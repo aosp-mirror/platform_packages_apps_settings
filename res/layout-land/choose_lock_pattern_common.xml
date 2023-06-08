@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (C) 2022 The Android Open Source Project
+
+    Licensed under the Apache License, Version 2.0 (the "License")
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+
+<!-- Used in phone portrait and tablet, as referenced in alias.xml. -->
+<com.google.android.setupdesign.GlifLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/setup_wizard_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:icon="@drawable/ic_lock">
+
+    <!-- takes up all space above button bar at bottom -->
+    <com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient
+        android:id="@+id/topLayout"
+        style="@style/SudContentFrame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:orientation="vertical"
+        android:paddingTop="0dp"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
+        android:paddingBottom="0dp">
+
+        <!-- TODO b/249974175 Move into Glif header mixin -->
+        <Button
+            android:id="@+id/screen_lock_options"
+            style="@style/SudGlifButton.Tertiary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/setup_lock_settings_options_button_label"
+            android:visibility="gone"/>
+
+        <com.google.android.setupdesign.view.FillContentLayout
+            style="@style/LockPatternContainerStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <com.android.internal.widget.LockPatternView
+                android:id="@+id/lockPattern"
+                android:layout_width="@dimen/biometric_auth_pattern_view_size"
+                android:layout_height="@dimen/biometric_auth_pattern_view_size"
+                android:layout_gravity="center"/>
+
+        </com.google.android.setupdesign.view.FillContentLayout>
+
+        <TextView android:id="@+id/footerText"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_gravity="center_horizontal"
+                  android:minHeight="24dp"
+                  android:textSize="14sp"
+                  android:visibility="gone"/>
+
+    </com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient>
+
+</com.google.android.setupdesign.GlifLayout>

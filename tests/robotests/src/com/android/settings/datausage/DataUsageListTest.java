@@ -22,6 +22,7 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -31,6 +32,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
+import android.os.UserManager;
 import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,6 +62,9 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.android.controller.ActivityController;
+import org.robolectric.annotation.Config;
+import org.robolectric.annotation.Implementation;
+import org.robolectric.annotation.Implements;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
@@ -74,6 +79,8 @@ public class DataUsageListTest {
     private TemplatePreference.NetworkServices mNetworkServices;
     @Mock
     private LoaderManager mLoaderManager;
+    @Mock
+    private UserManager mUserManager;
 
     private Activity mActivity;
     private DataUsageList mDataUsageList;
@@ -90,11 +97,34 @@ public class DataUsageListTest {
         mDataUsageList.mDataStateListener = mMobileDataEnabledListener;
 
         doReturn(mActivity).when(mDataUsageList).getContext();
+        doReturn(mUserManager).when(mActivity).getSystemService(UserManager.class);
+        doReturn(false).when(mUserManager).isGuestUser();
         ReflectionHelpers.setField(mDataUsageList, "mDataStateListener",
                 mMobileDataEnabledListener);
         ReflectionHelpers.setField(mDataUsageList, "services", mNetworkServices);
         doReturn(mLoaderManager).when(mDataUsageList).getLoaderManager();
         mDataUsageList.mLoadingViewController = mock(LoadingViewController.class);
+    }
+
+    @Test
+    @Config(shadows = ShadowDataUsageBaseFragment.class)
+    public void onCreate_isNotGuestUser_shouldNotFinish() {
+        doReturn(false).when(mUserManager).isGuestUser();
+        doNothing().when(mDataUsageList).processArgument();
+
+        mDataUsageList.onCreate(null);
+
+        verify(mDataUsageList, never()).finish();
+    }
+
+    @Test
+    @Config(shadows = ShadowDataUsageBaseFragment.class)
+    public void onCreate_isGuestUser_shouldFinish() {
+        doReturn(true).when(mUserManager).isGuestUser();
+
+        mDataUsageList.onCreate(null);
+
+        verify(mDataUsageList).finish();
     }
 
     @Test
@@ -240,5 +270,18 @@ public class DataUsageListTest {
     private Spinner getSpinner(View header) {
         final Spinner spinner = header.findViewById(R.id.filter_spinner);
         return spinner;
+    }
+
+    @Implements(DataUsageBaseFragment.class)
+    public static class ShadowDataUsageBaseFragment {
+        @Implementation
+        public void onCreate(Bundle icicle) {
+            // do nothing
+        }
+
+        @Implementation
+        protected boolean isBandwidthControlEnabled() {
+            return true;
+        }
     }
 }

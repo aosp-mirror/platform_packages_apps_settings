@@ -129,6 +129,9 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 // This must be called AFTER itemView.setSelected above, in order to keep the
                 // customize button in an unselected state.
                 mCustomizeButton.setSelected(false);
+                mCustomizeButton.setContentDescription(
+                        mContext.getResources().getString(R.string.customize_button_description,
+                                item.getTitle()));
             }
 
             setEnabledStateOnViews(itemView, mEnabled);

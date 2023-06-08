@@ -17,9 +17,19 @@
 package com.android.settings.biometrics.face;
 
 import android.content.Context;
+import android.content.Intent;
+
+import androidx.annotation.Nullable;
 
 /** Feature provider for face unlock */
 public interface FaceFeatureProvider {
+    /** Returns specified intent config by resource R.string.config_face_enroll_guidance_page. */
+    @Nullable
+    Intent getPostureGuidanceIntent(Context context);
+
     /** Returns true if attention checking is supported. */
     boolean isAttentionSupported(Context context);
+
+    /** Returns true if setup wizard supported face enrollment. */
+    boolean isSetupWizardSupported(Context context);
 }

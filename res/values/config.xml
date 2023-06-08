@@ -283,6 +283,19 @@
     <!-- ComponentName to launch a vendor-specific enrollment activity if available -->
     <string name="config_face_enroll" translatable="false"></string>
 
+    <!-- ComponentName to launch a vendor-specific posture guidance activity if available -->
+    <string name="config_face_enroll_guidance_page" translatable="false"></string>
+
+    <!-- Whether to support posture listening for face auth, default is 0(DEVICE_POSTURE_UNKNOWN)
+     means setting will try listening on device posture changes.
+     0 : DEVICE_POSTURE_UNKNOWN
+     1 : DEVICE_POSTURE_CLOSED
+     2 : DEVICE_POSTURE_HALF_OPENED
+     3 : DEVICE_POSTURE_OPENED
+     4 : DEVICE_POSTURE_FLIPPED
+     -->
+    <integer name="config_face_enroll_supported_posture">0</integer>
+
     <!-- Whether to show the "less secure" info section on the face enroll intro screen -->
     <bool name="config_face_intro_show_less_secure">false</bool>
 
@@ -291,6 +304,9 @@
 
     <!-- Whether to use the Lottie animation for the face education enrollment screen -->
     <bool name="config_face_education_use_lottie">false</bool>
+
+    <!-- Whether to support enrollment during setup wizard flow -->
+    <bool name="config_suw_support_face_enroll">true</bool>
 
     <!-- App intent -->
     <string name="config_account_intent_uri" translatable="false"></string>
@@ -655,4 +671,22 @@
     <!-- Control messages displayed during enrollment -->
     <bool name="enrollment_message_display_controller_flag">false</bool>
 
+    <!-- Whether to display the 3G option at network mode.-->
+    <bool name="config_display_network_mode_3g_option">true</bool>
+
+    <!-- The illustration for those screen are not in one of below type. This file should be a video in JSON format. -->
+    <item name="a11y_timeout_banner" type="raw" product="default">@raw/accessibility_timeout_banner</item>
+    <item name="a11y_timeout_banner" type="raw" product="tablet">@raw/accessibility_timeout_banner_tablet</item>
+
+    <item name="a11y_shortcut_type_triple_tap" type="raw" product="default">@raw/accessibility_shortcut_type_triple_tap</item>
+    <item name="a11y_shortcut_type_triple_tap" type="raw" product="tablet">@raw/accessibility_shortcut_type_triple_tap_tablet</item>
+
+    <item name="a11y_color_inversion_banner" type="raw" product="default">@raw/accessibility_color_inversion_banner</item>
+    <item name="a11y_color_inversion_banner" type="raw" product="tablet">@raw/accessibility_color_inversion_banner_tablet</item>
+
+    <item name="a11y_magnification_banner" type="raw" product="default">@raw/accessibility_magnification_banner</item>
+    <item name="a11y_magnification_banner" type="raw" product="tablet">@raw/accessibility_magnification_banner_tablet</item>
+
+    <item name="a11y_extra_dim_banner" type="raw" product="default">@raw/extra_dim_banner</item>
+    <item name="a11y_extra_dim_banner" type="raw" product="tablet">@raw/extra_dim_banner_tablet</item>
 </resources>

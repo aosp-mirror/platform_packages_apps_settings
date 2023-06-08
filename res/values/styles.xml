@@ -432,10 +432,11 @@
     </style>
 
     <style name="LockPatternContainerStyle">
-        <item name="android:maxHeight">620dp</item>
-        <item name="android:maxWidth">620dp</item>
-        <item name="android:minHeight">0dp</item>
-        <item name="android:minWidth">0dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:maxHeight">@dimen/biometric_auth_pattern_view_max_size</item>
+        <item name="android:maxWidth">@dimen/biometric_auth_pattern_view_max_size</item>
+        <item name="android:minHeight">@dimen/biometric_auth_pattern_view_size</item>
+        <item name="android:minWidth">@dimen/biometric_auth_pattern_view_size</item>
         <item name="android:paddingBottom">0dp</item>
         <item name="android:paddingHorizontal">0dp</item>
         <item name="android:paddingTop">0dp</item>
@@ -446,6 +447,12 @@
         <item name="*android:successColor">?android:attr/textColorPrimary</item>
         <item name="*android:errorColor">?android:attr/colorError</item>
         <item name="*android:dotColor">?android:attr/textColorSecondary</item>
+    </style>
+
+    <style name="LockPatternButtonStyle" parent="@style/SudGlifButton.Tertiary">
+        <item name="android:layout_marginStart">@dimen/sud_glif_button_margin_start</item>
+        <item name="android:layout_marginEnd">@dimen/sud_glif_button_margin_end</item>
+        <item name="android:layout_gravity">start|top</item>
     </style>
 
     <style name="device_info_dialog_label">

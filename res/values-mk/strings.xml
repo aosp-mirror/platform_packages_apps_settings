@@ -467,6 +467,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Поставете го вашиот отпечаток"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Дозволете отклучување со отпечаток"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Користење на отпечатокот"</string>
+    <string name="security_settings_fingerprint_settings_footer_learn_more" msgid="2508322993726483601">"Дознајте повеќе за „Отклучување со отпечаток на прст“"</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"Користете го отпечатокот за да го отклучите таблетот или да потврдите дека сте вие, како кога се најавувате на апликации или одобрувате купување."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Користете го отпечатокот за да го отклучите уредот или да потврдите дека сте вие, како кога се најавувате на апликации или одобрувате купување."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"Користете го отпечатокот за да го отклучите телефонот или да потврдите дека сте вие, како кога се најавувате на апликации или одобрувате купување."</string>
@@ -521,17 +522,39 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"Подигнете го прстот кога ќе почувствувате вибрации"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"Преместете се некаде каде што има понежно осветлување и обидете се повторно"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"Го достигнавте максималниот број на обиди"</string>
+    <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"Отклучување со часовник"</string>
+    <string name="biometric_settings_intro_with_activeunlock" product="default" msgid="6583248094453119314">"Кога ќе поставите „Отклучување со лик“ и „Отклучување со отпечаток на прст“, телефонот ќе го побара вашиот отпечаток кога носите маска или сте на темно место.\n\nМоже да отклучите со часовникот кога нема да се препознае вашиот лик или отпечатокот."</string>
+    <string name="biometric_settings_intro_with_activeunlock" product="tablet" msgid="8930396405433023076">"Кога ќе поставите „Отклучување со лик“ и „Отклучување со отпечаток“, таблетот ќе го побара вашиот отпечаток кога носите маска или сте на темно место.\n\nМоже да отклучите со часовникот кога нема да се препознае вашиот лик или отпечатокот."</string>
+    <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"Може да отклучите со часовникот кога нема да се препознае вашиот отпечаток."</string>
+    <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"Може да отклучите со часовникот кога нема да се препознае вашиот лик."</string>
+    <string name="biometric_settings_use_face_or_watch_preference_summary" msgid="4969685200340861744">"Со лик или часовник"</string>
+    <string name="biometric_settings_use_fingerprint_or_watch_preference_summary" msgid="2425628094194828407">"Со отпечаток или часовник"</string>
+    <string name="biometric_settings_use_face_fingerprint_or_watch_preference_summary" msgid="188805113048792007">"Со лик, отпечаток или часовник"</string>
+    <string name="biometric_settings_use_watch_preference_summary" msgid="2311453276747908475">"Со часовник"</string>
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_title" msgid="8776904312629209685">"Прво поставете „Отклуч. со лик“ или „Отклуч. со отпечаток“"</string>
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_message" msgid="1669326067732567911">"Може да отклучите со часовникот кога нема да се препознае вашиот лик или отпечатокот."</string>
+    <string name="security_settings_activeunlock_require_fingerprint_setup_title" msgid="6703703635881050623">"Прво поставете „Отклучување со отпечаток на прст“"</string>
+    <string name="security_settings_activeunlock_require_fingerprint_setup_message" msgid="4966813766409918392">"Може да отклучите со часовникот кога нема да се препознае вашиот отпечаток"</string>
+    <string name="security_settings_activeunlock_require_face_setup_title" msgid="1428795376597739880">"Прво поставете „Отклучување со лик“"</string>
+    <string name="security_settings_activeunlock_require_face_setup_message" msgid="8904070645721933399">"Може да отклучите со часовникот кога нема да се препознае вашиот лик"</string>
+    <string name="security_settings_activeunlock_biometric_setup" msgid="8876454457817955475">"Постави"</string>
+    <string name="security_settings_fingerprint_single_watch_preference_summary" msgid="6464470096384164369">"Додадени се отпечаток и <xliff:g id="WATCH">%s</xliff:g>"</string>
+    <string name="security_settings_fingerprint_multiple_watch_preference_summary" msgid="2259261786932097004">"Додадени се отпечатоци и <xliff:g id="WATCH">%s</xliff:g>"</string>
+    <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Додадени се лик и <xliff:g id="WATCH">%s</xliff:g>"</string>
+    <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Додадени се лик, отпечаток и <xliff:g id="WATCH">%s</xliff:g>"</string>
+    <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Додадени се лик, отпечатоци и <xliff:g id="WATCH">%s</xliff:g>"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Отклучување со лик и отпечаток на прст"</string>
+    <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Отклучување со лик и отпечаток за работа"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"Допрете за поставување"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Ликот и отпечатоците се додадени"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"Ликот и отпечатокот се додадени"</string>
     <string name="biometric_settings_intro" msgid="4263069383955676756">"Кога ќе поставите „Отклучување со лик“ и „Отклучување со отпечаток на прст“, телефонот ќе го побара вашиот отпечаток кога носите маска или сте на темно место"</string>
     <string name="biometric_settings_category_ways_to_unlock" msgid="3384767901580915266">"Начини на отклучување"</string>
-    <string name="biometric_settings_use_biometric_unlock_phone" msgid="8180914579885804358">"Отклучувајте го телефонот"</string>
+    <string name="biometric_settings_use_biometric_unlock_phone" msgid="8180914579885804358">"Отклучување на телефонот"</string>
     <string name="biometric_settings_use_biometric_for_apps" msgid="6201168728906364189">"Потврдувајте дека сте вие во апликациите"</string>
     <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"со користење лик"</string>
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"со користење отпечаток"</string>
-    <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"со користење лик или отпечаток"</string>
+    <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"со лик или отпечаток"</string>
     <string name="biometric_settings_hand_back_to_guardian" product="tablet" msgid="1498542470242509989">"Дај му го таблетот на родителот"</string>
     <string name="biometric_settings_hand_back_to_guardian" product="device" msgid="3837001353226852511">"Дај му го уредот на родителот"</string>
     <string name="biometric_settings_hand_back_to_guardian" product="default" msgid="3747619291972376153">"Дај му го телефонот на родителот"</string>
@@ -551,9 +574,9 @@
     <string name="security_settings_sfps_enroll_find_sensor_title" msgid="8327884364635804363">"Допрете го копчето за вклучување без да го притискате"</string>
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"Како да го поставите вашиот отпечаток"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"Се наоѓа на задната страна на телефонот. Користете го показалецот."</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="tablet" msgid="3861487880213212565">"Сензорот за отпечатоци се наоѓа на копчето за вклучување. Тоа е рамното копче веднаш до подигнатото копче за јачина на звук на работ на таблетот.\n\nАко го притиснете копчето за вклучување, ќе се исклучи екранот."</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="device" msgid="700314363994033893">"Сензорот за отпечатоци се наоѓа на копчето за вклучување. Тоа е рамното копче веднаш до подигнатото копче за јачина на звук на работ на уредот.\n\nАко го притиснете копчето за вклучување, ќе се исклучи екранот."</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="default" msgid="5857063580604638331">"Сензорот за отпечатоци се наоѓа на копчето за вклучување. Тоа е рамното копче веднаш до подигнатото копче за јачина на звук на работ на телефонот.\n\nАко го притиснете копчето за вклучување, ќе се исклучи екранот."</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="tablet" msgid="6345521315059783195">"Сензорот за отпечатоци се наоѓа на копчето за вклучување. Тоа е рамното копче веднаш до подигнатото копче за јачина на звук на работ од таблетот."</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="device" msgid="5548015866784733975">"Сензорот за отпечатоци се наоѓа на копчето за вклучување. Тоа е рамното копче веднаш до подигнатото копче за јачина на звук на работ од уредот."</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="default" msgid="1977903336177861081">"Сензорот за отпечатоци се наоѓа на копчето за вклучување. Тоа е рамното копче веднаш до подигнатото копче за јачина на звук на работ од телефонот."</string>
     <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"Сензорот за отпечатоци се наоѓа на вашиот екран. Отпечатокот ќе го снимите на следниот екран."</string>
     <string name="security_settings_udfps_enroll_find_sensor_start_button" msgid="3172268783620336357">"Започнете"</string>
     <string name="security_settings_udfps_enroll_a11y" msgid="1899453114050362235">"Движете го прстот низ екранот за да го најдете сензорот. Допрете и задржете ја иконата за отпечаток"</string>
@@ -588,8 +611,11 @@
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="6064618417107305796">"Сега може да го користите отпечатокот за да го отклучите таблетот или да потврдите дека сте вие, како кога се најавувате на апликации или одобрувате купување"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="1948980056333872057">"Сега може да го користите отпечатокот за да го отклучите уредот или да потврдите дека сте вие, како кога се најавувате на апликации или одобрувате купување"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="3084541878035403475">"Сега може да го користите отпечатокот за да го отклучите телефонот или да потврдите дека сте вие, како кога се најавувате на апликации или одобрувате купување"</string>
-    <string name="security_settings_require_screen_on_to_auth_title" msgid="6393244827110756927">"Отклучете само кога екранот е вклучен"</string>
-    <string name="security_settings_require_screen_on_to_auth_description" msgid="8555651197315796037">"Екранот мора да биде вклучен пред да може да го отклучите со отпечаток. Ова го прави случајното отклучување да биде помалку веројатно."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="tablet" msgid="308213612040535580">"Сега може да го користите отпечатокот за да го отклучите таблетот или да потврдите дека сте вие, како кога се најавувате на апликации или одобрувате купување. \n\nДодајте уште еден отпечаток за да биде полесно да отклучувате кога го држите таблетот на различни начини."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="device" msgid="911541337099737104">"Сега може да го користите отпечатокот за да го отклучите уредот или да потврдите дека сте вие, како кога се најавувате на апликации или одобрувате купување.\n\nДодајте уште еден отпечаток за да биде полесно да отклучувате кога го држите уредот на различни начини."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="default" msgid="5261993991973265283">"Сега може да го користите отпечатокот за да го отклучите телефонот или да потврдите дека сте вие, како кога се најавувате на апликации или одобрувате купување.\n\nДодајте уште еден отпечаток за да биде полесно да отклучувате кога го држите телефонот на различни начини."</string>
+    <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"Допрете за да отклучите во секое време"</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"Допрете го сензорот за да отклучите дури и кога екранот е исклучен. Вака, веројатноста за ненамерно отклучување е поголема."</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Екран, отклучување"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Направи подоцна"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Подигнете и допрете повторно"</string>
@@ -648,6 +674,7 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Готово"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Упс, тоа не е сензорот"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Допрете го сензорот одзади со показалецот."</string>
+    <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title" msgid="5796228438604723279">"Регистрацијата не беше завршена"</string>
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Времето за поставување отпечаток истече"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"Обидете се повторно сега или поставете отпечаток подоцна во „Поставки“"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Внесувањето отпечаток не успеа. Обидете се повторно или користете друг прст."</string>
@@ -735,28 +762,22 @@
     <string name="fingerprint_unlock_set_unlock_password" msgid="5614333047430835971">"Отпечаток + лозинка"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="7631242444064287891">"Продолжете без отпечаток"</string>
     <string name="fingerprint_unlock_title" product="default" msgid="4978686534505944042">"Може да го отклучувате телефонот со вашиот отпечаток. Од безбедносни причини, за оваа опција е потребно резервно заклучување на екранот."</string>
-    <!-- no translation found for fingerprint_unlock_title (8674718459462612186) -->
-    <skip />
-    <!-- no translation found for fingerprint_unlock_title (3224468142599659740) -->
-    <skip />
+    <string name="fingerprint_unlock_title" product="tablet" msgid="8674718459462612186">"Може да го отклучувате таблетот со отпечаток. Од безбедносни причини, за оваа опција е потребно резервно заклучување на екранот."</string>
+    <string name="fingerprint_unlock_title" product="device" msgid="3224468142599659740">"Може да го отклучувате уредот со отпечаток. Од безбедносни причини, за оваа опција е потребно резервно заклучување на екранот."</string>
     <string name="face_unlock_set_unlock_pattern" msgid="3117316407679805330">"Отклучување со лик + шема"</string>
     <string name="face_unlock_set_unlock_pin" msgid="5300188327595503657">"Отклучување со лик + PIN"</string>
     <string name="face_unlock_set_unlock_password" msgid="8395722611524617956">"Отклучување со лик + лозинка"</string>
     <string name="face_unlock_skip_face" msgid="189695556498300008">"Продолжете без „Отклучување со лик“"</string>
     <string name="face_unlock_title" product="default" msgid="7344830351598247267">"Може да го отклучите телефонот со лицето. Од безбедносни причини, потребно резервно заклучување екран за оваа опција."</string>
-    <!-- no translation found for face_unlock_title (5695698036499155727) -->
-    <skip />
-    <!-- no translation found for face_unlock_title (6768108756755361161) -->
-    <skip />
+    <string name="face_unlock_title" product="tablet" msgid="5695698036499155727">"Може да го отклучувате таблетот со лик. Од безбедносни причини, за оваа опција е потребно резервно заклучување на екранот."</string>
+    <string name="face_unlock_title" product="device" msgid="6768108756755361161">"Може да го отклучувате уредот со лик. Од безбедносни причини, за оваа опција е потребно резервно заклучување на екранот."</string>
     <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"Шема • Лик • Отпечаток"</string>
     <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"PIN • Лик • Отпечаток"</string>
     <string name="biometrics_unlock_set_unlock_password" msgid="4612217647465743624">"Лозинка • Лик • Отпечаток"</string>
     <string name="biometrics_unlock_skip_biometrics" msgid="7785643433551409223">"Продолжи без лик или отпечаток"</string>
     <string name="biometrics_unlock_title" product="default" msgid="616524056055233041">"Може да го отклучувате телефонот со лик или отпечаток. Од безбедносни причини, потребно резервно заклучување на екранот за опцијава."</string>
-    <!-- no translation found for biometrics_unlock_title (5808626401936488028) -->
-    <skip />
-    <!-- no translation found for biometrics_unlock_title (4912499343509046929) -->
-    <skip />
+    <string name="biometrics_unlock_title" product="tablet" msgid="5808626401936488028">"Може да го отклучувате таблетот со лик или отпечаток. Од безбедносни причини, за оваа опција е потребно резервно заклучување на екранот."</string>
+    <string name="biometrics_unlock_title" product="device" msgid="4912499343509046929">"Може да го отклучувате уредот со лик или отпечаток. Од безбедносни причини, за оваа опција е потребно резервно заклучување на екранот."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="4022867760387966129">"Оневозм. од админ., шифрир. или складир. акредит."</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"Ниедна"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"Повлечи"</string>
@@ -1798,7 +1819,7 @@
     <string name="battery_status_title" msgid="4661768220545945771">"Статус на батеријата"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"Ниво на батерија"</string>
     <string name="communal_settings_title" msgid="2845678473945902115">"Заедница"</string>
-    <string name="communal_settings_summary" msgid="4923914136953940317">"Поставки за заедница"</string>
+    <string name="communal_settings_summary" msgid="4923914136953940317">"Заеднички поставки"</string>
     <string name="apn_settings" msgid="4295467389400441299">"Поставки за APN"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Изменете ја пристапната точка"</string>
     <string name="apn_not_set" msgid="8246646433109750293">"Не е поставено"</string>
@@ -2070,9 +2091,15 @@
     <string name="lockpassword_strong_auth_required_work_pattern" msgid="6803652050512161140">"За дополнителна безбедност, користете ја шемата на работниот профил"</string>
     <string name="lockpassword_strong_auth_required_work_pin" msgid="4208510396448713500">"За дополнителна безбедност, внесете го PIN-кодот на работниот профил"</string>
     <string name="lockpassword_strong_auth_required_work_password" msgid="6119482061429323090">"За дополнителна безбедност, внесете ја лозинката на работниот профил"</string>
-    <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6351784282865851482">"Телефонот е ресетиран на фабрички поставки. За да го користите, внесете ја претходната шема."</string>
-    <string name="lockpassword_confirm_your_pin_details_frp" msgid="2128795640346033349">"Телефонот е ресетиран на фабрички поставки. За да го користите, внесете го претходниот PIN."</string>
-    <string name="lockpassword_confirm_your_password_details_frp" msgid="4031863562975125016">"Телефонот е ресетиран на фабрички поставки. За да го користите, внесете ја претходната лозинка."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="default" msgid="6351784282865851482">"Телефонот е ресетиран на фабрички поставки. За да го користите, внесете ја претходната шема."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="tablet" msgid="8596917715101288176">"Таблетот беше ресетиран на фабрички поставки. За да го користите, внесете ја претходната шема."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="device" msgid="5454624762517414834">"Уредот беше ресетиран на фабрички поставки. За да го користите, внесете ја претходната шема."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="default" msgid="2128795640346033349">"Телефонот е ресетиран на фабрички поставки. За да го користите, внесете го претходниот PIN."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="tablet" msgid="8365335365718500964">"Таблетот беше ресетиран на фабрички поставки. За да го користите, внесете го претходниот PIN."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="device" msgid="1755588602707523835">"Уредот беше ресетиран на фабрички поставки. За да го користите, внесете го претходниот PIN."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="default" msgid="4031863562975125016">"Телефонот е ресетиран на фабрички поставки. За да го користите, внесете ја претходната лозинка."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="tablet" msgid="3899701773001146600">"Таблетот беше ресетиран на фабрички поставки. За да го користите, внесете ја претходната лозинка."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="device" msgid="2683204467262573702">"Уредот беше ресетиран на фабрички поставки. За да го користите, внесете ја претходната лозинка."</string>
     <string name="lockpassword_confirm_your_pattern_header_frp" msgid="5641858015891896427">"Потврдете ја шемата"</string>
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"Потврдете го PIN-от"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Потврдете ја лозинката"</string>
@@ -2097,6 +2124,8 @@
     <string name="lockpattern_settings_enable_title" msgid="7401197111303283723">"Барај шема"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1116467204475387886">"Мора да употребите шема за да го отклучите екранот"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="3340969054395584754">"Направи ја шемата видлива"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_title" msgid="7172693275721931683">"Подобрена приватност со PIN"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_summary" msgid="8639588868341114740">"Оневозможете ги анимациите додека внесувате PIN"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"Направете ја шемата на профилот видлива"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"Вибрации на допир"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"Заклучи со копче за вклуч."</string>
@@ -2137,7 +2166,7 @@
     <string name="advanced_settings_summary" msgid="1823765348195530035">"Овозможи повеќе опции за подесување"</string>
     <string name="application_info_label" msgid="1015706497694165866">"Информации за апликацијата"</string>
     <string name="storage_label" msgid="2522307545547515733">"Капацитет"</string>
-    <string name="auto_launch_label" msgid="4069860409309364872">"Отвори стандардно"</string>
+    <string name="auto_launch_label" msgid="4069860409309364872">"Отворај стандардно"</string>
     <string name="auto_launch_label_generic" msgid="5033137408273064599">"Стандардни вредности"</string>
     <string name="screen_compatibility_label" msgid="7549658546078613431">"Компатибилност на екран"</string>
     <string name="permissions_label" msgid="1708927634370314404">"Дозволи"</string>
@@ -2704,7 +2733,7 @@
     <string name="accessibility_service_warning_description" msgid="6573203795976134751">"Целосната контрола е соодветна за апликации што ви помагаат со потребите за пристапност, но не и за повеќето апликации."</string>
     <string name="accessibility_service_screen_control_title" msgid="324795030658109870">"Приказ и контрола на екранот"</string>
     <string name="accessibility_service_screen_control_description" msgid="8431940515157990426">"Може да ги чита сите содржини на екранот и да прикажува содржини врз другите апликации."</string>
-    <string name="accessibility_service_action_perform_title" msgid="1449360056585337833">"Преглед и вршење на дејствата"</string>
+    <string name="accessibility_service_action_perform_title" msgid="1449360056585337833">"Преглед и вршење дејства"</string>
     <string name="accessibility_service_action_perform_description" msgid="7807832069800034738">"Може да ја следи вашата интеракција со апликациите или хардверскиот сензор и да врши интеракција со апликациите во ваше име."</string>
     <string name="accessibility_dialog_button_allow" msgid="8274918676473216697">"Дозволи"</string>
     <string name="accessibility_dialog_button_deny" msgid="2037249860078259284">"Одбиј"</string>
@@ -2821,7 +2850,7 @@
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Користење на батеријата"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Прикажи користење во минатите 24 часа"</string>
     <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"Користење од последното целосно полнење"</string>
-    <string name="battery_details_title" msgid="3289680399291090588">"Користење на батеријата за апликации"</string>
+    <string name="battery_details_title" msgid="3289680399291090588">"Користење на батеријата од апликацијата"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Користи детали"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Приспособи употреба на струја"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Вклучени пакети"</string>
@@ -3821,6 +3850,7 @@
     <string name="ring_volume_option_title" msgid="1520802026403038560">"Ѕвонење и известувања"</string>
     <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"Јачина на звук на ѕвонењето"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"Јачина на звук на известување"</string>
+    <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"Недостапно бидејќи звукот е исклучен"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"Мелодија на телефон"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Стандарден звук за известување"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"Звук што го дава апликацијата"</string>
@@ -3854,7 +3884,7 @@
     <string name="spatial_summary_off" msgid="8272678804629774378">"Исклучено"</string>
     <string name="spatial_summary_on_one" msgid="6239933399496282994">"Вклучено/<xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"Вклучено/<xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> и <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
-    <string name="spatial_audio_footer_title" msgid="8775010547623606088">"Можете да вклучите и „Просторен звук“ за уреди со Bluetooth."</string>
+    <string name="spatial_audio_footer_title" msgid="8775010547623606088">"Може да вклучите „Просторен звук“ и за уреди со Bluetooth."</string>
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Поставки за поврзани уреди"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Ниеден}=1{Поставен е 1 распоред}one{Поставен е # распоред}other{Поставени се # распореди}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Не вознемирувај"</string>
@@ -3884,7 +3914,7 @@
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"Кога пристигнуваат известувања, телефонот нема да испушта звук или да вибрира."</string>
     <string name="zen_mode_restrict_notifications_hide" msgid="5997930361607752541">"Без визуелни вознемирувања или звук од известувањата"</string>
     <string name="zen_mode_restrict_notifications_hide_summary" msgid="6005445725686969583">"Нема да гледате ниту да слушате известувања"</string>
-    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4314772315731485747">"Телефонот нема да ги прикажува, ниту да вибрира или да пушта звук за новите и постојните известувања. Имајте предвид дека важните известувања за активноста и статусот на телефонот и понатаму ќе се појавуваат.\n\nКога ќе го исклучите „Не вознемирувај“, пропуштените известувања може да ги најдете со повлекување надолу од врвот на екранот."</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="3761837271201073330">"Телефонот нема да ги прикажува, ниту да вибрира или да пушта звук за новите и постојните известувања. Имајте предвид дека важните известувања за активноста и статусот на уредот и понатаму ќе се појавуваат.\n\nКога ќе ја исклучите „Не вознемирувај“, пропуштените известувања може да ги најдете со повлекување надолу од врвот на екранот."</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"Приспособени"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"Овозможи ја приспособената поставка"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="5062332754972217218">"Отстрани ја приспособената поставка"</string>
@@ -3908,7 +3938,7 @@
     <string name="zen_mode_block_effect_summary_sound" msgid="1559968890497946901">"Звук и вибрации"</string>
     <string name="zen_mode_block_effect_summary_some" msgid="2730383453754229650">"Звук, вибрации и некои визуелни знаци од известувањата"</string>
     <string name="zen_mode_block_effect_summary_all" msgid="3131918059492425222">"Звук, вибрации и визуелни знаци од известувањата"</string>
-    <string name="zen_mode_blocked_effects_footer" msgid="1115914818435434668">"Неопходните известувања за основната активност и статусот на телефонот никогаш нема да се кријат."</string>
+    <string name="zen_mode_blocked_effects_footer" msgid="6403365663466620328">"Неопходните известувања за основната активност и статусот на уредот никогаш нема да се кријат."</string>
     <string name="zen_mode_no_exceptions" msgid="1580136061336585873">"Нема"</string>
     <string name="zen_mode_other_options" msgid="3399967231522580421">"други опции"</string>
     <string name="zen_mode_add" msgid="8789024026733232566">"Додај"</string>
@@ -4042,6 +4072,8 @@
     <string name="lockscreen_bypass_summary" msgid="464277506200346748">"По отклучувањето, оди директно на последниот користен екран"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Заклучен екран, прескокни, заобиколи"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"При заклучен работен профил"</string>
+    <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Прикажувај само нови известувања на заклучен екран"</string>
+    <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Автоматски отстранувај ги претходно прегледаните известувања од заклучениот екран"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Известувања на заклучен екран"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Прикажувај разговори, стандардни и безгласни"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Прикажувај разговори, стандардни и безгласни"</string>
@@ -4129,7 +4161,7 @@
       <item quantity="other">Околу <xliff:g id="NUMBER_1">%,d</xliff:g> известувања седмично</item>
     </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Никогаш"</string>
-    <string name="manage_notification_access_title" msgid="6481256069087219982">"Известувања во уреди и апликации"</string>
+    <string name="manage_notification_access_title" msgid="6481256069087219982">"Известувања од уредот и апликациите"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"Контролирајте кои апликации и уреди може да ги читаат известувањата"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8643809206612366067">"Пристапот до известувањата на работниот профил е блокиран"</string>
     <string name="manage_notification_access_summary_zero" msgid="7528633634628627431">"Апликациите не можат да читаат известувања"</string>
@@ -4213,7 +4245,7 @@
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Дозволи „Не вознемирувај“"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Ниту една од инсталираните апликации не побарала пристап до „Не вознемирувај“"</string>
     <string name="loading_notification_apps" msgid="5139471829295287945">"Се вчитуваат апликации…"</string>
-    <string name="app_notifications_off_desc" msgid="6691342160980435901">"На ваше барање, Android го блокира појавувањето на известувања од апликацијава на уредов"</string>
+    <string name="app_notifications_off_desc" msgid="2484843759466874201">"Известувања од оваа апликација не се дозволени"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"На ваше барање, Android го блокира појавувањето на оваа категорија известувања на уредов"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"На ваше барање, Android го блокира појавувањето на оваа група известувања на уредов"</string>
     <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"Апликацијава не испраќа известувања"</string>
@@ -4464,7 +4496,7 @@
     <string name="imei_information_title" msgid="8703564992893669514">"Информации за IMEI"</string>
     <string name="imei_information_summary" msgid="4763358372990258786">"Информации во врска со IMEI"</string>
     <string name="slot_number" msgid="2663789411468530397">"(Отвор<xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
-    <string name="launch_by_default" msgid="892824422067985734">"Отвори стандардно"</string>
+    <string name="launch_by_default" msgid="892824422067985734">"Отворај стандардно"</string>
     <string name="app_launch_domain_links_title" msgid="6702041169676128550">"За отворање линкови"</string>
     <string name="app_launch_open_domain_urls_title" msgid="4805388403977096285">"Отворај поддржани линкови"</string>
     <string name="app_launch_top_intro_message" msgid="137370923637482459">"Дозволувај веб-линковите да се отвораат во апликацијава"</string>
@@ -4628,7 +4660,7 @@
     <string name="high_power_prompt_body" msgid="6029266540782139941">"Ако дозволите <xliff:g id="APP_NAME">%1$s</xliff:g> секогаш да се извршува во заднина, тоа може да ја намали трајноста на батеријата. \n\nМоже да го промените ова подоцна во „Поставки &gt; Апликации“"</string>
     <string name="battery_summary" msgid="2491764359695671207">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> употреба од последното целосно полнење"</string>
     <string name="battery_summary_24hr" msgid="7656033283282656551">"Користење од <xliff:g id="PERCENTAGE">%1$s</xliff:g> во минатите 24 часа"</string>
-    <string name="no_battery_summary" msgid="5769159953384122003">"Нема употреба на батерија од последното целосно полнење"</string>
+    <string name="no_battery_summary" msgid="5769159953384122003">"Нема користење на батеријата по последното целосно полнење"</string>
     <string name="no_battery_summary_24hr" msgid="6280079526797873842">"Нема користење на батеријата во минатите 24 часа"</string>
     <string name="app_notification_preferences" msgid="2004680717999108725">"Поставки на апликација"</string>
     <string name="system_ui_settings" msgid="936169564323330967">"Прикажи SystemUI Tuner"</string>
@@ -4780,7 +4812,7 @@
       <item quantity="other">Исклучено за <xliff:g id="COUNT">%d</xliff:g> апликации</item>
     </plurals>
     <string name="notification_summary_none" msgid="9179312319023988089">"Вклучено за сите апликации"</string>
-    <string name="apps_summary" msgid="4007416751775414252">"<xliff:g id="COUNT">%1$d</xliff:g> апликации се инсталирани"</string>
+    <string name="apps_summary" msgid="4007416751775414252">"Инсталирани се <xliff:g id="COUNT">%1$d</xliff:g> апликации"</string>
     <string name="apps_summary_example" msgid="6034002063446955592">"Инсталирани се 24 апликации"</string>
     <string name="storage_summary" msgid="5903562203143572768">"Искористено <xliff:g id="PERCENTAGE">%1$s</xliff:g> - слободен простор <xliff:g id="FREE_SPACE">%2$s</xliff:g>"</string>
     <string name="storage_summary_with_sdcard" msgid="2063780050580228868">"Внатрешен капацитет: искористено <xliff:g id="PERCENTAGE">%1$s</xliff:g> - слободно <xliff:g id="FREE_SPACE">%2$s</xliff:g>"</string>
@@ -4980,7 +5012,7 @@
     <string name="display_cutout_emulation_keywords" msgid="4506580703807358127">"исечок на екранот, сензор за носење"</string>
     <string name="overlay_option_device_default" msgid="7986355499809313848">"Стандардни поставки за уредот"</string>
     <string name="overlay_toast_failed_to_apply" msgid="4839587811338164960">"Не успеа да се примени прекривка"</string>
-    <string name="special_access" msgid="1767980727423395147">"Посебни пристапи"</string>
+    <string name="special_access" msgid="1767980727423395147">"Посебен пристап"</string>
     <plurals name="special_access_summary" formatted="false" msgid="4995506406763570815">
       <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> апликација може да користи неограничен мобилен интернет</item>
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> апликации може да користат неограничен мобилен интернет</item>
@@ -5896,10 +5928,13 @@
     <string name="dream_picker_category" msgid="7726447836872744867">"Изберете заштитник на екран"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Прикажување дополнителни податоци"</string>
     <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Прикажува работи како време, временска прогноза или други информации на заштитникот на екранот"</string>
+    <string name="dream_home_controls_toggle_title" msgid="706799741564479248">"Прикажи ги контролите за домот"</string>
+    <string name="dream_home_controls_toggle_summary" msgid="4102519907917430579">"Прикажи го копчето за контроли за домот од заштитникот на екранот"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Повеќе поставки"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Изберете го заштитникот на екранот"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Изберете што да се прикажува на екранот кога таблетот е приклучен на док. Уредот може да користи повеќе енергија кога се користи заштитник на екранот."</string>
     <string name="customize_button_title" msgid="1110284655990203359">"Приспособи"</string>
+    <string name="customize_button_description" msgid="7440248477266126231">"Приспособете го <xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"Потребно е рестартирање за да се овозможи поддршка со слободна форма."</string>
     <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"Потребно е рестартирање за да се присили режимот на компјутер на секундарни екрани."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Рестартирај сега"</string>

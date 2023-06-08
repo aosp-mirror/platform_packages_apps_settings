@@ -16,10 +16,9 @@
 
 package com.android.settings.wifi.calling;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyBoolean;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyObject;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.anyBoolean;
+import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
@@ -95,7 +94,7 @@ public class WifiCallingDisclaimerFragmentTest {
 
         doReturn(mActivity).when(mFragment).getActivity();
 
-        when(mLayoutInflater.inflate(anyInt(), anyObject(), anyBoolean())).thenReturn(mView);
+        when(mLayoutInflater.inflate(anyInt(), any(), anyBoolean())).thenReturn(mView);
         when(mView.findViewById(R.id.agree_button)).thenReturn(mAgreeButton);
         when(mView.findViewById(R.id.disagree_button)).thenReturn(mDisagreeButton);
         when(mView.findViewById(R.id.disclaimer_item_list)).thenReturn(mRecyclerView);

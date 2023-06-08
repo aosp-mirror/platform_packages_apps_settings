@@ -53,7 +53,7 @@ public class AccessibilityLayerDrawable extends LayerDrawable {
      */
     public static AccessibilityLayerDrawable createLayerDrawable(Context context, int resId,
             int opacity) {
-        final Drawable bg = context.getDrawable(R.drawable.accessibility_button_preview_base);
+        final Drawable bg = context.getDrawable(R.drawable.a11y_button_preview_base);
         final AccessibilityLayerDrawable basicDrawable = new AccessibilityLayerDrawable(
                 new Drawable[]{bg, null});
 

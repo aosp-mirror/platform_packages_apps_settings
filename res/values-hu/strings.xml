@@ -467,6 +467,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Ujjlenyomat beállítása"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Feloldás ujjlenyomattal"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Az ujjlenyomat használata"</string>
+    <string name="security_settings_fingerprint_settings_footer_learn_more" msgid="2508322993726483601">"További információ a Feloldás ujjlenyomattal funkcióról"</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"Használhatja ujjlenyomatát táblagépe zárolásának feloldásához vagy személyazonossága igazolásához (például alkalmazásokba való bejelentkezés vagy vásárlás jóváhagyása során)."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Használhatja ujjlenyomatát eszköze zárolásának feloldásához vagy személyazonossága igazolásához (például alkalmazásokba való bejelentkezés vagy vásárlás jóváhagyása során)."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"Használhatja ujjlenyomatát telefonja zárolásának feloldásához vagy személyazonossága igazolásához (például alkalmazásokba való bejelentkezés vagy vásárlás jóváhagyása során)."</string>
@@ -521,7 +522,29 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"Emelje fel az ujját, miután érzi a rezgést."</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"Keressen valamilyen kevésbé erősen megvilágított helyet, majd próbálkozzon újra."</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"Elérte a kísérletek maximális számát."</string>
+    <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"Feloldás órával"</string>
+    <string name="biometric_settings_intro_with_activeunlock" product="default" msgid="6583248094453119314">"Ha beállítja az Arcalapú feloldás és a Feloldás ujjlenyomattal funkciót, telefonja az ujjlenyomatát fogja kérni, amikor Ön maszkot visel, vagy sötét helyen van.\n\nA feloldás az órájával is lehetséges, ha az arcát vagy az ujjlenyomatát nem ismeri fel a rendszer."</string>
+    <string name="biometric_settings_intro_with_activeunlock" product="tablet" msgid="8930396405433023076">"Ha beállítja az Arcalapú feloldás és a Feloldás ujjlenyomattal funkciót, táblagépe az ujjlenyomatát fogja kérni, amikor Ön maszkot visel, vagy sötét helyen van.\n\nA feloldás az órájával is lehetséges, ha az arcát vagy az ujjlenyomatát nem ismeri fel a rendszer."</string>
+    <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"A feloldás az órájával is lehetséges, ha az ujjlenyomatát nem ismeri fel a rendszer."</string>
+    <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"A feloldás az órájával is lehetséges, ha az arcát nem ismeri fel a rendszer."</string>
+    <string name="biometric_settings_use_face_or_watch_preference_summary" msgid="4969685200340861744">"Arc vagy óra használatával"</string>
+    <string name="biometric_settings_use_fingerprint_or_watch_preference_summary" msgid="2425628094194828407">"Ujjlenyomat vagy óra használatával"</string>
+    <string name="biometric_settings_use_face_fingerprint_or_watch_preference_summary" msgid="188805113048792007">"Arc, ujjlenyomat vagy óra használatával"</string>
+    <string name="biometric_settings_use_watch_preference_summary" msgid="2311453276747908475">"Óra használatával"</string>
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_title" msgid="8776904312629209685">"Előbb állítson be arccal vagy ujjlenyomattal való feloldást"</string>
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_message" msgid="1669326067732567911">"A feloldás az órájával is lehetséges, ha az arcát vagy az ujjlenyomatát nem ismeri fel a rendszer."</string>
+    <string name="security_settings_activeunlock_require_fingerprint_setup_title" msgid="6703703635881050623">"Előbb állítsa be a Feloldás ujjlenyomattal funkciót"</string>
+    <string name="security_settings_activeunlock_require_fingerprint_setup_message" msgid="4966813766409918392">"A feloldás az órájával is lehetséges, ha az ujjlenyomatát nem ismeri fel a rendszer."</string>
+    <string name="security_settings_activeunlock_require_face_setup_title" msgid="1428795376597739880">"Előbb állítsa be az Arcalapú feloldást"</string>
+    <string name="security_settings_activeunlock_require_face_setup_message" msgid="8904070645721933399">"A feloldás az órájával is lehetséges, ha az arcát nem ismeri fel a rendszer."</string>
+    <string name="security_settings_activeunlock_biometric_setup" msgid="8876454457817955475">"Beállítás"</string>
+    <string name="security_settings_fingerprint_single_watch_preference_summary" msgid="6464470096384164369">"Ujjlenyomat és <xliff:g id="WATCH">%s</xliff:g> hozzáadva"</string>
+    <string name="security_settings_fingerprint_multiple_watch_preference_summary" msgid="2259261786932097004">"Ujjlenyomatok és <xliff:g id="WATCH">%s</xliff:g> hozzáadva"</string>
+    <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Arc és <xliff:g id="WATCH">%s</xliff:g> hozzáadva"</string>
+    <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Arc, ujjlenyomat és <xliff:g id="WATCH">%s</xliff:g> hozzáadva"</string>
+    <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Arc, ujjlenyomatok és <xliff:g id="WATCH">%s</xliff:g> hozzáadva"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Arc- és ujjlenyomat-alapú feloldás"</string>
+    <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Arcalapú feloldás és Feloldás ujjlenyomattal a munkaprofilban"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"Koppintson ide a beállításhoz"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Arc és ujjlenyomatok hozzáadva"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"Arc és ujjlenyomat hozzáadva"</string>
@@ -551,9 +574,9 @@
     <string name="security_settings_sfps_enroll_find_sensor_title" msgid="8327884364635804363">"Érintse meg a bekapcsológombot, de ne nyomja le"</string>
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"Az ujjlenyomat beállítása"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"A telefon hátoldalán találja. Használja a mutatóujját."</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="tablet" msgid="3861487880213212565">"Az ujjlenyomat-érzékelő a bekapcsológombon található. A kiemelkedő hangerőgomb melletti lapos gomb a táblagép szélén.\n\nA bekapcsológomb lenyomásával kikapcsol a képernyő."</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="device" msgid="700314363994033893">"Az ujjlenyomat-érzékelő a bekapcsológombon található. A kiemelkedő hangerőgomb melletti lapos gomb az eszköz szélén.\n\nA bekapcsológomb lenyomásával kikapcsol a képernyő."</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="default" msgid="5857063580604638331">"Az ujjlenyomat-érzékelő a bekapcsológombon található. A kiemelkedő hangerőgomb melletti lapos gomb a telefon szélén.\n\nA bekapcsológomb lenyomásával kikapcsol a képernyő."</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="tablet" msgid="6345521315059783195">"Az ujjlenyomat-érzékelő a bekapcsológombon található. Ez a kiemelkedő hangerőgomb melletti lapos gomb a táblagép szélén."</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="device" msgid="5548015866784733975">"Az ujjlenyomat-érzékelő a bekapcsológombon található. Ez a kiemelkedő hangerőgomb melletti lapos gomb az eszköz szélén."</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="default" msgid="1977903336177861081">"Az ujjlenyomat-érzékelő a bekapcsológombon található. Ez a kiemelkedő hangerőgomb melletti lapos gomb a telefon szélén."</string>
     <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"Az ujjlenyomat-érzékelő a képernyőn található. Ujjlenyomatának rögzítése a következő képernyőn történik."</string>
     <string name="security_settings_udfps_enroll_find_sensor_start_button" msgid="3172268783620336357">"Kezdés"</string>
     <string name="security_settings_udfps_enroll_a11y" msgid="1899453114050362235">"Mozgassa az ujját a képernyőn, amíg megtalálja az érzékelőt. Tartsa ujját az ujjlenyomat-érzékelőn."</string>
@@ -588,8 +611,11 @@
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="6064618417107305796">"Mostantól használhatja ujjlenyomatát táblagépe zárolásának feloldásához vagy személyazonossága igazolásához (például amikor alkalmazásokba jelentkezik be, vagy vásárlást hagy jóvá)."</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="1948980056333872057">"Mostantól használhatja ujjlenyomatát eszköze zárolásának feloldásához vagy személyazonossága igazolásához (például amikor alkalmazásokba jelentkezik be, vagy vásárlást hagy jóvá)."</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="3084541878035403475">"Mostantól használhatja ujjlenyomatát telefonja zárolásának feloldásához vagy személyazonossága igazolásához (például amikor alkalmazásokba jelentkezik be, vagy vásárlást hagy jóvá)."</string>
-    <string name="security_settings_require_screen_on_to_auth_title" msgid="6393244827110756927">"Csak akkor oldja fel a képernyőt, ha be van kapcsolva a képernyő"</string>
-    <string name="security_settings_require_screen_on_to_auth_description" msgid="8555651197315796037">"A képernyőnek bekapcsolva kell lennie, hogy feloldhassa az ujjlenyomatával. Így kisebb az esélye a véletlen feloldásoknak."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="tablet" msgid="308213612040535580">"Mostantól használhatja ujjlenyomatát táblagépe zárolásának feloldásához vagy személyazonossága igazolásához (például amikor alkalmazásokba jelentkezik be, vagy vásárlást hagy jóvá). \n\nTovábbi ujjlenyomat hozzáadásával könnyebben feloldhatja táblagépét, amikor eltérő pozícióban tartja."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="device" msgid="911541337099737104">"Mostantól használhatja ujjlenyomatát eszköze zárolásának feloldásához vagy személyazonossága igazolásához (például amikor alkalmazásokba jelentkezik be, vagy vásárlást hagy jóvá).\n\nTovábbi ujjlenyomat hozzáadásával könnyebben feloldhatja eszközét, amikor eltérő pozícióban tartja."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="default" msgid="5261993991973265283">"Mostantól használhatja ujjlenyomatát telefonja zárolásának feloldásához vagy személyazonossága igazolásához (például amikor alkalmazásokba jelentkezik be, vagy vásárlást hagy jóvá).\n\nTovábbi ujjlenyomat hozzáadásával könnyebben feloldhatja telefonját, amikor eltérő pozícióban tartja."</string>
+    <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"Feloldás érintéssel bármikor"</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"A feloldáshoz érintse meg az érzékelőt, akár kikapcsolt képernyő esetén is. Így nagyobb az esély a véletlen feloldásra."</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Képernyő, feloldás"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Később"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Emelje fel, majd érintse meg újra"</string>
@@ -648,6 +674,7 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Kész"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Hoppá! Az nem az érzékelő"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Érintse meg a hátsó érzékelőt mutatóujjával."</string>
+    <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title" msgid="5796228438604723279">"A regisztráció nincs kész"</string>
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Lejárt az ujjlenyomat-beállítás időkorlátja."</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"Próbálja meg újra beállítani az ujjlenyomatát most, illetve később a Beállítások menüben"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Az ujjlenyomat regisztrációja nem sikerült. Próbálja újra, vagy próbálkozzon egy másik ujjával."</string>
@@ -735,28 +762,22 @@
     <string name="fingerprint_unlock_set_unlock_password" msgid="5614333047430835971">"Ujjlenyomat + jelszó"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="7631242444064287891">"Folytatás ujjlenyomat nélkül"</string>
     <string name="fingerprint_unlock_title" product="default" msgid="4978686534505944042">"Telefonját feloldhatja az ujjlenyomata segítségével. Biztonsági okokból ezen beállítás esetében szükség van másodlagos képernyőzárra is."</string>
-    <!-- no translation found for fingerprint_unlock_title (8674718459462612186) -->
-    <skip />
-    <!-- no translation found for fingerprint_unlock_title (3224468142599659740) -->
-    <skip />
+    <string name="fingerprint_unlock_title" product="tablet" msgid="8674718459462612186">"Ujjlenyomata segítségével feloldhatja táblagépe zárolását. Biztonsági okokból ennek a beállításnak az esetében szükség van másodlagos képernyőzárra is"</string>
+    <string name="fingerprint_unlock_title" product="device" msgid="3224468142599659740">"Eszközét feloldhatja az ujjlenyomata segítségével. Biztonsági okokból ennek a beállításnak az esetében szükség van másodlagos képernyőzárra is."</string>
     <string name="face_unlock_set_unlock_pattern" msgid="3117316407679805330">"Arcalapú feloldás + minta"</string>
     <string name="face_unlock_set_unlock_pin" msgid="5300188327595503657">"Arcalapú feloldás + PIN-kód"</string>
     <string name="face_unlock_set_unlock_password" msgid="8395722611524617956">"Arcalapú feloldás + jelszó"</string>
     <string name="face_unlock_skip_face" msgid="189695556498300008">"Folytatás Arcalapú feloldás nélkül"</string>
     <string name="face_unlock_title" product="default" msgid="7344830351598247267">"Feloldhatja telefonját arca segítségével. Biztonsági okokból ezen beállítás esetében szükség van másodlagos képernyőzárra is."</string>
-    <!-- no translation found for face_unlock_title (5695698036499155727) -->
-    <skip />
-    <!-- no translation found for face_unlock_title (6768108756755361161) -->
-    <skip />
+    <string name="face_unlock_title" product="tablet" msgid="5695698036499155727">"Feloldhatja táblagépét arca segítségével. Biztonsági okokból ezen beállítás esetében szükség van másodlagos képernyőzárra is."</string>
+    <string name="face_unlock_title" product="device" msgid="6768108756755361161">"Feloldhatja eszközét arca segítségével. Biztonsági okokból ezen beállítás esetében szükség van másodlagos képernyőzárra is."</string>
     <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"Minta • Arc • Ujjlenyomat"</string>
     <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"PIN-kód • Arc • Ujjlenyomat"</string>
     <string name="biometrics_unlock_set_unlock_password" msgid="4612217647465743624">"Jelszó • Arc • Ujjlenyomat"</string>
     <string name="biometrics_unlock_skip_biometrics" msgid="7785643433551409223">"Folytatás arc- vagy ujjlenyomat-alapú feloldás nélkül"</string>
     <string name="biometrics_unlock_title" product="default" msgid="616524056055233041">"Feloldhatja telefonja zárolását az arca vagy az ujjlenyomata használatával. Biztonsági okokból ennek a beállításnak az esetében szükség van másodlagos képernyőzárra is"</string>
-    <!-- no translation found for biometrics_unlock_title (5808626401936488028) -->
-    <skip />
-    <!-- no translation found for biometrics_unlock_title (4912499343509046929) -->
-    <skip />
+    <string name="biometrics_unlock_title" product="tablet" msgid="5808626401936488028">"Feloldhatja táblagépe zárolását az arca vagy az ujjlenyomata használatával. Biztonsági okokból ennek a beállításnak az esetében szükség van másodlagos képernyőzárra is"</string>
+    <string name="biometrics_unlock_title" product="device" msgid="4912499343509046929">"Feloldhatja eszköze zárolását az arca vagy az ujjlenyomata használatával. Biztonsági okokból ennek a beállításnak az esetében szükség van másodlagos képernyőzárra is"</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="4022867760387966129">"Rendszergazda, szabályzat vagy adattár letiltotta"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"Nincs"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"Csúsztatás"</string>
@@ -2070,9 +2091,15 @@
     <string name="lockpassword_strong_auth_required_work_pattern" msgid="6803652050512161140">"A nagyobb biztonság érdekében használja munkaprofil-feloldási mintáját"</string>
     <string name="lockpassword_strong_auth_required_work_pin" msgid="4208510396448713500">"A nagyobb biztonság érdekében adja meg munkaprofilja PIN-kódját"</string>
     <string name="lockpassword_strong_auth_required_work_password" msgid="6119482061429323090">"A nagyobb biztonság érdekében adja meg munkaprofilja jelszavát"</string>
-    <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6351784282865851482">"Visszaállítottuk az eszköz gyári beállításait. A telefon használatához adja meg az előző mintáját."</string>
-    <string name="lockpassword_confirm_your_pin_details_frp" msgid="2128795640346033349">"Visszaállítottuk az eszköz gyári beállításait. A telefon használatához adja meg az előző PIN-kódját."</string>
-    <string name="lockpassword_confirm_your_password_details_frp" msgid="4031863562975125016">"Visszaállítottuk az eszköz gyári beállításait. A telefon használatához adja meg az előző jelszavát."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="default" msgid="6351784282865851482">"Visszaállítottuk az eszköz gyári beállításait. A telefon használatához adja meg az előző mintáját."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="tablet" msgid="8596917715101288176">"A táblagép gyári beállításai visszaállítva. A táblagép használatához adja meg az előző mintáját."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="device" msgid="5454624762517414834">"Az eszköz gyári beállításai visszaállítva. Az eszköz használatához adja meg az előző mintáját."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="default" msgid="2128795640346033349">"Visszaállítottuk az eszköz gyári beállításait. A telefon használatához adja meg az előző PIN-kódját."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="tablet" msgid="8365335365718500964">"A táblagép gyári beállításai visszaállítva. A táblagép használatához adja meg előző PIN-kódját."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="device" msgid="1755588602707523835">"Az eszköz gyári beállításai visszaállítva. Az eszköz használatához adja meg előző PIN-kódját."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="default" msgid="4031863562975125016">"Visszaállítottuk az eszköz gyári beállításait. A telefon használatához adja meg az előző jelszavát."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="tablet" msgid="3899701773001146600">"A táblagép gyári beállításai visszaállítva. A táblagép használatához adja meg előző jelszavát."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="device" msgid="2683204467262573702">"Az eszköz gyári beállításai visszaállítva. Az eszköz használatához adja meg előző jelszavát."</string>
     <string name="lockpassword_confirm_your_pattern_header_frp" msgid="5641858015891896427">"Minta ellenőrzése"</string>
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"PIN-kód ellenőrzése"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Jelszó ellenőrzése"</string>
@@ -2097,6 +2124,8 @@
     <string name="lockpattern_settings_enable_title" msgid="7401197111303283723">"Minta kérése"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1116467204475387886">"Mintát kell rajzolni a képernyőzár feloldásához"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="3340969054395584754">"Minta megjelenítése"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_title" msgid="7172693275721931683">"Fokozott adatvédelem a PIN-kód megadásakor"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_summary" msgid="8639588868341114740">"Animációk kikapcsolása a PIN-kód megadásakor"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"Legyen látható a profilhoz tartozó minta"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"Rezgés koppintásra"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"Bekapcsológomb azonnal zár"</string>
@@ -3821,6 +3850,7 @@
     <string name="ring_volume_option_title" msgid="1520802026403038560">"Csörgetési, értesítési hangerő"</string>
     <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"Csengés hangereje"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"Értesítés hangereje"</string>
+    <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"Nem áll rendelkezésre, mert a csengetés le van némítva"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"Telefon csengőhangja"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Alapértelmezett értesítőhang"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"Alkalmazásból származó hang"</string>
@@ -3884,7 +3914,7 @@
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"Amikor értesítés érkezik, a telefon nem ad ki hangot, és nem rezeg."</string>
     <string name="zen_mode_restrict_notifications_hide" msgid="5997930361607752541">"Nincs hang vagy vizuális jelzés az értesítéseknél"</string>
     <string name="zen_mode_restrict_notifications_hide_summary" msgid="6005445725686969583">"Nem fog értesítéseket látni vagy hallani"</string>
-    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4314772315731485747">"A telefonja nem jelenít meg új vagy meglévő értesítéseket, és nem csörög vagy rezeg az értesítéseknél. A telefon funkcióival és állapotával kapcsolatos fontos értesítések azonban így is megjelennek.\n\nAmikor kikapcsolja a Ne zavarjanak módot, a nem fogadott értesítéseket úgy tekintheti meg, hogy ujját lefelé csúsztatja a képernyő tetejéről."</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="3761837271201073330">"A telefonja nem jelenít meg új vagy meglévő értesítéseket, és nem csörög vagy rezeg az értesítéseknél. Ne feledje, hogy az eszköztevékenységgel és állapottal kapcsolatos fontos értesítések így is megjelennek.\n\nAmikor kikapcsolja a Ne zavarjanak módot, a nem fogadott értesítéseket úgy tekintheti meg, hogy ujját lefelé csúsztatja a képernyő tetejéről."</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"Egyéni"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"Egyéni beállítás engedélyezése"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="5062332754972217218">"Egyéni beállítás törlése"</string>
@@ -3908,7 +3938,7 @@
     <string name="zen_mode_block_effect_summary_sound" msgid="1559968890497946901">"Hangok és rezgések"</string>
     <string name="zen_mode_block_effect_summary_some" msgid="2730383453754229650">"Hangok, rezgések és bizonyos vizuális értesítések"</string>
     <string name="zen_mode_block_effect_summary_all" msgid="3131918059492425222">"Hangok, rezgések és vizuális értesítések"</string>
-    <string name="zen_mode_blocked_effects_footer" msgid="1115914818435434668">"Az alapvető telefonos tevékenységekhez és állapothoz szükséges értesítések soha nem maradnak rejtve."</string>
+    <string name="zen_mode_blocked_effects_footer" msgid="6403365663466620328">"Az alapvető eszköztevékenységekhez és állapothoz szükséges értesítések sosem lesznek rejtve."</string>
     <string name="zen_mode_no_exceptions" msgid="1580136061336585873">"Nincs"</string>
     <string name="zen_mode_other_options" msgid="3399967231522580421">"egyéb lehetőségek"</string>
     <string name="zen_mode_add" msgid="8789024026733232566">"Hozzáadás"</string>
@@ -4042,6 +4072,8 @@
     <string name="lockscreen_bypass_summary" msgid="464277506200346748">"Feloldás után a legutóbbi képernyő megnyitása"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Lezárási képernyő, Kihagyás, Megkerülés"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Zárolt munkaprofil esetén"</string>
+    <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Csak az új értesítések megjelenítése a lezárási képernyőn"</string>
+    <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"A korábban megtekintett értesítések automatikus eltávolítása a zárolási képernyőről"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Értesítések a lezárási képernyőn"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Beszélgetések megjelenítése, alapértelmezett és néma is"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Beszélgetések megjelenítése, alapértelmezett és néma is"</string>
@@ -4213,7 +4245,7 @@
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"A Ne zavarjanak mód engedélyezése"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Egy telepített alkalmazás sem kért „Ne zavarjanak” elérést"</string>
     <string name="loading_notification_apps" msgid="5139471829295287945">"Alkalmazások betöltése…"</string>
-    <string name="app_notifications_off_desc" msgid="6691342160980435901">"Kérésére az Android letiltotta a jelen alkalmazás értesítéseinek megjelenését ezen az eszközön"</string>
+    <string name="app_notifications_off_desc" msgid="2484843759466874201">"Nem engedélyezte az ettől az apptól származó értesítéseket"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Kérésére az Android letiltotta a jelen értesítési kategória megjelenését ezen az eszközön"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Kérésére az Android letiltotta az értesítések jelen csoportjának megjelenését ezen az eszközön"</string>
     <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"Ez az alkalmazás nem küld értesítéseket"</string>
@@ -5896,10 +5928,13 @@
     <string name="dream_picker_category" msgid="7726447836872744867">"Képernyővédő kiválasztása"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"További információk megjelenítése"</string>
     <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"A pontos idő, az időjárás vagy más információk megjelenítése a képernyőkímélőn"</string>
+    <string name="dream_home_controls_toggle_title" msgid="706799741564479248">"Otthonvezérlők megjelenítése"</string>
+    <string name="dream_home_controls_toggle_summary" msgid="4102519907917430579">"Otthonvezérlők megjelenítése a képernyővédőn"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"További beállítások"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Képernyővédő kiválasztása"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Kiválaszthatja, hogy mi legyen látható a képernyőn, amikor a táblagép dokkolt állapotban van. Előfordulhat, hogy az eszköz több energiát használ, ha a képernyővédő be van kapcsolva."</string>
     <string name="customize_button_title" msgid="1110284655990203359">"Szerkesztés"</string>
+    <string name="customize_button_description" msgid="7440248477266126231">"<xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g> személyre szabása"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"A szabad formátumú támogatás engedélyezéséhez újraindításra van szükség."</string>
     <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"Az asztali mód másodlagos kijelzőkön való kényszerítéséhez újraindításra van szükség."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Újraindítás most"</string>

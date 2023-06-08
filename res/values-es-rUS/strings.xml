@@ -321,8 +321,8 @@
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"Usar ubicación"</string>
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Desactivado"</string>
     <plurals name="location_settings_summary_location_on" formatted="false" msgid="1019959038518185676">
-      <item quantity="other">Encendido: <xliff:g id="COUNT_1">%1$d</xliff:g> apps tienen acceso a la ubicación</item>
-      <item quantity="one">Encendido: <xliff:g id="COUNT_0">%1$d</xliff:g> app tiene acceso a la ubicación</item>
+      <item quantity="other">Activada: <xliff:g id="COUNT_1">%1$d</xliff:g> apps tienen acceso a la ubicación</item>
+      <item quantity="one">Activada: <xliff:g id="COUNT_0">%1$d</xliff:g> app tiene acceso a la ubicación</item>
     </plurals>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Cargando…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Las apps que tienen el permiso de dispositivos cercanos pueden determinar la posición relativa de los dispositivos conectados."</string>
@@ -346,7 +346,7 @@
     <string name="safety_center_title" msgid="7732397372178774777">"Seguridad y privacidad"</string>
     <string name="safety_center_summary" msgid="3554867379951053869">"Seguridad de apps, bloqueo del dispositivo, permisos"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Se agregó el rostro"</string>
-    <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"Presiona para configurar Desbloqueo facial"</string>
+    <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"Presiona para configurar un rostro"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Desbloqueo facial"</string>
     <string name="security_settings_face_profile_preference_title" msgid="7519527436266375005">"Desbloqueo facial para el trabajo"</string>
     <string name="security_settings_face_enroll_education_title" msgid="6448806884597691208">"Cómo configurar Desbloqueo facial"</string>
@@ -467,6 +467,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Configura tu huella dactilar"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Desbloq. con huella dactilar"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Usa tus huellas dactilares"</string>
+    <string name="security_settings_fingerprint_settings_footer_learn_more" msgid="2508322993726483601">"Más información sobre Desbloqueo con huellas dactilares"</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"Usa tu huella dactilar para desbloquear la tablet o verificar tu identidad, como cuando accedes a apps o apruebas compras."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Usa tu huella dactilar para desbloquear el dispositivo o verificar tu identidad, como cuando accedes a apps o apruebas compras."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"Usa tu huella dactilar para desbloquear el teléfono o verificar tu identidad, como cuando accedes a apps o apruebas compras."</string>
@@ -491,7 +492,7 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="tablet" msgid="3024180694355527323">"El uso de la huella dactilar para desbloquear la tablet puede ser menos seguro que un patrón o PIN confiables"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="device" msgid="150132643609189029">"El uso de la huella dactilar para desbloquear el dispositivo puede ser menos seguro que un patrón o PIN confiables"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"Cómo funciona"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="5909924864816776516">"La función Desbloqueo con huellas dactilares crea un modelo único de tu huella dactilar que permite verificar tu identidad. Para crear este modelo durante la configuración, deberás tomar fotos de tu huella desde diferentes posiciones."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="5909924864816776516">"La función Desbloqueo con huellas dactilares crea un modelo único de tu huella dactilar que permite verificar tu identidad. Para crear este modelo durante la configuración, es necesario tomar imágenes de tu huella desde diferentes posiciones."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2" msgid="3493356605815124807">"La función Desbloqueo con huellas dactilares crea un modelo único de la huella dactilar de tu hijo que permite verificar su identidad. Para crear este modelo durante la configuración, deberá tomar fotos de su huella desde diferentes posiciones."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="default" msgid="4729142136478078228">"Cuando usas Pixel Imprint, las imágenes se utilizan para actualizar el modelo de huella dactilar. Las imágenes que se usan para crear tu modelo no se guardan, pero el modelo en sí se almacena de manera segura en tu teléfono y nunca sale de él. Todo el proceso se lleva a cabo en el teléfono de forma segura."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="tablet" msgid="7537431055496985904">"Con Pixel Imprint, se usan imágenes para actualizar el modelo de huella dactilar. Las imágenes que se usan para crear tu modelo no se almacenan, a diferencia del modelo en sí, que lo hace de manera segura en la tablet y nunca sale de ella. Todo el proceso se lleva a cabo en la tablet de manera segura."</string>
@@ -505,7 +506,7 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="default" msgid="4983770600405797515">"Tu hijo y tú pueden borrar el modelo y las imágenes de su huella dactilar, así como desactivar la función Desbloqueo con huellas dactilares en cualquier momento desde Configuración. Los modelos y las imágenes de la huella se almacenan en el teléfono hasta que se borran."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="tablet" msgid="8752022694697150943">"Tu hijo y tú pueden borrar el modelo y las imágenes de su huella dactilar, así como desactivar el Desbloqueo con huellas dactilares en cualquier momento desde Configuración. Los modelos y las imágenes de la huella se almacenan en la tablet hasta que se borran."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="device" msgid="7234973062059196893">"Tu hijo y tú pueden borrar el modelo y las imágenes de su huella dactilar, así como desactivar el Desbloqueo con huellas dactilares en cualquier momento desde Configuración. Los modelos y las imágenes de la huella se almacenan en el dispositivo hasta que se borran."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"Tu teléfono se puede desbloquear aunque no lo desees, por ejemplo, cuando alguien lo sostiene frente a tu dedo."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"Tu teléfono se puede desbloquear aunque no lo desees, por ejemplo, si alguien lo acerca a tu dedo."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="tablet" msgid="7390208617531513381">"Tu tablet se puede desbloquear aunque no lo desees, por ejemplo, cuando alguien la sostiene frente a tu dedo."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="device" msgid="1662571028234764290">"Tu dispositivo se puede desbloquear aunque no lo desees, por ejemplo, cuando alguien lo sostiene frente a tu dedo."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="default" msgid="8356551505082794682">"El teléfono de tu hijo puede desbloquearse sin que así lo quisiera, por ejemplo, porque alguien se lo acercó al dedo."</string>
@@ -521,7 +522,29 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"Levanta el dedo cuando sientas una vibración"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"Ve a un lugar donde la luz sea menos brillante y vuelve a intentarlo"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"Alcanzaste la cantidad máxima de intentos"</string>
-    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Desbloqueo facial y con huella dactilar"</string>
+    <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"Desbloqueo con reloj"</string>
+    <string name="biometric_settings_intro_with_activeunlock" product="default" msgid="6583248094453119314">"Si configuras las funciones Desbloqueo facial y Desbloqueo con huellas dactilares, el teléfono te pedirá la huella dactilar en caso de que tengas puesta una mascarilla o estés en una zona oscura.\n\nPuedes usar el reloj para desbloquear el dispositivo cuando no se reconozcan tu rostro ni tu huella dactilar."</string>
+    <string name="biometric_settings_intro_with_activeunlock" product="tablet" msgid="8930396405433023076">"Si configuras las funciones de Desbloqueo facial y Desbloqueo con huellas dactilares, la tablet te pedirá la huella dactilar en caso de que tengas puesta una mascarilla o estés en una zona oscura.\n\nPuedes usar el reloj para desbloquear el dispositivo  cuando no se reconozcan tu rostro ni tu huella dactilar."</string>
+    <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"Puedes desbloquear con el reloj cuando no se reconozca tu huella dactilar."</string>
+    <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"Puedes desbloquear con el reloj cuando no se reconozca tu rostro."</string>
+    <string name="biometric_settings_use_face_or_watch_preference_summary" msgid="4969685200340861744">"Con rostro o reloj"</string>
+    <string name="biometric_settings_use_fingerprint_or_watch_preference_summary" msgid="2425628094194828407">"Con huella dactilar o reloj"</string>
+    <string name="biometric_settings_use_face_fingerprint_or_watch_preference_summary" msgid="188805113048792007">"Con rostro, huella dactilar o reloj"</string>
+    <string name="biometric_settings_use_watch_preference_summary" msgid="2311453276747908475">"Con reloj"</string>
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_title" msgid="8776904312629209685">"Primero configura Desbloqueo facial o con huellas dactilares"</string>
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_message" msgid="1669326067732567911">"Puedes usar el reloj para desbloquear el dispositivo cuando no se reconozcan tu rostro ni tu huella dactilar."</string>
+    <string name="security_settings_activeunlock_require_fingerprint_setup_title" msgid="6703703635881050623">"Primero configura Desbloqueo con huellas dactilares"</string>
+    <string name="security_settings_activeunlock_require_fingerprint_setup_message" msgid="4966813766409918392">"Puedes desbloquear con el reloj cuando no se reconozca tu huella dactilar"</string>
+    <string name="security_settings_activeunlock_require_face_setup_title" msgid="1428795376597739880">"Primero configura Desbloqueo facial"</string>
+    <string name="security_settings_activeunlock_require_face_setup_message" msgid="8904070645721933399">"Puedes desbloquear con el reloj cuando no se reconozca tu rostro"</string>
+    <string name="security_settings_activeunlock_biometric_setup" msgid="8876454457817955475">"Configurar"</string>
+    <string name="security_settings_fingerprint_single_watch_preference_summary" msgid="6464470096384164369">"Huella dactilar y <xliff:g id="WATCH">%s</xliff:g> agregados"</string>
+    <string name="security_settings_fingerprint_multiple_watch_preference_summary" msgid="2259261786932097004">"Huellas dactilares y <xliff:g id="WATCH">%s</xliff:g> agregados"</string>
+    <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Rostro y <xliff:g id="WATCH">%s</xliff:g> agregados"</string>
+    <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Rostro, huella dactilar y <xliff:g id="WATCH">%s</xliff:g> agregados"</string>
+    <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Rostro, huellas dactilares y <xliff:g id="WATCH">%s</xliff:g> agregados"</string>
+    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Desbloqueo facial y con huellas dactilares"</string>
+    <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Desbloqueo facial y con huellas dactilares para el trabajo"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"Presionar para configurar"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Se agregaron huellas dactilares y el rostro"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"Se agregaron el rostro y la huella dactilar"</string>
@@ -551,9 +574,9 @@
     <string name="security_settings_sfps_enroll_find_sensor_title" msgid="8327884364635804363">"Toca el botón de encendido sin presionarlo"</string>
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"Cómo configurar una huella dactilar"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"Se encuentra en la parte posterior del teléfono. Usa el dedo índice."</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="tablet" msgid="3861487880213212565">"El sensor de huellas dactilares está en el botón de encendido. Es el botón plano que está junto al botón de volumen en relieve, en el borde de la tablet.\n\nSi presionas el botón de encendido, se apaga la pantalla."</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="device" msgid="700314363994033893">"El sensor de huellas dactilares está en el botón de encendido. Es el botón plano que está junto al botón de volumen en relieve, en el borde del dispositivo.\n\nSi presionas el botón de encendido, se apaga la pantalla."</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="default" msgid="5857063580604638331">"El sensor de huellas dactilares está en el botón de encendido. Es el botón plano que está junto al botón de volumen en relieve, en el borde del teléfono.\n\nSi presionas el botón de encendido, se apaga la pantalla."</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="tablet" msgid="6345521315059783195">"El sensor de huellas dactilares está en el botón de encendido. Es el botón plano que está junto al botón de volumen en relieve, en el borde de la tablet."</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="device" msgid="5548015866784733975">"El sensor de huellas dactilares está en el botón de encendido. Es el botón plano que está junto al botón de volumen en relieve, en el borde del dispositivo."</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="default" msgid="1977903336177861081">"El sensor de huellas dactilares está en el botón de encendido. Es el botón plano que está junto al botón de volumen en relieve, en el borde del teléfono."</string>
     <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"El sensor de huellas dactilares está en la pantalla. En la próxima pantalla, se capturará tu huella dactilar."</string>
     <string name="security_settings_udfps_enroll_find_sensor_start_button" msgid="3172268783620336357">"Iniciar"</string>
     <string name="security_settings_udfps_enroll_a11y" msgid="1899453114050362235">"Mueve el dedo por la pantalla para encontrar el sensor y mantenlo presionado."</string>
@@ -587,9 +610,12 @@
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Se agregó la huella dactilar"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="6064618417107305796">"Ahora puedes usar tu huella dactilar para desbloquear la tablet o verificar tu identidad, como cuando accedes a apps o apruebas compras"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="1948980056333872057">"Ahora puedes usar tu huella dactilar para desbloquear el dispositivo o verificar tu identidad, como cuando accedes a apps o apruebas compras"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="3084541878035403475">"Ahora puedes usar tu huella dactilar para desbloquear el teléfono o verificar tu identidad, como cuando accedes a apps o apruebas compras"</string>
-    <string name="security_settings_require_screen_on_to_auth_title" msgid="6393244827110756927">"Desbloquear solo cuando la pantalla está encendida"</string>
-    <string name="security_settings_require_screen_on_to_auth_description" msgid="8555651197315796037">"La pantalla debe estar encendida para desbloquearla con la huella dactilar. De este modo, los desbloqueos accidentales son menos probables."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="3084541878035403475">"Ahora puedes usar tu huella dactilar para desbloquear el teléfono o verificar tu identidad, como cuando accedes a apps o apruebas compras."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="tablet" msgid="308213612040535580">"Ahora puedes usar tu huella dactilar para desbloquear la tablet o verificar tu identidad, como cuando accedes a apps o apruebas compras. \n\nAgrega otra huella dactilar para facilitar el desbloqueo cuando sostienes el dispositivo de distintas formas."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="device" msgid="911541337099737104">"Ahora puedes usar tu huella dactilar para desbloquear el dispositivo o verificar tu identidad, como cuando accedes a apps o apruebas compras.\n\nAgrega otra huella dactilar para facilitar el desbloqueo cuando sostienes el dispositivo de distintas formas."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="default" msgid="5261993991973265283">"Ahora puedes usar tu huella dactilar para desbloquear el teléfono o verificar tu identidad, como cuando accedes a apps o apruebas compras.\n\nAgrega otra huella dactilar para facilitar el desbloqueo cuando sostienes el teléfono de distintas formas."</string>
+    <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"Tocar para desbloquear en cualquier momento"</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"Toca el sensor para desbloquear, incluso si la pantalla está apagada. Con esta opción es más probable que se desbloquee el dispositivo accidentalmente."</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Pantalla, desbloqueo"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Más tarde"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Levanta el dedo y vuelve a tocar"</string>
@@ -648,9 +674,10 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Listo"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Ese no es el sensor"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Toca el sensor en la parte posterior del teléfono con el dedo índice."</string>
-    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Tiempo para conf. huella dactilar agotado"</string>
+    <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title" msgid="5796228438604723279">"No se completó la inscripción"</string>
+    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Tiempo para configurar huella dactilar agotado"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"Vuelve a intentarlo o hazlo más tarde en Configuración"</string>
-    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"El registro de huellas dactilares no funcionó. Vuelve a intentarlo o usa otro dedo."</string>
+    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Se produjo un error al registrar la huella dactilar. Vuelve a intentarlo o usa otro dedo."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Agregar otra huella digital"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Siguiente"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"Además de desbloquear el teléfono, también puedes utilizar tu huella dactilar para autorizar compras y el acceso a aplicaciones. "<annotation id="url">"Más información"</annotation></string>
@@ -670,9 +697,9 @@
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"¿Quitar las huellas dactilares?"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"Borrar \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\""</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"¿Quieres borrar esta huella dactilar?"</string>
-    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"Esta opción borra las imágenes de la huella dactilar y el modelo asociado con \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" que se guardaron en el teléfono"</string>
-    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"Esta opción borra las imágenes de la huella dactilar y el modelo asociado con \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" que se guardaron en la tablet"</string>
-    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"Esta opción borra las imágenes de la huella dactilar y el modelo asociado con \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" que se guardaron en el dispositivo"</string>
+    <string name="fingerprint_v2_delete_message" product="default" msgid="8310023888801801048">"Esta opción borra las imágenes de la huella dactilar y el modelo asociado con \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" que se guardaron en el teléfono."</string>
+    <string name="fingerprint_v2_delete_message" product="tablet" msgid="114315319294083658">"Esta opción borra las imágenes de la huella dactilar y el modelo asociado con \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" que se guardaron en la tablet."</string>
+    <string name="fingerprint_v2_delete_message" product="device" msgid="4136720729608391131">"Esta opción borra las imágenes de la huella dactilar y el modelo asociado con \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" que se guardaron en el dispositivo."</string>
     <string name="fingerprint_last_delete_message" product="default" msgid="7860374760549404410">"No podrás utilizar tu huella dactilar para desbloquear el teléfono ni verificar tu identidad en apps."</string>
     <string name="fingerprint_last_delete_message" product="tablet" msgid="4067899967580007895">"No podrás utilizar tu huella dactilar para desbloquear la tablet ni verificar tu identidad en apps."</string>
     <string name="fingerprint_last_delete_message" product="device" msgid="8582976866145366358">"No podrás utilizar tu huella dactilar para desbloquear el dispositivo ni verificar tu identidad en apps."</string>
@@ -735,28 +762,22 @@
     <string name="fingerprint_unlock_set_unlock_password" msgid="5614333047430835971">"Huella dactilar y contraseña"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="7631242444064287891">"Continuar sin huella dactilar"</string>
     <string name="fingerprint_unlock_title" product="default" msgid="4978686534505944042">"Puedes desbloquear el teléfono con tu huella dactilar. Para mayor seguridad, esta opción requiere un método secundario de bloqueo de pantalla."</string>
-    <!-- no translation found for fingerprint_unlock_title (8674718459462612186) -->
-    <skip />
-    <!-- no translation found for fingerprint_unlock_title (3224468142599659740) -->
-    <skip />
+    <string name="fingerprint_unlock_title" product="tablet" msgid="8674718459462612186">"Puedes desbloquear la tablet con las huellas dactilares. Por razones de seguridad, esta opción requiere un método secundario de bloqueo de pantalla."</string>
+    <string name="fingerprint_unlock_title" product="device" msgid="3224468142599659740">"Puedes desbloquear el dispositivo con las huellas dactilares. Por razones de seguridad, esta opción requiere un método secundario de bloqueo de pantalla."</string>
     <string name="face_unlock_set_unlock_pattern" msgid="3117316407679805330">"Desbloqueo facial y patrón"</string>
     <string name="face_unlock_set_unlock_pin" msgid="5300188327595503657">"Desbloqueo facial y PIN"</string>
     <string name="face_unlock_set_unlock_password" msgid="8395722611524617956">"Desbloqueo facial y contraseña"</string>
     <string name="face_unlock_skip_face" msgid="189695556498300008">"Continuar sin Desbloqueo facial"</string>
     <string name="face_unlock_title" product="default" msgid="7344830351598247267">"Puedes desbloquear tu teléfono con el reconocimiento facial. Para mayor seguridad, esta opción requiere un método secundario de bloqueo de pantalla."</string>
-    <!-- no translation found for face_unlock_title (5695698036499155727) -->
-    <skip />
-    <!-- no translation found for face_unlock_title (6768108756755361161) -->
-    <skip />
+    <string name="face_unlock_title" product="tablet" msgid="5695698036499155727">"Puedes desbloquear la tablet con el reconocimiento facial. Por razones de seguridad, esta opción requiere un método secundario de bloqueo de pantalla."</string>
+    <string name="face_unlock_title" product="device" msgid="6768108756755361161">"Puedes desbloquear el dispositivo con el reconocimiento facial. Por razones de seguridad, esta opción requiere un método secundario de bloqueo de pantalla."</string>
     <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"Patrón • Desbloqueo facial • Huella dactilar"</string>
     <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"PIN • Desbloqueo facial • Huella dactilar"</string>
     <string name="biometrics_unlock_set_unlock_password" msgid="4612217647465743624">"Contraseña • Desbl. facial • Huella dactilar"</string>
     <string name="biometrics_unlock_skip_biometrics" msgid="7785643433551409223">"Continuar sin el desbloqueo facial ni la huella dactilar"</string>
     <string name="biometrics_unlock_title" product="default" msgid="616524056055233041">"Puedes desbloquear el teléfono con el rostro o con tu huella dactilar. Por razones de seguridad, esta opción requiere un método secundario de bloqueo de pantalla."</string>
-    <!-- no translation found for biometrics_unlock_title (5808626401936488028) -->
-    <skip />
-    <!-- no translation found for biometrics_unlock_title (4912499343509046929) -->
-    <skip />
+    <string name="biometrics_unlock_title" product="tablet" msgid="5808626401936488028">"Puedes desbloquear la tablet con el reconocimiento facial o con la huella dactilar. Por razones de seguridad, esta opción requiere un método secundario de bloqueo de pantalla."</string>
+    <string name="biometrics_unlock_title" product="device" msgid="4912499343509046929">"Puedes desbloquear el dispositivo con el reconocimiento facial o con la huella dactilar. Por razones de seguridad, esta opción requiere un método secundario de bloqueo de pantalla."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="4022867760387966129">"Inhabilitada: admin, encriptación o credenciales"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"Ninguno"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"Deslizar"</string>
@@ -972,7 +993,7 @@
     <string name="bluetooth_device_advanced_enable_opp_title" msgid="7604726126703453984">"Permitir transferencias de archivos entrantes"</string>
     <string name="bluetooth_pan_user_profile_summary_connected" msgid="7851033200857999275">"Conectado para Internet"</string>
     <string name="bluetooth_pan_nap_profile_summary_connected" msgid="5563892893331988809">"Compartiendo conexión"</string>
-    <string name="bluetooth_dock_settings" msgid="1709536202189755022">"Configuración de la base"</string>
+    <string name="bluetooth_dock_settings" msgid="1709536202189755022">"Configuración del conector"</string>
     <string name="bluetooth_dock_settings_title" msgid="4872789068019972847">"Utilizar la base para el audio"</string>
     <string name="bluetooth_dock_settings_headset" msgid="5756482379574272554">"Como altavoz"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="434520221656010141">"Para música y medios"</string>
@@ -1177,7 +1198,7 @@
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"El nombre de la red es demasiado largo."</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"Se debe especificar un dominio."</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"Se requiere un certificado."</string>
-    <string name="wifi_wps_available_first_item" msgid="5780501151792036589">"WSP disponible"</string>
+    <string name="wifi_wps_available_first_item" msgid="5780501151792036589">"WPS disponible"</string>
     <string name="wifi_wps_available_second_item" msgid="1717024103303480804">" (WSP disponible)"</string>
     <string name="wifi_carrier_connect" msgid="4511538300946413213">"Red Wi‑Fi del proveedor"</string>
     <string name="wifi_carrier_content" msgid="2876499905644083615">"Conectarse mediante <xliff:g id="NAME">%1$s</xliff:g>"</string>
@@ -1367,7 +1388,7 @@
     <string name="volume_notification_mute" msgid="2612197659377126312">"Silenciar notificaciones"</string>
     <string name="volume_alarm_mute" msgid="3730895630530980760">"Silenciar alarmas"</string>
     <string name="dock_settings" msgid="4654404127402812514">"Base"</string>
-    <string name="dock_settings_title" msgid="1276956575555480214">"Configuración de la base"</string>
+    <string name="dock_settings_title" msgid="1276956575555480214">"Configuración del conector"</string>
     <string name="dock_audio_settings_title" msgid="8294821925086965934">"Audio"</string>
     <string name="dock_audio_summary_desk" msgid="4158593887711452737">"Configuración para la base adjunta del escritorio"</string>
     <string name="dock_audio_summary_car" msgid="292911654994476080">"Configuración para la base adjunta del automóvil"</string>
@@ -1798,7 +1819,7 @@
     <string name="battery_status_title" msgid="4661768220545945771">"Estado de batería"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"Nivel de la batería"</string>
     <string name="communal_settings_title" msgid="2845678473945902115">"Comunal"</string>
-    <string name="communal_settings_summary" msgid="4923914136953940317">"Configuración comunal"</string>
+    <string name="communal_settings_summary" msgid="4923914136953940317">"Configuraciones compartidas"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Editar punto de acceso"</string>
     <string name="apn_not_set" msgid="8246646433109750293">"Sin establecer"</string>
@@ -2028,7 +2049,7 @@
     <string name="lockpassword_choose_your_pin_header" msgid="7754265746504679473">"Establecer un PIN"</string>
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"Establecer un PIN de trabajo"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"Establecer un patrón"</string>
-    <string name="lockpassword_choose_your_pattern_description" msgid="6808109256008481046">"Para mayor seguridad, establece un patrón para desbloquear el dispositivo"</string>
+    <string name="lockpassword_choose_your_pattern_description" msgid="6808109256008481046">"Para mayor seguridad, establece un patrón para desbloquear el dispositivo."</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"Establecer un patrón de trabajo"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"Configura la contraseña de respaldo"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Para usar tu huella, configura un patrón"</string>
@@ -2070,9 +2091,15 @@
     <string name="lockpassword_strong_auth_required_work_pattern" msgid="6803652050512161140">"Para mayor seguridad, usa el patrón de tu perfil de trabajo"</string>
     <string name="lockpassword_strong_auth_required_work_pin" msgid="4208510396448713500">"Para mayor seguridad, ingresa el PIN de tu perfil de trabajo"</string>
     <string name="lockpassword_strong_auth_required_work_password" msgid="6119482061429323090">"Para mayor seguridad, ingresa la contraseña de tu perfil de trabajo"</string>
-    <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6351784282865851482">"Se restableció la configuración de fábrica del teléfono. Para usarlo, ingresa el patrón anterior."</string>
-    <string name="lockpassword_confirm_your_pin_details_frp" msgid="2128795640346033349">"Se restableció la configuración de fábrica del teléfono. Para usarlo, ingresa el PIN anterior."</string>
-    <string name="lockpassword_confirm_your_password_details_frp" msgid="4031863562975125016">"Se restableció la configuración de fábrica del teléfono. Para usarlo, ingresa contraseña anterior."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="default" msgid="6351784282865851482">"Se restableció la configuración de fábrica del teléfono. Para usarlo, ingresa el patrón anterior."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="tablet" msgid="8596917715101288176">"La tablet se restableció a la configuración de fábrica. Para usarla, ingresa el patrón anterior."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="device" msgid="5454624762517414834">"El dispositivo se restableció a la conf. de fábrica. Para usarlo, ingresa el patrón anterior."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="default" msgid="2128795640346033349">"Se restableció la configuración de fábrica del teléfono. Para usarlo, ingresa el PIN anterior."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="tablet" msgid="8365335365718500964">"La tablet se restableció a la configuración de fábrica. Para usarla, ingresa el PIN anterior."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="device" msgid="1755588602707523835">"El dispositivo se restableció a la configuración de fábrica. Para usarlo, ingresa el PIN anterior."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="default" msgid="4031863562975125016">"Se restableció la configuración de fábrica del teléfono. Para usarlo, ingresa contraseña anterior."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="tablet" msgid="3899701773001146600">"La tablet se restableció a la configuración de fábrica. Para usarla, ingresa la contraseña anterior."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="device" msgid="2683204467262573702">"El dispositivo se restableció a la conf. de fábrica. Para usarlo, ingresa la contraseña anterior."</string>
     <string name="lockpassword_confirm_your_pattern_header_frp" msgid="5641858015891896427">"Verificar patrón"</string>
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"Verificar PIN"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Verificar contraseña"</string>
@@ -2097,6 +2124,8 @@
     <string name="lockpattern_settings_enable_title" msgid="7401197111303283723">"Requiere un patrón"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1116467204475387886">"Debes dibujar el patrón para desbloquear la pantalla"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="3340969054395584754">"Hacer visible el patrón"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_title" msgid="7172693275721931683">"Privacidad de PIN mejorada"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_summary" msgid="8639588868341114740">"Inhabilitar las animaciones cuando se ingresa el PIN"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"Mostrar el patrón del perfil"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"Vibrar al presionar"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"Botón de encendido bloquea"</string>
@@ -2229,7 +2258,7 @@
     <string name="app_disable_dlg_positive" msgid="1414218905322009505">"Inhabilitar la aplicación"</string>
     <string name="app_disable_dlg_text" msgid="2449382902751908916">"Si inhabilitas esta app, es posible que Android y otras apps ya no funcionen correctamente. Ten en cuenta que no puedes borrar esta app ya que vino preinstalada en el dispositivo. Si la inhabilitas, se desactivarás y se ocultará en tu dispositivo."</string>
     <string name="app_disable_notifications_dlg_title" msgid="6686569904059411780">"¿Desactivar notificaciones?"</string>
-    <string name="app_install_details_group_title" msgid="1172114479073704677">"Store"</string>
+    <string name="app_install_details_group_title" msgid="1172114479073704677">"Tienda"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"Detalles de la app"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"App instalada desde <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
     <string name="instant_app_details_summary" msgid="417197491598208216">"Más información en <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
@@ -2399,9 +2428,9 @@
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Presiona los elementos en tu pantalla para escuchar la lectura en voz alta"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Preferencias de subtítulos"</string>
     <string name="accessibility_captioning_about_title" msgid="3542171637334191563">"Acerca de las preferencias de subtitulado"</string>
-    <string name="accessibility_captioning_footer_learn_more_content_description" msgid="5730040700677017706">"Más información sobre las preferencias de subtitulado"</string>
+    <string name="accessibility_captioning_footer_learn_more_content_description" msgid="5730040700677017706">"Más información sobre las preferencias de subtítulos"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Ampliación"</string>
-    <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Acceso directo de ampliación"</string>
+    <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Combinación de accesibilidad de ampliación"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"Amplía la escritura"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"La lupa sigue el texto a medida que escribes"</string>
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"Acerca de la ampliación"</string>
@@ -2464,7 +2493,7 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"Para usar una función de accesibilidad, desliza 2 dedos hacia arriba desde la parte inferior de la pantalla.\n\nSi quieres cambiar de función, desliza 2 dedos hacia arriba y mantén presionada la pantalla."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="7292969929578621958">"Para usar una función de accesibilidad, desliza 3 dedos hacia arriba desde la parte inferior de la pantalla.\n\nSi quieres cambiar de función, desliza 3 dedos hacia arriba y mantén presionada la pantalla."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Entendido"</string>
-    <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Combinación de accesibilidad de <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
+    <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Combinación de accesibilidad para: <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Botón de accesibilidad"</string>
     <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"Gesto de accesibilidad"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Deslizar dos dedos hacia arriba"</string>
@@ -2620,8 +2649,8 @@
     <string name="accessibility_toggle_audio_description_preference_title" msgid="8916473886256061220">"Audiodescripción"</string>
     <string name="accessibility_audio_description_summary" msgid="2554789094873781056">"Escucha una descripción de lo que ocurre en pantalla en películas y programas compatibles"</string>
     <string name="keywords_audio_description" msgid="6202816411593281252">"audiodescripción, audio, descripción, persona con visión reducida"</string>
-    <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"Acceso directo activado"</string>
-    <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"Desactivada"</string>
+    <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"Combinación activada"</string>
+    <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"Combinación desactivada"</string>
     <string name="accessibility_summary_state_enabled" msgid="1065431632216039369">"Activado"</string>
     <string name="accessibility_summary_state_disabled" msgid="9173234532752799694">"Desactivado"</string>
     <string name="accessibility_summary_state_stopped" msgid="2343602489802623424">"No funciona. Presiona para obtener información."</string>
@@ -2697,13 +2726,13 @@
     <string name="color_cyan" msgid="4341758639597035927">"Cian"</string>
     <string name="color_yellow" msgid="5957551912912679058">"Amarillo"</string>
     <string name="color_magenta" msgid="8943538189219528423">"Magenta"</string>
-    <string name="enable_service_title" msgid="7231533866953706788">"¿Deseas permitir que <xliff:g id="SERVICE">%1$s</xliff:g> tenga el control total de tu dispositivo?"</string>
+    <string name="enable_service_title" msgid="7231533866953706788">"¿Deseas permitir que la app <xliff:g id="SERVICE">%1$s</xliff:g> tenga el control total de tu dispositivo?"</string>
     <string name="capabilities_list_title" msgid="1225853611983394386">"<xliff:g id="SERVICE">%1$s</xliff:g> necesita:"</string>
     <string name="touch_filtered_warning" msgid="4225815157460318241">"Debido a que una aplicación está bloqueando una solicitud de permiso, la Configuración no puede verificar tu respuesta."</string>
     <string name="accessibility_service_warning" msgid="6779187188736432618">"<xliff:g id="SERVICE">%1$s</xliff:g> está solicitando el control total de este dispositivo. El servicio puede leer la pantalla y realizar acciones para los usuarios que necesitan accesibilidad. Este nivel de control no es apropiado para la mayoría de las apps."</string>
     <string name="accessibility_service_warning_description" msgid="6573203795976134751">"El control total es apropiado para las apps que te ayudan con las necesidades de accesibilidad, pero no para la mayoría de las apps."</string>
     <string name="accessibility_service_screen_control_title" msgid="324795030658109870">"Ver y controlar la pantalla"</string>
-    <string name="accessibility_service_screen_control_description" msgid="8431940515157990426">"Puede leer todo el contenido en la pantalla y mostrarlo sobre otras apps."</string>
+    <string name="accessibility_service_screen_control_description" msgid="8431940515157990426">"Puede leer todo el contenido en la pantalla y mostrar contenido sobre otras apps."</string>
     <string name="accessibility_service_action_perform_title" msgid="1449360056585337833">"Ver y realizar acciones"</string>
     <string name="accessibility_service_action_perform_description" msgid="7807832069800034738">"Puede realizar el seguimiento de tus interacciones con una app o un sensor de hardware, así como interactuar con las apps por ti."</string>
     <string name="accessibility_dialog_button_allow" msgid="8274918676473216697">"Permitir"</string>
@@ -2884,7 +2913,7 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Esta app podrá usar la batería en segundo plano. La batería podría agotarse antes de lo esperado."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Quitar"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Cancelar"</string>
-    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"Cargar al máximo"</string>
+    <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"Cargar por completo"</string>
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Tus apps consumen una cantidad normal de batería. Si consumen demasiada batería, el teléfono te recomendará acciones.\n\nSi tienes poca batería, también puedes activar el Ahorro de batería."</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"Tus apps consumen una cantidad normal de batería. Si consumen demasiada batería, la tablet te recomendará acciones.\n\nSi tienes poca batería, también puedes activar el Ahorro de batería."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Tus apps consumen una cantidad normal de batería. Si consumen demasiada batería, el dispositivo te recomendará acciones.\n\nSi tienes poca batería, también puedes activar el Ahorro de batería."</string>
@@ -3049,7 +3078,7 @@
     <string name="battery_saver_auto_percentage_summary" msgid="6190884450723824287">"Se activará cuando quede <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Establecer un programa"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Extender la duración de la batería"</string>
-    <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Desactivar después de la carga"</string>
+    <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Desactivar cuando la batería esté cargada"</string>
     <string name="battery_saver_sticky_description_new" product="default" msgid="492221102651829607">"El Ahorro de batería se desactiva cuando el teléfono tiene más del <xliff:g id="NUMBER">^1</xliff:g><xliff:g id="UNIT">%</xliff:g> de carga"</string>
     <string name="battery_saver_sticky_description_new" product="tablet" msgid="4566426833434375284">"El Ahorro de batería se desactiva cuando la tablet tiene más del <xliff:g id="NUMBER">^1</xliff:g><xliff:g id="UNIT">%</xliff:g> de carga"</string>
     <string name="battery_saver_sticky_description_new" product="device" msgid="4128841327359445726">"El Ahorro de batería se desactiva cuando el dispositivo tiene más del <xliff:g id="NUMBER">^1</xliff:g><xliff:g id="UNIT">%</xliff:g> de carga"</string>
@@ -3503,7 +3532,7 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"Borrar a <xliff:g id="USER_NAME">%1$s</xliff:g> del disp."</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Configuración de pantalla bloqueada"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Agregar usuarios desde la pantalla de bloqueo"</string>
-    <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Cambiar a usuario administrador cuando se conecta"</string>
+    <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Cambiar a usuario administrador cuando se conecte"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"¿Deseas borrarte a ti mismo?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"¿Borrar este usuario?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"¿Eliminar este perfil?"</string>
@@ -3691,7 +3720,7 @@
     <string name="network_dashboard_summary_mobile" msgid="7750924671970583670">"Datos móviles, Wi‑Fi y hotspot"</string>
     <string name="network_dashboard_summary_no_mobile" msgid="4022575916334910790">"Wi‑Fi y hotspot"</string>
     <string name="connected_devices_dashboard_title" msgid="19868275519754895">"Dispositivos conectados"</string>
-    <string name="connected_devices_dashboard_default_summary" msgid="7211769956193710397">"Bluetooth y sincronización"</string>
+    <string name="connected_devices_dashboard_default_summary" msgid="7211769956193710397">"Bluetooth y vinculación"</string>
     <string name="connected_devices_dashboard_summary" msgid="6927727617078296491">"Bluetooth, En automóvil, NFC"</string>
     <string name="connected_devices_dashboard_no_nfc_summary" msgid="8424794257586524040">"Bluetooth, En automóvil"</string>
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="7155882619333726331">"Bluetooth, NFC"</string>
@@ -3705,7 +3734,7 @@
     <string name="app_and_notification_dashboard_title" msgid="2861781687031832943">"Apps y notificaciones"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Apps recientes y predeterminadas"</string>
     <string name="notification_settings_work_profile" msgid="6076211850526353975">"Las apps del perfil de trabajo no tienen acceso a las notificaciones."</string>
-    <string name="account_dashboard_title" msgid="8228773251948253914">"Contraseñas y cuentas"</string>
+    <string name="account_dashboard_title" msgid="8228773251948253914">"Cuentas y contraseñas"</string>
     <string name="account_dashboard_default_summary" msgid="1730719656099599488">"Contraseñas guardadas, autocompletar y cuentas sincronizadas"</string>
     <string name="app_default_dashboard_title" msgid="4071015747629103216">"Apps predeterminadas"</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"Idiomas, gestos, hora, copia de seguridad"</string>
@@ -3793,14 +3822,14 @@
     <string name="keywords_default_payment_app" msgid="5162298193637362104">"pago, predeterminado"</string>
     <string name="keywords_ambient_display" msgid="3149287105145443697">"notificación entrante"</string>
     <string name="keywords_hotspot_tethering" msgid="3688439689671232627">"conexión USB, conexión Bluetooth, hotspot de Wi-Fi"</string>
-    <string name="keywords_accessibility_vibration_primary_switch" msgid="730692154347231253">"tecnología háptica, vibrar, vibración"</string>
-    <string name="keywords_touch_vibration" msgid="1125291201902251273">"tecnología háptica, vibrar, pantalla, sensibilidad"</string>
-    <string name="keywords_ring_vibration" msgid="1736301626537417541">"háptica, vibrar, teléfono, llamada, sensibilidad, tono"</string>
-    <string name="keywords_ramping_ringer_vibration" msgid="3678966746742257366">"háptica, vibrar, teléfono, llamada, hacer sonar, gradual"</string>
-    <string name="keywords_notification_vibration" msgid="2620799301276142183">"háptica, vibrar, sensibilidad, notificación"</string>
-    <string name="keywords_alarm_vibration" msgid="4833220371621521817">"háptica, vibrar, sensibilidad, alarma"</string>
-    <string name="keywords_media_vibration" msgid="723896490102792327">"háptica, vibrar, sensibilidad, contenido multimedia"</string>
-    <string name="keywords_vibration" msgid="670455132028025952">"tecnología háptica, vibrar, vibración"</string>
+    <string name="keywords_accessibility_vibration_primary_switch" msgid="730692154347231253">"tecnología táctil, vibrar, vibración"</string>
+    <string name="keywords_touch_vibration" msgid="1125291201902251273">"tecnología táctil, vibrar, pantalla, sensibilidad"</string>
+    <string name="keywords_ring_vibration" msgid="1736301626537417541">"tecnología táctil, vibrar, teléfono, llamada, sensibilidad, tono"</string>
+    <string name="keywords_ramping_ringer_vibration" msgid="3678966746742257366">"tecnología táctil, vibrar, teléfono, llamada, hacer sonar, gradual"</string>
+    <string name="keywords_notification_vibration" msgid="2620799301276142183">"tecnología táctil, vibrar, sensibilidad, notificación"</string>
+    <string name="keywords_alarm_vibration" msgid="4833220371621521817">"tecnología táctil, vibrar, sensibilidad, alarma"</string>
+    <string name="keywords_media_vibration" msgid="723896490102792327">"tecnología táctil, vibrar, sensibilidad, contenido multimedia"</string>
+    <string name="keywords_vibration" msgid="670455132028025952">"tecnología táctil, vibrar, vibración"</string>
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"ahorro de batería, fijo, permanente, ahorro de energía, batería"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"rutina, programa, ahorro de batería, ahorro de energía, batería, automático, porcentaje"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, llamadas avanzadas, llamadas mediante 4G"</string>
@@ -3821,6 +3850,7 @@
     <string name="ring_volume_option_title" msgid="1520802026403038560">"Volumen de tono y notificaciones"</string>
     <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"Volumen de tono"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"Volumen de notificación"</string>
+    <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"No disponible porque el timbre está silenciado"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"Tono de llamada"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Sonido de notificación predeterminado"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"Sonido que proporcionó la app"</string>
@@ -3832,7 +3862,7 @@
     <string name="vibrate_when_ringing_option_always_vibrate" msgid="968652667232075466">"Siempre vibrar"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"Primero vibrar, luego sonar gradualmente"</string>
     <string name="other_sound_settings" msgid="5468360269346162072">"Otros sonidos"</string>
-    <string name="spatial_audio_title" msgid="6591051622375191603">"Sonido espacial"</string>
+    <string name="spatial_audio_title" msgid="6591051622375191603">"Audio espacial"</string>
     <string name="dial_pad_tones_title" msgid="3536945335367914892">"Tonos del teclado"</string>
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"Sonido de bloqueo de pantalla"</string>
     <string name="charging_sounds_title" msgid="5261683808537783668">"Vibración y sonidos de carga"</string>
@@ -3847,7 +3877,7 @@
     <string name="emergency_tone_vibrate" msgid="6282296789406984698">"Vibraciones"</string>
     <string name="boot_sounds_title" msgid="5033062848948884111">"Activar los sonidos"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"Subtitulado instantáneo"</string>
-    <string name="live_caption_summary" msgid="2898451867595161809">"Subtitular automáticamente"</string>
+    <string name="live_caption_summary" msgid="2898451867595161809">"Muestra subtítulos automáticos"</string>
     <string name="spatial_audio_speaker" msgid="9145233652433523302">"Bocina del teléfono"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Auriculares con cable"</string>
     <string name="spatial_audio_text" msgid="8201387855375146000">"El audio del contenido multimedia compatible se hace más envolvente"</string>
@@ -3884,7 +3914,7 @@
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"El teléfono no sonará ni vibrará cuando recibas notificaciones."</string>
     <string name="zen_mode_restrict_notifications_hide" msgid="5997930361607752541">"Notificaciones sin sonido ni elementos visuales"</string>
     <string name="zen_mode_restrict_notifications_hide_summary" msgid="6005445725686969583">"No verás ni oirás notificaciones"</string>
-    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4314772315731485747">"Tu teléfono no mostrará notificaciones nuevas o existentes, ni tampoco vibrará ni sonará por ellas. Ten en cuenta que se seguirán mostrando las notificaciones importantes sobre la actividad y el estado del teléfono.\n\nCuando desactives No interrumpir, desliza el dedo hacia abajo desde la parte superior de la pantalla para ver las notificaciones que te perdiste."</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="3761837271201073330">"Tu teléfono no vibrará ni sonará por notificaciones nuevas ni existentes, ni las mostrará. Ten en cuenta que se seguirán mostrando las notificaciones importantes sobre la actividad y el estado del dispositivo.\n\nCuando desactives No interrumpir, desliza el dedo hacia abajo desde la parte superior de la pantalla para encontrar las notificaciones que te perdiste."</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"Personalizada"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"Habilitar configuración personalizada"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="5062332754972217218">"Quitar configuración personalizada"</string>
@@ -3908,7 +3938,7 @@
     <string name="zen_mode_block_effect_summary_sound" msgid="1559968890497946901">"Sonido y vibración"</string>
     <string name="zen_mode_block_effect_summary_some" msgid="2730383453754229650">"Sonido, vibración y algunos signos visuales de notificaciones"</string>
     <string name="zen_mode_block_effect_summary_all" msgid="3131918059492425222">"Sonido, vibración y signos visuales de notificaciones"</string>
-    <string name="zen_mode_blocked_effects_footer" msgid="1115914818435434668">"Nunca se ocultarán las notificaciones necesarias sobre el estado y las actividades básicas del teléfono."</string>
+    <string name="zen_mode_blocked_effects_footer" msgid="6403365663466620328">"Nunca se ocultarán las notificaciones necesarias sobre el estado y las actividades básicas del dispositivo."</string>
     <string name="zen_mode_no_exceptions" msgid="1580136061336585873">"Nada"</string>
     <string name="zen_mode_other_options" msgid="3399967231522580421">"otras opciones"</string>
     <string name="zen_mode_add" msgid="8789024026733232566">"Agregar"</string>
@@ -4042,6 +4072,8 @@
     <string name="lockscreen_bypass_summary" msgid="464277506200346748">"Después del desbloqueo, ir a la última pantalla usada"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Pantalla bloqueada, bloqueo de pantalla, omitir, omisión"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Con el perfil de trabajo bloqueado"</string>
+    <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Mostrar solo notificaciones nuevas en la pantalla de bloqueo"</string>
+    <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Quita automáticamente las notificaciones ya vistas de la pantalla de bloqueo"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Notificaciones en pantalla de bloqueo"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Mostrar conversaciones predeterminadas y silenciosas"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Mostrar conversaciones predeterminadas y silenciosas"</string>
@@ -4129,7 +4161,7 @@
       <item quantity="one">Aproximadamente <xliff:g id="NUMBER_0">%d</xliff:g> notificación por semana</item>
     </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Nunca"</string>
-    <string name="manage_notification_access_title" msgid="6481256069087219982">"Notificaciones de la app y del dispositivo"</string>
+    <string name="manage_notification_access_title" msgid="6481256069087219982">"Notificaciones de apps y dispositivos"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"Controla qué apps y dispositivos pueden leer notificaciones"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8643809206612366067">"El acceso a las notificaciones del perfil de trabajo está bloqueado"</string>
     <string name="manage_notification_access_summary_zero" msgid="7528633634628627431">"Las aplicaciones no pueden leer las notificaciones."</string>
@@ -4213,7 +4245,7 @@
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Permitir opción No interrumpir"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Ninguna aplicación instalada solicitó acceso en No interrumpir."</string>
     <string name="loading_notification_apps" msgid="5139471829295287945">"Cargando apps…"</string>
-    <string name="app_notifications_off_desc" msgid="6691342160980435901">"Como lo solicitaste, Android bloquea las notificaciones de esta app para que no se muestren en el dispositivo"</string>
+    <string name="app_notifications_off_desc" msgid="2484843759466874201">"No permitiste las notificaciones de esta app"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Como lo solicitaste, Android bloquea esta categoría de notificaciones para que no se muestren en el dispositivo"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Como lo solicitaste, Android bloquea este grupo de notificaciones para que no se muestren en el dispositivo"</string>
     <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"Esta app no envía notificaciones"</string>
@@ -4255,7 +4287,7 @@
     <string name="notification_vibrate_title" msgid="1422330728336623351">"Vibración"</string>
     <string name="notification_channel_sound_title" msgid="9018031231387273476">"Sonido"</string>
     <string name="notification_conversation_important" msgid="4365437037763608045">"Prioritaria"</string>
-    <string name="notification_conversation_add_to_home" msgid="8136269431130231389">"Agregar al hogar"</string>
+    <string name="notification_conversation_add_to_home" msgid="8136269431130231389">"Agregar a la pantalla principal"</string>
     <string name="zen_mode_rule_delete_button" msgid="7642063606919058862">"Borrar"</string>
     <string name="zen_mode_rule_rename_button" msgid="4158377587795511144">"Cambiar nombre"</string>
     <string name="zen_mode_rule_name" msgid="7303080427006917702">"Nombre"</string>
@@ -4432,7 +4464,7 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Solicitar contraseña para quitar fijación"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Bloquear dispositivo al quitar fijación"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Confirmar eliminación de SIM"</string>
-    <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"Verifica que tu identidad antes de borrar una SIM descargada"</string>
+    <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"Verifica tu identidad antes de borrar una SIM descargada"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"La siguiente aplicación administra este perfil de trabajo:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Administrado por <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="experimental_preference" msgid="869354050717870055">"(Experimental)"</string>
@@ -4537,7 +4569,7 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> apps en desuso</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> app en desuso</item>
     </plurals>
-    <string name="unused_apps_category" msgid="8954930958175500851">"Configuración de apps sin usar"</string>
+    <string name="unused_apps_category" msgid="8954930958175500851">"Configuración de app sin usar"</string>
     <string name="unused_apps_switch" msgid="7595419855882245772">"Pausar actividad en la app si no se usa"</string>
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"Quitar permisos, borrar archivos temporales y detener notificaciones"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Todas las apps"</string>
@@ -4937,7 +4969,7 @@
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"Activar ahora"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"Desactivar ahora"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"La optimización de la batería no está en uso"</string>
-    <string name="app_battery_usage_title" msgid="346558380609793334">"Uso de batería de las apps"</string>
+    <string name="app_battery_usage_title" msgid="346558380609793334">"Uso de batería de la app"</string>
     <string name="app_battery_usage_summary" msgid="6349965904306339539">"Establecer uso de batería para apps"</string>
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Sin restricciones"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Optimizada"</string>
@@ -4982,13 +5014,13 @@
     <string name="overlay_toast_failed_to_apply" msgid="4839587811338164960">"Error al aplicar superposición"</string>
     <string name="special_access" msgid="1767980727423395147">"Acceso especial de apps"</string>
     <plurals name="special_access_summary" formatted="false" msgid="4995506406763570815">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> apps pueden usar datos sin restricciones</item>
-      <item quantity="one">1 app puede usar datos sin restricciones</item>
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> apps pueden usar datos ilimitados</item>
+      <item quantity="one">1 app puede usar datos ilimitados</item>
     </plurals>
     <string name="special_access_more" msgid="132919514147475846">"Ver más"</string>
     <string name="reset_shortcut_manager_throttling" msgid="2183940254903144298">"Restablecer la limitación de frecuencia de ShortcutManager"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="8949943009096885470">"Se restableció la limitación de frecuencia de ShortcutManager"</string>
-    <string name="notification_suggestion_title" msgid="6309263655965785411">"Controlar los datos que aparecen en la pantalla bloqueada"</string>
+    <string name="notification_suggestion_title" msgid="6309263655965785411">"Controlar qué aparece en la pantalla de bloqueo"</string>
     <string name="notification_suggestion_summary" msgid="7615611244249276113">"Ocultar o mostrar el contenido de las notificaciones"</string>
     <string name="page_tab_title_summary" msgid="7188875610123234454">"Todas"</string>
     <string name="page_tab_title_support" msgid="3235725053332345773">"Sugerencias y asistencia"</string>
@@ -5896,15 +5928,18 @@
     <string name="dream_picker_category" msgid="7726447836872744867">"Selecciona un protector de pantalla"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Mostrar información adicional"</string>
     <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Mostrar datos como la hora, el clima o demás información en el protector de pantalla"</string>
+    <string name="dream_home_controls_toggle_title" msgid="706799741564479248">"Mostrar controles de la casa"</string>
+    <string name="dream_home_controls_toggle_summary" msgid="4102519907917430579">"Muestra el botón de controles de la casa desde el protector de pantalla"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Más parámetros de configuración"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Elige tu protector de pantalla"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Elige lo que quieres ver en la pantalla cuando la tablet no está conectada. Es posible que el dispositivo use más energía cuando se utiliza el protector de pantalla."</string>
     <string name="customize_button_title" msgid="1110284655990203359">"Personalizar"</string>
+    <string name="customize_button_description" msgid="7440248477266126231">"Personalizar <xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"Se debe reiniciar para habilitar la asistencia de formato libre."</string>
     <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"Se debe reiniciar para forzar el modo de computadora en las pantallas secundarias."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Reiniciar ahora"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Reiniciar más adelante"</string>
-    <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Sonido espacial"</string>
+    <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Audio espacial"</string>
     <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"El audio de contenido multimedia compatible se hace más envolvente"</string>
     <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"Seguimiento de cabeza"</string>
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"El audio cambia a medida que mueves la cabeza para sonar más natural"</string>

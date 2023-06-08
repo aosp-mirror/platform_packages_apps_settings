@@ -30,7 +30,7 @@ import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceGroupAdapter;
 import androidx.preference.PreferenceViewHolder;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.window.embedding.SplitController;
+import androidx.window.embedding.ActivityEmbeddingController;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -250,6 +250,7 @@ public class HighlightableTopLevelPreferenceAdapter extends PreferenceGroupAdapt
     }
 
     private boolean isHighlightNeeded() {
-        return SplitController.getInstance().isActivityEmbedded(mHomepageActivity);
+        return ActivityEmbeddingController.getInstance(mHomepageActivity)
+                .isActivityEmbedded(mHomepageActivity);
     }
 }
