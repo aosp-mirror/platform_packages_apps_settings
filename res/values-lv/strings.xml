@@ -158,8 +158,10 @@
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"Lai mainītu šo iestatījumu, jums jārestartē ierīce."</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Restartēt"</string>
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Atcelt"</string>
-    <string name="bluetooth_enable_leaudio" msgid="1245004820628723136">"Iespējot Bluetooth LE audio"</string>
-    <string name="bluetooth_enable_leaudio_summary" msgid="8066117764037123479">"Tiek iespējota Bluetooth LE audio funkcija, ja ierīcē tiek atbalstītas LE audio aparatūras iespējas."</string>
+    <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Atspējot Bluetooth LE Audio"</string>
+    <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Tiek atspējota Bluetooth LE Audio funkcija, ja ierīcē tiek atbalstītas LE Audio aparatūras iespējas."</string>
+    <string name="bluetooth_enable_leaudio_allow_list" msgid="1692999156437357534">"Iespējot Bluetooth LE audio atļaušanas sarakstu"</string>
+    <string name="bluetooth_enable_leaudio_allow_list_summary" msgid="725601205276008525">"Iespējojiet funkciju “Bluetooth LE audio atļaušanas saraksts”."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Multivides ierīces"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Zvanīšanas ierīces"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Citas ierīces"</string>
@@ -957,7 +959,8 @@
     <string name="bluetooth_menu_advanced" msgid="7633682234855216066">"Papildu iestatījumi"</string>
     <string name="bluetooth_advanced_titlebar" msgid="5369701494951467257">"Bluetooth papildu iestatījumi"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="316627049372961941">"Kad Bluetooth ir ieslēgts, ierīce var sazināties ar citām Bluetooth ierīcēm tuvumā."</string>
-    <string name="bluetooth_scanning_on_info_message" msgid="6667723887545056976">"Kad ir ieslēgts Bluetooth savienojums, jūsu ierīce var sazināties ar tuvumā esošām Bluetooth ierīcēm.\n\nLai uzlabotu ierīču izmantošanas iespējas, lietotnes un pakalpojumi joprojām var meklēt tuvumā esošas ierīces jebkurā laikā, pat ja Bluetooth savienojums ir izslēgts. Šo iestatījumu var izmantot, piemēram, lai uzlabotu ar atrašanās vietu saistītas funkcijas un pakalpojumus, un to var mainīt "<annotation id="link">"Bluetooth meklēšanas iestatījumos"</annotation>"."</string>
+    <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Kad ir ieslēgts Bluetooth savienojums, jūsu ierīce var sazināties ar tuvumā esošām Bluetooth ierīcēm.\n\nLai uzlabotu ierīču izmantošanas iespējas, lietotnes un pakalpojumi var meklēt tuvumā esošas ierīces jebkurā laikā, pat ja Bluetooth savienojums ir izslēgts. Šo iestatījumu var izmantot, piemēram, lai uzlabotu ar atrašanās vietu saistītas funkcijas un pakalpojumus, un to var mainīt Bluetooth meklēšanas iestatījumos."</string>
+    <string name="bluetooth_scan_change" msgid="1744636222637390367">"Mainīt"</string>
     <string name="ble_scan_notify_text" msgid="1358879010396045164">"Lai uzlabotu atrašanās vietas noteikšanas precizitāti, sistēmas lietotnēs un pakalpojumos joprojām var noteikt Bluetooth ierīces. Varat to mainīt <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>meklēšanas iestatījumos<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="bluetooth_connect_failed" msgid="7892663424429584925">"Nevarēja izveidot savienojumu. Mēģiniet vēlreiz."</string>
     <string name="device_details_title" msgid="1155622417516195481">"Ierīces dati"</string>
@@ -1915,7 +1918,7 @@
     <string name="call_settings_summary" msgid="8244293779053318053">"Balss pasta, zvanu pāradresācijas, zvana gaidīšanas, zvanītāja ID iestatīšana"</string>
     <string name="tether_settings_title_usb" msgid="5926474044238409099">"USB saistīšana"</string>
     <string name="tether_settings_title_wifi" msgid="4327056146425282159">"Pārnēsājams tīklājs"</string>
-    <string name="tether_settings_title_bluetooth" msgid="8878813702520141084">"Bluetooth saistīšana"</string>
+    <string name="tether_settings_title_bluetooth" msgid="8878813702520141084">"Bluetooth piesaiste"</string>
     <string name="tether_settings_title_usb_bluetooth" msgid="4437274151658505496">"Saistīšana"</string>
     <string name="tether_settings_title_all" msgid="6807525590937697228">"Tīklājs un piesaiste"</string>
     <string name="tether_settings_summary_hotspot_on_tether_on" msgid="6110241048260139633">"Tīklājs ir ieslēgts, piesaiste ir aktīva"</string>
@@ -1951,7 +1954,7 @@
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"USB piesaiste"</string>
     <string name="usb_tethering_subtext" product="default" msgid="3168636595109044213">"Koplietojiet tālruņa interneta savienojumu, izmantojot USB"</string>
     <string name="usb_tethering_subtext" product="tablet" msgid="1749659335004856576">"Koplietojiet planšetdatora interneta savienojumu, izmantojot USB"</string>
-    <string name="bluetooth_tether_checkbox_text" msgid="6108398414967813545">"Bluetooth saistīšana"</string>
+    <string name="bluetooth_tether_checkbox_text" msgid="6108398414967813545">"Bluetooth piesaiste"</string>
     <string name="bluetooth_tethering_subtext" product="tablet" msgid="2023654677593885805">"Koplietojiet planšetdatora interneta savienojumu, izmantojot Bluetooth"</string>
     <string name="bluetooth_tethering_subtext" product="default" msgid="4322810060538179348">"Koplietojiet tālruņa interneta savienojumu, izmantojot Bluetooth"</string>
     <string name="bluetooth_tethering_off_subtext_config" msgid="6941934844527406581">"Tiek koplietots ierīces <xliff:g id="DEVICE_NAME">%1$d</xliff:g> interneta savienojums, izmantojot Bluetooth"</string>
@@ -2064,12 +2067,12 @@
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Kombinācijas iestatīšana"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"Drošības nolūkos iestatiet PIN kodu."</string>
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="2783879743691792556">"Iestatiet PIN kodu"</string>
-    <string name="lockpassword_confirm_your_password_header" msgid="6132312814563023990">"Atkārtota paroles ievade"</string>
+    <string name="lockpassword_confirm_your_password_header" msgid="6132312814563023990">"Atkārtoti ievadiet paroli"</string>
     <string name="lockpassword_reenter_your_profile_password_header" msgid="3812040127714827685">"Atkārtoti ievadiet darba paroli"</string>
     <string name="lockpassword_confirm_your_work_password_header" msgid="4647071231702288305">"Ievadiet darba profila paroli"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="4037701363240138651">"Apstipriniet kombināciju"</string>
     <string name="lockpassword_confirm_your_work_pattern_header" msgid="2668883108969165844">"Ievadiet darba profila kombināciju"</string>
-    <string name="lockpassword_confirm_your_pin_header" msgid="2241722970567131308">"Atkārtota PIN ievade"</string>
+    <string name="lockpassword_confirm_your_pin_header" msgid="2241722970567131308">"Atkārtoti ievadiet PIN"</string>
     <string name="lockpassword_reenter_your_profile_pin_header" msgid="2890233614560435538">"Atkārtoti ievadiet darba PIN"</string>
     <string name="lockpassword_confirm_your_work_pin_header" msgid="4229765521391960255">"Ievadiet darba profila PIN"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="2100071354970605232">"Paroles nav vienādas"</string>
@@ -2426,20 +2429,13 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Lejupielādētās lietotnes"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Eksperimentāla"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Funkciju karodziņi"</string>
-    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_title (401330708633716596) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_summary (1319792184194176235) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_footer (4158945851818483666) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filter_pbap_title (1735427364451634823) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filter_map_title (180092480793945544) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filter_summary (7217091930762522599) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filtered_mode_disabled_summary (8824952559433361848) -->
-    <skip />
+    <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"Bluetooth HCI okšķerēšanas žurnāla filtrēšana"</string>
+    <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="1319792184194176235">"Iestatīt filtrus"</string>
+    <string name="bt_hci_snoop_log_filters_dashboard_footer" msgid="4158945851818483666">"Atspējojiet un iespējojiet Bluetooth, lai izmaiņas stātos spēkā."</string>
+    <string name="bt_hci_snoop_log_filter_pbap_title" msgid="1735427364451634823">"Bluetooth HCI okšķerēšanas žurnāla filtrēšanas PBAP"</string>
+    <string name="bt_hci_snoop_log_filter_map_title" msgid="180092480793945544">"Bluetooth HCI okšķerēšanas žurnāla filtrēšanas MAP"</string>
+    <string name="bt_hci_snoop_log_filter_summary" msgid="7217091930762522599">"Iestatiet filtrēšanas režīmu. (Atspējojiet un iespējojiet Bluetooth, lai izmaiņas stātos spēkā.)"</string>
+    <string name="bt_hci_snoop_log_filtered_mode_disabled_summary" msgid="8824952559433361848">"Lai mainītu šo opciju, iestatiet Bluetooth HCI okšķerēšanas žurnāla režīmu “Iespējot filtrētos”."</string>
     <string name="talkback_title" msgid="8756080454514251327">"TalkBack"</string>
     <string name="talkback_summary" msgid="5820927220378864281">"Ekrāna lasītājs, kas galvenokārt paredzēts akliem un vājredzīgiem lietotājiem"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Pieskarieties vienumiem ekrānā, lai tie tiktu skaļi nolasīti."</string>
@@ -2515,14 +2511,14 @@
     <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"Pieejamības žests"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Vilkšana augšup ar 2 pirkstiem"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Vilkšana augšup ar 3 pirkstiem"</string>
-    <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Pieskaršanās pieejamības pogai"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Pieskarties pieejamības pogai"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="3981188764050497346">"Izmantot pieejamības žestu"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="5606196352833449600">"Ekrāna apakšdaļā pieskarieties pieejamības pogai <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>.\n\nLai pārslēgtu funkcijas, pieskarieties pieejamības pogai un turiet to."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Velciet ar 2 pirkstiem augšup no ekrāna apakšdaļas.\n\nLai pārslēgtu funkcijas, velciet ar 2 pirkstiem augšup un turiet."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Velciet ar 3 pirkstiem augšup no ekrāna apakšdaļas.\n\nLai pārslēgtu funkcijas, velciet ar 3 pirkstiem augšup un turiet."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="4459254227203203324"><annotation id="link">"Citas opcijas"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"Plašāka informācija par: <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
-    <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Turiet nospiestas skaļuma pogas"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Turēt nospiestas skaļuma pogas"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"turiet nospiestus skaļuma pogas"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Nospiediet un turiet abas skaļuma pogas"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"Pieskaršanās ekrānam 3 reizes"</string>
@@ -2645,7 +2641,7 @@
     <string name="accessibility_caption_preference_summary" msgid="632875702223135121">"Ne visas multivides lietotnes atbalsta šīs subtitru preferences"</string>
     <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"Pieejamības poga"</string>
     <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"Velciet augšup ar diviem pirkstiem no apakšdaļas"</string>
-    <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"Turiet nospiestas skaļuma pogas"</string>
+    <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"Turēt nospiestas skaļuma pogas"</string>
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Trīsreiz pieskarieties ekrānam"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Turpināt"</string>
     <string name="accessibility_hearingaid_title" msgid="427173678199203191">"Dzirdes aparāti"</string>
@@ -2753,7 +2749,7 @@
     <string name="touch_filtered_warning" msgid="4225815157460318241">"Lietotne Iestatījumi nevar verificēt jūsu atbildi, jo cita lietotne aizsedz atļaujas pieprasījumu."</string>
     <string name="accessibility_service_warning" msgid="6779187188736432618">"Pakalpojums <xliff:g id="SERVICE">%1$s</xliff:g> pieprasa pilnīgu šīs ierīces kontroli. Pakalpojums var piekļūt ekrānā redzamajai informācijai un veikt darbības to lietotāju vārdā, kuriem ir īpašas vajadzības. Šāda līmeņa kontrole vairākumam lietotņu nav nepieciešama."</string>
     <string name="accessibility_service_warning_description" msgid="6573203795976134751">"Pilnīga kontrole ir piemērota lietotnēm, kas nepieciešamas lietotājiem ar īpašām vajadzībām, taču ne lielākajai daļai lietotņu."</string>
-    <string name="accessibility_service_screen_control_title" msgid="324795030658109870">"Skatīt un pārvaldīt ekrānu"</string>
+    <string name="accessibility_service_screen_control_title" msgid="324795030658109870">"Ekrāna skatīšana un pārvaldīšana"</string>
     <string name="accessibility_service_screen_control_description" msgid="8431940515157990426">"Tā var nolasīt visu ekrānā esošo saturu un attēlot saturu citām lietotnēm."</string>
     <string name="accessibility_service_action_perform_title" msgid="1449360056585337833">"Darbību skatīšana un veikšana"</string>
     <string name="accessibility_service_action_perform_description" msgid="7807832069800034738">"Tā var izsekot jūsu mijiedarbību ar lietotni vai aparatūras sensoru un mijiedarboties ar lietotnēm jūsu vārdā."</string>
@@ -4577,7 +4573,7 @@
     <string name="app_launch_supported_links_subtext" msgid="4268004019469184113">"Tiek atvērta lietotnē <xliff:g id="APP_LABEL">%s</xliff:g>"</string>
     <string name="storage_summary_format" msgid="5721782272185284276">"Izmantots: <xliff:g id="SIZE">%1$s</xliff:g> no <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
     <string name="storage_type_internal" msgid="979243131665635278">"iekšējā atmiņa"</string>
-    <string name="storage_type_external" msgid="125078274000280821">"ārējā atmiņa"</string>
+    <string name="storage_type_external" msgid="125078274000280821">"ārējā krātuve"</string>
     <string name="data_summary_format" msgid="8802057788950096650">"Izmantoti <xliff:g id="SIZE">%1$s</xliff:g> kopš: <xliff:g id="DATE">%2$s</xliff:g>"</string>
     <string name="storage_used" msgid="2591194906751432725">"Izmantotā krātuve"</string>
     <string name="change" msgid="273206077375322595">"Mainīt"</string>
@@ -5238,7 +5234,7 @@
     <string name="instant_apps_settings" msgid="4280942494969957858">"Tūlītējo lietotņu preferences"</string>
     <string name="domain_url_section_title" msgid="9028890472923474958">"Instalētās lietotnes"</string>
     <string name="automatic_storage_manager_activation_warning" msgid="170508173207142665">"Tagad jūsu krātuvi pārvalda krātuves pārvaldnieks"</string>
-    <string name="account_for_section_header" msgid="7466759342105251096">"Lietotāja <xliff:g id="USER_NAME">%1$s</xliff:g> konti"</string>
+    <string name="account_for_section_header" msgid="7466759342105251096">"Konti: <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="configure_section_header" msgid="3126887329521705210">"Konfigurācija"</string>
     <string name="auto_sync_account_title" msgid="1070908045600374254">"Automātiski sinhronizēt lietotnes datus"</string>
     <string name="auto_sync_personal_account_title" msgid="3544275021920818595">"Automātiski sinhronizēt personas datus"</string>
@@ -6042,6 +6038,7 @@
     <string name="find_broadcast_password_dialog_title" msgid="3176988702535737484">"Ievadiet paroli"</string>
     <string name="find_broadcast_password_dialog_connection_error" msgid="47873617983439400">"Nevar izveidot savienojumu. Mēģiniet vēlreiz."</string>
     <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"Nepareiza parole"</string>
+    <string name="find_broadcast_join_broadcast_error" msgid="5486980388774711346">"Nevar pievienoties apraidei."</string>
     <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"Lai sāktu klausīties, centrējiet tālāk norādīto kvadrātkodu."</string>
     <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"Kvadrātkoda formāts nav derīgs."</string>
 </resources>

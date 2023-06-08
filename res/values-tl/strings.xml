@@ -157,8 +157,10 @@
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"Kailangan mong i-restart ang iyong device para mabago ang setting na ito."</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"I-restart"</string>
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Kanselahin"</string>
-    <string name="bluetooth_enable_leaudio" msgid="1245004820628723136">"I-enable ang Bluetooth LE audio"</string>
-    <string name="bluetooth_enable_leaudio_summary" msgid="8066117764037123479">"Ine-enable ang feature na Bluetooth LE audio kung sinusuportahan ng device ang mga kakayahan ng LE audio hardware."</string>
+    <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"I-disable ang Bluetooth LE audio"</string>
+    <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Dini-disable ang feature na Bluetooth LE audio kung sinusuportahan ng device ang mga kakayahan ng LE audio hardware."</string>
+    <string name="bluetooth_enable_leaudio_allow_list" msgid="1692999156437357534">"I-enable ang Allow List ng Bluetooth LE audio"</string>
+    <string name="bluetooth_enable_leaudio_allow_list_summary" msgid="725601205276008525">"I-enable ang feature ng allow list ng Bluetooth LE audio."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Mga media device"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Mga device sa pagtawag"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Iba pang device"</string>
@@ -525,7 +527,7 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"Iangat ang iyong daliri pagkatapos mong makaramdam ng pag-vibrate"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"Lumipat sa hindi masyadong maliwanag na lugar at subukan ulit"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"Naabot mo na ang maximum na bilang ng mga pagsubok"</string>
-    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Pag-unlock Gamit ang Mukha &amp; Fingerprint"</string>
+    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Pag-unlock Gamit ang Mukha at Fingerprint"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"I-tap para i-set up"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Nagdagdag ng mukha at mga fingerprint"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"Nagdagdag ng mukha at fingerprint"</string>
@@ -940,7 +942,8 @@
     <string name="bluetooth_menu_advanced" msgid="7633682234855216066">"Advanced"</string>
     <string name="bluetooth_advanced_titlebar" msgid="5369701494951467257">"Advanced na Bluetooth"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="316627049372961941">"Kapag naka-on ang Bluetooth, maaaring makipag-ugnayan ang device mo sa ibang kalapit na Bluetooth device."</string>
-    <string name="bluetooth_scanning_on_info_message" msgid="6667723887545056976">"Kapag naka-on ang Bluetooth, puwedeng makipag-ugnayan ang iyong device sa iba pang malapit na Bluetooth device.\n\nPara mapaganda ang experience sa device, puwede pa ring mag-scan ang mga app at serbisyo ng mga malapit na device anumang oras, kahit na naka-off ang Bluetooth. Magagamit ito, halimbawa, para pahusayin ang mga feature at serbisyong batay sa lokasyon. Mababago mo ito sa "<annotation id="link">"mga setting ng pag-scan ng Bluetooth"</annotation>"."</string>
+    <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Kapag naka-on ang Bluetooth, puwedeng makipag-ugnayan ang iyong device sa iba pang malapit na Bluetooth device.\n\nPara mapaganda ang experience sa device, puwede pa ring mag-scan ang mga app at serbisyo ng mga malapit na device anumang oras, kahit na naka-off ang Bluetooth. Magagamit ito, halimbawa, para pahusayin ang mga feature at serbisyong batay sa lokasyon. Mababago mo ito sa mga setting ng pag-scan ng Bluetooth."</string>
+    <string name="bluetooth_scan_change" msgid="1744636222637390367">"Palitan"</string>
     <string name="ble_scan_notify_text" msgid="1358879010396045164">"Upang pahusayin ang katumpakan ng lokasyon, maaari pa ring mag-detect ng mga Bluetooth device ang mga app at serbisyo ng system. Maaari mo itong baguhin sa <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>mga setting ng pag-scan<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="bluetooth_connect_failed" msgid="7892663424429584925">"Hindi makakonekta. Subukang muli."</string>
     <string name="device_details_title" msgid="1155622417516195481">"Mga detalye ng device"</string>
@@ -2168,7 +2171,7 @@
     <string name="uninstall_text" msgid="315764653029060126">"I-uninstall"</string>
     <string name="uninstall_all_users_text" msgid="5924715251087176474">"I-uninstall para sa lahat ng user"</string>
     <string name="install_text" msgid="4558333621516996473">"I-install"</string>
-    <string name="disable_text" msgid="5146002260857428005">"Huwag Paganahin"</string>
+    <string name="disable_text" msgid="5146002260857428005">"I-disable"</string>
     <string name="enable_text" msgid="8570798764647110430">"Paganahin"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"I-clear ang storage"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"I-uninstall ang mga pag-update"</string>
@@ -2402,24 +2405,17 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Mga na-download na app"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Pang-eksperimento"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Mga flag ng feature"</string>
-    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_title (401330708633716596) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_summary (1319792184194176235) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_footer (4158945851818483666) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filter_pbap_title (1735427364451634823) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filter_map_title (180092480793945544) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filter_summary (7217091930762522599) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filtered_mode_disabled_summary (8824952559433361848) -->
-    <skip />
+    <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"Pag-filter ng snoop log ng Bluetooth HCI"</string>
+    <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="1319792184194176235">"Magtakda ng mga filter"</string>
+    <string name="bt_hci_snoop_log_filters_dashboard_footer" msgid="4158945851818483666">"I-disable at i-enable ang Bluetooth para magkabisa ang mga pagbabago"</string>
+    <string name="bt_hci_snoop_log_filter_pbap_title" msgid="1735427364451634823">"Snoop log ng Bluetooth na nagfi-filter ng PBAP"</string>
+    <string name="bt_hci_snoop_log_filter_map_title" msgid="180092480793945544">"Snoop log ng Bluetooth HCI na nagfi-filter ng MAP"</string>
+    <string name="bt_hci_snoop_log_filter_summary" msgid="7217091930762522599">"Itakda ang filtering mode. (I-disable at i-enable ang Bluetooth para magkabisa ang mga pagbabago)"</string>
+    <string name="bt_hci_snoop_log_filtered_mode_disabled_summary" msgid="8824952559433361848">"Itakda ang Bluetooth HCI snoop log mode sa Naka-enable ang Filter para baguhin ang opsyong ito"</string>
     <string name="talkback_title" msgid="8756080454514251327">"Talkback"</string>
     <string name="talkback_summary" msgid="5820927220378864281">"Screen reader na pangunahing nakalaan para sa mga taong bulag at malabo ang paningin"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Mag-tap ng mga item sa iyong screen upang marinig ang mga ito na binabasa nang malakas"</string>
-    <string name="accessibility_captioning_title" msgid="4561871958958925225">"Mga kagustuhan sa caption"</string>
+    <string name="accessibility_captioning_title" msgid="4561871958958925225">"Mga preference sa caption"</string>
     <string name="accessibility_captioning_about_title" msgid="3542171637334191563">"Tungkol sa mga kagustuhan sa caption"</string>
     <string name="accessibility_captioning_footer_learn_more_content_description" msgid="5730040700677017706">"Matuto pa tungkol sa mga kagustuhan sa caption"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Pag-magnify"</string>
@@ -3675,7 +3671,7 @@
     <string name="sim_calls_always_use" msgid="967857230039768111">"Palaging gamitin ito para sa mga tawag"</string>
     <string name="select_sim_for_data" msgid="2642305487659432499">"Pumili ng SIM para sa mobile data"</string>
     <string name="select_sim_for_sms" msgid="5335510076282673497">"Pumili ng SIM para sa SMS"</string>
-    <string name="data_switch_started" msgid="6292759843974720112">"Lumilipat ng data SIM, puwede itong magtagal nang hanggang isang minuto…"</string>
+    <string name="data_switch_started" msgid="6292759843974720112">"Lumilipat ng data SIM, puwede itong magtagal nang isang minuto…"</string>
     <string name="select_specific_sim_for_data_title" msgid="5851980301321577985">"Gamitin ang <xliff:g id="NEW_SIM">%1$s</xliff:g> sa mobile data?"</string>
     <string name="select_specific_sim_for_data_msg" msgid="7401698123430573637">"Kung lilipat ka sa <xliff:g id="NEW_SIM">%1$s</xliff:g>, hindi na gagamitin ang <xliff:g id="OLD_SIM">%2$s</xliff:g> para sa mobile data."</string>
     <string name="select_specific_sim_for_data_button" msgid="6571935548920603512">"Gamitin: <xliff:g id="NEW_SIM">%1$s</xliff:g>"</string>
@@ -5954,6 +5950,7 @@
     <string name="find_broadcast_password_dialog_title" msgid="3176988702535737484">"Ilagay ang password"</string>
     <string name="find_broadcast_password_dialog_connection_error" msgid="47873617983439400">"Hindi makakonekta. Subukan ulit."</string>
     <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"Maling password"</string>
+    <string name="find_broadcast_join_broadcast_error" msgid="5486980388774711346">"Hindi makasali sa broadcast"</string>
     <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"Para simulang makinig, igitna ang QR code sa ibaba"</string>
     <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"Hindi valid na format ang QR code"</string>
 </resources>

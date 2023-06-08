@@ -157,8 +157,10 @@
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"You need to restart your device to change this setting."</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Restart"</string>
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Cancel"</string>
-    <string name="bluetooth_enable_leaudio" msgid="1245004820628723136">"Enable Bluetooth LE audio"</string>
-    <string name="bluetooth_enable_leaudio_summary" msgid="8066117764037123479">"Enables Bluetooth LE audio feature if the device supports LE audio hardware capabilities."</string>
+    <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Disable Bluetooth LE audio"</string>
+    <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Disables the Bluetooth LE audio feature if the device supports LE audio hardware capabilities."</string>
+    <string name="bluetooth_enable_leaudio_allow_list" msgid="1692999156437357534">"Enable Bluetooth LE Audio allow List"</string>
+    <string name="bluetooth_enable_leaudio_allow_list_summary" msgid="725601205276008525">"Enable Bluetooth LE Audio allow list feature."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Media devices"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Call devices"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Other devices"</string>
@@ -503,7 +505,7 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="default" msgid="5908959250804145997">"When they use Pixel Imprint, images are used to update their fingerprint model. Images used to create your child’s fingerprint model are never stored, but the fingerprint model is stored securely on the phone and never leaves the phone. All processing occurs securely on the phone."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="tablet" msgid="530891604602839577">"When they use Pixel Imprint, images are used to update their fingerprint model. Images used to create your child’s fingerprint model are never stored, but the fingerprint model is stored securely on the tablet and never leaves the tablet. All processing occurs securely on the tablet."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="device" msgid="1735767057693277593">"When they use Pixel Imprint, images are used to update their fingerprint model. Images used to create your child’s fingerprint model are never stored, but the fingerprint model is stored securely on the device and never leaves the device. All processing occurs securely on the device."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="default" msgid="3948305045484131665">"You can delete your fingerprint images and model, or turn off Fingerprint Unlock at any time in settings. Fingerprint images and models are stored on the phone until you delete them."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="default" msgid="3948305045484131665">"You can delete your fingerprint images and model, or turn off Fingerprint Unlock at any time in Settings. Fingerprint images and models are stored on the phone until you delete them."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="tablet" msgid="1577753788807120092">"You can delete your fingerprint images and model, or turn off Fingerprint Unlock at any time in Settings. Fingerprint images and models are stored on the tablet until you delete them."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="device" msgid="5092396314447369758">"You can delete your fingerprint images and model, or turn off Fingerprint Unlock at any time in Settings. Fingerprint images and models are stored on the device until you delete them."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="default" msgid="4983770600405797515">"You and your child can delete their fingerprint images and model, or turn off Fingerprint Unlock at any time in Settings. Fingerprint images and models are stored on the phone until they’re deleted."</string>
@@ -940,7 +942,8 @@
     <string name="bluetooth_menu_advanced" msgid="7633682234855216066">"Advanced"</string>
     <string name="bluetooth_advanced_titlebar" msgid="5369701494951467257">"Advanced Bluetooth"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="316627049372961941">"When Bluetooth is turned on, your device can communicate with other nearby Bluetooth devices."</string>
-    <string name="bluetooth_scanning_on_info_message" msgid="6667723887545056976">"When Bluetooth is turned on, your device can communicate with other nearby Bluetooth devices.\n\nTo improve device experience, apps and services can still scan for nearby devices at any time, even when Bluetooth is off. This can be used, for example, to improve location-based features and services. You can change this in "<annotation id="link">"Bluetooth scanning settings"</annotation>"."</string>
+    <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"When Bluetooth is turned on, your device can communicate with other nearby Bluetooth devices.\n\nTo improve device experience, apps and services can still scan for nearby devices at any time, even when Bluetooth is off. This can be used, for example, to improve location-based features and services. You can change this in Bluetooth scanning settings."</string>
+    <string name="bluetooth_scan_change" msgid="1744636222637390367">"Change"</string>
     <string name="ble_scan_notify_text" msgid="1358879010396045164">"To improve location accuracy, system apps and services can still detect Bluetooth devices. You can change this in <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>scanning settings<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="bluetooth_connect_failed" msgid="7892663424429584925">"Couldn\'t connect. Try again."</string>
     <string name="device_details_title" msgid="1155622417516195481">"Device details"</string>
@@ -982,9 +985,9 @@
     <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"NFC verbose vendor debug log"</string>
     <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"Include additional device-specific vendor logs in bug reports, which may contain private information."</string>
     <string name="nfc_snoop_log_title" msgid="1072690687525472163">"NFC NCI unfiltered snoop log"</string>
-    <string name="nfc_snoop_log_summary" msgid="3988383328800163180">"Capture detail NFC packets, which may contain private information."</string>
+    <string name="nfc_snoop_log_summary" msgid="3988383328800163180">"Capture detailed NFC packets, which may contain private information."</string>
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Restart device?"</string>
-    <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"Detail NFC logging is intended for development purposes only. Additional NFC data is included in bug reports, which may contain private information. Restart your device to change this setting."</string>
+    <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"Detailed NFC logging is intended for development purposes only. Additional NFC data is included in bug reports, which may contain private information. Restart your device to change this setting."</string>
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Restart"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"mirror"</string>
@@ -1642,7 +1645,7 @@
     <string name="status_latest_area_info" msgid="8288488664620741734">"Operator info"</string>
     <string name="status_data_state" msgid="525196229491743487">"Mobile network state"</string>
     <string name="status_esim_id" msgid="5158916796362809133">"EID"</string>
-    <string name="status_service_state" msgid="1693424422121058791">"Service status"</string>
+    <string name="status_service_state" msgid="1693424422121058791">"Service state"</string>
     <string name="status_signal_strength" msgid="7644525712554444359">"Signal strength"</string>
     <string name="status_roaming" msgid="1253597174715663778">"Roaming"</string>
     <string name="status_operator" msgid="4335640583552058491">"Network"</string>
@@ -2402,20 +2405,13 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Downloaded apps"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Experimental"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Feature flags"</string>
-    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_title (401330708633716596) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_summary (1319792184194176235) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_footer (4158945851818483666) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filter_pbap_title (1735427364451634823) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filter_map_title (180092480793945544) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filter_summary (7217091930762522599) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filtered_mode_disabled_summary (8824952559433361848) -->
-    <skip />
+    <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"Bluetooth HCI snoop log filtering"</string>
+    <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="1319792184194176235">"Set filters"</string>
+    <string name="bt_hci_snoop_log_filters_dashboard_footer" msgid="4158945851818483666">"Disable and enable Bluetooth for the changes to take effect"</string>
+    <string name="bt_hci_snoop_log_filter_pbap_title" msgid="1735427364451634823">"Bluetooth HCI snoop log filtering PBAP"</string>
+    <string name="bt_hci_snoop_log_filter_map_title" msgid="180092480793945544">"Bluetooth HCI snoop log filtering MAP"</string>
+    <string name="bt_hci_snoop_log_filter_summary" msgid="7217091930762522599">"Set filtering mode. (Disable and enable Bluetooth for the changes to take effect)"</string>
+    <string name="bt_hci_snoop_log_filtered_mode_disabled_summary" msgid="8824952559433361848">"Set Bluetooth HCI snoop log mode to Enabled Filtered to change this option"</string>
     <string name="talkback_title" msgid="8756080454514251327">"Talkback"</string>
     <string name="talkback_summary" msgid="5820927220378864281">"Screen reader primarily for people with blindness and low vision"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Tap items on your screen to hear them read aloud"</string>
@@ -2491,7 +2487,7 @@
     <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"Accessibility gesture"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Swipe up with 2 fingers"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Swipe up with three fingers"</string>
-    <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Tap accessibility button"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Tap Accessibility button"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="3981188764050497346">"Use accessibility gesture"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="5606196352833449600">"Tap the accessibility button <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> at the bottom of your screen.\n\nTo switch between features, touch and hold the accessibility button."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Swipe up from the bottom of the screen with 2 fingers.\n\nTo switch between features, swipe up with 2 fingers and hold."</string>
@@ -3093,7 +3089,7 @@
     <string name="battery_system_usage_for" msgid="3248552137819897140">"System usage for <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"App usage for <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"Total: less than a min."</string>
-    <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"Background: less than a min."</string>
+    <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"Background: less than a min"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Total: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"Background: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_screen_footer" product="default" msgid="7899907241146636817">"Battery usage data is approximate and doesn\'t measure usage when phone is charging"</string>
@@ -3598,7 +3594,7 @@
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"Change PIN"</string>
     <string name="help_label" msgid="2896538416436125883">"Help and feedback"</string>
     <string name="support_summary" product="default" msgid="6137136608018134563">"Help articles, phone and chat"</string>
-    <string name="support_summary" product="tablet" msgid="6681247727996378252">"Help articles, tablet &amp; chat"</string>
+    <string name="support_summary" product="tablet" msgid="6681247727996378252">"Help articles, tablet and chat"</string>
     <string name="support_summary" product="device" msgid="1690554254039752541">"Help articles, device &amp; chat"</string>
     <string name="user_account_title" msgid="6389636876210834864">"Account for content"</string>
     <string name="user_picture_title" msgid="7176437495107563321">"Photo ID"</string>
@@ -4732,7 +4728,7 @@
     <string name="memory_maximum_usage" msgid="2047013391595835607">"Maximum usage"</string>
     <string name="no_data_usage" msgid="4665617440434654132">"No data used"</string>
     <string name="zen_access_warning_dialog_title" msgid="6323325813123130154">"Allow access to Do Not Disturb for <xliff:g id="APP">%1$s</xliff:g>?"</string>
-    <string name="zen_access_warning_dialog_summary" msgid="8468714854067428987">"The app will be able to turn on/off Do Not Disturb and make changes to related settings."</string>
+    <string name="zen_access_warning_dialog_summary" msgid="8468714854067428987">"The app will be able to turn Do Not Disturb on or off, and make changes to related settings."</string>
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"Must stay turned on because notification access is on"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"Revoke access to Do Not Disturb for <xliff:g id="APP">%1$s</xliff:g>?"</string>
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"All Do Not Disturb rules created by this app will be removed."</string>
@@ -5091,7 +5087,7 @@
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Digital assistant"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Swipe to invoke the assistant"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"Swipe up from a bottom corner to invoke digital assistant app."</string>
-    <string name="assistant_long_press_home_gesture_title" msgid="4865972278738178753">"Hold home for Assistant"</string>
+    <string name="assistant_long_press_home_gesture_title" msgid="4865972278738178753">"Hold Home for Assistant"</string>
     <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"Press and hold the Home button to invoke digital assistant app."</string>
     <string name="information_label" msgid="6939310810756569298">"Information"</string>
     <string name="low_label" msgid="6525629096999711220">"Low"</string>
@@ -5692,7 +5688,7 @@
     <string name="quick_controls_lower" msgid="6675573610027367819">"device controls"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"Cards and passes"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"cards and passes"</string>
-    <string name="power_menu_setting_name" msgid="2394440932633137229">"Press &amp; hold power button"</string>
+    <string name="power_menu_setting_name" msgid="2394440932633137229">"Press and hold power button"</string>
     <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"Press &amp; hold the power button to access"</string>
     <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"Power menu"</string>
     <string name="power_menu_long_press_for_assistant_title" msgid="6557738348262616455">"Digital assistant"</string>
@@ -5858,7 +5854,7 @@
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Show a message when apps access text, images or other content that you’ve copied"</string>
     <string name="all_apps" msgid="3054120149509114789">"All apps"</string>
     <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"Don\'t allow"</string>
-    <string name="uwb_settings_title" msgid="8578498712312002231">"Ultra-Wideband (UWB)"</string>
+    <string name="uwb_settings_title" msgid="8578498712312002231">"Ultra-wideband (UWB)"</string>
     <string name="uwb_settings_summary" msgid="3074271396764672268">"Helps identify the relative position of nearby devices that have UWB"</string>
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Turn off aeroplane mode to use UWB"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"Camera access"</string>
@@ -5954,6 +5950,7 @@
     <string name="find_broadcast_password_dialog_title" msgid="3176988702535737484">"Enter password"</string>
     <string name="find_broadcast_password_dialog_connection_error" msgid="47873617983439400">"Can’t connect. Try again."</string>
     <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"Wrong password"</string>
+    <string name="find_broadcast_join_broadcast_error" msgid="5486980388774711346">"Can’t join the broadcast"</string>
     <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"To start listening, centre the QR code below"</string>
     <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"QR code isn\'t a valid format"</string>
 </resources>
