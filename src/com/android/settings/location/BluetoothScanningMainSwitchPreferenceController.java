@@ -18,7 +18,6 @@ package com.android.settings.location;
 import android.content.Context;
 import android.provider.Settings;
 import android.widget.Switch;
-import android.os.UserManager;
 
 import androidx.preference.PreferenceScreen;
 
@@ -34,11 +33,9 @@ public class BluetoothScanningMainSwitchPreferenceController extends TogglePrefe
         implements OnMainSwitchChangeListener {
 
     private static final String KEY_BLUETOOTH_SCANNING_SWITCH = "bluetooth_always_scanning_switch";
-    private final UserManager mUserManager;
 
     public BluetoothScanningMainSwitchPreferenceController(Context context) {
         super(context, KEY_BLUETOOTH_SCANNING_SWITCH);
-        mUserManager = UserManager.get(context);
     }
 
     @Override
@@ -52,9 +49,7 @@ public class BluetoothScanningMainSwitchPreferenceController extends TogglePrefe
     @Override
     public int getAvailabilityStatus() {
         return mContext.getResources().getBoolean(R.bool.config_show_location_scanning)
-                ? (mUserManager.hasUserRestriction(UserManager.DISALLOW_CONFIG_LOCATION)
-                        ? DISABLED_DEPENDENT_SETTING
-                        : AVAILABLE)
+                ? AVAILABLE
                 : UNSUPPORTED_ON_DEVICE;
     }
 
