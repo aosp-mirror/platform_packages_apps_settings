@@ -64,8 +64,10 @@ import com.google.protobuf.MessageLite;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-import java.time.Duration;
 import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.List;
 
 /**
@@ -670,6 +672,14 @@ public class BatteryUtils {
             }
         }
         return summary.toString();
+    }
+    /** Format the date of battery related info */
+    public static CharSequence getBatteryInfoFormattedDate(long dateInMs) {
+        final Instant instant = Instant.ofEpochMilli(dateInMs);
+        final String localDate = instant.atZone(ZoneId.systemDefault()).toLocalDate().format(
+                DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
+
+        return localDate;
     }
 
     /** Builds the battery usage time information for one timestamp. */
