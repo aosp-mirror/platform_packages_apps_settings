@@ -145,8 +145,8 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
             profilePref.setEnabled(!mCachedDevice.isBusy());
         }
 
-        if (profile instanceof LeAudioProfile && !mIsLeAudioToggleEnabled) {
-            profilePref.setVisible(false);
+        if (profile instanceof LeAudioProfile) {
+            profilePref.setVisible(mIsLeAudioToggleEnabled);
         }
 
         if (profile instanceof MapProfile) {
