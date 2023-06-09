@@ -163,13 +163,13 @@ public class BubblePreference extends Preference implements View.OnClickListener
 
         void setSelected(Context context, boolean selected) {
             mView.setBackground(mContext.getDrawable(selected
-                ? R.drawable.button_border_selected
-                : R.drawable.button_border_unselected));
+                ? R.drawable.notification_importance_button_background_selected
+                : R.drawable.notification_importance_button_background_unselected));
             mView.setSelected(selected);
 
             int colorResId = selected
-                    ? com.android.internal.R.attr.materialColorOnSecondaryContainer
-                    : com.android.internal.R.attr.materialColorOnSurfaceVariant;
+                    ? R.attr.notification_importance_button_foreground_color_selected
+                    : R.attr.notification_importance_button_foreground_color_unselected;
             ColorStateList stateList = Utils.getColorAttr(context, colorResId);
             mImageView.setImageTintList(stateList);
             mTextView.setTextColor(stateList);

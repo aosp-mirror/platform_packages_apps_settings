@@ -14,7 +14,8 @@
      limitations under the License.
 -->
 
-<resources>
+<resources
+    xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
 
     <style name="Transparent">
         <item name="alertDialogTheme">@style/Theme.AlertDialog</item>
@@ -66,6 +67,14 @@
 
         <!-- For slice view in settings -->
         <item name="sliceViewStyle">@style/Widget.SliceView.Settings</item>
+
+        <item name="notification_importance_button_background_color_unselected">@android:color/transparent</item>
+        <item name="notification_importance_button_border_color_unselected">?androidprv:attr/materialColorOutlineVariant</item>
+        <item name="notification_importance_button_foreground_color_unselected">?androidprv:attr/materialColorOnSurfaceVariant</item>
+
+        <item name="notification_importance_button_background_color_selected">?androidprv:attr/materialColorSecondaryContainer</item>
+        <item name="notification_importance_button_border_color_selected">?androidprv:attr/materialColorOnSecondaryContainer</item>
+        <item name="notification_importance_button_foreground_color_selected">?androidprv:attr/materialColorOnSecondaryContainer</item>
     </style>
 
     <!-- Variant of the settings theme with no action bar. -->
@@ -229,9 +238,18 @@
         <item name="android:fontFamily">@*android:string/config_headlineFontFamilyMedium</item>
     </style>
 
-    <style name="Theme.Panel.Material" parent="Theme.Panel" >
+    <style name="Theme.Panel.Material" parent="Theme.Panel">
         <item name="android:switchStyle">@style/Switch.SettingsLib</item>
+
+        <item name="notification_importance_button_background_color_unselected">@android:color/transparent</item>
+        <item name="notification_importance_button_border_color_unselected">@android:color/system_outline_variant_light</item>
+        <item name="notification_importance_button_foreground_color_unselected">@android:color/system_on_surface_variant_light</item>
+
+        <item name="notification_importance_button_background_color_selected">@android:color/system_secondary_container_light</item>
+        <item name="notification_importance_button_border_color_selected">@android:color/system_on_secondary_container_light</item>
+        <item name="notification_importance_button_foreground_color_selected">@android:color/system_on_secondary_container_light</item>
     </style>
+
     <!-- Material theme for the pages containing TabLayout and ViewPager -->
     <style name="Theme.TabTheme" parent="@style/Theme.MaterialComponents.DayNight">
         <item name="colorPrimary">@*android:color/edge_effect_device_default_light</item>
