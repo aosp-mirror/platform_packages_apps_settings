@@ -112,7 +112,6 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
 
         addPreferencesFromResource(R.xml.languages);
         final Activity activity = getActivity();
-        activity.setTitle(R.string.language_picker_title);
         mLocaleHelperPreferenceController = new LocaleHelperPreferenceController(activity);
         final PreferenceScreen screen = getPreferenceScreen();
         mLocalePickerPreference = screen.findPreference(KEY_LANGUAGES_PICKER);
@@ -492,12 +491,12 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
         final LocaleLinearLayoutManager llm = new LocaleLinearLayoutManager(getContext(), mAdapter);
         llm.setAutoMeasureEnabled(true);
         list.setLayoutManager(llm);
-
         list.setHasFixedSize(true);
         list.setNestedScrollingEnabled(false);
         mAdapter.setRecyclerView(list);
         list.setAdapter(mAdapter);
         list.setOnTouchListener(this);
+        list.requestFocus();
 
         mAddLanguage = layout.findViewById(R.id.add_language);
         mAddLanguage.setOnClickListener(new View.OnClickListener() {
