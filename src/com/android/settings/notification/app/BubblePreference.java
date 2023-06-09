@@ -168,7 +168,7 @@ public class BubblePreference extends Preference implements View.OnClickListener
             mView.setSelected(selected);
 
             int colorResId = selected
-                    ? com.android.internal.R.attr.materialColorOnPrimaryContainer
+                    ? com.android.internal.R.attr.materialColorOnSecondaryContainer
                     : com.android.internal.R.attr.materialColorOnSurfaceVariant;
             ColorStateList stateList = Utils.getColorAttr(context, colorResId);
             mImageView.setImageTintList(stateList);
