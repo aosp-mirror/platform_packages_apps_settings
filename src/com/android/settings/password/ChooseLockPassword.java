@@ -25,6 +25,7 @@ import static android.app.admin.DevicePolicyResources.Strings.Settings.REENTER_W
 import static android.app.admin.DevicePolicyResources.Strings.Settings.SET_WORK_PROFILE_PASSWORD_HEADER;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.SET_WORK_PROFILE_PIN_HEADER;
 import static android.app.admin.DevicePolicyResources.UNDEFINED;
+import static android.view.View.ACCESSIBILITY_LIVE_REGION_POLITE;
 
 import static com.android.internal.widget.LockPatternUtils.CREDENTIAL_TYPE_NONE;
 import static com.android.internal.widget.PasswordValidationError.CONTAINS_INVALID_CHARACTERS;
@@ -531,6 +532,7 @@ public class ChooseLockPassword extends SettingsActivity {
             mIsAutoPinConfirmOptionSetManually = false;
             setOnAutoConfirmOptionClickListener();
             if (mAutoPinConfirmOption != null) {
+                mAutoPinConfirmOption.setAccessibilityLiveRegion(ACCESSIBILITY_LIVE_REGION_POLITE);
                 mAutoPinConfirmOption.setVisibility(View.GONE);
                 mAutoPinConfirmOption.setChecked(false);
             }
