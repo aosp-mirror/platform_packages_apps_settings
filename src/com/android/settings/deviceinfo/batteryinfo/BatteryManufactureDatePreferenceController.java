@@ -17,32 +17,52 @@
 package com.android.settings.deviceinfo.batteryinfo;
 
 import android.content.Context;
+import android.os.BatteryManager;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.fuelgauge.BatterySettingsFeatureProvider;
+import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.overlay.FeatureFactory;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * A controller that manages the information about battery manufacture date.
  */
 public class BatteryManufactureDatePreferenceController extends BasePreferenceController {
 
-    private BatterySettingsFeatureProvider mBatterySettingsFeatureProvider;
+    private final BatterySettingsFeatureProvider mBatterySettingsFeatureProvider;
+    private final BatteryManager mBatteryManager;
+
+    private long mManufactureDateInMs;
 
     public BatteryManufactureDatePreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         mBatterySettingsFeatureProvider = FeatureFactory.getFactory(
-                context).getBatterySettingsFeatureProvider(context);
+                context).getBatterySettingsFeatureProvider();
+        mBatteryManager = mContext.getSystemService(BatteryManager.class);
     }
 
     @Override
     public int getAvailabilityStatus() {
-        return mBatterySettingsFeatureProvider.isManufactureDateAvailable()
+        return mBatterySettingsFeatureProvider.isManufactureDateAvailable(getManufactureDate())
                 ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override
     public CharSequence getSummary() {
-        return mBatterySettingsFeatureProvider.getManufactureDateSummary();
+        return isAvailable()
+                ? BatteryUtils.getBatteryInfoFormattedDate(mManufactureDateInMs)
+                : null;
+    }
+
+    private long getManufactureDate() {
+        if (mManufactureDateInMs == 0L) {
+            final long manufactureDateInSec = mBatteryManager.getLongProperty(
+                    BatteryManager.BATTERY_PROPERTY_MANUFACTURING_DATE);
+            mManufactureDateInMs = TimeUnit.MILLISECONDS.convert(manufactureDateInSec,
+                    TimeUnit.SECONDS);
+        }
+        return mManufactureDateInMs;
     }
 }

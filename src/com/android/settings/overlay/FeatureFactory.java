@@ -136,8 +136,7 @@ public abstract class FeatureFactory {
     /**
      * Gets implementation for Battery Settings provider.
      */
-    public abstract BatterySettingsFeatureProvider getBatterySettingsFeatureProvider(
-            Context context);
+    public abstract BatterySettingsFeatureProvider getBatterySettingsFeatureProvider();
 
     public abstract DashboardFeatureProvider getDashboardFeatureProvider(Context context);
 
