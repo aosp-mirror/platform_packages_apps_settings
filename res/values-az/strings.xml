@@ -157,8 +157,10 @@
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"Bu ayarı dəyişmək üçün cihazı yenidən başlatmalısınız."</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Yenidən başladın"</string>
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Ləğv edin"</string>
-    <string name="bluetooth_enable_leaudio" msgid="1245004820628723136">"Bluetooth LE audiosunu aktiv edin"</string>
-    <string name="bluetooth_enable_leaudio_summary" msgid="8066117764037123479">"Cihaz LE audio avadanlıqlarını dəstəkləyirsə, Bluetooth LE audio funksiyasını aktivləşdirir."</string>
+    <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Bluetooth LE audionu deaktiv edin"</string>
+    <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Cihaz LE audio avadanlıq imkanlarını dəstəkləyirsə, Bluetooth LE audio funksiyasını deaktiv edir."</string>
+    <string name="bluetooth_enable_leaudio_allow_list" msgid="1692999156437357534">"Bluetooth LE audio icazə siyahısını aktivləşdirin"</string>
+    <string name="bluetooth_enable_leaudio_allow_list_summary" msgid="725601205276008525">"Bluetooth LE audio icazə siyahısı funksiyasını aktivləşdirin."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Media cihazları"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Zəng cihazları"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Digər cihazlar"</string>
@@ -940,7 +942,8 @@
     <string name="bluetooth_menu_advanced" msgid="7633682234855216066">"Əlavə"</string>
     <string name="bluetooth_advanced_titlebar" msgid="5369701494951467257">"Gəlişmiş Bluetooth"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="316627049372961941">"Bluetooth aktiv olan zaman cihazınız yaxınlıqdakı Bluetooth cihazları ilə bağlantı qura bilər."</string>
-    <string name="bluetooth_scanning_on_info_message" msgid="6667723887545056976">"Bluetooth aktiv olduqda cihaz digər Bluetooth cihazları ilə bağlantı qura bilər.\n\nBu funksiya hətta Bluetooth deaktiv olanda da tətbiqlərə və xidmətlərə yaxınlıqdakı cihazları axtarmağa imkan yaradır. Bununla da məkan haqqında məlumata ehtiyacı olan funksiya və xidmətlərin iş keyfiyyəti artmış olur. Bunu "<annotation id="link">"Bluetooth skanlama ayarlarında"</annotation>" dəyişə bilərsiniz."</string>
+    <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Bluetooth aktiv olduqda cihaz yaxınlıqdakı digər Bluetooth cihazları ilə bağlantı qura bilər.\n\nCihaz təcrübəsini yaxşılaşdırmaq üçün tətbiq və xidmətlər hətta Bluetooth deaktiv olduqda belə istənilən vaxt yaxınlıqdakı cihazları skan edə bilər. Bu, məsələn, məkan əsaslı funksiya və xidmətləri yaxşılaşdırmaq üçün istifadə oluna bilər. Bunu Bluetooth skanlama ayarlarında dəyişə bilərsiniz."</string>
+    <string name="bluetooth_scan_change" msgid="1744636222637390367">"Dəyişin"</string>
     <string name="ble_scan_notify_text" msgid="1358879010396045164">"Yerləşmə dəqiqliyini təkmilləşdirmək üçün sistem tətbiq və xidmətləri hələ də Bluetooth cihazlarını aşkar edə bilər. Bu funksiyanı <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>skan ayarlarından<xliff:g id="LINK_END_1">LINK_END</xliff:g> dəyişə bilərsiniz."</string>
     <string name="bluetooth_connect_failed" msgid="7892663424429584925">"Qoşulmaq mümkün olmadı. Yenidən cəhd edin."</string>
     <string name="device_details_title" msgid="1155622417516195481">"Cihaz məlumatları"</string>
@@ -2047,7 +2050,7 @@
     <string name="lockpassword_confirm_your_work_password_header" msgid="4647071231702288305">"İş parolunuzu daxil edin"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="4037701363240138651">"Modeli təsdiq edin"</string>
     <string name="lockpassword_confirm_your_work_pattern_header" msgid="2668883108969165844">"İş modelinizi daxil edin"</string>
-    <string name="lockpassword_confirm_your_pin_header" msgid="2241722970567131308">"PIN-i təkrar daxil edin"</string>
+    <string name="lockpassword_confirm_your_pin_header" msgid="2241722970567131308">"PIN-i yenidən yazın"</string>
     <string name="lockpassword_reenter_your_profile_pin_header" msgid="2890233614560435538">"İş PIN kodunuzu yenidən daxil edin"</string>
     <string name="lockpassword_confirm_your_work_pin_header" msgid="4229765521391960255">"İş PIN kodunuzu yazın"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="2100071354970605232">"Parollar eyni deyil"</string>
@@ -2402,20 +2405,13 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Endirilmiş tətbiqlər"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Eksperimental"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Eksperimental funksiyalar"</string>
-    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_title (401330708633716596) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_summary (1319792184194176235) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_footer (4158945851818483666) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filter_pbap_title (1735427364451634823) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filter_map_title (180092480793945544) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filter_summary (7217091930762522599) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filtered_mode_disabled_summary (8824952559433361848) -->
-    <skip />
+    <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"Bluetooth HCI müşahidə jurnalı filtrləməsi"</string>
+    <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="1319792184194176235">"Filtrlər ayarlayın"</string>
+    <string name="bt_hci_snoop_log_filters_dashboard_footer" msgid="4158945851818483666">"Dəyişikliklərin qüvvəyə minməsi üçün Bluetooth-u deaktiv-aktiv edin"</string>
+    <string name="bt_hci_snoop_log_filter_pbap_title" msgid="1735427364451634823">"Bluetooth HCI müşahidə jurnalı üzrə filtrləmə - PBAP"</string>
+    <string name="bt_hci_snoop_log_filter_map_title" msgid="180092480793945544">"Bluetooth HCI müşahidə jurnalı üzrə filtrləmə - MAP"</string>
+    <string name="bt_hci_snoop_log_filter_summary" msgid="7217091930762522599">"Filtrləmə rejimi ayarlayın. (Dəyişikliklərin qüvvəyə minməsi üçün Bluetooth-u deaktiv-aktiv edin)"</string>
+    <string name="bt_hci_snoop_log_filtered_mode_disabled_summary" msgid="8824952559433361848">"Bu seçimi dəyişmək üçün Bluetooth HCI müşahidə jurnalı rejimini Aktiv və Filtrlənib kimi ayarlayın"</string>
     <string name="talkback_title" msgid="8756080454514251327">"Talkback"</string>
     <string name="talkback_summary" msgid="5820927220378864281">"Ekran oxucusu əsasən korluq və aşağı görmə qabiliyyəti olan insanlar üçündür"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Səsli oxunuş üçün ekrandakı elementlərə toxunun"</string>
@@ -5825,7 +5821,7 @@
     <string name="use_wifi_hotsopt_main_switch_title" msgid="3909731167290690539">"Wi‑Fi hotspot funksiyasını istifadə edin"</string>
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Tətbiq bərkidilməsi"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Developer seçimlərini işlədin"</string>
-    <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Çap xidmətindən istifadə edin"</string>
+    <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Çap xidməti"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Bir neçə istifadəçiyə icazə verin"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Wi-Fi vasitəsilə sazlayın"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Qrafik drayver tərcihlərinin istifadəsi"</string>
@@ -5954,6 +5950,7 @@
     <string name="find_broadcast_password_dialog_title" msgid="3176988702535737484">"Parol daxil edin"</string>
     <string name="find_broadcast_password_dialog_connection_error" msgid="47873617983439400">"Qoşulmaq mümkün deyil. Yenə cəhd edin."</string>
     <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"Yanlış parol"</string>
+    <string name="find_broadcast_join_broadcast_error" msgid="5486980388774711346">"Yayıma qoşulmaq olmur"</string>
     <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"Dinləməyə başlamaq üçün aşağıda QR kodu mərkəzə yerləşdirin"</string>
     <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"QR kodu doğru formatda deyil"</string>
 </resources>

@@ -157,8 +157,10 @@
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"คุณต้องรีสตาร์ทอุปกรณ์เพื่อเปลี่ยนการตั้งค่านี้"</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"รีสตาร์ท"</string>
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"ยกเลิก"</string>
-    <string name="bluetooth_enable_leaudio" msgid="1245004820628723136">"เปิดใช้ Bluetooth LE AUDIO"</string>
-    <string name="bluetooth_enable_leaudio_summary" msgid="8066117764037123479">"เปิดใช้ฟีเจอร์ Bluetooth LE AUDIO หากอุปกรณ์รองรับความสามารถของฮาร์ดแวร์ LE AUDIO"</string>
+    <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"ปิดใช้ Bluetooth LE Audio"</string>
+    <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"ปิดใช้ฟีเจอร์ Bluetooth LE Audio หากอุปกรณ์รองรับความสามารถของฮาร์ดแวร์ LE Audio"</string>
+    <string name="bluetooth_enable_leaudio_allow_list" msgid="1692999156437357534">"เปิดใช้รายการที่อนุญาต Bluetooth LE Audio"</string>
+    <string name="bluetooth_enable_leaudio_allow_list_summary" msgid="725601205276008525">"เปิดใช้ฟีเจอร์รายการที่อนุญาต Bluetooth LE Audio"</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"อุปกรณ์สื่อ"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"อุปกรณ์สำหรับโทร"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"อุปกรณ์อื่นๆ"</string>
@@ -282,7 +284,7 @@
     <string name="date_and_time_settings_summary" msgid="334967758944498010">"ตั้งวันที่ เวลา เขตเวลาและรูปแบบ"</string>
     <string name="date_time_auto" msgid="4239202185055225869">"ตั้งเวลาอัตโนมัติ"</string>
     <string name="zone_auto_title" msgid="3993580453604839924">"ตั้งเขตเวลาอัตโนมัติ"</string>
-    <string name="date_time_24hour_auto" msgid="6583078135067804252">"ใช้เวลาเริ่มต้นในท้องถิ่น"</string>
+    <string name="date_time_24hour_auto" msgid="6583078135067804252">"ใช้รูปแบบเริ่มต้นในท้องถิ่น"</string>
     <string name="date_time_24hour_title" msgid="1445056824481243600">"รูปแบบ 24 ชั่วโมง"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"ใช้รูปแบบ 24 ชั่วโมง"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"เวลา"</string>
@@ -352,7 +354,7 @@
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"เพิ่มใบหน้าแล้ว"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"แตะเพื่อตั้งค่าใบหน้า"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"การปลดล็อกด้วยใบหน้า"</string>
-    <string name="security_settings_face_profile_preference_title" msgid="7519527436266375005">"การปลดล็อกด้วยใบหน้าสำหรับโปรไฟล์งาน"</string>
+    <string name="security_settings_face_profile_preference_title" msgid="7519527436266375005">"การปลดล็อกด้วยใบหน้าสำหรับการทำงาน"</string>
     <string name="security_settings_face_enroll_education_title" msgid="6448806884597691208">"วิธีตั้งค่าการปลดล็อกด้วยใบหน้า"</string>
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="3701874093226957891">"ตั้งค่าการปลดล็อกด้วยใบหน้า"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"ใช้ใบหน้าในการตรวจสอบสิทธิ์"</string>
@@ -450,8 +452,8 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"ต้องมีขั้นตอนการยืนยันทุกครั้งเมื่อใช้การปลดล็อกด้วยใบหน้าในแอป"</string>
     <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"ลบรูปแบบใบหน้า"</string>
     <string name="security_settings_face_settings_enroll" msgid="3726313826693825029">"ตั้งค่าการปลดล็อกด้วยใบหน้า"</string>
-    <string name="security_settings_face_settings_footer" msgid="625696606490947189">"ใช้ใบหน้าเพื่อปลดล็อกโทรศัพท์หรือใช้ในการตรวจสอบสิทธิ์ในแอป เช่น เมื่อคุณลงชื่อเข้าใช้หรืออนุมัติการซื้อ\n\nโปรดทราบ\nคุณตั้งค่าใบหน้าได้ครั้งละ 1 ใบหน้าเท่านั้น หากต้องการเพิ่มใบหน้าอื่น ให้ลบใบหน้าปัจจุบันออก\n\nการดูโทรศัพท์อาจปลดล็อกเครื่องโดยไม่ตั้งใจ\n\nคนอื่นอาจปลดล็อกโทรศัพท์ได้หากถือโทรศัพท์ไว้ตรงหน้าของคุณ\n\nคนที่หน้าคล้ายคุณมากๆ เช่น แฝดของคุณอาจปลดล็อกโทรศัพท์ได้"</string>
-    <string name="security_settings_face_settings_footer_attention_not_supported" msgid="2071065435536235622">"ใช้ใบหน้าเพื่อปลดล็อกโทรศัพท์หรือใช้ในการตรวจสอบสิทธิ์ในแอป เช่น เมื่อคุณลงชื่อเข้าใช้หรืออนุมัติการซื้อ\n\nโปรดทราบ\nคุณตั้งค่าใบหน้าได้ครั้งละ 1 ใบหน้าเท่านั้น หากต้องการเพิ่มใบหน้าอื่น ให้ลบใบหน้าปัจจุบันออก\n\nการดูโทรศัพท์อาจปลดล็อกเครื่องโดยไม่ตั้งใจ\n\nคนอื่นอาจปลดล็อกโทรศัพท์ได้หากถือโทรศัพท์ไว้ตรงหน้าของคุณ แม้ในขณะที่คุณหลับตาอยู่\n\nคนที่หน้าคล้ายคุณมากๆ เช่น แฝดของคุณอาจปลดล็อกโทรศัพท์ได้"</string>
+    <string name="security_settings_face_settings_footer" msgid="625696606490947189">"ใช้ใบหน้าเพื่อปลดล็อกโทรศัพท์หรือใช้ในการตรวจสอบสิทธิ์ในแอป เช่น เมื่อคุณลงชื่อเข้าใช้หรืออนุมัติการซื้อ\n\nโปรดทราบ\nคุณตั้งค่าใบหน้าได้ครั้งละ 1 ใบหน้าเท่านั้น หากต้องการเพิ่มใบหน้าอื่น ให้ลบใบหน้าปัจจุบันออก\n\nการดูโทรศัพท์อาจปลดล็อกเครื่องโดยไม่ตั้งใจ\n\nคนอื่นอาจปลดล็อกโทรศัพท์ได้หากถือโทรศัพท์ไว้ตรงหน้าของคุณ\n\nคนที่หน้าคล้ายคุณมากๆ เช่น พี่น้องที่หน้าตาเหมือนกัน อาจปลดล็อกโทรศัพท์ได้"</string>
+    <string name="security_settings_face_settings_footer_attention_not_supported" msgid="2071065435536235622">"ใช้ใบหน้าเพื่อปลดล็อกโทรศัพท์หรือใช้ในการตรวจสอบสิทธิ์ในแอป เช่น เมื่อคุณลงชื่อเข้าใช้หรืออนุมัติการซื้อ\n\nโปรดทราบ\nคุณตั้งค่าใบหน้าได้ครั้งละ 1 ใบหน้าเท่านั้น หากต้องการเพิ่มใบหน้าอื่น ให้ลบใบหน้าปัจจุบันออก\n\nการดูโทรศัพท์อาจปลดล็อกเครื่องโดยไม่ตั้งใจ\n\nคนอื่นอาจปลดล็อกโทรศัพท์ได้หากถือโทรศัพท์ไว้ตรงหน้าของคุณ แม้ในขณะที่คุณหลับตาอยู่\n\nคนที่หน้าคล้ายคุณมากๆ เช่น พี่น้องที่หน้าตาเหมือนกัน อาจปลดล็อกโทรศัพท์ได้"</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2899669764446232715">"ลบรูปแบบใบหน้าใช่ไหม"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="916131485988121592">"ระบบจะลบรูปแบบใบหน้าออกอย่างถาวรและปลอดภัย\n\nหลังจากที่ลบแล้ว คุณจะต้องใช้ PIN, รูปแบบ หรือรหัสผ่านเพื่อปลดล็อกโทรศัพท์ หรือสำหรับการตรวจสอบสิทธิ์ในแอป"</string>
     <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"ระบบจะลบรูปแบบใบหน้าออกอย่างถาวรและปลอดภัย\n\nหลังจากที่ลบแล้ว คุณจะต้องใช้ PIN, รูปแบบ หรือรหัสผ่านเพื่อปลดล็อกโทรศัพท์"</string>
@@ -479,7 +481,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="device" msgid="1131446458892188764">"อนุญาตให้บุตรหลานใช้ลายนิ้วมือเพื่อปลดล็อกอุปกรณ์หรือยืนยันว่าเป็นตนเอง ซึ่งจะทำได้เวลาลงชื่อเข้าใช้แอป ยืนยันการซื้อ และอื่นๆ"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"คุณควบคุมได้"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"คุณและบุตรหลานจะเป็นผู้ควบคุม"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"ข้อควรจำ"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"โปรดทราบ"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_message_1" msgid="7817635368506064516">"ระบบจะจัดเก็บข้อมูลที่บันทึกโดยลายนิ้วมือไว้อย่างปลอดภัยและจะไม่มีการส่งออกไปจากโทรศัพท์ คุณลบข้อมูลได้ทุกเมื่อในการตั้งค่า"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_message_2" msgid="3507618608004123384">"ลายนิ้วมืออาจมีความปลอดภัยน้อยกว่ารูปแบบหรือ PIN ที่เดายาก"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_message_3" product="default" msgid="4757472591076060066">"โทรศัพท์จะใช้รูปภาพล่าสุดจากลายนิ้วมือเพื่อสร้างรูปแบบลายนิ้วมือที่ปรับปรุงให้ดียิ่งขึ้นเป็นระยะๆ"</string>
@@ -509,7 +511,7 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="default" msgid="4983770600405797515">"คุณและบุตรหลานลบรูปภาพและรูปแบบลายนิ้วมือ หรือปิดการปลดล็อกด้วยลายนิ้วมือได้ทุกเมื่อในการตั้งค่า ระบบจะเก็บรูปภาพและรูปแบบลายนิ้วมือไว้ในโทรศัพท์จนกว่าจะมีการลบออก"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="tablet" msgid="8752022694697150943">"คุณและบุตรหลานลบรูปภาพและรูปแบบลายนิ้วมือ หรือปิดการปลดล็อกด้วยลายนิ้วมือได้ทุกเมื่อในการตั้งค่า ระบบจะเก็บรูปภาพและรูปแบบลายนิ้วมือไว้ในแท็บเล็ตจนกว่าจะลบออก"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="device" msgid="7234973062059196893">"คุณและบุตรหลานลบรูปภาพและรูปแบบลายนิ้วมือ หรือปิดการปลดล็อกด้วยลายนิ้วมือได้ทุกเมื่อในการตั้งค่า ระบบจะเก็บรูปภาพและรูปแบบลายนิ้วมือไว้ในอุปกรณ์จนกว่าจะลบออก"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"โทรศัพท์อาจปลดล็อกโดยที่คุณไม่ได้ตั้งใจ เช่น มีใครบางคนจ่อโทรศัพท์ที่นิ้วของคุณ"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"โทรศัพท์อาจปลดล็อกโดยที่คุณไม่ได้ตั้งใจ เช่น เมื่อมีใครบางคนจ่อโทรศัพท์ที่นิ้วของคุณ"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="tablet" msgid="7390208617531513381">"แท็บเล็ตอาจปลดล็อกได้แม้คุณไม่ได้ตั้งใจ เช่น เมื่อมีการยกแท็บเล็ตไปแตะกับนิ้วของคุณ"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="device" msgid="1662571028234764290">"อุปกรณ์อาจปลดล็อกโดยที่คุณไม่ได้ตั้งใจ เช่น หากมีใครบางคนจ่ออุปกรณ์ที่นิ้วของคุณ"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="default" msgid="8356551505082794682">"โทรศัพท์ของบุตรหลานอาจปลดล็อกโดยที่ไม่ได้ตั้งใจ เช่น มีใครบางคนเอาโทรศัพท์ไปแตะที่นิ้วของบุตรหลาน"</string>
@@ -654,7 +656,7 @@
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"แตะเซ็นเซอร์ที่ด้านหลังโทรศัพท์โดยใช้นิ้วชี้"</string>
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"การตั้งค่าลายนิ้วมือหมดเวลา"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"ลองอีกครั้งตอนนี้หรือตั้งค่าลายนิ้วมือภายหลังในการตั้งค่า"</string>
-    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"การลงทะเบียนลายนิ้วมือไม่ทำงาน โปรดลองอีกครั้งหรือใช้นิ้วอื่น"</string>
+    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"ลงทะเบียนลายนิ้วมือไม่สำเร็จ โปรดลองอีกครั้งหรือใช้นิ้วอื่น"</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"เพิ่มอีก"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"ถัดไป"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"นอกเหนือจากการปลดล็อกโทรศัพท์ คุณยังสามารถใช้ลายนิ้วมือเพื่อให้สิทธิ์การซื้อและการเข้าถึงแอปได้"<annotation id="url">"ดูข้อมูลเพิ่มเติม"</annotation></string>
@@ -718,7 +720,7 @@
     <string name="unlock_set_unlock_launch_picker_title" msgid="4981063601772605609">"ล็อกหน้าจอ"</string>
     <string name="unlock_set_unlock_launch_picker_summary_lock_immediately" msgid="5799070517574360310">"<xliff:g id="UNLOCK_METHOD">%1$s</xliff:g>/ทันทีหลังจากเข้าสู่โหมดสลีป"</string>
     <string name="unlock_set_unlock_launch_picker_summary_lock_after_timeout" msgid="4572132216801894216">"<xliff:g id="UNLOCK_METHOD">%1$s</xliff:g>/หลังจากเข้าสู่โหมดสลีป <xliff:g id="TIMEOUT_STRING">%2$s</xliff:g>"</string>
-    <string name="unlock_set_unlock_launch_picker_title_profile" msgid="7631371082326055429">"ล็อกของโปรไฟล์งาน"</string>
+    <string name="unlock_set_unlock_launch_picker_title_profile" msgid="7631371082326055429">"ล็อกโปรไฟล์งาน"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="4746783679112447948">"เปลี่ยนหน้าจอล็อก"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="6023813780512501969">"เปลี่ยนหรือปิดการใช้งานรูปแบบ, PIN หรือความปลอดภัยของรหัสผ่าน"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="1699993191343299179">"เลือกวิธีที่จะล็อกหน้าจอ"</string>
@@ -940,7 +942,8 @@
     <string name="bluetooth_menu_advanced" msgid="7633682234855216066">"ขั้นสูง"</string>
     <string name="bluetooth_advanced_titlebar" msgid="5369701494951467257">"บลูทูธขั้นสูง"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="316627049372961941">"เมื่อเปิดบลูทูธ อุปกรณ์ของคุณจะสื่อสารกับอุปกรณ์บลูทูธที่อยู่ใกล้ๆ ได้"</string>
-    <string name="bluetooth_scanning_on_info_message" msgid="6667723887545056976">"เมื่อเปิดบลูทูธ อุปกรณ์ของคุณจะสื่อสารกับอุปกรณ์บลูทูธเครื่องอื่นในบริเวณใกล้เคียงได้\n\nเพื่อปรับปรุงประสบการณ์การใช้งานอุปกรณ์ แอปและบริการต่างๆ จะยังคงสแกนหาอุปกรณ์ที่อยู่ใกล้เคียงตลอดเวลาแม้บลูทูธจะปิดอยู่ การตั้งค่านี้ใช้เพื่อทำสิ่งต่างๆ เช่น ปรับปรุงฟีเจอร์และบริการตามสถานที่ คุณเปลี่ยนแปลงการตั้งค่านี้ได้ใน"<annotation id="link">"การตั้งค่าการสแกนบลูทูธ"</annotation></string>
+    <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"เมื่อเปิดบลูทูธ อุปกรณ์ของคุณจะสื่อสารกับอุปกรณ์บลูทูธเครื่องอื่นในบริเวณใกล้เคียงได้\n\nแอปและบริการต่างๆ จะยังคงสแกนหาอุปกรณ์ที่อยู่ใกล้เคียงได้ทุกเมื่อแม้บลูทูธจะปิดอยู่เพื่อปรับปรุงประสบการณ์การใช้งานอุปกรณ์ การตั้งค่านี้ใช้เพื่อทำสิ่งต่างๆ เช่น ปรับปรุงฟีเจอร์และบริการที่อิงตามตำแหน่ง คุณเปลี่ยนตัวเลือกนี้ได้ในการตั้งค่าการสแกนหาบลูทูธ"</string>
+    <string name="bluetooth_scan_change" msgid="1744636222637390367">"เปลี่ยน"</string>
     <string name="ble_scan_notify_text" msgid="1358879010396045164">"แอปและบริการของระบบจะยังสามารถตรวจหาอุปกรณ์บลูทูธได้อยู่เพื่อปรับปรุงความแม่นยำของตำแหน่ง คุณสามารถเปลี่ยนแปลงฟีเจอร์นี้ได้ใน<xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>การตั้งค่าการสแกน<xliff:g id="LINK_END_1">LINK_END</xliff:g>"</string>
     <string name="bluetooth_connect_failed" msgid="7892663424429584925">"ไม่สามารถเชื่อมต่อ โปรดลองอีกครั้ง"</string>
     <string name="device_details_title" msgid="1155622417516195481">"รายละเอียดอุปกรณ์"</string>
@@ -989,7 +992,7 @@
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"แคสต์"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"มิเรอร์"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"เปิดใช้การแสดงผลแบบไร้สาย"</string>
-    <string name="wifi_display_no_devices_found" msgid="7904877793677102805">"ไม่พบอุปกรณ์ในบริเวณใกล้เคียง"</string>
+    <string name="wifi_display_no_devices_found" msgid="7904877793677102805">"ไม่พบอุปกรณ์ที่อยู่ใกล้เคียง"</string>
     <string name="wifi_display_status_connecting" msgid="530880182560077334">"กำลังเชื่อมต่อ"</string>
     <string name="wifi_display_status_connected" msgid="2189925211258519539">"เชื่อมต่อแล้ว"</string>
     <string name="wifi_display_status_in_use" msgid="5904009697167947449">"กำลังใช้งาน"</string>
@@ -1012,8 +1015,8 @@
     <string name="link_speed" msgid="931786745741016446">"<xliff:g id="LINK_SPEED">%1$d</xliff:g> Mbps"</string>
     <string name="wifi_ask_enable" msgid="6860056048266810769">"<xliff:g id="REQUESTER">%s</xliff:g> ต้องการเปิด Wi-Fi"</string>
     <string name="wifi_ask_disable" msgid="1663208096020309639">"<xliff:g id="REQUESTER">%s</xliff:g> ต้องการปิด Wi-Fi"</string>
-    <string name="art_verifier_for_debuggable_title" msgid="1926445785190030479">"ตรวจสอบไบต์โค้ดแอปที่จะแก้ไขข้อบกพร่อง"</string>
-    <string name="art_verifier_for_debuggable_summary" msgid="4802875841862652879">"อนุญาตให้ ART ตรวจสอบไบต์โค้ดแอปที่จะแก้ไขข้อบกพร่อง"</string>
+    <string name="art_verifier_for_debuggable_title" msgid="1926445785190030479">"ตรวจสอบไบต์โค้ดแอปที่แก้ไขข้อบกพร่องได้"</string>
+    <string name="art_verifier_for_debuggable_summary" msgid="4802875841862652879">"อนุญาตให้ ART ตรวจสอบไบต์โค้ดแอปที่แก้ไขข้อบกพร่องได้"</string>
     <string name="show_refresh_rate" msgid="5742688821872354973">"แสดงอัตราการรีเฟรช"</string>
     <string name="show_refresh_rate_summary" msgid="3558118122374609663">"แสดงอัตราการรีเฟรชจอแสดงผลล่าสุด"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
@@ -1073,7 +1076,7 @@
     <string name="wifi_add_network" msgid="4178564862173751181">"เพิ่มเครือข่าย"</string>
     <string name="wifi_configure_settings_preference_title" msgid="2536725796700696566">"ค่ากำหนด Wi‑Fi"</string>
     <string name="wifi_configure_settings_preference_summary_wakeup_on" msgid="7822368955551467382">"เปิด Wi‑Fi อีกครั้งโดยอัตโนมัติ"</string>
-    <string name="wifi_configure_settings_preference_summary_wakeup_off" msgid="5710203586018223864">"ไม่เปิด Wi‑Fi โดยอัตโนมัติ"</string>
+    <string name="wifi_configure_settings_preference_summary_wakeup_off" msgid="5710203586018223864">"ไม่เปิด Wi‑Fi อีกครั้งโดยอัตโนมัติ"</string>
     <string name="wifi_access_points" msgid="5846755709207101844">"เครือข่าย Wi-Fi"</string>
     <string name="wifi_menu_more_options" msgid="1236651929987819716">"ตัวเลือกอื่น"</string>
     <string name="wifi_menu_p2p" msgid="5234165837732940385">"Wi-Fi Direct"</string>
@@ -1531,7 +1534,7 @@
     <string name="screensaver_settings_title" msgid="3588535639672365395">"โปรแกรมรักษาหน้าจอ"</string>
     <string name="keywords_screensaver" msgid="7249337959432229172">"โปรแกรมรักษาหน้าจอ"</string>
     <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"ใช้ไม่ได้เนื่องจากโหมดเวลาเข้านอนเปิดอยู่"</string>
-    <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"ใช้โปรแกรมรักษาหน้าจอ"</string>
+    <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"ใช้ภาพพักหน้าจอ"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"ขณะชาร์จหรือวางอยู่บนแท่นชาร์จ"</string>
     <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"ขณะชาร์จอยู่ที่แท่นชาร์จ"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"ขณะที่ชาร์จ"</string>
@@ -1539,7 +1542,7 @@
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"ไม่เลย"</string>
     <string name="screensaver_settings_summary_on" msgid="4210827304351483645">"เปิด / <xliff:g id="SCREEN_SAVER">%1$s</xliff:g>"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"ปิด"</string>
-    <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"เริ่มเมื่อใด"</string>
+    <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"เวลาที่จะเริ่ม"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"โปรแกรมรักษาหน้าจอในปัจจุบัน"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"ปรับความสว่างอัตโนมัติ"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"ยกขึ้นเพื่อเวก"</string>
@@ -1550,7 +1553,7 @@
     <string name="doze_always_on_title" msgid="7326245192352868477">"แสดงเวลาและข้อมูลเสมอ"</string>
     <string name="doze_always_on_summary" msgid="509097829739647852">"การใช้งานแบตเตอรี่เพิ่มขึ้น"</string>
     <string name="force_bold_text" msgid="4620929631102086716">"ทำข้อความเป็นตัวหนา"</string>
-    <string name="title_font_size" msgid="570613010306330622">"ขนาดอักษร"</string>
+    <string name="title_font_size" msgid="570613010306330622">"ขนาดแบบอักษร"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"ทำให้ข้อความใหญ่ขึ้นหรือเล็กลง"</string>
     <string name="sim_lock_settings" msgid="7331982427303002613">"การตั้งค่าการล็อกซิม"</string>
     <string name="sim_lock_settings_category" msgid="6475255139493877786">"การล็อกซิม"</string>
@@ -1599,7 +1602,7 @@
     <string name="system_update_settings_list_item_summary" msgid="6703752298349642101"></string>
     <string name="firmware_version" msgid="1606901586501447275">"เวอร์ชันของ Android"</string>
     <string name="security_patch" msgid="4071756145347865382">"การอัปเดตความปลอดภัยของ Android"</string>
-    <string name="model_info" msgid="8997566254717810904">"โมเดล"</string>
+    <string name="model_info" msgid="8997566254717810904">"รุ่น"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"เวอร์ชันฮาร์ดแวร์"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"รหัสอุปกรณ์"</string>
     <string name="baseband_version" msgid="2600182227599835857">"เวอร์ชันเบสแบนด์"</string>
@@ -1646,7 +1649,7 @@
     <string name="status_signal_strength" msgid="7644525712554444359">"ความแรงสัญญาณ"</string>
     <string name="status_roaming" msgid="1253597174715663778">"โรมมิ่ง"</string>
     <string name="status_operator" msgid="4335640583552058491">"เครือข่าย"</string>
-    <string name="status_wifi_mac_address" msgid="4447611754614388914">"ที่อยู่ MAC ของ WiFi"</string>
+    <string name="status_wifi_mac_address" msgid="4447611754614388914">"ที่อยู่ MAC ของ Wi‑Fi"</string>
     <string name="status_device_wifi_mac_address" msgid="1896121694334176494">"ที่อยู่ MAC ของ Wi-Fi ของอุปกรณ์"</string>
     <string name="status_bt_address" msgid="6919660304578476547">"ที่อยู่บลูทูธ"</string>
     <string name="status_serial_number" msgid="9060064164331466789">"หมายเลขซีเรียล"</string>
@@ -1857,9 +1860,9 @@
     <string name="reset_network_desc" msgid="1112523764899788246">"การดำเนินการนี้จะรีเซ็ตการตั้งค่าเครือข่ายทั้งหมด ได้แก่\n\n"<li>"Wi‑Fi"</li>\n<li>"อินเทอร์เน็ตมือถือ"</li>\n<li>"บลูทูธ"</li></string>
     <string name="erase_euicc_data_button" msgid="728078969563311737">"ลบ"</string>
     <string name="reset_esim_title" msgid="4194570573425902754">"ลบ eSIM"</string>
-    <string name="reset_esim_desc" msgid="3662444090563399131">"การดำเนินการนี้จะไม่ยกเลิกแพ็กเกจอินเทอร์เน็ตมือถือ หากต้องการดาวน์โหลดซิมสำหรับใช้แทน โปรดติดต่อผู้ให้บริการ"</string>
+    <string name="reset_esim_desc" msgid="3662444090563399131">"การดำเนินการนี้จะไม่ยกเลิกแพ็กเกจมือถือ หากต้องการดาวน์โหลดซิมสำหรับใช้แทน โปรดติดต่อผู้ให้บริการ"</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"รีเซ็ตการตั้งค่า"</string>
-    <string name="reset_network_final_desc" msgid="5304365082065278425">"รีเซ็ตการตั้งค่าเครือข่ายทั้งหมดใช่ไหม คุณจะยกเลิกการดำเนินการนี้ไม่ได้"</string>
+    <string name="reset_network_final_desc" msgid="5304365082065278425">"รีเซ็ตการตั้งค่าเครือข่ายทั้งหมดไหม คุณจะยกเลิกการดำเนินการนี้ไม่ได้"</string>
     <string name="reset_network_final_desc_esim" msgid="1129251284212847939">"รีเซ็ตการตั้งค่าเครือข่ายทั้งหมดและลบ eSIM ใช่ไหม คุณจะยกเลิกการดำเนินการนี้ไม่ได้"</string>
     <string name="reset_network_final_button_text" msgid="2433867118414000462">"รีเซ็ตการตั้งค่า"</string>
     <string name="reset_network_confirm_title" msgid="913014422184481270">"รีเซ็ตไหม"</string>
@@ -1869,8 +1872,8 @@
     <string name="reset_esim_error_msg" msgid="7279607120606365250">"ลบ eSIM ไม่ได้เนื่องจากมีข้อผิดพลาด\n\nรีสตาร์ทอุปกรณ์แล้วลองอีกครั้ง"</string>
     <string name="main_clear_title" msgid="277664302144837723">"ลบข้อมูลทั้งหมด (รีเซ็ตเป็นค่าเริ่มต้น)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"ลบข้อมูลทั้งหมด (รีเซ็ตเป็นค่าเริ่มต้น)"</string>
-    <string name="main_clear_desc" product="tablet" msgid="1651178880680056849">"การดำเนินการนี้จะลบข้อมูลทั้งหมดออกจาก"<b>"พื้นที่เก็บข้อมูลภายใน"</b>"แท็บเล็ต ซึ่งรวมถึง\n\n"<li>"บัญชี Google"</li>\n<li>"ข้อมูลและการตั้งค่าของระบบและแอป"</li>\n<li>"แอปที่ดาวน์โหลด"</li></string>
-    <string name="main_clear_desc" product="default" msgid="6984348811887162647">"การดำเนินการนี้จะลบข้อมูลทั้งหมดออกจาก"<b>"พื้นที่เก็บข้อมูลภายใน"</b>"โทรศัพท์ ซึ่งรวมถึง\n\n"<li>"บัญชี Google"</li>\n<li>"ข้อมูลและการตั้งค่าของระบบและแอป"</li>\n<li>"แอปที่ดาวน์โหลด"</li></string>
+    <string name="main_clear_desc" product="tablet" msgid="1651178880680056849">"การดำเนินการนี้จะลบข้อมูลทั้งหมดออกจาก"<b>"ที่จัดเก็บข้อมูลภายใน"</b>"แท็บเล็ต ซึ่งรวมถึง\n\n"<li>"บัญชี Google"</li>\n<li>"ข้อมูลและการตั้งค่าของระบบและแอป"</li>\n<li>"แอปที่ดาวน์โหลด"</li></string>
+    <string name="main_clear_desc" product="default" msgid="6984348811887162647">"การดำเนินการนี้จะลบข้อมูลทั้งหมดออกจาก"<b>"ที่จัดเก็บข้อมูลภายใน"</b>"โทรศัพท์ ซึ่งรวมถึง\n\n"<li>"บัญชี Google"</li>\n<li>"ข้อมูลและการตั้งค่าของระบบและแอป"</li>\n<li>"แอปที่ดาวน์โหลด"</li></string>
     <string name="main_clear_accounts" product="default" msgid="7675859115108318537">\n\n"ขณะนี้คุณลงชื่อเข้าใช้บัญชีต่อไปนี้อยู่\n"</string>
     <string name="main_clear_other_users_present" product="default" msgid="2672976674798019077">\n\n"มีผู้ใช้รายอื่นอยู่ในอุปกรณ์เครื่องนี้\n"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"เพลง"</li>\n<li>"รูปภาพ"</li>\n<li>"ข้อมูลผู้ใช้อื่นๆ"</li></string>
@@ -1894,12 +1897,12 @@
     <string name="call_settings_summary" msgid="8244293779053318053">"ตั้งค่าข้อความเสียง การโอนสาย สายเรียกซ้อน หมายเลขผู้โทร"</string>
     <string name="tether_settings_title_usb" msgid="5926474044238409099">"เชื่อมต่อเน็ตผ่าน USB"</string>
     <string name="tether_settings_title_wifi" msgid="4327056146425282159">"ฮอตสปอตแบบพกพาได้"</string>
-    <string name="tether_settings_title_bluetooth" msgid="8878813702520141084">"ปล่อยสัญญาณบลูทูธ"</string>
+    <string name="tether_settings_title_bluetooth" msgid="8878813702520141084">"ต่ออินเทอร์เน็ตผ่านบลูทูธ"</string>
     <string name="tether_settings_title_usb_bluetooth" msgid="4437274151658505496">"การปล่อยสัญญาณ"</string>
     <string name="tether_settings_title_all" msgid="6807525590937697228">"ฮอตสปอตและการเชื่อมต่ออินเทอร์เน็ตผ่านมือถือ"</string>
     <string name="tether_settings_summary_hotspot_on_tether_on" msgid="6110241048260139633">"ฮอตสปอตเปิดอยู่ กำลังเชื่อมต่ออินเทอร์เน็ตผ่านมือถือ"</string>
     <string name="tether_settings_summary_hotspot_on_tether_off" msgid="5057598961245943644">"ฮอตสปอตเปิดอยู่"</string>
-    <string name="tether_settings_summary_hotspot_off_tether_on" msgid="7181518138494995888">"การเชื่อมต่ออินเทอร์เน็ตผ่านมือถือ"</string>
+    <string name="tether_settings_summary_hotspot_off_tether_on" msgid="7181518138494995888">"กำลังเชื่อมต่ออินเทอร์เน็ตผ่านมือถือ"</string>
     <string name="tether_settings_disabled_on_data_saver" msgid="9054069463426952689">"ไม่สามารถเชื่อมต่ออินเทอร์เน็ตผ่านมือถือหรือใช้โหมดฮอตสปอตแบบพกพาขณะที่การประหยัดอินเทอร์เน็ตเปิดอยู่"</string>
     <string name="tether_settings_summary_hotspot_only" msgid="8529008147731140279">"ฮอตสปอตเท่านั้น"</string>
     <string name="tether_settings_summary_usb_tethering_only" msgid="6351624505239356221">"USB เท่านั้น"</string>
@@ -1930,13 +1933,13 @@
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"เชื่อมต่ออินเทอร์เน็ตผ่าน USB"</string>
     <string name="usb_tethering_subtext" product="default" msgid="3168636595109044213">"แชร์การเชื่อมต่ออินเทอร์เน็ตของโทรศัพท์ผ่าน USB"</string>
     <string name="usb_tethering_subtext" product="tablet" msgid="1749659335004856576">"แชร์การเชื่อมต่ออินเทอร์เน็ตของแท็บเล็ตผ่าน USB"</string>
-    <string name="bluetooth_tether_checkbox_text" msgid="6108398414967813545">"ปล่อยสัญญาณบลูทูธ"</string>
+    <string name="bluetooth_tether_checkbox_text" msgid="6108398414967813545">"ต่ออินเทอร์เน็ตผ่านบลูทูธ"</string>
     <string name="bluetooth_tethering_subtext" product="tablet" msgid="2023654677593885805">"แชร์การเชื่อมต่ออินเทอร์เน็ตของแท็บเล็ตผ่านบลูทูธ"</string>
     <string name="bluetooth_tethering_subtext" product="default" msgid="4322810060538179348">"แชร์การเชื่อมต่ออินเทอร์เน็ตของโทรศัพท์ผ่านบลูทูธ"</string>
     <string name="bluetooth_tethering_off_subtext_config" msgid="6941934844527406581">"กำลังแชร์การเชื่อมต่ออินเทอร์เน็ตของ <xliff:g id="DEVICE_NAME">%1$d</xliff:g> นี้ผ่านบลูทูธ"</string>
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"ไม่สามารถปล่อยการเชื่อมต่อมากกว่า <xliff:g id="MAXCONNECTION">%1$d</xliff:g> อุปกรณ์"</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> จะถูกยกเลิกการปล่อยสัญญาณ"</string>
-    <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"เชื่อมต่อผ่านอีเทอร์เน็ต"</string>
+    <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"เชื่อมต่ออินเทอร์เน็ตผ่านอีเทอร์เน็ต"</string>
     <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"แชร์การเชื่อมต่ออินเทอร์เน็ตของโทรศัพท์ผ่านอีเทอร์เน็ต"</string>
     <string name="ethernet_tethering_subtext" product="tablet" msgid="8796744370636115313">"แชร์การเชื่อมต่ออินเทอร์เน็ตของแท็บเล็ตผ่านอีเทอร์เน็ต"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"ใช้ฮอตสปอตและการเชื่อมต่ออินเทอร์เน็ตผ่านมือถือเพื่อให้อุปกรณ์อื่นๆ ใช้อินเทอร์เน็ตจากการเชื่อมต่ออินเทอร์เน็ตมือถือได้ แอปยังสร้างฮอตสปอตเพื่อแชร์เนื้อหากับอุปกรณ์ที่อยู่ใกล้เคียงได้อีกด้วย"</string>
@@ -2206,8 +2209,8 @@
     <string name="no_applications" msgid="985069304755391640">"ไม่มีแอปใดๆ"</string>
     <string name="internal_storage" msgid="999496851424448809">"ที่เก็บข้อมูลภายใน"</string>
     <string name="recompute_size" msgid="1098091228370999128">"กำลังคำนวณขนาดใหม่..."</string>
-    <string name="clear_data_dlg_title" msgid="180446967743732410">"ลบข้อมูลในแอปหรือไม่"</string>
-    <string name="clear_data_dlg_text" msgid="3440011276559762619">"ข้อมูลของแอปนี้จะถูกลบออกจากอุปกรณ์นี้อย่างถาวร รวมถึงไฟล์และการตั้งค่า"</string>
+    <string name="clear_data_dlg_title" msgid="180446967743732410">"ลบข้อมูลแอปไหม"</string>
+    <string name="clear_data_dlg_text" msgid="3440011276559762619">"ข้อมูลของแอปนี้ ซึ่งรวมถึงไฟล์และการตั้งค่า จะถูกลบออกจากอุปกรณ์นี้อย่างถาวร"</string>
     <string name="dlg_ok" msgid="1421350367857960997">"ตกลง"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"ยกเลิก"</string>
     <string name="dlg_delete" msgid="1790919205039397659">"ลบ"</string>
@@ -2390,7 +2393,7 @@
     <string name="vision_settings_description" msgid="7614894785054441991">"คุณปรับแต่งอุปกรณ์นี้ให้ตรงกับความต้องการได้ และเปลี่ยนฟีเจอร์การช่วยเหลือพิเศษเหล่านี้ได้ภายหลังในการตั้งค่า"</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"เปลี่ยนขนาดแบบอักษร"</string>
     <string name="screen_reader_category_title" msgid="5825700839731107803">"โปรแกรมอ่านหน้าจอ"</string>
-    <string name="captions_category_title" msgid="574490148949400274">"คำบรรยายวิดีโอ"</string>
+    <string name="captions_category_title" msgid="574490148949400274">"คำบรรยายแทนเสียง"</string>
     <string name="audio_category_title" msgid="5283853679967605826">"เสียง"</string>
     <string name="general_category_title" msgid="6298579528716834157">"ทั่วไป"</string>
     <string name="display_category_title" msgid="6638191682294461408">"การแสดงผล"</string>
@@ -2402,24 +2405,17 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"แอปที่ดาวน์โหลด"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"ทดสอบ"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"แฟล็กฟีเจอร์"</string>
-    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_title (401330708633716596) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_summary (1319792184194176235) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_footer (4158945851818483666) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filter_pbap_title (1735427364451634823) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filter_map_title (180092480793945544) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filter_summary (7217091930762522599) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filtered_mode_disabled_summary (8824952559433361848) -->
-    <skip />
+    <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"การกรองบันทึก HCI Snoop ของบลูทูธ"</string>
+    <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="1319792184194176235">"ตั้งค่าตัวกรอง"</string>
+    <string name="bt_hci_snoop_log_filters_dashboard_footer" msgid="4158945851818483666">"ปิดและเปิดบลูทูธเพื่อให้การเปลี่ยนแปลงมีผล"</string>
+    <string name="bt_hci_snoop_log_filter_pbap_title" msgid="1735427364451634823">"PBAP การกรองบันทึก HCI Snoop ของบลูทูธ"</string>
+    <string name="bt_hci_snoop_log_filter_map_title" msgid="180092480793945544">"MAP การกรองบันทึก HCI Snoop ของบลูทูธ"</string>
+    <string name="bt_hci_snoop_log_filter_summary" msgid="7217091930762522599">"ตั้งค่าโหมดการกรอง (ปิดและเปิดบลูทูธเพื่อให้การเปลี่ยนแปลงมีผล)"</string>
+    <string name="bt_hci_snoop_log_filtered_mode_disabled_summary" msgid="8824952559433361848">"ตั้งค่าโหมดบันทึก HCI Snoop ของบลูทูธเป็น \"เปิดใช้รายการที่กรอง\" เพื่อเปลี่ยนตัวเลือกนี้"</string>
     <string name="talkback_title" msgid="8756080454514251327">"TalkBack"</string>
     <string name="talkback_summary" msgid="5820927220378864281">"โปรแกรมอ่านหน้าจอสำหรับผู้ที่ตาบอดหรือมีสายตาเลือนรางเป็นหลัก"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"แตะรายการบนหน้าจอเพื่อฟังการอ่านออกเสียง"</string>
-    <string name="accessibility_captioning_title" msgid="4561871958958925225">"ค่ากำหนดคำบรรยายวิดีโอ"</string>
+    <string name="accessibility_captioning_title" msgid="4561871958958925225">"ค่ากำหนดคำบรรยายแทนเสียง"</string>
     <string name="accessibility_captioning_about_title" msgid="3542171637334191563">"เกี่ยวกับค่ากำหนดคำบรรยาย"</string>
     <string name="accessibility_captioning_footer_learn_more_content_description" msgid="5730040700677017706">"ดูข้อมูลเพิ่มเติมเกี่ยวกับค่ากำหนดคำบรรยาย"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"การขยาย"</string>
@@ -2469,7 +2465,7 @@
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"แตะ 3 ครั้งเพื่อซูม"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"แตะปุ่มเพื่อซูม"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"ซูมเข้าอย่างรวดเร็วบนหน้าจอเพื่อทำให้เนื้อหาใหญ่ขึ้น"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;วิธีซูมเข้า&lt;/b&gt;&lt;br/&gt; {0,number,integer} ใช้ทางลัดเพื่อเริ่มการขยาย&lt;br/&gt; {1,number,integer} แตะหน้าจอ&lt;br/&gt; {2,number,integer} ใช้ 2 นิ้วลากเพื่อย้ายไปรอบๆ หน้าจอ&lt;br/&gt; {3,number,integer} บีบ 2 นิ้วเพื่อปรับการซูม&lt;br/&gt; {4,number,integer} ใช้ทางลัดเพื่อหยุดการขยาย&lt;br/&gt;&lt;br/&gt; &lt;b&gt;วิธีซูมเข้าชั่วคราว&lt;/b&gt;&lt;br/&gt; {0,number,integer} ตรวจสอบว่าตั้งค่าประเภทการขยายเป็นแบบเต็มหน้าจอ&lt;br/&gt; {1,number,integer} ใช้ทางลัดเพื่อเริ่มการขยาย&lt;br/&gt; {2,number,integer} แตะที่ใดก็ได้บนหน้าจอค้างไว้&lt;br/&gt; {3,number,integer} ลากนิ้วเพื่อย้ายไปรอบๆ หน้าจอ&lt;br/&gt; {4,number,integer} ยกนิ้วขึ้นเพื่อหยุดการขยาย"</string>
+    <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;วิธีซูมเข้า&lt;/b&gt;&lt;br/&gt; {0,number,integer}. ใช้ทางลัดเพื่อเริ่มการขยาย&lt;br/&gt; {1,number,integer}. แตะหน้าจอ&lt;br/&gt; {2,number,integer}. ใช้ 2 นิ้วลากเพื่อย้ายไปรอบๆ หน้าจอ&lt;br/&gt; {3,number,integer}. บีบ 2 นิ้วเพื่อปรับการซูม&lt;br/&gt; {4,number,integer}. ใช้ทางลัดเพื่อหยุดการขยาย&lt;br/&gt;&lt;br/&gt; &lt;b&gt;วิธีซูมเข้าชั่วคราว&lt;/b&gt;&lt;br/&gt; {0,number,integer}. ตรวจสอบว่าตั้งค่าประเภทการขยายเป็นแบบเต็มหน้าจอ&lt;br/&gt; {1,number,integer}. ใช้ทางลัดเพื่อเริ่มการขยาย&lt;br/&gt; {2,number,integer}. แตะที่ใดก็ได้บนหน้าจอค้างไว้&lt;br/&gt; {3,number,integer}. ลากนิ้วเพื่อย้ายไปรอบๆ หน้าจอ&lt;br/&gt; {4,number,integer}. ยกนิ้วขึ้นเพื่อหยุดการขยาย"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"คุณจะซูมหน้าจอเข้าได้เมื่อเปิดการขยาย\n\n"<b>"วิธีซูมคือ"</b>" เริ่มการขยาย จากนั้นแตะบริเวณที่ต้องการซูมในหน้าจอ\n"<ul><li>"ลากนิ้วอย่างน้อย 2 นิ้วเพื่อเลื่อน"</li>\n<li>"บีบนิ้วอย่างน้อย 2 นิ้วเพื่อปรับการซูม"</li></ul>\n\n<b>"วิธีซูมชั่วคราวคือ"</b>" เริ่มการขยาย จากนั้นแตะบริเวณที่ต้องการซูมในหน้าจอค้างไว้\n"<ul><li>"ลากเพื่อไปยังส่วนต่างๆ ในหน้าจอ"</li>\n<li>"ยกนิ้วขึ้นเพื่อซูมออก"</li></ul>\n\n"คุณซูมเข้าโดยใช้แป้นพิมพ์หรือแถบนำทางไม่ได้"</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"หน้า <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> จาก <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"ใช้ปุ่มการช่วยเหลือพิเศษเพื่อเปิด"</string>
@@ -2494,7 +2490,7 @@
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"แตะปุ่มการช่วยเหลือพิเศษ"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="3981188764050497346">"ใช้ท่าทางสัมผัสการช่วยเหลือพิเศษ"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="5606196352833449600">"แตะปุ่มการช่วยเหลือพิเศษ <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> ที่ด้านล่างของหน้าจอ\n\nหากต้องการสลับระหว่างฟีเจอร์ต่างๆ ให้แตะปุ่มการช่วยเหลือพิเศษค้างไว้"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"ใช้ 2 นิ้วเลื่อนขึ้นจากด้านล่างของหน้าจอ\n\nหากต้องการสลับระหว่างฟีเจอร์ต่างๆ ให้ใช้ 2 นิ้วเลื่อนขึ้นแล้วค้างไว้"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"ใช้ 2 นิ้วปัดขึ้นจากด้านล่างของหน้าจอ\n\nหากต้องการสลับระหว่างฟีเจอร์ต่างๆ ให้ใช้ 2 นิ้วปัดขึ้นแล้วค้างไว้"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"ใช้ 3 นิ้วเลื่อนขึ้นจากด้านล่างของหน้าจอ\n\nหากต้องการสลับระหว่างฟีเจอร์ต่างๆ ให้ใช้ 3 นิ้วเลื่อนขึ้นแล้วค้างไว้"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="4459254227203203324"><annotation id="link">"ตัวเลือกเพิ่มเติม"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"ดูข้อมูลเพิ่มเติมเกี่ยวกับ<xliff:g id="SERVICE">%1$s</xliff:g>"</string>
@@ -2612,7 +2608,7 @@
     <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"ดูข้อมูลเพิ่มเติมเกี่ยวกับการแก้สี"</string>
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"เกี่ยวกับการกลับสี"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"ดูข้อมูลเพิ่มเติมเกี่ยวกับการกลับสี"</string>
-    <string name="accessibility_caption_primary_switch_title" msgid="8901149325574757370">"แสดงคำบรรยาย"</string>
+    <string name="accessibility_caption_primary_switch_title" msgid="8901149325574757370">"แสดงคำบรรยายแทนเสียง"</string>
     <string name="accessibility_caption_primary_switch_summary" msgid="2754071646412717674">"สำหรับแอปที่รองรับเท่านั้น"</string>
     <string name="captioning_caption_appearance_title" msgid="4501313548541670063">"ขนาดและรูปแบบของคำบรรยาย"</string>
     <string name="captioning_caption_appearance_summary" msgid="7340741178479381312">"ขนาดข้อความ <xliff:g id="ACCESSIBILITY_FONT_SIZE">%1$s</xliff:g>"</string>
@@ -2630,7 +2626,7 @@
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"จับคู่เครื่องช่วยฟัง"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"ในหน้าจอถัดไป ให้แตะที่เครื่องช่วยฟัง คุณอาจต้องจับคู่อุปกรณ์ของหูฟังข้างซ้ายและขวาแยกกัน\n\nโปรดตรวจสอบว่าคุณเปิดเครื่องช่วยฟังแล้วและอุปกรณ์พร้อมจับคู่"</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ใช้งานอยู่"</string>
-    <string name="accessibility_hearingaid_left_side_device_summary" msgid="1907302799168261001">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, ซ้ายเท่านั้น"</string>
+    <string name="accessibility_hearingaid_left_side_device_summary" msgid="1907302799168261001">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, เฉพาะข้างซ้าย"</string>
     <string name="accessibility_hearingaid_right_side_device_summary" msgid="148257064855054376">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, ขวาเท่านั้น"</string>
     <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="4268221140368164452">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, ทั้งซ้ายและขวา"</string>
     <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> +1 รายการ"</string>
@@ -2697,14 +2693,14 @@
     <string name="captioning_custom_options_title" msgid="3858866498893566351">"ตัวเลือกที่กำหนดเอง"</string>
     <string name="captioning_background_color" msgid="5231412761368883107">"สีพื้นหลัง"</string>
     <string name="captioning_background_opacity" msgid="6453738649182382614">"ความทึบแสงของพื้นหลัง"</string>
-    <string name="captioning_window_color" msgid="1406167274530183119">"สีของหน้าต่างคำอธิบายภาพ"</string>
-    <string name="captioning_window_opacity" msgid="4031752812991199525">"ความทึบแสงของหน้าต่างคำอธิบายภาพ"</string>
+    <string name="captioning_window_color" msgid="1406167274530183119">"สีของหน้าต่างคำบรรยายแทนเสียง"</string>
+    <string name="captioning_window_opacity" msgid="4031752812991199525">"ความทึบแสงของหน้าต่างคำบรรยายแทนเสียง"</string>
     <string name="captioning_foreground_color" msgid="9057327228286129232">"สีข้อความ"</string>
     <string name="captioning_foreground_opacity" msgid="1395843080697567189">"ความทึบแสงของข้อความ"</string>
     <string name="captioning_edge_color" msgid="6035818279902597518">"สีขอบ"</string>
     <string name="captioning_edge_type" msgid="5281259280060811506">"ชนิดขอบ"</string>
     <string name="captioning_typeface" msgid="285325623518361407">"ชุดแบบอักษร"</string>
-    <string name="captioning_preview_text" msgid="4973475065545995704">"คำบรรยายจะมีหน้าตาแบบนี้"</string>
+    <string name="captioning_preview_text" msgid="4973475065545995704">"คำบรรยายแทนเสียงจะมีลักษณะดังนี้"</string>
     <string name="captioning_preview_characters" msgid="7854812443613580460">"Aa"</string>
     <string name="locale_default" msgid="8948077172250925164">"ค่าเริ่มต้น"</string>
     <string name="color_title" msgid="2511586788643787427">"สี"</string>
@@ -2742,7 +2738,7 @@
     <string name="keywords_accessibility" msgid="4263443239404659143">"ใช้งานง่าย, เข้าถึงง่าย, ความช่วยเหลือ, การช่วยเหลือพิเศษ"</string>
     <string name="keywords_magnification" msgid="3908145308269840862">"แว่นขยายหน้าจอ, ซูม, การขยาย, สายตาเลือนราง, ขยาย, ทำให้ใหญ่ขึ้น"</string>
     <string name="keywords_talkback" msgid="2816435437095102527"></string>
-    <string name="keywords_live_caption" msgid="1667203998080567556">"คำบรรยายวิดีโอ, คำบรรภาพ, คำบรรยาย, Live Transcribe, มีปัญหาในการได้ยิน, สูญเสียการได้ยิน, CART, การแปลงคำพูดเป็นข้อความ, คำบรรยาย"</string>
+    <string name="keywords_live_caption" msgid="1667203998080567556">"คำบรรยายแทนเสียง, คำบรรภาพ, คำบรรยาย, Live Transcribe, มีปัญหาในการได้ยิน, สูญเสียการได้ยิน, CART, การแปลงคำพูดเป็นข้อความ"</string>
     <string name="keywords_live_transcribe" msgid="3226990195174890997"></string>
     <string name="keywords_sound_notifications" msgid="8183107485754075413"></string>
     <string name="keywords_sound_amplifier" msgid="939404835256246663"></string>
@@ -2755,7 +2751,7 @@
     <string name="keywords_switch_access" msgid="5813094504384313402"></string>
     <string name="keywords_auto_click" msgid="7151756353013736931">"การเคลื่อนไหว, เมาส์"</string>
     <string name="keywords_hearing_aids" msgid="524979615168196199">"มีปัญหาในการได้ยิน, สูญเสียการได้ยิน"</string>
-    <string name="keywords_rtt" msgid="2429130928152514402">"มีปัญหาในการได้ยิน, สูญเสียการได้ยิน, คำบรรยายวิดีโอ, โทรพิมพ์, tty"</string>
+    <string name="keywords_rtt" msgid="2429130928152514402">"มีปัญหาในการได้ยิน, สูญเสียการได้ยิน, คำบรรยายแทนเสียง, โทรพิมพ์, tty"</string>
     <string name="keywords_voice_access" msgid="7807335263195876454"></string>
     <string name="print_settings" msgid="8519810615863882491">"การพิมพ์"</string>
     <string name="print_settings_summary_no_service" msgid="6721731154917653862">"ปิด"</string>
@@ -2767,7 +2763,7 @@
       <item quantity="other">งานพิมพ์ <xliff:g id="COUNT">%1$d</xliff:g> รายการ</item>
       <item quantity="one">งานพิมพ์ 1 รายการ</item>
     </plurals>
-    <string name="print_settings_title" msgid="7680498284751129935">"บริการการพิมพ์"</string>
+    <string name="print_settings_title" msgid="7680498284751129935">"บริการพิมพ์"</string>
     <string name="print_no_services_installed" msgid="7554057966540602692">"ไม่ได้ติดตั้งบริการใดไว้"</string>
     <string name="print_no_printers_found" msgid="4833082484646109486">"ไม่พบเครื่องพิมพ์"</string>
     <string name="print_menu_item_settings" msgid="8202755044784599740">"การตั้งค่า"</string>
@@ -3292,7 +3288,7 @@
 %1$s</xliff:g>"</string>
     <string name="sync_gmail" msgid="228561698646018808">"Gmail"</string>
     <string name="sync_calendar" msgid="4603704438090387251">"ปฏิทิน"</string>
-    <string name="sync_contacts" msgid="2376465611511325472">"สมุดโทรศัพท์"</string>
+    <string name="sync_contacts" msgid="2376465611511325472">"รายชื่อติดต่อ"</string>
     <string name="sync_plug" msgid="7956982719077985381"><font fgcolor="#ffffffff">"ยินดีต้อนรับสู่ Google Sync!"</font>\n"วิธีการของ Google ในการซิงค์ข้อมูลเพื่อให้คุณเข้าถึงสมุดติดต่อ นัดหมาย และข้อมูลอื่นๆ ของคุณได้จากทุกที่"</string>
     <string name="header_application_sync_settings" msgid="7427706834875419243">"การตั้งค่าการซิงค์แอปพลิเคชัน"</string>
     <string name="header_data_and_synchronization" msgid="453920312552838939">"ข้อมูลและการซิงค์"</string>
@@ -3313,7 +3309,7 @@
     <string name="misc_files_selected_count_bytes" msgid="7622766714974500289">"<xliff:g id="NUMBER">%1$s</xliff:g> จาก <xliff:g id="TOTAL">%2$s</xliff:g>"</string>
     <string name="select_all" msgid="7898929601615536401">"เลือกทั้งหมด"</string>
     <string name="data_usage_summary_title" msgid="394067070764360142">"ปริมาณการใช้อินเทอร์เน็ต"</string>
-    <string name="data_usage_app_summary_title" msgid="4933742247928064178">"เน็ตมือถือและ Wi‑Fi"</string>
+    <string name="data_usage_app_summary_title" msgid="4933742247928064178">"อินเทอร์เน็ตมือถือและ Wi‑Fi"</string>
     <string name="data_usage_accounting" msgid="6832015632699116754">"การทำบัญชีข้อมูลผู้ให้บริการอาจแตกต่างจากอุปกรณ์ของคุณ"</string>
     <string name="data_usage_app" msgid="6367974637783240699">"การใช้งานแอป"</string>
     <string name="data_usage_app_info_label" msgid="3542220416056122841">"ข้อมูลแอป"</string>
@@ -3376,8 +3372,8 @@
     <string name="data_usage_cycle_editor_title" msgid="2019035830921480941">"วันที่รีเซ็ตรอบการใช้"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="1026234456777365545">"วันที่ของแต่ละเดือน:"</string>
     <string name="data_usage_cycle_editor_positive" msgid="6110165528024717527">"ตั้งค่า"</string>
-    <string name="data_usage_warning_editor_title" msgid="5252748452973120016">"ตั้งค่าเตือนการใช้อินเทอร์เน็ต"</string>
-    <string name="data_usage_limit_editor_title" msgid="8826855902435008518">"ตั้งค่าขีดจำกัดการใช้อินเทอร์เน็ต"</string>
+    <string name="data_usage_warning_editor_title" msgid="5252748452973120016">"ตั้งค่าคำเตือนปริมาณการใช้อินเทอร์เน็ต"</string>
+    <string name="data_usage_limit_editor_title" msgid="8826855902435008518">"ตั้งค่าขีดจำกัดปริมาณการใช้อินเทอร์เน็ต"</string>
     <string name="data_usage_limit_dialog_title" msgid="2053134451707801439">"การจำกัดการใช้อินเทอร์เน็ต"</string>
     <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="6000062970083379466">"แท็บเล็ตจะปิดอินเทอร์เน็ตมือถือเมื่อถึงขีดจำกัดที่คุณตั้งไว้\n\nเนื่องจากว่าปริมาณการใช้อินเทอร์เน็ตนั้นวัดโดยแท็บเล็ตของคุณ ผู้ให้บริการอาจมีวิธีบันทึกการใช้ที่แตกต่างออกไป ดังนั้น โปรดกำหนดขีดจำกัดอย่างระมัดระวัง"</string>
     <string name="data_usage_limit_dialog_mobile" product="default" msgid="4942895670789168024">"โทรศัพท์ของคุณจะปิดอินเทอร์เน็ตมือถือเมื่อถึงขีดจำกัดที่คุณตั้งไว้\n\nเนื่องจากว่าปริมาณการใช้อินเทอร์เน็ตนั้นวัดโดยโทรศัพท์ของคุณ ผู้ให้บริการอาจมีวิธีบันทึกการใช้ที่แตกต่างออกไป ดังนั้น โปรดกำหนดขีดจำกัดอย่างระมัดระวัง"</string>
@@ -3675,7 +3671,7 @@
     <string name="sim_calls_always_use" msgid="967857230039768111">"ใช้ในการโทรทุกครั้ง"</string>
     <string name="select_sim_for_data" msgid="2642305487659432499">"เลือกซิมสำหรับอินเทอร์เน็ตมือถือ"</string>
     <string name="select_sim_for_sms" msgid="5335510076282673497">"เลือกซิมสำหรับ SMS"</string>
-    <string name="data_switch_started" msgid="6292759843974720112">"กำลังสลับซิมข้อมูล การดำเนินการนี้อาจใช้เวลาถึง 1 นาที…"</string>
+    <string name="data_switch_started" msgid="6292759843974720112">"กำลังสลับซิมสำหรับใช้อินเทอร์เน็ต การดำเนินการนี้อาจใช้เวลาถึง 1 นาที…"</string>
     <string name="select_specific_sim_for_data_title" msgid="5851980301321577985">"ใช้อินเทอร์เน็ตมือถือของ <xliff:g id="NEW_SIM">%1$s</xliff:g> ไหม"</string>
     <string name="select_specific_sim_for_data_msg" msgid="7401698123430573637">"หากเปลี่ยนเป็น <xliff:g id="NEW_SIM">%1$s</xliff:g> ระบบจะไม่ใช้อินเทอร์เน็ตมือถือของ <xliff:g id="OLD_SIM">%2$s</xliff:g> อีก"</string>
     <string name="select_specific_sim_for_data_button" msgid="6571935548920603512">"ใช้ <xliff:g id="NEW_SIM">%1$s</xliff:g>"</string>
@@ -3847,7 +3843,7 @@
     <string name="alarm_volume_option_title" msgid="6398641749273697140">"ระดับเสียงปลุก"</string>
     <string name="ring_volume_option_title" msgid="1520802026403038560">"ระดับเสียงเรียกเข้าและการแจ้งเตือน"</string>
     <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"ระดับเสียงเรียกเข้า"</string>
-    <string name="notification_volume_option_title" msgid="4838818791683615978">"ระดับเสียงของการแจ้งเตือน"</string>
+    <string name="notification_volume_option_title" msgid="4838818791683615978">"ระดับเสียงการแจ้งเตือน"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"เสียงเรียกเข้า"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"เสียงแจ้งเตือนเริ่มต้น"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"เสียงจากแอป"</string>
@@ -3863,7 +3859,7 @@
     <string name="dial_pad_tones_title" msgid="3536945335367914892">"เสียงแป้นหมายเลข"</string>
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"เสียงการล็อกหน้าจอ"</string>
     <string name="charging_sounds_title" msgid="5261683808537783668">"เสียงชาร์จและการสั่น"</string>
-    <string name="docking_sounds_title" msgid="5341616179210436159">"เสียงเชื่อมต่อแท่นลำโพง"</string>
+    <string name="docking_sounds_title" msgid="5341616179210436159">"เสียงเชื่อมต่อแท่นชาร์จ"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"เสียงแตะ"</string>
     <string name="vibrate_icon_title" msgid="1281100105045362530">"แสดงไอคอนเสมอเมื่ออยู่ในโหมดสั่น"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"เล่นเสียงจากแท่นลำโพง"</string>
@@ -4558,7 +4554,7 @@
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"ไม่มีการขอสิทธิ์"</string>
     <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"ควมคุมสิทธิ์ของแอปในการเข้าถึงข้อมูล"</string>
     <string name="permissions_usage_title" msgid="2942741460679049132">"แดชบอร์ดความเป็นส่วนตัว"</string>
-    <string name="permissions_usage_summary" msgid="6784310472062516454">"แสดงแอปที่ใช้สิทธิ์ล่าสุด"</string>
+    <string name="permissions_usage_summary" msgid="6784310472062516454">"แสดงแอปล่าสุดที่ใช้สิทธิ์"</string>
     <string name="unused_apps" msgid="4566272194756830656">"แอปที่ไม่ได้ใช้"</string>
     <plurals name="unused_apps_summary" formatted="false" msgid="3827583582750975783">
       <item quantity="other">แอปที่ไม่ได้ใช้ <xliff:g id="COUNT_1">%d</xliff:g> รายการ</item>
@@ -4691,7 +4687,7 @@
     <string name="usb_control_device" msgid="527916783743021577">"อุปกรณ์นี้"</string>
     <string name="usb_switching" msgid="3654709188596609354">"กำลังเปลี่ยน…"</string>
     <string name="usb_switching_failed" msgid="5721262697715454137">"เปลี่ยนไม่ได้"</string>
-    <string name="usb_summary_charging_only" msgid="678095599403565146">"ชาร์จอุปกรณ์นี้"</string>
+    <string name="usb_summary_charging_only" msgid="678095599403565146">"กำลังชาร์จอุปกรณ์นี้"</string>
     <string name="usb_summary_power_only" msgid="4901734938857822887">"การชาร์จอุปกรณ์ที่เชื่อมต่อ"</string>
     <string name="usb_summary_file_transfers" msgid="5498487271972556431">"การถ่ายโอนไฟล์"</string>
     <string name="usb_summary_tether" msgid="2554569836525075702">"เชื่อมต่ออินเทอร์เน็ตผ่าน USB"</string>
@@ -4949,7 +4945,7 @@
     <string name="data_saver_off" msgid="5891210864117269045">"ปิด"</string>
     <string name="data_saver_switch_title" msgid="7111538580123722959">"ใช้การประหยัดอินเทอร์เน็ต"</string>
     <string name="unrestricted_app_title" msgid="7117585996574329284">"ใช้อินเทอร์เน็ตได้ไม่จำกัด"</string>
-    <string name="unrestricted_app_summary" msgid="282698963532000403">"อนุญาตให้เข้าถึงข้อมูลได้ไม่จำกัดเมื่อเปิดการประหยัดอินเทอร์เน็ต"</string>
+    <string name="unrestricted_app_summary" msgid="282698963532000403">"อนุญาตให้ใช้เน็ตได้ไม่จำกัดเมื่อเปิดการประหยัดอินเทอร์เน็ต"</string>
     <string name="home_app" msgid="6056850504746902747">"แอปหน้าแรก"</string>
     <string name="no_default_home" msgid="3588073707316139318">"ไม่มีหน้าแรกเริ่มต้น"</string>
     <string name="lockpattern_settings_require_cred_before_startup" msgid="4098653943835666086">"รักษาความปลอดภัยเมื่อเปิดขึ้น"</string>
@@ -5003,7 +4999,7 @@
     <string name="notification_log_details_ranking_null" msgid="6607596177723101524">"ไม่มีวัตถุการจัดอันดับ"</string>
     <string name="notification_log_details_ranking_none" msgid="2484105338466675261">"วัตถุการจัดอันดับไม่มีคีย์นี้"</string>
     <string name="theme_customization_device_default" msgid="7641813022590999286">"ค่าเริ่มต้นของอุปกรณ์"</string>
-    <string name="display_cutout_emulation" msgid="1421648375408281244">"คัตเอาท์ดิสเพลย์"</string>
+    <string name="display_cutout_emulation" msgid="1421648375408281244">"หน้าจอรอยบาก"</string>
     <string name="display_cutout_emulation_keywords" msgid="4506580703807358127">"คัตเอาท์ดิสเพลย์"</string>
     <string name="overlay_option_device_default" msgid="7986355499809313848">"ค่าเริ่มต้นของอุปกรณ์"</string>
     <string name="overlay_toast_failed_to_apply" msgid="4839587811338164960">"ใช้การวางซ้อนไม่สำเร็จ"</string>
@@ -5034,7 +5030,7 @@
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"เปิดชั่วคราวเนื่องจากอยู่ในโหมดประหยัดแบตเตอรี่"</string>
     <string name="dark_theme_slice_title" msgid="4684222119481114062">"ลองใช้ธีมมืด"</string>
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"ช่วยยืดอายุการใช้งานแบตเตอรี่"</string>
-    <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"องค์ประกอบการตั้งค่าด่วนสำหรับนักพัฒนาแอป"</string>
+    <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"การ์ดการตั้งค่าด่วนสำหรับนักพัฒนาแอป"</string>
     <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"ปิดใช้ระยะหมดเวลาการให้สิทธิ์ adb"</string>
     <string name="adb_authorization_timeout_summary" msgid="409931540424019778">"ปิดใช้การเพิกถอนการให้สิทธิ์ adb โดยอัตโนมัติสำหรับระบบที่ไม่ได้เชื่อมต่อใหม่ภายในระยะเวลาที่เป็นค่าเริ่มต้น (7 วัน) หรือระยะเวลาที่ผู้ใช้กำหนดค่าไว้ (ขั้นต่ำ 1 วัน)"</string>
     <string name="winscope_trace_quick_settings_title" msgid="4104768565053226689">"Winscope Trace"</string>
@@ -5121,8 +5117,8 @@
     <string name="one_handed_action_show_notification_summary" msgid="8281689861222000436">"การแจ้งเตือนและการตั้งค่าจะปรากฏขึ้น"</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"หากต้องการดูเวลา การแจ้งเตือน และข้อมูลอื่นๆ ให้แตะหน้าจอสองครั้ง"</string>
     <string name="ambient_display_pickup_title" product="default" msgid="4418310591912877548">"ยกขึ้นเพื่อดูโทรศัพท์"</string>
-    <string name="ambient_display_pickup_title" product="tablet" msgid="8055486872070888377">"ยกขึ้นเพื่อตรวจสอบแท็บเล็ต"</string>
-    <string name="ambient_display_pickup_title" product="device" msgid="8980156994848721455">"ยกขึ้นเพื่อตรวจสอบอุปกรณ์"</string>
+    <string name="ambient_display_pickup_title" product="tablet" msgid="8055486872070888377">"ยกขึ้นเพื่อดูแท็บเล็ต"</string>
+    <string name="ambient_display_pickup_title" product="device" msgid="8980156994848721455">"ยกขึ้นเพื่อดูอุปกรณ์"</string>
     <string name="ambient_display_wake_screen_title" msgid="7637678749035378085">"ปลุกจอแสดงผล"</string>
     <string name="ambient_display_pickup_summary" product="default" msgid="1087355013674109242">"หากต้องการดูเวลา การแจ้งเตือน และข้อมูลอื่นๆ ให้หยิบโทรศัพท์ขึ้นมา"</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="2589556997034530529">"หากต้องการดูเวลา การแจ้งเตือน และข้อมูลอื่นๆ ให้หยิบแท็บเล็ตขึ้นมา"</string>
@@ -5332,7 +5328,7 @@
     <string name="zen_suggestion_summary" msgid="1984990920503217">"หยุดการแจ้งเตือนชั่วคราวเพื่อไม่ให้มีสิ่งรบกวน"</string>
     <string name="disabled_feature" msgid="7151433782819744211">"ใช้งานฟีเจอร์ไม่ได้"</string>
     <string name="disabled_feature_reason_slow_down_phone" msgid="5743569256308510404">"ฟีเจอร์นี้ถูกปิดไปเพราะทำให้โทรศัพท์ช้า"</string>
-    <string name="show_first_crash_dialog" msgid="1696584857732637389">"แสดงปัญหาที่ขัดข้องเสมอ"</string>
+    <string name="show_first_crash_dialog" msgid="1696584857732637389">"แสดงกล่องโต้ตอบข้อขัดข้องเสมอ"</string>
     <string name="show_first_crash_dialog_summary" msgid="4692334286984681111">"แสดงกล่องโต้ตอบทุกครั้งที่แอปขัดข้อง"</string>
     <string name="angle_enabled_app" msgid="6044941043384239076">"เลือกแอปที่พร้อมใช้งาน ANGLE"</string>
     <string name="angle_enabled_app_not_set" msgid="4472572224881726067">"ไม่ได้ตั้งค่าแอปพลิเคชันที่พร้อมใช้งาน ANGLE"</string>
@@ -5619,8 +5615,8 @@
     <string name="force_desktop_mode_summary" msgid="4587416867846930479">"บังคับใช้โหมดเดสก์ท็อปแบบทดลองในจอแสดงผลรอง"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"เปิดใช้แอปแบบปรับขนาดไม่ได้ในหลายหน้าต่าง"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"อนุญาตให้แอปแบบปรับขนาดไม่ได้แสดงในหลายหน้าต่าง"</string>
-    <string name="hwui_force_dark_title" msgid="4256904905631994219">"ลบล้างฟีเจอร์บังคับใช้โหมดมืด"</string>
-    <string name="hwui_force_dark_summary" msgid="6515748781487952769">"ลบล้างฟีเจอร์บังคับใช้โหมดมืดให้เปิดตลอดเวลา"</string>
+    <string name="hwui_force_dark_title" msgid="4256904905631994219">"ลบล้างฟีเจอร์บังคับใช้ธีมมืด"</string>
+    <string name="hwui_force_dark_summary" msgid="6515748781487952769">"ลบล้างฟีเจอร์บังคับใช้ธีมมืดให้เปิดตลอดเวลา"</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"ความเป็นส่วนตัว"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"สิทธิ์ กิจกรรมในบัญชี ข้อมูลส่วนตัว"</string>
     <string name="privacy_controls_title" msgid="1383047169455206604">"การควบคุม"</string>
@@ -5766,7 +5762,7 @@
     <string name="calls_sms_unavailable" msgid="4055729705246556529">"ไม่ว่าง"</string>
     <string name="calls_sms_temp_unavailable" msgid="8602291749338757424">"ไม่พร้อมใช้งานชั่วคราว"</string>
     <string name="calls_sms_no_sim" msgid="2336377399761819718">"ไม่มีซิม"</string>
-    <string name="network_and_internet_preferences_title" msgid="8635896466814033405">"การตั้งค่าเครือข่าย"</string>
+    <string name="network_and_internet_preferences_title" msgid="8635896466814033405">"ค่ากำหนดเครือข่าย"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"การเชื่อมต่อเครือข่าย, อินเทอร์เน็ต, ไร้สาย, อินเทอร์เน็ตมือถือ, wifi, wi-fi, wi fi, เครือข่ายมือถือ, อุปกรณ์เคลื่อนที่, ผู้ให้บริการเครือข่ายมือถือ, 4g, 3g, 2g, lte"</string>
     <string name="turn_on_wifi" msgid="4868116014727533668">"เปิด Wi-Fi"</string>
     <string name="turn_off_wifi" msgid="8861028501067400694">"ปิด Wi-Fi"</string>
@@ -5923,9 +5919,9 @@
   </string-array>
     <string name="tare_dialog_confirm_button_title" msgid="9179397559760203348">"ยืนยัน"</string>
     <string name="dream_preview_button_title" msgid="6637456541851795952">"แสดงตัวอย่าง"</string>
-    <string name="dream_picker_category" msgid="7726447836872744867">"เลือกโปรแกรมรักษาหน้าจอ"</string>
+    <string name="dream_picker_category" msgid="7726447836872744867">"เลือกภาพพักหน้าจอ"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"แสดงข้อมูลเพิ่มเติม"</string>
-    <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"แสดงสิ่งต่างๆ เช่น เวลา สภาพอากาศ หรือข้อมูลอื่นๆ บนโปรแกรมรักษาหน้าจอ"</string>
+    <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"แสดงสิ่งต่างๆ เช่น เวลา สภาพอากาศ หรือข้อมูลอื่นๆ บนภาพพักหน้าจอ"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"การตั้งค่าเพิ่มเติม"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"เลือกโปรแกรมรักษาหน้าจอ"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"เลือกสิ่งที่คุณจะเห็นในหน้าจอเมื่อวางแท็บเล็ตบนแท่นชาร์จ อุปกรณ์อาจใช้พลังงานมากขึ้นเมื่อใช้โปรแกรมรักษาหน้าจอ"</string>
@@ -5954,6 +5950,7 @@
     <string name="find_broadcast_password_dialog_title" msgid="3176988702535737484">"ป้อนรหัสผ่าน"</string>
     <string name="find_broadcast_password_dialog_connection_error" msgid="47873617983439400">"เชื่อมต่อไม่ได้ ลองใหม่"</string>
     <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"รหัสผ่านไม่ถูกต้อง"</string>
+    <string name="find_broadcast_join_broadcast_error" msgid="5486980388774711346">"เข้าร่วมออกอากาศไม่ได้"</string>
     <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"ถือให้คิวอาร์โค้ดอยู่กลางช่องด้านล่างเพื่อเริ่มฟัง"</string>
     <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"คิวอาร์โค้ดมีรูปแบบไม่ถูกต้อง"</string>
 </resources>
