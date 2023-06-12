@@ -132,6 +132,8 @@
         <item name="android:windowSoftInputMode">adjustResize</item>
         <item name="android:clipToPadding">true</item>
         <item name="android:clipChildren">true</item>
+        <item name="android:textDirection">locale</item>
+        <item name="android:layoutDirection">locale</item>
 
         <!-- Redefine the ActionBar style for contentInsetStart -->
         <item name="android:actionBarStyle">@style/Widget.ActionBar</item>
@@ -227,6 +229,9 @@
         <item name="android:fontFamily">@*android:string/config_headlineFontFamilyMedium</item>
     </style>
 
+    <style name="Theme.Panel.Material" parent="Theme.Panel" >
+        <item name="android:switchStyle">@style/Switch.SettingsLib</item>
+    </style>
     <!-- Material theme for the pages containing TabLayout and ViewPager -->
     <style name="Theme.TabTheme" parent="@style/Theme.MaterialComponents.DayNight">
         <item name="colorPrimary">@*android:color/edge_effect_device_default_light</item>
