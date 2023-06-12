@@ -94,6 +94,8 @@ public class UserDictionaryCursorLoader extends CursorLoader {
             hashSet.add(hash);
             result.addRow(new Object[]{id, word, shortcut});
         }
+        // The cursor needs to be closed after use, otherwise it will cause resource leakage
+        candidate.close();
         return result;
     }
 }
