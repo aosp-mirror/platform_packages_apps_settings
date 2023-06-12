@@ -15,9 +15,7 @@
  */
 package com.android.settings.testutils;
 
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 import android.content.Context;
 
@@ -54,8 +52,6 @@ import com.android.settings.vpn2.AdvancedVpnFeatureProvider;
 import com.android.settings.wifi.WifiTrackerLibProvider;
 import com.android.settings.wifi.factory.WifiFeatureProvider;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-
-import org.mockito.Answers;
 
 /**
  * Test util to provide fake FeatureFactory. To use this factory, call {@code setupForTest} in
@@ -100,17 +96,9 @@ public class FakeFeatureFactory extends FeatureFactory {
      * Call this in {@code @Before} method of the test class to use fake factory.
      */
     public static FakeFeatureFactory setupForTest() {
-        final Context context = mock(Context.class, Answers.RETURNS_DEEP_STUBS);
-        sFactory = null;
-        when(context.getString(com.android.settings.R.string.config_featureFactory))
-                .thenReturn(FakeFeatureFactory.class.getName());
-        try {
-            Class c = FakeFeatureFactory.class;
-            when(context.getClassLoader().loadClass(anyString())).thenReturn(c);
-        } catch (ClassNotFoundException e) {
-            // Ignore.
-        }
-        return (FakeFeatureFactory) FakeFeatureFactory.getFactory(context);
+        FakeFeatureFactory factory = new FakeFeatureFactory();
+        setFactory(getAppContext(), factory);
+        return factory;
     }
 
     /**
