@@ -17,32 +17,51 @@
 package com.android.settings.deviceinfo.batteryinfo;
 
 import android.content.Context;
+import android.os.BatteryManager;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.fuelgauge.BatterySettingsFeatureProvider;
+import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.overlay.FeatureFactory;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * A controller that manages the information about battery first use date.
  */
 public class BatteryFirstUseDatePreferenceController extends BasePreferenceController {
 
-    private BatterySettingsFeatureProvider mBatterySettingsFeatureProvider;
+    private final BatterySettingsFeatureProvider mBatterySettingsFeatureProvider;
+    private final BatteryManager mBatteryManager;
+
+    private long mFirstUseDateInMs;
 
     public BatteryFirstUseDatePreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         mBatterySettingsFeatureProvider = FeatureFactory.getFactory(
-                context).getBatterySettingsFeatureProvider(context);
+                context).getBatterySettingsFeatureProvider();
+        mBatteryManager = mContext.getSystemService(BatteryManager.class);
     }
 
     @Override
     public int getAvailabilityStatus() {
-        return mBatterySettingsFeatureProvider.isFirstUseDateAvailable()
+        return mBatterySettingsFeatureProvider.isFirstUseDateAvailable(getFirstUseDate())
                 ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override
     public CharSequence getSummary() {
-        return mBatterySettingsFeatureProvider.getFirstUseDateSummary();
+        return isAvailable()
+                ? BatteryUtils.getBatteryInfoFormattedDate(mFirstUseDateInMs)
+                : null;
+    }
+
+    private long getFirstUseDate() {
+        if (mFirstUseDateInMs == 0L) {
+            final long firstUseDateInSec = mBatteryManager.getLongProperty(
+                    BatteryManager.BATTERY_PROPERTY_FIRST_USAGE_DATE);
+            mFirstUseDateInMs = TimeUnit.MILLISECONDS.convert(firstUseDateInSec, TimeUnit.SECONDS);
+        }
+        return mFirstUseDateInMs;
     }
 }
