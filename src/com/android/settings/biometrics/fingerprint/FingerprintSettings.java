@@ -623,9 +623,9 @@ public class FingerprintSettings extends SubSettings {
                 return; // Activity went away
             }
 
-            final Preference addPreference = findPreference(KEY_FINGERPRINT_ADD);
+            mAddFingerprintPreference = findPreference(KEY_FINGERPRINT_ADD);
 
-            if (addPreference == null) {
+            if (mAddFingerprintPreference == null) {
                 return; // b/275519315 Skip if updateAddPreference() invoke before addPreference()
             }
 
