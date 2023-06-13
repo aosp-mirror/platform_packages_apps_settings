@@ -44,6 +44,7 @@ import android.hardware.biometrics.SensorProperties;
 import android.hardware.fingerprint.FingerprintManager;
 import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
 import android.os.Bundle;
+import android.os.CancellationSignal;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -68,6 +69,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
@@ -91,6 +93,16 @@ public class FingerprintSettingsFragmentTest {
     private FingerprintManager mFingerprintManager;
     @Mock
     private FragmentTransaction mFragmentTransaction;
+
+    @Captor
+    private ArgumentCaptor<CancellationSignal> mCancellationSignalArgumentCaptor =
+            ArgumentCaptor.forClass(CancellationSignal.class);
+    @Captor
+    private ArgumentCaptor<FingerprintManager.AuthenticationCallback>
+            mAuthenticationCallbackArgumentCaptor = ArgumentCaptor.forClass(
+            FingerprintManager.AuthenticationCallback.class);
+
+    private FingerprintAuthenticateSidecar mFingerprintAuthenticateSidecar;
 
     @Before
     public void setUp() {
@@ -146,6 +158,34 @@ public class FingerprintSettingsFragmentTest {
                 false)).isTrue();
     }
 
+    // Test the case when FingerprintAuthenticateSidecar receives an error callback from the
+    // framework or from another authentication client. The cancellation signal should not be set
+    // to null because there may exist a running authentication client.
+    // The signal can only be cancelled from the caller in FingerprintSettings.
+    @Test
+    public void testCancellationSignalLifeCycle() {
+        setUpFragment(false);
+
+        mFingerprintAuthenticateSidecar.setFingerprintManager(mFingerprintManager);
+
+        doNothing().when(mFingerprintManager).authenticate(any(),
+                mCancellationSignalArgumentCaptor.capture(),
+                mAuthenticationCallbackArgumentCaptor.capture(), any(), anyInt());
+
+        mFingerprintAuthenticateSidecar.startAuthentication(1);
+
+        assertThat(mAuthenticationCallbackArgumentCaptor.getValue()).isNotNull();
+        assertThat(mCancellationSignalArgumentCaptor.getValue()).isNotNull();
+
+        // Authentication error callback should not cancel the signal.
+        mAuthenticationCallbackArgumentCaptor.getValue().onAuthenticationError(0, "");
+        assertThat(mFingerprintAuthenticateSidecar.isCancelled()).isFalse();
+
+        // The signal should be cancelled when caller stops the authentication.
+        mFingerprintAuthenticateSidecar.stopAuthentication();
+        assertThat(mFingerprintAuthenticateSidecar.isCancelled()).isTrue();
+    }
+
     private void setUpFragment(boolean showChooseLock) {
         Intent intent = new Intent();
         if (!showChooseLock) {
@@ -165,6 +205,10 @@ public class FingerprintSettingsFragmentTest {
         doReturn(mFragmentTransaction).when(mFragmentTransaction).add(any(), anyString());
         doReturn(fragmentManager).when(mFragment).getFragmentManager();
         doReturn(fragmentManager).when(mActivity).getSupportFragmentManager();
+
+        mFingerprintAuthenticateSidecar = new FingerprintAuthenticateSidecar();
+        doReturn(mFingerprintAuthenticateSidecar).when(fragmentManager).findFragmentByTag(
+                "authenticate_sidecar");
 
         doNothing().when(mFragment).startActivityForResult(any(Intent.class), anyInt());
 
