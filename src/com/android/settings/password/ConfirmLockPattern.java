@@ -512,7 +512,9 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                     }
                 } else if (mForceVerifyPath) {
                     if (isInternalActivity()) {
-                        startVerifyPattern(credential, intent, 0 /* flags */);
+                        final int flags = mRequestWriteRepairModePassword
+                                ? LockPatternUtils.VERIFY_FLAG_WRITE_REPAIR_MODE_PW : 0;
+                        startVerifyPattern(credential, intent, flags);
                         return;
                     }
                 } else {
