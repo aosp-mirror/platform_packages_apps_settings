@@ -105,6 +105,7 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
     protected final Handler mHandler = new Handler();
     protected boolean mFrp;
     protected boolean mRemoteValidation;
+    protected boolean mRequestWriteRepairModePassword;
     protected CharSequence mAlternateButtonText;
     protected BiometricManager mBiometricManager;
     @Nullable protected RemoteLockscreenValidationSession mRemoteLockscreenValidationSession;
@@ -130,6 +131,8 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
                 ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW_HANDLE, false);
         mForceVerifyPath = intent.getBooleanExtra(
                 ChooseLockSettingsHelper.EXTRA_KEY_FORCE_VERIFY, false);
+        mRequestWriteRepairModePassword = intent.getBooleanExtra(
+                ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_WRITE_REPAIR_MODE_PW, false);
 
         if (intent.getBooleanExtra(IS_REMOTE_LOCKSCREEN_VALIDATION, false)) {
             if (FeatureFlagUtils.isEnabled(getContext(),
