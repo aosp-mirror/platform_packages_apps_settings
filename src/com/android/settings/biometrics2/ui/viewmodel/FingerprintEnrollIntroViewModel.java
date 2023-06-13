@@ -16,9 +16,9 @@
 
 package com.android.settings.biometrics2.ui.viewmodel;
 
-import static com.android.settings.biometrics2.ui.model.FingerprintEnrollIntroStatus.FINGERPRINT_ENROLLABLE_ERROR_REACH_MAX;
-import static com.android.settings.biometrics2.ui.model.FingerprintEnrollIntroStatus.FINGERPRINT_ENROLLABLE_OK;
-import static com.android.settings.biometrics2.ui.model.FingerprintEnrollIntroStatus.FINGERPRINT_ENROLLABLE_UNKNOWN;
+import static com.android.settings.biometrics2.ui.model.FingerprintEnrollable.FINGERPRINT_ENROLLABLE_ERROR_REACH_MAX;
+import static com.android.settings.biometrics2.ui.model.FingerprintEnrollable.FINGERPRINT_ENROLLABLE_OK;
+import static com.android.settings.biometrics2.ui.model.FingerprintEnrollable.FINGERPRINT_ENROLLABLE_UNKNOWN;
 
 import android.annotation.IntDef;
 import android.app.Application;
@@ -33,6 +33,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.android.settings.biometrics2.data.repository.FingerprintRepository;
 import com.android.settings.biometrics2.ui.model.EnrollmentRequest;
 import com.android.settings.biometrics2.ui.model.FingerprintEnrollIntroStatus;
+import com.android.settings.biometrics2.ui.model.FingerprintEnrollable;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -44,7 +45,8 @@ public class FingerprintEnrollIntroViewModel extends AndroidViewModel {
 
     private static final String TAG = "FingerprintEnrollIntroViewModel";
     private static final boolean HAS_SCROLLED_TO_BOTTOM_DEFAULT = false;
-    private static final int ENROLLABLE_STATUS_DEFAULT = FINGERPRINT_ENROLLABLE_UNKNOWN;
+    private static final FingerprintEnrollable ENROLLABLE_STATUS_DEFAULT =
+            FINGERPRINT_ENROLLABLE_UNKNOWN;
 
     /**
      * User clicks 'Done' button on this page
@@ -73,7 +75,7 @@ public class FingerprintEnrollIntroViewModel extends AndroidViewModel {
 
     private final MutableLiveData<Boolean> mHasScrolledToBottomLiveData =
             new MutableLiveData<>(HAS_SCROLLED_TO_BOTTOM_DEFAULT);
-    private final MutableLiveData<Integer> mEnrollableStatusLiveData =
+    private final MutableLiveData<FingerprintEnrollable> mEnrollableStatusLiveData =
             new MutableLiveData<>(ENROLLABLE_STATUS_DEFAULT);
     private final MediatorLiveData<FingerprintEnrollIntroStatus> mPageStatusLiveData =
             new MediatorLiveData<>();
@@ -101,7 +103,8 @@ public class FingerprintEnrollIntroViewModel extends AndroidViewModel {
         mPageStatusLiveData.addSource(
                 mHasScrolledToBottomLiveData,
                 hasScrolledToBottom -> {
-                    final Integer enrollableValue = mEnrollableStatusLiveData.getValue();
+                    final FingerprintEnrollable enrollableValue =
+                            mEnrollableStatusLiveData.getValue();
                     final FingerprintEnrollIntroStatus status = new FingerprintEnrollIntroStatus(
                             hasScrolledToBottom,
                             enrollableValue != null ? enrollableValue : ENROLLABLE_STATUS_DEFAULT);
@@ -181,7 +184,7 @@ public class FingerprintEnrollIntroViewModel extends AndroidViewModel {
      * User clicks next button
      */
     public void onNextButtonClick() {
-        final Integer status = mEnrollableStatusLiveData.getValue();
+        final FingerprintEnrollable status = mEnrollableStatusLiveData.getValue();
         switch (status != null ? status : ENROLLABLE_STATUS_DEFAULT) {
             case FINGERPRINT_ENROLLABLE_ERROR_REACH_MAX:
                 mActionLiveData.postValue(FINGERPRINT_ENROLL_INTRO_ACTION_DONE_AND_FINISH);
