@@ -920,7 +920,7 @@ public class FingerprintSettings extends SubSettings {
                     activity.finish();
                 }
             } else if (requestCode == AUTO_ADD_FIRST_FINGERPRINT_REQUEST) {
-                if (resultCode != RESULT_FINISHED || data == null) {
+                if (resultCode != RESULT_FINISHED) {
                     Log.d(TAG, "Add first fingerprint, fail or null data, result:" + resultCode);
                     if (resultCode == BiometricEnrollBase.RESULT_TIMEOUT) {
                         // If "Fingerprint Unlock" is closed because of timeout, notify result code
@@ -932,14 +932,19 @@ public class FingerprintSettings extends SubSettings {
                     return;
                 }
 
-                mToken = data.getByteArrayExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
+                if (mToken == null && data != null) {
+                    mToken = data.getByteArrayExtra(
+                            ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
+                }
                 if (mToken == null) {
                     Log.w(TAG, "Add first fingerprint, null token");
                     finish();
                     return;
                 }
 
-                mChallenge = data.getLongExtra(EXTRA_KEY_CHALLENGE, -1L);
+                if (mChallenge == -1L && data != null) {
+                    mChallenge = data.getLongExtra(EXTRA_KEY_CHALLENGE, -1L);
+                }
                 if (mChallenge == -1L) {
                     Log.w(TAG, "Add first fingerprint, invalid challenge");
                     finish();
