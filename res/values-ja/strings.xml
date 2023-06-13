@@ -65,7 +65,8 @@
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"左耳をペア設定"</string>
     <string name="bluetooth_device_controls_general" msgid="1399214835599665488">"使用可能なすべての補聴器"</string>
     <string name="bluetooth_device_controls_title" msgid="1895676556354697234">"補聴器の設定"</string>
-    <string name="bluetooth_device_controls_summary" msgid="949566933352398337">"音声の出力、ショートカット、補聴器両立性"</string>
+    <!-- no translation found for bluetooth_device_controls_summary (8115767735418425663) -->
+    <skip />
     <string name="bluetooth_device_controls_specific" msgid="7706863288754077107">"このデバイスのみ"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"音声出力"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"音声出力について"</string>
@@ -180,7 +181,7 @@
     <string name="temperature_preferences_title" msgid="5009881556503629058">"温度"</string>
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"週最初の曜日"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"Numbers の設定"</string>
-    <string name="default_string_of_regional_preference" msgid="7662581547334113719">"アプリのデフォルトを使用する"</string>
+    <string name="default_string_of_regional_preference" msgid="3428899072914884203">"デフォルトを使用"</string>
     <string name="celsius_temperature_unit" msgid="8896459071273084507">"摂氏（°C）"</string>
     <string name="fahrenheit_temperature_unit" msgid="1118677820614569801">"華氏（°F）"</string>
     <string name="sunday_first_day_of_week" msgid="7644548348295686051">"日曜日"</string>
@@ -326,6 +327,8 @@
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2899669764446232715">"顔モデルを削除しますか？"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="916131485988121592">"顔モデルは安全かつ完全に削除されます。\n\n削除後に、スマートフォンのロック解除やアプリでの認証を行うには、PIN、パターン、パスワードのいずれかが必要になります。"</string>
     <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"顔モデルは安全かつ完全に削除されます。\n\n削除後に、スマートフォンのロックを解除するには、PIN、パターン、パスワードのいずれかが必要になります。"</string>
+    <string name="security_settings_face_remove_dialog_details_fingerprint" msgid="7609582230650860974">"顔モデルは安全かつ完全に削除されます。\n\n削除後に、スマートフォンのロック解除やアプリでの認証を行うには、指紋、PIN、パターン、パスワードのいずれかが必要になります。"</string>
+    <string name="security_settings_face_remove_dialog_details_fingerprint_conv" msgid="2627374706274503259">"顔モデルは安全かつ完全に削除されます。\n\n削除後に、スマートフォンのロックを解除するには、指紋、PIN、パターン、パスワードのいずれかが必要になります。"</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"顔認証を使用して、スマートフォンのロックを解除します"</string>
     <string name="security_settings_fingerprint" msgid="6387775386189204201">"指紋"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"指紋"</string>
@@ -463,15 +466,14 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"完了"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"これはセンサーではありません"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"スマートフォンの背面にある指紋センサーを人差し指でタッチしてください。"</string>
-    <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title" msgid="6305457126747942642">"指紋の登録を完了できません"</string>
-    <string name="security_settings_fingerprint_enroll_error_unable_to_process_message_setup" msgid="2735739618722623980">"今すぐもう一度試すことも、後で [設定] で指紋を登録することもできます。"</string>
-    <string name="security_settings_fingerprint_enroll_error_unable_to_process_message" msgid="5858386244898601003">"今すぐもう一度試すことも、後で指紋を登録することもできます。"</string>
+    <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title" msgid="6305457126747942642">"指紋の設定を完了できません"</string>
+    <string name="security_settings_fingerprint_enroll_error_unable_to_process_message_setup" msgid="2735739618722623980">"今すぐもう一度試すことも、後で [設定] で指紋を設定することもできます。"</string>
+    <string name="security_settings_fingerprint_enroll_error_unable_to_process_message" msgid="5858386244898601003">"今すぐもう一度試すことも、後で指紋を設定することもできます。"</string>
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"指紋の設定がタイムアウトしました"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message_setup" msgid="8521566666541069383">"指紋の登録は後で [設定] で行えます。"</string>
-    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message_setup" msgid="8140162986046783546">"エラーが発生しました。指紋の登録は後で [設定] で行えます。"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (3534341971920335247) -->
-    <skip />
-    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="4344665784935791640">"エラーが発生しました。指紋の登録は後で行えます。"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message_setup" msgid="8521566666541069383">"後から [設定] で指紋を設定できます。"</string>
+    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message_setup" msgid="8140162986046783546">"エラーが発生しました。後から [設定] で指紋を設定できます。"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="3534341971920335247">"後で指紋を設定できます。"</string>
+    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="4344665784935791640">"エラーが発生しました。後で指紋を設定できます。"</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"別の指紋を登録"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"次へ"</string>
     <string name="security_fingerprint_disclaimer_lockscreen_disabled_1" msgid="294529888220959309">"画面ロック オプションは無効になっています。詳しくは、組織の管理者にお問い合わせください。"</string>
@@ -1972,7 +1974,7 @@
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"着信時のバイブレーション"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"通知時のバイブレーション"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"触覚フィードバック"</string>
-    <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>の使用"</string>
+    <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>を使用"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>を開く"</string>
     <string name="accessibility_service_auto_added_qs_tooltip_content" msgid="2941824314912928072">"「<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>」をクイック設定に追加しました。下にスワイプすると、いつでも ON と OFF を切り替えられます。"</string>
     <string name="accessibility_service_qs_tooltip_content" msgid="6002493441414967868">"画面の上部からクイック設定に「<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>」を追加することもできます"</string>
@@ -2330,8 +2332,7 @@
     <string name="battery_usage_spinner_view_by_apps" msgid="8769276544072098082">"アプリ別に表示"</string>
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"システム別に表示"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
-    <!-- no translation found for battery_cycle_count_footer (3642121059800373545) -->
-    <skip />
+    <string name="battery_cycle_count_footer" msgid="3642121059800373545">"出荷前の品質検査により、初回使用時にサイクル回数がゼロになっていない場合があります"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"プロセスの統計情報"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"プロセスの実行に関する独自の統計情報"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"メモリ使用"</string>
@@ -2843,7 +2844,7 @@
     <string name="network_dashboard_title" msgid="788543070557731240">"ネットワークとインターネット"</string>
     <string name="network_dashboard_summary_mobile" msgid="7750924671970583670">"モバイル、Wi-Fi、アクセス ポイント"</string>
     <string name="network_dashboard_summary_no_mobile" msgid="4022575916334910790">"Wi-Fi、アクセス ポイント"</string>
-    <string name="connected_devices_dashboard_title" msgid="19868275519754895">"デバイス接続"</string>
+    <string name="connected_devices_dashboard_title" msgid="19868275519754895">"接続設定"</string>
     <string name="connected_devices_dashboard_default_summary" msgid="7211769956193710397">"Bluetooth、ペア設定"</string>
     <string name="connected_devices_dashboard_summary" msgid="6927727617078296491">"Bluetooth、運転モード、NFC"</string>
     <string name="connected_devices_dashboard_no_nfc_summary" msgid="8424794257586524040">"Bluetooth、運転モード"</string>
@@ -2955,8 +2956,7 @@
     <string name="keywords_storage_settings" msgid="6018856193950281898">"メモリ, キャッシュ, データ, 削除, 消去, 解放, 空き容量"</string>
     <string name="keywords_bluetooth_settings" msgid="2588159530959868188">"接続済み, デバイス, ヘッドフォン, ヘッドセット, スピーカー, ワイヤレス, ペア設定, イヤフォン, 音楽, メディア"</string>
     <string name="keywords_wallpaper" msgid="7332890404629446192">"背景、テーマ、グリッド、カスタマイズ、パーソナライズ"</string>
-    <!-- no translation found for keywords_styles (3367789885254807447) -->
-    <skip />
+    <string name="keywords_styles" msgid="3367789885254807447">"アイコン, アクセント, 色, ホーム画面, ロック画面, ショートカット, 時計 サイズ"</string>
     <string name="keywords_assist_input" msgid="3086289530227075593">"デフォルト, アシスタント"</string>
     <string name="keywords_default_payment_app" msgid="5162298193637362104">"お支払い, デフォルト"</string>
     <string name="keywords_ambient_display" msgid="3149287105145443697">"通知の着信"</string>
@@ -3236,8 +3236,7 @@
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"プルダウン シェードで、通知を折りたたんで 1 行で表示します"</string>
     <string name="notification_channel_summary_low" msgid="5549662596677692000">"着信音もバイブレーションも無効になります"</string>
     <string name="notification_conversation_summary_low" msgid="6352818857388412326">"着信音もバイブレーションも無効になり会話セクションの下に表示されます"</string>
-    <!-- no translation found for notification_channel_summary_default (1168420867670390611) -->
-    <skip />
+    <string name="notification_channel_summary_default" msgid="1168420867670390611">"デバイスの設定を基に着信音またはバイブレーションが有効になります"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"デバイスのロックが解除されているとき、画面上部にバナーとして通知を表示します"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"「<xliff:g id="APP_NAME">%1$s</xliff:g>」のすべての通知"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"<xliff:g id="APP_NAME">%1$s</xliff:g> のすべての通知"</string>
@@ -4044,8 +4043,7 @@
     <string name="financed_privacy_fully_paid_category" msgid="9221763928564246923">"全額支払い済みの場合:"</string>
     <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"デバイスからすべての制限が削除される"</string>
     <string name="financed_privacy_uninstall_creditor_app" msgid="6339004120497310705">"クレジット プロバイダのアプリをアンインストールできる"</string>
-    <!-- no translation found for financed_device_info (3871860346697308342) -->
-    <skip />
+    <string name="financed_device_info" msgid="3871860346697308342">"ローンで購入したデバイスの情報"</string>
     <string name="default_camera_app_title" msgid="6546248868519965998">"{count,plural, =1{カメラアプリ}other{カメラアプリ}}"</string>
     <string name="default_calendar_app_title" msgid="1870095225089706093">"カレンダー アプリ"</string>
     <string name="default_contacts_app_title" msgid="7740028900741944569">"連絡帳アプリ"</string>
@@ -4162,7 +4160,7 @@
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"このアプリによる Wi-Fi の ON / OFF 切り替え、Wi-Fi ネットワークのスキャンと接続、ネットワークの追加と削除、ローカル専用アクセス ポイントの起動を許可します"</string>
     <string name="change_nfc_tag_apps_title" msgid="91514009058149617">"NFC 経由での起動"</string>
     <string name="change_nfc_tag_apps_detail_switch" msgid="240286205725043561">"NFC スキャン時の起動を許可する"</string>
-    <string name="change_nfc_tag_apps_detail_summary" msgid="7083666814715607078">"NFC タグが検出されたときに起動することを、このアプリに許可します。\nこの権限が有効の場合にタグが検出されると、このアプリが選択肢として表示されます。"</string>
+    <string name="change_nfc_tag_apps_detail_summary" msgid="3338220223868942195">"NFC タグが検出されたときに起動することを、このアプリに許可します。\nこの権限が有効の場合にタグが検出されると、このアプリをオプションとして利用できるようになります。"</string>
     <string name="media_output_title" msgid="8283629315159510680">"メディアの再生先"</string>
     <string name="media_output_label_title" msgid="4139048973886819148">"<xliff:g id="LABEL">%s</xliff:g> を再生:"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"このデバイス"</string>
@@ -4725,36 +4723,20 @@
     <string name="contrast_medium" msgid="384414510709285811">"中"</string>
     <string name="contrast_high" msgid="3988567609694797696">"高"</string>
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"このアプリはウィンドウが 1 つの場合のみ開くことができます"</string>
-    <!-- no translation found for accessibility_feature_full_state_summary (8747170258807179670) -->
-    <skip />
-    <!-- no translation found for generic_accessibility_service_on (2465820044606775562) -->
-    <skip />
-    <!-- no translation found for generic_accessibility_service_off (1752061696695346360) -->
-    <skip />
-    <!-- no translation found for generic_accessibility_feature_shortcut_off (3669343136122187913) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_state_off (8158137799007601475) -->
-    <skip />
-    <!-- no translation found for daltonizer_state_on (131013270022603983) -->
-    <skip />
-    <!-- no translation found for daltonizer_state_off (1162285688069856179) -->
-    <skip />
-    <!-- no translation found for color_inversion_state_on (1160969033636440368) -->
-    <skip />
-    <!-- no translation found for color_inversion_state_off (6925638668080451724) -->
-    <skip />
-    <!-- no translation found for color_inversion_feature_summary (1199876648549627647) -->
-    <skip />
-    <!-- no translation found for magnification_feature_summary (641825267460247848) -->
-    <skip />
-    <!-- no translation found for autoclick_disabled (3213396804955002120) -->
-    <skip />
-    <!-- no translation found for show_captions_disabled (690650956523818755) -->
-    <skip />
-    <!-- no translation found for show_captions_enabled (7089043007924626) -->
-    <skip />
-    <!-- no translation found for live_caption_disabled (3562035026547887366) -->
-    <skip />
-    <!-- no translation found for live_caption_enabled (5269360946200718949) -->
-    <skip />
+    <string name="accessibility_feature_full_state_summary" msgid="8747170258807179670">"<xliff:g id="STATE_0">%1$s</xliff:g> / <xliff:g id="SHORTCUT_STATE">%2$s</xliff:g> / <xliff:g id="SERVICE_SUMMARY">%3$s</xliff:g>"</string>
+    <string name="generic_accessibility_service_on" msgid="2465820044606775562">"サービス: ON"</string>
+    <string name="generic_accessibility_service_off" msgid="1752061696695346360">"サービス: OFF"</string>
+    <string name="generic_accessibility_feature_shortcut_off" msgid="3669343136122187913">"ショートカット: OFF"</string>
+    <string name="accessibility_shortcut_state_off" msgid="8158137799007601475">"OFF"</string>
+    <string name="daltonizer_state_on" msgid="131013270022603983">"ON"</string>
+    <string name="daltonizer_state_off" msgid="1162285688069856179">"OFF"</string>
+    <string name="color_inversion_state_on" msgid="1160969033636440368">"ON"</string>
+    <string name="color_inversion_state_off" msgid="6925638668080451724">"OFF"</string>
+    <string name="color_inversion_feature_summary" msgid="1199876648549627647">"明るい画面が暗くなり、暗い画面が明るくなります"</string>
+    <string name="magnification_feature_summary" msgid="641825267460247848">"画面をすばやくズームインして、コンテンツを拡大できます"</string>
+    <string name="autoclick_disabled" msgid="3213396804955002120">"OFF"</string>
+    <string name="show_captions_disabled" msgid="690650956523818755">"OFF"</string>
+    <string name="show_captions_enabled" msgid="7089043007924626">"ON"</string>
+    <string name="live_caption_disabled" msgid="3562035026547887366">"OFF"</string>
+    <string name="live_caption_enabled" msgid="5269360946200718949">"ON"</string>
 </resources>
