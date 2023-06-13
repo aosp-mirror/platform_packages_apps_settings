@@ -20,15 +20,8 @@ package com.android.settings.fuelgauge;
 public interface BatterySettingsFeatureProvider {
 
     /** Returns true if manufacture date should be shown */
-    boolean isManufactureDateAvailable();
+    boolean isManufactureDateAvailable(long manufactureDateMs);
 
     /** Returns true if first use date should be shown */
-    boolean isFirstUseDateAvailable();
-
-    /** Returns the summary of battery manufacture date */
-    CharSequence getManufactureDateSummary();
-
-    /** Returns the summary of battery first use date */
-    CharSequence getFirstUseDateSummary();
-
+    boolean isFirstUseDateAvailable(long firstUseDateMs);
 }

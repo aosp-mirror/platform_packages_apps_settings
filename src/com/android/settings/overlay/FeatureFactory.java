@@ -33,6 +33,7 @@ import com.android.settings.biometrics2.factory.BiometricsRepositoryProvider;
 import com.android.settings.bluetooth.BluetoothFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
+import com.android.settings.deviceinfo.hardwareinfo.HardwareInfoFeatureProvider;
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
 import com.android.settings.fuelgauge.BatterySettingsFeatureProvider;
 import com.android.settings.fuelgauge.BatteryStatusFeatureProvider;
@@ -110,6 +111,11 @@ public abstract class FeatureFactory {
      */
     public abstract SuggestionFeatureProvider getSuggestionFeatureProvider();
 
+    /**
+     * Retrieves implementation for Hardware Info feature.
+     */
+    public abstract HardwareInfoFeatureProvider getHardwareInfoFeatureProvider();
+
     public abstract SupportFeatureProvider getSupportFeatureProvider(Context context);
 
     public abstract MetricsFeatureProvider getMetricsFeatureProvider();
@@ -125,8 +131,7 @@ public abstract class FeatureFactory {
     /**
      * Gets implementation for Battery Settings provider.
      */
-    public abstract BatterySettingsFeatureProvider getBatterySettingsFeatureProvider(
-            Context context);
+    public abstract BatterySettingsFeatureProvider getBatterySettingsFeatureProvider();
 
     public abstract DashboardFeatureProvider getDashboardFeatureProvider(Context context);
 
