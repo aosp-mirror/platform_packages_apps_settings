@@ -40,6 +40,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.hardware.face.Face;
 import android.hardware.face.FaceManager;
 import android.hardware.face.FaceSensorProperties;
@@ -116,6 +117,7 @@ public class FaceEnrollIntroductionTest {
     private FaceEnrollIntroduction mSpyActivity;
     private FakeFeatureFactory mFakeFeatureFactory;
     private ShadowUserManager mUserManager;
+    private Resources mResources;
 
     enum GateKeeperAction {CALL_SUPER, RETURN_BYTE_ARRAY, THROW_CREDENTIAL_NOT_MATCH}
 
@@ -243,6 +245,14 @@ public class FaceEnrollIntroductionTest {
             faces.add(new Face("Face " + i /* name */, 1 /*faceId */, 1 /* deviceId */));
         }
         when(mFaceManager.getEnrolledFaces(anyInt())).thenReturn(faces);
+    }
+
+    private void setFaceManagerToHaveWithUserId(int numEnrollments, int userId) {
+        List<Face> faces = new ArrayList<>();
+        for (int i = 0; i < numEnrollments; i++) {
+            faces.add(new Face("Face " + i /* name */, 1 /*faceId */, 1 /* deviceId */));
+        }
+        when(mFaceManager.getEnrolledFaces(userId)).thenReturn(faces);
     }
 
     @Test
@@ -544,6 +554,42 @@ public class FaceEnrollIntroductionTest {
         mController.start();
 
         assertThat(mActivity.getPostureCallback()).isNull();
+    }
+
+    @Test
+    public void testFaceEnrollIntroduction_maxFacesNotEnrolled_addUserProfile() {
+        // Enroll a face for one user
+        setFaceManagerToHaveWithUserId(1, 0);
+
+        mContext = spy(ApplicationProvider.getApplicationContext());
+        mResources = spy(mContext.getResources());
+        when(mResources.getInteger(R.integer.suw_max_faces_enrollable)).thenReturn(1);
+
+        mController = Robolectric.buildActivity(TestFaceEnrollIntroduction.class, new Intent());
+        mActivity = (TestFaceEnrollIntroduction) mController.get();
+
+        mController.create();
+
+        // The maximum number of faces is already enrolled
+        int result = mActivity.checkMaxEnrolled();
+        assertThat(result).isEqualTo(R.string.face_intro_error_max);
+
+        // Add another user profile
+        mUserManager.addUser(10, "", 0);
+        final Intent intent = new Intent();
+        intent.putExtra(Intent.EXTRA_USER_ID, 10);
+
+        when(mResources.getInteger(R.integer.suw_max_faces_enrollable)).thenReturn(2);
+
+        mController = Robolectric.buildActivity(TestFaceEnrollIntroduction.class, intent);
+        mActivity = (TestFaceEnrollIntroduction) mController.get();
+
+        mController.create();
+
+        // The maximum number of faces hasn't been enrolled, so a new face
+        // can be enrolled for the added user profile
+        result = mActivity.checkMaxEnrolled();
+        assertThat(result).isEqualTo(0);
     }
 
 }
