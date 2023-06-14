@@ -37,22 +37,19 @@ class FingerprintEnrollEnrollingErrorDialog : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val value = mViewModel!!.errorDialogLiveData.value!!
-        return AlertDialog.Builder(requireActivity())
-                .setTitle(value.errTitle)
-                .setMessage(value.errMsg)
-                .setCancelable(false)
-                .setPositiveButton(
-                        R.string.security_settings_fingerprint_enroll_dialog_ok
-                ) { dialog: DialogInterface, _: Int ->
-                    dialog.dismiss()
-                    mViewModel?.onErrorDialogAction(
-                            if (value.errMsgId == BiometricConstants.BIOMETRIC_ERROR_TIMEOUT)
-                                FINGERPRINT_ERROR_DIALOG_ACTION_SET_RESULT_TIMEOUT
-                            else
-                                FINGERPRINT_ERROR_DIALOG_ACTION_SET_RESULT_FINISH)
-                }
-                .create()
-                .apply { setCanceledOnTouchOutside(false) }
+        return requireActivity().bindFingerprintEnrollEnrollingErrorDialog(
+            title = value.errTitle,
+            message = value.errMsg,
+            positiveButtonClickListener = { dialog: DialogInterface?, _: Int ->
+                dialog?.dismiss()
+                mViewModel?.onErrorDialogAction(
+                    if (value.errMsgId == BiometricConstants.BIOMETRIC_ERROR_TIMEOUT)
+                        FINGERPRINT_ERROR_DIALOG_ACTION_SET_RESULT_TIMEOUT
+                    else
+                        FINGERPRINT_ERROR_DIALOG_ACTION_SET_RESULT_FINISH
+                )
+            }
+        )
     }
 
     override fun onAttach(context: Context) {
@@ -61,3 +58,18 @@ class FingerprintEnrollEnrollingErrorDialog : DialogFragment() {
         super.onAttach(context)
     }
 }
+
+fun Context.bindFingerprintEnrollEnrollingErrorDialog(
+    title: CharSequence?,
+    message: CharSequence?,
+    positiveButtonClickListener: DialogInterface.OnClickListener
+): AlertDialog = AlertDialog.Builder(this)
+    .setTitle(title)
+    .setMessage(message)
+    .setCancelable(false)
+    .setPositiveButton(
+        R.string.security_settings_fingerprint_enroll_dialog_ok,
+        positiveButtonClickListener
+    )
+    .create()
+    .apply { setCanceledOnTouchOutside(false) }
