@@ -172,7 +172,6 @@ public class BatteryEntry {
                     mName = mDefaultPackageName;
                 }
             }
-            getQuickNameIconForUid(uid, packages, loadDataInBackground);
             mTimeInForegroundMs =
                     uidBatteryConsumer.getTimeInStateMs(UidBatteryConsumer.STATE_FOREGROUND);
             mTimeInBackgroundMs =
