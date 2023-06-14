@@ -18,15 +18,15 @@ package com.android.settings.slices;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
+import android.annotation.NonNull;
 import android.content.Context;
 import android.net.Uri;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 import androidx.slice.Slice;
 
 import org.junit.Before;
@@ -80,7 +80,6 @@ public class SlicePreferenceControllerTest {
 
     @Test
     public void onStop_unregisterObserver() {
-        when(mLiveData.hasActiveObservers()).thenReturn(true);
         mController.onStart();
 
         mController.onStop();
@@ -88,20 +87,18 @@ public class SlicePreferenceControllerTest {
     }
 
     @Test
-    public void onStop_noActiveObservers_notUnregisterObserver() {
-        when(mLiveData.hasActiveObservers()).thenReturn(false);
+    public void onStop_unregisterObserverAndHasSecurityException_noCrash() {
+        LiveData<Slice> liveData = new LiveData<Slice>() {
+            @Override
+            public void removeObserver(@NonNull Observer<? super Slice> observer) {
+                super.removeObserver(observer);
+                throw new SecurityException("SecurityException Test");
+            }
+        };
+        mController.mLiveData = liveData;
         mController.onStart();
 
         mController.onStop();
-        verify(mLiveData, never()).removeObserver(mController);
-    }
-
-    @Test
-    public void onStop_notRegisterObserver_notUnregisterObserver() {
-        when(mLiveData.hasActiveObservers()).thenReturn(true);
-
-        mController.onStop();
-        verify(mLiveData, never()).removeObserver(mController);
     }
 
     @Test
