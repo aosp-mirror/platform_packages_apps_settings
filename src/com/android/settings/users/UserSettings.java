@@ -885,7 +885,6 @@ public class UserSettings extends SettingsPreferenceFragment
                 this::startActivityForResult,
                 userIcon,
                 user.name,
-                getString(com.android.settingslib.R.string.profile_info_settings_title),
                 (newUserName, newUserIcon) -> {
                     if (newUserIcon != userIcon) {
                         ThreadUtils.postOnBackgroundThread(() ->
