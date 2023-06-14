@@ -41,7 +41,10 @@ android_test {
     },
 
     // Include all test java files.
-    srcs: ["src/**/*.java"],
+    srcs: [
+        "src/**/*.java",
+        "src/**/*.kt",
+    ],
 
     platform_apis: true,
     test_suites: ["device-tests"],
