@@ -181,7 +181,10 @@ public class NotificationAccessDetails extends AppInfoBase {
 
     public void updatePreference(SwitchPreference preference) {
         final CharSequence label = mPackageInfo.applicationInfo.loadLabel(mPm);
+        final boolean isAllowedCn = mComponentName.flattenToShortString().length()
+                <= NotificationManager.MAX_SERVICE_COMPONENT_NAME_LENGTH;
         preference.setChecked(isServiceEnabled(mComponentName));
+        preference.setEnabled(preference.isChecked() || isAllowedCn);
         preference.setOnPreferenceChangeListener((p, newValue) -> {
             final boolean access = (Boolean) newValue;
             if (!access) {
