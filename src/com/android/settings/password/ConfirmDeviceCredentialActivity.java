@@ -23,6 +23,7 @@ import static android.app.admin.DevicePolicyResources.Strings.Settings.CONFIRM_W
 import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_CONFIRM_PASSWORD;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_CONFIRM_PATTERN;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_CONFIRM_PIN;
+import static android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS;
 
 import android.app.Activity;
 import android.app.KeyguardManager;
@@ -32,6 +33,7 @@ import android.app.trust.TrustManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.hardware.biometrics.BiometricConstants;
 import android.hardware.biometrics.BiometricPrompt;
@@ -379,6 +381,12 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         // Translucent activity that is "visible", so it doesn't complain about finish()
         // not being called before onResume().
         setVisible(true);
+
+        if ((getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK)
+                != Configuration.UI_MODE_NIGHT_YES) {
+            getWindow().getInsetsController().setSystemBarsAppearance(
+                    APPEARANCE_LIGHT_STATUS_BARS, APPEARANCE_LIGHT_STATUS_BARS);
+        }
     }
 
     @Override
