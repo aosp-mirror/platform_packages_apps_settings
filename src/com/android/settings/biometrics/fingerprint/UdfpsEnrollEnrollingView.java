@@ -86,7 +86,7 @@ public class UdfpsEnrollEnrollingView extends GlifLayout {
             UdfpsEnrollHelper udfpsEnrollHelper,
             AccessibilityManager accessibilityManager) {
         mAccessibilityManager = accessibilityManager;
-        initUdfpsEnrollView(mUdfpsEnrollView, udfpsProps, udfpsEnrollHelper);
+        initUdfpsEnrollView(udfpsProps, udfpsEnrollHelper);
 
         if (!mIsLandscape) {
             adjustPortraitPaddings();
@@ -117,8 +117,7 @@ public class UdfpsEnrollEnrollingView extends GlifLayout {
         });
     }
 
-    private void initUdfpsEnrollView(UdfpsEnrollView udfpsEnrollView,
-                                     FingerprintSensorPropertiesInternal udfpsProps,
+    private void initUdfpsEnrollView(FingerprintSensorPropertiesInternal udfpsProps,
                                      UdfpsEnrollHelper udfpsEnrollHelper) {
         DisplayInfo displayInfo = new DisplayInfo();
         mContext.getDisplay().getDisplayInfo(displayInfo);
@@ -141,8 +140,8 @@ public class UdfpsEnrollEnrollingView extends GlifLayout {
                 scaleFactor,
                 displayInfo.rotation);
 
-        udfpsEnrollView.setOverlayParams(params);
-        udfpsEnrollView.setEnrollHelper(udfpsEnrollHelper);
+        mUdfpsEnrollView.setOverlayParams(params);
+        mUdfpsEnrollView.setEnrollHelper(udfpsEnrollHelper);
     }
 
     private void adjustPortraitPaddings() {
