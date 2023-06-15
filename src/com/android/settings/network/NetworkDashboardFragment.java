@@ -181,5 +181,17 @@ public class NetworkDashboardFragment extends DashboardFragment implements
                             null /* metricsFeatureProvider */, null /* fragment */,
                             null /* mobilePlanHost */, null /* LifecycleOwner */);
                 }
+
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    final List<String> keys = super.getNonIndexableKeys(context);
+
+                    MobilePlanPreferenceController mppc =
+                            new MobilePlanPreferenceController(context, null);
+                    if (!mppc.isAvailable()) {
+                        keys.add(MobilePlanPreferenceController.KEY_MANAGE_MOBILE_PLAN);
+                    }
+                    return keys;
+                }
             };
 }
