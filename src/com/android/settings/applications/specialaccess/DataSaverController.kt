@@ -51,7 +51,7 @@ class DataSaverController(context: Context, key: String) : BasePreferenceControl
         preference = screen.findPreference(preferenceKey)!!
     }
 
-    fun init(viewLifecycleOwner: LifecycleOwner) {
+    override fun onViewCreated(viewLifecycleOwner: LifecycleOwner) {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 preference.summary = getUnrestrictedSummary(mContext)
