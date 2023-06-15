@@ -58,8 +58,6 @@ import java.util.List;
 public class NotificationAccessSettings extends EmptyTextSettings {
     private static final String TAG = "NotifAccessSettings";
 
-    private static final int MAX_CN_LENGTH = 500;
-
     private static final ManagedServiceSettings.Config CONFIG =
             new ManagedServiceSettings.Config.Builder()
                     .setTag(TAG)
@@ -135,7 +133,8 @@ public class NotificationAccessSettings extends EmptyTextSettings {
         for (ServiceInfo service : services) {
             final ComponentName cn = new ComponentName(service.packageName, service.name);
             boolean isAllowed = mNm.isNotificationListenerAccessGranted(cn);
-            if (!isAllowed && cn.flattenToString().length() > MAX_CN_LENGTH) {
+            if (!isAllowed && cn.flattenToString().length()
+                    > NotificationManager.MAX_SERVICE_COMPONENT_NAME_LENGTH) {
                 continue;
             }
 
