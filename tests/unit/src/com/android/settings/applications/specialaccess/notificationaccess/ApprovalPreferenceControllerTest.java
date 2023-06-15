@@ -78,6 +78,25 @@ public class ApprovalPreferenceControllerTest {
     }
 
     @Test
+    public void updateState_enabled() {
+        SwitchPreference pref = new SwitchPreference(mContext);
+        mController.updateState(pref);
+        assertThat(pref.isEnabled()).isTrue();
+    }
+
+    @Test
+    public void updateState_invalidCn_disabled() {
+        ComponentName longCn = new ComponentName("com.example.package",
+                com.google.common.base.Strings.repeat("Blah", 150));
+        mController.setCn(longCn);
+        SwitchPreference pref = new SwitchPreference(mContext);
+
+        mController.updateState(pref);
+
+        assertThat(pref.isEnabled()).isFalse();
+    }
+
+    @Test
     public void updateState_checked() {
         when(mNm.isNotificationListenerAccessGranted(mCn)).thenReturn(true);
         SwitchPreference pref = new SwitchPreference(mContext);
