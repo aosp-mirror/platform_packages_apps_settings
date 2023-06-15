@@ -21,15 +21,20 @@ import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_U
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.os.Looper;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.telephony.data.ApnSetting;
 
+import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -63,7 +68,7 @@ public class MmsMessagePreferenceControllerTest {
         when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
         when(mTelephonyManager.createForSubscriptionId(SUB_ID)).thenReturn(mTelephonyManager);
 
-        mPreference = new SwitchPreference(mContext);
+        mPreference = spy(new SwitchPreference(mContext));
         mController = new MmsMessagePreferenceController(mContext, "mms_message");
         mController.init(SUB_ID);
         mPreference.setKey(mController.getPreferenceKey());
@@ -117,5 +122,21 @@ public class MmsMessagePreferenceControllerTest {
         mController.setChecked(false);
         verify(mTelephonyManager).setMobileDataPolicyEnabled(
                 TelephonyManager.MOBILE_DATA_POLICY_MMS_ALWAYS_ALLOWED, false);
+    }
+
+    @Test
+    public void onStart_updatePreferenceUiState() {
+        if (Looper.myLooper() == null) {
+            Looper.prepare();
+        }
+        PreferenceManager preferenceManager = new PreferenceManager(mContext);
+        PreferenceScreen preferenceScreen = preferenceManager.createPreferenceScreen(mContext);
+        preferenceScreen.addPreference(mPreference);
+        mController.displayPreference(preferenceScreen);
+
+        mController.onStart();
+
+        // First is preference initialization, and second is in onStart();
+        verify(mPreference, times(2)).setChecked(anyBoolean());
     }
 }
