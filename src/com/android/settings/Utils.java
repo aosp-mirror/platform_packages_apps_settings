@@ -708,9 +708,13 @@ public final class Utils extends com.android.settingslib.Utils {
         final int userId = bundle.getInt(Intent.EXTRA_USER_ID, UserHandle.myUserId());
         if (userId == LockPatternUtils.USER_FRP) {
             return allowAnyUser ? userId : checkUserOwnsFrpCredential(context, userId);
-        } else {
-            return allowAnyUser ? userId : enforceSameOwner(context, userId);
         }
+        if (userId == LockPatternUtils.USER_REPAIR_MODE) {
+            enforceRepairModeActive(context);
+            // any users can exit repair mode
+            return userId;
+        }
+        return allowAnyUser ? userId : enforceSameOwner(context, userId);
     }
 
     /**
@@ -727,6 +731,16 @@ public final class Utils extends com.android.settingslib.Utils {
         }
         throw new SecurityException("Current user id " + UserHandle.myUserId()
                 + " does not own frp credential.");
+    }
+
+    /**
+     * Throws {@link SecurityException} if repair mode is not active on the device.
+     */
+    private static void enforceRepairModeActive(Context context) {
+        if (LockPatternUtils.isRepairModeActive(context)) {
+            return;
+        }
+        throw new SecurityException("Repair mode is not active on the device.");
     }
 
     /**

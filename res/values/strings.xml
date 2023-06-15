@@ -3501,6 +3501,18 @@
     <!-- Checkbox label to set password as new screen lock if remote device credential validation succeeds. [CHAR LIMIT=43] -->
     <string name="lockpassword_remote_validation_set_password_as_screenlock">Also use password to unlock this device</string>
 
+    <!-- Header shown when pattern needs to be solved before the device exits repair mode. [CHAR LIMIT=100] [DO NOT TRANSLATE] TODO(b/275677027): update with finalized UX string -->
+    <string name="lockpassword_confirm_repair_mode_pattern_header">Verify pattern</string>
+    <!-- Header shown when the pin needs to be solved before the device exits repair mode. [CHAR LIMIT=100] [DO NOT TRANSLATE] TODO(b/275677027): update with finalized UX string -->
+    <string name="lockpassword_confirm_repair_mode_pin_header">Verify PIN</string>
+    <!-- Header shown when the password needs to be solved before the device exits repair mode. [CHAR LIMIT=100] [DO NOT TRANSLATE] TODO(b/275677027): update with finalized UX string -->
+    <string name="lockpassword_confirm_repair_mode_password_header">Verify password</string>
+    <!-- An explanation text that the pattern needs to be solved before the device exits repair mode. [CHAR LIMIT=100] [DO NOT TRANSLATE] TODO(b/275677027): update with finalized UX string -->
+    <string name="lockpassword_confirm_repair_mode_pattern_details" translatable="false">Enter your device pattern enrolled in normal mode to continue</string>
+    <!-- An explanation text that the PIN needs to be solved before the device exits repair mode. [CHAR LIMIT=100] [DO NOT TRANSLATE] TODO(b/275677027): update with finalized UX string -->
+    <string name="lockpassword_confirm_repair_mode_pin_details" translatable="false">Enter your device PIN enrolled in normal mode to continue</string>
+    <!-- An explanation text that the password needs to be solved before the device exits repair mode. [CHAR LIMIT=100] [DO NOT TRANSLATE] TODO(b/275677027): update with finalized UX string -->
+    <string name="lockpassword_confirm_repair_mode_password_details" translatable="false">Enter your device password enrolled in normal mode to continue</string>
 
     <!-- Security & location settings screen, change security method screen instruction if user
          enters incorrect PIN [CHAR LIMIT=30] -->
