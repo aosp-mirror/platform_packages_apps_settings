@@ -74,9 +74,11 @@ import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.CheckBox;
 import android.widget.ImeAwareEditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -517,7 +519,9 @@ public class ChooseLockPassword extends SettingsActivity {
                     || DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC == mPasswordType
                     || DevicePolicyManager.PASSWORD_QUALITY_COMPLEX == mPasswordType;
 
-            setupPasswordRequirementsView(view);
+            final LinearLayout headerLayout = view.findViewById(
+                    R.id.sud_layout_header);
+            setupPasswordRequirementsView(headerLayout);
 
             mPasswordRestrictionView.setLayoutManager(new LinearLayoutManager(getActivity()));
             mPasswordEntry = view.findViewById(R.id.password_entry);
@@ -626,11 +630,33 @@ public class ChooseLockPassword extends SettingsActivity {
             }
         }
 
-        private void setupPasswordRequirementsView(View view) {
-            mPasswordRestrictionView = view.findViewById(R.id.password_requirements_view);
+        private void setupPasswordRequirementsView(@Nullable ViewGroup view) {
+            if (view == null) {
+                return;
+            }
+
+            createHintMessageView(view);
             mPasswordRestrictionView.setLayoutManager(new LinearLayoutManager(getActivity()));
-            mPasswordRequirementAdapter = new PasswordRequirementAdapter();
+            mPasswordRequirementAdapter = new PasswordRequirementAdapter(getActivity());
             mPasswordRestrictionView.setAdapter(mPasswordRequirementAdapter);
+            view.addView(mPasswordRestrictionView);
+        }
+
+        private void createHintMessageView(ViewGroup view) {
+            if (mPasswordRestrictionView != null) {
+                return;
+            }
+
+            final TextView sucTitleView = view.findViewById(R.id.suc_layout_title);
+            final ViewGroup.MarginLayoutParams titleLayoutParams =
+                    (ViewGroup.MarginLayoutParams) sucTitleView.getLayoutParams();
+            mPasswordRestrictionView = new RecyclerView(getActivity());
+            final LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT);
+            lp.setMargins(titleLayoutParams.leftMargin, getResources().getDimensionPixelSize(
+                    R.dimen.password_requirement_view_margin_top), titleLayoutParams.leftMargin, 0);
+            mPasswordRestrictionView.setLayoutParams(lp);
         }
 
         @Override

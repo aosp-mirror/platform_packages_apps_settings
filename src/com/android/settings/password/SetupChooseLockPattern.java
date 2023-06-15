@@ -23,6 +23,7 @@ import static com.android.internal.widget.LockPatternUtils.CREDENTIAL_TYPE_PATTE
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,7 +84,10 @@ public class SetupChooseLockPattern extends ChooseLockPattern {
                 LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             View view = super.onCreateView(inflater, container, savedInstanceState);
             if (!getResources().getBoolean(R.bool.config_lock_pattern_minimal_ui)) {
-                mOptionsButton = view.findViewById(R.id.screen_lock_options);
+                mOptionsButton = new Button(new ContextThemeWrapper(getActivity(),
+                        R.style.SudGlifButton_Tertiary));
+                mOptionsButton.setId(R.id.screen_lock_options);
+                PasswordUtils.setupScreenLockOptionsButton(getActivity(), view, mOptionsButton);
                 mOptionsButton.setOnClickListener((btn) ->
                         ChooseLockTypeDialogFragment.newInstance(mUserId)
                                 .show(getChildFragmentManager(), TAG_SKIP_SCREEN_LOCK_DIALOG));
