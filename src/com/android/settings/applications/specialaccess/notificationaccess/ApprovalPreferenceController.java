@@ -81,6 +81,9 @@ public class ApprovalPreferenceController extends BasePreferenceController {
         final SwitchPreference preference = (SwitchPreference) pref;
         final CharSequence label = mPkgInfo.applicationInfo.loadLabel(mPm);
         preference.setChecked(isServiceEnabled(mCn));
+        final boolean isAllowedCn = mCn.flattenToShortString().length()
+                <= NotificationManager.MAX_SERVICE_COMPONENT_NAME_LENGTH;
+        preference.setEnabled(preference.isChecked() || isAllowedCn);
         preference.setOnPreferenceChangeListener((p, newValue) -> {
             final boolean access = (Boolean) newValue;
             if (!access) {
