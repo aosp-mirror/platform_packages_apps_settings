@@ -342,6 +342,19 @@ public class FingerprintEnrollEnrollingTest {
     }
 
     @Test
+    public void fingerprintUdfpsOverlayEnrollment_udfpsAnimationViewVisibility() {
+        initializeActivityWithoutCreate(TYPE_UDFPS_OPTICAL);
+        when(mMockDisplay.getRotation()).thenReturn(Surface.ROTATION_0);
+        createActivity();
+
+        final UdfpsEnrollView enrollView = mActivity.findViewById(R.id.udfps_animation_view);
+        assertThat(enrollView.getVisibility()).isEqualTo(View.GONE);
+
+        mActivity.onUdfpsOverlayShown();
+        assertThat(enrollView.getVisibility()).isEqualTo(View.VISIBLE);
+    }
+
+    @Test
     public void forwardEnrollProgressEvents() {
         initializeActivityFor(TYPE_UDFPS_OPTICAL);
 
@@ -382,11 +395,11 @@ public class FingerprintEnrollEnrollingTest {
     }
 
     @Test
-    public void forwardEnrollPointerDownEvents() {
+    public void forwardUdfpsEnrollPointerDownEvents() {
         initializeActivityFor(TYPE_UDFPS_OPTICAL);
 
         EnrollListener listener = new EnrollListener(mActivity);
-        mActivity.onPointerDown(0);
+        mActivity.onUdfpsPointerDown(0);
         assertThat(listener.mProgress).isFalse();
         assertThat(listener.mHelp).isFalse();
         assertThat(listener.mAcquired).isFalse();
@@ -395,11 +408,11 @@ public class FingerprintEnrollEnrollingTest {
     }
 
     @Test
-    public void forwardEnrollPointerUpEvents() {
+    public void forwardUdfpsEnrollPointerUpEvents() {
         initializeActivityFor(TYPE_UDFPS_OPTICAL);
 
         EnrollListener listener = new EnrollListener(mActivity);
-        mActivity.onPointerUp(0);
+        mActivity.onUdfpsPointerUp(0);
         assertThat(listener.mProgress).isFalse();
         assertThat(listener.mHelp).isFalse();
         assertThat(listener.mAcquired).isFalse();

@@ -819,16 +819,23 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     }
 
     @Override
-    public void onPointerDown(int sensorId) {
+    public void onUdfpsPointerDown(int sensorId) {
         if (mUdfpsEnrollHelper != null) {
             mUdfpsEnrollHelper.onPointerDown(sensorId);
         }
     }
 
     @Override
-    public void onPointerUp(int sensorId) {
+    public void onUdfpsPointerUp(int sensorId) {
         if (mUdfpsEnrollHelper != null) {
             mUdfpsEnrollHelper.onPointerUp(sensorId);
+        }
+    }
+
+    @Override
+    public void onUdfpsOverlayShown() {
+        if (mCanAssumeUdfps) {
+            findViewById(R.id.udfps_animation_view).setVisibility(View.VISIBLE);
         }
     }
 
