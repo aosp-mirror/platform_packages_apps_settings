@@ -42,6 +42,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
+import com.android.settings.testutils.FakeTimer;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -49,9 +50,12 @@ import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.shadows.ShadowContextWrapper;
+import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.function.Consumer;
 
 @RunWith(RobolectricTestRunner.class)
 public class ScreenFlashNotificationColorDialogFragmentTest {
@@ -68,9 +72,8 @@ public class ScreenFlashNotificationColorDialogFragmentTest {
         mShadowContextWrapper = shadowOf(fragmentActivity);
 
         mCurrentColor = ROSE.mColorInt;
-        mDialogFragment = ScreenFlashNotificationColorDialogFragment.getInstance(
-                mCurrentColor, selectedColor -> mCurrentColor = selectedColor
-        );
+        mDialogFragment = createFragment();
+
         mDialogFragment.show(fragmentActivity.getSupportFragmentManager(), "test");
 
         mAlertDialog = (AlertDialog) mDialogFragment.getDialog();
@@ -91,16 +94,19 @@ public class ScreenFlashNotificationColorDialogFragmentTest {
     }
 
     @Test
-    public void clickNeutral_assertStartPreview() throws InterruptedException {
+    public void clickNeutral_assertStartPreview() {
         performClickOnDialog(BUTTON_NEUTRAL);
-        Thread.sleep(100);
+        getTimerFromFragment().runOneTask();
 
-        Intent captured = getLastCapturedIntent();
-        assertThat(captured.getAction()).isEqualTo(ACTION_FLASH_NOTIFICATION_START_PREVIEW);
-        assertThat(captured.getIntExtra(EXTRA_FLASH_NOTIFICATION_PREVIEW_TYPE, TYPE_SHORT_PREVIEW))
-                .isEqualTo(TYPE_LONG_PREVIEW);
-        assertThat(captured.getIntExtra(EXTRA_FLASH_NOTIFICATION_PREVIEW_COLOR, Color.TRANSPARENT))
-                .isEqualTo(ROSE.mColorInt);
+        assertStartPreview(ROSE.mColorInt);
+    }
+
+    @Test
+    public void clickNeutral_flushAllScheduledTasks_assertStopPreview() {
+        performClickOnDialog(BUTTON_NEUTRAL);
+        getTimerFromFragment().runAllTasks();
+
+        assertStopPreview();
     }
 
     @Test
@@ -116,51 +122,47 @@ public class ScreenFlashNotificationColorDialogFragmentTest {
     }
 
     @Test
-    public void clickNeutralAndPause_assertStopPreview() throws InterruptedException {
+    public void clickNeutralAndPause_assertStopPreview() {
         performClickOnDialog(BUTTON_NEUTRAL);
-        Thread.sleep(100);
+        getTimerFromFragment().runOneTask();
         mDialogFragment.onPause();
-        Thread.sleep(100);
 
-        assertThat(getLastCapturedIntent().getAction())
-                .isEqualTo(ACTION_FLASH_NOTIFICATION_STOP_PREVIEW);
+        assertStopPreview();
     }
 
     @Test
-    public void clickNeutralAndClickNegative_assertStopPreview() throws InterruptedException {
+    public void clickNeutralAndClickNegative_assertStopPreview() {
         performClickOnDialog(BUTTON_NEUTRAL);
-        Thread.sleep(100);
+        getTimerFromFragment().runOneTask();
         performClickOnDialog(BUTTON_NEGATIVE);
-        Thread.sleep(100);
 
-        assertThat(getLastCapturedIntent().getAction())
-                .isEqualTo(ACTION_FLASH_NOTIFICATION_STOP_PREVIEW);
+        assertStopPreview();
     }
 
     @Test
-    public void clickNeutralAndClickPositive_assertStopPreview() throws InterruptedException {
+    public void clickNeutralAndClickPositive_assertStopPreview() {
         performClickOnDialog(BUTTON_NEUTRAL);
-        Thread.sleep(100);
+        getTimerFromFragment().runOneTask();
         performClickOnDialog(BUTTON_POSITIVE);
-        Thread.sleep(100);
 
-        assertThat(getLastCapturedIntent().getAction())
-                .isEqualTo(ACTION_FLASH_NOTIFICATION_STOP_PREVIEW);
+        assertStopPreview();
     }
 
     @Test
-    public void clickNeutralAndClickColor_assertStartPreview() throws InterruptedException {
+    public void clickNeutralAndClickColor_assertStartPreview() {
         performClickOnDialog(BUTTON_NEUTRAL);
-        Thread.sleep(100);
+        getTimerFromFragment().runOneTask();
         checkColorButton(CYAN);
-        Thread.sleep(500);
+        // When changing the color while the preview is running, the fragment will schedule three
+        // tasks: stop the current preview, start the new preview, stop the new preview
+        int numOfPendingTasks = getTimerFromFragment().numOfPendingTasks();
+        // Run all the pending tasks except the last one
+        while (numOfPendingTasks > 1) {
+            getTimerFromFragment().runOneTask();
+            numOfPendingTasks--;
+        }
 
-        Intent captured = getLastCapturedIntent();
-        assertThat(captured.getAction()).isEqualTo(ACTION_FLASH_NOTIFICATION_START_PREVIEW);
-        assertThat(captured.getIntExtra(EXTRA_FLASH_NOTIFICATION_PREVIEW_TYPE, TYPE_SHORT_PREVIEW))
-                .isEqualTo(TYPE_LONG_PREVIEW);
-        assertThat(captured.getIntExtra(EXTRA_FLASH_NOTIFICATION_PREVIEW_COLOR, Color.TRANSPARENT))
-                .isEqualTo(CYAN.mColorInt);
+        assertStartPreview(CYAN.mColorInt);
     }
 
     @Test
@@ -168,6 +170,7 @@ public class ScreenFlashNotificationColorDialogFragmentTest {
         checkColorButton(AZURE);
         performClickOnDialog(BUTTON_NEGATIVE);
 
+        assertThat(getTimerFromFragment()).isNull();
         assertThat(mCurrentColor).isEqualTo(ROSE.mColorInt);
     }
 
@@ -192,5 +195,47 @@ public class ScreenFlashNotificationColorDialogFragmentTest {
                 mShadowContextWrapper.getBroadcastIntents());
         final int size = capturedIntents.size();
         return capturedIntents.get(size - 1);
+    }
+
+    private ScreenFlashNotificationColorDialogFragment createFragment() {
+        ScreenFlashNotificationColorDialogFragmentWithFakeTimer fragment =
+                new ScreenFlashNotificationColorDialogFragmentWithFakeTimer();
+        ReflectionHelpers.setField(fragment, "mCurrentColor", mCurrentColor);
+        ReflectionHelpers.setField(fragment, "mConsumer",
+                (Consumer<Integer>) selectedColor -> mCurrentColor = selectedColor);
+
+        return fragment;
+    }
+
+    private FakeTimer getTimerFromFragment() {
+        return (FakeTimer) ReflectionHelpers.getField(mDialogFragment, "mTimer");
+    }
+
+    private void assertStartPreview(int color) {
+        Intent captured = getLastCapturedIntent();
+        assertThat(captured.getAction()).isEqualTo(ACTION_FLASH_NOTIFICATION_START_PREVIEW);
+        assertThat(captured.getIntExtra(EXTRA_FLASH_NOTIFICATION_PREVIEW_TYPE, TYPE_SHORT_PREVIEW))
+                .isEqualTo(TYPE_LONG_PREVIEW);
+        assertThat(captured.getIntExtra(EXTRA_FLASH_NOTIFICATION_PREVIEW_COLOR, Color.TRANSPARENT))
+                .isEqualTo(color);
+    }
+
+    private void assertStopPreview() {
+        assertThat(getTimerFromFragment().numOfPendingTasks()).isEqualTo(0);
+        assertThat(getLastCapturedIntent().getAction())
+                .isEqualTo(ACTION_FLASH_NOTIFICATION_STOP_PREVIEW);
+    }
+
+    /**
+     * A {@link ScreenFlashNotificationColorDialogFragment} that uses a fake timer so that it won't
+     * create unmanageable timer threads during test.
+     */
+    public static class ScreenFlashNotificationColorDialogFragmentWithFakeTimer extends
+            ScreenFlashNotificationColorDialogFragment {
+
+        @Override
+        Timer createTimer() {
+            return new FakeTimer();
+        }
     }
 }
