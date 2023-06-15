@@ -84,6 +84,36 @@ public class ApprovalPreferenceControllerTest {
     }
 
     @Test
+    public void updateState_enabled() {
+        when(mAppOpsManager.noteOpNoThrow(anyInt(), anyInt(), anyString())).thenReturn(
+                AppOpsManager.MODE_ALLOWED);
+        when(mNm.isNotificationListenerAccessGranted(mCn)).thenReturn(true);
+        RestrictedSwitchPreference pref = new RestrictedSwitchPreference(
+                mContext);
+        pref.setAppOps(mAppOpsManager);
+
+        mController.updateState(pref);
+
+        assertThat(pref.isEnabled()).isTrue();
+    }
+
+    @Test
+    public void updateState_invalidCn_disabled() {
+        ComponentName longCn = new ComponentName("com.example.package",
+                com.google.common.base.Strings.repeat("Blah", 150));
+        mController.setCn(longCn);
+        when(mAppOpsManager.noteOpNoThrow(anyInt(), anyInt(), anyString())).thenReturn(
+                AppOpsManager.MODE_ALLOWED);
+        RestrictedSwitchPreference pref = new RestrictedSwitchPreference(
+                mContext);
+        pref.setAppOps(mAppOpsManager);
+
+        mController.updateState(pref);
+
+        assertThat(pref.isEnabled()).isFalse();
+    }
+
+    @Test
     public void updateState_checked() {
         when(mAppOpsManager.noteOpNoThrow(anyInt(), anyInt(), anyString())).thenReturn(
                 AppOpsManager.MODE_ALLOWED);
