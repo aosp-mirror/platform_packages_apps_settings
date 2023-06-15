@@ -20,6 +20,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -27,6 +28,7 @@ import static org.mockito.Mockito.when;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 
+import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
@@ -75,6 +77,7 @@ public class ToggleScreenMagnificationPreferenceFragmentForSetupWizardTest {
         mFragment =
                 spy(new TestToggleScreenMagnificationPreferenceFragmentForSetupWizard(mContext));
         doReturn(mActivity).when(mFragment).getActivity();
+        doReturn(mock(LifecycleOwner.class)).when(mFragment).getViewLifecycleOwner();
         when(mActivity.getSwitchBar()).thenReturn(mSwitchBar);
         doReturn(mFooterBarMixin).when(mGlifLayoutView).getMixin(FooterBarMixin.class);
     }
