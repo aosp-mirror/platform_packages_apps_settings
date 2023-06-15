@@ -316,12 +316,9 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                         R.string.lockpassword_remote_validation_pattern_details);
             }
             final boolean isStrongAuthRequired = isStrongAuthRequired();
-            if (!mIsManagedProfile) {
-                return isStrongAuthRequired
-                        ? getString(R.string.lockpassword_strong_auth_required_device_pattern)
-                        : getString(R.string.lockpassword_confirm_your_pattern_generic);
-            }
-            return null;
+            return isStrongAuthRequired
+                    ? getString(R.string.lockpassword_strong_auth_required_device_pattern)
+                    : getString(R.string.lockpassword_confirm_your_pattern_generic);
         }
 
         private Object[][] getActiveViews() {
@@ -371,7 +368,10 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
 
                     CharSequence detailsText =
                             mDetailsText == null ? getDefaultDetails() : mDetailsText;
-                    if (detailsText != null) {
+
+                    if (mIsManagedProfile) {
+                        mGlifLayout.getDescriptionTextView().setVisibility(View.GONE);
+                    } else {
                         mGlifLayout.setDescriptionText(detailsText);
                     }
 
