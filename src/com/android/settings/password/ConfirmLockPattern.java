@@ -179,7 +179,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                 //              ability to disable the pattern in L. Remove this block after
                 //              ensuring it's safe to do so. (Note that ConfirmLockPassword
                 //              doesn't have this).
-                if (!mFrp && !mRemoteValidation
+                if (!mFrp && !mRemoteValidation && !mRepairMode
                         && !mLockPatternUtils.isLockPatternEnabled(mEffectiveUserId)) {
                     getActivity().setResult(Activity.RESULT_OK);
                     getActivity().finish();
@@ -308,6 +308,9 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
             if (mFrp) {
                 return getString(R.string.lockpassword_confirm_your_pattern_details_frp);
             }
+            if (mRepairMode) {
+                return getString(R.string.lockpassword_confirm_repair_mode_pattern_details);
+            }
             if (mRemoteValidation) {
                 return getString(
                         R.string.lockpassword_remote_validation_pattern_details);
@@ -402,7 +405,12 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
         }
 
         private String getDefaultHeader() {
-            if (mFrp) return getString(R.string.lockpassword_confirm_your_pattern_header_frp);
+            if (mFrp) {
+                return getString(R.string.lockpassword_confirm_your_pattern_header_frp);
+            }
+            if (mRepairMode) {
+                return getString(R.string.lockpassword_confirm_repair_mode_pattern_header);
+            }
             if (mRemoteValidation) {
                 return getString(R.string.lockpassword_remote_validation_header);
             }
