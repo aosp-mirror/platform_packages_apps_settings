@@ -379,7 +379,7 @@ public class FingerprintEnrollProgressViewModelTest {
 
         // Notify acquire message
         final int value = 33;
-        mCallbackWrapper.mValue.onPointerDown(value);
+        mCallbackWrapper.mValue.onUdfpsPointerDown(value);
         assertThat(liveData.getValue()).isEqualTo(value);
     }
 
@@ -397,7 +397,7 @@ public class FingerprintEnrollProgressViewModelTest {
 
         // Notify acquire message
         final int value = 44;
-        mCallbackWrapper.mValue.onPointerUp(value);
+        mCallbackWrapper.mValue.onUdfpsPointerUp(value);
         assertThat(liveData.getValue()).isEqualTo(value);
     }
 

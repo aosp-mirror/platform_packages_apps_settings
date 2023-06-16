@@ -362,7 +362,8 @@ public final class ChooseLockSettingsHelper {
         }
 
         @NonNull public ChooseLockSettingsHelper build() {
-            if (!mAllowAnyUserId && mUserId != LockPatternUtils.USER_FRP) {
+            if (!mAllowAnyUserId && mUserId != LockPatternUtils.USER_FRP
+                    && mUserId != LockPatternUtils.USER_REPAIR_MODE) {
                 Utils.enforceSameOwner(mActivity, mUserId);
             }
 

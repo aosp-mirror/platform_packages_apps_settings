@@ -284,6 +284,11 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                 return mIsAlpha ? getString(R.string.lockpassword_confirm_your_password_header_frp)
                         : getString(R.string.lockpassword_confirm_your_pin_header_frp);
             }
+            if (mRepairMode) {
+                return mIsAlpha
+                        ? getString(R.string.lockpassword_confirm_repair_mode_password_header)
+                        : getString(R.string.lockpassword_confirm_repair_mode_pin_header);
+            }
             if (mRemoteValidation) {
                 return getString(R.string.lockpassword_remote_validation_header);
             }
@@ -306,6 +311,11 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             if (mFrp) {
                 return mIsAlpha ? getString(R.string.lockpassword_confirm_your_password_details_frp)
                         : getString(R.string.lockpassword_confirm_your_pin_details_frp);
+            }
+            if (mRepairMode) {
+                return mIsAlpha
+                        ? getString(R.string.lockpassword_confirm_repair_mode_password_details)
+                        : getString(R.string.lockpassword_confirm_repair_mode_pin_details);
             }
             if (mRemoteValidation) {
                 return getContext().getString(mIsAlpha

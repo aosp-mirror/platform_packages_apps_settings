@@ -25,11 +25,14 @@ import android.preference.PreferenceManager.OnActivityResultListener;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
+import android.view.View;
 
 import androidx.annotation.CallSuper;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceGroup;
@@ -166,6 +169,15 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             // Upon rotation configuration change we need to update preference states before any
             // editing dialog is recreated (that would happen before onResume is called).
             updatePreferenceStates();
+        }
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        LifecycleOwner viewLifecycleOwner = getViewLifecycleOwner();
+        for (AbstractPreferenceController controller : mControllers) {
+            controller.onViewCreated(viewLifecycleOwner);
         }
     }
 
