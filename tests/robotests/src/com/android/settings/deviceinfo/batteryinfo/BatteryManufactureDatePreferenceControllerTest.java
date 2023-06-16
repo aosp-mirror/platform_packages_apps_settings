@@ -22,6 +22,7 @@ import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_U
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 
@@ -61,7 +62,7 @@ public class BatteryManufactureDatePreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_dateAvailable_returnAvailable() {
-        when(mFactory.batterySettingsFeatureProvider.isManufactureDateAvailable(
+        when(mFactory.batterySettingsFeatureProvider.isManufactureDateAvailable(eq(mContext),
                 anyLong())).thenReturn(true);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
@@ -69,15 +70,15 @@ public class BatteryManufactureDatePreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_dateUnavailable_returnNotAvailable() {
-        when(mFactory.batterySettingsFeatureProvider.isManufactureDateAvailable(anyLong()))
-                .thenReturn(false);
+        when(mFactory.batterySettingsFeatureProvider.isManufactureDateAvailable(eq(mContext),
+                anyLong())).thenReturn(false);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 
     @Test
     public void getSummary_available_returnExpectedDate() {
-        when(mFactory.batterySettingsFeatureProvider.isManufactureDateAvailable(
+        when(mFactory.batterySettingsFeatureProvider.isManufactureDateAvailable(eq(mContext),
                 anyLong())).thenReturn(true);
         mShadowBatteryManager.setLongProperty(BatteryManager.BATTERY_PROPERTY_MANUFACTURING_DATE,
                 1669680000L);
@@ -89,8 +90,8 @@ public class BatteryManufactureDatePreferenceControllerTest {
 
     @Test
     public void getSummary_unavailable_returnNull() {
-        when(mFactory.batterySettingsFeatureProvider.isManufactureDateAvailable(anyLong()))
-                .thenReturn(false);
+        when(mFactory.batterySettingsFeatureProvider.isManufactureDateAvailable(eq(mContext),
+                anyLong())).thenReturn(false);
 
         assertThat(mController.getSummary()).isNull();
     }
