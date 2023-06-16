@@ -202,7 +202,7 @@ public class BluetoothDevicePairingDetailBaseTest {
                 new BluetoothDevicePreference(mContext, mCachedBluetoothDevice,
                         true, BluetoothDevicePreference.SortType.TYPE_FIFO);
         final BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(TEST_DEVICE_ADDRESS);
-        mFragment.mDevicePreferenceMap.put(mCachedBluetoothDevice, preference);
+        mFragment.getDevicePreferenceMap().put(mCachedBluetoothDevice, preference);
 
         when(mCachedBluetoothDevice.isConnected()).thenReturn(true);
         when(mCachedBluetoothDevice.getDevice()).thenReturn(device);
@@ -210,7 +210,7 @@ public class BluetoothDevicePairingDetailBaseTest {
         mFragment.onProfileConnectionStateChanged(mCachedBluetoothDevice,
                 BluetoothProfile.A2DP, BluetoothAdapter.STATE_CONNECTED);
 
-        assertThat(mFragment.mDevicePreferenceMap.size()).isEqualTo(0);
+        assertThat(mFragment.getDevicePreferenceMap().size()).isEqualTo(0);
     }
 
     @Test
@@ -221,7 +221,7 @@ public class BluetoothDevicePairingDetailBaseTest {
                         true, BluetoothDevicePreference.SortType.TYPE_FIFO);
         final BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(TEST_DEVICE_ADDRESS);
         final BluetoothDevice device2 = mBluetoothAdapter.getRemoteDevice(TEST_DEVICE_ADDRESS_B);
-        mFragment.mDevicePreferenceMap.put(mCachedBluetoothDevice, preference);
+        mFragment.getDevicePreferenceMap().put(mCachedBluetoothDevice, preference);
 
         when(mCachedBluetoothDevice.isConnected()).thenReturn(true);
         when(mCachedBluetoothDevice.getDevice()).thenReturn(device);

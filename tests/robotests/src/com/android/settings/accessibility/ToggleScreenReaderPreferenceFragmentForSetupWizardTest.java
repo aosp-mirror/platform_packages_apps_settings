@@ -20,6 +20,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -28,6 +29,7 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
@@ -72,6 +74,7 @@ public class ToggleScreenReaderPreferenceFragmentForSetupWizardTest {
     public void setUp() {
         mFragment = spy(new TestToggleScreenReaderPreferenceFragmentForSetupWizard(mContext));
         doReturn(mActivity).when(mFragment).getActivity();
+        doReturn(mock(LifecycleOwner.class)).when(mFragment).getViewLifecycleOwner();
         when(mActivity.getSwitchBar()).thenReturn(mSwitchBar);
         doReturn(mFooterBarMixin).when(mGlifLayoutView).getMixin(FooterBarMixin.class);
     }
