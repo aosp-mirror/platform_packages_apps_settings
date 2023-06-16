@@ -119,7 +119,7 @@ public class ScreenFlashNotificationColorDialogFragment extends DialogFragment i
         synchronized (this) {
             if (mTimer != null) mTimer.cancel();
 
-            mTimer = new Timer();
+            mTimer = createTimer();
             if (mIsPreview) {
                 mTimer.schedule(getStopTask(), 0);
                 startDelay = BETWEEN_STOP_AND_START_DELAY_MS;
@@ -175,5 +175,9 @@ public class ScreenFlashNotificationColorDialogFragment extends DialogFragment i
         Intent stopIntent = new Intent(ACTION_FLASH_NOTIFICATION_STOP_PREVIEW);
         getContext().sendBroadcast(stopIntent);
         mIsPreview = false;
+    }
+
+    Timer createTimer() {
+        return new Timer();
     }
 }
