@@ -37,6 +37,7 @@ import com.android.settings.spa.app.specialaccess.WifiControlAppListProvider
 import com.android.settings.spa.app.specialaccess.UseFullScreenIntentAppListProvider
 import com.android.settings.spa.core.instrumentation.SpaLogProvider
 import com.android.settings.spa.development.UsageStatsPageProvider
+import com.android.settings.spa.development.compat.PlatformCompatAppListPageProvider
 import com.android.settings.spa.home.HomePageProvider
 import com.android.settings.spa.network.NetworkAndInternetPageProvider
 import com.android.settings.spa.notification.AppListNotificationsPageProvider
@@ -84,6 +85,7 @@ open class SettingsSpaEnvironment(context: Context) : SpaEnvironment(context) {
                 LanguageAndInputPageProvider,
                 AppLanguagesPageProvider,
                 UsageStatsPageProvider,
+                PlatformCompatAppListPageProvider,
                 BackgroundInstalledAppsPageProvider,
                 CloneAppInfoSettingsProvider,
                 NetworkAndInternetPageProvider,
@@ -97,5 +99,5 @@ open class SettingsSpaEnvironment(context: Context) : SpaEnvironment(context) {
     override val logger =
         if (FeatureFlagUtils.isEnabled(context, FeatureFlagUtils.SETTINGS_ENABLE_SPA_METRICS))
             SpaLogProvider
-        else object: SpaLogger {}
+        else object : SpaLogger {}
 }
