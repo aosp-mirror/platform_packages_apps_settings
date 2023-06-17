@@ -30,6 +30,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Binder;
 import android.os.StrictMode;
+import android.os.UserManager;
 import android.provider.Settings;
 import android.provider.SettingsSlicesContract;
 import android.text.TextUtils;
@@ -231,6 +232,14 @@ public class SettingsSliceProvider extends SliceProvider {
                 Log.d(TAG, "Night mode changed, reload theme");
                 mNightMode = nightMode;
                 getContext().getTheme().rebase();
+            }
+
+            // Checking if some semi-sensitive slices are requested by a guest user. If so, will
+            // return an empty slice.
+            final UserManager userManager = getContext().getSystemService(UserManager.class);
+            if (userManager.isGuestUser() && RestrictedSliceUtils.isGuestRestricted(sliceUri)) {
+                Log.i(TAG, "Guest user access denied.");
+                return null;
             }
 
             // Before adding a slice to {@link CustomSliceManager}, please get approval
