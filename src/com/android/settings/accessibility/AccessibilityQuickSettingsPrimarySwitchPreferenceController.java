@@ -130,10 +130,17 @@ public abstract class AccessibilityQuickSettingsPrimarySwitchPreferenceControlle
             return;
         }
 
-        mTooltipWindow = new AccessibilityQuickSettingsTooltipWindow(mContext);
-        mTooltipWindow.setup(getTileTooltipContent(),
-                R.drawable.accessibility_auto_added_qs_tooltip_illustration);
-        mTooltipWindow.showAtTopCenter(mPreference.getSwitch());
+        // TODO (287728819): Move tooltip showing to SystemUI
+        // Since the lifecycle of controller is independent of that of the preference, doing
+        // null check on switch is a temporary solution for the case that switch view
+        // is not ready when we would like to show the tooltip.  If the switch is not ready,
+        // we give up showing the tooltip and also do not reshow it in the future.
+        if (mPreference.getSwitch() != null) {
+            mTooltipWindow = new AccessibilityQuickSettingsTooltipWindow(mContext);
+            mTooltipWindow.setup(getTileTooltipContent(),
+                    R.drawable.accessibility_auto_added_qs_tooltip_illustration);
+            mTooltipWindow.showAtTopCenter(mPreference.getSwitch());
+        }
         AccessibilityQuickSettingUtils.optInValueToSharedPreferences(mContext, tileComponentName);
         mNeedsQSTooltipReshow = false;
     }
