@@ -23,6 +23,7 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.telephony.data.ApnSetting;
 
+import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.network.MobileDataContentObserver;
@@ -38,6 +39,7 @@ public class MmsMessagePreferenceController extends TelephonyTogglePreferenceCon
     private TelephonyManager mTelephonyManager;
     private MobileDataContentObserver mMobileDataContentObserver;
     private PreferenceScreen mScreen;
+    private Preference mPreference;
 
     public MmsMessagePreferenceController(Context context, String key) {
         super(context, key);
@@ -61,6 +63,7 @@ public class MmsMessagePreferenceController extends TelephonyTogglePreferenceCon
     public void onStart() {
         if (mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             mMobileDataContentObserver.register(mContext, mSubId);
+            updateState(mPreference);
         }
     }
 
@@ -75,6 +78,7 @@ public class MmsMessagePreferenceController extends TelephonyTogglePreferenceCon
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mScreen = screen;
+        mPreference = screen.findPreference(getPreferenceKey());
     }
 
 
