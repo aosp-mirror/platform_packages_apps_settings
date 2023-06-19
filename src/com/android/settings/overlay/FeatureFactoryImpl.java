@@ -33,8 +33,6 @@ import com.android.settings.accounts.AccountFeatureProvider;
 import com.android.settings.accounts.AccountFeatureProviderImpl;
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.applications.ApplicationFeatureProviderImpl;
-import com.android.settings.aware.AwareFeatureProvider;
-import com.android.settings.aware.AwareFeatureProviderImpl;
 import com.android.settings.biometrics.face.FaceFeatureProvider;
 import com.android.settings.biometrics.face.FaceFeatureProviderImpl;
 import com.android.settings.biometrics2.factory.BiometricsRepositoryProvider;
@@ -109,7 +107,6 @@ public class FeatureFactoryImpl extends FeatureFactory {
     private PanelFeatureProvider mPanelFeatureProvider;
     private ContextualCardFeatureProvider mContextualCardFeatureProvider;
     private BluetoothFeatureProvider mBluetoothFeatureProvider;
-    private AwareFeatureProvider mAwareFeatureProvider;
     private FaceFeatureProvider mFaceFeatureProvider;
     private BiometricsRepositoryProvider mBiometricsRepositoryProvider;
     private WifiTrackerLibProvider mWifiTrackerLibProvider;
@@ -302,14 +299,6 @@ public class FeatureFactoryImpl extends FeatureFactory {
             mBluetoothFeatureProvider = new BluetoothFeatureProviderImpl(getAppContext());
         }
         return mBluetoothFeatureProvider;
-    }
-
-    @Override
-    public AwareFeatureProvider getAwareFeatureProvider() {
-        if (mAwareFeatureProvider == null) {
-            mAwareFeatureProvider = new AwareFeatureProviderImpl();
-        }
-        return mAwareFeatureProvider;
     }
 
     @Override
