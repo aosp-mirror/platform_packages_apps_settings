@@ -20,9 +20,8 @@ import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.SparseIntArray;
-import android.view.View;
 
-import androidx.annotation.IdRes;
+import androidx.annotation.DrawableRes;
 import androidx.annotation.IntDef;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -134,7 +133,8 @@ public abstract class BatteryTip implements Comparable<BatteryTip>, Parcelable {
 
     public abstract CharSequence getSummary(Context context);
 
-    @IdRes
+    /** Gets the drawable resource id for the icon. */
+    @DrawableRes
     public abstract int getIconId();
 
     /**
@@ -162,19 +162,10 @@ public abstract class BatteryTip implements Comparable<BatteryTip>, Parcelable {
         preference.setTitle(getTitle(context));
         preference.setSummary(getSummary(context));
         preference.setIcon(getIconId());
-        @IdRes int iconTintColorId = getIconTintColorId();
-        if (iconTintColorId != View.NO_ID) {
-            preference.getIcon().setTint(context.getColor(iconTintColorId));
-        }
         final CardPreference cardPreference = castToCardPreferenceSafely(preference);
         if (cardPreference != null) {
             cardPreference.resetLayoutState();
         }
-    }
-
-    /** Returns the color resid for tinting {@link #getIconId()} or {@link View#NO_ID} if none. */
-    public @IdRes int getIconTintColorId() {
-        return View.NO_ID;
     }
 
     public boolean shouldShowDialog() {
