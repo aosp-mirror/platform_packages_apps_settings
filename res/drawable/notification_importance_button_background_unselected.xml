@@ -15,10 +15,11 @@
   limitations under the License.
   -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
-       xmlns:androidprv="http://schemas.android.com/apk/prv/res/android"
        android:shape="rectangle">
+    <solid
+        android:color="?attr/notification_importance_button_background_color_unselected"/>
     <stroke
         android:width="1dp"
-        android:color="?androidprv:attr/materialColorOutlineVariant"/>
+        android:color="?attr/notification_importance_button_border_color_unselected"/>
     <corners android:radius="@dimen/rect_button_radius" />
 </shape>
