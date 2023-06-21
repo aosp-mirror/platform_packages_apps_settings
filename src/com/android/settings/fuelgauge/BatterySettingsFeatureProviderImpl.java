@@ -16,16 +16,18 @@
 
 package com.android.settings.fuelgauge;
 
+import android.content.Context;
+
 /** Feature provider implementation for battery settings usage. */
 public class BatterySettingsFeatureProviderImpl implements BatterySettingsFeatureProvider {
 
     @Override
-    public boolean isManufactureDateAvailable(long manufactureDateMs) {
+    public boolean isManufactureDateAvailable(Context context, long manufactureDateMs) {
         return false;
     }
 
     @Override
-    public boolean isFirstUseDateAvailable(long firstUseDateMs) {
+    public boolean isFirstUseDateAvailable(Context context, long firstUseDateMs) {
         return false;
     }
 }
