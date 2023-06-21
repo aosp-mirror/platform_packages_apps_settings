@@ -75,6 +75,7 @@ public class NotificationVolumePreferenceController extends
 
         updateEffectsSuppressor();
         selectPreferenceIconState();
+        updateContentDescription();
         updateEnabledState();
     }
 
@@ -120,23 +121,32 @@ public class NotificationVolumePreferenceController extends
     }
 
     @Override
-    protected void selectPreferenceIconState() {
+    protected int getEffectiveRingerMode() {
+        if (mVibrator == null && mRingerMode == AudioManager.RINGER_MODE_VIBRATE) {
+            return AudioManager.RINGER_MODE_SILENT;
+        } else if (mRingerMode == AudioManager.RINGER_MODE_NORMAL) {
+            if (mHelper.getStreamVolume(AudioManager.STREAM_NOTIFICATION) == 0) {
+                // Ring is in normal, but notification is in silent.
+                return AudioManager.RINGER_MODE_SILENT;
+            }
+        }
+        return mRingerMode;
+    }
+
+    @Override
+    protected void updateContentDescription() {
         if (mPreference != null) {
-            if (mVibrator != null && mRingerMode == AudioManager.RINGER_MODE_VIBRATE) {
-                mMuteIcon = mVibrateIconId;
-                mPreference.showIcon(mVibrateIconId);
-            } else if (mRingerMode == AudioManager.RINGER_MODE_SILENT
-                    || mVibrator == null && mRingerMode == AudioManager.RINGER_MODE_VIBRATE) {
-                mMuteIcon = mSilentIconId;
-                mPreference.showIcon(mSilentIconId);
-            } else { // ringmode normal: could be that we are still silent
-                if (mHelper.getStreamVolume(AudioManager.STREAM_NOTIFICATION) == 0) {
-                    // ring is in normal, but notification is in silent
-                    mMuteIcon = mSilentIconId;
-                    mPreference.showIcon(mSilentIconId);
-                } else {
-                    mPreference.showIcon(mNormalIconId);
-                }
+            int ringerMode = getEffectiveRingerMode();
+            if (ringerMode == AudioManager.RINGER_MODE_VIBRATE) {
+                mPreference.updateContentDescription(
+                        mContext.getString(
+                                R.string.notification_volume_content_description_vibrate_mode));
+            } else if (ringerMode == AudioManager.RINGER_MODE_SILENT) {
+                mPreference.updateContentDescription(
+                        mContext.getString(R.string.volume_content_description_silent_mode,
+                                mPreference.getTitle()));
+            } else {
+                mPreference.updateContentDescription(mPreference.getTitle());
             }
         }
     }
@@ -169,6 +179,7 @@ public class NotificationVolumePreferenceController extends
                     break;
                 case NOTIFICATION_VOLUME_CHANGED:
                     selectPreferenceIconState();
+                    updateContentDescription();
                     updateEnabledState();
                     break;
             }
