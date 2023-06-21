@@ -77,8 +77,10 @@ public class ImportancePreference extends Preference {
 
     private void init(Context context) {
         mContext = context;
-        selectedBackground = mContext.getDrawable(R.drawable.button_border_selected);
-        unselectedBackground = mContext.getDrawable(R.drawable.button_border_unselected);
+        selectedBackground = mContext.getDrawable(
+                R.drawable.notification_importance_button_background_selected);
+        unselectedBackground = mContext.getDrawable(
+                R.drawable.notification_importance_button_background_unselected);
         setLayoutResource(R.layout.notif_importance_preference);
     }
 
@@ -152,12 +154,14 @@ public class ImportancePreference extends Preference {
         });
     }
 
-    private ColorStateList getAccentTint() {
-        return Utils.getColorAccent(getContext());
+    private ColorStateList getSelectedColor() {
+        return Utils.getColorAttr(getContext(),
+                R.attr.notification_importance_button_foreground_color_selected);
     }
 
-    private ColorStateList getRegularTint() {
-        return Utils.getColorAttr(getContext(), android.R.attr.textColorPrimary);
+    private ColorStateList getUnselectedColor() {
+        return Utils.getColorAttr(getContext(),
+                R.attr.notification_importance_button_foreground_color_unselected);
     }
 
     void setImportanceSummary(ViewGroup parent, int importance, boolean fromUser) {
@@ -167,25 +171,25 @@ public class ImportancePreference extends Preference {
             TransitionManager.beginDelayedTransition(parent, transition);
         }
 
-        ColorStateList colorAccent = getAccentTint();
-        ColorStateList colorNormal = getRegularTint();
+        ColorStateList colorSelected = getSelectedColor();
+        ColorStateList colorUnselected = getUnselectedColor();
 
         if (importance >= IMPORTANCE_DEFAULT) {
             parent.findViewById(R.id.silence_summary).setVisibility(GONE);
-            ((ImageView) parent.findViewById(R.id.silence_icon)).setImageTintList(colorNormal);
-            ((TextView) parent.findViewById(R.id.silence_label)).setTextColor(colorNormal);
+            ((ImageView) parent.findViewById(R.id.silence_icon)).setImageTintList(colorUnselected);
+            ((TextView) parent.findViewById(R.id.silence_label)).setTextColor(colorUnselected);
 
-            ((ImageView) parent.findViewById(R.id.alert_icon)).setImageTintList(colorAccent);
-            ((TextView) parent.findViewById(R.id.alert_label)).setTextColor(colorAccent);
+            ((ImageView) parent.findViewById(R.id.alert_icon)).setImageTintList(colorSelected);
+            ((TextView) parent.findViewById(R.id.alert_label)).setTextColor(colorSelected);
 
             parent.findViewById(R.id.alert_summary).setVisibility(VISIBLE);
         } else {
             parent.findViewById(R.id.alert_summary).setVisibility(GONE);
-            ((ImageView) parent.findViewById(R.id.alert_icon)).setImageTintList(colorNormal);
-            ((TextView) parent.findViewById(R.id.alert_label)).setTextColor(colorNormal);
+            ((ImageView) parent.findViewById(R.id.alert_icon)).setImageTintList(colorUnselected);
+            ((TextView) parent.findViewById(R.id.alert_label)).setTextColor(colorUnselected);
 
-            ((ImageView) parent.findViewById(R.id.silence_icon)).setImageTintList(colorAccent);
-            ((TextView) parent.findViewById(R.id.silence_label)).setTextColor(colorAccent);
+            ((ImageView) parent.findViewById(R.id.silence_icon)).setImageTintList(colorSelected);
+            ((TextView) parent.findViewById(R.id.silence_label)).setTextColor(colorSelected);
             parent.findViewById(R.id.silence_summary).setVisibility(VISIBLE);
         }
     }

@@ -213,11 +213,19 @@ abstract class PreviewSizeSeekBarController extends BasePreferenceController imp
             return;
         }
 
-        mTooltipWindow = new AccessibilityQuickSettingsTooltipWindow(mContext);
-        mTooltipWindow.setup(getTileTooltipContent(),
-                R.drawable.accessibility_auto_added_qs_tooltip_illustration);
-        mTooltipWindow.showAtTopCenter(mSeekBarPreference.getSeekbar());
-        AccessibilityQuickSettingUtils.optInValueToSharedPreferences(mContext, tileComponentName);
+        // TODO (287728819): Move tooltip showing to SystemUI
+        // Since the lifecycle of controller is independent of that of the preference, doing
+        // null check on seekbar is a temporary solution for the case that seekbar view
+        // is not ready when we would like to show the tooltip.  If the seekbar is not ready,
+        // we give up showing the tooltip and also do not reshow it in the future.
+        if (mSeekBarPreference.getSeekbar() != null) {
+            mTooltipWindow = new AccessibilityQuickSettingsTooltipWindow(mContext);
+            mTooltipWindow.setup(getTileTooltipContent(),
+                    R.drawable.accessibility_auto_added_qs_tooltip_illustration);
+            mTooltipWindow.showAtTopCenter(mSeekBarPreference.getSeekbar());
+        }
+        AccessibilityQuickSettingUtils.optInValueToSharedPreferences(mContext,
+                tileComponentName);
         mNeedsQSTooltipReshow = false;
     }
 
