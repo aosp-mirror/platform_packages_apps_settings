@@ -146,6 +146,7 @@ public class WifiTetherSettingsTest {
         doReturn(mTetheringManager).when(mContext).getSystemService(Context.TETHERING_SERVICE);
         doReturn(WIFI_REGEXS).when(mTetheringManager).getTetherableWifiRegexs();
         doReturn(mUserManager).when(mContext).getSystemService(Context.USER_SERVICE);
+        doReturn(true).when(mUserManager).isAdminUser();
         when(mWifiRestriction.isTetherAvailable(mContext)).thenReturn(true);
         when(mWifiRestriction.isHotspotAvailable(mContext)).thenReturn(true);
 
@@ -185,9 +186,21 @@ public class WifiTetherSettingsTest {
     }
 
     @Test
+    @Config(shadows = ShadowRestrictedDashboardFragment.class)
+    public void onCreate_uiIsRestricted_shouldNotGetViewModel() {
+        mSettings.mWifiTetherViewModel = null;
+        when(mWifiRestriction.isHotspotAvailable(mContext)).thenReturn(false);
+
+        mSettings.onCreate(null);
+
+        assertThat(mSettings.mWifiTetherViewModel).isNull();
+    }
+
+    @Test
     @Config(shadows = ShadowFragment.class)
     public void onStart_uiIsRestricted_removeAllPreferences() {
         spyWifiTetherSettings();
+        mSettings.mUnavailable = true;
 
         mSettings.onStart();
 
@@ -306,11 +319,19 @@ public class WifiTetherSettingsTest {
     }
 
     @Test
-    public void isPageSearchEnabled_canShowWifiHotspot_returnTrue() {
+    public void isPageSearchEnabled_allReady_returnTrue() {
         setCanShowWifiHotspotCached(true);
 
         assertThat(WifiTetherSettings.SEARCH_INDEX_DATA_PROVIDER.isPageSearchEnabled(mContext))
                 .isTrue();
+    }
+
+    @Test
+    public void isPageSearchEnabled_isNotAdminUser_returnFalse() {
+        doReturn(false).when(mUserManager).isAdminUser();
+
+        assertThat(WifiTetherSettings.SEARCH_INDEX_DATA_PROVIDER.isPageSearchEnabled(mContext))
+                .isFalse();
     }
 
     @Test
@@ -418,6 +439,11 @@ public class WifiTetherSettingsTest {
         @Implementation
         public void onCreate(Bundle icicle) {
             // do nothing
+        }
+
+        @Implementation
+        public boolean isUiRestricted() {
+            return false;
         }
     }
 }
