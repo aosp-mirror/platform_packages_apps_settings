@@ -243,7 +243,7 @@ public class DefaultAutofillPicker extends DefaultAppPickerFragment {
         }
         final CharSequence appName = appInfo.loadLabel();
         final String message = getContext().getString(
-                R.string.autofill_confirmation_message, appName);
+                R.string.autofill_confirmation_message, Html.escapeHtml(appName));
         return Html.fromHtml(message);
     }
 

@@ -32,6 +32,7 @@ import com.android.settingslib.widget.LayoutPreference;
  * The controller of the reset button in the text and reading options page.
  */
 class TextReadingResetController extends BasePreferenceController {
+    private boolean mIsVisible;
     private final View.OnClickListener mOnResetClickListener;
 
     @EntryPoint
@@ -65,6 +66,12 @@ class TextReadingResetController extends BasePreferenceController {
                         AccessibilityStatsLogUtils.convertToEntryPoint(mEntryPoint));
             }
         });
+
+        setVisible(screen, getPreferenceKey(), mIsVisible);
+    }
+
+    void setVisible(boolean isVisible) {
+        mIsVisible = isVisible;
     }
 
     /**

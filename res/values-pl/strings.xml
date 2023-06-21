@@ -481,6 +481,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Skonfiguruj odcisk palca"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Zezwól na odblokowywanie odciskiem palca"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Korzystanie z odcisku palca"</string>
+    <string name="security_settings_fingerprint_settings_footer_learn_more" msgid="2508322993726483601">"Więcej informacji o odblokowywaniu odciskiem palca"</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"Używaj odcisku palca do odblokowywania tabletu i potwierdzania tożsamości, na przykład podczas logowania się w aplikacjach lub zatwierdzania zakupów."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Używaj odcisku palca do odblokowywania urządzenia i potwierdzania tożsamości, na przykład podczas logowania się w aplikacjach lub zatwierdzania zakupów."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"Używaj odcisku palca do odblokowywania telefonu i potwierdzania tożsamości, na przykład podczas logowania się w aplikacjach lub zatwierdzania zakupów."</string>
@@ -535,7 +536,29 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"Gdy poczujesz wibracje, podnieś palec"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"Spróbuj ponownie w słabiej oświetlonym miejscu"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"Osiągnięto maksymalną liczbę prób"</string>
+    <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"Odblokowywanie za pomocą zegarka"</string>
+    <string name="biometric_settings_intro_with_activeunlock" product="default" msgid="6583248094453119314">"Jeśli ustawisz rozpoznawanie twarzy i odblokowywanie odciskiem palca, w ciemnym otoczeniu oraz w sytuacji, gdy będziesz mieć maskę, pojawi się prośba o użycie odcisku palca.\n\nJeśli odcisk palca lub twarz nie zostaną rozpoznane, możesz odblokować urządzenie zegarkiem."</string>
+    <string name="biometric_settings_intro_with_activeunlock" product="tablet" msgid="8930396405433023076">"Jeśli ustawisz rozpoznawanie twarzy i odblokowywanie odciskiem palca, w ciemnym otoczeniu oraz w sytuacji, gdy będziesz mieć maskę, na tablecie pojawi się prośba o użycie odcisku palca.\n\nJeśli odcisk palca lub twarz nie zostaną rozpoznane, możesz odblokować urządzenie zegarkiem."</string>
+    <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"Jeśli odcisk palca nie zostanie rozpoznany, możesz odblokować telefon zegarkiem."</string>
+    <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"Jeśli twarz nie zostanie rozpoznana, możesz odblokować urządzenie zegarkiem."</string>
+    <string name="biometric_settings_use_face_or_watch_preference_summary" msgid="4969685200340861744">"Przy użyciu rozpoznawania twarzy lub zegarka"</string>
+    <string name="biometric_settings_use_fingerprint_or_watch_preference_summary" msgid="2425628094194828407">"Przy użyciu odcisku palca lub zegarka"</string>
+    <string name="biometric_settings_use_face_fingerprint_or_watch_preference_summary" msgid="188805113048792007">"Przy użyciu rozpoznawania twarzy, odcisku palca lub zegarka"</string>
+    <string name="biometric_settings_use_watch_preference_summary" msgid="2311453276747908475">"Przy użyciu zegarka"</string>
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_title" msgid="8776904312629209685">"Skonfiguruj rozpoznawanie twarzy lub odcisk palca"</string>
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_message" msgid="1669326067732567911">"Jeśli twarz lub odcisk palca nie zostaną rozpoznane, możesz odblokować urządzenie zegarkiem"</string>
+    <string name="security_settings_activeunlock_require_fingerprint_setup_title" msgid="6703703635881050623">"Najpierw skonfiguruj odblokowywanie odciskiem palca"</string>
+    <string name="security_settings_activeunlock_require_fingerprint_setup_message" msgid="4966813766409918392">"Jeśli odcisk palca nie zostanie rozpoznany, możesz odblokować urządzenie zegarkiem"</string>
+    <string name="security_settings_activeunlock_require_face_setup_title" msgid="1428795376597739880">"Najpierw skonfiguruj rozpoznawanie twarzy"</string>
+    <string name="security_settings_activeunlock_require_face_setup_message" msgid="8904070645721933399">"Jeśli twarz nie zostanie rozpoznana, możesz odblokować urządzenie zegarkiem"</string>
+    <string name="security_settings_activeunlock_biometric_setup" msgid="8876454457817955475">"Skonfiguruj"</string>
+    <string name="security_settings_fingerprint_single_watch_preference_summary" msgid="6464470096384164369">"Dodano odcisk palca i <xliff:g id="WATCH">%s</xliff:g>"</string>
+    <string name="security_settings_fingerprint_multiple_watch_preference_summary" msgid="2259261786932097004">"Dodano odciski palca i <xliff:g id="WATCH">%s</xliff:g>"</string>
+    <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Dodano skan twarzy i <xliff:g id="WATCH">%s</xliff:g>"</string>
+    <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Dodano skan twarzy, odcisk palca i <xliff:g id="WATCH">%s</xliff:g>"</string>
+    <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Dodano skan twarzy, odciski palca i <xliff:g id="WATCH">%s</xliff:g>"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Rozpoznawanie twarzy i odcisk palca"</string>
+    <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Rozpoznawanie twarzy i odcisku palca w profilu służbowym"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"Kliknij, aby skonfigurować"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Dodano skany twarzy i odciski palca"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"Dodano skan twarzy i odcisk palca"</string>
@@ -565,9 +588,9 @@
     <string name="security_settings_sfps_enroll_find_sensor_title" msgid="8327884364635804363">"Dotknij przycisku zasilania, ale go nie naciskaj"</string>
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"Jak skonfigurować odcisk palca"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"Znajduje się z tyłu telefonu. Użyj palca wskazującego."</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="tablet" msgid="3861487880213212565">"Czytnik linii papilarnych znajduje się na przycisku zasilania. To płaski przycisk przy uniesionym przycisku głośności na krawędzi tabletu.\n\nNaciśnięcie przycisku zasilania wyłącza ekran."</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="device" msgid="700314363994033893">"Czytnik linii papilarnych znajduje się na przycisku zasilania. To płaski przycisk przy uniesionym przycisku głośności na krawędzi urządzenia.\n\nNaciśnięcie przycisku zasilania wyłącza ekran."</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="default" msgid="5857063580604638331">"Czytnik linii papilarnych znajduje się na przycisku zasilania. To płaski przycisk przy uniesionym przycisku głośności na krawędzi telefonu.\n\nNaciśnięcie przycisku zasilania wyłącza ekran."</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="tablet" msgid="6345521315059783195">"Czytnik linii papilarnych znajduje się na przycisku zasilania. To płaski przycisk przy wypukłym przycisku głośności na krawędzi tabletu."</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="device" msgid="5548015866784733975">"Czytnik linii papilarnych znajduje się na przycisku zasilania. To płaski przycisk przy wypukłym przycisku głośności na krawędzi urządzenia."</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="default" msgid="1977903336177861081">"Czytnik linii papilarnych znajduje się na przycisku zasilania. To płaski przycisk przy wypukłym przycisku głośności na krawędzi telefonu."</string>
     <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"Czytnik linii papilarnych znajduje się na ekranie. Na następnym ekranie zarejestrujesz odcisk palca."</string>
     <string name="security_settings_udfps_enroll_find_sensor_start_button" msgid="3172268783620336357">"Rozpocznij"</string>
     <string name="security_settings_udfps_enroll_a11y" msgid="1899453114050362235">"Przesuwaj palcem po ekranie, by znaleźć czytnik. Połóż palec na czytniku linii papilarnych i przytrzymaj."</string>
@@ -602,8 +625,11 @@
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="6064618417107305796">"Możesz teraz używać odcisku palca do odblokowywania tabletu oraz potwierdzania tożsamości, na przykład podczas logowania się w aplikacjach i zatwierdzania zakupów"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="1948980056333872057">"Możesz teraz używać odcisku palca do odblokowywania urządzenia oraz weryfikacji tożsamości, na przykład podczas logowania się w aplikacjach i zatwierdzania zakupów"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="3084541878035403475">"Możesz teraz używać odcisku palca do odblokowywania telefonu oraz potwierdzania tożsamości, na przykład podczas logowania się w aplikacjach i zatwierdzania zakupów"</string>
-    <string name="security_settings_require_screen_on_to_auth_title" msgid="6393244827110756927">"Odblokowuj tylko przy włączonym ekranie"</string>
-    <string name="security_settings_require_screen_on_to_auth_description" msgid="8555651197315796037">"Zanim odblokujesz urządzenie odciskiem palca, ekran musi zostać włączony. Dzięki temu trudniej przypadkowo odblokować urządzenie."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="tablet" msgid="308213612040535580">"Możesz teraz używać odcisku palca do odblokowywania tabletu oraz potwierdzania swojej tożsamości, na przykład podczas logowania się w aplikacjach i zatwierdzania zakupów. \n\nDodaj kolejny odcisk palca, aby ułatwić sobie odblokowywanie, jeśli zdarza Ci się trzymać tablet na różne sposoby."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="device" msgid="911541337099737104">"Możesz teraz używać odcisku palca do odblokowywania urządzenia oraz potwierdzania swojej tożsamości, na przykład podczas logowania się w aplikacjach i zatwierdzania zakupów.\n\nDodaj kolejny odcisk palca, aby ułatwić sobie odblokowywanie, jeśli zdarza Ci się trzymać urządzenie na różne sposoby."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="default" msgid="5261993991973265283">"Możesz teraz używać odcisku palca do odblokowywania telefonu oraz potwierdzania swojej tożsamości, na przykład podczas logowania się w aplikacjach i zatwierdzania zakupów.\n\nDodaj kolejny odcisk palca, aby ułatwić sobie odblokowywanie, jeśli zdarza Ci się trzymać telefon na różne sposoby."</string>
+    <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"Dotknij, aby odblokować w dowolnym momencie"</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"Dotknięcie czujnika powoduje odblokowanie urządzenia nawet przy wyłączonym ekranie. W ten sposób łatwo przypadkowo odblokować urządzenie."</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Ekran, odblokowywanie"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Później"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Podnieś i przyłóż ponownie"</string>
@@ -662,6 +688,7 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Gotowe"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Ups, to nie jest czytnik"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Dotknij czytnika z tyłu telefonu. Użyj palca wskazującego."</string>
+    <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title" msgid="5796228438604723279">"Nie ukończono rejestracji"</string>
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Upłynął limit czasu konfiguracji odcisku palca"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"Spróbuj ponownie teraz lub skonfiguruj odcisk palca później w Ustawieniach."</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Nie udało się zarejestrować odcisku palca. Spróbuj ponownie lub przyłóż inny palec."</string>
@@ -2125,9 +2152,15 @@
     <string name="lockpassword_strong_auth_required_work_pattern" msgid="6803652050512161140">"Ze względów bezpieczeństwa podaj wzór do profilu służbowego"</string>
     <string name="lockpassword_strong_auth_required_work_pin" msgid="4208510396448713500">"Ze względów bezpieczeństwa podaj kod PIN do profilu służbowego"</string>
     <string name="lockpassword_strong_auth_required_work_password" msgid="6119482061429323090">"Ze względów bezpieczeństwa podaj hasło do profilu służbowego"</string>
-    <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6351784282865851482">"Telefon został zresetowany do ustawień fabrycznych. Aby korzystać z tego telefonu, wprowadź poprzedni wzór."</string>
-    <string name="lockpassword_confirm_your_pin_details_frp" msgid="2128795640346033349">"Telefon został zresetowany do ustawień fabrycznych. Aby korzystać z tego telefonu, wprowadź poprzedni kod PIN."</string>
-    <string name="lockpassword_confirm_your_password_details_frp" msgid="4031863562975125016">"Telefon został zresetowany do ustawień fabrycznych. Aby korzystać z tego telefonu, wpisz poprzednie hasło."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="default" msgid="6351784282865851482">"Telefon został zresetowany do ustawień fabrycznych. Aby korzystać z tego telefonu, wprowadź poprzedni wzór."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="tablet" msgid="8596917715101288176">"Tablet został zresetowany do ustawień fabrycznych. Aby używać tabletu, wprowadź swój poprzedni wzór."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="device" msgid="5454624762517414834">"Urządzenie zostało zresetowane do ustawień fabrycznych. Aby z niego korzystać, wpisz poprzedni wzór."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="default" msgid="2128795640346033349">"Telefon został zresetowany do ustawień fabrycznych. Aby korzystać z tego telefonu, wprowadź poprzedni kod PIN."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="tablet" msgid="8365335365718500964">"Tablet został zresetowany do ustawień fabrycznych. Aby z niego korzystać, wprowadź swój poprzedni kod PIN."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="device" msgid="1755588602707523835">"Urządzenie zostało zresetowane do ustawień fabrycznych. Aby z niego korzystać, wprowadź swój poprzedni kod PIN."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="default" msgid="4031863562975125016">"Telefon został zresetowany do ustawień fabrycznych. Aby korzystać z tego telefonu, wpisz poprzednie hasło."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="tablet" msgid="3899701773001146600">"Tablet został zresetowany do ustawień fabrycznych. Aby z niego korzystać, wpisz swoje poprzednie hasło."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="device" msgid="2683204467262573702">"Urządzenie zostało zresetowane do ustawień fabrycznych. Aby z niego korzystać, wpisz swoje poprzednie hasło."</string>
     <string name="lockpassword_confirm_your_pattern_header_frp" msgid="5641858015891896427">"Zweryfikuj wzór"</string>
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"Zweryfikuj PIN"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Zweryfikuj hasło"</string>
@@ -2152,6 +2185,8 @@
     <string name="lockpattern_settings_enable_title" msgid="7401197111303283723">"Wymagaj wzoru"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1116467204475387886">"Trzeba narysować wzór, aby odblokować ekran"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="3340969054395584754">"Wzór jest widoczny"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_title" msgid="7172693275721931683">"Zwiększona prywatność kodu PIN"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_summary" msgid="8639588868341114740">"Wyłącz animacje podczas wpisywania kodu PIN"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"Pokazuj wzór dla profilu"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"Wibracja przy dotknięciu"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"Blokuj przyciskiem zasilania"</string>
@@ -3930,6 +3965,7 @@
     <string name="ring_volume_option_title" msgid="1520802026403038560">"Głośność dzwonka i powiadomień"</string>
     <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"Głośność dzwonka"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"Głośność powiadomień"</string>
+    <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"Niedostępne, bo dzwonek jest wyciszony"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"Dzwonek telefonu"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Domyślny dźwięk powiadomienia"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"Dźwięk z aplikacji"</string>
@@ -3993,7 +4029,7 @@
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"Telefon nie będzie sygnalizował powiadomień dźwiękiem ani wibracjami."</string>
     <string name="zen_mode_restrict_notifications_hide" msgid="5997930361607752541">"Brak wizualnego i dźwiękowego sygnalizowania powiadomień"</string>
     <string name="zen_mode_restrict_notifications_hide_summary" msgid="6005445725686969583">"Powiadomienia nie będą wyświetlane ani sygnalizowane dźwiękiem"</string>
-    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4314772315731485747">"Telefon nie będzie sygnalizował nowych ani obecnych powiadomień poprzez wyświetlenie informacji, wibrację ani dzwonek. Pamiętaj, że krytyczne powiadomienia dotyczące aktywności i stanu telefonu nadal będą się pojawiać.\n\nPo wyłączeniu trybu Nie przeszkadzać możesz zobaczyć wszystkie powiadomienia, przesuwając palcem w dół z góry ekranu."</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="3761837271201073330">"Telefon nie będzie sygnalizował nowych i obecnych powiadomień przez wyświetlanie informacji, wibracje ani dzwonek. Pamiętaj, że krytyczne powiadomienia dotyczące aktywności i stanu urządzenia nadal będą się pojawiać.\n\nPo wyłączeniu trybu Nie przeszkadzać możesz zobaczyć wszystkie powiadomienia, przesuwając palcem z góry ekranu w dół."</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"Niestandardowe"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"Włącz ustawienia niestandardowe"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="5062332754972217218">"Usuń ustawienia niestandardowe"</string>
@@ -4017,7 +4053,7 @@
     <string name="zen_mode_block_effect_summary_sound" msgid="1559968890497946901">"Dźwięk i wibracje"</string>
     <string name="zen_mode_block_effect_summary_some" msgid="2730383453754229650">"Dźwięk, wibracje i niektóre rodzaje wizualnej sygnalizacji powiadomień"</string>
     <string name="zen_mode_block_effect_summary_all" msgid="3131918059492425222">"Dźwięk, wibracje i wizualna sygnalizacja powiadomień"</string>
-    <string name="zen_mode_blocked_effects_footer" msgid="1115914818435434668">"Powiadomienia wymagane przez podstawowe funkcje i stan telefonu nigdy nie będą ukryte."</string>
+    <string name="zen_mode_blocked_effects_footer" msgid="6403365663466620328">"Powiadomienia dotyczące podstawowych funkcji i stanu urządzenia nigdy nie będą ukryte."</string>
     <string name="zen_mode_no_exceptions" msgid="1580136061336585873">"Brak"</string>
     <string name="zen_mode_other_options" msgid="3399967231522580421">"inne opcje"</string>
     <string name="zen_mode_add" msgid="8789024026733232566">"Dodaj"</string>
@@ -4151,6 +4187,8 @@
     <string name="lockscreen_bypass_summary" msgid="464277506200346748">"Po odblokowaniu przechodź od razu do ostatnio używanego ekranu"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Ekran blokady, Pomiń, Pomijaj"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Gdy profil służbowy jest zablokowany"</string>
+    <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Na ekranie blokady pokazuj tylko nowe powiadomienia"</string>
+    <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Automatycznie usuwaj już wyświetlone powiadomienia z ekranu blokady"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Powiadomienia na ekranie blokady"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Pokazuj rozmowy, domyślne i ciche"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Pokazuj rozmowy, domyślne i ciche"</string>
@@ -4332,7 +4370,7 @@
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Zezwalaj na dostęp do trybu Nie przeszkadzać"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Żadne zainstalowane aplikacje nie prosiły o dostęp do funkcji „Nie przeszkadzać”."</string>
     <string name="loading_notification_apps" msgid="5139471829295287945">"Ładuję aplikacje…"</string>
-    <string name="app_notifications_off_desc" msgid="6691342160980435901">"Na Twoje życzenie Android blokuje powiadomienia z tej aplikacji na urządzeniu"</string>
+    <string name="app_notifications_off_desc" msgid="2484843759466874201">"Nie zezwalasz na powiadomienia z tej aplikacji"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Android na żądanie blokuje tę kategorię powiadomień na urządzeniu"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Android na żądanie blokuje tę grupę powiadomień na urządzeniu"</string>
     <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"Ta aplikacja nie wysyła powiadomień"</string>
@@ -6098,10 +6136,13 @@
     <string name="dream_picker_category" msgid="7726447836872744867">"Wybierz wygaszacz ekranu"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Pokazuj dodatkowe informacje"</string>
     <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Wyświetla na wygaszaczu ekranu aktualną godzinę, pogodę lub inne informacje."</string>
+    <string name="dream_home_controls_toggle_title" msgid="706799741564479248">"Pokazuj sterowanie domem"</string>
+    <string name="dream_home_controls_toggle_summary" msgid="4102519907917430579">"Pokazuj przycisk sterowania domem na wygaszaczu ekranu"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Więcej ustawień"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Wybierz wygaszacz ekranu"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Wybierz, co ma być widoczne na ekranie, kiedy tablet będzie zadokowany. Urządzenie może pobierać więcej energii podczas korzystania z wygaszacza ekranu."</string>
     <string name="customize_button_title" msgid="1110284655990203359">"Dostosuj"</string>
+    <string name="customize_button_description" msgid="7440248477266126231">"Dostosuj wygaszacz ekranu <xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"Włączenie obsługi trybu dowolnego wymaga ponownego uruchomienia."</string>
     <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"Wymuszenie wersji na komputery na dodatkowych wyświetlaczach wymaga ponownego uruchomienia."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Uruchom ponownie teraz"</string>

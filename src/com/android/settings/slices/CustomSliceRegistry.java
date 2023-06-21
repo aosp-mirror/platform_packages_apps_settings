@@ -196,13 +196,23 @@ public class CustomSliceRegistry {
             .build();
 
     /**
-     * Full {@link Uri} for the Ringer volume Slice.
+     * Full {@link Uri} for the Ringer volume Slice. (Ring & notification combined)
      */
     public static final Uri VOLUME_RINGER_URI = new Uri.Builder()
             .scheme(ContentResolver.SCHEME_CONTENT)
             .authority(SettingsSliceProvider.SLICE_AUTHORITY)
             .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
             .appendPath("ring_volume")
+            .build();
+
+    /**
+     * Full {@link Uri} for the Separate Ring volume Slice.
+     */
+    public static final Uri VOLUME_SEPARATE_RING_URI = new Uri.Builder()
+            .scheme(ContentResolver.SCHEME_CONTENT)
+            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+            .appendPath("separate_ring_volume")
             .build();
 
     /**

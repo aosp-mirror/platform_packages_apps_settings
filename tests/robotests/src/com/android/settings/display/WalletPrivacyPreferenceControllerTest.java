@@ -141,11 +141,29 @@ public class WalletPrivacyPreferenceControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_noService_returnsDisabled() {
+    public void getAvailabilityStatus_noServiceAndIsSecure_returnsUnsupported() {
         when(mClient.isWalletServiceAvailable()).thenReturn(false);
         when(mLockPatternUtils.isSecure(anyInt())).thenReturn(true);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                BasePreferenceController.UNSUPPORTED_ON_DEVICE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_hasServiceButNotSecure_returnsDisabled() {
+        when(mClient.isWalletServiceAvailable()).thenReturn(true);
+        when(mLockPatternUtils.isSecure(anyInt())).thenReturn(false);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
                 BasePreferenceController.DISABLED_DEPENDENT_SETTING);
+    }
+
+    @Test
+    public void getAvailabilityStatus_hasServiceAndIsSecure_returnsAvailable() {
+        when(mClient.isWalletServiceAvailable()).thenReturn(true);
+        when(mLockPatternUtils.isSecure(anyInt())).thenReturn(true);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                BasePreferenceController.AVAILABLE);
     }
 }

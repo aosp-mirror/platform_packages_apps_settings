@@ -24,7 +24,9 @@ import static org.robolectric.RuntimeEnvironment.application;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.os.UserHandle;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -32,6 +34,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
 
+import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockPatternView;
 import com.android.internal.widget.LockPatternView.Cell;
 import com.android.internal.widget.LockPatternView.DisplayMode;
@@ -45,6 +48,7 @@ import com.android.settings.testutils.shadow.ShadowUtils;
 
 import com.google.android.setupcompat.PartnerCustomizationLayout;
 import com.google.android.setupcompat.template.FooterBarMixin;
+import com.google.android.setupcompat.template.FooterButton;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -94,11 +98,11 @@ public class SetupChooseLockPatternTest {
 
     @Test
     public void optionsButton_whenPatternSelected_shouldBeVisible() {
-        Button button = mActivity.findViewById(R.id.screen_lock_options);
+        final Button button = mActivity.findViewById(R.id.screen_lock_options);
         assertThat(button).isNotNull();
         assertThat(button.getVisibility()).isEqualTo(View.VISIBLE);
 
-        LockPatternView lockPatternView = mActivity.findViewById(R.id.lockPattern);
+        final LockPatternView lockPatternView = mActivity.findViewById(R.id.lockPattern);
         ReflectionHelpers.callInstanceMethod(lockPatternView, "notifyPatternDetected");
 
         enterPattern();
@@ -106,12 +110,12 @@ public class SetupChooseLockPatternTest {
     }
 
     private void verifyScreenLockOptionsShown() {
-        Button button = mActivity.findViewById(R.id.screen_lock_options);
+        final Button button = mActivity.findViewById(R.id.screen_lock_options);
         assertThat(button).isNotNull();
         assertThat(button.getVisibility()).isEqualTo(View.VISIBLE);
 
         button.performClick();
-        AlertDialog chooserDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+        final AlertDialog chooserDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(chooserDialog).isNotNull();
         int count = chooserDialog.getListView().getCount();
         assertWithMessage("List items shown").that(count).isEqualTo(3);
@@ -149,9 +153,10 @@ public class SetupChooseLockPatternTest {
 
     @Test
     public void skipButton_shouldBeVisible_duringNonFingerprintFlow() {
-        PartnerCustomizationLayout layout = mActivity.findViewById(R.id.setup_wizard_layout);
+        final PartnerCustomizationLayout layout = mActivity.findViewById(R.id.setup_wizard_layout);
         final Button skipOrClearButton =
                 layout.getMixin(FooterBarMixin.class).getSecondaryButtonView();
+
         assertThat(skipOrClearButton).isNotNull();
         assertThat(skipOrClearButton.getVisibility()).isEqualTo(View.VISIBLE);
 
@@ -164,29 +169,31 @@ public class SetupChooseLockPatternTest {
     public void clearButton_shouldBeVisible_duringRetryStage() {
         enterPattern();
 
-        PartnerCustomizationLayout layout = mActivity.findViewById(R.id.setup_wizard_layout);
+        final PartnerCustomizationLayout layout = mActivity.findViewById(R.id.setup_wizard_layout);
         final Button skipOrClearButton =
                 layout.getMixin(FooterBarMixin.class).getSecondaryButtonView();
+
         assertThat(skipOrClearButton.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(skipOrClearButton.isEnabled()).isTrue();
 
         skipOrClearButton.performClick();
+
         assertThat(findFragment(mActivity).mChosenPattern).isNull();
     }
 
     @Test
     public void createActivity_enterPattern_clearButtonShouldBeShown() {
-        ChooseLockPatternFragment fragment = findFragment(mActivity);
-
-        PartnerCustomizationLayout layout = mActivity.findViewById(R.id.setup_wizard_layout);
+        final PartnerCustomizationLayout layout = mActivity.findViewById(R.id.setup_wizard_layout);
         final Button skipOrClearButton =
                 layout.getMixin(FooterBarMixin.class).getSecondaryButtonView();
+
         assertThat(skipOrClearButton.isEnabled()).isTrue();
         assertThat(skipOrClearButton.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(skipOrClearButton.getText())
                 .isEqualTo(application.getString(R.string.skip_label));
 
         enterPattern();
+
         assertThat(skipOrClearButton.isEnabled()).isTrue();
         assertThat(skipOrClearButton.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(skipOrClearButton.getText())
@@ -195,14 +202,147 @@ public class SetupChooseLockPatternTest {
 
     @Test
     public void createActivity_patternDescription_shouldBeShown() {
-        PartnerCustomizationLayout layout = mActivity.findViewById(R.id.setup_wizard_layout);
-
+        final PartnerCustomizationLayout layout = mActivity.findViewById(R.id.setup_wizard_layout);
         final TextView patternDescription =
                 layout.findViewById(R.id.sud_layout_subtitle);
 
         assertThat(patternDescription.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(patternDescription.getText()).isEqualTo(
                 application.getString(R.string.lockpassword_choose_your_pattern_description));
+    }
+
+    @Test
+    public void inIntroductionStage_theHeaderHeight_shouldSetMinLinesTwoToPreventFlicker() {
+        final PartnerCustomizationLayout layout = mActivity.findViewById(R.id.setup_wizard_layout);
+        final TextView headerView = layout.findViewById(R.id.sud_layout_subtitle);
+
+        assertThat(headerView.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(headerView.getText().toString()).isEqualTo(
+                application.getString(R.string.lockpassword_choose_your_pattern_description));
+    }
+
+    @Test
+    public void createActivity_enterPattern_shouldGoToFirstChoiceValidStage() {
+        final PartnerCustomizationLayout layout = mActivity.findViewById(R.id.setup_wizard_layout);
+        final TextView headerView = layout.findViewById(R.id.sud_layout_subtitle);
+
+        assertThat(headerView.getVisibility()).isEqualTo(View.VISIBLE);
+
+        enterPattern();
+
+        assertThat(headerView.getText().toString()).isEqualTo(
+                application.getString(R.string.lockpattern_pattern_entered_header));
+    }
+
+    @Test
+    public void createActivity_enterShortPattern_shouldGoToChoiceTooShortStage() {
+        final PartnerCustomizationLayout layout = mActivity.findViewById(R.id.setup_wizard_layout);
+        final TextView headerView = layout.findViewById(R.id.sud_layout_subtitle);
+
+        enterShortPattern();
+
+        assertThat(headerView.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(headerView.getText().toString()).isEqualTo(
+                application.getResources().getString(
+                        R.string.lockpattern_recording_incorrect_too_short,
+                        LockPatternUtils.MIN_LOCK_PATTERN_SIZE));
+    }
+
+    @Test
+    public void inChoiceTooShortStage_theHeaderColor_shouldTintOnErrorColor() {
+        final PartnerCustomizationLayout layout = mActivity.findViewById(R.id.setup_wizard_layout);
+        final TextView headerView = layout.findViewById(R.id.sud_layout_subtitle);
+        final TypedValue typedValue = new TypedValue();
+        final Resources.Theme theme = mActivity.getTheme();
+        theme.resolveAttribute(R.attr.colorError, typedValue, true);
+        final int errorColor = typedValue.data;
+
+        enterShortPattern();
+
+        assertThat(headerView.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(headerView.getTextColors().getDefaultColor()).isEqualTo(errorColor);
+    }
+
+    @Test
+    public void inFirstChoiceValidStage_nextButtonState_shouldEnabled() {
+        final PartnerCustomizationLayout layout = mActivity.findViewById(R.id.setup_wizard_layout);
+        final FooterBarMixin footerBarMixin = layout.getMixin(FooterBarMixin.class);
+        final FooterButton nextButton = footerBarMixin.getPrimaryButton();
+
+        assertThat(nextButton.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(nextButton.isEnabled()).isFalse();
+
+        enterPattern();
+
+        assertThat(nextButton.isEnabled()).isTrue();
+    }
+
+    @Test
+    public void inFirstChoiceValidStage_clickNextButton_shouldGoToNeedToConfirmStage() {
+        final PartnerCustomizationLayout layout = mActivity.findViewById(R.id.setup_wizard_layout);
+        final TextView headerView = layout.findViewById(R.id.sud_layout_subtitle);
+        final FooterBarMixin footerBarMixin = layout.getMixin(FooterBarMixin.class);
+        final Button nextButton = footerBarMixin.getPrimaryButtonView();
+
+        assertThat(headerView.getVisibility()).isEqualTo(View.VISIBLE);
+
+        enterPattern();
+        nextButton.performClick();
+
+        assertThat(headerView.getText().toString()).isEqualTo(
+                application.getString(R.string.lockpattern_need_to_confirm));
+    }
+
+    @Test
+    public void inNeedToConfirmStage_enterWrongPattern_shouldGoToConfirmWrongStage() {
+        final PartnerCustomizationLayout layout = mActivity.findViewById(R.id.setup_wizard_layout);
+        final TextView headerView = layout.findViewById(R.id.sud_layout_subtitle);
+        final FooterBarMixin footerBarMixin = layout.getMixin(FooterBarMixin.class);
+        final Button nextButton = footerBarMixin.getPrimaryButtonView();
+        // IntroductionStage
+        assertThat(headerView.getVisibility()).isEqualTo(View.VISIBLE);
+
+        enterPattern();
+        nextButton.performClick();
+
+        // NeedToConfirmStage
+        assertThat(headerView.getText().toString()).isEqualTo(
+                application.getString(R.string.lockpattern_need_to_confirm));
+
+        enterShortPattern();
+
+        // ConfirmWrongStage
+        assertThat(headerView.getText().toString()).isEqualTo(
+                application.getString(R.string.lockpattern_need_to_unlock_wrong));
+        assertThat(nextButton.getText().toString()).isEqualTo(
+                application.getString(R.string.lockpattern_confirm_button_text));
+        assertThat(nextButton.isEnabled()).isFalse();
+    }
+
+    @Test
+    public void inNeedToConfirmStage_enterCorrectPattern_shouldGoToChoiceConfirmedStage() {
+        final PartnerCustomizationLayout layout = mActivity.findViewById(R.id.setup_wizard_layout);
+        final TextView headerView = layout.findViewById(R.id.sud_layout_subtitle);
+        final FooterBarMixin footerBarMixin = layout.getMixin(FooterBarMixin.class);
+        final Button nextButton = footerBarMixin.getPrimaryButtonView();
+        // IntroductionStage
+        assertThat(headerView.getVisibility()).isEqualTo(View.VISIBLE);
+
+        enterPattern();
+        nextButton.performClick();
+
+        // NeedToConfirmStage
+        assertThat(headerView.getText().toString()).isEqualTo(
+                application.getString(R.string.lockpattern_need_to_confirm));
+
+        enterPattern();
+
+        // ChoiceConfirmedStage
+        assertThat(headerView.getText().toString()).isEqualTo(
+                application.getString(R.string.lockpattern_pattern_confirmed_header));
+        assertThat(nextButton.getText().toString()).isEqualTo(
+                application.getString(R.string.lockpattern_confirm_button_text));
+        assertThat(nextButton.isEnabled()).isTrue();
     }
 
     private ChooseLockPatternFragment findFragment(FragmentActivity activity) {
@@ -219,6 +359,17 @@ public class SetupChooseLockPatternTest {
                         createCell(0, 1),
                         createCell(1, 1),
                         createCell(1, 0)));
+        ReflectionHelpers.callInstanceMethod(lockPatternView, "notifyPatternDetected");
+    }
+
+    private void enterShortPattern() {
+        LockPatternView lockPatternView = mActivity.findViewById(R.id.lockPattern);
+        lockPatternView.setPattern(
+                DisplayMode.Animate,
+                Arrays.asList(
+                        createCell(0, 0),
+                        createCell(0, 1),
+                        createCell(1, 1)));
         ReflectionHelpers.callInstanceMethod(lockPatternView, "notifyPatternDetected");
     }
 
