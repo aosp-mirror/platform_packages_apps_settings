@@ -69,7 +69,7 @@ public class WifiAPITest extends SettingsPreferenceFragment implements
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-        addPreferencesFromResource(R.layout.wifi_api_test);
+        addPreferencesFromResource(R.xml.wifi_api_test);
 
         final PreferenceScreen preferenceScreen = getPreferenceScreen();
 
