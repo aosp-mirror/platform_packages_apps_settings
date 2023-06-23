@@ -237,6 +237,8 @@ public class FaceSettings extends DashboardFragment {
     public void onStart() {
         super.onStart();
         final boolean hasEnrolled = mFaceManager.hasEnrolledTemplates(mUserId);
+        mEnrollButton.setVisible(!hasEnrolled);
+        mRemoveButton.setVisible(hasEnrolled);
 
         // When the user has face id registered but failed enrolling in device lock state,
         // lead users directly to the confirm deletion dialog in Face Unlock settings.
