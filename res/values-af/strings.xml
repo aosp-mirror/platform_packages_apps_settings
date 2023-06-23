@@ -65,8 +65,7 @@
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"Bind linkeroor saam"</string>
     <string name="bluetooth_device_controls_general" msgid="1399214835599665488">"Vir alle beskikbare gehoortoestelle"</string>
     <string name="bluetooth_device_controls_title" msgid="1895676556354697234">"Gehoortoestelinstellings"</string>
-    <!-- no translation found for bluetooth_device_controls_summary (8115767735418425663) -->
-    <skip />
+    <string name="bluetooth_device_controls_summary" msgid="8115767735418425663">"Kortpad, gehoortoestel-versoenbaarheid"</string>
     <string name="bluetooth_device_controls_specific" msgid="7706863288754077107">"Vir hierdie toestel"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Oudio-uitvoer"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Meer oor oudio-uitvoer"</string>
@@ -254,7 +253,7 @@
     <string name="location_settings_title" msgid="8375074508036087178">"Ligging"</string>
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"Gebruik ligging"</string>
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Af"</string>
-    <string name="location_settings_summary_location_on" msgid="7029728269719893381">"{count,plural, =1{Aan – # app het toegang tot ligging}other{Aan – # apps het toegang tot ligging}}"</string>
+    <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Aan / # app het toegang tot ligging}other{Aan / # apps het toegang tot ligging}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Laai tans …"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Programme met die Toestelle in die Omtrek-toestemming kan die relatiewe posisie van gekoppelde toestelle bepaal."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Liggingtoegang is af vir programme en dienste. Jou toestelligging kan steeds aan nooddienste gestuur word wanneer jy \'n noodnommer bel of \'n SMS daarheen stuur."</string>
@@ -327,10 +326,8 @@
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2899669764446232715">"Vee gesigmodel uit?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="916131485988121592">"Jou gesigmodel sal permanent en veilig uitgevee word. \n\nNadat dit uitgevee is, sal jy jou PIN, patroon of wagwoord nodig hê om jou foon te ontsluit of vir stawing in apps."</string>
     <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"Jou gesigmodel sal permanent en veilig uitgevee word. \n\nNadat dit uitgevee is, sal jy jou PIN, patroon of wagwoord nodig hê om jou foon te ontsluit."</string>
-    <!-- no translation found for security_settings_face_remove_dialog_details_fingerprint (7609582230650860974) -->
-    <skip />
-    <!-- no translation found for security_settings_face_remove_dialog_details_fingerprint_conv (2627374706274503259) -->
-    <skip />
+    <string name="security_settings_face_remove_dialog_details_fingerprint" msgid="7609582230650860974">"Jou gesigmodel sal permanent en veilig uitgevee word.\n\nNadat dit uitgevee is, sal jy jou vingerafdruk, PIN, patroon of wagwoord nodig hê om jou foon te ontsluit of vir stawing in apps."</string>
+    <string name="security_settings_face_remove_dialog_details_fingerprint_conv" msgid="2627374706274503259">"Jou gesigmodel sal permanent en veilig uitgevee word.\n\nNadat dit uitgevee is, sal jy jou vingerafdruk, PIN, patroon of wagwoord nodig hê om jou foon te ontsluit."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Gebruik Gesigslot om jou foon te ontsluit"</string>
     <string name="security_settings_fingerprint" msgid="6387775386189204201">"Vingerafdruk"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Vingerafdruk"</string>
@@ -1124,6 +1121,7 @@
     <string name="security_patch" msgid="4071756145347865382">"Android-sekuriteitopdatering"</string>
     <string name="model_info" msgid="8997566254717810904">"Model"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"Hardewareweergawe"</string>
+    <string name="manufactured_year" msgid="3401517138700926475">"Jaar van vervaardiging"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"Toerusting-ID"</string>
     <string name="baseband_version" msgid="2600182227599835857">"Basisbandweergawe"</string>
     <string name="kernel_version" msgid="3513538109381366881">"Kernweergawe"</string>
@@ -3914,9 +3912,9 @@
     <string name="emergency_settings_preference_title" msgid="6183455153241187148">"Veiligheid en noodgeval"</string>
     <string name="emergency_dashboard_summary" msgid="401033951074039302">"Nood-SOS, mediese inligting, waarskuwings"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Gebaarnavigasie"</string>
-    <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"Swiep op van die onderkant van die skerm af om na die tuisskerm toe te gaan. Swiep op van die onderkant af, hou, en los dan om programme te wissel. Swiep van óf die linker- óf die regterrand af om terug te gaan."</string>
+    <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"Swiep op van die onderkant van die skerm af om na die tuisskerm toe te gaan. Swiep op van die onderkant af, hou, en los dan om apps te wissel. Swiep van óf die linker- óf die regterrand af om terug te gaan."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"3-knoppienavigasie"</string>
-    <string name="legacy_navigation_summary" msgid="5905301067778326433">"Gaan terug, Tuis, en wissel programme met knoppies onderaan jou skerm."</string>
+    <string name="legacy_navigation_summary" msgid="5905301067778326433">"Gaan terug, Tuis, en wissel apps met knoppies onderaan jou skerm."</string>
     <string name="keywords_system_navigation" msgid="3131782378486554934">"stelselnavigasie, 2-knoppienavigasie, 3-knoppienavigasie, gebaarnavigasie, swiep"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Digitale assistent"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Swiep om assistent op te roep"</string>
@@ -4148,7 +4146,6 @@
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Wissel veranderinge aan programversoenbaarheid"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Veranderinge aan by verstek geaktiveer"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"Veranderinge aan by verstek gedeaktiveer"</string>
-    <string name="platform_compat_dialog_title_no_apps" msgid="4387656000745989506">"Geen programme nie"</string>
     <string name="platform_compat_dialog_text_no_apps" msgid="5715226015751055812">"Veranderinge aan programversoenbaarheid kan net vir ontfoutbare programme gewysig word. Installeer \'n ontfoutbare program en probeer weer."</string>
     <string name="disabled_dependent_setting_summary" msgid="4508635725315852504">"Hang van \'n ander instelling af"</string>
     <string name="my_device_info_account_preference_title" msgid="9197139254007133175">"Rekening"</string>
@@ -4162,8 +4159,7 @@
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"Laat hierdie program toe om Wi-Fi aan of af te skakel, Wi-Fi-netwerke te soek en aan hulle te koppel, netwerke by te voeg en te verwyder, en om \'n slegsplaaslike warmkol te begin"</string>
     <string name="change_nfc_tag_apps_title" msgid="91514009058149617">"Begin via NFC"</string>
     <string name="change_nfc_tag_apps_detail_switch" msgid="240286205725043561">"Laat toe dat dit met NFC-skandering begin"</string>
-    <!-- no translation found for change_nfc_tag_apps_detail_summary (3338220223868942195) -->
-    <skip />
+    <string name="change_nfc_tag_apps_detail_summary" msgid="3338220223868942195">"Laat hierdie app toe om te begin wanneer ’n NFC-merker geskandeer word.\nAs hierdie toestemming aan is, sal die app as ’n opsie beskikbaar wees elke keer wanneer ’n merker bespeur word."</string>
     <string name="media_output_title" msgid="8283629315159510680">"Speel media na"</string>
     <string name="media_output_label_title" msgid="4139048973886819148">"Speel <xliff:g id="LABEL">%s</xliff:g> op"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"Hierdie toestel"</string>
@@ -4571,7 +4567,7 @@
     <string name="require_cellular_encryption_summary" msgid="4813823321032908641">"Enkripsie is veiliger, maar jy sal dalk nie in sommige liggings kan koppel nie. Enkripsie word nooit vereis vir noodoproepe nie"</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Alle dienste"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Wys knipbordtoegang"</string>
-    <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Wys \'n boodskap wanneer programme toegang het tot teks, prente of ander inhoud wat jy gekopieer het"</string>
+    <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Wys \'n boodskap wanneer apps toegang het tot teks, prente of ander inhoud wat jy gekopieer het"</string>
     <string name="all_apps" msgid="3054120149509114789">"Alle programme"</string>
     <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"Moenie toelaat nie"</string>
     <string name="uwb_settings_title" msgid="8578498712312002231">"Ultrawye band (UWB)"</string>

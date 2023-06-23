@@ -65,8 +65,7 @@
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"左耳をペア設定"</string>
     <string name="bluetooth_device_controls_general" msgid="1399214835599665488">"使用可能なすべての補聴器"</string>
     <string name="bluetooth_device_controls_title" msgid="1895676556354697234">"補聴器の設定"</string>
-    <!-- no translation found for bluetooth_device_controls_summary (8115767735418425663) -->
-    <skip />
+    <string name="bluetooth_device_controls_summary" msgid="8115767735418425663">"ショートカット、補聴器両立性"</string>
     <string name="bluetooth_device_controls_specific" msgid="7706863288754077107">"このデバイスのみ"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"音声出力"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"音声出力について"</string>
@@ -254,7 +253,7 @@
     <string name="location_settings_title" msgid="8375074508036087178">"位置情報"</string>
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"位置情報を使用"</string>
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"OFF"</string>
-    <string name="location_settings_summary_location_on" msgid="7029728269719893381">"{count,plural, =1{ON - # 件のアプリに位置情報へのアクセスを許可}other{ON - # 件のアプリに位置情報へのアクセスを許可}}"</string>
+    <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{ON / # 個のアプリに位置情報へのアクセスを許可}other{ON / # 個のアプリに位置情報へのアクセスを許可}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"読み込んでいます…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"付近のデバイスへのアクセス許可を持つアプリは、接続されたデバイスの相対位置を確認できます。"</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"アプリとサービスの位置情報へのアクセスは OFF になっています。緊急通報番号に電話をかけたりテキスト メッセージを送信したりした場合は、デバイスの位置情報が緊急サービスに送信されることがあります。"</string>
@@ -609,7 +608,7 @@
     <string name="lockpassword_password_too_short" msgid="1938086368137797700">"{count,plural, =1{# 文字以上にしてください}other{# 文字以上にしてください}}"</string>
     <string name="lockpassword_password_too_short_all_numeric" msgid="4301294924022401502">"{count,plural, =1{数字のみ使用する場合は、1 桁以上にしてください}other{数字のみ使用する場合は、# 桁以上にしてください}}"</string>
     <string name="lockpassword_pin_too_short" msgid="8910105226463085689">"{count,plural, =1{PIN は # 桁以上必要です}other{PIN は # 桁以上必要です}}"</string>
-    <string name="lockpassword_pin_too_short_autoConfirm_extra_message" msgid="3271351502900762571">"{count,plural, =1{PIN は # 桁以上で指定してください。セキュリティ強化のため、{minAutoConfirmLen} 桁の PIN をおすすめします}other{PIN は # 桁以上で指定してください。セキュリティ強化のため、{minAutoConfirmLen} 桁の PIN をおすすめします}}"</string>
+    <string name="lockpassword_pin_too_short_autoConfirm_extra_message" msgid="3271351502900762571">"{count,plural, =1{PIN は # 桁以上で指定してください。セキュリティ強化のため、{minAutoConfirmLen} 桁の PIN をおすすめします}other{PIN は # 桁以上で指定してください。セキュリティ強化のため、{minAutoConfirmLen} 桁の PIN をおすすめします。}}"</string>
     <string name="lockpassword_password_too_long" msgid="1940345313260498308">"{count,plural, =1{# 文字未満にしてください}other{# 文字未満にしてください}}"</string>
     <string name="lockpassword_pin_too_long" msgid="1678212054564388576">"{count,plural, =1{# 桁未満にしてください}other{# 桁未満にしてください}}"</string>
     <string name="lockpassword_pin_recently_used" msgid="6650277060998923465">"デバイス管理により、最近使用した PIN は使用できません"</string>
@@ -1122,6 +1121,7 @@
     <string name="security_patch" msgid="4071756145347865382">"Android セキュリティ アップデート"</string>
     <string name="model_info" msgid="8997566254717810904">"モデル"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"ハードウェア バージョン"</string>
+    <string name="manufactured_year" msgid="3401517138700926475">"製造年"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"装置ID"</string>
     <string name="baseband_version" msgid="2600182227599835857">"ベースバンド バージョン"</string>
     <string name="kernel_version" msgid="3513538109381366881">"カーネル バージョン"</string>
@@ -1660,7 +1660,7 @@
     <string name="hardkeyboard_category" msgid="8729780593378161071">"キーボードの設定"</string>
     <string name="auto_punctuate_summary" msgid="3549190848611386748">"英語: Spaceキー2回でピリオド(.)を挿入"</string>
     <string name="show_password" msgid="7101900779571040117">"パスワードを表示"</string>
-    <string name="show_password_summary" msgid="9025960283785111619">"入力した文字を短い間表示する"</string>
+    <string name="show_password_summary" msgid="9025960283785111619">"入力した文字を一瞬だけ表示します"</string>
     <string name="spellchecker_security_warning" msgid="2016059050608271820">"このスペルチェッカーを選択すると、入力する全文字列の収集をアプリ（<xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>）に許可することになります。これにはパスワードやクレジットカード番号などの個人情報も含まれます。このスペルチェッカーを使用しますか？"</string>
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"設定"</string>
     <string name="spellchecker_language" msgid="8905487366580285282">"言語"</string>
@@ -2861,7 +2861,7 @@
     <string name="account_dashboard_title" msgid="8228773251948253914">"パスワードとアカウント"</string>
     <string name="account_dashboard_default_summary" msgid="1730719656099599488">"保存されているパスワード、自動入力、同期されているアカウント"</string>
     <string name="app_default_dashboard_title" msgid="4071015747629103216">"デフォルトのアプリ"</string>
-    <string name="cloned_apps_dashboard_title" msgid="5542076801222950921">"アプリ クローニング"</string>
+    <string name="cloned_apps_dashboard_title" msgid="5542076801222950921">"クローン作成済みアプリ"</string>
     <string name="desc_cloned_apps_intro_text" msgid="1369621522882622476">"アプリのインスタンスをもう 1 つ作成して、2 つのアカウントを同時に使用できるようにします。"</string>
     <string name="desc_cloneable_app_list_text" msgid="3354586725814708688">"クローニングできるアプリ。"</string>
     <string name="cloned_apps_summary" msgid="8805362440770795709">"クローン作成済み: <xliff:g id="CLONED_APPS_COUNT">%1$s</xliff:g>、クローン作成可能: <xliff:g id="ALLOWED_APPS_COUNT">%2$d</xliff:g>"</string>
@@ -3593,7 +3593,7 @@
     <string name="sharing_remote_bugreport_dialog_message" msgid="3523877008096439251">"このバグレポートを IT 管理者と共有しています。詳しくは、IT 管理者にお問い合わせください。"</string>
     <string name="share_remote_bugreport_action" msgid="7173093464692893276">"共有する"</string>
     <string name="decline_remote_bugreport_action" msgid="1276509879613158895">"共有しない"</string>
-    <string name="usb_use_charging_only" msgid="1743303747327057947">"充電"</string>
+    <string name="usb_use_charging_only" msgid="1743303747327057947">"充電のみ"</string>
     <string name="usb_use_power_only" msgid="3408055485802114621">"接続デバイスの充電"</string>
     <string name="usb_use_file_transfers" msgid="483915710802018503">"ファイル転送"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"PTP"</string>
@@ -4146,7 +4146,6 @@
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"「アプリの互換性の変更」を切り替えます"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"デフォルトで有効な変更"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"デフォルトで無効な変更"</string>
-    <string name="platform_compat_dialog_title_no_apps" msgid="4387656000745989506">"利用できるアプリはありません"</string>
     <string name="platform_compat_dialog_text_no_apps" msgid="5715226015751055812">"アプリの互換性の変更は、デバッグ可能アプリでのみ行えます。デバッグ可能アプリをインストールしてから、もう一度お試しください。"</string>
     <string name="disabled_dependent_setting_summary" msgid="4508635725315852504">"別の設定に依存しています"</string>
     <string name="my_device_info_account_preference_title" msgid="9197139254007133175">"アカウント"</string>
@@ -4568,7 +4567,7 @@
     <string name="require_cellular_encryption_summary" msgid="4813823321032908641">"暗号化した方が安全ですが、場所によっては接続できないことがあります。緊急通報に暗号化が求められることはありません。"</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"すべてのサービス"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"クリップボードへのアクセスを表示"</string>
-    <string name="show_clip_access_notification_summary" msgid="474090757777203207">"クリップボードにコピーしたテキストや画像などにアプリがアクセスすると、メッセージで通知する"</string>
+    <string name="show_clip_access_notification_summary" msgid="474090757777203207">"クリップボードにコピーしたテキストや画像などにアプリがアクセスすると、メッセージが表示されます"</string>
     <string name="all_apps" msgid="3054120149509114789">"すべてのアプリ"</string>
     <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"許可しない"</string>
     <string name="uwb_settings_title" msgid="8578498712312002231">"超広帯域無線（UWB）"</string>

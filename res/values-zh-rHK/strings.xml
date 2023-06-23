@@ -65,8 +65,7 @@
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"配對左耳"</string>
     <string name="bluetooth_device_controls_general" msgid="1399214835599665488">"所有適用的助聽器"</string>
     <string name="bluetooth_device_controls_title" msgid="1895676556354697234">"助聽器設定"</string>
-    <!-- no translation found for bluetooth_device_controls_summary (8115767735418425663) -->
-    <skip />
+    <string name="bluetooth_device_controls_summary" msgid="8115767735418425663">"快速鍵、助聽器兼容性"</string>
     <string name="bluetooth_device_controls_specific" msgid="7706863288754077107">"僅限此裝置"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"音訊輸出裝置"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"關於音訊輸出"</string>
@@ -181,7 +180,7 @@
     <string name="temperature_preferences_title" msgid="5009881556503629058">"溫度"</string>
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"每週的第一天"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"數字偏好設定"</string>
-    <string name="default_string_of_regional_preference" msgid="3428899072914884203">"使用預設值"</string>
+    <string name="default_string_of_regional_preference" msgid="3428899072914884203">"使用預設"</string>
     <string name="celsius_temperature_unit" msgid="8896459071273084507">"攝氏 (°C)"</string>
     <string name="fahrenheit_temperature_unit" msgid="1118677820614569801">"華氏 (°F)"</string>
     <string name="sunday_first_day_of_week" msgid="7644548348295686051">"星期日"</string>
@@ -254,7 +253,7 @@
     <string name="location_settings_title" msgid="8375074508036087178">"位置"</string>
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"使用位置"</string>
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"關閉"</string>
-    <string name="location_settings_summary_location_on" msgid="7029728269719893381">"{count,plural, =1{開啟 - # 個應用程式可存取位置資訊}other{開啟 - # 個應用程式可存取位置資訊}}"</string>
+    <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{開啟/ # 個應用程式可存取位置資訊}other{開啟/ # 個應用程式可存取位置資訊}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"正在載入…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"應用程式如可存取附近的裝置，就能判斷已連接裝置的相對位置。"</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"應用程式和服務的位置權限已關閉。當你打電話或發短訊到緊急電話號碼時，系統仍會將你的裝置位置資料傳送給救援人員。"</string>
@@ -327,10 +326,8 @@
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2899669764446232715">"要刪除面部模型嗎？"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="916131485988121592">"系統會將你的面部模型安全地永久刪除。\n\n刪除後，你需要使用 PIN、圖案或密碼解鎖手機，或在應用程式內驗證身分。"</string>
     <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"系統會妥善地將你的面部模型永久刪除。面部模型刪除後，你便需要使用\n\n面部模型刪除後，你便需要使用 PIN、圖案或密碼來解鎖手機。"</string>
-    <!-- no translation found for security_settings_face_remove_dialog_details_fingerprint (7609582230650860974) -->
-    <skip />
-    <!-- no translation found for security_settings_face_remove_dialog_details_fingerprint_conv (2627374706274503259) -->
-    <skip />
+    <string name="security_settings_face_remove_dialog_details_fingerprint" msgid="7609582230650860974">"系統會妥善地將你的面部模型永久刪除。\n\n面部模型刪除後，你需要使用指紋、PIN、圖案或密碼，才能解鎖手機或在應用程式內驗證身分。"</string>
+    <string name="security_settings_face_remove_dialog_details_fingerprint_conv" msgid="2627374706274503259">"系統會妥善地將你的面部模型永久刪除。\n\n面部模型刪除後，你需要使用指紋、PIN、圖案或密碼，才能解鎖手機。"</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"使用「面孔解鎖」解鎖手機"</string>
     <string name="security_settings_fingerprint" msgid="6387775386189204201">"指紋"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"指紋"</string>
@@ -474,7 +471,7 @@
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"指紋設定逾時"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message_setup" msgid="8521566666541069383">"你可稍後前往「設定」設定指紋。"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message_setup" msgid="8140162986046783546">"系統發生問題，你可稍後前往「設定」設定指紋。"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="3534341971920335247">"你可稍後設定指紋。"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="3534341971920335247">"你可稍後再設定指紋。"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="4344665784935791640">"系統發生問題，你可稍後設定指紋。"</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"新增其他指紋"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"下一步"</string>
@@ -1124,6 +1121,7 @@
     <string name="security_patch" msgid="4071756145347865382">"Android 安全性更新"</string>
     <string name="model_info" msgid="8997566254717810904">"型號"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"硬件版本"</string>
+    <string name="manufactured_year" msgid="3401517138700926475">"製造年份"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"設備編號"</string>
     <string name="baseband_version" msgid="2600182227599835857">"基帶版本"</string>
     <string name="kernel_version" msgid="3513538109381366881">"核心版本"</string>
@@ -4148,7 +4146,6 @@
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"切換應用程式兼容性變更"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"預設為啟用的變更"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"預設為已停用的變更"</string>
-    <string name="platform_compat_dialog_title_no_apps" msgid="4387656000745989506">"沒有可用的應用程式"</string>
     <string name="platform_compat_dialog_text_no_apps" msgid="5715226015751055812">"你只能修改 debuggable 應用程式的兼容性。請安裝 debuggable 應用程式，然後再試。"</string>
     <string name="disabled_dependent_setting_summary" msgid="4508635725315852504">"必須一併變更其他設定"</string>
     <string name="my_device_info_account_preference_title" msgid="9197139254007133175">"帳戶"</string>
@@ -4162,8 +4159,7 @@
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"允許這個應用程式開啟或關閉 Wi-Fi，掃瞄和連線至 Wi-Fi 網絡、新增或移除網絡，或啟動僅限本機的熱點"</string>
     <string name="change_nfc_tag_apps_title" msgid="91514009058149617">"透過 NFC 啟動"</string>
     <string name="change_nfc_tag_apps_detail_switch" msgid="240286205725043561">"允許在掃瞄 NFC 後啟動"</string>
-    <!-- no translation found for change_nfc_tag_apps_detail_summary (3338220223868942195) -->
-    <skip />
+    <string name="change_nfc_tag_apps_detail_summary" msgid="3338220223868942195">"允許系統掃瞄到 NFC 標籤時啟用此應用程式。\n如開啟此權限，系統會在偵測到標籤時，將此應用程式列為選項。"</string>
     <string name="media_output_title" msgid="8283629315159510680">"播放媒體的裝置"</string>
     <string name="media_output_label_title" msgid="4139048973886819148">"使用以下裝置播放「<xliff:g id="LABEL">%s</xliff:g>」的內容"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"此裝置"</string>
