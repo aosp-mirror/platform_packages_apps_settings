@@ -65,8 +65,7 @@
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"Упари лево уво"</string>
     <string name="bluetooth_device_controls_general" msgid="1399214835599665488">"За све доступне слушне апарате"</string>
     <string name="bluetooth_device_controls_title" msgid="1895676556354697234">"Подешавања слушног апарата"</string>
-    <!-- no translation found for bluetooth_device_controls_summary (8115767735418425663) -->
-    <skip />
+    <string name="bluetooth_device_controls_summary" msgid="8115767735418425663">"пречица, компатибилност са слушним апаратима"</string>
     <string name="bluetooth_device_controls_specific" msgid="7706863288754077107">"За овај уређај"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Аудио излаз"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"О аудио излазу"</string>
@@ -254,7 +253,7 @@
     <string name="location_settings_title" msgid="8375074508036087178">"Локација"</string>
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"Користи локацију"</string>
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Искључена"</string>
-    <string name="location_settings_summary_location_on" msgid="7029728269719893381">"{count,plural, =1{Укључено – # апликација има приступ локацији}one{Укључено – # апликација има приступ локацији}few{Укључено – # апликације имају приступ локацији}other{Укључено – # апликација има приступ локацији}}"</string>
+    <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Укључено/# апликација има приступ локацији}one{Укључено/# апликација има приступ локацији}few{Укључено/# апликације имају приступ локацији}other{Укључено/# апликација има приступ локацији}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Учитава се…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Апликације са дозволом за уређаје у близини могу да одреде приближан положај повезаних уређаја."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Приступ локацији је искључен за апликације и услуге. Локација уређаја може и даље да се шаље екипама хитних служби када позовете број за хитне случајеве или пошаљете SMS на њега."</string>
@@ -327,10 +326,8 @@
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2899669764446232715">"Желите да избришете модел лица?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="916131485988121592">"Модел лица ће се трајно и безбедно избрисати.\n\nПосле брисања вам треба PIN, шаблон или лозинка да бисте откључали телефон или за потврду идентитета у апликацијама."</string>
     <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"Модел лица ће бити трајно и безбедно избрисан.\n\nПосле брисања вам треба PIN, шаблон или лозинка да бисте откључали телефон."</string>
-    <!-- no translation found for security_settings_face_remove_dialog_details_fingerprint (7609582230650860974) -->
-    <skip />
-    <!-- no translation found for security_settings_face_remove_dialog_details_fingerprint_conv (2627374706274503259) -->
-    <skip />
+    <string name="security_settings_face_remove_dialog_details_fingerprint" msgid="7609582230650860974">"Модел лица ће се трајно и безбедно избрисати.\n\nПосле брисања треба вам отисак прста, PIN, шаблон или лозинка да бисте откључали телефон или за потврду идентитета у апликацијама."</string>
+    <string name="security_settings_face_remove_dialog_details_fingerprint_conv" msgid="2627374706274503259">"Модел лица ће бити трајно и безбедно избрисан.\n\nПосле брисања вам треба отисак прста, PIN, шаблон или лозинка да бисте откључали телефон."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Откључајте телефон лицем"</string>
     <string name="security_settings_fingerprint" msgid="6387775386189204201">"Отисак прста"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Отисак прста"</string>
@@ -492,11 +489,11 @@
     <string name="security_header" msgid="961514795852103424">"Безбедност"</string>
     <string name="privacy_header" msgid="5526002421324257007">"Приватност"</string>
     <string name="work_profile_category_header" msgid="85707750968948517">"Пословни профил"</string>
-    <string name="fingerprint_add_max" msgid="8639321019299347447">"Максималан број отисака прстију који можете да додате је <xliff:g id="COUNT">%d</xliff:g>"</string>
+    <string name="fingerprint_add_max" msgid="8639321019299347447">"Можете да их додате до <xliff:g id="COUNT">%d</xliff:g>"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Додали сте максималан број отисака прстију"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Не можете да додате још отисака прстију"</string>
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"Избришите <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>"</string>
-    <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Нећете моћи да користите отисак прста за откључавање пословног профила, овлашћивање куповина или пријављивање у пословне апликације."</string>
+    <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Нећете моћи да користите отисак прста за откључавање пословног профила, овлашћивање куповина ни пријављивање у пословне апликације."</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"Шифровање"</string>
     <string name="encrypted_summary" msgid="545623487587251207">"Шифровано"</string>
     <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"Подесите откључавање екрана"</string>
@@ -532,7 +529,7 @@
     <string name="unlock_set_unlock_pin_title" msgid="5283636759362880407">"PIN"</string>
     <string name="unlock_set_unlock_password_title" msgid="2559842616268607041">"Лозинка"</string>
     <string name="unlock_set_do_later_title" msgid="6565575303676064364">"Не сада"</string>
-    <string name="current_screen_lock" msgid="1367883977261098017">"Актуелно закључавање екрана"</string>
+    <string name="current_screen_lock" msgid="1367883977261098017">"Актуелно откључавање екрана"</string>
     <string name="fingerprint_unlock_set_unlock_pattern" msgid="2229689425933043901">"Шаблон • Отисак прста"</string>
     <string name="fingerprint_unlock_set_unlock_pin" msgid="7979848492740627674">"PIN • Отисак прста"</string>
     <string name="fingerprint_unlock_set_unlock_password" msgid="6207676267295036963">"Лозинка • Отисак прста"</string>
@@ -1124,6 +1121,7 @@
     <string name="security_patch" msgid="4071756145347865382">"Безбедносно ажурирање за Android"</string>
     <string name="model_info" msgid="8997566254717810904">"Модел"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"Верзија хардвера"</string>
+    <string name="manufactured_year" msgid="3401517138700926475">"Година производње"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"ИД опреме"</string>
     <string name="baseband_version" msgid="2600182227599835857">"Верзија основног пропусног опсега"</string>
     <string name="kernel_version" msgid="3513538109381366881">"Верзија језгра"</string>
@@ -3595,7 +3593,7 @@
     <string name="sharing_remote_bugreport_dialog_message" msgid="3523877008096439251">"Овај извештај о грешци се дели са ИТ администратором. Контактирајте га за више детаља."</string>
     <string name="share_remote_bugreport_action" msgid="7173093464692893276">"Дели"</string>
     <string name="decline_remote_bugreport_action" msgid="1276509879613158895">"Одбиј"</string>
-    <string name="usb_use_charging_only" msgid="1743303747327057947">"Нема преноса података"</string>
+    <string name="usb_use_charging_only" msgid="1743303747327057947">"Без преноса података"</string>
     <string name="usb_use_power_only" msgid="3408055485802114621">"Напуни повезани уређај"</string>
     <string name="usb_use_file_transfers" msgid="483915710802018503">"Пренос датотека"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"PTP"</string>
@@ -4148,7 +4146,6 @@
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Укључите/искључите промене компатибилности апликације"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Подразумеване омогућене промене"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"Подразумеване онемогућене промене"</string>
-    <string name="platform_compat_dialog_title_no_apps" msgid="4387656000745989506">"Нема апликација"</string>
     <string name="platform_compat_dialog_text_no_apps" msgid="5715226015751055812">"Промене компатибилности апликација могу да се измене само за апликације са отклоњивим грешкама. Инсталирајте апликацију са отклоњивим грешкама и пробајте поново."</string>
     <string name="disabled_dependent_setting_summary" msgid="4508635725315852504">"Зависи од другог подешавања"</string>
     <string name="my_device_info_account_preference_title" msgid="9197139254007133175">"Налог"</string>
@@ -4162,8 +4159,7 @@
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"Омогућите да ова апликација укључи или искључи WiFi, тражи и повезује се на WiFi мреже, додаје и уклања мреже или покреће само локални хотспот"</string>
     <string name="change_nfc_tag_apps_title" msgid="91514009058149617">"Покрени преко NFC-а"</string>
     <string name="change_nfc_tag_apps_detail_switch" msgid="240286205725043561">"Дозволи покретање при скенирању NFC ознаке"</string>
-    <!-- no translation found for change_nfc_tag_apps_detail_summary (3338220223868942195) -->
-    <skip />
+    <string name="change_nfc_tag_apps_detail_summary" msgid="3338220223868942195">"Дозволите да се ова апликација покреће када се скенира NFC ознака.\nАко је ова дозвола укључена, апликација ће бити доступна као опција сваки пут када се ознака открије."</string>
     <string name="media_output_title" msgid="8283629315159510680">"Пуштај медијски садржај на"</string>
     <string name="media_output_label_title" msgid="4139048973886819148">"Пусти <xliff:g id="LABEL">%s</xliff:g> на"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"Овај уређај"</string>

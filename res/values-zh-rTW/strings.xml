@@ -65,8 +65,7 @@
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"配對左耳的裝置"</string>
     <string name="bluetooth_device_controls_general" msgid="1399214835599665488">"適用於所有可用的助聽裝置"</string>
     <string name="bluetooth_device_controls_title" msgid="1895676556354697234">"助聽器設定"</string>
-    <!-- no translation found for bluetooth_device_controls_summary (8115767735418425663) -->
-    <skip />
+    <string name="bluetooth_device_controls_summary" msgid="8115767735418425663">"捷徑、助聽器相容性"</string>
     <string name="bluetooth_device_controls_specific" msgid="7706863288754077107">"適用於本裝置"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"音訊輸出裝置"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"關於音訊輸出"</string>
@@ -254,7 +253,7 @@
     <string name="location_settings_title" msgid="8375074508036087178">"位置"</string>
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"使用位置資訊"</string>
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"關閉"</string>
-    <string name="location_settings_summary_location_on" msgid="7029728269719893381">"{count,plural, =1{已開啟 - # 個應用程式已取得位置存取權}other{已開啟 - # 個應用程式已取得位置存取權}}"</string>
+    <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{已開啟/# 個應用程式可存取位置資訊}other{已開啟/# 個應用程式可存取位置資訊}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"載入中…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"如果應用程式具有鄰近裝置權限，就能判斷已連結裝置的相對位置。"</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"應用程式和服務的位置存取權已關閉。當你撥打或傳訊息到緊急電話號碼時，系統仍會將你的裝置位置資訊傳送給緊急應變人員。"</string>
@@ -327,10 +326,8 @@
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2899669764446232715">"要刪除臉部模型嗎？"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="916131485988121592">"系統會安全地將臉部模型永久刪除。\n\n模型刪除後，你必須使用 PIN 碼、解鎖圖案或密碼，才能解鎖手機或在應用程式中驗證身分。"</string>
     <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"系統會安全地將臉部模型永久刪除。\n\n模型刪除後，你必須使用 PIN 碼、解鎖圖案或密碼才能解鎖手機。"</string>
-    <!-- no translation found for security_settings_face_remove_dialog_details_fingerprint (7609582230650860974) -->
-    <skip />
-    <!-- no translation found for security_settings_face_remove_dialog_details_fingerprint_conv (2627374706274503259) -->
-    <skip />
+    <string name="security_settings_face_remove_dialog_details_fingerprint" msgid="7609582230650860974">"系統會安全地將你的臉部模型永久刪除。\n\n臉部模型刪除後，你需要使用指紋、PIN 碼、解鎖圖案或密碼，才能解鎖手機或在應用程式內驗證身分。"</string>
+    <string name="security_settings_face_remove_dialog_details_fingerprint_conv" msgid="2627374706274503259">"系統會安全地將你的臉部模型永久刪除。\n\n臉部模型刪除後，你需要使用指紋、PIN 碼、解鎖圖案或密碼才能解鎖手機。"</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"使用人臉解鎖功能解鎖手機"</string>
     <string name="security_settings_fingerprint" msgid="6387775386189204201">"指紋"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"指紋"</string>
@@ -351,7 +348,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="6104718999323591180">"不用了，謝謝"</string>
     <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="4068276083536421828">"我同意"</string>
     <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"要略過指紋設定程序嗎？"</string>
-    <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"指紋設定程序只需一兩分鐘即可完成。如果略過這個程序，稍後可以在設定中自行新增你的指紋。"</string>
+    <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"指紋設定只需一兩分鐘即可完成。如果選擇略過，之後可以在「設定」中新增指紋。"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"看到這個圖示時，請使用你的指紋驗證身分，以便執行特定操作，例如登入應用程式或核准購買交易"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_1" msgid="4360262371633254407">"注意事項"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"運作方式"</string>
@@ -444,7 +441,7 @@
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"指紋註冊進度為 <xliff:g id="PERCENTAGE">%d</xliff:g>%%"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"指紋新增成功"</string>
     <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"隨時輕觸解鎖"</string>
-    <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"輕觸感應器進行解鎖，即使螢幕關閉也能解鎖。這樣可能會提高意外解鎖的機率。"</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"輕觸感應器就能解鎖 (即便螢幕處於關閉狀態)。使用此功能會提高意外解鎖的機率。"</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"螢幕解鎖"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"稍後再說"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"移開手指，然後再次輕觸感應器"</string>
@@ -1124,6 +1121,7 @@
     <string name="security_patch" msgid="4071756145347865382">"Android 安全性更新"</string>
     <string name="model_info" msgid="8997566254717810904">"型號"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"硬體版本"</string>
+    <string name="manufactured_year" msgid="3401517138700926475">"製造年份"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"設備 ID"</string>
     <string name="baseband_version" msgid="2600182227599835857">"基頻版本"</string>
     <string name="kernel_version" msgid="3513538109381366881">"核心版本"</string>
@@ -1415,7 +1413,7 @@
     <string name="lockpassword_choose_your_pin_header" msgid="7754265746504679473">"設定 PIN 碼"</string>
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"設定工作資料夾 PIN 碼"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"設定解鎖圖案"</string>
-    <string name="lockpassword_choose_your_pattern_description" msgid="6808109256008481046">"為提升安全性，建議你設定裝置的解鎖圖案"</string>
+    <string name="lockpassword_choose_your_pattern_description" msgid="6808109256008481046">"為提升安全性，請設定裝置的解鎖圖案"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"設定工作資料夾解鎖圖案"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"如要使用指紋，請設定密碼"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"如要使用指紋，請設定解鎖圖案"</string>
@@ -3177,7 +3175,7 @@
     <string name="silent_notifications_status_bar" msgid="6113307620588767516">"隱藏狀態列中的靜音通知"</string>
     <string name="notification_pulse_title" msgid="8013178454646671529">"閃爍燈光"</string>
     <string name="lock_screen_notifications_title" msgid="2876323153692406203">"隱私設定"</string>
-    <string name="lockscreen_bypass_title" msgid="6519964196744088573">"略過螢幕鎖定程序"</string>
+    <string name="lockscreen_bypass_title" msgid="6519964196744088573">"略過螢幕鎖定畫面"</string>
     <string name="lockscreen_bypass_summary" msgid="4578154430436224161">"解鎖後直接前往上次使用的畫面。螢幕鎖定畫面不會顯示通知，如要查看，請從螢幕頂端向下滑動。"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"螢幕鎖定, 鎖定螢幕, 略過, 規避"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"當工作資料夾遭鎖定時"</string>
@@ -3195,7 +3193,7 @@
     <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"顯示所有通知內容"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"僅在解鎖狀態下顯示敏感內容"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"完全不顯示通知"</string>
-    <string name="lock_screen_notifications_interstitial_message" msgid="4688399629301178487">"你要使用哪一種螢幕鎖定畫面顯示方式？"</string>
+    <string name="lock_screen_notifications_interstitial_message" msgid="4688399629301178487">"螢幕鎖定時，你希望如何顯示通知訊息？"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1360388192096354315">"螢幕鎖定"</string>
     <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"顯示所有工作通知內容"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"隱藏敏感的 Work 內容"</string>
@@ -4148,7 +4146,6 @@
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"切換應用程式相容性變更"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"預設啟用的應用程式有相容性異動"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"預設停用的應用程式有相容性異動"</string>
-    <string name="platform_compat_dialog_title_no_apps" msgid="4387656000745989506">"沒有可用的應用程式"</string>
     <string name="platform_compat_dialog_text_no_apps" msgid="5715226015751055812">"你只能修改可偵錯應用程式的應用程式相容性變更。請安裝可進行偵錯的應用程式，然後再試一次。"</string>
     <string name="disabled_dependent_setting_summary" msgid="4508635725315852504">"必須一併變更其他設定"</string>
     <string name="my_device_info_account_preference_title" msgid="9197139254007133175">"帳戶"</string>
@@ -4162,8 +4159,7 @@
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"允許這個應用程式開啟或關閉 Wi-Fi、掃描及連上 Wi-Fi 網路、新增或移除網路，或啟動僅限本機的無線基地台"</string>
     <string name="change_nfc_tag_apps_title" msgid="91514009058149617">"透過 NFC 啟動"</string>
     <string name="change_nfc_tag_apps_detail_switch" msgid="240286205725043561">"允許在掃描 NFC 時啟動"</string>
-    <!-- no translation found for change_nfc_tag_apps_detail_summary (3338220223868942195) -->
-    <skip />
+    <string name="change_nfc_tag_apps_detail_summary" msgid="3338220223868942195">"允許系統掃描到 NFC 標記時啟用這個應用程式。\n如果開啟這項權限，每當系統偵測到標記時，就會將這個應用程式列為選項。"</string>
     <string name="media_output_title" msgid="8283629315159510680">"播放媒體"</string>
     <string name="media_output_label_title" msgid="4139048973886819148">"透過以下裝置播放「<xliff:g id="LABEL">%s</xliff:g>」"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"這個裝置"</string>

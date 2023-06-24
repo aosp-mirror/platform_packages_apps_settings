@@ -65,8 +65,7 @@
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"მარცხენა დინამიკის დაკავშირება"</string>
     <string name="bluetooth_device_controls_general" msgid="1399214835599665488">"სმენის ყველა ხელმისაწვდომი აპარატისთვის"</string>
     <string name="bluetooth_device_controls_title" msgid="1895676556354697234">"სმენის აპარატის პარამეტრები"</string>
-    <!-- no translation found for bluetooth_device_controls_summary (8115767735418425663) -->
-    <skip />
+    <string name="bluetooth_device_controls_summary" msgid="8115767735418425663">"მალსახმობი, სმენის აპარატებთან თავსებადობა"</string>
     <string name="bluetooth_device_controls_specific" msgid="7706863288754077107">"ამ მოწყობილობისთვის"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"გამომავალი აუდიო"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"აუდიოს გამოსატანის შესახებ"</string>
@@ -254,7 +253,7 @@
     <string name="location_settings_title" msgid="8375074508036087178">"მდებარეობა"</string>
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"მდებარეობის გამოყენება"</string>
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"გამორთული"</string>
-    <string name="location_settings_summary_location_on" msgid="7029728269719893381">"{count,plural, =1{ჩართულია — # აპს აქვს მდებარეობაზე წვდომა}other{ჩართულია — # აპს აქვს მდებარეობაზე წვდომა}}"</string>
+    <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{ჩართულია — # აპს აქვს მდებარეობაზე წვდომა}other{ჩართულია — # აპს აქვს მდებარეობაზე წვდომა}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"მიმდინარეობს ჩატვირთვა…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"ახლომდებარე მოწყობილობების ნებართვების მქონე აპებს შეუძლია დაკავშირებული მოწყობილობების პოზიციის განსაზღვრა."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"აპებისა და სერვისების მდებარეობაზე წვდომა გამორთულია. თქვენი მოწყობილობის მდებარეობა მაინც გაიგზავნება გადაუდებელი დახმარების სამსახურში, როცა გადაუდებელი დახმარების სამსახურის ნომერზე დარეკავთ ან ტექსტურ შეტყობინებას გაგზავნით."</string>
@@ -1122,6 +1121,7 @@
     <string name="security_patch" msgid="4071756145347865382">"Android-ის უსაფრთხოების განახლება"</string>
     <string name="model_info" msgid="8997566254717810904">"მოდელი"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"აპარატურის ვერსია"</string>
+    <string name="manufactured_year" msgid="3401517138700926475">"წარმოების წელი"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"მოწყობილობის ID"</string>
     <string name="baseband_version" msgid="2600182227599835857">"Baseband-ის ვერსია"</string>
     <string name="kernel_version" msgid="3513538109381366881">"kernel-ის ვერსია"</string>
@@ -1437,9 +1437,9 @@
     <string name="lockpassword_choose_your_password_header_for_face" msgid="622276003801157839">"სახით განბლოკვისთვის დააყენეთ პაროლი"</string>
     <string name="lockpassword_choose_your_pattern_header_for_face" msgid="7333603579958317102">"სახით განბლოკვისთვის დააყენეთ ნიმუში"</string>
     <string name="lockpassword_choose_your_pin_header_for_face" msgid="704061826984851309">"სახით განბლოკვისთვის დააყენეთ PIN-კოდი"</string>
-    <string name="lockpassword_choose_your_password_header_for_biometrics" msgid="2053366309272487015">"დააყენეთ პაროლი სახის ან თითის ანაბეჭდის გამოსაყენებლად"</string>
+    <string name="lockpassword_choose_your_password_header_for_biometrics" msgid="2053366309272487015">"დააყენეთ პაროლი სახისთვის/თითის ანაბეჭდისთვის"</string>
     <string name="lockpassword_choose_your_pattern_header_for_biometrics" msgid="4038476475293734905">"დააყენეთ ნიმუში სახის ან თითის ანაბეჭდის გამოსაყენებლად"</string>
-    <string name="lockpassword_choose_your_pin_header_for_biometrics" msgid="9086039918921009380">"დააყენეთ PIN-კოდი სახის ან თითის ანაბეჭდის გამოსაყენებლად"</string>
+    <string name="lockpassword_choose_your_pin_header_for_biometrics" msgid="9086039918921009380">"დააყენეთ PIN სახისთვის/თითის ანაბეჭდისთვის"</string>
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"პაროლი დაგავიწყდათ?"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"დაგავიწყდათ ნიმუში?"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"დაგავიწყდათ PIN-კოდი?"</string>
@@ -4146,7 +4146,6 @@
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"აპის თავსებადობის ცვლილებების გადართვა"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"ნაგულისხმევი ჩართული ცვლილებები"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"ნაგულისხმევი გათიშული ცვლილებები"</string>
-    <string name="platform_compat_dialog_title_no_apps" msgid="4387656000745989506">"ხელმისაწვდომი აპები არ არის"</string>
     <string name="platform_compat_dialog_text_no_apps" msgid="5715226015751055812">"აპის თავსებადობის ცვლილებები მხოლოდ გამართვადი აპლიკაციებისთვის შეიძლება განხორციელდეს დააინსტალირეთ გამართვადი აპი და ხელახლა ცადეთ."</string>
     <string name="disabled_dependent_setting_summary" msgid="4508635725315852504">"დამოკიდებულია სხვა პარამეტრზე"</string>
     <string name="my_device_info_account_preference_title" msgid="9197139254007133175">"ანგარიში"</string>

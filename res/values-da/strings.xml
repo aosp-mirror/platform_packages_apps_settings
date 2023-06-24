@@ -65,8 +65,7 @@
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"Par venstre apparat"</string>
     <string name="bluetooth_device_controls_general" msgid="1399214835599665488">"For alle tilgængelige høreapparater"</string>
     <string name="bluetooth_device_controls_title" msgid="1895676556354697234">"Indstillinger for høreapparat"</string>
-    <!-- no translation found for bluetooth_device_controls_summary (8115767735418425663) -->
-    <skip />
+    <string name="bluetooth_device_controls_summary" msgid="8115767735418425663">"Genvej, høreapparatskompatibilitet"</string>
     <string name="bluetooth_device_controls_specific" msgid="7706863288754077107">"For denne enhed"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Lydudgang"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Om lydudgang"</string>
@@ -181,8 +180,7 @@
     <string name="temperature_preferences_title" msgid="5009881556503629058">"Temperatur"</string>
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"Ugens første dag"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"Præferencer for tal"</string>
-    <!-- no translation found for default_string_of_regional_preference (3428899072914884203) -->
-    <skip />
+    <string name="default_string_of_regional_preference" msgid="3428899072914884203">"Brug standard"</string>
     <string name="celsius_temperature_unit" msgid="8896459071273084507">"Celsius (°C)"</string>
     <string name="fahrenheit_temperature_unit" msgid="1118677820614569801">"Fahrenheit (°F)"</string>
     <string name="sunday_first_day_of_week" msgid="7644548348295686051">"Søndag"</string>
@@ -255,7 +253,7 @@
     <string name="location_settings_title" msgid="8375074508036087178">"Lokation"</string>
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"Brug lokation"</string>
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Fra"</string>
-    <string name="location_settings_summary_location_on" msgid="7029728269719893381">"{count,plural, =1{Til – # app har adgang til din lokation}one{Til – # app har adgang til din lokation}other{Til – # apps har adgang til din lokation}}"</string>
+    <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Til/# app har adgang til din lokation}one{Til/# app har adgang til din lokation}other{Til/# apps har adgang til din lokation}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Indlæser…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Apps med tilladelse fra enheder i nærheden kan fastslå den relative placering af forbundne enheder."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Adgangen til Lokation er deaktiveret for apps og tjenester. Din enhedslokation kan stadig blive sendt til udrykningsberedskab, hvis du ringer eller sender en sms til et alarmnummer."</string>
@@ -273,7 +271,7 @@
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Ansigt tilføjet"</string>
     <string name="security_settings_face_preference_summary_none" msgid="523320857738436024">"Konfiguration er påkrævet"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Ansigtslås"</string>
-    <string name="security_settings_face_profile_preference_title" msgid="7519527436266375005">"Ansigtslås til arbejdet"</string>
+    <string name="security_settings_face_profile_preference_title" msgid="7519527436266375005">"Ansigtslås til arbejdsprofil"</string>
     <string name="security_settings_face_enroll_education_title" msgid="6448806884597691208">"Sådan konfigurerer du ansigtslås"</string>
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="3701874093226957891">"Konfigurer ansigtslås"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"Brug dit ansigt til godkendelse"</string>
@@ -304,7 +302,7 @@
     <string name="security_settings_face_enroll_enrolling_skip" msgid="5568617401632528567">"Spring over"</string>
     <string name="face_intro_error_max" msgid="2474735057709291626">"Du har tilføjet det maksimale antal ansigter"</string>
     <string name="face_intro_error_unknown" msgid="1626057493054989995">"Der kan ikke tilføjes flere ansigter"</string>
-    <string name="security_settings_face_enroll_error_dialog_title" msgid="2460820099922775936">"Scanningen kunne ikke gennemføres"</string>
+    <string name="security_settings_face_enroll_error_dialog_title" msgid="2460820099922775936">"Registreringen kunne ikke gennemføres"</string>
     <string name="security_settings_face_enroll_dialog_ok" msgid="1674650455786434426">"OK"</string>
     <string name="security_settings_face_enroll_error_timeout_dialog_message" msgid="7768349698547951750">"Tidsgrænsen for ansigtsscanning blev overskredet. Prøv igen."</string>
     <string name="security_settings_face_enroll_error_generic_dialog_message" msgid="3186810411630091490">"Ansigtsscanningen mislykkedes."</string>
@@ -328,15 +326,13 @@
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2899669764446232715">"Skal ansigtsmodellen slettes?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="916131485988121592">"Din ansigtsmodel slettes permanent og på sikker vis.\n\nNår den er slettet, skal du bruge din pinkode, dit mønster eller din adgangskode til at låse din telefon op eller til godkendelse i apps."</string>
     <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"Din ansigtsmodel slettes permanent og på sikker vis.\n\nNår den er slettet, skal du bruge din pinkode, dit mønster eller din adgangskode til at låse din telefon op."</string>
-    <!-- no translation found for security_settings_face_remove_dialog_details_fingerprint (7609582230650860974) -->
-    <skip />
-    <!-- no translation found for security_settings_face_remove_dialog_details_fingerprint_conv (2627374706274503259) -->
-    <skip />
+    <string name="security_settings_face_remove_dialog_details_fingerprint" msgid="7609582230650860974">"Din ansigtsmodel slettes permanent og på sikker vis.\n\nNår den er slettet, skal du bruge dit fingeraftryk, din pinkode, dit mønster eller din adgangskode til at låse din telefon op eller til godkendelse i apps."</string>
+    <string name="security_settings_face_remove_dialog_details_fingerprint_conv" msgid="2627374706274503259">"Din ansigtsmodel slettes permanent og på sikker vis.\n\nNår den er slettet, skal du bruge dit fingeraftryk, din pinkode, dit mønster eller din adgangskode til at låse din telefon op."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Brug ansigtslås til at låse din telefon op"</string>
     <string name="security_settings_fingerprint" msgid="6387775386189204201">"Fingeraftryk"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Fingeraftryk"</string>
     <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"Når du bruger oplåsning med fingeraftryk"</string>
-    <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Fingeraftryk til arbejde"</string>
+    <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Fingeraftryk til arbejdsprofil"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Tilføj fingeraftryk"</string>
     <string name="security_settings_fingerprint_preference_summary" msgid="8486134175759676037">"{count,plural, =1{Fingeraftryk tilføjet}one{# fingeraftryk tilføjet}other{# fingeraftryk tilføjet}}"</string>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1146977379031250790">"Konfiguration er påkrævet"</string>
@@ -386,18 +382,18 @@
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Ansigt, fingeraftryk og <xliff:g id="WATCH">%s</xliff:g> er tilføjet"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Ansigt, fingeraftryk og <xliff:g id="WATCH">%s</xliff:g> er tilføjet"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Ansigtslås og oplåsning med fingeraftryk"</string>
-    <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Ansigtslås og oplåsning med fingeraftryk til arbejde"</string>
+    <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Ansigtslås og oplåsning med fingeraftryk til arbejdsprofil"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"Konfiguration er påkrævet"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Ansigt og fingeraftryk er tilføjet"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"Ansigt og fingeraftryk er tilføjet"</string>
     <string name="biometric_settings_intro" msgid="4263069383955676756">"Når du konfigurerer ansigtslås og oplåsning med fingeraftryk, beder din telefon om dit fingeraftryk, hvis du er iført en maske eller befinder dig et mørkt sted"</string>
     <string name="biometric_settings_category_ways_to_unlock" msgid="3384767901580915266">"Muligheder for oplåsning"</string>
-    <string name="biometric_settings_category_use_face_fingerprint" msgid="4377659744376863913">"Anvend ansigtsgenkendelse eller fingeraftryk til at"</string>
+    <string name="biometric_settings_category_use_face_fingerprint" msgid="4377659744376863913">"Brug dit ansigt eller fingeraftryk til at"</string>
     <string name="biometric_settings_use_biometric_unlock_phone" msgid="8180914579885804358">"Låse din telefon op"</string>
     <string name="biometric_settings_use_biometric_for_apps" msgid="6201168728906364189">"Verificere din identitet i apps"</string>
     <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"Anvend ansigtsgenkendelse"</string>
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"Anvend fingeraftryk"</string>
-    <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"Anvend ansigtsgenkendelse eller fingeraftryk"</string>
+    <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"Brug ansigt eller fingeraftryk"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"OK"</string>
     <string name="biometric_settings_add_face_in_split_mode_title" msgid="6041232223862753222">"Ansigtslåsen kan ikke konfigureres"</string>
     <string name="biometric_settings_add_face_in_split_mode_message" msgid="1904738532939614456">"Luk den opdelte skærm for at konfigurere ansigtslåsen"</string>
@@ -410,7 +406,7 @@
     <string name="skip_lock_screen_dialog_button_label" msgid="641984698150020591">"Spring over"</string>
     <string name="cancel_lock_screen_dialog_button_label" msgid="1801132985957491690">"Annuller"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="886085239313346000">"Tryk på sensoren"</string>
-    <string name="security_settings_sfps_enroll_find_sensor_title" msgid="8327884364635804363">"Sæt fingeren på afbryderknappen uden at trykke"</string>
+    <string name="security_settings_sfps_enroll_find_sensor_title" msgid="8327884364635804363">"Sæt fingeren på afbryder­knappen uden at trykke"</string>
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"Sådan konfigurerer du fingeraftryk"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"Den sidder på bagsiden af telefonen. Brug pegefingeren."</string>
     <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"Fingeraftrykssensoren er på din skærm. Du registrerer dit fingeraftryk på den næste skærm."</string>
@@ -510,7 +506,7 @@
     <string name="lock_settings_picker_title" msgid="9219376327364915334">"Vælg skærmlås"</string>
     <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"Vælg en skærmlås"</string>
     <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"Vælg en ny skærmlås"</string>
-    <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"Vælg en lås for arbejdsapps"</string>
+    <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"Vælg en lås for apps til arbejdsprofil"</string>
     <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Vælg en ny lås for arbejdsapps"</string>
     <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"Konfigurer en alternativ metode til skærmlåsning for at opnå større sikkerhed"</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Vælg din alternative metode til skærmlåsning"</string>
@@ -1125,6 +1121,7 @@
     <string name="security_patch" msgid="4071756145347865382">"Sikkerhedsopdatering til Android"</string>
     <string name="model_info" msgid="8997566254717810904">"Model"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"Hardwareversion"</string>
+    <string name="manufactured_year" msgid="3401517138700926475">"Produktionsår"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"Udstyrs-id"</string>
     <string name="baseband_version" msgid="2600182227599835857">"Basebandversion"</string>
     <string name="kernel_version" msgid="3513538109381366881">"Kernesystem"</string>
@@ -1679,7 +1676,7 @@
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Tastaturgenveje"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Vis liste over genveje"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Tastatur og værktøjer for arbejdsprofil"</string>
-    <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"Skærmtastatur til arbejde"</string>
+    <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"Skærmtastatur til arbejdsprofil"</string>
     <string name="keyboard_default_layout" msgid="5377811770620422301">"Standard"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"Touchplade"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Touchplade og mus"</string>
@@ -1740,7 +1737,7 @@
     <string name="keyboard_layout_picker_title" msgid="240504762718562906">"Tastaturlayout"</string>
     <string name="keyboard_layout_picker_category_title" msgid="2369473692906329772">"Layout for fysisk tastatur"</string>
     <string name="user_dict_settings_title" msgid="680410651924276991">"Personlig ordbog"</string>
-    <string name="user_dict_settings_for_work_title" msgid="1245315720684961770">"Personlig ordbog til arbejdet"</string>
+    <string name="user_dict_settings_for_work_title" msgid="1245315720684961770">"Personlig ordbog til arbejdsprofil"</string>
     <string name="user_dict_settings_summary" msgid="4939694372338975081">"Tilføj ord, der skal bruges i apps som f.eks. Stavekontrol"</string>
     <string name="user_dict_settings_add_menu_title" msgid="8046882347281382968">"Tilføj"</string>
     <string name="user_dict_settings_add_dialog_title" msgid="3485845465134083084">"Føj til ordbog"</string>
@@ -2664,7 +2661,7 @@
     <string name="user_credential_removed" msgid="4087675887725394743">"Fjernede loginoplysninger: <xliff:g id="CREDENTIAL_NAME">%s</xliff:g>"</string>
     <string name="user_credential_none_installed" msgid="918620912366836994">"Der er ikke installeret nogen brugerloginoplysninger"</string>
     <string name="spellcheckers_settings_title" msgid="2799021700580591443">"Stavekontrol"</string>
-    <string name="spellcheckers_settings_for_work_title" msgid="6471603934176062893">"Stavekontrol til arbejdet"</string>
+    <string name="spellcheckers_settings_for_work_title" msgid="6471603934176062893">"Stavekontrol til arbejdsprofil"</string>
     <string name="current_backup_pw_prompt" msgid="4962276598546381140">"Angiv din aktuelle adgangskode til fuldstændig backup:"</string>
     <string name="new_backup_pw_prompt" msgid="4884439230209419503">"Angiv din nye adgangskode til fuldstændig backup:"</string>
     <string name="confirm_new_backup_pw_prompt" msgid="5753796799743881356">"Gentag din nye adgangskode til fuldstændig backup:"</string>
@@ -3894,7 +3891,7 @@
     <string name="winscope_trace_quick_settings_title" msgid="4104768565053226689">"Sporing af Winscope"</string>
     <string name="sensors_off_quick_settings_title" msgid="8472151847125917167">"Sensorer er slået fra"</string>
     <string name="managed_profile_settings_title" msgid="3400923723423564217">"Indstillinger for arbejdsprofil"</string>
-    <string name="managed_profile_contact_search_title" msgid="6562061740814513737">"Søg efter kontakter ved hjælp af indekset for arbejde i personlige apps"</string>
+    <string name="managed_profile_contact_search_title" msgid="6562061740814513737">"Søg efter kontakter ved hjælp af indekset for arbejdsprofil i personlige apps"</string>
     <string name="managed_profile_contact_search_summary" msgid="4974727886709219105">"Dine søgninger og indgående opkald kan muligvis ses af din it-administrator"</string>
     <string name="cross_profile_calendar_title" msgid="7570277841490216947">"Kalender for flere profiler"</string>
     <string name="cross_profile_calendar_summary" msgid="8856185206722860069">"Se arbejdsbegivenheder i din personlige kalender"</string>
@@ -4149,7 +4146,6 @@
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Skift appens kompatibilitetsændringer"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Ændringer i standardvalg for aktiveret"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"Ændringer i standardvalg for deaktiveret"</string>
-    <string name="platform_compat_dialog_title_no_apps" msgid="4387656000745989506">"Der er ingen apps"</string>
     <string name="platform_compat_dialog_text_no_apps" msgid="5715226015751055812">"Det er kun apps med fejlretningsmuligheder, som kan få ændret appkompatibiliteten. Installer en app med fejlretningsmuligheder, og prøv igen."</string>
     <string name="disabled_dependent_setting_summary" msgid="4508635725315852504">"Er afhængig af en anden indstilling"</string>
     <string name="my_device_info_account_preference_title" msgid="9197139254007133175">"Konto"</string>
@@ -4163,8 +4159,7 @@
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"Giv denne app tilladelse til at aktivere og deaktivere Wi-Fi, søge efter og oprette forbindelse til Wi-Fi-netværk, tilføje og fjerne netværk eller starte et lokalt hotspot"</string>
     <string name="change_nfc_tag_apps_title" msgid="91514009058149617">"Åbn via NFC"</string>
     <string name="change_nfc_tag_apps_detail_switch" msgid="240286205725043561">"Giv appen tilladelse til at åbne, når der scannes et NFC-tag"</string>
-    <!-- no translation found for change_nfc_tag_apps_detail_summary (3338220223868942195) -->
-    <skip />
+    <string name="change_nfc_tag_apps_detail_summary" msgid="3338220223868942195">"Giv appen tilladelse til at åbne, når der scannes et NFC-tag.\nHvis denne tilladelse er aktiveret, kan appen vælges, når der registreres et tag."</string>
     <string name="media_output_title" msgid="8283629315159510680">"Afspil medier på"</string>
     <string name="media_output_label_title" msgid="4139048973886819148">"Afspil <xliff:g id="LABEL">%s</xliff:g> på"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"Denne enhed"</string>

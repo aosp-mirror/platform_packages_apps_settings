@@ -65,8 +65,7 @@
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"为左耳进行配对"</string>
     <string name="bluetooth_device_controls_general" msgid="1399214835599665488">"适合所有可用的助听设备"</string>
     <string name="bluetooth_device_controls_title" msgid="1895676556354697234">"助听装置设置"</string>
-    <!-- no translation found for bluetooth_device_controls_summary (8115767735418425663) -->
-    <skip />
+    <string name="bluetooth_device_controls_summary" msgid="8115767735418425663">"快捷方式、助听器兼容性"</string>
     <string name="bluetooth_device_controls_specific" msgid="7706863288754077107">"适合此设备"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"音频输出"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"音频输出简介"</string>
@@ -254,7 +253,7 @@
     <string name="location_settings_title" msgid="8375074508036087178">"位置信息"</string>
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"使用位置信息"</string>
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"已关闭"</string>
-    <string name="location_settings_summary_location_on" msgid="7029728269719893381">"{count,plural, =1{已开启 - # 个应用有权访问位置信息}other{已开启 - # 个应用有权访问位置信息}}"</string>
+    <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{已开启 / # 个应用有权访问位置信息}other{已开启 / # 个应用有权访问位置信息}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"正在加载…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"具有附近设备权限的应用可以确定已连接的设备的相对位置。"</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"应用和服务的位置信息使用权处于关闭状态。在您拨打紧急电话号码或向该号码发送短信时，系统可能仍会将您的设备位置信息发送给急救人员。"</string>
@@ -349,17 +348,17 @@
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="6104718999323591180">"不用了"</string>
     <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="4068276083536421828">"我同意"</string>
     <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"要跳过指纹设置吗？"</string>
-    <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"指纹设置只需一两分钟即可完成。如果您选择跳过，之后还可以在设置中添加指纹。"</string>
+    <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"指纹设置只需一两分钟即可完成。如果您选择跳过，之后还可以在“设置”中添加指纹。"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"看到该图标时，您可以使用指纹验证身份，例如在登录应用或批准购买交易时"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_1" msgid="4360262371633254407">"注意事项"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"运作方式"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="5909924864816776516">"指纹解锁功能会为您创建一个具有唯一性的指纹模型，用于验证您的身份。为了在设置过程中创建指纹模型，您需要截取指纹不同部位的图像。"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="5909924864816776516">"指纹解锁功能会为您创建一个具有唯一性的指纹模型，用于验证您的身份。为了在设置过程中创建指纹模型，您需要录入不同位置的指纹图像。"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2" msgid="3493356605815124807">"指纹解锁功能会为您的孩子创建一个具有唯一性的指纹模型，用于验证其身份。为了在设置过程中创建指纹模型，孩子需要截取指纹不同部位的图像。"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"为获得最佳效果，请使用获得 Made For Google 认证的屏幕保护膜。如果使用其他屏幕保护膜，系统可能无法识别您的指纹。"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"为获得最佳效果，请使用获得 Made For Google 认证的屏幕保护膜。如果使用其他屏幕保护膜，系统可能无法识别您孩子的指纹。"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"手表解锁"</string>
-    <string name="biometric_settings_intro_with_activeunlock" msgid="6583248094453119314">"在设置人脸解锁和指纹解锁时，如果您戴着口罩或所在区域光线较暗，手机会要求您提供指纹。\n\n如果系统无法识别您的面孔或指纹，您可以用手表进行解锁。"</string>
+    <string name="biometric_settings_intro_with_activeunlock" msgid="6583248094453119314">"在设置人脸解锁和指纹解锁时，如果您戴着口罩或所在区域光线较暗，手机会要求您使用指纹解锁。\n\n如果系统无法识别您的面孔或指纹，您可以用手表进行解锁。"</string>
     <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"如果系统无法识别您的指纹，您可以用手表进行解锁。"</string>
     <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"如果系统无法识别您的面孔，您可以用手表进行解锁。"</string>
     <string name="biometric_settings_use_fingerprint_or_watch_for" msgid="1160830065613858095">"将指纹或手表用于"</string>
@@ -387,9 +386,9 @@
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"需要设置"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"已添加面孔和多个指纹"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"已添加面孔和一个指纹"</string>
-    <string name="biometric_settings_intro" msgid="4263069383955676756">"在设置人脸解锁和指纹解锁时，如果您戴着口罩或所在区域光线较暗，手机会要求您提供指纹"</string>
+    <string name="biometric_settings_intro" msgid="4263069383955676756">"在设置人脸解锁和指纹解锁时，如果您戴着口罩或所在区域光线较暗，手机会要求您使用指纹解锁"</string>
     <string name="biometric_settings_category_ways_to_unlock" msgid="3384767901580915266">"解锁方式"</string>
-    <string name="biometric_settings_category_use_face_fingerprint" msgid="4377659744376863913">"使用人脸或指纹"</string>
+    <string name="biometric_settings_category_use_face_fingerprint" msgid="4377659744376863913">"人脸或指纹的用途"</string>
     <string name="biometric_settings_use_biometric_unlock_phone" msgid="8180914579885804358">"解锁手机"</string>
     <string name="biometric_settings_use_biometric_for_apps" msgid="6201168728906364189">"在应用中验证您的身份"</string>
     <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"刷脸"</string>
@@ -472,7 +471,7 @@
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"指纹设置已超时"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message_setup" msgid="8521566666541069383">"您可以稍后在“设置”中设置指纹。"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message_setup" msgid="8140162986046783546">"出了点问题。您可以稍后在“设置”中设置指纹。"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="3534341971920335247">"您可以稍后设置指纹。"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="3534341971920335247">"您可以稍后再设置指纹。"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="4344665784935791640">"出了点问题。您可以稍后设置指纹。"</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"再添加一个"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"下一步"</string>
@@ -510,7 +509,7 @@
     <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"为工作应用选择一种锁定方式"</string>
     <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"选择新的工作资料屏幕锁定方式"</string>
     <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"为提升安全性，请设置备用的屏幕解锁方式"</string>
-    <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"选择您的备用屏幕锁定方式"</string>
+    <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"请选择备用的锁屏方式"</string>
     <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"如果您忘记屏幕解锁方式，IT 管理员将无法为您重置。"</string>
     <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"为工作资料设置单独的屏幕锁定方式"</string>
     <string name="lock_settings_picker_profile_message" msgid="9142379549980873478">"如果您忘记了此锁定方式的相关信息，请让您的 IT 管理员将其重置"</string>
@@ -1122,6 +1121,7 @@
     <string name="security_patch" msgid="4071756145347865382">"Android 安全更新"</string>
     <string name="model_info" msgid="8997566254717810904">"型号"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"硬件版本"</string>
+    <string name="manufactured_year" msgid="3401517138700926475">"制造年份"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"设备 ID"</string>
     <string name="baseband_version" msgid="2600182227599835857">"基带版本"</string>
     <string name="kernel_version" msgid="3513538109381366881">"内核版本"</string>
@@ -3175,7 +3175,7 @@
     <string name="silent_notifications_status_bar" msgid="6113307620588767516">"隐藏状态栏中的无声通知"</string>
     <string name="notification_pulse_title" msgid="8013178454646671529">"闪烁指示灯"</string>
     <string name="lock_screen_notifications_title" msgid="2876323153692406203">"隐私"</string>
-    <string name="lockscreen_bypass_title" msgid="6519964196744088573">"跳过锁定屏幕"</string>
+    <string name="lockscreen_bypass_title" msgid="6519964196744088573">"跳过锁屏画面"</string>
     <string name="lockscreen_bypass_summary" msgid="4578154430436224161">"解锁后直接进入上次使用的界面。锁屏状态下不会显示通知。从屏幕顶部向下滑动可查看通知。"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"锁定屏幕, 锁屏, 跳过, 绕过"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"当工作资料锁定时"</string>
@@ -4146,7 +4146,6 @@
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"在应用兼容性变更之间切换"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"默认启用的应用兼容性变更"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"默认停用的应用兼容性变更"</string>
-    <string name="platform_compat_dialog_title_no_apps" msgid="4387656000745989506">"没有可用的应用"</string>
     <string name="platform_compat_dialog_text_no_apps" msgid="5715226015751055812">"只能修改可调试应用的应用兼容性变更。请安装可调试的应用，然后重试。"</string>
     <string name="disabled_dependent_setting_summary" msgid="4508635725315852504">"必须一并更改其他设置"</string>
     <string name="my_device_info_account_preference_title" msgid="9197139254007133175">"帐号"</string>

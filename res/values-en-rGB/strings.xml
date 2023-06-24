@@ -65,8 +65,7 @@
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"Pair left ear"</string>
     <string name="bluetooth_device_controls_general" msgid="1399214835599665488">"For all available hearing devices"</string>
     <string name="bluetooth_device_controls_title" msgid="1895676556354697234">"Hearing device settings"</string>
-    <!-- no translation found for bluetooth_device_controls_summary (8115767735418425663) -->
-    <skip />
+    <string name="bluetooth_device_controls_summary" msgid="8115767735418425663">"Shortcut, hearing aid compatibility"</string>
     <string name="bluetooth_device_controls_specific" msgid="7706863288754077107">"For this device"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Audio output"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"About audio output"</string>
@@ -254,7 +253,7 @@
     <string name="location_settings_title" msgid="8375074508036087178">"Location"</string>
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"Use location"</string>
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Off"</string>
-    <string name="location_settings_summary_location_on" msgid="7029728269719893381">"{count,plural, =1{On – # app has access to location}other{On – # apps have access to location}}"</string>
+    <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{On / # app has access to location}other{On / # apps have access to location}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Loading…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Apps with the Nearby devices permission can determine the relative position of connected devices."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Location access is off for apps and services. Your device location may still be sent to emergency responders when you call or text an emergency number."</string>
@@ -327,10 +326,8 @@
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2899669764446232715">"Delete face model?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="916131485988121592">"Your face model will be permanently and securely deleted.\n\nAfter deletion, you will need your PIN, pattern or password to unlock your phone or for authentication in apps."</string>
     <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"Your face model will be permanently and securely deleted.\n\nAfter deletion, you will need your PIN, pattern or password to unlock your phone."</string>
-    <!-- no translation found for security_settings_face_remove_dialog_details_fingerprint (7609582230650860974) -->
-    <skip />
-    <!-- no translation found for security_settings_face_remove_dialog_details_fingerprint_conv (2627374706274503259) -->
-    <skip />
+    <string name="security_settings_face_remove_dialog_details_fingerprint" msgid="7609582230650860974">"Your face model will be permanently and securely deleted.\n\nAfter deletion, you will need your fingerprint, PIN, pattern or password to unlock your phone or for authentication in apps."</string>
+    <string name="security_settings_face_remove_dialog_details_fingerprint_conv" msgid="2627374706274503259">"Your face model will be permanently and securely deleted.\n\nAfter deletion, you will need your fingerprint, PIN, pattern or password to unlock your phone."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Use Face Unlock to unlock your phone"</string>
     <string name="security_settings_fingerprint" msgid="6387775386189204201">"Fingerprint"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Fingerprint"</string>
@@ -1124,6 +1121,7 @@
     <string name="security_patch" msgid="4071756145347865382">"Android security update"</string>
     <string name="model_info" msgid="8997566254717810904">"Model"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"Hardware version"</string>
+    <string name="manufactured_year" msgid="3401517138700926475">"Manufactured year"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"Equipment ID"</string>
     <string name="baseband_version" msgid="2600182227599835857">"Baseband version"</string>
     <string name="kernel_version" msgid="3513538109381366881">"Kernel version"</string>
@@ -2861,7 +2859,7 @@
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Recent apps, default apps"</string>
     <string name="notification_settings_work_profile" msgid="6076211850526353975">"Notification access is not available for apps in the work profile."</string>
     <string name="account_dashboard_title" msgid="8228773251948253914">"Passwords and accounts"</string>
-    <string name="account_dashboard_default_summary" msgid="1730719656099599488">"Saved passwords, auto-fill, synced accounts"</string>
+    <string name="account_dashboard_default_summary" msgid="1730719656099599488">"Saved passwords, autofill, synced accounts"</string>
     <string name="app_default_dashboard_title" msgid="4071015747629103216">"Default apps"</string>
     <string name="cloned_apps_dashboard_title" msgid="5542076801222950921">"Cloned apps"</string>
     <string name="desc_cloned_apps_intro_text" msgid="1369621522882622476">"Create a second instance of an app so that you can use two accounts at the same time."</string>
@@ -3914,9 +3912,9 @@
     <string name="emergency_settings_preference_title" msgid="6183455153241187148">"Safety and emergency"</string>
     <string name="emergency_dashboard_summary" msgid="401033951074039302">"Emergency SOS, medical info, alerts"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Gesture navigation"</string>
-    <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"To go Home, swipe up from the bottom of the screen. To switch apps, swipe up from the bottom, hold, then release. To go back, swipe from either the left or right edge."</string>
+    <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"To go home, swipe up from the bottom of the screen. To switch apps, swipe up from the bottom, hold, then release. To go back, swipe from either the left or right edge."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"3-button navigation"</string>
-    <string name="legacy_navigation_summary" msgid="5905301067778326433">"Go back, Home and switch apps with buttons at the bottom of your screen."</string>
+    <string name="legacy_navigation_summary" msgid="5905301067778326433">"Go back, home and switch apps with buttons at the bottom of your screen."</string>
     <string name="keywords_system_navigation" msgid="3131782378486554934">"system navigation, 2-button navigation, 3-button navigation, gesture navigation, swipe"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Digital assistant"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Swipe to invoke the assistant"</string>
@@ -4148,7 +4146,6 @@
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Toggle app compatibility changes"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Default enabled changes"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"Default disabled changes"</string>
-    <string name="platform_compat_dialog_title_no_apps" msgid="4387656000745989506">"No apps available"</string>
     <string name="platform_compat_dialog_text_no_apps" msgid="5715226015751055812">"App compatibility changes can only be modified for debuggable apps. Install a debuggable app and try again."</string>
     <string name="disabled_dependent_setting_summary" msgid="4508635725315852504">"Depends on another setting"</string>
     <string name="my_device_info_account_preference_title" msgid="9197139254007133175">"Account"</string>
@@ -4162,8 +4159,7 @@
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"Allow this app to turn Wi-Fi on or off, scan and connect to Wi-Fi networks, add or remove networks, or start a local-only hotspot"</string>
     <string name="change_nfc_tag_apps_title" msgid="91514009058149617">"Launch via NFC"</string>
     <string name="change_nfc_tag_apps_detail_switch" msgid="240286205725043561">"Allow launch on NFC scan"</string>
-    <!-- no translation found for change_nfc_tag_apps_detail_summary (3338220223868942195) -->
-    <skip />
+    <string name="change_nfc_tag_apps_detail_summary" msgid="3338220223868942195">"Allow this app to launch when an NFC tag is scanned.\nIf this permission is on, the app will be available as an option whenever a tag is detected."</string>
     <string name="media_output_title" msgid="8283629315159510680">"Play media to"</string>
     <string name="media_output_label_title" msgid="4139048973886819148">"Play <xliff:g id="LABEL">%s</xliff:g> on"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"This device"</string>
