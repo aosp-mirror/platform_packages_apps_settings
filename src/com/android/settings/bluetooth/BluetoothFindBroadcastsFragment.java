@@ -125,6 +125,10 @@ public class BluetoothFindBroadcastsFragment extends RestrictedDashboardFragment
                         Log.w(TAG, "onSourceAdded: mSelectedPreference == null!");
                         return;
                     }
+                    if (mLeBroadcastAssistant != null
+                            && mLeBroadcastAssistant.isSearchInProgress()) {
+                        mLeBroadcastAssistant.stopSearchingForSources();
+                    }
                     getActivity().runOnUiThread(() -> updateListCategoryFromBroadcastMetadata(
                             mSelectedPreference.getBluetoothLeBroadcastMetadata(), true));
                 }
@@ -232,6 +236,9 @@ public class BluetoothFindBroadcastsFragment extends RestrictedDashboardFragment
     public void onStop() {
         super.onStop();
         if (mLeBroadcastAssistant != null) {
+            if (mLeBroadcastAssistant.isSearchInProgress()) {
+                mLeBroadcastAssistant.stopSearchingForSources();
+            }
             mLeBroadcastAssistant.unregisterServiceCallBack(mBroadcastAssistantCallback);
         }
     }
