@@ -212,7 +212,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                     getTitleFromCredentialType(credentialType, isEffectiveUserManagedProfile));
         }
         if (mDetails == null) {
-            promptInfo.setSubtitle(
+            promptInfo.setDeviceCredentialSubtitle(
                     getDetailsFromCredentialType(credentialType, isEffectiveUserManagedProfile));
         }
 

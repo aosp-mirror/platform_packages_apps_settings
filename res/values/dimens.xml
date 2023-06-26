@@ -242,6 +242,10 @@
     <item name="face_preview_scale" format="float" type="dimen">1.0</item>
     <dimen name="face_enroll_intro_illustration_margin_bottom">0dp</dimen>
 
+    <!-- Lock pattern view size, align sysui biometric_auth_pattern_view_size -->
+    <dimen name="biometric_auth_pattern_view_size">348dp</dimen>
+    <dimen name="biometric_auth_pattern_view_max_size">@dimen/biometric_auth_pattern_view_size</dimen>
+
     <!-- Confirm device credentials -->
     <dimen name="confirm_credentials_security_method_margin">48dp</dimen>
     <dimen name="confirm_credentials_layout_width">@dimen/match_parent</dimen>
@@ -454,6 +458,9 @@
     <dimen name="output_switcher_panel_icon_size">52dp</dimen>
     <dimen name="output_switcher_panel_icon_corner_radius">16dp</dimen>
 
+    <!-- Notification channels panel related dimensions -->
+    <dimen name="notif_channel_panel_max_height">600dp</dimen>
+
     <!-- Settings panel related dimensions -->
     <dimen name="settings_panel_corner_radius">28dp</dimen>
     <dimen name="settings_panel_title_margin">24dp</dimen>
@@ -513,4 +520,18 @@
     <dimen name="qrcode_icon_size">27dp</dimen>
     <!-- Margin for SD card setup completion Image -->
     <dimen name="setup_completion_margin_top">88dp</dimen>
+
+    <!-- Biometrics Face enroll education dimensions-->
+    <dimen name="face_enroll_icon_large_width">300dp</dimen>
+    <dimen name="face_enroll_icon_large_height">300dp</dimen>
+    <dimen name="illustration_lottie_height">440dp</dimen>
+    <dimen name="illustration_accessibility_margin_top">0dp</dimen>
+    <dimen name="face_enroll_education_lottie_frame_margin_top">-24dp</dimen>
+    <dimen name="lottie_animation_view_margin_top">-52dp</dimen>
+    <dimen name="limited_vision_button_margin_top">0dp</dimen>
+    <dimen name="limited_vision_button_margin_bottom">0dp</dimen>
+    <dimen name="limited_vision_button_toggle_margin_top">0dp</dimen>
+
+    <!-- Default margin for side fps enroll find sensor lottie -->
+    <dimen name="sfps_enroll_find_sensor_lottie_margin">0dp</dimen>
 </resources>

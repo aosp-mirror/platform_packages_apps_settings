@@ -81,12 +81,12 @@ public class FingerprintSettingsRequireScreenOnToAuthPreferenceControllerTest {
     @Test
     public void onPreferenceChange_settingIsUpdated() {
         boolean state = Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.SFPS_REQUIRE_SCREEN_ON_TO_AUTH_ENABLED, 1) != 0;
+                Settings.Secure.SFPS_PERFORMANT_AUTH_ENABLED, 1) != 0;
 
         assertThat(mController.isChecked()).isFalse();
         assertThat(mController.onPreferenceChange(mPreference, !state)).isTrue();
         boolean newState = Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.SFPS_REQUIRE_SCREEN_ON_TO_AUTH_ENABLED, 1) != 0;
+                Settings.Secure.SFPS_PERFORMANT_AUTH_ENABLED, 1) != 0;
         assertThat(newState).isEqualTo(!state);
     }
 

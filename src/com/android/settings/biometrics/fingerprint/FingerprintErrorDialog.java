@@ -40,18 +40,20 @@ import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 public class FingerprintErrorDialog extends InstrumentedDialogFragment {
 
     public static final String KEY_ERROR_MSG = "error_msg";
+    public static final String KEY_ERROR_TITLE = "error_title";
     public static final String KEY_ERROR_ID = "error_id";
     public static final String KEY_UDFPS = "is_udfps";
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        CharSequence errorString = getArguments().getCharSequence(KEY_ERROR_MSG);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        final CharSequence errorString = getArguments().getCharSequence(KEY_ERROR_MSG);
+        final CharSequence errorTitle = getArguments().getCharSequence(KEY_ERROR_TITLE);
         final int errMsgId = getArguments().getInt(KEY_ERROR_ID);
         final boolean canAssumeUdfps = getArguments().getBoolean(KEY_UDFPS, false);
-        boolean wasTimeout = errMsgId == BiometricConstants.BIOMETRIC_ERROR_TIMEOUT;
+        final boolean wasTimeout = errMsgId == BiometricConstants.BIOMETRIC_ERROR_TIMEOUT;
 
-        builder.setTitle(R.string.security_settings_fingerprint_enroll_error_dialog_title)
+        builder.setTitle(errorTitle)
                 .setMessage(errorString)
                 .setCancelable(false)
                 .setPositiveButton(
@@ -60,7 +62,7 @@ public class FingerprintErrorDialog extends InstrumentedDialogFragment {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
-                                Activity activity = getActivity();
+                                final Activity activity = getActivity();
                                 if (wasTimeout && !canAssumeUdfps) {
                                     activity.setResult(RESULT_TIMEOUT);
                                 } else {
@@ -76,8 +78,8 @@ public class FingerprintErrorDialog extends InstrumentedDialogFragment {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     dialog.dismiss();
-                                    Activity activity = getActivity();
-                                    Intent intent = activity.getIntent();
+                                    final Activity activity = getActivity();
+                                    final Intent intent = activity.getIntent();
                                     intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                                     intent.putExtra(KEY_STATE_CANCELED, false);
                                     activity.startActivity(intent);
@@ -90,13 +92,13 @@ public class FingerprintErrorDialog extends InstrumentedDialogFragment {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     dialog.dismiss();
-                                    Activity activity = getActivity();
+                                    final Activity activity = getActivity();
                                     activity.setResult(RESULT_TIMEOUT);
                                     activity.finish();
                                 }
                             });
         }
-        AlertDialog dialog = builder.create();
+        final AlertDialog dialog = builder.create();
         dialog.setCanceledOnTouchOutside(false);
         return dialog;
     }
@@ -111,11 +113,13 @@ public class FingerprintErrorDialog extends InstrumentedDialogFragment {
             return;
         }
         CharSequence errMsg = host.getText(getErrorMessage(errMsgId));
+        final CharSequence errTitle = host.getText(getErrorTitle(errMsgId));
         if (!canAssumeUdfps
                 && errMsgId == BiometricConstants.BIOMETRIC_ERROR_TIMEOUT) {
             errMsg = host.getText(getErrorMessage(BiometricConstants.BIOMETRIC_ERROR_CANCELED));
         }
-        final FingerprintErrorDialog dialog = newInstance(errMsg, errMsgId, canAssumeUdfps);
+        final FingerprintErrorDialog dialog = newInstance(errMsg, errTitle,
+                errMsgId, canAssumeUdfps);
         dialog.show(fragmentManager, FingerprintErrorDialog.class.getName());
     }
 
@@ -133,11 +137,22 @@ public class FingerprintErrorDialog extends InstrumentedDialogFragment {
         }
     }
 
-    private static FingerprintErrorDialog newInstance(CharSequence msg, int msgId,
-            boolean canAssumeUdfps) {
-        FingerprintErrorDialog dialog = new FingerprintErrorDialog();
-        Bundle args = new Bundle();
+    private static int getErrorTitle(int errMsgId) {
+        switch (errMsgId) {
+            case FingerprintManager.FINGERPRINT_ERROR_UNABLE_TO_PROCESS:
+                return R.string
+                        .security_settings_fingerprint_enroll_error_unable_to_process_dialog_title;
+            default:
+                return R.string.security_settings_fingerprint_enroll_error_dialog_title;
+        }
+    }
+
+    private static FingerprintErrorDialog newInstance(CharSequence msg, CharSequence title,
+            int msgId, boolean canAssumeUdfps) {
+        final FingerprintErrorDialog dialog = new FingerprintErrorDialog();
+        final Bundle args = new Bundle();
         args.putCharSequence(KEY_ERROR_MSG, msg);
+        args.putCharSequence(KEY_ERROR_TITLE, title);
         args.putInt(KEY_ERROR_ID, msgId);
         args.putBoolean(KEY_UDFPS, canAssumeUdfps);
         dialog.setArguments(args);
