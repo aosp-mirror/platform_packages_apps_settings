@@ -242,6 +242,11 @@ public class VolumeSeekBarPreference extends SeekBarPreference {
         mTitle.setContentDescription(contentDescription);
     }
 
+    protected void setAccessibilityLiveRegion(int mode) {
+        if (mTitle == null) return;
+        mTitle.setAccessibilityLiveRegion(mode);
+    }
+
     public interface Callback {
         void onSampleStarting(SeekBarVolumizer sbv);
         void onStreamValueChanged(int stream, int progress);
