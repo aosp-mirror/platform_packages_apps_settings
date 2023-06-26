@@ -28,12 +28,6 @@
         android:summary="@string/summary_placeholder"
         settings:searchable="false"/>
 
-    <Preference
-        android:key="gesture_assist_application"
-        android:title="@string/assist_gesture_title"
-        android:fragment="com.android.settings.gestures.AssistGestureSettings"
-        settings:controller="com.android.settings.gestures.AssistGestureSettingsPreferenceController" />
-
     <SwitchPreference
         android:key="context"
         android:title="@string/assist_access_context_title"

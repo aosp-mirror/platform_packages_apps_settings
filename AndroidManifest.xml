@@ -641,20 +641,6 @@
                        android:value="@string/menu_key_connected_devices"/>
         </activity-alias>
 
-        <activity android:name="Settings$AssistGestureSettingsActivity"
-            android:label="@string/assist_gesture_title"
-            android:exported="true"
-            android:icon="@drawable/ic_settings_gestures">
-            <intent-filter>
-                <action android:name="android.settings.ASSIST_GESTURE_SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.gestures.AssistGestureSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_system"/>
-        </activity>
-
         <activity android:name="Settings$FaceSettingsActivity"
             android:label="@string/security_settings_face_preference_title"
             android:exported="true"
