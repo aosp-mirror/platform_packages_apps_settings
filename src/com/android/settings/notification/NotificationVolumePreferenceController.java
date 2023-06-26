@@ -26,6 +26,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.service.notification.NotificationListenerService;
+import android.view.View;
 
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.PreferenceScreen;
@@ -138,14 +139,19 @@ public class NotificationVolumePreferenceController extends
         if (mPreference != null) {
             int ringerMode = getEffectiveRingerMode();
             if (ringerMode == AudioManager.RINGER_MODE_VIBRATE) {
+                mPreference.setAccessibilityLiveRegion(View.ACCESSIBILITY_LIVE_REGION_POLITE);
                 mPreference.updateContentDescription(
                         mContext.getString(
                                 R.string.notification_volume_content_description_vibrate_mode));
             } else if (ringerMode == AudioManager.RINGER_MODE_SILENT) {
+                mPreference.setAccessibilityLiveRegion(View.ACCESSIBILITY_LIVE_REGION_POLITE);
                 mPreference.updateContentDescription(
                         mContext.getString(R.string.volume_content_description_silent_mode,
                                 mPreference.getTitle()));
             } else {
+                // Set a11y mode to none in order not to trigger talkback while changing
+                // notification volume in normal mode.
+                mPreference.setAccessibilityLiveRegion(View.ACCESSIBILITY_LIVE_REGION_NONE);
                 mPreference.updateContentDescription(mPreference.getTitle());
             }
         }
