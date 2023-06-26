@@ -17,6 +17,7 @@
 package com.android.settings.users;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.UserManager;
 
@@ -73,6 +74,7 @@ public class GuestTelephonyPreferenceController extends TogglePreferenceControll
     public void updateState(Preference preference) {
         super.updateState(preference);
         mUserCaps.updateAddUserCapabilities(mContext);
-        preference.setVisible(isAvailable() && mUserCaps.mUserSwitcherEnabled);
+        preference.setVisible(isAvailable() && mUserCaps.mUserSwitcherEnabled && mContext
+                .getPackageManager().hasSystemFeature(PackageManager.FEATURE_TELEPHONY));
     }
 }
