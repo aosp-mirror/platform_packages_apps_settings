@@ -22,13 +22,13 @@ import android.hardware.fingerprint.FingerprintManager
 import android.hardware.fingerprint.FingerprintSensorPropertiesInternal
 import android.hardware.fingerprint.IFingerprintAuthenticatorsRegisteredCallback
 import android.os.UserHandle
-import android.support.test.uiautomator.By
-import android.support.test.uiautomator.UiDevice
-import android.support.test.uiautomator.UiObject2
-import android.support.test.uiautomator.Until
 import android.util.Log
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.uiautomator.By
+import androidx.test.uiautomator.UiDevice
+import androidx.test.uiautomator.UiObject2
+import androidx.test.uiautomator.Until
 import com.android.internal.widget.LockPatternChecker
 import com.android.internal.widget.LockPatternUtils
 import com.android.internal.widget.LockscreenCredential
@@ -57,6 +57,7 @@ class FingerprintEnrollmentActivityTest {
     private var canAssumeUdfps = false
     private var canAssumeSfps = false
     private var enrollingPageTitle: String = ""
+    private var runAsLandscape = false
 
     private val device: UiDevice by lazy {
         UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
@@ -108,12 +109,16 @@ class FingerprintEnrollmentActivityTest {
     @After
     @Throws(Exception::class)
     fun tearDown() {
+        runAsLandscape = false
+        setDeviceOrientation()
+
         LockScreenUtil.resetLockscreen(TEST_PIN)
         device.pressHome()
     }
 
     @Test
     fun testIntroChooseLock() {
+        setDeviceOrientation()
         val intent = newActivityIntent(false)
         context.startActivity(intent)
         assertThat(
@@ -122,6 +127,12 @@ class FingerprintEnrollmentActivityTest {
                 IDLE_TIMEOUT
             )
         ).isTrue()
+    }
+
+    @Test
+    fun testIntroChooseLock_landscape() {
+        runAsLandscape = true
+        testIntroChooseLock()
     }
 
     private fun verifyIntroPage() {
@@ -141,7 +152,8 @@ class FingerprintEnrollmentActivityTest {
         // Click more btn at most twice and the introduction should stay in the last page
         var moreBtn: UiObject2? = null
         var i = 0
-        while (i < 2 && device.findObject(By.text("More")).also { moreBtn = it } != null) {
+        val more = if (runAsLandscape) 5 else 2
+        while (i < more && device.findObject(By.text("More")).also { moreBtn = it } != null) {
             moreBtn!!.click()
             device.waitForIdle()
             device.wait(Until.hasObject(By.text("More")), IDLE_TIMEOUT)
@@ -154,6 +166,8 @@ class FingerprintEnrollmentActivityTest {
     @Test
     fun testIntroWithGkPwHandle_withUdfps_clickStart() {
         Assume.assumeTrue(canAssumeUdfps)
+
+        setDeviceOrientation()
         LockScreenUtil.setLockscreen(LockScreenUtil.LockscreenType.PIN, TEST_PIN, true)
         launchIntroWithGkPwHandle(false)
 
@@ -179,8 +193,16 @@ class FingerprintEnrollmentActivityTest {
     }
 
     @Test
+    fun testIntroWithGkPwHandle_withUdfps_clickStart_landscape() {
+        runAsLandscape = true
+        testIntroWithGkPwHandle_withUdfps_clickStart()
+    }
+
+    @Test
     fun testIntroWithGkPwHandle_withUdfps_clickLottie() {
         Assume.assumeTrue(canAssumeUdfps)
+
+        setDeviceOrientation()
         LockScreenUtil.setLockscreen(LockScreenUtil.LockscreenType.PIN, TEST_PIN, true)
         launchIntroWithGkPwHandle(false)
 
@@ -204,8 +226,16 @@ class FingerprintEnrollmentActivityTest {
     }
 
     @Test
+    fun testIntroWithGkPwHandle_withUdfps_clickLottie_landscape() {
+        runAsLandscape = true
+        testIntroWithGkPwHandle_withUdfps_clickLottie()
+    }
+
+    @Test
     fun testIntroWithGkPwHandle_withSfps() {
         Assume.assumeTrue(canAssumeSfps)
+
+        setDeviceOrientation()
         LockScreenUtil.setLockscreen(LockScreenUtil.LockscreenType.PIN, TEST_PIN, true)
         launchIntroWithGkPwHandle(false)
 
@@ -226,8 +256,16 @@ class FingerprintEnrollmentActivityTest {
     }
 
     @Test
+    fun testIntroWithGkPwHandle_withSfps_landscape() {
+        runAsLandscape = true
+        testIntroWithGkPwHandle_withSfps()
+    }
+
+    @Test
     fun testIntroWithGkPwHandle_withRfps() {
         Assume.assumeFalse(canAssumeUdfps || canAssumeSfps)
+
+        setDeviceOrientation()
         LockScreenUtil.setLockscreen(LockScreenUtil.LockscreenType.PIN, TEST_PIN, true)
         launchIntroWithGkPwHandle(false)
 
@@ -253,7 +291,14 @@ class FingerprintEnrollmentActivityTest {
     }
 
     @Test
+    fun testIntroWithGkPwHandle_withRfps_landscape() {
+        runAsLandscape = true
+        testIntroWithGkPwHandle_withRfps()
+    }
+
+    @Test
     fun testIntroWithGkPwHandle_clickNoThanksInIntroPage() {
+        setDeviceOrientation()
         LockScreenUtil.setLockscreen(LockScreenUtil.LockscreenType.PIN, TEST_PIN, true)
         launchIntroWithGkPwHandle(false)
 
@@ -269,7 +314,14 @@ class FingerprintEnrollmentActivityTest {
     }
 
     @Test
+    fun testIntroWithGkPwHandle_clickNoThanksInIntroPage_landscape() {
+        runAsLandscape = true
+        testIntroWithGkPwHandle_clickNoThanksInIntroPage()
+    }
+
+    @Test
     fun testIntroWithGkPwHandle_clickSkipInFindSensor() {
+        setDeviceOrientation()
         LockScreenUtil.setLockscreen(LockScreenUtil.LockscreenType.PIN, TEST_PIN, true)
         launchIntroWithGkPwHandle(false)
 
@@ -292,7 +344,14 @@ class FingerprintEnrollmentActivityTest {
     }
 
     @Test
+    fun testIntroWithGkPwHandle_clickSkipInFindSensor_landscape() {
+        runAsLandscape = true
+        testIntroWithGkPwHandle_clickSkipInFindSensor()
+    }
+
+    @Test
     fun testIntroWithGkPwHandle_clickSkipAnywayInFindFpsDialog_whenIsSuw() {
+        setDeviceOrientation()
         LockScreenUtil.setLockscreen(LockScreenUtil.LockscreenType.PIN, TEST_PIN, true)
         launchIntroWithGkPwHandle(true)
 
@@ -323,7 +382,14 @@ class FingerprintEnrollmentActivityTest {
     }
 
     @Test
+    fun testIntroWithGkPwHandle_clickSkipAnywayInFindFpsDialog_whenIsSuw_landscape() {
+        runAsLandscape = true
+        testIntroWithGkPwHandle_clickSkipAnywayInFindFpsDialog_whenIsSuw()
+    }
+
+    @Test
     fun testIntroWithGkPwHandle_clickGoBackInFindFpsDialog_whenIsSuw() {
+        setDeviceOrientation()
         LockScreenUtil.setLockscreen(LockScreenUtil.LockscreenType.PIN, TEST_PIN, true)
         launchIntroWithGkPwHandle(true)
 
@@ -352,7 +418,14 @@ class FingerprintEnrollmentActivityTest {
     }
 
     @Test
+    fun testIntroWithGkPwHandle_clickGoBackInFindFpsDialog_whenIsSuw_landscape() {
+        runAsLandscape = true
+        testIntroWithGkPwHandle_clickGoBackInFindFpsDialog_whenIsSuw()
+    }
+
+    @Test
     fun testIntroCheckPin() {
+        setDeviceOrientation()
         LockScreenUtil.setLockscreen(LockScreenUtil.LockscreenType.PIN, TEST_PIN, true)
         val intent = newActivityIntent(false)
         context.startActivity(intent)
@@ -366,6 +439,7 @@ class FingerprintEnrollmentActivityTest {
 
     @Test
     fun testEnrollingWithGkPwHandle() {
+        setDeviceOrientation()
         LockScreenUtil.setLockscreen(LockScreenUtil.LockscreenType.PIN, TEST_PIN, true)
         launchEnrollingWithGkPwHandle()
 
@@ -375,8 +449,16 @@ class FingerprintEnrollmentActivityTest {
     }
 
     @Test
+    fun testEnrollingWithGkPwHandle_landscape() {
+        runAsLandscape = true
+        testEnrollingWithGkPwHandle()
+    }
+
+    @Test
     fun testEnrollingIconTouchDialog_withSfps() {
         Assume.assumeTrue(canAssumeSfps)
+
+        setDeviceOrientation()
         LockScreenUtil.setLockscreen(LockScreenUtil.LockscreenType.PIN, TEST_PIN, true)
         launchEnrollingWithGkPwHandle()
 
@@ -410,8 +492,16 @@ class FingerprintEnrollmentActivityTest {
     }
 
     @Test
+    fun testEnrollingIconTouchDialog_withSfps_landscape() {
+        runAsLandscape = true
+        testEnrollingIconTouchDialog_withSfps()
+    }
+
+    @Test
     fun testEnrollingIconTouchDialog_withRfps() {
         Assume.assumeFalse(canAssumeUdfps || canAssumeSfps)
+
+        setDeviceOrientation()
         LockScreenUtil.setLockscreen(LockScreenUtil.LockscreenType.PIN, TEST_PIN, true)
         launchEnrollingWithGkPwHandle()
 
@@ -444,8 +534,16 @@ class FingerprintEnrollmentActivityTest {
     }
 
     @Test
+    fun testEnrollingIconTouchDialog_withRfps_landscape() {
+        runAsLandscape = true
+        testEnrollingIconTouchDialog_withRfps()
+    }
+
+    @Test
     fun testFindUdfpsWithGkPwHandle_clickStart() {
         Assume.assumeTrue(canAssumeUdfps)
+
+        setDeviceOrientation()
         LockScreenUtil.setLockscreen(LockScreenUtil.LockscreenType.PIN, TEST_PIN, true)
         launchFindSensorWithGkPwHandle()
 
@@ -465,8 +563,53 @@ class FingerprintEnrollmentActivityTest {
     }
 
     @Test
+    fun testFindUdfpsWithGkPwHandle_clickStart_landscape() {
+        runAsLandscape = true
+        testFindUdfpsWithGkPwHandle_clickStart()
+    }
+
+    @Test
+    fun testFindUdfpsLandscapeWithGkPwHandle_clickStartThenBack() {
+        Assume.assumeTrue(canAssumeUdfps)
+
+        setDeviceOrientation()
+        LockScreenUtil.setLockscreen(LockScreenUtil.LockscreenType.PIN, TEST_PIN, true)
+        launchFindSensorWithGkPwHandle()
+
+        // FindUdfps page (portrait)
+        assertThat(device.wait(Until.hasObject(By.text(DO_IT_LATER)), IDLE_TIMEOUT)).isTrue()
+
+        // rotate device
+        device.setOrientationLandscape()
+        device.waitForIdle()
+
+        // FindUdfps page (landscape)
+        assertThat(device.wait(Until.hasObject(By.text(DO_IT_LATER)), IDLE_TIMEOUT)).isTrue()
+        val lottie = device.findObject(
+            By.res(SETTINGS_PACKAGE_NAME, "illustration_lottie")
+        )
+        assertThat(lottie).isNotNull()
+        assertThat(lottie.isClickable).isTrue()
+        val startBtn = device.findObject(By.text("Start"))
+        assertThat(startBtn.isClickable).isTrue()
+        startBtn.click()
+
+        // Enrolling page
+        assertThat(device.wait(Until.hasObject(By.text(enrollingPageTitle)), IDLE_TIMEOUT)).isTrue()
+
+        // Press back
+        device.pressBack()
+        device.waitForIdle()
+
+        // FindUdfps page (landscape-again)
+        assertThat(device.wait(Until.hasObject(By.text(DO_IT_LATER)), IDLE_TIMEOUT)).isTrue()
+    }
+
+    @Test
     fun testFindUdfpsWithGkPwHandle_clickLottie() {
         Assume.assumeTrue(canAssumeUdfps)
+
+        setDeviceOrientation()
         LockScreenUtil.setLockscreen(LockScreenUtil.LockscreenType.PIN, TEST_PIN, true)
         launchFindSensorWithGkPwHandle()
 
@@ -486,8 +629,16 @@ class FingerprintEnrollmentActivityTest {
     }
 
     @Test
+    fun testFindUdfpsWithGkPwHandle_clickLottie_landscape() {
+        runAsLandscape = true
+        testFindUdfpsWithGkPwHandle_clickLottie()
+    }
+
+    @Test
     fun testFindSfpsWithGkPwHandle() {
         Assume.assumeTrue(canAssumeSfps)
+
+        setDeviceOrientation()
         LockScreenUtil.setLockscreen(LockScreenUtil.LockscreenType.PIN, TEST_PIN, true)
         launchFindSensorWithGkPwHandle()
 
@@ -502,8 +653,16 @@ class FingerprintEnrollmentActivityTest {
     }
 
     @Test
+    fun testFindSfpsWithGkPwHandle_landscape() {
+        runAsLandscape = true
+        testFindSfpsWithGkPwHandle()
+    }
+
+    @Test
     fun testFindRfpsWithGkPwHandle() {
         Assume.assumeFalse(canAssumeUdfps || canAssumeSfps)
+
+        setDeviceOrientation()
         LockScreenUtil.setLockscreen(LockScreenUtil.LockscreenType.PIN, TEST_PIN, true)
         launchFindSensorWithGkPwHandle()
 
@@ -529,7 +688,14 @@ class FingerprintEnrollmentActivityTest {
     }
 
     @Test
+    fun testFindRfpsWithGkPwHandle_landscape() {
+        runAsLandscape = true
+        testFindRfpsWithGkPwHandle()
+    }
+
+    @Test
     fun testFindSensorWithGkPwHandle_clickSkipInFindSensor() {
+        setDeviceOrientation()
         LockScreenUtil.setLockscreen(LockScreenUtil.LockscreenType.PIN, TEST_PIN, true)
         launchFindSensorWithGkPwHandle()
 
@@ -543,6 +709,12 @@ class FingerprintEnrollmentActivityTest {
         // Back to home
         device.waitForWindowUpdate(SETTINGS_PACKAGE_NAME, IDLE_TIMEOUT)
         assertThat(device.wait(Until.gone(By.text(DO_IT_LATER)), IDLE_TIMEOUT)).isTrue()
+    }
+
+    @Test
+    fun testFindSensorWithGkPwHandle_clickSkipInFindSensor_landscape() {
+        runAsLandscape = true
+        testFindSensorWithGkPwHandle_clickSkipInFindSensor()
     }
 
     private fun launchIntroWithGkPwHandle(isSuw: Boolean) {
@@ -608,6 +780,15 @@ class FingerprintEnrollmentActivityTest {
         intent.putExtra(Intent.EXTRA_USER_ID, context.userId)
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
         return intent
+    }
+
+    private fun setDeviceOrientation() {
+        if (runAsLandscape) {
+            device.setOrientationLandscape()
+        } else {
+            device.setOrientationPortrait()
+        }
+        device.waitForIdle()
     }
 
     companion object {
