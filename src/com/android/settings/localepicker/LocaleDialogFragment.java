@@ -164,15 +164,18 @@ public class LocaleDialogFragment extends InstrumentedDialogFragment {
         public void onClick(DialogInterface dialog, int which) {
             if (mDialogType == DIALOG_CONFIRM_SYSTEM_DEFAULT) {
                 int result = Activity.RESULT_CANCELED;
+                boolean changed = false;
                 if (which == DialogInterface.BUTTON_POSITIVE) {
                     result = Activity.RESULT_OK;
+                    changed = true;
                 }
                 Intent intent = new Intent();
                 Bundle bundle = new Bundle();
                 bundle.putInt(ARG_DIALOG_TYPE, DIALOG_CONFIRM_SYSTEM_DEFAULT);
                 intent.putExtras(bundle);
                 mParent.onActivityResult(DIALOG_CONFIRM_SYSTEM_DEFAULT, result, intent);
-                mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_CHANGE_LANGUAGE);
+                mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_CHANGE_LANGUAGE,
+                        changed);
             }
             mShouldKeepDialog = false;
         }

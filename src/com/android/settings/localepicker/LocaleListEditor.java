@@ -213,9 +213,11 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
             localeInfo = (LocaleStore.LocaleInfo) data.getSerializableExtra(INTENT_LOCALE_KEY);
             String preferencesTags = Settings.System.getString(
                     getContext().getContentResolver(), Settings.System.LOCALE_PREFERENCES);
-
-            mAdapter.addLocale(mayAppendUnicodeTags(localeInfo, preferencesTags));
+            localeInfo = mayAppendUnicodeTags(localeInfo, preferencesTags);
+            mAdapter.addLocale(localeInfo);
             updateVisibilityOfRemoveMenu();
+            mMetricsFeatureProvider.action(getContext(), SettingsEnums.ACTION_ADD_LANGUAGE,
+                    localeInfo.getLocale().getDisplayName());
         } else if (requestCode == DIALOG_CONFIRM_SYSTEM_DEFAULT) {
             localeInfo = mAdapter.getFeedItemList().get(0);
             if (resultCode == Activity.RESULT_OK) {
@@ -228,6 +230,9 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
                     LocaleDialogFragment localeDialogFragment = LocaleDialogFragment.newInstance();
                     localeDialogFragment.setArguments(args);
                     localeDialogFragment.show(mFragmentManager, TAG_DIALOG_NOT_AVAILABLE);
+                    mMetricsFeatureProvider.action(getContext(),
+                            SettingsEnums.ACTION_NOT_SUPPORTED_SYSTEM_LANGUAGE,
+                            localeInfo.getLocale().getDisplayName());
                 }
             } else {
                 mAdapter.notifyListChanged(localeInfo);
