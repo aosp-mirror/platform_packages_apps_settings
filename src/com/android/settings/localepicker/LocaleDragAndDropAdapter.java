@@ -16,6 +16,7 @@
 
 package com.android.settings.localepicker;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.os.Bundle;
@@ -37,6 +38,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.internal.app.LocalePicker;
 import com.android.internal.app.LocaleStore;
 import com.android.settings.R;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.shortcut.ShortcutsUpdateTask;
 
 import java.text.NumberFormat;
@@ -210,6 +212,13 @@ class LocaleDragAndDropAdapter
             Log.e(TAG, String.format(Locale.US,
                     "Negative position in onItemMove %d -> %d", fromPosition, toPosition));
         }
+
+        if (fromPosition != toPosition) {
+            FeatureFactory.getFactory(mContext).getMetricsFeatureProvider()
+                    .action(mContext, SettingsEnums.ACTION_REORDER_LANGUAGE,
+                            mDragLocale.getLocale().getDisplayName() + " move to " + toPosition);
+        }
+
         notifyItemChanged(fromPosition); // to update the numbers
         notifyItemChanged(toPosition);
         notifyItemMoved(fromPosition, toPosition);
@@ -244,8 +253,13 @@ class LocaleDragAndDropAdapter
 
     void removeChecked() {
         int itemCount = mFeedItemList.size();
+        LocaleStore.LocaleInfo localeInfo;
         for (int i = itemCount - 1; i >= 0; i--) {
-            if (mFeedItemList.get(i).getChecked()) {
+            localeInfo = mFeedItemList.get(i);
+            if (localeInfo.getChecked()) {
+                FeatureFactory.getFactory(mContext).getMetricsFeatureProvider()
+                        .action(mContext, SettingsEnums.ACTION_REMOVE_LANGUAGE,
+                                localeInfo.getLocale().getDisplayName());
                 mFeedItemList.remove(i);
             }
         }
