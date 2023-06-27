@@ -27,7 +27,6 @@ import com.android.settings.accessibility.AccessibilityMetricsFeatureProvider;
 import com.android.settings.accessibility.AccessibilitySearchFeatureProvider;
 import com.android.settings.accounts.AccountFeatureProvider;
 import com.android.settings.applications.ApplicationFeatureProvider;
-import com.android.settings.aware.AwareFeatureProvider;
 import com.android.settings.biometrics.face.FaceFeatureProvider;
 import com.android.settings.biometrics2.factory.BiometricsRepositoryProvider;
 import com.android.settings.bluetooth.BluetoothFeatureProvider;
@@ -175,8 +174,6 @@ public abstract class FeatureFactory {
      * Retrieves implementation for Bluetooth feature.
      */
     public abstract BluetoothFeatureProvider getBluetoothFeatureProvider();
-
-    public abstract AwareFeatureProvider getAwareFeatureProvider();
 
     public abstract FaceFeatureProvider getFaceFeatureProvider();
 
