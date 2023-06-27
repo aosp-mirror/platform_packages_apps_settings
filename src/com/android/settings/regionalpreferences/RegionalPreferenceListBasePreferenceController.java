@@ -59,6 +59,8 @@ public abstract class RegionalPreferenceListBasePreferenceController extends
             TickButtonPreference pref = new TickButtonPreference(mContext);
             mPreferenceCategory.addPreference(pref);
             final String item = unitValues[i];
+            final String value = RegionalPreferencesDataUtils.getDefaultUnicodeExtensionData(
+                    mContext, getExtensionTypes());
             pref.setTitle(getPreferenceTitle(item));
             pref.setKey(item);
             pref.setOnPreferenceClickListener(clickedPref -> {
@@ -66,11 +68,10 @@ public abstract class RegionalPreferenceListBasePreferenceController extends
                 RegionalPreferencesDataUtils.savePreference(mContext, getExtensionTypes(),
                         item.equals(RegionalPreferencesDataUtils.DEFAULT_VALUE)
                                 ? null : item);
-                mMetricsFeatureProvider.action(mContext, getMetricsActionKey());
+                mMetricsFeatureProvider.action(mContext, getMetricsActionKey(),
+                        getPreferenceTitle(value) + " > " +  getPreferenceTitle(item));
                 return true;
             });
-            String value = RegionalPreferencesDataUtils.getDefaultUnicodeExtensionData(mContext,
-                    getExtensionTypes());
             pref.setSelected(!value.isEmpty() && item.equals(value));
         }
     }
