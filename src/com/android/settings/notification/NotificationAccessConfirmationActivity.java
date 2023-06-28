@@ -67,7 +67,9 @@ public class NotificationAccessConfirmationActivity extends Activity
         mUserId = getIntent().getIntExtra(EXTRA_USER_ID, UserHandle.USER_NULL);
         CharSequence mAppLabel;
 
-        if (mComponentName == null || mComponentName.getPackageName() == null) {
+        if (mComponentName == null || mComponentName.getPackageName() == null
+                || mComponentName.flattenToString().length()
+                > NotificationManager.MAX_SERVICE_COMPONENT_NAME_LENGTH) {
             finish();
             return;
         }
