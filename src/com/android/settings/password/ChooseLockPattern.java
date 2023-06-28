@@ -34,7 +34,6 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Log;
-import android.util.Pair;
 import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -53,7 +52,6 @@ import com.android.internal.widget.LockPatternView;
 import com.android.internal.widget.LockPatternView.Cell;
 import com.android.internal.widget.LockPatternView.DisplayMode;
 import com.android.internal.widget.LockscreenCredential;
-import com.android.internal.widget.VerifyCredentialResponse;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SetupWizardUtils;
@@ -827,7 +825,9 @@ public class ChooseLockPattern extends SettingsActivity {
             setRightButtonEnabled(false);
 
             mSaveAndFinishWorker = new SaveAndFinishWorker();
-            mSaveAndFinishWorker.setListener(this);
+            mSaveAndFinishWorker
+                    .setListener(this)
+                    .setRequestGatekeeperPasswordHandle(mRequestGatekeeperPassword);
 
             getFragmentManager().beginTransaction().add(mSaveAndFinishWorker,
                     FRAGMENT_TAG_SAVE_AND_FINISH).commit();
@@ -843,7 +843,7 @@ public class ChooseLockPattern extends SettingsActivity {
                             profileCredential);
                 }
             }
-            mSaveAndFinishWorker.start(mLockPatternUtils, mRequestGatekeeperPassword,
+            mSaveAndFinishWorker.start(mLockPatternUtils,
                     mChosenPattern, mCurrentCredential, mUserId);
         }
 
@@ -865,53 +865,6 @@ public class ChooseLockPattern extends SettingsActivity {
                 }
             }
             getActivity().finish();
-        }
-    }
-
-    public static class SaveAndFinishWorker extends SaveChosenLockWorkerBase {
-
-        private LockscreenCredential mChosenPattern;
-        private LockscreenCredential mCurrentCredential;
-
-        public void start(LockPatternUtils utils, boolean requestGatekeeperPassword,
-                LockscreenCredential chosenPattern, LockscreenCredential currentCredential,
-                int userId) {
-            prepare(utils, requestGatekeeperPassword, userId);
-
-            mCurrentCredential = currentCredential != null ? currentCredential
-                    : LockscreenCredential.createNone();
-            mChosenPattern = chosenPattern;
-            mUserId = userId;
-
-            start();
-        }
-
-        @Override
-        protected Pair<Boolean, Intent> saveAndVerifyInBackground() {
-            final int userId = mUserId;
-            final boolean success = mUtils.setLockCredential(mChosenPattern, mCurrentCredential,
-                    userId);
-            if (success) {
-                unifyProfileCredentialIfRequested();
-            }
-            Intent result = null;
-            if (success && mRequestGatekeeperPassword) {
-                // If a Gatekeeper Password was requested, invoke the LockSettingsService code
-                // path to return a Gatekeeper Password based on the credential that the user
-                // chose. This should only be run if the credential was successfully set.
-                final VerifyCredentialResponse response = mUtils.verifyCredential(mChosenPattern,
-                        userId, LockPatternUtils.VERIFY_FLAG_REQUEST_GK_PW_HANDLE);
-
-                if (!response.isMatched() || !response.containsGatekeeperPasswordHandle()) {
-                    Log.e(TAG, "critical: bad response or missing GK PW handle for known good"
-                            + " pattern: " + response.toString());
-                }
-
-                result = new Intent();
-                result.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE,
-                        response.getGatekeeperPasswordHandle());
-            }
-            return Pair.create(success, result);
         }
     }
 }

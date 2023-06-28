@@ -20,6 +20,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.util.Log;
 import android.util.Pair;
 import android.widget.Toast;
 
@@ -27,6 +28,7 @@ import androidx.fragment.app.Fragment;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockscreenCredential;
+import com.android.internal.widget.VerifyCredentialResponse;
 import com.android.settings.R;
 import com.android.settings.safetycenter.LockScreenSafetySource;
 
@@ -34,18 +36,21 @@ import com.android.settings.safetycenter.LockScreenSafetySource;
  * An invisible retained worker fragment to track the AsyncWork that saves (and optionally
  * verifies if a challenge is given) the chosen lock credential (pattern/pin/password).
  */
-abstract class SaveChosenLockWorkerBase extends Fragment {
+public class SaveAndFinishWorker extends Fragment {
+    private static final String TAG = "SaveAndFinishWorker";
 
     private Listener mListener;
     private boolean mFinished;
     private Intent mResultData;
 
-    protected LockPatternUtils mUtils;
-    protected boolean mRequestGatekeeperPassword;
-    protected boolean mWasSecureBefore;
-    protected int mUserId;
-    protected int mUnificationProfileId = UserHandle.USER_NULL;
-    protected LockscreenCredential mUnificationProfileCredential;
+    private LockPatternUtils mUtils;
+    private boolean mRequestGatekeeperPassword;
+    private boolean mWasSecureBefore;
+    private int mUserId;
+    private int mUnificationProfileId = UserHandle.USER_NULL;
+    private LockscreenCredential mUnificationProfileCredential;
+    private LockscreenCredential mChosenCredential;
+    private LockscreenCredential mCurrentCredential;
 
     private boolean mBlocking;
 
@@ -55,28 +60,31 @@ abstract class SaveChosenLockWorkerBase extends Fragment {
         setRetainInstance(true);
     }
 
-    public void setListener(Listener listener) {
+    public SaveAndFinishWorker setListener(Listener listener) {
         if (mListener == listener) {
-            return;
+            return this;
         }
 
         mListener = listener;
         if (mFinished && mListener != null) {
             mListener.onChosenLockSaveFinished(mWasSecureBefore, mResultData);
         }
+        return this;
     }
 
-    protected void prepare(LockPatternUtils utils, boolean requestGatekeeperPassword, int userId) {
+    public void start(LockPatternUtils utils, LockscreenCredential chosenCredential,
+            LockscreenCredential currentCredential, int userId) {
         mUtils = utils;
         mUserId = userId;
-        mRequestGatekeeperPassword = requestGatekeeperPassword;
         // This will be a no-op for non managed profiles.
         mWasSecureBefore = mUtils.isSecure(mUserId);
         mFinished = false;
         mResultData = null;
-    }
 
-    protected void start() {
+        mChosenCredential = chosenCredential;
+        mCurrentCredential = currentCredential != null ? currentCredential
+                : LockscreenCredential.createNone();
+
         if (mBlocking) {
             finish(saveAndVerifyInBackground().second);
         } else {
@@ -89,9 +97,34 @@ abstract class SaveChosenLockWorkerBase extends Fragment {
      * @return pair where the first is a boolean confirming whether the change was successful or not
      * and second is the Intent which has the challenge token or is null.
      */
-    protected abstract Pair<Boolean, Intent> saveAndVerifyInBackground();
+    private Pair<Boolean, Intent> saveAndVerifyInBackground() {
+        final int userId = mUserId;
+        final boolean success = mUtils.setLockCredential(mChosenCredential, mCurrentCredential,
+                userId);
+        if (success) {
+            unifyProfileCredentialIfRequested();
+        }
+        Intent result = null;
+        if (success && mRequestGatekeeperPassword) {
+            // If a Gatekeeper Password was requested, invoke the LockSettingsService code
+            // path to return a Gatekeeper Password based on the credential that the user
+            // chose. This should only be run if the credential was successfully set.
+            final VerifyCredentialResponse response = mUtils.verifyCredential(mChosenCredential,
+                    userId, LockPatternUtils.VERIFY_FLAG_REQUEST_GK_PW_HANDLE);
 
-    protected void finish(Intent resultData) {
+            if (!response.isMatched() || !response.containsGatekeeperPasswordHandle()) {
+                Log.e(TAG, "critical: bad response or missing GK PW handle for known good"
+                        + " credential: " + response.toString());
+            }
+
+            result = new Intent();
+            result.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE,
+                    response.getGatekeeperPasswordHandle());
+        }
+        return Pair.create(success, result);
+    }
+
+    private void finish(Intent resultData) {
         mFinished = true;
         mResultData = resultData;
         if (mListener != null) {
@@ -103,16 +136,24 @@ abstract class SaveChosenLockWorkerBase extends Fragment {
         LockScreenSafetySource.onLockScreenChange(getContext());
     }
 
-    public void setBlocking(boolean blocking) {
-        mBlocking = blocking;
+    public SaveAndFinishWorker setRequestGatekeeperPasswordHandle(boolean value) {
+        mRequestGatekeeperPassword = value;
+        return this;
     }
 
-    public void setProfileToUnify(int profileId, LockscreenCredential credential) {
+    public SaveAndFinishWorker setBlocking(boolean blocking) {
+        mBlocking = blocking;
+        return this;
+    }
+
+    public SaveAndFinishWorker setProfileToUnify(
+            int profileId, LockscreenCredential credential) {
         mUnificationProfileId = profileId;
         mUnificationProfileCredential = credential.duplicate();
+        return this;
     }
 
-    protected void unifyProfileCredentialIfRequested() {
+    private void unifyProfileCredentialIfRequested() {
         if (mUnificationProfileId != UserHandle.USER_NULL) {
             mUtils.setSeparateProfileChallengeEnabled(mUnificationProfileId, false,
                     mUnificationProfileCredential);
