@@ -153,7 +153,7 @@ public class NumberingSystemItemController extends BasePreferenceController {
     private void handleLanguageSelect(Preference preference) {
         String selectedLanguage = preference.getKey();
         mMetricsFeatureProvider.action(mContext,
-                SettingsEnums.ACTION_CHOOSE_LANGUAGE_FOR_NUMBERS_PREFERENCES);
+                SettingsEnums.ACTION_CHOOSE_LANGUAGE_FOR_NUMBERS_PREFERENCES, selectedLanguage);
         final Bundle extra = new Bundle();
         extra.putString(RegionalPreferencesEntriesFragment.ARG_KEY_REGIONAL_PREFERENCE,
                 ARG_VALUE_NUMBERING_SYSTEM_SELECT);
@@ -177,7 +177,8 @@ public class NumberingSystemItemController extends BasePreferenceController {
                         saveNumberingSystemToLocale(Locale.forLanguageTag(mSelectedLanguage),
                                 numberingSystem);
                 mMetricsFeatureProvider.action(mContext,
-                        SettingsEnums.ACTION_SET_NUMBERS_PREFERENCES);
+                        SettingsEnums.ACTION_SET_NUMBERS_PREFERENCES,
+                        updatedLocale.getDisplayName() + ": " + numberingSystem);
                 // After updated locale to framework, this fragment will recreate,
                 // so it needs to update the argument of selected language.
                 Bundle bundle = new Bundle();

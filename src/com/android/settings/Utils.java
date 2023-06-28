@@ -63,6 +63,7 @@ import android.os.BatteryManager;
 import android.os.Binder;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.IBinder;
 import android.os.INetworkManagementService;
 import android.os.RemoteException;
@@ -97,7 +98,6 @@ import android.widget.TabWidget;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 import androidx.annotation.VisibleForTesting;
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.core.graphics.drawable.RoundedBitmapDrawable;
@@ -1309,4 +1309,15 @@ public final class Utils extends com.android.settingslib.Utils {
                 com.android.internal.R.bool.config_dreamsOnlyEnabledForDockUser);
         return dreamsSupported && (!dreamsOnlyEnabledForDockUser || canCurrentUserDream(context));
     }
+
+    /**
+     * Get private total size directly.
+     * Referred from StorageManager
+     */
+    public static long getPrimaryStorageSize() {
+        // TODO(b/288103116): remove this method once support by StorageManager.
+        return Environment.getDataDirectory().getTotalSpace()
+                + Environment.getRootDirectory().getTotalSpace();
+    }
+
 }
