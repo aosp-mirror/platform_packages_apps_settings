@@ -157,8 +157,10 @@
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"Die Änderung erfordert einen Neustart des Geräts."</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Neu starten"</string>
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Abbrechen"</string>
-    <string name="bluetooth_enable_leaudio" msgid="1245004820628723136">"Bluetooth LE Audio aktivieren"</string>
-    <string name="bluetooth_enable_leaudio_summary" msgid="8066117764037123479">"Aktiviert die Bluetooth LE Audio-Funktion, wenn das Gerät LE-Hardwarefunktionen für Audio unterstützt."</string>
+    <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Bluetooth LE Audio deaktivieren"</string>
+    <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Deaktiviert die Bluetooth LE Audio-Funktion, wenn das Gerät LE Audio-Hardwarefunktionen unterstützt."</string>
+    <string name="bluetooth_enable_leaudio_allow_list" msgid="1692999156437357534">"Zulassungsliste für Bluetooth LE-Audio aktivieren"</string>
+    <string name="bluetooth_enable_leaudio_allow_list_summary" msgid="725601205276008525">"Aktiviert die Zulassungslistenfunktion für Bluetooth LE-Audio."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Mediengeräte"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Anrufgeräte"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Andere Geräte"</string>
@@ -353,7 +355,7 @@
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"Zum Einrichten der Gesichtsentsperrung tippen"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Entsperrung per Gesicht"</string>
     <string name="security_settings_face_profile_preference_title" msgid="7519527436266375005">"Entsperrung per Gesichtserkennung für die Arbeit"</string>
-    <string name="security_settings_face_enroll_education_title" msgid="6448806884597691208">"So richtest du die Gesichtsentsperrung ein"</string>
+    <string name="security_settings_face_enroll_education_title" msgid="6448806884597691208">"Gesichtsentsperrung einrichten"</string>
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="3701874093226957891">"Entsperrung per Gesichtserkennung einrichten"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"Per Gesichtserkennung authentifizieren"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
@@ -471,6 +473,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Fingerabdruck einrichten"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Fingerabdruck zulassen"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Fingerabdruck verwenden"</string>
+    <string name="security_settings_fingerprint_settings_footer_learn_more" msgid="2508322993726483601">"Weitere Informationen zur Entsperrung per Fingerabdruck"</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"Du kannst deinen Fingerabdruck verwenden, um dein Tablet zu entsperren oder dich in Apps zu authentifizieren, beispielsweise um dich anzumelden oder einen Kauf zu autorisieren."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Du kannst deinen Fingerabdruck verwenden, um dein Gerät zu entsperren oder deine Identität zu bestätigen, beispielsweise um dich in Apps anzumelden oder einen Kauf zu autorisieren."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"Du kannst deinen Fingerabdruck verwenden, um dein Smartphone zu entsperren oder deine Identität zu bestätigen, beispielsweise um dich in Apps anzumelden oder einen Kauf zu autorisieren."</string>
@@ -525,7 +528,29 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"Hebe deinen Finger an, wenn du eine Vibration spürst"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"Gehe an einen schwächer beleuchteten Ort und versuche es noch einmal"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"Du hast die maximale Anzahl von Versuchen erreicht"</string>
+    <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"Watch Unlock"</string>
+    <string name="biometric_settings_intro_with_activeunlock" product="default" msgid="6583248094453119314">"Wenn du die Entsperrung per Gesichtserkennung und die Entsperrung per Fingerabdruck einrichtest, wirst du auf dem Smartphone nach deinem Fingerabdruck gefragt, wenn du eine Maske trägst oder dich im Dunkeln befindest.\n\nDu kannst dein Gerät mit deiner Smartwatch entsperren, wenn dein Gesicht oder dein Fingerabdruck nicht erkannt werden."</string>
+    <string name="biometric_settings_intro_with_activeunlock" product="tablet" msgid="8930396405433023076">"Wenn du auf dem Tablet die Entsperrung per Gesichtserkennung und die Entsperrung per Fingerabdruck einrichtest, wirst du im Dunklen oder beim Tragen einer Maske nach deinem Fingerabdruck gefragt.\n\nErkennt das Tablet weder dein Gesicht noch deinen Fingerabdruck, kannst du es mit deiner Smartwatch entsperren."</string>
+    <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"Du kannst dein Gerät mit deiner Smartwatch entsperren, wenn dein Fingerabdruck nicht erkannt wird."</string>
+    <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"Du kannst dein Gerät mit deiner Smartwatch entsperren, wenn dein Gesicht nicht erkannt wird."</string>
+    <string name="biometric_settings_use_face_or_watch_preference_summary" msgid="4969685200340861744">"Gesicht oder Smartwatch verwenden"</string>
+    <string name="biometric_settings_use_fingerprint_or_watch_preference_summary" msgid="2425628094194828407">"Fingerabdruck oder Smartwatch verwenden"</string>
+    <string name="biometric_settings_use_face_fingerprint_or_watch_preference_summary" msgid="188805113048792007">"Gesicht, Fingerabdruck oder Smartwatch verwenden"</string>
+    <string name="biometric_settings_use_watch_preference_summary" msgid="2311453276747908475">"Smartwatch verwenden"</string>
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_title" msgid="8776904312629209685">"Zuerst Gesichts- oder Fingerabdruckentsperrung einrichten"</string>
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_message" msgid="1669326067732567911">"Du kannst dein Gerät mit deiner Smartwatch entsperren, wenn dein Gesicht oder dein Fingerabdruck nicht erkannt wird"</string>
+    <string name="security_settings_activeunlock_require_fingerprint_setup_title" msgid="6703703635881050623">"Zuerst Entsperrung per Fingerabdruck einrichten"</string>
+    <string name="security_settings_activeunlock_require_fingerprint_setup_message" msgid="4966813766409918392">"Du kannst dein Gerät mit deiner Smartwatch entsperren, wenn dein Fingerabdruck nicht erkannt wird"</string>
+    <string name="security_settings_activeunlock_require_face_setup_title" msgid="1428795376597739880">"Zuerst Entsperrung per Gesichtserkennung einrichten"</string>
+    <string name="security_settings_activeunlock_require_face_setup_message" msgid="8904070645721933399">"Du kannst dein Gerät mit deiner Smartwatch entsperren, wenn dein Gesicht nicht erkannt wird"</string>
+    <string name="security_settings_activeunlock_biometric_setup" msgid="8876454457817955475">"Einrichten"</string>
+    <string name="security_settings_fingerprint_single_watch_preference_summary" msgid="6464470096384164369">"Fingerabdruck und <xliff:g id="WATCH">%s</xliff:g> hinzugefügt"</string>
+    <string name="security_settings_fingerprint_multiple_watch_preference_summary" msgid="2259261786932097004">"Fingerabdrücke und <xliff:g id="WATCH">%s</xliff:g> hinzugefügt"</string>
+    <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Gesicht und <xliff:g id="WATCH">%s</xliff:g> hinzugefügt"</string>
+    <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Gesicht, Fingerabdruck und <xliff:g id="WATCH">%s</xliff:g> hinzugefügt"</string>
+    <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Gesicht, Fingerabdrücke und <xliff:g id="WATCH">%s</xliff:g> hinzugefügt"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Entsperrung per Gesichtserkennung &amp; Fingerabdruck"</string>
+    <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Gesichts- und Fingerabdruckentsperrung für die Arbeit"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"Zum Einrichten tippen"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Gesicht und Fingerabdrücke hinzugefügt"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"Gesicht und Fingerabdruck hinzugefügt"</string>
@@ -555,9 +580,9 @@
     <string name="security_settings_sfps_enroll_find_sensor_title" msgid="8327884364635804363">"Leg den Finger auf die Ein-/Aus-Taste, ohne sie zu drücken"</string>
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"So richtest du deinen Fingerabdruck ein"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"Er befindet sich auf der Rückseite des Smartphones. Am besten den Zeigefinger verwenden."</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="tablet" msgid="3861487880213212565">"Der Fingerabdrucksensor befindet sich auf der Ein-/Aus-Taste. Das ist die flache Taste neben der erhöhten Lautstärketaste an der Seite des Tablets.\n\nWenn du die Ein-/Aus-Taste drückst, schaltet sich das Display aus."</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="device" msgid="700314363994033893">"Der Fingerabdrucksensor befindet sich auf der Ein-/Aus-Taste. Das ist die flache Taste neben der erhöhten Lautstärketaste an der Seite des Geräts.\n\nWenn du die Ein-/Aus-Taste drückst, schaltet sich das Display aus."</string>
-    <string name="security_settings_sfps_enroll_find_sensor_message" product="default" msgid="5857063580604638331">"Der Fingerabdrucksensor befindet sich auf der Ein-/Aus-Taste. Das ist die flache Taste neben der erhöhten Lautstärketaste an der Seite des Smartphones.\n\nWenn du die Ein-/Aus-Taste drückst, schaltet sich das Display aus."</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="tablet" msgid="6345521315059783195">"Der Fingerabdrucksensor befindet sich auf der Ein-/Aus-Taste. Das ist die flache Taste neben der erhöhten Lautstärketaste am Rand des Tablets."</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="device" msgid="5548015866784733975">"Der Fingerabdrucksensor befindet sich auf der Ein-/Aus-Taste. Das ist die flache Taste neben der erhöhten Lautstärketaste am Geräterand."</string>
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="default" msgid="1977903336177861081">"Der Fingerabdrucksensor befindet sich auf der Ein-/Aus-Taste. Das ist die flache Taste neben der erhöhten Lautstärketaste am Rand des Smartphones."</string>
     <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"Der Fingerabdrucksensor befindet sich auf deinem Display. Auf dem nächsten Bildschirm zeichnest du deinen Fingerabdruck auf."</string>
     <string name="security_settings_udfps_enroll_find_sensor_start_button" msgid="3172268783620336357">"Starten"</string>
     <string name="security_settings_udfps_enroll_a11y" msgid="1899453114050362235">"Bewege deinen Finger über das Display, um den Sensor zu finden. Halte den Fingerabdrucksensor gedrückt."</string>
@@ -579,7 +604,7 @@
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Leg deine Fingerkuppe auf den Sensor"</string>
     <string name="security_settings_udfps_enroll_left_edge_title" msgid="1944076382202470458">"Leg die linke Seite deines Fingers auf den Sensor"</string>
     <string name="security_settings_udfps_enroll_right_edge_title" msgid="9036744264606447490">"Leg die rechte Seite deines Fingers auf den Sensor"</string>
-    <string name="security_settings_sfps_enroll_finger_center_title" msgid="1320688855767675739">"Leg den mittleren Teil deines Fingers auf den Sensor"</string>
+    <string name="security_settings_sfps_enroll_finger_center_title" msgid="1320688855767675739">"Leg deinen Finger mittig auf den Sensor"</string>
     <string name="security_settings_sfps_enroll_fingertip_title" msgid="2737520837684516446">"Leg deine Fingerkuppe auf den Sensor"</string>
     <string name="security_settings_sfps_enroll_left_edge_title" msgid="9022963735924413343">"Leg die linke Seite deines Fingers auf den Sensor"</string>
     <string name="security_settings_sfps_enroll_right_edge_title" msgid="823106857743394392">"Leg zuletzt die rechte Seite deines Fingers auf den Sensor"</string>
@@ -592,8 +617,11 @@
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="6064618417107305796">"Du kannst jetzt deinen Fingerabdruck verwenden, um dein Tablet zu entsperren oder deine Identität zu bestätigen, z. B. um dich in Apps anzumelden oder Käufe zu autorisieren"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="1948980056333872057">"Du kannst jetzt deinen Fingerabdruck verwenden, um dein Gerät zu entsperren oder deine Identität zu bestätigen, z. B. um dich in Apps anzumelden oder Käufe zu autorisieren"</string>
     <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="3084541878035403475">"Du kannst jetzt deinen Fingerabdruck verwenden, um dein Smartphone zu entsperren oder deine Identität zu bestätigen, z. B. um dich in Apps anzumelden oder Käufe zu autorisieren"</string>
-    <string name="security_settings_require_screen_on_to_auth_title" msgid="6393244827110756927">"Nur entsperren, wenn das Display aktiviert ist"</string>
-    <string name="security_settings_require_screen_on_to_auth_description" msgid="8555651197315796037">"Das Display muss aktiviert sein, bevor du es mit deinem Fingerabdruck entsperren kannst. Versehentliches Entsperren wird so weniger wahrscheinlich."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="tablet" msgid="308213612040535580">"Du kannst jetzt deinen Fingerabdruck verwenden, um dein Tablet zu entsperren oder deine Identität zu bestätigen, wenn du dich z. B. in Apps anmelden oder Käufe autorisieren möchtest. \n\nDamit sich dein Tablet leichter entsperren lässt, wenn du es anders hältst, kannst du auch einen weiteren Fingerabdruck hinzufügen."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="device" msgid="911541337099737104">"Du kannst jetzt deinen Fingerabdruck verwenden, um dein Gerät zu entsperren oder deine Identität zu bestätigen, wenn du dich z. B. in Apps anmelden oder Käufe autorisieren möchtest.\n\nDamit sich dein Gerät leichter entsperren lässt, wenn du es anders hältst, kannst du auch einen weiteren Fingerabdruck hinzufügen."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="default" msgid="5261993991973265283">"Du kannst jetzt deinen Fingerabdruck verwenden, um dein Smartphone zu entsperren oder deine Identität zu bestätigen, wenn du dich z. B. in Apps anmelden oder Käufe autorisieren möchtest.\n\nDamit sich dein Smartphone leichter entsperren lässt, wenn du es anders hältst, kannst du auch einen weiteren Fingerabdruck hinzufügen."</string>
+    <string name="security_settings_require_screen_on_to_auth_title" msgid="1641621458536715518">"Jederzeit durch Berühren entsperren"</string>
+    <string name="security_settings_require_screen_on_to_auth_description" msgid="4158414711168345398">"Du kannst dein Gerät auch bei ausgeschaltetem Display per Fingerabdruck entsperren. Das erhöht allerdings die Gefahr eines versehentlichen Entsperrens."</string>
     <string name="security_settings_require_screen_on_to_auth_keywords" msgid="5557869560397089603">"Display, entsperren"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Später"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Hebe den Finger an und lege ihn dann noch mal auf den Sensor"</string>
@@ -652,6 +680,7 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Fertig"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Das ist nicht der Sensor"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Sensor auf Rückseite mit Zeigefinger berühren."</string>
+    <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title" msgid="5796228438604723279">"Scan wurde nicht abgeschlossen"</string>
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Zeitüberschreitung bei Fingerabdruckeinrichtung"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"Du kannst es entweder jetzt noch einmal versuchen oder den Fingerabdruck später in den Einstellungen einrichten"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Fehler bei Fingerabdruckregistrierung. Versuche es erneut oder verwende einen anderen Finger."</string>
@@ -941,7 +970,8 @@
     <string name="bluetooth_menu_advanced" msgid="7633682234855216066">"Erweitert"</string>
     <string name="bluetooth_advanced_titlebar" msgid="5369701494951467257">"Bluetooth - Erweitert"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="316627049372961941">"Bei aktiviertem Bluetooth kann dein Gerät mit Bluetooth-Geräten in der Nähe kommunizieren."</string>
-    <string name="bluetooth_scanning_on_info_message" msgid="6667723887545056976">"Bei aktiviertem Bluetooth kann dein Gerät mit anderen Bluetooth-Geräten in der Nähe kommunizieren.\n\nDamit es optimal funktioniert, können Apps und Dienste immer nach Geräten in der Nähe suchen, auch wenn Bluetooth deaktiviert ist. Dadurch werden beispielsweise standortbasierte Funktionen und Dienste verbessert. Dies lässt sich in den "<annotation id="link">"Bluetooth-Sucheinstellungen"</annotation>" ändern."</string>
+    <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Bei aktiviertem Bluetooth kann dein Gerät mit anderen Bluetooth-Geräten in der Nähe kommunizieren.\n\nDamit es optimal funktioniert, können Apps und Dienste immer nach Geräten in der Nähe suchen, auch wenn Bluetooth deaktiviert ist. Dadurch werden beispielsweise standortbasierte Funktionen und Dienste verbessert. Dies lässt sich in den Bluetooth-Sucheinstellungen ändern."</string>
+    <string name="bluetooth_scan_change" msgid="1744636222637390367">"Ändern"</string>
     <string name="ble_scan_notify_text" msgid="1358879010396045164">"Zur Erhöhung der Standortgenauigkeit können System-Apps und -dienste Bluetooth-Geräte weiterhin erkennen. Du kannst dies in den <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>Sucheinstellungen<xliff:g id="LINK_END_1">LINK_END</xliff:g> ändern."</string>
     <string name="bluetooth_connect_failed" msgid="7892663424429584925">"Verbindung konnte nicht hergestellt werden. Versuch es noch einmal."</string>
     <string name="device_details_title" msgid="1155622417516195481">"Gerätedetails"</string>
@@ -981,11 +1011,11 @@
     <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"NFC-Stack-Debuggingprotokoll"</string>
     <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"NFC-Stack-Protokollierungsebene erhöhen"</string>
     <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"Ausführliches NFC-Debugging-Protokoll"</string>
-    <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"Schließt zusätzliche gerätespezifische Anbieterprotokolle in Fehlerberichten ein, die private Informationen enthalten können."</string>
+    <string name="nfc_verbose_vendor_log_summary" msgid="3049128322855928507">"Zusätzliche gerätespezifische Anbieterprotokolle in Fehlerberichte einschließen, die private Informationen enthalten können"</string>
     <string name="nfc_snoop_log_title" msgid="1072690687525472163">"Gefiltertes oder ungefiltertes NFC-NCI-Snoop-Protokoll"</string>
-    <string name="nfc_snoop_log_summary" msgid="3988383328800163180">"Erfasst detaillierte NFC-Pakete, die private Informationen enthalten können."</string>
+    <string name="nfc_snoop_log_summary" msgid="3988383328800163180">"Detaillierte NFC-Pakete erfassen, die private Informationen enthalten können"</string>
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Gerät neu starten?"</string>
-    <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"Die detaillierte NFC-Protokollierung wird nur zu Entwicklungszwecken verwendet. Schließt zusätzliche NFC-Daten in Fehlerberichten ein, die private Informationen enthalten können. Starte dein Gerät neu, um diese Einstellung zu ändern."</string>
+    <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"Die detaillierte NFC-Protokollierung wird nur zu Entwicklungszwecken verwendet. Dazu gehören auch zusätzliche NFC-Daten in Fehlerberichten, die private Informationen enthalten können. Starte dein Gerät neu, um diese Einstellung zu ändern."</string>
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Neu starten"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Streamen"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"spiegeln"</string>
@@ -1520,7 +1550,7 @@
     <string name="screen_timeout_summary" msgid="5558778019594643427">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> ohne Aktivität"</string>
     <string name="screen_timeout_summary_not_set" msgid="5107680774964178875">"Nicht festgelegt"</string>
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"Hintergrund"</string>
-    <string name="style_and_wallpaper_settings_title" msgid="2232042809407308946">"Hintergrund &amp; Stil"</string>
+    <string name="style_and_wallpaper_settings_title" msgid="2232042809407308946">"Hintergrund und Stil"</string>
     <string name="wallpaper_dashboard_summary" msgid="2324472863981057118">"Startseite, Sperrbildschirm"</string>
     <string name="wallpaper_settings_summary_default" msgid="7569803705735001813">"Standard"</string>
     <string name="wallpaper_settings_summary_custom" msgid="3174561317688848729">"Benutzerdefiniert"</string>
@@ -1963,7 +1993,7 @@
     <string name="location_category_location_services" msgid="8163798686832434284">"Standortdienste"</string>
     <string name="location_title" msgid="5819154746934945021">"Mein Standort"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Standort für Arbeitsprofil"</string>
-    <string name="location_app_level_permissions" msgid="907206607664629759">"Welche Apps dürfen den Standort ermitteln?"</string>
+    <string name="location_app_level_permissions" msgid="907206607664629759">"Berechtigungen zur Standortermittlung"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"Standortermittlung ist deaktiviert"</string>
     <plurals name="location_app_permission_summary_location_on" formatted="false" msgid="8286873148858526214">
       <item quantity="other"> <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> von <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> Apps haben Zugriff auf den Standort</item>
@@ -2061,7 +2091,7 @@
     <string name="lockpassword_choose_your_password_header_for_face" msgid="622276003801157839">"Für Gesichtsentsperrung Passwort festlegen"</string>
     <string name="lockpassword_choose_your_pattern_header_for_face" msgid="7333603579958317102">"Für Gesichtsentsperrung Muster festlegen"</string>
     <string name="lockpassword_choose_your_pin_header_for_face" msgid="704061826984851309">"Für Gesichtsentsperrung PIN festlegen"</string>
-    <string name="lockpassword_choose_your_password_header_for_biometrics" msgid="2053366309272487015">"Passwort für Entsperrung per Gesicht oder Fingerabdruck einrichten"</string>
+    <string name="lockpassword_choose_your_password_header_for_biometrics" msgid="2053366309272487015">"Passwort festlegen"</string>
     <string name="lockpassword_choose_your_pattern_header_for_biometrics" msgid="4038476475293734905">"Muster für Entsperrung per Gesicht oder Fingerabdruck einrichten"</string>
     <string name="lockpassword_choose_your_pin_header_for_biometrics" msgid="9086039918921009380">"PIN für Entsperrung per Gesicht oder Fingerabdruck einrichten"</string>
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Passwort vergessen?"</string>
@@ -2079,9 +2109,15 @@
     <string name="lockpassword_strong_auth_required_work_pattern" msgid="6803652050512161140">"Verwende das Muster deines Arbeitsprofils, um die Sicherheit zu erhöhen"</string>
     <string name="lockpassword_strong_auth_required_work_pin" msgid="4208510396448713500">"Gib die PIN deines Arbeitsprofils ein, um die Sicherheit zu erhöhen"</string>
     <string name="lockpassword_strong_auth_required_work_password" msgid="6119482061429323090">"Gib das Passwort deines Arbeitsprofils ein, um die Sicherheit zu erhöhen"</string>
-    <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6351784282865851482">"Dein Smartphone auf die Werkseinstellungen zurückgesetzt. Gib dein früheres Muster ein."</string>
-    <string name="lockpassword_confirm_your_pin_details_frp" msgid="2128795640346033349">"Dein Smartphone auf die Werkseinstellungen zurückgesetzt. Gib deine frühere PIN ein."</string>
-    <string name="lockpassword_confirm_your_password_details_frp" msgid="4031863562975125016">"Dein Smartphone wurde auf die Werkseinstellungen zurückgesetzt. Gib dein früheres Passwort ein."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="default" msgid="6351784282865851482">"Dein Smartphone auf die Werkseinstellungen zurückgesetzt. Gib dein früheres Muster ein."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="tablet" msgid="8596917715101288176">"Tablet auf Werkseinstellungen zurückgesetzt. Um es zu verwenden, gib dein früheres Muster ein."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="device" msgid="5454624762517414834">"Gerät auf Werkseinstellungen zurückgesetzt. Um es zu verwenden, gib dein früheres Muster ein."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="default" msgid="2128795640346033349">"Dein Smartphone auf die Werkseinstellungen zurückgesetzt. Gib deine frühere PIN ein."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="tablet" msgid="8365335365718500964">"Tablet auf Werkseinstellungen zurückgesetzt. Um es verwenden, gib deine frühere PIN ein."</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" product="device" msgid="1755588602707523835">"Gerät auf Werkseinstellungen zurückgesetzt. Um es zu verwenden, gib deine frühere PIN ein."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="default" msgid="4031863562975125016">"Dein Smartphone wurde auf die Werkseinstellungen zurückgesetzt. Gib dein früheres Passwort ein."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="tablet" msgid="3899701773001146600">"Tablet auf Werkseinstellungen zurückgesetzt. Um es zu verwenden, gib dein früheres Passwort ein."</string>
+    <string name="lockpassword_confirm_your_password_details_frp" product="device" msgid="2683204467262573702">"Gerät auf Werkseinstellungen zurückgesetzt. Um es zu verwenden, gib dein früheres Passwort ein."</string>
     <string name="lockpassword_confirm_your_pattern_header_frp" msgid="5641858015891896427">"Muster bestätigen"</string>
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"PIN bestätigen"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Passwort bestätigen"</string>
@@ -2106,6 +2142,8 @@
     <string name="lockpattern_settings_enable_title" msgid="7401197111303283723">"Muster erforderlich"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1116467204475387886">"Zum Entsperren muss ein Muster gezeichnet werden"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="3340969054395584754">"Muster sichtbar machen"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_title" msgid="7172693275721931683">"Erweiterter Datenschutz bei der PIN-Eingabe"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_summary" msgid="8639588868341114740">"Animationen bei PIN-Eingabe deaktivieren"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"Muster für das Profil anzeigen"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"Bei Berührung vibrieren"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"Ein/Aus sperrt Gerät sofort"</string>
@@ -2403,23 +2441,16 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Heruntergeladene Apps"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Experimentell"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Funktions-Flags"</string>
-    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_title (401330708633716596) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_summary (1319792184194176235) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_footer (4158945851818483666) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filter_pbap_title (1735427364451634823) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filter_map_title (180092480793945544) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filter_summary (7217091930762522599) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filtered_mode_disabled_summary (8824952559433361848) -->
-    <skip />
+    <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"Filterung durch Bluetooth HCI-Snoop-Protokoll"</string>
+    <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="1319792184194176235">"Filter festlegen"</string>
+    <string name="bt_hci_snoop_log_filters_dashboard_footer" msgid="4158945851818483666">"Bluetooth zum Übernehmen der Änderungen aus- und wieder einschalten"</string>
+    <string name="bt_hci_snoop_log_filter_pbap_title" msgid="1735427364451634823">"PBAP-Filterung durch Bluetooth HCI-Snoop-Protokoll"</string>
+    <string name="bt_hci_snoop_log_filter_map_title" msgid="180092480793945544">"MAP-Filterung durch Bluetooth HCI-Snoop-Protokoll"</string>
+    <string name="bt_hci_snoop_log_filter_summary" msgid="7217091930762522599">"Wähle den Filtermodus aus. (Bluetooth zum Übernehmen der Änderungen aus- und wieder einschalten)"</string>
+    <string name="bt_hci_snoop_log_filtered_mode_disabled_summary" msgid="8824952559433361848">"Setze den Bluetooth HCI-Snoop-Protokollmodus zum Ändern dieser Option auf „Filter aktiviert“"</string>
     <string name="talkback_title" msgid="8756080454514251327">"TalkBack"</string>
     <string name="talkback_summary" msgid="5820927220378864281">"Der Screenreader ist in erster Linie für Blinde und Menschen mit eingeschränktem Sehvermögen bestimmt"</string>
-    <string name="select_to_speak_summary" msgid="1995285446766920925">"Tippe auf dem Bildschirm auf Elemente, damit sie vorgelesen werden"</string>
+    <string name="select_to_speak_summary" msgid="1995285446766920925">"Auf dem Bildschirm auf Elemente tippen, damit sie vorgelesen werden"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Untertitel-Einstellungen"</string>
     <string name="accessibility_captioning_about_title" msgid="3542171637334191563">"Über die Einstellungen für Untertitel"</string>
     <string name="accessibility_captioning_footer_learn_more_content_description" msgid="5730040700677017706">"Weitere Informationen zu den Einstellungen für Untertitel"</string>
@@ -2453,7 +2484,7 @@
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Mit Tastenkombination und 3-mal Tippen vergrößern"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"Die Bedienungshilfe „<xliff:g id="SERVICE">%1$s</xliff:g>“"</string>
     <string name="accessibility_text_reading_options_title" msgid="3224648909213325563">"Anzeigegröße und Text"</string>
-    <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"Textanzeige ändern"</string>
+    <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"Einstellungen für Textanzeige ändern"</string>
     <string name="accessibility_text_reading_preview_mail_subject" msgid="4597374768612733616">"Betreff: Designs für Heißluftballons"</string>
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"Von: Bernd"</string>
     <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"Guten Morgen,\n\nwie geht es mit den Entwürfen voran? Werden sie fertig sein, bevor wir mit der Herstellung der neuen Ballons beginnen?"</string>
@@ -2503,8 +2534,8 @@
     <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"Lautstärketasten gedrückt halten"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Halte beide Lautstärketasten gedrückt"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"Dreimal auf den Bildschirm tippen"</string>
-    <string name="accessibility_shortcut_triple_tap_keyword" msgid="6863958573135995927">"Dreimal auf den Bildschirm tippen"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="2102327956423320536">"Tippe {0,number,integer}-mal schnell auf das Display. Durch diese Verknüpfung kann dein Gerät langsamer werden."</string>
+    <string name="accessibility_shortcut_triple_tap_keyword" msgid="6863958573135995927">"dreimal auf den Bildschirm tippen"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="2102327956423320536">"Tippe {0,number,integer}-mal schnell auf das Display. Durch diesen Kurzbefehl  kann dein Gerät langsamer werden."</string>
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Erweitert"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"Die Schaltfläche für die Bedienungshilfen ist auf <xliff:g id="SERVICE">%1$s</xliff:g> gestellt. Um die Vergrößerung nutzen zu können, tippe &amp; halte die Schaltfläche für die Bedienungshilfen gedrückt und wähle anschließend \"Vergrößerung\" aus."</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"Die Touch-Geste für die Bedienungshilfen ist auf den Dienst \"<xliff:g id="SERVICE">%1$s</xliff:g>\" eingestellt. Wenn du die Vergrößerung verwenden möchtest, wische mit zwei Fingern vom unteren Bildschirmrand nach oben und halte den Bildschirm gedrückt. Wähle dann \"Vergrößerung\" aus."</string>
@@ -2625,8 +2656,8 @@
     <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"Lautstärketasten gedrückt halten"</string>
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Dreimal auf den Bildschirm tippen"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Weiter"</string>
-    <string name="accessibility_hearingaid_title" msgid="427173678199203191">"Hörhilfen"</string>
-    <string name="accessibility_hearingaid_not_connected_summary" msgid="3371427366765435743">"Keine Hörhilfen verbunden"</string>
+    <string name="accessibility_hearingaid_title" msgid="427173678199203191">"Hörgeräte"</string>
+    <string name="accessibility_hearingaid_not_connected_summary" msgid="3371427366765435743">"Keine Hörgeräte verbunden"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"Hörhilfen hinzufügen"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Hörgeräte koppeln"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"Wähle auf dem nächsten Bildschirm deine Hörgeräte aus. Das linke und rechte Ohr müssen möglicherweise separat gekoppelt werden.\n\nDeine Hörgeräte müssen eingeschaltet und bereit zum Koppeln sein."</string>
@@ -2643,7 +2674,7 @@
     <string name="accessibility_toggle_audio_description_preference_title" msgid="8916473886256061220">"Audiobeschreibung"</string>
     <string name="accessibility_audio_description_summary" msgid="2554789094873781056">"Höre dir bei unterstützten Filmen und Serien eine Beschreibung der Ereignisse auf dem Bildschirm an"</string>
     <string name="keywords_audio_description" msgid="6202816411593281252">"Audiobeschreibung, Audio, Beschreibung, eingeschränktes Sehvermögen"</string>
-    <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"Verknüpfung aktiviert"</string>
+    <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"Kurzbefehl aktiviert"</string>
     <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"Aus"</string>
     <string name="accessibility_summary_state_enabled" msgid="1065431632216039369">"An"</string>
     <string name="accessibility_summary_state_disabled" msgid="9173234532752799694">"Aus"</string>
@@ -2726,7 +2757,7 @@
     <string name="accessibility_service_warning" msgid="6779187188736432618">"<xliff:g id="SERVICE">%1$s</xliff:g> fordert eine volle Kontrolle für dieses Gerät an. Der Dienst kann den Bildschirm lesen und im Namen von Nutzern mit Bedarf an Bedienungshilfen handeln. Dieses Maß an Kontrolle ist für die meisten Apps ungeeignet."</string>
     <string name="accessibility_service_warning_description" msgid="6573203795976134751">"Die vollständige Kontrolle sollte nur für Apps aktiviert werden, die dir Zugang zu App-Funktionen erleichtern. Das ist in der Regel nur ein kleiner Teil der Apps."</string>
     <string name="accessibility_service_screen_control_title" msgid="324795030658109870">"Bildschirm aufrufen und steuern"</string>
-    <string name="accessibility_service_screen_control_description" msgid="8431940515157990426">"Die Funktion kann alle Inhalte auf dem Bildschirm lesen und diese Inhalte über andere Apps anzeigen."</string>
+    <string name="accessibility_service_screen_control_description" msgid="8431940515157990426">"Die Funktion kann alle Inhalte auf dem Bildschirm lesen und diese Inhalte über anderen Apps anzeigen."</string>
     <string name="accessibility_service_action_perform_title" msgid="1449360056585337833">"Aktionen aufrufen und durchführen"</string>
     <string name="accessibility_service_action_perform_description" msgid="7807832069800034738">"Die Funktion kann deine Interaktionen mit einer App oder einem Hardwaresensor verfolgen und in deinem Namen mit Apps interagieren."</string>
     <string name="accessibility_dialog_button_allow" msgid="8274918676473216697">"Zulassen"</string>
@@ -3849,6 +3880,7 @@
     <string name="ring_volume_option_title" msgid="1520802026403038560">"Lautstärke Klingeln/Benachrichtigungen"</string>
     <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"Klingeltonlautstärke"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"Benachrichtigungslautstärke"</string>
+    <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"Nicht verfügbar, da der Klingelton stummgeschaltet ist"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"Klingelton"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Standard-Benachrichtigungston"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"Von App erzeugter Ton"</string>
@@ -3912,7 +3944,7 @@
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"Wenn auf deinem Smartphone neue Benachrichtigungen eingehen, ist weder ein akustisches Signal zu hören noch eine Vibration zu spüren."</string>
     <string name="zen_mode_restrict_notifications_hide" msgid="5997930361607752541">"Kein optisches oder akustisches Signal bei Benachrichtigungen"</string>
     <string name="zen_mode_restrict_notifications_hide_summary" msgid="6005445725686969583">"Du siehst und hörst keine Benachrichtigungen"</string>
-    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4314772315731485747">"Du siehst keine neuen oder vorhandenen Benachrichtigungen. Außerdem vibriert dein Gerät nicht und du hörst kein akustisches Signal. Beachte, dass wichtige Benachrichtigungen zu den Smartphone-Aktivitäten und zum Smartphone-Status weiterhin eingeblendet werden.\n\nNachdem du „Bitte nicht stören“ deaktiviert hast, kannst du vom oberen Bildschirmrand nach unten wischen, um die verpassten Benachrichtigungen zu sehen."</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="3761837271201073330">"Du siehst auf deinem Smartphone keine neuen oder vorhandenen Benachrichtigungen. Außerdem vibriert es nicht und gibt keine akustischen Signale von sich. Beachte, dass wichtige Benachrichtigungen zu den Geräteaktivitäten und zum Gerätestatus weiterhin eingeblendet werden.\n\nNachdem du „Bitte nicht stören“ deaktiviert hast, kannst du vom oberen Bildschirmrand nach unten wischen, um die verpassten Benachrichtigungen zu sehen."</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"Benutzerdefiniert"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"Benutzerdefinierte Einstellung aktivieren"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="5062332754972217218">"Benutzerdefinierte Einstellung entfernen"</string>
@@ -3936,7 +3968,7 @@
     <string name="zen_mode_block_effect_summary_sound" msgid="1559968890497946901">"Töne und Vibration"</string>
     <string name="zen_mode_block_effect_summary_some" msgid="2730383453754229650">"Töne, Vibration und einige visuelle Elemente von Benachrichtigungen"</string>
     <string name="zen_mode_block_effect_summary_all" msgid="3131918059492425222">"Töne, Vibration und visuelle Elemente von Benachrichtigungen"</string>
-    <string name="zen_mode_blocked_effects_footer" msgid="1115914818435434668">"Benachrichtigungen für grundlegende Smartphone-Aktivitäten und den Smartphone-Status werden nie ausgeblendet."</string>
+    <string name="zen_mode_blocked_effects_footer" msgid="6403365663466620328">"Benachrichtigungen für grundlegende Geräteaktivitäten und den Gerätestatus werden nie ausgeblendet."</string>
     <string name="zen_mode_no_exceptions" msgid="1580136061336585873">"Keine"</string>
     <string name="zen_mode_other_options" msgid="3399967231522580421">"sonstige Optionen"</string>
     <string name="zen_mode_add" msgid="8789024026733232566">"Hinzufügen"</string>
@@ -4070,6 +4102,8 @@
     <string name="lockscreen_bypass_summary" msgid="464277506200346748">"Nach der Entsperrung direkt zum zuletzt genutzten Bildschirm gehen"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Sperrbildschirm, überspringen, umgehen"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Wenn das Arbeitsprofil gesperrt ist"</string>
+    <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Nur neue Benachrichtigungen auf dem Sperrbildschirm anzeigen"</string>
+    <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Zuvor angesehene Benachrichtigungen werden automatisch vom Sperrbildschirm entfernt"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Benachrichtigungen auf Sperrbildschirm"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Lautlose und Standardunterhaltungen anzeigen"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Alle Benachrichtigungen anzeigen"</string>
@@ -4241,7 +4275,7 @@
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"„Bitte nicht stören“ zulassen"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Keine installierte App hat während „Bitte nicht stören“ Zugriff angefordert."</string>
     <string name="loading_notification_apps" msgid="5139471829295287945">"Apps werden geladen…"</string>
-    <string name="app_notifications_off_desc" msgid="6691342160980435901">"Gemäß deinen Einstellungen unterbindet Android die Anzeige von Benachrichtigungen dieser App auf diesem Gerät."</string>
+    <string name="app_notifications_off_desc" msgid="2484843759466874201">"Von dieser App sind keine Benachrichtigungen zugelassen"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Gemäß deinen Einstellungen unterbindet Android die Anzeige von Benachrichtigungen dieser Kategorie auf diesem Gerät."</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Gemäß deinen Einstellungen unterbindet Android die Anzeige von Benachrichtigungen dieser Gruppe auf diesem Gerät."</string>
     <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"Diese App sendet keine Benachrichtigungen"</string>
@@ -4565,7 +4599,7 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> nicht verwendete Apps</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> nicht verwendete App</item>
     </plurals>
-    <string name="unused_apps_category" msgid="8954930958175500851">"Nicht verwendete App-Einstellungen"</string>
+    <string name="unused_apps_category" msgid="8954930958175500851">"Einstellungen für App bei Nichtnutzung"</string>
     <string name="unused_apps_switch" msgid="7595419855882245772">"App-Aktivität bei Nichtnutzung stoppen"</string>
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"Berechtigungen entfernen, temporäre Dateien löschen und Benachrichtigungen stoppen"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Alle Apps"</string>
@@ -4606,7 +4640,7 @@
     <string name="default_for_work" msgid="537558180548617528">"Standardeinstellung für Arbeit"</string>
     <string name="assist_and_voice_input_title" msgid="6317935163145135914">"Assistent &amp; Spracheingabe"</string>
     <string name="default_assist_title" msgid="1182435129627493758">"App für digitalen Assistenten"</string>
-    <string name="default_digital_assistant_title" msgid="5654663086385490838">"Standardapp für digitalen Assistenten"</string>
+    <string name="default_digital_assistant_title" msgid="5654663086385490838">"Standard-App digit. Assistent"</string>
     <string name="assistant_security_warning_title" msgid="6444187332360938730">"<xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g> als Assistenten festlegen?"</string>
     <string name="assistant_security_warning" msgid="5623237187748811070">"Der Assistent kann Informationen zu Apps abrufen, die du auf deinem System verwendest, einschließlich Informationen, die auf deinem Bildschirm angezeigt werden oder die in Apps zugänglich sind."</string>
     <string name="assistant_security_warning_agree" msgid="9013334158753473359">"Zustimmen"</string>
@@ -4622,7 +4656,7 @@
     <string name="usage_access" msgid="5487993885373893282">"Zugriff auf Nutzungsdaten"</string>
     <string name="permit_usage_access" msgid="179630895262172674">"Zugriff auf Nutzungsdaten gewähren"</string>
     <string name="app_usage_preference" msgid="7062447555623339120">"App-Nutzungseinstellungen"</string>
-    <string name="time_spent_in_app_pref_title" msgid="25327097913383330">"Gerätenutzungsdauer"</string>
+    <string name="time_spent_in_app_pref_title" msgid="25327097913383330">"Bildschirmzeit"</string>
     <string name="usage_access_description" msgid="8547716253713890707">"Der Zugriff auf die Nutzungsdaten ermöglicht es einer App, verschiedene Informationen zu erfassen – welche anderen Apps du wie oft verwendest, welchen Mobilfunkanbieter du nutzt, welche Spracheinstellungen du festgelegt hast usw."</string>
     <string name="memory_settings_title" msgid="6582588646363308430">"Arbeitsspeicher"</string>
     <string name="memory_details_title" msgid="3048107441540417799">"Speicherdetails"</string>
@@ -4965,7 +4999,7 @@
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"Jetzt aktivieren"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"Jetzt deaktivieren"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"Akkuoptimierung wird nicht verwendet"</string>
-    <string name="app_battery_usage_title" msgid="346558380609793334">"Akkunutzung von Apps"</string>
+    <string name="app_battery_usage_title" msgid="346558380609793334">"Akkunutzung der App"</string>
     <string name="app_battery_usage_summary" msgid="6349965904306339539">"Akkunutzung für Apps festlegen"</string>
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Uneingeschränkt"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Optimiert"</string>
@@ -5927,10 +5961,13 @@
     <string name="dream_picker_category" msgid="7726447836872744867">"Bildschirmschoner auswählen"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Zusätzliche Informationen anzeigen"</string>
     <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"Uhrzeit, Wetter oder andere Informationen auf dem Bildschirmschoner anzeigen"</string>
+    <string name="dream_home_controls_toggle_title" msgid="706799741564479248">"Smart-Home-Steuerung anzeigen"</string>
+    <string name="dream_home_controls_toggle_summary" msgid="4102519907917430579">"Schaltflächen zur Smart-Home-Steuerung auf dem Bildschirmschoner anzeigen lassen"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Weitere Einstellungen"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Bildschirmschoner auswählen"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Hier kannst du festlegen, was auf dem Display angezeigt werden soll, wenn das Tablet angedockt ist. Das Gerät verbraucht möglicherweise mehr Strom, wenn ein Bildschirmschoner verwendet wird."</string>
     <string name="customize_button_title" msgid="1110284655990203359">"Anpassen"</string>
+    <string name="customize_button_description" msgid="7440248477266126231">"<xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g> anpassen"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"Damit die Freiform-Unterstützung aktiviert wird, musst du das Gerät neu starten."</string>
     <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"Damit der Desktop-Modus auf sekundären Bildschirmen erzwungen wird, musst du das Gerät neu starten."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Jetzt neu starten"</string>
@@ -5955,6 +5992,7 @@
     <string name="find_broadcast_password_dialog_title" msgid="3176988702535737484">"Passwort eingeben"</string>
     <string name="find_broadcast_password_dialog_connection_error" msgid="47873617983439400">"Verbindung nicht möglich. Versuche es noch einmal."</string>
     <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"Falsches Passwort"</string>
+    <string name="find_broadcast_join_broadcast_error" msgid="5486980388774711346">"Teilnahme an der Übertragung nicht möglich"</string>
     <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"Scanne zum Anhören den QR-Code unten"</string>
     <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"Das Format des QR-Codes ist ungültig"</string>
 </resources>

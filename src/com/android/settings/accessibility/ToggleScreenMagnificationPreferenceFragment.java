@@ -94,7 +94,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         mPackageName = getString(R.string.accessibility_screen_magnification_title);
         mImageUri = new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
                 .authority(getPrefContext().getPackageName())
-                .appendPath(String.valueOf(R.raw.accessibility_magnification_banner))
+                .appendPath(String.valueOf(R.raw.a11y_magnification_banner))
                 .build();
         mTouchExplorationStateChangeListener = isTouchExplorationEnabled -> {
             removeDialog(DialogEnums.EDIT_SHORTCUT);

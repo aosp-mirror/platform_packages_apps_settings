@@ -16,6 +16,8 @@
 
 package com.android.settings.accessibility;
 
+import static android.app.Activity.RESULT_CANCELED;
+
 import android.app.settings.SettingsEnums;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -27,6 +29,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
 
+import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupdesign.GlifPreferenceLayout;
 
 public class ToggleScreenMagnificationPreferenceFragmentForSetupWizard
@@ -44,6 +47,13 @@ public class ToggleScreenMagnificationPreferenceFragmentForSetupWizard
         final Drawable icon = getContext().getDrawable(R.drawable.ic_accessibility_visibility);
         AccessibilitySetupWizardUtils.updateGlifPreferenceLayout(getContext(), layout, title,
                 description, icon);
+
+        final FooterBarMixin mixin = layout.getMixin(FooterBarMixin.class);
+        AccessibilitySetupWizardUtils.setPrimaryButton(getContext(), mixin, R.string.done, () -> {
+            setResult(RESULT_CANCELED);
+            finish();
+        });
+
         hidePreferenceSettingComponents();
     }
 

@@ -36,6 +36,7 @@ import androidx.preference.Preference;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -59,7 +60,13 @@ public class DreamSettings extends DashboardFragment implements OnMainSwitchChan
 
     private MainSwitchPreference mMainSwitchPreference;
     private Button mPreviewButton;
+    private Preference mComplicationsTogglePreference;
     private RecyclerView mRecyclerView;
+
+    private DreamPickerController mDreamPickerController;
+
+    private final DreamPickerController.Callback mCallback =
+            this::updateComplicationsToggleVisibility;
 
     @WhenToDream
     static int getSettingFromPrefKey(String key) {
@@ -128,7 +135,13 @@ public class DreamSettings extends DashboardFragment implements OnMainSwitchChan
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context);
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        if (mDreamPickerController == null) {
+            mDreamPickerController = new DreamPickerController(context);
+        }
+        controllers.add(mDreamPickerController);
+        controllers.add(new WhenToDreamPreferenceController(context));
+        return controllers;
     }
 
     public static CharSequence getSummaryTextWithDreamName(Context context) {
@@ -146,10 +159,9 @@ public class DreamSettings extends DashboardFragment implements OnMainSwitchChan
         }
     }
 
-    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context) {
-        final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new WhenToDreamPreferenceController(context));
-        return controllers;
+    @VisibleForTesting
+    void setDreamPickerController(DreamPickerController dreamPickerController) {
+        mDreamPickerController = dreamPickerController;
     }
 
     private void setAllPreferencesEnabled(boolean isEnabled) {
@@ -174,12 +186,29 @@ public class DreamSettings extends DashboardFragment implements OnMainSwitchChan
 
         final DreamBackend dreamBackend = DreamBackend.getInstance(getContext());
 
+        mComplicationsTogglePreference = findPreference(
+                DreamComplicationPreferenceController.PREF_KEY);
+        updateComplicationsToggleVisibility();
+
         mMainSwitchPreference = findPreference(MAIN_SWITCH_PREF_KEY);
         if (mMainSwitchPreference != null) {
             mMainSwitchPreference.addOnSwitchChangeListener(this);
         }
 
         setAllPreferencesEnabled(dreamBackend.isEnabled());
+
+        if (mDreamPickerController != null) {
+            mDreamPickerController.addCallback(mCallback);
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        if (mDreamPickerController != null) {
+            mDreamPickerController.removeCallback(mCallback);
+        }
+
+        super.onDestroy();
     }
 
     @Override
@@ -195,8 +224,22 @@ public class DreamSettings extends DashboardFragment implements OnMainSwitchChan
         mPreviewButton.setOnClickListener(v -> dreamBackend.preview(dreamBackend.getActiveDream()));
 
         mRecyclerView = super.onCreateRecyclerView(inflater, parent, bundle);
+        // The enable/disable status change of the nested RecyclerView(Dream Picker) causes the
+        // focus moving. Make the RecyclerView unfocusable to prevent the unexpected scrolling when
+        // the focus changes in the TalkBack mode.
+        mRecyclerView.setFocusable(false);
         updatePaddingForPreviewButton();
         return mRecyclerView;
+    }
+
+    private void updateComplicationsToggleVisibility() {
+        if (mDreamPickerController == null || mComplicationsTogglePreference == null) {
+            return;
+        }
+
+        final DreamBackend.DreamInfo activeDream = mDreamPickerController.getActiveDreamInfo();
+        mComplicationsTogglePreference.setVisible(
+                activeDream != null && activeDream.supportsComplications);
     }
 
     private void updatePaddingForPreviewButton() {
@@ -213,6 +256,17 @@ public class DreamSettings extends DashboardFragment implements OnMainSwitchChan
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.dream_fragment_overview);
+            new SearchIndexProvider(R.xml.dream_fragment_overview);
+
+    static class SearchIndexProvider extends BaseSearchIndexProvider {
+        SearchIndexProvider(int xmlRes) {
+            super(xmlRes);
+        }
+
+        @Override
+        protected boolean isPageSearchEnabled(Context context) {
+            return Utils.areDreamsAvailableToCurrentUser(context);
+        }
+    }
 }
 

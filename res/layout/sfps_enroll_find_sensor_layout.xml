@@ -29,7 +29,8 @@
         android:gravity="center_vertical"
         android:orientation="vertical"
         android:clipToPadding="false"
-        android:clipChildren="false">
+        android:clipChildren="false"
+        android:layout_marginTop="@dimen/sfps_enroll_find_sensor_lottie_margin">
 
         <!-- Animation res MUST be set in code because asset is dependent on device orientation -->
         <com.airbnb.lottie.LottieAnimationView
