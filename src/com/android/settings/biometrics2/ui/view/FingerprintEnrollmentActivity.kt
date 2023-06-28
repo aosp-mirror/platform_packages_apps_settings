@@ -32,8 +32,11 @@ import androidx.annotation.ColorInt
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.lifecycle.viewmodel.CreationExtras
 import androidx.lifecycle.viewmodel.MutableCreationExtras
 import com.android.settings.R
@@ -53,15 +56,12 @@ import com.android.settings.biometrics2.ui.viewmodel.AutoCredentialViewModel.CRE
 import com.android.settings.biometrics2.ui.viewmodel.AutoCredentialViewModel.FingerprintChallengeGenerator
 import com.android.settings.biometrics2.ui.viewmodel.DeviceFoldedViewModel
 import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollEnrollingViewModel
-import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollEnrollingViewModel.ErrorDialogData
 import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollEnrollingViewModel.FINGERPRINT_ENROLL_ENROLLING_ACTION_DONE
 import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollEnrollingViewModel.FINGERPRINT_ENROLL_ENROLLING_ACTION_SHOW_ICON_TOUCH_DIALOG
 import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollEnrollingViewModel.FINGERPRINT_ENROLL_ENROLLING_CANCELED_BECAUSE_BACK_PRESSED
 import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollEnrollingViewModel.FINGERPRINT_ENROLL_ENROLLING_CANCELED_BECAUSE_USER_SKIP
-import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollEnrollingViewModel.FINGERPRINT_ERROR_DIALOG_ACTION_SET_RESULT_FINISH
-import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollEnrollingViewModel.FINGERPRINT_ERROR_DIALOG_ACTION_SET_RESULT_TIMEOUT
 import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollEnrollingViewModel.FingerprintEnrollEnrollingAction
-import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollEnrollingViewModel.FingerprintErrorDialogAction
+import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollErrorDialogViewModel
 import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollFindSensorViewModel
 import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollFindSensorViewModel.FINGERPRINT_ENROLL_FIND_SENSOR_ACTION_DIALOG
 import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollFindSensorViewModel.FINGERPRINT_ENROLL_FIND_SENSOR_ACTION_SKIP
@@ -78,8 +78,11 @@ import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollIntroViewM
 import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollIntroViewModel.FingerprintEnrollIntroAction
 import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollProgressViewModel
 import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollmentViewModel
+import com.android.settings.biometrics2.ui.viewmodel.FingerprintErrorDialogSetResultAction.FINGERPRINT_ERROR_DIALOG_ACTION_SET_RESULT_FINISH
+import com.android.settings.biometrics2.ui.viewmodel.FingerprintErrorDialogSetResultAction.FINGERPRINT_ERROR_DIALOG_ACTION_SET_RESULT_TIMEOUT
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.google.android.setupdesign.util.ThemeHelper
+import kotlinx.coroutines.launch
 
 /**
  * Fingerprint enrollment activity implementation
@@ -103,6 +106,30 @@ open class FingerprintEnrollmentActivity : FragmentActivity() {
         viewModelProvider[AutoCredentialViewModel::class.java]
     }
 
+    private val introViewModel: FingerprintEnrollIntroViewModel by lazy {
+        viewModelProvider[FingerprintEnrollIntroViewModel::class.java]
+    }
+
+    private val findSensorViewModel: FingerprintEnrollFindSensorViewModel by lazy {
+        viewModelProvider[FingerprintEnrollFindSensorViewModel::class.java]
+    }
+
+    private val progressViewModel: FingerprintEnrollProgressViewModel by lazy {
+        viewModelProvider[FingerprintEnrollProgressViewModel::class.java]
+    }
+
+    private val enrollingViewModel: FingerprintEnrollEnrollingViewModel by lazy {
+        viewModelProvider[FingerprintEnrollEnrollingViewModel::class.java]
+    }
+
+    private val finishViewModel: FingerprintEnrollFinishViewModel by lazy {
+        viewModelProvider[FingerprintEnrollFinishViewModel::class.java]
+    }
+
+    private val errorDialogViewModel: FingerprintEnrollErrorDialogViewModel by lazy {
+        viewModelProvider[FingerprintEnrollErrorDialogViewModel::class.java]
+    }
+
     private val introActionObserver: Observer<Int> = Observer<Int> { action ->
         if (DEBUG) {
             Log.d(TAG, "introActionObserver($action)")
@@ -122,26 +149,6 @@ open class FingerprintEnrollmentActivity : FragmentActivity() {
             Log.d(TAG, "enrollingActionObserver($action)")
         }
         action?.let { onEnrollingAction(it) }
-    }
-
-    private val enrollingErrorDialogObserver: Observer<ErrorDialogData> =
-        Observer<ErrorDialogData> { data ->
-            if (DEBUG) {
-                Log.d(TAG, "enrollingErrorDialogObserver($data)")
-            }
-            data?.let {
-                FingerprintEnrollEnrollingErrorDialog().show(
-                    supportFragmentManager,
-                    ENROLLING_ERROR_DIALOG_TAG
-                )
-            }
-        }
-
-    private val enrollingErrorDialogActionObserver: Observer<Int> = Observer<Int> { action ->
-        if (DEBUG) {
-            Log.d(TAG, "enrollingErrorDialogActionObserver($action)")
-        }
-        action?.let { onEnrollingErrorDialogAction(it) }
     }
 
     private val finishActionObserver: Observer<Int> = Observer<Int> { action ->
@@ -218,6 +225,33 @@ open class FingerprintEnrollmentActivity : FragmentActivity() {
         autoCredentialViewModel.generateChallengeFailedLiveData.observe(this) {
             _: Boolean -> onGenerateChallengeFailed()
         }
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                errorDialogViewModel.newDialogFlow.collect {
+                    Log.d(TAG, "newErrorDialogFlow($it)")
+                    FingerprintEnrollErrorDialog.newInstance(it).show(
+                        supportFragmentManager,
+                        ERROR_DIALOG_TAG
+                    )
+                }
+            }
+        }
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                errorDialogViewModel.setResultFlow.collect {
+                    Log.d(TAG, "errorDialogSetResultFlow($it)")
+                    when (it) {
+                        FINGERPRINT_ERROR_DIALOG_ACTION_SET_RESULT_FINISH -> onSetActivityResult(
+                            ActivityResult(BiometricEnrollBase.RESULT_FINISHED, null)
+                        )
+
+                        FINGERPRINT_ERROR_DIALOG_ACTION_SET_RESULT_TIMEOUT -> onSetActivityResult(
+                            ActivityResult(BiometricEnrollBase.RESULT_TIMEOUT, null)
+                        )
+                    }
+                }
+            }
+        }
     }
 
     private fun startFragment(fragmentClass: Class<out Fragment>, tag: String) {
@@ -252,7 +286,7 @@ open class FingerprintEnrollmentActivity : FragmentActivity() {
         if (request.isSkipIntro || request.isSkipFindSensor) {
             return
         }
-        viewModelProvider[FingerprintEnrollIntroViewModel::class.java].let {
+        introViewModel.let {
             // Clear ActionLiveData in FragmentViewModel to prevent getting previous action during
             // recreate, like press 'Agree' then press 'back' in FingerprintEnrollFindSensor
             // activity.
@@ -264,8 +298,7 @@ open class FingerprintEnrollmentActivity : FragmentActivity() {
     // We need to make sure token is valid before entering find sensor page
     private fun startFindSensorFragment() {
         // Always setToken into progressViewModel even it is not necessary action for UDFPS
-        viewModelProvider[FingerprintEnrollProgressViewModel::class.java]
-            .setToken(autoCredentialViewModel.token)
+        progressViewModel.setToken(autoCredentialViewModel.token)
         attachFindSensorViewModel()
         val fragmentClass: Class<out Fragment> = if (viewModel.canAssumeUdfps()) {
             FingerprintEnrollFindUdfpsFragment::class.java
@@ -281,7 +314,7 @@ open class FingerprintEnrollmentActivity : FragmentActivity() {
         if (viewModel.request.isSkipFindSensor) {
             return
         }
-        viewModelProvider[FingerprintEnrollFindSensorViewModel::class.java].let {
+        findSensorViewModel.let {
             // Clear ActionLiveData in FragmentViewModel to prevent getting previous action during
             // recreate, like press 'Start' then press 'back' in FingerprintEnrollEnrolling
             // activity.
@@ -292,8 +325,7 @@ open class FingerprintEnrollmentActivity : FragmentActivity() {
 
     private fun startEnrollingFragment() {
         // Always setToken into progressViewModel even it is not necessary action for SFPS or RFPS
-        viewModelProvider[FingerprintEnrollProgressViewModel::class.java]
-            .setToken(autoCredentialViewModel.token)
+        progressViewModel.setToken(autoCredentialViewModel.token)
         attachEnrollingViewModel()
         val fragmentClass: Class<out Fragment> = if (viewModel.canAssumeUdfps()) {
             FingerprintEnrollEnrollingUdfpsFragment::class.java
@@ -306,14 +338,9 @@ open class FingerprintEnrollmentActivity : FragmentActivity() {
     }
 
     private fun attachEnrollingViewModel() {
-        viewModelProvider[FingerprintEnrollEnrollingViewModel::class.java].let {
+        enrollingViewModel.let {
             it.clearActionLiveData()
             it.actionLiveData.observe(this, enrollingActionObserver)
-            it.errorDialogLiveData.observe(this, enrollingErrorDialogObserver)
-            it.errorDialogActionLiveData.observe(
-                this,
-                enrollingErrorDialogActionObserver
-            )
         }
     }
 
@@ -374,7 +401,7 @@ open class FingerprintEnrollmentActivity : FragmentActivity() {
     }
 
     private fun attachFinishViewModel() {
-        viewModelProvider[FingerprintEnrollFinishViewModel::class.java].let {
+        finishViewModel.let {
             it.clearActionLiveData()
             it.actionLiveData.observe(this, finishActionObserver)
         }
@@ -520,18 +547,6 @@ open class FingerprintEnrollmentActivity : FragmentActivity() {
         }
     }
 
-    private fun onEnrollingErrorDialogAction(@FingerprintErrorDialogAction action: Int) {
-        when (action) {
-            FINGERPRINT_ERROR_DIALOG_ACTION_SET_RESULT_FINISH -> onSetActivityResult(
-                ActivityResult(BiometricEnrollBase.RESULT_FINISHED, null)
-            )
-
-            FINGERPRINT_ERROR_DIALOG_ACTION_SET_RESULT_TIMEOUT -> onSetActivityResult(
-                ActivityResult(BiometricEnrollBase.RESULT_TIMEOUT, null)
-            )
-        }
-    }
-
     private fun onFinishAction(@FingerprintEnrollFinishAction action: Int) {
         when (action) {
             FINGERPRINT_ENROLL_FINISH_ACTION_ADD_BUTTON_CLICK -> {
@@ -623,12 +638,13 @@ open class FingerprintEnrollmentActivity : FragmentActivity() {
     companion object {
         private const val DEBUG = false
         private const val TAG = "FingerprintEnrollmentActivity"
+        protected const val LAUNCH_CONFIRM_LOCK_ACTIVITY = 1
+
         private const val INTRO_TAG = "intro"
         private const val FIND_SENSOR_TAG = "find-sensor"
         private const val ENROLLING_TAG = "enrolling"
         private const val FINISH_TAG = "finish"
         private const val SKIP_SETUP_FIND_FPS_DIALOG_TAG = "skip-setup-dialog"
-        private const val ENROLLING_ERROR_DIALOG_TAG = "enrolling-error-dialog"
-        protected const val LAUNCH_CONFIRM_LOCK_ACTIVITY = 1
+        private const val ERROR_DIALOG_TAG = "error-dialog"
     }
 }

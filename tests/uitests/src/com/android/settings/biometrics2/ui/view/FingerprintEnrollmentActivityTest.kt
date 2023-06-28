@@ -130,7 +130,7 @@ class FingerprintEnrollmentActivityTest {
     }
 
     @Test
-    fun testIntroChooseLock_landscape() {
+    fun testIntroChooseLock_runAslandscape() {
         runAsLandscape = true
         testIntroChooseLock()
     }
@@ -193,7 +193,7 @@ class FingerprintEnrollmentActivityTest {
     }
 
     @Test
-    fun testIntroWithGkPwHandle_withUdfps_clickStart_landscape() {
+    fun testIntroWithGkPwHandle_withUdfps_clickStart_runAslandscape() {
         runAsLandscape = true
         testIntroWithGkPwHandle_withUdfps_clickStart()
     }
@@ -226,7 +226,7 @@ class FingerprintEnrollmentActivityTest {
     }
 
     @Test
-    fun testIntroWithGkPwHandle_withUdfps_clickLottie_landscape() {
+    fun testIntroWithGkPwHandle_withUdfps_clickLottie_runAslandscape() {
         runAsLandscape = true
         testIntroWithGkPwHandle_withUdfps_clickLottie()
     }
@@ -256,7 +256,7 @@ class FingerprintEnrollmentActivityTest {
     }
 
     @Test
-    fun testIntroWithGkPwHandle_withSfps_landscape() {
+    fun testIntroWithGkPwHandle_withSfps_runAslandscape() {
         runAsLandscape = true
         testIntroWithGkPwHandle_withSfps()
     }
@@ -291,7 +291,7 @@ class FingerprintEnrollmentActivityTest {
     }
 
     @Test
-    fun testIntroWithGkPwHandle_withRfps_landscape() {
+    fun testIntroWithGkPwHandle_withRfps_runAslandscape() {
         runAsLandscape = true
         testIntroWithGkPwHandle_withRfps()
     }
@@ -314,7 +314,7 @@ class FingerprintEnrollmentActivityTest {
     }
 
     @Test
-    fun testIntroWithGkPwHandle_clickNoThanksInIntroPage_landscape() {
+    fun testIntroWithGkPwHandle_clickNoThanksInIntroPage_runAslandscape() {
         runAsLandscape = true
         testIntroWithGkPwHandle_clickNoThanksInIntroPage()
     }
@@ -344,7 +344,7 @@ class FingerprintEnrollmentActivityTest {
     }
 
     @Test
-    fun testIntroWithGkPwHandle_clickSkipInFindSensor_landscape() {
+    fun testIntroWithGkPwHandle_clickSkipInFindSensor_runAslandscape() {
         runAsLandscape = true
         testIntroWithGkPwHandle_clickSkipInFindSensor()
     }
@@ -382,7 +382,7 @@ class FingerprintEnrollmentActivityTest {
     }
 
     @Test
-    fun testIntroWithGkPwHandle_clickSkipAnywayInFindFpsDialog_whenIsSuw_landscape() {
+    fun testIntroWithGkPwHandle_clickSkipAnywayInFindFpsDialog_whenIsSuw_runAslandscape() {
         runAsLandscape = true
         testIntroWithGkPwHandle_clickSkipAnywayInFindFpsDialog_whenIsSuw()
     }
@@ -418,7 +418,7 @@ class FingerprintEnrollmentActivityTest {
     }
 
     @Test
-    fun testIntroWithGkPwHandle_clickGoBackInFindFpsDialog_whenIsSuw_landscape() {
+    fun testIntroWithGkPwHandle_clickGoBackInFindFpsDialog_whenIsSuw_runAslandscape() {
         runAsLandscape = true
         testIntroWithGkPwHandle_clickGoBackInFindFpsDialog_whenIsSuw()
     }
@@ -449,7 +449,7 @@ class FingerprintEnrollmentActivityTest {
     }
 
     @Test
-    fun testEnrollingWithGkPwHandle_landscape() {
+    fun testEnrollingWithGkPwHandle_runAslandscape() {
         runAsLandscape = true
         testEnrollingWithGkPwHandle()
     }
@@ -492,7 +492,7 @@ class FingerprintEnrollmentActivityTest {
     }
 
     @Test
-    fun testEnrollingIconTouchDialog_withSfps_landscape() {
+    fun testEnrollingIconTouchDialog_withSfps_runAslandscape() {
         runAsLandscape = true
         testEnrollingIconTouchDialog_withSfps()
     }
@@ -534,7 +534,7 @@ class FingerprintEnrollmentActivityTest {
     }
 
     @Test
-    fun testEnrollingIconTouchDialog_withRfps_landscape() {
+    fun testEnrollingIconTouchDialog_withRfps_runAslandscape() {
         runAsLandscape = true
         testEnrollingIconTouchDialog_withRfps()
     }
@@ -563,7 +563,7 @@ class FingerprintEnrollmentActivityTest {
     }
 
     @Test
-    fun testFindUdfpsWithGkPwHandle_clickStart_landscape() {
+    fun testFindUdfpsWithGkPwHandle_clickStart_runAslandscape() {
         runAsLandscape = true
         testFindUdfpsWithGkPwHandle_clickStart()
     }
@@ -580,7 +580,11 @@ class FingerprintEnrollmentActivityTest {
         assertThat(device.wait(Until.hasObject(By.text(DO_IT_LATER)), IDLE_TIMEOUT)).isTrue()
 
         // rotate device
-        device.setOrientationLandscape()
+        if (runAsLandscape) {
+            device.setOrientationPortrait()
+        } else {
+            device.setOrientationLandscape()
+        }
         device.waitForIdle()
 
         // FindUdfps page (landscape)
@@ -603,6 +607,12 @@ class FingerprintEnrollmentActivityTest {
 
         // FindUdfps page (landscape-again)
         assertThat(device.wait(Until.hasObject(By.text(DO_IT_LATER)), IDLE_TIMEOUT)).isTrue()
+    }
+
+    @Test
+    fun testFindUdfpsLandscapeWithGkPwHandle_clickStartThenBack_runAslandscape() {
+        runAsLandscape = true
+        testFindUdfpsLandscapeWithGkPwHandle_clickStartThenBack()
     }
 
     @Test
@@ -629,7 +639,7 @@ class FingerprintEnrollmentActivityTest {
     }
 
     @Test
-    fun testFindUdfpsWithGkPwHandle_clickLottie_landscape() {
+    fun testFindUdfpsWithGkPwHandle_clickLottie_runAslandscape() {
         runAsLandscape = true
         testFindUdfpsWithGkPwHandle_clickLottie()
     }
@@ -653,7 +663,7 @@ class FingerprintEnrollmentActivityTest {
     }
 
     @Test
-    fun testFindSfpsWithGkPwHandle_landscape() {
+    fun testFindSfpsWithGkPwHandle_runAslandscape() {
         runAsLandscape = true
         testFindSfpsWithGkPwHandle()
     }
@@ -688,7 +698,7 @@ class FingerprintEnrollmentActivityTest {
     }
 
     @Test
-    fun testFindRfpsWithGkPwHandle_landscape() {
+    fun testFindRfpsWithGkPwHandle_runAslandscape() {
         runAsLandscape = true
         testFindRfpsWithGkPwHandle()
     }
@@ -712,7 +722,7 @@ class FingerprintEnrollmentActivityTest {
     }
 
     @Test
-    fun testFindSensorWithGkPwHandle_clickSkipInFindSensor_landscape() {
+    fun testFindSensorWithGkPwHandle_clickSkipInFindSensor_runAslandscape() {
         runAsLandscape = true
         testFindSensorWithGkPwHandle_clickSkipInFindSensor()
     }

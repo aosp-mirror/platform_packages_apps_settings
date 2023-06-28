@@ -16,6 +16,7 @@
 
 package com.android.settings.biometrics2.ui.viewmodel;
 
+import static android.hardware.biometrics.BiometricFingerprintConstants.FINGERPRINT_ERROR_CANCELED;
 import static android.hardware.fingerprint.FingerprintManager.ENROLL_ENROLL;
 
 import static com.android.settings.biometrics2.ui.model.EnrollmentProgress.INITIAL_REMAINING;
@@ -41,6 +42,8 @@ import com.android.settings.biometrics.fingerprint.MessageDisplayController;
 import com.android.settings.biometrics2.ui.model.EnrollmentProgress;
 import com.android.settings.biometrics2.ui.model.EnrollmentStatusMessage;
 
+import java.util.LinkedList;
+
 /**
  * Progress ViewModel handles the state around biometric enrollment. It manages the state of
  * enrollment throughout the activity lifecycle so the app can continue after an event like
@@ -57,6 +60,7 @@ public class FingerprintEnrollProgressViewModel extends AndroidViewModel {
             new MutableLiveData<>();
     private final MutableLiveData<EnrollmentStatusMessage> mErrorMessageLiveData =
             new MutableLiveData<>();
+    private final MutableLiveData<Object> mCanceledSignalLiveData = new MutableLiveData<>();
     private final MutableLiveData<Boolean> mAcquireLiveData = new MutableLiveData<>();
     private final MutableLiveData<Integer> mPointerDownLiveData = new MutableLiveData<>();
     private final MutableLiveData<Integer> mPointerUpLiveData = new MutableLiveData<>();
@@ -66,6 +70,8 @@ public class FingerprintEnrollProgressViewModel extends AndroidViewModel {
 
     private final FingerprintUpdater mFingerprintUpdater;
     @Nullable private CancellationSignal mCancellationSignal = null;
+    @NonNull private final LinkedList<CancellationSignal> mCancelingSignalQueue =
+            new LinkedList<>();
     private final EnrollmentCallback mEnrollmentCallback = new EnrollmentCallback() {
 
         @Override
@@ -91,10 +97,13 @@ public class FingerprintEnrollProgressViewModel extends AndroidViewModel {
 
         @Override
         public void onEnrollmentError(int errMsgId, CharSequence errString) {
-            if (DEBUG) {
-                Log.d(TAG, "onEnrollmentError(" + errMsgId + ", " + errString + ")");
+            Log.d(TAG, "onEnrollmentError(" + errMsgId + ", " + errString
+                    + "), cancelingQueueSize:" + mCancelingSignalQueue.size());
+            if (FINGERPRINT_ERROR_CANCELED == errMsgId && mCancelingSignalQueue.size() > 0) {
+                mCanceledSignalLiveData.postValue(mCancelingSignalQueue.poll());
+            } else {
+                mErrorMessageLiveData.postValue(new EnrollmentStatusMessage(errMsgId, errString));
             }
-            mErrorMessageLiveData.postValue(new EnrollmentStatusMessage(errMsgId, errString));
         }
 
         @Override
@@ -152,6 +161,10 @@ public class FingerprintEnrollProgressViewModel extends AndroidViewModel {
         return mErrorMessageLiveData;
     }
 
+    public LiveData<Object> getCanceledSignalLiveData() {
+        return mCanceledSignalLiveData;
+    }
+
     public LiveData<Boolean> getAcquireLiveData() {
         return mAcquireLiveData;
     }
@@ -167,14 +180,14 @@ public class FingerprintEnrollProgressViewModel extends AndroidViewModel {
     /**
      * Starts enrollment and return latest isEnrolling() result
      */
-    public boolean startEnrollment(@EnrollReason int reason) {
+    public Object startEnrollment(@EnrollReason int reason) {
         if (mToken == null) {
             Log.e(TAG, "Null hardware auth token for enroll");
-            return false;
+            return null;
         }
         if (mCancellationSignal != null) {
-            Log.w(TAG, "Enrolling has started, shall not start again");
-            return true;
+            Log.w(TAG, "Enrolling is running, shall not start again");
+            return mCancellationSignal;
         }
         if (DEBUG) {
             Log.e(TAG, "startEnrollment(" + reason + ")");
@@ -204,7 +217,7 @@ public class FingerprintEnrollProgressViewModel extends AndroidViewModel {
             mFingerprintUpdater.enroll(mToken, mCancellationSignal, mUserId, mEnrollmentCallback,
                     reason);
         }
-        return true;
+        return mCancellationSignal;
     }
 
     /**
@@ -212,13 +225,17 @@ public class FingerprintEnrollProgressViewModel extends AndroidViewModel {
      */
     public boolean cancelEnrollment() {
         final CancellationSignal cancellationSignal = mCancellationSignal;
+        mCancellationSignal = null;
+
         if (cancellationSignal == null) {
             Log.e(TAG, "Fail to cancel enrollment, has cancelled or not start");
             return false;
+        } else {
+            Log.d(TAG, "enrollment cancelled");
         }
-
-        mCancellationSignal = null;
+        mCancelingSignalQueue.add(cancellationSignal);
         cancellationSignal.cancel();
+
         return true;
     }
 

@@ -34,6 +34,7 @@ import com.android.settings.biometrics2.ui.viewmodel.AutoCredentialViewModel.Cha
 import com.android.settings.biometrics2.ui.viewmodel.DeviceFoldedViewModel;
 import com.android.settings.biometrics2.ui.viewmodel.DeviceRotationViewModel;
 import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollEnrollingViewModel;
+import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollErrorDialogViewModel;
 import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollFindSensorViewModel;
 import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollFinishViewModel;
 import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollIntroViewModel;
@@ -47,7 +48,7 @@ import com.android.systemui.unfold.compat.ScreenSizeFoldProvider;
  */
 public class BiometricsViewModelFactory implements ViewModelProvider.Factory {
 
-    private static final String TAG = "BiometricsViewModelFact";
+    private static final String TAG = "BiometricsViewModelFactory";
 
     public static final CreationExtras.Key<ChallengeGenerator> CHALLENGE_GENERATOR_KEY =
             new CreationExtras.Key<ChallengeGenerator>() {};
@@ -113,7 +114,7 @@ public class BiometricsViewModelFactory implements ViewModelProvider.Factory {
             final Integer userId = extras.get(USER_ID_KEY);
             final FingerprintRepository fingerprint = provider.getFingerprintRepository(
                     application);
-            if (fingerprint != null) {
+            if (fingerprint != null && userId != null) {
                 return (T) new FingerprintEnrollEnrollingViewModel(application, userId,
                         fingerprint);
             }
@@ -122,9 +123,14 @@ public class BiometricsViewModelFactory implements ViewModelProvider.Factory {
             final EnrollmentRequest request = extras.get(ENROLLMENT_REQUEST_KEY);
             final FingerprintRepository fingerprint = provider.getFingerprintRepository(
                     application);
-            if (fingerprint != null && userId != null) {
+            if (fingerprint != null && userId != null && request != null) {
                 return (T) new FingerprintEnrollFinishViewModel(application, userId, request,
                         fingerprint);
+            }
+        } else if (modelClass.isAssignableFrom(FingerprintEnrollErrorDialogViewModel.class)) {
+            final EnrollmentRequest request = extras.get(ENROLLMENT_REQUEST_KEY);
+            if (request != null) {
+                return (T) new FingerprintEnrollErrorDialogViewModel(application, request.isSuw());
             }
         }
         return create(modelClass);
