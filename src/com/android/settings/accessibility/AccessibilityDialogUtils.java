@@ -55,6 +55,7 @@ import androidx.core.content.ContextCompat;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.utils.AnnotationSpan;
+import com.android.settingslib.widget.LottieColorUtils;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.airbnb.lottie.LottieDrawable;
@@ -162,17 +163,18 @@ public class AccessibilityDialogUtils {
     }
 
     /**
-     * Updates the software shortcut in edit shortcut dialog.
+     * Updates the shortcut content in edit shortcut dialog.
      *
      * @param context A valid context
      * @param editShortcutDialog Need to be a type of edit shortcut dialog
      * @return True if the update is successful
      */
-    public static boolean updateSoftwareShortcutInDialog(Context context,
+    public static boolean updateShortcutInDialog(Context context,
             Dialog editShortcutDialog) {
         final View container = editShortcutDialog.findViewById(R.id.container_layout);
         if (container != null) {
             initSoftwareShortcut(context, container);
+            initHardwareShortcut(context, container);
             return true;
         }
         return false;
@@ -269,10 +271,11 @@ public class AccessibilityDialogUtils {
         setupShortcutWidgetWithImageResource(view, imageResId);
     }
 
-    private static void setupShortcutWidgetWithImageRawResource(View view, CharSequence titleText,
+    private static void setupShortcutWidgetWithImageRawResource(Context context,
+            View view, CharSequence titleText,
             CharSequence summaryText, @RawRes int imageRawResId) {
         setupShortcutWidgetWithTitleAndSummary(view, titleText, summaryText);
-        setupShortcutWidgetWithImageRawResource(view, imageRawResId);
+        setupShortcutWidgetWithImageRawResource(context, view, imageRawResId);
     }
 
     private static void setupShortcutWidgetWithTitleAndSummary(View view, CharSequence titleText,
@@ -296,7 +299,7 @@ public class AccessibilityDialogUtils {
         imageView.setImageResource(imageResId);
     }
 
-    private static void setupShortcutWidgetWithImageRawResource(View view,
+    private static void setupShortcutWidgetWithImageRawResource(Context context, View view,
             @RawRes int imageRawResId) {
         final LottieAnimationView lottieView = view.findViewById(R.id.image);
         lottieView.setFailureListener(
@@ -304,6 +307,7 @@ public class AccessibilityDialogUtils {
                         result));
         lottieView.setAnimation(imageRawResId);
         lottieView.setRepeatCount(LottieDrawable.INFINITE);
+        LottieColorUtils.applyDynamicColors(context, lottieView);
         lottieView.playAnimation();
     }
 
@@ -337,7 +341,7 @@ public class AccessibilityDialogUtils {
         final CharSequence summary = context.getText(
                 R.string.accessibility_shortcut_edit_dialog_summary_hardware);
         setupShortcutWidget(dialogView, title, summary,
-                R.drawable.accessibility_shortcut_type_hardware);
+                R.drawable.a11y_shortcut_type_hardware);
     }
 
     private static void initMagnifyShortcut(Context context, View view) {
@@ -350,8 +354,8 @@ public class AccessibilityDialogUtils {
         final Object[] arguments = {3};
         summary = MessageFormat.format(summary, arguments);
 
-        setupShortcutWidgetWithImageRawResource(dialogView, title, summary,
-                R.raw.accessibility_shortcut_type_triple_tap);
+        setupShortcutWidgetWithImageRawResource(context, dialogView, title, summary,
+                R.raw.a11y_shortcut_type_triple_tap);
     }
 
     private static void initAdvancedWidget(View view) {
@@ -406,13 +410,13 @@ public class AccessibilityDialogUtils {
     private static int retrieveSoftwareShortcutImageResId(Context context) {
         int resId;
         if (AccessibilityUtil.isFloatingMenuEnabled(context)) {
-            resId = R.drawable.accessibility_shortcut_type_software_floating;
+            resId = R.drawable.a11y_shortcut_type_software_floating;
         } else if (AccessibilityUtil.isGestureNavigateEnabled(context)) {
             resId = AccessibilityUtil.isTouchExploreEnabled(context)
-                    ? R.drawable.accessibility_shortcut_type_software_gesture_talkback
-                    : R.drawable.accessibility_shortcut_type_software_gesture;
+                    ? R.drawable.a11y_shortcut_type_software_gesture_talkback
+                    : R.drawable.a11y_shortcut_type_software_gesture;
         } else {
-            resId = R.drawable.accessibility_shortcut_type_software;
+            resId = R.drawable.a11y_shortcut_type_software;
         }
         return resId;
     }

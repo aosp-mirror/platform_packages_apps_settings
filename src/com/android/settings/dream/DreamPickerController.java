@@ -33,6 +33,7 @@ import com.android.settingslib.dream.DreamBackend;
 import com.android.settingslib.dream.DreamBackend.DreamInfo;
 import com.android.settingslib.widget.LayoutPreference;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,6 +41,7 @@ import java.util.stream.Collectors;
  * Controller for the dream picker where the user can select a screensaver.
  */
 public class DreamPickerController extends BasePreferenceController {
+    public static final String PREF_KEY = "dream_picker";
 
     private final DreamBackend mBackend;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
@@ -48,12 +50,14 @@ public class DreamPickerController extends BasePreferenceController {
     private DreamInfo mActiveDream;
     private DreamAdapter mAdapter;
 
-    public DreamPickerController(Context context, String key) {
-        this(context, key, DreamBackend.getInstance(context));
+    private final HashSet<Callback> mCallbacks = new HashSet<>();
+
+    public DreamPickerController(Context context) {
+        this(context, DreamBackend.getInstance(context));
     }
 
-    public DreamPickerController(Context context, String key, DreamBackend backend) {
-        super(context, key);
+    public DreamPickerController(Context context, DreamBackend backend) {
+        super(context, PREF_KEY);
         mBackend = backend;
         mDreamInfos = mBackend.getDreamInfos();
         mActiveDream = getActiveDreamInfo(mDreamInfos);
@@ -97,12 +101,30 @@ public class DreamPickerController extends BasePreferenceController {
     }
 
     @Nullable
+    public DreamInfo getActiveDreamInfo() {
+        return mActiveDream;
+    }
+
+    @Nullable
     private static DreamInfo getActiveDreamInfo(List<DreamInfo> dreamInfos) {
         return dreamInfos
                 .stream()
                 .filter(d -> d.isActive)
                 .findFirst()
                 .orElse(null);
+    }
+
+    void addCallback(Callback callback) {
+        mCallbacks.add(callback);
+    }
+
+    void removeCallback(Callback callback) {
+        mCallbacks.remove(callback);
+    }
+
+    interface Callback {
+        // Triggered when the selected dream changes.
+        void onActiveDreamChanged();
     }
 
     private class DreamItem implements IDreamItem {
@@ -131,6 +153,7 @@ public class DreamPickerController extends BasePreferenceController {
         public void onItemClicked() {
             mActiveDream = mDreamInfo;
             mBackend.setActiveDream(mDreamInfo.componentName);
+            mCallbacks.forEach(Callback::onActiveDreamChanged);
             mMetricsFeatureProvider.action(SettingsEnums.PAGE_UNKNOWN,
                     SettingsEnums.ACTION_DREAM_SELECT_TYPE, SettingsEnums.DREAM,
                     mDreamInfo.componentName.flattenToString(), 1);

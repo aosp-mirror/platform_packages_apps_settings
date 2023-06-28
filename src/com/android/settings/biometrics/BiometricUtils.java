@@ -16,6 +16,7 @@
 
 package com.android.settings.biometrics;
 
+import android.annotation.IntDef;
 import android.app.Activity;
 import android.app.PendingIntent;
 import android.app.admin.DevicePolicyManager;
@@ -47,17 +48,53 @@ import com.android.settings.password.SetupChooseLockGeneric;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
 /**
  * Common biometric utilities.
  */
 public class BiometricUtils {
     private static final String TAG = "BiometricUtils";
 
+    // Note: Theis IntDef must align SystemUI DevicePostureInt
+    @IntDef(prefix = {"DEVICE_POSTURE_"}, value = {
+            DEVICE_POSTURE_UNKNOWN,
+            DEVICE_POSTURE_CLOSED,
+            DEVICE_POSTURE_HALF_OPENED,
+            DEVICE_POSTURE_OPENED,
+            DEVICE_POSTURE_FLIPPED
+    })
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface DevicePostureInt {}
+
+    // NOTE: These constants **must** match those defined for Jetpack Sidecar. This is because we
+    // use the Device State -> Jetpack Posture map in DevicePostureControllerImpl to translate
+    // between the two.
+    public static final int DEVICE_POSTURE_UNKNOWN = 0;
+    public static final int DEVICE_POSTURE_CLOSED = 1;
+    public static final int DEVICE_POSTURE_HALF_OPENED = 2;
+    public static final int DEVICE_POSTURE_OPENED = 3;
+    public static final int DEVICE_POSTURE_FLIPPED = 4;
+
+    public static int sAllowEnrollPosture = DEVICE_POSTURE_UNKNOWN;
+
     /**
      * Request was sent for starting another enrollment of a previously
      * enrolled biometric of the same type.
      */
     public static int REQUEST_ADD_ANOTHER = 7;
+
+    /**
+     * Gatekeeper credential not match exception, it throws if VerifyCredentialResponse is not
+     * matched in requestGatekeeperHat().
+     */
+    public static class GatekeeperCredentialNotMatchException extends IllegalStateException {
+        public GatekeeperCredentialNotMatchException(String s) {
+            super(s);
+        }
+    };
+
     /**
      * Given the result from confirming or choosing a credential, request Gatekeeper to generate
      * a HardwareAuthToken with the Gatekeeper Password together with a biometric challenge.
@@ -67,6 +104,8 @@ public class BiometricUtils {
      * @param userId User ID that the credential/biometric operation applies to
      * @param challenge Unique biometric challenge from FingerprintManager/FaceManager
      * @return
+     * @throws GatekeeperCredentialNotMatchException if Gatekeeper response is not match
+     * @throws IllegalStateException if Gatekeeper Password is missing
      */
     public static byte[] requestGatekeeperHat(@NonNull Context context, @NonNull Intent result,
             int userId, long challenge) {
@@ -84,7 +123,7 @@ public class BiometricUtils {
         final VerifyCredentialResponse response = utils.verifyGatekeeperPasswordHandle(gkPwHandle,
                 challenge, userId);
         if (!response.isMatched()) {
-            throw new IllegalStateException("Unable to request Gatekeeper HAT");
+            throw new GatekeeperCredentialNotMatchException("Unable to request Gatekeeper HAT");
         }
         return response.getGatekeeperHAT();
     }
@@ -268,6 +307,51 @@ public class BiometricUtils {
     public static boolean isAnyMultiBiometricFlow(@NonNull Activity activity) {
         return isMultiBiometricFaceEnrollmentFlow(activity)
                 || isMultiBiometricFingerprintEnrollmentFlow(activity);
+    }
+
+    /**
+     * Used to check if the activity is showing a posture guidance to user.
+     *
+     * @param devicePosture the device posture state
+     * @param isLaunchedPostureGuidance True launching a posture guidance to user
+     * @return True if the activity is showing posture guidance to user
+     */
+    public static boolean isPostureGuidanceShowing(@DevicePostureInt int devicePosture,
+            boolean isLaunchedPostureGuidance) {
+        return !isPostureAllowEnrollment(devicePosture) && isLaunchedPostureGuidance;
+    }
+
+    /**
+     * Used to check if current device posture state is allow to enroll biometrics.
+     * For compatibility, we don't restrict enrollment if device do not config.
+     *
+     * @param devicePosture True if current device posture allow enrollment
+     * @return True if current device posture state allow enrollment
+     */
+    public static boolean isPostureAllowEnrollment(@DevicePostureInt int devicePosture) {
+        return (sAllowEnrollPosture == DEVICE_POSTURE_UNKNOWN)
+                || (devicePosture == sAllowEnrollPosture);
+    }
+
+    /**
+     * Used to check if the activity should show a posture guidance to user.
+     *
+     * @param devicePosture the device posture state
+     * @param isLaunchedPostureGuidance True launching a posture guidance to user
+     * @return True if posture disallow enroll and posture guidance not showing, false otherwise.
+     */
+    public static boolean shouldShowPostureGuidance(@DevicePostureInt int devicePosture,
+            boolean isLaunchedPostureGuidance) {
+        return !isPostureAllowEnrollment(devicePosture) && !isLaunchedPostureGuidance;
+    }
+
+    /**
+     * Sets allowed device posture for face enrollment.
+     *
+     * @param devicePosture the allowed posture state {@link DevicePostureInt} for enrollment
+     */
+    public static void setDevicePosturesAllowEnroll(@DevicePostureInt int devicePosture) {
+        sAllowEnrollPosture = devicePosture;
     }
 
     public static void copyMultiBiometricExtras(@NonNull Intent fromIntent,
