@@ -64,6 +64,7 @@ import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowContentResolver;
 import org.robolectric.shadows.ShadowPackageManager;
+import org.robolectric.shadows.ShadowSettings;
 import org.robolectric.shadows.androidx.fragment.FragmentController;
 import org.robolectric.util.ReflectionHelpers;
 
@@ -71,7 +72,8 @@ import java.util.Collection;
 import java.util.List;
 
 /** Tests for {@link ToggleScreenMagnificationPreferenceFragment}. */
-@Config(shadows = {ShadowUserManager.class, ShadowStorageManager.class})
+@Config(shadows = {ShadowUserManager.class, ShadowStorageManager.class,
+        ShadowSettings.ShadowSecure.class})
 @RunWith(RobolectricTestRunner.class)
 public class ToggleScreenMagnificationPreferenceFragmentTest {
 
@@ -206,6 +208,73 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
 
         assertThat(getStringFromSettings(SOFTWARE_SHORTCUT_KEY)).isEqualTo(
                 PLACEHOLDER_COMPONENT_NAME.flattenToString() + ":" + MAGNIFICATION_CONTROLLER_NAME);
+    }
+
+    @Test
+    public void optInAllValuesToSettings_software_sizeValueIsNull_putLargeSizeValue() {
+        ShadowSettings.ShadowSecure.reset();
+
+        ToggleScreenMagnificationPreferenceFragment.optInAllMagnificationValuesToSettings(mContext,
+                UserShortcutType.SOFTWARE);
+
+        assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_FLOATING_MENU_SIZE,
+                FloatingMenuSizePreferenceController.Size.UNKNOWN)).isEqualTo(
+                FloatingMenuSizePreferenceController.Size.LARGE);
+    }
+
+    @Test
+    public void optInAllValuesToSettings_software_sizeValueIsNotNull_sizeValueIsNotChanged() {
+        for (int size : new int[] {FloatingMenuSizePreferenceController.Size.LARGE,
+                FloatingMenuSizePreferenceController.Size.SMALL}) {
+            Settings.Secure.putInt(mContext.getContentResolver(),
+                    Settings.Secure.ACCESSIBILITY_FLOATING_MENU_SIZE, size);
+
+            ToggleScreenMagnificationPreferenceFragment.optInAllMagnificationValuesToSettings(
+                    mContext,
+                    UserShortcutType.SOFTWARE);
+
+            assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
+                    Settings.Secure.ACCESSIBILITY_FLOATING_MENU_SIZE,
+                    FloatingMenuSizePreferenceController.Size.UNKNOWN)).isEqualTo(
+                    size);
+        }
+    }
+
+    @Test
+    public void optInAllValuesToSettings_hardware_sizeValueIsNotChanged() {
+        for (int size : new int[] {FloatingMenuSizePreferenceController.Size.UNKNOWN,
+                FloatingMenuSizePreferenceController.Size.LARGE,
+                FloatingMenuSizePreferenceController.Size.SMALL}) {
+            Settings.Secure.putInt(mContext.getContentResolver(),
+                    Settings.Secure.ACCESSIBILITY_FLOATING_MENU_SIZE, size);
+
+            ToggleScreenMagnificationPreferenceFragment.optInAllMagnificationValuesToSettings(
+                    mContext,
+                    UserShortcutType.HARDWARE);
+
+            assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
+                    Settings.Secure.ACCESSIBILITY_FLOATING_MENU_SIZE, size + 1)).isEqualTo(
+                    size);
+        }
+    }
+
+    @Test
+    public void optInAllValuesToSettings_tripletap_sizeValueIsNotChanged() {
+        for (int size : new int[] {FloatingMenuSizePreferenceController.Size.UNKNOWN,
+                FloatingMenuSizePreferenceController.Size.LARGE,
+                FloatingMenuSizePreferenceController.Size.SMALL}) {
+            Settings.Secure.putInt(mContext.getContentResolver(),
+                    Settings.Secure.ACCESSIBILITY_FLOATING_MENU_SIZE, size);
+
+            ToggleScreenMagnificationPreferenceFragment.optInAllMagnificationValuesToSettings(
+                    mContext,
+                    UserShortcutType.TRIPLETAP);
+
+            assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
+                    Settings.Secure.ACCESSIBILITY_FLOATING_MENU_SIZE, size + 1)).isEqualTo(
+                    size);
+        }
     }
 
     @Test

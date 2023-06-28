@@ -643,6 +643,17 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         joiner.add(MAGNIFICATION_CONTROLLER_NAME);
 
         Settings.Secure.putString(context.getContentResolver(), targetKey, joiner.toString());
+        // The size setting defaults to unknown. If the user has ever manually changed the size
+        // before, we do not automatically change it.
+        if (shortcutType == UserShortcutType.SOFTWARE
+                && Settings.Secure.getInt(context.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_FLOATING_MENU_SIZE,
+                FloatingMenuSizePreferenceController.Size.UNKNOWN)
+                == FloatingMenuSizePreferenceController.Size.UNKNOWN) {
+            Settings.Secure.putInt(context.getContentResolver(),
+                    Settings.Secure.ACCESSIBILITY_FLOATING_MENU_SIZE,
+                    FloatingMenuSizePreferenceController.Size.LARGE);
+        }
     }
 
     @VisibleForTesting
