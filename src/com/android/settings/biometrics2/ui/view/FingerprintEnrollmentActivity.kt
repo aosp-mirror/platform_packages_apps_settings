@@ -39,7 +39,6 @@ import androidx.lifecycle.viewmodel.MutableCreationExtras
 import com.android.settings.R
 import com.android.settings.Utils
 import com.android.settings.biometrics.BiometricEnrollBase
-import com.android.settings.biometrics2.data.repository.FingerprintRepository
 import com.android.settings.biometrics2.factory.BiometricsViewModelFactory
 import com.android.settings.biometrics2.factory.BiometricsViewModelFactory.CHALLENGE_GENERATOR_KEY
 import com.android.settings.biometrics2.factory.BiometricsViewModelFactory.ENROLLMENT_REQUEST_KEY
@@ -91,12 +90,6 @@ open class FingerprintEnrollmentActivity : FragmentActivity() {
 
     /** Internal activity for FingerprintSettings */
     class InternalActivity : FingerprintEnrollmentActivity()
-
-    /**
-     * This flag is used for addBackStack(), we do not save it in ViewModel because it is just used
-     * during FragmentManager calls
-     */
-    private var isFirstFragmentAdded = false
 
     private val viewModelProvider: ViewModelProvider by lazy {
         ViewModelProvider(this)
@@ -168,7 +161,7 @@ open class FingerprintEnrollmentActivity : FragmentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.setSavedInstanceState(savedInstanceState)
+        viewModel.onRestoreInstanceState(savedInstanceState)
         autoCredentialViewModel.setCredentialModel(savedInstanceState, intent)
 
         // Theme
@@ -189,10 +182,9 @@ open class FingerprintEnrollmentActivity : FragmentActivity() {
         }
         if (fragment == null) {
             checkCredential()
-            val request: EnrollmentRequest = viewModel.getRequest()
-            if (request.isSkipFindSensor) {
+            if (viewModel.request.isSkipFindSensor) {
                 startEnrollingFragment()
-            } else if (request.isSkipIntro) {
+            } else if (viewModel.request.isSkipIntro) {
                 startFindSensorFragment()
             } else {
                 startIntroFragment()
@@ -229,12 +221,12 @@ open class FingerprintEnrollmentActivity : FragmentActivity() {
     }
 
     private fun startFragment(fragmentClass: Class<out Fragment>, tag: String) {
-        if (!isFirstFragmentAdded) {
+        if (!viewModel.isFirstFragmentAdded) {
             supportFragmentManager.beginTransaction()
                 .setReorderingAllowed(true)
                 .replace(R.id.fragment_container_view, fragmentClass, null, tag)
                 .commit()
-            isFirstFragmentAdded = true
+            viewModel.setIsFirstFragmentAdded()
         } else {
             supportFragmentManager.beginTransaction()
                 .setReorderingAllowed(true)

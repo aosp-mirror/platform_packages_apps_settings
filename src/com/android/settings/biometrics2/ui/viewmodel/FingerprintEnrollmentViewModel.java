@@ -53,12 +53,17 @@ public class FingerprintEnrollmentViewModel extends AndroidViewModel {
     @VisibleForTesting
     static final String SAVED_STATE_IS_NEW_FINGERPRINT_ADDED = "is_new_fingerprint_added";
 
+    @VisibleForTesting
+    static final String SAVED_STATE_IS_FIRST_FRAGMENT_ADDED = "is_first_fragment_added";
+
     @NonNull private final FingerprintRepository mFingerprintRepository;
 
     private final AtomicBoolean mIsWaitingActivityResult = new AtomicBoolean(false);
     private final MutableLiveData<ActivityResult> mSetResultLiveData = new MutableLiveData<>();
     @NonNull private final EnrollmentRequest mRequest;
     private boolean mIsNewFingerprintAdded = false;
+    /** Flag for FragmentManager::addToBackStack() */
+    private boolean mIsFirstFragmentAdded = false;
 
     public FingerprintEnrollmentViewModel(
             @NonNull Application application,
@@ -145,7 +150,7 @@ public class FingerprintEnrollmentViewModel extends AndroidViewModel {
     /**
      * Handle savedInstanceState from activity onCreated()
      */
-    public void setSavedInstanceState(@Nullable Bundle savedInstanceState) {
+    public void onRestoreInstanceState(@Nullable Bundle savedInstanceState) {
         if (savedInstanceState == null) {
             return;
         }
@@ -154,6 +159,8 @@ public class FingerprintEnrollmentViewModel extends AndroidViewModel {
         );
         mIsNewFingerprintAdded = savedInstanceState.getBoolean(
                 SAVED_STATE_IS_NEW_FINGERPRINT_ADDED, false);
+        mIsFirstFragmentAdded = savedInstanceState.getBoolean(
+                SAVED_STATE_IS_FIRST_FRAGMENT_ADDED, false);
     }
 
     /**
@@ -162,6 +169,7 @@ public class FingerprintEnrollmentViewModel extends AndroidViewModel {
     public void onSaveInstanceState(@NonNull Bundle outState) {
         outState.putBoolean(SAVED_STATE_IS_WAITING_ACTIVITY_RESULT, mIsWaitingActivityResult.get());
         outState.putBoolean(SAVED_STATE_IS_NEW_FINGERPRINT_ADDED, mIsNewFingerprintAdded);
+        outState.putBoolean(SAVED_STATE_IS_FIRST_FRAGMENT_ADDED, mIsFirstFragmentAdded);
     }
 
     /**
@@ -191,6 +199,17 @@ public class FingerprintEnrollmentViewModel extends AndroidViewModel {
      */
     public void setIsNewFingerprintAdded() {
         mIsNewFingerprintAdded = true;
+    }
+
+    public boolean isFirstFragmentAdded() {
+        return mIsFirstFragmentAdded;
+    }
+
+    /**
+     * set mIsFirstFragmentAdded to true, this flag will be used during adding fragment
+     */
+    public void setIsFirstFragmentAdded() {
+        mIsFirstFragmentAdded = true;
     }
 
     /**

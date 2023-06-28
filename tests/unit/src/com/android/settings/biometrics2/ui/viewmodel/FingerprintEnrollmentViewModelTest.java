@@ -18,8 +18,8 @@ package com.android.settings.biometrics2.ui.viewmodel;
 
 import static android.hardware.fingerprint.FingerprintSensorProperties.TYPE_UDFPS_OPTICAL;
 
+import static com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollmentViewModel.SAVED_STATE_IS_FIRST_FRAGMENT_ADDED;
 import static com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollmentViewModel.SAVED_STATE_IS_NEW_FINGERPRINT_ADDED;
-import static com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollmentViewModel.SAVED_STATE_IS_WAITING_ACTIVITY_RESULT;
 import static com.android.settings.biometrics2.utils.EnrollmentRequestUtils.newAllFalseRequest;
 import static com.android.settings.biometrics2.utils.FingerprintRepositoryUtils.newFingerprintRepository;
 import static com.android.settings.biometrics2.utils.FingerprintRepositoryUtils.setupFingerprintEnrolledFingerprints;
@@ -58,13 +58,17 @@ public class FingerprintEnrollmentViewModelTest {
     private FingerprintRepository mFingerprintRepository;
     private FingerprintEnrollmentViewModel mViewModel;
 
+    private FingerprintEnrollmentViewModel newViewModelInstance() {
+        return new FingerprintEnrollmentViewModel(mApplication, mFingerprintRepository,
+                newAllFalseRequest(mApplication));
+    }
+
     @Before
     public void setUp() {
         mApplication = ApplicationProvider.getApplicationContext();
         mFingerprintRepository = newFingerprintRepository(mFingerprintManager, TYPE_UDFPS_OPTICAL,
                 5);
-        mViewModel = new FingerprintEnrollmentViewModel(mApplication, mFingerprintRepository,
-                newAllFalseRequest(mApplication));
+        mViewModel = newViewModelInstance();
     }
 
     @Test
@@ -73,63 +77,137 @@ public class FingerprintEnrollmentViewModelTest {
     }
 
     @Test
-    public void testSetSavedInstanceState() {
-        // setSavedInstanceState() as false
-        final Bundle bundle = new Bundle();
-        final Bundle outBundle = new Bundle();
-
-        // Set SAVED_STATE_IS_WAITING_ACTIVITY_RESULT to true
-        bundle.putBoolean(SAVED_STATE_IS_WAITING_ACTIVITY_RESULT, false);
-        mViewModel.setSavedInstanceState(bundle);
+    public void testIsWaitingActivityResult() {
+        // Default false
         assertThat(mViewModel.isWaitingActivityResult().get()).isFalse();
 
-        // Set SAVED_STATE_IS_WAITING_ACTIVITY_RESULT to true
-        bundle.clear();
-        bundle.putBoolean(SAVED_STATE_IS_WAITING_ACTIVITY_RESULT, true);
-        mViewModel.setSavedInstanceState(bundle);
-        assertThat(mViewModel.isWaitingActivityResult().get()).isTrue();
+        // false if null bundle
+        mViewModel = newViewModelInstance();
+        mViewModel.onRestoreInstanceState(null);
+        assertThat(mViewModel.isWaitingActivityResult().get()).isFalse();
 
-        // Set SAVED_STATE_IS_NEW_FINGERPRINT_ADDED to false
-        bundle.clear();
-        bundle.putBoolean(SAVED_STATE_IS_NEW_FINGERPRINT_ADDED, false);
-        mViewModel.setSavedInstanceState(bundle);
-        outBundle.clear();
-        mViewModel.onSaveInstanceState(outBundle);
-        assertThat(outBundle.getBoolean(SAVED_STATE_IS_NEW_FINGERPRINT_ADDED)).isFalse();
+        // false if empty bundle
+        mViewModel.onRestoreInstanceState(new Bundle());
+        assertThat(mViewModel.isWaitingActivityResult().get()).isFalse();
 
-        // Set SAVED_STATE_IS_NEW_FINGERPRINT_ADDED to true
-        bundle.clear();
-        bundle.putBoolean(SAVED_STATE_IS_NEW_FINGERPRINT_ADDED, true);
-        mViewModel.setSavedInstanceState(bundle);
-        outBundle.clear();
-        mViewModel.onSaveInstanceState(outBundle);
-        assertThat(outBundle.getBoolean(SAVED_STATE_IS_NEW_FINGERPRINT_ADDED)).isTrue();
+        // False value can be saved during onSaveInstanceState() and restore after
+        // onSaveInstanceState()
+        final Bundle falseSavedInstance = new Bundle();
+        mViewModel.onSaveInstanceState(falseSavedInstance);
+        final FingerprintEnrollmentViewModel falseViewModel = newViewModelInstance();
+        falseViewModel.onRestoreInstanceState(falseSavedInstance);
+        assertThat(falseViewModel.isWaitingActivityResult().get()).isFalse();
+
+        // True value can be saved during onSaveInstanceState() and restore after
+        // onSaveInstanceState()
+        final Bundle trueSavedInstance = new Bundle();
+        mViewModel.isWaitingActivityResult().set(true);
+        mViewModel.onSaveInstanceState(trueSavedInstance);
+        final FingerprintEnrollmentViewModel trueViewModel = newViewModelInstance();
+        trueViewModel.onRestoreInstanceState(trueSavedInstance);
+        assertThat(trueViewModel.isWaitingActivityResult().get()).isTrue();
     }
 
     @Test
-    public void testOnSaveInstanceState() {
-        // Test isWaitingActivityResult false
-        mViewModel.isWaitingActivityResult().set(false);
-        final Bundle bundle = new Bundle();
-        mViewModel.onSaveInstanceState(bundle);
-        assertThat(bundle.getBoolean(SAVED_STATE_IS_WAITING_ACTIVITY_RESULT)).isFalse();
+    public void testIsNewFingerprintAdded() {
+        // Default false
+        final Bundle outBundle = new Bundle();
+        mViewModel.onSaveInstanceState(outBundle);
+        assertThat(outBundle.containsKey(SAVED_STATE_IS_NEW_FINGERPRINT_ADDED)).isTrue();
+        assertThat(outBundle.getBoolean(SAVED_STATE_IS_NEW_FINGERPRINT_ADDED)).isFalse();
 
-        // Test isWaitingActivityResult true
-        mViewModel.isWaitingActivityResult().set(true);
-        bundle.clear();
-        mViewModel.onSaveInstanceState(bundle);
-        assertThat(bundle.getBoolean(SAVED_STATE_IS_WAITING_ACTIVITY_RESULT)).isTrue();
+        // false if null bundle
+        mViewModel = newViewModelInstance();
+        mViewModel.onRestoreInstanceState(null);
+        outBundle.clear();
+        mViewModel.onSaveInstanceState(outBundle);
+        assertThat(outBundle.containsKey(SAVED_STATE_IS_NEW_FINGERPRINT_ADDED)).isTrue();
+        assertThat(outBundle.getBoolean(SAVED_STATE_IS_NEW_FINGERPRINT_ADDED)).isFalse();
 
-        // Test isNewFingerprintAdded default false
-        bundle.clear();
-        mViewModel.onSaveInstanceState(bundle);
-        assertThat(bundle.getBoolean(SAVED_STATE_IS_NEW_FINGERPRINT_ADDED)).isFalse();
+        // false if empty bundle
+        mViewModel = newViewModelInstance();
+        mViewModel.onRestoreInstanceState(new Bundle());
+        outBundle.clear();
+        mViewModel.onSaveInstanceState(outBundle);
+        assertThat(outBundle.containsKey(SAVED_STATE_IS_NEW_FINGERPRINT_ADDED)).isTrue();
+        assertThat(outBundle.getBoolean(SAVED_STATE_IS_NEW_FINGERPRINT_ADDED)).isFalse();
 
-        // Test isNewFingerprintAdded true
-        mViewModel.setIsNewFingerprintAdded();
-        bundle.clear();
-        mViewModel.onSaveInstanceState(bundle);
-        assertThat(bundle.getBoolean(SAVED_STATE_IS_NEW_FINGERPRINT_ADDED)).isTrue();
+        // False value can be saved during onSaveInstanceState() and restore after
+        // onSaveInstanceState()
+        final Bundle falseSavedInstance = new Bundle();
+        falseSavedInstance.putBoolean(SAVED_STATE_IS_NEW_FINGERPRINT_ADDED, false);
+        mViewModel.onRestoreInstanceState(falseSavedInstance);
+        outBundle.clear();
+        mViewModel.onSaveInstanceState(outBundle);
+        assertThat(outBundle.containsKey(SAVED_STATE_IS_NEW_FINGERPRINT_ADDED)).isTrue();
+        assertThat(outBundle.getBoolean(SAVED_STATE_IS_NEW_FINGERPRINT_ADDED)).isFalse();
+
+        // True value can be saved during onSaveInstanceState() and restore after
+        // onSaveInstanceState()
+        final Bundle trueSavedInstance = new Bundle();
+        trueSavedInstance.putBoolean(SAVED_STATE_IS_NEW_FINGERPRINT_ADDED, true);
+        mViewModel.onRestoreInstanceState(trueSavedInstance);
+        outBundle.clear();
+        mViewModel.onSaveInstanceState(outBundle);
+        assertThat(outBundle.containsKey(SAVED_STATE_IS_NEW_FINGERPRINT_ADDED)).isTrue();
+        assertThat(outBundle.getBoolean(SAVED_STATE_IS_NEW_FINGERPRINT_ADDED)).isTrue();
+
+        // setIsFirstFragmentAdded() can be saved during onSaveInstanceState()
+        mViewModel.setIsFirstFragmentAdded();
+        mViewModel.onSaveInstanceState(trueSavedInstance);
+        assertThat(trueSavedInstance.containsKey(SAVED_STATE_IS_NEW_FINGERPRINT_ADDED)).isTrue();
+        assertThat(trueSavedInstance.getBoolean(SAVED_STATE_IS_NEW_FINGERPRINT_ADDED)).isTrue();
+    }
+
+    @Test
+    public void testIsFirstFragmentAdded() {
+        // Default false
+        final Bundle outBundle = new Bundle();
+        mViewModel.onSaveInstanceState(outBundle);
+        assertThat(outBundle.containsKey(SAVED_STATE_IS_FIRST_FRAGMENT_ADDED)).isTrue();
+        assertThat(outBundle.getBoolean(SAVED_STATE_IS_FIRST_FRAGMENT_ADDED)).isFalse();
+
+        // false if null bundle
+        mViewModel = newViewModelInstance();
+        mViewModel.onRestoreInstanceState(null);
+        outBundle.clear();
+        mViewModel.onSaveInstanceState(outBundle);
+        assertThat(outBundle.containsKey(SAVED_STATE_IS_FIRST_FRAGMENT_ADDED)).isTrue();
+        assertThat(outBundle.getBoolean(SAVED_STATE_IS_FIRST_FRAGMENT_ADDED)).isFalse();
+
+        // false if empty bundle
+        mViewModel = newViewModelInstance();
+        mViewModel.onRestoreInstanceState(new Bundle());
+        outBundle.clear();
+        mViewModel.onSaveInstanceState(outBundle);
+        assertThat(outBundle.containsKey(SAVED_STATE_IS_FIRST_FRAGMENT_ADDED)).isTrue();
+        assertThat(outBundle.getBoolean(SAVED_STATE_IS_FIRST_FRAGMENT_ADDED)).isFalse();
+
+        // False value can be saved during onSaveInstanceState() and restore after
+        // onSaveInstanceState()
+        final Bundle falseSavedInstance = new Bundle();
+        falseSavedInstance.putBoolean(SAVED_STATE_IS_FIRST_FRAGMENT_ADDED, false);
+        mViewModel.onRestoreInstanceState(falseSavedInstance);
+        outBundle.clear();
+        mViewModel.onSaveInstanceState(outBundle);
+        assertThat(outBundle.containsKey(SAVED_STATE_IS_FIRST_FRAGMENT_ADDED)).isTrue();
+        assertThat(outBundle.getBoolean(SAVED_STATE_IS_FIRST_FRAGMENT_ADDED)).isFalse();
+
+        // True value can be saved during onSaveInstanceState() and restore after
+        // onSaveInstanceState()
+        final Bundle trueSavedInstance = new Bundle();
+        trueSavedInstance.putBoolean(SAVED_STATE_IS_FIRST_FRAGMENT_ADDED, true);
+        mViewModel.onRestoreInstanceState(trueSavedInstance);
+        outBundle.clear();
+        mViewModel.onSaveInstanceState(outBundle);
+        assertThat(outBundle.containsKey(SAVED_STATE_IS_FIRST_FRAGMENT_ADDED)).isTrue();
+        assertThat(outBundle.getBoolean(SAVED_STATE_IS_FIRST_FRAGMENT_ADDED)).isTrue();
+
+        // setIsFirstFragmentAdded() can be saved during onSaveInstanceState()
+        mViewModel.setIsFirstFragmentAdded();
+        mViewModel.onSaveInstanceState(trueSavedInstance);
+        assertThat(trueSavedInstance.containsKey(SAVED_STATE_IS_FIRST_FRAGMENT_ADDED)).isTrue();
+        assertThat(trueSavedInstance.getBoolean(SAVED_STATE_IS_FIRST_FRAGMENT_ADDED)).isTrue();
     }
 
     @Test
