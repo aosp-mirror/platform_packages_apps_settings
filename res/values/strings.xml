@@ -4497,10 +4497,24 @@
     <string name="accessibility_button_intro">Using the accessibility button. The gesture isn\u2019t available with 3-button navigation.</string>
     <!-- Summary text for the accessibility button preference. [CHAR LIMIT=50] -->
     <string name="accessibility_button_summary">Quickly access accessibility features</string>
-    <!-- Description for the accessibility button in gesture navigation. Explain how this page works. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_button_gesture_description"><b>To get started</b>\n1. Go to accessibility settings\n2. Select a feature and tap the shortcut\n3. Choose whether you want to use a button or gesture to access the feature</string>
-    <!-- Description for the accessibility button page. Explain how this page works. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_button_description"><b>To get started</b>\n1. Go to accessibility settings\n2. Select a feature and tap the shortcut\n3. Choose the button to access the feature</string>
+    <!-- Description for the accessibility button in gesture navigation. Explain how this page works in numbered ordered list. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_button_gesture_description">
+        <![CDATA[
+        <b>To get started</b><br/>
+        {0,number,integer}. Go to accessibility settings<br/>
+        {1,number,integer}. Select a feature and tap the shortcut<br/>
+        {2,number,integer}. Choose whether you want to use a button or gesture to access the feature<br/>
+        ]]>
+    </string>
+    <!-- Description for the accessibility button page. Explain how this page works in numbered ordered list. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_button_description">
+        <![CDATA[
+        <b>To get started</b><br/>
+        {0,number,integer}. Go to accessibility settings<br/>
+        {1,number,integer}. Select a feature and tap the shortcut<br/>
+        {2,number,integer}. Choose the button to access the feature<br/>
+        ]]>
+    </string>
     <!-- Title for the button or gesture of the accessibility button. [CHAR LIMIT=35] -->
     <string name="accessibility_button_or_gesture_title">Use button or gesture</string>
     <!-- Title for the location of the accessibility button. [CHAR LIMIT=35] -->
@@ -8616,20 +8630,24 @@
     <string name="app_pinning_intro">App pinning allows you to keep the current app in view until you unpin it. This feature can be used, for example, to let a trusted friend play a specific game.</string>
     <!-- [CHAR LIMIT=none] Screen pinning description -->
     <string name="screen_pinning_description">
+        <![CDATA[
         When an app is pinned, the pinned app may open other apps and personal data may be accessible.
         \n\nTo use app pinning:
-        \t\n1. Turn on app pinning
-        \t\n2. Open Overview
-        \t\n3. Tap the app icon at the top of the screen, then tap Pin
+        \t\n{0,number,integer}. Turn on app pinning
+        \t\n{1,number,integer}. Open Overview
+        \t\n{2,number,integer}. Tap the app icon at the top of the screen, then tap Pin
+        ]]>
     </string>
     <!-- [CHAR LIMIT=none] Screen pinning description -->
     <string name="screen_pinning_guest_user_description">
+        <![CDATA[
         When an app is pinned, the pinned app may open other apps and personal data may be accessible.
         \n\nIf you want to securely share your device with someone, try using a guest user instead.
         \n\nTo use app pinning:
-        \t\n1. Turn on app pinning
-        \t\n2. Open Overview
-        \t\n3. Tap the app icon at the top of the screen, then tap Pin
+        \t\n{0,number,integer}. Turn on app pinning
+        \t\n{1,number,integer}. Open Overview
+        \t\n{2,number,integer}. Tap the app icon at the top of the screen, then tap Pin
+        ]]>
     </string>
     <!-- [CHAR LIMIT=300] Screen pinning title -->
     <string name="screen_pinning_dialog_message">
