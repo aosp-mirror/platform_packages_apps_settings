@@ -47,7 +47,7 @@ import com.android.settings.slices.SlicesFeatureProvider
 import com.android.settings.users.UserFeatureProvider
 import com.android.settings.vpn2.AdvancedVpnFeatureProvider
 import com.android.settings.wifi.WifiTrackerLibProvider
-import com.android.settings.wifi.factory.WifiFeatureProvider;
+import com.android.settings.wifi.factory.WifiFeatureProvider
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider
 import org.mockito.Mockito.mock
 
@@ -59,130 +59,94 @@ class FakeFeatureFactory : FeatureFactory() {
         mock(ApplicationFeatureProvider::class.java)
 
     init {
-        sFactory = this
+        setFactory(appContext, this)
     }
 
-    override fun getAssistGestureFeatureProvider(): AssistGestureFeatureProvider {
+    override val assistGestureFeatureProvider: AssistGestureFeatureProvider
+        get() = TODO("Not yet implemented")
+    override val suggestionFeatureProvider: SuggestionFeatureProvider
+        get() = TODO("Not yet implemented")
+    override val hardwareInfoFeatureProvider: HardwareInfoFeatureProvider
+        get() = TODO("Not yet implemented")
+
+    override fun getSupportFeatureProvider(context: Context): SupportFeatureProvider? {
         TODO("Not yet implemented")
     }
 
-    override fun getSuggestionFeatureProvider(): SuggestionFeatureProvider {
+    override val metricsFeatureProvider = mockMetricsFeatureProvider
+
+    override fun getPowerUsageFeatureProvider(context: Context): PowerUsageFeatureProvider {
         TODO("Not yet implemented")
     }
 
-    override fun getSupportFeatureProvider(context: Context?): SupportFeatureProvider {
+    override fun getBatteryStatusFeatureProvider(context: Context): BatteryStatusFeatureProvider {
         TODO("Not yet implemented")
     }
 
-    override fun getMetricsFeatureProvider(): MetricsFeatureProvider = mockMetricsFeatureProvider
+    override val batterySettingsFeatureProvider: BatterySettingsFeatureProvider
+        get() = TODO("Not yet implemented")
 
-    override fun getPowerUsageFeatureProvider(context: Context?): PowerUsageFeatureProvider {
+    override fun getDashboardFeatureProvider(context: Context): DashboardFeatureProvider {
         TODO("Not yet implemented")
     }
 
-    override fun getBatteryStatusFeatureProvider(context: Context?): BatteryStatusFeatureProvider {
-        TODO("Not yet implemented")
-    }
+    override val dockUpdaterFeatureProvider: DockUpdaterFeatureProvider
+        get() = TODO("Not yet implemented")
 
-    override fun getBatterySettingsFeatureProvider(): BatterySettingsFeatureProvider {
-        TODO("Not yet implemented")
-    }
+    override fun getApplicationFeatureProvider(context: Context) = mockApplicationFeatureProvider
 
-    override fun getDashboardFeatureProvider(context: Context?): DashboardFeatureProvider {
-        TODO("Not yet implemented")
-    }
-
-    override fun getDockUpdaterFeatureProvider(): DockUpdaterFeatureProvider {
-        TODO("Not yet implemented")
-    }
-
-    override fun getApplicationFeatureProvider(context: Context?) = mockApplicationFeatureProvider
-
-    override fun getLocaleFeatureProvider(): LocaleFeatureProvider {
-        TODO("Not yet implemented")
-    }
+    override val localeFeatureProvider: LocaleFeatureProvider
+        get() = TODO("Not yet implemented")
 
     override fun getEnterprisePrivacyFeatureProvider(
-        context: Context?,
+        context: Context,
     ): EnterprisePrivacyFeatureProvider {
         TODO("Not yet implemented")
     }
 
-    override fun getSearchFeatureProvider(): SearchFeatureProvider {
+    override val searchFeatureProvider: SearchFeatureProvider
+        get() = TODO("Not yet implemented")
+
+    override fun getSurveyFeatureProvider(context: Context): SurveyFeatureProvider? {
         TODO("Not yet implemented")
     }
 
-    override fun getSurveyFeatureProvider(context: Context?): SurveyFeatureProvider {
+    override val securityFeatureProvider: SecurityFeatureProvider
+        get() = TODO("Not yet implemented")
+
+    override fun getUserFeatureProvider(context: Context): UserFeatureProvider {
         TODO("Not yet implemented")
     }
 
-    override fun getSecurityFeatureProvider(): SecurityFeatureProvider {
+    override val slicesFeatureProvider: SlicesFeatureProvider
+        get() = TODO("Not yet implemented")
+    override val accountFeatureProvider: AccountFeatureProvider
+        get() = TODO("Not yet implemented")
+    override val panelFeatureProvider: PanelFeatureProvider
+        get() = TODO("Not yet implemented")
+
+    override fun getContextualCardFeatureProvider(context: Context): ContextualCardFeatureProvider {
         TODO("Not yet implemented")
     }
 
-    override fun getUserFeatureProvider(context: Context?): UserFeatureProvider {
-        TODO("Not yet implemented")
-    }
-
-    override fun getSlicesFeatureProvider(): SlicesFeatureProvider {
-        TODO("Not yet implemented")
-    }
-
-    override fun getAccountFeatureProvider(): AccountFeatureProvider {
-        TODO("Not yet implemented")
-    }
-
-    override fun getPanelFeatureProvider(): PanelFeatureProvider {
-        TODO("Not yet implemented")
-    }
-
-    override fun getContextualCardFeatureProvider(
-        context: Context?,
-    ): ContextualCardFeatureProvider {
-        TODO("Not yet implemented")
-    }
-
-    override fun getBluetoothFeatureProvider(): BluetoothFeatureProvider {
-        TODO("Not yet implemented")
-    }
-
-    override fun getFaceFeatureProvider(): FaceFeatureProvider {
-        TODO("Not yet implemented")
-    }
-
-    override fun getBiometricsRepositoryProvider(): BiometricsRepositoryProvider {
-        TODO("Not yet implemented")
-    }
-
-    override fun getWifiTrackerLibProvider(): WifiTrackerLibProvider {
-        TODO("Not yet implemented")
-    }
-
-    override fun getSecuritySettingsFeatureProvider(): SecuritySettingsFeatureProvider {
-        TODO("Not yet implemented")
-    }
-
-    override fun getAccessibilitySearchFeatureProvider(): AccessibilitySearchFeatureProvider {
-        TODO("Not yet implemented")
-    }
-
-    override fun getAccessibilityMetricsFeatureProvider(): AccessibilityMetricsFeatureProvider {
-        TODO("Not yet implemented")
-    }
-
-    override fun getHardwareInfoFeatureProvider(): HardwareInfoFeatureProvider {
-        TODO("Not yet implemented")
-    }
-
-    override fun getAdvancedVpnFeatureProvider(): AdvancedVpnFeatureProvider {
-        TODO("Not yet implemented")
-    }
-
-    override fun getWifiFeatureProvider(): WifiFeatureProvider {
-        TODO("Not yet implemented")
-    }
-
-    override fun getKeyboardSettingsFeatureProvider(): KeyboardSettingsFeatureProvider {
-        TODO("Not yet implemented")
-    }
+    override val bluetoothFeatureProvider: BluetoothFeatureProvider
+        get() = TODO("Not yet implemented")
+    override val faceFeatureProvider: FaceFeatureProvider
+        get() = TODO("Not yet implemented")
+    override val biometricsRepositoryProvider: BiometricsRepositoryProvider
+        get() = TODO("Not yet implemented")
+    override val wifiTrackerLibProvider: WifiTrackerLibProvider
+        get() = TODO("Not yet implemented")
+    override val securitySettingsFeatureProvider: SecuritySettingsFeatureProvider
+        get() = TODO("Not yet implemented")
+    override val accessibilitySearchFeatureProvider: AccessibilitySearchFeatureProvider
+        get() = TODO("Not yet implemented")
+    override val accessibilityMetricsFeatureProvider: AccessibilityMetricsFeatureProvider
+        get() = TODO("Not yet implemented")
+    override val advancedVpnFeatureProvider: AdvancedVpnFeatureProvider
+        get() = TODO("Not yet implemented")
+    override val wifiFeatureProvider: WifiFeatureProvider
+        get() = TODO("Not yet implemented")
+    override val keyboardSettingsFeatureProvider: KeyboardSettingsFeatureProvider
+        get() = TODO("Not yet implemented")
 }
