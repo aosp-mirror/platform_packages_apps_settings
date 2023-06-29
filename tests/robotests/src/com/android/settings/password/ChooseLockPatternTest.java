@@ -18,12 +18,15 @@ package com.android.settings.password;
 
 import static android.view.WindowManager.LayoutParams.FLAG_SECURE;
 
+import static com.android.settings.password.ChooseLockPattern.ChooseLockPatternFragment.KEY_UI_STAGE;
+
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.Truth.assertWithMessage;
 
 import static org.robolectric.RuntimeEnvironment.application;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.UserHandle;
 import android.view.View;
 
@@ -33,6 +36,8 @@ import com.android.settings.R;
 import com.android.settings.password.ChooseLockPattern.ChooseLockPatternFragment;
 import com.android.settings.password.ChooseLockPattern.IntentBuilder;
 import com.android.settings.testutils.shadow.ShadowUtils;
+
+import com.google.android.setupdesign.GlifLayout;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -117,6 +122,21 @@ public class ChooseLockPatternTest {
                 ChooseLockPattern.class, new IntentBuilder(application).build()).setup().get();
         final int flags = activity.getWindow().getAttributes().flags;
         assertThat(flags & FLAG_SECURE).isEqualTo(FLAG_SECURE);
+    }
+
+    @Test
+    public void headerText_stageConfirmWrong() {
+        ChooseLockPattern activity = createActivity(true);
+        ChooseLockPatternFragment fragment = (ChooseLockPatternFragment)
+                activity.getSupportFragmentManager().findFragmentById(R.id.main_content);
+        final GlifLayout layout = fragment.getView().findViewById(R.id.setup_wizard_layout);
+        Bundle savedInstanceState = new Bundle();
+        savedInstanceState.putInt(KEY_UI_STAGE,
+                ChooseLockPatternFragment.Stage.ConfirmWrong.ordinal());
+
+        fragment.onViewCreated(layout, savedInstanceState);
+        assertThat(layout.getHeaderText().toString()).isEqualTo(activity.getResources().getString(
+                R.string.lockpassword_draw_your_pattern_again_header));
     }
 
     private ChooseLockPattern createActivity(boolean addFingerprintExtra) {
