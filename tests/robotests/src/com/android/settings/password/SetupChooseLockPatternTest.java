@@ -28,6 +28,7 @@ import android.content.res.Resources;
 import android.os.UserHandle;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -112,6 +113,14 @@ public class SetupChooseLockPatternTest {
 
         enterPattern();
         assertThat(button.getVisibility()).isEqualTo(View.VISIBLE);
+    }
+
+    @Test
+    public void headerView_noBottomMargin() {
+        final View header = mActivity.findViewById(R.id.sud_layout_header);
+        final ViewGroup.MarginLayoutParams lp =
+                (ViewGroup.MarginLayoutParams) header.getLayoutParams();
+        assertThat(lp.bottomMargin).isEqualTo(0);
     }
 
     private void verifyScreenLockOptionsShown() {
