@@ -17,6 +17,7 @@
 package com.android.settings.network.apn;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
@@ -27,6 +28,7 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -41,15 +43,18 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.EditTextPreference;
 import androidx.preference.ListPreference;
 import androidx.preference.MultiSelectListPreference;
 import androidx.preference.SwitchPreference;
+
 import com.android.settings.R;
 import com.android.settings.network.ProxySubscriptionManager;
 import com.android.settings.network.apn.ApnEditor.ApnData;
 import com.android.settings.testutils.shadow.ShadowFragment;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -154,6 +159,19 @@ public class ApnEditorTest {
                 any(String.class),
                 any(String[].class),
                 any(String.class));
+    }
+
+    @Test
+    public void getApnDataFromUri_emptyCursor_returnsNull() {
+        var mockContentResolver = mock(ContentResolver.class);
+        var mockCursor = mock(Cursor.class);
+        doReturn(mockContentResolver).when(mActivity).getContentResolver();
+        when(mockContentResolver.query(any(), any(), any(), any(), any())).thenReturn(mockCursor);
+        when(mockCursor.moveToFirst()).thenReturn(false);
+
+        var apnData = mApnEditorUT.getApnDataFromUri(mock(Uri.class));
+
+        assertThat(apnData).isNull();
     }
 
     @Test
