@@ -131,12 +131,7 @@ public class WifiCallingSliceHelper {
     public Slice createWifiCallingSlice(Uri sliceUri) {
         final int subId = getDefaultVoiceSubId();
 
-        if (!SubscriptionManager.isValidSubscriptionId(subId)) {
-            Log.d(TAG, "Invalid subscription Id");
-            return null;
-        }
-
-        if (!queryImsState(subId).isWifiCallingProvisioned()) {
+        if (!queryImsState(subId).isReadyToWifiCalling()) {
             Log.d(TAG, "Wifi calling is either not provisioned or not enabled by Platform");
             return null;
         }
@@ -223,7 +218,7 @@ public class WifiCallingSliceHelper {
             return null;
         }
 
-        if (!queryImsState(subId).isWifiCallingProvisioned()) {
+        if (!queryImsState(subId).isReadyToWifiCalling()) {
             Log.d(TAG, "Wifi calling is either not provisioned or not enabled by platform");
             return null;
         }
