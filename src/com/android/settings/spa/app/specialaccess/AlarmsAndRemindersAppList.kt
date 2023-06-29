@@ -26,7 +26,7 @@ import android.os.PowerExemptionManager
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
 import com.android.settings.R
-import com.android.settings.overlay.FeatureFactory
+import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settingslib.spa.framework.compose.stateOf
 import com.android.settingslib.spaprivileged.model.app.AppRecord
 import com.android.settingslib.spaprivileged.model.app.IPackageManagers
@@ -91,7 +91,7 @@ class AlarmsAndRemindersAppListModel(
     }
 
     private fun logPermissionChange(newAllowed: Boolean) {
-        FeatureFactory.getFactory(context).metricsFeatureProvider.action(
+        featureFactory.metricsFeatureProvider.action(
             SettingsEnums.PAGE_UNKNOWN,
             SettingsEnums.ACTION_ALARMS_AND_REMINDERS_TOGGLE,
             SettingsEnums.ALARMS_AND_REMINDERS,

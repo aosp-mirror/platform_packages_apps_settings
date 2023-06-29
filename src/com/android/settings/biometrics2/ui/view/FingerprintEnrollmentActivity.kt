@@ -78,7 +78,7 @@ import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollIntroViewM
 import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollIntroViewModel.FingerprintEnrollIntroAction
 import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollProgressViewModel
 import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollmentViewModel
-import com.android.settings.overlay.FeatureFactory
+import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.google.android.setupdesign.util.ThemeHelper
 
 /**
@@ -581,9 +581,7 @@ open class FingerprintEnrollmentActivity : FragmentActivity() {
 
     override val defaultViewModelCreationExtras: CreationExtras
         get() {
-            val fingerprintRepository = FeatureFactory
-                .getFactory(application)
-                .biometricsRepositoryProvider
+            val fingerprintRepository = featureFactory.biometricsRepositoryProvider
                 .getFingerprintRepository(application)!!
             val credentialModel = CredentialModel(intent.extras, SystemClock.elapsedRealtimeClock())
 

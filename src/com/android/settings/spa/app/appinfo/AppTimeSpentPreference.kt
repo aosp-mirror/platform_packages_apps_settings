@@ -28,7 +28,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.liveData
 import com.android.settings.R
-import com.android.settings.overlay.FeatureFactory
+import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settingslib.spa.framework.compose.stateOf
 import com.android.settingslib.spa.widget.preference.Preference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
@@ -60,8 +60,7 @@ private class AppTimeSpentPresenter(
     private val intent = Intent(Settings.ACTION_APP_USAGE_SETTINGS).apply {
         putExtra(Intent.EXTRA_PACKAGE_NAME, app.packageName)
     }
-    private val appFeatureProvider = FeatureFactory.getFactory(context)
-        .getApplicationFeatureProvider(context)
+    private val appFeatureProvider = featureFactory.getApplicationFeatureProvider(context)
 
     fun isAvailable() = context.packageManager.queryIntentActivitiesAsUser(
         intent, ResolveInfoFlags.of(0), app.userId
