@@ -26,6 +26,7 @@ import android.app.Activity;
 import android.app.KeyguardManager;
 import android.app.RemoteLockscreenValidationSession;
 import android.app.admin.DevicePolicyManager;
+import android.app.admin.ManagedSubscriptionsPolicy;
 import android.app.trust.TrustManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -199,6 +200,13 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         promptInfo.setTitle(mTitle);
         promptInfo.setDescription(mDetails);
         promptInfo.setDisallowBiometricsIfPolicyExists(mCheckDevicePolicyManager);
+
+        final int policyType = mDevicePolicyManager.getManagedSubscriptionsPolicy().getPolicyType();
+
+        if (isEffectiveUserManagedProfile
+                && (policyType == ManagedSubscriptionsPolicy.TYPE_ALL_MANAGED_SUBSCRIPTIONS)) {
+            promptInfo.setShowEmergencyCallButton(true);
+        }
 
         final @LockPatternUtils.CredentialType int credentialType = Utils.getCredentialType(
                 mContext, effectiveUserId);

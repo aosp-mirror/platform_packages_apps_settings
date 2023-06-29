@@ -396,8 +396,7 @@ public class WifiDppUtils {
             final int userId = UserHandle.myUserId();
 
             final BiometricPrompt.Builder builder = new BiometricPrompt.Builder(context)
-                    .setTitle(context.getText(R.string.wifi_dpp_lockscreen_title))
-                    .setUseDefaultSubtitle();
+                    .setTitle(context.getText(R.string.wifi_dpp_lockscreen_title));
 
             if (keyguardManager.isDeviceSecure()) {
                 builder.setDeviceCredentialAllowed(true);
