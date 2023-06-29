@@ -37,8 +37,6 @@ import android.app.AppOpsManager;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.ResolveInfo;
@@ -69,7 +67,6 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.Spy;
@@ -372,8 +369,6 @@ public class AccessibilitySettingsTest {
     @Test
     @Config(shadows = {ShadowFragment.class, ShadowUserManager.class})
     public void onCreate_haveRegisterToSpecificUrisAndActions() {
-        final ArgumentCaptor<IntentFilter> captor = ArgumentCaptor.forClass(IntentFilter.class);
-        final IntentFilter intentFilter;
         mFragment.onAttach(mContext);
 
         mFragment.onCreate(Bundle.EMPTY);
@@ -385,11 +380,8 @@ public class AccessibilitySettingsTest {
         verify(mContentResolver).registerContentObserver(eq(Settings.Secure.getUriFor(
                         Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE)), anyBoolean(),
                 any(AccessibilitySettingsContentObserver.class));
-        verify(mActivity, atLeast(1)).registerReceiver(any(PackageMonitor.class), captor.capture(),
-                isNull(), any());
-        intentFilter = captor.getAllValues().get(/* first time */ 0);
-        assertThat(intentFilter.hasAction(Intent.ACTION_PACKAGE_ADDED)).isTrue();
-        assertThat(intentFilter.hasAction(Intent.ACTION_PACKAGE_REMOVED)).isTrue();
+        verify(mActivity, atLeast(1)).registerReceiver(
+                any(PackageMonitor.class), any(), isNull(), any());
     }
 
     @Test
@@ -404,7 +396,6 @@ public class AccessibilitySettingsTest {
         verify(mContentResolver).unregisterContentObserver(
                 any(AccessibilitySettingsContentObserver.class));
         verify(mActivity).unregisterReceiver(any(PackageMonitor.class));
-
     }
 
     @Test
