@@ -4914,6 +4914,20 @@
         <activity android:name=".spa.SpaBridgeActivity" android:exported="false"/>
         <activity android:name=".spa.SpaAppBridgeActivity" android:exported="false"/>
 
+        <activity android:name=".Settings$FingerprintSettingsActivityV2"
+            android:label="@string/security_settings_fingerprint_preference_title"
+            android:exported="false"
+            android:icon="@drawable/ic_fingerprint_header">
+            <intent-filter>
+                <action android:name="android.settings.FINGERPRINT_SETTINGS_V2" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.biometrics.fingerprint2.ui.fragment.FingerprintSettingsV2Fragment" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_security"/>
+        </activity>
+
         <activity-alias android:name="UsageStatsActivity"
                         android:exported="true"
                         android:label="@string/testing_usage_stats"
