@@ -298,7 +298,7 @@
     <string name="zone_menu_by_offset" msgid="1257702747474426745">"Seleccionar por compensación de UTC"</string>
     <string name="date_picker_title" msgid="646573308567782578">"Fecha"</string>
     <string name="time_picker_title" msgid="1784236407401743393">"Hora"</string>
-    <string name="lock_after_timeout" msgid="8682769000437403444">"Bloquear al finalizar el tiempo de espera de pantalla"</string>
+    <string name="lock_after_timeout" msgid="8682769000437403444">"Bloquear tras tiempo de espera de pantalla"</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> después de que se agote tiempo de espera"</string>
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"Inmediatamente después de que se agote tiempo de espera, excepto cuando <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> mantenga la pantalla desbloqueada"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> después de que se agote el tiempo de espera, excepto cuando <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> mantenga la pantalla desbloqueada"</string>
@@ -407,7 +407,7 @@
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Los ojos deben estar abiertos"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"Para desbloquear el teléfono, debes abrir los ojos"</string>
     <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"Requerir siempre confirmación"</string>
-    <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"Solicitar confirmación cuando se use Desbloqueo facial en apps"</string>
+    <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"Solicitar confirmación cuando se use Desbloqueo facial en apps."</string>
     <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"Borrar modelo de rostro"</string>
     <string name="security_settings_face_settings_enroll" msgid="3726313826693825029">"Configura Desbloqueo facial"</string>
     <string name="security_settings_face_settings_footer" msgid="625696606490947189">"Usa tu rostro para desbloquear el teléfono o autenticarte en apps, como cuando accedes o apruebas compras.\n\nTen en cuenta lo siguiente:\nSolo puedes configurar un rostro a la vez. Para agregar otro rostro, borra el actual.\n\nPuedes desbloquear el teléfono aunque no lo desees cuando lo miras.\n\nUn tercero puede desbloquear el teléfono si lo sostiene frente a tu rostro.\n\nTambién puede desbloquearlo cualquier persona que se parezca a ti, como un hermano gemelo."</string>
@@ -445,7 +445,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="6104718999323591180">"No, gracias"</string>
     <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="4068276083536421828">"Acepto"</string>
     <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"¿Omitir huella dactilar?"</string>
-    <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"La configuración de la huella dactilar solo toma unos minutos. Si omites este paso, puedes agregarla más tarde en la configuración."</string>
+    <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"La configuración de la huella dactilar solo toma unos minutos. Si omites este paso, puedes agregarla más tarde en la app Configuración."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"Cuando veas este ícono, usa la huella dactilar para autenticarte, como cuando accedes a apps o apruebas compras"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_1" msgid="4360262371633254407">"Importante"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" msgid="5824014348182478279">"Es posible que el desbloqueo con huella dactilar sea menos seguro que un patrón o un PIN eficaz"</string>
@@ -461,7 +461,7 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Para obtener los mejores resultados, usa un protector de pantalla que tenga certificación Made for Google. Es posible que tu huella dactilar no funcione con otros protectores."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Para obtener los mejores resultados, usa un protector de pantalla que tenga certificación Made for Google. Es posible que la huella dactilar de tu hijo no funcione con otros protectores."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
-    <string name="security_settings_fingerprint_v2_enroll_acquire_try_adjusting" msgid="3855444121278320304">"Cambia un poco la posición del dedo cada vez"</string>
+    <string name="security_settings_fingerprint_v2_enroll_acquire_try_adjusting" msgid="3855444121278320304">"Cambia ligeramente la posición del dedo cada vez"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_partially_detected" msgid="8330287007361798356">"Cubre el ícono con el centro de la huella dactilar"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_already_enrolled" msgid="8616678833080422946">"Ya se agregó esta huella dactilar"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_clean_sensor" msgid="3501453094314993113">"Limpia la pantalla cerca del sensor y vuelve a intentarlo"</string>
@@ -515,8 +515,8 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Sigue levantando el dedo para agregar diferentes partes de la huella dactilar."</string>
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Mantén presionado cada vez que el ícono de huella dactilar se mueva. Esto permite capturar más superficie de tu huella dactilar."</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Apoya la punta del dedo en el sensor"</string>
-    <string name="security_settings_udfps_enroll_left_edge_title" msgid="1944076382202470458">"Coloca el borde izquierdo de tu dedo"</string>
-    <string name="security_settings_udfps_enroll_right_edge_title" msgid="9036744264606447490">"Coloca el borde derecho de tu dedo"</string>
+    <string name="security_settings_udfps_enroll_left_edge_title" msgid="1944076382202470458">"Coloca el borde izquierdo del dedo"</string>
+    <string name="security_settings_udfps_enroll_right_edge_title" msgid="9036744264606447490">"Coloca el borde derecho del dedo"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Apoya un lado de tu huella dactilar en el sensor y mantén presionado. Luego, cambia de lado."</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Esto permite capturar más superficie de tu huella dactilar"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Inscribiendo huella dactilar: <xliff:g id="PERCENTAGE">%d</xliff:g>%%"</string>
@@ -2007,7 +2007,7 @@
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"Mostrar el patrón del perfil"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"Vibrar al presionar"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"Bloquear con botón de encendido"</string>
-    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="2202430156268094229">"Excepto cuando <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> mantiene la pantalla desbloqueada"</string>
+    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="2202430156268094229">"Excepto cuando <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> mantenga la pantalla desbloqueada"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="2193588309557281466">"Conf. patrón de desbloq."</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="7614155083815661347">"Cambiar patrón de desbloqueo"</string>
     <string name="lockpattern_settings_help_how_to_record" msgid="2093801939046625774">"Cómo dibujar un patrón de desbloqueo"</string>
@@ -2309,7 +2309,7 @@
     <string name="accessibility_captioning_footer_learn_more_content_description" msgid="5730040700677017706">"Más información sobre las preferencias de subtítulos"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Ampliación"</string>
     <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Acceso directo de ampliación"</string>
-    <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"Amplía la escritura"</string>
+    <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"Ampliar escritura"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"La lupa sigue el texto a medida que escribes"</string>
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"Acerca de la ampliación"</string>
     <string name="accessibility_screen_magnification_footer_learn_more_content_description" msgid="924848332575978463">"Más información sobre la ampliación"</string>
@@ -2357,7 +2357,7 @@
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Cuando la ampliación esté activada, podrás acercar el contenido en pantalla.\n\n"<b>"Para usar el zoom"</b>", inicia la ampliación y, luego, presiona cualquier parte de la pantalla.\n"<ul><li>"Arrastra 2 o más dedos para desplazarte."</li>\n<li>"Pellizca con 2 o más dedos para ajustar el zoom."</li></ul>\n\n<b>"Para hacer zoom de manera temporal"</b>", inicia la ampliación y, luego, mantén presionada cualquier parte de la pantalla.\n"<ul><li>"Arrastra el dedo para moverte por la pantalla."</li>\n<li>"Levanta el dedo para alejar el contenido."</li></ul>\n\n"No puedes acercar con el teclado ni en la barra de navegación."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Página <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> de <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Usa el botón de accesibilidad para abrir"</string>
-    <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Mantén presionadas teclas de volumen para abrir"</string>
+    <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Mantén presionadas las teclas de volumen para abrir"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Presiona tres veces para abrir el servicio"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Usa el gesto para abrir"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"Usa los gestos de accesibilidad"</string>
@@ -2514,7 +2514,7 @@
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Vincula los audífonos"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"En la siguiente pantalla, presiona tus audífonos. Es posible que debas vincular el audífono izquierdo y el derecho por separado.\n\nAsegúrate de que los audífonos estén encendidos y listos para la vinculación."</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> activo"</string>
-    <string name="accessibility_hearingaid_left_side_device_summary" msgid="1907302799168261001">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, solo el izquierdo"</string>
+    <string name="accessibility_hearingaid_left_side_device_summary" msgid="1907302799168261001">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, solo izquierdo"</string>
     <string name="accessibility_hearingaid_right_side_device_summary" msgid="148257064855054376">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, solo el derecho"</string>
     <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="4268221140368164452">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, izquierdo y derecho"</string>
     <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"Más de 1 <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
@@ -3100,7 +3100,7 @@
     <string name="remove_device_admin" msgid="3143059558744287259">"Desactivar esta app de administración del dispositivo"</string>
     <string name="uninstall_device_admin" msgid="4481095209503956916">"Desinstalar app"</string>
     <string name="remove_and_uninstall_device_admin" msgid="707912012681691559">"Desactivar y desinstalar"</string>
-    <string name="select_device_admin_msg" msgid="5501360309040114486">"Apps del dispositivo del administrador"</string>
+    <string name="select_device_admin_msg" msgid="5501360309040114486">"Apps de administración de dispositivos"</string>
     <string name="no_device_admins" msgid="8888779888103079854">"No hay apps de administración de dispositivo disponibles"</string>
     <string name="no_trust_agents" msgid="8659098725864191600">"No hay agentes de confianza disponibles."</string>
     <string name="add_device_admin_msg" msgid="7730006568970042119">"¿Activar la app de administración?"</string>
@@ -3388,7 +3388,7 @@
     <string name="user_cannot_manage_message" product="default" msgid="6434662649769855494">"Solo los propietarios del dispositivo pueden administrar los usuarios."</string>
     <string name="user_cannot_add_accounts_message" msgid="2351326078338805337">"Los perfiles restringidos no pueden agregar cuentas."</string>
     <string name="user_remove_user_menu" msgid="2183714948094429367">"Borrar a <xliff:g id="USER_NAME">%1$s</xliff:g> del disp."</string>
-    <string name="user_lockscreen_settings" msgid="4596612658981942092">"Configuración de pantalla bloqueada"</string>
+    <string name="user_lockscreen_settings" msgid="4596612658981942092">"Configuración de la pantalla de bloqueo"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Agregar usuarios desde la pantalla de bloqueo"</string>
     <string name="switch_to_user_zero_when_docked" msgid="2554028721803481458">"Cambiar a usuario administrador cuando se conecte"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"¿Deseas borrarte a ti mismo?"</string>
@@ -3874,7 +3874,7 @@
     <string name="history_toggled_on_summary" msgid="9034278971358282728">"Las notificaciones recientes y pospuestas aparecerán aquí"</string>
     <string name="notification_history_view_settings" msgid="5269317798670449002">"ver configuración de notificaciones"</string>
     <string name="notification_history_open_notification" msgid="2655071846911258371">"notificación abierta"</string>
-    <string name="snooze_options_title" msgid="2109795569568344617">"Permitir posponer alarmas"</string>
+    <string name="snooze_options_title" msgid="2109795569568344617">"Permitir posponer notificaciones"</string>
     <string name="hide_silent_icons_title" msgid="5951392023601167577">"Ocultar íconos de las notificaciones silenciosas"</string>
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"Los íconos de las notificaciones silenciosas no se muestran en la barra de estado"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"Punto de notificación en ícono de app"</string>
@@ -4293,7 +4293,7 @@
     <string name="device_feedback" msgid="5351614458411688608">"Enviar comentarios del dispositivo"</string>
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"Ingresa el PIN de administrador"</string>
     <string name="switch_on_text" msgid="5664542327776075105">"Activado"</string>
-    <string name="switch_off_text" msgid="1315547447393646667">"Sin activar"</string>
+    <string name="switch_off_text" msgid="1315547447393646667">"Desactivado"</string>
     <string name="nfc_setting_on" msgid="7701896496026725772">"Activada"</string>
     <string name="nfc_setting_off" msgid="7142103438532732309">"Desactivada"</string>
     <string name="screen_pinning_switch_on_text" msgid="6971386830247542552">"Activada"</string>
@@ -4924,7 +4924,7 @@
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="5754081720589900007">"Prueba el nuevo botón de inicio"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="8885866570559435110">"Activa el nuevo gesto para cambiar de app"</string>
     <string name="emergency_settings_preference_title" msgid="6183455153241187148">"Seguridad y emergencia"</string>
-    <string name="emergency_dashboard_summary" msgid="401033951074039302">"Emergencia SOS, información médica y alertas"</string>
+    <string name="emergency_dashboard_summary" msgid="401033951074039302">"Emergencia SOS, datos médicos y alertas"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Navegación por gestos"</string>
     <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"Para ir a la pantalla principal, desliza el dedo hacia arriba desde la parte inferior de la pantalla. Para cambiar de app, desliza el dedo hacia arriba desde la parte inferior, sostenlo y, luego, suéltalo. Para ir atrás, desliza el dedo desde el borde izquierdo o el derecho."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Navegación con 3 botones"</string>
@@ -4952,8 +4952,8 @@
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Presionar dos veces la tablet para revisarla"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Presionar dos veces el dispositivo para revisarlo"</string>
     <string name="one_handed_title" msgid="2584414010282746195">"Modo de una mano"</string>
-    <string name="one_handed_mode_enabled" msgid="3396864848786359651">"Usar el modo de una mano"</string>
-    <string name="one_handed_mode_shortcut_title" msgid="1847871530184067369">"Acceso directo al modo de una mano"</string>
+    <string name="one_handed_mode_enabled" msgid="3396864848786359651">"Usar el Modo de una mano"</string>
+    <string name="one_handed_mode_shortcut_title" msgid="1847871530184067369">"Acceso directo al Modo de una mano"</string>
     <string name="keywords_one_handed" msgid="969440592493034101">"accesibilidad"</string>
     <string name="one_handed_mode_swipe_down_category" msgid="110178629274462484">"Deslizar hacia abajo para"</string>
     <string name="one_handed_mode_use_shortcut_category" msgid="1414714099339147711">"Usa la combinación de teclas para"</string>
@@ -5688,7 +5688,7 @@
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> requiere 2G para brindar servicio"</string>
     <string name="app_info_all_services_label" msgid="3600929226735860271">"Todos los servicios"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Mostrar acceso a portapapeles"</string>
-    <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Mostrar un mensaje cuando las apps accedan a textos, imágenes y otro contenido que hayas copiado"</string>
+    <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Muestra un mensaje cuando las apps accedan a texto, imágenes y otro contenido que hayas copiado"</string>
     <string name="all_apps" msgid="3054120149509114789">"Todas las apps"</string>
     <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"No permitir"</string>
     <string name="uwb_settings_title" msgid="8578498712312002231">"Banda ultraancha (UWB)"</string>

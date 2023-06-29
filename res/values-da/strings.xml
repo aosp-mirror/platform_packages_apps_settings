@@ -148,7 +148,7 @@
     <string name="bluetooth_pref_summary" product="device" msgid="2192027516577675587">"Tillad, at enheden kommunikerer med Bluetooth-enheder i nærheden"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="768958961865499804">"Tillad, at telefonen kommunikerer med Bluetooth-enheder i nærheden"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Deaktiver Bluetooth A2DP-hardwareaflastning"</string>
-    <string name="bluetooth_disable_le_audio_hw_offload" msgid="3966022676505972908">"Deaktiver aflastning af hardware for Bluetooth LE AUDIO"</string>
+    <string name="bluetooth_disable_le_audio_hw_offload" msgid="3966022676505972908">"Deaktiver aflastning af hardware for Bluetooth LE-lyd"</string>
     <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"Vil du genstarte enheden?"</string>
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"Genstart enheden for at skifte indstilling"</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Genstart"</string>
@@ -344,7 +344,7 @@
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Ansigt tilføjet"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"Tryk for at konfigurere ansigtslås"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Ansigtslås"</string>
-    <string name="security_settings_face_profile_preference_title" msgid="7519527436266375005">"Ansigtslås til arbejdet"</string>
+    <string name="security_settings_face_profile_preference_title" msgid="7519527436266375005">"Ansigtslås til arbejdsprofil"</string>
     <string name="security_settings_face_enroll_education_title" msgid="6448806884597691208">"Sådan konfigurerer du ansigtslås"</string>
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="3701874093226957891">"Konfigurer ansigtslås"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"Brug dit ansigt til godkendelse"</string>
@@ -389,7 +389,7 @@
     <string name="face_add_max" msgid="4578405795494514876">"Du kan tilføje op til <xliff:g id="COUNT">%d</xliff:g> ansigter"</string>
     <string name="face_intro_error_max" msgid="2474735057709291626">"Du har tilføjet det maksimale antal ansigter"</string>
     <string name="face_intro_error_unknown" msgid="1626057493054989995">"Der kan ikke tilføjes flere ansigter"</string>
-    <string name="security_settings_face_enroll_error_dialog_title" msgid="2460820099922775936">"Scanningen kunne ikke gennemføres"</string>
+    <string name="security_settings_face_enroll_error_dialog_title" msgid="2460820099922775936">"Registreringen kunne ikke gennemføres"</string>
     <string name="security_settings_face_enroll_dialog_ok" msgid="1674650455786434426">"OK"</string>
     <string name="security_settings_face_enroll_error_timeout_dialog_message" msgid="7768349698547951750">"Tidsgrænsen for ansigtsscanning blev overskredet. Prøv igen."</string>
     <string name="security_settings_face_enroll_error_generic_dialog_message" msgid="3186810411630091490">"Ansigtsscanningen mislykkedes."</string>
@@ -410,14 +410,14 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"Kræv altid et bekræftelsestrin ved brug af ansigtslås i apps"</string>
     <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"Slet ansigtsmodel"</string>
     <string name="security_settings_face_settings_enroll" msgid="3726313826693825029">"Konfigurer ansigtslås"</string>
-    <string name="security_settings_face_settings_footer" msgid="625696606490947189">"Brug dit ansigt til at låse din telefon op eller til godkendelse i apps, f.eks. ved login eller godkendelse af et køb.\n\nHusk!\nDu kan kun have ét konfigureret ansigt ad gangen. Før du kan tilføje et nyt ansigt, skal du slette det aktuelle ansigt.\n\nDu kan komme til at låse telefonen op, hvis du kigger på den.\n\nDin telefon kan låses op af en anden, hvis den holdes op foran dit ansigt.\n\nDin telefon kan låses op af en anden, der ligner dig meget, f.eks. en bror eller søster."</string>
-    <string name="security_settings_face_settings_footer_attention_not_supported" msgid="2071065435536235622">"Brug dit ansigt til at låse din telefon op eller til godkendelse i apps, f.eks. ved login eller godkendelse af et køb.\n\nHusk!\nDu kan kun have ét konfigureret ansigt ad gangen. Før du kan tilføje et nyt ansigt, skal du slette det aktuelle ansigt.\n\nDu kan komme til at låse telefonen op, hvis du kigger på den.\n\nDin telefon kan låses op af en anden, hvis den holdes op foran dit ansigt, også selvom dine øjne er lukkede.\n\nDin telefon kan låses op af en anden, der ligner dig meget, f.eks. en bror eller søster."</string>
+    <string name="security_settings_face_settings_footer" msgid="625696606490947189">"Brug dit ansigt til at låse din telefon op eller til godkendelse i apps, f.eks. ved login eller godkendelse af et køb.\n\nHusk!\nDu kan kun have ét konfigureret ansigt ad gangen. Før du kan tilføje et nyt ansigt, skal du slette det aktuelle ansigt.\n\nHvis du kigger på din telefon, kan den blive låst op, selv om det ikke var din hensigt.\n\nDin telefon kan låses op af en anden, hvis den holdes op foran dit ansigt.\n\nDin telefon kan låses op af en anden, der ligner dig meget, f.eks. en bror eller søster."</string>
+    <string name="security_settings_face_settings_footer_attention_not_supported" msgid="2071065435536235622">"Brug dit ansigt til at låse din telefon op eller til godkendelse i apps, f.eks. ved login eller godkendelse af et køb.\n\nHusk!\nDu kan kun have ét konfigureret ansigt ad gangen. Før du kan tilføje et nyt ansigt, skal du slette det aktuelle ansigt.\n\nHvis du kigger på din telefon, kan den blive låst op, selv om det ikke var din hensigt.\n\nDin telefon kan låses op af en anden, hvis den holdes op foran dit ansigt, også selvom dine øjne er lukkede.\n\nDin telefon kan låses op af en anden, der ligner dig meget, f.eks. en bror eller søster."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2899669764446232715">"Skal ansigtsmodellen slettes?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="916131485988121592">"Din ansigtsmodel slettes permanent og på sikker vis.\n\nNår den er slettet, skal du bruge din pinkode, dit mønster eller din adgangskode til at låse din telefon op eller til godkendelse i apps."</string>
     <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"Din ansigtsmodel slettes permanent og på sikker vis.\n\nNår den er slettet, skal du bruge din pinkode, dit mønster eller din adgangskode til at låse din telefon op."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Brug ansigtslås til at låse din telefon op"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Fingeraftryk"</string>
-    <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Fingeraftryk til arbejde"</string>
+    <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Fingeraftryk til arbejdsprofil"</string>
     <string name="fingerprint_manage_category_title" msgid="1249349505688268850">"Adm. fingeraftryk"</string>
     <string name="fingerprint_usage_category_title" msgid="8757959085075024856">"Brug fingeraftryk til"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Tilføj fingeraftryk"</string>
@@ -456,8 +456,8 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" msgid="5908959250804145997">"Når barnet bruger Pixel Imprint, bruges billederne til at opdatere barnets fingeraftryksmodel. De billeder, der bruges til at oprette dit barns fingeraftryksmodel, gemmes aldrig, men fingeraftryksmodellen gemmes på sikker vis på telefonen, og den forlader aldrig telefonen. Al behandling sker på sikker vis på telefonen."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"Du kan til enhver tid slette dine fingeraftryksbilleder og din fingeraftryksmodel eller deaktivere Oplåsning med fingeraftryk i Indstillinger. Fingeraftryksbilleder og fingeraftryksmodellen gemmes på telefonen, indtil du sletter dem."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"Du og dit barn kan til enhver tid slette barnets billeder og model eller deaktivere oplåsning med fingeraftryk i Indstillinger. Fingeraftryksbilleder og -modeller gemmes på telefonen, indtil de slettes."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" msgid="2018885671994058605">"Din telefon kan blive låst op, når det ikke er meningen, f.eks. hvis nogen holder din finger op mod den."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"Dit barns telefon kan låses op, når det ikke er meningen, f.eks. hvis nogen holder den op mod dit barns finger."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" msgid="2018885671994058605">"Din telefon kan blive låst op uden din hensigt, f.eks. hvis nogen holder din finger op mod den."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"Dit barns telefon kan låses op, når det ikke barnets hensigt, f.eks. hvis nogen holder den op mod dit barns finger."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Du får de bedste resultater ved at bruge en skærmbeskytter, der er Made For Google-certificeret. Dit fingeraftryk virker muligvis ikke med andre skærmbeskyttere."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Du får de bedste resultater ved at bruge en skærmbeskytter, der er Made For Google-certificeret. Dit barns fingeraftryk virker muligvis ikke med andre skærmbeskyttere."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
@@ -481,7 +481,7 @@
     <string name="biometric_settings_use_biometric_for_apps" msgid="6201168728906364189">"Verificere din identitet i apps"</string>
     <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"Anvend ansigtsgenkendelse"</string>
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"Anvend fingeraftryk"</string>
-    <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"Anvend ansigtsgenkendelse eller fingeraftryk"</string>
+    <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"Brug ansigt eller fingeraftryk"</string>
     <string name="biometric_settings_hand_back_to_guardian" msgid="3747619291972376153">"Giv telefonen tilbage til din forælder"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"OK"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Vil du springe skærmlås over?"</string>
@@ -581,7 +581,7 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Udfør"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Hov! Dette er ikke sensoren"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Tryk på sensoren bagpå med pegefingeren."</string>
-    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="132085362209418770">"Scanningen kunne ikke gennemføres"</string>
+    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="132085362209418770">"Registreringen kunne ikke gennemføres"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="5479647886550695766">"Tidsgrænsen for registrering af fingeraftryk blev overskredet. Prøv igen."</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Registrering af fingeraftryk virkede ikke. Prøv igen, eller brug en anden finger."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Tilføj endnu et"</string>
@@ -625,7 +625,7 @@
     <string name="lock_settings_picker_title" msgid="9219376327364915334">"Vælg skærmlås"</string>
     <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"Vælg en skærmlås"</string>
     <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"Vælg en ny skærmlås"</string>
-    <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"Vælg en lås for arbejdsapps"</string>
+    <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"Vælg en lås for apps til arbejdsprofil"</string>
     <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Vælg en ny lås for arbejdsapps"</string>
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="1276283007274778191">"Beskyt din tablet"</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="3585905639045649905">"Beskyt din enhed"</string>
@@ -1941,7 +1941,7 @@
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Angiv mønster for at bruge fingeraftryk"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"Angiv en pinkode af hensyn til sikkerheden"</string>
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="2783879743691792556">"Angiv pinkode for at bruge fingeraftryk"</string>
-    <string name="lockpassword_confirm_your_password_header" msgid="6132312814563023990">"Angiv din adgangskode igen"</string>
+    <string name="lockpassword_confirm_your_password_header" msgid="6132312814563023990">"Angiv din adgangs­kode igen"</string>
     <string name="lockpassword_reenter_your_profile_password_header" msgid="3812040127714827685">"Angiv adgangskoden til arbejdsprofilen igen"</string>
     <string name="lockpassword_confirm_your_work_password_header" msgid="4647071231702288305">"Angiv adgangskoden til din arbejdsprofil"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="4037701363240138651">"Bekræft dit mønster"</string>
@@ -1959,7 +1959,7 @@
     <string name="lockpassword_choose_your_password_header_for_face" msgid="622276003801157839">"Angiv backup for ansigtslås"</string>
     <string name="lockpassword_choose_your_pattern_header_for_face" msgid="7333603579958317102">"Angiv mønster for at bruge ansigtslås"</string>
     <string name="lockpassword_choose_your_pin_header_for_face" msgid="704061826984851309">"Angiv pinkode for at bruge ansigtslås"</string>
-    <string name="lockpassword_choose_your_password_header_for_biometrics" msgid="2053366309272487015">"Angiv en adgangskode for at bruge ansigt eller fingeraftryk"</string>
+    <string name="lockpassword_choose_your_password_header_for_biometrics" msgid="2053366309272487015">"Angiv en adgangs­kode for at bruge ansigt eller fingeraftryk"</string>
     <string name="lockpassword_choose_your_pattern_header_for_biometrics" msgid="4038476475293734905">"Angiv et mønster for at bruge dit ansigt eller fingeraftryk"</string>
     <string name="lockpassword_choose_your_pin_header_for_biometrics" msgid="9086039918921009380">"Angiv en pinkode for at bruge dit ansigt eller fingeraftryk"</string>
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Har du glemt din adgangskode?"</string>
@@ -2221,7 +2221,7 @@
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Tastaturgenveje"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="8649760728213630156">"Vis tilgængelige genveje"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Tastatur og værktøjer for arbejdsprofil"</string>
-    <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"Skærmtastatur til arbejde"</string>
+    <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"Skærmtastatur til arbejdsprofil"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Standard"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"Tale"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"Markørens hastighed"</string>
@@ -2234,7 +2234,7 @@
     <string name="keyboard_layout_default_label" msgid="6078569989261528039">"Standard"</string>
     <string name="keyboard_layout_picker_title" msgid="240504762718562906">"Tastaturlayout"</string>
     <string name="user_dict_settings_title" msgid="680410651924276991">"Personlig ordbog"</string>
-    <string name="user_dict_settings_for_work_title" msgid="1245315720684961770">"Personlig ordbog til arbejdet"</string>
+    <string name="user_dict_settings_for_work_title" msgid="1245315720684961770">"Personlig ordbog til arbejdsprofil"</string>
     <string name="user_dict_settings_summary" msgid="4939694372338975081">"Tilføj ord, der skal bruges i apps som f.eks. Stavekontrol"</string>
     <string name="user_dict_settings_add_menu_title" msgid="8046882347281382968">"Tilføj"</string>
     <string name="user_dict_settings_add_dialog_title" msgid="3485845465134083084">"Føj til ordbog"</string>
@@ -2542,7 +2542,7 @@
     <string name="daltonizer_mode_protanomaly_summary" msgid="4617032854982040748">"Rød svag, deuteranomali"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Tritanomali"</string>
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"Ekstra dæmpet belysning"</string>
-    <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Gør skærmen ekstra mørk"</string>
+    <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Ekstra dæmpet belysning af skærm"</string>
     <string name="reduce_bright_colors_shortcut_title" msgid="495648157059202745">"Genvej til ekstra dæmpet belysning"</string>
     <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"Om ekstra dæmpet belysning"</string>
     <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"Gør skærmen mørkere end telefonens laveste indstilling for lysstyrke"</string>
@@ -3351,7 +3351,7 @@
     <string name="user_credential_removed" msgid="4087675887725394743">"Fjernede loginoplysninger: <xliff:g id="CREDENTIAL_NAME">%s</xliff:g>"</string>
     <string name="user_credential_none_installed" msgid="918620912366836994">"Der er ikke installeret nogen brugerloginoplysninger"</string>
     <string name="spellcheckers_settings_title" msgid="2799021700580591443">"Stavekontrol"</string>
-    <string name="spellcheckers_settings_for_work_title" msgid="6471603934176062893">"Stavekontrol til arbejdet"</string>
+    <string name="spellcheckers_settings_for_work_title" msgid="6471603934176062893">"Stavekontrol til arbejdsprofil"</string>
     <string name="current_backup_pw_prompt" msgid="4962276598546381140">"Angiv din aktuelle adgangskode til fuldstændig backup:"</string>
     <string name="new_backup_pw_prompt" msgid="4884439230209419503">"Angiv din nye adgangskode til fuldstændig backup:"</string>
     <string name="confirm_new_backup_pw_prompt" msgid="5753796799743881356">"Gentag din nye adgangskode til fuldstændig backup:"</string>
@@ -4307,7 +4307,7 @@
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Bed om pinkode inden frigørelse"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Bed om adgangskode inden frigørelse"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Lås enheden ved frigørelse"</string>
-    <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Bekræft sletning af SIM-kort"</string>
+    <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Bekræft sletning af SIM"</string>
     <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"Verificer din identitet, før du sletter et downloadet SIM-kort"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Denne arbejdsprofil administreres af:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Administreret af <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
@@ -4686,7 +4686,7 @@
     <string name="admin_device_owner_message" msgid="5503131744126520590">"Din administrator kan overvåge og administrere apps og data, der er knyttet til denne enhed, herunder indstillinger, tilladelser, virksomhedsadgang, netværksaktivitet og enhedens lokationsoplysninger."</string>
     <string name="admin_financed_message" msgid="1156197630834947884">"Din enhedsadministrator kan muligvis administrere apps, få adgang til data, der er tilknyttet denne enhed, og ændre enhedens indstillinger."</string>
     <string name="condition_turn_off" msgid="402707350778441939">"Slå fra"</string>
-    <string name="condition_turn_on" msgid="3911077299444314791">"Slå til"</string>
+    <string name="condition_turn_on" msgid="3911077299444314791">"Aktivér"</string>
     <string name="condition_expand_show" msgid="1501084007540953213">"Vis"</string>
     <string name="condition_expand_hide" msgid="8347564076209121058">"Skjul"</string>
     <string name="condition_hotspot_title" msgid="7903918338790641071">"Hotspot er aktiveret"</string>
@@ -4884,7 +4884,7 @@
     <string name="winscope_trace_quick_settings_title" msgid="4104768565053226689">"Sporing af Winscope"</string>
     <string name="sensors_off_quick_settings_title" msgid="8472151847125917167">"Sensorer er slået fra"</string>
     <string name="managed_profile_settings_title" msgid="3400923723423564217">"Indstillinger for arbejdsprofil"</string>
-    <string name="managed_profile_contact_search_title" msgid="6562061740814513737">"Søg efter kontakter ved hjælp af indekset for arbejde i personlige apps"</string>
+    <string name="managed_profile_contact_search_title" msgid="6562061740814513737">"Søg efter kontakter ved hjælp af indekset for arbejdsprofil i personlige apps"</string>
     <string name="managed_profile_contact_search_summary" msgid="4974727886709219105">"Dine søgninger og indgående opkald kan muligvis ses af din it-administrator"</string>
     <string name="cross_profile_calendar_title" msgid="7570277841490216947">"Kalender for flere profiler"</string>
     <string name="cross_profile_calendar_summary" msgid="8856185206722860069">"Se arbejdsbegivenheder i din personlige kalender"</string>

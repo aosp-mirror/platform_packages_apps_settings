@@ -298,10 +298,10 @@
     <string name="zone_menu_by_offset" msgid="1257702747474426745">"按世界协调时间 (UTC) 偏移量选择"</string>
     <string name="date_picker_title" msgid="646573308567782578">"日期"</string>
     <string name="time_picker_title" msgid="1784236407401743393">"时间"</string>
-    <string name="lock_after_timeout" msgid="8682769000437403444">"设备空闲多久后锁定"</string>
+    <string name="lock_after_timeout" msgid="8682769000437403444">"屏幕超时多久后锁定"</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"空闲 <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>后"</string>
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"空闲后立即锁定（<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> 让屏幕保持解锁状态时除外）"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"空闲<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>后（<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> 让屏幕保持解锁状态时除外）"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"超时 <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>后（<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> 让屏幕保持解锁状态时除外）"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="197365342192696406">"在锁定屏幕上显示机主信息"</string>
     <string name="owner_info_settings_title" msgid="3555626140700093017">"在锁定屏幕上添加文字"</string>
     <string name="security_enable_widgets_title" msgid="676199714313423099">"启用微件"</string>
@@ -344,7 +344,7 @@
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"已添加人脸"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"点按即可设置人脸"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"人脸解锁"</string>
-    <string name="security_settings_face_profile_preference_title" msgid="7519527436266375005">"工作用的人脸解锁"</string>
+    <string name="security_settings_face_profile_preference_title" msgid="7519527436266375005">"用于工作资料的人脸解锁"</string>
     <string name="security_settings_face_enroll_education_title" msgid="6448806884597691208">"如何设置人脸解锁"</string>
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="3701874093226957891">"设置人脸解锁"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"使用您的面孔进行身份验证"</string>
@@ -410,7 +410,7 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"在应用中使用人脸解锁时，一律需确认"</string>
     <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"删除脸部模型"</string>
     <string name="security_settings_face_settings_enroll" msgid="3726313826693825029">"设置人脸解锁"</string>
-    <string name="security_settings_face_settings_footer" msgid="625696606490947189">"您可以通过刷脸来解锁手机或在应用内验证自己的身份，例如在登录帐号或批准购买交易时。\n\n注意：\n一次只能设置一张面孔。如需添加另一张面孔，请删除当前的面孔。\n\n目视手机可能会让手机意外解锁。\n\n如果有人将手机对准您的脸，手机可能会解锁。\n\n此外，长相与您非常相似的人，例如您的孪生兄弟姐妹，可能也能解锁您的手机。"</string>
+    <string name="security_settings_face_settings_footer" msgid="625696606490947189">"您可以通过刷脸来解锁手机或在应用内验证自己的身份，例如在登录帐号或批准购买交易时。\n\n注意：\n一次只能设置一张面孔。如需添加另一张面孔，请先删除当前的面孔。\n\n目视手机可能会让手机意外解锁。\n\n如果有人将手机对准您的脸，手机可能会解锁。\n\n此外，长相与您非常相似的人，例如您的孪生兄弟姐妹，可能也能解锁您的手机。"</string>
     <string name="security_settings_face_settings_footer_attention_not_supported" msgid="2071065435536235622">"您可以通过刷脸来解锁手机或在应用内验证自己的身份，例如在登录帐号或批准购买交易时。\n\n注意：\n一次只能设置一张面孔。如需添加另一张面孔，请删除当前的面孔。\n\n目视手机可能会让手机意外解锁。\n\n如果有人将手机对准您的脸，即使您闭上眼睛，手机可能也会解锁。\n\n此外，长相与您非常相似的人，例如您的孪生兄弟姐妹，可能也能解锁您的手机。"</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2899669764446232715">"要删除脸部模型吗？"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="916131485988121592">"系统会安全地永久删除您的脸部模型。\n\n脸部模型删除后，如需解锁手机或在应用内进行身份验证，您将需要使用 PIN 码、解锁图案或密码。"</string>
@@ -430,9 +430,9 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"设置指纹"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"允许使用指纹解锁功能"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"使用指纹"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"您可以使用指纹解锁平板电脑或验证自己的身份，例如登录应用或批准购买交易。"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"您可以使用指纹解锁平板电脑或验证自己的身份，例如在登录应用或批准购买交易时进行验证。"</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"指纹可用于解锁设备或验证您的身份，例如在登录应用或批准购买交易时。"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"您可以使用指纹解锁手机或验证自己的身份，例如在登录应用或批准购买交易时。"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"您可以使用指纹解锁手机或验证自己的身份，例如在登录应用或批准购买交易时进行验证。"</string>
     <string name="security_settings_fingerprint_enroll_introduction_consent_message" msgid="1833139688278350628">"允许您的孩子使用指纹来解锁手机或验证自己的身份，例如在他们登录应用、批准购买交易以及执行其他操作时。"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"一切由您掌控"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"一切由您和您的孩子掌握"</string>
@@ -445,12 +445,12 @@
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="6104718999323591180">"不用了"</string>
     <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="4068276083536421828">"我同意"</string>
     <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"要跳过指纹设置吗？"</string>
-    <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"指纹设置只需一两分钟即可完成。如果您选择跳过，之后还可以在设置中添加指纹。"</string>
+    <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"指纹设置只需一两分钟即可完成。如果您选择跳过，之后还可以在“设置”中添加指纹。"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"看到该图标时，您可以使用指纹验证身份，例如在登录应用或批准购买交易时"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_1" msgid="4360262371633254407">"注意事项"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" msgid="5824014348182478279">"用指纹解锁手机的安全性可能不及高安全系数的图案或 PIN 码"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"设置方式"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="5909924864816776516">"指纹解锁功能会为您创建一个具有唯一性的指纹模型，用于验证您的身份。为了在设置过程中创建指纹模型，您需要截取指纹不同部位的图像。"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"运作方式"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="5909924864816776516">"指纹解锁功能会为您创建一个具有唯一性的指纹模型，用于验证您的身份。为了在设置过程中创建指纹模型，您需要录入不同位置的指纹图像。"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2" msgid="3493356605815124807">"指纹解锁功能会为您的孩子创建一个具有唯一性的指纹模型，用于验证其身份。为了在设置过程中创建指纹模型，孩子需要截取指纹不同部位的图像。"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" msgid="4729142136478078228">"在您使用 Pixel Imprint 时，系统会使用图像来更新您的指纹模型。系统绝不会存储您用来创建指纹模型的图像，只会将指纹模型安全地存储在您的手机上，并且绝不会外泄。整个处理过程都是在您的手机上安全进行。"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" msgid="5908959250804145997">"在您的孩子使用 Pixel Imprint 时，系统会使用图像来更新其指纹模型。系统绝不会存储孩子用来创建指纹模型的图像，只会将指纹模型安全地存储在手机上，并且绝不会外泄。整个处理过程都是在手机上安全进行。"</string>
@@ -475,7 +475,7 @@
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"点按即可进行设置"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"已添加面孔和多个指纹"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"已添加面孔和一个指纹"</string>
-    <string name="biometric_settings_intro" msgid="4263069383955676756">"在设置人脸解锁和指纹解锁时，如果您戴着口罩或所在区域光线较暗，手机会要求您提供指纹"</string>
+    <string name="biometric_settings_intro" msgid="4263069383955676756">"在设置人脸解锁和指纹解锁时，如果您戴着口罩或所在区域光线较暗，手机会要求您使用指纹解锁"</string>
     <string name="biometric_settings_category_ways_to_unlock" msgid="3384767901580915266">"解锁方式"</string>
     <string name="biometric_settings_use_biometric_unlock_phone" msgid="8180914579885804358">"解锁手机"</string>
     <string name="biometric_settings_use_biometric_for_apps" msgid="6201168728906364189">"在应用中验证您的身份"</string>
@@ -498,7 +498,7 @@
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="886085239313346000">"触摸传感器"</string>
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"如何设置指纹"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"指纹传感器位于您手机的背面。请用食指触摸传感器。"</string>
-    <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"指纹传感器在屏幕上。系统会在下一个屏幕上获取您的指纹。"</string>
+    <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"指纹传感器就在屏幕上。系统会在下一个画面中获取您的指纹。"</string>
     <string name="security_settings_udfps_enroll_find_sensor_start_button" msgid="3172268783620336357">"开始"</string>
     <string name="security_settings_udfps_enroll_a11y" msgid="1899453114050362235">"请在屏幕上移动手指，以便找到传感器。轻触并按住指纹传感器。"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"关于设备和指纹传感器位置的图示说明"</string>
@@ -634,7 +634,7 @@
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="4870877800737248926">"启用设备保护功能可防止他人在未经您允许的情况下使用此平板电脑。请选择您要使用的屏幕锁定方式。"</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="8961855222808442301">"启用设备保护功能可防止他人在未经您允许的情况下使用此设备。请选择您要使用的屏幕锁定方式。"</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="8867435145945818970">"启用设备保护功能可防止他人在未经您允许的情况下使用此手机。请选择您要使用的屏幕锁定方式。"</string>
-    <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"选择您的备用屏幕锁定方式"</string>
+    <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"请选择备用的锁屏方式"</string>
     <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"如果您忘记屏幕解锁方式，IT 管理员将无法为您重置。"</string>
     <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"为工作资料设置单独的屏幕锁定方式"</string>
     <string name="lock_settings_picker_profile_message" msgid="9142379549980873478">"如果您忘记了此锁定方式的相关信息，请让您的 IT 管理员将其重置"</string>
@@ -1428,7 +1428,7 @@
     <string name="screen_timeout_title" msgid="785134393520893049">"屏幕关闭"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"闲置 <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>后"</string>
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"壁纸"</string>
-    <string name="style_and_wallpaper_settings_title" msgid="2232042809407308946">"壁纸和样式"</string>
+    <string name="style_and_wallpaper_settings_title" msgid="2232042809407308946">"壁纸与个性化"</string>
     <string name="wallpaper_dashboard_summary" msgid="2324472863981057118">"主屏幕、锁定屏幕"</string>
     <string name="wallpaper_settings_summary_default" msgid="7569803705735001813">"默认"</string>
     <string name="wallpaper_settings_summary_custom" msgid="3174561317688848729">"自定义"</string>
@@ -2286,7 +2286,7 @@
     <string name="accessibility_settings_title" msgid="6739115703615065716">"无障碍设置"</string>
     <string name="accessibility_settings_summary" msgid="2366627644570558503">"显示、互动、音频"</string>
     <string name="vision_settings_title" msgid="8919983801864103069">"阅读辅助设置"</string>
-    <string name="vision_settings_description" msgid="7614894785054441991">"您可以根据自己的需求对此设备进行自定义。您可以稍后在“设置”中更改这些无障碍功能的设置。"</string>
+    <string name="vision_settings_description" msgid="7614894785054441991">"您可以根据自己的需求对此设备进行自定义，也可以稍后在“设置”中更改这些无障碍功能的设置。"</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"更改字体大小"</string>
     <string name="screen_reader_category_title" msgid="5825700839731107803">"屏幕阅读器"</string>
     <string name="captions_category_title" msgid="574490148949400274">"字幕"</string>
@@ -2478,7 +2478,7 @@
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"使用“<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>”"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"打开“<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>”"</string>
     <string name="accessibility_service_auto_added_qs_tooltip_content" msgid="2941824314912928072">"“<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>”已添加到“快捷设置”中。向下滑动即可随时开启或关闭此功能。"</string>
-    <string name="accessibility_service_qs_tooltip_content" msgid="6002493441414967868">"您还可以将“<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>”添加到屏幕顶部的“快捷设置”中"</string>
+    <string name="accessibility_service_qs_tooltip_content" msgid="6002493441414967868">"您还可以从屏幕顶部将“<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>”添加到“快捷设置”中"</string>
     <string name="accessibility_color_correction_auto_added_qs_tooltip_content" msgid="9092661358437404374">"“色彩校正”已添加到“快捷设置”中。向下滑动即可随时开启或关闭此功能。"</string>
     <string name="accessibility_color_correction_qs_tooltip_content" msgid="3258628434235475205">"您还可以将“色彩校正”添加到屏幕顶部的“快捷设置”中"</string>
     <string name="accessibility_color_inversion_auto_added_qs_tooltip_content" msgid="7267618234972101725">"“颜色反转”已添加到“快捷设置”中。向下滑动即可随时开启或关闭此功能。"</string>
@@ -2514,8 +2514,8 @@
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"为助听器进行配对"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"请在下一步中点按您的助听器。您可能需要为左右耳分别进行配对。\n\n请确保助听器已开启，并且已准备好进行配对。"</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> 使用中"</string>
-    <string name="accessibility_hearingaid_left_side_device_summary" msgid="1907302799168261001">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>，仅左耳已激活"</string>
-    <string name="accessibility_hearingaid_right_side_device_summary" msgid="148257064855054376">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>，仅右耳已激活"</string>
+    <string name="accessibility_hearingaid_left_side_device_summary" msgid="1907302799168261001">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>，仅在使用左耳助听器"</string>
+    <string name="accessibility_hearingaid_right_side_device_summary" msgid="148257064855054376">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>，仅在使用右耳助听器"</string>
     <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="4268221140368164452">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>，左右耳都已激活"</string>
     <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>及另外 1 个设备已激活"</string>
     <plurals name="show_number_hearingaid_count" formatted="false" msgid="776000580683647556">
@@ -3700,7 +3700,7 @@
     <string name="notification_volume_option_title" msgid="4838818791683615978">"通知音量"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"手机铃声"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"默认通知提示音"</string>
-    <string name="notification_unknown_sound_title" msgid="1319708450698738980">"应用提供的提示音"</string>
+    <string name="notification_unknown_sound_title" msgid="1319708450698738980">"应用提供的音效"</string>
     <string name="notification_sound_default" msgid="8630353701915294299">"默认通知提示音"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"默认闹钟提示音"</string>
     <string name="vibrate_when_ringing_title" msgid="3436203665622843196">"来电振动"</string>
@@ -3915,10 +3915,10 @@
     <string name="silent_notifications_status_bar" msgid="6113307620588767516">"隐藏状态栏中的无声通知"</string>
     <string name="notification_pulse_title" msgid="8013178454646671529">"闪烁指示灯"</string>
     <string name="lock_screen_notifications_title" msgid="2876323153692406203">"隐私"</string>
-    <string name="lockscreen_bypass_title" msgid="6519964196744088573">"跳过锁定屏幕"</string>
+    <string name="lockscreen_bypass_title" msgid="6519964196744088573">"跳过锁屏画面"</string>
     <string name="lockscreen_bypass_summary" msgid="464277506200346748">"解锁后直接转到上次使用的屏幕"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"锁定屏幕, 锁屏, 跳过, 绕过"</string>
-    <string name="locked_work_profile_notification_title" msgid="279367321791301499">"当工作资料遭到锁定时"</string>
+    <string name="locked_work_profile_notification_title" msgid="279367321791301499">"当工作资料锁定时"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"锁屏通知"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"显示对话通知、默认通知和无声通知"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"显示默认对话和已设为静音的对话"</string>
@@ -5392,7 +5392,7 @@
     <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"关闭<xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"关闭 SIM 卡并不会取消您的服务"</string>
     <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"正在连接到网络…"</string>
-    <string name="sim_action_switch_sub_dialog_progress" msgid="4718412054243793310">"正在切换到使用<xliff:g id="CARRIER_NAME">%1$s</xliff:g>来拨打电话和收发消息…"</string>
+    <string name="sim_action_switch_sub_dialog_progress" msgid="4718412054243793310">"正在切换到使用<xliff:g id="CARRIER_NAME">%1$s</xliff:g>来接打电话和收发信息…"</string>
     <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"无法切换运营商"</string>
     <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"发生错误，因此无法切换运营商。"</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"要停用<xliff:g id="CARRIER_NAME">%1$s</xliff:g>吗？"</string>
