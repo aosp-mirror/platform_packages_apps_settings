@@ -117,11 +117,10 @@ android_library {
         "aconfig_settings_flags_lib",
         "android.content.pm.flags-aconfig-java",
         "FingerprintManagerInteractor",
+        "notification_flags_lib",
     ],
 
-    plugins: [
-        "androidx.room_room-compiler-plugin",
-    ],
+    plugins: ["androidx.room_room-compiler-plugin"],
 
     libs: [
         "telephony-common",
