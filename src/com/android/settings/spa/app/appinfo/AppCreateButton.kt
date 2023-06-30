@@ -18,6 +18,7 @@ package com.android.settings.spa.app.appinfo
 
 import android.app.settings.SettingsEnums
 import android.content.pm.ApplicationInfo
+import android.widget.Toast
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Add
 import androidx.compose.runtime.Composable
@@ -25,14 +26,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rememberCoroutineScope
 import com.android.settings.R
 import com.android.settings.applications.manageapplications.CloneBackend
-import com.android.settings.overlay.FeatureFactory
+import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settings.spa.app.appinfo.AppInfoSettingsProvider.getRoute
 import com.android.settingslib.spa.framework.compose.LocalNavController
 import com.android.settingslib.spa.widget.button.ActionButton
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import android.widget.Toast;
 
 class AppCreateButton(packageInfoPresenter: PackageInfoPresenter) {
     private val context = packageInfoPresenter.context
@@ -54,7 +54,7 @@ class AppCreateButton(packageInfoPresenter: PackageInfoPresenter) {
         )
         {
             val cloneBackend = CloneBackend.getInstance(context)
-            FeatureFactory.getFactory(context).metricsFeatureProvider.action(context,
+            featureFactory.metricsFeatureProvider.action(context,
                     SettingsEnums.ACTION_CREATE_CLONE_APP)
             val appLabel = app.loadLabel(context.packageManager)
             Toast.makeText(context, context.getString(R.string.cloned_app_creation_toast_summary,

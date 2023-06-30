@@ -21,7 +21,7 @@ import android.app.AppOpsManager
 import android.app.settings.SettingsEnums
 import android.content.Context
 import com.android.settings.R
-import com.android.settings.overlay.FeatureFactory
+import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settingslib.spaprivileged.template.app.AppOpPermissionListModel
 import com.android.settingslib.spaprivileged.template.app.AppOpPermissionRecord
 import com.android.settingslib.spaprivileged.template.app.TogglePermissionAppListProvider
@@ -49,6 +49,6 @@ class AllFilesAccessListModel(context: Context) : AppOpPermissionListModel(conte
             newAllowed -> SettingsEnums.APP_SPECIAL_PERMISSION_MANAGE_EXT_STRG_ALLOW
             else -> SettingsEnums.APP_SPECIAL_PERMISSION_MANAGE_EXT_STRG_DENY
         }
-        FeatureFactory.getFactory(context).metricsFeatureProvider.action(context, category, "")
+        featureFactory.metricsFeatureProvider.action(context, category, "")
     }
 }

@@ -152,7 +152,7 @@ abstract class FeatureFactory {
 
         /** Returns a factory for creating feature controllers. */
         @JvmStatic
-        val factory: FeatureFactory
+        val featureFactory: FeatureFactory
             get() = _factory ?: throw UnsupportedOperationException("No feature factory configured")
 
         private var _appContext: Context? = null
@@ -171,13 +171,13 @@ abstract class FeatureFactory {
 
         /** Returns a factory for creating feature controllers. */
         @Deprecated(
-            "Replace with factory without Context",
+            "Replace with featureFactory without Context",
             ReplaceWith(
-                "factory",
-                "com.android.settings.overlay.FeatureFactory.Companion.factory",
+                "featureFactory",
+                "com.android.settings.overlay.FeatureFactory.Companion.featureFactory",
             )
         )
         @JvmStatic
-        fun getFactory(context: Context?): FeatureFactory = factory
+        fun getFactory(context: Context?): FeatureFactory = featureFactory
     }
 }

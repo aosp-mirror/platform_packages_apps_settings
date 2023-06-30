@@ -25,7 +25,7 @@ import android.content.pm.PackageManager
 import android.os.UserHandle
 import android.util.Log
 import androidx.compose.runtime.Composable
-import com.android.settings.overlay.FeatureFactory
+import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settings.spa.app.startUninstallActivity
 import com.android.settingslib.spa.framework.compose.LocalNavController
 import com.android.settingslib.spaprivileged.framework.common.activityManager
@@ -51,7 +51,7 @@ class PackageInfoPresenter(
     private val coroutineScope: CoroutineScope,
     private val packageManagers: IPackageManagers = PackageManagers,
 ) {
-    private val metricsFeatureProvider = FeatureFactory.getFactory(context).metricsFeatureProvider
+    private val metricsFeatureProvider = featureFactory.metricsFeatureProvider
     private val userHandle = UserHandle.of(userId)
     val userContext by lazy { context.asUser(userHandle) }
     val userPackageManager: PackageManager by lazy { userContext.packageManager }

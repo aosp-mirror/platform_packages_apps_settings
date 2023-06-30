@@ -21,7 +21,7 @@ import android.app.AppOpsManager
 import android.app.settings.SettingsEnums
 import android.content.Context
 import com.android.settings.R
-import com.android.settings.overlay.FeatureFactory
+import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settingslib.spaprivileged.template.app.AppOpPermissionListModel
 import com.android.settingslib.spaprivileged.template.app.AppOpPermissionRecord
 import com.android.settingslib.spaprivileged.template.app.TogglePermissionAppListProvider
@@ -48,6 +48,6 @@ class DisplayOverOtherAppsListModel(context: Context) : AppOpPermissionListModel
             newAllowed -> SettingsEnums.APP_SPECIAL_PERMISSION_APPDRAW_ALLOW
             else -> SettingsEnums.APP_SPECIAL_PERMISSION_APPDRAW_DENY
         }
-        FeatureFactory.getFactory(context).metricsFeatureProvider.action(context, category, "")
+        featureFactory.metricsFeatureProvider.action(context, category, "")
     }
 }
