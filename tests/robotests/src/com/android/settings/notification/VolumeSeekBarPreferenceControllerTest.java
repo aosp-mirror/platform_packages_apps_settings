@@ -49,6 +49,8 @@ public class VolumeSeekBarPreferenceControllerTest {
     @Mock
     private VolumeSeekBarPreference.Callback mCallback;
     @Mock
+    private VolumeSeekBarPreference.Listener mListener;
+    @Mock
     private AudioHelper mHelper;
 
     private VolumeSeekBarPreferenceControllerTestable mController;
@@ -59,7 +61,7 @@ public class VolumeSeekBarPreferenceControllerTest {
         when(mScreen.findPreference(nullable(String.class))).thenReturn(mPreference);
         when(mPreference.getKey()).thenReturn("key");
         mController = new VolumeSeekBarPreferenceControllerTestable(mContext, mCallback, true,
-                mPreference.getKey());
+                mPreference.getKey(), mListener);
         mController.setAudioHelper(mHelper);
     }
 
@@ -70,18 +72,20 @@ public class VolumeSeekBarPreferenceControllerTest {
         verify(mPreference).setCallback(mCallback);
         verify(mPreference).setStream(VolumeSeekBarPreferenceControllerTestable.AUDIO_STREAM);
         verify(mPreference).setMuteIcon(VolumeSeekBarPreferenceControllerTestable.MUTE_ICON);
+        verify(mPreference).setListener(mListener);
     }
 
     @Test
     public void displayPreference_notAvailable_shouldNotUpdatePreference() {
         mController = new VolumeSeekBarPreferenceControllerTestable(mContext, mCallback, false,
-                mPreference.getKey());
+                mPreference.getKey(), mListener);
 
         mController.displayPreference(mScreen);
 
         verify(mPreference, never()).setCallback(any(VolumeSeekBarPreference.Callback.class));
         verify(mPreference, never()).setStream(anyInt());
         verify(mPreference, never()).setMuteIcon(anyInt());
+        verify(mPreference, never()).setListener(mListener);
     }
 
     @Test
@@ -157,10 +161,12 @@ public class VolumeSeekBarPreferenceControllerTest {
         private boolean mAvailable;
 
         VolumeSeekBarPreferenceControllerTestable(Context context,
-            VolumeSeekBarPreference.Callback callback, boolean available, String key) {
+                VolumeSeekBarPreference.Callback callback, boolean available, String key,
+                VolumeSeekBarPreference.Listener listener) {
             super(context, key);
             setCallback(callback);
             mAvailable = available;
+            mVolumePreferenceListener = listener;
         }
 
         @Override
