@@ -217,7 +217,7 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
             mAdapter.addLocale(localeInfo);
             updateVisibilityOfRemoveMenu();
             mMetricsFeatureProvider.action(getContext(), SettingsEnums.ACTION_ADD_LANGUAGE,
-                    localeInfo.getLocale().getDisplayName());
+                    localeInfo.getLocale().toLanguageTag());
         } else if (requestCode == DIALOG_CONFIRM_SYSTEM_DEFAULT) {
             localeInfo = mAdapter.getFeedItemList().get(0);
             if (resultCode == Activity.RESULT_OK) {
@@ -232,7 +232,7 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
                     localeDialogFragment.show(mFragmentManager, TAG_DIALOG_NOT_AVAILABLE);
                     mMetricsFeatureProvider.action(getContext(),
                             SettingsEnums.ACTION_NOT_SUPPORTED_SYSTEM_LANGUAGE,
-                            localeInfo.getLocale().getDisplayName());
+                            localeInfo.getLocale().toLanguageTag());
                 }
             } else {
                 mAdapter.notifyListChanged(localeInfo);
