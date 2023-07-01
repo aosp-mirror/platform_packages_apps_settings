@@ -16,25 +16,31 @@
 
 package com.android.settings.network;
 
+import static com.android.settings.network.SubscriptionUtil.KEY_UNIQUE_SUBSCRIPTION_DISPLAYNAME;
+import static com.android.settings.network.SubscriptionUtil.SUB_ID;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
-import com.android.settings.R;
-
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+
+import com.android.settings.R;
 
 import org.junit.Before;
 import org.junit.Ignore;
@@ -442,6 +448,35 @@ public class SubscriptionUtilTest {
 
         assertThat(name).isNotNull();
         assertTrue(TextUtils.isEmpty(name));
+    }
+
+    @Test
+    public void getUniqueDisplayName_hasRecord_useRecordBeTheResult() {
+        final SubscriptionInfo info1 = mock(SubscriptionInfo.class);
+        final SubscriptionInfo info2 = mock(SubscriptionInfo.class);
+        when(info1.getSubscriptionId()).thenReturn(SUBID_1);
+        when(info2.getSubscriptionId()).thenReturn(SUBID_2);
+        when(info1.getDisplayName()).thenReturn(CARRIER_1);
+        when(info2.getDisplayName()).thenReturn(CARRIER_1);
+        when(mSubMgr.getAvailableSubscriptionInfoList()).thenReturn(
+                Arrays.asList(info1, info2));
+
+        SharedPreferences sp = mock(SharedPreferences.class);
+        when(mContext.getSharedPreferences(
+                KEY_UNIQUE_SUBSCRIPTION_DISPLAYNAME, Context.MODE_PRIVATE)).thenReturn(sp);
+        when(sp.getString(eq(SUB_ID + SUBID_1), anyString())).thenReturn(CARRIER_1 + "6789");
+        when(sp.getString(eq(SUB_ID + SUBID_2), anyString())).thenReturn(CARRIER_1 + "4321");
+
+
+        final CharSequence nameOfSub1 =
+                SubscriptionUtil.getUniqueSubscriptionDisplayName(info1, mContext);
+        final CharSequence nameOfSub2 =
+                SubscriptionUtil.getUniqueSubscriptionDisplayName(info2, mContext);
+
+        assertThat(nameOfSub1).isNotNull();
+        assertThat(nameOfSub2).isNotNull();
+        assertEquals(CARRIER_1 + "6789", nameOfSub1.toString());
+        assertEquals(CARRIER_1 + "4321", nameOfSub2.toString());
     }
 
     @Test

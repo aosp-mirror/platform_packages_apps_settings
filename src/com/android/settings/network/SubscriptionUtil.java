@@ -23,6 +23,7 @@ import static com.android.internal.util.CollectionUtils.emptyIfNull;
 
 import android.annotation.Nullable;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.ParcelUuid;
 import android.provider.Settings;
 import android.telephony.PhoneNumberUtils;
@@ -61,6 +62,10 @@ import java.util.stream.Stream;
 public class SubscriptionUtil {
     private static final String TAG = "SubscriptionUtil";
     private static final String PROFILE_GENERIC_DISPLAY_NAME = "CARD";
+    @VisibleForTesting
+    static final String SUB_ID = "sub_id";
+    @VisibleForTesting
+    static final String KEY_UNIQUE_SUBSCRIPTION_DISPLAYNAME = "unique_subscription_displayName";
     private static List<SubscriptionInfo> sAvailableResultsForTesting;
     private static List<SubscriptionInfo> sActiveResultsForTesting;
 
@@ -265,20 +270,21 @@ public class SubscriptionUtil {
         // Map of SubscriptionId to DisplayName
         final Supplier<Stream<DisplayInfo>> originalInfos =
                 () -> getAvailableSubscriptions(context)
-                .stream()
-                .filter(i -> {
-                    // Filter out null values.
-                    return (i != null && i.getDisplayName() != null);
-                })
-                .map(i -> {
-                    DisplayInfo info = new DisplayInfo();
-                    info.subscriptionInfo = i;
-                    String displayName = i.getDisplayName().toString();
-                    info.originalName = TextUtils.equals(displayName, PROFILE_GENERIC_DISPLAY_NAME)
-                            ? context.getResources().getString(R.string.sim_card)
-                            : displayName.trim();
-                    return info;
-                });
+                        .stream()
+                        .filter(i -> {
+                            // Filter out null values.
+                            return (i != null && i.getDisplayName() != null);
+                        })
+                        .map(i -> {
+                            DisplayInfo info = new DisplayInfo();
+                            info.subscriptionInfo = i;
+                            String displayName = i.getDisplayName().toString();
+                            info.originalName =
+                                    TextUtils.equals(displayName, PROFILE_GENERIC_DISPLAY_NAME)
+                                    ? context.getResources().getString(R.string.sim_card)
+                                    : displayName.trim();
+                            return info;
+                        });
 
         // TODO(goldmanj) consider using a map of DisplayName to SubscriptionInfos.
         // A Unique set of display names
@@ -292,6 +298,14 @@ public class SubscriptionUtil {
         // If a display name is duplicate, append the final 4 digits of the phone number.
         // Creates a mapping of Subscription id to original display name + phone number display name
         final Supplier<Stream<DisplayInfo>> uniqueInfos = () -> originalInfos.get().map(info -> {
+            String cachedDisplayName = getDisplayNameFromSharedPreference(
+                    context, info.subscriptionInfo.getSubscriptionId());
+            if (!TextUtils.isEmpty(cachedDisplayName)) {
+                Log.d(TAG, "use cached display name : " + cachedDisplayName);
+                info.uniqueName = cachedDisplayName;
+                return info;
+            }
+
             if (duplicateOriginalNames.contains(info.originalName)) {
                 // This may return null, if the user cannot view the phone number itself.
                 final String phoneNumber = getBidiFormattedPhoneNumber(context,
@@ -299,15 +313,17 @@ public class SubscriptionUtil {
                 String lastFourDigits = "";
                 if (phoneNumber != null) {
                     lastFourDigits = (phoneNumber.length() > 4)
-                        ? phoneNumber.substring(phoneNumber.length() - 4) : phoneNumber;
+                            ? phoneNumber.substring(phoneNumber.length() - 4) : phoneNumber;
                 }
-
                 if (TextUtils.isEmpty(lastFourDigits)) {
                     info.uniqueName = info.originalName;
                 } else {
                     info.uniqueName = info.originalName + " " + lastFourDigits;
+                    Log.d(TAG, "Cache display name [" + info.uniqueName + "] for sub id "
+                            + info.subscriptionInfo.getSubscriptionId());
+                    saveDisplayNameToSharedPreference(
+                            context, info.subscriptionInfo.getSubscriptionId(), info.uniqueName);
                 }
-
             } else {
                 info.uniqueName = info.originalName;
             }
@@ -369,6 +385,27 @@ public class SubscriptionUtil {
             return "";
         }
         return getUniqueSubscriptionDisplayName(info.getSubscriptionId(), context);
+    }
+
+
+    private static SharedPreferences getDisplayNameSharedPreferences(Context context) {
+        return context.getSharedPreferences(
+                KEY_UNIQUE_SUBSCRIPTION_DISPLAYNAME, Context.MODE_PRIVATE);
+    }
+
+    private static SharedPreferences.Editor getDisplayNameSharedPreferenceEditor(Context context) {
+        return getDisplayNameSharedPreferences(context).edit();
+    }
+
+    private static void saveDisplayNameToSharedPreference(
+            Context context, int subId, CharSequence displayName) {
+        getDisplayNameSharedPreferenceEditor(context)
+                .putString(SUB_ID + subId, String.valueOf(displayName))
+                .apply();
+    }
+
+    private static String getDisplayNameFromSharedPreference(Context context, int subid) {
+        return getDisplayNameSharedPreferences(context).getString(SUB_ID + subid, "");
     }
 
     public static String getDisplayName(SubscriptionInfo info) {

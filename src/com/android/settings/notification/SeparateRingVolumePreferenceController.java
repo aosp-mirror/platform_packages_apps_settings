@@ -65,6 +65,7 @@ public class SeparateRingVolumePreferenceController extends
         mReceiver.register(true);
         updateEffectsSuppressor();
         selectPreferenceIconState();
+        updateContentDescription();
 
         if (mPreference != null) {
             mPreference.setVisible(getAvailabilityStatus() == AVAILABLE);
