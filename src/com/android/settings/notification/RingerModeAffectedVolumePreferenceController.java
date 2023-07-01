@@ -26,6 +26,7 @@ import android.os.Vibrator;
 import android.util.Log;
 
 import com.android.internal.annotations.VisibleForTesting;
+import com.android.settings.R;
 
 import java.util.Objects;
 
@@ -54,6 +55,7 @@ public abstract class RingerModeAffectedVolumePreferenceController extends
         if (mVibrator != null && !mVibrator.hasVibrator()) {
             mVibrator = null;
         }
+        mVolumePreferenceListener = this::updateContentDescription;
     }
 
     protected void updateEffectsSuppressor() {
@@ -123,6 +125,7 @@ public abstract class RingerModeAffectedVolumePreferenceController extends
         }
         mRingerMode = ringerMode;
         selectPreferenceIconState();
+        updateContentDescription();
         return true;
     }
 
@@ -131,15 +134,38 @@ public abstract class RingerModeAffectedVolumePreferenceController extends
      */
     protected void selectPreferenceIconState() {
         if (mPreference != null) {
-            if (mRingerMode == AudioManager.RINGER_MODE_NORMAL) {
+            int ringerMode = getEffectiveRingerMode();
+            if (ringerMode == AudioManager.RINGER_MODE_NORMAL) {
                 mPreference.showIcon(mNormalIconId);
             } else {
-                if (mRingerMode == AudioManager.RINGER_MODE_VIBRATE && mVibrator != null) {
+                if (ringerMode == AudioManager.RINGER_MODE_VIBRATE) {
                     mMuteIcon = mVibrateIconId;
                 } else {
                     mMuteIcon = mSilentIconId;
                 }
                 mPreference.showIcon(getMuteIcon());
+            }
+        }
+    }
+
+    protected int getEffectiveRingerMode() {
+        if (mVibrator == null && mRingerMode == AudioManager.RINGER_MODE_VIBRATE) {
+            return AudioManager.RINGER_MODE_SILENT;
+        }
+        return mRingerMode;
+    }
+
+    protected void updateContentDescription() {
+        if (mPreference != null) {
+            int ringerMode = getEffectiveRingerMode();
+            if (ringerMode == AudioManager.RINGER_MODE_VIBRATE) {
+                mPreference.updateContentDescription(
+                        mContext.getString(R.string.ringer_content_description_vibrate_mode));
+            } else if (ringerMode == AudioManager.RINGER_MODE_SILENT) {
+                mPreference.updateContentDescription(
+                        mContext.getString(R.string.ringer_content_description_silent_mode));
+            } else {
+                mPreference.updateContentDescription(mPreference.getTitle());
             }
         }
     }
