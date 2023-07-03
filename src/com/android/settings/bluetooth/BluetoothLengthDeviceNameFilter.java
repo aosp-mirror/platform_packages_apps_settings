@@ -17,7 +17,7 @@
 package com.android.settings.bluetooth;
 
 /**
- * Filter to max the length of a Bluetotoh device name to 248 bytes, as defined by the spec.
+ * Filter to max the length of a Bluetooth device name to 248 bytes, as defined by the spec.
  */
 public class BluetoothLengthDeviceNameFilter extends Utf8ByteLengthFilter {
     private static final int BLUETOOTH_NAME_MAX_LENGTH_BYTES = 248;

@@ -71,7 +71,7 @@ public class SwitchBarTest {
     @Test
     public void cycleChecked_customLabel_shouldUpdateTextAndBackground() {
         final int onText = R.string.main_clear_progress_text;
-        final int offText = R.string.manage_space_text;
+        final int offText = R.string.clear_user_data_text;
 
         mBar.setSwitchBarText(onText, offText);
         assertThat(((TextView) mBar.findViewById(R.id.switch_text)).getText())

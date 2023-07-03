@@ -16,33 +16,32 @@
 
 package com.android.settings.language;
 
-import android.app.settings.SettingsEnums;
 import android.content.Context;
 
 import androidx.preference.Preference;
 
 import com.android.settings.R;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.core.SubSettingLauncher;
-import com.android.settings.localepicker.LocaleListEditor;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.List;
 
-public class PhoneLanguagePreferenceController extends AbstractPreferenceController
+public class PhoneLanguagePreferenceController extends BasePreferenceController
         implements PreferenceControllerMixin {
 
-    private static final String KEY_PHONE_LANGUAGE = "phone_language";
-
-    public PhoneLanguagePreferenceController(Context context) {
-        super(context);
+    public PhoneLanguagePreferenceController(Context context, String key) {
+        super(context, key);
     }
 
     @Override
-    public boolean isAvailable() {
-        return mContext.getResources().getBoolean(R.bool.config_show_phone_language)
-                && mContext.getAssets().getLocales().length > 1;
+    public int getAvailabilityStatus() {
+        if (mContext.getResources().getBoolean(R.bool.config_show_phone_language)
+                && mContext.getAssets().getLocales().length > 1) {
+            return AVAILABLE;
+        } else {
+            return CONDITIONALLY_UNAVAILABLE;
+        }
     }
 
     @Override
@@ -61,23 +60,4 @@ public class PhoneLanguagePreferenceController extends AbstractPreferenceControl
         // make search page look like there are duplicate result, creating confusion.
         keys.add(getPreferenceKey());
     }
-
-    @Override
-    public String getPreferenceKey() {
-        return KEY_PHONE_LANGUAGE;
-    }
-
-    @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        if (!KEY_PHONE_LANGUAGE.equals(preference.getKey())) {
-            return false;
-        }
-        new SubSettingLauncher(mContext)
-                .setDestination(LocaleListEditor.class.getName())
-                .setSourceMetricsCategory(SettingsEnums.SETTINGS_LANGUAGE_CATEGORY)
-                .setTitleRes(R.string.language_picker_title)
-                .launch();
-        return true;
-    }
-
 }

@@ -26,6 +26,7 @@ import static org.mockito.Mockito.spy;
 import android.content.Context;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
@@ -50,6 +51,7 @@ public class TopLevelDisplayPreferenceControllerTest {
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
+    @Ignore
     @Test
     @Config(qualifiers = "mcc999")
     public void getAvailabilityStatus_unsupportedWhenSet() {

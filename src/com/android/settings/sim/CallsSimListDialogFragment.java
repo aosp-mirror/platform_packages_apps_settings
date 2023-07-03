@@ -16,6 +16,8 @@
 
 package com.android.settings.sim;
 
+import static android.telephony.SubscriptionManager.PROFILE_CLASS_PROVISIONING;
+
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.telecom.PhoneAccountHandle;
@@ -49,6 +51,12 @@ public class CallsSimListDialogFragment extends SimListDialogFragment {
             final int subId = telephonyManager.getSubscriptionId(handle);
 
             if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+                continue;
+            }
+
+            SubscriptionInfo info = subscriptionManager.getActiveSubscriptionInfo(subId);
+            if (info == null || (info.isEmbedded()
+                    && info.getProfileClass() == PROFILE_CLASS_PROVISIONING)) {
                 continue;
             }
             result.add(subscriptionManager.getActiveSubscriptionInfo(subId));

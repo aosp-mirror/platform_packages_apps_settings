@@ -20,6 +20,8 @@ import static com.android.settings.testutils.CommonUtils.set_wifi_enabled;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.mock;
+
 import android.app.Instrumentation;
 import android.content.Context;
 import android.content.Intent;
@@ -31,6 +33,7 @@ import android.util.Log;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -40,6 +43,9 @@ import androidx.test.platform.app.InstrumentationRegistry;
 import com.android.settings.Settings;
 import com.android.settings.testutils.CommonUtils;
 import com.android.settings.testutils.UiUtils;
+import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.mobile.dataservice.MobileNetworkInfoEntity;
+import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
 
 import org.junit.After;
 import org.junit.Assume;
@@ -47,6 +53,8 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 
 import java.io.IOException;
 import java.net.URL;
@@ -54,6 +62,12 @@ import java.net.URL;
 @RunWith(AndroidJUnit4.class)
 @SmallTest
 public class MobileDataPreferenceControllerComponentTest {
+
+    @Mock
+    private Lifecycle mLifecycle;
+    @Mock
+    private LifecycleOwner mLifecycleOwner;
+
     public static final int TIMEOUT = 2000;
     private static int sSubscriptionId = 2;
     public final String TAG = this.getClass().getName();
@@ -116,9 +130,11 @@ public class MobileDataPreferenceControllerComponentTest {
             try {
                 URL url = new URL("https://www.google.net");
                 MobileDataPreferenceController controller = new MobileDataPreferenceController(
-                        mInstrumentation.getTargetContext(), "mobile_data");
+                        mInstrumentation.getTargetContext(), "mobile_data", mLifecycle,
+                        mLifecycleOwner, sSubscriptionId);
                 FragmentManager manager = ((FragmentActivity) activity).getSupportFragmentManager();
-                controller.init(manager, sSubscriptionId);
+                controller.init(manager, sSubscriptionId, mock(SubscriptionInfoEntity.class), mock(
+                        MobileNetworkInfoEntity.class));
 
                 // Make sure mobile network can connect at first.
                 assertThat(UiUtils.waitUntilCondition(1000,

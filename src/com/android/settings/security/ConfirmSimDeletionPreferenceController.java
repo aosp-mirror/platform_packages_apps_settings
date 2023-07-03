@@ -19,6 +19,7 @@ package com.android.settings.security;
 import android.app.KeyguardManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.os.UserManager;
 import android.provider.Settings;
 
 import androidx.preference.Preference;
@@ -39,6 +40,8 @@ public class ConfirmSimDeletionPreferenceController extends BasePreferenceContro
             ConfirmationSimDeletionPredicate.KEY_CONFIRM_SIM_DELETION;
     private boolean mConfirmationDefaultOn;
     private MetricsFeatureProvider mMetricsFeatureProvider;
+    private UserManager mUserManager;
+    private KeyguardManager mKeyguardManager;
 
     public ConfirmSimDeletionPreferenceController(Context context, String key) {
         super(context, key);
@@ -46,12 +49,16 @@ public class ConfirmSimDeletionPreferenceController extends BasePreferenceContro
                 context.getResources()
                         .getBoolean(R.bool.config_sim_deletion_confirmation_default_on);
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+
+        mUserManager = context.getSystemService(UserManager.class);
+        mKeyguardManager = mContext.getSystemService(KeyguardManager.class);
     }
 
     @Override
     public int getAvailabilityStatus() {
         // hide if eSim is not supported on the device
-        return MobileNetworkUtils.showEuiccSettings(mContext) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        return (!MobileNetworkUtils.isMobileNetworkUserRestricted(mContext)) &&
+                MobileNetworkUtils.showEuiccSettings(mContext) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     private boolean getGlobalState() {
@@ -99,8 +106,7 @@ public class ConfirmSimDeletionPreferenceController extends BasePreferenceContro
 
     @Override
     public void updateState(Preference preference) {
-        final KeyguardManager keyguardManager = mContext.getSystemService(KeyguardManager.class);
-        if (!keyguardManager.isKeyguardSecure()) {
+        if (!mKeyguardManager.isKeyguardSecure() && mUserManager.isGuestUser()) {
             preference.setEnabled(false);
             if (preference instanceof TwoStatePreference) {
                 ((TwoStatePreference) preference).setChecked(false);

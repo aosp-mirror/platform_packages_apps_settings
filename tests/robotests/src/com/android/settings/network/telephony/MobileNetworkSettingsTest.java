@@ -29,6 +29,7 @@ import static org.mockito.Mockito.when;
 import android.app.Activity;
 import android.app.usage.NetworkStatsManager;
 import android.content.Context;
+import android.content.res.Resources;
 import android.net.NetworkPolicyManager;
 import android.os.Bundle;
 import android.os.UserManager;
@@ -37,6 +38,7 @@ import android.telephony.TelephonyManager;
 
 import androidx.fragment.app.FragmentActivity;
 
+import com.android.settings.R;
 import com.android.settings.datausage.DataUsageSummaryPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
@@ -68,12 +70,18 @@ public class MobileNetworkSettingsTest {
     private FragmentActivity mActivity;
 
     private Context mContext;
+    private Resources mResources;
     private MobileNetworkSettings mFragment;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
+
+        mResources = spy(mContext.getResources());
+        when(mContext.getResources()).thenReturn(mResources);
+        when(mResources.getBoolean(R.bool.config_show_sim_info)).thenReturn(true);
+
         when(mActivity.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
         when(mTelephonyManager.createForSubscriptionId(anyInt())).thenReturn(mTelephonyManager);
         when(mContext.getSystemService(NetworkStatsManager.class)).thenReturn(mNetworkStatsManager);

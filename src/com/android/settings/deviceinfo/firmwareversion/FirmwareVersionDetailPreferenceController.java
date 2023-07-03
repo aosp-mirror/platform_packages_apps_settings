@@ -98,7 +98,8 @@ public class FirmwareVersionDetailPreferenceController extends BasePreferenceCon
 
             final Intent intent = new Intent(Intent.ACTION_MAIN)
                     .setClassName(
-                            "android", com.android.internal.app.PlatLogoActivity.class.getName());
+                            "android", com.android.internal.app.PlatLogoActivity.class.getName())
+                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             try {
                 mContext.startActivity(intent);
             } catch (Exception e) {

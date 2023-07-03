@@ -107,7 +107,6 @@ public class ConfigureNotificationSettings extends DashboardFragment implements
         mNotificationAssistantPreferenceController =
                 use(NotificationAssistantPreferenceController.class);
         mNotificationAssistantPreferenceController.setFragment(this);
-        mNotificationAssistantPreferenceController.setBackend(new NotificationBackend());
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,

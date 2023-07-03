@@ -17,13 +17,15 @@
 package com.android.settings.notification.zen;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.fail;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -31,12 +33,18 @@ import static org.mockito.Mockito.when;
 
 import android.app.AutomaticZenRule;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.provider.Settings;
 
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
+
+import com.google.common.collect.ImmutableList;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -47,6 +55,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.lang.reflect.Field;
+import java.util.AbstractMap;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -56,39 +65,81 @@ public class ZenModeAutomaticRulesPreferenceControllerTest {
     private ZenModeAutomaticRulesPreferenceController mController;
     @Mock
     private ZenModeBackend mBackend;
-    @Mock
-    private PreferenceCategory mockPref;
-    @Mock
+    private PreferenceCategory mPreferenceCategory;
     private PreferenceScreen mPreferenceScreen;
-    @Mock
-    private ZenRulePreference mZenRulePreference;
     private Context mContext;
+    @Mock
+    PackageManager mPm;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        mContext = ApplicationProvider.getApplicationContext();
-        mController = spy(new ZenModeAutomaticRulesPreferenceController(mContext, mock(Fragment.class),
-            null));
-        ReflectionHelpers.setField(mController, "mBackend", mBackend);
-        when(mPreferenceScreen.findPreference(mController.getPreferenceKey())).thenReturn(
-            mockPref);
-        mController.displayPreference(mPreferenceScreen);
-        doReturn(mZenRulePreference).when(mController).createZenRulePreference(any());
+        mContext = spy(ApplicationProvider.getApplicationContext());
+        when(mContext.getPackageManager()).thenReturn(mPm);
+        when(mPm.queryIntentActivities(any(), any())).thenReturn(
+                ImmutableList.of(mock(ResolveInfo.class)));
+        when(mBackend.getAutomaticZenRules()).thenReturn(new Map.Entry[0]);
+        mController = spy(new ZenModeAutomaticRulesPreferenceController(
+                mContext, mock(Fragment.class), null, mBackend));
+        final PreferenceManager preferenceManager = new PreferenceManager(mContext);
+        mPreferenceScreen = preferenceManager.createPreferenceScreen(mContext);
+        mPreferenceCategory = spy(new PreferenceCategory(mContext));
+        mPreferenceCategory.setKey(mController.getPreferenceKey());
+        mPreferenceScreen.addPreference(mPreferenceCategory);
     }
 
     @Test
-    public void testDisplayPreference_resetsPreferencesWhenCategoryEmpty() {
-        // when the PreferenceCategory is empty (no preferences), make sure we clear out any
-        // stale state in the cached set of zen rule preferences
-        mController.mZenRulePreferences.put("test1_id", mZenRulePreference);
-        when(mockPref.getPreferenceCount()).thenReturn(0);
+    public void testDisplayPreference_notPersistent() {
         mController.displayPreference(mPreferenceScreen);
-        assertTrue(mController.mZenRulePreferences.isEmpty());
+        assertFalse(mPreferenceCategory.isPersistent());
     }
 
     @Test
-    public void testUpdateState_clearsPreferencesWhenAddingNewPreferences() {
+    public void testDisplayThenUpdateState_onlyAddsOnceRulesUnchanged() {
+        final int NUM_RULES = 1;
+        Map<String, AutomaticZenRule> rMap = new HashMap<>();
+
+        String ruleId1 = "test1_id";
+
+        AutomaticZenRule autoRule1 = new AutomaticZenRule("test_rule_1", null, null,
+                null, null, Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, true, 10);
+
+        rMap.put(ruleId1, autoRule1);
+
+        // should add 1 new preferences to mockPref
+        mockGetAutomaticZenRules(NUM_RULES, rMap);
+        mController.displayPreference(mPreferenceScreen);
+        mController.updateState(mPreferenceCategory);
+        assertEquals(NUM_RULES, mPreferenceCategory.getPreferenceCount());
+        verify(mPreferenceCategory, times(1)).addPreference(any());
+    }
+
+    @Test
+    public void testDisplayThenUpdateState_addsIfRulesChange() {
+        Map<String, AutomaticZenRule> rMap = new HashMap<>();
+
+        String ruleId1 = "test1_id";
+        AutomaticZenRule autoRule1 = new AutomaticZenRule("test_rule_1", null, null,
+                null, null, Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, true, 10);
+        rMap.put(ruleId1, autoRule1);
+        mockGetAutomaticZenRules(1, rMap);
+        // adds one
+        mController.displayPreference(mPreferenceScreen);
+
+        String ruleId2 = "test2_id";
+        AutomaticZenRule autoRule2 = new AutomaticZenRule("test_rule_2", null, null,
+                null, null, Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, true, 20);
+        rMap.put(ruleId2, autoRule2);
+        mockGetAutomaticZenRules(2, rMap);
+
+        mController.updateState(mPreferenceCategory);
+        assertEquals(2, mPreferenceCategory.getPreferenceCount());
+        verify(mPreferenceCategory, times(2)).addPreference(any());
+    }
+
+    @Test
+    public void testUpdateState_addingNewPreferences() {
+        mController.displayPreference(mPreferenceScreen);
         final int NUM_RULES = 3;
         Map<String, AutomaticZenRule> rMap = new HashMap<>();
 
@@ -109,16 +160,26 @@ public class ZenModeAutomaticRulesPreferenceControllerTest {
 
         // should add 3 new preferences to mockPref
         mockGetAutomaticZenRules(NUM_RULES, rMap);
-        mController.updateState(mockPref);
-        verify(mockPref, times(1)).removeAll();
-        verify(mockPref, times(NUM_RULES)).addPreference(any());
-        assertEquals(NUM_RULES, mController.mZenRulePreferences.size());
+        mController.updateState(mPreferenceCategory);
+        assertEquals(NUM_RULES, mPreferenceCategory.getPreferenceCount());
     }
 
     @Test
-    public void testUpdateState_clearsPreferencesWhenRemovingPreferences(){
+    public void testUpdateState_addsAndRemoves(){
+        mController.displayPreference(mPreferenceScreen);
         final int NUM_RULES = 2;
         Map<String, AutomaticZenRule> rMap = new HashMap<>();
+
+        String FAKE_1 = "fake key 1";
+        String FAKE_2 = "fake 2";
+        mPreferenceCategory.addPreference(new ZenRulePreference(mContext,
+                new AbstractMap.SimpleEntry<>(FAKE_1, mock(AutomaticZenRule.class)),
+                null, null, mBackend));
+        mPreferenceCategory.addPreference(new ZenRulePreference(mContext,
+                new AbstractMap.SimpleEntry<>(FAKE_2, mock(AutomaticZenRule.class)),
+                null, null, mBackend));
+        assertNotNull(mPreferenceCategory.findPreference(FAKE_1));
+        assertNotNull(mPreferenceCategory.findPreference(FAKE_2));
 
         String ruleId1 = "test1_id";
         String ruleId2 = "test2_id";
@@ -131,83 +192,37 @@ public class ZenModeAutomaticRulesPreferenceControllerTest {
         rMap.put(ruleId1, autoRule1);
         rMap.put(ruleId2, autoRule2);
 
-        // Add three preferences to the set of previously-known-about ZenRulePreferences; in this
-        // case, test3_id is "deleted"
-        mController.mZenRulePreferences.put("test1_id", mZenRulePreference);
-        mController.mZenRulePreferences.put("test2_id", mZenRulePreference);
-        mController.mZenRulePreferences.put("test3_id", mZenRulePreference);
-
         // update state should re-add all preferences since a preference was deleted
-        when(mockPref.getPreferenceCount()).thenReturn(NUM_RULES + 1);
         mockGetAutomaticZenRules(NUM_RULES, rMap);
-        mController.updateState(mockPref);
-        verify(mockPref, times(1)).removeAll();
-        verify(mockPref, times(NUM_RULES)).addPreference(any());
-        assertEquals(NUM_RULES, mController.mZenRulePreferences.size());
+        mController.updateState(mPreferenceCategory);
+        assertNull(mPreferenceCategory.findPreference(FAKE_1));
+        assertNull(mPreferenceCategory.findPreference(FAKE_2));
+        assertNotNull(mPreferenceCategory.findPreference(ruleId1));
+        assertNotNull(mPreferenceCategory.findPreference(ruleId2));
     }
 
     @Test
-    public void testUpdateState_clearsPreferencesWhenSameNumberButDifferentPrefs() {
-        final int NUM_RULES = 2;
-        Map<String, AutomaticZenRule> rMap = new HashMap<>();
-
-        String ruleId1 = "test1_id";
-        String ruleId2 = "test2_id";
-
-        AutomaticZenRule autoRule1 = new AutomaticZenRule("test_rule_1", null, null,
-                null, null, Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, true, 10);
-        AutomaticZenRule autoRule2 = new AutomaticZenRule("test_rule_2", null, null,
-                null, null, Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, true, 20);
-
-        rMap.put(ruleId1, autoRule1);
-        rMap.put(ruleId2, autoRule2);
-
-        // Add two preferences to the set of previously-known-about ZenRulePreferences; in this
-        // case, test3_id is "deleted" but test2_id is "added"
-        mController.mZenRulePreferences.put("test1_id", mZenRulePreference);
-        mController.mZenRulePreferences.put("test3_id", mZenRulePreference);
-
-        // update state should re-add all preferences since a preference was deleted
-        when(mockPref.getPreferenceCount()).thenReturn(NUM_RULES);
-        mockGetAutomaticZenRules(NUM_RULES, rMap);
-        mController.updateState(mockPref);
-        verify(mockPref, times(1)).removeAll();
-        verify(mockPref, times(NUM_RULES)).addPreference(any());
-        assertEquals(NUM_RULES, mController.mZenRulePreferences.size());
-    }
-
-    @Test
-    public void testUpdateState_updateEnableState() throws NoSuchFieldException {
-        final int NUM_RULES = 1;
-        Map<String, AutomaticZenRule> rMap = new HashMap<>();
+    public void testUpdateState_updateEnableState() {
+        mController.displayPreference(mPreferenceScreen);
         String testId = "test1_id";
         AutomaticZenRule rule = new AutomaticZenRule("rule_name", null, null,
-            null, null, Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, true, 10);
-        rMap.put(testId, rule);
+                null, null, Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, true, 10);
 
-        when(mockPref.getPreferenceCount()).thenReturn(NUM_RULES);
-        when(mockPref.getPreference(anyInt())).thenReturn(mZenRulePreference);
-        mController.mZenRulePreferences.put("test1_id", mZenRulePreference);
+        mPreferenceCategory.addPreference(new ZenRulePreference(mContext,
+                new AbstractMap.SimpleEntry<>(testId, rule),
+                null, null, mBackend));
 
-        // update state should NOT re-add all the preferences, should only update enable state
-        rule.setEnabled(false);
-        rMap.put(testId, rule);
+        final int NUM_RULES = 1;
+        Map<String, AutomaticZenRule> rMap = new HashMap<>();
+        AutomaticZenRule ruleUpdated = new AutomaticZenRule("rule_name", null, null,
+                null, null, Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, true, 10);
+        ruleUpdated.setEnabled(false);
+        rMap.put(testId, ruleUpdated);
         mockGetAutomaticZenRules(NUM_RULES, rMap);
-        setZenRulePreferenceField("mId", testId);
-        mController.updateState(mockPref);
-        verify(mZenRulePreference, times(1)).updatePreference(any());
-        verify(mockPref, never()).removeAll();
-        assertEquals(NUM_RULES, mController.mZenRulePreferences.size());
-    }
 
-    private void setZenRulePreferenceField(String name, Object value) {
-        try {
-            Field field = ZenRulePreference.class.getDeclaredField("mId");
-            field.setAccessible(true);
-            field.set(mZenRulePreference, value);
-        } catch (ReflectiveOperationException e) {
-            fail("Unable to set mZenRulePreference field: " + name);
-        }
+        mController.updateState(mPreferenceCategory);
+        assertFalse(mPreferenceCategory.findPreference(testId).isEnabled());
+        assertEquals(NUM_RULES, mPreferenceCategory.getPreferenceCount());
     }
 
     private void mockGetAutomaticZenRules(int numRules, Map<String, AutomaticZenRule> rules) {

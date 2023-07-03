@@ -28,6 +28,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.network.SubscriptionUtil;
 
 import java.util.List;
 
@@ -50,6 +51,10 @@ public class SimLockPreferenceController extends BasePreferenceController {
 
     @Override
     public int getAvailabilityStatus() {
+        if (!SubscriptionUtil.isSimHardwareVisible(mContext)) {
+            return UNSUPPORTED_ON_DEVICE;
+        }
+
         final List<SubscriptionInfo> subInfoList =
                 mSubscriptionManager.getActiveSubscriptionInfoList();
 
@@ -89,7 +94,8 @@ public class SimLockPreferenceController extends BasePreferenceController {
         for (SubscriptionInfo subInfo : subInfoList) {
             final int simState = mTelephonyManager.getSimState(subInfo.getSimSlotIndex());
             if ((simState != TelephonyManager.SIM_STATE_ABSENT)
-                    && (simState != TelephonyManager.SIM_STATE_UNKNOWN)) {
+                    && (simState != TelephonyManager.SIM_STATE_UNKNOWN)
+                    && (simState != TelephonyManager.SIM_STATE_PERM_DISABLED)) {
                 return true;
             }
         }

@@ -19,8 +19,8 @@ package com.android.settings.dream;
 import android.annotation.LayoutRes;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.VectorDrawable;
 import android.text.TextUtils;
+import android.util.SparseIntArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,10 +41,9 @@ import java.util.List;
  */
 public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final List<IDreamItem> mItemList;
-    @LayoutRes
-    private final int mLayoutRes;
     private int mLastSelectedPos = -1;
     private boolean mEnabled = true;
+    private SparseIntArray mLayouts = new SparseIntArray();
 
     /**
      * View holder for each {@link IDreamItem}.
@@ -83,23 +82,9 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 mSummaryView.setVisibility(View.VISIBLE);
             }
 
-            final Drawable previewImage = item.getPreviewImage();
-            if (previewImage != null) {
-                mPreviewView.setImageDrawable(previewImage);
-                mPreviewView.setClipToOutline(true);
-                mPreviewPlaceholderView.setVisibility(View.GONE);
-            } else {
-                mPreviewView.setImageDrawable(null);
-                mPreviewPlaceholderView.setVisibility(View.VISIBLE);
-            }
-
             final Drawable icon = item.isActive()
                     ? mContext.getDrawable(R.drawable.ic_dream_check_circle)
                     : item.getIcon().mutate();
-            if (icon instanceof VectorDrawable) {
-                icon.setTintList(
-                        mContext.getColorStateList(R.color.dream_card_icon_color_state_list));
-            }
             final int iconSize = mContext.getResources().getDimensionPixelSize(
                     R.dimen.dream_item_icon_size);
             icon.setBounds(0, 0, iconSize, iconSize);
@@ -122,12 +107,27 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 itemView.setClickable(true);
             }
 
-            mCustomizeButton.setOnClickListener(v -> item.onCustomizeClicked());
-            mCustomizeButton.setVisibility(
-                    item.allowCustomization() && mEnabled ? View.VISIBLE : View.GONE);
-            // This must be called AFTER itemView.setSelected above, in order to keep the
-            // customize button in an unselected state.
-            mCustomizeButton.setSelected(false);
+            if (item.viewType() != DreamItemViewTypes.NO_DREAM_ITEM) {
+                final Drawable previewImage = item.getPreviewImage();
+                if (previewImage != null) {
+                    mPreviewView.setImageDrawable(previewImage);
+                    mPreviewView.setClipToOutline(true);
+                    mPreviewPlaceholderView.setVisibility(View.GONE);
+                } else {
+                    mPreviewView.setImageDrawable(null);
+                    mPreviewPlaceholderView.setVisibility(View.VISIBLE);
+                }
+
+                mCustomizeButton.setOnClickListener(v -> item.onCustomizeClicked());
+                mCustomizeButton.setVisibility(
+                        item.allowCustomization() && mEnabled ? View.VISIBLE : View.GONE);
+                // This must be called AFTER itemView.setSelected above, in order to keep the
+                // customize button in an unselected state.
+                mCustomizeButton.setSelected(false);
+                mCustomizeButton.setContentDescription(
+                        mContext.getResources().getString(R.string.customize_button_description,
+                                item.getTitle()));
+            }
 
             setEnabledStateOnViews(itemView, mEnabled);
         }
@@ -149,22 +149,33 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
     }
 
+    public DreamAdapter(SparseIntArray layouts, List<IDreamItem> itemList) {
+        mItemList = itemList;
+        mLayouts = layouts;
+    }
+
     public DreamAdapter(@LayoutRes int layoutRes, List<IDreamItem> itemList) {
         mItemList = itemList;
-        mLayoutRes = layoutRes;
+        mLayouts.append(DreamItemViewTypes.DREAM_ITEM, layoutRes);
     }
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup,
+                                                      @DreamItemViewTypes.ViewType int viewType) {
         View view = LayoutInflater.from(viewGroup.getContext())
-                .inflate(mLayoutRes, viewGroup, false);
+                .inflate(mLayouts.get(viewType), viewGroup, false);
         return new DreamViewHolder(view, viewGroup.getContext());
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
         ((DreamViewHolder) viewHolder).bindView(mItemList.get(i), i);
+    }
+
+    @Override
+    public @DreamItemViewTypes.ViewType int getItemViewType(int position) {
+        return mItemList.get(position).viewType();
     }
 
     @Override

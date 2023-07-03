@@ -35,7 +35,9 @@ import android.net.wifi.WifiManager;
 
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.widget.ValidatedEditTextPreference;
+import com.android.settings.wifi.repository.WifiHotspotRepository;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
@@ -65,6 +67,8 @@ public class WifiTetherPasswordPreferenceControllerTest {
     private PreferenceScreen mScreen;
     @Mock
     private MetricsFeatureProvider mMetricsFeatureProvider;
+    @Mock
+    private WifiHotspotRepository mWifiHotspotRepository;
 
     private WifiTetherPasswordPreferenceController mController;
     private ValidatedEditTextPreference mPreference;
@@ -73,6 +77,10 @@ public class WifiTetherPasswordPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        FakeFeatureFactory featureFactory = FakeFeatureFactory.setupForTest();
+        when(featureFactory.getWifiFeatureProvider().getWifiHotspotRepository())
+                .thenReturn(mWifiHotspotRepository);
+
         mPreference = new ValidatedEditTextPreference(RuntimeEnvironment.application);
         mConfig = new SoftApConfiguration.Builder().setSsid("test_1234")
                 .setPassphrase(INITIAL_PASSWORD, SoftApConfiguration.SECURITY_TYPE_WPA2_PSK)
@@ -89,6 +97,11 @@ public class WifiTetherPasswordPreferenceControllerTest {
 
         mController = new WifiTetherPasswordPreferenceController(mContext, mListener,
                 mMetricsFeatureProvider);
+    }
+
+    @Test
+    public void constructor_shouldQueryLastPasswordIfNeeded() {
+        verify(mWifiHotspotRepository).queryLastPasswordIfNeeded();
     }
 
     @Test

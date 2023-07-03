@@ -50,8 +50,6 @@ public class ButtonActionDialogFragmentTest {
 
     private static final int FORCE_STOP_ID = ButtonActionDialogFragment.DialogType.FORCE_STOP;
     private static final int DISABLE_ID = ButtonActionDialogFragment.DialogType.DISABLE;
-    private static final int SPECIAL_DISABLE_ID =
-            ButtonActionDialogFragment.DialogType.SPECIAL_DISABLE;
     @Mock
     private TestFragment mTargetFragment;
     private ButtonActionDialogFragment mFragment;
@@ -77,10 +75,10 @@ public class ButtonActionDialogFragmentTest {
     @Test
     public void testOnClick_forceStop_dismissDialog() {
         ButtonActionDialogFragment fragment =
-                spy(ButtonActionDialogFragment.newInstance(FORCE_STOP_ID));
+                ButtonActionDialogFragment.newInstance(FORCE_STOP_ID);
         FragmentController.setupFragment(fragment, FragmentActivity.class, 0 /* containerViewId */,
                 null /* bundle */);
-        doReturn(mTargetFragment).when(fragment).getTargetFragment();
+        fragment.setTargetFragment(mTargetFragment, 0);
         doNothing().when(mTargetFragment).handleDialogClick(anyInt());
         final AlertDialog dialog = mock(AlertDialog.class);
 
@@ -113,26 +111,6 @@ public class ButtonActionDialogFragmentTest {
     @Test
     public void testOnCreateDialog_disableDialog() {
         ButtonActionDialogFragment fragment = ButtonActionDialogFragment.newInstance(DISABLE_ID);
-        FragmentController.setupFragment(fragment, FragmentActivity.class, 0 /* containerViewId */,
-                null /* bundle */);
-        final AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
-
-        assertThat(dialog).isNotNull();
-
-        ShadowAlertDialogCompat shadowDialog = ShadowAlertDialogCompat.shadowOf(dialog);
-
-        assertThat(shadowDialog.getMessage()).isEqualTo(
-                mShadowContext.getString(R.string.app_disable_dlg_text));
-        assertThat(dialog.getButton(DialogInterface.BUTTON_POSITIVE).getText()).isEqualTo(
-                mShadowContext.getString(R.string.app_disable_dlg_positive));
-        assertThat(dialog.getButton(DialogInterface.BUTTON_NEGATIVE).getText()).isEqualTo(
-                mShadowContext.getString(R.string.dlg_cancel));
-    }
-
-    @Test
-    public void testOnCreateDialog_specialDisableDialog() {
-        ButtonActionDialogFragment fragment =
-                ButtonActionDialogFragment.newInstance(SPECIAL_DISABLE_ID);
         FragmentController.setupFragment(fragment, FragmentActivity.class, 0 /* containerViewId */,
                 null /* bundle */);
         final AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
