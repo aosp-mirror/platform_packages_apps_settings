@@ -43,7 +43,7 @@ class AppDisableButton(
     private val packageManager = context.packageManager
     private val userManager = context.userManager
     private val devicePolicyManager = context.devicePolicyManager
-    private val applicationFeatureProvider = featureFactory.getApplicationFeatureProvider(context)
+    private val applicationFeatureProvider = featureFactory.applicationFeatureProvider
 
     @Composable
     fun getActionButton(app: ApplicationInfo): ActionButton? {

@@ -69,8 +69,8 @@ public class EnterpriseSetDefaultAppsListPreferenceController extends
         super(context);
         mPm = packageManager;
         mParent = parent;
-        final FeatureFactory factory = FeatureFactory.getFactory(context);
-        mApplicationFeatureProvider = factory.getApplicationFeatureProvider(context);
+        final FeatureFactory factory = FeatureFactory.getFeatureFactory();
+        mApplicationFeatureProvider = factory.getApplicationFeatureProvider();
         mEnterprisePrivacyFeatureProvider = factory.getEnterprisePrivacyFeatureProvider(context);
         mUserFeatureProvider = factory.getUserFeatureProvider(context);
         buildAppList();

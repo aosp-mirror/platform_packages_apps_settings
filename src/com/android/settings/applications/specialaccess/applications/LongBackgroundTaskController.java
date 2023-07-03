@@ -30,8 +30,8 @@ public class LongBackgroundTaskController extends BasePreferenceController {
 
     public LongBackgroundTaskController(Context context, String preferenceKey) {
         super(context, preferenceKey);
-        mAppFeatureProvider = FeatureFactory.getFactory(context)
-                .getApplicationFeatureProvider(context);
+        mAppFeatureProvider = FeatureFactory.getFeatureFactory()
+                .getApplicationFeatureProvider();
     }
 
     @Override

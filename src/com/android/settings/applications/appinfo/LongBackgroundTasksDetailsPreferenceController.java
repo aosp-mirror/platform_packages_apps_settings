@@ -40,8 +40,8 @@ public class LongBackgroundTasksDetailsPreferenceController extends
 
     public LongBackgroundTasksDetailsPreferenceController(Context context, String key) {
         super(context, key);
-        mAppFeatureProvider = FeatureFactory.getFactory(context)
-                .getApplicationFeatureProvider(context);
+        mAppFeatureProvider = FeatureFactory.getFeatureFactory()
+                .getApplicationFeatureProvider();
     }
 
     @VisibleForTesting

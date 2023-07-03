@@ -79,7 +79,7 @@ public abstract class ApplicationListFragment extends DashboardFragment
         @Override
         public void buildApplicationList(Context context,
                 ApplicationFeatureProvider.ListOfAppsCallback callback) {
-            FeatureFactory.getFactory(context).getApplicationFeatureProvider(context)
+            FeatureFactory.getFeatureFactory().getApplicationFeatureProvider()
                     .listAppsWithAdminGrantedPermissions(mPermissions, callback);
         }
 
@@ -120,8 +120,8 @@ public abstract class ApplicationListFragment extends DashboardFragment
         @Override
         public void buildApplicationList(Context context,
                 ApplicationFeatureProvider.ListOfAppsCallback callback) {
-            FeatureFactory.getFactory(context).getApplicationFeatureProvider(context).
-                    listPolicyInstalledApps(callback);
+            FeatureFactory.getFeatureFactory()
+                    .getApplicationFeatureProvider().listPolicyInstalledApps(callback);
         }
     }
 }

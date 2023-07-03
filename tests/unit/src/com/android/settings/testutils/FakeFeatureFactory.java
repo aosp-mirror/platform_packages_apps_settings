@@ -53,6 +53,8 @@ import com.android.settings.wifi.WifiTrackerLibProvider;
 import com.android.settings.wifi.factory.WifiFeatureProvider;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * Test util to provide fake FeatureFactory. To use this factory, call {@code setupForTest} in
  * {@code @Before} method of the test class.
@@ -176,8 +178,9 @@ public class FakeFeatureFactory extends FeatureFactory {
         return dockUpdaterFeatureProvider;
     }
 
+    @NotNull
     @Override
-    public ApplicationFeatureProvider getApplicationFeatureProvider(Context context) {
+    public ApplicationFeatureProvider getApplicationFeatureProvider() {
         return applicationFeatureProvider;
     }
 

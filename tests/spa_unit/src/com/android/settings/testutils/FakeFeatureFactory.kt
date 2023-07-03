@@ -93,7 +93,7 @@ class FakeFeatureFactory : FeatureFactory() {
     override val dockUpdaterFeatureProvider: DockUpdaterFeatureProvider
         get() = TODO("Not yet implemented")
 
-    override fun getApplicationFeatureProvider(context: Context) = mockApplicationFeatureProvider
+    override val applicationFeatureProvider = mockApplicationFeatureProvider
 
     override val localeFeatureProvider: LocaleFeatureProvider
         get() = TODO("Not yet implemented")

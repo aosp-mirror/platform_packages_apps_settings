@@ -66,15 +66,6 @@ import com.android.settingslib.spaprivileged.framework.common.devicePolicyManage
  * [FeatureFactory] implementation for AOSP Settings.
  */
 open class FeatureFactoryImpl : FeatureFactory() {
-    private val applicationFeatureProvider by lazy {
-        ApplicationFeatureProviderImpl(
-            appContext,
-            appContext.packageManager,
-            AppGlobals.getPackageManager(),
-            appContext.devicePolicyManager,
-        )
-    }
-
     private val dashboardFeatureProvider by lazy { DashboardFeatureProviderImpl(appContext) }
 
     private val enterprisePrivacyFeatureProvider by lazy {
@@ -120,7 +111,14 @@ open class FeatureFactoryImpl : FeatureFactory() {
         DockUpdaterFeatureProviderImpl()
     }
 
-    override fun getApplicationFeatureProvider(context: Context) = applicationFeatureProvider
+    override val applicationFeatureProvider by lazy {
+        ApplicationFeatureProviderImpl(
+            appContext,
+            appContext.packageManager,
+            AppGlobals.getPackageManager(),
+            appContext.devicePolicyManager,
+        )
+    }
 
     override val localeFeatureProvider by lazy { LocaleFeatureProviderImpl() }
 

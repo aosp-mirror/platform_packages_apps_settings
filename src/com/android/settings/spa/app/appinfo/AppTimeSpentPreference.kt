@@ -60,7 +60,7 @@ private class AppTimeSpentPresenter(
     private val intent = Intent(Settings.ACTION_APP_USAGE_SETTINGS).apply {
         putExtra(Intent.EXTRA_PACKAGE_NAME, app.packageName)
     }
-    private val appFeatureProvider = featureFactory.getApplicationFeatureProvider(context)
+    private val appFeatureProvider = featureFactory.applicationFeatureProvider
 
     fun isAvailable() = context.packageManager.queryIntentActivitiesAsUser(
         intent, ResolveInfoFlags.of(0), app.userId

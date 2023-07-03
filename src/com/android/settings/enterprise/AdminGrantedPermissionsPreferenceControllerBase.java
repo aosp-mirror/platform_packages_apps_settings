@@ -38,8 +38,8 @@ public abstract class AdminGrantedPermissionsPreferenceControllerBase
             String[] permissions) {
         super(context);
         mPermissions = permissions;
-        mFeatureProvider = FeatureFactory.getFactory(context)
-                .getApplicationFeatureProvider(context);
+        mFeatureProvider = FeatureFactory.getFeatureFactory()
+                .getApplicationFeatureProvider();
         mAsync = async;
         mHasApps = false;
     }
