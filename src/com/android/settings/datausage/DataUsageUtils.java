@@ -46,7 +46,7 @@ import java.util.Optional;
 /**
  * Utility methods for data usage classes.
  */
-public final class DataUsageUtils extends com.android.settingslib.net.DataUsageUtils {
+public final class DataUsageUtils {
     static final boolean TEST_RADIOS = false;
     static final String TEST_RADIOS_PROP = "test.radios";
     private static final boolean LOGD = false;
