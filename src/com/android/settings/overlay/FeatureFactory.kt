@@ -66,8 +66,11 @@ abstract class FeatureFactory {
      */
     abstract val hardwareInfoFeatureProvider: HardwareInfoFeatureProvider
 
-    abstract fun getSupportFeatureProvider(context: Context): SupportFeatureProvider?
+    /** Implementation for [SupportFeatureProvider]. */
+    open val supportFeatureProvider: SupportFeatureProvider? = null
+
     abstract val metricsFeatureProvider: MetricsFeatureProvider
+
     abstract fun getPowerUsageFeatureProvider(context: Context): PowerUsageFeatureProvider
 
     /**
