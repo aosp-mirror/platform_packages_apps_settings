@@ -31,7 +31,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
@@ -325,6 +328,12 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         session.close();
 
         onRestoreInstance(icicle);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        use(DataUsagePreferenceController.class).whenViewCreated(getViewLifecycleOwner());
     }
 
     @Override
