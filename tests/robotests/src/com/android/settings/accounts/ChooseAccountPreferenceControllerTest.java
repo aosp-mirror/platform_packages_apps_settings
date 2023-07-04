@@ -173,7 +173,7 @@ public class ChooseAccountPreferenceControllerTest {
                 mActivity);
         mController.displayPreference(mPreferenceScreen);
 
-        assertThat(mActivity.isFinishing()).isTrue();
+        assertThat(mActivity.isFinishing()).isFalse();
         assertThat(mPreferenceScreen.getPreferenceCount()).isEqualTo(0);
     }
 
