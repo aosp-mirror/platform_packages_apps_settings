@@ -108,6 +108,7 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
                         SHOW_VIRTUAL_KEYBOARD_SWITCH));
 
         FeatureFactory featureFactory = FeatureFactory.getFactory(getContext());
+        mMetricsFeatureProvider = featureFactory.getMetricsFeatureProvider();
         mFeatureProvider = featureFactory.getKeyboardSettingsFeatureProvider();
         mSupportsFirmwareUpdate = mFeatureProvider.supportsFirmwareUpdate();
         if (mSupportsFirmwareUpdate) {
@@ -122,7 +123,12 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
         }
         InputDeviceIdentifier inputDeviceIdentifier = activity.getIntent().getParcelableExtra(
                 KeyboardLayoutPickerFragment.EXTRA_INPUT_DEVICE_IDENTIFIER);
-        // TODO (b/271391879): The EXTRA_INTENT_FROM is used for the future metrics.
+        String intentFromWhere =
+                activity.getIntent().getStringExtra(NewKeyboardSettingsUtils.EXTRA_INTENT_FROM);
+        if (intentFromWhere != null) {
+            mMetricsFeatureProvider.action(
+                    getContext(), SettingsEnums.ACTION_OPEN_PK_SETTINGS_FROM, intentFromWhere);
+        }
         if (inputDeviceIdentifier != null) {
             mAutoInputDeviceIdentifier = inputDeviceIdentifier;
         }
@@ -253,6 +259,10 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
                         });
             }
             category.addPreference(pref);
+            mMetricsFeatureProvider.action(
+                    getContext(),
+                    SettingsEnums.ACTION_USE_SPECIFIC_KEYBOARD,
+                    hardKeyboardDeviceInfo.mDeviceName);
         }
         mKeyboardAssistanceCategory.setOrder(1);
         preferenceScreen.addPreference(mKeyboardAssistanceCategory);
