@@ -34,8 +34,7 @@ public class NewKeyboardLayoutPickerTitle extends SettingsPreferenceFragment {
 
     @Override
     public int getMetricsCategory() {
-        // TODO: add new SettingsEnums SETTINGS_KEYBOARDS_LAYOUT_PICKER_TITLE
-        return SettingsEnums.SETTINGS_KEYBOARDS_LAYOUT_PICKER;
+        return SettingsEnums.SETTINGS_KEYBOARDS_LAYOUT_PICKER_TITLE;
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
