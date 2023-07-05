@@ -47,10 +47,13 @@ public class VolumeSeekBarPreference extends SeekBarPreference {
 
     protected SeekBar mSeekBar;
     private int mStream;
-    private SeekBarVolumizer mVolumizer;
+    @VisibleForTesting
+    SeekBarVolumizer mVolumizer;
     private Callback mCallback;
+    private Listener mListener;
     private ImageView mIconView;
     private TextView mSuppressionTextView;
+    private TextView mTitle;
     private String mSuppressionText;
     private boolean mMuted;
     private boolean mZenMuted;
@@ -98,6 +101,10 @@ public class VolumeSeekBarPreference extends SeekBarPreference {
         mCallback = callback;
     }
 
+    public void setListener(Listener listener) {
+        mListener = listener;
+    }
+
     public void onActivityResume() {
         if (mStopped) {
             init();
@@ -118,6 +125,7 @@ public class VolumeSeekBarPreference extends SeekBarPreference {
         mSeekBar = (SeekBar) view.findViewById(com.android.internal.R.id.seekbar);
         mIconView = (ImageView) view.findViewById(com.android.internal.R.id.icon);
         mSuppressionTextView = (TextView) view.findViewById(R.id.suppression_text);
+        mTitle = (TextView) view.findViewById(com.android.internal.R.id.title);
         init();
     }
 
@@ -142,6 +150,9 @@ public class VolumeSeekBarPreference extends SeekBarPreference {
                 mMuted = muted;
                 mZenMuted = zenMuted;
                 updateIconView();
+                if (mListener != null) {
+                    mListener.onUpdateMuteState();
+                }
             }
             @Override
             public void onStartTrackingTouch(SeekBarVolumizer sbv) {
@@ -165,6 +176,9 @@ public class VolumeSeekBarPreference extends SeekBarPreference {
         mVolumizer.setSeekBar(mSeekBar);
         updateIconView();
         updateSuppressionText();
+        if (mListener != null) {
+            mListener.onUpdateMuteState();
+        }
         if (!isEnabled()) {
             mSeekBar.setEnabled(false);
             mVolumizer.stop();
@@ -175,7 +189,7 @@ public class VolumeSeekBarPreference extends SeekBarPreference {
         if (mIconView == null) return;
         if (mIconResId != 0) {
             mIconView.setImageResource(mIconResId);
-        } else if (mMuteIconResId != 0 && mMuted && !mZenMuted) {
+        } else if (mMuteIconResId != 0 && isMuted()) {
             mIconView.setImageResource(mMuteIconResId);
         } else {
             mIconView.setImageDrawable(getIcon());
@@ -208,12 +222,29 @@ public class VolumeSeekBarPreference extends SeekBarPreference {
         updateSuppressionText();
     }
 
+    protected boolean isMuted() {
+        return mMuted && !mZenMuted;
+    }
+
     protected void updateSuppressionText() {
         if (mSuppressionTextView != null && mSeekBar != null) {
             mSuppressionTextView.setText(mSuppressionText);
             final boolean showSuppression = !TextUtils.isEmpty(mSuppressionText);
             mSuppressionTextView.setVisibility(showSuppression ? View.VISIBLE : View.GONE);
         }
+    }
+
+    /**
+     * Update content description of title to improve talkback announcements.
+     */
+    protected void updateContentDescription(CharSequence contentDescription) {
+        if (mTitle == null) return;
+        mTitle.setContentDescription(contentDescription);
+    }
+
+    protected void setAccessibilityLiveRegion(int mode) {
+        if (mTitle == null) return;
+        mTitle.setAccessibilityLiveRegion(mode);
     }
 
     public interface Callback {
@@ -224,5 +255,16 @@ public class VolumeSeekBarPreference extends SeekBarPreference {
          * Callback reporting that the seek bar is start tracking.
          */
         void onStartTrackingTouch(SeekBarVolumizer sbv);
+    }
+
+    /**
+     * Listener to view updates in volumeSeekbarPreference.
+     */
+    public interface Listener {
+
+        /**
+         * Listener to mute state updates.
+         */
+        void onUpdateMuteState();
     }
 }
