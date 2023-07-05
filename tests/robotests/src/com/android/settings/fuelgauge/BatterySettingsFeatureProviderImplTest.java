@@ -18,9 +18,6 @@ package com.android.settings.fuelgauge;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.eq;
-
 import android.content.Context;
 
 import androidx.test.core.app.ApplicationProvider;
@@ -43,11 +40,11 @@ public class BatterySettingsFeatureProviderImplTest {
 
     @Test
     public void isManufactureDateAvailable_returnFalse() {
-        assertThat(mImpl.isManufactureDateAvailable(eq(mContext), anyLong())).isFalse();
+        assertThat(mImpl.isManufactureDateAvailable(mContext, 1000L)).isFalse();
     }
 
     @Test
     public void isFirstUseDateAvailable_returnFalse() {
-        assertThat(mImpl.isFirstUseDateAvailable(eq(mContext), anyLong())).isFalse();
+        assertThat(mImpl.isFirstUseDateAvailable(mContext, 1000L)).isFalse();
     }
 }
