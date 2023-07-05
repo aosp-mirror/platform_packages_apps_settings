@@ -50,6 +50,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.StringJoiner;
 
 /**
  * An extra {@link UserHandle} can be specified in the intent as {@link EXTRA_USER}, if the user for
@@ -189,7 +190,7 @@ public class ChooseAccountPreferenceController extends BasePreferenceController 
                 mScreen.addPreference(p);
             }
         } else {
-            if (Log.isLoggable(TAG, Log.VERBOSE)) {
+            if (mAuthorities != null && Log.isLoggable(TAG, Log.VERBOSE)) {
                 final StringBuilder auths = new StringBuilder();
                 for (String a : mAuthorities) {
                     auths.append(a);
@@ -197,8 +198,14 @@ public class ChooseAccountPreferenceController extends BasePreferenceController 
                 }
                 Log.v(TAG, "No providers found for authorities: " + auths);
             }
+            if (mAccountTypesFilter != null) {
+                final StringJoiner types = new StringJoiner(", ", "", "");
+                mAccountTypesFilter.forEach(types::add);
+                Log.w(TAG, "No providers found for account types: " + types);
+            }
             mActivity.setResult(RESULT_CANCELED);
-            mActivity.finish();
+            // Do not finish activity to avoid the caller getting the existing account list because
+            // the prompt respond reveals that the input account does not exist.
         }
     }
 
