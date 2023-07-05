@@ -95,8 +95,6 @@ open class FeatureFactoryImpl : FeatureFactory() {
     override val hardwareInfoFeatureProvider: HardwareInfoFeatureProvider =
         HardwareInfoFeatureProviderImpl
 
-    override fun getSupportFeatureProvider(context: Context): SupportFeatureProvider? = null
-
     override val metricsFeatureProvider by lazy { SettingsMetricsFeatureProvider() }
 
     override fun getPowerUsageFeatureProvider(context: Context) = powerUsageFeatureProvider

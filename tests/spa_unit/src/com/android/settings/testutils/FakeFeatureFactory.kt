@@ -69,10 +69,6 @@ class FakeFeatureFactory : FeatureFactory() {
     override val hardwareInfoFeatureProvider: HardwareInfoFeatureProvider
         get() = TODO("Not yet implemented")
 
-    override fun getSupportFeatureProvider(context: Context): SupportFeatureProvider? {
-        TODO("Not yet implemented")
-    }
-
     override val metricsFeatureProvider = mockMetricsFeatureProvider
 
     override fun getPowerUsageFeatureProvider(context: Context): PowerUsageFeatureProvider {

@@ -144,7 +144,7 @@ public class FakeFeatureFactory extends FeatureFactory {
     }
 
     @Override
-    public SupportFeatureProvider getSupportFeatureProvider(Context context) {
+    public SupportFeatureProvider getSupportFeatureProvider() {
         return supportFeatureProvider;
     }
 

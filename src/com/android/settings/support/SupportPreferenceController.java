@@ -34,8 +34,7 @@ public class SupportPreferenceController extends BasePreferenceController {
 
     public SupportPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
-        mSupportFeatureProvider = FeatureFactory.getFactory(context)
-                .getSupportFeatureProvider(context);
+        mSupportFeatureProvider = FeatureFactory.getFeatureFactory().getSupportFeatureProvider();
     }
 
     public void setActivity(Activity activity) {
