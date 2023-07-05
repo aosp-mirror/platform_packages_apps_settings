@@ -22,6 +22,7 @@ import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_KEY;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_SUMMARY;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_TITLE;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_UNAVAILABLE_SLICE_SUBTITLE;
+import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_USER_RESTRICTION;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.settings.SettingsEnums;
@@ -189,7 +190,8 @@ class SliceDataConverter {
                             | MetadataFlag.FLAG_NEED_PREF_TITLE
                             | MetadataFlag.FLAG_NEED_PREF_ICON
                             | MetadataFlag.FLAG_NEED_PREF_SUMMARY
-                            | MetadataFlag.FLAG_UNAVAILABLE_SLICE_SUBTITLE);
+                            | MetadataFlag.FLAG_UNAVAILABLE_SLICE_SUBTITLE
+                            | MetadataFlag.FLAG_NEED_USER_RESTRICTION);
 
             for (Bundle bundle : metadata) {
                 // TODO (b/67996923) Non-controller Slices should become intent-only slices.
@@ -218,6 +220,7 @@ class SliceDataConverter {
                         METADATA_UNAVAILABLE_SLICE_SUBTITLE);
                 final boolean isPublicSlice = controller.isPublicSlice();
                 final int highlightMenuRes = controller.getSliceHighlightMenuRes();
+                final String userRestriction = bundle.getString(METADATA_USER_RESTRICTION);
 
                 final SliceData xmlSlice = new SliceData.Builder()
                         .setKey(key)
@@ -232,6 +235,7 @@ class SliceDataConverter {
                         .setUnavailableSliceSubtitle(unavailableSliceSubtitle)
                         .setIsPublicSlice(isPublicSlice)
                         .setHighlightMenuRes(highlightMenuRes)
+                        .setUserRestriction(userRestriction)
                         .build();
 
                 xmlSliceData.add(xmlSlice);

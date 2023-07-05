@@ -36,6 +36,7 @@
         android:icon="@drawable/ic_media_stream"
         android:title="@string/media_volume_option_title"
         android:order="-180"
+        settings:userRestriction="no_adjust_volume"
         settings:controller="com.android.settings.notification.MediaVolumePreferenceController"/>
 
     <!-- Media output switcher -->
@@ -53,6 +54,7 @@
         android:icon="@drawable/ic_local_phone_24_lib"
         android:title="@string/call_volume_option_title"
         android:order="-170"
+        settings:userRestriction="no_adjust_volume"
         settings:controller="com.android.settings.notification.CallVolumePreferenceController"/>
 
     <!-- Hands free profile output switcher -->
@@ -70,6 +72,7 @@
         android:icon="@drawable/ic_ring_volume"
         android:title="@string/separate_ring_volume_option_title"
         android:order="-155"
+        settings:userRestriction="no_adjust_volume"
         settings:controller="com.android.settings.notification.SeparateRingVolumePreferenceController"/>
 
     <!-- Notification volume -->
@@ -78,6 +81,7 @@
         android:icon="@drawable/ic_notifications"
         android:title="@string/notification_volume_option_title"
         android:order="-150"
+        settings:userRestriction="no_adjust_volume"
         settings:controller="com.android.settings.notification.NotificationVolumePreferenceController"
         settings:unavailableSliceSubtitle="@string/notification_volume_disabled_summary"/>
 
@@ -87,6 +91,7 @@
         android:icon="@*android:drawable/ic_audio_alarm"
         android:title="@string/alarm_volume_option_title"
         android:order="-140"
+        settings:userRestriction="no_adjust_volume"
         settings:controller="com.android.settings.notification.AlarmVolumePreferenceController"/>
 
     <!-- TODO(b/174964721): make this a PrimarySwitchPreference -->

@@ -74,7 +74,8 @@ public class PreferenceXmlParserUtils {
             MetadataFlag.FLAG_NEED_SEARCHABLE,
             MetadataFlag.FLAG_UNAVAILABLE_SLICE_SUBTITLE,
             MetadataFlag.FLAG_FOR_WORK,
-            MetadataFlag.FLAG_NEED_HIGHLIGHTABLE_MENU_KEY})
+            MetadataFlag.FLAG_NEED_HIGHLIGHTABLE_MENU_KEY,
+            MetadataFlag.FLAG_NEED_USER_RESTRICTION})
     @Retention(RetentionPolicy.SOURCE)
     public @interface MetadataFlag {
 
@@ -91,6 +92,7 @@ public class PreferenceXmlParserUtils {
         int FLAG_UNAVAILABLE_SLICE_SUBTITLE = 1 << 11;
         int FLAG_FOR_WORK = 1 << 12;
         int FLAG_NEED_HIGHLIGHTABLE_MENU_KEY = 1 << 13;
+        int FLAG_NEED_USER_RESTRICTION = 1 << 14;
     }
 
     public static final String METADATA_PREF_TYPE = "type";
@@ -105,6 +107,7 @@ public class PreferenceXmlParserUtils {
     public static final String METADATA_UNAVAILABLE_SLICE_SUBTITLE = "unavailable_slice_subtitle";
     public static final String METADATA_FOR_WORK = "for_work";
     public static final String METADATA_HIGHLIGHTABLE_MENU_KEY = "highlightable_menu_key";
+    public static final String METADATA_USER_RESTRICTION = "userRestriction";
 
     private static final String ENTRIES_SEPARATOR = "|";
 
@@ -257,9 +260,16 @@ public class PreferenceXmlParserUtils {
                 preferenceMetadata.putString(METADATA_HIGHLIGHTABLE_MENU_KEY,
                         getHighlightableMenuKey(preferenceAttributes));
             }
+            if (hasFlag(flags, MetadataFlag.FLAG_NEED_USER_RESTRICTION)) {
+                preferenceMetadata.putString(METADATA_USER_RESTRICTION,
+                        getUserRestriction(context, attrs));
+            }
             metadata.add(preferenceMetadata);
 
             preferenceAttributes.recycle();
+            if (preferenceScreenAttributes != null) {
+                preferenceScreenAttributes.recycle();
+            }
         } while ((type = parser.next()) != XmlPullParser.END_DOCUMENT
                 && (type != XmlPullParser.END_TAG || parser.getDepth() > outerDepth));
         parser.close();
@@ -350,5 +360,14 @@ public class PreferenceXmlParserUtils {
     private static boolean isForWork(TypedArray styledAttributes) {
         return styledAttributes.getBoolean(
                 R.styleable.Preference_forWork, false);
+    }
+
+    private static String getUserRestriction(Context context, AttributeSet attrs) {
+        TypedArray preferenceAttributes = context.obtainStyledAttributes(attrs,
+                R.styleable.RestrictedPreference);
+        String userRestriction = preferenceAttributes.getString(
+                R.styleable.RestrictedPreference_userRestriction);
+        preferenceAttributes.recycle();
+        return userRestriction;
     }
 }
