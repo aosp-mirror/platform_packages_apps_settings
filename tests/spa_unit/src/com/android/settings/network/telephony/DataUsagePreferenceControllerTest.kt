@@ -32,6 +32,7 @@ import com.android.dx.mockito.inline.extended.ExtendedMockito
 import com.android.settings.core.BasePreferenceController.AVAILABLE
 import com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE
 import com.android.settings.datausage.DataUsageUtils
+import com.android.settings.datausage.lib.DataUsageLib
 import com.android.settingslib.net.DataUsageController
 import com.android.settingslib.net.DataUsageController.DataUsageInfo
 import com.android.settingslib.spa.testutils.waitUntil
@@ -80,13 +81,14 @@ class DataUsagePreferenceControllerTest {
             .initMocks(this)
             .mockStatic(SubscriptionManager::class.java)
             .spyStatic(DataUsageUtils::class.java)
+            .spyStatic(DataUsageLib::class.java)
             .strictness(Strictness.LENIENT)
             .startMocking()
 
         whenever(SubscriptionManager.isValidSubscriptionId(SUB_ID)).thenReturn(true)
         ExtendedMockito.doReturn(true).`when` { DataUsageUtils.hasMobileData(context) }
         ExtendedMockito.doReturn(networkTemplate)
-            .`when` { DataUsageUtils.getMobileTemplate(context, SUB_ID) }
+            .`when` { DataUsageLib.getMobileTemplate(context, SUB_ID) }
         preference.key = TEST_KEY
         whenever(preferenceScreen.findPreference<Preference>(TEST_KEY)).thenReturn(preference)
 
@@ -122,7 +124,7 @@ class DataUsagePreferenceControllerTest {
         }
         whenever(dataUsageController.getDataUsageInfo(networkTemplate)).thenReturn(usageInfo)
         doNothing().`when`(context).startActivity(any())
-        controller.whenViewCreated(TestLifecycleOwner(initialState = Lifecycle.State.STARTED))
+        controller.onViewCreated(TestLifecycleOwner(initialState = Lifecycle.State.STARTED))
         waitUntil { preference.summary != null }
 
         controller.handlePreferenceTreeClick(preference)
@@ -138,7 +140,7 @@ class DataUsagePreferenceControllerTest {
     fun updateState_invalidSubId_disabled() = runTest {
         controller.init(SubscriptionManager.INVALID_SUBSCRIPTION_ID)
 
-        controller.whenViewCreated(TestLifecycleOwner(initialState = Lifecycle.State.STARTED))
+        controller.onViewCreated(TestLifecycleOwner(initialState = Lifecycle.State.STARTED))
 
         waitUntil { !preference.isEnabled }
     }
@@ -148,7 +150,7 @@ class DataUsagePreferenceControllerTest {
         val usageInfo = DataUsageInfo()
         whenever(dataUsageController.getDataUsageInfo(networkTemplate)).thenReturn(usageInfo)
 
-        controller.whenViewCreated(TestLifecycleOwner(initialState = Lifecycle.State.STARTED))
+        controller.onViewCreated(TestLifecycleOwner(initialState = Lifecycle.State.STARTED))
 
         waitUntil { !preference.isEnabled }
     }
@@ -160,7 +162,7 @@ class DataUsagePreferenceControllerTest {
         }
         whenever(dataUsageController.getDataUsageInfo(networkTemplate)).thenReturn(usageInfo)
 
-        controller.whenViewCreated(TestLifecycleOwner(initialState = Lifecycle.State.STARTED))
+        controller.onViewCreated(TestLifecycleOwner(initialState = Lifecycle.State.STARTED))
 
         waitUntil { preference.summary?.contains("1.00 MB") == true }
     }

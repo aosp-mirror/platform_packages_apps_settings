@@ -30,6 +30,7 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
 import com.android.settings.R
 import com.android.settings.datausage.DataUsageUtils
+import com.android.settings.datausage.lib.DataUsageLib
 import com.android.settingslib.net.DataUsageController
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -63,7 +64,7 @@ class DataUsagePreferenceController(context: Context, key: String) :
         preference = screen.findPreference(preferenceKey)!!
     }
 
-    fun whenViewCreated(viewLifecycleOwner: LifecycleOwner) {
+    override fun onViewCreated(viewLifecycleOwner: LifecycleOwner) {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 update()
@@ -96,7 +97,7 @@ class DataUsagePreferenceController(context: Context, key: String) :
 
     private fun getNetworkTemplate(): NetworkTemplate? = when {
         SubscriptionManager.isValidSubscriptionId(mSubId) -> {
-            DataUsageUtils.getMobileTemplate(mContext, mSubId)
+            DataUsageLib.getMobileTemplate(mContext, mSubId)
         }
 
         else -> null
