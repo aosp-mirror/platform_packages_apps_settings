@@ -43,7 +43,6 @@ import com.android.settings.enterprise.EnterprisePrivacyFeatureProviderImpl
 import com.android.settings.fuelgauge.BatterySettingsFeatureProviderImpl
 import com.android.settings.fuelgauge.BatteryStatusFeatureProviderImpl
 import com.android.settings.fuelgauge.PowerUsageFeatureProviderImpl
-import com.android.settings.gestures.AssistGestureFeatureProviderImpl
 import com.android.settings.homepage.contextualcards.ContextualCardFeatureProviderImpl
 import com.android.settings.inputmethod.KeyboardSettingsFeatureProvider
 import com.android.settings.inputmethod.KeyboardSettingsFeatureProviderImpl
@@ -136,8 +135,6 @@ open class FeatureFactoryImpl : FeatureFactory() {
     }
 
     override fun getUserFeatureProvider(context: Context) = userFeatureProvider
-
-    override val assistGestureFeatureProvider by lazy { AssistGestureFeatureProviderImpl() }
 
     override val slicesFeatureProvider by lazy { SlicesFeatureProviderImpl() }
 

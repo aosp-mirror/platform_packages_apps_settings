@@ -30,7 +30,6 @@ import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider
 import com.android.settings.fuelgauge.BatterySettingsFeatureProvider
 import com.android.settings.fuelgauge.BatteryStatusFeatureProvider
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider
-import com.android.settings.gestures.AssistGestureFeatureProvider
 import com.android.settings.homepage.contextualcards.ContextualCardFeatureProvider
 import com.android.settings.inputmethod.KeyboardSettingsFeatureProvider
 import com.android.settings.localepicker.LocaleFeatureProvider
@@ -54,8 +53,6 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider
  * To provide a factory implementation, implementors should call [setFactory] in their Application.
  */
 abstract class FeatureFactory {
-    abstract val assistGestureFeatureProvider: AssistGestureFeatureProvider
-
     /**
      * Gets implementation for the Suggestion Feature provider.
      */

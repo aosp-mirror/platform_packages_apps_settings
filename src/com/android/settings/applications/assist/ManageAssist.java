@@ -21,7 +21,6 @@ import android.content.Context;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.gestures.AssistGestureSettingsPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -57,12 +56,6 @@ public class ManageAssist extends DashboardFragment {
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.APPLICATIONS_MANAGE_ASSIST;
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        use(AssistGestureSettingsPreferenceController.class).setAssistOnly(true);
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
