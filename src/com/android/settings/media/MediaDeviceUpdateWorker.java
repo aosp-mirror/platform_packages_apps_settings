@@ -239,7 +239,7 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
      */
     public void adjustVolume(MediaDevice device, int volume) {
         ThreadUtils.postOnBackgroundThread(() -> {
-            device.requestSetVolume(volume);
+            mLocalMediaManager.adjustDeviceVolume(device, volume);
         });
     }
 
