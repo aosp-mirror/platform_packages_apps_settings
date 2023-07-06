@@ -73,9 +73,7 @@ abstract class FeatureFactory {
     /**
      * Retrieves implementation for Battery Status feature.
      */
-    abstract fun getBatteryStatusFeatureProvider(
-        context: Context
-    ): BatteryStatusFeatureProvider
+    abstract val batteryStatusFeatureProvider: BatteryStatusFeatureProvider
 
     /**
      * Gets implementation for Battery Settings provider.

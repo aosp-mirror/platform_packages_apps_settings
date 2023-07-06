@@ -36,7 +36,6 @@ import com.android.settings.inputmethod.KeyboardSettingsFeatureProvider
 import com.android.settings.localepicker.LocaleFeatureProvider
 import com.android.settings.overlay.DockUpdaterFeatureProvider
 import com.android.settings.overlay.FeatureFactory
-import com.android.settings.overlay.SupportFeatureProvider
 import com.android.settings.overlay.SurveyFeatureProvider
 import com.android.settings.panel.PanelFeatureProvider
 import com.android.settings.search.SearchFeatureProvider
@@ -72,9 +71,8 @@ class FakeFeatureFactory : FeatureFactory() {
         TODO("Not yet implemented")
     }
 
-    override fun getBatteryStatusFeatureProvider(context: Context): BatteryStatusFeatureProvider {
-        TODO("Not yet implemented")
-    }
+    override val batteryStatusFeatureProvider: BatteryStatusFeatureProvider
+        get() = TODO("Not yet implemented")
 
     override val batterySettingsFeatureProvider: BatterySettingsFeatureProvider
         get() = TODO("Not yet implemented")

@@ -27,10 +27,10 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.Utils;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
-import com.android.settingslib.Utils;
 import com.android.settingslib.utils.ThreadUtils;
 
 public class TopLevelBatteryPreferenceController extends BasePreferenceController implements
@@ -66,8 +66,8 @@ public class TopLevelBatteryPreferenceController extends BasePreferenceControlle
             }, true /* shortString */);
         });
 
-        mBatteryStatusFeatureProvider = FeatureFactory.getFactory(context)
-                .getBatteryStatusFeatureProvider(context);
+        mBatteryStatusFeatureProvider = FeatureFactory.getFeatureFactory()
+                .getBatteryStatusFeatureProvider();
     }
 
     @Override

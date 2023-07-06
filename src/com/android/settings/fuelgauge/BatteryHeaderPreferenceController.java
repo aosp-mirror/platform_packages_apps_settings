@@ -18,7 +18,6 @@ package com.android.settings.fuelgauge;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.icu.text.NumberFormat;
 import android.os.BatteryManager;
 import android.os.PowerManager;
@@ -67,8 +66,8 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
     public BatteryHeaderPreferenceController(Context context, String key) {
         super(context, key);
         mPowerManager = context.getSystemService(PowerManager.class);
-        mBatteryStatusFeatureProvider = FeatureFactory.getFactory(context)
-                .getBatteryStatusFeatureProvider(context);
+        mBatteryStatusFeatureProvider = FeatureFactory.getFeatureFactory()
+                .getBatteryStatusFeatureProvider();
     }
 
     public void setActivity(Activity activity) {
