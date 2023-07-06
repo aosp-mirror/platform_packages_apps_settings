@@ -701,10 +701,10 @@ public class WifiDetailPreferenceController2Test {
     }
 
     @Test
-    public void linkSpeedPref_shouldNotShowIfNotSet() {
+    public void linkSpeedPref_shouldNotShowIfSpeedStringIsEmpty() {
         setUpForConnectedNetwork();
         setUpSpyController();
-        when(mMockWifiInfo.getTxLinkSpeedMbps()).thenReturn(WifiInfo.LINK_SPEED_UNKNOWN);
+        when(mMockWifiEntry.getTxSpeedString()).thenReturn("");
 
         displayAndResume();
 
@@ -712,42 +712,22 @@ public class WifiDetailPreferenceController2Test {
     }
 
     @Test
-    public void linkSpeedPref_shouldVisibleForConnectedNetwork() {
+    public void linkSpeedPref_shouldBeVisibleIfSpeedStringIsNotEmpty() {
         setUpForConnectedNetwork();
         setUpSpyController();
-        String expectedLinkSpeed = mContext.getString(R.string.tx_link_speed, TX_LINK_SPEED);
+        when(mMockWifiEntry.getTxSpeedString()).thenReturn("100 Mbps");
 
         displayAndResume();
 
         verify(mMockTxLinkSpeedPref).setVisible(true);
-        verify(mMockTxLinkSpeedPref).setSummary(expectedLinkSpeed);
+        verify(mMockTxLinkSpeedPref).setSummary("100 Mbps");
     }
 
     @Test
-    public void linkSpeedPref_shouldInvisibleForDisconnectedNetwork() {
-        setUpForDisconnectedNetwork();
-
-        displayAndResume();
-
-        verify(mMockTxLinkSpeedPref).setVisible(false);
-        verify(mMockTxLinkSpeedPref, never()).setSummary(any(String.class));
-    }
-
-    @Test
-    public void linkSpeedPref_shouldInvisibleForNotInRangeNetwork() {
-        setUpForNotInRangeNetwork();
-
-        displayAndResume();
-
-        verify(mMockTxLinkSpeedPref).setVisible(false);
-        verify(mMockTxLinkSpeedPref, never()).setSummary(any(String.class));
-    }
-
-    @Test
-    public void rxLinkSpeedPref_shouldNotShowIfNotSet() {
+    public void rxLinkSpeedPref_shouldNotShowIfSpeedStringIsEmpty() {
         setUpForConnectedNetwork();
         setUpSpyController();
-        when(mMockWifiInfo.getRxLinkSpeedMbps()).thenReturn(WifiInfo.LINK_SPEED_UNKNOWN);
+        when(mMockWifiEntry.getRxSpeedString()).thenReturn("");
 
         displayAndResume();
 
@@ -755,35 +735,15 @@ public class WifiDetailPreferenceController2Test {
     }
 
     @Test
-    public void rxLinkSpeedPref_shouldVisibleForConnectedNetwork() {
+    public void rxLinkSpeedPref_shouldBeVisibleIfSpeedStringIsNotEmpty() {
         setUpForConnectedNetwork();
         setUpSpyController();
-        String expectedLinkSpeed = mContext.getString(R.string.rx_link_speed, RX_LINK_SPEED);
+        when(mMockWifiEntry.getRxSpeedString()).thenReturn("100 Mbps");
 
         displayAndResume();
 
         verify(mMockRxLinkSpeedPref).setVisible(true);
-        verify(mMockRxLinkSpeedPref).setSummary(expectedLinkSpeed);
-    }
-
-    @Test
-    public void rxLinkSpeedPref_shouldInvisibleForDisconnectedNetwork() {
-        setUpForDisconnectedNetwork();
-
-        displayAndResume();
-
-        verify(mMockRxLinkSpeedPref).setVisible(false);
-        verify(mMockRxLinkSpeedPref, never()).setSummary(any(String.class));
-    }
-
-    @Test
-    public void rxLinkSpeedPref_shouldInvisibleForNotInRangeNetwork() {
-        setUpForNotInRangeNetwork();
-
-        displayAndResume();
-
-        verify(mMockRxLinkSpeedPref).setVisible(false);
-        verify(mMockRxLinkSpeedPref, never()).setSummary(any(String.class));
+        verify(mMockRxLinkSpeedPref).setSummary("100 Mbps");
     }
 
     @Test

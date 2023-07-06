@@ -637,29 +637,23 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
     }
 
     private void refreshTxSpeed() {
-        if (mWifiInfo == null
-                || mWifiEntry.getConnectedState() != WifiEntry.CONNECTED_STATE_CONNECTED) {
+        String summary = mWifiEntry.getTxSpeedString();
+        if (TextUtils.isEmpty(summary)) {
             mTxLinkSpeedPref.setVisible(false);
             return;
         }
-
-        int txLinkSpeedMbps = mWifiInfo.getTxLinkSpeedMbps();
-        mTxLinkSpeedPref.setVisible(txLinkSpeedMbps >= 0);
-        mTxLinkSpeedPref.setSummary(mContext.getString(
-                R.string.tx_link_speed, mWifiInfo.getTxLinkSpeedMbps()));
+        mTxLinkSpeedPref.setVisible(true);
+        mTxLinkSpeedPref.setSummary(summary);
     }
 
     private void refreshRxSpeed() {
-        if (mWifiInfo == null
-                || mWifiEntry.getConnectedState() != WifiEntry.CONNECTED_STATE_CONNECTED) {
+        String summary = mWifiEntry.getRxSpeedString();
+        if (TextUtils.isEmpty(summary)) {
             mRxLinkSpeedPref.setVisible(false);
             return;
         }
-
-        int rxLinkSpeedMbps = mWifiInfo.getRxLinkSpeedMbps();
-        mRxLinkSpeedPref.setVisible(rxLinkSpeedMbps >= 0);
-        mRxLinkSpeedPref.setSummary(mContext.getString(
-                R.string.rx_link_speed, mWifiInfo.getRxLinkSpeedMbps()));
+        mRxLinkSpeedPref.setVisible(true);
+        mRxLinkSpeedPref.setSummary(summary);
     }
 
     private void refreshSsid() {
