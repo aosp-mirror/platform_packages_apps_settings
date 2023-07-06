@@ -1092,9 +1092,9 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         }
     }
 
-    @SuppressWarnings("MissingSuperCall") // TODO: Fix me
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
         maybeHideSfpsText(newConfig);
         switch(newConfig.orientation) {
             case Configuration.ORIENTATION_LANDSCAPE: {
