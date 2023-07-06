@@ -34,14 +34,11 @@ public class GuestTelephonyPreferenceController extends TogglePreferenceControll
 
     private final UserManager mUserManager;
     private final UserCapabilities mUserCaps;
-    private Bundle mDefaultGuestRestrictions;
 
     public GuestTelephonyPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         mUserManager = context.getSystemService(UserManager.class);
         mUserCaps = UserCapabilities.create(context);
-        mDefaultGuestRestrictions = mUserManager.getDefaultGuestRestrictions();
-        mDefaultGuestRestrictions.putBoolean(UserManager.DISALLOW_SMS, true);
     }
 
     @Override
@@ -55,13 +52,16 @@ public class GuestTelephonyPreferenceController extends TogglePreferenceControll
 
     @Override
     public boolean isChecked() {
-        return !mDefaultGuestRestrictions.getBoolean(UserManager.DISALLOW_OUTGOING_CALLS, false);
+        return !mUserManager.getDefaultGuestRestrictions()
+                .getBoolean(UserManager.DISALLOW_OUTGOING_CALLS, false);
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        mDefaultGuestRestrictions.putBoolean(UserManager.DISALLOW_OUTGOING_CALLS, !isChecked);
-        mUserManager.setDefaultGuestRestrictions(mDefaultGuestRestrictions);
+        Bundle guestRestrictions = mUserManager.getDefaultGuestRestrictions();
+        guestRestrictions.putBoolean(UserManager.DISALLOW_SMS, true);
+        guestRestrictions.putBoolean(UserManager.DISALLOW_OUTGOING_CALLS, !isChecked);
+        mUserManager.setDefaultGuestRestrictions(guestRestrictions);
         return true;
     }
 
@@ -74,7 +74,7 @@ public class GuestTelephonyPreferenceController extends TogglePreferenceControll
     public void updateState(Preference preference) {
         super.updateState(preference);
         mUserCaps.updateAddUserCapabilities(mContext);
-        preference.setVisible(isAvailable() && mUserCaps.mUserSwitcherEnabled && mContext
-                .getPackageManager().hasSystemFeature(PackageManager.FEATURE_TELEPHONY));
+        preference.setVisible(isAvailable() && mUserCaps.mUserSwitcherEnabled
+                && mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_TELEPHONY));
     }
 }
