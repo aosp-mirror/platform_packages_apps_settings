@@ -260,7 +260,9 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
                 META_DATA_PREFERENCE_TITLE_URI)) {
             // Set a placeholder title before starting to fetch real title, this is necessary
             // to avoid preference height change.
-            preference.setTitle(R.string.summary_placeholder);
+            if (preference.getTitle() == null) {
+                preference.setTitle(R.string.summary_placeholder);
+            }
 
             final Uri uri = TileUtils.getCompleteUri(tile, META_DATA_PREFERENCE_TITLE_URI,
                     METHOD_GET_DYNAMIC_TITLE);
@@ -288,7 +290,9 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
                 && tile.getMetaData().containsKey(META_DATA_PREFERENCE_SUMMARY_URI)) {
             // Set a placeholder summary before starting to fetch real summary, this is necessary
             // to avoid preference height change.
-            preference.setSummary(R.string.summary_placeholder);
+            if (preference.getSummary() == null) {
+                preference.setSummary(R.string.summary_placeholder);
+            }
 
             final Uri uri = TileUtils.getCompleteUri(tile, META_DATA_PREFERENCE_SUMMARY_URI,
                     METHOD_GET_DYNAMIC_SUMMARY);
@@ -382,10 +386,8 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         // Icon provided by the content provider overrides any static icon.
         if (tile.getMetaData() != null
                 && tile.getMetaData().containsKey(META_DATA_PREFERENCE_ICON_URI)) {
-            // Set a transparent color before starting to fetch the real icon, this is necessary
-            // to avoid preference padding change.
-            setPreferenceIcon(preference, tile, forceRoundedIcon, mContext.getPackageName(),
-                    Icon.createWithResource(mContext, android.R.color.transparent));
+            // Reserve the icon space to avoid preference padding change.
+            preference.setIconSpaceReserved(true);
 
             ThreadUtils.postOnBackgroundThread(() -> {
                 final Intent intent = tile.getIntent();

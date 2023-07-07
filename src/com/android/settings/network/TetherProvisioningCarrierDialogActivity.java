@@ -35,7 +35,7 @@ public class TetherProvisioningCarrierDialogActivity extends Activity {
                 .setTitle(R.string.wifi_tether_carrier_unsupport_dialog_title)
                 .setMessage(R.string.wifi_tether_carrier_unsupport_dialog_content)
                 .setCancelable(false)
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
                         finish();

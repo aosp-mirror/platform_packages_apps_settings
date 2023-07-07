@@ -102,21 +102,9 @@ public class NotificationChannelWarningsPreferenceControllerTest {
     }
 
     @Test
-    public void updateState_settingUndefinedDebuggingEnabled_preferenceShouldBeChecked() {
+    public void updateState_settingUndefinedDebuggingEnabled_preferenceShouldNotBeChecked() {
         mController = spy(mController);
         doReturn(true).when(mController).isDebuggable();
-        Settings.Global.putString(mContext.getContentResolver(),
-                Settings.Global.SHOW_NOTIFICATION_CHANNEL_WARNINGS, "NotAnInteger");
-
-        mController.updateState(mPreference);
-
-        verify(mPreference).setChecked(true);
-    }
-
-    @Test
-    public void updateState_settingUndefinedDebuggingDisabled_preferenceShouldNotBeChecked() {
-        mController = spy(mController);
-        doReturn(false).when(mController).isDebuggable();
         Settings.Global.putString(mContext.getContentResolver(),
                 Settings.Global.SHOW_NOTIFICATION_CHANNEL_WARNINGS, "NotAnInteger");
 

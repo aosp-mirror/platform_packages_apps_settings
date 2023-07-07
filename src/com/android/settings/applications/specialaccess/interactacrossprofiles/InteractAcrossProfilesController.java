@@ -25,6 +25,7 @@ import android.os.UserManager;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settingslib.utils.StringUtil;
 
 import java.util.List;
 
@@ -66,9 +67,7 @@ public class InteractAcrossProfilesController extends BasePreferenceController {
         return connectedApps == 0
                 ? mContext.getResources().getString(
                         R.string.interact_across_profiles_number_of_connected_apps_none)
-                : mContext.getResources().getQuantityString(
-                        R.plurals.interact_across_profiles_number_of_connected_apps,
-                        connectedApps,
-                        connectedApps);
+                : StringUtil.getIcuPluralsString(mContext, connectedApps,
+                R.string.interact_across_profiles_number_of_connected_apps);
     }
 }

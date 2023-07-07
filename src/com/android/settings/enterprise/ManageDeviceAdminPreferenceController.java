@@ -21,6 +21,7 @@ import android.content.Context;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.utils.StringUtil;
 
 
 public class ManageDeviceAdminPreferenceController extends BasePreferenceController {
@@ -47,8 +48,8 @@ public class ManageDeviceAdminPreferenceController extends BasePreferenceControl
         }
 
         // TODO: override
-        return mContext.getResources().getQuantityString(R.plurals.number_of_device_admins,
-                        activeAdmins, activeAdmins);
+        return StringUtil.getIcuPluralsString(mContext, activeAdmins,
+                R.string.number_of_device_admins);
     }
 
     @Override

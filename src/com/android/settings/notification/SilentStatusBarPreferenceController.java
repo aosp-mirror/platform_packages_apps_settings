@@ -17,6 +17,7 @@
 package com.android.settings.notification;
 
 import android.content.Context;
+import android.os.UserManager;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
@@ -51,7 +52,7 @@ public class SilentStatusBarPreferenceController extends TogglePreferenceControl
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return UserManager.get(mContext).isGuestUser() ? DISABLED_FOR_USER : AVAILABLE;
     }
 
     @Override

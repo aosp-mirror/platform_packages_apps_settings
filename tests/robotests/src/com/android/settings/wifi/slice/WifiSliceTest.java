@@ -33,6 +33,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
+import android.os.UserManager;
 
 import androidx.slice.Slice;
 import androidx.slice.SliceItem;
@@ -84,6 +85,8 @@ public class WifiSliceTest {
     @Spy
     Context mContext = ApplicationProvider.getApplicationContext();
     @Mock
+    private UserManager mUserManager;
+    @Mock
     private WifiManager mWifiManager;
     @Mock
     private PackageManager mPackageManager;
@@ -98,6 +101,8 @@ public class WifiSliceTest {
     @Before
     public void setUp() {
         doReturn(mResolver).when(mContext).getContentResolver();
+        doReturn(mUserManager).when(mContext).getSystemService(UserManager.class);
+        doReturn(false).when(mUserManager).isGuestUser();
         doReturn(mWifiManager).when(mContext).getSystemService(WifiManager.class);
         doReturn(WifiManager.WIFI_STATE_ENABLED).when(mWifiManager).getWifiState();
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
@@ -112,6 +117,33 @@ public class WifiSliceTest {
         when(mPackageManager.getNameForUid(USER_ID)).thenReturn(mSIPackageName);
         ShadowWifiSlice.setWifiPermissible(true);
         mWifiSlice = new WifiSlice(mContext, mWifiRestriction);
+    }
+
+    @Test
+    public void getWifiSlice_isGuestUser_shouldReturnNoToggle() {
+        doReturn(true).when(mUserManager).isGuestUser();
+
+        final Slice wifiSlice = mWifiSlice.getSlice();
+        final SliceMetadata metadata = SliceMetadata.from(mContext, wifiSlice);
+        final List<SliceAction> toggles = metadata.getToggles();
+        assertThat(toggles).hasSize(0);
+
+        final int rows = SliceQuery.findAll(wifiSlice, FORMAT_SLICE, HINT_LIST_ITEM,
+                null /* nonHints */).size();
+        // Title row
+        assertThat(rows).isEqualTo(1);
+    }
+
+    @Test
+    public void getWifiSlice_isNotGuestUser_shouldHaveTitleAndToggle() {
+        doReturn(false).when(mUserManager).isGuestUser();
+
+        final Slice wifiSlice = mWifiSlice.getSlice();
+        assertThat(wifiSlice).isNotNull();
+
+        final SliceMetadata metadata = SliceMetadata.from(mContext, wifiSlice);
+        final List<SliceAction> toggles = metadata.getToggles();
+        assertThat(toggles).hasSize(1);
     }
 
     @Test
