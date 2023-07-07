@@ -217,41 +217,6 @@ public class BatteryUtilsTest {
     }
 
     @Test
-    public void testShouldHideSystemConsumer_TypeIdle_ReturnTrue() {
-        assertThat(mBatteryUtils.shouldHideDevicePowerComponent(mAggregateBatteryConsumer,
-                BatteryConsumer.POWER_COMPONENT_IDLE)).isTrue();
-    }
-
-    @Test
-    public void testShouldHideSystemConsumer_TypeMobileRadio_ReturnTrue() {
-        assertThat(mBatteryUtils.shouldHideDevicePowerComponent(mAggregateBatteryConsumer,
-                BatteryConsumer.POWER_COMPONENT_MOBILE_RADIO)).isTrue();
-    }
-
-    @Test
-    public void testShouldHideSystemConsumer_TypeScreen_ReturnTrue() {
-        assertThat(mBatteryUtils.shouldHideDevicePowerComponent(mAggregateBatteryConsumer,
-                BatteryConsumer.POWER_COMPONENT_SCREEN)).isTrue();
-    }
-
-    @Test
-    public void testShouldHideSystemConsumer_TypeBluetooth_ReturnTrue() {
-        assertThat(mBatteryUtils.shouldHideDevicePowerComponent(mAggregateBatteryConsumer,
-                BatteryConsumer.POWER_COMPONENT_BLUETOOTH)).isTrue();    }
-
-    @Test
-    public void testShouldHideSystemConsumer_TypeWifi_ReturnTrue() {
-        assertThat(mBatteryUtils.shouldHideDevicePowerComponent(mAggregateBatteryConsumer,
-                BatteryConsumer.POWER_COMPONENT_WIFI)).isTrue();
-    }
-
-    @Test
-    public void testShouldHideSystemConsumer_OtherType_ReturnFalse() {
-        assertThat(mBatteryUtils.shouldHideDevicePowerComponent(mAggregateBatteryConsumer,
-                BatteryConsumer.POWER_COMPONENT_FLASHLIGHT)).isFalse();
-    }
-
-    @Test
     public void testCalculateBatteryPercent() {
         assertThat(mBatteryUtils.calculateBatteryPercent(BATTERY_SYSTEM_USAGE, TOTAL_BATTERY_USAGE,
                 DISCHARGE_AMOUNT))
@@ -433,7 +398,8 @@ public class BatteryUtilsTest {
     @Test
     public void testShouldHideAnomaly_AppInDozeList_returnTrue() {
         doReturn(new String[]{HIGH_SDK_PACKAGE}).when(mPackageManager).getPackagesForUid(UID);
-        doReturn(true).when(mPowerAllowlistBackend).isAllowlisted(new String[]{HIGH_SDK_PACKAGE});
+        doReturn(true).when(mPowerAllowlistBackend)
+                .isAllowlisted(new String[]{HIGH_SDK_PACKAGE}, UID);
 
         assertThat(mBatteryUtils.shouldHideAnomaly(mPowerAllowlistBackend, UID,
                 mAnomalyInfo)).isTrue();
@@ -521,32 +487,32 @@ public class BatteryUtilsTest {
     }
 
     @Test
-    public void testIsBatteryDefenderOn_isOverheatedAndIsCharging_returnTrue() {
-        mBatteryInfo.isOverheated = true;
+    public void testIsBatteryDefenderOn_isDefenderAndIsCharging_returnTrue() {
+        mBatteryInfo.isBatteryDefender = true;
         mBatteryInfo.discharging = false;
 
         assertThat(mBatteryUtils.isBatteryDefenderOn(mBatteryInfo)).isTrue();
     }
 
     @Test
-    public void testIsBatteryDefenderOn_isOverheatedAndDischarging_returnFalse() {
-        mBatteryInfo.isOverheated = true;
+    public void testIsBatteryDefenderOn_isDefenderAndDischarging_returnFalse() {
+        mBatteryInfo.isBatteryDefender = true;
         mBatteryInfo.discharging = true;
 
         assertThat(mBatteryUtils.isBatteryDefenderOn(mBatteryInfo)).isFalse();
     }
 
     @Test
-    public void testIsBatteryDefenderOn_notOverheatedAndDischarging_returnFalse() {
-        mBatteryInfo.isOverheated = false;
+    public void testIsBatteryDefenderOn_notDefenderAndDischarging_returnFalse() {
+        mBatteryInfo.isBatteryDefender = false;
         mBatteryInfo.discharging = true;
 
         assertThat(mBatteryUtils.isBatteryDefenderOn(mBatteryInfo)).isFalse();
     }
 
     @Test
-    public void testIsBatteryDefenderOn_notOverheatedAndIsCharging_returnFalse() {
-        mBatteryInfo.isOverheated = false;
+    public void testIsBatteryDefenderOn_notDefenderAndIsCharging_returnFalse() {
+        mBatteryInfo.isBatteryDefender = false;
         mBatteryInfo.discharging = false;
 
         assertThat(mBatteryUtils.isBatteryDefenderOn(mBatteryInfo)).isFalse();

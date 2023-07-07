@@ -68,25 +68,41 @@ public class SlicePreferenceController extends BasePreferenceController implemen
         });
 
         //TODO(b/120803703): figure out why we need to remove observer first
-        mLiveData.removeObserver(this);
+        removeLiveDataObserver();
     }
 
     @Override
     public void onStart() {
-        if (mLiveData != null) {
+        if (mLiveData == null) {
+            return;
+        }
+
+        try {
             mLiveData.observeForever(this);
+        } catch (SecurityException e) {
+            Log.w(TAG, "observeForever - no permission");
         }
     }
 
     @Override
     public void onStop() {
-        if (mLiveData != null) {
-            mLiveData.removeObserver(this);
-        }
+        removeLiveDataObserver();
     }
 
     @Override
     public void onChanged(Slice slice) {
         mSlicePreference.onSliceUpdated(slice);
+    }
+
+    private void removeLiveDataObserver() {
+        if (mLiveData == null) {
+            return;
+        }
+
+        try {
+            mLiveData.removeObserver(this);
+        } catch (SecurityException e) {
+            Log.w(TAG, "removeLiveDataObserver - no permission");
+        }
     }
 }

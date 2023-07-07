@@ -111,7 +111,7 @@ public class DoubleTapPowerPreferenceControllerTest {
                 com.android.internal.R.bool.config_cameraDoubleTapPowerGestureEnabled, true);
         // No stored value in shared preferences if not visited yet.
         final SharedPreferences prefs =
-                new SuggestionFeatureProviderImpl(mContext).getSharedPrefs(mContext);
+                new SuggestionFeatureProviderImpl().getSharedPrefs(mContext);
         assertThat(isSuggestionComplete(mContext, prefs)).isFalse();
     }
 
@@ -121,7 +121,7 @@ public class DoubleTapPowerPreferenceControllerTest {
                 com.android.internal.R.bool.config_cameraDoubleTapPowerGestureEnabled, true);
         // No stored value in shared preferences if not visited yet.
         final SharedPreferences prefs =
-                new SuggestionFeatureProviderImpl(mContext).getSharedPrefs(mContext);
+                new SuggestionFeatureProviderImpl().getSharedPrefs(mContext);
         prefs.edit().putBoolean(DoubleTapPowerSettings.PREF_KEY_SUGGESTION_COMPLETE, true).commit();
 
         assertThat(isSuggestionComplete(mContext, prefs)).isTrue();

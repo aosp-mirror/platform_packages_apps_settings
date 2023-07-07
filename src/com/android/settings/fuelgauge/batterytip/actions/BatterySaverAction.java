@@ -16,6 +16,8 @@
 
 package com.android.settings.fuelgauge.batterytip.actions;
 
+import static com.android.settingslib.fuelgauge.BatterySaverLogging.SAVER_ENABLED_UNKNOWN;
+
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 
@@ -31,7 +33,8 @@ public class BatterySaverAction extends BatteryTipAction {
      */
     @Override
     public void handlePositiveAction(int metricsKey) {
-        BatterySaverUtils.setPowerSaveMode(mContext, true, /*needFirstTimeWarning*/ true);
+        BatterySaverUtils.setPowerSaveMode(mContext, true, /*needFirstTimeWarning*/ true,
+                SAVER_ENABLED_UNKNOWN);
         mMetricsFeatureProvider.action(mContext,
                 SettingsEnums.ACTION_TIP_TURN_ON_BATTERY_SAVER, metricsKey);
     }

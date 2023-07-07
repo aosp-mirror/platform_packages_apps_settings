@@ -20,6 +20,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 import android.os.SystemProperties;
+import android.provider.Settings;
 
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -36,11 +37,14 @@ public class TranscodeDefaultOptionPreferenceControllerTest {
             "persist.sys.fuse.transcode_default";
 
     private TranscodeDefaultOptionPreferenceController mUnderTest;
+    private Context mContext;
 
     @Before
     public void setUp() {
-        Context context = ApplicationProvider.getApplicationContext();
-        mUnderTest = new TranscodeDefaultOptionPreferenceController(context, "some_key");
+        mContext = ApplicationProvider.getApplicationContext();
+        mUnderTest = new TranscodeDefaultOptionPreferenceController(mContext, "some_key");
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 1);
     }
 
     @Test
@@ -73,5 +77,13 @@ public class TranscodeDefaultOptionPreferenceControllerTest {
     public void getAvailabilityStatus_shouldReturnAVAILABLE() {
         assertThat(mUnderTest.getAvailabilityStatus()).isEqualTo(
                 BasePreferenceController.AVAILABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_developerOptionFalse_shouldReturnUNAVAILABLE() {
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0);
+        assertThat(mUnderTest.getAvailabilityStatus()).isEqualTo(
+                BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
     }
 }

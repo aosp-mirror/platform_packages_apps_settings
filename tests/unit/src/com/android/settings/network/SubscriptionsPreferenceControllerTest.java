@@ -275,7 +275,8 @@ public class SubscriptionsPreferenceControllerTest {
                 true, ServiceState.STATE_IN_SERVICE);
         doReturn(mock(MobileMappings.Config.class)).when(sInjector).getConfig(mContext);
         doReturn(networkType)
-                .when(sInjector).getNetworkType(any(), any(), any(), anyInt(), eq(false));
+                .when(sInjector).getNetworkType(any(), any(), any(), anyInt(), eq(false),
+                        eq(false));
 
         mController.onResume();
         mController.displayPreference(mPreferenceScreen);
@@ -295,7 +296,7 @@ public class SubscriptionsPreferenceControllerTest {
                 true, ServiceState.STATE_IN_SERVICE);
         doReturn(mock(MobileMappings.Config.class)).when(sInjector).getConfig(mContext);
         doReturn(networkType)
-                .when(sInjector).getNetworkType(any(), any(), any(), anyInt(), eq(true));
+                .when(sInjector).getNetworkType(any(), any(), any(), anyInt(), eq(true), eq(false));
         doReturn(true).when(mWifiPickerTrackerHelper).isCarrierNetworkActive();
 
         mController.onResume();
@@ -317,7 +318,8 @@ public class SubscriptionsPreferenceControllerTest {
         setupGetIconConditions(sub.get(0).getSubscriptionId(), false, false,
                 true, ServiceState.STATE_IN_SERVICE);
         doReturn(networkType)
-                .when(sInjector).getNetworkType(any(), any(), any(), anyInt(), eq(false));
+                .when(sInjector).getNetworkType(any(), any(), any(), anyInt(), eq(false),
+                        eq(false));
 
         mController.onResume();
         mController.displayPreference(mPreferenceScreen);
@@ -336,7 +338,8 @@ public class SubscriptionsPreferenceControllerTest {
         setupGetIconConditions(sub.get(0).getSubscriptionId(), false, true,
                 true, ServiceState.STATE_IN_SERVICE);
         doReturn(networkType)
-                .when(sInjector).getNetworkType(any(), any(), any(), anyInt(), eq(false));
+                .when(sInjector).getNetworkType(any(), any(), any(), anyInt(), eq(false),
+                        eq(false));
         when(mTelephonyManager.isDataEnabled()).thenReturn(true);
 
         mController.onResume();
@@ -371,7 +374,8 @@ public class SubscriptionsPreferenceControllerTest {
                 true, ServiceState.STATE_IN_SERVICE);
         doReturn(mock(MobileMappings.Config.class)).when(sInjector).getConfig(mContext);
         doReturn(networkType)
-                .when(sInjector).getNetworkType(any(), any(), any(), anyInt(), eq(false));
+                .when(sInjector).getNetworkType(any(), any(), any(), anyInt(), eq(false),
+                        eq(false));
         when(mTelephonyManager.isDataEnabled()).thenReturn(true);
 
         mController.onResume();
@@ -397,7 +401,8 @@ public class SubscriptionsPreferenceControllerTest {
                 true, ServiceState.STATE_IN_SERVICE);
         doReturn(mock(MobileMappings.Config.class)).when(sInjector).getConfig(mContext);
         doReturn(networkType)
-                .when(sInjector).getNetworkType(any(), any(), any(), anyInt(), eq(false));
+                .when(sInjector).getNetworkType(any(), any(), any(), anyInt(), eq(false),
+                        eq(false));
 
         mController.onResume();
         mController.displayPreference(mPreferenceScreen);
@@ -424,7 +429,8 @@ public class SubscriptionsPreferenceControllerTest {
                 false, ServiceState.STATE_OUT_OF_SERVICE);
         doReturn(mock(MobileMappings.Config.class)).when(sInjector).getConfig(mContext);
         doReturn(networkType)
-                .when(sInjector).getNetworkType(any(), any(), any(), anyInt(), eq(false));
+                .when(sInjector).getNetworkType(any(), any(), any(), anyInt(), eq(false),
+                        eq(false));
 
         mController.onResume();
         mController.displayPreference(mPreferenceScreen);
@@ -491,7 +497,7 @@ public class SubscriptionsPreferenceControllerTest {
         doReturn(sub.get(0)).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
         Drawable icon = mock(Drawable.class);
         when(mTelephonyManager.isDataEnabled()).thenReturn(true);
-        doReturn(icon).when(sInjector).getIcon(any(), anyInt(), anyInt(), eq(false));
+        doReturn(icon).when(sInjector).getIcon(any(), anyInt(), anyInt(), eq(false), eq(false));
         setupGetIconConditions(sub.get(0).getSubscriptionId(), true, true,
                 true, ServiceState.STATE_IN_SERVICE);
 
@@ -509,7 +515,7 @@ public class SubscriptionsPreferenceControllerTest {
         doReturn(subs.get(0)).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
         Drawable icon = mock(Drawable.class);
         when(mTelephonyManager.isDataEnabled()).thenReturn(true);
-        doReturn(icon).when(sInjector).getIcon(any(), anyInt(), anyInt(), eq(false));
+        doReturn(icon).when(sInjector).getIcon(any(), anyInt(), anyInt(), eq(false), eq(false));
         setupGetIconConditions(subId, false, true,
                 true, ServiceState.STATE_IN_SERVICE);
         mController.onResume();
@@ -527,7 +533,7 @@ public class SubscriptionsPreferenceControllerTest {
         doReturn(subs.get(0)).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
         Drawable icon = mock(Drawable.class);
         when(mTelephonyManager.isDataEnabled()).thenReturn(false);
-        doReturn(icon).when(sInjector).getIcon(any(), anyInt(), anyInt(), eq(true));
+        doReturn(icon).when(sInjector).getIcon(any(), anyInt(), anyInt(), eq(true), eq(false));
 
         setupGetIconConditions(subId, false, false,
                 false, ServiceState.STATE_IN_SERVICE);
@@ -559,7 +565,8 @@ public class SubscriptionsPreferenceControllerTest {
 
         mController.getIcon(SUB_ID);
 
-        verify(sInjector).getIcon(any(), eq(SIGNAL_STRENGTH_GOOD), anyInt(), anyBoolean());
+        verify(sInjector).getIcon(any(), eq(SIGNAL_STRENGTH_GOOD), anyInt(), anyBoolean(),
+                anyBoolean());
     }
 
     @Test
@@ -576,7 +583,7 @@ public class SubscriptionsPreferenceControllerTest {
 
         mController.getIcon(SUB_ID);
 
-        verify(sInjector).getIcon(any(), eq(WIFI_LEVEL_MAX), anyInt(), anyBoolean());
+        verify(sInjector).getIcon(any(), eq(WIFI_LEVEL_MAX), anyInt(), anyBoolean(), anyBoolean());
     }
 
     @Test

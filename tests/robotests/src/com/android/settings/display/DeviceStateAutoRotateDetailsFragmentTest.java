@@ -16,6 +16,8 @@
 
 package com.android.settings.display;
 
+import static android.provider.Settings.Secure.DEVICE_STATE_ROTATION_LOCK_LOCKED;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.spy;
@@ -39,6 +41,10 @@ import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 public class DeviceStateAutoRotateDetailsFragmentTest {
+    private static final int FOLDED_STATE = 0;
+    private static final int HALF_FOLDED_STATE = 1;
+    private static final int UNFOLDED_STATE = 2;
+    private static final int REAR_DISPLAY_STATE = 3;
 
     private final DeviceStateAutoRotateDetailsFragment mFragment =
             spy(new DeviceStateAutoRotateDetailsFragment());
@@ -51,12 +57,13 @@ public class DeviceStateAutoRotateDetailsFragmentTest {
         when(mContext.getApplicationContext()).thenReturn(mContext);
         when(mFragment.getContext()).thenReturn(mContext);
         when(mFragment.getResources()).thenReturn(mResources);
+        setUpPostureMappings();
     }
 
     @Test
     public void getMetricsCategory_returnsAutoRotateSettings() {
         assertThat(mFragment.getMetricsCategory()).isEqualTo(
-                SettingsEnums.DISPLAY_AUTO_ROTATE_SETTINGS);
+                SettingsEnums.DISPLAY_DEVICE_STATE_AUTO_ROTATE_SETTINGS);
     }
 
     @Test
@@ -67,7 +74,9 @@ public class DeviceStateAutoRotateDetailsFragmentTest {
 
     @Test
     public void createPreferenceControllers_settableDeviceStates_returnsDeviceStateControllers() {
-        enableDeviceStateSettableRotationStates(new String[]{"0:1", "1:1"},
+        enableDeviceStateSettableRotationStates(
+                new String[]{FOLDED_STATE + ":" + DEVICE_STATE_ROTATION_LOCK_LOCKED,
+                        UNFOLDED_STATE + ":" + DEVICE_STATE_ROTATION_LOCK_LOCKED},
                 new String[]{"Folded", "Unfolded"});
 
         List<AbstractPreferenceController> preferenceControllers =
@@ -101,5 +110,20 @@ public class DeviceStateAutoRotateDetailsFragmentTest {
         DeviceStateRotationLockSettingsManager.resetInstance();
         DeviceStateRotationLockSettingsManager.getInstance(mContext)
                 .resetStateForTesting(mResources);
+    }
+
+    private void setUpPostureMappings() {
+        when(mResources.getIntArray(
+                com.android.internal.R.array.config_foldedDeviceStates)).thenReturn(
+                new int[]{FOLDED_STATE});
+        when(mResources.getIntArray(
+                com.android.internal.R.array.config_halfFoldedDeviceStates)).thenReturn(
+                new int[]{HALF_FOLDED_STATE});
+        when(mResources.getIntArray(
+                com.android.internal.R.array.config_openDeviceStates)).thenReturn(
+                new int[]{UNFOLDED_STATE});
+        when(mResources.getIntArray(
+                com.android.internal.R.array.config_rearDisplayDeviceStates)).thenReturn(
+                new int[]{REAR_DISPLAY_STATE});
     }
 }

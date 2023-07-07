@@ -21,12 +21,13 @@ import android.os.Parcel;
 
 import androidx.annotation.VisibleForTesting;
 
+import com.android.settings.fuelgauge.AdvancedPowerUsageDetail;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 /**
  * Tip to suggest user to remove app restriction. This is the empty tip and it is only used in
- * {@link com.android.settings.fuelgauge.AdvancedPowerUsageDetail} to create dialog.
+ * {@link AdvancedPowerUsageDetail} to create dialog.
  */
 public class UnrestrictAppTip extends BatteryTip {
     private AppInfo mAppInfo;

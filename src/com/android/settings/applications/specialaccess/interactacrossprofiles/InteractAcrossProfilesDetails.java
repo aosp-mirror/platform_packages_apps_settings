@@ -51,8 +51,9 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.stats.devicepolicy.DevicePolicyEnums;
 import android.util.IconDrawableFactory;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -98,7 +99,6 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         mContext = getContext();
         mCrossProfileApps = mContext.getSystemService(CrossProfileApps.class);
         mUserManager = mContext.getSystemService(UserManager.class);
@@ -113,6 +113,12 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
         mInstallAppIntent = AppStoreUtil.getAppStoreLink(mContext, mPackageName);
 
         addPreferencesFromResource(R.xml.interact_across_profiles_permissions_details);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+        final View view =  super.onCreateView(inflater, container, savedInstanceState);
 
         replaceEnterprisePreferenceScreenTitle(CONNECTED_WORK_AND_PERSONAL_APPS_TITLE,
                 R.string.interact_across_profiles_title);
@@ -125,7 +131,6 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
         replaceEnterpriseStringSummary("interact_across_profiles_extra_summary",
                 HOW_TO_DISCONNECT_APPS,
                 R.string.interact_across_profiles_summary_3);
-
 
         mSwitchPref = findPreference(INTERACT_ACROSS_PROFILES_SETTINGS_SWITCH);
         mSwitchPref.setOnPreferenceClickListener(this);
@@ -146,6 +151,8 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
         styleActionBar();
         maybeShowExtraSummary();
         logPageLaunchMetrics();
+
+        return view;
     }
 
     private void maybeShowExtraSummary() {
@@ -395,8 +402,7 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
      * @return the summary for the current state of whether the app associated with the given
      * {@code packageName} is allowed to interact across profiles.
      */
-    public static CharSequence getPreferenceSummary(
-            Context context, String packageName) {
+    public static String getPreferenceSummary(Context context, String packageName) {
         return context.getString(isInteractAcrossProfilesEnabled(context, packageName)
                 ? R.string.interact_across_profiles_summary_allowed
                 : R.string.interact_across_profiles_summary_not_allowed);

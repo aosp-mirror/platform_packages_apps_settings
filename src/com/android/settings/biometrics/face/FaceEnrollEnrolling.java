@@ -31,11 +31,13 @@ import com.android.settings.R;
 import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.BiometricEnrollSidecar;
 import com.android.settings.biometrics.BiometricErrorDialog;
+import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.biometrics.BiometricsEnrollEnrolling;
 import com.android.settings.slices.CustomSliceRegistry;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
+import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import java.util.ArrayList;
 
@@ -110,6 +112,25 @@ public class FaceEnrollEnrolling extends BiometricsEnrollEnrolling {
         }
 
         startEnrollment();
+    }
+
+    @Override
+    protected void onStop() {
+        if (!isChangingConfigurations()) {
+            if (!WizardManagerHelper.isAnySetupWizard(getIntent())
+                    && !BiometricUtils.isAnyMultiBiometricFlow(this)) {
+                setResult(RESULT_TIMEOUT);
+            }
+            finish();
+        }
+
+        super.onStop();
+    }
+
+    @Override
+    protected boolean shouldFinishWhenBackgrounded() {
+        // Prevent super.onStop() from finishing, since we handle this in our onStop().
+        return false;
     }
 
     @Override

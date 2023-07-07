@@ -15,11 +15,14 @@
  */
 package com.android.settings.fuelgauge.batterysaver;
 
+import static com.android.settingslib.fuelgauge.BatterySaverUtils.KEY_PERCENTAGE;
+
 import android.content.ContentResolver;
 import android.content.Context;
-import android.os.PowerManager;
 import android.provider.Settings;
 import android.provider.Settings.Global;
+import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
 
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
@@ -29,6 +32,7 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.widget.SeekBarPreference;
+import com.android.settingslib.fuelgauge.BatterySaverUtils;
 
 /**
  * Responds to user actions in the Settings > Battery > Set a Schedule Screen for the seekbar.
@@ -42,15 +46,19 @@ import com.android.settings.widget.SeekBarPreference;
  * See {@link Settings.Global#AUTOMATIC_POWER_SAVE_MODE} for more details.
  */
 public class BatterySaverScheduleSeekBarController implements
-        OnPreferenceChangeListener {
+        OnPreferenceChangeListener, OnSeekBarChangeListener {
 
     public static final int MAX_SEEKBAR_VALUE = 15;
     public static final int MIN_SEEKBAR_VALUE = 2;
     public static final String KEY_BATTERY_SAVER_SEEK_BAR = "battery_saver_seek_bar";
+    private static final int LEVEL_UNIT_SCALE = 5;
 
     @VisibleForTesting
     public SeekBarPreference mSeekBarPreference;
     private Context mContext;
+
+    @VisibleForTesting
+    int mPercentage;
 
     public BatterySaverScheduleSeekBarController(Context context) {
         mContext = context;
@@ -58,6 +66,7 @@ public class BatterySaverScheduleSeekBarController implements
         mSeekBarPreference.setLayoutResource(R.layout.preference_widget_seekbar_settings);
         mSeekBarPreference.setIconSpaceReserved(false);
         mSeekBarPreference.setOnPreferenceChangeListener(this);
+        mSeekBarPreference.setOnSeekBarChangeListener(this);
         mSeekBarPreference.setContinuousUpdates(true);
         mSeekBarPreference.setMax(MAX_SEEKBAR_VALUE);
         mSeekBarPreference.setMin(MIN_SEEKBAR_VALUE);
@@ -68,37 +77,41 @@ public class BatterySaverScheduleSeekBarController implements
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        // The nits are in intervals of 5%
-        final int percentage = ((Integer) newValue) * 5;
-        Settings.Global.putInt(mContext.getContentResolver(), Global.LOW_POWER_MODE_TRIGGER_LEVEL,
-                percentage);
-        final CharSequence stateDescription = formatStateDescription(percentage);
+        mPercentage = ((Integer) newValue) * LEVEL_UNIT_SCALE;
+        final CharSequence stateDescription = formatStateDescription(mPercentage);
         preference.setTitle(stateDescription);
         mSeekBarPreference.overrideSeekBarStateDescription(stateDescription);
         return true;
     }
 
+    @Override
+    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {}
+
+    @Override
+    public void onStartTrackingTouch(SeekBar seekBar) {}
+
+    @Override
+    public void onStopTrackingTouch(SeekBar seekBar) {
+        if (mPercentage > 0) {
+            Settings.Global.putInt(mContext.getContentResolver(),
+                    Global.LOW_POWER_MODE_TRIGGER_LEVEL,
+                    mPercentage);
+        }
+    }
+
     public void updateSeekBar() {
         final ContentResolver resolver = mContext.getContentResolver();
-        // Note: this can also be obtained via PowerManager.getPowerSaveModeTrigger()
-        final int mode = Settings.Global.getInt(resolver, Global.AUTOMATIC_POWER_SAVE_MODE,
-                PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE);
-        // if mode is "dynamic" we are in routine mode, percentage with non-zero threshold is
-        // percentage mode, otherwise it is no schedule mode
-        if (mode == PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE) {
+        final String mode = BatterySaverUtils.getBatterySaverScheduleKey(mContext);
+        if (KEY_PERCENTAGE.equals(mode)) {
             final int threshold =
                     Settings.Global.getInt(resolver, Global.LOW_POWER_MODE_TRIGGER_LEVEL, 0);
-            if (threshold <= 0) {
-                mSeekBarPreference.setVisible(false);
-            } else {
-                final int currentSeekbarValue = Math.max(threshold / 5, MIN_SEEKBAR_VALUE);
-                mSeekBarPreference.setVisible(true);
-                mSeekBarPreference.setProgress(currentSeekbarValue);
-                final CharSequence stateDescription = formatStateDescription(
-                        currentSeekbarValue * 5);
-                mSeekBarPreference.setTitle(stateDescription);
-                mSeekBarPreference.overrideSeekBarStateDescription(stateDescription);
-            }
+            final int currentSeekbarValue = Math.max(threshold / 5, MIN_SEEKBAR_VALUE);
+            mSeekBarPreference.setVisible(true);
+            mSeekBarPreference.setProgress(currentSeekbarValue);
+            final CharSequence stateDescription = formatStateDescription(
+                    currentSeekbarValue * 5);
+            mSeekBarPreference.setTitle(stateDescription);
+            mSeekBarPreference.overrideSeekBarStateDescription(stateDescription);
         } else {
             mSeekBarPreference.setVisible(false);
         }

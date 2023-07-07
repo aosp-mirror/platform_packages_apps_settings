@@ -18,15 +18,8 @@ package com.android.settings;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
-import android.content.Context;
-import android.net.wifi.p2p.WifiP2pManager;
-import android.os.Looper;
 import android.view.LayoutInflater;
 import android.widget.TextView;
 
@@ -34,10 +27,10 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowRecoverySystem;
+import com.android.settings.utils.ActivityControllerWrapper;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -50,22 +43,20 @@ import org.robolectric.annotation.Config;
 @Config(shadows = {ShadowRecoverySystem.class, ShadowBluetoothAdapter.class})
 public class ResetNetworkConfirmTest {
 
+    private static final String TEST_PACKAGE = "com.android.settings";
+
     private FragmentActivity mActivity;
 
-    @Mock
-    private WifiP2pManager mWifiP2pManager;
     @Mock
     private ResetNetworkConfirm mResetNetworkConfirm;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        when(mWifiP2pManager.initialize(any(Context.class), any(Looper.class), any()))
-                .thenReturn(mock(WifiP2pManager.Channel.class));
 
         mResetNetworkConfirm = new ResetNetworkConfirm();
-        mActivity = spy(Robolectric.setupActivity(FragmentActivity.class));
-        when(mActivity.getSystemService(Context.WIFI_P2P_SERVICE)).thenReturn(mWifiP2pManager);
+        mActivity = spy((FragmentActivity) ActivityControllerWrapper.setup(
+                Robolectric.buildActivity(FragmentActivity.class)).get());
         mResetNetworkConfirm.mActivity = mActivity;
     }
 
@@ -75,20 +66,17 @@ public class ResetNetworkConfirmTest {
     }
 
     @Test
-    @Ignore
-    public void testResetNetworkData_resetEsim() {
-        mResetNetworkConfirm.mEraseEsim = true;
-
-        mResetNetworkConfirm.mFinalClickListener.onClick(null /* View */);
-        Robolectric.getBackgroundThreadScheduler().advanceToLastPostedRunnable();
-
-        assertThat(ShadowRecoverySystem.getWipeEuiccCalledCount()).isEqualTo(1);
-    }
-
-    @Test
-    @Ignore
     public void testResetNetworkData_notResetEsim() {
-        mResetNetworkConfirm.mEraseEsim = false;
+        mResetNetworkConfirm.mResetNetworkRequest =
+                new ResetNetworkRequest(ResetNetworkRequest.RESET_NONE);
+        mResetNetworkConfirm.mResetSubscriptionContract =
+                new ResetSubscriptionContract(mActivity,
+                mResetNetworkConfirm.mResetNetworkRequest) {
+            @Override
+            public void onSubscriptionInactive(int subscriptionId) {
+                mActivity.onBackPressed();
+            }
+        };
 
         mResetNetworkConfirm.mFinalClickListener.onClick(null /* View */);
         Robolectric.getBackgroundThreadScheduler().advanceToLastPostedRunnable();
@@ -96,19 +84,12 @@ public class ResetNetworkConfirmTest {
         assertThat(ShadowRecoverySystem.getWipeEuiccCalledCount()).isEqualTo(0);
     }
 
-    /**
-     * Test for WifiP2pManager factoryReset method.
-     */
-    @Test
-    public void testResetNetworkData_resetP2p() {
-        mResetNetworkConfirm.p2pFactoryReset(mActivity);
-
-        verify(mWifiP2pManager).factoryReset(any(WifiP2pManager.Channel.class), any());
-    }
-
     @Test
     public void setSubtitle_eraseEsim() {
-        mResetNetworkConfirm.mEraseEsim = true;
+        mResetNetworkConfirm.mResetNetworkRequest =
+                new ResetNetworkRequest(ResetNetworkRequest.RESET_NONE);
+        mResetNetworkConfirm.mResetNetworkRequest.setResetEsim(TEST_PACKAGE);
+
         mResetNetworkConfirm.mContentView =
                 LayoutInflater.from(mActivity).inflate(R.layout.reset_network_confirm, null);
 
@@ -121,7 +102,9 @@ public class ResetNetworkConfirmTest {
 
     @Test
     public void setSubtitle_notEraseEsim() {
-        mResetNetworkConfirm.mEraseEsim = false;
+        mResetNetworkConfirm.mResetNetworkRequest =
+                new ResetNetworkRequest(ResetNetworkRequest.RESET_NONE);
+
         mResetNetworkConfirm.mContentView =
                 LayoutInflater.from(mActivity).inflate(R.layout.reset_network_confirm, null);
 

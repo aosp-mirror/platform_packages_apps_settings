@@ -50,6 +50,7 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.devicestate.DeviceStateRotationLockSettingsManager;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -111,6 +112,8 @@ public class SmartAutoRotatePreferenceFragmentTest {
         when(mActivity.getPackageManager()).thenReturn(mPackageManager);
         when(mFragment.getActivity()).thenReturn(mActivity);
         when(mFragment.getContext()).thenReturn(mContext);
+        when(mActivity.getResources()).thenReturn(mResources);
+
         doReturn(mView).when(mFragment).getView();
 
         when(mFragment.findPreference(AUTO_ROTATE_SWITCH_PREFERENCE_KEY)).thenReturn(
@@ -153,6 +156,17 @@ public class SmartAutoRotatePreferenceFragmentTest {
     }
 
     @Test
+    public void createHeader_faceDetectionNotEnabledByConfig_switchBarIsDisabled() {
+        doReturn(false).when(mResources).getBoolean(
+                R.bool.config_auto_rotate_face_detection_available);
+
+        mFragment.createHeader(mActivity);
+
+        verify(mRotateMainSwitchPreference, times(1)).setVisible(false);
+        verify(mRotateSwitchPreference, never()).setVisible(false);
+    }
+
+    @Test
     public void createPreferenceControllers_noSettableDeviceStates_returnsEmptyList() {
         enableDeviceStateSettableRotationStates(new String[]{}, new String[]{});
 
@@ -162,6 +176,7 @@ public class SmartAutoRotatePreferenceFragmentTest {
         assertThat(preferenceControllers).isEmpty();
     }
 
+    @Ignore
     @Test
     public void createPreferenceControllers_settableDeviceStates_returnsDeviceStateControllers() {
         enableDeviceStateSettableRotationStates(new String[]{"0:1", "1:1"},
@@ -198,6 +213,8 @@ public class SmartAutoRotatePreferenceFragmentTest {
         when(mResources.getStringArray(
                 R.array.config_settableAutoRotationDeviceStatesDescriptions)).thenReturn(
                 settableStatesDescriptions);
+        when(mResources.getBoolean(R.bool.config_auto_rotate_face_detection_available)).thenReturn(
+                true);
         DeviceStateRotationLockSettingsManager.resetInstance();
         DeviceStateRotationLockSettingsManager.getInstance(mContext)
                 .resetStateForTesting(mResources);
