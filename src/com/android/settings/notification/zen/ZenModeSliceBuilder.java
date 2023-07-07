@@ -26,6 +26,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.Settings;
 
 import androidx.core.graphics.drawable.IconCompat;
@@ -40,6 +42,8 @@ import com.android.settings.Utils;
 import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.slices.SliceBroadcastReceiver;
 import com.android.settings.slices.SliceBuilderUtils;
+import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 
 public class ZenModeSliceBuilder {
 
@@ -84,8 +88,11 @@ public class ZenModeSliceBuilder {
                 isZenModeEnabled);
         final RowBuilder rowBuilder = new RowBuilder()
                 .setTitle(title)
-                .addEndItem(toggleSliceAction)
                 .setPrimaryAction(primarySliceAction);
+        if (!isManagedByAdmin(context)) {
+            rowBuilder.addEndItem(toggleSliceAction);
+        }
+
         if (!Utils.isSettingsIntelligence(context)) {
             rowBuilder.setSubtitle(subtitle);
         }
@@ -151,5 +158,11 @@ public class ZenModeSliceBuilder {
                 .setClass(context, SliceBroadcastReceiver.class);
         return PendingIntent.getBroadcast(context, 0 /* requestCode */, intent,
                 PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_MUTABLE);
+    }
+
+    private static boolean isManagedByAdmin(Context context) {
+        EnforcedAdmin enforcedAdmin = RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
+                context, UserManager.DISALLOW_ADJUST_VOLUME, UserHandle.myUserId());
+        return enforcedAdmin != null;
     }
 }
