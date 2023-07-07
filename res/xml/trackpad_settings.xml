@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2022 The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:title="@string/trackpad_settings">
+    <Preference
+        android:key="trackpad_gesture_settings"
+        android:title="@string/trackpad_touchpad_gesture_title"
+        android:summary="@string/trackpad_touchpad_gesture_summary"
+        android:icon="@drawable/ic_trackpad_touch_gestures_normal"
+        android:order="-10"
+        android:fragment="com.android.settings.inputmethod.TrackpadTouchGestureSettings"
+        settings:controller="com.android.settings.inputmethod.TrackpadTouchGestureSettingsController"/>
+
+    <SwitchPreference
+        android:key="trackpad_tap_to_click"
+        android:title="@string/trackpad_tap_to_click"
+        android:icon="@drawable/ic_trackpad_tap_to_click"
+        settings:controller="com.android.settings.inputmethod.TrackpadTapToClickPreferenceController"
+        android:order="10"/>
+
+    <SwitchPreference
+        android:key="trackpad_reverse_scrolling"
+        android:title="@string/trackpad_reverse_scrolling_title"
+        android:summary="@string/trackpad_reverse_scrolling_summary"
+        android:icon="@drawable/ic_trackpad_reverse_scrolling"
+        settings:controller="com.android.settings.inputmethod.TrackpadReverseScrollingPreferenceController"
+        android:order="20"/>
+
+    <SwitchPreference
+        android:key="trackpad_bottom_right_tap"
+        android:title="@string/trackpad_bottom_right_tap_title"
+        android:summary="@string/trackpad_bottom_right_tap_summary"
+        android:icon="@drawable/ic_trackpad_bottom_right_click"
+        settings:controller="com.android.settings.inputmethod.TrackpadBottomPreferenceController"
+        android:order="30"/>
+
+    <com.android.settings.widget.SeekBarPreference
+        android:key="trackpad_pointer_speed"
+        android:title="@string/trackpad_pointer_speed"
+        android:icon="@drawable/ic_trackpad_pointer_speed"
+        android:order="40"
+        android:selectable="false"
+        settings:controller="com.android.settings.inputmethod.TrackpadPointerSpeedPreferenceController"/>
+
+    <com.android.settingslib.widget.ButtonPreference
+        android:key="trackpad_touch_gesture"
+        android:title="@string/trackpad_touch_gesture"
+        android:icon="@drawable/ic_trackpad_touch_gestures_inverse"
+        settings:controller="com.android.settings.inputmethod.TouchGesturesButtonPreferenceController"/>
+</PreferenceScreen>

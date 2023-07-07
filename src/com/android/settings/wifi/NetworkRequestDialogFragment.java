@@ -16,7 +16,7 @@
 
 package com.android.settings.wifi;
 
-import static com.android.settings.wifi.WifiUtils.getWifiEntrySecurity;
+import static com.android.wifitrackerlib.Utils.getSecurityTypesFromScanResult;
 
 import static java.util.stream.Collectors.toList;
 
@@ -77,8 +77,12 @@ public class NetworkRequestDialogFragment extends NetworkRequestDialogBaseFragme
     private static final int MAX_NUMBER_LIST_ITEM = 5;
     private boolean mShowLimitedItem = true;
 
+    private static class MatchWifi {
+        String mSsid;
+        List<Integer> mSecurityTypes;
+    }
+    private List<MatchWifi> mMatchWifis = new ArrayList<>();
     @VisibleForTesting List<WifiEntry> mFilteredWifiEntries = new ArrayList<>();
-    @VisibleForTesting List<ScanResult> mMatchedScanResults = new ArrayList<>();
     private WifiEntryAdapter mDialogAdapter;
     private NetworkRequestUserSelectionCallback mUserSelectionCallback;
 
@@ -237,7 +241,7 @@ public class NetworkRequestDialogFragment extends NetworkRequestDialogBaseFragme
     /** Called when the state of Wifi has changed. */
     @Override
     public void onWifiStateChanged() {
-        if (mMatchedScanResults.size() == 0) {
+        if (mMatchWifis.size() == 0) {
             return;
         }
         updateWifiEntries();
@@ -249,7 +253,7 @@ public class NetworkRequestDialogFragment extends NetworkRequestDialogBaseFragme
      */
     @Override
     public void onWifiEntriesChanged() {
-        if (mMatchedScanResults.size() == 0) {
+        if (mMatchWifis.size() == 0) {
             return;
         }
         updateWifiEntries();
@@ -275,16 +279,24 @@ public class NetworkRequestDialogFragment extends NetworkRequestDialogBaseFragme
         wifiEntries.addAll(mWifiPickerTracker.getWifiEntries());
 
         mFilteredWifiEntries.clear();
-        mFilteredWifiEntries.addAll(wifiEntries.stream().filter(entry -> {
-            for (ScanResult matchedScanResult : mMatchedScanResults) {
-                if (TextUtils.equals(entry.getSsid(), matchedScanResult.SSID)
-                        && entry.getSecurity() == getWifiEntrySecurity(matchedScanResult)) {
+        mFilteredWifiEntries.addAll(wifiEntries.stream()
+                .filter(entry -> isMatchedWifiEntry(entry))
+                .limit(mShowLimitedItem ? MAX_NUMBER_LIST_ITEM : Long.MAX_VALUE)
+                .collect(toList()));
+    }
+
+    private boolean isMatchedWifiEntry(WifiEntry entry) {
+        for (MatchWifi wifi : mMatchWifis) {
+            if (!TextUtils.equals(entry.getSsid(), wifi.mSsid)) {
+                continue;
+            }
+            for (Integer security : wifi.mSecurityTypes) {
+                if (entry.getSecurityTypes().contains(security)) {
                     return true;
                 }
             }
-            return false;
-        }).limit(mShowLimitedItem ? MAX_NUMBER_LIST_ITEM : Long.MAX_VALUE)
-                .collect(toList()));
+        }
+        return false;
     }
 
     private class WifiEntryAdapter extends ArrayAdapter<WifiEntry> {
@@ -350,7 +362,14 @@ public class NetworkRequestDialogFragment extends NetworkRequestDialogBaseFragme
 
     @Override
     public void onMatch(List<ScanResult> scanResults) {
-        mMatchedScanResults = scanResults;
+        mMatchWifis.clear();
+        for (ScanResult scanResult : scanResults) {
+            MatchWifi matchWifi = new MatchWifi();
+            matchWifi.mSsid = scanResult.SSID;
+            matchWifi.mSecurityTypes = getSecurityTypesFromScanResult(scanResult);
+            mMatchWifis.add(matchWifi);
+        }
+
         updateWifiEntries();
         updateUi();
     }

@@ -18,9 +18,10 @@ import android.content.Context;
 import android.os.Build;
 import android.service.notification.NotificationListenerFilter;
 
+import androidx.preference.Preference;
+
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.notification.NotificationBackend;
-
 
 public class BridgedAppsLinkPreferenceController extends BasePreferenceController {
 
@@ -61,12 +62,17 @@ public class BridgedAppsLinkPreferenceController extends BasePreferenceControlle
             if (mTargetSdk > Build.VERSION_CODES.S) {
                 return AVAILABLE;
             }
-
             mNlf = mNm.getListenerFilter(mCn, mUserId);
             if (!mNlf.areAllTypesAllowed() || !mNlf.getDisallowedPackages().isEmpty()) {
                 return AVAILABLE;
             }
         }
         return DISABLED_DEPENDENT_SETTING;
+    }
+
+    @Override
+    public void updateState(Preference pref) {
+        pref.setEnabled(getAvailabilityStatus() == AVAILABLE);
+        super.updateState(pref);
     }
 }

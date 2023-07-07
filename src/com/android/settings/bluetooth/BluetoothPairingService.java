@@ -99,11 +99,8 @@ public final class BluetoothPairingService extends Service {
                 Log.d(TAG, "Notification cancel " + " (" +
                         mDevice.getName() + ")");
                 mDevice.cancelBondProcess();
-            } else {
-                int bondState = intent.getIntExtra(BluetoothDevice.EXTRA_BOND_STATE,
-                        BluetoothDevice.ERROR);
-                Log.d(TAG, "Dismiss pairing for " + " (" +
-                        mDevice.getName() + "), BondState: " + bondState);
+            } else { // BluetoothDevice.ACTION_PAIRING_CANCEL
+                Log.d(TAG, "Dismiss pairing for " + " (" + mDevice.getName() + ")");
             }
 
             mNm.cancel(NOTIFICATION_ID);

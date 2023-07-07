@@ -23,6 +23,8 @@ import android.icu.util.TimeZone;
 
 import androidx.preference.Preference;
 
+import com.android.settings.utils.ActivityControllerWrapper;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,7 +38,8 @@ public class FixedOffsetPreferenceControllerTest {
 
     @Before
     public void setUp() {
-        mActivity = Robolectric.setupActivity(Activity.class);
+        mActivity = (Activity) ActivityControllerWrapper.setup(
+                Robolectric.buildActivity(Activity.class)).get();
     }
 
     @Test

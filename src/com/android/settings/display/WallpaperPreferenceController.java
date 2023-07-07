@@ -41,6 +41,8 @@ public class WallpaperPreferenceController extends BasePreferenceController {
     private final String mWallpaperPackage;
     private final String mWallpaperClass;
     private final String mStylesAndWallpaperClass;
+    private final String mWallpaperActionName;
+    private final String mStylesAndWallpaperActionName;
     private final String mWallpaperLaunchExtra;
 
     public WallpaperPreferenceController(Context context, String key) {
@@ -49,6 +51,9 @@ public class WallpaperPreferenceController extends BasePreferenceController {
         mWallpaperClass = mContext.getString(R.string.config_wallpaper_picker_class);
         mStylesAndWallpaperClass =
                 mContext.getString(R.string.config_styles_and_wallpaper_picker_class);
+        mWallpaperActionName = mContext.getString(R.string.config_wallpaper_picker_action);
+        mStylesAndWallpaperActionName =
+                mContext.getString(R.string.config_styles_and_wallpaper_picker_action);
         mWallpaperLaunchExtra = mContext.getString(R.string.config_wallpaper_picker_launch_extra);
     }
 
@@ -70,6 +75,10 @@ public class WallpaperPreferenceController extends BasePreferenceController {
 
     public String getComponentClassString() {
         return areStylesAvailable() ? mStylesAndWallpaperClass : mWallpaperClass;
+    }
+
+    public String getComponentActionName() {
+        return areStylesAvailable() ? mStylesAndWallpaperActionName : mWallpaperActionName;
     }
 
     public String getKeywords() {

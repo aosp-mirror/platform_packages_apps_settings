@@ -11,10 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- *
  */
-
 package com.android.settings.fuelgauge;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -23,12 +20,15 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.hardware.usb.UsbManager;
+import android.hardware.usb.UsbPort;
+import android.hardware.usb.UsbPortStatus;
 import android.icu.text.NumberFormat;
 import android.os.BatteryManager;
 import android.os.PowerManager;
@@ -43,6 +43,7 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.LowBatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.SmartBatteryTip;
+import com.android.settings.testutils.BatteryTestUtils;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settings.widget.EntityHeaderController;
@@ -85,6 +86,13 @@ public class BatteryHeaderPreferenceControllerTest {
     private UsageProgressBarPreference mBatteryUsageProgressBarPref;
     @Mock
     private BatteryStatusFeatureProvider mBatteryStatusFeatureProvider;
+    @Mock
+    private UsbPort mUsbPort;
+    @Mock
+    private UsbManager mUsbManager;
+    @Mock
+    private UsbPortStatus mUsbPortStatus;
+
     private BatteryHeaderPreferenceController mController;
     private Context mContext;
     private ShadowPowerManager mShadowPowerManager;
@@ -99,6 +107,7 @@ public class BatteryHeaderPreferenceControllerTest {
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
         mContext = spy(RuntimeEnvironment.application);
+        when(mContext.getSystemService(UsbManager.class)).thenReturn(mUsbManager);
         ShadowEntityHeaderController.setUseMock(mEntityHeaderController);
 
         mBatteryIntent = new Intent();
@@ -267,7 +276,7 @@ public class BatteryHeaderPreferenceControllerTest {
 
         mController.updateHeaderByBatteryTips(null, mBatteryInfo);
 
-        verifyZeroInteractions(mBatteryUsageProgressBarPref);
+        verifyNoInteractions(mBatteryUsageProgressBarPref);
     }
 
     @Test
@@ -277,16 +286,26 @@ public class BatteryHeaderPreferenceControllerTest {
 
         mController.updateHeaderByBatteryTips(lowBatteryTip, null);
 
-        verifyZeroInteractions(mBatteryUsageProgressBarPref);
+        verifyNoInteractions(mBatteryUsageProgressBarPref);
     }
 
     @Test
-    public void updatePreference_isOverheat_showEmptyText() {
-        mBatteryInfo.isOverheated = true;
+    public void updatePreference_isBatteryDefender_showEmptyText() {
+        mBatteryInfo.isBatteryDefender = true;
 
         mController.updateHeaderPreference(mBatteryInfo);
 
         verify(mBatteryUsageProgressBarPref).setBottomSummary(null);
+    }
+
+    @Test
+    public void updatePreference_incompatibleCharger_showNotChargingState() {
+        BatteryTestUtils.setupIncompatibleEvent(mUsbPort, mUsbManager, mUsbPortStatus);
+
+        mController.updateHeaderPreference(mBatteryInfo);
+
+        verify(mBatteryUsageProgressBarPref).setBottomSummary(
+            mContext.getString(R.string.battery_info_status_not_charging));
     }
 
     @Test

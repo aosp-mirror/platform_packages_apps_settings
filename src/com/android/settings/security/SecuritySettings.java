@@ -40,7 +40,7 @@ import java.util.List;
 public class SecuritySettings extends DashboardFragment {
 
     private static final String TAG = "SecuritySettings";
-    private static final String SECURITY_CATEGORY = "security_category";
+    protected static final String SECURITY_CATEGORY = "security_category";
 
     public static final int CHANGE_TRUST_AGENT_SETTINGS = 126;
     public static final int UNIFY_LOCK_CONFIRM_PROFILE_REQUEST = 129;
@@ -132,4 +132,9 @@ public class SecuritySettings extends DashboardFragment {
                             && !SafetyCenterManagerWrapper.get().isEnabled(context);
                 }
             };
+
+    @Override
+    public Lifecycle getSettingsLifecycle() {
+        return super.getSettingsLifecycle();
+    }
 }

@@ -24,7 +24,8 @@
     <com.android.settingslib.widget.IllustrationPreference
         android:key="gesture_double_twist_video"
         settings:searchable="false"
-        app:lottie_rawRes="@drawable/flip_camera_for_selfie"/>
+        settings:lottie_rawRes="@raw/flip_camera_for_selfie_lottie"
+        settings:dynamicColor="true"/>
 
     <SwitchPreference
         android:key="gesture_double_twist"

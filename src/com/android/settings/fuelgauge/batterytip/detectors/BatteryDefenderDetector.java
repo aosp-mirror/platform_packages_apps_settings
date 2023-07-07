@@ -16,26 +16,33 @@
 
 package com.android.settings.fuelgauge.batterytip.detectors;
 
+import android.content.Context;
+
 import com.android.settings.fuelgauge.BatteryInfo;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryDefenderTip;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
+import com.android.settings.overlay.FeatureFactory;
 
 /**
  * Detect whether the battery is overheated
  */
 public class BatteryDefenderDetector implements BatteryTipDetector {
-    private BatteryInfo mBatteryInfo;
+    private final BatteryInfo mBatteryInfo;
+    private final Context mContext;
 
-    public BatteryDefenderDetector(BatteryInfo batteryInfo) {
+    public BatteryDefenderDetector(BatteryInfo batteryInfo, Context context) {
         mBatteryInfo = batteryInfo;
+        mContext = context;
     }
 
     @Override
     public BatteryTip detect() {
-        final int state =
-                mBatteryInfo.isOverheated
-                    ? BatteryTip.StateType.NEW
-                    : BatteryTip.StateType.INVISIBLE;
-        return new BatteryDefenderTip(state);
+        final boolean isBasicBatteryDefend = mBatteryInfo.isBatteryDefender
+                && !FeatureFactory.getFactory(mContext).getPowerUsageFeatureProvider(mContext)
+                .isExtraDefend();
+        final int state = isBasicBatteryDefend
+                ? BatteryTip.StateType.NEW : BatteryTip.StateType.INVISIBLE;
+        final boolean isPluggedIn = mBatteryInfo.pluggedStatus != 0;
+        return new BatteryDefenderTip(state, isPluggedIn);
     }
 }
