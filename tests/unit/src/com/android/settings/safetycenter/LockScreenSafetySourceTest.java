@@ -55,8 +55,10 @@ import org.mockito.MockitoAnnotations;
 public class LockScreenSafetySourceTest {
 
     private static final String SUMMARY = "summary";
-    private static final String FAKE_ACTION_CHOOSE_LOCK_GENERIC_FRAGMENT = "choose_lock_generic";
-    private static final String FAKE_ACTION_SCREEN_LOCK_SETTINGS = "screen_lock_settings";
+    private static final String FAKE_ACTION_OPEN_SUB_SETTING = "open_sub_setting";
+    private static final String EXTRA_DESTINATION = "destination";
+    private static final String FAKE_CHOOSE_LOCK_GENERIC_FRAGMENT = "choose_lock_generic";
+    private static final String FAKE_SCREEN_LOCK_SETTINGS = "screen_lock_settings";
     private static final SafetyEvent EVENT_SOURCE_STATE_CHANGED =
             new SafetyEvent.Builder(SAFETY_EVENT_TYPE_SOURCE_STATE_CHANGED).build();
 
@@ -157,7 +159,10 @@ public class LockScreenSafetySourceTest {
                 .isEqualTo(SUMMARY);
         assertThat(safetySourceStatus.getPendingIntent().getIntent()).isNotNull();
         assertThat(safetySourceStatus.getPendingIntent().getIntent().getAction())
-                .isEqualTo(FAKE_ACTION_CHOOSE_LOCK_GENERIC_FRAGMENT);
+                .isEqualTo(FAKE_ACTION_OPEN_SUB_SETTING);
+        assertThat(
+                safetySourceStatus.getPendingIntent().getIntent().getStringExtra(EXTRA_DESTINATION))
+                .isEqualTo(FAKE_CHOOSE_LOCK_GENERIC_FRAGMENT);
     }
 
     @Test
@@ -300,7 +305,9 @@ public class LockScreenSafetySourceTest {
                 ResourcesUtils.getResourcesString(mApplicationContext,
                         "no_screen_lock_issue_action_label"));
         assertThat(action.getPendingIntent().getIntent().getAction())
-                .isEqualTo(FAKE_ACTION_CHOOSE_LOCK_GENERIC_FRAGMENT);
+                .isEqualTo(FAKE_ACTION_OPEN_SUB_SETTING);
+        assertThat(action.getPendingIntent().getIntent().getStringExtra(EXTRA_DESTINATION))
+                .isEqualTo(FAKE_CHOOSE_LOCK_GENERIC_FRAGMENT);
     }
 
     @Test
@@ -383,9 +390,6 @@ public class LockScreenSafetySourceTest {
     public void setSafetySourceData_whenShouldShowGearMenu_setGearMenuActionIcon() {
         whenScreenLockIsEnabled();
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
-        final Intent launchScreenLockSettings = new Intent(FAKE_ACTION_SCREEN_LOCK_SETTINGS);
-        when(mScreenLockPreferenceDetailsUtils.getLaunchScreenLockSettingsIntent(anyInt()))
-                .thenReturn(launchScreenLockSettings);
         when(mScreenLockPreferenceDetailsUtils.shouldShowGearMenu()).thenReturn(true);
 
         LockScreenSafetySource.setSafetySourceData(mApplicationContext,
@@ -399,7 +403,10 @@ public class LockScreenSafetySourceTest {
 
         assertThat(iconAction.getIconType()).isEqualTo(IconAction.ICON_TYPE_GEAR);
         assertThat(iconAction.getPendingIntent().getIntent().getAction())
-                .isEqualTo(FAKE_ACTION_SCREEN_LOCK_SETTINGS);
+                .isEqualTo(FAKE_ACTION_OPEN_SUB_SETTING);
+        assertThat(
+                iconAction.getPendingIntent().getIntent().getStringExtra(EXTRA_DESTINATION))
+                .isEqualTo(FAKE_SCREEN_LOCK_SETTINGS);
     }
 
     @Test
@@ -448,9 +455,15 @@ public class LockScreenSafetySourceTest {
         when(mScreenLockPreferenceDetailsUtils.isAvailable()).thenReturn(true);
         when(mScreenLockPreferenceDetailsUtils.getSummary(anyInt())).thenReturn(SUMMARY);
 
-        Intent launchChooseLockGenericFragment = new Intent(
-                FAKE_ACTION_CHOOSE_LOCK_GENERIC_FRAGMENT);
+        Intent launchChooseLockGenericFragment = new Intent(FAKE_ACTION_OPEN_SUB_SETTING);
+        launchChooseLockGenericFragment.putExtra(EXTRA_DESTINATION,
+                FAKE_CHOOSE_LOCK_GENERIC_FRAGMENT);
         when(mScreenLockPreferenceDetailsUtils.getLaunchChooseLockGenericFragmentIntent(anyInt()))
                 .thenReturn(launchChooseLockGenericFragment);
+
+        Intent launchScreenLockSettings = new Intent(FAKE_ACTION_OPEN_SUB_SETTING);
+        launchScreenLockSettings.putExtra(EXTRA_DESTINATION, FAKE_SCREEN_LOCK_SETTINGS);
+        when(mScreenLockPreferenceDetailsUtils.getLaunchScreenLockSettingsIntent(anyInt()))
+                .thenReturn(launchScreenLockSettings);
     }
 }

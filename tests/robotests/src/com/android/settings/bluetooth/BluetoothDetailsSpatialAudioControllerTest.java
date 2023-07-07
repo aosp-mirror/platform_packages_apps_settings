@@ -22,7 +22,9 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.bluetooth.BluetoothDevice;
 import android.media.AudioDeviceAttributes;
+import android.media.AudioDeviceInfo;
 import android.media.AudioManager;
 import android.media.Spatializer;
 
@@ -57,6 +59,8 @@ public class BluetoothDetailsSpatialAudioControllerTest extends BluetoothDetails
     private Lifecycle mSpatialAudioLifecycle;
     @Mock
     private PreferenceCategory mProfilesContainer;
+    @Mock
+    private BluetoothDevice mBluetoothDevice;
 
     private BluetoothDetailsSpatialAudioController mController;
     private SwitchPreference mSpatialAudioPref;
@@ -70,6 +74,8 @@ public class BluetoothDetailsSpatialAudioControllerTest extends BluetoothDetails
         when(mContext.getSystemService(AudioManager.class)).thenReturn(mAudioManager);
         when(mAudioManager.getSpatializer()).thenReturn(mSpatializer);
         when(mCachedDevice.getAddress()).thenReturn(MAC_ADDRESS);
+        when(mCachedDevice.getDevice()).thenReturn(mBluetoothDevice);
+        when(mBluetoothDevice.getAnonymizedAddress()).thenReturn(MAC_ADDRESS);
 
         mController = new BluetoothDetailsSpatialAudioController(mContext, mFragment,
                 mCachedDevice, mSpatialAudioLifecycle);
@@ -83,15 +89,85 @@ public class BluetoothDetailsSpatialAudioControllerTest extends BluetoothDetails
     }
 
     @Test
-    public void isAvailable_spatialAudioIsAvailable_returnsTrue() {
-        when(mSpatializer.isAvailableForDevice(mController.mAudioDevice)).thenReturn(true);
+    public void isAvailable_spatialAudioSupportA2dpDevice_returnsTrue() {
+        AudioDeviceAttributes a2dpDevice = new AudioDeviceAttributes(
+                AudioDeviceAttributes.ROLE_OUTPUT,
+                AudioDeviceInfo.TYPE_BLUETOOTH_A2DP,
+                MAC_ADDRESS);
+        when(mSpatializer.isAvailableForDevice(a2dpDevice)).thenReturn(true);
+
+        mController.setAvailableDevice(a2dpDevice);
+
         assertThat(mController.isAvailable()).isTrue();
+        assertThat(mController.mAudioDevice.getType())
+                .isEqualTo(AudioDeviceInfo.TYPE_BLUETOOTH_A2DP);
     }
 
     @Test
-    public void isAvailable_spatialAudioIsNotAvailable_returnsFalse() {
-        when(mSpatializer.isAvailableForDevice(mController.mAudioDevice)).thenReturn(false);
+    public void isAvailable_spatialAudioSupportBleHeadsetDevice_returnsTrue() {
+        AudioDeviceAttributes bleHeadsetDevice = new AudioDeviceAttributes(
+                AudioDeviceAttributes.ROLE_OUTPUT,
+                AudioDeviceInfo.TYPE_BLE_HEADSET,
+                MAC_ADDRESS);
+        when(mSpatializer.isAvailableForDevice(bleHeadsetDevice)).thenReturn(true);
+
+        mController.setAvailableDevice(bleHeadsetDevice);
+
+        assertThat(mController.isAvailable()).isTrue();
+        assertThat(mController.mAudioDevice.getType())
+                .isEqualTo(AudioDeviceInfo.TYPE_BLE_HEADSET);
+    }
+
+    @Test
+    public void isAvailable_spatialAudioSupportBleSpeakerDevice_returnsTrue() {
+        AudioDeviceAttributes bleSpeakerDevice = new AudioDeviceAttributes(
+                AudioDeviceAttributes.ROLE_OUTPUT,
+                AudioDeviceInfo.TYPE_BLE_SPEAKER,
+                MAC_ADDRESS);
+        when(mSpatializer.isAvailableForDevice(bleSpeakerDevice)).thenReturn(true);
+
+        mController.setAvailableDevice(bleSpeakerDevice);
+
+        assertThat(mController.isAvailable()).isTrue();
+        assertThat(mController.mAudioDevice.getType())
+                .isEqualTo(AudioDeviceInfo.TYPE_BLE_SPEAKER);
+    }
+
+    @Test
+    public void isAvailable_spatialAudioSupportBleBroadcastDevice_returnsTrue() {
+        AudioDeviceAttributes bleBroadcastDevice = new AudioDeviceAttributes(
+                AudioDeviceAttributes.ROLE_OUTPUT,
+                AudioDeviceInfo.TYPE_BLE_BROADCAST,
+                MAC_ADDRESS);
+        when(mSpatializer.isAvailableForDevice(bleBroadcastDevice)).thenReturn(true);
+
+        mController.setAvailableDevice(bleBroadcastDevice);
+
+        assertThat(mController.isAvailable()).isTrue();
+        assertThat(mController.mAudioDevice.getType())
+                .isEqualTo(AudioDeviceInfo.TYPE_BLE_BROADCAST);
+    }
+
+    @Test
+    public void isAvailable_spatialAudioSupportHearingAidDevice_returnsTrue() {
+        AudioDeviceAttributes hearingAidDevice = new AudioDeviceAttributes(
+                AudioDeviceAttributes.ROLE_OUTPUT,
+                AudioDeviceInfo.TYPE_HEARING_AID,
+                MAC_ADDRESS);
+        when(mSpatializer.isAvailableForDevice(hearingAidDevice)).thenReturn(true);
+
+        mController.setAvailableDevice(hearingAidDevice);
+
+        assertThat(mController.isAvailable()).isTrue();
+        assertThat(mController.mAudioDevice.getType())
+                .isEqualTo(AudioDeviceInfo.TYPE_HEARING_AID);
+    }
+
+    @Test
+    public void isAvailable_spatialAudioNotSupported_returnsFalse() {
         assertThat(mController.isAvailable()).isFalse();
+        assertThat(mController.mAudioDevice.getType())
+                .isEqualTo(AudioDeviceInfo.TYPE_HEARING_AID);
     }
 
     @Test

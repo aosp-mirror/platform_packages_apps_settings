@@ -18,11 +18,7 @@ package com.android.settings.applications.appinfo;
 import android.app.AppOpsManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.os.Bundle;
-import android.provider.Settings;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
@@ -41,20 +37,13 @@ import com.android.settingslib.applications.ApplicationsState.AppEntry;
 public class WriteSettingsDetails extends AppInfoWithHeader implements OnPreferenceChangeListener,
         OnPreferenceClickListener {
 
-    private static final String KEY_APP_OPS_PREFERENCE_SCREEN = "app_ops_preference_screen";
     private static final String KEY_APP_OPS_SETTINGS_SWITCH = "app_ops_settings_switch";
-    private static final String LOG_TAG = "WriteSettingsDetails";
-
-    private static final int [] APP_OPS_OP_CODE = {
-            AppOpsManager.OP_WRITE_SETTINGS
-    };
 
     // Use a bridge to get the overlay details but don't initialize it to connect with all state.
     // TODO: Break out this functionality into its own class.
     private AppStateWriteSettingsBridge mAppBridge;
     private AppOpsManager mAppOpsManager;
     private SwitchPreference mSwitchPref;
-    private Intent mSettingsIntent;
     private WriteSettingsState mWriteSettingsState;
 
     @Override
@@ -66,13 +55,10 @@ public class WriteSettingsDetails extends AppInfoWithHeader implements OnPrefere
         mAppOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
 
         addPreferencesFromResource(R.xml.write_system_settings_permissions_details);
-        mSwitchPref = (SwitchPreference) findPreference(KEY_APP_OPS_SETTINGS_SWITCH);
+        mSwitchPref = findPreference(KEY_APP_OPS_SETTINGS_SWITCH);
 
         mSwitchPref.setOnPreferenceChangeListener(this);
 
-        mSettingsIntent = new Intent(Intent.ACTION_MAIN)
-                .addCategory(Settings.INTENT_CATEGORY_USAGE_ACCESS_CONFIG)
-                .setPackage(mPackageName);
     }
 
     @Override
@@ -107,16 +93,6 @@ public class WriteSettingsDetails extends AppInfoWithHeader implements OnPrefere
                 logCategory, packageName);
     }
 
-    private boolean canWriteSettings(String pkgName) {
-        int result = mAppOpsManager.checkOpNoThrow(AppOpsManager.OP_WRITE_SETTINGS,
-                mPackageInfo.applicationInfo.uid, pkgName);
-        if (result == AppOpsManager.MODE_ALLOWED) {
-            return true;
-        }
-
-        return false;
-    }
-
     @Override
     protected boolean refreshUi() {
         mWriteSettingsState = mAppBridge.getWriteSettingsInfo(mPackageName,
@@ -127,8 +103,6 @@ public class WriteSettingsDetails extends AppInfoWithHeader implements OnPrefere
         // you can't ask a user for a permission you didn't even declare!
         mSwitchPref.setEnabled(mWriteSettingsState.permissionDeclared);
 
-        ResolveInfo resolveInfo = mPm.resolveActivityAsUser(mSettingsIntent,
-                PackageManager.GET_META_DATA, mUserId);
         return true;
     }
 
@@ -139,7 +113,7 @@ public class WriteSettingsDetails extends AppInfoWithHeader implements OnPrefere
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.SYSTEM_ALERT_WINDOW_APPS;
+        return SettingsEnums.MODIFY_SYSTEM_SETTINGS;
     }
 
     public static CharSequence getSummary(Context context, AppEntry entry) {

@@ -26,6 +26,8 @@ import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.OnLifecycleEvent;
 
 import com.android.internal.annotations.VisibleForTesting;
+import com.android.settings.Utils;
+import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.HashSet;
 
@@ -49,7 +51,7 @@ public final class EthernetTetherPreferenceController extends TetherBasePreferen
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     public void onStart() {
         mEthernetListener = (iface, state, role, configuration) -> {
-            if (state == EthernetManager.STATE_LINK_UP) {
+            if (state != EthernetManager.STATE_ABSENT) {
                 mAvailableInterfaces.add(iface);
             } else {
                 mAvailableInterfaces.remove(iface);
@@ -74,7 +76,7 @@ public final class EthernetTetherPreferenceController extends TetherBasePreferen
 
     @Override
     public boolean shouldEnable() {
-        ensureRunningOnMainLoopThread();
+        ThreadUtils.ensureMainThread();
         String[] available = mTm.getTetherableIfaces();
         for (String s : available) {
             if (mAvailableInterfaces.contains(s)) {
@@ -86,7 +88,7 @@ public final class EthernetTetherPreferenceController extends TetherBasePreferen
 
     @Override
     public boolean shouldShow() {
-        return mEthernetManager != null;
+        return mEthernetManager != null && !Utils.isMonkeyRunning();
     }
 
     @Override
@@ -94,11 +96,4 @@ public final class EthernetTetherPreferenceController extends TetherBasePreferen
         return TetheringManager.TETHERING_ETHERNET;
     }
 
-    private void ensureRunningOnMainLoopThread() {
-        if (Looper.getMainLooper().getThread() != Thread.currentThread()) {
-            throw new IllegalStateException(
-                    "Not running on main loop thread: "
-                            + Thread.currentThread().getName());
-        }
-    }
 }

@@ -19,6 +19,7 @@ package com.android.settings.applications.appinfo;
 import static com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY;
 
 import android.content.Context;
+import android.icu.text.MessageFormat;
 import android.os.Bundle;
 
 import androidx.preference.Preference;
@@ -30,6 +31,10 @@ import com.android.settings.notification.NotificationBackend;
 import com.android.settings.notification.app.AppNotificationSettings;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
+
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 
 public class AppNotificationPreferenceController extends AppInfoPreferenceControllerBase {
 
@@ -103,10 +108,14 @@ public class AppNotificationPreferenceController extends AppInfoPreferenceContro
             if (appRow.blockedChannelCount == 0) {
                 return NotificationBackend.getSentSummary(context, appRow.sentByApp, false);
             }
+            MessageFormat msgFormat = new MessageFormat(
+                    context.getString(R.string.notifications_categories_off),
+                    Locale.getDefault());
+            Map<String, Object> arguments = new HashMap<>();
+            arguments.put("count", appRow.blockedChannelCount);
             return context.getString(R.string.notifications_enabled_with_info,
                     NotificationBackend.getSentSummary(context, appRow.sentByApp, false),
-                    context.getResources().getQuantityString(R.plurals.notifications_categories_off,
-                            appRow.blockedChannelCount, appRow.blockedChannelCount));
+                    msgFormat.format(arguments));
         }
     }
 }

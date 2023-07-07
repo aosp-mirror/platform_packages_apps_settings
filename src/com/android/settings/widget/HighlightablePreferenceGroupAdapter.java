@@ -141,6 +141,8 @@ public class HighlightablePreferenceGroupAdapter extends PreferenceGroupAdapter 
             return;
         }
 
+        // Highlight request accepted
+        mHighlightRequested = true;
         // Collapse app bar after 300 milliseconds.
         if (appBarLayout != null) {
             root.postDelayed(() -> {
@@ -148,19 +150,39 @@ public class HighlightablePreferenceGroupAdapter extends PreferenceGroupAdapter 
             }, DELAY_COLLAPSE_DURATION_MILLIS);
         }
 
+        // Remove the animator as early as possible to avoid a RecyclerView crash.
+        recyclerView.setItemAnimator(null);
         // Scroll to correct position after 600 milliseconds.
         root.postDelayed(() -> {
-            mHighlightRequested = true;
-            // Remove the animator to avoid a RecyclerView crash.
-            recyclerView.setItemAnimator(null);
-            recyclerView.smoothScrollToPosition(position);
-            mHighlightPosition = position;
+            if (ensureHighlightPosition()) {
+                recyclerView.smoothScrollToPosition(mHighlightPosition);
+            }
         }, DELAY_HIGHLIGHT_DURATION_MILLIS);
 
         // Highlight preference after 900 milliseconds.
         root.postDelayed(() -> {
-            notifyItemChanged(position);
+            if (ensureHighlightPosition()) {
+                notifyItemChanged(mHighlightPosition);
+            }
         }, DELAY_COLLAPSE_DURATION_MILLIS + DELAY_HIGHLIGHT_DURATION_MILLIS);
+    }
+
+    /**
+     * Make sure we highlight the real-wanted position in case of preference position already
+     * changed when the delay time comes.
+     */
+    private boolean ensureHighlightPosition() {
+        if (TextUtils.isEmpty(mHighlightKey)) {
+            return false;
+        }
+        final int position = getPreferenceAdapterPosition(mHighlightKey);
+        final boolean allowHighlight = position >= 0;
+        if (allowHighlight && mHighlightPosition != position) {
+            Log.w(TAG, "EnsureHighlight: position has changed since last highlight request");
+            // Make sure RecyclerView always uses latest correct position to avoid exceptions.
+            mHighlightPosition = position;
+        }
+        return allowHighlight;
     }
 
     public boolean isHighlightRequested() {
