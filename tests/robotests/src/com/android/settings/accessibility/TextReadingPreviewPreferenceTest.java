@@ -129,6 +129,17 @@ public class TextReadingPreviewPreferenceTest {
         verify(mPreviewPagerAdapter).setPreviewLayer(eq(index), anyInt(), anyInt(), anyBoolean());
     }
 
+    @Test
+    public void afterPagerChange_updateCurrentItem() {
+        final int currentItem = 2;
+        mTextReadingPreviewPreference.setPreviewAdapter(mPreviewPagerAdapter);
+        mTextReadingPreviewPreference.onBindViewHolder(mHolder);
+
+        mViewPager.setCurrentItem(currentItem);
+
+        assertThat(mTextReadingPreviewPreference.getCurrentItem()).isEqualTo(currentItem);
+    }
+
     private static Configuration[] createConfigurations(int count) {
         final Configuration[] configurations = new Configuration[count];
         for (int i = 0; i < count; i++) {

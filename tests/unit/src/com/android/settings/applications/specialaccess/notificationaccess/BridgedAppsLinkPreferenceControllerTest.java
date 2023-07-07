@@ -31,6 +31,7 @@ import android.content.Context;
 import android.os.Build;
 import android.service.notification.NotificationListenerFilter;
 
+import androidx.preference.Preference;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
@@ -68,6 +69,11 @@ public class BridgedAppsLinkPreferenceControllerTest {
         mController.setTargetSdk(Build.VERSION_CODES.CUR_DEVELOPMENT + 1);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(DISABLED_DEPENDENT_SETTING);
+
+        // disables field
+        Preference p = new Preference(mContext);
+        mController.updateState(p);
+        assertThat(p.isEnabled()).isFalse();
     }
 
     @Test
@@ -77,6 +83,11 @@ public class BridgedAppsLinkPreferenceControllerTest {
         when(mNm.getListenerFilter(mCn, 0)).thenReturn(new NotificationListenerFilter());
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(DISABLED_DEPENDENT_SETTING);
+
+        // disables field
+        Preference p = new Preference(mContext);
+        mController.updateState(p);
+        assertThat(p.isEnabled()).isFalse();
     }
 
     @Test
@@ -88,6 +99,11 @@ public class BridgedAppsLinkPreferenceControllerTest {
         when(mNm.getListenerFilter(mCn, 0)).thenReturn(nlf);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+
+        // enables field
+        Preference p = new Preference(mContext);
+        mController.updateState(p);
+        assertThat(p.isEnabled()).isTrue();
     }
 
     @Test
@@ -97,5 +113,10 @@ public class BridgedAppsLinkPreferenceControllerTest {
         when(mNm.getListenerFilter(mCn, 0)).thenReturn(new NotificationListenerFilter());
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+
+        // enables field
+        Preference p = new Preference(mContext);
+        mController.updateState(p);
+        assertThat(p.isEnabled()).isTrue();
     }
 }

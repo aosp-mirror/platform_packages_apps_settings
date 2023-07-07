@@ -42,23 +42,24 @@ public class UnrestrictedPreferenceController extends AbstractPreferenceControll
     @Override
     public void updateState(Preference preference) {
 
-        if (!mBatteryOptimizeUtils.isValidPackageName()) {
-            Log.d(TAG, "invalid package name, disable pref");
+        if (mBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()) {
+            Log.d(TAG, "disable preference for " + mBatteryOptimizeUtils.getPackageName());
             preference.setEnabled(false);
             return;
         } else {
             preference.setEnabled(true);
         }
 
-        if (mBatteryOptimizeUtils.isSystemOrDefaultApp()) {
-            Log.d(TAG, "is system or default app, unrestricted states only");
-            ((SelectorWithWidgetPreference) preference).setChecked(true);
-        } else if (mBatteryOptimizeUtils.getAppOptimizationMode()
+        if (mBatteryOptimizeUtils.getAppOptimizationMode()
                 == BatteryOptimizeUtils.MODE_UNRESTRICTED) {
             Log.d(TAG, "is unrestricted states");
             ((SelectorWithWidgetPreference) preference).setChecked(true);
         } else {
             ((SelectorWithWidgetPreference) preference).setChecked(false);
+            if (mBatteryOptimizeUtils.isSystemOrDefaultApp()) {
+                Log.d(TAG, "is system or default app, disable pref");
+                preference.setEnabled(false);
+            }
         }
     }
 

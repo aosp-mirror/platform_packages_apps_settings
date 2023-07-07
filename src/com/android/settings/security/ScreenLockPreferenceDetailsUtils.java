@@ -148,7 +148,7 @@ public class ScreenLockPreferenceDetailsUtils {
         // able to complete the operation due to the lack of (old) encryption key.
         if (mProfileChallengeUserId != UserHandle.USER_NULL
                 && !mLockPatternUtils.isSeparateProfileChallengeEnabled(mProfileChallengeUserId)
-                && StorageManager.isFileEncryptedNativeOnly()) {
+                && StorageManager.isFileEncrypted()) {
             if (mUm.isQuietModeEnabled(UserHandle.of(mProfileChallengeUserId))) {
                 return UnlaunchableAppActivity.createInQuietModeDialogIntent(
                         mProfileChallengeUserId);

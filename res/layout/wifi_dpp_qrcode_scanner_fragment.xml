@@ -23,47 +23,46 @@
     android:icon="@drawable/ic_scan_32dp"
     app:sudDescriptionText="@string/wifi_dpp_scan_qr_code_join_unknown_network">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         style="@style/SudContentFrame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center_horizontal">
+        android:layout_height="match_parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical">
+        <FrameLayout
+            android:id="@+id/frame_layout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/error_message"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_max="@dimen/qrcode_preview_size"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_max="@dimen/qrcode_preview_size">
 
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clipChildren="true">
-                <TextureView
-                    android:id="@+id/preview_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/qrcode_preview_size"/>
-                <com.android.settingslib.qrcode.QrDecorateView
-                    android:id="@+id/decorate_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/qrcode_preview_size"/>
-            </FrameLayout>
+            <TextureView
+                android:id="@+id/preview_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
-            <TextView
-                android:id="@+id/error_message"
-                style="@style/TextAppearance.ErrorText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginStart="?attr/sudMarginStart"
-                android:layout_marginEnd="?attr/sudMarginEnd"
-                android:textAlignment="center"
-                android:visibility="invisible"/>
+            <com.android.settingslib.qrcode.QrDecorateView
+                android:id="@+id/decorate_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </FrameLayout>
 
-        </LinearLayout>
-
-    </LinearLayout>
+        <TextView
+            android:id="@+id/error_message"
+            style="@style/TextAppearance.ErrorText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="16dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/frame_layout" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.setupdesign.GlifLayout>
 

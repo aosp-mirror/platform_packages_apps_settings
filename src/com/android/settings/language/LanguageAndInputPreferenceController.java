@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.util.FeatureFlagUtils;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 
@@ -41,7 +42,9 @@ public class LanguageAndInputPreferenceController extends BasePreferenceControll
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        boolean isFeatureOn = FeatureFlagUtils
+                .isEnabled(mContext, FeatureFlagUtils.SETTINGS_NEW_KEYBOARD_UI);
+        return isFeatureOn ? CONDITIONALLY_UNAVAILABLE : AVAILABLE;
     }
 
     @Override

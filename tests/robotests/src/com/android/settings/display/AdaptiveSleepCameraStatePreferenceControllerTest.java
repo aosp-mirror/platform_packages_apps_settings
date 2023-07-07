@@ -28,6 +28,7 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.pm.PackageManager;
 
+import androidx.lifecycle.Lifecycle;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.shadow.ShadowSensorPrivacyManager;
@@ -50,6 +51,8 @@ public class AdaptiveSleepCameraStatePreferenceControllerTest {
     private PackageManager mPackageManager;
     @Mock
     private PreferenceScreen mScreen;
+    @Mock
+    private Lifecycle mLifecycle;
 
     @Before
     public void setUp() {
@@ -61,7 +64,7 @@ public class AdaptiveSleepCameraStatePreferenceControllerTest {
         when(mPackageManager.checkPermission(any(), any())).thenReturn(
                 PackageManager.PERMISSION_GRANTED);
 
-        mController = new AdaptiveSleepCameraStatePreferenceController(mContext);
+        mController = new AdaptiveSleepCameraStatePreferenceController(mContext, mLifecycle);
         when(mController.isCameraLocked()).thenReturn(false);
     }
 

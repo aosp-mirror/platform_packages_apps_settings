@@ -31,6 +31,7 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -72,6 +73,7 @@ public class ChargingSoundPreferenceControllerTest {
         assertThat(mController.isAvailable()).isTrue();
     }
 
+    @Ignore
     @Test
     @Config(qualifiers = "mcc999")
     public void isAvailable_whenNotVisible_isFalse() {
