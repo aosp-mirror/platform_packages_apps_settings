@@ -81,6 +81,7 @@ public class VolumeSeekBarPreferenceTest {
 
     @Test
     public void init_listenerIsCalled() {
+        when(mPreference.isEnabled()).thenReturn(true);
         doCallRealMethod().when(mPreference).setListener(mListener);
         doCallRealMethod().when(mPreference).init();
 
@@ -92,6 +93,18 @@ public class VolumeSeekBarPreferenceTest {
 
     @Test
     public void init_listenerNotSet_noException() {
+        when(mPreference.isEnabled()).thenReturn(true);
+        doCallRealMethod().when(mPreference).init();
+
+        mPreference.init();
+
+        verify(mPreference, never()).updateContentDescription(CONTENT_DESCRIPTION);
+    }
+
+    @Test
+    public void init_preferenceIsDisabled_shouldNotInvokeListener() {
+        when(mPreference.isEnabled()).thenReturn(false);
+        doCallRealMethod().when(mPreference).setListener(mListener);
         doCallRealMethod().when(mPreference).init();
 
         mPreference.init();
