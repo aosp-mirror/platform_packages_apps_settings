@@ -28,7 +28,6 @@ import android.content.Intent;
 import android.nfc.NfcAdapter;
 import android.nfc.NfcManager;
 import android.os.UserManager;
-import android.provider.Settings;
 
 import androidx.preference.PreferenceScreen;
 
@@ -186,44 +185,6 @@ public class NfcPreferenceControllerTest {
     @Test
     public void hasAsyncUpdate_shouldReturnTrue() {
         assertThat(mNfcController.hasAsyncUpdate()).isTrue();
-    }
-
-    @Test
-    public void isToggleableInAirplaneMode_containNfc_shouldReturnTrue() {
-        Settings.Global.putString(mContext.getContentResolver(),
-                Settings.Global.AIRPLANE_MODE_TOGGLEABLE_RADIOS,
-                Settings.Global.RADIO_NFC);
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.AIRPLANE_MODE_ON, 1);
-
-        assertThat(NfcPreferenceController.isToggleableInAirplaneMode(mContext)).isTrue();
-    }
-
-    @Test
-    public void isToggleableInAirplaneMode_withoutNfc_shouldReturnFalse() {
-        Settings.Global.putString(mContext.getContentResolver(),
-                Settings.Global.AIRPLANE_MODE_TOGGLEABLE_RADIOS,
-                "null");
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.AIRPLANE_MODE_ON, 1);
-
-        assertThat(NfcPreferenceController.isToggleableInAirplaneMode(mContext)).isFalse();
-    }
-
-    @Test
-    public void shouldTurnOffNFCInAirplaneMode_airplaneModeRadiosContainsNfc_shouldReturnTrue() {
-        Settings.Global.putString(mContext.getContentResolver(),
-                Settings.Global.AIRPLANE_MODE_RADIOS, Settings.Global.RADIO_NFC);
-
-        assertThat(NfcPreferenceController.shouldTurnOffNFCInAirplaneMode(mContext)).isTrue();
-    }
-
-    @Test
-    public void shouldTurnOffNFCInAirplaneMode_airplaneModeRadiosWithoutNfc_shouldReturnFalse() {
-        Settings.Global.putString(mContext.getContentResolver(),
-                Settings.Global.AIRPLANE_MODE_RADIOS, "");
-
-        assertThat(NfcPreferenceController.shouldTurnOffNFCInAirplaneMode(mContext)).isFalse();
     }
 
     @Test

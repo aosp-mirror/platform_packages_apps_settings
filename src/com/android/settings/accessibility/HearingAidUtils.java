@@ -23,7 +23,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.android.settings.bluetooth.HearingAidPairingDialogFragment;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
-import com.android.settingslib.bluetooth.HearingAidProfile;
+import com.android.settingslib.bluetooth.HearingAidInfo;
 
 /** Provides utility methods related hearing aids. */
 public final class HearingAidUtils {
@@ -40,8 +40,8 @@ public final class HearingAidUtils {
      */
     public static void launchHearingAidPairingDialog(FragmentManager fragmentManager,
             @NonNull CachedBluetoothDevice device) {
-        if (device.isConnectedHearingAidDevice()
-                && device.getDeviceMode() == HearingAidProfile.DeviceMode.MODE_BINAURAL
+        if (device.isConnectedAshaHearingAidDevice()
+                && device.getDeviceMode() == HearingAidInfo.DeviceMode.MODE_BINAURAL
                 && device.getSubDevice() == null) {
             launchHearingAidPairingDialogInternal(fragmentManager, device);
         }
@@ -49,11 +49,11 @@ public final class HearingAidUtils {
 
     private static void launchHearingAidPairingDialogInternal(FragmentManager fragmentManager,
             @NonNull CachedBluetoothDevice device) {
-        if (device.getDeviceSide() == HearingAidProfile.DeviceSide.SIDE_INVALID) {
+        if (device.getDeviceSide() == HearingAidInfo.DeviceSide.SIDE_INVALID) {
             Log.w(TAG, "Can not launch hearing aid pairing dialog for invalid side");
             return;
         }
-        HearingAidPairingDialogFragment.newInstance(device).show(fragmentManager,
+        HearingAidPairingDialogFragment.newInstance(device.getAddress()).show(fragmentManager,
                 HearingAidPairingDialogFragment.TAG);
     }
 }

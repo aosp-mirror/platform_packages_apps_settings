@@ -312,21 +312,6 @@ public class ZenModeBackend {
         return R.string.zen_mode_from_no_conversations;
     }
 
-    protected int getConversationSummary() {
-        int conversationType = getPriorityConversationSenders();
-
-        switch (conversationType) {
-            case NotificationManager.Policy.CONVERSATION_SENDERS_ANYONE:
-                return R.string.zen_mode_from_all_conversations;
-            case NotificationManager.Policy.CONVERSATION_SENDERS_IMPORTANT:
-                return R.string.zen_mode_from_important_conversations;
-            case NotificationManager.Policy.CONVERSATION_SENDERS_NONE:
-                return R.string.zen_mode_from_no_conversations;
-            default:
-                return R.string.zen_mode_from_no_conversations;
-        }
-    }
-
     protected int getContactsCallsSummary(ZenPolicy policy) {
         int peopleType = policy.getPriorityCallSenders();
         switch (peopleType) {
