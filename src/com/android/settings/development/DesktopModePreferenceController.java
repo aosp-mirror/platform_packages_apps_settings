@@ -19,7 +19,6 @@ package com.android.settings.development;
 import static android.provider.Settings.Global.DEVELOPMENT_FORCE_DESKTOP_MODE_ON_EXTERNAL_DISPLAYS;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Build;
 import android.provider.Settings;
 
@@ -81,12 +80,6 @@ public class DesktopModePreferenceController extends DeveloperOptionsPreferenceC
         Settings.Global.putInt(mContext.getContentResolver(),
                 DEVELOPMENT_FORCE_DESKTOP_MODE_ON_EXTERNAL_DISPLAYS, SETTING_VALUE_OFF);
         ((SwitchPreference) mPreference).setChecked(false);
-    }
-
-    @Override
-    public void onRebootConfirmed() {
-        final Intent intent = new Intent(Intent.ACTION_REBOOT);
-        mContext.startActivity(intent);
     }
 
     @VisibleForTesting

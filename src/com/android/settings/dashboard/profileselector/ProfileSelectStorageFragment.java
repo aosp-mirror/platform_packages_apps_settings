@@ -323,7 +323,7 @@ public class ProfileSelectStorageFragment extends ProfileSelectFragment {
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.SETTINGS_STORAGE_CATEGORY;
+        return SettingsEnums.SETTINGS_STORAGE_PROFILE_SELECTOR;
     }
 
     @Override

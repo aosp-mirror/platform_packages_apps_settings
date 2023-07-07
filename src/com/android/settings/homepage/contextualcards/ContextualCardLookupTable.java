@@ -34,7 +34,6 @@ import com.android.settings.homepage.contextualcards.slices.SliceContextualCardR
 import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class ContextualCardLookupTable {
@@ -65,41 +64,39 @@ public class ContextualCardLookupTable {
     }
 
     @VisibleForTesting
-    static final Set<ControllerRendererMapping> LOOKUP_TABLE =
-            new TreeSet<ControllerRendererMapping>() {{
-                add(new ControllerRendererMapping(CardType.CONDITIONAL,
-                        ConditionContextualCardRenderer.VIEW_TYPE_HALF_WIDTH,
-                        ConditionContextualCardController.class,
-                        ConditionContextualCardRenderer.class));
-                add(new ControllerRendererMapping(CardType.CONDITIONAL,
-                        ConditionContextualCardRenderer.VIEW_TYPE_FULL_WIDTH,
-                        ConditionContextualCardController.class,
-                        ConditionContextualCardRenderer.class));
-                add(new ControllerRendererMapping(CardType.LEGACY_SUGGESTION,
-                        LegacySuggestionContextualCardRenderer.VIEW_TYPE,
-                        LegacySuggestionContextualCardController.class,
-                        LegacySuggestionContextualCardRenderer.class));
-                add(new ControllerRendererMapping(CardType.SLICE,
-                        SliceContextualCardRenderer.VIEW_TYPE_FULL_WIDTH,
-                        SliceContextualCardController.class,
-                        SliceContextualCardRenderer.class));
-                add(new ControllerRendererMapping(CardType.SLICE,
-                        SliceContextualCardRenderer.VIEW_TYPE_HALF_WIDTH,
-                        SliceContextualCardController.class,
-                        SliceContextualCardRenderer.class));
-                add(new ControllerRendererMapping(CardType.SLICE,
-                        SliceContextualCardRenderer.VIEW_TYPE_STICKY,
-                        SliceContextualCardController.class,
-                        SliceContextualCardRenderer.class));
-                add(new ControllerRendererMapping(CardType.CONDITIONAL_FOOTER,
-                        ConditionFooterContextualCardRenderer.VIEW_TYPE,
-                        ConditionContextualCardController.class,
-                        ConditionFooterContextualCardRenderer.class));
-                add(new ControllerRendererMapping(CardType.CONDITIONAL_HEADER,
-                        ConditionHeaderContextualCardRenderer.VIEW_TYPE,
-                        ConditionContextualCardController.class,
-                        ConditionHeaderContextualCardRenderer.class));
-            }};
+    static final Set<ControllerRendererMapping> LOOKUP_TABLE = Set.of(
+            new ControllerRendererMapping(CardType.CONDITIONAL,
+                    ConditionContextualCardRenderer.VIEW_TYPE_HALF_WIDTH,
+                    ConditionContextualCardController.class,
+                    ConditionContextualCardRenderer.class),
+            new ControllerRendererMapping(CardType.CONDITIONAL,
+                    ConditionContextualCardRenderer.VIEW_TYPE_FULL_WIDTH,
+                    ConditionContextualCardController.class,
+                    ConditionContextualCardRenderer.class),
+            new ControllerRendererMapping(CardType.LEGACY_SUGGESTION,
+                    LegacySuggestionContextualCardRenderer.VIEW_TYPE,
+                    LegacySuggestionContextualCardController.class,
+                    LegacySuggestionContextualCardRenderer.class),
+            new ControllerRendererMapping(CardType.SLICE,
+                    SliceContextualCardRenderer.VIEW_TYPE_FULL_WIDTH,
+                    SliceContextualCardController.class,
+                    SliceContextualCardRenderer.class),
+            new ControllerRendererMapping(CardType.SLICE,
+                    SliceContextualCardRenderer.VIEW_TYPE_HALF_WIDTH,
+                    SliceContextualCardController.class,
+                    SliceContextualCardRenderer.class),
+            new ControllerRendererMapping(CardType.SLICE,
+                    SliceContextualCardRenderer.VIEW_TYPE_STICKY,
+                    SliceContextualCardController.class,
+                    SliceContextualCardRenderer.class),
+            new ControllerRendererMapping(CardType.CONDITIONAL_FOOTER,
+                    ConditionFooterContextualCardRenderer.VIEW_TYPE,
+                    ConditionContextualCardController.class,
+                    ConditionFooterContextualCardRenderer.class),
+            new ControllerRendererMapping(CardType.CONDITIONAL_HEADER,
+                    ConditionHeaderContextualCardRenderer.VIEW_TYPE,
+                    ConditionContextualCardController.class,
+                    ConditionHeaderContextualCardRenderer.class));
 
     public static Class<? extends ContextualCardController> getCardControllerClass(
             @CardType int cardType) {

@@ -22,7 +22,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.os.PersistableBundle;
 import android.provider.Settings;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
@@ -74,6 +73,7 @@ public class NetworkProviderWifiCallingGroup extends
     private Map<Integer, PhoneAccountHandle> mSimCallManagerList = new HashMap<>();
     private Map<Integer, Preference> mWifiCallingForSubPreferences;
     private List<SubscriptionInfo> mSubInfoListForWfc;
+    private SubscriptionsChangeListener mChangeListener;
 
     public NetworkProviderWifiCallingGroup(Context context, Lifecycle lifecycle,
             String preferenceGroupKey) {
@@ -87,26 +87,25 @@ public class NetworkProviderWifiCallingGroup extends
             mTelephonyCallback = new PhoneCallStateTelephonyCallback();
         }
         lifecycle.addObserver(this);
+        mChangeListener = new SubscriptionsChangeListener(context, this);
     }
 
     private void setSubscriptionInfoList(Context context) {
         mSubInfoListForWfc = new ArrayList<>(
                 SubscriptionUtil.getActiveSubscriptions(mSubscriptionManager));
-        if (mSubInfoListForWfc != null) {
-            mSubInfoListForWfc.removeIf(info -> {
-                final int subId = info.getSubscriptionId();
-                setTelephonyManagerForSubscriptionId(context, subId);
-                setPhoneAccountHandleForSubscriptionId(context, subId);
-                boolean isExisted = mSubInfoListForWfc.contains(info);
-                boolean shouldShowWfcForSub = shouldShowWifiCallingForSub(subId);
-                if (!shouldShowWfcForSub && isExisted) {
-                    return true;
-                }
-                return false;
-            });
-        } else {
-            Log.d(TAG, "No active subscriptions");
-        }
+        mSubInfoListForWfc.removeIf(info -> {
+            final int subId = info.getSubscriptionId();
+            setTelephonyManagerForSubscriptionId(context, subId);
+            setPhoneAccountHandleForSubscriptionId(context, subId);
+            boolean isExisted = mSubInfoListForWfc.contains(info);
+            boolean shouldShowWfcForSub = shouldShowWifiCallingForSub(subId);
+            if (!shouldShowWfcForSub && isExisted) {
+                return true;
+            }
+            return false;
+        });
+        Log.d(TAG, "setSubscriptionInfoList: mSubInfoListForWfc size:"
+                + mSubInfoListForWfc.size());
     }
 
     private void setTelephonyManagerForSubscriptionId(Context context, int subId) {
@@ -137,12 +136,18 @@ public class NetworkProviderWifiCallingGroup extends
 
     @OnLifecycleEvent(Event.ON_RESUME)
     public void onResume() {
+        if (mChangeListener != null) {
+            mChangeListener.start();
+        }
         updateListener();
         update();
     }
 
     @OnLifecycleEvent(Event.ON_PAUSE)
     public void onPause() {
+        if (mChangeListener != null) {
+            mChangeListener.stop();
+        }
         if ((mTelephonyCallback != null)) {
             mTelephonyCallback.unregister();
         }
@@ -176,6 +181,7 @@ public class NetworkProviderWifiCallingGroup extends
 
     private void update() {
         if (mPreferenceGroup == null) {
+            Log.d(TAG, "mPreferenceGroup == null");
             return;
         }
 
@@ -255,7 +261,11 @@ public class NetworkProviderWifiCallingGroup extends
 
     @Override
     public void onSubscriptionsChanged() {
+        Log.d(TAG, "onSubscriptionsChanged:");
         setSubscriptionInfoList(mContext);
+        if (mPreferenceGroup != null) {
+            mPreferenceGroup.setVisible(isAvailable());
+        }
         updateListener();
         update();
     }
@@ -303,26 +313,10 @@ public class NetworkProviderWifiCallingGroup extends
     @VisibleForTesting
     protected boolean shouldShowWifiCallingForSub(int subId) {
         if (SubscriptionManager.isValidSubscriptionId(subId)
-                && MobileNetworkUtils.isWifiCallingEnabled(
-                mContext, subId, queryImsState(subId),
-                getPhoneAccountHandleForSubscriptionId(subId))
-                && isWifiCallingAvailableForCarrier(subId)) {
+                && MobileNetworkUtils.isWifiCallingEnabled(mContext, subId, queryImsState(subId))) {
             return true;
         }
         return false;
-    }
-
-    private boolean isWifiCallingAvailableForCarrier(int subId) {
-        boolean isWifiCallingAvailableForCarrier = false;
-        if (mCarrierConfigManager != null) {
-            final PersistableBundle carrierConfig =
-                    mCarrierConfigManager.getConfigForSubId(subId);
-            if (carrierConfig != null) {
-                isWifiCallingAvailableForCarrier = carrierConfig.getBoolean(
-                        CarrierConfigManager.KEY_CARRIER_WFC_IMS_AVAILABLE_BOOL);
-            }
-        }
-        return isWifiCallingAvailableForCarrier;
     }
 
     @Override

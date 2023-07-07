@@ -21,13 +21,16 @@ import static com.android.settings.development.tare.DropdownActivity.POLICY_ALAR
 import static com.android.settings.development.tare.DropdownActivity.POLICY_JOB_SCHEDULER;
 
 import android.app.Activity;
+import android.app.tare.EconomyManager;
 import android.content.Intent;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.provider.DeviceConfig;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -40,6 +43,8 @@ import com.android.settings.R;
 
 /** Class for creating the TARE homepage in settings */
 public class TareHomePage extends Activity {
+    private static final String TAG = "TareHomePage";
+
     private Switch mOnSwitch;
     private Button mRevButton;
     private TextView mAlarmManagerView;
@@ -66,7 +71,7 @@ public class TareHomePage extends Activity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (mConfigObserver.mEnableTareSetting == SETTING_VALUE_DEFAULT
-                        && isChecked == (Settings.Global.DEFAULT_ENABLE_TARE == SETTING_VALUE_ON)) {
+                        && isChecked == mConfigObserver.getDefaultEnabledStatus()) {
                     // Don't bother writing something that's not new information. It would make
                     // it hard to use DeviceConfig if we did.
                     return;
@@ -93,12 +98,19 @@ public class TareHomePage extends Activity {
     /** Reverts the TARE settings to the original default settings */
     public void revertSettings(View v) {
         Toast.makeText(this, R.string.tare_settings_reverted_toast, Toast.LENGTH_LONG).show();
+        final boolean wasSettingsDefault =
+                mConfigObserver.mEnableTareSetting == SETTING_VALUE_DEFAULT;
         Settings.Global.putString(getApplicationContext().getContentResolver(),
                 Settings.Global.ENABLE_TARE, null);
         Settings.Global.putString(getApplicationContext().getContentResolver(),
                 Settings.Global.TARE_ALARM_MANAGER_CONSTANTS, null);
         Settings.Global.putString(getApplicationContext().getContentResolver(),
                 Settings.Global.TARE_JOB_SCHEDULER_CONSTANTS, null);
+        if (wasSettingsDefault) {
+            // Only do this manually here to force a DeviceConfig check if the settings value isn't
+            // actually changing.
+            setEnabled(mConfigObserver.getDefaultEnabledStatus());
+        }
     }
 
     /** Opens up the AlarmManager TARE policy page with its factors to view and edit */
@@ -117,7 +129,6 @@ public class TareHomePage extends Activity {
 
     /** Changes the enabled state of the TARE homepage buttons based on global toggle */
     private void setEnabled(boolean tareStatus) {
-        mRevButton.setEnabled(tareStatus);
         mAlarmManagerView.setEnabled(tareStatus);
         mJobSchedulerView.setEnabled(tareStatus);
         mOnSwitch.setChecked(tareStatus);
@@ -148,16 +159,32 @@ public class TareHomePage extends Activity {
         private void processEnableTareChange() {
             final String setting =
                     Settings.Global.getString(getContentResolver(), Settings.Global.ENABLE_TARE);
-            if (setting == null ) {
+            if (setting == null) {
                 mEnableTareSetting = SETTING_VALUE_DEFAULT;
             } else {
                 try {
                     mEnableTareSetting = Integer.parseInt(setting);
                 } catch (NumberFormatException e) {
-                    mEnableTareSetting = Settings.Global.DEFAULT_ENABLE_TARE;
+                    Log.e(TAG, "Invalid setting value", e);
+                    mEnableTareSetting = EconomyManager.DEFAULT_ENABLE_TARE_MODE;
                 }
             }
-            setEnabled(mEnableTareSetting == SETTING_VALUE_ON);
+            final boolean enabled;
+            if (mEnableTareSetting == SETTING_VALUE_ON) {
+                enabled = true;
+            } else if (mEnableTareSetting == SETTING_VALUE_OFF) {
+                enabled = false;
+            } else {
+                enabled = getDefaultEnabledStatus();
+            }
+            setEnabled(enabled);
+        }
+
+        private boolean getDefaultEnabledStatus() {
+            // Show Shadow Mode as "off" in the UI since it won't be affecting device behavior.
+            return DeviceConfig.getInt(DeviceConfig.NAMESPACE_TARE,
+                    EconomyManager.KEY_ENABLE_TARE_MODE,
+                    EconomyManager.DEFAULT_ENABLE_TARE_MODE) == EconomyManager.ENABLED_MODE_ON;
         }
     }
 }

@@ -23,6 +23,7 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.safetycenter.SafetyEvent;
 import android.safetycenter.SafetySourceData;
 import android.safetycenter.SafetySourceIssue;
@@ -42,6 +43,9 @@ public final class LockScreenSafetySource {
     public static final String NO_SCREEN_LOCK_ISSUE_TYPE_ID = "NoScreenLockIssueType";
     public static final String SET_SCREEN_LOCK_ACTION_ID = "SetScreenLockAction";
 
+    private static final int REQUEST_CODE_SCREEN_LOCK = 1;
+    private static final int REQUEST_CODE_SCREEN_LOCK_SETTINGS = 2;
+
     private LockScreenSafetySource() {
     }
 
@@ -53,6 +57,11 @@ public final class LockScreenSafetySource {
             return;
         }
 
+        UserManager userManager = context.getSystemService(UserManager.class);
+        if (userManager != null && userManager.isProfile()) {
+            return; // LockScreen source only supports primary profile.
+        }
+
         if (!screenLockPreferenceDetailsUtils.isAvailable()) {
             return;
         }
@@ -62,7 +71,7 @@ public final class LockScreenSafetySource {
                 .checkIfPasswordQualityIsSet(context, userId);
         final PendingIntent pendingIntent = createPendingIntent(context,
                 screenLockPreferenceDetailsUtils.getLaunchChooseLockGenericFragmentIntent(
-                        SettingsEnums.SAFETY_CENTER));
+                        SettingsEnums.SAFETY_CENTER), REQUEST_CODE_SCREEN_LOCK);
         final IconAction gearMenuIconAction = createGearMenuIconAction(context,
                 screenLockPreferenceDetailsUtils);
         final boolean enabled =
@@ -114,15 +123,17 @@ public final class LockScreenSafetySource {
                 IconAction.ICON_TYPE_GEAR,
                 createPendingIntent(context,
                         screenLockPreferenceDetailsUtils.getLaunchScreenLockSettingsIntent(
-                                SettingsEnums.SAFETY_CENTER)))
+                                SettingsEnums.SAFETY_CENTER),
+                        REQUEST_CODE_SCREEN_LOCK_SETTINGS))
                 : null;
     }
 
-    private static PendingIntent createPendingIntent(Context context, Intent intent) {
+    private static PendingIntent createPendingIntent(Context context, Intent intent,
+            int requestCode) {
         return PendingIntent
                 .getActivity(
                         context,
-                        0 /* requestCode */,
+                        requestCode,
                         intent,
                         PendingIntent.FLAG_IMMUTABLE);
     }
@@ -133,6 +144,12 @@ public final class LockScreenSafetySource {
                 SET_SCREEN_LOCK_ACTION_ID,
                 context.getString(R.string.no_screen_lock_issue_action_label),
                 pendingIntent).build();
+        // Custom notification deliberately has zero actions
+        final SafetySourceIssue.Notification customNotification =
+            new SafetySourceIssue.Notification.Builder(
+                context.getString(R.string.no_screen_lock_issue_notification_title),
+                context.getString(R.string.no_screen_lock_issue_notification_text))
+                .build();
         return new SafetySourceIssue.Builder(
                 NO_SCREEN_LOCK_ISSUE_ID,
                 context.getString(R.string.no_screen_lock_issue_title),
@@ -140,6 +157,10 @@ public final class LockScreenSafetySource {
                 SafetySourceData.SEVERITY_LEVEL_RECOMMENDATION,
                 NO_SCREEN_LOCK_ISSUE_TYPE_ID)
                 .setIssueCategory(SafetySourceIssue.ISSUE_CATEGORY_DEVICE)
-                .addAction(action).build();
+                .addAction(action)
+                .setIssueActionability(SafetySourceIssue.ISSUE_ACTIONABILITY_MANUAL)
+                .setCustomNotification(customNotification)
+                .setNotificationBehavior(SafetySourceIssue.NOTIFICATION_BEHAVIOR_DELAYED)
+                .build();
     }
 }

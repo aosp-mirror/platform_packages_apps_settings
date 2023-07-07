@@ -25,7 +25,6 @@ import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.location.BluetoothScanningFragment;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.utils.AnnotationSpan;
 import com.android.settings.widget.SwitchWidgetController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
@@ -121,15 +120,14 @@ public class BluetoothSwitchPreferenceController
     }
 
     @VisibleForTesting void updateText(boolean isChecked) {
-        if (!isChecked
-                && Utils.isBluetoothScanningEnabled(mContext)) {
-            AnnotationSpan.LinkInfo info = new AnnotationSpan.LinkInfo(
-                    AnnotationSpan.LinkInfo.DEFAULT_ANNOTATION, this);
-            CharSequence text = AnnotationSpan.linkify(
-                    mContext.getText(R.string.bluetooth_scanning_on_info_message), info);
-            mFooterPreference.setTitle(text);
+        if (!isChecked && Utils.isBluetoothScanningEnabled(mContext)) {
+            mFooterPreference.setTitle(R.string.bluetooth_scanning_on_info_message);
+            mFooterPreference.setLearnMoreText(mContext.getString(R.string.bluetooth_scan_change));
+            mFooterPreference.setLearnMoreAction(v -> onClick(v));
         } else {
             mFooterPreference.setTitle(R.string.bluetooth_empty_list_bluetooth_off);
+            mFooterPreference.setLearnMoreText("");
+            mFooterPreference.setLearnMoreAction(null);
         }
     }
 }

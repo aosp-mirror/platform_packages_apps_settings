@@ -40,6 +40,19 @@ public abstract class BiometricEnrollSidecar extends InstrumentedFragment {
         void onEnrollmentHelp(int helpMsgId, CharSequence helpString);
         void onEnrollmentError(int errMsgId, CharSequence errString);
         void onEnrollmentProgressChange(int steps, int remaining);
+        /**
+         * Called when a fingerprint image has been acquired.
+         * @param isAcquiredGood whether the fingerprint image was good.
+         */
+        default void onAcquired(boolean isAcquiredGood) { }
+        /**
+         * Called when a pointer down event has occurred.
+         */
+        default void onPointerDown(int sensorId) { }
+        /**
+         * Called when a pointer up event has occurred.
+         */
+        default void onPointerUp(int sensorId) { }
     }
 
     private int mEnrollmentSteps = -1;
@@ -97,6 +110,45 @@ public abstract class BiometricEnrollSidecar extends InstrumentedFragment {
         @Override
         public void send(Listener listener) {
             listener.onEnrollmentError(errMsgId, errString);
+        }
+    }
+
+    private class QueuedAcquired extends QueuedEvent {
+        private final boolean isAcquiredGood;
+
+        public QueuedAcquired(boolean isAcquiredGood) {
+            this.isAcquiredGood = isAcquiredGood;
+        }
+
+        @Override
+        public void send(Listener listener) {
+            listener.onAcquired(isAcquiredGood);
+        }
+    }
+
+    private class QueuedPointerDown extends QueuedEvent {
+        private final int sensorId;
+
+        public QueuedPointerDown(int sensorId) {
+            this.sensorId = sensorId;
+        }
+
+        @Override
+        public void send(Listener listener) {
+            listener.onPointerDown(sensorId);
+        }
+    }
+
+    private class QueuedPointerUp extends QueuedEvent {
+        private final int sensorId;
+
+        public QueuedPointerUp(int sensorId) {
+            this.sensorId = sensorId;
+        }
+
+        @Override
+        public void send(Listener listener) {
+            listener.onPointerUp(sensorId);
         }
     }
 
@@ -187,6 +239,30 @@ public abstract class BiometricEnrollSidecar extends InstrumentedFragment {
             mQueuedEvents.add(new QueuedEnrollmentError(errMsgId, errString));
         }
         mEnrolling = false;
+    }
+
+    protected void onAcquired(boolean isAcquiredGood) {
+        if (mListener != null) {
+            mListener.onAcquired(isAcquiredGood);
+        } else {
+            mQueuedEvents.add(new QueuedAcquired(isAcquiredGood));
+        }
+    }
+
+    protected void onPointerDown(int sensorId) {
+        if (mListener != null) {
+            mListener.onPointerDown(sensorId);
+        } else {
+            mQueuedEvents.add(new QueuedPointerDown(sensorId));
+        }
+    }
+
+    protected void onPointerUp(int sensorId) {
+        if (mListener != null) {
+            mListener.onPointerUp(sensorId);
+        } else {
+            mQueuedEvents.add(new QueuedPointerUp(sensorId));
+        }
     }
 
     public void setListener(Listener listener) {
