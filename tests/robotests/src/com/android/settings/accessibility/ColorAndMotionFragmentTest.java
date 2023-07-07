@@ -18,6 +18,7 @@ package com.android.settings.accessibility;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 
 import androidx.test.core.app.ApplicationProvider;
@@ -25,16 +26,41 @@ import androidx.test.core.app.ApplicationProvider;
 import com.android.settings.R;
 import com.android.settings.testutils.XmlTestUtils;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 
 import java.util.List;
 
+/** Tests for {@link ColorAndMotionFragment}. */
 @RunWith(RobolectricTestRunner.class)
 public class ColorAndMotionFragmentTest {
 
-    private Context mContext = ApplicationProvider.getApplicationContext();
+    private final Context mContext = ApplicationProvider.getApplicationContext();
+    private ColorAndMotionFragment mFragment;
+
+    @Before
+    public void setUp() {
+        mFragment = new ColorAndMotionFragment();
+    }
+
+    @Test
+    public void getMetricsCategory_returnsCorrectCategory() {
+        assertThat(mFragment.getMetricsCategory()).isEqualTo(
+                SettingsEnums.ACCESSIBILITY_COLOR_AND_MOTION);
+    }
+
+    @Test
+    public void getPreferenceScreenResId_returnsCorrectXml() {
+        assertThat(mFragment.getPreferenceScreenResId()).isEqualTo(
+                R.xml.accessibility_color_and_motion);
+    }
+
+    @Test
+    public void getLogTag_returnsCorrectTag() {
+        assertThat(mFragment.getLogTag()).isEqualTo("ColorAndMotionFragment");
+    }
 
     @Test
     public void getNonIndexableKeys_existInXmlLayout() {

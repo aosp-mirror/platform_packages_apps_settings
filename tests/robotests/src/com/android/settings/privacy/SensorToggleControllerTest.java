@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 The Android Open Source Project
+ * Copyright (C) 2021 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,275 +16,426 @@
 
 package com.android.settings.privacy;
 
-import static android.hardware.SensorPrivacyManager.Sensors.CAMERA;
-import static android.hardware.SensorPrivacyManager.Sensors.MICROPHONE;
-import static android.hardware.SensorPrivacyManager.Sources.OTHER;
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
+import static com.android.settings.utils.SensorPrivacyManagerHelper.SENSOR_CAMERA;
+import static com.android.settings.utils.SensorPrivacyManagerHelper.SENSOR_MICROPHONE;
+import static com.android.settings.utils.SensorPrivacyManagerHelper.TOGGLE_TYPE_SOFTWARE;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 import android.content.Context;
-import android.hardware.SensorPrivacyManager;
-import android.hardware.SensorPrivacyManager.OnSensorPrivacyChangedListener;
-import android.util.ArraySet;
-import android.util.SparseArray;
-import android.util.SparseBooleanArray;
+
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.utils.SensorPrivacyManagerHelper;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
+import org.mockito.MockitoSession;
+import org.mockito.quality.Strictness;
 import org.robolectric.RobolectricTestRunner;
 
-import java.lang.reflect.Method;
-import java.util.Set;
+import java.util.concurrent.Executor;
 
 @RunWith(RobolectricTestRunner.class)
 public class SensorToggleControllerTest {
 
+    private MockitoSession mMockitoSession;
+
     @Mock
     private Context mContext;
     @Mock
-    private SensorPrivacyManager mSensorPrivacyManager;
-    private SparseBooleanArray mMicState;
-    private SparseBooleanArray mCamState;
-    private SparseArray<Set<OnSensorPrivacyChangedListener>> mMicListeners;
-    private SparseArray<Set<OnSensorPrivacyChangedListener>> mCamListeners;
+    private SensorPrivacyManagerHelper mSensorPrivacyManagerHelper;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-        mContext = Mockito.mock(Context.class);
-        mSensorPrivacyManager = Mockito.mock(SensorPrivacyManager.class);
+        mMockitoSession = Mockito.mockitoSession()
+                .initMocks(this)
+                .strictness(Strictness.WARN)
+                .startMocking();
 
-        try {
-            Method clearInstance =
-                    SensorPrivacyManagerHelper.class.getDeclaredMethod("clearInstance");
-            clearInstance.setAccessible(true);
-            clearInstance.invoke(null);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        mMicState = new SparseBooleanArray();
-        mCamState = new SparseBooleanArray();
-        mMicState.put(0, false);
-        mCamState.put(0, false);
-        mMicState.put(10, false);
-        mCamState.put(10, false);
-        mMicListeners = new SparseArray<>();
-        mCamListeners = new SparseArray<>();
-        mMicListeners.put(0, new ArraySet<>());
-        mMicListeners.put(10, new ArraySet<>());
-        mCamListeners.put(0, new ArraySet<>());
-        mCamListeners.put(10, new ArraySet<>());
-
-        doReturn(0).when(mContext).getUserId();
-        doReturn(mSensorPrivacyManager).when(mContext)
-                .getSystemService(SensorPrivacyManager.class);
-
-        doAnswer(invocation -> mMicState.get(0))
-                .when(mSensorPrivacyManager).isSensorPrivacyEnabled(eq(MICROPHONE));
-        doAnswer(invocation -> mCamState.get(0))
-                .when(mSensorPrivacyManager).isSensorPrivacyEnabled(eq(CAMERA));
-        doAnswer(invocation -> mMicState.get(invocation.getArgument(1)))
-                .when(mSensorPrivacyManager).isSensorPrivacyEnabled(eq(MICROPHONE), anyInt());
-        doAnswer(invocation -> mCamState.get(invocation.getArgument(1)))
-                .when(mSensorPrivacyManager).isSensorPrivacyEnabled(eq(CAMERA), anyInt());
-
-        doAnswer(invocation -> {
-            mMicState.put(0, invocation.getArgument(2));
-            mMicState.put(10, invocation.getArgument(2));
-            for (OnSensorPrivacyChangedListener listener : mMicListeners.get(0)) {
-                listener.onSensorPrivacyChanged(MICROPHONE, mMicState.get(0));
-            }
-            return null;
-        }).when(mSensorPrivacyManager).setSensorPrivacy(anyInt(), eq(MICROPHONE), anyBoolean());
-        doAnswer(invocation -> {
-            mCamState.put(0, invocation.getArgument(2));
-            mCamState.put(10, invocation.getArgument(2));
-            for (OnSensorPrivacyChangedListener listener : mMicListeners.get(0)) {
-                listener.onSensorPrivacyChanged(CAMERA, mMicState.get(0));
-            }
-            return null;
-        }).when(mSensorPrivacyManager).setSensorPrivacy(anyInt(), eq(CAMERA), anyBoolean());
-
-        doAnswer(invocation -> {
-            mMicState.put(0, invocation.getArgument(2));
-            mMicState.put(10, invocation.getArgument(2));
-            for (OnSensorPrivacyChangedListener listener : mMicListeners.get(0)) {
-                listener.onSensorPrivacyChanged(MICROPHONE, mMicState.get(0));
-            }
-            for (OnSensorPrivacyChangedListener listener : mMicListeners.get(10)) {
-                listener.onSensorPrivacyChanged(MICROPHONE, mMicState.get(10));
-            }
-            return null;
-        }).when(mSensorPrivacyManager)
-                .setSensorPrivacyForProfileGroup(anyInt(), eq(MICROPHONE), anyBoolean());
-        doAnswer(invocation -> {
-            mCamState.put(0, invocation.getArgument(2));
-            mCamState.put(10, invocation.getArgument(2));
-            for (OnSensorPrivacyChangedListener listener : mCamListeners.get(0)) {
-                listener.onSensorPrivacyChanged(CAMERA, mCamState.get(0));
-            }
-            for (OnSensorPrivacyChangedListener listener : mCamListeners.get(10)) {
-                listener.onSensorPrivacyChanged(CAMERA, mCamState.get(10));
-            }
-            return null;
-        }).when(mSensorPrivacyManager)
-                .setSensorPrivacyForProfileGroup(anyInt(), eq(CAMERA), anyBoolean());
-
-        doAnswer(invocation -> mMicListeners.get(0).add(invocation.getArgument(1)))
-                .when(mSensorPrivacyManager).addSensorPrivacyListener(eq(MICROPHONE), any());
-        doAnswer(invocation -> mCamListeners.get(0).add(invocation.getArgument(1)))
-                .when(mSensorPrivacyManager).addSensorPrivacyListener(eq(CAMERA), any());
-
-        doAnswer(invocation -> mMicListeners.get(invocation.getArgument(2))
-                .add(invocation.getArgument(1))).when(mSensorPrivacyManager)
-                .addSensorPrivacyListener(eq(MICROPHONE), anyInt(), any());
-        doAnswer(invocation -> mCamListeners.get(invocation.getArgument(2))
-                .add(invocation.getArgument(1))).when(mSensorPrivacyManager)
-                .addSensorPrivacyListener(eq(CAMERA), anyInt(), any());
+        doReturn((Executor) r -> r.run()).when(mContext).getMainExecutor();
     }
 
+    @After
+    public void tearDown() {
+        mMockitoSession.finishMocking();
+    }
+
+    /**
+     * Test the availability status when mic toggle is not supported.
+     */
+    @Test
+    public void getAvailabilityStatus_MicrophoneToggleNotSupported_returnUnsupported() {
+        // Return not supported
+        doReturn(false).when(mSensorPrivacyManagerHelper).supportsSensorToggle(SENSOR_MICROPHONE);
+        MicToggleController micToggleController = new MicToggleController(mContext, "mic_toggle",
+                mSensorPrivacyManagerHelper);
+        // Verify not available
+        assertEquals(UNSUPPORTED_ON_DEVICE, micToggleController.getAvailabilityStatus());
+    }
+
+    /**
+     * Test the availability status when mic toggle is supported.
+     */
+    @Test
+    public void getAvailabilityStatus_MicrophoneToggleSupported_returnAvailable() {
+        // Return supported
+        doReturn(true).when(mSensorPrivacyManagerHelper).supportsSensorToggle(SENSOR_MICROPHONE);
+        MicToggleController micToggleController = new MicToggleController(mContext, "mic_toggle",
+                mSensorPrivacyManagerHelper);
+        // Verify available
+        assertEquals(AVAILABLE, micToggleController.getAvailabilityStatus());
+    }
+
+    /**
+     * Test the initial state shows mic unblocked when created.
+     */
     @Test
     public void isChecked_disableMicrophoneSensorPrivacy_returnTrue() {
-        mSensorPrivacyManager.setSensorPrivacy(OTHER, MICROPHONE, false);
-        MicToggleController micToggleController = new MicToggleController(mContext, "mic_toggle");
+        // Starts off unblocked
+        doReturn(false).when(mSensorPrivacyManagerHelper).isSensorBlocked(SENSOR_MICROPHONE);
+        MicToggleController micToggleController = new MicToggleController(mContext, "mic_toggle",
+                mSensorPrivacyManagerHelper);
+        // Verify the controller is checked
         assertTrue(micToggleController.isChecked());
     }
 
+    /**
+     * Test the initial state shows mic blocked when created.
+     */
     @Test
     public void isChecked_enableMicrophoneSensorPrivacy_returnFalse() {
-        mSensorPrivacyManager.setSensorPrivacy(OTHER, MICROPHONE, true);
-        MicToggleController micToggleController = new MicToggleController(mContext, "mic_toggle");
+        // Starts off blocked
+        doReturn(true).when(mSensorPrivacyManagerHelper).isSensorBlocked(SENSOR_MICROPHONE);
+        MicToggleController micToggleController = new MicToggleController(mContext, "mic_toggle",
+                mSensorPrivacyManagerHelper);
+        // Verify the controller is unchecked
         assertFalse(micToggleController.isChecked());
     }
 
+    @Test
+    public void startMicrophoneToggleController_invokeAddSensorBlockedListener() {
+        MicToggleController micToggleController = new MicToggleController(mContext, "mic_toggle",
+                mSensorPrivacyManagerHelper);
+        micToggleController.onStart();
+        verify(mSensorPrivacyManagerHelper, times(1))
+                .addSensorBlockedListener(eq(SENSOR_MICROPHONE), any(), any());
+    }
+
+    @Test
+    public void stopMicrophoneToggleController_invokeRemoveSensorBlockedListener() {
+        MicToggleController micToggleController = new MicToggleController(mContext, "mic_toggle",
+                mSensorPrivacyManagerHelper);
+        micToggleController.onStart();
+
+        ArgumentCaptor<SensorPrivacyManagerHelper.Callback> callbackCaptor =
+                ArgumentCaptor.forClass(SensorPrivacyManagerHelper.Callback.class);
+        verify(mSensorPrivacyManagerHelper, times(1))
+                .addSensorBlockedListener(eq(SENSOR_MICROPHONE), any(), callbackCaptor.capture());
+
+        micToggleController.onStop();
+
+        verify(mSensorPrivacyManagerHelper, times(1))
+                .removeSensorBlockedListener(callbackCaptor.getValue());
+    }
+
+    /**
+     * Test the state of the mic controller switches from unblocked to blocked when state is changed
+     * externally.
+     */
     @Test
     public void isChecked_disableMicrophoneSensorPrivacyThenChanged_returnFalse() {
-        mSensorPrivacyManager.setSensorPrivacy(OTHER, MICROPHONE, false);
-        MicToggleController micToggleController = new MicToggleController(mContext, "mic_toggle");
-        mSensorPrivacyManager.setSensorPrivacy(OTHER, MICROPHONE, true);
+        // Starts off unblocked
+        doReturn(false).when(mSensorPrivacyManagerHelper).isSensorBlocked(SENSOR_MICROPHONE);
+        MicToggleController micToggleController = new MicToggleController(mContext, "mic_toggle",
+                mSensorPrivacyManagerHelper);
+        // Preference is started
+        micToggleController.displayPreference(mock(PreferenceScreen.class));
+        micToggleController.onStart();
+
+        ArgumentCaptor<SensorPrivacyManagerHelper.Callback> callbackCaptor =
+                ArgumentCaptor.forClass(SensorPrivacyManagerHelper.Callback.class);
+        verify(mSensorPrivacyManagerHelper, times(1))
+                .addSensorBlockedListener(eq(SENSOR_MICROPHONE), any(), callbackCaptor.capture());
+
+        // The state changed externally, update return value of isSensorBlocked and invoke callback
+        doReturn(true).when(mSensorPrivacyManagerHelper).isSensorBlocked(SENSOR_MICROPHONE);
+        callbackCaptor.getValue()
+                .onSensorPrivacyChanged(TOGGLE_TYPE_SOFTWARE, SENSOR_MICROPHONE, true);
         assertFalse(micToggleController.isChecked());
     }
 
+
+    /**
+     * Test the state of the mic controller switches from blocked to unblocked when state is changed
+     * externally.
+     */
     @Test
     public void isChecked_enableMicrophoneSensorPrivacyThenChanged_returnTrue() {
-        mSensorPrivacyManager.setSensorPrivacy(OTHER, MICROPHONE, true);
-        MicToggleController micToggleController = new MicToggleController(mContext, "mic_toggle");
-        mSensorPrivacyManager.setSensorPrivacy(OTHER, MICROPHONE, false);
+        // Starts off blocked
+        doReturn(true).when(mSensorPrivacyManagerHelper).isSensorBlocked(SENSOR_MICROPHONE);
+        MicToggleController micToggleController = new MicToggleController(mContext, "mic_toggle",
+                mSensorPrivacyManagerHelper);
+        // Preference is started
+        micToggleController.displayPreference(mock(PreferenceScreen.class));
+        micToggleController.onStart();
+
+        // The state changed externally, update return value of isSensorBlocked and invoke callback
+        ArgumentCaptor<SensorPrivacyManagerHelper.Callback> callbackCaptor =
+                ArgumentCaptor.forClass(SensorPrivacyManagerHelper.Callback.class);
+        verify(mSensorPrivacyManagerHelper, times(1))
+                .addSensorBlockedListener(eq(SENSOR_MICROPHONE), any(), callbackCaptor.capture());
+
+        doReturn(false).when(mSensorPrivacyManagerHelper).isSensorBlocked(SENSOR_MICROPHONE);
+        callbackCaptor.getValue()
+                .onSensorPrivacyChanged(TOGGLE_TYPE_SOFTWARE, SENSOR_MICROPHONE, false);
         assertTrue(micToggleController.isChecked());
     }
 
+
+    /**
+     * Test the mic controller requests to block the mic when unblocked on invocation of setChecked.
+     */
     @Test
-    public void isMicrophoneSensorPrivacyEnabled_uncheckMicToggle_returnTrue() {
-        mSensorPrivacyManager.setSensorPrivacy(OTHER, MICROPHONE, false);
-        MicToggleController micToggleController = new MicToggleController(mContext, "mic_toggle");
+    public void blocked_uncheckMicToggle_returnTrue() {
+        // Starts off unblocked
+        doReturn(false).when(mSensorPrivacyManagerHelper).isSensorBlocked(SENSOR_MICROPHONE);
+
+        MicToggleController micToggleController = new MicToggleController(mContext, "mic_toggle",
+                mSensorPrivacyManagerHelper);
+        verify(mSensorPrivacyManagerHelper, never()).setSensorBlocked(anyInt(), anyBoolean());
+
+        // User set blocked
         micToggleController.setChecked(false);
-        assertTrue(mMicState.get(0));
+
+        ArgumentCaptor<Boolean> blockedResult = ArgumentCaptor.forClass(Boolean.class);
+        verify(mSensorPrivacyManagerHelper, times(1))
+                .setSensorBlocked(ArgumentMatchers.eq(SENSOR_MICROPHONE), blockedResult.capture());
+
+        // Verify attempt to block
+        assertTrue(blockedResult.getValue());
     }
 
+
+
+    /**
+     * Test the mic controller requests to unblock the mic when blocked on invocation of setChecked.
+     */
     @Test
-    public void isMicrophoneSensorPrivacyEnabled_checkMicToggle_returnFalse() {
-        mSensorPrivacyManager.setSensorPrivacy(OTHER, MICROPHONE, true);
-        MicToggleController micToggleController = new MicToggleController(mContext, "mic_toggle");
+    public void blocked_checkMicToggle_returnFalse() {
+        // Starts off blocked
+        doReturn(true).when(mSensorPrivacyManagerHelper).isSensorBlocked(SENSOR_MICROPHONE);
+
+        MicToggleController micToggleController = new MicToggleController(mContext, "mic_toggle",
+                mSensorPrivacyManagerHelper);
+        verify(mSensorPrivacyManagerHelper, never()).setSensorBlocked(anyInt(), anyBoolean());
+
+        // User set unblocked
         micToggleController.setChecked(true);
-        assertFalse(mMicState.get(0));
+
+        ArgumentCaptor<Boolean> blockedResult = ArgumentCaptor.forClass(Boolean.class);
+        verify(mSensorPrivacyManagerHelper, times(1))
+                .setSensorBlocked(ArgumentMatchers.eq(SENSOR_MICROPHONE), blockedResult.capture());
+
+        // Verify attempt to unblock
+        assertFalse(blockedResult.getValue());
     }
 
+    /**
+     * Test the availability status when cam toggle is not supported.
+     */
     @Test
-    public void isMicrophoneSensorPrivacyEnabledForProfileUser_uncheckMicToggle_returnTrue() {
-        mSensorPrivacyManager.setSensorPrivacy(OTHER, MICROPHONE, false);
-        MicToggleController micToggleController = new MicToggleController(mContext, "mic_toggle");
-        micToggleController.setChecked(false);
-        assertTrue(mMicState.get(10));
+    public void getAvailabilityStatus_CameraToggleNotSupported_returnUnsupported() {
+        // Return not supported
+        doReturn(false).when(mSensorPrivacyManagerHelper).supportsSensorToggle(SENSOR_CAMERA);
+        CameraToggleController cameraToggleController = new CameraToggleController(mContext,
+                "cam_toggle", mSensorPrivacyManagerHelper);
+        // Verify not available
+        assertEquals(UNSUPPORTED_ON_DEVICE, cameraToggleController.getAvailabilityStatus());
     }
 
+    /**
+     * Test the availability status when cam toggle is supported.
+     */
     @Test
-    public void isMicrophoneSensorPrivacyEnabledProfileUser_checkMicToggle_returnFalse() {
-        mSensorPrivacyManager.setSensorPrivacy(OTHER, MICROPHONE, true);
-        MicToggleController micToggleController = new MicToggleController(mContext, "mic_toggle");
-        micToggleController.setChecked(true);
-        assertFalse(mMicState.get(10));
+    public void getAvailabilityStatus_CameraToggleSupported_returnAvailable() {
+        // Return supported
+        doReturn(true).when(mSensorPrivacyManagerHelper).supportsSensorToggle(SENSOR_CAMERA);
+        CameraToggleController cameraToggleController = new CameraToggleController(mContext,
+                "cam_toggle", mSensorPrivacyManagerHelper);
+        // Verify available
+        assertEquals(AVAILABLE, cameraToggleController.getAvailabilityStatus());
     }
 
+    /**
+     * Test the initial state shows cam unblocked when created.
+     */
     @Test
     public void isChecked_disableCameraSensorPrivacy_returnTrue() {
-        mSensorPrivacyManager.setSensorPrivacy(OTHER, CAMERA, false);
-        CameraToggleController camToggleController =
-                new CameraToggleController(mContext, "cam_toggle");
-        assertTrue(camToggleController.isChecked());
+        // Starts off unblocked
+        doReturn(false).when(mSensorPrivacyManagerHelper).isSensorBlocked(SENSOR_CAMERA);
+        CameraToggleController cameraToggleController = new CameraToggleController(mContext,
+                "cam_toggle", mSensorPrivacyManagerHelper);
+        // Verify the controller is checked
+        assertTrue(cameraToggleController.isChecked());
     }
 
+    /**
+     * Test the initial state shows cam blocked when created.
+     */
     @Test
     public void isChecked_enableCameraSensorPrivacy_returnFalse() {
-        mSensorPrivacyManager.setSensorPrivacy(OTHER, CAMERA, true);
-        CameraToggleController camToggleController =
-                new CameraToggleController(mContext, "cam_toggle");
-        assertFalse(camToggleController.isChecked());
+        // Starts off blocked
+        doReturn(true).when(mSensorPrivacyManagerHelper).isSensorBlocked(SENSOR_CAMERA);
+        CameraToggleController cameraToggleController = new CameraToggleController(mContext,
+                "cam_toggle", mSensorPrivacyManagerHelper);
+        // Verify the controller is unchecked
+        assertFalse(cameraToggleController.isChecked());
     }
 
+    @Test
+    public void startCameraToggleController_invokeAddSensorBlockedListener() {
+        CameraToggleController cameraToggleController =
+                new CameraToggleController(mContext, "cam_toggle", mSensorPrivacyManagerHelper);
+        cameraToggleController.onStart();
+        verify(mSensorPrivacyManagerHelper, times(1))
+                .addSensorBlockedListener(eq(SENSOR_CAMERA), any(), any());
+    }
+
+    @Test
+    public void stopCameraToggleController_invokeRemoveSensorBlockedListener() {
+        CameraToggleController cameraToggleController =
+                new CameraToggleController(mContext, "cam_toggle", mSensorPrivacyManagerHelper);
+        cameraToggleController.onStart();
+
+        ArgumentCaptor<SensorPrivacyManagerHelper.Callback> callbackCaptor =
+                ArgumentCaptor.forClass(SensorPrivacyManagerHelper.Callback.class);
+        verify(mSensorPrivacyManagerHelper, times(1))
+                .addSensorBlockedListener(eq(SENSOR_CAMERA), any(), callbackCaptor.capture());
+
+        cameraToggleController.onStop();
+
+        verify(mSensorPrivacyManagerHelper, times(1))
+                .removeSensorBlockedListener(callbackCaptor.getValue());
+    }
+
+    /**
+     * Test the state of the cam controller switches from unblocked to blocked when state is changed
+     * externally.
+     */
     @Test
     public void isChecked_disableCameraSensorPrivacyThenChanged_returnFalse() {
-        mSensorPrivacyManager.setSensorPrivacy(OTHER, CAMERA, false);
-        CameraToggleController camToggleController =
-                new CameraToggleController(mContext, "cam_toggle");
-        mSensorPrivacyManager.setSensorPrivacy(OTHER, CAMERA, true);
-        assertFalse(camToggleController.isChecked());
+        // Starts off unblocked
+        doReturn(false).when(mSensorPrivacyManagerHelper).isSensorBlocked(SENSOR_CAMERA);
+        CameraToggleController cameraToggleController = new CameraToggleController(mContext,
+                "cam_toggle", mSensorPrivacyManagerHelper);
+        // Preference is started
+        cameraToggleController.displayPreference(mock(PreferenceScreen.class));
+        cameraToggleController.onStart();
+
+        ArgumentCaptor<SensorPrivacyManagerHelper.Callback> callbackCaptor =
+                ArgumentCaptor.forClass(SensorPrivacyManagerHelper.Callback.class);
+        verify(mSensorPrivacyManagerHelper, times(1))
+                .addSensorBlockedListener(eq(SENSOR_CAMERA), any(), callbackCaptor.capture());
+
+        // The state changed externally, update return value of isSensorBlocked and invoke callback
+        doReturn(true).when(mSensorPrivacyManagerHelper).isSensorBlocked(SENSOR_CAMERA);
+        callbackCaptor.getValue().onSensorPrivacyChanged(TOGGLE_TYPE_SOFTWARE, SENSOR_CAMERA, true);
+        assertFalse(cameraToggleController.isChecked());
     }
 
+
+    /**
+     * Test the state of the cam controller switches from blocked to unblocked when state is changed
+     * externally.
+     */
     @Test
     public void isChecked_enableCameraSensorPrivacyThenChanged_returnTrue() {
-        mSensorPrivacyManager.setSensorPrivacy(OTHER, CAMERA, true);
-        CameraToggleController camToggleController =
-                new CameraToggleController(mContext, "cam_toggle");
-        mSensorPrivacyManager.setSensorPrivacy(OTHER, CAMERA, false);
-        assertTrue(camToggleController.isChecked());
+        // Starts off blocked
+        doReturn(true).when(mSensorPrivacyManagerHelper).isSensorBlocked(SENSOR_CAMERA);
+        CameraToggleController cameraToggleController = new CameraToggleController(mContext,
+                "cam_toggle", mSensorPrivacyManagerHelper);
+        // Preference is started
+        cameraToggleController.displayPreference(mock(PreferenceScreen.class));
+        cameraToggleController.onStart();
+
+        // The state changed externally, update return value of isSensorBlocked and invoke callback
+        ArgumentCaptor<SensorPrivacyManagerHelper.Callback> callbackCaptor =
+                ArgumentCaptor.forClass(SensorPrivacyManagerHelper.Callback.class);
+        verify(mSensorPrivacyManagerHelper, times(1))
+                .addSensorBlockedListener(eq(SENSOR_CAMERA), any(), callbackCaptor.capture());
+
+        doReturn(false).when(mSensorPrivacyManagerHelper).isSensorBlocked(SENSOR_CAMERA);
+        callbackCaptor.getValue()
+                .onSensorPrivacyChanged(TOGGLE_TYPE_SOFTWARE, SENSOR_CAMERA, false);
+        assertTrue(cameraToggleController.isChecked());
     }
 
+
+    /**
+     * Test the cam controller requests to block the cam when unblocked on invocation of setChecked.
+     */
     @Test
-    public void isCameraSensorPrivacyEnabled_uncheckCanToggle_returnTrue() {
-        mSensorPrivacyManager.setSensorPrivacy(OTHER, CAMERA, false);
-        CameraToggleController camToggleController =
-                new CameraToggleController(mContext, "cam_toggle");
-        camToggleController.setChecked(false);
-        assertTrue(mCamState.get(0));
+    public void blocked_uncheckCamToggle_returnTrue() {
+        // Starts off unblocked
+        doReturn(false).when(mSensorPrivacyManagerHelper).isSensorBlocked(SENSOR_CAMERA);
+
+        CameraToggleController cameraToggleController = new CameraToggleController(mContext,
+                "cam_toggle", mSensorPrivacyManagerHelper);
+        verify(mSensorPrivacyManagerHelper, never()).setSensorBlocked(anyInt(), anyBoolean());
+
+        // User set blocked
+        cameraToggleController.setChecked(false);
+
+        ArgumentCaptor<Boolean> blockedResult = ArgumentCaptor.forClass(Boolean.class);
+        verify(mSensorPrivacyManagerHelper, times(1))
+                .setSensorBlocked(ArgumentMatchers.eq(SENSOR_CAMERA), blockedResult.capture());
+
+        // Verify attempt to block
+        assertTrue(blockedResult.getValue());
     }
 
-    @Test
-    public void isCameraSensorPrivacyEnabled_checkCamToggle_returnFalse() {
-        mSensorPrivacyManager.setSensorPrivacy(OTHER, CAMERA, true);
-        CameraToggleController camToggleController =
-                new CameraToggleController(mContext, "cam_toggle");
-        camToggleController.setChecked(true);
-        assertFalse(mCamState.get(0));
-    }
 
-    @Test
-    public void isCameraSensorPrivacyEnabledForProfileUser_uncheckCamToggle_returnTrue() {
-        mSensorPrivacyManager.setSensorPrivacy(OTHER, CAMERA, false);
-        CameraToggleController camToggleController =
-                new CameraToggleController(mContext, "cam_toggle");
-        camToggleController.setChecked(false);
-        assertTrue(mCamState.get(10));
-    }
 
+    /**
+     * Test the cam controller requests to unblock the cam when blocked on invocation of setChecked.
+     */
     @Test
-    public void isCameraSensorPrivacyEnabledProfileUser_checkCamToggle_returnFalse() {
-        mSensorPrivacyManager.setSensorPrivacy(OTHER, CAMERA, true);
-        CameraToggleController camToggleController =
-                new CameraToggleController(mContext, "cam_toggle");
-        camToggleController.setChecked(true);
-        assertFalse(mCamState.get(10));
+    public void blocked_checkCamToggle_returnFalse() {
+        // Starts off blocked
+        doReturn(true).when(mSensorPrivacyManagerHelper).isSensorBlocked(SENSOR_CAMERA);
+
+        CameraToggleController cameraToggleController = new CameraToggleController(mContext,
+                "cam_toggle", mSensorPrivacyManagerHelper);
+        verify(mSensorPrivacyManagerHelper, never()).setSensorBlocked(anyInt(), anyBoolean());
+
+        // User set unblocked
+        cameraToggleController.setChecked(true);
+
+        ArgumentCaptor<Boolean> blockedResult = ArgumentCaptor.forClass(Boolean.class);
+        verify(mSensorPrivacyManagerHelper, times(1))
+                .setSensorBlocked(ArgumentMatchers.eq(SENSOR_CAMERA), blockedResult.capture());
+
+        // Verify attempt to unblock
+        assertFalse(blockedResult.getValue());
     }
 }

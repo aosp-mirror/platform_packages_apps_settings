@@ -22,6 +22,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 import android.os.SystemProperties;
+import android.provider.Settings;
 
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -36,10 +37,14 @@ import org.junit.runner.RunWith;
 public class TranscodeNotificationPreferenceControllerTest {
     private TranscodeNotificationPreferenceController mUnderTest;
 
+    private Context mContext;
+
     @Before
     public void setUp() {
-        Context context = ApplicationProvider.getApplicationContext();
-        mUnderTest = new TranscodeNotificationPreferenceController(context, "notification_key");
+        mContext = ApplicationProvider.getApplicationContext();
+        mUnderTest = new TranscodeNotificationPreferenceController(mContext, "notification_key");
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 1);
     }
 
     @Test
@@ -72,5 +77,13 @@ public class TranscodeNotificationPreferenceControllerTest {
     public void getAvailabilityStatus_shouldReturnAVAILABLE() {
         assertThat(mUnderTest.getAvailabilityStatus()).isEqualTo(
                 BasePreferenceController.AVAILABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_developerOptionFalse_shouldReturnUNAVAILABLE() {
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0);
+        assertThat(mUnderTest.getAvailabilityStatus()).isEqualTo(
+                BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
     }
 }

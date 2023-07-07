@@ -42,6 +42,7 @@ import android.text.InputType;
 import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.ArrayMap;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -96,6 +97,8 @@ public class WifiConfigController2 implements TextWatcher,
         AdapterView.OnItemSelectedListener, OnCheckedChangeListener,
         TextView.OnEditorActionListener, View.OnKeyListener {
     private static final String TAG = "WifiConfigController2";
+    @VisibleForTesting
+    static final String DEFAULT_ANONYMOUS_ID = "anonymous";
 
     private static final String SYSTEM_CA_STORE_PATH = "/system/etc/security/cacerts";
 
@@ -178,6 +181,7 @@ public class WifiConfigController2 implements TextWatcher,
     private int mLastShownEapMethod;
     @VisibleForTesting Spinner mEapSimSpinner;    // For EAP-SIM, EAP-AKA and EAP-AKA-PRIME.
     @VisibleForTesting Spinner mEapCaCertSpinner;
+    private Spinner mEapMinTlsVerSpinner;
     private Spinner mEapOcspSpinner;
     private TextView mEapDomainView;
     private Spinner mPhase2Spinner;
@@ -185,7 +189,8 @@ public class WifiConfigController2 implements TextWatcher,
     private ArrayAdapter<CharSequence> mPhase2Adapter;
     private Spinner mEapUserCertSpinner;
     private TextView mEapIdentityView;
-    private TextView mEapAnonymousView;
+    @VisibleForTesting
+    TextView mEapAnonymousView;
 
     private Spinner mIpSettingsSpinner;
     private TextView mIpAddressView;
@@ -587,28 +592,32 @@ public class WifiConfigController2 implements TextWatcher,
             return null;
         }
 
-        WifiConfiguration config = new WifiConfiguration();
-
+        WifiConfiguration config;
         if (mWifiEntry == null) {
+            config = new WifiConfiguration();
             config.SSID = "\"" + mSsidView.getText().toString() + "\"";
             // If the user adds a network manually, assume that it is hidden.
             config.hiddenSSID = mHiddenSettingsSpinner.getSelectedItemPosition() == HIDDEN_NETWORK;
-        } else if (!mWifiEntry.isSaved()) {
-            config.SSID = "\"" + mWifiEntry.getTitle() + "\"";
+        } else if (mWifiEntry.isSaved()) {
+            config = new WifiConfiguration(mWifiEntry.getWifiConfiguration());
         } else {
-            config.networkId = mWifiEntry.getWifiConfiguration().networkId;
-            config.hiddenSSID = mWifiEntry.getWifiConfiguration().hiddenSSID;
+            config = new WifiConfiguration();
+            config.SSID = "\"" + mWifiEntry.getTitle() + "\"";
         }
 
         config.shared = mSharedCheckBox.isChecked();
 
         switch (mWifiEntrySecurity) {
             case WifiEntry.SECURITY_NONE:
-                config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_OPEN);
+                if (mWifiEntry == null || !mWifiEntry.isSaved()) {
+                    config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_OPEN);
+                }
                 break;
 
             case WifiEntry.SECURITY_WEP:
-                config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_WEP);
+                if (mWifiEntry == null || !mWifiEntry.isSaved()) {
+                    config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_WEP);
+                }
                 if (mPasswordView.length() != 0) {
                     int length = mPasswordView.length();
                     String password = mPasswordView.getText().toString();
@@ -623,7 +632,9 @@ public class WifiConfigController2 implements TextWatcher,
                 break;
 
             case WifiEntry.SECURITY_PSK:
-                config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_PSK);
+                if (mWifiEntry == null || !mWifiEntry.isSaved()) {
+                    config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_PSK);
+                }
                 if (mPasswordView.length() != 0) {
                     String password = mPasswordView.getText().toString();
                     if (password.matches("[0-9A-Fa-f]{64}")) {
@@ -637,13 +648,16 @@ public class WifiConfigController2 implements TextWatcher,
             case WifiEntry.SECURITY_EAP:
             case WifiEntry.SECURITY_EAP_WPA3_ENTERPRISE:
             case WifiEntry.SECURITY_EAP_SUITE_B:
-                if (mWifiEntrySecurity == WifiEntry.SECURITY_EAP_SUITE_B) {
-                    // allowedSuiteBCiphers will be set according to certificate type
-                    config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_EAP_SUITE_B);
-                } else if (mWifiEntrySecurity == WifiEntry.SECURITY_EAP_WPA3_ENTERPRISE) {
-                    config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_EAP_WPA3_ENTERPRISE);
-                } else {
-                    config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_EAP);
+                if (mWifiEntry == null || !mWifiEntry.isSaved()) {
+                    if (mWifiEntrySecurity == WifiEntry.SECURITY_EAP_SUITE_B) {
+                        // allowedSuiteBCiphers will be set according to certificate type
+                        config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_EAP_SUITE_B);
+                    } else if (mWifiEntrySecurity == WifiEntry.SECURITY_EAP_WPA3_ENTERPRISE) {
+                        config.setSecurityParams(
+                                WifiConfiguration.SECURITY_TYPE_EAP_WPA3_ENTERPRISE);
+                    } else {
+                        config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_EAP);
+                    }
                 }
                 config.enterpriseConfig = new WifiEnterpriseConfig();
                 int eapMethod = mEapMethodSpinner.getSelectedItemPosition();
@@ -737,17 +751,20 @@ public class WifiConfigController2 implements TextWatcher,
                 if (config.enterpriseConfig.getCaCertificateAliases() != null
                         && config.enterpriseConfig.getCaPath() != null) {
                     Log.e(TAG, "ca_cert ("
-                            + config.enterpriseConfig.getCaCertificateAliases()
+                            + Arrays.toString(config.enterpriseConfig.getCaCertificateAliases())
                             + ") and ca_path ("
                             + config.enterpriseConfig.getCaPath()
                             + ") should not both be non-null");
                 }
 
-                // Only set OCSP option if there is a valid CA certificate.
+                // Only set certificate option if there is a valid CA certificate.
                 if (caCert.equals(mUnspecifiedCertString)) {
                     config.enterpriseConfig.setOcsp(WifiEnterpriseConfig.OCSP_NONE);
+                    config.enterpriseConfig.setMinimumTlsVersion(WifiEnterpriseConfig.TLS_V1_0);
                 } else {
                     config.enterpriseConfig.setOcsp(mEapOcspSpinner.getSelectedItemPosition());
+                    config.enterpriseConfig.setMinimumTlsVersion(
+                            mEapMinTlsVerSpinner.getSelectedItemPosition());
                 }
 
                 String clientCert = (String) mEapUserCertSpinner.getSelectedItem();
@@ -782,7 +799,9 @@ public class WifiConfigController2 implements TextWatcher,
                 }
                 break;
             case WifiEntry.SECURITY_SAE:
-                config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_SAE);
+                if (mWifiEntry == null || !mWifiEntry.isSaved()) {
+                    config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_SAE);
+                }
                 if (mPasswordView.length() != 0) {
                     String password = mPasswordView.getText().toString();
                     config.preSharedKey = '"' + password + '"';
@@ -790,7 +809,9 @@ public class WifiConfigController2 implements TextWatcher,
                 break;
 
             case WifiEntry.SECURITY_OWE:
-                config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_OWE);
+                if (mWifiEntry == null || !mWifiEntry.isSaved()) {
+                    config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_OWE);
+                }
                 break;
 
             default:
@@ -1004,6 +1025,8 @@ public class WifiConfigController2 implements TextWatcher,
             mPhase2Spinner.setOnItemSelectedListener(this);
             mEapCaCertSpinner = (Spinner) mView.findViewById(R.id.ca_cert);
             mEapCaCertSpinner.setOnItemSelectedListener(this);
+            mEapMinTlsVerSpinner = getEapMinTlsVerSpinner(mWifiManager.isTlsV13Supported());
+
             mEapOcspSpinner = (Spinner) mView.findViewById(R.id.ocsp);
             mEapDomainView = (TextView) mView.findViewById(R.id.domain);
             mEapDomainView.addTextChangedListener(this);
@@ -1147,6 +1170,7 @@ public class WifiConfigController2 implements TextWatcher,
                     setSelection(mEapCaCertSpinner, mMultipleCertSetString);
                 }
             }
+            mEapMinTlsVerSpinner.setSelection(enterpriseConfig.getMinimumTlsVersion());
             mEapOcspSpinner.setSelection(enterpriseConfig.getOcsp());
             mEapDomainView.setText(enterpriseConfig.getDomainSuffixMatch());
             String userCert = enterpriseConfig.getClientCertificateAlias();
@@ -1178,6 +1202,7 @@ public class WifiConfigController2 implements TextWatcher,
         mEapMethodSpinner.setAccessibilityDelegate(selectedEventBlocker);
         mPhase2Spinner.setAccessibilityDelegate(selectedEventBlocker);
         mEapCaCertSpinner.setAccessibilityDelegate(selectedEventBlocker);
+        mEapMinTlsVerSpinner.setAccessibilityDelegate(selectedEventBlocker);
         mEapOcspSpinner.setAccessibilityDelegate(selectedEventBlocker);
         mEapUserCertSpinner.setAccessibilityDelegate(selectedEventBlocker);
     }
@@ -1213,6 +1238,9 @@ public class WifiConfigController2 implements TextWatcher,
         // Defaults for most of the EAP methods and over-riden by
         // by certain EAP methods
         mView.findViewById(R.id.l_ca_cert).setVisibility(View.VISIBLE);
+        if (mWifiManager.isTlsMinimumVersionSupported()) {
+            mView.findViewById(R.id.l_min_tls_ver).setVisibility(View.VISIBLE);
+        }
         mView.findViewById(R.id.l_ocsp).setVisibility(View.VISIBLE);
         mView.findViewById(R.id.password_layout).setVisibility(View.VISIBLE);
         mView.findViewById(R.id.show_password_layout).setVisibility(View.VISIBLE);
@@ -1223,6 +1251,7 @@ public class WifiConfigController2 implements TextWatcher,
             case WIFI_EAP_METHOD_PWD:
                 setPhase2Invisible();
                 setCaCertInvisible();
+                setMinTlsVerInvisible();
                 setOcspInvisible();
                 setDomainInvisible();
                 setAnonymousIdentInvisible();
@@ -1243,7 +1272,7 @@ public class WifiConfigController2 implements TextWatcher,
                     mPhase2Spinner.setAdapter(mPhase2Adapter);
                 }
                 mView.findViewById(R.id.l_phase2).setVisibility(View.VISIBLE);
-                mView.findViewById(R.id.l_anonymous).setVisibility(View.VISIBLE);
+                setAnonymousIdVisible();
                 showPeapFields();
                 setUserCertInvisible();
                 break;
@@ -1254,7 +1283,7 @@ public class WifiConfigController2 implements TextWatcher,
                     mPhase2Spinner.setAdapter(mPhase2Adapter);
                 }
                 mView.findViewById(R.id.l_phase2).setVisibility(View.VISIBLE);
-                mView.findViewById(R.id.l_anonymous).setVisibility(View.VISIBLE);
+                setAnonymousIdVisible();
                 setUserCertInvisible();
                 mView.findViewById(R.id.l_sim).setVisibility(View.GONE);
                 break;
@@ -1264,6 +1293,7 @@ public class WifiConfigController2 implements TextWatcher,
                 setPhase2Invisible();
                 setAnonymousIdentInvisible();
                 setCaCertInvisible();
+                setMinTlsVerInvisible();
                 setOcspInvisible();
                 setDomainInvisible();
                 setUserCertInvisible();
@@ -1277,6 +1307,7 @@ public class WifiConfigController2 implements TextWatcher,
             if (eapCertSelection.equals(mUnspecifiedCertString)
                     || (mIsTrustOnFirstUseSupported
                             && eapCertSelection.equals(mTrustOnFirstUse))) {
+                setMinTlsVerInvisible();
                 // Domain suffix matching is not relevant if the user hasn't chosen a CA
                 // certificate yet, or chooses not to validate the EAP server.
                 setDomainInvisible();
@@ -1298,7 +1329,6 @@ public class WifiConfigController2 implements TextWatcher,
             mView.findViewById(R.id.l_sim).setVisibility(View.VISIBLE);
         } else {
             mView.findViewById(R.id.l_identity).setVisibility(View.VISIBLE);
-            mView.findViewById(R.id.l_anonymous).setVisibility(View.VISIBLE);
             mView.findViewById(R.id.password_layout).setVisibility(View.VISIBLE);
             mView.findViewById(R.id.show_password_layout).setVisibility(View.VISIBLE);
             mView.findViewById(R.id.l_sim).setVisibility(View.GONE);
@@ -1316,6 +1346,11 @@ public class WifiConfigController2 implements TextWatcher,
     private void setCaCertInvisible() {
         mView.findViewById(R.id.l_ca_cert).setVisibility(View.GONE);
         setSelection(mEapCaCertSpinner, mUnspecifiedCertString);
+    }
+
+    private void setMinTlsVerInvisible() {
+        mView.findViewById(R.id.l_min_tls_ver).setVisibility(View.GONE);
+        mEapMinTlsVerSpinner.setSelection(WifiEnterpriseConfig.TLS_V1_0);
     }
 
     private void setOcspInvisible() {
@@ -1336,6 +1371,12 @@ public class WifiConfigController2 implements TextWatcher,
     private void setAnonymousIdentInvisible() {
         mView.findViewById(R.id.l_anonymous).setVisibility(View.GONE);
         mEapAnonymousView.setText("");
+    }
+
+    @VisibleForTesting
+    void setAnonymousIdVisible() {
+        mView.findViewById(R.id.l_anonymous).setVisibility(View.VISIBLE);
+        mEapAnonymousView.setText(DEFAULT_ANONYMOUS_ID);
     }
 
     private void setPasswordInvisible() {
@@ -1495,13 +1536,20 @@ public class WifiConfigController2 implements TextWatcher,
         }
 
         // Shows display name of each active subscription.
-        final ArrayList<CharSequence> displayNames = new ArrayList<>();
+        ArrayMap<Integer, CharSequence> displayNames = new ArrayMap<>();
+        int defaultDataSubscriptionId = SubscriptionManager.getDefaultDataSubscriptionId();
         for (SubscriptionInfo activeSubInfo : mActiveSubscriptionInfos) {
-            displayNames.add(
+            // If multiple SIMs have the same carrier id, only the first or default data SIM is
+            // displayed.
+            if (displayNames.containsKey(activeSubInfo.getCarrierId())
+                    && defaultDataSubscriptionId != activeSubInfo.getSubscriptionId()) {
+                continue;
+            }
+            displayNames.put(activeSubInfo.getCarrierId(),
                     SubscriptionUtil.getUniqueSubscriptionDisplayName(activeSubInfo, mContext));
         }
         mEapSimSpinner.setAdapter(
-                getSpinnerAdapter(displayNames.toArray(new String[displayNames.size()])));
+                getSpinnerAdapter(displayNames.values().toArray(new String[displayNames.size()])));
         mEapSimSpinner.setSelection(0 /* position */);
         if (displayNames.size() == 1) {
             mEapSimSpinner.setEnabled(false);
@@ -1911,5 +1959,19 @@ public class WifiConfigController2 implements TextWatcher,
                 info.addAction(customClick);
             }
         });
+    }
+
+    @VisibleForTesting
+    Spinner getEapMinTlsVerSpinner(boolean isTlsV13Supported) {
+        Spinner spinner = mView.findViewById(R.id.min_tls_ver);
+        String[] stringArray = mContext.getResources().getStringArray(R.array.wifi_eap_tls_ver);
+        if (!isTlsV13Supported) {
+            Log.w(TAG, "Wi-Fi Enterprise TLS v1.3 is not supported on this device");
+            List<String> list = new ArrayList<>(Arrays.asList(stringArray));
+            list.remove(WifiEnterpriseConfig.TLS_V1_3);
+            stringArray = list.toArray(new String[0]);
+        }
+        spinner.setAdapter(getSpinnerAdapter(stringArray));
+        return spinner;
     }
 }

@@ -35,6 +35,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
+import com.android.settings.utils.ActivityControllerWrapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -55,19 +56,22 @@ public class InstantAppButtonDialogFragmentTest {
 
     @Before
     public void setUp() {
-        final FragmentActivity activity = Robolectric.setupActivity(FragmentActivity.class);
+        final FragmentActivity activity = (FragmentActivity) ActivityControllerWrapper.setup(
+                Robolectric.buildActivity(FragmentActivity.class)).get();
+
         mContext = spy(RuntimeEnvironment.application);
-        mFragment = spy(InstantAppButtonDialogFragment.newInstance(TEST_PACKAGE));
+        mFragment = InstantAppButtonDialogFragment.newInstance(TEST_PACKAGE);
         mFragment.show(activity.getSupportFragmentManager(), "InstantAppButtonDialogFragment");
-        doReturn(mContext).when(mFragment).getContext();
     }
 
     @Test
     public void onClick_shouldDeleteApp() {
+        final InstantAppButtonDialogFragment spyFragment = spy(mFragment);
+        doReturn(mContext).when(spyFragment).getContext();
         final PackageManager packageManager = mock(PackageManager.class);
         when(mContext.getPackageManager()).thenReturn(packageManager);
 
-        mFragment.onClick(null /* dialog */, 0  /* which */);
+        spyFragment.onClick(null /* dialog */, 0  /* which */);
 
         verify(packageManager)
             .deletePackageAsUser(eq(TEST_PACKAGE), any(), anyInt(), anyInt());

@@ -25,6 +25,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.internal.annotations.VisibleForTesting;
+import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricStatusPreferenceController;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreference;
@@ -35,11 +36,12 @@ import com.android.settingslib.RestrictedPreference;
  */
 public class CombinedBiometricStatusPreferenceController extends
         BiometricStatusPreferenceController implements LifecycleObserver {
-    private static final String KEY_BIOMETRIC_SETTINGS = "biometric_settings";
+    public static final String KEY_BIOMETRIC_SETTINGS = "biometric_settings";
 
     @VisibleForTesting
     RestrictedPreference mPreference;
     protected final CombinedBiometricStatusUtils mCombinedBiometricStatusUtils;
+    private PreferenceScreen mPreferenceScreen;
 
     public CombinedBiometricStatusPreferenceController(Context context) {
         this(context, KEY_BIOMETRIC_SETTINGS, null /* lifecycle */);
@@ -66,17 +68,26 @@ public class CombinedBiometricStatusPreferenceController extends
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     public void onResume() {
         updateStateInternal();
+        if (mPreferenceScreen != null) {
+            displayPreference(mPreferenceScreen);
+        }
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
+        mPreferenceScreen = screen;
         mPreference = screen.findPreference(mPreferenceKey);
     }
 
     @Override
     protected boolean isDeviceSupported() {
         return mCombinedBiometricStatusUtils.isAvailable();
+    }
+
+    @Override
+    protected boolean isHardwareSupported() {
+        return Utils.hasFaceHardware(mContext) || Utils.hasFingerprintHardware(mContext);
     }
 
     @Override
@@ -116,5 +127,9 @@ public class CombinedBiometricStatusPreferenceController extends
     @Override
     protected String getSettingsClassName() {
         return mCombinedBiometricStatusUtils.getSettingsClassName();
+    }
+
+    public void setPreferenceScreen(PreferenceScreen preferenceScreen) {
+        mPreferenceScreen = preferenceScreen;
     }
 }

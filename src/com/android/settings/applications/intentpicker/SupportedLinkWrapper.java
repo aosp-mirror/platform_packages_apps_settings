@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
  *  A buffer of the supported link data. This {@link SupportedLinkWrapper} wraps the host, enabled
  *  and a list of {@link DomainOwner}.
  */
-public class SupportedLinkWrapper implements Comparable {
+public class SupportedLinkWrapper implements Comparable<SupportedLinkWrapper> {
     private static final String TAG = "SupportedLinkWrapper";
 
     private String mHost;
@@ -112,8 +112,7 @@ public class SupportedLinkWrapper implements Comparable {
     }
 
     @Override
-    public int compareTo(Object o) {
-        final SupportedLinkWrapper that = (SupportedLinkWrapper) o;
+    public int compareTo(SupportedLinkWrapper that) {
         if (this.mIsEnabled != that.mIsEnabled) {
             return this.mIsEnabled ? -1 : 1;
         }

@@ -16,6 +16,8 @@
 
 package com.android.settings.widget;
 
+import static com.android.settings.spa.app.appinfo.AppInfoSettingsProvider.startAppInfoSettings;
+
 import android.annotation.IdRes;
 import android.annotation.UserIdInt;
 import android.app.Activity;
@@ -40,8 +42,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.applications.AppInfoBase;
-import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -292,17 +292,9 @@ public class EntityHeaderController {
             Log.w(TAG, "Missing ingredients to build app info link, skip");
             return;
         }
-        entityHeaderContent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AppInfoBase.startAppInfoFragment(
-                        AppInfoDashboardFragment.class,
-                        mActivity.getString(R.string.application_info_label),
-                        mPackageName, mUid, mFragment, 0 /* request */,
-                        mMetricsCategory);
-            }
-        });
-        return;
+        entityHeaderContent.setOnClickListener(v -> startAppInfoSettings(
+                mPackageName, mUid, mFragment, 0 /* request */,
+                mMetricsCategory));
     }
 
     /**
