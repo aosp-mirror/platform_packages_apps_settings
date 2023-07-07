@@ -19,6 +19,7 @@ package com.android.settings.notification;
 import static com.android.settings.notification.SettingPref.TYPE_SECURE;
 
 import android.content.Context;
+import android.os.Vibrator;
 import android.provider.Settings.Secure;
 
 import com.android.settings.SettingsPreferenceFragment;
@@ -27,16 +28,18 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 public class VibrateIconPreferenceController extends SettingPrefController {
 
     private static final String KEY_VIBRATE_ICON = "vibrate_icon";
+    private final boolean mHasVibrator;
 
     public VibrateIconPreferenceController(Context context, SettingsPreferenceFragment parent,
             Lifecycle lifecycle) {
         super(context, parent, lifecycle);
+        mHasVibrator = context.getSystemService(Vibrator.class).hasVibrator();
         mPreference = new SettingPref(
             TYPE_SECURE, KEY_VIBRATE_ICON, Secure.STATUS_BAR_SHOW_VIBRATE_ICON, 0 /*default off*/);
     }
 
     @Override
     public boolean isAvailable() {
-        return true;
+        return mHasVibrator;
     }
 }

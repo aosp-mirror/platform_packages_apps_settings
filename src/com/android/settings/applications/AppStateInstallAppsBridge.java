@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.pm.IPackageManager;
 import android.content.pm.PackageManager;
 import android.os.RemoteException;
+import android.os.UserHandle;
 import android.util.Log;
 
 import com.android.internal.util.ArrayUtils;
@@ -65,9 +66,9 @@ public class AppStateInstallAppsBridge extends AppStateBaseBridge {
         }
     }
 
-    private boolean hasRequestedAppOpPermission(String permission, String packageName) {
+    private boolean hasRequestedAppOpPermission(String permission, String packageName, int userId) {
         try {
-            String[] packages = mIpm.getAppOpPermissionPackages(permission);
+            String[] packages = mIpm.getAppOpPermissionPackages(permission, userId);
             return ArrayUtils.contains(packages, packageName);
         } catch (RemoteException exc) {
             Log.e(TAG, "PackageManager dead. Cannot get permission info");
@@ -91,8 +92,9 @@ public class AppStateInstallAppsBridge extends AppStateBaseBridge {
 
     public InstallAppsState createInstallAppsStateFor(String packageName, int uid) {
         final InstallAppsState appState = new InstallAppsState();
+        final int userId = UserHandle.getUserId(uid);
         appState.permissionRequested = hasRequestedAppOpPermission(
-                Manifest.permission.REQUEST_INSTALL_PACKAGES, packageName);
+                Manifest.permission.REQUEST_INSTALL_PACKAGES, packageName, userId);
         appState.appOpMode = getAppOpMode(AppOpsManager.OP_REQUEST_INSTALL_PACKAGES, uid,
                 packageName);
         return appState;

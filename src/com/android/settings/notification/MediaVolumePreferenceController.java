@@ -29,6 +29,7 @@ import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.builders.ListBuilder;
 import androidx.slice.builders.SliceAction;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.bluetooth.BluetoothBroadcastDialog;
@@ -51,6 +52,7 @@ public class MediaVolumePreferenceController extends VolumeSeekBarPreferenceCont
 
     public MediaVolumePreferenceController(Context context) {
         super(context, KEY_MEDIA_VOLUME);
+        mVolumePreferenceListener = this::updateContentDescription;
     }
 
     @Override
@@ -90,18 +92,34 @@ public class MediaVolumePreferenceController extends VolumeSeekBarPreferenceCont
         return R.drawable.ic_media_stream_off;
     }
 
-    private boolean isSupportEndItem() {
-        return getWorker() != null
-            && getWorker().getActiveLocalMediaController() != null
-            && isConnectedBLEDevice();
+    @VisibleForTesting
+    boolean isSupportEndItem() {
+        return getWorker() != null && getWorker().isBroadcastSupported()
+                && (getWorker().isDeviceBroadcasting() || isConnectedBLEDevice());
     }
 
     private boolean isConnectedBLEDevice() {
+        if (getWorker() == null) {
+            Log.d(TAG, "The Worker is null");
+            return false;
+        }
         mMediaDevice = getWorker().getCurrentConnectedMediaDevice();
         if (mMediaDevice != null) {
             return mMediaDevice.isBLEDevice();
         }
         return false;
+    }
+
+    private void updateContentDescription() {
+        if (mPreference != null) {
+            if (mPreference.isMuted()) {
+                mPreference.updateContentDescription(
+                        mContext.getString(R.string.volume_content_description_silent_mode,
+                        mPreference.getTitle()));
+            } else {
+                mPreference.updateContentDescription(mPreference.getTitle());
+            }
+        }
     }
 
     @Override
@@ -120,7 +138,7 @@ public class MediaVolumePreferenceController extends VolumeSeekBarPreferenceCont
                     getWorker().getActiveLocalMediaController().getPackageName());
 
             pi = PendingIntent.getBroadcast(context, 0 /* requestCode */, intent,
-                    PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
+                    PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         } else {
             final CachedBluetoothDevice bluetoothDevice =
                     ((BluetoothMediaDevice) mMediaDevice).getCachedDevice();
@@ -133,9 +151,11 @@ public class MediaVolumePreferenceController extends VolumeSeekBarPreferenceCont
                     Utils.getApplicationLabel(mContext, getWorker().getPackageName()));
             intent.putExtra(BluetoothBroadcastDialog.KEY_DEVICE_ADDRESS,
                     bluetoothDevice.getAddress());
+            intent.putExtra(BluetoothBroadcastDialog.KEY_MEDIA_STREAMING, getWorker() != null
+                    && getWorker().getActiveLocalMediaController() != null);
 
             pi = PendingIntent.getActivity(context, 0 /* requestCode */, intent,
-                    PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
+                    PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         }
 
         final IconCompat icon = getBroadcastIcon(context);

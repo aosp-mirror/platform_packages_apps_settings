@@ -81,6 +81,7 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
     };
 
     private DevicePolicyManager mDevicePolicyManager;
+    private SensorPrivacyManager.OnSensorPrivacyChangedListener mPrivacyChangedListener;
 
     @VisibleForTesting
     Context mContext;
@@ -120,7 +121,7 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
         mAdaptiveSleepPermissionController = new AdaptiveSleepPermissionPreferenceController(
                 context);
         mAdaptiveSleepCameraStatePreferenceController =
-                new AdaptiveSleepCameraStatePreferenceController(context);
+                new AdaptiveSleepCameraStatePreferenceController(context, getLifecycle());
         mAdaptiveSleepBatterySaverPreferenceController =
                 new AdaptiveSleepBatterySaverPreferenceController(context);
         mPrivacyPreference = new FooterPreference(context);
@@ -129,8 +130,7 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
         mPrivacyPreference.setSelectable(false);
         mPrivacyPreference.setLayoutResource(R.layout.preference_footer);
         mPrivacyManager = SensorPrivacyManager.getInstance(context);
-        mPrivacyManager.addSensorPrivacyListener(CAMERA,
-                (sensor, enabled) -> mAdaptiveSleepController.updatePreference());
+        mPrivacyChangedListener = (sensor, enabled) -> mAdaptiveSleepController.updatePreference();
     }
 
     @Override
@@ -159,12 +159,14 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
         mAdaptiveSleepController.updatePreference();
         mContext.registerReceiver(mReceiver,
                 new IntentFilter(PowerManager.ACTION_POWER_SAVE_MODE_CHANGED));
+        mPrivacyManager.addSensorPrivacyListener(CAMERA, mPrivacyChangedListener);
     }
 
     @Override
     public void onStop() {
         super.onStop();
         mContext.unregisterReceiver(mReceiver);
+        mPrivacyManager.removeSensorPrivacyListener(CAMERA, mPrivacyChangedListener);
     }
 
     @Override

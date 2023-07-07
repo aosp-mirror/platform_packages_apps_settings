@@ -62,6 +62,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:ellipsize="marquee"
                 android:hyphenationFrequency="normalFast"
+                android:lineBreakWordStyle="phrase"
                 android:fadingEdge="horizontal"/>
             <TextView
                 android:id="@android:id/summary"
@@ -76,6 +77,7 @@
                 android:textColor="?android:attr/textColorSecondary"
                 android:focusable="false"
                 android:hyphenationFrequency="normalFast"
+                android:lineBreakWordStyle="phrase"
                 android:maxLines="4" />
         </RelativeLayout>
     </LinearLayout>

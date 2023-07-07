@@ -17,7 +17,9 @@
 package com.android.settings.wifi;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+import static android.os.UserManager.DISALLOW_CONFIG_WIFI;
 
+import android.app.KeyguardManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -31,6 +33,7 @@ import android.os.Looper;
 import android.os.Process;
 import android.os.SimpleClock;
 import android.os.SystemClock;
+import android.os.UserManager;
 import android.text.TextUtils;
 import android.util.EventLog;
 import android.util.Log;
@@ -49,6 +52,7 @@ import com.android.wifitrackerlib.WifiEntry;
 import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.util.ThemeHelper;
 
+import java.lang.ref.WeakReference;
 import java.time.Clock;
 import java.time.ZoneOffset;
 
@@ -94,10 +98,12 @@ public class WifiDialogActivity extends ObservableActivity implements WifiDialog
     // Interval between initiating NetworkDetailsTracker scans.
     private static final long SCAN_INTERVAL_MILLIS = 10_000;
 
-    private WifiDialog mDialog;
+    @VisibleForTesting
+    WifiDialog mDialog;
     private AccessPoint mAccessPoint;
 
-    private WifiDialog2 mDialog2;
+    @VisibleForTesting
+    WifiDialog2 mDialog2;
 
     // The received intent supports a key of WifiTrackerLib or SettingsLib.
     private boolean mIsWifiTrackerLib;
@@ -106,6 +112,7 @@ public class WifiDialogActivity extends ObservableActivity implements WifiDialog
     private NetworkDetailsTracker mNetworkDetailsTracker;
     private HandlerThread mWorkerThread;
     private WifiManager mWifiManager;
+    private LockScreenMonitor mLockScreenMonitor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,6 +122,10 @@ public class WifiDialogActivity extends ObservableActivity implements WifiDialog
         }
 
         super.onCreate(savedInstanceState);
+        if (!isConfigWifiAllowed()) {
+            finish();
+            return;
+        }
 
         mIsWifiTrackerLib = !TextUtils.isEmpty(mIntent.getStringExtra(KEY_CHOSEN_WIFIENTRY_KEY));
 
@@ -178,6 +189,10 @@ public class WifiDialogActivity extends ObservableActivity implements WifiDialog
                 mDialog.setOnDismissListener(this);
             }
         }
+
+        if (mDialog2 != null || mDialog != null) {
+            mLockScreenMonitor = new LockScreenMonitor(this);
+        }
     }
 
     @VisibleForTesting
@@ -215,6 +230,10 @@ public class WifiDialogActivity extends ObservableActivity implements WifiDialog
             }
         }
 
+        if (mLockScreenMonitor != null) {
+            mLockScreenMonitor.release();
+            mLockScreenMonitor = null;
+        }
         super.onDestroy();
     }
 
@@ -361,6 +380,19 @@ public class WifiDialogActivity extends ObservableActivity implements WifiDialog
         }
     }
 
+    @VisibleForTesting
+    boolean isConfigWifiAllowed() {
+        UserManager userManager = getSystemService(UserManager.class);
+        if (userManager == null) return true;
+        final boolean isConfigWifiAllowed = !userManager.hasUserRestriction(DISALLOW_CONFIG_WIFI);
+        if (!isConfigWifiAllowed) {
+            Log.e(TAG, "The user is not allowed to configure Wi-Fi.");
+            EventLog.writeEvent(0x534e4554, "226133034", getApplicationContext().getUserId(),
+                    "The user is not allowed to configure Wi-Fi.");
+        }
+        return isConfigWifiAllowed;
+    }
+
     private boolean hasWifiManager() {
         if (mWifiManager != null) return true;
         mWifiManager = getSystemService(WifiManager.class);
@@ -391,5 +423,46 @@ public class WifiDialogActivity extends ObservableActivity implements WifiDialog
             Log.w(TAG, "Cannot find the UID, calling package: " + callingPackage, e);
         }
         return false;
+    }
+
+    void dismissDialog() {
+        if (mDialog != null) {
+            mDialog.dismiss();
+            mDialog = null;
+        }
+        if (mDialog2 != null) {
+            mDialog2.dismiss();
+            mDialog2 = null;
+        }
+    }
+
+    @VisibleForTesting
+    static final class LockScreenMonitor implements KeyguardManager.KeyguardLockedStateListener {
+        private final WeakReference<WifiDialogActivity> mWifiDialogActivity;
+        private KeyguardManager mKeyguardManager;
+
+        LockScreenMonitor(WifiDialogActivity activity) {
+            mWifiDialogActivity = new WeakReference<>(activity);
+            mKeyguardManager = activity.getSystemService(KeyguardManager.class);
+            mKeyguardManager.addKeyguardLockedStateListener(activity.getMainExecutor(), this);
+        }
+
+        void release() {
+            if (mKeyguardManager == null) return;
+            mKeyguardManager.removeKeyguardLockedStateListener(this);
+            mKeyguardManager = null;
+        }
+
+        @Override
+        public void onKeyguardLockedStateChanged(boolean isKeyguardLocked) {
+            if (!isKeyguardLocked) return;
+            WifiDialogActivity activity = mWifiDialogActivity.get();
+            if (activity == null) return;
+            activity.dismissDialog();
+
+            Log.e(TAG, "Dismiss Wi-Fi dialog to prevent leaking user data on lock screen!");
+            EventLog.writeEvent(0x534e4554, "231583603", -1 /* UID */,
+                    "Leak Wi-Fi dialog on lock screen");
+        }
     }
 }

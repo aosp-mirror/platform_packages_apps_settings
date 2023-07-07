@@ -19,6 +19,7 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
+import android.os.UserManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.text.BidiFormatter;
@@ -27,6 +28,8 @@ import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.format.Formatter;
 import android.text.style.RelativeSizeSpan;
+import android.util.EventLog;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -36,6 +39,7 @@ import com.android.settings.R;
 import com.android.settings.datausage.lib.DataUsageLib;
 import com.android.settings.network.ProxySubscriptionManager;
 import com.android.settings.network.SubscriptionUtil;
+import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settingslib.NetworkPolicyEditor;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -75,11 +79,26 @@ public class DataUsageSummary extends DataUsageBaseFragment implements DataUsage
         return R.string.help_url_data_usage;
     }
 
+    public boolean isSimHardwareVisible(Context context) {
+        return SubscriptionUtil.isSimHardwareVisible(context);
+    }
+
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         Context context = getContext();
+        if (isGuestUser(context)) {
+            Log.e(TAG, "This setting isn't available due to user restriction.");
+            EventLog.writeEvent(0x534e4554, "262243574", -1 /* UID */, "Guest user");
+            finish();
+            return;
+        }
 
+        if (!isSimHardwareVisible(context) ||
+            MobileNetworkUtils.isMobileNetworkUserRestricted(context)) {
+            finish();
+            return;
+        }
         enableProxySubscriptionManager(context);
 
         boolean hasMobileData = DataUsageUtils.hasMobileData(context);
@@ -137,6 +156,10 @@ public class DataUsageSummary extends DataUsageBaseFragment implements DataUsage
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         final Activity activity = getActivity();
         final ArrayList<AbstractPreferenceController> controllers = new ArrayList<>();
+        if (!isSimHardwareVisible(context) ||
+            MobileNetworkUtils.isMobileNetworkUserRestricted(context)) {
+            return controllers;
+        }
         mSummaryController =
                 new DataUsageSummaryPreferenceController(activity, getSettingsLifecycle(), this,
                         DataUsageUtils.getDefaultSubscriptionId(activity));
@@ -270,5 +293,12 @@ public class DataUsageSummary extends DataUsageBaseFragment implements DataUsage
     public void updateDataUsage() {
         updateState();
         mSummaryController.updateState(mSummaryPreference);
+    }
+
+    private static boolean isGuestUser(Context context) {
+        if (context == null) return false;
+        final UserManager userManager = context.getSystemService(UserManager.class);
+        if (userManager == null) return false;
+        return userManager.isGuestUser();
     }
 }

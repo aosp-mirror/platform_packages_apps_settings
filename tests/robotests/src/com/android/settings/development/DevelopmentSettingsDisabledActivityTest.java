@@ -21,6 +21,7 @@ import static com.google.common.truth.Truth.assertThat;
 import android.content.Context;
 
 import com.android.settings.R;
+import com.android.settings.utils.ActivityControllerWrapper;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,7 +35,8 @@ public class DevelopmentSettingsDisabledActivityTest {
 
     @Test
     public void launchActivity_shouldShowToast() {
-        Robolectric.setupActivity(DevelopmentSettingsDisabledActivity.class);
+        ActivityControllerWrapper.setup(
+                Robolectric.buildActivity(DevelopmentSettingsDisabledActivity.class)).get();
 
         final Context context = RuntimeEnvironment.application;
         assertThat(ShadowToast.getTextOfLatestToast())

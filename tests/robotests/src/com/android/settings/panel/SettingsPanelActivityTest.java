@@ -16,11 +16,13 @@
 
 package com.android.settings.panel;
 
+import static android.content.res.Configuration.UI_MODE_NIGHT_NO;
 import static android.view.WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -30,15 +32,20 @@ import static org.mockito.Mockito.when;
 
 import android.content.res.Configuration;
 import android.os.Build;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsControllerCompat;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -61,6 +68,9 @@ public class SettingsPanelActivityTest {
     private PanelFragment mPanelFragment;
     @Mock
     private FragmentManager mFragmentManager;
+    @Mock
+    private FragmentTransaction mTransaction;
+    private int mOriginalUiMode;
 
     @Before
     public void setUp() {
@@ -76,6 +86,15 @@ public class SettingsPanelActivityTest {
         mSettingsPanelActivity.mPanelFragment = mPanelFragment;
         when(mFragmentManager.findFragmentById(R.id.main_content)).thenReturn(mPanelFragment);
         when(mSettingsPanelActivity.getSupportFragmentManager()).thenReturn(mFragmentManager);
+        mOriginalUiMode = mSettingsPanelActivity.getResources().getConfiguration().uiMode;
+        when(mFragmentManager.beginTransaction()).thenReturn(mTransaction);
+        when(mTransaction.add(anyInt(), any())).thenReturn(mTransaction);
+        when(mTransaction.commit()).thenReturn(0); // don't care about return value
+    }
+
+    @After
+    public void tearDown() {
+        mSettingsPanelActivity.getResources().getConfiguration().uiMode = mOriginalUiMode;
     }
 
     @Test
@@ -178,5 +197,25 @@ public class SettingsPanelActivityTest {
         mSettingsPanelActivity.onNewIntent(mSettingsPanelActivity.getIntent());
 
         verify(mPanelFragment, never()).updatePanelWithAnimation();
+    }
+
+    @Test
+    public void onCreated_isWindowBottomPaddingZero() {
+        int paddingBottom = mSettingsPanelActivity.getWindow().getDecorView().getPaddingBottom();
+        assertThat(paddingBottom).isEqualTo(0);
+    }
+
+    @Test
+    public void notInNightMode_lightNavigationBarAppearance() {
+        Configuration config = mSettingsPanelActivity.getResources().getConfiguration();
+        config.uiMode = UI_MODE_NIGHT_NO;
+        mSettingsPanelActivity.onConfigurationChanged(config); // forces creation
+
+        mSettingsPanelActivity.onNewIntent(mSettingsPanelActivity.getIntent());
+        verify(mFragmentManager).beginTransaction();
+
+        View decorView = mSettingsPanelActivity.getWindow().getDecorView();
+        WindowInsetsControllerCompat controller = ViewCompat.getWindowInsetsController(decorView);
+        assertThat(controller.isAppearanceLightNavigationBars()).isTrue();
     }
 }

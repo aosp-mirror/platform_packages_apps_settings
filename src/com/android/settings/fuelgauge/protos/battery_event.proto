@@ -1,0 +1,17 @@
+syntax = "proto2";
+
+option java_multiple_files = true;
+option java_package = "com.android.settings.fuelgauge.batteryusage";
+option java_outer_classname = "BatteryEventProto";
+
+enum BatteryEventType {
+  UNKNOWN_EVENT = 0;
+  POWER_CONNECTED = 1;
+  POWER_DISCONNECTED = 2;
+}
+
+message BatteryEvent {
+  optional int64 timestamp = 1;
+  optional BatteryEventType type = 2;
+  optional int32 battery_level = 3;
+}
