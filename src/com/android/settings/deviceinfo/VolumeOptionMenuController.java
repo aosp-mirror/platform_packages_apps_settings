@@ -30,6 +30,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
@@ -55,7 +56,9 @@ public class VolumeOptionMenuController implements LifecycleObserver, OnCreateOp
         OnPrepareOptionsMenu, OnOptionsItemSelected {
 
     private static final String TAG = "VolumeOptionMenuController";
-
+    private final Context mContext;
+    private final Fragment mFragment;
+    private final PackageManager mPackageManager;
     @VisibleForTesting
     MenuItem mRename;
     @VisibleForTesting
@@ -74,18 +77,12 @@ public class VolumeOptionMenuController implements LifecycleObserver, OnCreateOp
     MenuItem mFree;
     @VisibleForTesting
     MenuItem mForget;
-
-    private final Context mContext;
-    private final Fragment mFragment;
-    private final PackageManager mPackageManager;
-    private final StorageManager mStorageManager;
     private StorageEntry mStorageEntry;
 
     public VolumeOptionMenuController(Context context, Fragment parent, StorageEntry storageEntry) {
         mContext = context;
         mFragment = parent;
         mPackageManager = context.getPackageManager();
-        mStorageManager = context.getSystemService(StorageManager.class);
         mStorageEntry = storageEntry;
     }
 
@@ -162,12 +159,7 @@ public class VolumeOptionMenuController implements LifecycleObserver, OnCreateOp
         if (mStorageEntry.isPublic()) {
             mRename.setVisible(true);
             mUnmount.setVisible(true);
-            mFormat.setVisible(true);
-            final DiskInfo diskInfo = mStorageManager.findDiskById(mStorageEntry.getDiskId());
-            mFormatAsInternal.setVisible(diskInfo != null
-                    && diskInfo.isAdoptable()
-                    && UserManager.get(mContext).isAdminUser()
-                    && !ActivityManager.isUserAMonkey());
+            mFormatAsInternal.setVisible(true);
             return;
         }
     }
@@ -225,6 +217,16 @@ public class VolumeOptionMenuController implements LifecycleObserver, OnCreateOp
         }
         if (menuId == R.id.storage_format_as_portable) {
             if (mStorageEntry.isPrivate()) {
+                boolean mIsPermittedToAdopt = UserManager.get(mContext).isAdminUser()
+                    && !ActivityManager.isUserAMonkey();
+
+                if(!mIsPermittedToAdopt){
+                    //Notify guest users as to why formatting is disallowed
+                    Toast.makeText(mFragment.getActivity(),
+                                 R.string.storage_wizard_guest,Toast.LENGTH_LONG).show();
+                    (mFragment.getActivity()).finish();
+                    return false;
+                }
                 final Bundle args = new Bundle();
                 args.putString(VolumeInfo.EXTRA_VOLUME_ID, mStorageEntry.getId());
                 new SubSettingLauncher(mContext)
@@ -239,8 +241,9 @@ public class VolumeOptionMenuController implements LifecycleObserver, OnCreateOp
         }
         if (menuId == R.id.storage_format_as_internal) {
             if (mStorageEntry.isPublic()) {
-                StorageWizardFormatConfirm.showPrivate(mFragment.getActivity(),
-                        mStorageEntry.getDiskId());
+                final Intent intent = new Intent(mFragment.getActivity(), StorageWizardInit.class);
+                intent.putExtra(VolumeInfo.EXTRA_VOLUME_ID, mStorageEntry.getId());
+                mContext.startActivity(intent);
                 return true;
             }
             return false;

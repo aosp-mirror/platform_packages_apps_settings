@@ -19,6 +19,7 @@ package com.android.settings.datetime;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
+import android.app.timedetector.TimeDetectorHelper;
 import android.content.Context;
 import android.content.Intent;
 
@@ -69,28 +70,28 @@ public class DateTimeSettings extends DashboardFragment implements
         final Intent intent = activity.getIntent();
         final boolean isFromSUW = intent.getBooleanExtra(EXTRA_IS_FROM_SUW, false);
 
-        final AutoTimeZonePreferenceController autoTimeZonePreferenceController =
-                new AutoTimeZonePreferenceController(
-                        activity, this /* UpdateTimeAndDateCallback */, isFromSUW);
         final AutoTimePreferenceController autoTimePreferenceController =
                 new AutoTimePreferenceController(
                         activity, this /* UpdateTimeAndDateCallback */);
+        controllers.add(autoTimePreferenceController);
+        DatePreferenceController datePreferenceController = new DatePreferenceController(
+                activity, this /* UpdateTimeAndDateCallback */);
+        controllers.add(datePreferenceController);
+        controllers.add(new TimePreferenceController(
+                activity, this /* UpdateTimeAndDateCallback */, datePreferenceController));
+
+        final AutoTimeZonePreferenceController autoTimeZonePreferenceController =
+                new AutoTimeZonePreferenceController(
+                        activity, this /* UpdateTimeAndDateCallback */, isFromSUW);
+        controllers.add(autoTimeZonePreferenceController);
+        controllers.add(new TimeZonePreferenceController(activity));
+
         final AutoTimeFormatPreferenceController autoTimeFormatPreferenceController =
                 new AutoTimeFormatPreferenceController(
                         activity, this /* UpdateTimeAndDateCallback */);
-
-        controllers.add(autoTimeZonePreferenceController);
-        controllers.add(autoTimePreferenceController);
         controllers.add(autoTimeFormatPreferenceController);
-
         controllers.add(new TimeFormatPreferenceController(
                 activity, this /* UpdateTimeAndDateCallback */, isFromSUW));
-        controllers.add(new TimeZonePreferenceController(
-                activity, autoTimeZonePreferenceController));
-        controllers.add(new TimePreferenceController(
-                activity, this /* UpdateTimeAndDateCallback */, autoTimePreferenceController));
-        controllers.add(new DatePreferenceController(
-                activity, this /* UpdateTimeAndDateCallback */, autoTimePreferenceController));
         return controllers;
     }
 
@@ -104,7 +105,7 @@ public class DateTimeSettings extends DashboardFragment implements
         switch (id) {
             case DatePreferenceController.DIALOG_DATEPICKER:
                 return use(DatePreferenceController.class)
-                        .buildDatePicker(getActivity());
+                        .buildDatePicker(getActivity(), TimeDetectorHelper.INSTANCE);
             case TimePreferenceController.DIALOG_TIMEPICKER:
                 return use(TimePreferenceController.class)
                         .buildTimePicker(getActivity());

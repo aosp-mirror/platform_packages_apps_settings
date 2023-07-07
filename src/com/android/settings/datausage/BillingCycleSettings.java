@@ -22,14 +22,18 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
+import android.icu.text.MeasureFormat;
+import android.icu.util.MeasureUnit;
 import android.net.NetworkPolicy;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.text.method.NumberKeyListener;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
@@ -42,6 +46,8 @@ import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.network.SubscriptionUtil;
+import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.NetworkPolicyEditor;
 import com.android.settingslib.net.DataUsageController;
@@ -49,6 +55,7 @@ import com.android.settingslib.search.SearchIndexable;
 
 import java.text.NumberFormat;
 import java.text.ParseException;
+import java.util.Optional;
 import java.util.TimeZone;
 
 @SearchIndexable
@@ -102,10 +109,26 @@ public class BillingCycleSettings extends DataUsageBaseFragment implements
         super.onCreate(icicle);
 
         final Context context = getContext();
+        if (!SubscriptionUtil.isSimHardwareVisible(context)) {
+            finish();
+            return;
+        }
         mDataUsageController = new DataUsageController(context);
 
         Bundle args = getArguments();
         mNetworkTemplate = args.getParcelable(DataUsageList.EXTRA_NETWORK_TEMPLATE);
+        if (mNetworkTemplate == null && getIntent() != null) {
+            mNetworkTemplate = getIntent().getParcelableExtra(Settings.EXTRA_NETWORK_TEMPLATE);
+        }
+
+        if (mNetworkTemplate == null) {
+            Optional<NetworkTemplate> mobileNetworkTemplateFromSim =
+                    DataUsageUtils.getMobileNetworkTemplateFromSubId(context, getIntent());
+            if (mobileNetworkTemplateFromSim.isPresent()) {
+                mNetworkTemplate = mobileNetworkTemplateFromSim.get();
+            }
+        }
+
         if (mNetworkTemplate == null) {
             mNetworkTemplate = DataUsageUtils.getDefaultTemplate(context,
                 DataUsageUtils.getDefaultSubscriptionId(context));
@@ -300,6 +323,17 @@ public class BillingCycleSettings extends DataUsageBaseFragment implements
             final long bytes = isLimit ? editor.getPolicyLimitBytes(template)
                     : editor.getPolicyWarningBytes(template);
             final long limitDisabled = isLimit ? LIMIT_DISABLED : WARNING_DISABLED;
+
+            final MeasureFormat formatter = MeasureFormat.getInstance(
+                    getContext().getResources().getConfiguration().locale,
+                    MeasureFormat.FormatWidth.SHORT);
+            final String[] unitNames = new String[] {
+                formatter.getUnitDisplayName(MeasureUnit.MEGABYTE),
+                formatter.getUnitDisplayName(MeasureUnit.GIGABYTE)
+            };
+            final ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                    getContext(), android.R.layout.simple_spinner_item, unitNames);
+            type.setAdapter(adapter);
 
             final boolean unitInGigaBytes = (bytes > 1.5f * GIB_IN_BYTES);
             final String bytesText = formatText(bytes,
@@ -498,7 +532,9 @@ public class BillingCycleSettings extends DataUsageBaseFragment implements
 
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    return DataUsageUtils.hasMobileData(context);
+                    return (!MobileNetworkUtils.isMobileNetworkUserRestricted(context))
+                            && SubscriptionUtil.isSimHardwareVisible(context)
+                            && DataUsageUtils.hasMobileData(context);
                 }
             };
 

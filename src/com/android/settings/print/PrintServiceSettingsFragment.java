@@ -368,6 +368,7 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
         MenuItem searchItem = menu.findItem(R.id.print_menu_item_search);
         if (mServiceEnabled && mPrintersAdapter.getUnfilteredCount() > 0) {
             mSearchView = (SearchView) searchItem.getActionView();
+            mSearchView.setMaxWidth(Integer.MAX_VALUE);
             mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                 @Override
                 public boolean onQueryTextSubmit(String query) {

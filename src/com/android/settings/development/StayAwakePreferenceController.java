@@ -50,7 +50,7 @@ public class StayAwakePreferenceController extends DeveloperOptionsPreferenceCon
     @VisibleForTesting
     static final int SETTING_VALUE_ON =
             BatteryManager.BATTERY_PLUGGED_AC | BatteryManager.BATTERY_PLUGGED_USB
-                    | BatteryManager.BATTERY_PLUGGED_WIRELESS;
+                    | BatteryManager.BATTERY_PLUGGED_WIRELESS | BatteryManager.BATTERY_PLUGGED_DOCK;
     @VisibleForTesting
     SettingsObserver mSettingsObserver;
 

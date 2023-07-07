@@ -60,6 +60,7 @@ import com.android.settingslib.utils.ThreadUtils;
 
 import com.google.android.setupdesign.DividerItemDecoration;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -213,6 +214,8 @@ public class PanelFragment extends Fragment {
         // Make the panel layout gone here, to avoid janky animation when updating from old panel.
         // We will make it visible once the panel is ready to load.
         mPanelSlices.setVisibility(View.GONE);
+        // Remove the animator to avoid a RecyclerView crash.
+        mPanelSlices.setItemAnimator(null);
 
         final Bundle arguments = getArguments();
         final String callingPackageName =
@@ -339,8 +342,13 @@ public class PanelFragment extends Fragment {
             mSliceLiveData.put(uri, sliceLiveData);
 
             sliceLiveData.observe(getViewLifecycleOwner(), slice -> {
-                // If the Slice has already loaded, do nothing.
+
+                // If the Slice has already loaded, refresh list with slice data.
                 if (mPanelSlicesLoaderCountdownLatch.isSliceLoaded(uri)) {
+                    if (mAdapter != null) {
+                        int itemIndex = (new ArrayList<>(mSliceLiveData.keySet())).indexOf(uri);
+                        mAdapter.notifyItemChanged(itemIndex);
+                    }
                     return;
                 }
 
