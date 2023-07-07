@@ -40,7 +40,7 @@ public class BluetoothLeAudioDeviceDetailsPreferenceController
 
     private static final String PREFERENCE_KEY = "bluetooth_show_leaudio_device_details";
     private static final String CONFIG_LE_AUDIO_ENABLED_BY_DEFAULT = "le_audio_enabled_by_default";
-    private static final boolean LE_AUDIO_DEVICE_DETAIL_DEFAULT_VALUE = true;
+    private static final boolean LE_AUDIO_DEVICE_DETAIL_DEFAULT_VALUE = false;
     static int sLeAudioSupportedStateCache = BluetoothStatusCodes.ERROR_UNKNOWN;
 
     @VisibleForTesting
