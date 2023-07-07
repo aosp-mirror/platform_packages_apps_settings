@@ -188,7 +188,7 @@
     <string name="thursday_first_day_of_week" msgid="3035885630945594833">"Четврток"</string>
     <string name="friday_first_day_of_week" msgid="7074795061812083541">"Петок"</string>
     <string name="saturday_first_day_of_week" msgid="3702282590450322727">"Сабота"</string>
-    <string name="title_regional_pref_footer" msgid="7450438024324794380">"Ако апликацијата не поддржува регионални поставки, таа ќе ги користи стандардните поставки за локален стандард."</string>
+    <string name="title_regional_pref_footer" msgid="7450438024324794380">"Ако апликацијата не поддржува регионални поставки, ќе ги користи поставките за својот локален стандард."</string>
     <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"Дознајте повеќе за поставките за јазик."</string>
     <string name="dlg_remove_locales_title" msgid="3170501604483612114">"{count,plural, =1{Да се отстрани избраниот јазик?}one{Да се отстранат избраните јазици?}other{Да се отстранат избраните јазици?}}"</string>
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"Текстот ќе се прикажува на друг јазик."</string>
@@ -662,7 +662,6 @@
     <string name="remove_association_button" msgid="5004208145998061135">"Отстрани асоцијација"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"Да се прекине врската со апликацијата?"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"Апликацијата <xliff:g id="APP_NAME">%1$s</xliff:g> веќе нема да се поврзува со вашиот <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
-    <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"Експериментално. Го подобрува аудиото."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Заборави го уредот"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Прекини врска со апликацијата"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Максимален број аудиоуреди поврзани преку Bluetooth"</string>
@@ -1463,6 +1462,18 @@
     <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"Користи ја шемата и за отклуч. на уредов"</string>
     <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"Користи го PIN-кодот и за отклуч. на уредов"</string>
     <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="2066701840753591922">"Користи ја лозинката и за отклуч. на уредов"</string>
+    <!-- no translation found for lockpassword_confirm_repair_mode_pattern_header (6669435143987988314) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_pin_header (2585263648322879131) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_password_header (3064676176428495228) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_pattern_details (6187536224419477465) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_pin_details (203022189107305807) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_password_details (4860219600771003873) -->
+    <skip />
     <string name="lockpassword_invalid_pin" msgid="7530854476819820600">"Погрешен PIN"</string>
     <string name="lockpassword_invalid_password" msgid="1588184930542221687">"Погрешна лозинка"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="8109305107409924083">"Погрешна шема"</string>
@@ -2709,7 +2720,7 @@
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Да се избрише активноста на гостин?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Апликациите и податоците од оваа гостинска сесија ќе се избришат сега, а целата идна активност на гостите ќе се брише секој пат кога ќе излезете од режимот на гостин"</string>
     <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"бриши, гостин, активност, отстрани, податоци, посетител, избриши"</string>
-    <string name="enable_guest_calling" msgid="8300355036005240911">"Дозволете гостин да го користи телефонот"</string>
+    <string name="enable_guest_calling" msgid="4620657197834392094">"Доз. му на гост. да воспост. тел. повици"</string>
     <string name="enable_guest_calling_summary" msgid="4748224917641204782">"Историјата на повици ќе се сподели со гостинскиот корисник"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Вклучи телефонски повици и SMS"</string>
     <string name="user_grant_admin" msgid="5942118263054572074">"Постави го корисников како администратор"</string>
@@ -2984,6 +2995,10 @@
     <string name="ring_volume_option_title" msgid="1520802026403038560">"Ѕвонење и известувања"</string>
     <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"Јачина на звук за ѕвонење"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"Јачина на звук за известување"</string>
+    <string name="ringer_content_description_silent_mode" msgid="1442257660889685934">"Ѕвонење во безгласен режим"</string>
+    <string name="ringer_content_description_vibrate_mode" msgid="5946432791951870480">"Ѕвонење на вибрации"</string>
+    <string name="notification_volume_content_description_vibrate_mode" msgid="6097212000507408288">"Звукот на известувањата е исклучен, известувањата ќе вибрираат"</string>
+    <string name="volume_content_description_silent_mode" msgid="377680514551405754">"Звукот на <xliff:g id="VOLUME_TYPE">%1$s</xliff:g> е исклучен"</string>
     <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"Недостапно бидејќи звукот е исклучен"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"Мелодија на телефон"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Стандарден звук за известување"</string>
@@ -4662,7 +4677,7 @@
     <string name="disable_phantom_process_monitor_title" msgid="8348108346706188771">"Оневозможи ги ограничувањата за подредени процеси"</string>
     <string name="disable_phantom_process_monitor_summary" msgid="3044464635550256985">"Ги оневозможува ограничувањата за користење системски ресурси за подредените процеси на апликациите"</string>
     <string name="enable_notes_role_title" msgid="7662702013496114763">"Присилно овозможување на улогата „Белешки“"</string>
-    <string name="enable_notes_role_summary" msgid="136916915155048249">"Овозможува системски интеграции за фаќање белешки преку улогата „Белешки“. Ако улогата „Белешки“ е веќе овозможена, не се презема никакво дејство."</string>
+    <string name="enable_notes_role_summary" msgid="5495721409392395089">"Овозможете системски интеграции за фаќање белешки преку улогата „Белешки“. Ако улогата „Белешки“ е веќе овозможена, не правете ништо. Потребно е рестартирање."</string>
     <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Емитување"</string>
     <string name="bluetooth_broadcast_dialog_broadcast_app" msgid="1016617579194329005">"Емитување на <xliff:g id="CURRENTAPP">%1$s</xliff:g>"</string>
     <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"Слушајте емитувања во ваша близина"</string>
