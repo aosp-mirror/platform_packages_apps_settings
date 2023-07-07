@@ -65,11 +65,8 @@ public class CardContentProvider extends ContentProvider {
         URI_MATCHER.addURI(CARD_AUTHORITY, CardDatabaseHelper.CARD_TABLE, MATCH_CARDS);
     }
 
-    private CardDatabaseHelper mDBHelper;
-
     @Override
     public boolean onCreate() {
-        mDBHelper = CardDatabaseHelper.getInstance(getContext());
         return true;
     }
 
@@ -84,7 +81,8 @@ public class CardContentProvider extends ContentProvider {
     public int bulkInsert(Uri uri, ContentValues[] values) {
         final StrictMode.ThreadPolicy oldPolicy = StrictMode.getThreadPolicy();
         int numInserted = 0;
-        final SQLiteDatabase database = mDBHelper.getWritableDatabase();
+        final CardDatabaseHelper DBHelper = CardDatabaseHelper.getInstance(getContext());
+        final SQLiteDatabase database = DBHelper.getWritableDatabase();
         final boolean keepDismissalTimestampBeforeDeletion = getContext().getResources()
                 .getBoolean(R.bool.config_keep_contextual_card_dismissal_timestamp);
         final Map<String, Long> dismissedTimeMap = new ArrayMap<>();
@@ -168,7 +166,8 @@ public class CardContentProvider extends ContentProvider {
             final SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
             final String table = getTableFromMatch(uri);
             queryBuilder.setTables(table);
-            final SQLiteDatabase database = mDBHelper.getReadableDatabase();
+            final CardDatabaseHelper DBHelper = CardDatabaseHelper.getInstance(getContext());
+            final SQLiteDatabase database = DBHelper.getReadableDatabase();
             final Cursor cursor = queryBuilder.query(database,
                     projection, selection, selectionArgs, null /* groupBy */, null /* having */,
                     sortOrder);

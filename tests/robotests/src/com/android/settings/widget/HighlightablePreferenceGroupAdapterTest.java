@@ -26,7 +26,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
@@ -83,7 +83,7 @@ public class HighlightablePreferenceGroupAdapterTest {
                 false /* highlighted*/));
         when(mAdapter.getItem(anyInt())).thenReturn(mPreference);
         mViewHolder = PreferenceViewHolder.createInstanceForTests(
-                View.inflate(mContext, R.layout.app_preference_item, null));
+                View.inflate(mContext, R.layout.preference, null));
     }
 
     @Test
@@ -111,7 +111,7 @@ public class HighlightablePreferenceGroupAdapterTest {
         ReflectionHelpers.setField(mAdapter, "mHighlightRequested", false);
         mAdapter.requestHighlight(mRoot, null /* recyclerView */,  mock(AppBarLayout.class));
 
-        verifyZeroInteractions(mRoot);
+        verifyNoInteractions(mRoot);
     }
 
     @Test
@@ -125,11 +125,11 @@ public class HighlightablePreferenceGroupAdapterTest {
         when(mFragment.getArguments()).thenReturn(null);
         when(mFragment.getPreferenceScreen()).thenReturn(screen);
         HighlightablePreferenceGroupAdapter.adjustInitialExpandedChildCount(mFragment);
-        verifyZeroInteractions(screen);
+        verifyNoInteractions(screen);
     }
 
     @Test
-    public void adjustInitialExpandedChildCount_hasHightlightKey_shouldExpandAllChildren() {
+    public void adjustInitialExpandedChildCount_hasHighlightKey_shouldExpandAllChildren() {
         final Bundle args = new Bundle();
         when(mFragment.getArguments()).thenReturn(args);
         args.putString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY, "testkey");
@@ -150,7 +150,7 @@ public class HighlightablePreferenceGroupAdapterTest {
         HighlightablePreferenceGroupAdapter.adjustInitialExpandedChildCount(mFragment);
 
         verify(mFragment).getInitialExpandedChildCount();
-        verifyZeroInteractions(screen);
+        verifyNoInteractions(screen);
     }
 
     @Test
@@ -208,7 +208,7 @@ public class HighlightablePreferenceGroupAdapterTest {
     }
 
     @Test
-    public void updateBackground_reuseHightlightedRowForNormalRow_shouldResetBackgroundAndTag() {
+    public void updateBackground_reuseHighlightedRowForNormalRow_shouldResetBackgroundAndTag() {
         ReflectionHelpers.setField(mAdapter, "mHighlightPosition", 10);
         mViewHolder.itemView.setTag(R.id.preference_highlighted, true);
 

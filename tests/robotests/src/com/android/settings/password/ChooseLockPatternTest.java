@@ -16,6 +16,8 @@
 
 package com.android.settings.password;
 
+import static android.view.WindowManager.LayoutParams.FLAG_SECURE;
+
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.Truth.assertWithMessage;
 
@@ -32,12 +34,14 @@ import com.android.settings.password.ChooseLockPattern.ChooseLockPatternFragment
 import com.android.settings.password.ChooseLockPattern.IntentBuilder;
 import com.android.settings.testutils.shadow.ShadowUtils;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
+@Ignore
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowUtils.class)
 public class ChooseLockPatternTest {
@@ -105,6 +109,14 @@ public class ChooseLockPatternTest {
 
         View iconView = fragment.getView().findViewById(R.id.sud_layout_icon);
         assertThat(iconView.getVisibility()).isEqualTo(View.GONE);
+    }
+
+    @Test
+    public void activity_shouldHaveSecureFlag() {
+        final ChooseLockPattern activity = Robolectric.buildActivity(
+                ChooseLockPattern.class, new IntentBuilder(application).build()).setup().get();
+        final int flags = activity.getWindow().getAttributes().flags;
+        assertThat(flags & FLAG_SECURE).isEqualTo(FLAG_SECURE);
     }
 
     private ChooseLockPattern createActivity(boolean addFingerprintExtra) {

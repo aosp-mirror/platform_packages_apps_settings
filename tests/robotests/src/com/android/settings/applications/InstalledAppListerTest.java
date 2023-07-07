@@ -20,11 +20,11 @@ import static com.android.settings.testutils.ApplicationTestUtils.buildInfo;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyObject;
-import static org.mockito.ArgumentMatchers.argThat;
-import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.anyInt;
+import static org.mockito.Mockito.argThat;
 import static org.mockito.Mockito.atLeast;
+import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -170,7 +170,7 @@ public final class InstalledAppListerTest {
         verify(mPackageManager).getInstalledApplicationsAsUser(anyInt(), eq(MAIN_USER_ID));
         verify(mPackageManager).getInstalledApplicationsAsUser(anyInt(), eq(MANAGED_PROFILE_ID));
         verify(mPackageManager, atLeast(0))
-            .queryIntentActivitiesAsUser(anyObject(), anyInt(), anyInt());
+            .queryIntentActivitiesAsUser(any(), anyInt(), anyInt());
     }
 
     public static boolean checkAppFound(List<UserAppInfo> mInstalledAppList, String appId,

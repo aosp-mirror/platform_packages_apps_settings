@@ -16,10 +16,9 @@
 
 package com.android.settings.wifi.calling;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyBoolean;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyObject;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.anyBoolean;
+import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
@@ -41,6 +40,7 @@ import androidx.recyclerview.widget.RecyclerView.OnScrollListener;
 import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowDisclaimerItemFactory;
 import com.android.settings.testutils.shadow.ShadowFragment;
+import com.android.settings.utils.ActivityControllerWrapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -90,12 +90,13 @@ public class WifiCallingDisclaimerFragmentTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mActivity = Robolectric.setupActivity(FragmentActivity.class);
+        mActivity = (FragmentActivity) ActivityControllerWrapper.setup(
+                Robolectric.buildActivity(FragmentActivity.class)).get();
         mFragment = spy(new WifiCallingDisclaimerFragment());
 
         doReturn(mActivity).when(mFragment).getActivity();
 
-        when(mLayoutInflater.inflate(anyInt(), anyObject(), anyBoolean())).thenReturn(mView);
+        when(mLayoutInflater.inflate(anyInt(), any(), anyBoolean())).thenReturn(mView);
         when(mView.findViewById(R.id.agree_button)).thenReturn(mAgreeButton);
         when(mView.findViewById(R.id.disagree_button)).thenReturn(mDisagreeButton);
         when(mView.findViewById(R.id.disclaimer_item_list)).thenReturn(mRecyclerView);

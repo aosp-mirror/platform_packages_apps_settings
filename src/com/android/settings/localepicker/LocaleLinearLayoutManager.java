@@ -86,7 +86,7 @@ public class LocaleLinearLayoutManager extends LinearLayoutManager {
         // any language can handle it. And we want the position to be part of it.
         // So we use something like "2, French (France)"
         final String description =
-                (position + 1) + ", " + dragCell.getCheckbox().getContentDescription();
+                (position + 1) + ", " + dragCell.getLabelView().getContentDescription();
         info.setContentDescription(description);
 
         if (mAdapter.isRemoveMode()) { // We don't move things around in remove mode

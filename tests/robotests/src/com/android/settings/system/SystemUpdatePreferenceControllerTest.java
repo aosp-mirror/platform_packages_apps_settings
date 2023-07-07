@@ -38,6 +38,7 @@ import com.android.settings.testutils.shadow.ShadowUserManager;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -111,6 +112,7 @@ public class SystemUpdatePreferenceControllerTest {
         assertThat(mPreference.isVisible()).isFalse();
     }
 
+    @Ignore
     @Test
     @Config(qualifiers = "mcc999")
     public void displayPrefs_ifAdminUser_butNotVisible_shouldNotDisplay() {

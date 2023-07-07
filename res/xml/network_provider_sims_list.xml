@@ -21,20 +21,13 @@
 
     <PreferenceCategory
         android:key="provider_model_sim_category"
-        android:title="@string/sim_category_title"
+        android:title="@string/summary_placeholder"
+        android:layout="@layout/preference_category_no_label"
         android:order="20"
         settings:controller="com.android.settings.network.NetworkProviderSimsCategoryController"/>
 
-    <PreferenceCategory
-        android:key="provider_model_downloaded_sim_category"
-        android:title="@string/downloaded_sim_category_title"
-        android:order="25"
-        settings:controller=
-            "com.android.settings.network.NetworkProviderDownloadedSimsCategoryController"
-        settings:allowDividerAbove="true"/>
-
     <com.android.settingslib.RestrictedPreference
-        android:key="add_more"
+        android:key="add_sim"
         settings:isPreferenceVisible="false"
         settings:userRestriction="no_config_mobile_networks"
         settings:useAdminDisabledSummary="true"

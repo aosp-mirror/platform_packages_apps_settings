@@ -21,8 +21,8 @@ import static androidx.lifecycle.Lifecycle.Event.ON_STOP;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyObject;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -72,7 +72,7 @@ public class PrintJobMessagePreferenceControllerTest {
         mPreference = new Preference(mContext);
         when(mContext.getSystemService(Context.PRINT_SERVICE)).thenReturn(mPrintManager);
         when(mPrintManager.getGlobalPrintManagerForUser(anyInt())).thenReturn(mPrintManager);
-        when(mPrintManager.getPrintJob(anyObject())).thenReturn(mPrintJob);
+        when(mPrintManager.getPrintJob(any())).thenReturn(mPrintJob);
         when(mPrintJob.getInfo()).thenReturn(mPrintJobInfo);
         mController = new PrintJobMessagePreferenceController(mContext, PREF_KEY);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
@@ -93,7 +93,7 @@ public class PrintJobMessagePreferenceControllerTest {
 
     @Test
     public void updateUi_visiblePreference() {
-        when(mPrintJobInfo.getStatus(anyObject())).thenReturn("TestPrint");
+        when(mPrintJobInfo.getStatus(any())).thenReturn("TestPrint");
         mLifecycle.handleLifecycleEvent(ON_START);
 
         assertThat(mPreference.isVisible()).isTrue();
@@ -103,7 +103,7 @@ public class PrintJobMessagePreferenceControllerTest {
 
     @Test
     public void updateUi_invisiblePreference() {
-        when(mPrintJobInfo.getStatus(anyObject())).thenReturn(null);
+        when(mPrintJobInfo.getStatus(any())).thenReturn(null);
         mLifecycle.handleLifecycleEvent(ON_START);
 
         assertThat(mPreference.isVisible()).isFalse();

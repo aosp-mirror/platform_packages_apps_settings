@@ -28,6 +28,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.util.FeatureFlagUtils;
 
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -35,6 +36,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 
 @RunWith(AndroidJUnit4.class)
 public class PanelFeatureProviderImplTest {
@@ -66,11 +68,27 @@ public class PanelFeatureProviderImplTest {
     }
 
     @Test
-    public void getPanel_volume_returnsCorrectPanel() {
+    public void getPanel_volumePanel_returnsCorrectPanel() {
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlagUtils.SETTINGS_VOLUME_PANEL_IN_SYSTEMUI,
+                false);
         mBundle.putString(KEY_PANEL_TYPE_ARGUMENT, Settings.Panel.ACTION_VOLUME);
 
         final PanelContent panel = mProvider.getPanel(mContext, mBundle);
 
         assertThat(panel).isInstanceOf(VolumePanel.class);
+    }
+
+    @Test
+    public void getPanel_volumePanelFlagEnabled_sendRedirectIntent() {
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlagUtils.SETTINGS_VOLUME_PANEL_IN_SYSTEMUI,
+                true);
+        mBundle.putString(KEY_PANEL_TYPE_ARGUMENT, Settings.Panel.ACTION_VOLUME);
+        final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
+
+        mProvider.getPanel(mContext, mBundle);
+
+        verify(mContext).sendBroadcast(intentCaptor.capture());
+        assertThat(intentCaptor.getValue().getAction()).isEqualTo(Settings.Panel.ACTION_VOLUME);
+        assertThat(intentCaptor.getValue().getPackage()).isEqualTo(SYSTEMUI_PACKAGE_NAME);
     }
 }
