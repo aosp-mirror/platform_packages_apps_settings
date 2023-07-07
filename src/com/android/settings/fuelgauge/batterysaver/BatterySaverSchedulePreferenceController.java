@@ -15,9 +15,10 @@
  */
 package com.android.settings.fuelgauge.batterysaver;
 
+import static com.android.settingslib.fuelgauge.BatterySaverUtils.KEY_PERCENTAGE;
+
 import android.content.ContentResolver;
 import android.content.Context;
-import android.os.PowerManager;
 import android.provider.Settings;
 import android.provider.Settings.Global;
 
@@ -61,20 +62,14 @@ public class BatterySaverSchedulePreferenceController extends BasePreferenceCont
     @Override
     public CharSequence getSummary() {
         final ContentResolver resolver = mContext.getContentResolver();
-        final int mode = Settings.Global.getInt(resolver, Global.AUTOMATIC_POWER_SAVE_MODE,
-                PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE);
-        if (mode == PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE) {
+        final String mode = BatterySaverUtils.getBatterySaverScheduleKey(mContext);
+        if (KEY_PERCENTAGE.equals(mode)) {
             final int threshold =
                     Settings.Global.getInt(resolver, Global.LOW_POWER_MODE_TRIGGER_LEVEL, 0);
-            if (threshold <= 0) {
-                return mContext.getText(R.string.battery_saver_auto_no_schedule);
-            } else {
-                return mContext.getString(R.string.battery_saver_auto_percentage_summary,
-                        Utils.formatPercentage(threshold));
-            }
-        } else {
-            return mContext.getText(R.string.battery_saver_auto_routine);
+            return mContext.getString(R.string.battery_saver_auto_percentage_summary,
+                    Utils.formatPercentage(threshold));
         }
+        return mContext.getText(R.string.battery_saver_auto_no_schedule);
     }
 
     @Override

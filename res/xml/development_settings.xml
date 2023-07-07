@@ -45,8 +45,9 @@
             android:title="@string/capture_system_heap_dump_title" />
 
         <Preference
-            android:key="reboot_with_mte"
-            android:title="@string/reboot_with_mte_title" />
+            android:key="development_memtag_page"
+            android:title="@string/development_memtag_page_title"
+            android:fragment="com.android.settings.development.DevelopmentMemtagPage" />
 
         <Preference
             android:key="local_backup_password"
@@ -79,6 +80,26 @@
             android:dialogTitle="@string/bt_hci_snoop_log_summary"
             android:entries="@array/bt_hci_snoop_log_entries"
             android:entryValues="@array/bt_hci_snoop_log_values" />
+
+        <Preference
+            android:key="snoop_logger_filters_dashboard"
+            android:title="@string/bt_hci_snoop_log_filters_dashboard_title"
+            android:fragment=
+                "com.android.settings.development.snooplogger.SnoopLoggerFiltersDashboard" />
+
+        <ListPreference
+            android:key="bt_hci_snoop_log_filter_pbap"
+            android:title="@string/bt_hci_snoop_log_filter_pbap_title"
+            android:dialogTitle="@string/bt_hci_snoop_log_filter_summary"
+            android:entries="@array/bt_hci_snoop_log_profile_filter_entries"
+            android:entryValues="@array/bt_hci_snoop_log_profile_filter_values" />
+
+        <ListPreference
+            android:key="bt_hci_snoop_log_filter_map"
+            android:title="@string/bt_hci_snoop_log_filter_map_title"
+            android:dialogTitle="@string/bt_hci_snoop_log_filter_summary"
+            android:entries="@array/bt_hci_snoop_log_profile_filter_entries"
+            android:entryValues="@array/bt_hci_snoop_log_profile_filter_values" />
 
         <com.android.settingslib.RestrictedSwitchPreference
             android:key="oem_unlock_enable"
@@ -222,6 +243,11 @@
             android:title="@string/enable_gpu_debug_layers"
             android:summary="@string/enable_gpu_debug_layers_summary" />
 
+        <SwitchPreference
+            android:key="enable_angle_as_system_driver"
+            android:title="@string/enable_angle_as_system_driver"
+            android:summary="@string/enable_angle_as_system_driver_summary" />
+
         <Preference
             android:key="graphics_driver_dashboard"
             android:title="@string/graphics_driver_dashboard_title"
@@ -320,12 +346,26 @@
             android:summary="@string/bluetooth_disable_absolute_volume_summary" />
 
         <SwitchPreference
-            android:key="bluetooth_disable_a2dp_hw_offload"
-            android:title="@string/bluetooth_disable_a2dp_hw_offload" />
+            android:key="bluetooth_disable_leaudio"
+            android:title="@string/bluetooth_disable_leaudio"
+            android:summary="@string/bluetooth_disable_leaudio_summary" />
+
+        <SwitchPreference
+            android:key="bluetooth_show_leaudio_device_details"
+            android:title="@string/bluetooth_show_leaudio_device_details"/>
+
+        <SwitchPreference
+            android:key="bluetooth_enable_leaudio_allow_list"
+            android:title="@string/bluetooth_enable_leaudio_allow_list"
+            android:summary="@string/bluetooth_enable_leaudio_allow_list_summary" />
 
         <SwitchPreference
             android:key="bluetooth_disable_le_audio_hw_offload"
             android:title="@string/bluetooth_disable_le_audio_hw_offload" />
+
+        <SwitchPreference
+            android:key="bluetooth_disable_a2dp_hw_offload"
+            android:title="@string/bluetooth_disable_a2dp_hw_offload" />
 
         <ListPreference
             android:key="bluetooth_select_avrcp_version"
@@ -396,6 +436,16 @@
             android:key="nfc_stack_debuglog_enabled"
             android:title="@string/nfc_stack_debuglog_title"
             android:summary="@string/nfc_stack_debuglog_summary" />
+
+        <SwitchPreference
+            android:key="nfc_verbose_vendor_log"
+            android:title="@string/nfc_verbose_vendor_log_title"
+            android:summary="@string/nfc_verbose_vendor_log_summary" />
+
+        <SwitchPreference
+            android:key="nfc_snoop_log"
+            android:title="@string/nfc_snoop_log_title"
+            android:summary="@string/nfc_snoop_log_summary"/>
 
     </PreferenceCategory>
 
@@ -468,6 +518,17 @@
             android:key="display_cutout_emulation"
             android:title="@string/display_cutout_emulation"
             settings:keywords="@string/display_cutout_emulation_keywords" />
+
+        <SwitchPreference
+            android:key="transparent_navigation_bar"
+            android:title="@string/transparent_navigation_bar"
+            android:summary="@string/transparent_navigation_bar_summary" />
+
+        <Preference
+            android:key="contrast_preference"
+            android:title="@string/contrast_title"
+            android:persistent="false"
+            settings:keywords="@string/keywords_contrast" />
 
     </PreferenceCategory>
 
@@ -604,11 +665,9 @@
             android:title="@string/show_notification_channel_warnings"
             android:summary="@string/show_notification_channel_warnings_summary" />
 
-        <com.android.settingslib.widget.LayoutPreference
+        <Preference
             android:key="asst_importance_reset"
             android:title="@string/asst_importance_reset_title"
-            android:selectable="false"
-            android:layout="@layout/reset_importance_button"
             settings:controller="com.android.settings.notification.ImportanceResetPreferenceController" />
 
         <Preference
@@ -619,9 +678,6 @@
         <Preference
             android:key="tare"
             android:title="@string/tare_title" >
-            <intent
-                android:targetPackage="com.android.settings"
-                android:targetClass="com.android.settings.development.tare.TareHomePage" />
         </Preference>
 
         <SwitchPreference
@@ -657,6 +713,17 @@
         <Preference
             android:key="reset_shortcut_manager_throttling"
             android:title="@string/reset_shortcut_manager_throttling" />
+
+        <SwitchPreference
+            android:key="disable_phantom_process_monitor"
+            android:title="@string/disable_phantom_process_monitor_title"
+            android:summary="@string/disable_phantom_process_monitor_summary" />
+
+        <SwitchPreference
+            android:key="force_enable_notes_role"
+            android:title="@string/enable_notes_role_title"
+            android:summary="@string/enable_notes_role_summary" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -729,6 +796,7 @@
         <SwitchPreference
             android:key="stylus_handwriting"
             android:title="@string/stylus_handwriting"
+            android:defaultValue="true"
             android:summary="@string/stylus_handwriting_summary" />
     </PreferenceCategory>
 </PreferenceScreen>

@@ -50,6 +50,7 @@ public class AppFilterItemTest {
         assertThat(item).isEqualTo(item2);
     }
 
+    @SuppressWarnings("SelfComparison")
     @Test
     public void compare_sameContent_return0() {
         final AppFilterItem item = AppFilterRegistry.getInstance().get(FILTER_APPS_USAGE_ACCESS);

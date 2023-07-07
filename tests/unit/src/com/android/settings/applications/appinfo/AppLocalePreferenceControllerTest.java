@@ -19,7 +19,6 @@ package com.android.settings.applications.appinfo;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
-import android.util.FeatureFlagUtils;
 
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -49,22 +48,10 @@ public class AppLocalePreferenceControllerTest {
                 return mCanDisplayLocaleUi;
             }
         };
-        FeatureFlagUtils
-                .setEnabled(mContext, FeatureFlagUtils.SETTINGS_APP_LANGUAGE_SELECTION, true);
     }
 
     @Test
-    public void getAvailabilityStatus_canShowUiButFeatureFlagOff_shouldReturnUnavailable() {
-        mCanDisplayLocaleUi = true;
-        FeatureFlagUtils
-                .setEnabled(mContext, FeatureFlagUtils.SETTINGS_APP_LANGUAGE_SELECTION, false);
-
-        assertThat(mController.getAvailabilityStatus())
-                .isEqualTo(BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
-    }
-
-    @Test
-    public void getAvailabilityStatus_canShowUiAndFeatureFlagOn_shouldReturnAvailable() {
+    public void getAvailabilityStatus_canShowUi_shouldReturnAvailable() {
         mCanDisplayLocaleUi = true;
 
         assertThat(mController.getAvailabilityStatus())
@@ -72,18 +59,8 @@ public class AppLocalePreferenceControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_featureFlagOnButCanNotShowUi_shouldReturnUnavailable() {
+    public void getAvailabilityStatus_canNotShowUi_shouldReturnUnavailable() {
         mCanDisplayLocaleUi = false;
-
-        assertThat(mController.getAvailabilityStatus())
-                .isEqualTo(BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
-    }
-
-    @Test
-    public void getAvailabilityStatus_featureFlagOffAndCanNotShowUi_shouldReturnUnavailable() {
-        mCanDisplayLocaleUi = false;
-        FeatureFlagUtils
-                .setEnabled(mContext, FeatureFlagUtils.SETTINGS_APP_LANGUAGE_SELECTION, false);
 
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.CONDITIONALLY_UNAVAILABLE);

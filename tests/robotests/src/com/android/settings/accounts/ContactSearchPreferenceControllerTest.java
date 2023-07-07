@@ -20,12 +20,18 @@ import static android.provider.Settings.Secure.MANAGED_PROFILE_CONTACT_REMOTE_SE
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.pm.UserInfo;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.Settings;
+
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settingslib.RestrictedSwitchPreference;
 
@@ -35,39 +41,51 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
+
+import java.util.Collections;
 
 @RunWith(RobolectricTestRunner.class)
 public class ContactSearchPreferenceControllerTest {
 
     private static final String PREF_KEY = "contacts_search";
-
-    @Mock
-    private UserHandle mManagedUser;
+    private static final int MANAGED_USER_ID = 10;
 
     private Context mContext;
     private ContactSearchPreferenceController mController;
     private RestrictedSwitchPreference mPreference;
 
+    @Mock
+    private UserHandle mManagedUser;
+    @Mock
+    private UserManager mUserManager;
+    @Mock
+    private UserInfo mUserInfo;
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
-        mController = new ContactSearchPreferenceController(mContext, PREF_KEY);
-        mController.setManagedUser(mManagedUser);
+        mContext = spy(ApplicationProvider.getApplicationContext());
+        when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
         mPreference = spy(new RestrictedSwitchPreference(mContext));
+        when(mUserInfo.isManagedProfile()).thenReturn(true);
+        when(mUserManager.getUserInfo(anyInt())).thenReturn(mUserInfo);
+        when(mUserManager.getProcessUserId()).thenReturn(0);
+        when(mUserManager.getUserProfiles()).thenReturn(Collections.singletonList(mManagedUser));
+        when(mManagedUser.getIdentifier()).thenReturn(MANAGED_USER_ID);
+        mController = new ContactSearchPreferenceController(mContext, PREF_KEY);
     }
 
     @Test
     public void getAvailabilityStatus_noManagedUser_DISABLED() {
-        mController.setManagedUser(null);
+        when(mUserManager.getProcessUserId()).thenReturn(MANAGED_USER_ID);
+        mController = new ContactSearchPreferenceController(mContext, PREF_KEY);
+
         assertThat(mController.getAvailabilityStatus())
                 .isNotEqualTo(ContactSearchPreferenceController.AVAILABLE);
     }
 
     @Test
     public void getAvailabilityStatus_hasManagedUser_AVAILABLE() {
-        mController.setManagedUser(mManagedUser);
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(ContactSearchPreferenceController.AVAILABLE);
     }
@@ -75,32 +93,96 @@ public class ContactSearchPreferenceControllerTest {
     @Test
     public void updateState_shouldRefreshContent() {
         Settings.Secure.putIntForUser(mContext.getContentResolver(),
-                MANAGED_PROFILE_CONTACT_REMOTE_SEARCH, 0, mManagedUser.getIdentifier());
+                MANAGED_PROFILE_CONTACT_REMOTE_SEARCH, 0, MANAGED_USER_ID);
+
         mController.updateState(mPreference);
+
         assertThat(mPreference.isChecked()).isFalse();
 
         Settings.Secure.putIntForUser(mContext.getContentResolver(),
-                MANAGED_PROFILE_CONTACT_REMOTE_SEARCH, 1, mManagedUser.getIdentifier());
+                MANAGED_PROFILE_CONTACT_REMOTE_SEARCH, 1, MANAGED_USER_ID);
+
         mController.updateState(mPreference);
+
         assertThat(mPreference.isChecked()).isTrue();
     }
 
     @Test
     public void updateState_preferenceShouldBeDisabled() {
         mController.updateState(mPreference);
+
         verify(mPreference).setDisabledByAdmin(any());
     }
 
     @Test
     public void onPreferenceChange_shouldUpdateProviderValue() {
         mController.onPreferenceChange(mPreference, false);
+
         assertThat(Settings.Secure.getIntForUser(mContext.getContentResolver(),
-                MANAGED_PROFILE_CONTACT_REMOTE_SEARCH, 1, mManagedUser.getIdentifier()))
+                MANAGED_PROFILE_CONTACT_REMOTE_SEARCH, 1, MANAGED_USER_ID))
                 .isEqualTo(0);
 
         mController.onPreferenceChange(mPreference, true);
+
         assertThat(Settings.Secure.getIntForUser(mContext.getContentResolver(),
-                MANAGED_PROFILE_CONTACT_REMOTE_SEARCH, 0, mManagedUser.getIdentifier()))
+                MANAGED_PROFILE_CONTACT_REMOTE_SEARCH, 0, MANAGED_USER_ID))
                 .isEqualTo(1);
+    }
+
+    @Test
+    public void onQuietModeDisabled_preferenceEnabled() {
+        when(mUserManager.isQuietModeEnabled(any(UserHandle.class))).thenReturn(false);
+
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.isEnabled()).isTrue();
+    }
+
+    @Test
+    public void onQuietModeEnabled_preferenceDisabledAndUnchecked() {
+        when(mUserManager.isQuietModeEnabled(any(UserHandle.class))).thenReturn(true);
+
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.isEnabled()).isFalse();
+        assertThat(mPreference.isChecked()).isFalse();
+    }
+
+    @Test
+    public void afterQuietModeTurnedOnAndOffWhenPreferenceChecked_toggleCheckedAndEnabled() {
+        Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                MANAGED_PROFILE_CONTACT_REMOTE_SEARCH, 1, MANAGED_USER_ID);
+        when(mUserManager.isQuietModeEnabled(any(UserHandle.class))).thenReturn(true);
+
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.isEnabled()).isFalse();
+        assertThat(mPreference.isChecked()).isFalse();
+
+        when(mUserManager.isQuietModeEnabled(any(UserHandle.class))).thenReturn(false);
+
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.isEnabled()).isTrue();
+        assertThat(mPreference.isChecked()).isTrue();
+    }
+
+    @Test
+    public void afterQuietModeTurnedOnAndOffWhenPreferenceUnchecked_toggleUncheckedAndEnabled() {
+        Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                MANAGED_PROFILE_CONTACT_REMOTE_SEARCH, 0, MANAGED_USER_ID);
+        when(mUserManager.isQuietModeEnabled(any(UserHandle.class))).thenReturn(true);
+
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.isEnabled()).isFalse();
+        assertThat(mPreference.isChecked()).isFalse();
+
+        when(mUserManager.isQuietModeEnabled(any(UserHandle.class))).thenReturn(false);
+
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.isEnabled()).isTrue();
+        assertThat(mPreference.isChecked()).isFalse();
     }
 }

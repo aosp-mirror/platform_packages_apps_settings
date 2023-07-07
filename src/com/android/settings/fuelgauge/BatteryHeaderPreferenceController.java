@@ -11,8 +11,6 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- *
  */
 
 package com.android.settings.fuelgauge;
@@ -25,6 +23,7 @@ import android.icu.text.NumberFormat;
 import android.os.BatteryManager;
 import android.os.PowerManager;
 import android.text.TextUtils;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceFragmentCompat;
@@ -48,6 +47,8 @@ import com.android.settingslib.widget.UsageProgressBarPreference;
 public class BatteryHeaderPreferenceController extends BasePreferenceController
         implements PreferenceControllerMixin, LifecycleObserver, OnStart,
         BatteryPreferenceController {
+    private static final String TAG = "BatteryHeaderPreferenceController";
+
     @VisibleForTesting
     static final String KEY_BATTERY_HEADER = "battery_header";
     private static final int BATTERY_MAX_LEVEL = 100;
@@ -86,7 +87,7 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mBatteryUsageProgressBarPref = screen.findPreference(getPreferenceKey());
-        //Set up loading text first to prevent layout flaky before info loaded.
+        // Set up loading text first to prevent layout flaky before info loaded.
         mBatteryUsageProgressBarPref.setBottomSummary(
                 mContext.getString(R.string.settings_license_activity_loading));
 
@@ -109,7 +110,9 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
     }
 
     private CharSequence generateLabel(BatteryInfo info) {
-        if (BatteryUtils.isBatteryDefenderOn(info)) {
+        if (Utils.containsIncompatibleChargers(mContext, TAG)) {
+            return mContext.getString(R.string.battery_info_status_not_charging);
+        } else if (BatteryUtils.isBatteryDefenderOn(info)) {
             return null;
         } else if (info.remainingLabel == null
                 || info.batteryStatus == BatteryManager.BATTERY_STATUS_NOT_CHARGING) {
@@ -151,12 +154,14 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
      * Callback which receives text for the summary line.
      */
     public void updateBatteryStatus(String label, BatteryInfo info) {
-        mBatteryUsageProgressBarPref.setBottomSummary(label != null ? label : generateLabel(info));
+        final CharSequence summary = label != null ? label : generateLabel(info);
+        mBatteryUsageProgressBarPref.setBottomSummary(summary);
+        Log.d(TAG, "updateBatteryStatus: " + label + " summary: " + summary);
     }
 
     public void quickUpdateHeaderPreference() {
-        Intent batteryBroadcast = mContext.registerReceiver(null,
-                new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        Intent batteryBroadcast = com.android.settingslib.fuelgauge.BatteryUtils
+                .getBatteryIntent(mContext);
         final int batteryLevel = Utils.getBatteryLevel(batteryBroadcast);
         final boolean discharging =
                 batteryBroadcast.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1) == 0;

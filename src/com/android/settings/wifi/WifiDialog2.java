@@ -137,6 +137,7 @@ public class WifiDialog2 extends AlertDialog implements WifiConfigUiBase2,
         window.setAttributes(lp);
     }
 
+    @SuppressWarnings("MissingSuperCall") // TODO: Fix me
     @Override
     protected void onStart() {
         final ImageButton ssidScannerButton = findViewById(R.id.ssid_scanner_button);
