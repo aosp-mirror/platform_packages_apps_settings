@@ -18,9 +18,12 @@ package com.android.settings.spa.app.specialaccess
 
 import android.Manifest
 import android.app.AppOpsManager
+import android.app.settings.SettingsEnums
 import android.content.Context
 import com.android.settings.R
+import com.android.settings.overlay.FeatureFactory
 import com.android.settingslib.spaprivileged.template.app.AppOpPermissionListModel
+import com.android.settingslib.spaprivileged.template.app.AppOpPermissionRecord
 import com.android.settingslib.spaprivileged.template.app.TogglePermissionAppListProvider
 
 object DisplayOverOtherAppsAppListProvider : TogglePermissionAppListProvider {
@@ -34,4 +37,17 @@ class DisplayOverOtherAppsListModel(context: Context) : AppOpPermissionListModel
     override val footerResId = R.string.allow_overlay_description
     override val appOp = AppOpsManager.OP_SYSTEM_ALERT_WINDOW
     override val permission = Manifest.permission.SYSTEM_ALERT_WINDOW
+
+    override fun setAllowed(record: AppOpPermissionRecord, newAllowed: Boolean) {
+        super.setAllowed(record, newAllowed)
+        logPermissionChange(newAllowed)
+    }
+
+    private fun logPermissionChange(newAllowed: Boolean) {
+        val category = when {
+            newAllowed -> SettingsEnums.APP_SPECIAL_PERMISSION_APPDRAW_ALLOW
+            else -> SettingsEnums.APP_SPECIAL_PERMISSION_APPDRAW_DENY
+        }
+        FeatureFactory.getFactory(context).metricsFeatureProvider.action(context, category, "")
+    }
 }

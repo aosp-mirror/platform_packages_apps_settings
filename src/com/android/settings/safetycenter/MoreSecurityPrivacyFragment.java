@@ -77,21 +77,23 @@ public class MoreSecurityPrivacyFragment extends DashboardFragment {
                 SafetyCenterUtils.getEnterpriseOverrideStringForPrivacyEntries();
         for (int i = 0; i < privacyOverrideStrings.size(); i++) {
             EnterpriseOverrideString overrideString = privacyOverrideStrings.get(i);
-            replaceEnterpriseStringTitle(overrideString.getPreferenceKey(),
-                    overrideString.getOverrideKey(), overrideString.getResource());
+            replaceEnterpriseStringTitle(
+                    overrideString.getPreferenceKey(),
+                    overrideString.getOverrideKey(),
+                    overrideString.getResource());
         }
         List<EnterpriseOverrideString> securityOverrideStrings =
                 SafetyCenterUtils.getEnterpriseOverrideStringForSecurityEntries();
         for (int i = 0; i < securityOverrideStrings.size(); i++) {
             EnterpriseOverrideString overrideString = securityOverrideStrings.get(i);
-            replaceEnterpriseStringTitle(overrideString.getPreferenceKey(),
-                    overrideString.getOverrideKey(), overrideString.getResource());
+            replaceEnterpriseStringTitle(
+                    overrideString.getPreferenceKey(),
+                    overrideString.getOverrideKey(),
+                    overrideString.getResource());
         }
     }
 
-    /**
-     * see confirmPatternThenDisableAndClear
-     */
+    /** see confirmPatternThenDisableAndClear */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (use(TrustAgentListPreferenceController.class)
@@ -117,9 +119,7 @@ public class MoreSecurityPrivacyFragment extends DashboardFragment {
         controllers.addAll(
                 SafetyCenterUtils.getControllersForAdvancedSecurity(context, lifecycle, host));
         return controllers;
-
     }
-
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.more_security_privacy_settings) {
@@ -130,7 +130,9 @@ public class MoreSecurityPrivacyFragment extends DashboardFragment {
                 @Override
                 public List<SearchIndexableResource> getXmlResourcesToIndex(
                         Context context, boolean enabled) {
-                    if (!SafetyCenterManagerWrapper.get().isEnabled(context)) {
+                    // NOTE: This check likely should be moved to the super method. This is done
+                    // here to avoid potentially undesired side effects for existing implementors.
+                    if (!isPageSearchEnabled(context)) {
                         return null;
                     }
                     return super.getXmlResourcesToIndex(context, enabled);
@@ -156,6 +158,11 @@ public class MoreSecurityPrivacyFragment extends DashboardFragment {
                     // Otherwise, we should hide the search result.
                     keys.add(KEY_NOTIFICATION_WORK_PROFILE_NOTIFICATIONS);
                     return keys;
+                }
+
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return SafetyCenterManagerWrapper.get().isEnabled(context);
                 }
             };
 }

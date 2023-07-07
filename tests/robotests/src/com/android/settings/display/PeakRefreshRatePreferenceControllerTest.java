@@ -16,14 +16,15 @@
 
 package com.android.settings.display;
 
-import static com.android.internal.display.RefreshRateSettingsUtils.DEFAULT_REFRESH_RATE;
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
+import static com.android.settings.display.PeakRefreshRatePreferenceController.DEFAULT_REFRESH_RATE;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 import android.provider.Settings;
+import android.view.Display;
 
 import androidx.preference.SwitchPreference;
 
@@ -69,21 +70,23 @@ public class PeakRefreshRatePreferenceControllerTest {
     }
 
     @Test
-    public void setChecked_enableSmoothDisplay() {
+    public void setChecked_enableSmoothDisplay_setCurrentRefreshRate() {
+        mController.mPeakRefreshRate = 88f;
         mController.setChecked(true);
 
-        assertThat(Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.SMOOTH_DISPLAY, -1))
-                .isEqualTo(1);
+        assertThat(Settings.System.getFloat(mContext.getContentResolver(),
+                Settings.System.PEAK_REFRESH_RATE, DEFAULT_REFRESH_RATE))
+                .isEqualTo(88.0f);
     }
 
     @Test
-    public void setChecked_disableSmoothDisplay() {
+    public void setChecked_disableSmoothDisplay_setDefaultRefreshRate() {
+        mController.mPeakRefreshRate = 88f;
         mController.setChecked(false);
 
-        assertThat(Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.SMOOTH_DISPLAY, -1))
-                .isEqualTo(0);
+        assertThat(Settings.System.getFloat(mContext.getContentResolver(),
+                Settings.System.PEAK_REFRESH_RATE, DEFAULT_REFRESH_RATE))
+                .isEqualTo(DEFAULT_REFRESH_RATE);
     }
 
     @Test
@@ -100,21 +103,36 @@ public class PeakRefreshRatePreferenceControllerTest {
         assertThat(mController.isChecked()).isFalse();
     }
 
+    @Test
+    public void findPeakRefreshRate_moreThanOneHigherThanDefault() {
+        Display.Mode lower = new Display.Mode(0, 0, 0, DEFAULT_REFRESH_RATE - 1);
+        Display.Mode def = new Display.Mode(0, 0, 0, DEFAULT_REFRESH_RATE);
+        Display.Mode higher = new Display.Mode(0, 0, 0, DEFAULT_REFRESH_RATE + 1);
+        Display.Mode higher1 = new Display.Mode(0, 0, 0, DEFAULT_REFRESH_RATE + 2);
+
+        assertThat(mController.findPeakRefreshRate(
+                new Display.Mode[] {lower, def, higher, higher1}))
+                .isEqualTo(DEFAULT_REFRESH_RATE + 2);
+        assertThat(mController.findPeakRefreshRate(
+                new Display.Mode[] {lower, def, higher1, higher}))
+                .isEqualTo(DEFAULT_REFRESH_RATE + 2);
+    }
+
     private void enableSmoothDisplayPreference() {
         mController.mPeakRefreshRate = 88f;
 
-        Settings.System.putInt(
+        Settings.System.putFloat(
                 mContext.getContentResolver(),
-                Settings.System.SMOOTH_DISPLAY,
-                1);
+                Settings.System.PEAK_REFRESH_RATE,
+                mController.mPeakRefreshRate);
     }
 
     private void disableSmoothDisplayPreference() {
         mController.mPeakRefreshRate = 88f;
 
-        Settings.System.putInt(
+        Settings.System.putFloat(
                 mContext.getContentResolver(),
-                Settings.System.SMOOTH_DISPLAY,
-                0);
+                Settings.System.PEAK_REFRESH_RATE,
+                DEFAULT_REFRESH_RATE);
     }
 }

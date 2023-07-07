@@ -34,18 +34,22 @@ import com.android.internal.app.LocaleStore;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.TickButtonPreference;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import java.util.Locale;
 
 /** Uses to control the preference UI of numbering system page. */
 public class NumberingSystemItemController extends BasePreferenceController {
     private static final String TAG = NumberingSystemItemController.class.getSimpleName();
+    private static final String DISPLAY_KEYWORD_NUMBERING_SYSTEM = "numbers";
 
     static final String ARG_VALUE_NUMBERING_SYSTEM_SELECT = "arg_value_numbering_system_select";
     static final String ARG_VALUE_LANGUAGE_SELECT = "arg_value_language_select";
     static final String KEY_SELECTED_LANGUAGE = "key_selected_language";
-    private static final String DISPLAY_KEYWORD_NUMBERING_SYSTEM = "numbers";
+
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
 
     private String mOption = "";
     private String mSelectedLanguage = "";
@@ -60,6 +64,7 @@ public class NumberingSystemItemController extends BasePreferenceController {
                 RegionalPreferencesEntriesFragment.ARG_KEY_REGIONAL_PREFERENCE, "");
         mSelectedLanguage = argument.getString(
                 NumberingSystemItemController.KEY_SELECTED_LANGUAGE, "");
+        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
     }
 
     /**
@@ -146,10 +151,13 @@ public class NumberingSystemItemController extends BasePreferenceController {
     }
 
     private void handleLanguageSelect(Preference preference) {
+        String selectedLanguage = preference.getKey();
+        mMetricsFeatureProvider.action(mContext,
+                SettingsEnums.ACTION_CHOOSE_LANGUAGE_FOR_NUMBERS_PREFERENCES);
         final Bundle extra = new Bundle();
         extra.putString(RegionalPreferencesEntriesFragment.ARG_KEY_REGIONAL_PREFERENCE,
                 ARG_VALUE_NUMBERING_SYSTEM_SELECT);
-        extra.putString(KEY_SELECTED_LANGUAGE, preference.getKey());
+        extra.putString(KEY_SELECTED_LANGUAGE, selectedLanguage);
         new SubSettingLauncher(preference.getContext())
                 .setDestination(NumberingPreferencesFragment.class.getName())
                 .setSourceMetricsCategory(
@@ -163,17 +171,20 @@ public class NumberingSystemItemController extends BasePreferenceController {
             TickButtonPreference pref = (TickButtonPreference) mPreferenceScreen.getPreference(i);
             Log.i(TAG, "[onPreferenceClick] key is " + pref.getKey());
             if (pref.getKey().equals(preference.getKey())) {
+                String numberingSystem = pref.getKey();
                 pref.setSelected(true);
                 Locale updatedLocale =
-                        saveNumberingSystemToLocale(
-                                Locale.forLanguageTag(mSelectedLanguage), pref.getKey());
-
+                        saveNumberingSystemToLocale(Locale.forLanguageTag(mSelectedLanguage),
+                                numberingSystem);
+                mMetricsFeatureProvider.action(mContext,
+                        SettingsEnums.ACTION_SET_NUMBERS_PREFERENCES);
                 // After updated locale to framework, this fragment will recreate,
-                // so it need to update the argement of selected language.
+                // so it needs to update the argument of selected language.
                 Bundle bundle = new Bundle();
                 bundle.putString(RegionalPreferencesEntriesFragment.ARG_KEY_REGIONAL_PREFERENCE,
                         ARG_VALUE_NUMBERING_SYSTEM_SELECT);
-                bundle.putString(KEY_SELECTED_LANGUAGE, updatedLocale.toLanguageTag());
+                bundle.putString(KEY_SELECTED_LANGUAGE,
+                        updatedLocale != null ? updatedLocale.toLanguageTag() : "");
                 mParentFragment.setArguments(bundle);
                 continue;
             }
@@ -184,13 +195,14 @@ public class NumberingSystemItemController extends BasePreferenceController {
     private Locale saveNumberingSystemToLocale(Locale targetLocale, String value) {
         LocaleList localeList = LocalePicker.getLocales();
         Locale[] locales = new Locale[localeList.size()];
+        Locale updatedLocale = null;
         for (int i = 0; i < localeList.size(); i++) {
             Locale locale = localeList.get(i);
             if (targetLocale.equals(locale)) {
-                if (value.equals(RegionalPreferencesDataUtils.DEFAULT_VALUE)) {
+                if (RegionalPreferencesDataUtils.DEFAULT_VALUE.equals(value)) {
                     value = null;
                 }
-                Locale updatedLocale = new Locale.Builder()
+                updatedLocale = new Locale.Builder()
                         .setLocale(locale)
                         .setUnicodeLocaleKeyword(ExtensionTypes.NUMBERING_SYSTEM, value)
                         .build();
@@ -200,7 +212,7 @@ public class NumberingSystemItemController extends BasePreferenceController {
             locales[i] = localeList.get(i);
         }
         LocalePicker.updateLocales(new LocaleList(locales));
-        return targetLocale;
+        return updatedLocale;
     }
 
     private static String getNumberingSystem(Locale locale) {

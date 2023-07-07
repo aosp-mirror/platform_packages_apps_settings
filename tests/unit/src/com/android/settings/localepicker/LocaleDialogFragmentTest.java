@@ -17,8 +17,8 @@
 package com.android.settings.localepicker;
 
 import static com.android.settings.localepicker.LocaleDialogFragment.ARG_DIALOG_TYPE;
-import static com.android.settings.localepicker.LocaleDialogFragment.ARG_RESULT_RECEIVER;
 import static com.android.settings.localepicker.LocaleDialogFragment.ARG_TARGET_LOCALE;
+import static com.android.settings.localepicker.LocaleDialogFragment.DIALOG_CONFIRM_SYSTEM_DEFAULT;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -27,17 +27,15 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
-import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.os.ResultReceiver;
 
 import androidx.test.annotation.UiThreadTest;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.internal.app.LocaleStore;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.ResourcesUtils;
 
 import org.junit.Before;
@@ -54,35 +52,38 @@ public class LocaleDialogFragmentTest {
     public final MockitoRule mockito = MockitoJUnit.rule();
 
     private Context mContext;
+    private LocaleListEditor mLocaleListEditor;
     private LocaleDialogFragment mDialogFragment;
+    private FakeFeatureFactory mFeatureFactory;
 
     @Before
     public void setUp() throws Exception {
         mContext = ApplicationProvider.getApplicationContext();
         mDialogFragment = new LocaleDialogFragment();
+        mLocaleListEditor = spy(new LocaleListEditor());
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
     }
 
-    private void setArgument(
-            int type, ResultReceiver receiver) {
+    private void setArgument(int type) {
         LocaleStore.LocaleInfo localeInfo = LocaleStore.getLocaleInfo(Locale.ENGLISH);
         Bundle args = new Bundle();
         args.putInt(ARG_DIALOG_TYPE, type);
         args.putSerializable(ARG_TARGET_LOCALE, localeInfo);
-        args.putParcelable(ARG_RESULT_RECEIVER, receiver);
         mDialogFragment.setArguments(args);
     }
 
     @Test
     public void getDialogContent_confirmSystemDefault_has2ButtonText() {
-        setArgument(LocaleDialogFragment.DIALOG_CONFIRM_SYSTEM_DEFAULT, null);
+        setArgument(DIALOG_CONFIRM_SYSTEM_DEFAULT);
         LocaleDialogFragment.LocaleDialogController controller =
-                new LocaleDialogFragment.LocaleDialogController(mContext, mDialogFragment);
+                mDialogFragment.getLocaleDialogController(mContext, mDialogFragment,
+                        mLocaleListEditor);
 
         LocaleDialogFragment.LocaleDialogController.DialogContent dialogContent =
                 controller.getDialogContent();
 
         assertEquals(ResourcesUtils.getResourcesString(
-                mContext, "button_label_confirmation_of_system_locale_change"),
+                        mContext, "button_label_confirmation_of_system_locale_change"),
                 dialogContent.mPositiveButton);
         assertEquals(ResourcesUtils.getResourcesString(mContext, "cancel"),
                 dialogContent.mNegativeButton);
@@ -90,9 +91,10 @@ public class LocaleDialogFragmentTest {
 
     @Test
     public void getDialogContent_unavailableLocale_has1ButtonText() {
-        setArgument(LocaleDialogFragment.DIALOG_NOT_AVAILABLE_LOCALE, null);
+        setArgument(LocaleDialogFragment.DIALOG_NOT_AVAILABLE_LOCALE);
         LocaleDialogFragment.LocaleDialogController controller =
-                new LocaleDialogFragment.LocaleDialogController(mContext, mDialogFragment);
+                mDialogFragment.getLocaleDialogController(mContext, mDialogFragment,
+                        mLocaleListEditor);
 
         LocaleDialogFragment.LocaleDialogController.DialogContent dialogContent =
                 controller.getDialogContent();
@@ -103,33 +105,8 @@ public class LocaleDialogFragmentTest {
     }
 
     @Test
-    public void onClick_clickPositiveButton_sendOK() {
-        ResultReceiver resultReceiver = spy(new ResultReceiver(null));
-        setArgument(LocaleDialogFragment.DIALOG_CONFIRM_SYSTEM_DEFAULT, resultReceiver);
-        LocaleDialogFragment.LocaleDialogController controller =
-                new LocaleDialogFragment.LocaleDialogController(mContext, mDialogFragment);
-
-        controller.onClick(null, DialogInterface.BUTTON_POSITIVE);
-
-        verify(resultReceiver).send(eq(Activity.RESULT_OK), any());
-    }
-
-    @Test
-    public void onClick_clickNegativeButton_sendCancel() {
-        ResultReceiver resultReceiver = spy(new ResultReceiver(null));
-        setArgument(LocaleDialogFragment.DIALOG_CONFIRM_SYSTEM_DEFAULT, resultReceiver);
-        LocaleDialogFragment.LocaleDialogController controller =
-                new LocaleDialogFragment.LocaleDialogController(mContext, mDialogFragment);
-
-        controller.onClick(null, DialogInterface.BUTTON_NEGATIVE);
-
-        verify(resultReceiver).send(eq(Activity.RESULT_CANCELED), any());
-    }
-
-    @Test
     public void getMetricsCategory_systemLocaleChange() {
-        setArgument(LocaleDialogFragment.DIALOG_CONFIRM_SYSTEM_DEFAULT, null);
-
+        setArgument(DIALOG_CONFIRM_SYSTEM_DEFAULT);
         int result = mDialogFragment.getMetricsCategory();
 
         assertEquals(SettingsEnums.DIALOG_SYSTEM_LOCALE_CHANGE, result);
@@ -137,8 +114,7 @@ public class LocaleDialogFragmentTest {
 
     @Test
     public void getMetricsCategory_unavailableLocale() {
-        setArgument(LocaleDialogFragment.DIALOG_NOT_AVAILABLE_LOCALE, null);
-
+        setArgument(LocaleDialogFragment.DIALOG_NOT_AVAILABLE_LOCALE);
         int result = mDialogFragment.getMetricsCategory();
 
         assertEquals(SettingsEnums.DIALOG_SYSTEM_LOCALE_UNAVAILABLE, result);

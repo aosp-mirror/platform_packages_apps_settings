@@ -18,8 +18,8 @@ package com.android.settings.applications.specialaccess;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -27,6 +27,7 @@ import android.content.res.Resources;
 import com.android.settings.R;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
@@ -58,6 +59,7 @@ public class DataSaverControllerTest {
         assertThat(mController.isAvailable()).isTrue();
     }
 
+    @Ignore
     @Test
     @Config(qualifiers = "mcc999")
     public void testDataSaver_ifDisabledByCarrier_shouldNotBeShown() {

@@ -353,9 +353,9 @@ public class DataProcessManager {
     }
 
     private void loadAndApplyBatteryMapFromServiceOnly() {
-        new AsyncTask<Void, Void, BatteryCallbackData>() {
+        new AsyncTask<Void, Void, Map<Integer, Map<Integer, BatteryDiffData>>>() {
             @Override
-            protected BatteryCallbackData doInBackground(Void... voids) {
+            protected Map<Integer, Map<Integer, BatteryDiffData>> doInBackground(Void... voids) {
                 final long startTime = System.currentTimeMillis();
                 final Map<Integer, Map<Integer, BatteryDiffData>> batteryUsageMap =
                         DataProcessor.getBatteryUsageMapFromStatsService(mContext);
@@ -363,18 +363,18 @@ public class DataProcessManager {
                 Log.d(TAG, String.format(
                         "execute loadAndApplyBatteryMapFromServiceOnly size=%d in %d/ms",
                         batteryUsageMap.size(), (System.currentTimeMillis() - startTime)));
-                return new BatteryCallbackData(batteryUsageMap, /*deviceScreenOnTime=*/ null);
+                return batteryUsageMap;
             }
 
             @Override
             protected void onPostExecute(
-                    final BatteryCallbackData batteryCallbackData) {
+                    final Map<Integer, Map<Integer, BatteryDiffData>> batteryUsageMap) {
                 // Set the unused variables to null.
                 mContext = null;
                 // Post results back to main thread to refresh UI.
                 if (mHandler != null && mCallbackFunction != null) {
                     mHandler.post(() -> {
-                        mCallbackFunction.onBatteryCallbackDataLoaded(batteryCallbackData);
+                        mCallbackFunction.onBatteryCallbackDataLoaded(batteryUsageMap);
                     });
                 }
             }
@@ -413,24 +413,23 @@ public class DataProcessManager {
     }
 
     private void generateFinalDataAndApplyCallback() {
-        new AsyncTask<Void, Void, BatteryCallbackData>() {
+        new AsyncTask<Void, Void, Map<Integer, Map<Integer, BatteryDiffData>>>() {
             @Override
-            protected BatteryCallbackData doInBackground(Void... voids) {
+            protected Map<Integer, Map<Integer, BatteryDiffData>> doInBackground(Void... voids) {
                 final long startTime = System.currentTimeMillis();
                 final Map<Integer, Map<Integer, BatteryDiffData>> batteryUsageMap =
                         DataProcessor.getBatteryUsageMap(
                                 mContext, mHourlyBatteryLevelsPerDay, mBatteryHistoryMap,
                                 mAppUsagePeriodMap);
-                final Map<Integer, Map<Integer, Long>> deviceScreenOnTime =
-                        DataProcessor.getDeviceScreenOnTime(mAppUsagePeriodMap);
                 DataProcessor.loadLabelAndIcon(batteryUsageMap);
                 Log.d(TAG, String.format("execute generateFinalDataAndApplyCallback in %d/ms",
                         (System.currentTimeMillis() - startTime)));
-                return new BatteryCallbackData(batteryUsageMap, deviceScreenOnTime);
+                return batteryUsageMap;
             }
 
             @Override
-            protected void onPostExecute(final BatteryCallbackData batteryCallbackData) {
+            protected void onPostExecute(
+                    final Map<Integer, Map<Integer, BatteryDiffData>> batteryUsageMap) {
                 // Set the unused variables to null.
                 mContext = null;
                 mHourlyBatteryLevelsPerDay = null;
@@ -438,7 +437,7 @@ public class DataProcessManager {
                 // Post results back to main thread to refresh UI.
                 if (mHandler != null && mCallbackFunction != null) {
                     mHandler.post(() -> {
-                        mCallbackFunction.onBatteryCallbackDataLoaded(batteryCallbackData);
+                        mCallbackFunction.onBatteryCallbackDataLoaded(batteryUsageMap);
                     });
                 }
             }

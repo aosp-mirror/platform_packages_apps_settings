@@ -19,11 +19,14 @@ package com.android.settings.deviceinfo.imei;
 import static android.telephony.TelephonyManager.PHONE_TYPE_CDMA;
 import static android.telephony.TelephonyManager.PHONE_TYPE_GSM;
 import static android.telephony.TelephonyManager.PHONE_TYPE_NONE;
+
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
-import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -32,13 +35,16 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.os.UserManager;
 import android.telephony.TelephonyManager;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
 import com.android.settings.deviceinfo.simstatus.SlotSimStatus;
+
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -119,13 +125,13 @@ public class ImeiInfoPreferenceControllerTest {
     }
 
     @Test
-    public void updatePreference_simSlotWithoutSim_shouldBeEnabled() {
+    public void updatePreference_simSlotWithoutSim_notSetEnabled() {
         mSecondController = createPreferenceController(null,
                 "imei_info2", mSecondSimPreference, PHONE_TYPE_NONE);
 
         mSecondController.updatePreference(mSecondSimPreference, -1);
 
-        assertThat(mSecondSimPreference.isEnabled()).isTrue();
+        verify(mSecondSimPreference, never()).setEnabled(anyBoolean());
     }
 
     @Ignore

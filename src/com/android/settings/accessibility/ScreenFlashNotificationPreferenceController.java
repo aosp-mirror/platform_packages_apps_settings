@@ -30,6 +30,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
+import com.android.settings.overlay.FeatureFactory;
 
 import java.util.function.Consumer;
 
@@ -62,8 +63,11 @@ public class ScreenFlashNotificationPreferenceController extends TogglePreferenc
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        if (isChecked) checkAndSetInitialColor();
-
+        FeatureFactory.getFactory(mContext).getMetricsFeatureProvider().changed(
+                getMetricsCategory(), getPreferenceKey(), isChecked ? 1 : 0);
+        if (isChecked) {
+            checkAndSetInitialColor();
+        }
         return Settings.System.putInt(mContext.getContentResolver(),
                 Settings.System.SCREEN_FLASH_NOTIFICATION, (isChecked ? ON : OFF));
     }

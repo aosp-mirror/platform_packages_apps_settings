@@ -710,7 +710,7 @@ public class AdvancedPowerUsageDetailTest {
 
     @Test
     public void initPreferenceForTriState_isValidPackageName_hasCorrectString() {
-        when(mBatteryOptimizeUtils.isValidPackageName()).thenReturn(false);
+        when(mBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()).thenReturn(true);
 
         mFragment.initPreferenceForTriState(mContext);
 
@@ -720,7 +720,7 @@ public class AdvancedPowerUsageDetailTest {
 
     @Test
     public void initPreferenceForTriState_isSystemOrDefaultApp_hasCorrectString() {
-        when(mBatteryOptimizeUtils.isValidPackageName()).thenReturn(true);
+        when(mBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()).thenReturn(false);
         when(mBatteryOptimizeUtils.isSystemOrDefaultApp()).thenReturn(true);
 
         mFragment.initPreferenceForTriState(mContext);
@@ -731,7 +731,7 @@ public class AdvancedPowerUsageDetailTest {
 
     @Test
     public void initPreferenceForTriState_hasCorrectString() {
-        when(mBatteryOptimizeUtils.isValidPackageName()).thenReturn(true);
+        when(mBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()).thenReturn(false);
         when(mBatteryOptimizeUtils.isSystemOrDefaultApp()).thenReturn(false);
 
         mFragment.initPreferenceForTriState(mContext);

@@ -17,17 +17,21 @@
 package com.android.settings.inputmethod;
 
 import static android.view.WindowManager.LayoutParams.TYPE_SYSTEM_DIALOG;
+import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL;
 
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.Window;
+import android.view.WindowInsets;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -87,6 +91,7 @@ public class TrackpadGestureDialogFragment extends BottomSheetDialogFragment {
         if (window == null) {
             return;
         }
+        setLayoutEdgeToEdge(window);
         final Point size = getScreenSize();
         final WindowManager.LayoutParams attributes = window.getAttributes();
         attributes.width = (int) (size.x * 0.75);
@@ -94,14 +99,28 @@ public class TrackpadGestureDialogFragment extends BottomSheetDialogFragment {
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+        dismiss();
+    }
+
+    private static void setLayoutEdgeToEdge(Window window) {
+        View windowDecorView = window.getDecorView();
+        windowDecorView.setSystemUiVisibility(
+                windowDecorView.getSystemUiVisibility()
+                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
+        window.setNavigationBarColor(Color.TRANSPARENT);
+    }
+
+    @Override
     public Dialog onCreateDialog(final Bundle savedInstanceState) {
         Dialog dialog = super.onCreateDialog(savedInstanceState);
+
         mInflater = mContext.getSystemService(LayoutInflater.class);
-
-        View gestureEducationView = mInflater.inflate(R.layout.trackpad_gesture_preview, null);
-        addViewPager(gestureEducationView);
-        dialog.setContentView(gestureEducationView);
-
+        View contentView = mInflater.inflate(R.layout.trackpad_gesture_preview, null);
+        addViewPager(contentView);
+        dialog.setContentView(contentView);
         Window gestureDialogWindow = dialog.getWindow();
         gestureDialogWindow.setType(TYPE_SYSTEM_DIALOG);
 
@@ -109,8 +128,40 @@ public class TrackpadGestureDialogFragment extends BottomSheetDialogFragment {
         FrameLayout bottomSheet = (FrameLayout)
                 dialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
         bottomSheet.setBackgroundResource(android.R.color.transparent);
-        BottomSheetBehavior.from(bottomSheet)
-                .setState(BottomSheetBehavior.STATE_EXPANDED);
+        BottomSheetBehavior<FrameLayout> behavior = BottomSheetBehavior.from(bottomSheet);
+        if (!isGestureNavigationEnabled()) {
+            behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+        }
+        ViewTreeObserver observer = contentView.getViewTreeObserver();
+        observer.addOnGlobalLayoutListener(
+                new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        contentView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                        int contentViewHeight = contentView.getMeasuredHeight();
+                        int navigationBarHeight = getNavigationBarHeight();
+                        behavior.setPeekHeight(contentViewHeight - navigationBarHeight);
+                    }
+                });
+
+        // The gesture education view shouldn't be draggable."
+        behavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(View bottomSheet, int newState) {
+                if (newState == BottomSheetBehavior.STATE_DRAGGING) {
+                    if (isGestureNavigationEnabled()) {
+                        behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                    } else {
+                        behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                    }
+                }
+            }
+
+            @Override
+            public void onSlide(View bottomSheet, float slideOffset) {
+                // Do nothing.
+            }
+        });
 
         return dialog;
     }
@@ -262,5 +313,17 @@ public class TrackpadGestureDialogFragment extends BottomSheetDialogFragment {
         final Display display = activity.getWindowManager().getDefaultDisplay();
         display.getSize(size);
         return size;
+    }
+
+    private int getNavigationBarHeight() {
+        final Activity activity = (Activity) mContext;
+        WindowInsets insets =
+                activity.getWindowManager().getCurrentWindowMetrics().getWindowInsets();
+        return insets.getInsets(WindowInsets.Type.navigationBars()).bottom;
+    }
+
+    private boolean isGestureNavigationEnabled() {
+        return NAV_BAR_MODE_GESTURAL == mContext.getResources().getInteger(
+                com.android.internal.R.integer.config_navBarInteractionMode);
     }
 }

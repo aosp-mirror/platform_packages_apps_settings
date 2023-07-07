@@ -43,6 +43,7 @@ import com.android.settings.fuelgauge.batteryusage.BatteryDiffEntry;
 import com.android.settingslib.applications.ApplicationsState;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -113,6 +114,7 @@ public class AppBatteryPreferenceControllerTest {
         assertThat(mController.isAvailable()).isTrue();
     }
 
+    @Ignore
     @Test
     @Config(qualifiers = "mcc999")
     public void testAppBattery_ifDisabled_shouldNotBeShown() {

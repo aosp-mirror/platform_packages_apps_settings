@@ -18,6 +18,7 @@ package com.android.settings.wifi.factory;
 
 import android.annotation.Nullable;
 import android.content.Context;
+import android.net.TetheringManager;
 import android.net.wifi.WifiManager;
 import android.util.Log;
 
@@ -40,6 +41,7 @@ public class WifiFeatureProvider {
 
     private final Context mAppContext;
     private WifiManager mWifiManager;
+    private TetheringManager mTetheringManager;
     private WifiVerboseLogging mWifiVerboseLogging;
     private WifiHotspotRepository mWifiHotspotRepository;
 
@@ -48,7 +50,7 @@ public class WifiFeatureProvider {
     }
 
     /**
-     * Get WifiManager
+     * Gets WifiManager
      */
     public WifiManager getWifiManager() {
         if (mWifiManager == null) {
@@ -58,7 +60,18 @@ public class WifiFeatureProvider {
     }
 
     /**
-     * Get WifiVerboseLogging
+     * Gets TetheringManager
+     */
+    public TetheringManager getTetheringManager() {
+        if (mTetheringManager == null) {
+            mTetheringManager = mAppContext.getSystemService(TetheringManager.class);
+            verboseLog(TAG, "getTetheringManager():" + mTetheringManager);
+        }
+        return mTetheringManager;
+    }
+
+    /**
+     * Gets WifiVerboseLogging
      */
     public WifiVerboseLogging getWifiVerboseLogging() {
         if (mWifiVerboseLogging == null) {
@@ -68,25 +81,26 @@ public class WifiFeatureProvider {
     }
 
     /**
-     * Get WifiHotspotRepository
+     * Gets WifiHotspotRepository
      */
     public WifiHotspotRepository getWifiHotspotRepository() {
         if (mWifiHotspotRepository == null) {
-            mWifiHotspotRepository = new WifiHotspotRepository(mAppContext, getWifiManager());
+            mWifiHotspotRepository = new WifiHotspotRepository(mAppContext, getWifiManager(),
+                    getTetheringManager());
             verboseLog(TAG, "getWifiHotspotRepository():" + mWifiHotspotRepository);
         }
         return mWifiHotspotRepository;
     }
 
     /**
-     * Get WifiTetherViewModel
+     * Gets WifiTetherViewModel
      */
     public WifiTetherViewModel getWifiTetherViewModel(@NotNull ViewModelStoreOwner owner) {
         return new ViewModelProvider(owner).get(WifiTetherViewModel.class);
     }
 
     /**
-     * Get WifiHotspotSecurityViewModel
+     * Gets WifiHotspotSecurityViewModel
      */
     public WifiHotspotSecurityViewModel getWifiHotspotSecurityViewModel(
             @NotNull ViewModelStoreOwner owner) {
@@ -97,7 +111,7 @@ public class WifiFeatureProvider {
     }
 
     /**
-     * Get WifiHotspotSpeedViewModel
+     * Gets WifiHotspotSpeedViewModel
      */
     public WifiHotspotSpeedViewModel getWifiHotspotSpeedViewModel(
             @NotNull ViewModelStoreOwner owner) {

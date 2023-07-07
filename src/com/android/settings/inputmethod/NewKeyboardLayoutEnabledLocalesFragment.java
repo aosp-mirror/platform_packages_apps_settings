@@ -169,9 +169,11 @@ public class NewKeyboardLayoutEnabledLocalesFragment extends DashboardFragment
 
     private void mapLanguageWithLayout(InputMethodInfo info, InputMethodSubtype subtype) {
         CharSequence subtypeLabel = getSubtypeLabel(mContext, info, subtype);
-        KeyboardLayout[] keyboardLayouts = getKeyboardLayouts(info, subtype);
-        String layout = getKeyboardLayout(info, subtype);
-
+        KeyboardLayout[] keyboardLayouts =
+                NewKeyboardSettingsUtils.getKeyboardLayouts(
+                        mIm, mUserId, mInputDeviceIdentifier, info, subtype);
+        String layout = NewKeyboardSettingsUtils.getKeyboardLayout(
+                mIm, mUserId, mInputDeviceIdentifier, info, subtype);
         if (layout != null) {
             for (int i = 0; i < keyboardLayouts.length; i++) {
                 if (keyboardLayouts[i].getDescriptor().equals(layout)) {
@@ -220,7 +222,6 @@ public class NewKeyboardLayoutEnabledLocalesFragment extends DashboardFragment
                     preference -> {
                         showKeyboardLayoutPicker(
                                 keyboardInfo.getSubtypeLabel(),
-                                keyboardInfo.getLayout(),
                                 mInputDeviceIdentifier,
                                 mUserId,
                                 keyboardInfo.getInputMethodInfo(),
@@ -267,7 +268,6 @@ public class NewKeyboardLayoutEnabledLocalesFragment extends DashboardFragment
 
     private void showKeyboardLayoutPicker(
             CharSequence subtypeLabel,
-            String layout,
             InputDeviceIdentifier inputDeviceIdentifier,
             int userId,
             InputMethodInfo inputMethodInfo,
@@ -281,22 +281,11 @@ public class NewKeyboardLayoutEnabledLocalesFragment extends DashboardFragment
                 NewKeyboardSettingsUtils.EXTRA_INPUT_METHOD_SUBTYPE, inputMethodSubtype);
         arguments.putInt(NewKeyboardSettingsUtils.EXTRA_USER_ID, userId);
         arguments.putCharSequence(NewKeyboardSettingsUtils.EXTRA_TITLE, subtypeLabel);
-        arguments.putString(NewKeyboardSettingsUtils.EXTRA_KEYBOARD_LAYOUT, layout);
         new SubSettingLauncher(mContext)
                 .setSourceMetricsCategory(getMetricsCategory())
                 .setDestination(NewKeyboardLayoutPickerFragment.class.getName())
                 .setArguments(arguments)
                 .launch();
-    }
-
-    private KeyboardLayout[] getKeyboardLayouts(InputMethodInfo info, InputMethodSubtype subtype) {
-        return mIm.getKeyboardLayoutListForInputDevice(
-                mInputDeviceIdentifier, mUserId, info, subtype);
-    }
-
-    private String getKeyboardLayout(InputMethodInfo info, InputMethodSubtype subtype) {
-        return mIm.getKeyboardLayoutForInputDevice(
-                mInputDeviceIdentifier, mUserId, info, subtype);
     }
 
     private CharSequence getSubtypeLabel(

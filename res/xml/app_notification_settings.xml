@@ -59,38 +59,57 @@
     <com.android.settingslib.RestrictedSwitchPreference
         android:key="allow_sound"
         android:title="@string/allow_interruption"
-        android:summary="@string/allow_interruption_summary" />
+        android:summary="@string/allow_interruption_summary"
+        settings:allowDividerAbove="true"
+        settings:allowDividerBelow="false" />
 
     <!-- Visibility Override -->
     <com.android.settings.RestrictedListPreference
         android:key="visibility_override"
-        android:title="@string/app_notification_visibility_override_title"/>
+        android:title="@string/app_notification_visibility_override_title"
+        settings:allowDividerAbove="true"
+        settings:allowDividerBelow="false" />
 
     <!-- Bypass DND -->
     <com.android.settingslib.RestrictedSwitchPreference
         android:key="bypass_dnd"
         android:title="@string/app_notification_override_dnd_title"
-        android:summary="@string/app_notification_override_dnd_summary"/>
+        android:summary="@string/app_notification_override_dnd_summary"
+        settings:allowDividerAbove="true"
+        settings:allowDividerBelow="false" />
+
+    <!-- Allow full-screen intents -->
+    <com.android.settingslib.RestrictedSwitchPreference
+        android:key="fsi_permission"
+        android:title="@string/app_notification_fsi_permission_title"
+        android:summary="@string/app_notification_fsi_permission_summary"
+        settings:allowDividerAbove="true"
+        settings:allowDividerBelow="false" />
 
     <!-- Show badge -->
     <com.android.settingslib.RestrictedSwitchPreference
         android:key="badge"
         android:title="@string/notification_badge_title"
-        settings:useAdditionalSummary="true"
-        android:order="1001"
         android:icon="@drawable/ic_notification_dot"
+        settings:useAdditionalSummary="true"
+        settings:restrictedSwitchSummary="@string/enabled_by_admin"
+        android:order="1001"
         settings:allowDividerAbove="true"
-        settings:restrictedSwitchSummary="@string/enabled_by_admin" />
+        settings:allowDividerBelow="false" />
 
     <Preference
         android:key="app_link"
-        android:order="1003"
         android:icon="@drawable/ic_settings_24dp"
-        android:title="@string/app_settings_link" />
+        android:title="@string/app_settings_link"
+        android:order="1003"
+        settings:allowDividerAbove="true"
+        settings:allowDividerBelow="false" />
 
     <com.android.settingslib.widget.FooterPreference
         android:key="deleted"
         android:icon="@drawable/ic_trash_can"
-        android:order="8000" />
+        android:order="8000"
+        settings:allowDividerAbove="true"
+        settings:allowDividerBelow="false" />
 
 </PreferenceScreen>

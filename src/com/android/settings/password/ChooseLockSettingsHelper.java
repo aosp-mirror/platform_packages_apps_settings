@@ -64,6 +64,8 @@ public final class ChooseLockSettingsHelper {
     public static final String EXTRA_KEY_FOR_FACE = "for_face";
     // For the paths where multiple biometric sensors exist
     public static final String EXTRA_KEY_FOR_BIOMETRICS = "for_biometrics";
+    // For the paths where setup biometrics in suw flow
+    public static final String EXTRA_KEY_IS_SUW = "is_suw";
     public static final String EXTRA_KEY_FOREGROUND_ONLY = "foreground_only";
     public static final String EXTRA_KEY_REQUEST_GK_PW_HANDLE = "request_gk_pw_handle";
     // Gatekeeper password handle, which can subsequently be used to generate Gatekeeper

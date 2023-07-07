@@ -16,7 +16,6 @@
 
 package com.android.settings.notification;
 
-import android.app.ActivityThread;
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -26,16 +25,12 @@ import android.media.AudioManager;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.provider.DeviceConfig;
 import android.service.notification.NotificationListenerService;
 
 import androidx.lifecycle.OnLifecycleEvent;
 
-import com.android.internal.config.sysui.SystemUiDeviceConfigFlags;
 import com.android.settings.R;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-
-import java.util.Set;
 
 /**
  * This slider is used to represent ring volume when ring is separated from notification
@@ -60,22 +55,7 @@ public class SeparateRingVolumePreferenceController extends
         mVibrateIconId = R.drawable.ic_volume_ringer_vibrate;
         mSilentIconId = R.drawable.ic_ring_volume_off;
 
-        mSeparateNotification = isSeparateNotificationConfigEnabled();
         updateRingerMode();
-    }
-
-    /**
-     * Show/hide settings
-     */
-    private void onDeviceConfigChange(DeviceConfig.Properties properties) {
-        Set<String> changeSet = properties.getKeyset();
-        if (changeSet.contains(SystemUiDeviceConfigFlags.VOLUME_SEPARATE_NOTIFICATION)) {
-            boolean valueUpdated = readSeparateNotificationVolumeConfig();
-            if (valueUpdated) {
-                updateEffectsSuppressor();
-                selectPreferenceIconState();
-            }
-        }
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
@@ -83,11 +63,9 @@ public class SeparateRingVolumePreferenceController extends
     public void onResume() {
         super.onResume();
         mReceiver.register(true);
-        readSeparateNotificationVolumeConfig();
-        DeviceConfig.addOnPropertiesChangedListener(DeviceConfig.NAMESPACE_SYSTEMUI,
-                ActivityThread.currentApplication().getMainExecutor(), this::onDeviceConfigChange);
         updateEffectsSuppressor();
         selectPreferenceIconState();
+        updateContentDescription();
 
         if (mPreference != null) {
             mPreference.setVisible(getAvailabilityStatus() == AVAILABLE);
@@ -99,7 +77,6 @@ public class SeparateRingVolumePreferenceController extends
     public void onPause() {
         super.onPause();
         mReceiver.register(false);
-        DeviceConfig.removeOnPropertiesChangedListener(this::onDeviceConfigChange);
     }
 
     @Override
@@ -109,9 +86,7 @@ public class SeparateRingVolumePreferenceController extends
 
     @Override
     public int getAvailabilityStatus() {
-        boolean separateNotification = isSeparateNotificationConfigEnabled();
-        return separateNotification && !mHelper.isSingleVolume()
-                ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        return !mHelper.isSingleVolume() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
@@ -124,8 +99,6 @@ public class SeparateRingVolumePreferenceController extends
         return (hints & NotificationListenerService.HINT_HOST_DISABLE_CALL_EFFECTS) != 0
                 || (hints & NotificationListenerService.HINT_HOST_DISABLE_EFFECTS) != 0;
     }
-
-
 
     private final class H extends Handler {
         private static final int UPDATE_EFFECTS_SUPPRESSOR = 1;

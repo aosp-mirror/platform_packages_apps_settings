@@ -19,6 +19,7 @@ package com.android.settings.fuelgauge.batterytip.tips;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcel;
 import android.util.Log;
 
 import androidx.preference.Preference;
@@ -41,6 +42,10 @@ public class BatteryDefenderTip extends BatteryTip {
     public BatteryDefenderTip(@StateType int state, boolean isPluggedIn) {
         super(TipType.BATTERY_DEFENDER, state, false /* showDialog */);
         mIsPluggedIn = isPluggedIn;
+    }
+
+    private BatteryDefenderTip(Parcel in) {
+        super(in);
     }
 
     @Override
@@ -113,4 +118,14 @@ public class BatteryDefenderTip extends BatteryTip {
 
         Log.i(TAG, "send resume charging broadcast intent=" + intent);
     }
+
+    public static final Creator CREATOR = new Creator() {
+        public BatteryTip createFromParcel(Parcel in) {
+            return new BatteryDefenderTip(in);
+        }
+
+        public BatteryTip[] newArray(int size) {
+            return new BatteryDefenderTip[size];
+        }
+    };
 }

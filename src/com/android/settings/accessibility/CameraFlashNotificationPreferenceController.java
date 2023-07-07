@@ -24,7 +24,7 @@ import android.provider.Settings;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
-
+import com.android.settings.overlay.FeatureFactory;
 
 /**
  * Controller for Camera flash notification.
@@ -49,6 +49,8 @@ public class CameraFlashNotificationPreferenceController extends TogglePreferenc
 
     @Override
     public boolean setChecked(boolean isChecked) {
+        FeatureFactory.getFactory(mContext).getMetricsFeatureProvider().changed(
+                getMetricsCategory(), getPreferenceKey(), isChecked ? 1 : 0);
         return Settings.System.putInt(mContext.getContentResolver(),
                 Settings.System.CAMERA_FLASH_NOTIFICATION, (isChecked ? ON : OFF));
     }

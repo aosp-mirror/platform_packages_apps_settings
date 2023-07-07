@@ -52,7 +52,6 @@ import com.android.settings.wifi.WifiPickerTrackerHelper;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.mobile.dataservice.MobileNetworkInfoEntity;
 import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
-import com.android.settingslib.mobile.dataservice.UiccInfoEntity;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.utils.ThreadUtils;
 
@@ -301,6 +300,13 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         if (convertToEsimPreferenceController != null) {
             convertToEsimPreferenceController.init(mSubId, mSubscriptionInfoEntity);
         }
+
+        List<AbstractSubscriptionPreferenceController> subscriptionPreferenceControllers =
+                useAll(AbstractSubscriptionPreferenceController.class);
+        for (AbstractSubscriptionPreferenceController controller :
+                subscriptionPreferenceControllers) {
+            controller.init(mSubId);
+        }
     }
 
     @Override
@@ -441,8 +447,10 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
                 /** suppress full page if user is not admin */
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    return SubscriptionUtil.isSimHardwareVisible(context) &&
-                            context.getSystemService(UserManager.class).isAdminUser();
+                    boolean isAirplaneOff = Settings.Global.getInt(context.getContentResolver(),
+                            Settings.Global.AIRPLANE_MODE_ON, 0) == 0;
+                    return isAirplaneOff && SubscriptionUtil.isSimHardwareVisible(context)
+                            && context.getSystemService(UserManager.class).isAdminUser();
                 }
             };
 

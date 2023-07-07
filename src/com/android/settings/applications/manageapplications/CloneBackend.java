@@ -165,4 +165,13 @@ public class CloneBackend {
     public int getCloneUserId() {
         return mCloneUserId;
     }
+
+    /**
+     * Resets {@link #mCloneUserId} to -1.
+     * Typically called after the cloneUser is removed, so that the obsolete clonedUserId present
+     * with the CloneBackend instance can be cleared.
+     */
+    public void resetCloneUserId() {
+        mCloneUserId = -1;
+    }
 }

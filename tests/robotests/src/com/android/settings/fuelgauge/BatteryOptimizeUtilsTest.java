@@ -136,16 +136,16 @@ public class BatteryOptimizeUtilsTest {
     }
 
     @Test
-    public void testIsValidPackageName_InvalidPackageName_returnFalse() {
+    public void isDisabledForOptimizeModeOnly_invalidPackageName_returnTrue() {
         final BatteryOptimizeUtils testBatteryOptimizeUtils =
                 new BatteryOptimizeUtils(mContext, UID, null);
 
-        assertThat(testBatteryOptimizeUtils.isValidPackageName()).isFalse();
+        assertThat(testBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()).isTrue();
     }
 
     @Test
-    public void testIsValidPackageName_validPackageName_returnTrue() {
-        assertThat(mBatteryOptimizeUtils.isValidPackageName()).isTrue();
+    public void isDisabledForOptimizeModeOnly_validPackageName_returnFalse() {
+        assertThat(mBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()).isFalse();
     }
 
     @Test

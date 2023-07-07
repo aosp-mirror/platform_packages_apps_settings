@@ -67,12 +67,14 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
     private static final String SHOW_VIRTUAL_KEYBOARD_SWITCH = "show_virtual_keyboard_switch";
     private static final String KEYBOARD_SHORTCUTS_HELPER = "keyboard_shortcuts_helper";
     private static final String MODIFIER_KEYS_SETTINGS = "modifier_keys_settings";
+    private static final String EXTRA_AUTO_SELECTION = "auto_selection";
 
     @NonNull
     private final ArrayList<HardKeyboardDeviceInfo> mLastHardKeyboards = new ArrayList<>();
 
     private InputManager mIm;
     private InputMethodManager mImm;
+    private InputDeviceIdentifier mAutoInputDeviceIdentifier;
     @NonNull
     private PreferenceCategory mKeyboardAssistanceCategory;
     @NonNull
@@ -83,6 +85,12 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
 
     static final String EXTRA_BT_ADDRESS = "extra_bt_address";
     private String mBluetoothAddress;
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putParcelable(EXTRA_AUTO_SELECTION, mAutoInputDeviceIdentifier);
+        super.onSaveInstanceState(outState);
+    }
 
     @Override
     public void onCreatePreferences(Bundle bundle, String s) {
@@ -107,15 +115,19 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
                 KeyboardLayoutPickerFragment.EXTRA_INPUT_DEVICE_IDENTIFIER);
         // TODO (b/271391879): The EXTRA_INTENT_FROM is used for the future metrics.
         if (inputDeviceIdentifier != null) {
-            Bundle arguments = new Bundle();
-            arguments.putParcelable(NewKeyboardSettingsUtils.EXTRA_INPUT_DEVICE_IDENTIFIER,
-                    inputDeviceIdentifier);
-            new SubSettingLauncher(getContext())
-                    .setSourceMetricsCategory(getMetricsCategory())
-                    .setDestination(NewKeyboardLayoutEnabledLocalesFragment.class.getName())
-                    .setArguments(arguments)
-                    .launch();
+            mAutoInputDeviceIdentifier = inputDeviceIdentifier;
         }
+        // Don't repeat the autoselection.
+        if (isAutoSelection(bundle, inputDeviceIdentifier)) {
+            showEnabledLocalesKeyboardLayoutList(inputDeviceIdentifier);
+        }
+    }
+
+    private static boolean isAutoSelection(Bundle bundle, InputDeviceIdentifier identifier) {
+        if (bundle != null && bundle.getParcelable(EXTRA_AUTO_SELECTION) != null) {
+            return false;
+        }
+        return identifier != null;
     }
 
     @Override
@@ -220,7 +232,6 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
                 pref.setOnPreferenceClickListener(
                         preference -> {
                             showEnabledLocalesKeyboardLayoutList(
-                                    hardKeyboardDeviceInfo.mDeviceName,
                                     hardKeyboardDeviceInfo.mDeviceIdentifier);
                             return true;
                         });
@@ -246,8 +257,7 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
         fragment.show(getActivity().getSupportFragmentManager(), "keyboardLayout");
     }
 
-    private void showEnabledLocalesKeyboardLayoutList(String keyboardName,
-            InputDeviceIdentifier inputDeviceIdentifier) {
+    private void showEnabledLocalesKeyboardLayoutList(InputDeviceIdentifier inputDeviceIdentifier) {
         Bundle arguments = new Bundle();
         arguments.putParcelable(NewKeyboardSettingsUtils.EXTRA_INPUT_DEVICE_IDENTIFIER,
                 inputDeviceIdentifier);

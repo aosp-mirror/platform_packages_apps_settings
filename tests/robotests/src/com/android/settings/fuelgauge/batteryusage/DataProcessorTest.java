@@ -326,62 +326,6 @@ public final class DataProcessorTest {
     }
 
     @Test
-    public void getDeviceScreenOnTime_returnExpectedResult() {
-        final Map<Integer, Map<Integer, Map<Long, Map<String, List<AppUsagePeriod>>>>>
-                appUsagePeriodMap = new HashMap<>();
-        appUsagePeriodMap.put(0, new HashMap<>());
-        appUsagePeriodMap.put(1, new HashMap<>());
-        appUsagePeriodMap.put(2, null);
-        final long userId1 = 1;
-        final long userId2 = 2;
-        // Adds the index [0][0].
-        Map<Long, Map<String, List<AppUsagePeriod>>> appUsageMap = new HashMap<>();
-        Map<String, List<AppUsagePeriod>> userPeriodMap = new HashMap<>();
-        appUsageMap.put(userId1, userPeriodMap);
-        userPeriodMap.put(
-                "package1", List.of(buildAppUsagePeriod(0, 5), buildAppUsagePeriod(5, 7)));
-        userPeriodMap.put("package2", List.of(buildAppUsagePeriod(10, 25)));
-        userPeriodMap = new HashMap<>();
-        appUsageMap.put(userId2, userPeriodMap);
-        userPeriodMap.put("package3", List.of(buildAppUsagePeriod(15, 45)));
-        appUsagePeriodMap.get(0).put(0, appUsageMap);
-        // Adds the index [0][1].
-        appUsageMap = new HashMap<>();
-        userPeriodMap = new HashMap<>();
-        appUsageMap.put(userId1, userPeriodMap);
-        userPeriodMap.put(
-                "package1", List.of(buildAppUsagePeriod(50, 60), buildAppUsagePeriod(70, 80)));
-        appUsagePeriodMap.get(0).put(1, appUsageMap);
-        // Adds the index [1][0].
-        appUsageMap = new HashMap<>();
-        userPeriodMap = new HashMap<>();
-        appUsageMap.put(userId1, userPeriodMap);
-        userPeriodMap.put("package2", List.of(buildAppUsagePeriod(0, 8000000L)));
-        userPeriodMap.put("package3",
-                List.of(buildAppUsagePeriod(10, 15), buildAppUsagePeriod(25, 29)));
-        appUsagePeriodMap.get(1).put(0, appUsageMap);
-
-        final Map<Integer, Map<Integer, Long>> deviceScreenOnTime =
-                DataProcessor.getDeviceScreenOnTime(appUsagePeriodMap);
-
-        assertThat(deviceScreenOnTime.get(0).get(0)).isEqualTo(42);
-        assertThat(deviceScreenOnTime.get(0).get(1)).isEqualTo(20);
-        assertThat(deviceScreenOnTime.get(1).get(0)).isEqualTo(7200000);
-        assertThat(deviceScreenOnTime.get(0).get(DataProcessor.SELECTED_INDEX_ALL)).isEqualTo(62);
-        assertThat(deviceScreenOnTime.get(1).get(DataProcessor.SELECTED_INDEX_ALL))
-                .isEqualTo(7200000);
-        assertThat(deviceScreenOnTime
-                .get(DataProcessor.SELECTED_INDEX_ALL)
-                .get(DataProcessor.SELECTED_INDEX_ALL))
-                .isEqualTo(7200062);
-    }
-
-    @Test
-    public void getDeviceScreenOnTime_nullUsageMap_returnNull() {
-        assertThat(DataProcessor.getDeviceScreenOnTime(null)).isNull();
-    }
-
-    @Test
     public void getHistoryMapWithExpectedTimestamps_emptyHistoryMap_returnEmptyMap() {
         assertThat(DataProcessor
                 .getHistoryMapWithExpectedTimestamps(mContext, new HashMap<>()))
@@ -1040,7 +984,7 @@ public final class DataProcessorTest {
                 /*backgroundUsageTimeInMs=*/ 35L, /*isHidden=*/ false);
         entryMap.put(entry.getKey(), entry);
         entry = createBatteryHistEntry(
-                "package3", "label3", /*consumePower=*/ 10.0,
+                "package3", "Screen", /*consumePower=*/ 10.0,
                 /*foregroundUsageConsumePower=*/ 4, /*foregroundServiceUsageConsumePower=*/ 2,
                 /*backgroundUsageConsumePower=*/ 2, /*cachedUsageConsumePower=*/ 2,
                 /*uid=*/ 3L, currentUserId,
@@ -1048,7 +992,7 @@ public final class DataProcessorTest {
                 /*backgroundUsageTimeInMs=*/ 50L, /*isHidden=*/ false);
         entryMap.put(entry.getKey(), entry);
         entry = createBatteryHistEntry(
-                "package4", "label3", /*consumePower=*/ 15.0,
+                "package4", "label4", /*consumePower=*/ 15.0,
                 /*foregroundUsageConsumePower=*/ 6, /*foregroundServiceUsageConsumePower=*/ 3,
                 /*backgroundUsageConsumePower=*/ 3, /*cachedUsageConsumePower=*/ 3,
                 /*uid=*/ 4L, currentUserId,
@@ -1068,7 +1012,7 @@ public final class DataProcessorTest {
                 /*backgroundUsageTimeInMs=*/ 40L, /*isHidden=*/ false);
         entryMap.put(entry.getKey(), entry);
         entry = createBatteryHistEntry(
-                "package3", "label3", /*consumePower=*/ 20.0,
+                "package3", "Screen", /*consumePower=*/ 20.0,
                 /*foregroundUsageConsumePower=*/ 5, /*foregroundServiceUsageConsumePower=*/ 5,
                 /*backgroundUsageConsumePower=*/ 5, /*cachedUsageConsumePower=*/ 5,
                 /*uid=*/ 3L, currentUserId,
@@ -1128,6 +1072,7 @@ public final class DataProcessorTest {
                 resultMap
                         .get(DataProcessor.SELECTED_INDEX_ALL)
                         .get(DataProcessor.SELECTED_INDEX_ALL);
+        assertThat(resultDiffData.getScreenOnTime()).isEqualTo(36L);
         assertBatteryDiffEntry(
                 resultDiffData.getAppDiffEntryList().get(0), currentUserId, /*uid=*/ 2L,
                 ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*consumePercentage=*/ 50.0,
@@ -1147,7 +1092,7 @@ public final class DataProcessorTest {
                 ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY, /*consumePercentage=*/ 100.0,
                 /*foregroundUsageConsumePower=*/ 5, /*foregroundServiceUsageConsumePower=*/ 5,
                 /*backgroundUsageConsumePower=*/ 5, /*cachedUsageConsumePower=*/ 5,
-                /*foregroundUsageTimeInMs=*/ 50, /*backgroundUsageTimeInMs=*/ 60,
+                /*foregroundUsageTimeInMs=*/ 16, /*backgroundUsageTimeInMs=*/ 60,
                 /*screenOnTimeInMs=*/ 9);
         resultDiffData = resultMap.get(0).get(DataProcessor.SELECTED_INDEX_ALL);
         assertBatteryDiffEntry(
@@ -1177,7 +1122,7 @@ public final class DataProcessorTest {
                 ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY, /*consumePercentage=*/ 100.0,
                 /*foregroundUsageConsumePower=*/ 5, /*foregroundServiceUsageConsumePower=*/ 5,
                 /*backgroundUsageConsumePower=*/ 5, /*cachedUsageConsumePower=*/ 5,
-                /*foregroundUsageTimeInMs=*/ 50, /*backgroundUsageTimeInMs=*/ 60,
+                /*foregroundUsageTimeInMs=*/ 16, /*backgroundUsageTimeInMs=*/ 60,
                 /*screenOnTimeInMs=*/ 9);
     }
 
@@ -1287,6 +1232,7 @@ public final class DataProcessorTest {
                 resultMap
                         .get(DataProcessor.SELECTED_INDEX_ALL)
                         .get(DataProcessor.SELECTED_INDEX_ALL);
+        assertThat(resultDiffData.getScreenOnTime()).isEqualTo(0L);
         assertBatteryDiffEntry(
                 resultDiffData.getAppDiffEntryList().get(0), currentUserId, /*uid=*/ 1L,
                 ConvertUtils.CONSUMER_TYPE_UID_BATTERY, /*consumePercentage=*/ 100.0,
@@ -1367,6 +1313,7 @@ public final class DataProcessorTest {
                 resultMap
                         .get(DataProcessor.SELECTED_INDEX_ALL)
                         .get(DataProcessor.SELECTED_INDEX_ALL);
+        assertThat(resultDiffData.getScreenOnTime()).isEqualTo(7200000L);
         // Verifies the clipped usage time.
         final float ratio = (float) (7200) / (float) (3600 + 7200);
         final BatteryDiffEntry resultEntry = resultDiffData.getAppDiffEntryList().get(0);

@@ -23,16 +23,27 @@ import android.content.Intent;
 import android.provider.Settings;
 import android.util.Log;
 
+import androidx.annotation.VisibleForTesting;
+
+import com.android.settings.R;
+import com.android.settings.fuelgauge.BatteryOptimizeHistoricalLogEntry;
 import com.android.settings.fuelgauge.batterysaver.BatterySaverScheduleRadioButtonsController;
 import com.android.settingslib.fuelgauge.BatterySaverUtils;
+
+import java.util.List;
 
 /** Execute battery settings migration tasks in the device booting stage. */
 public final class BatterySettingsMigrateChecker extends BroadcastReceiver {
     private static final String TAG = "BatterySettingsMigrateChecker";
 
+    @VisibleForTesting
+    static BatteryOptimizeUtils sBatteryOptimizeUtils = null;
+
     @Override
     public void onReceive(Context context, Intent intent) {
-        if (intent != null && Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
+        if (intent != null
+                && Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())
+                && BatteryBackupHelper.isOwner()) {
             verifyConfiguration(context);
         }
     }
@@ -40,9 +51,35 @@ public final class BatterySettingsMigrateChecker extends BroadcastReceiver {
     static void verifyConfiguration(Context context) {
         context = context.getApplicationContext();
         verifySaverConfiguration(context);
+        verifyOptimizationModes(context);
     }
 
-    private static void verifySaverConfiguration(Context context) {
+    /** Avoid users set important apps into the unexpected battery optimize modes */
+    static void verifyOptimizationModes(Context context) {
+        Log.d(TAG, "invoke verifyOptimizationModes()");
+        verifyOptimizationModes(context, BatteryOptimizeUtils.getAllowList(context));
+    }
+
+    @VisibleForTesting
+    static void verifyOptimizationModes(Context context, List<String> allowList) {
+        allowList.forEach(packageName -> {
+            final BatteryOptimizeUtils batteryOptimizeUtils =
+                    BatteryBackupHelper.newBatteryOptimizeUtils(context, packageName,
+                            /* testOptimizeUtils */ sBatteryOptimizeUtils);
+            if (batteryOptimizeUtils == null) {
+                return;
+            }
+            if (batteryOptimizeUtils.getAppOptimizationMode() !=
+                    BatteryOptimizeUtils.MODE_OPTIMIZED) {
+                Log.w(TAG, "Reset optimization mode for: " + packageName);
+                batteryOptimizeUtils.setAppUsageState(BatteryOptimizeUtils.MODE_OPTIMIZED,
+                        BatteryOptimizeHistoricalLogEntry.Action.FORCE_RESET);
+            }
+        });
+    }
+
+    static void verifySaverConfiguration(Context context) {
+        Log.d(TAG, "invoke verifySaverConfiguration()");
         final ContentResolver resolver = context.getContentResolver();
         final int threshold = Settings.Global.getInt(resolver,
                 Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, 0);

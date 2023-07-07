@@ -49,13 +49,14 @@ class RequestPermissionHelperTest {
     @Test
     fun requestEnable_withAppLabelAndNoTimeout_hasCorrectMessage() {
         val activity = activityController.get()
+
         RequestPermissionHelper.requestEnable(
             context = activity,
             appLabel = "App Label",
             timeout = -1,
             onAllow = {},
             onDeny = {},
-        )
+        )!!.show()
 
         assertLatestMessageIs("App Label wants to turn on Bluetooth")
     }
@@ -63,13 +64,14 @@ class RequestPermissionHelperTest {
     @Test
     fun requestEnable_withAppLabelAndZeroTimeout_hasCorrectMessage() {
         val activity = activityController.get()
+
         RequestPermissionHelper.requestEnable(
             context = activity,
             appLabel = "App Label",
             timeout = 0,
             onAllow = {},
             onDeny = {},
-        )
+        )!!.show()
 
         assertLatestMessageIs(
             "App Label wants to turn on Bluetooth and make your phone visible to other devices. " +
@@ -80,13 +82,14 @@ class RequestPermissionHelperTest {
     @Test
     fun requestEnable_withAppLabelAndNormalTimeout_hasCorrectMessage() {
         val activity = activityController.get()
+
         RequestPermissionHelper.requestEnable(
             context = activity,
             appLabel = "App Label",
             timeout = 120,
             onAllow = {},
             onDeny = {},
-        )
+        )!!.show()
 
         assertLatestMessageIs(
             "App Label wants to turn on Bluetooth and make your phone visible to other devices " +
@@ -97,13 +100,14 @@ class RequestPermissionHelperTest {
     @Test
     fun requestEnable_withNoAppLabelAndNoTimeout_hasCorrectMessage() {
         val activity = activityController.get()
+
         RequestPermissionHelper.requestEnable(
             context = activity,
             appLabel = null,
             timeout = -1,
             onAllow = {},
             onDeny = {},
-        )
+        )!!.show()
 
         assertLatestMessageIs("An app wants to turn on Bluetooth")
     }
@@ -111,13 +115,14 @@ class RequestPermissionHelperTest {
     @Test
     fun requestEnable_withNoAppLabelAndZeroTimeout_hasCorrectMessage() {
         val activity = activityController.get()
+
         RequestPermissionHelper.requestEnable(
             context = activity,
             appLabel = null,
             timeout = 0,
             onAllow = {},
             onDeny = {},
-        )
+        )!!.show()
 
         assertLatestMessageIs(
             "An app wants to turn on Bluetooth and make your phone visible to other devices. " +
@@ -128,13 +133,14 @@ class RequestPermissionHelperTest {
     @Test
     fun requestEnable_withNoAppLabelAndNormalTimeout_hasCorrectMessage() {
         val activity = activityController.get()
+
         RequestPermissionHelper.requestEnable(
             context = activity,
             appLabel = null,
             timeout = 120,
             onAllow = {},
             onDeny = {},
-        )
+        )!!.show()
 
         assertLatestMessageIs(
             "An app wants to turn on Bluetooth and make your phone visible to other devices for " +
@@ -177,12 +183,13 @@ class RequestPermissionHelperTest {
     @Test
     fun requestDisable_withAppLabel_hasCorrectMessage() {
         val activity = activityController.get()
+
         RequestPermissionHelper.requestDisable(
             context = activity,
             appLabel = "App Label",
             onAllow = {},
             onDeny = {},
-        )
+        )!!.show()
 
         assertLatestMessageIs("App Label wants to turn off Bluetooth")
     }
@@ -190,12 +197,13 @@ class RequestPermissionHelperTest {
     @Test
     fun requestDisable_withNoAppLabel_hasCorrectMessage() {
         val activity = activityController.get()
+
         RequestPermissionHelper.requestDisable(
             context = activity,
             appLabel = null,
             onAllow = {},
             onDeny = {},
-        )
+        )!!.show()
 
         assertLatestMessageIs("An app wants to turn off Bluetooth")
     }

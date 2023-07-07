@@ -39,7 +39,7 @@ public class AccessibilityHearingAidsFragment extends AccessibilityShortcutPrefe
 
     private static final String TAG = "AccessibilityHearingAidsFragment";
     private static final String KEY_HEARING_OPTIONS_CATEGORY = "hearing_options_category";
-    private static final int FIRST_PREFERENCE_IN_CATEGORY_INDEX = -1;
+    private static final int SHORTCUT_PREFERENCE_IN_CATEGORY_INDEX = 20;
     private String mFeatureName;
 
     public AccessibilityHearingAidsFragment() {
@@ -65,7 +65,7 @@ public class AccessibilityHearingAidsFragment extends AccessibilityShortcutPrefe
         final View view = super.onCreateView(inflater, container, savedInstanceState);
         final PreferenceCategory controlCategory = findPreference(KEY_HEARING_OPTIONS_CATEGORY);
         // To move the shortcut preference under controlCategory need to remove the original added.
-        mShortcutPreference.setOrder(FIRST_PREFERENCE_IN_CATEGORY_INDEX);
+        mShortcutPreference.setOrder(SHORTCUT_PREFERENCE_IN_CATEGORY_INDEX);
         getPreferenceScreen().removePreference(mShortcutPreference);
         controlCategory.addPreference(mShortcutPreference);
         return view;

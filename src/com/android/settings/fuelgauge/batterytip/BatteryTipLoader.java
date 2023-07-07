@@ -67,9 +67,6 @@ public class BatteryTipLoader extends AsyncLoaderCompat<List<BatteryTip>> {
 
         tips.add(new LowBatteryDetector(context, policy, batteryInfo, isPowerSaveMode).detect());
         tips.add(new HighUsageDetector(context, policy, mBatteryUsageStats, batteryInfo).detect());
-        tips.add(new SmartBatteryDetector(
-                context, policy, batteryInfo, context.getContentResolver(), isPowerSaveMode)
-                        .detect());
         tips.add(new BatteryDefenderDetector(batteryInfo, context).detect());
         tips.add(new DockDefenderDetector(batteryInfo, context).detect());
         tips.add(new IncompatibleChargerDetector(context).detect());

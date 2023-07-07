@@ -243,6 +243,11 @@
             android:title="@string/enable_gpu_debug_layers"
             android:summary="@string/enable_gpu_debug_layers_summary" />
 
+        <SwitchPreference
+            android:key="enable_angle_as_system_driver"
+            android:title="@string/enable_angle_as_system_driver"
+            android:summary="@string/enable_angle_as_system_driver_summary" />
+
         <Preference
             android:key="graphics_driver_dashboard"
             android:title="@string/graphics_driver_dashboard_title"
@@ -344,6 +349,10 @@
             android:key="bluetooth_disable_leaudio"
             android:title="@string/bluetooth_disable_leaudio"
             android:summary="@string/bluetooth_disable_leaudio_summary" />
+
+        <SwitchPreference
+            android:key="bluetooth_show_leaudio_device_details"
+            android:title="@string/bluetooth_show_leaudio_device_details"/>
 
         <SwitchPreference
             android:key="bluetooth_enable_leaudio_allow_list"

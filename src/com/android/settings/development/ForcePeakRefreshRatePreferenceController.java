@@ -16,24 +16,29 @@
 
 package com.android.settings.development;
 
-import static com.android.internal.display.RefreshRateSettingsUtils.DEFAULT_REFRESH_RATE;
-
 import android.content.Context;
+import android.hardware.display.DisplayManager;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.Display;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
-import com.android.internal.display.RefreshRateSettingsUtils;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
 public class ForcePeakRefreshRatePreferenceController extends DeveloperOptionsPreferenceController
         implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
+
+    @VisibleForTesting
+    static float DEFAULT_REFRESH_RATE = 60f;
+
+    @VisibleForTesting
+    static float NO_CONFIG = 0f;
 
     @VisibleForTesting
     float mPeakRefreshRate;
@@ -43,8 +48,17 @@ public class ForcePeakRefreshRatePreferenceController extends DeveloperOptionsPr
 
     public ForcePeakRefreshRatePreferenceController(Context context) {
         super(context);
-        mPeakRefreshRate =
-                RefreshRateSettingsUtils.findHighestRefreshRateForDefaultDisplay(context);
+
+        final DisplayManager dm = context.getSystemService(DisplayManager.class);
+        final Display display = dm.getDisplay(Display.DEFAULT_DISPLAY);
+
+        if (display == null) {
+            Log.w(TAG, "No valid default display device");
+            mPeakRefreshRate = DEFAULT_REFRESH_RATE;
+        } else {
+            mPeakRefreshRate = findPeakRefreshRate(display.getSupportedModes());
+        }
+
         Log.d(TAG, "DEFAULT_REFRESH_RATE : " + DEFAULT_REFRESH_RATE
             + " mPeakRefreshRate : " + mPeakRefreshRate);
     }
@@ -85,20 +99,34 @@ public class ForcePeakRefreshRatePreferenceController extends DeveloperOptionsPr
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
         super.onDeveloperOptionsSwitchDisabled();
-        Settings.System.putInt(mContext.getContentResolver(),
-                Settings.System.FORCE_PEAK_REFRESH_RATE, 0);
+        Settings.System.putFloat(mContext.getContentResolver(),
+            Settings.System.MIN_REFRESH_RATE, NO_CONFIG);
 
         ((SwitchPreference) mPreference).setChecked(false);
     }
 
     @VisibleForTesting
     void forcePeakRefreshRate(boolean enable) {
-        Settings.System.putInt(mContext.getContentResolver(),
-                Settings.System.FORCE_PEAK_REFRESH_RATE, enable ? 1 : 0);
+        final float peakRefreshRate = enable ? mPeakRefreshRate : NO_CONFIG;
+        Settings.System.putFloat(mContext.getContentResolver(),
+            Settings.System.MIN_REFRESH_RATE, peakRefreshRate);
     }
 
     boolean isForcePeakRefreshRateEnabled() {
-        return Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.FORCE_PEAK_REFRESH_RATE, 0) == 1;
+        final float peakRefreshRate = Settings.System.getFloat(mContext.getContentResolver(),
+            Settings.System.MIN_REFRESH_RATE, NO_CONFIG);
+
+        return peakRefreshRate >= mPeakRefreshRate;
+    }
+
+    private float findPeakRefreshRate(Display.Mode[] modes) {
+        float peakRefreshRate = DEFAULT_REFRESH_RATE;
+        for (Display.Mode mode : modes) {
+            if (Math.round(mode.getRefreshRate()) > peakRefreshRate) {
+                peakRefreshRate = mode.getRefreshRate();
+            }
+        }
+
+        return peakRefreshRate;
     }
 }

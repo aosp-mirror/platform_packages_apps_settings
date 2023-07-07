@@ -44,8 +44,6 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.Settings.MobileNetworkActivity;
-import com.android.settings.network.helper.SubscriptionAnnotation;
-import com.android.settings.network.helper.SubscriptionGrouping;
 import com.android.settings.widget.AddPreference;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -135,18 +133,12 @@ public class MobileNetworkSummaryControllerTest {
         assertThat(mController.isAvailable()).isFalse();
     }
 
-
     @Test
-    public void getSummary_noSubscriptions_correctSummaryAndClickHandler() {
+    public void getSummary_noSubscriptions_returnSummaryCorrectly() {
         mController.displayPreference(mPreferenceScreen);
         mController.onResume();
-        assertThat(mController.getSummary()).isEqualTo("Add a network");
 
-        final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
-        doNothing().when(mContext).startActivity(intentCaptor.capture());
-        mPreference.getOnPreferenceClickListener().onPreferenceClick(mPreference);
-        assertThat(intentCaptor.getValue().getAction()).isEqualTo(
-                EuiccManager.ACTION_PROVISION_EMBEDDED_SUBSCRIPTION);
+        assertThat(mController.getSummary()).isEqualTo("Add a network");
     }
 
     @Test
@@ -303,13 +295,12 @@ public class MobileNetworkSummaryControllerTest {
     }
 
     @Test
-    public void onResume_noSubscriptionEsimDisabled_isDisabled() {
+    public void onAvailableSubInfoChanged_noSubscriptionEsimDisabled_isDisabled() {
         Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 0);
-        SubscriptionUtil.setAvailableSubscriptionsForTesting(null);
         when(mEuiccManager.isEnabled()).thenReturn(false);
         mController.displayPreference(mPreferenceScreen);
 
-        mController.onResume();
+        mController.onAvailableSubInfoChanged(null);
 
         assertThat(mPreference.isEnabled()).isFalse();
     }

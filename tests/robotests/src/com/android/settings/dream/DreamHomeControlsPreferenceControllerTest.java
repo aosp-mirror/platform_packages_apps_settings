@@ -23,6 +23,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.provider.Settings;
 import android.util.ArraySet;
 
 import androidx.preference.PreferenceScreen;
@@ -80,6 +81,7 @@ public class DreamHomeControlsPreferenceControllerTest {
 
     @Test
     public void testSetChecked_setTrue_enablesSetting() {
+        setControlsEnabledOnLockscreen(true);
         mBackend.setHomeControlsEnabled(false);
         assertThat(mBackend.getEnabledComplications())
                 .doesNotContain(COMPLICATION_TYPE_HOME_CONTROLS);
@@ -91,6 +93,7 @@ public class DreamHomeControlsPreferenceControllerTest {
 
     @Test
     public void testSetChecked_setFalse_disablesSetting() {
+        setControlsEnabledOnLockscreen(true);
         mBackend.setHomeControlsEnabled(true);
         assertThat(mBackend.getEnabledComplications())
                 .contains(COMPLICATION_TYPE_HOME_CONTROLS);
@@ -102,15 +105,33 @@ public class DreamHomeControlsPreferenceControllerTest {
 
     @Test
     public void testIsChecked_returnsFalse() {
+        setControlsEnabledOnLockscreen(true);
         mBackend.setHomeControlsEnabled(false);
         assertThat(mController.isChecked()).isFalse();
     }
 
     @Test
     public void testIsChecked_returnsTrue() {
+        setControlsEnabledOnLockscreen(true);
         mBackend.setHomeControlsEnabled(true);
         assertThat(mBackend.getEnabledComplications())
                 .contains(COMPLICATION_TYPE_HOME_CONTROLS);
         assertThat(mController.isChecked()).isTrue();
+    }
+
+    @Test
+    public void testIsChecked_lockScreenDisabled_returnsFalse() {
+        setControlsEnabledOnLockscreen(false);
+        mBackend.setHomeControlsEnabled(true);
+        assertThat(mBackend.getEnabledComplications())
+                .doesNotContain(COMPLICATION_TYPE_HOME_CONTROLS);
+        assertThat(mController.isChecked()).isFalse();
+    }
+
+    private void setControlsEnabledOnLockscreen(boolean enabled) {
+        Settings.Secure.putInt(
+                mContext.getContentResolver(),
+                Settings.Secure.LOCKSCREEN_SHOW_CONTROLS,
+                enabled ? 1 : 0);
     }
 }

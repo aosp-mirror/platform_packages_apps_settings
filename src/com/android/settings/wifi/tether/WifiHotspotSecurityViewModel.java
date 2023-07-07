@@ -130,6 +130,13 @@ public class WifiHotspotSecurityViewModel extends AndroidViewModel {
     }
 
     /**
+     * Gets Restarting LiveData
+     */
+    public LiveData<Boolean> getRestarting() {
+        return mWifiHotspotRepository.getRestarting();
+    }
+
+    /**
      * Wi-Fi Hotspot View Item
      */
     public static final class ViewItem {

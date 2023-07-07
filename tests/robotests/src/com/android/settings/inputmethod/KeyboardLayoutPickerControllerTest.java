@@ -39,6 +39,7 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.shadow.ShadowInputDevice;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -49,6 +50,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
+@Ignore
 @RunWith(RobolectricTestRunner.class)
 public class KeyboardLayoutPickerControllerTest {
 

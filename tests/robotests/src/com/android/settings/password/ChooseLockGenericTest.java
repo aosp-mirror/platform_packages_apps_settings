@@ -30,6 +30,8 @@ import static com.android.settings.password.ChooseLockGeneric.ChooseLockGenericF
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_CALLER_APP_NAME;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_DEVICE_PASSWORD_REQUIREMENT_ONLY;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_FOR_BIOMETRICS;
+import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_FOR_FACE;
+import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_IS_CALLING_APP_ADMIN;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_REQUESTED_MIN_COMPLEXITY;
 
@@ -79,6 +81,7 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.shadows.ShadowPersistentDataBlockManager;
@@ -98,6 +101,8 @@ public class ChooseLockGenericTest {
 
     @Rule
     public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+
+    private ActivityController<ChooseLockGeneric> mActivityController;
     private FakeFeatureFactory mFakeFeatureFactory;
     private ChooseLockGenericFragment mFragment;
     private ChooseLockGeneric mActivity;
@@ -109,7 +114,8 @@ public class ChooseLockGenericTest {
     @Before
     public void setUp() {
         mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
-        mActivity = Robolectric.buildActivity(ChooseLockGeneric.class)
+        mActivityController = Robolectric.buildActivity(ChooseLockGeneric.class);
+        mActivity = mActivityController
                 .create()
                 .start()
                 .postCreate(null)
@@ -122,7 +128,9 @@ public class ChooseLockGenericTest {
         when(mFaceManager.isHardwareDetected()).thenReturn(true);
         when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
         when(mFakeFeatureFactory.mFaceFeatureProvider.isSetupWizardSupported(any())).thenReturn(
-                false);
+                true);
+        ShadowUtils.setFingerprintManager(mFingerprintManager);
+        ShadowUtils.setFaceManager(mFaceManager);
     }
 
     @After
@@ -310,6 +318,20 @@ public class ChooseLockGenericTest {
         mFragment.onActivityResult(
                 ChooseLockGenericFragment.SKIP_FINGERPRINT_REQUEST, Activity.RESULT_OK,
                 null /* data */);
+
+        assertThat(mActivity.isFinishing()).isTrue();
+    }
+
+    @Test
+    public void securedScreenLock_notChangingConfig_notWaitForConfirmation_onStopFinishSelf() {
+        Intent intent = new Intent().putExtra(
+                LockPatternUtils.PASSWORD_TYPE_KEY, DevicePolicyManager.PASSWORD_QUALITY_NUMERIC);
+        intent.putExtra("waiting_for_confirmation", true);
+        initActivity(intent);
+
+        mFragment.updatePreferencesOrFinish(false /* isRecreatingActivity */);
+        mActivityController.configurationChange();
+        mActivityController.stop();
 
         assertThat(mActivity.isFinishing()).isTrue();
     }
@@ -522,35 +544,63 @@ public class ChooseLockGenericTest {
 
     @Test
     public void updatePreferenceText_supportBiometrics_showFaceAndFingerprint() {
-        ShadowLockPatternUtils.setRequiredPasswordComplexity(PASSWORD_COMPLEXITY_LOW);
-        final PasswordPolicy policy = new PasswordPolicy();
-        policy.quality = PASSWORD_QUALITY_ALPHABETIC;
-        ShadowLockPatternUtils.setRequestedProfilePasswordMetrics(policy.getMinMetrics());
-
+        ShadowStorageManager.setIsFileEncrypted(false);
         final Intent intent = new Intent().putExtra(EXTRA_KEY_FOR_BIOMETRICS, true);
         initActivity(intent);
 
-        final Intent passwordIntent = mFragment.getLockPatternIntent();
-        assertThat(passwordIntent.getIntExtra(ChooseLockPassword.EXTRA_KEY_MIN_COMPLEXITY,
-                PASSWORD_COMPLEXITY_NONE)).isEqualTo(PASSWORD_COMPLEXITY_LOW);
 
-        final String supportFingerprint = mActivity.getResources().getString(
-                R.string.security_settings_fingerprint);
-        final String supportFace = mActivity.getResources().getString(
-                R.string.keywords_face_settings);
+        final String supportFingerprint = capitalize(mActivity.getResources().getString(
+                R.string.security_settings_fingerprint));
+        final String supportFace = capitalize(mActivity.getResources().getString(
+                R.string.keywords_face_settings));
+        String pinTitle =
+                (String) mFragment.findPreference(ScreenLockType.PIN.preferenceKey).getTitle();
+        String patternTitle =
+                (String) mFragment.findPreference(ScreenLockType.PATTERN.preferenceKey).getTitle();
+        String passwordTitle =
+                (String) mFragment.findPreference(ScreenLockType.PASSWORD.preferenceKey).getTitle();
 
-        assertThat(mFragment.getBiometricsPreferenceTitle(ScreenLockType.PIN)).contains(
-                supportFingerprint);
-        assertThat(mFragment.getBiometricsPreferenceTitle(ScreenLockType.PIN)).contains(
-                supportFace);
-        assertThat(mFragment.getBiometricsPreferenceTitle(ScreenLockType.PATTERN)).contains(
-                supportFingerprint);
-        assertThat(mFragment.getBiometricsPreferenceTitle(ScreenLockType.PATTERN)).contains(
-                supportFace);
-        assertThat(mFragment.getBiometricsPreferenceTitle(ScreenLockType.PASSWORD)).contains(
-                supportFingerprint);
-        assertThat(mFragment.getBiometricsPreferenceTitle(ScreenLockType.PASSWORD)).contains(
-                supportFace);
+        assertThat(pinTitle).contains(supportFingerprint);
+        assertThat(pinTitle).contains(supportFace);
+        assertThat(patternTitle).contains(supportFingerprint);
+        assertThat(patternTitle).contains(supportFace);
+        assertThat(passwordTitle).contains(supportFingerprint);
+        assertThat(passwordTitle).contains(supportFace);
+    }
+
+    @Test
+    public void updatePreferenceText_supportFingerprint_showFingerprint() {
+        ShadowStorageManager.setIsFileEncrypted(false);
+        final Intent intent = new Intent().putExtra(EXTRA_KEY_FOR_FINGERPRINT, true);
+        initActivity(intent);
+        mFragment.updatePreferencesOrFinish(false /* isRecreatingActivity */);
+
+        assertThat(mFragment.findPreference(ScreenLockType.PIN.preferenceKey).getTitle()).isEqualTo(
+                mFragment.getString(R.string.fingerprint_unlock_set_unlock_pin));
+        assertThat(mFragment.findPreference(
+                ScreenLockType.PATTERN.preferenceKey).getTitle()).isEqualTo(
+                mFragment.getString(R.string.fingerprint_unlock_set_unlock_pattern));
+        assertThat(mFragment.findPreference(
+                ScreenLockType.PASSWORD.preferenceKey).getTitle()).isEqualTo(
+                mFragment.getString(R.string.fingerprint_unlock_set_unlock_password));
+    }
+
+    @Test
+    public void updatePreferenceText_supportFace_showFace() {
+
+        ShadowStorageManager.setIsFileEncrypted(false);
+        final Intent intent = new Intent().putExtra(EXTRA_KEY_FOR_FACE, true);
+        initActivity(intent);
+        mFragment.updatePreferencesOrFinish(false /* isRecreatingActivity */);
+
+        assertThat(mFragment.findPreference(ScreenLockType.PIN.preferenceKey).getTitle()).isEqualTo(
+                mFragment.getString(R.string.face_unlock_set_unlock_pin));
+        assertThat(mFragment.findPreference(
+                ScreenLockType.PATTERN.preferenceKey).getTitle()).isEqualTo(
+                mFragment.getString(R.string.face_unlock_set_unlock_pattern));
+        assertThat(mFragment.findPreference(
+                ScreenLockType.PASSWORD.preferenceKey).getTitle()).isEqualTo(
+                mFragment.getString(R.string.face_unlock_set_unlock_password));
     }
 
     private void initActivity(@Nullable Intent intent) {
@@ -562,5 +612,9 @@ public class ChooseLockGenericTest {
         mActivity = Robolectric.buildActivity(ChooseLockGeneric.InternalActivity.class, intent)
                 .create().start().postCreate(null).resume().get();
         mActivity.getSupportFragmentManager().beginTransaction().add(mFragment, null).commitNow();
+    }
+
+    private static String capitalize(final String input) {
+        return Character.toUpperCase(input.charAt(0)) + input.substring(1);
     }
 }

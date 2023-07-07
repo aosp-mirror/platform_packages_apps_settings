@@ -26,6 +26,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -77,7 +78,17 @@ public class BluetoothDevicePreferenceTest {
     @Mock
     private CachedBluetoothDevice mCachedDevice3;
     @Mock
+    private BluetoothDevice mBluetoothDevice;
+    @Mock
+    private BluetoothDevice mBluetoothDevice1;
+    @Mock
+    private BluetoothDevice mBluetoothDevice2;
+    @Mock
+    private BluetoothDevice mBluetoothDevice3;
+    @Mock
     private Drawable mDrawable;
+    @Mock
+    private BluetoothAdapter mBluetoothAdapter;
 
     private FakeFeatureFactory mFakeFeatureFactory;
     private MetricsFeatureProvider mMetricsFeatureProvider;
@@ -94,17 +105,22 @@ public class BluetoothDevicePreferenceTest {
         when(mCachedBluetoothDevice.getAddress()).thenReturn(MAC_ADDRESS);
         when(mCachedBluetoothDevice.getDrawableWithDescription())
                 .thenReturn(new Pair<>(mDrawable, FAKE_DESCRIPTION));
+        when(mCachedBluetoothDevice.getDevice()).thenReturn(mBluetoothDevice);
         when(mCachedDevice1.getAddress()).thenReturn(MAC_ADDRESS_2);
         when(mCachedDevice1.getDrawableWithDescription())
                 .thenReturn(new Pair<>(mDrawable, FAKE_DESCRIPTION));
+        when(mCachedDevice1.getDevice()).thenReturn(mBluetoothDevice1);
         when(mCachedDevice2.getAddress()).thenReturn(MAC_ADDRESS_3);
         when(mCachedDevice2.getDrawableWithDescription())
                 .thenReturn(new Pair<>(mDrawable, FAKE_DESCRIPTION));
+        when(mCachedDevice2.getDevice()).thenReturn(mBluetoothDevice2);
         when(mCachedDevice3.getAddress()).thenReturn(MAC_ADDRESS_4);
         when(mCachedDevice3.getDrawableWithDescription())
                 .thenReturn(new Pair<>(mDrawable, FAKE_DESCRIPTION));
+        when(mCachedDevice3.getDevice()).thenReturn(mBluetoothDevice3);
         mPreference = new BluetoothDevicePreference(mContext, mCachedBluetoothDevice,
                 SHOW_DEVICES_WITHOUT_NAMES, BluetoothDevicePreference.SortType.TYPE_DEFAULT);
+        mPreference.mBluetoothAdapter = mBluetoothAdapter;
     }
 
     @Test
@@ -279,15 +295,25 @@ public class BluetoothDevicePreferenceTest {
     @Test
     public void onAttached_callbackNotRemoved_doNotRegisterCallback() {
         mPreference.onAttached();
+        // After the onAttached(), the callback is registered.
 
-        verify(mCachedBluetoothDevice, never()).unregisterCallback(any());
+        // If it goes to the onAttached() again, then it do not register again, since the
+        // callback is not removed.
+        mPreference.onAttached();
+
+        verify(mCachedBluetoothDevice, times(1)).registerCallback(any());
+        verify(mBluetoothAdapter, times(1)).addOnMetadataChangedListener(any(), any(), any());
     }
 
     @Test
     public void onAttached_callbackRemoved_registerCallback() {
+        mPreference.onAttached();
+
         mPreference.onPrepareForRemoval();
         mPreference.onAttached();
 
+        verify(mCachedBluetoothDevice, times(1)).unregisterCallback(any());
         verify(mCachedBluetoothDevice, times(2)).registerCallback(any());
+        verify(mBluetoothAdapter, times(2)).addOnMetadataChangedListener(any(), any(), any());
     }
 }

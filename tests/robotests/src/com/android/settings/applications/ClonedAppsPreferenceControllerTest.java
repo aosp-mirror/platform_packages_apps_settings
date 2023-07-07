@@ -23,12 +23,15 @@ import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.provider.DeviceConfig;
 
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.testutils.shadow.ShadowDeviceConfig;
 
@@ -45,10 +48,15 @@ public class ClonedAppsPreferenceControllerTest {
     private ClonedAppsPreferenceController mController;
     private static final String KEY = "key";
     private Context mContext;
+    private Resources mResources;
 
     @Before
     public void setUp() {
         mContext = spy(ApplicationProvider.getApplicationContext());
+
+        mResources = spy(mContext.getResources());
+        when(mContext.getResources()).thenReturn(mResources);
+
         mController = new ClonedAppsPreferenceController(mContext, KEY);
     }
 
@@ -56,6 +64,7 @@ public class ClonedAppsPreferenceControllerTest {
     public void getAvailabilityStatus_featureNotEnabled_shouldNotReturnAvailable() {
         DeviceConfig.setProperty(NAMESPACE_APP_CLONING, Utils.PROPERTY_CLONED_APPS_ENABLED,
                 "false", true /* makeDefault */);
+        when(mResources.getBoolean(R.bool.config_cloned_apps_page_enabled)).thenReturn(false);
 
         assertThat(mController.getAvailabilityStatus()).isNotEqualTo(AVAILABLE);
     }
@@ -64,7 +73,26 @@ public class ClonedAppsPreferenceControllerTest {
     public void getAvailabilityStatus_featureEnabled_shouldReturnAvailable() {
         DeviceConfig.setProperty(NAMESPACE_APP_CLONING, Utils.PROPERTY_CLONED_APPS_ENABLED,
                 "true", true /* makeDefault */);
+        when(mResources.getBoolean(R.bool.config_cloned_apps_page_enabled)).thenReturn(true);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_deviceConfigFalseAndConfigEnabled_shouldNotReturnAvailable() {
+        DeviceConfig.setProperty(NAMESPACE_APP_CLONING, Utils.PROPERTY_CLONED_APPS_ENABLED,
+                "false", true /* makeDefault */);
+        when(mResources.getBoolean(R.bool.config_cloned_apps_page_enabled)).thenReturn(true);
+
+        assertThat(mController.getAvailabilityStatus()).isNotEqualTo(AVAILABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_deviceConfigTrueAndConfigDisabled_shouldNotReturnAvailable() {
+        DeviceConfig.setProperty(NAMESPACE_APP_CLONING, Utils.PROPERTY_CLONED_APPS_ENABLED,
+                "true", true /* makeDefault */);
+        when(mResources.getBoolean(R.bool.config_cloned_apps_page_enabled)).thenReturn(false);
+
+        assertThat(mController.getAvailabilityStatus()).isNotEqualTo(AVAILABLE);
     }
 }

@@ -123,13 +123,15 @@ class AppNotificationRepository(
     }
 
     override fun getNotificationSummary(app: ApplicationInfo): String {
-        if (!isEnabled(app)) return context.getString(R.string.off)
+        if (!isEnabled(app)) return context.getString(R.string.notifications_disabled)
         val channelCount = getChannelCount(app)
         if (channelCount == 0) {
             return calculateFrequencySummary(getSentCount(app))
         }
         val blockedChannelCount = getBlockedChannelCount(app)
-        if (channelCount == blockedChannelCount) return context.getString(R.string.off)
+        if (channelCount == blockedChannelCount) {
+            return context.getString(R.string.notifications_disabled)
+        }
         val frequencySummary = calculateFrequencySummary(getSentCount(app))
         if (blockedChannelCount == 0) return frequencySummary
         return context.getString(

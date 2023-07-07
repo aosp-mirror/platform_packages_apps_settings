@@ -16,8 +16,6 @@
 
 package com.android.settings.applications.manageapplications;
 
-import static android.util.FeatureFlagUtils.SETTINGS_ENABLE_SPA;
-
 import static androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_DRAGGING;
 import static androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE;
 
@@ -67,7 +65,6 @@ import android.provider.DeviceConfig;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.ArraySet;
-import android.util.FeatureFlagUtils;
 import android.util.IconDrawableFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -728,9 +725,6 @@ public class ManageApplications extends InstrumentedFragment
                         R.string.long_background_tasks_label);
                 break;
             case LIST_TYPE_CLONED_APPS:
-                if (!FeatureFlagUtils.isEnabled(getContext(), SETTINGS_ENABLE_SPA)) {
-                    return;
-                }
                 int userId = UserHandle.getUserId(mCurrentUid);
                 UserInfo userInfo = mUserManager.getUserInfo(userId);
                 if (userInfo != null && !userInfo.isCloneProfile()) {
@@ -880,7 +874,7 @@ public class ManageApplications extends InstrumentedFragment
         mOptionsMenu.findItem(R.id.delete_all_app_clones)
                 .setVisible(mListType == LIST_TYPE_CLONED_APPS  && DeviceConfig.getBoolean(
                         DeviceConfig.NAMESPACE_APP_CLONING, PROPERTY_DELETE_ALL_APP_CLONES_ENABLED,
-                false) && Utils.getCloneUserId(getContext()) != -1);
+                true) && Utils.getCloneUserId(getContext()) != -1);
     }
 
     @Override
@@ -929,10 +923,15 @@ public class ManageApplications extends InstrumentedFragment
             }
             IUserManager um = IUserManager.Stub.asInterface(
                     ServiceManager.getService(Context.USER_SERVICE));
+            CloneBackend cloneBackend = CloneBackend.getInstance(getContext());
             try {
                 // Warning: This removes all the data, media & images present in cloned user.
-                um.removeUser(clonedUserId);
-                mApplications.rebuild();
+                if (um.removeUser(clonedUserId)) {
+                    cloneBackend.resetCloneUserId();
+                    mApplications.rebuild();
+                } else if (ManageApplications.DEBUG) {
+                    Log.e(TAG, "Failed to remove cloned user");
+                }
             } catch (RemoteException e) {
                 Log.e(TAG, "Failed to remove cloned apps", e);
                 Toast.makeText(getContext(),

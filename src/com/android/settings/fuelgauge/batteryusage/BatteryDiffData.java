@@ -34,17 +34,20 @@ import java.util.Set;
 public class BatteryDiffData {
     static final double SMALL_PERCENTAGE_THRESHOLD = 1f;
 
+    private final long mScreenOnTime;
     private final List<BatteryDiffEntry> mAppEntries;
     private final List<BatteryDiffEntry> mSystemEntries;
 
     /** Constructor for the diff entries. */
     public BatteryDiffData(
             final Context context,
+            final long screenOnTime,
             final @NonNull List<BatteryDiffEntry> appDiffEntries,
             final @NonNull List<BatteryDiffEntry> systemDiffEntries,
             final @NonNull Set<String> systemAppsPackageNames,
             final @NonNull Set<Integer> systemAppsUids,
             final boolean isAccumulated) {
+        mScreenOnTime = screenOnTime;
         mAppEntries = appDiffEntries;
         mSystemEntries = systemDiffEntries;
 
@@ -58,6 +61,10 @@ public class BatteryDiffData {
 
         processAndSortEntries(mAppEntries);
         processAndSortEntries(mSystemEntries);
+    }
+
+    public long getScreenOnTime() {
+        return mScreenOnTime;
     }
 
     public List<BatteryDiffEntry> getAppDiffEntryList() {

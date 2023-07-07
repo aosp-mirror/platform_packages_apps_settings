@@ -177,8 +177,8 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
         mAppListPreferenceGroup.setOrderingAsAdded(false);
         mSpinnerPreference.initializeSpinner(
                 new String[]{
-                        mPrefContext.getString(R.string.battery_usage_spinner_by_apps),
-                        mPrefContext.getString(R.string.battery_usage_spinner_by_systems)
+                        mPrefContext.getString(R.string.battery_usage_spinner_view_by_apps),
+                        mPrefContext.getString(R.string.battery_usage_spinner_view_by_systems)
                 },
                 new AdapterView.OnItemSelectedListener() {
                     @Override

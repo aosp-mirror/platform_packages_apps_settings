@@ -70,8 +70,15 @@ public class AccountWorkProfileDashboardFragment extends DashboardFragment {
             CredentialManagerPreferenceController cmpp =
                     use(CredentialManagerPreferenceController.class);
             CredentialManagerPreferenceController.Delegate delegate =
-                result -> getActivity().setResult(result);
-            cmpp.init(this, getFragmentManager(), getIntent(), delegate);
+                    new CredentialManagerPreferenceController.Delegate() {
+                public void setActivityResult(int resultCode) {
+                    getActivity().setResult(resultCode);
+                }
+                public void forceDelegateRefresh() {
+                    forceUpdatePreferences();
+                }
+            };
+            cmpp.init(this, getFragmentManager(), getIntent(), delegate, /*isWorkProfile=*/true);
         } else {
             getSettingsLifecycle().addObserver(use(PasswordsPreferenceController.class));
         }

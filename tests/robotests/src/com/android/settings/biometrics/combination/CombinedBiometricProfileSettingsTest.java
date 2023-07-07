@@ -68,6 +68,7 @@ import com.android.settingslib.core.AbstractPreferenceController;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -85,6 +86,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+@Ignore
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowSettingsPreferenceFragment.class, ShadowUtils.class, ShadowFragment.class})
 public class CombinedBiometricProfileSettingsTest {

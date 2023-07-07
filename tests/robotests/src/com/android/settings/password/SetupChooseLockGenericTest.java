@@ -21,6 +21,7 @@ import static android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_HIGH;
 
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_REQUESTED_MIN_COMPLEXITY;
 
+import static com.google.android.setupcompat.util.WizardManagerHelper.EXTRA_IS_SETUP_FLOW;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -43,6 +44,7 @@ import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowPasswordUtils;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.testutils.shadow.ShadowUtils;
+import com.android.settings.utils.ActivityControllerWrapper;
 
 import com.google.android.setupdesign.GlifPreferenceLayout;
 
@@ -100,6 +102,7 @@ public class SetupChooseLockGenericTest {
     @Test
     public void setupChooseLockGenericPasswordComplexityExtraWithoutPermission() {
         Intent intent = new Intent("com.android.settings.SETUP_LOCK_SCREEN");
+        intent.putExtra(EXTRA_IS_SETUP_FLOW, true);
         intent.putExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY, PASSWORD_COMPLEXITY_HIGH);
         SetupChooseLockGeneric activity =
                 Robolectric.buildActivity(SetupChooseLockGeneric.class, intent).create().get();
@@ -114,6 +117,7 @@ public class SetupChooseLockGenericTest {
         ShadowPasswordUtils.addGrantedPermission(REQUEST_PASSWORD_COMPLEXITY);
 
         Intent intent = new Intent("com.android.settings.SETUP_LOCK_SCREEN");
+        intent.putExtra(EXTRA_IS_SETUP_FLOW, true);
         intent.putExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY, PASSWORD_COMPLEXITY_HIGH);
         SetupChooseLockGeneric activity =
                 Robolectric.buildActivity(SetupChooseLockGeneric.class, intent).create().get();
@@ -124,7 +128,8 @@ public class SetupChooseLockGenericTest {
 
     @Test
     public void setupChooseLockGenericUsingDescriptionTextOfGlifLayout() {
-        SetupChooseLockGenericFragment fragment = getFragmentOfSetupChooseLockGeneric(false);
+        SetupChooseLockGenericFragment fragment = getFragmentOfSetupChooseLockGeneric(true, true,
+                false);
         GlifPreferenceLayout view = getViewOfSetupChooseLockGenericFragment(fragment);
         assertThat(TextUtils.isEmpty(view.getDescriptionText())).isFalse();
         assertThat(view.getDescriptionText().toString()).isEqualTo(fragment.loadDescriptionText());
@@ -132,47 +137,24 @@ public class SetupChooseLockGenericTest {
 
     @Test
     public void setupChooseLockGenericUsingDescriptionTextOfGlifLayoutForBiometric() {
-        SetupChooseLockGenericFragment fragment = getFragmentOfSetupChooseLockGeneric(true);
+        SetupChooseLockGenericFragment fragment = getFragmentOfSetupChooseLockGeneric(true, true,
+                true);
         GlifPreferenceLayout view = getViewOfSetupChooseLockGenericFragment(fragment);
         assertThat(TextUtils.isEmpty(view.getDescriptionText())).isFalse();
         assertThat(view.getDescriptionText().toString()).isEqualTo(fragment.loadDescriptionText());
     }
 
     @Test
-    public void updatePreferenceTextShowScreenLockAndFingerprint() {
-        when(mFakeFeatureFactory.mFaceFeatureProvider.isSetupWizardSupported(any())).thenReturn(
-                false);
-        SetupChooseLockGenericFragment fragment = getFragmentOfSetupChooseLockGeneric(true);
-
-        final String supportFingerprint = fragment.getResources().getString(
-                R.string.security_settings_fingerprint);
-        final String supportFace = fragment.getResources().getString(
-                R.string.keywords_face_settings);
-
-        assertThat(fragment.getBiometricsPreferenceTitle(ScreenLockType.PIN)).contains(
-                supportFingerprint);
-        assertThat(fragment.getBiometricsPreferenceTitle(ScreenLockType.PIN)).doesNotContain(
-                supportFace);
-        assertThat(fragment.getBiometricsPreferenceTitle(ScreenLockType.PATTERN)).contains(
-                supportFingerprint);
-        assertThat(fragment.getBiometricsPreferenceTitle(ScreenLockType.PATTERN)).doesNotContain(
-                supportFace);
-        assertThat(fragment.getBiometricsPreferenceTitle(ScreenLockType.PASSWORD)).contains(
-                supportFingerprint);
-        assertThat(fragment.getBiometricsPreferenceTitle(ScreenLockType.PASSWORD)).doesNotContain(
-                supportFace);
-    }
-
-    @Test
     public void updatePreferenceTextShowScreenLockAndShowFaceAndShowFingerprint() {
         when(mFakeFeatureFactory.mFaceFeatureProvider.isSetupWizardSupported(any())).thenReturn(
                 true);
-        SetupChooseLockGenericFragment fragment = getFragmentOfSetupChooseLockGeneric(true);
+        SetupChooseLockGenericFragment fragment = getFragmentOfSetupChooseLockGeneric(true, true,
+                true);
 
-        final String supportFingerprint = fragment.getResources().getString(
-                R.string.security_settings_fingerprint);
-        final String supportFace = fragment.getResources().getString(
-                R.string.keywords_face_settings);
+        final String supportFingerprint = capitalize(fragment.getResources().getString(
+                R.string.security_settings_fingerprint));
+        final String supportFace = capitalize(fragment.getResources().getString(
+                R.string.keywords_face_settings));
 
         assertThat(fragment.getBiometricsPreferenceTitle(ScreenLockType.PIN)).contains(
                 supportFingerprint);
@@ -192,12 +174,13 @@ public class SetupChooseLockGenericTest {
     public void updatePreferenceTextShowScreenLockAndShowFingerprint() {
         when(mFakeFeatureFactory.mFaceFeatureProvider.isSetupWizardSupported(any())).thenReturn(
                 false);
-        SetupChooseLockGenericFragment fragment = getFragmentOfSetupChooseLockGeneric(true);
+        SetupChooseLockGenericFragment fragment = getFragmentOfSetupChooseLockGeneric(false, false,
+                true);
 
-        final String supportFingerprint = fragment.getResources().getString(
-                R.string.security_settings_fingerprint);
-        final String supportFace = fragment.getResources().getString(
-                R.string.keywords_face_settings);
+        final String supportFingerprint = capitalize(fragment.getResources().getString(
+                R.string.security_settings_fingerprint));
+        final String supportFace = capitalize(fragment.getResources().getString(
+                R.string.keywords_face_settings));
 
         assertThat(fragment.getBiometricsPreferenceTitle(ScreenLockType.PIN)).contains(
                 supportFingerprint);
@@ -213,16 +196,18 @@ public class SetupChooseLockGenericTest {
                 supportFace);
     }
 
-    private SetupChooseLockGenericFragment getFragmentOfSetupChooseLockGeneric(boolean biometric) {
+    private SetupChooseLockGenericFragment getFragmentOfSetupChooseLockGeneric(
+            boolean forFingerprint, boolean forFace, boolean forBiometric) {
         ShadowPasswordUtils.addGrantedPermission(REQUEST_PASSWORD_COMPLEXITY);
         Intent intent = new Intent("com.android.settings.SETUP_LOCK_SCREEN");
         intent.putExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY, PASSWORD_COMPLEXITY_HIGH);
-        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, biometric);
-        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FACE, biometric);
-        // TODO(b/275023433) This presents the activity from being made 'visible` is workaround
-        SetupChooseLockGeneric activity =
-                Robolectric.buildActivity(SetupChooseLockGeneric.class,
-                        intent).create().start().postCreate(null).resume().get();
+        intent.putExtra(EXTRA_IS_SETUP_FLOW, true);
+        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, forFingerprint);
+        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FACE, forFace);
+        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_BIOMETRICS, forBiometric);
+
+        SetupChooseLockGeneric activity = (SetupChooseLockGeneric) ActivityControllerWrapper.setup(
+                Robolectric.buildActivity(SetupChooseLockGeneric.class, intent)).get();
 
         List<Fragment> fragments = activity.getSupportFragmentManager().getFragments();
         assertThat(fragments).isNotNull();
@@ -237,5 +222,9 @@ public class SetupChooseLockGenericTest {
         assertThat(fragment.getView()).isInstanceOf(GlifPreferenceLayout.class);
 
         return (GlifPreferenceLayout) fragment.getView();
+    }
+
+    private static String capitalize(final String input) {
+        return Character.toUpperCase(input.charAt(0)) + input.substring(1);
     }
 }

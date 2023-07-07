@@ -19,6 +19,7 @@ package com.android.settings.inputmethod;
 import android.content.Context;
 import android.hardware.input.InputDeviceIdentifier;
 import android.hardware.input.InputManager;
+import android.hardware.input.KeyboardLayout;
 import android.view.InputDevice;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -39,7 +40,6 @@ public class NewKeyboardSettingsUtils {
             "com.android.settings.inputmethod.EXTRA_INTENT_FROM";
 
     static final String EXTRA_TITLE = "keyboard_layout_picker_title";
-    static final String EXTRA_KEYBOARD_LAYOUT = "keyboard_layout";
     static final String EXTRA_USER_ID = "user_id";
     static final String EXTRA_INPUT_DEVICE_IDENTIFIER = "input_device_identifier";
     static final String EXTRA_INPUT_METHOD_INFO = "input_method_info";
@@ -116,5 +116,15 @@ public class NewKeyboardSettingsUtils {
 
     static InputDevice getInputDevice(InputManager im, InputDeviceIdentifier identifier) {
         return im.getInputDeviceByDescriptor(identifier.getDescriptor());
+    }
+
+    static KeyboardLayout[] getKeyboardLayouts(InputManager inputManager, int userId,
+            InputDeviceIdentifier identifier, InputMethodInfo info, InputMethodSubtype subtype) {
+        return inputManager.getKeyboardLayoutListForInputDevice(identifier, userId, info, subtype);
+    }
+
+    static String getKeyboardLayout(InputManager inputManager, int userId,
+            InputDeviceIdentifier identifier, InputMethodInfo info, InputMethodSubtype subtype) {
+        return inputManager.getKeyboardLayoutForInputDevice(identifier, userId, info, subtype);
     }
 }

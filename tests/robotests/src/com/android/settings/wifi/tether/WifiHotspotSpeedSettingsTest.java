@@ -25,6 +25,9 @@ import static com.android.settings.wifi.tether.WifiHotspotSpeedSettings.KEY_SPEE
 import static com.android.settings.wifi.tether.WifiHotspotSpeedSettings.KEY_SPEED_5GHZ;
 import static com.android.settings.wifi.tether.WifiHotspotSpeedSettings.KEY_SPEED_6GHZ;
 
+import static org.mockito.Mockito.anyBoolean;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -80,7 +83,7 @@ public class WifiHotspotSpeedSettingsTest {
         WifiFeatureProvider provider = FakeFeatureFactory.setupForTest().getWifiFeatureProvider();
         when(provider.getWifiHotspotSpeedViewModel(mViewModelStoreOwner)).thenReturn(mViewModel);
 
-        mSettings = new WifiHotspotSpeedSettings();
+        mSettings = spy(new WifiHotspotSpeedSettings());
         mSettings.mWifiHotspotSpeedViewModel = mViewModel;
     }
 
@@ -178,6 +181,24 @@ public class WifiHotspotSpeedSettingsTest {
         mSettings.onSpeedInfoMapDataChanged(mSpeedInfoMap);
 
         verifyRadioButton(true, false, true);
+    }
+
+    @Test
+    public void onRestartingChanged_restartingTrue_setLoadingTrue() {
+        doNothing().when(mSettings).setLoading(anyBoolean(), anyBoolean());
+
+        mSettings.onRestartingChanged(true);
+
+        verify(mSettings).setLoading(true, false);
+    }
+
+    @Test
+    public void onRestartingChanged_restartingFalse_setLoadingFalse() {
+        doNothing().when(mSettings).setLoading(anyBoolean(), anyBoolean());
+
+        mSettings.onRestartingChanged(false);
+
+        verify(mSettings).setLoading(false, false);
     }
 
     @Test

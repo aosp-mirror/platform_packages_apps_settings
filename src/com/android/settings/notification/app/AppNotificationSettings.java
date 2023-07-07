@@ -18,18 +18,11 @@ package com.android.settings.notification.app;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 
-import androidx.preference.Preference;
-import androidx.preference.PreferenceGroup;
-import androidx.preference.PreferenceScreen;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
-import com.android.settings.Utils;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.ArrayList;
@@ -81,6 +74,7 @@ public class AppNotificationSettings extends NotificationSettings {
         mControllers = new ArrayList<>();
         mControllers.add(new HeaderPreferenceController(context, this));
         mControllers.add(new BlockPreferenceController(context, mDependentFieldListener, mBackend));
+        mControllers.add(new FullScreenIntentPermissionPreferenceController(context, mBackend));
         mControllers.add(new BadgePreferenceController(context, mBackend));
         mControllers.add(new AllowSoundPreferenceController(
                 context, mDependentFieldListener, mBackend));

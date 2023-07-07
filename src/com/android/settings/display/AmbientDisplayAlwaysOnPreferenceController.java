@@ -59,12 +59,12 @@ public class AmbientDisplayAlwaysOnPreferenceController extends TogglePreference
 
     @Override
     public boolean isSliceable() {
-        return TextUtils.equals(getPreferenceKey(), "ambient_display_always_on");
+        return true;
     }
 
     @Override
     public boolean isPublicSlice() {
-        return true;
+        return TextUtils.equals(getPreferenceKey(), "ambient_display_always_on");
     }
 
     @Override

@@ -100,6 +100,8 @@ public class StylusDeviceUpdater implements InputManager.InputDeviceListener,
     @Override
     public void onInputDeviceAdded(int deviceId) {
         InputDevice inputDevice = mInputManager.getInputDevice(deviceId);
+        if (inputDevice == null) return;
+
         if (inputDevice.supportsSource(InputDevice.SOURCE_STYLUS)
                 && !inputDevice.isExternal()) {
             try {
@@ -121,7 +123,10 @@ public class StylusDeviceUpdater implements InputManager.InputDeviceListener,
 
     @Override
     public void onInputDeviceChanged(int deviceId) {
-        if (mInputManager.getInputDevice(deviceId).supportsSource(InputDevice.SOURCE_STYLUS)) {
+        InputDevice inputDevice = mInputManager.getInputDevice(deviceId);
+        if (inputDevice == null) return;
+
+        if (inputDevice.supportsSource(InputDevice.SOURCE_STYLUS)) {
             forceUpdate();
         }
     }
@@ -160,8 +165,7 @@ public class StylusDeviceUpdater implements InputManager.InputDeviceListener,
         }
         mUsiPreference.setKey(PREF_KEY);
         mUsiPreference.setTitle(R.string.stylus_connected_devices_title);
-        // TODO(b/250909304): pending actual icon visD
-        mUsiPreference.setIcon(R.drawable.ic_edit);
+        mUsiPreference.setIcon(R.drawable.ic_stylus);
         mUsiPreference.setOnPreferenceClickListener((Preference p) -> {
             mMetricsFeatureProvider.logClickedPreference(p, mFragment.getMetricsCategory());
             launchDeviceDetails();
@@ -189,6 +193,8 @@ public class StylusDeviceUpdater implements InputManager.InputDeviceListener,
     boolean hasConnectedBluetoothStylusDevice() {
         for (int deviceId : mInputManager.getInputDeviceIds()) {
             InputDevice device = mInputManager.getInputDevice(deviceId);
+            if (device == null) continue;
+
             if (device.supportsSource(InputDevice.SOURCE_STYLUS)
                     && mInputManager.getInputDeviceBluetoothAddress(deviceId) != null) {
                 return true;

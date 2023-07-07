@@ -65,6 +65,8 @@ public class WifiHotspotSecurityViewModelTest {
     MutableLiveData<Integer> mSecurityType;
     @Mock
     MutableLiveData<Integer> mSpeedType;
+    @Mock
+    private MutableLiveData<Boolean> mRestarting;
 
     WifiHotspotSecurityViewModel mViewModel;
 
@@ -75,6 +77,7 @@ public class WifiHotspotSecurityViewModelTest {
                 .thenReturn(mWifiHotspotRepository);
         when(mWifiHotspotRepository.getSecurityType()).thenReturn(mSecurityType);
         when(mWifiHotspotRepository.getSpeedType()).thenReturn(mSpeedType);
+        when(mWifiHotspotRepository.getRestarting()).thenReturn(mRestarting);
 
         mViewModel = new WifiHotspotSecurityViewModel((Application) mContext);
     }
@@ -183,6 +186,11 @@ public class WifiHotspotSecurityViewModelTest {
         mViewModel.mViewInfoListData = null;
 
         assertThat(mViewModel.getViewItemListData()).isNotNull();
+    }
+
+    @Test
+    public void getRestarting_shouldNotReturnNull() {
+        assertThat(mViewModel.getRestarting()).isNotNull();
     }
 
     private void assertItemChecked(boolean checkedWpa3, boolean checkedWpa2Wpa3,

@@ -26,16 +26,9 @@ import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
 
 public class CallsDefaultSubscriptionController extends DefaultSubscriptionController {
 
-    private SubscriptionInfoEntity mSubscriptionInfoEntity;
-
     public CallsDefaultSubscriptionController(Context context, String preferenceKey,
             Lifecycle lifecycle, LifecycleOwner lifecycleOwner) {
         super(context, preferenceKey, lifecycle, lifecycleOwner);
-    }
-
-    @Override
-    protected SubscriptionInfoEntity getDefaultSubscriptionInfo() {
-        return mSubscriptionInfoEntity;
     }
 
     @Override
@@ -44,7 +37,6 @@ public class CallsDefaultSubscriptionController extends DefaultSubscriptionContr
         for (SubscriptionInfoEntity subInfo : mSubInfoEntityList) {
             int subId = subInfo.getSubId();
             if (subInfo.isActiveSubscriptionId && subId == defaultCallSubId) {
-                mSubscriptionInfoEntity = subInfo;
                 return subId;
             }
         }

@@ -64,6 +64,8 @@ public class WifiHotspotSpeedViewModelTest {
     MutableLiveData<Boolean> m6gAvailable;
     @Mock
     MutableLiveData<Map<Integer, WifiHotspotSpeedViewModel.SpeedInfo>> mSpeedInfoMapData;
+    @Mock
+    private MutableLiveData<Boolean> mRestarting;
 
     WifiHotspotSpeedViewModel mViewModel;
 
@@ -77,6 +79,7 @@ public class WifiHotspotSpeedViewModelTest {
         when(mWifiHotspotRepository.get5gAvailable()).thenReturn(m5gAvailable);
         when(mWifiHotspotRepository.is6GHzBandSupported()).thenReturn(true);
         when(mWifiHotspotRepository.get6gAvailable()).thenReturn(m6gAvailable);
+        when(mWifiHotspotRepository.getRestarting()).thenReturn(mRestarting);
 
         mViewModel = new WifiHotspotSpeedViewModel((Application) mContext);
         mViewModel.mSpeedInfoMapData = mSpeedInfoMapData;
@@ -283,5 +286,10 @@ public class WifiHotspotSpeedViewModelTest {
         mViewModel.mSpeedInfoMapData = null;
 
         assertThat(mViewModel.getSpeedInfoMapData()).isNotNull();
+    }
+
+    @Test
+    public void getRestarting_shouldNotReturnNull() {
+        assertThat(mViewModel.getRestarting()).isNotNull();
     }
 }

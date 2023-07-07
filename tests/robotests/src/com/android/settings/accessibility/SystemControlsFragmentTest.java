@@ -25,16 +25,19 @@ import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
 import com.android.settings.testutils.XmlTestUtils;
+import com.android.settings.testutils.shadow.ShadowKeyCharacterMap;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 import java.util.List;
 
 /** Tests for {@link SystemControlsFragment}. */
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowKeyCharacterMap.class})
 public class SystemControlsFragmentTest {
 
     private final Context mContext = ApplicationProvider.getApplicationContext();

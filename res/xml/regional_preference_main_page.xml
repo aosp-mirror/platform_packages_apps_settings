@@ -27,21 +27,10 @@
         android:title="@string/temperature_preferences_title"
         android:summary="@string/default_string_of_regional_preference"
         settings:controller="com.android.settings.regionalpreferences.TemperatureUnitController"
-        settings:fragment="com.android.settings.regionalpreferences.RegionalPreferencesFragment">
+        settings:fragment="com.android.settings.regionalpreferences.TemperatureUnitFragment">
         <extra
             android:name="arg_key_regional_preference"
             android:value="mu" />
-    </Preference>
-
-    <Preference
-        android:key="key_calendar_type"
-        android:title="@string/calendar_preferences_title"
-        android:summary="@string/default_string_of_regional_preference"
-        settings:controller="com.android.settings.regionalpreferences.CalendarTypeController"
-        settings:fragment="com.android.settings.regionalpreferences.RegionalPreferencesFragment">
-        <extra
-            android:name="arg_key_regional_preference"
-            android:value="ca" />
     </Preference>
 
     <Preference
@@ -49,7 +38,7 @@
         android:title="@string/first_day_of_week_preferences_title"
         android:summary="@string/default_string_of_regional_preference"
         settings:controller="com.android.settings.regionalpreferences.FirstDayOfWeekController"
-        settings:fragment="com.android.settings.regionalpreferences.RegionalPreferencesFragment">
+        settings:fragment="com.android.settings.regionalpreferences.FirstDayOfWeekItemFragment">
         <extra
             android:name="arg_key_regional_preference"
             android:value="fw" />

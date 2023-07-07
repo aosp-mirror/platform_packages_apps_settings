@@ -17,7 +17,6 @@
 package com.android.settings.development;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Build;
 import android.provider.Settings;
 
@@ -79,12 +78,6 @@ public class FreeformWindowsPreferenceController extends DeveloperOptionsPrefere
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.DEVELOPMENT_ENABLE_FREEFORM_WINDOWS_SUPPORT, SETTING_VALUE_OFF);
         ((SwitchPreference) mPreference).setChecked(false);
-    }
-
-    @Override
-    public void onRebootConfirmed() {
-        final Intent intent = new Intent(Intent.ACTION_REBOOT);
-        mContext.startActivity(intent);
     }
 
     @VisibleForTesting

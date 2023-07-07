@@ -46,6 +46,7 @@ public class CombinedBiometricSettings extends BiometricsSettingsBase {
     private static final String KEY_UNLOCK_PHONE = "biometric_settings_biometric_keyguard";
     private static final String KEY_USE_IN_APPS = "biometric_settings_biometric_app";
     private static final String KEY_INTRO_PREFERENCE = "biometric_intro";
+    private static final String KEY_USE_BIOMETRIC_PREFERENCE = "biometric_ways_to_use";
 
     private ActiveUnlockStatusUtils mActiveUnlockStatusUtils;
     private CombinedBiometricStatusUtils mCombinedBiometricStatusUtils;
@@ -82,6 +83,11 @@ public class CombinedBiometricSettings extends BiometricsSettingsBase {
         final Preference introPreference = findPreference(KEY_INTRO_PREFERENCE);
         if (introPreference != null) {
             introPreference.setTitle(mActiveUnlockStatusUtils.getIntroForActiveUnlock());
+        }
+        final Preference useBiometricPreference = findPreference(KEY_USE_BIOMETRIC_PREFERENCE);
+        if (useBiometricPreference != null) {
+            useBiometricPreference.setTitle(
+                    mActiveUnlockStatusUtils.getUseBiometricTitleForActiveUnlock());
         }
         getActivity().setTitle(mActiveUnlockStatusUtils.getTitleForActiveUnlock());
     }

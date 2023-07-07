@@ -110,8 +110,6 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     int mHourlyChartIndex = BatteryChartViewModel.SELECTED_INDEX_ALL;
     @VisibleForTesting
     Map<Integer, Map<Integer, BatteryDiffData>> mBatteryUsageMap;
-    @VisibleForTesting
-    Map<Integer, Map<Integer, Long>> mScreenOnTimeMap;
 
     private boolean mIs24HourFormat;
     private boolean mHourlyChartVisible = true;
@@ -219,9 +217,8 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         animateBatteryChartViewGroup();
         final BatteryLevelData batteryLevelData =
                 DataProcessManager.getBatteryLevelData(mContext, mHandler, batteryHistoryMap,
-                        batteryCallbackData -> {
-                            mBatteryUsageMap = batteryCallbackData.getBatteryUsageMap();
-                            mScreenOnTimeMap = batteryCallbackData.getDeviceScreenOnTime();
+                        batteryUsageMap -> {
+                            mBatteryUsageMap = batteryUsageMap;
                             logScreenUsageTime();
                             refreshUi();
                         });
@@ -336,16 +333,15 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             return false;
         }
 
-        if (mOnScreenOnTimeUpdatedListener != null && mScreenOnTimeMap != null
-                && mScreenOnTimeMap.get(mDailyChartIndex) != null) {
-            mOnScreenOnTimeUpdatedListener.onScreenOnTimeUpdated(
-                    mScreenOnTimeMap.get(mDailyChartIndex).get(mHourlyChartIndex),
-                    getSlotInformation());
-        }
         if (mOnBatteryUsageUpdatedListener != null && mBatteryUsageMap != null
                 && mBatteryUsageMap.get(mDailyChartIndex) != null) {
             final BatteryDiffData slotUsageData =
                     mBatteryUsageMap.get(mDailyChartIndex).get(mHourlyChartIndex);
+            if (slotUsageData != null) {
+                mOnScreenOnTimeUpdatedListener.onScreenOnTimeUpdated(
+                        slotUsageData.getScreenOnTime(),
+                        getSlotInformation());
+            }
             mOnBatteryUsageUpdatedListener.onBatteryUsageUpdated(
                     slotUsageData, getSlotInformation(), isBatteryUsageMapNullOrEmpty());
         }
@@ -503,17 +499,19 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     }
 
     private void logScreenUsageTime() {
-        if (mBatteryUsageMap == null || mScreenOnTimeMap == null) {
+        if (mBatteryUsageMap == null) {
             return;
         }
-        final long totalScreenOnTime =
-                mScreenOnTimeMap
-                        .get(BatteryChartViewModel.SELECTED_INDEX_ALL)
-                        .get(BatteryChartViewModel.SELECTED_INDEX_ALL);
+        final BatteryDiffData allBatteryDiffData = mBatteryUsageMap.get(
+                BatteryChartViewModel.SELECTED_INDEX_ALL).get(
+                BatteryChartViewModel.SELECTED_INDEX_ALL);
+        if (allBatteryDiffData == null) {
+            return;
+        }
         mMetricsFeatureProvider.action(
                 mPrefContext,
                 SettingsEnums.ACTION_BATTERY_USAGE_SCREEN_ON_TIME,
-                (int) totalScreenOnTime);
+                (int) allBatteryDiffData.getScreenOnTime());
         mMetricsFeatureProvider.action(
                 mPrefContext,
                 SettingsEnums.ACTION_BATTERY_USAGE_FOREGROUND_USAGE_TIME,

@@ -55,6 +55,8 @@ public class WifiTetherViewModelTest {
     MutableLiveData<Integer> mSecurityType;
     @Mock
     MutableLiveData<Integer> mSpeedType;
+    @Mock
+    private MutableLiveData<Boolean> mRestarting;
 
     WifiTetherViewModel mViewModel;
 
@@ -67,6 +69,7 @@ public class WifiTetherViewModelTest {
                 .thenReturn(mWifiHotspotRepository);
         when(mWifiHotspotRepository.getSecurityType()).thenReturn(mSecurityType);
         when(mWifiHotspotRepository.getSpeedType()).thenReturn(mSpeedType);
+        when(mWifiHotspotRepository.getRestarting()).thenReturn(mRestarting);
 
         mViewModel = new WifiTetherViewModel(mApplication);
     }
@@ -80,6 +83,13 @@ public class WifiTetherViewModelTest {
 
         verify(mSecurityType).removeObserver(mViewModel.mSecurityTypeObserver);
         verify(mSpeedType).removeObserver(mViewModel.mSpeedTypeObserver);
+    }
+
+    @Test
+    public void getSoftApConfiguration_getConfigFromRepository() {
+        mViewModel.getSoftApConfiguration();
+
+        verify(mWifiHotspotRepository).getSoftApConfiguration();
     }
 
     @Test
@@ -125,5 +135,10 @@ public class WifiTetherViewModelTest {
         mViewModel.isSpeedFeatureAvailable();
 
         verify(mWifiHotspotRepository).isSpeedFeatureAvailable();
+    }
+
+    @Test
+    public void getRestarting_shouldNotReturnNull() {
+        assertThat(mViewModel.getRestarting()).isNotNull();
     }
 }
