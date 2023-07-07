@@ -154,7 +154,7 @@
     <string name="app_locale_preference_title" msgid="5513627099300360232">"Språk"</string>
     <string name="locale_picker_category_title" msgid="6212064706962721255">"Foretrukket språk"</string>
     <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"Appspråk"</string>
-    <string name="app_locale_picker_summary" msgid="6742557329924446252">"Angi språket for hver app"</string>
+    <string name="app_locale_picker_summary" msgid="6742557329924446252">"Velg språk for hver app"</string>
     <string name="app_locale_picker_title" msgid="2431448962911301366">"Appspråk"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Foreslåtte språk"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Alle språk"</string>
@@ -162,7 +162,7 @@
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Systemstandard"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Språkvalg for denne appen er ikke tilgjengelig fra innstillingene."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Språket kan være forskjellig fra språkene som er tilgjengelige i appen. Noen apper støtter muligens ikke denne innstillingen."</string>
-    <string name="desc_app_locale_selection_supported" msgid="6744909281573556379">"Angi språket for hver app."</string>
+    <string name="desc_app_locale_selection_supported" msgid="6744909281573556379">"Velg språk for hver app."</string>
     <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Systemet, apper og nettsteder bruker det første språket som støttes, av de foretrukne språkene dine."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"For å velge et språk for hver app, gå til innstillingene for appspråk."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Finn ut mer om appspråk"</string>
@@ -192,6 +192,20 @@
     <string name="saturday_first_day_of_week" msgid="3702282590450322727">"lørdag"</string>
     <string name="title_regional_pref_footer" msgid="7450438024324794380">"Apper som ikke støtter regionsinnstillinger, bruker sine egne standardinnstillinger for lokalitet."</string>
     <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"Finn ut mer om språkinnstillinger."</string>
+    <!-- no translation found for category_title_terms_of_address (4309422700380895278) -->
+    <skip />
+    <!-- no translation found for terms_of_address_title (4064593634733842458) -->
+    <skip />
+    <!-- no translation found for terms_of_address_summary (6136134336560679144) -->
+    <skip />
+    <!-- no translation found for terms_of_address_intro_title (6149691509414243483) -->
+    <skip />
+    <!-- no translation found for terms_of_address_not_specified (4439257779351251973) -->
+    <skip />
+    <!-- no translation found for terms_of_address_feminine (1743479869695539283) -->
+    <skip />
+    <!-- no translation found for terms_of_address_masculine (983106046135098856) -->
+    <skip />
     <string name="dlg_remove_locales_title" msgid="3170501604483612114">"{count,plural, =1{Vil du fjerne det valgte språket?}other{Vil du fjerne de valgte språkene?}}"</string>
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"Da vises tekst på et annet språk."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Du kan ikke fjerne alle språkene"</string>
@@ -664,7 +678,6 @@
     <string name="remove_association_button" msgid="5004208145998061135">"Fjern tilknytning"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"Vil du koble fra appen?"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"<xliff:g id="APP_NAME">%1$s</xliff:g>-appen kobler ikke lenger til <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
-    <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"På forsøksstadiet. Bedrer lydkvaliteten."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Glem enheten"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Koble fra appen"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Maksimalt antall Bluetooth-lydenheter"</string>
@@ -1458,13 +1471,25 @@
     <string name="lockpassword_confirm_your_pattern_header_frp" msgid="5641858015891896427">"Bekreft mønster"</string>
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"Bekreft PIN-kode"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Bekreft passord"</string>
-    <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"Bekreft deg"</string>
+    <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"Bekreft at det er deg"</string>
     <string name="lockpassword_remote_validation_pattern_details" msgid="4655537780358707983">"For å overføre Google-kontoer, innstillinger og andre ting, legg inn mønsteret for den andre enheten. Mønsteret krypteres."</string>
     <string name="lockpassword_remote_validation_pin_details" msgid="2373654227583206297">"For å overføre Google-kontoer, innstillinger og andre ting, legg inn PIN-koden for den andre enheten. PIN-koden krypteres."</string>
     <string name="lockpassword_remote_validation_password_details" msgid="3482328925925888340">"For å overføre Google-kontoer, innstillinger og andre ting, legg inn passordet for den andre enheten. Passordet krypteres."</string>
     <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"Bruk også mønster for å låse opp enheten"</string>
     <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"Bruk også PIN-kode for å låse opp enheten"</string>
     <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="2066701840753591922">"Bruk også passord for å låse opp enheten"</string>
+    <!-- no translation found for lockpassword_confirm_repair_mode_pattern_header (6669435143987988314) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_pin_header (2585263648322879131) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_password_header (3064676176428495228) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_pattern_details (6187536224419477465) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_pin_details (203022189107305807) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_password_details (4860219600771003873) -->
+    <skip />
     <string name="lockpassword_invalid_pin" msgid="7530854476819820600">"Feil PIN-kode"</string>
     <string name="lockpassword_invalid_password" msgid="1588184930542221687">"Feil passord"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="8109305107409924083">"Feil mønster"</string>
@@ -1723,7 +1748,7 @@
     <string name="modifier_keys_cancel" msgid="7136520252570826772">"Avbryt"</string>
     <string name="modifier_keys_reset" msgid="551170906710422041">"Tilbakestill"</string>
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"Velg modifikatortast"</string>
-    <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Velg en ny nøkkel for <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>:"</string>
+    <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Velg en ny tast for <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>:"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Standard"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"Tale"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"Pekerhastighet"</string>
@@ -1903,8 +1928,10 @@
     <string name="accessibility_button_gesture_footer_learn_more_content_description" msgid="4144803517680297869">"Finn ut mer om Tilgjengelighet-knappen og -bevegelsen"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Bruk av Tilgjengelighet-knappen. Bevegelsen er ikke tilgjengelig med navigasjon med tre knapper."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Rask tilgang til tilgjengelighetsfunksjoner"</string>
-    <string name="accessibility_button_gesture_description" msgid="7507097717493960397"><b>"Slik kommer du i gang"</b>\n"1. Gå til tilgjengelighetsinnstillingene.\n2. Velg en funksjon og trykk på snarveien.\n3. Velg om du vil bruke en knapp eller bevegelse for å åpne funksjonen."</string>
-    <string name="accessibility_button_description" msgid="1261273371298608222"><b>"Slik kommer du i gang"</b>\n"1. Gå til tilgjengelighetsinnstillingene.\n2. Velg en funksjon og trykk på snarveien.\n3. Velg knappen du vil bruke for å åpne funksjonen."</string>
+    <!-- no translation found for accessibility_button_gesture_description (1141723096904904336) -->
+    <skip />
+    <!-- no translation found for accessibility_button_description (7669538706120092399) -->
+    <skip />
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Bruk knapp eller bevegelse"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Posisjon"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Størrelse"</string>
@@ -2710,7 +2737,7 @@
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Vil du slette gjesteaktivitet?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Apper og data fra denne gjesteøkten slettes nå, og all fremtidig gjesteaktivitet slettes hver gang du avslutter gjestemodus"</string>
     <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"slett, gjest, aktivitet, fjern, data, besøkende, tøm"</string>
-    <string name="enable_guest_calling" msgid="8300355036005240911">"La gjester bruke telefonen"</string>
+    <string name="enable_guest_calling" msgid="4620657197834392094">"La gjester starte telefonanrop"</string>
     <string name="enable_guest_calling_summary" msgid="4748224917641204782">"Anropsloggen deles med gjestebrukeren"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Slå på telefonsamtaler og SMS"</string>
     <string name="user_grant_admin" msgid="5942118263054572074">"Gjør denne brukeren til administrator"</string>
@@ -2926,7 +2953,6 @@
     <string name="keywords_wallet" msgid="3757421969956996972">"Wallet"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"betal, trykk på, betalinger"</string>
     <string name="keywords_backup" msgid="707735920706667685">"sikkerhetskopi, sikkerhetskopiér"</string>
-    <string name="keywords_assist_gesture_launch" msgid="7710762655355161924">"bevegelse"</string>
     <string name="keywords_face_unlock" msgid="545338452730885392">"ansikt, lås opp, autentisering, pålogging"</string>
     <string name="keywords_biometric_unlock" msgid="8569545388717753692">"ansikt, lås opp, autentisering, pålogging, fingeravtrykk, biometri"</string>
     <string name="keywords_imei_info" msgid="8848791606402333514">"imei, meid, min, prl-versjon, imei sv"</string>
@@ -2985,6 +3011,10 @@
     <string name="ring_volume_option_title" msgid="1520802026403038560">"Ringe- og varselvolum"</string>
     <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"Ringevolum"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"Varselvolum"</string>
+    <string name="ringer_content_description_silent_mode" msgid="1442257660889685934">"Stillemodus"</string>
+    <string name="ringer_content_description_vibrate_mode" msgid="5946432791951870480">"Vibreringsmodus"</string>
+    <string name="notification_volume_content_description_vibrate_mode" msgid="6097212000507408288">"Varsellyden er slått av – varsler vibrerer"</string>
+    <string name="volume_content_description_silent_mode" msgid="377680514551405754">"<xliff:g id="VOLUME_TYPE">%1$s</xliff:g> er slått av"</string>
     <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"Ikke tilgjengelig fordi ringelyden er kuttet"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"Ringetone"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Standard varsellyd"</string>
@@ -3474,8 +3504,10 @@
     <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"Av"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Festing av apper"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"Med festing av apper kan du holde den aktive appen synlig til du løsner den. Denne funksjonen kan for eksempel brukes til å la en venn du stoler på, spille et bestemt spill."</string>
-    <string name="screen_pinning_description" msgid="4305370471370474846">"Når en app er festet, kan den åpne andre apper, og personlige data kan være tilgjengelige. \n\nSlik bruker du festing av apper: 	\n1. Slå på festing av apper. 	\n2. Åpne Oversikt. 	\n3. Trykk på appikonet øverst på skjermen, og trykk på Fest."</string>
-    <string name="screen_pinning_guest_user_description" msgid="2465729370037556955">"Når en app er festet, kan den åpne andre apper, og personlige data kan være tilgjengelige. \n\nBruk en gjestebruker i stedet hvis du vil dele enheten med noen på en sikker måte. \n\nSlik bruker du festing av apper: 	\n1. Slå på festing av apper. 	\n2. Åpne Oversikt. 	\n3. Trykk på appikonet øverst på skjermen, og trykk på Fest."</string>
+    <!-- no translation found for screen_pinning_description (5822120806426139396) -->
+    <skip />
+    <!-- no translation found for screen_pinning_guest_user_description (2307270321127139579) -->
+    <skip />
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Når en app er festet \n\n•		kan personlige data være tilgjengelige \n		(f.eks. kontakter og e-postinnhold) \n•		kan den åpne andre apper \n\nBare bruk festing av apper med personer du stoler på."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Krev opplåsingsmønster for å løsne apper"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Krev PIN-kode for å løsne app"</string>
@@ -4085,7 +4117,7 @@
     <string name="credman_keywords" msgid="8305600680836806170">"data, tilgangsnøkkel, passord"</string>
     <string name="credman_autofill_keywords" msgid="701180623776848914">"auto, fyll, autofyll, data, passnøkkel, passord"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Stoler du på denne appen?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google autofyll&gt;%1$s&lt;/xliff:g&gt; bruker det som er på skjermen, til å fastslå hva som kan fylles ut automatisk."</string>
-    <string name="credman_autofill_confirmation_message" msgid="4951846866327737417">"&lt;b&gt;Use &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; bruker det som er på skjermen din, til å avgjøre hva som kan autofylles. Nye passord, passnøkler og annen informasjon lagres her fra nå av."</string>
+    <string name="credman_autofill_confirmation_message" msgid="4951846866327737417">"&lt;b&gt;Vil du bruke &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; bruker det som er på skjermen din, til å avgjøre hva som kan autofylles. Nye passord, passnøkler og annen informasjon lagres her fra nå av."</string>
     <string name="credman_picker_title" msgid="2642776965060619988">"Passord, passnøkler og datatjenester"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Vil du slå av %1$s?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Vil du slå av denne tjenesten?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Lagret informasjon som passord, passnøkler, betalingsmåter og andre ting fylles ikke ut når du logger på. For å bruke informasjonen du har lagret, velg et passord, en passnøkkel eller en datatjeneste."</string>
@@ -4175,7 +4207,6 @@
     <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"Ignorer"</string>
     <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="8070356204398144241">"For å slå på dette, endre først «Trykk og hold på av/på-knappen» til av/på-menyen."</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Nettverksdetaljer"</string>
-    <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Enhetsnavnet ditt er synlig for apper på telefonen. Det kan også ses av andre personer når du kobler til Bluetooth-enheter, kobler til et wifi-nettverk eller konfigurerer en wifi-sone."</string>
     <string name="devices_title" msgid="649715719278562515">"Enheter"</string>
     <string name="choose_network_title" msgid="5355609223363859430">"Velg nettverk"</string>
     <string name="network_disconnected" msgid="8281188173486212661">"Frakoblet"</string>
@@ -4663,7 +4694,7 @@
     <string name="disable_phantom_process_monitor_title" msgid="8348108346706188771">"Slå av begrensninger for underordnede prosesser"</string>
     <string name="disable_phantom_process_monitor_summary" msgid="3044464635550256985">"Slå av begrensningene for hvor mange systemressurser som kan brukes av underordnede approsesser"</string>
     <string name="enable_notes_role_title" msgid="7662702013496114763">"Tving aktivering av Notater-rollen"</string>
-    <string name="enable_notes_role_summary" msgid="136916915155048249">"Aktiver systemintegreringer for notater via Notater-rollen. Hvis Notater-rollen er aktivert allerede, skjer det ingenting."</string>
+    <string name="enable_notes_role_summary" msgid="5495721409392395089">"Aktiver systemintegreringer for notater via Notater-rollen. Hvis Notater-rollen er aktivert allerede, skjer det ingenting. Krever omstart."</string>
     <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Kringkast"</string>
     <string name="bluetooth_broadcast_dialog_broadcast_app" msgid="1016617579194329005">"Kringkast <xliff:g id="CURRENTAPP">%1$s</xliff:g>"</string>
     <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"Lytt til kringkastinger som spilles av i nærheten"</string>
