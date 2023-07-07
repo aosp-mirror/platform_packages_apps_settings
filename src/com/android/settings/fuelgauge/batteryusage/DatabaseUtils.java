@@ -34,7 +34,9 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
+import com.android.settings.fuelgauge.BatteryUsageHistoricalLogEntry.Action;
 import com.android.settings.fuelgauge.BatteryUtils;
+import com.android.settings.fuelgauge.batteryusage.bugreport.BatteryUsageLogUtils;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryStateDatabase;
 import com.android.settingslib.fuelgauge.BatteryStatus;
 
@@ -395,6 +397,7 @@ public final class DatabaseUtils {
 
         int size = 1;
         final ContentResolver resolver = context.getContentResolver();
+        String errorMessage = "";
         // Inserts all ContentValues into battery provider.
         if (!valuesList.isEmpty()) {
             final ContentValues[] valuesArray = new ContentValues[valuesList.size()];
@@ -404,7 +407,8 @@ public final class DatabaseUtils {
                 Log.d(TAG, "insert() battery states data into database with isFullChargeStart:"
                         + isFullChargeStart);
             } catch (Exception e) {
-                Log.e(TAG, "bulkInsert() battery states data into database error:\n" + e);
+                errorMessage = e.toString();
+                Log.e(TAG, "bulkInsert() data into database error:\n" + errorMessage);
             }
         } else {
             // Inserts one fake data into battery provider.
@@ -424,11 +428,16 @@ public final class DatabaseUtils {
                         + isFullChargeStart);
 
             } catch (Exception e) {
-                Log.e(TAG, "insert() data into database error:\n" + e);
+                errorMessage = e.toString();
+                Log.e(TAG, "insert() data into database error:\n" + errorMessage);
             }
             valuesList.add(contentValues);
         }
         resolver.notifyChange(BATTERY_CONTENT_URI, /*observer=*/ null);
+        BatteryUsageLogUtils.writeLog(
+                context,
+                Action.INSERT_USAGE_DATA,
+                "size=" + size + " " + errorMessage);
         Log.d(TAG, String.format("sendBatteryEntryData() size=%d in %d/ms",
                 size, (System.currentTimeMillis() - startTime)));
         if (isFullChargeStart) {

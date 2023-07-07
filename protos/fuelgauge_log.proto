@@ -5,13 +5,12 @@ option java_multiple_files = true;
 option java_package = "com.android.settings.fuelgauge";
 option java_outer_classname = "FuelgaugeLogProto";
 
-// Stores history of setting optimize mode
+// Store history of setting optimize mode
 message BatteryOptimizeHistoricalLog {
   repeated BatteryOptimizeHistoricalLogEntry log_entry = 1;
 }
 
 message BatteryOptimizeHistoricalLogEntry {
-
   // The action to set optimize mode
   enum Action {
     UNKNOWN = 0;
@@ -27,4 +26,26 @@ message BatteryOptimizeHistoricalLogEntry {
   optional Action action = 2;
   optional string action_description = 3;
   optional int64 timestamp = 4;
+}
+
+
+// Store history of battery usage periodic job
+message BatteryUsageHistoricalLog {
+  repeated BatteryUsageHistoricalLogEntry log_entry = 1;
+}
+
+message BatteryUsageHistoricalLogEntry {
+  // The action to record battery usage job event
+  enum Action {
+    UNKNOWN = 0;
+    SCHEDULE_JOB = 1;
+    EXECUTE_JOB = 2;
+    RECHECK_JOB = 3;
+    FETCH_USAGE_DATA = 4;
+    INSERT_USAGE_DATA = 5;
+  }
+
+  optional int64 timestamp = 1;
+  optional Action action = 2;
+  optional string action_description = 3;
 }

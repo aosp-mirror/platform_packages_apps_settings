@@ -24,6 +24,8 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
+import com.android.settings.fuelgauge.BatteryUsageHistoricalLogEntry.Action;
+import com.android.settings.fuelgauge.batteryusage.bugreport.BatteryUsageLogUtils;
 import com.android.settings.overlay.FeatureFactory;
 
 import java.time.Clock;
@@ -76,8 +78,11 @@ public final class PeriodicJobManager {
         final long triggerAtMillis = getTriggerAtMillis(mContext, Clock.systemUTC(), fromBoot);
         mAlarmManager.setExactAndAllowWhileIdle(
                 AlarmManager.RTC_WAKEUP, triggerAtMillis, pendingIntent);
-        Log.d(TAG, "schedule next alarm job at "
-                + ConvertUtils.utcToLocalTimeForLogging(triggerAtMillis));
+
+        final String utcToLocalTime = ConvertUtils.utcToLocalTimeForLogging(triggerAtMillis);
+        BatteryUsageLogUtils.writeLog(
+                mContext, Action.SCHEDULE_JOB, "triggerTime=" + utcToLocalTime);
+        Log.d(TAG, "schedule next alarm job at " + utcToLocalTime);
     }
 
     void cancelJob(PendingIntent pendingIntent) {
