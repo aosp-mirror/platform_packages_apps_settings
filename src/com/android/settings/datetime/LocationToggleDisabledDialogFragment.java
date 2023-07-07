@@ -19,7 +19,6 @@ package com.android.settings.datetime;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -32,11 +31,7 @@ import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
  */
 public class LocationToggleDisabledDialogFragment extends InstrumentedDialogFragment {
 
-    private final Context mContext;
-
-    public LocationToggleDisabledDialogFragment(Context context) {
-        mContext = context;
-    }
+    public LocationToggleDisabledDialogFragment() {}
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -48,7 +43,7 @@ public class LocationToggleDisabledDialogFragment extends InstrumentedDialogFrag
                         R.string.location_time_zone_detection_location_is_off_dialog_ok_button,
                         (dialog, which) -> {
                             Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                            mContext.startActivity(intent);
+                            getContext().startActivity(intent);
                         })
                 .setNegativeButton(
                         R.string.location_time_zone_detection_location_is_off_dialog_cancel_button,

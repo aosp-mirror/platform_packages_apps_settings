@@ -16,14 +16,21 @@
 
 package com.android.settings.notification;
 
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.DISABLED_FOR_USER;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.robolectric.Shadows.shadowOf;
 
 import android.content.Context;
+import android.content.pm.UserInfo;
+import android.os.UserHandle;
+import android.os.UserManager;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -35,6 +42,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.shadows.ShadowUserManager;
 
 @RunWith(RobolectricTestRunner.class)
 public class SilentStatusBarPreferenceControllerTest {
@@ -57,6 +65,27 @@ public class SilentStatusBarPreferenceControllerTest {
         mPreference = new Preference(mContext);
         mPreference.setKey(mController.getPreferenceKey());
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
+    }
+
+    @Test
+    public void isAvailable_systemUser_available() {
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+    }
+
+    @Test
+    public void isAvailable_extraUser_available() {
+        ShadowUserManager um = shadowOf(mContext.getSystemService(UserManager.class));
+        um.addUser(UserHandle.myUserId(), "Another User", UserInfo.FLAG_FULL);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+    }
+
+    @Test
+    public void isAvailable_guestUser_disabled() {
+        ShadowUserManager um = shadowOf(mContext.getSystemService(UserManager.class));
+        um.addUser(UserHandle.myUserId(), "Guest", UserInfo.FLAG_GUEST);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(DISABLED_FOR_USER);
     }
 
     @Test

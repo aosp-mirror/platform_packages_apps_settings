@@ -17,61 +17,56 @@ package com.android.settings.wifi;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
-
 import android.content.Context;
 import android.os.UserManager;
 
 import androidx.test.core.app.ApplicationProvider;
 
-import com.android.settings.R;
+import com.android.settingslib.RestrictedLockUtils;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = ShadowRestrictedPreference.class)
 public class AddWifiNetworkPreferenceTest {
 
-    private Context mContext;
-    private AddWifiNetworkPreference mPreference;
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+    @Spy
+    Context mContext = ApplicationProvider.getApplicationContext();
 
-    @Mock
-    private UserManager mUserManager;
+    private AddWifiNetworkPreference mPreference;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-
-        mContext = spy(ApplicationProvider.getApplicationContext());
-        when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
         mPreference = new AddWifiNetworkPreference(mContext);
-
     }
 
     @Test
     public void updatePreferenceForRestriction_isAddWifiConfigAllowed_prefIsEnabled() {
-        mPreference.mIsAddWifiConfigAllow = true;
+        // If the user is allowed to add Wi-Fi configuration then the EnforcedAdmin will be null.
+        RestrictedLockUtils.EnforcedAdmin enforcedAdmin = null;
 
-        mPreference.updatePreferenceForRestriction();
+        mPreference.setDisabledByAdmin(enforcedAdmin);
 
         assertThat(mPreference.isEnabled()).isTrue();
-        assertThat(mPreference.getSummary()).isNull();
     }
 
     @Test
     public void updatePreferenceForRestriction_isAddWifiConfigNotAllowed_prefIsDisabled() {
-        mPreference.mIsAddWifiConfigAllow = false;
+        RestrictedLockUtils.EnforcedAdmin enforcedAdmin = new RestrictedLockUtils.EnforcedAdmin(
+                null /* component */, UserManager.DISALLOW_ADD_WIFI_CONFIG, null /* user */);
 
-        mPreference.updatePreferenceForRestriction();
+        mPreference.setDisabledByAdmin(enforcedAdmin);
 
         assertThat(mPreference.isEnabled()).isFalse();
-        assertThat(mPreference.getSummary())
-                .isEqualTo(mContext.getString(R.string.not_allowed_by_ent));
     }
 }

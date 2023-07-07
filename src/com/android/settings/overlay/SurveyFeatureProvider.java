@@ -26,14 +26,15 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
  * An interface for classes wishing to provide the ability to serve surveys to implement.
  */
 public interface SurveyFeatureProvider {
-
     /**
      * Downloads a survey asynchronously to shared preferences to be served at a later date.
      *
      * @param activity A valid context.
      * @param surveyId A unique Id representing a survey to download.
-     * @param data a text blob to be attached to the survey results.
+     * @param data     a text blob to be attached to the survey results.
+     * @deprecated This is not used after T.
      */
+    @Deprecated
     void downloadSurvey(Activity activity, String surveyId, @Nullable String data);
 
     /**
@@ -42,17 +43,21 @@ public interface SurveyFeatureProvider {
      * @param activity The host activity to show the survey in.
      * @param surveyId A unique Id representing a survey to download.
      * @return A boolean indicating if a survey was shown or not.
+     * @deprecated This is not used after T.
      */
+    @Deprecated
     boolean showSurveyIfAvailable(Activity activity, String surveyId);
 
     /**
      * A helper method to get the surveyId. Implementers should create a mapping of
      * keys to surveyIds and provide them via this function.
      *
-     * @param context A valid context.
+     * @param context   A valid context.
      * @param simpleKey The simple name of the key to get the surveyId for.
      * @return The unique Id as a string or null on error.
+     * @deprecated This is not used after T.
      */
+    @Deprecated
     String getSurveyId(Context context, String simpleKey);
 
     /**
@@ -60,28 +65,36 @@ public interface SurveyFeatureProvider {
      * unix timestamp) for the remaining survey should it exist and be ready to show. Returns -1 if
      * no valid survey exists after removing the potentially expired one.
      *
-     * @param context the calling context.
+     * @param context  the calling context.
      * @param surveyId the site ID.
      * @return the unix timestamp for the available survey for the given {@coe siteId} or -1 if
      * there is none available.
+     * @deprecated This is not used after T.
      */
+    @Deprecated
     long getSurveyExpirationDate(Context context, String surveyId);
 
     /**
      * Registers an activity to show surveys/prompts as soon as they are downloaded. The receiver
      * should be unregistered prior to destroying the activity to avoid undefined behavior by
      * calling {@link #unregisterReceiver(Activity, BroadcastReceiver)}.
+     *
      * @param activity The activity that should show surveys once they are downloaded.
      * @return the broadcast receiver listening for survey downloads. Must be unregistered before
      * leaving the activity.
+     * @deprecated This is not used after T.
      */
+    @Deprecated
     BroadcastReceiver createAndRegisterReceiver(Activity activity);
 
     /**
      * Unregisters the broadcast receiver for this activity. Should only be called once per activity
      * after a call to {@link #createAndRegisterReceiver(Activity)}.
+     *
      * @param activity The activity that was used to register the BroadcastReceiver.
+     * @deprecated This is not used after T.
      */
+    @Deprecated
     static void unregisterReceiver(Activity activity, BroadcastReceiver receiver) {
         if (activity == null) {
             throw new IllegalStateException("Cannot unregister receiver if activity is null");
@@ -89,4 +102,11 @@ public interface SurveyFeatureProvider {
 
         LocalBroadcastManager.getInstance(activity).unregisterReceiver(receiver);
     }
+
+    /**
+     * Send the visited activity to the place where it will trigger a survey if possible.
+     *
+     * @param simpleKey The simple name of the key to get the surveyId for.
+     */
+    void sendActivityIfAvailable(String simpleKey);
 }

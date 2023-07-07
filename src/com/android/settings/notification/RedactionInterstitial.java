@@ -189,13 +189,16 @@ public class RedactionInterstitial extends SettingsActivity {
         }
 
         private void loadFromSettings() {
+            final boolean showUnRedactedDefault = getContext().getResources().getBoolean(
+                    R.bool.default_allow_sensitive_lockscreen_content);
             final boolean managedProfile = UserManager.get(getContext()).isManagedProfile(mUserId);
             // Hiding all notifications is device-wide setting, managed profiles can only set
             // whether their notifications are show in full or redacted.
             final boolean showNotifications = managedProfile || Settings.Secure.getIntForUser(
                     getContentResolver(), LOCK_SCREEN_SHOW_NOTIFICATIONS, 0, mUserId) != 0;
             final boolean showUnredacted = Settings.Secure.getIntForUser(
-                    getContentResolver(), LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS, 1, mUserId) != 0;
+                    getContentResolver(), LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS,
+                    showUnRedactedDefault ? 1 : 0, mUserId) != 0;
 
             int checkedButtonId = R.id.hide_all;
             if (showNotifications) {

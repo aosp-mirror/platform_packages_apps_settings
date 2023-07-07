@@ -46,9 +46,12 @@ import androidx.preference.PreferenceGroup;
 import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.Settings.TetherSettingsActivity;
+import com.android.settings.Settings.WifiTetherSettingsActivity;
+import com.android.settings.activityembedding.ActivityEmbeddingUtils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.gestures.OneHandedSettingsUtils;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.wifi.WifiUtils;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import java.util.ArrayList;
@@ -127,7 +130,7 @@ public class CreateShortcutPreferenceController extends BasePreferenceController
                     return false;
                 }
                 final Intent shortcutIntent = createResultIntent(
-                        buildShortcutIntent(info),
+                        buildShortcutIntent(uiContext, info),
                         info, clickTarget.getTitle());
                 mHost.setResult(Activity.RESULT_OK, shortcutIntent);
                 logCreateShortcut(info);
@@ -191,6 +194,12 @@ public class CreateShortcutPreferenceController extends BasePreferenceController
                     continue;
                 }
             }
+            if (info.activityInfo.name.endsWith(WifiTetherSettingsActivity.class.getSimpleName())) {
+                if (!canShowWifiHotspot()) {
+                    Log.d(TAG, "Skipping Wi-Fi hotspot settings:" + info.activityInfo);
+                    continue;
+                }
+            }
             if (!info.activityInfo.applicationInfo.isSystemApp()) {
                 Log.d(TAG, "Skipping non-system app: " + info.activityInfo);
                 continue;
@@ -199,6 +208,11 @@ public class CreateShortcutPreferenceController extends BasePreferenceController
         }
         Collections.sort(shortcuts, SHORTCUT_COMPARATOR);
         return shortcuts;
+    }
+
+    @VisibleForTesting
+    boolean canShowWifiHotspot() {
+        return WifiUtils.canShowWifiHotspot(mContext);
     }
 
     private void logCreateShortcut(ResolveInfo info) {
@@ -210,10 +224,14 @@ public class CreateShortcutPreferenceController extends BasePreferenceController
                 info.activityInfo.name);
     }
 
-    private static Intent buildShortcutIntent(ResolveInfo info) {
-        return new Intent(SHORTCUT_PROBE)
+    private static Intent buildShortcutIntent(Context context, ResolveInfo info) {
+        Intent intent = new Intent(SHORTCUT_PROBE)
                 .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 .setClassName(info.activityInfo.packageName, info.activityInfo.name);
+        if (ActivityEmbeddingUtils.isEmbeddingActivityEnabled(context)) {
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        }
+        return intent;
     }
 
     private static ShortcutInfo createShortcutInfo(Context context, Intent shortcutIntent,
@@ -277,8 +295,8 @@ public class CreateShortcutPreferenceController extends BasePreferenceController
                 ResolveInfo ri = context.getPackageManager().resolveActivity(si.getIntent(), 0);
 
                 if (ri != null) {
-                    updatedShortcuts.add(createShortcutInfo(context, buildShortcutIntent(ri), ri,
-                            si.getShortLabel()));
+                    updatedShortcuts.add(createShortcutInfo(context,
+                            buildShortcutIntent(context, ri), ri, si.getShortLabel()));
                 }
             }
         }
