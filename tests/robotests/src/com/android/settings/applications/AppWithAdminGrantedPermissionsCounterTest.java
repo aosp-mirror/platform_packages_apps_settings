@@ -20,10 +20,10 @@ import static com.android.settings.testutils.ApplicationTestUtils.buildInfo;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyObject;
-import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.atLeast;
+import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
@@ -39,7 +39,6 @@ import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
 
-import java.util.Collections;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -49,6 +48,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 @RunWith(RobolectricTestRunner.class)
 public final class AppWithAdminGrantedPermissionsCounterTest {
@@ -129,7 +129,7 @@ public final class AppWithAdminGrantedPermissionsCounterTest {
         verify(mPackageManager).getInstalledApplicationsAsUser(anyInt(), eq(MAIN_USER_ID));
         verify(mPackageManager).getInstalledApplicationsAsUser(anyInt(),
                 eq(MANAGED_PROFILE_ID));
-        verify(mPackageManager, atLeast(0)).getInstallReason(anyObject(), anyObject());
+        verify(mPackageManager, atLeast(0)).getInstallReason(any(), any());
         verifyNoMoreInteractions(mPackageManager);
     }
 
@@ -166,9 +166,9 @@ public final class AppWithAdminGrantedPermissionsCounterTest {
     }
 
     private void configureInstallTimePermissions() throws RemoteException {
-        when(mPackageManagerService.checkUidPermission(anyObject(), eq(APP_1_UID)))
+        when(mPackageManagerService.checkUidPermission(any(), eq(APP_1_UID)))
                 .thenReturn(PackageManager.PERMISSION_DENIED);
-        when(mPackageManagerService.checkUidPermission(anyObject(), eq(APP_2_UID)))
+        when(mPackageManagerService.checkUidPermission(any(), eq(APP_2_UID)))
                 .thenReturn(PackageManager.PERMISSION_DENIED);
         when(mPackageManagerService.checkUidPermission(PERMISSION_1, APP_3_UID))
                 .thenReturn(PackageManager.PERMISSION_DENIED);
@@ -178,9 +178,9 @@ public final class AppWithAdminGrantedPermissionsCounterTest {
                 .thenReturn(PackageManager.PERMISSION_DENIED);
         when(mPackageManagerService.checkUidPermission(PERMISSION_2, APP_4_UID))
                 .thenReturn(PackageManager.PERMISSION_GRANTED);
-        when(mPackageManagerService.checkUidPermission(anyObject(), eq(APP_5_UID)))
+        when(mPackageManagerService.checkUidPermission(any(), eq(APP_5_UID)))
                 .thenReturn(PackageManager.PERMISSION_DENIED);
-        when(mPackageManagerService.checkUidPermission(anyObject(), eq(APP_6_UID)))
+        when(mPackageManagerService.checkUidPermission(any(), eq(APP_6_UID)))
                 .thenReturn(PackageManager.PERMISSION_DENIED);
     }
 
@@ -189,15 +189,15 @@ public final class AppWithAdminGrantedPermissionsCounterTest {
                 .thenReturn(DevicePolicyManager.PERMISSION_GRANT_STATE_GRANTED);
         when(mDevicePolicyManager.getPermissionGrantState(null, APP_1, PERMISSION_2))
                 .thenReturn(DevicePolicyManager.PERMISSION_GRANT_STATE_DENIED);
-        when(mDevicePolicyManager.getPermissionGrantState(eq(null), eq(APP_2), anyObject()))
+        when(mDevicePolicyManager.getPermissionGrantState(eq(null), eq(APP_2), any()))
                 .thenReturn(DevicePolicyManager.PERMISSION_GRANT_STATE_DENIED);
-        when(mDevicePolicyManager.getPermissionGrantState(eq(null), eq(APP_3), anyObject()))
+        when(mDevicePolicyManager.getPermissionGrantState(eq(null), eq(APP_3), any()))
                 .thenReturn(DevicePolicyManager.PERMISSION_GRANT_STATE_DENIED);
-        when(mDevicePolicyManager.getPermissionGrantState(eq(null), eq(APP_4), anyObject()))
+        when(mDevicePolicyManager.getPermissionGrantState(eq(null), eq(APP_4), any()))
                 .thenReturn(DevicePolicyManager.PERMISSION_GRANT_STATE_DENIED);
-        when(mDevicePolicyManager.getPermissionGrantState(eq(null), eq(APP_5), anyObject()))
+        when(mDevicePolicyManager.getPermissionGrantState(eq(null), eq(APP_5), any()))
                 .thenReturn(DevicePolicyManager.PERMISSION_GRANT_STATE_DENIED);
-        when(mDevicePolicyManager.getPermissionGrantState(eq(null), eq(APP_6), anyObject()))
+        when(mDevicePolicyManager.getPermissionGrantState(eq(null), eq(APP_6), any()))
                 .thenReturn(DevicePolicyManager.PERMISSION_GRANT_STATE_GRANTED);
     }
 

@@ -17,6 +17,7 @@
 package com.android.settings.accessibility;
 
 import static com.android.internal.accessibility.AccessibilityShortcutController.ACCESSIBILITY_BUTTON_COMPONENT_NAME;
+import static com.android.internal.accessibility.AccessibilityShortcutController.ACCESSIBILITY_HEARING_AIDS_COMPONENT_NAME;
 import static com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_COMPONENT_NAME;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
@@ -31,6 +32,7 @@ import android.content.pm.ServiceInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.text.TextUtils;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.view.accessibility.AccessibilityManager;
 
@@ -41,6 +43,7 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.accessibility.AccessibilityUtils;
 
 import java.util.List;
@@ -109,6 +112,13 @@ public class AccessibilityDetailsSettingsFragment extends InstrumentedFragment {
 
         if (ACCESSIBILITY_BUTTON_COMPONENT_NAME.equals(componentName)) {
             final String destination = AccessibilityButtonFragment.class.getName();
+            return new LaunchFragmentArguments(destination, /* arguments= */ null);
+        }
+
+        if (ACCESSIBILITY_HEARING_AIDS_COMPONENT_NAME.equals(componentName)
+                && FeatureFlagUtils.isEnabled(getContext(),
+                FeatureFlagUtils.SETTINGS_ACCESSIBILITY_HEARING_AID_PAGE)) {
+            final String destination = AccessibilityHearingAidsFragment.class.getName();
             return new LaunchFragmentArguments(destination, /* arguments= */ null);
         }
 
@@ -230,6 +240,10 @@ public class AccessibilityDetailsSettingsFragment extends InstrumentedFragment {
                     new ComponentName(packageName, tileServiceClassName).flattenToString());
         }
 
+        final int metricsCategory = FeatureFactory.getFactory(getActivity().getApplicationContext())
+                .getAccessibilityMetricsFeatureProvider()
+                .getDownloadedFeatureMetricsCategory(componentName);
+        extras.putInt(AccessibilitySettings.EXTRA_METRICS_CATEGORY, metricsCategory);
         extras.putParcelable(AccessibilitySettings.EXTRA_COMPONENT_NAME, componentName);
         extras.putInt(AccessibilitySettings.EXTRA_ANIMATED_IMAGE_RES, info.getAnimatedImageRes());
 

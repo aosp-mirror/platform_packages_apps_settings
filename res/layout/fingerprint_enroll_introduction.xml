@@ -21,8 +21,7 @@
     style="?attr/fingerprint_layout_theme"
     android:id="@+id/setup_wizard_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:sudDescriptionText="@string/security_settings_fingerprint_enroll_introduction_v2_message">
+    android:layout_height="match_parent">
 
     <LinearLayout
         style="@style/SudContentFrame"
@@ -95,7 +94,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:contentDescription="@null"
-                    android:src="@drawable/ic_device_locked_24dp"/>
+                    android:src="@drawable/ic_lock_24dp"/>
                 <Space
                     android:layout_width="16dp"
                     android:layout_height="wrap_content"/>
@@ -199,6 +198,8 @@
                     android:layout_width="16dp"
                     android:layout_height="wrap_content"/>
                 <TextView
+                    android:id="@+id/footer_learn_more"
+                    android:linksClickable="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     style="@style/BiometricEnrollIntroMessage"

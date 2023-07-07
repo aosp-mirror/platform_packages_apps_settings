@@ -16,6 +16,8 @@
 
 package com.android.settings.core;
 
+import com.android.settings.utils.ActivityControllerWrapper;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
@@ -31,7 +33,8 @@ public class InstrumentedActivityTest {
      */
     @Test
     public void canInstantiate() {
-        Robolectric.buildActivity(InstrumentedActivityTestable.class).setup().get();
+        ActivityControllerWrapper.setup(
+                Robolectric.buildActivity(InstrumentedActivityTestable.class)).get();
     }
 
     public static class InstrumentedActivityTestable extends InstrumentedActivity {

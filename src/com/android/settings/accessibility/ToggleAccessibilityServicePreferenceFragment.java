@@ -32,7 +32,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.ResolveInfo;
-import android.content.pm.ServiceInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -49,7 +48,6 @@ import androidx.annotation.Nullable;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.accessibility.AccessibilityUtils;
 
 import java.util.List;
@@ -61,9 +59,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
 
     private static final String TAG = "ToggleAccessibilityServicePreferenceFragment";
     private static final String KEY_HAS_LOGGED = "has_logged";
-    private AtomicBoolean mIsDialogShown = new AtomicBoolean(/* initialValue= */ false);
-
-    private static final String EMPTY_STRING = "";
+    private final AtomicBoolean mIsDialogShown = new AtomicBoolean(/* initialValue= */ false);
 
     private Dialog mWarningDialog;
     private ComponentName mTileComponentName;
@@ -73,19 +69,11 @@ public class ToggleAccessibilityServicePreferenceFragment extends
 
     @Override
     public int getMetricsCategory() {
-        // Retrieve from getArguments() directly because this function will be executed from
-        // onAttach(), but variable mComponentName only available after onProcessArguments()
-        // which comes from onCreateView().
-        final ComponentName componentName = getArguments().getParcelable(
-                AccessibilitySettings.EXTRA_COMPONENT_NAME);
-
-        return FeatureFactory.getFactory(getActivity().getApplicationContext())
-                .getAccessibilityMetricsFeatureProvider()
-                .getDownloadedFeatureMetricsCategory(componentName);
+        return getArguments().getInt(AccessibilitySettings.EXTRA_METRICS_CATEGORY);
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater infalter) {
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         // Do not call super. We don't want to see the "Help & feedback" option on this page so as
         // not to confuse users who think they might be able to send feedback about a specific
         // accessibility service from this page.
@@ -126,11 +114,6 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-    }
-
-    @Override
     public void onSaveInstanceState(Bundle outState) {
         if (mStartTimeMillsForLogging > 0) {
             outState.putBoolean(KEY_HAS_LOGGED, mDisabledStateLogged);
@@ -148,10 +131,8 @@ public class ToggleAccessibilityServicePreferenceFragment extends
         AccessibilityUtils.setAccessibilityServiceState(getPrefContext(), toggledService, enabled);
     }
 
-    // IMPORTANT: Refresh the info since there are dynamically changing
-    // capabilities. For
-    // example, before JellyBean MR2 the user was granting the explore by touch
-    // one.
+    // IMPORTANT: Refresh the info since there are dynamically changing capabilities. For
+    // example, before JellyBean MR2 the user was granting the explore by touch one.
     @Nullable
     AccessibilityServiceInfo getAccessibilityServiceInfo() {
         final List<AccessibilityServiceInfo> infos = AccessibilityManager.getInstance(
@@ -301,22 +282,10 @@ public class ToggleAccessibilityServicePreferenceFragment extends
         mPackageRemovedReceiver = null;
     }
 
-    private boolean isServiceSupportAccessibilityButton() {
-        final AccessibilityManager ams = getPrefContext().getSystemService(
-                AccessibilityManager.class);
-        final List<AccessibilityServiceInfo> services = ams.getInstalledAccessibilityServiceList();
-
-        for (AccessibilityServiceInfo info : services) {
-            if ((info.flags & AccessibilityServiceInfo.FLAG_REQUEST_ACCESSIBILITY_BUTTON) != 0) {
-                ServiceInfo serviceInfo = info.getResolveInfo().serviceInfo;
-                if (serviceInfo != null && TextUtils.equals(serviceInfo.name,
-                        getAccessibilityServiceInfo().getResolveInfo().serviceInfo.name)) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
+    boolean serviceSupportsAccessibilityButton() {
+        final AccessibilityServiceInfo info = getAccessibilityServiceInfo();
+        return info != null
+                && (info.flags & AccessibilityServiceInfo.FLAG_REQUEST_ACCESSIBILITY_BUTTON) != 0;
     }
 
     private void handleConfirmServiceEnabled(boolean confirmed) {
@@ -454,9 +423,20 @@ public class ToggleAccessibilityServicePreferenceFragment extends
         unregisterPackageRemoveReceiver();
     }
 
+    @Override
+    protected int getPreferenceScreenResId() {
+        // TODO(b/171272809): Add back when controllers move to static type
+        return 0;
+    }
+
+    @Override
+    protected String getLogTag() {
+        return TAG;
+    }
+
     private void onAllowButtonFromEnableToggleClicked() {
         handleConfirmServiceEnabled(/* confirmed= */ true);
-        if (isServiceSupportAccessibilityButton()) {
+        if (serviceSupportsAccessibilityButton()) {
             mIsDialogShown.set(false);
             showPopupDialog(DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL);
         }
@@ -531,7 +511,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
                 showPopupDialog(DialogEnums.ENABLE_WARNING_FROM_TOGGLE);
             } else {
                 handleConfirmServiceEnabled(/* confirmed= */ true);
-                if (isServiceSupportAccessibilityButton()) {
+                if (serviceSupportsAccessibilityButton()) {
                     showPopupDialog(DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL);
                 }
             }

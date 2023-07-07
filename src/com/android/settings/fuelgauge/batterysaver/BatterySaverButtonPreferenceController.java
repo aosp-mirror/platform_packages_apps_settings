@@ -16,15 +16,15 @@
 
 package com.android.settings.fuelgauge.batterysaver;
 
+import static com.android.settingslib.fuelgauge.BatterySaverLogging.SAVER_ENABLED_SETTINGS;
+
 import android.content.ContentResolver;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.PowerManager;
-import android.provider.Settings;
 import android.provider.SettingsSlicesContract;
-import android.widget.Switch;
 
 import androidx.preference.PreferenceScreen;
 
@@ -36,15 +36,13 @@ import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 import com.android.settingslib.fuelgauge.BatterySaverUtils;
 import com.android.settingslib.widget.MainSwitchPreference;
-import com.android.settingslib.widget.OnMainSwitchChangeListener;
-
 
 /**
  * Controller to update the battery saver button
  */
 public class BatterySaverButtonPreferenceController extends
-        TogglePreferenceController implements OnMainSwitchChangeListener, LifecycleObserver,
-        OnStart, OnStop, BatterySaverReceiver.BatterySaverListener {
+        TogglePreferenceController implements LifecycleObserver, OnStart, OnStop,
+        BatterySaverReceiver.BatterySaverListener {
     private static final long SWITCH_ANIMATION_DURATION = 350L;
 
     private final BatterySaverReceiver mBatterySaverReceiver;
@@ -96,18 +94,7 @@ public class BatterySaverButtonPreferenceController extends
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = screen.findPreference(getPreferenceKey());
-        mPreference.addOnSwitchChangeListener(this);
         mPreference.updateStatus(isChecked());
-    }
-
-    @Override
-    public void onSwitchChanged(Switch switchView, boolean isChecked) {
-        // Cancel preference's check state once it's first time launch
-        if (isChecked && (Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.LOW_POWER_WARNING_ACKNOWLEDGED, 0) == 0)) {
-            mPreference.setChecked(false);
-        }
-        setChecked(isChecked);
     }
 
     @Override
@@ -118,7 +105,7 @@ public class BatterySaverButtonPreferenceController extends
     @Override
     public boolean setChecked(boolean stateOn) {
         return BatterySaverUtils.setPowerSaveMode(mContext, stateOn,
-                true /* needFirstTimeWarning */);
+                false /* needFirstTimeWarning */, SAVER_ENABLED_SETTINGS);
     }
 
     @Override

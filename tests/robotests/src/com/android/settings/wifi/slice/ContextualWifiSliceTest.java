@@ -103,6 +103,7 @@ public class ContextualWifiSliceTest {
                 mContext.getString(R.string.config_settingsintelligence_package_name);
         ShadowBinder.setCallingUid(1);
         when(mPackageManager.getPackagesForUid(1)).thenReturn(new String[]{siPackageName});
+        when(mPackageManager.getNameForUid(1)).thenReturn(siPackageName);
         ShadowWifiSlice.setWifiPermissible(true);
         mWifiSlice = new ContextualWifiSlice(mContext);
     }
