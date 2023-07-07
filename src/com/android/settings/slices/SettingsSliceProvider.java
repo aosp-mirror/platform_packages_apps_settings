@@ -17,8 +17,10 @@
 package com.android.settings.slices;
 
 import static android.Manifest.permission.READ_SEARCH_INDEXABLES;
+import static android.app.slice.Slice.HINT_PARTIAL;
 
 import android.app.PendingIntent;
+import android.app.settings.SettingsEnums;
 import android.app.slice.SliceManager;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -161,6 +163,13 @@ public class SettingsSliceProvider extends SliceProvider {
             Log.d(TAG, "onSlicePinned: " + sliceUri);
             mFirstSlicePinned = true;
         }
+        FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider()
+                .action(SettingsEnums.PAGE_UNKNOWN,
+                        SettingsEnums.ACTION_SETTINGS_SLICE_REQUESTED,
+                        SettingsEnums.PAGE_UNKNOWN,
+                        sliceUri.getLastPathSegment(),
+                        0);
+
         if (CustomSliceRegistry.isValidUri(sliceUri)) {
             final Context context = getContext();
             final CustomSliceable sliceable = FeatureFactory.getFactory(context)
@@ -187,6 +196,7 @@ public class SettingsSliceProvider extends SliceProvider {
 
     @Override
     public void onSliceUnpinned(Uri sliceUri) {
+        mSliceWeakDataCache.remove(sliceUri);
         final Context context = getContext();
         if (!VolumeSliceHelper.unregisterUri(context, sliceUri)) {
             SliceBroadcastRelay.unregisterReceivers(context, sliceUri);
@@ -257,11 +267,6 @@ public class SettingsSliceProvider extends SliceProvider {
             if (cachedSliceData == null) {
                 loadSliceInBackground(sliceUri);
                 return getSliceStub(sliceUri);
-            }
-
-            // Remove the SliceData from the cache after it has been used to prevent a memory-leak.
-            if (!getPinnedSlices().contains(sliceUri)) {
-                mSliceWeakDataCache.remove(sliceUri);
             }
             return SliceBuilderUtils.buildSlice(getContext(), cachedSliceData);
         } finally {
@@ -388,6 +393,10 @@ public class SettingsSliceProvider extends SliceProvider {
 
     @VisibleForTesting
     void loadSlice(Uri uri) {
+        if (mSliceWeakDataCache.containsKey(uri)) {
+            Log.d(TAG, uri + " loaded from cache");
+            return;
+        }
         long startBuildTime = System.currentTimeMillis();
 
         final SliceData sliceData;
@@ -504,7 +513,7 @@ public class SettingsSliceProvider extends SliceProvider {
      */
     private static Slice getSliceStub(Uri uri) {
         // TODO: Switch back to ListBuilder when slice loading states are fixed.
-        return new Slice.Builder(uri).build();
+        return new Slice.Builder(uri).addHints(HINT_PARTIAL).build();
     }
 
     private static String[] parseStringArray(String value) {

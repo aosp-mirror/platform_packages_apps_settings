@@ -22,6 +22,7 @@ import static android.provider.Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFIC
 
 import android.app.KeyguardManager;
 import android.content.Context;
+import android.content.pm.UserInfo;
 import android.database.ContentObserver;
 import android.os.Handler;
 import android.os.Looper;
@@ -41,6 +42,8 @@ import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
+
+import java.util.List;
 
 /**
  * The controller of the sensitive notifications.
@@ -74,11 +77,13 @@ public class RedactNotificationPreferenceController extends TogglePreferenceCont
         mKm = context.getSystemService(KeyguardManager.class);
 
         mProfileUserId = UserHandle.myUserId();
-        final int[] profileIds = mUm.getProfileIdsWithDisabled(UserHandle.myUserId());
-
-        for (int profileId : profileIds) {
-            if (profileId != UserHandle.myUserId()) {
-                mProfileUserId = profileId;
+        final List<UserInfo> profiles = mUm.getProfiles(UserHandle.myUserId());
+        final int count = profiles.size();
+        for (int i = 0; i < count; i++) {
+            final UserInfo profile = profiles.get(i);
+            if (profile.isManagedProfile()
+                    && profile.getUserHandle().getIdentifier() !=  UserHandle.myUserId()) {
+                mProfileUserId = profile.getUserHandle().getIdentifier();
             }
         }
     }

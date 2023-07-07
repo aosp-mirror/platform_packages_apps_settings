@@ -20,6 +20,7 @@ import android.content.Context;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settingslib.utils.StringUtil;
 
 public class ConversationListSummaryPreferenceController extends BasePreferenceController {
 
@@ -41,9 +42,8 @@ public class ConversationListSummaryPreferenceController extends BasePreferenceC
         if (count == 0) {
             return mContext.getText(R.string.priority_conversation_count_zero);
         }
-        return mContext.getResources().getQuantityString(
-                R.plurals.priority_conversation_count,
-                count, count);
+        return StringUtil.getIcuPluralsString(mContext, count,
+                R.string.priority_conversation_count);
     }
 
     void setBackend(NotificationBackend backend) {

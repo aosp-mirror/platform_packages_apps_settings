@@ -19,6 +19,7 @@ package com.android.settings.accounts;
 
 import android.accounts.Account;
 import android.accounts.AuthenticatorDescription;
+import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -164,6 +165,9 @@ public class AccountTypePreferenceLoader {
                                  * exploiting the fact that settings has system privileges.
                                  */
                             if (isSafeIntent(pm, prefIntent, acccountType)) {
+                                // Explicitly set an empty ClipData to ensure that we don't offer to
+                                // promote any Uris contained inside for granting purposes
+                                prefIntent.setClipData(ClipData.newPlainText(null, null));
                                 mFragment.getActivity().startActivityAsUser(
                                     prefIntent, mUserHandle);
                             } else {

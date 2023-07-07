@@ -25,6 +25,11 @@ import android.content.Intent;
 import android.content.IntentSender;
 import android.os.RemoteException;
 import android.os.UserManager;
+import android.view.View;
+import android.view.WindowInsets;
+import android.view.WindowInsetsController;
+
+import androidx.annotation.NonNull;
 
 import com.android.internal.widget.LockPatternUtils;
 
@@ -47,7 +52,12 @@ public class ConfirmDeviceCredentialUtils {
         IntentSender intentSender = activity.getIntent().getParcelableExtra(Intent.EXTRA_INTENT);
         if (intentSender != null) {
             try {
-                activity.startIntentSenderForResult(intentSender, -1, null, 0, 0, 0);
+                ActivityOptions activityOptions =
+                        ActivityOptions.makeBasic()
+                                .setPendingIntentBackgroundActivityStartMode(
+                                        ActivityOptions.MODE_BACKGROUND_ACTIVITY_START_ALLOWED);
+                activity.startIntentSenderForResult(intentSender, -1, null, 0, 0, 0,
+                        activityOptions.toBundle());
             } catch (IntentSender.SendIntentException e) {
                 /* ignore */
             }
@@ -65,6 +75,18 @@ public class ConfirmDeviceCredentialUtils {
             // Keyguard is responsible to disable StrongAuth for primary user. Disable StrongAuth
             // for work challenge only here.
             utils.userPresent(userId);
+        }
+    }
+
+    /**
+     * Request hiding soft-keyboard before animating away credential UI, in case IME
+     * insets animation get delayed by dismissing animation.
+     * @param view used to get root {@link WindowInsets} and {@link WindowInsetsController}.
+     */
+    public static void hideImeImmediately(@NonNull View view) {
+        if (view.isAttachedToWindow()
+                && view.getRootWindowInsets().isVisible(WindowInsets.Type.ime())) {
+            view.getWindowInsetsController().hide(WindowInsets.Type.ime());
         }
     }
 }

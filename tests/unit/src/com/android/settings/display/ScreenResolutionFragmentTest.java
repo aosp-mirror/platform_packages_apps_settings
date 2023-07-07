@@ -27,73 +27,78 @@ import android.view.Display;
 
 import androidx.test.annotation.UiThreadTest;
 import androidx.test.core.app.ApplicationProvider;
-import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
-@RunWith(AndroidJUnit4.class)
 public class ScreenResolutionFragmentTest {
 
     private Context mContext;
     private ScreenResolutionFragment mFragment;
-
-    private static final int FHD_WIDTH = 1080;
-    private static final int QHD_WIDTH = 1440;
+    private ScreenResolutionController mController;
+    private int mHighWidth;
+    private int mFullWidth;
 
     @Before
     @UiThreadTest
     public void setup() {
         mContext = spy(ApplicationProvider.getApplicationContext());
         mFragment = spy(new ScreenResolutionFragment());
+        mController = spy(new ScreenResolutionController(mContext, "test"));
+        mHighWidth = mController.getHighWidth();
+        mFullWidth = mController.getFullWidth();
     }
 
     @Test
     @UiThreadTest
-    public void getDefaultKey_FHD() {
-        Display.Mode mode = new Display.Mode(0, FHD_WIDTH, 0, 0);
+    public void getDefaultKey_highResolution() {
+        Display.Mode mode = new Display.Mode(0, mHighWidth, 0, 0);
         doReturn(mode).when(mFragment).getDisplayMode();
+        doReturn(mContext).when(mFragment).getContext();
 
         mFragment.onAttach(mContext);
-        assertThat(mFragment.getDefaultKey()).isEqualTo(mFragment.getKeyForResolution(FHD_WIDTH));
+        assertThat(mFragment.getDefaultKey()).isEqualTo(mFragment.getKeyForResolution(mHighWidth));
     }
 
     @Test
     @UiThreadTest
-    public void getDefaultKey_QHD() {
-        Display.Mode mode = new Display.Mode(0, QHD_WIDTH, 0, 0);
+    public void getDefaultKey_fullResolution() {
+        Display.Mode mode = new Display.Mode(0, mFullWidth, 0, 0);
         doReturn(mode).when(mFragment).getDisplayMode();
+        doReturn(mContext).when(mFragment).getContext();
 
         mFragment.onAttach(mContext);
-        assertThat(mFragment.getDefaultKey()).isEqualTo(mFragment.getKeyForResolution(QHD_WIDTH));
+        assertThat(mFragment.getDefaultKey()).isEqualTo(mFragment.getKeyForResolution(mFullWidth));
     }
 
     @Test
     @UiThreadTest
-    public void setDefaultKey_FHD() {
+    public void setDefaultKey_highResolution() {
+        doReturn(mContext).when(mFragment).getContext();
         mFragment.onAttach(mContext);
 
-        mFragment.setDefaultKey(mFragment.getKeyForResolution(FHD_WIDTH));
+        mFragment.setDefaultKey(mFragment.getKeyForResolution(mHighWidth));
 
-        verify(mFragment).setDisplayMode(FHD_WIDTH);
+        verify(mFragment).setDisplayMode(mHighWidth);
     }
 
     @Test
     @UiThreadTest
-    public void setDefaultKey_QHD() {
+    public void setDefaultKey_fullResolution() {
+        doReturn(mContext).when(mFragment).getContext();
         mFragment.onAttach(mContext);
 
-        mFragment.setDefaultKey(mFragment.getKeyForResolution(QHD_WIDTH));
+        mFragment.setDefaultKey(mFragment.getKeyForResolution(mFullWidth));
 
-        verify(mFragment).setDisplayMode(QHD_WIDTH);
+        verify(mFragment).setDisplayMode(mFullWidth);
     }
 
     @Test
     @UiThreadTest
     public void bindPreferenceExtra_setSummary() {
+        doReturn(mContext).when(mFragment).getContext();
         mFragment.onAttach(mContext);
         SelectorWithWidgetPreference preference = new SelectorWithWidgetPreference(mContext);
         ScreenResolutionFragment.ScreenResolutionCandidateInfo candidates =

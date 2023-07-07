@@ -58,19 +58,15 @@ public class PreUpgradePreferenceController extends BasePreferenceController {
 
     @Override
     public int getAvailabilityStatus() {
-        if (mNm.isNotificationListenerAccessGranted(mCn)) {
-            mNlf = mNm.getListenerFilter(mCn, mUserId);
+        mNlf = mNm.getListenerFilter(mCn, mUserId);
 
-            if (mTargetSdk > Build.VERSION_CODES.S) {
-                return CONDITIONALLY_UNAVAILABLE;
-            }
-
-            if (!mNlf.areAllTypesAllowed() || !mNlf.getDisallowedPackages().isEmpty()) {
-                return CONDITIONALLY_UNAVAILABLE;
-            }
-            return AVAILABLE;
-        } else {
+        if (mTargetSdk > Build.VERSION_CODES.S) {
             return CONDITIONALLY_UNAVAILABLE;
         }
+
+        if (!mNlf.areAllTypesAllowed() || !mNlf.getDisallowedPackages().isEmpty()) {
+            return CONDITIONALLY_UNAVAILABLE;
+        }
+        return AVAILABLE;
     }
 }

@@ -18,6 +18,7 @@ package com.android.settings.applications.defaultapps;
 
 import static com.android.settingslib.widget.TwoTargetPreference.ICON_SIZE_MEDIUM;
 
+import android.annotation.Nullable;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -65,16 +66,21 @@ public abstract class DefaultAppPreferenceController extends AbstractPreferenceC
             ((TwoTargetPreference) preference).setIconSize(ICON_SIZE_MEDIUM);
         }
         if (!TextUtils.isEmpty(defaultAppLabel)) {
-            if (showLabelAsTitle()) {
+            if (showLabelAsTitle() && showAppSummary()) {
+                preference.setTitle(defaultAppLabel);
+                preference.setSummary(getDefaultAppSummary());
+            } else if (showLabelAsTitle()) {
                 preference.setTitle(defaultAppLabel);
             } else {
                 preference.setSummary(defaultAppLabel);
             }
+
             preference.setIcon(Utils.getSafeIcon(getDefaultAppIcon()));
         } else {
             Log.d(TAG, "No default app");
             if (showLabelAsTitle()) {
                 preference.setTitle(R.string.app_list_preference_none);
+                preference.setSummary(null);
             } else {
                 preference.setSummary(R.string.app_list_preference_none);
             }
@@ -89,8 +95,7 @@ public abstract class DefaultAppPreferenceController extends AbstractPreferenceC
         }
         final Intent settingIntent = getSettingIntent(app);
         if (settingIntent != null) {
-            ((GearPreference) preference).setOnGearClickListener(
-                    p -> startActivity(settingIntent));
+            ((GearPreference) preference).setOnGearClickListener(p -> startActivity(settingIntent));
         } else {
             ((GearPreference) preference).setOnGearClickListener(null);
         }
@@ -102,18 +107,19 @@ public abstract class DefaultAppPreferenceController extends AbstractPreferenceC
 
     protected abstract DefaultAppInfo getDefaultAppInfo();
 
-    /**
-     * Returns an optional intent that will be launched when clicking "gear" icon.
-     */
+    /** Returns an optional intent that will be launched when clicking "gear" icon. */
     protected Intent getSettingIntent(DefaultAppInfo info) {
-        //By default return null. It's up to subclasses to provide logic.
+        // By default return null. It's up to subclasses to provide logic.
         return null;
     }
 
-    /**
-     * Whether to show the default app label as the title, instead of as the summary.
-     */
+    /** Whether to show the default app label as the title, instead of as the summary. */
     protected boolean showLabelAsTitle() {
+        return false;
+    }
+
+    /** Whether to show the app summary. */
+    protected boolean showAppSummary() {
         return false;
     }
 
@@ -135,6 +141,17 @@ public abstract class DefaultAppPreferenceController extends AbstractPreferenceC
         final DefaultAppInfo app = getDefaultAppInfo();
         if (app != null) {
             return app.loadLabel();
+        }
+        return null;
+    }
+
+    private @Nullable CharSequence getDefaultAppSummary() {
+        if (!isAvailable()) {
+            return null;
+        }
+        final DefaultAppInfo app = getDefaultAppInfo();
+        if (app != null) {
+            return app.getSummary();
         }
         return null;
     }
