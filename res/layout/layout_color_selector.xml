@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (C) 2023 The Android Open Source Project
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/color_selector_root_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="?android:attr/listPreferredItemHeight"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/color_radio_button_00"
+            android:layout_width="@dimen/screen_flash_color_button_frame_size"
+            android:layout_height="@dimen/screen_flash_color_button_frame_size"
+            android:button="@drawable/screen_flash_color_01_selector"
+            android:contentDescription="@string/screen_flash_color_blue" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <RadioButton
+            android:id="@+id/color_radio_button_01"
+            android:layout_width="@dimen/screen_flash_color_button_frame_size"
+            android:layout_height="@dimen/screen_flash_color_button_frame_size"
+            android:button="@drawable/screen_flash_color_02_selector"
+            android:contentDescription="@string/screen_flash_color_azure" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <RadioButton
+            android:id="@+id/color_radio_button_02"
+            android:layout_width="@dimen/screen_flash_color_button_frame_size"
+            android:layout_height="@dimen/screen_flash_color_button_frame_size"
+            android:button="@drawable/screen_flash_color_03_selector"
+            android:contentDescription="@string/screen_flash_color_cyan" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <RadioButton
+            android:id="@+id/color_radio_button_03"
+            android:layout_width="@dimen/screen_flash_color_button_frame_size"
+            android:layout_height="@dimen/screen_flash_color_button_frame_size"
+            android:button="@drawable/screen_flash_color_04_selector"
+            android:contentDescription="@string/screen_flash_color_spring_green" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/color_radio_button_04"
+            android:layout_width="@dimen/screen_flash_color_button_frame_size"
+            android:layout_height="@dimen/screen_flash_color_button_frame_size"
+            android:button="@drawable/screen_flash_color_05_selector"
+            android:contentDescription="@string/screen_flash_color_green" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <RadioButton
+            android:id="@+id/color_radio_button_05"
+            android:layout_width="@dimen/screen_flash_color_button_frame_size"
+            android:layout_height="@dimen/screen_flash_color_button_frame_size"
+            android:button="@drawable/screen_flash_color_06_selector"
+            android:contentDescription="@string/screen_flash_color_chartreuse_green" />
+
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+        <RadioButton
+            android:id="@+id/color_radio_button_06"
+            android:layout_width="@dimen/screen_flash_color_button_frame_size"
+            android:layout_height="@dimen/screen_flash_color_button_frame_size"
+            android:button="@drawable/screen_flash_color_07_selector"
+            android:contentDescription="@string/screen_flash_color_yellow" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <RadioButton
+            android:id="@+id/color_radio_button_07"
+            android:layout_width="@dimen/screen_flash_color_button_frame_size"
+            android:layout_height="@dimen/screen_flash_color_button_frame_size"
+            android:button="@drawable/screen_flash_color_08_selector"
+            android:contentDescription="@string/screen_flash_color_orange" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/color_radio_button_08"
+            android:layout_width="@dimen/screen_flash_color_button_frame_size"
+            android:layout_height="@dimen/screen_flash_color_button_frame_size"
+            android:button="@drawable/screen_flash_color_09_selector"
+            android:contentDescription="@string/screen_flash_color_red" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <RadioButton
+            android:id="@+id/color_radio_button_09"
+            android:layout_width="@dimen/screen_flash_color_button_frame_size"
+            android:layout_height="@dimen/screen_flash_color_button_frame_size"
+            android:button="@drawable/screen_flash_color_10_selector"
+            android:contentDescription="@string/screen_flash_color_rose" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <RadioButton
+            android:id="@+id/color_radio_button_10"
+            android:layout_width="@dimen/screen_flash_color_button_frame_size"
+            android:layout_height="@dimen/screen_flash_color_button_frame_size"
+            android:button="@drawable/screen_flash_color_11_selector"
+            android:contentDescription="@string/screen_flash_color_magenta" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <RadioButton
+            android:id="@+id/color_radio_button_11"
+            android:layout_width="@dimen/screen_flash_color_button_frame_size"
+            android:layout_height="@dimen/screen_flash_color_button_frame_size"
+            android:button="@drawable/screen_flash_color_12_selector"
+            android:contentDescription="@string/screen_flash_color_violet" />
+
+    </LinearLayout>
+</LinearLayout>

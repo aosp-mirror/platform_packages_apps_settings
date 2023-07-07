@@ -32,12 +32,15 @@ public class WhenToDreamPicker extends RadioButtonPickerFragment {
 
     private static final String TAG = "WhenToDreamPicker";
     private DreamBackend mBackend;
+    private boolean mDreamsSupportedOnBattery;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
 
         mBackend = DreamBackend.getInstance(context);
+        mDreamsSupportedOnBattery = getResources().getBoolean(
+                com.android.internal.R.bool.config_dreamsEnabledOnBattery);
     }
 
     @Override
@@ -69,11 +72,17 @@ public class WhenToDreamPicker extends RadioButtonPickerFragment {
     }
 
     private String[] entries() {
-        return getResources().getStringArray(R.array.when_to_start_screensaver_entries);
+        if (mDreamsSupportedOnBattery) {
+            return getResources().getStringArray(R.array.when_to_start_screensaver_entries);
+        }
+        return getResources().getStringArray(R.array.when_to_start_screensaver_entries_no_battery);
     }
 
     private String[] keys() {
-        return getResources().getStringArray(R.array.when_to_start_screensaver_values);
+        if (mDreamsSupportedOnBattery) {
+            return getResources().getStringArray(R.array.when_to_start_screensaver_values);
+        }
+        return getResources().getStringArray(R.array.when_to_start_screensaver_values_no_battery);
     }
 
     @Override

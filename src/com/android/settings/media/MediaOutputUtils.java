@@ -64,7 +64,9 @@ public class MediaOutputUtils {
                         + ", play back type : " + pi.getPlaybackType() + ", play back state : "
                         + playbackState.getState());
             }
-            if (playbackState.getState() != PlaybackState.STATE_PLAYING) {
+            if (playbackState.getState() == PlaybackState.STATE_STOPPED
+                    || playbackState.getState() == PlaybackState.STATE_NONE
+                    || playbackState.getState() == PlaybackState.STATE_ERROR) {
                 // do nothing
                 continue;
             }

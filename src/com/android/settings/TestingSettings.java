@@ -17,25 +17,39 @@
 package com.android.settings;
 
 import android.app.settings.SettingsEnums;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.UserManager;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceScreen;
+
+import com.android.settings.network.telephony.MobileNetworkUtils;
 
 public class TestingSettings extends SettingsPreferenceFragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
+
         addPreferencesFromResource(R.xml.testing_settings);
 
-        final UserManager um = UserManager.get(getContext());
-        if (!um.isAdminUser()) {
+        if (!isRadioInfoVisible(getContext())) {
             PreferenceScreen preferenceScreen = (PreferenceScreen)
                     findPreference("radio_info_settings");
             getPreferenceScreen().removePreference(preferenceScreen);
         }
+    }
+
+    @VisibleForTesting
+    protected boolean isRadioInfoVisible(Context context) {
+        UserManager um = context.getSystemService(UserManager.class);
+        if (um != null) {
+            if (!um.isAdminUser()) {
+                return false;
+            }
+        }
+        return !MobileNetworkUtils.isMobileNetworkUserRestricted(context);
     }
 
     @Override

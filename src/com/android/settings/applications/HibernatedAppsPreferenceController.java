@@ -21,6 +21,7 @@ import static android.provider.DeviceConfig.NAMESPACE_APP_HIBERNATION;
 import static com.android.settings.Utils.PROPERTY_APP_HIBERNATION_ENABLED;
 
 import android.content.Context;
+import android.icu.text.MessageFormat;
 import android.permission.PermissionControllerManager;
 import android.provider.DeviceConfig;
 
@@ -35,6 +36,9 @@ import com.android.settings.core.BasePreferenceController;
 
 import com.google.common.annotations.VisibleForTesting;
 
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 import java.util.concurrent.Executor;
 
 /**
@@ -67,9 +71,13 @@ public final class HibernatedAppsPreferenceController extends BasePreferenceCont
 
     @Override
     public CharSequence getSummary() {
+        MessageFormat msgFormat = new MessageFormat(
+                mContext.getResources().getString(R.string.unused_apps_summary),
+                Locale.getDefault());
+        Map<String, Object> arguments = new HashMap<>();
+        arguments.put("count", mUnusedCount);
         return mLoadedUnusedCount
-                ? mContext.getResources().getQuantityString(
-                        R.plurals.unused_apps_summary, mUnusedCount, mUnusedCount)
+                ? msgFormat.format(arguments)
                 : mContext.getResources().getString(R.string.summary_placeholder);
     }
 

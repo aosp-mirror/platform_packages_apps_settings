@@ -16,13 +16,15 @@
 
 package com.android.settings.password;
 
+import static com.android.internal.widget.LockPatternUtils.CREDENTIAL_TYPE_PASSWORD;
+import static com.android.internal.widget.LockPatternUtils.CREDENTIAL_TYPE_PIN;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 
 import androidx.annotation.Nullable;
@@ -31,6 +33,8 @@ import androidx.fragment.app.Fragment;
 import com.android.settings.R;
 import com.android.settings.SetupRedactionInterstitial;
 import com.android.settings.password.ChooseLockTypeDialogFragment.OnLockTypeSelectedListener;
+
+import com.google.android.setupcompat.util.WizardManagerHelper;
 
 /**
  * Setup Wizard's version of ChooseLockPassword screen. It inherits the logic and basic structure
@@ -114,16 +118,15 @@ public class SetupChooseLockPassword extends ChooseLockPassword {
                 final boolean forBiometrics = intent
                         .getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_BIOMETRICS, false);
                 final SetupSkipDialog dialog = SetupSkipDialog.newInstance(
+                        mIsAlphaMode ? CREDENTIAL_TYPE_PASSWORD : CREDENTIAL_TYPE_PIN,
                         frpSupported,
-                        /* isPatternMode= */ false,
-                        mIsAlphaMode,
                         forFingerprint,
                         forFace,
-                        forBiometrics);
+                        forBiometrics,
+                        WizardManagerHelper.isAnySetupWizard(intent));
 
-                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(
-                        Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                ConfirmDeviceCredentialUtils.hideImeImmediately(
+                        getActivity().getWindow().getDecorView());
 
                 dialog.show(getFragmentManager());
                 return;
@@ -171,6 +174,12 @@ public class SetupChooseLockPassword extends ChooseLockPassword {
             if (mOptionsButton != null) {
                 mOptionsButton.setVisibility(
                         mUiStage == Stage.Introduction ? View.VISIBLE : View.GONE);
+            }
+
+            // Visibility of auto pin confirm opt-in/out option should always be invisible.
+            if (mAutoPinConfirmOption != null) {
+                mAutoPinConfirmOption.setVisibility(View.GONE);
+                mAutoConfirmSecurityMessage.setVisibility(View.GONE);
             }
         }
     }

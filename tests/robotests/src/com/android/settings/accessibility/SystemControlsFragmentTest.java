@@ -18,24 +18,52 @@ package com.android.settings.accessibility;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
 import com.android.settings.testutils.XmlTestUtils;
+import com.android.settings.testutils.shadow.ShadowKeyCharacterMap;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 import java.util.List;
 
 /** Tests for {@link SystemControlsFragment}. */
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowKeyCharacterMap.class})
 public class SystemControlsFragmentTest {
 
-    private Context mContext = ApplicationProvider.getApplicationContext();
+    private final Context mContext = ApplicationProvider.getApplicationContext();
+    private SystemControlsFragment mFragment;
+
+    @Before
+    public void setUp() {
+        mFragment = new SystemControlsFragment();
+    }
+
+    @Test
+    public void getMetricsCategory_returnsCorrectCategory() {
+        assertThat(mFragment.getMetricsCategory()).isEqualTo(
+                SettingsEnums.ACCESSIBILITY_SYSTEM_CONTROLS);
+    }
+
+    @Test
+    public void getPreferenceScreenResId_returnsCorrectXml() {
+        assertThat(mFragment.getPreferenceScreenResId()).isEqualTo(
+                R.xml.accessibility_system_controls);
+    }
+
+    @Test
+    public void getLogTag_returnsCorrectTag() {
+        assertThat(mFragment.getLogTag()).isEqualTo("SystemControlsFragment");
+    }
 
     @Test
     public void getNonIndexableKeys_existInXmlLayout() {

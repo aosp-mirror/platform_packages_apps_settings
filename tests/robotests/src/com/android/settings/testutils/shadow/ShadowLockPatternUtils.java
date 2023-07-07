@@ -16,9 +16,13 @@
 
 package com.android.settings.testutils.shadow;
 
+import android.annotation.NonNull;
+import android.annotation.Nullable;
 import android.app.admin.DevicePolicyManager;
 import android.app.admin.PasswordMetrics;
 import android.content.ComponentName;
+import android.content.Context;
+import android.content.pm.UserInfo;
 import android.os.UserHandle;
 
 import com.android.internal.widget.LockPatternUtils;
@@ -36,20 +40,33 @@ import java.util.Map;
 public class ShadowLockPatternUtils {
 
     private static boolean sDeviceEncryptionEnabled;
+    private static Map<Integer, Integer> sUserToActivePasswordQualityMap = new HashMap<>();
     private static Map<Integer, Integer> sUserToComplexityMap = new HashMap<>();
     private static Map<Integer, Integer> sUserToProfileComplexityMap = new HashMap<>();
     private static Map<Integer, PasswordMetrics> sUserToMetricsMap = new HashMap<>();
     private static Map<Integer, PasswordMetrics> sUserToProfileMetricsMap = new HashMap<>();
     private static Map<Integer, Boolean> sUserToIsSecureMap = new HashMap<>();
+    private static Map<Integer, Boolean> sUserToPatternEverChosenMap = new HashMap<>();
+    private static Map<Integer, Boolean> sUserToVisiblePatternEnabledMap = new HashMap<>();
+    private static Map<Integer, Boolean> sUserToBiometricAllowedMap = new HashMap<>();
+    private static Map<Integer, Boolean> sUserToLockPatternEnabledMap = new HashMap<>();
+
+    private static boolean sIsUserOwnsFrpCredential;
 
     @Resetter
     public static void reset() {
+        sUserToActivePasswordQualityMap.clear();
         sUserToComplexityMap.clear();
         sUserToProfileComplexityMap.clear();
         sUserToMetricsMap.clear();
         sUserToProfileMetricsMap.clear();
         sUserToIsSecureMap.clear();
+        sUserToPatternEverChosenMap.clear();
+        sUserToVisiblePatternEnabledMap.clear();
+        sUserToBiometricAllowedMap.clear();
+        sUserToLockPatternEnabledMap.clear();
         sDeviceEncryptionEnabled = false;
+        sIsUserOwnsFrpCredential = false;
     }
 
     @Implementation
@@ -72,7 +89,11 @@ public class ShadowLockPatternUtils {
 
     @Implementation
     protected int getActivePasswordQuality(int userId) {
-        return DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
+        final Integer activePasswordQuality = sUserToActivePasswordQualityMap.get(userId);
+        if (activePasswordQuality == null) {
+            return DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
+        }
+        return activePasswordQuality;
     }
 
     @Implementation
@@ -122,6 +143,65 @@ public class ShadowLockPatternUtils {
         return complexity;
     }
 
+    @Implementation
+    public static boolean userOwnsFrpCredential(Context context, UserInfo info) {
+        return sIsUserOwnsFrpCredential;
+    }
+
+    public static void setUserOwnsFrpCredential(boolean isUserOwnsFrpCredential) {
+        sIsUserOwnsFrpCredential = isUserOwnsFrpCredential;
+    }
+
+    @Implementation
+    public boolean isVisiblePatternEnabled(int userId) {
+        return sUserToVisiblePatternEnabledMap.getOrDefault(userId, false);
+    }
+
+    public static void setIsVisiblePatternEnabled(int userId, boolean isVisiblePatternEnabled) {
+        sUserToVisiblePatternEnabledMap.put(userId, isVisiblePatternEnabled);
+    }
+
+    @Implementation
+    public boolean isPatternEverChosen(int userId) {
+        return sUserToPatternEverChosenMap.getOrDefault(userId, true);
+    }
+
+    public static void setIsPatternEverChosen(int userId, boolean isPatternEverChosen) {
+        sUserToPatternEverChosenMap.put(userId, isPatternEverChosen);
+    }
+
+    @Implementation
+    public boolean isBiometricAllowedForUser(int userId) {
+        return sUserToBiometricAllowedMap.getOrDefault(userId, false);
+    }
+
+    public static void setIsBiometricAllowedForUser(int userId, boolean isBiometricAllowed) {
+        sUserToBiometricAllowedMap.put(userId, isBiometricAllowed);
+    }
+
+    @Implementation
+    public boolean isLockPatternEnabled(int userId) {
+        return sUserToBiometricAllowedMap.getOrDefault(userId, false);
+    }
+
+    public static void setIsLockPatternEnabled(int userId, boolean isLockPatternEnabled) {
+        sUserToLockPatternEnabledMap.put(userId, isLockPatternEnabled);
+    }
+
+    @Implementation
+    public boolean setLockCredential(@NonNull LockscreenCredential newCredential,
+            @NonNull LockscreenCredential savedCredential, int userHandle) {
+        setIsSecure(userHandle, true);
+        return true;
+    }
+
+    @Implementation
+    public boolean checkCredential(@NonNull LockscreenCredential credential, int userId,
+            @Nullable LockPatternUtils.CheckCredentialProgressCallback progressCallback)
+            throws LockPatternUtils.RequestThrottledException {
+        return true;
+    }
+
     public static void setRequiredPasswordComplexity(int userHandle, int complexity) {
         sUserToComplexityMap.put(userHandle, complexity);
     }
@@ -151,6 +231,10 @@ public class ShadowLockPatternUtils {
 
     public static void setRequestedProfilePasswordMetrics(PasswordMetrics metrics) {
         sUserToProfileMetricsMap.put(UserHandle.myUserId(), metrics);
+    }
+
+    public static void setActivePasswordQuality(int quality) {
+        sUserToActivePasswordQualityMap.put(UserHandle.myUserId(), quality);
     }
 
     @Implementation

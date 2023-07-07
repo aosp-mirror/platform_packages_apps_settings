@@ -22,7 +22,6 @@ import static android.app.NotificationManager.BUBBLE_PREFERENCE_SELECTED;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
-import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
@@ -31,8 +30,8 @@ import android.widget.TextView;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
+import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settingslib.R;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreferenceHelper;
 
@@ -164,13 +163,14 @@ public class BubblePreference extends Preference implements View.OnClickListener
 
         void setSelected(Context context, boolean selected) {
             mView.setBackground(mContext.getDrawable(selected
-                ? R.drawable.button_border_selected
-                : R.drawable.button_border_unselected));
+                ? R.drawable.notification_importance_button_background_selected
+                : R.drawable.notification_importance_button_background_unselected));
             mView.setSelected(selected);
 
-            ColorStateList stateList = selected
-                    ? Utils.getColorAccent(context)
-                    : Utils.getColorAttr(context, android.R.attr.textColorPrimary);
+            int colorResId = selected
+                    ? R.attr.notification_importance_button_foreground_color_selected
+                    : R.attr.notification_importance_button_foreground_color_unselected;
+            ColorStateList stateList = Utils.getColorAttr(context, colorResId);
             mImageView.setImageTintList(stateList);
             mTextView.setTextColor(stateList);
         }

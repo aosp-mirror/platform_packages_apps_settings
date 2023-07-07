@@ -24,7 +24,10 @@ import android.hardware.fingerprint.FingerprintManager;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.password.ChooseLockSettingsHelper;
+
+import java.util.function.Function;
 
 /**
  * Helper for {@link BiometricEnrollActivity} when multiple sensors exist on a device.
@@ -37,6 +40,7 @@ public class MultiBiometricEnrollHelper {
     private static final int REQUEST_FINGERPRINT_ENROLL = 3001;
 
     public static final String EXTRA_ENROLL_AFTER_FACE = "enroll_after_face";
+    public static final String EXTRA_ENROLL_AFTER_FINGERPRINT = "enroll_after_finger";
     public static final String EXTRA_SKIP_PENDING_ENROLL = "skip_pending_enroll";
 
     @NonNull private final FragmentActivity mActivity;
@@ -44,21 +48,46 @@ public class MultiBiometricEnrollHelper {
     private final int mUserId;
     private final boolean mRequestEnrollFace;
     private final boolean mRequestEnrollFingerprint;
+    private final FingerprintManager mFingerprintManager;
+    private final FaceManager mFaceManager;
+    private final Intent mFingerprintEnrollIntroductionIntent;
+    private final Intent mFaceEnrollIntroductionIntent;
+    private Function<Long, byte[]> mGatekeeperHatSupplier;
 
+    @VisibleForTesting
     MultiBiometricEnrollHelper(@NonNull FragmentActivity activity, int userId,
-            boolean enrollFace, boolean enrollFingerprint, long gkPwHandle) {
+            boolean enrollFace, boolean enrollFingerprint, long gkPwHandle,
+            FingerprintManager fingerprintManager,
+            FaceManager faceManager, Intent fingerprintEnrollIntroductionIntent,
+            Intent faceEnrollIntroductionIntent, Function<Long, byte[]> gatekeeperHatSupplier) {
         mActivity = activity;
         mUserId = userId;
         mGkPwHandle = gkPwHandle;
         mRequestEnrollFace = enrollFace;
         mRequestEnrollFingerprint = enrollFingerprint;
+        mFingerprintManager = fingerprintManager;
+        mFaceManager = faceManager;
+        mFingerprintEnrollIntroductionIntent = fingerprintEnrollIntroductionIntent;
+        mFaceEnrollIntroductionIntent = faceEnrollIntroductionIntent;
+        mGatekeeperHatSupplier = gatekeeperHatSupplier;
+    }
+
+    MultiBiometricEnrollHelper(@NonNull FragmentActivity activity, int userId,
+            boolean enrollFace, boolean enrollFingerprint, long gkPwHandle) {
+        this(activity, userId, enrollFace, enrollFingerprint, gkPwHandle,
+                activity.getSystemService(FingerprintManager.class),
+                activity.getSystemService(FaceManager.class),
+                BiometricUtils.getFingerprintIntroIntent(activity, activity.getIntent()),
+                BiometricUtils.getFaceIntroIntent(activity, activity.getIntent()),
+                (challenge) ->  BiometricUtils.requestGatekeeperHat(activity, gkPwHandle,
+                        userId, challenge));
     }
 
     void startNextStep() {
-        if (mRequestEnrollFace) {
-            launchFaceEnroll();
-        } else if (mRequestEnrollFingerprint) {
+        if (mRequestEnrollFingerprint) {
             launchFingerprintEnroll();
+        } else if (mRequestEnrollFace) {
+            launchFaceEnroll();
         } else {
             mActivity.setResult(BiometricEnrollIntroduction.RESULT_SKIP);
             mActivity.finish();
@@ -66,45 +95,39 @@ public class MultiBiometricEnrollHelper {
     }
 
     private void launchFaceEnroll() {
-        final FaceManager faceManager = mActivity.getSystemService(FaceManager.class);
-        faceManager.generateChallenge(mUserId, (sensorId, userId, challenge) -> {
-            final byte[] hardwareAuthToken = BiometricUtils.requestGatekeeperHat(mActivity,
-                    mGkPwHandle, mUserId, challenge);
-            final Intent faceIntent = BiometricUtils.getFaceIntroIntent(mActivity,
-                    mActivity.getIntent());
-            faceIntent.putExtra(BiometricEnrollBase.EXTRA_KEY_SENSOR_ID, sensorId);
-            faceIntent.putExtra(BiometricEnrollBase.EXTRA_KEY_CHALLENGE, challenge);
-
-            if (mRequestEnrollFingerprint) {
-                // Give FaceEnroll a pendingIntent pointing to fingerprint enrollment, so that it
-                // can be started when user skips or finishes face enrollment. FLAG_UPDATE_CURRENT
-                // ensures it is launched with the most recent values.
-                final Intent fpIntent = BiometricUtils.getFingerprintIntroIntent(mActivity,
-                        mActivity.getIntent());
-                fpIntent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE, mGkPwHandle);
-                final PendingIntent fpAfterFaceIntent = PendingIntent.getActivity(mActivity,
-                        0 /* requestCode */, fpIntent,
-                        PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
-                faceIntent.putExtra(EXTRA_ENROLL_AFTER_FACE, fpAfterFaceIntent);
-            }
-
-            BiometricUtils.launchEnrollForResult(mActivity, faceIntent, REQUEST_FACE_ENROLL,
-                    hardwareAuthToken, mGkPwHandle, mUserId);
+        mFaceManager.generateChallenge(mUserId, (sensorId, userId, challenge) -> {
+            final byte[] hardwareAuthToken = mGatekeeperHatSupplier.apply(challenge);
+            mFaceEnrollIntroductionIntent.putExtra(
+                    BiometricEnrollBase.EXTRA_KEY_SENSOR_ID, sensorId);
+            mFaceEnrollIntroductionIntent.putExtra(
+                    BiometricEnrollBase.EXTRA_KEY_CHALLENGE, challenge);
+            BiometricUtils.launchEnrollForResult(mActivity, mFaceEnrollIntroductionIntent,
+                    REQUEST_FACE_ENROLL, hardwareAuthToken, mGkPwHandle, mUserId);
         });
     }
 
     private void launchFingerprintEnroll() {
-        final FingerprintManager fingerprintManager = mActivity
-                .getSystemService(FingerprintManager.class);
-        fingerprintManager.generateChallenge(mUserId, ((sensorId, userId, challenge) -> {
-            final byte[] hardwareAuthToken = BiometricUtils.requestGatekeeperHat(mActivity,
-                    mGkPwHandle, mUserId, challenge);
-            final Intent intent = BiometricUtils.getFingerprintIntroIntent(mActivity,
-                    mActivity.getIntent());
-            intent.putExtra(BiometricEnrollBase.EXTRA_KEY_SENSOR_ID, sensorId);
-            intent.putExtra(BiometricEnrollBase.EXTRA_KEY_CHALLENGE, challenge);
-            BiometricUtils.launchEnrollForResult(mActivity, intent, REQUEST_FINGERPRINT_ENROLL,
-                    hardwareAuthToken, mGkPwHandle, mUserId);
+        mFingerprintManager.generateChallenge(mUserId, ((sensorId, userId, challenge) -> {
+            final byte[] hardwareAuthToken = mGatekeeperHatSupplier.apply(challenge);
+            mFingerprintEnrollIntroductionIntent.putExtra(
+                    BiometricEnrollBase.EXTRA_KEY_SENSOR_ID, sensorId);
+            mFingerprintEnrollIntroductionIntent.putExtra(
+                    BiometricEnrollBase.EXTRA_KEY_CHALLENGE, challenge);
+            if (mRequestEnrollFace) {
+                // Give FingerprintEnroll a pendingIntent pointing to face enrollment, so that it
+                // can be started when user skips or finishes fingerprint enrollment.
+                // FLAG_UPDATE_CURRENT ensures it is launched with the most recent values.
+                mFaceEnrollIntroductionIntent.putExtra(Intent.EXTRA_USER_ID, mUserId);
+                mFaceEnrollIntroductionIntent.putExtra(
+                        ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE, mGkPwHandle);
+                final PendingIntent faceAfterFp = PendingIntent.getActivity(mActivity,
+                        0 /* requestCode */, mFaceEnrollIntroductionIntent,
+                        PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
+                mFingerprintEnrollIntroductionIntent.putExtra(EXTRA_ENROLL_AFTER_FINGERPRINT,
+                        faceAfterFp);
+            }
+            BiometricUtils.launchEnrollForResult(mActivity, mFingerprintEnrollIntroductionIntent,
+                    REQUEST_FINGERPRINT_ENROLL, hardwareAuthToken, mGkPwHandle, mUserId);
         }));
     }
 }

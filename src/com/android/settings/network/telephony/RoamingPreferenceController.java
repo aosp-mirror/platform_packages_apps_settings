@@ -16,9 +16,11 @@
 
 package com.android.settings.network.telephony;
 
+import static androidx.lifecycle.Lifecycle.Event.ON_START;
+import static androidx.lifecycle.Lifecycle.Event.ON_STOP;
+
 import android.content.Context;
 import android.os.PersistableBundle;
-import android.provider.Settings;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -26,74 +28,70 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.network.GlobalSettingsChangeListener;
+import com.android.settings.network.MobileNetworkRepository;
 import com.android.settingslib.RestrictedSwitchPreference;
-import com.android.settingslib.core.lifecycle.LifecycleObserver;
-import com.android.settingslib.core.lifecycle.events.OnStart;
-import com.android.settingslib.core.lifecycle.events.OnStop;
+import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.mobile.dataservice.MobileNetworkInfoEntity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Preference controller for "Roaming"
  */
 public class RoamingPreferenceController extends TelephonyTogglePreferenceController implements
-        LifecycleObserver, OnStart, OnStop {
-
+        LifecycleObserver, MobileNetworkRepository.MobileNetworkCallback {
     private static final String TAG = "RoamingController";
     private static final String DIALOG_TAG = "MobileDataDialog";
 
     private RestrictedSwitchPreference mSwitchPreference;
     private TelephonyManager mTelephonyManager;
     private CarrierConfigManager mCarrierConfigManager;
-
-    /**
-     * There're 2 listeners both activated at the same time.
-     * For project that access DATA_ROAMING, only first listener is functional.
-     * For project that access "DATA_ROAMING + subId", first listener will be stopped when receiving
-     * any onChange from second listener.
-     */
-    private GlobalSettingsChangeListener mListener;
-    private GlobalSettingsChangeListener mListenerForSubId;
+    protected MobileNetworkRepository mMobileNetworkRepository;
+    protected LifecycleOwner mLifecycleOwner;
+    private List<MobileNetworkInfoEntity> mMobileNetworkInfoEntityList = new ArrayList<>();
 
     @VisibleForTesting
     FragmentManager mFragmentManager;
+    MobileNetworkInfoEntity mMobileNetworkInfoEntity;
 
-    public RoamingPreferenceController(Context context, String key) {
+    public RoamingPreferenceController(Context context, String key, Lifecycle lifecycle,
+            LifecycleOwner lifecycleOwner, int subId) {
         super(context, key);
+        mSubId = subId;
         mCarrierConfigManager = context.getSystemService(CarrierConfigManager.class);
+        mMobileNetworkRepository = MobileNetworkRepository.getInstance(context);
+        mLifecycleOwner = lifecycleOwner;
+        if (lifecycle != null) {
+            lifecycle.addObserver(this);
+        }
     }
 
     @Override
+    public int getAvailabilityStatus() {
+        final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(mSubId);
+        if (carrierConfig != null && carrierConfig.getBoolean(
+                CarrierConfigManager.KEY_FORCE_HOME_NETWORK_BOOL)) {
+            return CONDITIONALLY_UNAVAILABLE;
+        }
+        return AVAILABLE;
+    }
+
+    @OnLifecycleEvent(ON_START)
     public void onStart() {
-        if (mListener == null) {
-            mListener = new GlobalSettingsChangeListener(mContext,
-                    Settings.Global.DATA_ROAMING) {
-                public void onChanged(String field) {
-                    updateState(mSwitchPreference);
-                }
-            };
-        }
-        stopMonitorSubIdSpecific();
-
-        if (mSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-            return;
-        }
-
-        mListenerForSubId = new GlobalSettingsChangeListener(mContext,
-                Settings.Global.DATA_ROAMING + mSubId) {
-            public void onChanged(String field) {
-                stopMonitor();
-                updateState(mSwitchPreference);
-            }
-        };
+        mMobileNetworkRepository.addRegister(mLifecycleOwner, this, mSubId);
+        mMobileNetworkRepository.updateEntity();
     }
 
-    @Override
+    @OnLifecycleEvent(ON_STOP)
     public void onStop() {
-        stopMonitor();
-        stopMonitorSubIdSpecific();
+        mMobileNetworkRepository.removeRegister(this);
     }
 
     @Override
@@ -104,7 +102,7 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
 
     @Override
     public int getAvailabilityStatus(int subId) {
-        return subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID
+        return mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID
                 ? AVAILABLE
                 : AVAILABLE_UNSEARCHABLE;
     }
@@ -125,19 +123,26 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        final RestrictedSwitchPreference switchPreference = (RestrictedSwitchPreference) preference;
-        if (!switchPreference.isDisabledByAdmin()) {
-            switchPreference.setEnabled(mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID);
-            switchPreference.setChecked(isChecked());
+        mSwitchPreference = (RestrictedSwitchPreference) preference;
+        update();
+    }
+
+    private void update() {
+        if (mSwitchPreference == null) {
+            return;
+        }
+        if (!mSwitchPreference.isDisabledByAdmin()) {
+            mSwitchPreference.setEnabled(mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+            mSwitchPreference.setChecked(isChecked());
         }
     }
 
     @VisibleForTesting
     boolean isDialogNeeded() {
-        final boolean isRoamingEnabled = mTelephonyManager.isDataRoamingEnabled();
+        final boolean isRoamingEnabled = mMobileNetworkInfoEntity == null ? false
+                : mMobileNetworkInfoEntity.isDataRoamingEnabled;
         final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(
                 mSubId);
-
         // Need dialog if we need to turn on roaming and the roaming charge indication is allowed
         if (!isRoamingEnabled && (carrierConfig == null || !carrierConfig.getBoolean(
                 CarrierConfigManager.KEY_DISABLE_CHARGE_INDICATION_BOOL))) {
@@ -148,12 +153,14 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
 
     @Override
     public boolean isChecked() {
-        return mTelephonyManager.isDataRoamingEnabled();
+        return mMobileNetworkInfoEntity == null ? false
+                : mMobileNetworkInfoEntity.isDataRoamingEnabled;
     }
 
-    public void init(FragmentManager fragmentManager, int subId) {
+    public void init(FragmentManager fragmentManager, int subId, MobileNetworkInfoEntity entity) {
         mFragmentManager = fragmentManager;
         mSubId = subId;
+        mMobileNetworkInfoEntity = entity;
         mTelephonyManager = mContext.getSystemService(TelephonyManager.class);
         if (mSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             return;
@@ -174,17 +181,31 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
         dialogFragment.show(mFragmentManager, DIALOG_TAG);
     }
 
-    private void stopMonitor() {
-        if (mListener != null) {
-            mListener.close();
-            mListener = null;
-        }
+    @VisibleForTesting
+    public void setMobileNetworkInfoEntity(MobileNetworkInfoEntity mobileNetworkInfoEntity) {
+        mMobileNetworkInfoEntity = mobileNetworkInfoEntity;
     }
 
-    private void stopMonitorSubIdSpecific() {
-        if (mListenerForSubId != null) {
-            mListenerForSubId.close();
-            mListenerForSubId = null;
+    @Override
+    public void onAllMobileNetworkInfoChanged(
+            List<MobileNetworkInfoEntity> mobileNetworkInfoEntityList) {
+        mMobileNetworkInfoEntityList = mobileNetworkInfoEntityList;
+        mMobileNetworkInfoEntityList.forEach(entity -> {
+            if (Integer.parseInt(entity.subId) == mSubId) {
+                mMobileNetworkInfoEntity = entity;
+                update();
+                refreshSummary(mSwitchPreference);
+                return;
+            }
+        });
+    }
+
+    @Override
+    public void onDataRoamingChanged(int subId, boolean enabled) {
+        if (subId != mSubId) {
+            Log.d(TAG, "onDataRoamingChanged - wrong subId : " + subId + " / " + enabled);
+            return;
         }
+        update();
     }
 }
