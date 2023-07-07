@@ -22,6 +22,7 @@ import android.os.SystemProperties;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
+import com.android.settingslib.development.DevelopmentSettingsEnabler;
 
 /**
  * The controller (in the Media transcoding settings) indicating the user's preference to show
@@ -49,7 +50,11 @@ public class TranscodeNotificationPreferenceController extends TogglePreferenceC
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        if (DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(mContext)) {
+            return AVAILABLE;
+        } else {
+            return CONDITIONALLY_UNAVAILABLE;
+        }
     }
 
     @Override

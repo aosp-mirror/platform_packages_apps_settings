@@ -22,7 +22,7 @@ import static android.provider.Settings.EXTRA_DO_NOT_DISTURB_MODE_MINUTES;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
+import android.icu.text.MessageFormat;
 import android.media.AudioManager;
 import android.os.UserHandle;
 import android.provider.Settings.Global;
@@ -34,7 +34,9 @@ import android.util.Log;
 import com.android.settings.R;
 import com.android.settings.utils.VoiceSettingsActivity;
 
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 /**
  * Activity for modifying the Zen mode (Do not disturb) by voice
@@ -87,16 +89,10 @@ public class ZenModeVoiceActivity extends VoiceSettingsActivity {
      */
     private CharSequence getChangeSummary(int mode, int minutes) {
         int indefinite = -1;
-        int byMinute = -1;
-        int byHour = -1;
-        int byTime = -1;
 
         switch (mode) {
             case Global.ZEN_MODE_ALARMS:
                 indefinite = R.string.zen_mode_summary_alarms_only_indefinite;
-                byMinute = R.plurals.zen_mode_summary_alarms_only_by_minute;
-                byHour = R.plurals.zen_mode_summary_alarms_only_by_hour;
-                byTime = R.string.zen_mode_summary_alarms_only_by_time;
                 break;
             case Global.ZEN_MODE_OFF:
                 indefinite = R.string.zen_mode_summary_always;
@@ -111,15 +107,23 @@ public class ZenModeVoiceActivity extends VoiceSettingsActivity {
         String skeleton = DateFormat.is24HourFormat(this, UserHandle.myUserId()) ? "Hm" : "hma";
         String pattern = DateFormat.getBestDateTimePattern(Locale.getDefault(), skeleton);
         CharSequence formattedTime = DateFormat.format(pattern, time);
-        Resources res = getResources();
 
         if (minutes < 60) {
-            return res.getQuantityString(byMinute, minutes, minutes, formattedTime);
+            return buildMessage(R.string.zen_mode_summary_alarms_only_by_minute, minutes, formattedTime);
         } else if (minutes % 60 != 0) {
-            return res.getString(byTime, formattedTime);
+            return getResources().getString(R.string.zen_mode_summary_alarms_only_by_time, formattedTime);
         } else {
             int hours = minutes / 60;
-            return res.getQuantityString(byHour, hours, hours, formattedTime);
+            return buildMessage(R.string.zen_mode_summary_alarms_only_by_hour, hours, formattedTime);
         }
+    }
+
+    private CharSequence buildMessage(int resId, int count, CharSequence formattedTime) {
+        MessageFormat msgFormat = new MessageFormat(
+                getResources().getString(resId), Locale.getDefault());
+        Map<String, Object> arguments = new HashMap<>();
+        arguments.put("count", count);
+        arguments.put("time", formattedTime);
+        return msgFormat.format(arguments);
     }
 }

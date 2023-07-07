@@ -64,7 +64,7 @@ public class LegacySuggestionContextualCardController implements ContextualCardC
             return;
         }
         final ComponentName suggestionServiceComponent =
-                FeatureFactory.getFactory(mContext).getSuggestionFeatureProvider(mContext)
+                FeatureFactory.getFactory(mContext).getSuggestionFeatureProvider()
                         .getSuggestionServiceComponent();
         mSuggestionController = new SuggestionController(
                 mContext, suggestionServiceComponent, this /* listener */);
@@ -93,7 +93,7 @@ public class LegacySuggestionContextualCardController implements ContextualCardC
     @Override
     public void onDismissed(ContextualCard card) {
         mSuggestionController
-                .dismissSuggestions(((LegacySuggestionContextualCard)card).getSuggestion());
+                .dismissSuggestions(((LegacySuggestionContextualCard) card).getSuggestion());
         mSuggestions.remove(card);
         updateAdapter();
     }

@@ -187,6 +187,24 @@
                          android:prompt="@string/wifi_eap_ca_cert"/>
             </LinearLayout>
 
+            <LinearLayout android:id="@+id/l_min_tls_ver"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:visibility="gone"
+                          style="@style/wifi_item">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/wifi_item_label"
+                    android:text="@string/wifi_eap_min_tls_ver"/>
+
+                <Spinner android:id="@+id/min_tls_ver"
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         style="@style/wifi_item_spinner"
+                         android:prompt="@string/wifi_eap_min_tls_ver"/>
+            </LinearLayout>
+
             <LinearLayout android:id="@+id/l_ocsp"
                           android:layout_width="match_parent"
                           android:layout_height="wrap_content"

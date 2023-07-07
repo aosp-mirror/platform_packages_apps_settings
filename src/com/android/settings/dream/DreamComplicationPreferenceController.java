@@ -29,6 +29,8 @@ import com.android.settingslib.dream.DreamBackend;
 public class DreamComplicationPreferenceController extends TogglePreferenceController {
     private final DreamBackend mBackend;
 
+    public static final String PREF_KEY = "dream_complications_toggle";
+
     public DreamComplicationPreferenceController(Context context, String key) {
         super(context, key);
         mBackend = DreamBackend.getInstance(context);
@@ -42,14 +44,12 @@ public class DreamComplicationPreferenceController extends TogglePreferenceContr
 
     @Override
     public boolean isChecked() {
-        return mBackend.getEnabledComplications().containsAll(mBackend.getSupportedComplications());
+        return mBackend.getComplicationsEnabled();
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        for (int complication : mBackend.getSupportedComplications()) {
-            mBackend.setComplicationEnabled(complication, isChecked);
-        }
+        mBackend.setComplicationsEnabled(isChecked);
         return true;
     }
 

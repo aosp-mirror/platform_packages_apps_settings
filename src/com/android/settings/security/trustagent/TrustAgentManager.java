@@ -99,13 +99,27 @@ public class TrustAgentManager {
     }
 
     /**
-     * Returns a list of trust agents.
+     * Returns a list of trust agents that have a android:settingsActivity set in their declaration.
      *
      * If {@link #ONLY_ONE_TRUST_AGENT} is set, the list will contain up to 1 agent instead of all
      * available agents on device.
      */
     public List<TrustAgentComponentInfo> getActiveTrustAgents(Context context,
             LockPatternUtils utils) {
+        return getActiveTrustAgents(context, utils, true);
+    }
+
+    /**
+     * Returns a list of trust agents.
+     *
+     * If {@link #ONLY_ONE_TRUST_AGENT} is set, the list will contain up to 1 agent instead of all
+     * available agents on device.
+     *
+     * @param skipTrustAgentsWithNoActivity {@code false} to only include trustagents with
+     * android:settingsActivity set in their declaration, {@code true} otherwise.
+     */
+    public List<TrustAgentComponentInfo> getActiveTrustAgents(Context context,
+            LockPatternUtils utils, boolean skipTrustAgentsWithNoActivity) {
         final int myUserId = UserHandle.myUserId();
         final DevicePolicyManager dpm = context.getSystemService(DevicePolicyManager.class);
         final PackageManager pm = context.getPackageManager();
@@ -125,9 +139,12 @@ public class TrustAgentManager {
                 }
                 final TrustAgentComponentInfo trustAgentComponentInfo =
                         getSettingsComponent(pm, resolveInfo);
-                if (trustAgentComponentInfo.componentName == null ||
-                        !enabledTrustAgents.contains(getComponentName(resolveInfo)) ||
-                        TextUtils.isEmpty(trustAgentComponentInfo.title)) {
+                if (skipTrustAgentsWithNoActivity
+                        && trustAgentComponentInfo.componentName == null) {
+                    continue;
+                }
+                if (!enabledTrustAgents.contains(getComponentName(resolveInfo))
+                        || TextUtils.isEmpty(trustAgentComponentInfo.title)) {
                     continue;
                 }
                 if (admin != null && dpm.getTrustAgentConfiguration(

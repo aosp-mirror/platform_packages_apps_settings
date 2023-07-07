@@ -18,17 +18,25 @@ package com.android.settings.datetime;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
+import android.app.time.Capabilities;
+import android.app.time.TimeCapabilities;
+import android.app.time.TimeCapabilitiesAndConfig;
+import android.app.time.TimeConfiguration;
+import android.app.time.TimeManager;
 import android.content.Context;
-import android.provider.Settings;
+import android.os.UserHandle;
 
-import com.android.settingslib.RestrictedSwitchPreference;
+import androidx.preference.Preference;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
@@ -38,43 +46,123 @@ public class AutoTimePreferenceControllerTest {
 
     @Mock
     private UpdateTimeAndDateCallback mCallback;
-
     private Context mContext;
-    private RestrictedSwitchPreference mPreference;
     private AutoTimePreferenceController mController;
+    private Preference mPreference;
+    @Mock
+    private TimeManager mTimeManager;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
-        mPreference = new RestrictedSwitchPreference(mContext);
+        mContext = spy(RuntimeEnvironment.application);
+        mPreference = new Preference(mContext);
+        when(mContext.getSystemService(TimeManager.class)).thenReturn(mTimeManager);
+
         mController = new AutoTimePreferenceController(mContext, mCallback);
     }
 
     @Test
-    public void testIsEnabled_shouldReadFromSettingsProvider() {
-        // Disabled
-        Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.AUTO_TIME, 0);
-        assertThat(mController.isEnabled()).isFalse();
+    public void autoTimeNotSupported_notAvailable() {
+        TimeCapabilitiesAndConfig capabilitiesAndConfig = createCapabilitiesAndConfig(
+                /* autoSupported= */false, /* autoEnabled= */false);
+        when(mTimeManager.getTimeCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
 
-        // Enabled
-        Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.AUTO_TIME, 1);
-        assertThat(mController.isEnabled()).isTrue();
+        assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @Test
+    public void autoTimeNotSupported_notEnable() {
+        TimeCapabilitiesAndConfig capabilitiesAndConfig = createCapabilitiesAndConfig(
+                /* autoSupported= */false, /* autoEnabled= */false);
+        when(mTimeManager.getTimeCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
+
+        assertThat(mController.isEnabled()).isFalse();
+    }
+
+    @Test
+    public void testIsEnabled_shouldReadFromTimeManagerConfig() {
+        {
+            // Disabled
+            TimeCapabilitiesAndConfig capabilitiesAndConfig = createCapabilitiesAndConfig(
+                    /* autoSupported= */true, /* autoEnabled= */false);
+            when(mTimeManager.getTimeCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
+
+            assertThat(mController.isEnabled()).isFalse();
+        }
+
+        {
+            // Enabled
+            TimeCapabilitiesAndConfig capabilitiesAndConfig = createCapabilitiesAndConfig(
+                    /* autoSupported= */true, /* autoEnabled= */true);
+            when(mTimeManager.getTimeCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
+
+            assertThat(mController.isEnabled()).isTrue();
+        }
     }
 
     @Test
     public void updatePreferenceChange_prefIsChecked_shouldUpdatePreferenceAndNotifyCallback() {
-        mController.onPreferenceChange(mPreference, true);
+        TimeCapabilitiesAndConfig capabilitiesAndConfig = createCapabilitiesAndConfig(
+                /* autoSupported= */true, /* autoEnabled= */false);
+        when(mTimeManager.getTimeCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
+        when(mTimeManager.updateTimeConfiguration(Mockito.any())).thenReturn(true);
+
+        assertThat(mController.onPreferenceChange(mPreference, true)).isTrue();
+        verify(mCallback).updateTimeAndDateDisplay(mContext);
+
+        // Check the service was asked to change the configuration correctly.
+        TimeConfiguration timeConfiguration = new TimeConfiguration.Builder()
+                .setAutoDetectionEnabled(true)
+                .build();
+        verify(mTimeManager).updateTimeConfiguration(timeConfiguration);
+
+        // Update the mTimeManager mock so that it now returns the expected updated config.
+        TimeCapabilitiesAndConfig capabilitiesAndConfigAfterUpdate =
+                createCapabilitiesAndConfig(/* autoSupported= */true, /* autoEnabled= */true);
+        when(mTimeManager.getTimeCapabilitiesAndConfig())
+                .thenReturn(capabilitiesAndConfigAfterUpdate);
 
         assertThat(mController.isEnabled()).isTrue();
-        verify(mCallback).updateTimeAndDateDisplay(mContext);
     }
 
     @Test
     public void updatePreferenceChange_prefIsUnchecked_shouldUpdatePreferenceAndNotifyCallback() {
-        mController.onPreferenceChange(mPreference, false);
+        TimeCapabilitiesAndConfig capabilitiesAndConfig = createCapabilitiesAndConfig(
+                /* autoSupported= */true, /* autoEnabled= */true);
+        when(mTimeManager.getTimeCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
+        when(mTimeManager.updateTimeConfiguration(Mockito.any())).thenReturn(true);
+
+        assertThat(mController.onPreferenceChange(mPreference, false)).isTrue();
+        verify(mCallback).updateTimeAndDateDisplay(mContext);
+
+        // Check the service was asked to change the configuration correctly.
+        TimeConfiguration timeConfiguration = new TimeConfiguration.Builder()
+                .setAutoDetectionEnabled(false)
+                .build();
+        verify(mTimeManager).updateTimeConfiguration(timeConfiguration);
+
+        // Update the mTimeManager mock so that it now returns the expected updated config.
+        TimeCapabilitiesAndConfig capabilitiesAndConfigAfterUpdate =
+                createCapabilitiesAndConfig(/* autoSupported= */true, /* autoEnabled= */false);
+        when(mTimeManager.getTimeCapabilitiesAndConfig())
+                .thenReturn(capabilitiesAndConfigAfterUpdate);
 
         assertThat(mController.isEnabled()).isFalse();
-        verify(mCallback).updateTimeAndDateDisplay(mContext);
+    }
+
+    private static TimeCapabilitiesAndConfig createCapabilitiesAndConfig(
+            boolean autoSupported, boolean autoEnabled) {
+        int configureAutoDetectionEnabledCapability =
+                autoSupported ? Capabilities.CAPABILITY_POSSESSED
+                        : Capabilities.CAPABILITY_NOT_SUPPORTED;
+        TimeCapabilities capabilities = new TimeCapabilities.Builder(UserHandle.SYSTEM)
+                .setConfigureAutoDetectionEnabledCapability(configureAutoDetectionEnabledCapability)
+                .setSetManualTimeCapability(Capabilities.CAPABILITY_POSSESSED)
+                .build();
+        TimeConfiguration config = new TimeConfiguration.Builder()
+                .setAutoDetectionEnabled(autoEnabled)
+                .build();
+        return new TimeCapabilitiesAndConfig(capabilities, config);
     }
 }
