@@ -48,7 +48,7 @@ public class DeviceNameWarningDialog extends InstrumentedDialogFragment
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.DIALOG_ENABLE_DEVELOPMENT_OPTIONS;
+        return SettingsEnums.DIALOG_DEVICENAME_WARNING;
     }
 
     @Override

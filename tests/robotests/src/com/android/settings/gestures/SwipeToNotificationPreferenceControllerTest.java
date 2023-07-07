@@ -145,7 +145,7 @@ public class SwipeToNotificationPreferenceControllerTest {
                 .thenReturn(true);
         // No stored value in shared preferences if not visited yet.
         final Context context = RuntimeEnvironment.application;
-        final SharedPreferences prefs = new SuggestionFeatureProviderImpl(context)
+        final SharedPreferences prefs = new SuggestionFeatureProviderImpl()
                 .getSharedPrefs(context);
 
         assertThat(SwipeToNotificationPreferenceController.isSuggestionComplete(mContext, prefs))
@@ -161,7 +161,7 @@ public class SwipeToNotificationPreferenceControllerTest {
                 .thenReturn(true);
         // No stored value in shared preferences if not visited yet.
         final Context context = RuntimeEnvironment.application;
-        final SharedPreferences prefs = new SuggestionFeatureProviderImpl(context)
+        final SharedPreferences prefs = new SuggestionFeatureProviderImpl()
                 .getSharedPrefs(context);
         prefs.edit()
                 .putBoolean(SwipeToNotificationSettings.PREF_KEY_SUGGESTION_COMPLETE, true)

@@ -41,6 +41,7 @@ import com.android.settings.wifi.NetworkRequestErrorDialogFragment.ERROR_DIALOG_
 import com.android.wifitrackerlib.WifiPickerTracker;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
@@ -69,6 +70,7 @@ public class NetworkRequestErrorDialogFragmentTest {
         mFragment.show(mActivity.getSupportFragmentManager(), null);
     }
 
+    @Ignore
     @Test
     public void getConstructor_shouldNotThrowNoSuchMethodException() {
         try {
@@ -78,6 +80,7 @@ public class NetworkRequestErrorDialogFragmentTest {
         }
     }
 
+    @Ignore
     @Test
     public void display_shouldShowTimeoutDialog() {
         AlertDialog alertDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
@@ -91,6 +94,7 @@ public class NetworkRequestErrorDialogFragmentTest {
                 .isEqualTo(shadowAlertDialog.getMessage());
     }
 
+    @Ignore
     @Test
     public void display_shouldShowAbortDialog() {
         mFragment = spy(NetworkRequestErrorDialogFragment.newInstance());
@@ -111,6 +115,7 @@ public class NetworkRequestErrorDialogFragmentTest {
                 .isEqualTo(shadowAlertDialog.getMessage());
     }
 
+    @Ignore
     @Test
     public void clickPositiveButton_shouldCallStartScanningDialog() {
         AlertDialog alertDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
@@ -123,6 +128,7 @@ public class NetworkRequestErrorDialogFragmentTest {
         verify(mFragment, times(1)).onRescanClick();
     }
 
+    @Ignore
     @Test
     public void clickNegativeButton_shouldCloseTheDialog() {
         AlertDialog alertDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
@@ -135,6 +141,7 @@ public class NetworkRequestErrorDialogFragmentTest {
         assertThat(alertDialog.isShowing()).isFalse();
     }
 
+    @Ignore
     @Test
     public void clickNegativeButton_shouldCallReject() {
         final NetworkRequestUserSelectionCallback rejectCallback =

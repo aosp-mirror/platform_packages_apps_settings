@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-
 package com.android.settings.fuelgauge;
 
 import android.content.Context;
@@ -43,24 +42,24 @@ public class RestrictedPreferenceController extends AbstractPreferenceController
     @Override
     public void updateState(Preference preference) {
 
-        if (!mBatteryOptimizeUtils.isValidPackageName()) {
-            Log.d(TAG, "invalid package name, disable pref");
+        if (mBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()) {
+            Log.d(TAG, "disable preference for " + mBatteryOptimizeUtils.getPackageName());
             preference.setEnabled(false);
             return;
         } else {
             preference.setEnabled(true);
         }
 
-        if (mBatteryOptimizeUtils.isSystemOrDefaultApp()) {
-            Log.d(TAG, "is system or default app, disable pref");
-            ((SelectorWithWidgetPreference) preference).setChecked(false);
-            preference.setEnabled(false);
-        } else if (mBatteryOptimizeUtils.getAppOptimizationMode()
+        if (mBatteryOptimizeUtils.getAppOptimizationMode()
                 == BatteryOptimizeUtils.MODE_RESTRICTED) {
             Log.d(TAG, "is restricted states");
             ((SelectorWithWidgetPreference) preference).setChecked(true);
         } else {
             ((SelectorWithWidgetPreference) preference).setChecked(false);
+            if (mBatteryOptimizeUtils.isSystemOrDefaultApp()) {
+                Log.d(TAG, "is system or default app, disable pref");
+                preference.setEnabled(false);
+            }
         }
     }
 

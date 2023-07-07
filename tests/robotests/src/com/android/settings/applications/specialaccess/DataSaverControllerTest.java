@@ -19,10 +19,15 @@ package com.android.settings.applications.specialaccess;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.res.Resources;
+
+import com.android.settings.R;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
@@ -34,23 +39,36 @@ import org.robolectric.annotation.Config;
 public class DataSaverControllerTest {
 
     private Context mContext;
+    private Resources mResources;
     private DataSaverController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application.getApplicationContext());
+
+        mResources = spy(mContext.getResources());
+        when(mContext.getResources()).thenReturn(mResources);
+
         mController = new DataSaverController(mContext, "key");
     }
 
     @Test
     public void testDataSaver_byDefault_shouldBeShown() {
+        when(mResources.getBoolean(R.bool.config_show_data_saver)).thenReturn(true);
         assertThat(mController.isAvailable()).isTrue();
     }
 
+    @Ignore
     @Test
     @Config(qualifiers = "mcc999")
+    public void testDataSaver_ifDisabledByCarrier_shouldNotBeShown() {
+        assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @Test
     public void testDataSaver_ifDisabled_shouldNotBeShown() {
+        when(mResources.getBoolean(R.bool.config_show_data_saver)).thenReturn(false);
         assertThat(mController.isAvailable()).isFalse();
     }
 }

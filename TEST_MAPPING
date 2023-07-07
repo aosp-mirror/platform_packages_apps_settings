@@ -1,4 +1,23 @@
 {
+  "presubmit": [
+    {
+      "name": "SettingsSpaUnitTests"
+    },
+    {
+      "name": "SettingsUnitTests",
+      "options": [
+        {
+          "include-filter": "com.android.settings.password"
+        },
+        {
+          "include-filter": "com.android.settings.biometrics"
+        },
+        {
+          "include-filter": "com.android.settings.biometrics2"
+        }
+      ]
+    }
+  ],
   "postsubmit": [
     {
       "name": "SettingsUnitTests",

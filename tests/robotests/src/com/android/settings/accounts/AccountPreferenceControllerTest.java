@@ -45,7 +45,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.AccessiblePreferenceCategory;
 import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 import com.android.settings.testutils.shadow.ShadowAccountManager;
 import com.android.settings.testutils.shadow.ShadowContentResolver;
@@ -77,7 +77,7 @@ public class AccountPreferenceControllerTest {
     @Mock(answer = RETURNS_DEEP_STUBS)
     private UserManager mUserManager;
     @Mock(answer = RETURNS_DEEP_STUBS)
-    private SettingsPreferenceFragment mFragment;
+    private DashboardFragment mFragment;
     @Mock(answer = RETURNS_DEEP_STUBS)
     private AccountManager mAccountManager;
     @Mock(answer = RETURNS_DEEP_STUBS)

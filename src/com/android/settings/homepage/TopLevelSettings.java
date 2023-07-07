@@ -30,12 +30,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.window.embedding.SplitController;
+import androidx.window.embedding.ActivityEmbeddingController;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -43,6 +44,7 @@ import com.android.settings.activityembedding.ActivityEmbeddingRulesController;
 import com.android.settings.activityembedding.ActivityEmbeddingUtils;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.support.SupportPreferenceController;
 import com.android.settings.widget.HomepagePreference;
@@ -64,12 +66,20 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
     private int mPaddingHorizontal;
     private boolean mScrollNeeded = true;
     private boolean mFirstStarted = true;
+    private ActivityEmbeddingController mActivityEmbeddingController;
 
     public TopLevelSettings() {
         final Bundle args = new Bundle();
         // Disable the search icon because this page uses a full search view in actionbar.
         args.putBoolean(NEED_SEARCH_ICON_IN_ACTION_BAR, false);
         setArguments(args);
+    }
+
+    /** Dependency injection ctor only for testing. */
+    @VisibleForTesting
+    public TopLevelSettings(TopLevelHighlightMixin highlightMixin) {
+        this();
+        mHighlightMixin = highlightMixin;
     }
 
     @Override
@@ -142,23 +152,36 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
             return;
         }
 
-        boolean activityEmbedded = SplitController.getInstance().isActivityEmbedded(getActivity());
+        boolean activityEmbedded = isActivityEmbedded();
         if (icicle != null) {
             mHighlightMixin = icicle.getParcelable(SAVED_HIGHLIGHT_MIXIN);
-            mScrollNeeded = !mHighlightMixin.isActivityEmbedded() && activityEmbedded;
-            mHighlightMixin.setActivityEmbedded(activityEmbedded);
+            if (mHighlightMixin != null) {
+                mScrollNeeded = !mHighlightMixin.isActivityEmbedded() && activityEmbedded;
+                mHighlightMixin.setActivityEmbedded(activityEmbedded);
+            }
         }
         if (mHighlightMixin == null) {
             mHighlightMixin = new TopLevelHighlightMixin(activityEmbedded);
         }
     }
 
+    /** Wrap ActivityEmbeddingController#isActivityEmbedded for testing. */
+    @VisibleForTesting
+    public boolean isActivityEmbedded() {
+        if (mActivityEmbeddingController == null) {
+            mActivityEmbeddingController = ActivityEmbeddingController.getInstance(getActivity());
+        }
+        return mActivityEmbeddingController.isActivityEmbedded(getActivity());
+    }
+
     @Override
     public void onStart() {
         if (mFirstStarted) {
             mFirstStarted = false;
+            FeatureFactory.getFactory(getContext()).getSearchFeatureProvider().sendPreIndexIntent(
+                    getContext());
         } else if (mIsEmbeddingActivityEnabled && isOnlyOneActivityInTask()
-                && !SplitController.getInstance().isActivityEmbedded(getActivity())) {
+                && !isActivityEmbedded()) {
             // Set default highlight menu key for 1-pane homepage since it will show the placeholder
             // page once changing back to 2-pane.
             Log.i(TAG, "Set default menu key");
@@ -283,7 +306,7 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
          * 3. the current activity is embedded */
         return mHighlightMixin != null
                 && TextUtils.equals(pref.getKey(), mHighlightMixin.getHighlightPreferenceKey())
-                && SplitController.getInstance().isActivityEmbedded(getActivity());
+                && isActivityEmbedded();
     }
 
     /** Show/hide the highlight on the menu entry for the search page presence */
@@ -346,7 +369,9 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
     }
 
     private interface PreferenceJob {
-        default void init() {}
+        default void init() {
+        }
+
         void doForEach(Preference preference);
     }
 
