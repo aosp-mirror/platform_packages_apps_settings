@@ -124,6 +124,9 @@ public class NotificationBackend {
 
     static public CharSequence getDeviceList(ICompanionDeviceManager cdm, LocalBluetoothManager lbm,
             String pkg, int userId) {
+        if (cdm == null) {
+            return "";
+        }
         boolean multiple = false;
         StringBuilder sb = new StringBuilder();
 

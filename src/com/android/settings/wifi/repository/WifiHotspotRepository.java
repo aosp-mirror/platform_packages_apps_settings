@@ -102,7 +102,6 @@ public class WifiHotspotRepository {
     protected Boolean mIs6gBandSupported;
     protected Boolean mIs6gAvailable;
     protected MutableLiveData<Boolean> m6gAvailable;
-    protected String mCurrentCountryCode;
     protected ActiveCountryCodeChangedCallback mActiveCountryCodeChangedCallback;
 
     @VisibleForTesting
@@ -568,17 +567,12 @@ public class WifiHotspotRepository {
         @Override
         public void onActiveCountryCodeChanged(String country) {
             log("onActiveCountryCodeChanged(), country:" + country);
-            mCurrentCountryCode = country;
             purgeRefreshData();
             refresh();
         }
 
         @Override
         public void onCountryCodeInactive() {
-            log("onCountryCodeInactive()");
-            mCurrentCountryCode = null;
-            purgeRefreshData();
-            refresh();
         }
     }
 

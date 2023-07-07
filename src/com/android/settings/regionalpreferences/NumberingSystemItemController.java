@@ -183,7 +183,8 @@ public class NumberingSystemItemController extends BasePreferenceController {
                 Bundle bundle = new Bundle();
                 bundle.putString(RegionalPreferencesEntriesFragment.ARG_KEY_REGIONAL_PREFERENCE,
                         ARG_VALUE_NUMBERING_SYSTEM_SELECT);
-                bundle.putString(KEY_SELECTED_LANGUAGE, updatedLocale.toLanguageTag());
+                bundle.putString(KEY_SELECTED_LANGUAGE,
+                        updatedLocale != null ? updatedLocale.toLanguageTag() : "");
                 mParentFragment.setArguments(bundle);
                 continue;
             }
@@ -194,13 +195,14 @@ public class NumberingSystemItemController extends BasePreferenceController {
     private Locale saveNumberingSystemToLocale(Locale targetLocale, String value) {
         LocaleList localeList = LocalePicker.getLocales();
         Locale[] locales = new Locale[localeList.size()];
+        Locale updatedLocale = null;
         for (int i = 0; i < localeList.size(); i++) {
             Locale locale = localeList.get(i);
             if (targetLocale.equals(locale)) {
-                if (value.equals(RegionalPreferencesDataUtils.DEFAULT_VALUE)) {
+                if (RegionalPreferencesDataUtils.DEFAULT_VALUE.equals(value)) {
                     value = null;
                 }
-                Locale updatedLocale = new Locale.Builder()
+                updatedLocale = new Locale.Builder()
                         .setLocale(locale)
                         .setUnicodeLocaleKeyword(ExtensionTypes.NUMBERING_SYSTEM, value)
                         .build();
@@ -210,7 +212,7 @@ public class NumberingSystemItemController extends BasePreferenceController {
             locales[i] = localeList.get(i);
         }
         LocalePicker.updateLocales(new LocaleList(locales));
-        return targetLocale;
+        return updatedLocale;
     }
 
     private static String getNumberingSystem(Locale locale) {

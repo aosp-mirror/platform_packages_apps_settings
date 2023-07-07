@@ -27,13 +27,17 @@ import android.widget.AdapterView;
 import android.widget.Spinner;
 
 import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.dashboard.profileselector.UserAdapter;
 
 /**
  * Base fragment class for per profile settings.
  */
-public abstract class ProfileSettingsPreferenceFragment extends SettingsPreferenceFragment {
+public abstract class ProfileSettingsPreferenceFragment extends RestrictedDashboardFragment {
+
+    public ProfileSettingsPreferenceFragment(String restrictionKey) {
+        super(restrictionKey);
+    }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {

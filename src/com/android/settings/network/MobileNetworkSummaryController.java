@@ -24,7 +24,6 @@ import android.content.Intent;
 import android.os.UserManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.euicc.EuiccManager;
-import android.util.Log;
 
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;

@@ -34,24 +34,20 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /**
- * Use this broadcastReceiver to listen to the battery change, and it will invoke
- * {@link OnBatteryChangedListener} if any of the following has been changed:
- *
- * 1. Battery level(e.g. 100%->99%)
- * 2. Battery status(e.g. plugged->unplugged)
- * 3. Battery saver(e.g. off->on)
- * 4. Battery health(e.g. good->overheat)
+ * Use this broadcastReceiver to listen to the battery change and it will invoke
+ * {@link OnBatteryChangedListener}
  */
 public class BatteryBroadcastReceiver extends BroadcastReceiver {
 
     private static final String TAG = "BatteryBroadcastRcvr";
     /**
-     * Callback when the following has been changed:
+     * Callback if any of the monitored fields has been changed:
      *
      * Battery level(e.g. 100%->99%)
      * Battery status(e.g. plugged->unplugged)
      * Battery saver(e.g. off->on)
      * Battery health(e.g. good->overheat)
+     * Battery charging status(e.g. default->long life)
      */
     public interface OnBatteryChangedListener {
         void onBatteryChanged(@BatteryUpdateType int type);
@@ -63,6 +59,7 @@ public class BatteryBroadcastReceiver extends BroadcastReceiver {
             BatteryUpdateType.BATTERY_SAVER,
             BatteryUpdateType.BATTERY_STATUS,
             BatteryUpdateType.BATTERY_HEALTH,
+            BatteryUpdateType.CHARGING_STATUS,
             BatteryUpdateType.BATTERY_NOT_PRESENT})
     public @interface BatteryUpdateType {
         int MANUAL = 0;
@@ -70,13 +67,16 @@ public class BatteryBroadcastReceiver extends BroadcastReceiver {
         int BATTERY_SAVER = 2;
         int BATTERY_STATUS = 3;
         int BATTERY_HEALTH = 4;
-        int BATTERY_NOT_PRESENT = 5;
+        int CHARGING_STATUS = 5;
+        int BATTERY_NOT_PRESENT = 6;
     }
 
     @VisibleForTesting
     String mBatteryLevel;
     @VisibleForTesting
     String mBatteryStatus;
+    @VisibleForTesting
+    int mChargingStatus;
     @VisibleForTesting
     int mBatteryHealth;
     private OnBatteryChangedListener mBatteryListener;
@@ -121,21 +121,27 @@ public class BatteryBroadcastReceiver extends BroadcastReceiver {
             final String batteryLevel = Utils.getBatteryPercentage(intent);
             final String batteryStatus =
                     Utils.getBatteryStatus(mContext, intent, /* compactStatus= */ false);
+            final int chargingStatus = intent.getIntExtra(
+                    BatteryManager.EXTRA_CHARGING_STATUS, BatteryManager.CHARGING_POLICY_DEFAULT);
             final int batteryHealth = intent.getIntExtra(
                     BatteryManager.EXTRA_HEALTH, BatteryManager.BATTERY_HEALTH_UNKNOWN);
             Log.d(
                     TAG,
-                    "Battery changed: level="
+                    "Battery changed: level: "
                             + batteryLevel
-                            + ", status="
+                            + "| status: "
                             + batteryStatus
-                            + ", health="
+                            + "| chargingStatus: "
+                            + chargingStatus
+                            + "| health: "
                             + batteryHealth);
             if (!Utils.isBatteryPresent(intent)) {
                 Log.w(TAG, "Problem reading the battery meter.");
                 mBatteryListener.onBatteryChanged(BatteryUpdateType.BATTERY_NOT_PRESENT);
             } else if (forceUpdate) {
                 mBatteryListener.onBatteryChanged(BatteryUpdateType.MANUAL);
+            } else if (chargingStatus != mChargingStatus) {
+                mBatteryListener.onBatteryChanged(BatteryUpdateType.CHARGING_STATUS);
             } else if (batteryHealth != mBatteryHealth) {
                 mBatteryListener.onBatteryChanged(BatteryUpdateType.BATTERY_HEALTH);
             } else if(!batteryLevel.equals(mBatteryLevel)) {
@@ -145,6 +151,7 @@ public class BatteryBroadcastReceiver extends BroadcastReceiver {
             }
             mBatteryLevel = batteryLevel;
             mBatteryStatus = batteryStatus;
+            mChargingStatus = chargingStatus;
             mBatteryHealth = batteryHealth;
         } else if (PowerManager.ACTION_POWER_SAVE_MODE_CHANGED.equals(action)) {
             mBatteryListener.onBatteryChanged(BatteryUpdateType.BATTERY_SAVER);

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.bluetooth;
+package com.android.settings.accessibility;
 
 import android.content.Context;
 import android.provider.Settings;
@@ -35,15 +35,6 @@ public class HearingDeviceCallRoutingPreferenceController extends
         super(context, preferenceKey);
     }
 
-    /**
-     * Initializes objects in this controller. Need to call this before using the controller.
-     *
-     * @param cachedBluetoothDevice the hearing device to configure audio routing
-     */
-    public void init(CachedBluetoothDevice cachedBluetoothDevice) {
-        mHearingDevice = cachedBluetoothDevice;
-    }
-
     @Override
     public int getAvailabilityStatus() {
         return Utils.isVoiceCapable(mContext) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
@@ -52,11 +43,6 @@ public class HearingDeviceCallRoutingPreferenceController extends
     @Override
     protected int[] getSupportedAttributeList() {
         return HearingAidAudioRoutingConstants.CALL_ROUTING_ATTRIBUTES;
-    }
-
-    @Override
-    protected CachedBluetoothDevice getHearingDevice() {
-        return mHearingDevice;
     }
 
     @Override

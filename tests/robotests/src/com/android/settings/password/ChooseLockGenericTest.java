@@ -30,6 +30,8 @@ import static com.android.settings.password.ChooseLockGeneric.ChooseLockGenericF
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_CALLER_APP_NAME;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_DEVICE_PASSWORD_REQUIREMENT_ONLY;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_FOR_BIOMETRICS;
+import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_FOR_FACE;
+import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_IS_CALLING_APP_ADMIN;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_REQUESTED_MIN_COMPLEXITY;
 
@@ -126,7 +128,9 @@ public class ChooseLockGenericTest {
         when(mFaceManager.isHardwareDetected()).thenReturn(true);
         when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
         when(mFakeFeatureFactory.mFaceFeatureProvider.isSetupWizardSupported(any())).thenReturn(
-                false);
+                true);
+        ShadowUtils.setFingerprintManager(mFingerprintManager);
+        ShadowUtils.setFaceManager(mFaceManager);
     }
 
     @After
@@ -540,35 +544,63 @@ public class ChooseLockGenericTest {
 
     @Test
     public void updatePreferenceText_supportBiometrics_showFaceAndFingerprint() {
-        ShadowLockPatternUtils.setRequiredPasswordComplexity(PASSWORD_COMPLEXITY_LOW);
-        final PasswordPolicy policy = new PasswordPolicy();
-        policy.quality = PASSWORD_QUALITY_ALPHABETIC;
-        ShadowLockPatternUtils.setRequestedProfilePasswordMetrics(policy.getMinMetrics());
-
+        ShadowStorageManager.setIsFileEncrypted(false);
         final Intent intent = new Intent().putExtra(EXTRA_KEY_FOR_BIOMETRICS, true);
         initActivity(intent);
 
-        final Intent passwordIntent = mFragment.getLockPatternIntent();
-        assertThat(passwordIntent.getIntExtra(ChooseLockPassword.EXTRA_KEY_MIN_COMPLEXITY,
-                PASSWORD_COMPLEXITY_NONE)).isEqualTo(PASSWORD_COMPLEXITY_LOW);
 
         final String supportFingerprint = capitalize(mActivity.getResources().getString(
                 R.string.security_settings_fingerprint));
         final String supportFace = capitalize(mActivity.getResources().getString(
                 R.string.keywords_face_settings));
+        String pinTitle =
+                (String) mFragment.findPreference(ScreenLockType.PIN.preferenceKey).getTitle();
+        String patternTitle =
+                (String) mFragment.findPreference(ScreenLockType.PATTERN.preferenceKey).getTitle();
+        String passwordTitle =
+                (String) mFragment.findPreference(ScreenLockType.PASSWORD.preferenceKey).getTitle();
 
-        assertThat(mFragment.getBiometricsPreferenceTitle(ScreenLockType.PIN)).contains(
-                supportFingerprint);
-        assertThat(mFragment.getBiometricsPreferenceTitle(ScreenLockType.PIN)).contains(
-                supportFace);
-        assertThat(mFragment.getBiometricsPreferenceTitle(ScreenLockType.PATTERN)).contains(
-                supportFingerprint);
-        assertThat(mFragment.getBiometricsPreferenceTitle(ScreenLockType.PATTERN)).contains(
-                supportFace);
-        assertThat(mFragment.getBiometricsPreferenceTitle(ScreenLockType.PASSWORD)).contains(
-                supportFingerprint);
-        assertThat(mFragment.getBiometricsPreferenceTitle(ScreenLockType.PASSWORD)).contains(
-                supportFace);
+        assertThat(pinTitle).contains(supportFingerprint);
+        assertThat(pinTitle).contains(supportFace);
+        assertThat(patternTitle).contains(supportFingerprint);
+        assertThat(patternTitle).contains(supportFace);
+        assertThat(passwordTitle).contains(supportFingerprint);
+        assertThat(passwordTitle).contains(supportFace);
+    }
+
+    @Test
+    public void updatePreferenceText_supportFingerprint_showFingerprint() {
+        ShadowStorageManager.setIsFileEncrypted(false);
+        final Intent intent = new Intent().putExtra(EXTRA_KEY_FOR_FINGERPRINT, true);
+        initActivity(intent);
+        mFragment.updatePreferencesOrFinish(false /* isRecreatingActivity */);
+
+        assertThat(mFragment.findPreference(ScreenLockType.PIN.preferenceKey).getTitle()).isEqualTo(
+                mFragment.getString(R.string.fingerprint_unlock_set_unlock_pin));
+        assertThat(mFragment.findPreference(
+                ScreenLockType.PATTERN.preferenceKey).getTitle()).isEqualTo(
+                mFragment.getString(R.string.fingerprint_unlock_set_unlock_pattern));
+        assertThat(mFragment.findPreference(
+                ScreenLockType.PASSWORD.preferenceKey).getTitle()).isEqualTo(
+                mFragment.getString(R.string.fingerprint_unlock_set_unlock_password));
+    }
+
+    @Test
+    public void updatePreferenceText_supportFace_showFace() {
+
+        ShadowStorageManager.setIsFileEncrypted(false);
+        final Intent intent = new Intent().putExtra(EXTRA_KEY_FOR_FACE, true);
+        initActivity(intent);
+        mFragment.updatePreferencesOrFinish(false /* isRecreatingActivity */);
+
+        assertThat(mFragment.findPreference(ScreenLockType.PIN.preferenceKey).getTitle()).isEqualTo(
+                mFragment.getString(R.string.face_unlock_set_unlock_pin));
+        assertThat(mFragment.findPreference(
+                ScreenLockType.PATTERN.preferenceKey).getTitle()).isEqualTo(
+                mFragment.getString(R.string.face_unlock_set_unlock_pattern));
+        assertThat(mFragment.findPreference(
+                ScreenLockType.PASSWORD.preferenceKey).getTitle()).isEqualTo(
+                mFragment.getString(R.string.face_unlock_set_unlock_password));
     }
 
     private void initActivity(@Nullable Intent intent) {

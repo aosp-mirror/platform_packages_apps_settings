@@ -43,7 +43,6 @@ import com.android.internal.os.BatteryStatsHistoryIterator;
 import com.android.settings.testutils.BatteryTestUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.widget.UsageView;
-import com.android.settingslib.R;
 import com.android.settingslib.fuelgauge.Estimate;
 
 import org.junit.Before;
@@ -164,26 +163,6 @@ public class BatteryInfoTest {
     }
 
     @Test
-    public void testGetBatteryInfo_basedOnUsageTrueLessThanSevenMinutes_usesCorrectString() {
-        Estimate estimate = new Estimate(Duration.ofMinutes(7).toMillis(),
-                true /* isBasedOnUsage */,
-                1000 /* averageDischargeTime */);
-        BatteryInfo info = BatteryInfo.getBatteryInfo(mContext, mDisChargingBatteryBroadcast,
-                mBatteryUsageStats, estimate, SystemClock.elapsedRealtime() * 1000,
-                false /* shortString */);
-        BatteryInfo info2 = BatteryInfo.getBatteryInfo(mContext, mDisChargingBatteryBroadcast,
-                mBatteryUsageStats, estimate, SystemClock.elapsedRealtime() * 1000,
-                true /* shortString */);
-
-        // These should be identical in either case
-        assertThat(info.remainingLabel.toString()).isEqualTo(
-                mContext.getString(R.string.power_remaining_duration_only_shutdown_imminent));
-        assertThat(info2.remainingLabel.toString()).isEqualTo(
-                mContext.getString(R.string.power_remaining_duration_only_shutdown_imminent));
-        assertThat(info2.suggestionLabel).contains(BATTERY_RUN_OUT_PREFIX);
-    }
-
-    @Test
     @Ignore
     public void getBatteryInfo_MoreThanOneDay_suggestionLabelIsCorrectString() {
         Estimate estimate = new Estimate(Duration.ofDays(3).toMillis(),
@@ -194,25 +173,6 @@ public class BatteryInfoTest {
                 false /* shortString */);
 
         assertThat(info.suggestionLabel).doesNotContain(BATTERY_RUN_OUT_PREFIX);
-    }
-
-    @Test
-    public void
-    testGetBatteryInfo_basedOnUsageTrueBetweenSevenAndFifteenMinutes_usesCorrectString() {
-        Estimate estimate = new Estimate(Duration.ofMinutes(10).toMillis(),
-                true /* isBasedOnUsage */,
-                1000 /* averageDischargeTime */);
-        BatteryInfo info = BatteryInfo.getBatteryInfo(mContext, mDisChargingBatteryBroadcast,
-                mBatteryUsageStats, estimate, SystemClock.elapsedRealtime() * 1000,
-                false /* shortString */);
-
-        // Check that strings are showing less than 15 minutes remaining regardless of exact time.
-        assertThat(info.chargeLabel.toString()).isEqualTo(
-                mContext.getString(R.string.power_remaining_less_than_duration,
-                        FIFTEEN_MIN_FORMATTED, TEST_BATTERY_LEVEL_10));
-        assertThat(info.remainingLabel.toString()).isEqualTo(
-                mContext.getString(R.string.power_remaining_less_than_duration_only,
-                        FIFTEEN_MIN_FORMATTED));
     }
 
     @Test
@@ -254,18 +214,18 @@ public class BatteryInfoTest {
     }
 
     @Test
-    public void testGetBatteryInfo_chargingWithOverheated_updateChargeLabel() {
+    public void testGetBatteryInfo_chargingWithDefender_updateChargeLabel() {
         doReturn(TEST_CHARGE_TIME_REMAINING)
                 .when(mBatteryUsageStats)
                 .getChargeTimeRemainingMs();
-        mChargingBatteryBroadcast
-                .putExtra(BatteryManager.EXTRA_HEALTH, BatteryManager.BATTERY_HEALTH_OVERHEAT);
+        mChargingBatteryBroadcast.putExtra(BatteryManager.EXTRA_CHARGING_STATUS,
+                BatteryManager.CHARGING_POLICY_ADAPTIVE_LONGLIFE);
 
         BatteryInfo info = BatteryInfo.getBatteryInfo(mContext, mChargingBatteryBroadcast,
                 mBatteryUsageStats, MOCK_ESTIMATE, SystemClock.elapsedRealtime() * 1000,
                 false /* shortString */);
 
-        assertThat(info.isOverheated).isTrue();
+        assertThat(info.isBatteryDefender).isTrue();
         assertThat(info.chargeLabel.toString()).contains(STATUS_CHARGING_PAUSED);
     }
 
@@ -278,7 +238,8 @@ public class BatteryInfoTest {
                         50 /* level */,
                         100 /* scale */,
                         BatteryManager.BATTERY_STATUS_CHARGING)
-                .putExtra(BatteryManager.EXTRA_HEALTH, BatteryManager.BATTERY_HEALTH_OVERHEAT);
+                .putExtra(BatteryManager.EXTRA_CHARGING_STATUS,
+                        BatteryManager.CHARGING_POLICY_ADAPTIVE_LONGLIFE);
 
         BatteryInfo info = BatteryInfo.getBatteryInfo(mContext, intent,
                 mBatteryUsageStats, MOCK_ESTIMATE, SystemClock.elapsedRealtime() * 1000,
@@ -290,8 +251,8 @@ public class BatteryInfoTest {
     @Test
     public void testGetBatteryInfo_dockDefenderTemporarilyBypassed_updateChargeLabel() {
         doReturn(REMAINING_TIME).when(mBatteryUsageStats).getChargeTimeRemainingMs();
-        mChargingBatteryBroadcast
-                .putExtra(BatteryManager.EXTRA_HEALTH, BatteryManager.BATTERY_HEALTH_GOOD);
+        mChargingBatteryBroadcast.putExtra(BatteryManager.EXTRA_CHARGING_STATUS,
+                BatteryManager.CHARGING_POLICY_DEFAULT);
         Settings.Global.putInt(mContext.getContentResolver(),
                 BatteryUtils.SETTINGS_GLOBAL_DOCK_DEFENDER_BYPASS, 1);
 
@@ -309,8 +270,8 @@ public class BatteryInfoTest {
     @Test
     public void testGetBatteryInfo_dockDefenderFutureBypass_updateChargeLabel() {
         doReturn(false).when(mFeatureFactory.powerUsageFeatureProvider).isExtraDefend();
-        mChargingBatteryBroadcast
-                .putExtra(BatteryManager.EXTRA_HEALTH, BatteryManager.BATTERY_HEALTH_GOOD);
+        mChargingBatteryBroadcast.putExtra(BatteryManager.EXTRA_CHARGING_STATUS,
+                BatteryManager.CHARGING_POLICY_DEFAULT);
 
         BatteryInfo info = BatteryInfo.getBatteryInfo(mContext,
                 BatteryTestUtils.getCustomBatteryIntent(BatteryManager.BATTERY_PLUGGED_DOCK,

@@ -17,9 +17,7 @@
 package com.android.settings.password;
 
 import static android.app.admin.DevicePolicyResources.Strings.Settings.CONFIRM_WORK_PROFILE_PATTERN_HEADER;
-import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_CONFIRM_PATTERN;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_LAST_PATTERN_ATTEMPT_BEFORE_WIPE;
-import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_PATTERN_REQUIRED;
 import static android.app.admin.DevicePolicyResources.UNDEFINED;
 
 import static com.android.settings.biometrics.GatekeeperPasswordProvider.containsGatekeeperPasswordHandle;
@@ -315,23 +313,12 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                         R.string.lockpassword_remote_validation_pattern_details);
             }
             final boolean isStrongAuthRequired = isStrongAuthRequired();
-            if (mIsManagedProfile) {
-                if (isStrongAuthRequired) {
-                    return mDevicePolicyManager.getResources().getString(
-                            WORK_PROFILE_PATTERN_REQUIRED,
-                            () -> getString(
-                                    R.string.lockpassword_strong_auth_required_work_pattern));
-                } else {
-                    return mDevicePolicyManager.getResources().getString(
-                            WORK_PROFILE_CONFIRM_PATTERN,
-                            () -> getString(
-                                    R.string.lockpassword_confirm_your_pattern_generic_profile));
-                }
-            } else {
+            if (!mIsManagedProfile) {
                 return isStrongAuthRequired
                         ? getString(R.string.lockpassword_strong_auth_required_device_pattern)
                         : getString(R.string.lockpassword_confirm_your_pattern_generic);
             }
+            return null;
         }
 
         private Object[][] getActiveViews() {
@@ -381,7 +368,9 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
 
                     CharSequence detailsText =
                             mDetailsText == null ? getDefaultDetails() : mDetailsText;
-                    mGlifLayout.setDescriptionText(detailsText);
+                    if (detailsText != null) {
+                        mGlifLayout.setDescriptionText(detailsText);
+                    }
 
                     mErrorTextView.setText("");
                     updateErrorMessage(

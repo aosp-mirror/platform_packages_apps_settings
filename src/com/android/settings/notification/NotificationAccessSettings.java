@@ -43,6 +43,7 @@ import android.widget.Toast;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.applications.AppInfoBase;
@@ -63,9 +64,8 @@ import java.util.List;
 @SearchIndexable
 public class NotificationAccessSettings extends EmptyTextSettings {
     private static final String TAG = "NotifAccessSettings";
-    private static final String ALLOWED_KEY = "allowed";
-    private static final String NOT_ALLOWED_KEY = "not_allowed";
-    private static final int MAX_CN_LENGTH = 500;
+    static final String ALLOWED_KEY = "allowed";
+    static final String NOT_ALLOWED_KEY = "not_allowed";
 
     private static final ManagedServiceSettings.Config CONFIG =
             new ManagedServiceSettings.Config.Builder()
@@ -80,9 +80,9 @@ public class NotificationAccessSettings extends EmptyTextSettings {
                     .setEmptyText(R.string.no_notification_listeners)
                     .build();
 
-    private NotificationManager mNm;
+    @VisibleForTesting NotificationManager mNm;
     protected Context mContext;
-    private PackageManager mPm;
+    @VisibleForTesting PackageManager mPm;
     private DevicePolicyManager mDpm;
     private ServiceListing mServiceListing;
     private IconDrawableFactory mIconDrawableFactory;
@@ -102,12 +102,6 @@ public class NotificationAccessSettings extends EmptyTextSettings {
                 .setNoun(CONFIG.noun)
                 .setSetting(CONFIG.setting)
                 .setTag(CONFIG.tag)
-                .setValidator(info -> {
-                    if (info.getComponentName().flattenToString().length() > MAX_CN_LENGTH) {
-                        return false;
-                    }
-                    return true;
-                })
                 .build();
         mServiceListing.addCallback(this::updateList);
 
@@ -140,7 +134,8 @@ public class NotificationAccessSettings extends EmptyTextSettings {
         mServiceListing.setListening(false);
     }
 
-    private void updateList(List<ServiceInfo> services) {
+    @VisibleForTesting
+    void updateList(List<ServiceInfo> services) {
         final UserManager um = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
         final int managedProfileId = Utils.getManagedProfileId(um, UserHandle.myUserId());
 
@@ -153,6 +148,12 @@ public class NotificationAccessSettings extends EmptyTextSettings {
         services.sort(new PackageItemInfo.DisplayNameComparator(mPm));
         for (ServiceInfo service : services) {
             final ComponentName cn = new ComponentName(service.packageName, service.name);
+            boolean isAllowed = mNm.isNotificationListenerAccessGranted(cn);
+            if (!isAllowed && cn.flattenToString().length()
+                    > NotificationManager.MAX_SERVICE_COMPONENT_NAME_LENGTH) {
+                continue;
+            }
+
             CharSequence title = null;
             try {
                 title = mPm.getApplicationInfoAsUser(
@@ -200,7 +201,7 @@ public class NotificationAccessSettings extends EmptyTextSettings {
                         return true;
                     });
             pref.setKey(cn.flattenToString());
-            if (mNm.isNotificationListenerAccessGranted(cn)) {
+            if (isAllowed) {
                 allowedCategory.addPreference(pref);
             } else {
                 notAllowedCategory.addPreference(pref);

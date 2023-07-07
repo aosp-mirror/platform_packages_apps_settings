@@ -249,12 +249,18 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         super.onProcessArguments(arguments);
     }
 
-    private void addAlwaysOnSetting(PreferenceCategory generalCategory) {
-        if (!DeviceConfig.getBoolean(
+    private boolean isAlwaysOnSettingEnabled() {
+        final boolean defaultValue = getContext().getResources().getBoolean(
+                com.android.internal.R.bool.config_magnification_always_on_enabled);
+
+        return DeviceConfig.getBoolean(
                 DeviceConfig.NAMESPACE_WINDOW_MANAGER,
                 "AlwaysOnMagnifier__enable_always_on_magnifier",
-                false
-        )) {
+                defaultValue
+        );
+    }
+    private void addAlwaysOnSetting(PreferenceCategory generalCategory) {
+        if (!isAlwaysOnSettingEnabled()) {
             return;
         }
 

@@ -18,7 +18,9 @@ package com.android.settings.fuelgauge.batterytip;
 
 import android.annotation.Nullable;
 import android.content.Context;
+import android.os.BadParcelableException;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -142,14 +144,26 @@ public class BatteryTipPreferenceController extends BasePreferenceController {
     }
 
     public void restoreInstanceState(Bundle bundle) {
-        if (bundle != null) {
+        if (bundle == null) {
+            return;
+        }
+        try {
             List<BatteryTip> batteryTips = bundle.getParcelableArrayList(KEY_BATTERY_TIPS);
             updateBatteryTips(batteryTips);
+        } catch (BadParcelableException e) {
+            Log.e(TAG, "failed to invoke restoreInstanceState()", e);
         }
     }
 
-    public void saveInstanceState(Bundle outState) {
-        outState.putParcelableList(KEY_BATTERY_TIPS, mBatteryTips);
+    public void saveInstanceState(Bundle bundle) {
+        if (bundle == null) {
+            return;
+        }
+        try {
+            bundle.putParcelableList(KEY_BATTERY_TIPS, mBatteryTips);
+        } catch (BadParcelableException e) {
+            Log.e(TAG, "failed to invoke saveInstanceState()", e);
+        }
     }
 
     public boolean needUpdate() {

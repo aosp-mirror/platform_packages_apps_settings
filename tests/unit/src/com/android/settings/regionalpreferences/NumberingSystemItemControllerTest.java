@@ -16,6 +16,8 @@
 
 package com.android.settings.regionalpreferences;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
@@ -34,6 +36,7 @@ import androidx.preference.PreferenceScreen;
 import androidx.test.annotation.UiThreadTest;
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.internal.app.LocalePicker;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.widget.TickButtonPreference;
 
@@ -68,6 +71,7 @@ public class NumberingSystemItemControllerTest {
     @After
     public void tearDown() {
         LocaleList.setDefault(mCacheLocale);
+        LocalePicker.updateLocales(mCacheLocale);
     }
 
     @Test
@@ -120,6 +124,31 @@ public class NumberingSystemItemControllerTest {
         verify(mFeatureFactory.metricsFeatureProvider).action(
                 mApplicationContext, SettingsEnums.ACTION_SET_NUMBERS_PREFERENCES,
                 "test_key");
+    }
+
+    @Test
+    @UiThreadTest
+    public void handlePreferenceTreeClick_numbersSelect_numberingSystemIsUpdated() {
+        LocalePicker.updateLocales(LocaleList.forLanguageTags("en-US,zh-TW,ar-BH"));
+        Bundle bundle = new Bundle();
+        bundle.putString(RegionalPreferencesEntriesFragment.ARG_KEY_REGIONAL_PREFERENCE,
+                NumberingSystemItemController.ARG_VALUE_NUMBERING_SYSTEM_SELECT);
+        bundle.putString(
+                NumberingSystemItemController.KEY_SELECTED_LANGUAGE, "ar-BH");
+        TickButtonPreference defaultPreference = new TickButtonPreference(mApplicationContext);
+        TickButtonPreference numberPreference = new TickButtonPreference(mApplicationContext);
+        defaultPreference.setKey("default");
+        numberPreference.setKey("latn");
+        mPreferenceScreen.addPreference(defaultPreference);
+        mPreferenceScreen.addPreference(numberPreference);
+        mController = new NumberingSystemItemController(mApplicationContext, bundle);
+        mController.setParentFragment(mFragment);
+        mController.displayPreference(mPreferenceScreen);
+
+        mController.handlePreferenceTreeClick(numberPreference);
+
+        assertThat(LocalePicker.getLocales().toLanguageTags()).contains(
+                "en-US,zh-TW,ar-BH-u-nu-latn");
     }
 
     @Test

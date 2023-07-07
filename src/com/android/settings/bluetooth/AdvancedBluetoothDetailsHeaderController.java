@@ -100,8 +100,6 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
     @VisibleForTesting
     Handler mHandler = new Handler(Looper.getMainLooper());
     @VisibleForTesting
-    boolean mIsRegisterCallback = false;
-    @VisibleForTesting
     boolean mIsLeftDeviceEstimateReady;
     @VisibleForTesting
     boolean mIsRightDeviceEstimateReady;

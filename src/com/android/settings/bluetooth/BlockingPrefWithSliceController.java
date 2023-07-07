@@ -113,15 +113,27 @@ public class BlockingPrefWithSliceController extends BasePreferenceController im
 
     @Override
     public void onStart() {
-        if (mLiveData != null) {
+        if (mLiveData == null) {
+            return;
+        }
+
+        try {
             mLiveData.observeForever(this);
+        } catch (SecurityException e) {
+            Log.w(TAG, "observeForever - no permission");
         }
     }
 
     @Override
     public void onStop() {
-        if (mLiveData != null) {
+        if (mLiveData == null) {
+            return;
+        }
+
+        try {
             mLiveData.removeObserver(this);
+        } catch (SecurityException e) {
+            Log.w(TAG, "removeObserver - no permission");
         }
     }
 

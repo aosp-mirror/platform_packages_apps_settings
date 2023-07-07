@@ -20,22 +20,20 @@ import android.content.Context;
 import android.content.Intent;
 
 /**
- * Host of {@link RebootConfirmationDialogFragment} that provides callback when user
- * interacts with the UI.
+ * Host of {@link RebootConfirmationDialogFragment} that provides callback when user interacts with
+ * the UI.
  */
 public interface RebootConfirmationDialogHost {
-    /**
-     * Called when user made a decision to reboot the device.
-     */
+    /** Called when user made a decision to reboot the device. */
     default void onRebootConfirmed(Context context) {
         // user presses button "Reboot now", reboot the device
         final Intent intent = new Intent(Intent.ACTION_REBOOT);
         context.startActivity(intent);
     }
 
-    /**
-     * Called when user made a decision to cancel the reboot
-     * Default to do nothing
-     */
+    /** Called when user made a decision to cancel the reboot Default to do nothing */
     default void onRebootCancelled() {}
+
+    /** Called when reboot dialog is dismissed Default to do nothing */
+    default void onRebootDialogDismissed() {}
 }

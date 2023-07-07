@@ -22,6 +22,7 @@ import android.content.Context;
 import android.os.LocaleList;
 import android.provider.Settings;
 
+import androidx.core.text.util.LocalePreferences;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.internal.app.LocalePicker;

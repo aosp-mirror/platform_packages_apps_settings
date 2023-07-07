@@ -31,6 +31,8 @@ import com.android.settings.biometrics2.factory.BiometricsRepositoryProvider;
 import com.android.settings.bluetooth.BluetoothFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
+import com.android.settings.deviceinfo.hardwareinfo.HardwareInfoFeatureProvider;
+import com.android.settings.deviceinfo.hardwareinfo.HardwareInfoFeatureProviderImpl;
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
 import com.android.settings.fuelgauge.BatterySettingsFeatureProvider;
 import com.android.settings.fuelgauge.BatteryStatusFeatureProvider;
@@ -285,6 +287,11 @@ public class FakeFeatureFactory extends FeatureFactory {
     @Override
     public AccessibilityMetricsFeatureProvider getAccessibilityMetricsFeatureProvider() {
         return mAccessibilityMetricsFeatureProvider;
+    }
+
+    @Override
+    public HardwareInfoFeatureProvider getHardwareInfoFeatureProvider() {
+        return HardwareInfoFeatureProviderImpl.INSTANCE;
     }
 
     @Override

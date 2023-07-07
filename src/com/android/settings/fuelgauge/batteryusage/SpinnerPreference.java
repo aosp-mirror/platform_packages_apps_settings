@@ -79,8 +79,11 @@ public class SpinnerPreference extends Preference {
 
     @Override
     protected void onRestoreInstanceState(Parcelable state) {
-        if (state == null || !state.getClass().equals(SavedState.class)) {
+        if (state == null || state == BaseSavedState.EMPTY_STATE) {
             super.onRestoreInstanceState(state);
+            return;
+        }
+        if (!(state instanceof SavedState)) {
             return;
         }
         SavedState savedState = (SavedState) state;

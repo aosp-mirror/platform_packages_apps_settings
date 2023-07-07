@@ -19,6 +19,8 @@ package com.android.settings.regionalpreferences;
 import android.content.Context;
 import android.provider.Settings;
 
+import androidx.core.text.util.LocalePreferences;
+
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 

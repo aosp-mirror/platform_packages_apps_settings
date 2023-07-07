@@ -185,7 +185,8 @@ public class FingerprintSettings extends SubSettings {
         private static final int MSG_FINGER_AUTH_HELP = 1004;
 
         private static final int CONFIRM_REQUEST = 101;
-        private static final int CHOOSE_LOCK_GENERIC_REQUEST = 102;
+        @VisibleForTesting
+        static final int CHOOSE_LOCK_GENERIC_REQUEST = 102;
         @VisibleForTesting
         static final int ADD_FINGERPRINT_REQUEST = 10;
         private static final int AUTO_ADD_FIRST_FINGERPRINT_REQUEST = 11;
@@ -622,9 +623,9 @@ public class FingerprintSettings extends SubSettings {
                 return; // Activity went away
             }
 
-            final Preference addPreference = findPreference(KEY_FINGERPRINT_ADD);
+            mAddFingerprintPreference = findPreference(KEY_FINGERPRINT_ADD);
 
-            if (addPreference == null) {
+            if (mAddFingerprintPreference == null) {
                 return; // b/275519315 Skip if updateAddPreference() invoke before addPreference()
             }
 
@@ -1014,7 +1015,7 @@ public class FingerprintSettings extends SubSettings {
                         true);
                 intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
                 intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW_HANDLE, true);
-                intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
+                intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, true);
                 startActivityForResult(intent, CHOOSE_LOCK_GENERIC_REQUEST);
             }
         }

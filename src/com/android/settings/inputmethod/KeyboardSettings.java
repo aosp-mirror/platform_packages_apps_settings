@@ -30,9 +30,7 @@ import androidx.annotation.Nullable;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.language.DefaultVoiceInputPreferenceController;
 import com.android.settings.language.PointerSpeedController;
-import com.android.settings.language.TtsPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.PreferenceCategoryController;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -49,8 +47,6 @@ public class KeyboardSettings extends DashboardFragment {
     private static final String TAG = "KeyboardSettings";
 
     private static final String KEY_KEYBOARDS_CATEGORY = "keyboards_category";
-    private static final String KEY_SPEECH_CATEGORY = "speech_category";
-    private static final String KEY_TEXT_TO_SPEECH = "tts_settings_summary";
     private static final String KEY_POINTER_CATEGORY = "pointer_category";
 
     @Override
@@ -101,17 +97,6 @@ public class KeyboardSettings extends DashboardFragment {
                 KEY_KEYBOARDS_CATEGORY).setChildren(
                 Arrays.asList(virtualKeyboardPreferenceController,
                         physicalKeyboardPreferenceController)));
-
-        // Speech
-        final DefaultVoiceInputPreferenceController defaultVoiceInputPreferenceController =
-                new DefaultVoiceInputPreferenceController(context, lifecycle);
-        final TtsPreferenceController ttsPreferenceController =
-                new TtsPreferenceController(context, KEY_TEXT_TO_SPEECH);
-        controllers.add(defaultVoiceInputPreferenceController);
-        controllers.add(ttsPreferenceController);
-        controllers.add(new PreferenceCategoryController(context,
-                KEY_SPEECH_CATEGORY).setChildren(
-                Arrays.asList(defaultVoiceInputPreferenceController, ttsPreferenceController)));
 
         // Pointer
         final PointerSpeedController pointerController = new PointerSpeedController(context);
