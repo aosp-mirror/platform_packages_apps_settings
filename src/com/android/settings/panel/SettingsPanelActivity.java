@@ -29,12 +29,15 @@ import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsControllerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
 
 /**
@@ -144,9 +147,33 @@ public class SettingsPanelActivity extends FragmentActivity {
             window.setGravity(Gravity.BOTTOM);
             window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,
                     WindowManager.LayoutParams.WRAP_CONTENT);
+            setupNavigationBar();
             mPanelFragment = new PanelFragment();
             mPanelFragment.setArguments(new Bundle(mBundle));
             fragmentManager.beginTransaction().add(R.id.main_content, mPanelFragment).commit();
+        }
+    }
+
+    /**
+     * Adjust bottom edge and color.
+     */
+    private void setupNavigationBar() {
+        // Extend the panel all the way to the bottom of the screen, as opposed to sitting on top of
+        // the navigation bar.
+        ViewCompat.setOnApplyWindowInsetsListener(getWindow().getDecorView(),
+                (v, windowInsets) -> {
+                    v.setPadding(v.getPaddingLeft(), v.getPaddingTop(), v.getPaddingRight(), 0);
+                    return windowInsets; // propagate down to panel layout root element
+                });
+
+        // When using 3-button navigation in light mode, the system picks white navigation buttons
+        // which are not sufficiently contrasted from the panel background.
+        WindowInsetsControllerCompat windowInsetsController =
+                ViewCompat.getWindowInsetsController(getWindow().getDecorView());
+
+        if (windowInsetsController != null) {
+            boolean forceNavigationButtonsDark = !Utils.isNightMode(this);
+            windowInsetsController.setAppearanceLightNavigationBars(forceNavigationButtonsDark);
         }
     }
 }

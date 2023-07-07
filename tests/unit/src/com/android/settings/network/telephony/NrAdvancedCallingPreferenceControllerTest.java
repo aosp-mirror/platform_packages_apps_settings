@@ -186,6 +186,7 @@ public class NrAdvancedCallingPreferenceControllerTest {
         doReturn(true).when(mTelephonyManager).isVoNrEnabled();
         mPreference.setChecked(false);
 
+        mController.init(SUB_ID);
         mController.updateState(mPreference);
 
         assertThat(mPreference.isChecked()).isTrue();

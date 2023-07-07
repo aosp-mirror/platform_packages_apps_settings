@@ -21,6 +21,7 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.icu.text.MessageFormat;
 import android.net.ConnectivityManager;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
@@ -46,6 +47,9 @@ import com.android.settingslib.Utils;
 import com.android.settingslib.net.DataUsageController;
 import com.android.settingslib.utils.StringUtil;
 
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
@@ -290,10 +294,14 @@ public class DataUsageSummaryPreference extends Preference {
             cycleTime.setText(getContext().getString(R.string.billing_cycle_none_left));
         } else {
             int daysLeft = (int) (millisLeft / MILLIS_IN_A_DAY);
+            MessageFormat msgFormat = new MessageFormat(
+                    getContext().getResources().getString(R.string.billing_cycle_days_left),
+                    Locale.getDefault());
+            Map<String, Object> arguments = new HashMap<>();
+            arguments.put("count", daysLeft);
             cycleTime.setText(daysLeft < 1
                     ? getContext().getString(R.string.billing_cycle_less_than_one_day_left)
-                    : getContext().getResources().getQuantityString(
-                            R.plurals.billing_cycle_days_left, daysLeft, daysLeft));
+                    : msgFormat.format(arguments));
         }
     }
 

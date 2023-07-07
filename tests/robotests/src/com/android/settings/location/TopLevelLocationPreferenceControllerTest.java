@@ -22,6 +22,7 @@ import android.content.Context;
 import android.location.LocationManager;
 
 import com.android.settings.R;
+import com.android.settingslib.utils.StringUtil;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -67,9 +68,8 @@ public class TopLevelLocationPreferenceControllerTest {
         // Turn on location again and check if the previous summary text is still cached.
         mLocationManager.setLocationEnabledForUser(true, android.os.Process.myUserHandle());
         assertThat(mController.getSummary()).isEqualTo(
-                mContext.getResources().getQuantityString(
-                        R.plurals.location_settings_summary_location_on, locationAppCount,
-                        locationAppCount));
+                StringUtil.getIcuPluralsString(mContext, locationAppCount,
+                        R.string.location_settings_summary_location_on));
     }
 
     @Test
@@ -78,9 +78,8 @@ public class TopLevelLocationPreferenceControllerTest {
         mLocationManager.setLocationEnabledForUser(true, android.os.Process.myUserHandle());
         mController.setLocationAppCount(locationAppCount);
         assertThat(mController.getSummary()).isEqualTo(
-                mContext.getResources().getQuantityString(
-                        R.plurals.location_settings_summary_location_on,
-                        locationAppCount, locationAppCount));
+                StringUtil.getIcuPluralsString(mContext, locationAppCount,
+                        R.string.location_settings_summary_location_on));
     }
 
     @Test
@@ -89,8 +88,7 @@ public class TopLevelLocationPreferenceControllerTest {
         mLocationManager.setLocationEnabledForUser(true, android.os.Process.myUserHandle());
         mController.setLocationAppCount(locationAppCount);
         assertThat(mController.getSummary()).isEqualTo(
-                mContext.getResources().getQuantityString(
-                        R.plurals.location_settings_summary_location_on,
-                        locationAppCount, locationAppCount));
+                StringUtil.getIcuPluralsString(mContext, locationAppCount,
+                        R.string.location_settings_summary_location_on));
     }
 }

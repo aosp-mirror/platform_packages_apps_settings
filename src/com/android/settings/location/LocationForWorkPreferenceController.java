@@ -44,8 +44,8 @@ public class LocationForWorkPreferenceController extends LocationBasePreferenceC
             final boolean switchState = mPreference.isChecked();
             mUserManager.setUserRestriction(UserManager.DISALLOW_SHARE_LOCATION, !switchState,
                     Utils.getManagedProfile(mUserManager));
-            mPreference.setSummary(switchState ?
-                    R.string.switch_on_text : R.string.switch_off_text);
+            mPreference.setSummary(switchState
+                    ? R.string.switch_on_text : R.string.switch_off_text);
             return true;
         }
         return false;

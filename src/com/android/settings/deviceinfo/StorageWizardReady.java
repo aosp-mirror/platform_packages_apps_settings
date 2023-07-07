@@ -19,6 +19,7 @@ package com.android.settings.deviceinfo;
 import android.os.Bundle;
 import android.os.storage.VolumeInfo;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.android.settings.R;
 
@@ -48,7 +49,9 @@ public class StorageWizardReady extends StorageWizardBase {
             setBodyText(R.string.storage_wizard_ready_v2_external_body,
                     getDiskDescription());
         }
-
+        ImageView img = (ImageView) findViewById(R.id.storage_wizard_body_image);
+        img.setImageResource(R.drawable.ic_storage_wizard_ready);
+        setIcon(R.drawable.ic_test_tick);
         setNextButtonText(R.string.done);
         setBackButtonVisibility(View.INVISIBLE);
     }

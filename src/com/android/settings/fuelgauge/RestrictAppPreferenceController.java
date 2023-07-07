@@ -31,6 +31,7 @@ import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
 import com.android.settings.fuelgauge.batterytip.BatteryTipUtils;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.utils.StringUtil;
 
 import java.util.List;
 
@@ -46,12 +47,15 @@ public class RestrictAppPreferenceController extends BasePreferenceController {
     private AppOpsManager mAppOpsManager;
     private InstrumentedPreferenceFragment mPreferenceFragment;
     private UserManager mUserManager;
+    private boolean mEnableAppBatteryUsagePage;
 
     public RestrictAppPreferenceController(Context context) {
         super(context, KEY_RESTRICT_APP);
         mAppOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
         mUserManager = context.getSystemService(UserManager.class);
         mAppInfos = BatteryTipUtils.getRestrictedAppsList(mAppOpsManager, mUserManager);
+        mEnableAppBatteryUsagePage =
+                mContext.getResources().getBoolean(R.bool.config_app_battery_usage_list_enabled);
     }
 
     public RestrictAppPreferenceController(InstrumentedPreferenceFragment preferenceFragment) {
@@ -61,7 +65,8 @@ public class RestrictAppPreferenceController extends BasePreferenceController {
 
     @Override
     public int getAvailabilityStatus() {
-        return mAppInfos.size() > 0 ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+        return mAppInfos.size() > 0 && !mEnableAppBatteryUsagePage ? AVAILABLE
+                : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override
@@ -71,9 +76,8 @@ public class RestrictAppPreferenceController extends BasePreferenceController {
         final int num = mAppInfos.size();
         // Fragment change RestrictedAppsList after onPause(), UI needs to be updated in onResume()
         preference.setVisible(num > 0);
-        preference.setSummary(
-                mContext.getResources().getQuantityString(R.plurals.restricted_app_summary, num,
-                        num));
+        preference.setSummary(StringUtil.getIcuPluralsString(mContext, num,
+                        R.string.restricted_app_summary));
     }
 
     @Override
