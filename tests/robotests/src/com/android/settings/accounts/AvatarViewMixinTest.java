@@ -41,7 +41,6 @@ import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.android.settings.homepage.SettingsHomepageActivity;
-import com.android.settings.homepage.contextualcards.slices.BatteryFixSliceTest;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 
 import org.junit.Before;
@@ -95,7 +94,6 @@ public class AvatarViewMixinTest {
     }
 
     @Test
-    @Config(shadows = BatteryFixSliceTest.ShadowBatteryTipLoader.class)
     public void onStart_useMockAvatarViewMixin_shouldBeExecuted() {
         final AvatarViewMixin mockAvatar = spy(new AvatarViewMixin(mActivity, mImageView));
 

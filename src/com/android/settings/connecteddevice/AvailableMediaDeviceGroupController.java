@@ -131,7 +131,7 @@ public class AvailableMediaDeviceGroupController extends BasePreferenceControlle
     public void init(DashboardFragment fragment) {
         mFragmentManager = fragment.getParentFragmentManager();
         mBluetoothDeviceUpdater = new AvailableMediaBluetoothDeviceUpdater(fragment.getContext(),
-                fragment, AvailableMediaDeviceGroupController.this);
+                AvailableMediaDeviceGroupController.this, fragment.getMetricsCategory());
     }
 
     @VisibleForTesting

@@ -28,7 +28,6 @@ import android.telephony.UiccSlotMapping;
 import android.util.Log;
 
 import com.android.internal.annotations.VisibleForTesting;
-import com.android.internal.telephony.uicc.UiccController;
 import com.android.settingslib.utils.ThreadUtils;
 
 import com.google.common.collect.ImmutableList;
@@ -201,7 +200,7 @@ public class UiccSlotUtil {
                         && uiccCardInfo.getCardId() > TelephonyManager.UNSUPPORTED_CARD_ID
                         && uiccCardInfo.isEuicc()
                         && uiccCardInfo.isRemovable()) {
-                    Log.d(TAG, "getEsimSlotId: This subInfo is removable esim.");
+                    Log.d(TAG, "getEsimSlotId: This subInfo is a removable esim.");
                     return uiccCardInfo.getPhysicalSlotIndex();
                 }
             }
@@ -270,6 +269,7 @@ public class UiccSlotUtil {
         if (slotId == INVALID_PHYSICAL_SLOT_ID) {
             for (int i = 0; i < slots.length; i++) {
                 if (slots[i].isRemovable()
+                        && !slots[i].getIsEuicc()
                         && !slots[i].getPorts().stream().findFirst().get().isActive()
                         && slots[i].getCardStateInfo() != UiccSlotInfo.CARD_STATE_INFO_ERROR
                         && slots[i].getCardStateInfo() != UiccSlotInfo.CARD_STATE_INFO_RESTRICTED) {
@@ -409,5 +409,30 @@ public class UiccSlotUtil {
                 .mapToInt(uiccSlotMapping -> uiccSlotMapping.getLogicalSlotIndex())
                 .findFirst()
                 .orElse(INVALID_LOGICAL_SLOT_ID);
+    }
+
+    /**
+     * Return whether the removable psim is enabled.
+     *
+     * @param telMgr is a TelephonyManager.
+     * @return whether the removable psim is enabled.
+     */
+    public static boolean isRemovableSimEnabled(TelephonyManager telMgr) {
+        if (telMgr == null) {
+            return false;
+        }
+        ImmutableList<UiccSlotInfo> slotInfos = UiccSlotUtil.getSlotInfos(telMgr);
+        boolean isRemovableSimEnabled =
+                slotInfos.stream()
+                        .anyMatch(
+                                slot -> slot != null
+                                        && slot.isRemovable()
+                                        && !slot.getIsEuicc()
+                                        && slot.getPorts().stream().anyMatch(
+                                                port -> port.isActive())
+                                        && slot.getCardStateInfo()
+                                                == UiccSlotInfo.CARD_STATE_INFO_PRESENT);
+        Log.i(TAG, "isRemovableSimEnabled: " + isRemovableSimEnabled);
+        return isRemovableSimEnabled;
     }
 }

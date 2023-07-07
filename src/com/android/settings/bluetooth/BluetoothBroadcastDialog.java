@@ -19,6 +19,7 @@ package com.android.settings.bluetooth;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -27,6 +28,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.R;
@@ -41,15 +43,18 @@ import com.android.settingslib.media.MediaOutputConstants;
  * nearby broadcast sources.
  */
 public class BluetoothBroadcastDialog extends InstrumentedDialogFragment {
+
     public static final String KEY_APP_LABEL = "app_label";
     public static final String KEY_DEVICE_ADDRESS =
             BluetoothFindBroadcastsFragment.KEY_DEVICE_ADDRESS;
+    public static final String KEY_MEDIA_STREAMING = "media_streaming";
 
     private static final String TAG = "BTBroadcastsDialog";
     private static final CharSequence UNKNOWN_APP_LABEL = "unknown";
     private Context mContext;
     private CharSequence mCurrentAppLabel = UNKNOWN_APP_LABEL;
     private String mDeviceAddress;
+    private boolean mIsMediaStreaming;
     private LocalBluetoothManager mLocalBluetoothManager;
     private AlertDialog mAlertDialog;
 
@@ -59,6 +64,7 @@ public class BluetoothBroadcastDialog extends InstrumentedDialogFragment {
         mContext = getActivity();
         mCurrentAppLabel = getActivity().getIntent().getCharSequenceExtra(KEY_APP_LABEL);
         mDeviceAddress = getActivity().getIntent().getStringExtra(KEY_DEVICE_ADDRESS);
+        mIsMediaStreaming = getActivity().getIntent().getBooleanExtra(KEY_MEDIA_STREAMING, false);
         mLocalBluetoothManager = Utils.getLocalBtManager(mContext);
         setShowsDialog(true);
     }
@@ -70,21 +76,29 @@ public class BluetoothBroadcastDialog extends InstrumentedDialogFragment {
 
         TextView title = layout.findViewById(com.android.settingslib.R.id.dialog_title);
         TextView subTitle = layout.findViewById(com.android.settingslib.R.id.dialog_subtitle);
-        title.setText(mContext.getString(R.string.bluetooth_broadcast_dialog_title));
-        subTitle.setText(
-                mContext.getString(R.string.bluetooth_broadcast_dialog_broadcast_message));
 
         Button broadcastBtn = layout.findViewById(com.android.settingslib.R.id.positive_btn);
-        if (TextUtils.isEmpty(mCurrentAppLabel)) {
-            broadcastBtn.setText(mContext.getString(R.string.bluetooth_broadcast_dialog_title));
-        } else {
-            broadcastBtn.setText(mContext.getString(
+        if (isBroadcastSupported() && mIsMediaStreaming) {
+            title.setText(mContext.getString(R.string.bluetooth_broadcast_dialog_title));
+            subTitle.setText(
+                    mContext.getString(R.string.bluetooth_broadcast_dialog_broadcast_message));
+            broadcastBtn.setVisibility(View.VISIBLE);
+            if (TextUtils.isEmpty(mCurrentAppLabel)) {
+                broadcastBtn.setText(mContext.getString(R.string.bluetooth_broadcast_dialog_title));
+            } else {
+                broadcastBtn.setText(mContext.getString(
                     R.string.bluetooth_broadcast_dialog_broadcast_app,
                     String.valueOf(mCurrentAppLabel)));
+            }
+            broadcastBtn.setOnClickListener((view) -> {
+                launchMediaOutputBroadcastDialog();
+            });
+        } else {
+            title.setText(mContext.getString(R.string.bluetooth_find_broadcast));
+            subTitle.setText(
+                    mContext.getString(R.string.bluetooth_broadcast_dialog_find_message));
+            broadcastBtn.setVisibility(View.GONE);
         }
-        broadcastBtn.setOnClickListener((view) -> {
-            launchMediaOutputBroadcastDialog();
-        });
 
         Button findBroadcastBtn = layout.findViewById(com.android.settingslib.R.id.negative_btn);
         findBroadcastBtn.setText(mContext.getString(R.string.bluetooth_find_broadcast));
@@ -113,8 +127,13 @@ public class BluetoothBroadcastDialog extends InstrumentedDialogFragment {
 
     @Override
     public int getMetricsCategory() {
-        //TODO(b/228255796) : add new enum for find broadcast fragment
-        return SettingsEnums.PAGE_UNKNOWN;
+        return SettingsEnums.DIALOG_LE_AUDIO_BROADCAST;
+    }
+
+    @Override
+    public void onCancel(@NonNull DialogInterface dialog) {
+        dismiss();
+        getActivity().finish();
     }
 
     private void launchFindBroadcastsActivity() {
@@ -168,5 +187,11 @@ public class BluetoothBroadcastDialog extends InstrumentedDialogFragment {
         mContext.sendBroadcast(new Intent()
                 .setPackage(MediaOutputConstants.SETTINGS_PACKAGE_NAME)
                 .setAction(MediaOutputConstants.ACTION_CLOSE_PANEL));
+    }
+
+    boolean isBroadcastSupported() {
+        LocalBluetoothLeBroadcast broadcast =
+                mLocalBluetoothManager.getProfileManager().getLeAudioBroadcastProfile();
+        return broadcast != null;
     }
 }

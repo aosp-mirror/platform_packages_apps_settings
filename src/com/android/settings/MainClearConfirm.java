@@ -267,8 +267,10 @@ public class MainClearConfirm extends InstrumentedFragment {
     @VisibleForTesting
     void setSubtitle() {
         if (mEraseEsims) {
-            ((TextView) mContentView.findViewById(R.id.sud_layout_description))
-                .setText(R.string.main_clear_final_desc_esim);
+            TextView confirmationMessage = mContentView.findViewById(R.id.sud_layout_description);
+            if (confirmationMessage != null) {
+                confirmationMessage.setText(R.string.main_clear_final_desc_esim);
+                }
         }
     }
 

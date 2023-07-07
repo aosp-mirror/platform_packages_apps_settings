@@ -18,6 +18,7 @@
 <com.google.android.setupdesign.GlifLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/setup_wizard_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -39,11 +40,13 @@
             android:orientation="vertical">
 
           <FrameLayout
+              android:id="@+id/layout_container"
               android:layout_width="match_parent"
-              android:layout_height="wrap_content"
+              android:layout_height="0dp"
               android:clipChildren="false"
               android:clipToPadding="false"
-              android:layout_gravity="center_horizontal|bottom">
+              android:layout_gravity="center_horizontal|bottom"
+              tools:ignore="Suspicious0dp">
 
               <!-- Animation res MUST be set in code -->
               <com.airbnb.lottie.LottieAnimationView
@@ -58,6 +61,9 @@
                   android:clipChildren="false"
                   android:clipToPadding="false"
                   app:lottie_speed=".85" />
+
+              <include layout="@layout/udfps_enroll_view" />
+
           </FrameLayout>
 
           <TextView

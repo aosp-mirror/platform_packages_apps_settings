@@ -16,6 +16,9 @@
 
 package com.android.settings.wifi;
 
+import static com.android.settings.wifi.WifiConfigController2.DEFAULT_ANONYMOUS_ID;
+import static com.android.settings.wifi.WifiConfigController2.WIFI_EAP_METHOD_SIM;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -71,10 +74,15 @@ import org.robolectric.shadows.ShadowInputMethodManager;
 import org.robolectric.shadows.ShadowSubscriptionManager;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowConnectivityManager.class)
 public class WifiConfigController2Test {
+
+    static final String WIFI_EAP_TLS_V1_3 = "TLS v1.3";
 
     @Mock
     private WifiConfigUiBase2 mConfigUiBase;
@@ -86,6 +94,8 @@ public class WifiConfigController2Test {
     private AndroidKeystoreAliasLoader mAndroidKeystoreAliasLoader;
     @Mock
     private WifiManager mWifiManager;
+    @Mock
+    Spinner mEapMethodSimSpinner;
     private View mView;
     private Spinner mHiddenSettingsSpinner;
     private Spinner mEapCaCertSpinner;
@@ -141,6 +151,7 @@ public class WifiConfigController2Test {
                 mContext.getString(R.string.wifi_do_not_provide_eap_user_cert);
         ipSettingsSpinner.setSelection(DHCP);
         mShadowSubscriptionManager = shadowOf(mContext.getSystemService(SubscriptionManager.class));
+        when(mEapMethodSimSpinner.getSelectedItemPosition()).thenReturn(WIFI_EAP_METHOD_SIM);
 
         mController = new TestWifiConfigController2(mConfigUiBase, mView, mWifiEntry,
                 WifiConfigUiBase2.MODE_CONNECT);
@@ -459,7 +470,7 @@ public class WifiConfigController2Test {
 
     private void checkSavedMacRandomizedValue(int macRandomizedValue) {
         when(mWifiEntry.isSaved()).thenReturn(true);
-        final WifiConfiguration mockWifiConfig = mock(WifiConfiguration.class);
+        final WifiConfiguration mockWifiConfig = spy(new WifiConfiguration());
         when(mockWifiConfig.getIpConfiguration()).thenReturn(mock(IpConfiguration.class));
         when(mWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfig);
         mockWifiConfig.macRandomizationSetting = macRandomizedValue;
@@ -798,9 +809,10 @@ public class WifiConfigController2Test {
     private void setUpModifyingSavedPeapConfigController() {
         when(mWifiEntry.isSaved()).thenReturn(true);
         when(mWifiEntry.getSecurity()).thenReturn(WifiEntry.SECURITY_EAP);
-        final WifiConfiguration mockWifiConfig = mock(WifiConfiguration.class);
+        final WifiConfiguration mockWifiConfig = spy(new WifiConfiguration());
+        mockWifiConfig.setSecurityParams(WifiConfiguration.SECURITY_TYPE_EAP);
         when(mockWifiConfig.getIpConfiguration()).thenReturn(mock(IpConfiguration.class));
-        final WifiEnterpriseConfig mockWifiEnterpriseConfig = mock(WifiEnterpriseConfig.class);
+        final WifiEnterpriseConfig mockWifiEnterpriseConfig = spy(new WifiEnterpriseConfig());
         when(mockWifiEnterpriseConfig.getEapMethod()).thenReturn(Eap.PEAP);
         mockWifiConfig.enterpriseConfig = mockWifiEnterpriseConfig;
         when(mWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfig);
@@ -813,10 +825,7 @@ public class WifiConfigController2Test {
         when(mWifiEntry.getSecurity()).thenReturn(WifiEntry.SECURITY_EAP);
         mController = new TestWifiConfigController2(mConfigUiBase, mView, mWifiEntry,
                 WifiConfigUiBase2.MODE_CONNECT);
-        final Spinner eapMethodSpinner = mock(Spinner.class);
-        when(eapMethodSpinner.getSelectedItemPosition()).thenReturn(
-                WifiConfigController2.WIFI_EAP_METHOD_SIM);
-        mController.mEapMethodSpinner = eapMethodSpinner;
+        mController.mEapMethodSpinner = mEapMethodSimSpinner;
 
         mController.loadSims();
 
@@ -837,15 +846,54 @@ public class WifiConfigController2Test {
         mShadowSubscriptionManager.setActiveSubscriptionInfoList(Arrays.asList(subscriptionInfo));
         mController = new TestWifiConfigController2(mConfigUiBase, mView, mWifiEntry,
                 WifiConfigUiBase2.MODE_CONNECT);
-        final Spinner eapMethodSpinner = mock(Spinner.class);
-        when(eapMethodSpinner.getSelectedItemPosition()).thenReturn(
-                WifiConfigController2.WIFI_EAP_METHOD_SIM);
-        mController.mEapMethodSpinner = eapMethodSpinner;
+        mController.mEapMethodSpinner = mEapMethodSimSpinner;
 
         mController.loadSims();
 
         final WifiConfiguration wifiConfiguration = mController.getConfig();
         assertThat(wifiConfiguration.carrierId).isEqualTo(carrierId);
+    }
+
+    @Test
+    public void loadSims_twoSimsWithDifferentCarrierId_showTwoSims() {
+        SubscriptionInfo sub1 = createMockSubscription(1, "sub1", 8888);
+        SubscriptionInfo sub2 = createMockSubscription(2, "sub2", 9999);
+        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1, sub2));
+        mShadowSubscriptionManager.setActiveSubscriptionInfoList(Arrays.asList(sub1, sub2));
+        when(mWifiEntry.getSecurity()).thenReturn(WifiEntry.SECURITY_EAP);
+        mController = new TestWifiConfigController2(mConfigUiBase, mView, mWifiEntry,
+                WifiConfigUiBase2.MODE_CONNECT);
+        mController.mEapMethodSpinner = mEapMethodSimSpinner;
+        ShadowSubscriptionManager.setDefaultDataSubscriptionId(1);
+
+        mController.loadSims();
+
+        assertThat(mController.mEapSimSpinner.getAdapter().getCount()).isEqualTo(2);
+    }
+
+    @Test
+    public void loadSims_twoSimsWithSameCarrierId_showOneDefaultDataSim() {
+        SubscriptionInfo sub1 = createMockSubscription(1, "sub1", 9999);
+        SubscriptionInfo sub2 = createMockSubscription(2, "sub2", 9999);
+        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1, sub2));
+        mShadowSubscriptionManager.setActiveSubscriptionInfoList(Arrays.asList(sub1, sub2));
+        when(mWifiEntry.getSecurity()).thenReturn(WifiEntry.SECURITY_EAP);
+        mController = new TestWifiConfigController2(mConfigUiBase, mView, mWifiEntry,
+                WifiConfigUiBase2.MODE_CONNECT);
+        mController.mEapMethodSpinner = mEapMethodSimSpinner;
+        ShadowSubscriptionManager.setDefaultDataSubscriptionId(1);
+
+        mController.loadSims();
+
+        assertThat(mController.mEapSimSpinner.getAdapter().getCount()).isEqualTo(1);
+        assertThat(mController.mEapSimSpinner.getSelectedItem().toString()).isEqualTo("sub1");
+
+        ShadowSubscriptionManager.setDefaultDataSubscriptionId(2);
+
+        mController.loadSims();
+
+        assertThat(mController.mEapSimSpinner.getAdapter().getCount()).isEqualTo(1);
+        assertThat(mController.mEapSimSpinner.getSelectedItem().toString()).isEqualTo("sub2");
     }
 
     @Test
@@ -897,10 +945,44 @@ public class WifiConfigController2Test {
         assertThat(mEapUserCertSpinner.getSelectedItem()).isEqualTo(SAVED_USER_CERT);
     }
 
+    @Test
+    public void getEapMinTlsVerSpinner_isTlsV13Supported_containsTlsV13() {
+        Spinner spinner = mController.getEapMinTlsVerSpinner(true /* isTlsV13Supported */);
+
+        List<Object> list = IntStream.range(0, spinner.getAdapter().getCount())
+                .mapToObj(spinner.getAdapter()::getItem)
+                .collect(Collectors.toList());
+        assertThat(list).contains(WIFI_EAP_TLS_V1_3);
+    }
+
+    @Test
+    public void getEapMinTlsVerSpinner_isNotTlsV13Supported_doesNotContainTlsV13() {
+        Spinner spinner = mController.getEapMinTlsVerSpinner(false /* isTlsV13Supported */);
+
+        List<Object> list = IntStream.range(0, spinner.getAdapter().getCount())
+                .mapToObj(spinner.getAdapter()::getItem)
+                .collect(Collectors.toList());
+        assertThat(list).doesNotContain(WIFI_EAP_TLS_V1_3);
+    }
+
+    @Test
+    public void setAnonymousIdVisible_showAnonymousIdAndSetDefaultId() {
+        View anonymousLayout = mView.findViewById(R.id.l_anonymous);
+        TextView anonymousId = mView.findViewById(R.id.anonymous);
+        mController.mEapAnonymousView = anonymousId;
+        anonymousLayout.setVisibility(View.GONE);
+        anonymousId.setText("");
+
+        mController.setAnonymousIdVisible();
+
+        assertThat(anonymousLayout.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(anonymousId.getText().toString()).isEqualTo(DEFAULT_ANONYMOUS_ID);
+    }
+
     private void setUpModifyingSavedCertificateConfigController(String savedCaCertificate,
             String savedUserCertificate) {
-        final WifiConfiguration mockWifiConfig = mock(WifiConfiguration.class);
-        final WifiEnterpriseConfig mockWifiEnterpriseConfig = mock(WifiEnterpriseConfig.class);
+        final WifiConfiguration mockWifiConfig = spy(new WifiConfiguration());
+        final WifiEnterpriseConfig mockWifiEnterpriseConfig = spy(new WifiEnterpriseConfig());
 
         mockWifiConfig.enterpriseConfig = mockWifiEnterpriseConfig;
         when(mWifiEntry.isSaved()).thenReturn(true);
@@ -939,5 +1021,13 @@ public class WifiConfigController2Test {
         //  We need to add a redundant mEapMethodSpinner.setSelection here to verify whether the
         //  certificates are covered by mController.onItemSelected after showSecurityFields end.
         mController.mEapMethodSpinner.setSelection(Eap.TLS);
+    }
+
+    private SubscriptionInfo createMockSubscription(int subId, String displayName, int carrierId) {
+        SubscriptionInfo sub = mock(SubscriptionInfo.class);
+        when(sub.getSubscriptionId()).thenReturn(subId);
+        when(sub.getDisplayName()).thenReturn(displayName);
+        when(sub.getCarrierId()).thenReturn(carrierId);
+        return sub;
     }
 }

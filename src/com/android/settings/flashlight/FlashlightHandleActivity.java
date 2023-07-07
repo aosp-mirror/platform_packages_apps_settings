@@ -65,6 +65,11 @@ public class FlashlightHandleActivity extends Activity implements Indexable {
                         boolean enabled) {
 
                     final List<SearchIndexableRaw> result = new ArrayList<>();
+                    if (!context.getResources().getBoolean(
+                            R.bool.config_settingsintelligence_slice_supported)) {
+                        Log.d(TAG, "Search doesn't support Slice");
+                        return result;
+                    }
 
                     SearchIndexableRaw data = new SearchIndexableRaw(context);
                     data.title = context.getString(R.string.power_flashlight);

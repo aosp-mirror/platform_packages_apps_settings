@@ -19,6 +19,8 @@ package com.android.settings.applications;
 import android.annotation.UserIdInt;
 import android.content.Intent;
 
+import androidx.annotation.NonNull;
+
 import java.util.List;
 import java.util.Set;
 
@@ -85,9 +87,16 @@ public interface ApplicationFeatureProvider {
      * Returns a user readable text explaining how much time user has spent in an app at a
      * pre-specified duration.
      */
+    @NonNull
     default CharSequence getTimeSpentInApp(String packageName) {
-        return null;
+        return "";
     }
+
+    /**
+     * @return {@code true} if the device supports the toggling of the long background task
+     * permission.
+     */
+    boolean isLongBackgroundTaskPermissionToggleSupported();
 
     /**
      * Callback that receives the number of packages installed on the device.

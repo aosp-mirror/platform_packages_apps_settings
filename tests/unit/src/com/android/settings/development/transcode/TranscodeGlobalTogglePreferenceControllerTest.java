@@ -20,9 +20,12 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 import android.os.SystemProperties;
+import android.provider.Settings;
 
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+
+import com.android.settings.core.BasePreferenceController;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -34,11 +37,14 @@ public class TranscodeGlobalTogglePreferenceControllerTest {
     private static final String TRANSCODE_ENABLED_PROP_KEY = "persist.sys.fuse.transcode_enabled";
 
     private TranscodeGlobalTogglePreferenceController mController;
+    private Context mContext;
 
     @Before
     public void setUp() {
-        Context context = ApplicationProvider.getApplicationContext();
-        mController = new TranscodeGlobalTogglePreferenceController(context, "test_key");
+        mContext = ApplicationProvider.getApplicationContext();
+        mController = new TranscodeGlobalTogglePreferenceController(mContext, "test_key");
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 1);
     }
 
     @Test
@@ -74,5 +80,13 @@ public class TranscodeGlobalTogglePreferenceControllerTest {
 
         // Verify the system property was updated.
         assertThat(SystemProperties.getBoolean(TRANSCODE_ENABLED_PROP_KEY, true)).isFalse();
+    }
+
+    @Test
+    public void getAvailabilityStatus_developerOptionFalse_shouldReturnUNAVAILABLE() {
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
     }
 }

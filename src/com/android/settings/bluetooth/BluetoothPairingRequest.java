@@ -24,7 +24,9 @@ import android.content.Intent;
 import android.os.PowerManager;
 import android.os.UserHandle;
 import android.text.TextUtils;
+import android.util.Log;
 
+import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 /**
@@ -34,6 +36,7 @@ import com.android.settingslib.bluetooth.LocalBluetoothManager;
  * starts a notification in the status bar that can be clicked to bring up the same dialog.
  */
 public final class BluetoothPairingRequest extends BroadcastReceiver {
+    private static final String TAG = "BluetoothPairingRequest";
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -48,22 +51,31 @@ public final class BluetoothPairingRequest extends BroadcastReceiver {
             PowerManager powerManager = context.getSystemService(PowerManager.class);
             int pairingVariant = intent.getIntExtra(BluetoothDevice.EXTRA_PAIRING_VARIANT,
                     BluetoothDevice.ERROR);
-            String deviceAddress = device != null ? device.getAddress() : null;
-            String deviceName = device != null ? device.getName() : null;
             boolean shouldShowDialog = LocalBluetoothPreferences.shouldShowDialogInForeground(
-                    context, deviceAddress, deviceName);
+                    context, device);
 
-            // Skips consent pairing dialog if the device was recently associated with CDM
+            Log.d(TAG,
+                "Receive ACTION_PAIRING_REQUEST pairingVariant=" + pairingVariant
+                    + " canBondWithoutDialog=" + device.canBondWithoutDialog()
+                    + " isOngoingPairByCsip="
+                    + mBluetoothManager.getCachedDeviceManager().isOngoingPairByCsip(device)
+                    + " isLateBonding="
+                    + mBluetoothManager.getCachedDeviceManager().isLateBonding(device));
+
+            /* Skips consent pairing dialog if the device was recently associated with CDM
+             * or if the device is a member of the coordinated set and is not bonding late.
+             */
             if (pairingVariant == BluetoothDevice.PAIRING_VARIANT_CONSENT
-                    && (device.canBondWithoutDialog()
-                    || mBluetoothManager.getCachedDeviceManager().isOngoingPairByCsip(device))) {
+                && (device.canBondWithoutDialog()
+                    || (mBluetoothManager.getCachedDeviceManager().isOngoingPairByCsip(device)
+                        && !mBluetoothManager.getCachedDeviceManager().isLateBonding(device)))) {
                 device.setPairingConfirmation(true);
             } else if (powerManager.isInteractive() && shouldShowDialog) {
                 // Since the screen is on and the BT-related activity is in the foreground,
                 // just open the dialog
                 // convert broadcast intent into activity intent (same action string)
-                Intent pairingIntent = BluetoothPairingService.getPairingDialogIntent(context,
-                        intent, BluetoothDevice.EXTRA_PAIRING_INITIATOR_FOREGROUND);
+                Intent pairingIntent = BluetoothPairingService.getPairingDialogIntent(
+                    context, intent, BluetoothDevice.EXTRA_PAIRING_INITIATOR_FOREGROUND);
 
                 context.startActivityAsUser(pairingIntent, UserHandle.CURRENT);
             } else {
@@ -74,6 +86,7 @@ public final class BluetoothPairingRequest extends BroadcastReceiver {
             }
         } else if (TextUtils.equals(action,
                 BluetoothCsipSetCoordinator.ACTION_CSIS_SET_MEMBER_AVAILABLE)) {
+            Log.d(TAG, "Receive ACTION_CSIS_SET_MEMBER_AVAILABLE");
             if (device == null) {
                 return;
             }
@@ -84,9 +97,7 @@ public final class BluetoothPairingRequest extends BroadcastReceiver {
                 return;
             }
 
-            if (mBluetoothManager.getCachedDeviceManager().shouldPairByCsip(device, groupId)) {
-                device.createBond(BluetoothDevice.TRANSPORT_LE);
-            }
+            mBluetoothManager.getCachedDeviceManager().pairDeviceByCsip(device, groupId);
         }
     }
 }

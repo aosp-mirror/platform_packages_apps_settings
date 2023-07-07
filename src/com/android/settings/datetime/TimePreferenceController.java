@@ -16,13 +16,13 @@
 
 package com.android.settings.datetime;
 
-import android.app.Activity;
 import android.app.TimePickerDialog;
 import android.app.timedetector.ManualTimeSuggestion;
 import android.app.timedetector.TimeDetector;
 import android.content.Context;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.widget.TimePicker;
 
 import androidx.preference.Preference;
@@ -42,18 +42,19 @@ public class TimePreferenceController extends AbstractPreferenceController
 
     public static final int DIALOG_TIMEPICKER = 1;
 
+    private static final String TAG = "TimePreferenceController";
     private static final String KEY_TIME = "time";
 
-    private final AutoTimePreferenceController mAutoTimePreferenceController;
+    private final DatePreferenceController mDatePreferenceController;
     private final TimePreferenceHost mHost;
 
 
     public TimePreferenceController(Context context,
             TimePreferenceHost callback,
-            AutoTimePreferenceController autoTimePreferenceController) {
+            DatePreferenceController datePreferenceController) {
         super(context);
         mHost = callback;
-        mAutoTimePreferenceController = autoTimePreferenceController;
+        mDatePreferenceController = datePreferenceController;
     }
 
     @Override
@@ -69,7 +70,8 @@ public class TimePreferenceController extends AbstractPreferenceController
         final Calendar now = Calendar.getInstance();
         preference.setSummary(DateFormat.getTimeFormat(mContext).format(now.getTime()));
         if (!((RestrictedPreference) preference).isDisabledByAdmin()) {
-            preference.setEnabled(!mAutoTimePreferenceController.isEnabled());
+            boolean enableManualTimeSelection = mDatePreferenceController.isEnabled();
+            preference.setEnabled(enableManualTimeSelection);
         }
     }
 
@@ -98,14 +100,17 @@ public class TimePreferenceController extends AbstractPreferenceController
         // SystemClock time.
     }
 
-    public TimePickerDialog buildTimePicker(Activity activity) {
+    /**
+     * Builds a {@link TimePickerDialog} that can be used to request the current time from the user.
+     */
+    public TimePickerDialog buildTimePicker(Context parentContext) {
         final Calendar calendar = Calendar.getInstance();
         return new TimePickerDialog(
-                activity,
+                parentContext,
                 this,
                 calendar.get(Calendar.HOUR_OF_DAY),
                 calendar.get(Calendar.MINUTE),
-                DateFormat.is24HourFormat(activity));
+                DateFormat.is24HourFormat(parentContext));
     }
 
     void setTime(int hourOfDay, int minute) {
@@ -115,13 +120,16 @@ public class TimePreferenceController extends AbstractPreferenceController
         c.set(Calendar.MINUTE, minute);
         c.set(Calendar.SECOND, 0);
         c.set(Calendar.MILLISECOND, 0);
-        long when = Math.max(c.getTimeInMillis(), TimePreferenceHost.MIN_DATE);
+        long when = c.getTimeInMillis();
 
-        if (when / 1000 < Integer.MAX_VALUE) {
-            TimeDetector timeDetector = mContext.getSystemService(TimeDetector.class);
-            ManualTimeSuggestion manualTimeSuggestion =
-                    TimeDetector.createManualTimeSuggestion(when, "Settings: Set time");
-            timeDetector.suggestManualTime(manualTimeSuggestion);
+        TimeDetector timeDetector = mContext.getSystemService(TimeDetector.class);
+        ManualTimeSuggestion manualTimeSuggestion =
+                TimeDetector.createManualTimeSuggestion(when, "Settings: Set time");
+        boolean success = timeDetector.suggestManualTime(manualTimeSuggestion);
+        if (!success) {
+            // This implies the system server is applying tighter bounds than the settings app or
+            // the date/time cannot be set for other reasons, e.g. perhaps "auto time" is turned on.
+            Log.w(TAG, "Unable to set time with suggestion=" + manualTimeSuggestion);
         }
     }
 }

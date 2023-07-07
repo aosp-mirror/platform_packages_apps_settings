@@ -73,7 +73,7 @@ public class SuggestionFeatureProviderImplTest {
         when(mContext.getSystemService(Context.ACTIVITY_SERVICE)).thenReturn(mActivityManager);
         when(mActivityManager.isLowRamDevice()).thenReturn(false);
 
-        mProvider = new SuggestionFeatureProviderImpl(mContext);
+        mProvider = new SuggestionFeatureProviderImpl();
     }
 
     @Test
