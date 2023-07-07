@@ -38,6 +38,7 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.PersistableBundle;
+import android.os.UserManager;
 import android.telephony.CarrierConfigManager;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -107,6 +108,8 @@ public class ApnEditorTest {
     @Mock
     private FragmentActivity mActivity;
     @Mock
+    private UserManager mUserManager;
+    @Mock
     private ProxySubscriptionManager mProxySubscriptionMgr;
     @Mock
     private CarrierConfigManager mCarrierConfigManager;
@@ -134,6 +137,10 @@ public class ApnEditorTest {
         doReturn(mContext.getTheme()).when(mActivity).getTheme();
         doReturn(mContext.getContentResolver()).when(mActivity).getContentResolver();
 
+        doReturn(mUserManager).when(mContext).getSystemService(UserManager.class);
+        doReturn(true).when(mUserManager).isAdminUser();
+        doReturn(false).when(mUserManager)
+                .hasUserRestriction(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS);
         doReturn(mCarrierConfigManager).when(mContext)
                 .getSystemService(Context.CARRIER_CONFIG_SERVICE);
         doReturn(mBundle).when(mCarrierConfigManager).getConfigForSubId(anyInt());
@@ -487,6 +494,27 @@ public class ApnEditorTest {
     @Test
     public void formatInteger_shouldIgnoreNonIntegers() {
         assertThat(ApnEditor.formatInteger("not an int")).isEqualTo("not an int");
+    }
+
+    @Test
+    @Config(shadows = ShadowFragment.class)
+    public void onCreate_notAdminUser_shouldFinish() {
+        doReturn(false).when(mUserManager).isAdminUser();
+
+        mApnEditorUT.onCreate(null);
+
+        verify(mApnEditorUT).finish();
+    }
+
+    @Test
+    @Config(shadows = ShadowFragment.class)
+    public void onCreate_hasUserRestriction_shouldFinish() {
+        doReturn(true).when(mUserManager)
+                .hasUserRestriction(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS);
+
+        mApnEditorUT.onCreate(null);
+
+        verify(mApnEditorUT).finish();
     }
 
     @Test
