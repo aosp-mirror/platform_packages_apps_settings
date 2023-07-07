@@ -16,6 +16,9 @@
 
 package com.android.settings.wifi;
 
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.DISABLED_DEPENDENT_SETTING;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.doReturn;
@@ -66,6 +69,41 @@ public class WifiWakeupPreferenceControllerTest {
 
         when(mWifiManager.isScanAlwaysAvailable()).thenReturn(true);
         doReturn(true).when(mLocationManager).isLocationEnabled();
+    }
+
+    @Test
+    public void getAvailabilityStatus_fragmentIsNotNull_returnAvailable() {
+        mController.setFragment(mFragment);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_fragmentIsNullAndLocationDisabled_returnDisabled() {
+        mController.setFragment(null);
+        when(mLocationManager.isLocationEnabled()).thenReturn(false);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(DISABLED_DEPENDENT_SETTING);
+    }
+
+    @Test
+    public void getAvailabilityStatus_fragmentIsNullAndWifiScanDisabled_returnDisabled() {
+        mController.setFragment(null);
+        when(mWifiManager.isScanAlwaysAvailable()).thenReturn(false);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(DISABLED_DEPENDENT_SETTING);
+    }
+
+    @Test
+    public void setChecked_mFragmentIsNullLocationEnable_wifiWakeupEnable() {
+        mController.setFragment(null);
+        when(mLocationManager.isLocationEnabled()).thenReturn(true);
+        when(mWifiManager.isScanAlwaysAvailable()).thenReturn(true);
+        when(mWifiManager.isAutoWakeupEnabled()).thenReturn(false);
+
+        mController.setChecked(true);
+
+        verify(mWifiManager).setAutoWakeupEnabled(true);
     }
 
     @Test

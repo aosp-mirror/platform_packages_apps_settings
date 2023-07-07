@@ -141,10 +141,9 @@ public class BluetoothSampleRateDialogPreferenceControllerTest {
 
     @Test
     public void getSelectableIndex_verifyList() {
-        List<BluetoothCodecConfig> mCodecConfigs = new ArrayList() {{
-                    add(mCodecConfigAAC);
-                    add(mCodecConfigSBC);
-                }};
+        List<BluetoothCodecConfig> mCodecConfigs = List.of(
+                mCodecConfigAAC,
+                mCodecConfigSBC);
         mCodecStatus = new BluetoothCodecStatus.Builder()
                 .setCodecConfig(mCodecConfigAAC)
                 .setCodecsSelectableCapabilities(mCodecConfigs)

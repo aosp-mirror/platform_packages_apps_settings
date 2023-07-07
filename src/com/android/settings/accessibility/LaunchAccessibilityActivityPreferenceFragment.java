@@ -42,38 +42,31 @@ import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
-import com.android.settings.overlay.FeatureFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /** Fragment for providing open activity button. */
 public class LaunchAccessibilityActivityPreferenceFragment extends ToggleFeaturePreferenceFragment {
-    private static final String TAG = "LaunchA11yActivity";
+
+    private static final String TAG = "LaunchAccessibilityActivityPreferenceFragment";
     private static final String EMPTY_STRING = "";
     protected static final String KEY_LAUNCH_PREFERENCE = "launch_preference";
+
     private ComponentName mTileComponentName;
 
     @Override
     public int getMetricsCategory() {
-        // Retrieve from getArguments() directly because this function will be executed from
-        // onAttach(), but variable mComponentName only available after onProcessArguments()
-        // which comes from onCreateView().
-        final ComponentName componentName = getArguments().getParcelable(
-                AccessibilitySettings.EXTRA_COMPONENT_NAME);
-
-        return FeatureFactory.getFactory(getActivity().getApplicationContext())
-                .getAccessibilityMetricsFeatureProvider()
-                .getDownloadedFeatureMetricsCategory(componentName);
+        return getArguments().getInt(AccessibilitySettings.EXTRA_METRICS_CATEGORY);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        final View view = super.onCreateView(inflater, container, savedInstanceState);
-
         // Init new preference to replace the switch preference instead.
         initLaunchPreference();
+
+        final View view = super.onCreateView(inflater, container, savedInstanceState);
         removePreference(KEY_USE_SERVICE_PREFERENCE);
         return view;
     }
@@ -173,6 +166,7 @@ public class LaunchAccessibilityActivityPreferenceFragment extends ToggleFeature
     /** Customizes the order by preference key. */
     protected List<String> getPreferenceOrderList() {
         final List<String> lists = new ArrayList<>();
+        lists.add(KEY_TOP_INTRO_PREFERENCE);
         lists.add(KEY_ANIMATED_IMAGE);
         lists.add(KEY_LAUNCH_PREFERENCE);
         lists.add(KEY_GENERAL_CATEGORY);
@@ -229,5 +223,16 @@ public class LaunchAccessibilityActivityPreferenceFragment extends ToggleFeature
         }
 
         return settingsIntent;
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        // TODO(b/171272809): Add back when controllers move to static type
+        return 0;
+    }
+
+    @Override
+    protected String getLogTag() {
+        return TAG;
     }
 }

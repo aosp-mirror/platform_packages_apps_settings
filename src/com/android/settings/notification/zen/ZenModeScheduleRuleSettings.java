@@ -210,7 +210,7 @@ public class ZenModeScheduleRuleSettings extends ZenModeRuleSettingsBase {
                     protected void onChanged(final int[] days) {
                         if (mDisableListeners) return;
                         if (Arrays.equals(days, mSchedule.days)) return;
-                        if (DEBUG) Log.d(TAG, "days.onChanged days=" + Arrays.asList(days));
+                        if (DEBUG) Log.d(TAG, "days.onChanged days=" + Arrays.toString(days));
                         mSchedule.days = days;
                         updateRule(ZenModeConfig.toScheduleConditionId(mSchedule));
                     }

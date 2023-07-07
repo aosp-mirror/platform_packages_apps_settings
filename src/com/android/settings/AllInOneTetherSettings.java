@@ -251,6 +251,9 @@ public class AllInOneTetherSettings extends RestrictedDashboardFragment
         }
         final Context context = getContext();
         if (context != null) {
+            // The intent WIFI_AP_STATE_CHANGED_ACTION is not sticky intent after SC-V2
+            // But ACTION_TETHER_STATE_CHANGED is still sticky intent. So no need to handle
+            // initial state for WIFI_AP_STATE_CHANGED_ACTION
             IntentFilter filter = new IntentFilter(ACTION_TETHER_STATE_CHANGED);
             filter.addAction(WIFI_AP_STATE_CHANGED_ACTION);
             context.registerReceiver(mTetherChangeReceiver, filter);

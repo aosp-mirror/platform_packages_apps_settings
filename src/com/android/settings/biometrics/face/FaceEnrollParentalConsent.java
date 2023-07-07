@@ -45,14 +45,16 @@ public class FaceEnrollParentalConsent extends FaceEnrollIntroduction {
             R.string.security_settings_face_enroll_introduction_info_consent_gaze,
             R.string.security_settings_face_enroll_introduction_how_consent_message,
             R.string.security_settings_face_enroll_introduction_control_consent_title,
-            R.string.security_settings_face_enroll_introduction_control_consent_message
+            R.string.security_settings_face_enroll_introduction_control_consent_message,
+            R.string.security_settings_face_enroll_introduction_consent_message_0,
+            R.string.security_settings_face_enroll_introduction_consent_message_0_class3,
+            R.string.security_settings_face_enroll_introduction_info_consent_less_secure
     };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setDescriptionText(R.string.security_settings_face_enroll_introduction_consent_message);
+        updateDescriptionText();
     }
 
     @Override
@@ -135,7 +137,24 @@ public class FaceEnrollParentalConsent extends FaceEnrollIntroduction {
     }
 
     @Override
+    protected int getLessSecureMessage() {
+        return R.string.security_settings_face_enroll_introduction_info_consent_less_secure;
+    }
+
+    @Override
     public int getMetricsCategory() {
         return SettingsEnums.FACE_PARENTAL_CONSENT;
+    }
+
+    @Override
+    protected void updateDescriptionText() {
+        super.updateDescriptionText();
+        if (isFaceStrong()) {
+            setDescriptionText(getString(
+                    R.string.security_settings_face_enroll_introduction_consent_message_0_class3));
+        } else {
+            setDescriptionText(
+                    R.string.security_settings_face_enroll_introduction_consent_message_0);
+        }
     }
 }

@@ -33,6 +33,7 @@ public class ShadowRestrictedLockUtilsInternal {
     private static boolean sIsRestricted;
     private static boolean sHasSystemFeature;
     private static boolean sMaximumTimeToLockIsSet;
+    private static boolean sMteOverridden;
     private static String[] sRestrictedPkgs;
     private static DevicePolicyManager sDevicePolicyManager;
     private static String[] sDisabledTypes;
@@ -45,6 +46,7 @@ public class ShadowRestrictedLockUtilsInternal {
         sKeyguardDisabledFeatures = 0;
         sDisabledTypes = new String[0];
         sMaximumTimeToLockIsSet = false;
+        sMteOverridden = false;
     }
 
     @Implementation
@@ -101,6 +103,11 @@ public class ShadowRestrictedLockUtilsInternal {
         return sMaximumTimeToLockIsSet ? new EnforcedAdmin() : null;
     }
 
+    @Implementation
+    public static EnforcedAdmin checkIfMteIsDisabled(Context context) {
+        return sMteOverridden ? new EnforcedAdmin() : null;
+    }
+
     public static void setRestricted(boolean restricted) {
         sIsRestricted = restricted;
     }
@@ -131,5 +138,9 @@ public class ShadowRestrictedLockUtilsInternal {
 
     public static void setMaximumTimeToLockIsSet(boolean isSet) {
         sMaximumTimeToLockIsSet = isSet;
+    }
+
+    public static void setMteIsDisabled(boolean isSet) {
+        sMteOverridden = isSet;
     }
 }

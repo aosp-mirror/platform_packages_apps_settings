@@ -18,7 +18,6 @@ package com.android.settings.fuelgauge.batterytip.detectors;
 
 import android.content.ContentResolver;
 import android.content.Context;
-import android.os.PowerManager;
 import android.provider.Settings;
 
 import com.android.settings.fuelgauge.BatteryInfo;
@@ -32,17 +31,17 @@ import com.android.settings.fuelgauge.batterytip.tips.SmartBatteryTip;
 public class SmartBatteryDetector implements BatteryTipDetector {
     private static final int EXPECTED_BATTERY_LEVEL = 30;
 
-    private BatteryInfo mBatteryInfo;
-    private BatteryTipPolicy mPolicy;
-    private ContentResolver mContentResolver;
-    private PowerManager mPowerManager;
+    private final BatteryInfo mBatteryInfo;
+    private final BatteryTipPolicy mPolicy;
+    private final ContentResolver mContentResolver;
+    private final boolean mIsPowerSaveMode;
 
     public SmartBatteryDetector(Context context, BatteryTipPolicy policy, BatteryInfo batteryInfo,
-            ContentResolver contentResolver) {
+            ContentResolver contentResolver, boolean isPowerSaveMode) {
         mPolicy = policy;
         mBatteryInfo = batteryInfo;
         mContentResolver = contentResolver;
-        mPowerManager = context.getSystemService(PowerManager.class);
+        mIsPowerSaveMode = isPowerSaveMode;
     }
 
     @Override
@@ -53,7 +52,7 @@ public class SmartBatteryDetector implements BatteryTipDetector {
                 mBatteryInfo.batteryLevel <= EXPECTED_BATTERY_LEVEL;
         // Show it if in test or smart battery is off.
         final boolean enableSmartBatteryTip =
-                smartBatteryOff && !mPowerManager.isPowerSaveMode() && isUnderExpectedBatteryLevel
+                smartBatteryOff && !mIsPowerSaveMode && isUnderExpectedBatteryLevel
                 || mPolicy.testSmartBatteryTip;
         final int state =
                 enableSmartBatteryTip ? BatteryTip.StateType.NEW : BatteryTip.StateType.INVISIBLE;
