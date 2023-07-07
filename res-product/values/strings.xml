@@ -83,12 +83,24 @@
     <string name="security_settings_face_enroll_introduction_message" product="tablet">Use your face to unlock your tablet, authorize purchases, or sign in to apps.</string>
     <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
     <string name="security_settings_face_enroll_introduction_message" product="device">Use your face to unlock your device, authorize purchases, or sign in to apps.</string>
+    <!-- Subtitle shown on the face enrollment introduction screen with in-app authentication. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_message_class3" product="default">Use your face to unlock your phone or for authentication in apps, like when you sign in to apps or approve a purchase.</string>
+    <!-- Subtitle shown on the face enrollment introduction screen with in-app authentication. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_message_class3" product="tablet">Use your face to unlock your tablet or for authentication in apps, like when you sign in to apps or approve a purchase.</string>
+    <!-- Subtitle shown on the face enrollment introduction screen with in-app authentication. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_message_class3" product="device">Use your face to unlock your device or for authentication in apps, like when you sign in to apps or approve a purchase.</string>
     <!-- Introduction detail message shown in face enrollment dialog when asking for parental consent [CHAR LIMIT=NONE]-->
     <string name="security_settings_face_enroll_introduction_consent_message_0" product="default">Allow your child to use their face to unlock their phone</string>
     <!-- Introduction detail message shown in face enrollment dialog when asking for parental consent [CHAR LIMIT=NONE]-->
     <string name="security_settings_face_enroll_introduction_consent_message_0" product="tablet">Allow your child to use their face to unlock their tablet</string>
     <!-- Introduction detail message shown in face enrollment dialog when asking for parental consent [CHAR LIMIT=NONE]-->
     <string name="security_settings_face_enroll_introduction_consent_message_0" product="device">Allow your child to use their face to unlock their device</string>
+    <!-- Introduction detail message shown in face enrollment dialog when asking for parental consent [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_consent_message_0_class3" product="default">Allow your child to use their face to unlock their phone or verify it\u2019s them. This happens when they sign in to apps, approve a purchase, and more.</string>
+    <!-- Introduction detail message shown in face enrollment dialog when asking for parental consent [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_consent_message_0_class3" product="tablet">Allow your child to use their face to unlock their tablet or verify it\u2019s them. This happens when they sign in to apps, approve a purchase, and more.</string>
+    <!-- Introduction detail message shown in face enrollment dialog when asking for parental consent [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_consent_message_0_class3" product="device">Allow your child to use their face to unlock their device or verify it\u2019s them. This happens when they sign in to apps, approve a purchase, and more.</string>
     <!-- Introduction detail message shown in face enrollment dialog when asking for parental consent [CHAR LIMIT=NONE]-->
     <string name="security_settings_face_enroll_introduction_consent_message" product="default">Using your child\u2019s face to unlock their phone may be less secure than a strong pattern or PIN.</string>
     <!-- Introduction detail message shown in face enrollment dialog when asking for parental consent [CHAR LIMIT=NONE]-->
@@ -155,6 +167,30 @@
     <string name="security_settings_face_enroll_introduction_control_consent_message" product="tablet"></string>
     <!-- Message on the face enrollment introduction page that explains privacy controls for face unlock when asking for parental consent. [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_enroll_introduction_control_consent_message" product="device"></string>
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer" product="default">Use your face to unlock your phone or for authentication in apps, like when you sign in or approve a purchase.\n\nKeep in mind:\nYou can only have one face set up at a time. To add another face, delete the current one.\n\nLooking at the phone can unlock it when you don\u2019t intend to.\n\nYour phone can be unlocked by someone else if it\u2019s held up to your face.\n\nYour phone can be unlocked by someone who looks a lot like you, like an identical sibling.</string>
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer" product="tablet">Use your face to unlock your tablet or for authentication in apps, like when you sign in or approve a purchase.\n\nKeep in mind:\nYou can only have one face set up at a time. To add another face, delete the current one.\n\nLooking at the tablet can unlock it when you don\u2019t intend to.\n\nYour tablet can be unlocked by someone else if it\u2019s held up to your face.\n\nYour tablet can be unlocked by someone who looks a lot like you, like an identical sibling.</string>
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer" product="device">Use your face to unlock your device or for authentication in apps, like when you sign in or approve a purchase.\n\nKeep in mind:\nYou can only have one face set up at a time. To add another face, delete the current one.\n\nLooking at the device can unlock it when you don\u2019t intend to.\n\nYour device can be unlocked by someone else if it\u2019s held up to your face.\n\nYour device can be unlocked by someone who looks a lot like you, like an identical sibling.</string>
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported" product="default">Use your face to unlock your phone or for authentication in apps, like when you sign in or approve a purchase.\n\nKeep in mind:\nYou can only have one face set up at a time. To add another face, delete the current one.\n\nLooking at the phone can unlock it when you don\u2019t intend to.\n\nYour phone can be unlocked by someone else if it\u2019s held up to your face, even if your eyes are closed.\n\nYour phone can be unlocked by someone who looks a lot like you, like an identical sibling.</string>
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported" product="tablet">Use your face to unlock your tablet or for authentication in apps, like when you sign in or approve a purchase.\n\nKeep in mind:\nYou can only have one face set up at a time. To add another face, delete the current one.\n\nLooking at the tablet can unlock it when you don\u2019t intend to.\n\nYour tablet can be unlocked by someone else if it\u2019s held up to your face, even if your eyes are closed.\n\nYour tablet can be unlocked by someone who looks a lot like you, like an identical sibling.</string>
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported" product="device">Use your face to unlock your device or for authentication in apps, like when you sign in or approve a purchase.\n\nKeep in mind:\nYou can only have one face set up at a time. To add another face, delete the current one.\n\nLooking at the device can unlock it when you don\u2019t intend to.\n\nYour device can be unlocked by someone else if it\u2019s held up to your face, even if your eyes are closed.\n\nYour device can be unlocked by someone who looks a lot like you, like an identical sibling.</string>
+    <!-- Text shown in face settings explaining what your face can be used for. Used when face is class 3. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_class3" product="default">Use your face to unlock your phone or verify it\u2019s you, like when you sign in to apps or approve a purchase.\n\nKeep in mind:\nYou can only have one face set up at a time. To add another face, delete the current one.\n\nLooking at the phone can unlock it when you don\u2019t intend to.\n\nYour phone can be unlocked by someone else if it\u2019s held up to your face.\n\nYour phone can be unlocked by someone who looks a lot like you, like an identical sibling.</string>
+  <!-- Text shown in face settings explaining what your face can be used for. Used when face is class 3. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_class3" product="tablet">Use your face to unlock your tablet or verify it\u2019s you, like when you sign in to apps or approve a purchase.\n\nKeep in mind:\nYou can only have one face set up at a time. To add another face, delete the current one.\n\nLooking at the tablet can unlock it when you don\u2019t intend to.\n\nYour tablet can be unlocked by someone else if it\u2019s held up to your face.\n\nYour tablet can be unlocked by someone who looks a lot like you, like an identical sibling.</string>
+  <!-- Text shown in face settings explaining what your face can be used for. Used when face is class 3. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_class3" product="device">Use your face to unlock your device or verify it\u2019s you, like when you sign in to apps or approve a purchase.\n\nKeep in mind:\nYou can only have one face set up at a time. To add another face, delete the current one.\n\nLooking at the device can unlock it when you don\u2019t intend to.\n\nYour device can be unlocked by someone else if it\u2019s held up to your face.\n\nYour device can be unlocked by someone who looks a lot like you, like an identical sibling.</string>
+    <!-- Text shown in face settings explaining what your face can be used for. Used when face is class 3 and attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_class3_attention_not_supported" product="default">Use your face to unlock your phone or verify it\u2019s you, like when you sign in to apps or approve a purchase.\n\nKeep in mind:\nYou can only have one face set up at a time. To add another face, delete the current one.\n\nLooking at the phone can unlock it when you don\u2019t intend to.\n\nYour phone can be unlocked by someone else if it\u2019s held up to your face, even if your eyes are closed.\n\nYour phone can be unlocked by someone who looks a lot like you, like an identical sibling.</string>
+    <!-- Text shown in face settings explaining what your face can be used for. Used when face is class 3 and attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_class3_attention_not_supported" product="tablet">Use your face to unlock your tablet or verify it\u2019s you, like when you sign in to apps or approve a purchase.\n\nKeep in mind:\nYou can only have one face set up at a time. To add another face, delete the current one.\n\nLooking at the tablet can unlock it when you don\u2019t intend to.\n\nYour tablet can be unlocked by someone else if it\u2019s held up to your face, even if your eyes are closed.\n\nYour tablet can be unlocked by someone who looks a lot like you, like an identical sibling.</string>
+    <!-- Text shown in face settings explaining what your face can be used for. Used when face is class 3 and attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_class3_attention_not_supported" product="device">Use your face to unlock your device or verify it\u2019s you, like when you sign in to apps or approve a purchase.\n\nKeep in mind:\nYou can only have one face set up at a time. To add another face, delete the current one.\n\nLooking at the device can unlock it when you don\u2019t intend to.\n\nYour device can be unlocked by someone else if it\u2019s held up to your face, even if your eyes are closed.\n\nYour device can be unlocked by someone who looks a lot like you, like an identical sibling.</string>
     <!-- Introduction detail message shown in fingerprint enrollment dialog [CHAR LIMIT=NONE]-->
     <string name="security_settings_fingerprint_enroll_introduction_v3_message">Use your fingerprint to unlock your <xliff:g id="deviceName" example="Pixel">%s</xliff:g> or verify it\u2019s you, like when you sign in to apps or approve a purchase</string>
     <!-- Introduction detail message shown in fingerprint enrollment dialog when asking for parental consent [CHAR LIMIT=NONE]-->
@@ -656,6 +692,12 @@
     <!-- Description for interrupting the voice call alert. [CHAR_LIMIT=NONE] -->
     <string name="reset_internet_text" product="tablet">This will end your phone call</string>
 
+    <!-- Help URI, battery saver page [DO NOT TRANSLATE] -->
+    <string name="help_url_battery_saver_settings" translatable="false" product="default"></string>
+
+    <!-- Help URI, app usage page [DO NOT TRANSLATE] -->
+    <string name="help_url_app_usage_settings" translatable="false" product="default"></string>
+
     <!-- An explanation text that the pattern needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
     <string name="lockpassword_confirm_your_pattern_details_frp" product="default">Your phone was reset to factory settings. To use this phone, enter your previous pattern.</string>
     <!-- An explanation text that the pattern needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
@@ -676,4 +718,19 @@
     <string name="lockpassword_confirm_your_password_details_frp" product="tablet">Your tablet was reset to factory settings. To use this tablet, enter your previous password.</string>
     <!-- An explanation text that the password needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
     <string name="lockpassword_confirm_your_password_details_frp" product="device">Your device was reset to factory settings. To use this device, enter your previous password.</string>
+    <!-- Message of incompatible charging battery tip [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_incompatible_charging_message" product="default">Battery charging slowly or won\'t charge. Check if the cable and power adapter work with your phone</string>
+    <string name="battery_tip_incompatible_charging_message" product="device">Battery charging slowly or won\'t charge. Check if the cable and power adapter work with your device</string>
+    <string name="battery_tip_incompatible_charging_message" product="tablet">Battery charging slowly or won\'t charge. Check if the cable and power adapter work with your tablet</string>
+
+    <!-- Description for using device controls feature with a locked phone [CHAR LIMIT=NONE] -->
+    <string name="lockscreen_trivial_controls_summary" product="default">Without unlocking your phone</string>
+    <!-- Description for using device controls feature with a locked tablet [CHAR LIMIT=NONE] -->
+    <string name="lockscreen_trivial_controls_summary" product="tablet">Without unlocking your tablet</string>
+
+    <!-- Accessibility summary text for auto rotate [CHAR LIMIT=NONE] -->
+    <string name="auto_rotate_summary_a11y" product="default">When you move your phone between portrait and landscape</string>
+    <!-- Accessibility summary text for auto rotate [CHAR LIMIT=NONE] -->
+    <string name="auto_rotate_summary_a11y" product="tabled">When you move your tablet between portrait and landscape</string>
+
 </resources>

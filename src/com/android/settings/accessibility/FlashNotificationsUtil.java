@@ -16,8 +16,6 @@
 
 package com.android.settings.accessibility;
 
-import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
-
 import android.content.Context;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCharacteristics;
@@ -43,19 +41,10 @@ class FlashNotificationsUtil {
     static final String EXTRA_FLASH_NOTIFICATION_PREVIEW_TYPE =
             "com.android.internal.intent.extra.FLASH_NOTIFICATION_PREVIEW_TYPE";
 
-    static final String SETTING_KEY_CAMERA_FLASH_NOTIFICATION =
-            "camera_flash_notification";
-    static final String SETTING_KEY_SCREEN_FLASH_NOTIFICATION =
-            "screen_flash_notification";
-    static final String SETTING_KEY_SCREEN_FLASH_NOTIFICATION_COLOR =
-            "screen_flash_notification_color_global";
-
     static final int TYPE_SHORT_PREVIEW = 0;
     static final int TYPE_LONG_PREVIEW = 1;
 
-    static final int DEFAULT_SCREEN_FLASH_COLOR =
-            ScreenFlashNotificationColor.YELLOW.mColorInt;
-
+    static final int DEFAULT_SCREEN_FLASH_COLOR = ScreenFlashNotificationColor.YELLOW.mColorInt;
 
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({
@@ -128,9 +117,9 @@ class FlashNotificationsUtil {
 
         final boolean isTorchAvailable = FlashNotificationsUtil.isTorchAvailable(context);
         final boolean isCameraFlashEnabled = Settings.System.getInt(context.getContentResolver(),
-                SETTING_KEY_CAMERA_FLASH_NOTIFICATION, State.OFF) != State.OFF;
+                Settings.System.CAMERA_FLASH_NOTIFICATION, State.OFF) != State.OFF;
         final boolean isScreenFlashEnabled = Settings.System.getInt(context.getContentResolver(),
-                SETTING_KEY_SCREEN_FLASH_NOTIFICATION, State.OFF) != State.OFF;
+                Settings.System.SCREEN_FLASH_NOTIFICATION, State.OFF) != State.OFF;
 
         return ((isTorchAvailable && isCameraFlashEnabled) ? State.CAMERA : State.OFF)
                 | (isScreenFlashEnabled ? State.SCREEN : State.OFF);

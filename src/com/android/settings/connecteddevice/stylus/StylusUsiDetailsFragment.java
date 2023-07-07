@@ -57,8 +57,7 @@ public class StylusUsiDetailsFragment extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        // TODO(b/261988317): for new SettingsEnum for this page
-        return SettingsEnums.BLUETOOTH_DEVICE_DETAILS;
+        return SettingsEnums.USI_DEVICE_DETAILS;
     }
 
     @Override

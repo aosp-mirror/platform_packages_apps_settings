@@ -44,7 +44,7 @@ public class DataSaverPreference extends Preference implements DataSaverBackend.
 
     @Override
     public void onDataSaverChanged(boolean isDataSaving) {
-        setSummary(isDataSaving ? R.string.on : R.string.off);
+        setSummary(isDataSaving ? R.string.data_saver_on : R.string.data_saver_off);
     }
 
     @Override

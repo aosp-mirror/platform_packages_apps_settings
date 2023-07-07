@@ -33,6 +33,7 @@ import com.android.settings.biometrics2.factory.BiometricsRepositoryProvider;
 import com.android.settings.bluetooth.BluetoothFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
+import com.android.settings.deviceinfo.hardwareinfo.HardwareInfoFeatureProvider;
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
 import com.android.settings.fuelgauge.BatterySettingsFeatureProvider;
 import com.android.settings.fuelgauge.BatteryStatusFeatureProvider;
@@ -48,6 +49,7 @@ import com.android.settings.slices.SlicesFeatureProvider;
 import com.android.settings.users.UserFeatureProvider;
 import com.android.settings.vpn2.AdvancedVpnFeatureProvider;
 import com.android.settings.wifi.WifiTrackerLibProvider;
+import com.android.settings.wifi.factory.WifiFeatureProvider;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 /**
@@ -107,6 +109,11 @@ public abstract class FeatureFactory {
      * Gets implementation for the Suggestion Feature provider.
      */
     public abstract SuggestionFeatureProvider getSuggestionFeatureProvider();
+
+    /**
+     * Retrieves implementation for Hardware Info feature.
+     */
+    public abstract HardwareInfoFeatureProvider getHardwareInfoFeatureProvider();
 
     public abstract SupportFeatureProvider getSupportFeatureProvider(Context context);
 
@@ -191,6 +198,11 @@ public abstract class FeatureFactory {
      * Retrieves implementation for advanced vpn feature.
      */
     public abstract AdvancedVpnFeatureProvider getAdvancedVpnFeatureProvider();
+
+    /**
+     * Retrieves implementation for Wi-Fi feature.
+     */
+    public abstract WifiFeatureProvider getWifiFeatureProvider();
 
     public static final class FactoryNotFoundException extends RuntimeException {
         public FactoryNotFoundException(Throwable throwable) {

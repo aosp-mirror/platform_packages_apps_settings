@@ -84,5 +84,7 @@ public final class ActiveUnlockTestUtils {
                 ActiveUnlockStatusUtils.CONFIG_FLAG_NAME,
                 null /* value */,
                 false /* makeDefault */);
+        Settings.Secure.putString(context.getContentResolver(), TARGET_SETTING, null);
+        Settings.Secure.putString(context.getContentResolver(), PROVIDER_SETTING, null);
     }
 }

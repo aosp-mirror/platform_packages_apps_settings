@@ -71,7 +71,7 @@ public class SpatialAudioParentPreferenceController extends BasePreferenceContro
             return mContext.getString(R.string.spatial_summary_on_one,
                     mContext.getString(R.string.spatial_audio_wired_headphones));
         } else {
-            return mContext.getString(R.string.off);
+            return mContext.getString(R.string.spatial_summary_off);
         }
     }
 }

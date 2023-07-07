@@ -31,11 +31,14 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
+import com.android.settings.R;
 import com.android.settings.fuelgauge.BatteryOptimizeHistoricalLogEntry.Action;
 import com.android.settingslib.fuelgauge.PowerAllowlistBackend;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.Arrays;
+import java.util.List;
 
 /** A utility class for application usage operation. */
 public class BatteryOptimizeUtils {
@@ -83,8 +86,7 @@ public class BatteryOptimizeUtils {
         mAppOpsManager = context.getSystemService(AppOpsManager.class);
         mBatteryUtils = BatteryUtils.getInstance(context);
         mPowerAllowListBackend = PowerAllowlistBackend.getInstance(context);
-        mMode = mAppOpsManager
-                .checkOpNoThrow(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, mUid, mPackageName);
+        mMode = getMode(mAppOpsManager, mUid, mPackageName);
         mAllowListed = mPowerAllowListBackend.isAllowlisted(mPackageName, mUid);
     }
 
@@ -126,11 +128,10 @@ public class BatteryOptimizeUtils {
                 mContext, mode, mUid, mPackageName, mBatteryUtils, mPowerAllowListBackend, action);
     }
 
-    /**
-     * Return {@code true} if package name is valid (can get an uid).
-     */
-    public boolean isValidPackageName() {
-        return mBatteryUtils.getPackageUid(mPackageName) != BatteryUtils.UID_NULL;
+    /** Return {@code true} if it is disabled for default optimized mode only. */
+    public boolean isDisabledForOptimizeModeOnly() {
+        return getAllowList(mContext).contains(mPackageName)
+                || mBatteryUtils.getPackageUid(mPackageName) == BatteryUtils.UID_NULL;
     }
 
     /**
@@ -204,10 +205,20 @@ public class BatteryOptimizeUtils {
         return mPackageName == null ? UNKNOWN_PACKAGE : mPackageName;
     }
 
-    private static boolean isSystemOrDefaultApp(
+    static int getMode(AppOpsManager appOpsManager, int uid, String packageName) {
+        return appOpsManager.checkOpNoThrow(
+                AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, uid, packageName);
+    }
+
+    static boolean isSystemOrDefaultApp(
             PowerAllowlistBackend powerAllowlistBackend, String packageName, int uid) {
         return powerAllowlistBackend.isSysAllowlisted(packageName)
                 || powerAllowlistBackend.isDefaultActiveApp(packageName, uid);
+    }
+
+    static List<String> getAllowList(Context context) {
+        return Arrays.asList(context.getResources().getStringArray(
+                R.array.config_disable_optimization_mode_apps));
     }
 
     private static void setAppUsageStateInternal(

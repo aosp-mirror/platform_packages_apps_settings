@@ -50,6 +50,7 @@ import com.android.settings.applications.appinfo.ExternalSourcesDetails;
 import com.android.settings.applications.appinfo.LongBackgroundTasksDetails;
 import com.android.settings.applications.appinfo.ManageExternalStorageDetails;
 import com.android.settings.applications.appinfo.MediaManagementAppsDetails;
+import com.android.settings.applications.appinfo.TurnScreenOnDetails;
 import com.android.settings.applications.appinfo.WriteSettingsDetails;
 import com.android.settings.applications.appops.BackgroundCheckSummary;
 import com.android.settings.applications.assist.ManageAssist;
@@ -62,8 +63,6 @@ import com.android.settings.applications.specialaccess.notificationaccess.Notifi
 import com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureDetails;
 import com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureSettings;
 import com.android.settings.applications.specialaccess.premiumsms.PremiumSmsAccess;
-import com.android.settings.applications.specialaccess.turnscreenon.TurnScreenOnDetails;
-import com.android.settings.applications.specialaccess.turnscreenon.TurnScreenOnSettings;
 import com.android.settings.applications.specialaccess.vrlistener.VrListenerSettings;
 import com.android.settings.applications.specialaccess.zenaccess.ZenAccessDetails;
 import com.android.settings.backup.PrivacySettings;
@@ -78,6 +77,7 @@ import com.android.settings.bluetooth.BluetoothDeviceDetailsFragment;
 import com.android.settings.bluetooth.BluetoothFindBroadcastsFragment;
 import com.android.settings.bluetooth.BluetoothPairingDetail;
 import com.android.settings.bugreporthandler.BugReportHandlerPicker;
+import com.android.settings.communal.CommunalDashboardFragment;
 import com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFragment;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
 import com.android.settings.connecteddevice.NfcAndPaymentFragment;
@@ -275,6 +275,7 @@ public class SettingsGateway {
             SystemNavigationGestureSettings.class.getName(),
             DataUsageSummary.class.getName(),
             DreamSettings.class.getName(),
+            CommunalDashboardFragment.class.getName(),
             UserSettings.class.getName(),
             NotificationAccessSettings.class.getName(),
             NotificationAccessDetails.class.getName(),
@@ -366,7 +367,6 @@ public class SettingsGateway {
             OneHandedSettings.class.getName(),
             MobileNetworkSettings.class.getName(),
             AppLocaleDetails.class.getName(),
-            TurnScreenOnSettings.class.getName(),
             TurnScreenOnDetails.class.getName(),
             NfcAndPaymentFragment.class.getName(),
             ColorAndMotionFragment.class.getName(),
@@ -417,5 +417,6 @@ public class SettingsGateway {
             Settings.ModuleLicensesActivity.class.getName(),
             UserBackupSettingsActivity.class.getName(),
             Settings.MemtagPageActivity.class.getName(),
+            Settings.NavigationModeSettingsActivity.class.getName(),
     };
 }

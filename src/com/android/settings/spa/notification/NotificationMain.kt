@@ -37,6 +37,8 @@ object NotificationMainPageProvider : SettingsPageProvider {
     override val name = "NotificationMain"
     private val owner = createSettingsPage()
 
+    override fun isEnabled(arguments: Bundle?) = false
+
     @Composable
     override fun Page(arguments: Bundle?) {
         RegularScaffold(title = getTitle(arguments)) {

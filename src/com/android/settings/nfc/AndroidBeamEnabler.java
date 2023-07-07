@@ -65,7 +65,7 @@ public class AndroidBeamEnabler extends BaseNfcEnabler {
                 if (mNfcAdapter.isNdefPushEnabled() && mPreference.isEnabled()) {
                     mPreference.setSummary(R.string.android_beam_on_summary);
                 } else {
-                    mPreference.setSummary(R.string.off);
+                    mPreference.setSummary(R.string.android_beam_off_summary);
                 }
                 break;
             case NfcAdapter.STATE_TURNING_ON:

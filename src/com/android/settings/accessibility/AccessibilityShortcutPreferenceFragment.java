@@ -66,6 +66,7 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
     protected int mSavedCheckBoxValue = NOT_SET;
 
     protected ShortcutPreference mShortcutPreference;
+    protected Dialog mDialog;
     private AccessibilityManager.TouchExplorationStateChangeListener
             mTouchExplorationStateChangeListener;
     private AccessibilitySettingsContentObserver mSettingsContentObserver;
@@ -167,12 +168,15 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
     @Override
     public void onResume() {
         super.onResume();
+
         final AccessibilityManager am = getPrefContext().getSystemService(
                 AccessibilityManager.class);
         am.addTouchExplorationStateChangeListener(mTouchExplorationStateChangeListener);
         mSettingsContentObserver.register(getContentResolver());
         updateShortcutPreferenceData();
         updateShortcutPreference();
+
+        updateEditShortcutDialogIfNeeded();
     }
 
     @Override
@@ -200,31 +204,30 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
 
     @Override
     public Dialog onCreateDialog(int dialogId) {
-        final Dialog dialog;
         switch (dialogId) {
             case DialogEnums.EDIT_SHORTCUT:
                 final int dialogType = WizardManagerHelper.isAnySetupWizard(getIntent())
                         ? AccessibilityDialogUtils.DialogType.EDIT_SHORTCUT_GENERIC_SUW :
                         AccessibilityDialogUtils.DialogType.EDIT_SHORTCUT_GENERIC;
-                dialog = AccessibilityDialogUtils.showEditShortcutDialog(
+                mDialog = AccessibilityDialogUtils.showEditShortcutDialog(
                         getPrefContext(), dialogType, getShortcutTitle(),
                         this::callOnAlertDialogCheckboxClicked);
-                setupEditShortcutDialog(dialog);
-                return dialog;
+                setupEditShortcutDialog(mDialog);
+                return mDialog;
             case DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL:
                 if (WizardManagerHelper.isAnySetupWizard(getIntent())) {
-                    dialog = AccessibilityGestureNavigationTutorial
+                    mDialog = AccessibilityGestureNavigationTutorial
                             .createAccessibilityTutorialDialogForSetupWizard(
                                     getPrefContext(), getUserShortcutTypes(),
                                     this::callOnTutorialDialogButtonClicked);
                 } else {
-                    dialog = AccessibilityGestureNavigationTutorial
+                    mDialog = AccessibilityGestureNavigationTutorial
                             .createAccessibilityTutorialDialog(
                                     getPrefContext(), getUserShortcutTypes(),
                                     this::callOnTutorialDialogButtonClicked);
                 }
-                dialog.setCanceledOnTouchOutside(false);
-                return dialog;
+                mDialog.setCanceledOnTouchOutside(false);
+                return mDialog;
             default:
                 throw new IllegalArgumentException("Unsupported dialogId " + dialogId);
         }
@@ -319,6 +322,18 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
                 getComponentName());
     };
 
+    private static CharSequence getSoftwareShortcutTypeSummary(Context context) {
+        int resId;
+        if (AccessibilityUtil.isFloatingMenuEnabled(context)) {
+            resId = R.string.accessibility_shortcut_edit_summary_software;
+        } else if (AccessibilityUtil.isGestureNavigateEnabled(context)) {
+            resId = R.string.accessibility_shortcut_edit_summary_software_gesture;
+        } else {
+            resId = R.string.accessibility_shortcut_edit_summary_software;
+        }
+        return context.getText(resId);
+    }
+
     /**
      * This method will be invoked when a button in the tutorial dialog is clicked.
      *
@@ -368,6 +383,13 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
         getPreferenceScreen().addPreference(generalCategory);
     }
 
+    private void updateEditShortcutDialogIfNeeded() {
+        if (mDialog == null || !mDialog.isShowing()) {
+            return;
+        }
+        AccessibilityDialogUtils.updateShortcutInDialog(getContext(), mDialog);
+    }
+
     @VisibleForTesting
     void saveNonEmptyUserShortcutType(int type) {
         if (type == AccessibilityUtil.UserShortcutType.EMPTY) {
@@ -412,18 +434,16 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
         }
 
         if (!mShortcutPreference.isChecked()) {
-            return context.getText(R.string.off);
+            return context.getText(R.string.switch_off_text);
         }
 
         final int shortcutTypes = PreferredShortcuts.retrieveUserShortcutType(context,
                 getComponentName().flattenToString(), AccessibilityUtil.UserShortcutType.SOFTWARE);
 
         final List<CharSequence> list = new ArrayList<>();
-        final CharSequence softwareTitle = context.getText(
-                R.string.accessibility_shortcut_edit_summary_software);
 
         if (hasShortcutType(shortcutTypes, AccessibilityUtil.UserShortcutType.SOFTWARE)) {
-            list.add(softwareTitle);
+            list.add(getSoftwareShortcutTypeSummary(context));
         }
         if (hasShortcutType(shortcutTypes, AccessibilityUtil.UserShortcutType.HARDWARE)) {
             final CharSequence hardwareTitle = context.getText(
@@ -433,7 +453,7 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
 
         // Show software shortcut if first time to use.
         if (list.isEmpty()) {
-            list.add(softwareTitle);
+            list.add(getSoftwareShortcutTypeSummary(context));
         }
 
         return CaseMap.toTitle().wholeString().noLowercase().apply(Locale.getDefault(), /* iter= */

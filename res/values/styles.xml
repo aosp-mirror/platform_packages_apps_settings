@@ -319,9 +319,8 @@
     </style>
 
     <style name="LanguageCheckboxAndLabel">
-        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginStart">?android:attr/listPreferredItemPaddingStart</item>
         <item name="android:textAppearance">?android:attr/textAppearanceListItem</item>
         <item name="android:gravity">center_vertical</item>
     </style>
@@ -381,6 +380,20 @@
         <item name="android:padding">4dp</item>
     </style>
 
+    <style name="TrackpadButtonDone" parent="@android:style/Widget.Material.Button">
+        <item name="android:background">@drawable/trackpad_button_done_colored</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:padding">4dp</item>
+    </style>
+
+    <style name="TrackpadButtonCancel" parent="@android:style/Widget.Material.Button">
+        <item name="android:background">@drawable/trackpad_bordered</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:padding">4dp</item>
+    </style>
+
     <style name="LockPatternContainerStyle">
         <item name="android:gravity">center</item>
         <item name="android:maxHeight">@dimen/biometric_auth_pattern_view_max_size</item>
@@ -407,7 +420,7 @@
 
     <style name="WorkChallengeEmergencyButtonStyle">
         <item name="android:background">@drawable/work_challenge_emergency_button_background</item>
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textColor">@android:color/system_accent3_900</item>
         <item name="android:outlineProvider">none</item>
         <item name="android:paddingTop">15dp</item>
         <item name="android:paddingBottom">15dp</item>
@@ -435,7 +448,7 @@
         <item name="android:layout_marginBottom">@dimen/contextual_card_vertical_margin</item>
         <item name="android:layout_marginStart">@dimen/contextual_card_side_margin</item>
         <item name="android:layout_marginEnd">@dimen/contextual_card_side_margin</item>
-        <item name="cardBackgroundColor">?androidprv:attr/colorSurface</item>
+        <item name="cardBackgroundColor">?androidprv:attr/materialColorSurfaceContainer</item>
         <item name="cardCornerRadius">@dimen/contextual_card_corner_radius</item>
         <item name="cardElevation">0dp</item>
         <item name="rippleColor">?android:attr/colorControlHighlight</item>

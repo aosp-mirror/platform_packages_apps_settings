@@ -40,6 +40,7 @@ import java.util.Map;
 public class ShadowLockPatternUtils {
 
     private static boolean sDeviceEncryptionEnabled;
+    private static Map<Integer, Integer> sUserToActivePasswordQualityMap = new HashMap<>();
     private static Map<Integer, Integer> sUserToComplexityMap = new HashMap<>();
     private static Map<Integer, Integer> sUserToProfileComplexityMap = new HashMap<>();
     private static Map<Integer, PasswordMetrics> sUserToMetricsMap = new HashMap<>();
@@ -54,6 +55,7 @@ public class ShadowLockPatternUtils {
 
     @Resetter
     public static void reset() {
+        sUserToActivePasswordQualityMap.clear();
         sUserToComplexityMap.clear();
         sUserToProfileComplexityMap.clear();
         sUserToMetricsMap.clear();
@@ -87,7 +89,11 @@ public class ShadowLockPatternUtils {
 
     @Implementation
     protected int getActivePasswordQuality(int userId) {
-        return DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
+        final Integer activePasswordQuality = sUserToActivePasswordQualityMap.get(userId);
+        if (activePasswordQuality == null) {
+            return DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
+        }
+        return activePasswordQuality;
     }
 
     @Implementation
@@ -225,6 +231,10 @@ public class ShadowLockPatternUtils {
 
     public static void setRequestedProfilePasswordMetrics(PasswordMetrics metrics) {
         sUserToProfileMetricsMap.put(UserHandle.myUserId(), metrics);
+    }
+
+    public static void setActivePasswordQuality(int quality) {
+        sUserToActivePasswordQualityMap.put(UserHandle.myUserId(), quality);
     }
 
     @Implementation

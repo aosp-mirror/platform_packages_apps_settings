@@ -93,8 +93,8 @@ public class RestrictAppTip extends BatteryTip {
     @Override
     public int getIconId() {
         return mState == StateType.HANDLED
-                ? R.drawable.ic_perm_device_information_green_24dp
-                : R.drawable.ic_battery_alert_24dp;
+                ? R.drawable.ic_perm_device_information_theme
+                : R.drawable.ic_battery_alert_theme;
     }
 
     @Override

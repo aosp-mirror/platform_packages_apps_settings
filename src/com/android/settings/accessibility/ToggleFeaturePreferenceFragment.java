@@ -120,9 +120,8 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
     private AccessibilityQuickSettingsTooltipWindow mTooltipWindow;
     private boolean mNeedsQSTooltipReshow = false;
     private int mNeedsQSTooltipType = QuickSettingsTooltipType.GUIDE_TO_EDIT;
-    private boolean mSavedAccessibilityFloatingMenuEnabled;
     private ImageView mImageGetterCacheView;
-    private final Html.ImageGetter mImageGetter = (String str) -> {
+    protected final Html.ImageGetter mImageGetter = (String str) -> {
         if (str != null && str.startsWith(IMG_PREFIX)) {
             final String fileName = str.substring(IMG_PREFIX.length());
             return getDrawableFromUri(Uri.parse(
@@ -276,8 +275,6 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
                 AccessibilityManager.class);
         am.removeTouchExplorationStateChangeListener(mTouchExplorationStateChangeListener);
         mSettingsContentObserver.unregister(getContentResolver());
-        mSavedAccessibilityFloatingMenuEnabled = AccessibilityUtil.isFloatingMenuEnabled(
-                getContext());
         super.onPause();
     }
 
@@ -661,7 +658,7 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
         }
 
         if (!mShortcutPreference.isChecked()) {
-            return context.getText(R.string.off);
+            return context.getText(R.string.switch_off_text);
         }
 
         final int shortcutTypes = PreferredShortcuts.retrieveUserShortcutType(context,

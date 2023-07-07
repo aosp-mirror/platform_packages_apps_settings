@@ -23,7 +23,6 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.telephony.SubscriptionManager;
 import android.util.ArrayMap;
-import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.LifecycleOwner;
@@ -38,16 +37,15 @@ import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
-import com.android.settingslib.mobile.dataservice.MobileNetworkInfoEntity;
 import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
-import com.android.settingslib.mobile.dataservice.UiccInfoEntity;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class NetworkProviderSimListController extends AbstractPreferenceController implements
-        LifecycleObserver, MobileNetworkRepository.MobileNetworkCallback {
+        LifecycleObserver, MobileNetworkRepository.MobileNetworkCallback,
+        DefaultSubscriptionReceiver.DefaultSubscriptionListener {
     private static final String TAG = "NetworkProviderSimListCtrl";
     private static final String KEY_PREFERENCE_CATEGORY_SIM = "provider_model_sim_category";
     private static final String KEY_PREFERENCE_SIM = "provider_model_sim_list";
@@ -58,6 +56,7 @@ public class NetworkProviderSimListController extends AbstractPreferenceControll
     private LifecycleOwner mLifecycleOwner;
     private MobileNetworkRepository mMobileNetworkRepository;
     private List<SubscriptionInfoEntity> mSubInfoEntityList = new ArrayList<>();
+    private DefaultSubscriptionReceiver mDataSubscriptionChangedReceiver;
 
     public NetworkProviderSimListController(Context context, Lifecycle lifecycle,
             LifecycleOwner lifecycleOwner) {
@@ -65,19 +64,23 @@ public class NetworkProviderSimListController extends AbstractPreferenceControll
         mSubscriptionManager = context.getSystemService(SubscriptionManager.class);
         mPreferences = new ArrayMap<>();
         mLifecycleOwner = lifecycleOwner;
-        mMobileNetworkRepository = MobileNetworkRepository.create(context, this);
+        mMobileNetworkRepository = MobileNetworkRepository.getInstance(context);
+        mDataSubscriptionChangedReceiver = new DefaultSubscriptionReceiver(context, this);
         lifecycle.addObserver(this);
     }
 
     @OnLifecycleEvent(ON_RESUME)
     public void onResume() {
-        mMobileNetworkRepository.addRegister(mLifecycleOwner);
-        update();
+        mMobileNetworkRepository.addRegister(mLifecycleOwner, this,
+                SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+        mMobileNetworkRepository.updateEntity();
+        mDataSubscriptionChangedReceiver.registerReceiver();
     }
 
     @OnLifecycleEvent(ON_PAUSE)
     public void onPause() {
-        mMobileNetworkRepository.removeRegister();
+        mMobileNetworkRepository.removeRegister(this);
+        mDataSubscriptionChangedReceiver.unRegisterReceiver();
     }
 
     @Override
@@ -129,7 +132,8 @@ public class NetworkProviderSimListController extends AbstractPreferenceControll
 
     public CharSequence getSummary(SubscriptionInfoEntity subInfo, CharSequence displayName) {
         if (subInfo.isActiveSubscriptionId) {
-            CharSequence config = subInfo.defaultSimConfig;
+            CharSequence config = SubscriptionUtil.getDefaultSimConfig(mContext,
+                    subInfo.getSubId());
             CharSequence summary = mContext.getResources().getString(
                     R.string.sim_category_active_sim);
             if (config == "") {
@@ -181,6 +185,24 @@ public class NetworkProviderSimListController extends AbstractPreferenceControll
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
+        refreshSummary(mPreferenceCategory);
+        update();
+    }
+
+    @Override
+    public void onDefaultDataChanged(int defaultDataSubId) {
+        refreshSummary(mPreferenceCategory);
+        update();
+    }
+
+    @Override
+    public void onDefaultVoiceChanged(int defaultVoiceSubId) {
+        refreshSummary(mPreferenceCategory);
+        update();
+    }
+
+    @Override
+    public void onDefaultSmsChanged(int defaultSmsSubId) {
         refreshSummary(mPreferenceCategory);
         update();
     }

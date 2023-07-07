@@ -19,11 +19,11 @@ package com.android.settings.spa.app.appinfo
 import android.content.Context
 import android.content.pm.ApplicationInfo
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.lifecycle.liveData
+import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settings.R
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment
 import com.android.settings.applications.intentpicker.AppLaunchSettings
@@ -38,17 +38,20 @@ import com.android.settingslib.spaprivileged.model.app.hasFlag
 import com.android.settingslib.spaprivileged.model.app.userHandle
 import com.android.settingslib.spaprivileged.model.app.userId
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 
+@OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun AppOpenByDefaultPreference(app: ApplicationInfo) {
     val context = LocalContext.current
-    val presenter = remember { AppOpenByDefaultPresenter(context, app) }
-    if (!presenter.isAvailable()) return
+    val presenter = remember(app) { AppOpenByDefaultPresenter(context, app) }
+    if (remember(presenter) { !presenter.isAvailable() }) return
 
     Preference(object : PreferenceModel {
         override val title = stringResource(R.string.launch_by_default)
-        override val summary = presenter.summaryLiveData.observeAsState(
-            initial = stringResource(R.string.summary_placeholder),
+        override val summary = presenter.summaryFlow.collectAsStateWithLifecycle(
+            initialValue = stringResource(R.string.summary_placeholder),
         )
         override val enabled = stateOf(presenter.isEnabled())
         override val onClick = presenter::startActivity
@@ -66,14 +69,16 @@ private class AppOpenByDefaultPresenter(
 
     fun isEnabled() = app.hasFlag(ApplicationInfo.FLAG_INSTALLED) && app.enabled
 
-    val summaryLiveData = liveData(Dispatchers.IO) {
-        emit(context.getString(when {
+    val summaryFlow = flow { emit(getSummary()) }.flowOn(Dispatchers.IO)
+
+    private fun getSummary() = context.getString(
+        when {
             isLinkHandlingAllowed() -> R.string.app_link_open_always
             else -> R.string.app_link_open_never
-        }))
-    }
+        }
+    )
 
-    fun isLinkHandlingAllowed(): Boolean {
+    private fun isLinkHandlingAllowed(): Boolean {
         val userState = IntentPickerUtils.getDomainVerificationUserState(
             domainVerificationManager, app.packageName
         )

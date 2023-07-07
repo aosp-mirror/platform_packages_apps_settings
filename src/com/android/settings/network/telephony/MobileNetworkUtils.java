@@ -940,25 +940,12 @@ public class MobileNetworkUtils {
      * Copied from WifiCallingPreferenceController#isWifiCallingEnabled()
      */
     public static boolean isWifiCallingEnabled(Context context, int subId,
-            @Nullable WifiCallingQueryImsState queryImsState,
-            @Nullable PhoneAccountHandle phoneAccountHandle) {
-        if (phoneAccountHandle == null){
-            phoneAccountHandle = context.getSystemService(TelecomManager.class)
-                    .getSimCallManagerForSubscription(subId);
+            @Nullable WifiCallingQueryImsState queryImsState) {
+        if (queryImsState == null) {
+            queryImsState = new WifiCallingQueryImsState(context, subId);
         }
-        boolean isWifiCallingEnabled;
-        if (phoneAccountHandle != null) {
-            final Intent intent = buildPhoneAccountConfigureIntent(context, phoneAccountHandle);
-            isWifiCallingEnabled = intent != null;
-        } else {
-            if (queryImsState == null) {
-                queryImsState = new WifiCallingQueryImsState(context, subId);
-            }
-            isWifiCallingEnabled = queryImsState.isReadyToWifiCalling();
-        }
-        return isWifiCallingEnabled;
+        return queryImsState.isReadyToWifiCalling();
     }
-
 
     /**
      * Returns preferred status of Calls & SMS separately when Provider Model is enabled.
@@ -1007,7 +994,7 @@ public class MobileNetworkUtils {
     private static CharSequence getPreferredCallStatus(Context context,
             SubscriptionInfoEntity subInfo) {
         String status = "";
-        if (subInfo.isDefaultVoiceSubscription) {
+        if (subInfo.getSubId() == SubscriptionManager.getDefaultVoiceSubscriptionId()) {
             status = setSummaryResId(context, R.string.calls_sms_preferred);
         }
 
@@ -1017,7 +1004,7 @@ public class MobileNetworkUtils {
     private static CharSequence getPreferredSmsStatus(Context context,
             SubscriptionInfoEntity subInfo) {
         String status = "";
-        if (subInfo.isDefaultSmsSubscription) {
+        if (subInfo.getSubId() == SubscriptionManager.getDefaultSmsSubscriptionId()) {
             status = setSummaryResId(context, R.string.calls_sms_preferred);
         }
 

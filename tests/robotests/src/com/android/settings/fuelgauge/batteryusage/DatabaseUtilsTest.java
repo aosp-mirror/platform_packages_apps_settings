@@ -36,6 +36,7 @@ import android.os.UserHandle;
 import android.os.UserManager;
 
 import com.android.settings.fuelgauge.batteryusage.db.AppUsageEventEntity;
+import com.android.settings.fuelgauge.batteryusage.db.BatteryEventEntity;
 import com.android.settings.testutils.BatteryTestUtils;
 
 import org.junit.Before;
@@ -45,8 +46,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.Shadows;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -56,8 +58,8 @@ public final class DatabaseUtilsTest {
 
     private Context mContext;
 
-    @Mock
-    private PackageManager mPackageManager;
+    @Mock private PackageManager mPackageManager;
+    @Mock private UserManager mUserManager;
     @Mock private ContentResolver mMockContentResolver;
     @Mock private ContentResolver mMockContentResolver2;
     @Mock private BatteryUsageStats mBatteryUsageStats;
@@ -74,6 +76,7 @@ public final class DatabaseUtilsTest {
         doReturn(mMockContentResolver).when(mContext).getContentResolver();
         doReturn(mPackageManager).when(mMockContext).getPackageManager();
         doReturn(mPackageManager).when(mContext).getPackageManager();
+        DatabaseUtils.getSharedPreferences(mContext).edit().clear().apply();
     }
 
     @Test
@@ -85,14 +88,6 @@ public final class DatabaseUtilsTest {
     public void isWorkProfile_withManagedUser_returnTrue() {
         BatteryTestUtils.setWorkProfile(mContext);
         assertThat(DatabaseUtils.isWorkProfile(mContext)).isTrue();
-    }
-
-    @Test
-    public void isWorkProfile_withSystemUser_returnFalse() {
-        BatteryTestUtils.setWorkProfile(mContext);
-        Shadows.shadowOf(mContext.getSystemService(UserManager.class)).setIsSystemUser(true);
-
-        assertThat(DatabaseUtils.isWorkProfile(mContext)).isFalse();
     }
 
     @Test
@@ -140,6 +135,28 @@ public final class DatabaseUtilsTest {
                 DatabaseUtils.sendAppUsageEventData(mContext, new ArrayList<>());
         assertThat(valuesList).hasSize(0);
         verifyNoMoreInteractions(mMockContentResolver);
+    }
+
+    @Test
+    public void sendBatteryEventData_returnsExpectedList() {
+        final BatteryEvent batteryEvent =
+                BatteryEvent.newBuilder()
+                        .setTimestamp(10001L)
+                        .setType(BatteryEventType.POWER_CONNECTED)
+                        .setBatteryLevel(66)
+                        .build();
+
+        final ContentValues contentValues =
+                DatabaseUtils.sendBatteryEventData(mContext, batteryEvent);
+
+        assertThat(contentValues.getAsInteger(BatteryEventEntity.KEY_TIMESTAMP))
+                .isEqualTo(10001L);
+        assertThat(contentValues.getAsInteger(BatteryEventEntity.KEY_BATTERY_EVENT_TYPE))
+                .isEqualTo(BatteryEventType.POWER_CONNECTED.getNumber());
+        assertThat(contentValues.getAsInteger(BatteryEventEntity.KEY_BATTERY_LEVEL))
+                .isEqualTo(66);
+        // Verifies the inserted ContentValues into content provider.
+        verify(mMockContentResolver).insert(DatabaseUtils.BATTERY_EVENT_URI, contentValues);
     }
 
     @Test
@@ -244,7 +261,7 @@ public final class DatabaseUtilsTest {
     public void getAppUsageStartTimestampOfUser_emptyCursorContent_returnEarliestTimestamp() {
         final MatrixCursor cursor =
                 new MatrixCursor(new String[] {AppUsageEventEntity.KEY_TIMESTAMP});
-        DatabaseUtils.sFakeAppUsageLatestTimestampSupplier = () -> cursor;
+        DatabaseUtils.sFakeSupplier = () -> cursor;
 
         final long earliestTimestamp = 10001L;
         assertThat(DatabaseUtils.getAppUsageStartTimestampOfUser(
@@ -253,7 +270,7 @@ public final class DatabaseUtilsTest {
 
     @Test
     public void getAppUsageStartTimestampOfUser_nullCursor_returnEarliestTimestamp() {
-        DatabaseUtils.sFakeAppUsageLatestTimestampSupplier = () -> null;
+        DatabaseUtils.sFakeSupplier = () -> null;
         final long earliestTimestamp = 10001L;
         assertThat(DatabaseUtils.getAppUsageStartTimestampOfUser(
                 mContext, /*userId=*/ 0, earliestTimestamp)).isEqualTo(earliestTimestamp);
@@ -266,7 +283,7 @@ public final class DatabaseUtilsTest {
                 new MatrixCursor(new String[] {AppUsageEventEntity.KEY_TIMESTAMP});
         // Adds fake data into the cursor.
         cursor.addRow(new Object[] {returnedTimestamp});
-        DatabaseUtils.sFakeAppUsageLatestTimestampSupplier = () -> cursor;
+        DatabaseUtils.sFakeSupplier = () -> cursor;
 
         final long earliestTimestamp1 = 1001L;
         assertThat(DatabaseUtils.getAppUsageStartTimestampOfUser(
@@ -285,7 +302,7 @@ public final class DatabaseUtilsTest {
                         AppUsageEventEntity.KEY_PACKAGE_NAME,
                         AppUsageEventEntity.KEY_TIMESTAMP,
                         AppUsageEventEntity.KEY_APP_USAGE_EVENT_TYPE});
-        DatabaseUtils.sFakeAppUsageEventSupplier = () -> cursor;
+        DatabaseUtils.sFakeSupplier = () -> cursor;
 
         assertThat(DatabaseUtils.getAppUsageEventForUsers(
                 mContext,
@@ -296,7 +313,7 @@ public final class DatabaseUtilsTest {
 
     @Test
     public void getAppUsageEventForUsers_nullCursor_returnEmptyMap() {
-        DatabaseUtils.sFakeAppUsageEventSupplier = () -> null;
+        DatabaseUtils.sFakeSupplier = () -> null;
         assertThat(DatabaseUtils.getAppUsageEventForUsers(
                 mContext,
                 /*calendar=*/ null,
@@ -318,7 +335,7 @@ public final class DatabaseUtilsTest {
         cursor.addRow(new Object[] {101L, "app name2", timestamp2});
         cursor.addRow(new Object[] {101L, "app name3", timestamp2});
         cursor.addRow(new Object[] {101L, "app name4", timestamp2});
-        DatabaseUtils.sFakeAppUsageEventSupplier = () -> cursor;
+        DatabaseUtils.sFakeSupplier = () -> cursor;
 
         final List<AppUsageEvent> appUsageEventList = DatabaseUtils.getAppUsageEventForUsers(
                 mContext,
@@ -339,7 +356,7 @@ public final class DatabaseUtilsTest {
                         BatteryHistEntry.KEY_UID,
                         BatteryHistEntry.KEY_USER_ID,
                         BatteryHistEntry.KEY_TIMESTAMP});
-        DatabaseUtils.sFakeBatteryStateSupplier = () -> cursor;
+        DatabaseUtils.sFakeSupplier = () -> cursor;
 
         assertThat(DatabaseUtils.getHistoryMapSinceLastFullCharge(
                 mContext, /*calendar=*/ null)).isEmpty();
@@ -347,7 +364,7 @@ public final class DatabaseUtilsTest {
 
     @Test
     public void getHistoryMapSinceLastFullCharge_nullCursor_returnEmptyMap() {
-        DatabaseUtils.sFakeBatteryStateSupplier = () -> null;
+        DatabaseUtils.sFakeSupplier = () -> null;
         assertThat(DatabaseUtils.getHistoryMapSinceLastFullCharge(
                 mContext, /*calendar=*/ null)).isEmpty();
     }
@@ -366,7 +383,7 @@ public final class DatabaseUtilsTest {
                 "app name3", timestamp2, 3, ConvertUtils.CONSUMER_TYPE_UID_BATTERY});
         cursor.addRow(new Object[] {
                 "app name4", timestamp2, 4, ConvertUtils.CONSUMER_TYPE_UID_BATTERY});
-        DatabaseUtils.sFakeBatteryStateSupplier = () -> cursor;
+        DatabaseUtils.sFakeSupplier = () -> cursor;
 
         final Map<Long, Map<String, BatteryHistEntry>> batteryHistMap =
                 DatabaseUtils.getHistoryMapSinceLastFullCharge(
@@ -391,14 +408,50 @@ public final class DatabaseUtilsTest {
         doReturn("com.fake.package").when(mContext).getPackageName();
         doReturn(mMockContext).when(mContext).createPackageContextAsUser(
                 "com.fake.package", /*flags=*/ 0, UserHandle.OWNER);
-        BatteryTestUtils.setWorkProfile(mContext);
-        DatabaseUtils.sFakeBatteryStateSupplier = () -> getMatrixCursor();
+        doReturn(UserHandle.CURRENT).when(mContext).getUser();
+        doReturn(mUserManager).when(mContext).getSystemService(UserManager.class);
+        doReturn(true).when(mUserManager).isManagedProfile();
+        doReturn(UserHandle.SYSTEM).when(mUserManager).getProfileParent(UserHandle.CURRENT);
+
+        DatabaseUtils.sFakeSupplier = () -> getMatrixCursor();
 
         final Map<Long, Map<String, BatteryHistEntry>> batteryHistMap =
                 DatabaseUtils.getHistoryMapSinceLastFullCharge(
                         mContext, /*calendar=*/ null);
 
         assertThat(batteryHistMap).isEmpty();
+    }
+
+    @Test
+    public void recordDateTime_writeDataIntoSharedPreferences() {
+        final String preferenceKey = "test_preference_key";
+        DatabaseUtils.recordDateTime(mContext, preferenceKey);
+
+        assertThat(DatabaseUtils.getSharedPreferences(mContext).contains(preferenceKey))
+                .isTrue();
+    }
+
+    @Test
+    public void dump_dumpExpectedData() {
+        DatabaseUtils.recordDateTime(mContext,
+                Intent.ACTION_BATTERY_LEVEL_CHANGED);
+        DatabaseUtils.recordDateTime(mContext,
+                BatteryUsageBroadcastReceiver.ACTION_BATTERY_UNPLUGGING);
+        DatabaseUtils.recordDateTime(mContext,
+                DatabaseUtils.KEY_LAST_LOAD_FULL_CHARGE_TIME);
+        DatabaseUtils.recordDateTime(mContext,
+                DatabaseUtils.KEY_LAST_UPLOAD_FULL_CHARGE_TIME);
+        final StringWriter stringWriter = new StringWriter();
+        final PrintWriter printWriter = new PrintWriter(stringWriter);
+
+        DatabaseUtils.dump(mContext, printWriter);
+
+        String dumpContent = stringWriter.toString();
+        assertThat(dumpContent.contains("BatteryLevelChanged")).isTrue();
+        assertThat(dumpContent.contains("BatteryUnplugging")).isTrue();
+        assertThat(dumpContent.contains("ClearBatteryCacheData")).isTrue();
+        assertThat(dumpContent.contains("LastLoadFullChargeTime")).isTrue();
+        assertThat(dumpContent.contains("LastUploadFullChargeTime")).isTrue();
     }
 
     private static void verifyBatteryEntryContentValues(

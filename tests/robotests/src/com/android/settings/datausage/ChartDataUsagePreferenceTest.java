@@ -17,10 +17,7 @@ package com.android.settings.datausage;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
@@ -34,6 +31,7 @@ import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
 import com.android.settings.datausage.ChartDataUsagePreference.DataUsageSummaryNode;
+import com.android.settings.utils.ActivityControllerWrapper;
 import com.android.settings.widget.UsageView;
 import com.android.settingslib.net.NetworkCycleChartData;
 import com.android.settingslib.net.NetworkCycleData;
@@ -67,8 +65,8 @@ public class ChartDataUsagePreferenceTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-
-        mActivity = spy(Robolectric.setupActivity(Activity.class));
+        mActivity = spy((Activity) ActivityControllerWrapper.setup(
+                Robolectric.buildActivity(Activity.class)).get());
         mPreference = new ChartDataUsagePreference(mActivity, null /* attrs */);
         LayoutInflater inflater = LayoutInflater.from(mActivity);
         View view = inflater.inflate(mPreference.getLayoutResource(), null /* root */,
@@ -166,32 +164,23 @@ public class ChartDataUsagePreferenceTest {
 
     @Test
     public void notifyChange_nonEmptyDataUsage_shouldHaveSingleContentDescription() {
-        final ArgumentCaptor<CharSequence> contentCaptor =
-            ArgumentCaptor.forClass(CharSequence.class);
-        final UsageView chart = mock(UsageView.class);
-        doReturn(chart).when(mHolder).findViewById(R.id.data_usage);
-        final TextView labelTop = mock(TextView.class);
-        doReturn(labelTop).when(mHolder).findViewById(R.id.label_top);
-        final TextView labelMiddle = mock(TextView.class);
-        doReturn(labelMiddle).when(mHolder).findViewById(R.id.label_middle);
-        final TextView labelBottom = mock(TextView.class);
-        doReturn(labelBottom).when(mHolder).findViewById(R.id.label_bottom);
-        final TextView labelStart = mock(TextView.class);
-        doReturn(labelStart).when(mHolder).findViewById(R.id.label_start);
-        final TextView labelEnd = mock(TextView.class);
-        doReturn(labelEnd).when(mHolder).findViewById(R.id.label_end);
+        final UsageView chart = (UsageView) mHolder.findViewById(R.id.data_usage);
+        final TextView labelTop = (TextView) mHolder.findViewById(R.id.label_top);
+        final TextView labelMiddle = (TextView) mHolder.findViewById(R.id.label_middle);
+        final TextView labelBottom = (TextView) mHolder.findViewById(R.id.label_bottom);
+        final TextView labelStart = (TextView) mHolder.findViewById(R.id.label_start);
+        final TextView labelEnd = (TextView) mHolder.findViewById(R.id.label_end);
         createTestNetworkData();
-
-        mPreference.onBindViewHolder(mHolder);
         mPreference.setNetworkCycleData(mNetworkCycleChartData);
 
-        verify(chart).setContentDescription(contentCaptor.capture());
-        assertThat(contentCaptor.getValue()).isNotNull();
-        verify(labelTop, never()).setContentDescription(any());
-        verify(labelMiddle, never()).setContentDescription(any());
-        verify(labelBottom, never()).setContentDescription(any());
-        verify(labelStart, never()).setContentDescription(any());
-        verify(labelEnd, never()).setContentDescription(any());
+        mPreference.onBindViewHolder(mHolder);
+
+        assertThat(chart.getContentDescription()).isNotNull();
+        assertThat(labelTop.getContentDescription()).isNull();
+        assertThat(labelMiddle.getContentDescription()).isNull();
+        assertThat(labelBottom.getContentDescription()).isNull();
+        assertThat(labelStart.getContentDescription()).isNull();
+        assertThat(labelEnd.getContentDescription()).isNull();
     }
 
     @Test

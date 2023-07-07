@@ -19,11 +19,7 @@ package com.android.settings.network.telephony;
 import static androidx.lifecycle.Lifecycle.Event.ON_PAUSE;
 import static androidx.lifecycle.Lifecycle.Event.ON_RESUME;
 
-import android.content.ComponentName;
 import android.content.Context;
-import android.telecom.PhoneAccount;
-import android.telecom.PhoneAccountHandle;
-import android.telecom.TelecomManager;
 import android.telephony.SubscriptionManager;
 import android.view.View;
 
@@ -36,11 +32,10 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
+import com.android.settings.network.DefaultSubscriptionReceiver;
 import com.android.settings.network.MobileNetworkRepository;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.mobile.dataservice.MobileNetworkInfoEntity;
 import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
-import com.android.settingslib.mobile.dataservice.UiccInfoEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,19 +47,16 @@ import java.util.List;
  */
 public abstract class DefaultSubscriptionController extends TelephonyBasePreferenceController
         implements LifecycleObserver, Preference.OnPreferenceChangeListener,
-        MobileNetworkRepository.MobileNetworkCallback {
+        MobileNetworkRepository.MobileNetworkCallback,
+        DefaultSubscriptionReceiver.DefaultSubscriptionListener {
     private static final String TAG = "DefaultSubController";
 
     protected ListPreference mPreference;
     protected SubscriptionManager mManager;
-    protected TelecomManager mTelecomManager;
     protected MobileNetworkRepository mMobileNetworkRepository;
     protected LifecycleOwner mLifecycleOwner;
+    private DefaultSubscriptionReceiver mDataSubscriptionChangedReceiver;
 
-    private static final String EMERGENCY_ACCOUNT_HANDLE_ID = "E";
-    private static final ComponentName PSTN_CONNECTION_SERVICE_COMPONENT =
-            new ComponentName("com.android.phone",
-                    "com.android.services.telephony.TelephonyConnectionService");
     private boolean mIsRtlMode;
 
     List<SubscriptionInfoEntity> mSubInfoEntityList = new ArrayList<>();
@@ -75,16 +67,13 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
         mManager = context.getSystemService(SubscriptionManager.class);
         mIsRtlMode = context.getResources().getConfiguration().getLayoutDirection()
                 == View.LAYOUT_DIRECTION_RTL;
-        mMobileNetworkRepository = MobileNetworkRepository.create(context, this);
+        mMobileNetworkRepository = MobileNetworkRepository.getInstance(context);
+        mDataSubscriptionChangedReceiver = new DefaultSubscriptionReceiver(context, this);
         mLifecycleOwner = lifecycleOwner;
         if (lifecycle != null) {
             lifecycle.addObserver(this);
         }
     }
-
-    /** @return SubscriptionInfo for the default subscription for the service, or null if there
-     * isn't one. */
-    protected abstract SubscriptionInfoEntity getDefaultSubscriptionInfo();
 
     /** @return the id of the default subscription for the service, or
      * SubscriptionManager.INVALID_SUBSCRIPTION_ID if there isn't one. */
@@ -104,19 +93,27 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
 
     @OnLifecycleEvent(ON_RESUME)
     public void onResume() {
-        mMobileNetworkRepository.addRegister(mLifecycleOwner);
-        updateEntries();
+        mMobileNetworkRepository.addRegister(mLifecycleOwner, this,
+                SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+        mMobileNetworkRepository.updateEntity();
+        // Can not get default subId from database until get the callback, add register by subId
+        // later.
+        mMobileNetworkRepository.addRegisterBySubId(getDefaultSubscriptionId());
+        mDataSubscriptionChangedReceiver.registerReceiver();
     }
 
     @OnLifecycleEvent(ON_PAUSE)
     public void onPause() {
-        mMobileNetworkRepository.removeRegister();
+        mMobileNetworkRepository.removeRegister(this);
+        mDataSubscriptionChangedReceiver.unRegisterReceiver();
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = screen.findPreference(getPreferenceKey());
+        // Set a summary placeholder to reduce flicker.
+        mPreference.setSummaryProvider(pref -> mContext.getString(R.string.summary_placeholder));
         updateEntries();
     }
 
@@ -125,28 +122,8 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
         // Currently, cannot use ListPreference.setSummary() when the summary contains user
         // generated string, because ListPreference.getSummary() is using String.format() to format
         // the summary when the summary is set by ListPreference.setSummary().
-        if (preference != null) {
+        if (preference != null && !mSubInfoEntityList.isEmpty()) {
             preference.setSummaryProvider(pref -> getSummary());
-        }
-    }
-
-    @Override
-    public CharSequence getSummary() {
-        final PhoneAccountHandle handle = getDefaultCallingAccountHandle();
-        if ((handle != null) && (!isCallingAccountBindToSubscription(handle))) {
-            // display VoIP account in summary when configured through settings within dialer
-            return getLabelFromCallingAccount(handle);
-        }
-        final SubscriptionInfoEntity info = getDefaultSubscriptionInfo();
-        if (info != null) {
-            // display subscription based account
-            return info.uniqueName;
-        } else {
-            if (isAskEverytimeSupported()) {
-                return mContext.getString(R.string.calls_and_sms_ask_every_time);
-            } else {
-                return "";
-            }
         }
     }
 
@@ -171,6 +148,7 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
         final ArrayList<CharSequence> displayNames = new ArrayList<>();
         final ArrayList<CharSequence> subscriptionIds = new ArrayList<>();
         List<SubscriptionInfoEntity> list = getSubscriptionInfoList();
+        if (list.isEmpty()) return;
 
         if (list.size() == 1) {
             mPreference.setEnabled(false);
@@ -210,76 +188,6 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
         }
     }
 
-    /**
-     * Get default calling account
-     *
-     * @return current calling account {@link PhoneAccountHandle}
-     */
-    public PhoneAccountHandle getDefaultCallingAccountHandle() {
-        final PhoneAccountHandle currentSelectPhoneAccount =
-                getTelecomManager().getUserSelectedOutgoingPhoneAccount();
-        if (currentSelectPhoneAccount == null) {
-            return null;
-        }
-        final List<PhoneAccountHandle> accountHandles =
-                getTelecomManager().getCallCapablePhoneAccounts(false);
-        final PhoneAccountHandle emergencyAccountHandle = new PhoneAccountHandle(
-                PSTN_CONNECTION_SERVICE_COMPONENT, EMERGENCY_ACCOUNT_HANDLE_ID);
-        if (currentSelectPhoneAccount.equals(emergencyAccountHandle)) {
-            return null;
-        }
-        for (PhoneAccountHandle handle : accountHandles) {
-            if (currentSelectPhoneAccount.equals(handle)) {
-                return currentSelectPhoneAccount;
-            }
-        }
-        return null;
-    }
-
-    @VisibleForTesting
-    TelecomManager getTelecomManager() {
-        if (mTelecomManager == null) {
-            mTelecomManager = mContext.getSystemService(TelecomManager.class);
-        }
-        return mTelecomManager;
-    }
-
-    @VisibleForTesting
-    PhoneAccount getPhoneAccount(PhoneAccountHandle handle) {
-        return getTelecomManager().getPhoneAccount(handle);
-    }
-
-    /**
-     * Check if calling account bind to subscription
-     *
-     * @param handle {@link PhoneAccountHandle} for specific calling account
-     */
-    public boolean isCallingAccountBindToSubscription(PhoneAccountHandle handle) {
-        final PhoneAccount account = getPhoneAccount(handle);
-        if (account == null) {
-            return false;
-        }
-        return account.hasCapabilities(PhoneAccount.CAPABILITY_SIM_SUBSCRIPTION);
-    }
-
-    /**
-     * Get label from calling account
-     *
-     * @param handle to get label from {@link PhoneAccountHandle}
-     * @return label of calling account
-     */
-    public CharSequence getLabelFromCallingAccount(PhoneAccountHandle handle) {
-        CharSequence label = null;
-        final PhoneAccount account = getPhoneAccount(handle);
-        if (account != null) {
-            label = account.getLabel();
-        }
-        if (label != null) {
-            label = mContext.getPackageManager().getUserBadgedLabel(label, handle.getUserHandle());
-        }
-        return (label != null) ? label : "";
-    }
-
     @VisibleForTesting
     protected List<SubscriptionInfoEntity> getSubscriptionInfoList() {
         return mSubInfoEntityList;
@@ -304,5 +212,15 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
         refreshSummary(mPreference);
     }
 
+    @Override
+    public void onDefaultVoiceChanged(int defaultVoiceSubId) {
+        updateEntries();
+        refreshSummary(mPreference);
+    }
 
+    @Override
+    public void onDefaultSmsChanged(int defaultSmsSubId) {
+        updateEntries();
+        refreshSummary(mPreference);
+    }
 }

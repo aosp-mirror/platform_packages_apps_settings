@@ -8,17 +8,25 @@ package {
 }
 
 java_library {
-    name: "fuelgauge-usage-state-protos-lite",
-    proto: {
-        type: "lite",
-    },
-    srcs: ["fuelgauge_usage_state.proto"],
-}
-
-java_library {
     name: "app-usage-event-protos-lite",
     proto: {
         type: "lite",
     },
     srcs: ["app_usage_event.proto"],
+}
+
+java_library {
+    name: "battery-event-protos-lite",
+    proto: {
+        type: "lite",
+    },
+    srcs: ["battery_event.proto"],
+}
+
+java_library {
+    name: "fuelgauge-usage-state-protos-lite",
+    proto: {
+        type: "lite",
+    },
+    srcs: ["fuelgauge_usage_state.proto"],
 }

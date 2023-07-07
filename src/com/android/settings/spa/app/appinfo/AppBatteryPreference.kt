@@ -40,7 +40,6 @@ import com.android.settings.fuelgauge.batteryusage.BatteryChartPreferenceControl
 import com.android.settings.fuelgauge.batteryusage.BatteryDiffEntry
 import com.android.settingslib.spa.widget.preference.Preference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
-import com.android.settingslib.spaprivileged.framework.common.asUser
 import com.android.settingslib.spaprivileged.model.app.installed
 import com.android.settingslib.spaprivileged.model.app.userHandle
 import com.android.settingslib.spaprivileged.model.app.userId
@@ -55,7 +54,7 @@ fun AppBatteryPreference(app: ApplicationInfo) {
     if (!presenter.isAvailable()) return
 
     Preference(object : PreferenceModel {
-        override val title = stringResource(R.string.app_battery_usage_title)
+        override val title = stringResource(R.string.battery_details_title)
         override val summary = presenter.summary
         override val enabled = presenter.enabled
         override val onClick = presenter::startActivity
@@ -65,7 +64,6 @@ fun AppBatteryPreference(app: ApplicationInfo) {
 }
 
 private class AppBatteryPresenter(private val context: Context, private val app: ApplicationInfo) {
-    private val userContext = context.asUser(app.userHandle)
     private var batteryDiffEntryState: LoadingState<BatteryDiffEntry?>
         by mutableStateOf(LoadingState.Loading)
 
@@ -87,7 +85,7 @@ private class AppBatteryPresenter(private val context: Context, private val app:
 
     private suspend fun getBatteryDiffEntry(): BatteryDiffEntry? = withContext(Dispatchers.IO) {
         BatteryChartPreferenceController.getAppBatteryUsageData(
-            userContext, app.packageName, app.userId
+            context, app.packageName, app.userId
         ).also {
             Log.d(TAG, "loadBatteryDiffEntries():\n$it")
         }
@@ -108,7 +106,7 @@ private class AppBatteryPresenter(private val context: Context, private val app:
     private fun BatteryDiffEntry?.getSummary(): String =
         this?.takeIf { mConsumePower > 0 }?.let {
             context.getString(
-                R.string.battery_summary, Utils.formatPercentage(percentOfTotal, true)
+                R.string.battery_summary, Utils.formatPercentage(percentage, true)
             )
         } ?: context.getString(R.string.no_battery_summary)
 
@@ -127,7 +125,7 @@ private class AppBatteryPresenter(private val context: Context, private val app:
             context,
             AppInfoSettingsProvider.METRICS_CATEGORY,
             this,
-            Utils.formatPercentage(percentOfTotal, true),
+            Utils.formatPercentage(percentage, true),
             null,
             false,
         )

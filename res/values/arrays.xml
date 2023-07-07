@@ -255,7 +255,7 @@
 
     <!-- Bluetooth audio routing settings: Titles for audio routing options -->
     <string-array name="bluetooth_audio_routing_titles">
-        <item>Decide automatically</item>
+        <item>Use app default</item>
         <item>Play on hearing device</item>
         <item>Play on phone speaker</item>
     </string-array>
@@ -1389,20 +1389,6 @@
         <item>sat</item>
     </string-array>
 
-    <!-- A list for all supported calendar types. [DO NOT TRANSLATE] -->
-    <string-array name="calendar_type">
-        <item>default</item>
-        <item>chinese</item>
-        <item>dangi</item>
-        <item>hebrew</item>
-        <item>indian</item>
-        <item>islamic</item>
-        <item>islamic-rgsa</item>
-        <item>islamic-tbla</item>
-        <item>islamic-umalqura</item>
-        <item>persian</item>
-    </string-array>
-
     <!-- Screen flash notification color when activating -->
     <array name="screen_flash_notification_preset_opacity_colors">
         <item>@color/screen_flash_preset_opacity_color_01</item>
@@ -1418,4 +1404,9 @@
         <item>@color/screen_flash_preset_opacity_color_11</item>
         <item>@color/screen_flash_preset_opacity_color_12</item>
     </array>
+
+    <!-- hide 3G option from preferred network type UI -->
+    <integer-array name="network_mode_3g_deprecated_carrier_id" translatable="false">
+    </integer-array>
+
 </resources>

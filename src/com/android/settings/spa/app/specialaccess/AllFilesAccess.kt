@@ -18,9 +18,12 @@ package com.android.settings.spa.app.specialaccess
 
 import android.Manifest
 import android.app.AppOpsManager
+import android.app.settings.SettingsEnums
 import android.content.Context
 import com.android.settings.R
+import com.android.settings.overlay.FeatureFactory
 import com.android.settingslib.spaprivileged.template.app.AppOpPermissionListModel
+import com.android.settingslib.spaprivileged.template.app.AppOpPermissionRecord
 import com.android.settingslib.spaprivileged.template.app.TogglePermissionAppListProvider
 
 object AllFilesAccessAppListProvider : TogglePermissionAppListProvider {
@@ -35,4 +38,17 @@ class AllFilesAccessListModel(context: Context) : AppOpPermissionListModel(conte
     override val appOp = AppOpsManager.OP_MANAGE_EXTERNAL_STORAGE
     override val permission = Manifest.permission.MANAGE_EXTERNAL_STORAGE
     override val setModeByUid = true
+
+    override fun setAllowed(record: AppOpPermissionRecord, newAllowed: Boolean) {
+        super.setAllowed(record, newAllowed)
+        logPermissionChange(newAllowed)
+    }
+
+    private fun logPermissionChange(newAllowed: Boolean) {
+        val category = when {
+            newAllowed -> SettingsEnums.APP_SPECIAL_PERMISSION_MANAGE_EXT_STRG_ALLOW
+            else -> SettingsEnums.APP_SPECIAL_PERMISSION_MANAGE_EXT_STRG_DENY
+        }
+        FeatureFactory.getFactory(context).metricsFeatureProvider.action(context, category, "")
+    }
 }

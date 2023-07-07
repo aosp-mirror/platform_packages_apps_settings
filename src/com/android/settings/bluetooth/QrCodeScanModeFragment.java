@@ -16,9 +16,11 @@
 
 package com.android.settings.bluetooth;
 
+import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Matrix;
 import android.graphics.Outline;
 import android.graphics.Rect;
@@ -67,13 +69,14 @@ public class QrCodeScanModeFragment extends InstrumentedFragment implements
 
     private static final Duration VIBRATE_DURATION_QR_CODE_RECOGNITION = Duration.ofMillis(3);
 
+    public static final String KEY_BROADCAST_METADATA = "key_broadcast_metadata";
+
     private boolean mIsGroupOp;
     private int mCornerRadius;
     private BluetoothDevice mSink;
     private String mBroadcastMetadata;
     private Context mContext;
     private QrCamera mCamera;
-    private QrCodeScanModeController mController;
     private TextureView mTextureView;
     private TextView mSummary;
     private TextView mErrorMessage;
@@ -87,7 +90,6 @@ public class QrCodeScanModeFragment extends InstrumentedFragment implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = getContext();
-        mController = new QrCodeScanModeController(mContext);
     }
 
     @Override
@@ -215,10 +217,10 @@ public class QrCodeScanModeFragment extends InstrumentedFragment implements
                     break;
 
                 case MESSAGE_SCAN_BROADCAST_SUCCESS:
-                    /* TODO(b/265281156) : Move the logic to BluetoothFindBroadcastsFragment.
-                    *  We only pass the QR code string to the previous page.
-                    */
-                    mController.addSource(mSink, mBroadcastMetadata, mIsGroupOp);
+                    Log.d(TAG, "scan success");
+                    final Intent resultIntent = new Intent();
+                    resultIntent.putExtra(KEY_BROADCAST_METADATA, mBroadcastMetadata);
+                    getActivity().setResult(Activity.RESULT_OK, resultIntent);
                     notifyUserForQrCodeRecognition();
                     break;
                 default:

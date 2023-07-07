@@ -18,18 +18,21 @@ package com.android.settings.inputmethod;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.hardware.input.InputDeviceIdentifier;
 import android.provider.Settings;
 
 import androidx.preference.Preference;
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.inputmethod.PhysicalKeyboardFragment.HardKeyboardDeviceInfo;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 
 import org.junit.Before;
@@ -37,11 +40,13 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
-import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /** Tests for {@link KeyboardSettingsPreferenceController} */
 @RunWith(RobolectricTestRunner.class)
@@ -53,31 +58,42 @@ public class KeyboardSettingsPreferenceControllerTest {
     private static final String PREFERENCE_KEY = "keyboard_settings";
 
     @Mock
-    private Activity mActivity;
-    @Mock
     private CachedBluetoothDevice mCachedBluetoothDevice;
-    @Captor
-    private ArgumentCaptor<Intent> mIntentArgumentCaptor;
+    @Mock
+    private InputDeviceIdentifier mInputDeviceIdentifier;
+
     private Context mContext;
     private KeyboardSettingsPreferenceController mController;
 
     @Before
     public void setUp() {
         mContext = spy(ApplicationProvider.getApplicationContext());
-        mController = new KeyboardSettingsPreferenceController(mContext, PREFERENCE_KEY);
-        mController.init(mCachedBluetoothDevice, mActivity);
+        doNothing().when(mContext).startActivity(any());
+        mController = spy(new KeyboardSettingsPreferenceController(mContext, PREFERENCE_KEY));
+        mController.init(mCachedBluetoothDevice);
     }
 
     @Test
     public void handlePreferenceTreeClick_expected() {
         Preference mKeyboardPreference = new Preference(mContext);
         mKeyboardPreference.setKey(PREFERENCE_KEY);
+        final ArgumentCaptor<Intent> captor = ArgumentCaptor.forClass(Intent.class);
+        String address = "BT_ADDRESS";
+        HardKeyboardDeviceInfo deviceInfo =
+                new HardKeyboardDeviceInfo(
+                        "TEST_DEVICE",
+                        mInputDeviceIdentifier,
+                        "TEST_DEVICE_LABEL",
+                        address);
+        List<HardKeyboardDeviceInfo> keyboards = new ArrayList<>();
+        keyboards.add(deviceInfo);
+        when(mController.getHardKeyboardList()).thenReturn(keyboards);
+        when(mCachedBluetoothDevice.getAddress()).thenReturn(address);
 
         mController.handlePreferenceTreeClick(mKeyboardPreference);
 
-        verify(mActivity).startActivityForResult(mIntentArgumentCaptor.capture(), eq(0));
-        Intent expectedIntent = mIntentArgumentCaptor.getValue();
-        assertThat(expectedIntent.getAction()).isEqualTo(Settings.ACTION_HARD_KEYBOARD_SETTINGS);
+        verify(mContext).startActivity(captor.capture());
+        assertThat(captor.getValue().getAction()).isEqualTo(Settings.ACTION_HARD_KEYBOARD_SETTINGS);
     }
 
     @Test

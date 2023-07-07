@@ -16,6 +16,8 @@
 
 package com.android.settings.spa.app.appinfo
 
+import android.app.AppOpsManager
+import android.app.KeyguardManager
 import android.app.admin.DevicePolicyManager
 import android.content.Context
 import android.content.pm.ApplicationInfo
@@ -27,6 +29,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.test.assertIsNotDisplayed
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
 import androidx.test.core.app.ApplicationProvider
@@ -36,6 +39,7 @@ import com.android.settings.R
 import com.android.settings.Utils
 import com.android.settingslib.spa.testutils.delay
 import com.android.settingslib.spa.testutils.waitUntilExists
+import com.android.settingslib.spaprivileged.framework.common.appOpsManager
 import com.android.settingslib.spaprivileged.framework.common.devicePolicyManager
 import com.android.settingslib.spaprivileged.framework.common.userManager
 import com.android.settingslib.spaprivileged.model.app.IPackageManagers
@@ -46,6 +50,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
+import org.mockito.Mockito.verify
 import org.mockito.MockitoSession
 import org.mockito.Spy
 import org.mockito.quality.Strictness
@@ -73,6 +78,12 @@ class AppInfoSettingsMoreOptionsTest {
     @Mock
     private lateinit var devicePolicyManager: DevicePolicyManager
 
+    @Mock
+    private lateinit var appOpsManager: AppOpsManager
+
+    @Mock
+    private lateinit var keyguardManager: KeyguardManager
+
     @Spy
     private var resources = context.resources
 
@@ -90,6 +101,9 @@ class AppInfoSettingsMoreOptionsTest {
         whenever(context.packageManager).thenReturn(packageManager)
         whenever(context.userManager).thenReturn(userManager)
         whenever(context.devicePolicyManager).thenReturn(devicePolicyManager)
+        whenever(context.appOpsManager).thenReturn(appOpsManager)
+        whenever(context.getSystemService(KeyguardManager::class.java)).thenReturn(keyguardManager)
+        whenever(keyguardManager.isKeyguardSecure).thenReturn(false)
         whenever(Utils.isProfileOrDeviceOwner(userManager, devicePolicyManager, PACKAGE_NAME))
             .thenReturn(false)
     }
@@ -140,6 +154,35 @@ class AppInfoSettingsMoreOptionsTest {
 
         composeTestRule.waitUntilExists(
             hasText(context.getString(R.string.uninstall_all_users_text))
+        )
+    }
+
+    @Test
+    fun shouldShowAccessRestrictedSettings() {
+        whenever(
+            appOpsManager.noteOpNoThrow(
+                AppOpsManager.OP_ACCESS_RESTRICTED_SETTINGS, UID, PACKAGE_NAME, null, null
+            )
+        ).thenReturn(AppOpsManager.MODE_IGNORED)
+        val app = ApplicationInfo().apply {
+            packageName = PACKAGE_NAME
+            uid = UID
+        }
+
+        setContent(app)
+        composeTestRule.onRoot().performClick()
+
+        composeTestRule.waitUntilExists(
+            hasText(context.getString(R.string.app_restricted_settings_lockscreen_title))
+        )
+        composeTestRule
+            .onNodeWithText(context.getString(R.string.app_restricted_settings_lockscreen_title))
+            .performClick()
+        verify(appOpsManager).setMode(
+            AppOpsManager.OP_ACCESS_RESTRICTED_SETTINGS,
+            UID,
+            PACKAGE_NAME,
+            AppOpsManager.MODE_ALLOWED,
         )
     }
 

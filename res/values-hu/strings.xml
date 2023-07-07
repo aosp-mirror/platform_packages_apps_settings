@@ -22,8 +22,6 @@
     <string name="allow" msgid="3763244945363657722">"Engedélyezés"</string>
     <string name="deny" msgid="7326117222944479942">"Elutasítás"</string>
     <string name="confirmation_turn_on" msgid="2979094011928347665">"Bekapcsolás"</string>
-    <string name="on" msgid="1702751473920047">"Be"</string>
-    <string name="off" msgid="2898123876644709799">"Ki"</string>
     <string name="device_info_default" msgid="1406619232867343310">"Ismeretlen"</string>
     <string name="device_info_protected_single_press" msgid="3810785480060743677">"Koppintson az információk megjelenítéséhez"</string>
     <string name="show_dev_countdown" msgid="2936506773086395069">"{count,plural, =1{# lépésre van a fejlesztővé válástól.}other{# lépésre van a fejlesztővé válástól.}}"</string>
@@ -61,27 +59,29 @@
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Jobb fül párosítása"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Bal fül párosítása"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Párosítsa a másik fület"</string>
-    <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"Sikerült a bal oldali hallókészülék csatlakoztatása.\n\nA jobb oldali párosításához győződjön meg arról, hogy be van kapcsolva, és készen áll a párosításra."</string>
-    <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Sikerült a jobb oldali hallókészülék csatlakoztatása.\n\nA bal oldali párosításához győződjön meg arról, hogy be van kapcsolva, és készen áll a párosításra."</string>
+    <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="5711642363615781647">"Sikerült a bal oldali hallókészülék csatlakoztatása.\n\nA jobb oldali párosításához győződjön meg arról, hogy be van kapcsolva, és készen áll a párosításra."</string>
+    <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="631521133525979967">"Sikerült a jobb oldali hallókészülék csatlakoztatása.\n\nA bal oldali párosításához győződjön meg arról, hogy be van kapcsolva, és készen áll a párosításra."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"Jobb fül párosítása"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"Bal fül párosítása"</string>
-    <string name="bluetooth_device_controls_title" msgid="7115710864094259075">"Hallásjavító eszköz vezérlői"</string>
-    <string name="bluetooth_device_controls_summary" msgid="5843475712424478172">"Hallásjavító eszköz gyorsparancsa, hallókészülék-kompatibilitás"</string>
+    <string name="bluetooth_device_controls_general" msgid="1399214835599665488">"Minden rendelkezésre álló hallókészüléknél"</string>
+    <string name="bluetooth_device_controls_title" msgid="1895676556354697234">"Hallókészülék-beállítások"</string>
+    <string name="bluetooth_device_controls_summary" msgid="8115767735418425663">"Gyorsparancs, hallókészülék-kompatibilitás"</string>
+    <string name="bluetooth_device_controls_specific" msgid="7706863288754077107">"Ennél az eszköznél"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Hangkimenet"</string>
-    <string name="bluetooth_audio_routing_summary" msgid="7236959154306472259">"Megadhatja, hogy a hallásjavító eszköz vagy a telefon hangszórója lejátszhat-e különböző típusú hanganyagot"</string>
+    <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"A hangkimenetről"</string>
+    <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Hangok irányítása a hallásjavító eszköz vagy a telefon hangszórójára"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"Kapcsolódó"</string>
-    <string name="bluetooth_ringtone_title" msgid="3049822968673742328">"Csengőhang"</string>
-    <string name="bluetooth_call_title" msgid="3170657843273743928">"Hívás"</string>
+    <string name="bluetooth_ringtone_title" msgid="3177308461256892085">"Csengőhang és riasztások"</string>
+    <string name="bluetooth_call_title" msgid="6851464952021874072">"Hívás közbeni hang beállításai"</string>
     <string name="bluetooth_media_title" msgid="343705257183053699">"Média"</string>
-    <string name="bluetooth_system_sounds_title" msgid="5331556107110163039">"Rendszerhangok"</string>
-    <string name="bluetooth_audio_path_hearing_device_title" msgid="2073463574123159850">"Lejátszás hallásjavító eszközön"</string>
-    <string name="bluetooth_audio_path_phone_speaker_title" msgid="4259772328898172657">"Lejátszás a telefon hangszóróján"</string>
+    <string name="bluetooth_system_sounds_title" msgid="6746938637128763205">"Értesítések és más rendszerhangok"</string>
+    <string name="bluetooth_audio_routing_footer_summary" msgid="410260713589309293">"A hangkimenetet alapértelmezés szerint az egyes alkalmazások határozzák meg"</string>
     <string name="bluetooth_device" msgid="2217973503732544291">"Névtelen Bluetooth eszköz"</string>
     <string name="progress_scanning" msgid="2564746192843011826">"Keresés"</string>
     <string name="bluetooth_no_devices_found" msgid="7704539337219953182">"Nem található a közelben Bluetooth-eszköz."</string>
     <string name="bluetooth_notif_ticker" msgid="209515545257862858">"Bluetooth párosítási kérelem"</string>
     <string name="bluetooth_notif_title" msgid="1196532269131348647">"Párosítási kérelem"</string>
-    <string name="bluetooth_notif_message" msgid="5584717784198086653">"Koppintson rá a(z) <xliff:g id="DEVICE_NAME">%1$s</xliff:g> eszközzel való párosításhoz."</string>
+    <string name="bluetooth_notif_message" msgid="5584717784198086653">"Koppintson az eszközzel (<xliff:g id="DEVICE_NAME">%1$s</xliff:g>) való párosításhoz."</string>
     <string name="bluetooth_devices_card_off_title" msgid="1320149821945129127">"Kikapcsolt Bluetooth"</string>
     <string name="bluetooth_devices_card_off_summary" msgid="2276527382891105858">"A bekapcsoláshoz koppintson"</string>
     <string name="device_picker" msgid="2427027896389445414">"Bluetooth-eszköz kiválasztása"</string>
@@ -99,13 +99,16 @@
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"Eszközei"</string>
     <string name="bluetooth_pairing_page_title" msgid="3403981358823707692">"Új eszköz párosítása"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Bluetooth A2DP hardver tehermentesítésének letiltása"</string>
-    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"Bluetooth LE audio hardver tehermentesítésének letiltása"</string>
+    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"Bluetooth LE hangátvitel hardver tehermentesítésének letiltása"</string>
     <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"Újraindítja az eszközt?"</string>
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"A beállítás módosításához újra kell indítania az eszközt."</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Újraindítás"</string>
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Mégse"</string>
-    <string name="bluetooth_enable_leaudio" msgid="1245004820628723136">"Bluetooth LE audio engedélyezése"</string>
-    <string name="bluetooth_enable_leaudio_summary" msgid="8066117764037123479">"Engedélyezi a Bluetooth LE audio funkciót, ha az eszköz támogatja a LE audio hardver működését."</string>
+    <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Bluetooth LE hangátvitel kikapcsolása"</string>
+    <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Kikapcsolja a Bluetooth alacsony energiaszintű hangátvitel funkciót, ha az eszköz támogatja az Alacsony energiaszintű hangátvitel hardver működését."</string>
+    <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"„Alacsony energiaszintű hangátvitel” az Eszközadatokban"</string>
+    <string name="bluetooth_enable_leaudio_allow_list" msgid="1692999156437357534">"Bluetooth LE hangátvitel engedélyezőlistájának engedélyezése"</string>
+    <string name="bluetooth_enable_leaudio_allow_list_summary" msgid="725601205276008525">"Engedélyezi a Bluetooth alacsony energiaszintű hangátvitel engedélyezőlistája funkciót."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Médiaeszközök"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Hívóeszközök"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Egyéb eszközök"</string>
@@ -158,21 +161,25 @@
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Rendszerbeállítás"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"A Nyelvválasztás nem áll rendelkezésre ehhez az alkalmazáshoz a Beállításokban."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"A nyelv eltérhet az alkalmazásban rendelkezésre álló nyelvektől. Előfordulhat, hogy egyes alkalmazások nem támogatják ezt a beállítást."</string>
-    <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Csak azok az alkalmazások láthatók itt, amelyek támogatják a nyelvválasztást."</string>
+    <string name="desc_app_locale_selection_supported" msgid="6744909281573556379">"Az egyes alkalmazások nyelvének beállítása."</string>
     <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"A rendszer, az alkalmazások és a webhelyek a preferált nyelvek közül az első támogatottat fogják használni."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Ha minden alkalmazásnál Ön szeretné kiválasztani a nyelvet, lépjen az egyes alkalmazások nyelvi beállításaihoz."</string>
-    <string name="desc_locale_helper_footer_general" msgid="6967183342596405116">"További információ a nyelvekről"</string>
-    <string name="regional_preferences_title" msgid="4304567374498629528">"Regionális preferenciáik"</string>
+    <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"További információ az alkalmazások nyelveiről"</string>
+    <string name="title_change_system_locale" msgid="8589844586256566951">"Módosítja a rendszer nyelvét a következőre: %s?"</string>
+    <string name="desc_notice_device_locale_settings_change" msgid="8311132485850714160">"Az eszközbeállítások és a regionális preferenciák módosulni fognak."</string>
+    <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"Módosítás"</string>
+    <string name="title_unavailable_locale" msgid="2628898110416542386">"A(z) %s nyelv nem áll rendelkezésre"</string>
+    <string name="desc_unavailable_locale" msgid="2201756477400935896">"Ez a nyelv nem használható a rendszer nyelveként, de jelezte az alkalmazásoknak és a webhelyeknek, hogy ezt a nyelvet részesíti előnyben."</string>
+    <string name="regional_preferences_title" msgid="4304567374498629528">"Regionális preferenciák"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Mértékegységekkel és számokkal kapcsolatos preferenciák beállítása"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Tudassa az alkalmazásokkal a regionális preferenciáit, hogy személyre szabhassák a felhasználói élményt."</string>
     <string name="regional_preferences_option_page_sub_title" msgid="8303661099255197036">"Ahol lehetséges, ott az alkalmazások az Ön regionális preferenciáit használják majd."</string>
-    <string name="temperature_preferences_title" msgid="9067783912861473593">"Hőmérséklet mértékegysége"</string>
-    <string name="calendar_preferences_title" msgid="8312485828206542600">"Naptár"</string>
+    <string name="temperature_preferences_title" msgid="5009881556503629058">"Hőmérséklet"</string>
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"A hét első napja"</string>
-    <string name="numbers_preferences_title" msgid="6094837605398562369">"Számok"</string>
+    <string name="numbers_preferences_title" msgid="8197418984391195446">"Számbeállítások"</string>
     <string name="default_string_of_regional_preference" msgid="7662581547334113719">"Az appok alapértelmezett beállításának használata"</string>
-    <string name="celsius_temperature_unit" msgid="6118523647432383132">"Celsius (°C)"</string>
-    <string name="fahrenheit_temperature_unit" msgid="4622209814782318725">"Fahrenheit (°F)"</string>
+    <string name="celsius_temperature_unit" msgid="8896459071273084507">"Celsius (°C)"</string>
+    <string name="fahrenheit_temperature_unit" msgid="1118677820614569801">"Fahrenheit (°F)"</string>
     <string name="sunday_first_day_of_week" msgid="7644548348295686051">"Vasárnap"</string>
     <string name="monday_first_day_of_week" msgid="7244698610476506771">"Hétfő"</string>
     <string name="tuesday_first_day_of_week" msgid="5085370946936582391">"Kedd"</string>
@@ -180,6 +187,8 @@
     <string name="thursday_first_day_of_week" msgid="3035885630945594833">"Csütörtök"</string>
     <string name="friday_first_day_of_week" msgid="7074795061812083541">"Péntek"</string>
     <string name="saturday_first_day_of_week" msgid="3702282590450322727">"Szombat"</string>
+    <string name="title_regional_pref_footer" msgid="7450438024324794380">"Ha valamelyik alkalmazás nem támogatja a regionális preferenciákat, az app az alapértelmezett nyelvi beállításait fogja használni."</string>
+    <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"További információ a nyelvi beállításokról."</string>
     <string name="dlg_remove_locales_title" msgid="3170501604483612114">"{count,plural, =1{Eltávolítja a kiválasztott nyelvet?}other{Eltávolítja a kiválasztott nyelveket?}}"</string>
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"A szöveg más nyelven fog megjelenni."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Nem lehet eltávolítani az összes nyelvet"</string>
@@ -234,12 +243,13 @@
     <string name="lock_after_timeout" msgid="8682769000437403444">"Zárolás a képernyő időkorlátja után"</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"Az időkorlát után ennyivel: <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>"</string>
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"Az időkorlát után azonnal, kivéve ha a következő tartja feloldva: <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"Az időkorlát után ennyivel: <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>; kivéve, ha a <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> feloldva tartja"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"Az időkorlát után ennyivel: <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>; kivéve, ha az <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> feloldva tartja"</string>
     <string name="owner_info_settings_title" msgid="3555626140700093017">"Szöveg a lezárási képernyőn"</string>
     <string name="owner_info_settings_summary" msgid="347238313388083297">"Nincs"</string>
     <string name="owner_info_settings_edit_text_hint" msgid="841926875876050274">"pl. Péter Androidja."</string>
     <string name="location_settings_title" msgid="8375074508036087178">"Tartózkodási hely"</string>
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"Helyadatok használata"</string>
+    <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Ki"</string>
     <string name="location_settings_summary_location_on" msgid="7029728269719893381">"{count,plural, =1{Be – # alkalmazás hozzáfér a helyadatokhoz}other{Be – # alkalmazás hozzáfér a helyadatokhoz}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Betöltés…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"A közeli eszközökre vonatkozó engedéllyel rendelkező alkalmazások meghatározhatják a csatlakoztatott eszközök relatív pozícióját."</string>
@@ -256,7 +266,7 @@
     <string name="safety_center_title" msgid="7732397372178774777">"Biztonság és adatvédelem"</string>
     <string name="safety_center_summary" msgid="3554867379951053869">"Alkalmazásbiztonság, eszközzárolás, engedélyek"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Arc hozzáadva"</string>
-    <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"Koppintson az arc beállításához"</string>
+    <string name="security_settings_face_preference_summary_none" msgid="523320857738436024">"Beállítás szükséges"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Arcalapú feloldás"</string>
     <string name="security_settings_face_profile_preference_title" msgid="7519527436266375005">"Arcalapú feloldás munkaprofilhoz"</string>
     <string name="security_settings_face_enroll_education_title" msgid="6448806884597691208">"Az Arcalapú feloldás beállítása"</string>
@@ -310,21 +320,21 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"Alkalmazáson belüli arcalapú feloldáshoz megerősítés is szükséges"</string>
     <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"Arcmodell törlése"</string>
     <string name="security_settings_face_settings_enroll" msgid="3726313826693825029">"Az Arcalapú feloldás beállítása"</string>
-    <string name="security_settings_face_settings_footer" msgid="625696606490947189">"Használhatja arcát telefonja zárolásának feloldásához, vagy hitelesítés elvégzéséhez az alkalmazásokban, például bejelentkezés vagy vásárlás jóváhagyása során.\n\nNe feledje:\negyszerre csak egy arcot állíthat be. Másik arc megadásához törölnie kell a már beállított arcot.\n\nHa a telefonja felé fordul, azzal akkor is feloldhatja az eszköz zárolását, ha nem áll szándékában.\n\nTelefonját más is feloldhatja, ha az Ön arca elé tartja.\n\nElőfordulhat, hogy telefonját az Önre nagyon hasonlító személyek is feloldhatják, például az egypetéjű ikertestvére."</string>
-    <string name="security_settings_face_settings_footer_attention_not_supported" msgid="2071065435536235622">"Használhatja arcát telefonja zárolásának feloldásához, vagy hitelesítés elvégzéséhez az alkalmazásokban, például bejelentkezés vagy vásárlás jóváhagyása során.\n\nNe feledje:\negyszerre csak egy arcot állíthat be. Másik arc megadásához törölnie kell a már beállított arcot.\n\nHa a telefonja felé fordul, azzal akkor is feloldhatja az eszköz zárolását, ha nem áll szándékában.\n\nTelefonját más is feloldhatja, ha az Ön arca elé tartja, még akkor is, ha a szemét csukva tartja.\n\nElőfordulhat, hogy telefonját az Önre nagyon hasonlító személyek is feloldhatják, például az egypetéjű ikertestvére."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2899669764446232715">"Törli az arcmodellt?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="916131485988121592">"Arcmodelljét véglegesen és biztonságosan töröljük.\n\nA törlés után PIN-kódot, mintát vagy jelszót kell használnia a telefon zárolásának feloldásához és az alkalmazásokban történő hitelesítéshez."</string>
     <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"Arcmodelljét véglegesen és biztonságosan töröljük.\n\nAz eltávolítás után PIN-kódra, mintára vagy jelszóra lesz szüksége a telefon feloldásához."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"A telefon feloldásához használja az Arcalapú feloldást"</string>
+    <string name="security_settings_fingerprint" msgid="6387775386189204201">"Ujjlenyomat"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Ujjlenyomat"</string>
     <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"Ujjlenyomattal való feloldás használata esetén"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Ujjlenyomat munkához"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Ujjlenyomat hozzáadása"</string>
     <string name="security_settings_fingerprint_preference_summary" msgid="8486134175759676037">"{count,plural, =1{Ujjlenyomat hozzáadva}other{# ujjlenyomat hozzáadva}}"</string>
-    <string name="security_settings_fingerprint_preference_summary_none" msgid="1044059475710838504"></string>
+    <string name="security_settings_fingerprint_preference_summary_none" msgid="1146977379031250790">"Beállítás szükséges"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Ujjlenyomat beállítása"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Feloldás ujjlenyomattal"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Az ujjlenyomat használata"</string>
+    <string name="security_settings_fingerprint_settings_footer_learn_more" msgid="2508322993726483601">"További információ a Feloldás ujjlenyomattal funkcióról"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"Az irányítás az Ön kezében van"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"Az irányítás az Ön és gyermeke kezében van"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"Fontos tudnivalók"</string>
@@ -346,6 +356,10 @@
     <string name="biometric_settings_intro_with_activeunlock" msgid="6583248094453119314">"Ha beállítja az Arcalapú feloldás és a Feloldás ujjlenyomattal funkciót, telefonja az ujjlenyomatát fogja kérni, amikor Ön maszkot visel, vagy sötét helyen van.\n\nA feloldás az órájával is lehetséges, ha az arcát vagy az ujjlenyomatát nem ismeri fel a rendszer."</string>
     <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"A feloldás az órájával is lehetséges, ha az ujjlenyomatát nem ismeri fel a rendszer."</string>
     <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"A feloldás az órájával is lehetséges, ha az arcát nem ismeri fel a rendszer."</string>
+    <string name="biometric_settings_use_fingerprint_or_watch_for" msgid="1160830065613858095">"Ujjlenyomat vagy az óra használata"</string>
+    <string name="biometric_settings_use_face_or_watch_for" msgid="1507077107150278532">"Arc vagy az óra használata"</string>
+    <string name="biometric_settings_use_face_fingerprint_or_watch_for" msgid="7495835723072020641">"Arc, ujjlenyomat vagy az óra használata"</string>
+    <string name="biometric_settings_use_watch_for" msgid="5454545622244040110">"Az óra használata"</string>
     <string name="biometric_settings_use_face_or_watch_preference_summary" msgid="4969685200340861744">"Arc vagy óra használatával"</string>
     <string name="biometric_settings_use_fingerprint_or_watch_preference_summary" msgid="2425628094194828407">"Ujjlenyomat vagy óra használatával"</string>
     <string name="biometric_settings_use_face_fingerprint_or_watch_preference_summary" msgid="188805113048792007">"Arc, ujjlenyomat vagy óra használatával"</string>
@@ -363,8 +377,8 @@
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Arc, ujjlenyomat és <xliff:g id="WATCH">%s</xliff:g> hozzáadva"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Arc, ujjlenyomatok és <xliff:g id="WATCH">%s</xliff:g> hozzáadva"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Arc- és ujjlenyomat-alapú feloldás"</string>
-    <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Arcalapú feloldás és Feloldás ujjlenyomattal a munkaprofilban"</string>
-    <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"Koppintson ide a beállításhoz"</string>
+    <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Arc- és ujjlenyomat-alapú feloldás a munkaprofilban"</string>
+    <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"Beállítás szükséges"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Arc és ujjlenyomatok hozzáadva"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"Arc és ujjlenyomat hozzáadva"</string>
     <string name="biometric_settings_intro" msgid="4263069383955676756">"Ha beállítja az Arcalapú feloldás és a Feloldás ujjlenyomattal funkciót, telefonja az ujjlenyomatát fogja kérni, amikor Ön maszkot visel, vagy sötét helyen van."</string>
@@ -376,6 +390,11 @@
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"Ujjlenyomat használata"</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"Arc vagy ujjlenyomat használata"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"OK"</string>
+    <string name="biometric_settings_add_face_in_split_mode_title" msgid="6041232223862753222">"Nem sikerült az Arcalapú feloldás beállítása"</string>
+    <string name="biometric_settings_add_face_in_split_mode_message" msgid="1904738532939614456">"Zárja be az osztott képernyőt az Arcalapú feloldás beállításhoz"</string>
+    <string name="biometric_settings_add_fingerprint_in_split_mode_title" msgid="9194670722730454903">"Nem sikerült beállítani az ujjlenyomatot"</string>
+    <string name="biometric_settings_add_fingerprint_in_split_mode_message" msgid="6960548382076629454">"Zárja be az osztott képernyőt a beállításhoz"</string>
+    <string name="biometric_settings_add_biometrics_in_split_mode_ok" msgid="564103789097253645">"OK"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Kihagyja a lezárási képernyőt?"</string>
     <string name="skip_anyway_button_label" msgid="3442274117023270068">"Kihagyás"</string>
     <string name="go_back_button_label" msgid="6139455414099035594">"Vissza"</string>
@@ -424,6 +443,7 @@
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Helyezze az ujja oldalsó részét az érzékelőre, és tartsa lenyomva, majd helyezze az érzékelőre az ujja másik oldalát"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"Átugorja az ujjlenyomat-beállítást?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"Kiválasztotta, hogy ujjlenyomattal is feloldhassa telefonját. Ha most kihagyja a lépéseket, később kell majd beállítania a funkciót. Ez hozzávetőlegesen 1 percet vesz igénybe."</string>
+    <string name="lock_screen_skip_setup_title" msgid="6979006375138175111">"Kihagyja a következők beállítását: <xliff:g id="OPTIONS">%s</xliff:g>?"</string>
     <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"Kihagyja a PIN-kód beállítását?"</string>
     <string name="lock_screen_pin_skip_face_title" msgid="8810770395309512358">"Kihagyja a PIN-kód és arc beállítását?"</string>
     <string name="lock_screen_pin_skip_fingerprint_title" msgid="371214283158750976">"Kihagyja a PIN-kód és ujjlenyomat beállítását?"</string>
@@ -440,22 +460,27 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Kész"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Hoppá! Az nem az érzékelő"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Érintse meg a hátsó érzékelőt mutatóujjával."</string>
-    <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title" msgid="5796228438604723279">"A regisztráció nincs kész"</string>
-    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Lejárt az ujjlenyomat-beállítás időkorlátja."</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"Próbálja meg újra beállítani az ujjlenyomatát most, illetve később a Beállítások menüben"</string>
-    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Az ujjlenyomat regisztrációja nem sikerült. Próbálja újra, vagy próbálkozzon egy másik ujjával."</string>
+    <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title" msgid="6305457126747942642">"Az ujjlenyomat beállítása nem fejezhető be"</string>
+    <string name="security_settings_fingerprint_enroll_error_unable_to_process_message_setup" msgid="2735739618722623980">"Újra megpróbálhatja most, vagy beállíthatja az ujjlenyomatot később a Beállításokban."</string>
+    <string name="security_settings_fingerprint_enroll_error_unable_to_process_message" msgid="5858386244898601003">"Újra megpróbálhatja most, vagy beállíthatja az ujjlenyomatot később."</string>
+    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Lejárt az ujjlenyomat-beállítás időkorlátja"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message_setup" msgid="8521566666541069383">"Az ujjlenyomatot később is beállíthatja a Beállításokban."</string>
+    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message_setup" msgid="8140162986046783546">"Hiba történt. Az ujjlenyomatot később is beállíthatja a Beállításokban."</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="3534341971920335247">"Az ujjlenyomatot később is beállíthatja."</string>
+    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="4344665784935791640">"Hiba történt. Az ujjlenyomatot később is beállíthatja."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Még egy hozzáadása"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Következő"</string>
     <string name="security_fingerprint_disclaimer_lockscreen_disabled_1" msgid="294529888220959309">"A képernyőzár lehetőség le van tiltva. További információért forduljon szervezete rendszergazdájához."</string>
     <string name="security_fingerprint_disclaimer_lockscreen_disabled_2" msgid="8070829069640846543">"Továbbra is használhatja ujjlenyomatát vásárlások és alkalmazás-hozzáférések engedélyezésére."</string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Emelje fel ujját, majd érintse meg újra az érzékelőt"</string>
-    <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Nem lehet használni az ujjlenyomat-érzékelőt. Keresse fel a szervizt."</string>
+    <string name="security_settings_fingerprint_bad_calibration_title" msgid="3073145395701953620">"Nem lehet használni az ujjlenyomat-érzékelőt"</string>
+    <string name="security_settings_fingerprint_bad_calibration" msgid="304585658839584958">"Keresse fel a szervizt."</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"További biztonsági beállítások"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Munkaprofil zárolása, titkosítás és egyebek"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Titkosítás, hitelesítési adatok és egyebek"</string>
     <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"biztonság, további biztonsági beállítások, további beállítások, speciális biztonsági beállítások"</string>
     <string name="privacy_advanced_settings" msgid="8828215456566937719">"További adatvédelmi beállítások"</string>
-    <string name="more_security_privacy_settings" msgid="977191087706506398">"További beállítások"</string>
+    <string name="more_security_privacy_settings" msgid="123465614090328851">"További biztonsági és adatvédelmi beállítások"</string>
     <string name="security_header" msgid="961514795852103424">"Biztonság"</string>
     <string name="privacy_header" msgid="5526002421324257007">"Adatvédelem"</string>
     <string name="work_profile_category_header" msgid="85707750968948517">"Munkaprofil"</string>
@@ -469,7 +494,7 @@
     <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"Képernyőzár beállítása"</string>
     <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"A nagyobb védelem érdekében állítson be PIN-kódot, mintát vagy jelszót ezen az eszközön."</string>
     <string name="no_screen_lock_issue_action_label" msgid="2691229130486382863">"Képernyőzár beállítása"</string>
-    <string name="no_screen_lock_issue_notification_title" msgid="5718363966239208505">"Az eszközön nincs beállítva képernyőzár"</string>
+    <string name="no_screen_lock_issue_notification_title" msgid="1214876733592830628">"Képernyőzár beállítása"</string>
     <string name="no_screen_lock_issue_notification_text" msgid="8696194459170873345">"A nagyobb védelem érdekében állítson be PIN-kódot, mintát vagy jelszót ezen az eszközön."</string>
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"A telefon biztonságossá tétele"</string>
     <string name="suggested_fingerprint_lock_settings_title" msgid="3140266181874137984">"Állítson be zárolásfeloldó ujjlenyomatot"</string>
@@ -481,14 +506,16 @@
     <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"A nagyobb biztonság érdekében állítson be másodlagos képernyőzárat"</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Válassza ki a másodlagos képernyőzárolási módszert"</string>
     <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"Ha elfelejti a képernyőzárat, a rendszergazda nem tudja visszaállítani."</string>
-    <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"Más munkahelyi zár megadása"</string>
+    <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"Külön munkahelyi zár megadása"</string>
     <string name="lock_settings_picker_profile_message" msgid="9142379549980873478">"Ha elfelejtette, hogyan oldhatja fel ezt a zárat, forduljon a rendszergazdájához"</string>
-    <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"A képernyőzár feloldása"</string>
-    <string name="setup_lock_settings_options_dialog_title" msgid="7985107300517468569">"A képernyőzár feloldása"</string>
+    <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"Képernyőzárolási lehetőségek"</string>
+    <string name="setup_lock_settings_options_dialog_title" msgid="7985107300517468569">"Képernyőzárolási lehetőségek"</string>
     <string name="lock_screen_auto_pin_confirm_title" msgid="3012128112186088375">"Feloldás automatikus megerősítéssel"</string>
     <string name="lock_screen_auto_pin_confirm_summary" msgid="9050818870806580819">"Automatikusan feloldja a zárolást, ha helyesen ad meg egy hat vagy annál több jegyű PIN-kódot. Ez a megoldás valamelyest kevésbé biztonságos, mint az Enterre koppintással történő megerősítés."</string>
     <string name="auto_pin_confirm_user_message" msgid="6194556173488939314">"PIN-kód helyességének automatikus megerősítése"</string>
     <string name="auto_pin_confirm_opt_in_security_message" msgid="580773976736184893">"A PIN-kód Enterre koppintással történő megerősítése biztonságosabb, mint az automatikus megerősítés használata"</string>
+    <string name="auto_confirm_on_pin_verify_description" msgid="2052240431173223502">"Eszköz PIN-kódjának megadása az automatikus megerősítés bekapcsolásához"</string>
+    <string name="auto_confirm_off_pin_verify_description" msgid="4256219155659760047">"Eszköz PIN-kódjának megadása az automatikus megerősítés kikapcsolásához"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="4981063601772605609">"Képernyőzár"</string>
     <string name="unlock_set_unlock_launch_picker_title_profile" msgid="7631371082326055429">"Munkaprofil zárolása"</string>
     <string name="unlock_set_unlock_off_title" msgid="2831957685685921667">"Nincs"</string>
@@ -498,13 +525,13 @@
     <string name="unlock_set_unlock_password_title" msgid="2559842616268607041">"Jelszó"</string>
     <string name="unlock_set_do_later_title" msgid="6565575303676064364">"Most nem"</string>
     <string name="current_screen_lock" msgid="1367883977261098017">"Jelenlegi képernyőzár"</string>
-    <string name="fingerprint_unlock_set_unlock_pattern" msgid="4492334416059646032">"Ujjlenyomat + minta"</string>
-    <string name="fingerprint_unlock_set_unlock_pin" msgid="4724451168139460493">"Ujjlenyomat + PIN-kód"</string>
-    <string name="fingerprint_unlock_set_unlock_password" msgid="5614333047430835971">"Ujjlenyomat + jelszó"</string>
+    <string name="fingerprint_unlock_set_unlock_pattern" msgid="2229689425933043901">"Minta • Ujjlenyomat"</string>
+    <string name="fingerprint_unlock_set_unlock_pin" msgid="7979848492740627674">"PIN-kód • Ujjlenyomat"</string>
+    <string name="fingerprint_unlock_set_unlock_password" msgid="6207676267295036963">"Jelszó • Ujjlenyomat"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="7631242444064287891">"Folytatás ujjlenyomat nélkül"</string>
-    <string name="face_unlock_set_unlock_pattern" msgid="3117316407679805330">"Arcalapú feloldás + minta"</string>
-    <string name="face_unlock_set_unlock_pin" msgid="5300188327595503657">"Arcalapú feloldás + PIN-kód"</string>
-    <string name="face_unlock_set_unlock_password" msgid="8395722611524617956">"Arcalapú feloldás + jelszó"</string>
+    <string name="face_unlock_set_unlock_pattern" msgid="4206669838203096608">"Minta • Arc"</string>
+    <string name="face_unlock_set_unlock_pin" msgid="9034912683791069602">"PIN-kód • Arc"</string>
+    <string name="face_unlock_set_unlock_password" msgid="5874950853246424756">"Jelszó • Arc"</string>
     <string name="face_unlock_skip_face" msgid="189695556498300008">"Folytatás Arcalapú feloldás nélkül"</string>
     <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"Minta • Arc • Ujjlenyomat"</string>
     <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"PIN-kód • Arc • Ujjlenyomat"</string>
@@ -573,7 +600,7 @@
     <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2479195488386373253">"Amennyiben helytelen mintát ad meg a következő kísérletnél, a rendszer törli munkaprofilját és a kapcsolódó adatokat"</string>
     <string name="lock_last_pin_attempt_before_wipe_profile" msgid="7086428013814722436">"Amennyiben helytelen PIN-kódot ad meg a következő kísérletnél, a rendszer törli munkaprofilját és a kapcsolódó adatokat"</string>
     <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"Amennyiben helytelen jelszót ad meg a következő kísérletnél, a rendszer törli munkaprofilját és a kapcsolódó adatokat."</string>
-    <string name="lockpassword_password_too_short" msgid="1938086368137797700">"{count,plural, =1{Tartalmaznia kell legalább # karaktert}other{Legalább # karaktert kell tartalmaznia}}"</string>
+    <string name="lockpassword_password_too_short" msgid="1938086368137797700">"{count,plural, =1{Legalább # karakter legyen}other{Legalább # karakter legyen}}"</string>
     <string name="lockpassword_password_too_short_all_numeric" msgid="4301294924022401502">"{count,plural, =1{Ha csak számokat használ, adjon meg legalább egy számjegyet}other{Ha csak számokat használ, adjon meg legalább # számjegyet}}"</string>
     <string name="lockpassword_pin_too_short" msgid="8910105226463085689">"{count,plural, =1{A PIN-kódnak legalább # számjegyből kell állnia}other{A PIN-kódnak legalább # számjegyből kell állnia}}"</string>
     <string name="lockpassword_pin_too_short_autoConfirm_extra_message" msgid="3271351502900762571">"{count,plural, =1{A PIN-kódnak legalább # számjegyből kell állnia, de a nagyobb biztonság érdekében javasoljuk, hogy {minAutoConfirmLen} jegyű PIN-kódot adjon meg}other{A PIN-kódnak legalább # számjegyből kell állnia, de a nagyobb biztonság érdekében javasoljuk, hogy {minAutoConfirmLen} jegyű PIN-kódot adjon meg}}"</string>
@@ -605,6 +632,7 @@
     <string name="bluetooth_settings" msgid="2967239493428695171">"Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"Bluetooth"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"Párosítja a következővel: <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
+    <string name="bluetooth_pairing_group_late_bonding" msgid="5310869364570266209">"Új tag hozzáadása a meglévő koordinált készlethez"</string>
     <string name="bluetooth_pairing_key_msg" msgid="1329835708475701761">"Bluetooth-párosítókód"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="5806420933599368592">"Gépelje be a párosítókódot, majd nyomja meg az Enter vagy a Return gombot"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7256286571636950635">"A PIN-kód betűket vagy szimbólumokat tartalmaz"</string>
@@ -621,7 +649,8 @@
     <string name="bluetooth_device_context_disconnect" msgid="4464167389972513232">"Szétkapcsolás"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="2406032703622371826">"Párosítás és csatlakozás"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="316627049372961941">"Ha a Bluetooth aktív, az eszköz képes kommunikálni a közelben lévő Bluetooth-eszközökkel."</string>
-    <string name="bluetooth_scanning_on_info_message" msgid="6667723887545056976">"Ha a Bluetooth aktív, az eszköz képes kommunikálni a közelben lévő Bluetooth-eszközökkel.\n\nAz eszközhasználati élmény javítása érdekében az alkalmazások és szolgáltatások bármikor kereshetnek közeli eszközöket, még akkor is, ha ki van kapcsolva a Bluetooth. Ez például a helyalapú funkciók és szolgáltatások javítására használható. A funkciót a "<annotation id="link">"Bluetooth scanning settings"</annotation>" (Bluetooth-keresési beállítások) részben módosíthatja."</string>
+    <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Ha a Bluetooth aktív, az eszköz képes kommunikálni a közelben lévő Bluetooth-eszközökkel.\n\nAz eszközhasználati élmény javítása érdekében az alkalmazások és a szolgáltatások bármikor kereshetnek közeli eszközöket, még akkor is, ha ki van kapcsolva a Bluetooth. Ez például a helyalapú funkciók és szolgáltatások javítására használható. A funkciót a Bluetooth-keresési beállításoknál módosíthatja."</string>
+    <string name="bluetooth_scan_change" msgid="1744636222637390367">"Módosítás"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Eszközadatok"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Billentyűzetbeállítások"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Az eszköz Bluetooth-címe: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
@@ -630,6 +659,7 @@
     <string name="remove_association_button" msgid="5004208145998061135">"Társítás megszüntetése"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"Leválasztja az alkalmazást?"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"A(z) <xliff:g id="APP_NAME">%1$s</xliff:g> alkalmazás ezután nem fog csatlakozni a következőhöz: <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
+    <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"Kísérlet. Javítja a hangminőséget."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Eszköz elfelejtése"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Alkalmazás leválasztása"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Csatlakoztatott Bluetooth-audioeszközök maximális száma"</string>
@@ -641,7 +671,7 @@
     <string name="nfc_snoop_log_title" msgid="1576197495976952388">"NFC NCI nem szűrt napló"</string>
     <string name="nfc_snoop_log_summary" msgid="3988383328800163180">"Részletes NFC-csomagok elfogása, amelyek privát információkat is tartalmazhatnak."</string>
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Újraindítja az eszközt?"</string>
-    <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"A részletes NFC-naplózás csak fejlesztési célokra szolgál. A hibajelentésekben további NFC-adatok is szerepelnek, amelyek között privát információk is lehetnek. A beállítás módosításához indítsa úja eszközét."</string>
+    <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"A részletes NFC-naplózás csak fejlesztési célokra szolgál. A hibajelentésekben további NFC-adatok is szerepelnek, amelyek között privát információk is lehetnek. A beállítás módosításához indítsa újra eszközét."</string>
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Újraindítás"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Tartalomátküldés"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"tükrözés"</string>
@@ -675,6 +705,7 @@
     <string name="nfc_secure_settings_title" msgid="4906958426927741485">"Az NFC használatához fel kell oldani az eszköz zárolását"</string>
     <string name="android_beam_settings_title" msgid="2797963824490671295">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="6067720758437490896">"Alkalmazástartalmakat tud továbbítani NFC segítségével"</string>
+    <string name="android_beam_off_summary" msgid="5693961375631325042">"Ki"</string>
     <string name="nfc_disabled_summary" msgid="8737797364522502351">"Nem használható, mert az NFC ki van kapcsolva"</string>
     <string name="android_beam_explained" msgid="5684416131846701256">"A funkció bekapcsolása után eszközéről alkalmazástartalmakat sugározhat más NFC-képes eszközre, ha összeérinti őket. Sugározhat például weboldalakat, YouTube-videókat, névjegyeket és egyéb tartalmakat.\n\nÉrintse össze az eszközöket (általában háttal egymásnak), és koppintson a képernyőre. Az alkalmazás határozza meg, hogy az eszköz mit sugároz."</string>
     <string name="wifi_settings" msgid="8313301946393559700">"Wi-Fi"</string>
@@ -865,6 +896,25 @@
     <string name="wifi_hotspot_maximize_compatibility" msgid="6494125684420024058">"Kompatibilitás bővítése"</string>
     <string name="wifi_hotspot_maximize_compatibility_single_ap_summary" msgid="383355687431591441">"Megkönnyíti más eszközök számára ennek a hotspotnak a megtalálását. Csökkenti a hotspotkapcsolat sebességét."</string>
     <string name="wifi_hotspot_maximize_compatibility_dual_ap_summary" msgid="3579549223159056533">"Megkönnyíti más eszközök számára ennek a hotspotnak a megtalálását. Növeli az akkumulátorhasználatot."</string>
+    <string name="wifi_hotspot_speed_title" msgid="8629448084180512685">"Gyorsaság és kompatibilitás"</string>
+    <string name="wifi_hotspot_speed_summary_2g" msgid="5063438001736234858">"2,4 GHz / A legtöbb eszközzel kompatibilis"</string>
+    <string name="wifi_hotspot_speed_summary_5g" msgid="6221158936983135040">"5 GHz / Számos eszközzel kompatibilis"</string>
+    <string name="wifi_hotspot_speed_summary_6g" msgid="8863992901226595544">"6 GHz / Néhány eszközzel kompatibilis"</string>
+    <string name="wifi_hotspot_speed_summary_2g_and_5g" msgid="5931052946168943750">"2,4 és 5 GHz / A legtöbb eszközzel kompatibilis"</string>
+    <string name="wifi_hotspot_speed_intro" msgid="6973482196363758925">"Válassza ki a hotspot frekvenciáját. A frekvencia hatással van a kapcsolat sebességére, valamint arra, hogy milyen típusú eszközök képesek a hotspot észlelésére."</string>
+    <string name="wifi_hotspot_speed_category" msgid="5265655850463630286">"Preferált frekvencia"</string>
+    <string name="wifi_hotspot_speed_2g" msgid="3400600834257664480">"2,4 GHz"</string>
+    <string name="wifi_hotspot_speed_2g_summary" msgid="6930273933810520155">"Lassabb sebességet biztosító megoldás. A legtöbb eszközzel kompatibilis."</string>
+    <string name="wifi_hotspot_speed_5g" msgid="4058116867148848395">"5 GHz"</string>
+    <string name="wifi_hotspot_speed_5g_summary" msgid="562987935924535694">"Gyors sebességet biztosító megoldás. Számos eszközzel kompatibilis."</string>
+    <string name="wifi_hotspot_speed_2g_5g" msgid="9192756255938408285">"2,4 és 5 GHz"</string>
+    <string name="wifi_hotspot_speed_2g_5g_summary" msgid="8104575293617700173">"Gyors sebességet biztosító megoldás. A kétsávos hotspot a legtöbb eszközzel kompatibilis."</string>
+    <string name="wifi_hotspot_speed_6g" msgid="3787697484862730500">"6 GHz"</string>
+    <string name="wifi_hotspot_speed_6g_summary" msgid="8675262219242174548">"A leggyorsabb sebességet biztosító megoldás. Néhány eszközzel kompatibilis."</string>
+    <string name="wifi_hotspot_speed_summary_unavailable" msgid="7276080644693388756">"Nem áll rendelkezésre az Ön országában vagy régiójában"</string>
+    <string name="wifi_hotspot_speed_footer" msgid="8846939503916795002">"Ha a preferált frekvencia nem áll rendelkezésre, a hotspot másikat használhat. A hotspot biztonsági beállításai változhatnak a frekvencia módosítása esetén."</string>
+    <string name="wifi_hotspot_security_summary_unavailable" msgid="117582979310345853">"Nem áll rendelkezésre 6 GHz-en"</string>
+    <string name="wifi_hotspot_security_footer" msgid="4608329688744949796">"A biztonsági beállítások változhatnak, ha módosítja a hotspot frekvenciáját"</string>
     <string name="wifi_tether_starting" msgid="8879874184033857814">"Hotspot bekapcsolása..."</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"Hotspot kikapcsolása..."</string>
     <string name="wifi_tether_carrier_unsupport_dialog_title" msgid="3089432578433978073">"Az internetmegosztás nem vehető igénybe"</string>
@@ -904,6 +954,7 @@
     <string name="emergency_address_title" msgid="8102786488994263815">"Vészhelyzetkor értesítendő személy címe"</string>
     <string name="emergency_address_summary" msgid="3022628750270626473">"A Wi-Fi-n keresztül indított segélyhívások esetében megjelenő tartózkodási hely"</string>
     <string name="private_dns_help_message" msgid="851221502063782306"><annotation id="url">"További információ"</annotation>" a Privát DNS-funkciókról"</string>
+    <string name="private_dns_mode_on" msgid="8878679071975375696">"Be"</string>
     <string name="wifi_calling_settings_activation_instructions" msgid="3936067355828542266">"Aktiválja a Wi-Fi-hívást"</string>
     <string name="wifi_calling_turn_on" msgid="7687886259199428823">"Kapcsolja be a Wi-Fi-hívásokat"</string>
     <string name="wifi_disconnected_from" msgid="5249576734324159708">"<xliff:g id="SSID">%1$s</xliff:g> – leválasztva"</string>
@@ -911,19 +962,21 @@
     <string name="account_settings" msgid="255404935489127404">"Fiókok"</string>
     <string name="accessibility_category_work" msgid="5133894487353964944">"„Munkaprofil” fiókok – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_category_personal" msgid="2228088849803484780">"„Személyes profil” fiókok"</string>
+    <string name="accessibility_category_clone" msgid="7893383448944567885">"„Klónprofil” fiókok"</string>
     <string name="accessibility_work_account_title" msgid="7622485151217943839">"Munkahelyi fiók – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_personal_account_title" msgid="8535265881509557013">"Személyes fiók – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="search_settings" msgid="7573686516434589771">"Keresés"</string>
     <string name="display_settings" msgid="7197750639709493852">"Megjelenítés"</string>
     <string name="accelerometer_title" msgid="7745991950833748909">"Automatikus képernyőforgatás"</string>
+    <string name="auto_rotate_option_off" msgid="2788096269396290731">"Ki"</string>
+    <string name="auto_rotate_option_on" msgid="5776678230808498171">"Be"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Be: Arcalapú"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Arcfelismerés"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"További információ az automatikus forgatásról"</string>
-    <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Amikor Ön álló vagy fekvő helyzetbe fordítja a telefont"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Képernyőfelbontás"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Nagy felbontás"</string>
     <string name="screen_resolution_option_full" msgid="2694003735219114186">"Teljes felbontás"</string>
-    <string name="screen_resolution_footer" msgid="6772341522952795647">"A teljes felbontás jobban igénybe veszi az akkumulátort. A felbontásra váltásakor előfordulhat, hogy néhány alkalmazás újraindul."</string>
+    <string name="screen_resolution_footer" msgid="6772341522952795647">"A teljes felbontás jobban igénybe veszi az akkumulátort. A felbontás váltásakor előfordulhat, hogy néhány alkalmazás újraindul."</string>
     <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"Kijelölve"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Színek"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Természetes"</string>
@@ -933,6 +986,8 @@
     <string name="brightness" msgid="6216871641021779698">"Fényerőszint"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"Alkalmazkodó fényerő"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"A képernyő fényerőssége automatikusan alkalmazkodik a környezethez és az adott tevékenységhez. A csúszka mozgatásával segíthet az alkalmazkodó fényerő funkciónak, hogy megtanulja az Ön személyes preferenciáit."</string>
+    <string name="auto_brightness_summary_on" msgid="2748088951224387004">"Bekapcsolva"</string>
+    <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Kikapcsolva"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Kijelző fehéregyensúlya"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
@@ -1061,6 +1116,7 @@
     <string name="security_patch" msgid="4071756145347865382">"Android biztonsági frissítés"</string>
     <string name="model_info" msgid="8997566254717810904">"Modell"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"Hardververzió"</string>
+    <string name="manufactured_year" msgid="3401517138700926475">"Gyártás éve"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"Eszközazonosító"</string>
     <string name="baseband_version" msgid="2600182227599835857">"Alapsáv verziója"</string>
     <string name="kernel_version" msgid="3513538109381366881">"Kernel verziója"</string>
@@ -1080,6 +1136,8 @@
     <string name="status_prl_version" msgid="9002131357502714281">"PRL verzió"</string>
     <string name="meid_multi_sim" msgid="1460689549266621286">"MEID (<xliff:g id="MEID_SLOT_ID">%1$d</xliff:g>. SIM-kártya-foglalat)"</string>
     <string name="meid_multi_sim_primary" msgid="8921262417580407201">"MEID (<xliff:g id="MEID_SLOT_ID_PRIMARY">%1$d</xliff:g>. SIM-kártya-foglalat) (elsődleges)"</string>
+    <string name="scanning_status_text_on" msgid="3846571210578042940">"Be"</string>
+    <string name="scanning_status_text_off" msgid="4002352668313705132">"Ki"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
     <string name="status_icc_id" msgid="7995690631650006970">"ICCID"</string>
     <string name="status_data_network_type" msgid="3689772955330665876">"Mobiladat-hálózat típusa"</string>
@@ -1124,7 +1182,7 @@
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"Az ezen <xliff:g id="NAME">^1</xliff:g> által tárolt alkalmazások, fotók vagy adatok használatához helyezze be azt újra az eszközbe. \n\nHa azonban már nem áll az Ön rendelkezésére, el is felejtheti. \n\nAmennyiben az elfelejtés lehetőséget választja, akkor a rajta tárolt összes adat örökre elveszik. \n\nAz alkalmazásokat később újratelepítheti, de a tárhelyen lévő adataik megsemmisülnek."</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"<xliff:g id="NAME">^1</xliff:g> elfelejtése?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"Az adathordozón (<xliff:g id="NAME">^1</xliff:g>) lévő összes alkalmazás, fotó és adat örökre elvész."</string>
-    <string name="storage_detail_dialog_system" msgid="7461009051858709479">"A rendszer az Android <xliff:g id="VERSION">%s</xliff:g>. verziójának futtatásához használt fájlokat tartalmaz"</string>
+    <string name="storage_detail_dialog_system" msgid="7461009051858709479">"A rendszer az Android <xliff:g id="VERSION">%s</xliff:g> verziójának futtatásához használt fájlokat tartalmaz"</string>
     <string name="storage_wizard_guest" msgid="5813419895687733649">"Vendég módban nem lehet SD-kártyát formázni"</string>
     <string name="storage_wizard_format_progress_title" msgid="9170393018855949774">"A(z) <xliff:g id="NAME">^1</xliff:g> formázása folyamatban van…"</string>
     <string name="storage_wizard_format_progress_body" msgid="1044024044955390417">"Formázás közben ne távolítsa el az eszközt (<xliff:g id="NAME">^1</xliff:g>)."</string>
@@ -1223,7 +1281,7 @@
     <string name="reset_esim_error_msg" msgid="7279607120606365250">"Hiba történt, ezért nem sikerült az eSIM törlése.\n\nIndítsa újra az eszközt, majd próbálja újra."</string>
     <string name="main_clear_title" msgid="277664302144837723">"Összes adat törlése (gyári beállítások visszaállítása)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Összes adat törlése"</string>
-    <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"Zene"</li>\n<li>"Fotók"</li>\n<li>"Más felhasználói adatok"</li></string>
+    <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"a zenéket"</li>\n<li>"a fotókat"</li>\n<li>"más felhasználói adatokat"</li></string>
     <string name="main_clear_desc_also_erases_esim" msgid="4553469876411831729"><li>"eSIM-ek"</li></string>
     <string name="main_clear_desc_no_cancel_mobile_plan" msgid="369883568059127035">\n\n"Ezzel nem szünteti meg mobil-előfizetését."</string>
     <string name="main_clear_final_desc" msgid="5800877928569039580">"Az összes személyes adatot és letöltött alkalmazást törli. Ez a művelet nem vonható vissza."</string>
@@ -1310,7 +1368,7 @@
     <string name="location_time_zone_detection_toggle_title" msgid="6478751613645015287">"Hely használata"</string>
     <string name="location_time_zone_detection_status_title" msgid="8903495354385600423">"Nem állítható be automatikusan az időzóna"</string>
     <string name="location_time_zone_detection_status_summary_degraded_by_settings" msgid="6198939835335841106"></string>
-    <string name="location_time_zone_detection_status_summary_blocked_by_settings" msgid="5276280770344278768">"A helyadatok és a Helyszolgáltatások ki van kapcsolva"</string>
+    <string name="location_time_zone_detection_status_summary_blocked_by_settings" msgid="5276280770344278768">"Helyadatok és Helyszolgáltatások kikapcsolva"</string>
     <string name="location_time_zone_detection_status_summary_blocked_by_environment" msgid="2279833212923765802"></string>
     <string name="location_time_zone_detection_status_summary_temporarily_unavailable" msgid="6586801403644278967"></string>
     <string name="location_time_zone_detection_location_is_off_dialog_title" msgid="231698690198001146">"Az eszköz helyadataira van szükség"</string>
@@ -1322,7 +1380,7 @@
     <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"A helyalapú időzóna-meghatározás ki van kapcsolva"</string>
     <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"A helyalapú időzóna-meghatározás nem támogatott"</string>
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"A helyalapú időzóna-meghatározásra vonatkozó módosítások nem engedélyezettek"</string>
-    <string name="location_time_zone_detection_auto_is_on" msgid="8797434659844659323">"A helyadatok az időzóna beállításához használhatók"</string>
+    <string name="location_time_zone_detection_auto_is_on" msgid="8797434659844659323">"A helyadatok felhasználhatók az időzóna beállításához"</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"Jogi információk, állapot, szoftververzió megtekintése"</string>
     <string name="legal_information" msgid="7509900979811934843">"Jogi információk"</string>
     <string name="manual" msgid="3651593989906084868">"Útmutató"</string>
@@ -1391,6 +1449,13 @@
     <string name="lockpassword_confirm_your_pattern_header_frp" msgid="5641858015891896427">"Minta ellenőrzése"</string>
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"PIN-kód ellenőrzése"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Jelszó ellenőrzése"</string>
+    <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"Kilét igazolása"</string>
+    <string name="lockpassword_remote_validation_pattern_details" msgid="4655537780358707983">"A Google-fiókok, beállítások és egyebek átviteléhez adja meg a másik eszköz mintáját. Mintája titkosítva van."</string>
+    <string name="lockpassword_remote_validation_pin_details" msgid="2373654227583206297">"A Google-fiókok, beállítások és egyebek átviteléhez adja meg a másik eszköz PIN-kódját. PIN-kódja titkosítva van."</string>
+    <string name="lockpassword_remote_validation_password_details" msgid="3482328925925888340">"A Google-fiókok, beállítások és egyebek átviteléhez adja meg a másik eszköz jelszavát. Jelszava titkosítva van."</string>
+    <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"Használhat mintát is az eszköz feloldására"</string>
+    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"Használhat PIN-kódot is az eszközfeloldásra"</string>
+    <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="2066701840753591922">"Használhat jelszót is az eszköz feloldására"</string>
     <string name="lockpassword_invalid_pin" msgid="7530854476819820600">"Helytelen PIN-kód"</string>
     <string name="lockpassword_invalid_password" msgid="1588184930542221687">"Helytelen jelszó"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="8109305107409924083">"Helytelen minta"</string>
@@ -1413,10 +1478,12 @@
     <string name="lockpattern_settings_enable_title" msgid="7401197111303283723">"Minta kérése"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1116467204475387886">"Mintát kell rajzolni a képernyőzár feloldásához"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="3340969054395584754">"Minta megjelenítése"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_title" msgid="7172693275721931683">"Fokozott adatvédelem a PIN-kód megadásakor"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_summary" msgid="8639588868341114740">"Animációk kikapcsolása a PIN-kód megadásakor"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"Legyen látható a profilhoz tartozó minta"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"Rezgés koppintásra"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"Bekapcsológomb azonnal zár"</string>
-    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="2202430156268094229">"Kivéve, ha a <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> feloldva tartja"</string>
+    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="2202430156268094229">"Kivéve, ha az <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> feloldva tartja"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="2193588309557281466">"Feloldási minta beállítása"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="7614155083815661347">"Feloldási minta módosítása"</string>
     <string name="lockpattern_settings_help_how_to_record" msgid="2093801939046625774">"Hogyan kell feloldási mintát rajzolni"</string>
@@ -1645,9 +1712,9 @@
     <string name="modifier_keys_reset_message" msgid="5236994817619936058">"Biztosan visszaállítja alapértelmezett értékre az összes módosító billentyűt?"</string>
     <string name="modifier_keys_done" msgid="8196199314913909700">"Kész"</string>
     <string name="modifier_keys_cancel" msgid="7136520252570826772">"Mégse"</string>
-    <string name="modifier_keys_restore" msgid="7627661630556839268">"Visszaállítás"</string>
+    <string name="modifier_keys_reset" msgid="551170906710422041">"Alaphelyzet"</string>
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"Módosító billentyű választása"</string>
-    <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Válasszon új kulcsot a(z) <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g> számára:"</string>
+    <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Válasszon új billentyűt a(z) <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g> számára:"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Alapértelmezett"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"Beszéd"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"Mutató sebessége"</string>
@@ -1681,8 +1748,8 @@
     <string name="user_dict_settings_all_languages" msgid="8563387437755363526">"Minden nyelven"</string>
     <string name="user_dict_settings_more_languages" msgid="5378870726809672319">"További nyelvek…"</string>
     <string name="testing" msgid="6294172343766732037">"Tesztelés"</string>
-    <string name="keyboard_settings_summary" msgid="2716339620942356432">"Képernyő-billentyűzet, beszéd, eszközök"</string>
-    <string name="keyboard_settings_with_physical_keyboard_summary" msgid="6628668004523183413">"Képernyő-billentyűzet, fizikai billentyűzet, beszéd, eszközök"</string>
+    <string name="keyboard_settings_summary" msgid="9188442758316476986">"Képernyő-billentyűzet, eszközök"</string>
+    <string name="keyboard_settings_with_physical_keyboard_summary" msgid="2240779804018260938">"Képernyő-billentyűzet, fizikai billentyűzet, eszközök"</string>
     <string name="builtin_keyboard_settings_title" msgid="5096171620714179661">"Fizikai billentyűzet"</string>
     <string name="enabled_locales_keyboard_layout" msgid="3939886151098958639">"Elrendezés"</string>
     <string name="gadget_picker_title" msgid="7615902510050731400">"Modul kiválasztása"</string>
@@ -1715,18 +1782,13 @@
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Letöltött alkalmazások"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Kísérleti"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Funkciókapcsolók"</string>
-    <!-- no translation found for snoop_logger_filters_dashboard_title (3082744626059215281) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filters_dashboard_summary (626757789702677076) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filter_pbap_title (5508775381082875785) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filter_map_title (5700678748422653316) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filter_summary (6235819710248503870) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_filtered_mode_disabled_summary (272884193300382035) -->
-    <skip />
+    <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"Bluetooth HCI kémlelésnapló-szűrés"</string>
+    <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="1319792184194176235">"Szűrők beállítása"</string>
+    <string name="bt_hci_snoop_log_filters_dashboard_footer" msgid="4158945851818483666">"A módosítások életbe léptetéséhez kapcsolja be és ki a Bluetootht"</string>
+    <string name="bt_hci_snoop_log_filter_pbap_title" msgid="1735427364451634823">"Bluetooth HCI kémlelésnapló-szűrési PBAP"</string>
+    <string name="bt_hci_snoop_log_filter_map_title" msgid="180092480793945544">"Bluetooth HCI kémlelésnapló-szűrési MAP"</string>
+    <string name="bt_hci_snoop_log_filter_summary" msgid="7217091930762522599">"Szűrési mód beállítása. (A módosítások életbe léptetéséhez kapcsolja be és ki a Bluetootht)"</string>
+    <string name="bt_hci_snoop_log_filtered_mode_disabled_summary" msgid="8824952559433361848">"A módosításhoz állítsa a Bluetooth HCI kémlelésnaplózási módot Szűrtek engedélyezve értékre"</string>
     <string name="talkback_title" msgid="8756080454514251327">"Talkback"</string>
     <string name="talkback_summary" msgid="5820927220378864281">"Elsődlegesen vakok és gyengénlátók számára készült képernyőolvasó"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Koppintson a képernyőn látható elemekre, ha szeretné őket felolvasva hallani"</string>
@@ -1737,12 +1799,10 @@
     <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Nagyítás gyorsparancsa"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"Szöveg nagyítása gépelés közben"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"A nagyító követi a szöveget gépelés közben"</string>
-    <string name="accessibility_screen_magnification_always_on_title" msgid="3738009998799304549">"Mindig bekapcsolva"</string>
-    <string name="accessibility_screen_magnification_always_on_summary" msgid="8946516092699010033">"Alkalmazások módosításakor az alkalmazás a nagyítás deaktiválása helyett egyszerűen normál méretre kicsinyít. Az eredeti méret visszaállításához húzza össze az ujjait a kívánt területen."</string>
-    <!-- no translation found for accessibility_screen_magnification_joystick_title (1803769708582404964) -->
-    <skip />
-    <!-- no translation found for accessibility_screen_magnification_joystick_summary (4640300148573982720) -->
-    <skip />
+    <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"Folytatás alkalmazásváltás közben"</string>
+    <string name="accessibility_screen_magnification_always_on_summary" msgid="306908451430863049">"Alkalmazásváltáskor a nagyító bekapcsolva marad és kicsinyít"</string>
+    <string name="accessibility_screen_magnification_joystick_title" msgid="1803769708582404964">"Joystick"</string>
+    <string name="accessibility_screen_magnification_joystick_summary" msgid="4640300148573982720">"A nagyítót a képernyőn megjelenő joystickkel aktiválhatja és mozgathatja. A nagyító vezérléséhez tartsa nyomva, majd húzza a joysticket. A joystickot koppintással és húzással mozgathatja."</string>
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"A nagyításról"</string>
     <string name="accessibility_screen_magnification_footer_learn_more_content_description" msgid="924848332575978463">"További információ a nagyításról"</string>
     <string name="accessibility_magnification_mode_title" msgid="8446475127807168063">"Nagyítás típusa"</string>
@@ -1774,7 +1834,7 @@
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"Feladó: Bill"</string>
     <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"Jó reggelt!\n\nCsak a tervekről szeretnék érdeklődni. Készen lesznek, mielőtt elkezdjük elkészíteni az új hőlégballonokat?"</string>
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"Visszaállítás"</string>
-    <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"A képernyőméretre és a szövegre vonatkozó beállításokat visszaállította a rendszer"</string>
+    <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"A megjelenítési méret és a szöveg beállításait visszaállította"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Visszaállítja a megjelenítési méretet és a szöveg beállításait?"</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Visszaállítás"</string>
     <string name="accessibility_text_reading_conversation_message_1" msgid="7883952203831957831">"Vannak terveid a hétvégére?"</string>
@@ -1846,7 +1906,7 @@
     <string name="accessibility_button_low_label" msgid="4193015407828927741">"Átlátszó"</string>
     <string name="accessibility_button_high_label" msgid="9138077512008190896">"Nem átlátszó"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Nagy kontrasztú szöveg"</string>
-    <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Módosítsa a szöveg színét feketére vagy fehérre, hogy maximálisan elkülönüljön a háttértől."</string>
+    <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"A szöveg színének módosítása feketére vagy fehérre, hogy maximálisan elkülönüljön a háttértől."</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Képernyőnagyítás automatikus frissítése"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Nagyítás frissítése az alkalmazások közti átmeneteknél"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"A bekapcs. gomb megszakítja a hívást"</string>
@@ -1854,9 +1914,6 @@
     <string name="accessibility_toggle_large_pointer_icon_summary" msgid="1480527946039237705">"Könnyebben észrevehetővé teszi az egérmutatót"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Animációk eltávolítása"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Mozgás mennyiségének csökkentése a képernyőn"</string>
-    <string name="accessibility_contrast_level_title" msgid="8044307040061738158">"Kontrasztszint"</string>
-    <string name="accessibility_contrast_level_left_label" msgid="732834661342809574">"Normál"</string>
-    <string name="accessibility_contrast_level_right_label" msgid="5381154127087484725">"Magas"</string>
     <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"Monó hang"</string>
     <string name="accessibility_toggle_primary_mono_summary" msgid="1935283927319407303">"Csatornák kombinálása hang lejátszásakor"</string>
     <string name="accessibility_toggle_primary_balance_title" msgid="7332275200153366714">"Hangegyensúly"</string>
@@ -1897,6 +1954,8 @@
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"Automatikus kattintás ideje"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Rezgés és haptikus visszajelzés"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"A rezgéserősség szabályozása a különböző felhasználásokhoz"</string>
+    <string name="accessibility_vibration_settings_state_on" msgid="5566026932372832502">"Be"</string>
+    <string name="accessibility_vibration_settings_state_off" msgid="7946588741954981703">"Ki"</string>
     <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary" msgid="3982701772953323190">"A beállítás le van tiltva, mert az eszköz néma módban van"</string>
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Hívások"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Értesítések és ébresztések"</string>
@@ -1919,6 +1978,7 @@
     <string name="accessibility_reduce_bright_colors_qs_tooltip_content" msgid="7522121299176176785">"Az extrasötét módot is bármikor hozzáadhatja a Gyorsbeállításokhoz a képernyő tetején"</string>
     <string name="accessibility_one_handed_mode_auto_added_qs_tooltip_content" msgid="7914554254280416532">"Egykezes mód hozzáadva a Gyorsbeállításokhoz. Lefelé csúsztatva bármikor ki- vagy bekapcsolhatja."</string>
     <string name="accessibility_one_handed_mode_qs_tooltip_content" msgid="2754332083184384603">"Az egykezes módot is bármikor hozzáadhatja a Gyorsbeállításokhoz a képernyő tetején"</string>
+    <string name="accessibility_font_scaling_auto_added_qs_tooltip_content" msgid="7229921960884718332">"Betűméret felvéve a Gyorsbeállítások közé. Lefelé csúsztatva bármikor módosíthatja a betűméretet."</string>
     <string name="accessibility_quick_settings_tooltip_dismiss" msgid="3269120277643884190">"Bezárás"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Színkorrekció használata"</string>
     <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Színkorrekció gyorsparancsa"</string>
@@ -1939,7 +1999,8 @@
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Három koppintás a képernyőre"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Tovább"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Hallásjavító eszközök"</string>
-    <string name="accessibility_hearingaid_not_connected_summary" msgid="3371427366765435743">"Nincs csatlakoztatva hallókészülék"</string>
+    <string name="accessibility_hearingaid_intro" msgid="5856992709195963850">"Telefonján hallókészülékeket, cochleáris implantátumokat és egyéb jelerősítő eszközöket használhat."</string>
+    <string name="accessibility_hearingaid_not_connected_summary" msgid="7438018718889849521">"Nincs csatlakoztatva hallókészülék"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"Hallókészülékek hozzáadása"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Hallókészülék párosítása"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"A következő képernyőn koppintson a hallókészülékekre. Előfordulhat, hogy külön kell párosítania a bal és jobb fület.\n\nGyőződjön meg arról, hogy a hallókészülékek be vannak kapcsolva, és készen állnak a párosításra."</string>
@@ -1949,25 +2010,27 @@
     <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="4268221140368164452">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, bal és jobb"</string>
     <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> +1 további"</string>
     <string name="accessibility_hearing_device_pairing_title" msgid="2701812183769537320">"Új eszköz párosítása"</string>
-    <!-- no translation found for accessibility_hearing_device_connected_title (3785140037249487287) -->
-    <skip />
+    <string name="accessibility_pair_hearing_device_about_title" msgid="5870335480815052755">"Az Új eszköz párosítása funkcióról"</string>
+    <string name="accessibility_hearing_device_connected_title" msgid="3785140037249487287">"Hallókészülékek"</string>
     <string name="accessibility_hearing_device_saved_title" msgid="7573926212664909296">"Mentett eszközök"</string>
     <string name="accessibility_hearing_device_control" msgid="2661965917013100611">"Hallásjavító eszköz vezérlői"</string>
     <string name="accessibility_hearing_device_shortcut_title" msgid="7645100199603031360">"Hallásjavító eszköz parancsikonja"</string>
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"Hallókészülék-kompatibilitás"</string>
-    <string name="accessibility_hac_mode_summary" msgid="5164793702798871478">"Hang javítása egyes hallásjavító eszközöknél"</string>
-    <string name="accessibility_hearing_device_footer_summary" msgid="4636110586636490256">"Győződjön meg róla, hogy a hallásjavító eszköz be van kapcsolva és párosítási módban van"</string>
+    <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"Javítja a Telecoil rendszerű készülékekkel való kompatibilitást, és csökkenti a nem kívánt zajokat"</string>
+    <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"A hallókészülékekről"</string>
+    <string name="accessibility_hearing_device_footer_summary" msgid="7451899224828040581">"Győződjön meg arról, hogy az eszköz be van kapcsolva, és készen áll a párosításra"</string>
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"Hallásjavító párosítása"</string>
-    <!-- no translation found for accessibility_found_hearing_devices (637407580358386553) -->
-    <skip />
+    <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"Elérhető hallókészülékek"</string>
     <string name="accessibility_found_all_devices" msgid="7817834722148556520">"Nem látja a hallásjavító eszközt?"</string>
-    <string name="accessibility_list_all_devices_title" msgid="3555097127022458571">"Összes Bluetooth-eszköz megtekintése"</string>
+    <string name="accessibility_list_all_devices_title" msgid="161495343959211216">"További eszközök megjelenítése"</string>
     <string name="accessibility_audio_adjustment_title" msgid="1332113739136802997">"Hang korrigálása"</string>
     <string name="accessibility_toggle_audio_description_preference_title" msgid="8916473886256061220">"Audionarráció"</string>
     <string name="accessibility_audio_description_summary" msgid="2554789094873781056">"Leírást hallhat arról, hogy mi történik a képernyőn a támogatott filmekben és sorozatokban"</string>
     <string name="keywords_audio_description" msgid="6202816411593281252">"audionarráció, audio, narráció, gyengénlátó,"</string>
     <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"Gyorsparancs bekapcsolva"</string>
     <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"Ki"</string>
+    <string name="accessibility_summary_state_enabled" msgid="1065431632216039369">"Be"</string>
+    <string name="accessibility_summary_state_disabled" msgid="9173234532752799694">"Ki"</string>
     <string name="accessibility_summary_state_stopped" msgid="2343602489802623424">"Nem működik. Koppintson ide, ha további információra van szüksége."</string>
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"Ez a szolgáltatás nem működik megfelelően."</string>
     <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"Kisegítő lehetőségek gyorsparancsai"</string>
@@ -1993,6 +2056,8 @@
     <string name="accessibilty_autoclick_preference_subtitle_long_delay" msgid="4079139970819335593">"{count,plural, =1{Hosszú ({time} másodperc)}other{Hosszú ({time} másodperc)}}"</string>
     <string name="accessibilty_autoclick_delay_unit_second" msgid="5979297390686370567">"{count,plural, =1{{time} másodperc}other{{time} másodperc}}"</string>
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"Beállítások"</string>
+    <string name="accessibility_feature_state_on" msgid="1777344331063467511">"be"</string>
+    <string name="accessibility_feature_state_off" msgid="169119895905460512">"Ki"</string>
     <string name="captioning_preview_title" msgid="2888561631323180535">"Előnézet"</string>
     <string name="captioning_standard_options_title" msgid="5360264497750980205">"Normál beállítások"</string>
     <string name="captioning_locale" msgid="5533303294290661590">"Nyelv"</string>
@@ -2055,13 +2120,15 @@
     <string name="keywords_select_to_speak" msgid="2872704811610888719"></string>
     <string name="keywords_color_correction" msgid="8540442886990423681">"szín módosítása"</string>
     <string name="keywords_color_inversion" msgid="4291058365873221962">"képernyő sötétítése, képernyő világosítása"</string>
+    <string name="keywords_contrast" msgid="4668393735398949873">"színkontraszt"</string>
     <string name="keywords_accessibility_menu" msgid="4300579436464706608"></string>
     <string name="keywords_switch_access" msgid="5813094504384313402"></string>
     <string name="keywords_auto_click" msgid="7151756353013736931">"motorikus, egér"</string>
-    <string name="keywords_hearing_aids" msgid="524979615168196199">"nagyothallás, halláskárosodás"</string>
+    <string name="keywords_hearing_aids" msgid="4550504337687223314">"hallókészülékek, nagyothalló, hallásvesztés, cochleáris implantátumok, erősítő eszközök, hangfeldolgozók"</string>
     <string name="keywords_rtt" msgid="2429130928152514402">"nagyothalló, halláskárosodás, feliratok, Teletype, TTY"</string>
     <string name="keywords_voice_access" msgid="7807335263195876454"></string>
     <string name="print_settings" msgid="8519810615863882491">"Nyomtatás"</string>
+    <string name="print_settings_summary_no_service" msgid="6721731154917653862">"Kikapcsolva"</string>
     <string name="print_settings_summary" msgid="1458773840720811915">"{count,plural, =1{1 bekapcsolt nyomtatási szolgáltatás}other{# bekapcsolt nyomtatási szolgáltatás}}"</string>
     <string name="print_jobs_summary" msgid="7040836482336577323">"{count,plural, =1{1 nyomtatási feladat}other{# nyomtatási feladat}}"</string>
     <string name="print_settings_title" msgid="7680498284751129935">"Nyomtatási szolgáltatások"</string>
@@ -2069,6 +2136,8 @@
     <string name="print_no_printers_found" msgid="4833082484646109486">"Nem található nyomtató"</string>
     <string name="print_menu_item_settings" msgid="8202755044784599740">"Beállítások"</string>
     <string name="print_menu_item_add_printers" msgid="7958192149202584039">"Nyomtatók hozzáadása"</string>
+    <string name="print_feature_state_on" msgid="7132063461008624685">"Be"</string>
+    <string name="print_feature_state_off" msgid="1466195699995209446">"Ki"</string>
     <string name="print_menu_item_add_service" msgid="1549091062463044676">"Szolgáltatás hozzáadása"</string>
     <string name="print_menu_item_add_printer" msgid="8711630848324870892">"Nyomtató hozzáadása"</string>
     <string name="print_menu_item_search" msgid="5989979785203603169">"Keresés"</string>
@@ -2111,10 +2180,10 @@
     <string name="device_screen_usage" msgid="1011630249648289909">"Képernyőhasználat teljes feltöltés óta"</string>
     <string name="advanced_battery_title" msgid="3005993394776555079">"Akkuhasználat"</string>
     <string name="history_details_title" msgid="8628584613889559355">"Előzmények részletei"</string>
-    <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Akkumulátorhasználat"</string>
+    <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Akkuhasználat"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Használat az elmúlt 24 óra során"</string>
     <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"Használat az utolsó teljes feltöltés óta"</string>
-    <string name="battery_details_title" msgid="3289680399291090588">"Alkalmazás akkumulátorhasználata"</string>
+    <string name="battery_details_title" msgid="3289680399291090588">"Alkalmazás akkuhasználata"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Használat részletei"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Az energiafelhasználás beállítása"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Mellékelt csomagok"</string>
@@ -2126,12 +2195,12 @@
     <string name="battery_tip_early_heads_up_title" msgid="4411387863476629452">"Akkumulátorkímélő mód bekapcsolása"</string>
     <string name="battery_tip_early_heads_up_summary" msgid="578523794827443977">"Az akkumulátor a szokásosnál hamarabb lemerülhet"</string>
     <string name="battery_tip_early_heads_up_done_title" msgid="7705597228709143337">"Akkumulátorkímélő mód: Be"</string>
-    <string name="battery_saver_link_a11y" msgid="740558184830458845">"További információ az Akkumulátorkímélő módról"</string>
+    <string name="battery_saver_link_a11y" msgid="6613079613524512257">"További információ az Akkumulátorkímélő módról"</string>
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Egyes funkciók korlátozva lehetnek"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Magasabb akkuhasználat"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Az akkumulátort leginkább használó alkalmazások megtekintése"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="6258554134146272311">"Optimalizált töltés az akkumulátor védelme érdekében"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="6836981984725209843">"Az akkumulátor élettartamának növelése érdekében optimalizálva van a töltés"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="5107379280241187562">"Az akkumulátor élettartamának növelése érdekében optimalizálva van a töltés"</string>
     <string name="battery_tip_dock_defender_future_bypass_title" msgid="4332616280495788195">"Optimalizált töltés az akkumulátor védelme érdekében"</string>
     <string name="battery_tip_dock_defender_future_bypass_summary" msgid="7870758621381307597">"Az akkumulátor élettartamának növelése érdekében dokkolás közben optimalizálva van a töltés"</string>
     <string name="battery_tip_dock_defender_active_title" msgid="1414785238383255699">"Optimalizált töltés az akkumulátor védelme érdekében"</string>
@@ -2155,14 +2224,13 @@
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Eltávolítás"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Mégse"</string>
     <string name="battery_tip_charge_to_full_button" msgid="6701709034348116261">"Teljes feltöltés"</string>
-    <string name="battery_tip_incompatible_charging_title" msgid="654267494395731975">"Nem kompatibilis töltési megoldás"</string>
-    <string name="battery_tip_incompatible_charging_message" msgid="6031184746350185256">"Az akkumulátor egyáltalán nem vagy nagyon lassan töltődik"</string>
+    <string name="battery_tip_incompatible_charging_title" msgid="5120763575150751300">"Probléma van a töltőtartozékkal"</string>
     <string name="battery_tip_incompatible_charging_content_description" msgid="355668467640367701">"További információ a nem kompatibilis töltésről"</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Akkumulátorkezelő"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"Alkalmazások automatikus kezelése"</string>
     <string name="smart_battery_footer" msgid="8407121907452993645">"Amikor az Akkumulátorkezelő azt észleli, hogy bizonyos alkalmazások merítik az akkumulátort, Önnek lehetősége nyílik az érintett alkalmazások korlátozására. Előfordulhat, hogy a korlátozott alkalmazások ezután nem működnek megfelelően, és késnek az értesítéseik."</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"Korlátozott alkalmazások"</string>
-    <string name="restricted_app_summary" msgid="1022307922754893997">"{count,plural, =1{Akkumulátorhasználat korlátozása # alkalmazás számára}other{Akkumulátorhasználat korlátozása # alkalmazás számára}}"</string>
+    <string name="restricted_app_summary" msgid="1022307922754893997">"{count,plural, =1{Akkuhasználat korlátozása # alkalmazás számára}other{Akkuhasználat korlátozása # alkalmazás számára}}"</string>
     <string name="restricted_app_time_summary" msgid="3097721884155913252">"Korlátozva volt ekkor: <xliff:g id="TIME">%1$s</xliff:g>"</string>
     <string name="restricted_app_detail_footer" msgid="3495725286882138803">"Ezeknél az appoknál korlátozva van az akkumulátor háttérben történő használata. Előfordulhat, hogy nem a várt módon működnek, és késnek az értesítéseik."</string>
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"Az Akkumulátorkezelő használata"</string>
@@ -2189,7 +2257,7 @@
     <string name="battery_detail_since_full_charge" msgid="5650946565524184582">"Statisztikák az utolsó teljes feltöltés óta"</string>
     <string name="battery_last_full_charge" msgid="8308424441475063956">"Utolsó teljes feltöltés"</string>
     <string name="battery_full_charge_last" msgid="465146408601016923">"A legmagasabb töltöttségi szinttel körülbelül ennyit bír:"</string>
-    <string name="battery_footer_summary" msgid="8221691063048377342">"Az akkumulátorhasználati adatok hozzávetőlegesek, és az eszköz használatától függően módosulhatnak."</string>
+    <string name="battery_footer_summary" msgid="6753248007004259000">"A fennmaradó akkumulátor-élettartam becsült érték, a használattól függően módosulhat"</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Akkuhasználat"</string>
     <string name="battery_not_usage" msgid="3851536644733662392">"Nem volt használva az utolsó teljes feltöltés óta"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"Nem volt használatban az elmúlt 24 órában"</string>
@@ -2215,7 +2283,8 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Ütemezés beállítása"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Az akkumulátor élettartamának növelése"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Kikapcsolás feltöltés után"</string>
-    <string name="battery_saver_sticky_description_new" msgid="6472610662679038342">"Az Akkumulátorkímélő mód kikapcsol, ha az akkumulátor töltöttségi szintje a következő értékre csökken: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="battery_saver_sticky_title_percentage" msgid="1178162022087559148">"Kikapcsolás <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>-nál"</string>
+    <string name="battery_saver_sticky_description_new" msgid="6472610662679038342">"Az Akkumulátorkímélő mód kikapcsol, ha az akkumulátor töltöttségi szintje eléri a következő értéket: <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Bekapcsolás"</string>
@@ -2233,8 +2302,10 @@
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Rendszerhasználat – legutóbbi 24 óra"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"Rendszer használata: <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"Alkalmazás használata: <xliff:g id="SLOT">%s</xliff:g>"</string>
+    <string name="battery_system_usage_since_last_full_charge_to" msgid="4196795733829841971">"Rendszerhasználat az utolsó teljes feltöltés óta eddig: <xliff:g id="SLOT_TIMESTAMP">%s</xliff:g>"</string>
+    <string name="battery_app_usage_since_last_full_charge_to" msgid="4339201995118102114">"Alkalmazáshasználat az utolsó teljes feltöltés óta eddig: <xliff:g id="SLOT_TIMESTAMP">%s</xliff:g>"</string>
     <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"Összesen: kevesebb mint egy perc"</string>
-    <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"Háttér: kevesebb mint egy perc"</string>
+    <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"Háttér: egy percnél kevesebb"</string>
     <string name="battery_usage_screen_time_less_than_one_minute" msgid="2911989465891679033">"Képernyőidő: egy percnél kevesebb"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Összesen: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"Háttér: <xliff:g id="TIME">%s</xliff:g>"</string>
@@ -2246,12 +2317,13 @@
     <string name="battery_usage_chart" msgid="4114747521432440017">"Akkumulátorhasználatot szemléltető diagram"</string>
     <string name="daily_battery_usage_chart" msgid="4176059567682992686">"Napi akkumulátorhasználatot szemléltető diagram"</string>
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Óránkénti akkumulátorhasználatot szemléltető diagram"</string>
-    <string name="battery_usage_breakdown_title_since_last_full_charge" msgid="435006273323199906">"Akkumulátorhasználat a legutóbbi teljes feltöltés óta"</string>
-    <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"Akkumulátorhasználat – <xliff:g id="SLOT">%s</xliff:g>"</string>
+    <string name="battery_usage_breakdown_title_since_last_full_charge" msgid="435006273323199906">"Akkuhasználat a legutóbbi teljes feltöltés óta"</string>
+    <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"Akkuhasználat – <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"Képernyőidő az utolsó teljes feltöltés óta"</string>
     <string name="screen_time_category_for_slot" msgid="8287722270554654959">"Képernyőidő – <xliff:g id="SLOT">%s</xliff:g>"</string>
-    <string name="battery_usage_spinner_breakdown_by_apps" msgid="7746337368402445072">"Lebontás alkalmazások szerint"</string>
-    <string name="battery_usage_spinner_breakdown_by_system" msgid="4646952798665973464">"Lebontás rendszer szerint"</string>
+    <string name="battery_usage_spinner_view_by_apps" msgid="8769276544072098082">"Megtekintés alkalmazások szerint"</string>
+    <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"Megtekintés rendszerek szerint"</string>
+    <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt;<xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Folyamatstatisztikák"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"A futó folyamatok statisztikái"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Memóriahasználat"</string>
@@ -2315,6 +2387,8 @@
     <string name="vpn_settings_multiple_insecure_multiple_total" msgid="1706236062478680488">"<xliff:g id="VPN_COUNT">%d</xliff:g> nem biztonságos"</string>
     <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Adaptív kapcsolódás"</string>
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"A hálózati kapcsolatok automatikus kezelésével megnöveli az akkumulátor élettartamát és javítja az eszköz teljesítményét"</string>
+    <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"Be"</string>
+    <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"Ki"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Az Adaptive Connectivity használata"</string>
     <string name="credentials_title" msgid="7535942196886123656">"Hitelesítési adatok tárolója"</string>
     <string name="credentials_install" msgid="3933218407598415827">"Tanúsítvány telepítése"</string>
@@ -2357,6 +2431,8 @@
     <string name="emergency_tone_title" msgid="6673118505206685168">"Segélyhívó jelzés"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"Viselkedés beállítása segélyhívás kezdeményezésekor"</string>
     <string name="privacy_settings_title" msgid="6437057228255974577">"Biztonsági mentés"</string>
+    <string name="backup_summary_state_on" msgid="9018954639693085240">"Be"</string>
+    <string name="backup_summary_state_off" msgid="5341339397224835909">"Ki"</string>
     <string name="backup_section_title" msgid="6539706829848457794">"Biztonsági mentés és visszaállítás"</string>
     <string name="personal_data_section_title" msgid="6368610168625722682">"Személyes adatok"</string>
     <string name="backup_data_title" msgid="507663517227498525">"Adatok mentése"</string>
@@ -2393,7 +2469,7 @@
     <string name="admin_more_details" msgid="4928985331640193758">"További információ"</string>
     <string name="notification_log_title" msgid="2812594935014664891">"Értesítési napló"</string>
     <string name="notification_history_title" msgid="8821060912502593309">"Értesítéselőzmények"</string>
-    <string name="notification_history_today" msgid="5828496957208237230">"Elmúlt 24 óra"</string>
+    <string name="notification_history_today" msgid="6081829638548808795">"Utolsó %d óra"</string>
     <string name="notification_history_snooze" msgid="3980568893290512257">"Elhalasztva"</string>
     <string name="notification_history_dismiss" msgid="6180321217375722918">"Legutóbb elvetett"</string>
     <string name="notification_history_count" msgid="885305572972482838">"{count,plural, =1{# értesítés}other{# értesítés}}"</string>
@@ -2409,9 +2485,7 @@
     <string name="sync_is_failing" msgid="6738004111400633331">"A szinkronizálással problémák vannak. Hamarosan helyreáll."</string>
     <string name="add_account_label" msgid="7134707140831385869">"Fiók hozzáadása"</string>
     <string name="managed_profile_not_available_label" msgid="7500578232182547365">"A munkaprofil még nem érhető el"</string>
-    <string name="work_mode_label" msgid="1001415270126064436">"Munkaprofil"</string>
-    <string name="work_mode_on_summary" msgid="2042885311126239961">"Az Ön szervezete kezeli"</string>
-    <string name="work_mode_off_summary" msgid="4044568753909036134">"Az alkalmazások és az értesítések ki vannak kapcsolva"</string>
+    <string name="work_mode_label" msgid="4687734487641548872">"Munkahelyi alkalmazások"</string>
     <string name="remove_managed_profile_label" msgid="1294933737673830431">"Munkaprofil eltávolítása"</string>
     <string name="background_data" msgid="321903213000101158">"Háttéradatok"</string>
     <string name="background_data_summary" msgid="6572245922513522466">"Szinkronizálás, adatküldés és -fogadás bármikor"</string>
@@ -2444,7 +2518,7 @@
     <string name="delete" msgid="8330605554706263775">"Törlés"</string>
     <string name="select_all" msgid="7898929601615536401">"Az összes kijelölése"</string>
     <string name="data_usage_summary_title" msgid="394067070764360142">"Adathasználat"</string>
-    <string name="data_usage_app_summary_title" msgid="4933742247928064178">"Mobiladatok és Wi‑Fi"</string>
+    <string name="data_usage_app_summary_title" msgid="4933742247928064178">"Mobiladat és Wi‑Fi"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Személyesadat-szinkronizálás"</string>
     <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Munkaadat-szinkronizálás"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"Ciklus módosítása..."</string>
@@ -2492,7 +2566,7 @@
     <string name="data_usage_uninstalled_apps" msgid="9065885396147675694">"Eltávolított alkalmazások"</string>
     <string name="data_usage_uninstalled_apps_users" msgid="1262228664057122983">"Eltávolított alkalmazások és felhasználók"</string>
     <string name="wifi_metered_title" msgid="6623732965268033931">"Hálózathasználat"</string>
-    <string name="data_usage_metered_yes" msgid="4262598072030135223">"Mért"</string>
+    <string name="data_usage_metered_yes" msgid="4262598072030135223">"Forgalomkorlátos"</string>
     <string name="vpn_name" msgid="3806456074909253262">"Név"</string>
     <string name="vpn_type" msgid="5533202873260826663">"Típus"</string>
     <string name="vpn_server" msgid="2908816134941973935">"Szerver címe"</string>
@@ -2599,7 +2673,7 @@
     <string name="user_summary_not_set_up" msgid="4602868481732886115">"Nincs beállítva"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1658946988920104613">"Nincs létrehozva – Korlátozott jogokkal rendelkező profil"</string>
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"Még nincs létrehozva – Munkaprofil"</string>
-    <string name="user_admin" msgid="4024553191395768119">"Rendszergazda"</string>
+    <string name="user_admin" msgid="4024553191395768119">"Adminisztrátor"</string>
     <string name="user_you" msgid="3070562015202859996">"Ön (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_add_max_count" msgid="3328539978480663740">"Nem adhat hozzá több felhasználót. Újabb hozzáadásához távolítsa el valamelyik meglévő felhasználót."</string>
     <string name="user_cannot_add_accounts_message" msgid="2351326078338805337">"Korlátozott profilok nem adhatnak hozzá fiókokat"</string>
@@ -2627,15 +2701,15 @@
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Törli a vendégtevékenységeket?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Az ebből a vendégmunkamenetből származó alkalmazások és adatok azonnal törlődnek, és az összes jövőbeli, vendég módban végzett tevékenység törlődik minden olyan alkalomkor, amikor kilép a vendég módból"</string>
     <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"törlés, vendég, tevékenység, eltávolítás, adatok, látogató, kitörlés"</string>
-    <string name="enable_guest_calling" msgid="8300355036005240911">"Telefonhaszn. engedélyezése a vendégnek"</string>
+    <string name="enable_guest_calling" msgid="8300355036005240911">"A vendég használhatja a telefont"</string>
     <string name="enable_guest_calling_summary" msgid="4748224917641204782">"A rendszer megosztja a híváslistát ezzel a vendég felhasználóval."</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Hívások és SMS-ek engedélyezése"</string>
-    <string name="user_grant_admin" msgid="6511342422361803820">"Adminisztrátori jogosultságok megadása"</string>
+    <string name="user_grant_admin" msgid="5942118263054572074">"A felhasználó beállítása adminisztrátorként"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Felhasználó törlése"</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="4041510268838725520">"Engedélyezi a hívásokat és SMS-eket?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"A rendszer megosztja az SMS- és híváslistát ezzel a felhasználóval."</string>
-    <string name="user_revoke_admin_confirm_title" msgid="3057842401861731863">"Törli az adminisztrátori jogosultságokat?"</string>
-    <string name="user_revoke_admin_confirm_message" msgid="2719667217562982318">"Biztosan eltávolítja a felhasználó adminisztrátor jogosultságait?"</string>
+    <string name="user_revoke_admin_confirm_title" msgid="3057842401861731863">"Eltávolítja az adminisztrátori jogosultságokat?"</string>
+    <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"Ha visszavonja a felhasználó adminisztrátori jogosultságait, később újra megadhatja neki Ön vagy egy másik adminisztrátor."</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"Segélyhívási információk"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"Adatok és névjegyek: <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="open_app_button" msgid="5025229765547191710">"<xliff:g id="APP_NAME">%1$s</xliff:g> megnyitása"</string>
@@ -2740,7 +2814,7 @@
     <string name="sim_calls_always_use" msgid="967857230039768111">"Mindig ezt használja hívásokhoz"</string>
     <string name="select_sim_for_data" msgid="2642305487659432499">"SIM-kártya kiválasztása a mobiladatokhoz"</string>
     <string name="select_sim_for_sms" msgid="5335510076282673497">"SIM-kártya kiválasztása SMS-ekhez"</string>
-    <string name="data_switch_started" msgid="6292759843974720112">"Az adatforgalomhoz használt SIM-kártya váltása folyamatban – ez legfeljebb egy percet vesz igénybe…"</string>
+    <string name="data_switch_started" msgid="6292759843974720112">"Adatforgalomhoz használt SIM-kártya váltása – egy perc, és kész."</string>
     <string name="select_specific_sim_for_data_title" msgid="5851980301321577985">"A(z) <xliff:g id="NEW_SIM">%1$s</xliff:g> szolgáltatót használja?"</string>
     <string name="select_specific_sim_for_data_msg" msgid="7401698123430573637">"Ha a(z) <xliff:g id="NEW_SIM">%1$s</xliff:g> szolgáltatóra vált, az eszköz többé nem használja a(z) <xliff:g id="OLD_SIM">%2$s</xliff:g> szolgáltatót a mobiladat-kapcsolathoz."</string>
     <string name="select_specific_sim_for_data_button" msgid="6571935548920603512">"<xliff:g id="NEW_SIM">%1$s</xliff:g> használata"</string>
@@ -2786,8 +2860,10 @@
     <string name="delete_all_app_clones_failure" msgid="6821033414547132335">"Nem sikerült az alkalmazásklónok törlése"</string>
     <string name="cloned_app_creation_summary" msgid="4642627294993918502">"Létrehozás…"</string>
     <string name="cloned_app_created_summary" msgid="7277912971544890710">"Klónozva"</string>
+    <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>-klón létrehozása…"</string>
+    <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>-klón létrehozva"</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"Nyelvek, kézmozdulatok, idő, biztonsági mentés"</string>
-    <string name="languages_setting_summary" msgid="4924440599794956443">"Rendszernyelvek, alkalmazásnyelvek"</string>
+    <string name="languages_setting_summary" msgid="7963053736715746726">"Rendszernyelvek, alkalmazásnyelvek, beszéd"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"WiFi, Wi-Fi, hálózati kapcsolat, internet, vezeték nélküli, adatok, Wi Fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Wi‑Fi-értesítés, wifi értesítés"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"adathasználat"</string>
@@ -2808,7 +2884,7 @@
     <string name="keywords_display_cast_screen" msgid="2572331770299149370">"vetítés, átküldés, képernyőtükrözés, képernyőmegosztás, tükrözés, képernyő megosztása, képernyő átküldése"</string>
     <string name="keywords_storage" msgid="3004667910133021783">"tárhely, lemez, merevlemez, eszközhasználat"</string>
     <string name="keywords_battery" msgid="7040323668283600530">"áramfogyasztás, töltés"</string>
-    <string name="keywords_battery_usage" msgid="1763573071014260220">"akkuhasználati adatok megtekintése, akkumulátorhasználat, áramfogyasztás"</string>
+    <string name="keywords_battery_usage" msgid="1763573071014260220">"akkuhasználati adatok megtekintése, akkuhasználat, áramfogyasztás"</string>
     <string name="keywords_battery_saver" msgid="6289682844453234359">"akkumulátorkímélő mód, energiamegtakarítás, megtakarítás"</string>
     <string name="keywords_battery_adaptive_preferences" msgid="1774870663426502938">"adaptív beállítások, alkalmazkodó akkumulátor"</string>
     <string name="keywords_spell_checker" msgid="5148906820603481657">"helyesírás, szótár, helyesírás-ellenőrzés, automatikus javítás"</string>
@@ -2870,7 +2946,7 @@
     <string name="keywords_storage_settings" msgid="6018856193950281898">"memória, gyorsítótár, adatok, törlés, eltávolítás, felszabadítás, tárhely"</string>
     <string name="keywords_bluetooth_settings" msgid="2588159530959868188">"csatlakoztatott, eszköz, fejhallgató, headset, hangfal, vezeték nélküli, párosítás, fülhallgató, zene, médiatartalom"</string>
     <string name="keywords_wallpaper" msgid="7332890404629446192">"háttér, téma, rács, testre szabás, személyre szabás"</string>
-    <string name="keywords_styles" msgid="5291614313348476068">"ikon, kiemelés, szín"</string>
+    <string name="keywords_styles" msgid="3367789885254807447">"ikon, kiemelés, szín, kezdőképernyő, képernyőzár, gyorsparancs, óra mérete"</string>
     <string name="keywords_assist_input" msgid="3086289530227075593">"alapértelmezett, Segéd"</string>
     <string name="keywords_default_payment_app" msgid="5162298193637362104">"fizetés, alapértelmezett"</string>
     <string name="keywords_ambient_display" msgid="3149287105145443697">"bejövő értesítés"</string>
@@ -2889,7 +2965,7 @@
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, továbbfejlesztett telefonhívás, 5g-s telefonhívás"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"nyelv hozzáadása, egy nyelv hozzáadása"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"betűméret, nagybetű, nagy betűtípus, nagy szöveg, gyengénlátó, szöveg nagyítása, betűtípusnagyító, betűtípus-nagyítás"</string>
-    <string name="keywords_always_show_time_info" msgid="645658129239452778">"mindig bekapcsolt kijelző, AOD"</string>
+    <string name="keywords_always_show_time_info" msgid="1066752498285497595">"Mindig bekapcsolt környezeti kijelző (Always on Ambient Display, AOD)"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, címke, olvasó"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Hangerő, rezgés, Ne zavarjanak"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Média hangereje"</string>
@@ -2899,6 +2975,7 @@
     <string name="ring_volume_option_title" msgid="1520802026403038560">"Csörgetési, értesítési hangerő"</string>
     <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"Csengés hangereje"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"Értesítés hangereje"</string>
+    <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"Nem áll rendelkezésre, mert a csengetés le van némítva"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"Telefon csengőhangja"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Alapértelmezett értesítőhang"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"Alkalmazásból származó hang"</string>
@@ -2910,7 +2987,7 @@
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"Képernyőzárolási hang"</string>
     <string name="charging_sounds_title" msgid="5261683808537783668">"Töltési hangok és rezgés"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"Dokkolási hangok"</string>
-    <string name="touch_sounds_title" msgid="2200734041857425078">"Érintési hangok"</string>
+    <string name="touch_sounds_title" msgid="826964355109667449">"Koppintás és kattintás hangjai"</string>
     <string name="vibrate_icon_title" msgid="1281100105045362530">"Mindig jelenjen meg ikon rezgő módban"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"Dokkoláskor hangszórón szól"</string>
     <string name="dock_audio_media_disabled" msgid="8499927008999532341">"Minden hang"</string>
@@ -2924,6 +3001,7 @@
     <string name="spatial_audio_speaker" msgid="9145233652433523302">"Telefon hangszórója"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Vezetékes fejhallgató"</string>
     <string name="spatial_audio_text" msgid="8201387855375146000">"A kompatibilis médiatartalmak hangja még inkább magával ragadó lesz"</string>
+    <string name="spatial_summary_off" msgid="8272678804629774378">"Ki"</string>
     <string name="spatial_summary_on_one" msgid="6239933399496282994">"Bekapcsolva / <xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"Bekapcsolva / <xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> és <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
     <string name="spatial_audio_footer_title" msgid="8775010547623606088">"A Bluetooth-eszközök esetében is bekapcsolhatja a térbeli hangzást."</string>
@@ -2996,6 +3074,7 @@
     <string name="zen_interruption_level_priority" msgid="4854123502362861192">"Csak prioritásos"</string>
     <string name="zen_mode_and_condition" msgid="8580896862841920031">"<xliff:g id="ZEN_MODE">%1$s</xliff:g>. <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_sound_summary_on_with_info" msgid="4803606180235742003">"Be/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="zen_mode_sound_summary_on" msgid="9077659040104989899">"Be"</string>
     <string name="zen_mode_duration_summary_always_prompt" msgid="7658172853423383037">"Mindig kérdezzen rá"</string>
     <string name="zen_mode_duration_summary_forever" msgid="5551992961329998606">"Kikapcsolásig"</string>
     <string name="zen_mode_duration_summary_time_hours" msgid="2602655749780428308">"{count,plural, =1{1 óra}other{# óra}}"</string>
@@ -3037,7 +3116,7 @@
     <string name="notification_dashboard_summary" msgid="7530169251902320652">"Értesítéselőzmények, beszélgetések"</string>
     <string name="conversation_notifs_category" msgid="2549844862379963273">"Beszélgetés"</string>
     <string name="general_notification_header" msgid="3669031068980713359">"Kezelés"</string>
-    <string name="app_notification_field" msgid="3858667320444612716">"Alkalmazásbeállítások"</string>
+    <string name="app_notification_field" msgid="3208079070539894909">"Alkalmazásértesítések"</string>
     <string name="app_notification_field_summary" msgid="5981393613897713471">"A különböző alkalmazásoktól származó értesítések vezérlése"</string>
     <string name="advanced_section_header" msgid="6478709678084326738">"Általános"</string>
     <string name="profile_section_header" msgid="4970209372372610799">"Munkahelyi profil értesítései"</string>
@@ -3087,11 +3166,11 @@
     <string name="notification_pulse_title" msgid="8013178454646671529">"Villogó fény"</string>
     <string name="lock_screen_notifications_title" msgid="2876323153692406203">"Adatvédelem"</string>
     <string name="lockscreen_bypass_title" msgid="6519964196744088573">"Lezárási képernyő kihagyása"</string>
-    <string name="lockscreen_bypass_summary" msgid="464277506200346748">"Feloldás után a legutóbbi képernyő megnyitása"</string>
+    <string name="lockscreen_bypass_summary" msgid="4578154430436224161">"Feloldás után a legutóbbi képernyő nyílik meg. Nem láthatók értesítések a lezárási képernyőn. A megtekintésükhöz csúsztasson le a képernyő tetejéről."</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Lezárási képernyő, Kihagyás, Megkerülés"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Zárolt munkaprofil esetén"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Csak az új értesítések megjelenítése a lezárási képernyőn"</string>
-    <string name="unseen_notifs_lock_screen_summary" msgid="8824730389406143614">"A feloldást követően a rendszer eltávolítja a meglévő értesítéseket a lezárási képernyőről"</string>
+    <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"A korábban megtekintett értesítések automatikus eltávolítása a zárolási képernyőről"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Értesítések a lezárási képernyőn"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Beszélgetések megjelenítése, alapértelmezett és néma is"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Beszélgetések megjelenítése, alapértelmezett és néma is"</string>
@@ -3144,10 +3223,10 @@
     <string name="notification_priority_title" msgid="5554834239080425229">"Prioritás"</string>
     <string name="notification_channel_summary_priority" msgid="7225362351439076913">"A beszélgetések szakaszának tetején, lebegő buborékként látható, megjeleníti a profilképet a lezárási képernyőn"</string>
     <string name="convo_not_supported_summary" msgid="4285471045268268048">"A(z) <xliff:g id="APP_NAME">%1$s</xliff:g> nem támogatja a legtöbb beszélgetési funkciót. Nem állíthat be beszélgetést prioritásként, és a beszélgetések nem jelennek meg lebegő buborékként."</string>
-    <string name="notification_channel_summary_min" msgid="8823399508450176842">"A lehúzható értesítési felületen egyetlen sorrá csukhatja össze az értesítéseket"</string>
+    <string name="notification_channel_summary_min" msgid="8823399508450176842">"A lehúzható értesítési felületen egyetlen sorrá összecsukja az értesítéseket"</string>
     <string name="notification_channel_summary_low" msgid="5549662596677692000">"Nincs hang és rezgés"</string>
     <string name="notification_conversation_summary_low" msgid="6352818857388412326">"Nincs hang és rezgés, továbbá lejjebb jelenik meg a beszélgetések szakaszában"</string>
-    <string name="notification_channel_summary_default" msgid="3674057458265438896">"A telefonbeállítások alapján csöröghet és rezeghet"</string>
+    <string name="notification_channel_summary_default" msgid="1168420867670390611">"Az eszközbeállítások alapján csöröghet és rezeghet"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Feloldott állapotban az értesítések megjelenítése szalag formájában a képernyő felső részén"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"A(z) „<xliff:g id="APP_NAME">%1$s</xliff:g>” összes értesítése"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Az összes <xliff:g id="APP_NAME">%1$s</xliff:g>-értesítés"</string>
@@ -3164,8 +3243,8 @@
     <string name="notification_access_detail_switch" msgid="46386786409608330">"Értesítés-hozzáférés engedélyezése"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"A bővített értesítések felváltják az androidos alkalmazkodó értesítéseket az Android 12-es verziójában. Ez a funkció javasolt műveleteket és válaszokat mutat, és rendszerezi az értesítéseket. \n\nA bővített értesítések minden értesítéstartalmat olvashatnak (így a személyes adatokat, mint például a névjegyek nevét és az üzeneteket is). Ez a funkció emellett elvetheti az értesítéseket, valamint reagálhat rájuk, például felveheti a telefonhívásokat, és vezérelheti a Ne zavarjanak módot."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Engedélyezi az értesítések elérését a(z) <xliff:g id="SERVICE">%1$s</xliff:g> számára?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="4317764112725749020">"A(z) <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> elolvashatja az összes értesítést, beleértve a személyes adatokat, például az ismerősök neveit, fotóit és a fogadott üzeneteket. Ez az alkalmazás továbbá az értesítéseket is elhalaszthatja, elvetheti, vagy használhatja az értesítéseken lévő gombokat (így például felveheti a bejövő hívásokat) \n\nEzzel az alkalmazás egyúttal képes lesz a „Ne zavarjanak” funkció be- és kikapcsolására, továbbá a kapcsolódó beállítások módosítására is."</string>
-    <string name="nls_warning_prompt" msgid="9143226910825830619">"A(z) <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> számára a következőkre nyílik lehetőség:"</string>
+    <string name="notification_listener_security_warning_summary" msgid="1131986567509818121">"A(z) <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> elolvashatja az összes értesítést, beleértve a személyes adatokat, például az ismerősök neveit, fotóit és a fogadott üzeneteket. Ez az alkalmazás továbbá az értesítéseket is elhalaszthatja, elvetheti, vagy használhatja az értesítéseken lévő gombokat (így például felveheti a bejövő hívásokat) \n\nEzzel az alkalmazás egyúttal képes lesz a „Ne zavarjanak” funkció be- és kikapcsolására, továbbá a kapcsolódó beállítások módosítására is."</string>
+    <string name="nls_warning_prompt" msgid="1486887096703743841">"A(z) <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> alkalmazás a következőkre lesz képes:"</string>
     <string name="nls_feature_read_title" msgid="7629713268744220437">"Az értesítések elolvasása"</string>
     <string name="nls_feature_read_summary" msgid="1064698238110273593">"Elolvashatja az értesítéseket, beleértve a személyes adatokat, például az ismerősök neveit, az üzeneteket és a fotókat."</string>
     <string name="nls_feature_reply_title" msgid="7925455553821362039">"Üzenetek megválaszolása"</string>
@@ -3193,7 +3272,7 @@
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"Ebben az alkalmazásban további beállítások állnak rendelkezésre"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Virtuálisvalóság-segédszolgáltatás"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Egy telepített alkalmazás sem kérte, hogy virtuálisvalóság-segédszolgáltatásként legyen futtatva."</string>
-    <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Engedélyezi a(z) <xliff:g id="SERVICE">%1$s</xliff:g> számára a hozzáférést a virtuálisvalóság-szolgáltatáshoz?"</string>
+    <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Hozzáférhet a(z) <xliff:g id="SERVICE">%1$s</xliff:g> a virtuálisvalóság-szolgáltatáshoz?"</string>
     <string name="vr_listener_security_warning_summary" msgid="1888843557687017791">"A(z) <xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g> futtatható lesz, ha Ön virtuális valóság módban használ alkalmazásokat."</string>
     <string name="display_vr_pref_title" msgid="4850474436291113569">"Ha az eszköz VR módban van"</string>
     <string name="display_vr_pref_low_persistence" msgid="7039841277157739871">"Homályosítás csökkentése (ajánlott)"</string>
@@ -3241,6 +3320,8 @@
     <string name="app_notification_block_summary" msgid="1804611676339341551">"Soha ne jelenjenek meg ezek az értesítések"</string>
     <string name="notification_content_block_title" msgid="6689085826061361351">"Értesítések megjelenítése"</string>
     <string name="notification_content_block_summary" msgid="329171999992248925">"Soha ne jelenjen meg értesítés az értesítési felületen és a perifériás eszközökön"</string>
+    <string name="app_notification_fsi_permission_title" msgid="5424116606034705020">"Teljes képernyős értesítések engedélyezése"</string>
+    <string name="app_notification_fsi_permission_summary" msgid="7673487977631068039">"Teljes képernyős értesítések megjelenítésének engedélyezése, amikor az eszköz zárolva van"</string>
     <string name="notification_badge_title" msgid="6854537463548411313">"Értesítési pötty engedélyezése"</string>
     <string name="notification_channel_badge_title" msgid="6505542437385640049">"Értesítési pötty megjelenítése"</string>
     <string name="app_notification_override_dnd_title" msgid="3769539356442226691">"A Ne zavarjanak mód felülbírálása"</string>
@@ -3285,7 +3366,6 @@
     <string name="summary_divider_text" msgid="8836285171484563986">", "</string>
     <string name="summary_range_symbol_combination" msgid="8447490077794415525">"<xliff:g id="START">%1$s</xliff:g>–<xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="zen_mode_conversations_title" msgid="5491912973456026379">"Beszélgetések"</string>
-    <string name="zen_mode_conversations_section_title" msgid="666809483050936026">"Azok a beszélgetések, amelyeknél engedélyezve van a megszakítás"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"Az összes beszélgetés"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"Fontos beszélgetések"</string>
     <string name="zen_mode_from_important_conversations_second" msgid="7588299891972136599">"fontos beszélgetések"</string>
@@ -3376,6 +3456,12 @@
     <string name="suggestion_button_close" msgid="6865170855573283759">"Bezárás"</string>
     <string name="device_feedback" msgid="5351614458411688608">"Visszajelzés küldése az eszközről"</string>
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"Adja meg a rendszergazdai PIN-kódot"</string>
+    <string name="switch_on_text" msgid="5664542327776075105">"Be"</string>
+    <string name="switch_off_text" msgid="1315547447393646667">"Ki"</string>
+    <string name="nfc_setting_on" msgid="7701896496026725772">"Be"</string>
+    <string name="nfc_setting_off" msgid="7142103438532732309">"Ki"</string>
+    <string name="screen_pinning_switch_on_text" msgid="6971386830247542552">"Be"</string>
+    <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"Ki"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Alkalmazáskitűzés"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"Az alkalmazáskitűzés funkcióval az aktuális alkalmazás az előtérben marad egészen addig, amíg meg nem szünteti a kitűzést. Így például biztosíthatja, hogy ha valaki másnak adja át eszközét, az illető csak a kiválasztott alkalmazást használhatja."</string>
     <string name="screen_pinning_description" msgid="4305370471370474846">"A kitűzött alkalmazás megnyithat más alkalmazásokat, és bizonyos személyes adatok hozzáférhetők lehetnek. \n\nAz alkalmazásokat a következőképpen tűzheti ki: 	\n1. Kapcsolja be az alkalmazáskitűzés beállítást. 	\n2. Nyissa meg az Áttekintés nézetet. 	\n3. Koppintson a képernyő tetején található alkalmazásikonra, majd a Kitűzés elemre."</string>
@@ -3430,7 +3516,9 @@
     <string name="change" msgid="273206077375322595">"Módosítás"</string>
     <string name="change_storage" msgid="8773820275624113401">"Tárhely módosítása"</string>
     <string name="notifications_label" msgid="8471624476040164538">"Értesítések"</string>
+    <string name="notifications_enabled" msgid="7743168481579361019">"Be"</string>
     <string name="notifications_enabled_with_info" msgid="1808946629277684308">"<xliff:g id="NOTIFICATIONS_SENT">%1$s</xliff:g> / <xliff:g id="NOTIFICATIONS_CATEGORIES_OFF">%2$s</xliff:g>"</string>
+    <string name="notifications_disabled" msgid="5603160425378437143">"Ki"</string>
     <string name="notifications_categories_off" msgid="7712037485557237328">"{count,plural, =1{# kategória kikapcsolva}other{# kategória kikapcsolva}}"</string>
     <string name="runtime_permissions_additional_count" msgid="6071909675951786523">"{count,plural, =1{# további engedély}other{# további engedély}}"</string>
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"Nincsenek megadott engedélyek"</string>
@@ -3449,10 +3537,8 @@
     <string name="filter_notif_blocked_apps" msgid="1065653868850012325">"Kikapcsolva"</string>
     <string name="advanced_apps" msgid="7643010673326578815">"Speciális"</string>
     <string name="app_permissions" msgid="8666537659217653626">"Engedélykezelő"</string>
-    <!-- no translation found for app_data_sharing_updates_title (1694297952320402788) -->
-    <skip />
-    <!-- no translation found for app_data_sharing_updates_summary (4465929918457739443) -->
-    <skip />
+    <string name="app_data_sharing_updates_title" msgid="1694297952320402788">"A helyadatok megosztását érintő frissítések"</string>
+    <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"Áttekintheti az appokat, amelyek módosították, hogy hogyan oszthatják meg a helyadatait"</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"Koppintson a felébresztéshez"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"Az eszköz felébresztéséhez koppintson kétszer bárhol a képernyőre"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"Linkek megnyitása"</string>
@@ -3556,7 +3642,7 @@
     <string name="running_frequency" msgid="7260225121706316639">"Gyakoriság"</string>
     <string name="memory_maximum_usage" msgid="2047013391595835607">"Maximális használat"</string>
     <string name="no_data_usage" msgid="4665617440434654132">"Nincs felhasznált adatmennyiség"</string>
-    <string name="zen_access_warning_dialog_title" msgid="6323325813123130154">"Engedélyezi a(z) <xliff:g id="APP">%1$s</xliff:g> számára a hozzáférést a „Ne zavarjanak” funkcióhoz?"</string>
+    <string name="zen_access_warning_dialog_title" msgid="6323325813123130154">"Hozzáférhet a(z) <xliff:g id="APP">%1$s</xliff:g> a „Ne zavarjanak” funkcióhoz?"</string>
     <string name="zen_access_warning_dialog_summary" msgid="8468714854067428987">"Az alkalmazás be- és kikapcsolhatja a „Ne zavarjanak” funkciót, és módosíthatja a vonatkozó beállításokat."</string>
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"Bekapcsolva kell hagyni, mert az értesítési hozzáférés be van kapcsolva"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"Visszavonja a(z) <xliff:g id="APP">%1$s</xliff:g> hozzáférését a „Ne zavarjanak” szabályhoz?"</string>
@@ -3575,9 +3661,9 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Hozzáférés megadása minden fájl kezeléséhez"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Engedélyezi ennek az alkalmazásnak az eszközön és a csatlakoztatott tárolóköteteken található összes fájl olvasását, módosítását és törlését. Ha engedélyezve van, az alkalmazás anélkül férhet hozzá a fájlokhoz, hogy Önt külön tájékoztatná róla."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Minden fájlhoz hozzáférhet"</string>
-    <string name="full_screen_intent_title" msgid="1068024949389956404">"Teljes képernyős intentek kezelése"</string>
-    <string name="permit_full_screen_intent" msgid="2251949245519201421">"Az alkalmazások küldhetnek teljes képernyős intenteket"</string>
-    <string name="footer_description_full_screen_intent" msgid="8322826300555418227">"Az alkalmazás küldhet olyan teljes képernyős intent értesítéseket, amelyek a teljes képernyőt lefedik."</string>
+    <string name="full_screen_intent_title" msgid="747270185715224130">"Teljes képernyős értesítések"</string>
+    <string name="permit_full_screen_intent" msgid="9035367640019960861">"Teljes képernyős értesítések engedélyezése ettől az alkalmazástól"</string>
+    <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Teljes képernyős értesítések megjelenítésének engedélyezése az alkalmazásnak, amikor az eszköz zárolva van. Az alkalmazások ébresztések, bejövő hívások vagy más sürgős értesítések kiemelésére használhatják ezt a funkciót."</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"Médiakezelő alkalmazások"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Az alkalmazás kezelheti a médiafájlokat"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"Ha engedélyezte, akkor ez az alkalmazás anélkül módosíthatja vagy törölheti a más alkalmazásokkal létrehozott médiafájlokat, hogy Önt megkérdezné róla. Az alkalmazások csak engedéllyel férhetnek hozzá a fájlokhoz és a médiatartalmakhoz."</string>
@@ -3714,15 +3800,19 @@
     <string name="data_saver_title" msgid="2593804270788863815">"Adatforgalom-csökkentő"</string>
     <string name="unrestricted_data_saver" msgid="7922563266857367495">"Korlátlan adat"</string>
     <string name="restrict_background_blocklisted" msgid="2308345280442438232">"Háttéradatok kikapcsolva"</string>
+    <string name="data_saver_on" msgid="7848893946018448793">"Be"</string>
+    <string name="data_saver_off" msgid="5891210864117269045">"Ki"</string>
     <string name="data_saver_switch_title" msgid="7111538580123722959">"Adatforgalom-csökkentő használata"</string>
     <string name="unrestricted_app_title" msgid="7117585996574329284">"Korlátlan adathasználat"</string>
     <string name="unrestricted_app_summary" msgid="282698963532000403">"Adatforgalom-csökkentővel korlátlan adathozzáférés"</string>
     <string name="home_app" msgid="6056850504746902747">"Kezdőalkalmazás"</string>
     <string name="suggestion_additional_fingerprints" msgid="4726777300101156208">"Másik ujjlenyomat megadása"</string>
     <string name="suggestion_additional_fingerprints_summary" msgid="2825364645039666674">"Feloldás egy másik ujjal"</string>
+    <string name="battery_saver_on_summary" msgid="4605146593966255848">"Be"</string>
     <string name="battery_saver_off_scheduled_summary" msgid="2193875981740829819">"<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>-nál kapcsol be"</string>
-    <string name="app_battery_usage_title" msgid="346558380609793334">"Alkalmazás akkumulátorhasználata"</string>
-    <string name="app_battery_usage_summary" msgid="6349965904306339539">"Akkumulátorhasználat beállítása az alkalmazásokhoz"</string>
+    <string name="battery_saver_off_summary" msgid="4411561435493109261">"Ki"</string>
+    <string name="app_battery_usage_title" msgid="346558380609793334">"Alkalmazás akkuhasználata"</string>
+    <string name="app_battery_usage_summary" msgid="6349965904306339539">"Akkuhasználat beállítása az alkalmazásokhoz"</string>
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Korlátlan"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Optimalizált"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"Korlátozott"</string>
@@ -3769,7 +3859,7 @@
     <string name="long_background_tasks_title" msgid="3272230637974707490">"Hosszan futó háttérfeladatok"</string>
     <string name="long_background_tasks_footer_title" msgid="9117342254914743097">"Engedélyezheti, hogy ez az alkalmazás háttérben, hosszan futó feladatokat futtasson. Az alkalmazás ekkor olyan feladatokat futtathat, melyek futása néhány percnél hosszabb ideig tarthat (ilyen például a le- és feltöltés). \n\nAz engedély elutasításával a rendszer korlátozza majd annak időtartamát, hogy az alkalmazás mennyi ideig végezhet ilyen feladatokat a háttérben."</string>
     <string name="keywords_long_background_tasks" msgid="5788956269136054574">"hosszan futó feladatok, adatátvitel, háttérben futó feladatok"</string>
-    <string name="reset_shortcut_manager_throttling" msgid="2183940254903144298">"Visszaállítja a ShortcutManager gyakoriságkorlátozását"</string>
+    <string name="reset_shortcut_manager_throttling" msgid="2183940254903144298">"ShortcutManager gyakoriságkorlátozásának visszaállítása"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="8949943009096885470">"A ShortcutManager gyakoriságkorlátozása visszaállítva"</string>
     <string name="notification_suggestion_title" msgid="6309263655965785411">"A lezárási képernyő adatainak kezelése"</string>
     <string name="notification_suggestion_summary" msgid="7615611244249276113">"Értesítéstartalom megjelenítése vagy elrejtése"</string>
@@ -3778,6 +3868,7 @@
     <string name="premium_sms_none" msgid="8737045049886416739">"Egy telepített alkalmazás sem kért hozzáférést emelt díjas SMS küldéséhez"</string>
     <string name="premium_sms_warning" msgid="2192300872411073324">"A Prémium sms-ek használata pénzbe kerülhet Önnek, és a szolgáltató által kiállított számlák végösszegét növeli. Ha engedélyt ad valamelyik alkalmazásnak, akkor azzal lehetősége lesz prémium sms-eket küldeni."</string>
     <string name="premium_sms_access" msgid="5605970342699013212">"Emelt díjas SMS küldése"</string>
+    <string name="bluetooth_disabled" msgid="835838280837359514">"Kikapcsolva"</string>
     <string name="bluetooth_connected_summary" msgid="8043167194934315712">"<xliff:g id="ID_1">%1$s</xliff:g> – csatlakoztatva"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="2294954614327771844">"Több eszközhöz csatlakozik"</string>
     <string name="demo_mode" msgid="6566167465451386728">"A rendszer kezelőfelületének demómódja"</string>
@@ -3798,6 +3889,7 @@
     <string name="managed_profile_contact_search_summary" msgid="4974727886709219105">"A rendszergazda láthatja a kereséseit és a bejövő hívásait"</string>
     <string name="cross_profile_calendar_title" msgid="7570277841490216947">"Profilokat átfogó naptár"</string>
     <string name="cross_profile_calendar_summary" msgid="8856185206722860069">"Munkaesemények megjelenítése a személyes naptárban"</string>
+    <string name="managed_profile_settings_footer" msgid="996500759305118103">"Amikor a munkahelyi alkalmazások ki vannak kapcsolva, akkor szüneteltetve vannak, nem nyithatók meg, és nem küldhetnek értesítéseket."</string>
     <string name="automatic_storage_manager_settings" msgid="519158151463974656">"Tárhely kezelése"</string>
     <string name="automatic_storage_manager_text" msgid="6900593059927987273">"A tárhelykezelő tárhely felszabadítása érdekében eltávolítja az eszközről azokat a fotókat és videókat, amelyekről már készült biztonsági másolat."</string>
     <string name="automatic_storage_manager_days_title" msgid="5077286114860539367">"Fotók és videók eltávolítása"</string>
@@ -3819,9 +3911,9 @@
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"Visszaugrás, Kezdőképernyő és alkalmazások közötti váltás a képernyő alján található gombokkal."</string>
     <string name="keywords_system_navigation" msgid="3131782378486554934">"rendszernavigáció, kétgombos navigáció, háromgombos navigáció, navigáció kézmozdulatokkal, csúsztatás"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Digitális asszisztens"</string>
-    <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Csúsztassa ujját az asszisztens megnyitásához"</string>
+    <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Asszisztens megnyitása csúsztatással"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"Csúsztassa ujját felfelé valamelyik alsó sarokból a digitális asszisztens megnyitásához."</string>
-    <string name="assistant_long_press_home_gesture_title" msgid="4865972278738178753">"Tartsa nyomva a Kezdőképernyő gombot a Segéd megnyitásához"</string>
+    <string name="assistant_long_press_home_gesture_title" msgid="4865972278738178753">"Segéd megnyitása a Kezdőképernyő gomb nyomva tartásával"</string>
     <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"Tartsa lenyomva a Kezdőképernyő gombot a digitális asszisztens megnyitásához."</string>
     <string name="low_label" msgid="6525629096999711220">"Alacsony"</string>
     <string name="high_label" msgid="357503396626018487">"Magas"</string>
@@ -3861,6 +3953,8 @@
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"Értesítések ujjlenyomattal"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"Ujjlenyomat csúsztatása"</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="2956636269742745449">"Értesítések gyors megtekintése"</string>
+    <string name="gesture_setting_on" msgid="3223448394997988591">"Bekapcsolva"</string>
+    <string name="gesture_setting_off" msgid="3444029475726294919">"Kikapcsolva"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="65713754674288193">"A rendszerbetöltő már fel van oldva"</string>
     <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="7425519481227423860">"Csatlakozzon az internethez, vagy keresse fel szolgáltatóját"</string>
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="168124660162907358">"A nem kártyafüggetlen eszközökön nem áll rendelkezésre"</string>
@@ -3943,6 +4037,7 @@
     <string name="financed_privacy_fully_paid_category" msgid="9221763928564246923">"A teljes összeg kifizetése után:"</string>
     <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"A rendszer minden korlátozást megszüntet az eszközön"</string>
     <string name="financed_privacy_uninstall_creditor_app" msgid="6339004120497310705">"Eltávolíthatja a hitelezői alkalmazást"</string>
+    <string name="financed_device_info" msgid="3871860346697308342">"Információk a finanszírozott eszközről"</string>
     <string name="default_camera_app_title" msgid="6546248868519965998">"{count,plural, =1{Kameraalkalmazás}other{Kameraalkalmazások}}"</string>
     <string name="default_calendar_app_title" msgid="1870095225089706093">"Naptáralkalmazás"</string>
     <string name="default_contacts_app_title" msgid="7740028900741944569">"Címtáralkalmazás"</string>
@@ -3977,15 +4072,21 @@
     <string name="autofill_app" msgid="7595308061826307921">"Automatikus kitöltés"</string>
     <string name="default_autofill_app" msgid="372234803718251606">"Alapértelmezett automatikus kitöltés"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"Jelszavak"</string>
-    <string name="credman_credentials" msgid="5937331545565783811">"Jelszókezelési és személyazonosítási szolgáltatások"</string>
+    <string name="credman_chosen_app_title" msgid="4547405511458518096">"Jelszavak, azonosítókulcsok és adatszolgáltatások"</string>
+    <string name="credman_credentials" msgid="4931371941253324143">"További szolgáltatók"</string>
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# jelszó}other{# jelszó}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"automatikus, kitöltés, automatikus kitöltés, jelszó"</string>
-    <string name="credman_keywords" msgid="7236954350284379264">"hitelesítési adatok, azonosítókulcs, jelszó"</string>
+    <string name="credman_keywords" msgid="8305600680836806170">"adat, azonosítókulcs, jelszó"</string>
+    <string name="credman_autofill_keywords" msgid="701180623776848914">"automatikus, kitöltés, automatikus kitöltés, adatok, azonosítókulcs, jelszó"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Győződjön meg arról, hogy az alkalmazás megbízható.&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; A(z) &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; az Ön képernyőjén szereplő információk alapján határozza meg, hogy mit lehet automatikusan kitölteni."</string>
+    <string name="credman_autofill_confirmation_message" msgid="4951846866327737417">"&lt;b&gt;Használja a(z) &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; alkalmazást?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; A(z) &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; felhasználja az Ön képernyőjén megjelenő információkat az automatikusan kitölthető elemek meghatározásához. Az új jelszavak, azonosítókulcsok és egyéb adatok mostantól ide lesznek mentve."</string>
+    <string name="credman_picker_title" msgid="2642776965060619988">"Jelszavak, azonosítókulcsok és adatszolgáltatások"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Kikapcsolja a következőt: %1$s?"</string>
-    <string name="credman_confirmation_message" msgid="1485617504425237430">"A mentett adatokat (például címeket és fizetési módokat) a rendszer nem tölti be bejelentkezéskor. A mentett adatok folyamatos betöltéséhez állítson be alapértelmezett automatikus kitöltést."</string>
-    <string name="credman_error_message_title" msgid="5108868200002966901">"Jelszókezelési és személyazonosítási szolgáltatások korlátja"</string>
-    <string name="credman_error_message" msgid="4058425433345908579">"Egyszerre legfeljebb öt automatikus kitöltési és jelszókezelési szolgáltatás lehet aktív eszközén. További szolgáltatások hozzáadásához kapcsoljon ki egyet."</string>
+    <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Kikapcsolja a szolgáltatást?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; A mentett adatokat, például jelszavakat, azonosítókulcsokat, fizetési módokat és egyéb információkat a rendszer nem fogja kitölteni, amikor be van jelentkezve. A mentett adatok használatához válasszon egy jelszót, azonosítókulcsot vagy adatszolgáltatást."</string>
+    <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"Használni szeretné a következőt: %1$s?"</string>
+    <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"A(z) %1$s felhasználja az Ön képernyőjén megjelenő információkat az automatikusan kitölthető elemek meghatározásához."</string>
+    <string name="credman_error_message_title" msgid="4741457523969373713">"Jelszavak, azonosítókulcsok és adatszolgáltatások korlátja"</string>
+    <string name="credman_error_message" msgid="6793314648458925172">"Egyszerre legfeljebb öt aktív jelszava, azonosítókulcsa és adatszolgáltatása lehet. Továbbiak hozzáadásához kapcsolja ki valamelyik szolgáltatást."</string>
     <string name="credman_confirmation_message_positive_button" msgid="2812613187691345361">"Kikapcsolás"</string>
     <string name="debug_autofill_category" msgid="5998163555428196185">"Automatikus kitöltés"</string>
     <string name="autofill_logging_level_title" msgid="3733958845861098307">"Naplózási szint"</string>
@@ -3997,7 +4098,7 @@
     <string name="location_indicator_settings_title" msgid="6655916258720093451">"Helyadathasználat jelzése az állapotsoron"</string>
     <string name="location_indicator_settings_description" msgid="2888022085372804021">"Megjelenítés minden helyadathasználat esetén (pl. hálózat és kapcsolódás)"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"Teljes GNSS-mérés indítása"</string>
-    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Az összes GNSS-műhold és -frekvencia nyomon követése aktívciklus-szabályozás nélkül"</string>
+    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Az összes GNSS-konstelláció és -frekvencia nyomon követése aktívciklus-szabályozás nélkül"</string>
     <string name="input_method_category" msgid="2252659253631639005">"Beviteli mód"</string>
     <string name="stylus_handwriting" msgid="2154591374132794563">"Érintőceruzás kézírás"</string>
     <string name="stylus_handwriting_summary" msgid="6333425895172696950">"Ha engedélyezve van, az aktuális beviteli mód fogadja az érintőceruza MotionEvent-eseményeit az aktív szövegszerkesztő ablakban."</string>
@@ -4011,7 +4112,7 @@
     <string name="zen_suggestion_summary" msgid="1984990920503217">"Az összpontosításhoz szüneteltetheti az értesítéseket"</string>
     <string name="disabled_feature" msgid="7151433782819744211">"A funkció nem áll rendelkezésre"</string>
     <string name="disabled_feature_reason_slow_down_phone" msgid="5743569256308510404">"A rendszer kikapcsolta ezt a funkciót, mert lelassítja a telefont"</string>
-    <string name="show_first_crash_dialog" msgid="1696584857732637389">"Összeomlási párbeszédablak megjelenítése minden alkalommal"</string>
+    <string name="show_first_crash_dialog" msgid="1696584857732637389">"Mindig jelenjen meg összeomlási párbeszédablak"</string>
     <string name="show_first_crash_dialog_summary" msgid="4692334286984681111">"Mindig megjeleníti a párbeszédablakot, amikor valamelyik alkalmazás összeomlik"</string>
     <string name="angle_enabled_app" msgid="6044941043384239076">"ANGLE-kompatibilis alkalmazás kiválasztása"</string>
     <string name="angle_enabled_app_not_set" msgid="4472572224881726067">"Nincs beállítva ANGLE-kompatibilis alkalmazás"</string>
@@ -4032,6 +4133,9 @@
     <!-- no translation found for graphics_driver_app_preference_values:1 (485288770206606512) -->
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
+    <string name="enable_angle_as_system_driver" msgid="3985105681812713612">"Az ANGLE engedélyezése"</string>
+    <string name="enable_angle_as_system_driver_summary" msgid="4173041926052925436">"Az ANGLE engedélyezése a rendszer OpenGL ES illesztőprogramjaként"</string>
+    <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"Újraindítás szükséges a rendszer OpenGL ES illesztőprogramjának módosításához"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Az alkalmazás kompatibilitási változtatásai"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Az alkalmazás kompatibilitási változtatásainak be- és kikapcsolása"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Alapértelmezett engedélyezett változtatások"</string>
@@ -4048,9 +4152,9 @@
     <string name="change_wifi_state_title" msgid="5629648102837821525">"Wi-Fi-vezérlés"</string>
     <string name="change_wifi_state_app_detail_switch" msgid="1385358508267180745">"A Wi-Fi vezérlésének engedélyezése az alkalmazás számára"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"A Wi-Fi be- és kikapcsolásának, a Wi-Fi-hálózatok keresésének és a hozzájuk való kapcsolódásnak, hálózatok hozzáadásának és eltávolításának, illetve csak helyi hotspot indításának engedélyezése az alkalmazás számára"</string>
-    <string name="change_nfc_tag_apps_title" msgid="8720243766338657008">"Indítás NFC-címkével"</string>
+    <string name="change_nfc_tag_apps_title" msgid="91514009058149617">"Indítás NFC-n keresztül"</string>
     <string name="change_nfc_tag_apps_detail_switch" msgid="240286205725043561">"Indítás engedélyezése NFC-címke beolvasásakor"</string>
-    <string name="change_nfc_tag_apps_detail_summary" msgid="7083666814715607078">"NFC-címke beolvasásakor ez az alkalmazás elindulhat.\nHa ez az engedély be van kapcsolva, az alkalmazást ki lehet választani címke észlelésekor."</string>
+    <string name="change_nfc_tag_apps_detail_summary" msgid="3338220223868942195">"NFC-címke beolvasásakor ez az alkalmazás elindulhat.\nHa ez az engedély be van kapcsolva, az alkalmazást ki lehet választani címke észlelésekor."</string>
     <string name="media_output_title" msgid="8283629315159510680">"Média lejátszása:"</string>
     <string name="media_output_label_title" msgid="4139048973886819148">"<xliff:g id="LABEL">%s</xliff:g> lejátszása itt:"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"Ez az eszköz"</string>
@@ -4150,6 +4254,7 @@
     <string name="mobile_network_sim_color_label" msgid="5293944087609632340">"Szín (kompatibilis alkalmazásokban)"</string>
     <string name="mobile_network_sim_name_rename" msgid="5967588549571582924">"Mentés"</string>
     <string name="mobile_network_use_sim_on" msgid="7298332437547707908">"SIM-kártya használata"</string>
+    <string name="mobile_network_use_sim_off" msgid="6303281166199670639">"Ki"</string>
     <string name="mobile_network_disable_sim_explanation" msgid="2851862257846773796">"A SIM letiltásához távolítsa el a kártyát az eszközből"</string>
     <string name="mobile_network_tap_to_activate" msgid="4139979375717958102">"Koppintson a következő aktiválásához: <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="mobile_network_erase_sim" msgid="4629071168032714930">"SIM törlése"</string>
@@ -4272,28 +4377,17 @@
     <string name="content_capture" msgid="868372905432812238">"Alkalmazástartalom"</string>
     <string name="content_capture_summary" msgid="49720773699715531">"Engedélyezi, hogy az alkalmazások tartalmakat küldjenek az Android rendszernek"</string>
     <string name="capture_system_heap_dump_title" msgid="9210974110606886455">"A rendszer memória-pillanatfelvételeinek rögzítése"</string>
-    <!-- no translation found for development_memtag_page_title (3546667618748029188) -->
-    <skip />
-    <!-- no translation found for development_memtag_intro (8032596625527637164) -->
-    <skip />
-    <!-- no translation found for development_memtag_footer (5681925148773626562) -->
-    <skip />
-    <!-- no translation found for development_memtag_learn_more (8961984806973926704) -->
-    <skip />
-    <!-- no translation found for development_memtag_toggle (2474420239518386894) -->
-    <skip />
-    <!-- no translation found for development_memtag_reboot_message_on (8100075676107327847) -->
-    <skip />
-    <!-- no translation found for development_memtag_reboot_message_off (3703925647922079456) -->
-    <skip />
-    <!-- no translation found for reboot_with_mte_title (2320125810211279) -->
-    <skip />
-    <!-- no translation found for reboot_with_mte_message (1232881567956207641) -->
-    <skip />
-    <!-- no translation found for reboot_with_mte_summary (3896537791216432882) -->
-    <skip />
-    <!-- no translation found for reboot_with_mte_already_enabled (4439168867613407167) -->
-    <skip />
+    <string name="development_memtag_page_title" msgid="3546667618748029188">"Memory Tagging Extension"</string>
+    <string name="development_memtag_intro" msgid="8032596625527637164">"A Memory Tagging Extension (MTE) segítségével könnyebben találhatja meg a memóriabiztonsági problémákat az alkalmazásában, és biztonságosabbá teheti az alkalmazásában lévő natív kódot."</string>
+    <string name="development_memtag_footer" msgid="5681925148773626562">"Az MTE bekapcsolása lassíthatja az eszköz teljesítményét."</string>
+    <string name="development_memtag_learn_more" msgid="8961984806973926704">"További információ az MTE-ről"</string>
+    <string name="development_memtag_toggle" msgid="2474420239518386894">"Az MTE bekapcsolása, amíg ki nem kapcsolja"</string>
+    <string name="development_memtag_reboot_message_on" msgid="8100075676107327847">"Az MTE bekapcsolásához újra kell indítania eszközét."</string>
+    <string name="development_memtag_reboot_message_off" msgid="3703925647922079456">"Az MTE kikapcsolásához újra kell indítania eszközét."</string>
+    <string name="reboot_with_mte_title" msgid="2320125810211279">"MTE engedélyezése egyetlen munkamenetnél"</string>
+    <string name="reboot_with_mte_message" msgid="1232881567956207641">"A rendszer újraindul, és engedélyezi a Memory Tagging Extension (MTE) bővítménnyel való kísérletek végrehajtását. Az MTE negatívan hathat a rendszer teljesítményére és stabilitására. A következő újraindításnál alaphelyzetbe áll."</string>
+    <string name="reboot_with_mte_summary" msgid="3896537791216432882">"Újraindítás egyetlen munkamenetre bekapcsolt MTE-vel"</string>
+    <string name="reboot_with_mte_already_enabled" msgid="4439168867613407167">"Az MTE már be van kapcsolva"</string>
     <string name="capturing_system_heap_dump_message" msgid="8410503247477360622">"A rendszer memória-pillanatfelvételének rögzítése…"</string>
     <string name="error_capturing_system_heap_dump_message" msgid="2352983250048200052">"Nem sikerült a rendszer memória-pillanatfelvételének rögzítése"</string>
     <string name="automatic_system_heap_dump_title" msgid="4093306504711109479">"A rendszer memória-pillanatfelvételeinek automatikus rögzítése"</string>
@@ -4340,9 +4434,8 @@
     <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1856477548806618829">"QR-kód-szkennelő megjelenítése"</string>
     <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"A QR-kód-szkennelőhöz a lezárási képernyőn való hozzáférés engedélyezése"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Eszközvezérlők megjelenítése"</string>
-    <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"Külső eszközök vezérlőelemeinek megjelenítése a lezárási képernyőn"</string>
-    <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"Vezérlés zárolt eszközről"</string>
-    <string name="lockscreen_trivial_controls_summary" msgid="680581904143387225">"Úgy is vezérelheti a külső eszközöket, hogy nem kell feloldania a telefonját vagy táblagépét, amennyiben ezt engedélyezi az eszközvezérlő alkalmazás"</string>
+    <string name="lockscreen_privacy_controls_summary" msgid="7522918441738915364">"A lezárási képernyőről"</string>
+    <string name="lockscreen_trivial_controls_setting_toggle" msgid="2174300719855112358">"Eszközvezérlők használata"</string>
     <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"A használatához előbb kapcsolja be az „Eszközvezérlők megjelenítése” beállítást"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Kétsoros óra megjelenítése, amikor rendelkezésre áll"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"Kétsoros óra"</string>
@@ -4393,7 +4486,7 @@
     <string name="reset_your_internet_title" msgid="4856899004343241310">"Biztosan visszaállítja az internetkapcsolatot?"</string>
     <string name="resetting_internet_text" msgid="6696779371800051806">"Internetkapcsolat visszaállítása…"</string>
     <string name="fix_connectivity" msgid="2781433603228089501">"Csatlakozás javítása"</string>
-    <string name="networks_available" msgid="3299512933684383474">"Rendelkezésre álló hálózatok"</string>
+    <string name="networks_available" msgid="3299512933684383474">"Van elérhető hálózat"</string>
     <string name="to_switch_networks_disconnect_ethernet" msgid="6615374552827587197">"Hálózatváltáshoz válassza le az ethernetet"</string>
     <string name="carrier_wifi_offload_title" msgid="7263365988016247722">"W+-kapcsolatok"</string>
     <string name="carrier_wifi_offload_summary" msgid="2980563718888371142">"Engedélyezi a Google Fi szolgáltatásnak W+-hálózatok használatát a sebesség és lefedettség növeléséhez"</string>
@@ -4412,7 +4505,7 @@
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> (<xliff:g id="NETWORKMODE">%2$s</xliff:g>)"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Csatlakozva"</string>
     <string name="mobile_data_temp_connection_active" msgid="3430470299756236413">"Ideiglenesen csatlakoztatva"</string>
-    <string name="mobile_data_temp_using" msgid="5211002380149434155">"Ideiglenesen a következő használata: <xliff:g id="SUBNAME">%1$s</xliff:g>"</string>
+    <string name="mobile_data_temp_using" msgid="5211002380149434155">"Ideiglenes használatban: <xliff:g id="SUBNAME">%1$s</xliff:g>"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"Nincs kapcsolat"</string>
     <string name="mobile_data_off_summary" msgid="1884248776904165539">"Nincs automatikus mobiladat-kapcsolat"</string>
     <string name="mobile_data_disable_title" msgid="8438714772256088913">"Kikapcsolja a mobiladatokat?"</string>
@@ -4475,6 +4568,7 @@
     <string name="uwb_settings_title" msgid="8578498712312002231">"Ultraszélessáv (UWB)"</string>
     <string name="uwb_settings_summary" msgid="3074271396764672268">"Segít az UWB technológiát használó közeli eszközök relatív pozíciójának a meghatározásában"</string>
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Kapcsolja ki a Repülős üzemmódot az UWB használatához"</string>
+    <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"Aktuális tartózkodási helyén nem áll rendelkezésre az UWB szolgáltatás"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"Hozzáférés a kamerához"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Hozzáférés a mikrofonhoz"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"Alkalmazásoknál és szolgáltatásoknál"</string>
@@ -4493,6 +4587,8 @@
     <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"Ne csatlakozzon"</string>
     <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"Csatlakozás"</string>
     <string name="tare_settings" msgid="3788654800004869077">"TARE-beállítások"</string>
+    <string name="tare_on" msgid="2386073225978684535">"Be"</string>
+    <string name="tare_off" msgid="6305694402929756726">"Ki"</string>
     <string name="tare_revert" msgid="3855325741125236638">"Az alapértelmezett beállítások visszaállítása"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"Alapbeállítások visszaállítva."</string>
     <string name="tare_max_satiated_balance" msgid="3914973999573150340">"Maximális telítettségi egyenleg"</string>
@@ -4540,6 +4636,8 @@
     <string name="dream_picker_category" msgid="7726447836872744867">"Képernyővédő kiválasztása"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"További információk megjelenítése"</string>
     <string name="dream_complications_toggle_summary" msgid="8088911054987524904">"A pontos idő, az időjárás vagy más információk megjelenítése a képernyőkímélőn"</string>
+    <string name="dream_home_controls_toggle_title" msgid="706799741564479248">"Otthonvezérlők megjelenítése"</string>
+    <string name="dream_home_controls_toggle_summary" msgid="4102519907917430579">"Otthonvezérlők megjelenítése a képernyővédőn"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"További beállítások"</string>
     <string name="dream_setup_title" msgid="2458303874255396142">"Képernyővédő kiválasztása"</string>
     <string name="dream_setup_description" msgid="7508547154038580296">"Kiválaszthatja, hogy mi legyen látható a képernyőn, amikor a táblagép dokkolt állapotban van. Előfordulhat, hogy az eszköz több energiát használ, ha a képernyővédő be van kapcsolva."</string>
@@ -4559,6 +4657,8 @@
     <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"Nincs korlát"</string>
     <string name="disable_phantom_process_monitor_title" msgid="8348108346706188771">"Alárendelt folyamatok korlátozásánk kikapcsolása"</string>
     <string name="disable_phantom_process_monitor_summary" msgid="3044464635550256985">"A rendszererőforrások alárendelt alkalmazásfolyamatok általi használatát érintő korlátozások kikapcsolása"</string>
+    <string name="enable_notes_role_title" msgid="7662702013496114763">"Jegyzetek szerepkör engedélyezésének kényszerítése"</string>
+    <string name="enable_notes_role_summary" msgid="136916915155048249">"Engedélyezi a jegyzetelési rendszerintegrációkat a Jegyzetek szerepkörrel. Ha a Jegyzetek szerepkör már engedélyezve van, akkor nem végez műveletet."</string>
     <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Közvetítés"</string>
     <string name="bluetooth_broadcast_dialog_broadcast_app" msgid="1016617579194329005">"<xliff:g id="CURRENTAPP">%1$s</xliff:g> közvetítése"</string>
     <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"Az Ön közelében sugárzott közvetítések meghallgatása"</string>
@@ -4571,6 +4671,7 @@
     <string name="find_broadcast_password_dialog_title" msgid="3176988702535737484">"Jelszó megadása"</string>
     <string name="find_broadcast_password_dialog_connection_error" msgid="47873617983439400">"Nem lehet csatlakozni. Próbálja újra."</string>
     <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"Helytelen jelszó"</string>
+    <string name="find_broadcast_join_broadcast_error" msgid="5486980388774711346">"Nem lehet csatlakozni a közvetítéshez"</string>
     <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"A hallgatás megkezdéséhez igazítsa a QR-kódot az alábbi panel közepére"</string>
     <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"A QR-kód formátuma nem érvényes"</string>
     <string name="convert_to_esim_title" msgid="71037864129009206">"Konvertálás eSIM-mé"</string>
@@ -4583,56 +4684,37 @@
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Az elmúlt # hónapban telepített alkalmazások}other{Az elmúlt # hónapban telepített alkalmazások}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Az alkalmazások # hónapnál régebben lettek telepítve}other{Az alkalmazások # hónapnál régebben lettek telepítve}}"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Ujjlenyomat-érzékelő"</string>
-    <!-- no translation found for flash_notifications_title (4490438861180492311) -->
-    <skip />
-    <!-- no translation found for flash_notifications_summary_off (6056282996770691461) -->
-    <skip />
-    <!-- no translation found for flash_notifications_summary_on_camera (455038312752009971) -->
-    <skip />
-    <!-- no translation found for flash_notifications_summary_on_screen (7321838939240499267) -->
-    <skip />
-    <!-- no translation found for flash_notifications_summary_on_camera_and_screen (6515622987118268649) -->
-    <skip />
-    <!-- no translation found for flash_notifications_intro (1506414740603805778) -->
-    <skip />
-    <!-- no translation found for flash_notifications_note (7258551860911169239) -->
-    <skip />
-    <!-- no translation found for flash_notifications_preview (5320176885050440874) -->
-    <skip />
-    <!-- no translation found for camera_flash_notification_title (1605639711485773787) -->
-    <skip />
-    <!-- no translation found for screen_flash_notification_title (8008197872050400734) -->
-    <skip />
-    <!-- no translation found for screen_flash_notification_color_title (7213407653340970790) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_blue (3585766657607931371) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_azure (8691198532944992243) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_cyan (6878780006173747267) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_spring_green (4466548514738457815) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_green (8418019648507964564) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_chartreuse_green (7456381649919010366) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_yellow (7413465411615454556) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_orange (979177126315557656) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_red (8954162219886445491) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_rose (1216848195972231251) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_magenta (7726221666557102155) -->
-    <skip />
-    <!-- no translation found for screen_flash_color_violet (1279950780509029495) -->
-    <skip />
-    <!-- no translation found for color_selector_dialog_done (121253968943363376) -->
-    <skip />
-    <!-- no translation found for color_selector_dialog_cancel (8667350644753900701) -->
-    <skip />
-    <!-- no translation found for dock_multi_instances_not_supported_text (3513493664467667084) -->
-    <skip />
+    <string name="flash_notifications_title" msgid="4490438861180492311">"Villogó értesítések"</string>
+    <string name="flash_notifications_about_title" msgid="9004351252928121214">"A villogó értesítésekről"</string>
+    <string name="flash_notifications_summary_off" msgid="6056282996770691461">"Ki"</string>
+    <string name="flash_notifications_summary_on_camera" msgid="3286405833586333730">"Be / kamera vakuja"</string>
+    <string name="flash_notifications_summary_on_screen" msgid="9040640799633336219">"Be / kijelző felvillanása"</string>
+    <string name="flash_notifications_summary_on_camera_and_screen" msgid="2326268141063768701">"Be / kamera vakuja és kijelző felvillanása"</string>
+    <string name="flash_notifications_intro" msgid="8409873413480928249">"Felvillan a kamera vakuja vagy a kijelző értesítés érkezésekor vagy ébresztés megszólalásakor."</string>
+    <string name="flash_notifications_intro_without_camera_flash" msgid="6297337174487793891">"Értesítés érkezésekor vagy ébresztés megszólalásakor felvillan a képernyő."</string>
+    <string name="flash_notifications_note" msgid="2426125248448055075">"Ha érzékeny a fényre, kellő elővigyázatossággal használja a villogó értesítéseket"</string>
+    <string name="flash_notifications_keywords" msgid="2458759275318514836">"vaku, fény, nagyothalló, halláskárosodás"</string>
+    <string name="flash_notifications_preview" msgid="5320176885050440874">"Előnézet"</string>
+    <string name="camera_flash_notification_title" msgid="2475084876382922732">"Vaku"</string>
+    <string name="screen_flash_notification_title" msgid="3773100725793316708">"Kijelző felvillanása"</string>
+    <string name="screen_flash_notification_color_title" msgid="7213407653340970790">"Kijelző felvillanásának színe"</string>
+    <string name="screen_flash_color_blue" msgid="3585766657607931371">"Kék"</string>
+    <string name="screen_flash_color_azure" msgid="8691198532944992243">"Azúrkék"</string>
+    <string name="screen_flash_color_cyan" msgid="6878780006173747267">"Ciánkék"</string>
+    <string name="screen_flash_color_spring_green" msgid="4466548514738457815">"Tavaszzöld"</string>
+    <string name="screen_flash_color_green" msgid="8418019648507964564">"Zöld"</string>
+    <string name="screen_flash_color_chartreuse_green" msgid="7456381649919010366">"Zöldessárga"</string>
+    <string name="screen_flash_color_yellow" msgid="7413465411615454556">"Sárga"</string>
+    <string name="screen_flash_color_orange" msgid="979177126315557656">"Narancssárga"</string>
+    <string name="screen_flash_color_red" msgid="8954162219886445491">"Piros"</string>
+    <string name="screen_flash_color_rose" msgid="1216848195972231251">"Rózsaszín"</string>
+    <string name="screen_flash_color_magenta" msgid="7726221666557102155">"Magenta"</string>
+    <string name="screen_flash_color_violet" msgid="1279950780509029495">"Ibolyaszín"</string>
+    <string name="color_selector_dialog_done" msgid="121253968943363376">"Kész"</string>
+    <string name="color_selector_dialog_cancel" msgid="8667350644753900701">"Mégse"</string>
+    <string name="contrast_title" msgid="6885768151336508075">"Kontraszt"</string>
+    <string name="contrast_standard" msgid="1097297089917185235">"Normál"</string>
+    <string name="contrast_medium" msgid="384414510709285811">"Közepes"</string>
+    <string name="contrast_high" msgid="3988567609694797696">"Nagy"</string>
+    <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"Ez az alkalmazás csak egy ablakban nyitható meg"</string>
 </resources>

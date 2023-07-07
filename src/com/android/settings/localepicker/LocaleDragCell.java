@@ -63,13 +63,7 @@ class LocaleDragCell extends RelativeLayout {
 
     public void setShowCheckbox(boolean showCheckbox) {
         // "Opposite" visibility for label / checkbox
-        if (showCheckbox) {
-            mCheckbox.setVisibility(VISIBLE);
-            mLabel.setVisibility(INVISIBLE);
-        } else {
-            mCheckbox.setVisibility(INVISIBLE);
-            mLabel.setVisibility(VISIBLE);
-        }
+        mCheckbox.setVisibility(showCheckbox ? VISIBLE : GONE);
         invalidate();
         requestLayout();
     }
@@ -91,9 +85,7 @@ class LocaleDragCell extends RelativeLayout {
 
     public void setLabelAndDescription(String labelText, String description) {
         mLabel.setText(labelText);
-        mCheckbox.setText(labelText);
         mLabel.setContentDescription(description);
-        mCheckbox.setContentDescription(description);
         invalidate();
     }
 
@@ -112,6 +104,10 @@ class LocaleDragCell extends RelativeLayout {
 
     public ImageView getDragHandle() {
         return mDragHandle;
+    }
+
+    public TextView getLabelView() {
+        return mLabel;
     }
 
     public CheckBox getCheckbox() {

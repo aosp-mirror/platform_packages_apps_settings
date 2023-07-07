@@ -123,7 +123,6 @@ public class TetherSettings extends RestrictedSettingsFragment
     private boolean mMassStorageActive;
 
     private boolean mBluetoothEnableForTether;
-    private boolean mUnavailable;
 
     private DataSaverBackend mDataSaverBackend;
     private boolean mDataSaverEnabled;
@@ -147,18 +146,12 @@ public class TetherSettings extends RestrictedSettingsFragment
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        TetheringManagerModel model = new ViewModelProvider(this).get(TetheringManagerModel.class);
-        mWifiTetherPreferenceController =
-                new WifiTetherPreferenceController(context, getSettingsLifecycle(), model);
-        mTm = model.getTetheringManager();
-        model.getTetheredInterfaces().observe(this, this::onTetheredInterfacesChanged);
-    }
-
-    @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        setIfOnlyAvailableForAdmins(true);
+        if (isUiRestricted()) {
+            return;
+        }
 
         addPreferencesFromResource(R.xml.tether_prefs);
         mContext = getContext();
@@ -166,12 +159,8 @@ public class TetherSettings extends RestrictedSettingsFragment
         mDataSaverEnabled = mDataSaverBackend.isDataSaverEnabled();
         mDataSaverFooter = findPreference(KEY_DATA_SAVER_FOOTER);
 
-        setIfOnlyAvailableForAdmins(true);
-        if (isUiRestricted()) {
-            mUnavailable = true;
-            getPreferenceScreen().removeAll();
-            return;
-        }
+        setupTetherPreference();
+        setupViewModel();
 
         final Activity activity = getActivity();
         BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
@@ -186,7 +175,6 @@ public class TetherSettings extends RestrictedSettingsFragment
                     new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED));
         }
 
-        setupTetherPreference();
         setTopIntroPreferenceTitle();
 
         mDataSaverBackend.addListener(this);
@@ -224,8 +212,22 @@ public class TetherSettings extends RestrictedSettingsFragment
         onDataSaverChanged(mDataSaverBackend.isDataSaverEnabled());
     }
 
+    @VisibleForTesting
+    void setupViewModel() {
+        TetheringManagerModel model = new ViewModelProvider(this).get(TetheringManagerModel.class);
+        mWifiTetherPreferenceController =
+                new WifiTetherPreferenceController(getContext(), getSettingsLifecycle(), model);
+        mTm = model.getTetheringManager();
+        model.getTetheredInterfaces().observe(this, this::onTetheredInterfacesChanged);
+    }
+
     @Override
     public void onDestroy() {
+        if (isUiRestricted()) {
+            super.onDestroy();
+            return;
+        }
+
         mDataSaverBackend.remListener(this);
 
         BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
@@ -360,7 +362,7 @@ public class TetherSettings extends RestrictedSettingsFragment
     public void onStart() {
         super.onStart();
 
-        if (mUnavailable) {
+        if (isUiRestricted()) {
             if (!isUiRestrictedByOnlyAdmin()) {
                 getEmptyTextView().setText(R.string.tethering_settings_not_available);
             }
@@ -388,7 +390,7 @@ public class TetherSettings extends RestrictedSettingsFragment
     public void onStop() {
         super.onStop();
 
-        if (mUnavailable) {
+        if (isUiRestricted()) {
             return;
         }
         getActivity().unregisterReceiver(mTetherChangeReceiver);
@@ -607,6 +609,7 @@ public class TetherSettings extends RestrictedSettingsFragment
                 public void onServiceConnected(int profile, BluetoothProfile proxy) {
                     if (mBluetoothPan.get() == null) {
                         mBluetoothPan.set((BluetoothPan) proxy);
+                        updateBluetoothState();
                     }
                 }
 

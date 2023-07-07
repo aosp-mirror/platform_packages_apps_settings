@@ -41,6 +41,7 @@ object AppLanguagesPageProvider : SettingsPageProvider {
         AppListPage(
             title = stringResource(R.string.app_locales_picker_menu_title),
             listModel = rememberContext(::AppLanguagesListModel),
+            noMoreOptions = true,
             header = {
                 Box(Modifier.padding(SettingsDimension.itemPadding)) {
                     SettingsBody(stringResource(R.string.desc_app_locale_selection_supported))

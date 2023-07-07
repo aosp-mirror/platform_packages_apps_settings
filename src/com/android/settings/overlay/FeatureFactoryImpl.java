@@ -47,6 +47,8 @@ import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProviderImpl;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProviderImpl;
+import com.android.settings.deviceinfo.hardwareinfo.HardwareInfoFeatureProvider;
+import com.android.settings.deviceinfo.hardwareinfo.HardwareInfoFeatureProviderImpl;
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProviderImpl;
 import com.android.settings.fuelgauge.BatterySettingsFeatureProvider;
@@ -77,6 +79,7 @@ import com.android.settings.vpn2.AdvancedVpnFeatureProvider;
 import com.android.settings.vpn2.AdvancedVpnFeatureProviderImpl;
 import com.android.settings.wifi.WifiTrackerLibProvider;
 import com.android.settings.wifi.WifiTrackerLibProviderImpl;
+import com.android.settings.wifi.factory.WifiFeatureProvider;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 /**
@@ -112,6 +115,12 @@ public class FeatureFactoryImpl extends FeatureFactory {
     private AccessibilitySearchFeatureProvider mAccessibilitySearchFeatureProvider;
     private AccessibilityMetricsFeatureProvider mAccessibilityMetricsFeatureProvider;
     private AdvancedVpnFeatureProvider mAdvancedVpnFeatureProvider;
+    private WifiFeatureProvider mWifiFeatureProvider;
+
+    @Override
+    public HardwareInfoFeatureProvider getHardwareInfoFeatureProvider() {
+        return HardwareInfoFeatureProviderImpl.INSTANCE;
+    }
 
     @Override
     public SupportFeatureProvider getSupportFeatureProvider(Context context) {
@@ -354,5 +363,13 @@ public class FeatureFactoryImpl extends FeatureFactory {
             mAdvancedVpnFeatureProvider = new AdvancedVpnFeatureProviderImpl();
         }
         return mAdvancedVpnFeatureProvider;
+    }
+
+    @Override
+    public WifiFeatureProvider getWifiFeatureProvider() {
+        if (mWifiFeatureProvider == null) {
+            mWifiFeatureProvider = new WifiFeatureProvider(getAppContext());
+        }
+        return mWifiFeatureProvider;
     }
 }

@@ -27,10 +27,8 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.media.AudioManager;
 import android.os.Vibrator;
-import android.provider.DeviceConfig;
 import android.telephony.TelephonyManager;
 
-import com.android.internal.config.sysui.SystemUiDeviceConfigFlags;
 import com.android.settings.testutils.shadow.ShadowDeviceConfig;
 
 import org.junit.Before;
@@ -81,21 +79,11 @@ public class SeparateRingVolumePreferenceControllerTest {
         mController.setAudioHelper(mHelper);
     }
 
-    @Test
-    public void isAvailable_ringNotificationAliased_shouldReturnFalse() {
-        when(mHelper.isSingleVolume()).thenReturn(true);
-        when(mTelephonyManager.isVoiceCapable()).thenReturn(true);
-
-        assertThat(mController.isAvailable()).isFalse();
-    }
-
     /**
      * Maintain that the device does not need to be voice capable to display this slider
      */
     @Test
-    public void isAvailable_ringNotificationSeparated_isNotVoiceCapable_shouldReturnTrue() {
-        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_SYSTEMUI,
-                SystemUiDeviceConfigFlags.VOLUME_SEPARATE_NOTIFICATION, "true", false);
+    public void isAvailable_whenNotVoiceCapable_shouldReturnTrue() {
         when(mHelper.isSingleVolume()).thenReturn(false);
         when(mTelephonyManager.isVoiceCapable()).thenReturn(false);
 

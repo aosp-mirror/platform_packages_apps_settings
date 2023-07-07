@@ -77,7 +77,7 @@ public class LocationTimeZoneDetectionPreferenceController
         boolean isLocationEnabled =
                 timeZoneCapabilitiesAndConfig.getCapabilities().isUseLocationEnabled();
         if (isChecked && !isLocationEnabled) {
-            new LocationToggleDisabledDialogFragment(mContext)
+            new LocationToggleDisabledDialogFragment()
                     .show(mFragment.getFragmentManager(), TAG);
             // Toggle status is not updated.
             return false;

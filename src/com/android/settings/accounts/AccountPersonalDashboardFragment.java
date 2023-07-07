@@ -42,7 +42,7 @@ public class AccountPersonalDashboardFragment extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.ACCOUNT;
+        return SettingsEnums.ACCOUNT_PERSONAL;
     }
 
     @Override
@@ -69,7 +69,16 @@ public class AccountPersonalDashboardFragment extends DashboardFragment {
         if (CredentialManager.isServiceEnabled(context)) {
             CredentialManagerPreferenceController cmpp =
                     use(CredentialManagerPreferenceController.class);
-            cmpp.init(this, getFragmentManager());
+            CredentialManagerPreferenceController.Delegate delegate =
+                    new CredentialManagerPreferenceController.Delegate() {
+                public void setActivityResult(int resultCode) {
+                    getActivity().setResult(resultCode);
+                }
+                public void forceDelegateRefresh() {
+                    forceUpdatePreferences();
+                }
+            };
+            cmpp.init(this, getFragmentManager(), getIntent(), delegate, /*isWorkProfile=*/false);
         } else {
             getSettingsLifecycle().addObserver(use(PasswordsPreferenceController.class));
         }

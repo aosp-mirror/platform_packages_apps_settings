@@ -194,7 +194,7 @@ public class ZenModeSettings extends ZenModeSettingsBase {
                 String description = ZenModeConfig.getDescription(mContext, true, config, false);
 
                 if (description == null) {
-                    return mContext.getString(R.string.on);
+                    return mContext.getString(R.string.zen_mode_sound_summary_on);
                 } else {
                     return mContext.getString(R.string.zen_mode_sound_summary_on_with_info,
                             description);

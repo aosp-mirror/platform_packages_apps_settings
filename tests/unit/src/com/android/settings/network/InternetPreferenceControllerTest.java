@@ -129,6 +129,8 @@ public class InternetPreferenceControllerTest {
 
     private class MockInternetPreferenceController extends
             com.android.settings.network.InternetPreferenceController {
+
+        private int mDefaultDataSubscriptionId;
         public MockInternetPreferenceController(Context context, Lifecycle lifecycle,
                 LifecycleOwner lifecycleOwner) {
             super(context, lifecycle, lifecycleOwner);
@@ -145,18 +147,26 @@ public class InternetPreferenceControllerTest {
             mSubscriptionInfoEntity = list;
         }
 
+        @Override
+        protected int getDefaultDataSubscriptionId() {
+            return mDefaultDataSubscriptionId;
+        }
+
+        public void setDefaultDataSubscriptionId(int subscriptionId) {
+            mDefaultDataSubscriptionId = subscriptionId;
+        }
+
     }
 
     private SubscriptionInfoEntity setupSubscriptionInfoEntity(String subId, int slotId,
             int carrierId, String displayName, String mcc, String mnc, String countryIso,
             int cardId, boolean isVisible, boolean isValid, boolean isActive, boolean isAvailable,
-            boolean isDefaultData, boolean isActiveData) {
+            boolean isActiveData) {
         return new SubscriptionInfoEntity(subId, slotId, carrierId,
                 displayName, displayName, 0, mcc, mnc, countryIso, false, cardId,
                 TelephonyManager.DEFAULT_PORT_INDEX, false, null,
                 SubscriptionManager.SUBSCRIPTION_TYPE_LOCAL_SIM, displayName, isVisible,
-                "1234567890", true, "default", false, isValid, true, isActive, isAvailable, false,
-                false, isDefaultData, false, isActiveData);
+                "1234567890", true, false, isValid, true, isActive, isAvailable, isActiveData);
     }
 
     @Test
@@ -183,7 +193,7 @@ public class InternetPreferenceControllerTest {
         mController.onResume();
         mController.onPause();
 
-        verify(mContext).unregisterReceiver(any(BroadcastReceiver.class));
+        verify(mContext, times(2)).unregisterReceiver(any(BroadcastReceiver.class));
         verify(mConnectivityManager, times(2)).unregisterNetworkCallback(
                 any(ConnectivityManager.NetworkCallback.class));
     }
@@ -218,10 +228,11 @@ public class InternetPreferenceControllerTest {
 
     @Test
     public void updateCellularSummary_getActiveSubscriptionInfo_cbrs() {
+        mController.setDefaultDataSubscriptionId(Integer.parseInt(SUB_ID_2));
         mActiveSubInfo = setupSubscriptionInfoEntity(SUB_ID_1, 1, 1, DISPLAY_NAME_1, SUB_MCC_1,
-                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1, false, true, true, true, false, true);
+                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1, false, true, true, true, true);
         mDefaultDataSubInfo = setupSubscriptionInfoEntity(SUB_ID_2, 1, 1, DISPLAY_NAME_2, SUB_MCC_2,
-                SUB_MNC_2, SUB_COUNTRY_ISO_2, 1, false, true, true, true, true, false);
+                SUB_MNC_2, SUB_COUNTRY_ISO_2, 1, false, true, true, true, false);
         mSubscriptionInfoEntityList.add(mActiveSubInfo);
         mSubscriptionInfoEntityList.add(mDefaultDataSubInfo);
         mController.setSubscriptionInfoList(mSubscriptionInfoEntityList);
@@ -231,7 +242,7 @@ public class InternetPreferenceControllerTest {
         assertThat(mPreference.getSummary()).isEqualTo(DISPLAY_NAME_2);
 
         mActiveSubInfo = setupSubscriptionInfoEntity(SUB_ID_1, 1, 1, DISPLAY_NAME_1, SUB_MCC_1,
-                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1, true, true, true, true, false, true);
+                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1, true, true, true, true, true);
         mSubscriptionInfoEntityList.add(mActiveSubInfo);
         mController.setSubscriptionInfoList(mSubscriptionInfoEntityList);
         mController.onAvailableSubInfoChanged(mSubscriptionInfoEntityList);

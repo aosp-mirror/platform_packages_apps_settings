@@ -32,8 +32,14 @@ public class CommunalPreferenceController extends BasePreferenceController {
 
     @Override
     public int getAvailabilityStatus() {
-        return (mContext.getResources().getBoolean(R.bool.config_show_communal_settings)
-                && Utils.canCurrentUserDream(mContext))
-                ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        return isAvailable(mContext) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+    }
+
+    /**
+     * Returns whether communal preferences are available.
+     */
+    public static boolean isAvailable(Context context) {
+        return context.getResources().getBoolean(R.bool.config_show_communal_settings)
+                && Utils.canCurrentUserDream(context);
     }
 }

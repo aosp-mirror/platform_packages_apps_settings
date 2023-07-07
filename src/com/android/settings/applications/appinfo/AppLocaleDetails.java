@@ -213,7 +213,7 @@ public class AppLocaleDetails extends SettingsPreferenceFragment {
         if (appLocale == null) {
             return context.getString(R.string.preference_of_system_locale_summary);
         } else {
-            return LocaleHelper.getDisplayName(appLocale, appLocale, true);
+            return LocaleHelper.getDisplayName(appLocale.stripExtensions(), appLocale, true);
         }
     }
 }

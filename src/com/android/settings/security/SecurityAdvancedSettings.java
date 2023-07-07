@@ -58,8 +58,10 @@ public class SecurityAdvancedSettings extends DashboardFragment {
                 SafetyCenterUtils.getEnterpriseOverrideStringForSecurityEntries();
         for (int i = 0; i < securityOverrideStrings.size(); i++) {
             EnterpriseOverrideString overrideString = securityOverrideStrings.get(i);
-            replaceEnterpriseStringTitle(overrideString.getPreferenceKey(),
-                    overrideString.getOverrideKey(), overrideString.getResource());
+            replaceEnterpriseStringTitle(
+                    overrideString.getPreferenceKey(),
+                    overrideString.getOverrideKey(),
+                    overrideString.getResource());
         }
     }
 
@@ -77,8 +79,7 @@ public class SecurityAdvancedSettings extends DashboardFragment {
             return CategoryKey.CATEGORY_SECURITY_ADVANCED_SETTINGS;
         } else {
             final SecuritySettingsFeatureProvider securitySettingsFeatureProvider =
-                    FeatureFactory.getFactory(context)
-                            .getSecuritySettingsFeatureProvider();
+                    FeatureFactory.getFactory(context).getSecuritySettingsFeatureProvider();
 
             if (securitySettingsFeatureProvider.hasAlternativeSecuritySettingsFragment()) {
                 return securitySettingsFeatureProvider.getAlternativeAdvancedSettingsCategoryKey();
@@ -103,9 +104,7 @@ public class SecurityAdvancedSettings extends DashboardFragment {
         return buildPreferenceControllers(context, getSettingsLifecycle(), this /* host*/);
     }
 
-    /**
-     * see confirmPatternThenDisableAndClear
-     */
+    /** see confirmPatternThenDisableAndClear */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (use(TrustAgentListPreferenceController.class)
@@ -119,14 +118,12 @@ public class SecurityAdvancedSettings extends DashboardFragment {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
-            Lifecycle lifecycle, DashboardFragment host) {
+    private static List<AbstractPreferenceController> buildPreferenceControllers(
+            Context context, Lifecycle lifecycle, DashboardFragment host) {
         return SafetyCenterUtils.getControllersForAdvancedSecurity(context, lifecycle, host);
     }
 
-    /**
-     * For Search. Please keep it in sync when updating "createPreferenceHierarchy()"
-     */
+    /** For Search. Please keep it in sync when updating "createPreferenceHierarchy()" */
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.security_advanced_settings) {
                 /**
@@ -134,19 +131,26 @@ public class SecurityAdvancedSettings extends DashboardFragment {
                  * page, and we don't want to index these entries.
                  */
                 @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
-                        boolean enabled) {
-                    if (SafetyCenterManagerWrapper.get().isEnabled(context)) {
+                public List<SearchIndexableResource> getXmlResourcesToIndex(
+                        Context context, boolean enabled) {
+                    // NOTE: This check likely should be moved to the super method. This is done
+                    // here to avoid potentially undesired side effects for existing implementors.
+                    if (!isPageSearchEnabled(context)) {
                         return null;
                     }
                     return super.getXmlResourcesToIndex(context, enabled);
                 }
 
                 @Override
-                public List<AbstractPreferenceController> createPreferenceControllers(Context
-                        context) {
-                    return buildPreferenceControllers(context, null /* lifecycle */,
-                            null /* host*/);
+                public List<AbstractPreferenceController> createPreferenceControllers(
+                        Context context) {
+                    return buildPreferenceControllers(
+                            context, null /* lifecycle */, null /* host*/);
+                }
+
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return !SafetyCenterManagerWrapper.get().isEnabled(context);
                 }
             };
 }

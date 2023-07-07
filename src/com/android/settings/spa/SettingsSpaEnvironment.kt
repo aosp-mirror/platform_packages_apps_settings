@@ -17,7 +17,7 @@
 package com.android.settings.spa
 
 import android.content.Context
-import com.android.settings.spa.about.AboutPhonePageProvider
+import android.util.FeatureFlagUtils
 import com.android.settings.spa.app.AllAppListPageProvider
 import com.android.settings.spa.app.AppsMainPageProvider
 import com.android.settings.spa.app.appinfo.AppInfoSettingsProvider
@@ -33,6 +33,7 @@ import com.android.settings.spa.app.specialaccess.PictureInPictureListProvider
 import com.android.settings.spa.app.specialaccess.SpecialAppAccessPageProvider
 import com.android.settings.spa.app.specialaccess.WifiControlAppListProvider
 import com.android.settings.spa.app.specialaccess.UseFullScreenIntentAppListProvider
+import com.android.settings.spa.core.instrumentation.SpaLogProvider
 import com.android.settings.spa.development.UsageStatsPageProvider
 import com.android.settings.spa.home.HomePageProvider
 import com.android.settings.spa.network.NetworkAndInternetPageProvider
@@ -43,6 +44,7 @@ import com.android.settings.spa.system.LanguageAndInputPageProvider
 import com.android.settings.spa.system.SystemMainPageProvider
 import com.android.settingslib.spa.framework.common.SettingsPageProviderRepository
 import com.android.settingslib.spa.framework.common.SpaEnvironment
+import com.android.settingslib.spa.framework.common.SpaLogger
 import com.android.settingslib.spa.framework.common.createSettingsPage
 import com.android.settingslib.spaprivileged.template.app.TogglePermissionAppListProvider
 import com.android.settingslib.spaprivileged.template.app.TogglePermissionAppListTemplate
@@ -82,11 +84,14 @@ open class SettingsSpaEnvironment(context: Context) : SpaEnvironment(context) {
                 BackgroundInstalledAppsPageProvider,
                 CloneAppInfoSettingsProvider,
                 NetworkAndInternetPageProvider,
-                AboutPhonePageProvider,
                 ) + togglePermissionAppListTemplate.createPageProviders(),
             rootPages = listOf(
                 HomePageProvider.createSettingsPage()
             ),
         )
     }
+    override val logger =
+        if (FeatureFlagUtils.isEnabled(context, FeatureFlagUtils.SETTINGS_ENABLE_SPA_METRICS))
+            SpaLogProvider
+        else object: SpaLogger {}
 }

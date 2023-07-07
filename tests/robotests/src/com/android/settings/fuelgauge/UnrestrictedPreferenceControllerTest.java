@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-
 package com.android.settings.fuelgauge;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -53,7 +52,7 @@ public class UnrestrictedPreferenceControllerTest {
 
     @Test
     public void testUpdateState_isValidPackage_prefEnabled() {
-        when(mockBatteryOptimizeUtils.isValidPackageName()).thenReturn(true);
+        when(mockBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()).thenReturn(false);
 
         mController.updateState(mPreference);
 
@@ -62,7 +61,7 @@ public class UnrestrictedPreferenceControllerTest {
 
     @Test
     public void testUpdateState_invalidPackage_prefDisabled() {
-        when(mockBatteryOptimizeUtils.isValidPackageName()).thenReturn(false);
+        when(mockBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()).thenReturn(true);
 
         mController.updateState(mPreference);
 
@@ -71,7 +70,7 @@ public class UnrestrictedPreferenceControllerTest {
 
     @Test
     public void testUpdateState_isSystemOrDefaultAppAndUnrestrictedStates_prefChecked() {
-        when(mockBatteryOptimizeUtils.isValidPackageName()).thenReturn(true);
+        when(mockBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()).thenReturn(false);
         when(mockBatteryOptimizeUtils.isSystemOrDefaultApp()).thenReturn(true);
         when(mockBatteryOptimizeUtils.getAppOptimizationMode()).thenReturn(
                 BatteryOptimizeUtils.MODE_UNRESTRICTED);
@@ -83,7 +82,7 @@ public class UnrestrictedPreferenceControllerTest {
 
     @Test
     public void testUpdateState_isSystemOrDefaultApp_prefUnchecked() {
-        when(mockBatteryOptimizeUtils.isValidPackageName()).thenReturn(true);
+        when(mockBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()).thenReturn(false);
         when(mockBatteryOptimizeUtils.isSystemOrDefaultApp()).thenReturn(true);
 
         mController.updateState(mPreference);
@@ -94,7 +93,7 @@ public class UnrestrictedPreferenceControllerTest {
 
     @Test
     public void testUpdateState_isUnrestrictedStates_prefChecked() {
-        when(mockBatteryOptimizeUtils.isValidPackageName()).thenReturn(true);
+        when(mockBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()).thenReturn(false);
         when(mockBatteryOptimizeUtils.getAppOptimizationMode()).thenReturn(
                 BatteryOptimizeUtils.MODE_UNRESTRICTED);
 
@@ -105,7 +104,7 @@ public class UnrestrictedPreferenceControllerTest {
 
     @Test
     public void testUpdateState_prefUnchecked() {
-        when(mockBatteryOptimizeUtils.isValidPackageName()).thenReturn(true);
+        when(mockBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()).thenReturn(false);
 
         mController.updateState(mPreference);
 

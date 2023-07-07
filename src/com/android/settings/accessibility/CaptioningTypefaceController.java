@@ -16,14 +16,12 @@
 
 package com.android.settings.accessibility;
 
-import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings;
 import android.view.accessibility.CaptioningManager.CaptionStyle;
 
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
 
@@ -44,23 +42,21 @@ public class CaptioningTypefaceController extends BasePreferenceController
     }
 
     @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-        final ListPreference listPreference = screen.findPreference(getPreferenceKey());
-        final ContentResolver cr = mContext.getContentResolver();
-        final CaptionStyle attrs = CaptionStyle.getCustomStyle(cr);
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        final ListPreference listPreference = (ListPreference) preference;
+        final CaptionStyle attrs = CaptionStyle.getCustomStyle(mContext.getContentResolver());
         final String rawTypeface = attrs.mRawTypeface;
+
         listPreference.setValue(rawTypeface == null ? "" : rawTypeface);
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        final ListPreference listPreference = (ListPreference) preference;
-        final ContentResolver cr = mContext.getContentResolver();
         Settings.Secure.putString(
-                cr, Settings.Secure.ACCESSIBILITY_CAPTIONING_TYPEFACE, (String) newValue);
-        listPreference.setValue((String) newValue);
+                mContext.getContentResolver(), Settings.Secure.ACCESSIBILITY_CAPTIONING_TYPEFACE,
+                (String) newValue);
         mCaptionHelper.setEnabled(true);
-        return false;
+        return true;
     }
 }

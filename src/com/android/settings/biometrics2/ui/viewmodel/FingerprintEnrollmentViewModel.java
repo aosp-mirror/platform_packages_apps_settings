@@ -179,10 +179,6 @@ public class FingerprintEnrollmentViewModel extends AndroidViewModel {
         return mFingerprintRepository.canAssumeSfps();
     }
 
-    public boolean isNewFingerprintAdded() {
-        return mIsNewFingerprintAdded;
-    }
-
     /**
      * Sets mIsNewFingerprintAdded to true
      */

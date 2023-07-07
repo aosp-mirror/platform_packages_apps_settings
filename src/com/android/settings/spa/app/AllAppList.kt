@@ -38,6 +38,7 @@ import com.android.settingslib.spa.widget.preference.PreferenceModel
 import com.android.settingslib.spa.widget.ui.SpinnerOption
 import com.android.settingslib.spaprivileged.model.app.AppListModel
 import com.android.settingslib.spaprivileged.model.app.AppRecord
+import com.android.settingslib.spaprivileged.model.app.installed
 import com.android.settingslib.spaprivileged.template.app.AppList
 import com.android.settingslib.spaprivileged.template.app.AppListInput
 import com.android.settingslib.spaprivileged.template.app.AppListItem
@@ -75,6 +76,7 @@ fun AllAppListPage(
         title = stringResource(R.string.all_apps),
         listModel = rememberContext(::AllAppListModel),
         showInstantApps = true,
+        matchAnyUserForAdmin = true,
         moreOptions = { ResetAppPreferences(resetAppDialogPresenter::open) },
         appList = appList,
     )
@@ -133,8 +135,13 @@ class AllAppListModel(
         return remember {
             derivedStateOf {
                 storageSummary.value +
-                    when (isDisabled(record)) {
-                        true -> System.lineSeparator() + context.getString(R.string.disabled)
+                    when {
+                        !record.app.installed -> {
+                            System.lineSeparator() + context.getString(R.string.not_installed)
+                        }
+                        isDisabled(record) -> {
+                            System.lineSeparator() + context.getString(R.string.disabled)
+                        }
                         else -> ""
                     }
             }

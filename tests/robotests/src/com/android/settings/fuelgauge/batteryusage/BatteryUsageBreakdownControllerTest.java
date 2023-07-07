@@ -55,6 +55,7 @@ import java.util.TimeZone;
 @RunWith(RobolectricTestRunner.class)
 public final class BatteryUsageBreakdownControllerTest {
     private static final String PREF_KEY = "pref_key";
+    private static final String PREF_KEY2 = "pref_key2";
     private static final String PREF_SUMMARY = "fake preference summary";
 
     @Mock
@@ -106,8 +107,9 @@ public final class BatteryUsageBreakdownControllerTest {
                 mBatteryHistEntry);
         mBatteryDiffEntry = spy(mBatteryDiffEntry);
         mBatteryUsageBreakdownController.mBatteryDiffData =
-                new BatteryDiffData(mContext, Arrays.asList(mBatteryDiffEntry), Arrays.asList(),
-                        Set.of(), /* isAccumulated= */ false);
+                new BatteryDiffData(mContext, /* screenOnTime= */ 0L,
+                        Arrays.asList(mBatteryDiffEntry), Arrays.asList(), Set.of(), Set.of(),
+                        /* isAccumulated= */ false);
         // Adds fake testing data.
         BatteryDiffEntry.sResourceCache.put(
                 "fakeBatteryDiffEntryKey",
@@ -157,7 +159,7 @@ public final class BatteryUsageBreakdownControllerTest {
         assertThat(pref.getOrder()).isEqualTo(1);
         assertThat(pref.getBatteryDiffEntry()).isSameInstanceAs(mBatteryDiffEntry);
         assertThat(pref.isSingleLineTitle()).isTrue();
-        assertThat(pref.isEnabled()).isFalse();
+        assertThat(pref.isSelectable()).isFalse();
     }
 
     @Test
@@ -175,7 +177,24 @@ public final class BatteryUsageBreakdownControllerTest {
     }
 
     @Test
-    public void removeAndCacheAllPreferences_buildCacheAndRemoveAllPreference() {
+    public void removeAndCacheAllUnusedPreferences_removePref_buildCacheAndRemoveAllPreference() {
+        doReturn(1).when(mAppListPreferenceGroup).getPreferenceCount();
+        doReturn(mPowerGaugePreference).when(mAppListPreferenceGroup).getPreference(0);
+        doReturn(PREF_KEY2).when(mBatteryHistEntry).getKey();
+        doReturn(PREF_KEY).when(mPowerGaugePreference).getKey();
+        doReturn(mPowerGaugePreference).when(mAppListPreferenceGroup).findPreference(PREF_KEY);
+        // Ensures the testing data is correct.
+        assertThat(mBatteryUsageBreakdownController.mPreferenceCache).isEmpty();
+
+        mBatteryUsageBreakdownController.removeAndCacheAllUnusedPreferences();
+
+        assertThat(mBatteryUsageBreakdownController.mPreferenceCache.get(PREF_KEY))
+                .isEqualTo(mPowerGaugePreference);
+        verify(mAppListPreferenceGroup).removePreference(mPowerGaugePreference);
+    }
+
+    @Test
+    public void removeAndCacheAllUnusedPreferences_keepPref_KeepAllPreference() {
         doReturn(1).when(mAppListPreferenceGroup).getPreferenceCount();
         doReturn(mPowerGaugePreference).when(mAppListPreferenceGroup).getPreference(0);
         doReturn(PREF_KEY).when(mBatteryHistEntry).getKey();
@@ -184,11 +203,10 @@ public final class BatteryUsageBreakdownControllerTest {
         // Ensures the testing data is correct.
         assertThat(mBatteryUsageBreakdownController.mPreferenceCache).isEmpty();
 
-        mBatteryUsageBreakdownController.removeAndCacheAllPreferences();
+        mBatteryUsageBreakdownController.removeAndCacheAllUnusedPreferences();
 
-        assertThat(mBatteryUsageBreakdownController.mPreferenceCache.get(PREF_KEY))
-                .isEqualTo(mPowerGaugePreference);
-        verify(mAppListPreferenceGroup).removeAll();
+        verify(mAppListPreferenceGroup, never()).removePreference(any());
+        assertThat(mBatteryUsageBreakdownController.mPreferenceCache).isEmpty();
     }
 
     @Test
@@ -232,6 +250,40 @@ public final class BatteryUsageBreakdownControllerTest {
                         SettingsEnums.OPEN_BATTERY_USAGE,
                         /* package name */ "none",
                         /* percentage of total */ 100);
+    }
+
+    @Test
+    public void setPreferencePercent_lessThanThreshold_expectedFormat() {
+        final PowerGaugePreference pref = new PowerGaugePreference(mContext);
+        final BatteryDiffEntry batteryDiffEntry = createBatteryDiffEntry(
+                /*isSystem=*/ true,
+                /*screenOnTimeInMs=*/ 0,
+                /*foregroundUsageTimeInMs=*/ 0,
+                /*backgroundUsageTimeInMs=*/ 0);
+        batteryDiffEntry.mConsumePower = 0.8;
+        batteryDiffEntry.setTotalConsumePower(100);
+        mBatteryUsageBreakdownController.mPercentLessThanThresholdText = "< 1%";
+
+        mBatteryUsageBreakdownController.setPreferencePercentage(pref, batteryDiffEntry);
+
+        assertThat(pref.getPercentage()).isEqualTo("< 1%");
+    }
+
+    @Test
+    public void setPreferencePercent_greaterThanThreshold_expectedFormat() {
+        final PowerGaugePreference pref = new PowerGaugePreference(mContext);
+        final BatteryDiffEntry batteryDiffEntry = createBatteryDiffEntry(
+                /*isSystem=*/ true,
+                /*screenOnTimeInMs=*/ 0,
+                /*foregroundUsageTimeInMs=*/ 0,
+                /*backgroundUsageTimeInMs=*/ 0);
+        batteryDiffEntry.mConsumePower = 16;
+        batteryDiffEntry.setTotalConsumePower(100);
+        mBatteryUsageBreakdownController.mPercentLessThanThresholdText = "< 1%";
+
+        mBatteryUsageBreakdownController.setPreferencePercentage(pref, batteryDiffEntry);
+
+        assertThat(pref.getPercentage()).isEqualTo("16%");
     }
 
     @Test

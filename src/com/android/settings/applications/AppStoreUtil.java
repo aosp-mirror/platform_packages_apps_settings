@@ -53,7 +53,8 @@ public class AppStoreUtil {
             // so we choose to ignore this when supplied by a non-system app.
             String originatingPackageName = source.getOriginatingPackageName();
             String initiatingPackageName = source.getInitiatingPackageName();
-            if (originatingPackageName != null && initiatingPackageName != null) {
+            if (originatingPackageName != null && initiatingPackageName != null
+                    && !initiatingPackageName.equals("com.android.shell")) {
                 ApplicationInfo ai = context.getPackageManager().getApplicationInfo(
                         initiatingPackageName, 0);
                 if ((ai.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {

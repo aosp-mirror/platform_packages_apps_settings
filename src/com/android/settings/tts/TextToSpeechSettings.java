@@ -811,6 +811,14 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.tts_settings);
+            new BaseSearchIndexProvider(R.xml.tts_settings) {
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    TtsEngines ttsEngines = new TtsEngines(context);
+                    return !ttsEngines.getEngines().isEmpty() &&
+                            context.getResources().getBoolean(
+                                    R.bool.config_show_tts_settings_summary);
+                }
+            };
 
 }

@@ -132,7 +132,7 @@ public class BluetoothSummaryUpdaterTest {
 
         mSummaryUpdater.onBluetoothStateChanged(BluetoothAdapter.STATE_OFF);
 
-        verify(mListener).onSummaryChanged(mContext.getString(R.string.off));
+        verify(mListener).onSummaryChanged(mContext.getString(R.string.bluetooth_disabled));
     }
 
     @Test
@@ -197,12 +197,12 @@ public class BluetoothSummaryUpdaterTest {
 
         mShadowBluetoothAdapter.setEnabled(false);
         mSummaryUpdater.onBluetoothStateChanged(BluetoothAdapter.STATE_OFF);
-        verify(mListener).onSummaryChanged(mContext.getString(R.string.off));
+        verify(mListener).onSummaryChanged(mContext.getString(R.string.bluetooth_disabled));
 
         // Turning ON means not enabled
         mSummaryUpdater.onBluetoothStateChanged(BluetoothAdapter.STATE_TURNING_ON);
         // There should still be only one invocation of disabled message
-        verify(mListener).onSummaryChanged(mContext.getString(R.string.off));
+        verify(mListener).onSummaryChanged(mContext.getString(R.string.bluetooth_disabled));
 
         mShadowBluetoothAdapter.setEnabled(true);
         mDeviceConnected[0] = false;

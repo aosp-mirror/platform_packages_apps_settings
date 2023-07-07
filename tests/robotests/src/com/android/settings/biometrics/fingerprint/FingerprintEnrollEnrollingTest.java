@@ -43,6 +43,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.hardware.biometrics.ComponentInfoInternal;
 import android.hardware.biometrics.SensorProperties;
 import android.hardware.fingerprint.FingerprintManager;
@@ -52,17 +53,19 @@ import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
 import android.os.Bundle;
 import android.os.CancellationSignal;
 import android.os.Vibrator;
-import android.util.FeatureFlagUtils;
 import android.view.Display;
 import android.view.Surface;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.widget.RingProgressBar;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.airbnb.lottie.LottieTask;
 import com.google.android.setupdesign.GlifLayout;
 
 import org.junit.Before;
@@ -79,6 +82,7 @@ import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 @RunWith(RobolectricTestRunner.class)
 public class FingerprintEnrollEnrollingTest {
@@ -153,7 +157,7 @@ public class FingerprintEnrollEnrollingTest {
     }
 
     @Test
-    public void fingerprintUdfpsOverlayEnrollment_loseFocus_shouldCancel() {
+    public void fingerprintUdfpsOverlayEnrollment_loseFocus_shouldNotCancel() {
         initializeActivityFor(TYPE_UDFPS_OPTICAL);
 
         mActivity.onEnrollmentProgressChange(1, 1);
@@ -175,6 +179,7 @@ public class FingerprintEnrollEnrollingTest {
     @Test
     public void fingerprintUdfpsOverlayEnrollment_PlaysAllAnimationsAssetsCorrectly() {
         initializeActivityFor(TYPE_UDFPS_OPTICAL);
+        LottieTask.EXECUTOR = mContext.getMainExecutor();
 
         int initStageSteps = -1, initStageRemaining = 0;
         final int totalStages = mUdfpsStageThresholds.length;
@@ -191,23 +196,12 @@ public class FingerprintEnrollEnrollingTest {
             mActivity.onEnrollmentProgressChange(TOTAL_ENROLL_STEPS, remaining);
         }
 
-        List<Integer> expectedLottieAssetOrder = List.of(
-                R.raw.udfps_center_hint_lottie,
-                R.raw.udfps_tip_hint_lottie,
-                R.raw.udfps_left_edge_hint_lottie,
-                R.raw.udfps_right_edge_hint_lottie
-        );
 
-        ArgumentCaptor<Integer> lottieAssetCaptor = ArgumentCaptor.forClass(Integer.class);
-        verify(mIllustrationLottie, times(totalStages)).setAnimation(lottieAssetCaptor.capture());
-        List<Integer> observedLottieAssetOrder = lottieAssetCaptor.getAllValues();
-        assertThat(observedLottieAssetOrder).isEqualTo(expectedLottieAssetOrder);
+        verify(mIllustrationLottie, times(totalStages)).setComposition(any());
     }
 
     @Test
     public void fingerprintUdfpsOverlayEnrollment_showOverlayPortrait() {
-        FeatureFlagUtils.setEnabled(mContext,
-                FeatureFlagUtils.SETTINGS_SHOW_UDFPS_ENROLL_IN_SETTINGS, true);
         initializeActivityFor(TYPE_UDFPS_OPTICAL);
         when(mMockDisplay.getRotation()).thenReturn(Surface.ROTATION_0);
 
@@ -219,8 +213,6 @@ public class FingerprintEnrollEnrollingTest {
 
     @Test
     public void fingerprintUdfpsOverlayEnrollment_showOverlayLandscape() {
-        FeatureFlagUtils.setEnabled(mContext,
-                FeatureFlagUtils.SETTINGS_SHOW_UDFPS_ENROLL_IN_SETTINGS, true);
         initializeActivityFor(TYPE_UDFPS_OPTICAL);
         when(mMockDisplay.getRotation()).thenReturn(Surface.ROTATION_90);
 
@@ -232,8 +224,6 @@ public class FingerprintEnrollEnrollingTest {
 
     @Test
     public void fingerprintUdfpsOverlayEnrollment_usesCorrectProgressBarFillColor() {
-        FeatureFlagUtils.setEnabled(mContext,
-                FeatureFlagUtils.SETTINGS_SHOW_UDFPS_ENROLL_IN_SETTINGS, true);
         initializeActivityFor(TYPE_UDFPS_OPTICAL);
         final TypedArray ta = mActivity.obtainStyledAttributes(null,
                 R.styleable.BiometricsEnrollView, R.attr.biometricsEnrollStyle,
@@ -252,9 +242,105 @@ public class FingerprintEnrollEnrollingTest {
     }
 
     @Test
+    public void fingerprintUdfpsOverlayEnrollment_checkViewOverlapPortrait() {
+        when(mMockDisplay.getRotation()).thenReturn(Surface.ROTATION_0);
+        initializeActivityFor(TYPE_UDFPS_OPTICAL);
+
+        final GlifLayout defaultLayout = mActivity.findViewById(R.id.setup_wizard_layout);
+        final TextView headerTextView = defaultLayout.getHeaderTextView();
+        final TextView descriptionTextView = defaultLayout.getDescriptionTextView();
+        final FrameLayout lottieAnimationContainer = mActivity.findViewById(R.id.layout_container);
+        final UdfpsEnrollView udfpsEnrollView =
+                defaultLayout.findViewById(R.id.udfps_animation_view);
+
+        final int[] headerTextViewPosition = new int[2];
+        final int[] descriptionTextViewPosition = new int[2];
+        final int[] lottieAnimationPosition = new int[2];
+        final int[] udfpsEnrollViewPosition = new int[2];
+        final AtomicReference<Rect> rectHeaderTextView = new AtomicReference<>(
+                new Rect(0, 0, 0, 0));
+        final AtomicReference<Rect> rectDescriptionTextView =
+                new AtomicReference<>(new Rect(0, 0, 0, 0));
+        final AtomicReference<Rect> rectLottieAnimationView = new AtomicReference<>(
+                new Rect(0, 0, 0, 0));
+        final AtomicReference<Rect> rectUdfpsEnrollView = new AtomicReference<>(
+                new Rect(0, 0, 0, 0));
+
+        headerTextView.getViewTreeObserver().addOnDrawListener(() -> {
+            headerTextView.getLocationOnScreen(headerTextViewPosition);
+            rectHeaderTextView.set(new Rect(headerTextViewPosition[0], headerTextViewPosition[1],
+                    headerTextViewPosition[0] + headerTextView.getWidth(),
+                    headerTextViewPosition[1] + headerTextView.getHeight()));
+        });
+
+        descriptionTextView.getViewTreeObserver().addOnDrawListener(() -> {
+            descriptionTextView.getLocationOnScreen(descriptionTextViewPosition);
+            rectDescriptionTextView.set(new Rect(descriptionTextViewPosition[0],
+                    descriptionTextViewPosition[1], descriptionTextViewPosition[0]
+                    + descriptionTextView.getWidth(), descriptionTextViewPosition[1]
+                    + descriptionTextView.getHeight()));
+
+        });
+
+        udfpsEnrollView.getViewTreeObserver().addOnDrawListener(() -> {
+            udfpsEnrollView.getLocationOnScreen(udfpsEnrollViewPosition);
+            rectUdfpsEnrollView.set(new Rect(udfpsEnrollViewPosition[0],
+                    udfpsEnrollViewPosition[1], udfpsEnrollViewPosition[0]
+                    + udfpsEnrollView.getWidth(), udfpsEnrollViewPosition[1]
+                    + udfpsEnrollView.getHeight()));
+        });
+
+        lottieAnimationContainer.getViewTreeObserver().addOnDrawListener(() -> {
+            lottieAnimationContainer.getLocationOnScreen(lottieAnimationPosition);
+            rectLottieAnimationView.set(new Rect(lottieAnimationPosition[0],
+                    lottieAnimationPosition[1], lottieAnimationPosition[0]
+                    + lottieAnimationContainer.getWidth(), lottieAnimationPosition[1]
+                    + lottieAnimationContainer.getHeight()));
+        });
+
+        // Check if the HeaderTextView and DescriptionTextView overlapped
+        assertThat(rectHeaderTextView.get()
+                .intersect(rectDescriptionTextView.get())).isFalse();
+
+        // Check if the DescriptionTextView and Lottie animation overlapped
+        assertThat(rectDescriptionTextView.get()
+                .intersect(rectLottieAnimationView.get())).isFalse();
+
+        // Check if the Lottie animation and UDSPFEnrollView overlapped
+        assertThat(rectLottieAnimationView.get()
+                .intersect(rectUdfpsEnrollView.get())).isFalse();
+    }
+
+    @Test
+    public void fingerprintUdfpsOverlayEnrollment_descriptionViewGoneWithOverlap() {
+        initializeActivityWithoutCreate(TYPE_UDFPS_OPTICAL);
+        doReturn(true).when(mActivity).hasOverlap(any(), any());
+        when(mMockDisplay.getRotation()).thenReturn(Surface.ROTATION_0);
+        createActivity();
+
+        final GlifLayout defaultLayout = spy(mActivity.findViewById(R.id.setup_wizard_layout));
+        final TextView descriptionTextView = defaultLayout.getDescriptionTextView();
+
+        defaultLayout.getViewTreeObserver().dispatchOnDraw();
+        assertThat(descriptionTextView.getVisibility()).isEqualTo(View.GONE);
+    }
+
+    @Test
+    public void fingerprintUdfpsOverlayEnrollment_descriptionViewVisibleWithoutOverlap() {
+        initializeActivityWithoutCreate(TYPE_UDFPS_OPTICAL);
+        doReturn(false).when(mActivity).hasOverlap(any(), any());
+        when(mMockDisplay.getRotation()).thenReturn(Surface.ROTATION_0);
+        createActivity();
+
+        final GlifLayout defaultLayout = spy(mActivity.findViewById(R.id.setup_wizard_layout));
+        final TextView descriptionTextView = defaultLayout.getDescriptionTextView();
+
+        defaultLayout.getViewTreeObserver().dispatchOnDraw();
+        assertThat(descriptionTextView.getVisibility()).isEqualTo(View.VISIBLE);
+    }
+
+    @Test
     public void forwardEnrollProgressEvents() {
-        FeatureFlagUtils.setEnabled(mContext,
-                FeatureFlagUtils.SETTINGS_SHOW_UDFPS_ENROLL_IN_SETTINGS, true);
         initializeActivityFor(TYPE_UDFPS_OPTICAL);
 
         EnrollListener listener = new EnrollListener(mActivity);
@@ -268,8 +354,6 @@ public class FingerprintEnrollEnrollingTest {
 
     @Test
     public void forwardEnrollHelpEvents() {
-        FeatureFlagUtils.setEnabled(mContext,
-                FeatureFlagUtils.SETTINGS_SHOW_UDFPS_ENROLL_IN_SETTINGS, true);
         initializeActivityFor(TYPE_UDFPS_OPTICAL);
 
         EnrollListener listener = new EnrollListener(mActivity);
@@ -283,8 +367,6 @@ public class FingerprintEnrollEnrollingTest {
 
     @Test
     public void forwardEnrollAcquiredEvents() {
-        FeatureFlagUtils.setEnabled(mContext,
-                FeatureFlagUtils.SETTINGS_SHOW_UDFPS_ENROLL_IN_SETTINGS, true);
         initializeActivityFor(TYPE_UDFPS_OPTICAL);
 
         EnrollListener listener = new EnrollListener(mActivity);
@@ -299,8 +381,6 @@ public class FingerprintEnrollEnrollingTest {
 
     @Test
     public void forwardEnrollPointerDownEvents() {
-        FeatureFlagUtils.setEnabled(mContext,
-                FeatureFlagUtils.SETTINGS_SHOW_UDFPS_ENROLL_IN_SETTINGS, true);
         initializeActivityFor(TYPE_UDFPS_OPTICAL);
 
         EnrollListener listener = new EnrollListener(mActivity);
@@ -314,8 +394,6 @@ public class FingerprintEnrollEnrollingTest {
 
     @Test
     public void forwardEnrollPointerUpEvents() {
-        FeatureFlagUtils.setEnabled(mContext,
-                FeatureFlagUtils.SETTINGS_SHOW_UDFPS_ENROLL_IN_SETTINGS, true);
         initializeActivityFor(TYPE_UDFPS_OPTICAL);
 
         EnrollListener listener = new EnrollListener(mActivity);
@@ -328,8 +406,9 @@ public class FingerprintEnrollEnrollingTest {
     }
 
     @Test
-    public void fingerprintSfpsEnroll_PlaysAllAnimationsAssetsCorrectly() {
+    public void fingerprintSfpsEnroll_PlaysAnimations() {
         initializeActivityFor(TYPE_POWER_BUTTON);
+        LottieTask.EXECUTOR = mContext.getMainExecutor();
 
         int initStageSteps = -1, initStageRemaining = 0;
 
@@ -345,18 +424,8 @@ public class FingerprintEnrollEnrollingTest {
             mActivity.onEnrollmentProgressChange(TOTAL_ENROLL_STEPS, remaining);
         }
 
-        List<Integer> expectedLottieAssetOrder = List.of(
-                R.raw.sfps_lottie_no_animation,
-                R.raw.sfps_lottie_pad_center,
-                R.raw.sfps_lottie_tip,
-                R.raw.sfps_lottie_left_edge,
-                R.raw.sfps_lottie_right_edge
-        );
 
-        ArgumentCaptor<Integer> lottieAssetCaptor = ArgumentCaptor.forClass(Integer.class);
-        verify(mIllustrationLottie, times(5)).setAnimation(lottieAssetCaptor.capture());
-        List<Integer> observedLottieAssetOrder = lottieAssetCaptor.getAllValues();
-        assertThat(observedLottieAssetOrder).isEqualTo(expectedLottieAssetOrder);
+        verify(mIllustrationLottie, times(5)).setComposition(any());
     }
 
     @Test
@@ -449,6 +518,50 @@ public class FingerprintEnrollEnrollingTest {
         assertThat(appliedThemes.contains("SetupWizardPartnerResource")).isTrue();
     }
 
+    @Test
+    public void fingerprintSfpsEnroll_descriptionTextVisibility() {
+        initializeActivityFor(TYPE_POWER_BUTTON);
+
+        mActivity.onEnrollmentProgressChange(1 /* steps */, 1 /* remaining */);
+
+        assertThat(getLayout().getDescriptionTextView().getVisibility()).isEqualTo(View.GONE);
+    }
+
+    @Test
+    public void fingerprintUdfpsEnroll_descriptionTextVisibility() {
+        initializeActivityFor(TYPE_UDFPS_OPTICAL);
+
+        mActivity.onEnrollmentProgressChange(1 /* steps */, 1 /* remaining */);
+
+        assertThat(getLayout().getDescriptionTextView().getVisibility()).isEqualTo(View.VISIBLE);
+    }
+
+    @Test
+    public void testUdfpsConfigureEnrollmentStage_descriptionText() {
+        initializeActivityFor(TYPE_UDFPS_OPTICAL);
+
+        assertThat(getLayout().getDescriptionText()).isNotEqualTo("");
+
+        mActivity.configureEnrollmentStage(0 /* lottie */);
+
+        assertThat(getLayout().getDescriptionText()).isEqualTo("");
+    }
+
+    @Test
+    public void testSfpsConfigureEnrollmentStage_descriptionText() {
+        initializeActivityFor(TYPE_POWER_BUTTON);
+
+        assertThat(getLayout().getDescriptionTextView().getVisibility()).isEqualTo(View.GONE);
+
+        mActivity.configureEnrollmentStage(0 /* lottie */);
+
+        assertThat(getLayout().getDescriptionTextView().getVisibility()).isEqualTo(View.GONE);
+    }
+
+    private GlifLayout getLayout() {
+        return (GlifLayout) mActivity.findViewById(R.id.setup_wizard_layout);
+    }
+
     private void initializeActivityWithoutCreate(int sensorType) {
         final List<ComponentInfoInternal> componentInfo = new ArrayList<>();
         final FingerprintSensorPropertiesInternal prop =
@@ -481,6 +594,9 @@ public class FingerprintEnrollEnrollingTest {
                 doReturn(mSfpsStageThresholds[stage]).when(mActivity).getStageThresholdSteps(stage);
             }
             doReturn(true).when(mSidecar).isEnrolling();
+            ReflectionHelpers.setField(mActivity, "mCanAssumeSfps", true);
+        } else if (sensorType == TYPE_UDFPS_OPTICAL) {
+            ReflectionHelpers.setField(mActivity, "mCanAssumeUdfps", true);
         }
 
         if (sensorType == TYPE_UDFPS_OPTICAL) {

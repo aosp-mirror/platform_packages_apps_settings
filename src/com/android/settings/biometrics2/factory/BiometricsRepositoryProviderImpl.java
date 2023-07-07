@@ -18,16 +18,12 @@ package com.android.settings.biometrics2.factory;
 
 import android.app.Application;
 import android.hardware.fingerprint.FingerprintManager;
-import android.os.Vibrator;
-import android.view.accessibility.AccessibilityManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.android.settings.Utils;
-import com.android.settings.biometrics2.data.repository.AccessibilityRepository;
 import com.android.settings.biometrics2.data.repository.FingerprintRepository;
-import com.android.settings.biometrics2.data.repository.VibratorRepository;
 
 /**
  * Implementation for BiometricsRepositoryProvider
@@ -35,8 +31,6 @@ import com.android.settings.biometrics2.data.repository.VibratorRepository;
 public class BiometricsRepositoryProviderImpl implements BiometricsRepositoryProvider {
 
     private static volatile FingerprintRepository sFingerprintRepository;
-    private static volatile VibratorRepository sVibratorRepository;
-    private static volatile AccessibilityRepository sAccessibilityRepository;
 
     /**
      * Get FingerprintRepository
@@ -57,50 +51,5 @@ public class BiometricsRepositoryProviderImpl implements BiometricsRepositoryPro
             }
         }
         return sFingerprintRepository;
-    }
-
-    /**
-     * Get VibratorRepository
-     */
-    @Nullable
-    @Override
-    public VibratorRepository getVibratorRepository(@NonNull Application application) {
-
-        final Vibrator vibrator = application.getSystemService(Vibrator.class);
-        if (vibrator == null) {
-            return null;
-        }
-
-        if (sVibratorRepository == null) {
-            synchronized (VibratorRepository.class) {
-                if (sVibratorRepository == null) {
-                    sVibratorRepository = new VibratorRepository(vibrator);
-                }
-            }
-        }
-        return sVibratorRepository;
-    }
-
-    /**
-     * Get AccessibilityRepository
-     */
-    @Nullable
-    @Override
-    public AccessibilityRepository getAccessibilityRepository(@NonNull Application application) {
-
-        final AccessibilityManager accessibilityManager = application.getSystemService(
-                AccessibilityManager.class);
-        if (accessibilityManager == null) {
-            return null;
-        }
-
-        if (sAccessibilityRepository == null) {
-            synchronized (AccessibilityRepository.class) {
-                if (sAccessibilityRepository == null) {
-                    sAccessibilityRepository = new AccessibilityRepository(accessibilityManager);
-                }
-            }
-        }
-        return sAccessibilityRepository;
     }
 }

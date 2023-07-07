@@ -16,6 +16,7 @@
 package com.android.settings.fuelgauge.batteryusage;
 
 import static com.android.settings.Utils.formatPercentage;
+import static com.android.settings.fuelgauge.batteryusage.BatteryChartViewModel.AxisLabelPosition.BETWEEN_TRAPEZOIDS;
 
 import static java.lang.Math.round;
 import static java.util.Objects.requireNonNull;
@@ -29,6 +30,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.util.ArraySet;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.HapticFeedbackConstants;
@@ -52,13 +54,13 @@ import com.android.settingslib.Utils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 /** A widget component to draw chart graph. */
 public class BatteryChartView extends AppCompatImageView implements View.OnClickListener {
     private static final String TAG = "BatteryChartView";
 
     private static final int DIVIDER_COLOR = Color.parseColor("#CDCCC5");
-    private static final long UPDATE_STATE_DELAYED_TIME = 500L;
 
     /** A callback listener for selected group index is updated. */
     public interface OnSelectListener {
@@ -70,6 +72,7 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
     private final Rect mIndent = new Rect();
     private final Rect[] mPercentageBounds = new Rect[]{new Rect(), new Rect(), new Rect()};
     private final List<Rect> mAxisLabelsBounds = new ArrayList<>();
+    private final Set<Integer> mLabelDrawnIndexes = new ArraySet<>();
 
     private BatteryChartViewModel mViewModel;
     private int mHoveredIndex = BatteryChartViewModel.SELECTED_INDEX_INVALID;
@@ -80,6 +83,7 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
     private int mTrapezoidColor;
     private int mTrapezoidSolidColor;
     private int mTrapezoidHoverColor;
+    private int mDefaultTextColor;
     private int mTextPadding;
     private Paint mDividerPaint;
     private Paint mTrapezoidPaint;
@@ -134,6 +138,7 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
             // Pre-draws the view first to load style atttributions into paint.
             textView.draw(new Canvas());
             mTextPaint = textView.getPaint();
+            mDefaultTextColor = mTextPaint.getColor();
         } else {
             mTextPaint = null;
         }
@@ -301,7 +306,7 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
         mTrapezoidSolidColor = Utils.getColorAccentDefaultColor(context);
         mTrapezoidColor = Utils.getDisabled(context, mTrapezoidSolidColor);
         mTrapezoidHoverColor = Utils.getColorAttrDefaultColor(context,
-                com.android.internal.R.attr.colorAccentSecondaryVariant);
+                com.android.internal.R.attr.materialColorSecondaryContainer);
         // Initializes the divider line paint.
         final Resources resources = getContext().getResources();
         mDividerWidth = resources.getDimensionPixelSize(R.dimen.chartview_divider_width);
@@ -332,6 +337,7 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
         final int height = getHeight() - mIndent.top - mIndent.bottom;
         // Draws the top divider line for 100% curve.
         float offsetY = mIndent.top + mDividerWidth * .5f;
+        mDividerPaint.setColor(DIVIDER_COLOR);
         canvas.drawLine(0, offsetY, width, offsetY, mDividerPaint);
         drawPercentage(canvas, /*index=*/ 0, offsetY);
 
@@ -351,6 +357,7 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
     private void drawPercentage(Canvas canvas, int index, float offsetY) {
         if (mTextPaint != null) {
             mTextPaint.setTextAlign(Paint.Align.RIGHT);
+            mTextPaint.setColor(mDefaultTextColor);
             canvas.drawText(
                     mPercentages[index],
                     getWidth(),
@@ -367,18 +374,6 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
         final float bottomY = getHeight() - mIndent.bottom;
         final float startY = bottomY - mDividerHeight;
         final float trapezoidSlotOffset = mTrapezoidHOffset + mDividerWidth * .5f;
-        // Draws each vertical dividers.
-        float startX = mDividerWidth * .5f;
-        for (int index = 0; index < dividerCount; index++) {
-            canvas.drawLine(startX, startY, startX, bottomY, mDividerPaint);
-            final float nextX = startX + mDividerWidth + unitWidth;
-            // Updates the trapezoid slots for drawing.
-            if (index < mTrapezoidSlots.length) {
-                mTrapezoidSlots[index].mLeft = round(startX + trapezoidSlotOffset);
-                mTrapezoidSlots[index].mRight = round(nextX - trapezoidSlotOffset);
-            }
-            startX = nextX;
-        }
         // Draws the axis label slot information.
         if (mViewModel != null) {
             final float baselineY = getHeight() - mTextPadding;
@@ -403,6 +398,26 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
                     break;
             }
             drawAxisLabels(canvas, axisLabelDisplayAreas, baselineY);
+        }
+        // Draws each vertical dividers.
+        float startX = mDividerWidth * .5f;
+        for (int index = 0; index < dividerCount; index++) {
+            float dividerY = bottomY;
+            if (mViewModel.axisLabelPosition() == BETWEEN_TRAPEZOIDS
+                    && mLabelDrawnIndexes.contains(index)) {
+                mDividerPaint.setColor(mTrapezoidSolidColor);
+                dividerY += mDividerHeight / 4f;
+            } else {
+                mDividerPaint.setColor(DIVIDER_COLOR);
+            }
+            canvas.drawLine(startX, startY, startX, dividerY, mDividerPaint);
+            final float nextX = startX + mDividerWidth + unitWidth;
+            // Updates the trapezoid slots for drawing.
+            if (index < mTrapezoidSlots.length) {
+                mTrapezoidSlots[index].mLeft = round(startX + trapezoidSlotOffset);
+                mTrapezoidSlots[index].mRight = round(nextX - trapezoidSlotOffset);
+            }
+            startX = nextX;
         }
     }
 
@@ -432,9 +447,12 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
 
     private void drawAxisLabels(Canvas canvas, final Rect[] displayAreas, final float baselineY) {
         final int lastIndex = displayAreas.length - 1;
+        mLabelDrawnIndexes.clear();
         // Suppose first and last labels are always able to draw.
         drawAxisLabelText(canvas, 0, displayAreas[0], baselineY);
+        mLabelDrawnIndexes.add(0);
         drawAxisLabelText(canvas, lastIndex, displayAreas[lastIndex], baselineY);
+        mLabelDrawnIndexes.add(lastIndex);
         drawAxisLabelsBetweenStartIndexAndEndIndex(canvas, displayAreas, 0, lastIndex, baselineY);
     }
 
@@ -458,6 +476,7 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
                 return;
             }
             drawAxisLabelText(canvas, middleIndex, displayAreas[middleIndex], baselineY);
+            mLabelDrawnIndexes.add(middleIndex);
             drawAxisLabelsBetweenStartIndexAndEndIndex(
                     canvas, displayAreas, startIndex, middleIndex, baselineY);
             drawAxisLabelsBetweenStartIndexAndEndIndex(
@@ -471,7 +490,9 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
                 return;
             }
             drawAxisLabelText(canvas, middleIndex1, displayAreas[middleIndex1], baselineY);
+            mLabelDrawnIndexes.add(middleIndex1);
             drawAxisLabelText(canvas, middleIndex2, displayAreas[middleIndex2], baselineY);
+            mLabelDrawnIndexes.add(middleIndex2);
             drawAxisLabelsBetweenStartIndexAndEndIndex(
                     canvas, displayAreas, startIndex, middleIndex1, baselineY);
             drawAxisLabelsBetweenStartIndexAndEndIndex(
@@ -488,12 +509,14 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
 
     private void drawAxisLabelText(
             Canvas canvas, final int index, final Rect displayArea, final float baselineY) {
+        mTextPaint.setColor(mTrapezoidSolidColor);
         mTextPaint.setTextAlign(Paint.Align.CENTER);
         canvas.drawText(
                 mViewModel.getText(index),
                 displayArea.centerX(),
                 baselineY,
                 mTextPaint);
+        mLabelDrawnIndexes.add(index);
     }
 
     private void drawTrapezoids(Canvas canvas) {

@@ -29,6 +29,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.icu.text.CaseMap;
+import android.icu.text.MessageFormat;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.DeviceConfig;
@@ -220,12 +221,46 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         addJoystickSetting(generalCategory);
     }
 
-    private void addAlwaysOnSetting(PreferenceCategory generalCategory) {
-        if (!DeviceConfig.getBoolean(
+    @Override
+    protected void onProcessArguments(Bundle arguments) {
+        Context context = getContext();
+
+        // This Fragment may get arguments from MagnificationGesturesPreferenceController or
+        // MagnificationNavbarPreferenceController and it's necessary to check if a key exists
+        // before putting a new value into arguments.
+
+        if (!arguments.containsKey(AccessibilitySettings.EXTRA_PREFERENCE_KEY)) {
+            arguments.putString(AccessibilitySettings.EXTRA_PREFERENCE_KEY,
+                    Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED);
+        }
+
+        if (!arguments.containsKey(AccessibilitySettings.EXTRA_INTRO)) {
+            arguments.putCharSequence(AccessibilitySettings.EXTRA_INTRO,
+                    context.getString(R.string.accessibility_screen_magnification_intro_text));
+        }
+
+        if (!arguments.containsKey(AccessibilitySettings.EXTRA_HTML_DESCRIPTION)) {
+            String summary = MessageFormat.format(
+                    context.getString(R.string.accessibility_screen_magnification_summary),
+                            new Object[]{1, 2, 3, 4, 5});
+            arguments.putCharSequence(AccessibilitySettings.EXTRA_HTML_DESCRIPTION, summary);
+        }
+
+        super.onProcessArguments(arguments);
+    }
+
+    private boolean isAlwaysOnSettingEnabled() {
+        final boolean defaultValue = getContext().getResources().getBoolean(
+                com.android.internal.R.bool.config_magnification_always_on_enabled);
+
+        return DeviceConfig.getBoolean(
                 DeviceConfig.NAMESPACE_WINDOW_MANAGER,
                 "AlwaysOnMagnifier__enable_always_on_magnifier",
-                false
-        )) {
+                defaultValue
+        );
+    }
+    private void addAlwaysOnSetting(PreferenceCategory generalCategory) {
+        if (!isAlwaysOnSettingEnabled()) {
             return;
         }
 
@@ -402,7 +437,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     @Override
     protected CharSequence getShortcutTypeSummary(Context context) {
         if (!mShortcutPreference.isChecked()) {
-            return context.getText(R.string.off);
+            return context.getText(R.string.switch_off_text);
         }
 
         final int shortcutTypes = PreferredShortcuts.retrieveUserShortcutType(context,
@@ -723,6 +758,6 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         final int uerShortcutType = getUserShortcutTypeFromSettings(context);
         return (uerShortcutType != AccessibilityUtil.UserShortcutType.EMPTY)
                 ? context.getText(R.string.accessibility_summary_shortcut_enabled)
-                : context.getText(R.string.off);
+                : context.getText(R.string.accessibility_summary_shortcut_disabled);
     }
 }

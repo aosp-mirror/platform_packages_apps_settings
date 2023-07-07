@@ -16,8 +16,6 @@
 
 package com.android.settings.bluetooth;
 
-import static com.android.settings.bluetooth.BluetoothDeviceDetailsFragment.FEATURE_HEARING_DEVICE_CONTROLS_ORDER;
-
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.FeatureFlagUtils;
@@ -36,12 +34,12 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.google.common.annotations.VisibleForTesting;
 
 /**
- * The controller of the hearing device controls in the bluetooth detail settings.
+ * The controller of the hearing device settings to launch Hearing device page.
  */
 public class BluetoothDetailsHearingDeviceControlsController extends BluetoothDetailsController
         implements Preference.OnPreferenceClickListener {
 
-    private static final String KEY_FEATURE_CONTROLS_GROUP = "feature_controls_group";
+    private static final String KEY_DEVICE_CONTROLS_GENERAL_GROUP = "device_controls_general";
     @VisibleForTesting
     static final String KEY_HEARING_DEVICE_CONTROLS = "hearing_device_controls";
 
@@ -65,7 +63,6 @@ public class BluetoothDetailsHearingDeviceControlsController extends BluetoothDe
 
         final PreferenceCategory prefCategory = screen.findPreference(getPreferenceKey());
         final Preference pref = createHearingDeviceControlsPreference(prefCategory.getContext());
-        pref.setOrder(FEATURE_HEARING_DEVICE_CONTROLS_ORDER);
         prefCategory.addPreference(pref);
     }
 
@@ -74,7 +71,7 @@ public class BluetoothDetailsHearingDeviceControlsController extends BluetoothDe
 
     @Override
     public String getPreferenceKey() {
-        return KEY_FEATURE_CONTROLS_GROUP;
+        return KEY_DEVICE_CONTROLS_GENERAL_GROUP;
     }
 
     @Override

@@ -152,18 +152,6 @@ public class FingerprintEnrollEnrollingSfpsFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mEnrollingViewModel.restoreSavedState(savedInstanceState);
-    }
-
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        mEnrollingViewModel.onSaveInstanceState(outState);
-        super.onSaveInstanceState(outState);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         mView = initSfpsLayout(inflater, container);
@@ -231,7 +219,13 @@ public class FingerprintEnrollEnrollingSfpsFragment extends Fragment {
         super.onStart();
         startEnrollment();
         updateProgress(false /* animate */, mProgressViewModel.getProgressLiveData().getValue());
-        updateTitleAndDescription();
+        final EnrollmentStatusMessage msg = mProgressViewModel.getHelpMessageLiveData().getValue();
+        if (msg != null) {
+            onEnrollmentHelp(msg);
+        } else {
+            clearError();
+            updateTitleAndDescription();
+        }
     }
 
     @Override
@@ -385,7 +379,7 @@ public class FingerprintEnrollEnrollingSfpsFragment extends Fragment {
         mView.setHeaderText(error);
         mView.getHeaderTextView().setContentDescription(error);
         new GlifLayoutHelper(getActivity(), mView).setDescriptionText("");
-        if (!mHelpAnimation.isRunning()) {
+        if (isResumed() && !mHelpAnimation.isRunning()) {
             mHelpAnimation.start();
         }
         applySfpsErrorDynamicColors(true);
@@ -552,8 +546,7 @@ public class FingerprintEnrollEnrollingSfpsFragment extends Fragment {
 
     private void showIconTouchDialog() {
         mIconTouchCount = 0;
-        //TODO EnrollingActivity should observe live data and add dialog fragment
-        mEnrollingViewModel.onIconTouchDialogShow();
+        mEnrollingViewModel.showIconTouchDialog();
     }
 
     private final Runnable mShowDialogRunnable = () -> showIconTouchDialog();

@@ -27,9 +27,19 @@ public class LocaleFeatureProviderImpl implements LocaleFeatureProvider {
     @Override
     public String getLocaleNames() {
         final LocaleList locales = LocalePicker.getLocales();
-        Locale[] arrLocalesWithoutExtension = new Locale[locales.size()];
-        for (int i = 0; i < locales.size(); i++) {
-            arrLocalesWithoutExtension[i] = locales.get(i).stripExtensions();
+        return getLocaleNames(locales);
+    }
+
+    /**
+     * Returns displayable string of inputted locales.
+     */
+    public String getLocaleNames(LocaleList inputLocales) {
+        if (inputLocales.isEmpty()) {
+            return "";
+        }
+        Locale[] arrLocalesWithoutExtension = new Locale[inputLocales.size()];
+        for (int i = 0; i < inputLocales.size(); i++) {
+            arrLocalesWithoutExtension[i] = inputLocales.get(i).stripExtensions();
         }
         final Locale displayLocale = Locale.getDefault();
         return LocaleHelper.toSentenceCase(

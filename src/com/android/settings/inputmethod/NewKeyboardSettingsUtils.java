@@ -17,6 +17,9 @@
 package com.android.settings.inputmethod;
 
 import android.content.Context;
+import android.hardware.input.InputDeviceIdentifier;
+import android.hardware.input.InputManager;
+import android.hardware.input.KeyboardLayout;
 import android.view.InputDevice;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -30,9 +33,13 @@ import java.util.List;
  */
 public class NewKeyboardSettingsUtils {
 
-    static final String EXTRA_KEYBOARD_DEVICE_NAME = "extra_keyboard_device_name";
+    /**
+     * Record the class name of the intent sender for metrics.
+     */
+    public static final String EXTRA_INTENT_FROM =
+            "com.android.settings.inputmethod.EXTRA_INTENT_FROM";
+
     static final String EXTRA_TITLE = "keyboard_layout_picker_title";
-    static final String EXTRA_KEYBOARD_LAYOUT = "keyboard_layout";
     static final String EXTRA_USER_ID = "user_id";
     static final String EXTRA_INPUT_DEVICE_IDENTIFIER = "input_device_identifier";
     static final String EXTRA_INPUT_METHOD_INFO = "input_method_info";
@@ -70,24 +77,28 @@ public class NewKeyboardSettingsUtils {
     }
 
     static class KeyboardInfo {
-        String mLanguage;
+        CharSequence mSubtypeLabel;
         String mLayout;
         InputMethodInfo mInputMethodInfo;
         InputMethodSubtype mInputMethodSubtype;
 
         KeyboardInfo(
-                String language,
+                CharSequence subtypeLabel,
                 String layout,
                 InputMethodInfo inputMethodInfo,
                 InputMethodSubtype inputMethodSubtype) {
-            mLanguage = language;
+            mSubtypeLabel = subtypeLabel;
             mLayout = layout;
             mInputMethodInfo = inputMethodInfo;
             mInputMethodSubtype = inputMethodSubtype;
         }
 
-        String getLanguage() {
-            return mLanguage;
+        String getPrefId() {
+            return mInputMethodInfo.getId() + "_" + mInputMethodSubtype.hashCode();
+        }
+
+        CharSequence getSubtypeLabel() {
+            return mSubtypeLabel;
         }
 
         String getLayout() {
@@ -101,5 +112,19 @@ public class NewKeyboardSettingsUtils {
         InputMethodSubtype getInputMethodSubtype() {
             return mInputMethodSubtype;
         }
+    }
+
+    static InputDevice getInputDevice(InputManager im, InputDeviceIdentifier identifier) {
+        return im.getInputDeviceByDescriptor(identifier.getDescriptor());
+    }
+
+    static KeyboardLayout[] getKeyboardLayouts(InputManager inputManager, int userId,
+            InputDeviceIdentifier identifier, InputMethodInfo info, InputMethodSubtype subtype) {
+        return inputManager.getKeyboardLayoutListForInputDevice(identifier, userId, info, subtype);
+    }
+
+    static String getKeyboardLayout(InputManager inputManager, int userId,
+            InputDeviceIdentifier identifier, InputMethodInfo info, InputMethodSubtype subtype) {
+        return inputManager.getKeyboardLayoutForInputDevice(identifier, userId, info, subtype);
     }
 }

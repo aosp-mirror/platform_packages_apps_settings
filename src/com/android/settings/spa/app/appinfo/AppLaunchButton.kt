@@ -16,6 +16,7 @@
 
 package com.android.settings.spa.app.appinfo
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.pm.ApplicationInfo
 import androidx.compose.material.icons.Icons
@@ -37,6 +38,11 @@ class AppLaunchButton(packageInfoPresenter: PackageInfoPresenter) {
         text = context.getString(R.string.launch_instant_app),
         imageVector = Icons.Outlined.Launch,
     ) {
-        context.startActivityAsUser(intent, app.userHandle)
+        try {
+            context.startActivityAsUser(intent, app.userHandle)
+        } catch (_: ActivityNotFoundException) {
+            // Only happens after package changes like uninstall, and before page auto refresh or
+            // close, so ignore this exception is safe.
+        }
     }
 }

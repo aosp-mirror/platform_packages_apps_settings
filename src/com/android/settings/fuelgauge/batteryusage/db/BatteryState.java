@@ -23,20 +23,15 @@ import androidx.room.PrimaryKey;
 
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.batteryusage.BatteryInformation;
+import com.android.settings.fuelgauge.batteryusage.ConvertUtils;
 
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Locale;
-import java.util.TimeZone;
 
 /** A {@link Entity} class to save battery states snapshot into database. */
 @Entity
 public class BatteryState {
-    private static String sCacheZoneId;
-    private static SimpleDateFormat sCacheSimpleDateFormat;
-
     @PrimaryKey(autoGenerate = true)
     private long mId;
 
@@ -91,14 +86,8 @@ public class BatteryState {
     }
 
     @Override
-    @SuppressWarnings("JavaUtilDate")
     public String toString() {
-        final String currentZoneId = TimeZone.getDefault().getID();
-        if (!currentZoneId.equals(sCacheZoneId) || sCacheSimpleDateFormat == null) {
-            sCacheZoneId = currentZoneId;
-            sCacheSimpleDateFormat = new SimpleDateFormat("MMM dd,yyyy HH:mm:ss", Locale.US);
-        }
-        final String recordAtDateTime = sCacheSimpleDateFormat.format(new Date(timestamp));
+        final String recordAtDateTime = ConvertUtils.utcToLocalTimeForLogging(timestamp);
         final BatteryInformation batteryInformationInstance =
                 BatteryUtils.parseProtoFromString(
                         batteryInformation, BatteryInformation.getDefaultInstance());

@@ -64,6 +64,7 @@ public class CaptioningTypefaceControllerTest {
         mPreference = new ListPreference(mContext);
         mPreference.setEntries(R.array.captioning_typeface_selector_titles);
         mPreference.setEntryValues(R.array.captioning_typeface_selector_values);
+        mPreference.setSummary("%s");
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         CaptioningManager captioningManager = mContext.getSystemService(CaptioningManager.class);
         mShadowCaptioningManager = Shadow.extract(captioningManager);
@@ -76,29 +77,20 @@ public class CaptioningTypefaceControllerTest {
     }
 
     @Test
-    public void displayPreference_byDefault_shouldReturnDefault() {
-        mController.displayPreference(mScreen);
+    public void updateState_byDefault_shouldReturnDefault() {
+        mController.updateState(mPreference);
 
-        assertThat(mPreference.getEntry().toString()).isEqualTo("Default");
+        assertThat(mPreference.getSummary().toString()).isEqualTo("Default");
     }
 
     @Test
-    public void displayPreference_bySerif_shouldReturnSerif() {
+    public void updateState_bySerif_shouldReturnSerif() {
         Settings.Secure.putString(mContext.getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_CAPTIONING_TYPEFACE, "serif");
 
-        mController.displayPreference(mScreen);
+        mController.updateState(mPreference);
 
-        assertThat(mPreference.getEntry().toString()).isEqualTo("Serif");
-    }
-
-    @Test
-    public void onPreferenceChange_bySerif_shouldReturnSerif() {
-        mController.displayPreference(mScreen);
-
-        mController.onPreferenceChange(mPreference, "serif");
-
-        assertThat(mPreference.getEntry().toString()).isEqualTo("Serif");
+        assertThat(mPreference.getSummary().toString()).isEqualTo("Serif");
     }
 
     @Test

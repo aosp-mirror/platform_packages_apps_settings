@@ -470,7 +470,7 @@ public class WifiConfigController2Test {
 
     private void checkSavedMacRandomizedValue(int macRandomizedValue) {
         when(mWifiEntry.isSaved()).thenReturn(true);
-        final WifiConfiguration mockWifiConfig = mock(WifiConfiguration.class);
+        final WifiConfiguration mockWifiConfig = spy(new WifiConfiguration());
         when(mockWifiConfig.getIpConfiguration()).thenReturn(mock(IpConfiguration.class));
         when(mWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfig);
         mockWifiConfig.macRandomizationSetting = macRandomizedValue;
@@ -809,9 +809,10 @@ public class WifiConfigController2Test {
     private void setUpModifyingSavedPeapConfigController() {
         when(mWifiEntry.isSaved()).thenReturn(true);
         when(mWifiEntry.getSecurity()).thenReturn(WifiEntry.SECURITY_EAP);
-        final WifiConfiguration mockWifiConfig = mock(WifiConfiguration.class);
+        final WifiConfiguration mockWifiConfig = spy(new WifiConfiguration());
+        mockWifiConfig.setSecurityParams(WifiConfiguration.SECURITY_TYPE_EAP);
         when(mockWifiConfig.getIpConfiguration()).thenReturn(mock(IpConfiguration.class));
-        final WifiEnterpriseConfig mockWifiEnterpriseConfig = mock(WifiEnterpriseConfig.class);
+        final WifiEnterpriseConfig mockWifiEnterpriseConfig = spy(new WifiEnterpriseConfig());
         when(mockWifiEnterpriseConfig.getEapMethod()).thenReturn(Eap.PEAP);
         mockWifiConfig.enterpriseConfig = mockWifiEnterpriseConfig;
         when(mWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfig);
@@ -980,8 +981,8 @@ public class WifiConfigController2Test {
 
     private void setUpModifyingSavedCertificateConfigController(String savedCaCertificate,
             String savedUserCertificate) {
-        final WifiConfiguration mockWifiConfig = mock(WifiConfiguration.class);
-        final WifiEnterpriseConfig mockWifiEnterpriseConfig = mock(WifiEnterpriseConfig.class);
+        final WifiConfiguration mockWifiConfig = spy(new WifiConfiguration());
+        final WifiEnterpriseConfig mockWifiEnterpriseConfig = spy(new WifiEnterpriseConfig());
 
         mockWifiConfig.enterpriseConfig = mockWifiEnterpriseConfig;
         when(mWifiEntry.isSaved()).thenReturn(true);

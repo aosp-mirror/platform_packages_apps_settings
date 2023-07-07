@@ -16,16 +16,20 @@
 
 package com.android.settings.fuelgauge;
 
+import static com.android.settings.Utils.SYSTEMUI_PACKAGE_NAME;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Process;
+import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.SparseIntArray;
 
 import com.android.internal.util.ArrayUtils;
 import com.android.settingslib.fuelgauge.Estimate;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -34,9 +38,8 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
 
     private static final String PACKAGE_CALENDAR_PROVIDER = "com.android.providers.calendar";
     private static final String PACKAGE_MEDIA_PROVIDER = "com.android.providers.media";
-    private static final String PACKAGE_SYSTEMUI = "com.android.systemui";
     private static final String[] PACKAGES_SYSTEM = {PACKAGE_MEDIA_PROVIDER,
-            PACKAGE_CALENDAR_PROVIDER, PACKAGE_SYSTEMUI};
+            PACKAGE_CALENDAR_PROVIDER, SYSTEMUI_PACKAGE_NAME};
 
     protected PackageManager mPackageManager;
     protected Context mContext;
@@ -83,7 +86,7 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
 
     @Override
     public List<String> getSystemAppsAllowlist() {
-        return null;
+        return new ArrayList<>();
     }
 
     @Override
@@ -138,16 +141,6 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
-    public boolean isAdaptiveChargingSupported() {
-        return false;
-    }
-
-    @Override
-    public boolean isBatteryManagerSupported() {
-        return true;
-    }
-
-    @Override
     public Intent getResumeChargeIntent(boolean isDockDefender) {
         return null;
     }
@@ -173,6 +166,11 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
+    public Set<String> getOthersCustomComponentNameSet() {
+        return new ArraySet<>();
+    }
+
+    @Override
     public Set<Integer> getHideSystemComponentSet() {
         return new ArraySet<>();
     }
@@ -190,5 +188,20 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     @Override
     public Set<String> getIgnoreScreenOnTimeTaskRootSet() {
         return new ArraySet<>();
+    }
+
+    @Override
+    public String getBuildMetadata1(Context context) {
+        return null;
+    }
+
+    @Override
+    public String getBuildMetadata2(Context context) {
+        return null;
+    }
+
+    @Override
+    public boolean isValidToRestoreOptimizationMode(ArrayMap<String, String> deviceInfoMap) {
+        return false;
     }
 }

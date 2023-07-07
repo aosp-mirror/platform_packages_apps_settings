@@ -52,7 +52,7 @@ public class RestrictedPreferenceControllerTest {
 
     @Test
     public void testUpdateState_isValidPackage_prefEnabled() {
-        when(mockBatteryOptimizeUtils.isValidPackageName()).thenReturn(true);
+        when(mockBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()).thenReturn(false);
 
         mController.updateState(mPreference);
 
@@ -61,7 +61,7 @@ public class RestrictedPreferenceControllerTest {
 
     @Test
     public void testUpdateState_invalidPackage_prefDisabled() {
-        when(mockBatteryOptimizeUtils.isValidPackageName()).thenReturn(false);
+        when(mockBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()).thenReturn(true);
 
         mController.updateState(mPreference);
 
@@ -70,7 +70,7 @@ public class RestrictedPreferenceControllerTest {
 
     @Test
     public void testUpdateState_isSystemOrDefaultAppAndRestrictedStates_prefChecked() {
-        when(mockBatteryOptimizeUtils.isValidPackageName()).thenReturn(true);
+        when(mockBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()).thenReturn(false);
         when(mockBatteryOptimizeUtils.isSystemOrDefaultApp()).thenReturn(true);
         when(mockBatteryOptimizeUtils.getAppOptimizationMode()).thenReturn(
                 BatteryOptimizeUtils.MODE_RESTRICTED);
@@ -82,7 +82,7 @@ public class RestrictedPreferenceControllerTest {
 
     @Test
     public void testUpdateState_isSystemOrDefaultApp_prefUnchecked() {
-        when(mockBatteryOptimizeUtils.isValidPackageName()).thenReturn(true);
+        when(mockBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()).thenReturn(false);
         when(mockBatteryOptimizeUtils.isSystemOrDefaultApp()).thenReturn(true);
 
         mController.updateState(mPreference);
@@ -93,7 +93,7 @@ public class RestrictedPreferenceControllerTest {
 
     @Test
     public void testUpdateState_isRestrictedStates_prefChecked() {
-        when(mockBatteryOptimizeUtils.isValidPackageName()).thenReturn(true);
+        when(mockBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()).thenReturn(false);
         when(mockBatteryOptimizeUtils.getAppOptimizationMode()).thenReturn(
                 BatteryOptimizeUtils.MODE_RESTRICTED);
 
@@ -104,7 +104,7 @@ public class RestrictedPreferenceControllerTest {
 
     @Test
     public void testUpdateState_prefUnchecked() {
-        when(mockBatteryOptimizeUtils.isValidPackageName()).thenReturn(true);
+        when(mockBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()).thenReturn(false);
 
         mController.updateState(mPreference);
 

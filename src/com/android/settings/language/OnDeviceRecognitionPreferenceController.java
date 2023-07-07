@@ -16,9 +16,14 @@
 
 package com.android.settings.language;
 
+import android.app.Dialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.UserInfo;
+import android.os.UserHandle;
+import android.os.UserManager;
+import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
@@ -26,8 +31,12 @@ import androidx.preference.Preference;
 
 import com.android.internal.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.dashboard.profileselector.ProfileSelectDialog;
+import com.android.settings.dashboard.profileselector.UserAdapter;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 /** Controller of the On-device recognition preference. */
@@ -36,6 +45,8 @@ public class OnDeviceRecognitionPreferenceController extends BasePreferenceContr
     private static final String TAG = "OnDeviceRecognitionPreferenceController";
 
     private Optional<Intent> mIntent;
+
+    private WeakReference<Dialog> mProfileSelectDialog = new WeakReference<>(null);
 
     public OnDeviceRecognitionPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -57,6 +68,48 @@ public class OnDeviceRecognitionPreferenceController extends BasePreferenceContr
         if (mIntent != null && mIntent.isPresent()) {
             preference.setIntent(mIntent.get());
         }
+    }
+
+    @Override
+    public boolean handlePreferenceTreeClick(Preference preference) {
+        if (!TextUtils.equals(preference.getKey(), getPreferenceKey())) {
+            return super.handlePreferenceTreeClick(preference);
+        }
+        show(preference);
+        return true;
+    }
+
+    private void show(Preference preference) {
+        final List<UserHandle> userHandles = new ArrayList<>();
+        for (UserInfo userInfo : UserManager.get(mContext).getUsers()) {
+            userHandles.add(userInfo.getUserHandle());
+        }
+
+        // Only a single profile is installed. Proceed with its settings.
+        if (userHandles.size() == 1) {
+            mContext.startActivityAsUser(preference.getIntent(), userHandles.get(0));
+            return;
+        }
+
+        // Multiple profiles are installed. Show a dialog to the user to pick one to proceed with.
+        createAndShowProfileSelectDialog(preference.getIntent(), userHandles);
+    }
+
+    private UserAdapter.OnClickListener createProfileDialogClickCallback(
+            Intent intent, List<UserHandle> userHandles) {
+        return (int position) -> {
+            mContext.startActivityAsUser(intent, userHandles.get(position));
+            if (mProfileSelectDialog.get() != null) {
+                mProfileSelectDialog.get().dismiss();
+            }
+        };
+    }
+
+    private void createAndShowProfileSelectDialog(Intent intent, List<UserHandle> userHandles) {
+        Dialog profileSelectDialog = ProfileSelectDialog.createDialog(
+                mContext, userHandles, createProfileDialogClickCallback(intent, userHandles));
+        mProfileSelectDialog = new WeakReference<>(profileSelectDialog);
+        profileSelectDialog.show();
     }
 
     /**

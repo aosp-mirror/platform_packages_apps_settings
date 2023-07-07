@@ -18,6 +18,7 @@ package com.android.settings.accessibility;
 
 import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
 
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
 import android.os.Bundle;
@@ -37,8 +38,8 @@ import com.android.settingslib.search.SearchIndexable;
 public class AccessibilityHearingAidsFragment extends AccessibilityShortcutPreferenceFragment {
 
     private static final String TAG = "AccessibilityHearingAidsFragment";
-    private static final String KEY_DEVICE_CONTROL_CATEGORY = "device_control_category";
-    private static final int FIRST_PREFERENCE_IN_CATEGORY_INDEX = -1;
+    private static final String KEY_HEARING_OPTIONS_CATEGORY = "hearing_options_category";
+    private static final int SHORTCUT_PREFERENCE_IN_CATEGORY_INDEX = 20;
     private String mFeatureName;
 
     public AccessibilityHearingAidsFragment() {
@@ -62,9 +63,9 @@ public class AccessibilityHearingAidsFragment extends AccessibilityShortcutPrefe
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         final View view = super.onCreateView(inflater, container, savedInstanceState);
-        final PreferenceCategory controlCategory = findPreference(KEY_DEVICE_CONTROL_CATEGORY);
-        // Move the preference under controlCategory need to remove the original first.
-        mShortcutPreference.setOrder(FIRST_PREFERENCE_IN_CATEGORY_INDEX);
+        final PreferenceCategory controlCategory = findPreference(KEY_HEARING_OPTIONS_CATEGORY);
+        // To move the shortcut preference under controlCategory need to remove the original added.
+        mShortcutPreference.setOrder(SHORTCUT_PREFERENCE_IN_CATEGORY_INDEX);
         getPreferenceScreen().removePreference(mShortcutPreference);
         controlCategory.addPreference(mShortcutPreference);
         return view;
@@ -72,8 +73,7 @@ public class AccessibilityHearingAidsFragment extends AccessibilityShortcutPrefe
 
     @Override
     public int getMetricsCategory() {
-        // TODO(b/262839191): To be updated settings_enums.proto
-        return 0;
+        return SettingsEnums.ACCESSIBILITY_HEARING_AID_SETTINGS;
     }
 
     @Override
@@ -110,7 +110,8 @@ public class AccessibilityHearingAidsFragment extends AccessibilityShortcutPrefe
 
     @Override
     protected boolean showGeneralCategory() {
-        // Have customized category for accessibility hearings aids page.
+        // Have static preference under dynamically created PreferenceCategory KEY_GENERAL_CATEGORY.
+        // In order to modify that, we need to use our own PreferenceCategory for this page.
         return false;
     }
 

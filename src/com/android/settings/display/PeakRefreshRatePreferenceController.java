@@ -88,8 +88,7 @@ public class PeakRefreshRatePreferenceController extends TogglePreferenceControl
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
 
-        int defaultPeakRefreshRate = mContext.getResources().getInteger(
-                com.android.internal.R.integer.config_defaultPeakRefreshRate);
+        int defaultPeakRefreshRate = Math.round(mPeakRefreshRate);
 
         mPreference = screen.findPreference(getPreferenceKey());
         mPreference.setSummary(mContext.getString(

@@ -134,7 +134,7 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
         lp.setMarginEnd(switchBarMarginEnd);
         setBackgroundColor(mBackgroundColor);
 
-        setSwitchBarText(R.string.on, R.string.off);
+        setSwitchBarText(R.string.switch_on_text, R.string.switch_off_text);
 
         addOnSwitchChangeListener(
                 (switchView, isChecked) -> setTextViewLabelAndBackground(isChecked));

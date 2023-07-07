@@ -30,8 +30,10 @@ import com.android.settings.notification.app.AppNotificationSettings
 import com.android.settings.spa.notification.AppNotificationRepository
 import com.android.settings.spa.notification.IAppNotificationRepository
 import com.android.settingslib.spa.framework.compose.rememberContext
+import com.android.settingslib.spa.framework.compose.stateOf
 import com.android.settingslib.spa.widget.preference.Preference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
+import com.android.settingslib.spaprivileged.model.app.installed
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
@@ -53,6 +55,7 @@ fun AppNotificationPreference(
         override val summary = summaryFlow.collectAsStateWithLifecycle(
             initialValue = stringResource(R.string.summary_placeholder)
         )
+        override val enabled = stateOf(app.installed)
         override val onClick = { navigateToAppNotificationSettings(context, app) }
     })
 }

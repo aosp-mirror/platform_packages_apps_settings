@@ -18,8 +18,6 @@ package com.android.settings.accessibility;
 
 import static com.android.settings.accessibility.FlashNotificationsUtil.ACTION_FLASH_NOTIFICATION_START_PREVIEW;
 import static com.android.settings.accessibility.FlashNotificationsUtil.EXTRA_FLASH_NOTIFICATION_PREVIEW_TYPE;
-import static com.android.settings.accessibility.FlashNotificationsUtil.SETTING_KEY_CAMERA_FLASH_NOTIFICATION;
-import static com.android.settings.accessibility.FlashNotificationsUtil.SETTING_KEY_SCREEN_FLASH_NOTIFICATION;
 import static com.android.settings.accessibility.FlashNotificationsUtil.TYPE_LONG_PREVIEW;
 import static com.android.settings.accessibility.FlashNotificationsUtil.TYPE_SHORT_PREVIEW;
 import static com.android.settings.accessibility.ShadowFlashNotificationsUtils.setFlashNotificationsState;
@@ -48,7 +46,6 @@ import androidx.test.core.app.ApplicationProvider;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -131,7 +128,6 @@ public class FlashNotificationsPreviewPreferenceControllerTest {
         verify(mPreference).setEnabled(eq(true));
     }
 
-    @Ignore
     @Test
     public void testHandlePreferenceTreeClick_invalidPreference() {
         mController.handlePreferenceTreeClick(mock(Preference.class));
@@ -165,16 +161,16 @@ public class FlashNotificationsPreviewPreferenceControllerTest {
     public void onStateChanged_onResume_cameraUri_verifyRegister() {
         mController.onStateChanged(mock(LifecycleOwner.class), Lifecycle.Event.ON_RESUME);
         verify(mContentResolver).registerContentObserver(
-                eq(Settings.System.getUriFor(SETTING_KEY_CAMERA_FLASH_NOTIFICATION)), anyBoolean(),
-                eq(mController.mContentObserver));
+                eq(Settings.System.getUriFor(Settings.System.CAMERA_FLASH_NOTIFICATION)),
+                anyBoolean(), eq(mController.mContentObserver));
     }
 
     @Test
     public void onStateChanged_onResume_screenUri_verifyRegister() {
         mController.onStateChanged(mock(LifecycleOwner.class), Lifecycle.Event.ON_RESUME);
         verify(mContentResolver).registerContentObserver(
-                eq(Settings.System.getUriFor(SETTING_KEY_SCREEN_FLASH_NOTIFICATION)), anyBoolean(),
-                eq(mController.mContentObserver));
+                eq(Settings.System.getUriFor(Settings.System.SCREEN_FLASH_NOTIFICATION)),
+                anyBoolean(), eq(mController.mContentObserver));
     }
 
     @Test

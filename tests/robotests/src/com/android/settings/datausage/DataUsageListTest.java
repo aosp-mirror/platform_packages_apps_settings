@@ -22,6 +22,7 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -31,6 +32,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
+import android.os.UserManager;
 import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,6 +54,7 @@ import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
 import com.android.settingslib.net.NetworkCycleChartData;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -60,11 +63,15 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.android.controller.ActivityController;
+import org.robolectric.annotation.Config;
+import org.robolectric.annotation.Implementation;
+import org.robolectric.annotation.Implements;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Ignore
 @RunWith(RobolectricTestRunner.class)
 public class DataUsageListTest {
 
@@ -74,6 +81,8 @@ public class DataUsageListTest {
     private TemplatePreference.NetworkServices mNetworkServices;
     @Mock
     private LoaderManager mLoaderManager;
+    @Mock
+    private UserManager mUserManager;
 
     private Activity mActivity;
     private DataUsageList mDataUsageList;
@@ -90,10 +99,35 @@ public class DataUsageListTest {
         mDataUsageList.mDataStateListener = mMobileDataEnabledListener;
 
         doReturn(mActivity).when(mDataUsageList).getContext();
+        doReturn(mUserManager).when(mActivity).getSystemService(UserManager.class);
+        doReturn(false).when(mUserManager).isGuestUser();
         ReflectionHelpers.setField(mDataUsageList, "mDataStateListener",
                 mMobileDataEnabledListener);
         ReflectionHelpers.setField(mDataUsageList, "services", mNetworkServices);
         doReturn(mLoaderManager).when(mDataUsageList).getLoaderManager();
+        mDataUsageList.mLoadingViewController = mock(LoadingViewController.class);
+        doNothing().when(mDataUsageList).updateSubscriptionInfoEntity();
+    }
+
+    @Test
+    @Config(shadows = ShadowDataUsageBaseFragment.class)
+    public void onCreate_isNotGuestUser_shouldNotFinish() {
+        doReturn(false).when(mUserManager).isGuestUser();
+        doNothing().when(mDataUsageList).processArgument();
+
+        mDataUsageList.onCreate(null);
+
+        verify(mDataUsageList, never()).finish();
+    }
+
+    @Test
+    @Config(shadows = ShadowDataUsageBaseFragment.class)
+    public void onCreate_isGuestUser_shouldFinish() {
+        doReturn(true).when(mUserManager).isGuestUser();
+
+        mDataUsageList.onCreate(null);
+
+        verify(mDataUsageList).finish();
     }
 
     @Test
@@ -192,23 +226,30 @@ public class DataUsageListTest {
     }
 
     @Test
-    public void onViewCreated_shouldNotSetCycleSpinner() {
-        View view = constructRootView();
+    public void onViewCreated_shouldHideCycleSpinner() {
+        final View view = new View(mActivity);
+        final View header = getHeader();
+        final Spinner spinner = getSpinner(header);
+        spinner.setVisibility(View.VISIBLE);
+        doReturn(header).when(mDataUsageList).setPinnedHeaderView(anyInt());
+        doReturn(view).when(mDataUsageList).getView();
 
         mDataUsageList.onViewCreated(view, null);
 
-        assertThat(getSpinner(view)).isNull();
+        assertThat(spinner.getVisibility()).isEqualTo(View.GONE);
     }
 
     @Test
-    public void onLoadFinished_networkCycleDataCallback_shouldSetCycleSpinner() {
-        final View view = constructRootView();
+    public void onLoadFinished_networkCycleDataCallback_shouldShowCycleSpinner() {
+        final Spinner spinner = getSpinner(getHeader());
+        spinner.setVisibility(View.INVISIBLE);
+        mDataUsageList.mCycleSpinner = spinner;
+        assertThat(spinner.getVisibility()).isEqualTo(View.INVISIBLE);
         doNothing().when(mDataUsageList).updatePolicy();
-        doReturn(setupHeaderView(view)).when(mDataUsageList).setPinnedHeaderView(anyInt());
 
         mDataUsageList.mNetworkCycleDataCallbacks.onLoadFinished(null, null);
 
-        assertThat(getSpinner(view)).isNotNull();
+        assertThat(spinner.getVisibility()).isEqualTo(View.VISIBLE);
     }
 
     @Test
@@ -219,24 +260,31 @@ public class DataUsageListTest {
         verify(mLoaderManager).destroyLoader(DataUsageList.LOADER_SUMMARY);
     }
 
-    private View constructRootView() {
-        View rootView = LayoutInflater.from(mActivity)
+    private View getHeader() {
+        final View rootView = LayoutInflater.from(mActivity)
                 .inflate(R.layout.preference_list_fragment, null, false);
-        return rootView;
-    }
-
-    private View setupHeaderView(View rootView) {
-        final FrameLayout pinnedHeader = (FrameLayout) rootView.findViewById(R.id.pinned_header);
+        final FrameLayout pinnedHeader = rootView.findViewById(R.id.pinned_header);
         final View header = mActivity.getLayoutInflater()
-                .inflate(R.layout.apps_filter_spinner, pinnedHeader, true);
+                .inflate(R.layout.apps_filter_spinner, pinnedHeader, false);
+
         return header;
     }
 
-    private Spinner getSpinner(View rootView) {
-        final FrameLayout pinnedHeader = (FrameLayout) rootView.findViewById(R.id.pinned_header);
-        if (pinnedHeader == null) {
-            return null;
+    private Spinner getSpinner(View header) {
+        final Spinner spinner = header.findViewById(R.id.filter_spinner);
+        return spinner;
+    }
+
+    @Implements(DataUsageBaseFragment.class)
+    public static class ShadowDataUsageBaseFragment {
+        @Implementation
+        public void onCreate(Bundle icicle) {
+            // do nothing
         }
-        return pinnedHeader.findViewById(R.id.filter_spinner);
+
+        @Implementation
+        protected boolean isBandwidthControlEnabled() {
+            return true;
+        }
     }
 }

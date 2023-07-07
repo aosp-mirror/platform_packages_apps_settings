@@ -24,6 +24,7 @@ import android.content.Context;
 import com.android.settings.R;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -41,9 +42,9 @@ public class DevelopmentMemtagPageTest {
     }
 
     @Test
-    public void getMetricsCategory_isSETTINGS_MEMTAG_CATEGORY() {
+    public void getMetricsCategory_isSETTINGS_DEVELOPMENT_MEMTAG_CATEGORY() {
         assertThat(mMemtagPage.getMetricsCategory())
-                .isEqualTo(SettingsEnums.SETTINGS_MEMTAG_CATEGORY);
+                .isEqualTo(SettingsEnums.SETTINGS_DEVELOPMENT_MEMTAG_CATEGORY);
     }
 
     @Test

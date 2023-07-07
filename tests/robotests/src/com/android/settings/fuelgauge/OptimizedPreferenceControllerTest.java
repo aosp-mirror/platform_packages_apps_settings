@@ -52,7 +52,7 @@ public class OptimizedPreferenceControllerTest {
 
     @Test
     public void testUpdateState_invalidPackage_prefEnabled() {
-        when(mockBatteryOptimizeUtils.isValidPackageName()).thenReturn(false);
+        when(mockBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()).thenReturn(true);
 
         mController.updateState(mPreference);
 
@@ -62,7 +62,7 @@ public class OptimizedPreferenceControllerTest {
 
     @Test
     public void testUpdateState_isSystemOrDefaultAppAndOptimizeStates_prefChecked() {
-        when(mockBatteryOptimizeUtils.isValidPackageName()).thenReturn(true);
+        when(mockBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()).thenReturn(false);
         when(mockBatteryOptimizeUtils.isSystemOrDefaultApp()).thenReturn(true);
         when(mockBatteryOptimizeUtils.getAppOptimizationMode()).thenReturn(
                 BatteryOptimizeUtils.MODE_OPTIMIZED);
@@ -74,7 +74,7 @@ public class OptimizedPreferenceControllerTest {
 
     @Test
     public void testUpdateState_isSystemOrDefaultApp_prefUnchecked() {
-        when(mockBatteryOptimizeUtils.isValidPackageName()).thenReturn(true);
+        when(mockBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()).thenReturn(false);
         when(mockBatteryOptimizeUtils.isSystemOrDefaultApp()).thenReturn(true);
 
         mController.updateState(mPreference);
@@ -85,7 +85,7 @@ public class OptimizedPreferenceControllerTest {
 
     @Test
     public void testUpdateState_isOptimizedStates_prefChecked() {
-        when(mockBatteryOptimizeUtils.isValidPackageName()).thenReturn(true);
+        when(mockBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()).thenReturn(false);
         when(mockBatteryOptimizeUtils.getAppOptimizationMode()).thenReturn(
                 BatteryOptimizeUtils.MODE_OPTIMIZED);
 
@@ -96,7 +96,7 @@ public class OptimizedPreferenceControllerTest {
 
     @Test
     public void testUpdateState_prefUnchecked() {
-        when(mockBatteryOptimizeUtils.isValidPackageName()).thenReturn(true);
+        when(mockBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()).thenReturn(false);
 
         mController.updateState(mPreference);
 

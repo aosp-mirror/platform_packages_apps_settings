@@ -21,8 +21,8 @@ import static android.hardware.camera2.CameraCharacteristics.LENS_FACING;
 import static android.hardware.camera2.CameraCharacteristics.LENS_FACING_BACK;
 import static android.hardware.camera2.CameraMetadata.LENS_FACING_FRONT;
 
-import static com.android.settings.accessibility.FlashNotificationsUtil.SETTING_KEY_CAMERA_FLASH_NOTIFICATION;
-import static com.android.settings.accessibility.FlashNotificationsUtil.SETTING_KEY_SCREEN_FLASH_NOTIFICATION;
+import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
+import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 import static com.android.settings.accessibility.FlashNotificationsUtil.getColorDescriptionText;
 import static com.android.settings.accessibility.FlashNotificationsUtil.getFlashNotificationsState;
 import static com.android.settings.accessibility.FlashNotificationsUtil.getScreenColor;
@@ -156,8 +156,8 @@ public class FlashNotificationsUtilTest {
     @Test
     public void getFlashNotificationsState_torchPresent_cameraOff_screenOff_assertOff() {
         setTorchPresent();
-        Settings.System.putInt(mContentResolver, SETTING_KEY_CAMERA_FLASH_NOTIFICATION, 0);
-        Settings.System.putInt(mContentResolver, SETTING_KEY_SCREEN_FLASH_NOTIFICATION, 0);
+        Settings.System.putInt(mContentResolver, Settings.System.CAMERA_FLASH_NOTIFICATION, OFF);
+        Settings.System.putInt(mContentResolver, Settings.System.SCREEN_FLASH_NOTIFICATION, OFF);
 
         assertThat(getFlashNotificationsState(mContext))
                 .isEqualTo(FlashNotificationsUtil.State.OFF);
@@ -166,8 +166,8 @@ public class FlashNotificationsUtilTest {
     @Test
     public void getFlashNotificationsState_torchNotPresent_cameraOn_screenOff_assertOff() {
         setTorchNotPresent();
-        Settings.System.putInt(mContentResolver, SETTING_KEY_CAMERA_FLASH_NOTIFICATION, 1);
-        Settings.System.putInt(mContentResolver, SETTING_KEY_SCREEN_FLASH_NOTIFICATION, 0);
+        Settings.System.putInt(mContentResolver, Settings.System.CAMERA_FLASH_NOTIFICATION, ON);
+        Settings.System.putInt(mContentResolver, Settings.System.SCREEN_FLASH_NOTIFICATION, OFF);
 
         assertThat(getFlashNotificationsState(mContext))
                 .isEqualTo(FlashNotificationsUtil.State.OFF);
@@ -176,8 +176,8 @@ public class FlashNotificationsUtilTest {
     @Test
     public void getFlashNotificationsState_torchPresent_cameraOn_screenOff_assertCamera() {
         setTorchPresent();
-        Settings.System.putInt(mContentResolver, SETTING_KEY_CAMERA_FLASH_NOTIFICATION, 1);
-        Settings.System.putInt(mContentResolver, SETTING_KEY_SCREEN_FLASH_NOTIFICATION, 0);
+        Settings.System.putInt(mContentResolver, Settings.System.CAMERA_FLASH_NOTIFICATION, ON);
+        Settings.System.putInt(mContentResolver, Settings.System.SCREEN_FLASH_NOTIFICATION, OFF);
 
         assertThat(getFlashNotificationsState(mContext))
                 .isEqualTo(FlashNotificationsUtil.State.CAMERA);
@@ -186,8 +186,8 @@ public class FlashNotificationsUtilTest {
     @Test
     public void getFlashNotificationsState_torchPresent_cameraOff_screenOn_assertScreen() {
         setTorchPresent();
-        Settings.System.putInt(mContentResolver, SETTING_KEY_CAMERA_FLASH_NOTIFICATION, 0);
-        Settings.System.putInt(mContentResolver, SETTING_KEY_SCREEN_FLASH_NOTIFICATION, 1);
+        Settings.System.putInt(mContentResolver, Settings.System.CAMERA_FLASH_NOTIFICATION, OFF);
+        Settings.System.putInt(mContentResolver, Settings.System.SCREEN_FLASH_NOTIFICATION, ON);
 
         assertThat(getFlashNotificationsState(mContext))
                 .isEqualTo(FlashNotificationsUtil.State.SCREEN);
@@ -196,8 +196,8 @@ public class FlashNotificationsUtilTest {
     @Test
     public void testGetFlashNotificationsState_torchPresent_cameraOn_screenOn_assertCameraScreen() {
         setTorchPresent();
-        Settings.System.putInt(mContentResolver, SETTING_KEY_CAMERA_FLASH_NOTIFICATION, 1);
-        Settings.System.putInt(mContentResolver, SETTING_KEY_SCREEN_FLASH_NOTIFICATION, 1);
+        Settings.System.putInt(mContentResolver, Settings.System.CAMERA_FLASH_NOTIFICATION, ON);
+        Settings.System.putInt(mContentResolver, Settings.System.SCREEN_FLASH_NOTIFICATION, ON);
 
         assertThat(getFlashNotificationsState(mContext))
                 .isEqualTo(FlashNotificationsUtil.State.CAMERA_SCREEN);

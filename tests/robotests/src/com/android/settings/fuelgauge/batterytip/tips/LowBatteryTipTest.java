@@ -70,8 +70,7 @@ public class LowBatteryTipTest {
                 mContext.getString(R.string.battery_tip_low_battery_title));
         assertThat(mLowBatteryTip.getSummary(mContext)).isEqualTo(
                 mContext.getString(R.string.battery_tip_low_battery_summary));
-        assertThat(mLowBatteryTip.getIconId()).isEqualTo(R.drawable.ic_battery_status_bad_24dp);
-        assertThat(mLowBatteryTip.getIconTintColorId()).isEqualTo(R.color.battery_bad_color_light);
+        assertThat(mLowBatteryTip.getIconId()).isEqualTo(R.drawable.ic_battery_saver_accent_24dp);
     }
 
     @Test

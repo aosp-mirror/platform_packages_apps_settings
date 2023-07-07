@@ -487,32 +487,32 @@ public class BatteryUtilsTest {
     }
 
     @Test
-    public void testIsBatteryDefenderOn_isOverheatedAndIsCharging_returnTrue() {
-        mBatteryInfo.isOverheated = true;
+    public void testIsBatteryDefenderOn_isDefenderAndIsCharging_returnTrue() {
+        mBatteryInfo.isBatteryDefender = true;
         mBatteryInfo.discharging = false;
 
         assertThat(mBatteryUtils.isBatteryDefenderOn(mBatteryInfo)).isTrue();
     }
 
     @Test
-    public void testIsBatteryDefenderOn_isOverheatedAndDischarging_returnFalse() {
-        mBatteryInfo.isOverheated = true;
+    public void testIsBatteryDefenderOn_isDefenderAndDischarging_returnFalse() {
+        mBatteryInfo.isBatteryDefender = true;
         mBatteryInfo.discharging = true;
 
         assertThat(mBatteryUtils.isBatteryDefenderOn(mBatteryInfo)).isFalse();
     }
 
     @Test
-    public void testIsBatteryDefenderOn_notOverheatedAndDischarging_returnFalse() {
-        mBatteryInfo.isOverheated = false;
+    public void testIsBatteryDefenderOn_notDefenderAndDischarging_returnFalse() {
+        mBatteryInfo.isBatteryDefender = false;
         mBatteryInfo.discharging = true;
 
         assertThat(mBatteryUtils.isBatteryDefenderOn(mBatteryInfo)).isFalse();
     }
 
     @Test
-    public void testIsBatteryDefenderOn_notOverheatedAndIsCharging_returnFalse() {
-        mBatteryInfo.isOverheated = false;
+    public void testIsBatteryDefenderOn_notDefenderAndIsCharging_returnFalse() {
+        mBatteryInfo.isBatteryDefender = false;
         mBatteryInfo.discharging = false;
 
         assertThat(mBatteryUtils.isBatteryDefenderOn(mBatteryInfo)).isFalse();

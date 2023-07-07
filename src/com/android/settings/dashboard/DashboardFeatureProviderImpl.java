@@ -260,7 +260,9 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
                 META_DATA_PREFERENCE_TITLE_URI)) {
             // Set a placeholder title before starting to fetch real title, this is necessary
             // to avoid preference height change.
-            preference.setTitle(R.string.summary_placeholder);
+            if (preference.getTitle() == null) {
+                preference.setTitle(R.string.summary_placeholder);
+            }
 
             final Uri uri = TileUtils.getCompleteUri(tile, META_DATA_PREFERENCE_TITLE_URI,
                     METHOD_GET_DYNAMIC_TITLE);
@@ -288,7 +290,9 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
                 && tile.getMetaData().containsKey(META_DATA_PREFERENCE_SUMMARY_URI)) {
             // Set a placeholder summary before starting to fetch real summary, this is necessary
             // to avoid preference height change.
-            preference.setSummary(R.string.summary_placeholder);
+            if (preference.getSummary() == null) {
+                preference.setSummary(R.string.summary_placeholder);
+            }
 
             final Uri uri = TileUtils.getCompleteUri(tile, META_DATA_PREFERENCE_SUMMARY_URI,
                     METHOD_GET_DYNAMIC_SUMMARY);

@@ -20,29 +20,25 @@ import static androidx.lifecycle.Lifecycle.Event.ON_START;
 import static androidx.lifecycle.Lifecycle.Event.ON_STOP;
 
 import android.content.Context;
-import android.os.Handler;
-import android.os.Looper;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.OnLifecycleEvent;
-import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
-import com.android.settings.network.MobileDataContentObserver;
 import com.android.settings.network.MobileNetworkRepository;
 import com.android.settings.wifi.WifiPickerTrackerHelper;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.mobile.dataservice.MobileNetworkInfoEntity;
 import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
-import com.android.settingslib.mobile.dataservice.UiccInfoEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +54,6 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
     private SwitchPreference mPreference;
     private TelephonyManager mTelephonyManager;
     private SubscriptionManager mSubscriptionManager;
-    private MobileDataContentObserver mDataContentObserver;
     private FragmentManager mFragmentManager;
     @VisibleForTesting
     int mDialogType;
@@ -79,9 +74,7 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
         super(context, key);
         mSubId = subId;
         mSubscriptionManager = context.getSystemService(SubscriptionManager.class);
-        mDataContentObserver = new MobileDataContentObserver(new Handler(Looper.getMainLooper()));
-        mDataContentObserver.setOnMobileDataChangedListener(() -> updateState(mPreference));
-        mMobileNetworkRepository = MobileNetworkRepository.createBySubId(context, this, mSubId);
+        mMobileNetworkRepository = MobileNetworkRepository.getInstance(context);
         mLifecycleOwner = lifecycleOwner;
         if (lifecycle != null) {
             lifecycle.addObserver(this);
@@ -103,12 +96,13 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
 
     @OnLifecycleEvent(ON_START)
     public void onStart() {
-        mMobileNetworkRepository.addRegister(mLifecycleOwner);
+        mMobileNetworkRepository.addRegister(mLifecycleOwner, this, mSubId);
+        mMobileNetworkRepository.updateEntity();
     }
 
     @OnLifecycleEvent(ON_STOP)
     public void onStop() {
-        mMobileNetworkRepository.removeRegister();
+        mMobileNetworkRepository.removeRegister(this);
     }
 
     @Override
@@ -236,14 +230,14 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
     public void onActiveSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList) {
         mSubscriptionInfoEntityList = subInfoEntityList;
         mSubscriptionInfoEntityList.forEach(entity -> {
-            if (Integer.parseInt(entity.subId) == mSubId) {
+            if (entity.getSubId() == mSubId) {
                 mSubscriptionInfoEntity = entity;
+                if (entity.getSubId() == SubscriptionManager.getDefaultDataSubscriptionId()) {
+                    mDefaultSubId = entity.getSubId();
+                }
             }
         });
-        if (mSubscriptionInfoEntity != null
-                && mSubscriptionInfoEntity.isDefaultDataSubscription) {
-            mDefaultSubId = Integer.parseInt(mSubscriptionInfoEntity.subId);
-        }
+
         update();
         refreshSummary(mPreference);
     }

@@ -16,16 +16,15 @@
 
 package com.android.settings.inputmethod;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.provider.Settings;
 import android.util.FeatureFlagUtils;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
-import com.android.settings.Settings.PhysicalKeyboardActivity;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.inputmethod.PhysicalKeyboardFragment.HardKeyboardDeviceInfo;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
@@ -34,18 +33,14 @@ import java.util.List;
 
 public class KeyboardSettingsPreferenceController extends BasePreferenceController {
 
-    private Context mContext;
     private CachedBluetoothDevice mCachedDevice;
-    private Activity mActivity;
 
     public KeyboardSettingsPreferenceController(Context context, String key) {
         super(context, key);
-        mContext = context;
     }
 
-    public void init(@NonNull CachedBluetoothDevice cachedDevice, @NonNull Activity activity) {
+    public void init(@NonNull CachedBluetoothDevice cachedDevice) {
         mCachedDevice = cachedDevice;
-        mActivity = activity;
     }
 
     @Override
@@ -53,18 +48,26 @@ public class KeyboardSettingsPreferenceController extends BasePreferenceControll
         if (!getPreferenceKey().equals(preference.getKey())) {
             return false;
         }
-
-        final Intent intent = new Intent(Settings.ACTION_HARD_KEYBOARD_SETTINGS);
-        intent.setClass(mContext, PhysicalKeyboardActivity.class);
-        intent.putExtra(PhysicalKeyboardFragment.EXTRA_BT_ADDRESS, mCachedDevice.getAddress());
-        mActivity.startActivityForResult(intent, 0);
+        List<HardKeyboardDeviceInfo> newHardKeyboards = getHardKeyboardList();
+        for (HardKeyboardDeviceInfo hardKeyboardDeviceInfo : newHardKeyboards) {
+            if (mCachedDevice.getAddress().equals(hardKeyboardDeviceInfo.mBluetoothAddress)) {
+                Intent intent = new Intent(Settings.ACTION_HARD_KEYBOARD_SETTINGS);
+                intent.putExtra(
+                        NewKeyboardSettingsUtils.EXTRA_INTENT_FROM,
+                        "com.android.settings.inputmethod.KeyboardSettingsPreferenceController");
+                intent.putExtra(
+                        Settings.EXTRA_INPUT_DEVICE_IDENTIFIER,
+                        hardKeyboardDeviceInfo.mDeviceIdentifier);
+                mContext.startActivity(intent);
+                break;
+            }
+        }
         return true;
     }
 
     @Override
     public int getAvailabilityStatus() {
-        final List<HardKeyboardDeviceInfo> newHardKeyboards =
-                PhysicalKeyboardFragment.getHardKeyboards(mContext);
+        List<HardKeyboardDeviceInfo> newHardKeyboards = getHardKeyboardList();
         if (FeatureFlagUtils.isEnabled(mContext, FeatureFlagUtils.SETTINGS_NEW_KEYBOARD_UI)
                 && !newHardKeyboards.isEmpty()) {
             for (HardKeyboardDeviceInfo hardKeyboardDeviceInfo : newHardKeyboards) {
@@ -77,5 +80,10 @@ public class KeyboardSettingsPreferenceController extends BasePreferenceControll
             }
         }
         return CONDITIONALLY_UNAVAILABLE;
+    }
+
+    @VisibleForTesting
+    List<HardKeyboardDeviceInfo> getHardKeyboardList() {
+        return PhysicalKeyboardFragment.getHardKeyboards(mContext);
     }
 }

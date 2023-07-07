@@ -29,9 +29,16 @@ import static com.android.settings.biometrics2.utils.FingerprintRepositoryUtils.
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.doReturn;
+
 import android.content.Context;
 import android.content.res.Resources;
+import android.hardware.biometrics.SensorProperties;
 import android.hardware.fingerprint.FingerprintManager;
+import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
+import android.hardware.fingerprint.IFingerprintAuthenticatorsRegisteredCallback;
 
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -45,6 +52,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
+
+import java.util.ArrayList;
 
 @RunWith(AndroidJUnit4.class)
 public class FingerprintRepositoryTest {
@@ -139,4 +148,56 @@ public class FingerprintRepositoryTest {
         assertThat(repository.getMaxFingerprintsInSuw(mResources)).isEqualTo(20);
     }
 
+    @Test
+    public void testGetFirstFingerprintSensorPropertiesInternal() {
+        final ArrayList<FingerprintSensorPropertiesInternal> props = new ArrayList<>();
+        final FingerprintSensorPropertiesInternal prop = new FingerprintSensorPropertiesInternal(
+                0 /* sensorId */,
+                SensorProperties.STRENGTH_STRONG,
+                5,
+                new ArrayList<>() /* componentInfo */,
+                TYPE_UDFPS_OPTICAL,
+                true /* resetLockoutRequiresHardwareAuthToken */);
+        props.add(prop);
+        doAnswer(invocation -> {
+            final IFingerprintAuthenticatorsRegisteredCallback callback =
+                    invocation.getArgument(0);
+            callback.onAllAuthenticatorsRegistered(props);
+            return null;
+        }).when(mFingerprintManager).addAuthenticatorsRegisteredCallback(any());
+
+        final FingerprintRepository repository = new FingerprintRepository(mFingerprintManager);
+        assertThat(repository.getFirstFingerprintSensorPropertiesInternal()).isEqualTo(prop);
+    }
+
+    @Test
+    public void testGetEnrollStageCount() {
+        final FingerprintRepository repository = newFingerprintRepository(mFingerprintManager,
+                TYPE_UNKNOWN, 999);
+
+        final int expectedValue = 24;
+        doReturn(expectedValue).when(mFingerprintManager).getEnrollStageCount();
+
+        assertThat(repository.getEnrollStageCount()).isEqualTo(expectedValue);
+    }
+
+    @Test
+    public void testGetEnrollStageThreshold() {
+        final FingerprintRepository repository = newFingerprintRepository(mFingerprintManager,
+                TYPE_UNKNOWN, 999);
+
+        final float expectedValue0 = 0.42f;
+        final float expectedValue1 = 0.24f;
+        final float expectedValue2 = 0.33f;
+        final float expectedValue3 = 0.90f;
+        doReturn(expectedValue0).when(mFingerprintManager).getEnrollStageThreshold(0);
+        doReturn(expectedValue1).when(mFingerprintManager).getEnrollStageThreshold(1);
+        doReturn(expectedValue2).when(mFingerprintManager).getEnrollStageThreshold(2);
+        doReturn(expectedValue3).when(mFingerprintManager).getEnrollStageThreshold(3);
+
+        assertThat(repository.getEnrollStageThreshold(2)).isEqualTo(expectedValue2);
+        assertThat(repository.getEnrollStageThreshold(1)).isEqualTo(expectedValue1);
+        assertThat(repository.getEnrollStageThreshold(3)).isEqualTo(expectedValue3);
+        assertThat(repository.getEnrollStageThreshold(0)).isEqualTo(expectedValue0);
+    }
 }

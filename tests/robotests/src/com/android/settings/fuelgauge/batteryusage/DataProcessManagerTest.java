@@ -82,8 +82,8 @@ public final class DataProcessManagerTest {
         doReturn(66).when(mIntent).getIntExtra(eq(BatteryManager.EXTRA_LEVEL), anyInt());
 
         mDataProcessManager = new DataProcessManager(
-                mContext, /*handler=*/ null,  /*callbackFunction=*/ null,
-                /*hourlyBatteryLevelsPerDay=*/ new ArrayList<>(),
+                mContext, /*handler=*/ null,  /*rawStartTimestamp=*/ 0L,
+                /*callbackFunction=*/ null, /*hourlyBatteryLevelsPerDay=*/ new ArrayList<>(),
                 /*batteryHistoryMap=*/ new HashMap<>());
     }
 
@@ -102,7 +102,7 @@ public final class DataProcessManagerTest {
                         AppUsageEventEntity.KEY_UID,
                         AppUsageEventEntity.KEY_PACKAGE_NAME,
                         AppUsageEventEntity.KEY_TIMESTAMP});
-        DatabaseUtils.sFakeAppUsageEventSupplier = () -> cursor;
+        DatabaseUtils.sFakeSupplier = () -> cursor;
         doReturn(true).when(mUserManager).isUserUnlocked(anyInt());
 
         mDataProcessManager.start();
@@ -171,10 +171,10 @@ public final class DataProcessManagerTest {
         cursor.addRow(new Object[] {
                 AppUsageEventType.ACTIVITY_STOPPED.getNumber(), /*timestamp=*/ 6, /*userId=*/ 1,
                 /*instanceId=*/ 2, packageName});
-        DatabaseUtils.sFakeAppUsageEventSupplier = () -> cursor;
+        DatabaseUtils.sFakeSupplier = () -> cursor;
 
         final DataProcessManager dataProcessManager = new DataProcessManager(
-                mContext, /*handler=*/ null,  /*callbackFunction=*/ null,
+                mContext, /*handler=*/ null, /*rawStartTimestamp=*/ 2L,  /*callbackFunction=*/ null,
                 hourlyBatteryLevelsPerDay, /*batteryHistoryMap=*/ new HashMap<>());
         dataProcessManager.start();
 
@@ -183,7 +183,7 @@ public final class DataProcessManagerTest {
         assertThat(dataProcessManager.getIsCurrentBatteryHistoryLoaded()).isTrue();
         assertThat(dataProcessManager.getShowScreenOnTime()).isTrue();
         final List<AppUsageEvent> appUsageEventList = dataProcessManager.getAppUsageEventList();
-        Collections.sort(appUsageEventList, DataProcessor.TIMESTAMP_COMPARATOR);
+        Collections.sort(appUsageEventList, DataProcessor.APP_USAGE_EVENT_TIMESTAMP_COMPARATOR);
         assertThat(appUsageEventList.size()).isEqualTo(6);
         assertAppUsageEvent(
                 appUsageEventList.get(0), AppUsageEventType.ACTIVITY_RESUMED, /*timestamp=*/ 1);
@@ -240,49 +240,13 @@ public final class DataProcessManagerTest {
                         AppUsageEventEntity.KEY_TIMESTAMP});
         // Adds fake data into the cursor.
         cursor.addRow(new Object[] {101L, "app name1", 1001L});
-        DatabaseUtils.sFakeAppUsageEventSupplier = () -> cursor;
+        DatabaseUtils.sFakeSupplier = () -> cursor;
 
         mDataProcessManager.start();
 
         assertThat(mDataProcessManager.getAppUsageEventList()).isEmpty();
         assertThat(mDataProcessManager.getAppUsagePeriodMap()).isNull();
         assertThat(mDataProcessManager.getShowScreenOnTime()).isFalse();
-    }
-
-    @Test
-    public void getStartTimestampOfBatteryLevelData_returnExpectedResult() {
-        final List<BatteryLevelData.PeriodBatteryLevelData> hourlyBatteryLevelsPerDay =
-                new ArrayList<>();
-        final List<Long> timestamps = new ArrayList<>();
-        timestamps.add(101L);
-        timestamps.add(1001L);
-        final List<Integer> levels = new ArrayList<>();
-        levels.add(1);
-        levels.add(2);
-        hourlyBatteryLevelsPerDay.add(null);
-        hourlyBatteryLevelsPerDay.add(
-                new BatteryLevelData.PeriodBatteryLevelData(timestamps, levels));
-
-        final DataProcessManager dataProcessManager = new DataProcessManager(
-                mContext, /*handler=*/ null,  /*callbackFunction=*/ null,
-                hourlyBatteryLevelsPerDay, /*batteryHistoryMap=*/ null);
-
-        assertThat(dataProcessManager.getStartTimestampOfBatteryLevelData()).isEqualTo(101);
-    }
-
-    @Test
-    public void getStartTimestampOfBatteryLevelData_emptyLevels_returnZero() {
-        final List<BatteryLevelData.PeriodBatteryLevelData> hourlyBatteryLevelsPerDay =
-                new ArrayList<>();
-        hourlyBatteryLevelsPerDay.add(null);
-        hourlyBatteryLevelsPerDay.add(
-                new BatteryLevelData.PeriodBatteryLevelData(new ArrayList<>(), new ArrayList<>()));
-
-        final DataProcessManager dataProcessManager = new DataProcessManager(
-                mContext, /*handler=*/ null,  /*callbackFunction=*/ null,
-                hourlyBatteryLevelsPerDay, /*batteryHistoryMap=*/ null);
-
-        assertThat(dataProcessManager.getStartTimestampOfBatteryLevelData()).isEqualTo(0);
     }
 
     @Test
@@ -299,7 +263,7 @@ public final class DataProcessManagerTest {
     }
 
     @Test
-    public void getBatteryLevelData_notEnoughData_returnNull() {
+    public void getBatteryLevelData_allDataInOneHour_returnExpectedResult() {
         // The timestamps and the current time are within half hour before an even hour.
         final long[] timestamps = {
                 DateUtils.HOUR_IN_MILLIS * 2 - 300L,
@@ -310,9 +274,26 @@ public final class DataProcessManagerTest {
                 createHistoryMap(timestamps, levels);
         DataProcessor.sTestCurrentTimeMillis = timestamps[timestamps.length - 1];
 
-        assertThat(DataProcessManager.getBatteryLevelData(
-                mContext, /*handler=*/ null, batteryHistoryMap, /*asyncResponseDelegate=*/ null))
-                .isNull();
+        final BatteryLevelData resultData =
+                DataProcessManager.getBatteryLevelData(
+                        mContext,
+                        /*handler=*/ null,
+                        batteryHistoryMap,
+                        /*asyncResponseDelegate=*/ null);
+
+
+        final List<Long> expectedDailyTimestamps = List.of(
+                DateUtils.HOUR_IN_MILLIS * 2 - 300L,
+                DateUtils.HOUR_IN_MILLIS * 2 - 100L);
+        final List<Integer> expectedDailyLevels = List.of(100, 66);
+        final List<List<Long>> expectedHourlyTimestamps = List.of(expectedDailyTimestamps);
+        final List<List<Integer>> expectedHourlyLevels = List.of(expectedDailyLevels);
+        verifyExpectedBatteryLevelData(
+                resultData,
+                expectedDailyTimestamps,
+                expectedDailyLevels,
+                expectedHourlyTimestamps,
+                expectedHourlyLevels);
     }
 
     @Test
@@ -333,7 +314,7 @@ public final class DataProcessManagerTest {
 
         final List<Long> expectedDailyTimestamps = List.of(
                 1640966400000L,  // 2022-01-01 00:00:00
-                1640973600000L); // 2022-01-01 02:00:00
+                1640970000000L); // 2022-01-01 01:00:00
         final List<Integer> expectedDailyLevels = List.of(100, 66);
         final List<List<Long>> expectedHourlyTimestamps = List.of(expectedDailyTimestamps);
         final List<List<Integer>> expectedHourlyLevels = List.of(expectedDailyLevels);

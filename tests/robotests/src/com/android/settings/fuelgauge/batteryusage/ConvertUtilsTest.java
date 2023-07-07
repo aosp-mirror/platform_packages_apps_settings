@@ -39,6 +39,7 @@ import android.os.RemoteException;
 import android.os.UserHandle;
 
 import com.android.settings.fuelgauge.batteryusage.db.AppUsageEventEntity;
+import com.android.settings.fuelgauge.batteryusage.db.BatteryEventEntity;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -192,6 +193,22 @@ public final class ConvertUtilsTest {
         assertThat(values.getAsInteger(AppUsageEventEntity.KEY_INSTANCE_ID)).isEqualTo(100001);
         assertThat(values.getAsString(AppUsageEventEntity.KEY_TASK_ROOT_PACKAGE_NAME))
                 .isEqualTo("com.android.settings2");
+    }
+
+    @Test
+    public void convertBatteryEventToContentValues_normalCase_returnsExpectedContentValues() {
+        final BatteryEvent batteryEvent =
+                BatteryEvent.newBuilder()
+                        .setTimestamp(10001L)
+                        .setType(BatteryEventType.POWER_CONNECTED)
+                        .setBatteryLevel(66)
+                        .build();
+        final ContentValues values =
+                ConvertUtils.convertBatteryEventToContentValues(batteryEvent);
+        assertThat(values.getAsLong(BatteryEventEntity.KEY_TIMESTAMP)).isEqualTo(10001L);
+        assertThat(values.getAsInteger(BatteryEventEntity.KEY_BATTERY_EVENT_TYPE)).isEqualTo(
+                BatteryEventType.POWER_CONNECTED.getNumber());
+        assertThat(values.getAsInteger(BatteryEventEntity.KEY_BATTERY_LEVEL)).isEqualTo(66);
     }
 
     @Test
@@ -403,6 +420,15 @@ public final class ConvertUtilsTest {
         assertThat(appUsageEvent.getType()).isEqualTo(AppUsageEventType.DEVICE_SHUTDOWN);
         assertThat(appUsageEvent.getTaskRootPackageName()).isEqualTo("");
         assertThat(appUsageEvent.getInstanceId()).isEqualTo(0);
+    }
+
+    @Test
+    public void convertToBatteryEvent_normalCase_returnsExpectedResult() {
+        final BatteryEvent batteryEvent = ConvertUtils.convertToBatteryEvent(
+                666L, BatteryEventType.POWER_DISCONNECTED, 88);
+        assertThat(batteryEvent.getTimestamp()).isEqualTo(666L);
+        assertThat(batteryEvent.getType()).isEqualTo(BatteryEventType.POWER_DISCONNECTED);
+        assertThat(batteryEvent.getBatteryLevel()).isEqualTo(88);
     }
 
     @Test

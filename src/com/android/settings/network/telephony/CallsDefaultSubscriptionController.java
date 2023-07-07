@@ -26,24 +26,18 @@ import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
 
 public class CallsDefaultSubscriptionController extends DefaultSubscriptionController {
 
-    private SubscriptionInfoEntity mSubscriptionInfoEntity;
-
     public CallsDefaultSubscriptionController(Context context, String preferenceKey,
             Lifecycle lifecycle, LifecycleOwner lifecycleOwner) {
         super(context, preferenceKey, lifecycle, lifecycleOwner);
     }
 
     @Override
-    protected SubscriptionInfoEntity getDefaultSubscriptionInfo() {
-        return mSubscriptionInfoEntity;
-    }
-
-    @Override
     protected int getDefaultSubscriptionId() {
+        int defaultCallSubId = SubscriptionManager.getDefaultVoiceSubscriptionId();
         for (SubscriptionInfoEntity subInfo : mSubInfoEntityList) {
-            if (subInfo.isActiveSubscriptionId && subInfo.isDefaultVoiceSubscription) {
-                mSubscriptionInfoEntity = subInfo;
-                return Integer.parseInt(subInfo.subId);
+            int subId = subInfo.getSubId();
+            if (subInfo.isActiveSubscriptionId && subId == defaultCallSubId) {
+                return subId;
             }
         }
         return SubscriptionManager.INVALID_SUBSCRIPTION_ID;

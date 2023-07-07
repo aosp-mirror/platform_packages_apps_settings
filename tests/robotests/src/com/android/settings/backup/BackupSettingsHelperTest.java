@@ -90,7 +90,7 @@ public class BackupSettingsHelperTest {
 
         String backupSummary = mBackupSettingsHelper.getSummary();
 
-        assertThat(backupSummary).isEqualTo(mContext.getString(R.string.on));
+        assertThat(backupSummary).isEqualTo(mContext.getString(R.string.backup_summary_state_on));
     }
 
     @Test
@@ -100,7 +100,7 @@ public class BackupSettingsHelperTest {
 
         String backupSummary = mBackupSettingsHelper.getSummary();
 
-        assertThat(backupSummary).isEqualTo(mContext.getString(R.string.off));
+        assertThat(backupSummary).isEqualTo(mContext.getString(R.string.backup_summary_state_off));
     }
 
     @Test

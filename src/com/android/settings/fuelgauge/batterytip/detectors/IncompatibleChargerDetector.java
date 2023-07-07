@@ -18,7 +18,6 @@ package com.android.settings.fuelgauge.batterytip.detectors;
 import android.content.Context;
 import android.util.Log;
 
-import com.android.settings.fuelgauge.BatteryInfo;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.IncompatibleChargerTip;
 import com.android.settingslib.Utils;
@@ -28,25 +27,17 @@ public final class IncompatibleChargerDetector implements BatteryTipDetector {
     private static final String TAG = "IncompatibleChargerDetector";
 
     private final Context mContext;
-    private final BatteryInfo mBatteryInfo;
 
-    public IncompatibleChargerDetector(Context context, BatteryInfo batteryInfo) {
+    public IncompatibleChargerDetector(Context context) {
         mContext = context;
-        mBatteryInfo = batteryInfo;
     }
 
     @Override
     public BatteryTip detect() {
-        int state = BatteryTip.StateType.INVISIBLE;
-        boolean isIncompatibleCharging = false;
-
-        // Check incompatible charging state if the device is plugged.
-        if (mBatteryInfo.pluggedStatus != 0) {
-            isIncompatibleCharging = Utils.containsIncompatibleChargers(mContext, TAG);
-            if (isIncompatibleCharging) {
-                state = BatteryTip.StateType.NEW;
-            }
-        }
+        final boolean isIncompatibleCharging =
+                Utils.containsIncompatibleChargers(mContext, TAG);
+        final int state = isIncompatibleCharging
+                ? BatteryTip.StateType.NEW : BatteryTip.StateType.INVISIBLE;
         Log.d(TAG, "detect() state= " + state + " isIncompatibleCharging: "
                 + isIncompatibleCharging);
         return new IncompatibleChargerTip(state);

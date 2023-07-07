@@ -29,6 +29,7 @@ import android.content.ComponentName;
 
 import com.android.settings.R;
 import com.android.settings.biometrics.BiometricEnrollActivity;
+import com.android.settings.utils.ActivityControllerWrapper;
 
 import com.google.android.setupcompat.PartnerCustomizationLayout;
 import com.google.android.setupcompat.template.FooterBarMixin;
@@ -49,8 +50,8 @@ public class ActiveUnlockRequireBiometricSetupTest {
 
     @Before
     public void setUp() {
-        mActivity = Robolectric.buildActivity(
-                ActiveUnlockRequireBiometricSetup.class).setup().get();
+        mActivity = (ActiveUnlockRequireBiometricSetup) ActivityControllerWrapper.setup(
+                Robolectric.buildActivity(ActiveUnlockRequireBiometricSetup.class)).get();
         mLayout = mActivity.findViewById(R.id.setup_wizard_layout);
     }
 
