@@ -16,28 +16,46 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.internal.accessibility.AccessibilityShortcutController.FONT_SIZE_COMPONENT_NAME;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.content.ComponentName;
 import android.content.Context;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.widget.PopupWindow;
+import android.widget.SeekBar;
 
+import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
+import androidx.preference.PreferenceViewHolder;
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settings.testutils.shadow.ShadowInteractionJankMonitor;
 import com.android.settings.widget.LabeledSeekBarPreference;
+import com.android.settings.widget.SeekBarPreference;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.ShadowApplication;
 
 /**
  * Tests for {@link PreviewSizeSeekBarController}.
@@ -46,25 +64,70 @@ import org.robolectric.annotation.Config;
 @Config(shadows = {ShadowInteractionJankMonitor.class})
 public class PreviewSizeSeekBarControllerTest {
     private static final String FONT_SIZE_KEY = "font_size";
+    private static final String KEY_SAVED_QS_TOOLTIP_RESHOW = "qs_tooltip_reshow";
+    @Spy
     private final Context mContext = ApplicationProvider.getApplicationContext();
     private PreviewSizeSeekBarController mSeekBarController;
     private FontSizeData mFontSizeData;
     private LabeledSeekBarPreference mSeekBarPreference;
 
-    @Mock
     private PreferenceScreen mPreferenceScreen;
+    private TestFragment mFragment;
+    private PreferenceViewHolder mHolder;
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
+    private PreferenceManager mPreferenceManager;
+    private SeekBar mSeekBar;
+
+    @Mock
+    private PreviewSizeSeekBarController.ProgressInteractionListener mInteractionListener;
+
+    private static PopupWindow getLatestPopupWindow() {
+        final ShadowApplication shadowApplication =
+                Shadow.extract(ApplicationProvider.getApplicationContext());
+        return shadowApplication.getLatestPopupWindow();
+    }
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mFontSizeData = new FontSizeData(mContext);
-
-        mSeekBarController =
-                new PreviewSizeSeekBarController(mContext, FONT_SIZE_KEY, mFontSizeData);
-
+        mContext.setTheme(R.style.Theme_AppCompat);
+        mFragment = spy(new TestFragment());
+        when(mFragment.getPreferenceManager()).thenReturn(mPreferenceManager);
+        when(mFragment.getPreferenceManager().getContext()).thenReturn(mContext);
+        when(mFragment.getContext()).thenReturn(mContext);
+        mPreferenceScreen = spy(new PreferenceScreen(mContext, /* attrs= */ null));
+        when(mPreferenceScreen.getPreferenceManager()).thenReturn(mPreferenceManager);
+        doReturn(mPreferenceScreen).when(mFragment).getPreferenceScreen();
         mSeekBarPreference = spy(new LabeledSeekBarPreference(mContext, /* attrs= */ null));
+        mSeekBarPreference.setKey(FONT_SIZE_KEY);
+
+        LayoutInflater inflater = LayoutInflater.from(mContext);
+        mHolder = spy(PreferenceViewHolder.createInstanceForTests(inflater.inflate(
+                R.layout.preference_labeled_slider, null)));
+        mSeekBar = spy(new SeekBar(mContext));
+        doReturn(mSeekBar).when(mHolder).findViewById(com.android.internal.R.id.seekbar);
+        mSeekBarPreference.onBindViewHolder(mHolder);
+
         when(mPreferenceScreen.findPreference(anyString())).thenReturn(mSeekBarPreference);
+
+        mFontSizeData = new FontSizeData(mContext);
+        mSeekBarController =
+                new PreviewSizeSeekBarController(mContext, FONT_SIZE_KEY, mFontSizeData) {
+                    @Override
+                    ComponentName getTileComponentName() {
+                        return FONT_SIZE_COMPONENT_NAME;
+                    }
+
+                    @Override
+                    CharSequence getTileTooltipContent() {
+                        return mContext.getText(
+                                R.string.accessibility_font_scaling_auto_added_qs_tooltip_content);
+                    }
+                };
+        mSeekBarController.setInteractionListener(mInteractionListener);
+        when(mPreferenceScreen.findPreference(mSeekBarController.getPreferenceKey())).thenReturn(
+                mSeekBarPreference);
     }
 
     @Test
@@ -97,5 +160,100 @@ public class PreviewSizeSeekBarControllerTest {
         mSeekBarController.resetState();
 
         assertThat(mSeekBarPreference.getProgress()).isEqualTo(defaultProgress);
+    }
+
+    @Test
+    public void resetState_verifyOnProgressChanged() {
+        mSeekBarController.displayPreference(mPreferenceScreen);
+        mSeekBarController.resetState();
+
+        verify(mInteractionListener).onProgressChanged();
+    }
+
+    @Test
+    public void onProgressChanged_verifyNotifyPreferenceChanged() {
+        mSeekBarController.displayPreference(mPreferenceScreen);
+
+        mSeekBarPreference.setProgress(mSeekBarPreference.getMax());
+        mSeekBarPreference.onProgressChanged(new SeekBar(mContext), /* progress= */
+                0, /* fromUser= */ false);
+
+        verify(mInteractionListener).notifyPreferenceChanged();
+    }
+
+    @Test
+    public void onProgressChanged_showTooltipView() {
+        mSeekBarController.displayPreference(mPreferenceScreen);
+
+        // Simulate changing the progress for the first time
+        int newProgress = (mSeekBarPreference.getProgress() != 0) ? 0 : mSeekBarPreference.getMax();
+        mSeekBarPreference.setProgress(newProgress);
+        mSeekBarPreference.onProgressChanged(new SeekBar(mContext),
+                newProgress,
+                /* fromUser= */ false);
+
+        assertThat(getLatestPopupWindow().isShowing()).isTrue();
+    }
+
+    @Test
+    public void onProgressChanged_tooltipViewHasBeenShown_notShowTooltipView() {
+        mSeekBarController.displayPreference(mPreferenceScreen);
+        // Simulate changing the progress for the first time
+        int newProgress = (mSeekBarPreference.getProgress() != 0) ? 0 : mSeekBarPreference.getMax();
+        mSeekBarPreference.setProgress(newProgress);
+        mSeekBarPreference.onProgressChanged(new SeekBar(mContext),
+                newProgress,
+                /* fromUser= */ false);
+        getLatestPopupWindow().dismiss();
+
+        // Simulate progress changing for the second time
+        newProgress = (mSeekBarPreference.getProgress() != 0) ? 0 : mSeekBarPreference.getMax();
+        mSeekBarPreference.setProgress(newProgress);
+        mSeekBarPreference.onProgressChanged(new SeekBar(mContext),
+                newProgress,
+                /* fromUser= */ false);
+
+        assertThat(getLatestPopupWindow().isShowing()).isFalse();
+    }
+
+    @Test
+    @Config(shadows = ShadowFragment.class)
+    public void restoreValueFromSavedInstanceState_showTooltipView() {
+        final Bundle savedInstanceState = new Bundle();
+        savedInstanceState.putBoolean(KEY_SAVED_QS_TOOLTIP_RESHOW, /* value= */ true);
+        mSeekBarController.onCreate(savedInstanceState);
+
+        mSeekBarController.displayPreference(mPreferenceScreen);
+
+        assertThat(getLatestPopupWindow().isShowing()).isTrue();
+    }
+
+    @Test
+    public void onProgressChanged_setCorrespondingCustomizedStateDescription() {
+        String[] stateLabels = new String[]{"1", "2", "3", "4", "5"};
+        mSeekBarController.setProgressStateLabels(stateLabels);
+        mSeekBarController.displayPreference(mPreferenceScreen);
+
+        int progress = 3;
+        mSeekBarPreference.setProgress(progress);
+        mSeekBarPreference.onProgressChanged(mSeekBar,
+                progress,
+                /* fromUser= */ false);
+
+        verify(mSeekBarPreference).setSeekBarStateDescription(stateLabels[progress]);
+        assertThat(mSeekBar.getStateDescription().toString()).isEqualTo(stateLabels[progress]);
+    }
+
+    private static class TestFragment extends SettingsPreferenceFragment {
+
+        @Override
+        protected boolean shouldSkipForInitialSUW() {
+            return false;
+        }
+
+        @Override
+        public int getMetricsCategory() {
+            return 0;
+        }
     }
 }

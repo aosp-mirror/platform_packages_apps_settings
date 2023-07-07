@@ -28,6 +28,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.verify.domain.DomainVerificationManager;
 import android.content.pm.verify.domain.DomainVerificationUserState;
+import android.icu.text.MessageFormat;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.ArraySet;
@@ -52,7 +53,10 @@ import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.MainSwitchPreference;
 import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
@@ -246,15 +250,14 @@ public class AppLaunchSettings extends AppInfoBase implements
 
     /** Initialize verified links preference */
     private void initVerifiedLinksPreference() {
-        final VerifiedLinksPreference verifiedLinksPreference =
-                (VerifiedLinksPreference) mMainPreferenceCategory.findPreference(
-                        VERIFIED_LINKS_PREF_KEY);
-        verifiedLinksPreference.setWidgetFrameClickListener(l -> {
+        final Preference verifiedLinksPreference = mMainPreferenceCategory.findPreference(
+                VERIFIED_LINKS_PREF_KEY);
+        verifiedLinksPreference.setOnPreferenceClickListener(preference -> {
             showVerifiedLinksDialog();
+            return true;
         });
         final int verifiedLinksNo = getLinksNumber(DOMAIN_STATE_VERIFIED);
         verifiedLinksPreference.setTitle(getVerifiedLinksTitle(verifiedLinksNo));
-        verifiedLinksPreference.setCheckBoxVisible(verifiedLinksNo > 0);
         verifiedLinksPreference.setEnabled(verifiedLinksNo > 0);
     }
 
@@ -278,23 +281,37 @@ public class AppLaunchSettings extends AppInfoBase implements
 
         final List<String> verifiedLinksList = IntentPickerUtils.getLinksList(
                 mDomainVerificationManager, mPackageName, DOMAIN_STATE_VERIFIED);
-        return new AlertDialog.Builder(mContext)
+        AlertDialog dialog = new AlertDialog.Builder(mContext)
                 .setCustomTitle(titleView)
                 .setCancelable(true)
                 .setItems(verifiedLinksList.toArray(new String[0]), /* listener= */ null)
                 .setPositiveButton(R.string.app_launch_dialog_ok, /* listener= */ null)
                 .create();
+        if (dialog.getListView() != null) {
+            dialog.getListView().setTextDirection(View.TEXT_DIRECTION_LOCALE);
+        } else {
+            Log.w(TAG, "createVerifiedLinksDialog: dialog.getListView() is null, please check it.");
+        }
+        return dialog;
     }
 
     @VisibleForTesting
     String getVerifiedLinksTitle(int linksNo) {
-        return getResources().getQuantityString(
-                R.plurals.app_launch_verified_links_title, linksNo, linksNo);
+        MessageFormat msgFormat = new MessageFormat(
+                getResources().getString(R.string.app_launch_verified_links_title),
+                Locale.getDefault());
+        Map<String, Object> arguments = new HashMap<>();
+        arguments.put("count", linksNo);
+        return msgFormat.format(arguments);
     }
 
     private String getVerifiedLinksMessage(int linksNo) {
-        return getResources().getQuantityString(
-                R.plurals.app_launch_verified_links_message, linksNo, linksNo);
+        MessageFormat msgFormat = new MessageFormat(
+                getResources().getString(R.string.app_launch_verified_links_message),
+                Locale.getDefault());
+        Map<String, Object> arguments = new HashMap<>();
+        arguments.put("count", linksNo);
+        return msgFormat.format(arguments);
     }
 
     /** Add selected links items */

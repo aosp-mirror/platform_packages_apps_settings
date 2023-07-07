@@ -19,157 +19,119 @@ package com.android.settings.accessibility;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Resources;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.Settings;
 
-import androidx.lifecycle.LifecycleObserver;
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settings.core.BasePreferenceController;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnStart;
+import com.android.settingslib.core.lifecycle.events.OnStop;
 import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
-import com.google.common.primitives.Ints;
-
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-/**
- * Controller class that control accessibility time out settings.
- */
-public class AccessibilityTimeoutController extends AbstractPreferenceController implements
-        LifecycleObserver, SelectorWithWidgetPreference.OnClickListener, PreferenceControllerMixin {
-    static final String CONTENT_TIMEOUT_SETTINGS_SECURE =
-            Settings.Secure.ACCESSIBILITY_NON_INTERACTIVE_UI_TIMEOUT_MS;
-    static final String CONTROL_TIMEOUT_SETTINGS_SECURE =
-            Settings.Secure.ACCESSIBILITY_INTERACTIVE_UI_TIMEOUT_MS;
+/** Controller class that control accessibility timeout settings. */
+public class AccessibilityTimeoutController extends BasePreferenceController implements
+        LifecycleObserver, OnStart, OnStop , SelectorWithWidgetPreference.OnClickListener {
+
+    private static final List<String> ACCESSIBILITY_TIMEOUT_FEATURE_KEYS = Arrays.asList(
+            Settings.Secure.ACCESSIBILITY_NON_INTERACTIVE_UI_TIMEOUT_MS,
+            Settings.Secure.ACCESSIBILITY_INTERACTIVE_UI_TIMEOUT_MS
+    );
 
     // pair the preference key and timeout value.
     private final Map<String, Integer> mAccessibilityTimeoutKeyToValueMap = new HashMap<>();
-
     // RadioButtonPreference key, each preference represent a timeout value.
-    private final String mPreferenceKey;
     private final ContentResolver mContentResolver;
     private final Resources mResources;
-    private OnChangeListener mOnChangeListener;
     private SelectorWithWidgetPreference mPreference;
     private int mAccessibilityUiTimeoutValue;
+    private AccessibilitySettingsContentObserver mSettingsContentObserver;
 
-    public AccessibilityTimeoutController(Context context, Lifecycle lifecycle,
-            String preferenceKey) {
-        super(context);
-
+    public AccessibilityTimeoutController(Context context, String preferenceKey) {
+        super(context, preferenceKey);
         mContentResolver = context.getContentResolver();
         mResources = context.getResources();
-
-        if (lifecycle != null) {
-            lifecycle.addObserver(this);
-        }
-        mPreferenceKey = preferenceKey;
+        mSettingsContentObserver = new AccessibilitySettingsContentObserver(
+                new Handler(Looper.getMainLooper()));
+        mSettingsContentObserver.registerKeysToObserverCallback(ACCESSIBILITY_TIMEOUT_FEATURE_KEYS,
+                key -> updateState(mPreference));
     }
 
-    protected static int getSecureAccessibilityTimeoutValue(ContentResolver resolver, String name) {
-        String timeOutSec = Settings.Secure.getString(resolver, name);
-        if (timeOutSec == null) {
-            return 0;
-        }
-        Integer timeOutValue = Ints.tryParse(timeOutSec);
-        return timeOutValue == null ? 0 : timeOutValue;
+    @VisibleForTesting
+    AccessibilityTimeoutController(Context context, String preferenceKey,
+            AccessibilitySettingsContentObserver contentObserver) {
+        this(context, preferenceKey);
+        mSettingsContentObserver = contentObserver;
     }
 
-    public void setOnChangeListener(OnChangeListener listener) {
-        mOnChangeListener = listener;
+    @Override
+    public void onStart() {
+        mSettingsContentObserver.register(mContentResolver);
+    }
+
+    @Override
+    public void onStop() {
+        mSettingsContentObserver.unregister(mContentResolver);
+    }
+
+    @Override
+    public int getAvailabilityStatus() {
+        return AVAILABLE;
+    }
+
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        mPreference = screen.findPreference(getPreferenceKey());
+        mPreference.setOnClickListener(this);
+    }
+
+    @Override
+    public void onRadioButtonClicked(SelectorWithWidgetPreference preference) {
+        final String value = String.valueOf(getTimeoutValueToKeyMap().get(mPreferenceKey));
+
+        // save value to both content and control timeout setting.
+        Settings.Secure.putString(mContentResolver,
+                Settings.Secure.ACCESSIBILITY_NON_INTERACTIVE_UI_TIMEOUT_MS, value);
+        Settings.Secure.putString(mContentResolver,
+                Settings.Secure.ACCESSIBILITY_INTERACTIVE_UI_TIMEOUT_MS, value);
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        mAccessibilityUiTimeoutValue = AccessibilityTimeoutUtils.getSecureAccessibilityTimeoutValue(
+                mContentResolver);
+
+        // reset RadioButton
+        mPreference.setChecked(false);
+        final int preferenceValue = getTimeoutValueToKeyMap().get(mPreference.getKey());
+        if (mAccessibilityUiTimeoutValue == preferenceValue) {
+            mPreference.setChecked(true);
+        }
     }
 
     private Map<String, Integer> getTimeoutValueToKeyMap() {
         if (mAccessibilityTimeoutKeyToValueMap.size() == 0) {
-
             String[] timeoutKeys = mResources.getStringArray(
                     R.array.accessibility_timeout_control_selector_keys);
-
-            int[] timeoutValues = mResources.getIntArray(
+            final int[] timeoutValues = mResources.getIntArray(
                     R.array.accessibility_timeout_selector_values);
-
             final int timeoutValueCount = timeoutValues.length;
             for (int i = 0; i < timeoutValueCount; i++) {
                 mAccessibilityTimeoutKeyToValueMap.put(timeoutKeys[i], timeoutValues[i]);
             }
         }
         return mAccessibilityTimeoutKeyToValueMap;
-    }
-
-    private void putSecureString(String name, String value) {
-        Settings.Secure.putString(mContentResolver, name, value);
-    }
-
-    private void handlePreferenceChange(String value) {
-        // save value to both content and control timeout setting.
-        putSecureString(Settings.Secure.ACCESSIBILITY_NON_INTERACTIVE_UI_TIMEOUT_MS, value);
-        putSecureString(Settings.Secure.ACCESSIBILITY_INTERACTIVE_UI_TIMEOUT_MS, value);
-    }
-
-    @Override
-    public boolean isAvailable() {
-        return true;
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return mPreferenceKey;
-    }
-
-    @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-
-        mPreference = (SelectorWithWidgetPreference)
-                screen.findPreference(getPreferenceKey());
-        mPreference.setOnClickListener(this);
-    }
-
-    @Override
-    public void onRadioButtonClicked(SelectorWithWidgetPreference preference) {
-        int value = getTimeoutValueToKeyMap().get(mPreferenceKey);
-        handlePreferenceChange(String.valueOf(value));
-        if (mOnChangeListener != null) {
-            mOnChangeListener.onCheckedChanged(mPreference);
-        }
-    }
-
-    private int getAccessibilityTimeoutValue() {
-        // get accessibility control timeout value
-        int timeoutValue = getSecureAccessibilityTimeoutValue(mContentResolver,
-                CONTROL_TIMEOUT_SETTINGS_SECURE);
-        return timeoutValue;
-    }
-
-    protected void updatePreferenceCheckedState(int value) {
-        if (mAccessibilityUiTimeoutValue == value) {
-            mPreference.setChecked(true);
-        }
-    }
-
-    @Override
-    public void updateState(Preference preference) {
-        super.updateState(preference);
-
-        mAccessibilityUiTimeoutValue = getAccessibilityTimeoutValue();
-
-        // reset RadioButton
-        mPreference.setChecked(false);
-        int preferenceValue = getTimeoutValueToKeyMap().get(mPreference.getKey());
-        updatePreferenceCheckedState(preferenceValue);
-    }
-
-    /**
-     * Listener interface handles checked event.
-     */
-    public interface OnChangeListener {
-        /**
-         * A hook that is called when preference checked.
-         */
-        void onCheckedChanged(Preference preference);
     }
 }

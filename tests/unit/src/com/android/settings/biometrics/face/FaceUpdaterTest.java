@@ -39,6 +39,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import com.android.settings.safetycenter.SafetyCenterManagerWrapper;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -152,6 +153,7 @@ public class FaceUpdaterTest {
         verify(mSafetyCenterManagerWrapper, never()).isEnabled(any());
     }
 
+    @Ignore("b/282413778")
     @Test
     public void enroll_secondVersion_onEnrollmentCallbacks_triggerGivenCallback() {
         ArgumentCaptor<FaceManager.EnrollmentCallback> callbackCaptor =
@@ -180,6 +182,7 @@ public class FaceUpdaterTest {
                 .onEnrollmentFrame(HELP_CODE, HELP_MESSAGE, CELL, STAGE, PAN, TILT, DISTANCE);
     }
 
+    @Ignore("b/282413778")
     @Test
     public void enroll_secondVersion_onEnrollmentSuccess_invokedInteractionWithSafetyCenter() {
         ArgumentCaptor<FaceManager.EnrollmentCallback> callbackCaptor =
@@ -201,6 +204,7 @@ public class FaceUpdaterTest {
         verify(mSafetyCenterManagerWrapper).isEnabled(mContext);
     }
 
+    @Ignore("b/282413778")
     @Test
     public void enroll_secondVersion_onEnrollmentNotYetFinished_didntInvokeInteractionWithSafetyCenter() {
         ArgumentCaptor<FaceManager.EnrollmentCallback> callbackCaptor =

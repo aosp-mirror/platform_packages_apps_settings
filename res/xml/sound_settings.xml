@@ -64,30 +64,30 @@
         settings:searchable="false"
         settings:controller="com.android.settings.sound.HandsFreeProfileOutputPreferenceController"/>
 
-    <!-- Ring volume -->
+    <!-- Separate Ring volume -->
     <com.android.settings.notification.VolumeSeekBarPreference
-        android:key="ring_volume"
-        android:icon="@drawable/ic_notifications"
-        android:title="@string/ring_volume_option_title"
-        android:order="-160"
-        settings:controller="com.android.settings.notification.RingVolumePreferenceController"/>
-
-
-    <!-- Alarm volume -->
-    <com.android.settings.notification.VolumeSeekBarPreference
-        android:key="alarm_volume"
-        android:icon="@*android:drawable/ic_audio_alarm"
-        android:title="@string/alarm_volume_option_title"
-        android:order="-150"
-        settings:controller="com.android.settings.notification.AlarmVolumePreferenceController"/>
+        android:key="separate_ring_volume"
+        android:icon="@drawable/ic_ring_volume"
+        android:title="@string/separate_ring_volume_option_title"
+        android:order="-155"
+        settings:controller="com.android.settings.notification.SeparateRingVolumePreferenceController"/>
 
     <!-- Notification volume -->
     <com.android.settings.notification.VolumeSeekBarPreference
         android:key="notification_volume"
         android:icon="@drawable/ic_notifications"
         android:title="@string/notification_volume_option_title"
+        android:order="-150"
+        settings:controller="com.android.settings.notification.NotificationVolumePreferenceController"
+        settings:unavailableSliceSubtitle="@string/notification_volume_disabled_summary"/>
+
+    <!-- Alarm volume -->
+    <com.android.settings.notification.VolumeSeekBarPreference
+        android:key="alarm_volume"
+        android:icon="@*android:drawable/ic_audio_alarm"
+        android:title="@string/alarm_volume_option_title"
         android:order="-140"
-        settings:controller="com.android.settings.notification.NotificationVolumePreferenceController"/>
+        settings:controller="com.android.settings.notification.AlarmVolumePreferenceController"/>
 
     <!-- TODO(b/174964721): make this a PrimarySwitchPreference -->
     <!-- Interruptions -->

@@ -77,6 +77,10 @@ public class SimSelectNotification extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        if (!SubscriptionUtil.isSimHardwareVisible(context)) {
+            Log.w(TAG, "Received unexpected intent with null action.");
+            return;
+        }
         String action = intent.getAction();
 
         if (action == null) {
@@ -164,10 +168,7 @@ public class SimSelectNotification extends BroadcastReceiver {
 
         // If the dialog type is to dismiss.
         if (dialogType == EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE_DISMISS) {
-            Intent newIntent = new Intent(context, SimDialogActivity.class);
-            newIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            newIntent.putExtra(SimDialogActivity.DIALOG_TYPE_KEY, PICK_DISMISS);
-            context.startActivity(newIntent);
+            SimDialogProhibitService.dismissDialog(context);
             return;
         }
 

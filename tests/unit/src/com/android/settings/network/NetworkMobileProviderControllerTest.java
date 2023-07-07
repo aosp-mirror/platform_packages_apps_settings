@@ -49,8 +49,7 @@ import org.mockito.MockitoAnnotations;
  * Unit test for NetworkMobileProviderController.
  *
  * {@link NetworkMobileProviderController} is used to show subscription status on internet page for
- * provider model. This original class can refer to {@link MultiNetworkHeaderController}, and
- * NetworkMobileProviderControllerTest can also refer to {@link MultiNetworkHeaderControllerTest}.
+ * provider model.
  */
 @RunWith(AndroidJUnit4.class)
 public class NetworkMobileProviderControllerTest {

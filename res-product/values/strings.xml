@@ -1,0 +1,736 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2022 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Bluetooth settings.  Message for disconnecting from all profiles of a bluetooth device. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_disconnect_all_profiles" product="default">Your phone will disconnect from "<xliff:g id="device_name">%1$s</xliff:g>."</string>
+    <!-- Bluetooth settings.  Message for disconnecting from all profiles of a bluetooth device. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_disconnect_all_profiles" product="tablet">Your tablet will disconnect from "<xliff:g id="device_name">%1$s</xliff:g>."</string>
+    <!-- Bluetooth settings.  Message for disconnecting from all profiles of a bluetooth device. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_disconnect_all_profiles" product="device">Your device will disconnect from "<xliff:g id="device_name">%1$s</xliff:g>."</string>
+    <!-- Bluetooth mac address message.  This message shows the bluetooth mac address for this device.  [CHAR LIMIT=120] -->
+    <string name="bluetooth_footer_mac_message" product="default">Phone\'s Bluetooth address: <xliff:g id="bluetooth_mac_address">%1$s</xliff:g></string>
+    <!-- Bluetooth mac address message.  This message shows the bluetooth mac address for this device.  [CHAR LIMIT=120] -->
+    <string name="bluetooth_footer_mac_message" product="tablet">Tablet\'s Bluetooth address: <xliff:g id="bluetooth_mac_address">%1$s</xliff:g></string>
+    <!-- Bluetooth mac address message.  This message shows the bluetooth mac address for this device.  [CHAR LIMIT=120] -->
+    <string name="bluetooth_footer_mac_message" product="device">Device\'s Bluetooth address: <xliff:g id="bluetooth_mac_address">%1$s</xliff:g></string>
+    <!-- Strings for asking to the user whether to allow an app to enable discovery mode. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_ask_discovery" product="tablet"><xliff:g id="app_name">%1$s</xliff:g> wants to make your tablet visible to other Bluetooth devices for <xliff:g id="timeout">%2$d</xliff:g> seconds.</string>
+    <!-- Strings for asking to the user whether to allow an app to enable discovery mode. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_ask_discovery" product="default"><xliff:g id="app_name">%1$s</xliff:g> wants to make your phone visible to other Bluetooth devices for <xliff:g id="timeout">%2$d</xliff:g> seconds.</string>
+    <!-- Strings for asking to the user whether to allow an app to enable discovery mode. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_ask_discovery_no_name" product="tablet">An app wants to make your tablet visible to other Bluetooth devices for <xliff:g id="timeout">%1$d</xliff:g> seconds.</string>
+    <!-- Strings for asking to the user whether to allow an app to enable discovery mode. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_ask_discovery_no_name" product="default">An app wants to make your phone visible to other Bluetooth devices for <xliff:g id="timeout">%1$d</xliff:g> seconds.</string>
+    <!-- Strings for asking to the user whether to allow an app to enable lasting discovery mode. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_ask_lasting_discovery" product="tablet"><xliff:g id="app_name">%1$s</xliff:g> wants to make your tablet visible to other Bluetooth devices. You can change this later in Bluetooth settings.</string>
+    <!-- Strings for asking to the user whether to allow an app to enable lasting discovery mode. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_ask_lasting_discovery" product="default"><xliff:g id="app_name">%1$s</xliff:g> wants to make your phone visible to other Bluetooth devices. You can change this later in Bluetooth settings.</string>
+    <!-- Strings for asking to the user whether to allow an app to enable lasting discovery mode. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_ask_lasting_discovery_no_name" product="tablet">An app wants to make your tablet visible to other Bluetooth devices. You can change this later in Bluetooth settings.</string>
+    <!-- Strings for asking to the user whether to allow an app to enable lasting discovery mode. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_ask_lasting_discovery_no_name" product="default">An app wants to make your phone visible to other Bluetooth devices. You can change this later in Bluetooth settings.</string>
+    <!-- Strings for asking to the user whether to allow an app to enable bluetooth and discovery mode. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_ask_enablement_and_discovery" product="tablet"><xliff:g id="app_name">%1$s</xliff:g> wants to turn on Bluetooth and make your tablet visible to other devices for <xliff:g id="timeout">%2$d</xliff:g> seconds.</string>
+    <!-- Strings for asking to the user whether to allow an app to enable bluetooth and discovery mode. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_ask_enablement_and_discovery" product="default"><xliff:g id="app_name">%1$s</xliff:g> wants to turn on Bluetooth and make your phone visible to other devices for <xliff:g id="timeout">%2$d</xliff:g> seconds.</string>
+    <!-- Strings for asking to the user whether to allow an app to enable bluetooth and discovery mode. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_ask_enablement_and_discovery_no_name" product="tablet">An app wants to turn on Bluetooth and make your tablet visible to other devices for <xliff:g id="timeout">%1$d</xliff:g> seconds.</string>
+    <!-- Strings for asking to the user whether to allow an app to enable bluetooth and discovery mode. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_ask_enablement_and_discovery_no_name" product="default">An app wants to turn on Bluetooth and make your phone visible to other devices for <xliff:g id="timeout">%1$d</xliff:g> seconds.</string>
+    <!-- Strings for asking to the user whether to allow an app to enable bluetooth and discovery mode. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="tablet"><xliff:g id="app_name">%1$s</xliff:g> wants to turn on Bluetooth and make your tablet visible to other devices. You can change this later in Bluetooth settings.</string>
+    <!-- Strings for asking to the user whether to allow an app to enable bluetooth and discovery mode. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_ask_enablement_and_lasting_discovery" product="default"><xliff:g id="app_name">%1$s</xliff:g> wants to turn on Bluetooth and make your phone visible to other devices. You can change this later in Bluetooth settings.</string>
+    <!-- Strings for asking to the user whether to allow an app to enable bluetooth and discovery mode. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_ask_enablement_and_lasting_discovery_no_name" product="tablet">An app wants to turn on Bluetooth and make your tablet visible to other devices. You can change this later in Bluetooth settings.</string>
+    <!-- Strings for asking to the user whether to allow an app to enable bluetooth and discovery mode. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_ask_enablement_and_lasting_discovery_no_name" product="default">An app wants to turn on Bluetooth and make your phone visible to other devices. You can change this later in Bluetooth settings.</string>
+    <!-- Security Settings screen Encryption and credential summary -->
+    <string name="encryption_and_credential_settings_summary" product="default">Phone encrypted</string>
+    <string name="not_encrypted_summary" product="default">Phone not encrypted</string>
+    <!-- Security Settings screen Encryption and credential summary -->
+    <string name="encryption_and_credential_settings_summary" product="tablet">Device encrypted</string>
+    <string name="not_encrypted_summary" product="tablet">Device not encrypted</string>
+    <!-- Introduction detail message shown in face education for accessibility [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message_accessibility" product="default"></string>
+    <!-- Introduction detail message shown in face education for accessibility [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message_accessibility" product="tablet"></string>
+    <!-- Introduction detail message shown in face education for accessibility [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message_accessibility" product="device"></string>
+    <!-- Additional details shown when the accessibility toggle is expanded. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="default"></string>
+    <!-- Additional details shown when the accessibility toggle is expanded. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="tablet"></string>
+    <!-- Additional details shown when the accessibility toggle is expanded. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_accessibility_expanded" product="device"></string>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message" product="default">Use your face to unlock your phone, authorize purchases, or sign in to apps.</string>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message" product="tablet">Use your face to unlock your tablet, authorize purchases, or sign in to apps.</string>
+    <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_message" product="device">Use your face to unlock your device, authorize purchases, or sign in to apps.</string>
+    <!-- Subtitle shown on the face enrollment introduction screen with in-app authentication. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_message_class3" product="default">Use your face to unlock your phone or for authentication in apps, like when you sign in to apps or approve a purchase.</string>
+    <!-- Subtitle shown on the face enrollment introduction screen with in-app authentication. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_message_class3" product="tablet">Use your face to unlock your tablet or for authentication in apps, like when you sign in to apps or approve a purchase.</string>
+    <!-- Subtitle shown on the face enrollment introduction screen with in-app authentication. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_message_class3" product="device">Use your face to unlock your device or for authentication in apps, like when you sign in to apps or approve a purchase.</string>
+    <!-- Introduction detail message shown in face enrollment dialog when asking for parental consent [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="default">Allow your child to use their face to unlock their phone</string>
+    <!-- Introduction detail message shown in face enrollment dialog when asking for parental consent [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="tablet">Allow your child to use their face to unlock their tablet</string>
+    <!-- Introduction detail message shown in face enrollment dialog when asking for parental consent [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="device">Allow your child to use their face to unlock their device</string>
+    <!-- Introduction detail message shown in face enrollment dialog when asking for parental consent [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_consent_message_0_class3" product="default">Allow your child to use their face to unlock their phone or verify it\u2019s them. This happens when they sign in to apps, approve a purchase, and more.</string>
+    <!-- Introduction detail message shown in face enrollment dialog when asking for parental consent [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_consent_message_0_class3" product="tablet">Allow your child to use their face to unlock their tablet or verify it\u2019s them. This happens when they sign in to apps, approve a purchase, and more.</string>
+    <!-- Introduction detail message shown in face enrollment dialog when asking for parental consent [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_consent_message_0_class3" product="device">Allow your child to use their face to unlock their device or verify it\u2019s them. This happens when they sign in to apps, approve a purchase, and more.</string>
+    <!-- Introduction detail message shown in face enrollment dialog when asking for parental consent [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_consent_message" product="default">Using your child\u2019s face to unlock their phone may be less secure than a strong pattern or PIN.</string>
+    <!-- Introduction detail message shown in face enrollment dialog when asking for parental consent [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_consent_message" product="tablet">Using your child\u2019s face to unlock their tablet may be less secure than a strong pattern or PIN.</string>
+    <!-- Introduction detail message shown in face enrollment dialog when asking for parental consent [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_consent_message" product="device">Using your child\u2019s face to unlock their device may be less secure than a strong pattern or PIN.</string>
+    <!-- Message on the face enrollment introduction page that provides information about what could cause the phone to unlock. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_looking" product="default"></string>
+    <!-- Message on the face enrollment introduction page that provides information about what could cause the phone to unlock. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_looking" product="tablet"></string>
+    <!-- Message on the face enrollment introduction page that provides information about what could cause the phone to unlock. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_looking" product="device"></string>
+    <!-- Message on the face enrollment introduction page that provides information about what could cause the phone to unlock when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="default"></string>
+    <!-- Message on the face enrollment introduction page that provides information about what could cause the phone to unlock when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="tablet"></string>
+    <!-- Message on the face enrollment introduction page that provides information about what could cause the phone to unlock when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_consent_looking" product="device"></string>
+    <!-- Message on the face enrollment introduction page that provides information about the relative security of face for unlocking the phone. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="default"></string>
+    <!-- Message on the face enrollment introduction page that provides information about the relative security of face for unlocking the phone. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="tablet"></string>
+    <!-- Message on the face enrollment introduction page that provides information about the relative security of face for unlocking the phone. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" product="device"></string>
+    <!-- Message on the face enrollment introduction page that provides information about the relative security of face for unlocking the phone for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_less_secure" product="default"></string>
+    <!-- Message on the face enrollment introduction page that provides information about the relative security of face for unlocking the phone for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_less_secure" product="tablet"></string>
+    <!-- Message on the face enrollment introduction page that provides information about the relative security of face for unlocking the phone for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_less_secure" product="device"></string>
+    <!-- Message on the face enrollment introduction page that provides information about how to require eyes to be open for Face Unlock. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_gaze" product="default"></string>
+    <!-- Message on the face enrollment introduction page that provides information about how to require eyes to be open for Face Unlock. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_gaze" product="tablet"></string>
+    <!-- Message on the face enrollment introduction page that provides information about how to require eyes to be open for Face Unlock. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_gaze" product="device"></string>
+    <!-- Message on the face enrollment introduction page that provides information about how to require eyes to be open for Face Unlock when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="default"></string>
+    <!-- Message on the face enrollment introduction page that provides information about how to require eyes to be open for Face Unlock when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="tablet"></string>
+    <!-- Message on the face enrollment introduction page that provides information about how to require eyes to be open for Face Unlock when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" product="device"></string>
+    <!-- Message on the face enrollment introduction page that explains how face unlock works. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_how_message" product="default"></string>
+    <!-- Message on the face enrollment introduction page that explains how face unlock works. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_how_message" product="tablet"></string>
+    <!-- Message on the face enrollment introduction page that explains how face unlock works. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_how_message" product="device"></string>
+    <!-- Message on the face enrollment introduction page that explains how Face Unlock works when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_how_consent_message" product="default"></string>
+    <!-- Message on the face enrollment introduction page that explains how Face Unlock works when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_how_consent_message" product="tablet"></string>
+    <!-- Message on the face enrollment introduction page that explains how Face Unlock works when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_how_consent_message" product="device"></string>
+    <!-- Message on the face enrollment introduction page that explains privacy controls for face unlock [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_control_message" product="default"></string>
+    <!-- Message on the face enrollment introduction page that explains privacy controls for face unlock [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_control_message" product="tablet"></string>
+    <!-- Message on the face enrollment introduction page that explains privacy controls for face unlock [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_control_message" product="device"></string>
+    <!-- Message on the face enrollment introduction page that explains privacy controls for face unlock when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_control_consent_message" product="default"></string>
+    <!-- Message on the face enrollment introduction page that explains privacy controls for face unlock when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_control_consent_message" product="tablet"></string>
+    <!-- Message on the face enrollment introduction page that explains privacy controls for face unlock when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_control_consent_message" product="device"></string>
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer" product="default">Use your face to unlock your phone or for authentication in apps, like when you sign in or approve a purchase.\n\nKeep in mind:\nYou can only have one face set up at a time. To add another face, delete the current one.\n\nLooking at the phone can unlock it when you don\u2019t intend to.\n\nYour phone can be unlocked by someone else if it\u2019s held up to your face.\n\nYour phone can be unlocked by someone who looks a lot like you, like an identical sibling.</string>
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer" product="tablet">Use your face to unlock your tablet or for authentication in apps, like when you sign in or approve a purchase.\n\nKeep in mind:\nYou can only have one face set up at a time. To add another face, delete the current one.\n\nLooking at the tablet can unlock it when you don\u2019t intend to.\n\nYour tablet can be unlocked by someone else if it\u2019s held up to your face.\n\nYour tablet can be unlocked by someone who looks a lot like you, like an identical sibling.</string>
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer" product="device">Use your face to unlock your device or for authentication in apps, like when you sign in or approve a purchase.\n\nKeep in mind:\nYou can only have one face set up at a time. To add another face, delete the current one.\n\nLooking at the device can unlock it when you don\u2019t intend to.\n\nYour device can be unlocked by someone else if it\u2019s held up to your face.\n\nYour device can be unlocked by someone who looks a lot like you, like an identical sibling.</string>
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported" product="default">Use your face to unlock your phone or for authentication in apps, like when you sign in or approve a purchase.\n\nKeep in mind:\nYou can only have one face set up at a time. To add another face, delete the current one.\n\nLooking at the phone can unlock it when you don\u2019t intend to.\n\nYour phone can be unlocked by someone else if it\u2019s held up to your face, even if your eyes are closed.\n\nYour phone can be unlocked by someone who looks a lot like you, like an identical sibling.</string>
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported" product="tablet">Use your face to unlock your tablet or for authentication in apps, like when you sign in or approve a purchase.\n\nKeep in mind:\nYou can only have one face set up at a time. To add another face, delete the current one.\n\nLooking at the tablet can unlock it when you don\u2019t intend to.\n\nYour tablet can be unlocked by someone else if it\u2019s held up to your face, even if your eyes are closed.\n\nYour tablet can be unlocked by someone who looks a lot like you, like an identical sibling.</string>
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported" product="device">Use your face to unlock your device or for authentication in apps, like when you sign in or approve a purchase.\n\nKeep in mind:\nYou can only have one face set up at a time. To add another face, delete the current one.\n\nLooking at the device can unlock it when you don\u2019t intend to.\n\nYour device can be unlocked by someone else if it\u2019s held up to your face, even if your eyes are closed.\n\nYour device can be unlocked by someone who looks a lot like you, like an identical sibling.</string>
+    <!-- Text shown in face settings explaining what your face can be used for. Used when face is class 3. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_class3" product="default">Use your face to unlock your phone or verify it\u2019s you, like when you sign in to apps or approve a purchase.\n\nKeep in mind:\nYou can only have one face set up at a time. To add another face, delete the current one.\n\nLooking at the phone can unlock it when you don\u2019t intend to.\n\nYour phone can be unlocked by someone else if it\u2019s held up to your face.\n\nYour phone can be unlocked by someone who looks a lot like you, like an identical sibling.</string>
+  <!-- Text shown in face settings explaining what your face can be used for. Used when face is class 3. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_class3" product="tablet">Use your face to unlock your tablet or verify it\u2019s you, like when you sign in to apps or approve a purchase.\n\nKeep in mind:\nYou can only have one face set up at a time. To add another face, delete the current one.\n\nLooking at the tablet can unlock it when you don\u2019t intend to.\n\nYour tablet can be unlocked by someone else if it\u2019s held up to your face.\n\nYour tablet can be unlocked by someone who looks a lot like you, like an identical sibling.</string>
+  <!-- Text shown in face settings explaining what your face can be used for. Used when face is class 3. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_class3" product="device">Use your face to unlock your device or verify it\u2019s you, like when you sign in to apps or approve a purchase.\n\nKeep in mind:\nYou can only have one face set up at a time. To add another face, delete the current one.\n\nLooking at the device can unlock it when you don\u2019t intend to.\n\nYour device can be unlocked by someone else if it\u2019s held up to your face.\n\nYour device can be unlocked by someone who looks a lot like you, like an identical sibling.</string>
+    <!-- Text shown in face settings explaining what your face can be used for. Used when face is class 3 and attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_class3_attention_not_supported" product="default">Use your face to unlock your phone or verify it\u2019s you, like when you sign in to apps or approve a purchase.\n\nKeep in mind:\nYou can only have one face set up at a time. To add another face, delete the current one.\n\nLooking at the phone can unlock it when you don\u2019t intend to.\n\nYour phone can be unlocked by someone else if it\u2019s held up to your face, even if your eyes are closed.\n\nYour phone can be unlocked by someone who looks a lot like you, like an identical sibling.</string>
+    <!-- Text shown in face settings explaining what your face can be used for. Used when face is class 3 and attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_class3_attention_not_supported" product="tablet">Use your face to unlock your tablet or verify it\u2019s you, like when you sign in to apps or approve a purchase.\n\nKeep in mind:\nYou can only have one face set up at a time. To add another face, delete the current one.\n\nLooking at the tablet can unlock it when you don\u2019t intend to.\n\nYour tablet can be unlocked by someone else if it\u2019s held up to your face, even if your eyes are closed.\n\nYour tablet can be unlocked by someone who looks a lot like you, like an identical sibling.</string>
+    <!-- Text shown in face settings explaining what your face can be used for. Used when face is class 3 and attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_class3_attention_not_supported" product="device">Use your face to unlock your device or verify it\u2019s you, like when you sign in to apps or approve a purchase.\n\nKeep in mind:\nYou can only have one face set up at a time. To add another face, delete the current one.\n\nLooking at the device can unlock it when you don\u2019t intend to.\n\nYour device can be unlocked by someone else if it\u2019s held up to your face, even if your eyes are closed.\n\nYour device can be unlocked by someone who looks a lot like you, like an identical sibling.</string>
+    <!-- Introduction detail message shown in fingerprint enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_enroll_introduction_v3_message">Use your fingerprint to unlock your <xliff:g id="deviceName" example="Pixel">%s</xliff:g> or verify it\u2019s you, like when you sign in to apps or approve a purchase</string>
+    <!-- Introduction detail message shown in fingerprint enrollment dialog when asking for parental consent [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="default">Allow your child to use their fingerprint to unlock their phone or verify it\u2019s them. This happens when they sign in to apps, approve a purchase, and more.</string>
+    <!-- Introduction detail message shown in fingerprint enrollment dialog when asking for parental consent [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="tablet">Allow your child to use their fingerprint to unlock their tablet or verify it\u2019s them. This happens when they sign in to apps, approve a purchase, and more.</string>
+    <!-- Introduction detail message shown in fingerprint enrollment dialog when asking for parental consent [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="device">Allow your child to use their fingerprint to unlock their device or verify it\u2019s them. This happens when they sign in to apps, approve a purchase, and more.</string>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="default">Using your fingerprint to unlock your phone may be less secure than a strong pattern or PIN</string>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="tablet">Using your fingerprint to unlock your tablet may be less secure than a strong pattern or PIN</string>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" product="device">Using your fingerprint to unlock your device may be less secure than a strong pattern or PIN</string>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="default">When you use Pixel Imprint, images are used to update your fingerprint model. Images used to create your fingerprint model are never stored, but the fingerprint model is stored securely on your phone and never leaves the phone. All processing occurs securely on your phone.</string>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="tablet">When you use Pixel Imprint, images are used to update your fingerprint model. Images used to create your fingerprint model are never stored, but the fingerprint model is stored securely on your tablet and never leaves the tablet. All processing occurs securely on your tablet.</string>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" product="device">When you use Pixel Imprint, images are used to update your fingerprint model. Images used to create your fingerprint model are never stored, but the fingerprint model is stored securely on your device and never leaves the device. All processing occurs securely on your device.</string>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="default">When they use Pixel Imprint, images are used to update their fingerprint model. Images used to create your child\u2019s fingerprint model are never stored, but the fingerprint model is stored securely on the phone and never leaves the phone. All processing occurs securely on the phone.</string>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="tablet">When they use Pixel Imprint, images are used to update their fingerprint model. Images used to create your child\u2019s fingerprint model are never stored, but the fingerprint model is stored securely on the tablet and never leaves the tablet. All processing occurs securely on the tablet.</string>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" product="device">When they use Pixel Imprint, images are used to update their fingerprint model. Images used to create your child\u2019s fingerprint model are never stored, but the fingerprint model is stored securely on the device and never leaves the device. All processing occurs securely on the device.</string>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="default">You can delete your fingerprint images and model, or turn off Fingerprint Unlock at any time in Settings. Fingerprint images and models are stored on the phone until you delete them.</string>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="tablet">You can delete your fingerprint images and model, or turn off Fingerprint Unlock at any time in Settings. Fingerprint images and models are stored on the tablet until you delete them.</string>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" product="device">You can delete your fingerprint images and model, or turn off Fingerprint Unlock at any time in Settings. Fingerprint images and models are stored on the device until you delete them.</string>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="default">You and your child can delete their fingerprint images and model, or turn off Fingerprint Unlock at any time in Settings. Fingerprint images and models are stored on the phone until they\u2019re deleted.</string>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="tablet">You and your child can delete their fingerprint images and model, or turn off Fingerprint Unlock at any time in Settings. Fingerprint images and models are stored on the tablet until they\u2019re deleted.</string>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" product="device">You and your child can delete their fingerprint images and model, or turn off Fingerprint Unlock at any time in Settings. Fingerprint images and models are stored on the device until they\u2019re deleted.</string>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default">Your phone can be unlocked when you don\u2019t intend to, like if someone holds it up to your finger.</string>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="tablet">Your tablet can be unlocked when you don\u2019t intend to, like if someone holds it up to your finger.</string>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="device">Your device can be unlocked when you don\u2019t intend to, like if someone holds it up to your finger.</string>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="default">Your child\u2019s phone can be unlocked when they don\u2019t intend to, like if someone holds it up to their finger.</string>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="tablet">Your child\u2019s tablet can be unlocked when they don\u2019t intend to, like if someone holds it up to their finger.</string>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" product="device">Your child\u2019s device can be unlocked when they don\u2019t intend to, like if someone holds it up to their finger.</string>
+    <!-- Message text only shown in fingerprint security settings home screen. (tablet) [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_home_screen_text" product="tablet">Use your fingerprint to unlock your tablet or verify it\u2019s you, like when you sign in to apps</string>
+    <!-- Message text only shown in fingerprint security settings home screen. (device) [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_home_screen_text" product="device">Use your fingerprint to unlock your device or verify it\u2019s you, like when you sign in to apps</string>
+    <!-- Message text only shown in fingerprint security settings home screen. (phone) [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_home_screen_text" product="default">Use your fingerprint to unlock your phone or verify it\u2019s you, like when you sign in to apps</string>
+    <!-- Message shown during enrollment to prompt a child to give the device to a parent or guardian. [CHAR LIMIT=NONE]-->
+    <string name="biometric_settings_hand_back_to_guardian" product="tablet">Hand the tablet back to your parent</string>
+    <!-- Message shown during enrollment to prompt a child to give the device to a parent or guardian. [CHAR LIMIT=NONE]-->
+    <string name="biometric_settings_hand_back_to_guardian" product="device">Hand the device back to your parent</string>
+    <!-- Message shown during enrollment to prompt a child to give the device to a parent or guardian. [CHAR LIMIT=NONE]-->
+    <string name="biometric_settings_hand_back_to_guardian" product="default">Hand the phone back to your parent</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning them of potential consequences of not doing so, including loss of factory reset protection. (tablet) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet">Device protection features won\u2019t be turned on. You won\u2019t be able to prevent others from using this tablet if it\u2019s lost, stolen or reset.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning them of potential consequences of not doing so, including loss of factory reset protection. (device) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="device">Device protection features won\u2019t be turned on. You won\u2019t be able to prevent others from using this device if it\u2019s lost, stolen or reset.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning them of potential consequences of not doing so, including loss of factory reset protection. (phone) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="default">Device protection features won\u2019t be turned on. You won\u2019t be able to prevent others from using this phone if it\u2019s lost, stolen or reset.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning them of potential consequences of not doing so. (tablet) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_intro_skip_dialog_text" product="tablet">Device protection features won\u2019t be turned on. You won\u2019t be able to prevent others from using this tablet if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning them of potential consequences of not doing so. (device) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_intro_skip_dialog_text" product="device">Device protection features won\u2019t be turned on. You won\u2019t be able to prevent others from using this device if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning them of potential consequences of not doing so. (phone) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_intro_skip_dialog_text" product="default">Device protection features won\u2019t be turned on. You won\u2019t be able to prevent others from using this phone if it\u2019s lost or stolen.</string>
+    <!-- Message shown in SFPS enrollment dialog to locate the sensor (tablet) [CHAR LIMIT=NONE]-->
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="tablet">The fingerprint sensor is on the power button. It’s the flat button next to the raised volume button on the edge of the tablet.</string>
+    <!-- Message shown in SFPS enrollment dialog to locate the sensor (device) [CHAR LIMIT=NONE]-->
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="device">The fingerprint sensor is on the power button. It’s the flat button next to the raised volume button on the edge of the device.</string>
+    <!-- Message shown in SFPS enrollment dialog to locate the sensor (default) [CHAR LIMIT=NONE]-->
+    <string name="security_settings_sfps_enroll_find_sensor_message" product="default">The fingerprint sensor is on the power button. It’s the flat button next to the raised volume button on the edge of the phone.</string>
+    <!-- Message shown in fingerprint enrollment dialog once enrollment is completed (tablet) [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet">Now you can use your fingerprint to unlock your tablet or verify it\u2019s you, like when you sign in to apps or approve a purchase</string>
+    <!-- Message shown in fingerprint enrollment dialog once enrollment is completed (device) [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device">Now you can use your fingerprint to unlock your device or verify it\u2019s you, like when you sign in to apps or approve a purchase</string>
+    <!-- Message shown in fingerprint enrollment dialog once enrollment is completed (default) [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default">Now you can use your fingerprint to unlock your phone or verify it\u2019s you, like when you sign in to apps or approve a purchase</string>
+    <!-- Message shown in fingerprint enrollment dialog once enrollment is completed (tablet) [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="tablet">Now you can use your fingerprint to unlock your tablet or verify it\u2019s you, like when you sign in to apps or approve a purchase. \n\nAdd another fingerprint so it\u2019s easier to unlock when you hold your tablet in different ways.</string>
+    <!-- Message shown in fingerprint enrollment dialog once enrollment is completed (device) [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="device">Now you can use your fingerprint to unlock your device or verify it\u2019s you, like when you sign in to apps or approve a purchase.\n\nAdd another fingerprint so it\u2019s easier to unlock when you hold your device in different ways.</string>
+    <!-- Message shown in fingerprint enrollment dialog once enrollment is completed (default) [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_enroll_finish_v2_add_fingerprint_message" product="default">Now you can use your fingerprint to unlock your phone or verify it\u2019s you, like when you sign in to apps or approve a purchase.\n\nAdd another fingerprint so it\u2019s easier to unlock when you hold your phone in different ways.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up fingerprint. (tablet) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_pin_skip_message" product="tablet">A PIN protects the tablet if it\u2019s lost or stolen</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up fingerprint. (tablet) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_pattern_skip_message" product="tablet">A pattern protects the tablet if it\u2019s lost or stolen</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up fingerprint. (tablet) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_password_skip_message" product="tablet">A password protects the tablet if it\u2019s lost or stolen</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up fingerprint. (device) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_pin_skip_message" product="device">A PIN protects the device if it\u2019s lost or stolen</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up fingerprint. (device) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_pattern_skip_message" product="device">A pattern protects the device if it\u2019s lost or stolen</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up fingerprint. (device) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_password_skip_message" product="device">A password protects the device if it\u2019s lost or stolen</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up fingerprint. (default) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_pin_skip_message" product="default">A PIN protects the phone if it\u2019s lost or stolen</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up fingerprint. (default) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_pattern_skip_message" product="default">A pattern protects the phone if it\u2019s lost or stolen</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up fingerprint. (default) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_password_skip_message" product="default">A password protects the phone if it\u2019s lost or stolen</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up fingerprint. (tablet) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_pin_skip_fingerprint_message" product="tablet">A PIN is required to set up Fingerprint Unlock.\n\nA PIN protects the tablet if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up fingerprint. (tablet) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_pattern_skip_fingerprint_message" product="tablet">A pattern is required to set up Fingerprint Unlock.\n\nA pattern protects the tablet if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up fingerprint. (tablet) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_password_skip_fingerprint_message" product="tablet">A password is required to set up Fingerprint Unlock.\n\nA password protects the tablet if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up fingerprint. (device) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_pin_skip_fingerprint_message" product="device">A PIN is required to set up Fingerprint Unlock.\n\nA PIN protects the device if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up fingerprint. (device) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_pattern_skip_fingerprint_message" product="device">A pattern is required to set up Fingerprint Unlock.\n\nA pattern protects the device if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up fingerprint. (device) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_password_skip_fingerprint_message" product="device">A password is required to set up Fingerprint Unlock.\n\nA password protects the device if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up fingerprint. (default) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_pin_skip_fingerprint_message" product="default">A PIN is required to set up Fingerprint Unlock.\n\nA PIN protects the phone if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up fingerprint. (default) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_pattern_skip_fingerprint_message" product="default">A pattern is required to set up Fingerprint Unlock.\n\nA pattern protects the phone if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up fingerprint. (default) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_password_skip_fingerprint_message" product="default">A password is required to set up Fingerprint Unlock.\n\nA password protects the phone if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face. (tablet) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_pin_skip_face_message" product="tablet">A PIN is required to set up Face Unlock.\n\nA PIN protects the tablet if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face. (tablet) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_pattern_skip_face_message" product="tablet">A pattern is required to set up Face Unlock.\n\nA pattern protects the tablet if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face. (tablet) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_password_skip_face_message" product="tablet">A password is required to set up Face Unlock.\n\nA password protects the tablet if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face. (device) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_pin_skip_face_message" product="device">A PIN is required to set up Face Unlock.\n\nA PIN protects the device if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face. (device) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_pattern_skip_face_message" product="device">A pattern is required to set up Face Unlock.\n\nA pattern protects the device if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face. (device) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_password_skip_face_message" product="device">A password is required to set up Face Unlock.\n\nA password protects the device if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face. (default) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_pin_skip_face_message" product="default">A PIN is required to set up Face Unlock.\n\nA PIN protects the phone if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face. (default) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_pattern_skip_face_message" product="default">A pattern is required to set up Face Unlock.\n\nA pattern protects the phone if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face. (default) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_password_skip_face_message" product="default">A password is required to set up Face Unlock.\n\nA password protects the phone if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face or fingerprint. (tablet) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_pin_skip_biometrics_message" product="tablet">A PIN is required to set up Face Unlock and Fingerprint Unlock.\n\nA PIN protects the tablet if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face or fingerprint. (tablet) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_pattern_skip_biometrics_message" product="tablet">A pattern is required to set up Face Unlock and Fingerprint Unlock.\n\nA pattern protects the tablet if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face or fingerprint. (tablet) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_password_skip_biometrics_message" product="tablet">A password is required to set up Face Unlock and Fingerprint Unlock.\n\nA password protects the tablet if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face or fingerprint. (device) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_pin_skip_biometrics_message" product="device">A PIN is required to set up Face Unlock and Fingerprint Unlock.\n\nA PIN protects the device if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face or fingerprint. (device) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_pattern_skip_biometrics_message" product="device">A pattern is required to set up Face Unlock and Fingerprint Unlock.\n\nA pattern protects the device if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face or fingerprint. (device) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_password_skip_biometrics_message" product="device">A password is required to set up Face Unlock and Fingerprint Unlock.\n\nA password protects the device if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face or fingerprint. (default) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_pin_skip_biometrics_message" product="default">A PIN is required to set up Face Unlock and Fingerprint Unlock.\n\nA PIN protects the phone if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face or fingerprint. (default) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_pattern_skip_biometrics_message" product="default">A pattern is required to set up Face Unlock and Fingerprint Unlock.\n\nA pattern protects the phone if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face or fingerprint. (default) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_password_skip_biometrics_message" product="default">A password is required to set up Face Unlock and Fingerprint Unlock.\n\nA password protects the phone if it\u2019s lost or stolen.</string>
+    <!-- Message shown in a dialog which asks the user to confirm when a single fingerprint gets deleted. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_v2_delete_message" product="default">This deletes the fingerprint images and model associated with \'<xliff:g id="fingerprint_id" example="Fingerprint 2">%1$s</xliff:g>\' that are stored on your phone</string>
+    <!-- Message shown in a dialog which asks the user to confirm when a single fingerprint gets deleted. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_v2_delete_message" product="tablet">This deletes the fingerprint images and model associated with \'<xliff:g id="fingerprint_id" example="Fingerprint 2">%1$s</xliff:g>\' that are stored on your tablet</string>
+    <!-- Message shown in a dialog which asks the user to confirm when a single fingerprint gets deleted. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_v2_delete_message" product="device">This deletes the fingerprint images and model associated with \'<xliff:g id="fingerprint_id" example="Fingerprint 2">%1$s</xliff:g>\' that are stored on your device</string>
+    <!-- Message shown in a dialog which asks the user to confirm when the last fingerprint gets deleted by them. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_last_delete_message" product="default">You won\'t be able to use your fingerprint to unlock your phone or verify it\'s you in apps.</string>
+    <!-- Message shown in a dialog which asks the user to confirm when the last fingerprint gets deleted by them. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_last_delete_message" product="tablet">You won\'t be able to use your fingerprint to unlock your tablet or verify it\'s you in apps.</string>
+    <!-- Message shown in a dialog which asks the user to confirm when the last fingerprint gets deleted by them. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_last_delete_message" product="device">You won\'t be able to use your fingerprint to unlock your device or verify it\'s you in apps.</string>
+    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_unlock_title" product="default">You can unlock your phone using your fingerprint. For security, this option requires a backup screen lock.</string>
+    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_unlock_title" product="tablet">You can unlock your tablet using your fingerprint. For security, this option requires a backup screen lock.</string>
+    <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_unlock_title" product="device">You can unlock your device using your fingerprint. For security, this option requires a backup screen lock.</string>
+    <!-- Message shown in screen lock picker while setting up the new screen lock with face unlock option. [CHAR LIMIT=NONE] -->
+    <string name="face_unlock_title" product="default">You can unlock your phone using your face. For security, this option requires a backup screen lock.</string>
+    <!-- Message shown in screen lock picker while setting up the new screen lock with face unlock option. [CHAR LIMIT=NONE] -->
+    <string name="face_unlock_title" product="tablet">You can unlock your tablet using your face. For security, this option requires a backup screen lock.</string>
+    <!-- Message shown in screen lock picker while setting up the new screen lock with face unlock option. [CHAR LIMIT=NONE] -->
+    <string name="face_unlock_title" product="device">You can unlock your device using your face. For security, this option requires a backup screen lock.</string>
+    <!-- Message shown in screen lock picker while setting up the new screen lock with biometrics option. [CHAR LIMIT=NONE] -->
+    <string name="biometrics_unlock_title" product="default">You can unlock your phone using your face or fingerprint. For security, this option requires a backup screen lock.</string>
+    <!-- Message shown in screen lock picker while setting up the new screen lock with biometrics option. [CHAR LIMIT=NONE] -->
+    <string name="biometrics_unlock_title" product="tablet">You can unlock your tablet using your face or fingerprint. For security, this option requires a backup screen lock.</string>
+    <!-- Message shown in screen lock picker while setting up the new screen lock with biometrics option. [CHAR LIMIT=NONE] -->
+    <string name="biometrics_unlock_title" product="device">You can unlock your device using your face or fingerprint. For security, this option requires a backup screen lock.</string>
+    <!-- Title of the preferences item to control encryption -->
+    <string name="encrypt_title" product="tablet">Encrypt tablet</string>
+    <!-- Title of the preferences item to control encryption -->
+    <string name="encrypt_title" product="default">Encrypt phone</string>
+    <!-- Summary for suggested actions for screen lock (tablet) [CHAR LIMIT=55] -->
+    <string name="suggested_lock_settings_summary" product="tablet">Set screen lock to protect tablet</string>
+    <!-- Summary for suggested actions for screen lock (device) [CHAR LIMIT=55] -->
+    <string name="suggested_lock_settings_summary" product="device">Set screen lock to protect device</string>
+    <!-- Summary for suggested actions for screen lock (phone) [CHAR LIMIT=55] -->
+    <string name="suggested_lock_settings_summary" product="default">Set screen lock to protect phone</string>
+    <!-- Summary for suggested actions for settings up a fingerprint lock (tablet) [CHAR LIMIT=55] -->
+    <string name="suggested_fingerprint_lock_settings_summary" product="tablet"></string>
+    <!-- Summary for suggested actions for settings up a fingerprint lock (device) [CHAR LIMIT=55] -->
+    <string name="suggested_fingerprint_lock_settings_summary" product="device"></string>
+    <!-- Summary for suggested actions for settings up a fingerprint lock (phone) [CHAR LIMIT=55] -->
+    <string name="suggested_fingerprint_lock_settings_summary" product="default"></string>
+    <!--  Title for security picker in setup wizard to choose the unlock method: None/Pattern/PIN/Password (tablet) [CHAR LIMIT=22] -->
+    <string name="setup_lock_settings_picker_title" product="tablet">Protect your tablet</string>
+    <!--  Title for security picker in setup wizard to choose the unlock method: None/Pattern/PIN/Password (device) [CHAR LIMIT=22] -->
+    <string name="setup_lock_settings_picker_title" product="device">Protect your device</string>
+    <!--  Title for security picker in setup wizard to choose the unlock method: None/Pattern/PIN/Password (phone) [CHAR LIMIT=22] -->
+    <string name="setup_lock_settings_picker_title" product="default">Protect your phone</string>
+    <!-- Description text for screen in setup wizard asking user to set up screen lock, explaining to the user how setting up a screen lock protect them from losing data. (tablet) [CHAR LIMIT=NONE] -->
+    <string name="setup_lock_settings_picker_message" product="tablet">Prevent others from using this tablet without your permission by activating device protection features. Choose the screen lock you want to use.</string>
+    <!-- Description text for screen in setup wizard asking user to set up screen lock, explaining to the user how setting up a screen lock protect them from losing data. (device) [CHAR LIMIT=NONE] -->
+    <string name="setup_lock_settings_picker_message" product="device">Prevent others from using this device without your permission by activating device protection features. Choose the screen lock you want to use.</string>
+    <!-- Description text for screen in setup wizard asking user to set up screen lock, explaining to the user how setting up a screen lock protect them from losing data. (phone) [CHAR LIMIT=NONE] -->
+    <string name="setup_lock_settings_picker_message" product="default">Prevent others from using this phone without your permission by activating device protection features. Choose the screen lock you want to use.</string>
+    <!--  Bluetooth device details. The body of a confirmation dialog for unpairing a paired device. -->
+    <string name="bluetooth_unpair_dialog_body" product="default">Your phone will no longer be paired with <xliff:g id="device_name">%1$s</xliff:g></string>
+    <!--  Bluetooth device details. The body of a confirmation dialog for unpairing a paired device. -->
+    <string name="bluetooth_unpair_dialog_body" product="tablet">Your tablet will no longer be paired with <xliff:g id="device_name">%1$s</xliff:g></string>
+    <!--  Bluetooth device details. The body of a confirmation dialog for unpairing a paired device. -->
+    <string name="bluetooth_unpair_dialog_body" product="device">Your device will no longer be paired with <xliff:g id="device_name">%1$s</xliff:g></string>
+    <!-- Description of Secure NFC in the 1st level settings screen. [CHAR LIMIT=NONE] -->
+    <string name="nfc_secure_toggle_summary" product="default">Allow NFC use only when screen is unlocked</string>
+    <!-- Summary for the panel of add Wi-Fi network from APP [CHAR LIMIT=NONE] -->
+    <string name="wifi_add_app_single_network_summary" product="default"><xliff:g id="appName" example="ThirdPartyAppName">%1$s</xliff:g> wants to save a network to your phone</string>
+    <!-- Summary for the panel of add Wi-Fi network from APP [CHAR LIMIT=NONE] -->
+    <string name="wifi_add_app_single_network_summary" product="tablet"><xliff:g id="appName" example="ThirdPartyAppName">%1$s</xliff:g> wants to save a network to your tablet</string>
+    <!-- Summary for the panel of add multiple Wi-Fi networks from APP [CHAR LIMIT=NONE] -->
+    <string name="wifi_add_app_networks_summary" product="default"><xliff:g id="appName" example="ThirdPartyAppName">%1$s</xliff:g> wants to save these networks to your phone</string>
+    <!-- Summary for the panel of add multiple Wi-Fi networks from APP [CHAR LIMIT=NONE] -->
+    <string name="wifi_add_app_networks_summary" product="tablet"><xliff:g id="appName" example="ThirdPartyAppName">%1$s</xliff:g> wants to save these networks to your tablet</string>
+    <!-- Preference summary to enable auto rotate[CHAR_LIMIT=NONE]-->
+    <string name="auto_rotate_screen_summary" product="default">Automatically adjust the screen orientation when you move your phone between portrait and landscape</string>
+    <!-- Preference summary to enable auto rotate[CHAR_LIMIT=NONE]-->
+    <string name="auto_rotate_screen_summary" product="tablet">Automatically adjust the screen orientation when you move your tablet between portrait and landscape</string>
+    <!-- SIM card lock settings screen, setting option summary text when SIM lock check box is selected  [CHAR LIMIT=40] -->
+    <string name="sim_lock_on" product="tablet">Require PIN to use tablet</string>
+    <!-- SIM card lock settings screen, setting option summary text when SIM lock check box is selected  [CHAR LIMIT=40] -->
+    <string name="sim_lock_on" product="default">Require PIN to use phone</string>
+    <!-- SIM card lock settings screen, setting option summary text when SIM lock check box is clear  [CHAR LIMIT=40] -->
+    <string name="sim_lock_off" product="tablet">Require PIN to use tablet</string>
+    <!-- SIM card lock settings screen, setting option summary text when SIM lock check box is clear  [CHAR LIMIT=40] -->
+    <string name="sim_lock_off" product="default">Require PIN to use phone</string>
+    <!-- About tablet, status item title.  The Mobile Directory Number [CHAR LIMIT=40] -->
+    <string name="status_number" product="tablet">MDN</string>
+    <!-- About phone, status item title.  The phone number of the current device [CHAR LIMIT=40] -->
+    <string name="status_number" product="default">Phone number</string>
+    <!-- About tablet, status item title for multi-sim devices.  The Mobile Directory Number [CHAR LIMIT=40] -->
+    <string name="status_number_sim_slot" product="tablet">MDN (sim slot %1$d)</string>
+    <!-- About phone, status item title for multi-sim devices.  The phone number of the current device [CHAR LIMIT=40] -->
+    <string name="status_number_sim_slot" product="default">Phone number (sim slot %1$d)</string>
+    <!-- About tablet, status item title.  The Mobile Directory Number [CHAR LIMIT=30] -->
+    <string name="status_number_sim_status" product="tablet">MDN on SIM</string>
+    <!-- About phone, status item title.  The phone number of the current device [CHAR LIMIT=30] -->
+    <string name="status_number_sim_status" product="default">Phone number on SIM</string>
+    <!-- Title of a line item. Below this title, a user can tap a button to select this option if they want to use their SD card as extra device storage. [CHAR LIMIT=50] -->
+    <string name="storage_wizard_init_v2_internal_title" product="tablet">Format SD card for internal storage</string>
+    <!-- Subtext for a line item. Below this subtext, a user can tap a button to select this option if they want to use their SD card as extra device storage. [CHAR LIMIT=NONE] -->
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet">Store apps \u0026 media to use on this tablet only. &lt;a href="https://support.google.com/android/answer/12153449"&gt;Learn more about setting up an SD card&lt;/a&gt;.</string>
+    <!-- Button text. A user can tap this button if they want to use their SD card as extra device storage. [CHAR LIMIT=32] -->
+    <string name="storage_wizard_init_v2_internal_action" product="tablet">Format</string>
+    <!-- Title of a line item. Below this title, a user can tap a button to select this option if they want to use their SD card as extra device storage. [CHAR LIMIT=50] -->
+    <string name="storage_wizard_init_v2_internal_title" product="default">Format SD card for internal storage</string>
+    <!-- Subtext for a line item. Below this subtext, a user can tap a button to select this option if they want to use their SD card as extra device storage. [CHAR LIMIT=NONE] -->
+    <string name="storage_wizard_init_v2_internal_summary" product="default">Store apps \u0026 media to use on this phone only. &lt;a href="https://support.google.com/android/answer/12153449"&gt;Learn more about setting up an SD card&lt;/a&gt;.</string>
+    <!-- Button text. A user can tap this button if they want to use their SD card as extra device storage. [CHAR LIMIT=32] -->
+    <string name="storage_wizard_init_v2_internal_action" product="default">Format</string>
+    <!-- Main text for a full-screen message. These strings let the user know what they can move to the storage device, how much space will be made in their phone's storage, and how long the move will take. The first placeholder is for the amount of space (e.g. 1.4 GB) that will become available ("free up" is the phrasal verb used for this case). The second placeholder is for the amount of time (e.g. 6 minutes) it'll take to move their content to the storage device. The third placeholder is the name of the storage device (e.g. brand name of the SD card). [CHAR LIMIT=NONE] -->
+    <string name="storage_wizard_migrate_v2_body" product="tablet">You can move files, media, and certain apps to this <xliff:g id="name" example="SanDisk SD card">^1</xliff:g>.
+\n\nThis move will free up <xliff:g id="size" example="3 GB">^2</xliff:g> of your tablet\u2019s storage and should take around <xliff:g id="duration" example="3 minutes">^3</xliff:g>.</string>
+    <!-- Main text for a full-screen message. These strings let the user know what they can move to the storage device, how much space will be made in their device's storage, and how long the move will take. The first placeholder is for the amount of space (e.g. 1.4 GB) that will become available ("free up" is the phrasal verb used for this case). The second placeholder is for the amount of time (e.g. 6 minutes) it'll take to move their content to the storage device. The third placeholder is the name of the storage device (e.g. brand name of the SD card). [CHAR LIMIT=NONE] -->
+    <string name="storage_wizard_migrate_v2_body" product="default">You can move files, media, and certain apps to this <xliff:g id="name" example="SanDisk SD card">^1</xliff:g>.
+\n\nThis move will free up <xliff:g id="size" example="3 GB">^2</xliff:g> of your phone\u2019s storage and should take around <xliff:g id="duration" example="3 minutes">^3</xliff:g>.</string>
+    <!-- Item that a user should be aware of while moving their content to the SD card. Tells them to keep the tablet charged while the move is happening. [CHAR LIMIT=64] -->
+    <string name="storage_wizard_migrate_v2_checklist_battery" product="tablet">Keep this tablet charged</string>
+    <!-- Item that a user should be aware of while moving their content to the SD card. Tells them to keep the phone charged while the move is happening. [CHAR LIMIT=64] -->
+    <string name="storage_wizard_migrate_v2_checklist_battery" product="default">Keep this phone charged</string>
+    <!-- SD card & phone storage settings screen, message on screen after user selects Factory data reset [CHAR LIMIT=NONE] -->
+    <string name="main_clear_desc" product="tablet">"This will erase all data from your tablet\u2019s <b>internal storage</b>, including:\n\n<li>Your Google Account</li>\n<li>System and app data and settings</li>\n<li>Downloaded apps</li>"</string>
+    <!-- SD card & phone storage settings screen, message on screen after user selects Factory data reset [CHAR LIMIT=NONE] -->
+    <string name="main_clear_desc" product="default">"This will erase all data from your phone\u2019s <b>internal storage</b>, including:\n\n<li>Your Google Account</li>\n<li>System and app data and settings</li>\n<li>Downloaded apps</li>"</string>
+    <!-- SD card & phone storage settings screen, instructions and list of current accounts.  The list of accounts follows this text[CHAR LIMIT=NONE] -->
+    <string name="main_clear_accounts" product="default">"\n\nYou are currently signed into the following accounts:\n"</string>
+    <!-- SD card & phone storage settings screen, notification if other users are present on the device [CHAR LIMIT=NONE] -->
+    <string name="main_clear_other_users_present" product="default">"\n\nThere are other users present on this device.\n"</string>
+    <!-- SD card & phone storage settings screen, instructions about whether to also erase the external storage (SD card) when erasing the internal storage [CHAR LIMIT=NONE] -->
+    <string name="main_clear_desc_erase_external_storage" product="nosdcard">"\n\nTo clear music, pictures, and other user data, the <b>USB storage</b> needs to be erased."</string>
+    <!-- SD card & phone storage settings screen, instructions about whether to also erase the external storage (SD card) when erasing the internal storage [CHAR LIMIT=NONE] -->
+    <string name="main_clear_desc_erase_external_storage" product="default">"\n\nTo clear music, pictures, and other user data, the <b>SD card</b> needs to be erased."</string>
+    <!-- SD card & phone storage settings screen, label for check box to erase USB storage [CHAR LIMIT=30] -->
+    <string name="erase_external_storage" product="nosdcard">Erase USB storage</string>
+    <!-- SD card & phone storage settings screen, label for check box to erase SD card [CHAR LIMIT=30] -->
+    <string name="erase_external_storage" product="default">Erase SD card</string>
+    <!-- SD card & phone storage settings screen, description for check box to erase USB storage [CHAR LIMIT=NONE] -->
+    <string name="erase_external_storage_description" product="nosdcard">Erase all the data on the internal USB storage, such as music or photos</string>
+    <!-- SD card & phone storage settings screen, description for check box to erase USB storage [CHAR LIMIT=NONE] -->
+    <string name="erase_external_storage_description" product="default">Erase all the data on the SD card, such as music or photos</string>
+    <!-- SD card & phone storage settings screen, button on screen after user selects Factory data reset [CHAR LIMIT=NONE] -->
+    <string name="main_clear_button_text" product="tablet">Erase all data</string>
+    <!-- SD card & phone storage settings screen, button on screen after user selects Factory data reset [CHAR LIMIT=NONE] -->
+    <string name="main_clear_button_text" product="default">Erase all data</string>
+    <string name="usb_tethering_subtext" product="default">Share phone\u2019s internet connection via USB</string>
+    <string name="usb_tethering_subtext" product="tablet">Share tablet\u2019s internet connection via USB</string>
+    <!-- Bluetooth Tethering subtext [CHAR LIMIT=70]-->
+    <string name="bluetooth_tethering_subtext" product="tablet">Share tablet\u2019s internet connection via Bluetooth</string>
+    <!-- Bluetooth Tethering subtext [CHAR LIMIT=70]-->
+    <string name="bluetooth_tethering_subtext" product="default">Share phone\u2019s internet connection via Bluetooth</string>
+    <!-- Ethernet Tethering subtext [CHAR LIMIT=NONE]-->
+    <string name="ethernet_tethering_subtext" product="default">Share phone\u2019s internet connection via Ethernet</string>
+    <!-- Ethernet Tethering subtext for tablet [CHAR LIMIT=NONE]-->
+    <string name="ethernet_tethering_subtext" product="tablet">Share tablet\u2019s internet connection via Ethernet</string>
+    <!-- Main settings screen, setting title for the user to go into the About phone screen -->
+    <string name="about_settings" product="tablet">About tablet</string>
+    <!-- Main settings screen, setting title for the user to go into the About phone screen -->
+    <string name="about_settings" product="default">About phone</string>
+    <!-- Main settings screen, setting title for the user to go into the About phone screen -->
+    <string name="about_settings" product="device">About device</string>
+    <!-- Main settings screen, setting title for the user to go into the About phone screen -->
+    <string name="about_settings" product="emulator">About emulated device</string>
+    <!-- Warning that appears below the unknown sources switch in settings -->
+    <string name="install_all_warning" product="tablet">
+        Your tablet and personal data are more vulnerable
+        to attack by unknown apps. By installing apps from
+        this source, you agree that you are responsible for
+        any damage to your tablet or loss of data that may
+        result from their use.
+    </string>
+    <!-- Warning that appears below the unknown sources switch in settings -->
+    <string name="install_all_warning" product="default">
+        Your phone and personal data are more vulnerable
+        to attack by unknown apps. By installing apps from
+        this source, you agree that you are responsible for
+        any damage to your phone or loss of data that may
+        result from their use.
+    </string>
+    <!-- Warning that appears below the unknown sources switch in settings -->
+    <string name="install_all_warning" product="device">
+        Your device and personal data are more vulnerable
+        to attack by unknown apps. By installing apps from
+        this source, you agree that you are responsible for
+        any damage to your device or loss of data that may
+        result from their use.
+    </string>
+    <!-- Running service details, stop confirmation descriptive text. Displays when user selects selects to stop a system service. -->
+    <string name="runningservicedetails_stop_dlg_text" product="tablet">If you stop this service, some
+        features of your tablet may stop working correctly until you power it off
+        and then on again.</string>
+    <!-- Running service details, stop confirmation descriptive text. Displays when user selects selects to stop a system service. -->
+    <string name="runningservicedetails_stop_dlg_text" product="default">If you stop this service, some
+        features of your phone may stop working correctly until you power it off
+        and then on again.</string>
+    <!-- In the Testing screen.  The item title of the activity that shows a bunch of phone-related information.  -->
+    <string name="testing_phone_info" product="tablet">Tablet information</string>
+    <!-- In the Testing screen.  The item title of the activity that shows a bunch of phone-related information.  -->
+    <string name="testing_phone_info" product="default">Phone information</string>
+    <!-- Message for the confirm dialog of reset settings. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_text_reading_confirm_dialog_message" product="default">Your display size and text preferences will reset to the phone\u2019s original settings</string>
+    <!-- Message for the confirm dialog of reset settings. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_text_reading_confirm_dialog_message" product="tablet">Your display size and text preferences will reset to the tablet\u2019s original settings</string>
+    <!-- Intro for color correction settings screen to control turning on/off the feature entirely. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_daltonizer_about_intro_text" product="default">Adjust how colors display on your phone</string>
+    <!-- Intro for color correction settings screen to control turning on/off the feature entirely. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_daltonizer_about_intro_text" product="tablet">Adjust how colors display on your tablet</string>
+    <!-- Summary for the accessibility preference to configure Reduce Brightness feature. [CHAR LIMIT=NONE] -->
+    <string name="reduce_bright_colors_preference_summary" product="default">Dim screen beyond your phone\u2019s minimum brightness</string>
+    <!-- Summary for the accessibility preference to configure Reduce Brightness feature. [CHAR LIMIT=NONE] -->
+    <string name="reduce_bright_colors_preference_summary" product="tablet">Dim screen beyond your tablet\u2019s minimum brightness</string>
+    <!-- Subtitle that describes Reduce Brightness. [CHAR LIMIT=NONE] -->
+    <string name="reduce_bright_colors_preference_subtitle" product="default">
+        <![CDATA[Extra dim can be helpful when:
+        <ol>
+            <li>\u00a0Your phone\u2019s default minimum brightness is still too bright</li>
+            <li>\u00a0You\u2019re using your phone in dark situations, like at night or in a dark room before bed</li>
+        </ol>
+        ]]>
+    </string>
+    <!-- Subtitle that describes Reduce Brightness. [CHAR LIMIT=NONE] -->
+    <string name="reduce_bright_colors_preference_subtitle" product="tablet">
+        <![CDATA[Extra dim can be helpful when:
+        <ol>
+            <li>\u00a0Your tablet\u2019s default minimum brightness is still too bright</li>
+            <li>\u00a0You\u2019re using your tablet in dark situations, like at night or in a dark room before bed</li>
+        </ol>
+        ]]>
+    </string>
+    <!-- Summary for the battery summary tip [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_summary_summary" product="default">Phone has typical background battery usage</string>
+    <!-- Summary for the battery summary tip [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_summary_summary" product="tablet">Tablet has typical background battery usage</string>
+    <!-- Summary for the battery summary tip [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_summary_summary" product="device">Device has typical background battery usage</string>
+    <!-- Message of battery limited temporarily tip. [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="default">In certain conditions, like high temperatures and long charging periods, charging may be limited to <xliff:g id="percent" example="50%">%1$s</xliff:g> to help preserve battery health.\n\nWhen those conditions end, your phone will automatically charge normally.</string>
+    <!-- Message of battery limited temporarily tip. [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet">In certain conditions, like high temperatures and long charging periods, charging may be limited to <xliff:g id="percent" example="50%">%1$s</xliff:g> to help preserve battery health.\n\nWhen those conditions end, your tablet will automatically charge normally.</string>
+    <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_dialog_message" product="default">Because you’ve used your phone more than usual, your battery may run out sooner than it normally would.\n\nApps using most battery:</string>
+    <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_dialog_message" product="tablet">Because you’ve used your tablet more than usual, your battery may run out sooner than it normally would.\n\nApps using most battery:</string>
+    <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_dialog_message" product="device">Because you’ve used your device more than usual, your battery may run out sooner than it normally would.\n\nApps using most battery:</string>
+    <!-- Message for battery tip dialog to show the battery summary -->
+    <string name="battery_tip_dialog_summary_message" product="default">Your apps are using a normal amount of battery. If apps use too much battery, your phone will suggest actions you can take.\n\nYou can always turn on Battery Saver if you\u2019re running low on battery.</string>
+    <!-- Message for battery tip dialog to show the battery summary -->
+    <string name="battery_tip_dialog_summary_message" product="tablet">Your apps are using a normal amount of battery. If apps use too much battery, your tablet will suggest actions you can take.\n\nYou can always turn on Battery Saver if you\u2019re running low on battery.</string>
+    <!-- Message for battery tip dialog to show the battery summary -->
+    <string name="battery_tip_dialog_summary_message" product="device">Your apps are using a normal amount of battery. If apps use too much battery, your device will suggest actions you can take.\n\nYou can always turn on Battery Saver if you\u2019re running low on battery.</string>
+    <!-- Summary for the smart battery toggle [CHAR LIMIT=NONE] -->
+    <string name="smart_battery_summary" product="default">Limit battery for apps that you don\u2019t use often</string>
+    <!-- [CHAR_LIMIT=NONE] Battery usage main screen footer content -->
+    <string name="battery_usage_screen_footer" product="default">Battery usage and screen time are not measured while the phone is charging</string>
+    <!-- [CHAR_LIMIT=NONE] Battery usage main screen footer content -->
+    <string name="battery_usage_screen_footer" product="tablet">Battery usage and screen time are not measured while the tablet is charging</string>
+    <!-- [CHAR_LIMIT=NONE] Battery usage main screen footer content -->
+    <string name="battery_usage_screen_footer" product="device">Battery usage and screen time are not measured while the device is charging</string>
+    <!-- Summary of preference to install certificates from SD card [CHAR LIMIT=NONE] -->
+    <string name="credentials_install_summary" product="nosdcard">Install certificates from storage</string>
+    <!-- Summary of preference to install certificates from SD card [CHAR LIMIT=NONE] -->
+    <string name="credentials_install_summary" product="default">Install certificates from SD card</string>
+    <!-- Remove account message in dialog [CHAR LIMIT=NONE] -->
+    <string name="really_remove_account_message" product="tablet">Removing this account will delete all of its messages, contacts, and other data from the tablet!</string>
+    <!-- Remove account message in dialog [CHAR LIMIT=NONE] -->
+    <string name="really_remove_account_message" product="default">Removing this account will delete all of its messages, contacts, and other data from the phone!</string>
+    <!-- Remove account message in dialog [CHAR LIMIT=NONE] -->
+    <string name="really_remove_account_message" product="device">Removing this account will delete all of its messages, contacts, and other data from the device!</string>
+    <!--  Body of dialog shown when user enables global auto sync, for tablet [CHAR LIMIT=none] -->
+    <string name="data_usage_auto_sync_on_dialog" product="tablet">Any changes you make to your accounts on the web will be automatically copied to your tablet.\n\nSome accounts may also automatically copy any changes you make on the tablet to the web. A Google Account works this way.</string>
+    <!--  Body of dialog shown when user enables global auto sync [CHAR LIMIT=none] -->
+    <string name="data_usage_auto_sync_on_dialog" product="default">Any changes you make to your accounts on the web will be automatically copied to your phone.\n\nSome accounts may also automatically copy any changes you make on the phone to the web. A Google Account works this way.</string>
+    <!-- Body of dialog shown before user limits mobile data usage. [CHAR LIMIT=NONE] -->
+    <string name="data_usage_limit_dialog_mobile" product="tablet">Your tablet will turn off mobile data once it reaches the limit you set.\n\nSince data usage is measured by your tablet, and your carrier may account for usage differently, consider setting a conservative limit.</string>
+    <!-- Body of dialog shown before user limits mobile data usage. [CHAR LIMIT=NONE] -->
+    <string name="data_usage_limit_dialog_mobile" product="default">Your phone will turn off mobile data once it reaches the limit you set.\n\nSince data usage is measured by your phone, and your carrier may account for usage differently, consider setting a conservative limit.</string>
+    <!-- User settings screen footer text [CHAR LIMIT=NONE] -->
+    <string name="user_settings_footer_text" product="device">Share your device by adding new users. Each user has a personal space on your device for custom Home screens, accounts, apps, settings, and more.</string>
+    <!-- User settings screen footer text [CHAR LIMIT=NONE] -->
+    <string name="user_settings_footer_text" product="tablet">Share your tablet by adding new users. Each user has a personal space on your tablet for custom Home screens, accounts, apps, settings, and more.</string>
+    <!-- User settings screen footer text [CHAR LIMIT=NONE] -->
+    <string name="user_settings_footer_text" product="default">Share your phone by adding new users. Each user has a personal space on your phone for custom Home screens, accounts, apps, settings, and more.</string>
+    <!-- Message to secondary users that only owner can manage users [CHAR LIMIT=none] -->
+    <string name="user_cannot_manage_message" product="tablet">Only the tablet\u2019s owner can manage users.</string>
+    <!-- Message to secondary users that only owner can manage users [CHAR LIMIT=none] -->
+    <string name="user_cannot_manage_message" product="default">Only the phone\u2019s owner can manage users.</string>
+    <!-- User (self) removal confirmation message [CHAR LIMIT=none] -->
+    <string name="user_confirm_remove_self_message" product="tablet">You will lose your space and data on this tablet. You can\u2019t undo this action.</string>
+    <!-- User (self) removal confirmation message [CHAR LIMIT=none] -->
+    <string name="user_confirm_remove_self_message" product="default">You will lose your space and data on this phone. You can\u2019t undo this action.</string>
+    <!-- Summary text for support setting tile [CHAR LIMIT=None] -->
+    <string name="support_summary" product="default">Help articles, phone &amp; chat</string>
+    <!-- Summary text for support setting tile [CHAR LIMIT=None] -->
+    <string name="support_summary" product="tablet">Help articles, tablet &amp; chat</string>
+    <!-- Summary text for support setting tile [CHAR LIMIT=None] -->
+    <string name="support_summary" product="device">Help articles, device &amp; chat</string>
+    <!-- Preference and settings suggestion title text for ambient display double tap (phone) [CHAR LIMIT=60]-->
+    <string name="ambient_display_title" product="default">Double-tap to check phone</string>
+    <!-- Preference and settings suggestion title text for ambient display double tap (tablet) [CHAR LIMIT=60]-->
+    <string name="ambient_display_title" product="tablet">Double-tap to check tablet</string>
+    <!-- Preference and settings suggestion title text for ambient display double tap (device) [CHAR LIMIT=60]-->
+    <string name="ambient_display_title" product="device">Double-tap to check device</string>
+    <!-- Preference and settings suggestion title text for ambient display pick up (phone) [CHAR LIMIT=60]-->
+    <string name="ambient_display_pickup_title" product="default">Lift to check phone</string>
+    <!-- Preference and settings suggestion title text for ambient display pick up (tablet) [CHAR LIMIT=60]-->
+    <string name="ambient_display_pickup_title" product="tablet">Lift to check tablet</string>
+    <!-- Preference and settings suggestion title text for ambient display pick up (device) [CHAR LIMIT=60]-->
+    <string name="ambient_display_pickup_title" product="device">Lift to check device</string>
+    <!-- Summary text for ambient display (phone) [CHAR LIMIT=NONE]-->
+    <string name="ambient_display_pickup_summary" product="default">To check time, notifications, and other info, pick up your phone.</string>
+    <!-- Summary text for ambient display (tablet) [CHAR LIMIT=NONE]-->
+    <string name="ambient_display_pickup_summary" product="tablet">To check time, notifications, and other info, pick up your tablet.</string>
+    <!-- Summary text for ambient display (device) [CHAR LIMIT=NONE]-->
+    <string name="ambient_display_pickup_summary" product="device">To check time, notifications, and other info, pick up your device.</string>
+    <!-- Preference and settings suggestion title text for ambient display tap (phone) [CHAR LIMIT=60]-->
+    <string name="ambient_display_tap_screen_title" product="default">Tap to check phone</string>
+    <!-- Preference and settings suggestion title text for ambient display tap (tablet) [CHAR LIMIT=60]-->
+    <string name="ambient_display_tap_screen_title" product="tablet">Tap to check tablet</string>
+    <!-- Preference and settings suggestion title text for ambient display tap (device) [CHAR LIMIT=60]-->
+    <string name="ambient_display_tap_screen_title" product="device">Tap to check device</string>
+    <!-- Summary text for fingerprint swipe for notifications (phone) [CHAR LIMIT=160]-->
+    <string name="fingerprint_swipe_for_notifications_summary" product="default">To check your notifications, swipe down on the fingerprint sensor on the back of your phone.</string>
+    <!-- Summary text for fingerprint swipe for notifications (tablet) [CHAR LIMIT=160]-->
+    <string name="fingerprint_swipe_for_notifications_summary" product="tablet">To check your notifications, swipe down on the fingerprint sensor on the back of your tablet.</string>
+    <!-- Summary text for fingerprint swipe for notifications (device) [CHAR LIMIT=160]-->
+    <string name="fingerprint_swipe_for_notifications_summary" product="device">To check your notifications, swipe down on the fingerprint sensor on the back of your device.</string>
+    <!-- Footer to show current limitation of 5G on DSDS mode. [CHAR LIMIT=NONE] -->
+    <string name="no_5g_in_dsds_text" product="default">When using 2 SIMs, this phone will be limited to 4G. <annotation id="url">Learn more</annotation></string>
+    <!-- Footer to show current limitation of 5G on DSDS mode for tablets. [CHAR LIMIT=NONE] -->
+    <string name="no_5g_in_dsds_text" product="tablet">When using 2 SIMs, this tablet will be limited to 4G. <annotation id="url">Learn more</annotation></string>
+    <!-- Footer to show current limitation of 5G on DSDS mode for general devices. [CHAR LIMIT=NONE] -->
+    <string name="no_5g_in_dsds_text" product="device">When using 2 SIMs, this device will be limited to 4G. <annotation id="url">Learn more</annotation></string>
+    <!-- Description for interrupting the voice call alert. [CHAR_LIMIT=NONE] -->
+    <string name="reset_internet_text" product="default">This will end your phone call</string>
+    <!-- Description for interrupting the voice call alert. [CHAR_LIMIT=NONE] -->
+    <string name="reset_internet_text" product="tablet">This will end your phone call</string>
+
+    <!-- Help URI, battery saver page [DO NOT TRANSLATE] -->
+    <string name="help_url_battery_saver_settings" translatable="false" product="default"></string>
+
+    <!-- Help URI, app usage page [DO NOT TRANSLATE] -->
+    <string name="help_url_app_usage_settings" translatable="false" product="default"></string>
+
+    <!-- An explanation text that the pattern needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="default">Your phone was reset to factory settings. To use this phone, enter your previous pattern.</string>
+    <!-- An explanation text that the pattern needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="tablet">Your tablet was reset to factory settings. To use this tablet, enter your previous pattern.</string>
+    <!-- An explanation text that the pattern needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
+    <string name="lockpassword_confirm_your_pattern_details_frp" product="device">Your device was reset to factory settings. To use this device, enter your previous pattern.</string>
+
+    <!-- An explanation text that the pin needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
+    <string name="lockpassword_confirm_your_pin_details_frp" product="default">Your phone was reset to factory settings. To use this phone, enter your previous PIN.</string>
+    <!-- An explanation text that the pin needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
+    <string name="lockpassword_confirm_your_pin_details_frp" product="tablet">Your tablet was reset to factory settings. To use this tablet, enter your previous PIN.</string>
+    <!-- An explanation text that the pin needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
+    <string name="lockpassword_confirm_your_pin_details_frp" product="device">Your device was reset to factory settings. To use this device, enter your previous PIN.</string>
+
+    <!-- An explanation text that the password needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
+    <string name="lockpassword_confirm_your_password_details_frp" product="default">Your phone was reset to factory settings. To use this phone, enter your previous password.</string>
+    <!-- An explanation text that the password needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
+    <string name="lockpassword_confirm_your_password_details_frp" product="tablet">Your tablet was reset to factory settings. To use this tablet, enter your previous password.</string>
+    <!-- An explanation text that the password needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
+    <string name="lockpassword_confirm_your_password_details_frp" product="device">Your device was reset to factory settings. To use this device, enter your previous password.</string>
+    <!-- Message of incompatible charging battery tip [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_incompatible_charging_message" product="default">Battery charging slowly or won\'t charge. Check if the cable and power adapter work with your phone</string>
+    <string name="battery_tip_incompatible_charging_message" product="device">Battery charging slowly or won\'t charge. Check if the cable and power adapter work with your device</string>
+    <string name="battery_tip_incompatible_charging_message" product="tablet">Battery charging slowly or won\'t charge. Check if the cable and power adapter work with your tablet</string>
+
+    <!-- Description for using device controls feature with a locked phone [CHAR LIMIT=NONE] -->
+    <string name="lockscreen_trivial_controls_summary" product="default">Without unlocking your phone</string>
+    <!-- Description for using device controls feature with a locked tablet [CHAR LIMIT=NONE] -->
+    <string name="lockscreen_trivial_controls_summary" product="tablet">Without unlocking your tablet</string>
+
+    <!-- Accessibility summary text for auto rotate [CHAR LIMIT=NONE] -->
+    <string name="auto_rotate_summary_a11y" product="default">When you move your phone between portrait and landscape</string>
+    <!-- Accessibility summary text for auto rotate [CHAR LIMIT=NONE] -->
+    <string name="auto_rotate_summary_a11y" product="tabled">When you move your tablet between portrait and landscape</string>
+
+</resources>
