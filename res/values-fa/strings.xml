@@ -662,7 +662,6 @@
     <string name="remove_association_button" msgid="5004208145998061135">"حذف ارتباط"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"ارتباط برنامه قطع شود؟"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"<xliff:g id="APP_NAME">%1$s</xliff:g> برنامه دیگر با <xliff:g id="DEVICE_NAME">%2$s</xliff:g> شما ارتباط نخواهند داشت"</string>
-    <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"آزمایشی. کیفیت صدا را بهبود می‌بخشد."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"فراموش کردن دستگاه"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"قطع ارتباط برنامه"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"حداکثر تعداد دستگاه‌های صوتی بلوتوث متصل"</string>
@@ -1463,6 +1462,18 @@
     <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"از الگو برای قفل‌گشایی این دستگاه نیز استفاده شود"</string>
     <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"از پین برای قفل‌گشایی این دستگاه نیز استفاده شود"</string>
     <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="2066701840753591922">"از گذرواژه برای قفل‌گشایی این دستگاه نیز استفاده شود"</string>
+    <!-- no translation found for lockpassword_confirm_repair_mode_pattern_header (6669435143987988314) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_pin_header (2585263648322879131) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_password_header (3064676176428495228) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_pattern_details (6187536224419477465) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_pin_details (203022189107305807) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_password_details (4860219600771003873) -->
+    <skip />
     <string name="lockpassword_invalid_pin" msgid="7530854476819820600">"پین اشتباه است"</string>
     <string name="lockpassword_invalid_password" msgid="1588184930542221687">"گذرواژه اشتباه"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="8109305107409924083">"الگوی اشتباه"</string>
@@ -2709,7 +2720,7 @@
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"فعالیت مهمان حذف شود؟"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"برنامه‌ها و داده‌های این جلسه مهمان اکنون حذف خواهند شد و همه فعالیت‌های آتی مهمان هربار که از حالت مهمان خارج شوید حذف خواهد شد"</string>
     <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"حذف، مهمان، فعالیت، برداشتن، داده، بازدیدکننده، پاک کردن"</string>
-    <string name="enable_guest_calling" msgid="8300355036005240911">"اجازه دادن به مهمان برای استفاده از تلفن"</string>
+    <string name="enable_guest_calling" msgid="4620657197834392094">"اجازه دادن به مهمان برای گرفتن تماس تلفنی"</string>
     <string name="enable_guest_calling_summary" msgid="4748224917641204782">"سابقه تماس با کاربر مهمان هم‌رسانی خواهد شد"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"روشن کردن تماس‌های تلفنی و پیامک"</string>
     <string name="user_grant_admin" msgid="5942118263054572074">"انتخاب این کاربر به‌عنوان سرپرست"</string>
@@ -2984,6 +2995,10 @@
     <string name="ring_volume_option_title" msgid="1520802026403038560">"میزان صدای زنگ و اعلان"</string>
     <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"میزان صدای زنگ"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"میزان صدای اعلان"</string>
+    <string name="ringer_content_description_silent_mode" msgid="1442257660889685934">"زنگ بی‌صدا"</string>
+    <string name="ringer_content_description_vibrate_mode" msgid="5946432791951870480">"زنگ لرزشی"</string>
+    <string name="notification_volume_content_description_vibrate_mode" msgid="6097212000507408288">"اعلان‌ها بی‌صدا شد، اعلان‌ها دستگاه را به لرزش درمی‌آورد"</string>
+    <string name="volume_content_description_silent_mode" msgid="377680514551405754">"<xliff:g id="VOLUME_TYPE">%1$s</xliff:g> بی‌صدا شد"</string>
     <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"دردسترس نیست، چون زنگ بی‌صدا شده است"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"آهنگ زنگ تلفن"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"صدای اعلان پیش‌فرض"</string>
@@ -3894,7 +3909,7 @@
     <string name="managed_profile_contact_search_summary" msgid="4974727886709219105">"ممکن است سرپرست فناوری اطلاعات بتواند جستجوها و تماس‌های ورودی‌تان را ببیند"</string>
     <string name="cross_profile_calendar_title" msgid="7570277841490216947">"تقویم بین‌‌نمایه‌ای"</string>
     <string name="cross_profile_calendar_summary" msgid="8856185206722860069">"نمایش رویدادهای کاری در تقویم شخصی"</string>
-    <string name="managed_profile_settings_footer" msgid="996500759305118103">"وقتی برنامه‌های کاری خاموش هستند، موقتاً متوقف می‌شوند و نمی‌توانند برای شما اعلان ارسال کنند یا نمی‌توان به آن‌ها دسترسی داشت"</string>
+    <string name="managed_profile_settings_footer" msgid="996500759305118103">"وقتی برنامه‌های کاری خاموش هستند، موقتاً متوقف می‌شوند و نمی‌توانند به شما اعلان ارسال کنند یا نمی‌توان به آن‌ها دسترسی داشت"</string>
     <string name="automatic_storage_manager_settings" msgid="519158151463974656">"مدیریت فضای ذخیره‌سازی"</string>
     <string name="automatic_storage_manager_text" msgid="6900593059927987273">"برای کمک به خالی کردن فضای ذخیره‌سازی، مدیر ذخیره‌سازی عکس‌ها و ویدیوهای پشتیبان‌گیری‌شده را از دستگاهتان پاک می‌کند."</string>
     <string name="automatic_storage_manager_days_title" msgid="5077286114860539367">"پاک کردن عکس‌ها و ویدئوها"</string>
@@ -4662,7 +4677,7 @@
     <string name="disable_phantom_process_monitor_title" msgid="8348108346706188771">"غیرفعال کردن محدودیت‌های فرایندهای مربوط به کودک"</string>
     <string name="disable_phantom_process_monitor_summary" msgid="3044464635550256985">"غیرفعال کردن محدودیت‌های استفاده فرایندهای مربوط به کودکِ برنامه از منابع سیستم"</string>
     <string name="enable_notes_role_title" msgid="7662702013496114763">"فعال کردن اجباری نقش «یادداشت»"</string>
-    <string name="enable_notes_role_summary" msgid="136916915155048249">"فعال کردن ادغام‌های سیستم یادداشت‌برداری ازطریق نقش «یادداشت». اگر نقش «یادداشت» ازقبل فعال شده باشد، کاری انجام نمی‌شود."</string>
+    <string name="enable_notes_role_summary" msgid="5495721409392395089">"فعال کردن ادغام‌های سیستم یادداشت‌برداری ازطریق نقش «یادداشت». اگر نقش «یادداشت» ازقبل فعال شده باشد، کاری انجام نمی‌شود. به بازراه‌اندازی نیاز دارد."</string>
     <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"همه‌فرستی"</string>
     <string name="bluetooth_broadcast_dialog_broadcast_app" msgid="1016617579194329005">"همه‌فرستی <xliff:g id="CURRENTAPP">%1$s</xliff:g>"</string>
     <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"به همه‌فرستی‌هایی که اطراف شما درحال پخش هستند گوش دهید"</string>

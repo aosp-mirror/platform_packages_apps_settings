@@ -662,7 +662,6 @@
     <string name="remove_association_button" msgid="5004208145998061135">"Alisin ang asosasyon"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"I-diskonekta ang App?"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"Hindi na kokonekta ang <xliff:g id="APP_NAME">%1$s</xliff:g> app sa iyong <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
-    <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"Pang-eksperimento. Nagpapaayos sa audio."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Kalimutan ang device"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Idiskonekta ang app"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Maximum na nakakonektang mga Bluetooth audio device"</string>
@@ -1463,6 +1462,18 @@
     <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"Gamitin din ang pattern para i-unlock ito"</string>
     <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"Gamitin din ang PIN para i-unlock ito"</string>
     <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="2066701840753591922">"Gamitin din ang password para i-unlock ito"</string>
+    <!-- no translation found for lockpassword_confirm_repair_mode_pattern_header (6669435143987988314) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_pin_header (2585263648322879131) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_password_header (3064676176428495228) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_pattern_details (6187536224419477465) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_pin_details (203022189107305807) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_password_details (4860219600771003873) -->
+    <skip />
     <string name="lockpassword_invalid_pin" msgid="7530854476819820600">"Maling PIN"</string>
     <string name="lockpassword_invalid_password" msgid="1588184930542221687">"Maling password"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="8109305107409924083">"Maling pattern"</string>
@@ -2709,7 +2720,7 @@
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"I-delete ang aktibidad ng bisita?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Made-delete na ngayon ang mga app at data mula sa session na ito ng bisita, at made-delete ang lahat ng aktibidad ng bisita sa hinaharap sa tuwing aalis ka ng guest mode"</string>
     <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"i-delete, bisita, aktibidad, alisin, data, bumibisita, burahin"</string>
-    <string name="enable_guest_calling" msgid="8300355036005240911">"Payagang gamitin ng bisita ang telepono"</string>
+    <string name="enable_guest_calling" msgid="4620657197834392094">"Payagan ang bisita na tumawag"</string>
     <string name="enable_guest_calling_summary" msgid="4748224917641204782">"Ibabahagi sa bisitang user ang history ng tawag"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"I-on ang mga pagtawag sa telepono at SMS"</string>
     <string name="user_grant_admin" msgid="5942118263054572074">"Gawing admin ang user na ito"</string>
@@ -2984,6 +2995,10 @@
     <string name="ring_volume_option_title" msgid="1520802026403038560">"Volume ng pag-ring at notification"</string>
     <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"Volume ng pag-ring"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"Volume ng notification"</string>
+    <string name="ringer_content_description_silent_mode" msgid="1442257660889685934">"Naka-silent ang ringer"</string>
+    <string name="ringer_content_description_vibrate_mode" msgid="5946432791951870480">"Naka-vibrate ang ringer"</string>
+    <string name="notification_volume_content_description_vibrate_mode" msgid="6097212000507408288">"Naka-mute ang volume ng notification, magva-vibrate ang mga notification"</string>
+    <string name="volume_content_description_silent_mode" msgid="377680514551405754">"Na-mute ang <xliff:g id="VOLUME_TYPE">%1$s</xliff:g>"</string>
     <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"Hindi available dahil naka-mute ang ring"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"Ringtone ng telepono"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Default na notification sound"</string>
@@ -4662,7 +4677,7 @@
     <string name="disable_phantom_process_monitor_title" msgid="8348108346706188771">"I-disable ang mga paghihigpit sa proseso ng child"</string>
     <string name="disable_phantom_process_monitor_summary" msgid="3044464635550256985">"I-disable ang mga paghihigpit sa paggamit ng resource ng system para sa mga proseso ng child ng app"</string>
     <string name="enable_notes_role_title" msgid="7662702013496114763">"Sapilitang i-enable ang tungkuling Mga Tala"</string>
-    <string name="enable_notes_role_summary" msgid="136916915155048249">"I-enable ang mga integration ng system ng pagtatala sa pamamagitan ng tungkuling Mga Tala. Kung naka-enable na ang tungkuling Mga Tala, wala itong gagawin."</string>
+    <string name="enable_notes_role_summary" msgid="5495721409392395089">"I-enable ang mga integration ng system ng pagtatala sa pamamagitan ng tungkuling Mga Tala. Kung naka-enable na ang tungkuling Mga Tala, wala itong gagawin. Nagre-require ng pag-reboot."</string>
     <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Broadcast"</string>
     <string name="bluetooth_broadcast_dialog_broadcast_app" msgid="1016617579194329005">"I-broadcast ang <xliff:g id="CURRENTAPP">%1$s</xliff:g>"</string>
     <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"Makinig sa mga broadcast na nagpe-play malapit sa iyo"</string>
