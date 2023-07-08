@@ -356,7 +356,7 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"为获得最佳效果，请使用获得 Made For Google 认证的屏幕保护膜。如果使用其他屏幕保护膜，系统可能无法识别您孩子的指纹。"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"手表解锁"</string>
-    <string name="biometric_settings_intro_with_activeunlock" msgid="6583248094453119314">"在设置人脸解锁和指纹解锁时，如果您戴着口罩或所在区域光线较暗，手机会要求您使用指纹解锁。\n\n如果系统无法识别您的面孔或指纹，您可以用手表进行解锁。"</string>
+    <string name="biometric_settings_intro_with_activeunlock" msgid="6583248094453119314">"设置人脸解锁和指纹解锁后，如果您戴着口罩或所在区域光线较暗，手机会要求您使用指纹解锁。\n\n如果系统无法识别您的面孔或指纹，您可以用手表进行解锁。"</string>
     <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"如果系统无法识别您的指纹，您可以用手表进行解锁。"</string>
     <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"如果系统无法识别您的面孔，您可以用手表进行解锁。"</string>
     <string name="biometric_settings_use_fingerprint_or_watch_for" msgid="1160830065613858095">"将指纹或手表用于"</string>
@@ -384,7 +384,7 @@
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"需要设置"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"已添加面孔和多个指纹"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"已添加面孔和一个指纹"</string>
-    <string name="biometric_settings_intro" msgid="4263069383955676756">"在设置人脸解锁和指纹解锁时，如果您戴着口罩或所在区域光线较暗，手机会要求您使用指纹解锁"</string>
+    <string name="biometric_settings_intro" msgid="4263069383955676756">"设置人脸解锁和指纹解锁后，如果您戴着口罩或所在区域光线较暗，手机会要求您使用指纹解锁"</string>
     <string name="biometric_settings_category_ways_to_unlock" msgid="3384767901580915266">"解锁方式"</string>
     <string name="biometric_settings_category_use_face_fingerprint" msgid="4377659744376863913">"人脸或指纹的用途"</string>
     <string name="biometric_settings_use_biometric_unlock_phone" msgid="8180914579885804358">"解锁手机"</string>
@@ -662,7 +662,6 @@
     <string name="remove_association_button" msgid="5004208145998061135">"取消关联"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"要取消与该应用的关联吗？"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"“<xliff:g id="APP_NAME">%1$s</xliff:g>”应用将不再关联到您的“<xliff:g id="DEVICE_NAME">%2$s</xliff:g>”"</string>
-    <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"实验性功能。可改善音频质量。"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"取消保存"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"取消与该应用的关联"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"已连接蓝牙音频设备的数量上限"</string>
@@ -1463,6 +1462,18 @@
     <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"还使用解锁图案来解锁此设备"</string>
     <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"还使用 PIN 码来解锁此设备"</string>
     <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="2066701840753591922">"还使用密码来解锁此设备"</string>
+    <!-- no translation found for lockpassword_confirm_repair_mode_pattern_header (6669435143987988314) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_pin_header (2585263648322879131) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_password_header (3064676176428495228) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_pattern_details (6187536224419477465) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_pin_details (203022189107305807) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_password_details (4860219600771003873) -->
+    <skip />
     <string name="lockpassword_invalid_pin" msgid="7530854476819820600">"PIN 码错误"</string>
     <string name="lockpassword_invalid_password" msgid="1588184930542221687">"密码错误"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="8109305107409924083">"图案错误"</string>
@@ -2709,7 +2720,7 @@
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"要删除访客活动吗？"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"此访客会话中的应用和数据将会立即删除；日后您每次退出访客模式时，系统都会删除访客活动记录"</string>
     <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"删除, 访客, 活动, 移除, 数据, 访问者, 清除, delete, guest, activity, remove, data, visitor, erase"</string>
-    <string name="enable_guest_calling" msgid="8300355036005240911">"允许访客使用电话"</string>
+    <string name="enable_guest_calling" msgid="4620657197834392094">"允许访客打电话"</string>
     <string name="enable_guest_calling_summary" msgid="4748224917641204782">"将与访客用户共享通话记录"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"开启通话和短信功能"</string>
     <string name="user_grant_admin" msgid="5942118263054572074">"将此用户设为管理员"</string>
@@ -2984,6 +2995,10 @@
     <string name="ring_volume_option_title" msgid="1520802026403038560">"铃声和通知音量"</string>
     <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"铃声音量"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"通知音量"</string>
+    <string name="ringer_content_description_silent_mode" msgid="1442257660889685934">"振铃器静音"</string>
+    <string name="ringer_content_description_vibrate_mode" msgid="5946432791951870480">"振铃器振动"</string>
+    <string name="notification_volume_content_description_vibrate_mode" msgid="6097212000507408288">"通知音量已设为静音，有通知时设备会振动"</string>
+    <string name="volume_content_description_silent_mode" msgid="377680514551405754">"<xliff:g id="VOLUME_TYPE">%1$s</xliff:g>已设为静音"</string>
     <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"铃声已被静音，因此无法调整"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"手机铃声"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"默认通知提示音"</string>
@@ -4662,7 +4677,7 @@
     <string name="disable_phantom_process_monitor_title" msgid="8348108346706188771">"停止限制子进程"</string>
     <string name="disable_phantom_process_monitor_summary" msgid="3044464635550256985">"停止限制应用子进程的系统资源用量"</string>
     <string name="enable_notes_role_title" msgid="7662702013496114763">"强制启用“记事”角色"</string>
-    <string name="enable_notes_role_summary" msgid="136916915155048249">"通过“记事”角色启用记事系统集成。如果“记事”角色已启用，则无需执行任何操作。"</string>
+    <string name="enable_notes_role_summary" msgid="5495721409392395089">"通过“记事”角色启用记事系统集成。如果“记事”角色已启用，则无需执行任何操作。需要重新启动。"</string>
     <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"广播"</string>
     <string name="bluetooth_broadcast_dialog_broadcast_app" msgid="1016617579194329005">"广播“<xliff:g id="CURRENTAPP">%1$s</xliff:g>”的内容"</string>
     <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"收听在您附近播放的广播"</string>

@@ -662,7 +662,6 @@
     <string name="remove_association_button" msgid="5004208145998061135">"İlişkilendirmeyi kaldır"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"Uygulamanın Bağlantısı Kesilsin Mi?"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"<xliff:g id="APP_NAME">%1$s</xliff:g> uygulaması, artık <xliff:g id="DEVICE_NAME">%2$s</xliff:g> cihazınıza bağlanmaz"</string>
-    <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"Deneysel. Ses kalitesini artırır."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Cihazı unut"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Uygulamanın bağlantısını kes"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Maksimum sayıda bağlı Bluetooth ses cihazı"</string>
@@ -1463,6 +1462,18 @@
     <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"Bu cihazın kilidini desenle de aç"</string>
     <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"Bu cihazın kilidini PIN\'le de aç"</string>
     <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="2066701840753591922">"Bu cihazın kilidini şifreyle de aç"</string>
+    <!-- no translation found for lockpassword_confirm_repair_mode_pattern_header (6669435143987988314) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_pin_header (2585263648322879131) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_password_header (3064676176428495228) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_pattern_details (6187536224419477465) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_pin_details (203022189107305807) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_password_details (4860219600771003873) -->
+    <skip />
     <string name="lockpassword_invalid_pin" msgid="7530854476819820600">"Yanlış PIN"</string>
     <string name="lockpassword_invalid_password" msgid="1588184930542221687">"Yanlış şifre"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="8109305107409924083">"Yanlış desen"</string>
@@ -2709,7 +2720,7 @@
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Misafir etkinliği silinsin mi?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Bu misafir oturumundaki uygulamalar ve veriler şimdi silinecektir. Bundan sonraki tüm misafir etkinlikleri ise misafir modundan her çıktığınızda silinir."</string>
     <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"sil, misafir, etkinlik, veri, ziyaretçi"</string>
-    <string name="enable_guest_calling" msgid="8300355036005240911">"Misafirin, telefonu kullanmasına izin verin"</string>
+    <string name="enable_guest_calling" msgid="4620657197834392094">"Misafirin telefon etmesine izin ver"</string>
     <string name="enable_guest_calling_summary" msgid="4748224917641204782">"Çağrı geçmişi bu kullanıcıyla paylaşılacak"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Telefon aramalarını ve mesajları aç"</string>
     <string name="user_grant_admin" msgid="5942118263054572074">"Bu kullanıcıyı yönetici yap"</string>
@@ -2984,6 +2995,10 @@
     <string name="ring_volume_option_title" msgid="1520802026403038560">"Zil ve bildirim ses düzeyi"</string>
     <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"Zil sesi düzeyi"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"Bildirim ses düzeyi"</string>
+    <string name="ringer_content_description_silent_mode" msgid="1442257660889685934">"Telefon zili sessiz"</string>
+    <string name="ringer_content_description_vibrate_mode" msgid="5946432791951870480">"Telefon zili titreşimde"</string>
+    <string name="notification_volume_content_description_vibrate_mode" msgid="6097212000507408288">"Bildirim sesi kapatıldı. Bildirimlerde titreşim olmayacak."</string>
+    <string name="volume_content_description_silent_mode" msgid="377680514551405754">"<xliff:g id="VOLUME_TYPE">%1$s</xliff:g> kapalı"</string>
     <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"Zil sesi kapatıldığı için kullanılamıyor"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"Telefon zil sesi"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Varsayılan bildirim sesi"</string>
@@ -4662,7 +4677,7 @@
     <string name="disable_phantom_process_monitor_title" msgid="8348108346706188771">"Alt işlem kısıtlamalarını devre dışı bırak"</string>
     <string name="disable_phantom_process_monitor_summary" msgid="3044464635550256985">"Uygulamadaki alt işlemlerin sistem kaynağı kullanımıyla ilgili kısıtlamaları devre dışı bırakın"</string>
     <string name="enable_notes_role_title" msgid="7662702013496114763">"Notlar rolünü zorla etkinleştir"</string>
-    <string name="enable_notes_role_summary" msgid="136916915155048249">"Notlar rolü aracılığıyla not alma sistemi entegrasyonlarını etkinleştirin. Notlar rolü daha önce etkinleştirilmişse hiçbir değişiklik olmaz."</string>
+    <string name="enable_notes_role_summary" msgid="5495721409392395089">"Notlar rolü aracılığıyla not alma sistemi entegrasyonlarını etkinleştirin. Notlar rolü daha önce etkinleştirilmişse hiçbir değişiklik olmaz. Yeniden başlatmayı gerektirir."</string>
     <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Yayın"</string>
     <string name="bluetooth_broadcast_dialog_broadcast_app" msgid="1016617579194329005">"<xliff:g id="CURRENTAPP">%1$s</xliff:g> uygulamasında anons yapın"</string>
     <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"Yakınınızda oynatılan yayınları dinleyin"</string>
