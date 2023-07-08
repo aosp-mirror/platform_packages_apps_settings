@@ -65,7 +65,7 @@
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"Para vinstra eyra"</string>
     <string name="bluetooth_device_controls_general" msgid="1399214835599665488">"Fyrir öll heyrnartæki sem eru í boði"</string>
     <string name="bluetooth_device_controls_title" msgid="1895676556354697234">"Stillingar heyrnartækis"</string>
-    <string name="bluetooth_device_controls_summary" msgid="949566933352398337">"Hljóðúttak, flýtileið, samhæfi við heyrnartæki"</string>
+    <string name="bluetooth_device_controls_summary" msgid="8115767735418425663">"Flýtileið, samhæfi við heyrnartæki"</string>
     <string name="bluetooth_device_controls_specific" msgid="7706863288754077107">"Fyrir þetta tæki"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Hljóðúttak"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Um hljóðúttak"</string>
@@ -99,7 +99,7 @@
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"Tækin þín"</string>
     <string name="bluetooth_pairing_page_title" msgid="3403981358823707692">"Para nýtt tæki"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Slökkva á vélbúnaðarnotk. Bluetooth A2DP"</string>
-    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"Slökkva á Bluetooth vélbúnaðarnotkun LE-hljóðs"</string>
+    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"Slökkva á vélbúnaðarnotkun Bluetooth LE-hljóðs"</string>
     <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"Endurræsa tæki?"</string>
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"Endurræsa þarf tækið til að breyta þessari stillingu."</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Endurræsa"</string>
@@ -460,16 +460,21 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Lokið"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Úbbs, þetta er ekki skynjarinn"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Snertu lesarann aftan á símanum. Notaðu vísifingur."</string>
-    <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title" msgid="5796228438604723279">"Skráningu var ekki lokið"</string>
+    <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title" msgid="6305457126747942642">"Ekki er hægt að ljúka uppsetningu fingrafars"</string>
+    <string name="security_settings_fingerprint_enroll_error_unable_to_process_message_setup" msgid="2735739618722623980">"Þú getur reynt aftur núna eða sett fingrafarið upp síðar í stillingunum."</string>
+    <string name="security_settings_fingerprint_enroll_error_unable_to_process_message" msgid="5858386244898601003">"Þú getur reynt aftur núna eða sett fingrafarið upp síðar."</string>
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Fingrafarsuppsetning rann út á tíma"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="7022271597754894162">"Þú getur sett fingrafarið upp síðar í stillingunum."</string>
-    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Skráning fingrafars virkaði ekki. Reyndu aftur eða notaðu annan fingur."</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message_setup" msgid="8521566666541069383">"Þú getur sett fingrafarið upp síðar í stillingunum."</string>
+    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message_setup" msgid="8140162986046783546">"Eitthvað fór úrskeiðis. Þú getur sett fingrafarið upp síðar í stillingunum."</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="3534341971920335247">"Þú getur sett fingrafarið upp síðar."</string>
+    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="4344665784935791640">"Eitthvað fór úrskeiðis. Þú getur sett fingrafarið upp síðar."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Bæta öðru við"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Áfram"</string>
     <string name="security_fingerprint_disclaimer_lockscreen_disabled_1" msgid="294529888220959309">"Slökkt er á skjálásmöguleikanum. Hafðu samband við stjórnanda fyrirtækisins til að fá nánari upplýsingar."</string>
     <string name="security_fingerprint_disclaimer_lockscreen_disabled_2" msgid="8070829069640846543">"Þú getur áfram notað fingrafarið til að heimila kaup og aðgang að forritum."</string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Lyftu fingrinum og snertu svo skynjarann aftur"</string>
-    <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Ekki er hægt að nota fingrafaralesara. Þú verður að fara með hann á verkstæði"</string>
+    <string name="security_settings_fingerprint_bad_calibration_title" msgid="3073145395701953620">"Ekki er hægt að nota fingrafaralesara"</string>
+    <string name="security_settings_fingerprint_bad_calibration" msgid="304585658839584958">"Þú verður að fara á verkstæði."</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"Fleiri öryggisstillingar"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Lás vinnusniðs, dulkóðun og fleira"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Dulkóðun, skilríki og fleira"</string>
@@ -627,8 +632,7 @@
     <string name="bluetooth_settings" msgid="2967239493428695171">"Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"Bluetooth"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"Para við <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
-    <!-- no translation found for bluetooth_pairing_group_late_bonding (5310869364570266209) -->
-    <skip />
+    <string name="bluetooth_pairing_group_late_bonding" msgid="5310869364570266209">"Bættu nýjum meðlim við fyrirliggjandi samstillt sett"</string>
     <string name="bluetooth_pairing_key_msg" msgid="1329835708475701761">"Bluetooth-pörunarkóði"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="5806420933599368592">"Sláðu inn pörunarkóðann og ýttu svo á Return eða Enter"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7256286571636950635">"PIN inniheldur bókstafi eða tákn"</string>
@@ -1112,6 +1116,7 @@
     <string name="security_patch" msgid="4071756145347865382">"Öryggisuppfærsla fyrir Android"</string>
     <string name="model_info" msgid="8997566254717810904">"Gerð"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"Vélbúnaðarútgáfa"</string>
+    <string name="manufactured_year" msgid="3401517138700926475">"Framleiðsluár"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"Auðkenni búnaðar"</string>
     <string name="baseband_version" msgid="2600182227599835857">"Grunnbandsútgáfa"</string>
     <string name="kernel_version" msgid="3513538109381366881">"Kjarnaútgáfa"</string>
@@ -1743,8 +1748,8 @@
     <string name="user_dict_settings_all_languages" msgid="8563387437755363526">"Fyrir öll tungumál"</string>
     <string name="user_dict_settings_more_languages" msgid="5378870726809672319">"Fleiri tungumál…"</string>
     <string name="testing" msgid="6294172343766732037">"Prófun"</string>
-    <string name="keyboard_settings_summary" msgid="2716339620942356432">"Skjályklaborð, tal, verkfæri"</string>
-    <string name="keyboard_settings_with_physical_keyboard_summary" msgid="6628668004523183413">"Skjályklaborð, vélbúnaðarlyklaborð, tal, verkfæri"</string>
+    <string name="keyboard_settings_summary" msgid="9188442758316476986">"Skjályklaborð, verkfæri"</string>
+    <string name="keyboard_settings_with_physical_keyboard_summary" msgid="2240779804018260938">"Skjályklaborð, vélbúnaðarlyklaborð, verkfæri"</string>
     <string name="builtin_keyboard_settings_title" msgid="5096171620714179661">"Vélbúnaðarlyklaborð"</string>
     <string name="enabled_locales_keyboard_layout" msgid="3939886151098958639">"Uppsetning"</string>
     <string name="gadget_picker_title" msgid="7615902510050731400">"Veldu græju"</string>
@@ -1829,7 +1834,7 @@
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"Frá: Bjarna"</string>
     <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"Góðan daginn!\n\nÉg vildi bara athuga hvernig gengur með hönnunina. Verður allt tilbúið áður en við byrjum að búa til nýju loftbelgina?"</string>
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"Endurstilla"</string>
-    <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"Skjástærð og textastillingar hafa verði endurstilltar"</string>
+    <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"Skjástærð og textastillingar hafa verið endurstilltar"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Endurstilla skjástærð og texta?"</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Endurstilla"</string>
     <string name="accessibility_text_reading_conversation_message_1" msgid="7883952203831957831">"Á að gera eitthvað um helgina?"</string>
@@ -1850,7 +1855,7 @@
     <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"Til að nota þennan eiginleika skaltu ýta á aðgengishnappinn <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> neðst á skjánum.\n\nTil að skipta á milli eiginleika skaltu halda inni aðgengishnappinum."</string>
     <string name="accessibility_tutorial_dialog_message_floating_button" msgid="2551777208185138391">"Ýttu á aðgengishnappinn á skjánum til að nota þennan eiginleika."</string>
     <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"Til að nota þennan eiginleika heldurðu inni báðum hljóðstyrkstökkunum."</string>
-    <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"Til að ræsa og stöðva stækkun, ýttu þrisvar einhvers staðar á skjáinn."</string>
+    <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"Til að ræsa og stöðva stækkun skaltu ýta þrisvar einhvers staðar á skjáinn."</string>
     <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"Til að nota þennan eiginleika skaltu strjúka upp frá neðri hluta skjásins með tveimur fingrum.\n\nTil að skipta á milli eiginleika skaltu strjúka upp með tveimur fingrum og halda inni."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="8142847782708562793">"Til að nota þennan eiginleika skaltu strjúka upp frá neðri hluta skjásins með þremur fingrum.\n\nTil að skipta á milli eiginleika skaltu strjúka upp með þremur fingrum og halda inni."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"Til að nota aðgengiseiginleika skaltu strjúka upp frá neðri hluta skjásins með tveimur fingrum.\n\nTil að skipta á milli eiginleika skaltu strjúka upp með tveimur fingrum og halda inni."</string>
@@ -2000,7 +2005,7 @@
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Para heyrnartæki"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"Ýttu á heyrnartækin þín á næsta skjá. Þú þarft hugsanlega að para vinstra og hægra eyrað í sitthvoru lagi.\n\nGakktu úr skugga um að kveikt sé á heyrnartækjunum og þau séu tilbúin til pörunar."</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> virkt"</string>
-    <string name="accessibility_hearingaid_left_side_device_summary" msgid="1907302799168261001">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, aðeins vinstri"</string>
+    <string name="accessibility_hearingaid_left_side_device_summary" msgid="1907302799168261001">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, aðeins vinstra"</string>
     <string name="accessibility_hearingaid_right_side_device_summary" msgid="148257064855054376">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, aðeins hægra"</string>
     <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="4268221140368164452">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, vinstri og hægri"</string>
     <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> og 1 í viðbót"</string>
@@ -2858,7 +2863,7 @@
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"Býr til afrit af <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"Afrit af <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> búið til"</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"Tungumál, bendingar, tími, öryggisafrit"</string>
-    <string name="languages_setting_summary" msgid="4924440599794956443">"Kerfistungumál, tungumál forrita"</string>
+    <string name="languages_setting_summary" msgid="7963053736715746726">"Kerfistungumál, tungumál forrita, tal"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, Wi-Fi, nettenging, internet, þráðlaust, gögn, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Wi‑Fi tilkynning, wifi tilkynning"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"gagnanotkun"</string>
@@ -2941,7 +2946,7 @@
     <string name="keywords_storage_settings" msgid="6018856193950281898">"minni, skyndiminni, gögn, eyða, hreinsa, laust, pláss"</string>
     <string name="keywords_bluetooth_settings" msgid="2588159530959868188">"tengt, tæki, heyrnartól, höfuðtól, hátalari, þráðlaust, para, heyrnartól, tónlist, efni"</string>
     <string name="keywords_wallpaper" msgid="7332890404629446192">"bakgrunnur, þema, tafla, sérstilla, sérsníða"</string>
-    <string name="keywords_styles" msgid="5291614313348476068">"tákn, áhersla, litur"</string>
+    <string name="keywords_styles" msgid="3367789885254807447">"tákn, áherslulitur, litur, heimaskjár, lásskjár, flýtileið, klukkustærð"</string>
     <string name="keywords_assist_input" msgid="3086289530227075593">"sjálfgefið, hjálpari"</string>
     <string name="keywords_default_payment_app" msgid="5162298193637362104">"greiðsla, sjálfgefin"</string>
     <string name="keywords_ambient_display" msgid="3149287105145443697">"tilkynning berst"</string>
@@ -3221,7 +3226,7 @@
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"Sameina tilkynningar í einni línu á fellisvæði"</string>
     <string name="notification_channel_summary_low" msgid="5549662596677692000">"Ekkert hljóð eða titringur"</string>
     <string name="notification_conversation_summary_low" msgid="6352818857388412326">"Ekkert hljóð eða titringur og birtist neðar í samtalshluta"</string>
-    <string name="notification_channel_summary_default" msgid="3674057458265438896">"Gæti hringt eða titrað eftir stillingum símans"</string>
+    <string name="notification_channel_summary_default" msgid="1168420867670390611">"Gæti hringt eða titrað en það fer eftir stillingum tækisins"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Birta tilkynningar á borða efst á skjánum þegar tækið er opið"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"Allar tilkynningar frá „<xliff:g id="APP_NAME">%1$s</xliff:g>“"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Allar tilkynningar frá <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -3519,7 +3524,7 @@
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"Engar heimildir veittar"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"Engar heimildarbeiðnir"</string>
     <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"Stjórna aðgangi forrita að gögnum"</string>
-    <string name="permissions_usage_title" msgid="2942741460679049132">"Einkastjórnborð"</string>
+    <string name="permissions_usage_title" msgid="2942741460679049132">"Persónuverndarstjórnborð"</string>
     <string name="permissions_usage_summary" msgid="6784310472062516454">"Sýna hvaða forrit notuðu heimildir nýlega"</string>
     <string name="unused_apps" msgid="4566272194756830656">"Ónotuð forrit"</string>
     <string name="unused_apps_summary" msgid="4236371818881973021">"{count,plural, =1{# ónotað forrit}one{# ónotað forrit}other{# ónotuð forrit}}"</string>
@@ -4032,7 +4037,7 @@
     <string name="financed_privacy_fully_paid_category" msgid="9221763928564246923">"Þegar þú hefur greitt alla upphæðina:"</string>
     <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"Hafa allar takmarkanir verið fjarlægðar úr tækinu"</string>
     <string name="financed_privacy_uninstall_creditor_app" msgid="6339004120497310705">"Geturðu fjarlægt forrit lánveitanda"</string>
-    <string name="device_lock_info" msgid="1628142032642755537">"Tækjalás"</string>
+    <string name="financed_device_info" msgid="3871860346697308342">"Upplýsingar um fjármögnuð tæki"</string>
     <string name="default_camera_app_title" msgid="6546248868519965998">"{count,plural, =1{Myndavélarforrit}one{Myndavélarforrit}other{Myndavélarforrit}}"</string>
     <string name="default_calendar_app_title" msgid="1870095225089706093">"Dagatalsforrit"</string>
     <string name="default_contacts_app_title" msgid="7740028900741944569">"Tengiliðaforrit"</string>
@@ -4074,7 +4079,7 @@
     <string name="credman_keywords" msgid="8305600680836806170">"gögn, aðgangslykill, aðgangsorð"</string>
     <string name="credman_autofill_keywords" msgid="701180623776848914">"sjálfvirkt, útfylling, sjálfvirk útfylling, gögn, aðgangslykill, aðgangsorð"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Gakktu úr skugga um að þú treystir þessu forriti&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Sjálfvirk útfylling Google&gt;%1$s&lt;/xliff:g&gt; notar það sem er á skjánum til að ákvarða hvað er hægt að fylla sjálfkrafa út."</string>
-    <string name="credman_autofill_confirmation_message" msgid="4951846866327737417">"&lt;b&gt;Notaðu &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; notar það sem er á skjánum hjá þér til að greina hvað er hægt að fylla sjálfkrafa út. Ný aðgangsorð, aðgangslyklar og aðrar upplýsingar verða nú vistaðar hér í framhaldinu."</string>
+    <string name="credman_autofill_confirmation_message" msgid="4951846866327737417">"&lt;b&gt;Nota &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; notar það sem er á skjánum hjá þér til að greina hvað er hægt að fylla sjálfkrafa út. Ný aðgangsorð, aðgangslyklar og aðrar upplýsingar verða nú vistaðar hér í framhaldinu."</string>
     <string name="credman_picker_title" msgid="2642776965060619988">"Aðgangsorð, aðgangslyklar og gagnaþjónustur"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Viltu slökkva á %1$s?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Viltu slökkva á þessari þjónustu?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Vistaðar upplýsingar á borð við aðgangsorð, aðgangslykla, greiðslumáta og aðrar upplýsingar verða ekki fylltar út þegar þú skráir þig inn. Veldu aðgangsorð, aðgangslykil eða gagnaþjónustu til að nota vistuðu upplýsingarnar."</string>
@@ -4149,7 +4154,7 @@
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"Leyfa þessu forriti að kveikja og slökkva á Wi-Fi, leita að og tengjast við Wi-Fi net, bæta við og fjarlægja net og búa til staðbundinn heitan reit"</string>
     <string name="change_nfc_tag_apps_title" msgid="91514009058149617">"Ræsa með NFC"</string>
     <string name="change_nfc_tag_apps_detail_switch" msgid="240286205725043561">"Leyfa ræsingu við NFC-skönnun"</string>
-    <string name="change_nfc_tag_apps_detail_summary" msgid="7083666814715607078">"Leyfa ræsingu þessa forrits þegar NFC-merki er skannað.\nEf kveikt er á þessari heimild verður forritið í boði sem valkostur þegar merki greinist."</string>
+    <string name="change_nfc_tag_apps_detail_summary" msgid="3338220223868942195">"Leyfa ræsingu þessa forrits þegar NFC-merki er skannað.\nEf kveikt er á þessari heimild verður forritið í boði sem valkostur þegar merki greinist."</string>
     <string name="media_output_title" msgid="8283629315159510680">"Spila efni í"</string>
     <string name="media_output_label_title" msgid="4139048973886819148">"Spila <xliff:g id="LABEL">%s</xliff:g> á"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"Þessu tæki"</string>

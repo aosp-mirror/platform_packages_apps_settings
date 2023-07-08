@@ -300,6 +300,13 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         if (convertToEsimPreferenceController != null) {
             convertToEsimPreferenceController.init(mSubId, mSubscriptionInfoEntity);
         }
+
+        List<AbstractSubscriptionPreferenceController> subscriptionPreferenceControllers =
+                useAll(AbstractSubscriptionPreferenceController.class);
+        for (AbstractSubscriptionPreferenceController controller :
+                subscriptionPreferenceControllers) {
+            controller.init(mSubId);
+        }
     }
 
     @Override

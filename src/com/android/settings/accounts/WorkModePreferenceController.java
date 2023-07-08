@@ -16,29 +16,40 @@
 package com.android.settings.accounts;
 
 import android.content.Context;
+import android.widget.Switch;
 
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.slices.SliceData;
-import com.android.settings.widget.SettingsMainSwitchPreferenceController;
 import com.android.settingslib.widget.MainSwitchPreference;
+import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 import org.jetbrains.annotations.NotNull;
 
 
-public class WorkModePreferenceController extends SettingsMainSwitchPreferenceController
-        implements Preference.OnPreferenceChangeListener, DefaultLifecycleObserver,
+/** Controller for "Work apps" toggle that allows the user to enable/disable quiet mode. */
+public class WorkModePreferenceController extends BasePreferenceController
+        implements OnMainSwitchChangeListener, DefaultLifecycleObserver,
         ManagedProfileQuietModeEnabler.QuietModeChangeListener {
 
     private final ManagedProfileQuietModeEnabler mQuietModeEnabler;
+    private MainSwitchPreference mPreference;
 
     public WorkModePreferenceController(Context context, String key) {
         super(context, key);
         mQuietModeEnabler = new ManagedProfileQuietModeEnabler(context, this);
+    }
+
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        mPreference = screen.findPreference(getPreferenceKey());
+        mPreference.addOnSwitchChangeListener(this);
     }
 
     @Override
@@ -57,19 +68,18 @@ public class WorkModePreferenceController extends SettingsMainSwitchPreferenceCo
     }
 
     @Override
-    public boolean isChecked() {
-        return !mQuietModeEnabler.isQuietModeEnabled();
+    public void onSwitchChanged(Switch switchView, boolean isChecked) {
+        mQuietModeEnabler.setQuietModeEnabled(!isChecked);
     }
 
     @Override
-    public boolean setChecked(boolean isChecked) {
-        mQuietModeEnabler.setQuietModeEnabled(!isChecked);
-        return true;
+    public final void updateState(Preference preference) {
+        mPreference.updateStatus(!mQuietModeEnabler.isQuietModeEnabled());
     }
 
     @Override
     public void onQuietModeChanged() {
-        updateState(mSwitchPreference);
+        updateState(mPreference);
     }
 
     @Override
@@ -81,10 +91,5 @@ public class WorkModePreferenceController extends SettingsMainSwitchPreferenceCo
     @Override
     public int getSliceHighlightMenuRes() {
         return R.string.menu_key_accounts;
-    }
-
-    @VisibleForTesting
-    void setPreference(MainSwitchPreference preference) {
-        mSwitchPreference = preference;
     }
 }

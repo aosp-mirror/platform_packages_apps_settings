@@ -46,10 +46,12 @@ import androidx.preference.PreferenceGroup;
 import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.Settings.TetherSettingsActivity;
+import com.android.settings.Settings.WifiTetherSettingsActivity;
 import com.android.settings.activityembedding.ActivityEmbeddingUtils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.gestures.OneHandedSettingsUtils;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.wifi.WifiUtils;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import java.util.ArrayList;
@@ -192,6 +194,12 @@ public class CreateShortcutPreferenceController extends BasePreferenceController
                     continue;
                 }
             }
+            if (info.activityInfo.name.endsWith(WifiTetherSettingsActivity.class.getSimpleName())) {
+                if (!canShowWifiHotspot()) {
+                    Log.d(TAG, "Skipping Wi-Fi hotspot settings:" + info.activityInfo);
+                    continue;
+                }
+            }
             if (!info.activityInfo.applicationInfo.isSystemApp()) {
                 Log.d(TAG, "Skipping non-system app: " + info.activityInfo);
                 continue;
@@ -200,6 +208,11 @@ public class CreateShortcutPreferenceController extends BasePreferenceController
         }
         Collections.sort(shortcuts, SHORTCUT_COMPARATOR);
         return shortcuts;
+    }
+
+    @VisibleForTesting
+    boolean canShowWifiHotspot() {
+        return WifiUtils.canShowWifiHotspot(mContext);
     }
 
     private void logCreateShortcut(ResolveInfo info) {

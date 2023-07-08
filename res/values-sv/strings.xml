@@ -65,7 +65,7 @@
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"Parkoppla vänster"</string>
     <string name="bluetooth_device_controls_general" msgid="1399214835599665488">"För alla tillgängliga hörapparater"</string>
     <string name="bluetooth_device_controls_title" msgid="1895676556354697234">"Inställningar för hörapparat"</string>
-    <string name="bluetooth_device_controls_summary" msgid="949566933352398337">"Ljudutgång, genväg, kompatibilitet med hörapparat"</string>
+    <string name="bluetooth_device_controls_summary" msgid="8115767735418425663">"Genväg, kompatibilitet med hörapparat"</string>
     <string name="bluetooth_device_controls_specific" msgid="7706863288754077107">"För den här enheten"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Ljudutgång"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Om ljudutgång"</string>
@@ -172,8 +172,8 @@
     <string name="desc_unavailable_locale" msgid="2201756477400935896">"Du kan inte använda det här språket som systemspråk, men appar och webbplatser informeras om att du föredrar det."</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Regioninställningar"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Anger inställningar för enheter och siffror"</string>
-    <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Ge appar åtkomst till dina regioninställningar så att din upplevelse kan anpassas."</string>
-    <string name="regional_preferences_option_page_sub_title" msgid="8303661099255197036">"Appar använder dina regioninställningar om möjligt."</string>
+    <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Ge appar åtkomst till dina regionsinställningar så att din upplevelse kan anpassas."</string>
+    <string name="regional_preferences_option_page_sub_title" msgid="8303661099255197036">"Appar använder dina regionsinställningar om möjligt."</string>
     <string name="temperature_preferences_title" msgid="5009881556503629058">"Temperatur"</string>
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"Första dagen i veckan"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"Sifferinställningar"</string>
@@ -187,7 +187,7 @@
     <string name="thursday_first_day_of_week" msgid="3035885630945594833">"torsdag"</string>
     <string name="friday_first_day_of_week" msgid="7074795061812083541">"fredag"</string>
     <string name="saturday_first_day_of_week" msgid="3702282590450322727">"lördag"</string>
-    <string name="title_regional_pref_footer" msgid="7450438024324794380">"Om en app inte har stöd för regioninställningar används appens standardinställningar."</string>
+    <string name="title_regional_pref_footer" msgid="7450438024324794380">"Om en app inte har stöd för regionsinställningar används appens standardinställningar."</string>
     <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"Läs mer om språkinställningar."</string>
     <string name="dlg_remove_locales_title" msgid="3170501604483612114">"{count,plural, =1{Vill du ta bort det valda språket?}other{Vill du ta bort de valda språken?}}"</string>
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"Text visas på ett annat språk."</string>
@@ -384,7 +384,7 @@
     <string name="biometric_settings_intro" msgid="4263069383955676756">"Om du konfigurerar ansiktslås och fingeravtryckslås frågar telefonen om fingeravtryck när du använder munskydd eller om det är mörkt"</string>
     <string name="biometric_settings_category_ways_to_unlock" msgid="3384767901580915266">"Olika sätt att låsa upp"</string>
     <string name="biometric_settings_category_use_face_fingerprint" msgid="4377659744376863913">"Använd ansikte eller fingeravtryck för att"</string>
-    <string name="biometric_settings_use_biometric_unlock_phone" msgid="8180914579885804358">"Låsa upp telefonen"</string>
+    <string name="biometric_settings_use_biometric_unlock_phone" msgid="8180914579885804358">"Lås upp telefonen"</string>
     <string name="biometric_settings_use_biometric_for_apps" msgid="6201168728906364189">"Verifiera din identitet i appar"</string>
     <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"Med ansikte"</string>
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"Med fingeravtryck"</string>
@@ -460,16 +460,21 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Klar"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Hoppsan! Det där är inte sensorn"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Tryck på sensorn på mobilens baksida. Använd pekfingret."</string>
-    <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title" msgid="5796228438604723279">"Registreringen slutfördes inte"</string>
-    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Fingeravtryckskonfigurering nådde tidsgränsen"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="7022271597754894162">"Du kan ställa in ditt fingeravtryck senare i inställningarna."</string>
-    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Det gick inte att registrera fingeravtrycket. Försök igen eller använd ett annat finger."</string>
+    <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title" msgid="6305457126747942642">"Det gick inte att ställa in fingeravtryck"</string>
+    <string name="security_settings_fingerprint_enroll_error_unable_to_process_message_setup" msgid="2735739618722623980">"Försök igen direkt eller ställ in ditt fingeravtryck senare i inställningarna."</string>
+    <string name="security_settings_fingerprint_enroll_error_unable_to_process_message" msgid="5858386244898601003">"Försök igen direkt eller ställ in ditt fingeravtryck senare."</string>
+    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Tiden för fingeravtrycksinställning gick ut"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message_setup" msgid="8521566666541069383">"Du kan ställa in ditt fingeravtryck senare i inställningarna."</string>
+    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message_setup" msgid="8140162986046783546">"Något gick fel. Du kan ställa in ditt fingeravtryck senare i inställningarna."</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="3534341971920335247">"Du kan ställa in ditt fingeravtryck senare."</string>
+    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="4344665784935791640">"Något gick fel. Du kan ställa in ditt fingeravtryck senare."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Lägg till ännu ett"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Nästa"</string>
     <string name="security_fingerprint_disclaimer_lockscreen_disabled_1" msgid="294529888220959309">"Skärmlåsalternativet är inaktiverat. Kontakta din organisations administratör för mer information."</string>
     <string name="security_fingerprint_disclaimer_lockscreen_disabled_2" msgid="8070829069640846543">"Du kan fortfarande använda fingeravtryck för att auktorisera köp och appåtkomster."</string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Lyft fingret och nudda sedan sensorn igen"</string>
-    <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Det går inte att använda fingeravtryckssensorn. Besök ett reparationsställe"</string>
+    <string name="security_settings_fingerprint_bad_calibration_title" msgid="3073145395701953620">"Det går inte att använda fingeravtryckssensorn"</string>
+    <string name="security_settings_fingerprint_bad_calibration" msgid="304585658839584958">"Besök ett reparationsställe."</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"Fler säkerhetsinställningar"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Lås för jobbprofilen, kryptering med mera"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Kryptering, användaruppgifter med mera"</string>
@@ -498,7 +503,7 @@
     <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"Välj ett nytt skärmlås"</string>
     <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"Välj ett lås för jobbappar"</string>
     <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Välj ett nytt jobblås"</string>
-    <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"Ställ in ett skärmlås för ytterligare skydd"</string>
+    <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"Ställ in ett alternativt skärmlås för ytterligare skydd"</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Välj en reservmetod för skärmlås"</string>
     <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"Om du glömmer skärmlåset kan IT-administratören inte återställa det."</string>
     <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"Ställ in ett separat jobblås"</string>
@@ -535,7 +540,7 @@
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"Inget"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"Svep"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="1926480143883094896">"Mönster"</string>
-    <string name="unlock_set_unlock_mode_pin" msgid="9028659554829888373">"PIN-kod"</string>
+    <string name="unlock_set_unlock_mode_pin" msgid="9028659554829888373">"Pinkod"</string>
     <string name="unlock_set_unlock_mode_password" msgid="8810609692771987513">"Lösenord"</string>
     <string name="unlock_disable_frp_warning_title" msgid="3606280046362811229">"Vill du ta bort skärmlåset?"</string>
     <string name="unlock_disable_frp_warning_title_profile" msgid="1005284289723910461">"Vill du ta bort profilens säkerhetsfunktioner?"</string>
@@ -627,8 +632,7 @@
     <string name="bluetooth_settings" msgid="2967239493428695171">"Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"Bluetooth"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"Vill du koppla till <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
-    <!-- no translation found for bluetooth_pairing_group_late_bonding (5310869364570266209) -->
-    <skip />
+    <string name="bluetooth_pairing_group_late_bonding" msgid="5310869364570266209">"Lägg till ny medlem i koordinerat set"</string>
     <string name="bluetooth_pairing_key_msg" msgid="1329835708475701761">"Bluetooth-koppplingskod"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="5806420933599368592">"Ange kopplingskoden och tryck på Retur"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7256286571636950635">"PIN-koden innehåller bokstäver eller symboler"</string>
@@ -1112,6 +1116,7 @@
     <string name="security_patch" msgid="4071756145347865382">"Säkerhetsuppdatering för Android"</string>
     <string name="model_info" msgid="8997566254717810904">"Modell"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"Maskinvaruversion"</string>
+    <string name="manufactured_year" msgid="3401517138700926475">"Tillverkningsår"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"Utrustnings-ID"</string>
     <string name="baseband_version" msgid="2600182227599835857">"Basbandsversion"</string>
     <string name="kernel_version" msgid="3513538109381366881">"Kernel-version"</string>
@@ -1425,7 +1430,7 @@
     <string name="lockpassword_choose_your_pin_header_for_face" msgid="704061826984851309">"Ange pinkod för ansiktslås"</string>
     <string name="lockpassword_choose_your_password_header_for_biometrics" msgid="2053366309272487015">"Skapa ett lösenord för ansiktslås eller fingeravtryckslås"</string>
     <string name="lockpassword_choose_your_pattern_header_for_biometrics" msgid="4038476475293734905">"Skapa ett mönster för fingeravtrycks- eller ansiktslås"</string>
-    <string name="lockpassword_choose_your_pin_header_for_biometrics" msgid="9086039918921009380">"Skapa en pinkod för ansiktslås eller fingeravtryckslås"</string>
+    <string name="lockpassword_choose_your_pin_header_for_biometrics" msgid="9086039918921009380">"Skapa en pinkod för att använda ansikte eller fingeravtryck"</string>
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Har du glömt lösenordet?"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"Har du glömt mönstret?"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"Har du glömt pinkoden?"</string>
@@ -1463,8 +1468,8 @@
     <string name="lockpattern_recording_inprogress" msgid="7268008332694009191">"Lyft fingret när du är klar"</string>
     <string name="lockpattern_recording_incorrect_too_short" msgid="3351522018450593723">"Anslut minst <xliff:g id="NUMBER">%d</xliff:g> punkter. Försök igen."</string>
     <string name="lockpattern_pattern_entered_header" msgid="7709618312713127249">"Mönstret har registrerats"</string>
-    <string name="lockpattern_need_to_confirm" msgid="6489499109451714360">"Rita ditt grafiska lösenord igen för att bekräfta"</string>
-    <string name="lockpattern_pattern_confirmed_header" msgid="2969990617475456153">"Ditt nya grafiska lösenord"</string>
+    <string name="lockpattern_need_to_confirm" msgid="6489499109451714360">"Rita mönstret igen för att bekräfta"</string>
+    <string name="lockpattern_pattern_confirmed_header" msgid="2969990617475456153">"Ditt nya mönster"</string>
     <string name="lockpattern_confirm_button_text" msgid="6122815520373044089">"Bekräfta"</string>
     <string name="lockpattern_restart_button_text" msgid="255339375151895998">"Rita igen"</string>
     <string name="lockpattern_retry_button_text" msgid="4229668933251849760">"Rensa"</string>
@@ -1743,8 +1748,8 @@
     <string name="user_dict_settings_all_languages" msgid="8563387437755363526">"För alla språk"</string>
     <string name="user_dict_settings_more_languages" msgid="5378870726809672319">"Fler språk ..."</string>
     <string name="testing" msgid="6294172343766732037">"Testa"</string>
-    <string name="keyboard_settings_summary" msgid="2716339620942356432">"Skärmtangentbord, tal, verktyg"</string>
-    <string name="keyboard_settings_with_physical_keyboard_summary" msgid="6628668004523183413">"Skärmtangentbord, fysiskt tangentbord, tal, verktyg"</string>
+    <string name="keyboard_settings_summary" msgid="9188442758316476986">"Skärmtangentbord, verktyg"</string>
+    <string name="keyboard_settings_with_physical_keyboard_summary" msgid="2240779804018260938">"Skärmtangentbord, fysiskt tangentbord, verktyg"</string>
     <string name="builtin_keyboard_settings_title" msgid="5096171620714179661">"Fysiskt tangentbord"</string>
     <string name="enabled_locales_keyboard_layout" msgid="3939886151098958639">"Layout"</string>
     <string name="gadget_picker_title" msgid="7615902510050731400">"Välj gadget"</string>
@@ -1839,7 +1844,7 @@
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Tryck tre gånger om du vill zooma"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Tryck på en knapp för att zooma"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Zooma in snabbt så att innehåll på skärmen förstoras"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Så här zoomar du in:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Starta förstoring med genvägen&lt;br/&gt; {1,number,integer}. Tryck på skärmen&lt;br/&gt; {2,number,integer}. Navigera på skärmen genom att dra med två fingrar&lt;br/&gt; {3,number,integer}. Nyp med två fingrar för att justera zoomnivån&lt;br/&gt; {4,number,integer}. Stoppa förstoringen med genvägen&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Så här zoomar du in tillfälligt:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Kontrollera att hela skärmen har ställts in som förstoringstyp&lt;br/&gt; {1,number,integer}. Starta förstoring med genvägen&lt;br/&gt; {2,number,integer}. Tryck länge var som helst på skärmen&lt;br/&gt; {3,number,integer}. Navigera på skärmen genom att dra med fingret&lt;br/&gt; {4,number,integer}. Stoppa förstoringen genom att lyfta fingret"</string>
+    <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Så här zoomar du in:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Starta förstoring med genvägen&lt;br/&gt; {1,number,integer}. Tryck på skärmen&lt;br/&gt; {2,number,integer}. Navigera på skärmen genom att dra med två fingrar&lt;br/&gt; {3,number,integer}. Nyp med två fingrar för att justera zoomnivån&lt;br/&gt; {4,number,integer}. Stoppa förstoringen med genvägen&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Så här zoomar du in tillfälligt:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Kontrollera att förstoringstyp är inställd som helskärm&lt;br/&gt; {1,number,integer}. Starta förstoring med genvägen&lt;br/&gt; {2,number,integer}. Tryck länge var som helst på skärmen&lt;br/&gt; {3,number,integer}. Navigera på skärmen genom att dra med fingret&lt;br/&gt; {4,number,integer}. Stoppa förstoringen genom att lyfta fingret"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"När förstoring har aktiverats kan du zooma in på skärmen.\n\n"<b>"Om du vill zooma"</b>" aktiverar du förstoring och trycker var som helst på skärmen.\n"<ul><li>"Scrolla genom att dra med minst två fingrar."</li>\n<li>"Justera zoomen genom att nypa med minst två fingrar."</li></ul>\n\n<b>"Om du vill zooma tillfälligt"</b>" aktiverar du förstoring och trycker länge var som helst på skärmen.\n"<ul><li>"Flytta runt på skärmen genom att dra."</li>\n<li>"Zooma ut genom att lyfta fingret."</li></ul>\n\n"Det går inte att zooma in på tangentbordet eller navigeringsfältet."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Sida <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> av <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Öppna med tillgänglighetsknappen"</string>
@@ -1993,7 +1998,7 @@
     <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"Håll ned volymknapparna"</string>
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Tryck snabbt tre gånger på skärmen"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Fortsätt"</string>
-    <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Hörapparater"</string>
+    <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Hörhjälpmedel"</string>
     <string name="accessibility_hearingaid_intro" msgid="5856992709195963850">"Du kan använda hörapparater, cochleaimplantat och andra enheter som förstärker ljud med telefonen"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="7438018718889849521">"Inga hörhjälpmedel har anslutits"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"Lägg till hörapparater"</string>
@@ -2006,7 +2011,7 @@
     <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> och 1 till"</string>
     <string name="accessibility_hearing_device_pairing_title" msgid="2701812183769537320">"Koppla en ny enhet"</string>
     <string name="accessibility_pair_hearing_device_about_title" msgid="5870335480815052755">"Om att parkoppla en nya enhet"</string>
-    <string name="accessibility_hearing_device_connected_title" msgid="3785140037249487287">"Hörapparater"</string>
+    <string name="accessibility_hearing_device_connected_title" msgid="3785140037249487287">"Hörhjälpmedel"</string>
     <string name="accessibility_hearing_device_saved_title" msgid="7573926212664909296">"Sparade enheter"</string>
     <string name="accessibility_hearing_device_control" msgid="2661965917013100611">"Kontroller för hörapparat"</string>
     <string name="accessibility_hearing_device_shortcut_title" msgid="7645100199603031360">"Genväg för hörapparat"</string>
@@ -2858,7 +2863,7 @@
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"Klonar <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"Klonade <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>"</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"Språk, rörelser, tid, säkerhetskopiering"</string>
-    <string name="languages_setting_summary" msgid="4924440599794956443">"Systemspråk, appspråk"</string>
+    <string name="languages_setting_summary" msgid="7963053736715746726">"Systemspråk, appspråk, tal"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, nätverksanslutning, internet, trådlös, data, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Wi‑Fi-avisering, wi-fi-avisering"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"dataanvändning"</string>
@@ -2941,7 +2946,7 @@
     <string name="keywords_storage_settings" msgid="6018856193950281898">"minne, cache, data, radera, rensa, frigör, utrymme"</string>
     <string name="keywords_bluetooth_settings" msgid="2588159530959868188">"ansluten, enhet, hörlurar, headset, högtalare, trådlös, parkoppla, hörsnäckor, musik, media"</string>
     <string name="keywords_wallpaper" msgid="7332890404629446192">"bakgrund, tema, rutnät, anpassa"</string>
-    <string name="keywords_styles" msgid="5291614313348476068">"ikon, accent, färg"</string>
+    <string name="keywords_styles" msgid="3367789885254807447">"ikon, accent, färg, startskärm, skärmlås, genväg, klockstorlek"</string>
     <string name="keywords_assist_input" msgid="3086289530227075593">"standard, assistent"</string>
     <string name="keywords_default_payment_app" msgid="5162298193637362104">"betalning, standard"</string>
     <string name="keywords_ambient_display" msgid="3149287105145443697">"inkommande avisering"</string>
@@ -3221,7 +3226,7 @@
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"Komprimera aviseringar på den övre panelen på en rad"</string>
     <string name="notification_channel_summary_low" msgid="5549662596677692000">"Inga ljud eller vibrationer"</string>
     <string name="notification_conversation_summary_low" msgid="6352818857388412326">"Inga ljud eller vibrationer och visas längre ned bland konversationerna"</string>
-    <string name="notification_channel_summary_default" msgid="3674057458265438896">"Kan ringa eller vibrera beroende på inställningarna på telefonen"</string>
+    <string name="notification_channel_summary_default" msgid="1168420867670390611">"Kan ringa eller vibrera beroende på inställningarna på enheten"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"När enheten är olåst visas aviseringar i en banner högst upp på skärmen"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"Alla aviseringar från <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Alla aviseringar från <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -3466,8 +3471,8 @@
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Be om pinkod innan appen lossas"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Be om lösenord innan skärmen lossas"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Lås enheten när skärmen lossas"</string>
-    <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Bekräfta borttagning av SIM"</string>
-    <string name="confirm_sim_deletion_description" msgid="4439657901673639063">"Verifiera din identitet innan du tar bort ett eSIM"</string>
+    <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Bekräfta radering av SIM"</string>
+    <string name="confirm_sim_deletion_description" msgid="4439657901673639063">"Verifiera din identitet innan du raderar ett eSIM"</string>
     <string name="memtag_title" msgid="5096176296797727201">"Avancerat minnesskydd i beta"</string>
     <string name="memtag_toggle" msgid="8695028758462939212">"Avancerat minnesskydd"</string>
     <string name="memtag_intro" msgid="579408691329568953">"Med den här betafunktionen kan du skydda din enhet mot fel som kan innebära en säkerhetsrisk."</string>
@@ -3884,7 +3889,7 @@
     <string name="managed_profile_contact_search_summary" msgid="4974727886709219105">"Dina sökningar och inkommande samtal kan vara synliga för IT-administratören"</string>
     <string name="cross_profile_calendar_title" msgid="7570277841490216947">"Kalender för flera profiler"</string>
     <string name="cross_profile_calendar_summary" msgid="8856185206722860069">"Visa jobbhändelser i den personliga kalendern"</string>
-    <string name="managed_profile_settings_footer" msgid="996500759305118103">"När jobbappar har stängts av innebär det att de har pusats och inte går att komma åt och att de inte kan skicka aviseringar"</string>
+    <string name="managed_profile_settings_footer" msgid="996500759305118103">"När jobbappar har stängts av är de pausade. De går inte att komma åt och de kan inte skicka aviseringar."</string>
     <string name="automatic_storage_manager_settings" msgid="519158151463974656">"Hantera lagring"</string>
     <string name="automatic_storage_manager_text" msgid="6900593059927987273">"Lagringshanteraren tar bort säkerhetskopior av foton och videor från enheten för att frigöra lagringsutrymme."</string>
     <string name="automatic_storage_manager_days_title" msgid="5077286114860539367">"Ta bort foton och videor"</string>
@@ -4032,7 +4037,7 @@
     <string name="financed_privacy_fully_paid_category" msgid="9221763928564246923">"När du har betalat hela beloppet:"</string>
     <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"Alla begränsningar tas bort från enheten"</string>
     <string name="financed_privacy_uninstall_creditor_app" msgid="6339004120497310705">"Du kan avinstallera appen för långivaren"</string>
-    <string name="device_lock_info" msgid="1628142032642755537">"Enhetslås"</string>
+    <string name="financed_device_info" msgid="3871860346697308342">"Information om finansierad enhet"</string>
     <string name="default_camera_app_title" msgid="6546248868519965998">"{count,plural, =1{Kameraapp}other{Kameraappar}}"</string>
     <string name="default_calendar_app_title" msgid="1870095225089706093">"Kalenderapp"</string>
     <string name="default_contacts_app_title" msgid="7740028900741944569">"Kontaktapp"</string>
@@ -4147,9 +4152,9 @@
     <string name="change_wifi_state_title" msgid="5629648102837821525">"Wifi-styrning"</string>
     <string name="change_wifi_state_app_detail_switch" msgid="1385358508267180745">"Tillåt appen att styra wifi"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"Ge den här appen behörighet att aktivera och inaktivera wifi, söka efter och ansluta till wifi-nätverk, lägga till och ta bort nätverk samt starta en lokal surfzon"</string>
-    <string name="change_nfc_tag_apps_title" msgid="91514009058149617">"Lansera via NFC"</string>
+    <string name="change_nfc_tag_apps_title" msgid="91514009058149617">"Starta via NFC"</string>
     <string name="change_nfc_tag_apps_detail_switch" msgid="240286205725043561">"Tillåt start vid NFC-skanning"</string>
-    <string name="change_nfc_tag_apps_detail_summary" msgid="7083666814715607078">"Tillåt att appen startas när en NFC-etikett skannas.\nOm den här behörigheten är aktiverad blir appen tillgänglig som alternativ när en etikett identifieras."</string>
+    <string name="change_nfc_tag_apps_detail_summary" msgid="3338220223868942195">"Tillåt att appen startas när en NFC-etikett skannas.\nOm den här behörigheten är aktiverad blir appen tillgänglig som alternativ när en etikett identifieras."</string>
     <string name="media_output_title" msgid="8283629315159510680">"Spela upp media på"</string>
     <string name="media_output_label_title" msgid="4139048973886819148">"Spela upp <xliff:g id="LABEL">%s</xliff:g> på"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"Den här enheten"</string>

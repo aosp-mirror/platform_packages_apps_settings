@@ -134,7 +134,6 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
             return mContext.getString(R.string.mobile_network_tap_to_activate, displayName);
         } else {
             return mSubInfoEntityList.stream()
-                    .sorted((e1, e2) -> Integer.compare(e1.simSlotIndex, e2.simSlotIndex))
                     .map(SubscriptionInfoEntity::getUniqueDisplayName)
                     .collect(Collectors.joining(", "));
         }

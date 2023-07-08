@@ -39,10 +39,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.network.CarrierConfigCache;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.ims.WifiCallingQueryImsState;
+import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.network.telephony.SubscriptionActionDialogActivity;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -77,7 +79,10 @@ public class SimDialogActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        if (isUiRestricted()) {
+            finish();
+            return;
+        }
         if (!SubscriptionUtil.isSimHardwareVisible(this)) {
             Log.d(TAG, "Not support on device without SIM.");
             finish();
@@ -89,6 +94,15 @@ public class SimDialogActivity extends FragmentActivity {
         getWindow().addSystemFlags(
                 WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
         showOrUpdateDialog();
+    }
+
+    @VisibleForTesting
+    boolean isUiRestricted() {
+        if (MobileNetworkUtils.isMobileNetworkUserRestricted(getApplicationContext())) {
+            Log.e(TAG, "This setting isn't available due to user restriction.");
+            return true;
+        }
+        return false;
     }
 
     @Override

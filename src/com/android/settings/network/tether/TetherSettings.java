@@ -146,18 +146,12 @@ public class TetherSettings extends RestrictedSettingsFragment
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        TetheringManagerModel model = new ViewModelProvider(this).get(TetheringManagerModel.class);
-        mWifiTetherPreferenceController =
-                new WifiTetherPreferenceController(context, getSettingsLifecycle(), model);
-        mTm = model.getTetheringManager();
-        model.getTetheredInterfaces().observe(this, this::onTetheredInterfacesChanged);
-    }
-
-    @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        setIfOnlyAvailableForAdmins(true);
+        if (isUiRestricted()) {
+            return;
+        }
 
         addPreferencesFromResource(R.xml.tether_prefs);
         mContext = getContext();
@@ -165,13 +159,8 @@ public class TetherSettings extends RestrictedSettingsFragment
         mDataSaverEnabled = mDataSaverBackend.isDataSaverEnabled();
         mDataSaverFooter = findPreference(KEY_DATA_SAVER_FOOTER);
 
-        setIfOnlyAvailableForAdmins(true);
-        if (isUiRestricted()) {
-            getPreferenceScreen().removeAll();
-            return;
-        }
-
         setupTetherPreference();
+        setupViewModel();
 
         final Activity activity = getActivity();
         BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
@@ -223,8 +212,22 @@ public class TetherSettings extends RestrictedSettingsFragment
         onDataSaverChanged(mDataSaverBackend.isDataSaverEnabled());
     }
 
+    @VisibleForTesting
+    void setupViewModel() {
+        TetheringManagerModel model = new ViewModelProvider(this).get(TetheringManagerModel.class);
+        mWifiTetherPreferenceController =
+                new WifiTetherPreferenceController(getContext(), getSettingsLifecycle(), model);
+        mTm = model.getTetheringManager();
+        model.getTetheredInterfaces().observe(this, this::onTetheredInterfacesChanged);
+    }
+
     @Override
     public void onDestroy() {
+        if (isUiRestricted()) {
+            super.onDestroy();
+            return;
+        }
+
         mDataSaverBackend.remListener(this);
 
         BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();

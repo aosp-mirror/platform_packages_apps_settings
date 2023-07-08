@@ -65,7 +65,7 @@
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"Ляво ухо: Сдвояване"</string>
     <string name="bluetooth_device_controls_general" msgid="1399214835599665488">"За всички налични слухови апарати"</string>
     <string name="bluetooth_device_controls_title" msgid="1895676556354697234">"Настройки за слуховия апарат"</string>
-    <string name="bluetooth_device_controls_summary" msgid="949566933352398337">"Аудиоизход, пряк път, съвместимост със слухови апарати"</string>
+    <string name="bluetooth_device_controls_summary" msgid="8115767735418425663">"Пряк път, съвместимост със слухови апарати"</string>
     <string name="bluetooth_device_controls_specific" msgid="7706863288754077107">"За това устройство"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Аудиоизход"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Всичко за аудиоизхода"</string>
@@ -460,16 +460,21 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Готово"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Ами сега! Това не е сензорът"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"С показалеца си докоснете сензора на гърба на телефона."</string>
-    <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title" msgid="5796228438604723279">"Регистрирането не бе завършено"</string>
+    <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title" msgid="6305457126747942642">"Настройването на отпечатък не може да завърши"</string>
+    <string name="security_settings_fingerprint_enroll_error_unable_to_process_message_setup" msgid="2735739618722623980">"Можете да опитате отново сега или да настроите отпечатъка си по-късно от настройките."</string>
+    <string name="security_settings_fingerprint_enroll_error_unable_to_process_message" msgid="5858386244898601003">"Можете да опитате отново сега или да настроите отпечатъка си по-късно."</string>
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Настройването на отпечатък не завърши навреме"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="7022271597754894162">"Можете да настроите отпечатъка си по-късно от настройките."</string>
-    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Регистрирането на отпечатък не бе успешно. Опитайте отново или използвайте друг пръст."</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message_setup" msgid="8521566666541069383">"Можете да настроите отпечатъка си по-късно от настройките."</string>
+    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message_setup" msgid="8140162986046783546">"Нещо се обърка. Можете да настроите отпечатъка си по-късно от настройките."</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="3534341971920335247">"Можете да настроите отпечатъка си по-късно."</string>
+    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="4344665784935791640">"Нещо се обърка. Можете да настроите отпечатъка си по-късно."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Добавяне на друг"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Напред"</string>
     <string name="security_fingerprint_disclaimer_lockscreen_disabled_1" msgid="294529888220959309">"Опцията за заключване на екрана е деактивирана. За да научите повече, се свържете с администратора на организацията си."</string>
     <string name="security_fingerprint_disclaimer_lockscreen_disabled_2" msgid="8070829069640846543">"Все още можете да използвате отпечатъка си, за да оторизирате плащания и да отключвате приложения."</string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Вдигнете пръста, след което докоснете сензора отново"</string>
-    <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Сензорът за отпечатъци не може да се използва. Посетете оторизиран сервиз."</string>
+    <string name="security_settings_fingerprint_bad_calibration_title" msgid="3073145395701953620">"Сензорът за отпечатъци не може да се използва"</string>
+    <string name="security_settings_fingerprint_bad_calibration" msgid="304585658839584958">"Посетете оторизиран сервиз."</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"Още настройки за сигурност"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Заключване на служебен потребителски профил, шифроване и др."</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Шифроване, идентификационни данни и др."</string>
@@ -512,7 +517,7 @@
     <string name="auto_confirm_on_pin_verify_description" msgid="2052240431173223502">"Въведете ПИН кода на устройството, за да активирате автоматичното потвърждаване"</string>
     <string name="auto_confirm_off_pin_verify_description" msgid="4256219155659760047">"Въведете ПИН кода на устройството, за да деактивирате автоматичното потвърждаване"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="4981063601772605609">"Заключване на екрана"</string>
-    <string name="unlock_set_unlock_launch_picker_title_profile" msgid="7631371082326055429">"Служ. потр. профил: заключв."</string>
+    <string name="unlock_set_unlock_launch_picker_title_profile" msgid="7631371082326055429">"Заключв. на служ. потр. профил"</string>
     <string name="unlock_set_unlock_off_title" msgid="2831957685685921667">"Няма"</string>
     <string name="unlock_set_unlock_none_title" msgid="2844029875174409728">"С бързо плъзгане"</string>
     <string name="unlock_set_unlock_pattern_title" msgid="8224895208452995332">"Фигура"</string>
@@ -1111,6 +1116,7 @@
     <string name="security_patch" msgid="4071756145347865382">"Актуализация за сигурността на Android"</string>
     <string name="model_info" msgid="8997566254717810904">"Модел"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"Версия на хардуера"</string>
+    <string name="manufactured_year" msgid="3401517138700926475">"Година на производство"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"Идент. № на оборудването"</string>
     <string name="baseband_version" msgid="2600182227599835857">"Версия на базовия диапазон"</string>
     <string name="kernel_version" msgid="3513538109381366881">"Версия на ядрото"</string>
@@ -1683,7 +1689,7 @@
     <string name="gesture_summary_recent_apps" msgid="6643179135202417509">"Прекарайте 3 пръста нагоре, задръжте и след това ги вдигнете"</string>
     <string name="gesture_title_notifications" msgid="791717222472350194">"Към известията и бързите настройки"</string>
     <string name="gesture_summary_notifications" msgid="8419514601638387255">"Прекарайте три пръста надолу през началния екран"</string>
-    <string name="gesture_title_switch_apps" msgid="5840994412037872157">"Превключване на приложенията"</string>
+    <string name="gesture_title_switch_apps" msgid="5840994412037872157">"Превключване между приложенията"</string>
     <string name="gesture_summary_switch_apps" msgid="6842648062151413042">"Прекарайте четири пръста наляво или надясно"</string>
     <string name="gesture_button_skip" msgid="5174842083451193213">"Пропускане"</string>
     <string name="gesture_button_next" msgid="695288092704187356">"Напред"</string>
@@ -1742,8 +1748,8 @@
     <string name="user_dict_settings_all_languages" msgid="8563387437755363526">"За всички езици"</string>
     <string name="user_dict_settings_more_languages" msgid="5378870726809672319">"Още езици..."</string>
     <string name="testing" msgid="6294172343766732037">"Тестване"</string>
-    <string name="keyboard_settings_summary" msgid="2716339620942356432">"Екранна клавиатура, говор, инструменти"</string>
-    <string name="keyboard_settings_with_physical_keyboard_summary" msgid="6628668004523183413">"Екранна клавиатура, физическа клавиатура, говор, инструменти"</string>
+    <string name="keyboard_settings_summary" msgid="9188442758316476986">"Екранна клавиатура, инструменти"</string>
+    <string name="keyboard_settings_with_physical_keyboard_summary" msgid="2240779804018260938">"Екранна клавиатура, физическа клавиатура, инструменти"</string>
     <string name="builtin_keyboard_settings_title" msgid="5096171620714179661">"Физическа клавиатура"</string>
     <string name="enabled_locales_keyboard_layout" msgid="3939886151098958639">"Подредба"</string>
     <string name="gadget_picker_title" msgid="7615902510050731400">"Избор на притурка"</string>
@@ -1828,11 +1834,11 @@
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"От: Иван"</string>
     <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"Добро утро!\n\nСамо исках да разбера как върви работата по дизайните. Ще бъдат ли готови, преди да започнем да правим новите балони?"</string>
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"Нулиране на настройките"</string>
-    <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"Настройките за размер на текста и елементите на екрана бяха нулирани"</string>
-    <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Да се нулира ли размерът на текста и елементите на екрана?"</string>
+    <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"Настр. за размер на текста и елементите на екрана бяха нулирани"</string>
+    <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Да се нулират ли размерът на текста и елементите на екрана?"</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Нулиране"</string>
     <string name="accessibility_text_reading_conversation_message_1" msgid="7883952203831957831">"Имаш ли планове за уикенда?"</string>
-    <string name="accessibility_text_reading_conversation_message_2" msgid="8112160435318635856">"Отивам на плажа. Искаш ли да дойдеш?"</string>
+    <string name="accessibility_text_reading_conversation_message_2" msgid="8112160435318635856">"Ще ходя на плаж. Искаш ли да дойдеш?"</string>
     <string name="accessibility_screen_option" msgid="8465307075278878145">"Опции"</string>
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"Увеличаване на мащаба на екрана"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Трикратно докосване за промяна на мащаба"</string>
@@ -1856,7 +1862,7 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="7292969929578621958">"За да използвате функцията за достъпност, прекарайте три пръста нагоре от долната част на екрана.\n\nЗа превключване между функциите прекарайте три пръста нагоре и задръжте."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Разбрах"</string>
     <string name="accessibility_tutorial_dialog_link_button" msgid="1624189347106713695">"Настройки за бутона"</string>
-    <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Пряк път за „<xliff:g id="SERVICE">%1$s</xliff:g>“"</string>
+    <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Пряк път за <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Бутон за достъпност"</string>
     <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"Жест за достъпност"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Бързо плъзгане нагоре с 2 пръста"</string>
@@ -1864,7 +1870,7 @@
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Докосване на бутона за достъпност"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="3981188764050497346">"Използване на жеста за достъпност"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="5606196352833449600">"Докоснете бутона за достъпност <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> в долната част на екрана.\n\nЗа превключване между функциите докоснете и задръжте бутона за достъпност."</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Прекарайте два пръста нагоре от долната част на екрана.\n\nЗа превключване между функциите прекарайте два пръста нагоре и задръжте."</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Плъзнете два пръста нагоре от долната част на екрана.\n\nЗа превключване между функциите плъзнете два пръста нагоре и задръжте."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Прекарайте три пръста нагоре от долната част на екрана.\n\nЗа превключване между функциите прекарайте три пръста нагоре и задръжте."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="4459254227203203324"><annotation id="link">"Още опции"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"Научете повече за <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
@@ -2808,7 +2814,7 @@
     <string name="sim_calls_always_use" msgid="967857230039768111">"Използване винаги за обаждания"</string>
     <string name="select_sim_for_data" msgid="2642305487659432499">"Избиране на SIM карта за мобилните данни"</string>
     <string name="select_sim_for_sms" msgid="5335510076282673497">"Изберете SIM карта за SMS"</string>
-    <string name="data_switch_started" msgid="6292759843974720112">"SIM картата за данни се превключва. Това може да отнеме до една минута…"</string>
+    <string name="data_switch_started" msgid="6292759843974720112">"SIM за данни се превключва. Може да отнеме до минута…"</string>
     <string name="select_specific_sim_for_data_title" msgid="5851980301321577985">"Да се използва ли <xliff:g id="NEW_SIM">%1$s</xliff:g> за мобилни данни?"</string>
     <string name="select_specific_sim_for_data_msg" msgid="7401698123430573637">"Ако превключите към <xliff:g id="NEW_SIM">%1$s</xliff:g>, <xliff:g id="OLD_SIM">%2$s</xliff:g> вече няма да се използва за мобилни данни."</string>
     <string name="select_specific_sim_for_data_button" msgid="6571935548920603512">"Използване на <xliff:g id="NEW_SIM">%1$s</xliff:g>"</string>
@@ -2857,7 +2863,7 @@
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"Създава се копие на <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"Създадено бе копие на <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>"</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"Езици, жестове, час, резервно копие"</string>
-    <string name="languages_setting_summary" msgid="4924440599794956443">"Системни езици, езици за приложенията"</string>
+    <string name="languages_setting_summary" msgid="7963053736715746726">"Системни езици, езици за приложенията, говор"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"Wi-Fi, Wi-Fi, връзка с мрежата, интернет, безжично, пренос на данни, Wi-Fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"известие за Wi‑Fi, известие за wifi"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"пренос на данни"</string>
@@ -2940,7 +2946,7 @@
     <string name="keywords_storage_settings" msgid="6018856193950281898">"памет, кеш, данни, изтриване, изчистване, освобождаване, място"</string>
     <string name="keywords_bluetooth_settings" msgid="2588159530959868188">"свързано, устройство, слушалки, слушалки, високоговорител, безжично, сдвояване, слушалки, музика, мултимедия"</string>
     <string name="keywords_wallpaper" msgid="7332890404629446192">"фон, тема, решетка, персонализиране"</string>
-    <string name="keywords_styles" msgid="5291614313348476068">"икона, акцентиране, цвят"</string>
+    <string name="keywords_styles" msgid="3367789885254807447">"икона, акцент, цвят, начален екран, заключване на екрана, пряк път, часовник, размер"</string>
     <string name="keywords_assist_input" msgid="3086289530227075593">"по подразбиране, Асистент"</string>
     <string name="keywords_default_payment_app" msgid="5162298193637362104">"плащане, по подразбиране"</string>
     <string name="keywords_ambient_display" msgid="3149287105145443697">"входящо известие"</string>
@@ -3220,7 +3226,7 @@
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"Свиване на известията в падащия панел, така че да се показват на един ред"</string>
     <string name="notification_channel_summary_low" msgid="5549662596677692000">"Без звук или вибриране"</string>
     <string name="notification_conversation_summary_low" msgid="6352818857388412326">"Без звук или вибриране и се показва по-долу в секцията с разговори"</string>
-    <string name="notification_channel_summary_default" msgid="3674057458265438896">"Може да звъни или да вибрира въз основа на настройките за телефона"</string>
+    <string name="notification_channel_summary_default" msgid="1168420867670390611">"Може да звъни или да вибрира според настройките на устройството"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Когато устройството е отключено, известията се показват като банер в горната част на екрана"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"Всички известия от: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Всички известия от: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -3455,7 +3461,7 @@
     <string name="nfc_setting_on" msgid="7701896496026725772">"Вкл."</string>
     <string name="nfc_setting_off" msgid="7142103438532732309">"Изкл."</string>
     <string name="screen_pinning_switch_on_text" msgid="6971386830247542552">"Включено"</string>
-    <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"Изключено"</string>
+    <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"Изкл."</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Фиксиране на приложения"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"Функцията за фиксиране на приложения ви дава възможност да задържите текущото приложение на преден план, докато не го премахнете. С нейна помощ можете например да позволите на доверен приятел да играе конкретна игра."</string>
     <string name="screen_pinning_description" msgid="4305370471370474846">"Когато дадено приложение е фиксирано, то може да отваря други приложения. Възможно е също някои лични данни да са достъпни. \n\nЗа да използвате функцията за фиксиране на приложения: 	\n1. Включете я. 	\n2. Отворете екрана за общ преглед. 	\n3. Докоснете иконата на приложението в горната част на екрана, след което изберете „Фиксиране“."</string>
@@ -4031,7 +4037,7 @@
     <string name="financed_privacy_fully_paid_category" msgid="9221763928564246923">"След като платите цялата сума:"</string>
     <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"Всички ограничения са премахнати от устройството"</string>
     <string name="financed_privacy_uninstall_creditor_app" msgid="6339004120497310705">"Можете да деинсталирате приложението на кредитодателя"</string>
-    <string name="device_lock_info" msgid="1628142032642755537">"Заключване на устройството"</string>
+    <string name="financed_device_info" msgid="3871860346697308342">"Информация за финансираното устройство"</string>
     <string name="default_camera_app_title" msgid="6546248868519965998">"{count,plural, =1{Приложение за камера}other{Приложения за камера}}"</string>
     <string name="default_calendar_app_title" msgid="1870095225089706093">"Приложение за календар"</string>
     <string name="default_contacts_app_title" msgid="7740028900741944569">"Приложение за контакти"</string>
@@ -4148,7 +4154,7 @@
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"Разрешете на това приложение да включва и изключва Wi-Fi, да сканира за Wi-Fi мрежи и да се свързва с тях, да добавя или премахва мрежи и да стартира точки за достъп само на локално ниво."</string>
     <string name="change_nfc_tag_apps_title" msgid="91514009058149617">"Стартиране чрез NFC"</string>
     <string name="change_nfc_tag_apps_detail_switch" msgid="240286205725043561">"Разрешаване на стартирането при сканиране с NFC"</string>
-    <string name="change_nfc_tag_apps_detail_summary" msgid="7083666814715607078">"Разрешете на това приложение да се стартира при сканиране на маркер за NFC.\nАко предоставите това разрешение, приложението ще бъде налице като опция, когато сканирате маркер."</string>
+    <string name="change_nfc_tag_apps_detail_summary" msgid="3338220223868942195">"Разрешете на това приложение да се стартира при сканиране на маркер за NFC.\nАко предоставите това разрешение, приложението ще бъде налице като опция, когато сканирате маркер."</string>
     <string name="media_output_title" msgid="8283629315159510680">"Възпроизв. на мултимедия на"</string>
     <string name="media_output_label_title" msgid="4139048973886819148">"Пускане на <xliff:g id="LABEL">%s</xliff:g> на"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"Това устройство"</string>

@@ -65,7 +65,7 @@
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"بائیں کان کا جوڑا بنائیں"</string>
     <string name="bluetooth_device_controls_general" msgid="1399214835599665488">"تمام دستیاب سماعتی آلات کے لئے"</string>
     <string name="bluetooth_device_controls_title" msgid="1895676556354697234">"سماعت کے آلے کی ترتیبات"</string>
-    <string name="bluetooth_device_controls_summary" msgid="949566933352398337">"آڈیو آؤٹ پٹ، شارٹ کٹ، سماعتی آلے کی موافقت"</string>
+    <string name="bluetooth_device_controls_summary" msgid="8115767735418425663">"شارٹ کٹ، سماعتی آلہ کی موافقت"</string>
     <string name="bluetooth_device_controls_specific" msgid="7706863288754077107">"اس آلے کیلئے"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"آڈیو کا آؤٹ پُٹ"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"آڈیو آؤٹ پٹ کے بارے میں"</string>
@@ -343,7 +343,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="6104718999323591180">"نہیں شکریہ"</string>
     <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="4068276083536421828">"میں متفق ہوں"</string>
     <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"فنگر پرنٹ کو نظر انداز کریں؟"</string>
-    <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"فنگر پرنٹ سیٹ اپ میں صرف ایک یا دو منٹ لگتے ہیں۔ اگر آپ اسے نظر انداز کرتے ہیں، تو آپ بعد میں ترتیبات میں اپنی فنگر پرنٹ شامل کرسکتے ہیں۔"</string>
+    <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"فنگر پرنٹ سیٹ اپ میں صرف ایک یا دو منٹ لگتے ہیں۔ اگر آپ اسے نظر انداز کرتے ہیں، تو آپ بعد میں ترتیبات میں اپنا فنگر پرنٹ شامل کرسکتے ہیں۔"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"یہ آئیکن دیکھنے پر ایپس میں سائن ان کرنے یا خریداری کو منظوری دینے کی خاطر تصدیق کیلئے فنگر پرنٹ کا استعمال کریں"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_1" msgid="4360262371633254407">"یاد رکھیں"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"اس کے کام کرنے کا طریقہ"</string>
@@ -460,16 +460,21 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"ہوگیا"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"افوہ، یہ سینسر نہیں ہے"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"اپنے فون کے پشت پر سینسر کو ٹچ کریں۔ اپنی انڈیکس فنگر کا استعمال کریں۔"</string>
-    <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title" msgid="5796228438604723279">"اندراج مکمل نہیں ہوا"</string>
+    <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title" msgid="6305457126747942642">"فنگر پرنٹ سیٹ اپ مکمل نہیں کیا جا سکتا"</string>
+    <string name="security_settings_fingerprint_enroll_error_unable_to_process_message_setup" msgid="2735739618722623980">"اب آپ دوبارہ کوشش کر سکتے ہیں یا بعد میں ترتیبات میں اپنا فنگر پرنٹ سیٹ اپ کر سکتے ہیں۔"</string>
+    <string name="security_settings_fingerprint_enroll_error_unable_to_process_message" msgid="5858386244898601003">"اب آپ دوبارہ کوشش کر سکتے ہیں یا بعد میں اپنا فنگر پرنٹ سیٹ اپ کر سکتے ہیں۔"</string>
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"فنگر پرنٹ کے سیٹ اپ کا وقت ختم ہو گیا"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="7022271597754894162">"آپ بعد میں ترتیبات میں اپنا فنگر پرنٹ سیٹ اپ کر سکتے ہیں۔"</string>
-    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"فنگر پرنٹ اندراج نہیں ہوا۔ دوبارہ کوشش کریں یا مختلف انگلی استعمال کریں۔"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message_setup" msgid="8521566666541069383">"آپ بعد میں ترتیبات میں اپنا فنگر پرنٹ سیٹ اپ کر سکتے ہیں۔"</string>
+    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message_setup" msgid="8140162986046783546">"کچھ غلط ہو گیا۔ آپ بعد میں ترتیبات میں اپنا فنگر پرنٹ سیٹ اپ کر سکتے ہیں۔"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="3534341971920335247">"آپ بعد میں اپنا فنگر پرنٹ سیٹ اپ کر سکتے ہیں۔"</string>
+    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="4344665784935791640">"کچھ غلط ہو گیا۔ آپ بعد میں اپنا فنگر پرنٹ سیٹ اپ کر سکتے ہیں۔"</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"کوئی دوسرا شامل کریں"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"آگے جائیں"</string>
     <string name="security_fingerprint_disclaimer_lockscreen_disabled_1" msgid="294529888220959309">"اسکرین لاک کا اختیار غیر فعال ہے۔ مزید جاننے کیلئے، اپنی تنظیم کے منتظم سے رابطہ کریں۔"</string>
     <string name="security_fingerprint_disclaimer_lockscreen_disabled_2" msgid="8070829069640846543">"خریداریوں کو منظوری دینے اور ایپ تک رسائی حاصل کرنے کیلئے، آپ ابھی بھی اپنا فنگر پرنٹ استعمال کر سکتے ہیں۔"</string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"انگلی اٹھائیں اور سنسر کو دوبارہ ٹچ کریں"</string>
-    <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"فنگر پرنٹ سینسر کا استعمال نہیں کر سکتے۔ ایک مرمت فراہم کنندہ کو ملاحظہ کریں"</string>
+    <string name="security_settings_fingerprint_bad_calibration_title" msgid="3073145395701953620">"فنگر پرنٹ سینسر کا استعمال نہیں کر سکتے"</string>
+    <string name="security_settings_fingerprint_bad_calibration" msgid="304585658839584958">"ایک مرمت فراہم کنندہ کو ملاحظہ کریں۔"</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"مزید سیکیورٹی کی ترتیبات"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"دفتری پروفائل لاک، مرموز کاری اور مزید"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"مرموز کاری، اسنادات اور مزید"</string>
@@ -627,8 +632,7 @@
     <string name="bluetooth_settings" msgid="2967239493428695171">"بلوٹوتھ"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"بلوٹوتھ"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"‫<xliff:g id="DEVICE_NAME">%1$s</xliff:g> کے ساتھ جوڑا بنائیں؟"</string>
-    <!-- no translation found for bluetooth_pairing_group_late_bonding (5310869364570266209) -->
-    <skip />
+    <string name="bluetooth_pairing_group_late_bonding" msgid="5310869364570266209">"موجودہ مربوط سیٹ میں نئے رکن کو شامل کریں"</string>
     <string name="bluetooth_pairing_key_msg" msgid="1329835708475701761">"بلوٹوتھ جوڑا بنانے کا کوڈ"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="5806420933599368592">"جوڑا بنانے کا کوڈ ٹائپ کریں پھر ریٹرن یا انٹر دبائیں"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7256286571636950635">"‏PIN میں حروف یا علامات شامل ہیں"</string>
@@ -1112,6 +1116,7 @@
     <string name="security_patch" msgid="4071756145347865382">"‏Android سیکیورٹی اپ ڈیٹ"</string>
     <string name="model_info" msgid="8997566254717810904">"ماڈل"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"ہارڈ ویئر کا ورژن"</string>
+    <string name="manufactured_year" msgid="3401517138700926475">"مینوفیکچرر کئے جانے کا سال"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"‏آلہ ID"</string>
     <string name="baseband_version" msgid="2600182227599835857">"بیس بینڈ ورژن"</string>
     <string name="kernel_version" msgid="3513538109381366881">"کرنل ورژن"</string>
@@ -1743,8 +1748,8 @@
     <string name="user_dict_settings_all_languages" msgid="8563387437755363526">"سبھی زبانوں کیلئے"</string>
     <string name="user_dict_settings_more_languages" msgid="5378870726809672319">"مزید زبانیں…"</string>
     <string name="testing" msgid="6294172343766732037">"ٹیسٹنگ"</string>
-    <string name="keyboard_settings_summary" msgid="2716339620942356432">"آن اسکرین کی بورڈ، اسپیچ، ٹولز"</string>
-    <string name="keyboard_settings_with_physical_keyboard_summary" msgid="6628668004523183413">"آن اسکرین کی بورڈ، فزیکل کی بورڈ، اسپیچ، ٹولز"</string>
+    <string name="keyboard_settings_summary" msgid="9188442758316476986">"آن اسکرین کی بورڈ، ٹولز"</string>
+    <string name="keyboard_settings_with_physical_keyboard_summary" msgid="2240779804018260938">"آن اسکرین کی بورڈ، فزیکل کی بورڈ، ٹولز"</string>
     <string name="builtin_keyboard_settings_title" msgid="5096171620714179661">"فزیکل کی بورڈ"</string>
     <string name="enabled_locales_keyboard_layout" msgid="3939886151098958639">"لے آؤٹ"</string>
     <string name="gadget_picker_title" msgid="7615902510050731400">"گیجیٹ منتخب کریں"</string>
@@ -1961,7 +1966,7 @@
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"رنگ وائبریشن"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"اطلاع وائبریشن"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"ٹچ تاثرات"</string>
-    <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> استعمال کریں"</string>
+    <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"‫<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> استعمال کریں"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> کھولیں"</string>
     <string name="accessibility_service_auto_added_qs_tooltip_content" msgid="2941824314912928072">"فوری ترتیبات میں <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> کو شامل کیا گیا۔ اسے کسی بھی وقت آن یا آف کرنے کے لیے نیچے سوائپ کریں۔"</string>
     <string name="accessibility_service_qs_tooltip_content" msgid="6002493441414967868">"آپ اپنی اسکرین کے اوپری حصے سے فوری ترتیبات میں <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> کو بھی شامل کر سکتے ہیں"</string>
@@ -2704,7 +2709,7 @@
     <string name="user_enable_calling_and_sms_confirm_title" msgid="4041510268838725520">"‏فون کالز اور SMS آن کریں؟"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"‏کال اور SMS کی سرگزشت کا اس صارف کے ساتھ اشتراک کیا جائے گا۔"</string>
     <string name="user_revoke_admin_confirm_title" msgid="3057842401861731863">"منتظم کی مراعات کو ہٹائیں؟"</string>
-    <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"اگر آپ اس صارف کے لیے منتظم کی رعایات کو ہٹاتے ہیں تو آپ یا دیگر منتظم انہیں بعد میں واپس دے سکتے ہیں۔"</string>
+    <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"اگر آپ اس صارف کے لیے منتظم کی مراعات کو ہٹاتے ہیں تو آپ یا دیگر منتظم انہیں بعد میں واپس دے سکتے ہیں۔"</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"ایمرجنسی معلومات"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"<xliff:g id="USER_NAME">%1$s</xliff:g> کے متعلق معلومات اور رابطے"</string>
     <string name="open_app_button" msgid="5025229765547191710">"<xliff:g id="APP_NAME">%1$s</xliff:g> کھولیں"</string>
@@ -2858,7 +2863,7 @@
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> کلون تخلیق کیا جا رہا ہے"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> کولن تخلیق کیا گیا"</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"زبانیں، اشارے، وقت، بیک اپ"</string>
-    <string name="languages_setting_summary" msgid="4924440599794956443">"سسٹم کی زبانیں، ایپ کی زبانیں"</string>
+    <string name="languages_setting_summary" msgid="7963053736715746726">"سسٹم کی زبانیں، ایپ کی زبانیں، اسپیچ"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"‏wifi، wi-fi، نیٹ ورک کنکشن، انٹرنیٹ، وائر لیس، ڈیٹا، wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"‏Wi‑Fi کی اطلاع، wifi کی اطلاع"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"ڈیٹا کا استعمال"</string>
@@ -2941,7 +2946,7 @@
     <string name="keywords_storage_settings" msgid="6018856193950281898">"میموری، کیش، ڈیٹا، حذف، صاف، خالی، جگہ"</string>
     <string name="keywords_bluetooth_settings" msgid="2588159530959868188">"منسلک، آلہ، ہیڈ فونز، ہیڈ سیٹ، اسپیکر، وائرلیس، جوڑا، ایئر بڈز، موسیقی، میڈیا"</string>
     <string name="keywords_wallpaper" msgid="7332890404629446192">"پس منظر، تھیم، گرڈ، حسب ضرورت بنائیں، ذاتی نوعیت کا بنائیں"</string>
-    <string name="keywords_styles" msgid="5291614313348476068">"آئیکن، ایکسینٹ، رنگ"</string>
+    <string name="keywords_styles" msgid="3367789885254807447">"آئیکن، ایکسنٹ، رنگ، ہوم اسکرین، مقفل اسکرین، شارٹ کٹ، کلاک کا سائز"</string>
     <string name="keywords_assist_input" msgid="3086289530227075593">"ڈیفالٹ، اسسٹنٹ"</string>
     <string name="keywords_default_payment_app" msgid="5162298193637362104">"ادائیگی، ڈیفالٹ"</string>
     <string name="keywords_ambient_display" msgid="3149287105145443697">"آنے والی اطلاع"</string>
@@ -3221,7 +3226,7 @@
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"نیچے کی طرف کھینچے جانے والے شیڈ میں، اطلاعات کو ایک لائن میں سکیڑیں"</string>
     <string name="notification_channel_summary_low" msgid="5549662596677692000">"کوئی آواز یا وائبریشن نہیں"</string>
     <string name="notification_conversation_summary_low" msgid="6352818857388412326">"کوئی آواز یا وائبریشن نہیں اور گفتگو کے سیکشن میں نیچے ظاہر ہوتا ہے"</string>
-    <string name="notification_channel_summary_default" msgid="3674057458265438896">"آپ کے آلہ کی ترتیبات کے مطابق وائبریٹ یا گھنٹی بج سکتی ہے"</string>
+    <string name="notification_channel_summary_default" msgid="1168420867670390611">"آلے کی ترتیبات کی بنیاد پر وائبریٹ کر سکتی یا گھنٹی بج سکتی ہے"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"آلہ کے غیر مقفل ہونے پر، اطلاعات کو اسکرین کے اوپر بینر کے طور پر دکھائيں"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"سبھی \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" کی اطلاعات"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"‫<xliff:g id="APP_NAME">%1$s</xliff:g> کی سبھی اطلاعات"</string>
@@ -4032,7 +4037,7 @@
     <string name="financed_privacy_fully_paid_category" msgid="9221763928564246923">"مکمل رقم ادا کرنے کے بعد:"</string>
     <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"آلے سے تمام پابندیاں ہٹا دی گئی ہیں"</string>
     <string name="financed_privacy_uninstall_creditor_app" msgid="6339004120497310705">"آپ کریڈٹر ایپ کو ان انسٹال کر سکتے ہیں"</string>
-    <string name="device_lock_info" msgid="1628142032642755537">"آلے کا قفل"</string>
+    <string name="financed_device_info" msgid="3871860346697308342">"مالی تعاون یافتہ آلے کی معلومات"</string>
     <string name="default_camera_app_title" msgid="6546248868519965998">"{count,plural, =1{کیمرا ایپ}other{کیمرا ایپس}}"</string>
     <string name="default_calendar_app_title" msgid="1870095225089706093">"کیلنڈر ایپ"</string>
     <string name="default_contacts_app_title" msgid="7740028900741944569">"رابطہ ایپ"</string>
@@ -4074,7 +4079,7 @@
     <string name="credman_keywords" msgid="8305600680836806170">"ڈیٹا، پاس کی، پاس ورڈ"</string>
     <string name="credman_autofill_keywords" msgid="701180623776848914">"آٹو، فل، آٹو فل، ڈیٹا، پاس کی، پاس ورڈ"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"‏&lt;b&gt;یہ یقینی بنائیں کہ آپ کو اس ایپ پر اعتماد ہے&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;‫%1$s&lt;/xliff:g&gt; آٹو فل کی جا سکنے والی چیزوں کی تعیین کیلئے آپ کی اسکرین پر موجود چیزوں کو استعمال کرتا ہے۔"</string>
-    <string name="credman_autofill_confirmation_message" msgid="4951846866327737417">"‏&lt;b&gt;Use &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; آپ کی اسکرین پر موجود چیزوں کا استعمال کرتا ہے تاکہ یہ تعین کیا جا سکے کہ کیا آٹو فل ہو سکتا ہے۔ نئے پاس ورڈز، نئی پاس کیز اور دیگر نئی معلومات آئندہ سے یہاں محفوظ کی جائیں گی۔"</string>
+    <string name="credman_autofill_confirmation_message" msgid="4951846866327737417">"‏&lt;b&gt;استعمال کریں &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; آپ کی اسکرین پر موجود چیزوں کا استعمال کرتا ہے تاکہ یہ تعین کیا جا سکے کہ کیا آٹو فل ہو سکتا ہے۔ نئے پاس ورڈز، نئی پاس کیز اور دیگر نئی معلومات آئندہ سے یہاں محفوظ کی جائیں گی۔"</string>
     <string name="credman_picker_title" msgid="2642776965060619988">"پاس ورڈز، پاس کیز اور ڈیٹا سروسز"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"‏%1$s کو آف کریں؟"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"‏&lt;b&gt;یہ سروس آف کریں؟&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; پاس ورڈز، پاس کیز، ادائیگی کے طریقوں جیسی معلومات محفوظ کی گئی ہے اور دیگر معلومات آپ کے سائن ان کرنے پر پُر نہیں ہوں گی۔ اپنی محفوظ کردہ معلومات کا استعمال کرنے کے لیے، پاس ورڈ، پاس کی یا ڈیٹا سروس کا انتخاب کریں۔"</string>
@@ -4149,7 +4154,7 @@
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"‏اس ایپ کو Wi-Fi آن یا آف کرنے، Wi-Fi نیٹ ورکس اسکین کرنے اور ان سے منسلک کرنے، نیٹ ورکس شامل کرنے یا ہٹانے یا صرف مقامی ہاٹ اسپاٹ شروع کرنے کی اجازت دیں"</string>
     <string name="change_nfc_tag_apps_title" msgid="91514009058149617">"‏NFC کے ذریعے شروع کریں"</string>
     <string name="change_nfc_tag_apps_detail_switch" msgid="240286205725043561">"‏NFC اسکین پر شروع ہونے کی اجازت دیں"</string>
-    <string name="change_nfc_tag_apps_detail_summary" msgid="7083666814715607078">"‏NFC ٹیگ کا پتہ لگنے پر اس ایپ کو شروع ہونے کی اجازت دیں۔\nاگر یہ اجازت آن ہوگی تو جب بھی ٹيگ کا پتہ لگے گا تب ایپ ایک اختیار کے طور پر دستیاب ہوگی۔"</string>
+    <string name="change_nfc_tag_apps_detail_summary" msgid="3338220223868942195">"‏NFC ٹیگ اسکین ہونے پر اس ایپ کو شروع ہونے کی اجازت دیں۔\nاگر یہ اجازت آن ہوتی ہے تو ٹیگ کا پتا چلنے پر ایپ ایک اختیار کے طور پر دستیاب ہوگی۔"</string>
     <string name="media_output_title" msgid="8283629315159510680">"اس پر میڈیا چلائیں"</string>
     <string name="media_output_label_title" msgid="4139048973886819148">"‫<xliff:g id="LABEL">%s</xliff:g> اس پر چلائیں"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"یہ آلہ"</string>

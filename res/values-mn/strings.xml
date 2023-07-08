@@ -54,7 +54,7 @@
     <string name="bluetooth_rename_device" msgid="4219655243836021443">"Энэ төхөөрөмжийн нэрийг өөрчлөх"</string>
     <string name="bluetooth_rename_button" msgid="9162500408570289545">"Нэр солих"</string>
     <string name="bluetooth_disconnect_title" msgid="4581951246357823044">"Төхөөрөмжийг салгах уу?"</string>
-    <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Шинэ төхөөрөмж холбох"</string>
+    <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Шинэ төхөөрөмж хослуулах"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Баруун чих хослуулах"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Зүүн чих хослуулах"</string>
@@ -65,7 +65,7 @@
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"Зүүн чих хослуулах"</string>
     <string name="bluetooth_device_controls_general" msgid="1399214835599665488">"Сонсголын бүх боломжтой төхөөрөмжид"</string>
     <string name="bluetooth_device_controls_title" msgid="1895676556354697234">"Сонсголын төхөөрөмжийн тохиргоо"</string>
-    <string name="bluetooth_device_controls_summary" msgid="949566933352398337">"Аудио гаралт, товчлол, сонсголын төхөөрөмжийн зохицол"</string>
+    <string name="bluetooth_device_controls_summary" msgid="8115767735418425663">"Товчлол, сонсголын төхөөрөмжийн зохицол"</string>
     <string name="bluetooth_device_controls_specific" msgid="7706863288754077107">"Энэ төхөөрөмжид"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Аудио гаралт"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Аудио оролтын тухай"</string>
@@ -97,7 +97,7 @@
     <string name="bluetooth_device_name_summary" msgid="8678342689845439583">"Бусад төхөөрөмжид “<xliff:g id="DEVICE_NAME">^1</xliff:g>”-р харагдана"</string>
     <string name="bluetooth_off_footer" msgid="76578735660216295">"Бусад төхөөрөмжид холбогдохын тулд Bluetooth-г асаана уу."</string>
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"Таны төхөөрөмж"</string>
-    <string name="bluetooth_pairing_page_title" msgid="3403981358823707692">"Шинэ төхөөрөмж холбох"</string>
+    <string name="bluetooth_pairing_page_title" msgid="3403981358823707692">"Шинэ төхөөрөмж хослуулах"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Bluetooth A2DP техник хангамжийн шилжүүлэлтийг идэвхгүй болгох"</string>
     <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"Bluetooth LE аудионы техник хангамжийн шилжүүлэлтийг идэвхгүй болгох"</string>
     <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"Төхөөрөмжийг дахин эхлүүлэх үү?"</string>
@@ -460,16 +460,21 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Болсон"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Уучлаарай, энэ мэдрэгч биш байна"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Утасныхаа ар талын мэдрэгчид хүрнэ үү. Долоовор хуруугаа ашиглана уу."</string>
-    <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title" msgid="5796228438604723279">"Бүртгүүлж дуусаагүй"</string>
+    <string name="security_settings_fingerprint_enroll_error_unable_to_process_dialog_title" msgid="6305457126747942642">"Хурууны хээний тохируулгыг дуусгах боломжгүй"</string>
+    <string name="security_settings_fingerprint_enroll_error_unable_to_process_message_setup" msgid="2735739618722623980">"Та одоо дахин оролдох эсвэл Тохиргоонд хурууны хээгээ дараа тохируулах боломжтой."</string>
+    <string name="security_settings_fingerprint_enroll_error_unable_to_process_message" msgid="5858386244898601003">"Та одоо дахин оролдох эсвэл хурууны хээгээ дараа тохируулж болно."</string>
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Хурууны хээний тохируулга завсарласан"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="7022271597754894162">"Та дараа нь хурууны хээгээ Тохиргоонд тохируулах боломжтой."</string>
-    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Хурууны хээг оруулж чадсангүй. Дахин оролдох, эсвэл өөр хуруу ашиглана уу."</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message_setup" msgid="8521566666541069383">"Та дараа нь хурууны хээгээ Тохиргоонд тохируулах боломжтой."</string>
+    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message_setup" msgid="8140162986046783546">"Ямар нэг алдаа гарлаа. Та дараа нь хурууны хээгээ Тохиргоонд тохируулах боломжтой."</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="3534341971920335247">"Та дараа нь хурууны хээгээ тохируулах боломжтой."</string>
+    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="4344665784935791640">"Ямар нэг алдаа гарлаа. Та дараа нь хурууны хээгээ тохируулах боломжтой."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Өөрийг нэмэх"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Дараах"</string>
     <string name="security_fingerprint_disclaimer_lockscreen_disabled_1" msgid="294529888220959309">"Дэлгэцийн түгжээний сонголтыг идэвхгүй болгосон. Нэмэлт мэдээлэл авахын тулд байгууллагынхаа админтай холбоо барина уу."</string>
     <string name="security_fingerprint_disclaimer_lockscreen_disabled_2" msgid="8070829069640846543">"Та худалдан авалтын зөвшөөрөл олгох болон аппад хандахдаа хурууны хээгээ ашиглах боломжтой хэвээр байна."</string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Хуруугаа өргөөд мэдрэгч дээр дахин хүрнэ үү."</string>
-    <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Хурууны хээ мэдрэгч ашиглах боломжгүй. Засварын үйлчилгээ үзүүлэгчид зочилно уу"</string>
+    <string name="security_settings_fingerprint_bad_calibration_title" msgid="3073145395701953620">"Хурууны хээ мэдрэгч ашиглах боломжгүй"</string>
+    <string name="security_settings_fingerprint_bad_calibration" msgid="304585658839584958">"Засварын үйлчилгээ үзүүлэгчид зочилно уу."</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"Аюулгүй байдлын бусад тохиргоо"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Ажлын профайлын түгжээ, шифрлэлт болон бусад"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Шифрлэлт, мандат үнэмлэх болон бусад"</string>
@@ -627,8 +632,7 @@
     <string name="bluetooth_settings" msgid="2967239493428695171">"Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"Bluetooth"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>-тай хослуулах уу?"</string>
-    <!-- no translation found for bluetooth_pairing_group_late_bonding (5310869364570266209) -->
-    <skip />
+    <string name="bluetooth_pairing_group_late_bonding" msgid="5310869364570266209">"Одоо байгаа зохицуулсан багцад шинэ гишүүн нэмэх"</string>
     <string name="bluetooth_pairing_key_msg" msgid="1329835708475701761">"Bluetooth хослох код"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="5806420933599368592">"Хослуулах кодыг оруулаад Return буюу Enter дарна уу"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7256286571636950635">"ПИН нь үсэг буюу тэмдэгт агуулна"</string>
@@ -1112,6 +1116,7 @@
     <string name="security_patch" msgid="4071756145347865382">"Android-н аюулгүй байдлын шинэчлэлт"</string>
     <string name="model_info" msgid="8997566254717810904">"Загвар"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"Техник хангамжийн хувилбар"</string>
+    <string name="manufactured_year" msgid="3401517138700926475">"Үйлдвэрлэсэн жил"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"Төхөөрөмжийн ID"</string>
     <string name="baseband_version" msgid="2600182227599835857">"Долгион баригчийн хувилбар"</string>
     <string name="kernel_version" msgid="3513538109381366881">"Кернел хувилбар"</string>
@@ -1743,8 +1748,8 @@
     <string name="user_dict_settings_all_languages" msgid="8563387437755363526">"Бүх хэлэнд"</string>
     <string name="user_dict_settings_more_languages" msgid="5378870726809672319">"Өөр хэлүүд…"</string>
     <string name="testing" msgid="6294172343766732037">"Тест хийж байна"</string>
-    <string name="keyboard_settings_summary" msgid="2716339620942356432">"Дэлгэц дээрх гар, яриа, хэрэгсэл"</string>
-    <string name="keyboard_settings_with_physical_keyboard_summary" msgid="6628668004523183413">"Дэлгэц дээрх гар, биет гар, яриа, хэрэгсэл"</string>
+    <string name="keyboard_settings_summary" msgid="9188442758316476986">"Дэлгэц дээрх гар, хэрэгсэл"</string>
+    <string name="keyboard_settings_with_physical_keyboard_summary" msgid="2240779804018260938">"Дэлгэц дээрх гар, биет гар, хэрэгсэл"</string>
     <string name="builtin_keyboard_settings_title" msgid="5096171620714179661">"Биет гар"</string>
     <string name="enabled_locales_keyboard_layout" msgid="3939886151098958639">"Бүдүүвч"</string>
     <string name="gadget_picker_title" msgid="7615902510050731400">"Гаджет сонгоно уу"</string>
@@ -1826,7 +1831,7 @@
     <string name="accessibility_text_reading_options_title" msgid="3224648909213325563">"Дэлгэцийн хэмжээ болон текст"</string>
     <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"Текстийг хэрхэн үзүүлэхийг өөрчлөх"</string>
     <string name="accessibility_text_reading_preview_mail_subject" msgid="4597374768612733616">"Гарчиг: Халуун агаарын бөмбөлгийн дизайн"</string>
-    <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"Дараахаас: Билл"</string>
+    <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"Хэнээс: Билл"</string>
     <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"Өглөөний мэнд!\n\nБи зүгээр л загвар ямар болж байгааг мэдэхийг хүссэн юм. Бид шинэ бөмбөлөг барьж эхлэхээс өмнө тэд бэлэн болох уу?"</string>
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"Тохиргоог шинэчлэх"</string>
     <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"Дэлгэцийн хэмжээ болон текстийн тохиргоог шинэчилсэн"</string>
@@ -2858,7 +2863,7 @@
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> клон үүсгэж байна"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> клон үүсгэсэн"</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"Хэл, зангаа, цаг, нөөцлөлт"</string>
-    <string name="languages_setting_summary" msgid="4924440599794956443">"Системийн хэл, аппын хэл"</string>
+    <string name="languages_setting_summary" msgid="7963053736715746726">"Системийн хэл, аппын хэл, яриа"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, сүлжээний холболт, интернэт, утасгүй сүлжээ, дата, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Wi‑Fi-н мэдэгдэл, wifi-н мэдэгдэл"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"дата ашиглалт"</string>
@@ -2941,7 +2946,7 @@
     <string name="keywords_storage_settings" msgid="6018856193950281898">"санах ой, завсрын санах ойд хадгалах, өгөгдөл, устгах, арилгах, сул, зай"</string>
     <string name="keywords_bluetooth_settings" msgid="2588159530959868188">"холбогдсон, төхөөрөмж, чихэвч, микрофонтой чихэвч, чанга яригч, утасгүй сүлжээ, холболт, чихэнд тогтдог чихэвч, хөгжим, медиа"</string>
     <string name="keywords_wallpaper" msgid="7332890404629446192">"дэвсгэр, загвар, хүснэгтэн бүдүүвч, өөрчлөх, хувийн болгох"</string>
-    <string name="keywords_styles" msgid="5291614313348476068">"дүрс тэмдэг, өргөлт, өнгө"</string>
+    <string name="keywords_styles" msgid="3367789885254807447">"дүрс тэмдэг, өргөлт, өнгө, дэлгэцийн түгжээ, түгжээтэй дэлгэц, товчлол, цагны хэмжээ"</string>
     <string name="keywords_assist_input" msgid="3086289530227075593">"өгөгдмөл, туслах"</string>
     <string name="keywords_default_payment_app" msgid="5162298193637362104">"төлбөр, өгөгдмөл"</string>
     <string name="keywords_ambient_display" msgid="3149287105145443697">"ирж буй мэдэгдэл"</string>
@@ -3221,7 +3226,7 @@
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"Мэдэгдлүүдийг доош татдаг сүүдэрт нэг мөрд буулгаарай"</string>
     <string name="notification_channel_summary_low" msgid="5549662596677692000">"Дуу эсвэл чичиргээ байхгүй"</string>
     <string name="notification_conversation_summary_low" msgid="6352818857388412326">"Дуу эсвэл чичиргээ байхгүй бөгөөд харилцан ярианы хэсгийн доод талд харагдана"</string>
-    <string name="notification_channel_summary_default" msgid="3674057458265438896">"Утасны тохиргоонд тулгуурлан хонх дуугаргах эсвэл чичирхийлж болзошгүй"</string>
+    <string name="notification_channel_summary_default" msgid="1168420867670390611">"Төхөөрөмжийн тохиргоонд тулгуурлан хонх дуугаргах эсвэл чичиргэж болзошгүй"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Төхөөрөмжийн түгжээг тайлсан үед мэдэгдлүүдийг дэлгэцийн дээд хэсэгт баннер болгож харуулах"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"\"<xliff:g id="APP_NAME">%1$s</xliff:g>\"-н бүх мэдэгдэл"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"<xliff:g id="APP_NAME">%1$s</xliff:g>-н бүх мэдэгдэл"</string>
@@ -4032,7 +4037,7 @@
     <string name="financed_privacy_fully_paid_category" msgid="9221763928564246923">"Та төлбөрөө бүрэн хийсэн үед:"</string>
     <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"Бүх хязгаарлалтыг төхөөрөмжөөс хасна"</string>
     <string name="financed_privacy_uninstall_creditor_app" msgid="6339004120497310705">"Та зээлдүүлэгч аппыг устгах боломжтой"</string>
-    <string name="device_lock_info" msgid="1628142032642755537">"Төхөөрөмжийн түгжээ"</string>
+    <string name="financed_device_info" msgid="3871860346697308342">"Зээлээр авсан төхөөрөмжийн мэдээлэл"</string>
     <string name="default_camera_app_title" msgid="6546248868519965998">"{count,plural, =1{Камерын апп}other{Камерын аппууд}}"</string>
     <string name="default_calendar_app_title" msgid="1870095225089706093">"Хуанлины апп"</string>
     <string name="default_contacts_app_title" msgid="7740028900741944569">"Харилцагчийн апп"</string>
@@ -4149,7 +4154,7 @@
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"Энэ аппад Wi-Fi-г асаах эсвэл унтраах, Wi-Fi сүлжээг хайх болон холбогдох, сүлжээ нэмэх эсвэл устгах болон зөвхөн дотоодод ашиглах сүлжээний цэгийг эхлүүлэхийг зөвшөөрнө үү"</string>
     <string name="change_nfc_tag_apps_title" msgid="91514009058149617">"NFC-р эхлүүлэх"</string>
     <string name="change_nfc_tag_apps_detail_switch" msgid="240286205725043561">"NFC скан хийхэд эхлүүлэхийг зөвшөөрөх"</string>
-    <string name="change_nfc_tag_apps_detail_summary" msgid="7083666814715607078">"NFC шошгыг скан хийх үед энэ аппад эхлүүлэхийг зөвшөөрнө үү.\nХэрэв энэ зөвшөөрөл асаалттай бол апп нь шошгыг илрүүлэх бүрд сонголт байдлаар боломжтой байх болно."</string>
+    <string name="change_nfc_tag_apps_detail_summary" msgid="3338220223868942195">"NFC шошгыг скан хийх үед энэ аппад эхлүүлэхийг зөвшөөрнө үү.\nХэрэв энэ зөвшөөрөл асаалттай бол апп нь шошгыг илрүүлэх бүрд сонголт байдлаар боломжтой байх болно."</string>
     <string name="media_output_title" msgid="8283629315159510680">"Медиаг дараахад тоглуулна уу"</string>
     <string name="media_output_label_title" msgid="4139048973886819148">"<xliff:g id="LABEL">%s</xliff:g> дээр тоглуулах"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"Энэ төхөөрөмж"</string>

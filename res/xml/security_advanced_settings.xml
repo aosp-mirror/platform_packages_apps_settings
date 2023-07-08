@@ -59,8 +59,8 @@
             settings:controller="com.android.settings.enterprise.FinancedPrivacyPreferenceController"/>
 
         <Preference
-            android:key="device_lock_info"
-            android:title="@string/device_lock_info"
+            android:key="financed_device_info"
+            android:title="@string/financed_device_info"
             android:summary="@string/summary_placeholder"
             settings:controller="com.android.settings.devicelock.DeviceLockPreferenceController">
             <intent android:action="com.android.devicelockcontroller.action.DEVICE_INFO_SETTINGS"/>

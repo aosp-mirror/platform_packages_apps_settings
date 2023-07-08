@@ -19,6 +19,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -27,7 +28,9 @@ import android.content.Context;
 import android.content.pm.UserInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.widget.Switch;
 
+import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settingslib.widget.MainSwitchPreference;
@@ -57,6 +60,10 @@ public class WorkModePreferenceControllerTest {
     private UserHandle mManagedUser;
     @Mock
     private UserInfo mUserInfo;
+    @Mock
+    private PreferenceScreen mScreen;
+    @Mock
+    Switch mSwitch;
 
     @Before
     public void setUp() {
@@ -69,7 +76,9 @@ public class WorkModePreferenceControllerTest {
         when(mUserManager.getProcessUserId()).thenReturn(0);
         when(mUserManager.getUserProfiles()).thenReturn(Collections.singletonList(mManagedUser));
         when(mManagedUser.getIdentifier()).thenReturn(MANAGED_USER_ID);
+        when(mScreen.findPreference(anyString())).thenReturn(mPreference);
         mController = new WorkModePreferenceController(mContext, PREF_KEY);
+        mController.displayPreference(mScreen);
     }
 
     @Test
@@ -106,13 +115,11 @@ public class WorkModePreferenceControllerTest {
 
     @Test
     public void onPreferenceChange_shouldRequestQuietModeEnabled() {
-        mController.setPreference(mPreference);
-
-        mController.onPreferenceChange(mPreference, true);
+        mController.onSwitchChanged(mSwitch, true);
 
         verify(mUserManager).requestQuietModeEnabled(false, mManagedUser);
 
-        mController.onPreferenceChange(mPreference, false);
+        mController.onSwitchChanged(mSwitch, false);
 
         verify(mUserManager).requestQuietModeEnabled(true, mManagedUser);
     }

@@ -131,7 +131,7 @@
     <!-- Connected devices settings. Title of the preference to show the entrance of the hearing device controls related page. [CHAR LIMIT=65] -->
     <string name="bluetooth_device_controls_title">Hearing device settings</string>
     <!-- Connected devices settings. Title of the preference to show the entrance of the hearing device controls related page. [CHAR LIMIT=65] -->
-    <string name="bluetooth_device_controls_summary">Audio output, shortcut, hearing aid compatibility</string>
+    <string name="bluetooth_device_controls_summary">Shortcut, hearing aid compatibility</string>
     <!-- Title for this device specific controls section. [CHAR LIMIT=30] -->
     <string name="bluetooth_device_controls_specific">For this device</string>
     <!-- Connected devices settings. Title of the preference to show the entrance of the audio output page. It can change different types of audio are played on phone or other bluetooth devices. [CHAR LIMIT=35] -->
@@ -1054,8 +1054,10 @@
     <string name="security_fingerprint_disclaimer_lockscreen_disabled_2">You can still use your fingerprint to authorize purchases and app access.</string>
     <!-- Text shown in fingerprint enroll when we didn't observe progress for a few seconds. [CHAR LIMIT=100] -->
     <string name="security_settings_fingerprint_enroll_lift_touch_again">Lift finger, then touch sensor again</string>
+    <!-- Dialog title during fingerprint enrollment to indicate bad sensor calibration. [CHAR LIMIT=100] -->
+    <string name="security_settings_fingerprint_bad_calibration_title">Can\u2019t use fingerprint sensor</string>
     <!-- Text shown during fingerprint enrollment to indicate bad sensor calibration. [CHAR LIMIT=100] -->
-    <string name="security_settings_fingerprint_bad_calibration">Can\u2019t use fingerprint sensor. Visit a repair provider</string>
+    <string name="security_settings_fingerprint_bad_calibration">Visit a repair provider.</string>
     <!-- Title for the section that has additional security settings. [CHAR LIMIT=60] -->
     <string name="security_advanced_settings">More security settings</string>
     <!-- String for the "More security settings" summary when a work profile is on the device. [CHAR_LIMIT=NONE] -->
@@ -2640,6 +2642,8 @@
     <string name="model_info">Model</string>
     <!-- Label for device's hardware revision value [CHAR LIMIT=40] -->
     <string name="hardware_revision">Hardware version</string>
+    <!-- Label for device's manufactured year value [CHAR LIMIT=40] -->
+    <string name="manufactured_year">Manufactured year</string>
     <!-- About phone screen, fcc equipment id label  [CHAR LIMIT=40] -->
     <string name="fcc_equipment_id">Equipment ID</string>
     <!-- About phone screen,  setting option name  [CHAR LIMIT=40] -->
@@ -7070,7 +7074,7 @@
     <string name="keywords_wallpaper">background, theme, grid, customize, personalize</string>
 
     <!-- List of synonyms for the Styles picker setting, used to match in settings search [CHAR LIMIT=NONE] -->
-    <string name="keywords_styles">icon, accent, color</string>
+    <string name="keywords_styles">icon, accent, color, home screen, lock screen, shortcut, clock size</string>
 
     <!-- List of synonyms for the Default Assist and Voice input setting, used to match in settings search [CHAR LIMIT=NONE] -->
     <string name="keywords_assist_input">default, assistant</string>
@@ -7146,6 +7150,18 @@
 
     <!-- Sound: Title for the option managing notification volume. [CHAR LIMIT=30] -->
     <string name="notification_volume_option_title">Notification volume</string>
+
+    <!-- Sound: Content description of ring volume title in silent mode. [CHAR LIMIT=NONE BACKUP_MESSAGE_ID=8994620163934249882] -->
+    <string name="ringer_content_description_silent_mode">Ringer silent</string>
+
+    <!-- Sound: Content description of ring volume title in vibrate mode. [CHAR LIMIT=NONE BACKUP_MESSAGE_ID=6261841170896561364] -->
+    <string name="ringer_content_description_vibrate_mode">Ringer vibrate</string>
+
+    <!-- Sound: Content description of notification volume title in vibrate mode. [CHAR LIMIT=NONE] -->
+    <string name="notification_volume_content_description_vibrate_mode">Notification volume muted, notifications will vibrate</string>
+
+    <!-- Sound: Content description of volume title in silent mode [CHAR LIMIT=NONE] -->
+    <string name="volume_content_description_silent_mode"> <xliff:g id="volume type" example="notification volume">%1$s</xliff:g> muted</string>
 
     <!-- Sound: Summary for when notification volume is disabled. [CHAR LIMIT=100] -->
     <string name="notification_volume_disabled_summary">Unavailable because ring is muted</string>
@@ -7888,7 +7904,7 @@
     <string name="notification_conversation_summary_low">No sound or vibration and appears lower in conversation section</string>
 
     <!-- [CHAR LIMIT=150] Notification Importance title: normal importance level summary -->
-    <string name="notification_channel_summary_default">May ring or vibrate based on phone settings</string>
+    <string name="notification_channel_summary_default">May ring or vibrate based on device settings</string>
 
     <!-- [CHAR LIMIT=150] Notification Importance title: high importance level summary -->
     <string name="notification_channel_summary_high">When device is unlocked, show notifications as a banner across the top of the screen</string>
@@ -10176,8 +10192,7 @@
     <!-- Label explaining that the app installed by credit provider can be uninstalled. [CHAR LIMIT=60]-->
     <string name="financed_privacy_uninstall_creditor_app">You can uninstall the creditor app</string>
     <!-- Title of setting on security settings screen on a device provisioned by Device Lock. This will take the user to a screen in Device Lock with information about what a device provider can control and their impact on the user's privacy. Shown on Device Lock provisioned devices only. [CHAR LIMIT=NONE] -->
-    <!-- TODO(b/282040794): Update the title -->
-    <string name="device_lock_info">Device Lock</string>
+    <string name="financed_device_info">Financed device info</string>
     <!-- Strings for displaying which applications were set as default for specific actions. -->
     <!-- Title for the apps that have been set as default handlers of camera-related intents. [CHAR LIMIT=30] -->
     <string name="default_camera_app_title">{count, plural,
@@ -10419,14 +10434,8 @@
     <!-- Help URI, restricted apps page [DO NOT TRANSLATE] -->
     <string name="help_uri_restricted_apps" translatable="false"></string>
 
-    <!-- Help URI, battery saver page [DO NOT TRANSLATE] -->
-    <string name="help_url_battery_saver_settings" translatable="false"></string>
-
     <!-- Help URI, auto rotate page [DO NOT TRANSLATE] -->
     <string name="help_url_auto_rotate_settings" translatable="false"></string>
-
-    <!-- Help URI, app usage page [DO NOT TRANSLATE] -->
-    <string name="help_url_app_usage_settings" translatable="false"></string>
 
     <!-- Help URI, smart battery page [DO NOT TRANSLATE] -->
     <string name="help_uri_smart_battery_settings" translatable="false"></string>
@@ -10563,7 +10572,7 @@
     <string name="change_nfc_tag_apps_detail_switch">Allow launch on NFC scan</string>
 
     <!-- Special app access > Launch via NFC > Description. [CHAR LIMIT=NONE] -->
-    <string name="change_nfc_tag_apps_detail_summary">Allow this app to launch when a NFC tag is scanned.\nIf this permission is on, the app will be available as an option whenever a tag is detected.</string>
+    <string name="change_nfc_tag_apps_detail_summary">Allow this app to launch when an NFC tag is scanned.\nIf this permission is on, the app will be available as an option whenever a tag is detected.</string>
 
     <!-- Title for media output settings -->
     <string name="media_output_title">Play media to</string>
