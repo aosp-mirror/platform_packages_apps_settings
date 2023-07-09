@@ -662,7 +662,6 @@
     <string name="remove_association_button" msgid="5004208145998061135">"Премахване на свързването"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"Да се прекрати ли връзката с приложението?"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"<xliff:g id="APP_NAME">%1$s</xliff:g> вече няма да се свързва с устройството ви <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
-    <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"Експериментално. За по-качествен звук."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Забравяне на устройството"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Прекратяване на връзката с приложението"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Максимален брой свързани аудиоустройства с Bluetooth"</string>
@@ -1463,6 +1462,18 @@
     <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"Отключване на това у-во и с фигурата"</string>
     <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"Отключване на това у-во и с ПИН кода"</string>
     <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="2066701840753591922">"Отключване на това у-во и с паролата"</string>
+    <!-- no translation found for lockpassword_confirm_repair_mode_pattern_header (6669435143987988314) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_pin_header (2585263648322879131) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_password_header (3064676176428495228) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_pattern_details (6187536224419477465) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_pin_details (203022189107305807) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_password_details (4860219600771003873) -->
+    <skip />
     <string name="lockpassword_invalid_pin" msgid="7530854476819820600">"Грешен ПИН код"</string>
     <string name="lockpassword_invalid_password" msgid="1588184930542221687">"Грешна парола"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="8109305107409924083">"Грешна фигура"</string>
@@ -2709,7 +2720,7 @@
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Изтриване на активността като гост?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Приложенията и данните от тази сесия като гост ще бъдат изтрити сега, а цялата бъдеща активност като гост ще се изтрива всеки път, когато излезете от режима на гост"</string>
     <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"изтриване, гост, активност, премахване, данни, посетител, изтриване на данните"</string>
-    <string name="enable_guest_calling" msgid="8300355036005240911">"Разрешаване на гост да използва телефона"</string>
+    <string name="enable_guest_calling" msgid="4620657197834392094">"Гостите да извършват тел. обаждания"</string>
     <string name="enable_guest_calling_summary" msgid="4748224917641204782">"Историята на обажданията ще бъде споделена с госта"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Включване на тел. обаждания и SMS"</string>
     <string name="user_grant_admin" msgid="5942118263054572074">"Задаване на потребителя като администратор"</string>
@@ -2984,6 +2995,10 @@
     <string name="ring_volume_option_title" msgid="1520802026403038560">"Сила на звука за звън. и известия"</string>
     <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"Сила на звука при звънене"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"Сила на звука при известие"</string>
+    <string name="ringer_content_description_silent_mode" msgid="1442257660889685934">"Звъненето е в тих режим"</string>
+    <string name="ringer_content_description_vibrate_mode" msgid="5946432791951870480">"Вибрира при звънене"</string>
+    <string name="notification_volume_content_description_vibrate_mode" msgid="6097212000507408288">"Силата на звука на известията е спряна. При известия ще се вибрира"</string>
+    <string name="volume_content_description_silent_mode" msgid="377680514551405754">"Звукът на „<xliff:g id="VOLUME_TYPE">%1$s</xliff:g>“ е спрян"</string>
     <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"Не е налице, защото звъненето е спряно"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"Мелодия на телефона"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Стандартен звук за известяване"</string>
@@ -4662,7 +4677,7 @@
     <string name="disable_phantom_process_monitor_title" msgid="8348108346706188771">"Деактивиране на ограниченията за дъщерните процеси"</string>
     <string name="disable_phantom_process_monitor_summary" msgid="3044464635550256985">"Деактивиране на ограниченията за използването на системните ресурси за дъщерните процеси на приложението"</string>
     <string name="enable_notes_role_title" msgid="7662702013496114763">"Принудително активиране на ролята на бележките"</string>
-    <string name="enable_notes_role_summary" msgid="136916915155048249">"Активиране на системните интегрирания за водене на бележки чрез ролята на бележките. Ако тази роля вече е активирана, не се извършва нищо."</string>
+    <string name="enable_notes_role_summary" msgid="5495721409392395089">"Активиране на системните интегрирания за водене на бележки чрез ролята на бележките. Ако тази роля вече е активирана, не се извършва нищо. Изисква се рестартиране."</string>
     <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Предаване"</string>
     <string name="bluetooth_broadcast_dialog_broadcast_app" msgid="1016617579194329005">"Предаване на <xliff:g id="CURRENTAPP">%1$s</xliff:g>"</string>
     <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"Слушайте предавания, които се възпроизвеждат в близост"</string>

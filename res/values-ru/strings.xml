@@ -446,7 +446,7 @@
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Наклоните палец вбок, приложите к датчику и удерживайте. Затем наклоните палец в противоположную сторону и повторите действия."</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"Не настраивать доступ по отпечаткам?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"Для разблокировки телефона вы выбрали сканирование отпечатка пальца. Настройка займет около минуты. Если вы пропустите ее сейчас, вам все равно придется сделать это позже."</string>
-    <string name="lock_screen_skip_setup_title" msgid="6979006375138175111">"Пропустить настройку (<xliff:g id="OPTIONS">%s</xliff:g>)?"</string>
+    <string name="lock_screen_skip_setup_title" msgid="6979006375138175111">"Пропустить (<xliff:g id="OPTIONS">%s</xliff:g>)?"</string>
     <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"Не устанавливать PIN-код?"</string>
     <string name="lock_screen_pin_skip_face_title" msgid="8810770395309512358">"Пропустить настройку PIN-кода и фейсконтроля?"</string>
     <string name="lock_screen_pin_skip_fingerprint_title" msgid="371214283158750976">"Пропустить настройку PIN-кода и отпечатка пальца?"</string>
@@ -662,7 +662,6 @@
     <string name="remove_association_button" msgid="5004208145998061135">"Удалить связь"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"Отключить приложение?"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"Приложение \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" будет отключено от устройства <xliff:g id="DEVICE_NAME">%2$s</xliff:g>."</string>
-    <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"Улучш. качества звука (экспериментальн.)"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"ОК"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Отключение приложения"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Максимальное количество подключенных Bluetooth-аудиоустройств"</string>
@@ -1463,6 +1462,18 @@
     <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"Использовать графический ключ для разблокировки"</string>
     <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"Использовать PIN-код для разблокировки"</string>
     <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="2066701840753591922">"Использовать пароль для разблокировки"</string>
+    <!-- no translation found for lockpassword_confirm_repair_mode_pattern_header (6669435143987988314) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_pin_header (2585263648322879131) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_password_header (3064676176428495228) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_pattern_details (6187536224419477465) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_pin_details (203022189107305807) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_password_details (4860219600771003873) -->
+    <skip />
     <string name="lockpassword_invalid_pin" msgid="7530854476819820600">"Неверный PIN-код"</string>
     <string name="lockpassword_invalid_password" msgid="1588184930542221687">"Неверный пароль"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="8109305107409924083">"Неверный ключ."</string>
@@ -2709,7 +2720,7 @@
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Удалить историю гостевого сеанса?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Все данные и приложения этого гостевого сеанса будут удалены. В дальнейшем история будет очищаться каждый раз при выходе из гостевого режима."</string>
     <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"удалить, гость, история, стереть, данные, посетитель, очистить"</string>
-    <string name="enable_guest_calling" msgid="8300355036005240911">"Открыть гостю доступ к звонкам"</string>
+    <string name="enable_guest_calling" msgid="4620657197834392094">"Разрешить гостям совершать звонки"</string>
     <string name="enable_guest_calling_summary" msgid="4748224917641204782">"Гость получит доступ к журналу звонков"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Включить звонки и SMS"</string>
     <string name="user_grant_admin" msgid="5942118263054572074">"Назначить этого пользователя администратором"</string>
@@ -2984,6 +2995,10 @@
     <string name="ring_volume_option_title" msgid="1520802026403038560">"Вызовы и уведомления"</string>
     <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"Громкость звонка"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"Громкость уведомлений"</string>
+    <string name="ringer_content_description_silent_mode" msgid="1442257660889685934">"Беззвучный режим"</string>
+    <string name="ringer_content_description_vibrate_mode" msgid="5946432791951870480">"Режим вибрации"</string>
+    <string name="notification_volume_content_description_vibrate_mode" msgid="6097212000507408288">"Вместо звука для уведомлений будет включена вибрация"</string>
+    <string name="volume_content_description_silent_mode" msgid="377680514551405754">"Отключено: <xliff:g id="VOLUME_TYPE">%1$s</xliff:g>"</string>
     <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"Недоступно в беззвучном режиме"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"Рингтон"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Звук уведомления по умолчанию"</string>
@@ -4664,7 +4679,7 @@
     <string name="disable_phantom_process_monitor_title" msgid="8348108346706188771">"Отключить ограничения для дочерних процессов"</string>
     <string name="disable_phantom_process_monitor_summary" msgid="3044464635550256985">"Отключить ограничения на использование системных ресурсов для дочерних процессов приложения"</string>
     <string name="enable_notes_role_title" msgid="7662702013496114763">"Принудительно включить роль приложений для заметок"</string>
-    <string name="enable_notes_role_summary" msgid="136916915155048249">"Разрешить интеграцию систем для заметок через роль приложений для заметок. Если эта роль уже используется, ничего не произойдет."</string>
+    <string name="enable_notes_role_summary" msgid="5495721409392395089">"Разрешить интеграцию систем для заметок через роль приложений для заметок. Если эта роль уже используется, ничего не произойдет. Требуется перезагрузка."</string>
     <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Трансляция"</string>
     <string name="bluetooth_broadcast_dialog_broadcast_app" msgid="1016617579194329005">"Транслировать \"<xliff:g id="CURRENTAPP">%1$s</xliff:g>\""</string>
     <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"Подключайтесь к трансляциям рядом с вами."</string>

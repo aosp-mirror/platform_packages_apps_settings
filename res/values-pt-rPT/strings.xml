@@ -662,7 +662,6 @@
     <string name="remove_association_button" msgid="5004208145998061135">"Remover associação"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"Pretende desassociar a app?"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"A app <xliff:g id="APP_NAME">%1$s</xliff:g> deixará de estar associada ao seu <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
-    <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"Experimental. Melhora qualidade de áudio"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Esquecer dispositivo"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Desassociar app"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Máximo de dispositivos de áudio Bluetooth associados"</string>
@@ -1463,6 +1462,18 @@
     <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"Usar padrão para desbloquear o dispositivo"</string>
     <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"Usar PIN para desbloquear o dispositivo"</string>
     <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="2066701840753591922">"Usar palavra-passe p/ desbloq. dispositivo"</string>
+    <!-- no translation found for lockpassword_confirm_repair_mode_pattern_header (6669435143987988314) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_pin_header (2585263648322879131) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_password_header (3064676176428495228) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_pattern_details (6187536224419477465) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_pin_details (203022189107305807) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_password_details (4860219600771003873) -->
+    <skip />
     <string name="lockpassword_invalid_pin" msgid="7530854476819820600">"PIN incorreto"</string>
     <string name="lockpassword_invalid_password" msgid="1588184930542221687">"Palavra-passe incorreta"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="8109305107409924083">"Padrão incorreto"</string>
@@ -2709,7 +2720,7 @@
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Eliminar a atividade de convidado?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"As apps e os dados desta sessão de convidado vão ser eliminados agora e toda a atividade de convidado futura é eliminada sempre que sair do modo convidado"</string>
     <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"eliminar, convidado, atividade, remover, dados, visitante, apagar"</string>
-    <string name="enable_guest_calling" msgid="8300355036005240911">"Permitir que o convidado use o telemóvel"</string>
+    <string name="enable_guest_calling" msgid="4620657197834392094">"Permitir que o convidado faça chamadas"</string>
     <string name="enable_guest_calling_summary" msgid="4748224917641204782">"O histórico de chamadas vai ser partilhado com o utilizador convidado"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Ativar chamadas telefónicas e SMS"</string>
     <string name="user_grant_admin" msgid="5942118263054572074">"Definir este utilizador como um administrador"</string>
@@ -2984,6 +2995,10 @@
     <string name="ring_volume_option_title" msgid="1520802026403038560">"Volume de notificações e toque"</string>
     <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"Volume do toque"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"Volume de notificações"</string>
+    <string name="ringer_content_description_silent_mode" msgid="1442257660889685934">"Campainha em silêncio"</string>
+    <string name="ringer_content_description_vibrate_mode" msgid="5946432791951870480">"Campainha em vibração"</string>
+    <string name="notification_volume_content_description_vibrate_mode" msgid="6097212000507408288">"Volume de notificações desativado, o dispositivo vibra com notificações"</string>
+    <string name="volume_content_description_silent_mode" msgid="377680514551405754">"<xliff:g id="VOLUME_TYPE">%1$s</xliff:g> desativado"</string>
     <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"Indisponível com som do toque desativado"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"Toque do telemóvel"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Som de notificação padrão"</string>
@@ -4084,7 +4099,7 @@
     <string name="credman_keywords" msgid="8305600680836806170">"dados, chave de acesso, palavra-passe"</string>
     <string name="credman_autofill_keywords" msgid="701180623776848914">"automático, preenchimento, preenchimento automático, dados, chave de acesso, palavra-passe"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Certifique-se de que confia nesta app&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=O Preenchimento automático do Google&gt;%1$s&lt;/xliff:g&gt; utiliza o que está no ecrã para determinar o que pode ser preenchido automaticamente."</string>
-    <string name="credman_autofill_confirmation_message" msgid="4951846866327737417">"&lt;b&gt;Usar a app &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; A app &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; usa o que está no ecrã para determinar o que pode ser preenchido automaticamente. Entre outras informações, a partir de agora, as palavras-passe e as chaves de acesso novas vão ser guardadas aqui."</string>
+    <string name="credman_autofill_confirmation_message" msgid="4951846866327737417">"&lt;b&gt;Usar a &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; A &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; usa o que está no ecrã para determinar o que pode ser preenchido automaticamente. Entre outras informações, a partir de agora, as palavras-passe e as chaves de acesso novas vão ser guardadas aqui."</string>
     <string name="credman_picker_title" msgid="2642776965060619988">"Palavras-passe, chaves de acesso e serviços de dados"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Desativar %1$s?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Desativar este serviço?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; As informações guardadas, como palavras-passe, chaves de acesso, métodos de pagamento e outras informações, não vão ser preenchidas quando iniciar sessão. Para usar as informações guardadas, escolha uma palavra-passe, uma chave de acesso ou um serviço de dados."</string>
@@ -4662,7 +4677,7 @@
     <string name="disable_phantom_process_monitor_title" msgid="8348108346706188771">"Desativar restrições de processos secundários"</string>
     <string name="disable_phantom_process_monitor_summary" msgid="3044464635550256985">"Desative as restrições de utilização dos recursos do sistema pelos processos secundários da app"</string>
     <string name="enable_notes_role_title" msgid="7662702013496114763">"Force a ativação da função Notas"</string>
-    <string name="enable_notes_role_summary" msgid="136916915155048249">"Ative as integrações do sistema de notas através da função Notas. Se a função Notas já estiver ativada, não faz nada."</string>
+    <string name="enable_notes_role_summary" msgid="5495721409392395089">"Ative as integrações do sistema de notas através da função Notas. Se a função Notas já estiver ativada, não faz nada. É necessário reiniciar."</string>
     <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Transmissão"</string>
     <string name="bluetooth_broadcast_dialog_broadcast_app" msgid="1016617579194329005">"Transmita a app <xliff:g id="CURRENTAPP">%1$s</xliff:g>"</string>
     <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"Ouça transmissões em reprodução perto de si"</string>

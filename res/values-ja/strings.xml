@@ -606,7 +606,7 @@
     <string name="lockpassword_password_too_short" msgid="1938086368137797700">"{count,plural, =1{# 文字以上にしてください}other{# 文字以上にしてください}}"</string>
     <string name="lockpassword_password_too_short_all_numeric" msgid="4301294924022401502">"{count,plural, =1{数字のみ使用する場合は、1 桁以上にしてください}other{数字のみ使用する場合は、# 桁以上にしてください}}"</string>
     <string name="lockpassword_pin_too_short" msgid="8910105226463085689">"{count,plural, =1{PIN は # 桁以上必要です}other{PIN は # 桁以上必要です}}"</string>
-    <string name="lockpassword_pin_too_short_autoConfirm_extra_message" msgid="3271351502900762571">"{count,plural, =1{PIN は # 桁以上で指定してください。セキュリティ強化のため、{minAutoConfirmLen} 桁の PIN をおすすめします}other{PIN は # 桁以上で指定してください。セキュリティ強化のため、{minAutoConfirmLen} 桁の PIN をおすすめします。}}"</string>
+    <string name="lockpassword_pin_too_short_autoConfirm_extra_message" msgid="3271351502900762571">"{count,plural, =1{PIN は # 桁以上で指定してください。セキュリティ強化のため、{minAutoConfirmLen} 桁の PIN をおすすめします。}other{PIN は # 桁以上で指定してください。セキュリティ強化のため、{minAutoConfirmLen} 桁の PIN をおすすめします。}}"</string>
     <string name="lockpassword_password_too_long" msgid="1940345313260498308">"{count,plural, =1{# 文字未満にしてください}other{# 文字未満にしてください}}"</string>
     <string name="lockpassword_pin_too_long" msgid="1678212054564388576">"{count,plural, =1{# 桁未満にしてください}other{# 桁未満にしてください}}"</string>
     <string name="lockpassword_pin_recently_used" msgid="6650277060998923465">"デバイス管理により、最近使用した PIN は使用できません"</string>
@@ -662,7 +662,6 @@
     <string name="remove_association_button" msgid="5004208145998061135">"関連付けを削除"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"アプリの接続を解除しますか？"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"<xliff:g id="APP_NAME">%1$s</xliff:g> アプリは <xliff:g id="DEVICE_NAME">%2$s</xliff:g> に接続できなくなります。"</string>
-    <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"試験運用中。音声の品質が向上します。"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"このデバイスとのペア設定を解除"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"アプリの接続を解除する"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"接続できる Bluetooth オーディオ デバイスの上限"</string>
@@ -1463,6 +1462,18 @@
     <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"パターンでこのデバイスのロックも解除されます"</string>
     <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"PIN でこのデバイスのロックも解除されます"</string>
     <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="2066701840753591922">"パスワードでこのデバイスのロックも解除されます"</string>
+    <!-- no translation found for lockpassword_confirm_repair_mode_pattern_header (6669435143987988314) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_pin_header (2585263648322879131) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_password_header (3064676176428495228) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_pattern_details (6187536224419477465) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_pin_details (203022189107305807) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_password_details (4860219600771003873) -->
+    <skip />
     <string name="lockpassword_invalid_pin" msgid="7530854476819820600">"PINが正しくありません"</string>
     <string name="lockpassword_invalid_password" msgid="1588184930542221687">"パスワードが正しくありません"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="8109305107409924083">"パターンが正しくありません"</string>
@@ -2709,7 +2720,7 @@
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"ゲストのアクティビティを削除しますか？"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"今回のゲスト セッションのアプリとデータが今すぐ削除され、今後のゲストのアクティビティはすべて、ゲストモードを終了するたびに削除されます"</string>
     <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"削除, ゲスト, アクティビティ, 消す, データ, ビジター, 消去"</string>
-    <string name="enable_guest_calling" msgid="8300355036005240911">"スマートフォンの利用をゲストに許可する"</string>
+    <string name="enable_guest_calling" msgid="4620657197834392094">"ゲストに通話を許可する"</string>
     <string name="enable_guest_calling_summary" msgid="4748224917641204782">"発信履歴がゲストユーザーと共有されます。"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"通話と SMS を ON"</string>
     <string name="user_grant_admin" msgid="5942118263054572074">"このユーザーを管理者にする"</string>
@@ -2984,6 +2995,10 @@
     <string name="ring_volume_option_title" msgid="1520802026403038560">"着信音と通知の音量"</string>
     <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"着信音の音量"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"通知の音量"</string>
+    <string name="ringer_content_description_silent_mode" msgid="1442257660889685934">"マナーモード着信"</string>
+    <string name="ringer_content_description_vibrate_mode" msgid="5946432791951870480">"バイブレーション着信"</string>
+    <string name="notification_volume_content_description_vibrate_mode" msgid="6097212000507408288">"通知音をミュートし、通知をバイブレーションで知らせます"</string>
+    <string name="volume_content_description_silent_mode" msgid="377680514551405754">"<xliff:g id="VOLUME_TYPE">%1$s</xliff:g>をミュートしました"</string>
     <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"着信音がミュートされているため利用できません"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"着信音"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"デフォルトの通知音"</string>
@@ -4662,7 +4677,7 @@
     <string name="disable_phantom_process_monitor_title" msgid="8348108346706188771">"子プロセスの制限を無効にする"</string>
     <string name="disable_phantom_process_monitor_summary" msgid="3044464635550256985">"アプリの子プロセスのシステム リソース使用量に関する制限を無効にします"</string>
     <string name="enable_notes_role_title" msgid="7662702013496114763">"メモのロールを強制的に有効にする"</string>
-    <string name="enable_notes_role_summary" msgid="136916915155048249">"メモのロールを通じてメモ作成システムの統合を行えるようにします。メモのロールがすでに有効の場合、処理は行われません。"</string>
+    <string name="enable_notes_role_summary" msgid="5495721409392395089">"メモのロールを通じてメモ作成システムの統合を行えるようにします。メモのロールがすでに有効の場合、処理は行われません。再起動が必要です。"</string>
     <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"ブロードキャスト"</string>
     <string name="bluetooth_broadcast_dialog_broadcast_app" msgid="1016617579194329005">"<xliff:g id="CURRENTAPP">%1$s</xliff:g> をブロードキャスト"</string>
     <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"近くで再生されているブロードキャストを聴きます"</string>

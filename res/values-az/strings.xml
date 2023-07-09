@@ -662,7 +662,6 @@
     <string name="remove_association_button" msgid="5004208145998061135">"Əlaqəni silin"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"Tətbiq ayrılsın?"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"<xliff:g id="APP_NAME">%1$s</xliff:g> tətbiqi artıq <xliff:g id="DEVICE_NAME">%2$s</xliff:g> cihazınıza qoşulmayacaq"</string>
-    <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"Təcrübi. Audio keyfiyyəti yaxşılaşır."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Cihazı unudun"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Tətbiqi ayırın"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Qoşulu Bluetooth audiocihazlarının maksimal sayı"</string>
@@ -1463,6 +1462,18 @@
     <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"Bu cihazın kilidi model ilə açıla bilər"</string>
     <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"Bu cihazın kilidi PIN ilə açıla bilər"</string>
     <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="2066701840753591922">"Bu cihazın kilidi parol ilə açıla bilər"</string>
+    <!-- no translation found for lockpassword_confirm_repair_mode_pattern_header (6669435143987988314) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_pin_header (2585263648322879131) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_password_header (3064676176428495228) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_pattern_details (6187536224419477465) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_pin_details (203022189107305807) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_repair_mode_password_details (4860219600771003873) -->
+    <skip />
     <string name="lockpassword_invalid_pin" msgid="7530854476819820600">"PIN səhvdir"</string>
     <string name="lockpassword_invalid_password" msgid="1588184930542221687">"Yanlış parol"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="8109305107409924083">"Yanlış model"</string>
@@ -2709,7 +2720,7 @@
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Qonaq fəaliyyəti silinsin?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Bu qonaq sessiyasındakı tətbiqlər və data indi silinəcək və hər dəfə qonaq rejimindən çıxanda bütün gələcək qonaq fəaliyyəti silinəcək"</string>
     <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"sil, qonaq, fəaliyyət, sil, data, ziyarətçi, poz"</string>
-    <string name="enable_guest_calling" msgid="8300355036005240911">"Qonağa telefondan istifadə etməyə icazə verin"</string>
+    <string name="enable_guest_calling" msgid="4620657197834392094">"Qonağa telefon zəngi etmək icazəsi verin"</string>
     <string name="enable_guest_calling_summary" msgid="4748224917641204782">"Zəng tarixçəsi qonaq istifadəçi ilə paylaşılacaq"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Telefon zəngləri &amp; SMS-i aktivləşdir"</string>
     <string name="user_grant_admin" msgid="5942118263054572074">"Bu istifadəçini admin edin"</string>
@@ -2984,6 +2995,10 @@
     <string name="ring_volume_option_title" msgid="1520802026403038560">"Zəng və bildiriş səsləri"</string>
     <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"Zəng səsi"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"Bildiriş səsi"</string>
+    <string name="ringer_content_description_silent_mode" msgid="1442257660889685934">"Zəng səssiz rejimdədir"</string>
+    <string name="ringer_content_description_vibrate_mode" msgid="5946432791951870480">"Zəng vibrasiyadadır"</string>
+    <string name="notification_volume_content_description_vibrate_mode" msgid="6097212000507408288">"Bildiriş susduruldu. Bildirişlər vibrasiyada olacaq"</string>
+    <string name="volume_content_description_silent_mode" msgid="377680514551405754">"<xliff:g id="VOLUME_TYPE">%1$s</xliff:g> susdurulub"</string>
     <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"Zəng səssiz edildiyi üçün əlçatan deyil"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"Telefon zəng səsi"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Defolt bildiriş səsi"</string>
@@ -4662,7 +4677,7 @@
     <string name="disable_phantom_process_monitor_title" msgid="8348108346706188771">"Alt proses məhdudiyyətlərini deaktiv edin"</string>
     <string name="disable_phantom_process_monitor_summary" msgid="3044464635550256985">"Tətbiqin alt proseslərinin sistem resursundan istifadə məhdudiyyətlərini deaktiv edin"</string>
     <string name="enable_notes_role_title" msgid="7662702013496114763">"Qeydlər funksiyasını məcburi aktivləşdirin"</string>
-    <string name="enable_notes_role_summary" msgid="136916915155048249">"Qeydlər funksiyası ilə qeydgötürmə üzrə sistem inteqrasiyalarını aktivləşdirin. Qeydlər funksiyası aktivləşdirilibsə, heç nə etməyin."</string>
+    <string name="enable_notes_role_summary" msgid="5495721409392395089">"Qeydlər funksiyası ilə qeydgötürmə üzrə sistem inteqrasiyalarını aktivləşdirin. Qeydlər funksiyası aktivləşdirilibsə, heç nə etməyin. Yenidən yükləmə lazımdır."</string>
     <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Yayım"</string>
     <string name="bluetooth_broadcast_dialog_broadcast_app" msgid="1016617579194329005">"<xliff:g id="CURRENTAPP">%1$s</xliff:g> tətbiqini yayımlayın"</string>
     <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"Yaxınlığınızda oxudulan yayımları dinləyin"</string>
