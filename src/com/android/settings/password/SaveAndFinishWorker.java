@@ -24,6 +24,7 @@ import android.util.Log;
 import android.util.Pair;
 import android.widget.Toast;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 
 import com.android.internal.widget.LockPatternUtils;
@@ -45,6 +46,7 @@ public class SaveAndFinishWorker extends Fragment {
 
     private LockPatternUtils mUtils;
     private boolean mRequestGatekeeperPassword;
+    private boolean mRequestWriteRepairModePassword;
     private boolean mWasSecureBefore;
     private int mUserId;
     private int mUnificationProfileId = UserHandle.USER_NULL;
@@ -72,7 +74,8 @@ public class SaveAndFinishWorker extends Fragment {
         return this;
     }
 
-    public void start(LockPatternUtils utils, LockscreenCredential chosenCredential,
+    @VisibleForTesting
+    void prepare(LockPatternUtils utils, LockscreenCredential chosenCredential,
             LockscreenCredential currentCredential, int userId) {
         mUtils = utils;
         mUserId = userId;
@@ -84,7 +87,11 @@ public class SaveAndFinishWorker extends Fragment {
         mChosenCredential = chosenCredential;
         mCurrentCredential = currentCredential != null ? currentCredential
                 : LockscreenCredential.createNone();
+    }
 
+    public void start(LockPatternUtils utils, LockscreenCredential chosenCredential,
+            LockscreenCredential currentCredential, int userId) {
+        prepare(utils, chosenCredential, currentCredential, userId);
         if (mBlocking) {
             finish(saveAndVerifyInBackground().second);
         } else {
@@ -97,31 +104,49 @@ public class SaveAndFinishWorker extends Fragment {
      * @return pair where the first is a boolean confirming whether the change was successful or not
      * and second is the Intent which has the challenge token or is null.
      */
-    private Pair<Boolean, Intent> saveAndVerifyInBackground() {
+    @VisibleForTesting
+    Pair<Boolean, Intent> saveAndVerifyInBackground() {
         final int userId = mUserId;
-        final boolean success = mUtils.setLockCredential(mChosenCredential, mCurrentCredential,
-                userId);
-        if (success) {
-            unifyProfileCredentialIfRequested();
+        if (!mUtils.setLockCredential(mChosenCredential, mCurrentCredential, userId)) {
+            return Pair.create(false, null);
         }
-        Intent result = null;
-        if (success && mRequestGatekeeperPassword) {
+
+        unifyProfileCredentialIfRequested();
+
+        @LockPatternUtils.VerifyFlag int flags = 0;
+        if (mRequestGatekeeperPassword) {
             // If a Gatekeeper Password was requested, invoke the LockSettingsService code
             // path to return a Gatekeeper Password based on the credential that the user
             // chose. This should only be run if the credential was successfully set.
-            final VerifyCredentialResponse response = mUtils.verifyCredential(mChosenCredential,
-                    userId, LockPatternUtils.VERIFY_FLAG_REQUEST_GK_PW_HANDLE);
-
-            if (!response.isMatched() || !response.containsGatekeeperPasswordHandle()) {
-                Log.e(TAG, "critical: bad response or missing GK PW handle for known good"
-                        + " credential: " + response.toString());
-            }
-
-            result = new Intent();
-            result.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE,
-                    response.getGatekeeperPasswordHandle());
+            flags |= LockPatternUtils.VERIFY_FLAG_REQUEST_GK_PW_HANDLE;
         }
-        return Pair.create(success, result);
+        if (mRequestWriteRepairModePassword) {
+            flags |= LockPatternUtils.VERIFY_FLAG_WRITE_REPAIR_MODE_PW;
+        }
+        if (flags == 0) {
+            return Pair.create(true, null);
+        }
+
+        Intent result = new Intent();
+        final VerifyCredentialResponse response = mUtils.verifyCredential(mChosenCredential,
+                userId, flags);
+        if (response.isMatched()) {
+            if (mRequestGatekeeperPassword && response.containsGatekeeperPasswordHandle()) {
+                result.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE,
+                        response.getGatekeeperPasswordHandle());
+            } else if (mRequestGatekeeperPassword) {
+                Log.e(TAG, "critical: missing GK PW handle for known good credential: " + response);
+            }
+        } else {
+            Log.e(TAG, "critical: bad response for known good credential: " + response);
+        }
+        if (mRequestWriteRepairModePassword) {
+            // Notify the caller if repair mode credential is saved successfully
+            result.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_WROTE_REPAIR_MODE_CREDENTIAL,
+                    response.isMatched());
+        }
+
+        return Pair.create(true, result);
     }
 
     private void finish(Intent resultData) {
@@ -138,6 +163,11 @@ public class SaveAndFinishWorker extends Fragment {
 
     public SaveAndFinishWorker setRequestGatekeeperPasswordHandle(boolean value) {
         mRequestGatekeeperPassword = value;
+        return this;
+    }
+
+    public SaveAndFinishWorker setRequestWriteRepairModePassword(boolean value) {
+        mRequestWriteRepairModePassword = value;
         return this;
     }
 

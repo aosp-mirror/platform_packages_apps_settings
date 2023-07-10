@@ -204,6 +204,7 @@ public class ChooseLockPattern extends SettingsActivity {
 
         private LockscreenCredential mCurrentCredential;
         private boolean mRequestGatekeeperPassword;
+        private boolean mRequestWriteRepairModePassword;
         protected TextView mHeaderText;
         protected LockPatternView mLockPatternView;
         protected TextView mFooterText;
@@ -561,6 +562,8 @@ public class ChooseLockPattern extends SettingsActivity {
                     intent.getParcelableExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
             mRequestGatekeeperPassword = intent.getBooleanExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW_HANDLE, false);
+            mRequestWriteRepairModePassword = intent.getBooleanExtra(
+                    ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_WRITE_REPAIR_MODE_PW, false);
 
             if (savedInstanceState == null) {
                 if (confirmCredentials) {
@@ -574,6 +577,7 @@ public class ChooseLockPattern extends SettingsActivity {
                             .setTitle(getString(R.string.unlock_set_unlock_launch_picker_title))
                             .setReturnCredentials(true)
                             .setRequestGatekeeperPasswordHandle(mRequestGatekeeperPassword)
+                            .setRequestWriteRepairModePassword(mRequestWriteRepairModePassword)
                             .setUserId(mUserId)
                             .show();
 
@@ -827,7 +831,8 @@ public class ChooseLockPattern extends SettingsActivity {
             mSaveAndFinishWorker = new SaveAndFinishWorker();
             mSaveAndFinishWorker
                     .setListener(this)
-                    .setRequestGatekeeperPasswordHandle(mRequestGatekeeperPassword);
+                    .setRequestGatekeeperPasswordHandle(mRequestGatekeeperPassword)
+                    .setRequestWriteRepairModePassword(mRequestWriteRepairModePassword);
 
             getFragmentManager().beginTransaction().add(mSaveAndFinishWorker,
                     FRAGMENT_TAG_SAVE_AND_FINISH).commit();
