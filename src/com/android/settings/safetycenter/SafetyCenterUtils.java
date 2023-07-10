@@ -40,7 +40,6 @@ import com.android.settings.notification.LockScreenNotificationPreferenceControl
 import com.android.settings.privacy.PrivacyDashboardFragment;
 import com.android.settings.security.ChangeProfileScreenLockPreferenceController;
 import com.android.settings.security.LockUnificationPreferenceController;
-import com.android.settings.security.VisiblePatternProfilePreferenceController;
 import com.android.settings.security.trustagent.TrustAgentListPreferenceController;
 import com.android.settings.widget.PreferenceCategoryController;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -69,8 +68,6 @@ public final class SafetyCenterUtils {
         profileSecurityControllers.add(new ChangeProfileScreenLockPreferenceController(
                 context, host));
         profileSecurityControllers.add(new LockUnificationPreferenceController(context, host));
-        profileSecurityControllers.add(new VisiblePatternProfilePreferenceController(
-                context, lifecycle));
         profileSecurityControllers.add(new FaceProfileStatusPreferenceController(
                 context, lifecycle));
         profileSecurityControllers.add(new FingerprintProfileStatusPreferenceController(
