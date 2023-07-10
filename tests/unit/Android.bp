@@ -32,6 +32,7 @@ android_test {
         "platform-test-annotations",
         "truth-prebuilt",
         "androidx.test.uiautomator_uiautomator",
+        "kotlinx_coroutines_test",
         // Don't add SettingsLib libraries here - you can use them directly as they are in the
         // instrumented Settings app.
     ],
@@ -40,8 +41,11 @@ android_test {
         javacflags: ["-Xep:CheckReturnValue:WARN"]
     },
 
-    // Include all test java files.
-    srcs: ["src/**/*.java"],
+    // Include all test java/kotlin files.
+    srcs: [
+        "src/**/*.java",
+        "src/**/*.kt",
+    ],
 
     platform_apis: true,
     test_suites: ["device-tests"],
