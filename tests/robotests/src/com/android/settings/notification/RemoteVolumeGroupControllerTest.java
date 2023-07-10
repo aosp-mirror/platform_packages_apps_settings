@@ -118,7 +118,7 @@ public class RemoteVolumeGroupControllerTest {
         when(remoteSessionInfo.getClientPackageName()).thenReturn(TEST_PACKAGE_NAME);
         when(remoteSessionInfo.isSystemSession()).thenReturn(false);
         mRoutingSessionInfos.add(remoteSessionInfo);
-        when(mLocalMediaManager.getActiveMediaSession()).thenReturn(mRoutingSessionInfos);
+        when(mLocalMediaManager.getRemoteRoutingSessions()).thenReturn(mRoutingSessionInfos);
     }
 
     @Test

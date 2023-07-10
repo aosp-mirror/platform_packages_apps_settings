@@ -100,8 +100,8 @@ public class RemoteMediaSliceTest {
         when(remoteSessionInfo.getVolume()).thenReturn(10);
         when(remoteSessionInfo.isSystemSession()).thenReturn(false);
         mRoutingSessionInfos.add(remoteSessionInfo);
-        when(sMediaDeviceUpdateWorker.getActiveRemoteMediaDevice()).thenReturn(
-                mRoutingSessionInfos);
+        when(sMediaDeviceUpdateWorker.getActiveRemoteMediaDevices())
+                .thenReturn(mRoutingSessionInfos);
     }
 
     @Test

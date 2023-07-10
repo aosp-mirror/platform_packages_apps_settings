@@ -54,7 +54,7 @@ public class RemoteVolumeGroupController extends BasePreferenceController implem
     static final String SWITCHER_PREFIX = "OUTPUT_SWITCHER";
 
     private PreferenceCategory mPreferenceCategory;
-    private List<RoutingSessionInfo> mRoutingSessionInfos = new ArrayList<>();
+    private final List<RoutingSessionInfo> mRoutingSessionInfos = new ArrayList<>();
 
     @VisibleForTesting
     LocalMediaManager mLocalMediaManager;
@@ -89,11 +89,7 @@ public class RemoteVolumeGroupController extends BasePreferenceController implem
 
     private void initRemoteMediaSession() {
         mRoutingSessionInfos.clear();
-        for (RoutingSessionInfo info : mLocalMediaManager.getActiveMediaSession()) {
-            if (!info.isSystemSession()) {
-                mRoutingSessionInfos.add(info);
-            }
-        }
+        mRoutingSessionInfos.addAll(mLocalMediaManager.getRemoteRoutingSessions());
     }
 
     @Override

@@ -40,7 +40,6 @@ import com.android.settingslib.media.LocalMediaManager;
 import com.android.settingslib.media.MediaDevice;
 import com.android.settingslib.utils.ThreadUtils;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -224,18 +223,8 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
         return mLocalMediaManager.getSessionName();
     }
 
-    List<RoutingSessionInfo> getActiveRemoteMediaDevice() {
-        final List<RoutingSessionInfo> sessionInfos = new ArrayList<>();
-        for (RoutingSessionInfo info : mLocalMediaManager.getActiveMediaSession()) {
-            if (!info.isSystemSession()) {
-                if (DEBUG) {
-                    Log.d(TAG, "getActiveRemoteMediaDevice() info : " + info.toString()
-                            + ", package name : " + info.getClientPackageName());
-                }
-                sessionInfos.add(info);
-            }
-        }
-        return sessionInfos;
+    List<RoutingSessionInfo> getActiveRemoteMediaDevices() {
+        return mLocalMediaManager.getRemoteRoutingSessions();
     }
 
     /**

@@ -218,16 +218,13 @@ public class MediaDeviceUpdateWorkerTest {
         mMediaDeviceUpdateWorker.mLocalMediaManager = mock(LocalMediaManager.class);
         final List<RoutingSessionInfo> routingSessionInfos = new ArrayList<>();
         final RoutingSessionInfo remoteSessionInfo = mock(RoutingSessionInfo.class);
-        final RoutingSessionInfo localSessionInfo = mock(RoutingSessionInfo.class);
         when(remoteSessionInfo.isSystemSession()).thenReturn(false);
-        when(localSessionInfo.isSystemSession()).thenReturn(true);
         routingSessionInfos.add(remoteSessionInfo);
-        routingSessionInfos.add(localSessionInfo);
-        when(mMediaDeviceUpdateWorker.mLocalMediaManager.getActiveMediaSession()).thenReturn(
-                routingSessionInfos);
+        when(mMediaDeviceUpdateWorker.mLocalMediaManager.getRemoteRoutingSessions())
+                .thenReturn(routingSessionInfos);
 
-        assertThat(mMediaDeviceUpdateWorker.getActiveRemoteMediaDevice()).containsExactly(
-                remoteSessionInfo);
+        assertThat(mMediaDeviceUpdateWorker.getActiveRemoteMediaDevices())
+                .containsExactly(remoteSessionInfo);
     }
 
     @Test
@@ -246,6 +243,7 @@ public class MediaDeviceUpdateWorkerTest {
                 TEST_DEVICE_PACKAGE_NAME1);
 
         mMediaDeviceUpdateWorker = new MediaDeviceUpdateWorker(mContext, URI2);
+        mMediaDeviceUpdateWorker.mManager = mock(MediaRouter2Manager.class);
         mMediaDeviceUpdateWorker.mLocalMediaManager = mock(LocalMediaManager.class);
         when(mMediaDeviceUpdateWorker.mLocalMediaManager.getPackageName())
                 .thenReturn(TEST_DEVICE_PACKAGE_NAME2);
