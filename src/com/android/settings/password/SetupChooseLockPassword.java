@@ -24,6 +24,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.Button;
 
@@ -97,7 +98,10 @@ public class SetupChooseLockPassword extends ChooseLockPassword {
             }
 
             if (showOptionsButton && anyOptionsShown) {
-                mOptionsButton = view.findViewById(R.id.screen_lock_options);
+                mOptionsButton = new Button(new ContextThemeWrapper(getActivity(),
+                        R.style.SudGlifButton_Tertiary));
+                mOptionsButton.setId(R.id.screen_lock_options);
+                PasswordUtils.setupScreenLockOptionsButton(getActivity(), view, mOptionsButton);
                 mOptionsButton.setVisibility(View.VISIBLE);
                 mOptionsButton.setOnClickListener((btn) ->
                         ChooseLockTypeDialogFragment.newInstance(mUserId)

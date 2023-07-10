@@ -16,6 +16,7 @@
 
 package com.android.settings.password;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,9 +32,12 @@ import com.android.settings.password.PasswordRequirementAdapter.PasswordRequirem
  */
 public class PasswordRequirementAdapter extends
         RecyclerView.Adapter<PasswordRequirementViewHolder> {
-    private String[] mRequirements;
 
-    public PasswordRequirementAdapter() {
+    private String[] mRequirements;
+    private Context mContext;
+
+    public PasswordRequirementAdapter(Context context) {
+        mContext = context;
         setHasStableIds(true);
     }
 
@@ -61,7 +65,12 @@ public class PasswordRequirementAdapter extends
 
     @Override
     public void onBindViewHolder(PasswordRequirementViewHolder holder, int position) {
+        final int fontSize = mContext.getResources().getDimensionPixelSize(
+                R.dimen.password_requirement_font_size);
         holder.mDescriptionText.setText(mRequirements[position]);
+        holder.mDescriptionText.setTextAppearance(R.style.ScreenLockPasswordHintTextFontStyle);
+        holder.mDescriptionText.setTextSize(fontSize / mContext.getResources()
+                .getDisplayMetrics().scaledDensity);
     }
 
     public static class PasswordRequirementViewHolder extends RecyclerView.ViewHolder {
