@@ -131,6 +131,11 @@ public class VolumeSeekBarPreference extends SeekBarPreference {
 
     protected void init() {
         if (mSeekBar == null) return;
+        // It's unnecessary to set up relevant volumizer configuration if preference is disabled.
+        if (!isEnabled()) {
+            mSeekBar.setEnabled(false);
+            return;
+        }
         final SeekBarVolumizer.Callback sbvc = new SeekBarVolumizer.Callback() {
             @Override
             public void onSampleStarting(SeekBarVolumizer sbv) {
@@ -178,10 +183,6 @@ public class VolumeSeekBarPreference extends SeekBarPreference {
         updateSuppressionText();
         if (mListener != null) {
             mListener.onUpdateMuteState();
-        }
-        if (!isEnabled()) {
-            mSeekBar.setEnabled(false);
-            mVolumizer.stop();
         }
     }
 
