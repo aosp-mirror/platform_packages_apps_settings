@@ -32,9 +32,10 @@ import androidx.slice.core.SliceAction;
 import androidx.slice.widget.SliceLiveData;
 
 import com.android.settings.R;
-import com.android.settings.notification.zen.ZenModeSliceBuilder;
 import com.android.settings.testutils.shadow.ShadowNotificationManager;
+import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -44,7 +45,7 @@ import org.robolectric.annotation.Config;
 
 import java.util.List;
 
-@Config(shadows = ShadowNotificationManager.class)
+@Config(shadows = {ShadowNotificationManager.class, ShadowRestrictedLockUtilsInternal.class})
 @RunWith(RobolectricTestRunner.class)
 public class ZenModeSliceBuilderTest {
 
@@ -58,6 +59,11 @@ public class ZenModeSliceBuilderTest {
         SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);
     }
 
+    @After
+    public void tearDown() {
+        ShadowRestrictedLockUtilsInternal.reset();
+    }
+
     @Test
     public void getZenModeSlice_correctSliceContent() {
         final Slice dndSlice = ZenModeSliceBuilder.getSlice(mContext);
@@ -68,6 +74,22 @@ public class ZenModeSliceBuilderTest {
 
         final List<SliceAction> toggles = metadata.getToggles();
         assertThat(toggles).hasSize(1);
+
+        final SliceAction primaryAction = metadata.getPrimaryAction();
+        assertThat(primaryAction.getIcon()).isNull();
+    }
+
+    @Test
+    public void getZenModeSlice_managedByAdmin_shouldNotHaveToggle() {
+        ShadowRestrictedLockUtilsInternal.setRestricted(true);
+        final Slice dndSlice = ZenModeSliceBuilder.getSlice(mContext);
+
+        final SliceMetadata metadata = SliceMetadata.from(mContext, dndSlice);
+        assertThat(metadata.getTitle()).isEqualTo(
+                mContext.getString(R.string.zen_mode_settings_title));
+
+        final List<SliceAction> toggles = metadata.getToggles();
+        assertThat(toggles).hasSize(0);
 
         final SliceAction primaryAction = metadata.getPrimaryAction();
         assertThat(primaryAction.getIcon()).isNull();
