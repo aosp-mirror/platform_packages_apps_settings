@@ -252,33 +252,6 @@ public class BatteryEntry {
         return mPowerComponentId;
     }
 
-    void getQuickNameIconForUid(
-            final int uid, final String[] packages, final boolean loadDataInBackground) {
-        // Locale sync to system config in Settings
-        final Locale locale = Locale.getDefault();
-        if (sCurrentLocale != locale) {
-            clearUidCache();
-            sCurrentLocale = locale;
-        }
-
-        final String uidString = Integer.toString(uid);
-        if (sUidCache.containsKey(uidString)) {
-            UidToDetail utd = sUidCache.get(uidString);
-            mDefaultPackageName = utd.mPackageName;
-            mName = utd.mName;
-            mIcon = utd.mIcon;
-            return;
-        }
-
-        if (packages == null || packages.length == 0) {
-            final NameAndIcon nameAndIcon = getNameAndIconFromUid(mContext, mName, uid);
-            mIcon = nameAndIcon.mIcon;
-            mName = nameAndIcon.mName;
-        } else {
-            mIcon = mContext.getPackageManager().getDefaultActivityIcon();
-        }
-    }
-
     /** Loads the app label and icon image and stores into the cache. */
     public static NameAndIcon loadNameAndIcon(
             Context context,
