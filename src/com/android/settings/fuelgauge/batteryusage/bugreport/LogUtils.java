@@ -39,6 +39,12 @@ public final class LogUtils {
     private static final Duration DUMP_TIME_OFFSET_FOR_ENTRY = Duration.ofHours(4);
 
     static void dumpBatteryUsageDatabaseHist(Context context, PrintWriter writer) {
+        // Dumps periodic job events.
+        writer.println("\nBattery PeriodicJob History:");
+        BatteryUsageLogUtils.printHistoricalLog(context, writer);
+        writer.flush();
+
+        // Dumps phenotype environments.
         DatabaseUtils.dump(context, writer);
         writer.flush();
         final BatteryStateDao dao =
@@ -47,6 +53,7 @@ public final class LogUtils {
                         .batteryStateDao();
         final long timeOffset =
                 Clock.systemUTC().millis() - DUMP_TIME_OFFSET.toMillis();
+
         // Gets all distinct timestamps.
         final List<Long> timestamps = dao.getDistinctTimestamps(timeOffset);
         final int distinctCount = timestamps.size();

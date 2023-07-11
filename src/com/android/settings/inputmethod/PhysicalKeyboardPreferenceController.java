@@ -16,6 +16,7 @@
 
 package com.android.settings.inputmethod;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.hardware.input.InputManager;
@@ -66,9 +67,7 @@ public class PhysicalKeyboardPreferenceController extends AbstractPreferenceCont
             return false;
         }
         Intent intent = new Intent(Settings.ACTION_HARD_KEYBOARD_SETTINGS);
-        intent.putExtra(
-                NewKeyboardSettingsUtils.EXTRA_INTENT_FROM,
-                "com.android.settings.inputmethod.PhysicalKeyboardPreferenceController");
+        intent.putExtra(Settings.EXTRA_ENTRYPOINT, SettingsEnums.KEYBOARD_SETTINGS);
         mContext.startActivity(intent);
         return true;
     }
