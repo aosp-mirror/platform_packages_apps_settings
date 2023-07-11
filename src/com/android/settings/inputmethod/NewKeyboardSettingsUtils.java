@@ -33,12 +33,6 @@ import java.util.List;
  */
 public class NewKeyboardSettingsUtils {
 
-    /**
-     * Record the class name of the intent sender for metrics.
-     */
-    public static final String EXTRA_INTENT_FROM =
-            "com.android.settings.inputmethod.EXTRA_INTENT_FROM";
-
     static final String EXTRA_TITLE = "keyboard_layout_picker_title";
     static final String EXTRA_USER_ID = "user_id";
     static final String EXTRA_INPUT_DEVICE_IDENTIFIER = "input_device_identifier";

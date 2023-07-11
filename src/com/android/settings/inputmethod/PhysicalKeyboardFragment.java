@@ -123,9 +123,9 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
         }
         InputDeviceIdentifier inputDeviceIdentifier = activity.getIntent().getParcelableExtra(
                 KeyboardLayoutPickerFragment.EXTRA_INPUT_DEVICE_IDENTIFIER);
-        String intentFromWhere =
-                activity.getIntent().getStringExtra(NewKeyboardSettingsUtils.EXTRA_INTENT_FROM);
-        if (intentFromWhere != null) {
+        int intentFromWhere =
+                activity.getIntent().getIntExtra(android.provider.Settings.EXTRA_ENTRYPOINT, -1);
+        if (intentFromWhere != -1) {
             mMetricsFeatureProvider.action(
                     getContext(), SettingsEnums.ACTION_OPEN_PK_SETTINGS_FROM, intentFromWhere);
         }
