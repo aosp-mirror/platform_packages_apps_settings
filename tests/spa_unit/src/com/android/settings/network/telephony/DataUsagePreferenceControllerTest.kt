@@ -32,6 +32,7 @@ import com.android.dx.mockito.inline.extended.ExtendedMockito
 import com.android.settings.core.BasePreferenceController.AVAILABLE
 import com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE
 import com.android.settings.datausage.DataUsageUtils
+import com.android.settings.datausage.lib.DataUsageLib
 import com.android.settingslib.net.DataUsageController
 import com.android.settingslib.net.DataUsageController.DataUsageInfo
 import com.android.settingslib.spa.testutils.waitUntil
@@ -80,13 +81,14 @@ class DataUsagePreferenceControllerTest {
             .initMocks(this)
             .mockStatic(SubscriptionManager::class.java)
             .spyStatic(DataUsageUtils::class.java)
+            .spyStatic(DataUsageLib::class.java)
             .strictness(Strictness.LENIENT)
             .startMocking()
 
         whenever(SubscriptionManager.isValidSubscriptionId(SUB_ID)).thenReturn(true)
         ExtendedMockito.doReturn(true).`when` { DataUsageUtils.hasMobileData(context) }
         ExtendedMockito.doReturn(networkTemplate)
-            .`when` { DataUsageUtils.getMobileTemplate(context, SUB_ID) }
+            .`when` { DataUsageLib.getMobileTemplate(context, SUB_ID) }
         preference.key = TEST_KEY
         whenever(preferenceScreen.findPreference<Preference>(TEST_KEY)).thenReturn(preference)
 
