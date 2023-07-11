@@ -289,12 +289,14 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         mLogStringBuilder.append(", onPause mode = ").append(selectedPreference);
         logMetricCategory(selectedPreference);
 
-        BatteryHistoricalLogUtil.writeLog(
-                getContext().getApplicationContext(),
-                Action.LEAVE,
-                BatteryHistoricalLogUtil.getPackageNameWithUserId(
-                        mBatteryOptimizeUtils.getPackageName(), UserHandle.myUserId()),
-                mLogStringBuilder.toString());
+        mExecutor.execute(() -> {
+            BatteryOptimizeLogUtils.writeLog(
+                    getContext().getApplicationContext(),
+                    Action.LEAVE,
+                    BatteryOptimizeLogUtils.getPackageNameWithUserId(
+                            mBatteryOptimizeUtils.getPackageName(), UserHandle.myUserId()),
+                    mLogStringBuilder.toString());
+        });
         Log.d(TAG, "Leave with mode: " + selectedPreference);
     }
 

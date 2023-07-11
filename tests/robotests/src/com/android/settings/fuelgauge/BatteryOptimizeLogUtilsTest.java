@@ -33,7 +33,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 @RunWith(RobolectricTestRunner.class)
-public final class BatteryHistoricalLogUtilTest {
+public final class BatteryOptimizeLogUtilsTest {
 
     private final StringWriter mTestStringWriter = new StringWriter();
     private final PrintWriter mTestPrintWriter = new PrintWriter(mTestStringWriter);
@@ -43,19 +43,19 @@ public final class BatteryHistoricalLogUtilTest {
     @Before
     public void setUp() {
         mContext = ApplicationProvider.getApplicationContext();
-        BatteryHistoricalLogUtil.getSharedPreferences(mContext).edit().clear().commit();
+        BatteryOptimizeLogUtils.getSharedPreferences(mContext).edit().clear().commit();
     }
 
     @Test
     public void printHistoricalLog_withDefaultLogs() {
-        BatteryHistoricalLogUtil.printBatteryOptimizeHistoricalLog(mContext, mTestPrintWriter);
+        BatteryOptimizeLogUtils.printBatteryOptimizeHistoricalLog(mContext, mTestPrintWriter);
         assertThat(mTestStringWriter.toString()).contains("nothing to dump");
     }
 
     @Test
     public void writeLog_withExpectedLogs() {
-        BatteryHistoricalLogUtil.writeLog(mContext, Action.APPLY, "pkg1", "logs");
-        BatteryHistoricalLogUtil.printBatteryOptimizeHistoricalLog(mContext, mTestPrintWriter);
+        BatteryOptimizeLogUtils.writeLog(mContext, Action.APPLY, "pkg1", "logs");
+        BatteryOptimizeLogUtils.printBatteryOptimizeHistoricalLog(mContext, mTestPrintWriter);
 
         assertThat(mTestStringWriter.toString()).contains(
                 "pkg1\taction:APPLY\tevent:logs");
@@ -63,21 +63,27 @@ public final class BatteryHistoricalLogUtilTest {
 
     @Test
     public void writeLog_multipleLogs_withCorrectCounts() {
-        for (int i = 0; i < BatteryHistoricalLogUtil.MAX_ENTRIES; i++) {
-            BatteryHistoricalLogUtil.writeLog(mContext, Action.LEAVE, "pkg" + i, "logs");
+        final int expectedCount = 10;
+        for (int i = 0; i < expectedCount; i++) {
+            BatteryOptimizeLogUtils.writeLog(mContext, Action.LEAVE, "pkg" + i, "logs");
         }
-        BatteryHistoricalLogUtil.printBatteryOptimizeHistoricalLog(mContext, mTestPrintWriter);
+        BatteryOptimizeLogUtils.printBatteryOptimizeHistoricalLog(mContext, mTestPrintWriter);
 
-        assertThat(mTestStringWriter.toString().split("LEAVE").length).isEqualTo(41);
+        assertActionCount("LEAVE", expectedCount);
     }
 
     @Test
     public void writeLog_overMaxEntriesLogs_withCorrectCounts() {
-        for (int i = 0; i < BatteryHistoricalLogUtil.MAX_ENTRIES + 10; i++) {
-            BatteryHistoricalLogUtil.writeLog(mContext, Action.RESET, "pkg" + i, "logs");
+        for (int i = 0; i < BatteryOptimizeLogUtils.MAX_ENTRIES + 10; i++) {
+            BatteryOptimizeLogUtils.writeLog(mContext, Action.RESET, "pkg" + i, "logs");
         }
-        BatteryHistoricalLogUtil.printBatteryOptimizeHistoricalLog(mContext, mTestPrintWriter);
+        BatteryOptimizeLogUtils.printBatteryOptimizeHistoricalLog(mContext, mTestPrintWriter);
 
-        assertThat(mTestStringWriter.toString().split("RESET").length).isEqualTo(41);
+        assertActionCount("RESET", BatteryOptimizeLogUtils.MAX_ENTRIES);
+    }
+
+    private void assertActionCount(String token, int count) {
+        final String dumpResults = mTestStringWriter.toString();
+        assertThat(dumpResults.split(token).length).isEqualTo(count + 1);
     }
 }

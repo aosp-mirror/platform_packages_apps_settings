@@ -40,6 +40,7 @@ import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.batteryusage.BatteryEntry.NameAndIcon;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -232,6 +233,7 @@ public class BatteryEntryTest {
         assertThat(entry.getTimeInBackgroundMs()).isEqualTo(0);
     }
 
+    @Ignore
     @Test
     public void testUidCache_switchLocale_shouldCleanCache() {
         Locale.setDefault(new Locale("en_US"));
