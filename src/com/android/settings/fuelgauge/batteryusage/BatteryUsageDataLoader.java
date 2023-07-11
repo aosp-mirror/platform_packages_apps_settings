@@ -23,6 +23,9 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
+import com.android.settings.fuelgauge.BatteryUsageHistoricalLogEntry.Action;
+import com.android.settings.fuelgauge.batteryusage.bugreport.BatteryUsageLogUtils;
+
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -46,6 +49,7 @@ public final class BatteryUsageDataLoader {
 
     @VisibleForTesting
     static void loadUsageData(final Context context, final boolean isFullChargeStart) {
+        BatteryUsageLogUtils.writeLog(context, Action.FETCH_USAGE_DATA, "");
         final long start = System.currentTimeMillis();
         final BatteryUsageStats batteryUsageStats = DataProcessor.getBatteryUsageStats(context);
         final List<BatteryEntry> batteryEntryList =

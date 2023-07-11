@@ -355,7 +355,7 @@ public class BatteryUtils {
     @SuppressWarnings("unchecked")
     public static <T extends MessageLite> T parseProtoFromString(
             String serializedProto, T protoClass) {
-        if (serializedProto.isEmpty()) {
+        if (serializedProto == null || serializedProto.isEmpty()) {
             return (T) protoClass.getDefaultInstanceForType();
         }
         try {

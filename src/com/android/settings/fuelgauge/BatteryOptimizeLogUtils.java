@@ -20,22 +20,24 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Base64;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.fuelgauge.BatteryOptimizeHistoricalLogEntry.Action;
 import com.android.settings.fuelgauge.batteryusage.ConvertUtils;
-
-import com.google.common.annotations.VisibleForTesting;
 
 import java.io.PrintWriter;
 import java.util.List;
 
 /** Writes and reads a historical log of battery related state change events. */
-public final class BatteryHistoricalLogUtil {
+public final class BatteryOptimizeLogUtils {
+    private static final String TAG = "BatteryOptimizeLogUtils";
     private static final String BATTERY_OPTIMIZE_FILE_NAME = "battery_optimize_historical_logs";
     private static final String LOGS_KEY = "battery_optimize_logs_key";
-    private static final String TAG = "BatteryHistoricalLogUtil";
 
     @VisibleForTesting
     static final int MAX_ENTRIES = 40;
+
+    private BatteryOptimizeLogUtils() {}
 
     /** Writes a log entry for battery optimization mode. */
     static void writeLog(
@@ -67,7 +69,7 @@ public final class BatteryHistoricalLogUtil {
         newLogBuilder.addLogEntry(logEntry);
 
         String loggingContent =
-            Base64.encodeToString(newLogBuilder.build().toByteArray(), Base64.DEFAULT);
+                Base64.encodeToString(newLogBuilder.build().toByteArray(), Base64.DEFAULT);
         sharedPreferences
                 .edit()
                 .putString(LOGS_KEY, loggingContent)
@@ -94,7 +96,7 @@ public final class BatteryHistoricalLogUtil {
         if (logEntryList.isEmpty()) {
             writer.println("\tnothing to dump");
         } else {
-            writer.println("0:UNKNOWN 1:RESTRICTED  2:UNRESTRICTED 3:OPTIMIZED");
+            writer.println("0:UNKNOWN 1:RESTRICTED 2:UNRESTRICTED 3:OPTIMIZED");
             logEntryList.forEach(entry -> writer.println(toString(entry)));
         }
     }
@@ -113,6 +115,7 @@ public final class BatteryHistoricalLogUtil {
 
     @VisibleForTesting
     static SharedPreferences getSharedPreferences(Context context) {
-        return context.getSharedPreferences(BATTERY_OPTIMIZE_FILE_NAME, Context.MODE_PRIVATE);
+        return context.getApplicationContext()
+                .getSharedPreferences(BATTERY_OPTIMIZE_FILE_NAME, Context.MODE_PRIVATE);
     }
 }
