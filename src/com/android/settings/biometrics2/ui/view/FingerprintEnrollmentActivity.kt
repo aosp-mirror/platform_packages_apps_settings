@@ -130,6 +130,8 @@ open class FingerprintEnrollmentActivity : FragmentActivity() {
         viewModelProvider[FingerprintEnrollErrorDialogViewModel::class.java]
     }
 
+    private var isFirstFragmentAdded = false
+
     private val introActionObserver: Observer<Int> = Observer<Int> { action ->
         if (DEBUG) {
             Log.d(TAG, "introActionObserver($action)")
@@ -168,7 +170,6 @@ open class FingerprintEnrollmentActivity : FragmentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.onRestoreInstanceState(savedInstanceState)
         autoCredentialViewModel.setCredentialModel(savedInstanceState, intent)
 
         // Theme
@@ -181,12 +182,12 @@ open class FingerprintEnrollmentActivity : FragmentActivity() {
         val fragment: Fragment? = supportFragmentManager.findFragmentById(
             R.id.fragment_container_view
         )
-        if (DEBUG) {
-            Log.d(
-                TAG, "onCreate() has savedInstance:" + (savedInstanceState != null)
-                        + ", fragment:" + fragment
-            )
-        }
+        Log.d(
+            TAG,
+            "onCreate() has savedInstance:$(savedInstanceState != null), fragment:$fragment"
+        )
+
+        isFirstFragmentAdded = (savedInstanceState != null)
         if (fragment == null) {
             checkCredential()
             if (viewModel.request.isSkipFindSensor) {
@@ -255,12 +256,12 @@ open class FingerprintEnrollmentActivity : FragmentActivity() {
     }
 
     private fun startFragment(fragmentClass: Class<out Fragment>, tag: String) {
-        if (!viewModel.isFirstFragmentAdded) {
+        if (!isFirstFragmentAdded) {
             supportFragmentManager.beginTransaction()
                 .setReorderingAllowed(true)
                 .replace(R.id.fragment_container_view, fragmentClass, null, tag)
                 .commit()
-            viewModel.setIsFirstFragmentAdded()
+            isFirstFragmentAdded = true
         } else {
             supportFragmentManager.beginTransaction()
                 .setReorderingAllowed(true)
@@ -300,9 +301,9 @@ open class FingerprintEnrollmentActivity : FragmentActivity() {
         // Always setToken into progressViewModel even it is not necessary action for UDFPS
         progressViewModel.setToken(autoCredentialViewModel.token)
         attachFindSensorViewModel()
-        val fragmentClass: Class<out Fragment> = if (viewModel.canAssumeUdfps()) {
+        val fragmentClass: Class<out Fragment> = if (viewModel.canAssumeUdfps) {
             FingerprintEnrollFindUdfpsFragment::class.java
-        } else if (viewModel.canAssumeSfps()) {
+        } else if (viewModel.canAssumeSfps) {
             FingerprintEnrollFindSfpsFragment::class.java
         } else {
             FingerprintEnrollFindRfpsFragment::class.java
@@ -327,9 +328,9 @@ open class FingerprintEnrollmentActivity : FragmentActivity() {
         // Always setToken into progressViewModel even it is not necessary action for SFPS or RFPS
         progressViewModel.setToken(autoCredentialViewModel.token)
         attachEnrollingViewModel()
-        val fragmentClass: Class<out Fragment> = if (viewModel.canAssumeUdfps()) {
+        val fragmentClass: Class<out Fragment> = if (viewModel.canAssumeUdfps) {
             FingerprintEnrollEnrollingUdfpsFragment::class.java
-        } else if (viewModel.canAssumeSfps()) {
+        } else if (viewModel.canAssumeSfps) {
             FingerprintEnrollEnrollingSfpsFragment::class.java
         } else {
             FingerprintEnrollEnrollingRfpsFragment::class.java
@@ -345,7 +346,7 @@ open class FingerprintEnrollmentActivity : FragmentActivity() {
     }
 
     private fun startFinishFragment() {
-        viewModel.setIsNewFingerprintAdded()
+        viewModel.isNewFingerprintAdded = true
         attachFinishViewModel()
         if (viewModel.request.isSkipFindSensor) {
             // Set page to Finish
@@ -434,7 +435,7 @@ open class FingerprintEnrollmentActivity : FragmentActivity() {
                     viewModel.request.isSuw,
                     viewModel.request.suwExtras
                 )
-                if (!viewModel.isWaitingActivityResult().compareAndSet(false, true)) {
+                if (!viewModel.isWaitingActivityResult.compareAndSet(false, true)) {
                     Log.w(TAG, "chooseLock, fail to set isWaiting flag to true")
                 }
                 chooseLockLauncher.launch(intent)
@@ -452,7 +453,7 @@ open class FingerprintEnrollmentActivity : FragmentActivity() {
                     // is already set.
                     Log.e(TAG, "confirmLock, launched is true")
                     finish()
-                } else if (!viewModel.isWaitingActivityResult().compareAndSet(false, true)) {
+                } else if (!viewModel.isWaitingActivityResult.compareAndSet(false, true)) {
                     Log.w(TAG, "confirmLock, fail to set isWaiting flag to true")
                 }
                 return
@@ -464,7 +465,7 @@ open class FingerprintEnrollmentActivity : FragmentActivity() {
     }
 
     private fun onChooseOrConfirmLockResult(isChooseLock: Boolean, activityResult: ActivityResult) {
-        if (!viewModel.isWaitingActivityResult().compareAndSet(true, false)) {
+        if (!viewModel.isWaitingActivityResult.compareAndSet(true, false)) {
             Log.w(TAG, "isChooseLock:$isChooseLock, fail to unset waiting flag")
         }
         if (autoCredentialViewModel.checkNewCredentialFromActivityResult(
@@ -631,7 +632,6 @@ open class FingerprintEnrollmentActivity : FragmentActivity() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        viewModel.onSaveInstanceState(outState)
         autoCredentialViewModel.onSaveInstanceState(outState)
     }
 
