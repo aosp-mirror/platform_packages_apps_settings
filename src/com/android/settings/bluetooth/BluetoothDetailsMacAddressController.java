@@ -59,6 +59,12 @@ public class BluetoothDetailsMacAddressController extends BluetoothDetailsContro
                 title.append("\n").append(member.getIdentityAddress());
             }
             mFooterPreference.setTitle(title);
+        } else if (mCachedDevice.getSubDevice() != null) {
+            StringBuilder title = new StringBuilder(mContext.getString(
+                    R.string.bluetooth_multuple_devices_mac_address,
+                    mCachedDevice.getIdentityAddress()));
+            title.append("\n").append(mCachedDevice.getSubDevice().getIdentityAddress());
+            mFooterPreference.setTitle(title);
         } else {
             mFooterPreference.setTitle(mContext.getString(
                     R.string.bluetooth_device_mac_address, mCachedDevice.getIdentityAddress()));
