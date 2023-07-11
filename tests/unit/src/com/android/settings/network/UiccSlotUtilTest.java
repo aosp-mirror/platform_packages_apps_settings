@@ -20,10 +20,13 @@ import static android.telephony.UiccSlotInfo.CARD_STATE_INFO_PRESENT;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.Intent;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -49,6 +52,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 
 @RunWith(AndroidJUnit4.class)
 public class UiccSlotUtilTest {
@@ -736,6 +740,25 @@ public class UiccSlotUtilTest {
         boolean testSlot = UiccSlotUtil.isRemovableSimEnabled(mTelephonyManager);
 
         assertThat(testSlot).isFalse();
+    }
+
+    @Test
+    public void performSwitchToSlot_setSimSlotMapping() throws UiccSlotsException {
+        Collection<UiccSlotMapping> uiccSlotMappings = createUiccSlotMappingDualPortsBNoOrding();
+
+        UiccSlotUtil.performSwitchToSlot(mTelephonyManager, uiccSlotMappings, mContext);
+
+        verify(mTelephonyManager).setSimSlotMapping(any());
+    }
+
+    @Test
+    public void onReceiveSimSlotChangeReceiver_receiveAction_timerCountDown() {
+        CountDownLatch latch = spy(new CountDownLatch(1));
+        UiccSlotUtil.SimSlotChangeReceiver receive = new UiccSlotUtil.SimSlotChangeReceiver(latch);
+
+        receive.onReceive(mContext, new Intent(TelephonyManager.ACTION_SIM_SLOT_STATUS_CHANGED));
+
+        verify(latch).countDown();
     }
 
     private void compareTwoUiccSlotMappings(Collection<UiccSlotMapping> testUiccSlotMappings,
