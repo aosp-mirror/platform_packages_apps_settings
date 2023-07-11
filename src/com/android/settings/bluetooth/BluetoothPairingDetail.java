@@ -101,10 +101,8 @@ public class BluetoothPairingDetail extends BluetoothDevicePairingDetailBase imp
         if (bluetoothState == BluetoothAdapter.STATE_ON) {
             if (mInitialScanStarted) {
                 // Don't show bonded devices when screen turned back on
-                setFilter(BluetoothDeviceFilter.UNBONDED_DEVICE_FILTER);
-                addCachedDevices();
+                addCachedDevices(BluetoothDeviceFilter.UNBONDED_DEVICE_FILTER);
             }
-            setFilter(BluetoothDeviceFilter.ALL_FILTER);
             updateFooterPreference(mFooterPreference);
             mAlwaysDiscoverable.start();
         }
