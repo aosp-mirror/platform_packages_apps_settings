@@ -108,9 +108,9 @@ public class FingerprintEnrollProgressViewModelTest {
         mViewModel.setToken(token);
 
         // Start enrollment
-        final boolean ret = mViewModel.startEnrollment(enrollReason);
+        final Object ret = mViewModel.startEnrollment(enrollReason);
 
-        assertThat(ret).isTrue();
+        assertThat(ret).isNotNull();
         verify(mFingerprintUpdater, only()).enroll(eq(token), any(CancellationSignal.class),
                 eq(TEST_USER_ID), any(EnrollmentCallback.class), eq(enrollReason));
         assertThat(mCallbackWrapper.mValue instanceof MessageDisplayController).isFalse();
@@ -123,9 +123,9 @@ public class FingerprintEnrollProgressViewModelTest {
         mViewModel.setToken(token);
 
         // Start enrollment
-        final boolean ret = mViewModel.startEnrollment(enrollReason);
+        final Object ret = mViewModel.startEnrollment(enrollReason);
 
-        assertThat(ret).isTrue();
+        assertThat(ret).isNotNull();
         verify(mFingerprintUpdater, only()).enroll(eq(token), any(CancellationSignal.class),
                 eq(TEST_USER_ID), any(EnrollmentCallback.class), eq(enrollReason));
         assertThat(mCallbackWrapper.mValue instanceof MessageDisplayController).isFalse();
@@ -142,9 +142,9 @@ public class FingerprintEnrollProgressViewModelTest {
         mViewModel.setToken(token);
 
         // Start enrollment
-        final boolean ret = mViewModel.startEnrollment(enrollReason);
+        final Object ret = mViewModel.startEnrollment(enrollReason);
 
-        assertThat(ret).isTrue();
+        assertThat(ret).isNotNull();
         verify(mFingerprintUpdater, only()).enroll(eq(token), any(CancellationSignal.class),
                 eq(TEST_USER_ID), any(MessageDisplayController.class), eq(enrollReason));
         assertThat(mCallbackWrapper.mValue).isNotNull();
@@ -166,9 +166,9 @@ public class FingerprintEnrollProgressViewModelTest {
     @Test
     public void testStartEnrollmentFailBecauseOfNoToken() {
         // Start enrollment
-        final boolean ret = mViewModel.startEnrollment(ENROLL_FIND_SENSOR);
+        final Object ret = mViewModel.startEnrollment(ENROLL_FIND_SENSOR);
 
-        assertThat(ret).isFalse();
+        assertThat(ret).isNull();
         verify(mFingerprintUpdater, never()).enroll(any(byte[].class),
                 any(CancellationSignal.class), anyInt(), any(EnrollmentCallback.class), anyInt());
     }
@@ -177,8 +177,8 @@ public class FingerprintEnrollProgressViewModelTest {
     public void testCancelEnrollment() {
         // Start enrollment
         mViewModel.setToken(new byte[] { 1, 2, 3 });
-        final boolean ret = mViewModel.startEnrollment(ENROLL_ENROLL);
-        assertThat(ret).isTrue();
+        final Object ret = mViewModel.startEnrollment(ENROLL_ENROLL);
+        assertThat(ret).isNotNull();
         assertThat(mCancellationSignalWrapper.mValue).isNotNull();
 
         // Cancel enrollment
@@ -191,8 +191,8 @@ public class FingerprintEnrollProgressViewModelTest {
     public void testProgressUpdate() {
         // Start enrollment
         mViewModel.setToken(new byte[] { 1, 2, 3 });
-        final boolean ret = mViewModel.startEnrollment(ENROLL_ENROLL);
-        assertThat(ret).isTrue();
+        final Object ret = mViewModel.startEnrollment(ENROLL_ENROLL);
+        assertThat(ret).isNotNull();
         assertThat(mCallbackWrapper.mValue).isNotNull();
 
         // Test default value
@@ -228,8 +228,8 @@ public class FingerprintEnrollProgressViewModelTest {
     public void testProgressUpdateClearHelpMessage() {
         // Start enrollment
         mViewModel.setToken(new byte[] { 1, 2, 3 });
-        final boolean ret = mViewModel.startEnrollment(ENROLL_ENROLL);
-        assertThat(ret).isTrue();
+        final Object ret = mViewModel.startEnrollment(ENROLL_ENROLL);
+        assertThat(ret).isNotNull();
         assertThat(mCallbackWrapper.mValue).isNotNull();
         final LiveData<EnrollmentProgress> progressLiveData = mViewModel.getProgressLiveData();
         final LiveData<EnrollmentStatusMessage> helpMsgLiveData =
@@ -271,8 +271,8 @@ public class FingerprintEnrollProgressViewModelTest {
         mViewModel.setToken(new byte[] { 1, 2, 3 });
 
         // Start enrollment
-        final boolean ret = mViewModel.startEnrollment(ENROLL_ENROLL);
-        assertThat(ret).isTrue();
+        final Object ret = mViewModel.startEnrollment(ENROLL_ENROLL);
+        assertThat(ret).isNotNull();
         assertThat(mCallbackWrapper.mValue).isNotNull();
 
         // Test default value
@@ -308,8 +308,8 @@ public class FingerprintEnrollProgressViewModelTest {
     public void testGetErrorMessageLiveData() {
         // Start enrollment
         mViewModel.setToken(new byte[] { 1, 2, 3 });
-        final boolean ret = mViewModel.startEnrollment(ENROLL_ENROLL);
-        assertThat(ret).isTrue();
+        final Object ret = mViewModel.startEnrollment(ENROLL_ENROLL);
+        assertThat(ret).isNotNull();
         assertThat(mCallbackWrapper.mValue).isNotNull();
 
         // Check default value
@@ -330,8 +330,8 @@ public class FingerprintEnrollProgressViewModelTest {
     public void testGetHelpMessageLiveData() {
         // Start enrollment
         mViewModel.setToken(new byte[] { 1, 2, 3 });
-        final boolean ret = mViewModel.startEnrollment(ENROLL_ENROLL);
-        assertThat(ret).isTrue();
+        final Object ret = mViewModel.startEnrollment(ENROLL_ENROLL);
+        assertThat(ret).isNotNull();
         assertThat(mCallbackWrapper.mValue).isNotNull();
 
         // Check default value
@@ -352,8 +352,8 @@ public class FingerprintEnrollProgressViewModelTest {
     public void testGetAcquireLiveData() {
         // Start enrollment
         mViewModel.setToken(new byte[] { 1, 2, 3 });
-        final boolean ret = mViewModel.startEnrollment(ENROLL_ENROLL);
-        assertThat(ret).isTrue();
+        final Object ret = mViewModel.startEnrollment(ENROLL_ENROLL);
+        assertThat(ret).isNotNull();
         assertThat(mCallbackWrapper.mValue).isNotNull();
 
         // Check default value
@@ -369,8 +369,8 @@ public class FingerprintEnrollProgressViewModelTest {
     public void testGetPointerDownLiveData() {
         // Start enrollment
         mViewModel.setToken(new byte[] { 1, 2, 3 });
-        final boolean ret = mViewModel.startEnrollment(ENROLL_ENROLL);
-        assertThat(ret).isTrue();
+        final Object ret = mViewModel.startEnrollment(ENROLL_ENROLL);
+        assertThat(ret).isNotNull();
         assertThat(mCallbackWrapper.mValue).isNotNull();
 
         // Check default value
@@ -387,8 +387,8 @@ public class FingerprintEnrollProgressViewModelTest {
     public void testGetPointerUpLiveData() {
         // Start enrollment
         mViewModel.setToken(new byte[] { 1, 2, 3 });
-        final boolean ret = mViewModel.startEnrollment(ENROLL_ENROLL);
-        assertThat(ret).isTrue();
+        final Object ret = mViewModel.startEnrollment(ENROLL_ENROLL);
+        assertThat(ret).isNotNull();
         assertThat(mCallbackWrapper.mValue).isNotNull();
 
         // Check default value

@@ -16,7 +16,8 @@
 package com.android.settings.biometrics2.ui.view
 
 import android.content.Context
-import android.hardware.fingerprint.FingerprintManager
+import android.hardware.biometrics.BiometricFingerprintConstants
+import android.hardware.fingerprint.FingerprintManager.ENROLL_FIND_SENSOR
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -26,21 +27,27 @@ import android.view.ViewGroup
 import androidx.annotation.RawRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.airbnb.lottie.LottieAnimationView
 import com.android.settings.R
 import com.android.settings.biometrics2.ui.model.EnrollmentProgress
 import com.android.settings.biometrics2.ui.model.EnrollmentStatusMessage
 import com.android.settings.biometrics2.ui.viewmodel.DeviceFoldedViewModel
 import com.android.settings.biometrics2.ui.viewmodel.DeviceRotationViewModel
+import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollErrorDialogViewModel
 import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollFindSensorViewModel
 import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollProgressViewModel
 import com.android.settingslib.widget.LottieColorUtils
 import com.google.android.setupcompat.template.FooterBarMixin
 import com.google.android.setupcompat.template.FooterButton
 import com.google.android.setupdesign.GlifLayout
+import kotlinx.coroutines.launch
 
 /**
  * Fragment explaining the side fingerprint sensor location for fingerprint enrollment.
@@ -75,41 +82,41 @@ class FingerprintEnrollFindSfpsFragment : Fragment() {
     private val foldedViewModel: DeviceFoldedViewModel
         get() = _foldedViewModel!!
 
+    private var _errorDialogViewModel: FingerprintEnrollErrorDialogViewModel? = null
+    private val errorDialogViewModel: FingerprintEnrollErrorDialogViewModel
+        get() = _errorDialogViewModel!!
+
     private var findSfpsView: GlifLayout? = null
 
     private val onSkipClickListener =
         View.OnClickListener { _: View? -> viewModel.onSkipButtonClick() }
 
     private val illustrationLottie: LottieAnimationView
-        get() = findSfpsView!!.findViewById<LottieAnimationView>(R.id.illustration_lottie)!!
+        get() = findSfpsView!!.findViewById(R.id.illustration_lottie)!!
+
+    private var enrollingCancelSignal: Any? = null
 
     @Surface.Rotation
     private var animationRotation = -1
 
     private val rotationObserver = Observer { rotation: Int? ->
-        if (DEBUG) {
-            Log.d(TAG, "rotationObserver $rotation")
-        }
         rotation?.let { onRotationChanged(it) }
     }
 
-    private val progressObserver: Observer<EnrollmentProgress> =
-        Observer<EnrollmentProgress> { progress: EnrollmentProgress? ->
-            if (DEBUG) {
-                Log.d(TAG, "progressObserver($progress)")
-            }
-            if (progress != null && !progress.isInitialStep) {
-                stopLookingForFingerprint(true)
-            }
+    private val progressObserver = Observer { progress: EnrollmentProgress? ->
+        if (progress != null && !progress.isInitialStep) {
+            cancelEnrollment(true)
         }
+    }
 
-    private val lastCancelMessageObserver: Observer<EnrollmentStatusMessage> =
-        Observer<EnrollmentStatusMessage> { errorMessage: EnrollmentStatusMessage? ->
-            if (DEBUG) {
-                Log.d(TAG, "lastCancelMessageObserver($errorMessage)")
-            }
-            errorMessage?.let { onLastCancelMessage(it) }
-        }
+    private val errorMessageObserver = Observer{ errorMessage: EnrollmentStatusMessage? ->
+        Log.d(TAG, "errorMessageObserver($errorMessage)")
+        errorMessage?.let { onEnrollmentError(it) }
+    }
+
+    private val canceledSignalObserver = Observer { canceledSignal: Any? ->
+        canceledSignal?.let { onEnrollmentCanceled(it) }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -128,16 +135,21 @@ class FingerprintEnrollFindSfpsFragment : Fragment() {
             view = findSfpsView!!,
             onSkipClickListener = onSkipClickListener
         )
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                errorDialogViewModel.triggerRetryFlow.collect { startEnrollment() }
+            }
+        }
     }
 
     override fun onStart() {
         super.onStart()
-        val isEnrolling: Boolean = progressViewModel.isEnrolling
-        if (DEBUG) {
-            Log.d(TAG, "onStart(), isEnrolling:$isEnrolling")
-        }
-        if (!isEnrolling) {
-            startLookingForFingerprint()
+        val isErrorDialogShown = errorDialogViewModel.isDialogShown
+        Log.d(TAG, "onStart(), isEnrolling:${progressViewModel.isEnrolling}"
+                + ", isErrorDialog:$isErrorDialogShown")
+        if (!isErrorDialogShown) {
+            startEnrollment()
         }
     }
 
@@ -155,51 +167,44 @@ class FingerprintEnrollFindSfpsFragment : Fragment() {
 
     override fun onStop() {
         super.onStop()
-        val isEnrolling: Boolean = progressViewModel.isEnrolling
-        if (DEBUG) {
-            Log.d(TAG, "onStop(), isEnrolling:$isEnrolling")
-        }
-        if (isEnrolling) {
-            stopLookingForFingerprint(false)
-        }
-    }
-
-    private fun startLookingForFingerprint() {
-        if (progressViewModel.isEnrolling) {
-            Log.d(
-                TAG,
-                "startLookingForFingerprint(), failed because isEnrolling is true before starting"
-            )
-            return
-        }
-        progressViewModel.clearProgressLiveData()
-        progressViewModel.progressLiveData.observe(this, progressObserver)
-        val startResult: Boolean =
-            progressViewModel.startEnrollment(FingerprintManager.ENROLL_FIND_SENSOR)
-        if (!startResult) {
-            Log.e(TAG, "startLookingForFingerprint(), failed to start enrollment")
+        val isEnrolling = progressViewModel.isEnrolling
+        val isConfigChange = requireActivity().isChangingConfigurations
+        Log.d(TAG, "onStop(), enrolling:$isEnrolling isConfigChange:$isConfigChange")
+        if (isEnrolling && !isConfigChange) {
+            cancelEnrollment(false)
         }
     }
 
-    private fun stopLookingForFingerprint(waitForLastCancelErrMsg: Boolean) {
-        if (!progressViewModel.isEnrolling) {
-            Log.d(
-                TAG, "stopLookingForFingerprint(), failed because isEnrolling is false before"
-                        + " stopping"
-            )
-            return
-        }
-        if (waitForLastCancelErrMsg) {
-            progressViewModel.clearErrorMessageLiveData() // Prevent got previous error message
-            progressViewModel.errorMessageLiveData.observe(
-                this,
-                lastCancelMessageObserver
-            )
-        }
+    private fun removeEnrollmentObservers() {
+        progressViewModel.errorMessageLiveData.removeObserver(errorMessageObserver)
         progressViewModel.progressLiveData.removeObserver(progressObserver)
+    }
+
+    private fun startEnrollment() {
+        enrollingCancelSignal = progressViewModel.startEnrollment(ENROLL_FIND_SENSOR)
+        if (enrollingCancelSignal == null) {
+            Log.e(TAG, "startEnrollment(), failed to start enrollment")
+        } else {
+            Log.d(TAG, "startEnrollment(), success")
+        }
+        progressViewModel.progressLiveData.observe(this, progressObserver)
+        progressViewModel.errorMessageLiveData.observe(this, errorMessageObserver)
+    }
+
+    private fun cancelEnrollment(waitForLastCancelErrMsg: Boolean) {
+        if (!progressViewModel.isEnrolling) {
+            Log.d(TAG, "cancelEnrollment(), failed because isEnrolling is false")
+            return
+        }
+        removeEnrollmentObservers()
+        if (waitForLastCancelErrMsg) {
+            progressViewModel.canceledSignalLiveData.observe(this, canceledSignalObserver)
+        } else {
+            enrollingCancelSignal = null
+        }
         val cancelResult: Boolean = progressViewModel.cancelEnrollment()
         if (!cancelResult) {
-            Log.e(TAG, "stopLookingForFingerprint(), failed to cancel enrollment")
+            Log.e(TAG, "cancelEnrollment(), failed to cancel enrollment")
         }
     }
 
@@ -210,34 +215,39 @@ class FingerprintEnrollFindSfpsFragment : Fragment() {
         if ((newRotation + 2) % 4 == animationRotation) {
             // Fragment not changed, we just need to play correct rotation animation
             playLottieAnimation(newRotation)
-        } else if (newRotation % 2 != animationRotation % 2) {
-            // Fragment is going to be recreated, just stopLookingForFingerprint() here.
-            stopLookingForFingerprint(true)
         }
     }
 
-    private fun onLastCancelMessage(errorMessage: EnrollmentStatusMessage) {
-        if (errorMessage.msgId == FingerprintManager.FINGERPRINT_ERROR_CANCELED) {
+    private fun onEnrollmentError(errorMessage: EnrollmentStatusMessage) {
+        progressViewModel.cancelEnrollment()
+        lifecycleScope.launch {
+            Log.d(TAG, "newDialogFlow as $errorMessage")
+            errorDialogViewModel.newDialog(errorMessage.msgId)
+        }
+    }
+
+    private fun onEnrollmentCanceled(canceledSignal: Any) {
+        Log.d(
+            TAG,
+            "onEnrollmentCanceled enrolling:$enrollingCancelSignal, canceled:$canceledSignal"
+        )
+        if (enrollingCancelSignal === canceledSignal) {
             val progress: EnrollmentProgress? = progressViewModel.progressLiveData.value
+            progressViewModel.canceledSignalLiveData.removeObserver(canceledSignalObserver)
             progressViewModel.clearProgressLiveData()
-            progressViewModel.errorMessageLiveData.removeObserver(lastCancelMessageObserver)
             if (progress != null && !progress.isInitialStep) {
                 viewModel.onStartButtonClick()
             }
-        } else {
-            Log.e(TAG, "errorMessageObserver($errorMessage)")
         }
     }
 
     private fun playLottieAnimation(@Surface.Rotation rotation: Int) {
         @RawRes val animationRawRes = getSfpsLottieAnimationRawRes(rotation)
-        if (DEBUG) {
-            Log.d(
-                TAG,
-                "play lottie animation $animationRawRes, previous rotation:$animationRotation"
-                        + ", new rotation:" + rotation
-            )
-        }
+        Log.d(
+            TAG,
+            "play lottie animation $animationRawRes, previous rotation:$animationRotation"
+                    + ", new rotation:" + rotation
+        )
         animationRotation = rotation
         illustrationLottie.setAnimation(animationRawRes)
         LottieColorUtils.applyDynamicColors(activity, illustrationLottie)
@@ -247,7 +257,7 @@ class FingerprintEnrollFindSfpsFragment : Fragment() {
 
     @RawRes
     private fun getSfpsLottieAnimationRawRes(@Surface.Rotation rotation: Int): Int {
-        val isFolded = java.lang.Boolean.FALSE != foldedViewModel.getLiveData().getValue()
+        val isFolded = java.lang.Boolean.FALSE != foldedViewModel.liveData.value
         return when (rotation) {
             Surface.ROTATION_90 ->
                 if (isFolded)
@@ -278,6 +288,7 @@ class FingerprintEnrollFindSfpsFragment : Fragment() {
             _progressViewModel = provider[FingerprintEnrollProgressViewModel::class.java]
             _rotationViewModel = provider[DeviceRotationViewModel::class.java]
             _foldedViewModel = provider[DeviceFoldedViewModel::class.java]
+            _errorDialogViewModel = provider[FingerprintEnrollErrorDialogViewModel::class.java]
         }
         super.onAttach(context)
     }

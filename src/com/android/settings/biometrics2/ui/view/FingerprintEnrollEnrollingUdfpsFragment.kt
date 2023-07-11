@@ -17,8 +17,8 @@ package com.android.settings.biometrics2.ui.view
 
 import android.annotation.RawRes
 import android.content.Context
+import android.hardware.biometrics.BiometricFingerprintConstants
 import android.hardware.fingerprint.FingerprintManager.ENROLL_ENROLL
-import android.hardware.fingerprint.FingerprintManager.FINGERPRINT_ERROR_CANCELED
 import android.hardware.fingerprint.FingerprintSensorPropertiesInternal
 import android.os.Bundle
 import android.util.Log
@@ -35,20 +35,25 @@ import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.airbnb.lottie.LottieAnimationView
 import com.airbnb.lottie.LottieComposition
 import com.airbnb.lottie.LottieCompositionFactory
 import com.android.settings.R
-import com.android.settings.biometrics.fingerprint.FingerprintErrorDialog
 import com.android.settings.biometrics2.ui.model.EnrollmentProgress
 import com.android.settings.biometrics2.ui.model.EnrollmentStatusMessage
 import com.android.settings.biometrics2.ui.viewmodel.DeviceRotationViewModel
 import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollEnrollingViewModel
+import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollErrorDialogViewModel
 import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollProgressViewModel
 import com.android.settings.biometrics2.ui.widget.UdfpsEnrollView
 import com.android.settingslib.display.DisplayDensityUtils
+import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 
 /**
@@ -68,6 +73,10 @@ class FingerprintEnrollEnrollingUdfpsFragment : Fragment() {
     private val progressViewModel: FingerprintEnrollProgressViewModel
         get() = _progressViewModel!!
 
+    private var _errorDialogViewModel: FingerprintEnrollErrorDialogViewModel? = null
+    private val errorDialogViewModel: FingerprintEnrollErrorDialogViewModel
+        get() = _errorDialogViewModel!!
+
     private var illustrationLottie: LottieAnimationView? = null
 
     private var haveShownTipLottie = false
@@ -76,22 +85,22 @@ class FingerprintEnrollEnrollingUdfpsFragment : Fragment() {
     private var haveShownCenterLottie = false
     private var haveShownGuideLottie = false
 
-    private var enrollingUdfpsView: RelativeLayout? = null
+    private var enrollingView: RelativeLayout? = null
 
     private val titleText: TextView
-        get() = enrollingUdfpsView!!.findViewById<TextView>(R.id.suc_layout_title)!!
+        get() = enrollingView!!.findViewById(R.id.suc_layout_title)!!
 
     private val subTitleText: TextView
-        get() = enrollingUdfpsView!!.findViewById<TextView>(R.id.sud_layout_subtitle)!!
+        get() = enrollingView!!.findViewById(R.id.sud_layout_subtitle)!!
 
     private val udfpsEnrollView: UdfpsEnrollView
-        get() = enrollingUdfpsView!!.findViewById<UdfpsEnrollView>(R.id.udfps_animation_view)!!
+        get() = enrollingView!!.findViewById(R.id.udfps_animation_view)!!
 
     private val skipBtn: Button
-        get() = enrollingUdfpsView!!.findViewById<Button>(R.id.skip_btn)!!
+        get() = enrollingView!!.findViewById(R.id.skip_btn)!!
 
     private val icon: ImageView
-        get() = enrollingUdfpsView!!.findViewById<ImageView>(R.id.sud_layout_icon)!!
+        get() = enrollingView!!.findViewById(R.id.sud_layout_icon)!!
 
     private val shouldShowLottie: Boolean
         get() {
@@ -108,24 +117,33 @@ class FingerprintEnrollEnrollingUdfpsFragment : Fragment() {
 
     private var rotation = -1
 
+    private var enrollingCancelSignal: Any? = null
+
     private val onSkipClickListener = View.OnClickListener { _: View? ->
         enrollingViewModel.setOnSkipPressed()
-        cancelEnrollment()
+        cancelEnrollment(false)
     }
 
-    private val progressObserver: Observer<EnrollmentProgress> =
-        Observer<EnrollmentProgress> { progress: EnrollmentProgress? ->
-            progress?.let { onEnrollmentProgressChange(it) }
+    private val progressObserver = Observer { progress: EnrollmentProgress? ->
+        if (progress != null && progress.steps >= 0) {
+            onEnrollmentProgressChange(progress)
         }
+    }
 
-    private val helpMessageObserver: Observer<EnrollmentStatusMessage> =
-        Observer<EnrollmentStatusMessage> { helpMessage: EnrollmentStatusMessage? ->
-            helpMessage?.let { onEnrollmentHelp(it) }
-        }
-    private val errorMessageObserver: Observer<EnrollmentStatusMessage> =
-        Observer<EnrollmentStatusMessage> { errorMessage: EnrollmentStatusMessage? ->
-            errorMessage?.let { onEnrollmentError(it) }
-        }
+    private val helpMessageObserver = Observer { helpMessage: EnrollmentStatusMessage? ->
+        Log.d(TAG, "helpMessageObserver($helpMessage)")
+        helpMessage?.let { onEnrollmentHelp(it) }
+    }
+
+    private val errorMessageObserver = Observer { errorMessage: EnrollmentStatusMessage? ->
+        Log.d(TAG, "errorMessageObserver($errorMessage)")
+        errorMessage?.let { onEnrollmentError(it) }
+    }
+
+    private val canceledSignalObserver = Observer { canceledSignal: Any? ->
+        Log.d(TAG, "canceledSignalObserver($canceledSignal)")
+        canceledSignal?.let { onEnrollmentCanceled(it) }
+    }
 
     private val acquireObserver =
         Observer { isAcquiredGood: Boolean? -> isAcquiredGood?.let { onAcquired(it) } }
@@ -144,7 +162,7 @@ class FingerprintEnrollEnrollingUdfpsFragment : Fragment() {
             override fun handleOnBackPressed() {
                 isEnabled = false
                 enrollingViewModel.setOnBackPressed()
-                cancelEnrollment()
+                cancelEnrollment(true)
             }
         }
 
@@ -156,6 +174,7 @@ class FingerprintEnrollEnrollingUdfpsFragment : Fragment() {
             _enrollingViewModel = provider[FingerprintEnrollEnrollingViewModel::class.java]
             _rotationViewModel = provider[DeviceRotationViewModel::class.java]
             _progressViewModel = provider[FingerprintEnrollProgressViewModel::class.java]
+            _errorDialogViewModel = provider[FingerprintEnrollErrorDialogViewModel::class.java]
         }
         super.onAttach(context)
         requireActivity().onBackPressedDispatcher.addCallback(onBackPressedCallback)
@@ -172,7 +191,7 @@ class FingerprintEnrollEnrollingUdfpsFragment : Fragment() {
     ): View = (inflater.inflate(
         R.layout.udfps_enroll_enrolling_v2, container, false
     ) as RelativeLayout).also {
-        enrollingUdfpsView = it
+        enrollingView = it
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -181,23 +200,78 @@ class FingerprintEnrollEnrollingUdfpsFragment : Fragment() {
         updateIllustrationLottie(rotation)
 
         requireActivity().bindFingerprintEnrollEnrollingUdfpsView(
-            view = enrollingUdfpsView!!,
+            view = enrollingView!!,
             sensorProperties = enrollingViewModel.firstFingerprintSensorPropertiesInternal!!,
             rotation = rotation,
             onSkipClickListener = onSkipClickListener,
         )
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                errorDialogViewModel.triggerRetryFlow.collect { retryEnrollment() }
+            }
+        }
     }
 
+    private fun retryEnrollment() {
+        reattachUdfpsEnrollView()
+
+        startEnrollment()
+
+        updateProgress(false /* animate */, progressViewModel.progressLiveData.value!!)
+        progressViewModel.helpMessageLiveData.value.let {
+            if (it != null) {
+                onEnrollmentHelp(it)
+            } else {
+                updateTitleAndDescription()
+            }
+        }
+    }
 
     override fun onStart() {
         super.onStart()
-        startEnrollment()
+        val isEnrolling = progressViewModel.isEnrolling
+        val isErrorDialogShown = errorDialogViewModel.isDialogShown
+        Log.d(TAG, "onStart(), isEnrolling:$isEnrolling, isErrorDialog:$isErrorDialogShown")
+        if (!isErrorDialogShown) {
+            startEnrollment()
+        }
+
         updateProgress(false /* animate */, progressViewModel.progressLiveData.value!!)
-        val msg: EnrollmentStatusMessage? = progressViewModel.helpMessageLiveData.value
-        if (msg != null) {
-            onEnrollmentHelp(msg)
-        } else {
-            updateTitleAndDescription()
+        progressViewModel.helpMessageLiveData.value.let {
+            if (it != null) {
+                onEnrollmentHelp(it)
+            } else {
+                updateTitleAndDescription()
+            }
+        }
+    }
+
+    private fun reattachUdfpsEnrollView() {
+        enrollingView!!.let {
+            val newUdfpsView = LayoutInflater.from(requireActivity()).inflate(
+                R.layout.udfps_enroll_enrolling_v2_udfps_view,
+                null
+            )
+            val index = it.indexOfChild(udfpsEnrollView)
+            val lp = udfpsEnrollView.layoutParams
+
+            it.removeView(udfpsEnrollView)
+            it.addView(newUdfpsView, index, lp)
+            udfpsEnrollView.setSensorProperties(
+                enrollingViewModel.firstFingerprintSensorPropertiesInternal
+            )
+        }
+
+        // Clear lottie status
+        haveShownTipLottie = false
+        haveShownLeftEdgeLottie = false
+        haveShownRightEdgeLottie = false
+        haveShownCenterLottie = false
+        haveShownGuideLottie = false
+        illustrationLottie?.let {
+            it.contentDescription = ""
+            it.visibility = View.GONE
         }
     }
 
@@ -213,18 +287,17 @@ class FingerprintEnrollEnrollingUdfpsFragment : Fragment() {
 
     override fun onStop() {
         removeEnrollmentObservers()
-        if (!activity!!.isChangingConfigurations && progressViewModel.isEnrolling) {
-            progressViewModel.cancelEnrollment()
+        val isEnrolling = progressViewModel.isEnrolling
+        val isConfigChange = requireActivity().isChangingConfigurations
+        Log.d(TAG, "onStop(), enrolling:$isEnrolling isConfigChange:$isConfigChange")
+        if (isEnrolling && !isConfigChange) {
+            cancelEnrollment(false)
         }
         super.onStop()
     }
 
     private fun removeEnrollmentObservers() {
-        preRemoveEnrollmentObservers()
         progressViewModel.errorMessageLiveData.removeObserver(errorMessageObserver)
-    }
-
-    private fun preRemoveEnrollmentObservers() {
         progressViewModel.progressLiveData.removeObserver(progressObserver)
         progressViewModel.helpMessageLiveData.removeObserver(helpMessageObserver)
         progressViewModel.acquireLiveData.removeObserver(acquireObserver)
@@ -232,16 +305,29 @@ class FingerprintEnrollEnrollingUdfpsFragment : Fragment() {
         progressViewModel.pointerUpLiveData.removeObserver(pointerUpObserver)
     }
 
-    private fun cancelEnrollment() {
-        preRemoveEnrollmentObservers()
-        progressViewModel.cancelEnrollment()
+    private fun cancelEnrollment(waitForLastCancelErrMsg: Boolean) {
+        if (!progressViewModel.isEnrolling) {
+            Log.d(TAG, "cancelEnrollment(), failed because isEnrolling is false")
+            return
+        }
+        removeEnrollmentObservers()
+        if (waitForLastCancelErrMsg) {
+            progressViewModel.canceledSignalLiveData.observe(this, canceledSignalObserver)
+        } else {
+            enrollingCancelSignal = null
+        }
+        val cancelResult: Boolean = progressViewModel.cancelEnrollment()
+        if (!cancelResult) {
+            Log.e(TAG, "cancelEnrollment(), failed to cancel enrollment")
+        }
     }
 
     private fun startEnrollment() {
-        val startResult: Boolean =
-            progressViewModel.startEnrollment(ENROLL_ENROLL)
-        if (!startResult) {
+        enrollingCancelSignal = progressViewModel.startEnrollment(ENROLL_ENROLL)
+        if (enrollingCancelSignal == null) {
             Log.e(TAG, "startEnrollment(), failed")
+        } else {
+            Log.d(TAG, "startEnrollment(), success")
         }
         progressViewModel.progressLiveData.observe(this, progressObserver)
         progressViewModel.helpMessageLiveData.observe(this, helpMessageObserver)
@@ -256,17 +342,24 @@ class FingerprintEnrollEnrollingUdfpsFragment : Fragment() {
             Log.d(TAG, "Enrollment not started yet")
             return
         }
+
         val progress = getProgress(enrollmentProgress)
-        if (progressViewModel.progressLiveData.value!!.steps != -1) {
+        Log.d(TAG, "updateProgress($animate, $enrollmentProgress), progress:$progress")
+
+        if (enrollmentProgress.steps != -1) {
             udfpsEnrollView.onEnrollmentProgress(
                 enrollmentProgress.remaining,
                 enrollmentProgress.steps
             )
         }
-        if (animate) {
-            animateProgress(progress)
-        } else if (progress >= PROGRESS_BAR_MAX) {
-            delayedFinishRunnable.run()
+
+        if (progress >= PROGRESS_BAR_MAX) {
+            if (animate) {
+                // Wait animations to finish, then proceed to next page
+                activity!!.mainThreadHandler.postDelayed(delayedFinishRunnable, 400L)
+            } else {
+                delayedFinishRunnable.run()
+            }
         }
     }
 
@@ -278,15 +371,8 @@ class FingerprintEnrollEnrollingUdfpsFragment : Fragment() {
         return PROGRESS_BAR_MAX * displayProgress / (progress.steps + 1)
     }
 
-    private fun animateProgress(progress: Int) {
-        // UDFPS animations are owned by SystemUI
-        if (progress >= PROGRESS_BAR_MAX) {
-            // Wait for any animations in SysUI to finish, then proceed to next page
-            activity!!.mainThreadHandler.postDelayed(delayedFinishRunnable, 400L)
-        }
-    }
-
     private fun updateTitleAndDescription() {
+        Log.d(TAG, "updateTitleAndDescription($currentStage)")
         when (currentStage) {
             STAGE_CENTER -> {
                 titleText.setText(R.string.security_settings_fingerprint_enroll_repeat_title)
@@ -386,7 +472,7 @@ class FingerprintEnrollEnrollingUdfpsFragment : Fragment() {
             illustrationLottie = null
         } else if (shouldShowLottie) {
             illustrationLottie =
-                enrollingUdfpsView!!.findViewById<LottieAnimationView>(R.id.illustration_lottie)
+                enrollingView!!.findViewById(R.id.illustration_lottie)
         }
     }
 
@@ -468,6 +554,7 @@ class FingerprintEnrollEnrollingUdfpsFragment : Fragment() {
     }
 
     private fun onEnrollmentHelp(helpMessage: EnrollmentStatusMessage) {
+        Log.d(TAG, "onEnrollmentHelp($helpMessage)")
         val helpStr: CharSequence = helpMessage.str
         if (helpStr.isNotEmpty()) {
             showError(helpStr)
@@ -476,25 +563,26 @@ class FingerprintEnrollEnrollingUdfpsFragment : Fragment() {
     }
 
     private fun onEnrollmentError(errorMessage: EnrollmentStatusMessage) {
-        removeEnrollmentObservers()
-        if (enrollingViewModel.onBackPressed
-            && errorMessage.msgId == FINGERPRINT_ERROR_CANCELED
-        ) {
-            enrollingViewModel.onCancelledDueToOnBackPressed()
-        } else if (enrollingViewModel.onSkipPressed
-            && errorMessage.msgId == FINGERPRINT_ERROR_CANCELED
-        ) {
-            enrollingViewModel.onCancelledDueToOnSkipPressed()
-        } else {
-            val errMsgId: Int = errorMessage.msgId
-            enrollingViewModel.showErrorDialog(
-                FingerprintEnrollEnrollingViewModel.ErrorDialogData(
-                    getString(FingerprintErrorDialog.getErrorMessage(errMsgId)),
-                    getString(FingerprintErrorDialog.getErrorTitle(errMsgId)),
-                    errMsgId
-                )
-            )
-            progressViewModel.cancelEnrollment()
+        cancelEnrollment(true)
+        lifecycleScope.launch {
+            Log.d(TAG, "newDialog $errorMessage")
+            errorDialogViewModel.newDialog(errorMessage.msgId)
+        }
+    }
+
+    private fun onEnrollmentCanceled(canceledSignal: Any) {
+        Log.d(
+            TAG,
+            "onEnrollmentCanceled enrolling:$enrollingCancelSignal, canceled:$canceledSignal"
+        )
+        if (enrollingCancelSignal === canceledSignal) {
+            progressViewModel.canceledSignalLiveData.removeObserver(canceledSignalObserver)
+            progressViewModel.clearProgressLiveData()
+            if (enrollingViewModel.onBackPressed) {
+                enrollingViewModel.onCancelledDueToOnBackPressed()
+            } else if (enrollingViewModel.onSkipPressed) {
+                enrollingViewModel.onCancelledDueToOnSkipPressed()
+            }
         }
     }
 
