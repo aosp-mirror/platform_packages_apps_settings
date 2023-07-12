@@ -87,6 +87,7 @@ public final class BugReportContentProviderTest {
         mBugReportContentProvider.dump(FileDescriptor.out, mPrintWriter, new String[] {});
 
         String dumpContent = mStringWriter.toString();
+        assertThat(dumpContent).contains("Battery PeriodicJob History");
         assertThat(dumpContent).contains("Battery DatabaseHistory");
         assertThat(dumpContent).contains(PACKAGE_NAME1);
         assertThat(dumpContent).contains(PACKAGE_NAME2);

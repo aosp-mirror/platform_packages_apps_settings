@@ -17,7 +17,10 @@
 package com.android.settings.network;
 
 import android.annotation.IntDef;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -53,6 +56,28 @@ public class UiccSlotUtil {
     public static final int INVALID_LOGICAL_SLOT_ID = -1;
     public static final int INVALID_PHYSICAL_SLOT_ID = -1;
     public static final int INVALID_PORT_ID = -1;
+
+    @VisibleForTesting
+    static class SimSlotChangeReceiver extends BroadcastReceiver{
+        private final CountDownLatch mLatch;
+        SimSlotChangeReceiver(CountDownLatch latch) {
+            mLatch = latch;
+        }
+
+        public void registerOn(Context context) {
+            context.registerReceiver(this,
+                    new IntentFilter(TelephonyManager.ACTION_SIM_SLOT_STATUS_CHANGED),
+                    Context.RECEIVER_EXPORTED/*UNAUDITED*/);
+        }
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Log.i(TAG, "Action: " + intent.getAction());
+            if (TelephonyManager.ACTION_SIM_SLOT_STATUS_CHANGED.equals(intent.getAction())) {
+                mLatch.countDown();
+            }
+        }
+    }
 
     /**
      * Mode for switching to eSIM slot which decides whether there is cleanup process, e.g.
@@ -229,19 +254,27 @@ public class UiccSlotUtil {
                                 && uiccSlotMapping.getPortIndex() == port);
     }
 
-    private static void performSwitchToSlot(TelephonyManager telMgr,
+    @VisibleForTesting
+    static void performSwitchToSlot(TelephonyManager telMgr,
             Collection<UiccSlotMapping> uiccSlotMappings, Context context)
             throws UiccSlotsException {
-        CarrierConfigChangedReceiver receiver = null;
+        BroadcastReceiver receiver = null;
         long waitingTimeMillis =
                 Settings.Global.getLong(
                         context.getContentResolver(),
                         Settings.Global.EUICC_SWITCH_SLOT_TIMEOUT_MILLIS,
                         DEFAULT_WAIT_AFTER_SWITCH_TIMEOUT_MILLIS);
+        Log.d(TAG, "Set waitingTime as " + waitingTimeMillis);
+
         try {
             CountDownLatch latch = new CountDownLatch(1);
-            receiver = new CarrierConfigChangedReceiver(latch);
-            receiver.registerOn(context);
+            if (isMultipleEnabledProfilesSupported(telMgr)) {
+                receiver = new SimSlotChangeReceiver(latch);
+                ((SimSlotChangeReceiver) receiver).registerOn(context);
+            } else {
+                receiver = new CarrierConfigChangedReceiver(latch);
+                ((CarrierConfigChangedReceiver) receiver).registerOn(context);
+            }
             telMgr.setSimSlotMapping(uiccSlotMappings);
             latch.await(waitingTimeMillis, TimeUnit.MILLISECONDS);
         } catch (InterruptedException e) {
@@ -434,5 +467,15 @@ public class UiccSlotUtil {
                                                 == UiccSlotInfo.CARD_STATE_INFO_PRESENT);
         Log.i(TAG, "isRemovableSimEnabled: " + isRemovableSimEnabled);
         return isRemovableSimEnabled;
+    }
+
+    private static boolean isMultipleEnabledProfilesSupported(TelephonyManager telMgr) {
+        List<UiccCardInfo> cardInfos = telMgr.getUiccCardsInfo();
+        if (cardInfos == null) {
+            Log.w(TAG, "UICC cards info list is empty.");
+            return false;
+        }
+        return cardInfos.stream().anyMatch(
+                cardInfo -> cardInfo.isMultipleEnabledProfilesSupported());
     }
 }

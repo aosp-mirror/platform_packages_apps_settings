@@ -16,6 +16,7 @@
 
 package com.android.settings.inputmethod;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.provider.Settings;
@@ -53,8 +54,7 @@ public class KeyboardSettingsPreferenceController extends BasePreferenceControll
             if (mCachedDevice.getAddress().equals(hardKeyboardDeviceInfo.mBluetoothAddress)) {
                 Intent intent = new Intent(Settings.ACTION_HARD_KEYBOARD_SETTINGS);
                 intent.putExtra(
-                        NewKeyboardSettingsUtils.EXTRA_INTENT_FROM,
-                        "com.android.settings.inputmethod.KeyboardSettingsPreferenceController");
+                        Settings.EXTRA_ENTRYPOINT, SettingsEnums.CONNECTED_DEVICES_SETTINGS);
                 intent.putExtra(
                         Settings.EXTRA_INPUT_DEVICE_IDENTIFIER,
                         hardKeyboardDeviceInfo.mDeviceIdentifier);

@@ -24,6 +24,8 @@ import android.os.Looper;
 import android.util.Log;
 
 import com.android.settings.core.instrumentation.ElapsedTimeUtils;
+import com.android.settings.fuelgauge.BatteryUsageHistoricalLogEntry.Action;
+import com.android.settings.fuelgauge.batteryusage.bugreport.BatteryUsageLogUtils;
 import com.android.settings.overlay.FeatureFactory;
 
 import java.time.Duration;
@@ -79,8 +81,9 @@ public final class BootBroadcastReceiver extends BroadcastReceiver {
         if (Intent.ACTION_BOOT_COMPLETED.equals(action)) {
             final Intent recheckIntent = new Intent(ACTION_PERIODIC_JOB_RECHECK);
             recheckIntent.setClass(context, BootBroadcastReceiver.class);
-            mHandler.postDelayed(() -> context.sendBroadcast(recheckIntent),
-                    getRescheduleTimeForBootAction(context));
+            final long delayedTime = getRescheduleTimeForBootAction(context);
+            mHandler.postDelayed(() -> context.sendBroadcast(recheckIntent), delayedTime);
+            BatteryUsageLogUtils.writeLog(context, Action.RECHECK_JOB, "delay:" + delayedTime);
         } else if (ACTION_SETUP_WIZARD_FINISHED.equals(action)) {
             ElapsedTimeUtils.storeSuwFinishedTimestamp(context, System.currentTimeMillis());
         }
