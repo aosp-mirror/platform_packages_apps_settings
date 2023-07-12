@@ -81,10 +81,6 @@ open class FeatureFactoryImpl : FeatureFactory() {
 
     private val powerUsageFeatureProvider by lazy { PowerUsageFeatureProviderImpl(appContext) }
 
-    private val batteryStatusFeatureProvider by lazy {
-        BatteryStatusFeatureProviderImpl(appContext)
-    }
-
     private val userFeatureProvider by lazy { UserFeatureProviderImpl(appContext) }
 
     private val contextualCardFeatureProvider by lazy {
@@ -98,7 +94,9 @@ open class FeatureFactoryImpl : FeatureFactory() {
 
     override fun getPowerUsageFeatureProvider(context: Context) = powerUsageFeatureProvider
 
-    override fun getBatteryStatusFeatureProvider(context: Context) = batteryStatusFeatureProvider
+    override val batteryStatusFeatureProvider by lazy {
+        BatteryStatusFeatureProviderImpl(appContext)
+    }
 
     override val batterySettingsFeatureProvider by lazy { BatterySettingsFeatureProviderImpl() }
 

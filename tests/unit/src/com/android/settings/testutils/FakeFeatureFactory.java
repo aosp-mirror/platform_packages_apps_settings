@@ -150,8 +150,9 @@ public class FakeFeatureFactory extends FeatureFactory {
         return metricsFeatureProvider;
     }
 
+    @NotNull
     @Override
-    public BatteryStatusFeatureProvider getBatteryStatusFeatureProvider(Context context) {
+    public BatteryStatusFeatureProvider getBatteryStatusFeatureProvider() {
         return batteryStatusFeatureProvider;
     }
 
