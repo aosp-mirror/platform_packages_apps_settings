@@ -109,8 +109,8 @@ public class BatteryDefenderTip extends BatteryTip {
 
     private void resumeCharging(Context context) {
         final Intent intent =
-                FeatureFactory.getFactory(context)
-                        .getPowerUsageFeatureProvider(context)
+                FeatureFactory.getFeatureFactory()
+                        .getPowerUsageFeatureProvider()
                         .getResumeChargeIntent(false);
         if (intent != null) {
             context.sendBroadcast(intent);

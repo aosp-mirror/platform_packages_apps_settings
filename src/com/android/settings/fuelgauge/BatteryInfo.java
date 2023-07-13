@@ -104,8 +104,8 @@ public class BatteryInfo {
 
                 // Add projection if we have an estimate.
                 if (remainingTimeUs != 0) {
-                    PowerUsageFeatureProvider provider = FeatureFactory.getFactory(context)
-                            .getPowerUsageFeatureProvider(context);
+                    PowerUsageFeatureProvider provider =
+                            FeatureFactory.getFeatureFactory().getPowerUsageFeatureProvider();
                     if (!mCharging && provider.isEnhancedBatteryPredictionEnabled(context)) {
                         points = provider.getEnhancedBatteryPredictionCurve(context, startTime);
                     } else {
@@ -201,7 +201,7 @@ public class BatteryInfo {
 
         final long startTime = System.currentTimeMillis();
         PowerUsageFeatureProvider provider =
-                FeatureFactory.getFactory(context).getPowerUsageFeatureProvider(context);
+                FeatureFactory.getFeatureFactory().getPowerUsageFeatureProvider();
         final long elapsedRealtimeUs =
                 PowerUtil.convertMsToUs(SystemClock.elapsedRealtime());
 
@@ -211,8 +211,7 @@ public class BatteryInfo {
         final boolean discharging =
                 batteryBroadcast.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1) == 0;
 
-        if (discharging && provider != null
-                && provider.isEnhancedBatteryPredictionEnabled(context)) {
+        if (discharging && provider.isEnhancedBatteryPredictionEnabled(context)) {
             Estimate estimate = provider.getEnhancedBatteryPrediction(context);
             if (estimate != null) {
                 Estimate.storeCachedEstimate(context, estimate);

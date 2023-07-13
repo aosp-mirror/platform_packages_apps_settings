@@ -57,7 +57,7 @@ public class BatteryInfoLoaderTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
-        FakeFeatureFactory.setupForTest().getPowerUsageFeatureProvider(mContext);
+        FakeFeatureFactory.setupForTest().getPowerUsageFeatureProvider();
 
         doReturn(mContext).when(mContext).getApplicationContext();
         when(mContext.getSystemService(eq(Context.BATTERY_STATS_SERVICE)))

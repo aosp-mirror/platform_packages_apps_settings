@@ -68,7 +68,7 @@ abstract class FeatureFactory {
 
     abstract val metricsFeatureProvider: MetricsFeatureProvider
 
-    abstract fun getPowerUsageFeatureProvider(context: Context): PowerUsageFeatureProvider
+    abstract val powerUsageFeatureProvider: PowerUsageFeatureProvider
 
     /**
      * Retrieves implementation for Battery Status feature.

@@ -91,8 +91,8 @@ public final class BootBroadcastReceiver extends BroadcastReceiver {
 
     private long getRescheduleTimeForBootAction(Context context) {
         final boolean delayHourlyJobWhenBooting =
-                FeatureFactory.getFactory(context)
-                        .getPowerUsageFeatureProvider(context)
+                FeatureFactory.getFeatureFactory()
+                        .getPowerUsageFeatureProvider()
                         .delayHourlyJobWhenBooting();
         return delayHourlyJobWhenBooting
                 ? RESCHEDULE_FOR_BOOT_ACTION_WITH_DELAY

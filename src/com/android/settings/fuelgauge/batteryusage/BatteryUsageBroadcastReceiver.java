@@ -64,8 +64,8 @@ public final class BatteryUsageBroadcastReceiver extends BroadcastReceiver {
         final String action = intent.getAction();
         Log.d(TAG, "onReceive:" + action);
         DatabaseUtils.recordDateTime(context, action);
-        final String fullChargeIntentAction = FeatureFactory.getFactory(context)
-                .getPowerUsageFeatureProvider(context)
+        final String fullChargeIntentAction = FeatureFactory.getFeatureFactory()
+                .getPowerUsageFeatureProvider()
                 .getFullChargeIntentAction();
         switch (action) {
             case Intent.ACTION_BATTERY_LEVEL_CHANGED:
@@ -107,8 +107,8 @@ public final class BatteryUsageBroadcastReceiver extends BroadcastReceiver {
         }
 
         final boolean delayHourlyJobWhenBooting =
-                FeatureFactory.getFactory(context)
-                        .getPowerUsageFeatureProvider(context)
+                FeatureFactory.getFeatureFactory()
+                        .getPowerUsageFeatureProvider()
                         .delayHourlyJobWhenBooting();
         final long broadcastDelay = sBroadcastDelayFromBoot - SystemClock.elapsedRealtime();
         // If current boot time is smaller than expected delay, cancel sending the broadcast.

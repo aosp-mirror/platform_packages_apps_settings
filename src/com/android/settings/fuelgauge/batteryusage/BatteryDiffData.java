@@ -53,7 +53,7 @@ public class BatteryDiffData {
 
         if (!isAccumulated) {
             final PowerUsageFeatureProvider featureProvider =
-                    FeatureFactory.getFactory(context).getPowerUsageFeatureProvider(context);
+                    FeatureFactory.getFeatureFactory().getPowerUsageFeatureProvider();
             purgeBatteryDiffData(featureProvider);
             combineBatteryDiffEntry(
                     context, featureProvider, systemAppsPackageNames, systemAppsUids);

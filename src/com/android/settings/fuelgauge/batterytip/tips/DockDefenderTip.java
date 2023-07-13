@@ -153,8 +153,8 @@ public class DockDefenderTip extends BatteryTip {
 
     private void resumeCharging(Context context) {
         final Intent intent =
-                FeatureFactory.getFactory(context)
-                        .getPowerUsageFeatureProvider(context)
+                FeatureFactory.getFeatureFactory()
+                        .getPowerUsageFeatureProvider()
                         .getResumeChargeIntent(true);
         if (intent != null) {
             context.sendBroadcast(intent);

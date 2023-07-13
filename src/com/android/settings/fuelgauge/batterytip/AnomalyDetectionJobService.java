@@ -98,10 +98,10 @@ public class AnomalyDetectionJobService extends JobService {
             final UserManager userManager = getSystemService(UserManager.class);
             final PowerAllowlistBackend powerAllowlistBackend =
                     PowerAllowlistBackend.getInstance(context);
-            final PowerUsageFeatureProvider powerUsageFeatureProvider = FeatureFactory
-                    .getFactory(this).getPowerUsageFeatureProvider(this);
-            final MetricsFeatureProvider metricsFeatureProvider = FeatureFactory
-                    .getFactory(this).getMetricsFeatureProvider();
+            final PowerUsageFeatureProvider powerUsageFeatureProvider =
+                    FeatureFactory.getFeatureFactory().getPowerUsageFeatureProvider();
+            final MetricsFeatureProvider metricsFeatureProvider =
+                    FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
 
             for (JobWorkItem item = dequeueWork(params); item != null; item = dequeueWork(params)) {
                 saveAnomalyToDatabase(context, userManager,
