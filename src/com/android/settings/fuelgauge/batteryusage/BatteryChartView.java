@@ -61,6 +61,7 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
     private static final String TAG = "BatteryChartView";
 
     private static final int DIVIDER_COLOR = Color.parseColor("#CDCCC5");
+    private static final int HORIZONTAL_DIVIDER_COUNT = 5;
 
     /** A callback listener for selected group index is updated. */
     public interface OnSelectListener {
@@ -335,23 +336,24 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
     private void drawHorizontalDividers(Canvas canvas) {
         final int width = getWidth() - mIndent.right;
         final int height = getHeight() - mIndent.top - mIndent.bottom;
-        // Draws the top divider line for 100% curve.
-        float offsetY = mIndent.top + mDividerWidth * .5f;
+        final float topOffsetY = mIndent.top + mDividerWidth * .5f;
+        final float bottomOffsetY = mIndent.top + (height - mDividerHeight - mDividerWidth * .5f);
+        final float availableSpace = bottomOffsetY - topOffsetY;
+
         mDividerPaint.setColor(DIVIDER_COLOR);
-        canvas.drawLine(0, offsetY, width, offsetY, mDividerPaint);
-        drawPercentage(canvas, /*index=*/ 0, offsetY);
+        final float dividerOffsetUnit =
+                availableSpace / (float) (HORIZONTAL_DIVIDER_COUNT - 1);
 
-        // Draws the center divider line for 50% curve.
-        final float availableSpace =
-                height - mDividerWidth * 2 - mTrapezoidVOffset - mDividerHeight;
-        offsetY = mIndent.top + mDividerWidth + availableSpace * .5f;
-        canvas.drawLine(0, offsetY, width, offsetY, mDividerPaint);
-        drawPercentage(canvas, /*index=*/ 1, offsetY);
+        // Draws 5 divider lines.
+        for (int index = 0; index < HORIZONTAL_DIVIDER_COUNT; index++) {
+            float offsetY = topOffsetY + dividerOffsetUnit * index;
+            canvas.drawLine(0, offsetY, width, offsetY, mDividerPaint);
 
-        // Draws the bottom divider line for 0% curve.
-        offsetY = mIndent.top + (height - mDividerHeight - mDividerWidth * .5f);
-        canvas.drawLine(0, offsetY, width, offsetY, mDividerPaint);
-        drawPercentage(canvas, /*index=*/ 2, offsetY);
+            //  Draws percentage text only for 100% / 50% / 0%
+            if (index % 2 == 0) {
+                drawPercentage(canvas, /*index=*/ (index + 1) / 2, offsetY);
+            }
+        }
     }
 
     private void drawPercentage(Canvas canvas, int index, float offsetY) {
