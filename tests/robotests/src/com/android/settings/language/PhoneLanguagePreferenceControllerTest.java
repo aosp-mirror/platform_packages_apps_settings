@@ -31,7 +31,6 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -94,7 +93,6 @@ public class PhoneLanguagePreferenceControllerTest {
                 .isEqualTo(BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
     }
 
-    @Ignore
     @Test
     @Config(qualifiers = "mcc999")
     public void testIsAvailable_ifDisabled_shouldReturnFalse() {

@@ -45,7 +45,6 @@ import com.android.settings.bluetooth.HearingAidPairingDialogFragment;
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
-import com.android.settings.utils.ActivityControllerWrapper;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.HearingAidInfo;
@@ -171,8 +170,7 @@ public class HearingAidPairingDialogFragmentTest {
     private void setupDialog(int launchPage) {
         mFragment = spy(
                 HearingAidPairingDialogFragment.newInstance(TEST_DEVICE_ADDRESS, launchPage));
-        mActivity = (FragmentActivity) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(FragmentActivity.class)).get();
+        mActivity = Robolectric.setupActivity(FragmentActivity.class);
         mFragmentManager = mActivity.getSupportFragmentManager();
         when(mFragment.getActivity()).thenReturn(mActivity);
         doReturn(mFragmentManager).when(mFragment).getParentFragmentManager();

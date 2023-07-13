@@ -30,8 +30,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
-import com.android.settings.utils.ActivityControllerWrapper;
-
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -66,8 +64,7 @@ public class ViewAllBluetoothDevicesPreferenceControllerTest {
 
     @Before
     public void setUp() {
-        mActivity = (FragmentActivity) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(FragmentActivity.class)).get();
+        mActivity = Robolectric.setupActivity(FragmentActivity.class);
         when(mFragment.getContext()).thenReturn(mContext);
         when(mFragment.getActivity()).thenReturn(mActivity);
 

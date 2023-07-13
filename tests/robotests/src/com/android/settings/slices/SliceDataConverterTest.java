@@ -41,7 +41,6 @@ import com.android.settingslib.search.SearchIndexableData;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -89,7 +88,6 @@ public class SliceDataConverterTest {
         mFakeFeatureFactory.searchFeatureProvider = mock(SearchFeatureProvider.class);
     }
 
-    @Ignore
     @Test
     @Config(qualifiers = "mcc999")
     public void testFakeProvider_convertsFakeData() {

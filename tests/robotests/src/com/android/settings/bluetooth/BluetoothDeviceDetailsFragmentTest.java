@@ -46,7 +46,6 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.utils.ActivityControllerWrapper;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
@@ -231,9 +230,7 @@ public class BluetoothDeviceDetailsFragmentTest {
         doReturn(mPreferenceScreen).when(fragment).getPreferenceScreen();
         doReturn(mUserManager).when(fragment).getUserManager();
 
-        mActivity = spy((FragmentActivity) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(FragmentActivity.class)).get());
-
+        mActivity = spy(Robolectric.setupActivity(FragmentActivity.class));
         doReturn(mActivity).when(fragment).getActivity();
         doReturn(mContext).when(fragment).getContext();
 

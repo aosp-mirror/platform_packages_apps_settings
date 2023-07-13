@@ -27,7 +27,6 @@ import android.content.pm.ServiceInfo;
 
 import com.android.security.SecureBox;
 import com.android.settings.R;
-import com.android.settings.utils.ActivityControllerWrapper;
 
 import org.robolectric.Robolectric;
 
@@ -96,11 +95,7 @@ public final class TestUtils {
 
     public static ConfirmDeviceCredentialBaseActivity buildConfirmDeviceCredentialBaseActivity(
             Class<? extends ConfirmDeviceCredentialBaseActivity> impl, Intent intent) {
-
-        return (ConfirmDeviceCredentialBaseActivity) ActivityControllerWrapper.setup(
-                    Robolectric.buildActivity(impl, intent)).get();
-
-        //return Robolectric.buildActivity(impl, intent).setup().get();
+        return Robolectric.buildActivity(impl, intent).setup().get();
     }
 
     public static ConfirmDeviceCredentialBaseFragment getConfirmDeviceCredentialBaseFragment(

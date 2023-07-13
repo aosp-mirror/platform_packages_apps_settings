@@ -53,7 +53,6 @@ import com.android.settings.testutils.shadow.ShadowContentResolver;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settings.testutils.shadow.ShadowUserManager;
-import com.android.settings.utils.ActivityControllerWrapper;
 import com.android.settings.widget.RestrictedButton;
 import com.android.settingslib.widget.LayoutPreference;
 
@@ -113,8 +112,8 @@ public class RemoveAccountPreferenceControllerTest {
         when(mAccountManager.getAuthenticatorTypesAsUser(anyInt()))
                 .thenReturn(new AuthenticatorDescription[0]);
         when(mAccountManager.getAccountsAsUser(anyInt())).thenReturn(new Account[0]);
-        mController = new RemoveAccountPreferenceController((Context) ActivityControllerWrapper
-                .setup(Robolectric.buildActivity(Activity.class)).get(), mFragment);
+        mController = new RemoveAccountPreferenceController(
+                Robolectric.setupActivity(Activity.class), mFragment);
     }
 
     @After
