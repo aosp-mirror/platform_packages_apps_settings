@@ -73,6 +73,7 @@ public class Settings extends SettingsActivity {
     }
 
     public static class FingerprintSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class FingerprintSettingsActivityV2 extends SettingsActivity { /* empty */ }
     public static class CombinedBiometricSettingsActivity extends SettingsActivity { /* empty */ }
     public static class CombinedBiometricProfileSettingsActivity extends SettingsActivity { /* empty */ }
     public static class TetherSettingsActivity extends SettingsActivity {
