@@ -44,7 +44,8 @@
 
         <SwitchPreference
             android:key="visiblepattern_profile"
-            android:title="@string/lockpattern_settings_enable_visible_pattern_title_profile" />
+            android:title="@string/lockpattern_settings_enable_visible_pattern_title_profile"
+            settings:controller="com.android.settings.security.VisiblePatternProfilePreferenceController" />
 
         <com.android.settings.RestrictedListPreference
             android:key="privacy_lock_screen_work_profile_notifications"
