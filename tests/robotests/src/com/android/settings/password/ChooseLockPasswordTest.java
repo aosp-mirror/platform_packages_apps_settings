@@ -525,39 +525,6 @@ public class ChooseLockPasswordTest {
         assertThat(pinAutoConfirmOption.isChecked()).isFalse();
     }
 
-    @Ignore
-    @Test
-    public void autoPinConfirmOption_featureDisabled_shouldRemainInvisibleAndUnchecked() {
-        DeviceConfig.setProperty(NAMESPACE_AUTO_PIN_CONFIRMATION, FLAG_ENABLE_AUTO_PIN_CONFIRMATION,
-                /* value= */ "false", /* makeDefault= */ false);
-        ChooseLockPassword passwordActivity = setupActivityWithPinTypeAndDefaultPolicy();
-
-        ChooseLockPasswordFragment fragment = getChooseLockPasswordFragment(passwordActivity);
-        ScrollToParentEditText passwordEntry = passwordActivity.findViewById(R.id.password_entry);
-        CheckBox pinAutoConfirmOption = passwordActivity
-                .findViewById(R.id.auto_pin_confirm_enabler);
-        TextView securityMessage =
-                passwordActivity.findViewById(R.id.auto_pin_confirm_security_message);
-
-        passwordEntry.setText("1234");
-        fragment.updateUi();
-        assertThat(pinAutoConfirmOption.getVisibility()).isEqualTo(View.GONE);
-        assertThat(securityMessage.getVisibility()).isEqualTo(View.GONE);
-        assertThat(pinAutoConfirmOption.isChecked()).isFalse();
-
-        passwordEntry.setText("123456");
-        fragment.updateUi();
-        assertThat(pinAutoConfirmOption.getVisibility()).isEqualTo(View.GONE);
-        assertThat(securityMessage.getVisibility()).isEqualTo(View.GONE);
-        assertThat(pinAutoConfirmOption.isChecked()).isFalse();
-
-        passwordEntry.setText("12345678");
-        fragment.updateUi();
-        assertThat(pinAutoConfirmOption.getVisibility()).isEqualTo(View.GONE);
-        assertThat(securityMessage.getVisibility()).isEqualTo(View.GONE);
-        assertThat(pinAutoConfirmOption.isChecked()).isFalse();
-    }
-
     private ChooseLockPassword setupActivityWithPinTypeAndDefaultPolicy() {
         PasswordPolicy policy = new PasswordPolicy();
         policy.quality = PASSWORD_QUALITY_UNSPECIFIED;
