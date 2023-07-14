@@ -65,7 +65,6 @@ import com.google.android.setupdesign.GlifLayout;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
@@ -395,26 +394,8 @@ public class ChooseLockPasswordTest {
                 "Must be at least 6 characters");
     }
 
-    @Ignore
     @Test
-    public void processAndValidatePasswordRequirements_autoPinDisabled_defaultPinMinimumLength() {
-        DeviceConfig.setProperty(NAMESPACE_AUTO_PIN_CONFIRMATION, FLAG_ENABLE_AUTO_PIN_CONFIRMATION,
-                /* value= */ "false", /* makeDefault= */ false);
-        PasswordPolicy policy = new PasswordPolicy();
-        policy.quality = PASSWORD_QUALITY_UNSPECIFIED;
-
-        assertPasswordValidationResult(
-                /* minMetrics */ policy.getMinMetrics(),
-                /* minComplexity= */ PASSWORD_COMPLEXITY_NONE,
-                /* passwordType= */ PASSWORD_QUALITY_NUMERIC,
-                /* userEnteredPassword= */ LockscreenCredential.createPassword("11"),
-                "PIN must be at least 4 digits");
-    }
-
-    @Test
-    public void processAndValidatePasswordRequirements_autoPinEnabled_defaultPinMinimumLength() {
-        DeviceConfig.setProperty(NAMESPACE_AUTO_PIN_CONFIRMATION, FLAG_ENABLE_AUTO_PIN_CONFIRMATION,
-                /* value= */ "true", /* makeDefault= */ false);
+    public void processAndValidatePasswordRequirements_defaultPinMinimumLength() {
         PasswordPolicy policy = new PasswordPolicy();
         policy.quality = PASSWORD_QUALITY_UNSPECIFIED;
 
