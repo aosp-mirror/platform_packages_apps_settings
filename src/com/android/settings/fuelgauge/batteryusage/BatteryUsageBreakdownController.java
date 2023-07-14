@@ -144,19 +144,17 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
         }
         final PowerGaugePreference powerPref = (PowerGaugePreference) preference;
         final BatteryDiffEntry diffEntry = powerPref.getBatteryDiffEntry();
-        final BatteryHistEntry histEntry = diffEntry.mBatteryHistEntry;
-        final String packageName = histEntry.mPackageName;
-        final boolean isAppEntry = histEntry.isAppEntry();
+        final String packageName = diffEntry.getPackageName();
         mMetricsFeatureProvider.action(
                 /* attribution */ SettingsEnums.OPEN_BATTERY_USAGE,
-                /* action */ isAppEntry
-                        ? SettingsEnums.ACTION_BATTERY_USAGE_APP_ITEM
-                        : SettingsEnums.ACTION_BATTERY_USAGE_SYSTEM_ITEM,
+                /* action */ diffEntry.isSystemEntry()
+                        ? SettingsEnums.ACTION_BATTERY_USAGE_SYSTEM_ITEM
+                        : SettingsEnums.ACTION_BATTERY_USAGE_APP_ITEM,
                 /* pageId */ SettingsEnums.OPEN_BATTERY_USAGE,
                 TextUtils.isEmpty(packageName) ? PACKAGE_NAME_NONE : packageName,
                 (int) Math.round(diffEntry.getPercentage()));
         Log.d(TAG, String.format("handleClick() label=%s key=%s package=%s",
-                diffEntry.getAppLabel(), histEntry.getKey(), histEntry.mPackageName));
+                diffEntry.getAppLabel(), diffEntry.getKey(), packageName));
         AdvancedPowerUsageDetail.startBatteryDetailPage(
                 mActivity, mFragment, diffEntry, powerPref.getPercentage(), mSlotTimestamp);
         return true;

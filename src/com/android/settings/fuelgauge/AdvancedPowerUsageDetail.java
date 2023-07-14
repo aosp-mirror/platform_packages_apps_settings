@@ -16,6 +16,8 @@
 
 package com.android.settings.fuelgauge;
 
+import static com.android.settings.fuelgauge.batteryusage.ConvertUtils.isUserConsumer;
+
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.backup.BackupManager;
@@ -41,7 +43,6 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.fuelgauge.BatteryOptimizeHistoricalLogEntry.Action;
 import com.android.settings.fuelgauge.batteryusage.BatteryDiffEntry;
 import com.android.settings.fuelgauge.batteryusage.BatteryEntry;
-import com.android.settings.fuelgauge.batteryusage.BatteryHistEntry;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.HelpUtils;
@@ -149,14 +150,13 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
             Context context, int sourceMetricsCategory,
             BatteryDiffEntry diffEntry, String usagePercent, String slotInformation,
             boolean showTimeInformation) {
-        final BatteryHistEntry histEntry = diffEntry.mBatteryHistEntry;
         final LaunchBatteryDetailPageArgs launchArgs = new LaunchBatteryDetailPageArgs();
         // configure the launch argument.
         launchArgs.mUsagePercent = usagePercent;
         launchArgs.mPackageName = diffEntry.getPackageName();
         launchArgs.mAppLabel = diffEntry.getAppLabel();
         launchArgs.mSlotInformation = slotInformation;
-        launchArgs.mUid = (int) histEntry.mUid;
+        launchArgs.mUid = (int) diffEntry.mUid;
         launchArgs.mIconId = diffEntry.getAppIconId();
         launchArgs.mConsumedPower = (int) diffEntry.mConsumePower;
         if (showTimeInformation) {
@@ -164,7 +164,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
             launchArgs.mBackgroundTimeMs = diffEntry.mBackgroundUsageTimeInMs;
             launchArgs.mScreenOnTimeMs = diffEntry.mScreenOnTimeInMs;
         }
-        launchArgs.mIsUserEntry = histEntry.isUserEntry();
+        launchArgs.mIsUserEntry = isUserConsumer(diffEntry.mConsumerType);
         startBatteryDetailPage(context, sourceMetricsCategory, launchArgs);
     }
 
