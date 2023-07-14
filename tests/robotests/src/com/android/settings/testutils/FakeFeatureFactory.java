@@ -162,8 +162,9 @@ public class FakeFeatureFactory extends FeatureFactory {
         return batterySettingsFeatureProvider;
     }
 
+    @NotNull
     @Override
-    public PowerUsageFeatureProvider getPowerUsageFeatureProvider(Context context) {
+    public PowerUsageFeatureProvider getPowerUsageFeatureProvider() {
         return powerUsageFeatureProvider;
     }
 

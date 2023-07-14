@@ -97,8 +97,8 @@ public final class PeriodicJobManager {
     static long getTriggerAtMillis(Context context, Clock clock, final boolean fromBoot) {
         long currentTimeMillis = clock.millis();
         final boolean delayHourlyJobWhenBooting =
-                FeatureFactory.getFactory(context)
-                        .getPowerUsageFeatureProvider(context)
+                FeatureFactory.getFeatureFactory()
+                        .getPowerUsageFeatureProvider()
                         .delayHourlyJobWhenBooting();
         // Rounds to the previous nearest time slot and shifts to the next one.
         long timeSlotUnit = Duration.ofMinutes(DATA_FETCH_INTERVAL_MINUTE).toMillis();

@@ -32,12 +32,12 @@ public class AutoRestrictionPreferenceController extends BasePreferenceControlle
     private static final String KEY_SMART_BATTERY = "auto_restriction";
     private static final int ON = 1;
     private static final int OFF = 0;
-    private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
+    private final PowerUsageFeatureProvider mPowerUsageFeatureProvider;
 
     public AutoRestrictionPreferenceController(Context context) {
         super(context, KEY_SMART_BATTERY);
-        mPowerUsageFeatureProvider = FeatureFactory.getFactory(
-                context).getPowerUsageFeatureProvider(context);
+        mPowerUsageFeatureProvider =
+                FeatureFactory.getFeatureFactory().getPowerUsageFeatureProvider();
     }
 
     @Override

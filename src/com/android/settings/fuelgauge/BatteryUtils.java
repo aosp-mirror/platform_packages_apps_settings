@@ -135,8 +135,8 @@ public class BatteryUtils {
         mContext = context;
         mPackageManager = context.getPackageManager();
         mAppOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
-        mPowerUsageFeatureProvider = FeatureFactory.getFactory(context)
-                .getPowerUsageFeatureProvider(context);
+        mPowerUsageFeatureProvider =
+                FeatureFactory.getFeatureFactory().getPowerUsageFeatureProvider();
     }
 
     public long getProcessTimeMs(@StatusType int type, @Nullable BatteryStats.Uid uid,
@@ -626,8 +626,8 @@ public class BatteryUtils {
             if (Settings.Global.getInt(context.getContentResolver(),
                     SETTINGS_GLOBAL_DOCK_DEFENDER_BYPASS, 0) == 1) {
                 return DockDefenderMode.TEMPORARILY_BYPASSED;
-            } else if (batteryInfo.isBatteryDefender && FeatureFactory.getFactory(context)
-                    .getPowerUsageFeatureProvider(context)
+            } else if (batteryInfo.isBatteryDefender && FeatureFactory.getFeatureFactory()
+                    .getPowerUsageFeatureProvider()
                     .isExtraDefend()) {
                 return DockDefenderMode.ACTIVE;
             } else if (!batteryInfo.isBatteryDefender) {

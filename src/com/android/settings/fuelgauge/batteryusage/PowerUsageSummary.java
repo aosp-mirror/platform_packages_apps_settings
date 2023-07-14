@@ -246,9 +246,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
 
     @VisibleForTesting
     void initFeatureProvider() {
-        final Context context = getContext();
-        mPowerFeatureProvider = FeatureFactory.getFactory(context)
-                .getPowerUsageFeatureProvider(context);
+        mPowerFeatureProvider = FeatureFactory.getFeatureFactory().getPowerUsageFeatureProvider();
     }
 
     @VisibleForTesting

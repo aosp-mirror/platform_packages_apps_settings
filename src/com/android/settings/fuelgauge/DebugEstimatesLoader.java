@@ -48,7 +48,7 @@ public class DebugEstimatesLoader extends AsyncLoaderCompat<List<BatteryInfo>> {
     public List<BatteryInfo> loadInBackground() {
         Context context = getContext();
         PowerUsageFeatureProvider powerUsageFeatureProvider =
-                FeatureFactory.getFactory(context).getPowerUsageFeatureProvider(context);
+                FeatureFactory.getFeatureFactory().getPowerUsageFeatureProvider();
 
         // get stuff we'll need for both BatteryInfo
         final long elapsedRealtimeUs = PowerUtil.convertMsToUs(

@@ -321,8 +321,8 @@ public final class DataProcessor {
         long numEventsFetched = 0;
         long numAllEventsFetched = 0;
         final Set<String> ignoreScreenOnTimeTaskRootSet =
-                FeatureFactory.getFactory(context)
-                        .getPowerUsageFeatureProvider(context)
+                FeatureFactory.getFeatureFactory()
+                        .getPowerUsageFeatureProvider()
                         .getIgnoreScreenOnTimeTaskRootSet();
         for (final long userId : usageEventsMap.keySet()) {
             final UsageEvents usageEvents = usageEventsMap.get(userId);

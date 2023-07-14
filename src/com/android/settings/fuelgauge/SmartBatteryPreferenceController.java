@@ -37,12 +37,12 @@ public class SmartBatteryPreferenceController extends BasePreferenceController i
     private static final String KEY_SMART_BATTERY = "smart_battery";
     private static final int ON = 1;
     private static final int OFF = 0;
-    private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
+    private final PowerUsageFeatureProvider mPowerUsageFeatureProvider;
 
     public SmartBatteryPreferenceController(Context context) {
         super(context, KEY_SMART_BATTERY);
-        mPowerUsageFeatureProvider = FeatureFactory.getFactory(context)
-                .getPowerUsageFeatureProvider(context);
+        mPowerUsageFeatureProvider =
+                FeatureFactory.getFeatureFactory().getPowerUsageFeatureProvider();
     }
 
     @Override
