@@ -161,6 +161,9 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
+    public void insertSettingsData(Context context)  {}
+
+    @Override
     public Set<Integer> getOthersSystemComponentSet() {
         return new ArraySet<>();
     }
