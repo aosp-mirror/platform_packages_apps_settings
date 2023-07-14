@@ -533,17 +533,18 @@ public class BiometricUtils {
         // Assume the flow is "Screen Lock" + "Face" + "Fingerprint"
         ssb.append(bidi.unicodeWrap(screenLock));
 
+        if (hasFingerprint) {
+            ssb.append(bidi.unicodeWrap(SEPARATOR));
+            ssb.append(bidi.unicodeWrap(
+                    capitalize(context.getString(R.string.security_settings_fingerprint))));
+        }
+
         if (isFaceSupported) {
             ssb.append(bidi.unicodeWrap(SEPARATOR));
             ssb.append(bidi.unicodeWrap(
                     capitalize(context.getString(R.string.keywords_face_settings))));
         }
 
-        if (hasFingerprint) {
-            ssb.append(bidi.unicodeWrap(SEPARATOR));
-            ssb.append(bidi.unicodeWrap(
-                    capitalize(context.getString(R.string.security_settings_fingerprint))));
-        }
         return ssb.toString();
     }
 

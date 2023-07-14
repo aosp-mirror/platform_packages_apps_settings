@@ -60,6 +60,7 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockscreenCredential;
 import com.android.settings.R;
 import com.android.settings.biometrics.BiometricEnrollBase;
+import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment;
 import com.android.settings.search.SearchFeatureProvider;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -543,7 +544,7 @@ public class ChooseLockGenericTest {
     }
 
     @Test
-    public void updatePreferenceText_supportBiometrics_showFaceAndFingerprint() {
+    public void updatePreferenceText_supportBiometrics_setScreenLockFingerprintFace_inOrder() {
         ShadowStorageManager.setIsFileEncrypted(false);
         final Intent intent = new Intent().putExtra(EXTRA_KEY_FOR_BIOMETRICS, true);
         initActivity(intent);
@@ -552,19 +553,29 @@ public class ChooseLockGenericTest {
                 R.string.security_settings_fingerprint));
         final String supportFace = capitalize(mActivity.getResources().getString(
                 R.string.keywords_face_settings));
-        String pinTitle =
+
+        // The strings of golden copy
+        final String pinFingerprintFace = mActivity.getText(R.string.unlock_set_unlock_pin_title)
+                + BiometricUtils.SEPARATOR + supportFingerprint + BiometricUtils.SEPARATOR
+                + supportFace;
+        final String patternFingerprintFace = mActivity.getText(
+                R.string.unlock_set_unlock_pattern_title) + BiometricUtils.SEPARATOR
+                + supportFingerprint + BiometricUtils.SEPARATOR + supportFace;
+        final String passwordFingerprintFace = mActivity.getText(
+                R.string.unlock_set_unlock_password_title) + BiometricUtils.SEPARATOR
+                + supportFingerprint + BiometricUtils.SEPARATOR + supportFace;
+
+        // The strings obtain from preferences
+        final String pinTitle =
                 (String) mFragment.findPreference(ScreenLockType.PIN.preferenceKey).getTitle();
-        String patternTitle =
+        final String patternTitle =
                 (String) mFragment.findPreference(ScreenLockType.PATTERN.preferenceKey).getTitle();
-        String passwordTitle =
+        final String passwordTitle =
                 (String) mFragment.findPreference(ScreenLockType.PASSWORD.preferenceKey).getTitle();
 
-        assertThat(pinTitle).contains(supportFingerprint);
-        assertThat(pinTitle).contains(supportFace);
-        assertThat(patternTitle).contains(supportFingerprint);
-        assertThat(patternTitle).contains(supportFace);
-        assertThat(passwordTitle).contains(supportFingerprint);
-        assertThat(passwordTitle).contains(supportFace);
+        assertThat(pinTitle).isEqualTo(pinFingerprintFace);
+        assertThat(patternTitle).isEqualTo(patternFingerprintFace);
+        assertThat(passwordTitle).isEqualTo(passwordFingerprintFace);
     }
 
     @Test
