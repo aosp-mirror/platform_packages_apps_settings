@@ -74,7 +74,6 @@ import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowDrawable;
 
-@Ignore
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
         SettingsShadowResources.class,
@@ -414,6 +413,7 @@ public class ChooseLockPasswordTest {
                 "Must be at least 6 characters");
     }
 
+    @Ignore
     @Test
     public void processAndValidatePasswordRequirements_autoPinDisabled_defaultPinMinimumLength() {
         DeviceConfig.setProperty(NAMESPACE_AUTO_PIN_CONFIRMATION, FLAG_ENABLE_AUTO_PIN_CONFIRMATION,
@@ -543,6 +543,7 @@ public class ChooseLockPasswordTest {
         assertThat(pinAutoConfirmOption.isChecked()).isFalse();
     }
 
+    @Ignore
     @Test
     public void autoPinConfirmOption_featureDisabled_shouldRemainInvisibleAndUnchecked() {
         DeviceConfig.setProperty(NAMESPACE_AUTO_PIN_CONFIRMATION, FLAG_ENABLE_AUTO_PIN_CONFIRMATION,
