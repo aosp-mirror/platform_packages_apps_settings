@@ -48,6 +48,13 @@
             settings:keywords="@string/keywords_ambient_display_screen"
             settings:controller="com.android.settings.security.screenlock.LockScreenPreferenceController"/>
 
+        <SwitchPreference
+            android:key="stay_awake_on_fold"
+            android:title="@string/stay_awake_on_fold_title"
+            android:summary="@string/stay_awake_on_fold_summary"
+            settings:keywords="@string/keywords_stay_awake_on_lock"
+            settings:controller="com.android.settings.display.StayAwakeOnFoldPreferenceController"/>
+
         <com.android.settingslib.RestrictedPreference
             android:key="screen_timeout"
             android:title="@string/screen_timeout"
