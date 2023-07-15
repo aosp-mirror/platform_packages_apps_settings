@@ -192,20 +192,13 @@
     <string name="saturday_first_day_of_week" msgid="3702282590450322727">"subota"</string>
     <string name="title_regional_pref_footer" msgid="7450438024324794380">"Ako aplikacija ne podržava regionalne postavke, koristit će svoje zadane postavke jezika/zemlje."</string>
     <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"Saznajte više o postavkama jezika."</string>
-    <!-- no translation found for category_title_terms_of_address (4309422700380895278) -->
-    <skip />
-    <!-- no translation found for terms_of_address_title (4064593634733842458) -->
-    <skip />
-    <!-- no translation found for terms_of_address_summary (6136134336560679144) -->
-    <skip />
-    <!-- no translation found for terms_of_address_intro_title (6149691509414243483) -->
-    <skip />
-    <!-- no translation found for terms_of_address_not_specified (4439257779351251973) -->
-    <skip />
-    <!-- no translation found for terms_of_address_feminine (1743479869695539283) -->
-    <skip />
-    <!-- no translation found for terms_of_address_masculine (983106046135098856) -->
-    <skip />
+    <string name="category_title_terms_of_address" msgid="4309422700380895278">"Dodatne postavke"</string>
+    <string name="terms_of_address_title" msgid="4064593634733842458">"Rodni oblici obraćanja"</string>
+    <string name="terms_of_address_summary" msgid="6136134336560679144">"Postavite kako želite da vam se obraćaju"</string>
+    <string name="terms_of_address_intro_title" msgid="6149691509414243483">"Aplikacije mogu koristiti rodne oblike obraćanja da personaliziraju način na koji vam se obraćaju."</string>
+    <string name="terms_of_address_not_specified" msgid="4439257779351251973">"Nije navedeno"</string>
+    <string name="terms_of_address_feminine" msgid="1743479869695539283">"Ženski rod"</string>
+    <string name="terms_of_address_masculine" msgid="983106046135098856">"Muški rod"</string>
     <string name="dlg_remove_locales_title" msgid="3170501604483612114">"{count,plural, =1{Ukloniti odabrani jezik?}one{Ukloniti odabrane jezike?}few{Ukloniti odabrane jezike?}other{Ukloniti odabrane jezike?}}"</string>
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"Tekst će biti prikazan na drugom jeziku"</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Ne mogu se ukloniti svi jezici"</string>
@@ -678,6 +671,7 @@
     <string name="remove_association_button" msgid="5004208145998061135">"Uklonite povezanost"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"Prekinuti vezu s aplikacijom?"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"Aplikacija <xliff:g id="APP_NAME">%1$s</xliff:g> se neće više povezivati s uređajem <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
+    <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"Eksperimentalno. Poboljšava kvalitet zvuka."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Zaboravi uređaj"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Prekini vezu s aplikacijom"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Maksimalni broj povezanih Bluetooth audio uređaja"</string>
@@ -1478,18 +1472,12 @@
     <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"Koristi i uzorak za otključavanje uređaja"</string>
     <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"Koristi i PIN za otključavanje uređaja"</string>
     <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="2066701840753591922">"Koristi i lozinku za otključavanje uređaja"</string>
-    <!-- no translation found for lockpassword_confirm_repair_mode_pattern_header (6669435143987988314) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_repair_mode_pin_header (2585263648322879131) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_repair_mode_password_header (3064676176428495228) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_repair_mode_pattern_details (6187536224419477465) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_repair_mode_pin_details (203022189107305807) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_repair_mode_password_details (4860219600771003873) -->
-    <skip />
+    <string name="lockpassword_confirm_repair_mode_pattern_header" msgid="6669435143987988314">"Potvrdite uzorak"</string>
+    <string name="lockpassword_confirm_repair_mode_pin_header" msgid="2585263648322879131">"Potvrdite PIN"</string>
+    <string name="lockpassword_confirm_repair_mode_password_header" msgid="3064676176428495228">"Potvrdite lozinku"</string>
+    <string name="lockpassword_confirm_repair_mode_pattern_details" msgid="6187536224419477465">"Unesite uzorak za uređaj da nastavite"</string>
+    <string name="lockpassword_confirm_repair_mode_pin_details" msgid="203022189107305807">"Unesite PIN za uređaj da nastavite"</string>
+    <string name="lockpassword_confirm_repair_mode_password_details" msgid="4860219600771003873">"Unesite lozinku za uređaj da nastavite"</string>
     <string name="lockpassword_invalid_pin" msgid="7530854476819820600">"Pogrešan PIN"</string>
     <string name="lockpassword_invalid_password" msgid="1588184930542221687">"Pogrešna lozinka"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="8109305107409924083">"Pogrešan uzorak"</string>
@@ -1928,10 +1916,8 @@
     <string name="accessibility_button_gesture_footer_learn_more_content_description" msgid="4144803517680297869">"Saznajte više o dugmetu za pristupačnost i pokretu"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Korištenje dugmeta za pristupačnost. Pokret nije dostupan s navigiranjem pomoću 3 dugmeta."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Brzo pristupite funkcijama pristupačnosti"</string>
-    <!-- no translation found for accessibility_button_gesture_description (1141723096904904336) -->
-    <skip />
-    <!-- no translation found for accessibility_button_description (7669538706120092399) -->
-    <skip />
+    <string name="accessibility_button_gesture_description" msgid="1141723096904904336">"&lt;b&gt;Da započnete:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Idite u postavke pristupačnosti&lt;br/&gt; {1,number,integer}. Odaberite funkciju i dodirnite prečicu&lt;br/&gt; {2,number,integer}. Odaberite želite li koristiti dugme ili pokret da pristupite funkciji&lt;br/&gt;"</string>
+    <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;Da započnete:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Idite u postavke pristupačnosti&lt;br/&gt; {1,number,integer}. Odaberite funkciju i dodirnite prečicu&lt;br/&gt; {2,number,integer}. Odaberite dugme da pristupite funkciji&lt;br/&gt;"</string>
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Korištenje dugmeta ili pokreta"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Lokacija"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Veličina"</string>
@@ -3504,10 +3490,8 @@
     <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"Isključeno"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Kačenje aplikacije"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"Kačenje aplikacije omogućava da se trenutna aplikacija zadrži na ekranu dok je ne otkačite. Naprimjer, koristeći ovu funkciju možete omogućiti pouzdanom prijatelju da igra određenu igru."</string>
-    <!-- no translation found for screen_pinning_description (5822120806426139396) -->
-    <skip />
-    <!-- no translation found for screen_pinning_guest_user_description (2307270321127139579) -->
-    <skip />
+    <string name="screen_pinning_description" msgid="5822120806426139396">"Kada je aplikacija zakačena, ona može otvoriti druge aplikacije i omogućiti pristup ličnim podacima. \n\nDa koristite kačenje aplikacije: 	\n{0,number,integer}. Uključite kačenje aplikacije 	\n{1,number,integer}. Otvorite Pregled 	\n{2,number,integer}. Dodirnite ikonu aplikacije u gornjem dijelu ekrana, a zatim dodirnite Zakači"</string>
+    <string name="screen_pinning_guest_user_description" msgid="2307270321127139579">"Kada je aplikacija zakačena, ona može otvoriti druge aplikacije i omogućiti pristup ličnim podacima. \n\nAko želite dijeliti uređaj s nekim na siguran način, pokušajte koristiti profil za gosta korisnika. \n\nDa koristite kačenje aplikacije: 	\n{0,number,integer}. Uključite kačenje aplikacije 	\n{1,number,integer}. Otvorite Pregled 	\n{2,number,integer}. Dodirnite ikonu aplikacije u gornjem dijelu ekrana, a zatim dodirnite Zakači"</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Kada je aplikacija zakačena: \n\n•		Lični podaci mogu biti dostupni \n		(kao što su kontakti i sadržaj e-pošte) \n•		Zakačena aplikacija može otvoriti druge aplikacije \n\nKačenje aplikacije koristite samo s osobama kojima vjerujete."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Traži uzorak za otključavanje prije poništavanja kačenja"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Traži PIN prije poništavanja kačenja"</string>

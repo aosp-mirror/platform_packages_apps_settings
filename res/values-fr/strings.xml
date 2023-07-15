@@ -192,20 +192,13 @@
     <string name="saturday_first_day_of_week" msgid="3702282590450322727">"Samedi"</string>
     <string name="title_regional_pref_footer" msgid="7450438024324794380">"Si une appli ne prend pas en charge les préférences régionales, elle utilisera ses paramètres régionaux par défaut."</string>
     <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"Découvrez-en davantage sur les préférences linguistiques."</string>
-    <!-- no translation found for category_title_terms_of_address (4309422700380895278) -->
-    <skip />
-    <!-- no translation found for terms_of_address_title (4064593634733842458) -->
-    <skip />
-    <!-- no translation found for terms_of_address_summary (6136134336560679144) -->
-    <skip />
-    <!-- no translation found for terms_of_address_intro_title (6149691509414243483) -->
-    <skip />
-    <!-- no translation found for terms_of_address_not_specified (4439257779351251973) -->
-    <skip />
-    <!-- no translation found for terms_of_address_feminine (1743479869695539283) -->
-    <skip />
-    <!-- no translation found for terms_of_address_masculine (983106046135098856) -->
-    <skip />
+    <string name="category_title_terms_of_address" msgid="4309422700380895278">"Préférences supplémentaires"</string>
+    <string name="terms_of_address_title" msgid="4064593634733842458">"Identité de genre"</string>
+    <string name="terms_of_address_summary" msgid="6136134336560679144">"Sélectionnez la manière dont vous souhaitez que l\'on s\'adresse à vous."</string>
+    <string name="terms_of_address_intro_title" msgid="6149691509414243483">"Les applications sont susceptibles d\'utiliser votre identité de genre pour personnaliser la façon dont elles s\'adressent à vous."</string>
+    <string name="terms_of_address_not_specified" msgid="4439257779351251973">"Non défini"</string>
+    <string name="terms_of_address_feminine" msgid="1743479869695539283">"Féminin"</string>
+    <string name="terms_of_address_masculine" msgid="983106046135098856">"Masculin"</string>
     <string name="dlg_remove_locales_title" msgid="3170501604483612114">"{count,plural, =1{Retirer la langue sélectionnée ?}one{Retirer la langue sélectionnée ?}other{Retirer les langues sélectionnées ?}}"</string>
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"Le texte s\'affichera dans une autre langue."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Impossible de supprimer toutes les langues"</string>
@@ -678,6 +671,7 @@
     <string name="remove_association_button" msgid="5004208145998061135">"Supprimer l\'association"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"Dissocier l\'appli ?"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"L\'appli <xliff:g id="APP_NAME">%1$s</xliff:g> ne s\'associera plus à votre <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
+    <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"Expérimental. Améliore la qualité audio."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Oublier l\'appareil"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Dissocier l\'appli"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Nombre maximal d\'appareils audio Bluetooth connectés"</string>
@@ -1478,18 +1472,12 @@
     <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"Utiliser aussi schéma pour déverrouiller appareil"</string>
     <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"Utiliser aussi le code pour déverrouiller"</string>
     <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="2066701840753591922">"Utiliser aussi mot de passe pour déverrouiller appareil"</string>
-    <!-- no translation found for lockpassword_confirm_repair_mode_pattern_header (6669435143987988314) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_repair_mode_pin_header (2585263648322879131) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_repair_mode_password_header (3064676176428495228) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_repair_mode_pattern_details (6187536224419477465) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_repair_mode_pin_details (203022189107305807) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_repair_mode_password_details (4860219600771003873) -->
-    <skip />
+    <string name="lockpassword_confirm_repair_mode_pattern_header" msgid="6669435143987988314">"Valider le schéma"</string>
+    <string name="lockpassword_confirm_repair_mode_pin_header" msgid="2585263648322879131">"Valider le code"</string>
+    <string name="lockpassword_confirm_repair_mode_password_header" msgid="3064676176428495228">"Valider le mot de passe"</string>
+    <string name="lockpassword_confirm_repair_mode_pattern_details" msgid="6187536224419477465">"Utilisez le schéma de l\'appareil pour continuer."</string>
+    <string name="lockpassword_confirm_repair_mode_pin_details" msgid="203022189107305807">"Saisissez le code de l\'appareil pour continuer."</string>
+    <string name="lockpassword_confirm_repair_mode_password_details" msgid="4860219600771003873">"Saisissez le mot de passe de l\'appareil pour continuer."</string>
     <string name="lockpassword_invalid_pin" msgid="7530854476819820600">"Code d\'accès incorrect."</string>
     <string name="lockpassword_invalid_password" msgid="1588184930542221687">"Mot de passe incorrect."</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="8109305107409924083">"Schéma incorrect"</string>
@@ -1928,10 +1916,8 @@
     <string name="accessibility_button_gesture_footer_learn_more_content_description" msgid="4144803517680297869">"En savoir plus sur le bouton et le geste d\'accessibilité"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Utilisation du bouton Accessibilité. Geste indisponible avec la navigation à trois boutons."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Accès rapide aux fonctionnalités d\'accessibilité"</string>
-    <!-- no translation found for accessibility_button_gesture_description (1141723096904904336) -->
-    <skip />
-    <!-- no translation found for accessibility_button_description (7669538706120092399) -->
-    <skip />
+    <string name="accessibility_button_gesture_description" msgid="1141723096904904336">"&lt;b&gt;Pour démarrer&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Accédez aux paramètres d\'accessibilité&lt;br/&gt; {1,number,integer}. Sélectionnez une fonctionnalité et appuyez sur le raccourci&lt;br/&gt; {2,number,integer}. Précisez si vous souhaitez utiliser un bouton ou un geste pour accéder au paramètre&lt;br/&gt;."</string>
+    <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;Pour démarrer&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Accédez aux paramètres d\'accessibilité&lt;br/&gt; {1,number,integer}. Sélectionnez une fonctionnalité et appuyez sur le raccourci&lt;br/&gt; {2,number,integer}. Choisissez le bouton pour accéder à cette fonctionnalité&lt;br/&gt;."</string>
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Utiliser le bouton ou le geste"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Emplacement"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Taille"</string>
@@ -3504,10 +3490,8 @@
     <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"Désactivé"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Épinglage d\'application"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"Avec l\'épinglage d\'application, l\'application actuelle reste affichée jusqu\'à ce que vous la retiriez. Cette fonctionnalité vous permet, par exemple, de laisser une personne de confiance jouer à un jeu spécifique."</string>
-    <!-- no translation found for screen_pinning_description (5822120806426139396) -->
-    <skip />
-    <!-- no translation found for screen_pinning_guest_user_description (2307270321127139579) -->
-    <skip />
+    <string name="screen_pinning_description" msgid="5822120806426139396">"Les données personnelles peuvent être accessibles et d\'autres applis peuvent être ouvertes depuis une appli épinglée. \n\nPour utiliser l\'épinglage d\'application : 	\n{0,number,integer}. Activer l\'épinglage d\'application 	\n{1,number,integer}. Ouvrir Récents 	\n{2,number,integer}. Appuyez sur l\'icône d\'appli en haut de l\'écran, puis sur \"Épingler\""</string>
+    <string name="screen_pinning_guest_user_description" msgid="2307270321127139579">"Les données personnelles peuvent être accessibles et d\'autres applis peuvent être ouvertes depuis une appli épinglée. \n\nSi vous souhaitez partager votre appareil de manière sécurisée, essayez plutôt d\'utiliser un profil invité. \n\nPour utiliser l\'épinglage d\'application : 	\n{0,number,integer}. Activer l\'épinglage d\'application 	\n{1,number,integer}. Ouvrir Récents 	\n{2,number,integer}. Appuyez sur l\'icône d\'appli en haut de l\'écran, puis sur \"Épingler\""</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Lorsqu\'une application est épinglée : \n\n•	 Des données à caractère personnel peuvent être accessibles (comme des contacts et le contenu d\'e-mails) \n•		D\'autres applis peuvent être ouvertes depuis l\'application épinglée \n\nN\'utilisez l\'épinglage d\'application qu\'avec des personnes de confiance.\n"</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Demander le schéma de déverrouillage avant de retirer l\'épingle"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Demander le code avant de retirer l\'épingle"</string>

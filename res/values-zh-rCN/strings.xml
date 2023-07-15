@@ -192,20 +192,13 @@
     <string name="saturday_first_day_of_week" msgid="3702282590450322727">"星期六"</string>
     <string name="title_regional_pref_footer" msgid="7450438024324794380">"不支持地区偏好设置的应用将使用默认语言区域设置。"</string>
     <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"详细了解语言偏好设置。"</string>
-    <!-- no translation found for category_title_terms_of_address (4309422700380895278) -->
-    <skip />
-    <!-- no translation found for terms_of_address_title (4064593634733842458) -->
-    <skip />
-    <!-- no translation found for terms_of_address_summary (6136134336560679144) -->
-    <skip />
-    <!-- no translation found for terms_of_address_intro_title (6149691509414243483) -->
-    <skip />
-    <!-- no translation found for terms_of_address_not_specified (4439257779351251973) -->
-    <skip />
-    <!-- no translation found for terms_of_address_feminine (1743479869695539283) -->
-    <skip />
-    <!-- no translation found for terms_of_address_masculine (983106046135098856) -->
-    <skip />
+    <string name="category_title_terms_of_address" msgid="4309422700380895278">"更多偏好设置"</string>
+    <string name="terms_of_address_title" msgid="4064593634733842458">"称谓语"</string>
+    <string name="terms_of_address_summary" msgid="6136134336560679144">"设置您希望别人如何称呼您"</string>
+    <string name="terms_of_address_intro_title" msgid="6149691509414243483">"应用可以使用您的称谓语以个性化的方式来称呼您。"</string>
+    <string name="terms_of_address_not_specified" msgid="4439257779351251973">"未指定"</string>
+    <string name="terms_of_address_feminine" msgid="1743479869695539283">"阴性"</string>
+    <string name="terms_of_address_masculine" msgid="983106046135098856">"阳性"</string>
     <string name="dlg_remove_locales_title" msgid="3170501604483612114">"{count,plural, =1{要移除所选语言吗？}other{要移除所选语言吗？}}"</string>
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"系统将以其他语言显示文字。"</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"无法移除所有语言"</string>
@@ -678,6 +671,7 @@
     <string name="remove_association_button" msgid="5004208145998061135">"取消关联"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"要取消与该应用的关联吗？"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"“<xliff:g id="APP_NAME">%1$s</xliff:g>”应用将不再关联到您的“<xliff:g id="DEVICE_NAME">%2$s</xliff:g>”"</string>
+    <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"实验性功能。可改善音频质量。"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"取消保存"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"取消与该应用的关联"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"已连接蓝牙音频设备的数量上限"</string>
@@ -1478,18 +1472,12 @@
     <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"还使用解锁图案来解锁此设备"</string>
     <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"还使用 PIN 码来解锁此设备"</string>
     <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="2066701840753591922">"还使用密码来解锁此设备"</string>
-    <!-- no translation found for lockpassword_confirm_repair_mode_pattern_header (6669435143987988314) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_repair_mode_pin_header (2585263648322879131) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_repair_mode_password_header (3064676176428495228) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_repair_mode_pattern_details (6187536224419477465) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_repair_mode_pin_details (203022189107305807) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_repair_mode_password_details (4860219600771003873) -->
-    <skip />
+    <string name="lockpassword_confirm_repair_mode_pattern_header" msgid="6669435143987988314">"验证图案"</string>
+    <string name="lockpassword_confirm_repair_mode_pin_header" msgid="2585263648322879131">"验证 PIN 码"</string>
+    <string name="lockpassword_confirm_repair_mode_password_header" msgid="3064676176428495228">"验证密码"</string>
+    <string name="lockpassword_confirm_repair_mode_pattern_details" msgid="6187536224419477465">"请绘制您的设备解锁图案以继续"</string>
+    <string name="lockpassword_confirm_repair_mode_pin_details" msgid="203022189107305807">"请输入您的设备 PIN 码以继续"</string>
+    <string name="lockpassword_confirm_repair_mode_password_details" msgid="4860219600771003873">"请输入您的设备密码以继续"</string>
     <string name="lockpassword_invalid_pin" msgid="7530854476819820600">"PIN 码错误"</string>
     <string name="lockpassword_invalid_password" msgid="1588184930542221687">"密码错误"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="8109305107409924083">"图案错误"</string>
@@ -1928,10 +1916,8 @@
     <string name="accessibility_button_gesture_footer_learn_more_content_description" msgid="4144803517680297869">"详细了解“无障碍”按钮和无障碍功能启动手势"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"请使用“无障碍”按钮。该手势不能与“三按钮”导航搭配使用。"</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"快速使用无障碍功能"</string>
-    <!-- no translation found for accessibility_button_gesture_description (1141723096904904336) -->
-    <skip />
-    <!-- no translation found for accessibility_button_description (7669538706120092399) -->
-    <skip />
+    <string name="accessibility_button_gesture_description" msgid="1141723096904904336">"&lt;b&gt;如需开始使用此功能，请按以下步骤操作：&lt;/b&gt;&lt;br/&gt; {0,number,integer}. 转到无障碍设置&lt;br/&gt; {1,number,integer}. 选择一项功能并点按相应快捷方式&lt;br/&gt; {2,number,integer}. 选择是否要使用按钮或手势来访问该功能&lt;br/&gt;"</string>
+    <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;如需开始使用此功能，请按以下步骤操作：&lt;/b&gt;&lt;br/&gt; {0,number,integer}. 转到无障碍设置&lt;br/&gt; {1,number,integer}. 选择一项功能并点按相应快捷方式&lt;br/&gt; {2,number,integer}. 选择相应按钮以使用此功能&lt;br/&gt;"</string>
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"使用按钮或手势"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"位置"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"大小"</string>
@@ -3504,10 +3490,8 @@
     <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"已关闭"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"固定应用"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"通过固定应用功能，您可以固定显示当前应用，直到取消固定该应用为止。例如，您可以利用此功能让信任的好友玩某款游戏。"</string>
-    <!-- no translation found for screen_pinning_description (5822120806426139396) -->
-    <skip />
-    <!-- no translation found for screen_pinning_guest_user_description (2307270321127139579) -->
-    <skip />
+    <string name="screen_pinning_description" msgid="5822120806426139396">"固定某个应用后，该应用可打开其他应用，也能访问个人数据。\n\n如需使用固定应用功能，请按以下步骤操作：	\n{0,number,integer}. 开启固定应用功能 	\n{1,number,integer}. 打开“概览”	\n{2,number,integer}. 点按屏幕顶部的应用图标，然后点按“固定”"</string>
+    <string name="screen_pinning_guest_user_description" msgid="2307270321127139579">"固定某个应用后，该应用可打开其他应用，也能访问个人数据。\n\n如果您想安全地与他人共用您的设备，请尝试改用访客用户模式。\n\n如需使用固定应用功能，请按以下步骤操作：	\n{0,number,integer}. 开启固定应用功能	\n{1,number,integer}. 打开“概览”	\n{2,number,integer}. 点按屏幕顶部的应用图标，然后点按“固定”"</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"固定应用后：\n\n•		该应用可访问您的个人数据\n		（例如通讯录和电子邮件内容）\n•		已固定的应用可打开其他应用\n\n请务必只为您非常信任的人开启固定应用功能。"</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"取消固定屏幕前要求绘制解锁图案"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"取消固定前要求输入 PIN 码"</string>
@@ -4575,7 +4559,7 @@
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"使用“无线调试”"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"使用“图形驱动程序偏好设置”"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"使用“护眼模式”"</string>
-    <string name="nfc_main_switch_title" msgid="6295839988954817432">"使用“NFC”"</string>
+    <string name="nfc_main_switch_title" msgid="6295839988954817432">"使用 NFC"</string>
     <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"使用“自适应亮度”"</string>
     <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"使用“WLAN 通话”"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"查看所有应用"</string>

@@ -192,20 +192,13 @@
     <string name="saturday_first_day_of_week" msgid="3702282590450322727">"Sabato"</string>
     <string name="title_regional_pref_footer" msgid="7450438024324794380">"Se un\'app non supporta le preferenze locali, userà le proprie impostazioni internazionali predefinite."</string>
     <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"Scopri di più sulle preferenze di lingua."</string>
-    <!-- no translation found for category_title_terms_of_address (4309422700380895278) -->
-    <skip />
-    <!-- no translation found for terms_of_address_title (4064593634733842458) -->
-    <skip />
-    <!-- no translation found for terms_of_address_summary (6136134336560679144) -->
-    <skip />
-    <!-- no translation found for terms_of_address_intro_title (6149691509414243483) -->
-    <skip />
-    <!-- no translation found for terms_of_address_not_specified (4439257779351251973) -->
-    <skip />
-    <!-- no translation found for terms_of_address_feminine (1743479869695539283) -->
-    <skip />
-    <!-- no translation found for terms_of_address_masculine (983106046135098856) -->
-    <skip />
+    <string name="category_title_terms_of_address" msgid="4309422700380895278">"Preferenze aggiuntive"</string>
+    <string name="terms_of_address_title" msgid="4064593634733842458">"Appellativi"</string>
+    <string name="terms_of_address_summary" msgid="6136134336560679144">"Imposta gli appellativi da usare per rivolgersi a te"</string>
+    <string name="terms_of_address_intro_title" msgid="6149691509414243483">"Le app possono usare i tuoi appellativi per personalizzare il modo in cui rivolgersi a te."</string>
+    <string name="terms_of_address_not_specified" msgid="4439257779351251973">"Non specificati"</string>
+    <string name="terms_of_address_feminine" msgid="1743479869695539283">"Femminili"</string>
+    <string name="terms_of_address_masculine" msgid="983106046135098856">"Maschili"</string>
     <string name="dlg_remove_locales_title" msgid="3170501604483612114">"{count,plural, =1{Vuoi rimuovere la lingua selezionata?}other{Vuoi rimuovere le lingue selezionate?}}"</string>
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"Il testo verrà mostrato in un\'altra lingua."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Impossibile rimuovere tutte le lingue"</string>
@@ -678,6 +671,7 @@
     <string name="remove_association_button" msgid="5004208145998061135">"Rimuovi associazione"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"Vuoi scollegare l\'app?"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"L\'app <xliff:g id="APP_NAME">%1$s</xliff:g> non si collegherà più a <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
+    <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"Sperimentale. Migliora la qualità audio."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Elimina dispositivo"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Scollega app"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Numero max dispositivi audio Bluetooth connessi"</string>
@@ -1478,18 +1472,12 @@
     <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"Usa sequenza per sbloccare dispositivo"</string>
     <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"Usa PIN per sbloccare dispositivo"</string>
     <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="2066701840753591922">"Usa password per sbloccare dispositivo"</string>
-    <!-- no translation found for lockpassword_confirm_repair_mode_pattern_header (6669435143987988314) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_repair_mode_pin_header (2585263648322879131) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_repair_mode_password_header (3064676176428495228) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_repair_mode_pattern_details (6187536224419477465) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_repair_mode_pin_details (203022189107305807) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_repair_mode_password_details (4860219600771003873) -->
-    <skip />
+    <string name="lockpassword_confirm_repair_mode_pattern_header" msgid="6669435143987988314">"Verifica sequenza"</string>
+    <string name="lockpassword_confirm_repair_mode_pin_header" msgid="2585263648322879131">"Verifica PIN"</string>
+    <string name="lockpassword_confirm_repair_mode_password_header" msgid="3064676176428495228">"Verifica password"</string>
+    <string name="lockpassword_confirm_repair_mode_pattern_details" msgid="6187536224419477465">"Per continuare devi inserire la sequenza del dispositivo"</string>
+    <string name="lockpassword_confirm_repair_mode_pin_details" msgid="203022189107305807">"Per continuare devi inserire il PIN del dispositivo"</string>
+    <string name="lockpassword_confirm_repair_mode_password_details" msgid="4860219600771003873">"Per continuare devi inserire la password del dispositivo"</string>
     <string name="lockpassword_invalid_pin" msgid="7530854476819820600">"PIN errato"</string>
     <string name="lockpassword_invalid_password" msgid="1588184930542221687">"Password errata"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="8109305107409924083">"Sequenza errata"</string>
@@ -1928,10 +1916,8 @@
     <string name="accessibility_button_gesture_footer_learn_more_content_description" msgid="4144803517680297869">"Scopri di più sul gesto e sul pulsante Accessibilità"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Viene usato il pulsante Accessibilità. Gesto non disponibile con la navigazione con tre pulsanti."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Accedi rapidamente alle funzioni di accessibilità"</string>
-    <!-- no translation found for accessibility_button_gesture_description (1141723096904904336) -->
-    <skip />
-    <!-- no translation found for accessibility_button_description (7669538706120092399) -->
-    <skip />
+    <string name="accessibility_button_gesture_description" msgid="1141723096904904336">"&lt;b&gt;Per iniziare&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Vai alle impostazioni di accessibilità.&lt;br/&gt; {1,number,integer}. Seleziona una funzionalità e tocca la scorciatoia.&lt;br/&gt; {2,number,integer}. Scegli se vuoi utilizzare un pulsante o un gesto per accedere alla funzionalità.&lt;br/&gt;"</string>
+    <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;Per iniziare&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Vai alle impostazioni di accessibilità.&lt;br/&gt; {1,number,integer}. Seleziona una funzionalità e tocca la scorciatoia.&lt;br/&gt; {2,number,integer}. Scegli il pulsante per accedere alla funzionalità.&lt;br/&gt;"</string>
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Usa pulsante o gesto"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Posizione"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Dimensioni"</string>
@@ -3504,10 +3490,8 @@
     <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"Off"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Blocco app su schermo"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"La funzionalità di blocco delle app su schermo ti consente di mantenere visibile l\'app in uso finché non decidi di sbloccarla. Questa funzionalità può essere usata, ad esempio, per consentire a un amico di cui ti fidi di giocare a un gioco specifico."</string>
-    <!-- no translation found for screen_pinning_description (5822120806426139396) -->
-    <skip />
-    <!-- no translation found for screen_pinning_guest_user_description (2307270321127139579) -->
-    <skip />
+    <string name="screen_pinning_description" msgid="5822120806426139396">"Un\'app bloccata potrebbe aprire altre app e i dati personali potrebbero essere accessibili. \n\nPer usare la funzionalità di blocco app su schermo: 	\n{0,number,integer}. Attiva il blocco app su schermo. 	\n{1,number,integer}. Apri Panoramica. 	\n{2,number,integer}. Tocca l\'icona dell\'app nella parte superiore dello schermo, quindi tocca Blocca."</string>
+    <string name="screen_pinning_guest_user_description" msgid="2307270321127139579">"Un\'app bloccata potrebbe aprire altre app e i dati personali potrebbero essere accessibili. \n\nSe vuoi condividere il tuo dispositivo con qualcuno in modo sicuro, prova a usare invece un utente ospite. \n\nPer usare la funzionalità di blocco app su schermo: 	\n{0,number,integer}. Attiva il blocco app su schermo. 	\n{1,number,integer}. Apri Panoramica. 	\n{2,number,integer}. Tocca l\'icona dell\'app nella parte superiore dello schermo, quindi tocca Blocca."</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Quando un\'app è bloccata su schermo: \n\n•		I dati personali potrebbero essere accessibili (ad esempio i contatti o i contenuti delle email) \n\n•		Le app bloccate potrebbero aprire altre app \n\nUtilizza il blocco app su schermo solo con persone di cui ti fidi."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Richiedi sequenza prima di sbloccare"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Richiedi il PIN per lo sblocco"</string>
@@ -4202,9 +4186,9 @@
     <string name="gesture_prevent_ringing_title" msgid="5978577898997523581">"Premi insieme i tasti Accensione e Volume su per"</string>
     <string name="gesture_prevent_ringing_sound_title" msgid="4529077822282099235">"Scorciatoia per disattivare la suoneria"</string>
     <string name="prevent_ringing_option_vibrate" msgid="5456962289649581737">"Passare alla vibrazione"</string>
-    <string name="prevent_ringing_option_mute" msgid="7446121133560945051">"Disattivare l\'audio"</string>
+    <string name="prevent_ringing_option_mute" msgid="7446121133560945051">"Silenzia"</string>
     <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"Vibrazione"</string>
-    <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"Disattiva audio"</string>
+    <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"Silenzia"</string>
     <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="8070356204398144241">"Per procedere con l\'attivazione, devi prima modificare l\'opzione \"Tieni premuto il tasto di accensione\" impostandola sul menu del tasto di accensione."</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Dettagli rete"</string>
     <string name="devices_title" msgid="649715719278562515">"Dispositivi"</string>

@@ -192,20 +192,13 @@
     <string name="saturday_first_day_of_week" msgid="3702282590450322727">"Sábado"</string>
     <string name="title_regional_pref_footer" msgid="7450438024324794380">"Si una app no admite preferencias regionales, usará su configuración regional predeterminada."</string>
     <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"Obtén más información sobre las preferencias de idioma."</string>
-    <!-- no translation found for category_title_terms_of_address (4309422700380895278) -->
-    <skip />
-    <!-- no translation found for terms_of_address_title (4064593634733842458) -->
-    <skip />
-    <!-- no translation found for terms_of_address_summary (6136134336560679144) -->
-    <skip />
-    <!-- no translation found for terms_of_address_intro_title (6149691509414243483) -->
-    <skip />
-    <!-- no translation found for terms_of_address_not_specified (4439257779351251973) -->
-    <skip />
-    <!-- no translation found for terms_of_address_feminine (1743479869695539283) -->
-    <skip />
-    <!-- no translation found for terms_of_address_masculine (983106046135098856) -->
-    <skip />
+    <string name="category_title_terms_of_address" msgid="4309422700380895278">"Preferencias adicionales"</string>
+    <string name="terms_of_address_title" msgid="4064593634733842458">"Tratamiento"</string>
+    <string name="terms_of_address_summary" msgid="6136134336560679144">"Establece el tratamiento que prefieres"</string>
+    <string name="terms_of_address_intro_title" msgid="6149691509414243483">"Las apps pueden usar el tratamiento que prefieres para personalizar la forma en que se dirigen a ti."</string>
+    <string name="terms_of_address_not_specified" msgid="4439257779351251973">"Sin especificar"</string>
+    <string name="terms_of_address_feminine" msgid="1743479869695539283">"Femenino"</string>
+    <string name="terms_of_address_masculine" msgid="983106046135098856">"Masculino"</string>
     <string name="dlg_remove_locales_title" msgid="3170501604483612114">"{count,plural, =1{¿Quitar el idioma seleccionado?}other{¿Quitar los idiomas seleccionados?}}"</string>
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"Se mostrará el texto en otro idioma."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"No se pueden quitar todos los idiomas"</string>
@@ -678,6 +671,7 @@
     <string name="remove_association_button" msgid="5004208145998061135">"Quitar asociación"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"¿Quieres desconectar la app?"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"La app de <xliff:g id="APP_NAME">%1$s</xliff:g> ya no se conectará con <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
+    <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"Experimental Mejora la calidad del audio."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Olvidar este dispositivo"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Desconectar app"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Máximo de dispositivos de audio Bluetooth conectados"</string>
@@ -1478,18 +1472,12 @@
     <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"Desbloquear este dispositivo con el patrón"</string>
     <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"Desbloquear este dispositivo con el PIN"</string>
     <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="2066701840753591922">"Desbloquear este dispositivo con contraseña"</string>
-    <!-- no translation found for lockpassword_confirm_repair_mode_pattern_header (6669435143987988314) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_repair_mode_pin_header (2585263648322879131) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_repair_mode_password_header (3064676176428495228) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_repair_mode_pattern_details (6187536224419477465) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_repair_mode_pin_details (203022189107305807) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_repair_mode_password_details (4860219600771003873) -->
-    <skip />
+    <string name="lockpassword_confirm_repair_mode_pattern_header" msgid="6669435143987988314">"Verificar patrón"</string>
+    <string name="lockpassword_confirm_repair_mode_pin_header" msgid="2585263648322879131">"Verificar PIN"</string>
+    <string name="lockpassword_confirm_repair_mode_password_header" msgid="3064676176428495228">"Verificar contraseña"</string>
+    <string name="lockpassword_confirm_repair_mode_pattern_details" msgid="6187536224419477465">"Para continuar, usa el patrón del dispositivo"</string>
+    <string name="lockpassword_confirm_repair_mode_pin_details" msgid="203022189107305807">"Para continuar, ingresa el PIN del dispositivo"</string>
+    <string name="lockpassword_confirm_repair_mode_password_details" msgid="4860219600771003873">"Para continuar, ingresa la contraseña del dispositivo"</string>
     <string name="lockpassword_invalid_pin" msgid="7530854476819820600">"PIN incorrecto"</string>
     <string name="lockpassword_invalid_password" msgid="1588184930542221687">"Contraseña incorrecta"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="8109305107409924083">"Patrón incorrecto"</string>
@@ -1928,10 +1916,8 @@
     <string name="accessibility_button_gesture_footer_learn_more_content_description" msgid="4144803517680297869">"Más información sobre el botón de accesibilidad y los gestos"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Se está usando el botón de accesibilidad. El gesto no está disponible con navegación con 3 botones."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Accede rápidamente a funciones de accesibilidad"</string>
-    <!-- no translation found for accessibility_button_gesture_description (1141723096904904336) -->
-    <skip />
-    <!-- no translation found for accessibility_button_description (7669538706120092399) -->
-    <skip />
+    <string name="accessibility_button_gesture_description" msgid="1141723096904904336">"&lt;b&gt;Para comenzar&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Ve a la configuración de accesibilidad.&lt;br/&gt; {1,number,integer}. Selecciona una función y presiona la combinación de teclas.&lt;br/&gt; {2,number,integer}. Elige si quieres usar un botón o un gesto para acceder a la función.&lt;br/&gt;"</string>
+    <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;Para comenzar&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Ve a la configuración de accesibilidad.&lt;br/&gt; {1,number,integer}. Selecciona una función y presiona la combinación de teclas.&lt;br/&gt; {2,number,integer}. Elige el botón para acceder a la función.&lt;br/&gt;"</string>
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Usar botón o gesto"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Ubicación"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Tamaño"</string>
@@ -3504,10 +3490,8 @@
     <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"Desactivada"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Fijación de apps"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"Al fijar una app, esta se mantiene visible hasta que dejas de fijarla. Esta función se puede utilizar, por ejemplo, para dejar que alguien de confianza juegue un juego específico."</string>
-    <!-- no translation found for screen_pinning_description (5822120806426139396) -->
-    <skip />
-    <!-- no translation found for screen_pinning_guest_user_description (2307270321127139579) -->
-    <skip />
+    <string name="screen_pinning_description" msgid="5822120806426139396">"Si fijas una app, esta podrá abrir otras apps y acceder a tus datos personales. \n\nPara usar la fijación de apps, haz lo siguiente: 	\n{0,number,integer}. Activa la fijación de apps. 	\n{1,number,integer}. Abre Recientes. 	\n{2,number,integer}. Presiona el ícono de la app que se encuentra en la parte superior de la pantalla y, luego, Fijar."</string>
+    <string name="screen_pinning_guest_user_description" msgid="2307270321127139579">"Si fijas una app, esta podrá abrir otras apps y acceder a tus datos personales. \n\nSi quieres compartir tu dispositivo con alguien de forma segura, usa un perfil de invitado. \n\nPara usar la fijación de apps, haz lo siguiente: 	\n{0,number,integer}. Activa la fijación de apps. 	\n{1,number,integer}. Abre Recientes. 	\n{2,number,integer}. Presiona el ícono de la app que se encuentra en la parte superior de la pantalla y, luego, Fijar."</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Cuando fijas una app, puede ocurrir lo siguiente: \n\n•		Esta podrá acceder a datos personales (como contactos y contenido de los correos electrónicos). \n•	 Es posible que las apps fijadas abran otras apps.		 \n\nUsa la función para fijar apps solo con personas de confianza.\n"</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Solicitar desbloqueo para quitar fijación"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Solicitar PIN para quitar fijación"</string>
