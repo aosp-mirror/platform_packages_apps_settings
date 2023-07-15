@@ -865,7 +865,7 @@
 
     <!-- Biometric settings --><skip />
     <!-- Title shown for menu item that launches biometric settings. [CHAR LIMIT=66] -->
-    <string name="security_settings_biometric_preference_title">Face &amp; Fingerprint Unlock</string>
+    <string name="security_settings_biometric_preference_title">Fingerprint &amp; Face Unlock</string>
     <!-- Title shown for work menu item that launches biometric settings. [CHAR LIMIT=66] -->
     <string name="security_settings_work_biometric_preference_title">Face &amp; Fingerprint Unlock for work</string>
     <!-- Message shown in summary field of biometric settings. [CHAR LIMIT=66] -->
@@ -1217,14 +1217,8 @@
     <!-- Title for preference that guides the user to skip Face Unlock setup [CHAR LIMIT=60]-->
     <string name="face_unlock_skip_face">Continue without Face Unlock</string>
 
-    <!-- Title for preference that guides the user through creating a backup unlock pattern for biometrics unlock [CHAR LIMIT=45]-->
-    <string name="biometrics_unlock_set_unlock_pattern">Pattern \u2022 Face \u2022 Fingerprint</string>
-    <!-- Title for preference that guides the user through creating a backup unlock PIN for biometrics unlock [CHAR LIMIT=45]-->
-    <string name="biometrics_unlock_set_unlock_pin">PIN \u2022 Face \u2022 Fingerprint</string>
-    <!-- Title for preference that guides the user through creating a backup unlock password for biometrics unlock [CHAR LIMIT=45]-->
-    <string name="biometrics_unlock_set_unlock_password">Password \u2022 Face \u2022 Fingerprint</string>
     <!-- Title for preference that guides the user to skip face unlock setup [CHAR LIMIT=60]-->
-    <string name="biometrics_unlock_skip_biometrics">Continue without face or fingerprint</string>
+    <string name="biometrics_unlock_skip_biometrics">Continue without fingerprint or face</string>
 
     <!-- Summary for "Configure lockscreen" when lock screen is off [CHAR LIMIT=45] -->
     <string name="unlock_set_unlock_mode_off">None</string>
@@ -2363,6 +2357,10 @@
     <string name="display_white_balance_title">Display white balance</string>
     <!-- Display settings screen, display white balance settings summary [CHAR LIMIT=NONE] -->
     <string name="display_white_balance_summary"></string>
+    <!-- Display settings screen, setting name to enable staying awake on fold [CHAR LIMIT=30] -->
+    <string name="stay_awake_on_fold_title">Stay unlocked on fold</string>
+    <!-- Display settings screen, setting summary to enable staying awake on fold [CHAR LIMIT=NONE] -->
+    <string name="stay_awake_on_fold_summary">Keep front display unlocked when folded until screen timeout</string>
     <!-- Display settings screen, peak refresh rate settings title [CHAR LIMIT=30] -->
     <string name="peak_refresh_rate_title">Smooth Display</string>
     <!-- Display settings screen, peak refresh rate settings summary [CHAR LIMIT=NONE] -->
@@ -7034,6 +7032,9 @@
     <string name="keywords_app_pinning">screen pinning</string>
     <string name="keywords_profile_challenge">work challenge, work, profile</string>
     <string name="keywords_unification">work profile, managed profile, unify, unification, work, profile</string>
+    <string name="keywords_stay_awake_on_lock">
+        awake, sleep, do not lock, stay unlocked on fold, folding, closing, fold, close, screen off
+    </string>
     <string name="keywords_gesture">gestures</string>
     <string name="keywords_wallet">wallet</string>
     <string name="keywords_payment_settings">pay, tap, payments</string>
@@ -10532,7 +10533,7 @@
     <!-- Debugging developer settings: enable angle as system driver? [CHAR LIMIT=50] -->
     <string name="enable_angle_as_system_driver">Enable ANGLE</string>
     <!-- Debugging developer settings: enable angle as system driver summary [CHAR LIMIT=NONE] -->
-    <string name="enable_angle_as_system_driver_summary">Enable ANGLE as system OpenGL ES driver</string>
+    <string name="enable_angle_as_system_driver_summary">Enable ANGLE as default OpenGL ES driver. Enabling it on incompatible devices may break some applications.</string>
     <!--Dialog body text used to explain a reboot is required after changing ANGLE as system GLES driver setting-->
     <string name="reboot_dialog_enable_angle_as_system_driver">A reboot is required to change the system OpenGL ES driver</string>
 
