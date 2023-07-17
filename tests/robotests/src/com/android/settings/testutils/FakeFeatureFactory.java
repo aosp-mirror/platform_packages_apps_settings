@@ -193,8 +193,9 @@ public class FakeFeatureFactory extends FeatureFactory {
         return localeFeatureProvider;
     }
 
+    @NotNull
     @Override
-    public EnterprisePrivacyFeatureProvider getEnterprisePrivacyFeatureProvider(Context context) {
+    public EnterprisePrivacyFeatureProvider getEnterprisePrivacyFeatureProvider() {
         return enterprisePrivacyFeatureProvider;
     }
 

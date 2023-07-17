@@ -35,8 +35,8 @@ public class AlwaysOnVpnCurrentUserPreferenceController
 
     public AlwaysOnVpnCurrentUserPreferenceController(Context context) {
         super(context);
-        mFeatureProvider = FeatureFactory.getFactory(context)
-                .getEnterprisePrivacyFeatureProvider(context);
+        mFeatureProvider = FeatureFactory.getFeatureFactory()
+                .getEnterprisePrivacyFeatureProvider();
         mDevicePolicyManager = context.getSystemService(DevicePolicyManager.class);
     }
 

@@ -36,8 +36,8 @@ public abstract class AdminActionPreferenceControllerBase extends
 
     public AdminActionPreferenceControllerBase(Context context) {
         super(context);
-        mFeatureProvider = FeatureFactory.getFactory(context)
-                .getEnterprisePrivacyFeatureProvider(context);
+        mFeatureProvider = FeatureFactory.getFeatureFactory()
+                .getEnterprisePrivacyFeatureProvider();
     }
 
     protected abstract Date getAdminActionTimestamp();

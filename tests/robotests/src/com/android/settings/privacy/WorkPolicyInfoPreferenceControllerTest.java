@@ -53,7 +53,7 @@ public class WorkPolicyInfoPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
         mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
-        mEnterpriseProvider = mFakeFeatureFactory.getEnterprisePrivacyFeatureProvider(mContext);
+        mEnterpriseProvider = mFakeFeatureFactory.getEnterprisePrivacyFeatureProvider();
         SafetyCenterManagerWrapper.sInstance = mock(SafetyCenterManagerWrapper.class);
     }
 

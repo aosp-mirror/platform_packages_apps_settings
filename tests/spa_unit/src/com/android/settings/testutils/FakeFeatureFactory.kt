@@ -88,11 +88,8 @@ class FakeFeatureFactory : FeatureFactory() {
     override val localeFeatureProvider: LocaleFeatureProvider
         get() = TODO("Not yet implemented")
 
-    override fun getEnterprisePrivacyFeatureProvider(
-        context: Context,
-    ): EnterprisePrivacyFeatureProvider {
-        TODO("Not yet implemented")
-    }
+    override val enterprisePrivacyFeatureProvider: EnterprisePrivacyFeatureProvider
+        get() = TODO("Not yet implemented")
 
     override val searchFeatureProvider: SearchFeatureProvider
         get() = TODO("Not yet implemented")

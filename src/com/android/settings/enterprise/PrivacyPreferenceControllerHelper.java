@@ -39,8 +39,8 @@ class PrivacyPreferenceControllerHelper {
 
     PrivacyPreferenceControllerHelper(Context context) {
         mContext = Objects.requireNonNull(context);
-        mFeatureProvider = FeatureFactory.getFactory(context)
-                .getEnterprisePrivacyFeatureProvider(context);
+        mFeatureProvider = FeatureFactory.getFeatureFactory()
+                .getEnterprisePrivacyFeatureProvider();
         mDevicePolicyManager = context.getSystemService(DevicePolicyManager.class);
     }
 
