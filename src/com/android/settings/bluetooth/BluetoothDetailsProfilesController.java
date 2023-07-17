@@ -69,7 +69,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
     private static final String ENABLE_DUAL_MODE_AUDIO =
             "persist.bluetooth.enable_dual_mode_audio";
     private static final String CONFIG_LE_AUDIO_ENABLED_BY_DEFAULT = "le_audio_enabled_by_default";
-    private static final boolean LE_AUDIO_DEVICE_DETAIL_DEFAULT_VALUE = false;
+    private static final boolean LE_AUDIO_DEVICE_DETAIL_DEFAULT_VALUE = true;
 
     private LocalBluetoothManager mManager;
     private LocalBluetoothProfileManager mProfileManager;
