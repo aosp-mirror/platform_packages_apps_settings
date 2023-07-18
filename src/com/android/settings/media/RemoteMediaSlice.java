@@ -25,7 +25,6 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.media.MediaRouter2Manager;
 import android.media.RoutingSessionInfo;
 import android.net.Uri;
 import android.text.SpannableString;
@@ -33,7 +32,6 @@ import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 
-import androidx.annotation.VisibleForTesting;
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
 import androidx.slice.builders.ListBuilder;
@@ -66,9 +64,6 @@ public class RemoteMediaSlice implements CustomSliceable {
     private final Context mContext;
 
     private MediaDeviceUpdateWorker mWorker;
-
-    @VisibleForTesting
-    MediaRouter2Manager mRouterManager;
 
     public RemoteMediaSlice(Context context) {
         mContext = context;
@@ -104,9 +99,6 @@ public class RemoteMediaSlice implements CustomSliceable {
         if (getWorker() == null) {
             Log.e(TAG, "Unable to get the slice worker.");
             return listBuilder.build();
-        }
-        if (mRouterManager == null) {
-            mRouterManager = MediaRouter2Manager.getInstance(mContext);
         }
         // Only displaying remote devices
         final List<RoutingSessionInfo> infos = getWorker().getActiveRemoteMediaDevice();

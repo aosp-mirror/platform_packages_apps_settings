@@ -89,10 +89,10 @@ public class RemoteMediaSliceTest {
         SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);
 
         mRemoteMediaSlice = new RemoteMediaSlice(mContext);
-        mRemoteMediaSlice.mRouterManager = mock(MediaRouter2Manager.class);
         sMediaDeviceUpdateWorker = spy(new MediaDeviceUpdateWorker(mContext,
                 REMOTE_MEDIA_SLICE_URI));
         sMediaDeviceUpdateWorker.mLocalMediaManager = mLocalMediaManager;
+        sMediaDeviceUpdateWorker.mManager = mock(MediaRouter2Manager.class);
         final RoutingSessionInfo remoteSessionInfo = mock(RoutingSessionInfo.class);
         when(remoteSessionInfo.getId()).thenReturn(TEST_SESSION_1_ID);
         when(remoteSessionInfo.getName()).thenReturn(TEST_SESSION_1_NAME);

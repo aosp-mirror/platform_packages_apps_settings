@@ -31,6 +31,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaRoute2ProviderService;
+import android.media.MediaRouter2Manager;
 import android.media.RoutingSessionInfo;
 import android.net.Uri;
 
@@ -92,6 +93,7 @@ public class MediaDeviceUpdateWorkerTest {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
         mMediaDeviceUpdateWorker = new MediaDeviceUpdateWorker(mContext, URI);
+        mMediaDeviceUpdateWorker.mManager = mock(MediaRouter2Manager.class);
         mResolver = mock(ContentResolver.class);
         mShadowApplication = ShadowApplication.getInstance();
         mAudioManager = mContext.getSystemService(AudioManager.class);
@@ -234,6 +236,7 @@ public class MediaDeviceUpdateWorkerTest {
         when(mLocalBluetoothManager.getEventManager()).thenReturn(mBluetoothEventManager);
 
         mMediaDeviceUpdateWorker = new MediaDeviceUpdateWorker(mContext, URI1);
+        mMediaDeviceUpdateWorker.mManager = mock(MediaRouter2Manager.class);
         mMediaDeviceUpdateWorker.mLocalMediaManager = mock(LocalMediaManager.class);
         when(mMediaDeviceUpdateWorker.mLocalMediaManager.getPackageName())
                 .thenReturn(TEST_DEVICE_PACKAGE_NAME1);
