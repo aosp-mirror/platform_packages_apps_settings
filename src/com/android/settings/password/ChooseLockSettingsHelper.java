@@ -73,6 +73,8 @@ public final class ChooseLockSettingsHelper {
     public static final String EXTRA_KEY_GK_PW_HANDLE = "gk_pw_handle";
     public static final String EXTRA_KEY_REQUEST_WRITE_REPAIR_MODE_PW =
             "request_write_repair_mode_pw";
+    public static final String EXTRA_KEY_WROTE_REPAIR_MODE_CREDENTIAL =
+            "wrote_repair_mode_credential";
 
     /**
      * When EXTRA_KEY_UNIFICATION_PROFILE_CREDENTIAL and EXTRA_KEY_UNIFICATION_PROFILE_ID are

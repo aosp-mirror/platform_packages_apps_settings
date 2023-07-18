@@ -93,7 +93,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
 
     public static class ConfirmLockPatternFragment extends ConfirmDeviceCredentialBaseFragment
             implements AppearAnimationCreator<Object>, CredentialCheckResultTracker.Listener,
-            SaveChosenLockWorkerBase.Listener, RemoteLockscreenValidationFragment.Listener {
+            SaveAndFinishWorker.Listener, RemoteLockscreenValidationFragment.Listener {
 
         private static final String FRAGMENT_TAG_CHECK_LOCK_RESULT = "check_lock_result";
 
@@ -630,15 +630,15 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                     if (mCheckBox.isChecked() && mRemoteLockscreenValidationFragment
                             .getLockscreenCredential() != null) {
                         Log.i(TAG, "Setting device screen lock to the other device's screen lock.");
-                        ChooseLockPattern.SaveAndFinishWorker saveAndFinishWorker =
-                                new ChooseLockPattern.SaveAndFinishWorker();
+                        SaveAndFinishWorker saveAndFinishWorker = new SaveAndFinishWorker();
                         getFragmentManager().beginTransaction().add(saveAndFinishWorker, null)
                                 .commit();
                         getFragmentManager().executePendingTransactions();
-                        saveAndFinishWorker.setListener(this);
+                        saveAndFinishWorker
+                                .setListener(this)
+                                .setRequestGatekeeperPasswordHandle(true);
                         saveAndFinishWorker.start(
                                 mLockPatternUtils,
-                                /* requestGatekeeperPassword= */ true,
                                 mRemoteLockscreenValidationFragment.getLockscreenCredential(),
                                 /* currentCredential= */ null,
                                 mEffectiveUserId);
