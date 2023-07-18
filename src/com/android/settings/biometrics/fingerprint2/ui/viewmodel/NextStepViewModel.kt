@@ -17,32 +17,29 @@
 package com.android.settings.biometrics.fingerprint2.ui.viewmodel
 
 /**
- * A class to represent a next step for FingerprintSettings. This is typically to perform an action
- * such that launches another activity such as EnrollFirstFingerprint() or
- * LaunchConfirmDeviceCredential().
+ * A class to represent a high level step for FingerprintSettings. This is typically to perform an
+ * action like launching an activity.
  */
 sealed class NextStepViewModel
 
 data class EnrollFirstFingerprint(
-    val userId: Int, val gateKeeperPasswordHandle: Long?,
-    val challenge: Long?,
-    val challengeToken: ByteArray?,
+  val userId: Int,
+  val gateKeeperPasswordHandle: Long?,
+  val challenge: Long?,
+  val challengeToken: ByteArray?,
 ) : NextStepViewModel()
 
 data class EnrollAdditionalFingerprint(
-    val userId: Int,
-    val challengeToken: ByteArray?,
+  val userId: Int,
+  val challengeToken: ByteArray?,
 ) : NextStepViewModel()
 
-data class FinishSettings(
-    val reason: String
-) : NextStepViewModel()
+data class FinishSettings(val reason: String) : NextStepViewModel()
 
-data class FinishSettingsWithResult(
-    val result: Int, val reason: String
-) : NextStepViewModel()
+data class FinishSettingsWithResult(val result: Int, val reason: String) : NextStepViewModel()
 
-data class ShowSettings(val userId: Int) : NextStepViewModel()
+object ShowSettings : NextStepViewModel()
+
+object LaunchedActivity : NextStepViewModel()
 
 data class LaunchConfirmDeviceCredential(val userId: Int) : NextStepViewModel()
-
