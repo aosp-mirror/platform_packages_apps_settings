@@ -35,7 +35,7 @@ import com.android.settingslib.spaprivileged.model.app.AppEntry
 import com.android.settingslib.spaprivileged.model.app.AppListModel
 import com.android.settingslib.spaprivileged.model.app.AppRecord
 import com.android.settingslib.spaprivileged.template.app.AppListItemModel
-import com.android.settingslib.spaprivileged.template.app.AppListSwitchItem
+import com.android.settingslib.spaprivileged.template.app.AppListTwoTargetSwitchItem
 import com.android.settingslib.utils.StringUtil
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
@@ -117,7 +117,7 @@ class AppNotificationsListModel(
 
     @Composable
     override fun AppListItemModel<AppNotificationsRecord>.AppItem() {
-        AppListSwitchItem(
+        AppListTwoTargetSwitchItem(
             onClick = { navigateToAppNotificationSettings(app = record.app) },
             checked = record.controller.isEnabled.observeAsState(),
             changeable = produceState(initialValue = false) {
