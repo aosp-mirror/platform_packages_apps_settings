@@ -395,10 +395,13 @@ class LocaleDragAndDropAdapter
                 // drag locale's original position to the top.
                 mDragLocale = (LocaleStore.LocaleInfo) savedInstanceState.getSerializable(
                         CFGKEY_DRAG_LOCALE);
-                mFeedItemList.removeIf(
-                        localeInfo -> TextUtils.equals(localeInfo.getId(), mDragLocale.getId()));
-                mFeedItemList.add(0, mDragLocale);
-                notifyItemRangeChanged(0, mFeedItemList.size());
+                if (mDragLocale != null) {
+                    mFeedItemList.removeIf(
+                            localeInfo -> TextUtils.equals(localeInfo.getId(),
+                                    mDragLocale.getId()));
+                    mFeedItemList.add(0, mDragLocale);
+                    notifyItemRangeChanged(0, mFeedItemList.size());
+                }
             }
         }
     }
