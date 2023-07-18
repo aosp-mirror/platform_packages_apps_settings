@@ -27,6 +27,7 @@ import static org.mockito.Mockito.when;
 import android.app.Activity;
 import android.app.IActivityManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -57,6 +58,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,6 +93,8 @@ public class LocaleListEditorTest {
     private View mView;
     @Mock
     private IActivityManager mActivityService;
+    @Mock
+    private MetricsFeatureProvider mMetricsFeatureProvider;
 
     @Before
     public void setUp() throws Exception {
@@ -108,6 +112,8 @@ public class LocaleListEditorTest {
                 RuntimeEnvironment.application.getSystemService(Context.USER_SERVICE));
         ReflectionHelpers.setField(mLocaleListEditor, "mAdapter", mAdapter);
         ReflectionHelpers.setField(mLocaleListEditor, "mFragmentManager", mFragmentManager);
+        ReflectionHelpers.setField(mLocaleListEditor, "mMetricsFeatureProvider",
+                mMetricsFeatureProvider);
         when(mFragmentManager.beginTransaction()).thenReturn(mFragmentTransaction);
         FakeFeatureFactory.setupForTest();
     }
@@ -197,6 +203,38 @@ public class LocaleListEditorTest {
         final ShadowAlertDialogCompat shadowDialog = ShadowAlertDialogCompat.shadowOf(dialog);
 
         assertThat(shadowDialog.getMessage()).isNull();
+    }
+
+    @Test
+    public void showConfirmDialog_systemLocaleSelected_shouldShowLocaleChangeDialog()
+            throws Exception {
+        //pre-condition
+        setUpLocaleConditions();
+        final Configuration config = new Configuration();
+        config.setLocales((LocaleList.forLanguageTags("zh-TW,en-US")));
+        when(mActivityService.getConfiguration()).thenReturn(config);
+        when(mAdapter.getFeedItemList()).thenReturn(mLocaleList);
+        when(mAdapter.getCheckedCount()).thenReturn(1);
+        when(mAdapter.getItemCount()).thenReturn(2);
+        when(mAdapter.isFirstLocaleChecked()).thenReturn(true);
+        ReflectionHelpers.setField(mLocaleListEditor, "mRemoveMode", true);
+        ReflectionHelpers.setField(mLocaleListEditor, "mShowingRemoveDialog", true);
+
+        //launch the first dialog
+        mLocaleListEditor.showRemoveLocaleWarningDialog();
+
+        final AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+
+        assertThat(dialog).isNotNull();
+
+        // click the remove button
+        dialog.getButton(DialogInterface.BUTTON_POSITIVE).performClick();
+
+        assertThat(dialog.isShowing()).isFalse();
+
+        // check the second dialog is showing
+        verify(mFragmentTransaction).add(any(LocaleDialogFragment.class),
+                eq(TAG_DIALOG_CONFIRM_SYSTEM_DEFAULT));
     }
 
     @Test
