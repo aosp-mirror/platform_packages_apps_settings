@@ -456,7 +456,13 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
                                 // to remove.
                                 mRemoveMode = false;
                                 mShowingRemoveDialog = false;
+                                LocaleStore.LocaleInfo firstLocale =
+                                        mAdapter.getFeedItemList().get(0);
                                 mAdapter.removeChecked();
+                                boolean isFirstRemoved =
+                                        firstLocale != mAdapter.getFeedItemList().get(0);
+                                showConfirmDialog(isFirstRemoved, isFirstRemoved ? firstLocale
+                                        : mAdapter.getFeedItemList().get(0));
                                 setRemoveMode(false);
                             }
                         })
@@ -522,20 +528,25 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
     public boolean onTouch(View v, MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_UP
                 || event.getAction() == MotionEvent.ACTION_CANCEL) {
-            LocaleStore.LocaleInfo localeInfo = mAdapter.getFeedItemList().get(0);
-            if (!localeInfo.getLocale().equals(LocalePicker.getLocales().get(0))) {
-                final LocaleDialogFragment localeDialogFragment =
-                        LocaleDialogFragment.newInstance();
-                Bundle args = new Bundle();
-                args.putInt(LocaleDialogFragment.ARG_DIALOG_TYPE, DIALOG_CONFIRM_SYSTEM_DEFAULT);
-                args.putSerializable(LocaleDialogFragment.ARG_TARGET_LOCALE, localeInfo);
-                localeDialogFragment.setArguments(args);
-                localeDialogFragment.show(mFragmentManager, TAG_DIALOG_CONFIRM_SYSTEM_DEFAULT);
-            } else {
-                mAdapter.doTheUpdate();
-            }
+            showConfirmDialog(false, mAdapter.getFeedItemList().get(0));
         }
         return false;
+    }
+
+    private void showConfirmDialog(boolean isFirstRemoved, LocaleStore.LocaleInfo localeInfo) {
+        Locale currentSystemLocale = LocalePicker.getLocales().get(0);
+        if (!localeInfo.getLocale().equals(currentSystemLocale)) {
+            final LocaleDialogFragment localeDialogFragment =
+                    LocaleDialogFragment.newInstance();
+            Bundle args = new Bundle();
+            args.putInt(LocaleDialogFragment.ARG_DIALOG_TYPE, DIALOG_CONFIRM_SYSTEM_DEFAULT);
+            args.putSerializable(LocaleDialogFragment.ARG_TARGET_LOCALE,
+                    isFirstRemoved ? LocaleStore.getLocaleInfo(currentSystemLocale) : localeInfo);
+            localeDialogFragment.setArguments(args);
+            localeDialogFragment.show(mFragmentManager, TAG_DIALOG_CONFIRM_SYSTEM_DEFAULT);
+        } else {
+            mAdapter.doTheUpdate();
+        }
     }
 
     // Hide the "Remove" menu if there is only one locale in the list, show it otherwise
