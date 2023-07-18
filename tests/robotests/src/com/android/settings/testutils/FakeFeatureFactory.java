@@ -26,6 +26,7 @@ import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.biometrics.face.FaceFeatureProvider;
 import com.android.settings.biometrics2.factory.BiometricsRepositoryProvider;
 import com.android.settings.bluetooth.BluetoothFeatureProvider;
+import com.android.settings.connecteddevice.stylus.StylusFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.deviceinfo.hardwareinfo.HardwareInfoFeatureProvider;
@@ -91,6 +92,7 @@ public class FakeFeatureFactory extends FeatureFactory {
     public AdvancedVpnFeatureProvider mAdvancedVpnFeatureProvider;
     public WifiFeatureProvider mWifiFeatureProvider;
     public KeyboardSettingsFeatureProvider mKeyboardSettingsFeatureProvider;
+    public StylusFeatureProvider mStylusFeatureProvider;
 
     /**
      * Call this in {@code @Before} method of the test class to use fake factory.
@@ -134,6 +136,7 @@ public class FakeFeatureFactory extends FeatureFactory {
         mAdvancedVpnFeatureProvider = mock(AdvancedVpnFeatureProvider.class);
         mWifiFeatureProvider = mock(WifiFeatureProvider.class);
         mKeyboardSettingsFeatureProvider = mock(KeyboardSettingsFeatureProvider.class);
+        mStylusFeatureProvider = mock(StylusFeatureProvider.class);
     }
 
     @Override
@@ -287,5 +290,10 @@ public class FakeFeatureFactory extends FeatureFactory {
     @Override
     public KeyboardSettingsFeatureProvider getKeyboardSettingsFeatureProvider() {
         return mKeyboardSettingsFeatureProvider;
+    }
+
+    @Override
+    public StylusFeatureProvider getStylusFeatureProvider() {
+        return mStylusFeatureProvider;
     }
 }

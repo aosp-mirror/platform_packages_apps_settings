@@ -33,6 +33,8 @@ import com.android.settings.biometrics2.factory.BiometricsRepositoryProviderImpl
 import com.android.settings.bluetooth.BluetoothFeatureProvider
 import com.android.settings.bluetooth.BluetoothFeatureProviderImpl
 import com.android.settings.connecteddevice.dock.DockUpdaterFeatureProviderImpl
+import com.android.settings.connecteddevice.stylus.StylusFeatureProvider
+import com.android.settings.connecteddevice.stylus.StylusFeatureProviderImpl
 import com.android.settings.core.instrumentation.SettingsMetricsFeatureProvider
 import com.android.settings.dashboard.DashboardFeatureProviderImpl
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider
@@ -172,5 +174,9 @@ open class FeatureFactoryImpl : FeatureFactory() {
 
     override val keyboardSettingsFeatureProvider: KeyboardSettingsFeatureProvider by lazy {
         KeyboardSettingsFeatureProviderImpl()
+    }
+
+    override val stylusFeatureProvider: StylusFeatureProvider by lazy {
+        StylusFeatureProviderImpl()
     }
 }
