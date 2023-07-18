@@ -28,7 +28,6 @@ import android.text.BidiFormatter
 import android.util.Log
 import android.view.View
 import androidx.annotation.VisibleForTesting
-import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.Preference
 import androidx.preference.PreferenceCategory
@@ -41,6 +40,7 @@ import com.android.settingslib.bluetooth.CachedBluetoothDevice
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager
 import com.android.settingslib.bluetooth.LocalBluetoothManager
 import java.util.concurrent.ConcurrentHashMap
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -85,11 +85,10 @@ abstract class DeviceListPreferenceFragment(restrictedKey: String?) :
     @JvmField
     val mSelectedList: MutableList<BluetoothDevice> = ArrayList()
 
-    private var showDevicesWithoutNames = false
+    @VisibleForTesting
+    var lifecycleScope: CoroutineScope? = null
 
-    protected fun setFilter(filter: BluetoothDeviceFilter.Filter?) {
-        this.filter = filter
-    }
+    private var showDevicesWithoutNames = false
 
     protected fun setFilter(filterType: Int) {
         filter = BluetoothDeviceFilter.getFilter(filterType)
@@ -125,8 +124,6 @@ abstract class DeviceListPreferenceFragment(restrictedKey: String?) :
     /** find and update preference that already existed in preference screen  */
     protected abstract fun initPreferencesFromPreferenceScreen()
 
-    private var lifecycleScope: LifecycleCoroutineScope? = null
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         lifecycleScope = viewLifecycleOwner.lifecycleScope
@@ -154,13 +151,15 @@ abstract class DeviceListPreferenceFragment(restrictedKey: String?) :
         mDeviceListGroup!!.removeAll()
     }
 
-    fun addCachedDevices() {
+    @JvmOverloads
+    fun addCachedDevices(filterForCachedDevices: BluetoothDeviceFilter.Filter? = null) {
         lifecycleScope?.launch {
             withContext(Dispatchers.Default) {
-                val cachedDevices = mCachedDeviceManager!!.cachedDevicesCopy
-                for (cachedDevice in cachedDevices) {
-                    onDeviceAdded(cachedDevice)
-                }
+                mCachedDeviceManager!!.cachedDevicesCopy
+                    .filter {
+                        filterForCachedDevices == null || filterForCachedDevices.matches(it.device)
+                    }
+                    .forEach(::onDeviceAdded)
             }
         }
     }
