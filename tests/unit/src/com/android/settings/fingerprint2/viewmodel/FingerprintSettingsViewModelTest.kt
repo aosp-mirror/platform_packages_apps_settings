@@ -16,317 +16,232 @@
 
 package com.android.settings.fingerprint2.viewmodel
 
-import android.hardware.fingerprint.Fingerprint
-import android.hardware.fingerprint.FingerprintManager
-import com.android.settings.biometrics.fingerprint2.ui.viewmodel.EnrollFirstFingerprint
-import com.android.settings.biometrics.fingerprint2.ui.viewmodel.FinishSettings
-import com.android.settings.biometrics.fingerprint2.ui.viewmodel.FinishSettingsWithResult
-import com.android.settings.biometrics.fingerprint2.ui.viewmodel.LaunchConfirmDeviceCredential
-import com.android.settings.biometrics.fingerprint2.ui.viewmodel.NextStepViewModel
-import com.android.settings.biometrics.fingerprint2.ui.viewmodel.ShowSettings
+import android.hardware.biometrics.SensorProperties
+import android.hardware.fingerprint.FingerprintSensorProperties
+import android.hardware.fingerprint.FingerprintSensorPropertiesInternal
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.android.settings.biometrics.fingerprint2.ui.viewmodel.FingerprintAuthAttemptViewModel
+import com.android.settings.biometrics.fingerprint2.ui.viewmodel.FingerprintSettingsNavigationViewModel
 import com.android.settings.biometrics.fingerprint2.ui.viewmodel.FingerprintSettingsViewModel
+import com.android.settings.biometrics.fingerprint2.ui.viewmodel.FingerprintViewModel
+import com.android.settings.biometrics.fingerprint2.ui.viewmodel.PreferenceViewModel
+import com.android.settings.fingerprint2.domain.interactor.FakeFingerprintManagerInteractor
 import com.google.common.truth.Truth.assertThat
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.TestScope
+import kotlinx.coroutines.test.advanceTimeBy
+import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.test.setMain
+import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mock
-import org.mockito.Mockito.anyInt
 import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoJUnitRunner
-import org.mockito.Mockito.`when` as whenever
 
 @RunWith(MockitoJUnitRunner::class)
 class FingerprintSettingsViewModelTest {
 
-    @JvmField
-    @Rule
-    var rule = MockitoJUnit.rule()
+  @JvmField @Rule var rule = MockitoJUnit.rule()
 
-    @Mock
-    private lateinit var fingerprintManager: FingerprintManager
-    private lateinit var underTest: FingerprintSettingsViewModel
-    private val defaultUserId = 0
+  @get:Rule val instantTaskRule = InstantTaskExecutorRule()
 
-    @Before
-    fun setup() {
-        // @formatter:off
-        underTest = FingerprintSettingsViewModel.FingerprintSettingsViewModelFactory(
+  private lateinit var underTest: FingerprintSettingsViewModel
+  private lateinit var navigationViewModel: FingerprintSettingsNavigationViewModel
+  private val defaultUserId = 0
+  private var backgroundDispatcher = StandardTestDispatcher()
+  private var testScope = TestScope(backgroundDispatcher)
+  private lateinit var fakeFingerprintManagerInteractor: FakeFingerprintManagerInteractor
+
+  @Before
+  fun setup() {
+    fakeFingerprintManagerInteractor = FakeFingerprintManagerInteractor()
+    backgroundDispatcher = StandardTestDispatcher()
+    testScope = TestScope(backgroundDispatcher)
+    Dispatchers.setMain(backgroundDispatcher)
+
+    navigationViewModel =
+      FingerprintSettingsNavigationViewModel.FingerprintSettingsNavigationModelFactory(
+          defaultUserId,
+          fakeFingerprintManagerInteractor,
+          backgroundDispatcher,
+          null,
+          null,
+        )
+        .create(FingerprintSettingsNavigationViewModel::class.java)
+
+    underTest =
+      FingerprintSettingsViewModel.FingerprintSettingsViewModelFactory(
+          defaultUserId,
+          fakeFingerprintManagerInteractor,
+          backgroundDispatcher,
+          navigationViewModel,
+        )
+        .create(FingerprintSettingsViewModel::class.java)
+  }
+
+  @After
+  fun tearDown() {
+    Dispatchers.resetMain()
+  }
+
+  @Test
+  fun authenticate_DoesNotRun_ifOptical() =
+    testScope.runTest {
+      fakeFingerprintManagerInteractor.sensorProps =
+        listOf(
+          FingerprintSensorPropertiesInternal(
+            0 /* sensorId */,
+            SensorProperties.STRENGTH_STRONG,
+            5 /* maxEnrollmentsPerUser */,
+            emptyList() /* ComponentInfoInternal */,
+            FingerprintSensorProperties.TYPE_UDFPS_OPTICAL,
+            true /* resetLockoutRequiresHardwareAuthToken */
+          )
+        )
+      fakeFingerprintManagerInteractor.enrolledFingerprintsInternal =
+        mutableListOf(FingerprintViewModel("a", 1, 3L))
+
+      underTest =
+        FingerprintSettingsViewModel.FingerprintSettingsViewModelFactory(
             defaultUserId,
-            fingerprintManager,
-        ).create(FingerprintSettingsViewModel::class.java)
-        // @formatter:on
+            fakeFingerprintManagerInteractor,
+            backgroundDispatcher,
+            navigationViewModel,
+          )
+          .create(FingerprintSettingsViewModel::class.java)
+
+      var authAttempt: FingerprintAuthAttemptViewModel? = null
+      val job = launch { underTest.authFlow.take(5).collectLatest { authAttempt = it } }
+
+      underTest.shouldAuthenticate(true)
+      // Ensure we are showing settings
+      navigationViewModel.onConfirmDevice(true, 10L)
+
+      runCurrent()
+      advanceTimeBy(400)
+
+      assertThat(authAttempt).isNull()
+      job.cancel()
     }
 
-    @Test
-    fun testNoGateKeeper_launchesConfirmDeviceCredential() = runTest {
-        var nextStep: NextStepViewModel? = null
-        val job = launch {
-            underTest.nextStep.collect {
-                nextStep = it
-            }
-        }
-
-        underTest.updateTokenAndChallenge(null, null)
-
-        runCurrent()
-        assertThat(nextStep).isEqualTo(LaunchConfirmDeviceCredential(defaultUserId))
-        job.cancel()
-    }
-
-    @Test
-    fun testConfirmDevice_fails() = runTest {
-        var nextStep: NextStepViewModel? = null
-        val job = launch {
-            underTest.nextStep.collect {
-                nextStep = it
-            }
-        }
-
-        underTest.updateTokenAndChallenge(null, null)
-        underTest.onConfirmDevice(false, null)
-
-        runCurrent()
-
-        assertThat(nextStep).isInstanceOf(FinishSettings::class.java)
-        job.cancel()
-    }
-
-    @Test
-    fun confirmDeviceSuccess_noGateKeeper() = runTest {
-        var nextStep: NextStepViewModel? = null
-        val job = launch {
-            underTest.nextStep.collect {
-                nextStep = it
-            }
-        }
-
-        underTest.updateTokenAndChallenge(null, null)
-        underTest.onConfirmDevice(true, null)
-
-        runCurrent()
-
-        assertThat(nextStep).isInstanceOf(FinishSettings::class.java)
-        job.cancel()
-    }
-
-    @Test
-    fun confirmDeviceSuccess_launchesEnrollment_ifNoPreviousEnrollments() = runTest {
-        whenever(fingerprintManager.getEnrolledFingerprints(anyInt())).thenReturn(emptyList())
-
-        var nextStep: NextStepViewModel? = null
-        val job = launch {
-            underTest.nextStep.collect {
-                nextStep = it
-            }
-        }
-
-        underTest.updateTokenAndChallenge(null, null)
-        underTest.onConfirmDevice(true, 10L)
-
-        runCurrent()
-
-        assertThat(nextStep).isEqualTo(EnrollFirstFingerprint(defaultUserId, 10L, null, null))
-        job.cancel()
-    }
-
-    @Test
-    fun firstEnrollment_fails() = runTest {
-        whenever(fingerprintManager.getEnrolledFingerprints(anyInt())).thenReturn(emptyList())
-
-        var nextStep: NextStepViewModel? = null
-        val job = launch {
-            underTest.nextStep.collect {
-                nextStep = it
-            }
-        }
-
-        underTest.updateTokenAndChallenge(null, null)
-        underTest.onConfirmDevice(true, 10L)
-        underTest.onEnrollFirstFailure("We failed!!")
-
-        runCurrent()
-
-        assertThat(nextStep).isInstanceOf(FinishSettings::class.java)
-        job.cancel()
-    }
-
-    @Test
-    fun firstEnrollment_failsWithReason() = runTest {
-        whenever(fingerprintManager.getEnrolledFingerprints(anyInt())).thenReturn(emptyList())
-
-        var nextStep: NextStepViewModel? = null
-        val job = launch {
-            underTest.nextStep.collect {
-                nextStep = it
-            }
-        }
-
-        val failStr = "We failed!!"
-        val failReason = 101
-
-        underTest.updateTokenAndChallenge(null, null)
-        underTest.onConfirmDevice(true, 10L)
-        underTest.onEnrollFirstFailure(failStr, failReason)
-
-        runCurrent()
-
-        assertThat(nextStep).isEqualTo(FinishSettingsWithResult(failReason, failStr))
-        job.cancel()
-    }
-
-    @Test
-    fun firstEnrollmentSucceeds_noToken() = runTest {
-        whenever(fingerprintManager.getEnrolledFingerprints(anyInt())).thenReturn(emptyList())
-
-        var nextStep: NextStepViewModel? = null
-        val job = launch {
-            underTest.nextStep.collect {
-                nextStep = it
-            }
-        }
-
-        underTest.updateTokenAndChallenge(null, null)
-        underTest.onConfirmDevice(true, 10L)
-        underTest.onEnrollFirst(null, null)
-
-        runCurrent()
-
-        assertThat(nextStep).isEqualTo(FinishSettings("Error, empty token"))
-        job.cancel()
-    }
-
-    @Test
-    fun firstEnrollmentSucceeds_noKeyChallenge() = runTest {
-        whenever(fingerprintManager.getEnrolledFingerprints(anyInt())).thenReturn(emptyList())
-
-        var nextStep: NextStepViewModel? = null
-        val job = launch {
-            underTest.nextStep.collect {
-                nextStep = it
-            }
-        }
-
-        val byteArray = ByteArray(1) {
-            3
-        }
-
-        underTest.updateTokenAndChallenge(null, null)
-        underTest.onConfirmDevice(true, 10L)
-        underTest.onEnrollFirst(byteArray, null)
-
-        runCurrent()
-
-        assertThat(nextStep).isEqualTo(FinishSettings("Error, empty keyChallenge"))
-        job.cancel()
-    }
-
-    @Test
-    fun firstEnrollment_succeeds() = runTest {
-        whenever(fingerprintManager.getEnrolledFingerprints(anyInt())).thenReturn(emptyList())
-
-        var nextStep: NextStepViewModel? = null
-        val job = launch {
-            underTest.nextStep.collect {
-                nextStep = it
-            }
-        }
-
-        val byteArray = ByteArray(1) {
-            3
-        }
-        val keyChallenge = 89L
-
-        underTest.updateTokenAndChallenge(null, null)
-        underTest.onConfirmDevice(true, 10L)
-        underTest.onEnrollFirst(byteArray, keyChallenge)
-
-        runCurrent()
-
-        assertThat(nextStep).isEqualTo(ShowSettings(defaultUserId))
-        job.cancel()
-    }
-
-    @Test
-    fun confirmDeviceCredential_withEnrolledFingerprint_showsSettings() = runTest {
-        whenever(fingerprintManager.getEnrolledFingerprints(anyInt())).thenReturn(
-            listOf(
-                Fingerprint(
-                    "a", 1, 2, 3L
-                )
-            )
+  @Test
+  fun authenticate_DoesNotRun_ifUltrasonic() =
+    testScope.runTest {
+      fakeFingerprintManagerInteractor.sensorProps =
+        listOf(
+          FingerprintSensorPropertiesInternal(
+            0 /* sensorId */,
+            SensorProperties.STRENGTH_STRONG,
+            5 /* maxEnrollmentsPerUser */,
+            emptyList() /* ComponentInfoInternal */,
+            FingerprintSensorProperties.TYPE_UDFPS_ULTRASONIC,
+            true /* resetLockoutRequiresHardwareAuthToken */
+          )
         )
+      fakeFingerprintManagerInteractor.enrolledFingerprintsInternal =
+        mutableListOf(FingerprintViewModel("a", 1, 3L))
 
-        var nextStep: NextStepViewModel? = null
-        val job = launch {
-            underTest.nextStep.collect {
-                nextStep = it
-            }
-        }
+      underTest =
+        FingerprintSettingsViewModel.FingerprintSettingsViewModelFactory(
+            defaultUserId,
+            fakeFingerprintManagerInteractor,
+            backgroundDispatcher,
+            navigationViewModel,
+          )
+          .create(FingerprintSettingsViewModel::class.java)
 
-        underTest.updateTokenAndChallenge(null, null)
-        underTest.onConfirmDevice(true, 10L)
+      var authAttempt: FingerprintAuthAttemptViewModel? = null
+      val job = launch { underTest.authFlow.take(5).collectLatest { authAttempt = it } }
 
-        runCurrent()
+      underTest.shouldAuthenticate(true)
+      navigationViewModel.onConfirmDevice(true, 10L)
+      advanceTimeBy(400)
+      runCurrent()
 
-        assertThat(nextStep).isEqualTo(ShowSettings(defaultUserId))
-        job.cancel()
+      assertThat(authAttempt).isNull()
+      job.cancel()
     }
 
-    @Test
-    fun enrollAdditionalFingerprints_fails() = runTest {
-        whenever(fingerprintManager.getEnrolledFingerprints(anyInt())).thenReturn(
-            listOf(
-                Fingerprint(
-                    "a", 1, 2, 3L
-                )
-            )
+  @Test
+  fun authenticate_DoesRun_ifNotUdfps() =
+    testScope.runTest {
+      fakeFingerprintManagerInteractor.sensorProps =
+        listOf(
+          FingerprintSensorPropertiesInternal(
+            0 /* sensorId */,
+            SensorProperties.STRENGTH_STRONG,
+            5 /* maxEnrollmentsPerUser */,
+            emptyList() /* ComponentInfoInternal */,
+            FingerprintSensorProperties.TYPE_POWER_BUTTON,
+            true /* resetLockoutRequiresHardwareAuthToken */
+          )
         )
+      fakeFingerprintManagerInteractor.enrolledFingerprintsInternal =
+        mutableListOf(FingerprintViewModel("a", 1, 3L))
+      val success = FingerprintAuthAttemptViewModel.Success(1)
+      fakeFingerprintManagerInteractor.authenticateAttempt = success
 
-        var nextStep: NextStepViewModel? = null
-        val job = launch {
-            underTest.nextStep.collect {
-                nextStep = it
-            }
-        }
+      underTest =
+        FingerprintSettingsViewModel.FingerprintSettingsViewModelFactory(
+            defaultUserId,
+            fakeFingerprintManagerInteractor,
+            backgroundDispatcher,
+            navigationViewModel,
+          )
+          .create(FingerprintSettingsViewModel::class.java)
 
-        underTest.updateTokenAndChallenge(null, null)
-        underTest.onConfirmDevice(true, 10L)
-        underTest.onEnrollAdditionalFailure()
+      var authAttempt: FingerprintAuthAttemptViewModel? = null
 
-        runCurrent()
+      val job = launch { underTest.authFlow.take(5).collectLatest { authAttempt = it } }
+      underTest.shouldAuthenticate(true)
+      navigationViewModel.onConfirmDevice(true, 10L)
+      advanceTimeBy(400)
+      runCurrent()
 
-        assertThat(nextStep).isInstanceOf(FinishSettings::class.java)
-        job.cancel()
+      assertThat(authAttempt).isEqualTo(success)
+      job.cancel()
     }
 
-    @Test
-    fun enrollAdditional_success() = runTest {
-        whenever(fingerprintManager.getEnrolledFingerprints(anyInt())).thenReturn(
-            listOf(
-                Fingerprint(
-                    "a", 1, 2, 3L
-                )
-            )
+  @Test
+  fun deleteDialog_showAndDismiss() = runTest {
+    val fingerprintToDelete = FingerprintViewModel("A", 1, 10L)
+    fakeFingerprintManagerInteractor.enrolledFingerprintsInternal = mutableListOf(fingerprintToDelete)
+
+    underTest =
+      FingerprintSettingsViewModel.FingerprintSettingsViewModelFactory(
+          defaultUserId,
+          fakeFingerprintManagerInteractor,
+          backgroundDispatcher,
+          navigationViewModel,
         )
+        .create(FingerprintSettingsViewModel::class.java)
 
-        var nextStep: NextStepViewModel? = null
-        val job = launch {
-            underTest.nextStep.collect {
-                nextStep = it
-            }
-        }
+    var dialog: PreferenceViewModel? = null
+    val dialogJob = launch { underTest.isShowingDialog.collect { dialog = it } }
 
-        underTest.updateTokenAndChallenge(null, null)
-        underTest.onConfirmDevice(true, 10L)
-        underTest.onEnrollSuccess()
+    // Move to the ShowSettings state
+    navigationViewModel.onConfirmDevice(true, 10L)
+    runCurrent()
+    underTest.onDeleteClicked(fingerprintToDelete)
+    runCurrent()
 
-        runCurrent()
+    assertThat(dialog is PreferenceViewModel.DeleteDialog)
+    assertThat(dialog).isEqualTo(PreferenceViewModel.DeleteDialog(fingerprintToDelete))
 
-        assertThat(nextStep).isEqualTo(ShowSettings(defaultUserId))
-        job.cancel()
-    }
+    underTest.deleteFingerprint(fingerprintToDelete)
+    underTest.onDeleteDialogFinished()
+    runCurrent()
+
+    assertThat(dialog).isNull()
+
+    dialogJob.cancel()
+  }
 }
