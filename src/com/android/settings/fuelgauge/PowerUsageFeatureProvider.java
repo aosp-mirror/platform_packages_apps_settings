@@ -38,6 +38,16 @@ public interface PowerUsageFeatureProvider {
     boolean isBatteryUsageEnabled();
 
     /**
+     * Check whether the battery tips card is enabled in the battery usage page
+     */
+    boolean isBatteryTipsEnabled();
+
+    /**
+     * Check whether the feedback card is enabled in the battery tips card
+     */
+    boolean isBatteryTipsFeedbackEnabled();
+
+    /**
      * Returns a threshold (in milliseconds) for the minimal screen on time in battery usage list
      */
     double getBatteryUsageListScreenOnTimeThresholdInMs();
