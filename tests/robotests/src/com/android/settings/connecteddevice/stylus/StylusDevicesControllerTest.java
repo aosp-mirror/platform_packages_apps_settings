@@ -273,6 +273,20 @@ public class StylusDevicesControllerTest {
     }
 
     @Test
+    public void defaultNotesPreference_noApplicationInfo_showsBlankSummary()
+            throws PackageManager.NameNotFoundException {
+        when(mPm.getApplicationInfo(eq(NOTES_PACKAGE_NAME),
+                any(PackageManager.ApplicationInfoFlags.class))).thenReturn(null);
+
+        showScreen(mController);
+
+        Preference defaultNotesPref = mPreferenceContainer.getPreference(0);
+        assertThat(defaultNotesPref.getTitle().toString()).isEqualTo(
+                mContext.getString(R.string.stylus_default_notes_app));
+        assertThat(defaultNotesPref.getSummary().toString()).isEqualTo("");
+    }
+
+    @Test
     public void defaultNotesPreference_roleHolderChanges_updatesPreference() {
         showScreen(mController);
         Preference defaultNotesPref = mPreferenceContainer.getPreference(0);
