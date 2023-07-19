@@ -17,8 +17,7 @@
 package com.android.settings.biometrics.fingerprint2.ui.viewmodel
 
 import android.hardware.fingerprint.FingerprintManager
-import android.hardware.fingerprint.FingerprintSensorProperties.TYPE_UDFPS_OPTICAL
-import android.hardware.fingerprint.FingerprintSensorProperties.TYPE_UDFPS_ULTRASONIC
+import android.hardware.fingerprint.FingerprintSensorProperties
 import android.hardware.fingerprint.FingerprintSensorPropertiesInternal
 import android.util.Log
 import androidx.lifecycle.ViewModel
@@ -67,24 +66,6 @@ class FingerprintSettingsViewModel(
       }
     }
 
-  init {
-    viewModelScope.launch {
-      fingerprintSensorPropertiesInternal.update {
-        fingerprintManagerInteractor.sensorPropertiesInternal()
-      }
-    }
-
-    viewModelScope.launch {
-      navigationViewModel.nextStep.filterNotNull().collect {
-        _isShowingDialog.update { null }
-        if (it is ShowSettings) {
-          // reset state
-          updateSettingsData()
-        }
-      }
-    }
-  }
-
   private val _fingerprintStateViewModel: MutableStateFlow<FingerprintStateViewModel?> =
     MutableStateFlow(null)
   val fingerprintState: Flow<FingerprintStateViewModel?> =
@@ -103,7 +84,6 @@ class FingerprintSettingsViewModel(
     MutableSharedFlow()
 
   private val attemptsSoFar: MutableStateFlow<Int> = MutableStateFlow(0)
-
   /**
    * This is a very tricky flow. The current fingerprint manager APIs are not robust, and a proper
    * implementation would take quite a lot of code to implement, it might be easier to rewrite
@@ -139,7 +119,13 @@ class FingerprintSettingsViewModel(
           return@combine false
         }
         val sensorType = sensorProps[0].sensorType
-        if (listOf(TYPE_UDFPS_OPTICAL, TYPE_UDFPS_ULTRASONIC).contains(sensorType)) {
+        if (
+          listOf(
+              FingerprintSensorProperties.TYPE_UDFPS_OPTICAL,
+              FingerprintSensorProperties.TYPE_UDFPS_ULTRASONIC
+            )
+            .contains(sensorType)
+        ) {
           return@combine false
         }
 
@@ -181,6 +167,24 @@ class FingerprintSettingsViewModel(
         }
       }
       .flowOn(backgroundDispatcher)
+
+  init {
+    viewModelScope.launch {
+      fingerprintSensorPropertiesInternal.update {
+        fingerprintManagerInteractor.sensorPropertiesInternal()
+      }
+    }
+
+    viewModelScope.launch {
+      navigationViewModel.nextStep.filterNotNull().collect {
+        _isShowingDialog.update { null }
+        if (it is ShowSettings) {
+          // reset state
+          updateSettingsData()
+        }
+      }
+    }
+  }
 
   /** The rename dialog has finished */
   fun onRenameDialogFinished() {

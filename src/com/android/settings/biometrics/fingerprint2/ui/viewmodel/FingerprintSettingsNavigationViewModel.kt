@@ -26,6 +26,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.last
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -49,7 +50,13 @@ class FingerprintSettingsNavigationViewModel(
     if (challengeInit == null || tokenInit == null) {
       _nextStep.update { LaunchConfirmDeviceCredential(userId) }
     } else {
-      viewModelScope.launch { showSettingsHelper() }
+      viewModelScope.launch {
+        if (fingerprintManagerInteractor.enrolledFingerprints.last().isEmpty()) {
+          _nextStep.update { EnrollFirstFingerprint(userId, null, challenge, token) }
+        } else {
+          showSettingsHelper()
+        }
+      }
     }
   }
 
