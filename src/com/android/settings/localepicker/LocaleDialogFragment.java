@@ -16,6 +16,8 @@
 
 package com.android.settings.localepicker;
 
+import static android.window.OnBackInvokedDispatcher.PRIORITY_DEFAULT;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
@@ -23,15 +25,17 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.window.OnBackInvokedCallback;
+import android.window.OnBackInvokedDispatcher;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.FragmentManager;
 
 import com.android.internal.app.LocaleStore;
 import com.android.settings.R;
@@ -53,6 +57,12 @@ public class LocaleDialogFragment extends InstrumentedDialogFragment {
     static final String ARG_SHOW_DIALOG = "arg_show_dialog";
 
     private boolean mShouldKeepDialog;
+    private AlertDialog mAlertDialog;
+    private OnBackInvokedDispatcher mBackDispatcher;
+
+    private OnBackInvokedCallback mBackCallback = () -> {
+        Log.d(TAG, "Do not back to previous page if the dialog is displaying.");
+    };
 
     public static LocaleDialogFragment newInstance() {
         return new LocaleDialogFragment();
@@ -108,9 +118,15 @@ public class LocaleDialogFragment extends InstrumentedDialogFragment {
         if (!dialogContent.mNegativeButton.isEmpty()) {
             builder.setNegativeButton(dialogContent.mNegativeButton, controller);
         }
-        AlertDialog alertDialog = builder.create();
-        alertDialog.setCanceledOnTouchOutside(false);
-        return alertDialog;
+        mAlertDialog = builder.create();
+        getOnBackInvokedDispatcher().registerOnBackInvokedCallback(PRIORITY_DEFAULT, mBackCallback);
+        mAlertDialog.setCanceledOnTouchOutside(false);
+        mAlertDialog.setOnDismissListener(dialogInterface -> {
+            mAlertDialog.getOnBackInvokedDispatcher().unregisterOnBackInvokedCallback(
+                            mBackCallback);
+        });
+
+        return mAlertDialog;
     }
 
     private static void setDialogTitle(View root, String content) {
@@ -127,6 +143,25 @@ public class LocaleDialogFragment extends InstrumentedDialogFragment {
             return;
         }
         textView.setText(content);
+    }
+
+    @VisibleForTesting
+    public OnBackInvokedCallback getBackInvokedCallback() {
+        return mBackCallback;
+    }
+
+    @VisibleForTesting
+    public void setBackDispatcher(OnBackInvokedDispatcher dispatcher) {
+        mBackDispatcher = dispatcher;
+    }
+
+    @VisibleForTesting
+    public OnBackInvokedDispatcher getOnBackInvokedDispatcher() {
+        if (mBackDispatcher != null) {
+            return mBackDispatcher;
+        } else {
+            return mAlertDialog.getOnBackInvokedDispatcher();
+        }
     }
 
     @VisibleForTesting
@@ -153,11 +188,6 @@ public class LocaleDialogFragment extends InstrumentedDialogFragment {
             mMetricsFeatureProvider = FeatureFactory.getFactory(
                     mContext).getMetricsFeatureProvider();
             mParent = parentFragment;
-        }
-
-        LocaleDialogController(@NonNull LocaleDialogFragment dialogFragment,
-                LocaleListEditor parent) {
-            this(dialogFragment.getContext(), dialogFragment, parent);
         }
 
         @Override

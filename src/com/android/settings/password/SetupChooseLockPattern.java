@@ -94,12 +94,6 @@ public class SetupChooseLockPattern extends ChooseLockPattern {
             }
             // Show the skip button during SUW but not during Settings > Biometric Enrollment
             mSkipOrClearButton.setOnClickListener(this::onSkipOrClearButtonClick);
-
-            final View headerView = view.findViewById(R.id.sud_layout_header);
-            final ViewGroup.MarginLayoutParams lp =
-                    (ViewGroup.MarginLayoutParams) headerView.getLayoutParams();
-            lp.bottomMargin = 0;
-            view.setLayoutParams(lp);
             return view;
         }
 

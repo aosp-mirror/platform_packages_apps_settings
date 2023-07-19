@@ -125,7 +125,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
 
     public static class ConfirmLockPasswordFragment extends ConfirmDeviceCredentialBaseFragment
             implements OnClickListener, OnEditorActionListener,
-            CredentialCheckResultTracker.Listener, SaveChosenLockWorkerBase.Listener,
+            CredentialCheckResultTracker.Listener, SaveAndFinishWorker.Listener,
             RemoteLockscreenValidationFragment.Listener {
         private static final String FRAGMENT_TAG_CHECK_LOCK_RESULT = "check_lock_result";
         private ImeAwareEditText mPasswordEntry;
@@ -633,15 +633,15 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                     if (mCheckBox.isChecked() && mRemoteLockscreenValidationFragment
                             .getLockscreenCredential() != null) {
                         Log.i(TAG, "Setting device screen lock to the other device's screen lock.");
-                        ChooseLockPassword.SaveAndFinishWorker saveAndFinishWorker =
-                                new ChooseLockPassword.SaveAndFinishWorker();
+                        SaveAndFinishWorker saveAndFinishWorker = new SaveAndFinishWorker();
                         getFragmentManager().beginTransaction().add(saveAndFinishWorker, null)
                                 .commit();
                         getFragmentManager().executePendingTransactions();
-                        saveAndFinishWorker.setListener(this);
+                        saveAndFinishWorker
+                                .setListener(this)
+                                .setRequestGatekeeperPasswordHandle(true);
                         saveAndFinishWorker.start(
                                 mLockPatternUtils,
-                                /* requestGatekeeperPassword= */ true,
                                 mRemoteLockscreenValidationFragment.getLockscreenCredential(),
                                 /* currentCredential= */ null,
                                 mEffectiveUserId);
