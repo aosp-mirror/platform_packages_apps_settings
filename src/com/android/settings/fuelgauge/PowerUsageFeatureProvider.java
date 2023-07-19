@@ -129,6 +129,11 @@ public interface PowerUsageFeatureProvider {
     boolean delayHourlyJobWhenBooting();
 
     /**
+     * Insert device usage data for anomaly detection
+     */
+    void insertSettingsData(Context context);
+
+    /**
      * Gets an intent for one time bypass charge limited to resume charging.
      */
     Intent getResumeChargeIntent(boolean isDockDefender);
