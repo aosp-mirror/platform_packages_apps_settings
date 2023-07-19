@@ -124,7 +124,7 @@ public class StylusDevicesController extends AbstractPreferenceController implem
         try {
             ApplicationInfo ai = pm.getApplicationInfo(packageName,
                     PackageManager.ApplicationInfoFlags.of(0));
-            appName = ai == null ? packageName : pm.getApplicationLabel(ai).toString();
+            appName = ai == null ? "" : pm.getApplicationLabel(ai).toString();
         } catch (PackageManager.NameNotFoundException e) {
             Log.e(TAG, "Notes role package not found.");
         }
