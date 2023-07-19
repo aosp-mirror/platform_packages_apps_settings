@@ -145,7 +145,7 @@ open class FeatureFactoryImpl : FeatureFactory() {
     override fun getContextualCardFeatureProvider(context: Context) = contextualCardFeatureProvider
 
     override val bluetoothFeatureProvider: BluetoothFeatureProvider by lazy {
-        BluetoothFeatureProviderImpl(appContext)
+        BluetoothFeatureProviderImpl()
     }
 
     override val faceFeatureProvider: FaceFeatureProvider by lazy { FaceFeatureProviderImpl() }
