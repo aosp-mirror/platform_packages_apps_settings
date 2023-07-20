@@ -86,13 +86,14 @@ public class MainClearConfirm extends InstrumentedFragment {
                 return;
             }
 
+            final PersistentDataBlockManager pdbManager;
             // pre-flight check hardware support PersistentDataBlockManager
-            if (SystemProperties.get(PERSISTENT_DATA_BLOCK_PROP).equals("")) {
-                return;
-            }
-
-            final PersistentDataBlockManager pdbManager = (PersistentDataBlockManager)
+            if (!SystemProperties.get(PERSISTENT_DATA_BLOCK_PROP).equals("")) {
+                pdbManager = (PersistentDataBlockManager)
                     getActivity().getSystemService(Context.PERSISTENT_DATA_BLOCK_SERVICE);
+            } else {
+                pdbManager = null;
+            }
 
             if (shouldWipePersistentDataBlock(pdbManager)) {
 

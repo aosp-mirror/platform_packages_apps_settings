@@ -16,6 +16,9 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
+import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
@@ -51,5 +54,20 @@ public class FontSizeDataTest {
                         /* def= */ 1.0f);
 
         assertThat(currentScale).isEqualTo(mFontSizeData.getValues().get(progress));
+    }
+
+    @Test
+    public void commit_fontScalingHasBeenChangedIsOn() {
+        final int progress = 3;
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_FONT_SCALING_HAS_BEEN_CHANGED, OFF);
+
+        mFontSizeData.commit(progress);
+        final int currentSettings = Settings.Secure.getInt(
+                mContext.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_FONT_SCALING_HAS_BEEN_CHANGED,
+                /* def= */ OFF);
+
+        assertThat(currentSettings).isEqualTo(ON);
     }
 }

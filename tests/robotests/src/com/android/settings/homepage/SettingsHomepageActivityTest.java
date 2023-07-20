@@ -20,8 +20,13 @@ import static android.view.WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTE
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -31,6 +36,8 @@ import static org.mockito.Mockito.when;
 
 import android.app.ActivityManager;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.view.View;
 import android.view.Window;
@@ -218,29 +225,89 @@ public class SettingsHomepageActivityTest {
     }
 
     @Test
-    @Config(shadows = {ShadowPasswordUtils.class})
+    public void getInitialReferrer_differentPackage_returnCurrentReferrer() {
+        SettingsHomepageActivity activity =
+                spy(Robolectric.buildActivity(SettingsHomepageActivity.class).get());
+        String referrer = "com.abc";
+        doReturn(referrer).when(activity).getCurrentReferrer();
+
+        assertEquals(activity.getInitialReferrer(), referrer);
+    }
+
+    @Test
+    public void getInitialReferrer_noReferrerExtra_returnCurrentReferrer() {
+        SettingsHomepageActivity activity =
+                spy(Robolectric.buildActivity(SettingsHomepageActivity.class).get());
+        String referrer = activity.getPackageName();
+        doReturn(referrer).when(activity).getCurrentReferrer();
+
+        assertEquals(activity.getInitialReferrer(), referrer);
+    }
+
+    @Test
+    public void getInitialReferrer_hasReferrerExtra_returnGivenReferrer() {
+        SettingsHomepageActivity activity =
+                spy(Robolectric.buildActivity(SettingsHomepageActivity.class).get());
+        doReturn(activity.getPackageName()).when(activity).getCurrentReferrer();
+        String referrer = "com.abc";
+        activity.setIntent(new Intent().putExtra(SettingsHomepageActivity.EXTRA_INITIAL_REFERRER,
+                referrer));
+
+        assertEquals(activity.getInitialReferrer(), referrer);
+    }
+
+    @Test
+    public void getCurrentReferrer_hasReferrerExtra_shouldNotEqual() {
+        String referrer = "com.abc";
+        Uri uri = new Uri.Builder().scheme("android-app").authority(referrer).build();
+        SettingsHomepageActivity activity =
+                spy(Robolectric.buildActivity(SettingsHomepageActivity.class).get());
+        activity.setIntent(new Intent().putExtra(Intent.EXTRA_REFERRER, uri));
+
+        assertNotEquals(activity.getCurrentReferrer(), referrer);
+    }
+
+    @Test
+    public void getCurrentReferrer_hasReferrerNameExtra_shouldNotEqual() {
+        String referrer = "com.abc";
+        SettingsHomepageActivity activity =
+                spy(Robolectric.buildActivity(SettingsHomepageActivity.class).get());
+        activity.setIntent(new Intent().putExtra(Intent.EXTRA_REFERRER_NAME, referrer));
+
+        assertNotEquals(activity.getCurrentReferrer(), referrer);
+    }
+
+    @Test
     public void isCallingAppPermitted_emptyPermission_returnTrue() {
-        SettingsHomepageActivity homepageActivity = spy(new SettingsHomepageActivity());
+        SettingsHomepageActivity activity =
+                spy(Robolectric.buildActivity(SettingsHomepageActivity.class).get());
+        doReturn(PackageManager.PERMISSION_DENIED).when(activity)
+                .checkPermission(anyString(), anyInt(), anyInt());
 
-        assertTrue(homepageActivity.isCallingAppPermitted(""));
+        assertTrue(activity.isCallingAppPermitted("", 1000));
     }
 
     @Test
-    @Config(shadows = {ShadowPasswordUtils.class})
-    public void isCallingAppPermitted_noGrantedPermission_returnFalse() {
-        SettingsHomepageActivity homepageActivity = spy(new SettingsHomepageActivity());
+    public void isCallingAppPermitted_notGrantedPermission_returnFalse() {
+        SettingsHomepageActivity activity =
+                spy(Robolectric.buildActivity(SettingsHomepageActivity.class).get());
+        doReturn(PackageManager.PERMISSION_DENIED).when(activity)
+                .checkPermission(anyString(), anyInt(), anyInt());
 
-        assertFalse(homepageActivity.isCallingAppPermitted("android.permission.TEST"));
+        assertFalse(activity.isCallingAppPermitted("android.permission.TEST", 1000));
     }
 
     @Test
-    @Config(shadows = {ShadowPasswordUtils.class})
     public void isCallingAppPermitted_grantedPermission_returnTrue() {
-        SettingsHomepageActivity homepageActivity = spy(new SettingsHomepageActivity());
+        SettingsHomepageActivity activity =
+                spy(Robolectric.buildActivity(SettingsHomepageActivity.class).get());
         String permission = "android.permission.TEST";
-        ShadowPasswordUtils.addGrantedPermission(permission);
+        doReturn(PackageManager.PERMISSION_DENIED).when(activity)
+                .checkPermission(anyString(), anyInt(), anyInt());
+        doReturn(PackageManager.PERMISSION_GRANTED).when(activity)
+                .checkPermission(eq(permission), anyInt(), eq(1000));
 
-        assertTrue(homepageActivity.isCallingAppPermitted(permission));
+        assertTrue(activity.isCallingAppPermitted(permission, 1000));
     }
 
     @Implements(SuggestionFeatureProviderImpl.class)

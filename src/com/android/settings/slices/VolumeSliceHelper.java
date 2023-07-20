@@ -93,8 +93,9 @@ public class VolumeSliceHelper {
 
         if (AudioManager.VOLUME_CHANGED_ACTION.equals(action)) {
             handleVolumeChanged(context, intent);
-        } else if (AudioManager.STREAM_MUTE_CHANGED_ACTION.equals(action)
-                || AudioManager.STREAM_DEVICES_CHANGED_ACTION.equals(action)) {
+        } else if (AudioManager.STREAM_MUTE_CHANGED_ACTION.equals(action)) {
+            handleMuteChanged(context, intent);
+        } else if (AudioManager.STREAM_DEVICES_CHANGED_ACTION.equals(action)) {
             handleStreamChanged(context, intent);
         } else {
             notifyAllStreamsChanged(context);
@@ -109,13 +110,36 @@ public class VolumeSliceHelper {
         }
     }
 
+    /**
+     *  When mute is changed, notifyChange on relevant Volume Slice ContentResolvers to mark them
+     *  as needing update.
+     *
+     * In addition to the matching stream, we always notifyChange for the Notification stream
+     * when Ring events are issued. This is to make sure that Notification always gets updated
+     * for RingerMode changes, even if Notification's volume is zero and therefore it would not
+     * get its own AudioManager.VOLUME_CHANGED_ACTION.
+     */
+    private static void handleMuteChanged(Context context, Intent intent) {
+        final int inputType = intent.getIntExtra(AudioManager.EXTRA_VOLUME_STREAM_TYPE, -1);
+        handleStreamChanged(context, inputType);
+        if (inputType == AudioManager.STREAM_RING) {
+            handleStreamChanged(context, AudioManager.STREAM_NOTIFICATION);
+        }
+    }
+
     private static void handleStreamChanged(Context context, Intent intent) {
         final int inputType = intent.getIntExtra(AudioManager.EXTRA_VOLUME_STREAM_TYPE, -1);
+        handleStreamChanged(context, inputType);
+    }
+
+    private static void handleStreamChanged(Context context, int inputType) {
         synchronized (sRegisteredUri) {
             for (Map.Entry<Uri, Integer> entry : sRegisteredUri.entrySet()) {
                 if (entry.getValue() == inputType) {
                     context.getContentResolver().notifyChange(entry.getKey(), null /* observer */);
-                    break;
+                    if (inputType != AudioManager.STREAM_RING) { // Two URIs are mapped to ring
+                        break;
+                    }
                 }
             }
         }

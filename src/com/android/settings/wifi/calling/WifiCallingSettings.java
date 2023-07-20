@@ -20,13 +20,16 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
+import android.util.EventLog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewStub;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
@@ -39,6 +42,7 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.network.ActiveSubscriptionsListener;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.ims.WifiCallingQueryImsState;
+import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.search.actionbar.SearchMenuController;
 import com.android.settings.support.actionbar.HelpResourceProvider;
 import com.android.settings.widget.RtlCompatibleViewPager;
@@ -92,6 +96,9 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
+        if (MobileNetworkUtils.isMobileNetworkUserRestricted(getActivity())) {
+            return new ViewStub(getActivity());
+        }
         final View view = inflater.inflate(R.layout.wifi_calling_settings_tabs, container, false);
 
         mTabLayout = view.findViewById(R.id.sliding_tabs);
@@ -138,6 +145,12 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
     public void onCreate(Bundle icicle) {
         mConstructionSubId = getConstructionSubId(icicle);
         super.onCreate(icicle);
+        if (MobileNetworkUtils.isMobileNetworkUserRestricted(getActivity())) {
+            Log.e(TAG, "This setting isn't available due to user restriction.");
+            EventLog.writeEvent(0x534e4554, "262243015", UserHandle.myUserId(), "User restricted");
+            finish();
+            return;
+        }
         Log.d(TAG, "SubId=" + mConstructionSubId);
 
         if (mConstructionSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
