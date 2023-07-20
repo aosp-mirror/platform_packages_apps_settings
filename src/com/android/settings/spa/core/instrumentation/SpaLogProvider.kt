@@ -72,10 +72,10 @@ class SpaLogData(val id: String, val event: LogEvent,
         }
         val sessionSource = extraData.getString(LOG_DATA_SESSION_NAME)
         return when(sessionSource) {
-            SESSION_BROWSE -> SettingsEnums.BROWSE
-            SESSION_SEARCH -> SettingsEnums.SEARCH
-            SESSION_SLICE -> SettingsEnums.SLICE_TYPE
-            SESSION_EXTERNAL -> SettingsEnums.EXTERNAL
+            SESSION_BROWSE -> SettingsEnums.SESSION_BROWSE
+            SESSION_SEARCH -> SettingsEnums.SESSION_SEARCH
+            SESSION_SLICE -> SettingsEnums.SESSION_SLICE_TYPE
+            SESSION_EXTERNAL -> SettingsEnums.SESSION_EXTERNAL
             else -> SettingsEnums.SESSION_UNKNOWN
         }
     }
