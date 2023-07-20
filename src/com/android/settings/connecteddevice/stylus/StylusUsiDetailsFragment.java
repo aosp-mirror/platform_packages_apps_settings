@@ -54,7 +54,6 @@ public class StylusUsiDetailsFragment extends DashboardFragment {
         }
     }
 
-
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.USI_DEVICE_DETAILS;
