@@ -25,6 +25,7 @@ import com.android.settings.aware.AwareFeatureProvider
 import com.android.settings.biometrics.face.FaceFeatureProvider
 import com.android.settings.biometrics2.factory.BiometricsRepositoryProvider
 import com.android.settings.bluetooth.BluetoothFeatureProvider
+import com.android.settings.connecteddevice.stylus.StylusFeatureProvider
 import com.android.settings.dashboard.DashboardFeatureProvider
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider
 import com.android.settings.deviceinfo.hardwareinfo.HardwareInfoFeatureProvider
@@ -188,6 +189,10 @@ class FakeFeatureFactory : FeatureFactory() {
     }
 
     override fun getKeyboardSettingsFeatureProvider(): KeyboardSettingsFeatureProvider {
+        TODO("Not yet implemented")
+    }
+
+    override fun getStylusFeatureProvider(): StylusFeatureProvider {
         TODO("Not yet implemented")
     }
 }

@@ -42,6 +42,8 @@ import com.android.settings.biometrics2.factory.BiometricsRepositoryProviderImpl
 import com.android.settings.bluetooth.BluetoothFeatureProvider;
 import com.android.settings.bluetooth.BluetoothFeatureProviderImpl;
 import com.android.settings.connecteddevice.dock.DockUpdaterFeatureProviderImpl;
+import com.android.settings.connecteddevice.stylus.StylusFeatureProvider;
+import com.android.settings.connecteddevice.stylus.StylusFeatureProviderImpl;
 import com.android.settings.core.instrumentation.SettingsMetricsFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProviderImpl;
@@ -119,6 +121,7 @@ public class FeatureFactoryImpl extends FeatureFactory {
     private AdvancedVpnFeatureProvider mAdvancedVpnFeatureProvider;
     private WifiFeatureProvider mWifiFeatureProvider;
     private KeyboardSettingsFeatureProvider mKeyboardSettingsFeatureProvider;
+    private StylusFeatureProvider mStylusFeatureProvider;
 
     @Override
     public HardwareInfoFeatureProvider getHardwareInfoFeatureProvider() {
@@ -382,5 +385,13 @@ public class FeatureFactoryImpl extends FeatureFactory {
             mKeyboardSettingsFeatureProvider = new KeyboardSettingsFeatureProviderImpl();
         }
         return mKeyboardSettingsFeatureProvider;
+    }
+
+    @Override
+    public StylusFeatureProvider getStylusFeatureProvider() {
+        if (mStylusFeatureProvider == null) {
+            mStylusFeatureProvider = new StylusFeatureProviderImpl();
+        }
+        return mStylusFeatureProvider;
     }
 }
