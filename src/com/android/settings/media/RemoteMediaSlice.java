@@ -100,8 +100,9 @@ public class RemoteMediaSlice implements CustomSliceable {
             Log.e(TAG, "Unable to get the slice worker.");
             return listBuilder.build();
         }
+
         // Only displaying remote devices
-        final List<RoutingSessionInfo> infos = getWorker().getActiveRemoteMediaDevice();
+        final List<RoutingSessionInfo> infos = getWorker().getActiveRemoteMediaDevices();
         if (infos.isEmpty()) {
             Log.d(TAG, "No active remote media device");
             return listBuilder.build();
