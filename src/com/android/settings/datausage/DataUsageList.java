@@ -37,6 +37,7 @@ import android.os.UserManager;
 import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
+import android.util.EventLog;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
@@ -131,8 +132,14 @@ public class DataUsageList extends DataUsageBaseFragment
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final Activity activity = getActivity();
+        if (isGuestUser(getContext())) {
+            Log.e(TAG, "This setting isn't available for guest user");
+            EventLog.writeEvent(0x534e4554, "262741858", -1 /* UID */, "Guest user");
+            finish();
+            return;
+        }
 
+        final Activity activity = getActivity();
         if (!isBandwidthControlEnabled()) {
             Log.w(TAG, "No bandwidth control; leaving");
             activity.finish();
@@ -234,9 +241,10 @@ public class DataUsageList extends DataUsageBaseFragment
 
     @Override
     public void onDestroy() {
-        mUidDetailProvider.clearCache();
-        mUidDetailProvider = null;
-
+        if (mUidDetailProvider != null) {
+            mUidDetailProvider.clearCache();
+            mUidDetailProvider = null;
+        }
         super.onDestroy();
     }
 
@@ -614,4 +622,11 @@ public class DataUsageList extends DataUsageBaseFragment
             }
         }
     };
+
+    private static boolean isGuestUser(Context context) {
+        if (context == null) return false;
+        final UserManager userManager = context.getSystemService(UserManager.class);
+        if (userManager == null) return false;
+        return userManager.isGuestUser();
+    }
 }

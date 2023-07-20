@@ -37,8 +37,7 @@
         <com.android.settingslib.widget.LayoutPreference
             android:key="dream_picker"
             android:selectable="false"
-            android:layout="@layout/dream_picker_layout"
-            settings:controller="com.android.settings.dream.DreamPickerController"/>
+            android:layout="@layout/dream_picker_layout"/>
     </PreferenceCategory>
 
     <SwitchPreference
@@ -46,6 +45,12 @@
         android:title="@string/dream_complications_toggle_title"
         android:summary="@string/dream_complications_toggle_summary"
         settings:controller="com.android.settings.dream.DreamComplicationPreferenceController"/>
+
+    <SwitchPreference
+        android:key="dream_home_controls_toggle"
+        android:title="@string/dream_home_controls_toggle_title"
+        android:summary="@string/dream_home_controls_toggle_summary"
+        settings:controller="com.android.settings.dream.DreamHomeControlsPreferenceController"/>
 
     <com.android.settings.applications.SpacePreference
         android:layout_height="16dp" />

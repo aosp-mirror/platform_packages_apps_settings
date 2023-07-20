@@ -654,8 +654,8 @@ public class ManageApplications extends InstrumentedFragment
             case LIST_TYPE_APPS_LOCALE:
                 Intent intent = new Intent(getContext(), AppLocalePickerActivity.class);
                 intent.setData(Uri.parse("package:" + mCurrentPkgName));
-                intent.putExtra(AppInfoBase.ARG_PACKAGE_UID, mCurrentUid);
-                startActivity(intent);
+                getContext().startActivityAsUser(intent,
+                        UserHandle.getUserHandleForUid(mCurrentUid));
                 break;
             case LIST_TYPE_BATTERY_OPTIMIZATION:
                 AdvancedPowerUsageDetail.startBatteryDetailPage(
