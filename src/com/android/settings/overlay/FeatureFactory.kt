@@ -81,7 +81,7 @@ abstract class FeatureFactory {
      */
     abstract val batterySettingsFeatureProvider: BatterySettingsFeatureProvider
 
-    abstract fun getDashboardFeatureProvider(context: Context): DashboardFeatureProvider
+    abstract val dashboardFeatureProvider: DashboardFeatureProvider
     abstract val dockUpdaterFeatureProvider: DockUpdaterFeatureProvider
     abstract val applicationFeatureProvider: ApplicationFeatureProvider
     abstract val localeFeatureProvider: LocaleFeatureProvider

@@ -67,8 +67,6 @@ import com.android.settingslib.spaprivileged.framework.common.devicePolicyManage
  * [FeatureFactory] implementation for AOSP Settings.
  */
 open class FeatureFactoryImpl : FeatureFactory() {
-    private val dashboardFeatureProvider by lazy { DashboardFeatureProviderImpl(appContext) }
-
     private val enterprisePrivacyFeatureProvider by lazy {
         EnterprisePrivacyFeatureProviderImpl(
             appContext,
@@ -100,7 +98,7 @@ open class FeatureFactoryImpl : FeatureFactory() {
 
     override val batterySettingsFeatureProvider by lazy { BatterySettingsFeatureProviderImpl() }
 
-    override fun getDashboardFeatureProvider(context: Context) = dashboardFeatureProvider
+    override val dashboardFeatureProvider by lazy { DashboardFeatureProviderImpl(appContext) }
 
     override val dockUpdaterFeatureProvider: DockUpdaterFeatureProvider by lazy {
         DockUpdaterFeatureProviderImpl()

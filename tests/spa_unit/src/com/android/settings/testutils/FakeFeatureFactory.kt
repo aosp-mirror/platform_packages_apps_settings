@@ -77,9 +77,8 @@ class FakeFeatureFactory : FeatureFactory() {
     override val batterySettingsFeatureProvider: BatterySettingsFeatureProvider
         get() = TODO("Not yet implemented")
 
-    override fun getDashboardFeatureProvider(context: Context): DashboardFeatureProvider {
-        TODO("Not yet implemented")
-    }
+    override val dashboardFeatureProvider: DashboardFeatureProvider
+        get() = TODO("Not yet implemented")
 
     override val dockUpdaterFeatureProvider: DockUpdaterFeatureProvider
         get() = TODO("Not yet implemented")
