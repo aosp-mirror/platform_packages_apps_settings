@@ -31,6 +31,7 @@ import com.android.settings.aware.AwareFeatureProvider;
 import com.android.settings.biometrics.face.FaceFeatureProvider;
 import com.android.settings.biometrics2.factory.BiometricsRepositoryProvider;
 import com.android.settings.bluetooth.BluetoothFeatureProvider;
+import com.android.settings.connecteddevice.stylus.StylusFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.deviceinfo.hardwareinfo.HardwareInfoFeatureProvider;
@@ -208,6 +209,11 @@ public abstract class FeatureFactory {
      * Retrieves implementation for keyboard settings feature.
      */
     public abstract KeyboardSettingsFeatureProvider getKeyboardSettingsFeatureProvider();
+
+    /**
+     * Retrieves implementation for stylus settings feature.
+     */
+    public abstract StylusFeatureProvider getStylusFeatureProvider();
 
     public static final class FactoryNotFoundException extends RuntimeException {
         public FactoryNotFoundException(Throwable throwable) {
