@@ -28,7 +28,8 @@ import com.android.settings.R;
 import com.android.settings.bluetooth.BluetoothDevicePairingDetailBase;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * HearingDevicePairingDetail is a page to scan hearing devices. This page shows scanning icons and
@@ -42,10 +43,16 @@ public class HearingDevicePairingDetail extends BluetoothDevicePairingDetailBase
 
     public HearingDevicePairingDetail() {
         super();
-        final ScanFilter filter = new ScanFilter.Builder()
-                .setServiceData(BluetoothUuid.HEARING_AID, new byte[]{0}, new byte[]{0})
-                .build();
-        setFilter(Collections.singletonList(filter));
+        final List<ScanFilter> filterList = new ArrayList<>();
+        // Filters for ASHA hearing aids
+        filterList.add(new ScanFilter.Builder().setServiceUuid(BluetoothUuid.HEARING_AID).build());
+        filterList.add(new ScanFilter.Builder()
+                .setServiceData(BluetoothUuid.HEARING_AID, new byte[0]).build());
+        // Filters for LE audio hearing aids
+        filterList.add(new ScanFilter.Builder().setServiceUuid(BluetoothUuid.HAS).build());
+        filterList.add(new ScanFilter.Builder()
+                .setServiceData(BluetoothUuid.HAS, new byte[0]).build());
+        setFilter(filterList);
     }
 
     @Override
