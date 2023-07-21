@@ -377,6 +377,8 @@ public class Settings extends SettingsActivity {
     public static class NotificationAppListActivity extends SettingsActivity { /* empty */ }
     /** Activity to manage Cloned Apps page */
     public static class ClonedAppsListActivity extends SettingsActivity { /* empty */ }
+    /** Activity to manage Aspect Ratio app list page */
+    public static class UserAspectRatioAppListActivity extends SettingsActivity { /* empty */ }
     public static class NotificationReviewPermissionsActivity extends SettingsActivity { /* empty */ }
     public static class AppNotificationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ChannelNotificationSettingsActivity extends SettingsActivity { /* empty */ }

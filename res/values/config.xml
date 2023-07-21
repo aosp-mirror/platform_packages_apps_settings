@@ -608,6 +608,28 @@
         <item>3</item>
     </integer-array>
 
+    <!-- TODO(b/287448187): add USER_MIN_ASPECT_RATIO_DISPLAY_SIZE entry -->
+    <!-- App screen size settings screen, User aspect ratio override options. Must be the same
+         length and order as config_userAspectRatioOverrideValues below. -->
+    <string-array name="config_userAspectRatioOverrideEntries" translatable="false">
+        <item>@string/user_aspect_ratio_app_default</item>
+        <item>@string/user_aspect_ratio_half_screen</item>
+        <item>@string/user_aspect_ratio_16_9</item>
+        <item>@string/user_aspect_ratio_4_3</item>
+        <item>@string/user_aspect_ratio_3_2</item>
+    </string-array>
+
+    <!-- App screen size settings screen, User aspect ratio override options. Must be the same
+         length and order as config_userAspectRatioOverrideEntries above. The values must
+         correspond to PackageManager.UserMinAspectRatio -->
+    <integer-array name="config_userAspectRatioOverrideValues" translatable="false">
+        <item>0</item> <!-- USER_MIN_ASPECT_RATIO_UNSET -->
+        <item>1</item> <!-- USER_MIN_ASPECT_RATIO_SPLIT_SCREEN -->
+        <item>4</item> <!-- USER_MIN_ASPECT_RATIO_16_9 -->
+        <item>3</item> <!-- USER_MIN_ASPECT_RATIO_4_3 -->
+        <item>5</item> <!-- USER_MIN_ASPECT_RATIO_3_2 -->
+    </integer-array>
+
     <!-- The settings/preference description for each settable device state defined in the array
          "config_perDeviceStateRotationLockDefaults".
          The item in position "i" describes the auto-rotation setting for the device state also in
