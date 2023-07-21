@@ -191,10 +191,11 @@ abstract class DeviceListPreferenceFragment(restrictedKey: String?) :
 
     private suspend fun addDevice(cachedDevice: CachedBluetoothDevice) =
         withContext(Dispatchers.Default) {
+            // TODO(b/289189853): Replace checking if `filter` is null or not to decide which type
+            // of Bluetooth scanning method will be used
+            val filterMatched = filter == null || filter!!.matches(cachedDevice.device) == true
             // Prevent updates while the list shows one of the state messages
-            if (mBluetoothAdapter!!.state == BluetoothAdapter.STATE_ON &&
-                filter?.matches(cachedDevice.device) == true
-            ) {
+            if (mBluetoothAdapter!!.state == BluetoothAdapter.STATE_ON && filterMatched) {
                 createDevicePreference(cachedDevice)
             }
         }
@@ -304,17 +305,14 @@ abstract class DeviceListPreferenceFragment(restrictedKey: String?) :
         }
     }
 
-    private val scanCallback = object : ScanCallback() {
+    private val leScanCallback = object : ScanCallback() {
         override fun onScanResult(callbackType: Int, result: ScanResult) {
-            lifecycleScope?.launch {
-                withContext(Dispatchers.Default) {
-                    if (mBluetoothAdapter!!.state == BluetoothAdapter.STATE_ON) {
-                        val device = result.device
-                        val cachedDevice = mCachedDeviceManager!!.findDevice(device)
-                            ?: mCachedDeviceManager!!.addDevice(device)
-                        createDevicePreference(cachedDevice)
-                    }
-                }
+            handleLeScanResult(result)
+        }
+
+        override fun onBatchScanResults(results: MutableList<ScanResult>?) {
+            for (result in results.orEmpty()) {
+                handleLeScanResult(result)
             }
         }
 
@@ -328,12 +326,23 @@ abstract class DeviceListPreferenceFragment(restrictedKey: String?) :
         val settings = ScanSettings.Builder()
             .setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY)
             .build()
-        scanner.startScan(leScanFilters, settings, scanCallback)
+        scanner.startScan(leScanFilters, settings, leScanCallback)
     }
 
     private fun stopLeScanning() {
         val scanner = mBluetoothAdapter!!.bluetoothLeScanner
-        scanner?.stopScan(scanCallback)
+        scanner?.stopScan(leScanCallback)
+    }
+
+    private fun handleLeScanResult(result: ScanResult) {
+        lifecycleScope?.launch {
+            withContext(Dispatchers.Default) {
+                val device = result.device
+                val cachedDevice = mCachedDeviceManager!!.findDevice(device)
+                    ?: mCachedDeviceManager!!.addDevice(device, leScanFilters)
+                addDevice(cachedDevice)
+            }
+        }
     }
 
     companion object {
