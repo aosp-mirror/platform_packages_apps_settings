@@ -20,6 +20,7 @@ import android.content.Context
 import android.util.FeatureFlagUtils
 import com.android.settings.Settings.AlarmsAndRemindersActivity
 import com.android.settings.Settings.AppBatteryUsageActivity
+import com.android.settings.Settings.UserAspectRatioAppListActivity
 import com.android.settings.Settings.ChangeNfcTagAppsActivity
 import com.android.settings.Settings.ChangeWifiStateActivity
 import com.android.settings.Settings.ClonedAppsListActivity
@@ -40,6 +41,7 @@ import com.android.settings.applications.appinfo.AppLocaleDetails
 import com.android.settings.applications.manageapplications.ManageApplications.LIST_MANAGE_EXTERNAL_STORAGE
 import com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_ALARMS_AND_REMINDERS
 import com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_APPS_LOCALE
+import com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_USER_ASPECT_RATIO_APPS
 import com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_BATTERY_OPTIMIZATION
 import com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_CLONED_APPS
 import com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_GAMES
@@ -57,6 +59,7 @@ import com.android.settings.applications.manageapplications.ManageApplications.L
 import com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_WIFI_ACCESS
 import com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_WRITE_SETTINGS
 import com.android.settings.spa.app.AllAppListPageProvider
+import com.android.settings.spa.app.appcompat.UserAspectRatioAppsPageProvider
 import com.android.settings.spa.app.specialaccess.AlarmsAndRemindersAppListProvider
 import com.android.settings.spa.app.specialaccess.AllFilesAccessAppListProvider
 import com.android.settings.spa.app.specialaccess.DisplayOverOtherAppsAppListProvider
@@ -92,6 +95,7 @@ object ManageApplicationsUtil {
         ClonedAppsListActivity::class to LIST_TYPE_CLONED_APPS,
         ChangeNfcTagAppsActivity::class to LIST_TYPE_NFC_TAG_APPS,
         TurnScreenOnSettingsActivity::class to LIST_TYPE_TURN_SCREEN_ON,
+        UserAspectRatioAppListActivity::class to LIST_TYPE_USER_ASPECT_RATIO_APPS,
     )
 
     @JvmField
@@ -114,6 +118,7 @@ object ManageApplicationsUtil {
             LIST_TYPE_APPS_LOCALE -> AppLanguagesPageProvider.name
             LIST_TYPE_MAIN -> AllAppListPageProvider.name
             LIST_TYPE_NFC_TAG_APPS -> NfcTagAppsSettingsProvider.getAppListRoute()
+            LIST_TYPE_USER_ASPECT_RATIO_APPS -> UserAspectRatioAppsPageProvider.name
             else -> null
         }
     }
