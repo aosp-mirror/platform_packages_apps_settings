@@ -744,6 +744,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new ContrastPreferenceController(
                 context, context.getSystemService(UiModeManager.class)));
         controllers.add(new ForceEnableNotesRolePreferenceController(context));
+        controllers.add(new GrammaticalGenderPreferenceController(context));
 
         return controllers;
     }
