@@ -80,6 +80,17 @@
         android:order="10"/>
 
     <Preference
+        android:key="aspect_ratio_apps"
+        android:title="@string/screen_size_title"
+        android:summary="@string/summary_placeholder"
+        android:order="14"
+        settings:controller="com.android.settings.applications.appcompat.UserAspectRatioAppsPreferenceController"
+        android:fragment="com.android.settings.applications.manageapplications.ManageApplications">
+        <extra android:name="classname"
+               android:value="com.android.settings.Settings$UserAspectRatioAppListActivity"/>
+    </Preference>
+
+    <Preference
         android:key="hibernated_apps"
         android:title="@string/unused_apps"
         android:summary="@string/summary_placeholder"
