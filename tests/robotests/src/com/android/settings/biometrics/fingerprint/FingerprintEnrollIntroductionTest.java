@@ -85,6 +85,7 @@ public class FingerprintEnrollIntroductionTest {
     private Context mContext;
 
     private TestFingerprintEnrollIntroduction mFingerprintEnrollIntroduction;
+    private ActivityController<TestFingerprintEnrollIntroduction> mController;
 
     private static final int MAX_ENROLLMENTS = 5;
     private static final byte[] EXPECTED_TOKEN = new byte[] { 10, 20, 30, 40 };
@@ -121,9 +122,8 @@ public class FingerprintEnrollIntroductionTest {
 
     void setupFingerprintEnrollIntroWith(@NonNull Intent intent) {
 
-        final ActivityController<TestFingerprintEnrollIntroduction> controller =
-                Robolectric.buildActivity(TestFingerprintEnrollIntroduction.class, intent);
-        mFingerprintEnrollIntroduction = controller.get();
+        mController = Robolectric.buildActivity(TestFingerprintEnrollIntroduction.class, intent);
+        mFingerprintEnrollIntroduction = mController.get();
         mFingerprintEnrollIntroduction.mMockedFingerprintManager = mFingerprintManager;
         mFingerprintEnrollIntroduction.mMockedGatekeeperPasswordProvider =
                 mGatekeeperPasswordProvider;
@@ -137,7 +137,7 @@ public class FingerprintEnrollIntroductionTest {
         when(mLockPatternUtils.getActivePasswordQuality(userId))
                 .thenReturn(PASSWORD_QUALITY_SOMETHING);
 
-        controller.create();
+        mController.create();
     }
 
     void setFingerprintManagerToHave(int numEnrollments) {
@@ -277,6 +277,18 @@ public class FingerprintEnrollIntroductionTest {
         }
     }
 
+    @Test
+    public void clickNext_onActivityResult_pause_shouldFinish() {
+        setupFingerprintEnrollIntroWith(newTokenOnlyIntent());
+        mController.resume();
+        mFingerprintEnrollIntroduction.clickNextBtn();
+        mController.pause().stop();
+        assertThat(mFingerprintEnrollIntroduction.shouldFinishWhenBackgrounded()).isEqualTo(false);
+
+        mController.resume().pause().stop();
+        assertThat(mFingerprintEnrollIntroduction.shouldFinishWhenBackgrounded()).isEqualTo(true);
+    }
+
     private Intent newTokenOnlyIntent() {
         return new Intent()
                 .putExtra(EXTRA_KEY_CHALLENGE_TOKEN, new byte[] { 1 });
@@ -362,5 +374,16 @@ public class FingerprintEnrollIntroductionTest {
         protected void getChallenge(GenerateChallengeCallback callback) {
             callback.onChallengeGenerated(mNewSensorId, mUserId, mNewChallenge);
         }
+
+        @Override
+        protected boolean shouldFinishWhenBackgrounded() {
+            return super.shouldFinishWhenBackgrounded();
+        }
+
+        //mock click next btn
+        public void clickNextBtn() {
+            super.onNextButtonClick(null);
+        }
+
     }
 }
