@@ -480,10 +480,8 @@ public class FingerprintSettings extends SubSettings {
                         R.string.security_settings_fingerprint_enroll_introduction_v3_message,
                         DeviceHelper.getDeviceName(getActivity()));
                 column.mLearnMoreClickListener = learnMoreClickListener;
-                if (isSfps()) {
-                    column.mLearnMoreOverrideText = getText(
-                            R.string.security_settings_fingerprint_settings_footer_learn_more);
-                }
+                column.mLearnMoreOverrideText = getText(
+                        R.string.security_settings_fingerprint_settings_footer_learn_more);
                 mFooterColumns.add(column);
             }
         }
