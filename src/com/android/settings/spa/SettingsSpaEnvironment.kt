@@ -20,6 +20,7 @@ import android.content.Context
 import android.util.FeatureFlagUtils
 import com.android.settings.spa.app.AllAppListPageProvider
 import com.android.settings.spa.app.AppsMainPageProvider
+import com.android.settings.spa.app.appcompat.UserAspectRatioAppsPageProvider
 import com.android.settings.spa.app.appinfo.AppInfoSettingsProvider
 import com.android.settings.spa.app.appinfo.CloneAppInfoSettingsProvider
 import com.android.settings.spa.app.backgroundinstall.BackgroundInstalledAppsPageProvider
@@ -86,6 +87,7 @@ open class SettingsSpaEnvironment(context: Context) : SpaEnvironment(context) {
                 UsageStatsPageProvider,
                 PlatformCompatAppListPageProvider,
                 BackgroundInstalledAppsPageProvider,
+                UserAspectRatioAppsPageProvider,
                 CloneAppInfoSettingsProvider,
                 NetworkAndInternetPageProvider,
                 ) + togglePermissionAppListTemplate.createPageProviders(),

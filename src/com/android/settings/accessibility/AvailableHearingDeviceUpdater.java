@@ -16,7 +16,6 @@
 
 package com.android.settings.accessibility;
 
-import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 
 import com.android.settings.bluetooth.AvailableMediaBluetoothDeviceUpdater;
@@ -37,11 +36,9 @@ public class AvailableHearingDeviceUpdater extends AvailableMediaBluetoothDevice
 
     @Override
     public boolean isFilterMatched(CachedBluetoothDevice cachedDevice) {
-        final BluetoothDevice device = cachedDevice.getDevice();
-        final boolean isConnectedHearingAidDevice = (cachedDevice.isConnectedHearingAidDevice()
-                && (device.getBondState() == BluetoothDevice.BOND_BONDED));
-
-        return isConnectedHearingAidDevice && isDeviceInCachedDevicesList(cachedDevice);
+        return cachedDevice.isHearingAidDevice()
+                && isDeviceConnected(cachedDevice)
+                && isDeviceInCachedDevicesList(cachedDevice);
     }
 
     @Override
