@@ -23,12 +23,20 @@ import android.os.Bundle
 import androidx.activity.result.ActivityResult
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.settings.biometrics.BiometricEnrollBase
 import com.android.settings.biometrics2.data.repository.FingerprintRepository
 import com.android.settings.biometrics2.utils.EnrollmentRequestUtils.newAllFalseRequest
+import com.android.settings.biometrics2.utils.EnrollmentRequestUtils.newIsSuwRequest
 import com.android.settings.biometrics2.utils.FingerprintRepositoryUtils.newFingerprintRepository
 import com.android.settings.biometrics2.utils.FingerprintRepositoryUtils.setupFingerprintEnrolledFingerprints
-import com.android.settings.testutils.InstantTaskExecutorRule
-import com.google.common.truth.Truth
+import com.google.common.truth.Truth.assertThat
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.toList
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.test.TestScope
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.runCurrent
+import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -41,8 +49,6 @@ import org.mockito.junit.MockitoRule
 class FingerprintEnrollmentViewModelTest {
 
     @get:Rule val mockito: MockitoRule = MockitoJUnit.rule()
-
-    @get:Rule val taskExecutorRule = InstantTaskExecutorRule()
 
     private val application: Application
         get() = ApplicationProvider.getApplicationContext()
@@ -69,12 +75,12 @@ class FingerprintEnrollmentViewModelTest {
 
     @Test
     fun testGetRequest() {
-        Truth.assertThat(viewModel.request).isNotNull()
+        assertThat(viewModel.request).isNotNull()
     }
 
     @Test
     fun testIsWaitingActivityResultDefaultFalse() {
-        Truth.assertThat(viewModel.isWaitingActivityResult.value).isFalse()
+        assertThat(viewModel.isWaitingActivityResult.value).isFalse()
     }
 
 
@@ -83,8 +89,8 @@ class FingerprintEnrollmentViewModelTest {
         val retResult = viewModel.getOverrideActivityResult(
             ActivityResult(22, null), null
         )
-        Truth.assertThat(retResult).isNotNull()
-        Truth.assertThat(retResult.data).isNull()
+        assertThat(retResult).isNotNull()
+        assertThat(retResult.data).isNull()
     }
 
     @Test
@@ -93,8 +99,8 @@ class FingerprintEnrollmentViewModelTest {
         val retResult = viewModel.getOverrideActivityResult(
             ActivityResult(33, intent), null
         )
-        Truth.assertThat(retResult).isNotNull()
-        Truth.assertThat(retResult.data).isEqualTo(intent)
+        assertThat(retResult).isNotNull()
+        assertThat(retResult.data).isEqualTo(intent)
     }
 
     @Test
@@ -106,8 +112,8 @@ class FingerprintEnrollmentViewModelTest {
             ActivityResult(33, null), extra
         )
 
-        Truth.assertThat(retResult).isNotNull()
-        Truth.assertThat(retResult.data).isNull()
+        assertThat(retResult).isNotNull()
+        assertThat(retResult.data).isNull()
     }
 
     @Test
@@ -124,16 +130,16 @@ class FingerprintEnrollmentViewModelTest {
         val retResult = viewModel.getOverrideActivityResult(
             ActivityResult(33, null), extra
         )
-        Truth.assertThat(retResult).isNotNull()
+        assertThat(retResult).isNotNull()
 
         val retIntent = retResult.data
-        Truth.assertThat(retIntent).isNotNull()
+        assertThat(retIntent).isNotNull()
 
         val retExtra = retIntent!!.extras
-        Truth.assertThat(retExtra).isNotNull()
-        Truth.assertThat(retExtra!!.size).isEqualTo(extra.size)
-        Truth.assertThat(retExtra.getString(key1)).isEqualTo(extra.getString(key1))
-        Truth.assertThat(retExtra.getInt(key2)).isEqualTo(extra.getInt(key2))
+        assertThat(retExtra).isNotNull()
+        assertThat(retExtra!!.size).isEqualTo(extra.size)
+        assertThat(retExtra.getString(key1)).isEqualTo(extra.getString(key1))
+        assertThat(retExtra.getInt(key2)).isEqualTo(extra.getInt(key2))
     }
 
     @Test
@@ -149,15 +155,15 @@ class FingerprintEnrollmentViewModelTest {
 
         val retResult = viewModel.getOverrideActivityResult(ActivityResult(33, intent), extra)
 
-        Truth.assertThat(retResult).isNotNull()
+        assertThat(retResult).isNotNull()
 
         val retIntent = retResult.data
-        Truth.assertThat(retIntent).isNotNull()
+        assertThat(retIntent).isNotNull()
 
         val retExtra = retIntent!!.extras
-        Truth.assertThat(retExtra).isNotNull()
-        Truth.assertThat(retExtra!!.size).isEqualTo(intent.extras!!.size)
-        Truth.assertThat(retExtra.getString(key2)).isEqualTo(intent.extras!!.getString(key2))
+        assertThat(retExtra).isNotNull()
+        assertThat(retExtra!!.size).isEqualTo(intent.extras!!.size)
+        assertThat(retExtra.getString(key2)).isEqualTo(intent.extras!!.getString(key2))
     }
 
     @Test
@@ -177,17 +183,17 @@ class FingerprintEnrollmentViewModelTest {
         viewModel.isNewFingerprintAdded = true
 
         val retResult = viewModel.getOverrideActivityResult(ActivityResult(33, intent), extra)
-        Truth.assertThat(retResult).isNotNull()
+        assertThat(retResult).isNotNull()
 
         val retIntent = retResult.data
-        Truth.assertThat(retIntent).isNotNull()
+        assertThat(retIntent).isNotNull()
 
         val retExtra = retIntent!!.extras
-        Truth.assertThat(retExtra).isNotNull()
-        Truth.assertThat(retExtra!!.size).isEqualTo(extra.size + intent.extras!!.size)
-        Truth.assertThat(retExtra.getString(key1)).isEqualTo(extra.getString(key1))
-        Truth.assertThat(retExtra.getInt(key2)).isEqualTo(extra.getInt(key2))
-        Truth.assertThat(retExtra.getLong(key3)).isEqualTo(intent.extras!!.getLong(key3))
+        assertThat(retExtra).isNotNull()
+        assertThat(retExtra!!.size).isEqualTo(extra.size + intent.extras!!.size)
+        assertThat(retExtra.getString(key1)).isEqualTo(extra.getString(key1))
+        assertThat(retExtra.getInt(key2)).isEqualTo(extra.getInt(key2))
+        assertThat(retExtra.getLong(key3)).isEqualTo(intent.extras!!.getLong(key3))
     }
 
     @Test
@@ -205,18 +211,120 @@ class FingerprintEnrollmentViewModelTest {
         )
 
         setupFingerprintEnrolledFingerprints(fingerprintManager, uid, 0)
-        Truth.assertThat(viewModel.isMaxEnrolledReached(uid)).isFalse()
+        assertThat(viewModel.isMaxEnrolledReached(uid)).isFalse()
 
         setupFingerprintEnrolledFingerprints(fingerprintManager, uid, 1)
-        Truth.assertThat(viewModel.isMaxEnrolledReached(uid)).isFalse()
+        assertThat(viewModel.isMaxEnrolledReached(uid)).isFalse()
 
         setupFingerprintEnrolledFingerprints(fingerprintManager, uid, 2)
-        Truth.assertThat(viewModel.isMaxEnrolledReached(uid)).isFalse()
+        assertThat(viewModel.isMaxEnrolledReached(uid)).isFalse()
 
         setupFingerprintEnrolledFingerprints(fingerprintManager, uid, 3)
-        Truth.assertThat(viewModel.isMaxEnrolledReached(uid)).isTrue()
+        assertThat(viewModel.isMaxEnrolledReached(uid)).isTrue()
 
         setupFingerprintEnrolledFingerprints(fingerprintManager, uid, 4)
-        Truth.assertThat(viewModel.isMaxEnrolledReached(uid)).isTrue()
+        assertThat(viewModel.isMaxEnrolledReached(uid)).isTrue()
     }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun testSetResultFlow_defaultEmpty() = runTest {
+        val activityResults = listOfSetResultFlow()
+
+        runCurrent()
+
+        assertThat(activityResults.size).isEqualTo(0)
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun testCheckFinishActivityDuringOnPause_doNothingIfIsSuw() = runTest {
+        viewModel = FingerprintEnrollmentViewModel(
+            application,
+            fingerprintRepository,
+            newIsSuwRequest(application)
+        )
+
+        val activityResults = listOfSetResultFlow()
+
+        viewModel.checkFinishActivityDuringOnPause(
+            isActivityFinishing = false,
+            isChangingConfigurations = false,
+            scope = this
+        )
+        runCurrent()
+
+        assertThat(activityResults.size).isEqualTo(0)
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun testCheckFinishActivityDuringOnPause_doNothingIfIsWaitingActivity() = runTest {
+        val activityResults = listOfSetResultFlow()
+
+        viewModel.isWaitingActivityResult.value = true
+        viewModel.checkFinishActivityDuringOnPause(
+            isActivityFinishing = false,
+            isChangingConfigurations = false,
+            scope = this
+        )
+        runCurrent()
+
+        assertThat(activityResults.size).isEqualTo(0)
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun testCheckFinishActivityDuringOnPause_doNothingIfIsActivityFinishing() = runTest {
+        val activityResults = listOfSetResultFlow()
+
+        viewModel.checkFinishActivityDuringOnPause(
+            isActivityFinishing = true,
+            isChangingConfigurations = false,
+            scope = this
+        )
+        runCurrent()
+
+        assertThat(activityResults.size).isEqualTo(0)
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun testCheckFinishActivityDuringOnPause_doNothingIfIsChangingConfigurations() = runTest {
+        val activityResults = listOfSetResultFlow()
+
+        viewModel.checkFinishActivityDuringOnPause(
+            isActivityFinishing = false,
+            isChangingConfigurations = true,
+            scope = this
+        )
+        runCurrent()
+
+        assertThat(activityResults.size).isEqualTo(0)
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun testCheckFinishActivityDuringOnPause_defaultFinishSelf() = runTest {
+        val activityResults = listOfSetResultFlow()
+
+        viewModel.checkFinishActivityDuringOnPause(
+            isActivityFinishing = false,
+            isChangingConfigurations = false,
+            scope = backgroundScope
+        )
+        runCurrent()
+
+        assertThat(activityResults.size).isEqualTo(1)
+        assertThat(activityResults[0].resultCode).isEqualTo(BiometricEnrollBase.RESULT_TIMEOUT)
+        assertThat(activityResults[0].data).isEqualTo(null)
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    private fun TestScope.listOfSetResultFlow(): List<ActivityResult> =
+        mutableListOf<ActivityResult>().also {
+            backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) {
+                viewModel.setResultFlow.toList(it)
+            }
+        }
 }

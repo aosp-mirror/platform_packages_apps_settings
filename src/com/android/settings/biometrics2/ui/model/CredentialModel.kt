@@ -80,20 +80,6 @@ class CredentialModel(bundle: Bundle?, private val clock: Clock) {
     val isValidToken: Boolean
         get() = token != null
 
-    val bundle: Bundle
-        /**
-         * Get a bundle which can be used to recreate CredentialModel
-         */
-        get() {
-            val bundle = Bundle()
-            bundle.putInt(EXTRA_USER_ID, userId)
-            bundle.putLong(EXTRA_KEY_CHALLENGE, challenge)
-            bundle.putByteArray(EXTRA_KEY_CHALLENGE_TOKEN, token)
-            bundle.putLong(EXTRA_KEY_GK_PW_HANDLE, gkPwHandle)
-            return bundle
-        }
-
-
     /** Returns a string representation of the object */
     override fun toString(): String {
         val gkPwHandleLen = "$gkPwHandle".length

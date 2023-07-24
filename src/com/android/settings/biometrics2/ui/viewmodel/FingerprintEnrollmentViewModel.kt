@@ -23,8 +23,6 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.result.ActivityResult
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.android.settings.biometrics.BiometricEnrollBase
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollFinish.FINGERPRINT_SUGGESTION_ACTIVITY
 import com.android.settings.biometrics.fingerprint.SetupFingerprintEnrollIntroduction
@@ -32,6 +30,11 @@ import com.android.settings.biometrics2.data.repository.FingerprintRepository
 import com.android.settings.biometrics2.ui.model.EnrollmentRequest
 import kotlinx.atomicfu.AtomicBoolean
 import kotlinx.atomicfu.atomic
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.launch
 
 /**
  * Fingerprint enrollment view model implementation
@@ -44,9 +47,9 @@ class FingerprintEnrollmentViewModel(
 
     val isWaitingActivityResult: AtomicBoolean = atomic(false)
 
-    private val _setResultLiveData = MutableLiveData<ActivityResult>()
-    val setResultLiveData: LiveData<ActivityResult>
-        get() = _setResultLiveData
+    private val _setResultFlow = MutableSharedFlow<ActivityResult>()
+    val setResultFlow: SharedFlow<ActivityResult>
+        get() = _setResultFlow.asSharedFlow()
 
     var isNewFingerprintAdded = false
         set(value) {
@@ -94,16 +97,17 @@ class FingerprintEnrollmentViewModel(
      */
     fun checkFinishActivityDuringOnPause(
         isActivityFinishing: Boolean,
-        isChangingConfigurations: Boolean
+        isChangingConfigurations: Boolean,
+        scope: CoroutineScope
     ) {
         if (isChangingConfigurations || isActivityFinishing || request.isSuw
             || isWaitingActivityResult.value
         ) {
             return
         }
-        _setResultLiveData.postValue(
-            ActivityResult(BiometricEnrollBase.RESULT_TIMEOUT, null)
-        )
+        scope.launch {
+            _setResultFlow.emit(ActivityResult(BiometricEnrollBase.RESULT_TIMEOUT, null))
+        }
     }
 
     /**
@@ -133,23 +137,23 @@ class FingerprintEnrollmentViewModel(
      * Update FINGERPRINT_SUGGESTION_ACTIVITY into package manager
      */
     fun updateFingerprintSuggestionEnableState(userId: Int) {
-        val enrolled = fingerprintRepository.getNumOfEnrolledFingerprintsSize(userId)
         // Only show "Add another fingerprint" if the user already enrolled one.
         // "Add fingerprint" will be shown in the main flow if the user hasn't enrolled any
         // fingerprints. If the user already added more than one fingerprint, they already know
         // to add multiple fingerprints so we don't show the suggestion.
+        val state = if (fingerprintRepository.getNumOfEnrolledFingerprintsSize(userId) == 1)
+            PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+        else
+            PackageManager.COMPONENT_ENABLED_STATE_DISABLED
         getApplication<Application>().packageManager.setComponentEnabledSetting(
             ComponentName(
                 getApplication(),
                 FINGERPRINT_SUGGESTION_ACTIVITY
             ),
-            if (enrolled == 1)
-                PackageManager.COMPONENT_ENABLED_STATE_ENABLED
-            else
-                PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+            state,
             PackageManager.DONT_KILL_APP
         )
-        Log.d(TAG, "$FINGERPRINT_SUGGESTION_ACTIVITY enabled state = ${enrolled == 1}")
+        Log.d(TAG, "$FINGERPRINT_SUGGESTION_ACTIVITY enabled state: $state")
     }
 
     companion object {

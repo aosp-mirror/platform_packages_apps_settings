@@ -28,6 +28,7 @@ import androidx.lifecycle.viewmodel.CreationExtras;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.biometrics.fingerprint.FingerprintUpdater;
 import com.android.settings.biometrics2.data.repository.FingerprintRepository;
+import com.android.settings.biometrics2.ui.model.CredentialModel;
 import com.android.settings.biometrics2.ui.model.EnrollmentRequest;
 import com.android.settings.biometrics2.ui.viewmodel.AutoCredentialViewModel;
 import com.android.settings.biometrics2.ui.viewmodel.AutoCredentialViewModel.ChallengeGenerator;
@@ -54,8 +55,8 @@ public class BiometricsViewModelFactory implements ViewModelProvider.Factory {
             new CreationExtras.Key<ChallengeGenerator>() {};
     public static final CreationExtras.Key<EnrollmentRequest> ENROLLMENT_REQUEST_KEY =
             new CreationExtras.Key<EnrollmentRequest>() {};
-    public static final CreationExtras.Key<Integer> USER_ID_KEY =
-            new CreationExtras.Key<Integer>() {};
+    public static final CreationExtras.Key<CredentialModel> CREDENTIAL_MODEL_KEY =
+            new CreationExtras.Key<CredentialModel>() {};
 
     @NonNull
     @Override
@@ -76,9 +77,10 @@ public class BiometricsViewModelFactory implements ViewModelProvider.Factory {
             final LockPatternUtils lockPatternUtils =
                     featureFactory.getSecurityFeatureProvider().getLockPatternUtils(application);
             final ChallengeGenerator challengeGenerator = extras.get(CHALLENGE_GENERATOR_KEY);
-            if (challengeGenerator != null) {
+            final CredentialModel credentialModel = extras.get(CREDENTIAL_MODEL_KEY);
+            if (challengeGenerator != null && credentialModel != null) {
                 return (T) new AutoCredentialViewModel(application, lockPatternUtils,
-                        challengeGenerator);
+                        challengeGenerator, credentialModel);
             }
         } else if (modelClass.isAssignableFrom(DeviceFoldedViewModel.class)) {
             return (T) new DeviceFoldedViewModel(new ScreenSizeFoldProvider(application),
@@ -93,10 +95,10 @@ public class BiometricsViewModelFactory implements ViewModelProvider.Factory {
         } else if (modelClass.isAssignableFrom(FingerprintEnrollIntroViewModel.class)) {
             final FingerprintRepository repository = provider.getFingerprintRepository(application);
             final EnrollmentRequest request = extras.get(ENROLLMENT_REQUEST_KEY);
-            final Integer userId = extras.get(USER_ID_KEY);
-            if (repository != null && request != null && userId != null) {
+            final CredentialModel credentialModel = extras.get(CREDENTIAL_MODEL_KEY);
+            if (repository != null && request != null && credentialModel != null) {
                 return (T) new FingerprintEnrollIntroViewModel(application, repository, request,
-                        userId);
+                        credentialModel.getUserId());
             }
         } else if (modelClass.isAssignableFrom(FingerprintEnrollmentViewModel.class)) {
             final FingerprintRepository repository = provider.getFingerprintRepository(application);
@@ -105,27 +107,27 @@ public class BiometricsViewModelFactory implements ViewModelProvider.Factory {
                 return (T) new FingerprintEnrollmentViewModel(application, repository, request);
             }
         } else if (modelClass.isAssignableFrom(FingerprintEnrollProgressViewModel.class)) {
-            final Integer userId = extras.get(USER_ID_KEY);
-            if (userId != null) {
+            final CredentialModel credentialModel = extras.get(CREDENTIAL_MODEL_KEY);
+            if (credentialModel != null) {
                 return (T) new FingerprintEnrollProgressViewModel(application,
-                        new FingerprintUpdater(application), userId);
+                        new FingerprintUpdater(application), credentialModel.getUserId());
             }
         } else if (modelClass.isAssignableFrom(FingerprintEnrollEnrollingViewModel.class)) {
-            final Integer userId = extras.get(USER_ID_KEY);
+            final CredentialModel credentialModel = extras.get(CREDENTIAL_MODEL_KEY);
             final FingerprintRepository fingerprint = provider.getFingerprintRepository(
                     application);
-            if (fingerprint != null && userId != null) {
-                return (T) new FingerprintEnrollEnrollingViewModel(application, userId,
-                        fingerprint);
+            if (fingerprint != null && credentialModel != null) {
+                return (T) new FingerprintEnrollEnrollingViewModel(application,
+                        credentialModel.getUserId(), fingerprint);
             }
         } else if (modelClass.isAssignableFrom(FingerprintEnrollFinishViewModel.class)) {
-            final Integer userId = extras.get(USER_ID_KEY);
+            final CredentialModel credentialModel = extras.get(CREDENTIAL_MODEL_KEY);
             final EnrollmentRequest request = extras.get(ENROLLMENT_REQUEST_KEY);
             final FingerprintRepository fingerprint = provider.getFingerprintRepository(
                     application);
-            if (fingerprint != null && userId != null && request != null) {
-                return (T) new FingerprintEnrollFinishViewModel(application, userId, request,
-                        fingerprint);
+            if (fingerprint != null && credentialModel != null && request != null) {
+                return (T) new FingerprintEnrollFinishViewModel(application,
+                        credentialModel.getUserId(), request, fingerprint);
             }
         } else if (modelClass.isAssignableFrom(FingerprintEnrollErrorDialogViewModel.class)) {
             final EnrollmentRequest request = extras.get(ENROLLMENT_REQUEST_KEY);

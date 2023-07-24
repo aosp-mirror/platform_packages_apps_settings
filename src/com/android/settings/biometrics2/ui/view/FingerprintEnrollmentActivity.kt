@@ -44,16 +44,13 @@ import com.android.settings.Utils
 import com.android.settings.biometrics.BiometricEnrollBase
 import com.android.settings.biometrics2.factory.BiometricsViewModelFactory
 import com.android.settings.biometrics2.factory.BiometricsViewModelFactory.CHALLENGE_GENERATOR_KEY
+import com.android.settings.biometrics2.factory.BiometricsViewModelFactory.CREDENTIAL_MODEL_KEY
 import com.android.settings.biometrics2.factory.BiometricsViewModelFactory.ENROLLMENT_REQUEST_KEY
-import com.android.settings.biometrics2.factory.BiometricsViewModelFactory.USER_ID_KEY
 import com.android.settings.biometrics2.ui.model.CredentialModel
 import com.android.settings.biometrics2.ui.model.EnrollmentRequest
 import com.android.settings.biometrics2.ui.viewmodel.AutoCredentialViewModel
-import com.android.settings.biometrics2.ui.viewmodel.AutoCredentialViewModel.CREDENTIAL_FAIL_NEED_TO_CHOOSE_LOCK
-import com.android.settings.biometrics2.ui.viewmodel.AutoCredentialViewModel.CREDENTIAL_FAIL_NEED_TO_CONFIRM_LOCK
-import com.android.settings.biometrics2.ui.viewmodel.AutoCredentialViewModel.CREDENTIAL_IS_GENERATING_CHALLENGE
-import com.android.settings.biometrics2.ui.viewmodel.AutoCredentialViewModel.CREDENTIAL_VALID
 import com.android.settings.biometrics2.ui.viewmodel.AutoCredentialViewModel.FingerprintChallengeGenerator
+import com.android.settings.biometrics2.ui.viewmodel.CredentialAction
 import com.android.settings.biometrics2.ui.viewmodel.DeviceFoldedViewModel
 import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollEnrollingViewModel
 import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollEnrollingViewModel.FINGERPRINT_ENROLL_ENROLLING_ACTION_DONE
@@ -170,7 +167,6 @@ open class FingerprintEnrollmentActivity : FragmentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        autoCredentialViewModel.setCredentialModel(savedInstanceState, intent)
 
         // Theme
         setTheme(viewModel.request.theme)
@@ -219,14 +215,23 @@ open class FingerprintEnrollmentActivity : FragmentActivity() {
             }
         }
 
-        // observe LiveData
-        viewModel.setResultLiveData.observe(this) {
-            result: ActivityResult -> onSetActivityResult(result)
-        }
-        autoCredentialViewModel.generateChallengeFailedLiveData.observe(this) {
-            _: Boolean -> onGenerateChallengeFailed()
-        }
+        collectFlows()
+    }
+
+    private fun collectFlows() {
         lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.setResultFlow.collect {
+                    Log.d(TAG, "setResultLiveData($it)")
+                    onSetActivityResult(it)
+                }
+            }
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                autoCredentialViewModel.generateChallengeFailedFlow.collect {
+                    Log.d(TAG, "generateChallengeFailedFlow($it)")
+                    onSetActivityResult(ActivityResult(RESULT_CANCELED, null))
+                }
+            }
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 errorDialogViewModel.newDialogFlow.collect {
                     Log.d(TAG, "newErrorDialogFlow($it)")
@@ -236,8 +241,6 @@ open class FingerprintEnrollmentActivity : FragmentActivity() {
                     )
                 }
             }
-        }
-        lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 errorDialogViewModel.setResultFlow.collect {
                     Log.d(TAG, "errorDialogSetResultFlow($it)")
@@ -408,10 +411,6 @@ open class FingerprintEnrollmentActivity : FragmentActivity() {
         }
     }
 
-    private fun onGenerateChallengeFailed() {
-        onSetActivityResult(ActivityResult(RESULT_CANCELED, null))
-    }
-
     private fun onSetActivityResult(result: ActivityResult) {
         val challengeExtras: Bundle? = autoCredentialViewModel.createGeneratingChallengeExtras()
         val overrideResult: ActivityResult = viewModel.getOverrideActivityResult(
@@ -428,8 +427,8 @@ open class FingerprintEnrollmentActivity : FragmentActivity() {
     }
 
     private fun checkCredential() {
-        when (autoCredentialViewModel.checkCredential()) {
-            CREDENTIAL_FAIL_NEED_TO_CHOOSE_LOCK -> {
+        when (autoCredentialViewModel.checkCredential(lifecycleScope)) {
+            CredentialAction.FAIL_NEED_TO_CHOOSE_LOCK -> {
                 val intent: Intent = autoCredentialViewModel.createChooseLockIntent(
                     this,
                     viewModel.request.isSuw,
@@ -442,7 +441,7 @@ open class FingerprintEnrollmentActivity : FragmentActivity() {
                 return
             }
 
-            CREDENTIAL_FAIL_NEED_TO_CONFIRM_LOCK -> {
+            CredentialAction.FAIL_NEED_TO_CONFIRM_LOCK -> {
                 val launched: Boolean = autoCredentialViewModel.createConfirmLockLauncher(
                     this,
                     LAUNCH_CONFIRM_LOCK_ACTIVITY,
@@ -459,21 +458,24 @@ open class FingerprintEnrollmentActivity : FragmentActivity() {
                 return
             }
 
-            CREDENTIAL_VALID,
-            CREDENTIAL_IS_GENERATING_CHALLENGE -> {}
+            CredentialAction.CREDENTIAL_VALID,
+            CredentialAction.IS_GENERATING_CHALLENGE -> {}
         }
     }
 
-    private fun onChooseOrConfirmLockResult(isChooseLock: Boolean, activityResult: ActivityResult) {
+    private fun onChooseOrConfirmLockResult(
+        isChooseLock: Boolean,
+        activityResult: ActivityResult
+    ) {
         if (!viewModel.isWaitingActivityResult.compareAndSet(true, false)) {
             Log.w(TAG, "isChooseLock:$isChooseLock, fail to unset waiting flag")
         }
-        if (autoCredentialViewModel.checkNewCredentialFromActivityResult(
-                isChooseLock, activityResult
+        if (!autoCredentialViewModel.generateChallengeAsCredentialActivityResult(
+                isChooseLock,
+                activityResult,
+                lifecycleScope
             )
         ) {
-            overridePendingTransition(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out)
-        } else {
             onSetActivityResult(activityResult)
         }
     }
@@ -573,7 +575,11 @@ open class FingerprintEnrollmentActivity : FragmentActivity() {
 
     override fun onPause() {
         super.onPause()
-        viewModel.checkFinishActivityDuringOnPause(isFinishing, isChangingConfigurations)
+        viewModel.checkFinishActivityDuringOnPause(
+            isFinishing,
+            isChangingConfigurations,
+            lifecycleScope
+        )
     }
 
     override fun onDestroy() {
@@ -596,17 +602,14 @@ open class FingerprintEnrollmentActivity : FragmentActivity() {
     }
 
     override val defaultViewModelCreationExtras: CreationExtras
-        get() {
-            val fingerprintRepository = featureFactory.biometricsRepositoryProvider
-                .getFingerprintRepository(application)!!
-            val credentialModel = CredentialModel(intent.extras, SystemClock.elapsedRealtimeClock())
-
-            return MutableCreationExtras(super.defaultViewModelCreationExtras).also {
-                it[CHALLENGE_GENERATOR_KEY] = FingerprintChallengeGenerator(fingerprintRepository)
-                it[ENROLLMENT_REQUEST_KEY] =
-                    EnrollmentRequest(intent, applicationContext, this is SetupActivity)
-                it[USER_ID_KEY] = credentialModel.userId
-            }
+        get() = MutableCreationExtras(super.defaultViewModelCreationExtras).also {
+            it[CHALLENGE_GENERATOR_KEY] = FingerprintChallengeGenerator(
+                featureFactory.biometricsRepositoryProvider.getFingerprintRepository(application)!!
+            )
+            it[ENROLLMENT_REQUEST_KEY] =
+                EnrollmentRequest(intent, applicationContext, this is SetupActivity)
+            it[CREDENTIAL_MODEL_KEY] =
+                CredentialModel(intent.extras, SystemClock.elapsedRealtimeClock())
         }
 
     override val defaultViewModelProviderFactory: ViewModelProvider.Factory
@@ -628,11 +631,6 @@ open class FingerprintEnrollmentActivity : FragmentActivity() {
     override fun onConfigurationChanged(newConfig: Configuration) {
         viewModelProvider[DeviceFoldedViewModel::class.java].onConfigurationChanged(newConfig)
         super.onConfigurationChanged(newConfig)
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        autoCredentialViewModel.onSaveInstanceState(outState)
     }
 
     companion object {

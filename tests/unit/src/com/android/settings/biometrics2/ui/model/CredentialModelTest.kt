@@ -38,22 +38,6 @@ class CredentialModelTest {
         Truth.assertThat(credentialModel.userId).isEqualTo(UserHandle.myUserId())
     }
 
-    @Test
-    fun testSameValueFromBundle() {
-        val bundle = newCredentialModelIntentExtras(1234, 6677L, byteArrayOf(33, 44, 55), 987654321)
-        val model1 = CredentialModel(bundle, clock)
-        val model2 = CredentialModel(model1.bundle, clock)
-        verifySameCredentialModels(model1, model2)
-    }
-
-    @Test
-    fun testSameValueFromBundle_nullToken() {
-        val bundle = newCredentialModelIntentExtras(22, 33L, null, 21L)
-        val model1 = CredentialModel(bundle, clock)
-        val model2 = CredentialModel(model1.bundle, clock)
-        verifySameCredentialModels(model1, model2)
-    }
-
     companion object {
         @JvmStatic
         fun newCredentialModelIntentExtras(
@@ -147,37 +131,6 @@ class CredentialModelTest {
                     )
                 }
             }
-        }
-
-        fun verifySameCredentialModels(
-            model1: CredentialModel,
-            model2: CredentialModel
-        ) {
-            Truth.assertThat(model1.userId).isEqualTo(model2.userId)
-            Truth.assertThat(model1.challenge).isEqualTo(model2.challenge)
-            Truth.assertThat(model1.gkPwHandle).isEqualTo(model2.gkPwHandle)
-            val token1 = model1.token
-            val token2 = model2.token
-            if (token1 == null) {
-                Truth.assertThat(token2).isNull()
-            } else {
-                Truth.assertThat(token2).isNotNull()
-                Truth.assertThat(token1.size).isEqualTo(token2!!.size)
-                for (i in token1.indices) {
-                    Truth.assertThat(token1[i]).isEqualTo(
-                        token2[i]
-                    )
-                }
-            }
-            val bundle1 = model1.bundle
-            val bundle2 = model2.bundle
-            val keySet1 = bundle1.keySet()
-            Truth.assertThat(keySet1 == bundle2.keySet()).isTrue()
-            checkBundleIntValue(bundle1, bundle2, Intent.EXTRA_USER_ID)
-            checkBundleIntValue(bundle1, bundle2, BiometricEnrollBase.EXTRA_KEY_SENSOR_ID)
-            checkBundleLongValue(bundle1, bundle2, BiometricEnrollBase.EXTRA_KEY_CHALLENGE)
-            checkBundleByteArrayValue(bundle1, bundle2, BiometricEnrollBase.EXTRA_KEY_CHALLENGE)
-            checkBundleLongValue(bundle1, bundle2, ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE)
         }
     }
 }
