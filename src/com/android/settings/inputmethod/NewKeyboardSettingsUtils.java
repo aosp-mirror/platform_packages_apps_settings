@@ -20,6 +20,7 @@ import android.content.Context;
 import android.hardware.input.InputDeviceIdentifier;
 import android.hardware.input.InputManager;
 import android.hardware.input.KeyboardLayout;
+import android.os.UserHandle;
 import android.view.InputDevice;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -55,7 +56,7 @@ public class NewKeyboardSettingsUtils {
 
     static List<String> getSuitableImeLabels(Context context, InputMethodManager imm, int userId) {
         List<String> suitableInputMethodInfoLabels = new ArrayList<>();
-        List<InputMethodInfo> infoList = imm.getEnabledInputMethodListAsUser(userId);
+        List<InputMethodInfo> infoList = imm.getEnabledInputMethodListAsUser(UserHandle.of(userId));
         for (InputMethodInfo info : infoList) {
             List<InputMethodSubtype> subtypes =
                     imm.getEnabledInputMethodSubtypeList(info, true);
