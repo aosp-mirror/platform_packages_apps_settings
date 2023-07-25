@@ -52,26 +52,9 @@ public class Settings extends SettingsActivity {
     public static class AssistGestureSettingsActivity extends SettingsActivity { /* empty */}
     public static class BluetoothSettingsActivity extends SettingsActivity { /* empty */ }
     public static class CreateShortcutActivity extends SettingsActivity { /* empty */ }
-    public static class FaceSettingsActivity extends SettingsActivity {
-        @Override
-        protected void onCreate(Bundle savedState) {
-            setTheme(SetupWizardUtils.getTheme(this, getIntent()));
-            setTheme(R.style.SettingsPreferenceTheme_SetupWizard);
-            ThemeHelper.trySetDynamicColor(this);
-            super.onCreate(savedState);
-        }
-    }
+    public static class FaceSettingsActivity extends SettingsActivity { /* empty */ }
     /** Container for {@link FaceSettings} to use with a pre-defined task affinity. */
-    public static class FaceSettingsInternalActivity extends SettingsActivity {
-        @Override
-        protected void onCreate(Bundle savedState) {
-            setTheme(SetupWizardUtils.getTheme(this, getIntent()));
-            setTheme(R.style.SettingsPreferenceTheme_SetupWizard);
-            ThemeHelper.trySetDynamicColor(this);
-            super.onCreate(savedState);
-        }
-    }
-
+    public static class FaceSettingsInternalActivity extends SettingsActivity { /* empty */ }
     public static class FingerprintSettingsActivity extends SettingsActivity { /* empty */ }
     public static class CombinedBiometricSettingsActivity extends SettingsActivity { /* empty */ }
     public static class CombinedBiometricProfileSettingsActivity extends SettingsActivity { /* empty */ }
