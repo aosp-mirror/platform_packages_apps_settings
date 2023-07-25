@@ -94,8 +94,8 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         super.onAttach(context);
         mSuppressInjectedTileKeys = Arrays.asList(context.getResources().getStringArray(
                 R.array.config_suppress_injected_tile_keys));
-        mDashboardFeatureProvider = FeatureFactory.getFactory(context).
-                getDashboardFeatureProvider(context);
+        mDashboardFeatureProvider =
+                FeatureFactory.getFeatureFactory().getDashboardFeatureProvider();
         // Load preference controllers from code
         final List<AbstractPreferenceController> controllersFromCode =
                 createPreferenceControllers(context);

@@ -238,7 +238,7 @@ public class SettingsActivity extends SettingsBaseActivity
         String tag = getMetricsTag();
 
         return new SharedPreferencesLogger(this, tag,
-                FeatureFactory.getFactory(this).getMetricsFeatureProvider(),
+                FeatureFactory.getFeatureFactory().getMetricsFeatureProvider(),
                 lookupMetricsCategory());
     }
 
@@ -292,8 +292,8 @@ public class SettingsActivity extends SettingsBaseActivity
     protected void createUiFromIntent(Bundle savedState, Intent intent) {
         long startTime = System.currentTimeMillis();
 
-        final FeatureFactory factory = FeatureFactory.getFactory(this);
-        mDashboardFeatureProvider = factory.getDashboardFeatureProvider(this);
+        final FeatureFactory factory = FeatureFactory.getFeatureFactory();
+        mDashboardFeatureProvider = factory.getDashboardFeatureProvider();
 
         if (intent.hasExtra(EXTRA_UI_OPTIONS)) {
             getWindow().setUiOptions(intent.getIntExtra(EXTRA_UI_OPTIONS, 0));

@@ -170,8 +170,9 @@ public class FakeFeatureFactory extends FeatureFactory {
         return powerUsageFeatureProvider;
     }
 
+    @NotNull
     @Override
-    public DashboardFeatureProvider getDashboardFeatureProvider(Context context) {
+    public DashboardFeatureProvider getDashboardFeatureProvider() {
         return dashboardFeatureProvider;
     }
 
