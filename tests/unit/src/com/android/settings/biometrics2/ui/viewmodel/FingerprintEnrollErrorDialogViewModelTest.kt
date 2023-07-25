@@ -24,6 +24,9 @@ import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.test.TestScope
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
@@ -56,79 +59,69 @@ class FingerprintEnrollErrorDialogViewModelTest {
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun testNewDialog() = runTest {
-        backgroundScope.launch {
-            mutableListOf<Any>().let { list ->
-                viewModel.newDialogFlow.toList(list)
-                assertThat(list.size).isEqualTo(0)
-            }
-
-            mutableListOf<FingerprintErrorDialogSetResultAction>().let { list ->
-                val testErrorMsgId = 3456
-                viewModel.newDialog(testErrorMsgId)
-
-                assertThat(viewModel.isDialogShown).isTrue()
-                viewModel.setResultFlow.toList(list)
-                assertThat(list.size).isEqualTo(1)
-                assertThat(list[0]).isEqualTo(testErrorMsgId)
+        val newDialogs: List<Int> = mutableListOf<Int>().also {
+            backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) {
+                viewModel.newDialogFlow.toList(it)
             }
         }
+
+        runCurrent()
+
+        // Default values
+        assertThat(viewModel.isDialogShown).isFalse()
+        assertThat(newDialogs.size).isEqualTo(0)
+
+        val testErrorMsgId = 3456
+        viewModel.newDialog(testErrorMsgId)
+        runCurrent()
+
+        // verify after emit
+        assertThat(viewModel.isDialogShown).isTrue()
+        assertThat(newDialogs.size).isEqualTo(1)
+        assertThat(newDialogs[0]).isEqualTo(testErrorMsgId)
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun testTriggerRetry() = runTest {
-        backgroundScope.launch {
-            // triggerRetryFlow shall be empty on begin
-            mutableListOf<Any>().let { list ->
-                viewModel.triggerRetryFlow.toList(list)
-                assertThat(list.size).isEqualTo(0)
-            }
-
-            // emit newDialog
-            mutableListOf<FingerprintErrorDialogSetResultAction>().let { list ->
-                viewModel.newDialog(0)
-                viewModel.triggerRetry()
-
-                assertThat(viewModel.isDialogShown).isFalse()
-                viewModel.setResultFlow.toList(list)
-                assertThat(list.size).isEqualTo(1)
+        val triggerRetries: List<Any> = mutableListOf<Any>().also {
+            backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) {
+                viewModel.triggerRetryFlow.toList(it)
             }
         }
+
+        runCurrent()
+
+        // Default values
+        assertThat(triggerRetries.size).isEqualTo(0)
+
+        viewModel.triggerRetry()
+        runCurrent()
+
+        // verify after emit
+        assertThat(triggerRetries.size).isEqualTo(1)
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun testSetResultFinish() = runTest {
-        backgroundScope.launch {
-            // setResultFlow shall be empty on begin
-            mutableListOf<FingerprintErrorDialogSetResultAction>().let { list ->
-                viewModel.setResultFlow.toList(list)
-                assertThat(list.size).isEqualTo(0)
+        val setResults: List<FingerprintErrorDialogSetResultAction> =
+            mutableListOf<FingerprintErrorDialogSetResultAction>().also {
+                backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) {
+                    viewModel.setResultFlow.toList(it)
+                }
             }
 
-            // emit FINGERPRINT_ERROR_DIALOG_ACTION_SET_RESULT_FINISH
-            viewModel = FingerprintEnrollErrorDialogViewModel(application, false)
-            mutableListOf<FingerprintErrorDialogSetResultAction>().let { list ->
-                viewModel.newDialog(0)
-                viewModel.setResultAndFinish(FINGERPRINT_ERROR_DIALOG_ACTION_SET_RESULT_FINISH)
+        runCurrent()
 
-                assertThat(viewModel.isDialogShown).isFalse()
-                viewModel.setResultFlow.toList(list)
-                assertThat(list.size).isEqualTo(1)
-                assertThat(list[0]).isEqualTo(FINGERPRINT_ERROR_DIALOG_ACTION_SET_RESULT_FINISH)
-            }
+        // Default values
+        assertThat(setResults.size).isEqualTo(0)
 
-            // emit FINGERPRINT_ERROR_DIALOG_ACTION_SET_RESULT_TIMEOUT
-            viewModel = FingerprintEnrollErrorDialogViewModel(application, false)
-            mutableListOf<FingerprintErrorDialogSetResultAction>().let { list ->
-                viewModel.newDialog(0)
-                viewModel.setResultAndFinish(FINGERPRINT_ERROR_DIALOG_ACTION_SET_RESULT_TIMEOUT)
+        viewModel.setResultAndFinish(FINGERPRINT_ERROR_DIALOG_ACTION_SET_RESULT_FINISH)
+        runCurrent()
 
-                assertThat(viewModel.isDialogShown).isFalse()
-                viewModel.setResultFlow.toList(list)
-                assertThat(list.size).isEqualTo(1)
-                assertThat(list[0]).isEqualTo(FINGERPRINT_ERROR_DIALOG_ACTION_SET_RESULT_FINISH)
-            }
-        }
+        // verify after emit
+        assertThat(setResults.size).isEqualTo(1)
+        assertThat(setResults[0]).isEqualTo(FINGERPRINT_ERROR_DIALOG_ACTION_SET_RESULT_FINISH)
     }
 }
