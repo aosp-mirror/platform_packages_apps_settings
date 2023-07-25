@@ -202,6 +202,7 @@ public class UdfpsEnrollProgressBarDrawable extends Drawable {
             return;
         }
 
+        mShowingHelp = showingHelp;
         if (mShowingHelp) {
             if (mVibrator != null && mIsAccessibilityEnabled) {
                 mVibrator.vibrate(Process.myUid(), mContext.getOpPackageName(),
@@ -228,7 +229,6 @@ public class UdfpsEnrollProgressBarDrawable extends Drawable {
             }
         }
 
-        mShowingHelp = showingHelp;
         mRemainingSteps = remainingSteps;
         mTotalSteps = totalSteps;
 
