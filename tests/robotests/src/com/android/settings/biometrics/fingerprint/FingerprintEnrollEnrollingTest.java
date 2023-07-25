@@ -137,6 +137,23 @@ public class FingerprintEnrollEnrollingTest {
     }
 
     @Test
+    public void fingerprintUdfpsEnrollInitStage_afterOnEnrollmentHelp_shouldVibrate() {
+        initializeActivityFor(TYPE_UDFPS_OPTICAL);
+
+        assertThat(getLayout().getDescriptionText()).isNotEqualTo("");
+
+        mActivity.configureEnrollmentStage(0 /* lottie */);
+        mActivity.onEnrollmentHelp(1/* FINGERPRINT_ACQUIRED_PARTIAL */, mContext.getString(
+                com.android.internal.R.string.fingerprint_acquired_partial));
+
+        verify(mVibrator, never()).vibrate(anyInt(), anyString(), any(), anyString(), any());
+
+        mActivity.onEnrollmentProgressChange(1, 1);
+        verify(mVibrator).vibrate(anyInt(), anyString(), any(), anyString(), any());
+
+    }
+
+    @Test
     public void fingerprintUdfpsOverlayEnrollment_gainFocus_shouldNotCancel() {
         initializeActivityFor(TYPE_UDFPS_OPTICAL);
 
