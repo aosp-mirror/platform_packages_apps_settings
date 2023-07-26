@@ -22,6 +22,7 @@ import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_16_9;
 import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_3_2;
 import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_4_3;
 import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_DISPLAY_SIZE;
+import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_FULLSCREEN;
 import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_SPLIT_SCREEN;
 import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_UNSET;
 
@@ -54,6 +55,7 @@ public class UserAspectRatioDetails extends AppInfoWithHeader implements
     private static final String TAG = UserAspectRatioDetails.class.getSimpleName();
 
     private static final String KEY_HEADER_BUTTONS = "header_view";
+    private static final String KEY_PREF_FULLSCREEN = "fullscreen_pref";
     private static final String KEY_PREF_HALF_SCREEN = "half_screen_pref";
     private static final String KEY_PREF_DISPLAY_SIZE = "display_size_pref";
     private static final String KEY_PREF_16_9 = "16_9_pref";
@@ -140,6 +142,8 @@ public class UserAspectRatioDetails extends AppInfoWithHeader implements
     @PackageManager.UserMinAspectRatio
     private int getSelectedUserMinAspectRatio(@NonNull String selectedKey) {
         switch (selectedKey) {
+            case KEY_PREF_FULLSCREEN:
+                return USER_MIN_ASPECT_RATIO_FULLSCREEN;
             case KEY_PREF_HALF_SCREEN:
                 return USER_MIN_ASPECT_RATIO_SPLIT_SCREEN;
             case KEY_PREF_DISPLAY_SIZE:
@@ -158,6 +162,8 @@ public class UserAspectRatioDetails extends AppInfoWithHeader implements
     @NonNull
     private String getSelectedKey(@PackageManager.UserMinAspectRatio int userMinAspectRatio) {
         switch (userMinAspectRatio) {
+            case USER_MIN_ASPECT_RATIO_FULLSCREEN:
+                return KEY_PREF_FULLSCREEN;
             case USER_MIN_ASPECT_RATIO_SPLIT_SCREEN:
                 return KEY_PREF_HALF_SCREEN;
             case USER_MIN_ASPECT_RATIO_DISPLAY_SIZE:
@@ -182,6 +188,7 @@ public class UserAspectRatioDetails extends AppInfoWithHeader implements
                 .setButton1OnClickListener(v -> launchApplication());
 
         addPreference(KEY_PREF_DEFAULT, USER_MIN_ASPECT_RATIO_UNSET);
+        addPreference(KEY_PREF_FULLSCREEN, USER_MIN_ASPECT_RATIO_FULLSCREEN);
         addPreference(KEY_PREF_DISPLAY_SIZE, USER_MIN_ASPECT_RATIO_DISPLAY_SIZE);
         addPreference(KEY_PREF_HALF_SCREEN, USER_MIN_ASPECT_RATIO_SPLIT_SCREEN);
         addPreference(KEY_PREF_16_9, USER_MIN_ASPECT_RATIO_16_9);
