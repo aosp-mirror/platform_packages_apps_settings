@@ -1628,7 +1628,7 @@ public class UserSettings extends SettingsPreferenceFragment
             mRemovingUserId = -1;
             updateUserList();
             if (mCreateUserDialogController.isActive()) {
-                mCreateUserDialogController.clear();
+                mCreateUserDialogController.finish();
             }
         }
     }
