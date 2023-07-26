@@ -21,11 +21,13 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.LocaleList;
 
+import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.testutils.BatteryTestUtils;
 
 import org.junit.Before;
@@ -48,6 +50,9 @@ public final class BatteryTipsControllerTest {
     @Mock
     private BatteryTipsCardPreference mBatteryTipsCardPreference;
 
+    @Mock
+    private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
@@ -60,6 +65,7 @@ public final class BatteryTipsControllerTest {
         doReturn(resources).when(mContext).getResources();
         mBatteryTipsController = new BatteryTipsController(mContext);
         mBatteryTipsController.mCardPreference = mBatteryTipsCardPreference;
+        mBatteryTipsController.mPowerUsageFeatureProvider = mPowerUsageFeatureProvider;
     }
 
     @Test
@@ -87,16 +93,15 @@ public final class BatteryTipsControllerTest {
     @Test
     public void handleBatteryTipsCardUpdated_adaptiveBrightnessAnomaly_showAnomaly() {
         PowerAnomalyEvent event = BatteryTestUtils.createAdaptiveBrightnessAnomalyEvent();
+        when(mPowerUsageFeatureProvider.isBatteryTipsEnabled()).thenReturn(true);
 
         mBatteryTipsController.handleBatteryTipsCardUpdated(event);
 
         // Check pre-defined string
         verify(mBatteryTipsCardPreference).setTitle(
                 "Turn on adaptive brightness to extend battery life");
-        verify(mBatteryTipsCardPreference).setMainButtonLabel(
-                "View Settings");
-        verify(mBatteryTipsCardPreference).setDismissButtonLabel(
-                "Got it");
+        verify(mBatteryTipsCardPreference).setMainButtonLabel("View Settings");
+        verify(mBatteryTipsCardPreference).setDismissButtonLabel("Got it");
         // Check proto info
         verify(mBatteryTipsCardPreference).setMainButtonLauncherInfo(
                 "com.android.settings.display.AutoBrightnessSettings",
@@ -107,15 +112,13 @@ public final class BatteryTipsControllerTest {
     @Test
     public void handleBatteryTipsCardUpdated_screenTimeoutAnomaly_showAnomaly() {
         PowerAnomalyEvent event = BatteryTestUtils.createScreenTimeoutAnomalyEvent();
+        when(mPowerUsageFeatureProvider.isBatteryTipsEnabled()).thenReturn(true);
 
         mBatteryTipsController.handleBatteryTipsCardUpdated(event);
 
-        verify(mBatteryTipsCardPreference).setTitle(
-                "Reduce screen timeout to extend battery life");
-        verify(mBatteryTipsCardPreference).setMainButtonLabel(
-                "View Settings");
-        verify(mBatteryTipsCardPreference).setDismissButtonLabel(
-                "Got it");
+        verify(mBatteryTipsCardPreference).setTitle("Reduce screen timeout to extend battery life");
+        verify(mBatteryTipsCardPreference).setMainButtonLabel("View Settings");
+        verify(mBatteryTipsCardPreference).setDismissButtonLabel("Got it");
         verify(mBatteryTipsCardPreference).setMainButtonLauncherInfo(
                 "com.android.settings.display.ScreenTimeoutSettings",
                 1852);
@@ -131,15 +134,13 @@ public final class BatteryTipsControllerTest {
                                 .setTitleString(testTitle)
                                 .build())
                 .build();
+        when(mPowerUsageFeatureProvider.isBatteryTipsEnabled()).thenReturn(true);
 
         mBatteryTipsController.handleBatteryTipsCardUpdated(event);
 
-        verify(mBatteryTipsCardPreference).setTitle(
-                testTitle);
-        verify(mBatteryTipsCardPreference).setMainButtonLabel(
-                "View Settings");
-        verify(mBatteryTipsCardPreference).setDismissButtonLabel(
-                "Got it");
+        verify(mBatteryTipsCardPreference).setTitle(testTitle);
+        verify(mBatteryTipsCardPreference).setMainButtonLabel("View Settings");
+        verify(mBatteryTipsCardPreference).setDismissButtonLabel("Got it");
         verify(mBatteryTipsCardPreference).setMainButtonLauncherInfo(
                 "com.android.settings.display.ScreenTimeoutSettings",
                 1852);

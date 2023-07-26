@@ -36,11 +36,12 @@ public class BatteryTipsController extends BasePreferenceController {
     private static final String ROOT_PREFERENCE_KEY = "battery_tips_category";
     private static final String CARD_PREFERENCE_KEY = "battery_tips_card";
 
-    private final PowerUsageFeatureProvider mPowerUsageFeatureProvider;
     private final String[] mPowerAnomalyKeys;
 
     @VisibleForTesting
     BatteryTipsCardPreference mCardPreference;
+    @VisibleForTesting
+    PowerUsageFeatureProvider mPowerUsageFeatureProvider;
 
     public BatteryTipsController(Context context) {
         super(context, ROOT_PREFERENCE_KEY);
