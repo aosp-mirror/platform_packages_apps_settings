@@ -32,7 +32,6 @@ import android.os.RemoteException;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.testutils.shadow.ShadowActivityManager;
-import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -54,7 +53,7 @@ public class UserAspectRatioDetailsTest {
     @Mock
     private IActivityManager mAm;
 
-    private SelectorWithWidgetPreference mRadioButtonPref;
+    private RadioWithImagePreference mRadioButtonPref;
     private Context mContext;
     private UserAspectRatioDetails mFragment;
 
@@ -67,7 +66,7 @@ public class UserAspectRatioDetailsTest {
         when(mFragment.getContext()).thenReturn(mContext);
         when(mFragment.getAspectRatioManager()).thenReturn(mUserAspectRatioManager);
         ShadowActivityManager.setService(mAm);
-        mRadioButtonPref = new SelectorWithWidgetPreference(mContext);
+        mRadioButtonPref = new RadioWithImagePreference(mContext);
     }
 
     @Test
