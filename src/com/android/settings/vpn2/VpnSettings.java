@@ -142,6 +142,11 @@ public class VpnSettings extends RestrictedSettingsFragment implements
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
+
+        if (!getContext().getResources().getBoolean(R.bool.config_show_vpn_options)) {
+            return;
+        }
+
         // Although FEATURE_IPSEC_TUNNELS should always be present in android S and beyond,
         // keep this check here just to be safe.
         if (!getContext().getPackageManager().hasSystemFeature(
