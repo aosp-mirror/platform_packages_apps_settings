@@ -435,15 +435,20 @@ public class ApnEditor extends SettingsPreferenceFragment
             return false;
         }
 
-        if (hasAllApns(apnTypesArray1) || TextUtils.isEmpty(apnTypes2)) {
+        final String[] apnTypesArray1LowerCase = new String[apnTypesArray1.length];
+        for (int i = 0; i < apnTypesArray1.length; i++) {
+            apnTypesArray1LowerCase[i] = apnTypesArray1[i].toLowerCase();
+        }
+
+        if (hasAllApns(apnTypesArray1LowerCase) || TextUtils.isEmpty(apnTypes2)) {
             return true;
         }
 
-        final List apnTypesList1 = Arrays.asList(apnTypesArray1);
+        final List apnTypesList1 = Arrays.asList(apnTypesArray1LowerCase);
         final String[] apnTypesArray2 = apnTypes2.split(",");
 
         for (String apn : apnTypesArray2) {
-            if (apnTypesList1.contains(apn.trim())) {
+            if (apnTypesList1.contains(apn.trim().toLowerCase())) {
                 Log.d(TAG, "apnTypesMatch: true because match found for " + apn.trim());
                 return true;
             }
