@@ -89,7 +89,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
         mManager = manager;
         mProfileManager = mManager.getProfileManager();
         mCachedDevice = device;
-        mAllOfCachedDevices = Utils.getAllOfCachedBluetoothDevices(mContext, mCachedDevice);
+        mAllOfCachedDevices = Utils.getAllOfCachedBluetoothDevices(mManager, mCachedDevice);
         lifecycle.addObserver(this);
     }
 
@@ -460,7 +460,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
         for (CachedBluetoothDevice item : mAllOfCachedDevices) {
             item.unregisterCallback(this);
         }
-        mAllOfCachedDevices = Utils.getAllOfCachedBluetoothDevices(mContext, mCachedDevice);
+        mAllOfCachedDevices = Utils.getAllOfCachedBluetoothDevices(mManager, mCachedDevice);
         for (CachedBluetoothDevice item : mAllOfCachedDevices) {
             item.registerCallback(this);
         }

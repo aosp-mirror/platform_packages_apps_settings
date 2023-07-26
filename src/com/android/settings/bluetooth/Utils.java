@@ -235,7 +235,8 @@ public final class Utils {
      * @param cachedBluetoothDevice The main cachedBluetoothDevice.
      * @return all cachedBluetoothDevices with the same groupId.
      */
-    public static List<CachedBluetoothDevice> getAllOfCachedBluetoothDevices(Context context,
+    public static List<CachedBluetoothDevice> getAllOfCachedBluetoothDevices(
+            LocalBluetoothManager localBtMgr,
             CachedBluetoothDevice cachedBluetoothDevice) {
         List<CachedBluetoothDevice> cachedBluetoothDevices = new ArrayList<>();
         if (cachedBluetoothDevice == null) {
@@ -248,7 +249,6 @@ public final class Utils {
             return cachedBluetoothDevices;
         }
 
-        final LocalBluetoothManager localBtMgr = Utils.getLocalBtManager(context);
         if (localBtMgr == null) {
             Log.e(TAG, "getAllOfCachedBluetoothDevices: no LocalBluetoothManager");
             return cachedBluetoothDevices;
