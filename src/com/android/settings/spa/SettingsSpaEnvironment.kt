@@ -36,6 +36,7 @@ import com.android.settings.spa.app.specialaccess.PictureInPictureListProvider
 import com.android.settings.spa.app.specialaccess.SpecialAppAccessPageProvider
 import com.android.settings.spa.app.specialaccess.WifiControlAppListProvider
 import com.android.settings.spa.app.specialaccess.UseFullScreenIntentAppListProvider
+import com.android.settings.spa.app.storage.StorageAppListPageProvider
 import com.android.settings.spa.core.instrumentation.SpaLogProvider
 import com.android.settings.spa.development.UsageStatsPageProvider
 import com.android.settings.spa.development.compat.PlatformCompatAppListPageProvider
@@ -92,6 +93,8 @@ open class SettingsSpaEnvironment(context: Context) : SpaEnvironment(context) {
                 CloneAppInfoSettingsProvider,
                 NetworkAndInternetPageProvider,
                 AboutPhonePageProvider,
+                StorageAppListPageProvider.Apps,
+                StorageAppListPageProvider.Games,
                 ) + togglePermissionAppListTemplate.createPageProviders(),
             rootPages = listOf(
                 HomePageProvider.createSettingsPage()
