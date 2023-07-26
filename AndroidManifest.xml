@@ -644,7 +644,6 @@
         <activity android:name="Settings$FaceSettingsActivity"
             android:label="@string/security_settings_face_preference_title"
             android:exported="true"
-            android:configChanges="orientation|screenSize"
             android:icon="@drawable/ic_face_header">
             <intent-filter>
                 <action android:name="android.settings.FACE_SETTINGS" />
@@ -660,7 +659,6 @@
                   android:label="@string/security_settings_face_preference_title"
                   android:exported="false"
                   android:icon="@drawable/ic_face_header"
-                  android:configChanges="orientation|screenSize"
                   android:taskAffinity="com.android.settings.root">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.biometrics.face.FaceSettings" />
