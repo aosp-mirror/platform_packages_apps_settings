@@ -35,11 +35,14 @@ public final class BatteryTipsCardPreferenceTest {
 
     private Context mContext;
     private BatteryTipsCardPreference mBatteryTipsCardPreference;
+    private BatteryTipsController mBatteryTipsController;
 
     @Before
     public void setUp() {
         mContext = spy(RuntimeEnvironment.application);
         mBatteryTipsCardPreference = new BatteryTipsCardPreference(mContext, /*attrs=*/ null);
+        mBatteryTipsController = new BatteryTipsController(mContext);
+        mBatteryTipsController.mCardPreference = mBatteryTipsCardPreference;
     }
 
     @Test
