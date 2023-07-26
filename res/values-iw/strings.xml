@@ -379,7 +379,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"הפנים וה-<xliff:g id="WATCH">%s</xliff:g> נוספו"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"הפנים, טביעת האצבע וה-<xliff:g id="WATCH">%s</xliff:g> נוספו"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"הפנים, טביעות האצבע וה-<xliff:g id="WATCH">%s</xliff:g> נוספו"</string>
-    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"פתיחה ע\"י זיהוי הפנים וביטול הנעילה בטביעת אצבע"</string>
+    <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"פתיחה בטביעת אצבע ופתיחה ע\"י זיהוי הפנים"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"פתיחה ע\"י זיהוי הפנים וביטול הנעילה בטביעת אצבע בפרופיל העבודה"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"צריך להגדיר ביטול נעילה בעזרת מידע ביומטרי"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"נוספו טביעות אצבע וזיהוי פנים"</string>
@@ -536,10 +536,7 @@
     <string name="face_unlock_set_unlock_pin" msgid="9034912683791069602">"קוד אימות • זיהוי פנים"</string>
     <string name="face_unlock_set_unlock_password" msgid="5874950853246424756">"סיסמה • זיהוי פנים"</string>
     <string name="face_unlock_skip_face" msgid="189695556498300008">"המשך ללא פתיחה ע\"י זיהוי הפנים"</string>
-    <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"קו ביטול נעילה • פנים • טביעת אצבע"</string>
-    <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"קוד אימות • פנים • טביעת אצבע"</string>
-    <string name="biometrics_unlock_set_unlock_password" msgid="4612217647465743624">"סיסמה • פנים • טביעת אצבע"</string>
-    <string name="biometrics_unlock_skip_biometrics" msgid="7785643433551409223">"המשך ללא הגדרה של זיהוי פנים או טביעת אצבע"</string>
+    <string name="biometrics_unlock_skip_biometrics" msgid="7399882488272450182">"המשך בלי טביעת אצבע או זיהוי פנים"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"ללא"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"החלקה"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="1926480143883094896">"קו ביטול נעילה"</string>
@@ -993,6 +990,8 @@
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"כבויה"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"הצגת איזון לבן"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
+    <string name="stay_awake_on_fold_title" msgid="4195536619511589471">"במצב ביטול נעילה כשמכשיר מקופל"</string>
+    <string name="stay_awake_on_fold_summary" msgid="2413928869516675293">"השארת המסך החיצוני פתוח כשהמכשיר מקופל עד הזמן הקצוב לכיבוי המסך"</string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"תצוגה חלקה"</string>
     <string name="peak_refresh_rate_summary" msgid="3627278682437562787">"‏קצב הרענון עולה באופן אוטומטי מ-60 ל-Hz<xliff:g id="ID_1">%1$s</xliff:g> לחלק מהתוכן. השימוש בסוללה יוגבר."</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"אילוץ לקצב הרענון המקסימלי"</string>
@@ -2927,6 +2926,7 @@
     <string name="keywords_app_pinning" msgid="1564144561464945019">"הקפאת מסך"</string>
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"אתגר בעבודה, עבודה, פרופיל"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"פרופיל עבודה, פרופיל מנוהל, לאחד, איחוד, עבודה, פרופיל"</string>
+    <string name="keywords_stay_awake_on_lock" msgid="6338367464776295697">"ערות, לא במצב שינה, שינה, במצב שינה, לא לנעול, הישארות במצב ביטול נעילה, ביטול נעילה בזמן קיפול, קיפול, סגור, בתהליך סגירה, קיפול, סגירה, כיבוי מסך, מסך מושבת, מסך כבוי"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"תנועות לביצוע פעולות"</string>
     <string name="keywords_wallet" msgid="3757421969956996972">"ארנק"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"תשלום, הקשה, תשלומים"</string>
@@ -4149,7 +4149,7 @@
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
     <string name="enable_angle_as_system_driver" msgid="3985105681812713612">"‏הפעלת ANGLE"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="4173041926052925436">"‏הפעלת ANGLE כמנהל התקן OpenGL ES של המערכת"</string>
+    <string name="enable_angle_as_system_driver_summary" msgid="6413038127558166972">"‏הפעלת ANGLE כברירת מחדל OpenGL ES לנהג. הפעלה במכשירים לא תואמים עלולה לגרום לאפליקציות מסוימות להפסיק לעבוד."</string>
     <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"‏צריך להפעיל מחדש כדי לשנות את מערכת OpenGL ES לנהג"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"שינויים בתאימות האפליקציה"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"החלפת המצב של שינויים בתאימות של אפליקציות"</string>
@@ -4698,6 +4698,15 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"הסרת האפליקציה"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{אפליקציות שהותקנו במהלך החודש האחרון}one{אפליקציות שהותקנו במהלך # החודשים האחרונים}two{האפליקציות הותקנו במהלך החודשיים האחרונים}other{אפליקציות שהותקנו במהלך # החודשים האחרונים}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{האפליקציות הותקנו לפני יותר מחודש אחד (#)}one{האפליקציות הותקנו לפני יותר מ-# חודשים}two{האפליקציות הותקנו לפני יותר מחודשיים (#)}other{האפליקציות הותקנו לפני יותר מ-# חודשים}}"</string>
+    <string name="screen_size_title" msgid="2152383810632443047">"גודל המסך"</string>
+    <string name="screen_size_summary" msgid="2037727675540344412">"יש לבחור את יחס הגובה-רוחב לאפליקציות שלא הותאמו למכשיר <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"הצעות לאפליקציות"</string>
+    <string name="user_aspect_ratio_overridden_apps_label" msgid="1564914138276629704">"אפליקציות ששינית מברירת המחדל"</string>
+    <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"ברירת המחדל של האפליקציה"</string>
+    <string name="user_aspect_ratio_half_screen" msgid="2154061661380605966">"חצי מסך"</string>
+    <string name="user_aspect_ratio_16_9" msgid="2286644872775170164">"16:9"</string>
+    <string name="user_aspect_ratio_3_2" msgid="199262962518318932">"‎3:2"</string>
+    <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4:3"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"חיישן טביעות אצבע"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"התראות הבהוב"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"מידע על התראות הבהוב"</string>

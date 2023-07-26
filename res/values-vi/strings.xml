@@ -379,7 +379,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Đã thêm khuôn mặt và <xliff:g id="WATCH">%s</xliff:g>"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Đã thêm khuôn mặt, vân tay và <xliff:g id="WATCH">%s</xliff:g>"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Đã thêm khuôn mặt, vân tay và <xliff:g id="WATCH">%s</xliff:g>"</string>
-    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Mở khóa bằng khuôn mặt và vân tay"</string>
+    <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"Mở khoá bằng vân tay và Mở khoá bằng khuôn mặt"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Mở khoá bằng khuôn mặt và vân tay cho công việc"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"Cần thiết lập"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Đã thêm khuôn mặt và các vân tay"</string>
@@ -536,10 +536,7 @@
     <string name="face_unlock_set_unlock_pin" msgid="9034912683791069602">"Mã PIN • Khuôn mặt"</string>
     <string name="face_unlock_set_unlock_password" msgid="5874950853246424756">"Mật khẩu • Khuôn mặt"</string>
     <string name="face_unlock_skip_face" msgid="189695556498300008">"Tiếp tục mà không thiết lập tính năng Mở khóa bằng khuôn mặt"</string>
-    <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"Hình mở khóa • Khuôn mặt • Vân tay"</string>
-    <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"Mã PIN • Khuôn mặt • Vân tay"</string>
-    <string name="biometrics_unlock_set_unlock_password" msgid="4612217647465743624">"Mật khẩu • Khuôn mặt • Vân tay"</string>
-    <string name="biometrics_unlock_skip_biometrics" msgid="7785643433551409223">"Tiếp tục mà không thiết lập khuôn mặt hoặc vân tay"</string>
+    <string name="biometrics_unlock_skip_biometrics" msgid="7399882488272450182">"Tiếp tục mà không dùng vân tay hoặc khuôn mặt"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"Không"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"Vuốt"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="1926480143883094896">"Hình mở khóa"</string>
@@ -993,6 +990,8 @@
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Tắt"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Cân bằng trắng của màn hình"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
+    <string name="stay_awake_on_fold_title" msgid="4195536619511589471">"Luôn mở khoá khi gập"</string>
+    <string name="stay_awake_on_fold_summary" msgid="2413928869516675293">"Giữ màn hình ngoài luôn mở khoá khi điện thoại gập lại cho đến khi hết thời gian chờ khoá màn hình"</string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Hình ảnh mượt"</string>
     <string name="peak_refresh_rate_summary" msgid="3627278682437562787">"Tự động tăng tốc độ làm mới từ 60 lên <xliff:g id="ID_1">%1$s</xliff:g> Hz đối với một số nội dung. Chế độ cài đặt này sẽ làm tăng mức sử dụng pin."</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Buộc chuyển sang tốc độ làm mới cao nhất"</string>
@@ -2927,6 +2926,7 @@
     <string name="keywords_app_pinning" msgid="1564144561464945019">"ghim màn hình"</string>
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"thách thức công việc, công việc, hồ sơ"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"hồ sơ công việc, hồ sơ được quản lý, thống nhất, hợp nhất, làm việc, hồ sơ"</string>
+    <string name="keywords_stay_awake_on_lock" msgid="6338367464776295697">"bật, ngủ, không khoá, luôn mở khoá khi gập, đang gập, đang đóng, gập, đóng, màn hình tắt"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"cử chỉ"</string>
     <string name="keywords_wallet" msgid="3757421969956996972">"ví"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"thanh toán, nhấn, khoản thanh toán"</string>
@@ -4149,7 +4149,7 @@
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
     <string name="enable_angle_as_system_driver" msgid="3985105681812713612">"Bật ANGLE"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="4173041926052925436">"Bật ANGLE làm trình điều khiển hệ thống OpenGL ES"</string>
+    <string name="enable_angle_as_system_driver_summary" msgid="6413038127558166972">"Bật ANGLE làm trình điều khiển hệ thống OpenGL ES. Bật tính năng này trên thiết bị không tương thích có thể làm hỏng một số ứng dụng."</string>
     <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"Cần phải khởi động lại để thay đổi trình điều khiển hệ thống OpenGL ES"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Các thay đổi về khả năng tương thích của ứng dụng"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Bật/tắt các thay đổi về khả năng tương thích của ứng dụng"</string>
@@ -4697,6 +4697,24 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"Gỡ cài đặt ứng dụng"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Ứng dụng được cài đặt trong vòng # tháng gần đây}other{Ứng dụng được cài đặt trong vòng # tháng gần đây}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Ứng dụng được cài đặt từ hơn # tháng trước}other{Ứng dụng được cài đặt từ hơn # tháng trước}}"</string>
+    <!-- no translation found for screen_size_title (2152383810632443047) -->
+    <skip />
+    <!-- no translation found for screen_size_summary (2037727675540344412) -->
+    <skip />
+    <!-- no translation found for user_aspect_ratio_suggested_apps_label (8085934042329632039) -->
+    <skip />
+    <!-- no translation found for user_aspect_ratio_overridden_apps_label (1564914138276629704) -->
+    <skip />
+    <!-- no translation found for user_aspect_ratio_app_default (270065763307617837) -->
+    <skip />
+    <!-- no translation found for user_aspect_ratio_half_screen (2154061661380605966) -->
+    <skip />
+    <!-- no translation found for user_aspect_ratio_16_9 (2286644872775170164) -->
+    <skip />
+    <!-- no translation found for user_aspect_ratio_3_2 (199262962518318932) -->
+    <skip />
+    <!-- no translation found for user_aspect_ratio_4_3 (5196232982878982220) -->
+    <skip />
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Cảm biến vân tay"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Thông báo bằng đèn flash"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Giới thiệu về thông báo bằng đèn flash"</string>
