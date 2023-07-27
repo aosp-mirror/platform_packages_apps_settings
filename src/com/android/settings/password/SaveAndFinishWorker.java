@@ -107,7 +107,12 @@ public class SaveAndFinishWorker extends Fragment {
     @VisibleForTesting
     Pair<Boolean, Intent> saveAndVerifyInBackground() {
         final int userId = mUserId;
-        if (!mUtils.setLockCredential(mChosenCredential, mCurrentCredential, userId)) {
+        try {
+            if (!mUtils.setLockCredential(mChosenCredential, mCurrentCredential, userId)) {
+                return Pair.create(false, null);
+            }
+        } catch (RuntimeException e) {
+            Log.e(TAG, "Failed to set lockscreen credential", e);
             return Pair.create(false, null);
         }
 
