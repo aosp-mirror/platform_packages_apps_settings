@@ -27,10 +27,8 @@ import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_NUMERIC;
 import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_NUMERIC_COMPLEX;
 import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_SOMETHING;
 import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
-import static android.provider.DeviceConfig.NAMESPACE_AUTO_PIN_CONFIRMATION;
 import static android.view.WindowManager.LayoutParams.FLAG_SECURE;
 
-import static com.android.internal.widget.LockPatternUtils.FLAG_ENABLE_AUTO_PIN_CONFIRMATION;
 import static com.android.internal.widget.LockPatternUtils.PASSWORD_TYPE_KEY;
 import static com.android.settings.password.ChooseLockGeneric.CONFIRM_CREDENTIALS;
 
@@ -45,7 +43,6 @@ import android.app.admin.PasswordMetrics;
 import android.app.admin.PasswordPolicy;
 import android.content.Intent;
 import android.os.UserHandle;
-import android.provider.DeviceConfig;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
@@ -55,7 +52,6 @@ import com.android.settings.R;
 import com.android.settings.password.ChooseLockPassword.ChooseLockPasswordFragment;
 import com.android.settings.password.ChooseLockPassword.IntentBuilder;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
-import com.android.settings.testutils.shadow.ShadowDeviceConfig;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowUtils;
@@ -79,7 +75,6 @@ import org.robolectric.shadows.ShadowDrawable;
         ShadowLockPatternUtils.class,
         ShadowUtils.class,
         ShadowDevicePolicyManager.class,
-        ShadowDeviceConfig.class,
 })
 public class ChooseLockPasswordTest {
     @Before
@@ -453,8 +448,6 @@ public class ChooseLockPasswordTest {
 
     @Test
     public void autoPinConfirmOption_featureEnabledAndUntouchedByUser_changeStateAsPerRules() {
-        DeviceConfig.setProperty(NAMESPACE_AUTO_PIN_CONFIRMATION, FLAG_ENABLE_AUTO_PIN_CONFIRMATION,
-                /* value= */ "true", /* makeDefault= */ false);
         ChooseLockPassword passwordActivity = setupActivityWithPinTypeAndDefaultPolicy();
 
         ChooseLockPasswordFragment fragment = getChooseLockPasswordFragment(passwordActivity);
@@ -491,8 +484,6 @@ public class ChooseLockPasswordTest {
 
     @Test
     public void autoPinConfirmOption_featureEnabledAndModifiedByUser_shouldChangeStateAsPerRules() {
-        DeviceConfig.setProperty(NAMESPACE_AUTO_PIN_CONFIRMATION, FLAG_ENABLE_AUTO_PIN_CONFIRMATION,
-                /* value= */ "true", /* makeDefault= */ false);
         ChooseLockPassword passwordActivity = setupActivityWithPinTypeAndDefaultPolicy();
 
         ChooseLockPasswordFragment fragment = getChooseLockPasswordFragment(passwordActivity);
