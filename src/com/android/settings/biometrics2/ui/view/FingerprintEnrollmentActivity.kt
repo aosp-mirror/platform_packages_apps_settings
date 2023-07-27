@@ -68,11 +68,8 @@ import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollFinishView
 import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollFinishViewModel.FINGERPRINT_ENROLL_FINISH_ACTION_ADD_BUTTON_CLICK
 import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollFinishViewModel.FINGERPRINT_ENROLL_FINISH_ACTION_NEXT_BUTTON_CLICK
 import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollFinishViewModel.FingerprintEnrollFinishAction
+import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollIntroAction
 import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollIntroViewModel
-import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollIntroViewModel.FINGERPRINT_ENROLL_INTRO_ACTION_CONTINUE_ENROLL
-import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollIntroViewModel.FINGERPRINT_ENROLL_INTRO_ACTION_DONE_AND_FINISH
-import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollIntroViewModel.FINGERPRINT_ENROLL_INTRO_ACTION_SKIP_OR_CANCEL
-import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollIntroViewModel.FingerprintEnrollIntroAction
 import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollProgressViewModel
 import com.android.settings.biometrics2.ui.viewmodel.FingerprintEnrollmentViewModel
 import com.android.settings.biometrics2.ui.viewmodel.FingerprintErrorDialogSetResultAction.FINGERPRINT_ERROR_DIALOG_ACTION_SET_RESULT_FINISH
@@ -128,13 +125,6 @@ open class FingerprintEnrollmentActivity : FragmentActivity() {
     }
 
     private var isFirstFragmentAdded = false
-
-    private val introActionObserver: Observer<Int> = Observer<Int> { action ->
-        if (DEBUG) {
-            Log.d(TAG, "introActionObserver($action)")
-        }
-        action?.let { onIntroAction(it) }
-    }
 
     private val findSensorActionObserver: Observer<Int> = Observer<Int> { action ->
         if (DEBUG) {
@@ -290,12 +280,10 @@ open class FingerprintEnrollmentActivity : FragmentActivity() {
         if (request.isSkipIntro || request.isSkipFindSensor) {
             return
         }
-        introViewModel.let {
-            // Clear ActionLiveData in FragmentViewModel to prevent getting previous action during
-            // recreate, like press 'Agree' then press 'back' in FingerprintEnrollFindSensor
-            // activity.
-            it.clearActionLiveData()
-            it.actionLiveData.observe(this, introActionObserver)
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                introViewModel.actionFlow.collect(this@FingerprintEnrollmentActivity::onIntroAction)
+            }
         }
     }
 
@@ -480,23 +468,20 @@ open class FingerprintEnrollmentActivity : FragmentActivity() {
         }
     }
 
-    private fun onIntroAction(@FingerprintEnrollIntroAction action: Int) {
+    private fun onIntroAction(action: FingerprintEnrollIntroAction) {
+        Log.d(TAG, "onIntroAction($action)")
         when (action) {
-            FINGERPRINT_ENROLL_INTRO_ACTION_DONE_AND_FINISH -> {
-                onSetActivityResult(
-                    ActivityResult(BiometricEnrollBase.RESULT_FINISHED, null)
-                )
+            FingerprintEnrollIntroAction.DONE_AND_FINISH -> {
+                onSetActivityResult(ActivityResult(BiometricEnrollBase.RESULT_FINISHED, null))
                 return
             }
 
-            FINGERPRINT_ENROLL_INTRO_ACTION_SKIP_OR_CANCEL -> {
-                onSetActivityResult(
-                    ActivityResult(BiometricEnrollBase.RESULT_SKIP, null)
-                )
+            FingerprintEnrollIntroAction.SKIP_OR_CANCEL -> {
+                onSetActivityResult(ActivityResult(BiometricEnrollBase.RESULT_SKIP, null))
                 return
             }
 
-            FINGERPRINT_ENROLL_INTRO_ACTION_CONTINUE_ENROLL -> {
+            FingerprintEnrollIntroAction.CONTINUE_ENROLL -> {
                 startFindSensorFragment()
             }
         }
