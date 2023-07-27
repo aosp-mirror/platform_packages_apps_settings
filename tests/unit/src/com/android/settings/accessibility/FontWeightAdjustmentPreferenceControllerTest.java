@@ -27,8 +27,8 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.settings.core.BasePreferenceController;
 
+import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -52,15 +52,18 @@ public class FontWeightAdjustmentPreferenceControllerTest {
                 mContext, "font_weight_adjustment");
     }
 
+    @After
+    public void teardown() {
+        Settings.Secure.resetToDefaults(mContext.getContentResolver(), /* tag= */ null);
+    }
+
     @Test
-    @Ignore("modifies system-wide fontscale, but doesn't reset it. b/293250385")
     public void getAvailabilityStatus_byDefault_shouldReturnAvailable() {
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
                 BasePreferenceController.AVAILABLE);
     }
 
     @Test
-    @Ignore("modifies system-wide fontscale, but doesn't reset it. b/293250385")
     public void isChecked_enabledBoldText_shouldReturnTrue() {
         Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.FONT_WEIGHT_ADJUSTMENT, ON);
@@ -72,7 +75,6 @@ public class FontWeightAdjustmentPreferenceControllerTest {
     }
 
     @Test
-    @Ignore("modifies system-wide fontscale, but doesn't reset it. b/293250385")
     public void isChecked_disabledBoldText_shouldReturnFalse() {
         Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.FONT_WEIGHT_ADJUSTMENT, OFF);
@@ -84,7 +86,6 @@ public class FontWeightAdjustmentPreferenceControllerTest {
     }
 
     @Test
-    @Ignore("modifies system-wide fontscale, but doesn't reset it. b/293250385")
     public void setChecked_setTrue_shouldEnableBoldText() {
         mController.setChecked(true);
 
@@ -93,7 +94,6 @@ public class FontWeightAdjustmentPreferenceControllerTest {
     }
 
     @Test
-    @Ignore("modifies system-wide fontscale, but doesn't reset it. b/293250385")
     public void setChecked_setFalse_shouldDisableBoldText() {
         mController.setChecked(false);
 
@@ -102,7 +102,6 @@ public class FontWeightAdjustmentPreferenceControllerTest {
     }
 
     @Test
-    @Ignore("modifies system-wide fontscale, but doesn't reset it. b/293250385")
     public void resetState_shouldDisableBoldText() {
         mController.setChecked(true);
 
