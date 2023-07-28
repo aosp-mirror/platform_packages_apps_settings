@@ -18,6 +18,7 @@ package com.android.settings.fuelgauge;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.ArrayMap;
 import android.util.SparseIntArray;
 
@@ -129,9 +130,14 @@ public interface PowerUsageFeatureProvider {
     boolean delayHourlyJobWhenBooting();
 
     /**
-     * Insert device usage data for anomaly detection
+     * Insert settings configuration data for anomaly detection
      */
-    void insertSettingsData(Context context);
+    void insertSettingsData(Context context, double displayDrain);
+
+    /**
+     * Returns {@link Bundle} for settings anomaly detection result
+     */
+    Bundle detectSettingsAnomaly(Context context, double displayDrain);
 
     /**
      * Gets an intent for one time bypass charge limited to resume charging.
