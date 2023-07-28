@@ -30,3 +30,11 @@ java_library {
     },
     srcs: ["fuelgauge_usage_state.proto"],
 }
+
+java_library {
+    name: "power-anomaly-event-protos-lite",
+    proto: {
+        type: "lite",
+    },
+    srcs: ["power_anomaly_event.proto"],
+}
