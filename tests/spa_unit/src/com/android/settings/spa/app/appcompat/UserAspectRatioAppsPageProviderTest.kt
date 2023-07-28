@@ -60,21 +60,21 @@ class UserAspectRatioAppsPageProviderTest {
     @Test
     fun injectEntry_title() {
         setInjectEntry()
-        composeTestRule.onNodeWithText(context.getString(R.string.screen_size_title))
+        composeTestRule.onNodeWithText(context.getString(R.string.aspect_ratio_title))
             .assertIsDisplayed()
     }
 
     @Test
     fun injectEntry_summary() {
         setInjectEntry()
-        composeTestRule.onNodeWithText(context.getString(R.string.screen_size_summary, Build.MODEL))
+        composeTestRule.onNodeWithText(context.getString(R.string.aspect_ratio_summary, Build.MODEL))
             .assertIsDisplayed()
     }
 
     @Test
     fun injectEntry_onClick_navigate() {
         setInjectEntry()
-        composeTestRule.onNodeWithText(context.getString(R.string.screen_size_title)).performClick()
+        composeTestRule.onNodeWithText(context.getString(R.string.aspect_ratio_title)).performClick()
         assertThat(fakeNavControllerWrapper.navigateCalledWith).isEqualTo("UserAspectRatioAppsPage")
     }
 
@@ -92,7 +92,7 @@ class UserAspectRatioAppsPageProviderTest {
             UserAspectRatioAppList {}
         }
 
-        composeTestRule.onNodeWithText(context.getString(R.string.screen_size_title))
+        composeTestRule.onNodeWithText(context.getString(R.string.aspect_ratio_title))
             .assertIsDisplayed()
     }
 
