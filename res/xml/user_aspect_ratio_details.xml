@@ -28,6 +28,10 @@
         android:title="@string/user_aspect_ratio_app_default"/>
 
     <com.android.settingslib.widget.SelectorWithWidgetPreference
+        android:key="fullscreen_pref"
+        android:title="@string/user_aspect_ratio_fullscreen"/>
+
+    <com.android.settingslib.widget.SelectorWithWidgetPreference
         android:key="half_screen_pref"
         android:title="@string/user_aspect_ratio_half_screen"/>
 
