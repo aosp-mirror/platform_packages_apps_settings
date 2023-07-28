@@ -1,0 +1,37 @@
+syntax = "proto2";
+
+option java_multiple_files = true;
+option java_package = "com.android.settings.fuelgauge.batteryusage";
+option java_outer_classname = "PowerAnomalyEventProto";
+
+message PowerAnomalyEvent {
+  optional int64 timestamp = 1;
+  optional string type = 2;  // e.g. settings, apps
+  optional string key = 3;  // e.g. brightness, significant_increase
+  optional float score = 4;
+  oneof info {
+    WarningBannerInfo warning_banner_info = 5;
+    WarningItemInfo warning_item_info = 6;
+  }
+}
+
+message WarningBannerInfo {
+  optional string title_string = 1;
+  optional string description_string = 2;
+  optional string main_button_string = 3;
+  optional string main_button_action = 4;
+  optional string cancel_button_string = 5;
+  optional string cancel_button_action = 6;
+}
+
+message WarningItemInfo {
+  optional int64 start_timestamp = 1;
+  optional int64 end_timestamp = 2;
+  optional string top_card_string = 3;
+  optional string title_string = 4;
+  optional string description_string = 5;
+  optional string main_button_string = 6;
+  optional string main_button_action = 7;
+  optional string cancel_button_string = 8;
+  optional string cancel_button_action = 9;
+}
