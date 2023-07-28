@@ -21,6 +21,7 @@ import static com.android.settings.Utils.SYSTEMUI_PACKAGE_NAME;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Bundle;
 import android.os.Process;
 import android.util.ArrayMap;
 import android.util.ArraySet;
@@ -161,7 +162,12 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
-    public void insertSettingsData(Context context)  {}
+    public void insertSettingsData(Context context, double displayDrain) {}
+
+    @Override
+    public Bundle detectSettingsAnomaly(Context context, double displayDrain) {
+        return null;
+    }
 
     @Override
     public Set<Integer> getOthersSystemComponentSet() {
