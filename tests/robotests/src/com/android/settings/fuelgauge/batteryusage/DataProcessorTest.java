@@ -93,7 +93,7 @@ public final class DataProcessorTest {
         mPowerUsageFeatureProvider = mFeatureFactory.powerUsageFeatureProvider;
 
         DataProcessor.sTestSystemAppsPackageNames = Set.of();
-        DataProcessor.sUsageStatsManager = mUsageStatsManager;
+        DatabaseUtils.sUsageStatsManager = mUsageStatsManager;
         doReturn(mIntent).when(mContext).registerReceiver(
                 isA(BroadcastReceiver.class), isA(IntentFilter.class));
         doReturn(100).when(mIntent).getIntExtra(eq(BatteryManager.EXTRA_SCALE), anyInt());
@@ -249,7 +249,7 @@ public final class DataProcessorTest {
 
         final Map<Integer, Map<Integer, Map<Long, Map<String, List<AppUsagePeriod>>>>> periodMap =
                 DataProcessor.generateAppUsagePeriodMap(
-                        14400000L, hourlyBatteryLevelsPerDay, appUsageEventList, new ArrayList<>());
+                        mContext, hourlyBatteryLevelsPerDay, appUsageEventList, new ArrayList<>());
 
         assertThat(periodMap).hasSize(3);
         // Day 1
@@ -287,7 +287,8 @@ public final class DataProcessorTest {
         hourlyBatteryLevelsPerDay.add(
                 new BatteryLevelData.PeriodBatteryLevelData(new ArrayList<>(), new ArrayList<>()));
         assertThat(DataProcessor.generateAppUsagePeriodMap(
-                0L, hourlyBatteryLevelsPerDay, new ArrayList<>(), new ArrayList<>())).isNull();
+                mContext, hourlyBatteryLevelsPerDay, new ArrayList<>(), new ArrayList<>()))
+                .isNull();
     }
 
     @Test
@@ -1644,7 +1645,7 @@ public final class DataProcessorTest {
 
         final Map<Long, Map<String, List<AppUsagePeriod>>> appUsagePeriodMap =
                 DataProcessor.buildAppUsagePeriodList(
-                        appUsageEvents, new ArrayList<>(), 0, 5);
+                        mContext, appUsageEvents, new ArrayList<>(), 0, 5);
 
         assertThat(appUsagePeriodMap).hasSize(2);
         final Map<String, List<AppUsagePeriod>> userMap1 = appUsagePeriodMap.get(1L);
@@ -1668,7 +1669,7 @@ public final class DataProcessorTest {
     @Test
     public void buildAppUsagePeriodList_emptyEventList_returnNull() {
         assertThat(DataProcessor.buildAppUsagePeriodList(
-                new ArrayList<>(), new ArrayList<>(), 0, 1)).isNull();
+                mContext, new ArrayList<>(), new ArrayList<>(), 0, 1)).isNull();
     }
 
     @Test
@@ -1680,7 +1681,7 @@ public final class DataProcessorTest {
                 AppUsageEventType.DEVICE_SHUTDOWN, /*timestamp=*/ 2));
 
         assertThat(DataProcessor.buildAppUsagePeriodList(
-                appUsageEvents, new ArrayList<>(), 0, 3)).isNull();
+                mContext, appUsageEvents, new ArrayList<>(), 0, 3)).isNull();
     }
 
     @Test
