@@ -19,9 +19,11 @@ package com.android.settings.applications.appcompat;
 import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_16_9;
 import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_3_2;
 import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_4_3;
+import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_FULLSCREEN;
 import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_SPLIT_SCREEN;
 import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_UNSET;
 
+import static com.android.settings.applications.appcompat.UserAspectRatioManager.KEY_ENABLE_USER_ASPECT_RATIO_FULLSCREEN;
 import static com.android.settings.applications.appcompat.UserAspectRatioManager.KEY_ENABLE_USER_ASPECT_RATIO_SETTINGS;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -30,16 +32,19 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.ResolveInfo;
+import android.content.res.Resources;
 import android.provider.DeviceConfig;
 
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import com.android.internal.R;
 import com.android.settings.testutils.ResourcesUtils;
 
 import org.junit.After;
@@ -54,21 +59,35 @@ import org.junit.runner.RunWith;
 public class UserAspectRatioManagerTest {
 
     private Context mContext;
+    private Resources mResources;
     private UserAspectRatioManager mUtils;
-    private String mOriginalFlag;
+    private String mOriginalSettingsFlag;
+    private String mOriginalFullscreenFlag;
 
     @Before
     public void setUp() {
         mContext = spy(ApplicationProvider.getApplicationContext());
+        mResources = spy(mContext.getResources());
         mUtils = spy(new UserAspectRatioManager(mContext));
-        mOriginalFlag = DeviceConfig.getProperty(DeviceConfig.NAMESPACE_WINDOW_MANAGER,
-                KEY_ENABLE_USER_ASPECT_RATIO_SETTINGS);
+
+        when(mContext.getResources()).thenReturn(mResources);
+
+        mOriginalSettingsFlag = DeviceConfig.getProperty(
+                DeviceConfig.NAMESPACE_WINDOW_MANAGER, KEY_ENABLE_USER_ASPECT_RATIO_SETTINGS);
+        setAspectRatioSettingsBuildTimeFlagEnabled(true);
+        setAspectRatioSettingsDeviceConfigEnabled("true" /* enabled */, false /* makeDefault */);
+
+        mOriginalFullscreenFlag = DeviceConfig.getProperty(
+                DeviceConfig.NAMESPACE_WINDOW_MANAGER, KEY_ENABLE_USER_ASPECT_RATIO_FULLSCREEN);
+        setAspectRatioFullscreenBuildTimeFlagEnabled(true);
+        setAspectRatioFullscreenDeviceConfigEnabled("true" /* enabled */, false /* makeDefault */);
     }
 
     @After
     public void tearDown() {
-        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_WINDOW_MANAGER,
-                KEY_ENABLE_USER_ASPECT_RATIO_SETTINGS, mOriginalFlag, true /* makeDefault */);
+        setAspectRatioSettingsDeviceConfigEnabled(mOriginalSettingsFlag, true /* makeDefault */);
+        setAspectRatioFullscreenDeviceConfigEnabled(mOriginalFullscreenFlag,
+                true /* makeDefault */);
     }
 
     @Test
@@ -87,11 +106,50 @@ public class UserAspectRatioManagerTest {
 
     @Test
     public void testIsFeatureEnabled() {
-        assertFalse(UserAspectRatioManager.isFeatureEnabled(mContext));
-
-        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_WINDOW_MANAGER,
-                KEY_ENABLE_USER_ASPECT_RATIO_SETTINGS, "true", false /* makeDefault */);
         assertTrue(UserAspectRatioManager.isFeatureEnabled(mContext));
+    }
+
+    @Test
+    public void testIsFeatureEnabled_disabledBuildTimeFlag_returnFalse() {
+        setAspectRatioSettingsBuildTimeFlagEnabled(false);
+        assertFalse(UserAspectRatioManager.isFeatureEnabled(mContext));
+    }
+
+    @Test
+    public void testIsFeatureEnabled_disabledRuntimeFlag_returnFalse() {
+        setAspectRatioSettingsDeviceConfigEnabled("false" /* enabled */, false /* makeDefault */);
+        assertFalse(UserAspectRatioManager.isFeatureEnabled(mContext));
+    }
+
+    @Test
+    public void testIsFullscreenOptionEnabled() {
+        assertTrue(mUtils.isFullscreenOptionEnabled());
+    }
+
+    @Test
+    public void testIsFullscreenOptionEnabled_settingsDisabled_returnFalse() {
+        setAspectRatioFullscreenBuildTimeFlagEnabled(false);
+        assertFalse(mUtils.isFullscreenOptionEnabled());
+    }
+
+    @Test
+    public void testIsFullscreenOptionEnabled_disabledBuildTimeFlag_returnFalse() {
+        setAspectRatioFullscreenBuildTimeFlagEnabled(false);
+        assertFalse(mUtils.isFullscreenOptionEnabled());
+    }
+
+    @Test
+    public void testIsFullscreenOptionEnabled_disabledRuntimeFlag_returnFalse() {
+        setAspectRatioFullscreenDeviceConfigEnabled("false" /* enabled */, false /*makeDefault */);
+        assertFalse(mUtils.isFullscreenOptionEnabled());
+    }
+
+    @Test
+    public void containsAspectRatioOption_fullscreen() {
+        assertTrue(mUtils.containsAspectRatioOption(USER_MIN_ASPECT_RATIO_FULLSCREEN));
+
+        when(mUtils.isFullscreenOptionEnabled()).thenReturn(false);
+        assertFalse(mUtils.containsAspectRatioOption(USER_MIN_ASPECT_RATIO_FULLSCREEN));
     }
 
     @Test
@@ -117,6 +175,38 @@ public class UserAspectRatioManagerTest {
         // R.string.user_aspect_ratio_16_9
         assertThat(mUtils.getUserMinAspectRatioEntry(USER_MIN_ASPECT_RATIO_16_9))
                 .isEqualTo(ResourcesUtils.getResourcesString(mContext, "user_aspect_ratio_16_9"));
+        // R.string.user_aspect_ratio_fullscreen
+        assertThat(mUtils.getUserMinAspectRatioEntry(USER_MIN_ASPECT_RATIO_FULLSCREEN))
+                .isEqualTo(ResourcesUtils.getResourcesString(mContext,
+                        "user_aspect_ratio_fullscreen"));
+    }
+
+    @Test
+    public void testGetUserMinAspectRatioEntry_fullscreenDisabled_shouldReturnDefault() {
+        setAspectRatioFullscreenBuildTimeFlagEnabled(false);
+        assertThat(mUtils.getUserMinAspectRatioEntry(USER_MIN_ASPECT_RATIO_FULLSCREEN))
+                .isEqualTo(ResourcesUtils.getResourcesString(mContext,
+                        "user_aspect_ratio_app_default"));
+    }
+
+    private void setAspectRatioSettingsBuildTimeFlagEnabled(boolean enabled) {
+        when(mResources.getBoolean(R.bool.config_appCompatUserAppAspectRatioSettingsIsEnabled))
+                .thenReturn(enabled);
+    }
+
+    private void setAspectRatioSettingsDeviceConfigEnabled(String enabled, boolean makeDefault) {
+        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_WINDOW_MANAGER,
+                KEY_ENABLE_USER_ASPECT_RATIO_SETTINGS, enabled, makeDefault);
+    }
+
+    private void setAspectRatioFullscreenBuildTimeFlagEnabled(boolean enabled) {
+        when(mResources.getBoolean(R.bool.config_appCompatUserAppAspectRatioFullscreenIsEnabled))
+                .thenReturn(enabled);
+    }
+
+    private void setAspectRatioFullscreenDeviceConfigEnabled(String enabled, boolean makeDefault) {
+        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_WINDOW_MANAGER,
+                KEY_ENABLE_USER_ASPECT_RATIO_FULLSCREEN, enabled, makeDefault);
     }
 
     private void addResolveInfoLauncherEntry(String packageName) {
