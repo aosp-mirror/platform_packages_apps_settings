@@ -17,6 +17,7 @@
 package com.android.settings.print;
 
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
@@ -547,8 +548,13 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
                     @Override
                     public void onClick(View v) {
                         try {
+                            Bundle options = ActivityOptions.makeBasic()
+                                    .setPendingIntentBackgroundActivityStartMode(
+                                            ActivityOptions.MODE_BACKGROUND_ACTIVITY_START_ALLOWED)
+                                    .toBundle();
                             getActivity().startIntentSender(
-                                    printer.getInfoIntent().getIntentSender(), null, 0, 0, 0);
+                                    printer.getInfoIntent().getIntentSender(), null, 0, 0, 0,
+                                    options);
                         } catch (SendIntentException e) {
                             Log.e(LOG_TAG, "Could not execute pending info intent: %s", e);
                         }
