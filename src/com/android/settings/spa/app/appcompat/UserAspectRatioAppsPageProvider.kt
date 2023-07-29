@@ -36,7 +36,6 @@ import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settings.R
 import com.android.settings.applications.appcompat.UserAspectRatioManager
-import com.android.settings.spa.app.appinfo.AppInfoSettingsProvider
 import com.android.settingslib.spa.framework.common.SettingsEntryBuilder
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
 import com.android.settingslib.spa.framework.common.SpaEnvironmentFactory
@@ -81,7 +80,7 @@ object UserAspectRatioAppsPageProvider : SettingsPageProvider {
     @VisibleForTesting
     fun EntryItem() =
         Preference(object : PreferenceModel {
-            override val title = stringResource(R.string.screen_size_title)
+            override val title = stringResource(R.string.aspect_ratio_title)
             override val summary = getSummary().toState()
             override val onClick = navigator(name)
         })
@@ -94,7 +93,7 @@ object UserAspectRatioAppsPageProvider : SettingsPageProvider {
 
     @Composable
     @VisibleForTesting
-    fun getSummary(): String = stringResource(R.string.screen_size_summary, Build.MODEL)
+    fun getSummary(): String = stringResource(R.string.aspect_ratio_summary, Build.MODEL)
 }
 
 @Composable
@@ -103,7 +102,7 @@ fun UserAspectRatioAppList(
     = { AppList() },
 ) {
     AppListPage(
-        title = stringResource(R.string.screen_size_title),
+        title = stringResource(R.string.aspect_ratio_title),
         listModel = rememberContext(::UserAspectRatioAppListModel),
         appList = appList,
         header = {
@@ -148,7 +147,7 @@ class UserAspectRatioAppListModel(private val context: Context)
     override fun AppListItemModel<UserAspectRatioAppListItemModel>.AppItem() {
         val app = record.app
         AppListItem(
-            onClick = AppInfoSettingsProvider.navigator(app)
+            onClick = { navigateToAppAspectRatioSettings(context, app) }
         )
     }
 

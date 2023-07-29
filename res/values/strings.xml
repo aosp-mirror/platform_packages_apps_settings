@@ -12081,25 +12081,32 @@
     other {Apps installed more than # months ago}
     }</string>
 
-    <!-- App Screen Size (User Aspect Ratio Override) -->
-    <!-- [CHAR LIMIT=60] Screen size app list title setting to choose aspect ratio -->
-    <string name="screen_size_title">Screen size</string>
-    <!-- [CHAR LIMIT=NONE] Screen size setting summary to choose aspect ratio for apps unoptimized for device -->
-    <string name="screen_size_summary">Choose an aspect ratio for apps if they haven’t been optimized for your <xliff:g id="device_name">%1$s</xliff:g></string>
+    <!-- App Aspect Ratio (User Aspect Ratio Override) -->
+    <!-- [CHAR LIMIT=60] Aspect ratio title setting to choose app aspect ratio -->
+    <string name="aspect_ratio_title">Aspect ratio</string>
+    <!-- [CHAR LIMIT=NONE] Aspect ratio setting summary to choose aspect ratio for apps unoptimized for device -->
+    <string name="aspect_ratio_summary">Choose an aspect ratio to view this app if it hasn\'t been designed to fit your <xliff:g id="device_name">%1$s</xliff:g></string>
     <!-- [CHAR LIMIT=NONE] Aspect ratio suggested apps filter label -->
     <string name="user_aspect_ratio_suggested_apps_label">Suggested apps</string>
     <!-- [CHAR LIMIT=NONE] Filter label for apps that have user aspect ratio override applied -->
     <string name="user_aspect_ratio_overridden_apps_label">Apps you have overridden</string>
     <!-- [CHAR LIMIT=NONE] App default aspect ratio entry -->
     <string name="user_aspect_ratio_app_default">App default</string>
-    <!-- [CHAR LIMIT=NONE] Half-screen aspect ratio entry -->
-    <string name="user_aspect_ratio_half_screen">Half-screen</string>
+    <!-- [CHAR LIMIT=NONE] Fullscreen aspect ratio entry -->
+    <string name="user_aspect_ratio_fullscreen">Full screen</string>
+    <!-- [CHAR LIMIT=NONE] Half screen aspect ratio entry -->
+    <string name="user_aspect_ratio_half_screen">Half screen</string>
+    <!-- [CHAR LIMIT=NONE] Device display size aspect ratio entry -->
+    <string name="user_aspect_ratio_device_size">Device aspect ratio</string>
     <!-- [CHAR LIMIT=NONE] 16:9 aspect ratio entry -->
     <string name="user_aspect_ratio_16_9">16:9</string>
     <!-- [CHAR LIMIT=NONE] 3:2 aspect ratio entry -->
     <string name="user_aspect_ratio_3_2">3:2</string>
     <!-- [CHAR LIMIT=NONE] 4:3 aspect ratio entry -->
     <string name="user_aspect_ratio_4_3">4:3</string>
+    <!-- [CHAR LIMIT=NONE] Warning description for app info aspect ratio page -->
+    <string name="app_aspect_ratio_footer">The app will restart when you change aspect ratio. You may lose unsaved changes.</string>
+
 
     <!-- Accessibility label for fingerprint sensor [CHAR LIMIT=NONE] -->
     <string name="accessibility_fingerprint_label">Fingerprint sensor</string>

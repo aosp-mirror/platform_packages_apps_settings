@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2023 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:title="@string/aspect_ratio_title">
+
+    <com.android.settingslib.widget.ActionButtonsPreference
+        android:key="header_view" />
+
+    <com.android.settingslib.widget.SelectorWithWidgetPreference
+        android:key="app_default_pref"
+        android:title="@string/user_aspect_ratio_app_default"/>
+
+    <com.android.settingslib.widget.SelectorWithWidgetPreference
+        android:key="fullscreen_pref"
+        android:title="@string/user_aspect_ratio_fullscreen"/>
+
+    <com.android.settingslib.widget.SelectorWithWidgetPreference
+        android:key="half_screen_pref"
+        android:title="@string/user_aspect_ratio_half_screen"/>
+
+    <com.android.settingslib.widget.SelectorWithWidgetPreference
+        android:key="display_size_pref"
+        android:title="@string/user_aspect_ratio_device_size"/>
+
+    <com.android.settingslib.widget.SelectorWithWidgetPreference
+        android:key="16_9_pref"
+        android:title="@string/user_aspect_ratio_16_9"/>
+
+    <com.android.settingslib.widget.SelectorWithWidgetPreference
+        android:key="4_3_pref"
+        android:title="@string/user_aspect_ratio_4_3"/>
+
+    <com.android.settingslib.widget.SelectorWithWidgetPreference
+        android:key="3_2_pref"
+        android:title="@string/user_aspect_ratio_3_2"/>
+
+    <com.android.settingslib.widget.FooterPreference
+        android:title="@string/app_aspect_ratio_footer"
+        android:selectable="false"
+        settings:searchable="false"/>
+
+</PreferenceScreen>
