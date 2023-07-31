@@ -1175,12 +1175,37 @@
 
     <!-- Title for the subpage in the "Security & privacy". This page consists of the more security and privacy settings. Can be navigated by Settings -> Security & privacy -> More security & privacy [CHAR LIMIT=NONE] -->
     <string name="more_security_privacy_settings">More security &amp; privacy</string>
-    <!-- Title for the section that has security entries in the More security & privacy page. [CHAR LIMIT=60] -->
+    <!-- Title for the section that has security entries in the More security & privacy page. Also used for Private Space security category. [CHAR LIMIT=60] -->
     <string name="security_header">Security</string>
     <!-- Title for the section that has privacy entries in the More security & privacy page. [CHAR LIMIT=60] -->
     <string name="privacy_header">Privacy</string>
     <!-- Title for the section that has work profile entries in the More security & privacy page. [CHAR LIMIT=60] -->
     <string name="work_profile_category_header">Work profile</string>
+
+    <!-- Title for the Private Space page. [CHAR LIMIT=60] -->
+    <string name="private_space_title">Private Space</string>
+    <!-- Summary for the Private Space page. [CHAR LIMIT=NONE] -->
+    <string name="private_space_summary">Hide apps in a private folder</string>
+    <!-- Title for the Private Space one lock preference. [CHAR LIMIT=60] -->
+    <string name="private_space_one_lock_title">Unlock using screen lock</string>
+    <!-- Title for the preference to hide Private Space. [CHAR LIMIT=60] -->
+    <string name="private_space_hide_title">Show Private Space</string>
+    <!-- System category for the Private Space page. [CHAR LIMIT=30] -->
+    <string name="private_space_category_system">System</string>
+    <!-- Title for the preference to create Private Space. [CHAR LIMIT=60] -->
+    <string name="private_space_create_title">Create Private Space</string>
+    <!-- Title for the preference to delete Private Space. [CHAR LIMIT=60] -->
+    <string name="private_space_delete_title">Delete Private Space</string>
+    <!-- Toast to show when the private space was created. [CHAR LIMIT=NONE] -->
+    <string name="private_space_created">Private Space successfully created</string>
+    <!-- Toast to show when the private space already exists. [CHAR LIMIT=NONE] -->
+    <string name="private_space_already_exists">Private Space already exists</string>
+    <!-- Toast to show when the private space could not be created. [CHAR LIMIT=NONE] -->
+    <string name="private_space_create_failed">Private Space could not be created</string>
+    <!-- Toast to show when the private space was deleted. [CHAR LIMIT=NONE] -->
+    <string name="private_space_deleted">Private Space successfully deleted</string>
+    <!-- Toast to show when the private space could not be deleted. [CHAR LIMIT=NONE] -->
+    <string name="private_space_delete_failed">Private Space could not be deleted</string>
 
     <!-- Text shown when "Add fingerprint" button is disabled -->
     <string name="fingerprint_add_max">You can add up to <xliff:g id="count" example="5">%d</xliff:g> fingerprints</string>
