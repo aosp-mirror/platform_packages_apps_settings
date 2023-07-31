@@ -263,9 +263,9 @@ public class PreferenceXmlParserUtils {
 
     private static String getUserRestriction(Context context, AttributeSet attrs) {
         TypedArray preferenceAttributes = context.obtainStyledAttributes(attrs,
-                R.styleable.RestrictedPreference);
+                com.android.settingslib.R.styleable.RestrictedPreference);
         String userRestriction = preferenceAttributes.getString(
-                R.styleable.RestrictedPreference_userRestriction);
+                com.android.settingslib.R.styleable.RestrictedPreference_userRestriction);
         preferenceAttributes.recycle();
         return userRestriction;
     }

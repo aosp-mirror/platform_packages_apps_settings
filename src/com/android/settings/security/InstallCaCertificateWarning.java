@@ -58,7 +58,7 @@ public class InstallCaCertificateWarning extends Activity {
                         .setText(R.string.certificate_warning_install_anyway)
                         .setListener(installCaCertificate())
                         .setButtonType(FooterButton.ButtonType.OTHER)
-                        .setTheme(R.style.SudGlifButton_Secondary)
+                        .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Secondary)
                         .build()
         );
         mixin.getSecondaryButtonView().setFilterTouchesWhenObscured(true);
@@ -68,7 +68,7 @@ public class InstallCaCertificateWarning extends Activity {
                         .setText(R.string.certificate_warning_dont_install)
                         .setListener(returnToInstallCertificateFromStorage())
                         .setButtonType(FooterButton.ButtonType.NEXT)
-                        .setTheme(R.style.SudGlifButton_Primary)
+                        .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Primary)
                         .build()
         );
         mixin.getPrimaryButtonView().setFilterTouchesWhenObscured(true);

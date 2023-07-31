@@ -74,7 +74,7 @@ public class MagnificationModePreferenceControllerTest {
     @Before
     public void setUp() {
         mContext = ApplicationProvider.getApplicationContext();
-        mContext.setTheme(R.style.Theme_AppCompat);
+        mContext.setTheme(androidx.appcompat.R.style.Theme_AppCompat);
         final PreferenceManager preferenceManager = new PreferenceManager(mContext);
         mScreen = preferenceManager.createPreferenceScreen(mContext);
         mModePreference = new Preference(mContext);

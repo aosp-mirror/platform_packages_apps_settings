@@ -352,7 +352,7 @@ public class AccountPreferenceController extends AbstractPreferenceController
         } else if (userInfo.isManagedProfile()) {
             if (mType == ProfileSelectFragment.ProfileType.ALL) {
                 setCategoryTitleFromDevicePolicyResource(preferenceGroup, WORK_CATEGORY_HEADER,
-                        R.string.category_work);
+                        com.android.settingslib.R.string.category_work);
                 final String workGroupSummary = getWorkGroupSummary(context, userInfo);
                 preferenceGroup.setSummary(workGroupSummary);
                 setContentDescriptionFromDevicePolicyResource(preferenceGroup,
@@ -366,7 +366,7 @@ public class AccountPreferenceController extends AbstractPreferenceController
         } else if (userInfo.isCloneProfile()) {
             if (mType == ProfileSelectFragment.ProfileType.ALL) {
                 setCategoryTitleFromDevicePolicyResource(preferenceGroup, CLONE_CATEGORY_HEADER,
-                        R.string.category_clone);
+                        com.android.settingslib.R.string.category_clone);
                 setContentDescriptionFromDevicePolicyResource(preferenceGroup,
                         ACCESSIBILITY_CATEGORY_CLONE, R.string.accessibility_category_clone,
                         null);
@@ -375,7 +375,7 @@ public class AccountPreferenceController extends AbstractPreferenceController
             // Primary Profile
             if (mType == ProfileSelectFragment.ProfileType.ALL) {
                 setCategoryTitleFromDevicePolicyResource(preferenceGroup, PERSONAL_CATEGORY_HEADER,
-                        R.string.category_personal);
+                        com.android.settingslib.R.string.category_personal);
                 setContentDescriptionFromDevicePolicyResource(preferenceGroup,
                         ACCESSIBILITY_CATEGORY_PERSONAL, R.string.accessibility_category_personal,
                         null);

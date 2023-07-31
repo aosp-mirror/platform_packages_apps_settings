@@ -231,11 +231,11 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
 
         if (position == WORK_TAB) {
             return devicePolicyManager.getResources().getString(WORK_CATEGORY_HEADER,
-                    () -> getContext().getString(R.string.category_work));
+                    () -> getContext().getString(com.android.settingslib.R.string.category_work));
         }
 
         return devicePolicyManager.getResources().getString(PERSONAL_CATEGORY_HEADER,
-                () -> getContext().getString(R.string.category_personal));
+                () -> getContext().getString(com.android.settingslib.R.string.category_personal));
     }
 
     static class ViewPagerAdapter extends FragmentStateAdapter {

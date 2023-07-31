@@ -104,14 +104,14 @@ fun FragmentActivity.bindFingerprintEnrollFindUdfpsView(
         it.secondaryButton = FooterButton.Builder(this)
             .setText(R.string.security_settings_fingerprint_enroll_enrolling_skip)
             .setButtonType(FooterButton.ButtonType.SKIP)
-            .setTheme(R.style.SudGlifButton_Secondary)
+            .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Secondary)
             .build()
         it.secondaryButton.setOnClickListener(onSkipClickListener)
 
         it.primaryButton = FooterButton.Builder(this)
             .setText(R.string.security_settings_udfps_enroll_find_sensor_start_button)
             .setButtonType(FooterButton.ButtonType.NEXT)
-            .setTheme(R.style.SudGlifButton_Primary)
+            .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Primary)
             .build()
         it.primaryButton.setOnClickListener(onStartClickListener)
     }

@@ -34,7 +34,6 @@ import android.widget.Toast;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.PrimarySwitchPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -163,7 +162,8 @@ public class WirelessDebuggingPreferenceController extends DeveloperOptionsPrefe
         if (enabled && !isWifiConnected(mContext)) {
             // Cannot enable ADB over Wi-Fi if we're not connected to wifi.
             Toast.makeText(
-                    mContext, R.string.adb_wireless_no_network_msg, Toast.LENGTH_LONG)
+                    mContext, com.android.settingslib.R.string.adb_wireless_no_network_msg,
+                            Toast.LENGTH_LONG)
                     .show();
             return false;
         }

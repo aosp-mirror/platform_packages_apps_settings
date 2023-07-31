@@ -130,7 +130,7 @@ public class AccessibilitySettingsTest {
         when(mActivity.getContentResolver()).thenReturn(mContentResolver);
         when(mFragment.getPreferenceManager()).thenReturn(mPreferenceManager);
         when(mFragment.getPreferenceManager().getContext()).thenReturn(mContext);
-        mContext.setTheme(R.style.Theme_AppCompat);
+        mContext.setTheme(androidx.appcompat.R.style.Theme_AppCompat);
         when(mContext.getSystemService(AppOpsManager.class)).thenReturn(mAppOpsManager);
         when(mAppOpsManager.noteOpNoThrow(eq(AppOpsManager.OP_ACCESS_RESTRICTED_SETTINGS),
                 anyInt(), anyString())).thenReturn(AppOpsManager.MODE_ALLOWED);

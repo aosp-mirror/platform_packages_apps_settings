@@ -18,8 +18,6 @@ package com.android.settings.development.snooplogger;
 
 import android.content.Context;
 
-import com.android.settings.R;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -39,9 +37,11 @@ public class SnoopLoggerFiltersPreferenceTest {
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
-        sKEY = mContext.getResources().getStringArray(R.array.bt_hci_snoop_log_filters_values)[0];
+        sKEY = mContext.getResources().getStringArray(
+                com.android.settingslib.R.array.bt_hci_snoop_log_filters_values)[0];
         sENTRY =
-                mContext.getResources().getStringArray(R.array.bt_hci_snoop_log_filters_entries)[0];
+                mContext.getResources().getStringArray(
+                        com.android.settingslib.R.array.bt_hci_snoop_log_filters_entries)[0];
         mPreference = new SnoopLoggerFiltersPreference(mContext, sKEY, sENTRY);
     }
 

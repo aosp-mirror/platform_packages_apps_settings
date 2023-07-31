@@ -54,10 +54,11 @@ public class BluetoothDetailsButtonsControllerTest extends BluetoothDetailsContr
     public void setUp() {
         super.setUp();
         final View buttons = View.inflate(
-                RuntimeEnvironment.application, R.layout.settingslib_action_buttons,
+                RuntimeEnvironment.application,
+                com.android.settingslib.widget.R.layout.settingslib_action_buttons,
                 null /* parent */);
-        mConnectButton = buttons.findViewById(R.id.button2);
-        mForgetButton = buttons.findViewById(R.id.button1);
+        mConnectButton = buttons.findViewById(com.android.settingslib.widget.R.id.button2);
+        mForgetButton = buttons.findViewById(com.android.settingslib.widget.R.id.button1);
         mController =
                 new BluetoothDetailsButtonsController(mContext, mFragment, mCachedDevice,
                         mLifecycle);

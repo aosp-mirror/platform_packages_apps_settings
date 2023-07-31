@@ -49,7 +49,8 @@ public class SetFullBackupPassword extends Activity {
                     // Mismatch between new pw and its confirmation re-entry
                     Log.i(TAG, "password mismatch");
                     Toast.makeText(SetFullBackupPassword.this,
-                            R.string.local_backup_password_toast_confirmation_mismatch,
+                            com.android.settingslib.R
+                                    .string.local_backup_password_toast_confirmation_mismatch,
                             Toast.LENGTH_LONG).show();
                     return;
                 }
@@ -60,14 +61,15 @@ public class SetFullBackupPassword extends Activity {
                     // success
                     Log.i(TAG, "password set successfully");
                     Toast.makeText(SetFullBackupPassword.this,
-                            R.string.local_backup_password_toast_success,
+                            com.android.settingslib.R.string.local_backup_password_toast_success,
                             Toast.LENGTH_LONG).show();
                     finish();
                 } else {
                     // failure -- bad existing pw, usually
                     Log.i(TAG, "failure; password mismatch?");
                     Toast.makeText(SetFullBackupPassword.this,
-                            R.string.local_backup_password_toast_validation_failure,
+                            com.android.settingslib.R
+                                    .string.local_backup_password_toast_validation_failure,
                             Toast.LENGTH_LONG).show();
                 }
             } else if (v == mCancel) {

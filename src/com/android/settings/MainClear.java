@@ -437,7 +437,7 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
                         .setText(R.string.main_clear_button_text)
                         .setListener(mInitiateListener)
                         .setButtonType(ButtonType.OTHER)
-                        .setTheme(R.style.SudGlifButton_Primary)
+                        .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Primary)
                         .build()
         );
         mInitiateButton = mixin.getPrimaryButton();
@@ -501,10 +501,12 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
 
                 if (userInfo.isManagedProfile()) {
                     titleText.setText(devicePolicyManager.getResources().getString(
-                            WORK_CATEGORY_HEADER, () -> getString(R.string.category_work)));
+                            WORK_CATEGORY_HEADER, () -> getString(
+                                    com.android.settingslib.R.string.category_work)));
                 } else {
                     titleText.setText(devicePolicyManager.getResources().getString(
-                            PERSONAL_CATEGORY_HEADER, () -> getString(R.string.category_personal)));
+                            PERSONAL_CATEGORY_HEADER, () -> getString(
+                                    com.android.settingslib.R.string.category_personal)));
                 }
                 contents.addView(titleView);
             }

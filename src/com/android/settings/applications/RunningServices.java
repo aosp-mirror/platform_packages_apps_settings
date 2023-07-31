@@ -42,7 +42,7 @@ public class RunningServices extends SettingsPreferenceFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getActivity().setTitle(R.string.runningservices_settings_title);
+        getActivity().setTitle(com.android.settingslib.R.string.runningservices_settings_title);
     }
 
     @Override

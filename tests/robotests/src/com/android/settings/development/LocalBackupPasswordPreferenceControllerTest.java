@@ -15,8 +15,6 @@ import android.os.UserManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.R;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -60,7 +58,8 @@ public class LocalBackupPasswordPreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        verify(mPreference).setSummary(R.string.local_backup_password_summary_change);
+        verify(mPreference).setSummary(
+                com.android.settingslib.R.string.local_backup_password_summary_change);
     }
 
     @Test
@@ -73,7 +72,8 @@ public class LocalBackupPasswordPreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        verify(mPreference).setSummary(R.string.local_backup_password_summary_none);
+        verify(mPreference).setSummary(
+                com.android.settingslib.R.string.local_backup_password_summary_none);
     }
 
     @Test

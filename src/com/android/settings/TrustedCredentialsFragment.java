@@ -333,11 +333,11 @@ public class TrustedCredentialsFragment extends ObservableFragment
             TextView title = convertView.findViewById(android.R.id.title);
             if (getUserInfoByGroup(groupPosition).isManagedProfile()) {
                 title.setText(mDevicePolicyManager.getResources().getString(WORK_CATEGORY_HEADER,
-                        () -> getString(R.string.category_work)));
+                        () -> getString(com.android.settingslib.R.string.category_work)));
             } else {
                 title.setText(mDevicePolicyManager.getResources().getString(
                         PERSONAL_CATEGORY_HEADER,
-                        () -> getString(R.string.category_personal)));
+                        () -> getString(com.android.settingslib.R.string.category_personal)));
 
             }
             title.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_END);

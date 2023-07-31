@@ -122,7 +122,7 @@ public class StorageItemPreferenceControllerTest {
         final StorageItemPreference documentsAndOther = spy(new StorageItemPreference(mContext));
         documentsAndOther.setIcon(R.drawable.ic_folder_vd_theme_24);
         final StorageItemPreference system = spy(new StorageItemPreference(mContext));
-        system.setIcon(R.drawable.ic_system_update);
+        system.setIcon(com.android.settingslib.R.drawable.ic_system_update);
         final StorageItemPreference trash = spy(new StorageItemPreference(mContext));
         trash.setIcon(R.drawable.ic_trash_can);
 

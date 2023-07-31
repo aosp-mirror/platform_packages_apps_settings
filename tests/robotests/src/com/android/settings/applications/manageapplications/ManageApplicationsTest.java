@@ -105,7 +105,7 @@ public class ManageApplicationsTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mContext.setTheme(R.style.Theme_AppCompat);
+        mContext.setTheme(androidx.appcompat.R.style.Theme_AppCompat);
         mAppReset = new RoboMenuItem(R.id.reset_app_preferences);
         mSortRecent = new RoboMenuItem(R.id.sort_order_recent_notification);
         mSortFrequent = new RoboMenuItem(R.id.sort_order_frequent_notification);

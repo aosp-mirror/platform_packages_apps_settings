@@ -31,8 +31,6 @@ import android.os.UserHandle;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.R;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -78,8 +76,8 @@ public class SharedDataPreferenceControllerTest {
         mController.updateState(mPreference);
 
         verify(mPreference).setEnabled(true);
-        assertThat(mPreference.getSummary())
-                .isEqualTo(mContext.getString(R.string.shared_data_summary));
+        assertThat(mPreference.getSummary()).isEqualTo(
+                mContext.getString(com.android.settingslib.R.string.shared_data_summary));
     }
 
     @Test
@@ -88,8 +86,8 @@ public class SharedDataPreferenceControllerTest {
         mController.updateState(mPreference);
 
         verify(mPreference).setEnabled(false);
-        assertThat(mPreference.getSummary())
-                .isEqualTo(mContext.getString(R.string.shared_data_no_blobs_text));
+        assertThat(mPreference.getSummary()).isEqualTo(
+                mContext.getString(com.android.settingslib.R.string.shared_data_no_blobs_text));
     }
 
     @Test
@@ -98,8 +96,8 @@ public class SharedDataPreferenceControllerTest {
         mController.updateState(mPreference);
 
         verify(mPreference).setEnabled(false);
-        assertThat(mPreference.getSummary())
-                .isEqualTo(mContext.getString(R.string.shared_data_no_blobs_text));
+        assertThat(mPreference.getSummary()).isEqualTo(
+                mContext.getString(com.android.settingslib.R.string.shared_data_no_blobs_text));
     }
 
     private List<BlobInfo> generateBlobList() {

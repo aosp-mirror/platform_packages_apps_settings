@@ -23,9 +23,7 @@ import android.content.res.ColorStateList
 import android.content.res.Configuration
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
-import android.hardware.biometrics.BiometricFingerprintConstants
 import android.hardware.fingerprint.FingerprintManager.ENROLL_ENROLL
-import android.hardware.fingerprint.FingerprintManager.FINGERPRINT_ERROR_CANCELED
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -41,7 +39,6 @@ import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -62,8 +59,8 @@ import com.google.android.setupcompat.template.FooterButton
 import com.google.android.setupdesign.GlifLayout
 import com.google.android.setupdesign.template.DescriptionMixin
 import com.google.android.setupdesign.template.HeaderMixin
-import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
+import kotlinx.coroutines.launch
 
 /**
  * Fragment is used to handle enrolling process for sfps
@@ -83,7 +80,10 @@ class FingerprintEnrollEnrollingSfpsFragment : Fragment() {
         get() = _errorDialogViewModel!!
 
     private val fastOutSlowInInterpolator: Interpolator
-        get() = AnimationUtils.loadInterpolator(activity, R.interpolator.fast_out_slow_in)
+        get() = AnimationUtils.loadInterpolator(
+            activity,
+            androidx.appcompat.R.interpolator.fast_out_slow_in,
+        )
 
     private var enrollingView: GlifLayout? = null
 
@@ -604,7 +604,7 @@ fun FragmentActivity.bindFingerprintEnrollEnrollingSfpsView(
         .setText(R.string.security_settings_fingerprint_enroll_enrolling_skip)
         .setListener(onSkipClickListener)
         .setButtonType(FooterButton.ButtonType.SKIP)
-        .setTheme(R.style.SudGlifButton_Secondary)
+        .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Secondary)
         .build()
 
     view.findViewById<ProgressBar>(R.id.fingerprint_progress_bar)!!.progressBackgroundTintMode =

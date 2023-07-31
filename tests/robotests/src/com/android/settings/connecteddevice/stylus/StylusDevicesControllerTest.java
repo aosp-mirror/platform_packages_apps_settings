@@ -330,7 +330,7 @@ public class StylusDevicesControllerTest {
 
     @Test
     public void defaultNotesPreferenceClick_multiUserManagedProfile_showsProfileSelectorDialog() {
-        mContext.setTheme(R.style.Theme_AppCompat);
+        mContext.setTheme(androidx.appcompat.R.style.Theme_AppCompat);
         final String permissionPackageName = "permissions.package";
         final UserHandle currentUser = Process.myUserHandle();
         List<UserInfo> userInfos = Arrays.asList(
@@ -354,7 +354,7 @@ public class StylusDevicesControllerTest {
     @Test
     public void defaultNotesPreferenceClick_noManagedProfile_sendsManageDefaultRoleIntent() {
         final ArgumentCaptor<Intent> captor = ArgumentCaptor.forClass(Intent.class);
-        mContext.setTheme(R.style.Theme_AppCompat);
+        mContext.setTheme(androidx.appcompat.R.style.Theme_AppCompat);
         final String permissionPackageName = "permissions.package";
         final UserHandle currentUser = Process.myUserHandle();
         List<UserInfo> userInfos = Arrays.asList(

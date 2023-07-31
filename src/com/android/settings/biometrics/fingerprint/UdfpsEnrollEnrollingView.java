@@ -78,7 +78,7 @@ public class UdfpsEnrollEnrollingView extends GlifLayout {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        mHeaderView = findViewById(R.id.sud_landscape_header_area);
+        mHeaderView = findViewById(com.google.android.setupdesign.R.id.sud_landscape_header_area);
         mUdfpsEnrollView = findViewById(R.id.udfps_animation_view);
     }
 
@@ -201,8 +201,10 @@ public class UdfpsEnrollEnrollingView extends GlifLayout {
             return false;
         };
 
-        findManagedViewById(mIsLandscape ? R.id.sud_landscape_content_area
-                : R.id.sud_layout_content).setOnHoverListener(onHoverListener);
+        findManagedViewById(mIsLandscape
+                ? com.google.android.setupdesign.R.id.sud_landscape_content_area
+                : com.google.android.setupdesign.R.id.sud_layout_content
+        ).setOnHoverListener(onHoverListener);
     }
 
     private void swapHeaderAndContent() {
@@ -212,7 +214,8 @@ public class UdfpsEnrollEnrollingView extends GlifLayout {
         parentView.addView(mHeaderView);
 
         // Hide scroll indicators
-        BottomScrollView headerScrollView = mHeaderView.findViewById(R.id.sud_header_scroll_view);
+        BottomScrollView headerScrollView = mHeaderView.findViewById(
+                com.google.android.setupdesign.R.id.sud_header_scroll_view);
         headerScrollView.setScrollIndicators(0);
     }
 

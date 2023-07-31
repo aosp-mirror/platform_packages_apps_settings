@@ -876,8 +876,9 @@ public class FingerprintSettings extends SubSettings {
                             final Activity activity = getActivity();
                             if (activity != null) {
                                 // Apply pending transition for auto adding first fingerprint case
-                                activity.overridePendingTransition(R.anim.sud_slide_next_in,
-                                        R.anim.sud_slide_next_out);
+                                activity.overridePendingTransition(
+                                        com.google.android.setupdesign.R.anim.sud_slide_next_in,
+                                        com.google.android.setupdesign.R.anim.sud_slide_next_out);
                             }
 
                             // To have smoother animation, change flow to let next visible activity

@@ -300,8 +300,10 @@ public class BluetoothPairingDialogFragment extends InstrumentedDialogFragment i
         mBuilder.setTitle(getString(R.string.bluetooth_pairing_request,
                 mPairingController.getDeviceName()));
         mBuilder.setView(createView());
-        mBuilder.setPositiveButton(getString(R.string.bluetooth_pairing_accept), this);
-        mBuilder.setNegativeButton(getString(R.string.bluetooth_pairing_decline), this);
+        mBuilder.setPositiveButton(
+                getString(com.android.settingslib.R.string.bluetooth_pairing_accept), this);
+        mBuilder.setNegativeButton(
+                getString(com.android.settingslib.R.string.bluetooth_pairing_decline), this);
         AlertDialog dialog = mBuilder.create();
         return dialog;
     }

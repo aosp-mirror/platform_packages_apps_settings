@@ -51,8 +51,8 @@ public class EnableOemUnlockSettingWarningDialog extends InstrumentedDialogFragm
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         return new AlertDialog.Builder(getActivity())
-                .setTitle(R.string.confirm_enable_oem_unlock_title)
-                .setMessage(R.string.confirm_enable_oem_unlock_text)
+                .setTitle(com.android.settingslib.R.string.confirm_enable_oem_unlock_title)
+                .setMessage(com.android.settingslib.R.string.confirm_enable_oem_unlock_text)
                 .setPositiveButton(R.string.enable_text, this /* onClickListener */)
                 .setNegativeButton(android.R.string.cancel, this /* onClickListener */)
                 .create();

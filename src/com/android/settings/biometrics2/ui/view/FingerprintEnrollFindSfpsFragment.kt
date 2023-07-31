@@ -16,7 +16,6 @@
 package com.android.settings.biometrics2.ui.view
 
 import android.content.Context
-import android.hardware.biometrics.BiometricFingerprintConstants
 import android.hardware.fingerprint.FingerprintManager.ENROLL_FIND_SENSOR
 import android.os.Bundle
 import android.util.Log
@@ -29,7 +28,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -307,7 +305,7 @@ fun FragmentActivity.bindFingerprintEnrollFindSfpsView(
         it.secondaryButton = FooterButton.Builder(this)
             .setText(R.string.security_settings_fingerprint_enroll_enrolling_skip)
             .setButtonType(FooterButton.ButtonType.SKIP)
-            .setTheme(R.style.SudGlifButton_Secondary)
+            .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Secondary)
             .build()
         it.secondaryButton.setOnClickListener(onSkipClickListener)
     }

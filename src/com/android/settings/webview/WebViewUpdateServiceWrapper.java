@@ -27,8 +27,6 @@ import android.webkit.WebViewFactory;
 import android.webkit.WebViewProviderInfo;
 import android.widget.Toast;
 
-import com.android.settings.R;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -101,7 +99,8 @@ public class WebViewUpdateServiceWrapper {
         // The user chose a package that became invalid since the list was last updated,
         // show a Toast to explain the situation.
         Toast toast = Toast.makeText(context,
-                R.string.select_webview_provider_toast_text, Toast.LENGTH_SHORT);
+                com.android.settingslib.R.string.select_webview_provider_toast_text,
+                Toast.LENGTH_SHORT);
         toast.show();
     }
 

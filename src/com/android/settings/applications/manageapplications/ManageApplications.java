@@ -689,7 +689,8 @@ public class ManageApplications extends InstrumentedFragment
                 startAppInfoFragment(WriteSettingsDetails.class, R.string.write_system_settings);
                 break;
             case LIST_TYPE_MANAGE_SOURCES:
-                startAppInfoFragment(ExternalSourcesDetails.class, R.string.install_other_apps);
+                startAppInfoFragment(ExternalSourcesDetails.class,
+                        com.android.settingslib.R.string.install_other_apps);
                 break;
             case LIST_TYPE_GAMES:
                 startAppInfoFragment(AppStorageSettings.class, R.string.game_storage_settings);
@@ -704,7 +705,7 @@ public class ManageApplications extends InstrumentedFragment
                 break;
             case LIST_TYPE_ALARMS_AND_REMINDERS:
                 startAppInfoFragment(AlarmsAndRemindersDetails.class,
-                        R.string.alarms_and_reminders_label);
+                        com.android.settingslib.R.string.alarms_and_reminders_label);
                 break;
             case LIST_TYPE_MEDIA_MANAGEMENT_APPS:
                 startAppInfoFragment(MediaManagementAppsDetails.class,
@@ -741,7 +742,8 @@ public class ManageApplications extends InstrumentedFragment
                         R.string.change_nfc_tag_apps_title);
                 break;
             case LIST_TYPE_TURN_SCREEN_ON:
-                startAppInfoFragment(TurnScreenOnDetails.class, R.string.turn_screen_on_title);
+                startAppInfoFragment(TurnScreenOnDetails.class,
+                        com.android.settingslib.R.string.turn_screen_on_title);
                 break;
             // TODO: Figure out if there is a way where we can spin up the profile's settings
             // process ahead of time, to avoid a long load of data when user clicks on a managed
@@ -1052,7 +1054,7 @@ public class ManageApplications extends InstrumentedFragment
         } else if (className.equals(WriteSettingsActivity.class.getName())) {
             screenTitle = R.string.write_settings;
         } else if (className.equals(ManageExternalSourcesActivity.class.getName())) {
-            screenTitle = R.string.install_other_apps;
+            screenTitle = com.android.settingslib.R.string.install_other_apps;
         } else if (className.equals(ChangeWifiStateActivity.class.getName())) {
             screenTitle = R.string.change_wifi_state_title;
         } else if (className.equals(ManageExternalStorageActivity.class.getName())) {
@@ -1060,7 +1062,7 @@ public class ManageApplications extends InstrumentedFragment
         } else if (className.equals(MediaManagementAppsActivity.class.getName())) {
             screenTitle = R.string.media_management_apps_title;
         } else if (className.equals(AlarmsAndRemindersActivity.class.getName())) {
-            screenTitle = R.string.alarms_and_reminders_title;
+            screenTitle = com.android.settingslib.R.string.alarms_and_reminders_title;
         } else if (className.equals(NotificationAppListActivity.class.getName())
                 || className.equals(
                 NotificationReviewPermissionsActivity.class.getName())) {
@@ -1076,7 +1078,7 @@ public class ManageApplications extends InstrumentedFragment
         } else if (className.equals(ChangeNfcTagAppsActivity.class.getName())) {
             screenTitle = R.string.change_nfc_tag_apps_title;
         } else if (className.equals(TurnScreenOnSettingsActivity.class.getName())) {
-            screenTitle = R.string.turn_screen_on_title;
+            screenTitle = com.android.settingslib.R.string.turn_screen_on_title;
         } else {
             if (screenTitle == -1) {
                 screenTitle = R.string.all_apps;

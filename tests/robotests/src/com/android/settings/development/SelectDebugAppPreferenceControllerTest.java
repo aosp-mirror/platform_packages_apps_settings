@@ -16,8 +16,7 @@
 
 package com.android.settings.development;
 
-import static com.android.settings.development.DevelopmentOptionsActivityRequestCodes
-        .REQUEST_CODE_DEBUG_APP;
+import static com.android.settings.development.DevelopmentOptionsActivityRequestCodes.REQUEST_CODE_DEBUG_APP;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -35,8 +34,6 @@ import android.provider.Settings;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-
-import com.android.settings.R;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -92,7 +89,8 @@ public class SelectDebugAppPreferenceControllerTest {
         Settings.Global.putString(contentResolver, Settings.Global.DEBUG_APP, debugApp);
         mController.updateState(mPreference);
 
-        verify(mPreference).setSummary(mContext.getString(R.string.debug_app_set, debugApp));
+        verify(mPreference).setSummary(
+                mContext.getString(com.android.settingslib.R.string.debug_app_set, debugApp));
     }
 
     @Test
@@ -102,7 +100,8 @@ public class SelectDebugAppPreferenceControllerTest {
         Settings.Global.putString(contentResolver, Settings.Global.DEBUG_APP, debugApp);
         mController.updateState(mPreference);
 
-        verify(mPreference).setSummary(mContext.getString(R.string.debug_app_not_set));
+        verify(mPreference).setSummary(
+                mContext.getString(com.android.settingslib.R.string.debug_app_not_set));
     }
 
     @Test
@@ -114,7 +113,8 @@ public class SelectDebugAppPreferenceControllerTest {
             .onActivityResult(REQUEST_CODE_DEBUG_APP, Activity.RESULT_OK, activityResultIntent);
 
         assertThat(result).isTrue();
-        verify(mPreference).setSummary(mContext.getString(R.string.debug_app_set, appLabel));
+        verify(mPreference).setSummary(
+                mContext.getString(com.android.settingslib.R.string.debug_app_set, appLabel));
     }
 
     @Test
@@ -128,6 +128,7 @@ public class SelectDebugAppPreferenceControllerTest {
         mController.onDeveloperOptionsSwitchDisabled();
 
         verify(mPreference).setEnabled(false);
-        verify(mPreference).setSummary(mContext.getString(R.string.debug_app_not_set));
+        verify(mPreference).setSummary(
+                mContext.getString(com.android.settingslib.R.string.debug_app_not_set));
     }
 }

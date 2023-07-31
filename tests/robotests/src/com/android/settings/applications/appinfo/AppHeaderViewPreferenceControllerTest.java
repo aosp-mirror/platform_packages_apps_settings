@@ -76,7 +76,8 @@ public class AppHeaderViewPreferenceControllerTest {
         mActivity = spy(Robolectric.buildActivity(FragmentActivity.class).get());
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
-        mHeader = LayoutInflater.from(mContext).inflate(R.layout.settings_entity_header, null);
+        mHeader = LayoutInflater.from(mContext).inflate(
+                com.android.settingslib.widget.R.layout.settings_entity_header, null);
 
         when(mFragment.getActivity()).thenReturn(mActivity);
         when(mScreen.findPreference(anyString())).thenReturn(mPreference);

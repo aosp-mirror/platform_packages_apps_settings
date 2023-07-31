@@ -84,17 +84,21 @@ public class UsageGraph extends View {
         mLinePaint.setStrokeCap(Cap.ROUND);
         mLinePaint.setStrokeJoin(Join.ROUND);
         mLinePaint.setAntiAlias(true);
-        mCornerRadius = resources.getDimensionPixelSize(R.dimen.usage_graph_line_corner_radius);
+        mCornerRadius = resources.getDimensionPixelSize(
+                com.android.settingslib.R.dimen.usage_graph_line_corner_radius);
         mLinePaint.setPathEffect(new CornerPathEffect(mCornerRadius));
-        mLinePaint.setStrokeWidth(resources.getDimensionPixelSize(R.dimen.usage_graph_line_width));
+        mLinePaint.setStrokeWidth(resources.getDimensionPixelSize(
+                com.android.settingslib.R.dimen.usage_graph_line_width));
 
         mFillPaint = new Paint(mLinePaint);
         mFillPaint.setStyle(Style.FILL);
 
         mDottedPaint = new Paint(mLinePaint);
         mDottedPaint.setStyle(Style.STROKE);
-        float dots = resources.getDimensionPixelSize(R.dimen.usage_graph_dot_size);
-        float interval = resources.getDimensionPixelSize(R.dimen.usage_graph_dot_interval);
+        float dots = resources.getDimensionPixelSize(
+                com.android.settingslib.R.dimen.usage_graph_dot_size);
+        float interval = resources.getDimensionPixelSize(
+                com.android.settingslib.R.dimen.usage_graph_dot_interval);
         mDottedPaint.setStrokeWidth(dots * 3);
         mDottedPaint.setPathEffect(new DashPathEffect(new float[] {dots, interval}, 0));
         mDottedPaint.setColor(context.getColor(R.color.usage_graph_dots));
@@ -103,7 +107,8 @@ public class UsageGraph extends View {
         context.getTheme().resolveAttribute(com.android.internal.R.attr.listDivider, v, true);
         mDivider = context.getDrawable(v.resourceId);
         mTintedDivider = context.getDrawable(v.resourceId);
-        mDividerSize = resources.getDimensionPixelSize(R.dimen.usage_graph_divider_size);
+        mDividerSize = resources.getDimensionPixelSize(
+                com.android.settingslib.R.dimen.usage_graph_divider_size);
     }
 
     void clearPaths() {

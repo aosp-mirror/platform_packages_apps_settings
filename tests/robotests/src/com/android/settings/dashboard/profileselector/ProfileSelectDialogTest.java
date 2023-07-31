@@ -35,7 +35,6 @@ import android.widget.TextView;
 
 import androidx.test.core.app.ApplicationProvider;
 
-import com.android.settings.R;
 import com.android.settingslib.drawer.ActivityTile;
 import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.Tile;
@@ -144,14 +143,15 @@ public class ProfileSelectDialogTest {
 
     @Test
     public void createDialog_showsCorrectTitle() {
-        mContext.setTheme(R.style.Theme_AppCompat);
+        mContext.setTheme(androidx.appcompat.R.style.Theme_AppCompat);
 
         Dialog dialog = ProfileSelectDialog.createDialog(mContext, Lists.newArrayList(NORMAL_USER),
                 (position) -> {
                 });
         dialog.show();
 
-        TextView titleView = dialog.findViewById(R.id.topPanel).findViewById(android.R.id.title);
+        TextView titleView = dialog.findViewById(com.google.android.material.R.id.topPanel)
+                .findViewById(android.R.id.title);
         assertThat(titleView.getText().toString()).isEqualTo(
                 mContext.getText(com.android.settingslib.R.string.choose_profile).toString());
     }

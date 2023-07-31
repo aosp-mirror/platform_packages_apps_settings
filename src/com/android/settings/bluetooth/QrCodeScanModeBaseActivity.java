@@ -42,8 +42,8 @@ public abstract class QrCodeScanModeBaseActivity extends ObservableActivity {
 
         int defaultTheme =
                 ThemeHelper.isSetupWizardDayNightEnabled(this)
-                        ? R.style.SudThemeGlifV3_DayNight
-                        : R.style.SudThemeGlifV3_Light;
+                        ? com.google.android.setupdesign.R.style.SudThemeGlifV3_DayNight
+                        : com.google.android.setupdesign.R.style.SudThemeGlifV3_Light;
         ThemeResolver themeResolver =
                 new ThemeResolver.Builder(ThemeResolver.getDefault())
                         .setDefaultTheme(defaultTheme)

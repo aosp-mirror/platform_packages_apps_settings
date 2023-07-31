@@ -280,7 +280,8 @@ public class BatteryEntryTest {
     public void getNameAndIconFromUid_rerturnExpectedName() {
         final NameAndIcon nameAndIcon = BatteryEntry.getNameAndIconFromUid(
                 mContext, /* name */ null, /* uid */ 0);
-        assertThat(nameAndIcon.mName).isEqualTo(getString(R.string.process_kernel_label));
+        assertThat(nameAndIcon.mName).isEqualTo(
+                getString(com.android.settingslib.R.string.process_kernel_label));
 
         assertNameAndIcon("mediaserver", R.string.process_mediaserver_label);
         assertNameAndIcon("dex2oat32", R.string.process_dex2oat_label);

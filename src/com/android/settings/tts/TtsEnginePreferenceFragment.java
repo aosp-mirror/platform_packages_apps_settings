@@ -152,7 +152,8 @@ public class TtsEnginePreferenceFragment extends RadioButtonPickerFragment {
         final AlertDialog dialog = new AlertDialog.Builder(getPrefContext())
                 .setTitle(android.R.string.dialog_alert_title)
                 .setMessage(mContext.getString(
-                        R.string.tts_engine_security_warning, info.loadLabel()))
+                        com.android.settingslib.R.string.tts_engine_security_warning,
+                        info.loadLabel()))
                 .setCancelable(true)
                 .setPositiveButton(android.R.string.ok, positiveOnClickListener)
                 .setNegativeButton(android.R.string.cancel, null)

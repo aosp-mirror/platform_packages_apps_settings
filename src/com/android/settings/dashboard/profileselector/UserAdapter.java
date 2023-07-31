@@ -77,10 +77,11 @@ public class UserAdapter extends BaseAdapter {
             if (userHandle == UserHandle.USER_CURRENT
                     || userHandle == ActivityManager.getCurrentUser()) {
                 return resources.getString(PERSONAL_CATEGORY_HEADER,
-                        () -> context.getString(R.string.category_personal));
+                        () -> context.getString(
+                                com.android.settingslib.R.string.category_personal));
             } else {
                 return resources.getString(WORK_CATEGORY_HEADER,
-                        () -> context.getString(R.string.category_work));
+                        () -> context.getString(com.android.settingslib.R.string.category_work));
             }
         }
     }

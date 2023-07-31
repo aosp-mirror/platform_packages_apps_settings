@@ -110,7 +110,8 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
 
     private CharSequence generateLabel(BatteryInfo info) {
         if (Utils.containsIncompatibleChargers(mContext, TAG)) {
-            return mContext.getString(R.string.battery_info_status_not_charging);
+            return mContext.getString(
+                    com.android.settingslib.R.string.battery_info_status_not_charging);
         } else if (BatteryUtils.isBatteryDefenderOn(info)) {
             return null;
         } else if (info.remainingLabel == null

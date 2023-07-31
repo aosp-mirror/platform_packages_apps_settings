@@ -26,8 +26,6 @@ import android.sysprop.BluetoothProperties;
 import androidx.preference.ListPreference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.R;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -59,8 +57,10 @@ public class BluetoothSnoopLogFilterProfilePbapPreferenceControllerTest {
         // Get XML values without mock
         // Setup test list preference using XML values
         mPreference = new ListPreference(mSpyContext);
-        mPreference.setEntries(R.array.bt_hci_snoop_log_profile_filter_entries);
-        mPreference.setEntryValues(R.array.bt_hci_snoop_log_profile_filter_values);
+        mPreference.setEntries(
+                com.android.settingslib.R.array.bt_hci_snoop_log_profile_filter_entries);
+        mPreference.setEntryValues(
+                com.android.settingslib.R.array.bt_hci_snoop_log_profile_filter_values);
         // Init the actual controller
         mController = new BluetoothSnoopLogFilterProfilePbapPreferenceController(mSpyContext);
         // Construct preference in the controller via a mocked preference screen object

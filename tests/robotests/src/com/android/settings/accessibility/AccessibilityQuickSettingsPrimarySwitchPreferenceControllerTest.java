@@ -96,7 +96,7 @@ public class AccessibilityQuickSettingsPrimarySwitchPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mContext.setTheme(R.style.Theme_AppCompat);
+        mContext.setTheme(androidx.appcompat.R.style.Theme_AppCompat);
         mFragment = spy(new TestFragment());
         when(mFragment.getPreferenceManager()).thenReturn(mPreferenceManager);
         when(mFragment.getPreferenceManager().getContext()).thenReturn(mContext);

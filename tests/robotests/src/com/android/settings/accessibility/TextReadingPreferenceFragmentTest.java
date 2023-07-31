@@ -71,7 +71,7 @@ public class TextReadingPreferenceFragmentTest {
 
     @Before
     public void setUp() {
-        mContext.setTheme(R.style.Theme_AppCompat);
+        mContext.setTheme(androidx.appcompat.R.style.Theme_AppCompat);
 
         mFragment = spy(new TextReadingPreferenceFragment());
         when(mFragment.getPreferenceManager()).thenReturn(mPreferenceManager);

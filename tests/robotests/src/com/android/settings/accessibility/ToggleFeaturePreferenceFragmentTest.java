@@ -114,7 +114,7 @@ public class ToggleFeaturePreferenceFragmentTest {
         final PreferenceScreen screen = spy(new PreferenceScreen(mContext, null));
         when(screen.getPreferenceManager()).thenReturn(mPreferenceManager);
         doReturn(screen).when(mFragment).getPreferenceScreen();
-        mContext.setTheme(R.style.Theme_AppCompat);
+        mContext.setTheme(androidx.appcompat.R.style.Theme_AppCompat);
     }
 
     @Test

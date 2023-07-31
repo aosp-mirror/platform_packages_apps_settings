@@ -144,7 +144,8 @@ public class SpellCheckersSettings extends SettingsPreferenceFragment
             return getString(R.string.spell_checker_not_selected);
         }
         if (subtype == null) {
-            return getString(R.string.use_system_language_to_select_input_method_subtypes);
+            return getString(com.android.settingslib.R
+                    .string.use_system_language_to_select_input_method_subtypes);
         }
         return subtype.getDisplayName(
                 getActivity(), sci.getPackageName(), sci.getServiceInfo().applicationInfo);

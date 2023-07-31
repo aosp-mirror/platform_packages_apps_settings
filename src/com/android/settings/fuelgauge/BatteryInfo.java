@@ -33,7 +33,6 @@ import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 
 import com.android.internal.os.BatteryStatsHistoryIterator;
-import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.UsageView;
@@ -133,11 +132,11 @@ public class BatteryInfo {
         }
         parserList[parsers.length] = parser;
         parseBatteryHistory(parserList);
-        String timeString = context.getString(R.string.charge_length_format,
+        String timeString = context.getString(com.android.settingslib.R.string.charge_length_format,
                 Formatter.formatShortElapsedTime(context, timePeriod));
         String remaining = "";
         if (remainingTimeUs != 0) {
-            remaining = context.getString(R.string.remaining_length_format,
+            remaining = context.getString(com.android.settingslib.R.string.remaining_length_format,
                     Formatter.formatShortElapsedTime(context, remainingTimeUs / 1000));
         }
         view.setBottomLabels(new CharSequence[]{timeString, remaining});
@@ -287,7 +286,7 @@ public class BatteryInfo {
                 || dockDefenderMode == BatteryUtils.DockDefenderMode.ACTIVE) {
             // Battery defender active, battery charging paused
             info.remainingLabel = null;
-            int chargingLimitedResId = R.string.power_charging_limited;
+            int chargingLimitedResId = com.android.settingslib.R.string.power_charging_limited;
             info.chargeLabel = context.getString(chargingLimitedResId, info.batteryPercentString);
         } else if ((chargeTimeMs > 0 && status != BatteryManager.BATTERY_STATUS_FULL
                 && dockDefenderMode == BatteryUtils.DockDefenderMode.DISABLED)
@@ -297,22 +296,24 @@ public class BatteryInfo {
             final CharSequence timeString = StringUtil.formatElapsedTime(context,
                     (double) PowerUtil.convertUsToMs(info.remainingTimeUs), false /* withSeconds */,
                     true /* collapseTimeUnit */);
-            int resId = R.string.power_charging_duration;
+            int resId = com.android.settingslib.R.string.power_charging_duration;
             info.remainingLabel = chargeTimeMs <= 0 ? null : context.getString(
-                    R.string.power_remaining_charging_duration_only, timeString);
+                    com.android.settingslib.R.string.power_remaining_charging_duration_only,
+                    timeString);
             info.chargeLabel = chargeTimeMs <= 0 ? info.batteryPercentString
                     : context.getString(resId, info.batteryPercentString, timeString);
         } else if (dockDefenderMode == BatteryUtils.DockDefenderMode.FUTURE_BYPASS) {
             // Dock defender will be triggered in the future, charging will be optimized.
-            info.chargeLabel = context.getString(R.string.power_charging_future_paused,
+            info.chargeLabel = context.getString(
+                    com.android.settingslib.R.string.power_charging_future_paused,
                     info.batteryPercentString);
         } else {
             final String chargeStatusLabel = Utils.getBatteryStatus(context, batteryBroadcast,
                     compactStatus);
             info.remainingLabel = null;
             info.chargeLabel = info.batteryLevel == 100 ? info.batteryPercentString :
-                    resources.getString(R.string.power_charging, info.batteryPercentString,
-                            chargeStatusLabel);
+                    resources.getString(com.android.settingslib.R.string.power_charging,
+                            info.batteryPercentString, chargeStatusLabel);
         }
     }
 

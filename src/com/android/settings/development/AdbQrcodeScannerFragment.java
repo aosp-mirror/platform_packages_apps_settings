@@ -177,7 +177,7 @@ public class AdbQrcodeScannerFragment extends WifiDppQrCodeBaseFragment implemen
         mVerifyingTextView = view.findViewById(R.id.verifying_textview);
 
         setHeaderTitle(R.string.wifi_dpp_scan_qr_code);
-        mSummary.setText(R.string.adb_wireless_qrcode_pairing_description);
+        mSummary.setText(com.android.settingslib.R.string.adb_wireless_qrcode_pairing_description);
 
         mErrorMessage = view.findViewById(R.id.error_message);
     }

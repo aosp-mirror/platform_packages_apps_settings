@@ -72,7 +72,8 @@ public class AccessibilityFooterPreferenceControllerTest {
         mPreference.setTitle(TEST_TITLE);
 
         final LayoutInflater inflater = LayoutInflater.from(mContext);
-        final View view = inflater.inflate(R.layout.preference_footer, null);
+        final View view = inflater.inflate(
+                com.android.settingslib.widget.R.layout.preference_footer, null);
         mPreferenceViewHolder = PreferenceViewHolder.createInstanceForTests(view);
         mPreference.onBindViewHolder(mPreferenceViewHolder);
 

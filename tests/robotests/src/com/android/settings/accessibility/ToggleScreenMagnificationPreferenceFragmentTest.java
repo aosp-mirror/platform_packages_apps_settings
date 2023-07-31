@@ -559,7 +559,7 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
     }
 
     private AlertDialog createEditShortcutDialog(Context context) {
-        context.setTheme(R.style.Theme_AppCompat);
+        context.setTheme(androidx.appcompat.R.style.Theme_AppCompat);
         return AccessibilityDialogUtils.showEditShortcutDialog(
                 context,
                 DialogType.EDIT_SHORTCUT_MAGNIFICATION, PLACEHOLDER_DIALOG_TITLE,

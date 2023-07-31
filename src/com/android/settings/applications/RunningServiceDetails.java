@@ -226,8 +226,8 @@ public class RunningServiceDetails extends InstrumentedFragment
 
     void addServicesHeader() {
         if (mNumServices == 0) {
-            mServicesHeader = (TextView) mInflater.inflate(R.layout.preference_category,
-                    mAllDetails, false);
+            mServicesHeader = (TextView) mInflater.inflate(
+                    androidx.preference.R.layout.preference_category, mAllDetails, false);
             mServicesHeader.setText(R.string.runningservicedetails_services_title);
             mAllDetails.addView(mServicesHeader);
         }
@@ -236,8 +236,8 @@ public class RunningServiceDetails extends InstrumentedFragment
 
     void addProcessesHeader() {
         if (mNumProcesses == 0) {
-            mProcessesHeader = (TextView) mInflater.inflate(R.layout.preference_category,
-                    mAllDetails, false);
+            mProcessesHeader = (TextView) mInflater.inflate(
+                    androidx.preference.R.layout.preference_category, mAllDetails, false);
             mProcessesHeader.setText(R.string.runningservicedetails_processes_title);
             mAllDetails.addView(mProcessesHeader);
         }

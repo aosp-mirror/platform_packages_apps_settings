@@ -28,7 +28,6 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 
-import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
@@ -56,8 +55,10 @@ public class GrammaticalGenderPreferenceController extends DeveloperOptionsPrefe
             IActivityManager activityManager) {
         super(context);
 
-        mListValues = context.getResources().getStringArray(R.array.grammatical_gender_values);
-        mListSummaries = context.getResources().getStringArray(R.array.grammatical_gender_entries);
+        mListValues = context.getResources()
+                .getStringArray(com.android.settingslib.R.array.grammatical_gender_values);
+        mListSummaries = context.getResources()
+                .getStringArray(com.android.settingslib.R.array.grammatical_gender_entries);
         mActivityManager = activityManager;
     }
 

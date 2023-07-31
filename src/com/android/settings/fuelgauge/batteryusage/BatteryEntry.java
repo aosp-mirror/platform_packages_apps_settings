@@ -510,7 +510,8 @@ public class BatteryEntry {
             Context context, String name, final int uid) {
         Drawable icon = context.getDrawable(R.drawable.ic_power_system);
         if (uid == 0) {
-            name = context.getResources().getString(R.string.process_kernel_label);
+            name = context.getResources()
+                    .getString(com.android.settingslib.R.string.process_kernel_label);
         } else if (uid == BatteryUtils.UID_REMOVED_APPS) {
             name = context.getResources().getString(R.string.process_removed_apps);
         } else if (uid == BatteryUtils.UID_TETHERING) {

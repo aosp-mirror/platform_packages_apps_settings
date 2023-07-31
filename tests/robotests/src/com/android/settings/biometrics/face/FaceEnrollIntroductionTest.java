@@ -385,7 +385,8 @@ public class FaceEnrollIntroductionTest {
     @Test
     public void testFaceEnrollIntroduction_hasBottomScrollView() {
         setupActivity();
-        BottomScrollView scrollView = getGlifLayout(mActivity).findViewById(R.id.sud_scroll_view);
+        BottomScrollView scrollView = getGlifLayout(mActivity)
+                .findViewById(com.google.android.setupdesign.R.id.sud_scroll_view);
 
         assertThat(scrollView).isNotNull();
         assertThat(scrollView.getVisibility()).isEqualTo(View.VISIBLE);

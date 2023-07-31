@@ -109,7 +109,7 @@ public class RemoteMediaSlice implements CustomSliceable {
         }
         final CharSequence castVolume = mContext.getText(R.string.remote_media_volume_option_title);
         final IconCompat icon = IconCompat.createWithResource(mContext,
-                R.drawable.ic_volume_remote);
+                com.android.settingslib.R.drawable.ic_volume_remote);
         // To create an empty icon to indent the row
         final IconCompat emptyIcon = createEmptyIcon();
         for (RoutingSessionInfo info : infos) {
@@ -199,7 +199,8 @@ public class RemoteMediaSlice implements CustomSliceable {
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         final SliceAction primarySliceAction = SliceAction.createDeeplink(
                 primaryBroadcastIntent,
-                IconCompat.createWithResource(mContext, R.drawable.ic_volume_remote),
+                IconCompat.createWithResource(
+                        mContext, com.android.settingslib.R.drawable.ic_volume_remote),
                 ListBuilder.ICON_IMAGE,
                 mContext.getString(R.string.media_output_label_title,
                         Utils.getApplicationLabel(mContext, info.getClientPackageName())));

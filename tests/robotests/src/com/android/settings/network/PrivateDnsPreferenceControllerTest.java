@@ -211,7 +211,8 @@ public class PrivateDnsPreferenceControllerTest {
         ConnectivitySettingsManager.setPrivateDnsHostname(mContext, HOSTNAME);
         mController.updateState(mPreference);
         verify(mController, atLeastOnce()).getSummary();
-        verify(mPreference).setSummary(getResourceString(R.string.private_dns_mode_off));
+        verify(mPreference).setSummary(getResourceString(
+                com.android.settingslib.R.string.private_dns_mode_off));
     }
 
     @Test
@@ -221,7 +222,8 @@ public class PrivateDnsPreferenceControllerTest {
         ConnectivitySettingsManager.setPrivateDnsHostname(mContext, HOSTNAME);
         mController.updateState(mPreference);
         verify(mController, atLeastOnce()).getSummary();
-        verify(mPreference).setSummary(getResourceString(R.string.private_dns_mode_opportunistic));
+        verify(mPreference).setSummary(getResourceString(
+                com.android.settingslib.R.string.private_dns_mode_opportunistic));
 
         LinkProperties lp = mock(LinkProperties.class);
         when(lp.getValidatedPrivateDnsServers()).thenReturn(NON_EMPTY_ADDRESS_LIST);
@@ -234,7 +236,8 @@ public class PrivateDnsPreferenceControllerTest {
         when(lp.getValidatedPrivateDnsServers()).thenReturn(Collections.emptyList());
         updateLinkProperties(lp);
         mController.updateState(mPreference);
-        verify(mPreference).setSummary(getResourceString(R.string.private_dns_mode_opportunistic));
+        verify(mPreference).setSummary(getResourceString(
+                com.android.settingslib.R.string.private_dns_mode_opportunistic));
     }
 
     @Test
@@ -244,8 +247,8 @@ public class PrivateDnsPreferenceControllerTest {
         ConnectivitySettingsManager.setPrivateDnsHostname(mContext, HOSTNAME);
         mController.updateState(mPreference);
         verify(mController, atLeastOnce()).getSummary();
-        verify(mPreference).setSummary(
-                getResourceString(R.string.private_dns_mode_provider_failure));
+        verify(mPreference).setSummary(getResourceString(
+                com.android.settingslib.R.string.private_dns_mode_provider_failure));
 
         LinkProperties lp = mock(LinkProperties.class);
         when(lp.getValidatedPrivateDnsServers()).thenReturn(NON_EMPTY_ADDRESS_LIST);
@@ -258,8 +261,8 @@ public class PrivateDnsPreferenceControllerTest {
         when(lp.getValidatedPrivateDnsServers()).thenReturn(Collections.emptyList());
         updateLinkProperties(lp);
         mController.updateState(mPreference);
-        verify(mPreference).setSummary(
-                getResourceString(R.string.private_dns_mode_provider_failure));
+        verify(mPreference).setSummary(getResourceString(
+                com.android.settingslib.R.string.private_dns_mode_provider_failure));
     }
 
     @Test
@@ -269,7 +272,8 @@ public class PrivateDnsPreferenceControllerTest {
         ConnectivitySettingsManager.setPrivateDnsHostname(mContext, "");
         mController.updateState(mPreference);
         verify(mController, atLeastOnce()).getSummary();
-        verify(mPreference).setSummary(getResourceString(R.string.private_dns_mode_opportunistic));
+        verify(mPreference).setSummary(getResourceString(
+                com.android.settingslib.R.string.private_dns_mode_opportunistic));
 
         reset(mController);
         reset(mPreference);
@@ -277,7 +281,8 @@ public class PrivateDnsPreferenceControllerTest {
         ConnectivitySettingsManager.setPrivateDnsDefaultMode(mContext, PRIVATE_DNS_MODE_OFF);
         mController.updateState(mPreference);
         verify(mController, atLeastOnce()).getSummary();
-        verify(mPreference).setSummary(getResourceString(R.string.private_dns_mode_off));
+        verify(mPreference).setSummary(getResourceString(
+                com.android.settingslib.R.string.private_dns_mode_off));
 
         reset(mController);
         reset(mPreference);
@@ -287,7 +292,8 @@ public class PrivateDnsPreferenceControllerTest {
         ConnectivitySettingsManager.setPrivateDnsMode(mContext, PRIVATE_DNS_MODE_OPPORTUNISTIC);
         mController.updateState(mPreference);
         verify(mController, atLeastOnce()).getSummary();
-        verify(mPreference).setSummary(getResourceString(R.string.private_dns_mode_opportunistic));
+        verify(mPreference).setSummary(getResourceString(
+                com.android.settingslib.R.string.private_dns_mode_opportunistic));
     }
 
     @Ignore

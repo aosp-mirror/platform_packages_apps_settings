@@ -24,7 +24,6 @@ import android.view.ThreadedRenderer;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 
-import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 import com.android.settingslib.development.SystemPropPoker;
@@ -41,8 +40,10 @@ public class DebugNonRectClipOperationsPreferenceController extends
     public DebugNonRectClipOperationsPreferenceController(Context context) {
         super(context);
 
-        mListValues = context.getResources().getStringArray(R.array.show_non_rect_clip_values);
-        mListSummaries = context.getResources().getStringArray(R.array.show_non_rect_clip_entries);
+        mListValues = context.getResources().getStringArray(
+                com.android.settingslib.R.array.show_non_rect_clip_values);
+        mListSummaries = context.getResources().getStringArray(
+                com.android.settingslib.R.array.show_non_rect_clip_entries);
     }
 
     @Override

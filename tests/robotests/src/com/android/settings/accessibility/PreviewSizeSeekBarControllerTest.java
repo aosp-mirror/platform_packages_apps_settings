@@ -43,7 +43,6 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settings.testutils.shadow.ShadowInteractionJankMonitor;
 import com.android.settings.widget.LabeledSeekBarPreference;
-import com.android.settings.widget.SeekBarPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -91,7 +90,7 @@ public class PreviewSizeSeekBarControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mContext.setTheme(R.style.Theme_AppCompat);
+        mContext.setTheme(androidx.appcompat.R.style.Theme_AppCompat);
         mFragment = spy(new TestFragment());
         when(mFragment.getPreferenceManager()).thenReturn(mPreferenceManager);
         when(mFragment.getPreferenceManager().getContext()).thenReturn(mContext);

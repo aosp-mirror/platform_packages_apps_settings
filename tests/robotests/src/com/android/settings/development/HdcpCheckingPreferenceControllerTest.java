@@ -16,8 +16,7 @@
 
 package com.android.settings.development;
 
-import static com.android.settings.development.HdcpCheckingPreferenceController
-        .HDCP_CHECKING_PROPERTY;
+import static com.android.settings.development.HdcpCheckingPreferenceController.HDCP_CHECKING_PROPERTY;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -31,8 +30,6 @@ import android.os.SystemProperties;
 
 import androidx.preference.ListPreference;
 import androidx.preference.PreferenceScreen;
-
-import com.android.settings.R;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -69,8 +66,10 @@ public class HdcpCheckingPreferenceControllerTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mValues = mContext.getResources().getStringArray(R.array.hdcp_checking_values);
-        mSummaries = mContext.getResources().getStringArray(R.array.hdcp_checking_summaries);
+        mValues = mContext.getResources().getStringArray(
+                com.android.settingslib.R.array.hdcp_checking_values);
+        mSummaries = mContext.getResources().getStringArray(
+                com.android.settingslib.R.array.hdcp_checking_summaries);
         mController = new HdcpCheckingPreferenceController(mContext);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         mController.displayPreference(mScreen);

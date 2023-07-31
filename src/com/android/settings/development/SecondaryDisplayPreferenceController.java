@@ -23,8 +23,8 @@ import android.text.TextUtils;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 
-import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.R;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
 public class SecondaryDisplayPreferenceController extends DeveloperOptionsPreferenceController

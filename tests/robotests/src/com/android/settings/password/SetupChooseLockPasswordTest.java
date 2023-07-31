@@ -111,7 +111,7 @@ public class SetupChooseLockPasswordTest {
     public void createActivity_withShowOptionsButtonExtra_shouldShowButtonUnderSudHeader() {
         SetupChooseLockPassword activity = createSetupChooseLockPassword();
         final LinearLayout headerLayout = activity.findViewById(
-                R.id.sud_layout_header);
+                com.google.android.setupdesign.R.id.sud_layout_header);
         assertThat(headerLayout).isNotNull();
 
         final Button optionsButton = headerLayout.findViewById(R.id.screen_lock_options);
