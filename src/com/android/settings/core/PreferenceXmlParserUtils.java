@@ -17,7 +17,6 @@
 package com.android.settings.core;
 
 import android.annotation.NonNull;
-import android.annotation.Nullable;
 import android.annotation.XmlRes;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -26,11 +25,9 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.util.TypedValue;
 import android.util.Xml;
 
 import androidx.annotation.IntDef;
-import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 
@@ -50,8 +47,7 @@ import java.util.List;
 public class PreferenceXmlParserUtils {
 
     private static final String TAG = "PreferenceXmlParserUtil";
-    @VisibleForTesting
-    static final String PREF_SCREEN_TAG = "PreferenceScreen";
+    public static final String PREF_SCREEN_TAG = "PreferenceScreen";
     private static final List<String> SUPPORTED_PREF_TYPES = Arrays.asList(
             "Preference", "PreferenceCategory", "PreferenceScreen",
             "com.android.settings.widget.WorkOnlyCategory");
@@ -71,7 +67,9 @@ public class PreferenceXmlParserUtils {
             MetadataFlag.FLAG_NEED_PREF_TITLE,
             MetadataFlag.FLAG_NEED_PREF_SUMMARY,
             MetadataFlag.FLAG_NEED_PREF_ICON,
+            MetadataFlag.FLAG_NEED_KEYWORDS,
             MetadataFlag.FLAG_NEED_SEARCHABLE,
+            MetadataFlag.FLAG_NEED_PREF_APPEND,
             MetadataFlag.FLAG_UNAVAILABLE_SLICE_SUBTITLE,
             MetadataFlag.FLAG_FOR_WORK,
             MetadataFlag.FLAG_NEED_HIGHLIGHTABLE_MENU_KEY,
@@ -108,70 +106,6 @@ public class PreferenceXmlParserUtils {
     public static final String METADATA_FOR_WORK = "for_work";
     public static final String METADATA_HIGHLIGHTABLE_MENU_KEY = "highlightable_menu_key";
     public static final String METADATA_USER_RESTRICTION = "userRestriction";
-
-    private static final String ENTRIES_SEPARATOR = "|";
-
-    /**
-     * Call {@link #extractMetadata(Context, int, int)} with {@link #METADATA_KEY} instead.
-     */
-    @Deprecated
-    public static String getDataKey(Context context, AttributeSet attrs) {
-        return getStringData(context, attrs,
-                com.android.internal.R.styleable.Preference,
-                com.android.internal.R.styleable.Preference_key);
-    }
-
-    /**
-     * Call {@link #extractMetadata(Context, int, int)} with {@link #METADATA_TITLE} instead.
-     */
-    @Deprecated
-    public static String getDataTitle(Context context, AttributeSet attrs) {
-        return getStringData(context, attrs,
-                com.android.internal.R.styleable.Preference,
-                com.android.internal.R.styleable.Preference_title);
-    }
-
-    /**
-     * Call {@link #extractMetadata(Context, int, int)} with {@link #METADATA_SUMMARY} instead.
-     */
-    @Deprecated
-    public static String getDataSummary(Context context, AttributeSet attrs) {
-        return getStringData(context, attrs,
-                com.android.internal.R.styleable.Preference,
-                com.android.internal.R.styleable.Preference_summary);
-    }
-
-    public static String getDataSummaryOn(Context context, AttributeSet attrs) {
-        return getStringData(context, attrs,
-                com.android.internal.R.styleable.CheckBoxPreference,
-                com.android.internal.R.styleable.CheckBoxPreference_summaryOn);
-    }
-
-    public static String getDataSummaryOff(Context context, AttributeSet attrs) {
-        return getStringData(context, attrs,
-                com.android.internal.R.styleable.CheckBoxPreference,
-                com.android.internal.R.styleable.CheckBoxPreference_summaryOff);
-    }
-
-    public static String getDataEntries(Context context, AttributeSet attrs) {
-        return getDataEntries(context, attrs,
-                com.android.internal.R.styleable.ListPreference,
-                com.android.internal.R.styleable.ListPreference_entries);
-    }
-
-    public static String getDataKeywords(Context context, AttributeSet attrs) {
-        return getStringData(context, attrs, R.styleable.Preference,
-                R.styleable.Preference_keywords);
-    }
-
-    /**
-     * Call {@link #extractMetadata(Context, int, int)} with {@link #METADATA_CONTROLLER} instead.
-     */
-    @Deprecated
-    public static String getController(Context context, AttributeSet attrs) {
-        return getStringData(context, attrs, R.styleable.Preference,
-                R.styleable.Preference_controller);
-    }
 
     /**
      * Extracts metadata from preference xml and put them into a {@link Bundle}.
@@ -276,43 +210,8 @@ public class PreferenceXmlParserUtils {
         return metadata;
     }
 
-    /**
-     * Call {@link #extractMetadata(Context, int, int)} with a {@link MetadataFlag} instead.
-     */
-    @Deprecated
-    @Nullable
-    private static String getStringData(Context context, AttributeSet set, int[] attrs, int resId) {
-        final TypedArray ta = context.obtainStyledAttributes(set, attrs);
-        String data = ta.getString(resId);
-        ta.recycle();
-        return data;
-    }
-
     private static boolean hasFlag(int flags, @MetadataFlag int flag) {
         return (flags & flag) != 0;
-    }
-
-    private static String getDataEntries(Context context, AttributeSet set, int[] attrs,
-            int resId) {
-        final TypedArray sa = context.obtainStyledAttributes(set, attrs);
-        final TypedValue tv = sa.peekValue(resId);
-        sa.recycle();
-        String[] data = null;
-        if (tv != null && tv.type == TypedValue.TYPE_REFERENCE) {
-            if (tv.resourceId != 0) {
-                data = context.getResources().getStringArray(tv.resourceId);
-            }
-        }
-        final int count = (data == null) ? 0 : data.length;
-        if (count == 0) {
-            return null;
-        }
-        final StringBuilder result = new StringBuilder();
-        for (int n = 0; n < count; n++) {
-            result.append(data[n]);
-            result.append(ENTRIES_SEPARATOR);
-        }
-        return result.toString();
     }
 
     private static String getKey(TypedArray styledAttributes) {
