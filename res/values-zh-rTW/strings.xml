@@ -379,7 +379,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"已新增臉孔和「<xliff:g id="WATCH">%s</xliff:g>」"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"已新增臉孔、指紋和「<xliff:g id="WATCH">%s</xliff:g>」"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"已新增臉孔、指紋和「<xliff:g id="WATCH">%s</xliff:g>」"</string>
-    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"人臉和指紋解鎖"</string>
+    <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"指紋與人臉解鎖"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"用於工作資料夾的人臉和指紋解鎖"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"需要設定"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"已新增臉孔和指紋"</string>
@@ -536,10 +536,7 @@
     <string name="face_unlock_set_unlock_pin" msgid="9034912683791069602">"PIN 碼 • 人臉解鎖"</string>
     <string name="face_unlock_set_unlock_password" msgid="5874950853246424756">"密碼 • 人臉解鎖"</string>
     <string name="face_unlock_skip_face" msgid="189695556498300008">"繼續但不設定人臉解鎖功能"</string>
-    <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"解鎖圖案 • 人臉 • 指紋"</string>
-    <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"PIN 碼 • 人臉 • 指紋"</string>
-    <string name="biometrics_unlock_set_unlock_password" msgid="4612217647465743624">"密碼 • 人臉 • 指紋"</string>
-    <string name="biometrics_unlock_skip_biometrics" msgid="7785643433551409223">"繼續但不設定人臉或指紋解鎖"</string>
+    <string name="biometrics_unlock_skip_biometrics" msgid="7399882488272450182">"不設定指紋與人臉解鎖並繼續操作"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"無"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"滑動"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="1926480143883094896">"圖案"</string>
@@ -993,6 +990,8 @@
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"關閉"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"螢幕白平衡"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
+    <string name="stay_awake_on_fold_title" msgid="4195536619511589471">"摺疊時保持解鎖狀態"</string>
+    <string name="stay_awake_on_fold_summary" msgid="2413928869516675293">"摺疊時讓封面螢幕保持解鎖狀態，直到螢幕自動關閉為止"</string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"流暢顯示"</string>
     <string name="peak_refresh_rate_summary" msgid="3627278682437562787">"自動將某些內容的刷新率從 60 Hz 調高到 <xliff:g id="ID_1">%1$s</xliff:g> Hz。請注意，開啟這項設定會增加電池用量。"</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"強制使用最高重新整理頻率"</string>
@@ -1463,18 +1462,12 @@
     <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"一併使用圖案解鎖這部裝置"</string>
     <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"一併使用 PIN 碼解鎖這部裝置"</string>
     <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="2066701840753591922">"一併使用密碼解鎖這部裝置"</string>
-    <!-- no translation found for lockpassword_confirm_repair_mode_pattern_header (6669435143987988314) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_repair_mode_pin_header (2585263648322879131) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_repair_mode_password_header (3064676176428495228) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_repair_mode_pattern_details (6187536224419477465) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_repair_mode_pin_details (203022189107305807) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_repair_mode_password_details (4860219600771003873) -->
-    <skip />
+    <string name="lockpassword_confirm_repair_mode_pattern_header" msgid="6669435143987988314">"驗證解鎖圖案"</string>
+    <string name="lockpassword_confirm_repair_mode_pin_header" msgid="2585263648322879131">"驗證 PIN 碼"</string>
+    <string name="lockpassword_confirm_repair_mode_password_header" msgid="3064676176428495228">"驗證密碼"</string>
+    <string name="lockpassword_confirm_repair_mode_pattern_details" msgid="6187536224419477465">"畫出裝置解鎖圖案即可繼續"</string>
+    <string name="lockpassword_confirm_repair_mode_pin_details" msgid="203022189107305807">"輸入裝置 PIN 碼即可繼續"</string>
+    <string name="lockpassword_confirm_repair_mode_password_details" msgid="4860219600771003873">"輸入裝置密碼即可繼續"</string>
     <string name="lockpassword_invalid_pin" msgid="7530854476819820600">"PIN 碼錯誤"</string>
     <string name="lockpassword_invalid_password" msgid="1588184930542221687">"密碼錯誤"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="8109305107409924083">"圖案錯誤"</string>
@@ -1847,7 +1840,7 @@
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"使用快速手勢放大畫面"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"使用快速手勢並輕觸三下即可放大畫面"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"關於「<xliff:g id="SERVICE">%1$s</xliff:g>」"</string>
-    <string name="accessibility_text_reading_options_title" msgid="3224648909213325563">"螢幕大小和文字"</string>
+    <string name="accessibility_text_reading_options_title" msgid="3224648909213325563">"顯示大小和文字"</string>
     <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"變更文字的顯示方式"</string>
     <string name="accessibility_text_reading_preview_mail_subject" msgid="4597374768612733616">"主旨：熱氣球設計案"</string>
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"寄件者：阿比"</string>
@@ -2933,6 +2926,7 @@
     <string name="keywords_app_pinning" msgid="1564144561464945019">"螢幕固定"</string>
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"Work 驗證、Work、設定檔"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"工作資料夾, 受管理設定檔, 整合, 整合, Work, 設定檔"</string>
+    <string name="keywords_stay_awake_on_lock" msgid="6338367464776295697">"不鎖定螢幕, 休眠, 不鎖定, 摺疊時保持解鎖狀態, 摺疊狀態, 關閉狀態, 摺疊, 關閉, 關閉螢幕"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"手勢"</string>
     <string name="keywords_wallet" msgid="3757421969956996972">"錢包"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"支付、輕觸、付款"</string>
@@ -4155,7 +4149,7 @@
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
     <string name="enable_angle_as_system_driver" msgid="3985105681812713612">"啟用 ANGLE"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="4173041926052925436">"啟用 ANGLE 做為系統 OpenGL ES 驅動程式"</string>
+    <string name="enable_angle_as_system_driver_summary" msgid="6413038127558166972">"啟用 ANGLE 做為預設 OpenGL ES 驅動程式。在不相容的裝置上啟用 ANGLE，可能會導致某些應用程式受損。"</string>
     <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"需要重新啟動才能變更系統 OpenGL ES 驅動程式"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"應用程式相容性變更"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"切換應用程式相容性變更"</string>
@@ -4703,6 +4697,24 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"解除安裝應用程式"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{過去 # 個月內安裝的應用程式}other{過去 # 個月內安裝的應用程式}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{超過 # 個月前安裝的應用程式}other{超過 # 個月前安裝的應用程式}}"</string>
+    <!-- no translation found for screen_size_title (2152383810632443047) -->
+    <skip />
+    <!-- no translation found for screen_size_summary (2037727675540344412) -->
+    <skip />
+    <!-- no translation found for user_aspect_ratio_suggested_apps_label (8085934042329632039) -->
+    <skip />
+    <!-- no translation found for user_aspect_ratio_overridden_apps_label (1564914138276629704) -->
+    <skip />
+    <!-- no translation found for user_aspect_ratio_app_default (270065763307617837) -->
+    <skip />
+    <!-- no translation found for user_aspect_ratio_half_screen (2154061661380605966) -->
+    <skip />
+    <!-- no translation found for user_aspect_ratio_16_9 (2286644872775170164) -->
+    <skip />
+    <!-- no translation found for user_aspect_ratio_3_2 (199262962518318932) -->
+    <skip />
+    <!-- no translation found for user_aspect_ratio_4_3 (5196232982878982220) -->
+    <skip />
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"指紋感應器"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"閃光燈通知"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"關於閃光燈通知"</string>
