@@ -27,7 +27,6 @@ import android.provider.SearchIndexableResource;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.safetycenter.SafetyCenterUtils.EnterpriseOverrideString;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.security.LockUnificationPreferenceController;
 import com.android.settings.security.trustagent.TrustAgentListPreferenceController;
@@ -73,24 +72,8 @@ public class MoreSecurityPrivacyFragment extends DashboardFragment {
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        List<EnterpriseOverrideString> privacyOverrideStrings =
-                SafetyCenterUtils.getEnterpriseOverrideStringForPrivacyEntries();
-        for (int i = 0; i < privacyOverrideStrings.size(); i++) {
-            EnterpriseOverrideString overrideString = privacyOverrideStrings.get(i);
-            replaceEnterpriseStringTitle(
-                    overrideString.getPreferenceKey(),
-                    overrideString.getOverrideKey(),
-                    overrideString.getResource());
-        }
-        List<EnterpriseOverrideString> securityOverrideStrings =
-                SafetyCenterUtils.getEnterpriseOverrideStringForSecurityEntries();
-        for (int i = 0; i < securityOverrideStrings.size(); i++) {
-            EnterpriseOverrideString overrideString = securityOverrideStrings.get(i);
-            replaceEnterpriseStringTitle(
-                    overrideString.getPreferenceKey(),
-                    overrideString.getOverrideKey(),
-                    overrideString.getResource());
-        }
+        SafetyCenterUtils.replaceEnterpriseStringsForPrivacyEntries(this);
+        SafetyCenterUtils.replaceEnterpriseStringsForSecurityEntries(this);
     }
 
     /** see confirmPatternThenDisableAndClear */
