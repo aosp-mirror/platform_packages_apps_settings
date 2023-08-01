@@ -200,7 +200,7 @@ public class AccessibilitySettingsTest {
     }
 
     @Test
-    public void getServiceSummary_enableServiceShortcutOn_showsServiceEnabledShortcutOn() {
+    public void getServiceSummary_enableServiceShortcutOnWithEmptyDescription_showsServiceEnabled() {
         doReturn(EMPTY_STRING).when(mServiceInfo).loadSummary(any());
         setShortcutEnabled(mServiceInfo.getComponentName(), true);
 
@@ -208,27 +208,23 @@ public class AccessibilitySettingsTest {
                 mServiceInfo, SERVICE_ENABLED).toString();
 
         assertThat(summary).isEqualTo(
-                mContext.getString(R.string.preference_summary_default_combination,
-                        mContext.getString(R.string.generic_accessibility_service_on),
-                        mContext.getString(R.string.accessibility_summary_shortcut_enabled)));
+                mContext.getString(R.string.generic_accessibility_service_on));
     }
 
     @Test
-    public void getServiceSummary_enableServiceShortcutOff_showsServiceEnabledShortcutOff() {
+    public void getServiceSummary_enableServiceShortcutOffWithEmptyDescription_showsServiceEnabled() {
         doReturn(EMPTY_STRING).when(mServiceInfo).loadSummary(any());
         setShortcutEnabled(mServiceInfo.getComponentName(), false);
 
-        String summary = AccessibilitySettings.getServiceSummary(mContext,
-                mServiceInfo, SERVICE_ENABLED).toString();
+        String summary = AccessibilitySettings.getServiceSummary(
+                mContext, mServiceInfo, SERVICE_ENABLED).toString();
 
         assertThat(summary).isEqualTo(
-                mContext.getString(R.string.preference_summary_default_combination,
-                        mContext.getString(R.string.generic_accessibility_service_on),
-                        mContext.getString(R.string.generic_accessibility_feature_shortcut_off)));
+                mContext.getString(R.string.generic_accessibility_service_on));
     }
 
     @Test
-    public void getServiceSummary_disableServiceShortcutOff_showsDisabledShortcutOff() {
+    public void getServiceSummary_disableServiceShortcutOffWithEmptyDescription_showsServiceDisabled() {
         doReturn(EMPTY_STRING).when(mServiceInfo).loadSummary(any());
         setShortcutEnabled(mServiceInfo.getComponentName(), false);
 
@@ -236,13 +232,11 @@ public class AccessibilitySettingsTest {
                 mServiceInfo, SERVICE_DISABLED).toString();
 
         assertThat(summary).isEqualTo(
-                mContext.getString(R.string.preference_summary_default_combination,
-                        mContext.getString(R.string.generic_accessibility_service_off),
-                        mContext.getString(R.string.generic_accessibility_feature_shortcut_off)));
+                mContext.getString(R.string.generic_accessibility_service_off));
     }
 
     @Test
-    public void getServiceSummary_disableServiceShortcutOn_showsDisabledShortcutOn() {
+    public void getServiceSummary_disableServiceShortcutOnWithEmptyDescription_showsServiceDisabled() {
         doReturn(EMPTY_STRING).when(mServiceInfo).loadSummary(any());
         setShortcutEnabled(mServiceInfo.getComponentName(), true);
 
@@ -250,13 +244,11 @@ public class AccessibilitySettingsTest {
                 mServiceInfo, SERVICE_DISABLED).toString();
 
         assertThat(summary).isEqualTo(
-                mContext.getString(R.string.preference_summary_default_combination,
-                        mContext.getString(R.string.generic_accessibility_service_off),
-                        mContext.getString(R.string.accessibility_summary_shortcut_enabled)));
+                mContext.getString(R.string.generic_accessibility_service_off));
     }
 
     @Test
-    public void getServiceSummary_enableServiceShortcutOffAndHasSummary_showsEnabledShortcutOffSummary() {
+    public void getServiceSummary_enableServiceShortcutOffAndHasSummary_showsEnabledSummary() {
         setShortcutEnabled(mServiceInfo.getComponentName(), false);
         doReturn(DEFAULT_SUMMARY).when(mServiceInfo).loadSummary(any());
 
@@ -264,14 +256,13 @@ public class AccessibilitySettingsTest {
                 mServiceInfo, SERVICE_ENABLED).toString();
 
         assertThat(summary).isEqualTo(
-                mContext.getString(R.string.accessibility_feature_full_state_summary,
+                mContext.getString(R.string.preference_summary_default_combination,
                         mContext.getString(R.string.generic_accessibility_service_on),
-                        mContext.getString(R.string.generic_accessibility_feature_shortcut_off),
                         DEFAULT_SUMMARY));
     }
 
     @Test
-    public void getServiceSummary_enableServiceShortcutOnAndHasSummary_showsEnabledShortcutOnSummary() {
+    public void getServiceSummary_enableServiceShortcutOnAndHasSummary_showsEnabledSummary() {
         doReturn(DEFAULT_SUMMARY).when(mServiceInfo).loadSummary(any());
         setShortcutEnabled(mServiceInfo.getComponentName(), true);
 
@@ -279,14 +270,13 @@ public class AccessibilitySettingsTest {
                 mServiceInfo, SERVICE_ENABLED).toString();
 
         assertThat(summary).isEqualTo(
-                mContext.getString(R.string.accessibility_feature_full_state_summary,
+                mContext.getString(R.string.preference_summary_default_combination,
                         mContext.getString(R.string.generic_accessibility_service_on),
-                        mContext.getString(R.string.accessibility_summary_shortcut_enabled),
                         DEFAULT_SUMMARY));
     }
 
     @Test
-    public void getServiceSummary_disableServiceShortcutOnAndHasSummary_showsDisabledShortcutOnSummary() {
+    public void getServiceSummary_disableServiceShortcutOnAndHasSummary_showsDisabledSummary() {
         doReturn(DEFAULT_SUMMARY).when(mServiceInfo).loadSummary(any());
         setShortcutEnabled(mServiceInfo.getComponentName(), true);
 
@@ -294,14 +284,13 @@ public class AccessibilitySettingsTest {
                 mServiceInfo, SERVICE_DISABLED).toString();
 
         assertThat(summary).isEqualTo(
-                mContext.getString(R.string.accessibility_feature_full_state_summary,
+                mContext.getString(R.string.preference_summary_default_combination,
                         mContext.getString(R.string.generic_accessibility_service_off),
-                        mContext.getString(R.string.accessibility_summary_shortcut_enabled),
                         DEFAULT_SUMMARY));
     }
 
     @Test
-    public void getServiceSummary_disableServiceShortcutOffAndHasSummary_showsDisabledShortcutOffSummary() {
+    public void getServiceSummary_disableServiceShortcutOffAndHasSummary_showsDisabledSummary() {
         setShortcutEnabled(mServiceInfo.getComponentName(), false);
         doReturn(DEFAULT_SUMMARY).when(mServiceInfo).loadSummary(any());
 
@@ -309,9 +298,8 @@ public class AccessibilitySettingsTest {
                 mServiceInfo, SERVICE_DISABLED).toString();
 
         assertThat(summary).isEqualTo(
-                mContext.getString(R.string.accessibility_feature_full_state_summary,
+                mContext.getString(R.string.preference_summary_default_combination,
                         mContext.getString(R.string.generic_accessibility_service_off),
-                        mContext.getString(R.string.generic_accessibility_feature_shortcut_off),
                         DEFAULT_SUMMARY));
     }
 
@@ -334,36 +322,6 @@ public class AccessibilitySettingsTest {
                 mServiceInfo, SERVICE_ENABLED).toString();
 
         assertThat(description).isEqualTo(DEFAULT_DESCRIPTION);
-    }
-
-    @Test
-    public void getA11yShortcutInfoPreferenceSummary_shortcutOn_showsShortcutOnSummary() {
-        doReturn(DEFAULT_SUMMARY).when(mShortcutInfo).loadSummary(any());
-        setShortcutEnabled(COMPONENT_NAME, true);
-
-        String summary = AccessibilitySettings.getA11yShortcutInfoPreferenceSummary(
-                mContext,
-                mShortcutInfo).toString();
-
-        assertThat(summary).isEqualTo(
-                mContext.getString(R.string.preference_summary_default_combination,
-                        mContext.getString(R.string.accessibility_summary_shortcut_enabled),
-                        DEFAULT_SUMMARY));
-    }
-
-    @Test
-    public void getA11yShortcutInfoPreferenceSummary_shortcutOff_showsShortcutOffSummary() {
-        doReturn(DEFAULT_SUMMARY).when(mShortcutInfo).loadSummary(any());
-        setShortcutEnabled(COMPONENT_NAME, false);
-
-        String summary = AccessibilitySettings.getA11yShortcutInfoPreferenceSummary(
-                mContext,
-                mShortcutInfo).toString();
-
-        assertThat(summary).isEqualTo(
-                mContext.getString(R.string.preference_summary_default_combination,
-                        mContext.getString(R.string.generic_accessibility_feature_shortcut_off),
-                        DEFAULT_SUMMARY));
     }
 
     @Test

@@ -159,8 +159,7 @@ public class RestrictedPreferenceHelper {
 
             final String key = componentName.flattenToString();
             final CharSequence title = activityInfo.loadLabel(mPm);
-            final CharSequence summary =
-                    AccessibilitySettings.getA11yShortcutInfoPreferenceSummary(mContext, info);
+            final String summary = info.loadSummary(mPm);
             final String fragment =
                     LaunchAccessibilityActivityPreferenceFragment.class.getName();
 

@@ -51,6 +51,7 @@ public class LiveCaptionPreferenceControllerTest {
         mContext = ApplicationProvider.getApplicationContext();
         mController = new LiveCaptionPreferenceController(mContext, "test_key");
         mLiveCaptionPreference = new Preference(mContext);
+        mLiveCaptionPreference.setSummary(R.string.live_caption_summary);
     }
 
     @Test
@@ -78,10 +79,7 @@ public class LiveCaptionPreferenceControllerTest {
         mController.updateState(mLiveCaptionPreference);
 
         assertThat(mLiveCaptionPreference.getSummary().toString()).isEqualTo(
-                mContext.getString(
-                        R.string.preference_summary_default_combination,
-                        mContext.getString(R.string.live_caption_enabled),
-                        mContext.getText(R.string.live_caption_summary))
+                mContext.getString(R.string.live_caption_summary)
         );
     }
 
@@ -92,10 +90,7 @@ public class LiveCaptionPreferenceControllerTest {
         mController.updateState(mLiveCaptionPreference);
 
         assertThat(mLiveCaptionPreference.getSummary()).isEqualTo(
-                mContext.getString(
-                        R.string.preference_summary_default_combination,
-                        mContext.getString(R.string.live_caption_disabled),
-                        mContext.getText(R.string.live_caption_summary))
+                mContext.getString(R.string.live_caption_summary)
         );
     }
 

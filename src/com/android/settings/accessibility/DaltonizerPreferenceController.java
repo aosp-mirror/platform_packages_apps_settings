@@ -16,8 +16,6 @@
 
 package com.android.settings.accessibility;
 
-import static com.android.internal.accessibility.AccessibilityShortcutController.DALTONIZER_COMPONENT_NAME;
-
 import android.content.Context;
 import android.provider.Settings;
 
@@ -40,10 +38,9 @@ public class DaltonizerPreferenceController extends BasePreferenceController {
 
     @Override
     public CharSequence getSummary() {
-        return AccessibilityUtil.getFeatureFullStateSummary(
-                mContext, DALTONIZER_COMPONENT_NAME,
+        return AccessibilityUtil.getSummary(
+                mContext,
                 DALTONIZER_ENABLED,
-                R.string.daltonizer_state_on, R.string.daltonizer_state_off,
-                R.string.daltonizer_feature_summary);
+                R.string.daltonizer_state_on, R.string.daltonizer_state_off);
     }
 }
