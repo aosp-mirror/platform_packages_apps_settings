@@ -18,12 +18,8 @@ package com.android.settings.password;
 
 import static android.app.admin.DevicePolicyResources.Strings.Settings.CONFIRM_WORK_PROFILE_PASSWORD_HEADER;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.CONFIRM_WORK_PROFILE_PIN_HEADER;
-import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_CONFIRM_PASSWORD;
-import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_CONFIRM_PIN;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_LAST_PASSWORD_ATTEMPT_BEFORE_WIPE;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_LAST_PIN_ATTEMPT_BEFORE_WIPE;
-import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_PASSWORD_REQUIRED;
-import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_PIN_REQUIRED;
 import static android.app.admin.DevicePolicyResources.UNDEFINED;
 
 import static com.android.settings.biometrics.GatekeeperPasswordProvider.containsGatekeeperPasswordHandle;
@@ -75,27 +71,12 @@ import java.util.ArrayList;
 
 public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
 
-    // The index of the array is isStrongAuth << 2 + isManagedProfile << 1 + isAlpha.
+    // The index of the array is isStrongAuth << 1 + isAlpha.
     private static final int[] DETAIL_TEXTS = new int[] {
         R.string.lockpassword_confirm_your_pin_generic,
         R.string.lockpassword_confirm_your_password_generic,
-        R.string.lockpassword_confirm_your_pin_generic_profile,
-        R.string.lockpassword_confirm_your_password_generic_profile,
         R.string.lockpassword_strong_auth_required_device_pin,
         R.string.lockpassword_strong_auth_required_device_password,
-        R.string.lockpassword_strong_auth_required_work_pin,
-        R.string.lockpassword_strong_auth_required_work_password
-    };
-
-    private static final String[] DETAIL_TEXT_OVERRIDES = new String[] {
-            UNDEFINED,
-            UNDEFINED,
-            WORK_PROFILE_CONFIRM_PIN,
-            WORK_PROFILE_CONFIRM_PASSWORD,
-            UNDEFINED,
-            UNDEFINED,
-            WORK_PROFILE_PIN_REQUIRED,
-            WORK_PROFILE_PASSWORD_REQUIRED
     };
 
     public static class InternalActivity extends ConfirmLockPassword {
@@ -200,7 +181,12 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                     detailsMessage = getDefaultDetails();
                 }
                 mGlifLayout.setHeaderText(headerMessage);
-                mGlifLayout.setDescriptionText(detailsMessage);
+
+                if (mIsManagedProfile) {
+                    mGlifLayout.getDescriptionTextView().setVisibility(View.GONE);
+                } else {
+                    mGlifLayout.setDescriptionText(detailsMessage);
+                }
                 mCheckBoxLabel = intent.getCharSequenceExtra(KeyguardManager.EXTRA_CHECKBOX_LABEL);
             }
             int currentType = mPasswordEntry.getInputType();
@@ -323,11 +309,9 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                         : R.string.lockpassword_remote_validation_pin_details);
             }
             boolean isStrongAuthRequired = isStrongAuthRequired();
-            // Map boolean flags to an index by isStrongAuth << 2 + isManagedProfile << 1 + isAlpha.
-            int index = ((isStrongAuthRequired ? 1 : 0) << 2) + ((mIsManagedProfile ? 1 : 0) << 1)
-                    + (mIsAlpha ? 1 : 0);
-            return mDevicePolicyManager.getResources().getString(
-                    DETAIL_TEXT_OVERRIDES[index], () -> getString(DETAIL_TEXTS[index]));
+            // Map boolean flags to an index by isStrongAuth << 1 + isAlpha.
+            int index = ((isStrongAuthRequired ? 1 : 0) << 1) + (mIsAlpha ? 1 : 0);
+            return getString(DETAIL_TEXTS[index]);
         }
 
         private String getDefaultCheckboxLabel() {
