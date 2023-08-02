@@ -98,6 +98,20 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         void onScreenOnTimeUpdated(Long screenOnTime, String slotTimestamp);
     }
 
+    /**
+     * A callback listener for the battery tips card is updated.
+     * This happens when battery tips card is ready.
+     */
+    public interface OnBatteryTipsUpdatedListener {
+        /**
+         * The callback function for the battery tips card is updated.
+         * @param title the title of the battery tip card
+         * @param summary the summary of the battery tip card
+         */
+        void onBatteryTipsUpdated(String title, String summary);
+    }
+
+
     @VisibleForTesting
     Context mPrefContext;
     @VisibleForTesting
@@ -119,6 +133,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     private List<BatteryChartViewModel> mHourlyViewModels;
     private OnBatteryUsageUpdatedListener mOnBatteryUsageUpdatedListener;
     private OnScreenOnTimeUpdatedListener mOnScreenOnTimeUpdatedListener;
+    private OnBatteryTipsUpdatedListener mOnBatteryTipsUpdatedListener;
 
     private final SettingsActivity mActivity;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
@@ -207,6 +222,10 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
 
     void setOnScreenOnTimeUpdatedListener(OnScreenOnTimeUpdatedListener listener) {
         mOnScreenOnTimeUpdatedListener = listener;
+    }
+
+    void setOnBatteryTipsUpdatedListener(OnBatteryTipsUpdatedListener listener) {
+        mOnBatteryTipsUpdatedListener = listener;
     }
 
     void setBatteryHistoryMap(
@@ -344,6 +363,10 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             }
             mOnBatteryUsageUpdatedListener.onBatteryUsageUpdated(
                     slotUsageData, getSlotInformation(), isBatteryUsageMapNullOrEmpty());
+
+            if (mOnBatteryTipsUpdatedListener != null) {
+                mOnBatteryTipsUpdatedListener.onBatteryTipsUpdated(null, null);
+            }
         }
         return true;
     }
