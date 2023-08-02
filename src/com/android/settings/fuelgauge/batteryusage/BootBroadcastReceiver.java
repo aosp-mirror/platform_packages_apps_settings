@@ -83,6 +83,10 @@ public final class BootBroadcastReceiver extends BroadcastReceiver {
             recheckIntent.setClass(context, BootBroadcastReceiver.class);
             final long delayedTime = getRescheduleTimeForBootAction(context);
             mHandler.postDelayed(() -> context.sendBroadcast(recheckIntent), delayedTime);
+
+            // Refreshes the usage source from UsageStatsManager when booting.
+            DatabaseUtils.removeUsageSource(context);
+
             BatteryUsageLogUtils.writeLog(context, Action.RECHECK_JOB, "delay:" + delayedTime);
         } else if (ACTION_SETUP_WIZARD_FINISHED.equals(action)) {
             ElapsedTimeUtils.storeSuwFinishedTimestamp(context, System.currentTimeMillis());
