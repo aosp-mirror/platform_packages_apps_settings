@@ -29,6 +29,7 @@ import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityShortcutPreferenceFragment;
 import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.IllustrationPreference;
 import com.android.settingslib.widget.MainSwitchPreference;
 
@@ -38,6 +39,7 @@ import com.android.settingslib.widget.MainSwitchPreference;
  * <p>The child {@link AccessibilityShortcutPreferenceFragment} shows the actual UI for
  * providing basic accessibility shortcut service setup.
  */
+@SearchIndexable(forTarget = SearchIndexable.MOBILE)
 public class OneHandedSettings extends AccessibilityShortcutPreferenceFragment {
 
     private static final String TAG = "OneHandedSettings";
