@@ -79,8 +79,6 @@ open class FeatureFactoryImpl : FeatureFactory() {
         )
     }
 
-    private val userFeatureProvider by lazy { UserFeatureProviderImpl(appContext) }
-
     private val contextualCardFeatureProvider by lazy {
         ContextualCardFeatureProviderImpl(appContext)
     }
@@ -130,7 +128,7 @@ open class FeatureFactoryImpl : FeatureFactory() {
         SuggestionFeatureProviderImpl()
     }
 
-    override fun getUserFeatureProvider(context: Context) = userFeatureProvider
+    override val userFeatureProvider by lazy { UserFeatureProviderImpl(appContext) }
 
     override val slicesFeatureProvider by lazy { SlicesFeatureProviderImpl() }
 

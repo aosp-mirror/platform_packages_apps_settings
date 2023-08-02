@@ -93,7 +93,7 @@ abstract class FeatureFactory {
     abstract val searchFeatureProvider: SearchFeatureProvider
     abstract fun getSurveyFeatureProvider(context: Context): SurveyFeatureProvider?
     abstract val securityFeatureProvider: SecurityFeatureProvider
-    abstract fun getUserFeatureProvider(context: Context): UserFeatureProvider
+    abstract val userFeatureProvider: UserFeatureProvider
     abstract val slicesFeatureProvider: SlicesFeatureProvider
     abstract val accountFeatureProvider: AccountFeatureProvider
     abstract val panelFeatureProvider: PanelFeatureProvider

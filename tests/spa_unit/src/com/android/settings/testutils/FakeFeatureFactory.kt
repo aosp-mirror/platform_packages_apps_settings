@@ -104,9 +104,8 @@ class FakeFeatureFactory : FeatureFactory() {
     override val securityFeatureProvider: SecurityFeatureProvider
         get() = TODO("Not yet implemented")
 
-    override fun getUserFeatureProvider(context: Context): UserFeatureProvider {
-        TODO("Not yet implemented")
-    }
+    override val userFeatureProvider: UserFeatureProvider
+        get() = TODO("Not yet implemented")
 
     override val slicesFeatureProvider: SlicesFeatureProvider
         get() = TODO("Not yet implemented")

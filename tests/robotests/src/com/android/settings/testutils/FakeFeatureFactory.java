@@ -213,8 +213,9 @@ public class FakeFeatureFactory extends FeatureFactory {
         return securityFeatureProvider;
     }
 
+    @NotNull
     @Override
-    public UserFeatureProvider getUserFeatureProvider(Context context) {
+    public UserFeatureProvider getUserFeatureProvider() {
         return userFeatureProvider;
     }
 
