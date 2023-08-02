@@ -157,7 +157,7 @@ public class StylusUsbFirmwareControllerTest {
         when(mFeatureFactory.getStylusFeatureProvider()
                 .isUsbFirmwareUpdateEnabled(any())).thenReturn(true);
         when(mFeatureFactory.getStylusFeatureProvider()
-                .getUsbFirmwareUpdatePreferences(any()))
+                .getUsbFirmwareUpdatePreferences(any(), any()))
                 .thenReturn(Collections.singletonList(mock(Preference.class)));
     }
 }
