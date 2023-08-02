@@ -61,7 +61,7 @@ import com.android.internal.net.LegacyVpnInfo;
 import com.android.internal.net.VpnConfig;
 import com.android.internal.net.VpnProfile;
 import com.android.settings.R;
-import com.android.settings.RestrictedSettingsFragment;
+import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.GearPreference;
 import com.android.settings.widget.GearPreference.OnGearClickListener;
@@ -80,7 +80,7 @@ import java.util.Set;
  * Settings screen listing VPNs. Configured VPNs and networks managed by apps
  * are shown in the same list.
  */
-public class VpnSettings extends RestrictedSettingsFragment implements
+public class VpnSettings extends RestrictedDashboardFragment implements
         Handler.Callback, Preference.OnPreferenceClickListener {
     private static final String LOG_TAG = "VpnSettings";
     private static final boolean DEBUG = Log.isLoggable(LOG_TAG, Log.DEBUG);
@@ -135,7 +135,6 @@ public class VpnSettings extends RestrictedSettingsFragment implements
         mUnavailable = isUiRestricted();
         setHasOptionsMenu(!mUnavailable);
 
-        addPreferencesFromResource(R.xml.vpn_settings2);
         mPreferenceScreen = getPreferenceScreen();
     }
 
@@ -214,6 +213,16 @@ public class VpnSettings extends RestrictedSettingsFragment implements
         mUpdaterThread.start();
         mUpdater = new Handler(mUpdaterThread.getLooper(), this);
         mUpdater.sendEmptyMessage(RESCAN_MESSAGE);
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.vpn_settings2;
+    }
+
+    @Override
+    protected String getLogTag() {
+        return LOG_TAG;
     }
 
     @Override
