@@ -27,6 +27,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -118,6 +119,8 @@ public class WifiDppQrCodeGeneratorFragment extends WifiDppQrCodeBaseFragment {
 
         final String password = wifiNetworkConfig.getPreSharedKey();
         TextView passwordView = view.findViewById(R.id.password);
+        passwordView.setInputType(
+                InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
         if (TextUtils.isEmpty(password)) {
             mSummary.setText(getString(
                     R.string.wifi_dpp_scan_open_network_qr_code_with_another_device,
