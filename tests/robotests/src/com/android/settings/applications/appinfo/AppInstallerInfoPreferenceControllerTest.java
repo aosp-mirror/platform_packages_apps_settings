@@ -37,7 +37,6 @@ import android.content.pm.ModuleInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.os.UserManager;
 
 import androidx.preference.Preference;
 
@@ -54,8 +53,6 @@ import org.robolectric.RuntimeEnvironment;
 @RunWith(RobolectricTestRunner.class)
 public class AppInstallerInfoPreferenceControllerTest {
 
-    @Mock
-    private UserManager mUserManager;
     @Mock
     private PackageManager mPackageManager;
     @Mock
@@ -74,7 +71,6 @@ public class AppInstallerInfoPreferenceControllerTest {
     public void setUp() throws PackageManager.NameNotFoundException {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
-        when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
         final String installerPackage = "Installer1";
         when(mPackageManager.getInstallSourceInfo(anyString())).thenReturn(mInstallSourceInfo);
@@ -87,17 +83,7 @@ public class AppInstallerInfoPreferenceControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_managedProfile_shouldReturnDisabled() {
-        when(mUserManager.isManagedProfile()).thenReturn(true);
-
-        assertThat(mController.getAvailabilityStatus())
-                .isEqualTo(BasePreferenceController.DISABLED_FOR_USER);
-    }
-
-    @Test
     public void getAvailabilityStatus_noAppLabel_shouldReturnDisabled() {
-        when(mUserManager.isManagedProfile()).thenReturn(false);
-
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.DISABLED_FOR_USER);
     }
@@ -106,7 +92,6 @@ public class AppInstallerInfoPreferenceControllerTest {
     public void getAvailabilityStatus_hasAppLabel_shouldReturnAvailable()
             throws PackageManager.NameNotFoundException {
         final String packageName = "Package1";
-        when(mUserManager.isManagedProfile()).thenReturn(false);
         when(mAppInfo.loadLabel(mPackageManager)).thenReturn("Label1");
         mController = new AppInstallerInfoPreferenceController(mContext, "test_key");
         mController.setPackageName(packageName);
@@ -161,7 +146,6 @@ public class AppInstallerInfoPreferenceControllerTest {
     public void getAvailabilityStatus_isMainlineModule_shouldReturnDisabled()
             throws PackageManager.NameNotFoundException {
         final String packageName = "Package";
-        when(mUserManager.isManagedProfile()).thenReturn(false);
         when(mAppInfo.loadLabel(mPackageManager)).thenReturn("Label");
         mController.setPackageName(packageName);
         mockMainlineModule(packageName, true /* isMainlineModule */);

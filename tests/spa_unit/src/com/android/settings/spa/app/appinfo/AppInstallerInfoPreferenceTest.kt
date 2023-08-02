@@ -19,7 +19,6 @@ package com.android.settings.spa.app.appinfo
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
-import android.os.UserManager
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.test.assertIsDisplayed
@@ -40,16 +39,13 @@ import com.android.settings.Utils
 import com.android.settings.applications.AppStoreUtil
 import com.android.settingslib.applications.AppUtils
 import com.android.settingslib.spa.testutils.waitUntilExists
-import com.android.settingslib.spaprivileged.framework.common.userManager
 import com.android.settingslib.spaprivileged.model.app.userHandle
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mock
 import org.mockito.Mockito.any
-import org.mockito.Mockito.anyInt
 import org.mockito.Mockito.eq
 import org.mockito.Mockito.verify
 import org.mockito.MockitoSession
@@ -67,9 +63,6 @@ class AppInstallerInfoPreferenceTest {
     @Spy
     private val context: Context = ApplicationProvider.getApplicationContext()
 
-    @Mock
-    private lateinit var userManager: UserManager
-
     @Before
     fun setUp() {
         mockSession = mockitoSession()
@@ -79,8 +72,6 @@ class AppInstallerInfoPreferenceTest {
             .mockStatic(AppUtils::class.java)
             .strictness(Strictness.LENIENT)
             .startMocking()
-        whenever(context.userManager).thenReturn(userManager)
-        whenever(userManager.isManagedProfile(anyInt())).thenReturn(false)
         whenever(AppStoreUtil.getInstallerPackageName(any(), eq(PACKAGE_NAME)))
             .thenReturn(INSTALLER_PACKAGE_NAME)
         whenever(AppStoreUtil.getAppStoreLink(context, INSTALLER_PACKAGE_NAME, PACKAGE_NAME))
@@ -108,15 +99,6 @@ class AppInstallerInfoPreferenceTest {
     @Test
     fun whenInstallerLabelIsNull_notDisplayed() {
         whenever(Utils.getApplicationLabel(context, INSTALLER_PACKAGE_NAME)).thenReturn(null)
-
-        setContent()
-
-        composeTestRule.onRoot().assertIsNotDisplayed()
-    }
-
-    @Test
-    fun whenIsManagedProfile_notDisplayed() {
-        whenever(userManager.isManagedProfile(anyInt())).thenReturn(true)
 
         setContent()
 

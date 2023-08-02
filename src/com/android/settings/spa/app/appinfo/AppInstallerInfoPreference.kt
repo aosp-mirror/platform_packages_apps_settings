@@ -32,9 +32,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settingslib.spa.widget.preference.Preference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
 import com.android.settingslib.spaprivileged.framework.common.asUser
-import com.android.settingslib.spaprivileged.framework.common.userManager
 import com.android.settingslib.spaprivileged.model.app.userHandle
-import com.android.settingslib.spaprivileged.model.app.userId
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -71,7 +69,6 @@ private class AppInstallerInfoPresenter(
 ) {
     private val userContext = context.asUser(app.userHandle)
     private val packageManager = userContext.packageManager
-    private val userManager = context.userManager
 
     private val installerPackageFlow = flow {
         emit(withContext(Dispatchers.IO) {
@@ -88,9 +85,8 @@ private class AppInstallerInfoPresenter(
 
     val isAvailableFlow = installerLabelFlow.map { installerLabel ->
         withContext(Dispatchers.IO) {
-            !userManager.isManagedProfile(app.userId) &&
-                !AppUtils.isMainlineModule(packageManager, app.packageName) &&
-                installerLabel != null
+            !AppUtils.isMainlineModule(packageManager, app.packageName) &&
+                    installerLabel != null
         }
     }
 
