@@ -32,7 +32,6 @@ import android.os.BatteryUsageStats;
 import android.os.BatteryUsageStatsQuery;
 import android.os.Process;
 import android.os.RemoteException;
-import android.os.ServiceManager;
 import android.os.UidBatteryConsumer;
 import android.os.UserBatteryConsumer;
 import android.os.UserHandle;
@@ -78,8 +77,6 @@ public final class DataProcessor {
     private static final int MIN_DAILY_DATA_SIZE = 2;
     private static final int MIN_TIMESTAMP_DATA_SIZE = 2;
     private static final int MAX_DIFF_SECONDS_OF_UPPER_TIMESTAMP = 5;
-    // Maximum total time value for each hourly slot cumulative data at most 2 hours.
-    private static final float TOTAL_HOURLY_TIME_THRESHOLD = DateUtils.HOUR_IN_MILLIS * 2;
     private static final long MIN_TIME_SLOT = DateUtils.HOUR_IN_MILLIS * 2;
     private static final String MEDIASERVER_PACKAGE_NAME = "mediaserver";
     private static final String ANDROID_CORE_APPS_SHARED_USER_ID = "android.uid.shared";
@@ -110,11 +107,6 @@ public final class DataProcessor {
 
     @VisibleForTesting
     static Set<String> sTestSystemAppsPackageNames;
-
-    @VisibleForTesting
-    static IUsageStatsManager sUsageStatsManager =
-            IUsageStatsManager.Stub.asInterface(
-                    ServiceManager.getService(Context.USAGE_STATS_SERVICE));
 
     public static final String CURRENT_TIME_BATTERY_HISTORY_PLACEHOLDER =
             "CURRENT_TIME_BATTERY_HISTORY_PLACEHOLDER";
@@ -271,7 +263,7 @@ public final class DataProcessor {
     @Nullable
     public static Map<Integer, Map<Integer, Map<Long, Map<String, List<AppUsagePeriod>>>>>
             generateAppUsagePeriodMap(
-                    final long rawStartTimestamp,
+                    Context context,
                     final List<BatteryLevelData.PeriodBatteryLevelData> hourlyBatteryLevelsPerDay,
                     final List<AppUsageEvent> appUsageEventList,
                     final List<BatteryEvent> batteryEventList) {
@@ -305,7 +297,7 @@ public final class DataProcessor {
                 // The value could be null when there is no data in the hourly slot.
                 dailyMap.put(
                         hourlyIndex,
-                        buildAppUsagePeriodList(hourlyAppUsageEventList, batteryEventList,
+                        buildAppUsagePeriodList(context, hourlyAppUsageEventList, batteryEventList,
                                 startTimestamp, endTimestamp));
             }
         }
@@ -346,8 +338,7 @@ public final class DataProcessor {
                             break;
                         }
                         final AppUsageEvent appUsageEvent =
-                                ConvertUtils.convertToAppUsageEvent(
-                                        context, sUsageStatsManager, event, userId);
+                                ConvertUtils.convertToAppUsageEvent(context, event, userId);
                         if (appUsageEvent != null) {
                             numEventsFetched++;
                             appUsageEventList.add(appUsageEvent);
@@ -661,8 +652,8 @@ public final class DataProcessor {
     @VisibleForTesting
     @Nullable
     static Map<Long, Map<String, List<AppUsagePeriod>>> buildAppUsagePeriodList(
-            final List<AppUsageEvent> appUsageEvents, final List<BatteryEvent> batteryEventList,
-            final long startTime, final long endTime) {
+            Context context, final List<AppUsageEvent> appUsageEvents,
+            final List<BatteryEvent> batteryEventList, final long startTime, final long endTime) {
         if (appUsageEvents.isEmpty()) {
             return null;
         }
@@ -702,7 +693,7 @@ public final class DataProcessor {
             final AppUsageEvent firstEvent = usageEvents.get(0);
             final long eventUserId = firstEvent.getUserId();
             final String packageName = getEffectivePackageName(
-                    sUsageStatsManager,
+                    context,
                     firstEvent.getPackageName(),
                     firstEvent.getTaskRootPackageName());
             usageEvents.addAll(deviceEvents);
@@ -975,7 +966,7 @@ public final class DataProcessor {
         final long startTime = DatabaseUtils.getAppUsageStartTimestampOfUser(
                 context, userID, earliestTimestamp);
         return loadAppUsageEventsForUserFromService(
-                sUsageStatsManager, startTime, now, userID, callingPackage);
+                DatabaseUtils.sUsageStatsManager, startTime, now, userID, callingPackage);
     }
 
     @Nullable

@@ -17,7 +17,6 @@ package com.android.settings.fuelgauge.batteryusage;
 
 import android.annotation.IntDef;
 import android.annotation.Nullable;
-import android.app.usage.IUsageStatsManager;
 import android.app.usage.UsageEvents.Event;
 import android.app.usage.UsageStatsManager;
 import android.content.ContentValues;
@@ -27,7 +26,6 @@ import android.database.Cursor;
 import android.os.BatteryUsageStats;
 import android.os.Build;
 import android.os.LocaleList;
-import android.os.RemoteException;
 import android.os.UserHandle;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
@@ -66,6 +64,12 @@ public final class ConvertUtils {
     public static final int CONSUMER_TYPE_UID_BATTERY = 1;
     public static final int CONSUMER_TYPE_USER_BATTERY = 2;
     public static final int CONSUMER_TYPE_SYSTEM_BATTERY = 3;
+
+    public static final int DEFAULT_USAGE_SOURCE = UsageStatsManager.USAGE_SOURCE_CURRENT_ACTIVITY;
+    public static final int EMPTY_USAGE_SOURCE = -1;
+
+    @VisibleForTesting
+    static int sUsageSource = EMPTY_USAGE_SOURCE;
 
     private ConvertUtils() {
     }
@@ -181,8 +185,7 @@ public final class ConvertUtils {
     /** Converts to {@link AppUsageEvent} from {@link Event} */
     @Nullable
     public static AppUsageEvent convertToAppUsageEvent(
-            Context context, final IUsageStatsManager usageStatsManager, final Event event,
-            final long userId) {
+            Context context, final Event event, final long userId) {
         final String packageName = event.getPackageName();
         if (packageName == null) {
             // See b/190609174: Event package names should never be null, but sometimes they are.
@@ -207,7 +210,7 @@ public final class ConvertUtils {
         }
 
         final String effectivePackageName =
-                getEffectivePackageName(usageStatsManager, packageName, taskRootPackageName);
+                getEffectivePackageName(context, packageName, taskRootPackageName);
         try {
             final long uid = context
                     .getPackageManager()
@@ -323,9 +326,8 @@ public final class ConvertUtils {
      */
     @VisibleForTesting
     static String getEffectivePackageName(
-            final IUsageStatsManager usageStatsManager, final String packageName,
-            final String taskRootPackageName) {
-        int usageSource = getUsageSource(usageStatsManager);
+            Context context, final String packageName, final String taskRootPackageName) {
+        final int usageSource = getUsageSource(context);
         switch (usageSource) {
             case UsageStatsManager.USAGE_SOURCE_TASK_ROOT_ACTIVITY:
                 return !TextUtils.isEmpty(taskRootPackageName)
@@ -370,18 +372,11 @@ public final class ConvertUtils {
         }
     }
 
-    /**
-     * Returns what App Usage Observers will consider the source of usage for an activity.
-     *
-     * @see UsageStatsManager#getUsageSource()
-     */
-    private static int getUsageSource(final IUsageStatsManager usageStatsManager) {
-        try {
-            return usageStatsManager.getUsageSource();
-        } catch (RemoteException e) {
-            Log.e(TAG, "Failed to getUsageSource", e);
-            return UsageStatsManager.USAGE_SOURCE_CURRENT_ACTIVITY;
+    private static int getUsageSource(Context context) {
+        if (sUsageSource == EMPTY_USAGE_SOURCE) {
+            sUsageSource = DatabaseUtils.getUsageSource(context);
         }
+        return sUsageSource;
     }
 
     private static AppUsageEventType getAppUsageEventType(final int eventType) {
