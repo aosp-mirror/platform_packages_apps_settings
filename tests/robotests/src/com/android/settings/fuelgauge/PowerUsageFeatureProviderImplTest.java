@@ -68,6 +68,15 @@ public class PowerUsageFeatureProviderImplTest {
     }
 
     @Test
+    public void testIsBatteryTipsEnabled_returnFalse() {
+        assertThat(mPowerFeatureProvider.isBatteryTipsEnabled()).isFalse();
+    }
+
+    @Test
+    public void testIsBatteryTipsFeedbackEnabled_returnTrue() {
+        assertThat(mPowerFeatureProvider.isBatteryTipsFeedbackEnabled()).isTrue();
+    }
+    @Test
     public void testGetBatteryUsageListConsumePowerThreshold_return0() {
         assertThat(mPowerFeatureProvider.getBatteryUsageListConsumePowerThreshold()).isEqualTo(0.0);
     }
