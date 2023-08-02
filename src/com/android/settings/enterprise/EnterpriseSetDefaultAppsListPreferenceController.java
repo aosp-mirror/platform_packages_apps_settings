@@ -72,7 +72,7 @@ public class EnterpriseSetDefaultAppsListPreferenceController extends
         final FeatureFactory factory = FeatureFactory.getFeatureFactory();
         mApplicationFeatureProvider = factory.getApplicationFeatureProvider();
         mEnterprisePrivacyFeatureProvider = factory.getEnterprisePrivacyFeatureProvider(context);
-        mUserFeatureProvider = factory.getUserFeatureProvider(context);
+        mUserFeatureProvider = factory.getUserFeatureProvider();
         buildAppList();
     }
 
