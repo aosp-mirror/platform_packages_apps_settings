@@ -397,8 +397,8 @@ public class DataProcessManager {
         }
         // Generates the indexed AppUsagePeriod list data for each corresponding time slot for
         // further use.
-        mAppUsagePeriodMap = DataProcessor.generateAppUsagePeriodMap(mRawStartTimestamp,
-                mHourlyBatteryLevelsPerDay, mAppUsageEventList, mBatteryEventList);
+        mAppUsagePeriodMap = DataProcessor.generateAppUsagePeriodMap(
+                mContext, mHourlyBatteryLevelsPerDay, mAppUsageEventList, mBatteryEventList);
     }
 
     private void tryToGenerateFinalDataAndApplyCallback() {
