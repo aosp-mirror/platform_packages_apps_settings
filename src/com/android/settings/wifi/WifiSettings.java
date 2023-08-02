@@ -59,7 +59,6 @@ import com.android.settings.LinkifyUtils;
 import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
 import com.android.settings.SettingsActivity;
-import com.android.settings.Utils;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.datausage.DataUsagePreference;
@@ -175,9 +174,7 @@ public class WifiSettings extends RestrictedSettingsFragment
     };
 
     protected WifiManager mWifiManager;
-    private WifiManager.ActionListener mConnectListener;
     private WifiManager.ActionListener mSaveListener;
-    private WifiManager.ActionListener mForgetListener;
 
     /**
      * The state of {@link #isUiRestricted()} at {@link #onCreate(Bundle)}}. This is neccesary to
@@ -310,8 +307,6 @@ public class WifiSettings extends RestrictedSettingsFragment
             mWifiManager = getActivity().getSystemService(WifiManager.class);
         }
 
-        mConnectListener = new WifiConnectListener(getActivity());
-
         mSaveListener = new WifiManager.ActionListener() {
             @Override
             public void onSuccess() {
@@ -328,21 +323,6 @@ public class WifiSettings extends RestrictedSettingsFragment
             }
         };
 
-        mForgetListener = new WifiManager.ActionListener() {
-            @Override
-            public void onSuccess() {
-            }
-
-            @Override
-            public void onFailure(int reason) {
-                Activity activity = getActivity();
-                if (activity != null) {
-                    Toast.makeText(activity,
-                            R.string.wifi_failed_forget_message,
-                            Toast.LENGTH_SHORT).show();
-                }
-            }
-        };
         registerForContextMenu(getListView());
         setHasOptionsMenu(true);
 
