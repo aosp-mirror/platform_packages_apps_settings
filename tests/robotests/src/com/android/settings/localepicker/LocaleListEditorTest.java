@@ -23,6 +23,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.anyBoolean;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -42,7 +43,11 @@ import android.os.LocaleList;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
@@ -55,6 +60,7 @@ import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowActivityManager;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.After;
 import org.junit.Before;
@@ -67,7 +73,6 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
-import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,11 +89,12 @@ public class LocaleListEditorTest {
     private static final int REQUEST_CONFIRM_SYSTEM_DEFAULT = 1;
 
     private LocaleListEditor mLocaleListEditor;
-
     private Context mContext;
     private FragmentActivity mActivity;
-    private List mLocaleList;
+    private List<LocaleStore.LocaleInfo> mLocaleList;
     private Intent mIntent = new Intent();
+    private LocaleDragCell mLocaleDragCell;
+    private LocaleDragAndDropAdapter.CustomViewHolder mCustomViewHolder;
 
     @Mock
     private LocaleDragAndDropAdapter mAdapter;
@@ -108,6 +114,18 @@ public class LocaleListEditorTest {
     private IActivityManager mActivityService;
     @Mock
     private MetricsFeatureProvider mMetricsFeatureProvider;
+    @Mock
+    private TextView mLabel;
+    @Mock
+    private CheckBox mCheckbox;
+    @Mock
+    private TextView mMiniLabel;
+    @Mock
+    private TextView mLocalized;
+    @Mock
+    private TextView mCurrentDefault;
+    @Mock
+    private ImageView mDragHandle;
 
     @Before
     public void setUp() throws Exception {
@@ -415,6 +433,35 @@ public class LocaleListEditorTest {
                 R.string.desc_system_locale_addition)).thenReturn(
                 "This lets apps and websites know you also prefer this language.");
         when(mLocaleListEditor.getSupportedLocales()).thenReturn(supportedLocales);
+    }
+
+    @Test
+    public void onBindViewHolder_shouldSetCheckedBoxText() {
+        ReflectionHelpers.setField(mLocaleListEditor, "mRemoveMode", true);
+        mLocaleList = new ArrayList<>();
+        mLocaleList.add(mLocaleInfo);
+        when(mLocaleInfo.getFullNameNative()).thenReturn("English");
+        when(mLocaleInfo.getLocale()).thenReturn(LocaleList.forLanguageTags("en-US").get(0));
+
+        mAdapter = spy(new LocaleDragAndDropAdapter(mLocaleListEditor, mLocaleList));
+        ReflectionHelpers.setField(mAdapter, "mFeedItemList", mLocaleList);
+        ReflectionHelpers.setField(mAdapter, "mParent", mLocaleListEditor);
+        ReflectionHelpers.setField(mAdapter, "mCacheItemList", new ArrayList<>(mLocaleList));
+        ReflectionHelpers.setField(mAdapter, "mContext", mContext);
+        ViewGroup view = new FrameLayout(mContext);
+        mCustomViewHolder = mAdapter.onCreateViewHolder(view, 0);
+        mLocaleDragCell = new LocaleDragCell(mContext, null);
+        ReflectionHelpers.setField(mCustomViewHolder, "mLocaleDragCell", mLocaleDragCell);
+        ReflectionHelpers.setField(mLocaleDragCell, "mLabel", mLabel);
+        ReflectionHelpers.setField(mLocaleDragCell, "mLocalized", mLocalized);
+        ReflectionHelpers.setField(mLocaleDragCell, "mCurrentDefault", mCurrentDefault);
+        ReflectionHelpers.setField(mLocaleDragCell, "mMiniLabel", mMiniLabel);
+        ReflectionHelpers.setField(mLocaleDragCell, "mDragHandle", mDragHandle);
+        ReflectionHelpers.setField(mLocaleDragCell, "mCheckbox", mCheckbox);
+
+        mAdapter.onBindViewHolder(mCustomViewHolder, 0);
+
+        verify(mAdapter).setCheckBoxDescription(any(LocaleDragCell.class), any(), anyBoolean());
     }
 
     private void setUpLocaleConditions() {
