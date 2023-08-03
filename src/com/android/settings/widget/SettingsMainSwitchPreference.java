@@ -19,12 +19,9 @@ package com.android.settings.widget;
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import android.content.Context;
-import android.content.res.TypedArray;
-import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.widget.Switch;
 
-import androidx.core.content.res.TypedArrayUtils;
 import androidx.preference.PreferenceViewHolder;
 import androidx.preference.TwoStatePreference;
 
@@ -40,7 +37,7 @@ import java.util.List;
 /**
  * SettingsMainSwitchPreference is a Preference with a customized Switch.
  * This component is used as the main switch of the page
- * to enable or disable the prefereces on the page.
+ * to enable or disable the preferences on the page.
  */
 public class SettingsMainSwitchPreference extends TwoStatePreference implements
         OnMainSwitchChangeListener {
@@ -50,7 +47,6 @@ public class SettingsMainSwitchPreference extends TwoStatePreference implements
     private final List<OnMainSwitchChangeListener> mSwitchChangeListeners = new ArrayList<>();
 
     private SettingsMainSwitchBar mMainSwitchBar;
-    private CharSequence mTitle;
     private EnforcedAdmin mEnforcedAdmin;
     private RestrictedPreferenceHelper mRestrictedHelper;
 
@@ -103,17 +99,6 @@ public class SettingsMainSwitchPreference extends TwoStatePreference implements
         mSwitchChangeListeners.add(this);
 
         if (attrs != null) {
-            final TypedArray a = context.obtainStyledAttributes(attrs,
-                    androidx.preference.R.styleable.Preference, 0/*defStyleAttr*/,
-                    0/*defStyleRes*/);
-            final CharSequence title = TypedArrayUtils.getText(a,
-                    androidx.preference.R.styleable.Preference_title,
-                    androidx.preference.R.styleable.Preference_android_title);
-            if (!TextUtils.isEmpty(title)) {
-                setTitle(title.toString());
-            }
-            a.recycle();
-
             mRestrictedHelper = new RestrictedPreferenceHelper(context, this, attrs);
         }
     }
@@ -135,9 +120,9 @@ public class SettingsMainSwitchPreference extends TwoStatePreference implements
 
     @Override
     public void setTitle(CharSequence title) {
-        mTitle = title;
+        super.setTitle(title);
         if (mMainSwitchBar != null) {
-            mMainSwitchBar.setTitle(mTitle);
+            mMainSwitchBar.setTitle(title);
         }
     }
 
@@ -245,7 +230,7 @@ public class SettingsMainSwitchPreference extends TwoStatePreference implements
 
     private void initMainSwitchBar() {
         if (mMainSwitchBar != null) {
-            mMainSwitchBar.setTitle(mTitle);
+            mMainSwitchBar.setTitle(getTitle());
             mMainSwitchBar.setDisabledByAdmin(mEnforcedAdmin);
         }
     }
