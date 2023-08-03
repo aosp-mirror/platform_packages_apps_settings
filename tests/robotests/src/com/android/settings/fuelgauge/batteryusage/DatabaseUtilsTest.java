@@ -16,6 +16,9 @@
 
 package com.android.settings.fuelgauge.batteryusage;
 
+import static android.app.usage.UsageStatsManager.USAGE_SOURCE_CURRENT_ACTIVITY;
+import static android.app.usage.UsageStatsManager.USAGE_SOURCE_TASK_ROOT_ACTIVITY;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -23,15 +26,19 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.when;
 
+import android.app.usage.IUsageStatsManager;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.MatrixCursor;
 import android.os.BatteryManager;
 import android.os.BatteryUsageStats;
+import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
 
@@ -67,6 +74,7 @@ public final class DatabaseUtilsTest {
     @Mock private BatteryEntry mMockBatteryEntry2;
     @Mock private BatteryEntry mMockBatteryEntry3;
     @Mock private Context mMockContext;
+    @Mock private IUsageStatsManager mUsageStatsManager;
 
     @Before
     public void setUp() {
@@ -77,6 +85,7 @@ public final class DatabaseUtilsTest {
         doReturn(mPackageManager).when(mMockContext).getPackageManager();
         doReturn(mPackageManager).when(mContext).getPackageManager();
         DatabaseUtils.getSharedPreferences(mContext).edit().clear().apply();
+        DatabaseUtils.sUsageStatsManager = mUsageStatsManager;
     }
 
     @Test
@@ -420,6 +429,71 @@ public final class DatabaseUtilsTest {
                         mContext, /*calendar=*/ null);
 
         assertThat(batteryHistMap).isEmpty();
+    }
+
+    @Test
+    public void removeUsageSource_hasNoData() {
+        DatabaseUtils.removeUsageSource(mContext);
+        assertThat(
+                DatabaseUtils
+                        .getSharedPreferences(mContext)
+                        .contains(DatabaseUtils.KEY_LAST_USAGE_SOURCE))
+                .isFalse();
+    }
+
+    @Test
+    public void removeUsageSource_hasData_deleteUsageSource() {
+        final SharedPreferences sharedPreferences = DatabaseUtils.getSharedPreferences(mContext);
+        sharedPreferences
+                .edit()
+                .putInt(DatabaseUtils.KEY_LAST_USAGE_SOURCE, USAGE_SOURCE_TASK_ROOT_ACTIVITY)
+                .apply();
+
+        DatabaseUtils.removeUsageSource(mContext);
+
+        assertThat(
+                DatabaseUtils
+                        .getSharedPreferences(mContext)
+                        .contains(DatabaseUtils.KEY_LAST_USAGE_SOURCE))
+                .isFalse();
+    }
+
+    @Test
+    public void getUsageSource_hasData() {
+        final SharedPreferences sharedPreferences = DatabaseUtils.getSharedPreferences(mContext);
+        sharedPreferences
+                .edit()
+                .putInt(DatabaseUtils.KEY_LAST_USAGE_SOURCE, USAGE_SOURCE_TASK_ROOT_ACTIVITY)
+                .apply();
+
+        assertThat(DatabaseUtils.getUsageSource(mContext))
+                .isEqualTo(USAGE_SOURCE_TASK_ROOT_ACTIVITY);
+    }
+
+    @Test
+    public void getUsageSource_notHasData_writeLoadedData() throws RemoteException {
+        when(mUsageStatsManager.getUsageSource()).thenReturn(USAGE_SOURCE_TASK_ROOT_ACTIVITY);
+
+        assertThat(DatabaseUtils.getUsageSource(mContext))
+                .isEqualTo(USAGE_SOURCE_TASK_ROOT_ACTIVITY);
+        assertThat(
+                DatabaseUtils
+                        .getSharedPreferences(mContext)
+                        .getInt(DatabaseUtils.KEY_LAST_USAGE_SOURCE, USAGE_SOURCE_CURRENT_ACTIVITY))
+                .isEqualTo(USAGE_SOURCE_TASK_ROOT_ACTIVITY);
+    }
+
+    @Test
+    public void getUsageSource_throwException_writeDefaultData() throws RemoteException {
+        when(mUsageStatsManager.getUsageSource()).thenThrow(new RemoteException());
+
+        assertThat(DatabaseUtils.getUsageSource(mContext))
+                .isEqualTo(USAGE_SOURCE_CURRENT_ACTIVITY);
+        assertThat(
+                DatabaseUtils
+                        .getSharedPreferences(mContext)
+                        .getInt(DatabaseUtils.KEY_LAST_USAGE_SOURCE, USAGE_SOURCE_CURRENT_ACTIVITY))
+                .isEqualTo(USAGE_SOURCE_CURRENT_ACTIVITY);
     }
 
     @Test
