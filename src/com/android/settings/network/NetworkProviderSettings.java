@@ -74,7 +74,6 @@ import com.android.settings.wifi.ConfigureWifiEntryFragment;
 import com.android.settings.wifi.ConnectedWifiEntryPreference;
 import com.android.settings.wifi.LongPressWifiEntryPreference;
 import com.android.settings.wifi.WifiConfigUiBase2;
-import com.android.settings.wifi.WifiConnectListener;
 import com.android.settings.wifi.WifiDialog2;
 import com.android.settings.wifi.WifiPickerTrackerHelper;
 import com.android.settings.wifi.WifiUtils;
@@ -199,9 +198,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     };
 
     protected WifiManager mWifiManager;
-    private WifiManager.ActionListener mConnectListener;
     private WifiManager.ActionListener mSaveListener;
-    private WifiManager.ActionListener mForgetListener;
 
     protected InternetResetHelper mInternetResetHelper;
 
@@ -407,8 +404,6 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         }
         mInternetUpdater = new InternetUpdater(getContext(), getSettingsLifecycle(), this);
 
-        mConnectListener = new WifiConnectListener(getActivity());
-
         mSaveListener = new WifiManager.ActionListener() {
             @Override
             public void onSuccess() {
@@ -420,22 +415,6 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
                 if (activity != null) {
                     Toast.makeText(activity,
                             R.string.wifi_failed_save_message,
-                            Toast.LENGTH_SHORT).show();
-                }
-            }
-        };
-
-        mForgetListener = new WifiManager.ActionListener() {
-            @Override
-            public void onSuccess() {
-            }
-
-            @Override
-            public void onFailure(int reason) {
-                Activity activity = getActivity();
-                if (activity != null) {
-                    Toast.makeText(activity,
-                            R.string.wifi_failed_forget_message,
                             Toast.LENGTH_SHORT).show();
                 }
             }
