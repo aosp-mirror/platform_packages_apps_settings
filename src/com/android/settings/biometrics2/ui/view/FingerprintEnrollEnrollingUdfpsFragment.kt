@@ -121,7 +121,7 @@ class FingerprintEnrollEnrollingUdfpsFragment : Fragment() {
 
     private val onSkipClickListener = View.OnClickListener { _: View? ->
         enrollingViewModel.setOnSkipPressed()
-        cancelEnrollment(false)
+        cancelEnrollment(true) // TODO Add test after b/273640000 fixed
     }
 
     private val progressObserver = Observer { progress: EnrollmentProgress? ->
