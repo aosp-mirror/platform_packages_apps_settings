@@ -21,7 +21,8 @@ import android.content.pm.ActivityInfo
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
-import android.os.Build
+import android.provider.DeviceConfig.NAMESPACE_WINDOW_MANAGER
+import android.view.WindowManager.PROPERTY_COMPAT_ALLOW_USER_ASPECT_RATIO_OVERRIDE
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.test.assertIsDisplayed
@@ -34,15 +35,13 @@ import androidx.compose.ui.test.performClick
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.dx.mockito.inline.extended.ExtendedMockito
-import android.provider.DeviceConfig.NAMESPACE_WINDOW_MANAGER
 import com.android.settings.R
-import com.android.settings.applications.appinfo.AppInfoDashboardFragment
 import com.android.settings.applications.appcompat.UserAspectRatioDetails
 import com.android.settings.applications.appcompat.UserAspectRatioManager
+import com.android.settings.applications.appinfo.AppInfoDashboardFragment
 import com.android.settings.spa.app.appinfo.AppInfoSettingsProvider
 import com.android.settings.testutils.TestDeviceConfig
 import com.android.settingslib.spa.testutils.delay
-import com.android.settingslib.spa.testutils.waitUntilExists
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -51,8 +50,6 @@ import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito.any
 import org.mockito.Mockito.anyInt
-import org.mockito.Mockito.eq
-import org.mockito.Mockito.mock
 import org.mockito.MockitoSession
 import org.mockito.Spy
 import org.mockito.quality.Strictness
@@ -77,8 +74,6 @@ class UserAspectRatioAppPreferenceTest {
     private val aspectRatioEnabledConfig =
         TestDeviceConfig(NAMESPACE_WINDOW_MANAGER, "enable_app_compat_user_aspect_ratio_settings")
 
-    private lateinit var userAspectRatioManager: UserAspectRatioManager
-
     @Mock
     private lateinit var packageManager: PackageManager
 
@@ -92,7 +87,6 @@ class UserAspectRatioAppPreferenceTest {
             .startMocking()
         whenever(context.resources).thenReturn(resources)
         whenever(context.packageManager).thenReturn(packageManager)
-        userAspectRatioManager = mock(UserAspectRatioManager::class.java)
     }
 
     @After
@@ -130,6 +124,8 @@ class UserAspectRatioAppPreferenceTest {
 
     @Test
     fun whenCannotDisplayAspectRatioUiAndConfigTrue_notDisplayed() {
+        // True is ignored but need this here or getBoolean will complain null object
+        mockProperty(PROPERTY_COMPAT_ALLOW_USER_ASPECT_RATIO_OVERRIDE, true)
         setConfig(true)
 
         setContent()
@@ -139,6 +135,8 @@ class UserAspectRatioAppPreferenceTest {
 
     @Test
     fun whenCanDisplayAspectRatioUiAndConfigTrue_Displayed() {
+        // True is ignored but need this here or getBoolean will complain null object
+        mockProperty(PROPERTY_COMPAT_ALLOW_USER_ASPECT_RATIO_OVERRIDE, true)
         setConfig(true)
         whenever(packageManager.queryIntentActivities(any(), anyInt()))
             .thenReturn(listOf(RESOLVE_INFO))
@@ -155,6 +153,8 @@ class UserAspectRatioAppPreferenceTest {
 
     @Test
     fun onClick_startActivity() {
+        // True is ignored but need this here or getBoolean will complain null object
+        mockProperty(PROPERTY_COMPAT_ALLOW_USER_ASPECT_RATIO_OVERRIDE, true)
         setConfig(true)
         whenever(packageManager.queryIntentActivities(any(), anyInt()))
             .thenReturn(listOf(RESOLVE_INFO))
@@ -188,8 +188,14 @@ class UserAspectRatioAppPreferenceTest {
         composeTestRule.delay()
     }
 
+    private fun mockProperty(propertyName: String, value: Boolean) {
+        val prop = PackageManager.Property(
+            propertyName, value, PACKAGE_NAME, "" /* className */)
+        whenever(packageManager.getProperty(propertyName, PACKAGE_NAME)).thenReturn(prop)
+    }
+
     private companion object {
-        const val PACKAGE_NAME = "package.name"
+        const val PACKAGE_NAME = "com.test.mypackage"
         const val UID = 123
         val APP = ApplicationInfo().apply {
             packageName = PACKAGE_NAME
