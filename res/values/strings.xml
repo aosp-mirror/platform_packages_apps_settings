@@ -884,6 +884,20 @@
     <!-- Message showing that multiple fingerprints, face, and the current watch is set up. Shown for a menu item that launches fingerprint, face,  and active unlock settings or enrollment. [CHAR LIMIT=80]-->
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary">Face, fingerprints, and <xliff:g id="watch" example="Dani's Watch">%s</xliff:g> added</string>
 
+    <!-- RemoteAuth unlock enrollment and settings --><skip />
+    <!-- Strings for RemoteAuth enroll finish page -->
+    <!-- Title of the dialog that shows when a paired watch has been set up successfully and can be used to unlock the phone [CHAR_LIMIT=45] -->
+    <string name="security_settings_remoteauth_enroll_finish_title">
+        You\'re all set!
+    </string>
+    <!-- Explains when a paired watch can be used to unlock the phone after it has been set up successfully [CHAR_LIMIT=NONE] -->
+    <string name="security_settings_remoteauth_enroll_finish_description">
+        You can now use your watch to unlock this phone when you swipe up on the lock screen or tap a notification
+    </string>
+    <!-- Button text to finish enrollment [CHAR LIMIT=30] -->
+    <string name="security_settings_remoteauth_enroll_finish_btn_next">Done</string>
+
+
     <!-- Biometric settings --><skip />
     <!-- Title shown for menu item that launches biometric settings. [CHAR LIMIT=66] -->
     <string name="security_settings_biometric_preference_title">Fingerprint &amp; Face Unlock</string>
