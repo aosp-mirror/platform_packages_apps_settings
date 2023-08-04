@@ -86,9 +86,7 @@ abstract class FeatureFactory {
     abstract val applicationFeatureProvider: ApplicationFeatureProvider
     abstract val localeFeatureProvider: LocaleFeatureProvider
 
-    abstract fun getEnterprisePrivacyFeatureProvider(
-        context: Context,
-    ): EnterprisePrivacyFeatureProvider
+    abstract val enterprisePrivacyFeatureProvider: EnterprisePrivacyFeatureProvider
 
     abstract val searchFeatureProvider: SearchFeatureProvider
     abstract fun getSurveyFeatureProvider(context: Context): SurveyFeatureProvider?

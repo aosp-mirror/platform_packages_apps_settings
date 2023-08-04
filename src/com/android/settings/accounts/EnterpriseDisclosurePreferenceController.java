@@ -35,8 +35,8 @@ public class EnterpriseDisclosurePreferenceController extends BasePreferenceCont
     public EnterpriseDisclosurePreferenceController(Context context, String key) {
         // Preference key doesn't matter as we are creating the preference in code.
         super(context, key);
-        mFeatureProvider = FeatureFactory.getFactory(mContext)
-                .getEnterprisePrivacyFeatureProvider(mContext);
+        mFeatureProvider = FeatureFactory.getFeatureFactory()
+                .getEnterprisePrivacyFeatureProvider();
     }
 
     @Override

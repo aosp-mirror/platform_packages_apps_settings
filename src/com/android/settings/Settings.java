@@ -202,7 +202,7 @@ public class Settings extends SettingsActivity {
         private String getAlternativeFragmentName() {
             String alternativeFragmentClassname = null;
             final SecuritySettingsFeatureProvider securitySettingsFeatureProvider =
-                    FeatureFactory.getFactory(this).getSecuritySettingsFeatureProvider();
+                    FeatureFactory.getFeatureFactory().getSecuritySettingsFeatureProvider();
             if (securitySettingsFeatureProvider.hasAlternativeSecuritySettingsFragment()) {
                 alternativeFragmentClassname = securitySettingsFeatureProvider
                         .getAlternativeSecuritySettingsFragmentClassname();
@@ -418,8 +418,7 @@ public class Settings extends SettingsActivity {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            if (FeatureFactory.getFactory(this)
-                    .getEnterprisePrivacyFeatureProvider(this)
+            if (FeatureFactory.getFeatureFactory().getEnterprisePrivacyFeatureProvider()
                     .showParentalControls()) {
                 finish();
             } else if (!EnterprisePrivacySettings.isPageEnabled(this)) {

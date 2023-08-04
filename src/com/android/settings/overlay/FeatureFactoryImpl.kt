@@ -67,18 +67,6 @@ import com.android.settingslib.spaprivileged.framework.common.devicePolicyManage
  * [FeatureFactory] implementation for AOSP Settings.
  */
 open class FeatureFactoryImpl : FeatureFactory() {
-    private val enterprisePrivacyFeatureProvider by lazy {
-        EnterprisePrivacyFeatureProviderImpl(
-            appContext,
-            appContext.devicePolicyManager,
-            appContext.packageManager,
-            UserManager.get(appContext),
-            appContext.getSystemService(ConnectivityManager::class.java),
-            appContext.getSystemService(VpnManager::class.java),
-            appContext.resources,
-        )
-    }
-
     private val contextualCardFeatureProvider by lazy {
         ContextualCardFeatureProviderImpl(appContext)
     }
@@ -113,8 +101,17 @@ open class FeatureFactoryImpl : FeatureFactory() {
 
     override val localeFeatureProvider by lazy { LocaleFeatureProviderImpl() }
 
-    override fun getEnterprisePrivacyFeatureProvider(context: Context) =
-        enterprisePrivacyFeatureProvider
+    override val enterprisePrivacyFeatureProvider by lazy {
+        EnterprisePrivacyFeatureProviderImpl(
+            appContext,
+            appContext.devicePolicyManager,
+            appContext.packageManager,
+            UserManager.get(appContext),
+            appContext.getSystemService(ConnectivityManager::class.java),
+            appContext.getSystemService(VpnManager::class.java),
+            appContext.resources,
+        )
+    }
 
     override val searchFeatureProvider: SearchFeatureProvider by lazy {
         SearchFeatureProviderImpl()
