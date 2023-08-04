@@ -31,6 +31,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.core.view.MotionEventCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
@@ -178,15 +179,31 @@ class LocaleDragAndDropAdapter
         // clear listener before setChecked() in case another item already bind to
         // current ViewHolder and checked event is triggered on stale listener mistakenly.
         checkbox.setOnCheckedChangeListener(null);
-        checkbox.setChecked(mRemoveMode ? feedItem.getChecked() : false);
+        boolean isChecked = mRemoveMode ? feedItem.getChecked() : false;
+        checkbox.setChecked(isChecked);
+        setCheckBoxDescription(dragCell, checkbox, isChecked);
+
         checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 LocaleStore.LocaleInfo feedItem =
                         (LocaleStore.LocaleInfo) dragCell.getTag();
                 feedItem.setChecked(isChecked);
+                setCheckBoxDescription(dragCell, checkbox, isChecked);
             }
         });
+    }
+
+    @VisibleForTesting
+    protected void setCheckBoxDescription(LocaleDragCell dragCell, CheckBox checkbox,
+            boolean isChecked) {
+        CharSequence checkedStatus = mContext.getText(
+                isChecked ? com.android.internal.R.string.checked
+                        : com.android.internal.R.string.not_checked);
+        // Talkback
+        dragCell.setStateDescription(checkedStatus);
+        // Select to Speak
+        checkbox.setContentDescription(checkedStatus);
     }
 
     @Override
