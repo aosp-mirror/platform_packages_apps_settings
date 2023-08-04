@@ -97,7 +97,7 @@ public class LockUnificationPreferenceController extends AbstractPreferenceContr
         mHost = host;
         mUm = context.getSystemService(UserManager.class);
         mDpm = context.getSystemService(DevicePolicyManager.class);
-        mLockPatternUtils = FeatureFactory.getFactory(context)
+        mLockPatternUtils = FeatureFactory.getFeatureFactory()
                 .getSecurityFeatureProvider()
                 .getLockPatternUtils(context);
         mProfileUserId = Utils.getManagedProfileId(mUm, MY_USER_ID);

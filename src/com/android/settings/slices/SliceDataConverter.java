@@ -84,7 +84,7 @@ class SliceDataConverter {
 
     public SliceDataConverter(Context context) {
         mContext = context;
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     /**
@@ -100,7 +100,7 @@ class SliceDataConverter {
     public List<SliceData> getSliceData() {
         List<SliceData> sliceData = new ArrayList<>();
 
-        final Collection<SearchIndexableData> bundles = FeatureFactory.getFactory(mContext)
+        final Collection<SearchIndexableData> bundles = FeatureFactory.getFeatureFactory()
                 .getSearchFeatureProvider().getSearchIndexableResources().getProviderValues();
 
         for (SearchIndexableData bundle : bundles) {

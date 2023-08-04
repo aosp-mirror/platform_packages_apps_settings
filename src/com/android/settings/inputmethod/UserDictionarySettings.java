@@ -76,7 +76,7 @@ public class UserDictionarySettings extends ListFragment implements Instrumentab
         super.onCreate(savedInstanceState);
 
         mVisibilityLoggerMixin = new VisibilityLoggerMixin(getMetricsCategory(),
-                FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider());
+                FeatureFactory.getFeatureFactory().getMetricsFeatureProvider());
 
         final Intent intent = getActivity().getIntent();
         final String localeFromIntent =

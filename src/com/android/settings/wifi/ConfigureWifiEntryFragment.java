@@ -232,7 +232,7 @@ public class ConfigureWifiEntryFragment extends InstrumentedFragment implements 
             }
         };
 
-        mNetworkDetailsTracker = FeatureFactory.getFactory(context)
+        mNetworkDetailsTracker = FeatureFactory.getFeatureFactory()
                 .getWifiTrackerLibProvider()
                 .createNetworkDetailsTracker(
                         getSettingsLifecycle(),

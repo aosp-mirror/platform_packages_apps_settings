@@ -33,7 +33,7 @@ public abstract class InstrumentedFragment extends ObservableFragment implements
 
     @Override
     public void onAttach(Context context) {
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
         mVisibilityLoggerMixin = new VisibilityLoggerMixin(getMetricsCategory(),
                 mMetricsFeatureProvider);
         // Mixin that logs visibility change for activity.

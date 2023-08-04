@@ -106,7 +106,7 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
 
     public ScreenTimeoutSettings() {
         super();
-        mMetricsFeatureProvider = FeatureFactory.getFactory(getContext())
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory()
                 .getMetricsFeatureProvider();
     }
 

@@ -16,11 +16,8 @@
 
 package com.android.settings.regionalpreferences;
 
-import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.util.Log;
 
-import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
@@ -38,7 +35,7 @@ public abstract class RegionalPreferenceListBasePreferenceController extends
 
     public RegionalPreferenceListBasePreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     @Override

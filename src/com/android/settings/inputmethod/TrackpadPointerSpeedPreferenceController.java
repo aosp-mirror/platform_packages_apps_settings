@@ -34,7 +34,7 @@ public class TrackpadPointerSpeedPreferenceController extends SliderPreferenceCo
 
     public TrackpadPointerSpeedPreferenceController(Context context, String key) {
         super(context, key);
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     @Override

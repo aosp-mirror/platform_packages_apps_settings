@@ -117,7 +117,7 @@ public class AvatarViewMixin implements LifecycleObserver {
                     true /* finishSecondaryWithPrimary */,
                     false /* clearTop */);
 
-            FeatureFactory.getFactory(mContext).getMetricsFeatureProvider()
+            FeatureFactory.getFeatureFactory().getMetricsFeatureProvider()
                     .logSettingsTileClick(KEY_AVATAR_ICON, SettingsEnums.SETTINGS_HOMEPAGE);
 
             // Here may have two different UI while start the activity.
@@ -144,8 +144,8 @@ public class AvatarViewMixin implements LifecycleObserver {
 
     @VisibleForTesting
     boolean hasAccount() {
-        final Account accounts[] = FeatureFactory.getFactory(
-                mContext).getAccountFeatureProvider().getAccounts(mContext);
+        final Account[] accounts = FeatureFactory.getFeatureFactory().getAccountFeatureProvider()
+                .getAccounts(mContext);
         return (accounts != null) && (accounts.length > 0);
     }
 

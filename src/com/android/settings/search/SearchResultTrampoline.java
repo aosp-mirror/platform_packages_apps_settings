@@ -54,7 +54,7 @@ public class SearchResultTrampoline extends Activity {
 
         final ComponentName callingActivity = getCallingActivity();
         // First make sure caller has privilege to launch a search result page.
-        FeatureFactory.getFactory(this)
+        FeatureFactory.getFeatureFactory()
                 .getSearchFeatureProvider()
                 .verifyLaunchSearchResultPageCaller(this, callingActivity);
         // Didn't crash, proceed and launch the result as a subsetting.
@@ -141,7 +141,7 @@ public class SearchResultTrampoline extends Activity {
     private boolean isSettingsIntelligence(ComponentName callingActivity) {
         return callingActivity != null && TextUtils.equals(
                 callingActivity.getPackageName(),
-                FeatureFactory.getFactory(this).getSearchFeatureProvider()
+                FeatureFactory.getFeatureFactory().getSearchFeatureProvider()
                         .getSettingsIntelligencePkgName(this));
     }
 }

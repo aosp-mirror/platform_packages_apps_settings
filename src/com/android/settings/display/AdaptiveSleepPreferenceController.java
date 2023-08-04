@@ -62,7 +62,7 @@ public class AdaptiveSleepPreferenceController {
     public AdaptiveSleepPreferenceController(Context context, RestrictionUtils restrictionUtils) {
         mContext = context;
         mRestrictionUtils = restrictionUtils;
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
         mPrivacyManager = SensorPrivacyManager.getInstance(context);
         mPowerManager = context.getSystemService(PowerManager.class);
         mPackageManager = context.getPackageManager();

@@ -148,7 +148,7 @@ public class UsageAccessDetails extends AppInfoWithHeader implements OnPreferenc
         int logCategory = newState ? SettingsEnums.APP_SPECIAL_PERMISSION_USAGE_VIEW_ALLOW
                 : SettingsEnums.APP_SPECIAL_PERMISSION_USAGE_VIEW_DENY;
         final MetricsFeatureProvider metricsFeatureProvider =
-                FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider();
+                FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
         metricsFeatureProvider.action(
                 metricsFeatureProvider.getAttribution(getActivity()),
                 logCategory,

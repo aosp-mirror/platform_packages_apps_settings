@@ -140,7 +140,7 @@ public class WifiDialogActivity extends ObservableActivity implements WifiDialog
                     return SystemClock.elapsedRealtime();
                 }
             };
-            mNetworkDetailsTracker = FeatureFactory.getFactory(this)
+            mNetworkDetailsTracker = FeatureFactory.getFeatureFactory()
                     .getWifiTrackerLibProvider()
                     .createNetworkDetailsTracker(
                             getLifecycle(),

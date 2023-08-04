@@ -116,7 +116,7 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
         super.onAttach(context);
 
         SuggestionFeatureProvider suggestionFeatureProvider =
-                FeatureFactory.getFactory(context).getSuggestionFeatureProvider();
+                FeatureFactory.getFeatureFactory().getSuggestionFeatureProvider();
         SharedPreferences prefs = suggestionFeatureProvider.getSharedPrefs(context);
         prefs.edit().putBoolean(PREF_KEY_SUGGESTION_COMPLETE, true).apply();
 

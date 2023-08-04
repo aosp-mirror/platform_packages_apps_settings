@@ -280,7 +280,7 @@ public class WifiNetworkDetailsFragment extends RestrictedDashboardFragment impl
             }
         };
 
-        mNetworkDetailsTracker = FeatureFactory.getFactory(context)
+        mNetworkDetailsTracker = FeatureFactory.getFeatureFactory()
                 .getWifiTrackerLibProvider()
                 .createNetworkDetailsTracker(
                         getSettingsLifecycle(),

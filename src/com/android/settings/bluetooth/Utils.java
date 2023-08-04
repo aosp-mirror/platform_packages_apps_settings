@@ -106,7 +106,7 @@ public final class Utils {
 
     @VisibleForTesting
     static void showConnectingError(Context context, String name, LocalBluetoothManager manager) {
-        FeatureFactory.getFactory(context).getMetricsFeatureProvider().visible(context,
+        FeatureFactory.getFeatureFactory().getMetricsFeatureProvider().visible(context,
                 SettingsEnums.PAGE_UNKNOWN, SettingsEnums.ACTION_SETTINGS_BLUETOOTH_CONNECT_ERROR,
                 0);
         showError(context, name, R.string.bluetooth_connecting_error_message, manager);

@@ -23,7 +23,6 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.ParceledListSlice;
-import android.os.AsyncTask;
 import android.os.RemoteException;
 import android.util.ArraySet;
 import android.util.Log;
@@ -110,7 +109,7 @@ public class ZenAccessController extends BasePreferenceController {
     static void logSpecialPermissionChange(boolean enable, String packageName, Context context) {
         int logCategory = enable ? SettingsEnums.APP_SPECIAL_PERMISSION_DND_ALLOW
                 : SettingsEnums.APP_SPECIAL_PERMISSION_DND_DENY;
-        FeatureFactory.getFactory(context).getMetricsFeatureProvider().action(context,
+        FeatureFactory.getFeatureFactory().getMetricsFeatureProvider().action(context,
                 logCategory, packageName);
     }
 }

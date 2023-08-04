@@ -57,7 +57,7 @@ public class ModifierKeysResetDialogFragment extends DialogFragment {
         super.onCreateDialog(savedInstanceState);
 
         Activity activity = getActivity();
-        mMetricsFeatureProvider = FeatureFactory.getFactory(activity).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
         InputManager inputManager = activity.getSystemService(InputManager.class);
         View dialoglayout =
                 LayoutInflater.from(activity).inflate(R.layout.modifier_key_reset_dialog, null);

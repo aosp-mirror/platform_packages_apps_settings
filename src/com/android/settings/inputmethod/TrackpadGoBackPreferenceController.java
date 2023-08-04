@@ -33,7 +33,7 @@ public class TrackpadGoBackPreferenceController extends TogglePreferenceControll
 
     public TrackpadGoBackPreferenceController(Context context, String key) {
         super(context, key);
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     @Override

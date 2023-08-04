@@ -129,7 +129,7 @@ public class VpnSettings extends RestrictedDashboardFragment implements
         mUserManager = (UserManager) getSystemService(Context.USER_SERVICE);
         mConnectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         mVpnManager = (VpnManager) getSystemService(Context.VPN_MANAGEMENT_SERVICE);
-        mFeatureProvider = FeatureFactory.getFactory(getContext()).getAdvancedVpnFeatureProvider();
+        mFeatureProvider = FeatureFactory.getFeatureFactory().getAdvancedVpnFeatureProvider();
         mIsAdvancedVpnSupported = mFeatureProvider.isAdvancedVpnSupported(getContext());
 
         mUnavailable = isUiRestricted();

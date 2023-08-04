@@ -40,7 +40,7 @@ public class TouchGesturesButtonPreferenceController extends BasePreferenceContr
 
     public TouchGesturesButtonPreferenceController(Context context, String key) {
         super(context, key);
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     public void setFragment(Fragment parent) {

@@ -78,8 +78,8 @@ public class PreviouslyConnectedDevicePreferenceController extends BasePreferenc
     public PreviouslyConnectedDevicePreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
 
-        mSavedDockUpdater = FeatureFactory.getFactory(
-                context).getDockUpdaterFeatureProvider().getSavedDockUpdater(context, this);
+        mSavedDockUpdater = FeatureFactory.getFeatureFactory().getDockUpdaterFeatureProvider()
+                .getSavedDockUpdater(context, this);
         mIntentFilter = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
     }

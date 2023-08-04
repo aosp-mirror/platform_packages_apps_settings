@@ -513,7 +513,7 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
         mAddLanguage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider()
+                FeatureFactory.getFeatureFactory().getMetricsFeatureProvider()
                         .logSettingsTileClick(INDEX_KEY_ADD_LANGUAGE, getMetricsCategory());
 
                 final Intent intent = new Intent(getActivity(),

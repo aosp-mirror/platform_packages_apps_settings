@@ -294,7 +294,7 @@ public class WifiSettings extends RestrictedSettingsFragment
 
         mMainHandler = new Handler(Looper.getMainLooper());
         mWorkerHandler = mWorkerThread.getThreadHandler();
-        mWifiPickerTracker = FeatureFactory.getFactory(context)
+        mWifiPickerTracker = FeatureFactory.getFeatureFactory()
                 .getWifiTrackerLibProvider()
                 .createWifiPickerTracker(getSettingsLifecycle(), context,
                         mMainHandler, mWorkerHandler,

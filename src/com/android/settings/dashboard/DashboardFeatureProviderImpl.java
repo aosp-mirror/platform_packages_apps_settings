@@ -100,7 +100,7 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     public DashboardFeatureProviderImpl(Context context) {
         mContext = context.getApplicationContext();
         mCategoryManager = CategoryManager.get(context);
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
         mPackageManager = context.getPackageManager();
     }
 

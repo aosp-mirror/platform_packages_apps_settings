@@ -31,7 +31,7 @@ public class TrackpadTapToClickPreferenceController extends TogglePreferenceCont
 
     public TrackpadTapToClickPreferenceController(Context context, String key) {
         super(context, key);
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     @Override

@@ -30,7 +30,7 @@ public abstract class BatteryTipAction {
 
     public BatteryTipAction(Context context) {
         mContext = context;
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     /**

@@ -182,7 +182,7 @@ public class FaceSettings extends DashboardFragment {
 
         mUserId = getActivity().getIntent().getIntExtra(
                 Intent.EXTRA_USER_ID, UserHandle.myUserId());
-        mFaceFeatureProvider = FeatureFactory.getFactory(getContext()).getFaceFeatureProvider();
+        mFaceFeatureProvider = FeatureFactory.getFeatureFactory().getFaceFeatureProvider();
 
         if (mUserManager.getUserInfo(mUserId).isManagedProfile()) {
             getActivity().setTitle(
@@ -418,13 +418,9 @@ public class FaceSettings extends DashboardFragment {
                 }
 
                 private boolean isAttentionSupported(Context context) {
-                    FaceFeatureProvider featureProvider = FeatureFactory.getFactory(
-                            context).getFaceFeatureProvider();
-                    boolean isAttentionSupported = false;
-                    if (featureProvider != null) {
-                        isAttentionSupported = featureProvider.isAttentionSupported(context);
-                    }
-                    return isAttentionSupported;
+                    FaceFeatureProvider featureProvider =
+                            FeatureFactory.getFeatureFactory().getFaceFeatureProvider();
+                    return featureProvider.isAttentionSupported(context);
                 }
 
                 private boolean hasEnrolledBiometrics(Context context) {

@@ -194,8 +194,7 @@ public class SlicesDatabaseAccessor {
     private void verifyIndexing() {
         final long uidToken = Binder.clearCallingIdentity();
         try {
-            FeatureFactory.getFactory(
-                    mContext).getSlicesFeatureProvider().indexSliceData(mContext);
+            FeatureFactory.getFeatureFactory().getSlicesFeatureProvider().indexSliceData(mContext);
         } finally {
             Binder.restoreCallingIdentity(uidToken);
         }

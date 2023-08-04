@@ -44,7 +44,7 @@ public class PowerButtonInstantLockPreferenceController extends AbstractPreferen
         super(context);
         mUserId = userId;
         mLockPatternUtils = lockPatternUtils;
-        mTrustAgentManager = FeatureFactory.getFactory(context)
+        mTrustAgentManager = FeatureFactory.getFeatureFactory()
                 .getSecurityFeatureProvider().getTrustAgentManager();
     }
 

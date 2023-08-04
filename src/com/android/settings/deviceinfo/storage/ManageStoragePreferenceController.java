@@ -71,7 +71,7 @@ public class ManageStoragePreferenceController extends BasePreferenceController 
         }
 
         final MetricsFeatureProvider metricsFeatureProvider =
-                FeatureFactory.getFactory(mContext).getMetricsFeatureProvider();
+                FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
         metricsFeatureProvider.action(mContext, SettingsEnums.STORAGE_FREE_UP_SPACE_NOW);
 
         final Intent intent = new Intent(StorageManager.ACTION_MANAGE_STORAGE);

@@ -246,7 +246,7 @@ public class ApplicationViewHolder extends RecyclerView.ViewHolder {
             public void onClick(View v) {
                 CloneBackend cloneBackend = CloneBackend.getInstance(context);
                 final MetricsFeatureProvider metricsFeatureProvider =
-                        FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+                        FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
 
                 String packageName = entry.info.packageName;
 

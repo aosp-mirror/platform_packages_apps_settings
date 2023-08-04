@@ -155,7 +155,7 @@ public class HighPowerDetail extends InstrumentedDialogFragment implements OnCli
     static void logSpecialPermissionChange(boolean allowlist, String packageName, Context context) {
         int logCategory = allowlist ? SettingsEnums.APP_SPECIAL_PERMISSION_BATTERY_DENY
                 : SettingsEnums.APP_SPECIAL_PERMISSION_BATTERY_ALLOW;
-        FeatureFactory.getFactory(context).getMetricsFeatureProvider().action(context, logCategory,
+        FeatureFactory.getFeatureFactory().getMetricsFeatureProvider().action(context, logCategory,
                 packageName);
     }
 

@@ -164,7 +164,7 @@ public class SettingsSliceProvider extends SliceProvider {
             Log.d(TAG, "onSlicePinned: " + sliceUri);
             mFirstSlicePinned = true;
         }
-        FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider()
+        FeatureFactory.getFeatureFactory().getMetricsFeatureProvider()
                 .action(SettingsEnums.PAGE_UNKNOWN,
                         SettingsEnums.ACTION_SETTINGS_SLICE_REQUESTED,
                         SettingsEnums.PAGE_UNKNOWN,
@@ -173,7 +173,7 @@ public class SettingsSliceProvider extends SliceProvider {
 
         if (CustomSliceRegistry.isValidUri(sliceUri)) {
             final Context context = getContext();
-            final CustomSliceable sliceable = FeatureFactory.getFactory(context)
+            final CustomSliceable sliceable = FeatureFactory.getFeatureFactory()
                     .getSlicesFeatureProvider().getSliceableFromUri(context, sliceUri);
             final IntentFilter filter = sliceable.getIntentFilter();
             if (filter != null) {
@@ -246,13 +246,13 @@ public class SettingsSliceProvider extends SliceProvider {
             // from the Settings team.
             if (CustomSliceRegistry.isValidUri(sliceUri)) {
                 final Context context = getContext();
-                return FeatureFactory.getFactory(context)
+                return FeatureFactory.getFeatureFactory()
                         .getSlicesFeatureProvider().getSliceableFromUri(context, sliceUri)
                         .getSlice();
             }
 
             if (CustomSliceRegistry.WIFI_CALLING_URI.equals(sliceUri)) {
-                return FeatureFactory.getFactory(getContext())
+                return FeatureFactory.getFeatureFactory()
                         .getSlicesFeatureProvider()
                         .getNewWifiCallingSliceHelper(getContext())
                         .createWifiCallingSlice(sliceUri);
@@ -261,12 +261,12 @@ public class SettingsSliceProvider extends SliceProvider {
             } else if (CustomSliceRegistry.BLUETOOTH_URI.equals(sliceUri)) {
                 return BluetoothSliceBuilder.getSlice(getContext());
             } else if (CustomSliceRegistry.ENHANCED_4G_SLICE_URI.equals(sliceUri)) {
-                return FeatureFactory.getFactory(getContext())
+                return FeatureFactory.getFeatureFactory()
                         .getSlicesFeatureProvider()
                         .getNewEnhanced4gLteSliceHelper(getContext())
                         .createEnhanced4gLteSlice(sliceUri);
             } else if (CustomSliceRegistry.WIFI_CALLING_PREFERENCE_URI.equals(sliceUri)) {
-                return FeatureFactory.getFactory(getContext())
+                return FeatureFactory.getFeatureFactory()
                         .getSlicesFeatureProvider()
                         .getNewWifiCallingSliceHelper(getContext())
                         .createWifiCallingPreferenceSlice(sliceUri);

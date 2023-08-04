@@ -86,7 +86,7 @@ public class RestrictAppPreferenceController extends BasePreferenceController {
             // start fragment
             RestrictedAppDetails.startRestrictedAppDetails(mPreferenceFragment,
                     mAppInfos);
-            FeatureFactory.getFactory(mContext).getMetricsFeatureProvider()
+            FeatureFactory.getFeatureFactory().getMetricsFeatureProvider()
                     .action(mContext, SettingsEnums.OPEN_APP_RESTRICTED_LIST);
             return true;
         }

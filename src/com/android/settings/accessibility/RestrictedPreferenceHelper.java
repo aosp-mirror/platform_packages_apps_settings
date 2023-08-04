@@ -119,7 +119,7 @@ public class RestrictedPreferenceHelper {
             final String htmlDescription = info.loadHtmlDescription(mPm);
             final String settingsClassName = info.getSettingsActivityName();
             final String tileServiceClassName = info.getTileServiceName();
-            final int metricsCategory = FeatureFactory.getFactory(mContext)
+            final int metricsCategory = FeatureFactory.getFeatureFactory()
                     .getAccessibilityMetricsFeatureProvider()
                     .getDownloadedFeatureMetricsCategory(componentName);
 
@@ -183,7 +183,7 @@ public class RestrictedPreferenceHelper {
             final String htmlDescription = info.loadHtmlDescription(mPm);
             final String settingsClassName = info.getSettingsActivityName();
             final String tileServiceClassName = info.getTileServiceName();
-            final int metricsCategory = FeatureFactory.getFactory(mContext)
+            final int metricsCategory = FeatureFactory.getFeatureFactory()
                     .getAccessibilityMetricsFeatureProvider()
                     .getDownloadedFeatureMetricsCategory(componentName);
 

@@ -50,7 +50,7 @@ public class ScreenLockPreferenceDetailsUtils {
     public ScreenLockPreferenceDetailsUtils(Context context) {
         mContext = context;
         mUm = context.getSystemService(UserManager.class);
-        mLockPatternUtils = FeatureFactory.getFactory(context)
+        mLockPatternUtils = FeatureFactory.getFeatureFactory()
                 .getSecurityFeatureProvider()
                 .getLockPatternUtils(context);
         mProfileChallengeUserId = Utils.getManagedProfileId(mUm, mUserId);

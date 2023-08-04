@@ -334,7 +334,7 @@ public final class BluetoothDevicePreference extends GearPreference {
         int bondState = mCachedDevice.getBondState();
 
         final MetricsFeatureProvider metricsFeatureProvider =
-                FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+                FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
 
         if (mCachedDevice.isConnected()) {
             metricsFeatureProvider.action(context,

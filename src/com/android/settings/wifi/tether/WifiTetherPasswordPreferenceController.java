@@ -54,7 +54,7 @@ public class WifiTetherPasswordPreferenceController extends WifiTetherBasePrefer
     WifiTetherPasswordPreferenceController(Context context, OnTetherConfigUpdateListener listener,
             MetricsFeatureProvider provider) {
         super(context, listener);
-        FeatureFactory featureFactory = FeatureFactory.getFactory(context);
+        FeatureFactory featureFactory = FeatureFactory.getFeatureFactory();
         mMetricsFeatureProvider = (provider != null) ? provider
                 : featureFactory.getMetricsFeatureProvider();
         mWifiHotspotRepository = featureFactory.getWifiFeatureProvider().getWifiHotspotRepository();

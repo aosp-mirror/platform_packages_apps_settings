@@ -171,7 +171,7 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
             mNextLaunched = savedInstanceState.getBoolean(EXTRA_KEY_NEXT_LAUNCHED);
         }
         mUserId = getIntent().getIntExtra(Intent.EXTRA_USER_ID, UserHandle.myUserId());
-        mPostureGuidanceIntent = FeatureFactory.getFactory(getApplicationContext())
+        mPostureGuidanceIntent = FeatureFactory.getFeatureFactory()
                 .getFaceFeatureProvider().getPostureGuidanceIntent(getApplicationContext());
     }
 

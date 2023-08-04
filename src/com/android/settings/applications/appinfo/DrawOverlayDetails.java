@@ -121,7 +121,7 @@ public class DrawOverlayDetails extends AppInfoWithHeader implements OnPreferenc
         int logCategory = newState ? SettingsEnums.APP_SPECIAL_PERMISSION_APPDRAW_ALLOW
                 : SettingsEnums.APP_SPECIAL_PERMISSION_APPDRAW_DENY;
         final MetricsFeatureProvider metricsFeatureProvider =
-                FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider();
+                FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
         metricsFeatureProvider.action(
                 metricsFeatureProvider.getAttribution(getActivity()),
                 logCategory,

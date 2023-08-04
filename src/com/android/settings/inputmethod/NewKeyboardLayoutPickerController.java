@@ -65,7 +65,7 @@ public class NewKeyboardLayoutPickerController extends BasePreferenceController 
         mIm = context.getSystemService(InputManager.class);
         mInputDeviceId = -1;
         mPreferenceMap = new HashMap<>();
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     public void initialize(Fragment parent) {

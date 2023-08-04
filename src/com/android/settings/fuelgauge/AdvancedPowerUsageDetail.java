@@ -270,7 +270,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         mExecutor.execute(() -> {
             String packageName =
                     getLoggingPackageName(getContext(), mBatteryOptimizeUtils.getPackageName());
-            FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider()
+            FeatureFactory.getFeatureFactory().getMetricsFeatureProvider()
                     .action(
                             getContext(),
                             SettingsEnums.OPEN_APP_BATTERY_USAGE,
@@ -456,7 +456,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         mExecutor.execute(() -> {
             String packageName =
                     getLoggingPackageName(getContext(), mBatteryOptimizeUtils.getPackageName());
-            FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider()
+            FeatureFactory.getFeatureFactory().getMetricsFeatureProvider()
                     .action(
                             /* attribution */ SettingsEnums.OPEN_APP_BATTERY_USAGE,
                             /* action */ finalMetricCategory,

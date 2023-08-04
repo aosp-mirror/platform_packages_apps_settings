@@ -144,7 +144,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
             return;
         }
 
-        mWifiTetherViewModel = FeatureFactory.getFactory(getContext()).getWifiFeatureProvider()
+        mWifiTetherViewModel = FeatureFactory.getFeatureFactory().getWifiFeatureProvider()
                 .getWifiTetherViewModel(this);
         if (mWifiTetherViewModel != null) {
             setupSpeedFeature(mWifiTetherViewModel.isSpeedFeatureAvailable());

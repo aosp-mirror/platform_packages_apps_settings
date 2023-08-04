@@ -77,7 +77,7 @@ public class WifiHotspotSpeedSettings extends DashboardFragment implements
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         loadPreferences();
-        mWifiHotspotSpeedViewModel = FeatureFactory.getFactory(getContext())
+        mWifiHotspotSpeedViewModel = FeatureFactory.getFeatureFactory()
                 .getWifiFeatureProvider().getWifiHotspotSpeedViewModel(this);
         onSpeedInfoMapDataChanged(mWifiHotspotSpeedViewModel.getSpeedInfoMapData().getValue());
         mWifiHotspotSpeedViewModel.getSpeedInfoMapData()
@@ -138,6 +138,6 @@ public class WifiHotspotSpeedSettings extends DashboardFragment implements
     }
 
     private void log(String msg) {
-        FeatureFactory.getFactory(getContext()).getWifiFeatureProvider().verboseLog(TAG, msg);
+        FeatureFactory.getFeatureFactory().getWifiFeatureProvider().verboseLog(TAG, msg);
     }
 }

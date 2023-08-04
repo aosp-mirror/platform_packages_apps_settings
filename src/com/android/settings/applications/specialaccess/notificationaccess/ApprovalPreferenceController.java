@@ -135,7 +135,7 @@ public class ApprovalPreferenceController extends BasePreferenceController {
     void logSpecialPermissionChange(boolean enable, String packageName) {
         final int logCategory = enable ? SettingsEnums.APP_SPECIAL_PERMISSION_NOTIVIEW_ALLOW
                 : SettingsEnums.APP_SPECIAL_PERMISSION_NOTIVIEW_DENY;
-        FeatureFactory.getFactory(mContext).getMetricsFeatureProvider().action(mContext,
+        FeatureFactory.getFeatureFactory().getMetricsFeatureProvider().action(mContext,
                 logCategory, packageName);
     }
 }

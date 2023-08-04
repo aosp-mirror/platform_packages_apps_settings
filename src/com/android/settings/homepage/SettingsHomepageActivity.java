@@ -340,12 +340,12 @@ public class SettingsHomepageActivity extends FragmentActivity implements
 
     private void initSearchBarView() {
         final Toolbar toolbar = findViewById(R.id.search_action_bar);
-        FeatureFactory.getFactory(this).getSearchFeatureProvider()
+        FeatureFactory.getFeatureFactory().getSearchFeatureProvider()
                 .initSearchToolbar(this /* activity */, toolbar, SettingsEnums.SETTINGS_HOMEPAGE);
 
         if (mIsEmbeddingActivityEnabled) {
             final Toolbar toolbarTwoPaneVersion = findViewById(R.id.search_action_bar_two_pane);
-            FeatureFactory.getFactory(this).getSearchFeatureProvider()
+            FeatureFactory.getFeatureFactory().getSearchFeatureProvider()
                     .initSearchToolbar(this /* activity */, toolbarTwoPaneVersion,
                             SettingsEnums.SETTINGS_HOMEPAGE);
         }
@@ -383,7 +383,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
     }
 
     private void showSuggestionFragment(boolean scrollNeeded) {
-        final Class<? extends Fragment> fragmentClass = FeatureFactory.getFactory(this)
+        final Class<? extends Fragment> fragmentClass = FeatureFactory.getFeatureFactory()
                 .getSuggestionFeatureProvider().getContextualSuggestionFragment();
         if (fragmentClass == null) {
             return;

@@ -185,8 +185,8 @@ public class LocaleDialogFragment extends InstrumentedDialogFragment {
             Bundle arguments = dialogFragment.getArguments();
             mDialogType = arguments.getInt(ARG_DIALOG_TYPE);
             mLocaleInfo = (LocaleStore.LocaleInfo) arguments.getSerializable(ARG_TARGET_LOCALE);
-            mMetricsFeatureProvider = FeatureFactory.getFactory(
-                    mContext).getMetricsFeatureProvider();
+            mMetricsFeatureProvider =
+                    FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
             mParent = parentFragment;
         }
 

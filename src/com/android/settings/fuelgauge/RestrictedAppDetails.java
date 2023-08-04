@@ -105,7 +105,7 @@ public class RestrictedAppDetails extends DashboardFragment implements
         mBatteryUtils = BatteryUtils.getInstance(context);
         mBatteryDatabaseManager = BatteryDatabaseManager.getInstance(context);
         mMetricsFeatureProvider =
-                FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider();
+                FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
         refreshUi();
     }
 

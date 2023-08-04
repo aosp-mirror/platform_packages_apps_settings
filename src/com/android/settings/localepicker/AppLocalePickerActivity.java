@@ -89,7 +89,7 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
 
         setTitle(R.string.app_locale_picker_title);
         getActionBar().setDisplayHomeAsUpEnabled(true);
-        mMetricsFeatureProvider = FeatureFactory.getFactory(this).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
 
         mLocalePickerWithRegion = LocalePickerWithRegion.createLanguagePicker(
                 this,

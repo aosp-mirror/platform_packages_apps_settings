@@ -372,8 +372,8 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                     DisableDevSettingsDialogFragment.show(this /* host */);
                 }
             }
-            FeatureFactory.getFactory(
-                    getContext()).getSearchFeatureProvider().sendPreIndexIntent(getContext());
+            FeatureFactory.getFeatureFactory().getSearchFeatureProvider()
+                    .sendPreIndexIntent(getContext());
         }
     }
 

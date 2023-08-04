@@ -138,7 +138,7 @@ public class CellDataPreference extends CustomDialogPreferenceCompat
     @Override
     protected void performClick(View view) {
         final Context context = getContext();
-        FeatureFactory.getFactory(context).getMetricsFeatureProvider()
+        FeatureFactory.getFeatureFactory().getMetricsFeatureProvider()
                 .action(context, SettingsEnums.ACTION_CELL_DATA_TOGGLE, !mChecked);
         final SubscriptionInfo currentSir = getActiveSubscriptionInfo(mSubId);
         final SubscriptionInfo nextSir = getActiveSubscriptionInfo(

@@ -80,7 +80,7 @@ public class WifiTetherViewModel extends AndroidViewModel {
 
     public WifiTetherViewModel(@NotNull Application application) {
         super(application);
-        mWifiHotspotRepository = FeatureFactory.getFactory(application).getWifiFeatureProvider()
+        mWifiHotspotRepository = FeatureFactory.getFeatureFactory().getWifiFeatureProvider()
                 .getWifiHotspotRepository();
     }
 

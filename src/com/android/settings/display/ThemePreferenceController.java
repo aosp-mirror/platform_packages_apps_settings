@@ -59,7 +59,7 @@ public class ThemePreferenceController extends AbstractPreferenceController impl
         super(context);
         mOverlayService = overlayManager;
         mPackageManager = context.getPackageManager();
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     @Override

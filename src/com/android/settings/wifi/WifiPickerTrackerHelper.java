@@ -78,7 +78,7 @@ public class WifiPickerTrackerHelper implements LifecycleObserver {
                 Process.THREAD_PRIORITY_BACKGROUND);
         mWorkerThread.start();
 
-        mWifiPickerTracker = FeatureFactory.getFactory(context)
+        mWifiPickerTracker = FeatureFactory.getFeatureFactory()
                 .getWifiTrackerLibProvider()
                 .createWifiPickerTracker(lifecycle, context,
                 new Handler(Looper.getMainLooper()),

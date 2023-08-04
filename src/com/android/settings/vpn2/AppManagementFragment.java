@@ -123,7 +123,7 @@ public class AppManagementFragment extends SettingsPreferenceFragment
         mPackageManager = getContext().getPackageManager();
         mDevicePolicyManager = getContext().getSystemService(DevicePolicyManager.class);
         mVpnManager = getContext().getSystemService(VpnManager.class);
-        mFeatureProvider = FeatureFactory.getFactory(getContext()).getAdvancedVpnFeatureProvider();
+        mFeatureProvider = FeatureFactory.getFeatureFactory().getAdvancedVpnFeatureProvider();
 
         mPreferenceVersion = findPreference(KEY_VERSION);
         mPreferenceAlwaysOn = (RestrictedSwitchPreference) findPreference(KEY_ALWAYS_ON_VPN);

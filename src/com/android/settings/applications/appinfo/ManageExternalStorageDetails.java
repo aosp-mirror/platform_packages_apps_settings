@@ -67,7 +67,7 @@ public class ManageExternalStorageDetails extends AppInfoWithHeader implements
         mSwitchPref.setOnPreferenceChangeListener(this);
 
         mMetricsFeatureProvider =
-                FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider();
+                FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     @Override

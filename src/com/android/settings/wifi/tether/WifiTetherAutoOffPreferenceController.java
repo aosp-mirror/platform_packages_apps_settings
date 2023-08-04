@@ -38,7 +38,7 @@ public class WifiTetherAutoOffPreferenceController extends BasePreferenceControl
 
     public WifiTetherAutoOffPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
-        WifiHotspotRepository wifiHotspotRepository = FeatureFactory.getFactory(context)
+        WifiHotspotRepository wifiHotspotRepository = FeatureFactory.getFeatureFactory()
                 .getWifiFeatureProvider().getWifiHotspotRepository();
         if (wifiHotspotRepository.isSpeedFeatureAvailable() && wifiHotspotRepository.isDualBand()) {
             mNeedShutdownSecondarySap = true;

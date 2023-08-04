@@ -47,7 +47,7 @@ public class NightDisplayActivationPreferenceController extends
 
         mColorDisplayManager = context.getSystemService(ColorDisplayManager.class);
         mTimeFormatter = new NightDisplayTimeFormatter(context);
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     @Override

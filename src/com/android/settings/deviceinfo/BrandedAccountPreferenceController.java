@@ -38,7 +38,7 @@ public class BrandedAccountPreferenceController extends BasePreferenceController
 
     public BrandedAccountPreferenceController(Context context, String key) {
         super(context, key);
-        mAccountFeatureProvider = FeatureFactory.getFactory(mContext).getAccountFeatureProvider();
+        mAccountFeatureProvider = FeatureFactory.getFeatureFactory().getAccountFeatureProvider();
         mAccounts = mAccountFeatureProvider.getAccounts(mContext);
     }
 

@@ -101,7 +101,7 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
         mActivity = activity;
         mFragment = fragment;
         mMetricsFeatureProvider =
-                FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+                FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
         if (lifecycle != null) {
             lifecycle.addObserver(this);
         }

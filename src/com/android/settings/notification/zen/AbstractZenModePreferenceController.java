@@ -68,7 +68,7 @@ abstract public class AbstractZenModePreferenceController extends
         mNotificationManager = (NotificationManager) context.getSystemService(
                 Context.NOTIFICATION_SERVICE);
 
-        final FeatureFactory featureFactory = FeatureFactory.getFactory(mContext);
+        final FeatureFactory featureFactory = FeatureFactory.getFeatureFactory();
         mMetricsFeatureProvider = featureFactory.getMetricsFeatureProvider();
         mBackend = ZenModeBackend.getInstance(context);
     }

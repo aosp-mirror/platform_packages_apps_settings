@@ -63,7 +63,7 @@ public class WifiHotspotSecuritySettings extends DashboardFragment implements
     }
 
     protected void loadViewModel() {
-        mWifiHotspotSecurityViewModel = FeatureFactory.getFactory(getContext())
+        mWifiHotspotSecurityViewModel = FeatureFactory.getFeatureFactory()
                 .getWifiFeatureProvider().getWifiHotspotSecurityViewModel(this);
         LiveData<List<WifiHotspotSecurityViewModel.ViewItem>> viewItemListData =
                 mWifiHotspotSecurityViewModel.getViewItemListData();
@@ -115,6 +115,6 @@ public class WifiHotspotSecuritySettings extends DashboardFragment implements
     }
 
     private void log(String msg) {
-        FeatureFactory.getFactory(getContext()).getWifiFeatureProvider().verboseLog(TAG, msg);
+        FeatureFactory.getFeatureFactory().getWifiFeatureProvider().verboseLog(TAG, msg);
     }
 }

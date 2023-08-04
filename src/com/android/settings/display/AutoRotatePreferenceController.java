@@ -39,7 +39,7 @@ public class AutoRotatePreferenceController extends TogglePreferenceController i
 
     public AutoRotatePreferenceController(Context context, String key) {
         super(context, key);
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     @Override

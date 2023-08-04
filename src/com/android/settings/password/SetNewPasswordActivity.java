@@ -180,7 +180,7 @@ public class SetNewPasswordActivity extends Activity implements SetNewPasswordCo
                 : SettingsEnums.ACTION_SET_NEW_PARENT_PROFILE_PASSWORD;
 
         final MetricsFeatureProvider metricsProvider =
-                FeatureFactory.getFactory(this).getMetricsFeatureProvider();
+                FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
         metricsProvider.action(
                 metricsProvider.getAttribution(this),
                 action,

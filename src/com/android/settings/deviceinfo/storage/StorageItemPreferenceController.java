@@ -151,7 +151,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         mVolume = volume;
         mSvp = svp;
         mIsWorkProfile = isWorkProfile;
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
         mUserId = getCurrentUserId();
         mIsDocumentsPrefShown = isDocumentsPrefShown();
         mStorageCacheHelper = new StorageCacheHelper(mContext, mUserId);

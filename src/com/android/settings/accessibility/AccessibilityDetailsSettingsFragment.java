@@ -237,7 +237,7 @@ public class AccessibilityDetailsSettingsFragment extends InstrumentedFragment {
                     new ComponentName(packageName, tileServiceClassName).flattenToString());
         }
 
-        final int metricsCategory = FeatureFactory.getFactory(getActivity().getApplicationContext())
+        final int metricsCategory = FeatureFactory.getFeatureFactory()
                 .getAccessibilityMetricsFeatureProvider()
                 .getDownloadedFeatureMetricsCategory(componentName);
         extras.putInt(AccessibilitySettings.EXTRA_METRICS_CATEGORY, metricsCategory);

@@ -124,7 +124,7 @@ public class PictureInPictureDetails extends AppInfoWithHeader
                 ? SettingsEnums.APP_PICTURE_IN_PICTURE_ALLOW
                 : SettingsEnums.APP_PICTURE_IN_PICTURE_DENY;
         final MetricsFeatureProvider metricsFeatureProvider =
-                FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider();
+                FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
         metricsFeatureProvider.action(
                 metricsFeatureProvider.getAttribution(getActivity()),
                 logCategory,

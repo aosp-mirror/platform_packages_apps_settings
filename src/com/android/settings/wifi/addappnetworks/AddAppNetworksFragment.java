@@ -192,7 +192,7 @@ public class AddAppNetworksFragment extends InstrumentedFragment implements
                 return SystemClock.elapsedRealtime();
             }
         };
-        mWifiPickerTracker = FeatureFactory.getFactory(mActivity.getApplicationContext())
+        mWifiPickerTracker = FeatureFactory.getFeatureFactory()
                 .getWifiTrackerLibProvider()
                 .createWifiPickerTracker(getSettingsLifecycle(), mActivity,
                         new Handler(Looper.getMainLooper()),

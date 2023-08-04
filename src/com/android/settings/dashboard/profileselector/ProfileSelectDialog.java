@@ -130,14 +130,14 @@ public class ProfileSelectDialog extends DialogFragment implements UserAdapter.O
         final UserHandle user = mSelectedTile.userHandle.get(position);
         if (!mSelectedTile.hasPendingIntent()) {
             final Intent intent = new Intent(mSelectedTile.getIntent());
-            FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider()
+            FeatureFactory.getFeatureFactory().getMetricsFeatureProvider()
                     .logStartedIntentWithProfile(intent, mSourceMetricCategory,
                             position == 1 /* isWorkProfile */);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             getActivity().startActivityAsUser(intent, user);
         } else {
             PendingIntent pendingIntent = mSelectedTile.pendingIntentMap.get(user);
-            FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider()
+            FeatureFactory.getFeatureFactory().getMetricsFeatureProvider()
                     .logSettingsTileClickWithProfile(mSelectedTile.getKey(getContext()),
                             mSourceMetricCategory,
                             position == 1 /* isWorkProfile */);

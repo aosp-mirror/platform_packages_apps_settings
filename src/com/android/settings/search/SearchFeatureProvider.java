@@ -136,10 +136,10 @@ public interface SearchFeatureProvider {
     /** Start the search activity. */
     private static void startSearchActivity(
             Context context, FragmentActivity activity, int pageId, Intent intent) {
-        FeatureFactory.getFactory(context).getSlicesFeatureProvider()
+        FeatureFactory.getFeatureFactory().getSlicesFeatureProvider()
                 .indexSliceDataAsync(context);
 
-        FeatureFactory.getFactory(context).getMetricsFeatureProvider()
+        FeatureFactory.getFeatureFactory().getMetricsFeatureProvider()
                 .logSettingsTileClick(KEY_HOMEPAGE_SEARCH_BAR, pageId);
 
         final Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(activity).toBundle();

@@ -56,7 +56,7 @@ public class WifiTetherSecurityPreferenceController extends WifiTetherBasePrefer
             OnTetherConfigUpdateListener listener) {
         super(context, listener);
         // If the Wi-Fi Hotspot Speed Feature available, then hide this controller.
-        mShouldHidePreference = FeatureFactory.getFactory(context)
+        mShouldHidePreference = FeatureFactory.getFeatureFactory()
                 .getWifiFeatureProvider().getWifiHotspotRepository().isSpeedFeatureAvailable();
         Log.d(TAG, "shouldHidePreference():" + mShouldHidePreference);
         if (mShouldHidePreference) {

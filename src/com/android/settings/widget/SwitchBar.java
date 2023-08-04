@@ -161,7 +161,7 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
         // Default is hide
         setVisibility(View.GONE);
 
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     // Override the performClick method to eliminate redundant click.

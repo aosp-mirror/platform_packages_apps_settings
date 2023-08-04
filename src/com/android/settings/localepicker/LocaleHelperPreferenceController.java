@@ -43,7 +43,7 @@ public class LocaleHelperPreferenceController extends AbstractPreferenceControll
 
     public LocaleHelperPreferenceController(Context context) {
         super(context);
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     @Override

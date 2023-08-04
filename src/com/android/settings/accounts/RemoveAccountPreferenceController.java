@@ -68,7 +68,7 @@ public class RemoveAccountPreferenceController extends AbstractPreferenceControl
     public RemoveAccountPreferenceController(Context context, Fragment parent) {
         super(context);
         mParentFragment = parent;
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     @Override

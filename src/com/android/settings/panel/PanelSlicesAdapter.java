@@ -148,7 +148,7 @@ public class PanelSlicesAdapter
             // Log Panel interaction
             sliceView.setOnSliceActionListener(
                     ((eventInfo, sliceItem) -> {
-                        FeatureFactory.getFactory(sliceView.getContext())
+                        FeatureFactory.getFeatureFactory()
                                 .getMetricsFeatureProvider()
                                 .action(0 /* attribution */,
                                         SettingsEnums.ACTION_PANEL_INTERACTION,

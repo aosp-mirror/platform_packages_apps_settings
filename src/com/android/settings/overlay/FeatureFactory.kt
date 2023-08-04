@@ -170,16 +170,5 @@ abstract class FeatureFactory {
             _appContext = appContext
             _factory = factory
         }
-
-        /** Returns a factory for creating feature controllers. */
-        @Deprecated(
-            "Replace with featureFactory without Context",
-            ReplaceWith(
-                "featureFactory",
-                "com.android.settings.overlay.FeatureFactory.Companion.featureFactory",
-            )
-        )
-        @JvmStatic
-        fun getFactory(context: Context?): FeatureFactory = featureFactory
     }
 }

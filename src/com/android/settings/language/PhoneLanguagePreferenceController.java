@@ -49,7 +49,7 @@ public class PhoneLanguagePreferenceController extends BasePreferenceController
         if (preference == null) {
             return;
         }
-        final String localeNames = FeatureFactory.getFactory(mContext)
+        final String localeNames = FeatureFactory.getFeatureFactory()
                 .getLocaleFeatureProvider().getLocaleNames();
         preference.setSummary(localeNames);
     }

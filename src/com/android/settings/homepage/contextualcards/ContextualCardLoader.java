@@ -158,7 +158,7 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
 
         if (!CardContentProvider.DELETE_CARD_URI.equals(mNotifyUri)) {
             final MetricsFeatureProvider metricsFeatureProvider =
-                    FeatureFactory.getFactory(mContext).getMetricsFeatureProvider();
+                    FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
 
             metricsFeatureProvider.action(mContext,
                     SettingsEnums.ACTION_CONTEXTUAL_CARD_NOT_SHOW,
@@ -178,7 +178,7 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
     @VisibleForTesting
     Cursor getContextualCardsFromProvider() {
         final ContextualCardFeatureProvider cardFeatureProvider =
-                FeatureFactory.getFactory(mContext).getContextualCardFeatureProvider(mContext);
+                FeatureFactory.getFeatureFactory().getContextualCardFeatureProvider(mContext);
         return cardFeatureProvider.getContextualCards();
     }
 

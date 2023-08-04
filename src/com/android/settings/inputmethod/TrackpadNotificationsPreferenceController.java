@@ -33,7 +33,7 @@ public class TrackpadNotificationsPreferenceController extends TogglePreferenceC
 
     public TrackpadNotificationsPreferenceController(Context context, String key) {
         super(context, key);
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     @Override

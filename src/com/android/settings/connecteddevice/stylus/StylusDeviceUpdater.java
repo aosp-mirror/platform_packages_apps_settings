@@ -71,7 +71,7 @@ public class StylusDeviceUpdater implements InputManager.InputDeviceListener,
         mFragment = fragment;
         mRegisteredBatteryCallbackIds = new ArrayList<>();
         mDevicePreferenceCallback = devicePreferenceCallback;
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
         mContext = context;
         mInputManager = context.getSystemService(InputManager.class);
     }

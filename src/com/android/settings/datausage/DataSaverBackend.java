@@ -48,7 +48,7 @@ public class DataSaverBackend {
     public DataSaverBackend(@NotNull Context context) {
         // TODO(b/246537614):Use fragment context to DataSaverBackend class will caused memory leak
         mContext = context.getApplicationContext();
-        mMetricsFeatureProvider = FeatureFactory.getFactory(mContext).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
         mPolicyManager = NetworkPolicyManager.from(mContext);
     }
 

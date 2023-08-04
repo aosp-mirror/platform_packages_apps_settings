@@ -57,7 +57,7 @@ public abstract class InstrumentedPreferenceFragment extends ObservablePreferenc
 
     @Override
     public void onAttach(Context context) {
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
         // Mixin that logs visibility change for activity.
         mVisibilityLoggerMixin = new VisibilityLoggerMixin(getMetricsCategory(),
                 mMetricsFeatureProvider);

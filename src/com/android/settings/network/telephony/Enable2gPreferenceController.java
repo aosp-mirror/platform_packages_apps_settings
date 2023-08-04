@@ -74,7 +74,7 @@ public class Enable2gPreferenceController extends TelephonyTogglePreferenceContr
     public Enable2gPreferenceController(Context context, String key) {
         super(context, key);
         mCarrierConfigCache = CarrierConfigCache.getInstance(context);
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
         mSubscriptionManager = context.getSystemService(SubscriptionManager.class);
         mRestrictedPreference = null;
     }

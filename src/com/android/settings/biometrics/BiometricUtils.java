@@ -514,7 +514,7 @@ public class BiometricUtils {
      * Returns true if the device supports Face enrollment in SUW flow
      */
     public static boolean isFaceSupportedInSuw(Context context) {
-        return FeatureFactory.getFactory(context).getFaceFeatureProvider().isSetupWizardSupported(
+        return FeatureFactory.getFeatureFactory().getFaceFeatureProvider().isSetupWizardSupported(
                 context);
     }
 

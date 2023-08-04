@@ -88,7 +88,7 @@ class SlicesIndexer implements Runnable {
 
     @VisibleForTesting
     List<SliceData> getSliceData() {
-        return FeatureFactory.getFactory(mContext)
+        return FeatureFactory.getFeatureFactory()
                 .getSlicesFeatureProvider()
                 .getSliceDataConverter(mContext)
                 .getSliceData();

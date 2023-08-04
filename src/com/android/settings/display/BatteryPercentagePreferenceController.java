@@ -79,7 +79,7 @@ public class BatteryPercentagePreferenceController extends BasePreferenceControl
         boolean showPercentage = (Boolean) newValue;
         Settings.System.putInt(mContext.getContentResolver(), SHOW_BATTERY_PERCENT,
                 showPercentage ? 1 : 0);
-        FeatureFactory.getFactory(mContext).getMetricsFeatureProvider()
+        FeatureFactory.getFeatureFactory().getMetricsFeatureProvider()
                 .action(mContext, SettingsEnums.OPEN_BATTERY_PERCENTAGE, showPercentage);
         return true;
     }

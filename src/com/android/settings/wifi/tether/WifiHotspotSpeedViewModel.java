@@ -65,7 +65,7 @@ public class WifiHotspotSpeedViewModel extends AndroidViewModel {
 
     public WifiHotspotSpeedViewModel(@NotNull Application application) {
         super(application);
-        mWifiHotspotRepository = FeatureFactory.getFactory(application).getWifiFeatureProvider()
+        mWifiHotspotRepository = FeatureFactory.getFeatureFactory().getWifiFeatureProvider()
                 .getWifiHotspotRepository();
         mWifiHotspotRepository.get6gAvailable().observeForever(m6gAvailableObserver);
         mWifiHotspotRepository.get5gAvailable().observeForever(m5gAvailableObserver);
@@ -177,6 +177,6 @@ public class WifiHotspotSpeedViewModel extends AndroidViewModel {
     }
 
     private void log(String msg) {
-        FeatureFactory.getFactory(getApplication()).getWifiFeatureProvider().verboseLog(TAG, msg);
+        FeatureFactory.getFeatureFactory().getWifiFeatureProvider().verboseLog(TAG, msg);
     }
 }

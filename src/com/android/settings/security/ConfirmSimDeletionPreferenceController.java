@@ -48,7 +48,7 @@ public class ConfirmSimDeletionPreferenceController extends BasePreferenceContro
         mConfirmationDefaultOn =
                 context.getResources()
                         .getBoolean(R.bool.config_sim_deletion_confirmation_default_on);
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
 
         mUserManager = context.getSystemService(UserManager.class);
         mKeyguardManager = mContext.getSystemService(KeyguardManager.class);

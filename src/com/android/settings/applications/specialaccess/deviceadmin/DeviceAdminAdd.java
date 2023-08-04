@@ -573,7 +573,7 @@ public class DeviceAdminAdd extends CollapsingToolbarBaseActivity {
     void logSpecialPermissionChange(boolean allow, String packageName) {
         int logCategory = allow ? SettingsEnums.APP_SPECIAL_PERMISSION_ADMIN_ALLOW :
                 SettingsEnums.APP_SPECIAL_PERMISSION_ADMIN_DENY;
-        FeatureFactory.getFactory(this).getMetricsFeatureProvider().action(
+        FeatureFactory.getFeatureFactory().getMetricsFeatureProvider().action(
                 SettingsEnums.PAGE_UNKNOWN,
                 logCategory,
                 SettingsEnums.PAGE_UNKNOWN,

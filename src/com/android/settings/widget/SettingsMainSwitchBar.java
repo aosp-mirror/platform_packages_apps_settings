@@ -68,7 +68,7 @@ public class SettingsMainSwitchBar extends MainSwitchBar {
     public SettingsMainSwitchBar(Context context, AttributeSet attrs, int defStyleAttr,
             int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
 
         addOnSwitchChangeListener((switchView, isChecked) -> logMetrics(isChecked));
     }

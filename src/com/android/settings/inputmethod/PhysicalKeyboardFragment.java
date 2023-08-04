@@ -107,7 +107,7 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
                 (SwitchPreference) mKeyboardAssistanceCategory.findPreference(
                         SHOW_VIRTUAL_KEYBOARD_SWITCH));
 
-        FeatureFactory featureFactory = FeatureFactory.getFactory(getContext());
+        FeatureFactory featureFactory = FeatureFactory.getFeatureFactory();
         mMetricsFeatureProvider = featureFactory.getMetricsFeatureProvider();
         mFeatureProvider = featureFactory.getKeyboardSettingsFeatureProvider();
         mSupportsFirmwareUpdate = mFeatureProvider.supportsFirmwareUpdate();

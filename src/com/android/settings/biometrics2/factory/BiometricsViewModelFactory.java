@@ -69,9 +69,9 @@ public class BiometricsViewModelFactory implements ViewModelProvider.Factory {
             Log.w(TAG, "create, null application");
             return create(modelClass);
         }
-        final FeatureFactory featureFactory = FeatureFactory.getFactory(application);
-        final BiometricsRepositoryProvider provider = FeatureFactory.getFactory(application)
-                .getBiometricsRepositoryProvider();
+        final FeatureFactory featureFactory = FeatureFactory.getFeatureFactory();
+        final BiometricsRepositoryProvider provider =
+                featureFactory.getBiometricsRepositoryProvider();
 
         if (modelClass.isAssignableFrom(AutoCredentialViewModel.class)) {
             final LockPatternUtils lockPatternUtils =

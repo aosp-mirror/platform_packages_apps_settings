@@ -245,7 +245,7 @@ public class ActivityEmbeddingRulesController {
     private void registerAlwaysExpandRule() {
         final Set<ActivityFilter> activityFilters = new HashSet<>();
         if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.SETTINGS_SEARCH_ALWAYS_EXPAND)) {
-            final Intent searchIntent = FeatureFactory.getFactory(mContext)
+            final Intent searchIntent = FeatureFactory.getFeatureFactory()
                     .getSearchFeatureProvider()
                     .buildSearchIntent(mContext, SettingsEnums.SETTINGS_HOMEPAGE);
             addActivityFilter(activityFilters, searchIntent);

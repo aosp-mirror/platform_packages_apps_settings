@@ -51,7 +51,7 @@ public abstract class BluetoothDetailsController extends AbstractPreferenceContr
         mFragment = fragment;
         mCachedDevice = device;
         lifecycle.addObserver(this);
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     @Override

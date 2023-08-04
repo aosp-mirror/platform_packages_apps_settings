@@ -164,7 +164,7 @@ public class AccountPreferenceController extends AbstractPreferenceController
         if (mAuthorities != null) {
             mAuthoritiesCount = mAuthorities.length;
         }
-        final FeatureFactory featureFactory = FeatureFactory.getFactory(mContext);
+        final FeatureFactory featureFactory = FeatureFactory.getFeatureFactory();
         mMetricsFeatureProvider = featureFactory.getMetricsFeatureProvider();
         mHelper = helper;
         mType = type;

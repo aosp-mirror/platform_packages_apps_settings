@@ -81,7 +81,7 @@ public class SmartAutoRotateController extends TogglePreferenceController implem
 
     public SmartAutoRotateController(Context context, String preferenceKey) {
         super(context, preferenceKey);
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
         mPrivacyManager = SensorPrivacyManager.getInstance(context);
         mPowerManager = context.getSystemService(PowerManager.class);
         mDeviceStateAutoRotateSettingsManager = DeviceStateRotationLockSettingsManager.getInstance(

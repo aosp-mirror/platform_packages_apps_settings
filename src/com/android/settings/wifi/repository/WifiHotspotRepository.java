@@ -657,6 +657,6 @@ public class WifiHotspotRepository {
     }
 
     private void log(String msg) {
-        FeatureFactory.getFactory(mAppContext).getWifiFeatureProvider().verboseLog(TAG, msg);
+        FeatureFactory.getFeatureFactory().getWifiFeatureProvider().verboseLog(TAG, msg);
     }
 }

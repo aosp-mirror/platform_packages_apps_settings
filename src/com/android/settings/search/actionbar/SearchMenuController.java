@@ -91,7 +91,7 @@ public class SearchMenuController implements LifecycleObserver, OnCreateOptionsM
         searchItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 
         searchItem.setOnMenuItemClickListener(target -> {
-            final Intent intent = FeatureFactory.getFactory(activity)
+            final Intent intent = FeatureFactory.getFeatureFactory()
                     .getSearchFeatureProvider()
                     .buildSearchIntent(activity, mPageId);
 
@@ -100,7 +100,7 @@ public class SearchMenuController implements LifecycleObserver, OnCreateOptionsM
                 return true;
             }
 
-            FeatureFactory.getFactory(activity).getMetricsFeatureProvider()
+            FeatureFactory.getFeatureFactory().getMetricsFeatureProvider()
                     .action(activity, SettingsEnums.ACTION_SEARCH_RESULTS);
             mHost.startActivityForResult(intent, SearchFeatureProvider.REQUEST_CODE);
             return true;

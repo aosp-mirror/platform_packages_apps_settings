@@ -111,7 +111,7 @@ public class BluetoothWiFiResetPreferenceController extends BasePreferenceContro
         }
 
         // User confirm the reset operation
-        MetricsFeatureProvider provider = FeatureFactory.getFactory(mContext)
+        MetricsFeatureProvider provider = FeatureFactory.getFeatureFactory()
                 .getMetricsFeatureProvider();
         provider.action(mContext, SettingsEnums.RESET_BLUETOOTH_WIFI_CONFIRM, true);
 

@@ -43,7 +43,7 @@ public class NfcForegroundPreferenceController extends BasePreferenceController 
 
     public NfcForegroundPreferenceController(Context context, String key) {
         super(context, key);
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
         mListValues = context.getResources().getStringArray(R.array.nfc_payment_favor_values);
         mListEntries = context.getResources().getStringArray(R.array.nfc_payment_favor);
     }

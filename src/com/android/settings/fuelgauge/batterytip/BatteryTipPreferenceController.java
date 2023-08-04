@@ -66,7 +66,7 @@ public class BatteryTipPreferenceController extends BasePreferenceController {
     public BatteryTipPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         mBatteryTipMap = new HashMap<>();
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
         mNeedUpdate = true;
     }
 

@@ -82,7 +82,7 @@ public class StorageWizardMigrateConfirm extends StorageWizardBase {
 
     @Override
     public void onNavigateBack(View view) {
-        FeatureFactory.getFactory(this).getMetricsFeatureProvider().action(this,
+        FeatureFactory.getFeatureFactory().getMetricsFeatureProvider().action(this,
                 SettingsEnums.ACTION_STORAGE_MIGRATE_LATER);
 
         if (mDisk != null) {
@@ -142,7 +142,7 @@ public class StorageWizardMigrateConfirm extends StorageWizardBase {
             return;
         }
 
-        FeatureFactory.getFactory(this).getMetricsFeatureProvider().action(this,
+        FeatureFactory.getFeatureFactory().getMetricsFeatureProvider().action(this,
                 SettingsEnums.ACTION_STORAGE_MIGRATE_NOW);
 
         final Intent intent = new Intent(this, StorageWizardMigrateProgress.class);

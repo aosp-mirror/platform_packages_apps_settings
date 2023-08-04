@@ -57,7 +57,7 @@ class SliceFullCardRendererHelper {
                     eventInfo.actionType, cardHolder.getAdapterPosition());
 
             final MetricsFeatureProvider metricsFeatureProvider =
-                    FeatureFactory.getFactory(mContext).getMetricsFeatureProvider();
+                    FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
 
             metricsFeatureProvider.action(mContext,
                     SettingsEnums.ACTION_CONTEXTUAL_CARD_CLICK, log);

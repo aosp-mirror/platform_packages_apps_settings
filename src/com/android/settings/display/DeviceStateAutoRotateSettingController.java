@@ -67,7 +67,7 @@ public class DeviceStateAutoRotateSettingController extends TogglePreferenceCont
     public DeviceStateAutoRotateSettingController(Context context, int deviceState,
             String deviceStateDescription, int order) {
         this(context, deviceState, deviceStateDescription, order,
-                FeatureFactory.getFactory(context).getMetricsFeatureProvider());
+                FeatureFactory.getFeatureFactory().getMetricsFeatureProvider());
     }
 
     void init(Lifecycle lifecycle) {

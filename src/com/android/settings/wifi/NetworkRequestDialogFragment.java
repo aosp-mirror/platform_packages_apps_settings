@@ -112,7 +112,7 @@ public class NetworkRequestDialogFragment extends NetworkRequestDialogBaseFragme
             }
         };
         final Context context = getContext();
-        mWifiPickerTracker = FeatureFactory.getFactory(context)
+        mWifiPickerTracker = FeatureFactory.getFeatureFactory()
                 .getWifiTrackerLibProvider()
                 .createWifiPickerTracker(getSettingsLifecycle(), context,
                         new Handler(Looper.getMainLooper()),

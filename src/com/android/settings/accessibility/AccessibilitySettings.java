@@ -554,7 +554,7 @@ public class AccessibilitySettings extends DashboardFragment {
                 @Override
                 public List<SearchIndexableRaw> getRawDataToIndex(Context context,
                         boolean enabled) {
-                    return FeatureFactory.getFactory(context)
+                    return FeatureFactory.getFeatureFactory()
                             .getAccessibilitySearchFeatureProvider().getSearchIndexableRawData(
                                     context);
                 }

@@ -63,7 +63,7 @@ public class WifiTetherSSIDPreferenceController extends WifiTetherBasePreference
         super(context, listener);
 
         mWifiDeviceNameTextValidator = new WifiDeviceNameTextValidator();
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     @Override

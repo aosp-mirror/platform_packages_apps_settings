@@ -70,7 +70,7 @@ public class SecurityAdvancedSettings extends DashboardFragment {
             return CategoryKey.CATEGORY_SECURITY_ADVANCED_SETTINGS;
         } else {
             final SecuritySettingsFeatureProvider securitySettingsFeatureProvider =
-                    FeatureFactory.getFactory(context).getSecuritySettingsFeatureProvider();
+                    FeatureFactory.getFeatureFactory().getSecuritySettingsFeatureProvider();
 
             if (securitySettingsFeatureProvider.hasAlternativeSecuritySettingsFragment()) {
                 return securitySettingsFeatureProvider.getAlternativeAdvancedSettingsCategoryKey();

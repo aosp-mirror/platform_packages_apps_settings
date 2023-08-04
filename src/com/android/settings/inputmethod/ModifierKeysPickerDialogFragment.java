@@ -94,8 +94,8 @@ public class ModifierKeysPickerDialogFragment extends DialogFragment {
         super.onCreateDialog(savedInstanceState);
 
         mActivity = getActivity();
-        mMetricsFeatureProvider = FeatureFactory.getFactory(mActivity).getMetricsFeatureProvider();
-        FeatureFactory featureFactory = FeatureFactory.getFactory(mActivity);
+        FeatureFactory featureFactory = FeatureFactory.getFeatureFactory();
+        mMetricsFeatureProvider = featureFactory.getMetricsFeatureProvider();
         mFeatureProvider = featureFactory.getKeyboardSettingsFeatureProvider();
         InputManager inputManager = mActivity.getSystemService(InputManager.class);
         mKeyDefaultName = getArguments().getString(DEFAULT_KEY);

@@ -806,7 +806,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
             } else {
                 Log.e(TAG, "settingsIntent is null");
             }
-            FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider()
+            FeatureFactory.getFeatureFactory().getMetricsFeatureProvider()
                     .logClickedPreference(p, getMetricsCategory());
         }
     }

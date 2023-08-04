@@ -70,7 +70,7 @@ public class TrustAgentsPreferenceController extends BasePreferenceController
         mDevicePolicyManager = context.getSystemService(DevicePolicyManager.class);
         mIconDrawableFactory = IconDrawableFactory.newInstance(context);
         final SecurityFeatureProvider securityFeatureProvider =
-                FeatureFactory.getFactory(context).getSecurityFeatureProvider();
+                FeatureFactory.getFeatureFactory().getSecurityFeatureProvider();
         mTrustAgentManager = securityFeatureProvider.getTrustAgentManager();
         mLockPatternUtils = securityFeatureProvider.getLockPatternUtils(context);
         mPackageManager = context.getPackageManager();

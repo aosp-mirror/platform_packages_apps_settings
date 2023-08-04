@@ -45,7 +45,6 @@ import com.android.internal.os.RoSystemProperties;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.deletionhelper.ActivationWarningFragment;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.PrimarySwitchPreference;
 
@@ -83,7 +82,6 @@ public class AutomaticStorageManagementSwitchPreferenceControllerTest {
                 .getSystemService(Context.DEVICE_POLICY_SERVICE);
         doReturn(mock(DevicePolicyManager.class)).when(mMockContext)
                 .getSystemService(Context.DEVICE_POLICY_SERVICE);
-        FeatureFactory.getFactory(mContext);
         mResources = spy(mContext.getResources());
         when(mContext.getResources()).thenReturn(mResources);
 

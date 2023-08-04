@@ -161,7 +161,7 @@ public class NetworkSelectSettings extends DashboardFragment {
     @Keep
     @VisibleForTesting
     protected MetricsFeatureProvider getMetricsFeatureProvider(Context context) {
-        return FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        return FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     @Keep

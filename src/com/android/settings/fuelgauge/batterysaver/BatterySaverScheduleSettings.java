@@ -180,7 +180,7 @@ public class BatterySaverScheduleSettings extends RadioButtonPickerFragment {
                 && mSaverPercentage == currentSaverPercentage) {
             return;
         }
-        FeatureFactory.getFactory(mContext).getMetricsFeatureProvider()
+        FeatureFactory.getFeatureFactory().getMetricsFeatureProvider()
                 .action(SettingsEnums.FUELGAUGE_BATTERY_SAVER,
                         SettingsEnums.FIELD_BATTERY_SAVER_SCHEDULE_TYPE,
                         SettingsEnums.FIELD_BATTERY_SAVER_PERCENTAGE_VALUE,

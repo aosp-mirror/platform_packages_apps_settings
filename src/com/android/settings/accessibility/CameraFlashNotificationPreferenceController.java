@@ -49,7 +49,7 @@ public class CameraFlashNotificationPreferenceController extends TogglePreferenc
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        FeatureFactory.getFactory(mContext).getMetricsFeatureProvider().changed(
+        FeatureFactory.getFeatureFactory().getMetricsFeatureProvider().changed(
                 getMetricsCategory(), getPreferenceKey(), isChecked ? 1 : 0);
         return Settings.System.putInt(mContext.getContentResolver(),
                 Settings.System.CAMERA_FLASH_NOTIFICATION, (isChecked ? ON : OFF));

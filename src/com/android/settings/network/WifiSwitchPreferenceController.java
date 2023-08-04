@@ -91,7 +91,7 @@ public class WifiSwitchPreferenceController extends AbstractPreferenceController
         // Wi-Fi state, but WifiEnabler will enable the preference when the Wi-Fi state changes.
         if (mPreference != null && mIsChangeWifiStateAllowed) {
             mWifiEnabler = new WifiEnabler(mContext, new GenericSwitchController(mPreference),
-                    FeatureFactory.getFactory(mContext).getMetricsFeatureProvider());
+                    FeatureFactory.getFeatureFactory().getMetricsFeatureProvider());
         }
     }
 

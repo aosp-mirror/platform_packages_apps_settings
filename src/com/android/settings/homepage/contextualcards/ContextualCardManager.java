@@ -235,7 +235,7 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
         final List<ContextualCard> cardsToKeep = getCardsToKeep(cards);
 
         final MetricsFeatureProvider metricsFeatureProvider =
-                FeatureFactory.getFactory(mContext).getMetricsFeatureProvider();
+                FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
 
         //navigate back to the homepage, screen rotate or after card dismissal
         if (!mIsFirstLaunch) {

@@ -156,7 +156,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         mActivity = activity;
         mIs24HourFormat = DateFormat.is24HourFormat(context);
         mMetricsFeatureProvider =
-                FeatureFactory.getFactory(mContext).getMetricsFeatureProvider();
+                FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
         if (lifecycle != null) {
             lifecycle.addObserver(this);
         }

@@ -81,7 +81,7 @@ public abstract class TogglePreferenceController extends BasePreferenceControlle
         // TwoStatePreference is a regular preference and can be handled by DashboardFragment
         if (preference instanceof PrimarySwitchPreference
                 || preference instanceof TwoStateButtonPreference) {
-            FeatureFactory.getFactory(mContext).getMetricsFeatureProvider()
+            FeatureFactory.getFeatureFactory().getMetricsFeatureProvider()
                     .logClickedPreference(preference, getMetricsCategory());
         }
         return setChecked((boolean) newValue);

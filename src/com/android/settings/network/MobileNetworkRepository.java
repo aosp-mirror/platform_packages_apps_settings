@@ -120,7 +120,7 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
     private MobileNetworkRepository(Context context) {
         mContext = context;
         mMobileNetworkDatabase = MobileNetworkDatabase.getInstance(context);
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
         mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_MOBILE_NETWORK_DB_CREATED);
         mSubscriptionManager = context.getSystemService(SubscriptionManager.class);
         mSubscriptionInfoDao = mMobileNetworkDatabase.mSubscriptionInfoDao();

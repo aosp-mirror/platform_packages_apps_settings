@@ -110,7 +110,7 @@ public class EntityHeaderController {
         mActivity = activity;
         mAppContext = activity.getApplicationContext();
         mFragment = fragment;
-        mMetricsCategory = FeatureFactory.getFactory(mAppContext).getMetricsFeatureProvider()
+        mMetricsCategory = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider()
                 .getMetricsCategory(fragment);
         if (header != null) {
             mHeader = header;
@@ -327,7 +327,7 @@ public class EntityHeaderController {
                     button.setVisibility(View.GONE);
                 } else {
                     button.setOnClickListener(v -> {
-                        FeatureFactory.getFactory(mAppContext).getMetricsFeatureProvider()
+                        FeatureFactory.getFeatureFactory().getMetricsFeatureProvider()
                                 .action(SettingsEnums.PAGE_UNKNOWN,
                                         SettingsEnums.ACTION_OPEN_APP_NOTIFICATION_SETTING,
                                         mMetricsCategory,

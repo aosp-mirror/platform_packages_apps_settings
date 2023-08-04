@@ -387,8 +387,8 @@ public abstract class DevelopmentTiles extends TileService {
             mSensorPrivacyManager = (SensorPrivacyManager) mContext.getSystemService(
                     Context.SENSOR_PRIVACY_SERVICE);
             mIsEnabled = mSensorPrivacyManager.isAllSensorPrivacyEnabled();
-            mMetricsFeatureProvider = FeatureFactory.getFactory(
-                    mContext).getMetricsFeatureProvider();
+            mMetricsFeatureProvider = FeatureFactory.getFeatureFactory()
+                    .getMetricsFeatureProvider();
             mKeyguardManager = (KeyguardManager) mContext.getSystemService(
                     Context.KEYGUARD_SERVICE);
         }

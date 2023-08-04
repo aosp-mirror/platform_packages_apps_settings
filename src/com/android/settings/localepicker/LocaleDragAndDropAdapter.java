@@ -231,7 +231,7 @@ class LocaleDragAndDropAdapter
         }
 
         if (fromPosition != toPosition) {
-            FeatureFactory.getFactory(mContext).getMetricsFeatureProvider()
+            FeatureFactory.getFeatureFactory().getMetricsFeatureProvider()
                     .action(mContext, SettingsEnums.ACTION_REORDER_LANGUAGE,
                             mDragLocale.getLocale().toLanguageTag() + " move to " + toPosition);
         }
@@ -274,7 +274,7 @@ class LocaleDragAndDropAdapter
         for (int i = itemCount - 1; i >= 0; i--) {
             localeInfo = mFeedItemList.get(i);
             if (localeInfo.getChecked()) {
-                FeatureFactory.getFactory(mContext).getMetricsFeatureProvider()
+                FeatureFactory.getFeatureFactory().getMetricsFeatureProvider()
                         .action(mContext, SettingsEnums.ACTION_REMOVE_LANGUAGE,
                                 localeInfo.getLocale().toLanguageTag());
                 mFeedItemList.remove(i);

@@ -68,7 +68,7 @@ public class BluetoothSwitchPreferenceController
 
         mBluetoothEnabler = new BluetoothEnabler(context,
                 switchController,
-                FeatureFactory.getFactory(context).getMetricsFeatureProvider(),
+                FeatureFactory.getFeatureFactory().getMetricsFeatureProvider(),
                 SettingsEnums.ACTION_SETTINGS_MASTER_SWITCH_BLUETOOTH_TOGGLE,
                 mRestrictionUtils);
         mBluetoothEnabler.setToggleCallback(this);

@@ -188,7 +188,7 @@ public class PrivateDnsModeDialogPreference extends CustomDialogPreferenceCompat
                         mEditText.getText().toString());
             }
 
-            FeatureFactory.getFactory(context).getMetricsFeatureProvider().action(context,
+            FeatureFactory.getFeatureFactory().getMetricsFeatureProvider().action(context,
                     SettingsEnums.ACTION_PRIVATE_DNS_MODE, mMode);
             ConnectivitySettingsManager.setPrivateDnsMode(context, mMode);
         }

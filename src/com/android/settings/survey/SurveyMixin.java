@@ -54,7 +54,7 @@ public class SurveyMixin implements LifecycleObserver, OnResume {
         // guard against the activity not existing yet
         if (activity != null) {
             SurveyFeatureProvider provider =
-                    FeatureFactory.getFactory(activity).getSurveyFeatureProvider(activity);
+                    FeatureFactory.getFeatureFactory().getSurveyFeatureProvider(activity);
             if (provider != null) {
                 provider.sendActivityIfAvailable(mName);
             }
