@@ -388,7 +388,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"已添加面孔和“<xliff:g id="WATCH">%s</xliff:g>”"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"已添加面孔、指纹和“<xliff:g id="WATCH">%s</xliff:g>”"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"已添加面孔、指纹和“<xliff:g id="WATCH">%s</xliff:g>”"</string>
-    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"人脸解锁和指纹解锁"</string>
+    <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"指纹解锁和人脸解锁"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"用于工作资料的人脸解锁和指纹解锁"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"需要设置"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"已添加面孔和多个指纹"</string>
@@ -545,10 +545,7 @@
     <string name="face_unlock_set_unlock_pin" msgid="9034912683791069602">"PIN 码 • 面孔"</string>
     <string name="face_unlock_set_unlock_password" msgid="5874950853246424756">"密码 • 面孔"</string>
     <string name="face_unlock_skip_face" msgid="189695556498300008">"不设置人脸解锁并继续"</string>
-    <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"图案 • 人脸 • 指纹"</string>
-    <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"PIN 码 • 人脸 • 指纹"</string>
-    <string name="biometrics_unlock_set_unlock_password" msgid="4612217647465743624">"密码 • 人脸 • 指纹"</string>
-    <string name="biometrics_unlock_skip_biometrics" msgid="7785643433551409223">"继续，不设置人脸解锁或指纹解锁"</string>
+    <string name="biometrics_unlock_skip_biometrics" msgid="7399882488272450182">"继续，不设置人脸解锁或指纹解锁"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"无"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"滑动"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="1926480143883094896">"图案"</string>
@@ -1002,6 +999,8 @@
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"已关闭"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"显示屏白平衡"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
+    <string name="stay_awake_on_fold_title" msgid="4195536619511589471">"折叠时保持解锁状态"</string>
+    <string name="stay_awake_on_fold_summary" msgid="2413928869516675293">"折叠时使外屏保持解锁状态，直至屏幕超时"</string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"流畅画面"</string>
     <string name="peak_refresh_rate_summary" msgid="3627278682437562787">"自动将某些内容的刷新率从 60 Hz 调高到 <xliff:g id="ID_1">%1$s</xliff:g> Hz。但会增加耗电量。"</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"强制使用峰值刷新频率"</string>
@@ -2935,6 +2934,7 @@
     <string name="keywords_app_pinning" msgid="1564144561464945019">"固定屏幕"</string>
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"工作验证, 工作, 资料"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"工作资料, 托管资料, 汇整, 统一, 工作, 资料"</string>
+    <string name="keywords_stay_awake_on_lock" msgid="6338367464776295697">"唤醒, 休眠, 不锁定, 折叠时保持解锁状态, 折叠状态, 关闭状态, 折叠, 关闭, 屏幕关闭"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"手势"</string>
     <string name="keywords_wallet" msgid="3757421969956996972">"钱包"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"支付、点按、付款"</string>
@@ -4156,7 +4156,7 @@
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
     <string name="enable_angle_as_system_driver" msgid="3985105681812713612">"启用 ANGLE"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="4173041926052925436">"启用 ANGLE 作为系统 OpenGL ES 驱动程序"</string>
+    <string name="enable_angle_as_system_driver_summary" msgid="6413038127558166972">"启用 ANGLE 作为默认 OpenGL ES 驱动程序。在不兼容的设备上启用该功能可能会导致某些应用崩溃。"</string>
     <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"必须重新启动，才能更改系统 OpenGL ES 驱动程序"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"应用兼容性变更"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"在应用兼容性变更之间切换"</string>
@@ -4329,6 +4329,7 @@
     <string name="sim_action_no_thanks" msgid="435717748384544195">"不用了"</string>
     <string name="sim_action_cancel" msgid="2668099867029610910">"取消"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"切换"</string>
+    <string name="sim_action_turn_off" msgid="3506698692916473000">"停用"</string>
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"无法激活 SIM 卡"</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"请尝试重新启用 SIM 卡。如果问题仍然存在，请重启您的设备。"</string>
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"网络激活"</string>
@@ -4550,7 +4551,7 @@
     <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"使用深色主题"</string>
     <string name="bluetooth_main_switch_title" msgid="8409835540311309632">"使用蓝牙"</string>
     <string name="prevent_ringing_main_switch_title" msgid="4726252811262086643">"使用“阻止响铃”"</string>
-    <string name="use_wifi_hotsopt_main_switch_title" msgid="3909731167290690539">"使用“WLAN 热点”"</string>
+    <string name="use_wifi_hotsopt_main_switch_title" msgid="3909731167290690539">"使用 WLAN 热点"</string>
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"使用“固定应用”"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"使用“开发者选项”"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"使用打印服务"</string>
@@ -4703,6 +4704,18 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"卸载应用"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{过去 # 个月内安装的应用}other{过去 # 个月内安装的应用}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{# 个多月前安装的应用}other{# 个多月前安装的应用}}"</string>
+    <string name="aspect_ratio_title" msgid="2451826875939676101">"宽高比"</string>
+    <string name="aspect_ratio_summary" msgid="5944347596728740547">"如果应用的设计不适配您的<xliff:g id="DEVICE_NAME">%1$s</xliff:g>，请选择一个宽高比进行查看"</string>
+    <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"有推荐宽高比的应用"</string>
+    <string name="user_aspect_ratio_overridden_apps_label" msgid="1564914138276629704">"已覆盖宽高比的应用"</string>
+    <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"应用默认设置"</string>
+    <string name="user_aspect_ratio_fullscreen" msgid="1843427242540081996">"全屏"</string>
+    <string name="user_aspect_ratio_half_screen" msgid="1015852057094310209">"半屏"</string>
+    <string name="user_aspect_ratio_device_size" msgid="2339820985120881199">"设备宽高比"</string>
+    <string name="user_aspect_ratio_16_9" msgid="2286644872775170164">"16:9"</string>
+    <string name="user_aspect_ratio_3_2" msgid="199262962518318932">"3:2"</string>
+    <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4:3"</string>
+    <string name="app_aspect_ratio_footer" msgid="8661813386126142251">"更改宽高比后，应用将重启。未保存的更改可能会丢失。"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"指纹传感器"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"闪烁通知"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"闪烁通知简介"</string>
@@ -4753,4 +4766,7 @@
     <string name="show_captions_enabled" msgid="7089043007924626">"已开启"</string>
     <string name="live_caption_disabled" msgid="3562035026547887366">"已关闭"</string>
     <string name="live_caption_enabled" msgid="5269360946200718949">"已开启"</string>
+    <string name="about_phone_device_name_warning" msgid="3243226572404472381">"您安装的应用可以查看您的设备名称。此外，当您连接到蓝牙设备、连接到 WLAN 网络或设置 WLAN 热点时，其他人可能也会看到您的设备名称。"</string>
+    <string name="grammatical_gender_title" msgid="8584242850477270828">"语法性别"</string>
+    <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"选择语法性别"</string>
 </resources>

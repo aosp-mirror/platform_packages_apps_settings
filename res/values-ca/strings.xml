@@ -388,7 +388,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Cara i <xliff:g id="WATCH">%s</xliff:g> afegits"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Cara, empremta digital i <xliff:g id="WATCH">%s</xliff:g> afegits"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Empremtes digitals, cara i <xliff:g id="WATCH">%s</xliff:g> afegits"</string>
-    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Desbloqueig facial i amb empremta digital"</string>
+    <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"Desbloqueig facial i amb empremta digital"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Desbloqueig facial i amb empremta digital per a la feina"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"Cal fer la configuració"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Cara i empremtes digitals afegides"</string>
@@ -545,10 +545,7 @@
     <string name="face_unlock_set_unlock_pin" msgid="9034912683791069602">"PIN • Cara"</string>
     <string name="face_unlock_set_unlock_password" msgid="5874950853246424756">"Contrasenya • Cara"</string>
     <string name="face_unlock_skip_face" msgid="189695556498300008">"Continua sense Desbloqueig facial"</string>
-    <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"Patró • Cara • Empremta digital"</string>
-    <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"PIN • Cara • Empremta digital"</string>
-    <string name="biometrics_unlock_set_unlock_password" msgid="4612217647465743624">"Contrasenya • Cara • Empremta digital"</string>
-    <string name="biometrics_unlock_skip_biometrics" msgid="7785643433551409223">"Continua sense cara ni empremta digital"</string>
+    <string name="biometrics_unlock_skip_biometrics" msgid="7399882488272450182">"Continua sense empremta digital ni cara"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"Cap"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"Llisca"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="1926480143883094896">"Patró"</string>
@@ -924,7 +921,7 @@
     <string name="wifi_hotspot_speed_6g" msgid="3787697484862730500">"6 GHz"</string>
     <string name="wifi_hotspot_speed_6g_summary" msgid="8675262219242174548">"Velocitats màximes. Compatible amb pocs dispositius."</string>
     <string name="wifi_hotspot_speed_summary_unavailable" msgid="7276080644693388756">"No està disponible al teu país o regió"</string>
-    <string name="wifi_hotspot_speed_footer" msgid="8846939503916795002">"Si la teva freqüència preferida no està disponible, pot ser que el punt d\'accés Wi‑Fi en faci servir una altra. La configuració de seguretat del punt d\'accés Wi‑Fi pot canviar si canvies la freqüència."</string>
+    <string name="wifi_hotspot_speed_footer" msgid="8846939503916795002">"Si la teva freqüència preferida no està disponible, pot ser que el punt d\'accés Wi‑Fi en faci servir una altra. La configuració de seguretat del punt d\'accés Wi‑Fi pot canviar si modifiques la freqüència."</string>
     <string name="wifi_hotspot_security_summary_unavailable" msgid="117582979310345853">"No està disponible amb 6 GHz"</string>
     <string name="wifi_hotspot_security_footer" msgid="4608329688744949796">"La configuració de seguretat pot canviar si modifiques la freqüència del punt d\'accés Wi‑Fi"</string>
     <string name="wifi_tether_starting" msgid="8879874184033857814">"S\'està activant el punt d\'accés Wi-Fi…"</string>
@@ -1002,6 +999,8 @@
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Desactivat"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Mostra el balanç de blancs"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
+    <string name="stay_awake_on_fold_title" msgid="4195536619511589471">"Desbloquejada en plegar-se"</string>
+    <string name="stay_awake_on_fold_summary" msgid="2413928869516675293">"Mantén la pantalla frontal desbloquejada en plegar-se fins que s\'esgoti el temps d\'espera de la pantalla"</string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="3627278682437562787">"Augmenta automàticament la freqüència d\'actualització de 60 a <xliff:g id="ID_1">%1$s</xliff:g> Hz en alguns continguts. Augmenta l\'ús de la bateria."</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Força la freqüència d\'actualització màxima"</string>
@@ -2935,6 +2934,7 @@
     <string name="keywords_app_pinning" msgid="1564144561464945019">"fixació de pantalla"</string>
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"desafiament per accedir a contingut de feina, feina, perfil"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"perfil de treball, perfil gestionat, unificar, unificació, feina, perfil"</string>
+    <string name="keywords_stay_awake_on_lock" msgid="6338367464776295697">"activa, repòs, no bloquegis, desbloquejada en plegar-se, plegable, tancant, plega, tanca, pantalla desactivada"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"gestos"</string>
     <string name="keywords_wallet" msgid="3757421969956996972">"Wallet"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"paga, toca, pagaments"</string>
@@ -4156,7 +4156,7 @@
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
     <string name="enable_angle_as_system_driver" msgid="3985105681812713612">"Activa ANGLE"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="4173041926052925436">"Activa ANGLE com a controlador OpenGL ES del sistema"</string>
+    <string name="enable_angle_as_system_driver_summary" msgid="6413038127558166972">"Activa ANGLE com a controlador OpenGL ES predeterminat. Activar-lo en dispositius incompatibles pot fer que les aplicacions deixin de funcionar."</string>
     <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"Cal reiniciar per canviar el controlador OpenGL ES del sistema"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Canvis en la compatibilitat de les aplicacions"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Commuta els canvis en la compatibilitat de les aplicacions"</string>
@@ -4329,6 +4329,7 @@
     <string name="sim_action_no_thanks" msgid="435717748384544195">"No, gràcies"</string>
     <string name="sim_action_cancel" msgid="2668099867029610910">"Cancel·la"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"Canvia"</string>
+    <string name="sim_action_turn_off" msgid="3506698692916473000">"Desactiva"</string>
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"No s\'ha pogut activar la SIM"</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"Prova de tornar a activar la SIM. Si el problema continua, reinicia el dispositiu."</string>
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"Activació de la xarxa"</string>
@@ -4703,6 +4704,24 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"Desinstal·la l\'aplicació"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Aplicacions instal·lades en el # darrer mes}other{Aplicacions instal·lades en els # darrers mesos}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Aplicacions instal·lades fa més d’# mes}other{Aplicacions instal·lades fa més de # mesos}}"</string>
+    <!-- no translation found for aspect_ratio_title (2451826875939676101) -->
+    <skip />
+    <!-- no translation found for aspect_ratio_summary (5944347596728740547) -->
+    <skip />
+    <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"Aplicacions suggerides"</string>
+    <string name="user_aspect_ratio_overridden_apps_label" msgid="1564914138276629704">"Aplicacions que has anul·lat"</string>
+    <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"Configuració predeterminada de l\'aplicació"</string>
+    <!-- no translation found for user_aspect_ratio_fullscreen (1843427242540081996) -->
+    <skip />
+    <!-- no translation found for user_aspect_ratio_half_screen (1015852057094310209) -->
+    <skip />
+    <!-- no translation found for user_aspect_ratio_device_size (2339820985120881199) -->
+    <skip />
+    <string name="user_aspect_ratio_16_9" msgid="2286644872775170164">"16:9"</string>
+    <string name="user_aspect_ratio_3_2" msgid="199262962518318932">"3:2"</string>
+    <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4:3"</string>
+    <!-- no translation found for app_aspect_ratio_footer (8661813386126142251) -->
+    <skip />
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Sensor d\'empremtes digitals"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Notificacions amb flaix"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Sobre les notificacions amb flaix"</string>
@@ -4753,4 +4772,7 @@
     <string name="show_captions_enabled" msgid="7089043007924626">"Activat"</string>
     <string name="live_caption_disabled" msgid="3562035026547887366">"Desactivat"</string>
     <string name="live_caption_enabled" msgid="5269360946200718949">"Activat"</string>
+    <string name="about_phone_device_name_warning" msgid="3243226572404472381">"El nom del dispositiu és visible per a les aplicacions que has instal·lat. També el poden veure altres persones si el connectes a un dispositiu Bluetooth o a una xarxa Wi‑Fi, o si configures un punt d\'accés Wi‑Fi."</string>
+    <string name="grammatical_gender_title" msgid="8584242850477270828">"Gènere gramatical"</string>
+    <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Selecciona el gènere gramatical"</string>
 </resources>

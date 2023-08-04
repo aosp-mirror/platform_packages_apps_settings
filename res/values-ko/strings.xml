@@ -388,7 +388,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"얼굴 및 <xliff:g id="WATCH">%s</xliff:g> 추가됨"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"얼굴, 지문, <xliff:g id="WATCH">%s</xliff:g> 추가됨"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"얼굴, 지문, <xliff:g id="WATCH">%s</xliff:g> 추가됨"</string>
-    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"얼굴 인식/지문 잠금 해제"</string>
+    <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"지문 및 얼굴 인식 잠금 해제"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"직장용 얼굴 인식/지문 잠금 해제"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"설정 필요"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"얼굴 및 지문 추가됨"</string>
@@ -545,10 +545,7 @@
     <string name="face_unlock_set_unlock_pin" msgid="9034912683791069602">"PIN • 얼굴"</string>
     <string name="face_unlock_set_unlock_password" msgid="5874950853246424756">"비밀번호 • 얼굴"</string>
     <string name="face_unlock_skip_face" msgid="189695556498300008">"얼굴 인식 잠금 해제 없이 계속하기"</string>
-    <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"패턴 • 얼굴 인식 • 지문"</string>
-    <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"PIN • 얼굴 인식 • 지문"</string>
-    <string name="biometrics_unlock_set_unlock_password" msgid="4612217647465743624">"비밀번호 • 얼굴 인식 • 지문"</string>
-    <string name="biometrics_unlock_skip_biometrics" msgid="7785643433551409223">"얼굴 인식 또는 지문 없이 계속"</string>
+    <string name="biometrics_unlock_skip_biometrics" msgid="7399882488272450182">"지문 또는 얼굴 인식 없이 계속"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"없음"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"스와이프"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="1926480143883094896">"패턴"</string>
@@ -1002,6 +999,8 @@
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"사용 안함"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"디스플레이 화이트 밸런스"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
+    <string name="stay_awake_on_fold_title" msgid="4195536619511589471">"접혀 있을 때 잠금 해제된 상태로 유지"</string>
+    <string name="stay_awake_on_fold_summary" msgid="2413928869516675293">"접혀 있을 때 화면 자동 잠금 시간까지 전면 디스플레이를 잠금 해제된 상태로 유지"</string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"스무스 디스플레이"</string>
     <string name="peak_refresh_rate_summary" msgid="3627278682437562787">"일부 콘텐츠의 화면 재생 빈도를 자동으로 60Hz에서 <xliff:g id="ID_1">%1$s</xliff:g>Hz로 늘립니다. 배터리 사용량이 증가합니다."</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"가장 높은 새로고침 빈도 강제 적용"</string>
@@ -2935,6 +2934,7 @@
     <string name="keywords_app_pinning" msgid="1564144561464945019">"화면 고정"</string>
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"직장 보안 확인, 직장, 프로필"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"직장 프로필, 관리된 프로필, 통합, 통합형, 직장, 프로필"</string>
+    <string name="keywords_stay_awake_on_lock" msgid="6338367464776295697">"절전 모드 해제, 절전 모드, 잠그지 않음, 접었을 때 잠금 해제 상태 유지, 접기, 닫기, 접음, 닫음, 화면 끔"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"동작"</string>
     <string name="keywords_wallet" msgid="3757421969956996972">"월렛"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"결제, 탭, 결제"</string>
@@ -4156,7 +4156,7 @@
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
     <string name="enable_angle_as_system_driver" msgid="3985105681812713612">"ANGLE 사용 설정"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="4173041926052925436">"시스템 OpenGL ES 드라이버로 ANGLE 사용 설정"</string>
+    <string name="enable_angle_as_system_driver_summary" msgid="6413038127558166972">"기본 OpenGL ES 드라이버로 ANGLE 사용 설정 호환되지 않는 기기에서 사용 설정하면 일부 애플리케이션을 손상시킬 수 있습니다."</string>
     <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"시스템 OpenGL ES 드라이버를 변경하려면 재부팅해야 합니다."</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"앱 호환성 변경사항"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"앱 호환성 변경사항 전환"</string>
@@ -4329,6 +4329,7 @@
     <string name="sim_action_no_thanks" msgid="435717748384544195">"사용 안함"</string>
     <string name="sim_action_cancel" msgid="2668099867029610910">"취소"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"전환"</string>
+    <string name="sim_action_turn_off" msgid="3506698692916473000">"사용 중지"</string>
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"SIM을 활성화할 수 없음"</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"SIM을 다시 사용 설정해 보세요. 그래도 문제가 지속되면 기기를 다시 시작하세요."</string>
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"네트워크 활성화"</string>
@@ -4703,6 +4704,24 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"앱 제거"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{지난 #개월 내에 설치된 앱}other{지난 #개월 내에 설치된 앱}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{앱이 설치된 지 #개월 이상 지남}other{앱이 설치된 지 #개월 이상 지남}}"</string>
+    <!-- no translation found for aspect_ratio_title (2451826875939676101) -->
+    <skip />
+    <!-- no translation found for aspect_ratio_summary (5944347596728740547) -->
+    <skip />
+    <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"추천 앱"</string>
+    <string name="user_aspect_ratio_overridden_apps_label" msgid="1564914138276629704">"재정의한 앱"</string>
+    <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"앱 기본값"</string>
+    <!-- no translation found for user_aspect_ratio_fullscreen (1843427242540081996) -->
+    <skip />
+    <!-- no translation found for user_aspect_ratio_half_screen (1015852057094310209) -->
+    <skip />
+    <!-- no translation found for user_aspect_ratio_device_size (2339820985120881199) -->
+    <skip />
+    <string name="user_aspect_ratio_16_9" msgid="2286644872775170164">"16:9"</string>
+    <string name="user_aspect_ratio_3_2" msgid="199262962518318932">"3:2"</string>
+    <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4:3"</string>
+    <!-- no translation found for app_aspect_ratio_footer (8661813386126142251) -->
+    <skip />
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"지문 센서"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"플래시 알림"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"플래시 알림 정보"</string>
@@ -4753,4 +4772,7 @@
     <string name="show_captions_enabled" msgid="7089043007924626">"사용"</string>
     <string name="live_caption_disabled" msgid="3562035026547887366">"사용 안함"</string>
     <string name="live_caption_enabled" msgid="5269360946200718949">"사용"</string>
+    <string name="about_phone_device_name_warning" msgid="3243226572404472381">"기기 이름이 설치한 앱에 표시됩니다. 블루투스 기기 및 Wi-Fi 네트워크에 연결하거나 Wi-Fi 핫스팟을 설정할 때도 기기 이름이 다른 사용자에게 표시될 수 있습니다."</string>
+    <string name="grammatical_gender_title" msgid="8584242850477270828">"문법적 성별"</string>
+    <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"문법적 성별 선택"</string>
 </resources>

@@ -388,7 +388,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Yüz ve <xliff:g id="WATCH">%s</xliff:g> eklendi"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Yüz, parmak izi ve <xliff:g id="WATCH">%s</xliff:g> eklendi"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Yüz, parmak izleri ve <xliff:g id="WATCH">%s</xliff:g> eklendi"</string>
-    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Yüz Tanıma ve Parmak İzi Kilidi"</string>
+    <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"Parmak İzi ve Yüz Tanıma Kilidi"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"İş profili için Yüz Tanıma ve Parmak İzi Kilidi"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"Kurulum gerekiyor"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Yüz ve parmak izleri eklendi"</string>
@@ -545,10 +545,7 @@
     <string name="face_unlock_set_unlock_pin" msgid="9034912683791069602">"PIN • Yüz"</string>
     <string name="face_unlock_set_unlock_password" msgid="5874950853246424756">"Şifre • Yüz"</string>
     <string name="face_unlock_skip_face" msgid="189695556498300008">"Yüz Tanıma Kilidi olmadan devam et"</string>
-    <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"Desen • Yüz • Parmak İzi"</string>
-    <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"PIN • Yüz • Parmak İzi"</string>
-    <string name="biometrics_unlock_set_unlock_password" msgid="4612217647465743624">"Şifre • Yüz • Parmak İzi"</string>
-    <string name="biometrics_unlock_skip_biometrics" msgid="7785643433551409223">"Yüz tanıma veya parmak izi kilidi kurmadan devam edin"</string>
+    <string name="biometrics_unlock_skip_biometrics" msgid="7399882488272450182">"Parmak izi veya yüz tanıma kilidi kurmadan devam et"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"Yok"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"Kaydırma"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="1926480143883094896">"Desen"</string>
@@ -1002,6 +999,8 @@
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Kapalı"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Beyaz dengeyi göster"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
+    <string name="stay_awake_on_fold_title" msgid="4195536619511589471">"Katlanmışken kilidi açık bırak"</string>
+    <string name="stay_awake_on_fold_summary" msgid="2413928869516675293">"Ekran zaman aşımına uğrayana kadar ön ekranın kilidini açık bırak"</string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="3627278682437562787">"Bazı içerikler için yenileme hızını otomatik olarak 60 Hz\'den <xliff:g id="ID_1">%1$s</xliff:g> Hz\'e yükseltir. Pil kullanımını artırır."</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Yoğun yenileme hızına zorla"</string>
@@ -2688,7 +2687,7 @@
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName}, iş profilinize sertifika yetkilisi yükledi. Yönetici, bu sertifikayla e-postalar, uygulamalar ve güvenli web siteleri de dahil olmak üzere iş ağı etkinliğini izleyebilir.\n\nBu sertifika hakkında daha fazla bilgi edinmek için yöneticinizle iletişime geçin.}other{{orgName}, iş profilinize sertifika yetkilileri yükledi. Yönetici, bu sertifikalarla e-postalar, uygulamalar ve güvenli web siteleri de dahil olmak üzere iş ağı etkinliğini izleyebilir.\n\nBu sertifikalar hakkında daha fazla bilgi edinmek için yöneticinizle iletişime geçin.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"E-postalarınız, uygulamalarınız ve güvenli web siteleriniz dahil olmak üzere ağ etkinliğiniz üçüncü bir tarafça izlenebilir.\n\nCihazınızda yüklü durumdaki güvenilen bir kimlik bilgisi bunu mümkün kılmaktadır."</string>
     <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{Sertifikayı kontrol et}other{Sertifikaları kontrol et}}"</string>
-    <string name="user_settings_title" msgid="6550866465409807877">"Birden çok kullanıcı"</string>
+    <string name="user_settings_title" msgid="6550866465409807877">"Birden fazla kullanıcı"</string>
     <string name="user_list_title" msgid="1387379079186123404">"Kullanıcılar ve Profiller"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"Kullanıcı veya profil ekle"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"Kısıtlı profil"</string>
@@ -2935,6 +2934,7 @@
     <string name="keywords_app_pinning" msgid="1564144561464945019">"ekran sabitleme"</string>
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"iş güvenlik sorusu, iş, profil"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"iş profili, yönetilen profil, birleştir, birleştirme, iş, profil"</string>
+    <string name="keywords_stay_awake_on_lock" msgid="6338367464776295697">"uyanık, uyku, kilitleme, katlanmışken kilidi açık bırak, katlama, kapatma, katla, kapat, ekran kapalı"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"hareketler"</string>
     <string name="keywords_wallet" msgid="3757421969956996972">"cüzdan"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"ödeme, dokunma, ödemeler"</string>
@@ -4156,7 +4156,7 @@
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
     <string name="enable_angle_as_system_driver" msgid="3985105681812713612">"ANGLE\'ı etkinleştir"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="4173041926052925436">"ANGLE\'ı, sistem OpenGL ES sürücüsü olarak etkinleştirin"</string>
+    <string name="enable_angle_as_system_driver_summary" msgid="6413038127558166972">"ANGLE\'ı, varsayılan OpenGL ES sürücüsü olarak etkinleştirin. Bunu uyumlu olmayan cihazlarda etkinleştirirseniz bazı uygulamalarda sorun yaşanabilir."</string>
     <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"Sistem OpenGL ES sürücüsünü değiştirmek için yeniden başlatma gerekir"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Uygulama Uyumluluğuyla İlgili Değişiklikler"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Uygulama uyumluluk değişikliklerini aç/kapat"</string>
@@ -4329,6 +4329,7 @@
     <string name="sim_action_no_thanks" msgid="435717748384544195">"Hayır, teşekkürler"</string>
     <string name="sim_action_cancel" msgid="2668099867029610910">"İptal"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"Geç"</string>
+    <string name="sim_action_turn_off" msgid="3506698692916473000">"Kapat"</string>
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"SIM etkinleştirilemiyor"</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"SIM\'i tekrar açmayı deneyin. Sorun devam ederse cihazınızı yeniden başlatın."</string>
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"Ağ etkinleştirme"</string>
@@ -4703,6 +4704,18 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"Uygulamanın yüklemesini kaldır"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Son # ay içinde yüklenen uygulamalar}other{Son # ay içinde yüklenen uygulamalar}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{# aydan daha uzun süre önce yüklenen uygulamalar}other{# aydan daha uzun süre önce yüklenen uygulamalar}}"</string>
+    <string name="aspect_ratio_title" msgid="2451826875939676101">"En boy oranı"</string>
+    <string name="aspect_ratio_summary" msgid="5944347596728740547">"Bu uygulama <xliff:g id="DEVICE_NAME">%1$s</xliff:g> cihazınıza uyacak şekilde tasarlanmadıysa uygulamayı görüntülemek için bir en boy oranı seçin."</string>
+    <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"Önerilen uygulamalar"</string>
+    <string name="user_aspect_ratio_overridden_apps_label" msgid="1564914138276629704">"Geçersiz kıldığınız uygulamalar"</string>
+    <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"Uygulama varsayılanı"</string>
+    <string name="user_aspect_ratio_fullscreen" msgid="1843427242540081996">"Tam ekran"</string>
+    <string name="user_aspect_ratio_half_screen" msgid="1015852057094310209">"Yarım ekran"</string>
+    <string name="user_aspect_ratio_device_size" msgid="2339820985120881199">"Cihaz en boy oranı"</string>
+    <string name="user_aspect_ratio_16_9" msgid="2286644872775170164">"16:9"</string>
+    <string name="user_aspect_ratio_3_2" msgid="199262962518318932">"3:2"</string>
+    <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4:3"</string>
+    <string name="app_aspect_ratio_footer" msgid="8661813386126142251">"En boy oranını değiştirdiğinizde uygulama yeniden başlatılır. Kaydedilmemiş değişiklikleri kaybedebilirsiniz."</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Parmak izi sensörü"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Işıklı Bildirim"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Işıklı bildirimler hakkında"</string>
@@ -4753,4 +4766,7 @@
     <string name="show_captions_enabled" msgid="7089043007924626">"Açık"</string>
     <string name="live_caption_disabled" msgid="3562035026547887366">"Kapalı"</string>
     <string name="live_caption_enabled" msgid="5269360946200718949">"Açık"</string>
+    <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Yüklediğiniz uygulamalar, cihazınızın adını görebilecek. Cihazınızın adı ayrıca Bluetooth cihazlara bağlandığınızda, kablosuz ağa bağlandığınızda veya kablosuz hotspot oluşturduğunuzda diğer kişiler tarafından görülecektir."</string>
+    <string name="grammatical_gender_title" msgid="8584242850477270828">"Dil bilgisine uygun cinsiyet"</string>
+    <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Dil bilgisine uygun cinsiyet seçin"</string>
 </resources>

@@ -388,7 +388,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"چهره و <xliff:g id="WATCH">%s</xliff:g> اضافه شد"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"چهره، اثر انگشت، و <xliff:g id="WATCH">%s</xliff:g> اضافه شد"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"چهره، اثر انگشت، و <xliff:g id="WATCH">%s</xliff:g> اضافه شد"</string>
-    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"قفل‌گشایی با چهره و اثر انگشت"</string>
+    <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"قفل‌گشایی با اثر انگشت و چهره"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"«قفل‌گشایی با اثر انگشت و چهره» برای نمایه کاری"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"راه‌اندازی لازم است"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"چهره و چند اثر انگشت اضافه شده است"</string>
@@ -545,10 +545,7 @@
     <string name="face_unlock_set_unlock_pin" msgid="9034912683791069602">"پین • چهره"</string>
     <string name="face_unlock_set_unlock_password" msgid="5874950853246424756">"گذرواژه • چهره"</string>
     <string name="face_unlock_skip_face" msgid="189695556498300008">"ادامه بدون «قفل‌گشایی با چهره»"</string>
-    <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"الگو • چهره • اثر انگشت"</string>
-    <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"پین • چهره • اثر انگشت"</string>
-    <string name="biometrics_unlock_set_unlock_password" msgid="4612217647465743624">"گذرواژه • چهره • اثر انگشت"</string>
-    <string name="biometrics_unlock_skip_biometrics" msgid="7785643433551409223">"ادامه دادن بدون تشخیص چهره یا اثر انگشت"</string>
+    <string name="biometrics_unlock_skip_biometrics" msgid="7399882488272450182">"ادامه دادن بدون اثر انگشت یا چهره"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"خالی"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"تند کشیدن"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="1926480143883094896">"الگو"</string>
@@ -1002,6 +999,8 @@
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"خاموش"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"تعادل سفیدی نمایشگر"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
+    <string name="stay_awake_on_fold_title" msgid="4195536619511589471">"قفل نشدن هنگام تاخوردن"</string>
+    <string name="stay_awake_on_fold_summary" msgid="2413928869516675293">"نمایشگر جلو هنگام تاخوردن تا پایان وقفه صفحه‌نمایش قفل نمی‌شود"</string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"نمایشگر روان"</string>
     <string name="peak_refresh_rate_summary" msgid="3627278682437562787">"به‌طور خودکار نرخ بازآوری را برای بعضی محتوا، از ۶۰ هرتز تا <xliff:g id="ID_1">%1$s</xliff:g> هرتز بالا می‌برد. مصرف باتری را افزایش می‌دهد."</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"اعمال بالاترین نرخ بازآوری"</string>
@@ -2935,6 +2934,7 @@
     <string name="keywords_app_pinning" msgid="1564144561464945019">"سنجاق کردن صفحه"</string>
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"چالش کار، کار، نمایه"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"نمایه کاری، نمایه مدیریت‌شده، یکی شدن، یکپارچگی، کار، نمایه"</string>
+    <string name="keywords_stay_awake_on_lock" msgid="6338367464776295697">"بیدار، خواب، قفل نشود، درحالت تاخوردگی باز بماند، تا خوردن، بستن، تا زدن، بسته، خاموش شدن صفحه‌نمایش"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"اشاره‌ها"</string>
     <string name="keywords_wallet" msgid="3757421969956996972">"کیف پول"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"پرداخت کردن، ضربه زدن، پرداخت‌ها"</string>
@@ -4156,7 +4156,7 @@
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
     <string name="enable_angle_as_system_driver" msgid="3985105681812713612">"‏فعال کردن ANGLE"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="4173041926052925436">"‏فعال کردن ANGLE به‌عنوان درایور OpenGL ES در سیستم"</string>
+    <string name="enable_angle_as_system_driver_summary" msgid="6413038127558166972">"‏فعال کردن ANGLE به‌عنوان درایور پیش‌فرض OpenGL ES. فعال کردن آن در دستگاه‌های ناسازگار ممکن است باعث ازکارافتادن برخی برنامه‌ها شود."</string>
     <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"‏برای تغییر درایور OpenGL ES در سیستم، به بازراه‌اندازی نیاز است"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"تغییرات در سازگاری برنامه"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"روشن/خاموش کردن تغییرات سازگاری برنامه"</string>
@@ -4329,6 +4329,7 @@
     <string name="sim_action_no_thanks" msgid="435717748384544195">"نه متشکرم"</string>
     <string name="sim_action_cancel" msgid="2668099867029610910">"لغو"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"عوض کردن"</string>
+    <string name="sim_action_turn_off" msgid="3506698692916473000">"خاموش کردن"</string>
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"سیم‌کارت فعال نشد"</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"سیم‌کارت را دوباره روشن کنید. اگر مشکل ادامه داشت، دستگاهتان را بازراه‌اندازی کنید."</string>
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"فعال‌سازی شبکه"</string>
@@ -4703,6 +4704,18 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"حذف نصب برنامه"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{برنامه‌هایی که طی # ماه گذشته نصب شده است}one{برنامه‌هایی که طی # ماه گذشته نصب شده است}other{برنامه‌هایی که طی # ماه گذشته نصب شده است}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{برنامه‌هایی که بیش‌از # ماه از نصب آن‌ها می‌گذرد}one{برنامه‌هایی که بیش‌از # ماه از نصب آن‌ها می‌گذرد}other{برنامه‌هایی که بیش‌از # ماه از نصب آن‌ها می‌گذرد}}"</string>
+    <string name="aspect_ratio_title" msgid="2451826875939676101">"نسبت ابعادی"</string>
+    <string name="aspect_ratio_summary" msgid="5944347596728740547">"اگر این برنامه متناسب با <xliff:g id="DEVICE_NAME">%1$s</xliff:g> شما طراحی نشده است، نسبت ابعادی را برای مشاهده آن انتخاب کنید"</string>
+    <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"برنامه‌های پیشنهادی"</string>
+    <string name="user_aspect_ratio_overridden_apps_label" msgid="1564914138276629704">"برنامه‌هایی که ملغی کرده‌اید"</string>
+    <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"پیش‌فرض برنامه"</string>
+    <string name="user_aspect_ratio_fullscreen" msgid="1843427242540081996">"تمام‌صفحه"</string>
+    <string name="user_aspect_ratio_half_screen" msgid="1015852057094310209">"نیم‌صفحه"</string>
+    <string name="user_aspect_ratio_device_size" msgid="2339820985120881199">"نسبت ابعادی دستگاه"</string>
+    <string name="user_aspect_ratio_16_9" msgid="2286644872775170164">"۱۶:۹"</string>
+    <string name="user_aspect_ratio_3_2" msgid="199262962518318932">"۳:۲"</string>
+    <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"۴:۳"</string>
+    <string name="app_aspect_ratio_footer" msgid="8661813386126142251">"هنگام تغییر نسبت ابعادی، برنامه بازراه‌اندازی می‌شود. ممکن است تغییرات ذخیره‌نشده را ازدست بدهید."</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"حسگر اثر انگشت"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"اعلان‌های چشمک‌زن"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"درباره اعلان‌های چشمک‌زن"</string>
@@ -4753,4 +4766,7 @@
     <string name="show_captions_enabled" msgid="7089043007924626">"روشن"</string>
     <string name="live_caption_disabled" msgid="3562035026547887366">"خاموش"</string>
     <string name="live_caption_enabled" msgid="5269360946200718949">"روشن"</string>
+    <string name="about_phone_device_name_warning" msgid="3243226572404472381">"‏نام دستگاه شما برای برنامه‌هایی که نصب کرده‌اید قابل‌مشاهده است. همچنین ممکن است هنگام اتصال به دستگاه‌های بلوتوث، اتصال به شبکه Wi-Fi، یا راه‌اندازی نقطه اتصال Wi-Fi، برای افراد دیگر قابل‌مشاهده باشد."</string>
+    <string name="grammatical_gender_title" msgid="8584242850477270828">"جنسیت دستوری"</string>
+    <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"انتخاب جنسیت دستوری"</string>
 </resources>

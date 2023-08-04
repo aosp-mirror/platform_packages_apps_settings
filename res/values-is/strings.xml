@@ -388,7 +388,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Andliti og <xliff:g id="WATCH">%s</xliff:g> bætt við"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Andliti, fingrafari og <xliff:g id="WATCH">%s</xliff:g> bætt við"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Andliti, fingraförum og <xliff:g id="WATCH">%s</xliff:g> bætt við"</string>
-    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Andlits- og fingrafarskenni"</string>
+    <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"Fingrafar og andlitskenni"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Andlits- og fingrafarskenni fyrir vinnu"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"Þörf er á uppsetningu"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Andliti og fingraförum bætt við"</string>
@@ -545,10 +545,7 @@
     <string name="face_unlock_set_unlock_pin" msgid="9034912683791069602">"PIN-númer • Andlit"</string>
     <string name="face_unlock_set_unlock_password" msgid="5874950853246424756">"Aðgangsorð • Andlit"</string>
     <string name="face_unlock_skip_face" msgid="189695556498300008">"Halda áfram án andlitskennis"</string>
-    <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"Mynstur • Andlit • Fingrafar"</string>
-    <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"PIN-númer • Andlit • Fingrafar"</string>
-    <string name="biometrics_unlock_set_unlock_password" msgid="4612217647465743624">"Aðgangsorð • Andlit • Fingrafar"</string>
-    <string name="biometrics_unlock_skip_biometrics" msgid="7785643433551409223">"Halda áfram án andlits eða fingrafars"</string>
+    <string name="biometrics_unlock_skip_biometrics" msgid="7399882488272450182">"Halda áfram án fingrafara eða andlits"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"Enginn"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"Strjúka"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="1926480143883094896">"Mynstur"</string>
@@ -1002,6 +999,8 @@
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Slökkt"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Sýna hvítjöfnun"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
+    <string name="stay_awake_on_fold_title" msgid="4195536619511589471">"Haldast ólæstur samanbrotinn"</string>
+    <string name="stay_awake_on_fold_summary" msgid="2413928869516675293">"Halda framskjá ólæstum þegar hann er samanbrotinn þar til tímamörkum skjás er náð"</string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Hnökralaus skjár"</string>
     <string name="peak_refresh_rate_summary" msgid="3627278682437562787">"Breytir endurnýjunarhraða sjálfkrafa úr 60 í <xliff:g id="ID_1">%1$s</xliff:g> Hz fyrir sumt efni. Eykur rafhlöðunotkun."</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Þvinga fram mesta endurnýjunarhraða"</string>
@@ -2935,6 +2934,7 @@
     <string name="keywords_app_pinning" msgid="1564144561464945019">"skjáfesting"</string>
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"verkefni í vinnu, vinna, snið"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"vinnusnið, stýrt snið, sameina, sameining, vinna, snið"</string>
+    <string name="keywords_stay_awake_on_lock" msgid="6338367464776295697">"vakandi, sofa, ekki læsa, haldast ólæstur þegar brotinn saman, brjóta saman, loka, brjóta, lokun, slökkt á skjá"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"bendingar"</string>
     <string name="keywords_wallet" msgid="3757421969956996972">"veski"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"borga, ýta, greiðslur"</string>
@@ -4156,7 +4156,7 @@
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
     <string name="enable_angle_as_system_driver" msgid="3985105681812713612">"Virkja ANGLE"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="4173041926052925436">"Virkja ANGLE sem OpenGL ES-rekil kerfis"</string>
+    <string name="enable_angle_as_system_driver_summary" msgid="6413038127558166972">"Virkja ANGLE sem sjálfgefinn OpenGL ES-rekil Ef þetta er virkjað í ósamhæfum tækjum getur það valdið bilunum í sumum forritum."</string>
     <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"Endurræsingar er krafist til að skipta um OpenGL ES-rekil kerfis"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Breytingar á samhæfi forrits"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Víxla samhæfisbreytingum forrits"</string>
@@ -4329,6 +4329,7 @@
     <string name="sim_action_no_thanks" msgid="435717748384544195">"Nei, takk"</string>
     <string name="sim_action_cancel" msgid="2668099867029610910">"Hætta við"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"Skipta"</string>
+    <string name="sim_action_turn_off" msgid="3506698692916473000">"Slökkva"</string>
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"Ekki er hægt að virkja SIM-kort"</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"Prófaðu að kveikja aftur á SIM-kortinu. Ef vandamálið leysist ekki skaltu endurræsa tækið."</string>
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"Virkjun símkerfis"</string>
@@ -4703,6 +4704,24 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"Fjarlægja forrit"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Forrit sem voru sett upp á síðasta # mánuði}one{Forrit sem voru sett upp á síðasta # mánuði}other{Forrit sem voru sett upp á síðustu # mánuðum}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Forrit sem voru sett upp fyrir # mánuði}one{Forrit sem voru sett upp fyrir # mánuði}other{Forrit sem voru sett upp fyrir # mánuðum}}"</string>
+    <!-- no translation found for aspect_ratio_title (2451826875939676101) -->
+    <skip />
+    <!-- no translation found for aspect_ratio_summary (5944347596728740547) -->
+    <skip />
+    <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"Tillögur að forritum"</string>
+    <string name="user_aspect_ratio_overridden_apps_label" msgid="1564914138276629704">"Forrit sem þú hefur hnekkt"</string>
+    <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"Sjálfgefið í forriti"</string>
+    <!-- no translation found for user_aspect_ratio_fullscreen (1843427242540081996) -->
+    <skip />
+    <!-- no translation found for user_aspect_ratio_half_screen (1015852057094310209) -->
+    <skip />
+    <!-- no translation found for user_aspect_ratio_device_size (2339820985120881199) -->
+    <skip />
+    <string name="user_aspect_ratio_16_9" msgid="2286644872775170164">"16:9"</string>
+    <string name="user_aspect_ratio_3_2" msgid="199262962518318932">"3:2"</string>
+    <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4:3"</string>
+    <!-- no translation found for app_aspect_ratio_footer (8661813386126142251) -->
+    <skip />
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Fingrafaralesari"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Flasstilkynningar"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Um flasstilkynningar"</string>
@@ -4753,4 +4772,7 @@
     <string name="show_captions_enabled" msgid="7089043007924626">"Kveikt"</string>
     <string name="live_caption_disabled" msgid="3562035026547887366">"Slökkt"</string>
     <string name="live_caption_enabled" msgid="5269360946200718949">"Kveikt"</string>
+    <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Heiti tækisins er sýnilegt uppsettum forritum. Heiti þess er hugsanlega einnig sýnilegt öðru fólki þegar þú tengist Bluetooth-tækjum, WiFi-neti eða setur upp heitan WiFi-reit."</string>
+    <string name="grammatical_gender_title" msgid="8584242850477270828">"Kyn"</string>
+    <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Veldu kyn"</string>
 </resources>
