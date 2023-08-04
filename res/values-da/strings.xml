@@ -122,7 +122,7 @@
     <string name="stylus_default_notes_app" msgid="4165657465911764628">"Ved tryk på knappen til styluspennen"</string>
     <string name="stylus_default_notes_summary_work" msgid="4554643411627934223">"<xliff:g id="APP_NAME">%s</xliff:g> (arbejdsprofil)"</string>
     <string name="stylus_textfield_handwriting" msgid="2363579035338976327">"Skriv i tekstfelter"</string>
-    <string name="stylus_ignore_button" msgid="7734540973145241391">"Ignorer alle trykker på knapper med styluspen"</string>
+    <string name="stylus_ignore_button" msgid="7734540973145241391">"Ignorer alle tryk på styluspen-knappen"</string>
     <string name="stylus_connected_devices_title" msgid="2823967577941359812">"Styluspen"</string>
     <string name="date_and_time" msgid="1788358029823431692">"Dato og klokkeslæt"</string>
     <string name="proxy_settings_title" msgid="4201866858226087066">"Proxy"</string>
@@ -388,7 +388,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Ansigt og <xliff:g id="WATCH">%s</xliff:g> er tilføjet"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Ansigt, fingeraftryk og <xliff:g id="WATCH">%s</xliff:g> er tilføjet"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Ansigt, fingeraftryk og <xliff:g id="WATCH">%s</xliff:g> er tilføjet"</string>
-    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Ansigtslås og oplåsning med fingeraftryk"</string>
+    <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"Fingeraftryk og ansigtslås"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Ansigtslås og oplåsning med fingeraftryk til arbejdsprofil"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"Konfiguration er påkrævet"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Ansigt og fingeraftryk er tilføjet"</string>
@@ -545,10 +545,7 @@
     <string name="face_unlock_set_unlock_pin" msgid="9034912683791069602">"Pinkode • Ansigt"</string>
     <string name="face_unlock_set_unlock_password" msgid="5874950853246424756">"Adgangskode • Ansigt"</string>
     <string name="face_unlock_skip_face" msgid="189695556498300008">"Fortsæt uden ansigtslås"</string>
-    <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"Mønster • Ansigt • Fingeraftryk"</string>
-    <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"Pinkode • Ansigt • Fingeraftryk"</string>
-    <string name="biometrics_unlock_set_unlock_password" msgid="4612217647465743624">"Adgangskode • Ansigt • Fingeraftryk"</string>
-    <string name="biometrics_unlock_skip_biometrics" msgid="7785643433551409223">"Fortsæt uden ansigtslås eller fingeraftryk"</string>
+    <string name="biometrics_unlock_skip_biometrics" msgid="7399882488272450182">"Fortsæt uden fingeraftryk eller ansigtsgenkendelse"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"Ingen"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"Stryg"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="1926480143883094896">"Mønster"</string>
@@ -1002,6 +999,8 @@
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Fra"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Skærmens hvidbalance"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
+    <string name="stay_awake_on_fold_title" msgid="4195536619511589471">"Forbliv oplåst, når den er foldet"</string>
+    <string name="stay_awake_on_fold_summary" msgid="2413928869516675293">"Lad skærmen på forsiden forblive oplåst, når enheden er foldet, indtil timeout for skærmen"</string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="3627278682437562787">"Øger automatisk opdateringshastigheden fra 60 til <xliff:g id="ID_1">%1$s</xliff:g> Hz for noget indhold. Medfører højere batteriforbrug."</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Gennemtving højeste opdateringshastighed"</string>
@@ -1951,7 +1950,7 @@
     <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"Handlingstid"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="4037051091059316310">"Denne tidsbaserede præference understøttes ikke af alle apps"</string>
     <string name="accessibility_control_timeout_preference_intro_text" msgid="1398116710556762245">"Vælg, hvor længe der skal vises midlertidige meddelelser, som beder dig om at foretage en handling"</string>
-    <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Forsinkelse for hold finger på"</string>
+    <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Forsinkelse for Tryk og hold"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Ombytning af farver"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Brug ombytning af farver"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Genvej til ombytning af farver"</string>
@@ -2060,8 +2059,8 @@
     <string name="daltonizer_mode_protanomaly_title" msgid="6392456967103014723">"Rød-grøn"</string>
     <string name="daltonizer_mode_tritanomaly_title" msgid="2278786218762602022">"Blå-gul"</string>
     <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"Gråtoner"</string>
-    <string name="daltonizer_mode_deuteranomaly_summary" msgid="2117727423019598455">"Grøn svag, deuteranomali"</string>
-    <string name="daltonizer_mode_protanomaly_summary" msgid="4617032854982040748">"Rød svag, protanomali"</string>
+    <string name="daltonizer_mode_deuteranomaly_summary" msgid="2117727423019598455">"Farvesvaghed for grøn, deuteranomali"</string>
+    <string name="daltonizer_mode_protanomaly_summary" msgid="4617032854982040748">"Farvesvaghed for rød, protanomali"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Tritanomali"</string>
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"Ekstra dæmpet belysning"</string>
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Ekstra dæmpet belysning af skærm"</string>
@@ -2732,7 +2731,7 @@
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"Opkalds- og sms-historikken vil blive delt med denne bruger."</string>
     <string name="user_revoke_admin_confirm_title" msgid="3057842401861731863">"Vil du fjerne administratorrettighederne?"</string>
     <string name="user_revoke_admin_confirm_message" msgid="9207187319308572958">"Hvis du fjerner administratorrettigheder for denne bruger, kan du eller en anden administrator tildele dem igen senere."</string>
-    <string name="emergency_info_title" msgid="8233682750953695582">"Info til nødsituationer"</string>
+    <string name="emergency_info_title" msgid="8233682750953695582">"Nødoplysninger"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"Oplysninger og kontakter for <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="open_app_button" msgid="5025229765547191710">"Åbn <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="application_restrictions" msgid="276179173572729205">"Tillad apps og indhold"</string>
@@ -2935,6 +2934,7 @@
     <string name="keywords_app_pinning" msgid="1564144561464945019">"skærmfastholdelse"</string>
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"arbejdsudfordring, arbejde, profil"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"arbejdsprofil, administreret profil, samle, samling, arbejde, profil"</string>
+    <string name="keywords_stay_awake_on_lock" msgid="6338367464776295697">"aktiv, dvale, lås ikke, forbliv oplåst i foldet tilstand, foldet, folde, lukke, fold, luk, deaktiver skærm"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"bevægelser"</string>
     <string name="keywords_wallet" msgid="3757421969956996972">"Wallet"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"betal, tryk, betalinger"</string>
@@ -4156,7 +4156,7 @@
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
     <string name="enable_angle_as_system_driver" msgid="3985105681812713612">"Aktivér ANGLE"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="4173041926052925436">"Aktivér ANGLE som OpenGL ES-systemdriver"</string>
+    <string name="enable_angle_as_system_driver_summary" msgid="6413038127558166972">"Aktivér ANGLE som OpenGL ES-standarddriver. Hvis du aktiverer den på inkompatible enheder, fungerer visse apps muligvis ikke."</string>
     <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"Du skal genstarte for at ændre OpenGL ES-systemdriveren"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Ændringer i appkompatibilitet"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Skift appens kompatibilitetsændringer"</string>
@@ -4329,6 +4329,7 @@
     <string name="sim_action_no_thanks" msgid="435717748384544195">"Nej tak"</string>
     <string name="sim_action_cancel" msgid="2668099867029610910">"Annuller"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"Skift"</string>
+    <string name="sim_action_turn_off" msgid="3506698692916473000">"Deaktiver"</string>
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"SIM-kortet kunne ikke aktiveres"</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"Prøv at aktivere SIM-kortet igen. Genstart enheden, hvis problemet fortsætter."</string>
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"Netværksaktivering"</string>
@@ -4436,7 +4437,7 @@
     <string name="system_default_app_subtext" msgid="5212055189703164839">"Systemstandard"</string>
     <string name="default_app_none" msgid="5420632042222036264">"Ingen"</string>
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"Dette valg er ikke længere gyldigt. Prøv igen."</string>
-    <string name="power_menu_setting_name" msgid="2394440932633137229">"Hold afbryderU+00ADknappen nede"</string>
+    <string name="power_menu_setting_name" msgid="2394440932633137229">"Hold afbryder­knappen nede"</string>
     <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"Hold afbryderknappen nede for at tilgå"</string>
     <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"Menu for afbryderknappen"</string>
     <string name="power_menu_long_press_for_assistant_title" msgid="6557738348262616455">"Digital assistent"</string>
@@ -4703,6 +4704,24 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"Afinstaller app"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Apps installeret i den seneste måned}one{Apps installeret i de seneste}other{Apps installeret i de seneste # måneder}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Apps, som er installeret for mere end # måned siden}one{Apps, som er installeret for mere end # måned siden}other{Apps, som er installeret for mere end # måneder siden}}"</string>
+    <!-- no translation found for aspect_ratio_title (2451826875939676101) -->
+    <skip />
+    <!-- no translation found for aspect_ratio_summary (5944347596728740547) -->
+    <skip />
+    <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"Foreslåede apps"</string>
+    <string name="user_aspect_ratio_overridden_apps_label" msgid="1564914138276629704">"Apps, du har tilsidesat"</string>
+    <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"Standardindstilling for appen"</string>
+    <!-- no translation found for user_aspect_ratio_fullscreen (1843427242540081996) -->
+    <skip />
+    <!-- no translation found for user_aspect_ratio_half_screen (1015852057094310209) -->
+    <skip />
+    <!-- no translation found for user_aspect_ratio_device_size (2339820985120881199) -->
+    <skip />
+    <string name="user_aspect_ratio_16_9" msgid="2286644872775170164">"16:9"</string>
+    <string name="user_aspect_ratio_3_2" msgid="199262962518318932">"3:2"</string>
+    <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4:3"</string>
+    <!-- no translation found for app_aspect_ratio_footer (8661813386126142251) -->
+    <skip />
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Fingeraftrykssensor"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Lysnotifikationer"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Om lysnotifikationer"</string>
@@ -4753,4 +4772,7 @@
     <string name="show_captions_enabled" msgid="7089043007924626">"Til"</string>
     <string name="live_caption_disabled" msgid="3562035026547887366">"Fra"</string>
     <string name="live_caption_enabled" msgid="5269360946200718949">"Til"</string>
+    <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Din enheds navn er synligt for apps, du har installeret. Det kan muligvis også ses af andre, når du opretter forbindelse til Bluetooth-enheder eller et Wi-Fi-netværk, eller når du konfigurerer et Wi-Fi-hotspot."</string>
+    <string name="grammatical_gender_title" msgid="8584242850477270828">"Grammatisk køn"</string>
+    <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Vælg grammatisk køn"</string>
 </resources>

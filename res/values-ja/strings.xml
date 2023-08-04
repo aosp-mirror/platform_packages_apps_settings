@@ -250,10 +250,10 @@
     <string name="zone_time_type_standard" msgid="6865420715430680352">"標準時間"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"地域で選択"</string>
     <string name="zone_menu_by_offset" msgid="1257702747474426745">"UTC オフセットで選択"</string>
-    <string name="lock_after_timeout" msgid="8682769000437403444">"画面消灯後からロックまでの時間"</string>
+    <string name="lock_after_timeout" msgid="8682769000437403444">"画面が自動的に消灯してからロックまでの時間"</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"タイムアウトから <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>"</string>
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"画面消灯の直後にロック（<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> がロック解除を管理している場合を除く）"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"画面消灯後から<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>後にロック（<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> がロック解除を管理している場合を除く）"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"画面が自動的に消灯してから<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>後にロック（<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> がロック解除を管理している場合を除く）"</string>
     <string name="owner_info_settings_title" msgid="3555626140700093017">"ロック画面にテキストを追加"</string>
     <string name="owner_info_settings_summary" msgid="347238313388083297">"なし"</string>
     <string name="owner_info_settings_edit_text_hint" msgid="841926875876050274">"例: 佐藤のAndroid"</string>
@@ -388,7 +388,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"顔、<xliff:g id="WATCH">%s</xliff:g>を登録しました"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"顔、指紋、<xliff:g id="WATCH">%s</xliff:g>を登録しました"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"顔、指紋、<xliff:g id="WATCH">%s</xliff:g>を登録しました"</string>
-    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"顔認証と指紋認証によるロック解除"</string>
+    <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"指紋認証と顔認証"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"仕事用の顔認証と指紋認証"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"セットアップが必要です"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"顔と指紋を登録しました"</string>
@@ -545,10 +545,7 @@
     <string name="face_unlock_set_unlock_pin" msgid="9034912683791069602">"PIN • 顔認証"</string>
     <string name="face_unlock_set_unlock_password" msgid="5874950853246424756">"パスワード • 顔認証"</string>
     <string name="face_unlock_skip_face" msgid="189695556498300008">"顔認証を設定せずに続行"</string>
-    <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"パターン • 顔 • 指紋"</string>
-    <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"PIN • 顔 • 指紋"</string>
-    <string name="biometrics_unlock_set_unlock_password" msgid="4612217647465743624">"パスワード • 顔 • 指紋"</string>
-    <string name="biometrics_unlock_skip_biometrics" msgid="7785643433551409223">"顔認証や指紋認証を設定せずに続行"</string>
+    <string name="biometrics_unlock_skip_biometrics" msgid="7399882488272450182">"指紋認証や顔認証を使わずに続行する"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"なし"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"スワイプ"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="1926480143883094896">"パターン"</string>
@@ -909,24 +906,24 @@
     <string name="wifi_hotspot_maximize_compatibility_single_ap_summary" msgid="383355687431591441">"他のデバイスにこのアクセス ポイントが公開されます。アクセス ポイント接続速度が低下します。"</string>
     <string name="wifi_hotspot_maximize_compatibility_dual_ap_summary" msgid="3579549223159056533">"他のデバイスにこのアクセス ポイントが公開されます。バッテリー使用量が増えます。"</string>
     <string name="wifi_hotspot_speed_title" msgid="8629448084180512685">"速度と互換性"</string>
-    <string name="wifi_hotspot_speed_summary_2g" msgid="5063438001736234858">"2.4 GHz / ほとんどのデバイスと互換性あり"</string>
-    <string name="wifi_hotspot_speed_summary_5g" msgid="6221158936983135040">"5 GHz / 多くのデバイスと互換性あり"</string>
-    <string name="wifi_hotspot_speed_summary_6g" msgid="8863992901226595544">"6 GHz / ごく一部のデバイスのみと互換性あり"</string>
-    <string name="wifi_hotspot_speed_summary_2g_and_5g" msgid="5931052946168943750">"2.4 / 5 GHz / ほとんどのデバイスと互換性あり"</string>
+    <string name="wifi_hotspot_speed_summary_2g" msgid="5063438001736234858">"2.4 GHz / ほとんどのデバイスに対応"</string>
+    <string name="wifi_hotspot_speed_summary_5g" msgid="6221158936983135040">"5 GHz / 対応デバイスは多数"</string>
+    <string name="wifi_hotspot_speed_summary_6g" msgid="8863992901226595544">"6 GHz / 対応デバイスはまだ少数"</string>
+    <string name="wifi_hotspot_speed_summary_2g_and_5g" msgid="5931052946168943750">"2.4 / 5 GHz / ほとんどのデバイスに対応"</string>
     <string name="wifi_hotspot_speed_intro" msgid="6973482196363758925">"アクセス ポイントの周波数を選択してください。周波数は、接続速度と、アクセス ポイントを検出できるデバイスの種類に影響します。"</string>
     <string name="wifi_hotspot_speed_category" msgid="5265655850463630286">"優先周波数"</string>
     <string name="wifi_hotspot_speed_2g" msgid="3400600834257664480">"2.4 GHz"</string>
-    <string name="wifi_hotspot_speed_2g_summary" msgid="6930273933810520155">"速度が遅くなります。ほとんどのデバイスと互換性があります。"</string>
+    <string name="wifi_hotspot_speed_2g_summary" msgid="6930273933810520155">"速度が遅くなります。ほとんどのデバイスに対応しています。"</string>
     <string name="wifi_hotspot_speed_5g" msgid="4058116867148848395">"5 GHz"</string>
-    <string name="wifi_hotspot_speed_5g_summary" msgid="562987935924535694">"高速です。多くのデバイスと互換性があります。"</string>
+    <string name="wifi_hotspot_speed_5g_summary" msgid="562987935924535694">"高速です。多数のデバイスに対応しています。"</string>
     <string name="wifi_hotspot_speed_2g_5g" msgid="9192756255938408285">"2.4 / 5 GHz"</string>
-    <string name="wifi_hotspot_speed_2g_5g_summary" msgid="8104575293617700173">"高速です。このデュアルバンドのアクセス ポイントはほとんどのデバイスと互換性があります。"</string>
+    <string name="wifi_hotspot_speed_2g_5g_summary" msgid="8104575293617700173">"高速です。このデュアルバンドのアクセス ポイントはほとんどのデバイスに対応しています。"</string>
     <string name="wifi_hotspot_speed_6g" msgid="3787697484862730500">"6 GHz"</string>
-    <string name="wifi_hotspot_speed_6g_summary" msgid="8675262219242174548">"速度が最も速くなります。ごく一部のデバイスのみと互換性があります。"</string>
+    <string name="wifi_hotspot_speed_6g_summary" msgid="8675262219242174548">"速度が最も速くなります。対応デバイスはまだ少数です。"</string>
     <string name="wifi_hotspot_speed_summary_unavailable" msgid="7276080644693388756">"お住まいの国や地域では利用できません"</string>
     <string name="wifi_hotspot_speed_footer" msgid="8846939503916795002">"優先周波数を利用できない場合、アクセス ポイントは別の周波数を使用する可能性があります。周波数を変更すると、アクセス ポイントのセキュリティ設定が変更される可能性があります。"</string>
     <string name="wifi_hotspot_security_summary_unavailable" msgid="117582979310345853">"6 GHz には対応していません"</string>
-    <string name="wifi_hotspot_security_footer" msgid="4608329688744949796">"アクセス ポイントの周波数を変更すると、アクセス セキュリティ設定が変更される可能性があります"</string>
+    <string name="wifi_hotspot_security_footer" msgid="4608329688744949796">"アクセス ポイントの周波数を変更すると、セキュリティ設定が変更される可能性があります"</string>
     <string name="wifi_tether_starting" msgid="8879874184033857814">"アクセスポイントをONにしています…"</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"アクセスポイントをOFFにしています…"</string>
     <string name="wifi_tether_carrier_unsupport_dialog_title" msgid="3089432578433978073">"テザリングは利用できません"</string>
@@ -1002,6 +999,8 @@
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"OFF"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"ディスプレイのホワイト バランス"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
+    <string name="stay_awake_on_fold_title" msgid="4195536619511589471">"折りたたみ時はロックを解除する"</string>
+    <string name="stay_awake_on_fold_summary" msgid="2413928869516675293">"折りたたんだ状態では、画面が消灯するまでフロント ディスプレイのロックを解除します"</string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"スムーズ ディスプレイ"</string>
     <string name="peak_refresh_rate_summary" msgid="3627278682437562787">"コンテンツに応じて、リフレッシュ レートを自動的に 60 Hz から <xliff:g id="ID_1">%1$s</xliff:g> Hz に変更します。バッテリー使用量が増えます。"</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"ピーク時のリフレッシュ レートの適用"</string>
@@ -2309,7 +2308,7 @@
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"ON にする"</string>
-    <string name="battery_saver_master_switch_title" msgid="3474312070095834915">"バッテリー セーバーを使用する"</string>
+    <string name="battery_saver_master_switch_title" msgid="3474312070095834915">"バッテリー セーバーを使用"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="7857393318205740864">"自動的にON"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6194649389871448663">"使用しない"</string>
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"バッテリー残量が <xliff:g id="PERCENT">%1$s</xliff:g> になったとき"</string>
@@ -2724,7 +2723,7 @@
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"今回のゲスト セッションのアプリとデータが今すぐ削除され、今後のゲストのアクティビティはすべて、ゲストモードを終了するたびに削除されます"</string>
     <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"削除, ゲスト, アクティビティ, 消す, データ, ビジター, 消去"</string>
     <string name="enable_guest_calling" msgid="4620657197834392094">"ゲストに通話を許可する"</string>
-    <string name="enable_guest_calling_summary" msgid="4748224917641204782">"発信履歴がゲストユーザーと共有されます。"</string>
+    <string name="enable_guest_calling_summary" msgid="4748224917641204782">"通話履歴がゲストユーザーと共有されます。"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"通話と SMS を ON"</string>
     <string name="user_grant_admin" msgid="5942118263054572074">"このユーザーを管理者にする"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"ユーザーの削除"</string>
@@ -2935,6 +2934,7 @@
     <string name="keywords_app_pinning" msgid="1564144561464945019">"画面固定"</string>
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"ワーク チャレンジ, 仕事用, プロファイル"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"仕事用プロファイル, 管理対象プロファイル, 統合する, 統合, 仕事, プロファイル"</string>
+    <string name="keywords_stay_awake_on_lock" msgid="6338367464776295697">"アクティブ, スリープ, ロックしない, 折りたたみ時はロックを解除する, 折りたたんでいる, 閉じている, 折りたたむ, 閉じる, 画面 OFF"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"ジェスチャー"</string>
     <string name="keywords_wallet" msgid="3757421969956996972">"ウォレット"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"支払い, タップ, ペイメント"</string>
@@ -4156,7 +4156,7 @@
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
     <string name="enable_angle_as_system_driver" msgid="3985105681812713612">"ANGLE を有効にする"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="4173041926052925436">"システムの OpenGL ES ドライバとして ANGLE を有効にする"</string>
+    <string name="enable_angle_as_system_driver_summary" msgid="6413038127558166972">"デフォルトの OpenGL ES ドライバとして ANGLE を有効にします。互換性のないデバイスで有効にすると、一部のアプリケーションに問題が発生するおそれがあります。"</string>
     <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"システムの OpenGL ES ドライバを変更するには再起動が必要です"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"アプリの互換性の変更"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"「アプリの互換性の変更」を切り替えます"</string>
@@ -4329,6 +4329,7 @@
     <string name="sim_action_no_thanks" msgid="435717748384544195">"いいえ"</string>
     <string name="sim_action_cancel" msgid="2668099867029610910">"キャンセル"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"切り替える"</string>
+    <string name="sim_action_turn_off" msgid="3506698692916473000">"OFF にする"</string>
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"SIM を有効にできません"</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"SIM をもう一度 ON にしてみてください。問題が解決しない場合は、デバイスを再起動してください。"</string>
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"ネットワークの有効化"</string>
@@ -4703,6 +4704,18 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"アプリをアンインストール"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{過去 # か月間にインストールされたアプリ}other{過去 # か月間にインストールされたアプリ}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{# か月以上前にインストールされたアプリ}other{# か月以上前にインストールされたアプリ}}"</string>
+    <string name="aspect_ratio_title" msgid="2451826875939676101">"アスペクト比"</string>
+    <string name="aspect_ratio_summary" msgid="5944347596728740547">"お使いの <xliff:g id="DEVICE_NAME">%1$s</xliff:g> にあわせた設計になっていないアプリの場合は、表示のアスペクト比を変更してください"</string>
+    <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"推奨アプリ"</string>
+    <string name="user_aspect_ratio_overridden_apps_label" msgid="1564914138276629704">"オーバーライドを指定したアプリ"</string>
+    <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"アプリのデフォルト"</string>
+    <string name="user_aspect_ratio_fullscreen" msgid="1843427242540081996">"全画面表示"</string>
+    <string name="user_aspect_ratio_half_screen" msgid="1015852057094310209">"画面半分のみ表示"</string>
+    <string name="user_aspect_ratio_device_size" msgid="2339820985120881199">"デバイスのアスペクト比"</string>
+    <string name="user_aspect_ratio_16_9" msgid="2286644872775170164">"16:9"</string>
+    <string name="user_aspect_ratio_3_2" msgid="199262962518318932">"3:2"</string>
+    <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4:3"</string>
+    <string name="app_aspect_ratio_footer" msgid="8661813386126142251">"アスペクト比を変更すると、アプリが再起動します。保存されていない変更は失われる可能性があります。"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"指紋認証センサー"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"点滅による通知"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"点滅による通知について"</string>
@@ -4753,4 +4766,7 @@
     <string name="show_captions_enabled" msgid="7089043007924626">"ON"</string>
     <string name="live_caption_disabled" msgid="3562035026547887366">"OFF"</string>
     <string name="live_caption_enabled" msgid="5269360946200718949">"ON"</string>
+    <string name="about_phone_device_name_warning" msgid="3243226572404472381">"インストールしたアプリにデバイス名が表示されます。また、Bluetooth デバイスや Wi-Fi ネットワークに接続したり Wi-Fi アクセス ポイントを設定したりすると、他のユーザーもデバイス名を確認できるようになります。"</string>
+    <string name="grammatical_gender_title" msgid="8584242850477270828">"文法性"</string>
+    <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"文法性の選択"</string>
 </resources>

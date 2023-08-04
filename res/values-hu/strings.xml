@@ -388,7 +388,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Arc és <xliff:g id="WATCH">%s</xliff:g> hozzáadva"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Arc, ujjlenyomat és <xliff:g id="WATCH">%s</xliff:g> hozzáadva"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Arc, ujjlenyomatok és <xliff:g id="WATCH">%s</xliff:g> hozzáadva"</string>
-    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Arc- és ujjlenyomat-alapú feloldás"</string>
+    <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"Feloldás ujjlenyomattal és Arcalapú feloldás"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Arc- és ujjlenyomat-alapú feloldás a munkaprofilban"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"Beállítás szükséges"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Arc és ujjlenyomatok hozzáadva"</string>
@@ -545,10 +545,7 @@
     <string name="face_unlock_set_unlock_pin" msgid="9034912683791069602">"PIN-kód • Arc"</string>
     <string name="face_unlock_set_unlock_password" msgid="5874950853246424756">"Jelszó • Arc"</string>
     <string name="face_unlock_skip_face" msgid="189695556498300008">"Folytatás Arcalapú feloldás nélkül"</string>
-    <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"Minta • Arc • Ujjlenyomat"</string>
-    <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"PIN-kód • Arc • Ujjlenyomat"</string>
-    <string name="biometrics_unlock_set_unlock_password" msgid="4612217647465743624">"Jelszó • Arc • Ujjlenyomat"</string>
-    <string name="biometrics_unlock_skip_biometrics" msgid="7785643433551409223">"Folytatás arc- vagy ujjlenyomat-alapú feloldás nélkül"</string>
+    <string name="biometrics_unlock_skip_biometrics" msgid="7399882488272450182">"Folytatás ujjlenyomat vagy arc nélkül"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"Nincs"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"Csúsztatás"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="1926480143883094896">"Minta"</string>
@@ -1002,6 +999,8 @@
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Kikapcsolva"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Kijelző fehéregyensúlya"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
+    <string name="stay_awake_on_fold_title" msgid="4195536619511589471">"Összehajtva feloldva marad"</string>
+    <string name="stay_awake_on_fold_summary" msgid="2413928869516675293">"Összehajtva az előlapi kijelző a képernyő időkorlátjáig feloldva marad"</string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="3627278682437562787">"Néhány tartalomnál automatikusan megemeli a frissítési gyakoriságot 60-ról <xliff:g id="ID_1">%1$s</xliff:g> Hz-re. Növeli az akkumulátorhasználatot."</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Legmagasabb frissítési gyakoriság kényszerítése"</string>
@@ -2935,6 +2934,7 @@
     <string name="keywords_app_pinning" msgid="1564144561464945019">"képernyő rögzítése"</string>
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"munkahelyi kihívás, munka, profil"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"munkaprofil, felügyelt profil, egyesít, egyesítés, munka, profil"</string>
+    <string name="keywords_stay_awake_on_lock" msgid="6338367464776295697">"ébren, alvás, ne zárjon le, összehajtva maradjon feloldva, összehajtás, bezárás, összehajt, bezár, képernyő kikapcsolva"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"kézmozdulatok"</string>
     <string name="keywords_wallet" msgid="3757421969956996972">"wallet"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"fizetés, koppintás, kifizetések"</string>
@@ -4156,7 +4156,7 @@
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
     <string name="enable_angle_as_system_driver" msgid="3985105681812713612">"Az ANGLE engedélyezése"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="4173041926052925436">"Az ANGLE engedélyezése a rendszer OpenGL ES illesztőprogramjaként"</string>
+    <string name="enable_angle_as_system_driver_summary" msgid="6413038127558166972">"Az ANGLE engedélyezése alapértelmezett OpenGL ES-illesztőprogramként. Ha nem kompatibilis eszközökön engedélyezi, az egyes alkalmazások működésképtelenné válhatnak."</string>
     <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"Újraindítás szükséges a rendszer OpenGL ES illesztőprogramjának módosításához"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Az alkalmazás kompatibilitási változtatásai"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Az alkalmazás kompatibilitási változtatásainak be- és kikapcsolása"</string>
@@ -4329,6 +4329,7 @@
     <string name="sim_action_no_thanks" msgid="435717748384544195">"Köszönöm, nem"</string>
     <string name="sim_action_cancel" msgid="2668099867029610910">"Mégse"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"Váltás"</string>
+    <string name="sim_action_turn_off" msgid="3506698692916473000">"Kikapcsolás"</string>
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"Nem sikerült a SIM aktiválása"</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"Próbálkozzon meg újra a SIM bekapcsolásával. Ha a probléma továbbra is fennáll, indítsa újra az eszközt."</string>
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"Hálózat aktiválása"</string>
@@ -4703,6 +4704,24 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"Alkalmazás eltávolítása"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Az elmúlt # hónapban telepített alkalmazások}other{Az elmúlt # hónapban telepített alkalmazások}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Az alkalmazások # hónapnál régebben lettek telepítve}other{Az alkalmazások # hónapnál régebben lettek telepítve}}"</string>
+    <!-- no translation found for aspect_ratio_title (2451826875939676101) -->
+    <skip />
+    <!-- no translation found for aspect_ratio_summary (5944347596728740547) -->
+    <skip />
+    <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"Javasolt alkalmazások"</string>
+    <string name="user_aspect_ratio_overridden_apps_label" msgid="1564914138276629704">"Ön által felülírt alkalmazások"</string>
+    <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"Alkalmazás alapértelmezett értéke"</string>
+    <!-- no translation found for user_aspect_ratio_fullscreen (1843427242540081996) -->
+    <skip />
+    <!-- no translation found for user_aspect_ratio_half_screen (1015852057094310209) -->
+    <skip />
+    <!-- no translation found for user_aspect_ratio_device_size (2339820985120881199) -->
+    <skip />
+    <string name="user_aspect_ratio_16_9" msgid="2286644872775170164">"16:9"</string>
+    <string name="user_aspect_ratio_3_2" msgid="199262962518318932">"3:2"</string>
+    <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4:3"</string>
+    <!-- no translation found for app_aspect_ratio_footer (8661813386126142251) -->
+    <skip />
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Ujjlenyomat-érzékelő"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Villogó értesítések"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"A villogó értesítésekről"</string>
@@ -4753,4 +4772,7 @@
     <string name="show_captions_enabled" msgid="7089043007924626">"Be"</string>
     <string name="live_caption_disabled" msgid="3562035026547887366">"Ki"</string>
     <string name="live_caption_enabled" msgid="5269360946200718949">"Be"</string>
+    <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Eszköze neve látható a telepített alkalmazások számára. Mások is láthatják, ha csatlakoztatja telefonját más Bluetooth-eszközökhöz, Wi-Fi-hálózathoz, vagy ha Wi-Fi-hotspotot állít be."</string>
+    <string name="grammatical_gender_title" msgid="8584242850477270828">"Nyelvtani nem"</string>
+    <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Nyelvtani nem kiválasztása"</string>
 </resources>
