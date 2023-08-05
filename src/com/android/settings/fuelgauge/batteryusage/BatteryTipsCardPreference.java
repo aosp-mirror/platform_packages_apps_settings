@@ -17,15 +17,19 @@
 package com.android.settings.fuelgauge.batteryusage;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 
@@ -40,12 +44,14 @@ public class BatteryTipsCardPreference extends Preference implements View.OnClic
 
     private final PowerUsageFeatureProvider mPowerUsageFeatureProvider;
 
-    private MaterialButton mActionButton;
-    private ImageButton mDismissButton;
-    private ImageButton mThumbUpButton;
-    private ImageButton mThumbDownButton;
-    private CharSequence mTitle;
-    private CharSequence mSummary;
+    @VisibleForTesting
+    CharSequence mMainButtonLabel;
+    @VisibleForTesting
+    CharSequence mDismissButtonLabel;
+    @VisibleForTesting
+    String mDestinationComponentName;
+    @VisibleForTesting
+    int mSourceMetricsCategory;
 
     public BatteryTipsCardPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -55,34 +61,65 @@ public class BatteryTipsCardPreference extends Preference implements View.OnClic
             .getPowerUsageFeatureProvider();
     }
 
-    @Override
-    public void setTitle(CharSequence title) {
-        mTitle = title;
-        notifyChanged();
+    /**
+     * Update the label of main button in tips card.
+     */
+    public void setMainButtonLabel(CharSequence label) {
+        if (!TextUtils.equals(mMainButtonLabel, label)) {
+            mMainButtonLabel = label;
+            notifyChanged();
+        }
     }
 
-    @Override
-    public void setSummary(CharSequence summary) {
-        mSummary = summary;
-        notifyChanged();
+    /**
+     * Update the label of dismiss button in tips card.
+     */
+    public void setDismissButtonLabel(CharSequence label) {
+        if (!TextUtils.equals(mDismissButtonLabel, label)) {
+            mDismissButtonLabel = label;
+            notifyChanged();
+        }
+    }
+
+    /**
+     * Update the info of target fragment launched by main button.
+     */
+    public void setMainButtonLauncherInfo(final String destinationClassName,
+            final Integer sourceMetricsCategory) {
+        mDestinationComponentName = destinationClassName;
+        mSourceMetricsCategory = sourceMetricsCategory;
     }
 
     @Override
     public void onClick(View view) {
-        // TODO: replace with the settings anomaly obtained from detectSettingsAnomaly();
+        final int viewId = view.getId();
+        if (viewId == R.id.main_button || viewId == R.id.tips_card) {
+            if (TextUtils.isEmpty(mDestinationComponentName)) {
+                return;
+            }
+            new SubSettingLauncher(getContext())
+                    .setDestination(mDestinationComponentName)
+                    .setSourceMetricsCategory(mSourceMetricsCategory)
+                    .launch();
+        } else if (viewId == R.id.dismiss_button) {
+            setVisible(false);
+        }
     }
 
     @Override
     public void onBindViewHolder(PreferenceViewHolder view) {
         super.onBindViewHolder(view);
 
-        ((TextView) view.findViewById(R.id.title)).setText(mTitle);
-        ((TextView) view.findViewById(R.id.summary)).setText(mSummary);
+        ((TextView) view.findViewById(R.id.title)).setText(getTitle());
 
-        mActionButton = (MaterialButton) view.findViewById(R.id.action_button);
-        mActionButton.setOnClickListener(this);
-        mDismissButton = (ImageButton) view.findViewById(R.id.dismiss_button);
-        mDismissButton.setOnClickListener(this);
+        LinearLayout tipsCard = (LinearLayout) view.findViewById(R.id.tips_card);
+        tipsCard.setOnClickListener(this);
+        MaterialButton mainButton = (MaterialButton) view.findViewById(R.id.main_button);
+        mainButton.setOnClickListener(this);
+        mainButton.setText(mMainButtonLabel);
+        MaterialButton dismissButton = (MaterialButton) view.findViewById(R.id.dismiss_button);
+        dismissButton.setOnClickListener(this);
+        dismissButton.setText(mDismissButtonLabel);
 
         if (!mPowerUsageFeatureProvider.isBatteryTipsFeedbackEnabled()) {
             return;
@@ -91,9 +128,9 @@ public class BatteryTipsCardPreference extends Preference implements View.OnClic
                 .setBackgroundResource(R.drawable.battery_tips_half_rounded_top_bg);
         view.findViewById(R.id.feedback_card).setVisibility(View.VISIBLE);
 
-        mThumbUpButton = (ImageButton) view.findViewById(R.id.thumb_up);
-        mThumbUpButton.setOnClickListener(this);
-        mThumbDownButton = (ImageButton) view.findViewById(R.id.thumb_down);
-        mThumbDownButton.setOnClickListener(this);
+        ImageButton thumbUpButton = (ImageButton) view.findViewById(R.id.thumb_up);
+        thumbUpButton.setOnClickListener(this);
+        ImageButton thumbDownButton = (ImageButton) view.findViewById(R.id.thumb_down);
+        thumbDownButton.setOnClickListener(this);
     }
 }

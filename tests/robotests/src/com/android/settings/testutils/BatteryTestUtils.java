@@ -18,6 +18,7 @@ package com.android.settings.testutils;
 
 import static org.mockito.Mockito.when;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.hardware.usb.UsbManager;
@@ -25,11 +26,17 @@ import android.hardware.usb.UsbPort;
 import android.hardware.usb.UsbPortStatus;
 import android.os.BatteryManager;
 import android.os.UserManager;
+
 import androidx.room.Room;
 
+import com.android.settings.display.AutoBrightnessSettings;
+import com.android.settings.display.ScreenTimeoutSettings;
 import com.android.settings.fuelgauge.batteryusage.BatteryInformation;
 import com.android.settings.fuelgauge.batteryusage.ConvertUtils;
 import com.android.settings.fuelgauge.batteryusage.DeviceBatteryState;
+import com.android.settings.fuelgauge.batteryusage.PowerAnomalyEvent;
+import com.android.settings.fuelgauge.batteryusage.PowerAnomalyEventList;
+import com.android.settings.fuelgauge.batteryusage.WarningBannerInfo;
 import com.android.settings.fuelgauge.batteryusage.db.AppUsageEventDao;
 import com.android.settings.fuelgauge.batteryusage.db.AppUsageEventEntity;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryState;
@@ -192,5 +199,34 @@ public class BatteryTestUtils {
         when(mockUsbPortStatus.isConnected()).thenReturn(true);
         when(mockUsbPortStatus.getComplianceWarnings())
                 .thenReturn(new int[]{UsbPortStatus.COMPLIANCE_WARNING_OTHER});
+    }
+
+    /** Create an empty power anomaly event list proto. */
+    public static PowerAnomalyEventList createEmptyPowerAnomalyEventList() {
+        return PowerAnomalyEventList.getDefaultInstance();
+    }
+
+    /** Create a power anomaly event proto of adaptive brightness. */
+    public static PowerAnomalyEvent createAdaptiveBrightnessAnomalyEvent() {
+        return PowerAnomalyEvent.newBuilder()
+                .setType("settings banner")
+                .setKey("adaptive_brightness")
+                .setWarningBannerInfo(WarningBannerInfo.newBuilder()
+                        .setMainButtonDestination(AutoBrightnessSettings.class.getName())
+                        .setMainButtonSourceMetricsCategory(SettingsEnums.SETTINGS_AUTO_BRIGHTNESS)
+                        .build())
+                .build();
+    }
+
+    /** Create a power anomaly event proto of screen timeout. */
+    public static PowerAnomalyEvent createScreenTimeoutAnomalyEvent() {
+        return PowerAnomalyEvent.newBuilder()
+                .setType("settings banner")
+                .setKey("screen_timeout")
+                .setWarningBannerInfo(WarningBannerInfo.newBuilder()
+                        .setMainButtonDestination(ScreenTimeoutSettings.class.getName())
+                        .setMainButtonSourceMetricsCategory(SettingsEnums.SCREEN_TIMEOUT)
+                        .build())
+                .build();
     }
 }

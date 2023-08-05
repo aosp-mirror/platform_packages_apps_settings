@@ -17,12 +17,17 @@
 package com.android.settings.fuelgauge.batteryusage;
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import androidx.preference.PreferenceScreen;
 
+import com.android.internal.annotations.VisibleForTesting;
+import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
+
+import java.util.function.Function;
 
 /** Controls the update for battery tips card */
 public class BatteryTipsController extends BasePreferenceController {
@@ -32,14 +37,21 @@ public class BatteryTipsController extends BasePreferenceController {
     private static final String CARD_PREFERENCE_KEY = "battery_tips_card";
 
     private final PowerUsageFeatureProvider mPowerUsageFeatureProvider;
+    private final String[] mPowerAnomalyKeys;
 
-    private Context mPrefContext;
-    private BatteryTipsCardPreference mCardPreference;
+    @VisibleForTesting
+    BatteryTipsCardPreference mCardPreference;
 
     public BatteryTipsController(Context context) {
         super(context, ROOT_PREFERENCE_KEY);
         mPowerUsageFeatureProvider = FeatureFactory.getFeatureFactory()
             .getPowerUsageFeatureProvider();
+        mPowerAnomalyKeys = context.getResources().getStringArray(R.array.power_anomaly_keys);
+    }
+
+    private boolean isTipsCardVisible() {
+        // TODO: compared with the timestamp of last user dismiss action in sharedPreference.
+        return mPowerUsageFeatureProvider.isBatteryTipsEnabled();
     }
 
     @Override
@@ -50,28 +62,89 @@ public class BatteryTipsController extends BasePreferenceController {
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mPrefContext = screen.getContext();
         mCardPreference = screen.findPreference(CARD_PREFERENCE_KEY);
     }
 
-    /**
-     * Update the card visibility and contents.
-     * @param title a string not extend 2 lines.
-     * @param summary a string not extend 10 lines.
-     */
-    // TODO: replace parameters with SettingsAnomaly Data Proto
-    public void handleBatteryTipsCardUpdated(String title, String summary) {
-        if (!mPowerUsageFeatureProvider.isBatteryTipsEnabled()) {
-            mCardPreference.setVisible(false);
-            return;
+    @VisibleForTesting
+    int getPowerAnomalyEventIndex(String powerAnomalyKey) {
+        for (int index = 0; index < mPowerAnomalyKeys.length; index++) {
+            if (mPowerAnomalyKeys[index].equals(powerAnomalyKey)) {
+                return index;
+            }
         }
-        if (title == null || summary == null) {
-            mCardPreference.setVisible(false);
-            return;
-        }
-        mCardPreference.setTitle(title);
-        mCardPreference.setSummary(summary);
-        mCardPreference.setVisible(true);
+        return -1;
     }
 
+    private <T> T getInfo(PowerAnomalyEvent powerAnomalyEvent,
+                          Function<WarningBannerInfo, T> warningBannerInfoSupplier,
+                          Function<WarningItemInfo, T> warningItemInfoSupplier) {
+        if (powerAnomalyEvent.hasWarningBannerInfo() && warningBannerInfoSupplier != null) {
+            return warningBannerInfoSupplier.apply(powerAnomalyEvent.getWarningBannerInfo());
+        } else if (powerAnomalyEvent.hasWarningItemInfo() && warningItemInfoSupplier != null) {
+            return warningItemInfoSupplier.apply(powerAnomalyEvent.getWarningItemInfo());
+        }
+        return null;
+    }
+
+    private String getString(PowerAnomalyEvent powerAnomalyEvent,
+                             Function<WarningBannerInfo, String> warningBannerInfoSupplier,
+                             Function<WarningItemInfo, String> warningItemInfoSupplier,
+                             int resourceId, int resourceIndex) {
+        String string =
+                getInfo(powerAnomalyEvent, warningBannerInfoSupplier, warningItemInfoSupplier);
+
+        if (!TextUtils.isEmpty(string) || resourceId < 0) {
+            return string;
+        }
+
+        if (resourceIndex >= 0) {
+            string = mContext.getResources().getStringArray(resourceId)[resourceIndex];
+        }
+
+        return string;
+    }
+
+    @VisibleForTesting
+    void handleBatteryTipsCardUpdated(PowerAnomalyEvent powerAnomalyEvent) {
+        if (!isTipsCardVisible()) {
+            mCardPreference.setVisible(false);
+            return;
+        }
+        if (powerAnomalyEvent == null) {
+            mCardPreference.setVisible(false);
+            return;
+        }
+
+        // Get card preference strings and navigate fragment info
+        final int index = getPowerAnomalyEventIndex(powerAnomalyEvent.getKey());
+
+        String titleString = getString(powerAnomalyEvent, WarningBannerInfo::getTitleString,
+                WarningItemInfo::getTitleString, R.array.power_anomaly_titles, index);
+        if (titleString.isEmpty()) {
+            mCardPreference.setVisible(false);
+            return;
+        }
+
+        String mainBtnString = getString(powerAnomalyEvent,
+                WarningBannerInfo::getMainButtonString, WarningItemInfo::getMainButtonString,
+                R.array.power_anomaly_main_btn_strings, index);
+        String dismissBtnString = getString(powerAnomalyEvent,
+                WarningBannerInfo::getCancelButtonString, WarningItemInfo::getCancelButtonString,
+                R.array.power_anomaly_dismiss_btn_strings, index);
+
+        String destinationClassName = getString(powerAnomalyEvent,
+                WarningBannerInfo::getMainButtonDestination,
+                WarningItemInfo::getMainButtonDestination,
+                -1, -1);
+        Integer sourceMetricsCategory = getInfo(powerAnomalyEvent,
+                WarningBannerInfo::getMainButtonSourceMetricsCategory,
+                WarningItemInfo::getMainButtonSourceMetricsCategory);
+
+        // Updated card preference and main button fragment launcher
+        mCardPreference.setTitle(titleString);
+        mCardPreference.setMainButtonLabel(mainBtnString);
+        mCardPreference.setDismissButtonLabel(dismissBtnString);
+        mCardPreference.setMainButtonLauncherInfo(destinationClassName, sourceMetricsCategory);
+        mCardPreference.setVisible(true);
+    }
 }
