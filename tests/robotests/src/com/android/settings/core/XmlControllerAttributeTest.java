@@ -5,7 +5,6 @@ import static com.google.common.truth.Truth.assertWithMessage;
 import android.content.Context;
 import android.content.res.XmlResourceParser;
 import android.provider.SearchIndexableResource;
-import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Xml;
 
@@ -155,12 +154,6 @@ public class XmlControllerAttributeTest {
                 && (type != XmlPullParser.END_TAG || parser.getDepth() > outerDepth)) {
             if (type == XmlPullParser.END_TAG || type == XmlPullParser.TEXT) {
                 continue;
-            }
-
-            controllerClassName = PreferenceXmlParserUtils.getController(mContext, attrs);
-            // If controller is not indexed, then it is not compatible with
-            if (!TextUtils.isEmpty(controllerClassName)) {
-                xmlControllers.add(controllerClassName);
             }
         }
 
