@@ -159,11 +159,6 @@ public class DataUsageList extends DataUsageBaseFragment
         mChart = findPreference(KEY_CHART_DATA);
         mApps = findPreference(KEY_APPS_GROUP);
 
-        final Preference unnecessaryWarningPreference = findPreference("operator_warning");
-        if (unnecessaryWarningPreference != null) {
-            unnecessaryWarningPreference.setVisible(false);
-        }
-
         processArgument();
         updateSubscriptionInfoEntity();
         mDataStateListener = new MobileDataEnabledListener(activity, this);
