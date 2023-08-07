@@ -86,9 +86,18 @@ public class WifiEntryPreference extends RestrictedPreference implements
 
         setLayoutResource(R.layout.preference_access_point);
         mFrictionSld = getFrictionStateListDrawable();
+        mIconInjector = iconInjector;
+        setWifiEntry(wifiEntry);
+    }
+
+    /**
+     * Set updated {@link WifiEntry} to refresh the preference
+     *
+     * @param wifiEntry An instance of {@link WifiEntry}
+     */
+    public void setWifiEntry(@NonNull WifiEntry wifiEntry) {
         mWifiEntry = wifiEntry;
         mWifiEntry.setListener(this);
-        mIconInjector = iconInjector;
         refresh();
     }
 
@@ -151,14 +160,9 @@ public class WifiEntryPreference extends RestrictedPreference implements
         if (mWifiEntry instanceof HotspotNetworkEntry) {
             updateHotspotIcon(((HotspotNetworkEntry) mWifiEntry).getDeviceType());
         } else {
-            int level = mWifiEntry.getLevel();
-            boolean showX = mWifiEntry.shouldShowXLevelIcon();
-
-            if (level != mLevel || showX != mShowX) {
-                mLevel = level;
-                mShowX = showX;
-                updateIcon(mShowX, mLevel);
-            }
+            mLevel = mWifiEntry.getLevel();
+            mShowX = mWifiEntry.shouldShowXLevelIcon();
+            updateIcon(mShowX, mLevel);
         }
 
         setSummary(mWifiEntry.getSummary(false /* concise */));
