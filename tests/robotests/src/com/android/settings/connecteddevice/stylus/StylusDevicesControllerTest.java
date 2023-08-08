@@ -57,6 +57,7 @@ import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.profileselector.UserAdapter;
+import com.android.settingslib.PrimarySwitchPreference;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -403,9 +404,10 @@ public class StylusDevicesControllerTest {
                 Settings.Secure.STYLUS_HANDWRITING_ENABLED, 1);
 
         showScreen(mController);
-        SwitchPreference handwritingPref = (SwitchPreference) mPreferenceContainer.getPreference(1);
+        PrimarySwitchPreference handwritingPref =
+                (PrimarySwitchPreference) mPreferenceContainer.getPreference(1);
 
-        assertThat(handwritingPref.isChecked()).isEqualTo(true);
+        assertThat(handwritingPref.getCheckedState()).isEqualTo(true);
     }
 
     @Test
@@ -414,9 +416,10 @@ public class StylusDevicesControllerTest {
                 Settings.Secure.STYLUS_HANDWRITING_ENABLED, 0);
 
         showScreen(mController);
-        SwitchPreference handwritingPref = (SwitchPreference) mPreferenceContainer.getPreference(1);
+        PrimarySwitchPreference handwritingPref =
+                (PrimarySwitchPreference) mPreferenceContainer.getPreference(1);
 
-        assertThat(handwritingPref.isChecked()).isEqualTo(false);
+        assertThat(handwritingPref.getCheckedState()).isEqualTo(false);
     }
 
     @Test
@@ -424,21 +427,20 @@ public class StylusDevicesControllerTest {
         Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.STYLUS_HANDWRITING_ENABLED, 0);
         showScreen(mController);
-        SwitchPreference handwritingPref = (SwitchPreference) mPreferenceContainer.getPreference(1);
+        PrimarySwitchPreference handwritingPref =
+                (PrimarySwitchPreference) mPreferenceContainer.getPreference(1);
 
-        handwritingPref.performClick();
+        handwritingPref.callChangeListener(true);
 
-        assertThat(handwritingPref.isChecked()).isEqualTo(true);
         assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
                 Settings.Secure.STYLUS_HANDWRITING_ENABLED, -1)).isEqualTo(1);
     }
 
     @Test
-    public void handwritingPreference_startsHandwritingSettingsOnClickIfChecked() {
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.STYLUS_HANDWRITING_ENABLED, 0);
+    public void handwritingPreference_startsHandwritingSettingsOnClick() {
         showScreen(mController);
-        SwitchPreference handwritingPref = (SwitchPreference) mPreferenceContainer.getPreference(1);
+        PrimarySwitchPreference handwritingPref =
+                (PrimarySwitchPreference) mPreferenceContainer.getPreference(1);
 
         handwritingPref.performClick();
 
@@ -447,11 +449,23 @@ public class StylusDevicesControllerTest {
     }
 
     @Test
-    public void handwritingPreference_doesNotStartHandwritingSettingsOnClickIfNotChecked() {
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.STYLUS_HANDWRITING_ENABLED, 1);
+    public void handwritingPreference_doesNotStartHandwritingSettingsOnChange() {
         showScreen(mController);
-        SwitchPreference handwritingPref = (SwitchPreference) mPreferenceContainer.getPreference(1);
+        PrimarySwitchPreference handwritingPref =
+                (PrimarySwitchPreference) mPreferenceContainer.getPreference(1);
+
+        handwritingPref.callChangeListener(true);
+
+        verify(mInputMethodInfo, times(0)).createStylusHandwritingSettingsActivityIntent();
+        verify(mContext, times(0)).startActivity(any());
+    }
+
+    @Test
+    public void handwritingPreference_doesNotCreateIntentIfNoInputMethod() {
+        when(mImm.getCurrentInputMethodInfo()).thenReturn(null);
+        showScreen(mController);
+        PrimarySwitchPreference handwritingPref =
+                (PrimarySwitchPreference) mPreferenceContainer.getPreference(1);
 
         handwritingPref.performClick();
 
@@ -463,14 +477,12 @@ public class StylusDevicesControllerTest {
     public void handwritingPreference_doesNotStartHandwritingSettingsIfNoIntent() {
         when(mInputMethodInfo.createStylusHandwritingSettingsActivityIntent())
                 .thenReturn(null);
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.STYLUS_HANDWRITING_ENABLED, 1);
         showScreen(mController);
-        SwitchPreference handwritingPref = (SwitchPreference) mPreferenceContainer.getPreference(1);
+        PrimarySwitchPreference handwritingPref =
+                (PrimarySwitchPreference) mPreferenceContainer.getPreference(1);
 
         handwritingPref.performClick();
 
-        verify(mInputMethodInfo, times(0)).createStylusHandwritingSettingsActivityIntent();
         verify(mContext, times(0)).startActivity(any());
     }
 
