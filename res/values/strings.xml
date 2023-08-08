@@ -885,18 +885,38 @@
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary">Face, fingerprints, and <xliff:g id="watch" example="Dani's Watch">%s</xliff:g> added</string>
 
     <!-- RemoteAuth unlock enrollment and settings --><skip />
+    <!-- Strings for RemoteAuth enroll introduction page -->
+    <!-- Introduction title shown in remote enrollment to introduce the remote feature [CHAR LIMIT=29] -->
+    <string name="security_settings_remoteauth_enroll_introduction_title">Set up your watch</string>
+    <!-- Summary of the Watch Unlock feature that allows users to unlock the phone with paired watches [CHAR_LIMIT=NONE]-->
+    <string name="security_settings_remoteauth_enroll_introduction_message">Watch Unlock is another convenient way to unlock this phone, for example, when your fingers are wet or face isn\u2019t recognized.\n\nYou can use your watch to unlock this phone when you:</string>
+    <!-- Button text to cancel enrollment [CHAR LIMIT=30] -->
+    <string name="security_settings_remoteauth_enroll_introduction_disagree">Not now</string>
+    <!-- Button text to start enrollment [CHAR LIMIT=30] -->
+    <string name="security_settings_remoteauth_enroll_introduction_agree">Continue</string>
+    <!-- Button text to scroll to the end of a scrollview. [CHAR LIMIT=30] -->
+    <string name="security_settings_remoteauth_enroll_introduction_more">More</string>
+    <!-- Heading of the paragraph that explains how the Watch Unlock feature works [CHAR_LIMIT=NONE] -->
+    <string name="security_settings_remoteauth_enroll_introduction_how_title">How it works</string>
+    <!-- Explains that paired watches must be unlocked, on-body, and nearby, in order to unlock the phone [CHAR_LIMIT=NONE] -->
+    <string name="security_settings_remoteauth_enroll_introduction_info_lock_open">Your watch must be unlocked, on your wrist, and within reach of this phone. You won\u2019t need to unlock your watch again while it\u2019s on your wrist.</string>
+    <!-- Explains that users will be notified on the watch when the phone is unlocked by the watch, and they can tap on the notification to lock the phone from the watch [CHAR_LIMIT=NONE] -->
+    <string name="security_settings_remoteauth_enroll_introduction_info_notifications">When this phone is unlocked, you\u2019ll get notified on your watch. If it was unlocked when you didn’t intend to, tap the notification to lock the phone again.</string>
+    <!-- Heading of the paragraph that explains how to opt out of the Watch Unlock feature [CHAR_LIMIT=NONE] -->
+    <string name="security_settings_remoteauth_enroll_introduction_youre_in_control_title">You\u2019re in control</string>
+    <!-- Explains that users can prevent their watches from unlocking their phone by removing them in the Watch Unlock settings [CHAR_LIMIT=NONE] -->
+    <string name="security_settings_remoteauth_enroll_introduction_info_remove_watch">You can remove your watch from Watch Unlock at any time in Settings</string>
+    <!-- Subtitle for animation that explains users can unlock by tapping a notification [CHAR_LIMIT=NONE] -->
+    <string name="security_settings_remoteauth_enroll_introduction_animation_tap_notification">Tap a notification</string>
+    <!-- Subtitle for animation that explains users can unlock by swiping up on the lock screen [CHAR_LIMIT=NONE] -->
+    <string name="security_settings_remoteauth_enroll_introduction_animation_swipe_up">Swipe up on the lock screen</string>
     <!-- Strings for RemoteAuth enroll finish page -->
     <!-- Title of the dialog that shows when a paired watch has been set up successfully and can be used to unlock the phone [CHAR_LIMIT=45] -->
-    <string name="security_settings_remoteauth_enroll_finish_title">
-        You\'re all set!
-    </string>
+    <string name="security_settings_remoteauth_enroll_finish_title">You\u2019re all set!</string>
     <!-- Explains when a paired watch can be used to unlock the phone after it has been set up successfully [CHAR_LIMIT=NONE] -->
-    <string name="security_settings_remoteauth_enroll_finish_description">
-        You can now use your watch to unlock this phone when you swipe up on the lock screen or tap a notification
-    </string>
+    <string name="security_settings_remoteauth_enroll_finish_description">You can now use your watch to unlock this phone when you swipe up on the lock screen or tap a notification</string>
     <!-- Button text to finish enrollment [CHAR LIMIT=30] -->
     <string name="security_settings_remoteauth_enroll_finish_btn_next">Done</string>
-
 
     <!-- Biometric settings --><skip />
     <!-- Title shown for menu item that launches biometric settings. [CHAR LIMIT=66] -->
