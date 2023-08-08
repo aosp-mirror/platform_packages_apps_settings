@@ -365,7 +365,8 @@ public class TetherSettings extends RestrictedSettingsFragment
 
         if (isUiRestricted()) {
             if (!isUiRestrictedByOnlyAdmin()) {
-                getEmptyTextView().setText(R.string.tethering_settings_not_available);
+                getEmptyTextView().setText(
+                        com.android.settingslib.R.string.tethering_settings_not_available);
             }
             getPreferenceScreen().removeAll();
             return;

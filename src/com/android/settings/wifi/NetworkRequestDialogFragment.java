@@ -142,7 +142,7 @@ public class NetworkRequestDialogFragment extends NetworkRequestDialogBaseFragme
 
         // Prepares adapter.
         mDialogAdapter = new WifiEntryAdapter(context,
-                R.layout.preference_access_point, mFilteredWifiEntries);
+                com.android.settingslib.R.layout.preference_access_point, mFilteredWifiEntries);
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(context)
                 .setCustomTitle(customTitle)
@@ -326,7 +326,7 @@ public class NetworkRequestDialogFragment extends NetworkRequestDialogBaseFragme
                 view = mInflater.inflate(mResourceId, parent, false);
 
                 final View divider = view.findViewById(
-                        com.android.settingslib.R.id.two_target_divider);
+                        com.android.settingslib.widget.R.id.two_target_divider);
                 divider.setVisibility(View.GONE);
             }
 

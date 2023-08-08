@@ -28,7 +28,6 @@ import android.provider.Settings;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
-import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
@@ -82,7 +81,8 @@ public class SelectDebugAppPreferenceController extends DeveloperOptionsPreferen
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
         super.onDeveloperOptionsSwitchDisabled();
-        mPreference.setSummary(mContext.getResources().getString(R.string.debug_app_not_set));
+        mPreference.setSummary(mContext.getResources()
+                .getString(com.android.settingslib.R.string.debug_app_not_set));
     }
 
     @VisibleForTesting
@@ -94,10 +94,12 @@ public class SelectDebugAppPreferenceController extends DeveloperOptionsPreferen
         final String debugApp = Settings.Global.getString(
                 mContext.getContentResolver(), Settings.Global.DEBUG_APP);
         if (debugApp != null && debugApp.length() > 0) {
-            mPreference.setSummary(mContext.getResources().getString(R.string.debug_app_set,
-                    getAppLabel(debugApp)));
+            mPreference.setSummary(mContext.getResources()
+                    .getString(com.android.settingslib.R.string.debug_app_set,
+                            getAppLabel(debugApp)));
         } else {
-            mPreference.setSummary(mContext.getResources().getString(R.string.debug_app_not_set));
+            mPreference.setSummary(mContext.getResources()
+                    .getString(com.android.settingslib.R.string.debug_app_not_set));
         }
     }
 

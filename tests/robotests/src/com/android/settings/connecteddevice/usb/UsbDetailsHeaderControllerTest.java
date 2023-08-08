@@ -26,7 +26,6 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.hardware.usb.UsbManager;
-import android.hardware.usb.UsbPort;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.LifecycleOwner;
@@ -91,7 +90,8 @@ public class UsbDetailsHeaderControllerTest {
 
         ShadowEntityHeaderController.setUseMock(mHeaderController);
         mDetailsHeaderController = new UsbDetailsHeaderController(mContext, mFragment, mUsbBackend);
-        mPreference = new LayoutPreference(mContext, R.layout.settings_entity_header);
+        mPreference = new LayoutPreference(
+                mContext, com.android.settingslib.widget.R.layout.settings_entity_header);
         mPreference.setKey(mDetailsHeaderController.getPreferenceKey());
         mScreen.addPreference(mPreference);
     }

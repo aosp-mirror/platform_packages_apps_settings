@@ -243,7 +243,8 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
             mIsAvailable = false;
             // Show error message
             if (!isUiRestrictedByOnlyAdmin()) {
-                getEmptyTextView().setText(R.string.development_settings_not_available);
+                getEmptyTextView().setText(
+                        com.android.settingslib.R.string.development_settings_not_available);
             }
             getPreferenceScreen().removeAll();
             return;

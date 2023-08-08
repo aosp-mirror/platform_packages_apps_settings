@@ -102,14 +102,14 @@ fun FragmentActivity.bindFingerprintEnrollFinishFragment(
             )
             .setListener(nextButtonClickListener)
             .setButtonType(FooterButton.ButtonType.NEXT)
-            .setTheme(R.style.SudGlifButton_Primary)
+            .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Primary)
             .build()
         if (isAnotherFingerprintEnrollable) {
             footer.secondaryButton = FooterButton.Builder(this)
                 .setText(R.string.fingerprint_enroll_button_add)
                 .setListener(addButtonClickListener)
                 .setButtonType(FooterButton.ButtonType.SKIP)
-                .setTheme(R.style.SudGlifButton_Secondary)
+                .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Secondary)
                 .build()
         }
     }

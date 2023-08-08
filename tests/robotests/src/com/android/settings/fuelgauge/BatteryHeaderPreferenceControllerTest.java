@@ -304,8 +304,8 @@ public class BatteryHeaderPreferenceControllerTest {
 
         mController.updateHeaderPreference(mBatteryInfo);
 
-        verify(mBatteryUsageProgressBarPref).setBottomSummary(
-            mContext.getString(R.string.battery_info_status_not_charging));
+        verify(mBatteryUsageProgressBarPref).setBottomSummary(mContext.getString(
+                com.android.settingslib.R.string.battery_info_status_not_charging));
     }
 
     @Test

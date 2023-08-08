@@ -34,8 +34,6 @@ import android.os.SystemProperties;
 import androidx.preference.ListPreference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.R;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -63,8 +61,10 @@ public class GrammaticalGenderPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
         final Resources resources = mContext.getResources();
-        mListValues = resources.getStringArray(R.array.grammatical_gender_values);
-        mListSummaries = resources.getStringArray(R.array.grammatical_gender_entries);
+        mListValues = resources.getStringArray(
+                com.android.settingslib.R.array.grammatical_gender_values);
+        mListSummaries = resources.getStringArray(
+                com.android.settingslib.R.array.grammatical_gender_entries);
         mConfiguration = new Configuration();
         mController = new GrammaticalGenderPreferenceController(mContext, mActivityManager);
         when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))

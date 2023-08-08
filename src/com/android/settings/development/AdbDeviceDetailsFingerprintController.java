@@ -23,7 +23,6 @@ import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.R;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.widget.FooterPreference;
 
@@ -71,7 +70,7 @@ public class AdbDeviceDetailsFingerprintController extends AbstractPreferenceCon
         mFingerprintCategory = (PreferenceCategory) screen.findPreference(getPreferenceKey());
         mFingerprintPref = new FooterPreference(mFingerprintCategory.getContext());
         final CharSequence titleFormat = mContext.getText(
-                R.string.adb_device_fingerprint_title_format);
+                com.android.settingslib.R.string.adb_device_fingerprint_title_format);
         mFingerprintPref.setTitle(String.format(
                 titleFormat.toString(), mPairedDevice.guid));
         mFingerprintCategory.addPreference(mFingerprintPref);

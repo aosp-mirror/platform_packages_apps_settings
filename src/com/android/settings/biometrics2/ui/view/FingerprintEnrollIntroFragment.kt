@@ -130,7 +130,7 @@ class FingerprintEnrollIntroFragment : Fragment() {
         primaryFooterButton = FooterButton.Builder(context)
             .setText(R.string.security_settings_fingerprint_enroll_introduction_agree)
             .setButtonType(FooterButton.ButtonType.OPT_IN)
-            .setTheme(R.style.SudGlifButton_Primary)
+            .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Primary)
             .build()
             .also {
                 it.setOnClickListener(onNextClickListener)
@@ -153,7 +153,7 @@ class FingerprintEnrollIntroFragment : Fragment() {
                     R.string.security_settings_fingerprint_enroll_introduction_no_thanks
             )
             .setButtonType(FooterButton.ButtonType.NEXT)
-            .setTheme(R.style.SudGlifButton_Primary)
+            .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Primary)
             .build()
             .also {
                 it.setOnClickListener(onSkipOrCancelClickListener)

@@ -50,7 +50,6 @@ import androidx.annotation.VisibleForTesting;
 import com.android.internal.app.LocalePicker;
 import com.android.internal.inputmethod.ImeTracing;
 import com.android.internal.statusbar.IStatusBarService;
-import com.android.settings.R;
 import com.android.settings.development.WirelessDebuggingPreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -433,7 +432,8 @@ public abstract class DevelopmentTiles extends TileService {
             mContext = getApplicationContext();
             mKeyguardManager = (KeyguardManager) mContext.getSystemService(
                     Context.KEYGUARD_SERVICE);
-            mToast = Toast.makeText(mContext, R.string.adb_wireless_no_network_msg,
+            mToast = Toast.makeText(mContext,
+                    com.android.settingslib.R.string.adb_wireless_no_network_msg,
                     Toast.LENGTH_LONG);
         }
 

@@ -26,7 +26,6 @@ import static org.mockito.Mockito.when;
 import android.bluetooth.BluetoothDevice;
 import android.graphics.drawable.Drawable;
 
-import com.android.settings.R;
 import com.android.settings.core.SettingsUIDeviceConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowDeviceConfig;
@@ -73,7 +72,8 @@ public class BluetoothDetailsHeaderControllerTest extends BluetoothDetailsContro
         mController =
             new BluetoothDetailsHeaderController(mContext, mFragment, mCachedDevice, mLifecycle,
                 mBluetoothManager);
-        mPreference = new LayoutPreference(mContext, R.layout.settings_entity_header);
+        mPreference = new LayoutPreference(
+                mContext, com.android.settingslib.widget.R.layout.settings_entity_header);
         mPreference.setKey(mController.getPreferenceKey());
         mScreen.addPreference(mPreference);
         setupDevice(mDeviceConfig);
@@ -91,7 +91,8 @@ public class BluetoothDetailsHeaderControllerTest extends BluetoothDetailsContro
      */
     @Test
     public void testContextMock() {
-        assertThat(mContext.getString(R.string.bluetooth_connected)).isNotNull();
+        assertThat(mContext.getString(com.android.settingslib.R.string.bluetooth_connected))
+                .isNotNull();
     }
 
     @Test
@@ -110,20 +111,20 @@ public class BluetoothDetailsHeaderControllerTest extends BluetoothDetailsContro
     public void connectionStatusChangesWhileScreenOpen() {
         InOrder inOrder = inOrder(mHeaderController);
         when(mCachedDevice.getConnectionSummary())
-            .thenReturn(mContext.getString(R.string.bluetooth_connected));
+            .thenReturn(mContext.getString(com.android.settingslib.R.string.bluetooth_connected));
         showScreen(mController);
         inOrder.verify(mHeaderController)
-            .setSummary(mContext.getString(R.string.bluetooth_connected));
+            .setSummary(mContext.getString(com.android.settingslib.R.string.bluetooth_connected));
 
         when(mCachedDevice.getConnectionSummary()).thenReturn(null);
         mController.onDeviceAttributesChanged();
         inOrder.verify(mHeaderController).setSummary((CharSequence) null);
 
         when(mCachedDevice.getConnectionSummary())
-            .thenReturn(mContext.getString(R.string.bluetooth_connecting));
+            .thenReturn(mContext.getString(com.android.settingslib.R.string.bluetooth_connecting));
         mController.onDeviceAttributesChanged();
         inOrder.verify(mHeaderController)
-            .setSummary(mContext.getString(R.string.bluetooth_connecting));
+            .setSummary(mContext.getString(com.android.settingslib.R.string.bluetooth_connecting));
     }
 
     @Test

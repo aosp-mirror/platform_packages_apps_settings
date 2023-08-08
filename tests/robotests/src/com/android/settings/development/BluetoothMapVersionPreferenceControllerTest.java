@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 package com.android.settings.development;
-import static com.android.settings.development.BluetoothMapVersionPreferenceController
-        .BLUETOOTH_MAP_VERSION_PROPERTY;
+
+import static com.android.settings.development.BluetoothMapVersionPreferenceController.BLUETOOTH_MAP_VERSION_PROPERTY;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -28,8 +28,6 @@ import android.os.SystemProperties;
 
 import androidx.preference.ListPreference;
 import androidx.preference.PreferenceScreen;
-
-import com.android.settings.R;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -59,8 +57,10 @@ public class BluetoothMapVersionPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
         final Resources resources = mContext.getResources();
-        mListValues = resources.getStringArray(R.array.bluetooth_map_version_values);
-        mListSummaries = resources.getStringArray(R.array.bluetooth_map_versions);
+        mListValues = resources.getStringArray(
+                com.android.settingslib.R.array.bluetooth_map_version_values);
+        mListSummaries = resources.getStringArray(
+                com.android.settingslib.R.array.bluetooth_map_versions);
         mController = new BluetoothMapVersionPreferenceController(mContext);
         when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))
             .thenReturn(mPreference);

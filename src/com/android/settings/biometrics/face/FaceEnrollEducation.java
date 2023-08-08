@@ -117,7 +117,8 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
                             .setText(R.string.skip_label)
                             .setListener(this::onSkipButtonClick)
                             .setButtonType(FooterButton.ButtonType.SKIP)
-                            .setTheme(R.style.SudGlifButton_Secondary)
+                            .setTheme(
+                                    com.google.android.setupdesign.R.style.SudGlifButton_Secondary)
                             .build()
             );
         } else {
@@ -126,7 +127,8 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
                             .setText(R.string.security_settings_face_enroll_introduction_cancel)
                             .setListener(this::onSkipButtonClick)
                             .setButtonType(FooterButton.ButtonType.CANCEL)
-                            .setTheme(R.style.SudGlifButton_Secondary)
+                            .setTheme(
+                                    com.google.android.setupdesign.R.style.SudGlifButton_Secondary)
                             .build()
             );
         }
@@ -135,7 +137,7 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
                 .setText(R.string.security_settings_face_enroll_education_start)
                 .setListener(this::onNextButtonClick)
                 .setButtonType(FooterButton.ButtonType.NEXT)
-                .setTheme(R.style.SudGlifButton_Primary)
+                .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Primary)
                 .build();
 
         final AccessibilityManager accessibilityManager = getApplicationContext().getSystemService(

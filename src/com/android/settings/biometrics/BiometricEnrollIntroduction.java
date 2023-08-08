@@ -367,7 +367,9 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
                 updatePasswordQuality();
                 final boolean handled = onSetOrConfirmCredentials(data);
                 if (!handled) {
-                    overridePendingTransition(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out);
+                    overridePendingTransition(
+                            com.google.android.setupdesign.R.anim.sud_slide_next_in,
+                            com.google.android.setupdesign.R.anim.sud_slide_next_out);
                     getNextButton().setEnabled(false);
                     getChallenge(((sensorId, userId, challenge) -> {
                         mSensorId = sensorId;
@@ -387,7 +389,9 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
             if (resultCode == RESULT_OK && data != null) {
                 final boolean handled = onSetOrConfirmCredentials(data);
                 if (!handled) {
-                    overridePendingTransition(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out);
+                    overridePendingTransition(
+                            com.google.android.setupdesign.R.anim.sud_slide_next_in,
+                            com.google.android.setupdesign.R.anim.sud_slide_next_out);
                     getNextButton().setEnabled(false);
                     getChallenge(((sensorId, userId, challenge) -> {
                         mSensorId = sensorId;
@@ -403,7 +407,9 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
                 finish();
             }
         } else if (requestCode == LEARN_MORE_REQUEST) {
-            overridePendingTransition(R.anim.sud_slide_back_in, R.anim.sud_slide_back_out);
+            overridePendingTransition(
+                    com.google.android.setupdesign.R.anim.sud_slide_back_in,
+                    com.google.android.setupdesign.R.anim.sud_slide_back_out);
         } else if (requestCode == ENROLL_NEXT_BIOMETRIC_REQUEST
                 || cameFromMultiBioFpAuthAddAnother) {
             if (isResultFinished(resultCode)) {

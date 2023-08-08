@@ -127,13 +127,16 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
         footerTitle1.setText(getFooterTitle1());
         footerTitle2.setText(getFooterTitle2());
 
-        final ScrollView scrollView = findViewById(R.id.sud_scroll_view);
+        final ScrollView scrollView =
+                findViewById(com.google.android.setupdesign.R.id.sud_scroll_view);
         scrollView.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_YES);
 
         final Intent intent = getIntent();
         if (mFromSettingsSummary
                 && GatekeeperPasswordProvider.containsGatekeeperPasswordHandle(intent)) {
-            overridePendingTransition(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out);
+            overridePendingTransition(
+                    com.google.android.setupdesign.R.anim.sud_slide_next_in,
+                    com.google.android.setupdesign.R.anim.sud_slide_next_out);
             getNextButton().setEnabled(false);
             getChallenge(((sensorId, userId, challenge) -> {
                 if (isFinishing()) {
@@ -406,7 +409,7 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
                     .setText(R.string.security_settings_fingerprint_enroll_introduction_agree)
                     .setListener(this::onNextButtonClick)
                     .setButtonType(FooterButton.ButtonType.OPT_IN)
-                    .setTheme(R.style.SudGlifButton_Primary)
+                    .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Primary)
                     .build();
         }
         return mPrimaryFooterButton;
@@ -420,7 +423,7 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
                     .setText(getNegativeButtonTextId())
                     .setListener(this::onSkipButtonClick)
                     .setButtonType(FooterButton.ButtonType.NEXT)
-                    .setTheme(R.style.SudGlifButton_Primary)
+                    .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Primary)
                     .build();
         }
         return mSecondaryFooterButton;

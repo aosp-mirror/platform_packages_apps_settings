@@ -71,7 +71,7 @@ public class InactiveApps extends SettingsPreferenceFragment
 
         mUsageStats = getActivity().getSystemService(UsageStatsManager.class);
         addPreferencesFromResource(R.xml.placeholder_preference_screen);
-        getActivity().setTitle(R.string.inactive_apps_title);
+        getActivity().setTitle(com.android.settingslib.R.string.inactive_apps_title);
     }
 
     @Override
@@ -148,7 +148,8 @@ public class InactiveApps extends SettingsPreferenceFragment
         final Resources res = getActivity().getResources();
         final int appBucket = mUsageStats.getAppStandbyBucket(p.getKey());
         final String bucketName = bucketToName(appBucket);
-        p.setSummary(res.getString(R.string.standby_bucket_summary, bucketName));
+        p.setSummary(res.getString(
+                com.android.settingslib.R.string.standby_bucket_summary, bucketName));
         // Buckets outside of the range of the dynamic ones are only used for special
         // purposes and can either not be changed out of, or might have undesirable
         // side-effects in combination with other assumptions.

@@ -260,7 +260,8 @@ public class BluetoothSummaryUpdaterTest {
         mSummaryUpdater.onConnectionStateChanged(null /* device */,
                 BluetoothAdapter.STATE_CONNECTING);
 
-        verify(mListener).onSummaryChanged(mContext.getString(R.string.bluetooth_connecting));
+        verify(mListener).onSummaryChanged(
+                mContext.getString(com.android.settingslib.R.string.bluetooth_connecting));
     }
 
     @Test
@@ -272,7 +273,8 @@ public class BluetoothSummaryUpdaterTest {
         mSummaryUpdater.onConnectionStateChanged(null /* device */,
                 BluetoothAdapter.STATE_DISCONNECTING);
 
-        verify(mListener).onSummaryChanged(mContext.getString(R.string.bluetooth_disconnecting));
+        verify(mListener).onSummaryChanged(
+                mContext.getString(com.android.settingslib.R.string.bluetooth_disconnecting));
     }
 
     @Test

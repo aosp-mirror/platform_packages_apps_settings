@@ -28,8 +28,6 @@ import android.provider.Settings;
 import androidx.preference.ListPreference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.R;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -70,8 +68,10 @@ public class SecondaryDisplayPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
         final Resources resources = mContext.getResources();
-        mListValues = resources.getStringArray(R.array.overlay_display_devices_values);
-        mListSummaries = resources.getStringArray(R.array.overlay_display_devices_entries);
+        mListValues = resources.getStringArray(
+                com.android.settingslib.R.array.overlay_display_devices_values);
+        mListSummaries = resources.getStringArray(
+                com.android.settingslib.R.array.overlay_display_devices_entries);
         mController = new SecondaryDisplayPreferenceController(mContext);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         mController.displayPreference(mScreen);

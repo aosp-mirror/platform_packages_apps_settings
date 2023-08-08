@@ -23,14 +23,12 @@ import android.graphics.drawable.Animatable2
 import android.graphics.drawable.AnimatedVectorDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.LayerDrawable
-import android.hardware.biometrics.BiometricFingerprintConstants
 import android.hardware.fingerprint.FingerprintManager.ENROLL_ENROLL
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
-import android.view.Surface
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils.loadInterpolator
@@ -41,7 +39,6 @@ import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -511,6 +508,6 @@ fun FragmentActivity.bindFingerprintEnrollEnrollingRfpsView(
             .setText(R.string.security_settings_fingerprint_enroll_enrolling_skip)
             .setListener(onSkipClickListener)
             .setButtonType(FooterButton.ButtonType.SKIP)
-            .setTheme(R.style.SudGlifButton_Secondary)
+            .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Secondary)
             .build()
 }

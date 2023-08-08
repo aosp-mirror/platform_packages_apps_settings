@@ -424,7 +424,9 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
     // handles responses while parental consent is pending
     private void handleOnActivityResultWhileConsenting(
             int requestCode, int resultCode, Intent data) {
-        overridePendingTransition(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out);
+        overridePendingTransition(
+                com.google.android.setupdesign.R.anim.sud_slide_next_in,
+                com.google.android.setupdesign.R.anim.sud_slide_next_out);
 
         switch (requestCode) {
             case REQUEST_CHOOSE_LOCK:

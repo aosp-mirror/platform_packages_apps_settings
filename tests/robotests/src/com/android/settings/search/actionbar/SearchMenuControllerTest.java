@@ -33,7 +33,6 @@ import android.view.MenuItem;
 
 import androidx.fragment.app.FragmentActivity;
 
-import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.testutils.shadow.ShadowUtils;
 
@@ -71,7 +70,8 @@ public class SearchMenuControllerTest {
         Global.putInt(mActivity.getContentResolver(), Global.DEVICE_PROVISIONED, 1);
 
         when(mHost.getActivity()).thenReturn(mActivity);
-        when(mMenu.add(Menu.NONE, MENU_SEARCH, 0 /* order */, R.string.search_menu))
+        when(mMenu.add(Menu.NONE, MENU_SEARCH, 0 /* order */,
+                com.android.settingslib.widget.R.string.search_menu))
                 .thenReturn(mock(MenuItem.class));
     }
 
@@ -80,7 +80,8 @@ public class SearchMenuControllerTest {
         SearchMenuController.init(mHost);
         mHost.getSettingsLifecycle().onCreateOptionsMenu(mMenu, null /* inflater */);
 
-        verify(mMenu).add(Menu.NONE, MENU_SEARCH, 0 /* order */, R.string.search_menu);
+        verify(mMenu).add(Menu.NONE, MENU_SEARCH, 0 /* order */,
+                com.android.settingslib.widget.R.string.search_menu);
     }
 
     @Test

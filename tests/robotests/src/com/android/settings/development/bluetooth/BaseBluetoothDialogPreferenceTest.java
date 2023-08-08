@@ -170,8 +170,9 @@ public class BaseBluetoothDialogPreferenceTest {
 
     @Test
     public void generateSummary_checkString() {
-        final String summary = String.format(mContext.getResources().getString(
-                R.string.bluetooth_select_a2dp_codec_streaming_label), SUMMARY2);
+        String label = mContext.getResources().getString(
+                com.android.settingslib.R.string.bluetooth_select_a2dp_codec_streaming_label);
+        final String summary = String.format(label, SUMMARY2);
 
         assertThat(mPreference.generateSummary(1)).isEqualTo(summary);
     }

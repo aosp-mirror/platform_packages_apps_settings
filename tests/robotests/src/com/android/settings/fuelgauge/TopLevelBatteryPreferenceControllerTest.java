@@ -17,17 +17,14 @@
 package com.android.settings.fuelgauge;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
-import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
 import android.hardware.usb.UsbManager;
 import android.hardware.usb.UsbPort;
 import android.hardware.usb.UsbPortStatus;
@@ -46,10 +43,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 public class TopLevelBatteryPreferenceControllerTest {
@@ -143,7 +136,8 @@ public class TopLevelBatteryPreferenceControllerTest {
         BatteryInfo info = new BatteryInfo();
 
         assertThat(mController.getDashboardLabel(mContext, info, true))
-                .isEqualTo(mContext.getString(R.string.battery_info_status_not_charging));
+                .isEqualTo(mContext.getString(
+                        com.android.settingslib.R.string.battery_info_status_not_charging));
     }
 
     @Test

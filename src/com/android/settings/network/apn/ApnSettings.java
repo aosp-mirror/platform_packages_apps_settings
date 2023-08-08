@@ -248,7 +248,7 @@ public class ApnSettings extends RestrictedSettingsFragment
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        getEmptyTextView().setText(R.string.apn_settings_not_available);
+        getEmptyTextView().setText(com.android.settingslib.R.string.apn_settings_not_available);
         mUnavailable = isUiRestricted();
         setHasOptionsMenu(!mUnavailable);
         if (mUnavailable) {

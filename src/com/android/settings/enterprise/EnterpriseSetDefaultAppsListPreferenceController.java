@@ -137,11 +137,13 @@ public class EnterpriseSetDefaultAppsListPreferenceController extends
                 if (userInfo.isManagedProfile()) {
                     category.setTitle(devicePolicyManager.getResources().getString(
                             WORK_CATEGORY_HEADER,
-                            () -> mContext.getString(R.string.category_work)));
+                            () -> mContext.getString(
+                                    com.android.settingslib.R.string.category_work)));
                 } else {
                     category.setTitle(devicePolicyManager.getResources().getString(
                             PERSONAL_CATEGORY_HEADER,
-                            () -> mContext.getString(R.string.category_personal)));
+                            () -> mContext.getString(
+                                    com.android.settingslib.R.string.category_personal)));
                 }
                 category.setOrder(i);
                 createPreferences(prefContext, category, mApps.get(i));

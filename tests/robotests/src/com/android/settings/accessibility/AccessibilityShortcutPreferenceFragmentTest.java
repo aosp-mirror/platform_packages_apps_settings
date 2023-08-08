@@ -46,7 +46,6 @@ import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
-import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowFragment;
 
 import org.junit.Before;
@@ -140,7 +139,7 @@ public class AccessibilityShortcutPreferenceFragmentTest {
 
     @Test
     public void setupEditShortcutDialog_shortcutPreferenceOff_checkboxIsEmptyValue() {
-        mContext.setTheme(R.style.Theme_AppCompat);
+        mContext.setTheme(androidx.appcompat.R.style.Theme_AppCompat);
         final AlertDialog dialog = AccessibilityDialogUtils.showEditShortcutDialog(
                 mContext, AccessibilityDialogUtils.DialogType.EDIT_SHORTCUT_GENERIC,
                 PLACEHOLDER_DIALOG_TITLE,
@@ -158,7 +157,7 @@ public class AccessibilityShortcutPreferenceFragmentTest {
 
     @Test
     public void setupEditShortcutDialog_shortcutPreferenceOn_checkboxIsSavedValue() {
-        mContext.setTheme(R.style.Theme_AppCompat);
+        mContext.setTheme(androidx.appcompat.R.style.Theme_AppCompat);
         final AlertDialog dialog = AccessibilityDialogUtils.showEditShortcutDialog(
                 mContext, AccessibilityDialogUtils.DialogType.EDIT_SHORTCUT_GENERIC,
                 PLACEHOLDER_DIALOG_TITLE,
@@ -180,7 +179,7 @@ public class AccessibilityShortcutPreferenceFragmentTest {
     @Test
     @Config(shadows = ShadowFragment.class)
     public void restoreValueFromSavedInstanceState_assignShortcutTypeToVariable() {
-        mContext.setTheme(R.style.Theme_AppCompat);
+        mContext.setTheme(androidx.appcompat.R.style.Theme_AppCompat);
         final AlertDialog dialog = AccessibilityDialogUtils.showEditShortcutDialog(
                 mContext, AccessibilityDialogUtils.DialogType.EDIT_SHORTCUT_GENERIC,
                 PLACEHOLDER_DIALOG_TITLE,
@@ -206,7 +205,7 @@ public class AccessibilityShortcutPreferenceFragmentTest {
     @Test
     @Config(shadows = ShadowFragment.class)
     public void restoreValueFromSavedInstanceState_showTooltipView() {
-        mContext.setTheme(R.style.Theme_AppCompat);
+        mContext.setTheme(androidx.appcompat.R.style.Theme_AppCompat);
         mFragment.showQuickSettingsTooltipIfNeeded(QuickSettingsTooltipType.GUIDE_TO_EDIT);
         assertThat(getLatestPopupWindow().isShowing()).isTrue();
 

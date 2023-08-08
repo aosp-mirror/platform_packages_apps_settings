@@ -221,7 +221,7 @@ public class WifiTetherSettingsTest {
 
     @Test
     public void onSecuritySummaryChanged_canNotShowWifiHotspot_returnFalse() {
-        int stringResId = R.string.wifi_security_sae;
+        int stringResId = com.android.settingslib.R.string.wifi_security_sae;
         mSettings.mWifiHotspotSecurity = mock(Preference.class);
 
         mSettings.onSecuritySummaryChanged(stringResId);

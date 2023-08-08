@@ -30,7 +30,6 @@ import android.text.TextUtils;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
-import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
@@ -98,11 +97,13 @@ public class MockLocationAppPreferenceController extends DeveloperOptionsPrefere
 
         if (!TextUtils.isEmpty(mockLocationApp)) {
             mPreference.setSummary(
-                    mContext.getResources().getString(R.string.mock_location_app_set,
-                            getAppLabel(mockLocationApp)));
+                    mContext.getResources()
+                            .getString(com.android.settingslib.R.string.mock_location_app_set,
+                                    getAppLabel(mockLocationApp)));
         } else {
             mPreference.setSummary(
-                    mContext.getResources().getString(R.string.mock_location_app_not_set));
+                    mContext.getResources()
+                            .getString(com.android.settingslib.R.string.mock_location_app_not_set));
         }
     }
 

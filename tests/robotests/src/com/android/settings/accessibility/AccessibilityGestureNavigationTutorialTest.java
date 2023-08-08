@@ -37,7 +37,6 @@ import android.view.View;
 import androidx.appcompat.app.AlertDialog;
 import androidx.test.core.app.ApplicationProvider;
 
-import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SubSettings;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -67,7 +66,7 @@ public final class AccessibilityGestureNavigationTutorialTest {
 
     @Before
     public void setUp() {
-        mContext.setTheme(R.style.Theme_AppCompat);
+        mContext.setTheme(androidx.appcompat.R.style.Theme_AppCompat);
         mShortcutTypes = /* initial */ 0;
     }
 

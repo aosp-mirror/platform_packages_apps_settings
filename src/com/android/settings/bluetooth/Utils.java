@@ -67,13 +67,13 @@ public final class Utils {
     public static int getConnectionStateSummary(int connectionState) {
         switch (connectionState) {
             case BluetoothProfile.STATE_CONNECTED:
-                return R.string.bluetooth_connected;
+                return com.android.settingslib.R.string.bluetooth_connected;
             case BluetoothProfile.STATE_CONNECTING:
-                return R.string.bluetooth_connecting;
+                return com.android.settingslib.R.string.bluetooth_connecting;
             case BluetoothProfile.STATE_DISCONNECTED:
-                return R.string.bluetooth_disconnected;
+                return com.android.settingslib.R.string.bluetooth_disconnected;
             case BluetoothProfile.STATE_DISCONNECTING:
-                return R.string.bluetooth_disconnecting;
+                return com.android.settingslib.R.string.bluetooth_disconnecting;
             default:
                 return 0;
         }

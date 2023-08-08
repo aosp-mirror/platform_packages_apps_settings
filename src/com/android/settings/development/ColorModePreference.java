@@ -26,7 +26,7 @@ import android.view.Display;
 
 import androidx.preference.SwitchPreference;
 
-import com.android.settings.R;
+import com.android.settingslib.R;
 
 import java.util.ArrayList;
 import java.util.List;

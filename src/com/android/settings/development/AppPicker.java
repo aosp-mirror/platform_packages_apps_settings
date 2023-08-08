@@ -32,8 +32,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.android.settings.R;
-
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -168,7 +166,7 @@ public class AppPicker extends ListActivity {
             Collections.sort(mPackageInfoList, sDisplayNameComparator);
             if (mIncludeNothing) {
                 MyApplicationInfo info = new MyApplicationInfo();
-                info.label = context.getText(R.string.no_application);
+                info.label = context.getText(com.android.settingslib.R.string.no_application);
                 mPackageInfoList.add(0, info);
             }
             addAll(mPackageInfoList);

@@ -25,8 +25,8 @@ import android.content.pm.ApplicationInfo
 import android.os.PowerExemptionManager
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
-import com.android.settings.R
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
+import com.android.settingslib.R
 import com.android.settingslib.spa.framework.compose.stateOf
 import com.android.settingslib.spaprivileged.model.app.AppRecord
 import com.android.settingslib.spaprivileged.model.app.IPackageManagers

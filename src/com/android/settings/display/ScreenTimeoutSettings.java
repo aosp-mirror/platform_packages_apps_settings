@@ -128,7 +128,8 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
         mPrivacyPreference.setIcon(R.drawable.ic_privacy_shield_24dp);
         mPrivacyPreference.setTitle(R.string.adaptive_sleep_privacy);
         mPrivacyPreference.setSelectable(false);
-        mPrivacyPreference.setLayoutResource(R.layout.preference_footer);
+        mPrivacyPreference.setLayoutResource(
+                com.android.settingslib.widget.R.layout.preference_footer);
         mPrivacyManager = SensorPrivacyManager.getInstance(context);
         mPrivacyChangedListener = (sensor, enabled) -> mAdaptiveSleepController.updatePreference();
     }
@@ -201,7 +202,8 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
         mPrivacyPreference.setIcon(R.drawable.ic_privacy_shield_24dp);
         mPrivacyPreference.setTitle(R.string.adaptive_sleep_privacy);
         mPrivacyPreference.setSelectable(false);
-        mPrivacyPreference.setLayoutResource(R.layout.preference_footer);
+        mPrivacyPreference.setLayoutResource(
+                com.android.settingslib.widget.R.layout.preference_footer);
 
         if (isScreenAttentionAvailable(getContext())) {
             mAdaptiveSleepPermissionController.addToScreen(screen);

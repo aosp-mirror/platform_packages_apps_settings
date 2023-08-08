@@ -32,7 +32,6 @@ import android.content.res.Resources;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.R;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -67,7 +66,8 @@ public class PictureColorModePreferenceControllerTest {
         when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))
             .thenReturn(mPreference);
         when(mContext.getResources()).thenReturn(mResources);
-        when(mResources.getIntArray(R.array.color_mode_ids)).thenReturn(new int[0]);
+        when(mResources.getIntArray(com.android.settingslib.R.array.color_mode_ids))
+                .thenReturn(new int[0]);
         mController.displayPreference(mPreferenceScreen);
     }
 

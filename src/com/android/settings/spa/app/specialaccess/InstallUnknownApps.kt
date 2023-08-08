@@ -47,7 +47,7 @@ data class InstallUnknownAppsRecord(
 
 class InstallUnknownAppsListModel(private val context: Context) :
     TogglePermissionAppListModel<InstallUnknownAppsRecord> {
-    override val pageTitleResId = R.string.install_other_apps
+    override val pageTitleResId = com.android.settingslib.R.string.install_other_apps
     override val switchTitleResId = R.string.external_source_switch_title
     override val footerResId = R.string.install_all_warning
     override val switchRestrictionKeys =

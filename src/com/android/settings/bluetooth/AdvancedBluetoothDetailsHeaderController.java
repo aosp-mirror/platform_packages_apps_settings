@@ -267,7 +267,7 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
     Drawable createBtBatteryIcon(Context context, int level, boolean charging) {
         final BatteryMeterView.BatteryMeterDrawable drawable =
                 new BatteryMeterView.BatteryMeterDrawable(context,
-                        context.getColor(R.color.meter_background_color),
+                        context.getColor(com.android.settingslib.R.color.meter_background_color),
                         context.getResources().getDimensionPixelSize(
                                 R.dimen.advanced_bluetooth_battery_meter_width),
                         context.getResources().getDimensionPixelSize(

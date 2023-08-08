@@ -262,7 +262,7 @@ public class SetupChooseLockPatternTest {
         final TextView headerView = layout.findViewById(R.id.sud_layout_subtitle);
         final TypedValue typedValue = new TypedValue();
         final Resources.Theme theme = mActivity.getTheme();
-        theme.resolveAttribute(R.attr.colorError, typedValue, true);
+        theme.resolveAttribute(androidx.appcompat.R.attr.colorError, typedValue, true);
         final int errorColor = typedValue.data;
 
         enterShortPattern();

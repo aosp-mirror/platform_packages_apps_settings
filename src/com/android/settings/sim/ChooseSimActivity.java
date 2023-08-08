@@ -316,8 +316,9 @@ public class ChooseSimActivity extends Activity
         @Override
         public void onBindView(View view) {
             super.onBindView(view);
-            TextView title = view.findViewById(R.id.sud_items_title);
-            TextView summary = view.findViewById(R.id.sud_items_summary);
+            TextView title = view.findViewById(com.google.android.setupdesign.R.id.sud_items_title);
+            TextView summary =
+                    view.findViewById(com.google.android.setupdesign.R.id.sud_items_summary);
             title.setEnabled(isEnabled());
             summary.setEnabled(isEnabled());
         }

@@ -167,13 +167,13 @@ public class AppFilterRegistry {
         mFilters[FILTER_APPS_PERSONAL] = new AppFilterItem(
                 ApplicationsState.FILTER_PERSONAL,
                 FILTER_APPS_PERSONAL,
-                R.string.category_personal);
+                com.android.settingslib.R.string.category_personal);
 
         // Work
         mFilters[FILTER_APPS_WORK] = new AppFilterItem(
                 ApplicationsState.FILTER_WORK,
                 FILTER_APPS_WORK,
-                R.string.category_work);
+                com.android.settingslib.R.string.category_work);
 
         // Usage access screen, never displayed.
         mFilters[FILTER_APPS_USAGE_ACCESS] = new AppFilterItem(
@@ -219,7 +219,7 @@ public class AppFilterRegistry {
         mFilters[FILTER_ALARMS_AND_REMINDERS] = new AppFilterItem(
                 AppStateAlarmsAndRemindersBridge.FILTER_CLOCK_APPS,
                 FILTER_ALARMS_AND_REMINDERS,
-                R.string.alarms_and_reminders_title);
+                com.android.settingslib.R.string.alarms_and_reminders_title);
 
         // Apps that can manage media files
         mFilters[FILTER_APPS_MEDIA_MANAGEMENT] = new AppFilterItem(
@@ -279,7 +279,7 @@ public class AppFilterRegistry {
         mFilters[FILTER_APPS_TURN_SCREEN_ON] = new AppFilterItem(
                 AppStateTurnScreenOnBridge.FILTER_TURN_SCREEN_ON_APPS,
                 FILTER_APPS_TURN_SCREEN_ON,
-                R.string.turn_screen_on_title);
+                com.android.settingslib.R.string.turn_screen_on_title);
     }
 
     public static AppFilterRegistry getInstance() {

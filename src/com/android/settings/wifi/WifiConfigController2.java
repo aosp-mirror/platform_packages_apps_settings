@@ -926,7 +926,7 @@ public class WifiConfigController2 implements TextWatcher,
             } catch (NumberFormatException e) {
                 // Set the hint as default after user types in ip address
                 mNetworkPrefixLengthView.setText(mConfigUi.getContext().getString(
-                        R.string.wifi_network_prefix_length_hint));
+                        com.android.settingslib.R.string.wifi_network_prefix_length_hint));
             } catch (IllegalArgumentException e) {
                 return R.string.wifi_ip_settings_invalid_ip_address;
             }
@@ -959,7 +959,8 @@ public class WifiConfigController2 implements TextWatcher,
 
             if (TextUtils.isEmpty(dns)) {
                 //If everything else is valid, provide hint as a default option
-                mDns1View.setText(mConfigUi.getContext().getString(R.string.wifi_dns1_hint));
+                mDns1View.setText(mConfigUi.getContext().getString(
+                        com.android.settingslib.R.string.wifi_dns1_hint));
             } else {
                 dnsAddr = getIPv4Address(dns);
                 if (dnsAddr == null) {
@@ -1664,11 +1665,12 @@ public class WifiConfigController2 implements TextWatcher,
             public void afterTextChanged(Editable s) {
                 if (s.length() == 0) {
                     if (view.getId() == R.id.gateway) {
-                        mGatewayView.setHint(R.string.wifi_gateway_hint);
+                        mGatewayView.setHint(com.android.settingslib.R.string.wifi_gateway_hint);
                     } else if (view.getId() == R.id.network_prefix_length) {
-                        mNetworkPrefixLengthView.setHint(R.string.wifi_network_prefix_length_hint);
+                        mNetworkPrefixLengthView.setHint(
+                                com.android.settingslib.R.string.wifi_network_prefix_length_hint);
                     } else if (view.getId() == R.id.dns1) {
-                        mDns1View.setHint(R.string.wifi_dns1_hint);
+                        mDns1View.setHint(com.android.settingslib.R.string.wifi_dns1_hint);
                     }
                     Button submit = mConfigUi.getSubmitButton();
                     if (submit == null) return;
@@ -1810,29 +1812,36 @@ public class WifiConfigController2 implements TextWatcher,
         int idx = 0;
 
         // Populate the Wi-Fi security spinner with the various supported key management types
-        spinnerAdapter.add(mContext.getString(R.string.wifi_security_none));
+        spinnerAdapter.add(mContext.getString(com.android.settingslib.R.string.wifi_security_none));
         mSecurityInPosition[idx++] = WifiEntry.SECURITY_NONE;
         if (mWifiManager.isEnhancedOpenSupported()) {
-            spinnerAdapter.add(mContext.getString(R.string.wifi_security_owe));
+            spinnerAdapter.add(mContext.getString(
+                    com.android.settingslib.R.string.wifi_security_owe));
             mSecurityInPosition[idx++] = WifiEntry.SECURITY_OWE;
         }
-        spinnerAdapter.add(mContext.getString(R.string.wifi_security_wep));
+        spinnerAdapter.add(mContext.getString(com.android.settingslib.R.string.wifi_security_wep));
         mSecurityInPosition[idx++] = WifiEntry.SECURITY_WEP;
-        spinnerAdapter.add(mContext.getString(R.string.wifi_security_wpa_wpa2));
+        spinnerAdapter.add(mContext.getString(
+                com.android.settingslib.R.string.wifi_security_wpa_wpa2));
         mSecurityInPosition[idx++] = WifiEntry.SECURITY_PSK;
         if (mWifiManager.isWpa3SaeSupported()) {
-            spinnerAdapter.add(mContext.getString(R.string.wifi_security_sae));
+            spinnerAdapter.add(mContext.getString(
+                    com.android.settingslib.R.string.wifi_security_sae));
             mSecurityInPosition[idx++] = WifiEntry.SECURITY_SAE;
-            spinnerAdapter.add(mContext.getString(R.string.wifi_security_eap_wpa_wpa2));
+            spinnerAdapter.add(mContext.getString(
+                    com.android.settingslib.R.string.wifi_security_eap_wpa_wpa2));
             mSecurityInPosition[idx++] = WifiEntry.SECURITY_EAP;
-            spinnerAdapter.add(mContext.getString(R.string.wifi_security_eap_wpa3));
+            spinnerAdapter.add(mContext.getString(
+                    com.android.settingslib.R.string.wifi_security_eap_wpa3));
             mSecurityInPosition[idx++] = WifiEntry.SECURITY_EAP_WPA3_ENTERPRISE;
         } else {
-            spinnerAdapter.add(mContext.getString(R.string.wifi_security_eap));
+            spinnerAdapter.add(mContext.getString(
+                    com.android.settingslib.R.string.wifi_security_eap));
             mSecurityInPosition[idx++] = WifiEntry.SECURITY_EAP;
         }
         if (mWifiManager.isWpa3SuiteBSupported()) {
-            spinnerAdapter.add(mContext.getString(R.string.wifi_security_eap_suiteb));
+            spinnerAdapter.add(mContext.getString(
+                    com.android.settingslib.R.string.wifi_security_eap_suiteb));
             mSecurityInPosition[idx++] = WifiEntry.SECURITY_EAP_SUITE_B;
         }
 

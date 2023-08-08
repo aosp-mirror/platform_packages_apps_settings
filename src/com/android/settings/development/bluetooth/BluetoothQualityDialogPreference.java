@@ -65,12 +65,13 @@ public class BluetoothQualityDialogPreference extends BaseBluetoothDialogPrefere
         mRadioButtonIds.add(R.id.bluetooth_audio_quality_optimized_connection);
         mRadioButtonIds.add(R.id.bluetooth_audio_quality_best_effort);
         String[] stringArray = context.getResources().getStringArray(
-                R.array.bluetooth_a2dp_codec_ldac_playback_quality_titles);
+                com.android.settingslib.R.array.bluetooth_a2dp_codec_ldac_playback_quality_titles);
         for (int i = 0; i < stringArray.length; i++) {
             mRadioButtonStrings.add(stringArray[i]);
         }
         stringArray = context.getResources().getStringArray(
-                R.array.bluetooth_a2dp_codec_ldac_playback_quality_summaries);
+                com.android.settingslib.R
+                        .array.bluetooth_a2dp_codec_ldac_playback_quality_summaries);
         for (int i = 0; i < stringArray.length; i++) {
             mSummaryStrings.add(stringArray[i]);
         }

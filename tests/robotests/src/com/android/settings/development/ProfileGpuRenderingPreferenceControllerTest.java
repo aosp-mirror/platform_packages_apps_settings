@@ -28,8 +28,6 @@ import android.view.ThreadedRenderer;
 import androidx.preference.ListPreference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.R;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -60,8 +58,10 @@ public class ProfileGpuRenderingPreferenceControllerTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mListValues = mContext.getResources().getStringArray(R.array.track_frame_time_values);
-        mListSummaries = mContext.getResources().getStringArray(R.array.track_frame_time_entries);
+        mListValues = mContext.getResources().getStringArray(
+                com.android.settingslib.R.array.track_frame_time_values);
+        mListSummaries = mContext.getResources().getStringArray(
+                com.android.settingslib.R.array.track_frame_time_entries);
         mController = new ProfileGpuRenderingPreferenceController(mContext);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         mController.displayPreference(mScreen);
