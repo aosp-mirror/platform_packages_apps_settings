@@ -156,6 +156,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
         } else if (profile instanceof PbapServerProfile) {
             profilePref.setChecked(device.getPhonebookAccessPermission()
                     == BluetoothDevice.ACCESS_ALLOWED);
+            profilePref.setSummary(profile.getSummaryResourceForDevice(mCachedDevice.getDevice()));
         } else if (profile instanceof PanProfile) {
             profilePref.setChecked(profile.getConnectionStatus(device) ==
                     BluetoothProfile.STATE_CONNECTED);
