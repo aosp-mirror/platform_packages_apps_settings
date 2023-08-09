@@ -353,7 +353,7 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"为获得最佳效果，请使用获得 Made For Google 认证的屏幕保护膜。如果使用其他屏幕保护膜，系统可能无法识别您孩子的指纹。"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"手表解锁"</string>
-    <string name="biometric_settings_intro_with_activeunlock" msgid="6583248094453119314">"在设置人脸解锁和指纹解锁时，如果您戴着口罩或所在区域光线较暗，手机会要求您使用指纹解锁。\n\n如果系统无法识别您的面孔或指纹，您可以用手表进行解锁。"</string>
+    <string name="biometric_settings_intro_with_activeunlock" msgid="6583248094453119314">"设置人脸解锁和指纹解锁后，如果您戴着口罩或所在区域光线较暗，手机会要求您使用指纹解锁。\n\n如果系统无法识别您的面孔或指纹，您可以用手表进行解锁。"</string>
     <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"如果系统无法识别您的指纹，您可以用手表进行解锁。"</string>
     <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"如果系统无法识别您的面孔，您可以用手表进行解锁。"</string>
     <string name="biometric_settings_use_fingerprint_or_watch_for" msgid="1160830065613858095">"将指纹或手表用于"</string>
@@ -381,7 +381,7 @@
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"需要设置"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"已添加面孔和多个指纹"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"已添加面孔和一个指纹"</string>
-    <string name="biometric_settings_intro" msgid="4263069383955676756">"在设置人脸解锁和指纹解锁时，如果您戴着口罩或所在区域光线较暗，手机会要求您使用指纹解锁"</string>
+    <string name="biometric_settings_intro" msgid="4263069383955676756">"设置人脸解锁和指纹解锁后，如果您戴着口罩或所在区域光线较暗，手机会要求您使用指纹解锁"</string>
     <string name="biometric_settings_category_ways_to_unlock" msgid="3384767901580915266">"解锁方式"</string>
     <string name="biometric_settings_category_use_face_fingerprint" msgid="4377659744376863913">"人脸或指纹的用途"</string>
     <string name="biometric_settings_use_biometric_unlock_phone" msgid="8180914579885804358">"解锁手机"</string>
@@ -2975,6 +2975,10 @@
     <string name="ring_volume_option_title" msgid="1520802026403038560">"铃声和通知音量"</string>
     <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"铃声音量"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"通知音量"</string>
+    <string name="ringer_content_description_silent_mode" msgid="1442257660889685934">"振铃器静音"</string>
+    <string name="ringer_content_description_vibrate_mode" msgid="5946432791951870480">"振铃器振动"</string>
+    <string name="notification_volume_content_description_vibrate_mode" msgid="6097212000507408288">"通知音量已设为静音，有通知时设备会振动"</string>
+    <string name="volume_content_description_silent_mode" msgid="377680514551405754">"<xliff:g id="VOLUME_TYPE">%1$s</xliff:g>已设为静音"</string>
     <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"铃声已被静音，因此无法调整"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"手机铃声"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"默认通知提示音"</string>
@@ -4530,7 +4534,7 @@
     <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"使用深色主题"</string>
     <string name="bluetooth_main_switch_title" msgid="8409835540311309632">"使用蓝牙"</string>
     <string name="prevent_ringing_main_switch_title" msgid="4726252811262086643">"使用“阻止响铃”"</string>
-    <string name="use_wifi_hotsopt_main_switch_title" msgid="3909731167290690539">"使用“WLAN 热点”"</string>
+    <string name="use_wifi_hotsopt_main_switch_title" msgid="3909731167290690539">"使用 WLAN 热点"</string>
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"使用“固定应用”"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"使用“开发者选项”"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"使用打印服务"</string>
@@ -4539,7 +4543,7 @@
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"使用“无线调试”"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"使用“图形驱动程序偏好设置”"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"使用“护眼模式”"</string>
-    <string name="nfc_main_switch_title" msgid="6295839988954817432">"使用“NFC”"</string>
+    <string name="nfc_main_switch_title" msgid="6295839988954817432">"使用 NFC"</string>
     <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"使用“自适应亮度”"</string>
     <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"使用“WLAN 通话”"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"查看所有应用"</string>
