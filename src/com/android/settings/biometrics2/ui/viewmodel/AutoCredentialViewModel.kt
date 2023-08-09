@@ -64,11 +64,8 @@ class AutoCredentialViewModel(
      */
     interface ChallengeGenerator {
 
-        /** Get callback that will be called later after challenge generated */
-        fun getCallback(): GenerateChallengeCallback?
-
-        /** Set callback that will be called later after challenge generated */
-        fun setCallback(callback: GenerateChallengeCallback?)
+        /** Callback that will be called later after challenge generated */
+        var callback: GenerateChallengeCallback?
 
         /** Method for generating challenge from FingerprintManager or FaceManager */
         fun generateChallenge(userId: Int)
@@ -79,30 +76,16 @@ class AutoCredentialViewModel(
         private val fingerprintRepository: FingerprintRepository
     ) : ChallengeGenerator {
 
-        private var mCallback: GenerateChallengeCallback? = null
-
-        override fun getCallback(): GenerateChallengeCallback? {
-            return mCallback
-        }
-
-        override fun setCallback(callback: GenerateChallengeCallback?) {
-            mCallback = callback
-        }
+        override var callback: GenerateChallengeCallback? = null
 
         override fun generateChallenge(userId: Int) {
-            val callback = mCallback
-            if (callback == null) {
+            callback?.let {
+                fingerprintRepository.generateChallenge(userId) {
+                        sensorId: Int, uid: Int, challenge: Long ->
+                    it.onChallengeGenerated(sensorId, uid, challenge)
+                }
+            } ?:run {
                 Log.e(TAG, "generateChallenge, null callback")
-                return
-            }
-
-            fingerprintRepository.generateChallenge(userId) {
-                sensorId: Int, uid: Int, challenge: Long ->
-                callback.onChallengeGenerated(
-                    sensorId,
-                    uid,
-                    challenge
-                )
             }
         }
 
@@ -160,7 +143,7 @@ class AutoCredentialViewModel(
         revokeGkPwHandle: Boolean,
         scope: CoroutineScope
     ) {
-        challengeGenerator.setCallback(object : GenerateChallengeCallback {
+        challengeGenerator.callback = object : GenerateChallengeCallback {
             override fun onChallengeGenerated(sensorId: Int, userId: Int, challenge: Long) {
                 var illegalStateExceptionCaught = false
                 try {
@@ -188,7 +171,7 @@ class AutoCredentialViewModel(
                     }
                 }
             }
-        })
+        }
         challengeGenerator.generateChallenge(userId)
     }
 

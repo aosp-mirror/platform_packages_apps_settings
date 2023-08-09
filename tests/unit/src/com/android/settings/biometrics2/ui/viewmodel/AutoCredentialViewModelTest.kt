@@ -507,20 +507,13 @@ class AutoCredentialViewModelTest {
         var challenge = CredentialModel.INVALID_CHALLENGE
         var callbackRunCount = 0
 
-        private var _callback: AutoCredentialViewModel.GenerateChallengeCallback? = null
-
-        override fun getCallback(): AutoCredentialViewModel.GenerateChallengeCallback? {
-            return _callback
-        }
-
-        override fun setCallback(callback: AutoCredentialViewModel.GenerateChallengeCallback?) {
-            _callback = callback
-        }
+        override var callback: AutoCredentialViewModel.GenerateChallengeCallback? = null
 
         override fun generateChallenge(userId: Int) {
-            val callback = _callback ?: return
-            callback.onChallengeGenerated(sensorId, this.userId, challenge)
-            ++callbackRunCount
+            callback?.let {
+                it.onChallengeGenerated(sensorId, this.userId, challenge)
+                ++callbackRunCount
+            }
         }
     }
 
