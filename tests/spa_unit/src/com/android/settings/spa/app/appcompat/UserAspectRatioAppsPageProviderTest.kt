@@ -34,7 +34,6 @@ import com.android.settingslib.spa.testutils.FakeNavControllerWrapper
 import com.android.settingslib.spa.testutils.firstWithTimeoutOrNull
 import com.android.settingslib.spaprivileged.template.app.AppListItemModel
 import com.google.common.truth.Truth.assertThat
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
 import org.junit.Rule
@@ -67,14 +66,16 @@ class UserAspectRatioAppsPageProviderTest {
     @Test
     fun injectEntry_summary() {
         setInjectEntry()
-        composeTestRule.onNodeWithText(context.getString(R.string.aspect_ratio_summary, Build.MODEL))
+        composeTestRule
+            .onNodeWithText(context.getString(R.string.aspect_ratio_summary, Build.MODEL))
             .assertIsDisplayed()
     }
 
     @Test
     fun injectEntry_onClick_navigate() {
         setInjectEntry()
-        composeTestRule.onNodeWithText(context.getString(R.string.aspect_ratio_title)).performClick()
+        composeTestRule.onNodeWithText(context.getString(R.string.aspect_ratio_title))
+            .performClick()
         assertThat(fakeNavControllerWrapper.navigateCalledWith).isEqualTo("UserAspectRatioAppsPage")
     }
 
@@ -103,7 +104,6 @@ class UserAspectRatioAppsPageProviderTest {
         composeTestRule.onNodeWithText(LABEL).assertIsDisplayed()
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun aspectRatioAppListModel_transform() = runTest {
         val listModel = UserAspectRatioAppListModel(context)
@@ -114,7 +114,6 @@ class UserAspectRatioAppsPageProviderTest {
         assertThat(recordList[0].app).isSameInstanceAs(APP)
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun aspectRatioAppListModel_filter() = runTest {
         val listModel = UserAspectRatioAppListModel(context)

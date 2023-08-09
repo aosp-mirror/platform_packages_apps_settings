@@ -30,7 +30,6 @@ import com.android.settings.biometrics2.utils.EnrollmentRequestUtils.newIsSuwReq
 import com.android.settings.biometrics2.utils.FingerprintRepositoryUtils.newFingerprintRepository
 import com.android.settings.biometrics2.utils.FingerprintRepositoryUtils.setupFingerprintEnrolledFingerprints
 import com.google.common.truth.Truth.assertThat
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.TestScope
@@ -226,7 +225,6 @@ class FingerprintEnrollmentViewModelTest {
         assertThat(viewModel.isMaxEnrolledReached(uid)).isTrue()
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun testSetResultFlow_defaultEmpty() = runTest {
         val activityResults = listOfSetResultFlow()
@@ -236,7 +234,6 @@ class FingerprintEnrollmentViewModelTest {
         assertThat(activityResults.size).isEqualTo(0)
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun testCheckFinishActivityDuringOnPause_doNothingIfIsSuw() = runTest {
         viewModel = FingerprintEnrollmentViewModel(
@@ -257,7 +254,6 @@ class FingerprintEnrollmentViewModelTest {
         assertThat(activityResults.size).isEqualTo(0)
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun testCheckFinishActivityDuringOnPause_doNothingIfIsWaitingActivity() = runTest {
         val activityResults = listOfSetResultFlow()
@@ -273,7 +269,6 @@ class FingerprintEnrollmentViewModelTest {
         assertThat(activityResults.size).isEqualTo(0)
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun testCheckFinishActivityDuringOnPause_doNothingIfIsActivityFinishing() = runTest {
         val activityResults = listOfSetResultFlow()
@@ -288,7 +283,6 @@ class FingerprintEnrollmentViewModelTest {
         assertThat(activityResults.size).isEqualTo(0)
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun testCheckFinishActivityDuringOnPause_doNothingIfIsChangingConfigurations() = runTest {
         val activityResults = listOfSetResultFlow()
@@ -303,7 +297,6 @@ class FingerprintEnrollmentViewModelTest {
         assertThat(activityResults.size).isEqualTo(0)
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun testCheckFinishActivityDuringOnPause_defaultFinishSelf() = runTest {
         val activityResults = listOfSetResultFlow()
@@ -320,7 +313,6 @@ class FingerprintEnrollmentViewModelTest {
         assertThat(activityResults[0].data).isEqualTo(null)
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     private fun TestScope.listOfSetResultFlow(): List<ActivityResult> =
         mutableListOf<ActivityResult>().also {
             backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) {

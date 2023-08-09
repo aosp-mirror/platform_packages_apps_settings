@@ -19,12 +19,9 @@ import android.app.Application
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.biometrics2.ui.viewmodel.FingerprintErrorDialogSetResultAction.FINGERPRINT_ERROR_DIALOG_ACTION_SET_RESULT_FINISH
-import com.android.settings.biometrics2.ui.viewmodel.FingerprintErrorDialogSetResultAction.FINGERPRINT_ERROR_DIALOG_ACTION_SET_RESULT_TIMEOUT
 import com.google.common.truth.Truth.assertThat
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
@@ -56,7 +53,6 @@ class FingerprintEnrollErrorDialogViewModelTest {
         assertThat(FingerprintEnrollErrorDialogViewModel(application, true).isSuw).isTrue()
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun testNewDialog() = runTest {
         val newDialogs: List<Int> = mutableListOf<Int>().also {
@@ -81,7 +77,6 @@ class FingerprintEnrollErrorDialogViewModelTest {
         assertThat(newDialogs[0]).isEqualTo(testErrorMsgId)
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun testTriggerRetry() = runTest {
         val triggerRetries: List<Any> = mutableListOf<Any>().also {
@@ -102,7 +97,6 @@ class FingerprintEnrollErrorDialogViewModelTest {
         assertThat(triggerRetries.size).isEqualTo(1)
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun testSetResultFinish() = runTest {
         val setResults: List<FingerprintErrorDialogSetResultAction> =

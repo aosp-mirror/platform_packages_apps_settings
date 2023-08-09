@@ -35,7 +35,7 @@ import com.android.settings.biometrics2.ui.viewmodel.AutoCredentialViewModel.Cha
 import com.android.settings.password.ChooseLockPattern
 import com.android.settings.password.ChooseLockSettingsHelper
 import com.google.common.truth.Truth.assertThat
-import kotlinx.coroutines.ExperimentalCoroutinesApi
+import java.util.concurrent.atomic.AtomicBoolean
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.TestScope
@@ -50,7 +50,6 @@ import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoRule
-import java.util.concurrent.atomic.AtomicBoolean
 import org.mockito.Mockito.`when` as whenever
 
 @RunWith(AndroidJUnit4::class)
@@ -86,7 +85,6 @@ class AutoCredentialViewModelTest {
         challengeGenerator.challenge = newChallenge
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun testCheckCredential_validCredentialCase() = runTest {
         val userId = 99
@@ -109,7 +107,6 @@ class AutoCredentialViewModelTest {
         assertThat(viewModel.createGeneratingChallengeExtras()).isNull()
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun testCheckCredential_needToChooseLock() = runTest {
         val userId = 100
@@ -132,7 +129,6 @@ class AutoCredentialViewModelTest {
         assertThat(viewModel.createGeneratingChallengeExtras()).isNull()
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun testCheckCredential_needToConfirmLockForSomething() = runTest {
         val userId = 101
@@ -156,7 +152,6 @@ class AutoCredentialViewModelTest {
         assertThat(viewModel.createGeneratingChallengeExtras()).isNull()
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun testCheckCredential_needToConfirmLockForNumeric() = runTest {
         val userId = 102
@@ -180,7 +175,6 @@ class AutoCredentialViewModelTest {
         assertThat(viewModel.createGeneratingChallengeExtras()).isNull()
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun testCheckCredential_needToConfirmLockForAlphabetic() = runTest {
         val userId = 103
@@ -204,7 +198,6 @@ class AutoCredentialViewModelTest {
         assertThat(viewModel.createGeneratingChallengeExtras()).isNull()
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun testCheckCredential_generateChallenge() = runTest {
         val userId = 104
@@ -258,7 +251,6 @@ class AutoCredentialViewModelTest {
         assertThat(tokens[0]).isEqualTo(1)
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun testCheckCredential_generateChallengeFail() = runTest {
         backgroundScope.launch {
@@ -306,7 +298,6 @@ class AutoCredentialViewModelTest {
         assertThat(viewModel.userId).isEqualTo(userId)
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun testGenerateChallengeAsCredentialActivityResult_invalidChooseLock() = runTest {
         backgroundScope.launch {
@@ -332,7 +323,6 @@ class AutoCredentialViewModelTest {
         }
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun testGenerateChallengeAsCredentialActivityResult_invalidConfirmLock() = runTest {
         backgroundScope.launch {
@@ -358,7 +348,6 @@ class AutoCredentialViewModelTest {
         }
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun testGenerateChallengeAsCredentialActivityResult_nullDataChooseLock() = runTest {
         val userId = 108
@@ -380,7 +369,6 @@ class AutoCredentialViewModelTest {
         assertThat(generateFails.size).isEqualTo(0)
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun testGenerateChallengeAsCredentialActivityResult_nullDataConfirmLock() = runTest {
         val userId = 109
@@ -401,7 +389,6 @@ class AutoCredentialViewModelTest {
         assertThat(generateFails.size).isEqualTo(0)
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun testGenerateChallengeAsCredentialActivityResult_validChooseLock() = runTest {
         val userId = 108
@@ -447,7 +434,6 @@ class AutoCredentialViewModelTest {
         assertThat(hasCalledRemoveGkPwHandle.get()).isTrue()
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun testGenerateChallengeAsCredentialActivityResult_validConfirmLock() = runTest {
         val userId = 109
@@ -493,7 +479,6 @@ class AutoCredentialViewModelTest {
         assertThat(hasCalledRemoveGkPwHandle.get()).isTrue()
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     private fun TestScope.listOfGenerateChallengeFailedFlow(): List<Boolean> =
         mutableListOf<Boolean>().also {
             backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) {

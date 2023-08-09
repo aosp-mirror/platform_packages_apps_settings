@@ -33,7 +33,6 @@ import com.android.settingslib.spa.testutils.firstWithTimeoutOrNull
 import com.android.settingslib.spaprivileged.template.app.AppListInput
 import com.android.settingslib.spaprivileged.template.app.AppListItemModel
 import com.google.common.truth.Truth.assertThat
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
 import org.junit.Rule
@@ -118,7 +117,6 @@ class AllAppListTest {
             .isEqualTo("AppInfoSettings/package.name/0")
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun allAppListModel_transform() = runTest {
         val listModel = AllAppListModel(context) { stateOf(SUMMARY) }
