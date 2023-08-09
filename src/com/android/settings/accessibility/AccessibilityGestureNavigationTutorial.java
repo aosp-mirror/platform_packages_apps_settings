@@ -170,13 +170,6 @@ public final class AccessibilityGestureNavigationTutorial {
     static AlertDialog createAccessibilityTutorialDialogForSetupWizard(Context context,
             int shortcutTypes, @Nullable DialogInterface.OnClickListener actionButtonListener) {
 
-        final int category = SettingsEnums.SWITCH_SHORTCUT_DIALOG_ACCESSIBILITY_BUTTON_SETTINGS;
-        final DialogInterface.OnClickListener linkButtonListener =
-                (dialog, which) -> new SubSettingLauncher(context)
-                        .setDestination(AccessibilityButtonFragment.class.getName())
-                        .setSourceMetricsCategory(category)
-                        .launch();
-
         final AlertDialog alertDialog = new AlertDialog.Builder(context)
                 .setPositiveButton(R.string.accessibility_tutorial_dialog_button,
                         actionButtonListener)
