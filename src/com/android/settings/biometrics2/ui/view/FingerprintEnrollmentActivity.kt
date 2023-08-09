@@ -126,21 +126,21 @@ open class FingerprintEnrollmentActivity : FragmentActivity() {
 
     private var isFirstFragmentAdded = false
 
-    private val findSensorActionObserver: Observer<Int> = Observer<Int> { action ->
+    private val findSensorActionObserver = Observer<Int?> { action ->
         if (DEBUG) {
             Log.d(TAG, "findSensorActionObserver($action)")
         }
         action?.let { onFindSensorAction(it) }
     }
 
-    private val enrollingActionObserver: Observer<Int> = Observer<Int> { action ->
+    private val enrollingActionObserver = Observer<Int?> { action ->
         if (DEBUG) {
             Log.d(TAG, "enrollingActionObserver($action)")
         }
         action?.let { onEnrollingAction(it) }
     }
 
-    private val finishActionObserver: Observer<Int> = Observer<Int> { action ->
+    private val finishActionObserver = Observer<Int> { action ->
         if (DEBUG) {
             Log.d(TAG, "finishActionObserver($action)")
         }
