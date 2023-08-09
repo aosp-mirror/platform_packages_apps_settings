@@ -230,6 +230,37 @@ public class BatteryInfoTest {
     }
 
     @Test
+    public void testGetBatteryInfo_getChargeTimeRemaining_updateSettingsGlobal() {
+        doReturn(TEST_CHARGE_TIME_REMAINING)
+                .when(mBatteryUsageStats)
+                .getChargeTimeRemainingMs();
+
+        BatteryInfo.getBatteryInfo(mContext, mChargingBatteryBroadcast,
+                mBatteryUsageStats, MOCK_ESTIMATE, SystemClock.elapsedRealtime() * 1000,
+                false /* shortString */);
+
+        assertThat(BatteryInfo.getSettingsChargeTimeRemaining(mContext)).isEqualTo(
+                TEST_CHARGE_TIME_REMAINING);
+    }
+
+    @Test
+    public void testGetBatteryInfo_differentChargeTimeRemaining_updateSettingsGlobal() {
+        doReturn(TEST_CHARGE_TIME_REMAINING)
+                .when(mBatteryUsageStats)
+                .getChargeTimeRemainingMs();
+        final long newTimeToFull = 300L;
+        doReturn(newTimeToFull)
+                .when(mBatteryUsageStats)
+                .getChargeTimeRemainingMs();
+
+        BatteryInfo.getBatteryInfo(mContext, mChargingBatteryBroadcast,
+                mBatteryUsageStats, MOCK_ESTIMATE, SystemClock.elapsedRealtime() * 1000,
+                false /* shortString */);
+
+        assertThat(BatteryInfo.getSettingsChargeTimeRemaining(mContext)).isEqualTo(newTimeToFull);
+    }
+
+    @Test
     public void testGetBatteryInfo_dockDefenderActive_updateChargeString() {
         doReturn(TEST_CHARGE_TIME_REMAINING / 1000)
                 .when(mBatteryUsageStats).getChargeTimeRemainingMs();
