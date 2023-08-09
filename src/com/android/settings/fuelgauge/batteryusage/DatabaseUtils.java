@@ -31,7 +31,6 @@ import android.os.BatteryUsageStats;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.RemoteException;
-import android.os.ServiceManager;
 import android.os.SystemClock;
 import android.os.UserManager;
 import android.util.Log;
@@ -116,11 +115,6 @@ public final class DatabaseUtils {
     // For testing only.
     @VisibleForTesting
     static Supplier<Cursor> sFakeSupplier;
-
-    @VisibleForTesting
-    static IUsageStatsManager sUsageStatsManager =
-            IUsageStatsManager.Stub.asInterface(
-                    ServiceManager.getService(Context.USAGE_STATS_SERVICE));
 
     private DatabaseUtils() {
     }
@@ -488,7 +482,7 @@ public final class DatabaseUtils {
      *
      * @see UsageStatsManager#getUsageSource()
      */
-    static int getUsageSource(Context context) {
+    static int getUsageSource(Context context, IUsageStatsManager usageStatsManager) {
         final SharedPreferences sharedPreferences = getSharedPreferences(context);
         if (sharedPreferences != null && sharedPreferences.contains(KEY_LAST_USAGE_SOURCE)) {
             return sharedPreferences
@@ -497,7 +491,7 @@ public final class DatabaseUtils {
         int usageSource = ConvertUtils.DEFAULT_USAGE_SOURCE;
 
         try {
-            usageSource = sUsageStatsManager.getUsageSource();
+            usageSource = usageStatsManager.getUsageSource();
         } catch (RemoteException e) {
             Log.e(TAG, "Failed to getUsageSource", e);
         }
