@@ -50,51 +50,39 @@ public class DaltonizerPreferenceControllerTest {
     }
 
     @Test
-    public void getSummary_enabledColorCorrectionShortcutOff_shouldReturnOnShortcutOffSummary() {
+    public void getSummary_enabledColorCorrectionShortcutOff_shouldReturnOnSummary() {
         setColorCorrectionEnabled(true);
         setColorCorrectionShortcutEnabled(false);
 
         assertThat(mController.getSummary().toString()).isEqualTo(
-                mContext.getString(R.string.accessibility_feature_full_state_summary,
-                        mContext.getString(R.string.daltonizer_state_on),
-                        mContext.getString(R.string.generic_accessibility_feature_shortcut_off),
-                        mDaltonizerSummary));
+                mContext.getString(R.string.daltonizer_state_on));
     }
 
     @Test
-    public void getSummary_enabledColorCorrectionShortcutOn_shouldReturnOnShortcutOnSummary() {
+    public void getSummary_enabledColorCorrectionShortcutOn_shouldReturnOnSummary() {
         setColorCorrectionEnabled(true);
         setColorCorrectionShortcutEnabled(true);
 
         assertThat(mController.getSummary().toString()).isEqualTo(
-                mContext.getString(R.string.accessibility_feature_full_state_summary,
-                        mContext.getString(R.string.daltonizer_state_on),
-                        mContext.getString(R.string.accessibility_summary_shortcut_enabled),
-                        mDaltonizerSummary));
+                mContext.getString(R.string.daltonizer_state_on));
     }
 
     @Test
-    public void getSummary_disabledColorCorrectionShortcutOff_shouldReturnOffShortcutOffSummary() {
+    public void getSummary_disabledColorCorrectionShortcutOff_shouldReturnOffSummary() {
         setColorCorrectionEnabled(false);
         setColorCorrectionShortcutEnabled(false);
 
         assertThat(mController.getSummary().toString()).isEqualTo(
-                mContext.getString(R.string.accessibility_feature_full_state_summary,
-                        mContext.getString(R.string.daltonizer_state_off),
-                        mContext.getString(R.string.generic_accessibility_feature_shortcut_off),
-                        mDaltonizerSummary));
+                mContext.getString(R.string.daltonizer_state_off));
     }
 
     @Test
-    public void getSummary_disabledColorCorrectionShortcutOn_shouldReturnOffShortcutOnSummary() {
+    public void getSummary_disabledColorCorrectionShortcutOn_shouldReturnOffSummary() {
         setColorCorrectionEnabled(false);
         setColorCorrectionShortcutEnabled(true);
 
         assertThat(mController.getSummary().toString()).isEqualTo(
-                mContext.getString(R.string.accessibility_feature_full_state_summary,
-                        mContext.getString(R.string.daltonizer_state_off),
-                        mContext.getString(R.string.accessibility_summary_shortcut_enabled),
-                        mDaltonizerSummary));
+                mContext.getString(R.string.daltonizer_state_off));
     }
 
     private void setColorCorrectionEnabled(boolean enabled) {

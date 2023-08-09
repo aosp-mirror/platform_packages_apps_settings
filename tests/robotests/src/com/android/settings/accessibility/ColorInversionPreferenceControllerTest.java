@@ -52,51 +52,39 @@ public class ColorInversionPreferenceControllerTest {
     }
 
     @Test
-    public void getSummary_enabledColorInversionShortcutOff_shouldReturnOnShortcutOffSummary() {
+    public void getSummary_enabledColorInversionShortcutOff_shouldReturnOnSummary() {
         setColorInversionEnabled(true);
         setColorInversionShortcutEnabled(false);
 
         assertThat(mController.getSummary().toString()).isEqualTo(
-                mContext.getString(R.string.accessibility_feature_full_state_summary,
-                        mContext.getString(R.string.color_inversion_state_on),
-                        mContext.getString(R.string.generic_accessibility_feature_shortcut_off),
-                        mColorInversionSummary));
+                mContext.getString(R.string.color_inversion_state_on));
     }
 
     @Test
-    public void getSummary_enabledColorInversionShortcutOn_shouldReturnOnShortcutOnSummary() {
+    public void getSummary_enabledColorInversionShortcutOn_shouldReturnOnSummary() {
         setColorInversionEnabled(true);
         setColorInversionShortcutEnabled(true);
 
         assertThat(mController.getSummary().toString()).isEqualTo(
-                mContext.getString(R.string.accessibility_feature_full_state_summary,
-                        mContext.getString(R.string.color_inversion_state_on),
-                        mContext.getString(R.string.accessibility_summary_shortcut_enabled),
-                        mColorInversionSummary));
+                mContext.getString(R.string.color_inversion_state_on));
     }
 
     @Test
-    public void getSummary_disabledColorInversionShortcutOff_shouldReturnOffShortcutOffSummary() {
+    public void getSummary_disabledColorInversionShortcutOff_shouldReturnOffSummary() {
         setColorInversionEnabled(false);
         setColorInversionShortcutEnabled(false);
 
         assertThat(mController.getSummary().toString()).isEqualTo(
-                mContext.getString(R.string.accessibility_feature_full_state_summary,
-                        mContext.getString(R.string.color_inversion_state_off),
-                        mContext.getString(R.string.generic_accessibility_feature_shortcut_off),
-                        mColorInversionSummary));
+                mContext.getString(R.string.color_inversion_state_off));
     }
 
     @Test
-    public void getSummary_disabledColorInversionShortcutOn_shouldReturnOffShortcutOnSummary() {
+    public void getSummary_disabledColorInversionShortcutOn_shouldReturnOffSummary() {
         setColorInversionEnabled(false);
         setColorInversionShortcutEnabled(true);
 
         assertThat(mController.getSummary().toString()).isEqualTo(
-                mContext.getString(R.string.accessibility_feature_full_state_summary,
-                        mContext.getString(R.string.color_inversion_state_off),
-                        mContext.getString(R.string.accessibility_summary_shortcut_enabled),
-                        mColorInversionSummary));
+                mContext.getString(R.string.color_inversion_state_off));
     }
 
     private void setColorInversionShortcutEnabled(boolean enabled) {

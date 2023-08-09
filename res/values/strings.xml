@@ -4816,7 +4816,7 @@
     <!-- List of synonyms used in the settings search bar to find the "Audio Description. [CHAR LIMIT=NONE] -->
     <string name="keywords_audio_description">audio description, audio, description, low vision,</string>
 
-    <!-- Preference's shortcut when enabled. [CHAR LIMIT=NONE] -->
+    <!-- Shows when the shortcut of an accessibility feature is turned on. The accessibility feature could refer to any accessibility feature installed on the device. [CHAR LIMIT=NONE] -->
     <string name="accessibility_summary_shortcut_enabled">Shortcut on</string>
     <!-- Preference's shortcut when disabled. [CHAR LIMIT=NONE] -->
     <string name="accessibility_summary_shortcut_disabled">Off</string>
@@ -12246,15 +12246,18 @@
     <!-- Warning message when we try to dock an app not supporting multiple instances split into multiple sides [CHAR LIMIT=NONE] -->
     <string name="dock_multi_instances_not_supported_text">"This app can only be opened in 1 window"</string>
 
-    <!-- The accessibility features state summary, indicating whether the service is turned on, whether the shortcut is turned on. The last part of the summary is the short summary of the feature. -->
-    <string name="accessibility_feature_full_state_summary"><xliff:g example="Service on" id="state">%1$s</xliff:g> / <xliff:g example="Shortcut on" id="shortcut_state">%2$s</xliff:g> / <xliff:g example="Speak items on screen" id="service_summary">%3$s</xliff:g></string>
-    <!-- Label representing that a generic Accessibility Service is turned on. -->
-    <string name="generic_accessibility_service_on">Service on</string>
-    <!-- Label representing that a generic Accessibility Service is turned off. -->
-    <string name="generic_accessibility_service_off">Service off</string>
-    <!-- Label representing that an accessibility feature's shortcut is turned off -->
-    <string name="generic_accessibility_feature_shortcut_off">Shortcut off</string>
-    <!-- Summary for the disabled state of the accessibility shortcut. This is shown as a summary for "[Service] shortcut", where "off" refers to the state of "shortcut". -->
+    <!-- Shown when an accessibility feature is turned on. Note: for gendered languages, suggest to translate as "Feature on" because the accessibility feature it refers to can be in any gender. [CHAR LIMIT=NONE] -->
+    <string name="generic_accessibility_service_on">On</string>
+    <!-- Shown when an accessibility feature is turned off. Note: for gendered languages, suggest to translate as "Feature off" because the accessibility feature it refers to can be in any gender. [CHAR LIMIT=NONE] -->
+    <string name="generic_accessibility_service_off">Off</string>
+    <!-- Shows when the shortcut of an accessibility feature is turned off. The "off" refers to the state of "shortcut". Note: for gendered languages, suggest to translate as "Shortcut off". [CHAR LIMIT=NONE] -->
+    <string name="generic_accessibility_feature_shortcut_off">Off</string>
+    <!--
+        Summary for the disabled state of the accessibility shortcut.
+        This is shown as a summary for "[Service] shortcut" from the string resource accessibility_shortcut_title,
+        where "off" refers to the state of "shortcut" and
+        should match the same gender as the noun used in the string accessibility_shortcut_title.
+    -->
     <string name="accessibility_shortcut_state_off">Off</string>
 
     <!-- Representing daltonizer (color filter) feature is turned on -->

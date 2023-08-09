@@ -16,8 +16,6 @@
 
 package com.android.settings.accessibility;
 
-import static com.android.internal.accessibility.AccessibilityShortcutController.COLOR_INVERSION_COMPONENT_NAME;
-
 import android.content.Context;
 import android.provider.Settings;
 
@@ -36,11 +34,10 @@ public class ColorInversionPreferenceController extends BasePreferenceController
 
     @Override
     public CharSequence getSummary() {
-        return AccessibilityUtil.getFeatureFullStateSummary(
-                mContext, COLOR_INVERSION_COMPONENT_NAME,
+        return AccessibilityUtil.getSummary(
+                mContext,
                 DISPLAY_INVERSION_ENABLED,
-                R.string.color_inversion_state_on, R.string.color_inversion_state_off,
-                R.string.color_inversion_feature_summary);
+                R.string.color_inversion_state_on, R.string.color_inversion_state_off);
     }
 
     @Override

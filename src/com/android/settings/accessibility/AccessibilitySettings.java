@@ -251,69 +251,29 @@ public class AccessibilitySettings extends DashboardFragment {
             return context.getText(R.string.accessibility_summary_state_stopped);
         }
 
+        final CharSequence serviceState;
         final int fragmentType = AccessibilityUtil.getAccessibilityServiceFragmentType(info);
-        final ComponentName componentName = new ComponentName(
-                info.getResolveInfo().serviceInfo.packageName,
-                info.getResolveInfo().serviceInfo.name);
-        final boolean shortcutEnabled = AccessibilityUtil.getUserShortcutTypesFromSettings(
-                context, componentName) != AccessibilityUtil.UserShortcutType.EMPTY;
-
-        // Example shortcutState: "Shortcut on"
-        CharSequence shortcutState = shortcutEnabled
-                ? context.getText(R.string.accessibility_summary_shortcut_enabled)
-                : context.getText(R.string.generic_accessibility_feature_shortcut_off);
-
-        // Example serviceSummary: "Control device via large menu"
-        final CharSequence serviceSummary = info.loadSummary(context.getPackageManager());
-
         if (fragmentType == AccessibilityServiceFragmentType.INVISIBLE_TOGGLE) {
-            // Example result: "Shortcut on / Control device via large menu"
-            return TextUtils.isEmpty(serviceSummary)
-                    ? shortcutState
-                    : context.getString(
-                            R.string.preference_summary_default_combination, shortcutState,
-                            serviceSummary);
+            final ComponentName componentName = new ComponentName(
+                    info.getResolveInfo().serviceInfo.packageName,
+                    info.getResolveInfo().serviceInfo.name);
+            final boolean shortcutEnabled = AccessibilityUtil.getUserShortcutTypesFromSettings(
+                    context, componentName) != AccessibilityUtil.UserShortcutType.EMPTY;
+            serviceState = shortcutEnabled
+                    ? context.getText(R.string.accessibility_summary_shortcut_enabled)
+                    : context.getText(R.string.generic_accessibility_feature_shortcut_off);
         } else {
-            // Example serviceState: "Service on"
-            CharSequence serviceState = serviceEnabled
+            serviceState = serviceEnabled
                     ? context.getText(R.string.generic_accessibility_service_on)
                     : context.getText(R.string.generic_accessibility_service_off);
-
-            // Example result: "Service on / Shortcut on / Speak items on screen"
-            return TextUtils.isEmpty(serviceSummary)
-                    ? context.getString(
-                            R.string.preference_summary_default_combination,
-                            serviceState, shortcutState)
-                    : context.getString(
-                            R.string.accessibility_feature_full_state_summary, serviceState,
-                            shortcutState, serviceSummary);
         }
-    }
 
-    /**
-     * Returns the summary for the current shortcut state of the accessibility app
-     * captured in the {@link AccessibilityShortcutInfo}
-     */
-    public static CharSequence getA11yShortcutInfoPreferenceSummary(
-            Context context, AccessibilityShortcutInfo info) {
-
-        boolean shortcutEnabled = AccessibilityUtil.getUserShortcutTypesFromSettings(
-                context, info.getComponentName()) != AccessibilityUtil.UserShortcutType.EMPTY;
-
-        // Example shortcutState: "Shortcut on"
-        CharSequence shortcutState = shortcutEnabled
-                ? context.getText(R.string.accessibility_summary_shortcut_enabled)
-                : context.getText(R.string.generic_accessibility_feature_shortcut_off);
-
-        // Example serviceSummary: "Convert speech to text"
-        CharSequence serviceSummary = info.loadSummary(context.getPackageManager());
-
-        // Example result: "Shortcut on / Convert speech to text"
-        return TextUtils.isEmpty(serviceSummary)
-                ? shortcutState
-                : context.getString(
+        final CharSequence serviceSummary = info.loadSummary(context.getPackageManager());
+        final String stateSummaryCombo = context.getString(
                 R.string.preference_summary_default_combination,
-                shortcutState, serviceSummary);
+                serviceState, serviceSummary);
+
+        return TextUtils.isEmpty(serviceSummary) ? serviceState : stateSummaryCombo;
     }
 
     /**
