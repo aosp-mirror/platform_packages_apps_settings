@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (C) 2023 The Android Open Source Project
+
+    Licensed under the Apache License, Version 2.0 (the "License")
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+
+<com.google.android.setupdesign.GlifLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/setup_wizard_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:icon="@drawable/ic_lock"
+    app:sucUsePartnerResource="false"
+    app:sucHeaderText="@string/security_settings_remoteauth_enroll_introduction_title"
+    app:sudDescriptionText="@string/security_settings_remoteauth_enroll_introduction_message">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        style="@style/SudContentFrame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/remoteauth_fragment_padding_horizontal"
+        app:layout_optimizationLevel="barrier">
+
+        <com.android.settings.remoteauth.introduction.IntroductionImageCarousel
+            android:id="@+id/image_carousel_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"  />
+
+        <!-- How it works -->
+        <TextView
+            android:id="@+id/explanation_subheading_how_it_works"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/BiometricEnrollIntroTitle"
+            android:text="@string/security_settings_remoteauth_enroll_introduction_how_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image_carousel_view" />
+
+        <ImageView
+            android:id="@+id/explanation_icon_lock_open"
+            android:layout_width="@dimen/remoteauth_icon_small_size"
+            android:layout_height="@dimen/remoteauth_icon_small_size"
+            android:importantForAccessibility="no"
+            android:background="@drawable/ic_lock_open_24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/explanation_subheading_how_it_works" />
+
+        <TextView
+            android:id="@+id/explanation_lock_open_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/remoteauth_introduction_description_start_margin"
+            style="@style/BiometricEnrollIntroMessage"
+            android:text="@string/security_settings_remoteauth_enroll_introduction_info_lock_open"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/explanation_icon_lock_open"
+            app:layout_constraintTop_toTopOf="@id/explanation_icon_lock_open" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/explanation_lock_open_description_barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="explanation_icon_lock_open, explanation_lock_open_description" />
+
+        <ImageView
+            android:id="@+id/explanation_icon_notifications"
+            android:layout_width="@dimen/remoteauth_icon_small_size"
+            android:layout_height="@dimen/remoteauth_icon_small_size"
+            android:importantForAccessibility="no"
+            android:background="@drawable/ic_notifications"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/explanation_lock_open_description_barrier"/>
+
+        <TextView
+            android:id="@+id/explanation_notifications_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/remoteauth_introduction_description_start_margin"
+            style="@style/BiometricEnrollIntroMessage"
+            android:text="@string/security_settings_remoteauth_enroll_introduction_info_notifications"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/explanation_icon_notifications"
+            app:layout_constraintTop_toTopOf="@id/explanation_icon_notifications" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/explanation_notifications_description_barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="explanation_icon_notifications,explanation_notifications_description" />
+
+        <!-- You're in control -->
+        <TextView
+            android:id="@+id/explanation_subheading_youre_in_control"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/BiometricEnrollIntroTitle"
+            android:text="@string/security_settings_remoteauth_enroll_introduction_youre_in_control_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/explanation_notifications_description_barrier" />
+
+        <ImageView
+            android:id="@+id/explanation_icon_remove_watch"
+            android:layout_width="@dimen/remoteauth_icon_small_size"
+            android:layout_height="@dimen/remoteauth_icon_small_size"
+            android:importantForAccessibility="no"
+            android:background="@drawable/ic_delete"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/explanation_subheading_youre_in_control" />
+
+        <TextView
+            android:id="@+id/explanation_remove_watch_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/remoteauth_introduction_description_start_margin"
+            style="@style/BiometricEnrollIntroMessage"
+            android:text="@string/security_settings_remoteauth_enroll_introduction_info_remove_watch"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/explanation_icon_remove_watch"
+            app:layout_constraintTop_toTopOf="@id/explanation_icon_remove_watch" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.setupdesign.GlifLayout>
