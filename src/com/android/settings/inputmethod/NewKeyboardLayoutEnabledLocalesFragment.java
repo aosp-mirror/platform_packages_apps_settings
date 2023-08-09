@@ -145,7 +145,8 @@ public class NewKeyboardLayoutEnabledLocalesFragment extends DashboardFragment
 
         PreferenceScreen preferenceScreen = getPreferenceScreen();
         preferenceScreen.removeAll();
-        List<InputMethodInfo> infoList = mImm.getEnabledInputMethodListAsUser(mUserId);
+        List<InputMethodInfo> infoList =
+                mImm.getEnabledInputMethodListAsUser(UserHandle.of(mUserId));
         Collections.sort(infoList, new Comparator<InputMethodInfo>() {
             public int compare(InputMethodInfo o1, InputMethodInfo o2) {
                 String s1 = o1.loadLabel(mContext.getPackageManager()).toString();
@@ -157,7 +158,8 @@ public class NewKeyboardLayoutEnabledLocalesFragment extends DashboardFragment
         for (InputMethodInfo info : infoList) {
             mKeyboardInfoList.clear();
             List<InputMethodSubtype> subtypes =
-                    mImm.getEnabledInputMethodSubtypeListAsUser(info.getId(), true, mUserId);
+                    mImm.getEnabledInputMethodSubtypeListAsUser(info.getId(), true,
+                            UserHandle.of(mUserId));
             for (InputMethodSubtype subtype : subtypes) {
                 if (subtype.isSuitableForPhysicalKeyboardLayoutMapping()) {
                     mapLanguageWithLayout(info, subtype);

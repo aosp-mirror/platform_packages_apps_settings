@@ -155,7 +155,7 @@ public class AvailableVirtualKeyboardFragment extends DashboardFragment
         final Context prefContext = getPrefContext();
         final List<InputMethodInfo> imis = mInputMethodSettingValues.getInputMethodList();
         final List<InputMethodInfo> enabledImis = getContext().getSystemService(
-                InputMethodManager.class).getEnabledInputMethodListAsUser(mUserId);
+                InputMethodManager.class).getEnabledInputMethodListAsUser(UserHandle.of(mUserId));
         final int numImis = (imis == null ? 0 : imis.size());
         for (int i = 0; i < numImis; ++i) {
             final InputMethodInfo imi = imis.get(i);
