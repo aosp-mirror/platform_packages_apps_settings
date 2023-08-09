@@ -140,7 +140,7 @@ open class FingerprintEnrollmentActivity : FragmentActivity() {
         action?.let { onEnrollingAction(it) }
     }
 
-    private val finishActionObserver = Observer<Int> { action ->
+    private val finishActionObserver = Observer<Int?> { action ->
         if (DEBUG) {
             Log.d(TAG, "finishActionObserver($action)")
         }
