@@ -87,7 +87,7 @@ public class SearchMenuController implements LifecycleObserver, OnCreateOptionsM
         }
         final MenuItem searchItem = menu.add(Menu.NONE, MENU_SEARCH, 0 /* order */,
                 R.string.search_menu);
-        searchItem.setIcon(com.android.settingslib.widget.R.drawable.ic_search_24dp);
+        searchItem.setIcon(R.drawable.ic_search_24dp);
         searchItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 
         searchItem.setOnMenuItemClickListener(target -> {
