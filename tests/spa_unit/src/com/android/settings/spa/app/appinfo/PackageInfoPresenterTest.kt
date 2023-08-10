@@ -28,7 +28,6 @@ import com.android.settings.testutils.mockAsUser
 import com.android.settingslib.spaprivileged.framework.common.activityManager
 import com.android.settingslib.spaprivileged.model.app.IPackageManagers
 import com.google.common.truth.Truth.assertThat
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
@@ -45,7 +44,6 @@ import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoRule
 import org.mockito.Mockito.`when` as whenever
 
-@OptIn(ExperimentalCoroutinesApi::class)
 @RunWith(AndroidJUnit4::class)
 class PackageInfoPresenterTest {
     @get:Rule

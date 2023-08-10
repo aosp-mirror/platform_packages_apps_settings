@@ -34,7 +34,6 @@ import com.android.settingslib.spa.testutils.FakeNavControllerWrapper
 import com.android.settingslib.spa.testutils.any
 import com.android.settingslib.spaprivileged.template.app.AppListItemModel
 import com.google.common.truth.Truth
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
@@ -171,7 +170,6 @@ class BackgroundInstalledAppsPageProviderTest {
             .isEqualTo("AppInfoSettings/package.name/0")
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun backgroundInstalledAppsWithGroupingListModel_getGroupTitleOne() = runTest {
         val listModel = BackgroundInstalledAppsWithGroupingListModel(context)
@@ -186,7 +184,6 @@ class BackgroundInstalledAppsPageProviderTest {
         Truth.assertThat(actualGroupTitle).isEqualTo("Apps installed in the last 6 months")
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun backgroundInstalledAppsWithGroupingListModel_getGroupTitleTwo() = runTest {
         val listModel = BackgroundInstalledAppsWithGroupingListModel(context)
@@ -201,7 +198,6 @@ class BackgroundInstalledAppsPageProviderTest {
         Truth.assertThat(actualGroupTitle).isEqualTo("Apps installed more than 6 months ago")
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun backgroundInstalledAppsWithGroupingListModel_transform() = runTest {
         val listModel = BackgroundInstalledAppsWithGroupingListModel(mockContext)
@@ -220,7 +216,6 @@ class BackgroundInstalledAppsPageProviderTest {
         Truth.assertThat(packageInfoFlagsCaptor.value.value).isEqualTo(EXPECTED_PACKAGE_INFO_FLAG)
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun backgroundInstalledAppsWithGroupingListModel_filter() = runTest {
         val listModel = BackgroundInstalledAppsWithGroupingListModel(mockContext)

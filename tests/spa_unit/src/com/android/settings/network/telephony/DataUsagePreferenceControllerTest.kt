@@ -37,7 +37,6 @@ import com.android.settingslib.net.DataUsageController
 import com.android.settingslib.net.DataUsageController.DataUsageInfo
 import com.android.settingslib.spa.testutils.waitUntil
 import com.google.common.truth.Truth.assertThat
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Before
@@ -53,7 +52,6 @@ import org.mockito.Spy
 import org.mockito.quality.Strictness
 import org.mockito.Mockito.`when` as whenever
 
-@OptIn(ExperimentalCoroutinesApi::class)
 @RunWith(AndroidJUnit4::class)
 class DataUsagePreferenceControllerTest {
 

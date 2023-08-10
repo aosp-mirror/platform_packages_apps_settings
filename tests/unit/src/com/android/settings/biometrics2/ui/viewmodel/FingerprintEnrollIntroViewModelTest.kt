@@ -38,7 +38,6 @@ import com.android.settings.biometrics2.utils.FingerprintRepositoryUtils.newFing
 import com.android.settings.biometrics2.utils.FingerprintRepositoryUtils.setupFingerprintEnrolledFingerprints
 import com.android.settings.biometrics2.utils.FingerprintRepositoryUtils.setupSuwMaxFingerprintsEnrollable
 import com.google.common.truth.Truth.assertThat
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.TestScope
@@ -78,7 +77,6 @@ class FingerprintEnrollIntroViewModelTest {
         application = ApplicationProvider.getApplicationContext()
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun testPageStatusFlowDefaultAndUpdate() = runTest {
         val viewModel = newFingerprintEnrollIntroViewModel(
@@ -105,7 +103,6 @@ class FingerprintEnrollIntroViewModelTest {
         assertThat(statusList[1].enrollableStatus).isEqualTo(FINGERPRINT_ENROLLABLE_ERROR_REACH_MAX)
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     fun testOnStartToUpdateEnrollableStatusOk_isSuw() = runTest {
         setupFingerprintEnrolledFingerprints(fingerprintManager, TEST_USER_ID, 0)
         setupSuwMaxFingerprintsEnrollable(application, resources, 1)
@@ -122,7 +119,6 @@ class FingerprintEnrollIntroViewModelTest {
         assertThat(statusList[0].enrollableStatus).isEqualTo(FINGERPRINT_ENROLLABLE_OK)
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun testOnStartToUpdateEnrollableStatusReachMax_isSuw() = runTest {
         setupFingerprintEnrolledFingerprints(fingerprintManager, TEST_USER_ID, 1)
@@ -140,49 +136,41 @@ class FingerprintEnrollIntroViewModelTest {
         assertThat(statusList[0].enrollableStatus).isEqualTo(FINGERPRINT_ENROLLABLE_ERROR_REACH_MAX)
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun testOnStartToUpdateEnrollableStatusOk_isNotSuw() = runTest {
         testOnStartToUpdateEnrollableStatusOk(newAllFalseRequest(application))
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun testOnStartToUpdateEnrollableStatusReachMax_isNotSuw() = runTest {
         testOnStartToUpdateEnrollableStatusReachMax(newAllFalseRequest(application))
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun testOnStartToUpdateEnrollableStatusOk_isSuwDeferred() = runTest {
         testOnStartToUpdateEnrollableStatusOk(newIsSuwDeferredRequest(application))
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun testOnStartToUpdateEnrollableStatusReachMax_isSuwDeferred() = runTest {
         testOnStartToUpdateEnrollableStatusReachMax(newIsSuwDeferredRequest(application))
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun testOnStartToUpdateEnrollableStatusOk_isSuwPortal() = runTest {
         testOnStartToUpdateEnrollableStatusOk(newIsSuwPortalRequest(application))
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun testOnStartToUpdateEnrollableStatusReachMax_isSuwPortal() = runTest {
         testOnStartToUpdateEnrollableStatusReachMax(newIsSuwPortalRequest(application))
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun testOnStartToUpdateEnrollableStatusOk_isSuwSuggestedActionFlow() = runTest {
         testOnStartToUpdateEnrollableStatusOk(newIsSuwSuggestedActionFlowRequest(application))
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun testOnStartToUpdateEnrollableStatusReachMax_isSuwSuggestedActionFlow() = runTest {
         testOnStartToUpdateEnrollableStatusReachMax(
@@ -190,7 +178,6 @@ class FingerprintEnrollIntroViewModelTest {
         )
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     private fun TestScope.testOnStartToUpdateEnrollableStatusOk(request: EnrollmentRequest) {
         setupFingerprintEnrolledFingerprints(fingerprintManager, TEST_USER_ID, 0)
         val viewModel = newFingerprintEnrollIntroViewModel(
@@ -206,7 +193,6 @@ class FingerprintEnrollIntroViewModelTest {
         assertThat(statusList[0].enrollableStatus).isEqualTo(FINGERPRINT_ENROLLABLE_OK)
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     private fun TestScope.testOnStartToUpdateEnrollableStatusReachMax(request: EnrollmentRequest) {
         setupFingerprintEnrolledFingerprints(fingerprintManager, TEST_USER_ID, 5)
         val viewModel = newFingerprintEnrollIntroViewModel(
@@ -268,7 +254,6 @@ class FingerprintEnrollIntroViewModelTest {
         assertThat(viewModel.isBiometricUnlockDisabledByAdmin).isEqualTo(false)
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun testSetHasScrolledToBottom() = runTest {
         val viewModel = newFingerprintEnrollIntroViewModel(
@@ -284,7 +269,6 @@ class FingerprintEnrollIntroViewModelTest {
         assertThat(pageStatusList[pageStatusList.size-1].hasScrollToBottom()).isEqualTo(true)
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun testOnNextButtonClick_enrollNext() = runTest {
         // Set latest status to FINGERPRINT_ENROLLABLE_OK
@@ -305,7 +289,6 @@ class FingerprintEnrollIntroViewModelTest {
         assertThat(actions[0]).isEqualTo(CONTINUE_ENROLL)
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun testOnNextButtonClick_doneAndFinish() = runTest {
         // Set latest status to FINGERPRINT_ENROLLABLE_ERROR_REACH_MAX
@@ -334,7 +317,6 @@ class FingerprintEnrollIntroViewModelTest {
         assertThat(actionList[0]).isEqualTo(DONE_AND_FINISH)
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun testOnSkipOrCancelButtonClick() = runTest {
         val viewModel = newFingerprintEnrollIntroViewModel(
@@ -351,7 +333,6 @@ class FingerprintEnrollIntroViewModelTest {
         assertThat(actions[0]).isEqualTo(SKIP_OR_CANCEL)
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     private fun TestScope.listOfActionFlow(
         viewModel: FingerprintEnrollIntroViewModel
     ): List<FingerprintEnrollIntroAction> =
@@ -361,7 +342,6 @@ class FingerprintEnrollIntroViewModelTest {
             }
         }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     private fun TestScope.listOfPageStatusFlow(
         viewModel: FingerprintEnrollIntroViewModel
     ): List<FingerprintEnrollIntroStatus> =
