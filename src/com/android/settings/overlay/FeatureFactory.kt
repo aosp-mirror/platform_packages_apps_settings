@@ -24,6 +24,7 @@ import com.android.settings.biometrics.face.FaceFeatureProvider
 import com.android.settings.biometrics2.factory.BiometricsRepositoryProvider
 import com.android.settings.bluetooth.BluetoothFeatureProvider
 import com.android.settings.connecteddevice.stylus.StylusFeatureProvider
+import com.android.settings.onboarding.OnboardingFeatureProvider
 import com.android.settings.dashboard.DashboardFeatureProvider
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider
 import com.android.settings.deviceinfo.hardwareinfo.HardwareInfoFeatureProvider
@@ -148,6 +149,11 @@ abstract class FeatureFactory {
      * Retrieves implementation for stylus feature.
      */
     abstract val stylusFeatureProvider: StylusFeatureProvider
+
+    /**
+     * Retrieves implementation for TogglePreference feature.
+     */
+    open val onboardingFeatureProvider: OnboardingFeatureProvider? = null
 
     companion object {
         private var _factory: FeatureFactory? = null

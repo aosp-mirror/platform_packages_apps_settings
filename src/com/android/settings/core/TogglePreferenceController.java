@@ -21,6 +21,7 @@ import androidx.preference.TwoStatePreference;
 
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.slices.SliceData;
+import com.android.settings.onboarding.OnboardingFeatureProvider;
 import com.android.settings.widget.TwoStateButtonPreference;
 import com.android.settingslib.PrimarySwitchPreference;
 import com.android.settingslib.core.instrumentation.SettingsJankMonitor;
@@ -83,6 +84,11 @@ public abstract class TogglePreferenceController extends BasePreferenceControlle
                 || preference instanceof TwoStateButtonPreference) {
             FeatureFactory.getFeatureFactory().getMetricsFeatureProvider()
                     .logClickedPreference(preference, getMetricsCategory());
+        }
+        OnboardingFeatureProvider onboardingFeatureProvider =
+                FeatureFactory.getFeatureFactory().getOnboardingFeatureProvider();
+        if (onboardingFeatureProvider != null) {
+            onboardingFeatureProvider.markPreferenceHasChanged(mContext, mPreferenceKey);
         }
         return setChecked((boolean) newValue);
     }
