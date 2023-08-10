@@ -47,6 +47,9 @@ import com.android.settingslib.spa.framework.util.asyncMap
 import com.android.settingslib.spa.framework.util.filterItem
 import com.android.settingslib.spa.widget.preference.Preference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
+import com.android.settingslib.spa.widget.illustration.Illustration
+import com.android.settingslib.spa.widget.illustration.IllustrationModel
+import com.android.settingslib.spa.widget.illustration.ResourceType
 import com.android.settingslib.spa.widget.ui.SettingsBody
 import com.android.settingslib.spa.widget.ui.SpinnerOption
 import com.android.settingslib.spaprivileged.model.app.AppListModel
@@ -108,6 +111,10 @@ fun UserAspectRatioAppList(
             Box(Modifier.padding(SettingsDimension.itemPadding)) {
                 SettingsBody(UserAspectRatioAppsPageProvider.getSummary())
             }
+            Illustration(object : IllustrationModel {
+                override val resId = R.raw.user_aspect_ratio_education
+                override val resourceType = ResourceType.LOTTIE
+            })
         }
     )
 }
