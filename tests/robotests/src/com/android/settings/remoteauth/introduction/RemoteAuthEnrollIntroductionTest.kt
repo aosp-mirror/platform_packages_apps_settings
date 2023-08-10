@@ -16,45 +16,39 @@
 
 package com.android.settings.remoteauth.introduction
 
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.testing.launchFragmentInContainer
-import androidx.test.core.app.ApplicationProvider
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.ViewMatchers.*
 import com.android.settings.R
-import com.google.android.setupdesign.GlifLayout
-import com.google.common.truth.Truth.assertThat
-
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 
 @RunWith(RobolectricTestRunner::class)
 class RemoteAuthEnrollIntroductionTest {
-    private var mContext: Context = ApplicationProvider.getApplicationContext()
+    @Before
+    fun setUp() {
+        launchFragmentInContainer<RemoteAuthEnrollIntroduction>(Bundle(), R.style.SudThemeGlif)
+    }
 
     @Test
     fun testRemoteAuthenticatorEnrollIntroduction_hasHeader() {
-        launchFragmentInContainer<RemoteAuthEnrollIntroduction>(
-            Bundle(),
-            com.google.android.setupdesign.R.style.SudThemeGlif,
-        ).onFragment {
-            assertThat((it.view as GlifLayout).headerText)
-                .isEqualTo(mContext.getString(R.string.security_settings_remoteauth_enroll_introduction_title))
-        }
+        onView(withText(R.string.security_settings_remoteauth_enroll_introduction_title)).check(
+            matches(
+                isDisplayed()
+            )
+        )
     }
 
     @Test
     fun testRemoteAuthenticatorEnrollIntroduction_hasDescription() {
-        launchFragmentInContainer<RemoteAuthEnrollIntroduction>(
-            Bundle(),
-            com.google.android.setupdesign.R.style.SudThemeGlif,
-        ).onFragment {
-            assertThat((it.view as GlifLayout).descriptionText)
-                .isEqualTo(
-                    mContext.getString(
-                        R.string.security_settings_remoteauth_enroll_introduction_message
-                    )
-                )
-        }
+        onView(withText(R.string.security_settings_remoteauth_enroll_introduction_message)).check(
+            matches(
+                isDisplayed()
+            )
+        )
     }
 }
