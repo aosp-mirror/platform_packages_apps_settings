@@ -33,6 +33,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.VisibleForTesting;
@@ -341,11 +342,9 @@ public class BluetoothPairingDialogFragment extends InstrumentedDialogFragment i
         TextView pairingViewCaption = (TextView) view.findViewById(R.id.pairing_caption);
         TextView pairingViewContent = (TextView) view.findViewById(R.id.pairing_subhead);
         TextView messagePairing = (TextView) view.findViewById(R.id.pairing_code_message);
-        CheckBox contactSharing = (CheckBox) view.findViewById(
+        Switch contactSharing = (Switch) view.findViewById(
                 R.id.phonebook_sharing_message_confirm_pin);
-        contactSharing.setText(getString(R.string.bluetooth_pairing_shares_phonebook));
-
-        contactSharing.setVisibility(
+        view.findViewById(R.id.phonebook_sharing).setVisibility(
                 mPairingController.isContactSharingVisible() ? View.VISIBLE : View.GONE);
         mPairingController.setContactSharingState();
         contactSharing.setChecked(mPairingController.getContactSharingState());
