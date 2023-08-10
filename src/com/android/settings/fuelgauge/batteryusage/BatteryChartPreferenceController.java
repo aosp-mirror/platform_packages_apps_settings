@@ -36,6 +36,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -43,6 +44,7 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnCreate;
 import com.android.settingslib.core.lifecycle.events.OnDestroy;
+import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
 
@@ -50,12 +52,17 @@ import com.google.common.base.Objects;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /** Controls the update for chart graph and the list items. */
 public class BatteryChartPreferenceController extends AbstractPreferenceController
-        implements PreferenceControllerMixin, LifecycleObserver, OnCreate, OnDestroy,
+        implements PreferenceControllerMixin, LifecycleObserver, OnCreate, OnDestroy, OnPause,
         OnSaveInstanceState, OnResume {
     private static final String TAG = "BatteryChartPreferenceController";
     private static final String PREFERENCE_KEY = "battery_chart";
@@ -133,14 +140,17 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     private OnBatteryUsageUpdatedListener mOnBatteryUsageUpdatedListener;
     private OnScreenOnTimeUpdatedListener mOnScreenOnTimeUpdatedListener;
     private OnBatteryTipsUpdatedListener mOnBatteryTipsUpdatedListener;
+    private AtomicBoolean mIsAppResume = new AtomicBoolean(false);
 
     private final SettingsActivity mActivity;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
+    private final PowerUsageFeatureProvider mPowerUsageFeatureProvider;
     private final Handler mHandler = new Handler(Looper.getMainLooper());
     private final AnimatorListenerAdapter mHourlyChartFadeInAdapter =
             createHourlyChartAnimatorListenerAdapter(/*visible=*/ true);
     private final AnimatorListenerAdapter mHourlyChartFadeOutAdapter =
             createHourlyChartAnimatorListenerAdapter(/*visible=*/ false);
+    private final ExecutorService mExecutor = Executors.newSingleThreadExecutor();
 
     @VisibleForTesting
     final DailyChartLabelTextGenerator mDailyChartLabelTextGenerator =
@@ -156,6 +166,8 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         mIs24HourFormat = DateFormat.is24HourFormat(context);
         mMetricsFeatureProvider =
                 FeatureFactory.getFactory(mContext).getMetricsFeatureProvider();
+        mPowerUsageFeatureProvider =
+                FeatureFactory.getFactory(mContext).getPowerUsageFeatureProvider(context);
         if (lifecycle != null) {
             lifecycle.addObserver(this);
         }
@@ -173,9 +185,15 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         Log.d(TAG, String.format("onCreate() dailyIndex=%d hourlyIndex=%d",
                 mDailyChartIndex, mHourlyChartIndex));
     }
+    @Override
+    public void onPause() {
+        mIsAppResume.compareAndSet(/* expect= */ true, /* update= */ false);
+    }
+
 
     @Override
     public void onResume() {
+        mIsAppResume.compareAndSet(/* expect= */ false, /* update= */ true);
         mIs24HourFormat = DateFormat.is24HourFormat(mContext);
         mMetricsFeatureProvider.action(mPrefContext, SettingsEnums.OPEN_BATTERY_USAGE);
     }
@@ -363,12 +381,34 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             mOnBatteryUsageUpdatedListener.onBatteryUsageUpdated(
                     slotUsageData, getSlotInformation(), isBatteryUsageMapNullOrEmpty());
 
+            Log.d(TAG, "isBatteryTipsEnabled = "
+                    + mPowerUsageFeatureProvider.isBatteryTipsEnabled());
             if (mOnBatteryTipsUpdatedListener != null) {
-                // TODO: replace with a selected powerAnomalyEvent with highest score
-                mOnBatteryTipsUpdatedListener.onBatteryTipsUpdated(null);
+                mExecutor.execute(() -> {
+                    final PowerAnomalyEventList anomalyEventList = mPowerUsageFeatureProvider
+                            .detectSettingsAnomaly(mContext, /* displayDrain= */ 0);
+                    Log.d(TAG, "anomalyEventList = " + anomalyEventList);
+                    final PowerAnomalyEvent displayEvent =
+                            getHighestScoreAnomalyEvent(anomalyEventList);
+                    mHandler.post(() -> {
+                                if (mIsAppResume.get()) {
+                                    mOnBatteryTipsUpdatedListener
+                                            .onBatteryTipsUpdated(displayEvent);
+                                }
+                            }
+                    );
+                });
             }
         }
         return true;
+    }
+
+    private PowerAnomalyEvent getHighestScoreAnomalyEvent(PowerAnomalyEventList anomalyEventList) {
+        if (anomalyEventList == null || anomalyEventList.getPowerAnomalyEventsCount() == 0) {
+            return null;
+        }
+        return Collections.max(anomalyEventList.getPowerAnomalyEventsList(),
+                Comparator.comparing(PowerAnomalyEvent::getScore));
     }
 
     private boolean refreshUiWithNoLevelDataCase() {
