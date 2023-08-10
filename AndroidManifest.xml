@@ -4681,6 +4681,16 @@
         </activity>
 
         <activity
+            android:name=".wifi.dpp.WifiDppConfiguratorAuthActivity"
+            android:theme="@style/Transparent"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.settings.WIFI_DPP_CONFIGURATOR_AUTH_QR_CODE_GENERATOR"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <activity
             android:name=".wifi.dpp.WifiDppEnrolleeActivity"
             android:exported="true">
             <intent-filter>
