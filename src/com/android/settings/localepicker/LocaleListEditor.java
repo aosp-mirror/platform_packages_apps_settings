@@ -364,6 +364,7 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
                                 }
                             });
             mSuggestionDialog = dialogBuilder.create();
+            mSuggestionDialog.setCanceledOnTouchOutside(false);
             mSuggestionDialog.show();
         } else {
             Log.d(TAG, "Invalid parameter, dialogType:" + dialogType);
