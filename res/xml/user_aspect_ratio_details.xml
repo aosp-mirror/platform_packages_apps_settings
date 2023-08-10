@@ -18,38 +18,45 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title="@string/aspect_ratio_title">
 
     <com.android.settingslib.widget.ActionButtonsPreference
         android:key="header_view" />
 
-    <com.android.settingslib.widget.SelectorWithWidgetPreference
+    <com.android.settings.applications.appcompat.RadioWithImagePreference
         android:key="app_default_pref"
         android:title="@string/user_aspect_ratio_app_default"/>
 
-    <com.android.settingslib.widget.SelectorWithWidgetPreference
+    <com.android.settings.applications.appcompat.RadioWithImagePreference
         android:key="fullscreen_pref"
-        android:title="@string/user_aspect_ratio_fullscreen"/>
+        android:title="@string/user_aspect_ratio_fullscreen"
+        android:icon="@drawable/ic_app_aspect_ratio_fullscreen"/>
 
-    <com.android.settingslib.widget.SelectorWithWidgetPreference
+    <com.android.settings.applications.appcompat.RadioWithImagePreference
         android:key="half_screen_pref"
-        android:title="@string/user_aspect_ratio_half_screen"/>
+        android:title="@string/user_aspect_ratio_half_screen"
+        android:icon="@drawable/ic_app_aspect_ratio_half_screen"/>
 
-    <com.android.settingslib.widget.SelectorWithWidgetPreference
+    <com.android.settings.applications.appcompat.RadioWithImagePreference
         android:key="display_size_pref"
-        android:title="@string/user_aspect_ratio_device_size"/>
+        android:title="@string/user_aspect_ratio_device_size"
+        android:icon="@drawable/ic_app_aspect_ratio_display_size"/>
 
-    <com.android.settingslib.widget.SelectorWithWidgetPreference
+    <com.android.settings.applications.appcompat.RadioWithImagePreference
         android:key="16_9_pref"
-        android:title="@string/user_aspect_ratio_16_9"/>
+        android:title="@string/user_aspect_ratio_16_9"
+        android:icon="@drawable/ic_app_aspect_ratio_16_9"/>
 
-    <com.android.settingslib.widget.SelectorWithWidgetPreference
+    <com.android.settings.applications.appcompat.RadioWithImagePreference
         android:key="4_3_pref"
-        android:title="@string/user_aspect_ratio_4_3"/>
+        android:title="@string/user_aspect_ratio_4_3"
+        android:icon="@drawable/ic_app_aspect_ratio_4_3"/>
 
-    <com.android.settingslib.widget.SelectorWithWidgetPreference
+    <com.android.settings.applications.appcompat.RadioWithImagePreference
         android:key="3_2_pref"
-        android:title="@string/user_aspect_ratio_3_2"/>
+        android:title="@string/user_aspect_ratio_3_2"
+        android:icon="@drawable/ic_app_aspect_ratio_3_2"/>
 
     <com.android.settingslib.widget.FooterPreference
         android:title="@string/app_aspect_ratio_footer"
