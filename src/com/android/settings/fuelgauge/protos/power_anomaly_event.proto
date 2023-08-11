@@ -4,14 +4,19 @@ option java_multiple_files = true;
 option java_package = "com.android.settings.fuelgauge.batteryusage";
 option java_outer_classname = "PowerAnomalyEventProto";
 
+message PowerAnomalyEventList {
+  repeated PowerAnomalyEvent power_anomaly_events = 1;
+}
+
 message PowerAnomalyEvent {
-  optional int64 timestamp = 1;
-  optional string type = 2;  // e.g. settings, apps
-  optional string key = 3;  // e.g. brightness, significant_increase
-  optional float score = 4;
+  optional string event_id = 1;
+  optional int64 timestamp = 2;
+  optional string type = 3;  // e.g. settings, apps
+  optional string key = 4;  // e.g. brightness, significant_increase
+  optional float score = 5;
   oneof info {
-    WarningBannerInfo warning_banner_info = 5;
-    WarningItemInfo warning_item_info = 6;
+    WarningBannerInfo warning_banner_info = 6;
+    WarningItemInfo warning_item_info = 7;
   }
 }
 
@@ -19,9 +24,11 @@ message WarningBannerInfo {
   optional string title_string = 1;
   optional string description_string = 2;
   optional string main_button_string = 3;
-  optional string main_button_action = 4;
-  optional string cancel_button_string = 5;
-  optional string cancel_button_action = 6;
+  // Used in the SubSettingLauncher.setDestination().
+  optional string main_button_destination = 4;
+  // Used in the SubSettingLauncher.setSourceMetricsCategory().
+  optional int32 main_button_source_metrics_category = 5;
+  optional string cancel_button_string = 6;
 }
 
 message WarningItemInfo {
@@ -31,7 +38,9 @@ message WarningItemInfo {
   optional string title_string = 4;
   optional string description_string = 5;
   optional string main_button_string = 6;
-  optional string main_button_action = 7;
-  optional string cancel_button_string = 8;
-  optional string cancel_button_action = 9;
+  // Used in the SubSettingLauncher.setDestination().
+  optional string main_button_destination = 7;
+  // Used in the SubSettingLauncher.setSourceMetricsCategory().
+  optional int32 main_button_source_metrics_category = 8;
+  optional string cancel_button_string = 9;
 }
