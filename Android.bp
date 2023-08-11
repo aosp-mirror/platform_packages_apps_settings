@@ -55,6 +55,7 @@ android_library {
     ],
 
     srcs: ["src/**/*.java", "src/**/*.kt"],
+    use_resource_processor: true,
     resource_dirs: [
         "res",
         "res-export", // for external usage
@@ -136,6 +137,7 @@ android_app {
     ],
     static_libs: ["Settings-core"],
     uses_libs: ["org.apache.http.legacy"],
+    use_resource_processor: true,
     resource_dirs: [],
     optimize: {
         proguard_flags_files: ["proguard.flags"],

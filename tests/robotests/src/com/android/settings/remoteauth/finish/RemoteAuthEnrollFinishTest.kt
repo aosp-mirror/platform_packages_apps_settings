@@ -35,21 +35,29 @@ class RemoteAuthEnrollFinishTest {
 
     @Test
     fun testRemoteAuthenticatorEnrollFinish_hasHeader() {
-        launchFragmentInContainer<RemoteAuthEnrollFinish>(Bundle(), R.style.SudThemeGlif)
-            .onFragment {
-                assertThat((it.view as GlifLayout).headerText)
-                    .isEqualTo(mContext.getString(
-                        R.string.security_settings_remoteauth_enroll_finish_title))
-            }
+        launchFragmentInContainer<RemoteAuthEnrollFinish>(
+            Bundle(),
+            com.google.android.setupdesign.R.style.SudThemeGlif,
+        ).onFragment {
+            assertThat((it.view as GlifLayout).headerText)
+                .isEqualTo(
+                    mContext.getString(R.string.security_settings_remoteauth_enroll_finish_title)
+                )
+        }
     }
 
     @Test
     fun testRemoteAuthenticatorEnrollFinish_hasDescription() {
-        launchFragmentInContainer<RemoteAuthEnrollFinish>(Bundle(), R.style.SudThemeGlif)
-            .onFragment {
-                assertThat((it.view as GlifLayout).descriptionText)
-                    .isEqualTo(mContext.getString(
-                        R.string.security_settings_remoteauth_enroll_finish_description))
-            }
+        launchFragmentInContainer<RemoteAuthEnrollFinish>(
+            Bundle(),
+            com.google.android.setupdesign.R.style.SudThemeGlif,
+        ).onFragment {
+            assertThat((it.view as GlifLayout).descriptionText)
+                .isEqualTo(
+                    mContext.getString(
+                        R.string.security_settings_remoteauth_enroll_finish_description
+                    )
+                )
+        }
     }
 }

@@ -52,7 +52,7 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
     private final Set<Integer> mManagedProfiles = new HashSet<>();
     private final Set<String> mEnabledTypes = new HashSet<>();
     private boolean mIsQuietModeEnabled = false;
-    private int[] profileIdsForUser = new int[0];
+    private int[] mProfileIdsForUser = new int[0];
     private boolean mUserSwitchEnabled;
     private Bundle mDefaultGuestUserRestriction = new Bundle();
     private boolean mIsGuestUser = false;
@@ -154,11 +154,11 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
 
     @Implementation
     protected int[] getProfileIdsWithDisabled(@UserIdInt int userId) {
-        return profileIdsForUser;
+        return mProfileIdsForUser;
     }
 
     public void setProfileIdsWithDisabled(int[] profileIds) {
-        profileIdsForUser = profileIds;
+        mProfileIdsForUser = profileIds;
     }
 
     @Implementation

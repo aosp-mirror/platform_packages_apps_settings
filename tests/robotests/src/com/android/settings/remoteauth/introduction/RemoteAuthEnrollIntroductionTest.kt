@@ -30,23 +30,31 @@ import org.robolectric.RobolectricTestRunner
 
 @RunWith(RobolectricTestRunner::class)
 class RemoteAuthEnrollIntroductionTest {
-    private var mContext : Context = ApplicationProvider.getApplicationContext()
+    private var mContext: Context = ApplicationProvider.getApplicationContext()
 
     @Test
     fun testRemoteAuthenticatorEnrollIntroduction_hasHeader() {
-        launchFragmentInContainer<RemoteAuthEnrollIntroduction>(Bundle(), R.style.SudThemeGlif)
-            .onFragment {
-                assertThat((it.view as GlifLayout).headerText)
-                    .isEqualTo(mContext.getString(R.string.security_settings_remoteauth_enroll_introduction_title))
-            }
+        launchFragmentInContainer<RemoteAuthEnrollIntroduction>(
+            Bundle(),
+            com.google.android.setupdesign.R.style.SudThemeGlif,
+        ).onFragment {
+            assertThat((it.view as GlifLayout).headerText)
+                .isEqualTo(mContext.getString(R.string.security_settings_remoteauth_enroll_introduction_title))
+        }
     }
 
     @Test
     fun testRemoteAuthenticatorEnrollIntroduction_hasDescription() {
-        launchFragmentInContainer<RemoteAuthEnrollIntroduction>(Bundle(), R.style.SudThemeGlif)
-            .onFragment {
-                assertThat((it.view as GlifLayout).descriptionText)
-                    .isEqualTo(mContext.getString(R.string.security_settings_remoteauth_enroll_introduction_message))
-            }
+        launchFragmentInContainer<RemoteAuthEnrollIntroduction>(
+            Bundle(),
+            com.google.android.setupdesign.R.style.SudThemeGlif,
+        ).onFragment {
+            assertThat((it.view as GlifLayout).descriptionText)
+                .isEqualTo(
+                    mContext.getString(
+                        R.string.security_settings_remoteauth_enroll_introduction_message
+                    )
+                )
+        }
     }
 }

@@ -18,12 +18,10 @@ package com.android.settings.remoteauth.finish
 
 import android.os.Bundle
 import android.view.View
-
+import com.airbnb.lottie.LottieAnimationView
 import com.android.settings.R
 import com.android.settings.remoteauth.RemoteAuthEnrollBase
 import com.android.settingslib.widget.LottieColorUtils
-
-import com.airbnb.lottie.LottieAnimationView
 import com.google.android.setupcompat.template.FooterButton
 
 /**
@@ -45,7 +43,7 @@ class RemoteAuthEnrollFinish :
             .setText(R.string.security_settings_remoteauth_enroll_finish_btn_next)
             .setListener(this::onPrimaryFooterButtonClick)
             .setButtonType(FooterButton.ButtonType.NEXT)
-            .setTheme(R.style.SudGlifButton_Primary)
+            .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Primary)
             .build()
     }
 

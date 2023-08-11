@@ -50,9 +50,9 @@ import com.google.android.setupdesign.template.RequireScrollMixin
 import com.google.android.setupdesign.util.DeviceHelper
 import com.google.android.setupdesign.util.DynamicColorPalette
 import com.google.android.setupdesign.util.DynamicColorPalette.ColorType.ACCENT
+import java.util.function.Supplier
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
-import java.util.function.Supplier
 
 /**
  * Fingerprint intro onboarding page fragment implementation
@@ -324,6 +324,6 @@ fun FragmentActivity.bindFingerprintEnrollIntroView(
         )
     }
 
-    view.findViewById<ScrollView>(R.id.sud_scroll_view)?.importantForAccessibility =
-        View.IMPORTANT_FOR_ACCESSIBILITY_YES
+    view.findViewById<ScrollView>(com.google.android.setupdesign.R.id.sud_scroll_view)
+        ?.importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_YES
 }

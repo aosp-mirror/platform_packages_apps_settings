@@ -49,7 +49,7 @@ class RemoteAuthEnrollIntroduction :
             .setText(R.string.security_settings_remoteauth_enroll_introduction_agree)
             .setListener(::onPrimaryFooterButtonClick)
             .setButtonType(FooterButton.ButtonType.OPT_IN)
-            .setTheme(R.style.SudGlifButton_Primary)
+            .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Primary)
             .build()
     }
 
@@ -58,7 +58,7 @@ class RemoteAuthEnrollIntroduction :
             .setText(R.string.security_settings_remoteauth_enroll_introduction_disagree)
             .setListener(::onSecondaryFooterButtonClick)
             .setButtonType(FooterButton.ButtonType.NEXT)
-            .setTheme(R.style.SudGlifButton_Primary)
+            .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Primary)
             .build()
     }
 

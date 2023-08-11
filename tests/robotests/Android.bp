@@ -1,7 +1,3 @@
-    //############################################################
-// Build SettingsRoboTestStub.apk which includes test-only resources.#
-//############################################################
-
 package {
     // See: http://go/android-license-faq
     // A large-scale-change added 'default_applicable_licenses' to import
@@ -11,6 +7,7 @@ package {
     default_applicable_licenses: ["packages_apps_Settings_license"],
 }
 
+// Build SettingsRoboTestStub.apk which includes test-only resources.
 android_app {
     name: "SettingsRoboTestStub",
     defaults: [
@@ -25,33 +22,8 @@ android_app {
 
     static_libs: [
         "Settings-core",
-        "androidx-constraintlayout_constraintlayout",
-        "androidx.slice_slice-builders",
-        "androidx.slice_slice-core",
-        "androidx.slice_slice-view",
-        "androidx.core_core",
-        "androidx.appcompat_appcompat",
-        "androidx.cardview_cardview",
         "androidx.fragment_fragment-testing",
-        "androidx.preference_preference",
-        "androidx.recyclerview_recyclerview",
-        "androidx.window_window",
-        "com.google.android.material_material",
-        "setupcompat",
-        "setupdesign",
-        "androidx.lifecycle_lifecycle-runtime",
-        "androidx.test.core",
-        "androidx.test.runner",
-        "androidx.test.ext.junit",
         "frameworks-base-testutils",
-        "guava",
-        "jsr305",
-        "settings-contextual-card-protos-lite",
-        "settings-log-bridge-protos-lite",
-        "settings-telephony-protos-lite",
-        "contextualcards",
-        "settings-logtags",
-        "zxing-core-1.7",
     ],
 
     aaptflags: ["--extra-packages com.android.settings"],
@@ -67,9 +39,7 @@ android_app {
     ],
 }
 
-//############################################################
-// Settings Robolectric test target.                         #
-//############################################################
+// Settings Robolectric test target.
 android_robolectric_test {
     name: "SettingsRoboTests",
     srcs: [
@@ -79,12 +49,12 @@ android_robolectric_test {
 
     static_libs: [
         "SettingsLib-robo-testutils",
-        "android-support-annotations",
+        "Settings-robo-testutils",
         "androidx.test.core",
+        "androidx.test.espresso.core",
+        "androidx.test.ext.junit",
         "androidx.test.rules",
         "androidx.test.runner",
-        "androidx.test.ext.junit",
-        "androidx.test.espresso.core",
     ],
 
     libs: [
@@ -109,7 +79,7 @@ android_robolectric_test {
 
 java_library {
     name: "Settings-robo-testutils",
-    srcs: ["src/com/android/settings/testutils/**/*.java"],
+    srcs: ["testutils/**/*.java"],
 
     libs: [
         "Settings-core",

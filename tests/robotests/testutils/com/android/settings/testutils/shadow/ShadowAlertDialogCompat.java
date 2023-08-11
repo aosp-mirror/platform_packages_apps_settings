@@ -38,39 +38,40 @@ public class ShadowAlertDialogCompat extends ShadowDialog {
 
     @SuppressLint("StaticFieldLeak")
     @Nullable
-    private static ShadowAlertDialogCompat latestSupportAlertDialog;
+    private static ShadowAlertDialogCompat sLatestSupportAlertDialog;
     @RealObject
-    private AlertDialog realAlertDialog;
+    private AlertDialog mRealAlertDialog;
 
     @Implementation
     public void show() {
         super.show();
-        latestSupportAlertDialog = this;
+        sLatestSupportAlertDialog = this;
     }
 
     public CharSequence getMessage() {
-        final Object alertController = ReflectionHelpers.getField(realAlertDialog, "mAlert");
+        final Object alertController = ReflectionHelpers.getField(mRealAlertDialog, "mAlert");
         return ReflectionHelpers.getField(alertController, "mMessage");
     }
 
     public CharSequence getTitle() {
-        final Object alertController = ReflectionHelpers.getField(realAlertDialog, "mAlert");
+        final Object alertController = ReflectionHelpers.getField(mRealAlertDialog, "mAlert");
         return ReflectionHelpers.getField(alertController, "mTitle");
     }
 
     public View getView() {
-        final Object alertController = ReflectionHelpers.getField(realAlertDialog, "mAlert");
+        final Object alertController = ReflectionHelpers.getField(mRealAlertDialog, "mAlert");
         return ReflectionHelpers.getField(alertController, "mView");
     }
 
     @Nullable
     public static AlertDialog getLatestAlertDialog() {
-        return latestSupportAlertDialog == null ? null : latestSupportAlertDialog.realAlertDialog;
+        return sLatestSupportAlertDialog == null
+                ? null : sLatestSupportAlertDialog.mRealAlertDialog;
     }
 
     @Resetter
     public static void reset() {
-        latestSupportAlertDialog = null;
+        sLatestSupportAlertDialog = null;
     }
 
     public static ShadowAlertDialogCompat shadowOf(AlertDialog alertDialog) {
@@ -78,6 +79,6 @@ public class ShadowAlertDialogCompat extends ShadowDialog {
     }
 
     public void clickOnItem(int index) {
-        Shadows.shadowOf(realAlertDialog.getListView()).performItemClick(index);
+        Shadows.shadowOf(mRealAlertDialog.getListView()).performItemClick(index);
     }
 }

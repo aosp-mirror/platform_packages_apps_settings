@@ -114,8 +114,8 @@ public class ShadowLockPatternUtils {
     }
 
     @Implementation
-    protected byte[] getPasswordHistoryHashFactor(LockscreenCredential currentPassword,
-            int userId) {
+    protected byte[] getPasswordHistoryHashFactor(
+            LockscreenCredential currentPassword, int userId) {
         return null;
     }
 
@@ -130,8 +130,8 @@ public class ShadowLockPatternUtils {
     }
 
     @Implementation
-    public @DevicePolicyManager.PasswordComplexity int getRequestedPasswordComplexity(int userId,
-            boolean deviceWideOnly) {
+    @DevicePolicyManager.PasswordComplexity
+    public int getRequestedPasswordComplexity(int userId, boolean deviceWideOnly) {
         int complexity = sUserToComplexityMap.getOrDefault(userId,
                 DevicePolicyManager.PASSWORD_COMPLEXITY_NONE);
         if (!deviceWideOnly) {
@@ -178,14 +178,16 @@ public class ShadowLockPatternUtils {
     }
 
     @Implementation
-    public boolean setLockCredential(@NonNull LockscreenCredential newCredential,
+    public boolean setLockCredential(
+            @NonNull LockscreenCredential newCredential,
             @NonNull LockscreenCredential savedCredential, int userHandle) {
         setIsSecure(userHandle, true);
         return true;
     }
 
     @Implementation
-    public boolean checkCredential(@NonNull LockscreenCredential credential, int userId,
+    public boolean checkCredential(
+            @NonNull LockscreenCredential credential, int userId,
             @Nullable LockPatternUtils.CheckCredentialProgressCallback progressCallback)
             throws LockPatternUtils.RequestThrottledException {
         return true;
