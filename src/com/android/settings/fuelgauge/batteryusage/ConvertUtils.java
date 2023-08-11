@@ -17,6 +17,7 @@ package com.android.settings.fuelgauge.batteryusage;
 
 import android.annotation.IntDef;
 import android.annotation.Nullable;
+import android.app.usage.IUsageStatsManager;
 import android.app.usage.UsageEvents.Event;
 import android.app.usage.UsageStatsManager;
 import android.content.ContentValues;
@@ -185,7 +186,8 @@ public final class ConvertUtils {
     /** Converts to {@link AppUsageEvent} from {@link Event} */
     @Nullable
     public static AppUsageEvent convertToAppUsageEvent(
-            Context context, final Event event, final long userId) {
+            Context context, IUsageStatsManager usageStatsManager, final Event event,
+            final long userId) {
         final String packageName = event.getPackageName();
         if (packageName == null) {
             // See b/190609174: Event package names should never be null, but sometimes they are.
@@ -210,7 +212,8 @@ public final class ConvertUtils {
         }
 
         final String effectivePackageName =
-                getEffectivePackageName(context, packageName, taskRootPackageName);
+                getEffectivePackageName(
+                        context, usageStatsManager, packageName, taskRootPackageName);
         try {
             final long uid = context
                     .getPackageManager()
@@ -326,8 +329,9 @@ public final class ConvertUtils {
      */
     @VisibleForTesting
     static String getEffectivePackageName(
-            Context context, final String packageName, final String taskRootPackageName) {
-        final int usageSource = getUsageSource(context);
+            Context context, IUsageStatsManager usageStatsManager, final String packageName,
+            final String taskRootPackageName) {
+        final int usageSource = getUsageSource(context, usageStatsManager);
         switch (usageSource) {
             case UsageStatsManager.USAGE_SOURCE_TASK_ROOT_ACTIVITY:
                 return !TextUtils.isEmpty(taskRootPackageName)
@@ -372,9 +376,9 @@ public final class ConvertUtils {
         }
     }
 
-    private static int getUsageSource(Context context) {
+    private static int getUsageSource(Context context, IUsageStatsManager usageStatsManager) {
         if (sUsageSource == EMPTY_USAGE_SOURCE) {
-            sUsageSource = DatabaseUtils.getUsageSource(context);
+            sUsageSource = DatabaseUtils.getUsageSource(context, usageStatsManager);
         }
         return sUsageSource;
     }
