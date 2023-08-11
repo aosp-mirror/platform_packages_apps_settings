@@ -77,23 +77,29 @@ public class BatteryTipsController extends BasePreferenceController {
         return null;
     }
 
+    private String getStringFromResource(int resourceId, int resourceIndex) {
+        if (resourceId < 0) {
+            return null;
+        }
+        final String[] stringArray = mContext.getResources().getStringArray(resourceId);
+        return (resourceIndex >= 0 && resourceIndex < stringArray.length)
+                ? stringArray[resourceIndex] : null;
+    }
+
+    private int getResourceId(int resourceId, int resourceIndex, String defType) {
+        final String key = getStringFromResource(resourceId, resourceIndex);
+        return TextUtils.isEmpty(key) ? 0
+                : mContext.getResources().getIdentifier(key, defType, mContext.getPackageName());
+    }
+
     private String getString(PowerAnomalyEvent powerAnomalyEvent,
                              Function<WarningBannerInfo, String> warningBannerInfoSupplier,
                              Function<WarningItemInfo, String> warningItemInfoSupplier,
                              int resourceId, int resourceIndex) {
         String string =
                 getInfo(powerAnomalyEvent, warningBannerInfoSupplier, warningItemInfoSupplier);
-
-        if (!TextUtils.isEmpty(string) || resourceId < 0) {
-            return string;
-        }
-
-        String[] stringArray = mContext.getResources().getStringArray(resourceId);
-        if (resourceIndex >= 0 && resourceIndex < stringArray.length) {
-            string = stringArray[resourceIndex];
-        }
-
-        return string;
+        return (!TextUtils.isEmpty(string) || resourceId < 0) ? string
+                : getStringFromResource(resourceId, resourceIndex);
     }
 
     @VisibleForTesting
@@ -106,6 +112,13 @@ public class BatteryTipsController extends BasePreferenceController {
             mCardPreference.setVisible(false);
             return;
         }
+
+        // Get card icon and color styles
+        final int cardStyleId = powerAnomalyEvent.getType().getNumber();
+        final int iconResId = getResourceId(
+                R.array.battery_tips_card_icons, cardStyleId, "drawable");
+        final int colorResId = getResourceId(
+                R.array.battery_tips_card_colors, cardStyleId, "color");
 
         // Get card preference strings and navigate fragment info
         final PowerAnomalyKey powerAnomalyKey = powerAnomalyEvent.hasKey()
@@ -133,10 +146,12 @@ public class BatteryTipsController extends BasePreferenceController {
         String preferenceHighlightKey = getInfo(powerAnomalyEvent,
                 WarningBannerInfo::getMainButtonSourceHighlightKey, null);
 
-        // Updated card preference and main button fragment launcher
+        // Update card preference and main button fragment launcher
         mCardPreference.setAnomalyEventId(powerAnomalyEvent.getEventId());
         mCardPreference.setPowerAnomalyKey(powerAnomalyKey);
         mCardPreference.setTitle(titleString);
+        mCardPreference.setIconResourceId(iconResId);
+        mCardPreference.setMainButtonStrokeColorResourceId(colorResId);
         mCardPreference.setMainButtonLabel(mainBtnString);
         mCardPreference.setDismissButtonLabel(dismissBtnString);
         mCardPreference.setMainButtonLauncherInfo(
