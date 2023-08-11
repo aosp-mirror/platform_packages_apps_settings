@@ -84,6 +84,7 @@ public class SpinnerPreference extends Preference {
             return;
         }
         if (!(state instanceof SavedState)) {
+            super.onRestoreInstanceState(state);
             return;
         }
         SavedState savedState = (SavedState) state;
