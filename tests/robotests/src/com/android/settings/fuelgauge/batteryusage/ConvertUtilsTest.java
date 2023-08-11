@@ -25,6 +25,7 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
+import android.app.usage.IUsageStatsManager;
 import android.app.usage.UsageEvents;
 import android.app.usage.UsageEvents.Event;
 import android.content.ContentValues;
@@ -61,6 +62,8 @@ public final class ConvertUtilsTest {
     private BatteryUsageStats mBatteryUsageStats;
     @Mock
     private BatteryEntry mMockBatteryEntry;
+    @Mock
+    private IUsageStatsManager mUsageStatsManager;
 
     @Before
     public void setUp() {
@@ -68,6 +71,7 @@ public final class ConvertUtilsTest {
         mContext = spy(RuntimeEnvironment.application);
         ConvertUtils.sUsageSource = ConvertUtils.EMPTY_USAGE_SOURCE;
         when(mContext.getPackageManager()).thenReturn(mMockPackageManager);
+        DataProcessor.sUsageStatsManager = mUsageStatsManager;
     }
 
     @Test
@@ -299,7 +303,7 @@ public final class ConvertUtilsTest {
 
         final long userId = 2;
         final AppUsageEvent appUsageEvent = ConvertUtils.convertToAppUsageEvent(
-                mContext, event, userId);
+                mContext, mUsageStatsManager, event, userId);
         assertThat(appUsageEvent.getTimestamp()).isEqualTo(101L);
         assertThat(appUsageEvent.getType()).isEqualTo(AppUsageEventType.ACTIVITY_RESUMED);
         assertThat(appUsageEvent.getPackageName()).isEqualTo("com.android.settings1");
@@ -320,7 +324,7 @@ public final class ConvertUtilsTest {
 
         final long userId = 1;
         final AppUsageEvent appUsageEvent =
-                ConvertUtils.convertToAppUsageEvent(mContext, event, userId);
+                ConvertUtils.convertToAppUsageEvent(mContext, mUsageStatsManager, event, userId);
         assertThat(appUsageEvent.getTimestamp()).isEqualTo(101L);
         assertThat(appUsageEvent.getType()).isEqualTo(AppUsageEventType.DEVICE_SHUTDOWN);
         assertThat(appUsageEvent.getPackageName()).isEqualTo("com.android.settings1");
@@ -336,7 +340,8 @@ public final class ConvertUtilsTest {
         event.mPackage = null;
 
         final AppUsageEvent appUsageEvent =
-                ConvertUtils.convertToAppUsageEvent(mContext, event, /*userId=*/ 0);
+                ConvertUtils.convertToAppUsageEvent(
+                        mContext, mUsageStatsManager, event, /*userId=*/ 0);
 
         assertThat(appUsageEvent).isNull();
     }
@@ -352,7 +357,7 @@ public final class ConvertUtilsTest {
 
         final long userId = 1;
         final AppUsageEvent appUsageEvent =
-                ConvertUtils.convertToAppUsageEvent(mContext, event, userId);
+                ConvertUtils.convertToAppUsageEvent(mContext, mUsageStatsManager, event, userId);
 
         assertThat(appUsageEvent).isNull();
     }
@@ -453,7 +458,7 @@ public final class ConvertUtilsTest {
         final String taskRootPackageName = "com.android.settings2";
 
         assertThat(ConvertUtils.getEffectivePackageName(
-                mContext, packageName, taskRootPackageName))
+                mContext, mUsageStatsManager, packageName, taskRootPackageName))
                 .isEqualTo(packageName);
     }
 
@@ -463,7 +468,7 @@ public final class ConvertUtilsTest {
         final String taskRootPackageName = "com.android.settings2";
 
         assertThat(ConvertUtils.getEffectivePackageName(
-                mContext, packageName, taskRootPackageName))
+                mContext, mUsageStatsManager, packageName, taskRootPackageName))
                 .isEqualTo(packageName);
     }
 
@@ -474,7 +479,7 @@ public final class ConvertUtilsTest {
         final String taskRootPackageName = "com.android.settings2";
 
         assertThat(ConvertUtils.getEffectivePackageName(
-                mContext, packageName, taskRootPackageName))
+                mContext, mUsageStatsManager, packageName, taskRootPackageName))
                 .isEqualTo(taskRootPackageName);
     }
 
@@ -484,10 +489,10 @@ public final class ConvertUtilsTest {
         final String packageName = "com.android.settings1";
 
         assertThat(ConvertUtils.getEffectivePackageName(
-                mContext, packageName, /*taskRootPackageName=*/ null))
+                mContext, mUsageStatsManager, packageName, /*taskRootPackageName=*/ null))
                 .isEqualTo(packageName);
         assertThat(ConvertUtils.getEffectivePackageName(
-                mContext, packageName, /*taskRootPackageName=*/ ""))
+                mContext, mUsageStatsManager, packageName, /*taskRootPackageName=*/ ""))
                 .isEqualTo(packageName);
     }
 }

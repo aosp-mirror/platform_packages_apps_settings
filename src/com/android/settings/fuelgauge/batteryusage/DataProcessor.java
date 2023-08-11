@@ -32,6 +32,7 @@ import android.os.BatteryUsageStats;
 import android.os.BatteryUsageStatsQuery;
 import android.os.Process;
 import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.os.UidBatteryConsumer;
 import android.os.UserBatteryConsumer;
 import android.os.UserHandle;
@@ -107,6 +108,11 @@ public final class DataProcessor {
 
     @VisibleForTesting
     static Set<String> sTestSystemAppsPackageNames;
+
+    @VisibleForTesting
+    static IUsageStatsManager sUsageStatsManager =
+            IUsageStatsManager.Stub.asInterface(
+                    ServiceManager.getService(Context.USAGE_STATS_SERVICE));
 
     public static final String CURRENT_TIME_BATTERY_HISTORY_PLACEHOLDER =
             "CURRENT_TIME_BATTERY_HISTORY_PLACEHOLDER";
@@ -338,7 +344,8 @@ public final class DataProcessor {
                             break;
                         }
                         final AppUsageEvent appUsageEvent =
-                                ConvertUtils.convertToAppUsageEvent(context, event, userId);
+                                ConvertUtils.convertToAppUsageEvent(
+                                        context, sUsageStatsManager, event, userId);
                         if (appUsageEvent != null) {
                             numEventsFetched++;
                             appUsageEventList.add(appUsageEvent);
@@ -694,6 +701,7 @@ public final class DataProcessor {
             final long eventUserId = firstEvent.getUserId();
             final String packageName = getEffectivePackageName(
                     context,
+                    sUsageStatsManager,
                     firstEvent.getPackageName(),
                     firstEvent.getTaskRootPackageName());
             usageEvents.addAll(deviceEvents);
@@ -966,7 +974,7 @@ public final class DataProcessor {
         final long startTime = DatabaseUtils.getAppUsageStartTimestampOfUser(
                 context, userID, earliestTimestamp);
         return loadAppUsageEventsForUserFromService(
-                DatabaseUtils.sUsageStatsManager, startTime, now, userID, callingPackage);
+                sUsageStatsManager, startTime, now, userID, callingPackage);
     }
 
     @Nullable

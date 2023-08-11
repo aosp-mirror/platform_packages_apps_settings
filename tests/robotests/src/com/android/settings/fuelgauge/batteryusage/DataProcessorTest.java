@@ -93,7 +93,7 @@ public final class DataProcessorTest {
         mPowerUsageFeatureProvider = mFeatureFactory.powerUsageFeatureProvider;
 
         DataProcessor.sTestSystemAppsPackageNames = Set.of();
-        DatabaseUtils.sUsageStatsManager = mUsageStatsManager;
+        DataProcessor.sUsageStatsManager = mUsageStatsManager;
         doReturn(mIntent).when(mContext).registerReceiver(
                 isA(BroadcastReceiver.class), isA(IntentFilter.class));
         doReturn(100).when(mIntent).getIntExtra(eq(BatteryManager.EXTRA_SCALE), anyInt());
