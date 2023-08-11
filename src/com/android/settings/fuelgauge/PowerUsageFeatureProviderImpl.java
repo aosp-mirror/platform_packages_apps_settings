@@ -82,7 +82,7 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
 
     @Override
     public boolean isBatteryTipsFeedbackEnabled() {
-        return true;
+        return false;
     }
 
     @Override

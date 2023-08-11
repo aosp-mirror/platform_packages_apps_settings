@@ -105,10 +105,9 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     public interface OnBatteryTipsUpdatedListener {
         /**
          * The callback function for the battery tips card is updated.
-         * @param title the title of the battery tip card
-         * @param summary the summary of the battery tip card
+         * @param powerAnomalyEvent the power anomaly event with highest score
          */
-        void onBatteryTipsUpdated(String title, String summary);
+        void onBatteryTipsUpdated(PowerAnomalyEvent powerAnomalyEvent);
     }
 
 
@@ -365,7 +364,8 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
                     slotUsageData, getSlotInformation(), isBatteryUsageMapNullOrEmpty());
 
             if (mOnBatteryTipsUpdatedListener != null) {
-                mOnBatteryTipsUpdatedListener.onBatteryTipsUpdated(null, null);
+                // TODO: replace with a selected powerAnomalyEvent with highest score
+                mOnBatteryTipsUpdatedListener.onBatteryTipsUpdated(null);
             }
         }
         return true;
