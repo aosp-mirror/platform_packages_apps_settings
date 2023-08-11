@@ -21,13 +21,13 @@ import static com.android.settings.Utils.SYSTEMUI_PACKAGE_NAME;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.Bundle;
 import android.os.Process;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.SparseIntArray;
 
 import com.android.internal.util.ArrayUtils;
+import com.android.settings.fuelgauge.batteryusage.PowerAnomalyEventList;
 import com.android.settingslib.fuelgauge.Estimate;
 
 import java.util.ArrayList;
@@ -175,7 +175,7 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     public void insertSettingsData(Context context, double displayDrain) {}
 
     @Override
-    public Bundle detectSettingsAnomaly(Context context, double displayDrain) {
+    public PowerAnomalyEventList detectSettingsAnomaly(Context context, double displayDrain) {
         return null;
     }
 
