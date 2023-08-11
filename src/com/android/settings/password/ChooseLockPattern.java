@@ -878,7 +878,6 @@ public class ChooseLockPattern extends SettingsActivity {
 
         private LockscreenCredential mChosenPattern;
         private LockscreenCredential mCurrentCredential;
-        private boolean mLockVirgin;
 
         public void start(LockPatternUtils utils, boolean requestGatekeeperPassword,
                 LockscreenCredential chosenPattern, LockscreenCredential currentCredential,
@@ -889,8 +888,6 @@ public class ChooseLockPattern extends SettingsActivity {
                     : LockscreenCredential.createNone();
             mChosenPattern = chosenPattern;
             mUserId = userId;
-
-            mLockVirgin = !mUtils.isPatternEverChosen(mUserId);
 
             start();
         }
@@ -921,15 +918,6 @@ public class ChooseLockPattern extends SettingsActivity {
                         response.getGatekeeperPasswordHandle());
             }
             return Pair.create(success, result);
-        }
-
-        @Override
-        protected void finish(Intent resultData) {
-            if (mLockVirgin) {
-                mUtils.setVisiblePatternEnabled(true, mUserId);
-            }
-
-            super.finish(resultData);
         }
     }
 }
