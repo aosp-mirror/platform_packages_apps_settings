@@ -12,36 +12,16 @@
         android:id="@+id/tips_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/battery_tips_all_rounded_bg"
+        android:background="@drawable/battery_tips_all_rounded_bg_ripple"
         android:orientation="vertical"
         android:padding="24dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|start"
-                android:src="@drawable/ic_battery_tips_lightbulb" />
-
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
-
-            <ImageButton
-                android:id="@+id/dismiss_button"
-                style="@style/Banner.Dismiss.SettingsLib"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|end"
-                android:layout_marginEnd="0dp"
-                android:src="@drawable/ic_battery_tips_close_icon" />
-        </LinearLayout>
+            android:layout_gravity="center_vertical|start"
+            android:src="@drawable/ic_battery_tips_lightbulb" />
 
         <TextView
             android:id="@+id/title"
@@ -53,30 +33,40 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="?android:attr/textColorPrimary" />
 
-        <TextView
-            android:id="@+id/summary"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:layout_marginTop="8dp"
-            android:gravity="start"
-            android:maxLines="10"
-            android:textAlignment="viewStart"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="?android:attr/textColorSecondary" />
+            android:gravity="end">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/action_button"
-            style="@style/Widget.Material3.Button.OutlinedButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginTop="8dp"
-            android:text="@string/battery_tips_card_action_button"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="?android:attr/textColorPrimary"
-            android:textStyle="bold"
-            app:strokeColor="?android:attr/colorAccent"
-            app:strokeWidth="1dp" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/dismiss_button"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:paddingHorizontal="16dp"
+                android:layout_marginEnd="8dp"
+                android:text="@string/battery_tips_card_dismiss_button"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="?android:attr/colorAccent"
+                android:textStyle="bold" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/main_button"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:paddingHorizontal="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:text="@string/battery_tips_card_action_button"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textStyle="bold"
+                app:strokeColor="?android:attr/colorAccent"
+                app:strokeWidth="1dp" />
+        </LinearLayout>
     </LinearLayout>
 
     <Space
