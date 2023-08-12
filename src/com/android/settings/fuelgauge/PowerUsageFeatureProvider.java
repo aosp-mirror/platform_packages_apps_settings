@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.util.ArrayMap;
 import android.util.SparseIntArray;
 
+import com.android.settings.fuelgauge.batteryusage.PowerAnomalyEventList;
 import com.android.settingslib.fuelgauge.Estimate;
 
 import java.util.List;
@@ -147,7 +148,7 @@ public interface PowerUsageFeatureProvider {
     /**
      * Returns {@link Bundle} for settings anomaly detection result
      */
-    Bundle detectSettingsAnomaly(Context context, double displayDrain);
+    PowerAnomalyEventList detectSettingsAnomaly(Context context, double displayDrain);
 
     /**
      * Gets an intent for one time bypass charge limited to resume charging.
