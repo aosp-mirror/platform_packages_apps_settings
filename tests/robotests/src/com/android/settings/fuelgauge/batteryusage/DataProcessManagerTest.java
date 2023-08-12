@@ -72,7 +72,7 @@ public final class DataProcessManagerTest {
         MockitoAnnotations.initMocks(this);
 
         mContext = spy(RuntimeEnvironment.application);
-        DatabaseUtils.sUsageStatsManager = mUsageStatsManager;
+        DataProcessor.sUsageStatsManager = mUsageStatsManager;
         doReturn(mContext).when(mContext).getApplicationContext();
         doReturn(mUserManager)
                 .when(mContext)

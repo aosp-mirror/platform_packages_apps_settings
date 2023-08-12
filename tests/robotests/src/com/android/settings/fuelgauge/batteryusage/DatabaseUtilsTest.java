@@ -85,7 +85,7 @@ public final class DatabaseUtilsTest {
         doReturn(mPackageManager).when(mMockContext).getPackageManager();
         doReturn(mPackageManager).when(mContext).getPackageManager();
         DatabaseUtils.getSharedPreferences(mContext).edit().clear().apply();
-        DatabaseUtils.sUsageStatsManager = mUsageStatsManager;
+        DataProcessor.sUsageStatsManager = mUsageStatsManager;
     }
 
     @Test
@@ -466,7 +466,7 @@ public final class DatabaseUtilsTest {
                 .putInt(DatabaseUtils.KEY_LAST_USAGE_SOURCE, USAGE_SOURCE_TASK_ROOT_ACTIVITY)
                 .apply();
 
-        assertThat(DatabaseUtils.getUsageSource(mContext))
+        assertThat(DatabaseUtils.getUsageSource(mContext, mUsageStatsManager))
                 .isEqualTo(USAGE_SOURCE_TASK_ROOT_ACTIVITY);
     }
 
@@ -474,7 +474,7 @@ public final class DatabaseUtilsTest {
     public void getUsageSource_notHasData_writeLoadedData() throws RemoteException {
         when(mUsageStatsManager.getUsageSource()).thenReturn(USAGE_SOURCE_TASK_ROOT_ACTIVITY);
 
-        assertThat(DatabaseUtils.getUsageSource(mContext))
+        assertThat(DatabaseUtils.getUsageSource(mContext, mUsageStatsManager))
                 .isEqualTo(USAGE_SOURCE_TASK_ROOT_ACTIVITY);
         assertThat(
                 DatabaseUtils
@@ -487,7 +487,7 @@ public final class DatabaseUtilsTest {
     public void getUsageSource_throwException_writeDefaultData() throws RemoteException {
         when(mUsageStatsManager.getUsageSource()).thenThrow(new RemoteException());
 
-        assertThat(DatabaseUtils.getUsageSource(mContext))
+        assertThat(DatabaseUtils.getUsageSource(mContext, mUsageStatsManager))
                 .isEqualTo(USAGE_SOURCE_CURRENT_ACTIVITY);
         assertThat(
                 DatabaseUtils
