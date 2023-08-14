@@ -41,7 +41,8 @@ public interface StylusFeatureProvider {
      * the list will contain only the preference showing the current firmware version.
      *
      * @param context The context
+     * @param usbDevice The USB device for which to generate preferences.
      */
     @Nullable
-    List<Preference> getUsbFirmwareUpdatePreferences(Context context);
+    List<Preference> getUsbFirmwareUpdatePreferences(Context context, UsbDevice usbDevice);
 }
