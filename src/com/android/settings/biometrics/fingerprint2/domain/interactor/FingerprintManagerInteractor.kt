@@ -25,8 +25,8 @@ import android.hardware.fingerprint.FingerprintSensorPropertiesInternal
 import android.os.CancellationSignal
 import android.util.Log
 import com.android.settings.biometrics.GatekeeperPasswordProvider
-import com.android.settings.biometrics.fingerprint2.ui.viewmodel.FingerprintAuthAttemptViewModel
-import com.android.settings.biometrics.fingerprint2.ui.viewmodel.FingerprintViewModel
+import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintAuthAttemptViewModel
+import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintViewModel
 import com.android.settings.password.ChooseLockSettingsHelper
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine

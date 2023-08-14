@@ -20,8 +20,8 @@ import android.hardware.biometrics.SensorProperties
 import android.hardware.fingerprint.FingerprintSensorProperties.TYPE_POWER_BUTTON
 import android.hardware.fingerprint.FingerprintSensorPropertiesInternal
 import com.android.settings.biometrics.fingerprint2.domain.interactor.FingerprintManagerInteractor
-import com.android.settings.biometrics.fingerprint2.ui.viewmodel.FingerprintAuthAttemptViewModel
-import com.android.settings.biometrics.fingerprint2.ui.viewmodel.FingerprintViewModel
+import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintAuthAttemptViewModel
+import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
