@@ -26,7 +26,6 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.liveData
 import com.android.settings.R
@@ -49,7 +48,6 @@ data class DefaultAppShortcut(
     @StringRes val titleResId: Int,
 )
 
-@OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun DefaultAppShortcutPreference(shortcut: DefaultAppShortcut, app: ApplicationInfo) {
     val context = LocalContext.current
