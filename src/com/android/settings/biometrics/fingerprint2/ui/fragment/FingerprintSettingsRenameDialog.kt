@@ -106,8 +106,8 @@ class FingerprintSettingsRenameDialog : InstrumentedDialogFragment() {
         val dialog = FingerprintSettingsRenameDialog()
         val onClick =
           DialogInterface.OnClickListener { _, _ ->
-            val dialogTextField =
-              dialog.requireDialog().findViewById(R.id.fingerprint_rename_field) as ImeAwareEditText
+            val dialogTextField = dialog.requireDialog()
+                .requireViewById(R.id.fingerprint_rename_field) as ImeAwareEditText
             val newName = dialogTextField.text.toString()
             if (!TextUtils.equals(newName, fp.name)) {
               Log.d(TAG, "rename $fp.name to $newName for $dialog")
