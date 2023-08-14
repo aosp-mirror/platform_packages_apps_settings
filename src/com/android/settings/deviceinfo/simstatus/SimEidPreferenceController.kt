@@ -95,10 +95,10 @@ class SimEidPreferenceController(context: Context, preferenceKey: String) :
             WindowManager.LayoutParams.FLAG_SECURE
         )
         dialog.setCanceledOnTouchOutside(false)
-        val textView = dialog.findViewById<TextView>(R.id.esim_id_value)
+        val textView = dialog.requireViewById<TextView>(R.id.esim_id_value)
         textView.text = PhoneNumberUtil.expandByTts(eid)
 
-        val qrCodeView = dialog.findViewById<ImageView>(R.id.esim_id_qrcode)
+        val qrCodeView = dialog.requireViewById<ImageView>(R.id.esim_id_qrcode)
         qrCodeView.setImageBitmap(getEidQrCode(eid))
 
         // After "Tap to show", eid is displayed on preference.
