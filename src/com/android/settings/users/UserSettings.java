@@ -290,8 +290,9 @@ public class UserSettings extends SettingsPreferenceFragment
         } else {
             switchBar.hide();
         }
+        boolean isToggleEnabled = mUserManager.getFullUserCount() == 1;
         mSwitchBarController = new MultiUserSwitchBarController(activity,
-                new MainSwitchBarController(switchBar), this /* listener */);
+                new MainSwitchBarController(switchBar), isToggleEnabled, this /* listener */);
         getSettingsLifecycle().addObserver(mSwitchBarController);
         boolean openUserEditDialog = getIntent().getBooleanExtra(
                 EXTRA_OPEN_DIALOG_USER_PROFILE_EDITOR, false);
@@ -422,6 +423,9 @@ public class UserSettings extends SettingsPreferenceFragment
                 mRemoveGuestOnExitPreferenceController.getPreferenceKey()));
         if (mShouldUpdateUserList) {
             updateUI();
+            // Update state of "Allow multiple users" toggle when list of users updates
+            boolean isToggleEnabled = mUserManager.getFullUserCount() == 1;
+            mSwitchBarController.setToggleEnabled(isToggleEnabled);
         }
     }
 

@@ -46,13 +46,18 @@ public class MultiUserSwitchBarController implements SwitchWidgetController.OnSw
 
 
     MultiUserSwitchBarController(Context context, SwitchWidgetController switchBar,
-            OnMultiUserSwitchChangedListener listener) {
+            boolean canUserSwitchToggle, OnMultiUserSwitchChangedListener listener) {
         mContext = context;
         mSwitchBar = switchBar;
         mListener = listener;
         mUserCapabilities = UserCapabilities.create(context);
         mSwitchBar.setChecked(mUserCapabilities.mUserSwitcherEnabled);
 
+        setToggleEnabled(canUserSwitchToggle);
+        mSwitchBar.setListener(this);
+    }
+
+    void setToggleEnabled(boolean canUserSwitchToggle) {
         if (mUserCapabilities.mDisallowSwitchUser) {
             mSwitchBar.setDisabledByAdmin(RestrictedLockUtilsInternal
                     .checkIfRestrictionEnforced(mContext, UserManager.DISALLOW_USER_SWITCH,
@@ -64,9 +69,8 @@ public class MultiUserSwitchBarController implements SwitchWidgetController.OnSw
                             UserHandle.myUserId()));
         } else {
             mSwitchBar.setEnabled(!mUserCapabilities.mDisallowSwitchUser
-                    && !mUserCapabilities.mIsGuest && mUserCapabilities.isAdmin());
+                    && !mUserCapabilities.mIsGuest && canUserSwitchToggle);
         }
-        mSwitchBar.setListener(this);
     }
 
     @Override

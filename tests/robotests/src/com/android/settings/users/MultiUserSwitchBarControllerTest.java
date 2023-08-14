@@ -65,7 +65,7 @@ public class MultiUserSwitchBarControllerTest {
                 UserManager.DISALLOW_USER_SWITCH, true);
 
         final MultiUserSwitchBarController controller = new MultiUserSwitchBarController(mContext,
-                mSwitchBarController, null);
+                mSwitchBarController, true, null);
 
         verify(mSwitchBarController).setDisabledByAdmin(any());
     }
@@ -76,8 +76,32 @@ public class MultiUserSwitchBarControllerTest {
                 UserManager.DISALLOW_USER_SWITCH, false);
 
         final MultiUserSwitchBarController controller = new MultiUserSwitchBarController(mContext,
-                mSwitchBarController, null);
+                mSwitchBarController, true, null);
 
         verify(mSwitchBarController, never()).setDisabledByAdmin(any());
+    }
+
+    @Test
+    public void onStart_allowUserSwitch_setDisabledAfterInitialization_shouldBeDisabled() {
+        mUserManager.setUserRestriction(UserHandle.of(UserHandle.myUserId()),
+                UserManager.DISALLOW_USER_SWITCH, false);
+
+        final MultiUserSwitchBarController controller = new MultiUserSwitchBarController(mContext,
+                mSwitchBarController, true, null);
+        verify(mSwitchBarController).setEnabled(true);
+        controller.setToggleEnabled(false);
+        verify(mSwitchBarController).setEnabled(false);
+    }
+
+    @Test
+    public void onStart_allowUserSwitch_setEnabledAfterInitialization_shouldBeEnabled() {
+        mUserManager.setUserRestriction(UserHandle.of(UserHandle.myUserId()),
+                UserManager.DISALLOW_USER_SWITCH, false);
+
+        final MultiUserSwitchBarController controller = new MultiUserSwitchBarController(mContext,
+                mSwitchBarController, false, null);
+        verify(mSwitchBarController).setEnabled(false);
+        controller.setToggleEnabled(true);
+        verify(mSwitchBarController).setEnabled(true);
     }
 }
