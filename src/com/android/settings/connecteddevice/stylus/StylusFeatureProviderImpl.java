@@ -32,7 +32,7 @@ public class StylusFeatureProviderImpl implements StylusFeatureProvider {
     }
 
     @Override
-    public List<Preference> getUsbFirmwareUpdatePreferences(Context context) {
+    public List<Preference> getUsbFirmwareUpdatePreferences(Context context, UsbDevice usbDevice) {
         return null;
     }
 }

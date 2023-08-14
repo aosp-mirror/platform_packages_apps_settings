@@ -88,7 +88,7 @@ public class StylusUsbFirmwareController extends BasePreferenceController
             StylusFeatureProvider featureProvider =
                     FeatureFactory.getFeatureFactory().getStylusFeatureProvider();
             List<Preference> preferences =
-                    featureProvider.getUsbFirmwareUpdatePreferences(mContext);
+                    featureProvider.getUsbFirmwareUpdatePreferences(mContext, mStylusUsbDevice);
 
             if (preferences != null) {
                 mPreference = new PreferenceCategory(mContext);
