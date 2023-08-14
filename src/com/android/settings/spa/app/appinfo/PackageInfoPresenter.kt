@@ -77,7 +77,7 @@ class PackageInfoPresenter(
         DisposableBroadcastReceiverAsUser(intentFilter, userHandle) { intent ->
             if (packageName == intent.data?.schemeSpecificPart) {
                 val packageInfo = flow.value
-                if (packageInfo != null && packageInfo.applicationInfo.isSystemApp) {
+                if (packageInfo != null && packageInfo.applicationInfo?.isSystemApp == true) {
                     // System app still exists after uninstalling the updates, refresh the page.
                     reloadPackageInfo()
                 } else {

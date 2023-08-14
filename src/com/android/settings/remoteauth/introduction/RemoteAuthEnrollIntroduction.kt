@@ -71,7 +71,7 @@ class RemoteAuthEnrollIntroduction :
     }
 
     private fun initializeRequireScrollMixin(view: View) {
-        val layout = getGlifLayout(view)
+        val layout = checkNotNull(getGlifLayout(view))
         secondaryFooterButton?.visibility = View.INVISIBLE
         val requireScrollMixin = layout.getMixin(RequireScrollMixin::class.java)
         requireScrollMixin.requireScrollWithButton(requireContext(), primaryFooterButton,

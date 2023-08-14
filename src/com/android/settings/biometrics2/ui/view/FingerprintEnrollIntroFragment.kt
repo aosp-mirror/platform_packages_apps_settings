@@ -205,8 +205,8 @@ class FingerprintEnrollIntroFragment : Fragment() {
     private fun getDescriptionDisabledByAdmin(context: Context): String? {
         val defaultStrId: Int =
             R.string.security_settings_fingerprint_enroll_introduction_message_unlock_disabled
-        val devicePolicyManager: DevicePolicyManager = requireActivity()
-            .getSystemService(DevicePolicyManager::class.java)
+        val devicePolicyManager: DevicePolicyManager =
+            checkNotNull(requireActivity().getSystemService(DevicePolicyManager::class.java))
 
         return devicePolicyManager.resources.getString(FINGERPRINT_UNLOCK_DISABLED) {
             context.getString(defaultStrId)
@@ -234,7 +234,7 @@ class FingerprintEnrollIntroFragment : Fragment() {
             else
                 View.INVISIBLE
 
-        view!!.findViewById<TextView>(R.id.error_text).let {
+        view!!.requireViewById<TextView>(R.id.error_text).let {
             when (status.enrollableStatus) {
                 FINGERPRINT_ENROLLABLE_OK -> {
                     it.text = null

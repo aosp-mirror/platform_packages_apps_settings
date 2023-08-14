@@ -46,7 +46,7 @@ class RegulatoryInfoDisplayActivity : Activity() {
 
         getRegulatoryInfo()?.let {
             val view = layoutInflater.inflate(R.layout.regulatory_info, null)
-            val image = view.findViewById<ImageView>(R.id.regulatoryInfo)
+            val image = view.requireViewById<ImageView>(R.id.regulatoryInfo)
             image.setImageDrawable(it)
             builder.setView(view)
             builder.show()

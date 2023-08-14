@@ -65,7 +65,7 @@ abstract class RemoteAuthEnrollBase(
     abstract fun initializeSecondaryFooterButton(): FooterButton?
 
     private fun initializeFooterbarMixin(view: View) {
-        val footerBarMixin = getGlifLayout(view).getMixin(FooterBarMixin::class.java)
+        val footerBarMixin = checkNotNull(getGlifLayout(view)).getMixin(FooterBarMixin::class.java)
         primaryFooterButton.also { footerBarMixin.primaryButton = it }
         secondaryFooterButton?.also { footerBarMixin.secondaryButton = it }
         footerBarMixin.getButtonContainer().setBackgroundColor(getBackgroundColor())

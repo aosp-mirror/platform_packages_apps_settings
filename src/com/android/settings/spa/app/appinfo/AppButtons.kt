@@ -45,7 +45,7 @@ private class AppButtonsPresenter(private val packageInfoPresenter: PackageInfoP
     @Composable
     fun getActionButtons() =
         packageInfoPresenter.flow.collectAsStateWithLifecycle(initialValue = null).value?.let {
-            getActionButtons(it.applicationInfo)
+            getActionButtons(checkNotNull(it.applicationInfo))
         } ?: emptyList()
 
     @Composable
