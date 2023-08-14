@@ -46,8 +46,8 @@ class RemoteAuthEnrollEnrollingRecyclerViewAdapter :
     override fun getItemCount() = uiStates.size
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val titleTextView: TextView = view.findViewById(R.id.discovered_authenticator_name)
-        private val selectButton: ImageView = view.findViewById(R.id.authenticator_radio_button)
+        private val titleTextView: TextView = view.requireViewById(R.id.discovered_authenticator_name)
+        private val selectButton: ImageView = view.requireViewById(R.id.authenticator_radio_button)
         private val checkedDrawable =
             view.context.getDrawable(R.drawable.ic_radio_button_checked_black_24dp)
         private val uncheckedDrawable =
