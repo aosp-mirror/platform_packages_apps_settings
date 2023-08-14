@@ -102,15 +102,15 @@ public class LockScreenSafetySourceTest {
     }
 
     @Test
-    public void setSafetySourceData_whenScreenLockIsDisabled_doesNotSetData() {
+    public void setSafetySourceData_whenScreenLockIsDisabled_setsNullData() {
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         when(mScreenLockPreferenceDetailsUtils.isAvailable()).thenReturn(false);
 
         LockScreenSafetySource.setSafetySourceData(mApplicationContext,
                 mScreenLockPreferenceDetailsUtils, EVENT_SOURCE_STATE_CHANGED);
 
-        verify(mSafetyCenterManagerWrapper, never()).setSafetySourceData(
-                any(), any(), any(), any());
+        verify(mSafetyCenterManagerWrapper).setSafetySourceData(
+                any(), eq(LockScreenSafetySource.SAFETY_SOURCE_ID), eq(null), any());
     }
 
     @Test

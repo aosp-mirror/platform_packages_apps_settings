@@ -63,6 +63,12 @@ public final class LockScreenSafetySource {
         }
 
         if (!screenLockPreferenceDetailsUtils.isAvailable()) {
+            SafetyCenterManagerWrapper.get().setSafetySourceData(
+                    context,
+                    SAFETY_SOURCE_ID,
+                    /* safetySourceData= */ null,
+                    safetyEvent
+            );
             return;
         }
 
