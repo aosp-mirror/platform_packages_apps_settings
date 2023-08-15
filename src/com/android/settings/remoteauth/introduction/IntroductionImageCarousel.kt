@@ -38,13 +38,15 @@ import com.android.settings.R
 import com.android.settingslib.widget.LottieColorUtils
 
 class IntroductionImageCarousel : ConstraintLayout {
-    private val carousel: ViewPager2 by lazy { findViewById<ViewPager2>(R.id.image_carousel) }
+    private val carousel: ViewPager2 by lazy { requireViewById<ViewPager2>(R.id.image_carousel) }
     private val progressIndicator: RecyclerView by lazy {
-        findViewById<RecyclerView>(R.id.carousel_progress_indicator)
+        requireViewById<RecyclerView>(R.id.carousel_progress_indicator)
     }
-    private val backArrow: ImageView by lazy { findViewById<ImageView>(R.id.carousel_back_arrow) }
+    private val backArrow: ImageView by lazy {
+        requireViewById<ImageView>(R.id.carousel_back_arrow)
+    }
     private val forwardArrow: ImageView by lazy {
-        findViewById<ImageView>(R.id.carousel_forward_arrow)
+        requireViewById<ImageView>(R.id.carousel_forward_arrow)
     }
     private val progressIndicatorAdapter = ProgressIndicatorAdapter()
     // The index of the current animation we are on
