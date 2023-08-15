@@ -36,8 +36,6 @@ public class BatteryTipsController extends BasePreferenceController {
     private static final String ROOT_PREFERENCE_KEY = "battery_tips_category";
     private static final String CARD_PREFERENCE_KEY = "battery_tips_card";
 
-    private final String[] mPowerAnomalyKeys;
-
     @VisibleForTesting
     BatteryTipsCardPreference mCardPreference;
     @VisibleForTesting
@@ -47,7 +45,6 @@ public class BatteryTipsController extends BasePreferenceController {
         super(context, ROOT_PREFERENCE_KEY);
         mPowerUsageFeatureProvider = FeatureFactory.getFeatureFactory()
             .getPowerUsageFeatureProvider();
-        mPowerAnomalyKeys = context.getResources().getStringArray(R.array.power_anomaly_keys);
     }
 
     private boolean isTipsCardVisible() {
@@ -64,16 +61,6 @@ public class BatteryTipsController extends BasePreferenceController {
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mCardPreference = screen.findPreference(CARD_PREFERENCE_KEY);
-    }
-
-    @VisibleForTesting
-    int getPowerAnomalyEventIndex(String powerAnomalyKey) {
-        for (int index = 0; index < mPowerAnomalyKeys.length; index++) {
-            if (mPowerAnomalyKeys[index].equals(powerAnomalyKey)) {
-                return index;
-            }
-        }
-        return -1;
     }
 
     private <T> T getInfo(PowerAnomalyEvent powerAnomalyEvent,
@@ -98,8 +85,9 @@ public class BatteryTipsController extends BasePreferenceController {
             return string;
         }
 
-        if (resourceIndex >= 0) {
-            string = mContext.getResources().getStringArray(resourceId)[resourceIndex];
+        String[] stringArray = mContext.getResources().getStringArray(resourceId);
+        if (resourceIndex >= 0 && resourceIndex < stringArray.length) {
+            string = stringArray[resourceIndex];
         }
 
         return string;
@@ -117,10 +105,11 @@ public class BatteryTipsController extends BasePreferenceController {
         }
 
         // Get card preference strings and navigate fragment info
-        final int index = getPowerAnomalyEventIndex(powerAnomalyEvent.getKey());
+        final int resourceIndex = powerAnomalyEvent.hasKey()
+                ? powerAnomalyEvent.getKey().getNumber() : -1;
 
         String titleString = getString(powerAnomalyEvent, WarningBannerInfo::getTitleString,
-                WarningItemInfo::getTitleString, R.array.power_anomaly_titles, index);
+                WarningItemInfo::getTitleString, R.array.power_anomaly_titles, resourceIndex);
         if (titleString.isEmpty()) {
             mCardPreference.setVisible(false);
             return;
@@ -128,10 +117,10 @@ public class BatteryTipsController extends BasePreferenceController {
 
         String mainBtnString = getString(powerAnomalyEvent,
                 WarningBannerInfo::getMainButtonString, WarningItemInfo::getMainButtonString,
-                R.array.power_anomaly_main_btn_strings, index);
+                R.array.power_anomaly_main_btn_strings, resourceIndex);
         String dismissBtnString = getString(powerAnomalyEvent,
                 WarningBannerInfo::getCancelButtonString, WarningItemInfo::getCancelButtonString,
-                R.array.power_anomaly_dismiss_btn_strings, index);
+                R.array.power_anomaly_dismiss_btn_strings, resourceIndex);
 
         String destinationClassName = getString(powerAnomalyEvent,
                 WarningBannerInfo::getMainButtonDestination,
