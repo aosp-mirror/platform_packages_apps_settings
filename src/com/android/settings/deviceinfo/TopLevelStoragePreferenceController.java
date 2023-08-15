@@ -75,9 +75,7 @@ public class TopLevelStoragePreferenceController extends BasePreferenceControlle
             final PrivateStorageInfo info = PrivateStorageInfo.getPrivateStorageInfo(
                     getStorageManagerVolumeProvider());
 
-            // TODO(b/288103116): replace with  new API to get TotalBytes before rounding
-            //  once support by StorageManager.
-            long usedBytes = Utils.getPrimaryStorageSize() - info.freeBytes;
+            long usedBytes = info.totalBytes - info.freeBytes;
             storageCacheHelper.cacheUsedSize(usedBytes);
             ThreadUtils.postOnMainThread(() -> {
                 preference.setSummary(
