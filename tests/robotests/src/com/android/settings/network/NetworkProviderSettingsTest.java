@@ -797,6 +797,28 @@ public class NetworkProviderSettingsTest {
     }
 
     @Test
+    public void getNonIndexableKeys_wifiStateEnabled_addWifiNetworkKeyNotReturned() {
+        when(mWifiManager.getWifiState()).thenReturn(WifiManager.WIFI_STATE_ENABLED);
+        NetworkProviderSettings.SearchIndexProvider searchIndexProvider =
+                new NetworkProviderSettings.SearchIndexProvider(XML_RES, mWifiRestriction);
+
+        final List<String> keys = searchIndexProvider.getNonIndexableKeys(mContext);
+
+        assertThat(keys).doesNotContain(NetworkProviderSettings.PREF_KEY_ADD_WIFI_NETWORK);
+    }
+
+    @Test
+    public void getNonIndexableKeys_wifiStateDisabled_addWifiNetworkKeyReturned() {
+        when(mWifiManager.getWifiState()).thenReturn(WifiManager.WIFI_STATE_DISABLED);
+        NetworkProviderSettings.SearchIndexProvider searchIndexProvider =
+                new NetworkProviderSettings.SearchIndexProvider(XML_RES, mWifiRestriction);
+
+        final List<String> keys = searchIndexProvider.getNonIndexableKeys(mContext);
+
+        assertThat(keys).contains(NetworkProviderSettings.PREF_KEY_ADD_WIFI_NETWORK);
+    }
+
+    @Test
     public void launchConfigNewNetworkFragment_fragmentIsRestricted_ignoreWifiEntry() {
         mNetworkProviderSettings.mIsRestricted = true;
 

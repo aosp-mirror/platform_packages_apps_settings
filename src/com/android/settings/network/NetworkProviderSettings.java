@@ -137,6 +137,8 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     @VisibleForTesting
     static final String PREF_KEY_FIRST_ACCESS_POINTS = "first_access_points";
     private static final String PREF_KEY_ACCESS_POINTS = "access_points";
+    @VisibleForTesting
+    static final String PREF_KEY_ADD_WIFI_NETWORK = "add_wifi_network";
     private static final String PREF_KEY_CONFIGURE_NETWORK_SETTINGS = "configure_network_settings";
     private static final String PREF_KEY_SAVED_NETWORKS = "saved_networks";
     @VisibleForTesting
@@ -322,7 +324,10 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         mWifiEntryPreferenceCategory = findPreference(PREF_KEY_ACCESS_POINTS);
         mConfigureWifiSettingsPreference = findPreference(PREF_KEY_CONFIGURE_NETWORK_SETTINGS);
         mSavedNetworksPreference = findPreference(PREF_KEY_SAVED_NETWORKS);
-        mAddWifiNetworkPreference = new AddWifiNetworkPreference(getPrefContext());
+        mAddWifiNetworkPreference = findPreference(PREF_KEY_ADD_WIFI_NETWORK);
+        // Hide mAddWifiNetworkPreference by default. updateWifiEntryPreferences() will add it back
+        // later when appropriate.
+        mWifiEntryPreferenceCategory.removePreference(mAddWifiNetworkPreference);
         mDataUsagePreference = findPreference(PREF_KEY_DATA_USAGE);
         mDataUsagePreference.setVisible(DataUsageUtils.hasWifiRadio(getContext()));
         mDataUsagePreference.setTemplate(new NetworkTemplate.Builder(NetworkTemplate.MATCH_WIFI)
@@ -1290,6 +1295,9 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
 
             if (WifiSavedConfigUtils.getAllConfigsCount(context, wifiManager) == 0) {
                 keys.add(PREF_KEY_SAVED_NETWORKS);
+            }
+            if (wifiManager.getWifiState() != WifiManager.WIFI_STATE_ENABLED) {
+                keys.add(PREF_KEY_ADD_WIFI_NETWORK);
             }
 
             if (!DataUsageUtils.hasWifiRadio(context)) {
