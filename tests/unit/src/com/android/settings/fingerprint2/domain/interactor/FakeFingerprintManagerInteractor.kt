@@ -67,7 +67,11 @@ class FakeFingerprintManagerInteractor : FingerprintManagerInteractor {
     return enrolledFingerprintsInternal.remove(fp)
   }
 
-  override suspend fun renameFingerprint(fp: FingerprintViewModel, newName: String) {}
+  override suspend fun renameFingerprint(fp: FingerprintViewModel, newName: String) {
+    if (enrolledFingerprintsInternal.remove(fp)) {
+      enrolledFingerprintsInternal.add(FingerprintViewModel(newName, fp.fingerId, fp.deviceId))
+    }
+  }
 
   override suspend fun hasSideFps(): Boolean {
     return sensorProps.any { it.isAnySidefpsType }

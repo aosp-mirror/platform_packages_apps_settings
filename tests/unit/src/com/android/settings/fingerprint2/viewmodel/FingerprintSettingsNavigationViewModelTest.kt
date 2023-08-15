@@ -17,6 +17,7 @@
 package com.android.settings.fingerprint2.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.android.settings.biometrics.BiometricEnrollBase
 import com.android.settings.biometrics.fingerprint2.ui.viewmodel.EnrollFirstFingerprint
 import com.android.settings.biometrics.fingerprint2.ui.viewmodel.FingerprintSettingsNavigationViewModel
 import com.android.settings.biometrics.fingerprint2.ui.viewmodel.FingerprintViewModel
@@ -270,6 +271,99 @@ class FingerprintSettingsNavigationViewModelTest {
       runCurrent()
 
       assertThat(nextStep).isEqualTo(ShowSettings)
+      job.cancel()
+    }
+
+  @Test
+  fun enrollWithToken_andNoUsers_startsFingerprintEnrollment() =
+    testScope.runTest {
+      fakeFingerprintManagerInteractor.enrolledFingerprintsInternal = mutableListOf()
+
+      var nextStep: NextStepViewModel? = null
+      val job = launch { underTest.nextStep.collect { nextStep = it } }
+
+      val token = byteArrayOf(1)
+      val challenge = 5L
+
+      underTest =
+        FingerprintSettingsNavigationViewModel.FingerprintSettingsNavigationModelFactory(
+            defaultUserId,
+            fakeFingerprintManagerInteractor,
+            backgroundDispatcher,
+            token,
+            challenge,
+          )
+          .create(FingerprintSettingsNavigationViewModel::class.java)
+
+      runCurrent()
+
+      assertThat(nextStep).isEqualTo(EnrollFirstFingerprint(defaultUserId, null, challenge, token))
+      job.cancel()
+    }
+
+  @Test
+  fun enroll_shouldNotFinish() =
+    testScope.runTest {
+      fakeFingerprintManagerInteractor.enrolledFingerprintsInternal = mutableListOf()
+
+      var nextStep: NextStepViewModel? = null
+      val job = launch { underTest.nextStep.collect { nextStep = it } }
+
+      val token = byteArrayOf(1)
+      val challenge = 5L
+
+      underTest =
+        FingerprintSettingsNavigationViewModel.FingerprintSettingsNavigationModelFactory(
+            defaultUserId,
+            fakeFingerprintManagerInteractor,
+            backgroundDispatcher,
+            token,
+            challenge,
+          )
+          .create(FingerprintSettingsNavigationViewModel::class.java)
+
+      runCurrent()
+
+      assertThat(nextStep).isEqualTo(EnrollFirstFingerprint(defaultUserId, null, challenge, token))
+      underTest.maybeFinishActivity(false)
+
+      runCurrent()
+      assertThat(nextStep).isEqualTo(EnrollFirstFingerprint(defaultUserId, null, challenge, token))
+      job.cancel()
+    }
+
+  @Test
+  fun showSettings_shouldFinish() =
+    testScope.runTest {
+      fakeFingerprintManagerInteractor.enrolledFingerprintsInternal =
+        mutableListOf(FingerprintViewModel("a", 1, 3L))
+
+      var nextStep: NextStepViewModel? = null
+      val job = launch { underTest.nextStep.collect { nextStep = it } }
+
+      val token = byteArrayOf(1)
+      val challenge = 5L
+
+      underTest =
+        FingerprintSettingsNavigationViewModel.FingerprintSettingsNavigationModelFactory(
+            defaultUserId,
+            fakeFingerprintManagerInteractor,
+            backgroundDispatcher,
+            token,
+            challenge,
+          )
+          .create(FingerprintSettingsNavigationViewModel::class.java)
+
+      runCurrent()
+      assertThat(nextStep).isEqualTo(ShowSettings)
+
+      underTest.maybeFinishActivity(false)
+
+      runCurrent()
+      assertThat(nextStep)
+        .isEqualTo(
+          FinishSettingsWithResult(BiometricEnrollBase.RESULT_TIMEOUT, "onStop finishing settings")
+        )
       job.cancel()
     }
 }
