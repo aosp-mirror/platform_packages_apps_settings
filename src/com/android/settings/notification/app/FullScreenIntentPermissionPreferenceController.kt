@@ -81,7 +81,7 @@ class FullScreenIntentPermissionPreferenceController(
     private fun isPermissionRequested(): Boolean {
         val packageInfo = packageManager.getPackageInfo(packageName, GET_PERMISSIONS)
 
-        for (requestedPermission in packageInfo.requestedPermissions) {
+        for (requestedPermission in packageInfo.requestedPermissions.orEmpty()) {
             if (USE_FULL_SCREEN_INTENT.equals(requestedPermission)) {
                 return true
             }
