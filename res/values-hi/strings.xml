@@ -803,7 +803,7 @@
     <string name="wifi_dpp_sharing_wifi_with_this_device" msgid="7250369936882080107">"इस डिवाइस के साथ वाई-फ़ाई शेयर किया जा रहा है…"</string>
     <string name="wifi_dpp_connecting" msgid="2312769193202897589">"कनेक्ट हो रहा है…"</string>
     <string name="wifi_dpp_share_hotspot" msgid="6186452780604755316">"हॉटस्पॉट शेयर करें"</string>
-    <string name="wifi_dpp_lockscreen_title" msgid="4231438175617953652">"पुष्टि करें कि यह आप ही हैं"</string>
+    <string name="wifi_dpp_lockscreen_title" msgid="5246641326066972419">"अपनी पहचान की पुष्टि करें"</string>
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"वाई-फ़ाई पासवर्ड: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"हॉटस्पॉट का पासवर्ड: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"अपने-आप कनेक्ट हो जाए"</string>
@@ -1440,10 +1440,10 @@
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"अपना पासवर्ड भूल गए हैं?"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"अपना पैटर्न भूल गए हैं?"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"अपना पिन भूल गए हैं?"</string>
-    <string name="lockpassword_confirm_your_pattern_generic" msgid="7692794426682501482">"जारी रखने के लिए अपने डिवाइस के पैटर्न का इस्तेमाल करें"</string>
-    <string name="lockpassword_confirm_your_pin_generic" msgid="9206928587904701094">"जारी रखने के लिए अपने डिवाइस का पिन डालें"</string>
-    <string name="lockpassword_confirm_your_password_generic" msgid="2616127423884477152">"जारी रखने के लिए अपने डिवाइस का पासवर्ड डालें"</string>
-    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="9110305410672321714">"जारी रखने के लिए अपने काम पैटर्न का उपयोग करें"</string>
+    <string name="lockpassword_confirm_your_pattern_generic" msgid="7401165571170203743">"जारी रखने के लिए अपना पैटर्न ड्रॉ करें"</string>
+    <string name="lockpassword_confirm_your_pin_generic" msgid="8990266101852808091">"जारी रखने के लिए अपना पिन डालें"</string>
+    <string name="lockpassword_confirm_your_password_generic" msgid="8823867445451497224">"जारी रखने के लिए अपना पासवर्ड डालें"</string>
+    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="7003851856761939690">"जारी रखने के लिए, अपनी वर्क प्रोफ़ाइल का पैटर्न ड्रॉ करें"</string>
     <string name="lockpassword_confirm_your_pin_generic_profile" msgid="6524208128570235127">"जारी रखने के लिए अपनी वर्क प्रोफ़ाइल का पिन डालें"</string>
     <string name="lockpassword_confirm_your_password_generic_profile" msgid="5918738487760814147">"जारी रखने की लिए, अपने वर्क प्रोफ़ाइल का पासवर्ड डालें"</string>
     <string name="lockpassword_strong_auth_required_device_pattern" msgid="113817518413715557">"अतिरिक्त सुरक्षा के लिए, अपने पैटर्न का इस्तेमाल करें"</string>
@@ -4665,6 +4665,18 @@
     <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"डिवाइस के साथ काम करने वाले मीडिया पर, ऑडियो का आनंद बेहतर तरीके से लिया जा सकता है"</string>
     <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"सिर के हिलने को ट्रैक करें"</string>
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"जब आपका सिर उस तरफ़ घूमता है जहां से आवाज़ आ रही है, तब ऑडियो की आवाज़ ज़्यादा बेहतर सुनाई देती है"</string>
+    <!-- no translation found for bluetooth_details_audio_device_types_title (3381941189346781614) -->
+    <skip />
+    <!-- no translation found for bluetooth_details_audio_device_type_unknown (839337391037998014) -->
+    <skip />
+    <!-- no translation found for bluetooth_details_audio_device_type_speaker (3706227767994792124) -->
+    <skip />
+    <!-- no translation found for bluetooth_details_audio_device_type_headphones (7644588291215033798) -->
+    <skip />
+    <!-- no translation found for bluetooth_details_audio_device_type_carkit (4439017600454703229) -->
+    <skip />
+    <!-- no translation found for bluetooth_details_audio_device_type_other (7019481234617207563) -->
+    <skip />
     <string name="ingress_rate_limit_title" msgid="2106694002836274350">"नेटवर्क के लिए तय की गई डाउनलोड करने की दर की सीमा"</string>
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"नेटवर्क बैंडविड्थ के इन्ग्रेस डेटा ट्रैफ़िक की दर की सीमा को कॉन्फ़िगर करें. यह उन सभी नेटवर्क पर लागू होती है जो इंटरनेट कनेक्टिविटी देते हैं."</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"नेटवर्क के लिए तय की गई डाउनलोड करने की दर की सीमा को कॉन्फ़िगर करें"</string>
@@ -4697,24 +4709,18 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"ऐप्लिकेशन अनइंस्टॉल करें"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{पिछले # महीने में इंस्टॉल किए गए ऐप्लिकेशन}one{पिछले # महीने में इंस्टॉल किए गए ऐप्लिकेशन}other{पिछले # महीनों में इंस्टॉल किए गए ऐप्लिकेशन}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{ऐप्लिकेशन, # महीने से भी पहले इंस्टॉल किए गए}one{ऐप्लिकेशन, # महीने से भी पहले इंस्टॉल किए गए}other{ऐप्लिकेशन, # महीने से भी पहले इंस्टॉल किए गए}}"</string>
-    <!-- no translation found for aspect_ratio_title (2451826875939676101) -->
-    <skip />
-    <!-- no translation found for aspect_ratio_summary (5944347596728740547) -->
-    <skip />
+    <string name="aspect_ratio_title" msgid="2451826875939676101">"आसपेक्ट रेशियो"</string>
+    <string name="aspect_ratio_summary" msgid="5944347596728740547">"अगर आपके <xliff:g id="DEVICE_NAME">%1$s</xliff:g> की स्क्रीन में ऐप्लिकेशन का आसपेक्ट रेशियो फ़िट नहीं हो रहा है, तो ऐप्लिकेशन के हिसाब से इसे बदलें"</string>
     <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"सुझाए गए ऐप्लिकेशन"</string>
     <string name="user_aspect_ratio_overridden_apps_label" msgid="1564914138276629704">"वे ऐप्लिकेशन जिन्हें आपने ओवरराइड किया है"</string>
     <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"ऐप्लिकेशन का डिफ़ॉल्ट आसपेक्ट रेशियो"</string>
-    <!-- no translation found for user_aspect_ratio_fullscreen (1843427242540081996) -->
-    <skip />
-    <!-- no translation found for user_aspect_ratio_half_screen (1015852057094310209) -->
-    <skip />
-    <!-- no translation found for user_aspect_ratio_device_size (2339820985120881199) -->
-    <skip />
+    <string name="user_aspect_ratio_fullscreen" msgid="1843427242540081996">"फ़ुल स्क्रीन"</string>
+    <string name="user_aspect_ratio_half_screen" msgid="1015852057094310209">"आधी स्क्रीन"</string>
+    <string name="user_aspect_ratio_device_size" msgid="2339820985120881199">"डिवाइस का आसपेक्ट रेशियो"</string>
     <string name="user_aspect_ratio_16_9" msgid="2286644872775170164">"16:9"</string>
     <string name="user_aspect_ratio_3_2" msgid="199262962518318932">"3:2"</string>
     <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4:3"</string>
-    <!-- no translation found for app_aspect_ratio_footer (8661813386126142251) -->
-    <skip />
+    <string name="app_aspect_ratio_footer" msgid="8661813386126142251">"आसपेक्ट रेशियो (लंबाई-चौड़ाई का अनुपात) बदलने पर ऐप्लिकेशन रीस्टार्ट हो जाएगा. इससे वे बदलाव मिट सकते हैं जिन्हें सेव नहीं किया गया है."</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"फ़िंगरप्रिंट सेंसर"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"फ़्लैश के साथ मिलने वाली सूचनाएं"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"फ़्लैश के साथ मिलने वाली सूचनाओं की जानकारी"</string>

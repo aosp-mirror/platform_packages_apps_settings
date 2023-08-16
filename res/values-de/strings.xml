@@ -122,7 +122,7 @@
     <string name="stylus_default_notes_app" msgid="4165657465911764628">"Drücken der Eingabestifttaste"</string>
     <string name="stylus_default_notes_summary_work" msgid="4554643411627934223">"<xliff:g id="APP_NAME">%s</xliff:g> (Arbeitsprofil)"</string>
     <string name="stylus_textfield_handwriting" msgid="2363579035338976327">"Textfelder ausfüllen"</string>
-    <string name="stylus_ignore_button" msgid="7734540973145241391">"Alle Schaltflächenaktivierungen durch Eingabestift ignorieren"</string>
+    <string name="stylus_ignore_button" msgid="7734540973145241391">"Drücken der Taste am Eingabestift ignorieren"</string>
     <string name="stylus_connected_devices_title" msgid="2823967577941359812">"Eingabestift"</string>
     <string name="date_and_time" msgid="1788358029823431692">"Datum &amp; Uhrzeit"</string>
     <string name="proxy_settings_title" msgid="4201866858226087066">"Proxy"</string>
@@ -380,7 +380,7 @@
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Gesicht, Fingerabdruck und <xliff:g id="WATCH">%s</xliff:g> hinzugefügt"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Gesicht, Fingerabdrücke und <xliff:g id="WATCH">%s</xliff:g> hinzugefügt"</string>
     <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"Entsperrung per Gesichtserkennung &amp; Fingerabdruck"</string>
-    <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Gesichts- und Fingerabdruckentsperrung für die Arbeit"</string>
+    <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Entsperrung per GesichtsU+00ADerkennung &amp; FingerU+00ADabdruck für die Arbeit"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"Einrichtung erforderlich"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Gesicht und Fingerabdrücke hinzugefügt"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"Gesicht und Fingerabdruck hinzugefügt"</string>
@@ -495,10 +495,10 @@
     <string name="encryption_settings_title" msgid="2848716008695618360">"Verschlüsselung"</string>
     <string name="encrypted_summary" msgid="545623487587251207">"Verschlüsselt"</string>
     <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"Displaysperre einrichten"</string>
-    <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"Für zusätzliche Sicherheit kannst du eine PIN, ein Muster oder ein Passwort für dieses Gerät einrichten."</string>
+    <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"Für zusätzliche Sicherheit lässt sich eine PIN, ein Muster oder ein Passwort einrichten."</string>
     <string name="no_screen_lock_issue_action_label" msgid="2691229130486382863">"Displaysperre einrichten"</string>
     <string name="no_screen_lock_issue_notification_title" msgid="1214876733592830628">"Displaysperre einrichten"</string>
-    <string name="no_screen_lock_issue_notification_text" msgid="8696194459170873345">"Für zusätzliche Sicherheit kannst du eine PIN, ein Muster oder ein Passwort für dieses Gerät einrichten."</string>
+    <string name="no_screen_lock_issue_notification_text" msgid="8696194459170873345">"Für zusätzliche Sicherheit lässt sich eine PIN, ein Muster oder ein Passwort einrichten."</string>
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"Smartphone schützen"</string>
     <string name="suggested_fingerprint_lock_settings_title" msgid="3140266181874137984">"Fingerabdruck zum Entsperren hinzufügen"</string>
     <string name="lock_settings_picker_title" msgid="9219376327364915334">"Displaysperre wählen"</string>
@@ -803,7 +803,7 @@
     <string name="wifi_dpp_sharing_wifi_with_this_device" msgid="7250369936882080107">"WLAN wird für dieses Gerät freigegeben…"</string>
     <string name="wifi_dpp_connecting" msgid="2312769193202897589">"Verbindung wird hergestellt…"</string>
     <string name="wifi_dpp_share_hotspot" msgid="6186452780604755316">"Hotspot teilen"</string>
-    <string name="wifi_dpp_lockscreen_title" msgid="4231438175617953652">"Deine Identität bestätigen"</string>
+    <string name="wifi_dpp_lockscreen_title" msgid="5246641326066972419">"Identität bestätigen"</string>
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"WLAN-Passwort: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"Passwort des Hotspots: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"Automatische Verbindung"</string>
@@ -1440,10 +1440,14 @@
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Passwort vergessen?"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"Muster vergessen?"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"PIN vergessen?"</string>
-    <string name="lockpassword_confirm_your_pattern_generic" msgid="7692794426682501482">"Gib zum Fortfahren das Muster für dein Gerät ein"</string>
-    <string name="lockpassword_confirm_your_pin_generic" msgid="9206928587904701094">"Gib zum Fortfahren die PIN für dein Gerät ein"</string>
-    <string name="lockpassword_confirm_your_password_generic" msgid="2616127423884477152">"Gib zum Fortfahren das Passwort für dein Gerät ein"</string>
-    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="9110305410672321714">"Gib zum Fortfahren das Muster deines Arbeitsprofils ein"</string>
+    <!-- no translation found for lockpassword_confirm_your_pattern_generic (7401165571170203743) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_pin_generic (8990266101852808091) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_password_generic (8823867445451497224) -->
+    <skip />
+    <!-- no translation found for lockpassword_confirm_your_pattern_generic_profile (7003851856761939690) -->
+    <skip />
     <string name="lockpassword_confirm_your_pin_generic_profile" msgid="6524208128570235127">"Gib zum Fortfahren die PIN deines Arbeitsprofils ein"</string>
     <string name="lockpassword_confirm_your_password_generic_profile" msgid="5918738487760814147">"Gib zum Fortfahren das Passwort deines Arbeitsprofils ein"</string>
     <string name="lockpassword_strong_auth_required_device_pattern" msgid="113817518413715557">"Verwende das Muster für dein Gerät, um die Sicherheit zu erhöhen"</string>
@@ -1693,7 +1697,7 @@
     <string name="trackpad_bottom_right_tap_summary" msgid="8734094086900680674">"Tippe unten rechts auf das Touchpad für weitere Optionen"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Zeigergeschwindigkeit"</string>
     <string name="trackpad_touch_gesture" msgid="8641725062131922497">"Informationen zu Touchpad-Gesten"</string>
-    <string name="gesture_title_go_home" msgid="3682238648647225933">"Zum Startbildschirm"</string>
+    <string name="gesture_title_go_home" msgid="3682238648647225933">"Zum StartU+00ADbildschirm"</string>
     <string name="gesture_summary_go_home" msgid="6409031586904205741">"Wische irgendwo auf dem Touchpad mit drei Fingern nach oben"</string>
     <string name="gesture_title_go_back" msgid="6619462058488419802">"Zurück"</string>
     <string name="gesture_summary_go_back" msgid="4981604277892236888">"Wische mit drei Fingern von links oder rechts"</string>
@@ -4665,6 +4669,18 @@
     <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"Klang von kompatiblen Medien wird noch voller"</string>
     <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"Erfassung von Kopfbewegungen"</string>
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"Änderungen am Ton, während du deinen Kopf bewegst, damit er natürlicher klingt"</string>
+    <!-- no translation found for bluetooth_details_audio_device_types_title (3381941189346781614) -->
+    <skip />
+    <!-- no translation found for bluetooth_details_audio_device_type_unknown (839337391037998014) -->
+    <skip />
+    <!-- no translation found for bluetooth_details_audio_device_type_speaker (3706227767994792124) -->
+    <skip />
+    <!-- no translation found for bluetooth_details_audio_device_type_headphones (7644588291215033798) -->
+    <skip />
+    <!-- no translation found for bluetooth_details_audio_device_type_carkit (4439017600454703229) -->
+    <skip />
+    <!-- no translation found for bluetooth_details_audio_device_type_other (7019481234617207563) -->
+    <skip />
     <string name="ingress_rate_limit_title" msgid="2106694002836274350">"Ratenbegrenzung für Downloads im Netzwerk"</string>
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"Damit kannst du die Ratenbegrenzung für eingehenden Traffic über die Netzwerkbandbreite konfigurieren, die für alle Netzwerke angewendet wird, die eine Internetverbindung zur Verfügung stellen."</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"Ratenbegrenzung für Downloads im Netzwerk konfigurieren"</string>
@@ -4697,24 +4713,18 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"App deinstallieren"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Apps, die innerhalb des letzten Monats installiert wurden}other{Apps, die innerhalb der letzten # Monate installiert wurden}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Apps, die vor mehr als # Monat installiert wurden}other{Apps, die vor mehr als # Monaten installiert wurden}}"</string>
-    <!-- no translation found for aspect_ratio_title (2451826875939676101) -->
-    <skip />
-    <!-- no translation found for aspect_ratio_summary (5944347596728740547) -->
-    <skip />
+    <string name="aspect_ratio_title" msgid="2451826875939676101">"Seitenverhältnis"</string>
+    <string name="aspect_ratio_summary" msgid="5944347596728740547">"Wähle ein Seitenverhältnis für diese App aus, wenn sie nicht für dein Gerät (<xliff:g id="DEVICE_NAME">%1$s</xliff:g>) optimiert ist."</string>
     <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"Vorgeschlagene Apps"</string>
     <string name="user_aspect_ratio_overridden_apps_label" msgid="1564914138276629704">"Apps mit Überschreibung"</string>
     <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"App-Standard"</string>
-    <!-- no translation found for user_aspect_ratio_fullscreen (1843427242540081996) -->
-    <skip />
-    <!-- no translation found for user_aspect_ratio_half_screen (1015852057094310209) -->
-    <skip />
-    <!-- no translation found for user_aspect_ratio_device_size (2339820985120881199) -->
-    <skip />
+    <string name="user_aspect_ratio_fullscreen" msgid="1843427242540081996">"Ganzes Display"</string>
+    <string name="user_aspect_ratio_half_screen" msgid="1015852057094310209">"Halbes Display"</string>
+    <string name="user_aspect_ratio_device_size" msgid="2339820985120881199">"Seitenverhältnis des Geräts"</string>
     <string name="user_aspect_ratio_16_9" msgid="2286644872775170164">"16:9"</string>
     <string name="user_aspect_ratio_3_2" msgid="199262962518318932">"3:2"</string>
     <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4:3"</string>
-    <!-- no translation found for app_aspect_ratio_footer (8661813386126142251) -->
-    <skip />
+    <string name="app_aspect_ratio_footer" msgid="8661813386126142251">"Wenn du das Seitenverhältnis änderst, wird die App neu gestartet. Dadurch gehen nicht gespeicherte Änderungen möglicherweise verloren."</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Fingerabdrucksensor"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Aufleuchten bei Benachrichtigungen"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Infos zum Aufleuchten bei Benachrichtigungen"</string>

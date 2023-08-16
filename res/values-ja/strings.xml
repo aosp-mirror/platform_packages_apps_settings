@@ -241,7 +241,7 @@
     <string name="zone_time_type_standard" msgid="6865420715430680352">"標準時間"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"地域で選択"</string>
     <string name="zone_menu_by_offset" msgid="1257702747474426745">"UTC オフセットで選択"</string>
-    <string name="lock_after_timeout" msgid="8682769000437403444">"画面が自動的に消灯してからロックまでの時間"</string>
+    <string name="lock_after_timeout" msgid="8682769000437403444">"画面が自動消灯してからロックまでの時間"</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"タイムアウトから <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>"</string>
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"画面消灯の直後にロック（<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> がロック解除を管理している場合を除く）"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"画面が自動的に消灯してから<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>後にロック（<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> がロック解除を管理している場合を除く）"</string>
@@ -803,7 +803,7 @@
     <string name="wifi_dpp_sharing_wifi_with_this_device" msgid="7250369936882080107">"Wi‑Fi をこのデバイスと共有しています…"</string>
     <string name="wifi_dpp_connecting" msgid="2312769193202897589">"接続しています…"</string>
     <string name="wifi_dpp_share_hotspot" msgid="6186452780604755316">"アクセス ポイントの共有"</string>
-    <string name="wifi_dpp_lockscreen_title" msgid="4231438175617953652">"本人確認"</string>
+    <string name="wifi_dpp_lockscreen_title" msgid="5246641326066972419">"本人確認"</string>
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Wi‑Fi パスワード: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"アクセス ポイントのパスワード: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"自動接続"</string>
@@ -1440,10 +1440,10 @@
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"パスワードを忘れた場合"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"パターンを忘れた場合"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"PIN を忘れた場合"</string>
-    <string name="lockpassword_confirm_your_pattern_generic" msgid="7692794426682501482">"続行するにはロック解除のパターンを入力してください"</string>
-    <string name="lockpassword_confirm_your_pin_generic" msgid="9206928587904701094">"続行するにはデバイスの PIN を入力してください"</string>
-    <string name="lockpassword_confirm_your_password_generic" msgid="2616127423884477152">"続行するにはデバイスのパスワードを入力してください"</string>
-    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="9110305410672321714">"仕事用のパターンを使って続行します"</string>
+    <string name="lockpassword_confirm_your_pattern_generic" msgid="7401165571170203743">"続行するにはパターンを入力してください"</string>
+    <string name="lockpassword_confirm_your_pin_generic" msgid="8990266101852808091">"続行するには PIN を入力してください"</string>
+    <string name="lockpassword_confirm_your_password_generic" msgid="8823867445451497224">"続行するにはパスワードを入力してください"</string>
+    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="7003851856761939690">"続行するには仕事用のパターンを入力してください"</string>
     <string name="lockpassword_confirm_your_pin_generic_profile" msgid="6524208128570235127">"続行するには仕事用の PIN を入力してください"</string>
     <string name="lockpassword_confirm_your_password_generic_profile" msgid="5918738487760814147">"続行するには仕事用のパスワードを入力してください"</string>
     <string name="lockpassword_strong_auth_required_device_pattern" msgid="113817518413715557">"セキュリティ強化のため、デバイスのパターンを入力してください"</string>
@@ -2802,7 +2802,7 @@
     <string name="preferred_network_type_summary" msgid="8786291927331323061">"LTE（推奨）"</string>
     <string name="mms_message_title" msgid="6624505196063391964">"MMS メッセージ"</string>
     <string name="mms_message_summary" msgid="2855847140141698341">"モバイルデータが OFF のときに送受信します"</string>
-    <string name="auto_data_switch_title" msgid="5862200603753603464">"モバイルデータに自動的に切り替えます"</string>
+    <string name="auto_data_switch_title" msgid="5862200603753603464">"モバイルデータを自動的に切替"</string>
     <string name="auto_data_switch_summary" msgid="1934340931995429057">"このネットワークのほうが接続が安定している場合、こちらを一時的に使用します"</string>
     <string name="work_sim_title" msgid="8999872928646924429">"仕事用SIM"</string>
     <string name="user_restrictions_title" msgid="4068914244980335993">"アプリとコンテンツへのアクセス"</string>
@@ -4665,6 +4665,12 @@
     <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"対応するメディアを臨場感あふれる音声でお楽しみいただけます"</string>
     <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"ヘッド トラッキング"</string>
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"より自然なサウンドになるよう頭の動きに合わせて音声が変化します"</string>
+    <string name="bluetooth_details_audio_device_types_title" msgid="3381941189346781614">"オーディオ システムのタイプ"</string>
+    <string name="bluetooth_details_audio_device_type_unknown" msgid="839337391037998014">"不明"</string>
+    <string name="bluetooth_details_audio_device_type_speaker" msgid="3706227767994792124">"スピーカー"</string>
+    <string name="bluetooth_details_audio_device_type_headphones" msgid="7644588291215033798">"ヘッドフォン"</string>
+    <string name="bluetooth_details_audio_device_type_carkit" msgid="4439017600454703229">"車載キット"</string>
+    <string name="bluetooth_details_audio_device_type_other" msgid="7019481234617207563">"その他"</string>
     <string name="ingress_rate_limit_title" msgid="2106694002836274350">"ネットワーク ダウンロード速度制限"</string>
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"インターネット接続を提供するすべてのネットワークに対して、受信速度を制限します。"</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"ネットワーク ダウンロード速度制限の設定"</string>

@@ -803,7 +803,7 @@
     <string name="wifi_dpp_sharing_wifi_with_this_device" msgid="7250369936882080107">"‏جارٍ مشاركة Wi‑Fi مع هذا الجهاز…"</string>
     <string name="wifi_dpp_connecting" msgid="2312769193202897589">"جارٍ الاتصال…"</string>
     <string name="wifi_dpp_share_hotspot" msgid="6186452780604755316">"مشاركة نقطة الاتصال"</string>
-    <string name="wifi_dpp_lockscreen_title" msgid="4231438175617953652">"إثبات هويتك"</string>
+    <string name="wifi_dpp_lockscreen_title" msgid="5246641326066972419">"التحقق من هويتك"</string>
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"‏كلمة مرور Wi-Fi هي:  <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"كلمة مرور نقطة الاتصال: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"اتصال تلقائي"</string>
@@ -1440,10 +1440,10 @@
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"هل نسيت كلمة المرور؟"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"هل نسيت النقش؟"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"هل نسيت رقم التعريف الشخصي؟"</string>
-    <string name="lockpassword_confirm_your_pattern_generic" msgid="7692794426682501482">"استخدِم النقش الذي اخترته على جهازك للمتابعة."</string>
-    <string name="lockpassword_confirm_your_pin_generic" msgid="9206928587904701094">"للمتابعة، أدخِل رقم التعريف الشخصي للجهاز."</string>
-    <string name="lockpassword_confirm_your_password_generic" msgid="2616127423884477152">"أدخل كلمة مرور الجهاز للمتابعة."</string>
-    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="9110305410672321714">"استخدم نقش ملفك الشخصي الخاص بالعمل للمتابعة."</string>
+    <string name="lockpassword_confirm_your_pattern_generic" msgid="7401165571170203743">"يجب رسم النقش للمتابعة."</string>
+    <string name="lockpassword_confirm_your_pin_generic" msgid="8990266101852808091">"يجب إدخال رقم التعريف الشخصي للمتابعة."</string>
+    <string name="lockpassword_confirm_your_password_generic" msgid="8823867445451497224">"يجب إدخال كلمة المرور للمتابعة."</string>
+    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="7003851856761939690">"يجب رسم نقش ملفك الشخصي الخاص بالعمل للمتابعة."</string>
     <string name="lockpassword_confirm_your_pin_generic_profile" msgid="6524208128570235127">"أدخل رقم التعريف الشخصي لملفك الشخصي للعمل للمتابعة."</string>
     <string name="lockpassword_confirm_your_password_generic_profile" msgid="5918738487760814147">"أدخل كلمة مرور ملفك الشخصي للعمل للمتابعة."</string>
     <string name="lockpassword_strong_auth_required_device_pattern" msgid="113817518413715557">"استخدام نقش للجهاز لزيادة الأمان"</string>
@@ -4669,6 +4669,18 @@
     <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"الصوت الصادر من الوسائط المتوافقة يصبح أكثر وضوحًا."</string>
     <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"تتبُّع حركة الرأس"</string>
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"يتغيّر الصوت بينما تُحرك رأسك ليبدو طبيعيًا جدًا."</string>
+    <!-- no translation found for bluetooth_details_audio_device_types_title (3381941189346781614) -->
+    <skip />
+    <!-- no translation found for bluetooth_details_audio_device_type_unknown (839337391037998014) -->
+    <skip />
+    <!-- no translation found for bluetooth_details_audio_device_type_speaker (3706227767994792124) -->
+    <skip />
+    <!-- no translation found for bluetooth_details_audio_device_type_headphones (7644588291215033798) -->
+    <skip />
+    <!-- no translation found for bluetooth_details_audio_device_type_carkit (4439017600454703229) -->
+    <skip />
+    <!-- no translation found for bluetooth_details_audio_device_type_other (7019481234617207563) -->
+    <skip />
     <string name="ingress_rate_limit_title" msgid="2106694002836274350">"الحد الأقصى لمعدّل تنزيل الشبكة"</string>
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"يمكنك ضبط الحد الأقصى لحركة البيانات الواردة في معدّل نقل البيانات للشبكة والذي يتم تطبيقه على جميع الشبكات التي توفّر اتصالاً بالإنترنت."</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"ضبط الحد الأقصى لمعدّل تنزيل الشبكة"</string>
@@ -4685,7 +4697,7 @@
     <string name="bluetooth_find_broadcast_summary" msgid="3907899428626210673">"محتوى البث الذي تستمع إليه"</string>
     <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"البحث عن عمليات بث"</string>
     <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"مغادرة البث"</string>
-    <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"إجراء مسح ضوئي لرمز الاستجابة السريعة"</string>
+    <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"مسح رمز الاستجابة السريعة ضوئيًا"</string>
     <string name="find_broadcast_password_dialog_title" msgid="3176988702535737484">"إدخال كلمة المرور"</string>
     <string name="find_broadcast_password_dialog_connection_error" msgid="47873617983439400">"يتعذّر الاتصال. يُرجى إعادة المحاولة."</string>
     <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"كلمة مرور غير صحيحة"</string>
@@ -4701,24 +4713,18 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"إلغاء تثبيت التطبيق"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{التطبيقات التي تم تثبيتها خلال آخر شهر}zero{التطبيقات التي تم تثبيتها خلال آخر # شهر}two{التطبيقات التي تم تثبيتها خلال آخر شهرَين}few{التطبيقات التي تم تثبيتها خلال آخر # شهور}many{التطبيقات التي تم تثبيتها خلال آخر # شهرًا}other{التطبيقات التي تم تثبيتها خلال آخر # شهر}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{التطبيقات التي تم تثبيتها قبل أكثر من شهر واحد}zero{التطبيقات التي تم تثبيتها قبل أكثر من # شهر}two{التطبيقات التي تم تثبيتها قبل أكثر من شهرَين}few{التطبيقات التي تم تثبيتها قبل أكثر من # شهور}many{التطبيقات التي تم تثبيتها قبل أكثر من # شهرًا}other{التطبيقات التي تم تثبيتها قبل أكثر من # شهر}}"</string>
-    <!-- no translation found for aspect_ratio_title (2451826875939676101) -->
-    <skip />
-    <!-- no translation found for aspect_ratio_summary (5944347596728740547) -->
-    <skip />
+    <string name="aspect_ratio_title" msgid="2451826875939676101">"نسبة العرض إلى الارتفاع"</string>
+    <string name="aspect_ratio_summary" msgid="5944347596728740547">"يمكنك اختيار نسبة العرض إلى الارتفاع لهذا التطبيق في حال لم يكن مصمّمًا ليلائم جهاز <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"التطبيقات المقترَحة"</string>
     <string name="user_aspect_ratio_overridden_apps_label" msgid="1564914138276629704">"التطبيقات التي تم فيها إلغاء نسبة العرض إلى الارتفاع"</string>
     <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"نسبة العرض إلى الارتفاع التلقائية في التطبيق"</string>
-    <!-- no translation found for user_aspect_ratio_fullscreen (1843427242540081996) -->
-    <skip />
-    <!-- no translation found for user_aspect_ratio_half_screen (1015852057094310209) -->
-    <skip />
-    <!-- no translation found for user_aspect_ratio_device_size (2339820985120881199) -->
-    <skip />
+    <string name="user_aspect_ratio_fullscreen" msgid="1843427242540081996">"ملء الشاشة"</string>
+    <string name="user_aspect_ratio_half_screen" msgid="1015852057094310209">"نصف الشاشة"</string>
+    <string name="user_aspect_ratio_device_size" msgid="2339820985120881199">"نسبة العرض إلى الارتفاع في الجهاز"</string>
     <string name="user_aspect_ratio_16_9" msgid="2286644872775170164">"16:9"</string>
     <string name="user_aspect_ratio_3_2" msgid="199262962518318932">"3:2"</string>
     <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4:3"</string>
-    <!-- no translation found for app_aspect_ratio_footer (8661813386126142251) -->
-    <skip />
+    <string name="app_aspect_ratio_footer" msgid="8661813386126142251">"ستتم إعادة تشغيل التطبيق عند تغيير نسبة العرض إلى الارتفاع. يُرجى العِلم أنّك قد تفقد التغييرات التي يتم حفظها."</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"أداة استشعار بصمة الإصبع"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"الإشعارات المصحوبة بوميض"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"لمحة عن الإشعارات المصحوبة بوميض"</string>
