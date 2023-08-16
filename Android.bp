@@ -107,7 +107,9 @@ android_library {
         "SystemUIUnfoldLib",
     ],
 
-    plugins: ["androidx.room_room-compiler-plugin"],
+    plugins: [
+        "androidx.room_room-compiler-plugin",
+    ],
 
     libs: [
         "telephony-common",
