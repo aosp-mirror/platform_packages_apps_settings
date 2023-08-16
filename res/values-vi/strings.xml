@@ -803,7 +803,7 @@
     <string name="wifi_dpp_sharing_wifi_with_this_device" msgid="7250369936882080107">"Chia sẻ Wi‑Fi với thiết bị này…"</string>
     <string name="wifi_dpp_connecting" msgid="2312769193202897589">"Đang kết nối…"</string>
     <string name="wifi_dpp_share_hotspot" msgid="6186452780604755316">"Chia sẻ điểm phát sóng"</string>
-    <string name="wifi_dpp_lockscreen_title" msgid="4231438175617953652">"Xác minh rằng đó là bạn"</string>
+    <string name="wifi_dpp_lockscreen_title" msgid="5246641326066972419">"Xác minh danh tính của bạn"</string>
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Mật khẩu Wi-Fi: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"Mật khẩu điểm phát sóng: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"Tự động kết nối"</string>
@@ -1440,10 +1440,10 @@
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Bạn quên mật khẩu?"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"Bạn quên hình mở khóa?"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"Bạn quên mã PIN?"</string>
-    <string name="lockpassword_confirm_your_pattern_generic" msgid="7692794426682501482">"Sử dụng hình mở khóa thiết bị của bạn để tiếp tục"</string>
-    <string name="lockpassword_confirm_your_pin_generic" msgid="9206928587904701094">"Nhập mã PIN thiết bị của bạn để tiếp tục"</string>
-    <string name="lockpassword_confirm_your_password_generic" msgid="2616127423884477152">"Nhập mật khẩu thiết bị của bạn để tiếp tục"</string>
-    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="9110305410672321714">"Sử dụng hình mở khóa công việc của bạn để tiếp tục"</string>
+    <string name="lockpassword_confirm_your_pattern_generic" msgid="7401165571170203743">"Hãy vẽ hình mở khoá để tiếp tục"</string>
+    <string name="lockpassword_confirm_your_pin_generic" msgid="8990266101852808091">"Hãy nhập mã PIN để tiếp tục"</string>
+    <string name="lockpassword_confirm_your_password_generic" msgid="8823867445451497224">"Hãy nhập mật khẩu để tiếp tục"</string>
+    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="7003851856761939690">"Hãy vẽ hình mở khoá cho hồ sơ công việc của bạn để tiếp tục"</string>
     <string name="lockpassword_confirm_your_pin_generic_profile" msgid="6524208128570235127">"Nhập mã PIN công việc của bạn để tiếp tục"</string>
     <string name="lockpassword_confirm_your_password_generic_profile" msgid="5918738487760814147">"Nhập mật khẩu công việc của bạn để tiếp tục"</string>
     <string name="lockpassword_strong_auth_required_device_pattern" msgid="113817518413715557">"Để tăng cường bảo mật, hãy sử dụng hình mở khóa thiết bị của bạn"</string>
@@ -4665,6 +4665,18 @@
     <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"Âm thanh của nội dung nghe nhìn tương thích sẽ trở nên sống động hơn"</string>
     <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"Theo dõi chuyển động của đầu"</string>
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"Âm thanh sẽ thay đổi khi bạn di chuyển đầu nhằm mang lại trải nghiệm nghe tự nhiên hơn"</string>
+    <!-- no translation found for bluetooth_details_audio_device_types_title (3381941189346781614) -->
+    <skip />
+    <!-- no translation found for bluetooth_details_audio_device_type_unknown (839337391037998014) -->
+    <skip />
+    <!-- no translation found for bluetooth_details_audio_device_type_speaker (3706227767994792124) -->
+    <skip />
+    <!-- no translation found for bluetooth_details_audio_device_type_headphones (7644588291215033798) -->
+    <skip />
+    <!-- no translation found for bluetooth_details_audio_device_type_carkit (4439017600454703229) -->
+    <skip />
+    <!-- no translation found for bluetooth_details_audio_device_type_other (7019481234617207563) -->
+    <skip />
     <string name="ingress_rate_limit_title" msgid="2106694002836274350">"Giới hạn tốc độ tải xuống của mạng"</string>
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"Định cấu hình giới hạn tốc độ truy cập băng thông mạng để áp dụng cho tất cả các mạng cung cấp khả năng kết nối Internet."</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"Định cấu hình giới hạn tốc độ tải xuống của mạng"</string>
@@ -4697,24 +4709,18 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"Gỡ cài đặt ứng dụng"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Ứng dụng được cài đặt trong vòng # tháng gần đây}other{Ứng dụng được cài đặt trong vòng # tháng gần đây}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Ứng dụng được cài đặt từ hơn # tháng trước}other{Ứng dụng được cài đặt từ hơn # tháng trước}}"</string>
-    <!-- no translation found for aspect_ratio_title (2451826875939676101) -->
-    <skip />
-    <!-- no translation found for aspect_ratio_summary (5944347596728740547) -->
-    <skip />
+    <string name="aspect_ratio_title" msgid="2451826875939676101">"Tỷ lệ khung hình"</string>
+    <string name="aspect_ratio_summary" msgid="5944347596728740547">"Chọn tỷ lệ khung hình để xem ứng dụng này trong trường hợp ứng dụng này chưa được thiết kế cho vừa với <xliff:g id="DEVICE_NAME">%1$s</xliff:g> của bạn"</string>
     <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"Các ứng dụng được đề xuất"</string>
     <string name="user_aspect_ratio_overridden_apps_label" msgid="1564914138276629704">"Các ứng dụng bạn đã ghi đè"</string>
     <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"Mặc định của ứng dụng"</string>
-    <!-- no translation found for user_aspect_ratio_fullscreen (1843427242540081996) -->
-    <skip />
-    <!-- no translation found for user_aspect_ratio_half_screen (1015852057094310209) -->
-    <skip />
-    <!-- no translation found for user_aspect_ratio_device_size (2339820985120881199) -->
-    <skip />
+    <string name="user_aspect_ratio_fullscreen" msgid="1843427242540081996">"Toàn màn hình"</string>
+    <string name="user_aspect_ratio_half_screen" msgid="1015852057094310209">"Nửa màn hình"</string>
+    <string name="user_aspect_ratio_device_size" msgid="2339820985120881199">"Tỷ lệ khung hình của thiết bị"</string>
     <string name="user_aspect_ratio_16_9" msgid="2286644872775170164">"16:9"</string>
     <string name="user_aspect_ratio_3_2" msgid="199262962518318932">"3:2"</string>
     <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4:3"</string>
-    <!-- no translation found for app_aspect_ratio_footer (8661813386126142251) -->
-    <skip />
+    <string name="app_aspect_ratio_footer" msgid="8661813386126142251">"Ứng dụng sẽ khởi động lại khi bạn thay đổi tỷ lệ khung hình. Bạn có thể bị mất các thay đổi chưa lưu"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Cảm biến vân tay"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Thông báo bằng đèn flash"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Giới thiệu về thông báo bằng đèn flash"</string>
