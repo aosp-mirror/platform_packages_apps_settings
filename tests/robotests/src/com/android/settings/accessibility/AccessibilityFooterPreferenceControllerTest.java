@@ -117,7 +117,7 @@ public class AccessibilityFooterPreferenceControllerTest {
         mPreference.onBindViewHolder(mPreferenceViewHolder);
 
         final TextView learnMoreView = (TextView) mPreferenceViewHolder
-                .findViewById(com.android.settingslib.R.id.settingslib_learn_more);
+                .findViewById(com.android.settingslib.widget.R.id.settingslib_learn_more);
         assertThat(learnMoreView.getContentDescription()).isNull();
         assertThat(learnMoreView.getVisibility()).isEqualTo(View.GONE);
         assertThat(mPreference.isLinkEnabled()).isFalse();
