@@ -35,19 +35,19 @@ class RemoteAuthSettingsTest {
     }
 
     @Test
-    fun testRemoteAuthenticatorSettings_hasHeader() {
+    fun testRemoteAuthenticatorSettings_headerVisible() {
         onView(withText(R.string.security_settings_remoteauth_settings_title)).check(
             matches(
-                isDisplayed()
+                withEffectiveVisibility(Visibility.VISIBLE)
             )
         )
     }
 
     @Test
-    fun testRemoteAuthenticatorSettings_hasDescription() {
+    fun testRemoteAuthenticatorSettings_descriptionVisible() {
         onView(withText(R.string.security_settings_remoteauth_settings_description)).check(
             matches(
-                isDisplayed()
+                withEffectiveVisibility(Visibility.VISIBLE)
             )
         )
     }

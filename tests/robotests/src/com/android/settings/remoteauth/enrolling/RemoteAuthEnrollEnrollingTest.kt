@@ -22,7 +22,6 @@ import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import com.android.settings.R
-import org.hamcrest.core.IsNot.not
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -36,10 +35,10 @@ class RemoteAuthEnrollEnrollingTest {
     }
 
     @Test
-    fun testRemoteAuthenticatorEnrollEnrolling_hasHeader() {
+    fun testRemoteAuthenticatorEnrollEnrolling_headerVisible() {
         onView(withText(R.string.security_settings_remoteauth_enroll_enrolling_title)).check(
             matches(
-                isDisplayed()
+                withEffectiveVisibility(Visibility.VISIBLE)
             )
         )
     }
@@ -54,12 +53,18 @@ class RemoteAuthEnrollEnrollingTest {
     }
 
     @Test
-    fun testRemoteAuthenticatorEnrollEnrolling_progressBarNotDisplayed() {
-        onView(withId(R.id.enrolling_list_progress_bar)).check(matches(not(isDisplayed())))
+    fun testRemoteAuthenticatorEnrollEnrolling_progressBarNotVisible() {
+        onView(withId(R.id.enrolling_list_progress_bar)).check(
+            matches(
+                withEffectiveVisibility(
+                    Visibility.INVISIBLE
+                )
+            )
+        )
     }
 
     @Test
-    fun testRemoteAuthenticatorEnrollEnrolling_errorTextNotDisplayed() {
-        onView(withId(R.id.error_text)).check(matches(not(isDisplayed())))
+    fun testRemoteAuthenticatorEnrollEnrolling_errorTextNotVisible() {
+        onView(withId(R.id.error_text)).check(matches(withEffectiveVisibility(Visibility.INVISIBLE)))
     }
 }
