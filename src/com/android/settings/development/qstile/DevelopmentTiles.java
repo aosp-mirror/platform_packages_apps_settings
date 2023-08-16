@@ -29,9 +29,7 @@ import android.database.ContentObserver;
 import android.hardware.SensorPrivacyManager;
 import android.net.Uri;
 import android.os.Handler;
-import android.os.IBinder;
 import android.os.Looper;
-import android.os.Parcel;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemProperties;
@@ -45,10 +43,7 @@ import android.view.ThreadedRenderer;
 import android.view.WindowManagerGlobal;
 import android.widget.Toast;
 
-import androidx.annotation.VisibleForTesting;
-
 import com.android.internal.app.LocalePicker;
-import com.android.internal.inputmethod.ImeTracing;
 import com.android.internal.statusbar.IStatusBarService;
 import com.android.settings.development.WirelessDebuggingPreferenceController;
 import com.android.settings.overlay.FeatureFactory;
@@ -199,173 +194,6 @@ public abstract class DevelopmentTiles extends TileService {
                 wm.setAnimationScale(1, scale);
                 wm.setAnimationScale(2, scale);
             } catch (RemoteException e) {
-            }
-        }
-    }
-
-    /**
-     * Tile to toggle Winscope trace which consists of Window and Layer traces.
-     */
-    public static class WinscopeTrace extends DevelopmentTiles {
-        @VisibleForTesting
-        static final int SURFACE_FLINGER_LAYER_TRACE_CONTROL_CODE = 1025;
-        @VisibleForTesting
-        static final int SURFACE_FLINGER_LAYER_TRACE_STATUS_CODE = 1026;
-        private static final String VIEW_CAPTURE_ENABLED = "view_capture_enabled";
-        private IBinder mSurfaceFlinger;
-        private IWindowManager mWindowManager;
-        private ImeTracing mImeTracing;
-        private Toast mToast;
-
-        @Override
-        public void onCreate() {
-            super.onCreate();
-            mWindowManager = WindowManagerGlobal.getWindowManagerService();
-            mSurfaceFlinger = ServiceManager.getService("SurfaceFlinger");
-            mImeTracing = ImeTracing.getInstance();
-            Context context = getApplicationContext();
-            CharSequence text = "Trace files written to /data/misc/wmtrace";
-            mToast = Toast.makeText(context, text, Toast.LENGTH_LONG);
-        }
-
-        private boolean isWindowTraceEnabled() {
-            try {
-                return mWindowManager.isWindowTraceEnabled();
-            } catch (RemoteException e) {
-                Log.e(TAG,
-                        "Could not get window trace status, defaulting to false." + e.toString());
-            }
-            return false;
-        }
-
-        private boolean isLayerTraceEnabled() {
-            boolean layerTraceEnabled = false;
-            Parcel reply = null;
-            Parcel data = null;
-            try {
-                if (mSurfaceFlinger != null) {
-                    reply = Parcel.obtain();
-                    data = Parcel.obtain();
-                    data.writeInterfaceToken("android.ui.ISurfaceComposer");
-                    mSurfaceFlinger.transact(SURFACE_FLINGER_LAYER_TRACE_STATUS_CODE,
-                            data, reply, 0 /* flags */);
-                    layerTraceEnabled = reply.readBoolean();
-                }
-            } catch (RemoteException e) {
-                Log.e(TAG, "Could not get layer trace status, defaulting to false." + e.toString());
-            } finally {
-                if (data != null) {
-                    data.recycle();
-                    reply.recycle();
-                }
-            }
-            return layerTraceEnabled;
-        }
-
-        private boolean isSystemUiTracingEnabled() {
-            try {
-                final IStatusBarService statusBarService = IStatusBarService.Stub.asInterface(
-                        ServiceManager.checkService(Context.STATUS_BAR_SERVICE));
-                if (statusBarService != null) {
-                    return statusBarService.isTracing();
-                }
-            } catch (RemoteException e) {
-                Log.e(TAG, "Could not get system ui tracing status." + e.toString());
-            }
-            return false;
-        }
-
-        private boolean isImeTraceEnabled() {
-            return mImeTracing.isEnabled();
-        }
-
-        private boolean isViewCaptureEnabled() {
-            // Add null checking to avoid test case failure.
-            if (getApplicationContext() != null) {
-                return Settings.Global.getInt(getApplicationContext().getContentResolver(),
-                    VIEW_CAPTURE_ENABLED, 0) != 0;
-            }
-            return false;
-        }
-
-        @Override
-        protected boolean isEnabled() {
-            return isWindowTraceEnabled() || isLayerTraceEnabled() || isSystemUiTracingEnabled()
-                    || isImeTraceEnabled() || isViewCaptureEnabled();
-        }
-
-        private void setWindowTraceEnabled(boolean isEnabled) {
-            try {
-                if (isEnabled) {
-                    mWindowManager.startWindowTrace();
-                } else {
-                    mWindowManager.stopWindowTrace();
-                }
-            } catch (RemoteException e) {
-                Log.e(TAG, "Could not set window trace status." + e.toString());
-            }
-        }
-
-        private void setLayerTraceEnabled(boolean isEnabled) {
-            Parcel data = null;
-            try {
-                if (mSurfaceFlinger != null) {
-                    data = Parcel.obtain();
-                    data.writeInterfaceToken("android.ui.ISurfaceComposer");
-                    data.writeInt(isEnabled ? 1 : 0);
-                    mSurfaceFlinger.transact(SURFACE_FLINGER_LAYER_TRACE_CONTROL_CODE,
-                            data, null, 0 /* flags */);
-                }
-            } catch (RemoteException e) {
-                Log.e(TAG, "Could not set layer tracing." + e.toString());
-            } finally {
-                if (data != null) {
-                    data.recycle();
-                }
-            }
-        }
-
-        private void setSystemUiTracing(boolean isEnabled) {
-            try {
-                final IStatusBarService statusBarService = IStatusBarService.Stub.asInterface(
-                        ServiceManager.checkService(Context.STATUS_BAR_SERVICE));
-                if (statusBarService != null) {
-                    if (isEnabled) {
-                        statusBarService.startTracing();
-                    } else {
-                        statusBarService.stopTracing();
-                    }
-                }
-            } catch (RemoteException e) {
-                Log.e(TAG, "Could not set system ui tracing." + e.toString());
-            }
-        }
-
-        private void setImeTraceEnabled(boolean isEnabled) {
-            if (isEnabled) {
-                mImeTracing.startImeTrace();
-            } else {
-                mImeTracing.stopImeTrace();
-            }
-        }
-
-        private void setViewCaptureEnabled(boolean isEnabled) {
-            // Add null checking to avoid test case failure.
-            if (getApplicationContext() != null) {
-                Settings.Global.putInt(getApplicationContext()
-                        .getContentResolver(), VIEW_CAPTURE_ENABLED, isEnabled ? 1 : 0);
-            }
-        }
-
-        @Override
-        protected void setIsEnabled(boolean isEnabled) {
-            setWindowTraceEnabled(isEnabled);
-            setLayerTraceEnabled(isEnabled);
-            setSystemUiTracing(isEnabled);
-            setImeTraceEnabled(isEnabled);
-            setViewCaptureEnabled(isEnabled);
-            if (!isEnabled) {
-                mToast.show();
             }
         }
     }
