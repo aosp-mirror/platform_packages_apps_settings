@@ -17,7 +17,7 @@ android_app {
     platform_apis: true,
     certificate: "platform",
     privileged: true,
-
+    use_resource_processor: true,
     resource_dirs: ["res"],
 
     static_libs: [

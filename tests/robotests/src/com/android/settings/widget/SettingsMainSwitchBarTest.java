@@ -21,7 +21,7 @@ import static com.google.common.truth.Truth.assertThat;
 import android.content.Context;
 import android.widget.TextView;
 
-import com.android.settingslib.R;
+import com.android.settings.R;
 import com.android.settingslib.RestrictedLockUtils;
 
 import org.junit.Before;
