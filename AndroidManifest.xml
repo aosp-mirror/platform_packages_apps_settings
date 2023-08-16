@@ -2610,6 +2610,18 @@
 
         <activity android:name=".biometrics.activeunlock.ActiveUnlockRequireBiometricSetup" android:exported="false"/>
 
+        <activity android:name=".remoteauth.RemoteAuthActivity"
+                  android:exported="true">
+            <intent-filter>
+                <action android:name="android.settings.REMOTE_AUTHENTICATOR_ENROLL" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".remoteauth.RemoteAuthActivityInternal"
+                  android:exported="false"
+                  android:taskAffinity="com.android.settings.root" />
+
         <!-- Note this must not be exported since it returns the password in the intent -->
         <activity android:name=".password.ConfirmLockPattern$InternalActivity"
             android:exported="false"
