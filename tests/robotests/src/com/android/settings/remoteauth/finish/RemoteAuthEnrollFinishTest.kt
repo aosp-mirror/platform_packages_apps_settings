@@ -36,19 +36,19 @@ class RemoteAuthEnrollFinishTest {
     }
 
     @Test
-    fun testRemoteAuthenticatorEnrollFinish_hasHeader() {
+    fun testRemoteAuthenticatorEnrollFinish_headerVisible() {
         onView(withText(R.string.security_settings_remoteauth_enroll_finish_title)).check(
             matches(
-                isDisplayed()
+                withEffectiveVisibility(Visibility.VISIBLE)
             )
         )
     }
 
     @Test
-    fun testRemoteAuthenticatorEnrollFinish_hasDescription() {
+    fun testRemoteAuthenticatorEnrollFinish_descriptionVisible() {
         onView(withText(R.string.security_settings_remoteauth_enroll_finish_description)).check(
             matches(
-                isDisplayed()
+                withEffectiveVisibility(Visibility.VISIBLE)
             )
         )
     }
