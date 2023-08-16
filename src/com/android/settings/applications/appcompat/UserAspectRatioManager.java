@@ -16,6 +16,11 @@
 
 package com.android.settings.applications.appcompat;
 
+import static android.view.WindowManager.PROPERTY_COMPAT_ALLOW_USER_ASPECT_RATIO_FULLSCREEN_OVERRIDE;
+import static android.view.WindowManager.PROPERTY_COMPAT_ALLOW_USER_ASPECT_RATIO_OVERRIDE;
+
+import static java.lang.Boolean.FALSE;
+
 import android.app.AppGlobals;
 import android.content.Context;
 import android.content.Intent;
@@ -63,7 +68,7 @@ public class UserAspectRatioManager {
     public UserAspectRatioManager(@NonNull Context context) {
         mContext = context;
         mIPm = AppGlobals.getPackageManager();
-        mInfoHasLauncherEntryList = context.getPackageManager().queryIntentActivities(
+        mInfoHasLauncherEntryList = mContext.getPackageManager().queryIntentActivities(
                 UserAspectRatioManager.LAUNCHER_ENTRY_INTENT, PackageManager.GET_META_DATA);
         mUserAspectRatioMap = getUserMinAspectRatioMapping();
     }
@@ -85,7 +90,7 @@ public class UserAspectRatioManager {
     public int getUserMinAspectRatioValue(@NonNull String packageName, int uid)
             throws RemoteException {
         final int aspectRatio = mIPm.getUserMinAspectRatio(packageName, uid);
-        return containsAspectRatioOption(aspectRatio)
+        return hasAspectRatioOption(aspectRatio, packageName)
                 ? aspectRatio : PackageManager.USER_MIN_ASPECT_RATIO_UNSET;
     }
 
@@ -93,8 +98,9 @@ public class UserAspectRatioManager {
      * @return corresponding string for {@link PackageManager.UserMinAspectRatio} value
      */
     @NonNull
-    public String getUserMinAspectRatioEntry(@PackageManager.UserMinAspectRatio int aspectRatio) {
-        if (!containsAspectRatioOption(aspectRatio))  {
+    public String getUserMinAspectRatioEntry(@PackageManager.UserMinAspectRatio int aspectRatio,
+            String packageName) {
+        if (!hasAspectRatioOption(aspectRatio, packageName))  {
             return mUserAspectRatioMap.get(PackageManager.USER_MIN_ASPECT_RATIO_UNSET);
         }
         return mUserAspectRatioMap.get(aspectRatio);
@@ -107,7 +113,7 @@ public class UserAspectRatioManager {
     public String getUserMinAspectRatioEntry(@NonNull String packageName, int uid)
             throws RemoteException {
         final int aspectRatio = getUserMinAspectRatioValue(packageName, uid);
-        return getUserMinAspectRatioEntry(aspectRatio);
+        return getUserMinAspectRatioEntry(aspectRatio, packageName);
     }
 
     /**
@@ -115,9 +121,10 @@ public class UserAspectRatioManager {
      * {@link R.array.config_userAspectRatioOverrideValues}
      * and is enabled by device config
      */
-    public boolean containsAspectRatioOption(@PackageManager.UserMinAspectRatio int option) {
+    public boolean hasAspectRatioOption(@PackageManager.UserMinAspectRatio int option,
+            String packageName) {
         if (option == PackageManager.USER_MIN_ASPECT_RATIO_FULLSCREEN
-                && !isFullscreenOptionEnabled()) {
+                && !isFullscreenOptionEnabled(packageName)) {
             return false;
         }
         return mUserAspectRatioMap.containsKey(option);
@@ -136,21 +143,26 @@ public class UserAspectRatioManager {
      * will be overridable.
      */
     public boolean canDisplayAspectRatioUi(@NonNull ApplicationInfo app) {
+        Boolean appAllowsUserAspectRatioOverride = readComponentProperty(
+                mContext.getPackageManager(), app.packageName,
+                PROPERTY_COMPAT_ALLOW_USER_ASPECT_RATIO_OVERRIDE);
         boolean hasLauncherEntry = mInfoHasLauncherEntryList.stream()
                 .anyMatch(info -> info.activityInfo.packageName.equals(app.packageName));
-        return hasLauncherEntry;
+        return !FALSE.equals(appAllowsUserAspectRatioOverride) && hasLauncherEntry;
     }
 
     /**
      * Whether fullscreen option in per-app user aspect ratio settings is enabled
      */
     @VisibleForTesting
-    boolean isFullscreenOptionEnabled() {
+    boolean isFullscreenOptionEnabled(String packageName) {
+        Boolean appAllowsFullscreenOption = readComponentProperty(mContext.getPackageManager(),
+                packageName, PROPERTY_COMPAT_ALLOW_USER_ASPECT_RATIO_FULLSCREEN_OVERRIDE);
         final boolean isBuildTimeFlagEnabled = mContext.getResources().getBoolean(
                 com.android.internal.R.bool.config_appCompatUserAppAspectRatioFullscreenIsEnabled);
-        return isBuildTimeFlagEnabled && getValueFromDeviceConfig(
-                KEY_ENABLE_USER_ASPECT_RATIO_FULLSCREEN,
-                DEFAULT_VALUE_ENABLE_USER_ASPECT_RATIO_FULLSCREEN);
+        return !FALSE.equals(appAllowsFullscreenOption) && isBuildTimeFlagEnabled
+                && getValueFromDeviceConfig(KEY_ENABLE_USER_ASPECT_RATIO_FULLSCREEN,
+                    DEFAULT_VALUE_ENABLE_USER_ASPECT_RATIO_FULLSCREEN);
     }
 
     private static boolean getValueFromDeviceConfig(String name, boolean defaultValue) {
@@ -215,6 +227,17 @@ public class UserAspectRatioManager {
             default:
                 return mContext.getString(R.string.user_aspect_ratio_app_default);
         }
+    }
+
+    @Nullable
+    private static Boolean readComponentProperty(PackageManager pm, String packageName,
+            String propertyName) {
+        try {
+            return pm.getProperty(propertyName, packageName).getBoolean();
+        } catch (PackageManager.NameNotFoundException e) {
+            // No such property name
+        }
+        return null;
     }
 
     @VisibleForTesting
