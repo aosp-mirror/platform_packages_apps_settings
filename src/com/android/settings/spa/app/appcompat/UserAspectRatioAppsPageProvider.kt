@@ -121,7 +121,7 @@ fun UserAspectRatioAppList(
 
 data class UserAspectRatioAppListItemModel(
     override val app: ApplicationInfo,
-    val override: Int,
+    val userOverride: Int,
     val suggested: Boolean,
     val canDisplay: Boolean,
 ) : AppRecord
@@ -136,7 +136,7 @@ class UserAspectRatioAppListModel(private val context: Context)
         recordList: List<UserAspectRatioAppListItemModel>
     ): List<SpinnerOption> {
         val hasSuggested = recordList.any { it.suggested }
-        val hasOverride = recordList.any { it.override != USER_MIN_ASPECT_RATIO_UNSET }
+        val hasOverride = recordList.any { it.userOverride != USER_MIN_ASPECT_RATIO_UNSET }
         val options = mutableListOf(SpinnerItem.All)
         // Add suggested filter first as default
         if (hasSuggested) options.add(0, SpinnerItem.Suggested)
@@ -164,7 +164,7 @@ class UserAspectRatioAppListModel(private val context: Context)
                     app = app,
                     suggested = !app.isSystemApp && getPackageAndActivityInfo(
                                     app)?.isFixedOrientationOrAspectRatio() == true,
-                    override = userAspectRatioManager.getUserMinAspectRatioValue(
+                    userOverride = userAspectRatioManager.getUserMinAspectRatioValue(
                                     app.packageName, uid),
                     canDisplay = userAspectRatioManager.canDisplayAspectRatioUi(app),
                 )
@@ -178,16 +178,17 @@ class UserAspectRatioAppListModel(private val context: Context)
     ): Flow<List<UserAspectRatioAppListItemModel>> = recordListFlow.filterItem(
         when (SpinnerItem.values().getOrNull(option)) {
             SpinnerItem.Suggested -> ({ it.canDisplay && it.suggested })
-            SpinnerItem.Overridden -> ({ it.override != USER_MIN_ASPECT_RATIO_UNSET })
+            SpinnerItem.Overridden -> ({ it.userOverride != USER_MIN_ASPECT_RATIO_UNSET })
             else -> ({ it.canDisplay })
         }
     )
 
     @Composable
     override fun getSummary(option: Int, record: UserAspectRatioAppListItemModel) : State<String> =
-        remember(record.override) {
+        remember(record.userOverride) {
             flow {
-                emit(userAspectRatioManager.getUserMinAspectRatioEntry(record.override))
+                emit(userAspectRatioManager.getUserMinAspectRatioEntry(record.userOverride,
+                    record.app.packageName))
             }.flowOn(Dispatchers.IO)
         }.collectAsStateWithLifecycle(initialValue = stringResource(R.string.summary_placeholder))
 
