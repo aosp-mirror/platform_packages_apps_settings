@@ -227,7 +227,7 @@ public class WifiConfigController2 implements TextWatcher,
     private final WifiManager mWifiManager;
     private boolean mIsTrustOnFirstUseSupported;
 
-    private final List<SubscriptionInfo> mActiveSubscriptionInfos = new ArrayList<>();
+    private final ArrayMap<Integer, SubscriptionInfo> mActiveSubscriptionInfos = new ArrayMap<>();
 
     public WifiConfigController2(WifiConfigUiBase2 parent, View view, WifiEntry wifiEntry,
             int mode) {
@@ -716,7 +716,7 @@ public class WifiConfigController2 implements TextWatcher,
                 if (config.enterpriseConfig.isAuthenticationSimBased()
                         && mActiveSubscriptionInfos.size() > 0) {
                     config.carrierId = mActiveSubscriptionInfos
-                            .get(mEapSimSpinner.getSelectedItemPosition()).getCarrierId();
+                            .valueAt(mEapSimSpinner.getSelectedItemPosition()).getCarrierId();
                 }
 
                 String caCert = (String) mEapCaCertSpinner.getSelectedItem();
@@ -1137,11 +1137,9 @@ public class WifiConfigController2 implements TextWatcher,
             }
 
             if (enterpriseConfig.isAuthenticationSimBased()) {
-                for (int i = 0; i < mActiveSubscriptionInfos.size(); i++) {
-                    if (wifiConfig.carrierId == mActiveSubscriptionInfos.get(i).getCarrierId()) {
-                        mEapSimSpinner.setSelection(i);
-                        break;
-                    }
+                int index = mActiveSubscriptionInfos.indexOfKey(wifiConfig.carrierId);
+                if (index > -1) {
+                    mEapSimSpinner.setSelection(index);
                 }
             }
 
@@ -1517,18 +1515,8 @@ public class WifiConfigController2 implements TextWatcher,
         }
         mActiveSubscriptionInfos.clear();
 
-        // De-duplicates active subscriptions and caches in mActiveSubscriptionInfos.
-        for (SubscriptionInfo newInfo : activeSubscriptionInfos) {
-            for (SubscriptionInfo cachedInfo : mActiveSubscriptionInfos) {
-                if (newInfo.getCarrierId() == cachedInfo.getCarrierId()) {
-                    continue;
-                }
-            }
-            mActiveSubscriptionInfos.add(newInfo);
-        }
-
         // Shows disabled 'No SIM' when there is no active subscription.
-        if (mActiveSubscriptionInfos.size() == 0) {
+        if (activeSubscriptionInfos.isEmpty()) {
             final String[] noSim = new String[]{mContext.getString(R.string.wifi_no_sim_card)};
             mEapSimSpinner.setAdapter(getSpinnerAdapter(noSim));
             mEapSimSpinner.setSelection(0 /* position */);
@@ -1539,7 +1527,7 @@ public class WifiConfigController2 implements TextWatcher,
         // Shows display name of each active subscription.
         ArrayMap<Integer, CharSequence> displayNames = new ArrayMap<>();
         int defaultDataSubscriptionId = SubscriptionManager.getDefaultDataSubscriptionId();
-        for (SubscriptionInfo activeSubInfo : mActiveSubscriptionInfos) {
+        for (SubscriptionInfo activeSubInfo : activeSubscriptionInfos) {
             // If multiple SIMs have the same carrier id, only the first or default data SIM is
             // displayed.
             if (displayNames.containsKey(activeSubInfo.getCarrierId())
@@ -1548,6 +1536,7 @@ public class WifiConfigController2 implements TextWatcher,
             }
             displayNames.put(activeSubInfo.getCarrierId(),
                     SubscriptionUtil.getUniqueSubscriptionDisplayName(activeSubInfo, mContext));
+            mActiveSubscriptionInfos.put(activeSubInfo.getCarrierId(), activeSubInfo);
         }
         mEapSimSpinner.setAdapter(
                 getSpinnerAdapter(displayNames.values().toArray(new String[displayNames.size()])));
