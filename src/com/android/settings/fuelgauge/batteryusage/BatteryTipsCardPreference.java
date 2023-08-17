@@ -50,6 +50,7 @@ public class BatteryTipsCardPreference extends Preference implements View.OnClic
     private final MetricsFeatureProvider mMetricsFeatureProvider;
 
     private String mAnomalyEventId;
+    private PowerAnomalyKey mPowerAnomalyKey;
 
     @VisibleForTesting
     CharSequence mMainButtonLabel;
@@ -69,6 +70,7 @@ public class BatteryTipsCardPreference extends Preference implements View.OnClic
         final FeatureFactory featureFactory = FeatureFactory.getFactory(context);
         mPowerUsageFeatureProvider =  featureFactory.getPowerUsageFeatureProvider(context);
         mMetricsFeatureProvider = featureFactory.getMetricsFeatureProvider();
+        mPowerAnomalyKey = null;
     }
 
     /**
@@ -96,6 +98,13 @@ public class BatteryTipsCardPreference extends Preference implements View.OnClic
             mDismissButtonLabel = label;
             notifyChanged();
         }
+    }
+
+    /**
+     * Sets the power anomaly key of battery tips card.
+     */
+    public void setPowerAnomalyKey(final PowerAnomalyKey powerAnomalyKey) {
+        mPowerAnomalyKey = powerAnomalyKey;
     }
 
     /**
@@ -133,6 +142,9 @@ public class BatteryTipsCardPreference extends Preference implements View.OnClic
             setVisible(false);
             mMetricsFeatureProvider.action(
                     getContext(), SettingsEnums.ACTION_BATTERY_TIPS_CARD_DISMISS, mAnomalyEventId);
+            if (mPowerAnomalyKey != null) {
+                DatabaseUtils.setDismissedPowerAnomalyKeys(getContext(), mPowerAnomalyKey.name());
+            }
         }
     }
 

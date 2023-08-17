@@ -74,6 +74,7 @@ public final class BatteryUsageDataLoader {
                     context, DatabaseUtils.KEY_LAST_LOAD_FULL_CHARGE_TIME);
             DatabaseUtils.sendBatteryEventData(context, ConvertUtils.convertToBatteryEvent(
                     currentTime, BatteryEventType.FULL_CHARGED, 100));
+            DatabaseUtils.removeDismissedPowerAnomalyKeys(context);
         }
 
         // Uploads the BatteryEntry data into database.
