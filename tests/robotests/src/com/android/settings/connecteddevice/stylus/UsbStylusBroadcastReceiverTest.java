@@ -95,4 +95,32 @@ public class UsbStylusBroadcastReceiverTest {
 
         verifyNoMoreInteractions(mListener);
     }
+
+    @Test
+    public void onReceive_usbDeviceStateStylus_invokeCallback() {
+        when(mFeatureFactory.mStylusFeatureProvider.isUsbFirmwareUpdateEnabled(any()))
+                .thenReturn(true);
+        final UsbDevice usbDevice = mock(UsbDevice.class);
+        final Intent intent = new Intent();
+        intent.setAction(UsbManager.ACTION_USB_STATE);
+        intent.putExtra(UsbManager.EXTRA_DEVICE, usbDevice);
+
+        mReceiver.onReceive(mContext, intent);
+
+        verify(mListener).onUsbStylusConnectionChanged(usbDevice, false);
+    }
+
+    @Test
+    public void onReceive_usbDeviceStateNotStylus_doesNotInvokeCallback() {
+        when(mFeatureFactory.mStylusFeatureProvider.isUsbFirmwareUpdateEnabled(any()))
+                .thenReturn(false);
+        final UsbDevice usbDevice = mock(UsbDevice.class);
+        final Intent intent = new Intent();
+        intent.setAction(UsbManager.ACTION_USB_STATE);
+        intent.putExtra(UsbManager.EXTRA_DEVICE, usbDevice);
+
+        mReceiver.onReceive(mContext, intent);
+
+        verifyNoMoreInteractions(mListener);
+    }
 }
