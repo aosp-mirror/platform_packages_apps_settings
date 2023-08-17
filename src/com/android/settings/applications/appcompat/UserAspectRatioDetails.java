@@ -201,11 +201,12 @@ public class UserAspectRatioDetails extends AppInfoWithHeader implements
         if (pref == null) {
             return;
         }
-        if (!mUserAspectRatioManager.containsAspectRatioOption(aspectRatio)) {
+        if (!mUserAspectRatioManager.hasAspectRatioOption(aspectRatio, mPackageName)) {
             pref.setVisible(false);
             return;
         }
-        pref.setTitle(mUserAspectRatioManager.getUserMinAspectRatioEntry(aspectRatio));
+        pref.setTitle(mUserAspectRatioManager.getUserMinAspectRatioEntry(aspectRatio,
+                mPackageName));
         pref.setOnClickListener(this);
         mAspectRatioPreferences.add(pref);
     }
