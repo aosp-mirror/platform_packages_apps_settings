@@ -50,6 +50,7 @@ import android.view.ViewOutlineProvider;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.core.graphics.ColorUtils;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -176,7 +177,8 @@ public class NotificationHistoryActivity extends CollapsingToolbarBaseActivity {
                     com.android.internal.R.id.expand_button);
             int textColor = obtainThemeColor(android.R.attr.textColorPrimary);
             int backgroundColor = obtainThemeColor(android.R.attr.colorBackgroundFloating);
-            expand.setDefaultPillColor(backgroundColor);
+            int pillColor = ColorUtils.blendARGB(textColor, backgroundColor, 0.9f);
+            expand.setDefaultPillColor(pillColor);
             expand.setDefaultTextColor(textColor);
             expand.setExpanded(false);
             header.setStateDescription(container.getVisibility() == View.VISIBLE
