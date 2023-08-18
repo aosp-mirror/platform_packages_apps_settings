@@ -25,33 +25,27 @@ import androidx.room.Query;
 
 import java.util.List;
 
-/** Data access object for accessing {@link BatteryEventEntity} in the database. */
+/** Data access object for accessing {@link BatteryUsageSlotEntity} in the database. */
 @Dao
-public interface BatteryEventDao {
-    /** Inserts a {@link BatteryEventEntity} data into the database. */
+public interface BatteryUsageSlotDao {
+    /** Inserts a {@link BatteryUsageSlotEntity} data into the database. */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(BatteryEventEntity event);
+    void insert(BatteryUsageSlotEntity event);
 
     /** Gets all recorded data. */
-    @Query("SELECT * FROM BatteryEventEntity ORDER BY timestamp DESC")
-    List<BatteryEventEntity> getAll();
-
-    /** Gets the {@link Cursor} of the last full charge time . */
-    @Query("SELECT MAX(timestamp) FROM BatteryEventEntity"
-            + " WHERE batteryEventType = 3")  // BatteryEventType.FULL_CHARGED = 3
-    Cursor getLastFullChargeTimestamp();
+    @Query("SELECT * FROM BatteryUsageSlotEntity ORDER BY timestamp ASC")
+    List<BatteryUsageSlotEntity> getAll();
 
     /** Gets the {@link Cursor} of all recorded data after a specific timestamp. */
-    @Query("SELECT * FROM BatteryEventEntity"
-            + " WHERE timestamp > :timestamp AND batteryEventType IN (:batteryEventTypes)"
-            + " ORDER BY timestamp DESC")
-    Cursor getAllAfter(long timestamp, List<Integer> batteryEventTypes);
+    @Query("SELECT * FROM BatteryUsageSlotEntity WHERE timestamp >= :timestamp"
+            + " ORDER BY timestamp ASC")
+    Cursor getAllAfter(long timestamp);
 
     /** Deletes all recorded data before a specific timestamp. */
-    @Query("DELETE FROM BatteryEventEntity WHERE timestamp <= :timestamp")
+    @Query("DELETE FROM BatteryUsageSlotEntity WHERE timestamp <= :timestamp")
     void clearAllBefore(long timestamp);
 
     /** Clears all recorded data in the database. */
-    @Query("DELETE FROM BatteryEventEntity")
+    @Query("DELETE FROM BatteryUsageSlotEntity")
     void clearAll();
 }

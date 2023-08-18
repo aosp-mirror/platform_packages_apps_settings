@@ -173,8 +173,8 @@ public final class DatabaseUtilsTest {
         doReturn(null).when(mContext).registerReceiver(any(), any());
         assertThat(
                 DatabaseUtils.sendBatteryEntryData(
-                        mContext, /*batteryEntryList=*/ null, mBatteryUsageStats,
-                        /*isFullChargeStart=*/ false))
+                        mContext, System.currentTimeMillis(), /*batteryEntryList=*/ null,
+                        mBatteryUsageStats, /*isFullChargeStart=*/ false))
                 .isNull();
     }
 
@@ -193,7 +193,10 @@ public final class DatabaseUtilsTest {
 
         final List<ContentValues> valuesList =
                 DatabaseUtils.sendBatteryEntryData(
-                        mContext, batteryEntryList, mBatteryUsageStats,
+                        mContext,
+                        System.currentTimeMillis(),
+                        batteryEntryList,
+                        mBatteryUsageStats,
                         /*isFullChargeStart=*/ false);
 
         assertThat(valuesList).hasSize(2);
@@ -216,6 +219,7 @@ public final class DatabaseUtilsTest {
         final List<ContentValues> valuesList =
                 DatabaseUtils.sendBatteryEntryData(
                         mContext,
+                        System.currentTimeMillis(),
                         new ArrayList<>(),
                         mBatteryUsageStats,
                         /*isFullChargeStart=*/ false);
@@ -235,6 +239,7 @@ public final class DatabaseUtilsTest {
         final List<ContentValues> valuesList =
                 DatabaseUtils.sendBatteryEntryData(
                         mContext,
+                        System.currentTimeMillis(),
                         /*batteryEntryList=*/ null,
                         mBatteryUsageStats,
                         /*isFullChargeStart=*/ false);
@@ -254,6 +259,7 @@ public final class DatabaseUtilsTest {
         final List<ContentValues> valuesList =
                 DatabaseUtils.sendBatteryEntryData(
                         mContext,
+                        System.currentTimeMillis(),
                         /*batteryEntryList=*/ null,
                         /*batteryUsageStats=*/ null,
                         /*isFullChargeStart=*/ false);
@@ -359,7 +365,7 @@ public final class DatabaseUtilsTest {
     }
 
     @Test
-    public void getHistoryMapSinceLastFullCharge_emptyCursorContent_returnEmptyMap() {
+    public void getHistoryMap_emptyCursorContent_returnEmptyMap() {
         final MatrixCursor cursor = new MatrixCursor(
                 new String[] {
                         BatteryHistEntry.KEY_UID,
@@ -367,36 +373,33 @@ public final class DatabaseUtilsTest {
                         BatteryHistEntry.KEY_TIMESTAMP});
         DatabaseUtils.sFakeSupplier = () -> cursor;
 
-        assertThat(DatabaseUtils.getHistoryMapSinceLastFullCharge(
-                mContext, /*calendar=*/ null)).isEmpty();
+        assertThat(DatabaseUtils.getHistoryMapSinceQueryTimestamp(mContext, 0)).isEmpty();
     }
 
     @Test
-    public void getHistoryMapSinceLastFullCharge_nullCursor_returnEmptyMap() {
+    public void getHistoryMap_nullCursor_returnEmptyMap() {
         DatabaseUtils.sFakeSupplier = () -> null;
-        assertThat(DatabaseUtils.getHistoryMapSinceLastFullCharge(
-                mContext, /*calendar=*/ null)).isEmpty();
+        assertThat(DatabaseUtils.getHistoryMapSinceQueryTimestamp(mContext, 0)).isEmpty();
     }
 
     @Test
-    public void getHistoryMapSinceLastFullCharge_returnExpectedMap() {
+    public void getHistoryMap_returnExpectedMap() {
         final Long timestamp1 = Long.valueOf(1001L);
         final Long timestamp2 = Long.valueOf(1002L);
         final MatrixCursor cursor = getMatrixCursor();
         // Adds fake data into the cursor.
         cursor.addRow(new Object[] {
-                "app name1", timestamp1, 1, ConvertUtils.CONSUMER_TYPE_UID_BATTERY});
+                "app name1", timestamp1, 1, ConvertUtils.CONSUMER_TYPE_UID_BATTERY, true});
         cursor.addRow(new Object[] {
-                "app name2", timestamp2, 2, ConvertUtils.CONSUMER_TYPE_UID_BATTERY});
+                "app name2", timestamp2, 2, ConvertUtils.CONSUMER_TYPE_UID_BATTERY, false});
         cursor.addRow(new Object[] {
-                "app name3", timestamp2, 3, ConvertUtils.CONSUMER_TYPE_UID_BATTERY});
+                "app name3", timestamp2, 3, ConvertUtils.CONSUMER_TYPE_UID_BATTERY, false});
         cursor.addRow(new Object[] {
-                "app name4", timestamp2, 4, ConvertUtils.CONSUMER_TYPE_UID_BATTERY});
+                "app name4", timestamp2, 4, ConvertUtils.CONSUMER_TYPE_UID_BATTERY, false});
         DatabaseUtils.sFakeSupplier = () -> cursor;
 
         final Map<Long, Map<String, BatteryHistEntry>> batteryHistMap =
-                DatabaseUtils.getHistoryMapSinceLastFullCharge(
-                        mContext, /*calendar=*/ null);
+                DatabaseUtils.getHistoryMapSinceQueryTimestamp(mContext, timestamp1);
 
         assertThat(batteryHistMap).hasSize(2);
         // Verifies the BatteryHistEntry data for timestamp1.
@@ -412,7 +415,7 @@ public final class DatabaseUtilsTest {
     }
 
     @Test
-    public void getHistoryMapSinceLastFullCharge_withWorkProfile_returnExpectedMap()
+    public void getHistoryMap_withWorkProfile_returnExpectedMap()
             throws PackageManager.NameNotFoundException {
         doReturn("com.fake.package").when(mContext).getPackageName();
         doReturn(mMockContext).when(mContext).createPackageContextAsUser(
@@ -425,8 +428,7 @@ public final class DatabaseUtilsTest {
         DatabaseUtils.sFakeSupplier = () -> getMatrixCursor();
 
         final Map<Long, Map<String, BatteryHistEntry>> batteryHistMap =
-                DatabaseUtils.getHistoryMapSinceLastFullCharge(
-                        mContext, /*calendar=*/ null);
+                DatabaseUtils.getHistoryMapSinceQueryTimestamp(mContext, 0);
 
         assertThat(batteryHistMap).isEmpty();
     }
@@ -571,6 +573,7 @@ public final class DatabaseUtilsTest {
                         BatteryHistEntry.KEY_PACKAGE_NAME,
                         BatteryHistEntry.KEY_TIMESTAMP,
                         BatteryHistEntry.KEY_UID,
-                        BatteryHistEntry.KEY_CONSUMER_TYPE});
+                        BatteryHistEntry.KEY_CONSUMER_TYPE,
+                        BatteryHistEntry.KEY_IS_FULL_CHARGE_CYCLE_START});
     }
 }
