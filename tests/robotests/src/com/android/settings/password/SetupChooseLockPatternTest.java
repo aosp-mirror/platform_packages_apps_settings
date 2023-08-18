@@ -59,6 +59,7 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
+import org.robolectric.annotation.LooperMode;
 import org.robolectric.shadows.ShadowPackageManager;
 import org.robolectric.util.ReflectionHelpers;
 import org.robolectric.util.ReflectionHelpers.ClassParameter;
@@ -66,6 +67,7 @@ import org.robolectric.util.ReflectionHelpers.ClassParameter;
 import java.util.Arrays;
 
 @RunWith(RobolectricTestRunner.class)
+@LooperMode(LooperMode.Mode.LEGACY)
 @Config(shadows = {ShadowUtils.class, ShadowAlertDialogCompat.class, ShadowLockPatternUtils.class})
 public class SetupChooseLockPatternTest {
 

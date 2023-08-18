@@ -45,10 +45,15 @@ import org.mockito.junit.MockitoRule;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
+import org.robolectric.annotation.LooperMode;
 
 /** Tests for {@link HearingAidDialogFragment}. */
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = ShadowAlertDialogCompat.class)
+@LooperMode(LooperMode.Mode.LEGACY)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+        ShadowAlertDialogCompat.class,
+})
 public class HearingAidDialogFragmentTest {
 
     @Rule

@@ -54,7 +54,6 @@ import androidx.preference.SwitchPreference;
 import com.android.settings.R;
 import com.android.settings.network.ProxySubscriptionManager;
 import com.android.settings.network.apn.ApnEditor.ApnData;
-import com.android.settings.testutils.shadow.ShadowFragment;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -69,6 +68,9 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class ApnEditorTest {
 
     private static final Object[] APN_DATA = {
@@ -497,7 +499,6 @@ public class ApnEditorTest {
     }
 
     @Test
-    @Config(shadows = ShadowFragment.class)
     public void onCreate_notAdminUser_shouldFinish() {
         doReturn(false).when(mUserManager).isAdminUser();
 
@@ -507,7 +508,6 @@ public class ApnEditorTest {
     }
 
     @Test
-    @Config(shadows = ShadowFragment.class)
     public void onCreate_hasUserRestriction_shouldFinish() {
         doReturn(true).when(mUserManager)
                 .hasUserRestriction(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS);
@@ -518,7 +518,6 @@ public class ApnEditorTest {
     }
 
     @Test
-    @Config(shadows = ShadowFragment.class)
     public void onCreate_noAction_shouldFinishAndNoCrash() {
         ProxySubscriptionManager proxySubscriptionMgr = mock(ProxySubscriptionManager.class);
         mApnEditorUT.mProxySubscriptionMgr = proxySubscriptionMgr;

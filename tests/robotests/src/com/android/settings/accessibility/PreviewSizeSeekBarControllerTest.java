@@ -53,6 +53,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
+import org.robolectric.annotation.LooperMode;
 import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowApplication;
 
@@ -60,6 +61,7 @@ import org.robolectric.shadows.ShadowApplication;
  * Tests for {@link PreviewSizeSeekBarController}.
  */
 @RunWith(RobolectricTestRunner.class)
+@LooperMode(LooperMode.Mode.LEGACY)
 @Config(shadows = {ShadowInteractionJankMonitor.class})
 public class PreviewSizeSeekBarControllerTest {
     private static final String FONT_SIZE_KEY = "font_size";

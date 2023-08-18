@@ -75,7 +75,8 @@ import java.io.IOException;
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
         ShadowUserManager.class,
-        ShadowDevicePolicyManager.class
+        ShadowDevicePolicyManager.class,
+        ShadowFragment.class,
 })
 public class RemoveAccountPreferenceControllerTest {
 

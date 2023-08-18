@@ -66,6 +66,7 @@ import com.android.settings.search.SearchFeatureProvider;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowInteractionJankMonitor;
 import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
+import com.android.settings.testutils.shadow.ShadowPersistentDataBlockManager;
 import com.android.settings.testutils.shadow.ShadowStorageManager;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.testutils.shadow.ShadowUtils;
@@ -85,7 +86,6 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
-import org.robolectric.shadows.ShadowPersistentDataBlockManager;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(

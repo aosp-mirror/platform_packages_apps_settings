@@ -62,10 +62,12 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.fakes.RoboMenu;
-import org.robolectric.shadows.ShadowUserManager;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = ShadowUserManager.class)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowUserManager.class,
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class BluetoothDeviceDetailsFragmentTest {
 
     private static final String TEST_ADDRESS = "55:66:77:88:99:AA";

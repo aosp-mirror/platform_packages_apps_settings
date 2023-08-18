@@ -31,8 +31,12 @@ import com.android.settings.core.BasePreferenceController;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowUserManager.class,
+})
 public class InteractAcrossProfilesControllerTest {
     private static final int PERSONAL_PROFILE_ID = 0;
     private static final int WORK_PROFILE_ID = 10;

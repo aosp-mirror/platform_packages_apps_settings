@@ -46,6 +46,7 @@ import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.notification.NotificationBackend;
+import com.android.settings.testutils.shadow.ShadowActivityManager;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -54,11 +55,14 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
-import org.robolectric.shadows.ShadowActivityManager;
 import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        ShadowActivityManager.class,
+})
 public class BubbleSummaryPreferenceControllerTest {
 
     private Context mContext;

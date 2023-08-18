@@ -28,7 +28,7 @@ public class ShadowKeyStore {
     private static boolean sIsHardwareBacked;
 
     @Resetter
-    public void reset() {
+    public static void reset() {
         sIsHardwareBacked = false;
     }
 

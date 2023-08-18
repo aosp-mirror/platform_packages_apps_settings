@@ -58,9 +58,7 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowActivity;
 
 import java.util.List;
 
@@ -107,8 +105,7 @@ public class SetupChooseLockGenericTest {
         SetupChooseLockGeneric activity =
                 Robolectric.buildActivity(SetupChooseLockGeneric.class, intent).create().get();
 
-        ShadowActivity shadowActivity = Shadows.shadowOf(activity);
-        assertThat(shadowActivity.isFinishing()).isTrue();
+        assertThat(activity.isFinishing()).isTrue();
     }
 
     @Test
@@ -122,8 +119,7 @@ public class SetupChooseLockGenericTest {
         SetupChooseLockGeneric activity =
                 Robolectric.buildActivity(SetupChooseLockGeneric.class, intent).create().get();
 
-        ShadowActivity shadowActivity = Shadows.shadowOf(activity);
-        assertThat(shadowActivity.isFinishing()).isFalse();
+        assertThat(activity.isFinishing()).isFalse();
     }
 
     @Test

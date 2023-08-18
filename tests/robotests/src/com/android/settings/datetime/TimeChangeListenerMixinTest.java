@@ -36,8 +36,10 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.LooperMode;
 
 @RunWith(RobolectricTestRunner.class)
+@LooperMode(LooperMode.Mode.LEGACY)
 public class TimeChangeListenerMixinTest {
 
     @Mock

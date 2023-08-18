@@ -30,6 +30,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
+import static org.robolectric.shadows.ShadowLooper.shadowMainLooper;
 
 import android.app.AppOpsManager;
 import android.app.backup.BackupManager;
@@ -78,10 +79,12 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
-import java.util.concurrent.TimeUnit;
-
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowEntityHeaderController.class, ShadowActivityManager.class})
+@Config(shadows = {
+        ShadowEntityHeaderController.class,
+        ShadowActivityManager.class,
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class AdvancedPowerUsageDetailTest {
     private static final String APP_LABEL = "app label";
     private static final String SUMMARY = "summary";
@@ -768,7 +771,7 @@ public class AdvancedPowerUsageDetailTest {
         mFragment.onRadioButtonClicked(mOptimizePreference);
         mFragment.onPause();
 
-        TimeUnit.SECONDS.sleep(100);
+        shadowMainLooper().idle();
         verify(mMetricsFeatureProvider)
                 .action(
                         SettingsEnums.OPEN_APP_BATTERY_USAGE,
@@ -792,7 +795,7 @@ public class AdvancedPowerUsageDetailTest {
         mFragment.onRadioButtonClicked(mOptimizePreference);
         mFragment.onPause();
 
-        TimeUnit.SECONDS.sleep(100);
+        shadowMainLooper().idle();
         verifyNoInteractions(mMetricsFeatureProvider);
     }
 

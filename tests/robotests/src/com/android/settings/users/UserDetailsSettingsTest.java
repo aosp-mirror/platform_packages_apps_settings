@@ -81,7 +81,7 @@ import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
-        ShadowUserManager.class,
+        // ShadowUserManager.class,
         ShadowDevicePolicyManager.class
 })
 public class UserDetailsSettingsTest {

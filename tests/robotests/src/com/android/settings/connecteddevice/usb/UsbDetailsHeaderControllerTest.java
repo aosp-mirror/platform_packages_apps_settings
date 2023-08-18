@@ -52,7 +52,10 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = ShadowEntityHeaderController.class)
+@Config(shadows = {
+        ShadowEntityHeaderController.class,
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class UsbDetailsHeaderControllerTest {
 
     private UsbDetailsHeaderController mDetailsHeaderController;

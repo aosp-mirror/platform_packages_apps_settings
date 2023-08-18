@@ -49,7 +49,10 @@ import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowUserManager.class})
+@Config(shadows = {
+        ShadowUserManager.class,
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class AppMemoryPreferenceControllerTest {
 
     @Mock

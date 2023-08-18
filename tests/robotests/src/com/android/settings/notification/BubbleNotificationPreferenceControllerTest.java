@@ -35,6 +35,7 @@ import android.widget.Switch;
 
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.testutils.shadow.ShadowActivityManager;
 import com.android.settingslib.testutils.shadow.ShadowInteractionJankMonitor;
 import com.android.settingslib.widget.MainSwitchPreference;
 
@@ -48,10 +49,12 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
-import org.robolectric.shadows.ShadowActivityManager;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowInteractionJankMonitor.class})
+@Config(shadows = {
+        ShadowInteractionJankMonitor.class,
+        ShadowActivityManager.class,
+})
 public class BubbleNotificationPreferenceControllerTest {
 
     private Context mContext;

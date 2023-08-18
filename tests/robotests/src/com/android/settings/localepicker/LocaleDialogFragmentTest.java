@@ -37,7 +37,6 @@ import androidx.fragment.app.FragmentTransaction;
 import com.android.internal.app.LocaleStore;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.utils.ActivityControllerWrapper;
-import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -46,13 +45,14 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.annotation.LooperMode;
 
 import java.util.Locale;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowAlertDialogCompat.class})
+@LooperMode(LooperMode.Mode.LEGACY)
 public class LocaleDialogFragmentTest {
 
     @Mock

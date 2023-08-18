@@ -35,6 +35,7 @@ import androidx.fragment.app.FragmentActivity;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
+import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settingslib.development.AbstractEnableAdbPreferenceController;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
@@ -51,14 +52,17 @@ import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.shadow.api.Shadow;
-import org.robolectric.shadows.ShadowUserManager;
 import org.robolectric.shadows.androidx.fragment.FragmentController;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowUserManager.class, ShadowAlertDialogCompat.class})
+@Config(shadows = {
+        ShadowAlertDialogCompat.class,
+        ShadowUserManager.class,
+        ShadowUserManager.class,
+})
 public class DevelopmentSettingsDashboardFragmentTest {
 
     private Switch mSwitch;

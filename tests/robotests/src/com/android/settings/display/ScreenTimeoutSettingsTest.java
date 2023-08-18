@@ -57,10 +57,14 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class ScreenTimeoutSettingsTest {
     private static final String[] TIMEOUT_ENTRIES = new String[]{"15 secs", "30 secs"};
     private static final String[] TIMEOUT_VALUES = new String[]{"15000", "30000"};

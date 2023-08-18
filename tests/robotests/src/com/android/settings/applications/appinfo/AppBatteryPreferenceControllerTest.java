@@ -56,6 +56,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class AppBatteryPreferenceControllerTest {
 
     private static final int TARGET_UID = 111;

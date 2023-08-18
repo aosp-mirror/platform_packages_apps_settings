@@ -26,6 +26,7 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.robolectric.shadows.ShadowLooper.shadowMainLooper;
 
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
@@ -69,8 +70,12 @@ import org.robolectric.annotation.Config;
 
 /** Tests for {@link AvailableMediaDeviceGroupController}. */
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowAudioManager.class, ShadowBluetoothAdapter.class,
-        ShadowBluetoothUtils.class})
+@Config(shadows = {
+        ShadowAudioManager.class,
+        ShadowBluetoothAdapter.class,
+        ShadowBluetoothUtils.class,
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class AvailableMediaDeviceGroupControllerTest {
 
     private static final String TEST_DEVICE_ADDRESS = "00:A1:A1:A1:A1:A1";
@@ -257,7 +262,7 @@ public class AvailableMediaDeviceGroupControllerTest {
 
         mAvailableMediaDeviceGroupController.onActiveDeviceChanged(mCachedBluetoothDevice,
                 BluetoothProfile.HEARING_AID);
-
+        shadowMainLooper().idle();
         final AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(dialog.isShowing()).isTrue();
     }

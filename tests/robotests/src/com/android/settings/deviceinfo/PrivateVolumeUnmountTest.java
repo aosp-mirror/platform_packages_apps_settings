@@ -31,9 +31,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
+import org.robolectric.annotation.LooperMode;
 import org.robolectric.shadows.androidx.fragment.FragmentController;
 
 @RunWith(RobolectricTestRunner.class)
+@LooperMode(LooperMode.Mode.LEGACY)
 @Config(shadows = ShadowStorageManager.class)
 public class PrivateVolumeUnmountTest {
 

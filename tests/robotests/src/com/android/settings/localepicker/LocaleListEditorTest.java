@@ -72,6 +72,7 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.annotation.LooperMode;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
@@ -79,7 +80,12 @@ import java.util.List;
 import java.util.Locale;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowAlertDialogCompat.class, ShadowActivityManager.class})
+@Config(shadows = {
+        ShadowAlertDialogCompat.class,
+        ShadowActivityManager.class,
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
+@LooperMode(LooperMode.Mode.LEGACY)
 public class LocaleListEditorTest {
 
     private static final String ARG_DIALOG_TYPE = "arg_dialog_type";

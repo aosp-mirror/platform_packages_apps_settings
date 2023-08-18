@@ -58,6 +58,9 @@ import java.util.Iterator;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class UsbDetailsFunctionsControllerTest {
 
     private UsbDetailsFunctionsController mDetailsFunctionsController;

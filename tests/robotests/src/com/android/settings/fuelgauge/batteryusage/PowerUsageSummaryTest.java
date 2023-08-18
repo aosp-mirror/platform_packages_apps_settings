@@ -70,6 +70,9 @@ import java.util.List;
 
 // TODO: Improve this test class so that it starts up the real activity and fragment.
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class PowerUsageSummaryTest {
     private static Intent sAdditionalBatteryInfoIntent;
 
