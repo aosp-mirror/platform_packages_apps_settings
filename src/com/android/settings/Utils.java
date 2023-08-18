@@ -16,9 +16,6 @@
 
 package com.android.settings;
 
-import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_CONFIRM_PASSWORD;
-import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_CONFIRM_PATTERN;
-import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_CONFIRM_PIN;
 import static android.content.Intent.EXTRA_USER;
 import static android.content.Intent.EXTRA_USER_ID;
 import static android.text.format.DateUtils.FORMAT_ABBREV_MONTH;
@@ -791,36 +788,15 @@ public final class Utils extends com.android.settingslib.Utils {
     @Nullable public static String getConfirmCredentialStringForUser(@NonNull Context context,
              int userId, @LockPatternUtils.CredentialType int credentialType) {
         final int effectiveUserId = UserManager.get(context).getCredentialOwnerProfile(userId);
-        final boolean isEffectiveUserManagedProfile = UserManager.get(context)
-                .isManagedProfile(effectiveUserId);
-        final DevicePolicyManager devicePolicyManager = context
-                .getSystemService(DevicePolicyManager.class);
+        if (UserManager.get(context).isManagedProfile(effectiveUserId)) {
+            return null;
+        }
         switch (credentialType) {
             case LockPatternUtils.CREDENTIAL_TYPE_PIN:
-                if (isEffectiveUserManagedProfile) {
-                    return devicePolicyManager.getResources().getString(WORK_PROFILE_CONFIRM_PIN,
-                            () -> context.getString(
-                                    R.string.lockpassword_confirm_your_pin_generic_profile));
-                }
-
                 return context.getString(R.string.lockpassword_confirm_your_pin_generic);
             case LockPatternUtils.CREDENTIAL_TYPE_PATTERN:
-                if (isEffectiveUserManagedProfile) {
-                    return devicePolicyManager.getResources().getString(
-                            WORK_PROFILE_CONFIRM_PATTERN,
-                            () -> context.getString(
-                                    R.string.lockpassword_confirm_your_pattern_generic_profile));
-                }
-
                 return context.getString(R.string.lockpassword_confirm_your_pattern_generic);
             case LockPatternUtils.CREDENTIAL_TYPE_PASSWORD:
-                if (isEffectiveUserManagedProfile) {
-                    return devicePolicyManager.getResources().getString(
-                            WORK_PROFILE_CONFIRM_PASSWORD,
-                            () -> context.getString(
-                                    R.string.lockpassword_confirm_your_password_generic_profile));
-                }
-
                 return context.getString(R.string.lockpassword_confirm_your_password_generic);
         }
         return null;
