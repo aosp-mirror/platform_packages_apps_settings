@@ -25,8 +25,8 @@ message PowerAnomalyEvent {
 //
 // Next id: 2
 enum PowerAnomalyType{
-  SETTINGS_BANNER = 0;
-  APPS_ITEM = 1;
+  TYPE_SETTINGS_BANNER = 0;
+  TYPE_APPS_ITEM = 1;
 }
 
 // NOTE: Please DO NOT delete enum items or change enum values. Use [deprecated = true] instead.
@@ -34,9 +34,9 @@ enum PowerAnomalyType{
 //
 // Next id: 3
 enum PowerAnomalyKey{
-  BRIGHTNESS = 0;
-  SCREEN_TIMEOUT = 1;
-  APP = 2;
+  KEY_BRIGHTNESS = 0;
+  KEY_SCREEN_TIMEOUT = 1;
+  KEY_APP = 2;
 }
 
 message WarningBannerInfo {
