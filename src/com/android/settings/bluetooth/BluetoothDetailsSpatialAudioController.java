@@ -16,6 +16,8 @@
 
 package com.android.settings.bluetooth;
 
+import static android.media.Spatializer.SPATIALIZER_IMMERSIVE_LEVEL_NONE;
+
 import android.content.Context;
 import android.media.AudioDeviceAttributes;
 import android.media.AudioDeviceInfo;
@@ -106,6 +108,10 @@ public class BluetoothDetailsSpatialAudioController extends BluetoothDetailsCont
 
     @Override
     protected void refresh() {
+        if (mAudioDevice == null) {
+            return;
+        }
+
         SwitchPreference spatialAudioPref = mProfilesContainer.findPreference(KEY_SPATIAL_AUDIO);
         if (spatialAudioPref == null) {
             spatialAudioPref = createSpatialAudioPreference(mProfilesContainer.getContext());
@@ -152,6 +158,14 @@ public class BluetoothDetailsSpatialAudioController extends BluetoothDetailsCont
     }
 
     private void getAvailableDevice() {
+        if (mSpatializer.getImmersiveAudioLevel() == SPATIALIZER_IMMERSIVE_LEVEL_NONE) {
+            mIsAvailable = false;
+            mAudioDevice = null;
+            Log.d(TAG, "getAvailableDevice() ignored: spatializer not supported");
+
+            return;
+        }
+
         AudioDeviceAttributes a2dpDevice = new AudioDeviceAttributes(
                 AudioDeviceAttributes.ROLE_OUTPUT,
                 AudioDeviceInfo.TYPE_BLUETOOTH_A2DP,
