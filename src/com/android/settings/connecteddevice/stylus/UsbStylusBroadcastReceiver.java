@@ -41,6 +41,7 @@ public class UsbStylusBroadcastReceiver extends BroadcastReceiver {
             final IntentFilter intentFilter = new IntentFilter();
             intentFilter.addAction(UsbManager.ACTION_USB_DEVICE_ATTACHED);
             intentFilter.addAction(UsbManager.ACTION_USB_DEVICE_DETACHED);
+            intentFilter.addAction(UsbManager.ACTION_USB_STATE);
             final Intent intent = mContext.registerReceiver(this, intentFilter);
             if (intent != null) {
                 onReceive(mContext, intent);
