@@ -21,7 +21,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.INetworkPolicyManager;
-import android.net.NetworkPolicyManager;
 import android.net.NetworkTemplate;
 import android.os.ServiceManager;
 import android.telephony.SubscriptionInfo;
@@ -43,7 +42,6 @@ import com.android.settings.datausage.lib.DataUsageLib;
 import com.android.settings.network.ProxySubscriptionManager;
 import com.android.settings.network.telephony.TelephonyBasePreferenceController;
 import com.android.settings.widget.EntityHeaderController;
-import com.android.settingslib.NetworkPolicyEditor;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
@@ -71,7 +69,6 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
     protected DataUsageController mDataUsageController;
     protected DataUsageInfoController mDataInfoController;
     private NetworkTemplate mDefaultTemplate;
-    protected NetworkPolicyEditor mPolicyEditor;
     private boolean mHasMobileData;
 
     /** Name of the carrier, or null if not available */
@@ -120,10 +117,6 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
 
     protected void updateConfiguration(Context context,
             int subscriptionId, SubscriptionInfo subInfo) {
-        final NetworkPolicyManager policyManager =
-                context.getSystemService(NetworkPolicyManager.class);
-        mPolicyEditor = new NetworkPolicyEditor(policyManager);
-
         mDataUsageController = createDataUsageController(context);
         mDataUsageController.setSubscriptionId(subscriptionId);
         mDataInfoController = new DataUsageInfoController();
@@ -147,7 +140,6 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
             DataUsageController dataUsageController,
             DataUsageInfoController dataInfoController,
             NetworkTemplate defaultTemplate,
-            NetworkPolicyEditor policyEditor,
             Activity activity,
             Lifecycle lifecycle,
             EntityHeaderController entityHeaderController,
@@ -157,7 +149,6 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
         mDataUsageController = dataUsageController;
         mDataInfoController = dataInfoController;
         mDefaultTemplate = defaultTemplate;
-        mPolicyEditor = policyEditor;
         mHasMobileData = true;
         mLifecycle = lifecycle;
         mEntityHeaderController = entityHeaderController;
@@ -213,7 +204,6 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
         long usageLevel = info.usageLevel;
 
         if (subInfo != null) {
-            mDataInfoController.updateDataLimit(info, mPolicyEditor.getPolicy(mDefaultTemplate));
             summaryPreference.setWifiMode(/* isWifiMode */ false,
                     /* usagePeriod */ null, /* isSingleWifi */ false);
         } else {

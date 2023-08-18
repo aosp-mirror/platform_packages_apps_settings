@@ -18,9 +18,6 @@ package com.android.settings.datausage;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import android.net.NetworkPolicy;
-import android.net.NetworkTemplate;
-
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.settingslib.net.DataUsageController.DataUsageInfo;
@@ -32,7 +29,6 @@ import org.junit.runner.RunWith;
 @RunWith(AndroidJUnit4.class)
 public class DataUsageInfoControllerTest {
 
-    private static final int NEGATIVE = -1;
     private static final int ZERO = 0;
     private static final int POSITIVE_SMALL = 1;
     private static final int POSITIVE_LARGE = 5;
@@ -98,81 +94,5 @@ public class DataUsageInfoControllerTest {
         info.usageLevel = POSITIVE_LARGE;
 
         assertThat(mInfoController.getSummaryLimit(info)).isEqualTo(info.usageLevel);
-    }
-
-    private NetworkPolicy getDefaultNetworkPolicy() {
-        NetworkTemplate template = new NetworkTemplate.Builder(NetworkTemplate.MATCH_WIFI).build();
-        int cycleDay  = -1;
-        String cycleTimezone = "UTC";
-        long warningBytes = -1;
-        long limitBytes = -1;
-        return new NetworkPolicy(template, cycleDay, cycleTimezone, warningBytes, limitBytes, true);
-    }
-
-    @Test
-    public void updateDataLimit_NullArguments_NoError() {
-        mInfoController.updateDataLimit(null, null);
-        mInfoController.updateDataLimit(info, null);
-        mInfoController.updateDataLimit(null, getDefaultNetworkPolicy());
-    }
-
-    @Test
-    public void updateDataLimit_NegativeWarning_UpdatedToZero() {
-        NetworkPolicy policy = getDefaultNetworkPolicy();
-        policy.warningBytes = NEGATIVE;
-
-        mInfoController.updateDataLimit(info, policy);
-
-        assertThat(info.warningLevel).isEqualTo(ZERO);
-    }
-
-    @Test
-    public void updateDataLimit_WarningZero_UpdatedToZero() {
-        NetworkPolicy policy = getDefaultNetworkPolicy();
-        policy.warningBytes = ZERO;
-
-        mInfoController.updateDataLimit(info, policy);
-
-        assertThat(info.warningLevel).isEqualTo(ZERO);
-    }
-
-    @Test
-    public void updateDataLimit_WarningPositive_UpdatedToWarning() {
-        NetworkPolicy policy = getDefaultNetworkPolicy();
-        policy.warningBytes = POSITIVE_SMALL;
-
-        mInfoController.updateDataLimit(info, policy);
-
-        assertThat(info.warningLevel).isEqualTo(policy.warningBytes);
-    }
-
-    @Test
-    public void updateDataLimit_LimitNegative_UpdatedToZero() {
-        NetworkPolicy policy = getDefaultNetworkPolicy();
-        policy.limitBytes = NEGATIVE;
-
-        mInfoController.updateDataLimit(info, policy);
-
-        assertThat(info.limitLevel).isEqualTo(ZERO);
-    }
-
-    @Test
-    public void updateDataLimit_LimitZero_UpdatedToZero() {
-        NetworkPolicy policy = getDefaultNetworkPolicy();
-        policy.limitBytes = ZERO;
-
-        mInfoController.updateDataLimit(info, policy);
-
-        assertThat(info.limitLevel).isEqualTo(ZERO);
-    }
-
-    @Test
-    public void updateDataLimit_LimitPositive_UpdatedToLimit() {
-        NetworkPolicy policy = getDefaultNetworkPolicy();
-        policy.limitBytes = POSITIVE_SMALL;
-
-        mInfoController.updateDataLimit(info, policy);
-        
-        assertThat(info.limitLevel).isEqualTo(policy.limitBytes);
     }
 }

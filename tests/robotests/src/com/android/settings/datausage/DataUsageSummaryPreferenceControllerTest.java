@@ -47,7 +47,6 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.widget.EntityHeaderController;
-import com.android.settingslib.NetworkPolicyEditor;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.net.DataUsageController;
 
@@ -86,8 +85,6 @@ public class DataUsageSummaryPreferenceControllerTest {
     private DataUsageController mDataUsageController;
     @Mock
     private DataUsageSummaryPreference mSummaryPreference;
-    @Mock
-    private NetworkPolicyEditor mPolicyEditor;
     @Mock
     private NetworkTemplate mNetworkTemplate;
     @Mock
@@ -145,7 +142,6 @@ public class DataUsageSummaryPreferenceControllerTest {
                 mDataUsageController,
                 mDataInfoController,
                 mNetworkTemplate,
-                mPolicyEditor,
                 mActivity, null, null, null, mDefaultSubscriptionId));
         doReturn(null).when(mController).getSubscriptionInfo(
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
@@ -372,7 +368,6 @@ public class DataUsageSummaryPreferenceControllerTest {
                 mDataUsageController,
                 mDataInfoController,
                 mNetworkTemplate,
-                mPolicyEditor,
                 mActivity, mLifecycle, mHeaderController, mPreferenceFragment,
                 mDefaultSubscriptionId));
 
