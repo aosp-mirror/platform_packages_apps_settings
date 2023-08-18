@@ -67,15 +67,9 @@ public class DataUsageSummaryPreference extends Preference {
     private CharSequence mStartLabel;
     private CharSequence mEndLabel;
 
-    /** large vs small size is 36/16 ~ 2.25 */
-    private static final float LARGER_FONT_RATIO = 2.25f;
-    private static final float SMALLER_FONT_RATIO = 1.0f;
-
-    private boolean mDefaultTextColorSet;
-    private int mDefaultTextColor;
     private int mNumPlans;
     /** The specified un-initialized value for cycle time */
-    private final long CYCLE_TIME_UNINITIAL_VALUE = 0;
+    private static final long CYCLE_TIME_UNINITIAL_VALUE = 0;
     /** The ending time of the billing cycle in milliseconds since epoch. */
     private long mCycleEndTimeMs;
     /** The time of the last update in standard milliseconds since the epoch */

@@ -44,7 +44,6 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.widget.EntityHeaderController;
@@ -147,7 +146,6 @@ public class DataUsageSummaryPreferenceControllerTest {
                 mDataInfoController,
                 mNetworkTemplate,
                 mPolicyEditor,
-                R.string.cell_data_template,
                 mActivity, null, null, null, mDefaultSubscriptionId));
         doReturn(null).when(mController).getSubscriptionInfo(
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
@@ -375,7 +373,6 @@ public class DataUsageSummaryPreferenceControllerTest {
                 mDataInfoController,
                 mNetworkTemplate,
                 mPolicyEditor,
-                R.string.cell_data_template,
                 mActivity, mLifecycle, mHeaderController, mPreferenceFragment,
                 mDefaultSubscriptionId));
 
