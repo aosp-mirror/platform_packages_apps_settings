@@ -15,6 +15,8 @@
  */
 
 package com.android.settings.fuelgauge.batteryusage;
+import static com.android.settings.fuelgauge.batteryusage.ConvertUtils.utcToLocalTimeForLogging;
+
 import android.app.usage.IUsageStatsManager;
 import android.app.usage.UsageStatsManager;
 import android.content.ContentResolver;
@@ -76,12 +78,20 @@ public final class DatabaseUtils {
     public static final String BATTERY_EVENT_TABLE = "BatteryEvent";
     /** A table name for battery usage history. */
     public static final String BATTERY_STATE_TABLE = "BatteryState";
+    /** A table name for battery usage slot. */
+    public static final String BATTERY_USAGE_SLOT_TABLE = "BatteryUsageSlot";
+    /** A path name for last full charge time query. */
+    public static final String LAST_FULL_CHARGE_TIMESTAMP_PATH = "lastFullChargeTimestamp";
+    /** A path name for querying the latest record timestamp in battery state table. */
+    public static final String BATTERY_STATE_LATEST_TIMESTAMP_PATH = "batteryStateLatestTimestamp";
     /** A path name for app usage latest timestamp query. */
     public static final String APP_USAGE_LATEST_TIMESTAMP_PATH = "appUsageLatestTimestamp";
     /** Key for query parameter timestamp used in BATTERY_CONTENT_URI **/
     public static final String QUERY_KEY_TIMESTAMP = "timestamp";
     /** Key for query parameter userid used in APP_USAGE_EVENT_URI **/
     public static final String QUERY_KEY_USERID = "userid";
+    /** Key for query parameter battery event type used in BATTERY_EVENT_URI **/
+    public static final String QUERY_BATTERY_EVENT_TYPE = "batteryEventType";
 
     public static final long INVALID_USER_ID = Integer.MIN_VALUE;
     /**
@@ -110,6 +120,13 @@ public final class DatabaseUtils {
                     .scheme(ContentResolver.SCHEME_CONTENT)
                     .authority(AUTHORITY)
                     .appendPath(BATTERY_STATE_TABLE)
+                    .build();
+    /** A content URI to access battery usage slots data. */
+    public static final Uri BATTERY_USAGE_SLOT_URI =
+            new Uri.Builder()
+                    .scheme(ContentResolver.SCHEME_CONTENT)
+                    .authority(AUTHORITY)
+                    .appendPath(BATTERY_USAGE_SLOT_TABLE)
                     .build();
 
     // For testing only.
@@ -140,7 +157,7 @@ public final class DatabaseUtils {
                         .build();
         final long latestTimestamp =
                 loadAppUsageLatestTimestampFromContentProvider(context, appUsageLatestTimestampUri);
-        final String latestTimestampString = ConvertUtils.utcToLocalTimeForLogging(latestTimestamp);
+        final String latestTimestampString = utcToLocalTimeForLogging(latestTimestamp);
         Log.d(TAG, String.format(
                 "getAppUsageStartTimestampOfUser() userId=%d latestTimestamp=%s in %d/ms",
                 userId, latestTimestampString, (System.currentTimeMillis() - startTime)));
@@ -161,8 +178,7 @@ public final class DatabaseUtils {
         // sure the app usage calculation near the boundaries is correct.
         final long queryTimestamp =
                 Math.max(rawStartTimestamp, sixDaysAgoTimestamp) - USAGE_QUERY_BUFFER_HOURS;
-        Log.d(TAG, "sixDayAgoTimestamp: " + ConvertUtils.utcToLocalTimeForLogging(
-                sixDaysAgoTimestamp));
+        Log.d(TAG, "sixDaysAgoTimestamp: " + utcToLocalTimeForLogging(sixDaysAgoTimestamp));
         final String queryUserIdString = userIds.stream()
                 .map(userId -> String.valueOf(userId))
                 .collect(Collectors.joining(","));
@@ -189,11 +205,15 @@ public final class DatabaseUtils {
     public static List<BatteryEvent> getBatteryEvents(
             Context context,
             final Calendar calendar,
-            final long rawStartTimestamp) {
+            final long rawStartTimestamp,
+            final List<BatteryEventType> queryBatteryEventTypes) {
         final long startTime = System.currentTimeMillis();
         final long sixDaysAgoTimestamp = getTimestampSixDaysAgo(calendar);
         final long queryTimestamp = Math.max(rawStartTimestamp, sixDaysAgoTimestamp);
         Log.d(TAG, "getBatteryEvents for timestamp: " + queryTimestamp);
+        final String queryBatteryEventTypesString = queryBatteryEventTypes.stream()
+                .map(type -> String.valueOf(type.getNumber()))
+                .collect(Collectors.joining(","));
         // Builds the content uri everytime to avoid cache.
         final Uri batteryEventUri =
                 new Uri.Builder()
@@ -202,6 +222,8 @@ public final class DatabaseUtils {
                         .appendPath(BATTERY_EVENT_TABLE)
                         .appendQueryParameter(
                                 QUERY_KEY_TIMESTAMP, Long.toString(queryTimestamp))
+                        .appendQueryParameter(
+                                QUERY_BATTERY_EVENT_TYPE, queryBatteryEventTypesString)
                         .build();
 
         final List<BatteryEvent> batteryEventList =
@@ -211,13 +233,82 @@ public final class DatabaseUtils {
         return batteryEventList;
     }
 
-    /** Long: for timestamp and String: for BatteryHistEntry.getKey() */
-    public static Map<Long, Map<String, BatteryHistEntry>> getHistoryMapSinceLastFullCharge(
-            Context context, Calendar calendar) {
+    /**
+     * Returns the battery usage slot data after {@code rawStartTimestamp} in battery event table.
+     */
+    public static List<BatteryUsageSlot> getBatteryUsageSlots(
+            Context context,
+            final Calendar calendar,
+            final long rawStartTimestamp) {
         final long startTime = System.currentTimeMillis();
         final long sixDaysAgoTimestamp = getTimestampSixDaysAgo(calendar);
-        Log.d(TAG, "sixDayAgoTimestamp: " + ConvertUtils.utcToLocalTimeForLogging(
-                sixDaysAgoTimestamp));
+        final long queryTimestamp = Math.max(rawStartTimestamp, sixDaysAgoTimestamp);
+        Log.d(TAG, "getBatteryUsageSlots for timestamp: " + queryTimestamp);
+        // Builds the content uri everytime to avoid cache.
+        final Uri batteryUsageSlotUri =
+                new Uri.Builder()
+                        .scheme(ContentResolver.SCHEME_CONTENT)
+                        .authority(AUTHORITY)
+                        .appendPath(BATTERY_USAGE_SLOT_TABLE)
+                        .appendQueryParameter(
+                                QUERY_KEY_TIMESTAMP, Long.toString(queryTimestamp))
+                        .build();
+
+        final List<BatteryUsageSlot> batteryUsageSlotList =
+                loadBatteryUsageSlotsFromContentProvider(context, batteryUsageSlotUri);
+        Log.d(TAG, String.format("getBatteryUsageSlots size=%d in %d/ms",
+                batteryUsageSlotList.size(), (System.currentTimeMillis() - startTime)));
+        return batteryUsageSlotList;
+    }
+
+    /** Returns the last full charge time. */
+    public static long getLastFullChargeTime(Context context) {
+        final long startTime = System.currentTimeMillis();
+        // Builds the content uri everytime to avoid cache.
+        final Uri lastFullChargeTimeUri =
+                new Uri.Builder()
+                        .scheme(ContentResolver.SCHEME_CONTENT)
+                        .authority(AUTHORITY)
+                        .appendPath(LAST_FULL_CHARGE_TIMESTAMP_PATH)
+                        .build();
+        final long lastFullChargeTime = loadLastFullChargeTimeFromContentProvider(
+                context, lastFullChargeTimeUri);
+        final String lastFullChargeTimeString = utcToLocalTimeForLogging(lastFullChargeTime);
+        Log.d(TAG, String.format(
+                "getLastFullChargeTime() lastFullChargeTime=%s in %d/ms",
+                lastFullChargeTimeString, (System.currentTimeMillis() - startTime)));
+        return lastFullChargeTime;
+    }
+
+    /** Returns the first battery state timestamp no later than the {@code queryTimestamp}. */
+    @VisibleForTesting
+    static long getBatteryStateLatestTimestampBeforeQueryTimestamp(
+            Context context, final long queryTimestamp) {
+        final long startTime = System.currentTimeMillis();
+        // Builds the content uri everytime to avoid cache.
+        final Uri batteryStateLatestTimestampUri =
+                new Uri.Builder()
+                        .scheme(ContentResolver.SCHEME_CONTENT)
+                        .authority(AUTHORITY)
+                        .appendPath(BATTERY_STATE_LATEST_TIMESTAMP_PATH)
+                        .appendQueryParameter(
+                                QUERY_KEY_TIMESTAMP, Long.toString(queryTimestamp))
+                        .build();
+        final long batteryStateLatestTimestamp = loadBatteryStateLatestTimestampFromContentProvider(
+                context, batteryStateLatestTimestampUri);
+        final String batteryStateLatestTimestampString =
+                utcToLocalTimeForLogging(batteryStateLatestTimestamp);
+        Log.d(TAG, String.format(
+                "getBatteryStateLatestTimestamp() batteryStateLatestTimestamp=%s in %d/ms",
+                batteryStateLatestTimestampString, (System.currentTimeMillis() - startTime)));
+        return batteryStateLatestTimestamp;
+    }
+
+    /** Returns the battery history map after the given timestamp. */
+    @VisibleForTesting
+    static Map<Long, Map<String, BatteryHistEntry>> getHistoryMapSinceQueryTimestamp(
+            Context context, final long queryTimestamp) {
+        final long startTime = System.currentTimeMillis();
         // Builds the content uri everytime to avoid cache.
         final Uri batteryStateUri =
                 new Uri.Builder()
@@ -225,18 +316,44 @@ public final class DatabaseUtils {
                         .authority(AUTHORITY)
                         .appendPath(BATTERY_STATE_TABLE)
                         .appendQueryParameter(
-                                QUERY_KEY_TIMESTAMP, Long.toString(sixDaysAgoTimestamp))
+                                QUERY_KEY_TIMESTAMP, Long.toString(queryTimestamp))
                         .build();
 
         final Map<Long, Map<String, BatteryHistEntry>> resultMap =
                 loadHistoryMapFromContentProvider(context, batteryStateUri);
         if (resultMap == null || resultMap.isEmpty()) {
-            Log.d(TAG, "getHistoryMapSinceLastFullCharge() returns empty or null");
+            Log.d(TAG, "getBatteryHistoryMap() returns empty or null");
         } else {
-            Log.d(TAG, String.format("getHistoryMapSinceLastFullCharge() size=%d in %d/ms",
+            Log.d(TAG, String.format("getBatteryHistoryMap() size=%d in %d/ms",
                     resultMap.size(), (System.currentTimeMillis() - startTime)));
         }
         return resultMap;
+    }
+
+    /**
+     * Returns the battery history map since the latest record no later than the given timestamp.
+     * If there is no record before the given timestamp or the given timestamp is before last full
+     * charge time, returns the history map since last full charge time.
+     */
+    public static Map<Long, Map<String, BatteryHistEntry>>
+            getHistoryMapSinceLatestRecordBeforeQueryTimestamp(Context context, Calendar calendar,
+                    final long queryTimestamp, final long lastFullChargeTime) {
+        final long sixDaysAgoTimestamp = getTimestampSixDaysAgo(calendar);
+        Log.d(TAG, "sixDaysAgoTimestamp: " + utcToLocalTimeForLogging(sixDaysAgoTimestamp));
+        final long batteryStateLatestTimestamp =
+                queryTimestamp == 0L ? 0L : getBatteryStateLatestTimestampBeforeQueryTimestamp(
+                        context, queryTimestamp);
+        final long maxTimestamp = Math.max(Math.max(
+                sixDaysAgoTimestamp, lastFullChargeTime), batteryStateLatestTimestamp);
+        return getHistoryMapSinceQueryTimestamp(context, maxTimestamp);
+    }
+
+    /** Returns the history map since last full charge time. */
+    public static Map<Long, Map<String, BatteryHistEntry>> getHistoryMapSinceLastFullCharge(
+            Context context, Calendar calendar) {
+        final long lastFullChargeTime = getLastFullChargeTime(context);
+        return getHistoryMapSinceLatestRecordBeforeQueryTimestamp(
+                context, calendar, 0, lastFullChargeTime);
     }
 
     /** Clears all data in the battery usage database. */
@@ -248,6 +365,7 @@ public final class DatabaseUtils {
                 database.appUsageEventDao().clearAll();
                 database.batteryEventDao().clearAll();
                 database.batteryStateDao().clearAll();
+                database.batteryUsageSlotDao().clearAll();
             } catch (RuntimeException e) {
                 Log.e(TAG, "clearAll() failed", e);
             }
@@ -265,6 +383,7 @@ public final class DatabaseUtils {
                 database.appUsageEventDao().clearAllBefore(earliestTimestamp);
                 database.batteryEventDao().clearAllBefore(earliestTimestamp);
                 database.batteryStateDao().clearAllBefore(earliestTimestamp);
+                database.batteryUsageSlotDao().clearAllBefore(earliestTimestamp);
             } catch (RuntimeException e) {
                 Log.e(TAG, "clearAllBefore() failed", e);
             }
@@ -293,7 +412,7 @@ public final class DatabaseUtils {
                         /*user=*/ context.getSystemService(UserManager.class)
                                 .getProfileParent(context.getUser()));
             } catch (PackageManager.NameNotFoundException e) {
-                Log.e(TAG, "context.createPackageContextAsUser() fail:" + e);
+                Log.e(TAG, "context.createPackageContextAsUser() fail:", e);
                 return null;
             }
         }
@@ -320,7 +439,7 @@ public final class DatabaseUtils {
                 resolver.notifyChange(APP_USAGE_EVENT_URI, /*observer=*/ null);
                 Log.d(TAG, "insert() app usage events data into database");
             } catch (Exception e) {
-                Log.e(TAG, "bulkInsert() app usage data into database error:\n" + e);
+                Log.e(TAG, "bulkInsert() app usage data into database error:", e);
             }
         }
         Log.d(TAG, String.format("sendAppUsageEventData() size=%d in %d/ms",
@@ -346,8 +465,65 @@ public final class DatabaseUtils {
         return contentValues;
     }
 
+    static List<ContentValues> sendBatteryEventData(
+            final Context context, final List<BatteryEvent> batteryEventList) {
+        final long startTime = System.currentTimeMillis();
+        // Creates the ContentValues list to insert them into provider.
+        final List<ContentValues> valuesList = new ArrayList<>();
+        batteryEventList.stream()
+                .forEach(batteryEvent -> valuesList.add(
+                        ConvertUtils.convertBatteryEventToContentValues(batteryEvent)));
+        int size = 0;
+        final ContentResolver resolver = context.getContentResolver();
+        // Inserts all ContentValues into battery provider.
+        if (!valuesList.isEmpty()) {
+            final ContentValues[] valuesArray = new ContentValues[valuesList.size()];
+            valuesList.toArray(valuesArray);
+            try {
+                size = resolver.bulkInsert(BATTERY_EVENT_URI, valuesArray);
+                resolver.notifyChange(BATTERY_EVENT_URI, /*observer=*/ null);
+                Log.d(TAG, "insert() battery event data into database");
+            } catch (Exception e) {
+                Log.e(TAG, "bulkInsert() battery event data into database error:", e);
+            }
+        }
+        Log.d(TAG, String.format("sendBatteryEventData() size=%d in %d/ms",
+                size, (System.currentTimeMillis() - startTime)));
+        clearMemory();
+        return valuesList;
+    }
+
+    static List<ContentValues> sendBatteryUsageSlotData(
+            final Context context, final List<BatteryUsageSlot> batteryUsageSlotList) {
+        final long startTime = System.currentTimeMillis();
+        // Creates the ContentValues list to insert them into provider.
+        final List<ContentValues> valuesList = new ArrayList<>();
+        batteryUsageSlotList.stream()
+                .forEach(batteryUsageSlot -> valuesList.add(
+                        ConvertUtils.convertBatteryUsageSlotToContentValues(batteryUsageSlot)));
+        int size = 0;
+        final ContentResolver resolver = context.getContentResolver();
+        // Inserts all ContentValues into battery provider.
+        if (!valuesList.isEmpty()) {
+            final ContentValues[] valuesArray = new ContentValues[valuesList.size()];
+            valuesList.toArray(valuesArray);
+            try {
+                size = resolver.bulkInsert(BATTERY_USAGE_SLOT_URI, valuesArray);
+                resolver.notifyChange(BATTERY_USAGE_SLOT_URI, /*observer=*/ null);
+                Log.d(TAG, "insert() battery usage slots data into database");
+            } catch (Exception e) {
+                Log.e(TAG, "bulkInsert() battery usage slots data into database error:", e);
+            }
+        }
+        Log.d(TAG, String.format("sendBatteryUsageSlotData() size=%d in %d/ms",
+                size, (System.currentTimeMillis() - startTime)));
+        clearMemory();
+        return valuesList;
+    }
+
     static List<ContentValues> sendBatteryEntryData(
             final Context context,
+            final long snapshotTimestamp,
             final List<BatteryEntry> batteryEntryList,
             final BatteryUsageStats batteryUsageStats,
             final boolean isFullChargeStart) {
@@ -364,7 +540,6 @@ public final class DatabaseUtils {
         final int batteryHealth = intent.getIntExtra(
                 BatteryManager.EXTRA_HEALTH, BatteryManager.BATTERY_HEALTH_UNKNOWN);
         // We should use the same timestamp for each data snapshot.
-        final long snapshotTimestamp = Clock.systemUTC().millis();
         final long snapshotBootTimestamp = SystemClock.elapsedRealtime();
 
         // Creates the ContentValues list to insert them into provider.
@@ -409,8 +584,7 @@ public final class DatabaseUtils {
                 Log.d(TAG, "insert() battery states data into database with isFullChargeStart:"
                         + isFullChargeStart);
             } catch (Exception e) {
-                errorMessage = e.toString();
-                Log.e(TAG, "bulkInsert() data into database error:\n" + errorMessage);
+                Log.e(TAG, "bulkInsert() data into database error:", e);
             }
         } else {
             // Inserts one fake data into battery provider.
@@ -430,8 +604,7 @@ public final class DatabaseUtils {
                         + isFullChargeStart);
 
             } catch (Exception e) {
-                errorMessage = e.toString();
-                Log.e(TAG, "insert() data into database error:\n" + errorMessage);
+                Log.e(TAG, "insert() data into database error:", e);
             }
             valuesList.add(contentValues);
         }
@@ -504,8 +677,7 @@ public final class DatabaseUtils {
     static void recordDateTime(Context context, String preferenceKey) {
         final SharedPreferences sharedPreferences = getSharedPreferences(context);
         if (sharedPreferences != null) {
-            final String currentTime = ConvertUtils.utcToLocalTimeForLogging(
-                    System.currentTimeMillis());
+            final String currentTime = utcToLocalTimeForLogging(System.currentTimeMillis());
             sharedPreferences.edit().putString(preferenceKey, currentTime).apply();
         }
     }
@@ -533,11 +705,6 @@ public final class DatabaseUtils {
             cursor.moveToFirst();
             // There is only one column returned so use the index 0 directly.
             final long latestTimestamp = cursor.getLong(/*columnIndex=*/ 0);
-            try {
-                cursor.close();
-            } catch (Exception e) {
-                Log.e(TAG, "cursor.close() failed", e);
-            }
             // If there is no data for this user, 0 will be returned from the database.
             return latestTimestamp == 0 ? INVALID_USER_ID : latestTimestamp;
         }
@@ -556,14 +723,9 @@ public final class DatabaseUtils {
             if (cursor == null || cursor.getCount() == 0) {
                 return appUsageEventList;
             }
-            // Loads and recovers all AppUsageEvent data from cursor.
+            // Loads and converts all AppUsageEvent data from cursor.
             while (cursor.moveToNext()) {
-                appUsageEventList.add(ConvertUtils.convertToAppUsageEventFromCursor(cursor));
-            }
-            try {
-                cursor.close();
-            } catch (Exception e) {
-                Log.e(TAG, "cursor.close() failed", e);
+                appUsageEventList.add(ConvertUtils.convertToAppUsageEvent(cursor));
             }
         }
         return appUsageEventList;
@@ -582,17 +744,69 @@ public final class DatabaseUtils {
             if (cursor == null || cursor.getCount() == 0) {
                 return batteryEventList;
             }
-            // Loads and recovers all AppUsageEvent data from cursor.
+            // Loads and converts all AppUsageEvent data from cursor.
             while (cursor.moveToNext()) {
-                batteryEventList.add(ConvertUtils.convertToBatteryEventFromCursor(cursor));
-            }
-            try {
-                cursor.close();
-            } catch (Exception e) {
-                Log.e(TAG, "cursor.close() failed", e);
+                batteryEventList.add(ConvertUtils.convertToBatteryEvent(cursor));
             }
         }
         return batteryEventList;
+    }
+
+    private static List<BatteryUsageSlot> loadBatteryUsageSlotsFromContentProvider(
+            Context context, Uri batteryUsageSlotUri) {
+        final List<BatteryUsageSlot> batteryUsageSlotList = new ArrayList<>();
+        context = getParentContext(context);
+        if (context == null) {
+            return batteryUsageSlotList;
+        }
+        try (Cursor cursor = sFakeSupplier != null
+                ? sFakeSupplier.get()
+                : context.getContentResolver().query(batteryUsageSlotUri, null, null, null)) {
+            if (cursor == null || cursor.getCount() == 0) {
+                return batteryUsageSlotList;
+            }
+            // Loads and converts all AppUsageEvent data from cursor.
+            while (cursor.moveToNext()) {
+                batteryUsageSlotList.add(ConvertUtils.convertToBatteryUsageSlot(cursor));
+            }
+        }
+        return batteryUsageSlotList;
+    }
+
+    private static long loadLastFullChargeTimeFromContentProvider(
+            Context context, final Uri lastFullChargeTimeUri) {
+        // We have already make sure the context here is with profile parent's user identity. Don't
+        // need to check whether current user is work profile.
+        try (Cursor cursor = sFakeSupplier != null
+                ? sFakeSupplier.get()
+                : context.getContentResolver().query(
+                        lastFullChargeTimeUri, null, null, null)) {
+            if (cursor == null || cursor.getCount() == 0) {
+                return 0L;
+            }
+            cursor.moveToFirst();
+            // There is only one column returned so use the index 0 directly.
+            final long lastFullChargeTime = cursor.getLong(/*columnIndex=*/ 0);
+            return lastFullChargeTime;
+        }
+    }
+
+    private static long loadBatteryStateLatestTimestampFromContentProvider(
+            Context context, final Uri batteryStateLatestTimestampUri) {
+        // We have already make sure the context here is with profile parent's user identity. Don't
+        // need to check whether current user is work profile.
+        try (Cursor cursor = sFakeSupplier != null
+                ? sFakeSupplier.get()
+                : context.getContentResolver().query(
+                        batteryStateLatestTimestampUri, null, null, null)) {
+            if (cursor == null || cursor.getCount() == 0) {
+                return 0L;
+            }
+            cursor.moveToFirst();
+            // There is only one column returned so use the index 0 directly.
+            final long batteryStateLatestTimestamp = cursor.getLong(/*columnIndex=*/ 0);
+            return batteryStateLatestTimestamp;
+        }
     }
 
     private static Map<Long, Map<String, BatteryHistEntry>> loadHistoryMapFromContentProvider(
@@ -607,7 +821,7 @@ public final class DatabaseUtils {
             if (cursor == null || cursor.getCount() == 0) {
                 return resultMap;
             }
-            // Loads and recovers all BatteryHistEntry data from cursor.
+            // Loads and converts all BatteryHistEntry data from cursor.
             while (cursor.moveToNext()) {
                 final BatteryHistEntry entry = new BatteryHistEntry(cursor);
                 final long timestamp = entry.mTimestamp;
@@ -619,11 +833,6 @@ public final class DatabaseUtils {
                     resultMap.put(timestamp, batteryHistEntryMap);
                 }
                 batteryHistEntryMap.put(key, entry);
-            }
-            try {
-                cursor.close();
-            } catch (Exception e) {
-                Log.e(TAG, "cursor.close() failed", e);
             }
         }
         return resultMap;

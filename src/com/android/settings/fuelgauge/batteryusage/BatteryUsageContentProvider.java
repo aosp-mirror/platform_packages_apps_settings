@@ -21,7 +21,6 @@ import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -36,12 +35,14 @@ import com.android.settings.fuelgauge.batteryusage.db.BatteryEventEntity;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryState;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryStateDao;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryStateDatabase;
+import com.android.settings.fuelgauge.batteryusage.db.BatteryUsageSlotDao;
+import com.android.settings.fuelgauge.batteryusage.db.BatteryUsageSlotEntity;
 
 import java.time.Clock;
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /** {@link ContentProvider} class to fetch battery usage data. */
 public class BatteryUsageContentProvider extends ContentProvider {
@@ -55,7 +56,12 @@ public class BatteryUsageContentProvider extends ContentProvider {
     private static final int APP_USAGE_LATEST_TIMESTAMP_CODE = 2;
     private static final int APP_USAGE_EVENT_CODE = 3;
     private static final int BATTERY_EVENT_CODE = 4;
+    private static final int LAST_FULL_CHARGE_TIMESTAMP_CODE = 5;
+    private static final int BATTERY_STATE_LATEST_TIMESTAMP_CODE = 6;
+    private static final int BATTERY_USAGE_SLOT_CODE = 7;
 
+    private static final List<Integer> ALL_BATTERY_EVENT_TYPES =
+            Arrays.stream(BatteryEventType.values()).map(type -> type.getNumber()).toList();
     private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
     static {
@@ -75,12 +81,25 @@ public class BatteryUsageContentProvider extends ContentProvider {
                 DatabaseUtils.AUTHORITY,
                 /*path=*/ DatabaseUtils.BATTERY_EVENT_TABLE,
                 /*code=*/ BATTERY_EVENT_CODE);
+        sUriMatcher.addURI(
+                DatabaseUtils.AUTHORITY,
+                /*path=*/ DatabaseUtils.LAST_FULL_CHARGE_TIMESTAMP_PATH,
+                /*code=*/ LAST_FULL_CHARGE_TIMESTAMP_CODE);
+        sUriMatcher.addURI(
+                DatabaseUtils.AUTHORITY,
+                /*path=*/ DatabaseUtils.BATTERY_STATE_LATEST_TIMESTAMP_PATH,
+                /*code=*/ BATTERY_STATE_LATEST_TIMESTAMP_CODE);
+        sUriMatcher.addURI(
+                DatabaseUtils.AUTHORITY,
+                /*path=*/ DatabaseUtils.BATTERY_USAGE_SLOT_TABLE,
+                /*code=*/ BATTERY_USAGE_SLOT_CODE);
     }
 
     private Clock mClock;
     private BatteryStateDao mBatteryStateDao;
     private AppUsageEventDao mAppUsageEventDao;
     private BatteryEventDao mBatteryEventDao;
+    private BatteryUsageSlotDao mBatteryUsageSlotDao;
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     public void setClock(Clock clock) {
@@ -94,9 +113,11 @@ public class BatteryUsageContentProvider extends ContentProvider {
             return false;
         }
         mClock = Clock.systemUTC();
-        mBatteryStateDao = BatteryStateDatabase.getInstance(getContext()).batteryStateDao();
-        mAppUsageEventDao = BatteryStateDatabase.getInstance(getContext()).appUsageEventDao();
-        mBatteryEventDao = BatteryStateDatabase.getInstance(getContext()).batteryEventDao();
+        final BatteryStateDatabase database = BatteryStateDatabase.getInstance(getContext());
+        mBatteryStateDao = database.batteryStateDao();
+        mAppUsageEventDao = database.appUsageEventDao();
+        mBatteryEventDao = database.batteryEventDao();
+        mBatteryUsageSlotDao = database.batteryUsageSlotDao();
         Log.w(TAG, "create content provider from " + getCallingPackage());
         return true;
     }
@@ -118,6 +139,12 @@ public class BatteryUsageContentProvider extends ContentProvider {
                 return getAppUsageLatestTimestamp(uri);
             case BATTERY_EVENT_CODE:
                 return getBatteryEvents(uri);
+            case LAST_FULL_CHARGE_TIMESTAMP_CODE:
+                return getLastFullChargeTimestamp(uri);
+            case BATTERY_STATE_LATEST_TIMESTAMP_CODE:
+                return getBatteryStateLatestTimestamp(uri);
+            case BATTERY_USAGE_SLOT_CODE:
+                return getBatteryUsageSlots(uri);
             default:
                 throw new IllegalArgumentException("unknown URI: " + uri);
         }
@@ -132,34 +159,31 @@ public class BatteryUsageContentProvider extends ContentProvider {
     @Nullable
     @Override
     public Uri insert(@NonNull Uri uri, @Nullable ContentValues contentValues) {
-        switch (sUriMatcher.match(uri)) {
-            case BATTERY_STATE_CODE:
-                try {
+        try {
+            switch (sUriMatcher.match(uri)) {
+                case BATTERY_STATE_CODE:
                     mBatteryStateDao.insert(BatteryState.create(contentValues));
-                    return uri;
-                } catch (RuntimeException e) {
-                    Log.e(TAG, "insert() from:" + uri + " error:" + e);
-                    return null;
-                }
-            case APP_USAGE_EVENT_CODE:
-                try {
+                    break;
+                case APP_USAGE_EVENT_CODE:
                     mAppUsageEventDao.insert(AppUsageEventEntity.create(contentValues));
-                    return uri;
-                } catch (RuntimeException e) {
-                    Log.e(TAG, "insert() from:" + uri + " error:" + e);
-                    return null;
-                }
-            case BATTERY_EVENT_CODE:
-                try {
+                    break;
+                case BATTERY_EVENT_CODE:
                     mBatteryEventDao.insert(BatteryEventEntity.create(contentValues));
-                    return uri;
-                } catch (RuntimeException e) {
-                    Log.e(TAG, "insert() from:" + uri + " error:" + e);
-                    return null;
-                }
-            default:
-                throw new IllegalArgumentException("unknown URI: " + uri);
+                    break;
+                case BATTERY_USAGE_SLOT_CODE:
+                    mBatteryUsageSlotDao.insert(BatteryUsageSlotEntity.create(contentValues));
+                    break;
+                default:
+                    throw new IllegalArgumentException("unknown URI: " + uri);
+            }
+        } catch (RuntimeException e) {
+            if (e instanceof  IllegalArgumentException) {
+                throw e;
+            }
+            Log.e(TAG, "insert() from:" + uri + " error:", e);
+            return null;
         }
+        return uri;
     }
 
     @Override
@@ -176,21 +200,44 @@ public class BatteryUsageContentProvider extends ContentProvider {
         throw new UnsupportedOperationException("unsupported!");
     }
 
-    private Cursor getBatteryStates(Uri uri) {
-        final long queryTimestamp = getQueryTimestamp(uri);
-        return getBatteryStates(uri, queryTimestamp);
-    }
-
-    private Cursor getBatteryStates(Uri uri, long firstTimestamp) {
+    private Cursor getLastFullChargeTimestamp(Uri uri) {
         final long timestamp = mClock.millis();
         Cursor cursor = null;
         try {
-            cursor = mBatteryStateDao.getCursorSinceLastFullCharge(firstTimestamp);
+            cursor = mBatteryEventDao.getLastFullChargeTimestamp();
         } catch (RuntimeException e) {
-            Log.e(TAG, "query() from:" + uri + " error:" + e);
+            Log.e(TAG, "query() from:" + uri + " error:", e);
         }
-        AsyncTask.execute(() -> BootBroadcastReceiver.invokeJobRecheck(getContext()));
-        Log.d(TAG, "query battery states in " + (mClock.millis() - timestamp) + "/ms");
+        Log.d(TAG, String.format("getLastFullChargeTimestamp() in %d/ms",
+                mClock.millis() - timestamp));
+        return cursor;
+    }
+
+    private Cursor getBatteryStateLatestTimestamp(Uri uri) {
+        final long queryTimestamp = getQueryTimestamp(uri);
+        final long timestamp = mClock.millis();
+        Cursor cursor = null;
+        try {
+            cursor = mBatteryStateDao.getLatestTimestampBefore(queryTimestamp);
+        } catch (RuntimeException e) {
+            Log.e(TAG, "query() from:" + uri + " error:", e);
+        }
+        Log.d(TAG, String.format("getBatteryStateLatestTimestamp() no later than %d in %d/ms",
+                queryTimestamp, mClock.millis() - timestamp));
+        return cursor;
+    }
+
+    private Cursor getBatteryStates(Uri uri) {
+        final long queryTimestamp = getQueryTimestamp(uri);
+        final long timestamp = mClock.millis();
+        Cursor cursor = null;
+        try {
+            cursor = mBatteryStateDao.getBatteryStatesAfter(queryTimestamp);
+        } catch (RuntimeException e) {
+            Log.e(TAG, "query() from:" + uri + " error:", e);
+        }
+        Log.d(TAG, String.format("getBatteryStates() after %d in %d/ms",
+                queryTimestamp, mClock.millis() - timestamp));
         return cursor;
     }
 
@@ -205,9 +252,9 @@ public class BatteryUsageContentProvider extends ContentProvider {
         try {
             cursor = mAppUsageEventDao.getAllForUsersAfter(queryUserIds, queryTimestamp);
         } catch (RuntimeException e) {
-            Log.e(TAG, "query() from:" + uri + " error:" + e);
+            Log.e(TAG, "query() from:" + uri + " error:", e);
         }
-        Log.w(TAG, "query app usage events in " + (mClock.millis() - timestamp) + "/ms");
+        Log.w(TAG, "getAppUsageEvents() in " + (mClock.millis() - timestamp) + "/ms");
         return cursor;
     }
 
@@ -221,42 +268,78 @@ public class BatteryUsageContentProvider extends ContentProvider {
         try {
             cursor = mAppUsageEventDao.getLatestTimestampOfUser(queryUserId);
         } catch (RuntimeException e) {
-            Log.e(TAG, "query() from:" + uri + " error:" + e);
+            Log.e(TAG, "query() from:" + uri + " error:", e);
         }
-        Log.d(TAG, String.format("query app usage latest timestamp %d for user %d in %d/ms",
-                timestamp, queryUserId, (mClock.millis() - timestamp)));
+        Log.d(TAG, String.format("getAppUsageLatestTimestamp() for user %d in %d/ms",
+                queryUserId, (mClock.millis() - timestamp)));
         return cursor;
     }
 
     private Cursor getBatteryEvents(Uri uri) {
+        List<Integer> queryBatteryEventTypes = getQueryBatteryEventTypes(uri);
+        if (queryBatteryEventTypes == null || queryBatteryEventTypes.isEmpty()) {
+            queryBatteryEventTypes = ALL_BATTERY_EVENT_TYPES;
+        }
         final long queryTimestamp = getQueryTimestamp(uri);
         final long timestamp = mClock.millis();
         Cursor cursor = null;
         try {
-            cursor = mBatteryEventDao.getAllAfter(queryTimestamp);
+            cursor = mBatteryEventDao.getAllAfter(queryTimestamp, queryBatteryEventTypes);
         } catch (RuntimeException e) {
-            Log.e(TAG, "query() from:" + uri + " error:" + e);
+            Log.e(TAG, "query() from:" + uri + " error:", e);
         }
-        Log.w(TAG, "query app usage events in " + (mClock.millis() - timestamp) + "/ms");
+        Log.w(TAG, "getBatteryEvents() in " + (mClock.millis() - timestamp) + "/ms");
         return cursor;
+    }
+
+    private Cursor getBatteryUsageSlots(Uri uri) {
+        final long queryTimestamp = getQueryTimestamp(uri);
+        final long timestamp = mClock.millis();
+        Cursor cursor = null;
+        try {
+            cursor = mBatteryUsageSlotDao.getAllAfter(queryTimestamp);
+        } catch (RuntimeException e) {
+            Log.e(TAG, "query() from:" + uri + " error:", e);
+        }
+        Log.w(TAG, "getBatteryUsageSlots() in " + (mClock.millis() - timestamp) + "/ms");
+        return cursor;
+    }
+
+    private List<Integer> getQueryBatteryEventTypes(Uri uri) {
+        Log.d(TAG, "getQueryBatteryEventTypes from uri: " + uri);
+        final String batteryEventTypesParameter =
+                uri.getQueryParameter(DatabaseUtils.QUERY_BATTERY_EVENT_TYPE);
+        if (TextUtils.isEmpty(batteryEventTypesParameter)) {
+            return null;
+        }
+        try {
+            List<Integer> batteryEventTypes = new ArrayList<>();
+            for (String typeString : batteryEventTypesParameter.split(",")) {
+                batteryEventTypes.add(Integer.parseInt(typeString.trim()));
+            }
+            return batteryEventTypes;
+        } catch (NumberFormatException e) {
+            Log.e(TAG, "invalid query value: " + batteryEventTypesParameter, e);
+            return null;
+        }
     }
 
     // If URI contains query parameter QUERY_KEY_USERID, use the value directly.
     // Otherwise, return null.
     private List<Long> getQueryUserIds(Uri uri) {
         Log.d(TAG, "getQueryUserIds from uri: " + uri);
-        final String value = uri.getQueryParameter(DatabaseUtils.QUERY_KEY_USERID);
-        if (TextUtils.isEmpty(value)) {
-            Log.w(TAG, "empty query value");
+        final String userIdsParameter = uri.getQueryParameter(DatabaseUtils.QUERY_KEY_USERID);
+        if (TextUtils.isEmpty(userIdsParameter)) {
             return null;
         }
         try {
-            return Arrays.asList(value.split(","))
-                    .stream()
-                    .map(s -> Long.parseLong(s.trim()))
-                    .collect(Collectors.toList());
+            List<Long> userIds = new ArrayList<>();
+            for (String idString : userIdsParameter.split(",")) {
+                userIds.add(Long.parseLong(idString.trim()));
+            }
+            return userIds;
         } catch (NumberFormatException e) {
-            Log.e(TAG, "invalid query value: " + value, e);
+            Log.e(TAG, "invalid query value: " + userIdsParameter, e);
             return null;
         }
     }

@@ -16,6 +16,9 @@
 
 package com.android.settings.fuelgauge.batteryusage;
 
+import static com.android.settings.fuelgauge.batteryusage.ConvertUtils.FAKE_PACKAGE_NAME;
+import static com.android.settingslib.fuelgauge.BatteryStatus.BATTERY_LEVEL_UNKNOWN;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.anyInt;
@@ -42,6 +45,7 @@ import android.os.BatteryUsageStats;
 import android.os.Parcel;
 import android.os.RemoteException;
 import android.os.UserManager;
+import android.util.ArrayMap;
 
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -188,16 +192,18 @@ public final class DataProcessorTest {
         final String packageName = "com.android.settings";
         // Adds the day 1 data.
         final List<Long> timestamps1 = List.of(14400000L, 18000000L, 21600000L);
-        final List<Integer> levels1 = List.of(100, 100, 100);
+        final Map<Long, Integer> batteryLevelMap1 =
+                Map.of(timestamps1.get(0), 100, timestamps1.get(1), 100, timestamps1.get(2), 100);
         hourlyBatteryLevelsPerDay.add(
-                new BatteryLevelData.PeriodBatteryLevelData(timestamps1, levels1));
+                new BatteryLevelData.PeriodBatteryLevelData(batteryLevelMap1, timestamps1));
         // Adds the day 2 data.
         hourlyBatteryLevelsPerDay.add(null);
         // Adds the day 3 data.
         final List<Long> timestamps2 = List.of(45200000L, 48800000L);
-        final List<Integer> levels2 = List.of(100, 100);
+        final Map<Long, Integer> batteryLevelMap2 =
+                Map.of(timestamps2.get(0), 100, timestamps2.get(1), 100);
         hourlyBatteryLevelsPerDay.add(
-                new BatteryLevelData.PeriodBatteryLevelData(timestamps2, levels2));
+                new BatteryLevelData.PeriodBatteryLevelData(batteryLevelMap2, timestamps2));
         final List<AppUsageEvent> appUsageEventList = new ArrayList<>();
         // Adds some events before the start timestamp.
         appUsageEventList.add(buildAppUsageEvent(
@@ -285,7 +291,7 @@ public final class DataProcessorTest {
         final List<BatteryLevelData.PeriodBatteryLevelData> hourlyBatteryLevelsPerDay =
                 new ArrayList<>();
         hourlyBatteryLevelsPerDay.add(
-                new BatteryLevelData.PeriodBatteryLevelData(new ArrayList<>(), new ArrayList<>()));
+                new BatteryLevelData.PeriodBatteryLevelData(new ArrayMap<>(), new ArrayList<>()));
         assertThat(DataProcessor.generateAppUsagePeriodMap(
                 mContext, hourlyBatteryLevelsPerDay, new ArrayList<>(), new ArrayList<>()))
                 .isNull();
@@ -371,19 +377,6 @@ public final class DataProcessorTest {
     }
 
     @Test
-    public void getLevelDataThroughProcessedHistoryMap_notEnoughData_returnNull() {
-        final long[] timestamps = {100L};
-        final int[] levels = {100};
-        final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap =
-                createHistoryMap(timestamps, levels);
-        DataProcessor.sTestCurrentTimeMillis = timestamps[timestamps.length - 1];
-
-        assertThat(
-                DataProcessor.getLevelDataThroughProcessedHistoryMap(mContext, batteryHistoryMap))
-                .isNull();
-    }
-
-    @Test
     public void getLevelDataThroughProcessedHistoryMap_OneDayData_returnExpectedResult() {
         // Timezone GMT+8
         final long[] timestamps = {
@@ -441,7 +434,7 @@ public final class DataProcessorTest {
         );
         final List<Integer> expectedDailyLevels = new ArrayList<>();
         expectedDailyLevels.add(100);
-        expectedDailyLevels.add(null);
+        expectedDailyLevels.add(BATTERY_LEVEL_UNKNOWN);
         expectedDailyLevels.add(82);
         final List<List<Long>> expectedHourlyTimestamps = List.of(
                 List.of(
@@ -459,13 +452,13 @@ public final class DataProcessorTest {
         );
         final List<Integer> expectedHourlyLevels1 = new ArrayList<>();
         expectedHourlyLevels1.add(100);
-        expectedHourlyLevels1.add(null);
-        expectedHourlyLevels1.add(null);
+        expectedHourlyLevels1.add(BATTERY_LEVEL_UNKNOWN);
+        expectedHourlyLevels1.add(BATTERY_LEVEL_UNKNOWN);
         final List<Integer> expectedHourlyLevels2 = new ArrayList<>();
-        expectedHourlyLevels2.add(null);
+        expectedHourlyLevels2.add(BATTERY_LEVEL_UNKNOWN);
         expectedHourlyLevels2.add(94);
         expectedHourlyLevels2.add(90);
-        expectedHourlyLevels2.add(null);
+        expectedHourlyLevels2.add(BATTERY_LEVEL_UNKNOWN);
         expectedHourlyLevels2.add(82);
         final List<List<Integer>> expectedHourlyLevels = List.of(
                 expectedHourlyLevels1,
@@ -503,8 +496,8 @@ public final class DataProcessorTest {
         );
         final List<Integer> expectedDailyLevels = new ArrayList<>();
         expectedDailyLevels.add(100);
-        expectedDailyLevels.add(null);
-        expectedDailyLevels.add(null);
+        expectedDailyLevels.add(BATTERY_LEVEL_UNKNOWN);
+        expectedDailyLevels.add(BATTERY_LEVEL_UNKNOWN);
         expectedDailyLevels.add(88);
         final List<List<Long>> expectedHourlyTimestamps = List.of(
                 List.of(
@@ -542,32 +535,32 @@ public final class DataProcessorTest {
         );
         final List<Integer> expectedHourlyLevels1 = new ArrayList<>();
         expectedHourlyLevels1.add(100);
-        expectedHourlyLevels1.add(null);
-        expectedHourlyLevels1.add(null);
-        expectedHourlyLevels1.add(null);
-        expectedHourlyLevels1.add(null);
-        expectedHourlyLevels1.add(null);
-        expectedHourlyLevels1.add(null);
-        expectedHourlyLevels1.add(null);
+        expectedHourlyLevels1.add(BATTERY_LEVEL_UNKNOWN);
+        expectedHourlyLevels1.add(BATTERY_LEVEL_UNKNOWN);
+        expectedHourlyLevels1.add(BATTERY_LEVEL_UNKNOWN);
+        expectedHourlyLevels1.add(BATTERY_LEVEL_UNKNOWN);
+        expectedHourlyLevels1.add(BATTERY_LEVEL_UNKNOWN);
+        expectedHourlyLevels1.add(BATTERY_LEVEL_UNKNOWN);
+        expectedHourlyLevels1.add(BATTERY_LEVEL_UNKNOWN);
         final List<Integer> expectedHourlyLevels2 = new ArrayList<>();
-        expectedHourlyLevels2.add(null);
-        expectedHourlyLevels2.add(null);
-        expectedHourlyLevels2.add(null);
-        expectedHourlyLevels2.add(null);
-        expectedHourlyLevels2.add(null);
-        expectedHourlyLevels2.add(null);
-        expectedHourlyLevels2.add(null);
-        expectedHourlyLevels2.add(null);
-        expectedHourlyLevels2.add(null);
-        expectedHourlyLevels2.add(null);
-        expectedHourlyLevels2.add(null);
-        expectedHourlyLevels2.add(null);
-        expectedHourlyLevels2.add(null);
-        expectedHourlyLevels2.add(null);
+        expectedHourlyLevels2.add(BATTERY_LEVEL_UNKNOWN);
+        expectedHourlyLevels2.add(BATTERY_LEVEL_UNKNOWN);
+        expectedHourlyLevels2.add(BATTERY_LEVEL_UNKNOWN);
+        expectedHourlyLevels2.add(BATTERY_LEVEL_UNKNOWN);
+        expectedHourlyLevels2.add(BATTERY_LEVEL_UNKNOWN);
+        expectedHourlyLevels2.add(BATTERY_LEVEL_UNKNOWN);
+        expectedHourlyLevels2.add(BATTERY_LEVEL_UNKNOWN);
+        expectedHourlyLevels2.add(BATTERY_LEVEL_UNKNOWN);
+        expectedHourlyLevels2.add(BATTERY_LEVEL_UNKNOWN);
+        expectedHourlyLevels2.add(BATTERY_LEVEL_UNKNOWN);
+        expectedHourlyLevels2.add(BATTERY_LEVEL_UNKNOWN);
+        expectedHourlyLevels2.add(BATTERY_LEVEL_UNKNOWN);
+        expectedHourlyLevels2.add(BATTERY_LEVEL_UNKNOWN);
+        expectedHourlyLevels2.add(BATTERY_LEVEL_UNKNOWN);
         final List<Integer> expectedHourlyLevels3 = new ArrayList<>();
-        expectedHourlyLevels3.add(null);
-        expectedHourlyLevels3.add(null);
-        expectedHourlyLevels3.add(null);
+        expectedHourlyLevels3.add(BATTERY_LEVEL_UNKNOWN);
+        expectedHourlyLevels3.add(BATTERY_LEVEL_UNKNOWN);
+        expectedHourlyLevels3.add(BATTERY_LEVEL_UNKNOWN);
         expectedHourlyLevels3.add(88);
         final List<List<Integer>> expectedHourlyLevels = List.of(
                 expectedHourlyLevels1,
@@ -606,8 +599,8 @@ public final class DataProcessorTest {
         );
         final List<Integer> expectedDailyLevels = new ArrayList<>();
         expectedDailyLevels.add(100);
-        expectedDailyLevels.add(null);
-        expectedDailyLevels.add(null);
+        expectedDailyLevels.add(BATTERY_LEVEL_UNKNOWN);
+        expectedDailyLevels.add(BATTERY_LEVEL_UNKNOWN);
         expectedDailyLevels.add(88);
         final List<List<Long>> expectedHourlyTimestamps = List.of(
                 List.of(
@@ -638,25 +631,25 @@ public final class DataProcessorTest {
         );
         final List<Integer> expectedHourlyLevels1 = new ArrayList<>();
         expectedHourlyLevels1.add(100);
-        expectedHourlyLevels1.add(null);
+        expectedHourlyLevels1.add(BATTERY_LEVEL_UNKNOWN);
         final List<Integer> expectedHourlyLevels2 = new ArrayList<>();
-        expectedHourlyLevels2.add(null);
-        expectedHourlyLevels2.add(null);
-        expectedHourlyLevels2.add(null);
-        expectedHourlyLevels2.add(null);
-        expectedHourlyLevels2.add(null);
-        expectedHourlyLevels2.add(null);
-        expectedHourlyLevels2.add(null);
-        expectedHourlyLevels2.add(null);
-        expectedHourlyLevels2.add(null);
-        expectedHourlyLevels2.add(null);
-        expectedHourlyLevels2.add(null);
-        expectedHourlyLevels2.add(null);
-        expectedHourlyLevels2.add(null);
+        expectedHourlyLevels2.add(BATTERY_LEVEL_UNKNOWN);
+        expectedHourlyLevels2.add(BATTERY_LEVEL_UNKNOWN);
+        expectedHourlyLevels2.add(BATTERY_LEVEL_UNKNOWN);
+        expectedHourlyLevels2.add(BATTERY_LEVEL_UNKNOWN);
+        expectedHourlyLevels2.add(BATTERY_LEVEL_UNKNOWN);
+        expectedHourlyLevels2.add(BATTERY_LEVEL_UNKNOWN);
+        expectedHourlyLevels2.add(BATTERY_LEVEL_UNKNOWN);
+        expectedHourlyLevels2.add(BATTERY_LEVEL_UNKNOWN);
+        expectedHourlyLevels2.add(BATTERY_LEVEL_UNKNOWN);
+        expectedHourlyLevels2.add(BATTERY_LEVEL_UNKNOWN);
+        expectedHourlyLevels2.add(BATTERY_LEVEL_UNKNOWN);
+        expectedHourlyLevels2.add(BATTERY_LEVEL_UNKNOWN);
+        expectedHourlyLevels2.add(BATTERY_LEVEL_UNKNOWN);
         final List<Integer> expectedHourlyLevels3 = new ArrayList<>();
-        expectedHourlyLevels3.add(null);
-        expectedHourlyLevels3.add(null);
-        expectedHourlyLevels3.add(null);
+        expectedHourlyLevels3.add(BATTERY_LEVEL_UNKNOWN);
+        expectedHourlyLevels3.add(BATTERY_LEVEL_UNKNOWN);
+        expectedHourlyLevels3.add(BATTERY_LEVEL_UNKNOWN);
         expectedHourlyLevels3.add(88);
         final List<List<Integer>> expectedHourlyLevels = List.of(
                 expectedHourlyLevels1,
@@ -735,141 +728,6 @@ public final class DataProcessorTest {
     }
 
     @Test
-    public void getDailyTimestamps_notEnoughData_returnEmptyList() {
-        assertThat(DataProcessor.getDailyTimestamps(new ArrayList<>())).isEmpty();
-        assertThat(DataProcessor.getDailyTimestamps(List.of(100L))).isEmpty();
-    }
-
-    @Test
-    public void getDailyTimestamps_allDataInOneHour_returnExpectedList() {
-        // Timezone GMT+8
-        final List<Long> timestamps = List.of(
-                1640970006000L, // 2022-01-01 01:00:06
-                1640973608000L  // 2022-01-01 01:00:08
-        );
-
-        final List<Long> expectedTimestamps = List.of(
-                1640970006000L, // 2022-01-01 01:00:06
-                1640973608000L  // 2022-01-01 01:00:08
-        );
-        assertThat(DataProcessor.getDailyTimestamps(timestamps)).isEqualTo(expectedTimestamps);
-    }
-
-    @Test
-    public void getDailyTimestamps_OneHourDataPerDay_returnExpectedList() {
-        // Timezone GMT+8
-        final List<Long> timestamps = List.of(
-                1641049200000L, // 2022-01-01 23:00:00
-                1641052800000L, // 2022-01-02 00:00:00
-                1641056400000L  // 2022-01-02 01:00:00
-        );
-
-        final List<Long> expectedTimestamps = List.of(
-                1641049200000L, // 2022-01-01 23:00:00
-                1641052800000L, // 2022-01-02 00:00:00
-                1641056400000L  // 2022-01-02 01:00:00
-        );
-        assertThat(DataProcessor.getDailyTimestamps(timestamps)).isEqualTo(expectedTimestamps);
-    }
-
-    @Test
-    public void getDailyTimestamps_OneDayData_returnExpectedList() {
-        // Timezone GMT+8
-        final List<Long> timestamps = List.of(
-                1640966400000L, // 2022-01-01 00:00:00
-                1640970000000L, // 2022-01-01 01:00:00
-                1640973600000L, // 2022-01-01 02:00:00
-                1640977200000L, // 2022-01-01 03:00:00
-                1640980800000L  // 2022-01-01 04:00:00
-        );
-
-        final List<Long> expectedTimestamps = List.of(
-                1640966400000L, // 2022-01-01 00:00:00
-                1640980800000L  // 2022-01-01 04:00:00
-        );
-        assertThat(DataProcessor.getDailyTimestamps(timestamps)).isEqualTo(expectedTimestamps);
-    }
-
-    @Test
-    public void getDailyTimestamps_MultipleDaysData_returnExpectedList() {
-        // Timezone GMT+8
-        final List<Long> timestamps = List.of(
-                1641045600000L, // 2022-01-01 22:00:00
-                1641060000000L, // 2022-01-02 02:00:00
-                1641160800000L, // 2022-01-03 06:00:00
-                1641232800000L  // 2022-01-04 02:00:00
-        );
-
-        final List<Long> expectedTimestamps = List.of(
-                1641045600000L, // 2022-01-01 22:00:00
-                1641052800000L, // 2022-01-02 00:00:00
-                1641139200000L, // 2022-01-03 00:00:00
-                1641225600000L, // 2022-01-04 00:00:00
-                1641232800000L  // 2022-01-04 02:00:00
-        );
-        assertThat(DataProcessor.getDailyTimestamps(timestamps)).isEqualTo(expectedTimestamps);
-    }
-
-    @Test
-    public void getDailyTimestamps_FirstDayOneHourData_returnExpectedList() {
-        // Timezone GMT+8
-        final List<Long> timestamps = List.of(
-                1641049200000L, // 2022-01-01 23:00:00
-                1641060000000L, // 2022-01-02 02:00:00
-                1641160800000L, // 2022-01-03 06:00:00
-                1641254400000L  // 2022-01-04 08:00:00
-        );
-
-        final List<Long> expectedTimestamps = List.of(
-                1641049200000L, // 2022-01-01 23:00:00
-                1641052800000L, // 2022-01-02 00:00:00
-                1641139200000L, // 2022-01-03 00:00:00
-                1641225600000L, // 2022-01-04 00:00:00
-                1641254400000L  // 2022-01-04 08:00:00
-        );
-        assertThat(DataProcessor.getDailyTimestamps(timestamps)).isEqualTo(expectedTimestamps);
-    }
-
-    @Test
-    public void getDailyTimestamps_LastDayNoData_returnExpectedList() {
-        // Timezone GMT+8
-        final List<Long> timestamps = List.of(
-                1640988000000L, // 2022-01-01 06:00:00
-                1641060000000L, // 2022-01-02 02:00:00
-                1641160800000L, // 2022-01-03 06:00:00
-                1641225600000L  // 2022-01-04 00:00:00
-        );
-
-        final List<Long> expectedTimestamps = List.of(
-                1640988000000L, // 2022-01-01 06:00:00
-                1641052800000L, // 2022-01-02 00:00:00
-                1641139200000L, // 2022-01-03 00:00:00
-                1641225600000L  // 2022-01-04 00:00:00
-        );
-        assertThat(DataProcessor.getDailyTimestamps(timestamps)).isEqualTo(expectedTimestamps);
-    }
-
-    @Test
-    public void getDailyTimestamps_LastDayOneHourData_returnExpectedList() {
-        // Timezone GMT+8
-        final List<Long> timestamps = List.of(
-                1640988000000L, // 2022-01-01 06:00:00
-                1641060000000L, // 2022-01-02 02:00:00
-                1641160800000L, // 2022-01-03 06:00:00
-                1641229200000L  // 2022-01-04 01:00:00
-        );
-
-        final List<Long> expectedTimestamps = List.of(
-                1640988000000L, // 2022-01-01 06:00:00
-                1641052800000L, // 2022-01-02 00:00:00
-                1641139200000L, // 2022-01-03 00:00:00
-                1641225600000L, // 2022-01-04 00:00:00
-                1641229200000L  // 2022-01-04 01:00:00
-        );
-        assertThat(DataProcessor.getDailyTimestamps(timestamps)).isEqualTo(expectedTimestamps);
-    }
-
-    @Test
     public void isFromFullCharge_emptyData_returnFalse() {
         assertThat(DataProcessor.isFromFullCharge(null)).isFalse();
         assertThat(DataProcessor.isFromFullCharge(new HashMap<>())).isFalse();
@@ -916,20 +774,53 @@ public final class DataProcessorTest {
     }
 
     @Test
-    public void getBatteryUsageMap_emptyHistoryMap_returnNull() {
+    public void getBatteryDiffDataMap_emptyHistoryMap_returnEmpty() {
         final List<BatteryLevelData.PeriodBatteryLevelData> hourlyBatteryLevelsPerDay =
                 new ArrayList<>();
 
         hourlyBatteryLevelsPerDay.add(
-                new BatteryLevelData.PeriodBatteryLevelData(new ArrayList<>(), new ArrayList<>()));
+                new BatteryLevelData.PeriodBatteryLevelData(new ArrayMap<>(), new ArrayList<>()));
 
-        assertThat(DataProcessor.getBatteryUsageMap(
-                mContext, hourlyBatteryLevelsPerDay, new HashMap<>(), /*appUsagePeriodMap=*/ null))
-                .isNull();
+        assertThat(DataProcessor.getBatteryDiffDataMap(mContext, hourlyBatteryLevelsPerDay,
+                new HashMap<>(), /*appUsagePeriodMap=*/ null, Set.of(), Set.of())).isEmpty();
     }
 
     @Test
-    public void getBatteryUsageMap_returnsExpectedResult() {
+    public void getBatteryDiffDataMap_normalFlow_returnExpectedResult() {
+        final int userId = mContext.getUserId();
+        final long[] batteryHistoryKeys = new long[]{
+                1641045600000L, // 2022-01-01 22:00:00
+                1641049200000L, // 2022-01-01 23:00:00
+                1641052800000L, // 2022-01-02 00:00:00
+        };
+        final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap = Map.of(
+                batteryHistoryKeys[0], Map.of(FAKE_PACKAGE_NAME, createBatteryHistEntry(
+                        FAKE_PACKAGE_NAME, "fake_label", /*consumePower=*/ 0, 0, 0,
+                        0, 0, 0L, userId, ConvertUtils.CONSUMER_TYPE_UID_BATTERY, 0L, 0L, false)),
+                batteryHistoryKeys[1], Map.of(FAKE_PACKAGE_NAME, createBatteryHistEntry(
+                        FAKE_PACKAGE_NAME, "fake_label", /*consumePower=*/ 5, 0, 0,
+                        0, 0, 0L, userId, ConvertUtils.CONSUMER_TYPE_UID_BATTERY, 0L, 0L, false)),
+                batteryHistoryKeys[2], Map.of(FAKE_PACKAGE_NAME, createBatteryHistEntry(
+                        FAKE_PACKAGE_NAME, "fake_label", /*consumePower=*/ 16, 0, 0,
+                        0, 0, 0L, userId, ConvertUtils.CONSUMER_TYPE_UID_BATTERY, 0L, 0L, false)));
+        final BatteryLevelData batteryLevelData = generateBatteryLevelData(batteryHistoryKeys);
+        final Map<Integer, Map<Integer, Map<Long, Map<String, List<AppUsagePeriod>>>>>
+                appUsagePeriodMap = Map.of(0, Map.of(0, Map.of(Long.valueOf(userId), Map.of(
+                FAKE_PACKAGE_NAME, List.of(buildAppUsagePeriod(0, 6))))));
+
+        Map<Long, BatteryDiffData> batteryDiffDataMap = DataProcessor.getBatteryDiffDataMap(
+                mContext, batteryLevelData.getHourlyBatteryLevelsPerDay(), batteryHistoryMap,
+                appUsagePeriodMap, Set.of(), Set.of());
+
+        assertThat(batteryDiffDataMap).hasSize(1);
+        assertThat(batteryDiffDataMap).containsKey(batteryHistoryKeys[0]);
+        BatteryDiffData batteryDiffData = batteryDiffDataMap.get(batteryHistoryKeys[0]);
+        assertThat(batteryDiffData.getStartTimestamp()).isEqualTo(batteryHistoryKeys[0]);
+        assertThat(batteryDiffData.getEndTimestamp()).isEqualTo(batteryHistoryKeys[2]);
+    }
+
+    @Test
+    public void generateBatteryUsageMap_returnsExpectedResult() {
         final long[] batteryHistoryKeys = new long[]{
                 1641045600000L, // 2022-01-01 22:00:00
                 1641049200000L, // 2022-01-01 23:00:00
@@ -940,7 +831,7 @@ public final class DataProcessorTest {
         final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap = new HashMap<>();
         final int currentUserId = mContext.getUserId();
         final BatteryHistEntry fakeEntry = createBatteryHistEntry(
-                ConvertUtils.FAKE_PACKAGE_NAME, "fake_label", /*consumePower=*/ 0,
+                FAKE_PACKAGE_NAME, "fake_label", /*consumePower=*/ 0,
                 /*foregroundUsageConsumePower=*/ 0, /*foregroundServiceUsageConsumePower=*/ 0,
                 /*backgroundUsageConsumePower=*/ 0, /*cachedUsageConsumePower=*/ 0,
                 /*uid=*/ 0L, currentUserId, ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
@@ -1030,19 +921,7 @@ public final class DataProcessorTest {
         entryMap.put(entry.getKey(), entry);
         entryMap.put(fakeEntry.getKey(), fakeEntry);
         batteryHistoryMap.put(batteryHistoryKeys[4], entryMap);
-        final List<BatteryLevelData.PeriodBatteryLevelData> hourlyBatteryLevelsPerDay =
-                new ArrayList<>();
-        // Adds the day 1 data.
-        List<Long> timestamps =
-                List.of(batteryHistoryKeys[0], batteryHistoryKeys[2]);
-        final List<Integer> levels = List.of(100, 100);
-        hourlyBatteryLevelsPerDay.add(
-                new BatteryLevelData.PeriodBatteryLevelData(timestamps, levels));
-        // Adds the day 2 data.
-        timestamps = List.of(batteryHistoryKeys[2], batteryHistoryKeys[4]);
-        hourlyBatteryLevelsPerDay.add(
-                new BatteryLevelData.PeriodBatteryLevelData(timestamps, levels));
-
+        final BatteryLevelData batteryLevelData = generateBatteryLevelData(batteryHistoryKeys);
         // Adds app usage data to test screen on time.
         final Map<Integer, Map<Integer, Map<Long, Map<String, List<AppUsagePeriod>>>>>
                 appUsagePeriodMap = new HashMap<>();
@@ -1066,8 +945,12 @@ public final class DataProcessorTest {
         appUsagePeriodMap.get(1).put(0, appUsageMap);
 
         final Map<Integer, Map<Integer, BatteryDiffData>> resultMap =
-                DataProcessor.getBatteryUsageMap(
-                        mContext, hourlyBatteryLevelsPerDay, batteryHistoryMap, appUsagePeriodMap);
+                DataProcessor.generateBatteryUsageMap(
+                        mContext,
+                        DataProcessor.getBatteryDiffDataMap(mContext,
+                                batteryLevelData.getHourlyBatteryLevelsPerDay(), batteryHistoryMap,
+                                appUsagePeriodMap, Set.of(), Set.of()),
+                        batteryLevelData);
 
         BatteryDiffData resultDiffData =
                 resultMap
@@ -1128,7 +1011,7 @@ public final class DataProcessorTest {
     }
 
     @Test
-    public void getBatteryUsageMap_multipleUsers_returnsExpectedResult() {
+    public void generateBatteryUsageMap_multipleUsers_returnsExpectedResult() {
         final long[] batteryHistoryKeys = new long[]{
                 1641052800000L, // 2022-01-02 00:00:00
                 1641056400000L, // 2022-01-02 01:00:00
@@ -1217,17 +1100,15 @@ public final class DataProcessorTest {
                 /*backgroundUsageTimeInMs=*/ 30L, /*isHidden=*/ false);
         entryMap.put(entry.getKey(), entry);
         batteryHistoryMap.put(batteryHistoryKeys[2], entryMap);
-        final List<BatteryLevelData.PeriodBatteryLevelData> hourlyBatteryLevelsPerDay =
-                new ArrayList<>();
-        List<Long> timestamps = List.of(batteryHistoryKeys[0], batteryHistoryKeys[2]);
-        final List<Integer> levels = List.of(100, 100);
-        hourlyBatteryLevelsPerDay.add(
-                new BatteryLevelData.PeriodBatteryLevelData(timestamps, levels));
+        final BatteryLevelData batteryLevelData = generateBatteryLevelData(batteryHistoryKeys);
 
         final Map<Integer, Map<Integer, BatteryDiffData>> resultMap =
-                DataProcessor.getBatteryUsageMap(
-                        mContext, hourlyBatteryLevelsPerDay, batteryHistoryMap,
-                        /*appUsagePeriodMap=*/ null);
+                DataProcessor.generateBatteryUsageMap(
+                        mContext,
+                        DataProcessor.getBatteryDiffDataMap(mContext,
+                                batteryLevelData.getHourlyBatteryLevelsPerDay(), batteryHistoryMap,
+                                /*appUsagePeriodMap=*/ null, Set.of(), Set.of()),
+                        batteryLevelData);
 
         final BatteryDiffData resultDiffData =
                 resultMap
@@ -1247,7 +1128,7 @@ public final class DataProcessorTest {
     }
 
     @Test
-    public void getBatteryUsageMap_usageTimeExceed_returnsExpectedResult() {
+    public void generateBatteryUsageMap_usageTimeExceed_returnsExpectedResult() {
         final long[] batteryHistoryKeys = new long[]{
                 1641052800000L, // 2022-01-02 00:00:00
                 1641056400000L, // 2022-01-02 01:00:00
@@ -1288,12 +1169,7 @@ public final class DataProcessorTest {
                 /*backgroundUsageTimeInMs=*/ 7200000L, /*isHidden=*/ false);
         entryMap.put(entry.getKey(), entry);
         batteryHistoryMap.put(batteryHistoryKeys[2], entryMap);
-        final List<BatteryLevelData.PeriodBatteryLevelData> hourlyBatteryLevelsPerDay =
-                new ArrayList<>();
-        List<Long> timestamps = List.of(batteryHistoryKeys[0], batteryHistoryKeys[2]);
-        final List<Integer> levels = List.of(100, 100);
-        hourlyBatteryLevelsPerDay.add(
-                new BatteryLevelData.PeriodBatteryLevelData(timestamps, levels));
+        final BatteryLevelData batteryLevelData = generateBatteryLevelData(batteryHistoryKeys);
 
         // Adds app usage data to test screen on time.
         final Map<Integer, Map<Integer, Map<Long, Map<String, List<AppUsagePeriod>>>>>
@@ -1307,8 +1183,12 @@ public final class DataProcessorTest {
         appUsagePeriodMap.get(0).put(0, appUsageMap);
 
         final Map<Integer, Map<Integer, BatteryDiffData>> resultMap =
-                DataProcessor.getBatteryUsageMap(
-                        mContext, hourlyBatteryLevelsPerDay, batteryHistoryMap, appUsagePeriodMap);
+                DataProcessor.generateBatteryUsageMap(
+                        mContext,
+                        DataProcessor.getBatteryDiffDataMap(mContext,
+                                batteryLevelData.getHourlyBatteryLevelsPerDay(), batteryHistoryMap,
+                                appUsagePeriodMap, Set.of(), Set.of()),
+                        batteryLevelData);
 
         final BatteryDiffData resultDiffData =
                 resultMap
@@ -1338,7 +1218,7 @@ public final class DataProcessorTest {
     }
 
     @Test
-    public void getBatteryUsageMap_hideApplicationEntries_returnsExpectedResult() {
+    public void generateBatteryUsageMap_hideApplicationEntries_returnsExpectedResult() {
         final long[] batteryHistoryKeys = new long[]{
                 1641052800000L, // 2022-01-02 00:00:00
                 1641056400000L, // 2022-01-02 01:00:00
@@ -1403,19 +1283,17 @@ public final class DataProcessorTest {
                 /*backgroundUsageTimeInMs=*/ 20L, /*isHidden=*/ false);
         entryMap.put(entry.getKey(), entry);
         batteryHistoryMap.put(batteryHistoryKeys[2], entryMap);
-        final List<BatteryLevelData.PeriodBatteryLevelData> hourlyBatteryLevelsPerDay =
-                new ArrayList<>();
-        List<Long> timestamps = List.of(batteryHistoryKeys[0], batteryHistoryKeys[2]);
-        final List<Integer> levels = List.of(100, 100);
-        hourlyBatteryLevelsPerDay.add(
-                new BatteryLevelData.PeriodBatteryLevelData(timestamps, levels));
+        final BatteryLevelData batteryLevelData = generateBatteryLevelData(batteryHistoryKeys);
         when(mPowerUsageFeatureProvider.getHideApplicationSet())
                 .thenReturn(Set.of("package1"));
 
         final Map<Integer, Map<Integer, BatteryDiffData>> resultMap =
-                DataProcessor.getBatteryUsageMap(
-                        mContext, hourlyBatteryLevelsPerDay, batteryHistoryMap,
-                        /*appUsagePeriodMap=*/ null);
+                DataProcessor.generateBatteryUsageMap(
+                        mContext,
+                        DataProcessor.getBatteryDiffDataMap(mContext,
+                                batteryLevelData.getHourlyBatteryLevelsPerDay(), batteryHistoryMap,
+                                /*appUsagePeriodMap=*/ null, Set.of(), Set.of()),
+                        batteryLevelData);
 
         final BatteryDiffData resultDiffData =
                 resultMap
@@ -1431,7 +1309,7 @@ public final class DataProcessorTest {
     }
 
     @Test
-    public void getBatteryUsageMap_hideBackgroundUsageTime_returnsExpectedResult() {
+    public void generateBatteryUsageMap_hideBackgroundUsageTime_returnsExpectedResult() {
         final long[] batteryHistoryKeys = new long[]{
                 1641052800000L, // 2022-01-02 00:00:00
                 1641056400000L, // 2022-01-02 01:00:00
@@ -1496,19 +1374,17 @@ public final class DataProcessorTest {
                 /*backgroundUsageTimeInMs=*/ 20L, /*isHidden=*/ false);
         entryMap.put(entry.getKey(), entry);
         batteryHistoryMap.put(batteryHistoryKeys[2], entryMap);
-        final List<BatteryLevelData.PeriodBatteryLevelData> hourlyBatteryLevelsPerDay =
-                new ArrayList<>();
-        List<Long> timestamps = List.of(batteryHistoryKeys[0], batteryHistoryKeys[2]);
-        final List<Integer> levels = List.of(100, 100);
-        hourlyBatteryLevelsPerDay.add(
-                new BatteryLevelData.PeriodBatteryLevelData(timestamps, levels));
+        final BatteryLevelData batteryLevelData = generateBatteryLevelData(batteryHistoryKeys);
         when(mPowerUsageFeatureProvider.getHideBackgroundUsageTimeSet())
                 .thenReturn(new HashSet(Arrays.asList((CharSequence) "package2")));
 
         final Map<Integer, Map<Integer, BatteryDiffData>> resultMap =
-                DataProcessor.getBatteryUsageMap(
-                        mContext, hourlyBatteryLevelsPerDay, batteryHistoryMap,
-                        /*appUsagePeriodMap=*/ null);
+                DataProcessor.generateBatteryUsageMap(
+                        mContext,
+                        DataProcessor.getBatteryDiffDataMap(mContext,
+                                batteryLevelData.getHourlyBatteryLevelsPerDay(), batteryHistoryMap,
+                                /*appUsagePeriodMap=*/ null, Set.of(), Set.of()),
+                        batteryLevelData);
 
         final BatteryDiffData resultDiffData =
                 resultMap
@@ -1523,7 +1399,10 @@ public final class DataProcessorTest {
     @Test
     public void generateBatteryDiffData_emptyBatteryEntryList_returnNull() {
         assertThat(DataProcessor.generateBatteryDiffData(mContext,
-                DataProcessor.convertToBatteryHistEntry(null, mBatteryUsageStats))).isNull();
+                System.currentTimeMillis(),
+                DataProcessor.convertToBatteryHistEntry(null, mBatteryUsageStats),
+                /* systemAppsPackageNames= */ Set.of(),
+                /* systemAppsUids= */ Set.of())).isNull();
     }
 
     @Test
@@ -1574,7 +1453,10 @@ public final class DataProcessorTest {
                 .when(mMockBatteryEntry4).getPowerComponentId();
 
         final BatteryDiffData batteryDiffData = DataProcessor.generateBatteryDiffData(mContext,
-                DataProcessor.convertToBatteryHistEntry(batteryEntryList, mBatteryUsageStats));
+                System.currentTimeMillis(),
+                DataProcessor.convertToBatteryHistEntry(batteryEntryList, mBatteryUsageStats),
+                /* systemAppsPackageNames= */ Set.of(),
+                /* systemAppsUids= */ Set.of());
 
         assertBatteryDiffEntry(
                 batteryDiffData.getAppDiffEntryList().get(0), 0, /*uid=*/ 2L,
@@ -2041,9 +1923,9 @@ public final class DataProcessorTest {
             final double backgroundUsageConsumePower, final double cachedUsageConsumePower,
             final long foregroundUsageTimeInMs, final long backgroundUsageTimeInMs,
             final long screenOnTimeInMs) {
-        assertThat(entry.mBatteryHistEntry.mUserId).isEqualTo(userId);
-        assertThat(entry.mBatteryHistEntry.mUid).isEqualTo(uid);
-        assertThat(entry.mBatteryHistEntry.mConsumerType).isEqualTo(consumerType);
+        assertThat(entry.mUserId).isEqualTo(userId);
+        assertThat(entry.mUid).isEqualTo(uid);
+        assertThat(entry.mConsumerType).isEqualTo(consumerType);
         assertThat(entry.getPercentage()).isEqualTo(consumePercentage);
         assertThat(entry.mForegroundUsageConsumePower).isEqualTo(foregroundUsageConsumePower);
         assertThat(entry.mForegroundServiceUsageConsumePower)
@@ -2053,5 +1935,13 @@ public final class DataProcessorTest {
         assertThat(entry.mForegroundUsageTimeInMs).isEqualTo(foregroundUsageTimeInMs);
         assertThat(entry.mBackgroundUsageTimeInMs).isEqualTo(backgroundUsageTimeInMs);
         assertThat(entry.mScreenOnTimeInMs).isEqualTo(screenOnTimeInMs);
+    }
+
+    private BatteryLevelData generateBatteryLevelData(long[] timestamps) {
+        Map<Long, Integer> batteryLevelMap = new ArrayMap<>();
+        for (long timestamp : timestamps) {
+            batteryLevelMap.put(timestamp, 100);
+        }
+        return new BatteryLevelData(batteryLevelMap);
     }
 }

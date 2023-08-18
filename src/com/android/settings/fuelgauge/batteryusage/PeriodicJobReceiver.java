@@ -44,7 +44,6 @@ public final class PeriodicJobReceiver extends BroadcastReceiver {
         }
         BatteryUsageLogUtils.writeLog(context, Action.EXECUTE_JOB, "");
         BatteryUsageDataLoader.enqueueWork(context, /*isFullChargeStart=*/ false);
-        AppUsageDataLoader.enqueueWork(context);
         Log.d(TAG, "refresh periodic job from action=" + action);
         PeriodicJobManager.getInstance(context).refreshJob(/*fromBoot=*/ false);
         DatabaseUtils.clearExpiredDataIfNeeded(context);
