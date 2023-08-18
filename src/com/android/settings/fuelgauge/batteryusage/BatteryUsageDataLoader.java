@@ -16,9 +16,12 @@
 
 package com.android.settings.fuelgauge.batteryusage;
 
+import android.app.usage.UsageEvents;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.BatteryUsageStats;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
@@ -27,6 +30,7 @@ import com.android.settings.fuelgauge.BatteryUsageHistoricalLogEntry.Action;
 import com.android.settings.fuelgauge.batteryusage.bugreport.BatteryUsageLogUtils;
 
 import java.util.List;
+import java.util.Map;
 import java.util.function.Supplier;
 
 /** Load battery usage data in the background. */
@@ -36,6 +40,10 @@ public final class BatteryUsageDataLoader {
     // For testing only.
     @VisibleForTesting
     static Supplier<List<BatteryEntry>> sFakeBatteryEntryListSupplier;
+    @VisibleForTesting
+    static Supplier<Map<Long, UsageEvents>> sFakeAppUsageEventsSupplier;
+    @VisibleForTesting
+    static Supplier<List<AppUsageEvent>> sFakeUsageEventsListSupplier;
 
     private BatteryUsageDataLoader() {
     }
@@ -48,9 +56,9 @@ public final class BatteryUsageDataLoader {
     }
 
     @VisibleForTesting
-    static void loadUsageData(final Context context, final boolean isFullChargeStart) {
+    static void loadBatteryStatsData(final Context context, final boolean isFullChargeStart) {
         BatteryUsageLogUtils.writeLog(context, Action.FETCH_USAGE_DATA, "");
-        final long start = System.currentTimeMillis();
+        final long currentTime = System.currentTimeMillis();
         final BatteryUsageStats batteryUsageStats = DataProcessor.getBatteryUsageStats(context);
         final List<BatteryEntry> batteryEntryList =
                 sFakeBatteryEntryListSupplier != null ? sFakeBatteryEntryListSupplier.get()
@@ -59,25 +67,81 @@ public final class BatteryUsageDataLoader {
         if (batteryEntryList == null || batteryEntryList.isEmpty()) {
             Log.w(TAG, "getBatteryEntryList() returns null or empty content");
         }
-        final long elapsedTime = System.currentTimeMillis() - start;
+        final long elapsedTime = System.currentTimeMillis() - currentTime;
         Log.d(TAG, String.format("getBatteryUsageStats() in %d/ms", elapsedTime));
         if (isFullChargeStart) {
             DatabaseUtils.recordDateTime(
                     context, DatabaseUtils.KEY_LAST_LOAD_FULL_CHARGE_TIME);
+            DatabaseUtils.sendBatteryEventData(context, ConvertUtils.convertToBatteryEvent(
+                    currentTime, BatteryEventType.FULL_CHARGED, 100));
         }
 
         // Uploads the BatteryEntry data into database.
         DatabaseUtils.sendBatteryEntryData(
-                context, batteryEntryList, batteryUsageStats, isFullChargeStart);
+                context, currentTime, batteryEntryList, batteryUsageStats, isFullChargeStart);
         DataProcessor.closeBatteryUsageStats(batteryUsageStats);
+    }
+
+    @VisibleForTesting
+    static void loadAppUsageData(final Context context) {
+        final long start = System.currentTimeMillis();
+        final Map<Long, UsageEvents> appUsageEvents =
+                sFakeAppUsageEventsSupplier != null
+                        ? sFakeAppUsageEventsSupplier.get()
+                        : DataProcessor.getAppUsageEvents(context);
+        if (appUsageEvents == null) {
+            Log.w(TAG, "loadAppUsageData() returns null");
+            return;
+        }
+        final List<AppUsageEvent> appUsageEventList =
+                sFakeUsageEventsListSupplier != null
+                        ? sFakeUsageEventsListSupplier.get()
+                        : DataProcessor.generateAppUsageEventListFromUsageEvents(
+                                context, appUsageEvents);
+        if (appUsageEventList == null || appUsageEventList.isEmpty()) {
+            Log.w(TAG, "loadAppUsageData() returns null or empty content");
+            return;
+        }
+        final long elapsedTime = System.currentTimeMillis() - start;
+        Log.d(TAG, String.format("loadAppUsageData() size=%d in %d/ms", appUsageEventList.size(),
+                elapsedTime));
+        // Uploads the AppUsageEvent data into database.
+        DatabaseUtils.sendAppUsageEventData(context, appUsageEventList);
+    }
+
+    private static void preprocessBatteryUsageSlots(final Context context) {
+        final long start = System.currentTimeMillis();
+        final Handler handler = new Handler(Looper.getMainLooper());
+        final BatteryLevelData batteryLevelData = DataProcessManager.getBatteryLevelData(
+                context, handler, /*isFromPeriodJob=*/ true,
+                batteryDiffDataMap -> DatabaseUtils.sendBatteryUsageSlotData(context,
+                        ConvertUtils.convertToBatteryUsageSlotList(batteryDiffDataMap)));
+        if (batteryLevelData == null) {
+            Log.d(TAG, "preprocessBatteryUsageSlots() no new battery usage data.");
+            return;
+        }
+
+        DatabaseUtils.sendBatteryEventData(
+                context, ConvertUtils.convertToBatteryEventList(batteryLevelData));
+        Log.d(TAG, String.format(
+                "preprocessBatteryUsageSlots() batteryLevelData=%s in %d/ms",
+                batteryLevelData, System.currentTimeMillis() - start));
     }
 
     private static void loadUsageDataSafely(
             final Context context, final boolean isFullChargeStart) {
         try {
-            loadUsageData(context, isFullChargeStart);
+            final long start = System.currentTimeMillis();
+            loadBatteryStatsData(context, isFullChargeStart);
+            if (!isFullChargeStart) {
+                // No app usage data or battery diff data at this time.
+                loadAppUsageData(context);
+                preprocessBatteryUsageSlots(context);
+            }
+            Log.d(TAG, String.format(
+                    "loadUsageDataSafely() in %d/ms", System.currentTimeMillis() - start));
         } catch (RuntimeException e) {
-            Log.e(TAG, "loadUsageData:" + e);
+            Log.e(TAG, "loadUsageData:", e);
         }
     }
 }

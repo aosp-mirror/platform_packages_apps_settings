@@ -17,6 +17,7 @@ package com.android.settings.fuelgauge.batteryusage;
 
 import static com.android.settings.Utils.formatPercentage;
 import static com.android.settings.fuelgauge.batteryusage.BatteryChartViewModel.AxisLabelPosition.BETWEEN_TRAPEZOIDS;
+import static com.android.settingslib.fuelgauge.BatteryStatus.BATTERY_LEVEL_UNKNOWN;
 
 import static java.lang.Math.abs;
 import static java.lang.Math.round;
@@ -615,8 +616,8 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
 
     private static boolean isTrapezoidValid(
             @NonNull BatteryChartViewModel viewModel, int trapezoidIndex) {
-        return viewModel.getLevel(trapezoidIndex) != null
-                && viewModel.getLevel(trapezoidIndex + 1) != null;
+        return viewModel.getLevel(trapezoidIndex) != BATTERY_LEVEL_UNKNOWN
+                && viewModel.getLevel(trapezoidIndex + 1) != BATTERY_LEVEL_UNKNOWN;
     }
 
     private static boolean isTrapezoidIndexValid(

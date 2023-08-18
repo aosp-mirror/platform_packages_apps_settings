@@ -128,7 +128,6 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     Map<Integer, Map<Integer, BatteryDiffData>> mBatteryUsageMap;
 
     private boolean mIs24HourFormat;
-    private boolean mHourlyChartVisible = true;
     private View mBatteryChartViewGroup;
     private TextView mChartSummaryTextView;
     private BatteryChartViewModel mDailyViewModel;
@@ -234,20 +233,8 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         mOnBatteryTipsUpdatedListener = listener;
     }
 
-    void setBatteryHistoryMap(
-            final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap) {
-        Log.d(TAG, "setBatteryHistoryMap() " + (batteryHistoryMap == null ? "null"
-                : ("size=" + batteryHistoryMap.size())));
-        // Ensure the battery chart group is visible for users.
-        animateBatteryChartViewGroup();
-        final BatteryLevelData batteryLevelData =
-                DataProcessManager.getBatteryLevelData(mContext, mHandler, batteryHistoryMap,
-                        batteryUsageMap -> {
-                            mBatteryUsageMap = batteryUsageMap;
-                            logScreenUsageTime();
-                            refreshUi();
-                        });
-        Log.d(TAG, "getBatteryLevelData: " + batteryLevelData);
+    void onBatteryLevelDataUpdate(final BatteryLevelData batteryLevelData) {
+        Log.d(TAG, "onBatteryLevelDataUpdate: " + batteryLevelData);
         mMetricsFeatureProvider.action(
                 mPrefContext,
                 SettingsEnums.ACTION_BATTERY_HISTORY_LOADED,
@@ -275,6 +262,13 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
                     BatteryChartViewModel.AxisLabelPosition.BETWEEN_TRAPEZOIDS,
                     mHourlyChartLabelTextGenerator.updateSpecialCaseContext(batteryLevelData)));
         }
+        refreshUi();
+    }
+
+    void onBatteryUsageMapUpdate(Map<Integer, Map<Integer, BatteryDiffData>> batteryUsageMap) {
+        Log.d(TAG, "onBatteryUsageMapUpdate: " + batteryUsageMap);
+        mBatteryUsageMap = batteryUsageMap;
+        logScreenUsageTime();
         refreshUi();
     }
 
@@ -498,10 +492,10 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     }
 
     private void animateBatteryHourlyChartView(final boolean visible) {
-        if (mHourlyChartView == null || mHourlyChartVisible == visible) {
+        if (mHourlyChartView == null
+                || (mHourlyChartView.getVisibility() == View.VISIBLE) == visible) {
             return;
         }
-        mHourlyChartVisible = visible;
 
         if (visible) {
             mHourlyChartView.setVisibility(View.VISIBLE);
@@ -658,10 +652,8 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             return null;
         }
         for (BatteryDiffEntry entry : entries) {
-            final BatteryHistEntry batteryHistEntry = entry.mBatteryHistEntry;
-            if (batteryHistEntry != null
-                    && batteryHistEntry.mConsumerType == ConvertUtils.CONSUMER_TYPE_UID_BATTERY
-                    && batteryHistEntry.mUserId == userId
+            if (!entry.isSystemEntry()
+                    && entry.mUserId == userId
                     && packageName.equals(entry.getPackageName())) {
                 return entry;
             }
