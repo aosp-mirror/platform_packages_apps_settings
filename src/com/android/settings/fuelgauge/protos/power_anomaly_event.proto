@@ -11,13 +11,32 @@ message PowerAnomalyEventList {
 message PowerAnomalyEvent {
   optional string event_id = 1;
   optional int64 timestamp = 2;
-  optional string type = 3;  // e.g. settings, apps
-  optional string key = 4;  // e.g. brightness, significant_increase
+  optional PowerAnomalyType type = 3;
+  optional PowerAnomalyKey key = 4;
   optional float score = 5;
   oneof info {
     WarningBannerInfo warning_banner_info = 6;
     WarningItemInfo warning_item_info = 7;
   }
+}
+
+// NOTE: Please DO NOT delete enum items or change enum values. Use [deprecated = true] instead.
+// The enum value will be used to decide the tips card style like icons and colors.
+//
+// Next id: 2
+enum PowerAnomalyType{
+  TYPE_SETTINGS_BANNER = 0;
+  TYPE_APPS_ITEM = 1;
+}
+
+// NOTE: Please DO NOT delete enum items or change enum values. Use [deprecated = true] instead.
+// The enum value will be used to decide pre-defined title and button labels.
+//
+// Next id: 3
+enum PowerAnomalyKey{
+  KEY_BRIGHTNESS = 0;
+  KEY_SCREEN_TIMEOUT = 1;
+  KEY_APP = 2;
 }
 
 message WarningBannerInfo {
