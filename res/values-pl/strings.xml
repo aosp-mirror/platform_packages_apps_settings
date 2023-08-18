@@ -388,6 +388,21 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Dodano skan twarzy i <xliff:g id="WATCH">%s</xliff:g>"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Dodano skan twarzy, odcisk palca i <xliff:g id="WATCH">%s</xliff:g>"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Dodano skan twarzy, odciski palca i <xliff:g id="WATCH">%s</xliff:g>"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"Skonfiguruj zegarek"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_message" msgid="8737276885766036074">"Odblokowywanie za pomocą zegarka to wygodny sposób na odblokowywanie telefonu, gdy masz mokre palce lub nie udaje się rozpoznać Twojej twarzy.\n\nMożesz korzystać z zegarka, aby odblokować telefon, w tych sytuacjach:"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_disagree" msgid="7639258097401796028">"Nie teraz"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_agree" msgid="5271119227172049339">"Dalej"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_more" msgid="1644105894631257595">"Więcej"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_how_title" msgid="6604152528267830349">"Jak to działa"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_info_lock_open" msgid="8570511335628725116">"Zegarek musi być odblokowany oraz znajdować się na nadgarstku i w zasięgu telefonu. Jeśli masz zegarek na nadgarstku, ponowne odblokowanie nie będzie konieczne."</string>
+    <string name="security_settings_remoteauth_enroll_introduction_info_notifications" msgid="4298855831154039694">"Gdy telefon zostanie odblokowany, dostaniesz powiadomienie na zegarku. W przypadku niezamierzonego odblokowania kliknij powiadomienie, aby ponownie zablokować telefon."</string>
+    <string name="security_settings_remoteauth_enroll_introduction_youre_in_control_title" msgid="7974976673323638524">"Masz wszystko pod kontrolą"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_info_remove_watch" msgid="1888318677088986801">"Możesz usunąć zegarek z funkcji odblokowywania za pomocą zegarka w dowolnym momencie w Ustawieniach."</string>
+    <string name="security_settings_remoteauth_enroll_introduction_animation_tap_notification" msgid="1597397399097952974">"Kliknij powiadomienie"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_animation_swipe_up" msgid="2129230804324634653">"Przesuń palcem w górę na ekranie blokady"</string>
+    <string name="security_settings_remoteauth_enroll_finish_title" msgid="3807372930755413112">"Wszystko gotowe"</string>
+    <string name="security_settings_remoteauth_enroll_finish_description" msgid="4876209907275244653">"Możesz teraz używać zegarka do odblokowywania tego telefonu przez przeciąganie palcem w górę po powiadomieniu"</string>
+    <string name="security_settings_remoteauth_enroll_finish_btn_next" msgid="8072138423143889592">"Gotowe"</string>
     <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"Odblokowywanie za pomocą odcisku palca i rozpoznawania twarzy"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Rozpoznawanie twarzy i odcisku palca w profilu służbowym"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"Wymagana konfiguracja"</string>
@@ -651,6 +666,8 @@
     <string name="bluetooth_enter_passkey_other_device" msgid="8270426446247344709">"Może być również konieczne wpisanie tego klucza na drugim urządzeniu."</string>
     <string name="bluetooth_paring_group_msg" msgid="4609515924670823316">"Potwierdź, aby sparować ze skoordynowanym zestawem"</string>
     <string name="bluetooth_pairing_shares_phonebook" msgid="4329325125260724843">"Zezwól na dostęp do kontaktów i historii połączeń"</string>
+    <string name="bluetooth_pairing_phonebook_toggle_text" msgid="2474015367387690034">"Zezwól również na dostęp do kontaktów i historii połączeń"</string>
+    <string name="bluetooth_pairing_phonebook_toggle_details" msgid="1367197978487212581">"Informacje zostaną wykorzystane do powiadomień o połączeniach i innych funkcji"</string>
     <string name="bluetooth_error_title" msgid="2284738188253690278"></string>
     <string name="bluetooth_connecting_error_message" msgid="3941893154784152112">"Nie udało się nawiązać połączenia z <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_preference_found_media_devices" msgid="830061195998352840">"Dostępne urządzenia"</string>
@@ -812,7 +829,7 @@
     <string name="wifi_dpp_sharing_wifi_with_this_device" msgid="7250369936882080107">"Udostępniam Wi‑temu urządzeniu…"</string>
     <string name="wifi_dpp_connecting" msgid="2312769193202897589">"Łączę…"</string>
     <string name="wifi_dpp_share_hotspot" msgid="6186452780604755316">"Udostępnij hotspot"</string>
-    <string name="wifi_dpp_lockscreen_title" msgid="4231438175617953652">"Potwierdź swoją tożsamość"</string>
+    <string name="wifi_dpp_lockscreen_title" msgid="5246641326066972419">"Potwierdź swoją tożsamość"</string>
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Hasło do Wi-Fi: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"Hasło do hotspota: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"Łącz automatycznie"</string>
@@ -852,7 +869,6 @@
     <string name="wifi_not_in_range_message" msgid="3885327464037574739">"Poza zasięgiem sieci"</string>
     <string name="wifi_forget" msgid="3485573280364015620">"Zapomnij"</string>
     <string name="wifi_modify" msgid="5127926476383659412">"Zmień"</string>
-    <string name="wifi_failed_forget_message" msgid="8272732599235525880">"Nie udało się zapomnieć sieci"</string>
     <string name="wifi_save" msgid="2312643132472226807">"Zapisz"</string>
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"Nie udało się zapisać sieci"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"Anuluj"</string>
@@ -1449,10 +1465,10 @@
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Nie pamiętasz hasła?"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"Nie pamiętasz wzoru?"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"Nie pamiętasz kodu PIN?"</string>
-    <string name="lockpassword_confirm_your_pattern_generic" msgid="7692794426682501482">"Aby przejść dalej, podaj wzór używany na urządzeniu"</string>
-    <string name="lockpassword_confirm_your_pin_generic" msgid="9206928587904701094">"Aby przejść dalej, podaj kod PIN używany na urządzeniu"</string>
-    <string name="lockpassword_confirm_your_password_generic" msgid="2616127423884477152">"Aby przejść dalej, podaj hasło używane na urządzeniu"</string>
-    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="9110305410672321714">"Podaj wzór używany w profilu służbowym, by kontynuować"</string>
+    <string name="lockpassword_confirm_your_pattern_generic" msgid="7401165571170203743">"Aby kontynuować, narysuj wzór"</string>
+    <string name="lockpassword_confirm_your_pin_generic" msgid="8990266101852808091">"Aby kontynuować, wpisz kod PIN"</string>
+    <string name="lockpassword_confirm_your_password_generic" msgid="8823867445451497224">"Aby kontynuować, wpisz hasło"</string>
+    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="7003851856761939690">"Aby kontynuować, narysuj wzór służbowy"</string>
     <string name="lockpassword_confirm_your_pin_generic_profile" msgid="6524208128570235127">"Podaj kod PIN używany w profilu służbowym, by kontynuować"</string>
     <string name="lockpassword_confirm_your_password_generic_profile" msgid="5918738487760814147">"Podaj hasło używane w profilu służbowym, by kontynuować"</string>
     <string name="lockpassword_strong_auth_required_device_pattern" msgid="113817518413715557">"Ze względów bezpieczeństwa podaj wzór używany na urządzeniu"</string>
@@ -2128,7 +2144,7 @@
     <string name="accessibility_service_default_description" msgid="7801435825448138526">"Brak opisu"</string>
     <string name="settings_button" msgid="2195468788019730377">"Ustawienia"</string>
     <string name="keywords_reduce_bright_colors" msgid="1683190961013139183">"światłowstręt, fotofobia, ciemny motyw, migrena, ból głowy, tryb czytania, tryb nocny, zmniejszona jasność, punkt bieli"</string>
-    <string name="keywords_accessibility" msgid="4263443239404659143">"łatwa obsługa, łatwy dostęp, pomoc, wsparcie"</string>
+    <string name="keywords_accessibility" msgid="8593989878379366798">"widzenie, słyszenie, osoba niewidoma, osoba z wadą słuchu, motoryka, wygoda, wspomaganie, łatwe używanie, łatwy dostęp, dłoń, pomoc"</string>
     <string name="keywords_magnification" msgid="3908145308269840862">"powiększenie okna, zoom, powiększenie, niedowidzenie, powiększanie, powiększyć"</string>
     <string name="keywords_talkback" msgid="2816435437095102527"></string>
     <string name="keywords_live_caption" msgid="1667203998080567556">"napisy, Transkrypcja na żywo, niedosłuch, utrata słuchu, CART, zamiana mowy na tekst"</string>
@@ -2143,10 +2159,13 @@
     <string name="keywords_contrast" msgid="4668393735398949873">"kontrast kolorów"</string>
     <string name="keywords_accessibility_menu" msgid="4300579436464706608"></string>
     <string name="keywords_switch_access" msgid="5813094504384313402"></string>
-    <string name="keywords_auto_click" msgid="7151756353013736931">"ruchowy, mysz"</string>
-    <string name="keywords_hearing_aids" msgid="4550504337687223314">"aparaty słuchowe, niedosłyszący, utrata słuchu, implanty ślimakowe, urządzenia wzmacniające dźwięk, procesory dźwięku"</string>
+    <string name="keywords_auto_click" msgid="6811744211216280998">"motoryka, mysz, mysz zewnętrzna, mysz obsługiwana głową, mysz adaptacyjna, wózek inwalidzki, joystick"</string>
+    <string name="keywords_hearing_aids" msgid="4657889873249157071">"aparaty słuchowe, niedosłuch, utrata słuchu, implanty ślimakowe, urządzenia wzmacniające dźwięk, procesory dźwięku, CPR"</string>
     <string name="keywords_rtt" msgid="2429130928152514402">"niedosłuch, utrata słuchu, napisy, dalekopis, TTY"</string>
     <string name="keywords_voice_access" msgid="7807335263195876454"></string>
+    <string name="keywords_3_button_navigation" msgid="436361965016404218">"3 przyciski"</string>
+    <string name="keywords_touch_and_hold_delay" msgid="7854640156419599912">"wygoda, motoryka, senior, choroby reumatyczne, RSI, udar mózgu, drżenie, stwardnienie rozsiane, porażenie mózgowe, chroniczne przeciążenie mięśni i ścięgien, dłoń"</string>
+    <string name="keywords_accessibility_timeout" msgid="8903766864902000346">"opóźnienie, wygoda, senior"</string>
     <string name="print_settings" msgid="8519810615863882491">"Drukowanie"</string>
     <string name="print_settings_summary_no_service" msgid="6721731154917653862">"Wył."</string>
     <string name="print_settings_summary" msgid="1458773840720811915">"{count,plural, =1{Włączono 1 usługę drukowania}few{Włączono # usługi drukowania}many{Włączono # usług drukowania}other{Włączono # usługi drukowania}}"</string>
@@ -3795,7 +3814,6 @@
     <string name="cell_data_warning" msgid="5664921950473359634">"Ostrzeżenie dotyczące danych: <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="cell_data_limit" msgid="256855024790622112">"Limit danych: <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="cell_data_warning_and_limit" msgid="8393200831986035724">"Ostrzeżenie dotyczące danych: <xliff:g id="ID_1">^1</xliff:g> / limit danych: <xliff:g id="ID_2">^2</xliff:g>"</string>
-    <string name="operator_warning" msgid="5672761970087591211">"Operator komórkowy może obliczać ilość przesłanych danych inaczej niż urządzenie"</string>
     <string name="non_carrier_data_usage_warning" msgid="4707184871368847697">"Użycie danych w sieciach operatorów nie jest uwzględniane"</string>
     <string name="data_used_template" msgid="8229342096562327646">"Wykorzystano <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="set_data_warning" msgid="1685771882794205462">"Ustaw ostrzeżenie dotyczące danych"</string>
@@ -4674,6 +4692,18 @@
     <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"Jeszcze lepsza jakość dźwięku z kompatybilnych multimediów"</string>
     <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"Monitorowanie ruchów głowy"</string>
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"Dźwięk zmienia się, kiedy poruszasz głową, aby brzmieć bardziej naturalnie"</string>
+    <!-- no translation found for bluetooth_details_audio_device_types_title (3381941189346781614) -->
+    <skip />
+    <!-- no translation found for bluetooth_details_audio_device_type_unknown (839337391037998014) -->
+    <skip />
+    <!-- no translation found for bluetooth_details_audio_device_type_speaker (3706227767994792124) -->
+    <skip />
+    <!-- no translation found for bluetooth_details_audio_device_type_headphones (7644588291215033798) -->
+    <skip />
+    <!-- no translation found for bluetooth_details_audio_device_type_carkit (4439017600454703229) -->
+    <skip />
+    <!-- no translation found for bluetooth_details_audio_device_type_other (7019481234617207563) -->
+    <skip />
     <string name="ingress_rate_limit_title" msgid="2106694002836274350">"Ograniczenie liczby żądań pobierania w sieci"</string>
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"Skonfiguruj ograniczenie liczby żądań ruchu przychodzącego dla przepustowości sieci we wszystkich sieciach, które zapewniają połączenie z internetem"</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"Skonfiguruj ograniczenie liczby żądań pobierania w sieci"</string>
@@ -4706,24 +4736,18 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"Odinstaluj aplikację"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Aplikacje zainstalowane w ostatnim miesiącu}few{Aplikacje zainstalowane w ciągu ostatnich # miesięcy}many{Aplikacje zainstalowane w ciągu ostatnich # miesięcy}other{Aplikacje zainstalowane w ciągu ostatniego # miesiąca}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Aplikacja zainstalowana ponad miesiąc temu}few{Aplikacja zainstalowana ponad # miesiące temu}many{Aplikacja zainstalowana ponad # miesięcy temu}other{Aplikacja zainstalowana ponad # miesiąca temu}}"</string>
-    <!-- no translation found for aspect_ratio_title (2451826875939676101) -->
-    <skip />
-    <!-- no translation found for aspect_ratio_summary (5944347596728740547) -->
-    <skip />
+    <string name="aspect_ratio_title" msgid="2451826875939676101">"Format obrazu"</string>
+    <string name="aspect_ratio_summary" msgid="5944347596728740547">"Wybierz format obrazu, aby wyświetlić tę aplikację, jeśli nie została zaprojektowana, aby dopasować się do <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"Sugerowane aplikacje"</string>
     <string name="user_aspect_ratio_overridden_apps_label" msgid="1564914138276629704">"Aplikacje z zastąpionymi ustawieniami"</string>
     <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"Ustawienie domyślne aplikacji"</string>
-    <!-- no translation found for user_aspect_ratio_fullscreen (1843427242540081996) -->
-    <skip />
-    <!-- no translation found for user_aspect_ratio_half_screen (1015852057094310209) -->
-    <skip />
-    <!-- no translation found for user_aspect_ratio_device_size (2339820985120881199) -->
-    <skip />
+    <string name="user_aspect_ratio_fullscreen" msgid="1843427242540081996">"Pełny ekran"</string>
+    <string name="user_aspect_ratio_half_screen" msgid="1015852057094310209">"Połowa ekranu"</string>
+    <string name="user_aspect_ratio_device_size" msgid="2339820985120881199">"Format obrazu urządzenia"</string>
     <string name="user_aspect_ratio_16_9" msgid="2286644872775170164">"16:9"</string>
     <string name="user_aspect_ratio_3_2" msgid="199262962518318932">"3:2"</string>
     <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4:3"</string>
-    <!-- no translation found for app_aspect_ratio_footer (8661813386126142251) -->
-    <skip />
+    <string name="app_aspect_ratio_footer" msgid="8661813386126142251">"Aplikacja zostanie ponownie uruchomiona, kiedy zmienisz format obrazu. Możesz utracić niezapisane zmiany."</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Czytnik linii papilarnych"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Powiadomienia świetlne"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"O powiadomieniach świetlnych"</string>
@@ -4758,10 +4782,9 @@
     <string name="contrast_medium" msgid="384414510709285811">"Średni"</string>
     <string name="contrast_high" msgid="3988567609694797696">"Wysoki"</string>
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"Ta aplikacja może być otwarta tylko w 1 oknie."</string>
-    <string name="accessibility_feature_full_state_summary" msgid="8747170258807179670">"<xliff:g id="STATE_0">%1$s</xliff:g> / <xliff:g id="SHORTCUT_STATE">%2$s</xliff:g> / <xliff:g id="SERVICE_SUMMARY">%3$s</xliff:g>"</string>
-    <string name="generic_accessibility_service_on" msgid="2465820044606775562">"Usługa włączona"</string>
-    <string name="generic_accessibility_service_off" msgid="1752061696695346360">"Usługa wyłączona"</string>
-    <string name="generic_accessibility_feature_shortcut_off" msgid="3669343136122187913">"Skrót wyłączony"</string>
+    <string name="generic_accessibility_service_on" msgid="4466229372357726824">"Włączono"</string>
+    <string name="generic_accessibility_service_off" msgid="4759859497651675724">"Wyłączono"</string>
+    <string name="generic_accessibility_feature_shortcut_off" msgid="4022872394514077907">"Wyłączono"</string>
     <string name="accessibility_shortcut_state_off" msgid="8158137799007601475">"Wyłączono"</string>
     <string name="daltonizer_state_on" msgid="131013270022603983">"Włączono"</string>
     <string name="daltonizer_state_off" msgid="1162285688069856179">"Wyłączono"</string>

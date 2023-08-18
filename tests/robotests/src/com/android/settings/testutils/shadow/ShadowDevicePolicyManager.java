@@ -2,18 +2,22 @@ package com.android.settings.testutils.shadow;
 
 import static android.app.admin.DevicePolicyManager.DEVICE_OWNER_TYPE_DEFAULT;
 import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
+import static android.os.Build.VERSION_CODES.O;
 
 import android.annotation.NonNull;
 import android.annotation.Nullable;
 import android.annotation.UserIdInt;
 import android.app.admin.DevicePolicyManager;
 import android.app.admin.DevicePolicyManager.DeviceOwnerType;
+import android.app.admin.IDevicePolicyManager;
 import android.app.admin.ManagedSubscriptionsPolicy;
 import android.app.admin.PasswordMetrics;
 import android.app.admin.PasswordPolicy;
 import android.content.ComponentName;
+import android.content.Context;
 
-import org.robolectric.RuntimeEnvironment;
+import androidx.test.core.app.ApplicationProvider;
+
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.shadow.api.Shadow;
@@ -38,6 +42,11 @@ public class ShadowDevicePolicyManager extends org.robolectric.shadows.ShadowDev
     private int mPasswordMinSymbols = 0;
 
     private List<String> mPermittedAccessibilityServices = null;
+
+    @Implementation(minSdk = O)
+    protected void __constructor__(Context context, IDevicePolicyManager service) {
+        super.__constructor__(ApplicationProvider.getApplicationContext(), service);
+    }
 
     public void setShortSupportMessageForUser(ComponentName admin, int userHandle, String message) {
         mSupportMessagesMap.put(Objects.hash(admin, userHandle), message);
@@ -137,6 +146,7 @@ public class ShadowDevicePolicyManager extends org.robolectric.shadows.ShadowDev
 
     public static ShadowDevicePolicyManager getShadow() {
         return (ShadowDevicePolicyManager) Shadow.extract(
-                RuntimeEnvironment.application.getSystemService(DevicePolicyManager.class));
+                ApplicationProvider.getApplicationContext()
+                        .getSystemService(DevicePolicyManager.class));
     }
 }
