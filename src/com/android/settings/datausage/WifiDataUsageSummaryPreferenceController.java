@@ -55,7 +55,6 @@ public class WifiDataUsageSummaryPreferenceController extends DataUsageSummaryPr
         }
         final DataUsageController.DataUsageInfo info = mDataUsageController.getDataUsageInfo(
                 template);
-        mDataInfoController.updateDataLimit(info, mPolicyEditor.getPolicy(template));
 
         mPreference.setWifiMode(/* isWifiMode */ true, /* usagePeriod */
                 info.period, /* isSingleWifi */ true);

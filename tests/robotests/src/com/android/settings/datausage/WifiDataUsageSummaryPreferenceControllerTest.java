@@ -24,7 +24,6 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
 import android.content.Context;
-import android.net.NetworkPolicyManager;
 import android.telephony.TelephonyManager;
 
 import androidx.fragment.app.FragmentActivity;
@@ -60,8 +59,6 @@ public class WifiDataUsageSummaryPreferenceControllerTest {
     @Mock
     TelephonyManager mTelephonyManager;
     @Mock
-    NetworkPolicyManager mNetworkPolicyManager;
-    @Mock
     DataUsageSummaryPreference mSummaryPreference;
     @Mock
     DataUsageController mDataUsageController;
@@ -75,8 +72,6 @@ public class WifiDataUsageSummaryPreferenceControllerTest {
     public void setUp() {
         doReturn(mContext.getResources()).when(mActivity).getResources();
         doReturn(mTelephonyManager).when(mActivity).getSystemService(TelephonyManager.class);
-        doReturn(mNetworkPolicyManager).when(mActivity)
-                .getSystemService(NetworkPolicyManager.class);
         doNothing().when(mSummaryPreference).setWifiMode(anyBoolean(), anyString(), anyBoolean());
         doReturn(mDataUsageInfo).when(mDataUsageController).getDataUsageInfo(any());
 
