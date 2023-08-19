@@ -101,6 +101,7 @@ public class BatteryTipsCardPreference extends Preference implements View.OnClic
                     .setDestination(mDestinationComponentName)
                     .setSourceMetricsCategory(mSourceMetricsCategory)
                     .launch();
+            setVisible(false);
         } else if (viewId == R.id.dismiss_button) {
             setVisible(false);
         }

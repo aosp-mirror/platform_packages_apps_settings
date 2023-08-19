@@ -147,6 +147,14 @@ public class BatteryDiffDataTest {
                 /*foregroundUsageTimeInMs=*/ 0L,  /*backgroundUsageTimeInMs=*/ 0L, isHidden);
         return new BatteryDiffEntry(
                 context,
+                batteryHistEntry.mUid,
+                batteryHistEntry.mUserId,
+                batteryHistEntry.getKey(),
+                batteryHistEntry.mIsHidden,
+                batteryHistEntry.mDrainType,
+                batteryHistEntry.mPackageName,
+                batteryHistEntry.mAppLabel,
+                batteryHistEntry.mConsumerType,
                 /*foregroundUsageTimeInMs=*/ 0,
                 /*backgroundUsageTimeInMs=*/ 0,
                 /*screenOnTimeInMs=*/ 0,
@@ -154,8 +162,7 @@ public class BatteryDiffDataTest {
                 /*foregroundUsageConsumePower=*/ 0,
                 /*foregroundServiceUsageConsumePower=*/ 0,
                 /*backgroundUsageConsumePower=*/ 0,
-                /*cachedUsageConsumePower=*/ 0,
-                batteryHistEntry);
+                /*cachedUsageConsumePower=*/ 0);
     }
 
     private static BatteryHistEntry createBatteryHistEntry(

@@ -8,6 +8,8 @@ enum BatteryEventType {
   UNKNOWN_EVENT = 0;
   POWER_CONNECTED = 1;
   POWER_DISCONNECTED = 2;
+  FULL_CHARGED = 3;
+  EVEN_HOUR = 4;
 }
 
 message BatteryEvent {
