@@ -16,6 +16,8 @@
 
 package com.android.settings.fuelgauge.batteryusage;
 
+import static com.android.settings.fuelgauge.batteryusage.ConvertUtils.utcToLocalTimeForLogging;
+
 import android.content.Context;
 import android.os.BatteryConsumer;
 
@@ -34,6 +36,10 @@ import java.util.Set;
 public class BatteryDiffData {
     static final double SMALL_PERCENTAGE_THRESHOLD = 1f;
 
+    private final long mStartTimestamp;
+    private final long mEndTimestamp;
+    private final int mStartBatteryLevel;
+    private final int mEndBatteryLevel;
     private final long mScreenOnTime;
     private final List<BatteryDiffEntry> mAppEntries;
     private final List<BatteryDiffEntry> mSystemEntries;
@@ -41,12 +47,20 @@ public class BatteryDiffData {
     /** Constructor for the diff entries. */
     public BatteryDiffData(
             final Context context,
+            final long startTimestamp,
+            final long endTimestamp,
+            final int startBatteryLevel,
+            final int endBatteryLevel,
             final long screenOnTime,
             final @NonNull List<BatteryDiffEntry> appDiffEntries,
             final @NonNull List<BatteryDiffEntry> systemDiffEntries,
             final @NonNull Set<String> systemAppsPackageNames,
             final @NonNull Set<Integer> systemAppsUids,
             final boolean isAccumulated) {
+        mStartTimestamp = startTimestamp;
+        mEndTimestamp = endTimestamp;
+        mStartBatteryLevel = startBatteryLevel;
+        mEndBatteryLevel = endBatteryLevel;
         mScreenOnTime = screenOnTime;
         mAppEntries = appDiffEntries;
         mSystemEntries = systemDiffEntries;
@@ -63,16 +77,46 @@ public class BatteryDiffData {
         processAndSortEntries(mSystemEntries);
     }
 
-    public long getScreenOnTime() {
+    long getStartTimestamp() {
+        return mStartTimestamp;
+    }
+
+    long getEndTimestamp() {
+        return mEndTimestamp;
+    }
+
+    int getStartBatteryLevel() {
+        return mStartBatteryLevel;
+    }
+
+    int getEndBatteryLevel() {
+        return mEndBatteryLevel;
+    }
+
+    long getScreenOnTime() {
         return mScreenOnTime;
     }
 
-    public List<BatteryDiffEntry> getAppDiffEntryList() {
+    List<BatteryDiffEntry> getAppDiffEntryList() {
         return mAppEntries;
     }
 
-    public List<BatteryDiffEntry> getSystemDiffEntryList() {
+    List<BatteryDiffEntry> getSystemDiffEntryList() {
         return mSystemEntries;
+    }
+
+    @Override
+    public String toString() {
+        return new StringBuilder("BatteryDiffData{")
+                .append("startTimestamp:" + utcToLocalTimeForLogging(mStartTimestamp))
+                .append("|endTimestamp:" + utcToLocalTimeForLogging(mEndTimestamp))
+                .append("|startLevel:" + mStartBatteryLevel)
+                .append("|endLevel:" + mEndBatteryLevel)
+                .append("|screenOnTime:" + mScreenOnTime)
+                .append("|appEntries.size:" + mAppEntries.size())
+                .append("|systemEntries.size:" + mSystemEntries.size())
+                .append("}")
+                .toString();
     }
 
     /** Removes fake usage data and hidden packages. */
@@ -109,7 +153,7 @@ public class BatteryDiffData {
             final long screenOnTimeInMs = entry.mScreenOnTimeInMs;
             final double comsumePower = entry.mConsumePower;
             final String packageName = entry.getPackageName();
-            final Integer componentId = entry.mBatteryHistEntry.mDrainType;
+            final Integer componentId = entry.mComponentId;
             if ((screenOnTimeInMs < screenOnTimeThresholdInMs
                     && comsumePower < consumePowerThreshold)
                     || ConvertUtils.FAKE_PACKAGE_NAME.equals(packageName)
@@ -130,14 +174,16 @@ public class BatteryDiffData {
             final @NonNull Set<Integer> systemAppsUids,
             final @NonNull List<BatteryDiffEntry> appEntries) {
         final List<String> systemAppsAllowlist = featureProvider.getSystemAppsAllowlist();
-        BatteryDiffEntry.SystemAppsBatteryDiffEntry systemAppsDiffEntry = null;
+        BatteryDiffEntry systemAppsDiffEntry = null;
         final Iterator<BatteryDiffEntry> appListIterator = appEntries.iterator();
         while (appListIterator.hasNext()) {
             final BatteryDiffEntry batteryDiffEntry = appListIterator.next();
             if (needsCombineInSystemApp(batteryDiffEntry, systemAppsAllowlist,
                     systemAppsPackageNames, systemAppsUids)) {
                 if (systemAppsDiffEntry == null) {
-                    systemAppsDiffEntry = new BatteryDiffEntry.SystemAppsBatteryDiffEntry(context);
+                    systemAppsDiffEntry = new BatteryDiffEntry(context,
+                            BatteryDiffEntry.SYSTEM_APPS_KEY, BatteryDiffEntry.SYSTEM_APPS_KEY,
+                            ConvertUtils.CONSUMER_TYPE_UID_BATTERY);
                 }
                 systemAppsDiffEntry.mConsumePower += batteryDiffEntry.mConsumePower;
                 systemAppsDiffEntry.mForegroundUsageTimeInMs +=
@@ -159,17 +205,18 @@ public class BatteryDiffData {
         final Set<Integer> othersSystemComponentSet = featureProvider.getOthersSystemComponentSet();
         final Set<String> othersCustomComponentNameSet =
                 featureProvider.getOthersCustomComponentNameSet();
-        BatteryDiffEntry.OthersBatteryDiffEntry othersDiffEntry = null;
+        BatteryDiffEntry othersDiffEntry = null;
         final Iterator<BatteryDiffEntry> systemListIterator = systemEntries.iterator();
         while (systemListIterator.hasNext()) {
             final BatteryDiffEntry batteryDiffEntry = systemListIterator.next();
-            final int componentId = batteryDiffEntry.mBatteryHistEntry.mDrainType;
+            final int componentId = batteryDiffEntry.mComponentId;
             if (othersSystemComponentSet.contains(componentId) || (
                     componentId >= BatteryConsumer.FIRST_CUSTOM_POWER_COMPONENT_ID
                             && othersCustomComponentNameSet.contains(
                                     batteryDiffEntry.getAppLabel()))) {
                 if (othersDiffEntry == null) {
-                    othersDiffEntry = new BatteryDiffEntry.OthersBatteryDiffEntry(context);
+                    othersDiffEntry = new BatteryDiffEntry(context, BatteryDiffEntry.OTHERS_KEY,
+                            BatteryDiffEntry.OTHERS_KEY, ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY);
                 }
                 othersDiffEntry.mConsumePower += batteryDiffEntry.mConsumePower;
                 othersDiffEntry.setTotalConsumePower(
@@ -188,7 +235,7 @@ public class BatteryDiffData {
             final @NonNull List<String> systemAppsAllowlist,
             final @NonNull Set<String> systemAppsPackageNames,
             final @NonNull Set<Integer> systemAppsUids) {
-        if (batteryDiffEntry.mBatteryHistEntry.mIsHidden) {
+        if (batteryDiffEntry.mIsHidden) {
             return true;
         }
 
@@ -201,7 +248,7 @@ public class BatteryDiffData {
             return true;
         }
 
-        int uid = (int) batteryDiffEntry.mBatteryHistEntry.mUid;
+        int uid = (int) batteryDiffEntry.mUid;
         return systemAppsPackageNames.contains(packageName) || systemAppsUids.contains(uid);
     }
 

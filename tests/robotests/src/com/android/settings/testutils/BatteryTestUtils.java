@@ -36,6 +36,8 @@ import com.android.settings.fuelgauge.batteryusage.ConvertUtils;
 import com.android.settings.fuelgauge.batteryusage.DeviceBatteryState;
 import com.android.settings.fuelgauge.batteryusage.PowerAnomalyEvent;
 import com.android.settings.fuelgauge.batteryusage.PowerAnomalyEventList;
+import com.android.settings.fuelgauge.batteryusage.PowerAnomalyKey;
+import com.android.settings.fuelgauge.batteryusage.PowerAnomalyType;
 import com.android.settings.fuelgauge.batteryusage.WarningBannerInfo;
 import com.android.settings.fuelgauge.batteryusage.db.AppUsageEventDao;
 import com.android.settings.fuelgauge.batteryusage.db.AppUsageEventEntity;
@@ -209,8 +211,8 @@ public class BatteryTestUtils {
     /** Create a power anomaly event proto of adaptive brightness. */
     public static PowerAnomalyEvent createAdaptiveBrightnessAnomalyEvent() {
         return PowerAnomalyEvent.newBuilder()
-                .setType("settings banner")
-                .setKey("adaptive_brightness")
+                .setType(PowerAnomalyType.TYPE_SETTINGS_BANNER)
+                .setKey(PowerAnomalyKey.KEY_BRIGHTNESS)
                 .setWarningBannerInfo(WarningBannerInfo.newBuilder()
                         .setMainButtonDestination(AutoBrightnessSettings.class.getName())
                         .setMainButtonSourceMetricsCategory(SettingsEnums.SETTINGS_AUTO_BRIGHTNESS)
@@ -221,8 +223,8 @@ public class BatteryTestUtils {
     /** Create a power anomaly event proto of screen timeout. */
     public static PowerAnomalyEvent createScreenTimeoutAnomalyEvent() {
         return PowerAnomalyEvent.newBuilder()
-                .setType("settings banner")
-                .setKey("screen_timeout")
+                .setType(PowerAnomalyType.TYPE_SETTINGS_BANNER)
+                .setKey(PowerAnomalyKey.KEY_SCREEN_TIMEOUT)
                 .setWarningBannerInfo(WarningBannerInfo.newBuilder()
                         .setMainButtonDestination(ScreenTimeoutSettings.class.getName())
                         .setMainButtonSourceMetricsCategory(SettingsEnums.SCREEN_TIMEOUT)

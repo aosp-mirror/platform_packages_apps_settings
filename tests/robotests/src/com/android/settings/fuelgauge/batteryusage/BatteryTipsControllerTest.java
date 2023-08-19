@@ -16,8 +16,6 @@
 
 package com.android.settings.fuelgauge.batteryusage;
 
-import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -66,21 +64,6 @@ public final class BatteryTipsControllerTest {
         mBatteryTipsController = new BatteryTipsController(mContext);
         mBatteryTipsController.mCardPreference = mBatteryTipsCardPreference;
         mBatteryTipsController.mPowerUsageFeatureProvider = mPowerUsageFeatureProvider;
-    }
-
-    @Test
-    public void parsePowerAnomalyKey_preDefinedKeys_returnTrue() {
-        final String[] keys = {"adaptive_brightness", "screen_timeout"};
-        for (int index = 0; index < keys.length; index++) {
-            assertThat(mBatteryTipsController.getPowerAnomalyEventIndex(keys[index]))
-                    .isEqualTo(index);
-        }
-    }
-
-    @Test
-    public void parsePowerAnomalyKey_unknownKey_returnTrue() {
-        final String key = "unknown_key_for_test";
-        assertThat(mBatteryTipsController.getPowerAnomalyEventIndex(key)).isEqualTo(-1);
     }
 
     @Test

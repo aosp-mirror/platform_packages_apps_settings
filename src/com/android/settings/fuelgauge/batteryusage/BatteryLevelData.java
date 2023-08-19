@@ -16,15 +16,28 @@
 
 package com.android.settings.fuelgauge.batteryusage;
 
+import static com.android.settingslib.fuelgauge.BatteryStatus.BATTERY_LEVEL_UNKNOWN;
+
+import android.text.format.DateUtils;
+import android.util.ArrayMap;
+
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.core.util.Preconditions;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Objects;
 
 /** Wraps the battery timestamp and level data used for battery usage chart. */
 public final class BatteryLevelData {
+    private static final long MIN_SIZE = 2;
+    private static final long TIME_SLOT = DateUtils.HOUR_IN_MILLIS * 2;
+
     /** A container for the battery timestamp and level data. */
     public static final class PeriodBatteryLevelData {
         // The length of mTimestamps and mLevels must be the same. mLevels[index] might be null when
@@ -33,12 +46,14 @@ public final class BatteryLevelData {
         private final List<Integer> mLevels;
 
         public PeriodBatteryLevelData(
-                @NonNull List<Long> timestamps, @NonNull List<Integer> levels) {
-            Preconditions.checkArgument(timestamps.size() == levels.size(),
-                    /* errorMessage= */ "Timestamp: " + timestamps.size() + ", Level: "
-                            + levels.size());
+                @NonNull Map<Long, Integer> batteryLevelMap,
+                @NonNull List<Long> timestamps) {
             mTimestamps = timestamps;
-            mLevels = levels;
+            mLevels = new ArrayList<>(timestamps.size());
+            for (Long timestamp : timestamps) {
+                mLevels.add(batteryLevelMap.containsKey(timestamp)
+                        ? batteryLevelMap.get(timestamp) : BATTERY_LEVEL_UNKNOWN);
+            }
         }
 
         public List<Long> getTimestamps() {
@@ -68,15 +83,21 @@ public final class BatteryLevelData {
     // The size of hourly data must be the size of daily data - 1.
     private final List<PeriodBatteryLevelData> mHourlyBatteryLevelsPerDay;
 
-    public BatteryLevelData(
-            @NonNull PeriodBatteryLevelData dailyBatteryLevels,
-            @NonNull List<PeriodBatteryLevelData> hourlyBatteryLevelsPerDay) {
-        final long dailySize = dailyBatteryLevels.getTimestamps().size();
-        final long hourlySize = hourlyBatteryLevelsPerDay.size();
-        Preconditions.checkArgument(hourlySize == dailySize - 1,
-                /* errorMessage= */ "DailySize: " + dailySize + ", HourlySize: " + hourlySize);
-        mDailyBatteryLevels = dailyBatteryLevels;
-        mHourlyBatteryLevelsPerDay = hourlyBatteryLevelsPerDay;
+    public BatteryLevelData(@NonNull Map<Long, Integer> batteryLevelMap) {
+        final int mapSize = batteryLevelMap.size();
+        Preconditions.checkArgument(mapSize >= MIN_SIZE, "batteryLevelMap size:" + mapSize);
+
+        final List<Long> timestampList = new ArrayList<>(batteryLevelMap.keySet());
+        Collections.sort(timestampList);
+        final List<Long> dailyTimestamps = getDailyTimestamps(timestampList);
+        final List<List<Long>> hourlyTimestamps = getHourlyTimestamps(dailyTimestamps);
+
+        mDailyBatteryLevels = new PeriodBatteryLevelData(batteryLevelMap, dailyTimestamps);
+        mHourlyBatteryLevelsPerDay = new ArrayList<>(hourlyTimestamps.size());
+        for (List<Long> hourlyTimestampsPerDay : hourlyTimestamps) {
+            mHourlyBatteryLevelsPerDay.add(
+                    new PeriodBatteryLevelData(batteryLevelMap, hourlyTimestampsPerDay));
+        }
     }
 
     public PeriodBatteryLevelData getDailyBatteryLevels() {
@@ -93,6 +114,70 @@ public final class BatteryLevelData {
                 "dailyBatteryLevels: %s; hourlyBatteryLevelsPerDay: %s",
                 Objects.toString(mDailyBatteryLevels),
                 Objects.toString(mHourlyBatteryLevelsPerDay));
+    }
+
+    @Nullable
+    static BatteryLevelData combine(@Nullable BatteryLevelData existingBatteryLevelData,
+            List<BatteryEvent> batteryLevelRecordEvents) {
+        final Map<Long, Integer> batteryLevelMap = new ArrayMap<>(batteryLevelRecordEvents.size());
+        for (BatteryEvent event : batteryLevelRecordEvents) {
+            batteryLevelMap.put(event.getTimestamp(), event.getBatteryLevel());
+        }
+        if (existingBatteryLevelData != null) {
+            List<PeriodBatteryLevelData> multiDaysData =
+                    existingBatteryLevelData.getHourlyBatteryLevelsPerDay();
+            for (int dayIndex = 0; dayIndex < multiDaysData.size(); dayIndex++) {
+                PeriodBatteryLevelData oneDayData = multiDaysData.get(dayIndex);
+                for (int hourIndex = 0; hourIndex < oneDayData.getLevels().size(); hourIndex++) {
+                    batteryLevelMap.put(oneDayData.getTimestamps().get(hourIndex),
+                            oneDayData.getLevels().get(hourIndex));
+                }
+            }
+        }
+        return batteryLevelMap.size() < MIN_SIZE ? null : new BatteryLevelData(batteryLevelMap);
+    }
+
+    /**
+     * Computes expected daily timestamp slots.
+     *
+     * The valid result should be composed of 3 parts:
+     * 1) start timestamp
+     * 2) every 00:00 timestamp (default timezone) between the start and end
+     * 3) end timestamp
+     * Otherwise, returns an empty list.
+     */
+    @VisibleForTesting
+    static List<Long> getDailyTimestamps(final List<Long> timestampList) {
+        Preconditions.checkArgument(
+                timestampList.size() >= MIN_SIZE, "timestampList size:" + timestampList.size());
+        final List<Long> dailyTimestampList = new ArrayList<>();
+        final long startTimestamp = timestampList.get(0);
+        final long endTimestamp = timestampList.get(timestampList.size() - 1);
+        for (long timestamp = startTimestamp; timestamp < endTimestamp;
+                timestamp = TimestampUtils.getNextDayTimestamp(timestamp)) {
+            dailyTimestampList.add(timestamp);
+        }
+        dailyTimestampList.add(endTimestamp);
+        return dailyTimestampList;
+    }
+
+    private static List<List<Long>> getHourlyTimestamps(final List<Long> dailyTimestamps) {
+        final List<List<Long>> hourlyTimestamps = new ArrayList<>();
+        for (int dailyIndex = 0; dailyIndex < dailyTimestamps.size() - 1; dailyIndex++) {
+            final List<Long> hourlyTimestampsPerDay = new ArrayList<>();
+            final long startTime = dailyTimestamps.get(dailyIndex);
+            final long endTime = dailyTimestamps.get(dailyIndex + 1);
+
+            hourlyTimestampsPerDay.add(startTime);
+            for (long timestamp = TimestampUtils.getNextEvenHourTimestamp(startTime);
+                    timestamp < endTime; timestamp += TIME_SLOT) {
+                hourlyTimestampsPerDay.add(timestamp);
+            }
+            hourlyTimestampsPerDay.add(endTime);
+
+            hourlyTimestamps.add(hourlyTimestampsPerDay);
+        }
+        return hourlyTimestamps;
     }
 }
 
