@@ -21,12 +21,13 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.LocaleList;
 
-import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.testutils.BatteryTestUtils;
+import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -43,13 +44,11 @@ import java.util.TimeZone;
 public final class BatteryTipsControllerTest {
 
     private Context mContext;
+    private FakeFeatureFactory mFeatureFactory;
     private BatteryTipsController mBatteryTipsController;
 
     @Mock
     private BatteryTipsCardPreference mBatteryTipsCardPreference;
-
-    @Mock
-    private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
 
     @Before
     public void setUp() {
@@ -61,9 +60,9 @@ public final class BatteryTipsControllerTest {
         final Resources resources = spy(mContext.getResources());
         resources.getConfiguration().setLocales(new LocaleList(new Locale("en_US")));
         doReturn(resources).when(mContext).getResources();
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mBatteryTipsController = new BatteryTipsController(mContext);
         mBatteryTipsController.mCardPreference = mBatteryTipsCardPreference;
-        mBatteryTipsController.mPowerUsageFeatureProvider = mPowerUsageFeatureProvider;
     }
 
     @Test
@@ -76,10 +75,11 @@ public final class BatteryTipsControllerTest {
     @Test
     public void handleBatteryTipsCardUpdated_adaptiveBrightnessAnomaly_showAnomaly() {
         PowerAnomalyEvent event = BatteryTestUtils.createAdaptiveBrightnessAnomalyEvent();
-        when(mPowerUsageFeatureProvider.isBatteryTipsEnabled()).thenReturn(true);
+        when(mFeatureFactory.powerUsageFeatureProvider.isBatteryTipsEnabled()).thenReturn(true);
 
         mBatteryTipsController.handleBatteryTipsCardUpdated(event);
 
+        verify(mBatteryTipsCardPreference).setAnomalyEventId("BrightnessAnomaly");
         // Check pre-defined string
         verify(mBatteryTipsCardPreference).setTitle(
                 "Turn on adaptive brightness to extend battery life");
@@ -90,15 +90,18 @@ public final class BatteryTipsControllerTest {
                 "com.android.settings.display.AutoBrightnessSettings",
                 1381);
         verify(mBatteryTipsCardPreference).setVisible(true);
+        verify(mFeatureFactory.metricsFeatureProvider).action(
+                mContext, SettingsEnums.ACTION_BATTERY_TIPS_CARD_SHOW, "BrightnessAnomaly");
     }
 
     @Test
     public void handleBatteryTipsCardUpdated_screenTimeoutAnomaly_showAnomaly() {
         PowerAnomalyEvent event = BatteryTestUtils.createScreenTimeoutAnomalyEvent();
-        when(mPowerUsageFeatureProvider.isBatteryTipsEnabled()).thenReturn(true);
+        when(mFeatureFactory.powerUsageFeatureProvider.isBatteryTipsEnabled()).thenReturn(true);
 
         mBatteryTipsController.handleBatteryTipsCardUpdated(event);
 
+        verify(mBatteryTipsCardPreference).setAnomalyEventId("ScreenTimeoutAnomaly");
         verify(mBatteryTipsCardPreference).setTitle("Reduce screen timeout to extend battery life");
         verify(mBatteryTipsCardPreference).setMainButtonLabel("View Settings");
         verify(mBatteryTipsCardPreference).setDismissButtonLabel("Got it");
@@ -106,6 +109,8 @@ public final class BatteryTipsControllerTest {
                 "com.android.settings.display.ScreenTimeoutSettings",
                 1852);
         verify(mBatteryTipsCardPreference).setVisible(true);
+        verify(mFeatureFactory.metricsFeatureProvider).action(
+                mContext, SettingsEnums.ACTION_BATTERY_TIPS_CARD_SHOW, "ScreenTimeoutAnomaly");
     }
     @Test
     public void handleBatteryTipsCardUpdated_screenTimeoutAnomalyHasTitle_showAnomaly() {
@@ -117,10 +122,11 @@ public final class BatteryTipsControllerTest {
                                 .setTitleString(testTitle)
                                 .build())
                 .build();
-        when(mPowerUsageFeatureProvider.isBatteryTipsEnabled()).thenReturn(true);
+        when(mFeatureFactory.powerUsageFeatureProvider.isBatteryTipsEnabled()).thenReturn(true);
 
         mBatteryTipsController.handleBatteryTipsCardUpdated(event);
 
+        verify(mBatteryTipsCardPreference).setAnomalyEventId("ScreenTimeoutAnomaly");
         verify(mBatteryTipsCardPreference).setTitle(testTitle);
         verify(mBatteryTipsCardPreference).setMainButtonLabel("View Settings");
         verify(mBatteryTipsCardPreference).setDismissButtonLabel("Got it");
@@ -128,5 +134,7 @@ public final class BatteryTipsControllerTest {
                 "com.android.settings.display.ScreenTimeoutSettings",
                 1852);
         verify(mBatteryTipsCardPreference).setVisible(true);
+        verify(mFeatureFactory.metricsFeatureProvider).action(
+                mContext, SettingsEnums.ACTION_BATTERY_TIPS_CARD_SHOW, "ScreenTimeoutAnomaly");
     }
 }
