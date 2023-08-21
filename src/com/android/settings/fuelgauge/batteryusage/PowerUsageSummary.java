@@ -142,7 +142,6 @@ public class PowerUsageSummary extends PowerUsageBase implements
         mBatteryHeaderPreferenceController = use(BatteryHeaderPreferenceController.class);
         mBatteryHeaderPreferenceController.setActivity(activity);
         mBatteryHeaderPreferenceController.setFragment(this);
-        mBatteryHeaderPreferenceController.setLifecycle(getSettingsLifecycle());
 
         mBatteryTipPreferenceController = use(BatteryTipPreferenceController.class);
         mBatteryTipPreferenceController.setActivity(activity);

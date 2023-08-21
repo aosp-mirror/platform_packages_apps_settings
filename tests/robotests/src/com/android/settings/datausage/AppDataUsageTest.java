@@ -100,7 +100,6 @@ public class AppDataUsageTest {
         MockitoAnnotations.initMocks(this);
 
         ShadowEntityHeaderController.setUseMock(mHeaderController);
-        when(mHeaderController.setRecyclerView(any(), any())).thenReturn(mHeaderController);
         when(mHeaderController.setUid(anyInt())).thenReturn(mHeaderController);
     }
 

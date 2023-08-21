@@ -417,7 +417,6 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
         final Activity activity = getActivity();
         final Preference pref = EntityHeaderController
                 .newInstance(activity, this, null /* header */)
-                .setRecyclerView(getListView(), getSettingsLifecycle())
                 .setUid(uid)
                 .setHasAppInfoLink(showInfoButton)
                 .setButtonActions(EntityHeaderController.ActionType.ACTION_NONE,
@@ -425,7 +424,7 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
                 .setIcon(mIcon)
                 .setLabel(mLabel)
                 .setPackageName(pkg)
-                .done(activity, getPrefContext());
+                .done(getPrefContext());
         getPreferenceScreen().addPreference(pref);
     }
 

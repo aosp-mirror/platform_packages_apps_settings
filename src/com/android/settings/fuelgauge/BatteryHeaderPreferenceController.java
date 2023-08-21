@@ -35,7 +35,6 @@ import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.Utils;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.widget.UsageProgressBarPreference;
@@ -59,7 +58,6 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
 
     private Activity mActivity;
     private PreferenceFragmentCompat mHost;
-    private Lifecycle mLifecycle;
     private BatteryTip mBatteryTip;
     private final PowerManager mPowerManager;
 
@@ -76,10 +74,6 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
 
     public void setFragment(PreferenceFragmentCompat fragment) {
         mHost = fragment;
-    }
-
-    public void setLifecycle(Lifecycle lifecycle) {
-        mLifecycle = lifecycle;
     }
 
     @Override
@@ -104,8 +98,7 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
 
     @Override
     public void onStart() {
-        EntityHeaderController.newInstance(mActivity, mHost, null /* header view */)
-                .setRecyclerView(mHost.getListView(), mLifecycle);
+        EntityHeaderController.newInstance(mActivity, mHost, null /* header view */);
     }
 
     private CharSequence generateLabel(BatteryInfo info) {

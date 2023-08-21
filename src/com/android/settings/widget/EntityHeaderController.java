@@ -38,13 +38,11 @@ import android.widget.TextView;
 import androidx.annotation.IntDef;
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.applications.ApplicationsState;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.widget.LayoutPreference;
 
 import java.lang.annotation.Retention;
@@ -67,12 +65,9 @@ public class EntityHeaderController {
     private static final String TAG = "AppDetailFeature";
 
     private final Context mAppContext;
-    private final Activity mActivity;
     private final Fragment mFragment;
     private final int mMetricsCategory;
     private final View mHeader;
-    private Lifecycle mLifecycle;
-    private RecyclerView mRecyclerView;
     private Drawable mIcon;
     private int mPrefOrder = -1000;
     private String mIconContentDescription;
@@ -107,7 +102,6 @@ public class EntityHeaderController {
     }
 
     private EntityHeaderController(Activity activity, Fragment fragment, View header) {
-        mActivity = activity;
         mAppContext = activity.getApplicationContext();
         mFragment = fragment;
         mMetricsCategory = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider()
@@ -119,12 +113,6 @@ public class EntityHeaderController {
                     .inflate(com.android.settingslib.widget.R.layout.settings_entity_header,
                             null /* root */);
         }
-    }
-
-    public EntityHeaderController setRecyclerView(RecyclerView recyclerView, Lifecycle lifecycle) {
-        mRecyclerView = recyclerView;
-        mLifecycle = lifecycle;
-        return this;
     }
 
     /**
@@ -181,13 +169,6 @@ public class EntityHeaderController {
         return this;
     }
 
-    public EntityHeaderController setSecondSummary(PackageInfo packageInfo) {
-        if (packageInfo != null) {
-            mSummary = packageInfo.versionName;
-        }
-        return this;
-    }
-
     public EntityHeaderController setHasAppInfoLink(boolean hasAppInfoLink) {
         mHasAppInfoLink = hasAppInfoLink;
         return this;
@@ -234,8 +215,8 @@ public class EntityHeaderController {
     /**
      * Done mutating entity header, rebinds everything and return a new {@link LayoutPreference}.
      */
-    public LayoutPreference done(Activity activity, Context uiContext) {
-        final LayoutPreference pref = new LayoutPreference(uiContext, done(activity));
+    public LayoutPreference done(Context uiContext) {
+        final LayoutPreference pref = new LayoutPreference(uiContext, done());
         // Makes sure it's the first preference onscreen.
         pref.setOrder(mPrefOrder);
         pref.setSelectable(false);
@@ -247,7 +228,7 @@ public class EntityHeaderController {
     /**
      * Done mutating entity header, rebinds everything (optionally skip rebinding buttons).
      */
-    public View done(Activity activity, boolean rebindActions) {
+    public View done(boolean rebindActions) {
         ImageView iconView = mHeader.findViewById(R.id.entity_header_icon);
         if (iconView != null) {
             iconView.setImageDrawable(mIcon);
@@ -303,8 +284,8 @@ public class EntityHeaderController {
      * Done mutating entity header, rebinds everything.
      */
     @VisibleForTesting
-    View done(Activity activity) {
-        return done(activity, true /* rebindActions */);
+    View done() {
+        return done(true /* rebindActions */);
     }
 
     private void bindButton(ImageButton button, @ActionType int action) {
