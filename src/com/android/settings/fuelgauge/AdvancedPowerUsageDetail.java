@@ -316,7 +316,6 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         final Bundle bundle = getArguments();
         EntityHeaderController controller = EntityHeaderController
                 .newInstance(context, this, appSnippet)
-                .setRecyclerView(getListView(), getSettingsLifecycle())
                 .setButtonActions(EntityHeaderController.ActionType.ACTION_NONE,
                         EntityHeaderController.ActionType.ACTION_NONE);
 
@@ -337,7 +336,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         }
 
         controller.setSummary(getHeaderSummary(bundle));
-        controller.done(context, true /* rebindActions */);
+        controller.done(true /* rebindActions */);
     }
 
     @VisibleForTesting

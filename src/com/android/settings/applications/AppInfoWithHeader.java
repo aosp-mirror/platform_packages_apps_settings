@@ -46,7 +46,6 @@ public abstract class AppInfoWithHeader extends AppInfoBase {
         final Activity activity = getActivity();
         final Preference pref = EntityHeaderController
                 .newInstance(activity, this, null /* header */)
-                .setRecyclerView(getListView(), getSettingsLifecycle())
                 .setIcon(Utils.getBadgedIcon(getContext(), mPackageInfo.applicationInfo))
                 .setLabel(mPackageInfo.applicationInfo.loadLabel(mPm))
                 .setSummary(mPackageInfo)
@@ -55,7 +54,7 @@ public abstract class AppInfoWithHeader extends AppInfoBase {
                 .setUid(mPackageInfo.applicationInfo.uid)
                 .setHasAppInfoLink(true)
                 .setButtonActions(ActionType.ACTION_NONE, ActionType.ACTION_NONE)
-                .done(activity, getPrefContext());
+                .done(getPrefContext());
         getPreferenceScreen().addPreference(pref);
     }
 }

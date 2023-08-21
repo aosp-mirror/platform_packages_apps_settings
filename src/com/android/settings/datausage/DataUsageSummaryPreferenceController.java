@@ -33,7 +33,6 @@ import android.util.RecurrenceRule;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.internal.util.CollectionUtils;
 import com.android.settings.R;
@@ -162,8 +161,6 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
             mEntityHeaderController =
                     EntityHeaderController.newInstance((Activity) mContext, mFragment, null);
         }
-        RecyclerView view = mFragment.getListView();
-        mEntityHeaderController.setRecyclerView(view, mLifecycle);
     }
 
     @VisibleForTesting

@@ -114,6 +114,6 @@ public class UsbDetailsHeaderControllerTest {
             DrawableTestHelper.assertDrawableResId(t, R.drawable.ic_usb);
             return true;
         }));
-        verify(mHeaderController).done(mActivity, true);
+        verify(mHeaderController).done(true);
     }
 }

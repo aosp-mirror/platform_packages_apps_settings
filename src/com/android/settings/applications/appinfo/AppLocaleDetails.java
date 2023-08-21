@@ -137,7 +137,6 @@ public class AppLocaleDetails extends SettingsPreferenceFragment {
         final Activity activity = getActivity();
         final Preference pref = EntityHeaderController
                 .newInstance(activity, this, null /* header */)
-                .setRecyclerView(getListView(), getSettingsLifecycle())
                 .setIcon(Utils.getBadgedIcon(getContext(), mApplicationInfo))
                 .setLabel(mApplicationInfo.loadLabel(getContext().getPackageManager()))
                 .setIsInstantApp(AppUtils.isInstant(mApplicationInfo))
@@ -146,7 +145,7 @@ public class AppLocaleDetails extends SettingsPreferenceFragment {
                 .setHasAppInfoLink(true)
                 .setButtonActions(ActionType.ACTION_NONE, ActionType.ACTION_NONE)
                 .setOrder(10)
-                .done(activity, getPrefContext());
+                .done(getPrefContext());
         getPreferenceScreen().addPreference(pref);
     }
 

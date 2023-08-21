@@ -40,14 +40,11 @@ import android.telephony.TelephonyManager;
 import android.util.RecurrenceRule;
 
 import androidx.fragment.app.FragmentActivity;
-import androidx.preference.PreferenceFragmentCompat;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.widget.EntityHeaderController;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.net.DataUsageController;
 
 import org.junit.After;
@@ -91,12 +88,8 @@ public class DataUsageSummaryPreferenceControllerTest {
     private SubscriptionInfo mSubscriptionInfo;
     @Mock
     private SubscriptionPlan mSubscriptionPlan;
-    @Mock
-    private Lifecycle mLifecycle;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private EntityHeaderController mHeaderController;
-    @Mock
-    private PreferenceFragmentCompat mPreferenceFragment;
     @Mock
     private TelephonyManager mTelephonyManager;
     @Mock
@@ -358,25 +351,6 @@ public class DataUsageSummaryPreferenceControllerTest {
         mController.mDataUsageController = mDataUsageController;
         doReturn(true).when(mPm).hasSystemFeature(eq(FEATURE_WIFI));
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
-    }
-
-    @Test
-    public void testMobileData_entityHeaderSet() {
-        final RecyclerView recyclerView = new RecyclerView(mActivity);
-
-        mController = spy(new DataUsageSummaryPreferenceController(
-                mDataUsageController,
-                mDataInfoController,
-                mNetworkTemplate,
-                mActivity, mLifecycle, mHeaderController, mPreferenceFragment,
-                mDefaultSubscriptionId));
-
-        when(mPreferenceFragment.getListView()).thenReturn(recyclerView);
-
-        mController.onStart();
-
-        verify(mHeaderController)
-                .setRecyclerView(any(RecyclerView.class), any(Lifecycle.class));
     }
 
     private DataUsageController.DataUsageInfo createTestDataUsageInfo(long now) {

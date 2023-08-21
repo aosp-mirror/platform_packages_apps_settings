@@ -84,7 +84,7 @@ public class EntityHeaderControllerTest {
     @Test
     public void testBuildView_constructedWithoutView_shouldCreateNewView() {
         mController = EntityHeaderController.newInstance(mActivity, mFragment, null);
-        View view = mController.done(mActivity);
+        View view = mController.done();
 
         assertThat(view).isNotNull();
     }
@@ -92,7 +92,7 @@ public class EntityHeaderControllerTest {
     @Test
     public void testBuildView_withContext_shouldBuildPreferenceAllowedBelowDivider() {
         mController = EntityHeaderController.newInstance(mActivity, mFragment, null);
-        Preference preference = mController.done(mActivity, mShadowContext);
+        Preference preference = mController.done(mShadowContext);
 
         assertThat(preference instanceof LayoutPreference).isTrue();
         assertThat(((LayoutPreference)preference).isAllowDividerBelow()).isTrue();
@@ -103,7 +103,7 @@ public class EntityHeaderControllerTest {
         View inputView = mLayoutInflater.inflate(
                 com.android.settingslib.widget.R.layout.settings_entity_header, null /* root */);
         mController = EntityHeaderController.newInstance(mActivity, mFragment, inputView);
-        View view = mController.done(mActivity);
+        View view = mController.done();
 
         assertThat(view).isSameInstanceAs(inputView);
     }
@@ -123,7 +123,7 @@ public class EntityHeaderControllerTest {
         mController.setSummary(testString);
         mController.setSecondSummary(testString);
         mController.setIcon(mShadowContext.getDrawable(R.drawable.ic_add_24dp));
-        mController.done(mActivity);
+        mController.done();
 
         assertThat(label).isNotNull();
         assertThat(label.getText()).isEqualTo(testString);
@@ -144,15 +144,11 @@ public class EntityHeaderControllerTest {
         when(mActivity.getApplicationContext()).thenReturn(mContext);
 
         mController = EntityHeaderController.newInstance(mActivity, mFragment, view);
-        mController.setEditListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // do nothing
-            }
-        });
+        mController.setEditListener(v -> {/* do nothing */});
         mController.setButtonActions(
                 EntityHeaderController.ActionType.ACTION_EDIT_PREFERENCE,
                 EntityHeaderController.ActionType.ACTION_NONE);
-        mController.done(mActivity);
+        mController.done();
 
         final ImageButton button1 = view.findViewById(android.R.id.button1);
         assertThat(button1).isNotNull();
@@ -175,7 +171,7 @@ public class EntityHeaderControllerTest {
         mController.setButtonActions(
                 EntityHeaderController.ActionType.ACTION_EDIT_PREFERENCE,
                 EntityHeaderController.ActionType.ACTION_NONE);
-        mController.done(mActivity);
+        mController.done();
 
         assertThat(view.findViewById(android.R.id.button1).getVisibility()).isEqualTo(View.GONE);
         assertThat(view.findViewById(android.R.id.button2).getVisibility()).isEqualTo(View.GONE);
@@ -195,7 +191,7 @@ public class EntityHeaderControllerTest {
                 .setButtonActions(
                         EntityHeaderController.ActionType.ACTION_NONE,
                         EntityHeaderController.ActionType.ACTION_NONE);
-        mController.done(mActivity);
+        mController.done();
 
         assertThat(appLinks.findViewById(android.R.id.button1).getVisibility())
                 .isEqualTo(View.GONE);
@@ -224,7 +220,7 @@ public class EntityHeaderControllerTest {
                 .setButtonActions(
                         EntityHeaderController.ActionType.ACTION_NOTIF_PREFERENCE,
                         EntityHeaderController.ActionType.ACTION_NONE);
-        mController.done(mActivity);
+        mController.done();
 
         appLinks.findViewById(com.android.settingslib.widget.R.id.entity_header_content)
                 .performClick();
@@ -241,7 +237,7 @@ public class EntityHeaderControllerTest {
         String description = "Fake Description";
         mController.setIcon(mShadowContext.getDrawable(R.drawable.ic_add_24dp));
         mController.setIconContentDescription(description);
-        mController.done(mActivity);
+        mController.done();
         assertThat(view.findViewById(R.id.entity_header_icon).getContentDescription().toString())
                 .isEqualTo(description);
     }
@@ -254,7 +250,7 @@ public class EntityHeaderControllerTest {
         mController = EntityHeaderController.newInstance(mActivity, mFragment, view);
         String description = "Fake Description";
         mController.setIconContentDescription(description);
-        mController.done(mActivity);
+        mController.done();
         assertThat(view.findViewById(R.id.entity_header_icon).getContentDescription().toString())
                 .isEqualTo(description);
     }
@@ -269,7 +265,7 @@ public class EntityHeaderControllerTest {
                 .setButtonActions(
                         EntityHeaderController.ActionType.ACTION_NOTIF_PREFERENCE,
                         EntityHeaderController.ActionType.ACTION_NONE);
-        mController.done(mActivity);
+        mController.done();
 
         assertThat(appLinks.findViewById(android.R.id.button1).getVisibility())
                 .isEqualTo(View.VISIBLE);
@@ -284,7 +280,7 @@ public class EntityHeaderControllerTest {
         final View header = mLayoutInflater.inflate(
                 com.android.settingslib.widget.R.layout.settings_entity_header, null /* root */);
         mController = EntityHeaderController.newInstance(mActivity, mFragment, header);
-        mController.done(mActivity);
+        mController.done();
 
         View installType = header.findViewById(com.android.settingslib.widget.R.id.install_type);
         assertThat(installType.getVisibility()).isEqualTo(View.GONE);
@@ -297,7 +293,7 @@ public class EntityHeaderControllerTest {
                 com.android.settingslib.widget.R.layout.settings_entity_header, null /* root */);
         mController = EntityHeaderController.newInstance(mActivity, mFragment, header);
         mController.setIsInstantApp(true);
-        mController.done(mActivity);
+        mController.done();
         TextView label = header.findViewById(com.android.settingslib.widget.R.id.install_type);
 
         assertThat(label.getVisibility()).isEqualTo(View.VISIBLE);

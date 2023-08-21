@@ -47,7 +47,6 @@ import android.os.UserHandle;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.loader.app.LoaderManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -60,7 +59,6 @@ import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.LayoutPreference;
 import com.android.settingslib.widget.SelectorWithWidgetPreference;
@@ -158,8 +156,6 @@ public class AdvancedPowerUsageDetailTest {
         doReturn(mLoaderManager).when(mFragment).getLoaderManager();
 
         ShadowEntityHeaderController.setUseMock(mEntityHeaderController);
-        doReturn(mEntityHeaderController).when(mEntityHeaderController)
-                .setRecyclerView(nullable(RecyclerView.class), nullable(Lifecycle.class));
         doReturn(mEntityHeaderController).when(mEntityHeaderController)
                 .setButtonActions(anyInt(), anyInt());
         doReturn(mEntityHeaderController).when(mEntityHeaderController)

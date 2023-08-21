@@ -127,7 +127,6 @@ public class BatteryHeaderPreferenceControllerTest {
         mLifecycle.addObserver(mController);
         mController.setActivity(mActivity);
         mController.setFragment(mPreferenceFragment);
-        mController.setLifecycle(mLifecycle);
         mController.mBatteryUsageProgressBarPref = mBatteryUsageProgressBarPref;
         mController.mBatteryStatusFeatureProvider = mBatteryStatusFeatureProvider;
     }

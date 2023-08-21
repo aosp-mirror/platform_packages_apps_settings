@@ -200,7 +200,6 @@ public class AppLaunchSettings extends AppInfoBase implements
         final String summary = activity.getString(R.string.app_launch_top_intro_message);
         final Preference pref = EntityHeaderController
                 .newInstance(activity, this, null /* header */)
-                .setRecyclerView(getListView(), getSettingsLifecycle())
                 .setIcon(Utils.getBadgedIcon(mContext, mPackageInfo.applicationInfo))
                 .setLabel(mPackageInfo.applicationInfo.loadLabel(mPm))
                 .setSummary(summary)  // add intro text
@@ -210,7 +209,7 @@ public class AppLaunchSettings extends AppInfoBase implements
                 .setHasAppInfoLink(true)
                 .setButtonActions(EntityHeaderController.ActionType.ACTION_NONE,
                         EntityHeaderController.ActionType.ACTION_NONE)
-                .done(activity, getPrefContext());
+                .done(getPrefContext());
         getPreferenceScreen().addPreference(pref);
     }
 
