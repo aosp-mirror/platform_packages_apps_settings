@@ -56,7 +56,8 @@ public class SimListDialogFragment extends SimDialogFragment {
 
     protected SelectSubscriptionAdapter mAdapter;
     @VisibleForTesting
-    List<SubscriptionInfo> mSubscriptions;
+    @NonNull
+    List<SubscriptionInfo> mSubscriptions = new ArrayList<>();
 
     public static SimListDialogFragment newInstance(int dialogType, int titleResId,
             boolean includeAskEveryTime, boolean isCancelItemShowed) {
@@ -71,8 +72,6 @@ public class SimListDialogFragment extends SimDialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        mSubscriptions = new ArrayList<>();
-
         final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         View titleView = LayoutInflater.from(getContext()).inflate(
                 R.layout.sim_confirm_dialog_title_multiple_enabled_profiles_supported, null);
