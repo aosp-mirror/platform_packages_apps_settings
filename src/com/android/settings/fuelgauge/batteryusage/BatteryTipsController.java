@@ -16,6 +16,7 @@
 
 package com.android.settings.fuelgauge.batteryusage;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.text.TextUtils;
 
@@ -26,6 +27,7 @@ import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import java.util.function.Function;
 
@@ -36,19 +38,20 @@ public class BatteryTipsController extends BasePreferenceController {
     private static final String ROOT_PREFERENCE_KEY = "battery_tips_category";
     private static final String CARD_PREFERENCE_KEY = "battery_tips_card";
 
+    private final PowerUsageFeatureProvider mPowerUsageFeatureProvider;
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
+
     @VisibleForTesting
     BatteryTipsCardPreference mCardPreference;
-    @VisibleForTesting
-    PowerUsageFeatureProvider mPowerUsageFeatureProvider;
 
     public BatteryTipsController(Context context) {
         super(context, ROOT_PREFERENCE_KEY);
-        mPowerUsageFeatureProvider = FeatureFactory.getFeatureFactory()
-            .getPowerUsageFeatureProvider();
+        final FeatureFactory featureFactory = FeatureFactory.getFeatureFactory();
+        mPowerUsageFeatureProvider =  featureFactory.getPowerUsageFeatureProvider();
+        mMetricsFeatureProvider = featureFactory.getMetricsFeatureProvider();
     }
 
     private boolean isTipsCardVisible() {
-        // TODO: compared with the timestamp of last user dismiss action in sharedPreference.
         return mPowerUsageFeatureProvider.isBatteryTipsEnabled();
     }
 
@@ -131,10 +134,14 @@ public class BatteryTipsController extends BasePreferenceController {
                 WarningItemInfo::getMainButtonSourceMetricsCategory);
 
         // Updated card preference and main button fragment launcher
+        mCardPreference.setAnomalyEventId(powerAnomalyEvent.getEventId());
         mCardPreference.setTitle(titleString);
         mCardPreference.setMainButtonLabel(mainBtnString);
         mCardPreference.setDismissButtonLabel(dismissBtnString);
         mCardPreference.setMainButtonLauncherInfo(destinationClassName, sourceMetricsCategory);
         mCardPreference.setVisible(true);
+
+        mMetricsFeatureProvider.action(mContext,
+                SettingsEnums.ACTION_BATTERY_TIPS_CARD_SHOW, powerAnomalyEvent.getEventId());
     }
 }

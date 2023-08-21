@@ -16,6 +16,7 @@
 
 package com.android.settings.fuelgauge.batteryusage;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -32,6 +33,7 @@ import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import com.google.android.material.button.MaterialButton;
 
@@ -43,6 +45,9 @@ public class BatteryTipsCardPreference extends Preference implements View.OnClic
     private static final String TAG = "BatteryTipsCardPreference";
 
     private final PowerUsageFeatureProvider mPowerUsageFeatureProvider;
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
+
+    private String mAnomalyEventId;
 
     @VisibleForTesting
     CharSequence mMainButtonLabel;
@@ -51,18 +56,26 @@ public class BatteryTipsCardPreference extends Preference implements View.OnClic
     @VisibleForTesting
     String mDestinationComponentName;
     @VisibleForTesting
-    int mSourceMetricsCategory;
+    Integer mSourceMetricsCategory;
 
     public BatteryTipsCardPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         setLayoutResource(R.layout.battery_tips_card);
         setSelectable(false);
-        mPowerUsageFeatureProvider = FeatureFactory.getFeatureFactory()
-            .getPowerUsageFeatureProvider();
+        final FeatureFactory featureFactory = FeatureFactory.getFeatureFactory();
+        mPowerUsageFeatureProvider =  featureFactory.getPowerUsageFeatureProvider();
+        mMetricsFeatureProvider = featureFactory.getMetricsFeatureProvider();
     }
 
     /**
-     * Update the label of main button in tips card.
+     * Sets the anomaly event id which is used in metrics.
+     */
+    public void setAnomalyEventId(final String anomalyEventId) {
+        mAnomalyEventId = anomalyEventId;
+    }
+
+    /**
+     * Sets the label of main button in tips card.
      */
     public void setMainButtonLabel(CharSequence label) {
         if (!TextUtils.equals(mMainButtonLabel, label)) {
@@ -72,7 +85,7 @@ public class BatteryTipsCardPreference extends Preference implements View.OnClic
     }
 
     /**
-     * Update the label of dismiss button in tips card.
+     * Sets the label of dismiss button in tips card.
      */
     public void setDismissButtonLabel(CharSequence label) {
         if (!TextUtils.equals(mDismissButtonLabel, label)) {
@@ -82,7 +95,7 @@ public class BatteryTipsCardPreference extends Preference implements View.OnClic
     }
 
     /**
-     * Update the info of target fragment launched by main button.
+     * Sets the info of target fragment launched by main button.
      */
     public void setMainButtonLauncherInfo(final String destinationClassName,
             final Integer sourceMetricsCategory) {
@@ -102,8 +115,12 @@ public class BatteryTipsCardPreference extends Preference implements View.OnClic
                     .setSourceMetricsCategory(mSourceMetricsCategory)
                     .launch();
             setVisible(false);
+            mMetricsFeatureProvider.action(
+                    getContext(), SettingsEnums.ACTION_BATTERY_TIPS_CARD_ACCEPT, mAnomalyEventId);
         } else if (viewId == R.id.dismiss_button) {
             setVisible(false);
+            mMetricsFeatureProvider.action(
+                    getContext(), SettingsEnums.ACTION_BATTERY_TIPS_CARD_DISMISS, mAnomalyEventId);
         }
     }
 
