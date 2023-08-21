@@ -33,15 +33,21 @@ import android.text.format.DateFormat;
 import android.util.Base64;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.batteryusage.db.AppUsageEventEntity;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryEventEntity;
+import com.android.settings.fuelgauge.batteryusage.db.BatteryUsageSlotEntity;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
 import java.util.TimeZone;
 
 /** A utility class to convert data into another types. */
@@ -75,7 +81,22 @@ public final class ConvertUtils {
     private ConvertUtils() {
     }
 
-    /** Converts {@link BatteryEntry} to content values */
+    /** Whether {@code consumerType} is app consumer or not. */
+    public static boolean isUidConsumer(final int consumerType) {
+        return consumerType == CONSUMER_TYPE_UID_BATTERY;
+    }
+
+    /** Whether {@code consumerType} is user consumer or not. */
+    public static boolean isUserConsumer(final int consumerType) {
+        return consumerType == CONSUMER_TYPE_USER_BATTERY;
+    }
+
+    /** Whether {@code consumerType} is system consumer or not. */
+    public static boolean isSystemConsumer(final int consumerType) {
+        return consumerType == CONSUMER_TYPE_SYSTEM_BATTERY;
+    }
+
+    /** Converts {@link BatteryEntry} to {@link ContentValues} */
     public static ContentValues convertBatteryEntryToContentValues(
             final BatteryEntry entry,
             final BatteryUsageStats batteryUsageStats,
@@ -118,7 +139,7 @@ public final class ConvertUtils {
         return values;
     }
 
-    /** Converts {@link AppUsageEvent} to content values */
+    /** Converts {@link AppUsageEvent} to {@link ContentValues} */
     public static ContentValues convertAppUsageEventToContentValues(final AppUsageEvent event) {
         final ContentValues values = new ContentValues();
         values.put(AppUsageEventEntity.KEY_UID, event.getUid());
@@ -131,12 +152,22 @@ public final class ConvertUtils {
         return values;
     }
 
-    /** Converts {@link BatteryEvent} to content values */
+    /** Converts {@link BatteryEvent} to {@link ContentValues} */
     public static ContentValues convertBatteryEventToContentValues(final BatteryEvent event) {
         final ContentValues values = new ContentValues();
         values.put(BatteryEventEntity.KEY_TIMESTAMP, event.getTimestamp());
         values.put(BatteryEventEntity.KEY_BATTERY_EVENT_TYPE, event.getType().getNumber());
         values.put(BatteryEventEntity.KEY_BATTERY_LEVEL, event.getBatteryLevel());
+        return values;
+    }
+
+    /** Converts {@link BatteryUsageSlot} to {@link ContentValues} */
+    public static ContentValues convertBatteryUsageSlotToContentValues(
+            final BatteryUsageSlot batteryUsageSlot) {
+        final ContentValues values = new ContentValues(2);
+        values.put(BatteryUsageSlotEntity.KEY_TIMESTAMP, batteryUsageSlot.getStartTimestamp());
+        values.put(BatteryUsageSlotEntity.KEY_BATTERY_USAGE_SLOT,
+                Base64.encodeToString(batteryUsageSlot.toByteArray(), Base64.DEFAULT));
         return values;
     }
 
@@ -183,7 +214,7 @@ public final class ConvertUtils {
                         /*isFullChargeStart=*/ false));
     }
 
-    /** Converts to {@link AppUsageEvent} from {@link Event} */
+    /** Converts from {@link Event} to {@link AppUsageEvent} */
     @Nullable
     public static AppUsageEvent convertToAppUsageEvent(
             Context context, IUsageStatsManager usageStatsManager, final Event event,
@@ -234,8 +265,8 @@ public final class ConvertUtils {
         return appUsageEventBuilder.build();
     }
 
-    /** Converts to {@link AppUsageEvent} from {@link Cursor} */
-    public static AppUsageEvent convertToAppUsageEventFromCursor(final Cursor cursor) {
+    /** Converts from {@link Cursor} to {@link AppUsageEvent} */
+    public static AppUsageEvent convertToAppUsageEvent(final Cursor cursor) {
         final AppUsageEvent.Builder eventBuilder = AppUsageEvent.newBuilder();
         eventBuilder.setTimestamp(getLongFromCursor(cursor, AppUsageEventEntity.KEY_TIMESTAMP));
         eventBuilder.setType(
@@ -253,7 +284,7 @@ public final class ConvertUtils {
         return eventBuilder.build();
     }
 
-    /** Converts to {@link BatteryEvent} from {@link BatteryEventType} */
+    /** Converts from {@link BatteryEventType} to {@link BatteryEvent} */
     public static BatteryEvent convertToBatteryEvent(
             long timestamp, BatteryEventType type, int batteryLevel) {
         final BatteryEvent.Builder eventBuilder = BatteryEvent.newBuilder();
@@ -263,8 +294,8 @@ public final class ConvertUtils {
         return eventBuilder.build();
     }
 
-    /** Converts to {@link BatteryEvent} from {@link Cursor} */
-    public static BatteryEvent convertToBatteryEventFromCursor(final Cursor cursor) {
+    /** Converts from {@link Cursor} to {@link BatteryEvent} */
+    public static BatteryEvent convertToBatteryEvent(final Cursor cursor) {
         final BatteryEvent.Builder eventBuilder = BatteryEvent.newBuilder();
         eventBuilder.setTimestamp(getLongFromCursor(cursor, BatteryEventEntity.KEY_TIMESTAMP));
         eventBuilder.setType(
@@ -274,6 +305,42 @@ public final class ConvertUtils {
         eventBuilder.setBatteryLevel(
                 getIntegerFromCursor(cursor, BatteryEventEntity.KEY_BATTERY_LEVEL));
         return eventBuilder.build();
+    }
+
+    /** Converts from {@link BatteryLevelData} to {@link List<BatteryEvent>} */
+    public static List<BatteryEvent> convertToBatteryEventList(
+            final BatteryLevelData batteryLevelData) {
+        final List<BatteryEvent> batteryEventList = new ArrayList<>();
+        final List<BatteryLevelData.PeriodBatteryLevelData> levelDataList =
+                batteryLevelData.getHourlyBatteryLevelsPerDay();
+        for (BatteryLevelData.PeriodBatteryLevelData oneDayData : levelDataList) {
+            for (int hourIndex = 0; hourIndex < oneDayData.getLevels().size() - 1; hourIndex++) {
+                batteryEventList.add(convertToBatteryEvent(
+                        oneDayData.getTimestamps().get(hourIndex),
+                        BatteryEventType.EVEN_HOUR,
+                        oneDayData.getLevels().get(hourIndex)));
+            }
+        }
+        return batteryEventList;
+    }
+
+    /** Converts from {@link Cursor} to {@link BatteryUsageSlot} */
+    public static BatteryUsageSlot convertToBatteryUsageSlot(final Cursor cursor) {
+        final BatteryUsageSlot defaultInstance = BatteryUsageSlot.getDefaultInstance();
+        final int columnIndex =
+                cursor.getColumnIndex(BatteryUsageSlotEntity.KEY_BATTERY_USAGE_SLOT);
+        return columnIndex < 0 ? defaultInstance : BatteryUtils.parseProtoFromString(
+                cursor.getString(columnIndex), defaultInstance);
+    }
+
+    /** Converts from {@link Map<Long, BatteryDiffData>} to {@link List<BatteryUsageSlot>} */
+    public static List<BatteryUsageSlot> convertToBatteryUsageSlotList(
+            final Map<Long, BatteryDiffData> batteryDiffDataMap) {
+        List<BatteryUsageSlot> batteryUsageSlotList = new ArrayList<>();
+        for (BatteryDiffData batteryDiffData : batteryDiffDataMap.values()) {
+            batteryUsageSlotList.add(convertToBatteryUsageSlot(batteryDiffData));
+        }
+        return batteryUsageSlotList;
     }
 
     /** Converts UTC timestamp to local time string for logging only, so use the US locale for
@@ -394,6 +461,100 @@ public final class ConvertUtils {
             default:
                 return AppUsageEventType.UNKNOWN;
         }
+    }
+
+    private static BatteryUsageDiff convertToBatteryUsageDiff(BatteryDiffEntry batteryDiffEntry) {
+        BatteryUsageDiff.Builder builder = BatteryUsageDiff.newBuilder()
+                .setUid(batteryDiffEntry.mUid)
+                .setUserId(batteryDiffEntry.mUserId)
+                .setIsHidden(batteryDiffEntry.mIsHidden)
+                .setComponentId(batteryDiffEntry.mComponentId)
+                .setConsumerType(batteryDiffEntry.mConsumerType)
+                .setConsumePower(batteryDiffEntry.mConsumePower)
+                .setForegroundUsageConsumePower(batteryDiffEntry.mForegroundUsageConsumePower)
+                .setBackgroundUsageConsumePower(batteryDiffEntry.mBackgroundUsageConsumePower)
+                .setForegroundUsageTime(batteryDiffEntry.mForegroundUsageTimeInMs)
+                .setBackgroundUsageTime(batteryDiffEntry.mBackgroundUsageTimeInMs)
+                .setScreenOnTime(batteryDiffEntry.mScreenOnTimeInMs);
+        if (batteryDiffEntry.mKey != null) {
+            builder.setKey(batteryDiffEntry.mKey);
+        }
+        if (batteryDiffEntry.mLegacyPackageName != null) {
+            builder.setPackageName(batteryDiffEntry.mLegacyPackageName);
+        }
+        if (batteryDiffEntry.mLegacyLabel != null) {
+            builder.setLabel(batteryDiffEntry.mLegacyLabel);
+        }
+        return builder.build();
+    }
+
+    private static BatteryUsageSlot convertToBatteryUsageSlot(
+            final BatteryDiffData batteryDiffData) {
+        if (batteryDiffData == null) {
+            return BatteryUsageSlot.getDefaultInstance();
+        }
+        final BatteryUsageSlot.Builder builder = BatteryUsageSlot.newBuilder()
+                .setStartTimestamp(batteryDiffData.getStartTimestamp())
+                .setEndTimestamp(batteryDiffData.getEndTimestamp())
+                .setStartBatteryLevel(batteryDiffData.getStartBatteryLevel())
+                .setEndBatteryLevel(batteryDiffData.getEndBatteryLevel())
+                .setScreenOnTime(batteryDiffData.getScreenOnTime());
+        for (BatteryDiffEntry batteryDiffEntry : batteryDiffData.getAppDiffEntryList()) {
+            builder.addAppUsage(convertToBatteryUsageDiff(batteryDiffEntry));
+        }
+        for (BatteryDiffEntry batteryDiffEntry : batteryDiffData.getSystemDiffEntryList()) {
+            builder.addSystemUsage(convertToBatteryUsageDiff(batteryDiffEntry));
+        }
+        return builder.build();
+    }
+
+    private static BatteryDiffEntry convertToBatteryDiffEntry(
+            Context context, final BatteryUsageDiff batteryUsageDiff) {
+        return new BatteryDiffEntry(
+                context,
+                batteryUsageDiff.getUid(),
+                batteryUsageDiff.getUserId(),
+                batteryUsageDiff.getKey(),
+                batteryUsageDiff.getIsHidden(),
+                batteryUsageDiff.getComponentId(),
+                batteryUsageDiff.getPackageName(),
+                batteryUsageDiff.getLabel(),
+                batteryUsageDiff.getConsumerType(),
+                batteryUsageDiff.getForegroundUsageTime(),
+                batteryUsageDiff.getBackgroundUsageTime(),
+                batteryUsageDiff.getScreenOnTime(),
+                batteryUsageDiff.getConsumePower(),
+                batteryUsageDiff.getForegroundUsageConsumePower(),
+                /*foregroundServiceUsageConsumePower=*/ 0,
+                batteryUsageDiff.getBackgroundUsageConsumePower(),
+                /*cachedUsageConsumePower=*/ 0);
+    }
+
+    static BatteryDiffData convertToBatteryDiffData(
+            Context context,
+            final BatteryUsageSlot batteryUsageSlot,
+            @NonNull final Set<String> systemAppsPackageNames,
+            @NonNull final Set<Integer> systemAppsUids) {
+        final List<BatteryDiffEntry> appDiffEntries = new ArrayList<>();
+        final List<BatteryDiffEntry> systemDiffEntries = new ArrayList<>();
+        for (BatteryUsageDiff batteryUsageDiff : batteryUsageSlot.getAppUsageList()) {
+            appDiffEntries.add(convertToBatteryDiffEntry(context, batteryUsageDiff));
+        }
+        for (BatteryUsageDiff batteryUsageDiff : batteryUsageSlot.getSystemUsageList()) {
+            systemDiffEntries.add(convertToBatteryDiffEntry(context, batteryUsageDiff));
+        }
+        return new BatteryDiffData(
+                context,
+                batteryUsageSlot.getStartTimestamp(),
+                batteryUsageSlot.getEndTimestamp(),
+                batteryUsageSlot.getStartBatteryLevel(),
+                batteryUsageSlot.getEndBatteryLevel(),
+                batteryUsageSlot.getScreenOnTime(),
+                appDiffEntries,
+                systemDiffEntries,
+                systemAppsPackageNames,
+                systemAppsUids,
+                /*isAccumulated=*/ false);
     }
 
     private static BatteryInformation constructBatteryInformation(

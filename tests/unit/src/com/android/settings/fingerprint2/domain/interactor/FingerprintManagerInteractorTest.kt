@@ -29,8 +29,8 @@ import androidx.test.core.app.ApplicationProvider
 import com.android.settings.biometrics.GatekeeperPasswordProvider
 import com.android.settings.biometrics.fingerprint2.domain.interactor.FingerprintManagerInteractor
 import com.android.settings.biometrics.fingerprint2.domain.interactor.FingerprintManagerInteractorImpl
-import com.android.settings.biometrics.fingerprint2.ui.viewmodel.FingerprintAuthAttemptViewModel
-import com.android.settings.biometrics.fingerprint2.ui.viewmodel.FingerprintViewModel
+import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintAuthAttemptViewModel
+import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintViewModel
 import com.android.settings.password.ChooseLockSettingsHelper
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.cancelAndJoin

@@ -96,6 +96,14 @@ public final class BatteryUsageBreakdownControllerTest {
         mBatteryUsageBreakdownController.mAppListPreferenceGroup = mAppListPreferenceGroup;
         mBatteryDiffEntry = new BatteryDiffEntry(
                 mContext,
+                /*uid=*/ 0L,
+                /*userId=*/ 0L,
+                /*key=*/ "key",
+                /*isHidden=*/ false,
+                /*componentId=*/ -1,
+                /*legacyPackageName=*/ null,
+                /*legacyLabel=*/ null,
+                /*consumerType=*/ ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
                 /*foregroundUsageTimeInMs=*/ 1,
                 /*backgroundUsageTimeInMs=*/ 2,
                 /*screenOnTimeInMs=*/ 0,
@@ -103,13 +111,14 @@ public final class BatteryUsageBreakdownControllerTest {
                 /*foregroundUsageConsumePower=*/ 0,
                 /*foregroundServiceUsageConsumePower=*/ 1,
                 /*backgroundUsageConsumePower=*/ 2,
-                /*cachedUsageConsumePower=*/ 0,
-                mBatteryHistEntry);
+                /*cachedUsageConsumePower=*/ 0);
         mBatteryDiffEntry = spy(mBatteryDiffEntry);
         mBatteryUsageBreakdownController.mBatteryDiffData =
-                new BatteryDiffData(mContext, /* screenOnTime= */ 0L,
-                        Arrays.asList(mBatteryDiffEntry), Arrays.asList(), Set.of(), Set.of(),
-                        /* isAccumulated= */ false);
+                new BatteryDiffData(mContext, /* startTimestamp= */ 0L, /* endTimestamp= */ 0L,
+                        /* startBatteryLevel= */ 0, /* endBatteryLevel= */ 0,
+                        /* screenOnTime= */ 0L, Arrays.asList(mBatteryDiffEntry), Arrays.asList(),
+                        Set.of(), Set.of(), /* isAccumulated= */ false);
+        BatteryDiffEntry.clearCache();
         // Adds fake testing data.
         BatteryDiffEntry.sResourceCache.put(
                 "fakeBatteryDiffEntryKey",
@@ -140,7 +149,7 @@ public final class BatteryUsageBreakdownControllerTest {
         doReturn(1).when(mAppListPreferenceGroup).getPreferenceCount();
         doReturn(mDrawable).when(mBatteryDiffEntry).getAppIcon();
         doReturn(appLabel).when(mBatteryDiffEntry).getAppLabel();
-        doReturn(PREF_KEY).when(mBatteryHistEntry).getKey();
+        doReturn(PREF_KEY).when(mBatteryDiffEntry).getKey();
         doReturn(null).when(mAppListPreferenceGroup).findPreference(PREF_KEY);
         doReturn(false).when(mBatteryDiffEntry).validForRestriction();
 
@@ -168,7 +177,7 @@ public final class BatteryUsageBreakdownControllerTest {
         doReturn(1).when(mAppListPreferenceGroup).getPreferenceCount();
         doReturn(mDrawable).when(mBatteryDiffEntry).getAppIcon();
         doReturn(appLabel).when(mBatteryDiffEntry).getAppLabel();
-        doReturn(PREF_KEY).when(mBatteryHistEntry).getKey();
+        doReturn(PREF_KEY).when(mBatteryDiffEntry).getKey();
         doReturn(mPowerGaugePreference).when(mAppListPreferenceGroup).findPreference(PREF_KEY);
 
         mBatteryUsageBreakdownController.addAllPreferences();
@@ -197,7 +206,7 @@ public final class BatteryUsageBreakdownControllerTest {
     public void removeAndCacheAllUnusedPreferences_keepPref_KeepAllPreference() {
         doReturn(1).when(mAppListPreferenceGroup).getPreferenceCount();
         doReturn(mPowerGaugePreference).when(mAppListPreferenceGroup).getPreference(0);
-        doReturn(PREF_KEY).when(mBatteryHistEntry).getKey();
+        doReturn(PREF_KEY).when(mBatteryDiffEntry).getKey();
         doReturn(PREF_KEY).when(mPowerGaugePreference).getKey();
         doReturn(mPowerGaugePreference).when(mAppListPreferenceGroup).findPreference(PREF_KEY);
         // Ensures the testing data is correct.
@@ -222,7 +231,7 @@ public final class BatteryUsageBreakdownControllerTest {
 
     @Test
     public void handlePreferenceTreeClick_forAppEntry_returnTrue() {
-        doReturn(false).when(mBatteryHistEntry).isAppEntry();
+        mBatteryDiffEntry.mConsumerType = ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY;
         doReturn(mBatteryDiffEntry).when(mPowerGaugePreference).getBatteryDiffEntry();
 
         assertThat(mBatteryUsageBreakdownController.handlePreferenceTreeClick(
@@ -238,7 +247,7 @@ public final class BatteryUsageBreakdownControllerTest {
 
     @Test
     public void handlePreferenceTreeClick_forSystemEntry_returnTrue() {
-        doReturn(true).when(mBatteryHistEntry).isAppEntry();
+        mBatteryDiffEntry.mConsumerType = ConvertUtils.CONSUMER_TYPE_UID_BATTERY;
         doReturn(mBatteryDiffEntry).when(mPowerGaugePreference).getBatteryDiffEntry();
 
         assertThat(mBatteryUsageBreakdownController.handlePreferenceTreeClick(
@@ -394,10 +403,23 @@ public final class BatteryUsageBreakdownControllerTest {
         contentValues.put(BatteryHistEntry.KEY_USER_ID, Integer.valueOf(1001));
         final BatteryHistEntry batteryHistEntry = new BatteryHistEntry(contentValues);
         return new BatteryDiffEntry(
-                mContext, foregroundUsageTimeInMs, backgroundUsageTimeInMs, screenOnTimeInMs,
-                /*consumePower=*/ 0, /*foregroundUsageConsumePower=*/ 0,
-                /*foregroundServiceUsageConsumePower=*/ 0, /*backgroundUsageConsumePower=*/ 0,
-                /*cachedUsageConsumePower=*/ 0, batteryHistEntry);
+                mContext,
+                batteryHistEntry.mUid,
+                batteryHistEntry.mUserId,
+                batteryHistEntry.getKey(),
+                batteryHistEntry.mIsHidden,
+                batteryHistEntry.mDrainType,
+                batteryHistEntry.mPackageName,
+                batteryHistEntry.mAppLabel,
+                batteryHistEntry.mConsumerType,
+                foregroundUsageTimeInMs,
+                backgroundUsageTimeInMs,
+                screenOnTimeInMs,
+                /*consumePower=*/ 0,
+                /*foregroundUsageConsumePower=*/ 0,
+                /*foregroundServiceUsageConsumePower=*/ 0,
+                /*backgroundUsageConsumePower=*/ 0,
+                /*cachedUsageConsumePower=*/ 0);
     }
 
     private BatteryUsageBreakdownController createController() {

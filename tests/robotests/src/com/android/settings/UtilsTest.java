@@ -16,15 +16,10 @@
 
 package com.android.settings;
 
-import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_CONFIRM_PASSWORD;
-import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_CONFIRM_PATTERN;
-import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_CONFIRM_PIN;
-
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
@@ -399,45 +394,33 @@ public class UtilsTest {
     }
 
     @Test
-    public void getConfirmCredentialStringForUser_workPin_shouldReturnCorrectString() {
+    public void getConfirmCredentialStringForUser_workPin_shouldReturnNull() {
         setUpForConfirmCredentialString(true /* isEffectiveUserManagedProfile */);
-
-        when(mDevicePolicyResourcesManager
-                .getString(eq(WORK_PROFILE_CONFIRM_PIN), any()))
-                .thenReturn("WORK PIN");
 
         String confirmCredentialString = Utils.getConfirmCredentialStringForUser(mContext,
                 USER_ID, LockPatternUtils.CREDENTIAL_TYPE_PIN);
 
-        assertThat(confirmCredentialString).isEqualTo("WORK PIN");
+        assertNull(confirmCredentialString);
     }
 
     @Test
-    public void getConfirmCredentialStringForUser_workPattern_shouldReturnCorrectString() {
+    public void getConfirmCredentialStringForUser_workPattern_shouldReturnNull() {
         setUpForConfirmCredentialString(true /* isEffectiveUserManagedProfile */);
-
-        when(mDevicePolicyResourcesManager
-                .getString(eq(WORK_PROFILE_CONFIRM_PATTERN), any()))
-                .thenReturn("WORK PATTERN");
 
         String confirmCredentialString = Utils.getConfirmCredentialStringForUser(mContext,
                 USER_ID, LockPatternUtils.CREDENTIAL_TYPE_PATTERN);
 
-        assertThat(confirmCredentialString).isEqualTo("WORK PATTERN");
+        assertNull(confirmCredentialString);
     }
 
     @Test
-    public void getConfirmCredentialStringForUser_workPassword_shouldReturnCorrectString() {
+    public void getConfirmCredentialStringForUser_workPassword_shouldReturnNull() {
         setUpForConfirmCredentialString(true /* isEffectiveUserManagedProfile */);
-
-        when(mDevicePolicyResourcesManager
-                .getString(eq(WORK_PROFILE_CONFIRM_PASSWORD), any()))
-                .thenReturn("WORK PASSWORD");
 
         String confirmCredentialString = Utils.getConfirmCredentialStringForUser(mContext,
                 USER_ID, LockPatternUtils.CREDENTIAL_TYPE_PASSWORD);
 
-        assertThat(confirmCredentialString).isEqualTo("WORK PASSWORD");
+        assertNull(confirmCredentialString);
     }
 
     @Test
@@ -454,7 +437,5 @@ public class UtilsTest {
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mMockUserManager);
         when(mMockUserManager.getCredentialOwnerProfile(USER_ID)).thenReturn(USER_ID);
         when(mMockUserManager.isManagedProfile(USER_ID)).thenReturn(isEffectiveUserManagedProfile);
-        when(mContext.getSystemService(DevicePolicyManager.class)).thenReturn(mDevicePolicyManager);
-        when(mDevicePolicyManager.getResources()).thenReturn(mDevicePolicyResourcesManager);
     }
 }

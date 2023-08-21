@@ -21,7 +21,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.INetworkPolicyManager;
-import android.net.NetworkPolicyManager;
 import android.net.NetworkTemplate;
 import android.os.ServiceManager;
 import android.telephony.SubscriptionInfo;
@@ -43,7 +42,6 @@ import com.android.settings.datausage.lib.DataUsageLib;
 import com.android.settings.network.ProxySubscriptionManager;
 import com.android.settings.network.telephony.TelephonyBasePreferenceController;
 import com.android.settings.widget.EntityHeaderController;
-import com.android.settingslib.NetworkPolicyEditor;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
@@ -64,8 +62,6 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
     private static final String TAG = "DataUsageController";
     private static final String KEY = "status_header";
     private static final long PETA = 1000000000000000L;
-    private static final float RELATIVE_SIZE_LARGE = 1.25f * 1.25f;  // (1/0.8)^2
-    private static final float RELATIVE_SIZE_SMALL = 1.0f / RELATIVE_SIZE_LARGE;  // 0.8^2
 
     private EntityHeaderController mEntityHeaderController;
     private final Lifecycle mLifecycle;
@@ -73,8 +69,6 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
     protected DataUsageController mDataUsageController;
     protected DataUsageInfoController mDataInfoController;
     private NetworkTemplate mDefaultTemplate;
-    protected NetworkPolicyEditor mPolicyEditor;
-    private int mDataUsageTemplate;
     private boolean mHasMobileData;
 
     /** Name of the carrier, or null if not available */
@@ -95,8 +89,6 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
     private long mDataBarSize;
     /** The number of bytes used since the start of the cycle. */
     private long mDataplanUse;
-    /** The starting time of the billing cycle in ms since the epoch */
-    private long mCycleStart;
     /** The ending time of the billing cycle in ms since the epoch */
     private long mCycleEnd;
 
@@ -125,22 +117,15 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
 
     protected void updateConfiguration(Context context,
             int subscriptionId, SubscriptionInfo subInfo) {
-        final NetworkPolicyManager policyManager =
-                context.getSystemService(NetworkPolicyManager.class);
-        mPolicyEditor = new NetworkPolicyEditor(policyManager);
-
         mDataUsageController = createDataUsageController(context);
         mDataUsageController.setSubscriptionId(subscriptionId);
         mDataInfoController = new DataUsageInfoController();
 
         if (subInfo != null) {
-            mDataUsageTemplate = R.string.cell_data_template;
             mDefaultTemplate = DataUsageLib.getMobileTemplate(context, subscriptionId);
         } else if (DataUsageUtils.hasWifiRadio(context)) {
-            mDataUsageTemplate = R.string.wifi_data_template;
             mDefaultTemplate = new NetworkTemplate.Builder(NetworkTemplate.MATCH_WIFI).build();
         } else {
-            mDataUsageTemplate = R.string.ethernet_data_template;
             mDefaultTemplate = DataUsageUtils.getDefaultTemplate(context, subscriptionId);
         }
     }
@@ -155,8 +140,6 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
             DataUsageController dataUsageController,
             DataUsageInfoController dataInfoController,
             NetworkTemplate defaultTemplate,
-            NetworkPolicyEditor policyEditor,
-            int dataUsageTemplate,
             Activity activity,
             Lifecycle lifecycle,
             EntityHeaderController entityHeaderController,
@@ -166,8 +149,6 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
         mDataUsageController = dataUsageController;
         mDataInfoController = dataInfoController;
         mDefaultTemplate = defaultTemplate;
-        mPolicyEditor = policyEditor;
-        mDataUsageTemplate = dataUsageTemplate;
         mHasMobileData = true;
         mLifecycle = lifecycle;
         mEntityHeaderController = entityHeaderController;
@@ -223,7 +204,6 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
         long usageLevel = info.usageLevel;
 
         if (subInfo != null) {
-            mDataInfoController.updateDataLimit(info, mPolicyEditor.getPolicy(mDefaultTemplate));
             summaryPreference.setWifiMode(/* isWifiMode */ false,
                     /* usagePeriod */ null, /* isSingleWifi */ false);
         } else {
@@ -302,7 +282,6 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
         mDataplanSize = -1L;
         mDataBarSize = mDataInfoController.getSummaryLimit(info);
         mDataplanUse = info.usageLevel;
-        mCycleStart = info.cycleStart;
         mCycleEnd = info.cycleEnd;
         mSnapshotTime = -1L;
 
@@ -322,7 +301,6 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
 
                 RecurrenceRule rule = primaryPlan.getCycleRule();
                 if (rule != null && rule.start != null && rule.end != null) {
-                    mCycleStart = rule.start.toEpochSecond() * 1000L;
                     mCycleEnd = rule.end.toEpochSecond() * 1000L;
                 }
                 mSnapshotTime = primaryPlan.getDataUsageTime();

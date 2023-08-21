@@ -21,12 +21,13 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.database.ContentObserver;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.provider.SearchIndexableResource;
 import android.util.Log;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
@@ -39,11 +40,13 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.utils.AsyncLoaderCompat;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /** Advanced power usage. */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
@@ -55,16 +58,17 @@ public class PowerUsageAdvanced extends PowerUsageBase {
     @VisibleForTesting
     BatteryHistoryPreference mHistPref;
     @VisibleForTesting
-    Map<Long, Map<String, BatteryHistEntry>> mBatteryHistoryMap;
-    @VisibleForTesting
-    final BatteryHistoryLoaderCallbacks mBatteryHistoryLoaderCallbacks =
-            new BatteryHistoryLoaderCallbacks();
+    final BatteryLevelDataLoaderCallbacks mBatteryLevelDataLoaderCallbacks =
+            new BatteryLevelDataLoaderCallbacks();
 
     private boolean mIsChartDataLoaded = false;
+    private long mResumeTimestamp;
     private BatteryChartPreferenceController mBatteryChartPreferenceController;
+    private Optional<BatteryLevelData> mBatteryLevelData;
 
+    private final Handler mHandler = new Handler(Looper.getMainLooper());
     private final ContentObserver mBatteryObserver =
-            new ContentObserver(new Handler()) {
+            new ContentObserver(mHandler) {
                 @Override
                 public void onChange(boolean selfChange) {
                     Log.d(TAG, "onBatteryContentChange: " + selfChange);
@@ -79,6 +83,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         super.onCreate(icicle);
         mHistPref = findPreference(KEY_BATTERY_CHART);
         setBatteryChartPreferenceController();
+        AsyncTask.execute(() -> BootBroadcastReceiver.invokeJobRecheck(getContext()));
     }
 
     @Override
@@ -109,6 +114,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         super.onPause();
         // Resets the flag to reload usage data in onResume() callback.
         mIsChartDataLoaded = false;
+        mBatteryLevelData = null;
         final Uri uri = DatabaseUtils.BATTERY_CONTENT_URI;
         if (uri != null) {
             getContext().getContentResolver().unregisterContentObserver(mBatteryObserver);
@@ -118,6 +124,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
     @Override
     public void onResume() {
         super.onResume();
+        mResumeTimestamp = System.currentTimeMillis();
         final Uri uri = DatabaseUtils.BATTERY_CONTENT_URI;
         if (uri != null) {
             getContext().getContentResolver().registerContentObserver(
@@ -159,20 +166,8 @@ public class PowerUsageAdvanced extends PowerUsageBase {
     }
 
     @Override
-    protected boolean isBatteryHistoryNeeded() {
-        return true;
-    }
-
-    @Override
     protected void refreshUi(@BatteryUpdateType int refreshType) {
-        final Context context = getContext();
-        if (context == null) {
-            return;
-        }
-        updatePreference(mHistPref);
-        if (mBatteryChartPreferenceController != null && mBatteryHistoryMap != null) {
-            mBatteryChartPreferenceController.setBatteryHistoryMap(mBatteryHistoryMap);
-        }
+        // Do nothing
     }
 
     @Override
@@ -181,9 +176,30 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         bundle.putInt(KEY_REFRESH_TYPE, refreshType);
         if (!mIsChartDataLoaded) {
             mIsChartDataLoaded = true;
-            restartLoader(LoaderIndex.BATTERY_HISTORY_LOADER, bundle,
-                    mBatteryHistoryLoaderCallbacks);
+            restartLoader(LoaderIndex.BATTERY_LEVEL_DATA_LOADER, bundle,
+                    mBatteryLevelDataLoaderCallbacks);
         }
+    }
+
+    private void onBatteryLevelDataUpdate(BatteryLevelData batteryLevelData) {
+        mBatteryLevelData = Optional.ofNullable(batteryLevelData);
+        if (mBatteryChartPreferenceController != null) {
+            mBatteryChartPreferenceController.onBatteryLevelDataUpdate(batteryLevelData);
+            Log.d(TAG, String.format("Battery chart shows in %d millis",
+                    System.currentTimeMillis() - mResumeTimestamp));
+        }
+    }
+
+    private void onBatteryDiffDataMapUpdate(Map<Long, BatteryDiffData> batteryDiffDataMap) {
+        if (mBatteryLevelData != null && mBatteryChartPreferenceController != null) {
+            Map<Integer, Map<Integer, BatteryDiffData>> batteryUsageMap =
+                    DataProcessor.generateBatteryUsageMap(
+                            getContext(), batteryDiffDataMap, mBatteryLevelData.orElse(null));
+            DataProcessor.loadLabelAndIcon(batteryUsageMap);
+            mBatteryChartPreferenceController.onBatteryUsageMapUpdate(batteryUsageMap);
+        }
+        Log.d(TAG, String.format("Battery usage list shows in %d millis",
+                System.currentTimeMillis() - mResumeTimestamp));
     }
 
     private void setBatteryChartPreferenceController() {
@@ -216,28 +232,31 @@ public class PowerUsageAdvanced extends PowerUsageBase {
                 }
             };
 
-    private class BatteryHistoryLoaderCallbacks
-            implements LoaderManager.LoaderCallbacks<Map<Long, Map<String, BatteryHistEntry>>> {
-        private int mRefreshType;
-
+    private class BatteryLevelDataLoaderCallbacks
+            implements LoaderManager.LoaderCallbacks<BatteryLevelData> {
         @Override
-        @NonNull
-        public Loader<Map<Long, Map<String, BatteryHistEntry>>> onCreateLoader(
-                int id, Bundle bundle) {
-            mRefreshType = bundle.getInt(KEY_REFRESH_TYPE);
-            return new BatteryHistoryLoader(getContext());
+        public Loader<BatteryLevelData> onCreateLoader(int id, Bundle bundle) {
+            return new AsyncLoaderCompat<BatteryLevelData>(getContext().getApplicationContext()) {
+                @Override
+                protected void onDiscardResult(BatteryLevelData result) {}
+
+                @Override
+                public BatteryLevelData loadInBackground() {
+                    return DataProcessManager.getBatteryLevelData(
+                            getContext(), mHandler, /*isFromPeriodJob=*/ false,
+                            map -> PowerUsageAdvanced.this.onBatteryDiffDataMapUpdate(map));
+                }
+            };
         }
 
         @Override
-        public void onLoadFinished(Loader<Map<Long, Map<String, BatteryHistEntry>>> loader,
-                Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap) {
-            mBatteryHistoryMap = batteryHistoryMap;
-            PowerUsageAdvanced.this.onLoadFinished(mRefreshType);
+        public void onLoadFinished(Loader<BatteryLevelData> loader,
+                BatteryLevelData batteryLevelData) {
+            PowerUsageAdvanced.this.onBatteryLevelDataUpdate(batteryLevelData);
         }
 
         @Override
-        public void onLoaderReset(Loader<Map<Long, Map<String, BatteryHistEntry>>> loader) {
+        public void onLoaderReset(Loader<BatteryLevelData> loader) {
         }
     }
-
 }

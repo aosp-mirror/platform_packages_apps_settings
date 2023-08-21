@@ -2567,7 +2567,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".biometrics.fingerprint2.enrollment.ui.activity.FingerprintEnrollmentV2Activity"
+
+        <activity android:name=".biometrics.fingerprint2.ui.enrollment.activity.FingerprintEnrollmentV2Activity"
             android:exported="true"
             android:permission="android.permission.MANAGE_FINGERPRINT"
             android:theme="@style/GlifTheme.Light">
@@ -4942,7 +4943,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.biometrics.fingerprint2.ui.fragment.FingerprintSettingsV2Fragment" />
+                android:value="com.android.settings.biometrics.fingerprint2.ui.settings.fragment.FingerprintSettingsV2Fragment" />
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
                 android:value="@string/menu_key_security"/>
         </activity>

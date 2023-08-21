@@ -37,15 +37,17 @@ public interface BatteryStateDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(List<BatteryState> states);
 
+    /** Gets the {@link Cursor} of the latest record timestamp no later than the given timestamp. */
+    @Query("SELECT MAX(timestamp) FROM BatteryState WHERE timestamp <= :timestamp")
+    Cursor getLatestTimestampBefore(long timestamp);
+
+    /** Lists all recorded battery states after a specific timestamp. */
+    @Query("SELECT * FROM BatteryState WHERE timestamp >= :timestamp ORDER BY timestamp ASC")
+    Cursor getBatteryStatesAfter(long timestamp);
+
     /** Lists all recorded data after a specific timestamp. */
     @Query("SELECT * FROM BatteryState WHERE timestamp > :timestamp ORDER BY timestamp DESC")
     List<BatteryState> getAllAfter(long timestamp);
-
-    /** Gets the {@link Cursor} of all recorded data since last full charge within 7 days. */
-    @Query("SELECT * FROM BatteryState WHERE timestamp >= :timestampSixDaysAgo AND timestamp >= "
-            + "(SELECT IFNULL((SELECT MAX(timestamp) FROM BatteryState "
-            + "WHERE isFullChargeCycleStart = 1), 0)) ORDER BY timestamp ASC")
-    Cursor getCursorSinceLastFullCharge(long timestampSixDaysAgo);
 
     /** Get the count of distinct timestamp after a specific timestamp. */
     @Query("SELECT COUNT(DISTINCT timestamp) FROM BatteryState WHERE timestamp > :timestamp")
