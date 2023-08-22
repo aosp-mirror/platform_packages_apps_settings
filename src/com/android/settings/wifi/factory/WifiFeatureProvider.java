@@ -26,6 +26,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 
+import com.android.settings.wifi.repository.SharedConnectivityRepository;
 import com.android.settings.wifi.repository.WifiHotspotRepository;
 import com.android.settings.wifi.tether.WifiHotspotSecurityViewModel;
 import com.android.settings.wifi.tether.WifiHotspotSpeedViewModel;
@@ -44,6 +45,7 @@ public class WifiFeatureProvider {
     private TetheringManager mTetheringManager;
     private WifiVerboseLogging mWifiVerboseLogging;
     private WifiHotspotRepository mWifiHotspotRepository;
+    private SharedConnectivityRepository mSharedConnectivityRepository;
 
     public WifiFeatureProvider(@NonNull Context appContext) {
         mAppContext = appContext;
@@ -90,6 +92,17 @@ public class WifiFeatureProvider {
             verboseLog(TAG, "getWifiHotspotRepository():" + mWifiHotspotRepository);
         }
         return mWifiHotspotRepository;
+    }
+
+    /**
+     * Gets SharedConnectivityRepository
+     */
+    public SharedConnectivityRepository getSharedConnectivityRepository() {
+        if (mSharedConnectivityRepository == null) {
+            mSharedConnectivityRepository = new SharedConnectivityRepository(mAppContext);
+            verboseLog(TAG, "getSharedConnectivityRepository():" + mSharedConnectivityRepository);
+        }
+        return mSharedConnectivityRepository;
     }
 
     /**
