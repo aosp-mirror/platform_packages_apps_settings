@@ -135,7 +135,7 @@ public class DataUsageSummaryPreferenceControllerTest {
                 mDataUsageController,
                 mDataInfoController,
                 mNetworkTemplate,
-                mActivity, null, null, null, mDefaultSubscriptionId));
+                mActivity, null, null, mDefaultSubscriptionId));
         doReturn(null).when(mController).getSubscriptionInfo(
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
         doReturn(null).when(mController).getSubscriptionPlans(

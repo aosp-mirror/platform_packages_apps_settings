@@ -29,7 +29,6 @@ import android.telephony.TelephonyManager;
 import androidx.fragment.app.FragmentActivity;
 import androidx.test.core.app.ApplicationProvider;
 
-import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.net.DataUsageController;
 
 import org.junit.Before;
@@ -55,8 +54,6 @@ public class WifiDataUsageSummaryPreferenceControllerTest {
     @Mock
     FragmentActivity mActivity;
     @Mock
-    Lifecycle mLifecycle;
-    @Mock
     TelephonyManager mTelephonyManager;
     @Mock
     DataUsageSummaryPreference mSummaryPreference;
@@ -75,7 +72,7 @@ public class WifiDataUsageSummaryPreferenceControllerTest {
         doNothing().when(mSummaryPreference).setWifiMode(anyBoolean(), anyString(), anyBoolean());
         doReturn(mDataUsageInfo).when(mDataUsageController).getDataUsageInfo(any());
 
-        mController = spy(new WifiDataUsageSummaryPreferenceController(mActivity, mLifecycle, null,
+        mController = spy(new WifiDataUsageSummaryPreferenceController(mActivity, null,
                 mAllNetworkKeys));
         doReturn(mDataUsageController).when(mController).createDataUsageController(any());
     }

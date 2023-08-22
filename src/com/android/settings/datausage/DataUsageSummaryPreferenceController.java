@@ -41,7 +41,6 @@ import com.android.settings.datausage.lib.DataUsageLib;
 import com.android.settings.network.ProxySubscriptionManager;
 import com.android.settings.network.telephony.TelephonyBasePreferenceController;
 import com.android.settings.widget.EntityHeaderController;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.net.DataUsageController;
@@ -63,7 +62,6 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
     private static final long PETA = 1000000000000000L;
 
     private EntityHeaderController mEntityHeaderController;
-    private final Lifecycle mLifecycle;
     private final PreferenceFragmentCompat mFragment;
     protected DataUsageController mDataUsageController;
     protected DataUsageInfoController mDataInfoController;
@@ -95,11 +93,10 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
 
     private Future<Long> mHistoricalUsageLevel;
 
-    public DataUsageSummaryPreferenceController(Activity activity,
-            Lifecycle lifecycle, PreferenceFragmentCompat fragment, int subscriptionId) {
+    public DataUsageSummaryPreferenceController(
+            Activity activity, PreferenceFragmentCompat fragment, int subscriptionId) {
         super(activity, KEY);
 
-        mLifecycle = lifecycle;
         mFragment = fragment;
         init(subscriptionId);
     }
@@ -140,7 +137,6 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
             DataUsageInfoController dataInfoController,
             NetworkTemplate defaultTemplate,
             Activity activity,
-            Lifecycle lifecycle,
             EntityHeaderController entityHeaderController,
             PreferenceFragmentCompat fragment,
             int subscriptionId) {
@@ -149,7 +145,6 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
         mDataInfoController = dataInfoController;
         mDefaultTemplate = defaultTemplate;
         mHasMobileData = true;
-        mLifecycle = lifecycle;
         mEntityHeaderController = entityHeaderController;
         mFragment = fragment;
         mSubId = subscriptionId;

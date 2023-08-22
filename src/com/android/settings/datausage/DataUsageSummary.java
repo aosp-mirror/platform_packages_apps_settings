@@ -61,13 +61,6 @@ public class DataUsageSummary extends DataUsageBaseFragment implements DataUsage
 
     // Mobile data keys
     public static final String KEY_MOBILE_USAGE_TITLE = "mobile_category";
-    public static final String KEY_MOBILE_DATA_USAGE_TOGGLE = "data_usage_enable";
-    public static final String KEY_MOBILE_DATA_USAGE = "cellular_data_usage";
-    public static final String KEY_MOBILE_BILLING_CYCLE = "billing_preference";
-
-    // Wifi keys
-    public static final String KEY_WIFI_USAGE_TITLE = "wifi_category";
-    public static final String KEY_WIFI_DATA_USAGE = "wifi_data_usage";
 
     private DataUsageSummaryPreference mSummaryPreference;
     private DataUsageSummaryPreferenceController mSummaryController;
@@ -161,7 +154,7 @@ public class DataUsageSummary extends DataUsageBaseFragment implements DataUsage
             return controllers;
         }
         mSummaryController =
-                new DataUsageSummaryPreferenceController(activity, getSettingsLifecycle(), this,
+                new DataUsageSummaryPreferenceController(activity, this,
                         DataUsageUtils.getDefaultSubscriptionId(activity));
         controllers.add(mSummaryController);
         getSettingsLifecycle().addObserver(mSummaryController);
