@@ -85,6 +85,10 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     int mDailyChartIndex = BatteryChartViewModel.SELECTED_INDEX_ALL;
     @VisibleForTesting
     int mHourlyChartIndex = BatteryChartViewModel.SELECTED_INDEX_ALL;
+    @VisibleForTesting
+    int mDailyHighlightSlotIndex = BatteryChartViewModel.SELECTED_INDEX_INVALID;
+    @VisibleForTesting
+    int mHourlyHighlightSlotIndex = BatteryChartViewModel.SELECTED_INDEX_INVALID;
 
     private boolean mIs24HourFormat;
     private View mBatteryChartViewGroup;
@@ -217,6 +221,37 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         refreshUi();
     }
 
+    void onHighlightSlotIndexUpdate(int dailyHighlightSlotIndex, int hourlyHighlightSlotIndex) {
+        if (mDailyHighlightSlotIndex == dailyHighlightSlotIndex
+                && mHourlyHighlightSlotIndex == hourlyHighlightSlotIndex) {
+            return;
+        }
+        mDailyHighlightSlotIndex = dailyHighlightSlotIndex;
+        mHourlyHighlightSlotIndex = hourlyHighlightSlotIndex;
+        refreshUi();
+    }
+
+    void selectHighlightSlotIndex() {
+        if (mDailyHighlightSlotIndex == BatteryChartViewModel.SELECTED_INDEX_INVALID
+                || mHourlyHighlightSlotIndex == BatteryChartViewModel.SELECTED_INDEX_INVALID) {
+            return;
+        }
+        if (mDailyHighlightSlotIndex == mDailyChartIndex
+                && mHourlyHighlightSlotIndex == mHourlyChartIndex) {
+            return;
+        }
+        mDailyChartIndex = mDailyHighlightSlotIndex;
+        mHourlyChartIndex = mHourlyHighlightSlotIndex;
+        Log.d(TAG, String.format("onDailyChartSelect:%d, onHourlyChartSelect:%d",
+                mDailyChartIndex, mHourlyChartIndex));
+        refreshUi();
+        mHandler.post(() -> mDailyChartView.announceForAccessibility(
+                getAccessibilityAnnounceMessage()));
+        if (mOnSelectedIndexUpdatedListener != null) {
+            mOnSelectedIndexUpdatedListener.onSelectedIndexUpdated();
+        }
+    }
+
     void setBatteryChartView(@NonNull final BatteryChartView dailyChartView,
             @NonNull final BatteryChartView hourlyChartView) {
         final View parentView = (View) dailyChartView.getParent();
@@ -320,6 +355,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
                 mDailyChartIndex = BatteryChartViewModel.SELECTED_INDEX_ALL;
             }
             mDailyViewModel.setSelectedIndex(mDailyChartIndex);
+            mDailyViewModel.setHighlightSlotIndex(mDailyHighlightSlotIndex);
             mDailyChartView.setViewModel(mDailyViewModel);
         }
 
@@ -334,6 +370,9 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
                 mHourlyChartIndex = BatteryChartViewModel.SELECTED_INDEX_ALL;
             }
             hourlyViewModel.setSelectedIndex(mHourlyChartIndex);
+            hourlyViewModel.setHighlightSlotIndex((mDailyChartIndex == mDailyHighlightSlotIndex)
+                    ? mHourlyHighlightSlotIndex
+                    : BatteryChartViewModel.SELECTED_INDEX_INVALID);
             mHourlyChartView.setViewModel(hourlyViewModel);
         }
     }
