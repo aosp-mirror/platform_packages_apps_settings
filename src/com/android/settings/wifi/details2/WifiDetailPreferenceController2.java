@@ -434,8 +434,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
             mDataUsageSummaryPref.setVisible(true);
             mSummaryHeaderController =
                     new WifiDataUsageSummaryPreferenceController(mFragment.getActivity(),
-                            mLifecycle, (PreferenceFragmentCompat) mFragment,
-                            mWifiEntry.getWifiConfiguration().getAllNetworkKeys());
+                            mFragment, mWifiEntry.getWifiConfiguration().getAllNetworkKeys());
             return;
         }
 
