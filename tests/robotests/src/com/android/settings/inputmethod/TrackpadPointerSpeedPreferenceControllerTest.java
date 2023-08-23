@@ -18,11 +18,6 @@ package com.android.settings.inputmethod;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.verify;
-
-import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.hardware.input.InputSettings;
 import android.os.UserHandle;
@@ -31,14 +26,10 @@ import android.provider.Settings;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnit;
-import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
@@ -48,8 +39,6 @@ import org.robolectric.annotation.Config;
         com.android.settings.testutils.shadow.ShadowSystemSettings.class,
 })
 public class TrackpadPointerSpeedPreferenceControllerTest {
-    @Rule
-    public MockitoRule rule = MockitoJUnit.rule();
 
     private static final String PREFERENCE_KEY = "trackpad_pointer_speed";
     private static final String SETTING_KEY = Settings.System.TOUCHPAD_POINTER_SPEED;
@@ -57,12 +46,10 @@ public class TrackpadPointerSpeedPreferenceControllerTest {
     private Context mContext;
     private TrackpadPointerSpeedPreferenceController mController;
     private int mDefaultSpeed;
-    private FakeFeatureFactory mFeatureFactory;
 
     @Before
     public void setUp() {
         mContext = ApplicationProvider.getApplicationContext();
-        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mController = new TrackpadPointerSpeedPreferenceController(mContext, PREFERENCE_KEY);
         mDefaultSpeed = Settings.System.getIntForUser(
                 mContext.getContentResolver(),
@@ -102,10 +89,6 @@ public class TrackpadPointerSpeedPreferenceControllerTest {
 
         assertThat(result).isTrue();
         assertThat(mController.getSliderPosition()).isEqualTo(inputSpeed);
-        verify(mFeatureFactory.metricsFeatureProvider).action(
-                any(),
-                eq(SettingsEnums.ACTION_GESTURE_POINTER_SPEED_CHANGED),
-                eq(1));
     }
 
     @Test

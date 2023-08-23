@@ -16,25 +16,20 @@
 
 package com.android.settings.inputmethod;
 
-import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.hardware.input.InputSettings;
 
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.SliderPreferenceController;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.SeekBarPreference;
-import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 public class TrackpadPointerSpeedPreferenceController extends SliderPreferenceController {
 
     private SeekBarPreference mPreference;
-    private MetricsFeatureProvider mMetricsFeatureProvider;
 
     public TrackpadPointerSpeedPreferenceController(Context context, String key) {
         super(context, key);
-        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     @Override
@@ -58,8 +53,6 @@ public class TrackpadPointerSpeedPreferenceController extends SliderPreferenceCo
             return false;
         }
         InputSettings.setTouchpadPointerSpeed(mContext, position);
-        mMetricsFeatureProvider.action(
-                mContext, SettingsEnums.ACTION_GESTURE_POINTER_SPEED_CHANGED, position);
         return true;
     }
 
