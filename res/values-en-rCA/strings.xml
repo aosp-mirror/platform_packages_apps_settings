@@ -199,6 +199,8 @@
     <string name="terms_of_address_not_specified" msgid="4439257779351251973">"Not specified"</string>
     <string name="terms_of_address_feminine" msgid="1743479869695539283">"Feminine"</string>
     <string name="terms_of_address_masculine" msgid="983106046135098856">"Masculine"</string>
+    <!-- no translation found for terms_of_address_neutral (5475414185543112478) -->
+    <skip />
     <string name="dlg_remove_locales_title" msgid="3170501604483612114">"{count,plural, =1{Remove selected language?}other{Remove selected languages?}}"</string>
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"Text will be displayed in another language."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Can’t remove all languages"</string>
@@ -400,9 +402,19 @@
     <string name="security_settings_remoteauth_enroll_introduction_info_remove_watch" msgid="1888318677088986801">"You can remove your watch from Watch Unlock at any time in Settings"</string>
     <string name="security_settings_remoteauth_enroll_introduction_animation_tap_notification" msgid="1597397399097952974">"Tap a notification"</string>
     <string name="security_settings_remoteauth_enroll_introduction_animation_swipe_up" msgid="2129230804324634653">"Swipe up on the lock screen"</string>
+    <string name="security_settings_remoteauth_enroll_enrolling_title" msgid="313016997943607675">"Choose your watch"</string>
+    <string name="security_settings_remoteauth_enroll_enrolling_list_heading" msgid="8227585438932911013">"Available watches"</string>
+    <string name="security_settings_remoteauth_enroll_enrolling_disagree" msgid="1670201454188049863">"Cancel"</string>
+    <string name="security_settings_remoteauth_enroll_enrolling_agree" msgid="7048336252635730908">"Confirm"</string>
     <string name="security_settings_remoteauth_enroll_finish_title" msgid="3807372930755413112">"You’re all set!"</string>
     <string name="security_settings_remoteauth_enroll_finish_description" msgid="4876209907275244653">"You can now use your watch to unlock this phone when you swipe up on the lock screen or tap a notification"</string>
     <string name="security_settings_remoteauth_enroll_finish_btn_next" msgid="8072138423143889592">"Done"</string>
+    <string name="security_settings_remoteauth_settings_title" msgid="1564912618737165129">"Watch Unlock"</string>
+    <string name="security_settings_remoteauth_settings_description" msgid="2758239650119457964">"You can use your watch to unlock this phone when you swipe up on the lock screen or tap a notification"</string>
+    <string name="security_settings_remoteauth_settings_info_footer" msgid="795894033901478120">"To use Watch Unlock, your watch must be unlocked, on your wrist, within reach, and connected to this phone. If the connection is interrupted, you’ll need to unlock the phone before you can use Watch Unlock.\n\nKeep in mind:\nYou can only have one watch set up at a time. To add another watch, first remove the current one."</string>
+    <string name="security_settings_remoteauth_settings_learn_more" msgid="5653556124819260050">"Learn more about Watch Unlock"</string>
+    <string name="security_settings_remoteauth_settings_register_new_authenticator" msgid="9191331738306527887">"Add watch"</string>
+    <string name="security_settings_remoteauth_settings_remove_device" msgid="2436226120578851282">"Remove watch"</string>
     <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"Fingerprint &amp; Face Unlock"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Face and Fingerprint Unlock for work"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"Setup needed"</string>
@@ -940,6 +952,12 @@
     <string name="wifi_hotspot_speed_footer" msgid="8846939503916795002">"If your preferred frequency isn\'t available, your hotspot may use a different one. Hotspot security settings may change if you change the frequency."</string>
     <string name="wifi_hotspot_security_summary_unavailable" msgid="117582979310345853">"Not available with 6 GHz"</string>
     <string name="wifi_hotspot_security_footer" msgid="4608329688744949796">"Security settings may change if you change the hotspot’s frequency"</string>
+    <!-- no translation found for wifi_hotspot_instant_title (7052526695338853703) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_instant_summary_on (3142749148673081288) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_instant_summary_off (8594065628453795615) -->
+    <skip />
     <string name="wifi_tether_starting" msgid="8879874184033857814">"Turning hotspot on…"</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"Turning off hotspot…"</string>
     <string name="wifi_tether_carrier_unsupport_dialog_title" msgid="3089432578433978073">"Tethering unavailable"</string>
@@ -4112,7 +4130,7 @@
     <string name="autofill_app" msgid="7595308061826307921">"Autofill service"</string>
     <string name="default_autofill_app" msgid="372234803718251606">"Default autofill service"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"Passwords"</string>
-    <string name="credman_chosen_app_title" msgid="4547405511458518096">"Passwords, passkeys and data services"</string>
+    <string name="credman_chosen_app_title" msgid="872524130208251505">"Passwords, passkeys, and data services"</string>
     <string name="credman_credentials" msgid="4931371941253324143">"Additional providers"</string>
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# password}other{# passwords}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"auto, fill, autofill, password"</string>
@@ -4120,13 +4138,13 @@
     <string name="credman_autofill_keywords" msgid="701180623776848914">"auto, fill, autofill, data, passkey, password"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Make sure you trust this app&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; uses what\'s on your screen to determine what can be autofilled."</string>
     <string name="credman_autofill_confirmation_message" msgid="4951846866327737417">"&lt;b&gt;Use &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; uses what\'s on your screen to determine what can be autofilled. New passwords, passkeys and other info will be saved here from now on."</string>
-    <string name="credman_picker_title" msgid="2642776965060619988">"Passwords, passkeys and data services"</string>
+    <string name="credman_picker_title" msgid="8191267620665129205">"Passwords, passkeys, and data services"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Turn off %1$s?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Turn off this service?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Saved info like passwords, passkeys, payment methods, and other info won\'t be filled in when you sign in. To use your saved info, choose a password, passkey, or data service."</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"Use %1$s?"</string>
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"%1$s uses what\'s on your screen to determine what can be autofilled."</string>
-    <string name="credman_error_message_title" msgid="4741457523969373713">"Passwords, passkeys and data services limit"</string>
-    <string name="credman_error_message" msgid="6793314648458925172">"You can have up to 5 passwords, passkeys and data services active at the same time. Turn off a service to add more."</string>
+    <string name="credman_error_message_title" msgid="4099557206946333568">"Passwords, passkeys, and data services limit"</string>
+    <string name="credman_error_message" msgid="8334797097200415449">"You can have up to 5 passwords, passkeys, and data services active at the same time. Turn off a service to add more."</string>
     <string name="credman_confirmation_message_positive_button" msgid="2812613187691345361">"Turn off"</string>
     <string name="debug_autofill_category" msgid="5998163555428196185">"Autofill"</string>
     <string name="autofill_logging_level_title" msgid="3733958845861098307">"Logging level"</string>
@@ -4694,6 +4712,8 @@
     <string name="bluetooth_details_audio_device_type_unknown" msgid="839337391037998014">"Unknown"</string>
     <string name="bluetooth_details_audio_device_type_speaker" msgid="3706227767994792124">"Speaker"</string>
     <string name="bluetooth_details_audio_device_type_headphones" msgid="7644588291215033798">"Headphones"</string>
+    <!-- no translation found for bluetooth_details_audio_device_type_hearing_aid (1310631131071939859) -->
+    <skip />
     <string name="bluetooth_details_audio_device_type_carkit" msgid="4439017600454703229">"Car Kit"</string>
     <string name="bluetooth_details_audio_device_type_other" msgid="7019481234617207563">"Other"</string>
     <string name="ingress_rate_limit_title" msgid="2106694002836274350">"Network download rate limit"</string>
