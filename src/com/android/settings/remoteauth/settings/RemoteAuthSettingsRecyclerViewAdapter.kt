@@ -46,8 +46,8 @@ class RemoteAuthSettingsRecyclerViewAdapter() :
     override fun getItemCount() = uiStates.size
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val titleTextView: TextView = view.findViewById(R.id.authenticator_name_text)
-        private val unregisterButton: ImageView = view.findViewById(R.id.remove_icon)
+        private val titleTextView: TextView = view.requireViewById(R.id.authenticator_name_text)
+        private val unregisterButton: ImageView = view.requireViewById(R.id.remove_icon)
 
         fun bind(authenticatorUiState: RemoteAuthAuthenticatorItemUiState) {
             titleTextView.text = authenticatorUiState.name

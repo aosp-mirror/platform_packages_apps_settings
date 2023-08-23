@@ -34,11 +34,11 @@ class RemoteAuthSettings : Fragment(R.layout.remote_auth_settings) {
     val viewModel = RemoteAuthSettingsViewModel()
     private val adapter = RemoteAuthSettingsRecyclerViewAdapter()
     private val recyclerView by lazy {
-        view!!.findViewById<RecyclerView>(R.id.registered_authenticator_list)
+        view!!.requireViewById<RecyclerView>(R.id.registered_authenticator_list)
     }
 
     private val addAuthenticatorLayout by lazy {
-        view!!.findViewById<ConstraintLayout>(R.id.add_authenticator_layout)
+        view!!.requireViewById<ConstraintLayout>(R.id.add_authenticator_layout)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
