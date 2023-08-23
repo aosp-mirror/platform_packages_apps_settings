@@ -18,7 +18,6 @@ package com.android.settings.localepicker;
 
 import android.app.FragmentTransaction;
 import android.app.LocaleManager;
-import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -43,8 +42,6 @@ import com.android.settings.R;
 import com.android.settings.applications.AppLocaleUtil;
 import com.android.settings.applications.appinfo.AppLocaleDetails;
 import com.android.settings.core.SettingsBaseActivity;
-import com.android.settings.overlay.FeatureFactory;
-import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import java.util.Locale;
 
@@ -54,16 +51,11 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
     static final String EXTRA_APP_LOCALE = "app_locale";
     private static final String PROP_SYSTEM_LOCALE_SUGGESTION = "android.system.locale.suggestion";
     private static final boolean ENABLED = false;
-    private static final int SIM_LOCALE = 1 << 0;
-    private static final int SYSTEM_LOCALE = 1 << 1;
-    private static final int APP_LOCALE = 1 << 2;
-    private static final int IME_LOCALE = 1 << 3;
 
     private String mPackageName;
     private LocalePickerWithRegion mLocalePickerWithRegion;
     private AppLocaleDetails mAppLocaleDetails;
     private View mAppLocaleDetailContainer;
-    private MetricsFeatureProvider mMetricsFeatureProvider;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -89,7 +81,6 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
 
         setTitle(R.string.app_locale_picker_title);
         getActionBar().setDisplayHomeAsUpEnabled(true);
-        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
 
         mLocalePickerWithRegion = LocalePickerWithRegion.createLanguagePicker(
                 this,
@@ -118,7 +109,6 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
         if (localeInfo == null || localeInfo.getLocale() == null || localeInfo.isSystemLocale()) {
             setAppDefaultLocale("");
         } else {
-            logLocaleSource(localeInfo);
             setAppDefaultLocale(localeInfo.getLocale().toLanguageTag());
             broadcastAppLocaleChange(localeInfo);
         }
@@ -249,33 +239,5 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
         }
 
         return false;
-    }
-
-    private void logLocaleSource(LocaleStore.LocaleInfo localeInfo) {
-        if (!localeInfo.isSuggested() || localeInfo.isAppCurrentLocale()) {
-            return;
-        }
-        int localeSource = 0;
-        if (hasSuggestionType(localeInfo,
-                LocaleStore.LocaleInfo.SUGGESTION_TYPE_SYSTEM_AVAILABLE_LANGUAGE)) {
-            localeSource |= SYSTEM_LOCALE;
-        }
-        if (hasSuggestionType(localeInfo,
-                LocaleStore.LocaleInfo.SUGGESTION_TYPE_OTHER_APP_LANGUAGE)) {
-            localeSource |= APP_LOCALE;
-        }
-        if (hasSuggestionType(localeInfo, LocaleStore.LocaleInfo.SUGGESTION_TYPE_IME_LANGUAGE)) {
-            localeSource |= IME_LOCALE;
-        }
-        if (hasSuggestionType(localeInfo, LocaleStore.LocaleInfo.SUGGESTION_TYPE_SIM)) {
-            localeSource |= SIM_LOCALE;
-        }
-        mMetricsFeatureProvider.action(this,
-                SettingsEnums.ACTION_CHANGE_APP_LANGUAGE_FROM_SUGGESTED, localeSource);
-    }
-
-    private static boolean hasSuggestionType(LocaleStore.LocaleInfo localeInfo,
-            int suggestionType) {
-        return localeInfo.isSuggestionOfType(suggestionType);
     }
 }
