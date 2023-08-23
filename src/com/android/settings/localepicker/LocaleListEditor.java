@@ -216,8 +216,6 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
             localeInfo = mayAppendUnicodeTags(localeInfo, preferencesTags);
             mAdapter.addLocale(localeInfo);
             updateVisibilityOfRemoveMenu();
-            mMetricsFeatureProvider.action(getContext(), SettingsEnums.ACTION_ADD_LANGUAGE,
-                    localeInfo.getLocale().toLanguageTag());
         } else if (requestCode == DIALOG_CONFIRM_SYSTEM_DEFAULT) {
             localeInfo = mAdapter.getFeedItemList().get(0);
             if (resultCode == Activity.RESULT_OK) {
