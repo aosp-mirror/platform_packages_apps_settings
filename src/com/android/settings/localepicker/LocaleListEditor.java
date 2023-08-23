@@ -78,6 +78,7 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
     private static final String CFGKEY_ADD_LOCALE = "localeAdded";
     private static final String INDEX_KEY_ADD_LANGUAGE = "add_language";
     private static final String KEY_LANGUAGES_PICKER = "languages_picker";
+    private static final String KEY_CATEGORY_TERMS_OF_ADDRESS = "key_category_terms_of_address";
     private static final String TAG_DIALOG_CONFIRM_SYSTEM_DEFAULT = "dialog_confirm_system_default";
     private static final String TAG_DIALOG_NOT_AVAILABLE = "dialog_not_available_locale";
     private static final String TAG_DIALOG_ADD_SYSTEM_LOCALE = "dialog_add_system_locale";
@@ -99,6 +100,7 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
     private LayoutPreference mLocalePickerPreference;
     private LocaleHelperPreferenceController mLocaleHelperPreferenceController;
     private FragmentManager mFragmentManager;
+    private TermsOfAddressCategoryController mTermsOfAddressCategoryController;
 
     public LocaleListEditor() {
         super(DISALLOW_CONFIG_LOCALE);
@@ -120,6 +122,9 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
         final PreferenceScreen screen = getPreferenceScreen();
         mLocalePickerPreference = screen.findPreference(KEY_LANGUAGES_PICKER);
         mLocaleHelperPreferenceController.displayPreference(screen);
+        mTermsOfAddressCategoryController = new TermsOfAddressCategoryController(activity,
+                KEY_CATEGORY_TERMS_OF_ADDRESS);
+        mTermsOfAddressCategoryController.displayPreference(screen);
 
         LocaleStore.fillCache(this.getContext());
         final List<LocaleStore.LocaleInfo> feedsList = getUserLocaleList();
