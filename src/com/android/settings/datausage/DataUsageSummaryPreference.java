@@ -20,7 +20,6 @@ import android.annotation.AttrRes;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.icu.text.MessageFormat;
-import android.net.NetworkTemplate;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextUtils;
@@ -32,13 +31,14 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
 import com.android.settingslib.Utils;
-import com.android.settingslib.net.DataUsageController;
 import com.android.settingslib.utils.StringUtil;
 
 import java.util.HashMap;
@@ -62,10 +62,9 @@ public class DataUsageSummaryPreference extends Preference {
     private CharSequence mEndLabel;
 
     private int mNumPlans;
-    /** The specified un-initialized value for cycle time */
-    private static final long CYCLE_TIME_UNINITIAL_VALUE = 0;
     /** The ending time of the billing cycle in milliseconds since epoch. */
-    private long mCycleEndTimeMs;
+    @Nullable
+    private Long mCycleEndTimeMs;
     /** The time of the last update in standard milliseconds since the epoch */
     private long mSnapshotTimeMs;
     /** Name of carrier, or null if not available */
@@ -74,7 +73,6 @@ public class DataUsageSummaryPreference extends Preference {
 
     /** Progress to display on ProgressBar */
     private float mProgress;
-    private boolean mHasMobileData;
 
     /**
      * The size of the first registered plan if one exists or the size of the warning if it is set.
@@ -102,7 +100,10 @@ public class DataUsageSummaryPreference extends Preference {
         notifyChanged();
     }
 
-    public void setUsageInfo(long cycleEnd, long snapshotTime, CharSequence carrierName,
+    /**
+     * Sets the usage info.
+     */
+    public void setUsageInfo(@Nullable Long cycleEnd, long snapshotTime, CharSequence carrierName,
             int numPlans) {
         mCycleEndTimeMs = cycleEnd;
         mSnapshotTimeMs = snapshotTime;
@@ -124,15 +125,17 @@ public class DataUsageSummaryPreference extends Preference {
         notifyChanged();
     }
 
-    void setUsageNumbers(long used, long dataPlanSize, boolean hasMobileData) {
+    /**
+     * Sets the usage numbers.
+     */
+    public void setUsageNumbers(long used, long dataPlanSize) {
         mDataplanUse = used;
         mDataplanSize = dataPlanSize;
-        mHasMobileData = hasMobileData;
         notifyChanged();
     }
 
     @Override
-    public void onBindViewHolder(PreferenceViewHolder holder) {
+    public void onBindViewHolder(@NonNull PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
 
         ProgressBar bar = getProgressBar(holder);
@@ -178,7 +181,7 @@ public class DataUsageSummaryPreference extends Preference {
 
         final MeasurableLinearLayout layout = getLayout(holder);
 
-        if (mHasMobileData && mNumPlans >= 0 && mDataplanSize > 0L) {
+        if (mDataplanSize > 0L) {
             TextView usageRemainingField = getDataRemaining(holder);
             long dataRemaining = mDataplanSize - mDataplanUse;
             if (dataRemaining >= 0) {
@@ -204,7 +207,7 @@ public class DataUsageSummaryPreference extends Preference {
         TextView cycleTime = getCycleTime(holder);
 
         // Takes zero as a special case which value is never set.
-        if (mCycleEndTimeMs == CYCLE_TIME_UNINITIAL_VALUE) {
+        if (mCycleEndTimeMs == null) {
             cycleTime.setVisibility(View.GONE);
             return;
         }
@@ -228,7 +231,7 @@ public class DataUsageSummaryPreference extends Preference {
 
 
     private void updateCarrierInfo(TextView carrierInfo) {
-        if (mNumPlans > 0 && mSnapshotTimeMs >= 0L) {
+        if (mSnapshotTimeMs >= 0L) {
             carrierInfo.setVisibility(View.VISIBLE);
             long updateAgeMillis = calculateTruncatedUpdateAge();
 
@@ -291,13 +294,6 @@ public class DataUsageSummaryPreference extends Preference {
             TextView carrierInfo, @AttrRes int colorId, Typeface typeface) {
         carrierInfo.setTextColor(Utils.getColorAttr(getContext(), colorId));
         carrierInfo.setTypeface(typeface);
-    }
-
-    @VisibleForTesting
-    protected long getHistoricalUsageLevel() {
-        final DataUsageController controller = new DataUsageController(getContext());
-        return controller.getHistoricalUsageLevel(
-                new NetworkTemplate.Builder(NetworkTemplate.MATCH_WIFI).build());
     }
 
     @VisibleForTesting
