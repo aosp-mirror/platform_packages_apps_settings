@@ -32,7 +32,6 @@ import android.util.RecurrenceRule;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceFragmentCompat;
 
 import com.android.internal.util.CollectionUtils;
 import com.android.settings.R;
@@ -40,9 +39,6 @@ import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.datausage.lib.DataUsageLib;
 import com.android.settings.network.ProxySubscriptionManager;
 import com.android.settings.network.telephony.TelephonyBasePreferenceController;
-import com.android.settings.widget.EntityHeaderController;
-import com.android.settingslib.core.lifecycle.LifecycleObserver;
-import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.net.DataUsageController;
 import com.android.settingslib.utils.ThreadUtils;
 
@@ -55,14 +51,12 @@ import java.util.concurrent.Future;
  * framework and falls back to legacy usage data if none are available.
  */
 public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenceController
-        implements PreferenceControllerMixin, LifecycleObserver, OnStart {
+        implements PreferenceControllerMixin {
 
     private static final String TAG = "DataUsageController";
     private static final String KEY = "status_header";
     private static final long PETA = 1000000000000000L;
 
-    private EntityHeaderController mEntityHeaderController;
-    private final PreferenceFragmentCompat mFragment;
     protected DataUsageController mDataUsageController;
     protected DataUsageInfoController mDataInfoController;
     private NetworkTemplate mDefaultTemplate;
@@ -93,11 +87,9 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
 
     private Future<Long> mHistoricalUsageLevel;
 
-    public DataUsageSummaryPreferenceController(
-            Activity activity, PreferenceFragmentCompat fragment, int subscriptionId) {
+    public DataUsageSummaryPreferenceController(Activity activity, int subscriptionId) {
         super(activity, KEY);
 
-        mFragment = fragment;
         init(subscriptionId);
     }
 
@@ -137,25 +129,13 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
             DataUsageInfoController dataInfoController,
             NetworkTemplate defaultTemplate,
             Activity activity,
-            EntityHeaderController entityHeaderController,
-            PreferenceFragmentCompat fragment,
             int subscriptionId) {
         super(activity, KEY);
         mDataUsageController = dataUsageController;
         mDataInfoController = dataInfoController;
         mDefaultTemplate = defaultTemplate;
         mHasMobileData = true;
-        mEntityHeaderController = entityHeaderController;
-        mFragment = fragment;
         mSubId = subscriptionId;
-    }
-
-    @Override
-    public void onStart() {
-        if (mEntityHeaderController == null) {
-            mEntityHeaderController =
-                    EntityHeaderController.newInstance((Activity) mContext, mFragment, null);
-        }
     }
 
     @VisibleForTesting

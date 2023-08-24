@@ -167,7 +167,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         });
 
         return Arrays.asList(
-                new DataUsageSummaryPreferenceController(getActivity(), this, mSubId),
+                new DataUsageSummaryPreferenceController(getActivity(), mSubId),
                 new RoamingPreferenceController(context, KEY_ROAMING_PREF, getSettingsLifecycle(),
                         this, mSubId),
                 new CallsDefaultSubscriptionController(context, KEY_CALLS_PREF,

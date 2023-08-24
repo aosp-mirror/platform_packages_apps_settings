@@ -154,10 +154,9 @@ public class DataUsageSummary extends DataUsageBaseFragment implements DataUsage
             return controllers;
         }
         mSummaryController =
-                new DataUsageSummaryPreferenceController(activity, this,
+                new DataUsageSummaryPreferenceController(activity,
                         DataUsageUtils.getDefaultSubscriptionId(activity));
         controllers.add(mSummaryController);
-        getSettingsLifecycle().addObserver(mSummaryController);
         return controllers;
     }
 
