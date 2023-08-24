@@ -19,6 +19,7 @@ package com.android.settings.bluetooth;
 import static android.bluetooth.BluetoothDevice.DEVICE_TYPE_LE;
 import static android.media.AudioManager.AUDIO_DEVICE_CATEGORY_CARKIT;
 import static android.media.AudioManager.AUDIO_DEVICE_CATEGORY_HEADPHONES;
+import static android.media.AudioManager.AUDIO_DEVICE_CATEGORY_HEARING_AID;
 import static android.media.AudioManager.AUDIO_DEVICE_CATEGORY_OTHER;
 import static android.media.AudioManager.AUDIO_DEVICE_CATEGORY_SPEAKER;
 import static android.media.AudioManager.AUDIO_DEVICE_CATEGORY_UNKNOWN;
@@ -149,6 +150,7 @@ public class BluetoothDetailsAudioDeviceTypeController extends BluetoothDetailsC
                 mContext.getString(R.string.bluetooth_details_audio_device_type_speaker),
                 mContext.getString(R.string.bluetooth_details_audio_device_type_headphones),
                 mContext.getString(R.string.bluetooth_details_audio_device_type_carkit),
+                mContext.getString(R.string.bluetooth_details_audio_device_type_hearing_aid),
                 mContext.getString(R.string.bluetooth_details_audio_device_type_other),
         });
         mAudioDeviceTypePreference.setEntryValues(new CharSequence[]{
@@ -156,6 +158,7 @@ public class BluetoothDetailsAudioDeviceTypeController extends BluetoothDetailsC
                 Integer.toString(AUDIO_DEVICE_CATEGORY_SPEAKER),
                 Integer.toString(AUDIO_DEVICE_CATEGORY_HEADPHONES),
                 Integer.toString(AUDIO_DEVICE_CATEGORY_CARKIT),
+                Integer.toString(AUDIO_DEVICE_CATEGORY_HEARING_AID),
                 Integer.toString(AUDIO_DEVICE_CATEGORY_OTHER),
         });
 
