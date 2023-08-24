@@ -141,7 +141,7 @@ public class UnrestrictedDataAccessPreferenceControllerTest {
                 assertThat(preference.isDisabledByAdmin()).isTrue();
                 assertThat(preference.getSummary()).isEqualTo(
                         mContext.getString(
-                                com.android.settingslib.widget.R.string.disabled_by_admin));
+                                com.android.settingslib.widget.restricted.R.string.disabled_by_admin));
             }
             assertThat(preference.isChecked()).isFalse();
             preference.performClick();

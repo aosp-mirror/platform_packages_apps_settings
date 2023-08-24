@@ -54,7 +54,7 @@ public class PowerGaugePreferenceTest {
 
         mContext = RuntimeEnvironment.application;
         mRootView = LayoutInflater.from(mContext)
-                .inflate(com.android.settingslib.widget.R.layout.preference_app, null);
+                .inflate(com.android.settingslib.widget.preference.app.R.layout.preference_app, null);
         mWidgetView =
                 LayoutInflater.from(mContext).inflate(R.layout.preference_widget_summary, null);
         final LinearLayout widgetFrame = mRootView.findViewById(android.R.id.widget_frame);
@@ -64,7 +64,7 @@ public class PowerGaugePreferenceTest {
 
         mPowerGaugePreference = new PowerGaugePreference(mContext);
         assertThat(mPowerGaugePreference.getLayoutResource())
-                .isEqualTo(com.android.settingslib.widget.R.layout.preference_app);
+                .isEqualTo(com.android.settingslib.widget.preference.app.R.layout.preference_app);
     }
 
     @Test

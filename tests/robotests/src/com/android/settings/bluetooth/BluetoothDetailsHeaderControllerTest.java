@@ -72,7 +72,7 @@ public class BluetoothDetailsHeaderControllerTest extends BluetoothDetailsContro
         mController =
             new BluetoothDetailsHeaderController(mContext, mFragment, mCachedDevice, mLifecycle);
         mPreference = new LayoutPreference(
-                mContext, com.android.settingslib.widget.R.layout.settings_entity_header);
+                mContext, com.android.settingslib.widget.preference.layout.R.layout.settings_entity_header);
         mPreference.setKey(mController.getPreferenceKey());
         mScreen.addPreference(mPreference);
         setupDevice(mDeviceConfig);

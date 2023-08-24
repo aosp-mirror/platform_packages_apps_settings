@@ -49,7 +49,7 @@ public class LinkablePreference extends Preference {
 
     public LinkablePreference(Context ctx, AttributeSet attrs) {
         this(ctx, attrs, TypedArrayUtils.getAttr(
-                ctx, com.android.settingslib.widget.R.attr.footerPreferenceStyle,
+                ctx, com.android.settingslib.widget.theme.R.attr.footerPreferenceStyle,
                 android.R.attr.preferenceStyle));
     }
 

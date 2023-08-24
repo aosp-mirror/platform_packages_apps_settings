@@ -83,7 +83,7 @@ public class CredentialManagementAppHeaderController extends BasePreferenceContr
         TextView titleView = headerPref.findViewById(R.id.entity_header_title);
         TextView summary1 = headerPref.findViewById(R.id.entity_header_summary);
         TextView summary2 = headerPref.findViewById(
-                com.android.settingslib.widget.R.id.entity_header_second_summary);
+                com.android.settingslib.widget.preference.layout.R.id.entity_header_second_summary);
         summary2.setVisibility(View.GONE);
 
         try {

@@ -74,7 +74,7 @@ public class SearchMenuControllerTest {
 
         when(mHost.getActivity()).thenReturn(mActivity);
         when(mMenu.add(Menu.NONE, MENU_SEARCH, 0 /* order */,
-                com.android.settingslib.search.R.string.search_menu))
+                com.android.settingslib.search.widget.R.string.search_menu))
                 .thenReturn(mock(MenuItem.class));
     }
 
@@ -84,7 +84,7 @@ public class SearchMenuControllerTest {
         mHost.getSettingsLifecycle().onCreateOptionsMenu(mMenu, null /* inflater */);
 
         verify(mMenu).add(Menu.NONE, MENU_SEARCH, 0 /* order */,
-                com.android.settingslib.search.R.string.search_menu);
+                com.android.settingslib.search.widget.R.string.search_menu);
     }
 
     @Test

@@ -31,20 +31,24 @@ import androidx.preference.PreferenceViewHolder;
 public class AppCheckBoxPreference extends CheckBoxPreference {
     public AppCheckBoxPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-        setLayoutResource(com.android.settingslib.widget.R.layout.preference_app);
+        setLayoutResource(com.android.settingslib.widget.preference.app.R.layout.preference_app);
     }
 
     public AppCheckBoxPreference(Context context) {
         super(context);
-        setLayoutResource(com.android.settingslib.widget.R.layout.preference_app);
+        setLayoutResource(com.android.settingslib.widget.preference.app.R.layout.preference_app);
     }
 
     @Override
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
 
-        final LinearLayout layout = (LinearLayout) holder
-                .findViewById(com.android.settingslib.widget.R.id.summary_container);
+        // NOTE: All the summary_container resources IDs in the different dependency widget packages
+        // are equivalent, so it does not matter which one we use. For example,
+        //   com.android.settingslib.widget.preference.radio.R.id.summary_container ==
+        //   com.android.settingslib.widget.preference.selector.R.id.summary_container
+        final LinearLayout layout = (LinearLayout) holder.findViewById(
+                com.android.settingslib.widget.preference.radio.R.id.summary_container);
         if (layout != null) {
             // If summary doesn't exist, make it gone
             layout.setVisibility(TextUtils.isEmpty(getSummary()) ? View.GONE : View.VISIBLE);

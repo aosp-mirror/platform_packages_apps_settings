@@ -94,7 +94,7 @@ public class UsbDetailsHeaderControllerTest {
         ShadowEntityHeaderController.setUseMock(mHeaderController);
         mDetailsHeaderController = new UsbDetailsHeaderController(mContext, mFragment, mUsbBackend);
         mPreference = new LayoutPreference(
-                mContext, com.android.settingslib.widget.R.layout.settings_entity_header);
+                mContext, com.android.settingslib.widget.preference.layout.R.layout.settings_entity_header);
         mPreference.setKey(mDetailsHeaderController.getPreferenceKey());
         mScreen.addPreference(mPreference);
     }

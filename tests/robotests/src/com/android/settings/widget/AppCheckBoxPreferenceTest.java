@@ -45,15 +45,15 @@ public class AppCheckBoxPreferenceTest {
         mAttrPreference = new AppCheckBoxPreference(mContext, null /* attrs */);
         mPreferenceViewHolder = PreferenceViewHolder.createInstanceForTests(
                 LayoutInflater.from(mContext)
-                        .inflate(com.android.settingslib.widget.R.layout.preference_app, null));
+                        .inflate(com.android.settingslib.widget.preference.app.R.layout.preference_app, null));
     }
 
     @Test
     public void testGetLayoutResource() {
         assertThat(mPreference.getLayoutResource())
-                .isEqualTo(com.android.settingslib.widget.R.layout.preference_app);
+                .isEqualTo(com.android.settingslib.widget.preference.app.R.layout.preference_app);
         assertThat(mAttrPreference.getLayoutResource())
-                .isEqualTo(com.android.settingslib.widget.R.layout.preference_app);
+                .isEqualTo(com.android.settingslib.widget.preference.app.R.layout.preference_app);
     }
 
     @Test
@@ -61,7 +61,7 @@ public class AppCheckBoxPreferenceTest {
         mPreference.onBindViewHolder(mPreferenceViewHolder);
 
         View appendix =
-                mPreferenceViewHolder.findViewById(com.android.settingslib.widget.R.id.appendix);
+                mPreferenceViewHolder.findViewById(com.android.settingslib.widget.preference.app.R.id.appendix);
         assertThat(appendix.getVisibility()).isEqualTo(View.GONE);
     }
 }

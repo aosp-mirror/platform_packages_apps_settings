@@ -60,7 +60,7 @@ class BluetoothBroadcastSourcePreference extends Preference {
     @Override
     public void onBindViewHolder(final PreferenceViewHolder view) {
         super.onBindViewHolder(view);
-        view.findViewById(com.android.settingslib.widget.R.id.two_target_divider)
+        view.findViewById(com.android.settingslib.widget.preference.twotarget.R.id.two_target_divider)
                 .setVisibility(View.INVISIBLE);
         final ImageButton imageButton =
                 (ImageButton) view.findViewById(com.android.settingslib.R.id.icon_button);

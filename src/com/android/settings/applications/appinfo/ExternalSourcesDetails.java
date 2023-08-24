@@ -88,7 +88,7 @@ public class ExternalSourcesDetails extends AppInfoWithHeader
                         UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES_GLOBALLY,
                         userHandle);
         if ((userRestrictionSource & UserManager.RESTRICTION_SOURCE_SYSTEM) != 0) {
-            return context.getString(com.android.settingslib.widget.R.string.disabled_by_admin);
+            return context.getString(com.android.settingslib.widget.restricted.R.string.disabled_by_admin);
         } else if (userRestrictionSource != 0) {
             return context.getString(com.android.settingslib.R.string.disabled);
         }
