@@ -16,7 +16,6 @@
 
 package com.android.settings.localepicker;
 
-import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -25,10 +24,8 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.HelpUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.widget.FooterPreference;
 
 /**
@@ -39,11 +36,8 @@ public class LocaleHelperPreferenceController extends AbstractPreferenceControll
 
     private static final String KEY_FOOTER_LANGUAGE_PICKER = "footer_languages_picker";
 
-    private final MetricsFeatureProvider mMetricsFeatureProvider;
-
     public LocaleHelperPreferenceController(Context context) {
         super(context);
-        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     @Override
@@ -78,7 +72,6 @@ public class LocaleHelperPreferenceController extends AbstractPreferenceControll
                 mContext.getString(R.string.link_locale_picker_footer_learn_more),
                 mContext.getClass().getName());
         if (intent != null) {
-            mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_LANGUAGES_LEARN_MORE);
             mContext.startActivity(intent);
         } else {
             Log.w(TAG, "HelpIntent is null");
