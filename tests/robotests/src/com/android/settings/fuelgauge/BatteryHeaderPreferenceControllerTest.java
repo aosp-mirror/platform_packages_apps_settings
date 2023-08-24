@@ -23,7 +23,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.hardware.usb.UsbManager;
@@ -34,8 +33,6 @@ import android.os.BatteryManager;
 import android.os.PowerManager;
 import android.text.TextUtils;
 
-import androidx.lifecycle.LifecycleOwner;
-import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
@@ -47,7 +44,6 @@ import com.android.settings.testutils.BatteryTestUtils;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settings.widget.EntityHeaderController;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.widget.UsageProgressBarPreference;
 
 import org.junit.After;
@@ -73,10 +69,6 @@ public class BatteryHeaderPreferenceControllerTest {
     private static final String BATTERY_STATUS = "Charging";
 
     @Mock
-    private Activity mActivity;
-    @Mock
-    private PreferenceFragmentCompat mPreferenceFragment;
-    @Mock
     private PreferenceScreen mPreferenceScreen;
     @Mock
     private BatteryInfo mBatteryInfo;
@@ -97,15 +89,11 @@ public class BatteryHeaderPreferenceControllerTest {
     private Context mContext;
     private ShadowPowerManager mShadowPowerManager;
     private Intent mBatteryIntent;
-    private LifecycleOwner mLifecycleOwner;
-    private Lifecycle mLifecycle;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mLifecycleOwner = () -> mLifecycle;
-        mLifecycle = new Lifecycle(mLifecycleOwner);
         mContext = spy(RuntimeEnvironment.application);
         when(mContext.getSystemService(UsbManager.class)).thenReturn(mUsbManager);
         ShadowEntityHeaderController.setUseMock(mEntityHeaderController);
@@ -124,9 +112,6 @@ public class BatteryHeaderPreferenceControllerTest {
         mShadowPowerManager = Shadows.shadowOf(mContext.getSystemService(PowerManager.class));
 
         mController = spy(new BatteryHeaderPreferenceController(mContext, PREF_KEY));
-        mLifecycle.addObserver(mController);
-        mController.setActivity(mActivity);
-        mController.setFragment(mPreferenceFragment);
         mController.mBatteryUsageProgressBarPref = mBatteryUsageProgressBarPref;
         mController.mBatteryStatusFeatureProvider = mBatteryStatusFeatureProvider;
     }

@@ -72,8 +72,7 @@ public class WifiDataUsageSummaryPreferenceControllerTest {
         doNothing().when(mSummaryPreference).setWifiMode(anyBoolean(), anyString(), anyBoolean());
         doReturn(mDataUsageInfo).when(mDataUsageController).getDataUsageInfo(any());
 
-        mController = spy(new WifiDataUsageSummaryPreferenceController(mActivity, null,
-                mAllNetworkKeys));
+        mController = spy(new WifiDataUsageSummaryPreferenceController(mActivity, mAllNetworkKeys));
         doReturn(mDataUsageController).when(mController).createDataUsageController(any());
     }
 

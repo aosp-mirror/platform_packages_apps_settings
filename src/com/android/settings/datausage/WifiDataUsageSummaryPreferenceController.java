@@ -21,7 +21,6 @@ import android.net.NetworkTemplate;
 import android.telephony.SubscriptionManager;
 
 import androidx.preference.Preference;
-import androidx.preference.PreferenceFragmentCompat;
 
 import com.android.settingslib.net.DataUsageController;
 
@@ -34,9 +33,8 @@ import java.util.Set;
 public class WifiDataUsageSummaryPreferenceController extends DataUsageSummaryPreferenceController {
     final Set<String> mAllNetworkKeys;
 
-    public WifiDataUsageSummaryPreferenceController(
-            Activity activity, PreferenceFragmentCompat fragment, Set<String> allNetworkKeys) {
-        super(activity, fragment, SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+    public WifiDataUsageSummaryPreferenceController(Activity activity, Set<String> allNetworkKeys) {
+        super(activity, SubscriptionManager.INVALID_SUBSCRIPTION_ID);
         mAllNetworkKeys = new HashSet<>(allNetworkKeys);
     }
 
