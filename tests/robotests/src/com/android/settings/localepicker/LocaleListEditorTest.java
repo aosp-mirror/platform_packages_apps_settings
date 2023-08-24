@@ -328,7 +328,6 @@ public class LocaleListEditorTest {
 
         mAdapter = spy(new LocaleDragAndDropAdapter(mLocaleListEditor, mLocaleList));
         ReflectionHelpers.setField(mAdapter, "mFeedItemList", mLocaleList);
-        ReflectionHelpers.setField(mAdapter, "mParent", mLocaleListEditor);
         ReflectionHelpers.setField(mAdapter, "mCacheItemList", new ArrayList<>(mLocaleList));
         ReflectionHelpers.setField(mAdapter, "mContext", mContext);
         ViewGroup view = new FrameLayout(mContext);
