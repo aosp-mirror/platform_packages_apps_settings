@@ -16,6 +16,7 @@
 
 package com.android.settings.password;
 
+import android.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,6 +58,11 @@ public class PasswordRequirementAdapter extends
     @Override
     public long getItemId(int position) {
         return mRequirements[position].hashCode();
+    }
+
+    @Override
+    public void onViewAttachedToWindow(@NonNull PasswordRequirementViewHolder holder) {
+        holder.mDescriptionText.announceForAccessibility(holder.mDescriptionText.getText());
     }
 
     @Override

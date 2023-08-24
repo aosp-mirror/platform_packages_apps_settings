@@ -520,7 +520,6 @@ public class ChooseLockPassword extends SettingsActivity {
             setupPasswordRequirementsView(view);
 
             mPasswordRestrictionView.setLayoutManager(new LinearLayoutManager(getActivity()));
-            mPasswordRestrictionView.setAccessibilityLiveRegion(ACCESSIBILITY_LIVE_REGION_POLITE);
             mPasswordEntry = view.findViewById(R.id.password_entry);
             mPasswordEntry.setOnEditorActionListener(this);
             mPasswordEntry.addTextChangedListener(this);
