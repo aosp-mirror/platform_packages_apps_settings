@@ -69,9 +69,9 @@ public class BatteryTipsController extends BasePreferenceController {
     private <T> T getInfo(PowerAnomalyEvent powerAnomalyEvent,
                           Function<WarningBannerInfo, T> warningBannerInfoSupplier,
                           Function<WarningItemInfo, T> warningItemInfoSupplier) {
-        if (powerAnomalyEvent.hasWarningBannerInfo() && warningBannerInfoSupplier != null) {
+        if (warningBannerInfoSupplier != null && powerAnomalyEvent.hasWarningBannerInfo()) {
             return warningBannerInfoSupplier.apply(powerAnomalyEvent.getWarningBannerInfo());
-        } else if (powerAnomalyEvent.hasWarningItemInfo() && warningItemInfoSupplier != null) {
+        } else if (warningItemInfoSupplier != null && powerAnomalyEvent.hasWarningItemInfo()) {
             return warningItemInfoSupplier.apply(powerAnomalyEvent.getWarningItemInfo());
         }
         return null;
@@ -125,20 +125,20 @@ public class BatteryTipsController extends BasePreferenceController {
                 WarningBannerInfo::getCancelButtonString, WarningItemInfo::getCancelButtonString,
                 R.array.power_anomaly_dismiss_btn_strings, resourceIndex);
 
-        String destinationClassName = getString(powerAnomalyEvent,
-                WarningBannerInfo::getMainButtonDestination,
-                WarningItemInfo::getMainButtonDestination,
-                -1, -1);
+        String destinationClassName = getInfo(powerAnomalyEvent,
+                WarningBannerInfo::getMainButtonDestination, null);
         Integer sourceMetricsCategory = getInfo(powerAnomalyEvent,
-                WarningBannerInfo::getMainButtonSourceMetricsCategory,
-                WarningItemInfo::getMainButtonSourceMetricsCategory);
+                WarningBannerInfo::getMainButtonSourceMetricsCategory, null);
+        String preferenceHighlightKey = getInfo(powerAnomalyEvent,
+                WarningBannerInfo::getMainButtonSourceHighlightKey, null);
 
         // Updated card preference and main button fragment launcher
         mCardPreference.setAnomalyEventId(powerAnomalyEvent.getEventId());
         mCardPreference.setTitle(titleString);
         mCardPreference.setMainButtonLabel(mainBtnString);
         mCardPreference.setDismissButtonLabel(dismissBtnString);
-        mCardPreference.setMainButtonLauncherInfo(destinationClassName, sourceMetricsCategory);
+        mCardPreference.setMainButtonLauncherInfo(
+                destinationClassName, sourceMetricsCategory, preferenceHighlightKey);
         mCardPreference.setVisible(true);
 
         mMetricsFeatureProvider.action(mContext,

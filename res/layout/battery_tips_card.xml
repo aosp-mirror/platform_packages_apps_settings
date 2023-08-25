@@ -49,8 +49,7 @@
                 android:layout_marginEnd="8dp"
                 android:text="@string/battery_tips_card_dismiss_button"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="?android:attr/colorAccent"
-                android:textStyle="bold" />
+                android:textColor="?android:attr/textColorPrimary" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/main_button"
@@ -62,7 +61,6 @@
                 android:text="@string/battery_tips_card_action_button"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="?android:attr/textColorPrimary"
-                android:textStyle="bold"
                 app:strokeColor="?android:attr/colorAccent"
                 app:strokeWidth="1dp" />
         </LinearLayout>

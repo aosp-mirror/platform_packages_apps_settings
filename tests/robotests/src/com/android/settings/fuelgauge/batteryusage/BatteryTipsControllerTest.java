@@ -87,8 +87,8 @@ public final class BatteryTipsControllerTest {
         verify(mBatteryTipsCardPreference).setDismissButtonLabel("Got it");
         // Check proto info
         verify(mBatteryTipsCardPreference).setMainButtonLauncherInfo(
-                "com.android.settings.display.AutoBrightnessSettings",
-                1381);
+                "com.android.settings.DisplaySettings",
+                46, "auto_brightness_entry");
         verify(mBatteryTipsCardPreference).setVisible(true);
         verify(mFeatureFactory.metricsFeatureProvider).action(
                 mContext, SettingsEnums.ACTION_BATTERY_TIPS_CARD_SHOW, "BrightnessAnomaly");
@@ -107,11 +107,12 @@ public final class BatteryTipsControllerTest {
         verify(mBatteryTipsCardPreference).setDismissButtonLabel("Got it");
         verify(mBatteryTipsCardPreference).setMainButtonLauncherInfo(
                 "com.android.settings.display.ScreenTimeoutSettings",
-                1852);
+                1852, "60000");
         verify(mBatteryTipsCardPreference).setVisible(true);
         verify(mFeatureFactory.metricsFeatureProvider).action(
                 mContext, SettingsEnums.ACTION_BATTERY_TIPS_CARD_SHOW, "ScreenTimeoutAnomaly");
     }
+
     @Test
     public void handleBatteryTipsCardUpdated_screenTimeoutAnomalyHasTitle_showAnomaly() {
         PowerAnomalyEvent event = BatteryTestUtils.createScreenTimeoutAnomalyEvent();
@@ -132,7 +133,7 @@ public final class BatteryTipsControllerTest {
         verify(mBatteryTipsCardPreference).setDismissButtonLabel("Got it");
         verify(mBatteryTipsCardPreference).setMainButtonLauncherInfo(
                 "com.android.settings.display.ScreenTimeoutSettings",
-                1852);
+                1852, "60000");
         verify(mBatteryTipsCardPreference).setVisible(true);
         verify(mFeatureFactory.metricsFeatureProvider).action(
                 mContext, SettingsEnums.ACTION_BATTERY_TIPS_CARD_SHOW, "ScreenTimeoutAnomaly");
