@@ -83,6 +83,7 @@ public final class BatteryTipsCardPreferenceTest {
         mBatteryTipsController.handleBatteryTipsCardUpdated(adaptiveBrightnessAnomaly);
         mBatteryTipsCardPreference.onClick(mFakeView);
 
+        assertThat(mBatteryTipsCardPreference.isVisible()).isEqualTo(false);
         verify(mContext).startActivity(any(Intent.class));
         final Intent intent = captor.getValue();
         assertThat(intent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT))
@@ -94,15 +95,21 @@ public final class BatteryTipsCardPreferenceTest {
     }
 
     @Test
-    public void onClick_dismissBtn_metricsLogged() {
+    public void onClick_dismissBtn_cardDismissAndLogged() {
         PowerAnomalyEvent screenTimeoutAnomaly =
                 BatteryTestUtils.createScreenTimeoutAnomalyEvent();
+        DatabaseUtils.removeDismissedPowerAnomalyKeys(mContext);
         when(mFeatureFactory.powerUsageFeatureProvider.isBatteryTipsEnabled()).thenReturn(true);
         when(mFakeView.getId()).thenReturn(R.id.dismiss_button);
 
         mBatteryTipsController.handleBatteryTipsCardUpdated(screenTimeoutAnomaly);
         mBatteryTipsCardPreference.onClick(mFakeView);
 
+        assertThat(mBatteryTipsCardPreference.isVisible()).isEqualTo(false);
+        assertThat(DatabaseUtils.getDismissedPowerAnomalyKeys(mContext).size())
+                .isEqualTo(1);
+        assertThat(DatabaseUtils.getDismissedPowerAnomalyKeys(mContext))
+                .contains(PowerAnomalyKey.KEY_SCREEN_TIMEOUT.name());
         verify(mFeatureFactory.metricsFeatureProvider).action(
                 mContext, SettingsEnums.ACTION_BATTERY_TIPS_CARD_DISMISS, "ScreenTimeoutAnomaly");
     }

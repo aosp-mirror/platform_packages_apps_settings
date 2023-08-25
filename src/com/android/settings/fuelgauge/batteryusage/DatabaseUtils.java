@@ -35,6 +35,7 @@ import android.os.Looper;
 import android.os.RemoteException;
 import android.os.SystemClock;
 import android.os.UserManager;
+import android.util.ArraySet;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
@@ -53,6 +54,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
@@ -69,6 +71,7 @@ public final class DatabaseUtils {
     static final String KEY_LAST_LOAD_FULL_CHARGE_TIME = "last_load_full_charge_time";
     static final String KEY_LAST_UPLOAD_FULL_CHARGE_TIME = "last_upload_full_charge_time";
     static final String KEY_LAST_USAGE_SOURCE = "last_usage_source";
+    static final String KEY_DISMISSED_POWER_ANOMALY_KEYS = "dismissed_power_anomaly_keys";
 
     /** An authority name of the battery content provider. */
     public static final String AUTHORITY = "com.android.settings.battery.usage.provider";
@@ -636,6 +639,8 @@ public final class DatabaseUtils {
                 KEY_LAST_LOAD_FULL_CHARGE_TIME);
         writeString(context, writer, "LastUploadFullChargeTime",
                 KEY_LAST_UPLOAD_FULL_CHARGE_TIME);
+        writeString(context, writer, "DismissedPowerAnomalyKeys",
+                KEY_DISMISSED_POWER_ANOMALY_KEYS);
     }
 
     static SharedPreferences getSharedPreferences(Context context) {
@@ -672,6 +677,32 @@ public final class DatabaseUtils {
             sharedPreferences.edit().putInt(KEY_LAST_USAGE_SOURCE, usageSource).apply();
         }
         return usageSource;
+    }
+
+    static void removeDismissedPowerAnomalyKeys(Context context) {
+        final SharedPreferences sharedPreferences = getSharedPreferences(context);
+        if (sharedPreferences != null
+                && sharedPreferences.contains(KEY_DISMISSED_POWER_ANOMALY_KEYS)) {
+            sharedPreferences.edit().remove(KEY_DISMISSED_POWER_ANOMALY_KEYS).apply();
+        }
+    }
+
+    static Set<String> getDismissedPowerAnomalyKeys(Context context) {
+        final SharedPreferences sharedPreferences = getSharedPreferences(context);
+        return sharedPreferences != null
+                ? sharedPreferences.getStringSet(KEY_DISMISSED_POWER_ANOMALY_KEYS, new ArraySet<>())
+                : new ArraySet<>();
+    }
+
+    static void setDismissedPowerAnomalyKeys(Context context, String dismissedPowerAnomalyKey) {
+        final SharedPreferences sharedPreferences = getSharedPreferences(context);
+        if (sharedPreferences != null) {
+            final Set<String> dismissedPowerAnomalyKeys = getDismissedPowerAnomalyKeys(context);
+            dismissedPowerAnomalyKeys.add(dismissedPowerAnomalyKey);
+            sharedPreferences.edit()
+                    .putStringSet(KEY_DISMISSED_POWER_ANOMALY_KEYS, dismissedPowerAnomalyKeys)
+                    .apply();
+        }
     }
 
     static void recordDateTime(Context context, String preferenceKey) {
