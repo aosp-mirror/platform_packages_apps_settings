@@ -60,6 +60,7 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.wifi.WifiUtils;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiPickerTracker;
 
@@ -419,8 +420,7 @@ public class AddAppNetworksFragment extends InstrumentedFragment implements
             return;
         }
         // TODO: Check level of the network to show signal icon.
-        final Drawable wifiIcon = mActivity.getDrawable(
-                Utils.getWifiIconResource(level)).mutate();
+        final Drawable wifiIcon = mActivity.getDrawable(getWifiIconResource(level)).mutate();
         final Drawable wifiIconDark = wifiIcon.getConstantState().newDrawable().mutate();
         wifiIconDark.setTintList(
                 Utils.getColorAttr(mActivity, android.R.attr.colorControlNormal));
@@ -566,8 +566,7 @@ public class AddAppNetworksFragment extends InstrumentedFragment implements
             final PreferenceImageView imageView = view.findViewById(android.R.id.icon);
             if (imageView != null) {
                 final Drawable drawable = getContext().getDrawable(
-                        com.android.settingslib.Utils.getWifiIconResource(
-                                uiConfigurationItem.mLevel));
+                        getWifiIconResource(uiConfigurationItem.mLevel));
                 drawable.setTintList(
                         com.android.settingslib.Utils.getColorAttr(getContext(),
                                 android.R.attr.colorControlNormal));
@@ -656,6 +655,10 @@ public class AddAppNetworksFragment extends InstrumentedFragment implements
             try {
                 mWifiManager.addOrUpdatePasspointConfiguration(passpointConfig);
                 mAnyNetworkSavedSuccess = true;
+
+                // (force) enable MAC randomization on new credentials
+                mWifiManager.setMacRandomizationSettingPasspointEnabled(
+                        passpointConfig.getHomeSp().getFqdn(), true);
             } catch (IllegalArgumentException e) {
                 mResultCodeArrayList.set(mUiToRequestedList.get(index).mIndex,
                         RESULT_NETWORK_ADD_ERROR);
@@ -670,6 +673,10 @@ public class AddAppNetworksFragment extends InstrumentedFragment implements
             final WifiConfiguration wifiConfiguration =
                     mUiToRequestedList.get(index).mWifiNetworkSuggestion.getWifiConfiguration();
             wifiConfiguration.SSID = addQuotationIfNeeded(wifiConfiguration.SSID);
+
+            // (force) enable MAC randomization on new credentials
+            wifiConfiguration.setMacRandomizationSetting(
+                    WifiConfiguration.RANDOMIZATION_PERSISTENT);
             mWifiManager.save(wifiConfiguration, mSaveListener);
         }
     }
@@ -755,8 +762,6 @@ public class AddAppNetworksFragment extends InstrumentedFragment implements
         }
     }
 
-
-
     @VisibleForTesting
     void updateScanResultsToUi() {
         if (mUiToRequestedList == null) {
@@ -824,5 +829,10 @@ public class AddAppNetworksFragment extends InstrumentedFragment implements
     @Override
     public void onNumSavedNetworksChanged() {
         // Do nothing.
+    }
+
+    @VisibleForTesting
+    static int getWifiIconResource(int level) {
+        return WifiUtils.getInternetIconResource(level, false /* noInternet */);
     }
 }

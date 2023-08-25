@@ -21,14 +21,11 @@ import android.app.NotificationManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.media.AudioManager;
-import android.os.Binder;
 import android.os.ServiceManager;
 import android.os.Vibrator;
-import android.provider.DeviceConfig;
 import android.util.Log;
 
 import com.android.internal.annotations.VisibleForTesting;
-import com.android.internal.config.sysui.SystemUiDeviceConfigFlags;
 
 import java.util.Objects;
 
@@ -48,10 +45,7 @@ public abstract class RingerModeAffectedVolumePreferenceController extends
     protected Vibrator mVibrator;
     protected int mRingerMode = AudioManager.RINGER_MODE_NORMAL;
     protected ComponentName mSuppressor;
-    protected boolean mSeparateNotification;
     protected INotificationManager mNoMan;
-
-    private static final boolean CONFIG_SEPARATE_NOTIFICATION_DEFAULT_VAL = false;
 
     public RingerModeAffectedVolumePreferenceController(Context context, String key, String tag) {
         super(context, key);
@@ -116,28 +110,6 @@ public abstract class RingerModeAffectedVolumePreferenceController extends
     @Override
     public int getMuteIcon() {
         return mMuteIcon;
-    }
-
-    protected boolean isSeparateNotificationConfigEnabled() {
-        return Binder.withCleanCallingIdentity(()
-                -> DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_SYSTEMUI,
-                SystemUiDeviceConfigFlags.VOLUME_SEPARATE_NOTIFICATION,
-                CONFIG_SEPARATE_NOTIFICATION_DEFAULT_VAL));
-    }
-
-    /**
-     * side effect: updates the cached value of the config
-     * @return has the config changed?
-     */
-    protected boolean readSeparateNotificationVolumeConfig() {
-        boolean newVal = isSeparateNotificationConfigEnabled();
-
-        boolean valueUpdated = newVal != mSeparateNotification;
-        if (valueUpdated) {
-            mSeparateNotification = newVal;
-        }
-
-        return valueUpdated;
     }
 
     /**

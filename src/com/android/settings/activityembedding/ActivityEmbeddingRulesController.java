@@ -42,6 +42,7 @@ import com.android.settings.biometrics.face.FaceEnrollIntroductionInternal;
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollEnrolling;
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollIntroduction;
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollIntroductionInternal;
+import com.android.settings.biometrics2.ui.view.FingerprintEnrollmentActivity;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.homepage.DeepLinkHomepageActivity;
 import com.android.settings.homepage.DeepLinkHomepageActivityInternal;
@@ -249,6 +250,7 @@ public class ActivityEmbeddingRulesController {
                     .buildSearchIntent(mContext, SettingsEnums.SETTINGS_HOMEPAGE);
             addActivityFilter(activityFilters, searchIntent);
         }
+        addActivityFilter(activityFilters, FingerprintEnrollmentActivity.class);
         addActivityFilter(activityFilters, FingerprintEnrollIntroduction.class);
         addActivityFilter(activityFilters, FingerprintEnrollIntroductionInternal.class);
         addActivityFilter(activityFilters, FingerprintEnrollEnrolling.class);

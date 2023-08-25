@@ -20,11 +20,9 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.UserHandle;
 import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
-import android.util.EventLog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -146,8 +144,6 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
         mConstructionSubId = getConstructionSubId(icicle);
         super.onCreate(icicle);
         if (MobileNetworkUtils.isMobileNetworkUserRestricted(getActivity())) {
-            Log.e(TAG, "This setting isn't available due to user restriction.");
-            EventLog.writeEvent(0x534e4554, "262243015", UserHandle.myUserId(), "User restricted");
             finish();
             return;
         }
@@ -261,7 +257,10 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
         for (SubscriptionInfo subInfo : subInfoList) {
             int subId = subInfo.getSubscriptionId();
             try {
-                if (queryImsState(subId).isWifiCallingProvisioned()) {
+                if (MobileNetworkUtils.isWifiCallingEnabled(
+                        getContext(),
+                        subId,
+                        queryImsState(subId))) {
                     selectedList.add(subInfo);
                 }
             } catch (Exception exception) {}

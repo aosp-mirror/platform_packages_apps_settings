@@ -68,7 +68,7 @@
                     android:maxLines="1"
                     android:textColor="?android:attr/textColorPrimary"
                     android:textSize="24sp"
-                    android:fontFamily="sans-serif-reqular"/>
+                    android:fontFamily="@*android:string/config_headlineFontFamilyMedium"/>
 
                 <TextView
                     android:id="@+id/header_subtitle"
@@ -78,7 +78,7 @@
                     android:maxLines="1"
                     android:textColor="?android:attr/textColorSecondary"
                     android:textSize="14sp"
-                    android:fontFamily="sans-serif-reqular" />
+                    android:fontFamily="@*android:string/config_headlineFontFamilyMedium" />
             </LinearLayout>
         </LinearLayout>
 
@@ -91,7 +91,7 @@
             android:gravity="center"
             android:textColor="?android:attr/textColorPrimary"
             android:textSize="24sp"
-            android:fontFamily="sans-serif-reqular"/>
+            android:fontFamily="@*android:string/config_headlineFontFamilyMedium"/>
 
         <ProgressBar
             android:id="@+id/progress_bar"

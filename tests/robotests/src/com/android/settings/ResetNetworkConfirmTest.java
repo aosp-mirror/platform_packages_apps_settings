@@ -18,14 +18,8 @@ package com.android.settings;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
-import android.content.Context;
-import android.os.Looper;
 import android.view.LayoutInflater;
 import android.widget.TextView;
 
@@ -33,10 +27,10 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowRecoverySystem;
+import com.android.settings.utils.ActivityControllerWrapper;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -61,7 +55,8 @@ public class ResetNetworkConfirmTest {
         MockitoAnnotations.initMocks(this);
 
         mResetNetworkConfirm = new ResetNetworkConfirm();
-        mActivity = spy(Robolectric.setupActivity(FragmentActivity.class));
+        mActivity = spy((FragmentActivity) ActivityControllerWrapper.setup(
+                Robolectric.buildActivity(FragmentActivity.class)).get());
         mResetNetworkConfirm.mActivity = mActivity;
     }
 
@@ -74,6 +69,14 @@ public class ResetNetworkConfirmTest {
     public void testResetNetworkData_notResetEsim() {
         mResetNetworkConfirm.mResetNetworkRequest =
                 new ResetNetworkRequest(ResetNetworkRequest.RESET_NONE);
+        mResetNetworkConfirm.mResetSubscriptionContract =
+                new ResetSubscriptionContract(mActivity,
+                mResetNetworkConfirm.mResetNetworkRequest) {
+            @Override
+            public void onSubscriptionInactive(int subscriptionId) {
+                mActivity.onBackPressed();
+            }
+        };
 
         mResetNetworkConfirm.mFinalClickListener.onClick(null /* View */);
         Robolectric.getBackgroundThreadScheduler().advanceToLastPostedRunnable();

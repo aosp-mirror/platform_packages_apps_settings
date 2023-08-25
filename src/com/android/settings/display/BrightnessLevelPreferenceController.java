@@ -30,15 +30,9 @@ import android.hardware.display.DisplayManager.DisplayListener;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
-import android.os.PowerManager;
-import android.os.RemoteException;
-import android.os.ServiceManager;
 import android.provider.Settings.System;
-import android.service.vr.IVrManager;
 import android.text.TextUtils;
-import android.util.Log;
 
-import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
@@ -58,11 +52,8 @@ public class BrightnessLevelPreferenceController extends AbstractPreferenceContr
 
     private static final String TAG = "BrightnessPrefCtrl";
     private static final String KEY_BRIGHTNESS = "brightness";
-    private static final Uri BRIGHTNESS_FOR_VR_URI;
     private static final Uri BRIGHTNESS_ADJ_URI;
 
-    private final float mMinVrBrightness;
-    private final float mMaxVrBrightness;
     private final ContentResolver mContentResolver;
     private final Handler mHandler = new Handler(Looper.getMainLooper());
     private final DisplayManager mDisplayManager;
@@ -70,7 +61,6 @@ public class BrightnessLevelPreferenceController extends AbstractPreferenceContr
     private Preference mPreference;
 
     static {
-        BRIGHTNESS_FOR_VR_URI = System.getUriFor(System.SCREEN_BRIGHTNESS_FOR_VR);
         BRIGHTNESS_ADJ_URI = System.getUriFor(System.SCREEN_AUTO_BRIGHTNESS_ADJ);
     }
 
@@ -105,12 +95,6 @@ public class BrightnessLevelPreferenceController extends AbstractPreferenceContr
         if (lifecycle != null) {
             lifecycle.addObserver(this);
         }
-        final PowerManager powerManager = context.getSystemService(PowerManager.class);
-
-        mMinVrBrightness = powerManager.getBrightnessConstraint(
-                PowerManager.BRIGHTNESS_CONSTRAINT_TYPE_MINIMUM_VR);
-        mMaxVrBrightness = powerManager.getBrightnessConstraint(
-                PowerManager.BRIGHTNESS_CONSTRAINT_TYPE_MAXIMUM_VR);
         mContentResolver = mContext.getContentResolver();
     }
 
@@ -137,7 +121,6 @@ public class BrightnessLevelPreferenceController extends AbstractPreferenceContr
 
     @Override
     public void onStart() {
-        mContentResolver.registerContentObserver(BRIGHTNESS_FOR_VR_URI, false, mBrightnessObserver);
         mContentResolver.registerContentObserver(BRIGHTNESS_ADJ_URI, false, mBrightnessObserver);
         mDisplayManager.registerDisplayListener(mDisplayListener, mHandler,
                 DisplayManager.EVENT_FLAG_DISPLAY_BRIGHTNESS);
@@ -174,16 +157,10 @@ public class BrightnessLevelPreferenceController extends AbstractPreferenceContr
 
     private double getCurrentBrightness() {
         int value = 0;
-        if (isInVrMode()) {
-            value = convertLinearToGammaFloat(System.getFloat(mContentResolver,
-                    System.SCREEN_BRIGHTNESS_FOR_VR_FLOAT, mMaxVrBrightness),
-                    mMinVrBrightness, mMaxVrBrightness);
-        } else {
-            final BrightnessInfo info = mContext.getDisplay().getBrightnessInfo();
-            if (info != null) {
-                value = convertLinearToGammaFloat(info.brightness, info.brightnessMinimum,
-                        info.brightnessMaximum);
-            }
+        final BrightnessInfo info = mContext.getDisplay().getBrightnessInfo();
+        if (info != null) {
+            value = convertLinearToGammaFloat(info.brightness, info.brightnessMinimum,
+                    info.brightnessMaximum);
         }
         return getPercentage(value, GAMMA_SPACE_MIN, GAMMA_SPACE_MAX);
     }
@@ -196,24 +173,5 @@ public class BrightnessLevelPreferenceController extends AbstractPreferenceContr
             return 0.0;
         }
         return (value - min) / (max - min);
-    }
-
-    @VisibleForTesting
-    IVrManager safeGetVrManager() {
-        return IVrManager.Stub.asInterface(ServiceManager.getService(
-                Context.VR_SERVICE));
-    }
-
-    @VisibleForTesting
-    boolean isInVrMode() {
-        IVrManager vrManager = safeGetVrManager();
-        if (vrManager != null) {
-            try {
-                return vrManager.getVrModeState();
-            } catch (RemoteException e) {
-                Log.e(TAG, "Failed to check vr mode!", e);
-            }
-        }
-        return false;
     }
 }

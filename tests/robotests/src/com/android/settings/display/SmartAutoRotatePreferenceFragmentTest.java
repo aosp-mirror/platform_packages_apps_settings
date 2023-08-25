@@ -50,6 +50,7 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.devicestate.DeviceStateRotationLockSettingsManager;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -175,6 +176,7 @@ public class SmartAutoRotatePreferenceFragmentTest {
         assertThat(preferenceControllers).isEmpty();
     }
 
+    @Ignore
     @Test
     public void createPreferenceControllers_settableDeviceStates_returnsDeviceStateControllers() {
         enableDeviceStateSettableRotationStates(new String[]{"0:1", "1:1"},

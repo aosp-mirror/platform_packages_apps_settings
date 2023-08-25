@@ -85,6 +85,7 @@ import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.search.Indexable;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.utils.StringUtil;
 import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.LayoutPreference;
@@ -212,6 +213,8 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     protected boolean mIsRestricted;
     @VisibleForTesting
     boolean mIsAdmin = true;
+    @VisibleForTesting
+    boolean mIsGuest = false;
 
     @VisibleForTesting
     AirplaneModeEnabler mAirplaneModeEnabler;
@@ -302,13 +305,14 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         addPreferences();
 
         mIsRestricted = isUiRestricted();
-        mIsAdmin = isAdminUser();
+        updateUserType();
     }
 
-    private boolean isAdminUser() {
-        final UserManager userManager = getSystemService(UserManager.class);
-        if (userManager == null) return true;
-        return userManager.isAdminUser();
+    private void updateUserType() {
+        UserManager userManager = getSystemService(UserManager.class);
+        if (userManager == null) return;
+        mIsAdmin = userManager.isAdminUser();
+        mIsGuest = userManager.isGuestUser();
     }
 
     private void addPreferences() {
@@ -344,7 +348,18 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         }
     }
 
+    /**
+     * Whether to show any UI which is SIM related.
+     */
+    @VisibleForTesting
+    boolean showAnySubscriptionInfo(Context context) {
+        return (context != null) && SubscriptionUtil.isSimHardwareVisible(context);
+    }
+
     private void addNetworkMobileProviderController() {
+        if (!showAnySubscriptionInfo(getContext())) {
+            return;
+        }
         if (mNetworkMobileProviderController == null) {
             mNetworkMobileProviderController = new NetworkMobileProviderController(
                     getContext(), PREF_KEY_PROVIDER_MOBILE_NETWORK);
@@ -1083,10 +1098,13 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
                 .launch();
     }
 
-    /** Removes all preferences and hide the {@link #mConnectedWifiEntryPreferenceCategory}. */
+    /** Removes all preferences and hide the {@link #mConnectedWifiEntryPreferenceCategory} and
+     *  {@link #mFirstWifiEntryPreferenceCategory}. */
     private void removeConnectedWifiEntryPreference() {
         mConnectedWifiEntryPreferenceCategory.removeAll();
         mConnectedWifiEntryPreferenceCategory.setVisible(false);
+        mFirstWifiEntryPreferenceCategory.setVisible(false);
+        mFirstWifiEntryPreferenceCategory.removeAll();
     }
 
     private void removeWifiEntryPreference() {
@@ -1116,22 +1134,21 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
 
     private String getSavedNetworkSettingsSummaryText(
             int numSavedNetworks, int numSavedSubscriptions) {
-        if (getResources() == null) {
+        if (getContext() == null) {
             Log.w(TAG, "getSavedNetworkSettingsSummaryText shouldn't run if resource is not ready");
             return null;
         }
 
         if (numSavedSubscriptions == 0) {
-            return getResources().getQuantityString(R.plurals.wifi_saved_access_points_summary,
-                    numSavedNetworks, numSavedNetworks);
+            return StringUtil.getIcuPluralsString(getContext(), numSavedNetworks,
+                    R.string.wifi_saved_access_points_summary);
         } else if (numSavedNetworks == 0) {
-            return getResources().getQuantityString(
-                    R.plurals.wifi_saved_passpoint_access_points_summary,
-                    numSavedSubscriptions, numSavedSubscriptions);
+            return StringUtil.getIcuPluralsString(getContext(), numSavedSubscriptions,
+                    R.string.wifi_saved_passpoint_access_points_summary);
         } else {
             final int numTotalEntries = numSavedNetworks + numSavedSubscriptions;
-            return getResources().getQuantityString(R.plurals.wifi_saved_all_access_points_summary,
-                    numTotalEntries, numTotalEntries);
+            return StringUtil.getIcuPluralsString(getContext(), numTotalEntries,
+                    R.string.wifi_saved_all_access_points_summary);
         }
     }
 
@@ -1402,7 +1419,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        if (!mAirplaneModeEnabler.isAirplaneModeOn()) {
+        if (!mIsGuest && !mAirplaneModeEnabler.isAirplaneModeOn()) {
             MenuItem item = menu.add(0, MENU_FIX_CONNECTIVITY, 0, R.string.fix_connectivity);
             item.setIcon(R.drawable.ic_repair_24dp);
             item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
@@ -1449,6 +1466,11 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     }
 
     private void fixConnectivity() {
+        if (mIsGuest) {
+            Log.e(TAG, "Can't reset network because the user is a guest.");
+            EventLog.writeEvent(0x534e4554, "252995826", UserHandle.myUserId(), "User is a guest");
+            return;
+        }
         mInternetResetHelper.restart();
     }
 

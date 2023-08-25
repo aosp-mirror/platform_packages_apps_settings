@@ -32,7 +32,7 @@ public class SetupFingerprintEnrollIntroduction extends FingerprintEnrollIntrodu
     /**
      * Returns the number of fingerprint enrolled.
      */
-    private static final String EXTRA_FINGERPRINT_ENROLLED_COUNT = "fingerprint_enrolled_count";
+    public static final String EXTRA_FINGERPRINT_ENROLLED_COUNT = "fingerprint_enrolled_count";
 
     private static final String KEY_LOCK_SCREEN_PRESENT = "wasLockScreenPresent";
 

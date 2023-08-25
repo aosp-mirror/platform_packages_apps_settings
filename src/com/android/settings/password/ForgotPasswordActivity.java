@@ -33,6 +33,8 @@ import com.android.settings.R;
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.GlifLayout;
+import com.google.android.setupdesign.util.ContentStyler;
+import com.google.android.setupdesign.util.ThemeHelper;
 
 /**
  * An activity that asks the user to contact their admin to get assistance with forgotten password.
@@ -64,6 +66,11 @@ public class ForgotPasswordActivity extends Activity {
                         .setTheme(R.style.SudGlifButton_Primary)
                         .build()
         );
+
+        if (ThemeHelper.shouldApplyMaterialYouStyle(this)) {
+            ContentStyler.applyBodyPartnerCustomizationStyle(
+                    layout.findViewById(R.id.forgot_password_text));
+        }
 
         layout.setHeaderText(devicePolicyManager.getResources().getString(
                 FORGOT_PASSWORD_TITLE, () -> getString(R.string.forgot_password_title)));

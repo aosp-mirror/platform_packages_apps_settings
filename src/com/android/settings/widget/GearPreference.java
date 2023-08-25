@@ -33,6 +33,11 @@ public class GearPreference extends RestrictedPreference implements View.OnClick
     protected boolean mGearState = true;
     private OnGearClickListener mOnGearClickListener;
 
+    public GearPreference(Context context, AttributeSet attrs,
+            int defStyleAttr, int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+    }
+
     public GearPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
     }

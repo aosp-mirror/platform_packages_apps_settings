@@ -59,18 +59,24 @@ import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.datausage.CycleAdapter.SpinnerInterface;
 import com.android.settings.network.MobileDataEnabledListener;
+import com.android.settings.network.MobileNetworkRepository;
 import com.android.settings.network.ProxySubscriptionManager;
 import com.android.settings.widget.LoadingViewController;
 import com.android.settingslib.AppItem;
+import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
 import com.android.settingslib.net.NetworkCycleChartData;
 import com.android.settingslib.net.NetworkCycleChartDataLoader;
 import com.android.settingslib.net.NetworkStatsSummaryLoader;
+import com.android.settingslib.net.UidDetail;
 import com.android.settingslib.net.UidDetailProvider;
+import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * Panel showing data usage history across various networks, including options
@@ -123,6 +129,8 @@ public class DataUsageList extends DataUsageBaseFragment
     private Preference mUsageAmount;
     private PreferenceGroup mApps;
     private View mHeader;
+    private MobileNetworkRepository mMobileNetworkRepository;
+    private SubscriptionInfoEntity mSubscriptionInfoEntity;
 
     @Override
     public int getMetricsCategory() {
@@ -157,6 +165,7 @@ public class DataUsageList extends DataUsageBaseFragment
         }
 
         processArgument();
+        updateSubscriptionInfoEntity();
         mDataStateListener = new MobileDataEnabledListener(activity, this);
     }
 
@@ -270,7 +279,24 @@ public class DataUsageList extends DataUsageBaseFragment
             mSubId = intent.getIntExtra(Settings.EXTRA_SUB_ID,
                     SubscriptionManager.INVALID_SUBSCRIPTION_ID);
             mTemplate = intent.getParcelableExtra(Settings.EXTRA_NETWORK_TEMPLATE);
+
+            if (mTemplate == null) {
+                Optional<NetworkTemplate> mobileNetworkTemplateFromSim =
+                        DataUsageUtils.getMobileNetworkTemplateFromSubId(getContext(), getIntent());
+                if (mobileNetworkTemplateFromSim.isPresent()) {
+                    mTemplate = mobileNetworkTemplateFromSim.get();
+                }
+            }
         }
+    }
+
+    @VisibleForTesting
+    void updateSubscriptionInfoEntity() {
+        mMobileNetworkRepository = MobileNetworkRepository.getInstance(getContext());
+        ThreadUtils.postOnBackgroundThread(() -> {
+            mSubscriptionInfoEntity = mMobileNetworkRepository.getSubInfoById(
+                    String.valueOf(mSubId));
+        });
     }
 
     /**
@@ -480,7 +506,25 @@ public class DataUsageList extends DataUsageBaseFragment
         }
 
         Collections.sort(items);
+        final List<String> packageNames = Arrays.asList(getContext().getResources().getStringArray(
+                R.array.datausage_hiding_carrier_service_package_names));
+        // When there is no specified SubscriptionInfo, Wi-Fi data usage will be displayed.
+        // In this case, the carrier service package also needs to be hidden.
+        boolean shouldHidePackageName = mSubscriptionInfoEntity != null
+                ? Arrays.stream(getContext().getResources().getIntArray(
+                        R.array.datausage_hiding_carrier_service_carrier_id))
+                .anyMatch(carrierId -> (carrierId == mSubscriptionInfoEntity.carrierId))
+                : true;
+
         for (int i = 0; i < items.size(); i++) {
+            UidDetail detail = mUidDetailProvider.getUidDetail(items.get(i).key, true);
+            // Do not show carrier service package in data usage list if it should be hidden for
+            // the carrier.
+            if (detail != null && shouldHidePackageName && packageNames.contains(
+                    detail.packageName)) {
+                continue;
+            }
+
             final int percentTotal = largest != 0 ? (int) (items.get(i).total * 100 / largest) : 0;
             final AppDataUsagePreference preference = new AppDataUsagePreference(getContext(),
                     items.get(i), percentTotal, mUidDetailProvider);

@@ -20,6 +20,7 @@ import android.annotation.NonNull;
 import android.annotation.Nullable;
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.database.ContentObserver;
@@ -32,7 +33,9 @@ import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings.Secure;
 import android.text.TextUtils;
+import android.util.FeatureFlagUtils;
 import android.view.InputDevice;
+import android.view.inputmethod.InputMethodManager;
 
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
@@ -44,6 +47,7 @@ import com.android.internal.util.Preconditions;
 import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.utils.ThreadUtils;
@@ -59,31 +63,71 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
         implements InputManager.InputDeviceListener,
         KeyboardLayoutDialogFragment.OnSetupKeyboardLayoutsListener {
 
-    private static final String KEYBOARD_ASSISTANCE_CATEGORY = "keyboard_assistance_category";
+    private static final String KEYBOARD_OPTIONS_CATEGORY = "keyboard_options_category";
     private static final String SHOW_VIRTUAL_KEYBOARD_SWITCH = "show_virtual_keyboard_switch";
     private static final String KEYBOARD_SHORTCUTS_HELPER = "keyboard_shortcuts_helper";
+    private static final String MODIFIER_KEYS_SETTINGS = "modifier_keys_settings";
+    private static final String EXTRA_AUTO_SELECTION = "auto_selection";
 
     @NonNull
     private final ArrayList<HardKeyboardDeviceInfo> mLastHardKeyboards = new ArrayList<>();
 
     private InputManager mIm;
+    private InputMethodManager mImm;
+    private InputDeviceIdentifier mAutoInputDeviceIdentifier;
     @NonNull
     private PreferenceCategory mKeyboardAssistanceCategory;
     @NonNull
     private SwitchPreference mShowVirtualKeyboardSwitch;
 
     private Intent mIntentWaitingForResult;
+    private boolean mIsNewKeyboardSettings;
+
+    static final String EXTRA_BT_ADDRESS = "extra_bt_address";
+    private String mBluetoothAddress;
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putParcelable(EXTRA_AUTO_SELECTION, mAutoInputDeviceIdentifier);
+        super.onSaveInstanceState(outState);
+    }
 
     @Override
     public void onCreatePreferences(Bundle bundle, String s) {
         Activity activity = Preconditions.checkNotNull(getActivity());
         addPreferencesFromResource(R.xml.physical_keyboard_settings);
         mIm = Preconditions.checkNotNull(activity.getSystemService(InputManager.class));
+        mImm = Preconditions.checkNotNull(activity.getSystemService(InputMethodManager.class));
         mKeyboardAssistanceCategory = Preconditions.checkNotNull(
-                (PreferenceCategory) findPreference(KEYBOARD_ASSISTANCE_CATEGORY));
+                (PreferenceCategory) findPreference(KEYBOARD_OPTIONS_CATEGORY));
         mShowVirtualKeyboardSwitch = Preconditions.checkNotNull(
                 (SwitchPreference) mKeyboardAssistanceCategory.findPreference(
                         SHOW_VIRTUAL_KEYBOARD_SWITCH));
+
+        mIsNewKeyboardSettings = FeatureFlagUtils.isEnabled(
+                getContext(), FeatureFlagUtils.SETTINGS_NEW_KEYBOARD_UI);
+        boolean isModifierKeySettingsEnabled = FeatureFlagUtils
+                .isEnabled(getContext(), FeatureFlagUtils.SETTINGS_NEW_KEYBOARD_MODIFIER_KEY);
+        if (!isModifierKeySettingsEnabled) {
+            mKeyboardAssistanceCategory.removePreference(findPreference(MODIFIER_KEYS_SETTINGS));
+        }
+        InputDeviceIdentifier inputDeviceIdentifier = activity.getIntent().getParcelableExtra(
+                KeyboardLayoutPickerFragment.EXTRA_INPUT_DEVICE_IDENTIFIER);
+        // TODO (b/271391879): The EXTRA_INTENT_FROM is used for the future metrics.
+        if (inputDeviceIdentifier != null) {
+            mAutoInputDeviceIdentifier = inputDeviceIdentifier;
+        }
+        // Don't repeat the autoselection.
+        if (isAutoSelection(bundle, inputDeviceIdentifier)) {
+            showEnabledLocalesKeyboardLayoutList(inputDeviceIdentifier);
+        }
+    }
+
+    private static boolean isAutoSelection(Bundle bundle, InputDeviceIdentifier identifier) {
+        if (bundle != null && bundle.getParcelable(EXTRA_AUTO_SELECTION) != null) {
+            return false;
+        }
+        return identifier != null;
     }
 
     @Override
@@ -140,6 +184,10 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
         final Context context = getContext();
         ThreadUtils.postOnBackgroundThread(() -> {
             final List<HardKeyboardDeviceInfo> newHardKeyboards = getHardKeyboards(context);
+            if (newHardKeyboards.isEmpty()) {
+                getActivity().finish();
+                return;
+            }
             ThreadUtils.postOnMainThread(() -> updateHardKeyboards(newHardKeyboards));
         });
     }
@@ -166,14 +214,37 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
             // TODO(yukawa): Consider using com.android.settings.widget.GearPreference
             final Preference pref = new Preference(getPrefContext());
             pref.setTitle(hardKeyboardDeviceInfo.mDeviceName);
-            pref.setSummary(hardKeyboardDeviceInfo.mLayoutLabel);
-            pref.setOnPreferenceClickListener(preference -> {
-                showKeyboardLayoutDialog(hardKeyboardDeviceInfo.mDeviceIdentifier);
-                return true;
-            });
+            if (mIsNewKeyboardSettings) {
+                List<String> suitableImes = new ArrayList<>();
+                suitableImes.addAll(
+                        NewKeyboardSettingsUtils.getSuitableImeLabels(
+                                getContext(), mImm, UserHandle.myUserId()));
+                if (!suitableImes.isEmpty()) {
+                    String summary = suitableImes.get(0);
+                    StringBuilder result = new StringBuilder(summary);
+                    for (int i = 1; i < suitableImes.size(); i++) {
+                        result.append(", ").append(suitableImes.get(i));
+                    }
+                    pref.setSummary(result.toString());
+                } else {
+                    pref.setSummary(hardKeyboardDeviceInfo.mLayoutLabel);
+                }
+                pref.setOnPreferenceClickListener(
+                        preference -> {
+                            showEnabledLocalesKeyboardLayoutList(
+                                    hardKeyboardDeviceInfo.mDeviceIdentifier);
+                            return true;
+                        });
+            } else {
+                pref.setSummary(hardKeyboardDeviceInfo.mLayoutLabel);
+                pref.setOnPreferenceClickListener(
+                        preference -> {
+                            showKeyboardLayoutDialog(hardKeyboardDeviceInfo.mDeviceIdentifier);
+                            return true;
+                        });
+            }
             category.addPreference(pref);
         }
-
         mKeyboardAssistanceCategory.setOrder(1);
         preferenceScreen.addPreference(mKeyboardAssistanceCategory);
         updateShowVirtualKeyboardSwitch();
@@ -184,6 +255,17 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
                 inputDeviceIdentifier);
         fragment.setTargetFragment(this, 0);
         fragment.show(getActivity().getSupportFragmentManager(), "keyboardLayout");
+    }
+
+    private void showEnabledLocalesKeyboardLayoutList(InputDeviceIdentifier inputDeviceIdentifier) {
+        Bundle arguments = new Bundle();
+        arguments.putParcelable(NewKeyboardSettingsUtils.EXTRA_INPUT_DEVICE_IDENTIFIER,
+                inputDeviceIdentifier);
+        new SubSettingLauncher(getContext())
+                .setSourceMetricsCategory(getMetricsCategory())
+                .setDestination(NewKeyboardLayoutEnabledLocalesFragment.class.getName())
+                .setArguments(arguments)
+                .launch();
     }
 
     private void registerShowVirtualKeyboardSettingsObserver() {
@@ -211,8 +293,10 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
 
     private final OnPreferenceChangeListener mShowVirtualKeyboardSwitchPreferenceChangeListener =
             (preference, newValue) -> {
-                Secure.putInt(getContentResolver(), Secure.SHOW_IME_WITH_HARD_KEYBOARD,
-                        ((Boolean) newValue) ? 1 : 0);
+                final ContentResolver cr = getContentResolver();
+                Secure.putInt(cr, Secure.SHOW_IME_WITH_HARD_KEYBOARD, ((Boolean) newValue) ? 1 : 0);
+                cr.notifyChange(Secure.getUriFor(Secure.SHOW_IME_WITH_HARD_KEYBOARD),
+                        null /* observer */, ContentResolver.NOTIFY_NO_DELAY);
                 return true;
             };
 
@@ -274,7 +358,10 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
                 continue;
             }
             keyboards.add(new HardKeyboardDeviceInfo(
-                    device.getName(), device.getIdentifier(), getLayoutLabel(device, context, im)));
+                    device.getName(),
+                    device.getIdentifier(),
+                    getLayoutLabel(device, context, im),
+                    device.getBluetoothAddress()));
         }
 
         // We intentionally don't reuse Comparator because Collator may not be thread-safe.
@@ -301,14 +388,18 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
         public final InputDeviceIdentifier mDeviceIdentifier;
         @NonNull
         public final String mLayoutLabel;
+        @Nullable
+        public final String mBluetoothAddress;
 
         public HardKeyboardDeviceInfo(
                 @Nullable String deviceName,
                 @NonNull InputDeviceIdentifier deviceIdentifier,
-                @NonNull String layoutLabel) {
+                @NonNull String layoutLabel,
+                @Nullable String bluetoothAddress) {
             mDeviceName = TextUtils.emptyIfNull(deviceName);
             mDeviceIdentifier = deviceIdentifier;
             mLayoutLabel = layoutLabel;
+            mBluetoothAddress = bluetoothAddress;
         }
 
         @Override
@@ -326,6 +417,9 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
                 return false;
             }
             if (!TextUtils.equals(mLayoutLabel, that.mLayoutLabel)) {
+                return false;
+            }
+            if (!TextUtils.equals(mBluetoothAddress, that.mBluetoothAddress)) {
                 return false;
             }
 

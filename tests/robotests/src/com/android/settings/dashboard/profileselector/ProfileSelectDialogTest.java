@@ -53,6 +53,7 @@ public class ProfileSelectDialogTest {
 
     private static final UserHandle NORMAL_USER = new UserHandle(1111);
     private static final UserHandle REMOVED_USER = new UserHandle(2222);
+    private static final UserHandle CLONE_USER = new UserHandle(3333);
 
     @Spy
     private Context mContext = ApplicationProvider.getApplicationContext();
@@ -99,6 +100,22 @@ public class ProfileSelectDialogTest {
         assertThat(tile.userHandle.get(0).getIdentifier()).isEqualTo(NORMAL_USER.getIdentifier());
         verify(mUserManager, times(1)).getUserInfo(NORMAL_USER.getIdentifier());
         verify(mUserManager, times(2)).getUserInfo(REMOVED_USER.getIdentifier());
+    }
+
+    @Test
+    public void updateUserHandlesIfNeeded_removesCloneProfile() {
+        final UserInfo userInfo = new UserInfo(CLONE_USER.getIdentifier(), "clone_user", null,
+                UserInfo.FLAG_PROFILE, UserManager.USER_TYPE_PROFILE_CLONE);
+        when(mUserManager.getUserInfo(CLONE_USER.getIdentifier())).thenReturn(userInfo);
+        final Tile tile = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
+        tile.userHandle.add(CLONE_USER);
+        tile.userHandle.add(NORMAL_USER);
+
+        ProfileSelectDialog.updateUserHandlesIfNeeded(mContext, tile);
+
+        assertThat(tile.userHandle).hasSize(1);
+        assertThat(tile.userHandle.get(0).getIdentifier()).isEqualTo(NORMAL_USER.getIdentifier());
+        verify(mUserManager, times(1)).getUserInfo(CLONE_USER.getIdentifier());
     }
 
     @Test

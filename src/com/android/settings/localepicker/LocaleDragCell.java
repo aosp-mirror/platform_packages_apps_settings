@@ -33,6 +33,7 @@ class LocaleDragCell extends RelativeLayout {
     private CheckBox mCheckbox;
     private TextView mMiniLabel;
     private TextView mLocalized;
+    private TextView mCurrentDefault;
     private ImageView mDragHandle;
 
     public LocaleDragCell(Context context, AttributeSet attrs) {
@@ -44,6 +45,7 @@ class LocaleDragCell extends RelativeLayout {
         super.onFinishInflate();
         mLabel = (TextView) findViewById(R.id.label);
         mLocalized = (TextView) findViewById(R.id.l10nWarn);
+        mCurrentDefault = (TextView) findViewById(R.id.default_locale);
         mMiniLabel = (TextView) findViewById(R.id.miniLabel);
         mCheckbox = (CheckBox) findViewById(R.id.checkbox);
         mDragHandle = (ImageView) findViewById(R.id.dragHandle);
@@ -61,13 +63,7 @@ class LocaleDragCell extends RelativeLayout {
 
     public void setShowCheckbox(boolean showCheckbox) {
         // "Opposite" visibility for label / checkbox
-        if (showCheckbox) {
-            mCheckbox.setVisibility(VISIBLE);
-            mLabel.setVisibility(INVISIBLE);
-        } else {
-            mCheckbox.setVisibility(INVISIBLE);
-            mLabel.setVisibility(VISIBLE);
-        }
+        mCheckbox.setVisibility(showCheckbox ? VISIBLE : GONE);
         invalidate();
         requestLayout();
     }
@@ -89,9 +85,7 @@ class LocaleDragCell extends RelativeLayout {
 
     public void setLabelAndDescription(String labelText, String description) {
         mLabel.setText(labelText);
-        mCheckbox.setText(labelText);
         mLabel.setContentDescription(description);
-        mCheckbox.setContentDescription(description);
         invalidate();
     }
 
@@ -100,8 +94,20 @@ class LocaleDragCell extends RelativeLayout {
         invalidate();
     }
 
+    /**
+     * Indicate current locale is system default.
+     */
+    public void setCurrentDefault(boolean isCurrentDefault) {
+        mCurrentDefault.setVisibility(isCurrentDefault ? VISIBLE : GONE);
+        invalidate();
+    }
+
     public ImageView getDragHandle() {
         return mDragHandle;
+    }
+
+    public TextView getLabelView() {
+        return mLabel;
     }
 
     public CheckBox getCheckbox() {

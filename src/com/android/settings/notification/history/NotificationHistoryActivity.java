@@ -60,6 +60,7 @@ import com.android.internal.widget.NotificationExpandButton;
 import com.android.settings.R;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settingslib.collapsingtoolbar.CollapsingToolbarBaseActivity;
+import com.android.settingslib.utils.StringUtil;
 import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.widget.MainSwitchBar;
 import com.android.settingslib.widget.OnMainSwitchChangeListener;
@@ -77,6 +78,7 @@ public class NotificationHistoryActivity extends CollapsingToolbarBaseActivity {
     // R.integer.config_notificationServiceArchiveSize, which is the Number of notifications kept
     // in the notification service historical archive
     private static final int MAX_RECENT_DISMISS_ITEM_COUNT = 50;
+    private static final int HISTORY_HOURS = 24;
 
     private ViewGroup mHistoryOn;
     private ViewGroup mHistoryOff;
@@ -203,16 +205,15 @@ public class NotificationHistoryActivity extends CollapsingToolbarBaseActivity {
             icon.setImageDrawable(nhp.icon);
 
             TextView count = viewForPackage.findViewById(R.id.count);
-            count.setText(getResources().getQuantityString(R.plurals.notification_history_count,
-                    nhp.notifications.size(), nhp.notifications.size()));
+            count.setText(StringUtil.getIcuPluralsString(this, nhp.notifications.size(),
+                    R.string.notification_history_count));
 
             final NotificationHistoryRecyclerView rv =
                     viewForPackage.findViewById(R.id.notification_list);
             rv.setAdapter(new NotificationHistoryAdapter(mNm, rv,
                     newCount -> {
-                        count.setText(getResources().getQuantityString(
-                                R.plurals.notification_history_count,
-                                newCount, newCount));
+                        count.setText(StringUtil.getIcuPluralsString(this, newCount,
+                                R.string.notification_history_count));
                         if (newCount == 0) {
                             viewForPackage.setVisibility(View.GONE);
                         }
@@ -243,6 +244,8 @@ public class NotificationHistoryActivity extends CollapsingToolbarBaseActivity {
         mHistoryOn = findViewById(R.id.history_on);
         mHistoryEmpty = findViewById(R.id.history_on_empty);
         mSwitchBar = findViewById(R.id.main_switch_bar);
+        ((TextView) findViewById(R.id.today_header)).setText(
+                getString(R.string.notification_history_today, HISTORY_HOURS));
 
         ActionBar actionBar = getActionBar();
         if (actionBar != null) {

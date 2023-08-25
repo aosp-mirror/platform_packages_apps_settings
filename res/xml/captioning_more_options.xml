@@ -23,14 +23,14 @@
     <com.android.settings.accessibility.LocalePreference
         android:key="captioning_locale"
         android:summary="%s"
-        android:title="@string/captioning_locale" />
+        android:title="@string/captioning_locale"
+        settings:controller="com.android.settings.accessibility.CaptioningLocalePreferenceController"/>
 
     <com.android.settings.accessibility.AccessibilityFooterPreference
         android:key="captioning_more_options_footer"
-        android:title="@string/accessibility_caption_preference_summary"
-        android:persistent="false"
+        android:title="@string/accessibility_captioning_preference_summary"
         android:selectable="false"
         settings:searchable="false"
-        settings:controller="com.android.settings.accessibility.CaptionFooterPreferenceController"/>
+        settings:controller="com.android.settings.accessibility.CaptioningFooterPreferenceController"/>
 
 </PreferenceScreen>

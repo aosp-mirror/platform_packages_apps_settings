@@ -83,7 +83,7 @@ public class HighlightablePreferenceGroupAdapterTest {
                 false /* highlighted*/));
         when(mAdapter.getItem(anyInt())).thenReturn(mPreference);
         mViewHolder = PreferenceViewHolder.createInstanceForTests(
-                View.inflate(mContext, R.layout.app_preference_item, null));
+                View.inflate(mContext, R.layout.preference, null));
     }
 
     @Test

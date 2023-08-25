@@ -146,21 +146,6 @@ public final class UserDialogs {
     }
 
     /**
-     * Creates a dialog to confirm that the user is ok to enable phone calls (no SMS).
-     *
-     * @param onConfirmListener Callback object for positive action
-     */
-    public static Dialog createEnablePhoneCallsDialog(Context context,
-            DialogInterface.OnClickListener onConfirmListener) {
-        return new AlertDialog.Builder(context)
-                .setTitle(R.string.user_enable_calling_confirm_title)
-                .setMessage(R.string.user_enable_calling_confirm_message)
-                .setPositiveButton(R.string.okay, onConfirmListener)
-                .setNegativeButton(android.R.string.cancel, null)
-                .create();
-    }
-
-    /**
      * Creates a dialog to confirm that the user is ok to start setting up a new user.
      *
      * @param onConfirmListener Callback object for positive action

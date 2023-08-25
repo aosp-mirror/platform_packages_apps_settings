@@ -19,11 +19,13 @@ package com.android.settings.biometrics.fingerprint;
 import android.content.Context;
 import android.hardware.biometrics.BiometricAuthenticator;
 import android.hardware.fingerprint.FingerprintManager;
+import android.os.UserManager;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.ParentalControlsUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.utils.StringUtil;
 
 /**
  * Utilities for fingerprint details shared between Security Settings and Safety Center.
@@ -58,6 +60,17 @@ public class FingerprintStatusUtils {
         return ParentalControlsUtils.parentConsentRequired(
                 mContext, BiometricAuthenticator.TYPE_FINGERPRINT);
     }
+    /**
+     * Returns the title of fingerprint settings entity.
+     */
+    public String getTitle() {
+        UserManager userManager = mContext.getSystemService(UserManager.class);
+        if (userManager != null && userManager.isProfile()) {
+            return mContext.getString(R.string.security_settings_work_fingerprint_preference_title);
+        } else {
+            return mContext.getString(R.string.security_settings_fingerprint_preference_title);
+        }
+    }
 
     /**
      * Returns the summary of fingerprint settings entity.
@@ -65,9 +78,8 @@ public class FingerprintStatusUtils {
     public String getSummary() {
         if (hasEnrolled()) {
             final int numEnrolled = mFingerprintManager.getEnrolledFingerprints(mUserId).size();
-            return mContext.getResources().getQuantityString(
-                    R.plurals.security_settings_fingerprint_preference_summary,
-                    numEnrolled, numEnrolled);
+            return StringUtil.getIcuPluralsString(mContext, numEnrolled,
+                    R.string.security_settings_fingerprint_preference_summary);
         } else {
             return mContext.getString(
                     R.string.security_settings_fingerprint_preference_summary_none);
