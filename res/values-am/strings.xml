@@ -199,6 +199,8 @@
     <string name="terms_of_address_not_specified" msgid="4439257779351251973">"አልተገለጸም"</string>
     <string name="terms_of_address_feminine" msgid="1743479869695539283">"እንስት"</string>
     <string name="terms_of_address_masculine" msgid="983106046135098856">"ተባዕታይ"</string>
+    <!-- no translation found for terms_of_address_neutral (5475414185543112478) -->
+    <skip />
     <string name="dlg_remove_locales_title" msgid="3170501604483612114">"{count,plural, =1{የተመረጠው ቋንቋ ይወገድ?}one{የተመረጠው ቋንቋ ይወገድ?}other{የተመረጡ ቋንቋዎች ይወገዱ?}}"</string>
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"ጽሁፍ በሌላ ቋንቋ ይታያል።"</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"ሁሉንም ቋንቋዎች ማስወገድ አይቻልም"</string>
@@ -388,34 +390,31 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"መልክ እና <xliff:g id="WATCH">%s</xliff:g> ታክለዋል"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"መልክ፣ የጣት አሻራ እና <xliff:g id="WATCH">%s</xliff:g> ታክለዋል"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"መልክ፣ የጣት አሻራዎች እና <xliff:g id="WATCH">%s</xliff:g> ታክለዋል"</string>
-    <!-- no translation found for security_settings_remoteauth_enroll_introduction_title (2151004795778999671) -->
-    <skip />
-    <!-- no translation found for security_settings_remoteauth_enroll_introduction_message (8737276885766036074) -->
-    <skip />
-    <!-- no translation found for security_settings_remoteauth_enroll_introduction_disagree (7639258097401796028) -->
-    <skip />
-    <!-- no translation found for security_settings_remoteauth_enroll_introduction_agree (5271119227172049339) -->
-    <skip />
-    <!-- no translation found for security_settings_remoteauth_enroll_introduction_more (1644105894631257595) -->
-    <skip />
-    <!-- no translation found for security_settings_remoteauth_enroll_introduction_how_title (6604152528267830349) -->
-    <skip />
-    <!-- no translation found for security_settings_remoteauth_enroll_introduction_info_lock_open (8570511335628725116) -->
-    <skip />
-    <!-- no translation found for security_settings_remoteauth_enroll_introduction_info_notifications (4298855831154039694) -->
-    <skip />
-    <!-- no translation found for security_settings_remoteauth_enroll_introduction_youre_in_control_title (7974976673323638524) -->
-    <skip />
-    <!-- no translation found for security_settings_remoteauth_enroll_introduction_info_remove_watch (1888318677088986801) -->
-    <skip />
-    <!-- no translation found for security_settings_remoteauth_enroll_introduction_animation_tap_notification (1597397399097952974) -->
-    <skip />
-    <!-- no translation found for security_settings_remoteauth_enroll_introduction_animation_swipe_up (2129230804324634653) -->
-    <skip />
-    <!-- no translation found for security_settings_remoteauth_enroll_finish_title (3807372930755413112) -->
-    <skip />
+    <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"የእጅ ሰዓትዎን ያዋቅሩ"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_message" msgid="8737276885766036074">"በእጅ ሰዓት መክፈቻ ለምሳሌ ጣቶችዎ እርጥብ ሲሆኑ ወይንም ፊትዎ ሳይለይ ሲቀር ይህን ስልክ ለመክፈት ሌላኛው አመቺ መንገድ ነው።\n\nየሚከተሉትን ሲያደርጉ ይህን ስልክ ለመክፈት የእጅ ሰዓትዎን መጠቀም ይችላሉ፦"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_disagree" msgid="7639258097401796028">"አሁን አይደለም"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_agree" msgid="5271119227172049339">"ቀጥል"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_more" msgid="1644105894631257595">"ተጨማሪ"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_how_title" msgid="6604152528267830349">"እንዴት እንደሚሠራ"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_info_lock_open" msgid="8570511335628725116">"የእጅ ሰዓትዎ የተከፈተ፣ በእጅዎ ላይ ያለ እና ከስልኩ በቅርብ ርቀት ላይ መሆን አለበት። በእጅዎ ላይ በሚሆንበት ጊዜ የእጅ ሰዓትዎን በድጋሚ መክፈት አያስፈልግዎትም።"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_info_notifications" msgid="4298855831154039694">"ይህ ስልክ ሲከፈት በእጅ ሰዓትዎ ላይ ማሳወቂያ ይደርስዎታል። የተከፈተው ሳይፈልጉት ከነበረ በድጋሚ ስልኩን ለመቆለፍ ማሳወቂያውን መታ ያድርጉ።"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_youre_in_control_title" msgid="7974976673323638524">"እርስዎ ነዎት የሚቆጣጠሩት"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_info_remove_watch" msgid="1888318677088986801">"በማንኛውም ጊዜ በቅንብሮች ውስጥ የእጅ ሰዓትዎን ከእጅ ሰዓት መክፈቻ ማስወገድ ይችላሉ"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_animation_tap_notification" msgid="1597397399097952974">"ማሳወቂያን መታ ያድርጉ"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_animation_swipe_up" msgid="2129230804324634653">"ማያ ገጽ ቁልፉ ላይ ወደ ላይ ያንሸራትቱ"</string>
+    <string name="security_settings_remoteauth_enroll_enrolling_title" msgid="313016997943607675">"የእጅ ሰዓትዎን ይምረጡ"</string>
+    <string name="security_settings_remoteauth_enroll_enrolling_list_heading" msgid="8227585438932911013">"የሚገኙ የእጅ ሰዓቶች"</string>
+    <string name="security_settings_remoteauth_enroll_enrolling_disagree" msgid="1670201454188049863">"ይቅር"</string>
+    <string name="security_settings_remoteauth_enroll_enrolling_agree" msgid="7048336252635730908">"አረጋግጥ"</string>
+    <string name="security_settings_remoteauth_enroll_finish_title" msgid="3807372930755413112">"ጨርሰዋል!"</string>
     <string name="security_settings_remoteauth_enroll_finish_description" msgid="4876209907275244653">"አሁን የማያ ገጽ ቁልፉ ላይ ወደ ላይ ሲያንሸራትቱ ወይም ማሳወቂያን መታ ሲያደርጉ ይህን ስልክ ለመክፈት የእጅ ሰዓትዎን መጠቀም ይችላሉ"</string>
     <string name="security_settings_remoteauth_enroll_finish_btn_next" msgid="8072138423143889592">"ተከናውኗል"</string>
+    <string name="security_settings_remoteauth_settings_title" msgid="1564912618737165129">"በእጅ ሰዓት መክፈቻ"</string>
+    <string name="security_settings_remoteauth_settings_description" msgid="2758239650119457964">"የማያ ገጽ ቁልፉ ላይ ወደ ላይ ሲያንሸራትቱ ወይም ማሳወቂያን መታ ሲያደርጉ ይህን ስልክ ለመክፈት የእጅ ሰዓትዎን መጠቀም ይችላሉ"</string>
+    <string name="security_settings_remoteauth_settings_info_footer" msgid="795894033901478120">"በእጅ ሰዓት መክፈቻን ለመጠቀም የእጅ ሰዓትዎ መከፈት፣ በአንጓዎ ላይ መሆን፣ በቅርብ ርቀት ላይ መኖር እና ከዚህ ስልክ ጋር መገናኘት አለበት። ግንኙነቱ ከተቋረጠ በእጅ ሰዓት መክፈቻን መጠቀም ከመቻልዎ በፊት ስልኩን መክፈት ይኖርብዎታል።\n\nያስታውሱ፦\nበአንድ ጊዜ ማዋቀር የሚችሉት አንድ የእጅ ሰዓት ብቻ ነው። ሌላ የእጅ ሰዓት ለማከል በመጀመሪያ የአሁኑን ያስወግዱ።"</string>
+    <string name="security_settings_remoteauth_settings_learn_more" msgid="5653556124819260050">"ስለ በእጅ ሰዓት መክፈቻ የበለጠ ይወቁ"</string>
+    <string name="security_settings_remoteauth_settings_register_new_authenticator" msgid="9191331738306527887">"የእጅ ሰዓትን አክል"</string>
+    <string name="security_settings_remoteauth_settings_remove_device" msgid="2436226120578851282">"የእጅ ሰዓትን አስወግድ"</string>
     <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"የጣት አሻራ እና በመልክ መክፈት"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"በመልክ እና በጣት አሻራ መክፈቻ ለሥራ"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"ውቅረት ያስፈልጋል"</string>
@@ -679,10 +678,8 @@
     <string name="bluetooth_enter_passkey_other_device" msgid="8270426446247344709">"ይህን የይለፍ ቁልፍ በሌላ መሣሪያ ላይማስገባት ሊያስፈልግህ ይችላል።"</string>
     <string name="bluetooth_paring_group_msg" msgid="4609515924670823316">"ከተባባሪ ስብስቡ ጋር ለመጣመር ያረጋግጡ"</string>
     <string name="bluetooth_pairing_shares_phonebook" msgid="4329325125260724843">"የእርስዎን የእውቂያዎች እና የጥሪ ታሪክ መዳረሻ ይፍቀዱ"</string>
-    <!-- no translation found for bluetooth_pairing_phonebook_toggle_text (2474015367387690034) -->
-    <skip />
-    <!-- no translation found for bluetooth_pairing_phonebook_toggle_details (1367197978487212581) -->
-    <skip />
+    <string name="bluetooth_pairing_phonebook_toggle_text" msgid="2474015367387690034">"እንዲሁም ለዕውቂያዎች እና ለጥሪ ታሪክ መዳረሻ ይፍቀዱ"</string>
+    <string name="bluetooth_pairing_phonebook_toggle_details" msgid="1367197978487212581">"መረጃው ለደውል ማስታወቂያዎች እና ለሌሎችም ጥቅም ላይ ይውላል"</string>
     <string name="bluetooth_error_title" msgid="2284738188253690278"></string>
     <string name="bluetooth_connecting_error_message" msgid="3941893154784152112">"ወደ <xliff:g id="DEVICE_NAME">%1$s</xliff:g>ማገናኘት አልተቻለም።"</string>
     <string name="bluetooth_preference_found_media_devices" msgid="830061195998352840">"የሚገኙ መሣሪያዎች"</string>
@@ -955,6 +952,12 @@
     <string name="wifi_hotspot_speed_footer" msgid="8846939503916795002">"ተመራጭ ሞገድዎ ካልተገኘ መገናኛ ነጥብዎ ሌላ ሊጠቀም ይችላል። ሞገዱን ከለወጡት የመገናኛ ነጥብ የደህንነት ቅንብሮች ሊለወጡ ይችላሉ።"</string>
     <string name="wifi_hotspot_security_summary_unavailable" msgid="117582979310345853">"በ6 ጊኸ አይገኝም"</string>
     <string name="wifi_hotspot_security_footer" msgid="4608329688744949796">"የመገናኛ ነጥቡን ሞገድ ከለወጡ የደህነነት ቅንብሮች ሊለወጡ ይችላሉ"</string>
+    <!-- no translation found for wifi_hotspot_instant_title (7052526695338853703) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_instant_summary_on (3142749148673081288) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_instant_summary_off (8594065628453795615) -->
+    <skip />
     <string name="wifi_tether_starting" msgid="8879874184033857814">"የመገናኛ ነጥብን በማብራት ላይ…"</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"የመገናኛ ነጥብን በማጥፋት ላይ…"</string>
     <string name="wifi_tether_carrier_unsupport_dialog_title" msgid="3089432578433978073">"እንደ ሞደም መሰካት አይገኝም"</string>
@@ -1858,7 +1861,7 @@
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"ስለማጉላት"</string>
     <string name="accessibility_screen_magnification_footer_learn_more_content_description" msgid="924848332575978463">"ስለማጉላት የበለጠ ይወቁ"</string>
     <string name="accessibility_magnification_mode_title" msgid="8446475127807168063">"የማጉላት ዓይነት"</string>
-    <string name="accessibility_magnification_area_settings_message" msgid="8498648925928109462">"የእርስዎን ሙሉ ገፅ እይታ፣ አንድ የተወሰነ ቦታ ያጉሉ ወይም በሁለቱም አማራጮች መካከል ይቀያይሩ"</string>
+    <string name="accessibility_magnification_area_settings_message" msgid="8498648925928109462">"የእርስዎን ሙሉ ገፅ ዕይታ፣ አንድ የተወሰነ ቦታ ያጉሉ ወይም በሁለቱም አማራጮች መካከል ይቀያይሩ"</string>
     <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"ሙሉ ማያ ገፅ"</string>
     <string name="accessibility_magnification_area_settings_window_screen_summary" msgid="9191632962955877019">"ከፊል ማያ ገፅ"</string>
     <string name="accessibility_magnification_area_settings_all_summary" msgid="8107511976748799455">"በሙሉ እና በከፊል ማያ ገፅ መካከል ይቀያይሩ"</string>
@@ -3679,10 +3682,10 @@
     <string name="background_check_pref" msgid="5304564658578987535">"የዳራ ፍተሻ"</string>
     <string name="assist_access_context_title" msgid="5201495523514096201">"ከማያ ገፅ ላይ ጽሁፍ ተጠቀም"</string>
     <string name="assist_access_context_summary" msgid="6951814413185646275">"ረዳት መተግበሪያው የማያ ገጹን ይዘቶች እንደ ጽሁፍ እንዲደርሳባቸው ይፍቀዱ"</string>
-    <string name="assist_access_screenshot_title" msgid="4395902231753643633">"ቅጽበታዊ ገፅ እይታ ይጠቀሙ"</string>
+    <string name="assist_access_screenshot_title" msgid="4395902231753643633">"ቅጽበታዊ ገፅ ዕይታ ይጠቀሙ"</string>
     <string name="assist_access_screenshot_summary" msgid="5276593070956201863">"ረዳት መተግበሪያው የማያ ገጹን ምስል እንዲደርስበት ይፍቀዱ"</string>
     <string name="assist_flash_title" msgid="5449512572885550108">"ማያ ገጽን አብራ"</string>
-    <string name="assist_flash_summary" msgid="3032289860177784594">"የረዳት መተግበሪያ ጽሁፍ ከማያ ገፅ ወይም ቅጽበታዊ ገፅ እይታ ሲደርስ የማያ ገፅ ጠርዞችን አብራ"</string>
+    <string name="assist_flash_summary" msgid="3032289860177784594">"የረዳት መተግበሪያ ጽሁፍ ከማያ ገፅ ወይም ቅጽበታዊ ገፅ ዕይታ ሲደርስ የማያ ገፅ ጠርዞችን አብራ"</string>
     <string name="assist_footer" msgid="8248015363806299068">"ረዳት መተግበሪያዎች በሚያዩት ማያ ገፅ ላይ ባለ መረጃ ላይ ተመስርቶ ሊያግዘዎት ይችላል። አንዳንድ መተግበሪያዎች የተዋሃደ እርዳታ ለእርስዎ ለመስጠት ሁለቱንም ማስጀመሪያ እና የድምጽ ግቤት አገልግሎቶችን ይደግፋሉ።"</string>
     <string name="average_memory_use" msgid="717313706368825388">"አማካይ የማህደረ ትውስታ አጠቃቀም"</string>
     <string name="maximum_memory_use" msgid="2171779724001152933">"ከፍተኛ ማህደረ ትውስታ አጠቃቀም"</string>
@@ -3748,7 +3751,7 @@
     <string name="screen_zoom_title" msgid="6928045302654960559">"የማሳያ መጠን"</string>
     <string name="screen_zoom_short_summary" msgid="756254364808639194">"ሁሉንም ነገር ያተልቁ ወይም ያሳንሱ"</string>
     <string name="screen_zoom_keywords" msgid="5964023524422386592">"የማሳያ ትፍገት፣ ማያ ገፅ ማጉያ፣ ልኬት፣ ማመጣጠን"</string>
-    <string name="screen_zoom_preview_title" msgid="5288355628444562735">"ቅድመ-እይታ"</string>
+    <string name="screen_zoom_preview_title" msgid="5288355628444562735">"ቅድመ-ዕይታ"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="2628662648068995971">"አነስ አድርግ"</string>
     <string name="screen_zoom_make_larger_desc" msgid="7268794713428853139">"ተለቅ አድርግ"</string>
     <string name="disconnected" msgid="3469373726996129247">"አልተያያዘም"</string>
@@ -3894,7 +3897,7 @@
     <string name="notification_log_details_actions" msgid="2269605330470905236">"እርምጃዎች"</string>
     <string name="notification_log_details_title" msgid="8365761340979164197">"አርዕስት"</string>
     <string name="notification_log_details_remoteinput" msgid="264204203044885921">"የርቀት ግቤቶች"</string>
-    <string name="notification_log_details_content_view" msgid="7193602999512479112">"ብጁ እይታ"</string>
+    <string name="notification_log_details_content_view" msgid="7193602999512479112">"ብጁ ዕይታ"</string>
     <string name="notification_log_details_extras" msgid="8602887256103970989">"ተጨማሪ ነገሮች"</string>
     <string name="notification_log_details_icon" msgid="6728710746466389675">"አዶ"</string>
     <string name="notification_log_details_parcel" msgid="2098454650154230531">"የእሽግ መጠን"</string>
@@ -4127,7 +4130,7 @@
     <string name="autofill_app" msgid="7595308061826307921">"የራስ-ሙላ አገልግሎት"</string>
     <string name="default_autofill_app" msgid="372234803718251606">"ነባሪ የራስ-ሙላ አገልግሎት"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"የይለፍ ቃላት"</string>
-    <string name="credman_chosen_app_title" msgid="4547405511458518096">"የይለፍ ቃላት፣ የይለፍ ቁልፎች እና የውሂብ አገልግሎቶች"</string>
+    <string name="credman_chosen_app_title" msgid="872524130208251505">"የይለፍ ቃላት፣ የይለፍ ቁልፎች እና የውሂብ አገልግሎቶች"</string>
     <string name="credman_credentials" msgid="4931371941253324143">"ተጨማሪ አቅራቢዎች"</string>
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# የይለፍ ቃል}one{# የይለፍ ቃል}other{# የይለፍ ቃሎች}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"ራስ-ሰር፣ ሙላ፣ ራስ-ሙላ፣ የይለፍ ቃል"</string>
@@ -4135,13 +4138,13 @@
     <string name="credman_autofill_keywords" msgid="701180623776848914">"ራስ ሰር፣ ሙላ፣ ውሂብ፣ የይለፍ ቁልፍ፣ የይለፍ ቃል"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;ይህን መተግበሪያ የሚያምኑት መሆንዎን ያረጋግጡ&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google ራስ-ሙላ&gt;%1$s&lt;/xliff:g&gt; ምን በራስ መሞላት እንደሚችል ለማወቅ በማያ ገጽዎ ላይ ያለውን ነገር ይጠቀማል።"</string>
     <string name="credman_autofill_confirmation_message" msgid="4951846866327737417">"&lt;b&gt;Use &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; ምን በራስ መሞላት እንደሚችል ለማወቅ በማያ ገጽዎ ላይ ያለውን ይጠቀማል። ከእንግዲህ አዲስ የይለፍ ቃላት፣ የይለፍ ቁልፎች እና ሌላ መረጃ እዚህ ይቀመጣሉ።"</string>
-    <string name="credman_picker_title" msgid="2642776965060619988">"የይለፍ ቃላት፣ የይለፍ ቁልፎች እና የውሂብ አገልግሎቶች"</string>
+    <string name="credman_picker_title" msgid="8191267620665129205">"የይለፍ ቃላት፣ የይለፍ ቁልፎች እና የውሂብ አገልግሎቶች"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"%1$s ይጥፋ?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;ይህ አገልግሎት ይጥፋ?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; እንደ ይለፍ ቃላት፣ ይለፍ ቁልፎች፣ የመክፈያ ዘዴዎች እና ሌሎች መረጃዎች ያለ የተቀመጠ መረጃ በመለያ በሚገቡበት ጊዜ አይሞሉም። የእርስዎን የተቀመጠ መረጃ ለመጠቀም የይለፍ ቃል፣ የይለፍ ቁልፍ ወይም የውሂብ አገልግሎት ይምረጡ።"</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"%1$s ጥቅም ላይ ይዋል?"</string>
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"%1$s ምን በራስ-ሰር እንደሚሞላ ለመወሰን በማያ ገጽዎ ላይ ያለውን ይጠቀማል።"</string>
-    <string name="credman_error_message_title" msgid="4741457523969373713">"የይለፍ ቃላት፣ የይለፍ ቁልፎች እና የውሂብ አገልግሎቶች ገደብ"</string>
-    <string name="credman_error_message" msgid="6793314648458925172">"እስከ 5 የይለፍ ቃላት፣ የይለፍ ቁልፎች እና የውሂብ አገልግሎቶች በአንድ ጊዜ ማግበር ይችላሉ። ተጨማሪ ለማከል አንድ አገልግሎት ያጥፉ።"</string>
+    <string name="credman_error_message_title" msgid="4099557206946333568">"የይለፍ ቃላት፣ የይለፍ ቁልፎች እና የውሂብ አገልግሎቶች ገደብ"</string>
+    <string name="credman_error_message" msgid="8334797097200415449">"እስከ 5 የይለፍ ቃላት፣ የይለፍ ቁልፎች እና የውሂብ አገልግሎቶች በአንድ ጊዜ ማግበር ይችላሉ። ተጨማሪ ለማከል አንድ አገልግሎት ያጥፉ።"</string>
     <string name="credman_confirmation_message_positive_button" msgid="2812613187691345361">"አጥፋ"</string>
     <string name="debug_autofill_category" msgid="5998163555428196185">"ራስ-ሙላ"</string>
     <string name="autofill_logging_level_title" msgid="3733958845861098307">"የምዝግብ ማስታወሻ ደረጃ"</string>
@@ -4629,7 +4632,7 @@
     <string name="mic_toggle_description" msgid="484139688645092237">"ለመተግበሪያዎች እና አገልግሎቶች። ይህ ቅንብር ከጠፋ እርስዎ ወደ አንድ የአደጋ ጊዜ ቁጥር ሲደውሉ የማይክሮፎን ውሂብ አሁንም ሊጋራ ይችላል።"</string>
     <string name="previous_page_content_description" msgid="6438292457923282991">"ቀዳሚ"</string>
     <string name="next_page_content_description" msgid="1641835099813416294">"ቀጣይ"</string>
-    <string name="colors_viewpager_content_description" msgid="2591751086138259565">"የቀለም ቅድመ-እይታ"</string>
+    <string name="colors_viewpager_content_description" msgid="2591751086138259565">"የቀለም ቅድመ-ዕይታ"</string>
     <string name="bluetooth_sim_card_access_notification_title" msgid="7351015416346359536">"የሲም መዳረሻ ጥያቄ"</string>
     <string name="bluetooth_sim_card_access_notification_content" msgid="8685623260103018309">"አንድ መሣሪያ ሲምዎን መድረስ ይፈልጋል። ዝርዝሮችን ለማግኘት መታ ያድርጉ።"</string>
     <string name="bluetooth_sim_card_access_dialog_title" msgid="5616323725563125179">"የሲም መዳረሻ ይፈቀድ?"</string>
@@ -4705,18 +4708,14 @@
     <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"ከተኳኋኝ ሚዲያ የሚመጣው ድምፅ ይበልጥ መሳጭ ይሆናል"</string>
     <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"የጭንቅላት ክትትል"</string>
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"ጭንቅላትዎን ወደ ይበልጥ ተፈጥሯዊ ድምፅ ሲያንቀሳቅሱት ኦዲዮው ይቀየራል"</string>
-    <!-- no translation found for bluetooth_details_audio_device_types_title (3381941189346781614) -->
+    <string name="bluetooth_details_audio_device_types_title" msgid="3381941189346781614">"የኦዲዮ መሣሪያ ዓይነት"</string>
+    <string name="bluetooth_details_audio_device_type_unknown" msgid="839337391037998014">"ያልታወቀ"</string>
+    <string name="bluetooth_details_audio_device_type_speaker" msgid="3706227767994792124">"ድምጽ ማጉያ"</string>
+    <string name="bluetooth_details_audio_device_type_headphones" msgid="7644588291215033798">"የራስ ላይ ማዳመጫዎች"</string>
+    <!-- no translation found for bluetooth_details_audio_device_type_hearing_aid (1310631131071939859) -->
     <skip />
-    <!-- no translation found for bluetooth_details_audio_device_type_unknown (839337391037998014) -->
-    <skip />
-    <!-- no translation found for bluetooth_details_audio_device_type_speaker (3706227767994792124) -->
-    <skip />
-    <!-- no translation found for bluetooth_details_audio_device_type_headphones (7644588291215033798) -->
-    <skip />
-    <!-- no translation found for bluetooth_details_audio_device_type_carkit (4439017600454703229) -->
-    <skip />
-    <!-- no translation found for bluetooth_details_audio_device_type_other (7019481234617207563) -->
-    <skip />
+    <string name="bluetooth_details_audio_device_type_carkit" msgid="4439017600454703229">"የመኪና መለዋወጫ"</string>
+    <string name="bluetooth_details_audio_device_type_other" msgid="7019481234617207563">"ሌላ"</string>
     <string name="ingress_rate_limit_title" msgid="2106694002836274350">"የአውታረ መረብ የማውረድ ፍጥነት ገደብ"</string>
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"የበይነመረብ ግንኙነትን በሚሰጡ ሁሉም አውታረ መረቦች ላይ የሚተገበረውን የአውታረ መረብ መተላለፊያ ይዘት ማስገቢያ ፍጥነት ገደብ ያዋቅሩ።"</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"የአውታረ መረብ የማውረድ ፍጥነት ገደብን ያዋቅሩ"</string>
@@ -4795,12 +4794,9 @@
     <string name="contrast_medium" msgid="384414510709285811">"መካከለኛ"</string>
     <string name="contrast_high" msgid="3988567609694797696">"ከፍተኛ"</string>
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"ይህ መተግበሪያ መከፈት የሚችለው በ1 መስኮት ብቻ ነው"</string>
-    <!-- no translation found for generic_accessibility_service_on (4466229372357726824) -->
-    <skip />
-    <!-- no translation found for generic_accessibility_service_off (4759859497651675724) -->
-    <skip />
-    <!-- no translation found for generic_accessibility_feature_shortcut_off (4022872394514077907) -->
-    <skip />
+    <string name="generic_accessibility_service_on" msgid="4466229372357726824">"በርቷል"</string>
+    <string name="generic_accessibility_service_off" msgid="4759859497651675724">"ጠፍቷል"</string>
+    <string name="generic_accessibility_feature_shortcut_off" msgid="4022872394514077907">"ጠፍቷል"</string>
     <string name="accessibility_shortcut_state_off" msgid="8158137799007601475">"ጠፍቷል"</string>
     <string name="daltonizer_state_on" msgid="131013270022603983">"በርቷል"</string>
     <string name="daltonizer_state_off" msgid="1162285688069856179">"ጠፍቷል"</string>
