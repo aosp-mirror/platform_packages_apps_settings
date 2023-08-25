@@ -108,8 +108,9 @@ public class BatteryTipsController extends BasePreferenceController {
         }
 
         // Get card preference strings and navigate fragment info
-        final int resourceIndex = powerAnomalyEvent.hasKey()
-                ? powerAnomalyEvent.getKey().getNumber() : -1;
+        final PowerAnomalyKey powerAnomalyKey = powerAnomalyEvent.hasKey()
+                ? powerAnomalyEvent.getKey() : null;
+        final int resourceIndex = powerAnomalyKey != null ? powerAnomalyKey.getNumber() : -1;
 
         String titleString = getString(powerAnomalyEvent, WarningBannerInfo::getTitleString,
                 WarningItemInfo::getTitleString, R.array.power_anomaly_titles, resourceIndex);
@@ -134,6 +135,7 @@ public class BatteryTipsController extends BasePreferenceController {
 
         // Updated card preference and main button fragment launcher
         mCardPreference.setAnomalyEventId(powerAnomalyEvent.getEventId());
+        mCardPreference.setPowerAnomalyKey(powerAnomalyKey);
         mCardPreference.setTitle(titleString);
         mCardPreference.setMainButtonLabel(mainBtnString);
         mCardPreference.setDismissButtonLabel(dismissBtnString);
