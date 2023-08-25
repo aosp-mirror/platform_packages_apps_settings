@@ -32,8 +32,8 @@ import android.view.View;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.display.AutoBrightnessSettings;
-import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.testutils.BatteryTestUtils;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
@@ -49,21 +49,21 @@ import org.robolectric.RuntimeEnvironment;
 public final class BatteryTipsCardPreferenceTest {
 
     private Context mContext;
+    private FakeFeatureFactory mFeatureFactory;
     private BatteryTipsCardPreference mBatteryTipsCardPreference;
     private BatteryTipsController mBatteryTipsController;
+
     @Mock
     private View mFakeView;
-    @Mock
-    private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mBatteryTipsCardPreference = new BatteryTipsCardPreference(mContext, /*attrs=*/ null);
         mBatteryTipsController = new BatteryTipsController(mContext);
         mBatteryTipsController.mCardPreference = mBatteryTipsCardPreference;
-        mBatteryTipsController.mPowerUsageFeatureProvider = mPowerUsageFeatureProvider;
     }
 
     @Test
@@ -72,11 +72,11 @@ public final class BatteryTipsCardPreferenceTest {
                 R.layout.battery_tips_card);
     }
     @Test
-    public void onClick_actionBtn_getAdaptiveBrightnessLauncher() {
+    public void onClick_mainBtn_getAdaptiveBrightnessLauncher() {
         final ArgumentCaptor<Intent> captor = ArgumentCaptor.forClass(Intent.class);
         PowerAnomalyEvent adaptiveBrightnessAnomaly =
                 BatteryTestUtils.createAdaptiveBrightnessAnomalyEvent();
-        when(mPowerUsageFeatureProvider.isBatteryTipsEnabled()).thenReturn(true);
+        when(mFeatureFactory.powerUsageFeatureProvider.isBatteryTipsEnabled()).thenReturn(true);
         when(mFakeView.getId()).thenReturn(R.id.main_button);
         doNothing().when(mContext).startActivity(captor.capture());
 
@@ -89,5 +89,21 @@ public final class BatteryTipsCardPreferenceTest {
                 .isEqualTo(AutoBrightnessSettings.class.getName());
         assertThat(intent.getIntExtra(MetricsFeatureProvider.EXTRA_SOURCE_METRICS_CATEGORY, -1))
                 .isEqualTo(SettingsEnums.SETTINGS_AUTO_BRIGHTNESS);
+        verify(mFeatureFactory.metricsFeatureProvider).action(
+                mContext, SettingsEnums.ACTION_BATTERY_TIPS_CARD_ACCEPT, "BrightnessAnomaly");
+    }
+
+    @Test
+    public void onClick_dismissBtn_metricsLogged() {
+        PowerAnomalyEvent screenTimeoutAnomaly =
+                BatteryTestUtils.createScreenTimeoutAnomalyEvent();
+        when(mFeatureFactory.powerUsageFeatureProvider.isBatteryTipsEnabled()).thenReturn(true);
+        when(mFakeView.getId()).thenReturn(R.id.dismiss_button);
+
+        mBatteryTipsController.handleBatteryTipsCardUpdated(screenTimeoutAnomaly);
+        mBatteryTipsCardPreference.onClick(mFakeView);
+
+        verify(mFeatureFactory.metricsFeatureProvider).action(
+                mContext, SettingsEnums.ACTION_BATTERY_TIPS_CARD_DISMISS, "ScreenTimeoutAnomaly");
     }
 }

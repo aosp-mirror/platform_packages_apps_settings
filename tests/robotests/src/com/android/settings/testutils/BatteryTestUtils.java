@@ -211,6 +211,7 @@ public class BatteryTestUtils {
     /** Create a power anomaly event proto of adaptive brightness. */
     public static PowerAnomalyEvent createAdaptiveBrightnessAnomalyEvent() {
         return PowerAnomalyEvent.newBuilder()
+                .setEventId("BrightnessAnomaly")
                 .setType(PowerAnomalyType.TYPE_SETTINGS_BANNER)
                 .setKey(PowerAnomalyKey.KEY_BRIGHTNESS)
                 .setWarningBannerInfo(WarningBannerInfo.newBuilder()
@@ -223,6 +224,7 @@ public class BatteryTestUtils {
     /** Create a power anomaly event proto of screen timeout. */
     public static PowerAnomalyEvent createScreenTimeoutAnomalyEvent() {
         return PowerAnomalyEvent.newBuilder()
+                .setEventId("ScreenTimeoutAnomaly")
                 .setType(PowerAnomalyType.TYPE_SETTINGS_BANNER)
                 .setKey(PowerAnomalyKey.KEY_SCREEN_TIMEOUT)
                 .setWarningBannerInfo(WarningBannerInfo.newBuilder()
