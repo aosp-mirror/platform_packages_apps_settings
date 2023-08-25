@@ -29,7 +29,7 @@ import android.os.UserManager;
 
 import androidx.room.Room;
 
-import com.android.settings.display.AutoBrightnessSettings;
+import com.android.settings.DisplaySettings;
 import com.android.settings.display.ScreenTimeoutSettings;
 import com.android.settings.fuelgauge.batteryusage.BatteryInformation;
 import com.android.settings.fuelgauge.batteryusage.ConvertUtils;
@@ -215,8 +215,9 @@ public class BatteryTestUtils {
                 .setType(PowerAnomalyType.TYPE_SETTINGS_BANNER)
                 .setKey(PowerAnomalyKey.KEY_BRIGHTNESS)
                 .setWarningBannerInfo(WarningBannerInfo.newBuilder()
-                        .setMainButtonDestination(AutoBrightnessSettings.class.getName())
-                        .setMainButtonSourceMetricsCategory(SettingsEnums.SETTINGS_AUTO_BRIGHTNESS)
+                        .setMainButtonDestination(DisplaySettings.class.getName())
+                        .setMainButtonSourceMetricsCategory(SettingsEnums.DISPLAY)
+                        .setMainButtonSourceHighlightKey("auto_brightness_entry")
                         .build())
                 .build();
     }
@@ -230,6 +231,7 @@ public class BatteryTestUtils {
                 .setWarningBannerInfo(WarningBannerInfo.newBuilder()
                         .setMainButtonDestination(ScreenTimeoutSettings.class.getName())
                         .setMainButtonSourceMetricsCategory(SettingsEnums.SCREEN_TIMEOUT)
+                        .setMainButtonSourceHighlightKey("60000")
                         .build())
                 .build();
     }
