@@ -313,4 +313,18 @@ public class MediaOutputIndicatorWorkerTest {
 
         assertThat(mMediaOutputIndicatorWorker.isBroadcastSupported()).isTrue();
     }
+
+    @Test
+    public void isBroadcastSupported_noLocalMediaManager_returnFalse() {
+        mMediaOutputIndicatorWorker.mLocalMediaManager = null;
+
+        assertThat(mMediaOutputIndicatorWorker.isBroadcastSupported()).isFalse();
+    }
+
+    @Test
+    public void isDeviceBroadcasting_noLocalMediaManager_returnFalse() {
+        mMediaOutputIndicatorWorker.mLocalMediaManager = null;
+
+        assertThat(mMediaOutputIndicatorWorker.isDeviceBroadcasting()).isFalse();
+    }
 }
