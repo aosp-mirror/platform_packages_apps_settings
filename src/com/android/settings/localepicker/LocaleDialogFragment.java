@@ -204,8 +204,6 @@ public class LocaleDialogFragment extends InstrumentedDialogFragment {
                 bundle.putInt(ARG_DIALOG_TYPE, DIALOG_CONFIRM_SYSTEM_DEFAULT);
                 intent.putExtras(bundle);
                 mParent.onActivityResult(DIALOG_CONFIRM_SYSTEM_DEFAULT, result, intent);
-                mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_CHANGE_LANGUAGE,
-                        changed);
             }
             mShouldKeepDialog = false;
         }
