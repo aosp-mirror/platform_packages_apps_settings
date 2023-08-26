@@ -29,7 +29,7 @@ import android.os.UserManager;
 
 import androidx.room.Room;
 
-import com.android.settings.display.AutoBrightnessSettings;
+import com.android.settings.DisplaySettings;
 import com.android.settings.display.ScreenTimeoutSettings;
 import com.android.settings.fuelgauge.batteryusage.BatteryInformation;
 import com.android.settings.fuelgauge.batteryusage.ConvertUtils;
@@ -208,14 +208,25 @@ public class BatteryTestUtils {
         return PowerAnomalyEventList.getDefaultInstance();
     }
 
+    /** Create an non-empty power anomaly event list proto. */
+    public static PowerAnomalyEventList createNonEmptyPowerAnomalyEventList() {
+        return PowerAnomalyEventList.newBuilder()
+                .addPowerAnomalyEvents(0, createAdaptiveBrightnessAnomalyEvent())
+                .addPowerAnomalyEvents(1, createScreenTimeoutAnomalyEvent())
+                .build();
+    }
+
     /** Create a power anomaly event proto of adaptive brightness. */
     public static PowerAnomalyEvent createAdaptiveBrightnessAnomalyEvent() {
         return PowerAnomalyEvent.newBuilder()
+                .setEventId("BrightnessAnomaly")
                 .setType(PowerAnomalyType.TYPE_SETTINGS_BANNER)
                 .setKey(PowerAnomalyKey.KEY_BRIGHTNESS)
+                .setScore(1.2f)
                 .setWarningBannerInfo(WarningBannerInfo.newBuilder()
-                        .setMainButtonDestination(AutoBrightnessSettings.class.getName())
-                        .setMainButtonSourceMetricsCategory(SettingsEnums.SETTINGS_AUTO_BRIGHTNESS)
+                        .setMainButtonDestination(DisplaySettings.class.getName())
+                        .setMainButtonSourceMetricsCategory(SettingsEnums.DISPLAY)
+                        .setMainButtonSourceHighlightKey("auto_brightness_entry")
                         .build())
                 .build();
     }
@@ -223,11 +234,14 @@ public class BatteryTestUtils {
     /** Create a power anomaly event proto of screen timeout. */
     public static PowerAnomalyEvent createScreenTimeoutAnomalyEvent() {
         return PowerAnomalyEvent.newBuilder()
+                .setEventId("ScreenTimeoutAnomaly")
                 .setType(PowerAnomalyType.TYPE_SETTINGS_BANNER)
                 .setKey(PowerAnomalyKey.KEY_SCREEN_TIMEOUT)
+                .setScore(1.1f)
                 .setWarningBannerInfo(WarningBannerInfo.newBuilder()
                         .setMainButtonDestination(ScreenTimeoutSettings.class.getName())
                         .setMainButtonSourceMetricsCategory(SettingsEnums.SCREEN_TIMEOUT)
+                        .setMainButtonSourceHighlightKey("60000")
                         .build())
                 .build();
     }

@@ -33,8 +33,8 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
-import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.PreferenceXmlParserUtils;
 import com.android.settings.core.PreferenceXmlParserUtils.MetadataFlag;
 import com.android.settingslib.widget.CandidateInfo;
@@ -46,7 +46,10 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFragment implements
+/**
+ * A fragment to handle general radio button picker
+ */
+public abstract class RadioButtonPickerFragment extends SettingsPreferenceFragment implements
         SelectorWithWidgetPreference.OnClickListener {
 
     @VisibleForTesting
