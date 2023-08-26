@@ -19,6 +19,7 @@ package com.android.settings.accessibility;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.when;
+import static org.robolectric.shadows.ShadowLooper.shadowMainLooper;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -59,8 +60,11 @@ import java.util.List;
 
 /** Tests for {@link HearingAidUtils}. */
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowAlertDialogCompat.class, ShadowBluetoothAdapter.class,
-        ShadowBluetoothUtils.class})
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowAlertDialogCompat.class,
+        com.android.settings.testutils.shadow.ShadowBluetoothAdapter.class,
+        com.android.settings.testutils.shadow.ShadowBluetoothUtils.class,
+})
 public class HearingAidUtilsTest {
 
     @Rule
@@ -89,6 +93,7 @@ public class HearingAidUtilsTest {
         setupEnvironment();
         final FragmentActivity mActivity = (FragmentActivity) ActivityControllerWrapper.setup(
                 Robolectric.buildActivity(FragmentActivity.class)).get();
+        shadowMainLooper().idle();
         mFragmentManager = mActivity.getSupportFragmentManager();
         ShadowAlertDialogCompat.reset();
         when(mCachedBluetoothDevice.getAddress()).thenReturn(TEST_DEVICE_ADDRESS);
@@ -100,6 +105,7 @@ public class HearingAidUtilsTest {
 
         HearingAidUtils.launchHearingAidPairingDialog(mFragmentManager, mCachedBluetoothDevice);
 
+        shadowMainLooper().idle();
         final AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(dialog).isNull();
     }
@@ -112,6 +118,7 @@ public class HearingAidUtilsTest {
 
         HearingAidUtils.launchHearingAidPairingDialog(mFragmentManager, mCachedBluetoothDevice);
 
+        shadowMainLooper().idle();
         final AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(dialog).isNull();
     }
@@ -125,6 +132,7 @@ public class HearingAidUtilsTest {
 
         HearingAidUtils.launchHearingAidPairingDialog(mFragmentManager, mCachedBluetoothDevice);
 
+        shadowMainLooper().idle();
         final AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(dialog).isNull();
     }
@@ -139,6 +147,7 @@ public class HearingAidUtilsTest {
 
         HearingAidUtils.launchHearingAidPairingDialog(mFragmentManager, mCachedBluetoothDevice);
 
+        shadowMainLooper().idle();
         final AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(dialog).isNull();
     }
@@ -155,6 +164,7 @@ public class HearingAidUtilsTest {
 
         HearingAidUtils.launchHearingAidPairingDialog(mFragmentManager, mCachedBluetoothDevice);
 
+        shadowMainLooper().idle();
         final AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(dialog).isNull();
     }
@@ -171,6 +181,7 @@ public class HearingAidUtilsTest {
 
         HearingAidUtils.launchHearingAidPairingDialog(mFragmentManager, mCachedBluetoothDevice);
 
+        shadowMainLooper().idle();
         final AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(dialog.isShowing()).isTrue();
     }
@@ -185,6 +196,7 @@ public class HearingAidUtilsTest {
 
         HearingAidUtils.launchHearingAidPairingDialog(mFragmentManager, mCachedBluetoothDevice);
 
+        shadowMainLooper().idle();
         final AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(dialog.isShowing()).isTrue();
     }

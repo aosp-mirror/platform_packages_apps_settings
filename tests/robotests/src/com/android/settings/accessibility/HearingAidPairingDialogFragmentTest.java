@@ -43,7 +43,6 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.bluetooth.BluetoothPairingDetail;
 import com.android.settings.bluetooth.HearingAidPairingDialogFragment;
 import com.android.settings.bluetooth.Utils;
-import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
 import com.android.settings.utils.ActivityControllerWrapper;
@@ -62,12 +61,18 @@ import org.mockito.junit.MockitoRule;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
+import org.robolectric.annotation.LooperMode;
 import org.robolectric.shadow.api.Shadow;
 
 /** Tests for {@link HearingAidPairingDialogFragment}. */
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowAlertDialogCompat.class, ShadowBluetoothAdapter.class,
-        ShadowBluetoothUtils.class})
+@LooperMode(LooperMode.Mode.LEGACY)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowAlertDialogCompat.class,
+        com.android.settings.testutils.shadow.ShadowBluetoothAdapter.class,
+        com.android.settings.testutils.shadow.ShadowBluetoothUtils.class,
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class HearingAidPairingDialogFragmentTest {
 
     @Rule

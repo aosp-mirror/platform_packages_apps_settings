@@ -69,6 +69,9 @@ import java.util.List;
 
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class NotificationAssistantPreferenceControllerTest {
 
     private static final String KEY = "TEST_KEY";

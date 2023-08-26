@@ -30,6 +30,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
@@ -57,9 +58,17 @@ public class FaceSettingsRemoveButtonPreferenceController extends BasePreference
     static final String KEY = "security_settings_face_delete_faces_container";
 
     public static class ConfirmRemoveDialog extends InstrumentedDialogFragment {
-
-        private boolean mIsConvenience;
+        private static final String KEY_IS_CONVENIENCE = "is_convenience";
         private DialogInterface.OnClickListener mOnClickListener;
+
+        /** Returns the new instance of the class */
+        public static ConfirmRemoveDialog newInstance(boolean isConvenience) {
+            final ConfirmRemoveDialog dialog = new ConfirmRemoveDialog();
+            final Bundle args = new Bundle();
+            args.putBoolean(KEY_IS_CONVENIENCE, isConvenience);
+            dialog.setArguments(args);
+            return dialog;
+        }
 
         @Override
         public int getMetricsCategory() {
@@ -68,6 +77,8 @@ public class FaceSettingsRemoveButtonPreferenceController extends BasePreference
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
+            boolean isConvenience = getArguments().getBoolean(KEY_IS_CONVENIENCE);
+
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
             final PackageManager pm = getContext().getPackageManager();
@@ -75,11 +86,11 @@ public class FaceSettingsRemoveButtonPreferenceController extends BasePreference
             final int dialogMessageRes;
 
             if (hasFingerprint) {
-                dialogMessageRes = mIsConvenience
+                dialogMessageRes = isConvenience
                         ? R.string.security_settings_face_remove_dialog_details_fingerprint_conv
                         : R.string.security_settings_face_remove_dialog_details_fingerprint;
             } else {
-                dialogMessageRes = mIsConvenience
+                dialogMessageRes = isConvenience
                         ? R.string.security_settings_face_settings_remove_dialog_details_convenience
                         : R.string.security_settings_face_settings_remove_dialog_details;
             }
@@ -91,10 +102,6 @@ public class FaceSettingsRemoveButtonPreferenceController extends BasePreference
             AlertDialog dialog = builder.create();
             dialog.setCanceledOnTouchOutside(false);
             return dialog;
-        }
-
-        public void setIsConvenience(boolean isConvenience) {
-            mIsConvenience = isConvenience;
         }
 
         public void setOnClickListener(DialogInterface.OnClickListener listener) {
@@ -111,7 +118,8 @@ public class FaceSettingsRemoveButtonPreferenceController extends BasePreference
     private Listener mListener;
     private SettingsActivity mActivity;
     private int mUserId;
-    private boolean mRemoving;
+    @VisibleForTesting
+    boolean mRemoving;
 
     private final MetricsFeatureProvider mMetricsFeatureProvider;
     private final Context mContext;
@@ -142,7 +150,7 @@ public class FaceSettingsRemoveButtonPreferenceController extends BasePreference
         }
     };
 
-    private final DialogInterface.OnClickListener mOnClickListener
+    private final DialogInterface.OnClickListener mOnConfirmDialogClickListener
             = new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialog, int which) {
@@ -196,6 +204,16 @@ public class FaceSettingsRemoveButtonPreferenceController extends BasePreference
 
         mButton.setOnClickListener(this);
 
+        // If there is already a ConfirmRemoveDialog showing, reset the listener since the
+        // controller has been recreated.
+        ConfirmRemoveDialog removeDialog =
+                (ConfirmRemoveDialog) mActivity.getSupportFragmentManager()
+                        .findFragmentByTag(ConfirmRemoveDialog.class.getName());
+        if (removeDialog != null) {
+            mRemoving = true;
+            removeDialog.setOnClickListener(mOnConfirmDialogClickListener);
+        }
+
         if (!FaceSettings.isFaceHardwareDetected(mContext)) {
             mButton.setEnabled(false);
         } else {
@@ -218,10 +236,11 @@ public class FaceSettingsRemoveButtonPreferenceController extends BasePreference
         if (v == mButton) {
             mMetricsFeatureProvider.logClickedPreference(mPreference, getMetricsCategory());
             mRemoving = true;
-            ConfirmRemoveDialog dialog = new ConfirmRemoveDialog();
-            dialog.setOnClickListener(mOnClickListener);
-            dialog.setIsConvenience(BiometricUtils.isConvenience(mFaceManager));
-            dialog.show(mActivity.getSupportFragmentManager(), ConfirmRemoveDialog.class.getName());
+            ConfirmRemoveDialog confirmRemoveDialog =
+                    ConfirmRemoveDialog.newInstance(BiometricUtils.isConvenience(mFaceManager));
+            confirmRemoveDialog.setOnClickListener(mOnConfirmDialogClickListener);
+            confirmRemoveDialog.show(mActivity.getSupportFragmentManager(),
+                            ConfirmRemoveDialog.class.getName());
         }
     }
 

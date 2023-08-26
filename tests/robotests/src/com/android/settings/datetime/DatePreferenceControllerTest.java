@@ -20,6 +20,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -43,11 +44,15 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class DatePreferenceControllerTest {
 
     @Mock
@@ -65,6 +70,7 @@ public class DatePreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        mContext = spy(RuntimeEnvironment.application);
         when(mContext.getSystemService(TimeDetector.class)).thenReturn(mTimeDetector);
         when(mContext.getSystemService(TimeManager.class)).thenReturn(mTimeManager);
         mPreference = new RestrictedPreference(RuntimeEnvironment.application);

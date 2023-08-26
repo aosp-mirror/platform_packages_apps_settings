@@ -199,6 +199,8 @@
     <string name="terms_of_address_not_specified" msgid="4439257779351251973">"Inte angivet"</string>
     <string name="terms_of_address_feminine" msgid="1743479869695539283">"Femin­informer"</string>
     <string name="terms_of_address_masculine" msgid="983106046135098856">"Maskulinformer"</string>
+    <!-- no translation found for terms_of_address_neutral (5475414185543112478) -->
+    <skip />
     <string name="dlg_remove_locales_title" msgid="3170501604483612114">"{count,plural, =1{Vill du ta bort det valda språket?}other{Vill du ta bort de valda språken?}}"</string>
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"Text visas på ett annat språk."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Det går inte att ta bort alla språk"</string>
@@ -400,9 +402,19 @@
     <string name="security_settings_remoteauth_enroll_introduction_info_remove_watch" msgid="1888318677088986801">"Du kan ta bort klockan när som helst från Upplåsning med klockan i inställningarna."</string>
     <string name="security_settings_remoteauth_enroll_introduction_animation_tap_notification" msgid="1597397399097952974">"Trycka på en avisering"</string>
     <string name="security_settings_remoteauth_enroll_introduction_animation_swipe_up" msgid="2129230804324634653">"Svepa uppåt på låsskärmen"</string>
+    <string name="security_settings_remoteauth_enroll_enrolling_title" msgid="313016997943607675">"Välj klocka"</string>
+    <string name="security_settings_remoteauth_enroll_enrolling_list_heading" msgid="8227585438932911013">"Tillgängliga klockor"</string>
+    <string name="security_settings_remoteauth_enroll_enrolling_disagree" msgid="1670201454188049863">"Avbryt"</string>
+    <string name="security_settings_remoteauth_enroll_enrolling_agree" msgid="7048336252635730908">"Bekräfta"</string>
     <string name="security_settings_remoteauth_enroll_finish_title" msgid="3807372930755413112">"Nu är det klart!"</string>
     <string name="security_settings_remoteauth_enroll_finish_description" msgid="4876209907275244653">"Nu kan du låsa upp den här telefonen med klockan när du sveper uppåt på låsskärmen eller trycker på en avisering"</string>
     <string name="security_settings_remoteauth_enroll_finish_btn_next" msgid="8072138423143889592">"Klar"</string>
+    <string name="security_settings_remoteauth_settings_title" msgid="1564912618737165129">"Upplåsning med klockan"</string>
+    <string name="security_settings_remoteauth_settings_description" msgid="2758239650119457964">"Du kan låsa upp den här telefonen med klockan när du sveper uppåt på låsskärmen eller trycker på en avisering"</string>
+    <string name="security_settings_remoteauth_settings_info_footer" msgid="795894033901478120">"Du kan bara använda upplåsning med klockan om klockan är upplåst, sitter på handleden, i närheten av telefonen och ansluten till den. Om anslutningen avbryts behöver du låsa upp telefonen innan du kan använda upplåsning med klockan\n\nTänk på följande:\nDu kan bara ha en klocka konfigurerad åt gången. Om du vill lägga till en annan klocka måste du först ta bort den befintliga."</string>
+    <string name="security_settings_remoteauth_settings_learn_more" msgid="5653556124819260050">"Läs mer om upplåsning med klockan"</string>
+    <string name="security_settings_remoteauth_settings_register_new_authenticator" msgid="9191331738306527887">"Lägg till klocka"</string>
+    <string name="security_settings_remoteauth_settings_remove_device" msgid="2436226120578851282">"Ta bort klockan"</string>
     <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"Fingeravtryck och ansiktslås"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Ansikts- och fingeravtryckslås för jobbprofilen"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"Konfigurering krävs"</string>
@@ -940,6 +952,12 @@
     <string name="wifi_hotspot_speed_footer" msgid="8846939503916795002">"Om den föredragna frekvensen inte är tillgänglig kan surfzonen använda en annan. Säkerhetsinställningarna för surfzonen kan ändras om du ändrar frekvens."</string>
     <string name="wifi_hotspot_security_summary_unavailable" msgid="117582979310345853">"Inte tillgängligt för 6 GHz"</string>
     <string name="wifi_hotspot_security_footer" msgid="4608329688744949796">"Säkerhetsinställningar kan ändras om du ändrar surfzonens frekvens"</string>
+    <!-- no translation found for wifi_hotspot_instant_title (7052526695338853703) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_instant_summary_on (3142749148673081288) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_instant_summary_off (8594065628453795615) -->
+    <skip />
     <string name="wifi_tether_starting" msgid="8879874184033857814">"Aktiverar surfzon ..."</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"Surfzon inaktiveras ..."</string>
     <string name="wifi_tether_carrier_unsupport_dialog_title" msgid="3089432578433978073">"Internetdelning är inte tillgängligt"</string>
@@ -4112,7 +4130,7 @@
     <string name="autofill_app" msgid="7595308061826307921">"Autofylltjänst"</string>
     <string name="default_autofill_app" msgid="372234803718251606">"Standardtjänst för autofyll"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"Lösenord"</string>
-    <string name="credman_chosen_app_title" msgid="4547405511458518096">"Lösenord, nycklar och datatjänster"</string>
+    <string name="credman_chosen_app_title" msgid="872524130208251505">"Lösenord, nycklar och datatjänster"</string>
     <string name="credman_credentials" msgid="4931371941253324143">"Ytterligare leverantörer"</string>
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# lösenord}other{# lösenord}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"auto, fyll, autofyll, lösenord"</string>
@@ -4120,13 +4138,13 @@
     <string name="credman_autofill_keywords" msgid="701180623776848914">"auto, fyll, autofyll, data, nyckel, lösenord"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Kontrollera att du litar på den här appen&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofyll&gt;%1$s&lt;/xliff:g&gt; identifierar vad som kan fyllas i automatiskt utifrån vad som visas på skärmen."</string>
     <string name="credman_autofill_confirmation_message" msgid="4951846866327737417">"&lt;b&gt;Vill du använda &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; använder det som visas på skärmen för att avgöra vad som kan fyllas i automatiskt. Nya lösenord, nycklar och annan information sparas här från och med nu."</string>
-    <string name="credman_picker_title" msgid="2642776965060619988">"Lösenord, nycklar och datatjänster"</string>
+    <string name="credman_picker_title" msgid="8191267620665129205">"Lösenord, nycklar och datatjänster"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Vill du stänga av %1$s?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Vill du inaktivera den här tjänsten?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Sparade uppgifter som lösenord, nycklar, betalningsmetoder och annan information fylls inte i när du loggar in. Om du vill använda dina sparade uppgifter väljer du en lösenords-, nyckel- eller datatjänst."</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"Vill du använda %1$s?"</string>
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"%1$s använder det som visas på skärmen för att avgöra vad som kan fyllas i automatiskt."</string>
-    <string name="credman_error_message_title" msgid="4741457523969373713">"Gräns för lösenord, nycklar och datatjänster"</string>
-    <string name="credman_error_message" msgid="6793314648458925172">"Du kan ha upp till fem lösenord, nycklar och datatjänster aktiva samtidigt. Inaktivera en tjänst om du vill lägga till fler."</string>
+    <string name="credman_error_message_title" msgid="4099557206946333568">"Gräns för lösenord, nycklar och datatjänster"</string>
+    <string name="credman_error_message" msgid="8334797097200415449">"Du kan ha upp till fem lösenord, nycklar och datatjänster aktiva samtidigt. Inaktivera en tjänst om du vill lägga till fler."</string>
     <string name="credman_confirmation_message_positive_button" msgid="2812613187691345361">"Stäng av"</string>
     <string name="debug_autofill_category" msgid="5998163555428196185">"Autofyll"</string>
     <string name="autofill_logging_level_title" msgid="3733958845861098307">"Loggningsnivå"</string>
@@ -4690,18 +4708,14 @@
     <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"Ljud från kompatibel media blir mer omgivande"</string>
     <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"Huvudspårning"</string>
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"Ljudet ändras när du rör på huvudet för att låta mer naturligt"</string>
-    <!-- no translation found for bluetooth_details_audio_device_types_title (3381941189346781614) -->
+    <string name="bluetooth_details_audio_device_types_title" msgid="3381941189346781614">"Ljudenhetstyp"</string>
+    <string name="bluetooth_details_audio_device_type_unknown" msgid="839337391037998014">"Okänd"</string>
+    <string name="bluetooth_details_audio_device_type_speaker" msgid="3706227767994792124">"Högtalare"</string>
+    <string name="bluetooth_details_audio_device_type_headphones" msgid="7644588291215033798">"Hörlurar"</string>
+    <!-- no translation found for bluetooth_details_audio_device_type_hearing_aid (1310631131071939859) -->
     <skip />
-    <!-- no translation found for bluetooth_details_audio_device_type_unknown (839337391037998014) -->
-    <skip />
-    <!-- no translation found for bluetooth_details_audio_device_type_speaker (3706227767994792124) -->
-    <skip />
-    <!-- no translation found for bluetooth_details_audio_device_type_headphones (7644588291215033798) -->
-    <skip />
-    <!-- no translation found for bluetooth_details_audio_device_type_carkit (4439017600454703229) -->
-    <skip />
-    <!-- no translation found for bluetooth_details_audio_device_type_other (7019481234617207563) -->
-    <skip />
+    <string name="bluetooth_details_audio_device_type_carkit" msgid="4439017600454703229">"Bilsats"</string>
+    <string name="bluetooth_details_audio_device_type_other" msgid="7019481234617207563">"Annan"</string>
     <string name="ingress_rate_limit_title" msgid="2106694002836274350">"Gräns för nedladdningshastighet i nätverket"</string>
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"Konfigurera den inkommande bandbredden i nätverket som ska gälla för alla nätverk med internetanslutning."</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"Konfigurera gräns för nedladdningshastighet i nätverket"</string>

@@ -28,7 +28,9 @@ import static com.android.settings.wifi.repository.WifiHotspotRepository.SPEED_6
 
 import android.app.Application;
 import android.net.wifi.SoftApConfiguration;
+import android.net.wifi.sharedconnectivity.app.SharedConnectivitySettingsState;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -36,6 +38,8 @@ import androidx.lifecycle.Observer;
 
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.wifi.factory.WifiFeatureProvider;
+import com.android.settings.wifi.repository.SharedConnectivityRepository;
 import com.android.settings.wifi.repository.WifiHotspotRepository;
 
 import org.jetbrains.annotations.NotNull;
@@ -48,6 +52,8 @@ import java.util.Map;
  */
 public class WifiTetherViewModel extends AndroidViewModel {
     private static final String TAG = "WifiTetherViewModel";
+    static final int RES_INSTANT_HOTSPOT_SUMMARY_ON = R.string.wifi_hotspot_instant_summary_on;
+    static final int RES_INSTANT_HOTSPOT_SUMMARY_OFF = R.string.wifi_hotspot_instant_summary_off;
 
     static Map<Integer, Integer> sSecuritySummaryResMap = new HashMap<>();
 
@@ -78,10 +84,23 @@ public class WifiTetherViewModel extends AndroidViewModel {
     protected final Observer<Integer> mSecurityTypeObserver = st -> onSecurityTypeChanged(st);
     protected final Observer<Integer> mSpeedTypeObserver = st -> onSpeedTypeChanged(st);
 
+    private SharedConnectivityRepository mSharedConnectivityRepository;
+    @VisibleForTesting
+    MutableLiveData<String> mInstantHotspotSummary = new MutableLiveData<>();
+    @VisibleForTesting
+    Observer<SharedConnectivitySettingsState> mInstantHotspotStateObserver =
+            state -> onInstantHotspotStateChanged(state);
+
     public WifiTetherViewModel(@NotNull Application application) {
         super(application);
-        mWifiHotspotRepository = FeatureFactory.getFeatureFactory().getWifiFeatureProvider()
-                .getWifiHotspotRepository();
+        WifiFeatureProvider featureProvider = FeatureFactory.getFeatureFactory()
+                .getWifiFeatureProvider();
+        mWifiHotspotRepository = featureProvider.getWifiHotspotRepository();
+        mSharedConnectivityRepository = featureProvider.getSharedConnectivityRepository();
+        if (mSharedConnectivityRepository.isServiceAvailable()) {
+            mSharedConnectivityRepository.getSettingsState()
+                    .observeForever(mInstantHotspotStateObserver);
+        }
     }
 
     @Override
@@ -91,6 +110,10 @@ public class WifiTetherViewModel extends AndroidViewModel {
         }
         if (mSpeedSummary != null) {
             mWifiHotspotRepository.getSpeedType().removeObserver(mSpeedTypeObserver);
+        }
+        if (mSharedConnectivityRepository.isServiceAvailable()) {
+            mSharedConnectivityRepository.getSettingsState()
+                    .removeObserver(mInstantHotspotStateObserver);
         }
     }
 
@@ -171,5 +194,47 @@ public class WifiTetherViewModel extends AndroidViewModel {
      */
     public LiveData<Boolean> getRestarting() {
         return mWifiHotspotRepository.getRestarting();
+    }
+
+    /**
+     * Return whether Wi-Fi Instant Hotspot feature is available or not.
+     *
+     * @return {@code true} if Wi-Fi Instant Hotspot feature is available
+     */
+    public boolean isInstantHotspotFeatureAvailable() {
+        return mSharedConnectivityRepository.isServiceAvailable();
+    }
+
+    /**
+     * Gets InstantHotspotSummary
+     */
+    public LiveData<String> getInstantHotspotSummary() {
+        return mInstantHotspotSummary;
+    }
+
+    @VisibleForTesting
+    void onInstantHotspotStateChanged(SharedConnectivitySettingsState state) {
+        log("onInstantHotspotStateChanged(), state:" + state);
+        if (state == null) {
+            mInstantHotspotSummary.setValue(null);
+            return;
+        }
+        mInstantHotspotSummary.setValue(getInstantHotspotSummary(state.isInstantTetherEnabled()));
+    }
+
+    private String getInstantHotspotSummary(boolean enabled) {
+        return getApplication().getString(
+                enabled ? RES_INSTANT_HOTSPOT_SUMMARY_ON : RES_INSTANT_HOTSPOT_SUMMARY_OFF);
+    }
+
+    /**
+     * Launch Instant Hotspot Settings
+     */
+    public void launchInstantHotspotSettings() {
+        mSharedConnectivityRepository.launchSettings();
+    }
+
+    private void log(String msg) {
+        FeatureFactory.getFeatureFactory().getWifiFeatureProvider().verboseLog(TAG, msg);
     }
 }

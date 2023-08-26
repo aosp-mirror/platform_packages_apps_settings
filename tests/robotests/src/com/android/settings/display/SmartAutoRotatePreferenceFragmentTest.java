@@ -63,6 +63,7 @@ import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowFragment.class,
         ShadowDeviceStateRotationLockSettingsManager.class,
         ShadowRotationPolicy.class
 })

@@ -459,6 +459,8 @@
     <string name="terms_of_address_feminine">Feminine</string>
     <!-- The title of masculine of terms of address. [CHAR LIMIT=NONE] -->
     <string name="terms_of_address_masculine">Masculine</string>
+    <!-- The title of neutral of terms of address. [CHAR LIMIT=NONE] -->
+    <string name="terms_of_address_neutral">Neutral</string>
 
     <!-- The title of the confirmation dialog shown when the user selects one / several languages and tries to remove them [CHAR LIMIT=60] -->
     <string name="dlg_remove_locales_title">{count, plural,
@@ -2178,6 +2180,13 @@
     <string name="wifi_hotspot_security_summary_unavailable">Not available with 6 GHz</string>
     <!-- The footer message for Wi-Fi hotspot security settings [CHAR LIMIT=NONE] -->
     <string name="wifi_hotspot_security_footer">Security settings may change if you change the hotspot’s frequency</string>
+
+    <!-- Title for the instant hotspot state [CHAR LIMIT=NONE]-->
+    <string name="wifi_hotspot_instant_title">Instant hotspot</string>
+    <!-- Summary text when instant hotspot is turned on -->
+    <string name="wifi_hotspot_instant_summary_on">On</string>
+    <!-- Summary text when instant hotspot is turned off -->
+    <string name="wifi_hotspot_instant_summary_off">Off</string>
 
     <!-- Summary text when turning hotspot on -->
     <string name="wifi_tether_starting">Turning hotspot on\u2026</string>
@@ -9749,14 +9758,14 @@
     <!-- Preference summary for battery usage list page[CHAR_LIMIT=50]-->
     <string name="app_battery_usage_summary">Set battery usage for apps</string>
 
-    <!-- Label of action button in battery tips card [CHAR LIMIT=NONE] -->
-    <string name="battery_tips_card_action_button" translatable="false">View Settings</string>
+    <!-- Label of action button in battery tips card [CHAR LIMIT=50] -->
+    <string name="battery_tips_card_action_button">View Settings</string>
 
-    <!-- Label of dismiss button in battery tips card [CHAR LIMIT=NONE] -->
-    <string name="battery_tips_card_dismiss_button" translatable="false">Got it</string>
+    <!-- Label of dismiss button in battery tips card [CHAR LIMIT=50] -->
+    <string name="battery_tips_card_dismiss_button">Got it</string>
 
     <!-- Feedback card message in battery tips card [CHAR LIMIT=NONE] -->
-    <string name="battery_tips_card_feedback_info" translatable="false">Is this message helpful?</string>
+    <string name="battery_tips_card_feedback_info">Is this message helpful?</string>
 
     <!-- Filter title for battery unrestricted[CHAR_LIMIT=50]-->
     <string name="filter_battery_unrestricted_title">Unrestricted</string>
@@ -12096,12 +12105,14 @@
 
     <!-- The title of the bluetooth audio device type selection [CHAR LIMIT=none] -->
     <string name="bluetooth_details_audio_device_types_title">Audio Device Type</string>
-    <!-- The audio device type corresponding to unknown selected [CHAR LIMIT=none] -->
+    <!-- The audio device type corresponding to unknown device type [CHAR LIMIT=none] -->
     <string name="bluetooth_details_audio_device_type_unknown">Unknown</string>
-    <!-- The audio device type corresponding to none selected [CHAR LIMIT=none] -->
-    <string name="bluetooth_details_audio_device_type_speaker">Speaker</string>
     <!-- The audio device type corresponding to speakers [CHAR LIMIT=none] -->
+    <string name="bluetooth_details_audio_device_type_speaker">Speaker</string>
+    <!-- The audio device type corresponding to headphones [CHAR LIMIT=none] -->
     <string name="bluetooth_details_audio_device_type_headphones">Headphones</string>
+    <!-- The audio device type corresponding to hearing aid [CHAR LIMIT=none] -->
+    <string name="bluetooth_details_audio_device_type_hearing_aid">Hearing Aid</string>
     <!-- The audio device type corresponding to car kit [CHAR LIMIT=none] -->
     <string name="bluetooth_details_audio_device_type_carkit">Car Kit</string>
     <!-- The audio device type corresponding to other device type [CHAR LIMIT=none] -->

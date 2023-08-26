@@ -15,7 +15,6 @@
 
 package com.android.settings.fuelgauge;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.icu.text.NumberFormat;
@@ -25,7 +24,6 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
-import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
@@ -33,19 +31,14 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.Utils;
-import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.core.lifecycle.LifecycleObserver;
-import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.widget.UsageProgressBarPreference;
 
 /**
  * Controller that update the battery header view
  */
 public class BatteryHeaderPreferenceController extends BasePreferenceController
-        implements PreferenceControllerMixin, LifecycleObserver, OnStart,
-        BatteryPreferenceController {
+        implements PreferenceControllerMixin, BatteryPreferenceController {
     private static final String TAG = "BatteryHeaderPreferenceController";
 
     @VisibleForTesting
@@ -57,9 +50,6 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
     @VisibleForTesting
     UsageProgressBarPreference mBatteryUsageProgressBarPref;
 
-    private Activity mActivity;
-    private PreferenceFragmentCompat mHost;
-    private Lifecycle mLifecycle;
     private BatteryTip mBatteryTip;
     private final PowerManager mPowerManager;
 
@@ -68,18 +58,6 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
         mPowerManager = context.getSystemService(PowerManager.class);
         mBatteryStatusFeatureProvider = FeatureFactory.getFeatureFactory()
                 .getBatteryStatusFeatureProvider();
-    }
-
-    public void setActivity(Activity activity) {
-        mActivity = activity;
-    }
-
-    public void setFragment(PreferenceFragmentCompat fragment) {
-        mHost = fragment;
-    }
-
-    public void setLifecycle(Lifecycle lifecycle) {
-        mLifecycle = lifecycle;
     }
 
     @Override
@@ -100,12 +78,6 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
     @Override
     public int getAvailabilityStatus() {
         return AVAILABLE_UNSEARCHABLE;
-    }
-
-    @Override
-    public void onStart() {
-        EntityHeaderController.newInstance(mActivity, mHost, null /* header view */)
-                .setRecyclerView(mHost.getListView(), mLifecycle);
     }
 
     private CharSequence generateLabel(BatteryInfo info) {

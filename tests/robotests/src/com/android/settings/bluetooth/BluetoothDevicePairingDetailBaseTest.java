@@ -54,7 +54,10 @@ import org.robolectric.shadow.api.Shadow;
 
 /** Tests for {@link BluetoothDevicePairingDetailBase}. */
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowBluetoothAdapter.class})
+@Config(shadows = {
+        ShadowBluetoothAdapter.class,
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class BluetoothDevicePairingDetailBaseTest {
 
     @Rule

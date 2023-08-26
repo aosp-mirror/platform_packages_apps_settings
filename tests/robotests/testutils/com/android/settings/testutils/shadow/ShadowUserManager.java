@@ -16,6 +16,8 @@
 
 package com.android.settings.testutils.shadow;
 
+import static android.os.Build.VERSION_CODES.LOLLIPOP;
+
 import android.annotation.UserIdInt;
 import android.content.pm.UserInfo;
 import android.os.Bundle;
@@ -24,6 +26,9 @@ import android.os.UserManager;
 import android.os.UserManager.EnforcingUser;
 
 import com.google.android.collect.Maps;
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
+import com.google.common.collect.ImmutableList;
 
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Implementation;
@@ -32,6 +37,7 @@ import org.robolectric.annotation.Resetter;
 import org.robolectric.shadow.api.Shadow;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -43,6 +49,7 @@ import java.util.Set;
 public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager {
 
     private static boolean sIsSupportsMultipleUsers;
+    private static boolean sIsMultipleAdminEnabled = false;
 
     private static final int PRIMARY_USER_ID = 0;
 
@@ -50,12 +57,16 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
     private final Map<String, List<EnforcingUser>> mRestrictionSources = new HashMap<>();
     private final List<UserInfo> mUserProfileInfos = new ArrayList<>();
     private final Set<Integer> mManagedProfiles = new HashSet<>();
+    private final Map<Integer, Integer> mProfileToParent = new HashMap<>();
+    private final Map<Integer, UserInfo> mUserInfoMap = new HashMap<>();
     private final Set<String> mEnabledTypes = new HashSet<>();
+    private BiMap<UserHandle, Long> mUserProfiles = HashBiMap.create();
     private boolean mIsQuietModeEnabled = false;
     private int[] mProfileIdsForUser = new int[0];
     private boolean mUserSwitchEnabled;
     private Bundle mDefaultGuestUserRestriction = new Bundle();
     private boolean mIsGuestUser = false;
+    private long mNextUserSerial = 0;
 
     private @UserManager.UserSwitchabilityResult int mSwitchabilityStatus =
             UserManager.SWITCHABILITY_STATUS_OK;
@@ -70,9 +81,45 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
         sIsSupportsMultipleUsers = false;
     }
 
+    /**
+     * Creates a user with the specified name, userId and flags.
+     *
+     * @param id the unique id of user
+     * @param name name of the user
+     * @param flags 16 bits for user type. See {@link UserInfo#flags}
+     */
+    @Override public UserHandle addUser(int id, String name, int flags) {
+        UserHandle userHandle = super.addUser(id, name, flags);
+        mUserInfoMap.put(id, new UserInfo(id, name, flags));
+        return userHandle;
+    }
+
+    /** Add a profile to be returned by {@link #getProfiles(int)}. */
+    public void addProfile(
+            int userHandle, int profileUserHandle, String profileName, int profileFlags) {
+        UserInfo profileUserInfo = new UserInfo(profileUserHandle, profileName, profileFlags);
+        mUserProfileInfos.add(profileUserInfo);
+        mUserInfoMap.put(profileUserHandle, profileUserInfo);
+        mProfileToParent.put(profileUserHandle, userHandle);
+        if (profileFlags == UserInfo.FLAG_MANAGED_PROFILE) {
+            setManagedProfiles(new HashSet<>(Arrays.asList(profileUserHandle)));
+        }
+    }
+
     @Implementation
     protected List<UserInfo> getProfiles(@UserIdInt int userHandle) {
         return mUserProfileInfos;
+    }
+
+    /**
+     * If this profile has been added using {@link #addProfile}, return its parent.
+     */
+    @Implementation(minSdk = LOLLIPOP)
+    protected UserInfo getProfileParent(int userHandle) {
+        if (!mProfileToParent.containsKey(userHandle)) {
+            return null;
+        }
+        return mUserInfoMap.get(mProfileToParent.get(userHandle));
     }
 
     @Implementation
@@ -272,6 +319,19 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
         }
     }
 
+    /**
+     * Sets that the current user is an admin user; controls the return value of
+     * {@link UserManager#isAdminUser}.
+     */
+    public void setIsAdminUser(boolean isAdminUser) {
+        UserInfo userInfo = getUserInfo(UserHandle.myUserId());
+        if (isAdminUser) {
+            userInfo.flags |= UserInfo.FLAG_ADMIN;
+        } else {
+            userInfo.flags &= ~UserInfo.FLAG_ADMIN;
+        }
+    }
+
     @Implementation
     protected boolean isGuestUser() {
         return mIsGuestUser;
@@ -279,5 +339,28 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
 
     public void setGuestUser(boolean isGuestUser) {
         mIsGuestUser = isGuestUser;
+    }
+
+    public static void setIsMultipleAdminEnabled(boolean enableMultipleAdmin) {
+        sIsMultipleAdminEnabled = enableMultipleAdmin;
+    }
+
+    /**
+     * Adds a profile associated for the user that the calling process is running on.
+     *
+     * <p>The user is assigned an arbitrary unique serial number.
+     *
+     * @return the user's serial number
+     * @deprecated use either addUser() or addProfile()
+     */
+    @Deprecated
+    public long addUserProfile(UserHandle userHandle) {
+        long serialNumber = mNextUserSerial++;
+        mUserProfiles.put(userHandle, serialNumber);
+        return serialNumber;
+    }
+
+    protected List<UserHandle> getUserProfiles() {
+        return ImmutableList.copyOf(mUserProfiles.keySet());
     }
 }

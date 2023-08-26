@@ -16,7 +16,6 @@
 
 package com.android.settings.localepicker;
 
-import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.os.Bundle;
@@ -39,7 +38,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.internal.app.LocalePicker;
 import com.android.internal.app.LocaleStore;
 import com.android.settings.R;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.shortcut.ShortcutsUpdateTask;
 
 import java.text.NumberFormat;
@@ -53,7 +51,6 @@ class LocaleDragAndDropAdapter
     private static final String TAG = "LocaleDragAndDropAdapter";
     private static final String CFGKEY_SELECTED_LOCALES = "selectedLocales";
     private static final String CFGKEY_DRAG_LOCALE = "dragLocales";
-    private static final String CFGKEY_DRAG_LOCALES_TO_POSITION = "dragLocales_end";
 
     private final Context mContext;
     private final ItemTouchHelper mItemTouchHelper;
@@ -61,7 +58,6 @@ class LocaleDragAndDropAdapter
     private List<LocaleStore.LocaleInfo> mFeedItemList;
     private List<LocaleStore.LocaleInfo> mCacheItemList;
     private RecyclerView mParentView = null;
-    private LocaleListEditor mParent;
     private boolean mRemoveMode = false;
     private boolean mDragEnabled = true;
     private NumberFormat mNumberFormatter = NumberFormat.getNumberInstance();
@@ -94,7 +90,6 @@ class LocaleDragAndDropAdapter
 
     LocaleDragAndDropAdapter(LocaleListEditor parent, List<LocaleStore.LocaleInfo> feedItemList) {
         mFeedItemList = feedItemList;
-        mParent = parent;
         mCacheItemList = new ArrayList<>(feedItemList);
         mContext = parent.getContext();
 
@@ -230,12 +225,6 @@ class LocaleDragAndDropAdapter
                     "Negative position in onItemMove %d -> %d", fromPosition, toPosition));
         }
 
-        if (fromPosition != toPosition) {
-            FeatureFactory.getFeatureFactory().getMetricsFeatureProvider()
-                    .action(mContext, SettingsEnums.ACTION_REORDER_LANGUAGE,
-                            mDragLocale.getLocale().toLanguageTag() + " move to " + toPosition);
-        }
-
         notifyItemChanged(fromPosition); // to update the numbers
         notifyItemChanged(toPosition);
         notifyItemMoved(fromPosition, toPosition);
@@ -274,9 +263,6 @@ class LocaleDragAndDropAdapter
         for (int i = itemCount - 1; i >= 0; i--) {
             localeInfo = mFeedItemList.get(i);
             if (localeInfo.getChecked()) {
-                FeatureFactory.getFeatureFactory().getMetricsFeatureProvider()
-                        .action(mContext, SettingsEnums.ACTION_REMOVE_LANGUAGE,
-                                localeInfo.getLocale().toLanguageTag());
                 mFeedItemList.remove(i);
             }
         }

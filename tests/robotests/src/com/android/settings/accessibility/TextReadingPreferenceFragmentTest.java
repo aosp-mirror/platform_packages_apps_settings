@@ -52,6 +52,8 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
+import org.robolectric.annotation.LooperMode;
 import org.robolectric.shadows.ShadowToast;
 
 import java.util.ArrayList;
@@ -60,6 +62,10 @@ import java.util.List;
 
 /** Tests for {@link TextReadingPreferenceFragment}. */
 @RunWith(RobolectricTestRunner.class)
+@LooperMode(LooperMode.Mode.LEGACY)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class TextReadingPreferenceFragmentTest {
 
     @Rule

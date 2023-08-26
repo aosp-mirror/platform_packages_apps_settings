@@ -70,8 +70,7 @@ public class BluetoothDetailsHeaderControllerTest extends BluetoothDetailsContro
         when(mBluetoothManager.getCachedDeviceManager()).thenReturn(mCachedDeviceManager);
         when(mCachedDeviceManager.getSubDeviceSummary(mCachedDevice)).thenReturn("abc");
         mController =
-            new BluetoothDetailsHeaderController(mContext, mFragment, mCachedDevice, mLifecycle,
-                mBluetoothManager);
+            new BluetoothDetailsHeaderController(mContext, mFragment, mCachedDevice, mLifecycle);
         mPreference = new LayoutPreference(
                 mContext, com.android.settingslib.widget.R.layout.settings_entity_header);
         mPreference.setKey(mController.getPreferenceKey());
@@ -104,7 +103,7 @@ public class BluetoothDetailsHeaderControllerTest extends BluetoothDetailsContro
         verify(mHeaderController).setIconContentDescription(any(String.class));
         verify(mHeaderController).setSummary(any(String.class));
         verify(mHeaderController).setSecondSummary(any(String.class));
-        verify(mHeaderController).done(mActivity, true);
+        verify(mHeaderController).done(true);
     }
 
     @Test

@@ -31,12 +31,12 @@ import android.media.AudioDeviceCallback;
 import android.media.AudioManager;
 import android.os.Handler;
 
-import java.util.List;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.shadow.api.Shadow;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Implements(value = AudioManager.class)
 public class ShadowAudioManager extends org.robolectric.shadows.ShadowAudioManager {
@@ -46,7 +46,7 @@ public class ShadowAudioManager extends org.robolectric.shadows.ShadowAudioManag
     private List<AudioDeviceCallback> mDeviceCallbacks = new ArrayList<>();
 
     @Implementation
-    private int getRingerModeInternal() {
+    protected int getRingerModeInternal() {
         return mRingerMode;
     }
 

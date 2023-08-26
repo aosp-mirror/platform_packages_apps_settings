@@ -52,7 +52,10 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = ShadowEntityHeaderController.class)
+@Config(shadows = {
+        ShadowEntityHeaderController.class,
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class UsbDetailsHeaderControllerTest {
 
     private UsbDetailsHeaderController mDetailsHeaderController;
@@ -111,6 +114,6 @@ public class UsbDetailsHeaderControllerTest {
             DrawableTestHelper.assertDrawableResId(t, R.drawable.ic_usb);
             return true;
         }));
-        verify(mHeaderController).done(mActivity, true);
+        verify(mHeaderController).done(true);
     }
 }

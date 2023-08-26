@@ -47,7 +47,10 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowBluetoothAdapter.class})
+@Config(shadows = {
+        ShadowBluetoothAdapter.class,
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class BluetoothDeviceRenamePreferenceControllerTest {
 
     private static final String DEVICE_NAME = "Nightshade";

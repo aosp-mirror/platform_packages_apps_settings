@@ -21,6 +21,7 @@ import static android.content.Context.POWER_SERVICE;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -85,7 +86,7 @@ public class BrightnessLevelPreferenceControllerTest {
         ShadowApplication.getInstance().setSystemService(POWER_SERVICE,
                 mPowerManager);
         when(mScreen.findPreference(anyString())).thenReturn(mPreference);
-        when(mContext.getDisplay()).thenReturn(mDisplay);
+        doReturn(mDisplay).when(mContext).getDisplay();
         mController = spy(new BrightnessLevelPreferenceController(mContext, null));
     }
 

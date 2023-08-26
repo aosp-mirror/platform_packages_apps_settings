@@ -128,7 +128,7 @@ class FingerprintEnrollmentIntroV2Fragment : Fragment(R.layout.fingerprint_v2_en
                 R.id.icon_link
               )
               .forEach { icon ->
-                view.findViewById<ImageView>(icon).drawable.colorFilter = colorFilter
+                view.requireViewById<ImageView>(icon).drawable.colorFilter = colorFilter
               }
 
             // Set the text for the footer text views.
@@ -139,12 +139,12 @@ class FingerprintEnrollmentIntroV2Fragment : Fragment(R.layout.fingerprint_v2_en
                 R.id.footer_message_5 to textModel.footerMessageFive,
                 R.id.footer_message_6 to textModel.footerMessageSix,
               )
-              .forEach { pair -> view.findViewById<TextView>(pair.first).setText(pair.second) }
+              .forEach { pair -> view.requireViewById<TextView>(pair.first).setText(pair.second) }
 
             setFooterLink(view)
 
-            val iconShield: ImageView = view.findViewById(R.id.icon_shield)
-            val footerMessage6: TextView = view.findViewById(R.id.footer_message_6)
+            val iconShield: ImageView = view.requireViewById(R.id.icon_shield)
+            val footerMessage6: TextView = view.requireViewById(R.id.footer_message_6)
             when (sensorProps?.sensorType) {
               FingerprintSensorProperties.TYPE_UDFPS_ULTRASONIC,
               FingerprintSensorProperties.TYPE_UDFPS_OPTICAL -> {
@@ -157,15 +157,15 @@ class FingerprintEnrollmentIntroV2Fragment : Fragment(R.layout.fingerprint_v2_en
               }
             }
 
-            view.findViewById<TextView?>(R.id.footer_title_1).setText(textModel.footerTitleOne)
-            view.findViewById<TextView?>(R.id.footer_title_2).setText(textModel.footerTitleOne)
+            view.requireViewById<TextView?>(R.id.footer_title_1).setText(textModel.footerTitleOne)
+            view.requireViewById<TextView?>(R.id.footer_title_2).setText(textModel.footerTitleOne)
           }
         }
     }
   }
 
   private fun setFooterLink(view: View) {
-    val footerLink: TextView = view.findViewById(R.id.footer_learn_more)
+    val footerLink: TextView = view.requireViewById(R.id.footer_learn_more)
     footerLink.movementMethod = LinkMovementMethod.getInstance()
     footerLink.text =
       Html.fromHtml(
@@ -178,13 +178,13 @@ class FingerprintEnrollmentIntroV2Fragment : Fragment(R.layout.fingerprint_v2_en
     view: View,
   ) {
     val scrollView: ScrollView =
-      view.findViewById(com.google.android.setupdesign.R.id.sud_scroll_view)
+      view.requireViewById(com.google.android.setupdesign.R.id.sud_scroll_view)
     scrollView.importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_YES
     // Next button responsible for starting the next fragment.
     val onNextButtonClick: View.OnClickListener =
       View.OnClickListener { Log.d(TAG, "OnNextClicked") }
 
-    val layout: GlifLayout = requireActivity().findViewById(R.id.setup_wizard_layout)
+    val layout: GlifLayout = requireActivity().requireViewById(R.id.setup_wizard_layout)
     footerBarMixin = layout.getMixin(FooterBarMixin::class.java)
     footerBarMixin.primaryButton =
       FooterButton.Builder(requireActivity())

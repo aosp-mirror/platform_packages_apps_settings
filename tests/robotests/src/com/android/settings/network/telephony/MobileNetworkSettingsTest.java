@@ -58,7 +58,10 @@ import org.robolectric.util.ReflectionHelpers;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = ShadowEntityHeaderController.class)
+@Config(shadows = {
+        ShadowEntityHeaderController.class,
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class MobileNetworkSettingsTest {
     @Mock
     private TelephonyManager mTelephonyManager;

@@ -45,8 +45,10 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
+import org.robolectric.annotation.LooperMode;
 
 @RunWith(RobolectricTestRunner.class)
+@LooperMode(LooperMode.Mode.LEGACY)
 @Config(shadows = {ShadowUtils.class, ShadowAlertDialogCompat.class})
 public class SetupFingerprintEnrollFindSensorTest {
 

@@ -42,11 +42,11 @@ class RemoteAuthEnrollEnrolling :
     private val viewModel = RemoteAuthEnrollEnrollingViewModel()
     private val adapter = RemoteAuthEnrollEnrollingRecyclerViewAdapter()
     private val progressBar by lazy {
-        view!!.findViewById<ProgressBar>(R.id.enrolling_list_progress_bar)
+        view!!.requireViewById<ProgressBar>(R.id.enrolling_list_progress_bar)
     }
-    private val errorText by lazy { view!!.findViewById<TextView>(R.id.error_text) }
+    private val errorText by lazy { view!!.requireViewById<TextView>(R.id.error_text) }
     private val recyclerView by lazy {
-        view!!.findViewById<RecyclerView>(R.id.discovered_authenticator_list)
+        view!!.requireViewById<RecyclerView>(R.id.discovered_authenticator_list)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -76,6 +76,8 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     static final String KEY_WIFI_HOTSPOT_SECURITY = "wifi_hotspot_security";
     @VisibleForTesting
     static final String KEY_WIFI_HOTSPOT_SPEED = "wifi_hotspot_speed";
+    @VisibleForTesting
+    static final String KEY_INSTANT_HOTSPOT = "wifi_hotspot_instant";
 
     @VisibleForTesting
     SettingsMainSwitchBar mMainSwitchBar;
@@ -103,6 +105,8 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     Preference mWifiHotspotSecurity;
     @VisibleForTesting
     Preference mWifiHotspotSpeed;
+    @VisibleForTesting
+    Preference mInstantHotspot;
 
     static {
         TETHER_STATE_CHANGE_FILTER = new IntentFilter(WIFI_AP_STATE_CHANGED_ACTION);
@@ -148,6 +152,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
                 .getWifiTetherViewModel(this);
         if (mWifiTetherViewModel != null) {
             setupSpeedFeature(mWifiTetherViewModel.isSpeedFeatureAvailable());
+            setupInstantHotspot(mWifiTetherViewModel.isInstantHotspotFeatureAvailable());
             mWifiTetherViewModel.getRestarting().observe(this, this::onRestartingChanged);
         }
     }
@@ -165,6 +170,24 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
             mWifiTetherViewModel.getSecuritySummary().observe(this, this::onSecuritySummaryChanged);
             mWifiTetherViewModel.getSpeedSummary().observe(this, this::onSpeedSummaryChanged);
         }
+    }
+
+    @VisibleForTesting
+    void setupInstantHotspot(boolean isFeatureAvailable) {
+        if (!isFeatureAvailable) {
+            return;
+        }
+        mInstantHotspot = findPreference(KEY_INSTANT_HOTSPOT);
+        if (mInstantHotspot == null) {
+            Log.e(TAG, "Failed to find Instant Hotspot preference:" + KEY_INSTANT_HOTSPOT);
+            return;
+        }
+        mWifiTetherViewModel.getInstantHotspotSummary()
+                .observe(this, this::onInstantHotspotChanged);
+        mInstantHotspot.setOnPreferenceClickListener(p -> {
+            mWifiTetherViewModel.launchInstantHotspotSettings();
+            return true;
+        });
     }
 
     @Override
@@ -277,6 +300,16 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     void onRestartingChanged(Boolean restarting) {
         mMainSwitchBar.setVisibility((restarting) ? INVISIBLE : VISIBLE);
         setLoading(restarting, false);
+    }
+
+    @VisibleForTesting
+    void onInstantHotspotChanged(String summary) {
+        if (summary == null) {
+            mInstantHotspot.setVisible(false);
+            return;
+        }
+        mInstantHotspot.setVisible(true);
+        mInstantHotspot.setSummary(summary);
     }
 
     @VisibleForTesting

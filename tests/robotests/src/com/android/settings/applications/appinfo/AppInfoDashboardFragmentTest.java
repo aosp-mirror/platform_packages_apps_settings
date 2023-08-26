@@ -76,6 +76,9 @@ import java.util.List;
 import java.util.Set;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public final class AppInfoDashboardFragmentTest {
 
     private static final String PACKAGE_NAME = "test_package_name";

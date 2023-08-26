@@ -199,6 +199,8 @@
     <string name="terms_of_address_not_specified" msgid="4439257779351251973">"指定しない"</string>
     <string name="terms_of_address_feminine" msgid="1743479869695539283">"女性"</string>
     <string name="terms_of_address_masculine" msgid="983106046135098856">"男性"</string>
+    <!-- no translation found for terms_of_address_neutral (5475414185543112478) -->
+    <skip />
     <string name="dlg_remove_locales_title" msgid="3170501604483612114">"{count,plural, =1{選択した言語を削除しますか？}other{選択した言語を削除しますか？}}"</string>
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"テキストは別の言語で表示されるようになります。"</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"すべての言語を削除することはできません"</string>
@@ -388,34 +390,31 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"顔、<xliff:g id="WATCH">%s</xliff:g>を登録しました"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"顔、指紋、<xliff:g id="WATCH">%s</xliff:g>を登録しました"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"顔、指紋、<xliff:g id="WATCH">%s</xliff:g>を登録しました"</string>
-    <!-- no translation found for security_settings_remoteauth_enroll_introduction_title (2151004795778999671) -->
-    <skip />
-    <!-- no translation found for security_settings_remoteauth_enroll_introduction_message (8737276885766036074) -->
-    <skip />
-    <!-- no translation found for security_settings_remoteauth_enroll_introduction_disagree (7639258097401796028) -->
-    <skip />
-    <!-- no translation found for security_settings_remoteauth_enroll_introduction_agree (5271119227172049339) -->
-    <skip />
-    <!-- no translation found for security_settings_remoteauth_enroll_introduction_more (1644105894631257595) -->
-    <skip />
-    <!-- no translation found for security_settings_remoteauth_enroll_introduction_how_title (6604152528267830349) -->
-    <skip />
-    <!-- no translation found for security_settings_remoteauth_enroll_introduction_info_lock_open (8570511335628725116) -->
-    <skip />
-    <!-- no translation found for security_settings_remoteauth_enroll_introduction_info_notifications (4298855831154039694) -->
-    <skip />
-    <!-- no translation found for security_settings_remoteauth_enroll_introduction_youre_in_control_title (7974976673323638524) -->
-    <skip />
-    <!-- no translation found for security_settings_remoteauth_enroll_introduction_info_remove_watch (1888318677088986801) -->
-    <skip />
-    <!-- no translation found for security_settings_remoteauth_enroll_introduction_animation_tap_notification (1597397399097952974) -->
-    <skip />
-    <!-- no translation found for security_settings_remoteauth_enroll_introduction_animation_swipe_up (2129230804324634653) -->
-    <skip />
-    <!-- no translation found for security_settings_remoteauth_enroll_finish_title (3807372930755413112) -->
-    <skip />
+    <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"スマートウォッチのセットアップ"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_message" msgid="8737276885766036074">"ウォッチ認証を使用すると、たとえば指が濡れているときや顔が認識されないときでも、このスマートフォンをロック解除できます。\n\n次のようにして、スマートウォッチでこのスマートフォンをロック解除できます。"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_disagree" msgid="7639258097401796028">"後で"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_agree" msgid="5271119227172049339">"続行"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_more" msgid="1644105894631257595">"もっと見る"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_how_title" msgid="6604152528267830349">"仕組み"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_info_lock_open" msgid="8570511335628725116">"スマートウォッチをロック解除し、手首に着けて、このスマートフォンに近づける必要があります。すでに着けている場合は、スマートウォッチを再びロック解除する必要はありません。"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_info_notifications" msgid="4298855831154039694">"このスマートフォンがロック解除されると、スマートウォッチに通知が届きます。意図せずロック解除された場合は、通知をタップしてスマートフォンをもう一度ロックしてください。"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_youre_in_control_title" msgid="7974976673323638524">"ユーザーが設定可能"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_info_remove_watch" msgid="1888318677088986801">"[設定] で、ウォッチ認証からスマートウォッチをいつでも削除できます"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_animation_tap_notification" msgid="1597397399097952974">"通知をタップする"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_animation_swipe_up" msgid="2129230804324634653">"ロック画面を上にスワイプする"</string>
+    <string name="security_settings_remoteauth_enroll_enrolling_title" msgid="313016997943607675">"スマートウォッチの選択"</string>
+    <string name="security_settings_remoteauth_enroll_enrolling_list_heading" msgid="8227585438932911013">"対応しているスマートウォッチ"</string>
+    <string name="security_settings_remoteauth_enroll_enrolling_disagree" msgid="1670201454188049863">"キャンセル"</string>
+    <string name="security_settings_remoteauth_enroll_enrolling_agree" msgid="7048336252635730908">"確認"</string>
+    <string name="security_settings_remoteauth_enroll_finish_title" msgid="3807372930755413112">"設定完了"</string>
     <string name="security_settings_remoteauth_enroll_finish_description" msgid="4876209907275244653">"ロック画面で上にスワイプするか通知をタップすることで、スマートウォッチからスマートフォンをロック解除できるようになりました"</string>
     <string name="security_settings_remoteauth_enroll_finish_btn_next" msgid="8072138423143889592">"完了"</string>
+    <string name="security_settings_remoteauth_settings_title" msgid="1564912618737165129">"ウォッチ認証"</string>
+    <string name="security_settings_remoteauth_settings_description" msgid="2758239650119457964">"ロック画面で上にスワイプするか通知をタップすることで、スマートウォッチからスマートフォンをロック解除できます"</string>
+    <string name="security_settings_remoteauth_settings_info_footer" msgid="795894033901478120">"ウォッチ認証を使用するには、スマートウォッチがロック解除されていること、手首に装着されていること、このスマートフォンの近くにあること、このスマートフォンと接続済みであることが必要です。接続が中断された場合、ウォッチ認証を使用するにはスマートフォンをロック解除する必要があります。\n\n注意事項:\n一度にセットアップできるスマートウォッチは 1 つだけです。他のスマートウォッチを追加するには、セットアップ済みのスマートウォッチを削除してください。"</string>
+    <string name="security_settings_remoteauth_settings_learn_more" msgid="5653556124819260050">"ウォッチ認証の詳細"</string>
+    <string name="security_settings_remoteauth_settings_register_new_authenticator" msgid="9191331738306527887">"スマートウォッチを追加"</string>
+    <string name="security_settings_remoteauth_settings_remove_device" msgid="2436226120578851282">"スマートウォッチを削除"</string>
     <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"指紋認証と顔認証"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"仕事用の顔認証と指紋認証"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"セットアップが必要です"</string>
@@ -679,10 +678,8 @@
     <string name="bluetooth_enter_passkey_other_device" msgid="8270426446247344709">"もう一方のデバイスでも、このパスキーの入力が必要な場合があります。"</string>
     <string name="bluetooth_paring_group_msg" msgid="4609515924670823316">"確認すると、調整された設定でペア設定します"</string>
     <string name="bluetooth_pairing_shares_phonebook" msgid="4329325125260724843">"連絡先と通話履歴へのアクセスを許可する"</string>
-    <!-- no translation found for bluetooth_pairing_phonebook_toggle_text (2474015367387690034) -->
-    <skip />
-    <!-- no translation found for bluetooth_pairing_phonebook_toggle_details (1367197978487212581) -->
-    <skip />
+    <string name="bluetooth_pairing_phonebook_toggle_text" msgid="2474015367387690034">"連絡先と通話履歴へのアクセスも許可します"</string>
+    <string name="bluetooth_pairing_phonebook_toggle_details" msgid="1367197978487212581">"情報は着信の通知などに使用されます"</string>
     <string name="bluetooth_error_title" msgid="2284738188253690278"></string>
     <string name="bluetooth_connecting_error_message" msgid="3941893154784152112">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>に接続できませんでした。"</string>
     <string name="bluetooth_preference_found_media_devices" msgid="830061195998352840">"使用可能なデバイス"</string>
@@ -955,6 +952,12 @@
     <string name="wifi_hotspot_speed_footer" msgid="8846939503916795002">"優先周波数を利用できない場合、アクセス ポイントは別の周波数を使用する可能性があります。周波数を変更すると、アクセス ポイントのセキュリティ設定が変更される可能性があります。"</string>
     <string name="wifi_hotspot_security_summary_unavailable" msgid="117582979310345853">"6 GHz には対応していません"</string>
     <string name="wifi_hotspot_security_footer" msgid="4608329688744949796">"アクセス ポイントの周波数を変更すると、セキュリティ設定が変更される可能性があります"</string>
+    <!-- no translation found for wifi_hotspot_instant_title (7052526695338853703) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_instant_summary_on (3142749148673081288) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_instant_summary_off (8594065628453795615) -->
+    <skip />
     <string name="wifi_tether_starting" msgid="8879874184033857814">"アクセスポイントをONにしています…"</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"アクセスポイントをOFFにしています…"</string>
     <string name="wifi_tether_carrier_unsupport_dialog_title" msgid="3089432578433978073">"テザリングは利用できません"</string>
@@ -4127,7 +4130,7 @@
     <string name="autofill_app" msgid="7595308061826307921">"自動入力サービス"</string>
     <string name="default_autofill_app" msgid="372234803718251606">"デフォルトの自動入力サービス"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"パスワード"</string>
-    <string name="credman_chosen_app_title" msgid="4547405511458518096">"パスワード、パスキー、データのサービス"</string>
+    <string name="credman_chosen_app_title" msgid="872524130208251505">"パスワード、パスキー、データのサービス"</string>
     <string name="credman_credentials" msgid="4931371941253324143">"追加のプロバイダ"</string>
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# 件のパスワード}other{# 件のパスワード}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"自動, 入力, 自動入力, パスワード"</string>
@@ -4135,13 +4138,13 @@
     <string name="credman_autofill_keywords" msgid="701180623776848914">"自動, 入力, 自動入力, データ, パスキー, パスワード"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;このアプリが信頼できることを確認してください&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; は画面上の内容に基づいて、自動入力可能な情報を判別します。"</string>
     <string name="credman_autofill_confirmation_message" msgid="4951846866327737417">"&lt;b&gt;&lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; を使用しますか？&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; は画面上の内容に基づいて、自動入力可能な情報を判別します。今後は、新しいパスワード、パスキー、その他の情報がここに保存されます。"</string>
-    <string name="credman_picker_title" msgid="2642776965060619988">"パスワード、パスキー、データのサービス"</string>
+    <string name="credman_picker_title" msgid="8191267620665129205">"パスワード、パスキー、データのサービス"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"%1$s を OFF にしますか？"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;このサービスを無効にしますか？&lt;/b&gt; &lt;br/&gt; &lt;br/&gt;パスワード、パスキー、お支払い方法などの情報を保存しました。その他の情報はログイン時に入力されません。保存された情報を使用するには、パスワード、パスキー、またはデータのサービスを選択してください。"</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"%1$s を使用しますか？"</string>
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"%1$s は自動入力できる情報を判断するために画面上に表示される情報を使用します。"</string>
-    <string name="credman_error_message_title" msgid="4741457523969373713">"パスワード、パスキー、データのサービスの上限に達しました"</string>
-    <string name="credman_error_message" msgid="6793314648458925172">"一度に有効にできるパスワード、パスキー、データのサービスは 5 個までです。追加するには、いずれかのサービスを OFF にしてください。"</string>
+    <string name="credman_error_message_title" msgid="4099557206946333568">"パスワード、パスキー、データのサービスの上限に達しました"</string>
+    <string name="credman_error_message" msgid="8334797097200415449">"一度に有効にできるパスワード、パスキー、データのサービスは 5 個までです。追加するには、いずれかのサービスを OFF にしてください。"</string>
     <string name="credman_confirmation_message_positive_button" msgid="2812613187691345361">"OFF にする"</string>
     <string name="debug_autofill_category" msgid="5998163555428196185">"自動入力"</string>
     <string name="autofill_logging_level_title" msgid="3733958845861098307">"ロギングレベル"</string>
@@ -4709,6 +4712,8 @@
     <string name="bluetooth_details_audio_device_type_unknown" msgid="839337391037998014">"不明"</string>
     <string name="bluetooth_details_audio_device_type_speaker" msgid="3706227767994792124">"スピーカー"</string>
     <string name="bluetooth_details_audio_device_type_headphones" msgid="7644588291215033798">"ヘッドフォン"</string>
+    <!-- no translation found for bluetooth_details_audio_device_type_hearing_aid (1310631131071939859) -->
+    <skip />
     <string name="bluetooth_details_audio_device_type_carkit" msgid="4439017600454703229">"車載キット"</string>
     <string name="bluetooth_details_audio_device_type_other" msgid="7019481234617207563">"その他"</string>
     <string name="ingress_rate_limit_title" msgid="2106694002836274350">"ネットワーク ダウンロード速度制限"</string>
@@ -4789,12 +4794,9 @@
     <string name="contrast_medium" msgid="384414510709285811">"中"</string>
     <string name="contrast_high" msgid="3988567609694797696">"高"</string>
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"このアプリはウィンドウが 1 つの場合のみ開くことができます"</string>
-    <!-- no translation found for generic_accessibility_service_on (4466229372357726824) -->
-    <skip />
-    <!-- no translation found for generic_accessibility_service_off (4759859497651675724) -->
-    <skip />
-    <!-- no translation found for generic_accessibility_feature_shortcut_off (4022872394514077907) -->
-    <skip />
+    <string name="generic_accessibility_service_on" msgid="4466229372357726824">"ON"</string>
+    <string name="generic_accessibility_service_off" msgid="4759859497651675724">"OFF"</string>
+    <string name="generic_accessibility_feature_shortcut_off" msgid="4022872394514077907">"OFF"</string>
     <string name="accessibility_shortcut_state_off" msgid="8158137799007601475">"OFF"</string>
     <string name="daltonizer_state_on" msgid="131013270022603983">"ON"</string>
     <string name="daltonizer_state_off" msgid="1162285688069856179">"OFF"</string>

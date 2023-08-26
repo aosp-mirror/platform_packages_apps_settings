@@ -76,8 +76,12 @@ import org.robolectric.util.ReflectionHelpers;
 import java.util.ArrayList;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowUserManager.class, ShadowAppUtils.class,
-        ShadowInteractionJankMonitor.class})
+@Config(shadows = {
+        ShadowUserManager.class,
+        ShadowAppUtils.class,
+        ShadowInteractionJankMonitor.class,
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class ManageApplicationsTest {
 
     @Mock

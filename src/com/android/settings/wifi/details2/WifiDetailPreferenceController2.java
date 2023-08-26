@@ -434,7 +434,6 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
             mDataUsageSummaryPref.setVisible(true);
             mSummaryHeaderController =
                     new WifiDataUsageSummaryPreferenceController(mFragment.getActivity(),
-                            mLifecycle, (PreferenceFragmentCompat) mFragment,
                             mWifiEntry.getWifiConfiguration().getAllNetworkKeys());
             return;
         }
@@ -489,8 +488,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
             mEntityHeaderController
                     .setSummary(mWifiEntry.getSummary())
                     .setSecondSummary(getExpiryTimeSummary())
-                    .setRecyclerView(mFragment.getListView(), mLifecycle)
-                    .done(mFragment.getActivity(), true /* rebind */);
+                    .done(true /* rebind */);
         }
     }
 
@@ -583,9 +581,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
         Drawable wifiIcon = mIconInjector.getIcon(mShowX, mRssiSignalLevel);
 
         if (mEntityHeaderController != null) {
-            mEntityHeaderController
-                    .setIcon(redrawIconForHeader(wifiIcon)).done(mFragment.getActivity(),
-                            true /* rebind */);
+            mEntityHeaderController.setIcon(redrawIconForHeader(wifiIcon)).done(true /* rebind */);
         }
 
         Drawable wifiIconDark = wifiIcon.getConstantState().newDrawable().mutate();

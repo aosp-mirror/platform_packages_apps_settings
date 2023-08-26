@@ -51,7 +51,10 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = ShadowSettingsLibUtils.class)
+@Config(shadows = {
+        ShadowSettingsLibUtils.class,
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class AppHeaderViewPreferenceControllerTest {
 
     @Mock
