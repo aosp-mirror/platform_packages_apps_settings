@@ -16,6 +16,7 @@
 
 package com.android.settings.fuelgauge.batteryusage;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.text.TextUtils;
 
@@ -26,6 +27,7 @@ import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import java.util.function.Function;
 
@@ -36,19 +38,20 @@ public class BatteryTipsController extends BasePreferenceController {
     private static final String ROOT_PREFERENCE_KEY = "battery_tips_category";
     private static final String CARD_PREFERENCE_KEY = "battery_tips_card";
 
+    private final PowerUsageFeatureProvider mPowerUsageFeatureProvider;
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
+
     @VisibleForTesting
     BatteryTipsCardPreference mCardPreference;
-    @VisibleForTesting
-    PowerUsageFeatureProvider mPowerUsageFeatureProvider;
 
     public BatteryTipsController(Context context) {
         super(context, ROOT_PREFERENCE_KEY);
-        mPowerUsageFeatureProvider = FeatureFactory.getFactory(context)
-                .getPowerUsageFeatureProvider(context);
+        final FeatureFactory featureFactory = FeatureFactory.getFactory(context);
+        mPowerUsageFeatureProvider =  featureFactory.getPowerUsageFeatureProvider(context);
+        mMetricsFeatureProvider = featureFactory.getMetricsFeatureProvider();
     }
 
     private boolean isTipsCardVisible() {
-        // TODO: compared with the timestamp of last user dismiss action in sharedPreference.
         return mPowerUsageFeatureProvider.isBatteryTipsEnabled();
     }
 
@@ -66,9 +69,9 @@ public class BatteryTipsController extends BasePreferenceController {
     private <T> T getInfo(PowerAnomalyEvent powerAnomalyEvent,
                           Function<WarningBannerInfo, T> warningBannerInfoSupplier,
                           Function<WarningItemInfo, T> warningItemInfoSupplier) {
-        if (powerAnomalyEvent.hasWarningBannerInfo() && warningBannerInfoSupplier != null) {
+        if (warningBannerInfoSupplier != null && powerAnomalyEvent.hasWarningBannerInfo()) {
             return warningBannerInfoSupplier.apply(powerAnomalyEvent.getWarningBannerInfo());
-        } else if (powerAnomalyEvent.hasWarningItemInfo() && warningItemInfoSupplier != null) {
+        } else if (warningItemInfoSupplier != null && powerAnomalyEvent.hasWarningItemInfo()) {
             return warningItemInfoSupplier.apply(powerAnomalyEvent.getWarningItemInfo());
         }
         return null;
@@ -105,8 +108,9 @@ public class BatteryTipsController extends BasePreferenceController {
         }
 
         // Get card preference strings and navigate fragment info
-        final int resourceIndex = powerAnomalyEvent.hasKey()
-                ? powerAnomalyEvent.getKey().getNumber() : -1;
+        final PowerAnomalyKey powerAnomalyKey = powerAnomalyEvent.hasKey()
+                ? powerAnomalyEvent.getKey() : null;
+        final int resourceIndex = powerAnomalyKey != null ? powerAnomalyKey.getNumber() : -1;
 
         String titleString = getString(powerAnomalyEvent, WarningBannerInfo::getTitleString,
                 WarningItemInfo::getTitleString, R.array.power_anomaly_titles, resourceIndex);
@@ -122,19 +126,24 @@ public class BatteryTipsController extends BasePreferenceController {
                 WarningBannerInfo::getCancelButtonString, WarningItemInfo::getCancelButtonString,
                 R.array.power_anomaly_dismiss_btn_strings, resourceIndex);
 
-        String destinationClassName = getString(powerAnomalyEvent,
-                WarningBannerInfo::getMainButtonDestination,
-                WarningItemInfo::getMainButtonDestination,
-                -1, -1);
+        String destinationClassName = getInfo(powerAnomalyEvent,
+                WarningBannerInfo::getMainButtonDestination, null);
         Integer sourceMetricsCategory = getInfo(powerAnomalyEvent,
-                WarningBannerInfo::getMainButtonSourceMetricsCategory,
-                WarningItemInfo::getMainButtonSourceMetricsCategory);
+                WarningBannerInfo::getMainButtonSourceMetricsCategory, null);
+        String preferenceHighlightKey = getInfo(powerAnomalyEvent,
+                WarningBannerInfo::getMainButtonSourceHighlightKey, null);
 
         // Updated card preference and main button fragment launcher
+        mCardPreference.setAnomalyEventId(powerAnomalyEvent.getEventId());
+        mCardPreference.setPowerAnomalyKey(powerAnomalyKey);
         mCardPreference.setTitle(titleString);
         mCardPreference.setMainButtonLabel(mainBtnString);
         mCardPreference.setDismissButtonLabel(dismissBtnString);
-        mCardPreference.setMainButtonLauncherInfo(destinationClassName, sourceMetricsCategory);
+        mCardPreference.setMainButtonLauncherInfo(
+                destinationClassName, sourceMetricsCategory, preferenceHighlightKey);
         mCardPreference.setVisible(true);
+
+        mMetricsFeatureProvider.action(mContext,
+                SettingsEnums.ACTION_BATTERY_TIPS_CARD_SHOW, powerAnomalyEvent.getEventId());
     }
 }

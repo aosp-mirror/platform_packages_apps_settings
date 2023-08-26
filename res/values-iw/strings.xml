@@ -915,6 +915,12 @@
     <string name="wifi_hotspot_speed_footer" msgid="8846939503916795002">"אם התדירות המועדפת לא זמינה, יכול להיות שנקודת האינטרנט תשתמש בתדירות אחרת. הגדרות האבטחה של נקודת האינטרנט עשויות להשתנות כשמשנים את התדירות."</string>
     <string name="wifi_hotspot_security_summary_unavailable" msgid="117582979310345853">"‏אין זמינות עם 6GHz‎"</string>
     <string name="wifi_hotspot_security_footer" msgid="4608329688744949796">"‏הגדרות האבטחה עשויות להשתנות אם משנים את תדירות נקודת האינטרנט (Hotspot)"</string>
+    <!-- no translation found for wifi_hotspot_instant_title (7052526695338853703) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_instant_summary_on (3142749148673081288) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_instant_summary_off (8594065628453795615) -->
+    <skip />
     <string name="wifi_tether_starting" msgid="8879874184033857814">"מתבצעת הפעלה של נקודה לשיתוף אינטרנט…"</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"מתבצע כיבוי של נקודה לשיתוף אינטרנט…"</string>
     <string name="wifi_tether_carrier_unsupport_dialog_title" msgid="3089432578433978073">"‏שיתוף האינטרנט בין מכשירים (tethering) לא זמין"</string>
@@ -1966,8 +1972,8 @@
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"זמן לחיצה אוטומטית"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"רטט ומשוב פיזי"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"שליטה בעוצמת הרטט לשימושים שונים"</string>
-    <string name="accessibility_vibration_settings_state_on" msgid="5566026932372832502">"מופעלת"</string>
-    <string name="accessibility_vibration_settings_state_off" msgid="7946588741954981703">"כבויה"</string>
+    <string name="accessibility_vibration_settings_state_on" msgid="5566026932372832502">"מופעל"</string>
+    <string name="accessibility_vibration_settings_state_off" msgid="7946588741954981703">"כבוי"</string>
     <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary" msgid="3982701772953323190">"ההגדרה הושבתה מפני שהמכשיר מוגדר למצב שקט"</string>
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"שיחות"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"התראות"</string>
@@ -3346,7 +3352,7 @@
     <string name="app_notification_override_dnd_title" msgid="3769539356442226691">"התעלמות ממצב \'נא לא להפריע\'"</string>
     <string name="app_notification_override_dnd_summary" msgid="4894641191397562920">"ההתראות האלה יוכלו להמשיך ולהפריע כשמצב \'נא לא להפריע\' מופעל"</string>
     <string name="app_notification_visibility_override_title" msgid="7778628150022065920">"מסך נעילה"</string>
-    <string name="app_notifications_dialog_done" msgid="573716608705273004">"בוצע"</string>
+    <string name="app_notifications_dialog_done" msgid="573716608705273004">"אישור"</string>
     <string name="notification_show_lights_title" msgid="5564315979007438583">"אור מהבהב"</string>
     <string name="notification_vibrate_title" msgid="1422330728336623351">"רטט"</string>
     <string name="notification_channel_sound_title" msgid="9018031231387273476">"צליל"</string>
@@ -4666,18 +4672,14 @@
     <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"אודיו שמגיע ממכשירי מדיה תואמים יוצר חוויה עשירה יותר"</string>
     <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"מעקב אחר תנועות הראש"</string>
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"האודיו משתנה בהתאם לתנועות הראש כדי שיישמע טבעי יותר"</string>
-    <!-- no translation found for bluetooth_details_audio_device_types_title (3381941189346781614) -->
+    <string name="bluetooth_details_audio_device_types_title" msgid="3381941189346781614">"סוג של התקן אודיו"</string>
+    <string name="bluetooth_details_audio_device_type_unknown" msgid="839337391037998014">"לא ידוע"</string>
+    <string name="bluetooth_details_audio_device_type_speaker" msgid="3706227767994792124">"רמקול"</string>
+    <string name="bluetooth_details_audio_device_type_headphones" msgid="7644588291215033798">"אוזניות"</string>
+    <!-- no translation found for bluetooth_details_audio_device_type_hearing_aid (1310631131071939859) -->
     <skip />
-    <!-- no translation found for bluetooth_details_audio_device_type_unknown (839337391037998014) -->
-    <skip />
-    <!-- no translation found for bluetooth_details_audio_device_type_speaker (3706227767994792124) -->
-    <skip />
-    <!-- no translation found for bluetooth_details_audio_device_type_headphones (7644588291215033798) -->
-    <skip />
-    <!-- no translation found for bluetooth_details_audio_device_type_carkit (4439017600454703229) -->
-    <skip />
-    <!-- no translation found for bluetooth_details_audio_device_type_other (7019481234617207563) -->
-    <skip />
+    <string name="bluetooth_details_audio_device_type_carkit" msgid="4439017600454703229">"דיבורית לרכב"</string>
+    <string name="bluetooth_details_audio_device_type_other" msgid="7019481234617207563">"אחר"</string>
     <string name="ingress_rate_limit_title" msgid="2106694002836274350">"הגבלה לקצב ההורדה ברשת"</string>
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"הגדרת הגבלה לקצב של תעבורת הנתונים הנכנסת ברוחב הפס של הרשת. ההגבלה תחול על כל הרשתות שמאפשרות חיבור לאינטרנט."</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"הגדרת הגבלה לקצב ההורדה ברשת"</string>

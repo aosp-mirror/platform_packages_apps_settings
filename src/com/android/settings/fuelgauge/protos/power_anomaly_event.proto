@@ -47,7 +47,9 @@ message WarningBannerInfo {
   optional string main_button_destination = 4;
   // Used in the SubSettingLauncher.setSourceMetricsCategory().
   optional int32 main_button_source_metrics_category = 5;
-  optional string cancel_button_string = 6;
+  // Used in the SubSettingLauncher.setArguments().
+  optional string main_button_source_highlight_key = 6;
+  optional string cancel_button_string = 7;
 }
 
 message WarningItemInfo {
@@ -57,9 +59,5 @@ message WarningItemInfo {
   optional string title_string = 4;
   optional string description_string = 5;
   optional string main_button_string = 6;
-  // Used in the SubSettingLauncher.setDestination().
-  optional string main_button_destination = 7;
-  // Used in the SubSettingLauncher.setSourceMetricsCategory().
-  optional int32 main_button_source_metrics_category = 8;
-  optional string cancel_button_string = 9;
+  optional string cancel_button_string = 7;
 }

@@ -52,10 +52,10 @@ import com.google.common.base.Objects;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -397,12 +397,23 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         return true;
     }
 
-    private PowerAnomalyEvent getHighestScoreAnomalyEvent(PowerAnomalyEventList anomalyEventList) {
+    @VisibleForTesting
+    PowerAnomalyEvent getHighestScoreAnomalyEvent(PowerAnomalyEventList anomalyEventList) {
         if (anomalyEventList == null || anomalyEventList.getPowerAnomalyEventsCount() == 0) {
             return null;
         }
-        return Collections.max(anomalyEventList.getPowerAnomalyEventsList(),
-                Comparator.comparing(PowerAnomalyEvent::getScore));
+        final Set<String> dismissedPowerAnomalyKeys =
+                DatabaseUtils.getDismissedPowerAnomalyKeys(mContext);
+        Log.d(TAG, "dismissedPowerAnomalyKeys = " + dismissedPowerAnomalyKeys);
+
+        final PowerAnomalyEvent highestScoreEvent = anomalyEventList.getPowerAnomalyEventsList()
+                .stream()
+                .filter(event -> event.hasKey()
+                        && !dismissedPowerAnomalyKeys.contains(event.getKey().name()))
+                .max(Comparator.comparing(PowerAnomalyEvent::getScore))
+                .orElse(null);
+        Log.d(TAG, "highestScoreAnomalyEvent = " + highestScoreEvent);
+        return highestScoreEvent;
     }
 
     private boolean refreshUiWithNoLevelDataCase() {

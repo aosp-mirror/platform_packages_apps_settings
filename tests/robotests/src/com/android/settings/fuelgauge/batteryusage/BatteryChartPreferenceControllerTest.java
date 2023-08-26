@@ -46,6 +46,7 @@ import android.view.ViewPropertyAnimator;
 import android.widget.LinearLayout;
 
 import com.android.settings.SettingsActivity;
+import com.android.settings.testutils.BatteryTestUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
@@ -406,6 +407,57 @@ public final class BatteryChartPreferenceControllerTest {
         // Only calculate the even hours.
         assertThat(totalHour).isEqualTo(59);
     }
+
+    @Test
+    public void getHighestScoreAnomalyEvent_withEmptyOrNullList_getNull() {
+        assertThat(mBatteryChartPreferenceController.getHighestScoreAnomalyEvent(null))
+                .isEqualTo(null);
+        assertThat(mBatteryChartPreferenceController.getHighestScoreAnomalyEvent(
+                BatteryTestUtils.createEmptyPowerAnomalyEventList()))
+                .isEqualTo(null);
+    }
+
+    @Test
+    public void getHighestScoreAnomalyEvent_withoutDismissed_getHighestScoreEvent() {
+        final PowerAnomalyEventList eventList =
+                BatteryTestUtils.createNonEmptyPowerAnomalyEventList();
+
+        final PowerAnomalyEvent highestScoreEvent =
+                mBatteryChartPreferenceController.getHighestScoreAnomalyEvent(eventList);
+
+        assertThat(highestScoreEvent)
+                .isEqualTo(BatteryTestUtils.createAdaptiveBrightnessAnomalyEvent());
+    }
+
+    @Test
+    public void getHighestScoreAnomalyEvent_withBrightnessDismissed_getScreenTimeout() {
+        final PowerAnomalyEventList eventList =
+                BatteryTestUtils.createNonEmptyPowerAnomalyEventList();
+        DatabaseUtils.removeDismissedPowerAnomalyKeys(mContext);
+        DatabaseUtils.setDismissedPowerAnomalyKeys(mContext, PowerAnomalyKey.KEY_BRIGHTNESS.name());
+
+        final PowerAnomalyEvent highestScoreEvent =
+                mBatteryChartPreferenceController.getHighestScoreAnomalyEvent(eventList);
+
+        assertThat(highestScoreEvent)
+                .isEqualTo(BatteryTestUtils.createScreenTimeoutAnomalyEvent());
+    }
+
+    @Test
+    public void getHighestScoreAnomalyEvent_withAllDismissed_getNull() {
+        final PowerAnomalyEventList eventList =
+                BatteryTestUtils.createNonEmptyPowerAnomalyEventList();
+        DatabaseUtils.removeDismissedPowerAnomalyKeys(mContext);
+        for (PowerAnomalyKey key : PowerAnomalyKey.values()) {
+            DatabaseUtils.setDismissedPowerAnomalyKeys(mContext, key.name());
+        }
+
+        final PowerAnomalyEvent highestScoreEvent =
+                mBatteryChartPreferenceController.getHighestScoreAnomalyEvent(eventList);
+
+        assertThat(highestScoreEvent).isEqualTo(null);
+    }
+
 
     private static Long generateTimestamp(int index) {
         // "2021-04-23 07:00:00 UTC" + index hours
