@@ -736,6 +736,12 @@
             android:title="@string/enable_notes_role_title"
             android:summary="@string/enable_notes_role_summary" />
 
+        <Preference
+            android:key="quarantined_apps"
+            android:title="@string/quarantined_apps_title"
+            settings:controller="com.android.settings.development.quarantine.QuarantinedAppsPreferenceController"
+            android:fragment="com.android.settings.development.quarantine.QuarantinedAppsFragment" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
