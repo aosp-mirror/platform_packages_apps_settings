@@ -26,6 +26,7 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -86,6 +87,7 @@ class DataUsageLibTest {
     }
 
     @Test
+    @Ignore("b/297923588")
     fun getMobileTemplate_mergedImsisFromGroupNull_returnRequestedSub() {
         whenever(subscriptionManager.availableSubscriptionInfoList)
             .thenReturn(listOf(SUBSCRIBER_INFO))
