@@ -240,10 +240,10 @@
     <string name="zone_time_type_standard" msgid="6865420715430680352">"標準時間"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"地域で選択"</string>
     <string name="zone_menu_by_offset" msgid="1257702747474426745">"UTC オフセットで選択"</string>
-    <string name="lock_after_timeout" msgid="8682769000437403444">"画面消灯後からロックまでの時間"</string>
+    <string name="lock_after_timeout" msgid="8682769000437403444">"画面が自動消灯してからロックまでの時間"</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"タイムアウトから <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>"</string>
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"画面消灯の直後にロック（<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> がロック解除を管理している場合を除く）"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"画面消灯後から<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>後にロック（<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> がロック解除を管理している場合を除く）"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"画面が自動的に消灯してから<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>後にロック（<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> がロック解除を管理している場合を除く）"</string>
     <string name="owner_info_settings_title" msgid="3555626140700093017">"ロック画面にテキストを追加"</string>
     <string name="owner_info_settings_summary" msgid="347238313388083297">"なし"</string>
     <string name="owner_info_settings_edit_text_hint" msgid="841926875876050274">"例: 佐藤のAndroid"</string>
@@ -376,7 +376,7 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"顔、<xliff:g id="WATCH">%s</xliff:g>を登録しました"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"顔、指紋、<xliff:g id="WATCH">%s</xliff:g>を登録しました"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"顔、指紋、<xliff:g id="WATCH">%s</xliff:g>を登録しました"</string>
-    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"顔認証と指紋認証によるロック解除"</string>
+    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"顔認証と指紋認証"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"仕事用の顔認証と指紋認証"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"セットアップが必要です"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"顔と指紋を登録しました"</string>
@@ -2288,7 +2288,7 @@
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"ON にする"</string>
-    <string name="battery_saver_master_switch_title" msgid="3474312070095834915">"バッテリー セーバーを使用する"</string>
+    <string name="battery_saver_master_switch_title" msgid="3474312070095834915">"バッテリー セーバーを使用"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="7857393318205740864">"自動的にON"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6194649389871448663">"使用しない"</string>
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"バッテリー残量が <xliff:g id="PERCENT">%1$s</xliff:g> になったとき"</string>
@@ -2702,7 +2702,7 @@
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"今回のゲスト セッションのアプリとデータが今すぐ削除され、今後のゲストのアクティビティはすべて、ゲストモードを終了するたびに削除されます"</string>
     <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"削除, ゲスト, アクティビティ, 消す, データ, ビジター, 消去"</string>
     <string name="enable_guest_calling" msgid="8300355036005240911">"スマートフォンの利用をゲストに許可する"</string>
-    <string name="enable_guest_calling_summary" msgid="4748224917641204782">"発信履歴がゲストユーザーと共有されます。"</string>
+    <string name="enable_guest_calling_summary" msgid="4748224917641204782">"通話履歴がゲストユーザーと共有されます。"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"通話と SMS を ON"</string>
     <string name="user_grant_admin" msgid="5942118263054572074">"このユーザーを管理者にする"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"ユーザーの削除"</string>
@@ -2789,7 +2789,7 @@
     <string name="preferred_network_type_summary" msgid="8786291927331323061">"LTE（推奨）"</string>
     <string name="mms_message_title" msgid="6624505196063391964">"MMS メッセージ"</string>
     <string name="mms_message_summary" msgid="2855847140141698341">"モバイルデータが OFF のときに送受信します"</string>
-    <string name="auto_data_switch_title" msgid="5862200603753603464">"モバイルデータに自動的に切り替えます"</string>
+    <string name="auto_data_switch_title" msgid="5862200603753603464">"モバイルデータを自動的に切替"</string>
     <string name="auto_data_switch_summary" msgid="1934340931995429057">"このネットワークのほうが接続が安定している場合、こちらを一時的に使用します"</string>
     <string name="work_sim_title" msgid="8999872928646924429">"仕事用SIM"</string>
     <string name="user_restrictions_title" msgid="4068914244980335993">"アプリとコンテンツへのアクセス"</string>
