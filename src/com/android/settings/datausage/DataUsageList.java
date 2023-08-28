@@ -538,6 +538,9 @@ public class DataUsageList extends DataUsageBaseFragment
 
     @VisibleForTesting
     void startAppDataUsage(AppItem item) {
+        if (mCycleData == null) {
+            return;
+        }
         final Bundle args = new Bundle();
         args.putParcelable(AppDataUsage.ARG_APP_ITEM, item);
         args.putParcelable(AppDataUsage.ARG_NETWORK_TEMPLATE, mTemplate);
