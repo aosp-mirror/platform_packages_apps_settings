@@ -235,8 +235,7 @@ public class NotificationAssistantPreferenceControllerTest {
         mPreferenceController.getDefaultNASIntent();
         mPreferenceController.updateState(mPreference);
 
-        verify(mPreference, times(1)).setSwitchEnabled(eq(false));
+        verify(mPreference).setSwitchEnabled(eq(false));
         assertFalse(mPreference.isEnabled());
     }
-
 }
