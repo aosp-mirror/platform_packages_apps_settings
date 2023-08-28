@@ -34,6 +34,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
@@ -57,6 +59,7 @@ import com.android.settingslib.net.UidDetail;
 import com.android.settingslib.net.UidDetailProvider;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceChangeListener,
@@ -97,6 +100,7 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
     String mPackageName;
     private CycleAdapter mCycleAdapter;
 
+    @Nullable
     private List<NetworkCycleDataForUid> mUsageData;
     @VisibleForTesting
     NetworkTemplate mTemplate;
@@ -261,7 +265,7 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
     }
 
     @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
+    public boolean onPreferenceChange(@NonNull Preference preference, Object newValue) {
         if (preference == mRestrictBackground) {
             mDataSaverBackend.setIsDenylisted(mAppItem.key, mPackageName, !(Boolean) newValue);
             updatePrefs();
@@ -361,9 +365,7 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
         }
         String[] packages = mPackageManager.getPackagesForUid(uid);
         if (packages != null) {
-            for (int i = 0; i < packages.length; i++) {
-                mPackages.add(packages[i]);
-            }
+            Collections.addAll(mPackages, packages);
         }
     }
 
@@ -448,73 +450,75 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
 
     @VisibleForTesting
     final LoaderManager.LoaderCallbacks<List<NetworkCycleDataForUid>> mUidDataCallbacks =
-        new LoaderManager.LoaderCallbacks<List<NetworkCycleDataForUid>>() {
-            @Override
-            public Loader<List<NetworkCycleDataForUid>> onCreateLoader(int id, Bundle args) {
-                final NetworkCycleDataForUidLoader.Builder builder
-                    = NetworkCycleDataForUidLoader.builder(mContext);
-                builder.setRetrieveDetail(true)
-                    .setNetworkTemplate(mTemplate);
-                for (int i = 0; i < mAppItem.uids.size(); i++) {
-                    builder.addUid(mAppItem.uids.keyAt(i));
+            new LoaderManager.LoaderCallbacks<>() {
+                @Override
+                @NonNull
+                public Loader<List<NetworkCycleDataForUid>> onCreateLoader(int id, Bundle args) {
+                    final NetworkCycleDataForUidLoader.Builder<?> builder =
+                            NetworkCycleDataForUidLoader.builder(mContext);
+                    builder.setRetrieveDetail(true)
+                            .setNetworkTemplate(mTemplate);
+                    for (int i = 0; i < mAppItem.uids.size(); i++) {
+                        builder.addUid(mAppItem.uids.keyAt(i));
+                    }
+                    if (mCycles != null) {
+                        builder.setCycles(mCycles);
+                    }
+                    return builder.build();
                 }
-                if (mCycles != null) {
-                    builder.setCycles(mCycles);
-                }
-                return builder.build();
-            }
 
-            @Override
-            public void onLoadFinished(Loader<List<NetworkCycleDataForUid>> loader,
-                    List<NetworkCycleDataForUid> data) {
-                mUsageData = data;
-                mCycleAdapter.updateCycleList(data);
-                if (mSelectedCycle > 0L) {
-                    final int numCycles = data.size();
-                    int position = 0;
-                    for (int i = 0; i < numCycles; i++) {
-                        final NetworkCycleDataForUid cycleData = data.get(i);
-                        if (cycleData.getEndTime() == mSelectedCycle) {
-                            position = i;
-                            break;
+                @Override
+                public void onLoadFinished(@NonNull Loader<List<NetworkCycleDataForUid>> loader,
+                        List<NetworkCycleDataForUid> data) {
+                    mUsageData = data;
+                    mCycleAdapter.updateCycleList(data);
+                    if (mSelectedCycle > 0L) {
+                        final int numCycles = data.size();
+                        int position = 0;
+                        for (int i = 0; i < numCycles; i++) {
+                            final NetworkCycleDataForUid cycleData = data.get(i);
+                            if (cycleData.getEndTime() == mSelectedCycle) {
+                                position = i;
+                                break;
+                            }
                         }
+                        if (position > 0) {
+                            mCycle.setSelection(position);
+                        }
+                        bindData(position);
+                    } else {
+                        bindData(0 /* position */);
                     }
-                    if (position > 0) {
-                        mCycle.setSelection(position);
-                    }
-                    bindData(position);
-                } else {
-                    bindData(0 /* position */);
+                    mIsLoading = false;
                 }
-                mIsLoading = false;
-            }
 
-            @Override
-            public void onLoaderReset(Loader<List<NetworkCycleDataForUid>> loader) {
-            }
-        };
+                @Override
+                public void onLoaderReset(@NonNull Loader<List<NetworkCycleDataForUid>> loader) {
+                }
+            };
 
     private final LoaderManager.LoaderCallbacks<ArraySet<Preference>> mAppPrefCallbacks =
-        new LoaderManager.LoaderCallbacks<ArraySet<Preference>>() {
-            @Override
-            public Loader<ArraySet<Preference>> onCreateLoader(int i, Bundle bundle) {
-                return new AppPrefLoader(getPrefContext(), mPackages, getPackageManager());
-            }
+            new LoaderManager.LoaderCallbacks<>() {
+                @Override
+                @NonNull
+                public Loader<ArraySet<Preference>> onCreateLoader(int i, Bundle bundle) {
+                    return new AppPrefLoader(getPrefContext(), mPackages, getPackageManager());
+                }
 
-            @Override
-            public void onLoadFinished(Loader<ArraySet<Preference>> loader,
-                    ArraySet<Preference> preferences) {
-                if (preferences != null && mAppList != null) {
-                    for (Preference preference : preferences) {
-                        mAppList.addPreference(preference);
+                @Override
+                public void onLoadFinished(@NonNull Loader<ArraySet<Preference>> loader,
+                        ArraySet<Preference> preferences) {
+                    if (preferences != null && mAppList != null) {
+                        for (Preference preference : preferences) {
+                            mAppList.addPreference(preference);
+                        }
                     }
                 }
-            }
 
-            @Override
-            public void onLoaderReset(Loader<ArraySet<Preference>> loader) {
-            }
-        };
+                @Override
+                public void onLoaderReset(@NonNull Loader<ArraySet<Preference>> loader) {
+                }
+            };
 
     @Override
     public void onDataSaverChanged(boolean isDataSaving) {
