@@ -33,8 +33,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.android.settings.R
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollNavigationViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollViewModel
-import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollmentNavigationViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintGatekeeperViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintScrollViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.Unicorn
@@ -72,10 +72,10 @@ private data class TextModel(
  * 2. How the data will be stored
  * 3. How the user can access and remove their data
  */
-class FingerprintEnrollmentIntroV2Fragment : Fragment(R.layout.fingerprint_v2_enroll_introduction) {
+class FingerprintEnrollIntroV2Fragment : Fragment(R.layout.fingerprint_v2_enroll_introduction) {
   private lateinit var footerBarMixin: FooterBarMixin
   private lateinit var textModel: TextModel
-  private lateinit var navigationViewModel: FingerprintEnrollmentNavigationViewModel
+  private lateinit var navigationViewModel: FingerprintEnrollNavigationViewModel
   private lateinit var fingerprintEnrollViewModel: FingerprintEnrollViewModel
   private lateinit var fingerprintScrollViewModel: FingerprintScrollViewModel
   private lateinit var gateKeeperViewModel: FingerprintGatekeeperViewModel
@@ -83,7 +83,7 @@ class FingerprintEnrollmentIntroV2Fragment : Fragment(R.layout.fingerprint_v2_en
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     navigationViewModel =
-      ViewModelProvider(requireActivity())[FingerprintEnrollmentNavigationViewModel::class.java]
+      ViewModelProvider(requireActivity())[FingerprintEnrollNavigationViewModel::class.java]
     fingerprintEnrollViewModel =
       ViewModelProvider(requireActivity())[FingerprintEnrollViewModel::class.java]
     fingerprintScrollViewModel =

@@ -20,7 +20,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.android.settings.R
-import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollmentNavigationViewModel
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollNavigationViewModel
 
 /**
  * A fragment that is used to educate the user about the fingerprint sensor on this device.
@@ -36,7 +36,7 @@ class FingerprintEnrollFindSensorV2Fragment : Fragment(R.layout.fingerprint_v2_e
     super.onCreate(savedInstanceState)
     if (savedInstanceState == null) {
       val navigationViewModel =
-        ViewModelProvider(requireActivity())[FingerprintEnrollmentNavigationViewModel::class.java]
+        ViewModelProvider(requireActivity())[FingerprintEnrollNavigationViewModel::class.java]
     }
   }
 }
