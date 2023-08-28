@@ -3,8 +3,8 @@ package {
 }
 
 aconfig_declarations {
-    name: "aconfig_settings_connecteddevice_flags",
-    package: "com.android.settings.connecteddevice.flags",
+    name: "aconfig_settings_flags",
+    package: "com.android.settings.flags",
     srcs: [
         "settings_connecteddevice_flag_declarations.aconfig",
     ],
@@ -12,6 +12,6 @@ aconfig_declarations {
 
 java_aconfig_library {
     name: "aconfig_settings_flags_lib",
-    aconfig_declarations: "aconfig_settings_connecteddevice_flags",
+    aconfig_declarations: "aconfig_settings_flags",
 }
 
