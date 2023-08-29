@@ -237,37 +237,44 @@ public class NetworkSelectSettings extends DashboardFragment {
 
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
-        if (preference != mSelectedPreference) {
-            stopNetworkQuery();
-
-            // Refresh the last selected item in case users reselect network.
-            clearPreferenceSummary();
-            if (mSelectedPreference != null) {
-                // Set summary as "Disconnected" to the previously connected network
-                mSelectedPreference.setSummary(R.string.network_disconnected);
-            }
-
-            mSelectedPreference = (NetworkOperatorPreference) preference;
-            mSelectedPreference.setSummary(R.string.network_connecting);
-
-            mMetricsFeatureProvider.action(getContext(),
-                    SettingsEnums.ACTION_MOBILE_NETWORK_MANUAL_SELECT_NETWORK);
-
-            setProgressBarVisible(true);
-            // Disable the screen until network is manually set
-            enablePreferenceScreen(false);
-
-            mRequestIdManualNetworkSelect = getNewRequestId();
-            mWaitingForNumberOfScanResults = MIN_NUMBER_OF_SCAN_REQUIRED;
-            final OperatorInfo operator = mSelectedPreference.getOperatorInfo();
-            ThreadUtils.postOnBackgroundThread(() -> {
-                final Message msg = mHandler.obtainMessage(
-                        EVENT_SET_NETWORK_SELECTION_MANUALLY_DONE);
-                msg.obj = mTelephonyManager.setNetworkSelectionModeManual(
-                        operator, true /* persistSelection */);
-                msg.sendToTarget();
-            });
+        if (preference == mSelectedPreference) {
+            Log.d(TAG, "onPreferenceTreeClick: preference is mSelectedPreference. Do nothing.");
+            return true;
         }
+        if (!(preference instanceof NetworkOperatorPreference)) {
+            Log.d(TAG, "onPreferenceTreeClick: preference is not the NetworkOperatorPreference.");
+            return false;
+        }
+
+        stopNetworkQuery();
+
+        // Refresh the last selected item in case users reselect network.
+        clearPreferenceSummary();
+        if (mSelectedPreference != null) {
+            // Set summary as "Disconnected" to the previously connected network
+            mSelectedPreference.setSummary(R.string.network_disconnected);
+        }
+
+        mSelectedPreference = (NetworkOperatorPreference) preference;
+        mSelectedPreference.setSummary(R.string.network_connecting);
+
+        mMetricsFeatureProvider.action(getContext(),
+                SettingsEnums.ACTION_MOBILE_NETWORK_MANUAL_SELECT_NETWORK);
+
+        setProgressBarVisible(true);
+        // Disable the screen until network is manually set
+        enablePreferenceScreen(false);
+
+        mRequestIdManualNetworkSelect = getNewRequestId();
+        mWaitingForNumberOfScanResults = MIN_NUMBER_OF_SCAN_REQUIRED;
+        final OperatorInfo operator = mSelectedPreference.getOperatorInfo();
+        ThreadUtils.postOnBackgroundThread(() -> {
+            final Message msg = mHandler.obtainMessage(
+                    EVENT_SET_NETWORK_SELECTION_MANUALLY_DONE);
+            msg.obj = mTelephonyManager.setNetworkSelectionModeManual(
+                    operator, true /* persistSelection */);
+            msg.sendToTarget();
+        });
 
         return true;
     }
@@ -564,8 +571,7 @@ public class NetworkSelectSettings extends DashboardFragment {
         int idxPreference = mPreferenceCategory.getPreferenceCount();
         while (idxPreference > 0) {
             idxPreference--;
-            final NetworkOperatorPreference networkOperator = (NetworkOperatorPreference)
-                    (mPreferenceCategory.getPreference(idxPreference));
+            final Preference networkOperator = mPreferenceCategory.getPreference(idxPreference);
             networkOperator.setSummary(null);
         }
     }
