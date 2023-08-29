@@ -26,6 +26,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 
+import com.android.settings.wifi.details.WifiNetworkDetailsViewModel;
 import com.android.settings.wifi.repository.SharedConnectivityRepository;
 import com.android.settings.wifi.repository.WifiHotspotRepository;
 import com.android.settings.wifi.tether.WifiHotspotSecurityViewModel;
@@ -131,6 +132,17 @@ public class WifiFeatureProvider {
         WifiHotspotSpeedViewModel viewModel =
                 new ViewModelProvider(owner).get(WifiHotspotSpeedViewModel.class);
         verboseLog(TAG, "getWifiHotspotSpeedViewModel():" + viewModel);
+        return viewModel;
+    }
+
+    /**
+     * Gets WifiNetworkDetailsViewModel
+     */
+    public WifiNetworkDetailsViewModel getWifiNetworkDetailsViewModel(
+            @NotNull ViewModelStoreOwner owner) {
+        WifiNetworkDetailsViewModel viewModel =
+                new ViewModelProvider(owner).get(WifiNetworkDetailsViewModel.class);
+        verboseLog(TAG, "getWifiNetworkDetailsViewModel():" + viewModel);
         return viewModel;
     }
 
