@@ -35,6 +35,7 @@ import android.os.Looper;
 import android.os.RemoteException;
 import android.os.SystemClock;
 import android.os.UserManager;
+import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Log;
 
@@ -51,10 +52,10 @@ import java.time.Clock;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
@@ -66,6 +67,7 @@ public final class DatabaseUtils {
     /** Clear memory threshold for device booting phase. **/
     private static final long CLEAR_MEMORY_THRESHOLD_MS = Duration.ofMinutes(5).toMillis();
     private static final long CLEAR_MEMORY_DELAYED_MS = Duration.ofSeconds(2).toMillis();
+    private static final long INVALID_TIMESTAMP = 0L;
 
     static final int DATA_RETENTION_INTERVAL_DAY = 9;
     static final String KEY_LAST_LOAD_FULL_CHARGE_TIME = "last_load_full_charge_time";
@@ -158,8 +160,8 @@ public final class DatabaseUtils {
                         .appendQueryParameter(
                                 QUERY_KEY_USERID, Long.toString(userId))
                         .build();
-        final long latestTimestamp =
-                loadAppUsageLatestTimestampFromContentProvider(context, appUsageLatestTimestampUri);
+        final long latestTimestamp = loadLongFromContentProvider(
+                context, appUsageLatestTimestampUri, /*defaultValue=*/ INVALID_TIMESTAMP);
         final String latestTimestampString = utcToLocalTimeForLogging(latestTimestamp);
         Log.d(TAG, String.format(
                 "getAppUsageStartTimestampOfUser() userId=%d latestTimestamp=%s in %d/ms",
@@ -196,8 +198,8 @@ public final class DatabaseUtils {
                         .appendQueryParameter(QUERY_KEY_USERID, queryUserIdString)
                         .build();
 
-        final List<AppUsageEvent> appUsageEventList =
-                loadAppUsageEventsFromContentProvider(context, appUsageEventUri);
+        final List<AppUsageEvent> appUsageEventList = loadListFromContentProvider(
+                context, appUsageEventUri, ConvertUtils::convertToAppUsageEvent);
         Log.d(TAG, String.format("getAppUsageEventForUser userId=%s size=%d in %d/ms",
                 queryUserIdString, appUsageEventList.size(),
                 (System.currentTimeMillis() - startTime)));
@@ -229,8 +231,8 @@ public final class DatabaseUtils {
                                 QUERY_BATTERY_EVENT_TYPE, queryBatteryEventTypesString)
                         .build();
 
-        final List<BatteryEvent> batteryEventList =
-                loadBatteryEventsFromContentProvider(context, batteryEventUri);
+        final List<BatteryEvent> batteryEventList = loadListFromContentProvider(
+                context, batteryEventUri, ConvertUtils::convertToBatteryEvent);
         Log.d(TAG, String.format("getBatteryEvents size=%d in %d/ms", batteryEventList.size(),
                 (System.currentTimeMillis() - startTime)));
         return batteryEventList;
@@ -257,8 +259,8 @@ public final class DatabaseUtils {
                                 QUERY_KEY_TIMESTAMP, Long.toString(queryTimestamp))
                         .build();
 
-        final List<BatteryUsageSlot> batteryUsageSlotList =
-                loadBatteryUsageSlotsFromContentProvider(context, batteryUsageSlotUri);
+        final List<BatteryUsageSlot> batteryUsageSlotList = loadListFromContentProvider(
+                context, batteryUsageSlotUri, ConvertUtils::convertToBatteryUsageSlot);
         Log.d(TAG, String.format("getBatteryUsageSlots size=%d in %d/ms",
                 batteryUsageSlotList.size(), (System.currentTimeMillis() - startTime)));
         return batteryUsageSlotList;
@@ -274,8 +276,8 @@ public final class DatabaseUtils {
                         .authority(AUTHORITY)
                         .appendPath(LAST_FULL_CHARGE_TIMESTAMP_PATH)
                         .build();
-        final long lastFullChargeTime = loadLastFullChargeTimeFromContentProvider(
-                context, lastFullChargeTimeUri);
+        final long lastFullChargeTime = loadLongFromContentProvider(
+                context, lastFullChargeTimeUri, /*defaultValue=*/ INVALID_TIMESTAMP);
         final String lastFullChargeTimeString = utcToLocalTimeForLogging(lastFullChargeTime);
         Log.d(TAG, String.format(
                 "getLastFullChargeTime() lastFullChargeTime=%s in %d/ms",
@@ -297,8 +299,8 @@ public final class DatabaseUtils {
                         .appendQueryParameter(
                                 QUERY_KEY_TIMESTAMP, Long.toString(queryTimestamp))
                         .build();
-        final long batteryStateLatestTimestamp = loadBatteryStateLatestTimestampFromContentProvider(
-                context, batteryStateLatestTimestampUri);
+        final long batteryStateLatestTimestamp = loadLongFromContentProvider(
+                context, batteryStateLatestTimestampUri, /*defaultValue=*/ INVALID_TIMESTAMP);
         final String batteryStateLatestTimestampString =
                 utcToLocalTimeForLogging(batteryStateLatestTimestamp);
         Log.d(TAG, String.format(
@@ -322,8 +324,21 @@ public final class DatabaseUtils {
                                 QUERY_KEY_TIMESTAMP, Long.toString(queryTimestamp))
                         .build();
 
-        final Map<Long, Map<String, BatteryHistEntry>> resultMap =
-                loadHistoryMapFromContentProvider(context, batteryStateUri);
+        final List<BatteryHistEntry> batteryHistEntryList = loadListFromContentProvider(
+                context, batteryStateUri, cursor -> new BatteryHistEntry(cursor));
+        final Map<Long, Map<String, BatteryHistEntry>> resultMap = new ArrayMap();
+        for (final BatteryHistEntry entry : batteryHistEntryList) {
+            final long timestamp = entry.mTimestamp;
+            final String key = entry.getKey();
+            Map batteryHistEntryMap = resultMap.get(timestamp);
+            // Creates new one if there is no corresponding map.
+            if (batteryHistEntryMap == null) {
+                batteryHistEntryMap = new ArrayMap();
+                resultMap.put(timestamp, batteryHistEntryMap);
+            }
+            batteryHistEntryMap.put(key, entry);
+        }
+
         if (resultMap == null || resultMap.isEmpty()) {
             Log.d(TAG, "getBatteryHistoryMap() returns empty or null");
         } else {
@@ -713,6 +728,39 @@ public final class DatabaseUtils {
         }
     }
 
+    @VisibleForTesting
+    static <T> T loadFromContentProvider(
+            Context context, Uri uri, T defaultValue, Function<Cursor, T> cursorReader) {
+        // Transfer work profile to user profile. Please see b/297036263.
+        context = getParentContext(context);
+        if (context == null) {
+            return defaultValue;
+        }
+        try (Cursor cursor = sFakeSupplier != null ? sFakeSupplier.get() :
+                context.getContentResolver().query(uri, null, null, null)) {
+            return (cursor == null || cursor.getCount() == 0)
+                    ? defaultValue : cursorReader.apply(cursor);
+        }
+    }
+
+    private static long loadLongFromContentProvider(
+            Context context, Uri uri, final long defaultValue) {
+        return loadFromContentProvider(context, uri, defaultValue,
+                cursor -> cursor.moveToFirst() ? cursor.getLong(/*columnIndex=*/ 0) : defaultValue);
+    }
+
+    private static <E> List<E> loadListFromContentProvider(
+            Context context, Uri uri, Function<Cursor, E> converter) {
+        return loadFromContentProvider(context, uri, new ArrayList<>(),
+                cursor -> {
+                    final List<E> list = new ArrayList<>();
+                    while (cursor.moveToNext()) {
+                        list.add(converter.apply(cursor));
+                    }
+                    return list;
+                });
+    }
+
     private static void writeString(
             Context context, PrintWriter writer, String prefix, String key) {
         final SharedPreferences sharedPreferences = getSharedPreferences(context);
@@ -720,153 +768,6 @@ public final class DatabaseUtils {
             final String content = sharedPreferences.getString(key, "");
             writer.println(String.format("\t\t%s: %s", prefix, content));
         }
-    }
-
-    private static long loadAppUsageLatestTimestampFromContentProvider(
-            Context context, final Uri appUsageLatestTimestampUri) {
-        // We have already make sure the context here is with profile parent's user identity. Don't
-        // need to check whether current user is work profile.
-        try (Cursor cursor = sFakeSupplier != null
-                ? sFakeSupplier.get()
-                : context.getContentResolver().query(
-                        appUsageLatestTimestampUri, null, null, null)) {
-            if (cursor == null || cursor.getCount() == 0) {
-                return INVALID_USER_ID;
-            }
-            cursor.moveToFirst();
-            // There is only one column returned so use the index 0 directly.
-            final long latestTimestamp = cursor.getLong(/*columnIndex=*/ 0);
-            // If there is no data for this user, 0 will be returned from the database.
-            return latestTimestamp == 0 ? INVALID_USER_ID : latestTimestamp;
-        }
-    }
-
-    private static List<AppUsageEvent> loadAppUsageEventsFromContentProvider(
-            Context context, Uri appUsageEventUri) {
-        final List<AppUsageEvent> appUsageEventList = new ArrayList<>();
-        context = getParentContext(context);
-        if (context == null) {
-            return appUsageEventList;
-        }
-        try (Cursor cursor = sFakeSupplier != null
-                ? sFakeSupplier.get()
-                : context.getContentResolver().query(appUsageEventUri, null, null, null)) {
-            if (cursor == null || cursor.getCount() == 0) {
-                return appUsageEventList;
-            }
-            // Loads and converts all AppUsageEvent data from cursor.
-            while (cursor.moveToNext()) {
-                appUsageEventList.add(ConvertUtils.convertToAppUsageEvent(cursor));
-            }
-        }
-        return appUsageEventList;
-    }
-
-    private static List<BatteryEvent> loadBatteryEventsFromContentProvider(
-            Context context, Uri batteryEventUri) {
-        final List<BatteryEvent> batteryEventList = new ArrayList<>();
-        context = getParentContext(context);
-        if (context == null) {
-            return batteryEventList;
-        }
-        try (Cursor cursor = sFakeSupplier != null
-                ? sFakeSupplier.get()
-                : context.getContentResolver().query(batteryEventUri, null, null, null)) {
-            if (cursor == null || cursor.getCount() == 0) {
-                return batteryEventList;
-            }
-            // Loads and converts all AppUsageEvent data from cursor.
-            while (cursor.moveToNext()) {
-                batteryEventList.add(ConvertUtils.convertToBatteryEvent(cursor));
-            }
-        }
-        return batteryEventList;
-    }
-
-    private static List<BatteryUsageSlot> loadBatteryUsageSlotsFromContentProvider(
-            Context context, Uri batteryUsageSlotUri) {
-        final List<BatteryUsageSlot> batteryUsageSlotList = new ArrayList<>();
-        context = getParentContext(context);
-        if (context == null) {
-            return batteryUsageSlotList;
-        }
-        try (Cursor cursor = sFakeSupplier != null
-                ? sFakeSupplier.get()
-                : context.getContentResolver().query(batteryUsageSlotUri, null, null, null)) {
-            if (cursor == null || cursor.getCount() == 0) {
-                return batteryUsageSlotList;
-            }
-            // Loads and converts all AppUsageEvent data from cursor.
-            while (cursor.moveToNext()) {
-                batteryUsageSlotList.add(ConvertUtils.convertToBatteryUsageSlot(cursor));
-            }
-        }
-        return batteryUsageSlotList;
-    }
-
-    private static long loadLastFullChargeTimeFromContentProvider(
-            Context context, final Uri lastFullChargeTimeUri) {
-        // We have already make sure the context here is with profile parent's user identity. Don't
-        // need to check whether current user is work profile.
-        try (Cursor cursor = sFakeSupplier != null
-                ? sFakeSupplier.get()
-                : context.getContentResolver().query(
-                        lastFullChargeTimeUri, null, null, null)) {
-            if (cursor == null || cursor.getCount() == 0) {
-                return 0L;
-            }
-            cursor.moveToFirst();
-            // There is only one column returned so use the index 0 directly.
-            final long lastFullChargeTime = cursor.getLong(/*columnIndex=*/ 0);
-            return lastFullChargeTime;
-        }
-    }
-
-    private static long loadBatteryStateLatestTimestampFromContentProvider(
-            Context context, final Uri batteryStateLatestTimestampUri) {
-        // We have already make sure the context here is with profile parent's user identity. Don't
-        // need to check whether current user is work profile.
-        try (Cursor cursor = sFakeSupplier != null
-                ? sFakeSupplier.get()
-                : context.getContentResolver().query(
-                        batteryStateLatestTimestampUri, null, null, null)) {
-            if (cursor == null || cursor.getCount() == 0) {
-                return 0L;
-            }
-            cursor.moveToFirst();
-            // There is only one column returned so use the index 0 directly.
-            final long batteryStateLatestTimestamp = cursor.getLong(/*columnIndex=*/ 0);
-            return batteryStateLatestTimestamp;
-        }
-    }
-
-    private static Map<Long, Map<String, BatteryHistEntry>> loadHistoryMapFromContentProvider(
-            Context context, Uri batteryStateUri) {
-        context = getParentContext(context);
-        if (context == null) {
-            return null;
-        }
-        final Map<Long, Map<String, BatteryHistEntry>> resultMap = new HashMap();
-        try (Cursor cursor = sFakeSupplier != null ? sFakeSupplier.get() :
-                     context.getContentResolver().query(batteryStateUri, null, null, null)) {
-            if (cursor == null || cursor.getCount() == 0) {
-                return resultMap;
-            }
-            // Loads and converts all BatteryHistEntry data from cursor.
-            while (cursor.moveToNext()) {
-                final BatteryHistEntry entry = new BatteryHistEntry(cursor);
-                final long timestamp = entry.mTimestamp;
-                final String key = entry.getKey();
-                Map batteryHistEntryMap = resultMap.get(timestamp);
-                // Creates new one if there is no corresponding map.
-                if (batteryHistEntryMap == null) {
-                    batteryHistEntryMap = new HashMap<>();
-                    resultMap.put(timestamp, batteryHistEntryMap);
-                }
-                batteryHistEntryMap.put(key, entry);
-            }
-        }
-        return resultMap;
     }
 
     private static void clearMemory() {

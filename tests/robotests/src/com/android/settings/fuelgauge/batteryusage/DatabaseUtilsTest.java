@@ -22,6 +22,8 @@ import static android.app.usage.UsageStatsManager.USAGE_SOURCE_TASK_ROOT_ACTIVIT
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -36,6 +38,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.MatrixCursor;
+import android.net.Uri;
 import android.os.BatteryManager;
 import android.os.BatteryUsageStats;
 import android.os.RemoteException;
@@ -528,6 +531,19 @@ public final class DatabaseUtilsTest {
         assertThat(dumpContent.contains("ClearBatteryCacheData")).isTrue();
         assertThat(dumpContent.contains("LastLoadFullChargeTime")).isTrue();
         assertThat(dumpContent.contains("LastUploadFullChargeTime")).isTrue();
+    }
+
+    @Test
+    public void loadFromContentProvider_workProfile_transferToUserProfile() throws Exception {
+        // Test to verify b/297036263
+        doReturn(mUserManager).when(mContext).getSystemService(UserManager.class);
+        doReturn(true).when(mUserManager).isManagedProfile();
+        doReturn(UserHandle.CURRENT).when(mContext).getUser();
+        doReturn(UserHandle.SYSTEM).when(mUserManager).getProfileParent(UserHandle.CURRENT);
+
+        DatabaseUtils.loadFromContentProvider(mContext, Uri.EMPTY, null, cursor -> 1);
+
+        verify(mContext).createPackageContextAsUser(anyString(), anyInt(), any());
     }
 
     private static void verifyBatteryEntryContentValues(
