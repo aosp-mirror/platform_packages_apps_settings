@@ -23,10 +23,10 @@ import com.android.settings.accessibility.AccessibilityMetricsFeatureProvider;
 import com.android.settings.accessibility.AccessibilitySearchFeatureProvider;
 import com.android.settings.accounts.AccountFeatureProvider;
 import com.android.settings.applications.ApplicationFeatureProvider;
-import com.android.settings.onboarding.OnboardingFeatureProvider;
 import com.android.settings.biometrics.face.FaceFeatureProvider;
 import com.android.settings.biometrics2.factory.BiometricsRepositoryProvider;
 import com.android.settings.bluetooth.BluetoothFeatureProvider;
+import com.android.settings.connecteddevice.fastpair.FastPairFeatureProvider;
 import com.android.settings.connecteddevice.stylus.StylusFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
@@ -39,6 +39,7 @@ import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.homepage.contextualcards.ContextualCardFeatureProvider;
 import com.android.settings.inputmethod.KeyboardSettingsFeatureProvider;
 import com.android.settings.localepicker.LocaleFeatureProvider;
+import com.android.settings.onboarding.OnboardingFeatureProvider;
 import com.android.settings.overlay.DockUpdaterFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.overlay.SupportFeatureProvider;
@@ -94,6 +95,7 @@ public class FakeFeatureFactory extends FeatureFactory {
     public KeyboardSettingsFeatureProvider mKeyboardSettingsFeatureProvider;
     public StylusFeatureProvider mStylusFeatureProvider;
     public OnboardingFeatureProvider mOnboardingFeatureProvider;
+    public FastPairFeatureProvider mFastPairFeatureProvider;
 
     /**
      * Call this in {@code @Before} method of the test class to use fake factory.
@@ -104,9 +106,9 @@ public class FakeFeatureFactory extends FeatureFactory {
         return factory;
     }
 
-  /**
-   * FeatureFactory constructor.
-   */
+    /**
+     * FeatureFactory constructor.
+     */
     public FakeFeatureFactory() {
         supportFeatureProvider = mock(SupportFeatureProvider.class);
         metricsFeatureProvider = mock(MetricsFeatureProvider.class);
@@ -139,6 +141,7 @@ public class FakeFeatureFactory extends FeatureFactory {
         mKeyboardSettingsFeatureProvider = mock(KeyboardSettingsFeatureProvider.class);
         mStylusFeatureProvider = mock(StylusFeatureProvider.class);
         mOnboardingFeatureProvider = mock(OnboardingFeatureProvider.class);
+        mFastPairFeatureProvider = mock(FastPairFeatureProvider.class);
     }
 
     @Override
@@ -305,5 +308,10 @@ public class FakeFeatureFactory extends FeatureFactory {
     @Override
     public OnboardingFeatureProvider getOnboardingFeatureProvider() {
         return mOnboardingFeatureProvider;
+    }
+
+    @Override
+    public FastPairFeatureProvider getFastPairFeatureProvider() {
+        return mFastPairFeatureProvider;
     }
 }
