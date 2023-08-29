@@ -31,6 +31,8 @@ import com.android.settingslib.widget.ButtonPreference;
 
 import com.google.common.annotations.VisibleForTesting;
 
+import java.util.Set;
+
 /**
  * This class handles button preference logic to display for hearing aid device.
  */
@@ -91,7 +93,11 @@ public class BluetoothDetailsPairOtherController extends BluetoothDetailsControl
     }
 
     private boolean getButtonPreferenceVisibility(CachedBluetoothDevice cachedDevice) {
-        return isBinauralMode(cachedDevice) && isOnlyOneSideConnected(cachedDevice);
+        // The device is not connected yet. Don't show the button.
+        if (!cachedDevice.isConnectedHearingAidDevice()) {
+            return false;
+        }
+        return isBinauralMode(cachedDevice) && !isOtherSideConnected(cachedDevice);
     }
 
     private void launchPairingDetail() {
@@ -106,16 +112,25 @@ public class BluetoothDetailsPairOtherController extends BluetoothDetailsControl
         return cachedDevice.getDeviceMode() == HearingAidInfo.DeviceMode.MODE_BINAURAL;
     }
 
-    private boolean isOnlyOneSideConnected(CachedBluetoothDevice cachedDevice) {
-        if (!cachedDevice.isConnectedAshaHearingAidDevice()) {
-            return false;
+    private boolean isOtherSideConnected(CachedBluetoothDevice cachedDevice) {
+        // Check sub device for ASHA hearing aid
+        if (cachedDevice.isConnectedAshaHearingAidDevice()) {
+            final CachedBluetoothDevice subDevice = cachedDevice.getSubDevice();
+            if (subDevice != null && subDevice.isConnectedAshaHearingAidDevice()) {
+                return true;
+            }
         }
 
-        final CachedBluetoothDevice subDevice = cachedDevice.getSubDevice();
-        if (subDevice != null && subDevice.isConnectedAshaHearingAidDevice()) {
-            return false;
+        // Check member device for LE audio hearing aid
+        if (cachedDevice.isConnectedLeAudioHearingAidDevice()) {
+            final Set<CachedBluetoothDevice> memberDevices = cachedDevice.getMemberDevice();
+            for (CachedBluetoothDevice memberDevice : memberDevices) {
+                if (memberDevice.isConnectedLeAudioHearingAidDevice()) {
+                    return true;
+                }
+            }
         }
 
-        return true;
+        return false;
     }
 }

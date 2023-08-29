@@ -156,14 +156,13 @@ public class HearingAidUtilsTest {
     }
 
     @Test
-    public void launchHearingAidPairingDialog_deviceSupportsCsip_csipEnabled_noDialog() {
+    public void launchHearingAidPairingDialog_deviceSupportsCsip_noDialog() {
         when(mCachedBluetoothDevice.isConnectedAshaHearingAidDevice()).thenReturn(true);
         when(mCachedBluetoothDevice.getDeviceMode()).thenReturn(
                 HearingAidInfo.DeviceMode.MODE_BINAURAL);
         when(mCachedBluetoothDevice.getDeviceSide()).thenReturn(
                 HearingAidInfo.DeviceSide.SIDE_LEFT);
         makeDeviceSupportCsip();
-        makeDeviceEnableCsip(true);
 
         HearingAidUtils.launchHearingAidPairingDialog(mFragmentManager, mCachedBluetoothDevice,
                 TEST_LAUNCH_PAGE);
@@ -171,24 +170,6 @@ public class HearingAidUtilsTest {
         shadowMainLooper().idle();
         final AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(dialog).isNull();
-    }
-
-    @Test
-    public void launchHearingAidPairingDialog_deviceSupportsCsip_csipDisabled_dialogShown() {
-        when(mCachedBluetoothDevice.isConnectedAshaHearingAidDevice()).thenReturn(true);
-        when(mCachedBluetoothDevice.getDeviceMode()).thenReturn(
-                HearingAidInfo.DeviceMode.MODE_BINAURAL);
-        when(mCachedBluetoothDevice.getDeviceSide()).thenReturn(
-                HearingAidInfo.DeviceSide.SIDE_LEFT);
-        makeDeviceSupportCsip();
-        makeDeviceEnableCsip(false);
-
-        HearingAidUtils.launchHearingAidPairingDialog(mFragmentManager, mCachedBluetoothDevice,
-                TEST_LAUNCH_PAGE);
-
-        shadowMainLooper().idle();
-        final AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
-        assertThat(dialog.isShowing()).isTrue();
     }
 
     @Test
@@ -211,11 +192,6 @@ public class HearingAidUtilsTest {
         List<LocalBluetoothProfile> uuids = new ArrayList<>();
         uuids.add(mCsipSetCoordinatorProfile);
         when(mCachedBluetoothDevice.getProfiles()).thenReturn(uuids);
-    }
-
-    private void makeDeviceEnableCsip(boolean enabled) {
-        when(mCsipSetCoordinatorProfile.isEnabled(mCachedBluetoothDevice.getDevice()))
-                .thenReturn(enabled);
     }
 
     private void setupEnvironment() {
