@@ -48,6 +48,8 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.Lifecycle;
 import androidx.loader.app.LoaderManager.LoaderCallbacks;
@@ -118,7 +120,10 @@ public class DataUsageList extends DataUsageBaseFragment
     LoadingViewController mLoadingViewController;
 
     private ChartDataUsagePreference mChart;
+
+    @Nullable
     private List<NetworkCycleChartData> mCycleData;
+
     // Caches the cycles for startAppDataUsage usage, which need be cleared when resumed.
     private ArrayList<Long> mCycles;
     // Spinner will keep the selected cycle even after paused, this only keeps the displayed cycle,
@@ -165,7 +170,7 @@ public class DataUsageList extends DataUsageBaseFragment
     }
 
     @Override
-    public void onViewCreated(View v, Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View v, Bundle savedInstanceState) {
         super.onViewCreated(v, savedInstanceState);
 
         mHeader = setPinnedHeaderView(R.layout.apps_filter_spinner);
@@ -355,7 +360,9 @@ public class DataUsageList extends DataUsageBaseFragment
         }
 
         // generate cycle list based on policy and available history
-        mCycleAdapter.updateCycleList(mCycleData);
+        if (mCycleData != null) {
+            mCycleAdapter.updateCycleList(mCycleData);
+        }
         updateSelectedCycle();
     }
 
@@ -481,11 +488,9 @@ public class DataUsageList extends DataUsageBaseFragment
         }
         stats.close();
 
-        final int restrictedUidsMax = restrictedUids.length;
-        for (int i = 0; i < restrictedUidsMax; ++i) {
-            final int uid = restrictedUids[i];
+        for (final int uid : restrictedUids) {
             // Only splice in restricted state for current user or managed users
-            if (!profiles.contains(new UserHandle(UserHandle.getUserId(uid)))) {
+            if (!profiles.contains(UserHandle.getUserHandleForUid(uid))) {
                 continue;
             }
 
@@ -505,14 +510,13 @@ public class DataUsageList extends DataUsageBaseFragment
                 R.array.datausage_hiding_carrier_service_package_names));
         // When there is no specified SubscriptionInfo, Wi-Fi data usage will be displayed.
         // In this case, the carrier service package also needs to be hidden.
-        boolean shouldHidePackageName = mSubscriptionInfoEntity != null
-                ? Arrays.stream(getContext().getResources().getIntArray(
+        boolean shouldHidePackageName = mSubscriptionInfoEntity == null
+                || Arrays.stream(getContext().getResources().getIntArray(
                         R.array.datausage_hiding_carrier_service_carrier_id))
-                .anyMatch(carrierId -> (carrierId == mSubscriptionInfoEntity.carrierId))
-                : true;
+                .anyMatch(carrierId -> (carrierId == mSubscriptionInfoEntity.carrierId));
 
-        for (int i = 0; i < items.size(); i++) {
-            UidDetail detail = mUidDetailProvider.getUidDetail(items.get(i).key, true);
+        for (var item : items) {
+            UidDetail detail = mUidDetailProvider.getUidDetail(item.key, true);
             // Do not show carrier service package in data usage list if it should be hidden for
             // the carrier.
             if (detail != null && shouldHidePackageName && packageNames.contains(
@@ -520,17 +524,13 @@ public class DataUsageList extends DataUsageBaseFragment
                 continue;
             }
 
-            final int percentTotal = largest != 0 ? (int) (items.get(i).total * 100 / largest) : 0;
+            final int percentTotal = largest != 0 ? (int) (item.total * 100 / largest) : 0;
             final AppDataUsagePreference preference = new AppDataUsagePreference(getContext(),
-                    items.get(i), percentTotal, mUidDetailProvider);
-            preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-                @Override
-                public boolean onPreferenceClick(Preference preference) {
-                    AppDataUsagePreference pref = (AppDataUsagePreference) preference;
-                    AppItem item = pref.getItem();
-                    startAppDataUsage(item);
-                    return true;
-                }
+                    item, percentTotal, mUidDetailProvider);
+            preference.setOnPreferenceClickListener(p -> {
+                AppDataUsagePreference pref = (AppDataUsagePreference) p;
+                startAppDataUsage(pref.getItem());
+                return true;
             });
             mApps.addPreference(preference);
         }
@@ -538,6 +538,9 @@ public class DataUsageList extends DataUsageBaseFragment
 
     @VisibleForTesting
     void startAppDataUsage(AppItem item) {
+        if (mCycleData == null) {
+            return;
+        }
         final Bundle args = new Bundle();
         args.putParcelable(AppDataUsage.ARG_APP_ITEM, item);
         args.putParcelable(AppDataUsage.ARG_NETWORK_TEMPLATE, mTemplate);
@@ -600,67 +603,70 @@ public class DataUsageList extends DataUsageBaseFragment
 
     @VisibleForTesting
     final LoaderCallbacks<List<NetworkCycleChartData>> mNetworkCycleDataCallbacks =
-            new LoaderCallbacks<List<NetworkCycleChartData>>() {
-        @Override
-        public Loader<List<NetworkCycleChartData>> onCreateLoader(int id, Bundle args) {
-            return NetworkCycleChartDataLoader.builder(getContext())
-                    .setNetworkTemplate(mTemplate)
-                    .build();
-        }
+            new LoaderCallbacks<>() {
+                @Override
+                @NonNull
+                public Loader<List<NetworkCycleChartData>> onCreateLoader(int id, Bundle args) {
+                    return NetworkCycleChartDataLoader.builder(getContext())
+                            .setNetworkTemplate(mTemplate)
+                            .build();
+                }
 
-        @Override
-        public void onLoadFinished(Loader<List<NetworkCycleChartData>> loader,
-                List<NetworkCycleChartData> data) {
-            mLoadingViewController.showContent(false /* animate */);
-            mCycleData = data;
-            // calculate policy cycles based on available data
-            updatePolicy();
-            mCycleSpinner.setVisibility(View.VISIBLE);
-        }
+                @Override
+                public void onLoadFinished(@NonNull Loader<List<NetworkCycleChartData>> loader,
+                        List<NetworkCycleChartData> data) {
+                    mLoadingViewController.showContent(false /* animate */);
+                    mCycleData = data;
+                    // calculate policy cycles based on available data
+                    updatePolicy();
+                    mCycleSpinner.setVisibility(View.VISIBLE);
+                }
 
-        @Override
-        public void onLoaderReset(Loader<List<NetworkCycleChartData>> loader) {
-            mCycleData = null;
-        }
-    };
+                @Override
+                public void onLoaderReset(@NonNull Loader<List<NetworkCycleChartData>> loader) {
+                    mCycleData = null;
+                }
+            };
 
     private final LoaderCallbacks<NetworkStats> mNetworkStatsDetailCallbacks =
-            new LoaderCallbacks<NetworkStats>() {
-        @Override
-        public Loader<NetworkStats> onCreateLoader(int id, Bundle args) {
-            return new NetworkStatsSummaryLoader.Builder(getContext())
-                    .setStartTime(mChart.getInspectStart())
-                    .setEndTime(mChart.getInspectEnd())
-                    .setNetworkTemplate(mTemplate)
-                    .build();
-        }
-
-        @Override
-        public void onLoadFinished(Loader<NetworkStats> loader, NetworkStats data) {
-            final int[] restrictedUids = services.mPolicyManager.getUidsWithPolicy(
-                    POLICY_REJECT_METERED_BACKGROUND);
-            bindStats(data, restrictedUids);
-            updateEmptyVisible();
-        }
-
-        @Override
-        public void onLoaderReset(Loader<NetworkStats> loader) {
-            bindStats(null, new int[0]);
-            updateEmptyVisible();
-        }
-
-        private void updateEmptyVisible() {
-            if ((mApps.getPreferenceCount() != 0) !=
-                    (getPreferenceScreen().getPreferenceCount() != 0)) {
-                if (mApps.getPreferenceCount() != 0) {
-                    getPreferenceScreen().addPreference(mUsageAmount);
-                    getPreferenceScreen().addPreference(mApps);
-                } else {
-                    getPreferenceScreen().removeAll();
+            new LoaderCallbacks<>() {
+                @Override
+                @NonNull
+                public Loader<NetworkStats> onCreateLoader(int id, Bundle args) {
+                    return new NetworkStatsSummaryLoader.Builder(getContext())
+                            .setStartTime(mChart.getInspectStart())
+                            .setEndTime(mChart.getInspectEnd())
+                            .setNetworkTemplate(mTemplate)
+                            .build();
                 }
-            }
-        }
-    };
+
+                @Override
+                public void onLoadFinished(
+                        @NonNull Loader<NetworkStats> loader, NetworkStats data) {
+                    final int[] restrictedUids = services.mPolicyManager.getUidsWithPolicy(
+                            POLICY_REJECT_METERED_BACKGROUND);
+                    bindStats(data, restrictedUids);
+                    updateEmptyVisible();
+                }
+
+                @Override
+                public void onLoaderReset(@NonNull Loader<NetworkStats> loader) {
+                    bindStats(null, new int[0]);
+                    updateEmptyVisible();
+                }
+
+                private void updateEmptyVisible() {
+                    if ((mApps.getPreferenceCount() != 0)
+                            != (getPreferenceScreen().getPreferenceCount() != 0)) {
+                        if (mApps.getPreferenceCount() != 0) {
+                            getPreferenceScreen().addPreference(mUsageAmount);
+                            getPreferenceScreen().addPreference(mApps);
+                        } else {
+                            getPreferenceScreen().removeAll();
+                        }
+                    }
+                }
+            };
 
     private static boolean isGuestUser(Context context) {
         if (context == null) return false;
