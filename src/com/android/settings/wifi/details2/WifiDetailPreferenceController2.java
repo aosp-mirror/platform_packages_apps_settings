@@ -21,6 +21,8 @@ import static android.net.NetworkCapabilities.NET_CAPABILITY_VALIDATED;
 import static android.net.NetworkCapabilities.TRANSPORT_WIFI;
 import static android.telephony.TelephonyManager.UNKNOWN_CARRIER_ID;
 
+import static com.android.settingslib.wifi.WifiUtils.getHotspotIconResource;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.settings.SettingsEnums;
@@ -86,6 +88,7 @@ import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.utils.StringUtil;
 import com.android.settingslib.widget.ActionButtonsPreference;
 import com.android.settingslib.widget.LayoutPreference;
+import com.android.wifitrackerlib.HotspotNetworkEntry;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiEntry.ConnectCallback;
 import com.android.wifitrackerlib.WifiEntry.DisconnectCallback;
@@ -172,7 +175,8 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
 
     // UI elements - in order of appearance
     private ActionButtonsPreference mButtonsPref;
-    private EntityHeaderController mEntityHeaderController;
+    @VisibleForTesting
+    EntityHeaderController mEntityHeaderController;
     private Preference mSignalStrengthPref;
     private Preference mTxLinkSpeedPref;
     private Preference mRxLinkSpeedPref;
@@ -533,6 +537,8 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
     private void refreshPage() {
         Log.d(TAG, "Update UI!");
 
+        // refresh header icon
+        refreshEntryHeaderIcon();
         // refresh header
         refreshEntityHeader();
 
@@ -561,8 +567,33 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
         refreshWifiType();
     }
 
+    @VisibleForTesting
+    void refreshEntryHeaderIcon() {
+        if (mEntityHeaderController == null) {
+            return;
+        }
+        Drawable drawable = getWifiDrawable(mWifiEntry);
+        mEntityHeaderController
+                .setIcon(redrawIconForHeader(drawable))
+                .done(true /* rebind */);
+    }
+
+    /**
+     * Returns a Wi-Fi icon {@link Drawable}.
+     *
+     * @param wifiEntry {@link WifiEntry}
+     */
+    @VisibleForTesting
+    Drawable getWifiDrawable(WifiEntry wifiEntry) {
+        if (wifiEntry instanceof HotspotNetworkEntry) {
+            int deviceType = ((HotspotNetworkEntry) wifiEntry).getDeviceType();
+            return mContext.getDrawable(getHotspotIconResource(deviceType));
+        }
+        return mIconInjector.getIcon(wifiEntry.shouldShowXLevelIcon(), wifiEntry.getLevel());
+    }
+
     private void refreshRssiViews() {
-        final int signalLevel = mWifiEntry.getLevel();
+        int signalLevel = mWifiEntry.getLevel();
 
         // Disappears signal view if not in range. e.g. for saved networks.
         if (signalLevel == WifiEntry.WIFI_LEVEL_UNREACHABLE) {
@@ -571,19 +602,13 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
             return;
         }
 
-        final boolean showX = mWifiEntry.shouldShowXLevelIcon();
-
+        boolean showX = mWifiEntry.shouldShowXLevelIcon();
         if (mRssiSignalLevel == signalLevel && mShowX == showX) {
             return;
         }
         mRssiSignalLevel = signalLevel;
         mShowX = showX;
         Drawable wifiIcon = mIconInjector.getIcon(mShowX, mRssiSignalLevel);
-
-        if (mEntityHeaderController != null) {
-            mEntityHeaderController.setIcon(redrawIconForHeader(wifiIcon)).done(true /* rebind */);
-        }
-
         Drawable wifiIconDark = wifiIcon.getConstantState().newDrawable().mutate();
         wifiIconDark.setTintList(Utils.getColorAttr(mContext, android.R.attr.colorControlNormal));
         mSignalStrengthPref.setIcon(wifiIconDark);
@@ -1119,5 +1144,12 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
     @Override
     public void onSignInResult(@SignInStatus int status) {
         refreshPage();
+    }
+
+    /** Sets signal strength title */
+    public void setSignalStrengthTitle(int titleResId) {
+        if (mSignalStrengthPref != null) {
+            mSignalStrengthPref.setTitle(titleResId);
+        }
     }
 }

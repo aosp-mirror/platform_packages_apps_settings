@@ -58,8 +58,7 @@ public class SharedConnectivityRepository {
     MutableLiveData<SharedConnectivitySettingsState> mSettingsState = new MutableLiveData<>();
 
     public SharedConnectivityRepository(@NonNull Context appContext) {
-        this(appContext,
-                DeviceConfig.getBoolean(DEVICE_CONFIG_NAMESPACE, DEVICE_CONFIG_KEY, false));
+        this(appContext, isDeviceConfigEnabled());
     }
 
     @VisibleForTesting
@@ -180,5 +179,12 @@ public class SharedConnectivityRepository {
 
     private void log(String msg) {
         FeatureFactory.getFeatureFactory().getWifiFeatureProvider().verboseLog(TAG, msg);
+    }
+
+    /**
+     * Returns true if Shared Connectivity feature is enabled.
+     */
+    public static boolean isDeviceConfigEnabled() {
+        return DeviceConfig.getBoolean(DEVICE_CONFIG_NAMESPACE, DEVICE_CONFIG_KEY, false);
     }
 }

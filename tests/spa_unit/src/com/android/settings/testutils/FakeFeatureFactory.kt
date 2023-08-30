@@ -24,6 +24,7 @@ import com.android.settings.applications.ApplicationFeatureProvider
 import com.android.settings.biometrics.face.FaceFeatureProvider
 import com.android.settings.biometrics2.factory.BiometricsRepositoryProvider
 import com.android.settings.bluetooth.BluetoothFeatureProvider
+import com.android.settings.connecteddevice.fastpair.FastPairFeatureProvider
 import com.android.settings.connecteddevice.stylus.StylusFeatureProvider
 import com.android.settings.dashboard.DashboardFeatureProvider
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider
@@ -136,5 +137,7 @@ class FakeFeatureFactory : FeatureFactory() {
     override val keyboardSettingsFeatureProvider: KeyboardSettingsFeatureProvider
         get() = TODO("Not yet implemented")
     override val stylusFeatureProvider: StylusFeatureProvider
+        get() = TODO("Not yet implemented")
+    override val fastPairFeatureProvider: FastPairFeatureProvider
         get() = TODO("Not yet implemented")
 }

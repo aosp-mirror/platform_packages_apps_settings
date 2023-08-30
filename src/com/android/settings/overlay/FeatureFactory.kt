@@ -23,8 +23,8 @@ import com.android.settings.applications.ApplicationFeatureProvider
 import com.android.settings.biometrics.face.FaceFeatureProvider
 import com.android.settings.biometrics2.factory.BiometricsRepositoryProvider
 import com.android.settings.bluetooth.BluetoothFeatureProvider
+import com.android.settings.connecteddevice.fastpair.FastPairFeatureProvider
 import com.android.settings.connecteddevice.stylus.StylusFeatureProvider
-import com.android.settings.onboarding.OnboardingFeatureProvider
 import com.android.settings.dashboard.DashboardFeatureProvider
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider
 import com.android.settings.deviceinfo.hardwareinfo.HardwareInfoFeatureProvider
@@ -35,6 +35,7 @@ import com.android.settings.fuelgauge.PowerUsageFeatureProvider
 import com.android.settings.homepage.contextualcards.ContextualCardFeatureProvider
 import com.android.settings.inputmethod.KeyboardSettingsFeatureProvider
 import com.android.settings.localepicker.LocaleFeatureProvider
+import com.android.settings.onboarding.OnboardingFeatureProvider
 import com.android.settings.overlay.FeatureFactory.Companion.setFactory
 import com.android.settings.panel.PanelFeatureProvider
 import com.android.settings.search.SearchFeatureProvider
@@ -154,6 +155,11 @@ abstract class FeatureFactory {
      * Retrieves implementation for TogglePreference feature.
      */
     open val onboardingFeatureProvider: OnboardingFeatureProvider? = null
+
+    /**
+     * Gets implementation for Fast Pair device updater provider.
+     */
+    abstract val fastPairFeatureProvider: FastPairFeatureProvider
 
     companion object {
         private var _factory: FeatureFactory? = null
