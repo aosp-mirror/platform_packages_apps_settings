@@ -72,6 +72,7 @@ public final class ConvertUtilsTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
         mContext = spy(RuntimeEnvironment.application);
         ConvertUtils.sUsageSource = ConvertUtils.EMPTY_USAGE_SOURCE;
         when(mContext.getPackageManager()).thenReturn(mMockPackageManager);
