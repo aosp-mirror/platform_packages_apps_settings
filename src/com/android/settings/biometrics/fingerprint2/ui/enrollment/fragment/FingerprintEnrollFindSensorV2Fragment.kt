@@ -34,7 +34,6 @@ import com.android.systemui.biometrics.shared.model.FingerprintSensorType
 import com.google.android.setupcompat.template.FooterBarMixin
 import com.google.android.setupcompat.template.FooterButton
 import com.google.android.setupdesign.GlifLayout
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 private const val TAG = "FingerprintEnrollFindSensorV2Fragment"
@@ -94,12 +93,12 @@ class FingerprintEnrollFindSensorV2Fragment : Fragment() {
 
       // Set up lottie or animation
       lifecycleScope.launch {
-        viewModel.showSfpsLottie.collect { (isFolded, rotation) ->
+        viewModel.sfpsLottieInfo.collect { (isFolded, rotation) ->
           setupLottie(view, getSfpsIllustrationLottieAnimation(isFolded, rotation))
         }
       }
       lifecycleScope.launch {
-        viewModel.showUdfpsLottie.collect { isAccessibilityEnabled ->
+        viewModel.udfpsLottieInfo.collect { isAccessibilityEnabled ->
           val lottieAnimation =
             if (isAccessibilityEnabled) R.raw.udfps_edu_a11y_lottie else R.raw.udfps_edu_lottie
           setupLottie(view, lottieAnimation) { viewModel.proceedToEnrolling() }
