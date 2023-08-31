@@ -53,9 +53,7 @@ public class BluetoothDetailsSpatialAudioController extends BluetoothDetailsCont
     @VisibleForTesting
     PreferenceCategory mProfilesContainer;
     @VisibleForTesting
-    AudioDeviceAttributes mAudioDevice;
-
-    private boolean mIsAvailable;
+    AudioDeviceAttributes mAudioDevice = null;
 
     public BluetoothDetailsSpatialAudioController(
             Context context,
@@ -65,13 +63,11 @@ public class BluetoothDetailsSpatialAudioController extends BluetoothDetailsCont
         super(context, fragment, device, lifecycle);
         AudioManager audioManager = context.getSystemService(AudioManager.class);
         mSpatializer = audioManager.getSpatializer();
-        getAvailableDevice();
-
     }
 
     @Override
     public boolean isAvailable() {
-        return mIsAvailable;
+        return mSpatializer.getImmersiveAudioLevel() != SPATIALIZER_IMMERSIVE_LEVEL_NONE;
     }
 
     @Override
@@ -79,20 +75,36 @@ public class BluetoothDetailsSpatialAudioController extends BluetoothDetailsCont
         SwitchPreference switchPreference = (SwitchPreference) preference;
         String key = switchPreference.getKey();
         if (TextUtils.equals(key, KEY_SPATIAL_AUDIO)) {
-            if (switchPreference.isChecked()) {
-                mSpatializer.addCompatibleAudioDevice(mAudioDevice);
-            } else {
-                mSpatializer.removeCompatibleAudioDevice(mAudioDevice);
-            }
-            refresh();
+            updateSpatializerEnabled(switchPreference.isChecked());
+            refreshSpatialAudioEnabled(switchPreference);
             return true;
         } else if (TextUtils.equals(key, KEY_HEAD_TRACKING)) {
-            mSpatializer.setHeadTrackerEnabled(switchPreference.isChecked(), mAudioDevice);
+            updateSpatializerHeadTracking(switchPreference.isChecked());
             return true;
         } else {
             Log.w(TAG, "invalid key name.");
             return false;
         }
+    }
+
+    private void updateSpatializerEnabled(boolean enabled)  {
+        if (mAudioDevice == null) {
+            Log.w(TAG, "cannot update spatializer enabled for null audio device.");
+            return;
+        }
+        if (enabled) {
+            mSpatializer.addCompatibleAudioDevice(mAudioDevice);
+        } else {
+            mSpatializer.removeCompatibleAudioDevice(mAudioDevice);
+        }
+    }
+
+    private void updateSpatializerHeadTracking(boolean enabled)  {
+        if (mAudioDevice == null) {
+            Log.w(TAG, "cannot update spatializer head tracking for null audio device.");
+            return;
+        }
+        mSpatializer.setHeadTrackerEnabled(enabled, mAudioDevice);
     }
 
     @Override
@@ -109,15 +121,30 @@ public class BluetoothDetailsSpatialAudioController extends BluetoothDetailsCont
     @Override
     protected void refresh() {
         if (mAudioDevice == null) {
-            return;
+            getAvailableDevice();
         }
 
         SwitchPreference spatialAudioPref = mProfilesContainer.findPreference(KEY_SPATIAL_AUDIO);
-        if (spatialAudioPref == null) {
+        if (spatialAudioPref == null && mAudioDevice != null) {
             spatialAudioPref = createSpatialAudioPreference(mProfilesContainer.getContext());
             mProfilesContainer.addPreference(spatialAudioPref);
+        } else if (mAudioDevice == null || !mSpatializer.isAvailableForDevice(mAudioDevice)) {
+            if (spatialAudioPref != null) {
+                mProfilesContainer.removePreference(spatialAudioPref);
+            }
+            final SwitchPreference headTrackingPref =
+                    mProfilesContainer.findPreference(KEY_HEAD_TRACKING);
+            if (headTrackingPref != null) {
+                mProfilesContainer.removePreference(headTrackingPref);
+            }
+            mAudioDevice = null;
+            return;
         }
 
+        refreshSpatialAudioEnabled(spatialAudioPref);
+    }
+
+    private void refreshSpatialAudioEnabled(SwitchPreference spatialAudioPref) {
         boolean isSpatialAudioOn = mSpatializer.getCompatibleAudioDevices().contains(mAudioDevice);
         Log.d(TAG, "refresh() isSpatialAudioOn : " + isSpatialAudioOn);
         spatialAudioPref.setChecked(isSpatialAudioOn);
@@ -127,9 +154,13 @@ public class BluetoothDetailsSpatialAudioController extends BluetoothDetailsCont
             headTrackingPref = createHeadTrackingPreference(mProfilesContainer.getContext());
             mProfilesContainer.addPreference(headTrackingPref);
         }
+        refreshHeadTracking(spatialAudioPref, headTrackingPref);
+    }
 
+    private void refreshHeadTracking(SwitchPreference spatialAudioPref,
+                                     SwitchPreference headTrackingPref) {
         boolean isHeadTrackingAvailable =
-                isSpatialAudioOn && mSpatializer.hasHeadTracker(mAudioDevice);
+                spatialAudioPref.isChecked() && mSpatializer.hasHeadTracker(mAudioDevice);
         Log.d(TAG, "refresh() has head tracker : " + mSpatializer.hasHeadTracker(mAudioDevice));
         headTrackingPref.setVisible(isHeadTrackingAvailable);
         if (isHeadTrackingAvailable) {
@@ -158,14 +189,6 @@ public class BluetoothDetailsSpatialAudioController extends BluetoothDetailsCont
     }
 
     private void getAvailableDevice() {
-        if (mSpatializer.getImmersiveAudioLevel() == SPATIALIZER_IMMERSIVE_LEVEL_NONE) {
-            mIsAvailable = false;
-            mAudioDevice = null;
-            Log.d(TAG, "getAvailableDevice() ignored: spatializer not supported");
-
-            return;
-        }
-
         AudioDeviceAttributes a2dpDevice = new AudioDeviceAttributes(
                 AudioDeviceAttributes.ROLE_OUTPUT,
                 AudioDeviceInfo.TYPE_BLUETOOTH_A2DP,
@@ -187,7 +210,6 @@ public class BluetoothDetailsSpatialAudioController extends BluetoothDetailsCont
                 AudioDeviceInfo.TYPE_HEARING_AID,
                 mCachedDevice.getAddress());
 
-        mIsAvailable = true;
         if (mSpatializer.isAvailableForDevice(bleHeadsetDevice)) {
             mAudioDevice = bleHeadsetDevice;
         } else if (mSpatializer.isAvailableForDevice(bleSpeakerDevice)) {
@@ -196,20 +218,20 @@ public class BluetoothDetailsSpatialAudioController extends BluetoothDetailsCont
             mAudioDevice = bleBroadcastDevice;
         } else if (mSpatializer.isAvailableForDevice(a2dpDevice)) {
             mAudioDevice = a2dpDevice;
-        } else {
-            mIsAvailable = mSpatializer.isAvailableForDevice(hearingAidDevice);
+        } else if (mSpatializer.isAvailableForDevice(hearingAidDevice)) {
             mAudioDevice = hearingAidDevice;
+        } else {
+            mAudioDevice = null;
         }
 
         Log.d(TAG, "getAvailableDevice() device : "
                 + mCachedDevice.getDevice().getAnonymizedAddress()
-                + ", type : " + mAudioDevice.getType()
-                + ", is available : " + mIsAvailable);
+                + ", is available : " + (mAudioDevice != null)
+                + ", type : " + (mAudioDevice == null ? "no type" : mAudioDevice.getType()));
     }
 
     @VisibleForTesting
     void setAvailableDevice(AudioDeviceAttributes audioDevice) {
         mAudioDevice = audioDevice;
-        mIsAvailable = mSpatializer.isAvailableForDevice(audioDevice);
     }
 }
