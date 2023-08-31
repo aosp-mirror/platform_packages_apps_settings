@@ -199,8 +199,7 @@
     <string name="terms_of_address_not_specified" msgid="4439257779351251973">"Көрсетілмеген"</string>
     <string name="terms_of_address_feminine" msgid="1743479869695539283">"Аналық"</string>
     <string name="terms_of_address_masculine" msgid="983106046135098856">"Аталық"</string>
-    <!-- no translation found for terms_of_address_neutral (5475414185543112478) -->
-    <skip />
+    <string name="terms_of_address_neutral" msgid="5475414185543112478">"Белгісіз"</string>
     <string name="dlg_remove_locales_title" msgid="3170501604483612114">"{count,plural, =1{Таңдалған тілді жою керек пе?}other{Таңдалған тілдерді жою керек пе?}}"</string>
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"Мәтін басқа тілде көрсетіледі."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Барлық тілдерді жою мүмкін емес"</string>
@@ -897,6 +896,20 @@
     <string name="wifi_type_title" msgid="2174893488722015838">"Түрі"</string>
     <string name="wifi_details_dns" msgid="273231528073312579">"DNS"</string>
     <string name="wifi_details_ipv6_address_header" msgid="1913151339341722443">"IPv6 мекенжайлары"</string>
+    <!-- no translation found for hotspot_device_details_category (3110651914598697220) -->
+    <skip />
+    <!-- no translation found for hotspot_device_details_internet_source (1563266599673281875) -->
+    <skip />
+    <!-- no translation found for internet_source_wifi (6952593095166435179) -->
+    <skip />
+    <!-- no translation found for internet_source_mobile_data (877403889449201789) -->
+    <skip />
+    <!-- no translation found for internet_source_ethernet (8338472576454100966) -->
+    <skip />
+    <!-- no translation found for hotspot_connection_category (4320380513982923556) -->
+    <skip />
+    <!-- no translation found for hotspot_connection_strength (87359986943768421) -->
+    <skip />
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"Сақталған желілер"</string>
     <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"Жазылымдар"</string>
     <string name="wifi_saved_other_networks_tab" msgid="7942647415716557293">"Басқа желілер"</string>
@@ -952,12 +965,9 @@
     <string name="wifi_hotspot_speed_footer" msgid="8846939503916795002">"Басым жиілік қолжетімсіз болса, хотспот басқасын пайдалануы мүмкін. Жиілікті өзгертсеңіз, хотспоттың қауіпсіздік параметрлері де өзгеруі мүмкін."</string>
     <string name="wifi_hotspot_security_summary_unavailable" msgid="117582979310345853">"6 ГГц жиілігімен қолдану мүмкін емес."</string>
     <string name="wifi_hotspot_security_footer" msgid="4608329688744949796">"Хотспот жиілігін өзгертсеңіз, қауіпсіздік параметрлері де өзгеруі мүмкін."</string>
-    <!-- no translation found for wifi_hotspot_instant_title (7052526695338853703) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_instant_summary_on (3142749148673081288) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_instant_summary_off (8594065628453795615) -->
-    <skip />
+    <string name="wifi_hotspot_instant_title" msgid="7052526695338853703">"Лезде істейтін хотспот"</string>
+    <string name="wifi_hotspot_instant_summary_on" msgid="3142749148673081288">"Қосулы"</string>
+    <string name="wifi_hotspot_instant_summary_off" msgid="8594065628453795615">"Өшірулі"</string>
     <string name="wifi_tether_starting" msgid="8879874184033857814">"Хотспот қосылуда…"</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"Хотспот өшірілуде…"</string>
     <string name="wifi_tether_carrier_unsupport_dialog_title" msgid="3089432578433978073">"Тетеринг қолжетімсіз"</string>
@@ -3875,6 +3885,12 @@
     <string name="battery_saver_off_summary" msgid="4411561435493109261">"Өшірулі"</string>
     <string name="app_battery_usage_title" msgid="346558380609793334">"Қолданбаның батарея шығындау көрсеткіші"</string>
     <string name="app_battery_usage_summary" msgid="6349965904306339539">"Қолданбаларда батарея шығындау көрсеткішін орнату"</string>
+    <!-- no translation found for battery_tips_card_action_button (4897793527424711648) -->
+    <skip />
+    <!-- no translation found for battery_tips_card_dismiss_button (1885756985544936618) -->
+    <skip />
+    <!-- no translation found for battery_tips_card_feedback_info (767117835675157298) -->
+    <skip />
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Шектелмеген"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Оңтайландырылған"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"Шектеулі"</string>
@@ -4494,8 +4510,10 @@
     <string name="lockscreen_privacy_controls_summary" msgid="7522918441738915364">"Құлып экраны арқылы"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="2174300719855112358">"Құрылғыны басқару элементтерін пайдалану"</string>
     <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"Пайдалану үшін алдымен \"Құрылғыны басқару элементтерін көрсету\" параметрін қосыңыз."</string>
-    <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Қолжетімді болған кезде, екі қатарлы сағатты көрсету"</string>
-    <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"Екі қатарлы сағат"</string>
+    <!-- no translation found for lockscreen_double_line_clock_summary (4109235686687860393) -->
+    <skip />
+    <!-- no translation found for lockscreen_double_line_clock_setting_toggle (802271087416091548) -->
+    <skip />
     <string name="lockscreen_quick_affordances_title" msgid="8615741551327565793">"Жылдам пәрмендер"</string>
     <plurals name="lockscreen_quick_affordances_summary" formatted="false" msgid="4225396036524703997">
       <item quantity="other"><xliff:g id="FIRST_1">%1$s</xliff:g>, <xliff:g id="SECOND">%2$s</xliff:g></item>
@@ -4712,8 +4730,7 @@
     <string name="bluetooth_details_audio_device_type_unknown" msgid="839337391037998014">"Белгісіз"</string>
     <string name="bluetooth_details_audio_device_type_speaker" msgid="3706227767994792124">"Динамик"</string>
     <string name="bluetooth_details_audio_device_type_headphones" msgid="7644588291215033798">"Құлақаспап"</string>
-    <!-- no translation found for bluetooth_details_audio_device_type_hearing_aid (1310631131071939859) -->
-    <skip />
+    <string name="bluetooth_details_audio_device_type_hearing_aid" msgid="1310631131071939859">"Есту аппараты"</string>
     <string name="bluetooth_details_audio_device_type_carkit" msgid="4439017600454703229">"Көлік жинағы"</string>
     <string name="bluetooth_details_audio_device_type_other" msgid="7019481234617207563">"Басқа"</string>
     <string name="ingress_rate_limit_title" msgid="2106694002836274350">"Желі арқылы жүктеп алу жылдамдығының шегі"</string>
