@@ -18,6 +18,7 @@ package com.android.settings.panel;
 
 import static android.app.slice.Slice.HINT_ERROR;
 import static android.app.slice.SliceItem.FORMAT_SLICE;
+import static android.view.accessibility.AccessibilityNodeInfo.ACTION_CLICK;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -25,6 +26,7 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
@@ -59,12 +61,15 @@ public class PanelSlicesAdapter
     private final List<LiveData<Slice>> mSliceLiveData;
     private final int mMetricsCategory;
     private final PanelFragment mPanelFragment;
+    private final String mSliceClickActionLabel;
 
     public PanelSlicesAdapter(
             PanelFragment fragment, Map<Uri, LiveData<Slice>> sliceLiveData, int metricsCategory) {
         mPanelFragment = fragment;
         mSliceLiveData = new ArrayList<>(sliceLiveData.values());
         mMetricsCategory = metricsCategory;
+        mSliceClickActionLabel = mPanelFragment.getContext().getString(
+                R.string.accessibility_action_label_panel_slice);
     }
 
     @NonNull
@@ -78,7 +83,6 @@ public class PanelSlicesAdapter
         } else {
             view = inflater.inflate(R.layout.panel_slice_row, viewGroup, false);
         }
-
         return new SliceRowViewHolder(view);
     }
 
@@ -115,6 +119,9 @@ public class PanelSlicesAdapter
     public class SliceRowViewHolder extends RecyclerView.ViewHolder
             implements DividerItemDecoration.DividedViewHolder {
 
+        private static final int ROW_VIEW_ID = androidx.slice.view.R.id.row_view;
+        private static final int ROW_VIEW_TAG = R.id.tag_row_view;
+
         @VisibleForTesting
         final SliceView sliceView;
         @VisibleForTesting
@@ -135,6 +142,7 @@ public class PanelSlicesAdapter
         public void onBind(Slice slice) {
             // Hides slice which reports with error hint or not contain any slice sub-item.
             if (slice == null || !isValidSlice(slice)) {
+                updateActionLabel();
                 sliceView.setVisibility(View.GONE);
                 return;
             } else {
@@ -158,6 +166,60 @@ public class PanelSlicesAdapter
                                         eventInfo.actionType /* value */);
                     })
             );
+            updateActionLabel();
+        }
+
+        /**
+         * Either set the action label if the row view is inflated into Slice, or set a listener to
+         * do so later when the row is available.
+         */
+        @VisibleForTesting void updateActionLabel() {
+            if (sliceView == null) {
+                return;
+            }
+
+            final LinearLayout llRow = sliceView.findViewById(ROW_VIEW_ID);
+            if (llRow != null) {
+                // Just set the label for the row. if is already laid out, there is no need for
+                // listening to future changes.
+                setActionLabel(llRow);
+            } else { // set the accessibility delegate when row_view is laid out
+                Object alreadyAddedListener = sliceView.getTag(ROW_VIEW_TAG);
+                if (alreadyAddedListener != null) {
+                    return;
+                }
+                sliceView.setTag(ROW_VIEW_TAG, new Object());
+
+                sliceView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+                    @Override
+                    public void onLayoutChange(View v, int left, int top, int right, int bottom,
+                            int oldLeft, int oldTop, int oldRight, int oldBottom) {
+                        LinearLayout row = sliceView.findViewById(ROW_VIEW_ID);
+                        if (row != null) {
+                            setActionLabel(row);
+                            sliceView.removeOnLayoutChangeListener(this);
+                        }
+                    }
+                });
+            }
+        }
+
+        /**
+         * Update the action label for TalkBack to be more specific
+         * @param view the RowView within the Slice
+         */
+        private void setActionLabel(View view) {
+            view.setAccessibilityDelegate(new View.AccessibilityDelegate() {
+                @Override
+                public void onInitializeAccessibilityNodeInfo(View host,
+                        AccessibilityNodeInfo info) {
+                    super.onInitializeAccessibilityNodeInfo(host, info);
+                    AccessibilityNodeInfo.AccessibilityAction customClick =
+                            new AccessibilityNodeInfo.AccessibilityAction(
+                                    ACTION_CLICK, mSliceClickActionLabel);
+                    info.addAction(customClick);
+                }
+            });
         }
 
         private boolean isValidSlice(Slice slice) {
