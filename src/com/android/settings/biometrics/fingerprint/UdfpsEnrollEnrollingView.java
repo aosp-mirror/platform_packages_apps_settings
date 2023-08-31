@@ -37,8 +37,8 @@ import androidx.annotation.ColorInt;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
-import com.android.settingslib.udfps.UdfpsOverlayParams;
-import com.android.settingslib.udfps.UdfpsUtils;
+import com.android.systemui.biometrics.UdfpsUtils;
+import com.android.systemui.biometrics.shared.model.UdfpsOverlayParams;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupdesign.GlifLayout;

@@ -33,7 +33,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.android.settings.R;
-import com.android.settingslib.udfps.UdfpsOverlayParams;
+import com.android.systemui.biometrics.shared.model.UdfpsOverlayParams;
 
 /**
  * View corresponding with udfps_enroll_view.xml
