@@ -19,6 +19,7 @@ package com.android.settings.panel;
 import static com.android.settings.panel.PanelContent.VIEW_TYPE_SLIDER;
 import static com.android.settings.panel.PanelSlicesAdapter.MAX_NUM_OF_SLICES;
 import static com.android.settings.slices.CustomSliceRegistry.MEDIA_OUTPUT_INDICATOR_SLICE_URI;
+import static com.android.settings.slices.CustomSliceRegistry.VOLUME_NOTIFICATION_URI;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -137,6 +138,19 @@ public class PanelSlicesAdapterTest {
         adapter.onBindViewHolder(viewHolder, position);
 
         assertThat(viewHolder.mSliceSliderLayout).isNull();
+    }
+
+    @Test
+    public void onCreateViewHolder_viewTypeSlider_verifyActionLabelSet() {
+        addTestLiveData(VOLUME_NOTIFICATION_URI);
+
+        final PanelSlicesAdapter adapter =
+                new PanelSlicesAdapter(mPanelFragment, mData, 0);
+        final ViewGroup view = new FrameLayout(mContext);
+        SliceRowViewHolder viewHolder = spy(adapter.onCreateViewHolder(view, 0 /* view type*/));
+        adapter.onBindViewHolder(viewHolder, 0);
+
+        verify(viewHolder).updateActionLabel();
     }
 
     @Test
