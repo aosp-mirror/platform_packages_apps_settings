@@ -23,7 +23,7 @@ import com.android.settings.biometrics.fingerprint2.domain.interactor.Fingerprin
 import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintAuthAttemptViewModel
 import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintViewModel
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOf
 
 /** Fake to be used by other classes to easily fake the FingerprintManager implementation. */
 class FakeFingerprintManagerInteractor : FingerprintManagerInteractor {
@@ -53,15 +53,16 @@ class FakeFingerprintManagerInteractor : FingerprintManagerInteractor {
   override suspend fun generateChallenge(gateKeeperPasswordHandle: Long): Pair<Long, ByteArray> {
     return challengeToGenerate
   }
-  override val enrolledFingerprints: Flow<List<FingerprintViewModel>> = flow {
-    emit(enrolledFingerprintsInternal)
-  }
+  override val enrolledFingerprints: Flow<List<FingerprintViewModel>> =
+    flowOf(enrolledFingerprintsInternal)
 
-  override fun canEnrollFingerprints(numFingerprints: Int): Flow<Boolean> = flow {
-    emit(numFingerprints < enrollableFingerprints)
-  }
+  override val canEnrollFingerprints: Flow<Boolean> =
+    flowOf(enrolledFingerprintsInternal.size < enrollableFingerprints)
 
-  override val maxEnrollableFingerprints: Flow<Int> = flow { emit(enrollableFingerprints) }
+  override val sensorPropertiesInternal: Flow<FingerprintSensorPropertiesInternal?> =
+    flowOf(sensorProps.first())
+
+  override val maxEnrollableFingerprints: Flow<Int> = flowOf(enrollableFingerprints)
 
   override suspend fun removeFingerprint(fp: FingerprintViewModel): Boolean {
     return enrolledFingerprintsInternal.remove(fp)
@@ -80,7 +81,4 @@ class FakeFingerprintManagerInteractor : FingerprintManagerInteractor {
   override suspend fun pressToAuthEnabled(): Boolean {
     return pressToAuthEnabled
   }
-
-  override suspend fun sensorPropertiesInternal(): List<FingerprintSensorPropertiesInternal> =
-    sensorProps
 }

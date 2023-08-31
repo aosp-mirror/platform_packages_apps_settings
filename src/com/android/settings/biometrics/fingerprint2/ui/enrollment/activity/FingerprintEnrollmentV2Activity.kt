@@ -47,10 +47,10 @@ import com.android.settings.biometrics.fingerprint2.ui.enrollment.fragment.Finge
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.Confirmation
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.Education
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.Enrollment
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollmentNavigationViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintGatekeeperViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintScrollViewModel
-import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.Finish
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.GatekeeperInfo
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.Intro
@@ -179,8 +179,10 @@ class FingerprintEnrollmentV2Activity : FragmentActivity() {
       )[FingerprintEnrollmentNavigationViewModel::class.java]
 
     // Initialize FingerprintViewModel
-    ViewModelProvider(this, FingerprintViewModel.FingerprintViewModelFactory(interactor))[
-      FingerprintViewModel::class.java]
+    ViewModelProvider(
+      this,
+      FingerprintEnrollViewModel.FingerprintEnrollViewModelFactory(interactor)
+    )[FingerprintEnrollViewModel::class.java]
 
     // Initialize scroll view model
     ViewModelProvider(this, FingerprintScrollViewModel.FingerprintScrollViewModelFactory())[

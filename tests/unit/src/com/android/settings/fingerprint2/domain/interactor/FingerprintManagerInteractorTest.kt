@@ -18,7 +18,6 @@ package com.android.settings.fingerprint2.domain.interactor
 
 import android.content.Context
 import android.content.Intent
-import android.content.res.Resources
 import android.hardware.fingerprint.Fingerprint
 import android.hardware.fingerprint.FingerprintManager
 import android.hardware.fingerprint.FingerprintManager.CryptoObject
@@ -51,8 +50,11 @@ import org.mockito.ArgumentMatchers.eq
 import org.mockito.ArgumentMatchers.nullable
 import org.mockito.Mock
 import org.mockito.Mockito
+import org.mockito.Mockito.verify
+import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoJUnitRunner
+import org.mockito.stubbing.OngoingStubbing
 
 @RunWith(MockitoJUnitRunner::class)
 class FingerprintManagerInteractorTest {
@@ -82,8 +84,7 @@ class FingerprintManagerInteractorTest {
   @Test
   fun testEmptyFingerprints() =
     testScope.runTest {
-      Mockito.`when`(fingerprintManager.getEnrolledFingerprints(Mockito.anyInt()))
-        .thenReturn(emptyList())
+      whenever(fingerprintManager.getEnrolledFingerprints(anyInt())).thenReturn(emptyList())
 
       val emptyFingerprintList: List<Fingerprint> = emptyList()
       assertThat(underTest.enrolledFingerprints.last()).isEqualTo(emptyFingerprintList)
@@ -94,8 +95,7 @@ class FingerprintManagerInteractorTest {
     testScope.runTest {
       val expected = Fingerprint("Finger 1,", 2, 3L)
       val fingerprintList: List<Fingerprint> = listOf(expected)
-      Mockito.`when`(fingerprintManager.getEnrolledFingerprints(Mockito.anyInt()))
-        .thenReturn(fingerprintList)
+      whenever(fingerprintManager.getEnrolledFingerprints(anyInt())).thenReturn(fingerprintList)
 
       val list = underTest.enrolledFingerprints.last()
       assertThat(list.size).isEqualTo(fingerprintList.size)
@@ -108,21 +108,22 @@ class FingerprintManagerInteractorTest {
   @Test
   fun testCanEnrollFingerprint() =
     testScope.runTest {
-      val mockContext = Mockito.mock(Context::class.java)
-      val resources = Mockito.mock(Resources::class.java)
-      Mockito.`when`(mockContext.resources).thenReturn(resources)
-      Mockito.`when`(resources.getInteger(anyInt())).thenReturn(3)
-      underTest =
-        FingerprintManagerInteractorImpl(
-          mockContext,
-          backgroundDispatcher,
-          fingerprintManager,
-          gateKeeperPasswordProvider,
-          pressToAuthProvider,
+      val fingerprintList1: List<Fingerprint> =
+        listOf(
+          Fingerprint("Finger 1,", 2, 3L),
+          Fingerprint("Finger 2,", 3, 3L),
+          Fingerprint("Finger 3,", 4, 3L)
         )
+      val fingerprintList2: List<Fingerprint> =
+        fingerprintList1.plus(
+          listOf(Fingerprint("Finger 4,", 5, 3L), Fingerprint("Finger 5,", 6, 3L))
+        )
+      whenever(fingerprintManager.getEnrolledFingerprints(anyInt()))
+        .thenReturn(fingerprintList1)
+        .thenReturn(fingerprintList2)
 
-      assertThat(underTest.canEnrollFingerprints(2).last()).isTrue()
-      assertThat(underTest.canEnrollFingerprints(3).last()).isFalse()
+      assertThat(underTest.canEnrollFingerprints.last()).isTrue()
+      assertThat(underTest.canEnrollFingerprints.last()).isFalse()
     }
 
   @Test
@@ -132,7 +133,7 @@ class FingerprintManagerInteractorTest {
       val challenge = 100L
       val intent = Intent()
       intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE, challenge)
-      Mockito.`when`(
+      whenever(
           gateKeeperPasswordProvider.requestGatekeeperHat(
             any(Intent::class.java),
             anyLong(),
@@ -148,8 +149,7 @@ class FingerprintManagerInteractorTest {
       val job = testScope.launch { result = underTest.generateChallenge(1L) }
       runCurrent()
 
-      Mockito.verify(fingerprintManager)
-        .generateChallenge(anyInt(), capture(generateChallengeCallback))
+      verify(fingerprintManager).generateChallenge(anyInt(), capture(generateChallengeCallback))
       generateChallengeCallback.value.onChallengeGenerated(1, 2, challenge)
 
       runCurrent()
@@ -173,7 +173,7 @@ class FingerprintManagerInteractorTest {
         testScope.launch { result = underTest.removeFingerprint(fingerprintViewModelToRemove) }
       runCurrent()
 
-      Mockito.verify(fingerprintManager)
+      verify(fingerprintManager)
         .remove(any(Fingerprint::class.java), anyInt(), capture(removalCallback))
       removalCallback.value.onRemovalSucceeded(fingerprintToRemove, 1)
 
@@ -197,7 +197,7 @@ class FingerprintManagerInteractorTest {
         testScope.launch { result = underTest.removeFingerprint(fingerprintViewModelToRemove) }
       runCurrent()
 
-      Mockito.verify(fingerprintManager)
+      verify(fingerprintManager)
         .remove(any(Fingerprint::class.java), anyInt(), capture(removalCallback))
       removalCallback.value.onRemovalError(
         fingerprintToRemove,
@@ -218,8 +218,7 @@ class FingerprintManagerInteractorTest {
 
       underTest.renameFingerprint(fingerprintToRename, "Woo")
 
-      Mockito.verify(fingerprintManager)
-        .rename(eq(fingerprintToRename.fingerId), anyInt(), safeEq("Woo"))
+      verify(fingerprintManager).rename(eq(fingerprintToRename.fingerId), anyInt(), safeEq("Woo"))
     }
 
   @Test
@@ -235,7 +234,7 @@ class FingerprintManagerInteractorTest {
 
       runCurrent()
 
-      Mockito.verify(fingerprintManager)
+      verify(fingerprintManager)
         .authenticate(
           nullable(CryptoObject::class.java),
           any(CancellationSignal::class.java),
@@ -263,7 +262,7 @@ class FingerprintManagerInteractorTest {
 
       runCurrent()
 
-      Mockito.verify(fingerprintManager)
+      verify(fingerprintManager)
         .authenticate(
           nullable(CryptoObject::class.java),
           any(CancellationSignal::class.java),
@@ -284,4 +283,5 @@ class FingerprintManagerInteractorTest {
   private fun <T : Any> safeEq(value: T): T = eq(value) ?: value
   private fun <T> capture(argumentCaptor: ArgumentCaptor<T>): T = argumentCaptor.capture()
   private fun <T> any(type: Class<T>): T = Mockito.any<T>(type)
+  private fun <T> whenever(methodCall: T): OngoingStubbing<T> = `when`(methodCall)
 }
