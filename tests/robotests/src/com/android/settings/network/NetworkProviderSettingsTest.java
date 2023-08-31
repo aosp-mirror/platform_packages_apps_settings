@@ -482,8 +482,8 @@ public class NetworkProviderSettingsTest {
         when(mWifiEntry.canConnect()).thenReturn(true);
         final WifiConfigController2 controller = mock(WifiConfigController2.class);
         when(controller.getConfig()).thenReturn(config);
-        final WifiDialog2 wifiDialog2 = spy(WifiDialog2.createModal(mContext, null /* listener */,
-                mWifiEntry, mode));
+        WifiDialog2.WifiDialog2Listener listener = mock(WifiDialog2.WifiDialog2Listener.class);
+        final WifiDialog2 wifiDialog2 = spy(new WifiDialog2(mContext, listener, mWifiEntry, mode));
         when(wifiDialog2.getController()).thenReturn(controller);
         return wifiDialog2;
     }

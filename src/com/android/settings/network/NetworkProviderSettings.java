@@ -751,15 +751,11 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
 
     @Override
     public Dialog onCreateDialog(int dialogId) {
-        switch (dialogId) {
-            case WIFI_DIALOG_ID:
-                // modify network
-                mDialog = WifiDialog2
-                        .createModal(getActivity(), this, mDialogWifiEntry, mDialogMode);
-                return mDialog;
-            default:
-                return super.onCreateDialog(dialogId);
+        if (dialogId == WIFI_DIALOG_ID) {  // modify network
+            mDialog = new WifiDialog2(requireContext(), this, mDialogWifiEntry, mDialogMode);
+            return mDialog;
         }
+        return super.onCreateDialog(dialogId);
     }
 
     @Override

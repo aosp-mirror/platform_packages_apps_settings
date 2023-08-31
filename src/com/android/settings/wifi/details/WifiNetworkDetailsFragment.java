@@ -180,7 +180,7 @@ public class WifiNetworkDetailsFragment extends RestrictedDashboardFragment impl
         }
 
         final WifiEntry wifiEntry = mNetworkDetailsTracker.getWifiEntry();
-        return WifiDialog2.createModal(getActivity(), this, wifiEntry,
+        return new WifiDialog2(getActivity(), this, wifiEntry,
                 WifiConfigUiBase2.MODE_MODIFY);
     }
 
