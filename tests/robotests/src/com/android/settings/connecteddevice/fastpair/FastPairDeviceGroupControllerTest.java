@@ -25,11 +25,13 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.robolectric.Shadows.shadowOf;
 
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Looper;
 import android.platform.test.annotations.RequiresFlagsDisabled;
 import android.platform.test.annotations.RequiresFlagsEnabled;
 import android.platform.test.flag.junit.CheckFlagsRule;
@@ -38,11 +40,13 @@ import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceManager;
 
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.flags.Flags;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
+import com.android.settings.widget.GearPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -69,6 +73,7 @@ public class FastPairDeviceGroupControllerTest {
     @Mock private DashboardFragment mDashboardFragment;
     @Mock private FastPairDeviceUpdater mFastPairDeviceUpdater;
     @Mock private PackageManager mPackageManager;
+    @Mock private PreferenceManager mPreferenceManager;
     private ShadowBluetoothAdapter mShadowBluetoothAdapter;
     private Context mContext;
     private FastPairDeviceGroupController mFastPairDeviceGroupController;
@@ -88,6 +93,7 @@ public class FastPairDeviceGroupControllerTest {
         doReturn(mFastPairDeviceUpdater).when(provider).getFastPairDeviceUpdater(any(), any());
         mFastPairDeviceGroupController = new FastPairDeviceGroupController(mContext);
         mPreferenceGroup = spy(new PreferenceCategory(mContext));
+        doReturn(mPreferenceManager).when(mPreferenceGroup).getPreferenceManager();
         mPreferenceGroup.setVisible(false);
         mFastPairDeviceGroupController.setPreferenceGroup(mPreferenceGroup);
         mShadowBluetoothAdapter = Shadow.extract(BluetoothAdapter.getDefaultAdapter());
@@ -109,7 +115,7 @@ public class FastPairDeviceGroupControllerTest {
     @Test
     @RequiresFlagsEnabled(Flags.FLAG_ENABLE_SUBSEQUENT_PAIR_SETTINGS_INTEGRATION)
     public void testUnregister() {
-        // register it first
+        // register broadcast first
         mContext.registerReceiver(
                 mFastPairDeviceGroupController.mReceiver, null, Context.RECEIVER_EXPORTED);
 
@@ -148,10 +154,21 @@ public class FastPairDeviceGroupControllerTest {
     @Test
     @RequiresFlagsEnabled(Flags.FLAG_ENABLE_SUBSEQUENT_PAIR_SETTINGS_INTEGRATION)
     public void testUpdatePreferenceVisibility_bluetoothIsDisable_shouldHidePreference() {
+        mShadowBluetoothAdapter.setEnabled(true);
+        final GearPreference preference1 = new GearPreference(mContext, null /* AttributeSet */);
+        mFastPairDeviceGroupController.onDeviceAdded(preference1);
+        assertThat(mPreferenceGroup.isVisible()).isTrue();
+
         mShadowBluetoothAdapter.setEnabled(false);
+        // register broadcast first
+        mContext.registerReceiver(
+                mFastPairDeviceGroupController.mReceiver,
+                mFastPairDeviceGroupController.mIntentFilter,
+                Context.RECEIVER_EXPORTED_UNAUDITED);
         Intent intent = new Intent(BluetoothAdapter.ACTION_STATE_CHANGED);
         mContext.sendBroadcast(intent);
 
+        shadowOf(Looper.getMainLooper()).idle();
         assertThat(mPreferenceGroup.isVisible()).isFalse();
     }
 }
