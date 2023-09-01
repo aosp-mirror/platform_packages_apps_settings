@@ -15,8 +15,8 @@
  */
 package com.android.settings.wifi.details;
 
+import static com.android.settings.network.NetworkProviderSettings.WIFI_DIALOG_ID;
 import static com.android.settings.network.telephony.MobileNetworkUtils.NO_CELL_DATA_TYPE_ICON;
-import static com.android.settings.wifi.WifiSettings.WIFI_DIALOG_ID;
 import static com.android.settingslib.Utils.formatPercentage;
 
 import android.app.Dialog;
