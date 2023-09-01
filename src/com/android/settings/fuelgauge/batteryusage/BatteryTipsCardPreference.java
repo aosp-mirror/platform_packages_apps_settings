@@ -23,6 +23,7 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -51,6 +52,8 @@ public class BatteryTipsCardPreference extends Preference implements View.OnClic
 
     private String mAnomalyEventId;
     private PowerAnomalyKey mPowerAnomalyKey;
+    private int mIconResourceId = 0;
+    private int mMainButtonStrokeColorResourceId = 0;
 
     @VisibleForTesting
     CharSequence mMainButtonLabel;
@@ -71,6 +74,26 @@ public class BatteryTipsCardPreference extends Preference implements View.OnClic
         mPowerUsageFeatureProvider =  featureFactory.getPowerUsageFeatureProvider();
         mMetricsFeatureProvider = featureFactory.getMetricsFeatureProvider();
         mPowerAnomalyKey = null;
+    }
+
+    /**
+     * Sets the icon in tips card.
+     */
+    public void setIconResourceId(int resourceId) {
+        if (mIconResourceId != resourceId) {
+            mIconResourceId = resourceId;
+            notifyChanged();
+        }
+    }
+
+    /**
+     * Sets the stroke color of main button in tips card.
+     */
+    public void setMainButtonStrokeColorResourceId(int resourceId) {
+        if (mMainButtonStrokeColorResourceId != resourceId) {
+            mMainButtonStrokeColorResourceId = resourceId;
+            notifyChanged();
+        }
     }
 
     /**
@@ -159,9 +182,15 @@ public class BatteryTipsCardPreference extends Preference implements View.OnClic
         MaterialButton mainButton = (MaterialButton) view.findViewById(R.id.main_button);
         mainButton.setOnClickListener(this);
         mainButton.setText(mMainButtonLabel);
+        if (mMainButtonStrokeColorResourceId != 0) {
+            mainButton.setStrokeColorResource(mMainButtonStrokeColorResourceId);
+        }
         MaterialButton dismissButton = (MaterialButton) view.findViewById(R.id.dismiss_button);
         dismissButton.setOnClickListener(this);
         dismissButton.setText(mDismissButtonLabel);
+        if (mIconResourceId != 0) {
+            ((ImageView) view.findViewById(R.id.icon)).setImageResource(mIconResourceId);
+        }
 
         if (!mPowerUsageFeatureProvider.isBatteryTipsFeedbackEnabled()) {
             return;
