@@ -39,8 +39,10 @@ import android.net.Uri;
 import android.os.LocaleList;
 import android.os.Process;
 import android.os.SystemClock;
-import android.os.SystemProperties;
 import android.os.UserHandle;
+import android.platform.test.annotations.RequiresFlagsEnabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.telephony.TelephonyManager;
 
 import androidx.annotation.ArrayRes;
@@ -48,6 +50,7 @@ import androidx.annotation.ArrayRes;
 import com.android.internal.app.LocaleStore;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.applications.AppLocaleUtil;
+import com.android.settings.flags.Flags;
 
 import org.junit.After;
 import org.junit.Before;
@@ -98,6 +101,9 @@ public class AppLocalePickerActivityTest {
 
     @Rule
     public MockitoRule rule = MockitoJUnit.rule();
+    @Rule
+    public final CheckFlagsRule mCheckFlagsRule =
+            DeviceFlagsValueProvider.createCheckFlagsRule();
 
     private Context mContext;
     private ShadowPackageManager mPackageManager;
@@ -223,6 +229,7 @@ public class AppLocalePickerActivityTest {
     }
 
     @Test
+    @RequiresFlagsEnabled(Flags.FLAG_LOCALE_NOTIFICATION_ENABLED)
     public void onLocaleSelected_evaluateNotification_simpleLocaleUpdate_localeCreatedWithUid()
             throws Exception {
         sUid = 100;
@@ -244,11 +251,11 @@ public class AppLocalePickerActivityTest {
         assertThat(info.getDismissCount()).isEqualTo(0);
         assertThat(info.getLastNotificationTimeMs()).isEqualTo(0);
 
-        SystemProperties.set(AppLocalePickerActivity.PROP_SYSTEM_LOCALE_SUGGESTION, "false");
         mDataManager.clearLocaleNotificationMap();
     }
 
     @Test
+    @RequiresFlagsEnabled(Flags.FLAG_LOCALE_NOTIFICATION_ENABLED)
     public void onLocaleSelected_evaluateNotification_twoLocaleUpdate_triggerNotification()
             throws Exception {
         // App with uid 101 changed its locale from System to en-US.
@@ -269,11 +276,11 @@ public class AppLocalePickerActivityTest {
         assertThat(info.getDismissCount()).isEqualTo(0);
         assertThat(info.getLastNotificationTimeMs()).isNotEqualTo(0);
 
-        SystemProperties.set(AppLocalePickerActivity.PROP_SYSTEM_LOCALE_SUGGESTION, "false");
         mDataManager.clearLocaleNotificationMap();
     }
 
     @Test
+    @RequiresFlagsEnabled(Flags.FLAG_LOCALE_NOTIFICATION_ENABLED)
     public void onLocaleSelected_evaluateNotification_oddLocaleUpdate_uidAddedWithoutNotification()
             throws Exception {
         // App with uid 102 changed its locale from System to en-US.
@@ -298,11 +305,11 @@ public class AppLocalePickerActivityTest {
         assertThat(info.getLastNotificationTimeMs()).isNotEqualTo(0);
         assertThat(info.getNotificationId()).isEqualTo(notificationId);
 
-        SystemProperties.set(AppLocalePickerActivity.PROP_SYSTEM_LOCALE_SUGGESTION, "false");
         mDataManager.clearLocaleNotificationMap();
     }
 
     @Test
+    @RequiresFlagsEnabled(Flags.FLAG_LOCALE_NOTIFICATION_ENABLED)
     public void onLocaleSelected_evaluateNotification_frequentLocaleUpdate_uidAddedNoNotification()
             throws Exception {
         // App with uid 103 changed its locale from System to en-US.
@@ -327,11 +334,11 @@ public class AppLocalePickerActivityTest {
         assertThat(info.getLastNotificationTimeMs()).isNotEqualTo(0);
         assertThat(info.getNotificationId()).isEqualTo(notificationId);
 
-        SystemProperties.set(AppLocalePickerActivity.PROP_SYSTEM_LOCALE_SUGGESTION, "false");
         mDataManager.clearLocaleNotificationMap();
     }
 
     @Test
+    @RequiresFlagsEnabled(Flags.FLAG_LOCALE_NOTIFICATION_ENABLED)
     public void onLocaleSelected_evaluateNotification_2ndOddLocaleUpdate_uidAddedNoNotification()
             throws Exception {
         // App with uid 104 changed its locale from System to en-US.
@@ -356,11 +363,11 @@ public class AppLocalePickerActivityTest {
         assertThat(info.getDismissCount()).isEqualTo(0);
         assertThat(info.getLastNotificationTimeMs()).isNotEqualTo(0);
 
-        SystemProperties.set(AppLocalePickerActivity.PROP_SYSTEM_LOCALE_SUGGESTION, "false");
         mDataManager.clearLocaleNotificationMap();
     }
 
     @Test
+    @RequiresFlagsEnabled(Flags.FLAG_LOCALE_NOTIFICATION_ENABLED)
     public void testEvaluateLocaleNotification_evenLocaleUpdate_trigger2ndNotification()
             throws Exception {
         sUid = 105;
@@ -387,11 +394,11 @@ public class AppLocalePickerActivityTest {
         assertThat(info.getDismissCount()).isEqualTo(0);
         assertThat(info.getLastNotificationTimeMs()).isGreaterThan(lastNotificationTime);
 
-        SystemProperties.set(AppLocalePickerActivity.PROP_SYSTEM_LOCALE_SUGGESTION, "false");
         mDataManager.clearLocaleNotificationMap();
     }
 
     @Test
+    @RequiresFlagsEnabled(Flags.FLAG_LOCALE_NOTIFICATION_ENABLED)
     public void testEvaluateLocaleNotification_localeUpdateReachThreshold_uidAddedNoNotification()
             throws Exception {
         // App with uid 106 changed its locale from System to en-US.
@@ -417,11 +424,11 @@ public class AppLocalePickerActivityTest {
         assertThat(info.getDismissCount()).isEqualTo(0);
         assertThat(info.getLastNotificationTimeMs()).isEqualTo(lastNotificationTime);
 
-        SystemProperties.set(AppLocalePickerActivity.PROP_SYSTEM_LOCALE_SUGGESTION, "false");
         mDataManager.clearLocaleNotificationMap();
     }
 
     @Test
+    @RequiresFlagsEnabled(Flags.FLAG_LOCALE_NOTIFICATION_ENABLED)
     public void testEvaluateLocaleNotification_appChangedLocales_newLocaleCreated()
             throws Exception {
         sUid = 100;
@@ -448,13 +455,11 @@ public class AppLocalePickerActivityTest {
         assertThat(info.getDismissCount()).isEqualTo(0);
         assertThat(info.getLastNotificationTimeMs()).isEqualTo(0);
 
-        SystemProperties.set(AppLocalePickerActivity.PROP_SYSTEM_LOCALE_SUGGESTION, "false");
         mDataManager.clearLocaleNotificationMap();
     }
 
     private void initLocaleNotificationEnvironment() throws Exception {
         LocaleList.setDefault(LocaleList.forLanguageTags(EN_CA));
-        SystemProperties.set(AppLocalePickerActivity.PROP_SYSTEM_LOCALE_SUGGESTION, "true");
 
         Locale locale = Locale.forLanguageTag("en-US");
         when(mLocaleInfo.getLocale()).thenReturn(locale);
