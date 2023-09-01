@@ -20,6 +20,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import com.android.settings.R
 import com.android.settings.remoteauth.RemoteAuthEnrollBase
 import com.google.android.setupcompat.template.FooterButton
@@ -33,6 +34,7 @@ class RemoteAuthEnrollIntroduction :
         layoutResId = R.layout.remote_auth_enroll_introduction,
         glifLayoutId = R.id.setup_wizard_layout,
     ) {
+    private val navController by lazy { findNavController(this) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,7 +46,7 @@ class RemoteAuthEnrollIntroduction :
         }
 
 
-    override fun initializePrimaryFooterButton() : FooterButton {
+    override fun initializePrimaryFooterButton(): FooterButton {
         return FooterButton.Builder(context!!)
             .setText(R.string.security_settings_remoteauth_enroll_introduction_agree)
             .setListener(::onPrimaryFooterButtonClick)
@@ -53,7 +55,7 @@ class RemoteAuthEnrollIntroduction :
             .build()
     }
 
-    override fun initializeSecondaryFooterButton() : FooterButton {
+    override fun initializeSecondaryFooterButton(): FooterButton {
         return FooterButton.Builder(context!!)
             .setText(R.string.security_settings_remoteauth_enroll_introduction_disagree)
             .setListener(::onSecondaryFooterButtonClick)
@@ -63,24 +65,34 @@ class RemoteAuthEnrollIntroduction :
     }
 
     private fun onPrimaryFooterButtonClick(view: View) {
-        // TODO(b/293906345): Wire up navigation
+        navController.navigate(R.id.action_introduction_to_enrolling)
     }
 
     private fun onSecondaryFooterButtonClick(view: View) {
-        // TODO(b/293906345): Wire up navigation
+        navController.navigateUp()
     }
 
     private fun initializeRequireScrollMixin(view: View) {
         val layout = checkNotNull(getGlifLayout(view))
         secondaryFooterButton?.visibility = View.INVISIBLE
         val requireScrollMixin = layout.getMixin(RequireScrollMixin::class.java)
-        requireScrollMixin.requireScrollWithButton(requireContext(), primaryFooterButton,
-            R.string.security_settings_remoteauth_enroll_introduction_more, ::onPrimaryFooterButtonClick)
+        requireScrollMixin.requireScrollWithButton(
+            requireContext(),
+            primaryFooterButton,
+            R.string.security_settings_remoteauth_enroll_introduction_more,
+            ::onPrimaryFooterButtonClick
+        )
         requireScrollMixin.setOnRequireScrollStateChangedListener { scrollNeeded ->
             if (scrollNeeded) {
-                primaryFooterButton.setText(requireContext(), R.string.security_settings_remoteauth_enroll_introduction_more)
+                primaryFooterButton.setText(
+                    requireContext(),
+                    R.string.security_settings_remoteauth_enroll_introduction_more
+                )
             } else {
-                primaryFooterButton.setText(requireContext(), R.string.security_settings_remoteauth_enroll_introduction_agree)
+                primaryFooterButton.setText(
+                    requireContext(),
+                    R.string.security_settings_remoteauth_enroll_introduction_agree
+                )
                 secondaryFooterButton?.visibility = View.VISIBLE
             }
         }
