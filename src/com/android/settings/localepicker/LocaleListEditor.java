@@ -18,6 +18,7 @@ package com.android.settings.localepicker;
 
 import static android.os.UserManager.DISALLOW_CONFIG_LOCALE;
 
+import static com.android.settings.flags.Flags.localeNotificationEnabled;
 import static com.android.settings.localepicker.AppLocalePickerActivity.EXTRA_APP_LOCALE;
 import static com.android.settings.localepicker.AppLocalePickerActivity.EXTRA_NOTIFICATION_ID;
 import static com.android.settings.localepicker.LocaleDialogFragment.DIALOG_ADD_SYSTEM_LOCALE;
@@ -31,7 +32,6 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.LocaleList;
-import android.os.SystemProperties;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
@@ -283,7 +283,7 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
         String dialogType = intent.getStringExtra(EXTRA_SYSTEM_LOCALE_DIALOG_TYPE);
         String localeTag = intent.getStringExtra(EXTRA_APP_LOCALE);
         int notificationId = intent.getIntExtra(EXTRA_NOTIFICATION_ID, INVALID_NOTIFICATION_ID);
-        if (!isDialogFeatureEnabled()
+        if (!localeNotificationEnabled()
                 || !isValidNotificationId(localeTag, notificationId)
                 || !isValidDialogType(dialogType)
                 || !isValidLocale(localeTag)
@@ -291,11 +291,6 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
             return false;
         }
         return true;
-    }
-
-    private boolean isDialogFeatureEnabled() {
-        return SystemProperties.getBoolean(AppLocalePickerActivity.PROP_SYSTEM_LOCALE_SUGGESTION,
-                AppLocalePickerActivity.ENABLED);
     }
 
     private boolean isValidNotificationId(String localeTag, long id) {

@@ -40,6 +40,9 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.LocaleList;
+import android.platform.test.annotations.RequiresFlagsEnabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -56,6 +59,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.android.internal.app.LocaleStore;
 import com.android.settings.R;
+import com.android.settings.flags.Flags;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowActivityManager;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
@@ -63,6 +67,7 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -135,6 +140,10 @@ public class LocaleListEditorTest {
     private ImageView mDragHandle;
     @Mock
     private NotificationController mNotificationController;
+
+    @Rule
+    public final CheckFlagsRule mCheckFlagsRule =
+            DeviceFlagsValueProvider.createCheckFlagsRule();
 
     @Before
     public void setUp() throws Exception {
@@ -346,6 +355,7 @@ public class LocaleListEditorTest {
     }
 
     @Test
+    @RequiresFlagsEnabled(Flags.FLAG_LOCALE_NOTIFICATION_ENABLED)
     public void showDiallogForAddedLocale_showConfirmDialog() {
         initIntentAndResourceForLocaleDialog();
         mLocaleListEditor.onViewStateRestored(null);
@@ -355,6 +365,7 @@ public class LocaleListEditorTest {
     }
 
     @Test
+    @RequiresFlagsEnabled(Flags.FLAG_LOCALE_NOTIFICATION_ENABLED)
     public void showDiallogForAddedLocale_clickAdd() {
         initIntentAndResourceForLocaleDialog();
         mLocaleListEditor.onViewStateRestored(null);
@@ -363,12 +374,14 @@ public class LocaleListEditorTest {
         bundle.putInt(ARG_DIALOG_TYPE, DIALOG_ADD_SYSTEM_LOCALE);
         bundle.putSerializable(LocaleDialogFragment.ARG_TARGET_LOCALE, info);
         Intent intent = new Intent().putExtras(bundle);
+
         mLocaleListEditor.onActivityResult(DIALOG_ADD_SYSTEM_LOCALE, Activity.RESULT_OK, intent);
 
         verify(mAdapter).addLocale(any(LocaleStore.LocaleInfo.class));
     }
 
     @Test
+    @RequiresFlagsEnabled(Flags.FLAG_LOCALE_NOTIFICATION_ENABLED)
     public void showDiallogForAddedLocale_clickCancel() {
         initIntentAndResourceForLocaleDialog();
         mLocaleListEditor.onViewStateRestored(null);
@@ -377,6 +390,7 @@ public class LocaleListEditorTest {
         bundle.putInt(ARG_DIALOG_TYPE, DIALOG_ADD_SYSTEM_LOCALE);
         bundle.putSerializable(LocaleDialogFragment.ARG_TARGET_LOCALE, info);
         Intent intent = new Intent().putExtras(bundle);
+
         mLocaleListEditor.onActivityResult(DIALOG_ADD_SYSTEM_LOCALE, Activity.RESULT_CANCELED,
                 intent);
 
@@ -384,6 +398,7 @@ public class LocaleListEditorTest {
     }
 
     @Test
+    @RequiresFlagsEnabled(Flags.FLAG_LOCALE_NOTIFICATION_ENABLED)
     public void showDiallogForAddedLocale_invalidLocale_noDialog() {
         Intent intent = new Intent("ACTION")
                 .putExtra(EXTRA_APP_LOCALE, "ab-CD") // invalid locale
@@ -392,11 +407,12 @@ public class LocaleListEditorTest {
 
         mLocaleListEditor.onViewStateRestored(null);
 
-        final AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
-        assertThat(dialog).isNull();
+        verify(mFragmentTransaction, never()).add(any(LocaleDialogFragment.class),
+                eq(TAG_DIALOG_ADD_SYSTEM_LOCALE));
     }
 
     @Test
+    @RequiresFlagsEnabled(Flags.FLAG_LOCALE_NOTIFICATION_ENABLED)
     public void showDiallogForAddedLocale_noDialogType_noDialog() {
         Intent intent = new Intent("ACTION")
                 .putExtra(EXTRA_APP_LOCALE, "ja-JP");
@@ -405,11 +421,12 @@ public class LocaleListEditorTest {
 
         mLocaleListEditor.onViewStateRestored(null);
 
-        final AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
-        assertThat(dialog).isNull();
+        verify(mFragmentTransaction, never()).add(any(LocaleDialogFragment.class),
+                eq(TAG_DIALOG_ADD_SYSTEM_LOCALE));
     }
 
     @Test
+    @RequiresFlagsEnabled(Flags.FLAG_LOCALE_NOTIFICATION_ENABLED)
     public void showDiallogForAddedLocale_inSystemLocale_noDialog() {
         LocaleList.setDefault(LocaleList.forLanguageTags("en-US,ar-AE-u-nu-arab"));
         Intent intent = new Intent("ACTION")
@@ -419,8 +436,8 @@ public class LocaleListEditorTest {
 
         mLocaleListEditor.onViewStateRestored(null);
 
-        final AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
-        assertThat(dialog).isNull();
+        verify(mFragmentTransaction, never()).add(any(LocaleDialogFragment.class),
+                eq(TAG_DIALOG_ADD_SYSTEM_LOCALE));
     }
 
     private void initIntentAndResourceForLocaleDialog() {

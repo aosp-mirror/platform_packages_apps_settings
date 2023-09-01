@@ -16,6 +16,8 @@
 
 package com.android.settings.localepicker;
 
+import static com.android.settings.flags.Flags.localeNotificationEnabled;
+
 import android.app.FragmentTransaction;
 import android.app.LocaleManager;
 import android.app.NotificationChannel;
@@ -27,7 +29,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.LocaleList;
 import android.os.SystemClock;
-import android.os.SystemProperties;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
@@ -53,10 +54,8 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
     private static final String CHANNEL_ID_SUGGESTION_TO_USER = "Locale suggestion";
     private static final String EXTRA_SYSTEM_LOCALE_DIALOG_TYPE = "system_locale_dialog_type";
     private static final String LOCALE_SUGGESTION = "locale_suggestion";
-    static final boolean ENABLED = false;
     static final String EXTRA_APP_LOCALE = "app_locale";
     static final String EXTRA_NOTIFICATION_ID = "notification_id";
-    static final String PROP_SYSTEM_LOCALE_SUGGESTION = "android.system.locale.suggestion";
 
     private String mPackageName;
     private LocalePickerWithRegion mLocalePickerWithRegion;
@@ -151,7 +150,7 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
     }
 
     private void broadcastAppLocaleChange(LocaleStore.LocaleInfo localeInfo) {
-        if (!SystemProperties.getBoolean(PROP_SYSTEM_LOCALE_SUGGESTION, ENABLED)) {
+        if (!localeNotificationEnabled()) {
             return;
         }
         String localeTag = localeInfo.getLocale().toLanguageTag();
