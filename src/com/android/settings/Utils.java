@@ -144,11 +144,6 @@ public final class Utils extends com.android.settingslib.Utils {
             "device_identifier_access_restrictions_disabled";
 
     /**
-     * Whether to show the Permissions Hub.
-     */
-    public static final String PROPERTY_PERMISSIONS_HUB_ENABLED = "permissions_hub_enabled";
-
-    /**
      * Whether to show location indicators.
      */
     public static final String PROPERTY_LOCATION_INDICATORS_ENABLED = "location_indicators_enabled";

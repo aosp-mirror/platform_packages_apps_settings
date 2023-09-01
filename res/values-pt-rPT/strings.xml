@@ -199,8 +199,7 @@
     <string name="terms_of_address_not_specified" msgid="4439257779351251973">"Não especificado"</string>
     <string name="terms_of_address_feminine" msgid="1743479869695539283">"Feminino"</string>
     <string name="terms_of_address_masculine" msgid="983106046135098856">"Masculino"</string>
-    <!-- no translation found for terms_of_address_neutral (5475414185543112478) -->
-    <skip />
+    <string name="terms_of_address_neutral" msgid="5475414185543112478">"Neutro"</string>
     <string name="dlg_remove_locales_title" msgid="3170501604483612114">"{count,plural, =1{Remover o idioma selecionado?}other{Remover os idiomas selecionados?}}"</string>
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"O texto será apresentado noutro idioma."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Não é possível remover todos os idiomas"</string>
@@ -897,6 +896,13 @@
     <string name="wifi_type_title" msgid="2174893488722015838">"Tipo"</string>
     <string name="wifi_details_dns" msgid="273231528073312579">"DNS"</string>
     <string name="wifi_details_ipv6_address_header" msgid="1913151339341722443">"Endereços IPv6"</string>
+    <string name="hotspot_device_details_category" msgid="3110651914598697220">"Detalhes do dispositivo da zona Wi-Fi"</string>
+    <string name="hotspot_device_details_internet_source" msgid="1563266599673281875">"Origem da Internet"</string>
+    <string name="internet_source_wifi" msgid="6952593095166435179">"Wi‑Fi"</string>
+    <string name="internet_source_mobile_data" msgid="877403889449201789">"Dados móveis"</string>
+    <string name="internet_source_ethernet" msgid="8338472576454100966">"Ethernet"</string>
+    <string name="hotspot_connection_category" msgid="4320380513982923556">"Ligação à zona Wi-Fi"</string>
+    <string name="hotspot_connection_strength" msgid="87359986943768421">"Intensidade da ligação"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"Redes guardadas"</string>
     <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"Subscrições"</string>
     <string name="wifi_saved_other_networks_tab" msgid="7942647415716557293">"Outras redes"</string>
@@ -952,12 +958,9 @@
     <string name="wifi_hotspot_speed_footer" msgid="8846939503916795002">"Se a sua frequência preferida não estiver disponível, a zona Wi-Fi pode usar outra. As definições de segurança da zona Wi-Fi podem mudar se alterar a frequência."</string>
     <string name="wifi_hotspot_security_summary_unavailable" msgid="117582979310345853">"Não disponível com 6 GHz"</string>
     <string name="wifi_hotspot_security_footer" msgid="4608329688744949796">"As definições de segurança podem mudar se alterar a frequência da zona Wi-Fi"</string>
-    <!-- no translation found for wifi_hotspot_instant_title (7052526695338853703) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_instant_summary_on (3142749148673081288) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_instant_summary_off (8594065628453795615) -->
-    <skip />
+    <string name="wifi_hotspot_instant_title" msgid="7052526695338853703">"Zona Wi-Fi instantânea"</string>
+    <string name="wifi_hotspot_instant_summary_on" msgid="3142749148673081288">"Ativada"</string>
+    <string name="wifi_hotspot_instant_summary_off" msgid="8594065628453795615">"Desativada"</string>
     <string name="wifi_tether_starting" msgid="8879874184033857814">"A ativar zona Wi-Fi..."</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"A desativar zona Wi-Fi..."</string>
     <string name="wifi_tether_carrier_unsupport_dialog_title" msgid="3089432578433978073">"Ligação (à Internet) via telemóvel indisponível"</string>
@@ -3248,7 +3251,7 @@
     <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"Não mostrar notificações"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="4688399629301178487">"Como quer que o ecrã de bloqueio seja apresentado?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1360388192096354315">"Ecrã de bloqueio"</string>
-    <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"Mostre todo o conteúdo de notificações de trabalho"</string>
+    <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"Mostrar todo o conteúdo de notificações de trabalho"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"Ocultar conteúdo de trabalho confidencial"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"Como quer que as notificações do perfil sejam apresentadas quando o dispositivo estiver bloqueado?"</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="6950124772255324448">"Notificações do perfil"</string>
@@ -3757,7 +3760,7 @@
     <string name="disconnected" msgid="3469373726996129247">"Não ligado"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"Desligado"</string>
     <string name="apps_summary" msgid="4007416751775414252">"<xliff:g id="COUNT">%1$d</xliff:g> apps instaladas"</string>
-    <string name="storage_summary" msgid="5903562203143572768">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> utilizado – <xliff:g id="FREE_SPACE">%2$s</xliff:g> livre(s)"</string>
+    <string name="storage_summary" msgid="5903562203143572768">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> usado(s) – <xliff:g id="FREE_SPACE">%2$s</xliff:g> livre(s)"</string>
     <string name="display_dashboard_summary" msgid="1599453894989339454">"Tema escuro, tamanho do tipo de letra, brilho"</string>
     <string name="memory_summary" msgid="8221954450951651735">"Média de <xliff:g id="USED_MEMORY">%1$s</xliff:g> de <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> de memória utilizado(s)"</string>
     <string name="users_summary" msgid="8473589474976307510">"Sessão iniciada como <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
@@ -3774,7 +3777,7 @@
     <string name="disabled_by_policy_title_biometric_parental_consent" msgid="2463673997797134678">"São necessários os pais"</string>
     <string name="disabled_by_policy_content_biometric_parental_consent" msgid="7124116806784305206">"Entrega o telemóvel aos teus pais para começarem a configurar esta definição"</string>
     <string name="disabled_by_policy_parental_consent" msgid="9166060049019018978">"Entrega o telemóvel a um adulto responsável para autorizar a alteração desta definição."</string>
-    <string name="default_admin_support_msg" msgid="8816296554831532033">"Para mais informações, contacte a pessoa com a função de administração de TI"</string>
+    <string name="default_admin_support_msg" msgid="8816296554831532033">"Para mais informações, contacte o administrador de TI"</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"Mais detalhes"</string>
     <string name="admin_profile_owner_message" msgid="8860709969532649195">"O gestor pode monitorizar e gerir as aplicações e os dados associados ao seu perfil de trabalho, incluindo as definições, as autorizações, o acesso empresarial, a atividade da rede e as informações de localização do dispositivo."</string>
     <string name="admin_profile_owner_user_message" msgid="4929926887231544950">"O gestor pode monitorizar e gerir as aplicações e os dados associados a este utilizador, incluindo as definições, as autorizações, o acesso empresarial, a atividade da rede e as informações de localização do dispositivo."</string>
@@ -3875,6 +3878,9 @@
     <string name="battery_saver_off_summary" msgid="4411561435493109261">"Desativada"</string>
     <string name="app_battery_usage_title" msgid="346558380609793334">"Utilização da bateria para apps"</string>
     <string name="app_battery_usage_summary" msgid="6349965904306339539">"Definir a utilização da bateria para apps"</string>
+    <string name="battery_tips_card_action_button" msgid="4897793527424711648">"Ver definições"</string>
+    <string name="battery_tips_card_dismiss_button" msgid="1885756985544936618">"OK"</string>
+    <string name="battery_tips_card_feedback_info" msgid="767117835675157298">"Esta mensagem é útil?"</string>
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Sem restrições"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Otimizada"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"Restrita"</string>
@@ -4494,8 +4500,10 @@
     <string name="lockscreen_privacy_controls_summary" msgid="7522918441738915364">"A partir do ecrã de bloqueio"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="2174300719855112358">"Usar controlos de dispositivos"</string>
     <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"Para usar, ative primeiro a opção \"Mostrar controlos de dispositivos\""</string>
-    <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Apresente o relógio de duas linhas quando estiver disponível"</string>
-    <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"Relógio de duas linhas"</string>
+    <!-- no translation found for lockscreen_double_line_clock_summary (4109235686687860393) -->
+    <skip />
+    <!-- no translation found for lockscreen_double_line_clock_setting_toggle (802271087416091548) -->
+    <skip />
     <string name="lockscreen_quick_affordances_title" msgid="8615741551327565793">"Atalhos"</string>
     <plurals name="lockscreen_quick_affordances_summary" formatted="false" msgid="4225396036524703997">
       <item quantity="other"><xliff:g id="FIRST_1">%1$s</xliff:g>, <xliff:g id="SECOND">%2$s</xliff:g></item>
@@ -4542,7 +4550,7 @@
     <string name="keywords_internet" msgid="7674082764898690310">"ligação de rede, internet, sem fios, dados, wifi, wi-fi, wi fi, telemóvel, dispositivo móvel, operador de telemóvel, 4g, 3g, 2g, lte"</string>
     <string name="reset_your_internet_title" msgid="4856899004343241310">"Quer repor a Internet?"</string>
     <string name="resetting_internet_text" msgid="6696779371800051806">"A repor a Internet…"</string>
-    <string name="fix_connectivity" msgid="2781433603228089501">"Corrigir a conetividade"</string>
+    <string name="fix_connectivity" msgid="2781433603228089501">"Corrigir conetividade"</string>
     <string name="networks_available" msgid="3299512933684383474">"Redes disponíveis"</string>
     <string name="to_switch_networks_disconnect_ethernet" msgid="6615374552827587197">"Para mudar de rede, desligue a Ethernet."</string>
     <string name="carrier_wifi_offload_title" msgid="7263365988016247722">"Ligações W+"</string>
@@ -4712,8 +4720,7 @@
     <string name="bluetooth_details_audio_device_type_unknown" msgid="839337391037998014">"Desconhecido"</string>
     <string name="bluetooth_details_audio_device_type_speaker" msgid="3706227767994792124">"Altifalante"</string>
     <string name="bluetooth_details_audio_device_type_headphones" msgid="7644588291215033798">"Auscultadores"</string>
-    <!-- no translation found for bluetooth_details_audio_device_type_hearing_aid (1310631131071939859) -->
-    <skip />
+    <string name="bluetooth_details_audio_device_type_hearing_aid" msgid="1310631131071939859">"Aparelho auditivo"</string>
     <string name="bluetooth_details_audio_device_type_carkit" msgid="4439017600454703229">"Kit para carro"</string>
     <string name="bluetooth_details_audio_device_type_other" msgid="7019481234617207563">"Outro"</string>
     <string name="ingress_rate_limit_title" msgid="2106694002836274350">"Limitação de velocidade de transferência da rede"</string>
