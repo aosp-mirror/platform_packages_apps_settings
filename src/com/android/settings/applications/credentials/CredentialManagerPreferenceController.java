@@ -47,6 +47,8 @@ import android.service.autofill.AutofillServiceInfo;
 import android.text.TextUtils;
 import android.util.IconDrawableFactory;
 import android.util.Log;
+import android.view.View;
+import android.widget.Switch;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
@@ -58,7 +60,7 @@ import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.PreferenceViewHolder;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.content.PackageMonitor;
@@ -67,6 +69,7 @@ import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.utils.ThreadUtils;
+import com.android.settingslib.widget.TwoTargetPreference;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -100,7 +103,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
     private final Set<String> mEnabledPackageNames;
     private final @Nullable CredentialManager mCredentialManager;
     private final Executor mExecutor;
-    private final Map<String, SwitchPreference> mPrefs = new HashMap<>(); // key is package name
+    private final Map<String, CombiPreference> mPrefs = new HashMap<>(); // key is package name
     private final List<ServiceInfo> mPendingServiceInfos = new ArrayList<>();
     private final Handler mHandler = new Handler();
     private final SettingContentObserver mSettingsContentObserver;
@@ -389,7 +392,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
 
     /** Aggregates the list of services and builds a list of UI prefs to show. */
     @VisibleForTesting
-    public Map<String, SwitchPreference> buildPreferenceList(
+    public Map<String, CombiPreference> buildPreferenceList(
             Context context, PreferenceGroup group) {
         // Get the selected autofill provider. If it is the placeholder then replace it with an
         // empty string.
@@ -415,7 +418,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
             return new HashMap<>();
         }
 
-        Map<String, SwitchPreference> output = new HashMap<>();
+        Map<String, CombiPreference> output = new HashMap<>();
         for (CombinedProviderInfo combinedInfo : providers) {
             final String packageName = combinedInfo.getApplicationInfo().packageName;
 
@@ -434,7 +437,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
             CharSequence title = combinedInfo.getAppName(context);
 
             // Build the pref and add it to the output & group.
-            SwitchPreference pref =
+            CombiPreference pref =
                     addProviderPreference(
                             context, title, icon, packageName, combinedInfo.getSettingsSubtitle());
             output.put(packageName, pref);
@@ -449,7 +452,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
 
     /** Creates a preference object based on the provider info. */
     @VisibleForTesting
-    public SwitchPreference createPreference(Context context, CredentialProviderInfo service) {
+    public CombiPreference createPreference(Context context, CredentialProviderInfo service) {
         CharSequence label = service.getLabel(context);
         return addProviderPreference(
                 context,
@@ -510,15 +513,15 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         return enabledServices;
     }
 
-    private SwitchPreference addProviderPreference(
+    private CombiPreference addProviderPreference(
             @NonNull Context prefContext,
             @NonNull CharSequence title,
             @Nullable Drawable icon,
             @NonNull String packageName,
             @Nullable CharSequence subtitle) {
-        final SwitchPreference pref = new SwitchPreference(prefContext);
+        final CombiPreference pref =
+                new CombiPreference(prefContext, mEnabledPackageNames.contains(packageName));
         pref.setTitle(title);
-        pref.setChecked(mEnabledPackageNames.contains(packageName));
 
         if (icon != null) {
             pref.setIcon(Utils.getSafeIcon(icon));
@@ -528,10 +531,8 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
             pref.setSummary(subtitle);
         }
 
-        pref.setOnPreferenceClickListener(
-                p -> {
-                    boolean isChecked = pref.isChecked();
-
+        pref.setPreferenceListener(
+                (p, isChecked) -> {
                     if (isChecked) {
                         if (mEnabledPackageNames.size() >= MAX_SELECTABLE_PROVIDERS) {
                             // Show the error if too many enabled.
@@ -539,11 +540,11 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
                             final DialogFragment fragment = newErrorDialogFragment();
 
                             if (fragment == null || mFragmentManager == null) {
-                                return true;
+                                return;
                             }
 
                             fragment.show(mFragmentManager, ErrorDialogFragment.TAG);
-                            return true;
+                            return;
                         }
 
                         togglePackageNameEnabled(packageName);
@@ -552,12 +553,9 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
                         if (mPrefs.containsKey(packageName)) {
                             mPrefs.get(packageName).setChecked(true);
                         }
-                        return true;
                     } else {
                         togglePackageNameDisabled(packageName);
                     }
-
-                    return true;
                 });
 
         return pref;
@@ -834,6 +832,82 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         @Override
         public void onChange(boolean selfChange, Uri uri) {
             updateFromExternal();
+        }
+    }
+
+    /** CombiPreference is a combination of TwoTargetPreference and SwitchPreference. */
+    public static class CombiPreference extends TwoTargetPreference {
+
+        private final Listener mListener = new Listener();
+
+        private class Listener implements View.OnClickListener {
+            @Override
+            public void onClick(View buttonView) {
+                // Forward the event.
+                if (mSwitch != null) {
+                    mOnClickListener.onCheckChanged(CombiPreference.this, mSwitch.isChecked());
+                }
+            }
+        }
+
+        // Stores a reference to the switch view.
+        private @Nullable Switch mSwitch;
+
+        // Switch text for on and off states
+        private @NonNull boolean mChecked = false;
+        private @Nullable OnCombiPreferenceClickListener mOnClickListener = null;
+
+        public interface OnCombiPreferenceClickListener {
+            /** Called when the check is updated */
+            void onCheckChanged(CombiPreference p, boolean isChecked);
+        }
+
+        public CombiPreference(Context context, boolean initialValue) {
+            super(context);
+            mChecked = initialValue;
+        }
+
+        /** Set the new checked value */
+        public void setChecked(boolean isChecked) {
+            // Don't update if we don't need too.
+            if (mChecked == isChecked) {
+                return;
+            }
+
+            mChecked = isChecked;
+
+            if (mSwitch != null) {
+                mSwitch.setChecked(isChecked);
+            }
+        }
+
+        public boolean isChecked() {
+            return mChecked;
+        }
+
+        public void setPreferenceListener(OnCombiPreferenceClickListener onClickListener) {
+            mOnClickListener = onClickListener;
+        }
+
+        @Override
+        protected int getSecondTargetResId() {
+            return R.layout.preference_widget_primary_switch;
+        }
+
+        @Override
+        public void onBindViewHolder(PreferenceViewHolder view) {
+            super.onBindViewHolder(view);
+
+            // Setup the switch.
+            View checkableView = view.itemView.findViewById(R.id.switchWidget);
+            if (checkableView != null && checkableView instanceof Switch) {
+                final Switch switchView = (Switch) checkableView;
+                switchView.setChecked(mChecked);
+                switchView.setOnClickListener(mListener);
+
+                // Store this for later.
+                mSwitch = switchView;
+            }
         }
     }
 }
