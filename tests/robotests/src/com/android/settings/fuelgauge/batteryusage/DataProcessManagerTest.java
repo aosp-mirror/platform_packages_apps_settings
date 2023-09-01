@@ -60,6 +60,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Supplier;
 
 @RunWith(RobolectricTestRunner.class)
@@ -87,6 +88,7 @@ public final class DataProcessManagerTest {
         MockitoAnnotations.initMocks(this);
 
         mContext = spy(RuntimeEnvironment.application);
+        DataProcessor.sTestSystemAppsPackageNames = Set.of();
         DataProcessor.sUsageStatsManager = mUsageStatsManager;
         doReturn(mContext).when(mContext).getApplicationContext();
         doReturn(mUserManager)
