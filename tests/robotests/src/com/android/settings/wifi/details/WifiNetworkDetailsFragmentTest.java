@@ -22,7 +22,7 @@ import static android.net.wifi.sharedconnectivity.app.HotspotNetwork.NETWORK_TYP
 import static android.net.wifi.sharedconnectivity.app.HotspotNetwork.NETWORK_TYPE_WIFI;
 import static android.telephony.SignalStrength.SIGNAL_STRENGTH_GREAT;
 
-import static com.android.settings.wifi.WifiSettings.WIFI_DIALOG_ID;
+import static com.android.settings.network.NetworkProviderSettings.WIFI_DIALOG_ID;
 import static com.android.settings.wifi.details.WifiNetworkDetailsFragment.KEY_HOTSPOT_CONNECTION_CATEGORY;
 import static com.android.settings.wifi.details.WifiNetworkDetailsFragment.KEY_HOTSPOT_DEVICE_BATTERY;
 import static com.android.settings.wifi.details.WifiNetworkDetailsFragment.KEY_HOTSPOT_DEVICE_CATEGORY;
