@@ -18,6 +18,7 @@ package com.android.settings.remoteauth.finish
 
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import com.airbnb.lottie.LottieAnimationView
 import com.android.settings.R
 import com.android.settings.remoteauth.RemoteAuthEnrollBase
@@ -35,7 +36,10 @@ class RemoteAuthEnrollFinish :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        LottieColorUtils.applyDynamicColors(requireContext(), view.findViewById<LottieAnimationView>(R.id.enroll_finish_animation))
+        LottieColorUtils.applyDynamicColors(
+            requireContext(),
+            view.findViewById<LottieAnimationView>(R.id.enroll_finish_animation)
+        )
     }
 
     override fun initializePrimaryFooterButton(): FooterButton {
@@ -50,10 +54,10 @@ class RemoteAuthEnrollFinish :
     override fun initializeSecondaryFooterButton(): FooterButton? = null
 
     fun onPrimaryFooterButtonClick(view: View) {
-        // TODO(b/293906345): Wire up navigation
+        findNavController(this).navigate(R.id.action_finish_to_settings)
     }
 
-    private companion object{
+    private companion object {
         const val TAG = "RemoteAuthEnrollFinish"
     }
 }

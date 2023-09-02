@@ -15,8 +15,8 @@
  */
 package com.android.settings.wifi.details;
 
+import static com.android.settings.network.NetworkProviderSettings.WIFI_DIALOG_ID;
 import static com.android.settings.network.telephony.MobileNetworkUtils.NO_CELL_DATA_TYPE_ICON;
-import static com.android.settings.wifi.WifiSettings.WIFI_DIALOG_ID;
 import static com.android.settingslib.Utils.formatPercentage;
 
 import android.app.Dialog;
@@ -180,7 +180,7 @@ public class WifiNetworkDetailsFragment extends RestrictedDashboardFragment impl
         }
 
         final WifiEntry wifiEntry = mNetworkDetailsTracker.getWifiEntry();
-        return WifiDialog2.createModal(getActivity(), this, wifiEntry,
+        return new WifiDialog2(getActivity(), this, wifiEntry,
                 WifiConfigUiBase2.MODE_MODIFY);
     }
 

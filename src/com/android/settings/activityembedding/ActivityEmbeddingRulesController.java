@@ -49,6 +49,8 @@ import com.android.settings.homepage.DeepLinkHomepageActivityInternal;
 import com.android.settings.homepage.SettingsHomepageActivity;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockPattern;
+import com.android.settings.remoteauth.RemoteAuthActivity;
+import com.android.settings.remoteauth.RemoteAuthActivityInternal;
 import com.android.settingslib.users.AvatarPickerActivity;
 
 import java.util.Collection;
@@ -257,6 +259,8 @@ public class ActivityEmbeddingRulesController {
         addActivityFilter(activityFilters, FingerprintEnrollEnrolling.class);
         addActivityFilter(activityFilters, FaceEnrollIntroductionInternal.class);
         addActivityFilter(activityFilters, FaceEnrollIntroduction.class);
+        addActivityFilter(activityFilters, RemoteAuthActivity.class);
+        addActivityFilter(activityFilters, RemoteAuthActivityInternal.class);
         addActivityFilter(activityFilters, AvatarPickerActivity.class);
         addActivityFilter(activityFilters, ChooseLockPattern.class);
         ActivityRule activityRule = new ActivityRule.Builder(activityFilters).setAlwaysExpand(true)
