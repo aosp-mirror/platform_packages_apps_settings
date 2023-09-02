@@ -109,6 +109,7 @@ public class BluetoothDetailsAudioDeviceTypeController extends BluetoothDetailsC
                         mAudioManager.setBluetoothAudioDeviceCategory(mCachedDevice.getAddress(),
                                 mCachedDevice.getDevice().getType() == DEVICE_TYPE_LE,
                                 Integer.parseInt(value));
+                        mCachedDevice.onAudioDeviceCategoryChanged();
                     }
                 }
                 return true;

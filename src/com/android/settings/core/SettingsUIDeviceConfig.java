@@ -47,4 +47,9 @@ public class SettingsUIDeviceConfig {
      */
     public static final String BT_LE_AUDIO_DEVICE_DETAIL_ENABLED =
             "bt_le_audio_device_detail_enabled";
+    /**
+     * {@code true} if long press home button to search is enabled.
+     */
+    public static final String LONG_PRESS_HOME_BUTTON_TO_SEARCH =
+            "long_press_home_button_to_search";
 }
