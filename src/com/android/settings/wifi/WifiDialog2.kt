@@ -41,6 +41,7 @@ class WifiDialog2 @JvmOverloads constructor(
     private val mode: Int,
     @StyleRes style: Int = 0,
     private val hideSubmitButton: Boolean = mode == WifiConfigUiBase2.MODE_VIEW,
+    private val hideMeteredAndPrivacy: Boolean = false,
 ) : AlertDialog(context, style), WifiConfigUiBase2, DialogInterface.OnClickListener {
     /**
      * Host UI component of WifiDialog2 can receive callbacks by this interface.
@@ -71,7 +72,7 @@ class WifiDialog2 @JvmOverloads constructor(
         setWindowsOverlay()
         view = layoutInflater.inflate(R.layout.wifi_dialog, null)
         setView(view)
-        controller = WifiConfigController2(this, view, wifiEntry, mode)
+        controller = WifiConfigController2(this, view, wifiEntry, mode, hideMeteredAndPrivacy)
         super.onCreate(savedInstanceState)
         if (hideSubmitButton) {
             controller.hideSubmitButton()
