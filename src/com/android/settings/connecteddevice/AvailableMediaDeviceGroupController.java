@@ -152,7 +152,8 @@ public class AvailableMediaDeviceGroupController extends BasePreferenceControlle
         }
 
         if (bluetoothProfile == BluetoothProfile.HEARING_AID) {
-            HearingAidUtils.launchHearingAidPairingDialog(mFragmentManager, activeDevice);
+            HearingAidUtils.launchHearingAidPairingDialog(mFragmentManager, activeDevice,
+                    getMetricsCategory());
         }
     }
 
