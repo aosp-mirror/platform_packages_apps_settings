@@ -4405,20 +4405,6 @@
         </service>
 
         <service
-            android:name=".development.qstile.DevelopmentTiles$WinscopeTrace"
-            android:label="@string/winscope_trace_quick_settings_title"
-            android:icon="@drawable/tile_icon_winscope_trace"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
-            android:exported="true"
-            android:enabled="false">
-            <intent-filter>
-                <action android:name="android.service.quicksettings.action.QS_TILE" />
-            </intent-filter>
-            <meta-data android:name="android.service.quicksettings.TOGGLEABLE_TILE"
-                       android:value="true"/>
-        </service>
-
-        <service
             android:name=".development.qstile.DevelopmentTiles$SensorsOff"
             android:label="@string/sensors_off_quick_settings_title"
             android:icon="@drawable/tile_icon_sensors_off"

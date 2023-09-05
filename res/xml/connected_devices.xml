@@ -61,6 +61,22 @@
             android:fragment="com.android.settings.connecteddevice.PreviouslyConnectedDeviceDashboardFragment"/>
     </PreferenceCategory>
 
+    <PreferenceCategory
+        android:key="fast_pair_devices"
+        android:title="TODO(296507968): Placeholder"
+        settings:controller=
+            "com.android.settings.connecteddevice.fastpair.FastPairDevicePreferenceController">
+
+        <Preference
+            android:key="fast_pair_devices_see_all"
+            android:title="@string/connected_device_fast_pair_device_see_all"
+            android:icon="@drawable/ic_chevron_right_24dp"
+            android:order="10"
+            settings:searchable="false"
+            android:fragment=
+                "com.android.settings.connecteddevice.fastpair.FastPairDeviceDashboardFragment"/>
+    </PreferenceCategory>
+
     <Preference
         android:key="connection_preferences"
         android:title="@string/connected_device_connections_title"
