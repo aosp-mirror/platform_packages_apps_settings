@@ -36,8 +36,11 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
+import android.content.res.Resources;
 import android.os.SystemProperties;
+import android.os.UserManager;
 
+import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
 
@@ -69,6 +72,10 @@ public class CreateShortcutPreferenceControllerTest {
     private ShortcutManager mShortcutManager;
     @Mock
     private Activity mHost;
+    @Mock
+    private Resources mResources;
+    @Mock
+    private UserManager mUserManager;
 
     private Context mContext;
     private ShadowConnectivityManager mShadowConnectivityManager;
@@ -190,6 +197,70 @@ public class CreateShortcutPreferenceControllerTest {
         setupActivityInfo(Settings.WifiTetherSettingsActivity.class.getSimpleName());
 
         assertThat(mController.queryShortcuts()).hasSize(0);
+    }
+
+    @Test
+    public void queryShortcuts_configShowDataUsage_ShouldEnableShortcuts() {
+        doReturn(true).when(mController).canShowDataUsage();
+        setupActivityInfo(Settings.DataUsageSummaryActivity.class.getSimpleName());
+
+        assertThat(mController.queryShortcuts()).hasSize(1);
+    }
+
+    @Test
+    public void queryShortcuts_configNotShowDataUsage_ShouldDisableShortcuts() {
+        doReturn(false).when(mController).canShowDataUsage();
+        setupActivityInfo(Settings.DataUsageSummaryActivity.class.getSimpleName());
+
+        assertThat(mController.queryShortcuts()).hasSize(0);
+    }
+
+    @Test
+    public void canShowDataUsage_configShowDataUsage_returnTrue() {
+        when(mContext.getResources()).thenReturn(mResources);
+        when(mResources.getBoolean(R.bool.config_show_sim_info)).thenReturn(true);
+        when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
+        when(mUserManager.isGuestUser()).thenReturn(false);
+        when(mUserManager.hasUserRestriction(
+                UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS)).thenReturn(false);
+
+        assertThat(mController.canShowDataUsage()).isTrue();
+    }
+
+    @Test
+    public void canShowDataUsage_noSimCapability_returnFalse() {
+        when(mContext.getResources()).thenReturn(mResources);
+        when(mResources.getBoolean(R.bool.config_show_sim_info)).thenReturn(false);
+        when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
+        when(mUserManager.isGuestUser()).thenReturn(false);
+        when(mUserManager.hasUserRestriction(
+                UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS)).thenReturn(false);
+
+        assertThat(mController.canShowDataUsage()).isFalse();
+    }
+
+    @Test
+    public void canShowDataUsage_isGuestUser_returnFalse() {
+        when(mContext.getResources()).thenReturn(mResources);
+        when(mResources.getBoolean(R.bool.config_show_sim_info)).thenReturn(true);
+        when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
+        when(mUserManager.isGuestUser()).thenReturn(true);
+        when(mUserManager.hasUserRestriction(
+                UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS)).thenReturn(false);
+
+        assertThat(mController.canShowDataUsage()).isFalse();
+    }
+
+    @Test
+    public void canShowDataUsage_isMobileNetworkUserRestricted_returnFalse() {
+        when(mContext.getResources()).thenReturn(mResources);
+        when(mResources.getBoolean(R.bool.config_show_sim_info)).thenReturn(true);
+        when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
+        when(mUserManager.isGuestUser()).thenReturn(false);
+        when(mUserManager.hasUserRestriction(
+                UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS)).thenReturn(true);
+
+        assertThat(mController.canShowDataUsage()).isFalse();
     }
 
     private void setupActivityInfo(String name) {
