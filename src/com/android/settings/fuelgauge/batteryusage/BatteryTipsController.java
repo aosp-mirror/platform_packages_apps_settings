@@ -25,7 +25,6 @@ import androidx.preference.PreferenceScreen;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
@@ -38,7 +37,6 @@ public class BatteryTipsController extends BasePreferenceController {
     private static final String ROOT_PREFERENCE_KEY = "battery_tips_category";
     private static final String CARD_PREFERENCE_KEY = "battery_tips_card";
 
-    private final PowerUsageFeatureProvider mPowerUsageFeatureProvider;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
 
     @VisibleForTesting
@@ -47,12 +45,7 @@ public class BatteryTipsController extends BasePreferenceController {
     public BatteryTipsController(Context context) {
         super(context, ROOT_PREFERENCE_KEY);
         final FeatureFactory featureFactory = FeatureFactory.getFeatureFactory();
-        mPowerUsageFeatureProvider =  featureFactory.getPowerUsageFeatureProvider();
         mMetricsFeatureProvider = featureFactory.getMetricsFeatureProvider();
-    }
-
-    private boolean isTipsCardVisible() {
-        return mPowerUsageFeatureProvider.isBatteryTipsEnabled();
     }
 
     @Override
@@ -102,12 +95,7 @@ public class BatteryTipsController extends BasePreferenceController {
                 : getStringFromResource(resourceId, resourceIndex);
     }
 
-    @VisibleForTesting
     void handleBatteryTipsCardUpdated(PowerAnomalyEvent powerAnomalyEvent) {
-        if (!isTipsCardVisible()) {
-            mCardPreference.setVisible(false);
-            return;
-        }
         if (powerAnomalyEvent == null) {
             mCardPreference.setVisible(false);
             return;

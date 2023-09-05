@@ -22,7 +22,6 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -34,7 +33,6 @@ import androidx.preference.PreferenceViewHolder;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.SubSettingLauncher;
-import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
@@ -47,7 +45,6 @@ public class BatteryTipsCardPreference extends Preference implements View.OnClic
 
     private static final String TAG = "BatteryTipsCardPreference";
 
-    private final PowerUsageFeatureProvider mPowerUsageFeatureProvider;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
 
     private String mAnomalyEventId;
@@ -71,7 +68,6 @@ public class BatteryTipsCardPreference extends Preference implements View.OnClic
         setLayoutResource(R.layout.battery_tips_card);
         setSelectable(false);
         final FeatureFactory featureFactory = FeatureFactory.getFeatureFactory();
-        mPowerUsageFeatureProvider =  featureFactory.getPowerUsageFeatureProvider();
         mMetricsFeatureProvider = featureFactory.getMetricsFeatureProvider();
         mPowerAnomalyKey = null;
     }
@@ -191,17 +187,5 @@ public class BatteryTipsCardPreference extends Preference implements View.OnClic
         if (mIconResourceId != 0) {
             ((ImageView) view.findViewById(R.id.icon)).setImageResource(mIconResourceId);
         }
-
-        if (!mPowerUsageFeatureProvider.isBatteryTipsFeedbackEnabled()) {
-            return;
-        }
-        view.findViewById(R.id.tips_card)
-                .setBackgroundResource(R.drawable.battery_tips_half_rounded_top_bg);
-        view.findViewById(R.id.feedback_card).setVisibility(View.VISIBLE);
-
-        ImageButton thumbUpButton = (ImageButton) view.findViewById(R.id.thumb_up);
-        thumbUpButton.setOnClickListener(this);
-        ImageButton thumbDownButton = (ImageButton) view.findViewById(R.id.thumb_down);
-        thumbDownButton.setOnClickListener(this);
     }
 }
