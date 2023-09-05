@@ -24,6 +24,7 @@ import android.os.BatteryStats.HistoryItem;
 import android.os.BatteryStatsManager;
 import android.os.BatteryUsageStats;
 import android.os.SystemClock;
+import android.provider.Settings;
 import android.text.format.Formatter;
 import android.util.Log;
 import android.util.SparseIntArray;
@@ -43,6 +44,7 @@ import com.android.settingslib.utils.StringUtil;
 
 public class BatteryInfo {
     private static final String TAG = "BatteryInfo";
+    private static final String GLOBAL_TIME_TO_FULL_MILLIS = "time_to_full_millis";
 
     public CharSequence chargeLabel;
     public CharSequence remainingLabel;
@@ -145,6 +147,12 @@ public class BatteryInfo {
     public static void getBatteryInfo(final Context context, final Callback callback,
             boolean shortString) {
         BatteryInfo.getBatteryInfo(context, callback,  /* batteryUsageStats */ null, shortString);
+    }
+
+    static long getSettingsChargeTimeRemaining(final Context context) {
+        return Settings.Global.getLong(
+                context.getContentResolver(),
+                GLOBAL_TIME_TO_FULL_MILLIS, -1);
     }
 
     public static void getBatteryInfo(final Context context, final Callback callback,
@@ -276,6 +284,13 @@ public class BatteryInfo {
             BatteryUsageStats stats, BatteryInfo info, boolean compactStatus) {
         final Resources resources = context.getResources();
         final long chargeTimeMs = stats.getChargeTimeRemainingMs();
+        if (getSettingsChargeTimeRemaining(context) != chargeTimeMs) {
+            Settings.Global.putLong(
+                    context.getContentResolver(),
+                    GLOBAL_TIME_TO_FULL_MILLIS,
+                    chargeTimeMs);
+        }
+
         final int status = batteryBroadcast.getIntExtra(BatteryManager.EXTRA_STATUS,
                 BatteryManager.BATTERY_STATUS_UNKNOWN);
         info.discharging = false;
