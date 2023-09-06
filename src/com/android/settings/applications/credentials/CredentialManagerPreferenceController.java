@@ -302,8 +302,36 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
                 null);
     }
 
+    private Set<ComponentName> buildComponentNameSet(List<CredentialProviderInfo> providers) {
+        Set<ComponentName> output = new HashSet<>();
+
+        for (CredentialProviderInfo cpi : providers) {
+            output.add(cpi.getComponentName());
+        }
+
+        return output;
+    }
+
     private void updateFromExternal() {
-        update();
+        if (mCredentialManager == null) {
+            return;
+        }
+
+        // Get the list of new providers and components.
+        List<CredentialProviderInfo> newProviders =
+                mCredentialManager.getCredentialProviderServices(
+                        getUser(), CredentialManager.PROVIDER_FILTER_USER_PROVIDERS_ONLY);
+        Set<ComponentName> newComponents = buildComponentNameSet(newProviders);
+
+        // Get the list of old components
+        Set<ComponentName> oldComponents = buildComponentNameSet(mServices);
+
+        // If the sets are equal then don't update the UI.
+        if (oldComponents.equals(newComponents)) {
+            return;
+        }
+
+        setAvailableServices(newProviders, null);
 
         if (mPreferenceScreen != null) {
             displayPreference(mPreferenceScreen);
