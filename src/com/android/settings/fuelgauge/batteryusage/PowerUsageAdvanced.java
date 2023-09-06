@@ -35,8 +35,6 @@ import androidx.loader.content.Loader;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.fuelgauge.BatteryBroadcastReceiver;
-import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
@@ -138,29 +136,24 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         mBatteryChartPreferenceController =
                 new BatteryChartPreferenceController(
                         context, getSettingsLifecycle(), (SettingsActivity) getActivity());
-        ScreenOnTimeController screenOnTimeController = new ScreenOnTimeController(context);
-        BatteryUsageBreakdownController batteryUsageBreakdownController =
+        final ScreenOnTimeController screenOnTimeController = new ScreenOnTimeController(context);
+        final BatteryUsageBreakdownController batteryUsageBreakdownController =
                 new BatteryUsageBreakdownController(
                         context, getSettingsLifecycle(), (SettingsActivity) getActivity(), this);
+        final BatteryTipsController batteryTipsController = new BatteryTipsController(context);
 
         mBatteryChartPreferenceController.setOnScreenOnTimeUpdatedListener(
                 screenOnTimeController::handleSceenOnTimeUpdated);
         mBatteryChartPreferenceController.setOnBatteryUsageUpdatedListener(
                 batteryUsageBreakdownController::handleBatteryUsageUpdated);
+        mBatteryChartPreferenceController.setOnBatteryTipsUpdatedListener(
+                batteryTipsController::handleBatteryTipsCardUpdated);
 
         controllers.add(mBatteryChartPreferenceController);
         controllers.add(screenOnTimeController);
         controllers.add(batteryUsageBreakdownController);
+        controllers.add(batteryTipsController);
         setBatteryChartPreferenceController();
-
-        final PowerUsageFeatureProvider powerUsageFeatureProvider =
-                FeatureFactory.getFeatureFactory().getPowerUsageFeatureProvider();
-        if (powerUsageFeatureProvider.isBatteryTipsEnabled()) {
-            BatteryTipsController batteryTipsController = new BatteryTipsController(context);
-            mBatteryChartPreferenceController.setOnBatteryTipsUpdatedListener(
-                    batteryTipsController::handleBatteryTipsCardUpdated);
-            controllers.add(batteryTipsController);
-        }
 
         return controllers;
     }
