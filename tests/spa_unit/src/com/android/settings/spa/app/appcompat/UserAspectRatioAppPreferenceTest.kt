@@ -72,7 +72,7 @@ class UserAspectRatioAppPreferenceTest {
     private val resources = context.resources
 
     private val aspectRatioEnabledConfig =
-        TestDeviceConfig(NAMESPACE_WINDOW_MANAGER, "enable_app_compat_user_aspect_ratio_settings")
+        TestDeviceConfig(NAMESPACE_WINDOW_MANAGER, "enable_app_compat_aspect_ratio_user_settings")
 
     @Mock
     private lateinit var packageManager: PackageManager

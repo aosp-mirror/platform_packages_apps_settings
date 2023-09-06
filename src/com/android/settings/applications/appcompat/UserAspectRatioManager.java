@@ -51,10 +51,10 @@ public class UserAspectRatioManager {
             new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER);
 
     // TODO(b/288142656): Enable user aspect ratio settings by default
-    private static final boolean DEFAULT_VALUE_ENABLE_USER_ASPECT_RATIO_SETTINGS = false;
+    private static final boolean DEFAULT_VALUE_ENABLE_USER_ASPECT_RATIO_SETTINGS = true;
     @VisibleForTesting
     static final String KEY_ENABLE_USER_ASPECT_RATIO_SETTINGS =
-            "enable_app_compat_user_aspect_ratio_settings";
+            "enable_app_compat_aspect_ratio_user_settings";
     static final String KEY_ENABLE_USER_ASPECT_RATIO_FULLSCREEN =
             "enable_app_compat_user_aspect_ratio_fullscreen";
     private static final boolean DEFAULT_VALUE_ENABLE_USER_ASPECT_RATIO_FULLSCREEN = true;
