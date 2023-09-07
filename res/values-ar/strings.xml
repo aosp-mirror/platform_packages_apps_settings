@@ -1047,7 +1047,7 @@
     <string name="dark_ui_text" msgid="4392646155331126666">"يستخدم \"المظهر الداكن\" خلفية سوداء لتوفير طاقة البطارية والحفاظ عليها لفترة أطول في بعض الشاشات. لا يتم تفعيل الجداول الزمنية لعمل \"المظهر الداكن\" إلا بعد قفل الشاشة."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"يتبع وضع \"المظهر الداكن\" حاليًا الجدول الزمني لوضع \"وقت النوم\"."</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"إعدادات وضع \"وقت النوم\""</string>
-    <string name="screen_timeout" msgid="7709947617767439410">"مهلة غلق الشاشة"</string>
+    <string name="screen_timeout" msgid="7709947617767439410">"المهلة قبل غلق الشاشة"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"بعد <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> من عدم النشاط"</string>
     <string name="screen_timeout_summary_not_set" msgid="5107680774964178875">"لم يتم تحديد اقتراح مطابق."</string>
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"الخلفية"</string>
@@ -2938,11 +2938,11 @@
     <string name="keywords_biometric_settings" msgid="2173605297939326549">"الوجه، بصمة الإصبع، إضافة بصمة إصبع"</string>
     <string name="keywords_active_unlock_settings" msgid="4511320720304388889">"فتح الهاتف من الساعة، إضافة ميزة \"فتح الهاتف من الساعة\""</string>
     <string name="keywords_display_auto_brightness" msgid="7162942396941827998">"تعتيم الشاشة، شاشة تعمل باللمس، بطارية، سطوع ذكي، سطوع ديناميكي، سطوع تلقائي"</string>
-    <string name="keywords_display_adaptive_sleep" msgid="4905300860114643966">"ذكي، إضاءة خافتة للشاشة، سكون، بطارية، مهلة غلق الشاشة، استعراض الشاشة، عرض، شاشة، عدم نشاط"</string>
+    <string name="keywords_display_adaptive_sleep" msgid="4905300860114643966">"ذكي، إضاءة خافتة للشاشة، سكون، بطارية، المهلة قبل غلق الشاشة، استعراض الشاشة، عرض، شاشة، عدم نشاط"</string>
     <string name="keywords_auto_rotate" msgid="7288697525101837071">"كاميرا، ذكي، تدوير تلقائي، التدوير التلقائي، تدوير، قلب، دوران، عمودي، أفقي، اتجاه، رأسي، عرضي"</string>
     <string name="keywords_system_update_settings" msgid="5769003488814164931">"‏ترقية، android"</string>
     <string name="keywords_zen_mode_settings" msgid="7810203406522669584">"عدم الإزعاج، جدول زمني، إشعارات، حظر، صامت، اهتزاز، سكون، عمل، تركيز، صوت، كتم الصوت، يوم، يوم من الأسبوع، عطلة نهاية الأسبوع، ليلة من الأسبوع، حدث"</string>
-    <string name="keywords_screen_timeout" msgid="8921857020437540572">"شاشة، وقت القفل، مهلة غلق الشاشة، شاشة قفل"</string>
+    <string name="keywords_screen_timeout" msgid="8921857020437540572">"شاشة، وقت القفل، المهلة قبل غلق الشاشة، شاشة قفل"</string>
     <string name="keywords_storage_settings" msgid="6018856193950281898">"ذاكرة، تخزين مؤقت، بيانات، حذف، محو، فارغة، مساحة"</string>
     <string name="keywords_bluetooth_settings" msgid="2588159530959868188">"متصل، جهاز، سماعات رأس، سماعة، مكبر صوت، لاسلكي، إقران، سمّاعات أذن، موسيقى، وسائط"</string>
     <string name="keywords_wallpaper" msgid="7332890404629446192">"الخلفية، المظهر، الشبكة، تخصيص، خصص"</string>
@@ -2975,6 +2975,10 @@
     <string name="ring_volume_option_title" msgid="1520802026403038560">"مستوى صوت الرنين والإشعار"</string>
     <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"مستوى صوت الرنين"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"مستوى صوت الإشعارات"</string>
+    <string name="ringer_content_description_silent_mode" msgid="1442257660889685934">"رنين صامت"</string>
+    <string name="ringer_content_description_vibrate_mode" msgid="5946432791951870480">"رنين مع الاهتزاز"</string>
+    <string name="notification_volume_content_description_vibrate_mode" msgid="6097212000507408288">"تم كتم صوت الإشعارات، وسيهتز الجهاز عند تلقّي أي إشعارات."</string>
+    <string name="volume_content_description_silent_mode" msgid="377680514551405754">"<xliff:g id="VOLUME_TYPE">%1$s</xliff:g>: تم كتم الصوت."</string>
     <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"غير متاح لأنّه تم كتم صوت الرنين"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"نغمة رنين الهاتف"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"الصوت التلقائي للإشعارات"</string>
