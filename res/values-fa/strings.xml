@@ -42,6 +42,18 @@
     <string name="preview_pager_content_description" msgid="3762247188224576303">"پیش‌نمایش"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"کوچک‌تر کردن"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"بزرگ‌تر کردن"</string>
+    <!-- no translation found for stay_awake_on_fold_title (6590454679898134221) -->
+    <skip />
+    <!-- no translation found for stay_awake_on_fold_summary (1939963751585954262) -->
+    <skip />
+    <!-- no translation found for selective_stay_awake_title (7887645333447645168) -->
+    <skip />
+    <!-- no translation found for selective_stay_awake_summary (9055967322921984543) -->
+    <skip />
+    <!-- no translation found for sleep_on_fold_title (7626123024330501411) -->
+    <skip />
+    <!-- no translation found for sleep_on_fold_summary (7737992842459588846) -->
+    <skip />
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"استفاده از چرخش خودکار"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"‏«تشخیص چهره» برای بهبود دقت «چرخش خودکار» از دوربین جلو استفاده می‌کند. تصاویر هرگز ذخیره یا به Google ارسال نمی‌شود."</string>
     <string name="bluetooth" msgid="8898478620943459654">"بلوتوث"</string>
@@ -241,7 +253,7 @@
     <string name="zone_time_type_standard" msgid="6865420715430680352">"زمان استاندارد"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"انتخاب براساس منطقه"</string>
     <string name="zone_menu_by_offset" msgid="1257702747474426745">"‏انتخاب براساس اختلاف با UTC"</string>
-    <string name="lock_after_timeout" msgid="8682769000437403444">"قفل شدن بعداز درنگ صفحه"</string>
+    <string name="lock_after_timeout" msgid="8682769000437403444">"قفل شدن پس‌از خاموش شدن صفحه"</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> بعد از درنگ"</string>
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"بلافاصله بعداز درنگ، به‌جز وقتی‌که <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> قفل صفحه را باز نگه می‌دارد"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> بعداز درنگ، به‌جز وقتی‌که <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> قفل صفحه را باز نگه دارد"</string>
@@ -860,20 +872,13 @@
     <string name="wifi_type_title" msgid="2174893488722015838">"نوع"</string>
     <string name="wifi_details_dns" msgid="273231528073312579">"DNS"</string>
     <string name="wifi_details_ipv6_address_header" msgid="1913151339341722443">"‏نشانی‌های IPv6"</string>
-    <!-- no translation found for hotspot_device_details_category (3110651914598697220) -->
-    <skip />
-    <!-- no translation found for hotspot_device_details_internet_source (1563266599673281875) -->
-    <skip />
-    <!-- no translation found for internet_source_wifi (6952593095166435179) -->
-    <skip />
-    <!-- no translation found for internet_source_mobile_data (877403889449201789) -->
-    <skip />
-    <!-- no translation found for internet_source_ethernet (8338472576454100966) -->
-    <skip />
-    <!-- no translation found for hotspot_connection_category (4320380513982923556) -->
-    <skip />
-    <!-- no translation found for hotspot_connection_strength (87359986943768421) -->
-    <skip />
+    <string name="hotspot_device_details_category" msgid="3110651914598697220">"جزئیات دستگاه نقطه اتصال"</string>
+    <string name="hotspot_device_details_internet_source" msgid="1563266599673281875">"منبع اینترنت"</string>
+    <string name="internet_source_wifi" msgid="6952593095166435179">"Wi-Fi"</string>
+    <string name="internet_source_mobile_data" msgid="877403889449201789">"داده تلفن همراه"</string>
+    <string name="internet_source_ethernet" msgid="8338472576454100966">"اترنت"</string>
+    <string name="hotspot_connection_category" msgid="4320380513982923556">"ارتباط نقطه اتصال"</string>
+    <string name="hotspot_connection_strength" msgid="87359986943768421">"قدرت اتصال"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"شبکه‌های ذخیره‌شده"</string>
     <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"اشتراک‌ها"</string>
     <string name="wifi_saved_other_networks_tab" msgid="7942647415716557293">"شبکه‌های دیگر"</string>
@@ -1007,8 +1012,8 @@
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"خاموش"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"تعادل سفیدی نمایشگر"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
-    <string name="stay_awake_on_fold_title" msgid="4195536619511589471">"قفل نشدن هنگام تاخوردن"</string>
-    <string name="stay_awake_on_fold_summary" msgid="2413928869516675293">"نمایشگر جلو هنگام تاخوردن تا پایان وقفه صفحه‌نمایش قفل نمی‌شود"</string>
+    <!-- no translation found for fold_lock_behavior_title (786228803694268449) -->
+    <skip />
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"نمایشگر روان"</string>
     <string name="peak_refresh_rate_summary" msgid="3627278682437562787">"به‌طور خودکار نرخ بازآوری را برای بعضی محتوا، از ۶۰ هرتز تا <xliff:g id="ID_1">%1$s</xliff:g> هرتز بالا می‌برد. مصرف باتری را افزایش می‌دهد."</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"اعمال بالاترین نرخ بازآوری"</string>
@@ -1066,7 +1071,7 @@
     <string name="dark_ui_text" msgid="4392646155331126666">"«زمینه تیره» در برخی صفحه‌ها از پس‌زمینه سیاه استفاده می‌کند تا شارژ باتری برای مدتی طولانی‌تر حفظ شود. «زمینه تیره» تا زمانی که صفحه خاموش باشد، زمان انتظاری برای روشن شدن تنظیم می‌کند."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"درحال‌حاضر، «زمینه تیره» از زمان‌بندی «حالت وقت خواب» پیروی می‌کند"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"تنظیمات «حالت وقت خواب»"</string>
-    <string name="screen_timeout" msgid="7709947617767439410">"درنگ صفحه"</string>
+    <string name="screen_timeout" msgid="7709947617767439410">"خاموش شدن صفحه"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> پس از غیرفعال بودن"</string>
     <string name="screen_timeout_summary_not_set" msgid="5107680774964178875">"تنظیم نشده"</string>
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"کاغذدیواری"</string>
@@ -1965,6 +1970,7 @@
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"میان‌بر «وارونگی رنگ»"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"«وارونگی رنگ» صفحه روشن را تیره می‌کند. صفحه تیره را هم روشن می‌کند."</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"‏&lt;b&gt;به‌خاطر داشته باشید&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; رنگ‌ها در رسانه‌ها و تصاویر تغییر خواهد کرد&lt;/li&gt; &lt;li&gt; «وارونگی رنگ» در همه برنامه‌ها کار می‌کند&lt;/li&gt; &lt;li&gt; برای نمایش پس‌زمینه تیره، می‌توان به‌جای آن از «زمینه تیره» استفاده کرد&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="accessibility_action_label_panel_slice" msgid="1313725957071602932">"ورود به تنظیمات"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"کلیک خودکار (مدت ایست)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"درباره کلیک خودکار (مدت ایست)"</string>
     <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"درباره کلیک خودکار (مدت ایست) بیشتر بدانید"</string>
@@ -2893,7 +2899,7 @@
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"درحال ایجاد همسانه <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"همسانه <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> ایجاد شد"</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"زبان‌ها، ژست‌ها، زمان، پشتیبان"</string>
-    <string name="languages_setting_summary" msgid="7963053736715746726">"زبان‌های سیستم، زبان‌های برنامه، گفتار"</string>
+    <string name="languages_setting_summary" msgid="2650807397396180351">"زبان‌های سیستم، زبان‌های برنامه، اولویت‌های منطقه‌ای، گفتار"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"‏wifi، ‏Wi-Fi، اتصال شبکه، اینترنت، بی‌سیم، داده، wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"‏اعلان Wi-Fi، اعلان wifi"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"مصرف داده"</string>
@@ -2943,7 +2949,8 @@
     <string name="keywords_app_pinning" msgid="1564144561464945019">"سنجاق کردن صفحه"</string>
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"چالش کار، کار، نمایه"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"نمایه کاری، نمایه مدیریت‌شده، یکی شدن، یکپارچگی، کار، نمایه"</string>
-    <string name="keywords_stay_awake_on_lock" msgid="6338367464776295697">"بیدار، خواب، قفل نشود، درحالت تاخوردگی باز بماند، تا خوردن، بستن، تا زدن، بسته، خاموش شدن صفحه‌نمایش"</string>
+    <!-- no translation found for keywords_fold_lock_behavior (6278990772113341581) -->
+    <skip />
     <string name="keywords_gesture" msgid="3456930847450080520">"اشاره‌ها"</string>
     <string name="keywords_wallet" msgid="3757421969956996972">"کیف پول"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"پرداخت کردن، ضربه زدن، پرداخت‌ها"</string>
@@ -3849,12 +3856,9 @@
     <string name="battery_saver_off_summary" msgid="4411561435493109261">"خاموش"</string>
     <string name="app_battery_usage_title" msgid="346558380609793334">"مصرف باتری برنامه"</string>
     <string name="app_battery_usage_summary" msgid="6349965904306339539">"تنظیم مصرف باتری برای برنامه‌ها"</string>
-    <!-- no translation found for battery_tips_card_action_button (4897793527424711648) -->
-    <skip />
-    <!-- no translation found for battery_tips_card_dismiss_button (1885756985544936618) -->
-    <skip />
-    <!-- no translation found for battery_tips_card_feedback_info (767117835675157298) -->
-    <skip />
+    <string name="battery_tips_card_action_button" msgid="4897793527424711648">"مشاهده «تنظیمات»"</string>
+    <string name="battery_tips_card_dismiss_button" msgid="1885756985544936618">"متوجه‌ام"</string>
+    <string name="battery_tips_card_feedback_info" msgid="767117835675157298">"آیا این پیام مفید است؟"</string>
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"نامحدود"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"بهینه‌سازی‌شده"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"محدود"</string>
@@ -4474,10 +4478,8 @@
     <string name="lockscreen_privacy_controls_summary" msgid="7522918441738915364">"از صفحه قفل"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="2174300719855112358">"استفاده از کنترل‌های دستگاه"</string>
     <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"برای استفاده، ابتدا «نمایش کنترل‌های دستگاه» را روشن کنید"</string>
-    <!-- no translation found for lockscreen_double_line_clock_summary (4109235686687860393) -->
-    <skip />
-    <!-- no translation found for lockscreen_double_line_clock_setting_toggle (802271087416091548) -->
-    <skip />
+    <string name="lockscreen_double_line_clock_summary" msgid="4109235686687860393">"اندازه ساعت متناسب با محتوای صفحه قفل تغییر می‌کند"</string>
+    <string name="lockscreen_double_line_clock_setting_toggle" msgid="802271087416091548">"ساعت پویا"</string>
     <string name="lockscreen_quick_affordances_title" msgid="8615741551327565793">"میان‌برها"</string>
     <plurals name="lockscreen_quick_affordances_summary" formatted="false" msgid="4225396036524703997">
       <item quantity="one"><xliff:g id="FIRST_1">%1$s</xliff:g>، <xliff:g id="SECOND">%2$s</xliff:g></item>

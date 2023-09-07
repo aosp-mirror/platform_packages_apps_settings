@@ -42,6 +42,18 @@
     <string name="preview_pager_content_description" msgid="3762247188224576303">"ดูตัวอย่าง"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"ทำให้เล็กลง"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"ทำให้ใหญ่ขึ้น"</string>
+    <!-- no translation found for stay_awake_on_fold_title (6590454679898134221) -->
+    <skip />
+    <!-- no translation found for stay_awake_on_fold_summary (1939963751585954262) -->
+    <skip />
+    <!-- no translation found for selective_stay_awake_title (7887645333447645168) -->
+    <skip />
+    <!-- no translation found for selective_stay_awake_summary (9055967322921984543) -->
+    <skip />
+    <!-- no translation found for sleep_on_fold_title (7626123024330501411) -->
+    <skip />
+    <!-- no translation found for sleep_on_fold_summary (7737992842459588846) -->
+    <skip />
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"ใช้การหมุนอัตโนมัติ"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"การตรวจจับใบหน้าใช้กล้องหน้าเพื่อเพิ่มความแม่นยำในการหมุนอัตโนมัติ ระบบจะไม่จัดเก็บหรือส่งรูปภาพไปยัง Google"</string>
     <string name="bluetooth" msgid="8898478620943459654">"บลูทูธ"</string>
@@ -860,20 +872,13 @@
     <string name="wifi_type_title" msgid="2174893488722015838">"ประเภท"</string>
     <string name="wifi_details_dns" msgid="273231528073312579">"DNS"</string>
     <string name="wifi_details_ipv6_address_header" msgid="1913151339341722443">"ที่อยู่ IPv6"</string>
-    <!-- no translation found for hotspot_device_details_category (3110651914598697220) -->
-    <skip />
-    <!-- no translation found for hotspot_device_details_internet_source (1563266599673281875) -->
-    <skip />
-    <!-- no translation found for internet_source_wifi (6952593095166435179) -->
-    <skip />
-    <!-- no translation found for internet_source_mobile_data (877403889449201789) -->
-    <skip />
-    <!-- no translation found for internet_source_ethernet (8338472576454100966) -->
-    <skip />
-    <!-- no translation found for hotspot_connection_category (4320380513982923556) -->
-    <skip />
-    <!-- no translation found for hotspot_connection_strength (87359986943768421) -->
-    <skip />
+    <string name="hotspot_device_details_category" msgid="3110651914598697220">"รายละเอียดอุปกรณ์ฮอตสปอต"</string>
+    <string name="hotspot_device_details_internet_source" msgid="1563266599673281875">"แหล่งที่มาของอินเทอร์เน็ต"</string>
+    <string name="internet_source_wifi" msgid="6952593095166435179">"Wi-Fi"</string>
+    <string name="internet_source_mobile_data" msgid="877403889449201789">"อินเทอร์เน็ตมือถือ"</string>
+    <string name="internet_source_ethernet" msgid="8338472576454100966">"อีเทอร์เน็ต"</string>
+    <string name="hotspot_connection_category" msgid="4320380513982923556">"การเชื่อมต่อฮอตสปอต"</string>
+    <string name="hotspot_connection_strength" msgid="87359986943768421">"ความแรงของสัญญาณเชื่อมต่อ"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"เครือข่ายที่บันทึก"</string>
     <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"การสมัครใช้บริการ"</string>
     <string name="wifi_saved_other_networks_tab" msgid="7942647415716557293">"เครือข่ายอื่น"</string>
@@ -1007,8 +1012,8 @@
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"ปิด"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"แสดงไวท์บาลานซ์"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
-    <string name="stay_awake_on_fold_title" msgid="4195536619511589471">"ปลดล็อกค้างไว้เมื่อพับ"</string>
-    <string name="stay_awake_on_fold_summary" msgid="2413928869516675293">"ปลดล็อกหน้าจอด้านหน้าค้างไว้เมื่อพับจนถึงระยะหมดเวลาหน้าจอ"</string>
+    <!-- no translation found for fold_lock_behavior_title (786228803694268449) -->
+    <skip />
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="3627278682437562787">"เพิ่มอัตราการรีเฟรชจาก 60 เป็น <xliff:g id="ID_1">%1$s</xliff:g> Hz โดยอัตโนมัติสำหรับเนื้อหาบางรายการ เพิ่มการใช้งานแบตเตอรี่"</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"บังคับอัตราการรีเฟรชเป็นสูงสุด"</string>
@@ -1745,7 +1750,7 @@
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"เลือกคีย์ตัวปรับแต่ง"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"เลือกคีย์ใหม่สำหรับ <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>:"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"ค่าเริ่มต้น"</string>
-    <string name="speech_category_title" msgid="5995161659186229742">"คำพูด"</string>
+    <string name="speech_category_title" msgid="5995161659186229742">"เสียงพูด"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"ความเร็วของตัวชี้"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"อุปกรณ์ควบคุมเกม"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"เปลี่ยนเส้นทางการสั่น"</string>
@@ -1965,6 +1970,8 @@
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"ทางลัดการกลับสี"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"การกลับสีจะปรับหน้าจอที่สว่างให้กลายเป็นมืด และยังปรับหน้าจอที่มืดให้กลายเป็นสว่างด้วย"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"&lt;b&gt;โปรดทราบ&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; สีในสื่อและรูปภาพจะเปลี่ยนไป&lt;/li&gt; &lt;li&gt; การกลับสีใช้ได้กับทุกแอป&lt;/li&gt; &lt;li&gt; หากต้องการแสดงพื้นหลังสีมืด คุณใช้ธีมมืดแทนได้&lt;/li&gt; &lt;/ol&gt;"</string>
+    <!-- no translation found for accessibility_action_label_panel_slice (1313725957071602932) -->
+    <skip />
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"การคลิกอัตโนมัติ (เวลาที่ไม่มีการขยับเมาส์)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"เกี่ยวกับการคลิกอัตโนมัติ (เวลาที่ไม่มีการขยับเมาส์)"</string>
     <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"ดูข้อมูลเพิ่มเติมเกี่ยวกับการคลิกอัตโนมัติ (เวลาที่ไม่มีการขยับเมาส์)"</string>
@@ -2731,7 +2738,7 @@
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"ลบกิจกรรมของผู้ใช้ชั่วคราวไหม"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"ระบบจะลบแอปและข้อมูลจากเซสชันผู้ใช้ชั่วคราวนี้ตอนนี้เลย และต่อไปนี้จะลบกิจกรรมทั้งหมดของผู้ใช้ชั่วคราวทุกครั้งที่คุณออกจากโหมดผู้ใช้ชั่วคราว"</string>
     <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"ลบ, ผู้ใช้ชั่วคราว, กิจกรรม, นำออก, ข้อมูล, ผู้เข้าชม, ลบออก"</string>
-    <string name="enable_guest_calling" msgid="4620657197834392094">"อนุญาตให้ผู้เยี่ยมชมโทรออกได้"</string>
+    <string name="enable_guest_calling" msgid="4620657197834392094">"อนุญาตให้ผู้ใช้ชั่วคราวโทรออกได้"</string>
     <string name="enable_guest_calling_summary" msgid="4748224917641204782">"ระบบจะแชร์ประวัติการโทรกับผู้ใช้ชั่วคราว"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"เปิดการโทรและ SMS"</string>
     <string name="user_grant_admin" msgid="5942118263054572074">"กำหนดให้ผู้ใช้รายนี้เป็นผู้ดูแลระบบ"</string>
@@ -2893,7 +2900,8 @@
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"กำลังสร้างโคลนของ <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"สร้างโคลนของ <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> แล้ว"</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"ภาษา ท่าทางสัมผัส เวลา การสำรองข้อมูล"</string>
-    <string name="languages_setting_summary" msgid="7963053736715746726">"ภาษาของระบบ ภาษาของแอป เสียงพูด"</string>
+    <!-- no translation found for languages_setting_summary (2650807397396180351) -->
+    <skip />
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, การเชื่อมต่อเครือข่าย, อินเทอร์เน็ต, ไร้สาย, ข้อมูล, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"การแจ้งเตือน Wi‑Fi การแจ้งเตือน wifi"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"ปริมาณการใช้อินเทอร์เน็ต"</string>
@@ -2943,7 +2951,8 @@
     <string name="keywords_app_pinning" msgid="1564144561464945019">"การปักหมุดหน้าจอ"</string>
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"ความท้าทายในการทำงาน, งาน, โปรไฟล์"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"โปรไฟล์งาน, โปรไฟล์ที่มีการจัดการ, รวม, การรวม, งาน, โปรไฟล์"</string>
-    <string name="keywords_stay_awake_on_lock" msgid="6338367464776295697">"เปิดหน้าจอค้าง, สลีป, ไม่ต้องล็อก, ปลดล็อกค้างไว้เมื่อพับ, การพับ, การปิด, พับ, ปิด, ปิดหน้าจอ"</string>
+    <!-- no translation found for keywords_fold_lock_behavior (6278990772113341581) -->
+    <skip />
     <string name="keywords_gesture" msgid="3456930847450080520">"ท่าทางสัมผัส"</string>
     <string name="keywords_wallet" msgid="3757421969956996972">"Wallet"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"ชำระเงิน แตะ การชำระเงิน"</string>
@@ -4471,10 +4480,8 @@
     <string name="lockscreen_privacy_controls_summary" msgid="7522918441738915364">"จากหน้าจอล็อก"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="2174300719855112358">"ใช้ระบบควบคุมอุปกรณ์"</string>
     <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"หากต้องการใช้งาน ให้เปิด \"แสดงระบบควบคุมอุปกรณ์\" ก่อน"</string>
-    <!-- no translation found for lockscreen_double_line_clock_summary (4109235686687860393) -->
-    <skip />
-    <!-- no translation found for lockscreen_double_line_clock_setting_toggle (802271087416091548) -->
-    <skip />
+    <string name="lockscreen_double_line_clock_summary" msgid="4109235686687860393">"ขนาดของนาฬิกาจะเปลี่ยนตามเนื้อหาในหน้าจอล็อก"</string>
+    <string name="lockscreen_double_line_clock_setting_toggle" msgid="802271087416091548">"นาฬิกาแบบไดนามิก"</string>
     <string name="lockscreen_quick_affordances_title" msgid="8615741551327565793">"ทางลัด"</string>
     <plurals name="lockscreen_quick_affordances_summary" formatted="false" msgid="4225396036524703997">
       <item quantity="other"><xliff:g id="FIRST_1">%1$s</xliff:g>, <xliff:g id="SECOND">%2$s</xliff:g></item>

@@ -42,6 +42,18 @@
     <string name="preview_pager_content_description" msgid="3762247188224576303">"Anteprima"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Rimpicciolisci"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Ingrandisci"</string>
+    <!-- no translation found for stay_awake_on_fold_title (6590454679898134221) -->
+    <skip />
+    <!-- no translation found for stay_awake_on_fold_summary (1939963751585954262) -->
+    <skip />
+    <!-- no translation found for selective_stay_awake_title (7887645333447645168) -->
+    <skip />
+    <!-- no translation found for selective_stay_awake_summary (9055967322921984543) -->
+    <skip />
+    <!-- no translation found for sleep_on_fold_title (7626123024330501411) -->
+    <skip />
+    <!-- no translation found for sleep_on_fold_summary (7737992842459588846) -->
+    <skip />
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Usa la rotazione automatica"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"La funzionalità di riconoscimento facciale usa la fotocamera anteriore per migliorare la precisione della rotazione automatica. Le immagini non vengono mai memorizzate o inviate a Google."</string>
     <string name="bluetooth" msgid="8898478620943459654">"Bluetooth"</string>
@@ -241,7 +253,7 @@
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Ora solare"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"Selezione per regione"</string>
     <string name="zone_menu_by_offset" msgid="1257702747474426745">"Seleziona per scarto da UTC"</string>
-    <string name="lock_after_timeout" msgid="8682769000437403444">"Blocca dopo lo spegnimento schermo"</string>
+    <string name="lock_after_timeout" msgid="8682769000437403444">"Blocca dopo lo spegnimento dello schermo"</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> dopo il timeout"</string>
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"Subito dopo lo spegnimento dello schermo, tranne quando tenuto sbloccato da <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> dopo lo spegnimento dello schermo, tranne quando tenuto sbloccato da <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
@@ -860,20 +872,13 @@
     <string name="wifi_type_title" msgid="2174893488722015838">"Tipo"</string>
     <string name="wifi_details_dns" msgid="273231528073312579">"DNS"</string>
     <string name="wifi_details_ipv6_address_header" msgid="1913151339341722443">"Indirizzi IPv6"</string>
-    <!-- no translation found for hotspot_device_details_category (3110651914598697220) -->
-    <skip />
-    <!-- no translation found for hotspot_device_details_internet_source (1563266599673281875) -->
-    <skip />
-    <!-- no translation found for internet_source_wifi (6952593095166435179) -->
-    <skip />
-    <!-- no translation found for internet_source_mobile_data (877403889449201789) -->
-    <skip />
-    <!-- no translation found for internet_source_ethernet (8338472576454100966) -->
-    <skip />
-    <!-- no translation found for hotspot_connection_category (4320380513982923556) -->
-    <skip />
-    <!-- no translation found for hotspot_connection_strength (87359986943768421) -->
-    <skip />
+    <string name="hotspot_device_details_category" msgid="3110651914598697220">"Dettagli dispositivo hotspot"</string>
+    <string name="hotspot_device_details_internet_source" msgid="1563266599673281875">"Fonte internet"</string>
+    <string name="internet_source_wifi" msgid="6952593095166435179">"Wi‑Fi"</string>
+    <string name="internet_source_mobile_data" msgid="877403889449201789">"Dati mobili"</string>
+    <string name="internet_source_ethernet" msgid="8338472576454100966">"Ethernet"</string>
+    <string name="hotspot_connection_category" msgid="4320380513982923556">"Connessione tramite hotspot"</string>
+    <string name="hotspot_connection_strength" msgid="87359986943768421">"Potenza connessione"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"Reti salvate"</string>
     <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"Iscrizioni"</string>
     <string name="wifi_saved_other_networks_tab" msgid="7942647415716557293">"Altre reti"</string>
@@ -1007,8 +1012,8 @@
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Off"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Bilanciamento bianco display"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
-    <string name="stay_awake_on_fold_title" msgid="4195536619511589471">"Tieni sbloccato quando chiuso"</string>
-    <string name="stay_awake_on_fold_summary" msgid="2413928869516675293">"Tieni sbloccato il display frontale quando è chiuso fino a spegnimento schermo"</string>
+    <!-- no translation found for fold_lock_behavior_title (786228803694268449) -->
+    <skip />
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Display fluido"</string>
     <string name="peak_refresh_rate_summary" msgid="3627278682437562787">"Aumenta automaticamente la frequenza di aggiornamento da 60 a <xliff:g id="ID_1">%1$s</xliff:g> Hz per alcuni contenuti. Comporta un maggior utilizzo della batteria."</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Forza frequenza di aggiornamento massima"</string>
@@ -1066,7 +1071,7 @@
     <string name="dark_ui_text" msgid="4392646155331126666">"Il tema scuro usa uno sfondo nero per aumentare la durata della batteria su alcuni schermi. Le pianificazioni del tema scuro si attivano solo se lo schermo è spento."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Al momento il tema scuro viene attivato/disattivato in base alla pianificazione della modalità Riposo"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Impostazioni modalità Riposo"</string>
-    <string name="screen_timeout" msgid="7709947617767439410">"Spegnimento schermo"</string>
+    <string name="screen_timeout" msgid="7709947617767439410">"Spegnimento dello schermo"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"Dopo <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> di inattività"</string>
     <string name="screen_timeout_summary_not_set" msgid="5107680774964178875">"Nessuna impostazione"</string>
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"Sfondo"</string>
@@ -1141,7 +1146,7 @@
     <string name="kernel_version" msgid="3513538109381366881">"Versione kernel"</string>
     <string name="build_number" msgid="9009733242117579826">"Numero build"</string>
     <string name="module_version" msgid="1787518340082046658">"Aggiornamento di sistema Google Play"</string>
-    <string name="battery_info" msgid="7873528123969546728">"Informazioni batteria"</string>
+    <string name="battery_info" msgid="7873528123969546728">"Informazioni sulla batteria"</string>
     <string name="device_info_not_available" msgid="4804474466616712326">"Non disponibile"</string>
     <string name="storage_settings" msgid="7472188817781592677">"Spazio di archiviazione"</string>
     <string name="storage_settings_for_app" msgid="229425418984637483">"Spazio di archiviazione e cache"</string>
@@ -1965,6 +1970,7 @@
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Scorciatoia per l\'inversione dei colori"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"La funzionalità di inversione dei colori rende scure le schermate chiare e chiare le schermate scure"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"&lt;b&gt;Ricorda&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; I colori cambieranno nei contenuti multimediali e nelle immagini&lt;/li&gt; &lt;li&gt; L\'inversione dei colori funziona in tutte le app&lt;/li&gt; &lt;li&gt; Per visualizzare uno sfondo scuro, è possibile usare in alternativa il tema scuro&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="accessibility_action_label_panel_slice" msgid="1313725957071602932">"inserire impostazioni"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Clic automatico (tempo di interazione)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Info su Clic aut. (tempo interaz.)"</string>
     <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"Scopri di più su Clic automatico (tempo di interazione)"</string>
@@ -2893,7 +2899,7 @@
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"Creazione del clone di <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> in corso…"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"Clone di <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> creato"</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"Lingue, gesti, ora, backup"</string>
-    <string name="languages_setting_summary" msgid="7963053736715746726">"Lingue di sistema, lingue delle app, voce"</string>
+    <string name="languages_setting_summary" msgid="2650807397396180351">"Lingue di sistema, lingue delle app, preferenze locali, voce"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, connessione di rete, internet, wireless, dati, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Notifica Wi‑Fi, notifica wifi"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"utilizzo dei dati"</string>
@@ -2943,7 +2949,8 @@
     <string name="keywords_app_pinning" msgid="1564144561464945019">"blocco su schermo"</string>
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"sfida lavoro, lavoro, profilo"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"profilo di lavoro, profilo gestito, unificare, unificazione, lavoro, profilo"</string>
-    <string name="keywords_stay_awake_on_lock" msgid="6338367464776295697">"riattivare, sospendere, non bloccare, tenere sbloccato quando chiuso, piegare, chiudere, piegatura, chiusura, schermo disattivato"</string>
+    <!-- no translation found for keywords_fold_lock_behavior (6278990772113341581) -->
+    <skip />
     <string name="keywords_gesture" msgid="3456930847450080520">"gesti"</string>
     <string name="keywords_wallet" msgid="3757421969956996972">"wallet"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"paga, tocca, pagamenti"</string>
@@ -4471,10 +4478,8 @@
     <string name="lockscreen_privacy_controls_summary" msgid="7522918441738915364">"Dalla schermata di blocco"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="2174300719855112358">"Usa il controllo dei dispositivi"</string>
     <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"Per usare i controlli, devi prima attivare l\'opzione \"Mostra controlli dei dispositivi\""</string>
-    <!-- no translation found for lockscreen_double_line_clock_summary (4109235686687860393) -->
-    <skip />
-    <!-- no translation found for lockscreen_double_line_clock_setting_toggle (802271087416091548) -->
-    <skip />
+    <string name="lockscreen_double_line_clock_summary" msgid="4109235686687860393">"Le dimensioni dell\'orologio cambiano in base ai contenuti della schermata di blocco"</string>
+    <string name="lockscreen_double_line_clock_setting_toggle" msgid="802271087416091548">"Orologio dinamico"</string>
     <string name="lockscreen_quick_affordances_title" msgid="8615741551327565793">"Scorciatoie"</string>
     <plurals name="lockscreen_quick_affordances_summary" formatted="false" msgid="4225396036524703997">
       <item quantity="other"><xliff:g id="FIRST_1">%1$s</xliff:g>, <xliff:g id="SECOND">%2$s</xliff:g></item>
