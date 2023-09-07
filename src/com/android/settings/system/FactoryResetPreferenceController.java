@@ -24,35 +24,26 @@ import androidx.preference.Preference;
 import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.Utils;
-import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settings.core.BasePreferenceController;
 
-public class FactoryResetPreferenceController extends AbstractPreferenceController
-        implements PreferenceControllerMixin {
-    /** Key of the "Factory reset" preference in {@link R.xml.reset_dashboard_fragment}. */
-    private static final String KEY_FACTORY_RESET = "factory_reset";
+public class FactoryResetPreferenceController extends BasePreferenceController {
 
     private final UserManager mUm;
 
-    public FactoryResetPreferenceController(Context context) {
-        super(context);
+    public FactoryResetPreferenceController(Context context, String preferenceKey) {
+        super(context, preferenceKey);
         mUm = (UserManager) context.getSystemService(Context.USER_SERVICE);
     }
 
-    /** Hide "Factory reset" settings for secondary users, except demo users. */
+    /** Hide "Factory reset" settings for secondary users. */
     @Override
-    public boolean isAvailable() {
-        return mUm.isAdminUser() || Utils.isDemoUser(mContext);
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return KEY_FACTORY_RESET;
+    public int getAvailabilityStatus() {
+        return mUm.isAdminUser() ? AVAILABLE : DISABLED_FOR_USER;
     }
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-        if (KEY_FACTORY_RESET.equals(preference.getKey())) {
+        if (mPreferenceKey.equals(preference.getKey())) {
             final Intent intent = new Intent(mContext, Settings.FactoryResetActivity.class);
             mContext.startActivity(intent);
             return true;
