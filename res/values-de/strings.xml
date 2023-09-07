@@ -42,6 +42,18 @@
     <string name="preview_pager_content_description" msgid="3762247188224576303">"Vorschau"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Verkleinern"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Vergrößern"</string>
+    <!-- no translation found for stay_awake_on_fold_title (6590454679898134221) -->
+    <skip />
+    <!-- no translation found for stay_awake_on_fold_summary (1939963751585954262) -->
+    <skip />
+    <!-- no translation found for selective_stay_awake_title (7887645333447645168) -->
+    <skip />
+    <!-- no translation found for selective_stay_awake_summary (9055967322921984543) -->
+    <skip />
+    <!-- no translation found for sleep_on_fold_title (7626123024330501411) -->
+    <skip />
+    <!-- no translation found for sleep_on_fold_summary (7737992842459588846) -->
+    <skip />
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"„Automatisch drehen“ verwenden"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"Bei der Gesichtserkennung wird die Kamera auf der Vorderseite verwendet, um die Genauigkeit beim automatischen Drehen zu verbessern. Bilder werden weder gespeichert noch an Google gesendet."</string>
     <string name="bluetooth" msgid="8898478620943459654">"Bluetooth"</string>
@@ -750,8 +762,8 @@
     <string name="wifi_hidden_network_warning" msgid="3937433813754746158">"Wenn dein Router keine Netzwerk-ID sendet, du aber in Zukunft eine Verbindung herstellen möchtest, dann lege das Netzwerk als verborgen fest.\n\nDies stellt unter Umständen ein Sicherheitsrisiko dar, weil dein Smartphone regelmäßig ein Signal sendet, um das Netzwerk zu finden.\n\nDeine Routereinstellungen ändern sich nicht, wenn du das Netzwerk als verborgen festlegst."</string>
     <string name="wifi_signal" msgid="4442182285304271424">"Signalstärke"</string>
     <string name="wifi_status" msgid="5349199188871002778">"Status"</string>
-    <string name="tx_wifi_speed" msgid="2368986629172050673">"Upload-Geschwindigkeit"</string>
-    <string name="rx_wifi_speed" msgid="5167966079215111232">"Download-Geschwindigkeit"</string>
+    <string name="tx_wifi_speed" msgid="2368986629172050673">"Brutto-Datenrate Upload"</string>
+    <string name="rx_wifi_speed" msgid="5167966079215111232">"Brutto-Datenrate Download"</string>
     <string name="wifi_speed" msgid="6562147734565434513">"Verbindungsgeschwindigkeit"</string>
     <string name="wifi_frequency" msgid="3120998420184702834">"Frequenz"</string>
     <string name="wifi_ip_address" msgid="8903577251845268209">"IP-Adresse"</string>
@@ -860,20 +872,13 @@
     <string name="wifi_type_title" msgid="2174893488722015838">"Typ"</string>
     <string name="wifi_details_dns" msgid="273231528073312579">"DNS"</string>
     <string name="wifi_details_ipv6_address_header" msgid="1913151339341722443">"IPv6-Adressen"</string>
-    <!-- no translation found for hotspot_device_details_category (3110651914598697220) -->
-    <skip />
-    <!-- no translation found for hotspot_device_details_internet_source (1563266599673281875) -->
-    <skip />
-    <!-- no translation found for internet_source_wifi (6952593095166435179) -->
-    <skip />
-    <!-- no translation found for internet_source_mobile_data (877403889449201789) -->
-    <skip />
-    <!-- no translation found for internet_source_ethernet (8338472576454100966) -->
-    <skip />
-    <!-- no translation found for hotspot_connection_category (4320380513982923556) -->
-    <skip />
-    <!-- no translation found for hotspot_connection_strength (87359986943768421) -->
-    <skip />
+    <string name="hotspot_device_details_category" msgid="3110651914598697220">"Details zum Hotspot-Gerät"</string>
+    <string name="hotspot_device_details_internet_source" msgid="1563266599673281875">"Internetquelle"</string>
+    <string name="internet_source_wifi" msgid="6952593095166435179">"WLAN"</string>
+    <string name="internet_source_mobile_data" msgid="877403889449201789">"Mobile Daten"</string>
+    <string name="internet_source_ethernet" msgid="8338472576454100966">"Ethernet"</string>
+    <string name="hotspot_connection_category" msgid="4320380513982923556">"Hotspot-Verbindung"</string>
+    <string name="hotspot_connection_strength" msgid="87359986943768421">"Verbindungsstärke"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"Gespeicherte WLANs"</string>
     <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"Abos"</string>
     <string name="wifi_saved_other_networks_tab" msgid="7942647415716557293">"Andere Netzwerke"</string>
@@ -1007,8 +1012,8 @@
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Aus"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Weißabgleich des Bildschirms"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
-    <string name="stay_awake_on_fold_title" msgid="4195536619511589471">"Beim Falten entsperrt bleiben"</string>
-    <string name="stay_awake_on_fold_summary" msgid="2413928869516675293">"Frontdisplay beim Zusammenklappen entsperrt lassen, bis sich das Display nach Ablauf des Zeitlimits automatisch ausschaltet"</string>
+    <!-- no translation found for fold_lock_behavior_title (786228803694268449) -->
+    <skip />
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="3627278682437562787">"Setzt die Aktualisierungsrate für einige Inhalte automatisch von 60 auf <xliff:g id="ID_1">%1$s</xliff:g> Hz herauf. Erhöht den Akkuverbrauch."</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Maximale Aktualisierungsrate erzwingen"</string>
@@ -1150,7 +1155,7 @@
     <string name="eid_multi_sim" msgid="9087924808336397804">"EID (SIM-Steckplatz <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>)"</string>
     <string name="imei_multi_sim" msgid="9001570420423929507">"IMEI (SIM-Steckplatz <xliff:g id="IMEI_SLOT_ID">%1$d</xliff:g>)"</string>
     <string name="imei_multi_sim_primary" msgid="7914653040843734282">"IMEI (SIM-Steckplatz <xliff:g id="IMEI_SLOT_ID_PRIMARY">%1$d</xliff:g>) (Primär)"</string>
-    <string name="view_saved_network" msgid="1232387673095080910">"Wähle zum Ansehen ein gespeichertes Netzwerk aus"</string>
+    <string name="view_saved_network" msgid="1232387673095080910">"Zum Ansehen gespeichertes Netzwerk auswählen"</string>
     <string name="status_min_number" msgid="4492899165438225714">"MIN"</string>
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"PRL-Version"</string>
@@ -1745,7 +1750,7 @@
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"Modifikatortaste wählen"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Wähle eine neue Taste für <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>:"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Standard"</string>
-    <string name="speech_category_title" msgid="5995161659186229742">"Sprache"</string>
+    <string name="speech_category_title" msgid="5995161659186229742">"Spracheingabe, -erkennung und -ausgabe"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"Zeigergeschwindigkeit"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Gamecontroller"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"Vibration weiterleiten"</string>
@@ -1965,6 +1970,8 @@
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Kurzbefehl für Farbumkehr"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"Die Farbumkehr macht helle Displays dunkel. Und sie macht dunkle Displays hell."</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"&lt;b&gt;Hinweis&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Das führt zu einer veränderten Wiedergabe der Farben in Medien und Bildern&lt;/li&gt; &lt;li&gt; Die Farbumkehr funktioniert in allen Apps&lt;/li&gt; &lt;li&gt; Ein dunkler Hintergrund kann stattdessen mit dem dunklen Design angezeigt werden&lt;/li&gt; &lt;/ol&gt;"</string>
+    <!-- no translation found for accessibility_action_label_panel_slice (1313725957071602932) -->
+    <skip />
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Automatischer Klick (Verweildauer)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Über automatischer Klick (Verweildauer)"</string>
     <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"Weitere Informationen zu automatischen Klicks (Verweildauer)"</string>
@@ -2397,7 +2404,7 @@
     <string name="voice_recognizer_preference_summary" msgid="9195427725367463336">"Einfache Sprachausgabe-Funktion"</string>
     <string name="voice_interaction_security_warning" msgid="7962884055885987671">"Dieser Spracheingabedienst kann Spracheingaben jederzeit überwachen und Anwendungen, die Sprachbefehle unterstützen, für dich steuern. Er wird von der Anwendung <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g> bereitgestellt. Möchtest du diesen Dienst aktivieren?"</string>
     <string name="on_device_recognition_settings" msgid="6503160369314598069">"Einstellungen für Erkennung auf dem Gerät"</string>
-    <string name="on_device_recognition_settings_title" msgid="7137599722039096545">"Erkennung auf dem Gerät"</string>
+    <string name="on_device_recognition_settings_title" msgid="7137599722039096545">"Spracherkennung auf dem Gerät"</string>
     <string name="on_device_recognition_settings_summary" msgid="3292736423223499348">"Spracherkennung auf dem Gerät"</string>
     <string name="tts_engine_preference_title" msgid="7808775764174571132">"Bevorzugtes Modul"</string>
     <string name="tts_engine_settings_title" msgid="1298093555056321577">"Moduleinstellungen"</string>
@@ -2732,7 +2739,7 @@
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Apps und Daten dieser Gastsitzung werden jetzt gelöscht und alle künftigen Gastaktivitäten werden jeweils beim Beenden des Gastmodus gelöscht"</string>
     <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"löschen, gast, aktivität, entfernen, daten, besucher, löschen"</string>
     <string name="enable_guest_calling" msgid="4620657197834392094">"Gästen erlauben, zu telefonieren"</string>
-    <string name="enable_guest_calling_summary" msgid="4748224917641204782">"Anrufliste wird mit Gastnutzer geteilt"</string>
+    <string name="enable_guest_calling_summary" msgid="4748224917641204782">"Gastnutzer kann auf Anrufliste zugreifen"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Telefonieren &amp; SMS zulassen"</string>
     <string name="user_grant_admin" msgid="5942118263054572074">"Diesen Nutzer als Administrator festlegen"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Nutzer löschen"</string>
@@ -2795,7 +2802,7 @@
     <string name="call_manager_title" msgid="3397433159509629466">"Anrufverwaltung"</string>
     <!-- no translation found for call_manager_summary (2558839230880919191) -->
     <skip />
-    <string name="cell_broadcast_settings" msgid="2416980110093867199">"Notfall­benachrichtigungen für Mobilgeräte"</string>
+    <string name="cell_broadcast_settings" msgid="2416980110093867199">"Notfall­benachrichtigungen an Mobilgeräte"</string>
     <string name="network_operators_settings" msgid="5105453353329748954">"Netzbetreiber"</string>
     <string name="access_point_names" msgid="5768430498022188057">"Zugangspunkte (APNs)"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
@@ -2893,7 +2900,8 @@
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"Klon von <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> wird erstellt"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"Klon von <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> erstellt"</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"Sprachen, Gesten, Zeit, Sicherung"</string>
-    <string name="languages_setting_summary" msgid="7963053736715746726">"Systemsprachen, App-Sprachen, Spracheingabe"</string>
+    <!-- no translation found for languages_setting_summary (2650807397396180351) -->
+    <skip />
     <string name="keywords_wifi" msgid="8156528242318351490">"wlan, wi-fi, netzwerkverbindung, internet, kabellos, daten, wifi, wi-fi, w-lan"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"WLAN-Benachrichtigung, WLAN-Benachrichtigung"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"Datennutzung"</string>
@@ -2943,7 +2951,8 @@
     <string name="keywords_app_pinning" msgid="1564144561464945019">"Bildschirmfixierung"</string>
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"herausforderung bei der arbeit, arbeit, profil"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"arbeitsprofil, verwaltetes profil, gruppieren, gruppierung, arbeit, profil"</string>
-    <string name="keywords_stay_awake_on_lock" msgid="6338367464776295697">"aktiv, ruhemodus, nicht sperren, beim Falten entsperrt bleiben, falten, schließen, zusammenklappen, zuklappen, Display aus"</string>
+    <!-- no translation found for keywords_fold_lock_behavior (6278990772113341581) -->
+    <skip />
     <string name="keywords_gesture" msgid="3456930847450080520">"gesten, bewegungen, touch-gesten"</string>
     <string name="keywords_wallet" msgid="3757421969956996972">"Geldbörse"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"Bezahlen, kontaktlos, Zahlungen"</string>
@@ -3213,7 +3222,7 @@
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Lautlose Unterhaltungen und Benachrichtigungen verbergen"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Keine Benachrichtigungen anzeigen"</string>
     <string name="lock_screen_notifs_redact" msgid="9024158855454642296">"Vertrauliche Benachrichtigungen"</string>
-    <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"Auf dem Sperrbildschirm werden vertrauliche Inhalte angezeigt"</string>
+    <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"Vertrauliche Inhalte auf dem Sperrbildschirm anzeigen"</string>
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"Vertrauliche Benachrichtigungen aus Arbeitsprofilen"</string>
     <string name="lock_screen_notifs_redact_work_summary" msgid="3238238380405430156">"Auf dem Sperrbildschirm werden vertrauliche Inhalte aus Arbeitsprofilen angezeigt"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"Gesamten Benachrichtigungs­inhalt anzeigen"</string>
@@ -3326,11 +3335,11 @@
     <string name="interact_across_profiles_keywords" msgid="5996472773111665049">"profilübergreifend verknüpfte App geschäftliche und private Apps"</string>
     <string name="interact_across_profiles_switch_enabled" msgid="7294719120282287495">"Verknüpft"</string>
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"Diese Apps verknüpfen"</string>
-    <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Verknüpfte Apps teilen Berechtigungen und können auf Daten der jeweils anderen App zugreifen."</string>
-    <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"Verknüpfe nur Apps, bei denen du sicher bist, dass sie keine personenbezogenen Daten für deinen IT-Administrator freigeben."</string>
+    <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Für miteinander verknüpfte Apps gelten dieselben Berechtigungen und jede App kann auf die Daten der anderen App zugreifen."</string>
+    <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"Verknüpfe nur Apps, bei denen du sicher bist, dass sie deinem IT-Administrator keinen Zugriff auf deine personenbezogenen Daten gewähren."</string>
     <string name="interact_across_profiles_summary_3" msgid="444428694843299854">"Du kannst die Verknüpfung der Apps jederzeit in den Datenschutzeinstellungen deines Geräts aufheben."</string>
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"Darf die geschäftliche App „<xliff:g id="NAME">%1$s</xliff:g>“ auf deine personenbezogenen Daten zugreifen?"</string>
-    <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"Verknüpfe nur Apps, bei denen du sicher bist, dass sie keine personenbezogenen Daten für deinen IT-Administrator freigeben."</string>
+    <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"Verknüpfe nur Apps, bei denen du sicher bist, dass sie deinem IT-Administrator keinen Zugriff auf deine personenbezogenen Daten gewähren."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"App-Daten"</string>
     <string name="interact_across_profiles_consent_dialog_app_data_summary" msgid="6057019384328088311">"Diese App kann auf Daten in deiner privaten App „<xliff:g id="NAME">%1$s</xliff:g>“ zugreifen."</string>
     <string name="interact_across_profiles_consent_dialog_permissions_title" msgid="2316852600280487055">"Berechtigungen"</string>
@@ -3631,7 +3640,7 @@
     <string name="usb_use" msgid="6783183432648438528">"Verwendungszweck für USB-Verbindung"</string>
     <string name="usb_default_label" msgid="3372838450371060750">"Standard-USB-Konfiguration"</string>
     <string name="usb_default_info" msgid="167172599497085266">"Wenn ein anderes Gerät verbunden und dein Smartphone entsperrt ist, werden diese Einstellungen angewendet. Stell nur Verbindungen zu vertrauenswürdigen Geräten her."</string>
-    <string name="usb_power_title" msgid="5602112548385798646">"Optionen für Ein-/Aus-Taste"</string>
+    <string name="usb_power_title" msgid="5602112548385798646">"Optionen für Stromversorgung"</string>
     <string name="usb_file_transfer_title" msgid="2261577861371481478">"Optionen zur Dateiübertragung"</string>
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"USB-Einstellungen"</string>
@@ -3747,7 +3756,7 @@
     <string name="disabled_by_policy_title_biometric_parental_consent" msgid="2463673997797134678">"Elternerlaubnis erforderlich"</string>
     <string name="disabled_by_policy_content_biometric_parental_consent" msgid="7124116806784305206">"Gib das Smartphone einem Elternteil, um mit der Einrichtung zu beginnen"</string>
     <string name="disabled_by_policy_parental_consent" msgid="9166060049019018978">"Gib das Smartphone zum Ändern dieser Einstellung einem Elternteil."</string>
-    <string name="default_admin_support_msg" msgid="8816296554831532033">"Weitere Informationen erhältst du von deinem IT-Administrator"</string>
+    <string name="default_admin_support_msg" msgid="8816296554831532033">"Wenn du mehr wissen möchtest, wende dich an deinen IT-Administrator"</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"Weitere Details"</string>
     <string name="admin_profile_owner_message" msgid="8860709969532649195">"Dein Administrator kann die mit deinem Arbeitsprofil verbundenen Apps und Daten überwachen und verwalten, einschließlich der Einstellungen, Berechtigungen, Zugriffe auf Unternehmensinhalte, Netzwerkaktivitäten und Standortdaten des Geräts."</string>
     <string name="admin_profile_owner_user_message" msgid="4929926887231544950">"Dein Administrator kann die mit diesem Nutzer verbundenen Apps und Daten überwachen und verwalten, einschließlich der Einstellungen, Berechtigungen, Zugriffe auf Unternehmensinhalte, Netzwerkaktivitäten und Standortdaten des Geräts."</string>
@@ -3849,12 +3858,9 @@
     <string name="battery_saver_off_summary" msgid="4411561435493109261">"Aus"</string>
     <string name="app_battery_usage_title" msgid="346558380609793334">"Akkunutzung der App"</string>
     <string name="app_battery_usage_summary" msgid="6349965904306339539">"Akkunutzung für Apps festlegen"</string>
-    <!-- no translation found for battery_tips_card_action_button (4897793527424711648) -->
-    <skip />
-    <!-- no translation found for battery_tips_card_dismiss_button (1885756985544936618) -->
-    <skip />
-    <!-- no translation found for battery_tips_card_feedback_info (767117835675157298) -->
-    <skip />
+    <string name="battery_tips_card_action_button" msgid="4897793527424711648">"Einstellungen aufrufen"</string>
+    <string name="battery_tips_card_dismiss_button" msgid="1885756985544936618">"Ok"</string>
+    <string name="battery_tips_card_feedback_info" msgid="767117835675157298">"War diese Nachricht hilfreich?"</string>
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Uneingeschränkt"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Optimiert"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"Eingeschränkt"</string>
@@ -3927,7 +3933,7 @@
     <string name="managed_profile_contact_search_summary" msgid="4974727886709219105">"Deine Suchanfragen und eingehende Anrufe können für deinen IT-Administrator sichtbar sein"</string>
     <string name="cross_profile_calendar_title" msgid="7570277841490216947">"Profilübergreifender Kalender"</string>
     <string name="cross_profile_calendar_summary" msgid="8856185206722860069">"Geschäftliche Termine in meinem persönlichen Kalender anzeigen"</string>
-    <string name="managed_profile_settings_footer" msgid="996500759305118103">"Wenn geschäftliche Apps abgeschaltet sind, sind sie pausiert, d. h., weder kannst du darauf zugreifen, noch erhältst du Benachrichtigungen"</string>
+    <string name="managed_profile_settings_footer" msgid="996500759305118103">"Wenn geschäftliche Apps ausgeschaltet sind, sind sie pausiert, d. h., weder kannst du darauf zugreifen noch erhältst du Benachrichtigungen"</string>
     <string name="automatic_storage_manager_settings" msgid="519158151463974656">"Speicher verwalten"</string>
     <string name="automatic_storage_manager_text" msgid="6900593059927987273">"Zur Freigabe von Speicherplatz entfernt der Speichermanager Back-ups von Fotos und Videos von deinem Gerät."</string>
     <string name="automatic_storage_manager_days_title" msgid="5077286114860539367">"Fotos &amp; Videos entfernen"</string>
@@ -4172,7 +4178,7 @@
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
     <string name="enable_angle_as_system_driver" msgid="3985105681812713612">"ANGLE aktivieren"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="6413038127558166972">"ANGLE als OpenGL ES-Standardtreiber aktivieren Wenn du diese Option auf nicht kompatiblen Geräten aktivierst, funktionieren manche Apps möglicherweise nicht."</string>
+    <string name="enable_angle_as_system_driver_summary" msgid="6413038127558166972">"ANGLE als OpenGL ES-Standardtreiber aktivieren. Wenn du diese Option auf nicht kompatiblen Geräten aktivierst, funktionieren manche Apps möglicherweise nicht."</string>
     <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"Ein Neustart ist erforderlich, um den OpenGL ES-Systemtreiber zu ändern"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Änderungen der Kompatibilität von Apps"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Änderungen bei der Kompatibilität von Apps festlegen"</string>
@@ -4474,10 +4480,8 @@
     <string name="lockscreen_privacy_controls_summary" msgid="7522918441738915364">"Über den Sperrbildschirm"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="2174300719855112358">"Gerätesteuerung nutzen"</string>
     <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"Wenn du dies nutzen möchtest, aktiviere zuerst die Option „Gerätesteuerung anzeigen“"</string>
-    <!-- no translation found for lockscreen_double_line_clock_summary (4109235686687860393) -->
-    <skip />
-    <!-- no translation found for lockscreen_double_line_clock_setting_toggle (802271087416091548) -->
-    <skip />
+    <string name="lockscreen_double_line_clock_summary" msgid="4109235686687860393">"Die Größe der Uhr ändert sich je nach Inhalt auf dem Sperrbildschirm"</string>
+    <string name="lockscreen_double_line_clock_setting_toggle" msgid="802271087416091548">"Dynamische Uhr"</string>
     <string name="lockscreen_quick_affordances_title" msgid="8615741551327565793">"Verknüpfungen"</string>
     <plurals name="lockscreen_quick_affordances_summary" formatted="false" msgid="4225396036524703997">
       <item quantity="other"><xliff:g id="FIRST_1">%1$s</xliff:g>, <xliff:g id="SECOND">%2$s</xliff:g></item>
@@ -4539,7 +4543,7 @@
     <string name="default_active_sim_calls" msgid="2390973682556353558">"Anrufe"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"SMS"</string>
     <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"mobile Daten"</string>
-    <string name="wifi_scan_notify_message" msgid="1331238142061476869">"Damit das Gerät optimal funktioniert, können Apps und Dienste weiter nach WLANs suchen, auch wenn die WLAN-Funktion deaktiviert ist. Dadurch können beispielsweise standortbasierte Funktionen und Dienste verbessert werden. Das Verhalten lässt sich in den Einstellungen für die WLAN-Suche ändern."</string>
+    <string name="wifi_scan_notify_message" msgid="1331238142061476869">"Apps und Dienste können jederzeit nach WLANs suchen, auch wenn die WLAN-Funktion deaktiviert ist. Dadurch können beispielsweise standortbasierte Funktionen und Dienste verbessert werden. Das Verhalten lässt sich in den Einstellungen für die WLAN-Suche ändern."</string>
     <string name="wifi_scan_change" msgid="8438320311511852918">"Ändern"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Verbunden"</string>
