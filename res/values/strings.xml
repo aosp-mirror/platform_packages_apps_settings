@@ -80,6 +80,19 @@
     <!-- Description for the button that makes interface elements larger. [CHAR_LIMIT=NONE] -->
     <string name="font_size_make_larger_desc">Make larger</string>
 
+    <!-- Title for stay awake on fold radio button. [CHAR_LIMIT=NONE] -->
+    <string name="stay_awake_on_fold_title">Always</string>
+    <!-- Summary for stay awake on fold radio button. [CHAR_LIMIT=NONE] -->
+    <string name="stay_awake_on_fold_summary">Front display turns on when you fold your device</string>
+    <!-- Title for selective stay awake radio button. [CHAR_LIMIT=NONE] -->
+    <string name="selective_stay_awake_title">Only games, videos, and more</string>
+    <!-- Summary for selective stay awake radio button. [CHAR_LIMIT=NONE] -->
+    <string name="selective_stay_awake_summary">Front display turns on for apps that stop your screen going idle</string>
+    <!-- Title for sleep on fold radio button. [CHAR_LIMIT=NONE] -->
+    <string name="sleep_on_fold_title">Never</string>
+    <!-- Summary for sleep on fold radio button. [CHAR_LIMIT=NONE] -->
+    <string name="sleep_on_fold_summary">Front display locks when you fold your device</string>
+
     <!-- Auto rotate switchbar title. [CHAR_LIMIT=NONE] -->
     <string name="auto_rotate_settings_primary_switch_title">Use auto-rotate</string>
 
@@ -2468,10 +2481,8 @@
     <string name="display_white_balance_title">Display white balance</string>
     <!-- Display settings screen, display white balance settings summary [CHAR LIMIT=NONE] -->
     <string name="display_white_balance_summary"></string>
-    <!-- Display settings screen, setting name to enable staying awake on fold [CHAR LIMIT=30] -->
-    <string name="stay_awake_on_fold_title">Stay unlocked on fold</string>
-    <!-- Display settings screen, setting summary to enable staying awake on fold [CHAR LIMIT=NONE] -->
-    <string name="stay_awake_on_fold_summary">Keep front display unlocked when folded until screen timeout</string>
+    <!-- Display settings screen, setting option name to change Fold setting -->
+    <string name="fold_lock_behavior_title">Continue using apps on fold</string>
     <!-- Display settings screen, peak refresh rate settings title [CHAR LIMIT=30] -->
     <string name="peak_refresh_rate_title">Smooth Display</string>
     <!-- Display settings screen, peak refresh rate settings summary [CHAR LIMIT=NONE] -->
@@ -7165,7 +7176,7 @@
     <string name="keywords_app_pinning">screen pinning</string>
     <string name="keywords_profile_challenge">work challenge, work, profile</string>
     <string name="keywords_unification">work profile, managed profile, unify, unification, work, profile</string>
-    <string name="keywords_stay_awake_on_lock">
+    <string name="keywords_fold_lock_behavior">
         awake, sleep, do not lock, stay unlocked on fold, folding, closing, fold, close, screen off
     </string>
     <string name="keywords_gesture">gestures</string>
