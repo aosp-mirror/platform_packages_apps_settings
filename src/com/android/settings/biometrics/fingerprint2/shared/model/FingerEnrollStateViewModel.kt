@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel
+package com.android.settings.biometrics.fingerprint2.shared.model
 
 import android.annotation.StringRes
 

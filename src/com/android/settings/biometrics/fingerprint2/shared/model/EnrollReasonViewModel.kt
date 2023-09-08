@@ -13,24 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel
 
-import android.hardware.fingerprint.FingerprintManager
+package com.android.settings.biometrics.fingerprint2.shared.model
 
-/**
- * The reason for enrollment. Represents [FingerprintManager.EnrollReason]
- */
+/** The reason for enrollment */
 enum class EnrollReason {
-  /** The enroll happens on education screen. */
+  /**
+   * The enroll happens on education screen. This is to support legacy flows where we require the
+   * user to touch the sensor before going ahead to the EnrollEnrolling flow
+   */
   FindSensor,
   /** The enroll happens on enrolling screen. */
   EnrollEnrolling
-}
-
-/** Convert EnrollReason to original [FingerprintManager.EnrollReason]. */
-fun EnrollReason.toOriginalReason(): Int {
-  return when (this) {
-    EnrollReason.EnrollEnrolling -> FingerprintManager.ENROLL_ENROLL
-    EnrollReason.FindSensor -> FingerprintManager.ENROLL_FIND_SENSOR
-  }
 }

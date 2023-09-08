@@ -35,10 +35,10 @@ import androidx.lifecycle.lifecycleScope
 import com.android.settings.R
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollNavigationViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollViewModel
+import com.android.settings.biometrics.fingerprint2.shared.model.SensorType
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintGatekeeperViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintScrollViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.Unicorn
-import com.android.systemui.biometrics.shared.model.FingerprintSensorType
 import com.google.android.setupcompat.template.FooterBarMixin
 import com.google.android.setupcompat.template.FooterButton
 import com.google.android.setupdesign.GlifLayout
@@ -144,8 +144,8 @@ class FingerprintEnrollIntroV2Fragment : Fragment(R.layout.fingerprint_v2_enroll
             val iconShield: ImageView = view.requireViewById(R.id.icon_shield)
             val footerMessage6: TextView = view.requireViewById(R.id.footer_message_6)
             when (sensorType) {
-              FingerprintSensorType.UDFPS_ULTRASONIC,
-              FingerprintSensorType.UDFPS_OPTICAL -> {
+              SensorType.Ultrasonic,
+              SensorType.Optical -> {
                 footerMessage6.visibility = View.VISIBLE
                 iconShield.visibility = View.VISIBLE
               }
