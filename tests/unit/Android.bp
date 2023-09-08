@@ -25,8 +25,6 @@ android_test {
         "androidx.test.core",
         "androidx.test.rules",
         "androidx.test.espresso.core",
-        "androidx.test.espresso.contrib-nodeps",
-        "androidx.test.espresso.intents-nodeps",
         "androidx.test.ext.junit",
         "androidx.preference_preference",
         "mockito-target-minus-junit4",
@@ -46,7 +44,7 @@ android_test {
         "src/**/*.java",
         "src/**/*.kt",
     ],
-
+    use_resource_processor: true,
     platform_apis: true,
     test_suites: ["device-tests"],
 
