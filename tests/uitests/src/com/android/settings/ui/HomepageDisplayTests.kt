@@ -18,7 +18,6 @@ package com.android.settings.ui
 
 import android.provider.Settings
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.filters.SmallTest
 import androidx.test.uiautomator.UiDevice
 import com.android.settings.ui.testutils.SettingsTestUtils.assertHasTexts
 import com.android.settings.ui.testutils.SettingsTestUtils.startMainActivityFromHomeScreen
@@ -26,27 +25,35 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
-/** Verifies basic functionality of the About Phone screen  */
 @RunWith(AndroidJUnit4::class)
-@SmallTest
-class AboutPhoneSettingsTests {
+class HomepageDisplayTests {
     private lateinit var device: UiDevice
 
     @Before
     fun setUp() {
-        device = startMainActivityFromHomeScreen(Settings.ACTION_DEVICE_INFO_SETTINGS)
+        device = startMainActivityFromHomeScreen(Settings.ACTION_SETTINGS)
     }
 
     @Test
-    fun testAllMenuEntriesExist() {
-        device.assertHasTexts(ON_SCREEN_TEXTS)
+    fun hasHomepageItems() {
+        device.assertHasTexts(HOMEPAGE_ITEMS)
     }
 
     private companion object {
-        val ON_SCREEN_TEXTS = listOf(
-            "Device name",
-            "Legal information",
-            "Regulatory labels"
+        val HOMEPAGE_ITEMS = listOf(
+            "Network & internet",
+            "Connected devices",
+            "Apps",
+            "Notifications",
+            "Battery",
+            "Storage",
+            "Sound & vibration",
+            "Display",
+            "Accessibility",
+            "Security & privacy",
+            "Location",
+            "Passwords & accounts",
+            "System",
         )
     }
 }

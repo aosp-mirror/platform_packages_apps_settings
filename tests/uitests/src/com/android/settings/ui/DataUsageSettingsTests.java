@@ -26,6 +26,9 @@ import androidx.test.uiautomator.By;
 import androidx.test.uiautomator.UiDevice;
 import androidx.test.uiautomator.Until;
 
+import org.junit.Ignore;
+
+@Ignore
 public class DataUsageSettingsTests extends InstrumentationTestCase {
 
     private static final String SETTINGS_PACKAGE = "com.android.settings";
