@@ -30,6 +30,4 @@ public class FeatureFlags {
     public static final String CONTEXTUAL_HOME = "settings_contextual_home";
     public static final String SETTINGS_SEARCH_ALWAYS_EXPAND =
             "settings_search_always_expand";
-    public static final String PRESS_HOLD_NAV_HANDLE_TO_SEARCH =
-            "settings_press_hold_nav_handle_to_search";
 }
