@@ -42,6 +42,18 @@
     <string name="preview_pager_content_description" msgid="3762247188224576303">"झलक"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"छोटा करें"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"बड़ा करें"</string>
+    <!-- no translation found for stay_awake_on_fold_title (6590454679898134221) -->
+    <skip />
+    <!-- no translation found for stay_awake_on_fold_summary (1939963751585954262) -->
+    <skip />
+    <!-- no translation found for selective_stay_awake_title (7887645333447645168) -->
+    <skip />
+    <!-- no translation found for selective_stay_awake_summary (9055967322921984543) -->
+    <skip />
+    <!-- no translation found for sleep_on_fold_title (7626123024330501411) -->
+    <skip />
+    <!-- no translation found for sleep_on_fold_summary (7737992842459588846) -->
+    <skip />
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"स्क्रीन की अपने-आप दिशा बदलने की सुविधा का इस्तेमाल करें"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"चेहरे की पहचान करने वाली तकनीक, स्क्रीन के अपने-आप घूम जाने की सुविधा को बेहतर बनाने के लिए, सामने वाले कैमरे का इस्तेमाल करती है. इसके लिए, इमेज न तो सेव की जाती हैं और न ही Google को भेजी जाती हैं."</string>
     <string name="bluetooth" msgid="8898478620943459654">"ब्लूटूथ"</string>
@@ -860,20 +872,13 @@
     <string name="wifi_type_title" msgid="2174893488722015838">"टाइप"</string>
     <string name="wifi_details_dns" msgid="273231528073312579">"डीएनएस"</string>
     <string name="wifi_details_ipv6_address_header" msgid="1913151339341722443">"IPv6 पते"</string>
-    <!-- no translation found for hotspot_device_details_category (3110651914598697220) -->
-    <skip />
-    <!-- no translation found for hotspot_device_details_internet_source (1563266599673281875) -->
-    <skip />
-    <!-- no translation found for internet_source_wifi (6952593095166435179) -->
-    <skip />
-    <!-- no translation found for internet_source_mobile_data (877403889449201789) -->
-    <skip />
-    <!-- no translation found for internet_source_ethernet (8338472576454100966) -->
-    <skip />
-    <!-- no translation found for hotspot_connection_category (4320380513982923556) -->
-    <skip />
-    <!-- no translation found for hotspot_connection_strength (87359986943768421) -->
-    <skip />
+    <string name="hotspot_device_details_category" msgid="3110651914598697220">"हॉटस्पॉट डिवाइस की जानकारी"</string>
+    <string name="hotspot_device_details_internet_source" msgid="1563266599673281875">"इंटरनेट सोर्स"</string>
+    <string name="internet_source_wifi" msgid="6952593095166435179">"वाई-फ़ाई"</string>
+    <string name="internet_source_mobile_data" msgid="877403889449201789">"मोबाइल डेटा"</string>
+    <string name="internet_source_ethernet" msgid="8338472576454100966">"ईथरनेट"</string>
+    <string name="hotspot_connection_category" msgid="4320380513982923556">"हॉटस्पॉट कनेक्शन"</string>
+    <string name="hotspot_connection_strength" msgid="87359986943768421">"कनेक्शन की क्वालिटी"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"सेव किए गए नेटवर्क"</string>
     <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"सदस्यता"</string>
     <string name="wifi_saved_other_networks_tab" msgid="7942647415716557293">"अन्य नेटवर्क"</string>
@@ -1007,8 +1012,8 @@
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"बंद"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"डिसप्ले का वाइट बैलेंस"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
-    <string name="stay_awake_on_fold_title" msgid="4195536619511589471">"फ़ोल्ड करने पर अनलॉक रहें"</string>
-    <string name="stay_awake_on_fold_summary" msgid="2413928869516675293">"डिवाइस को फ़ोल्ड किए जाने पर, स्क्रीन के बंद होने तक फ़्रंट डिसप्ले को अनलॉक रखें"</string>
+    <!-- no translation found for fold_lock_behavior_title (786228803694268449) -->
+    <skip />
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"स्मूद डिसप्ले"</string>
     <string name="peak_refresh_rate_summary" msgid="3627278682437562787">"कुछ कॉन्टेंट के लिए, यह अपने-आप ही रीफ़्रेश दर को 60 से बढ़ाकर <xliff:g id="ID_1">%1$s</xliff:g> हर्ट्ज़ कर देता है. इसे चालू करने पर, बैटरी ज़्यादा खर्च होती है."</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"रीफ़्रेश दर को सबसे ज़्यादा पर सेट करें"</string>
@@ -1965,6 +1970,8 @@
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"रंग बदलने की सुविधा का शॉर्टकट"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"रंग बदलने की सुविधा चालू करने पर, हल्के रंग की स्क्रीन गहरे रंग में बदल जाती हैं. साथ ही, यह सुविधा इस्तेमाल करने पर, गहरे रंग की स्क्रीन हल्के रंग में बदल जाती हैं."</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"&lt;b&gt;ध्यान दें&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; रंग बदलने की सुविधा चालू करने पर, मीडिया और इमेज के रंग बदल जाएंगे&lt;/li&gt; &lt;li&gt; रंग बदलने की सुविधा का इस्तेमाल, सभी ऐप्लिकेशन पर किया जा सकता है&lt;/li&gt; &lt;li&gt; गहरे रंग का बैकग्राउंड रखने के लिए, रंग बदलने की सुविधा के बजाय गहरे रंग वाली थीम का इस्तेमाल करें&lt;/li&gt; &lt;/ol&gt;"</string>
+    <!-- no translation found for accessibility_action_label_panel_slice (1313725957071602932) -->
+    <skip />
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"अपने-आप क्लिक होने की सुविधा (कॉन्टेंट पर बिताया गया समय या ड्वेल टाइम)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"ऑटो क्लिक (कॉन्टेंट पर बिताया गया समय) के बारे में जानकारी"</string>
     <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"ऑटो क्लिक (कॉन्टेंट पर बिताया गया समय) के बारे में ज़्यादा जानें"</string>
@@ -2893,7 +2900,8 @@
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> का क्लोन बनाया जा रहा है"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> का क्लोन बनाया गया"</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"भाषाएं, जेस्चर, समय, बैकअप"</string>
-    <string name="languages_setting_summary" msgid="7963053736715746726">"सिस्टम की भाषाएं, ऐप्लिकेशन की भाषाएं, बोली"</string>
+    <!-- no translation found for languages_setting_summary (2650807397396180351) -->
+    <skip />
     <string name="keywords_wifi" msgid="8156528242318351490">"वाईफ़ाई, वाई-फ़ाई, नेटवर्क कनेक्शन, इंटरनेट, वायरलेस, डेटा, वाई फ़ाई"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"वाई-फ़ाई सूचना, वाई-फ़ाई नोटिफ़िकेशन"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"डेटा खर्च"</string>
@@ -2943,7 +2951,8 @@
     <string name="keywords_app_pinning" msgid="1564144561464945019">"स्क्रीन पिन करना"</string>
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"काम की चुनौती, काम, प्रोफ़ाइल"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"वर्क प्रोफ़ाइल, प्रबंधित प्रोफ़ाइल, एक करना, एकीकरण, काम, प्रोफ़ाइल"</string>
-    <string name="keywords_stay_awake_on_lock" msgid="6338367464776295697">"जागना, सोना, लॉक न करना, फ़ोल्ड होने पर अनलॉक रहना, फ़ोल्ड करना, बंद करना, फ़ोल्ड, बंद करें, स्क्रीन बंद करें"</string>
+    <!-- no translation found for keywords_fold_lock_behavior (6278990772113341581) -->
+    <skip />
     <string name="keywords_gesture" msgid="3456930847450080520">"जेस्चर"</string>
     <string name="keywords_wallet" msgid="3757421969956996972">"Wallet"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"भुगतान करें, टैप करें, भुगतान"</string>
@@ -3849,12 +3858,9 @@
     <string name="battery_saver_off_summary" msgid="4411561435493109261">"बंद है"</string>
     <string name="app_battery_usage_title" msgid="346558380609793334">"ऐप्लिकेशन के लिए बैटरी खर्च"</string>
     <string name="app_battery_usage_summary" msgid="6349965904306339539">"ऐप्लिकेशन के लिए बैटरी खर्च को सेट करें"</string>
-    <!-- no translation found for battery_tips_card_action_button (4897793527424711648) -->
-    <skip />
-    <!-- no translation found for battery_tips_card_dismiss_button (1885756985544936618) -->
-    <skip />
-    <!-- no translation found for battery_tips_card_feedback_info (767117835675157298) -->
-    <skip />
+    <string name="battery_tips_card_action_button" msgid="4897793527424711648">"सेटिंग देखें"</string>
+    <string name="battery_tips_card_dismiss_button" msgid="1885756985544936618">"ठीक है"</string>
+    <string name="battery_tips_card_feedback_info" msgid="767117835675157298">"क्या यह मैसेज उपयोगी है?"</string>
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"बैटरी के इस्तेमाल पर कोई पाबंदी नहीं है"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"बैटरी के इस्तेमाल को ऑप्टिमाइज़ किया गया"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"बैटरी के इस्तेमाल पर पाबंदी लगी है"</string>
@@ -4474,10 +4480,8 @@
     <string name="lockscreen_privacy_controls_summary" msgid="7522918441738915364">"लॉक स्क्रीन से"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="2174300719855112358">"डिवाइस कंट्रोल इस्तेमाल करें"</string>
     <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"इसका इस्तेमाल करने के लिए, सबसे पहले \"डिवाइस कंट्रोल दिखाएं\" को चालू करें"</string>
-    <!-- no translation found for lockscreen_double_line_clock_summary (4109235686687860393) -->
-    <skip />
-    <!-- no translation found for lockscreen_double_line_clock_setting_toggle (802271087416091548) -->
-    <skip />
+    <string name="lockscreen_double_line_clock_summary" msgid="4109235686687860393">"लॉक स्क्रीन के कॉन्टेंट के हिसाब से घड़ी का साइज़ बदलता है"</string>
+    <string name="lockscreen_double_line_clock_setting_toggle" msgid="802271087416091548">"डाइनैमिक घड़ी"</string>
     <string name="lockscreen_quick_affordances_title" msgid="8615741551327565793">"शॉर्टकट"</string>
     <plurals name="lockscreen_quick_affordances_summary" formatted="false" msgid="4225396036524703997">
       <item quantity="one"><xliff:g id="FIRST_1">%1$s</xliff:g>, <xliff:g id="SECOND">%2$s</xliff:g></item>
