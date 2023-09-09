@@ -42,6 +42,18 @@
     <string name="preview_pager_content_description" msgid="3762247188224576303">"Pregled"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Napravi manji"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Napravi veći"</string>
+    <!-- no translation found for stay_awake_on_fold_title (6590454679898134221) -->
+    <skip />
+    <!-- no translation found for stay_awake_on_fold_summary (1939963751585954262) -->
+    <skip />
+    <!-- no translation found for selective_stay_awake_title (7887645333447645168) -->
+    <skip />
+    <!-- no translation found for selective_stay_awake_summary (9055967322921984543) -->
+    <skip />
+    <!-- no translation found for sleep_on_fold_title (7626123024330501411) -->
+    <skip />
+    <!-- no translation found for sleep_on_fold_summary (7737992842459588846) -->
+    <skip />
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Koristi automatsko rotiranje"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"Prepoznavanje lica koristi prednju kameru da poboljša preciznost automatskog rotiranja. Slike se nikad ne pohranjuju niti šalju Googleu."</string>
     <string name="bluetooth" msgid="8898478620943459654">"Bluetooth"</string>
@@ -178,7 +190,7 @@
     <string name="temperature_preferences_title" msgid="5009881556503629058">"Temperatura"</string>
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"Prvi dan u sedmici"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"Postavke brojeva"</string>
-    <string name="default_string_of_regional_preference" msgid="3428899072914884203">"Koristi zadanu"</string>
+    <string name="default_string_of_regional_preference" msgid="3428899072914884203">"Koristi zadano"</string>
     <string name="celsius_temperature_unit" msgid="8896459071273084507">"Celzijus (°C)"</string>
     <string name="fahrenheit_temperature_unit" msgid="1118677820614569801">"Farenhajt (°F)"</string>
     <string name="sunday_first_day_of_week" msgid="7644548348295686051">"nedjelja"</string>
@@ -504,7 +516,7 @@
     <string name="lock_settings_picker_title" msgid="9219376327364915334">"Zaključavanje ekrana"</string>
     <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"Odaberite zaključavanje ekrana"</string>
     <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"Odaberite novo zaključ. ekrana"</string>
-    <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"Odaberite zaklj. za posl. apl."</string>
+    <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"Odaberite zaključavanje za poslovne aplikacije"</string>
     <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Odaberite novo poslovno zaklj."</string>
     <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"Za dodatnu sigurnost postavite alternativni način zaključavanja ekrana"</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Odaberite rezervni način zaključavanja ekrana"</string>
@@ -860,20 +872,13 @@
     <string name="wifi_type_title" msgid="2174893488722015838">"Vrsta"</string>
     <string name="wifi_details_dns" msgid="273231528073312579">"DNS"</string>
     <string name="wifi_details_ipv6_address_header" msgid="1913151339341722443">"IPv6 adrese"</string>
-    <!-- no translation found for hotspot_device_details_category (3110651914598697220) -->
-    <skip />
-    <!-- no translation found for hotspot_device_details_internet_source (1563266599673281875) -->
-    <skip />
-    <!-- no translation found for internet_source_wifi (6952593095166435179) -->
-    <skip />
-    <!-- no translation found for internet_source_mobile_data (877403889449201789) -->
-    <skip />
-    <!-- no translation found for internet_source_ethernet (8338472576454100966) -->
-    <skip />
-    <!-- no translation found for hotspot_connection_category (4320380513982923556) -->
-    <skip />
-    <!-- no translation found for hotspot_connection_strength (87359986943768421) -->
-    <skip />
+    <string name="hotspot_device_details_category" msgid="3110651914598697220">"Detalji o uređaju s pristupnom tačkom"</string>
+    <string name="hotspot_device_details_internet_source" msgid="1563266599673281875">"Izvor interneta"</string>
+    <string name="internet_source_wifi" msgid="6952593095166435179">"WiFi"</string>
+    <string name="internet_source_mobile_data" msgid="877403889449201789">"Prijenos podataka na mobilnoj mreži"</string>
+    <string name="internet_source_ethernet" msgid="8338472576454100966">"Ethernet"</string>
+    <string name="hotspot_connection_category" msgid="4320380513982923556">"Veza pristupne tačke"</string>
+    <string name="hotspot_connection_strength" msgid="87359986943768421">"Jačina veze"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"Sačuvane mreže"</string>
     <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"Pretplate"</string>
     <string name="wifi_saved_other_networks_tab" msgid="7942647415716557293">"Druge mreže"</string>
@@ -914,7 +919,7 @@
     <string name="wifi_hotspot_speed_summary_2g" msgid="5063438001736234858">"2,4 GHz / kompatibilno je s većinom uređaja"</string>
     <string name="wifi_hotspot_speed_summary_5g" msgid="6221158936983135040">"5 GHz / kompatibilno je s mnogim uređajima"</string>
     <string name="wifi_hotspot_speed_summary_6g" msgid="8863992901226595544">"6 GHz / kompatibilno je s manje uređaja"</string>
-    <string name="wifi_hotspot_speed_summary_2g_and_5g" msgid="5931052946168943750">"2,4 i 5 GHz / kompatibilni su s većinom uređaja"</string>
+    <string name="wifi_hotspot_speed_summary_2g_and_5g" msgid="5931052946168943750">"2,4 i 5 GHz / kompatibilne su s većinom uređaja"</string>
     <string name="wifi_hotspot_speed_intro" msgid="6973482196363758925">"Odaberite frekvenciju za pristupnu tačku. Frekvencija utiče ne brzinu veze i vrste uređaja koje mogu pronaći pristupnu tačku."</string>
     <string name="wifi_hotspot_speed_category" msgid="5265655850463630286">"Željena frekvencija"</string>
     <string name="wifi_hotspot_speed_2g" msgid="3400600834257664480">"2,4 GHz"</string>
@@ -926,7 +931,7 @@
     <string name="wifi_hotspot_speed_6g" msgid="3787697484862730500">"6 GHz"</string>
     <string name="wifi_hotspot_speed_6g_summary" msgid="8675262219242174548">"Najveće brzine. Kompatibilne su s manje uređaja."</string>
     <string name="wifi_hotspot_speed_summary_unavailable" msgid="7276080644693388756">"Nije dostupno u vašoj zemlji ili regiji"</string>
-    <string name="wifi_hotspot_speed_footer" msgid="8846939503916795002">"Ako željena frekvencija nije dostupna, pristupna tačka može koristiti drugu frekvenciju. Postavke privatnosti pristupne tačke se mogu promijeniti ako promijenite frekvenciju."</string>
+    <string name="wifi_hotspot_speed_footer" msgid="8846939503916795002">"Ako željena frekvencija nije dostupna, pristupna tačka može koristiti drugu frekvenciju. Postavke sigurnosti pristupne tačke se mogu promijeniti ako promijenite frekvenciju."</string>
     <string name="wifi_hotspot_security_summary_unavailable" msgid="117582979310345853">"Nije dostupno uz 6 GHz"</string>
     <string name="wifi_hotspot_security_footer" msgid="4608329688744949796">"Postavke sigurnosti se mogu promijeniti ako promijenite frekvenciju pristupne tačke"</string>
     <string name="wifi_hotspot_instant_title" msgid="7052526695338853703">"Instant pristupna tačka"</string>
@@ -1007,8 +1012,8 @@
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Isključeno"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Balans bijele boje prikaza"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
-    <string name="stay_awake_on_fold_title" msgid="4195536619511589471">"Ostavi otključan po sklapanju"</string>
-    <string name="stay_awake_on_fold_summary" msgid="2413928869516675293">"Zadržavanje prednjeg ekrana otključanog kada je uređaj sklopljen do isteka vremena ekrana"</string>
+    <!-- no translation found for fold_lock_behavior_title (786228803694268449) -->
+    <skip />
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Glatki prikaz"</string>
     <string name="peak_refresh_rate_summary" msgid="3627278682437562787">"Automatski povećava učestalost osvježavanja sa 60 na <xliff:g id="ID_1">%1$s</xliff:g> Hz za određeni sadržaj. Povećava potrošnju baterije."</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Nametni maksimalnu brzinu osvježavanja"</string>
@@ -1122,7 +1127,7 @@
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Koristi <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="sim_preferred_title" msgid="8850185380445309835">"Ažurirati preferirani SIM?"</string>
     <string name="sim_preferred_message" msgid="6004009449266648351">"<xliff:g id="NEW_SIM">%1$s</xliff:g> je jedini SIM u vašem uređaju. Želite li taj SIM koristiti za prijenos podataka na mobilnoj mreži, pozive i SMS poruke?"</string>
-    <string name="enable_auto_data_switch_dialog_title" msgid="3563043560556718994">"Poboljš. pokr. prijen. podat.?"</string>
+    <string name="enable_auto_data_switch_dialog_title" msgid="3563043560556718994">"Poboljšati pokrivenost prijenosa pod.?"</string>
     <string name="enable_auto_data_switch_dialog_message" msgid="5777287241521946883">"Dozvolite uređaju da se automatski prebaci na operatera <xliff:g id="BACKUP_CARRIER">%1$s</xliff:g> za prijenos podataka na mobilnoj mreži kada ima bolju dostupnost."</string>
     <string name="auto_data_switch_dialog_managed_profile_warning" msgid="6839438290079866605">\n\n"Pozivi, poruke i mrežni saobraćaj mogu biti vidljivi vašoj organizaciji."</string>
     <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"PIN za SIM je netačan. Za otključavanje uređaja sada morate kontaktirati svog operatera."</string>
@@ -1965,6 +1970,7 @@
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Prečica za inverziju boja"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"Inverzija boja mijenja svijetle ekrane u tamne, kao i tamne u svijetle."</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"&lt;b&gt;Imajte na umu:&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Boje u medijskim sadržajima i slikama će se promijeniti.&lt;/li&gt; &lt;li&gt; Inverzija boja funkcionira u svim aplikacijama.&lt;/li&gt; &lt;li&gt; Za prikazivanje tamne pozadine može se koristiti tamna tema.&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="accessibility_action_label_panel_slice" msgid="1313725957071602932">"ulazak u postavke"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Automatski klik (vrijeme zadržavanja)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Automatski klik (vrijeme zadržavanja)"</string>
     <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"Saznajte više o automatskom kliku (vrijeme zadržavanja)"</string>
@@ -2353,7 +2359,7 @@
     <string name="battery_usage_spinner_view_by_apps" msgid="8769276544072098082">"Pregled prema aplikacijama"</string>
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"Pregled prema sistemima"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="battery_cycle_count_footer" msgid="3642121059800373545">"Zbog pregleda kvalitete prije isporuke, broj ciklusa možda neće biti nula prilikom prvog korištenja"</string>
+    <string name="battery_cycle_count_footer" msgid="3642121059800373545">"Zbog pregleda kvaliteta prije isporuke broj ciklusa možda neće biti nula prilikom prvog korištenja"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Statistika procesa"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Geeky statistike o pokrenutim procesima"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Iskorištena memorija"</string>
@@ -2893,7 +2899,7 @@
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"Kreiranje klona aplikacije <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"Kreiran je klon aplikacije <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>"</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"Jezici, pokreti, vrijeme, sigurnosna kopija"</string>
-    <string name="languages_setting_summary" msgid="7963053736715746726">"Jezici sistema, jezici aplikacija, govor"</string>
+    <string name="languages_setting_summary" msgid="2650807397396180351">"Jezici sistema, jezici aplikacija, regionalne postavke, govor"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, veza s mrežom, internet, bežično, podaci, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"WiFi obavještenje, wifi obavještenje"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"prijenos podataka"</string>
@@ -2943,7 +2949,8 @@
     <string name="keywords_app_pinning" msgid="1564144561464945019">"kačenje ekrana"</string>
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"poslovni izazov, rad, profil"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"radni profil, upravljani profil, ujediniti, ujedinjenje, rad, profil"</string>
-    <string name="keywords_stay_awake_on_lock" msgid="6338367464776295697">"aktivno, u stanju mirovanja, nemoj zaključavati, ostavi otključano prilikom sklapanja, sklapanje, zatvaranje, sklopi, zatvori, ekran je isključen"</string>
+    <!-- no translation found for keywords_fold_lock_behavior (6278990772113341581) -->
+    <skip />
     <string name="keywords_gesture" msgid="3456930847450080520">"pokreti"</string>
     <string name="keywords_wallet" msgid="3757421969956996972">"novčanik"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"plati, dodir, plaćanja"</string>
@@ -3222,7 +3229,7 @@
     <string name="lock_screen_notifications_interstitial_message" msgid="4688399629301178487">"Kako želite da se obavještenja prikazuju na zaključanom ekranu?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1360388192096354315">"Zaključani ekran"</string>
     <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"Prikaži sav sadržaj obavještenja radnog profila"</string>
-    <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"Sakrij osjetljivi poslovni sadržaj"</string>
+    <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"Sakrij osjetljivi sadržaj radnog profila"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"Kada je uređaj zaključan, na koji način želite da se prikazuju obavještenja profila?"</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="6950124772255324448">"Obavještenja profila"</string>
     <string name="notifications_title" msgid="4221655533193721131">"Obavještenja"</string>
@@ -3501,7 +3508,7 @@
     <string name="screen_pinning_title" msgid="6927227272780208966">"Kačenje aplikacije"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"Kačenje aplikacije omogućava da se trenutna aplikacija zadrži na ekranu dok je ne otkačite. Naprimjer, koristeći ovu funkciju možete omogućiti pouzdanom prijatelju da igra određenu igru."</string>
     <string name="screen_pinning_description" msgid="4305370471370474846">"Kada je aplikacija zakačena, ona može otvoriti druge aplikacije i omogućiti pristup ličnim podacima. \n\nDa koristite kačenje aplikacije: 	\n1. Uključite kačenje aplikacije 	\n2. Otvorite Pregled 	\n3. Dodirnite ikonu aplikacije na vrhu ekrana, a zatim dodirnite Zakači"</string>
-    <string name="screen_pinning_guest_user_description" msgid="2465729370037556955">"Kada je aplikacija zakačena, ona može otvoriti druge aplikacije i omogućiti pristup ličnim podacima. \n\nAko želite dijeliti uređaj s nekim na siguran način, pokušajte koristiti profil za gosta korisnika. \n\nDa koristite kačenje aplikacije: 	\n1. Uključite kačenje aplikacije 	\n2. Otvorite Pregled 	\n3. Dodirnite ikonu aplikacije na vrhu ekrana, a zatim dodirnite Zakači"</string>
+    <string name="screen_pinning_guest_user_description" msgid="2465729370037556955">"Kada je aplikacija zakačena, ona može otvoriti druge aplikacije i omogućiti pristup ličnim podacima. \n\nAko želite dijeliti uređaj s nekim na siguran način, pokušajte koristiti profil za gosta. \n\nDa koristite kačenje aplikacije: 	\n1. Uključite kačenje aplikacije 	\n2. Otvorite Pregled 	\n3. Dodirnite ikonu aplikacije na vrhu ekrana, a zatim dodirnite Zakači"</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Kada je aplikacija zakačena: \n\n•		Lični podaci mogu biti dostupni \n		(kao što su kontakti i sadržaj e-pošte) \n•		Zakačena aplikacija može otvoriti druge aplikacije \n\nKačenje aplikacije koristite samo s osobama kojima vjerujete."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Traži uzorak za otključavanje prije poništavanja kačenja"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Traži PIN prije poništavanja kačenja"</string>
@@ -4169,7 +4176,7 @@
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
     <string name="enable_angle_as_system_driver" msgid="3985105681812713612">"Omogući ANGLE"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="6413038127558166972">"Omogući ANGLE kao zadani drajver OpenGL ES. Njegovo omogućavanje na nekompatibilnim uređajima može zaustaviti rad određenih aplikacija."</string>
+    <string name="enable_angle_as_system_driver_summary" msgid="6413038127558166972">"Omogućite ANGLE kao zadani drajver OpenGL ES-a. Njegovo omogućavanje na nekompatibilnim uređajima može zaustaviti rad određenih aplikacija."</string>
     <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"Ponovno pokretanje je potrebno za promjenu sistemskog drajvera OpenGL ES"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Izmjene kompatibilnosti aplikacije"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Uključivanje/isključivanje izmjena kompatibilnosti aplikacije"</string>
@@ -4180,7 +4187,7 @@
     <string name="my_device_info_account_preference_title" msgid="9197139254007133175">"Račun"</string>
     <string name="my_device_info_device_name_preference_title" msgid="8053298498727237971">"Naziv uređaja"</string>
     <string name="my_device_info_basic_info_category_title" msgid="381963187269356548">"Osnovne informacije"</string>
-    <string name="my_device_info_legal_category_title" msgid="7732792841537995127">"Pravne i zakonske obaveze"</string>
+    <string name="my_device_info_legal_category_title" msgid="7732792841537995127">"Pravne informacije i propisi"</string>
     <string name="my_device_info_device_details_category_title" msgid="4848438695638348680">"Detalji o uređaju"</string>
     <string name="my_device_info_device_identifiers_category_title" msgid="2197063484127704153">"Identifikatori uređaja"</string>
     <string name="change_wifi_state_title" msgid="5629648102837821525">"Upravljanje WiFi-jem"</string>
@@ -4471,10 +4478,8 @@
     <string name="lockscreen_privacy_controls_summary" msgid="7522918441738915364">"Sa zaključanog ekrana"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="2174300719855112358">"Koristi kontrole uređaja"</string>
     <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"Da koristite, najprije uključite \"Prikaži kontrole uređaja\""</string>
-    <!-- no translation found for lockscreen_double_line_clock_summary (4109235686687860393) -->
-    <skip />
-    <!-- no translation found for lockscreen_double_line_clock_setting_toggle (802271087416091548) -->
-    <skip />
+    <string name="lockscreen_double_line_clock_summary" msgid="4109235686687860393">"Veličina sata se mijenja u skladu sa sadržajem na zaključanom ekranu"</string>
+    <string name="lockscreen_double_line_clock_setting_toggle" msgid="802271087416091548">"Dinamični sat"</string>
     <string name="lockscreen_quick_affordances_title" msgid="8615741551327565793">"Prečice"</string>
     <plurals name="lockscreen_quick_affordances_summary" formatted="false" msgid="4225396036524703997">
       <item quantity="one"><xliff:g id="FIRST_1">%1$s</xliff:g>, <xliff:g id="SECOND">%2$s</xliff:g></item>
