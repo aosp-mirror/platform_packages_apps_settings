@@ -18,13 +18,8 @@ package com.android.settings.datausage;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.INetworkPolicyManager;
 import android.net.NetworkTemplate;
-import android.os.ServiceManager;
 import android.telephony.SubscriptionInfo;
-import android.telephony.SubscriptionManager;
 import android.telephony.SubscriptionPlan;
 import android.text.TextUtils;
 import android.util.Log;
@@ -83,8 +78,6 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
     /** The ending time of the billing cycle in ms since the epoch */
     private long mCycleEnd;
 
-    private Intent mManageSubscriptionIntent;
-
     private Future<Long> mHistoricalUsageLevel;
 
     public DataUsageSummaryPreferenceController(Activity activity, int subscriptionId) {
@@ -111,10 +104,6 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
 
         if (subInfo != null) {
             mDefaultTemplate = DataUsageLib.getMobileTemplate(context, subscriptionId);
-        } else if (DataUsageUtils.hasWifiRadio(context)) {
-            mDefaultTemplate = new NetworkTemplate.Builder(NetworkTemplate.MATCH_WIFI).build();
-        } else {
-            mDefaultTemplate = DataUsageUtils.getDefaultTemplate(context, subscriptionId);
         }
     }
 
@@ -154,8 +143,7 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
 
     @Override
     public int getAvailabilityStatus(int subId) {
-        return (getSubscriptionInfo(subId) != null)
-                || DataUsageUtils.hasWifiRadio(mContext) ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+        return getSubscriptionInfo(subId) != null ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override
@@ -163,6 +151,9 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
         DataUsageSummaryPreference summaryPreference = (DataUsageSummaryPreference) preference;
 
         final SubscriptionInfo subInfo = getSubscriptionInfo(mSubId);
+        if (subInfo == null) {
+            return;
+        }
         if (mDataUsageController == null) {
             updateConfiguration(mContext, mSubId, subInfo);
         }
@@ -174,25 +165,6 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
                 mDataUsageController.getDataUsageInfo(mDefaultTemplate);
 
         long usageLevel = info.usageLevel;
-
-        if (subInfo != null) {
-            summaryPreference.setWifiMode(/* isWifiMode */ false,
-                    /* usagePeriod */ null, /* isSingleWifi */ false);
-        } else {
-            summaryPreference.setWifiMode(/* isWifiMode */ true, /* usagePeriod */
-                    info.period, /* isSingleWifi */ false);
-            summaryPreference.setLimitInfo(null);
-            summaryPreference.setUsageNumbers(displayUsageLevel(usageLevel),
-                    /* dataPlanSize */ -1L,
-                    /* hasMobileData */ true);
-            summaryPreference.setChartEnabled(false);
-            summaryPreference.setUsageInfo(info.cycleEnd,
-                    /* snapshotTime */ -1L,
-                    /* carrierName */ null,
-                    /* numPlans */ 0,
-                    /* launchIntent */ null);
-            return;
-        }
 
         refreshDataplanInfo(info, subInfo);
 
@@ -229,8 +201,7 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
                     DataUsageUtils.formatDataUsage(mContext, mDataBarSize));
             summaryPreference.setProgress(mDataplanUse / (float) mDataBarSize);
         }
-        summaryPreference.setUsageInfo(mCycleEnd, mSnapshotTime, mCarrierName,
-                mDataplanCount, mManageSubscriptionIntent);
+        summaryPreference.setUsageInfo(mCycleEnd, mSnapshotTime, mCarrierName, mDataplanCount);
     }
 
     private long displayUsageLevel(long usageLevel) {
@@ -278,53 +249,7 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
                 mSnapshotTime = primaryPlan.getDataUsageTime();
             }
         }
-        // Temporarily return null, since no current users of SubscriptionPlan have this intent set.
-        // TODO (b/170330084): Remove after refactoring 5G SubscriptionPlan logic.
-        // mManageSubscriptionIntent = createManageSubscriptionIntent(mSubId);
-        mManageSubscriptionIntent = null;
-        Log.i(TAG, "Have " + mDataplanCount + " plans, dflt sub-id " + mSubId
-                + ", intent " + mManageSubscriptionIntent);
-    }
-
-    /**
-     * Create an {@link Intent} that can be launched towards the carrier app
-     * that is currently defining the billing relationship plan through
-     * {@link INetworkPolicyManager#setSubscriptionPlans(int, SubscriptionPlan [], String)}.
-     *
-     * @return ready to launch Intent targeted towards the carrier app, or
-     *         {@code null} if no carrier app is defined, or if the defined
-     *         carrier app provides no management activity.
-     */
-    @VisibleForTesting
-    Intent createManageSubscriptionIntent(int subId) {
-        final INetworkPolicyManager iNetPolicyManager = INetworkPolicyManager.Stub.asInterface(
-                ServiceManager.getService(Context.NETWORK_POLICY_SERVICE));
-        String owner = "";
-        try {
-            owner = iNetPolicyManager.getSubscriptionPlansOwner(subId);
-        } catch (Exception ex) {
-            Log.w(TAG, "Fail to get subscription plan owner for subId " + subId, ex);
-        }
-
-        if (TextUtils.isEmpty(owner)) {
-            return null;
-        }
-
-        final List<SubscriptionPlan> plans = getSubscriptionPlans(subId);
-        if (plans.isEmpty()) {
-            return null;
-        }
-
-        final Intent intent = new Intent(SubscriptionManager.ACTION_MANAGE_SUBSCRIPTION_PLANS);
-        intent.setPackage(owner);
-        intent.putExtra(SubscriptionManager.EXTRA_SUBSCRIPTION_INDEX, subId);
-
-        if (mContext.getPackageManager().queryIntentActivities(intent,
-                PackageManager.MATCH_DEFAULT_ONLY).isEmpty()) {
-            return null;
-        }
-
-        return intent;
+        Log.i(TAG, "Have " + mDataplanCount + " plans, dflt sub-id " + mSubId);
     }
 
     private static SubscriptionPlan getPrimaryPlan(List<SubscriptionPlan> plans) {
