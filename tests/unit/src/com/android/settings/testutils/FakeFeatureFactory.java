@@ -24,6 +24,7 @@ import com.android.settings.accessibility.AccessibilitySearchFeatureProvider;
 import com.android.settings.accounts.AccountFeatureProvider;
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.biometrics.face.FaceFeatureProvider;
+import com.android.settings.biometrics.fingerprint.FingerprintFeatureProvider;
 import com.android.settings.biometrics2.factory.BiometricsRepositoryProvider;
 import com.android.settings.bluetooth.BluetoothFeatureProvider;
 import com.android.settings.connecteddevice.fastpair.FastPairFeatureProvider;
@@ -79,6 +80,7 @@ public class FakeFeatureFactory extends FeatureFactory {
     public final AccountFeatureProvider mAccountFeatureProvider;
     public final BluetoothFeatureProvider mBluetoothFeatureProvider;
     public final FaceFeatureProvider mFaceFeatureProvider;
+    public final FingerprintFeatureProvider mFingerprintFeatureProvider;
     public final BiometricsRepositoryProvider mBiometricsRepositoryProvider;
 
     public PanelFeatureProvider panelFeatureProvider;
@@ -131,6 +133,7 @@ public class FakeFeatureFactory extends FeatureFactory {
         panelFeatureProvider = mock(PanelFeatureProvider.class);
         mBluetoothFeatureProvider = mock(BluetoothFeatureProvider.class);
         mFaceFeatureProvider = mock(FaceFeatureProvider.class);
+        mFingerprintFeatureProvider = mock(FingerprintFeatureProvider.class);
         mBiometricsRepositoryProvider = mock(BiometricsRepositoryProvider.class);
         wifiTrackerLibProvider = mock(WifiTrackerLibProvider.class);
         securitySettingsFeatureProvider = mock(SecuritySettingsFeatureProvider.class);
@@ -253,6 +256,11 @@ public class FakeFeatureFactory extends FeatureFactory {
     @Override
     public FaceFeatureProvider getFaceFeatureProvider() {
         return mFaceFeatureProvider;
+    }
+
+    @Override
+    public FingerprintFeatureProvider getFingerprintFeatureProvider() {
+        return mFingerprintFeatureProvider;
     }
 
     @Override
