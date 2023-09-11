@@ -69,8 +69,12 @@ object SettingsTestUtils {
     fun UiDevice.assertHasTexts(texts: List<String>) {
         val scrollableObj = findObject(By.scrollable(true))
         for (text in texts) {
-            scrollableObj.scrollUntil(Direction.DOWN, Until.findObject(By.text(text)))
-            assertWithMessage("Missing text: $text").that(waitObject(By.text(text))).isNotNull()
+            val selector = By.text(text)
+            assertWithMessage("Missing text: $text").that(
+                findObject(selector)
+                    ?: scrollableObj.scrollUntil(Direction.DOWN, Until.findObject(selector))
+                    ?: waitObject(selector)
+            ).isNotNull()
         }
     }
 }

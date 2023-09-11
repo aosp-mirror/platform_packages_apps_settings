@@ -41,6 +41,7 @@ class AppsSettingsTests {
     @Test
     fun testAppSettingsListForCalculator() {
         device.clickObject(By.text("Calculator"))
+        device.waitObject(By.text("Open"))
         device.assertHasTexts(ON_SCREEN_TEXTS)
     }
 
@@ -63,7 +64,7 @@ class AppsSettingsTests {
             "Screen time",
             "App battery usage",
             "Language",
-            "Open by default"
+            "Unused app settings",
         )
     }
 }
