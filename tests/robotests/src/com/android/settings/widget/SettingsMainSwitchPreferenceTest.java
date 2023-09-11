@@ -29,7 +29,6 @@ import androidx.preference.PreferenceViewHolder;
 import com.android.settings.R;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -59,7 +58,6 @@ public class SettingsMainSwitchPreferenceTest {
         mHolder = PreferenceViewHolder.createInstanceForTests(rootView);
     }
 
-    @Ignore
     @Test
     public void onBindViewHolder_isRestricted_restrictIconShouldDisplay() {
         mPreference.onBindViewHolder(mHolder);

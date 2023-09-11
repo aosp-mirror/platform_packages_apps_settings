@@ -45,7 +45,6 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexableRaw;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -102,7 +101,6 @@ public class TrustAgentListPreferenceControllerTest {
         assertThat(mController).isInstanceOf(PreferenceControllerMixin.class);
     }
 
-    @Ignore
     @Test
     @Config(qualifiers = "mcc999")
     public void isAvailable_whenNotVisible_isFalse() {
@@ -152,7 +150,6 @@ public class TrustAgentListPreferenceControllerTest {
         verify(mCategory, atLeastOnce()).addPreference(any(Preference.class));
     }
 
-    @Ignore
     @Test
     @Config(qualifiers = "mcc999")
     public void onResume_ifNotAvailable_shouldNotAddNewAgents() {

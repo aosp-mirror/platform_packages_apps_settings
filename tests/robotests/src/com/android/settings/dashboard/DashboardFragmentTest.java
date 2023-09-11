@@ -66,7 +66,6 @@ import com.android.settingslib.drawer.ProviderTile;
 import com.android.settingslib.drawer.Tile;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -236,7 +235,6 @@ public class DashboardFragmentTest {
         verify(mTestFragment.mScreen, never()).addPreference(nullable(Preference.class));
     }
 
-    @Ignore
     @Test
     @Config(qualifiers = "mcc999")
     public void displayTilesAsPreference_shouldNotAddSuppressedTiles() {

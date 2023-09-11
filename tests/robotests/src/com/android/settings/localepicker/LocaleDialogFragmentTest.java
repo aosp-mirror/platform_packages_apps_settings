@@ -36,7 +36,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.android.internal.app.LocaleStore;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
-import com.android.settings.utils.ActivityControllerWrapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -65,8 +64,7 @@ public class LocaleDialogFragmentTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        mActivity = (FragmentActivity) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(FragmentActivity.class)).get();
+        mActivity = Robolectric.setupActivity(FragmentActivity.class);
         mDialogFragment = LocaleDialogFragment.newInstance();
         LocaleStore.LocaleInfo localeInfo = LocaleStore.getLocaleInfo(Locale.ENGLISH);
         Bundle args = new Bundle();

@@ -31,7 +31,6 @@ import android.util.ArraySet;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.settings.core.CategoryMixin.CategoryListener;
-import com.android.settings.utils.ActivityControllerWrapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -54,7 +53,7 @@ public class CategoryMixinTest {
 
     @Test
     public void resumeActivity_shouldRegisterReceiver() {
-        ActivityControllerWrapper.setup(mActivityController);
+        mActivityController.setup();
 
         final TestActivity activity = mActivityController.get();
         assertThat(activity.getRegisteredReceivers()).isNotEmpty();
@@ -62,7 +61,7 @@ public class CategoryMixinTest {
 
     @Test
     public void pauseActivity_shouldUnregisterReceiver() {
-        ActivityControllerWrapper.setup(mActivityController).pause();
+        mActivityController.setup().pause();
 
         final TestActivity activity = mActivityController.get();
         assertThat(activity.getRegisteredReceivers()).isEmpty();
@@ -70,7 +69,7 @@ public class CategoryMixinTest {
 
     @Test
     public void onCategoriesChanged_listenerAdded_shouldNotifyChanged() {
-        ActivityControllerWrapper.setup(mActivityController).pause();
+        mActivityController.setup().pause();
         final CategoryMixin categoryMixin = mActivityController.get().getCategoryMixin();
         final CategoryListener listener = mock(CategoryListener.class);
         categoryMixin.addCategoryListener(listener);

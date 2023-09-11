@@ -34,7 +34,6 @@ import com.android.settings.R;
 import com.android.settings.core.PreferenceXmlParserUtils.MetadataFlag;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -51,7 +50,6 @@ import java.util.List;
  * If changing a preference file breaks a test in this test file, please replace its reference
  * with another preference with a matching replacement attribute.
  */
-@Ignore
 @RunWith(RobolectricTestRunner.class)
 public class PreferenceXmlParserUtilsTest {
 

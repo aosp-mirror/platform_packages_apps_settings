@@ -49,7 +49,6 @@ import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.testutils.shadow.ShadowAudioManager;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
-import com.android.settings.utils.ActivityControllerWrapper;
 import com.android.settingslib.bluetooth.BluetoothCallback;
 import com.android.settingslib.bluetooth.BluetoothEventManager;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
@@ -114,10 +113,7 @@ public class AvailableMediaDeviceGroupControllerTest {
         mPreference = new Preference(mContext);
         mPreference.setKey(PREFERENCE_KEY_1);
         mPreferenceGroup = spy(new PreferenceScreen(mContext, null));
-
-        final FragmentActivity mActivity = (FragmentActivity) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(FragmentActivity.class)).get();
-
+        final FragmentActivity mActivity = Robolectric.setupActivity(FragmentActivity.class);
         when(mPreferenceGroup.getPreferenceManager()).thenReturn(mPreferenceManager);
         doReturn(mContext).when(mDashboardFragment).getContext();
         doReturn(mPackageManager).when(mContext).getPackageManager();

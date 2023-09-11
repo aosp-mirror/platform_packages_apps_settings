@@ -27,7 +27,6 @@ import androidx.preference.Preference;
 import androidx.test.core.app.ApplicationProvider;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -60,7 +59,6 @@ public class RebootWithMtePreferenceControllerTest {
         assertFalse(mController.isAvailable());
     }
 
-    @Ignore
     @Test
     public void onAvailable_sysPropEnabled() {
         SystemProperties.set("ro.arm64.memtag.bootctl_supported", "1");

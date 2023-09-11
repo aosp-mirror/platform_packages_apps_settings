@@ -37,7 +37,6 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
-import com.android.settings.utils.ActivityControllerWrapper;
 import com.android.settings.wifi.NetworkRequestErrorDialogFragment.ERROR_DIALOG_TYPE;
 import com.android.wifitrackerlib.WifiPickerTracker;
 
@@ -82,8 +81,7 @@ public class NetworkRequestDialogActivityTest {
                 .thenReturn(mock(WifiPickerTracker.class));
         mScanResults.add(getScanResult(TEST_SSID, TEST_CAPABILITY));
 
-        mActivity = spy((NetworkRequestDialogActivity) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(NetworkRequestDialogActivity.class)).get());
+        mActivity = spy(Robolectric.setupActivity(NetworkRequestDialogActivity.class));
         when(mActivity.getSystemService(WifiManager.class)).thenReturn(mWifiManager);
     }
 
@@ -183,8 +181,7 @@ public class NetworkRequestDialogActivityTest {
     @Test
     public void onAbort_withFakeActivity_callStopAndPopShouldBeTrue() {
         final FakeNetworkRequestDialogActivity fakeActivity =
-                (FakeNetworkRequestDialogActivity) ActivityControllerWrapper.setup(
-                        Robolectric.buildActivity(FakeNetworkRequestDialogActivity.class)).get();
+                Robolectric.setupActivity(FakeNetworkRequestDialogActivity.class);
 
         fakeActivity.onResume();
         fakeActivity.onAbort();

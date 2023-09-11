@@ -30,7 +30,6 @@ import android.hardware.fingerprint.FingerprintManager;
 
 import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowFingerprintManager;
-import com.android.settings.utils.ActivityControllerWrapper;
 
 import com.google.android.setupcompat.PartnerCustomizationLayout;
 import com.google.android.setupcompat.template.FooterBarMixin;
@@ -55,8 +54,7 @@ public class SetupFingerprintEnrollFinishTest {
 
     @Before
     public void setUp() {
-        mActivity = (FingerprintEnrollFinish) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(FingerprintEnrollFinish.class)).get();
+        mActivity = Robolectric.buildActivity(FingerprintEnrollFinish.class).setup().get();
         mLayout = mActivity.findViewById(R.id.setup_wizard_layout);
         Shadows.shadowOf(application.getPackageManager())
                 .setSystemFeature(PackageManager.FEATURE_FINGERPRINT, true);
