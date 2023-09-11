@@ -44,7 +44,6 @@ import com.android.settingslib.utils.StringUtil;
 
 public class BatteryInfo {
     private static final String TAG = "BatteryInfo";
-    private static final String GLOBAL_TIME_TO_FULL_MILLIS = "time_to_full_millis";
 
     public CharSequence chargeLabel;
     public CharSequence remainingLabel;
@@ -152,7 +151,7 @@ public class BatteryInfo {
     static long getSettingsChargeTimeRemaining(final Context context) {
         return Settings.Global.getLong(
                 context.getContentResolver(),
-                GLOBAL_TIME_TO_FULL_MILLIS, -1);
+                com.android.settingslib.fuelgauge.BatteryUtils.GLOBAL_TIME_TO_FULL_MILLIS, -1);
     }
 
     public static void getBatteryInfo(final Context context, final Callback callback,
@@ -287,7 +286,7 @@ public class BatteryInfo {
         if (getSettingsChargeTimeRemaining(context) != chargeTimeMs) {
             Settings.Global.putLong(
                     context.getContentResolver(),
-                    GLOBAL_TIME_TO_FULL_MILLIS,
+                    com.android.settingslib.fuelgauge.BatteryUtils.GLOBAL_TIME_TO_FULL_MILLIS,
                     chargeTimeMs);
         }
 
