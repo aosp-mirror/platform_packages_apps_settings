@@ -43,7 +43,6 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.utils.ActivityControllerWrapper;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiPickerTracker;
 
@@ -100,8 +99,7 @@ public class AddAppNetworksFragmentTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mAddAppNetworksFragment = spy(new AddAppNetworksFragment());
-        mActivity = spy((FragmentActivity) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(FragmentActivity.class)).get());
+        mActivity = spy(Robolectric.setupActivity(FragmentActivity.class));
         doReturn(mActivity).when(mAddAppNetworksFragment).getActivity();
         when(mWifiManager.isWifiEnabled()).thenReturn(true);
         when(mActivity.getSystemService(WifiManager.class)).thenReturn(mWifiManager);

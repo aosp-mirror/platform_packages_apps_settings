@@ -31,8 +31,6 @@ import android.widget.TextView;
 
 import androidx.fragment.app.FragmentActivity;
 
-import com.android.settings.utils.ActivityControllerWrapper;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -66,8 +64,7 @@ public class MainClearConfirmTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mActivity = spy((FragmentActivity) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(FragmentActivity.class)).get());
+        mActivity = Robolectric.setupActivity(FragmentActivity.class);
         mMainClearConfirm = spy(new MainClearConfirm());
     }
 

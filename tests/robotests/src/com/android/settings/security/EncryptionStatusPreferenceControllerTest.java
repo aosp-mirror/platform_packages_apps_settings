@@ -32,7 +32,6 @@ import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -57,7 +56,6 @@ public class EncryptionStatusPreferenceControllerTest {
         mPreference = new Preference(mContext);
     }
 
-    @Ignore
     @Test
     @Config(qualifiers = "mcc999")
     public void isAvailable_notVisible_false() {

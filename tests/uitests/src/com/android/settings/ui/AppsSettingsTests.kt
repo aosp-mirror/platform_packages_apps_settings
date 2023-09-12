@@ -18,9 +18,8 @@ package com.android.settings.ui
 
 import android.provider.Settings
 import androidx.test.uiautomator.By
-import androidx.test.uiautomator.Direction
 import androidx.test.uiautomator.UiDevice
-import androidx.test.uiautomator.Until
+import com.android.settings.ui.testutils.SettingsTestUtils.assertHasTexts
 import com.android.settings.ui.testutils.SettingsTestUtils.clickObject
 import com.android.settings.ui.testutils.SettingsTestUtils.startMainActivityFromHomeScreen
 import com.android.settings.ui.testutils.SettingsTestUtils.waitObject
@@ -42,13 +41,8 @@ class AppsSettingsTests {
     @Test
     fun testAppSettingsListForCalculator() {
         device.clickObject(By.text("Calculator"))
-        val scrollableObj = device.findObject(By.scrollable(true))
-        for (setting in resourceTexts) {
-            scrollableObj.scrollUntil(Direction.DOWN, Until.findObject(By.text(setting)))
-            val appSetting = device.waitObject(By.text(setting))
-            assertWithMessage("Missing setting for Calculator: $setting")
-                .that(appSetting).isNotNull()
-        }
+        device.waitObject(By.text("Open"))
+        device.assertHasTexts(ON_SCREEN_TEXTS)
     }
 
     @Test
@@ -61,8 +55,8 @@ class AppsSettingsTests {
         assertWithMessage("App not enabled successfully").that(disableButton).isNotNull()
     }
 
-    companion object {
-        private val resourceTexts = arrayOf(
+    private companion object {
+        val ON_SCREEN_TEXTS = listOf(
             "Notifications",
             "Permissions",
             "Storage & cache",
@@ -70,7 +64,7 @@ class AppsSettingsTests {
             "Screen time",
             "App battery usage",
             "Language",
-            "Open by default"
+            "Unused app settings",
         )
     }
 }

@@ -25,7 +25,6 @@ import android.content.Context;
 import android.net.NetworkPolicyManager;
 
 import com.android.settings.Settings;
-import com.android.settings.utils.ActivityControllerWrapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -53,8 +52,7 @@ public class BackgroundDataConditionControllerTest {
         MockitoAnnotations.initMocks(this);
         ShadowApplication.getInstance().setSystemService(Context.NETWORK_POLICY_SERVICE,
                 mNetworkPolicyManager);
-        mActivity = (Activity) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(Activity.class)).get();
+        mActivity = Robolectric.setupActivity(Activity.class);
         mController = new BackgroundDataConditionController(mActivity, mConditionManager);
     }
 

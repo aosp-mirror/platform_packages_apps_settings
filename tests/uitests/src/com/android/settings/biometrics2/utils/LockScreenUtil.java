@@ -22,10 +22,10 @@ import static java.lang.String.format;
 import android.app.KeyguardManager;
 import android.content.Context;
 import android.os.SystemClock;
-import android.support.test.uiautomator.UiDevice;
 import android.util.Log;
 
 import androidx.test.InstrumentationRegistry;
+import androidx.test.uiautomator.UiDevice;
 
 import org.junit.Assert;
 

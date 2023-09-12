@@ -31,7 +31,6 @@ import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
 import com.android.settings.datausage.ChartDataUsagePreference.DataUsageSummaryNode;
-import com.android.settings.utils.ActivityControllerWrapper;
 import com.android.settings.widget.UsageView;
 import com.android.settingslib.net.NetworkCycleChartData;
 import com.android.settingslib.net.NetworkCycleData;
@@ -65,8 +64,8 @@ public class ChartDataUsagePreferenceTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mActivity = spy((Activity) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(Activity.class)).get());
+
+        mActivity = spy(Robolectric.setupActivity(Activity.class));
         mPreference = new ChartDataUsagePreference(mActivity, null /* attrs */);
         LayoutInflater inflater = LayoutInflater.from(mActivity);
         View view = inflater.inflate(mPreference.getLayoutResource(), null /* root */,

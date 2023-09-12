@@ -62,7 +62,6 @@ import com.android.settings.testutils.shadow.ShadowUtils;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -162,7 +161,6 @@ public class ConfirmLockPasswordTest {
                 InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
     }
 
-    @Ignore
     @Test
     public void handleNext_normalFlow_doesNotAttemptRemoteLockscreenValidation() {
         ConfirmLockPassword activity = Robolectric.buildActivity(
@@ -177,7 +175,6 @@ public class ConfirmLockPasswordTest {
         verifyNoInteractions(mRemoteLockscreenValidationClient);
     }
 
-    @Ignore
     @Test
     public void handleNext_remoteValidation_correctGuess_checkboxChecked() throws Exception {
         ConfirmDeviceCredentialBaseActivity activity =

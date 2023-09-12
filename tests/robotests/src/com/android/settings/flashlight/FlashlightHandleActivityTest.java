@@ -23,7 +23,6 @@ import android.content.Context;
 import com.android.settingslib.search.SearchIndexableRaw;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -50,7 +49,6 @@ public class FlashlightHandleActivityTest {
         assertThat(data).isEmpty();
     }
 
-    @Ignore
     @Test
     @Config(qualifiers = "mcc999")
     public void getRawDataToIndex_sliceSupported_returnData() {

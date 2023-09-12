@@ -25,7 +25,6 @@ import com.android.settings.slices.FakePreferenceController;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -45,7 +44,6 @@ public class PreferenceControllerListHelperTest {
         mContext = RuntimeEnvironment.application;
     }
 
-    @Ignore
     @Test
     @Config(qualifiers = "mcc999")
     public void getControllers_shouldReturnAList() {
@@ -59,7 +57,6 @@ public class PreferenceControllerListHelperTest {
         }
     }
 
-    @Ignore
     @Test
     @Config(qualifiers = "mcc998")
     public void getControllers_partialFailure_shouldReturnTheRest() {

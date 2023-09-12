@@ -19,13 +19,9 @@ package com.android.settings.ui
 import android.provider.Settings
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
-import androidx.test.uiautomator.By
-import androidx.test.uiautomator.Direction
 import androidx.test.uiautomator.UiDevice
-import com.android.settings.ui.testutils.SettingsTestUtils.SETTINGS_PACKAGE
+import com.android.settings.ui.testutils.SettingsTestUtils.assertHasTexts
 import com.android.settings.ui.testutils.SettingsTestUtils.startMainActivityFromHomeScreen
-import com.android.settings.ui.testutils.SettingsTestUtils.waitObject
-import com.google.common.truth.Truth.assertWithMessage
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -43,56 +39,11 @@ class AboutPhoneSettingsTests {
 
     @Test
     fun testAllMenuEntriesExist() {
-        searchForItemsAndTakeAction(device)
+        device.assertHasTexts(ON_SCREEN_TEXTS)
     }
 
-    /**
-     * Removes items found in the view and optionally takes some action.
-     */
-    private fun removeItemsAndTakeAction(device: UiDevice, itemsLeftToFind: MutableList<String>) {
-        val iterator = itemsLeftToFind.iterator()
-        while (iterator.hasNext()) {
-            val itemText = iterator.next()
-            val item = device.waitObject(By.text(itemText))
-            if (item != null) {
-                iterator.remove()
-            }
-        }
-    }
-
-    /**
-     * Searches for UI elements in the current view and optionally takes some action.
-     *
-     *
-     * Will scroll down the screen until it has found all elements or reached the bottom.
-     * This allows elements to be found and acted on even if they change order.
-     */
-    private fun searchForItemsAndTakeAction(device: UiDevice) {
-        val itemsLeftToFind = resourceTexts.toMutableList()
-        assertWithMessage("There must be at least one item to search for on the screen!")
-            .that(itemsLeftToFind)
-            .isNotEmpty()
-        var canScrollDown = true
-        while (canScrollDown && itemsLeftToFind.isNotEmpty()) {
-            removeItemsAndTakeAction(device, itemsLeftToFind)
-
-            // when we've finished searching the current view, scroll down
-            val view = device.waitObject(By.res("$SETTINGS_PACKAGE:id/main_content"))
-            canScrollDown = view?.scroll(Direction.DOWN, 1.0f) ?: false
-        }
-        // check the last items once we have reached the bottom of the view
-        removeItemsAndTakeAction(device, itemsLeftToFind)
-        assertWithMessage(
-            "The following items were not found on the screen: "
-                + itemsLeftToFind.joinToString(", ")
-        )
-            .that(itemsLeftToFind)
-            .isEmpty()
-    }
-
-    companion object {
-        // TODO: retrieve using name/ids from com.android.settings package
-        private val resourceTexts = listOf(
+    private companion object {
+        val ON_SCREEN_TEXTS = listOf(
             "Device name",
             "Legal information",
             "Regulatory labels"

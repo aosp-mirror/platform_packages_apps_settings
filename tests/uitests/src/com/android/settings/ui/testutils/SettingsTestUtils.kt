@@ -28,7 +28,7 @@ import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiObject2
 import androidx.test.uiautomator.Until
 import com.google.common.truth.Truth.assertThat
-import org.junit.Assert.fail
+import com.google.common.truth.Truth.assertWithMessage
 
 object SettingsTestUtils {
     const val SETTINGS_PACKAGE = "com.android.settings"
@@ -66,18 +66,15 @@ object SettingsTestUtils {
         return device
     }
 
-    @JvmStatic
-    fun assertTitleMatch(device: UiDevice, title: String) {
-        var maxAttempt = 5
-        while (maxAttempt-- > 0 &&
-            device.wait(
-                Until.findObject(By.res("android:id/title").text(title)),
-                TIMEOUT
-            ) == null
-        ) {
-            device.waitObject(By.res(SETTINGS_PACKAGE, "main_content"))
-                ?.scroll(Direction.DOWN, 1.0f)
+    fun UiDevice.assertHasTexts(texts: List<String>) {
+        val scrollableObj = findObject(By.scrollable(true))
+        for (text in texts) {
+            val selector = By.text(text)
+            assertWithMessage("Missing text: $text").that(
+                findObject(selector)
+                    ?: scrollableObj.scrollUntil(Direction.DOWN, Until.findObject(selector))
+                    ?: waitObject(selector)
+            ).isNotNull()
         }
-        fail("$title in Setting has not been loaded correctly")
     }
 }
