@@ -135,6 +135,11 @@ public class AvailableMediaDeviceGroupController extends BasePreferenceControlle
     }
 
     @VisibleForTesting
+    public void setFragmentManager(FragmentManager fragmentManager) {
+        mFragmentManager = fragmentManager;
+    }
+
+    @VisibleForTesting
     public void setBluetoothDeviceUpdater(BluetoothDeviceUpdater bluetoothDeviceUpdater) {
         mBluetoothDeviceUpdater = bluetoothDeviceUpdater;
     }
