@@ -27,10 +27,11 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.os.Flags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.safetycenter.SafetyEvent;
 import android.safetycenter.SafetySourceData;
 import android.safetycenter.SafetySourceStatus;
-import android.util.FeatureFlagUtils;
 
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -39,6 +40,7 @@ import com.android.settings.safetycenter.SafetyCenterManagerWrapper;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -51,15 +53,13 @@ public class PrivateSpaceSafetySourceTest {
             new SafetyEvent.Builder(SAFETY_EVENT_TYPE_DEVICE_REBOOTED).build();
     private Context mContext = ApplicationProvider.getApplicationContext();
     @Mock private SafetyCenterManagerWrapper mSafetyCenterManagerWrapper;
+    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     /** Required setup before a test. */
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         SafetyCenterManagerWrapper.sInstance = mSafetyCenterManagerWrapper;
-
-        FeatureFlagUtils
-                .setEnabled(mContext, FeatureFlagUtils.SETTINGS_PRIVATE_SPACE_SETTINGS, true);
     }
 
     /** Required setup after a test. */
@@ -83,6 +83,7 @@ public class PrivateSpaceSafetySourceTest {
     @Test
     public void onDeviceRebootedEvent_whenSafetyCenterEnabled_setsData() {
         when(mSafetyCenterManagerWrapper.isEnabled(mContext)).thenReturn(true);
+        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE);
 
         PrivateSpaceSafetySource.setSafetySourceData(mContext, EVENT_TYPE_DEVICE_REBOOTED);
 
@@ -90,13 +91,11 @@ public class PrivateSpaceSafetySourceTest {
                 any(), eq(SAFETY_SOURCE_ID), any(), eq(EVENT_TYPE_DEVICE_REBOOTED));
     }
 
-    // TODO(b/295516544): Modify this test for the new trunk stable flag instead when available.
     /** Tests that when the feature is disabled null data is set. */
     @Test
     public void setSafetySourceData_whenFeatureDisabled_setsNullData() {
         when(mSafetyCenterManagerWrapper.isEnabled(mContext)).thenReturn(true);
-        FeatureFlagUtils
-                .setEnabled(mContext, FeatureFlagUtils.SETTINGS_PRIVATE_SPACE_SETTINGS, false);
+        mSetFlagsRule.disableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE);
 
         PrivateSpaceSafetySource.setSafetySourceData(mContext, EVENT_TYPE_DEVICE_REBOOTED);
 
@@ -105,15 +104,13 @@ public class PrivateSpaceSafetySourceTest {
                 any(), eq(SAFETY_SOURCE_ID), captor.capture(), eq(EVENT_TYPE_DEVICE_REBOOTED));
         SafetySourceData safetySourceData = captor.getValue();
         assertThat(safetySourceData).isNull();
-
-        FeatureFlagUtils
-                .setEnabled(mContext, FeatureFlagUtils.SETTINGS_PRIVATE_SPACE_SETTINGS, true);
     }
 
     /** Tests that setSafetySourceData sets the source status enabled. */
     @Test
     public void setSafetySourceData_setsEnabled() {
         when(mSafetyCenterManagerWrapper.isEnabled(mContext)).thenReturn(true);
+        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE);
 
         PrivateSpaceSafetySource.setSafetySourceData(mContext, EVENT_TYPE_DEVICE_REBOOTED);
 
@@ -129,6 +126,7 @@ public class PrivateSpaceSafetySourceTest {
     @Test
     public void setSafetySourceData_setsPsIntent() {
         when(mSafetyCenterManagerWrapper.isEnabled(mContext)).thenReturn(true);
+        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE);
 
         PrivateSpaceSafetySource.setSafetySourceData(mContext, EVENT_TYPE_DEVICE_REBOOTED);
 
