@@ -17,25 +17,25 @@
 package com.android.settings.ui
 
 import android.provider.Settings
+import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiDevice
 import com.android.settings.ui.testutils.SettingsTestUtils.assertHasTexts
+import com.android.settings.ui.testutils.SettingsTestUtils.assertObject
 import com.android.settings.ui.testutils.SettingsTestUtils.clickObject
 import com.android.settings.ui.testutils.SettingsTestUtils.startMainActivityFromHomeScreen
 import com.android.settings.ui.testutils.SettingsTestUtils.waitObject
-import com.google.common.truth.Truth.assertWithMessage
 import org.junit.Before
 import org.junit.Test
 
 /** Verifies basic functionality of the About Phone screen  */
 class AppsSettingsTests {
-    private lateinit var device: UiDevice
+    private val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
 
     @Before
     fun setUp() {
-        device = startMainActivityFromHomeScreen(Settings.ACTION_MANAGE_APPLICATIONS_SETTINGS)
-        val title = device.waitObject(By.text("All apps"))
-        assertWithMessage("Could not find Settings > Apps screen").that(title).isNotNull()
+        device.startMainActivityFromHomeScreen(Settings.ACTION_MANAGE_APPLICATIONS_SETTINGS)
+        device.assertObject(By.text("All apps"))
     }
 
     @Test
@@ -51,8 +51,7 @@ class AppsSettingsTests {
         device.clickObject(By.text("Disable"))
         device.clickObject(By.text("Disable app"))  // Click on "Disable app" on dialog.
         device.clickObject(By.text("Enable"))
-        val disableButton = device.waitObject(By.text("Disable"))
-        assertWithMessage("App not enabled successfully").that(disableButton).isNotNull()
+        device.assertObject(By.text("Disable"))
     }
 
     private companion object {

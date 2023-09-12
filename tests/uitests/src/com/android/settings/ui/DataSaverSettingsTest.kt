@@ -18,26 +18,26 @@ package com.android.settings.ui
 
 import android.provider.Settings
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiDevice
+import com.android.settings.ui.testutils.SettingsTestUtils.assertObject
 import com.android.settings.ui.testutils.SettingsTestUtils.startMainActivityFromHomeScreen
-import com.android.settings.ui.testutils.SettingsTestUtils.waitObject
-import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class DataSaverSettingsTest {
-    private lateinit var device: UiDevice
+    private val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
 
     @Before
     fun setUp() {
-        device = startMainActivityFromHomeScreen(Settings.ACTION_DATA_SAVER_SETTINGS)
+        device.startMainActivityFromHomeScreen(Settings.ACTION_DATA_SAVER_SETTINGS)
     }
 
     @Test
     fun hasSwitchBar() {
-        assertThat(device.waitObject(By.text("Use Data Saver"))).isNotNull()
+        device.assertObject(By.text("Use Data Saver"))
     }
 }
