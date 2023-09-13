@@ -505,7 +505,7 @@
     <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"Выберите блокировку экрана"</string>
     <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"Блокировка для рабочего профиля"</string>
     <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Блокировка для раб. профиля"</string>
-    <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"Для более надежной защиты настройте дополнительный способ блокировки экрана."</string>
+    <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"Для более надежной защиты настройте дополнительный способ разблокировки экрана."</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Выберите дополнительный способ разблокировки экрана."</string>
     <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"Если вы забыли данные для разблокировки экрана, восстановить их невозможно."</string>
     <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"Задайте отдельную блокировку для рабочего профиля."</string>
@@ -3150,7 +3150,7 @@
     <string name="notification_badging_title" msgid="5469616894819568917">"Значок уведомления на значке приложения"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Всплывающие чаты"</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Всплывающие чаты"</string>
-    <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"Показывать всплывающий чат"</string>
+    <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"Всплывающий чат"</string>
     <string name="bubbles_conversation_toggle_summary" msgid="720229032254323578">"Показывать плавающий значок поверх приложений"</string>
     <string name="bubbles_feature_disabled_dialog_title" msgid="1794193899792284007">"Включить всплывающие чаты на устройстве?"</string>
     <string name="bubbles_feature_disabled_dialog_text" msgid="5275666953364031055">"Если включить всплывающие чаты для этого приложения, они также будут включены на уровне устройства.\n\nЭто отразится на других приложениях и разговорах, которые могут показывать всплывающие чаты."</string>
@@ -4080,7 +4080,7 @@
     <string name="autofill_app" msgid="7595308061826307921">"Автозаполнение"</string>
     <string name="default_autofill_app" msgid="372234803718251606">"Сервис автозаполнения по умолчанию"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"Пароли"</string>
-    <string name="credman_chosen_app_title" msgid="4547405511458518096">"Сервисы сохранения паролей, ключей доступа и данных"</string>
+    <string name="credman_chosen_app_title" msgid="4547405511458518096">"Сервисы для паролей, ключей доступа и данных"</string>
     <string name="credman_credentials" msgid="4931371941253324143">"Дополнительные поставщики"</string>
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# пароль}one{# пароль}few{# пароля}many{# паролей}other{# пароля}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"автозаполнение, автоматически, заполнение, пароль"</string>
@@ -4088,13 +4088,13 @@
     <string name="credman_autofill_keywords" msgid="701180623776848914">"авто, заполнение, автозаполнение, данные, ключ доступа, пароль"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Подтвердите, что вы доверяете этому приложению&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; анализирует содержимое экрана и находит поля, которые можно заполнить автоматически."</string>
     <string name="credman_autofill_confirmation_message" msgid="4951846866327737417">"&lt;b&gt;Использовать приложение \"&lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;\"?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Приложение \"&lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;\" анализирует содержимое экрана и находит поля, которые можно заполнить автоматически. Новые пароли, ключи доступа и другие данные будут сохраняться в нем."</string>
-    <string name="credman_picker_title" msgid="2642776965060619988">"Сервисы для хранения паролей, ключей доступа и данных"</string>
+    <string name="credman_picker_title" msgid="2642776965060619988">"Сервисы для паролей, ключей доступа и данных"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Отключить %1$s?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Отключить этот сервис?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt;Пароли, ключи доступа, способы оплаты и другая сохраненная информация не будут подставляться при входе. Чтобы использовать эти данные, выберите пароль, ключ доступа или сервис."</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"Использовать %1$s?"</string>
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"%1$s анализирует содержимое экрана и находит поля, которые можно заполнить автоматически."</string>
-    <string name="credman_error_message_title" msgid="4741457523969373713">"Количество сервисов сохранения паролей, ключей доступа и данных ограничено"</string>
-    <string name="credman_error_message" msgid="6793314648458925172">"Активными одновременно могут быть не более пяти сервисов сохранения паролей, ключей доступа и данных. Чтобы добавить новый сервис, отключите уже используемый."</string>
+    <string name="credman_error_message_title" msgid="4741457523969373713">"Количество сервисов для паролей, ключей доступа и данных ограничено"</string>
+    <string name="credman_error_message" msgid="6793314648458925172">"Активными одновременно могут быть не более пяти сервисов для паролей, ключей доступа и данных. Чтобы добавить новый сервис, отключите уже используемый."</string>
     <string name="credman_confirmation_message_positive_button" msgid="2812613187691345361">"Отключить"</string>
     <string name="debug_autofill_category" msgid="5998163555428196185">"Автозаполнение"</string>
     <string name="autofill_logging_level_title" msgid="3733958845861098307">"Журнал"</string>
@@ -4694,7 +4694,7 @@
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Приложения, установленные в течение # последнего месяца}one{Приложения, установленные в течение # последнего месяца}few{Приложения, установленные в течение # последних месяцев}many{Приложения, установленные в течение # последних месяцев}other{Приложения, установленные в течение # последнего месяца}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Приложения, установленные более # месяца назад}one{Приложения, установленные более # месяца назад}few{Приложения, установленные более # месяцев назад}many{Приложения, установленные более # месяцев назад}other{Приложения, установленные более # месяца назад}}"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Сканер отпечатков пальцев"</string>
-    <string name="flash_notifications_title" msgid="4490438861180492311">"Уведомления со вспышкой"</string>
+    <string name="flash_notifications_title" msgid="4490438861180492311">"Уведомления с подсветкой"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Об уведомлениях со вспышкой"</string>
     <string name="flash_notifications_summary_off" msgid="6056282996770691461">"Выключено"</string>
     <string name="flash_notifications_summary_on_camera" msgid="3286405833586333730">"Вкл. (вспышка камеры)"</string>
@@ -4702,7 +4702,7 @@
     <string name="flash_notifications_summary_on_camera_and_screen" msgid="2326268141063768701">"Вкл. (вспышка камеры и подсветка экрана)"</string>
     <string name="flash_notifications_intro" msgid="8409873413480928249">"Вспышка камеры или экран замигают, когда придет уведомление или зазвучит будильник."</string>
     <string name="flash_notifications_intro_without_camera_flash" msgid="6297337174487793891">"Экран замигает, когда придет уведомление или зазвучит будильник."</string>
-    <string name="flash_notifications_note" msgid="2426125248448055075">"Используйте уведомление со вспышкой осторожно, если вы чувствительны к свету."</string>
+    <string name="flash_notifications_note" msgid="2426125248448055075">"Используйте уведомление с подсветкой осторожно, если вы чувствительны к свету."</string>
     <string name="flash_notifications_keywords" msgid="2458759275318514836">"вспышка, световой сигнал, мигать, слабослышащий, потеря слуха"</string>
     <string name="flash_notifications_preview" msgid="5320176885050440874">"Посмотреть"</string>
     <string name="camera_flash_notification_title" msgid="2475084876382922732">"Вспышка камеры"</string>
