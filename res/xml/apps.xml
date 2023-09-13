@@ -80,18 +80,6 @@
         android:order="10"/>
 
     <Preference
-        android:key="aspect_ratio_apps"
-        android:title="@string/aspect_ratio_title"
-        android:summary="@string/summary_placeholder"
-        android:order="14"
-        settings:controller="com.android.settings.applications.appcompat.UserAspectRatioAppsPreferenceController"
-        android:fragment="com.android.settings.applications.manageapplications.ManageApplications">
-        <extra android:name="classname"
-               android:value="com.android.settings.Settings$UserAspectRatioAppListActivity"/>
-        <intent android:action="android.settings.MANAGE_USER_ASPECT_RATIO_SETTINGS"/>
-    </Preference>
-
-    <Preference
         android:key="hibernated_apps"
         android:title="@string/unused_apps"
         android:summary="@string/summary_placeholder"
@@ -118,5 +106,24 @@
         android:fragment="com.android.settings.applications.specialaccess.SpecialAccessSettings"
         android:title="@string/special_access"
         android:order="20"/>
+
+    <PreferenceCategory
+        android:key="advanced_category"
+        android:title="@string/advanced_apps"
+        android:order="21"
+        android:visibility="gone"
+        settings:searchable="false"/>
+
+    <Preference
+        android:key="aspect_ratio_apps"
+        android:title="@string/aspect_ratio_title"
+        android:summary="@string/summary_placeholder"
+        android:order="22"
+        settings:controller="com.android.settings.applications.appcompat.UserAspectRatioAppsPreferenceController"
+        android:fragment="com.android.settings.applications.manageapplications.ManageApplications">
+        <extra android:name="classname"
+               android:value="com.android.settings.Settings$UserAspectRatioAppListActivity"/>
+        <intent android:action="android.settings.MANAGE_USER_ASPECT_RATIO_SETTINGS"/>
+    </Preference>
 
 </PreferenceScreen>
