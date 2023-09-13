@@ -473,6 +473,9 @@ public final class ConvertUtils {
                 .setConsumePower(batteryDiffEntry.mConsumePower)
                 .setForegroundUsageConsumePower(batteryDiffEntry.mForegroundUsageConsumePower)
                 .setBackgroundUsageConsumePower(batteryDiffEntry.mBackgroundUsageConsumePower)
+                .setForegroundServiceUsageConsumePower(
+                        batteryDiffEntry.mForegroundServiceUsageConsumePower)
+                .setCachedUsageConsumePower(batteryDiffEntry.mCachedUsageConsumePower)
                 .setForegroundUsageTime(batteryDiffEntry.mForegroundUsageTimeInMs)
                 .setBackgroundUsageTime(batteryDiffEntry.mBackgroundUsageTimeInMs)
                 .setScreenOnTime(batteryDiffEntry.mScreenOnTimeInMs);
@@ -525,9 +528,9 @@ public final class ConvertUtils {
                 batteryUsageDiff.getScreenOnTime(),
                 batteryUsageDiff.getConsumePower(),
                 batteryUsageDiff.getForegroundUsageConsumePower(),
-                /*foregroundServiceUsageConsumePower=*/ 0,
+                batteryUsageDiff.getForegroundServiceUsageConsumePower(),
                 batteryUsageDiff.getBackgroundUsageConsumePower(),
-                /*cachedUsageConsumePower=*/ 0);
+                batteryUsageDiff.getCachedUsageConsumePower());
     }
 
     static BatteryDiffData convertToBatteryDiffData(

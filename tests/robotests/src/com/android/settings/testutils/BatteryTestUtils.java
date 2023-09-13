@@ -283,6 +283,9 @@ public class BatteryTestUtils {
                 .setKey(PowerAnomalyKey.KEY_APP)
                 .setScore(2.0f)
                 .setWarningItemInfo(WarningItemInfo.newBuilder()
+                        .setDismissRecordKey("KEY_APP_1")
+                        .setStartTimestamp(1694361600000L)  // 2023-09-11 00:00:00
+                        .setEndTimestamp(1694368800000L)    // 2023-09-11 02:00:00
                         .setTitleString("Chrome used more battery than usual in foreground")
                         .setMainButtonString("Check")
                         .setCancelButtonString("Got it")

@@ -18,6 +18,10 @@ package com.android.settings.fuelgauge.batteryusage;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import android.util.Pair;
+
+import com.android.settings.testutils.BatteryTestUtils;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -210,5 +214,30 @@ public class BatteryLevelDataTest {
                 .isEqualTo(List.of(1691586000166L, 1691589600000L));
         assertThat(result.getHourlyBatteryLevelsPerDay().get(0).getLevels())
                 .isEqualTo(List.of(100, 98));
+    }
+
+    @Test
+    public void getIndexByTimestamps_returnExpectedResult() {
+        final BatteryLevelData batteryLevelData =
+                new BatteryLevelData(Map.of(
+                        1694354400000L, 1,      // 2023-09-10 22:00:00
+                        1694361600000L, 2,      // 2023-09-11 00:00:00
+                        1694368800000L, 3));    // 2023-09-11 02:00:00
+        final PowerAnomalyEvent event = BatteryTestUtils.createAppAnomalyEvent();
+
+        assertThat(batteryLevelData.getIndexByTimestamps(0L, 0L))
+                .isEqualTo(Pair.create(BatteryChartViewModel.SELECTED_INDEX_INVALID,
+                        BatteryChartViewModel.SELECTED_INDEX_INVALID));
+        assertThat(batteryLevelData.getIndexByTimestamps(1694361600000L + 1L, 1694368800000L + 1L))
+                .isEqualTo(Pair.create(BatteryChartViewModel.SELECTED_INDEX_INVALID,
+                        BatteryChartViewModel.SELECTED_INDEX_INVALID));
+        assertThat(batteryLevelData.getIndexByTimestamps(1694361600000L, 1694368800000L))
+                .isEqualTo(Pair.create(1, 0));
+        assertThat(batteryLevelData.getIndexByTimestamps(1694361600000L + 1L, 1694368800000L - 1L))
+                .isEqualTo(Pair.create(1, 0));
+        assertThat(batteryLevelData.getIndexByTimestamps(
+                event.getWarningItemInfo().getStartTimestamp(),
+                event.getWarningItemInfo().getEndTimestamp()))
+                .isEqualTo(Pair.create(1, 0));
     }
 }

@@ -16,13 +16,10 @@
 
 package com.android.settings.fuelgauge.batteryusage;
 
-import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -32,9 +29,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
-import com.android.settings.SettingsActivity;
-import com.android.settings.core.SubSettingLauncher;
-import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
@@ -47,11 +41,17 @@ public class BatteryTipsCardPreference extends Preference implements View.OnClic
 
     private static final String TAG = "BatteryTipsCardPreference";
 
-    private final PowerUsageFeatureProvider mPowerUsageFeatureProvider;
-    private final MetricsFeatureProvider mMetricsFeatureProvider;
+    interface OnConfirmListener {
+        void onConfirm();
+    }
 
-    private String mAnomalyEventId;
-    private PowerAnomalyKey mPowerAnomalyKey;
+    interface OnRejectListener {
+        void onReject();
+    }
+
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
+    private OnConfirmListener mOnConfirmListener;
+    private OnRejectListener mOnRejectListener;
     private int mIconResourceId = 0;
     private int mMainButtonStrokeColorResourceId = 0;
 
@@ -59,21 +59,21 @@ public class BatteryTipsCardPreference extends Preference implements View.OnClic
     CharSequence mMainButtonLabel;
     @VisibleForTesting
     CharSequence mDismissButtonLabel;
-    @VisibleForTesting
-    String mDestinationComponentName;
-    @VisibleForTesting
-    String mPreferenceHighlightKey;
-    @VisibleForTesting
-    Integer mSourceMetricsCategory;
 
     public BatteryTipsCardPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         setLayoutResource(R.layout.battery_tips_card);
         setSelectable(false);
         final FeatureFactory featureFactory = FeatureFactory.getFactory(context);
-        mPowerUsageFeatureProvider =  featureFactory.getPowerUsageFeatureProvider(context);
         mMetricsFeatureProvider = featureFactory.getMetricsFeatureProvider();
-        mPowerAnomalyKey = null;
+    }
+
+    public void setOnConfirmListener(OnConfirmListener listener) {
+        mOnConfirmListener = listener;
+    }
+
+    public void setOnRejectListener(OnRejectListener listener) {
+        mOnRejectListener = listener;
     }
 
     /**
@@ -97,13 +97,6 @@ public class BatteryTipsCardPreference extends Preference implements View.OnClic
     }
 
     /**
-     * Sets the anomaly event id which is used in metrics.
-     */
-    public void setAnomalyEventId(final String anomalyEventId) {
-        mAnomalyEventId = anomalyEventId;
-    }
-
-    /**
      * Sets the label of main button in tips card.
      */
     public void setMainButtonLabel(CharSequence label) {
@@ -123,50 +116,18 @@ public class BatteryTipsCardPreference extends Preference implements View.OnClic
         }
     }
 
-    /**
-     * Sets the power anomaly key of battery tips card.
-     */
-    public void setPowerAnomalyKey(final PowerAnomalyKey powerAnomalyKey) {
-        mPowerAnomalyKey = powerAnomalyKey;
-    }
-
-    /**
-     * Sets the info of target fragment launched by main button.
-     */
-    public void setMainButtonLauncherInfo(final String destinationClassName,
-            final Integer sourceMetricsCategory, final String highlightKey) {
-        mDestinationComponentName = destinationClassName;
-        mSourceMetricsCategory = sourceMetricsCategory;
-        mPreferenceHighlightKey = highlightKey;
-    }
-
     @Override
     public void onClick(View view) {
         final int viewId = view.getId();
         if (viewId == R.id.main_button || viewId == R.id.tips_card) {
-            if (TextUtils.isEmpty(mDestinationComponentName)) {
-                return;
-            }
-            Bundle arguments = Bundle.EMPTY;
-            if (!TextUtils.isEmpty(mPreferenceHighlightKey)) {
-                arguments = new Bundle(1);
-                arguments.putString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY,
-                        mPreferenceHighlightKey);
-            }
-            new SubSettingLauncher(getContext())
-                    .setDestination(mDestinationComponentName)
-                    .setSourceMetricsCategory(mSourceMetricsCategory)
-                    .setArguments(arguments)
-                    .launch();
             setVisible(false);
-            mMetricsFeatureProvider.action(
-                    getContext(), SettingsEnums.ACTION_BATTERY_TIPS_CARD_ACCEPT, mAnomalyEventId);
+            if (mOnConfirmListener != null) {
+                mOnConfirmListener.onConfirm();
+            }
         } else if (viewId == R.id.dismiss_button) {
             setVisible(false);
-            mMetricsFeatureProvider.action(
-                    getContext(), SettingsEnums.ACTION_BATTERY_TIPS_CARD_DISMISS, mAnomalyEventId);
-            if (mPowerAnomalyKey != null) {
-                DatabaseUtils.setDismissedPowerAnomalyKeys(getContext(), mPowerAnomalyKey.name());
+            if (mOnRejectListener != null) {
+                mOnRejectListener.onReject();
             }
         }
     }
@@ -191,17 +152,5 @@ public class BatteryTipsCardPreference extends Preference implements View.OnClic
         if (mIconResourceId != 0) {
             ((ImageView) view.findViewById(R.id.icon)).setImageResource(mIconResourceId);
         }
-
-        if (!mPowerUsageFeatureProvider.isBatteryTipsFeedbackEnabled()) {
-            return;
-        }
-        view.findViewById(R.id.tips_card)
-                .setBackgroundResource(R.drawable.battery_tips_half_rounded_top_bg);
-        view.findViewById(R.id.feedback_card).setVisibility(View.VISIBLE);
-
-        ImageButton thumbUpButton = (ImageButton) view.findViewById(R.id.thumb_up);
-        thumbUpButton.setOnClickListener(this);
-        ImageButton thumbDownButton = (ImageButton) view.findViewById(R.id.thumb_down);
-        thumbDownButton.setOnClickListener(this);
     }
 }
