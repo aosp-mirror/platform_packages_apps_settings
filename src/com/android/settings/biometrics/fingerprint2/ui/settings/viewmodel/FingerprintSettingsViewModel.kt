@@ -18,26 +18,27 @@ package com.android.settings.biometrics.fingerprint2.ui.settings.viewmodel
 
 import android.hardware.fingerprint.FingerprintManager
 import android.hardware.fingerprint.FingerprintSensorProperties
-import android.hardware.fingerprint.FingerprintSensorPropertiesInternal
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.android.settings.biometrics.fingerprint2.domain.interactor.FingerprintManagerInteractor
 import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintAuthAttemptViewModel
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintStateViewModel
 import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.combineTransform
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.last
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.sample
+import kotlinx.coroutines.flow.transform
 import kotlinx.coroutines.flow.transformLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -52,12 +53,29 @@ class FingerprintSettingsViewModel(
   private val backgroundDispatcher: CoroutineDispatcher,
   private val navigationViewModel: FingerprintSettingsNavigationViewModel,
 ) : ViewModel() {
-
-  private val _consumerShouldAuthenticate: MutableStateFlow<Boolean> = MutableStateFlow(false)
-
-  private val fingerprintSensorPropertiesInternal:
-    MutableStateFlow<List<FingerprintSensorPropertiesInternal>?> =
+  private val _enrolledFingerprints: MutableStateFlow<List<FingerprintViewModel>?> =
     MutableStateFlow(null)
+
+  /** Represents the stream of enrolled fingerprints. */
+  val enrolledFingerprints: Flow<List<FingerprintViewModel>> =
+    _enrolledFingerprints.asStateFlow().filterNotNull().filterOnlyWhenSettingsIsShown()
+
+  /** Represents the stream of the information of "Add Fingerprint" preference. */
+  val addFingerprintPrefInfo: Flow<Pair<Boolean, Int>> =
+    _enrolledFingerprints.filterOnlyWhenSettingsIsShown().transform {
+      emit(
+        Pair(
+          fingerprintManagerInteractor.canEnrollFingerprints.first(),
+          fingerprintManagerInteractor.maxEnrollableFingerprints.first()
+        )
+      )
+    }
+
+  /** Represents the stream of visibility of sfps preference. */
+  val isSfpsPrefVisible: Flow<Boolean> =
+    _enrolledFingerprints.filterOnlyWhenSettingsIsShown().transform {
+      emit(fingerprintManagerInteractor.hasSideFps() && !it.isNullOrEmpty())
+    }
 
   private val _isShowingDialog: MutableStateFlow<PreferenceViewModel?> = MutableStateFlow(null)
   val isShowingDialog =
@@ -69,16 +87,13 @@ class FingerprintSettingsViewModel(
       }
     }
 
-  private val _fingerprintStateViewModel: MutableStateFlow<FingerprintStateViewModel?> =
-    MutableStateFlow(null)
-  val fingerprintState: Flow<FingerprintStateViewModel?> =
-    _fingerprintStateViewModel.combineTransform(navigationViewModel.nextStep) {
-      settingsShowingViewModel,
-      currStep ->
-      if (currStep != null && currStep is ShowSettings) {
-        emit(settingsShowingViewModel)
-      }
-    }
+  private val _consumerShouldAuthenticate: MutableStateFlow<Boolean> = MutableStateFlow(false)
+
+  private val _fingerprintSensorType: Flow<Int> =
+    fingerprintManagerInteractor.sensorPropertiesInternal.transform { it?.sensorType }
+
+  private val _sensorNullOrEmpty: Flow<Boolean> =
+    fingerprintManagerInteractor.sensorPropertiesInternal.map{it ==null}
 
   private val _isLockedOut: MutableStateFlow<FingerprintAuthAttemptViewModel.Error?> =
     MutableStateFlow(null)
@@ -86,7 +101,7 @@ class FingerprintSettingsViewModel(
   private val _authSucceeded: MutableSharedFlow<FingerprintAuthAttemptViewModel.Success?> =
     MutableSharedFlow()
 
-  private val attemptsSoFar: MutableStateFlow<Int> = MutableStateFlow(0)
+  private val _attemptsSoFar: MutableStateFlow<Int> = MutableStateFlow(0)
   /**
    * This is a very tricky flow. The current fingerprint manager APIs are not robust, and a proper
    * implementation would take quite a lot of code to implement, it might be easier to rewrite
@@ -101,11 +116,20 @@ class FingerprintSettingsViewModel(
         _isShowingDialog,
         navigationViewModel.nextStep,
         _consumerShouldAuthenticate,
-        _fingerprintStateViewModel,
+        _enrolledFingerprints,
         _isLockedOut,
-        attemptsSoFar,
-        fingerprintSensorPropertiesInternal
-      ) { dialogShowing, step, resume, fingerprints, isLockedOut, attempts, sensorProps ->
+        _attemptsSoFar,
+        _fingerprintSensorType,
+        _sensorNullOrEmpty
+      ) {
+        dialogShowing,
+        step,
+        resume,
+        fingerprints,
+        isLockedOut,
+        attempts,
+        sensorType,
+        sensorNullOrEmpty ->
         if (DEBUG) {
           Log.d(
             TAG,
@@ -115,13 +139,13 @@ class FingerprintSettingsViewModel(
               "fingerprints=${fingerprints}," +
               "lockedOut=${isLockedOut}," +
               "attempts=${attempts}," +
-              "sensorProps=${sensorProps}"
+              "sensorType=${sensorType}" +
+              "sensorNullOrEmpty=${sensorNullOrEmpty}"
           )
         }
-        if (sensorProps.isNullOrEmpty()) {
+        if (sensorNullOrEmpty) {
           return@combine false
         }
-        val sensorType = sensorProps[0].sensorType
         if (
           listOf(
               FingerprintSensorProperties.TYPE_UDFPS_OPTICAL,
@@ -133,7 +157,7 @@ class FingerprintSettingsViewModel(
         }
 
         if (step != null && step is ShowSettings) {
-          if (fingerprints?.fingerprintViewModels?.isNotEmpty() == true) {
+          if (fingerprints?.isNotEmpty() == true) {
             return@combine dialogShowing == null && isLockedOut == null && resume && attempts < 15
           }
         }
@@ -173,17 +197,11 @@ class FingerprintSettingsViewModel(
 
   init {
     viewModelScope.launch {
-      fingerprintSensorPropertiesInternal.update {
-        fingerprintManagerInteractor.sensorPropertiesInternal()
-      }
-    }
-
-    viewModelScope.launch {
       navigationViewModel.nextStep.filterNotNull().collect {
         _isShowingDialog.update { null }
         if (it is ShowSettings) {
           // reset state
-          updateSettingsData()
+          updateEnrolledFingerprints()
         }
       }
     }
@@ -200,7 +218,7 @@ class FingerprintSettingsViewModel(
   }
 
   override fun toString(): String {
-    return "userId: $userId\n" + "fingerprintState: ${_fingerprintStateViewModel.value}\n"
+    return "userId: $userId\n" + "enrolledFingerprints: ${_enrolledFingerprints.value}\n"
   }
 
   /** The fingerprint delete button has been clicked. */
@@ -229,7 +247,7 @@ class FingerprintSettingsViewModel(
   fun deleteFingerprint(fp: FingerprintViewModel) {
     viewModelScope.launch(backgroundDispatcher) {
       if (fingerprintManagerInteractor.removeFingerprint(fp)) {
-        updateSettingsData()
+        updateEnrolledFingerprints()
       }
     }
   }
@@ -238,51 +256,38 @@ class FingerprintSettingsViewModel(
   fun renameFingerprint(fp: FingerprintViewModel, newName: String) {
     viewModelScope.launch {
       fingerprintManagerInteractor.renameFingerprint(fp, newName)
-      updateSettingsData()
+      updateEnrolledFingerprints()
     }
   }
 
   private fun attemptingAuth() {
-    attemptsSoFar.update { it + 1 }
+    _attemptsSoFar.update { it + 1 }
   }
 
   private suspend fun onAuthSuccess(success: FingerprintAuthAttemptViewModel.Success) {
     _authSucceeded.emit(success)
-    attemptsSoFar.update { 0 }
+    _attemptsSoFar.update { 0 }
   }
 
   private fun lockout(attemptViewModel: FingerprintAuthAttemptViewModel.Error) {
     _isLockedOut.update { attemptViewModel }
   }
 
-  /**
-   * This function is sort of a hack, it's used whenever we want to check for fingerprint state
-   * updates.
-   */
-  private suspend fun updateSettingsData() {
-    Log.d(TAG, "update settings data called")
-    val fingerprints = fingerprintManagerInteractor.enrolledFingerprints.last()
-    val canEnrollFingerprint =
-      fingerprintManagerInteractor.canEnrollFingerprints(fingerprints.size).last()
-    val maxFingerprints = fingerprintManagerInteractor.maxEnrollableFingerprints.last()
-    val hasSideFps = fingerprintManagerInteractor.hasSideFps()
-    val pressToAuthEnabled = fingerprintManagerInteractor.pressToAuthEnabled()
-    _fingerprintStateViewModel.update {
-      FingerprintStateViewModel(
-        fingerprints,
-        canEnrollFingerprint,
-        maxFingerprints,
-        hasSideFps,
-        pressToAuthEnabled,
-        fingerprintManagerInteractor.sensorPropertiesInternal().first(),
-      )
-    }
+  private suspend fun updateEnrolledFingerprints() {
+    _enrolledFingerprints.update { fingerprintManagerInteractor.enrolledFingerprints.first() }
   }
 
   /** Used to indicate whether the consumer of the view model is ready for authentication. */
   fun shouldAuthenticate(authenticate: Boolean) {
     _consumerShouldAuthenticate.update { authenticate }
   }
+
+  private fun <T> Flow<T>.filterOnlyWhenSettingsIsShown() =
+    combineTransform(navigationViewModel.nextStep) { value, currStep ->
+      if (currStep != null && currStep is ShowSettings) {
+        emit(value)
+      }
+    }
 
   class FingerprintSettingsViewModelFactory(
     private val userId: Int,
@@ -307,7 +312,7 @@ class FingerprintSettingsViewModel(
   }
 }
 
-private inline fun <T1, T2, T3, T4, T5, T6, T7, R> combine(
+private inline fun <T1, T2, T3, T4, T5, T6, T7, T8, R> combine(
   flow: Flow<T1>,
   flow2: Flow<T2>,
   flow3: Flow<T3>,
@@ -315,9 +320,10 @@ private inline fun <T1, T2, T3, T4, T5, T6, T7, R> combine(
   flow5: Flow<T5>,
   flow6: Flow<T6>,
   flow7: Flow<T7>,
-  crossinline transform: suspend (T1, T2, T3, T4, T5, T6, T7) -> R
+  flow8: Flow<T8>,
+  crossinline transform: suspend (T1, T2, T3, T4, T5, T6, T7, T8) -> R
 ): Flow<R> {
-  return combine(flow, flow2, flow3, flow4, flow5, flow6, flow7) { args: Array<*> ->
+  return combine(flow, flow2, flow3, flow4, flow5, flow6, flow7, flow8) { args: Array<*> ->
     @Suppress("UNCHECKED_CAST")
     transform(
       args[0] as T1,
@@ -327,6 +333,7 @@ private inline fun <T1, T2, T3, T4, T5, T6, T7, R> combine(
       args[4] as T5,
       args[5] as T6,
       args[6] as T7,
+      args[7] as T8,
     )
   }
 }

@@ -47,6 +47,12 @@ interface FingerprintManagerInteractor {
   /** Returns the max enrollable fingerprints, note during SUW this might be 1 */
   val maxEnrollableFingerprints: Flow<Int>
 
+  /** Returns true if a user can enroll a fingerprint false otherwise. */
+  val canEnrollFingerprints: Flow<Boolean>
+
+  /** Retrieves the sensor properties of a device */
+  val sensorPropertiesInternal: Flow<FingerprintSensorPropertiesInternal?>
+
   /** Runs [FingerprintManager.authenticate] */
   suspend fun authenticate(): FingerprintAuthAttemptViewModel
 
@@ -59,9 +65,6 @@ interface FingerprintManagerInteractor {
    * @return A [Pair] of the challenge and challenge token
    */
   suspend fun generateChallenge(gateKeeperPasswordHandle: Long): Pair<Long, ByteArray>
-
-  /** Returns true if a user can enroll a fingerprint false otherwise. */
-  fun canEnrollFingerprints(numFingerprints: Int): Flow<Boolean>
 
   /**
    * Removes the given fingerprint, returning true if it was successfully removed and false
@@ -77,9 +80,6 @@ interface FingerprintManagerInteractor {
 
   /** Indicates if the press to auth feature has been enabled */
   suspend fun pressToAuthEnabled(): Boolean
-
-  /** Retrieves the sensor properties of a device */
-  suspend fun sensorPropertiesInternal(): List<FingerprintSensorPropertiesInternal>
 }
 
 class FingerprintManagerInteractorImpl(
@@ -120,8 +120,15 @@ class FingerprintManagerInteractorImpl(
     )
   }
 
-  override fun canEnrollFingerprints(numFingerprints: Int): Flow<Boolean> = flow {
-    emit(numFingerprints < maxFingerprints)
+  override val canEnrollFingerprints: Flow<Boolean> = flow {
+    emit(
+      fingerprintManager.getEnrolledFingerprints(applicationContext.userId).size < maxFingerprints
+    )
+  }
+
+  override val sensorPropertiesInternal = flow {
+    val sensorPropertiesInternal = fingerprintManager.sensorPropertiesInternal
+    emit(if (sensorPropertiesInternal.isEmpty()) null else sensorPropertiesInternal.first())
   }
 
   override val maxEnrollableFingerprints = flow { emit(maxFingerprints) }
@@ -164,11 +171,6 @@ class FingerprintManagerInteractorImpl(
   override suspend fun pressToAuthEnabled(): Boolean = suspendCancellableCoroutine {
     it.resume(pressToAuthProvider())
   }
-
-  override suspend fun sensorPropertiesInternal(): List<FingerprintSensorPropertiesInternal> =
-    suspendCancellableCoroutine {
-      it.resume(fingerprintManager.sensorPropertiesInternal)
-    }
 
   override suspend fun authenticate(): FingerprintAuthAttemptViewModel =
     suspendCancellableCoroutine { c: CancellableContinuation<FingerprintAuthAttemptViewModel> ->

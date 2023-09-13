@@ -34,10 +34,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.android.settings.R
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollmentNavigationViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintGatekeeperViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintScrollViewModel
-import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.Unicorn
 import com.google.android.setupcompat.template.FooterBarMixin
 import com.google.android.setupcompat.template.FooterButton
@@ -76,7 +76,7 @@ class FingerprintEnrollmentIntroV2Fragment : Fragment(R.layout.fingerprint_v2_en
   private lateinit var footerBarMixin: FooterBarMixin
   private lateinit var textModel: TextModel
   private lateinit var navigationViewModel: FingerprintEnrollmentNavigationViewModel
-  private lateinit var fingerprintStateViewModel: FingerprintViewModel
+  private lateinit var fingerprintEnrollViewModel: FingerprintEnrollViewModel
   private lateinit var fingerprintScrollViewModel: FingerprintScrollViewModel
   private lateinit var gateKeeperViewModel: FingerprintGatekeeperViewModel
 
@@ -84,8 +84,8 @@ class FingerprintEnrollmentIntroV2Fragment : Fragment(R.layout.fingerprint_v2_en
     super.onCreate(savedInstanceState)
     navigationViewModel =
       ViewModelProvider(requireActivity())[FingerprintEnrollmentNavigationViewModel::class.java]
-    fingerprintStateViewModel =
-      ViewModelProvider(requireActivity())[FingerprintViewModel::class.java]
+    fingerprintEnrollViewModel =
+      ViewModelProvider(requireActivity())[FingerprintEnrollViewModel::class.java]
     fingerprintScrollViewModel =
       ViewModelProvider(requireActivity())[FingerprintScrollViewModel::class.java]
     gateKeeperViewModel =
@@ -98,13 +98,11 @@ class FingerprintEnrollmentIntroV2Fragment : Fragment(R.layout.fingerprint_v2_en
     lifecycleScope.launch {
       combine(
           navigationViewModel.enrollType,
-          fingerprintStateViewModel.fingerprintStateViewModel,
-        ) { enrollType, fingerprintStateViewModel ->
-          Pair(enrollType, fingerprintStateViewModel)
+          fingerprintEnrollViewModel.sensorType,
+        ) { enrollType, sensorType ->
+          Pair(enrollType, sensorType)
         }
-        .collect { (enrollType, fingerprintStateViewModel) ->
-          val sensorProps = fingerprintStateViewModel?.sensorProps
-
+        .collect { (enrollType, sensorType) ->
           textModel =
             when (enrollType) {
               Unicorn -> getUnicornTextModel()
@@ -145,7 +143,7 @@ class FingerprintEnrollmentIntroV2Fragment : Fragment(R.layout.fingerprint_v2_en
 
             val iconShield: ImageView = view.requireViewById(R.id.icon_shield)
             val footerMessage6: TextView = view.requireViewById(R.id.footer_message_6)
-            when (sensorProps?.sensorType) {
+            when (sensorType) {
               FingerprintSensorProperties.TYPE_UDFPS_ULTRASONIC,
               FingerprintSensorProperties.TYPE_UDFPS_OPTICAL -> {
                 footerMessage6.visibility = View.VISIBLE

@@ -47,7 +47,6 @@ import com.android.settings.biometrics.fingerprint.FingerprintEnrollEnrolling
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollIntroductionInternal
 import com.android.settings.biometrics.fingerprint2.domain.interactor.FingerprintManagerInteractorImpl
 import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintAuthAttemptViewModel
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintStateViewModel
 import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintViewModel
 import com.android.settings.biometrics.fingerprint2.ui.settings.binder.FingerprintSettingsViewBinder
 import com.android.settings.biometrics.fingerprint2.ui.settings.viewmodel.FingerprintSettingsNavigationViewModel
@@ -304,44 +303,52 @@ class FingerprintSettingsV2Fragment :
     settingsViewModel.onDeleteClicked(fingerprintViewModel)
   }
 
-  override fun showSettings(state: FingerprintStateViewModel) {
+  override fun showSettings(enrolledFingerprints: List<FingerprintViewModel>) {
     val category =
       this@FingerprintSettingsV2Fragment.findPreference(KEY_FINGERPRINTS_ENROLLED_CATEGORY)
         as PreferenceCategory?
 
     category?.removeAll()
 
-    state.fingerprintViewModels.forEach { fingerprint ->
+    enrolledFingerprints.forEach { fingerprint ->
       category?.addPreference(
         FingerprintSettingsPreference(
           requireContext(),
           fingerprint,
           this@FingerprintSettingsV2Fragment,
-          state.fingerprintViewModels.size == 1,
+          enrolledFingerprints.size == 1,
         )
       )
     }
     category?.isVisible = true
-
-    createFingerprintsFooterPreference(state.canEnroll, state.maxFingerprints)
     preferenceScreen.isVisible = true
+    addFooter()
+  }
 
+  override fun updateAddFingerprintsPreference(canEnroll: Boolean, maxFingerprints: Int) {
+    val pref = this@FingerprintSettingsV2Fragment.findPreference<Preference>(KEY_FINGERPRINT_ADD)
+    val maxSummary = context?.getString(R.string.fingerprint_add_max, maxFingerprints) ?: ""
+    pref?.summary = maxSummary
+    pref?.isEnabled = canEnroll
+    pref?.setOnPreferenceClickListener {
+      navigationViewModel.onAddFingerprintClicked()
+      true
+    }
+    pref?.isVisible = true
+  }
+
+  override fun updateSfpsPreference(isSfpsPrefVisible: Boolean) {
     val sideFpsPref =
       this@FingerprintSettingsV2Fragment.findPreference(KEY_FINGERPRINT_SIDE_FPS_CATEGORY)
         as PreferenceCategory?
-    sideFpsPref?.isVisible = false
-
-    if (state.hasSideFps) {
-      sideFpsPref?.isVisible = state.fingerprintViewModels.isNotEmpty()
-      val otherPref =
-        this@FingerprintSettingsV2Fragment.findPreference(
-          KEY_FINGERPRINT_SIDE_FPS_SCREEN_ON_TO_AUTH
-        ) as Preference?
-      otherPref?.isVisible = state.fingerprintViewModels.isNotEmpty()
-    }
-    addFooter(state.hasSideFps)
+    sideFpsPref?.isVisible = isSfpsPrefVisible
+    val otherPref =
+      this@FingerprintSettingsV2Fragment.findPreference(KEY_FINGERPRINT_SIDE_FPS_SCREEN_ON_TO_AUTH)
+        as Preference?
+    otherPref?.isVisible = isSfpsPrefVisible
   }
-  private fun addFooter(hasSideFps: Boolean) {
+
+  private fun addFooter() {
     val footer =
       this@FingerprintSettingsV2Fragment.findPreference(KEY_FINGERPRINT_FOOTER)
         as PreferenceCategory?
@@ -380,10 +387,8 @@ class FingerprintSettingsV2Fragment :
       footerColumns.add(column1)
       val column2 = FooterColumn()
       column2.title = getText(R.string.security_fingerprint_disclaimer_lockscreen_disabled_2)
-      if (hasSideFps) {
-        column2.learnMoreOverrideText =
-          getText(R.string.security_settings_fingerprint_settings_footer_learn_more)
-      }
+      column2.learnMoreOverrideText =
+        getText(R.string.security_settings_fingerprint_settings_footer_learn_more)
       column2.learnMoreOnClickListener = learnMoreClickListener
       footerColumns.add(column2)
     } else {
@@ -394,10 +399,8 @@ class FingerprintSettingsV2Fragment :
           DeviceHelper.getDeviceName(requireActivity())
         )
       column.learnMoreOnClickListener = learnMoreClickListener
-      if (hasSideFps) {
-        column.learnMoreOverrideText =
-          getText(R.string.security_settings_fingerprint_settings_footer_learn_more)
-      }
+      column.learnMoreOverrideText =
+        getText(R.string.security_settings_fingerprint_settings_footer_learn_more)
       footerColumns.add(column)
     }
 
@@ -548,18 +551,6 @@ class FingerprintSettingsV2Fragment :
     lifecycleScope.launch {
       navigationViewModel.onConfirmDevice(wasSuccessful, gateKeeperPasswordHandle)
     }
-  }
-
-  private fun createFingerprintsFooterPreference(canEnroll: Boolean, maxFingerprints: Int) {
-    val pref = this@FingerprintSettingsV2Fragment.findPreference<Preference>(KEY_FINGERPRINT_ADD)
-    val maxSummary = context?.getString(R.string.fingerprint_add_max, maxFingerprints) ?: ""
-    pref?.summary = maxSummary
-    pref?.isEnabled = canEnroll
-    pref?.setOnPreferenceClickListener {
-      navigationViewModel.onAddFingerprintClicked()
-      true
-    }
-    pref?.isVisible = true
   }
 
   private fun fingerprintPreferences(): List<FingerprintSettingsPreference?> {

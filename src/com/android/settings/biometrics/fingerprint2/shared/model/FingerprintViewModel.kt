@@ -16,18 +16,6 @@
 
 package com.android.settings.biometrics.fingerprint2.shared.model
 
-import android.hardware.fingerprint.FingerprintSensorPropertiesInternal
-
-/** Represents the fingerprint data nad the relevant state. */
-data class FingerprintStateViewModel(
-  val fingerprintViewModels: List<FingerprintViewModel>,
-  val canEnroll: Boolean,
-  val maxFingerprints: Int,
-  val hasSideFps: Boolean,
-  val pressToAuth: Boolean,
-  val sensorProps: FingerprintSensorPropertiesInternal,
-)
-
 data class FingerprintViewModel(
   val name: String,
   val fingerId: Int,
