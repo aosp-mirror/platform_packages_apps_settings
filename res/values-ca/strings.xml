@@ -42,18 +42,12 @@
     <string name="preview_pager_content_description" msgid="3762247188224576303">"Previsualització"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Redueix"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Amplia"</string>
-    <!-- no translation found for stay_awake_on_fold_title (6590454679898134221) -->
-    <skip />
-    <!-- no translation found for stay_awake_on_fold_summary (1939963751585954262) -->
-    <skip />
-    <!-- no translation found for selective_stay_awake_title (7887645333447645168) -->
-    <skip />
-    <!-- no translation found for selective_stay_awake_summary (9055967322921984543) -->
-    <skip />
-    <!-- no translation found for sleep_on_fold_title (7626123024330501411) -->
-    <skip />
-    <!-- no translation found for sleep_on_fold_summary (7737992842459588846) -->
-    <skip />
+    <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"Sempre"</string>
+    <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"La pantalla frontal s\'encén quan plegues el dispositiu"</string>
+    <string name="selective_stay_awake_title" msgid="7887645333447645168">"Només jocs, vídeos i més"</string>
+    <string name="selective_stay_awake_summary" msgid="9055967322921984543">"La pantalla frontal s\'encén per a les aplicacions que eviten que la pantalla es quedi inactiva"</string>
+    <string name="sleep_on_fold_title" msgid="7626123024330501411">"Mai"</string>
+    <string name="sleep_on_fold_summary" msgid="7737992842459588846">"La pantalla frontal es bloqueja quan plegues el dispositiu"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Gira automàticament"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"La detecció facial utilitza la càmera frontal per millorar la precisió del gir automàtic. Les imatges mai no s\'emmagatzemen ni s\'envien a Google."</string>
     <string name="bluetooth" msgid="8898478620943459654">"Bluetooth"</string>
@@ -1012,8 +1006,7 @@
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Desactivat"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Mostra el balanç de blancs"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
-    <!-- no translation found for fold_lock_behavior_title (786228803694268449) -->
-    <skip />
+    <string name="fold_lock_behavior_title" msgid="786228803694268449">"Continua utilitzant les aplicacions amb el dispositiu plegat"</string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="3627278682437562787">"Augmenta automàticament la freqüència d\'actualització de 60 a <xliff:g id="ID_1">%1$s</xliff:g> Hz en alguns continguts. Augmenta l\'ús de la bateria."</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Força la freqüència d\'actualització màxima"</string>
@@ -2328,7 +2321,7 @@
     <string name="battery_saver_turn_on_automatically_never" msgid="6194649389871448663">"Mai"</string>
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"percentatge de bateria: <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_percentage" msgid="1779934245963043490">"Percentatge de bateria"</string>
-    <string name="battery_percentage_description" msgid="2321465139126125541">"Mostra el percentatge de bateria a la barra d\'estat"</string>
+    <string name="battery_percentage_description" msgid="2321465139126125541">"Mostra el percentatge a la barra d\'estat"</string>
     <string name="battery_usage_chart_graph_hint_last_full_charge" msgid="6570336408060566877">"Nivell de la bateria des de la darrera càrrega completa"</string>
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"Nivell de bateria durant les 24 darreres hores"</string>
     <string name="battery_app_usage" msgid="8976453608783133770">"Ús de les aplicacions des de la darrera càrrega completa"</string>
@@ -2949,8 +2942,7 @@
     <string name="keywords_app_pinning" msgid="1564144561464945019">"fixació de pantalla"</string>
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"desafiament per accedir a contingut de feina, feina, perfil"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"perfil de treball, perfil gestionat, unificar, unificació, feina, perfil"</string>
-    <!-- no translation found for keywords_fold_lock_behavior (6278990772113341581) -->
-    <skip />
+    <string name="keywords_fold_lock_behavior" msgid="6278990772113341581">"activa, repòs, no bloquegis, desbloquejada en plegar-se, plegable, tancant, plega, tanca, pantalla desactivada"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"gestos"</string>
     <string name="keywords_wallet" msgid="3757421969956996972">"Wallet"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"paga, toca, pagaments"</string>
@@ -4734,7 +4726,8 @@
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Relació d\'aspecte"</string>
     <string name="aspect_ratio_summary" msgid="5944347596728740547">"Tria una relació d\'aspecte per veure aquesta aplicació en cas que no s\'hagi dissenyat per adaptar-se al teu dispositiu (<xliff:g id="DEVICE_NAME">%1$s</xliff:g>)"</string>
     <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"Aplicacions suggerides"</string>
-    <string name="user_aspect_ratio_overridden_apps_label" msgid="1564914138276629704">"Aplicacions que has anul·lat"</string>
+    <!-- no translation found for user_aspect_ratio_changed_apps_label (2096614916172567672) -->
+    <skip />
     <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"Configuració predeterminada de l\'aplicació"</string>
     <string name="user_aspect_ratio_fullscreen" msgid="1843427242540081996">"Pantalla completa"</string>
     <string name="user_aspect_ratio_half_screen" msgid="1015852057094310209">"Mitja pantalla"</string>
