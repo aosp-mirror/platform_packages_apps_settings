@@ -68,6 +68,8 @@ public final class PeriodicJobManager {
     /** Schedules the next alarm job if it is available. */
     public void refreshJob(final boolean fromBoot) {
         if (mAlarmManager == null) {
+            BatteryUsageLogUtils.writeLog(mContext, Action.SCHEDULE_JOB,
+                    "cannot schedule next alarm job due to AlarmManager is null");
             Log.e(TAG, "cannot schedule next alarm job");
             return;
         }
@@ -80,8 +82,8 @@ public final class PeriodicJobManager {
                 AlarmManager.RTC_WAKEUP, triggerAtMillis, pendingIntent);
 
         final String utcToLocalTime = ConvertUtils.utcToLocalTimeForLogging(triggerAtMillis);
-        BatteryUsageLogUtils.writeLog(
-                mContext, Action.SCHEDULE_JOB, "triggerTime=" + utcToLocalTime);
+        BatteryUsageLogUtils.writeLog(mContext, Action.SCHEDULE_JOB,
+                String.format("triggerTime=%s, fromBoot=%b", utcToLocalTime, fromBoot));
         Log.d(TAG, "schedule next alarm job at " + utcToLocalTime);
     }
 
