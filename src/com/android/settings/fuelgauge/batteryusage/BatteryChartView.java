@@ -31,6 +31,7 @@ import android.graphics.CornerPathEffect;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.ArraySet;
 import android.util.AttributeSet;
@@ -90,6 +91,15 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
     private int mTrapezoidHoverColor;
     private int mDefaultTextColor;
     private int mTextPadding;
+    private int mTransomIconSize;
+    private int mTransomTop;
+    private int mTransomViewHeight;
+    private int mTransomLineDefaultColor;
+    private int mTransomLineSelectedColor;
+    private float mTransomPadding;
+    private Drawable mTransomIcon;
+    private Paint mTransomLinePaint;
+    private Paint mTransomSelectedSlotPaint;
     private Paint mDividerPaint;
     private Paint mTrapezoidPaint;
     private Paint mTextPaint;
@@ -123,8 +133,9 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
             return;
         }
 
-        Log.d(TAG, String.format("setViewModel(): size: %d, selectedIndex: %d.",
-                viewModel.size(), viewModel.selectedIndex()));
+        Log.d(TAG, String.format(
+                "setViewModel(): size: %d, selectedIndex: %d, getHighlightSlotIndex: %d",
+                viewModel.size(), viewModel.selectedIndex(), viewModel.getHighlightSlotIndex()));
         mViewModel = viewModel;
         initializeAxisLabelsBounds();
         initializeTrapezoidSlots(viewModel.size() - 1);
@@ -162,7 +173,7 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
                         mPercentageBounds[index]);
             }
             // Updates the indent configurations.
-            mIndent.top = mPercentageBounds[0].height();
+            mIndent.top = mPercentageBounds[0].height() + mTransomViewHeight;
             final int textWidth = mPercentageBounds[0].width() + mTextPadding;
             if (isRTL()) {
                 mIndent.left = textWidth;
@@ -196,6 +207,7 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
         }
         drawVerticalDividers(canvas);
         drawTrapezoids(canvas);
+        drawTransomLine(canvas);
     }
 
     @Override
@@ -340,6 +352,40 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
                         resources.getDimensionPixelSize(R.dimen.chartview_trapezoid_radius)));
         // Initializes for drawing text information.
         mTextPadding = resources.getDimensionPixelSize(R.dimen.chartview_text_padding);
+        // Initializes the padding top for drawing text information.
+        mTransomViewHeight = resources.getDimensionPixelSize(
+                R.dimen.chartview_transom_layout_height);
+    }
+
+    private void initializeTransomPaint() {
+        if (mTransomLinePaint != null && mTransomSelectedSlotPaint != null
+                && mTransomIcon != null) {
+            return;
+        }
+        // Initializes the transom line paint.
+        final Resources resources = getContext().getResources();
+        final int transomLineWidth = resources.getDimensionPixelSize(
+                R.dimen.chartview_transom_width);
+        final int transomRadius = resources.getDimensionPixelSize(R.dimen.chartview_transom_radius);
+        mTransomPadding = transomRadius * .5f;
+        mTransomTop = resources.getDimensionPixelSize(R.dimen.chartview_transom_padding_top);
+        mTransomLineDefaultColor = Utils.getDisabled(mContext, DIVIDER_COLOR);
+        mTransomLineSelectedColor = resources.getColor(
+                R.color.color_battery_anomaly_yellow_selector);
+        final int slotHighlightColor = Utils.getDisabled(mContext, mTransomLineSelectedColor);
+        mTransomIconSize = resources.getDimensionPixelSize(R.dimen.chartview_transom_icon_size);
+        mTransomLinePaint = new Paint();
+        mTransomLinePaint.setAntiAlias(true);
+        mTransomLinePaint.setStyle(Paint.Style.STROKE);
+        mTransomLinePaint.setStrokeWidth(transomLineWidth);
+        mTransomLinePaint.setStrokeCap(Paint.Cap.ROUND);
+        mTransomLinePaint.setPathEffect(new CornerPathEffect(transomRadius));
+        mTransomSelectedSlotPaint = new Paint();
+        mTransomSelectedSlotPaint.setAntiAlias(true);
+        mTransomSelectedSlotPaint.setColor(slotHighlightColor);
+        mTransomSelectedSlotPaint.setStyle(Paint.Style.FILL);
+        // Get the companion icon beside transom line
+        mTransomIcon = getResources().getDrawable(R.drawable.ic_battery_tips_warning_icon);
     }
 
     private void drawHorizontalDividers(Canvas canvas) {
@@ -590,6 +636,50 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
             // Draws the trapezoid shape into canvas.
             canvas.drawPath(trapezoidPath, mTrapezoidPaint);
         }
+    }
+
+    private boolean isHighlightSlotValid() {
+        return mViewModel != null && mViewModel.getHighlightSlotIndex()
+                != BatteryChartViewModel.SELECTED_INDEX_INVALID;
+    }
+
+    private void drawTransomLine(Canvas canvas) {
+        if (!isHighlightSlotValid()) {
+            return;
+        }
+        initializeTransomPaint();
+        // Draw the whole transom line and a warning icon
+        mTransomLinePaint.setColor(mTransomLineDefaultColor);
+        final int width = getWidth() - abs(mIndent.width());
+        final float transomOffset = mTrapezoidHOffset + mDividerWidth * .5f + mTransomPadding;
+        final float trapezoidBottom = getHeight() - mIndent.bottom - mDividerHeight - mDividerWidth
+                - mTrapezoidVOffset;
+        canvas.drawLine(mIndent.left + transomOffset, mTransomTop,
+                mIndent.left + width - transomOffset, mTransomTop,
+                mTransomLinePaint);
+        drawTransomIcon(canvas);
+        // Draw selected segment of transom line and a highlight slot
+        mTransomLinePaint.setColor(mTransomLineSelectedColor);
+        final int index = mViewModel.getHighlightSlotIndex();
+        final float startX = mTrapezoidSlots[index].mLeft;
+        final float endX = mTrapezoidSlots[index].mRight;
+        canvas.drawLine(startX + mTransomPadding, mTransomTop,
+                endX - mTransomPadding, mTransomTop,
+                mTransomLinePaint);
+        canvas.drawRect(startX, mTransomTop, endX, trapezoidBottom,
+                mTransomSelectedSlotPaint);
+    }
+
+    private void drawTransomIcon(Canvas canvas) {
+        if (mTransomIcon == null) {
+            return;
+        }
+        final int left = isRTL()
+                ? mIndent.left - mTextPadding - mTransomIconSize
+                : getWidth() - abs(mIndent.width()) + mTextPadding;
+        mTransomIcon.setBounds(left, mTransomTop - mTransomIconSize / 2,
+                left + mTransomIconSize, mTransomTop + mTransomIconSize / 2);
+        mTransomIcon.draw(canvas);
     }
 
     // Searches the corresponding trapezoid index from x location.

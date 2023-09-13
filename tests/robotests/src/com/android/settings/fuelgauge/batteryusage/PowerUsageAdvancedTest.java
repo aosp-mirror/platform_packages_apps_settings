@@ -17,9 +17,15 @@ package com.android.settings.fuelgauge.batteryusage;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.ArgumentMatchers.isNull;
+import static org.mockito.ArgumentMatchers.notNull;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 import android.content.Context;
+import android.util.Pair;
 
 import com.android.settings.testutils.BatteryTestUtils;
 import com.android.settings.testutils.shadow.ShadowDashboardFragment;
@@ -27,19 +33,47 @@ import com.android.settings.testutils.shadow.ShadowDashboardFragment;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+
+import java.util.Map;
+import java.util.Optional;
+import java.util.TimeZone;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowDashboardFragment.class)
 public final class PowerUsageAdvancedTest {
 
     private Context mContext;
+    private PowerUsageAdvanced mPowerUsageAdvanced;
+
+    @Mock
+    private BatteryTipsController mBatteryTipsController;
+    @Mock
+    private BatteryChartPreferenceController mBatteryChartPreferenceController;
+    @Mock
+    private ScreenOnTimeController mScreenOnTimeController;
+    @Mock
+    private BatteryUsageBreakdownController mBatteryUsageBreakdownController;
 
     @Before
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
+        TimeZone.setDefault(TimeZone.getTimeZone("GMT+8"));
         mContext = spy(RuntimeEnvironment.application);
+
+        mPowerUsageAdvanced = new PowerUsageAdvanced();
+        mPowerUsageAdvanced.mBatteryTipsController = mBatteryTipsController;
+        mPowerUsageAdvanced.mBatteryChartPreferenceController = mBatteryChartPreferenceController;
+        mPowerUsageAdvanced.mScreenOnTimeController = mScreenOnTimeController;
+        mPowerUsageAdvanced.mBatteryUsageBreakdownController = mBatteryUsageBreakdownController;
+        mPowerUsageAdvanced.mBatteryLevelData = Optional.of(new BatteryLevelData(Map.of(
+                1694354400000L, 1,      // 2023-09-10 22:00:00
+                1694361600000L, 2,      // 2023-09-11 00:00:00
+                1694368800000L, 3)));    // 2023-09-11 02:00:00
     }
 
     @Test
@@ -87,6 +121,65 @@ public final class PowerUsageAdvancedTest {
         final PowerAnomalyEvent highestScoreEvent =
                 PowerUsageAdvanced.getHighestScoreAnomalyEvent(mContext, powerAnomalyEventList);
 
-        assertThat(highestScoreEvent).isEqualTo(null);
+        assertThat(highestScoreEvent).isNull();
+    }
+
+    @Test
+    public void onDisplayAnomalyEventUpdated_withSettingsAnomalyEvent_skipHighlightSlotEffect() {
+        final PowerAnomalyEvent event = BatteryTestUtils.createAdaptiveBrightnessAnomalyEvent();
+
+        mPowerUsageAdvanced.onDisplayAnomalyEventUpdated(event);
+
+        assertThat(mPowerUsageAdvanced.mPowerAnomalyEvent).isEqualTo(event);
+        verify(mBatteryTipsController).handleBatteryTipsCardUpdated(eq(event));
+        verify(mPowerUsageAdvanced.mBatteryTipsController).setOnAnomalyConfirmListener(isNull());
+        verify(mPowerUsageAdvanced.mBatteryTipsController).setOnAnomalyRejectListener(isNull());
+        verify(mPowerUsageAdvanced.mBatteryChartPreferenceController).onHighlightSlotIndexUpdate(
+                eq(BatteryChartViewModel.SELECTED_INDEX_INVALID),
+                eq(BatteryChartViewModel.SELECTED_INDEX_INVALID));
+    }
+
+    @Test
+    public void onDisplayAnomalyEventUpdated_withAppAnomalyEvent_setHighlightSlotEffect() {
+        final PowerAnomalyEvent event = BatteryTestUtils.createAppAnomalyEvent();
+
+        mPowerUsageAdvanced.onDisplayAnomalyEventUpdated(event);
+
+        assertThat(mPowerUsageAdvanced.mPowerAnomalyEvent).isEqualTo(event);
+        verify(mBatteryTipsController).handleBatteryTipsCardUpdated(eq(event));
+        verify(mBatteryTipsController).setOnAnomalyConfirmListener(isNull());
+        verify(mBatteryTipsController).setOnAnomalyRejectListener(isNull());
+
+        assertThat(event.getWarningItemInfo().hasStartTimestamp()).isTrue();
+        assertThat(event.getWarningItemInfo().hasEndTimestamp()).isTrue();
+        assertThat(mPowerUsageAdvanced.mBatteryLevelData.get().getIndexByTimestamps(
+                event.getWarningItemInfo().getStartTimestamp(),
+                event.getWarningItemInfo().getEndTimestamp()
+        )).isEqualTo(Pair.create(1, 0));
+        verify(mBatteryChartPreferenceController).onHighlightSlotIndexUpdate(eq(1), eq(0));
+        verify(mBatteryTipsController).setOnAnomalyConfirmListener(notNull());
+        verify(mBatteryTipsController).setOnAnomalyRejectListener(notNull());
+    }
+
+    @Test
+    public void onDisplayAnomalyEventUpdated_withNull_removeHighlightSlotEffect() {
+        final PowerAnomalyEvent event = BatteryTestUtils.createAppAnomalyEvent();
+
+        mPowerUsageAdvanced.onDisplayAnomalyEventUpdated(event);
+        mPowerUsageAdvanced.onDisplayAnomalyEventUpdated(null);
+
+        assertThat(mPowerUsageAdvanced.mPowerAnomalyEvent).isNull();
+        verify(mBatteryTipsController, times(2))
+                .setOnAnomalyConfirmListener(isNull());
+        verify(mBatteryTipsController, times(2))
+                .setOnAnomalyRejectListener(isNull());
+        verify(mBatteryTipsController).setOnAnomalyConfirmListener(notNull());
+        verify(mBatteryTipsController).setOnAnomalyRejectListener(notNull());
+
+        verify(mBatteryChartPreferenceController)
+                .onHighlightSlotIndexUpdate(eq(1), eq(0));
+        verify(mBatteryChartPreferenceController).onHighlightSlotIndexUpdate(
+                eq(BatteryChartViewModel.SELECTED_INDEX_INVALID),
+                eq(BatteryChartViewModel.SELECTED_INDEX_INVALID));
     }
 }
