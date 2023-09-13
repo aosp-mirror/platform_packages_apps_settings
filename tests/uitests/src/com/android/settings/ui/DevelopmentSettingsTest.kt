@@ -16,9 +16,11 @@
 
 package com.android.settings.ui
 
+import android.os.SystemClock
 import android.provider.Settings
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
+import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.UiDevice
 import com.android.settings.ui.testutils.SettingsTestUtils.assertHasTexts
 import com.android.settings.ui.testutils.SettingsTestUtils.startMainActivityFromHomeScreen
@@ -29,11 +31,13 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 @SmallTest
 class DevelopmentSettingsTest {
-    private lateinit var device: UiDevice
+    private val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
 
     @Before
     fun setUp() {
-        device = startMainActivityFromHomeScreen(Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS)
+        device.executeShellCommand("settings put global development_settings_enabled 1")
+        SystemClock.sleep(1000)
+        device.startMainActivityFromHomeScreen(Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS)
     }
 
     @Test

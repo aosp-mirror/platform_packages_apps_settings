@@ -215,5 +215,5 @@ class UserAspectRatioAppListModel(private val context: Context)
 private enum class SpinnerItem(val stringResId: Int) {
     Suggested(R.string.user_aspect_ratio_suggested_apps_label),
     All(R.string.filter_all_apps),
-    Overridden(R.string.user_aspect_ratio_overridden_apps_label)
+    Overridden(R.string.user_aspect_ratio_changed_apps_label)
 }

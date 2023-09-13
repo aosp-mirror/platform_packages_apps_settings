@@ -18,6 +18,7 @@ package com.android.settings.ui
 
 import android.content.Intent
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.UiDevice
 import com.android.settings.ui.testutils.SettingsTestUtils.assertHasTexts
 import com.android.settings.ui.testutils.SettingsTestUtils.startMainActivityFromHomeScreen
@@ -27,11 +28,11 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class BatterySettingsTest {
-    private lateinit var device: UiDevice
+    private val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
 
     @Before
     fun setUp() {
-        device = startMainActivityFromHomeScreen(Intent.ACTION_POWER_USAGE_SUMMARY)
+        device.startMainActivityFromHomeScreen(Intent.ACTION_POWER_USAGE_SUMMARY)
     }
 
     @Test

@@ -14,40 +14,36 @@
  * limitations under the License.
  */
 
-package com.android.settings.ui
+package com.android.settings.ui.inputmethods
 
-import android.provider.Settings
+import android.content.Intent
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.filters.SmallTest
 import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiDevice
-import com.android.settings.ui.testutils.SettingsTestUtils.assertHasTexts
+import com.android.settings.ui.testutils.SettingsTestUtils.SETTINGS_PACKAGE
+import com.android.settings.ui.testutils.SettingsTestUtils.assertObject
 import com.android.settings.ui.testutils.SettingsTestUtils.startMainActivityFromHomeScreen
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
-/** Verifies basic functionality of the About Phone screen  */
 @RunWith(AndroidJUnit4::class)
-@SmallTest
-class AboutPhoneSettingsTests {
+class SpellCheckerSettingsTest {
     private val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
 
     @Before
     fun setUp() {
-        device.startMainActivityFromHomeScreen(Settings.ACTION_DEVICE_INFO_SETTINGS)
+        device.startMainActivityFromHomeScreen(Intent().apply {
+            setClassName(
+                SETTINGS_PACKAGE,
+                "com.android.settings.Settings\$SpellCheckersSettingsActivity",
+            )
+        })
     }
 
     @Test
-    fun testAllMenuEntriesExist() {
-        device.assertHasTexts(ON_SCREEN_TEXTS)
-    }
-
-    private companion object {
-        val ON_SCREEN_TEXTS = listOf(
-            "Device name",
-            "Legal information",
-            "Regulatory labels"
-        )
+    fun hasSwitchBar() {
+        device.assertObject(By.text("Use spell checker"))
     }
 }
