@@ -159,6 +159,16 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
             return CONDITIONALLY_UNAVAILABLE;
         }
 
+        // If we are in work profile mode and there is no user then we
+        // should hide for now. We use CONDITIONALLY_UNAVAILABLE
+        // because it is possible for the user to be set later.
+        if (mIsWorkProfile) {
+            UserHandle workProfile = getWorkProfileUserHandle();
+            if (workProfile == null) {
+                return CONDITIONALLY_UNAVAILABLE;
+            }
+        }
+
         return AVAILABLE;
     }
 
@@ -186,12 +196,17 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         fragment.getSettingsLifecycle().addObserver(this);
         mFragmentManager = fragmentManager;
         mIsWorkProfile = isWorkProfile;
+
         setDelegate(delegate);
         verifyReceivedIntent(launchIntent);
 
         // Recreate the content observers because the user might have changed.
         mSettingsContentObserver.unregister();
         mSettingsContentObserver.register();
+
+        // When we set the mIsWorkProfile above we should try and force a refresh
+        // so we can get the correct data.
+        delegate.forceDelegateRefresh();
     }
 
     /**
@@ -698,10 +713,20 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
 
     protected int getUser() {
         if (mIsWorkProfile) {
-            UserHandle workProfile = Utils.getManagedProfile(UserManager.get(mContext));
-            return workProfile.getIdentifier();
+            UserHandle workProfile = getWorkProfileUserHandle();
+            if (workProfile != null) {
+                return workProfile.getIdentifier();
+            }
         }
         return UserHandle.myUserId();
+    }
+
+    private @Nullable UserHandle getWorkProfileUserHandle() {
+        if (mIsWorkProfile) {
+            return Utils.getManagedProfile(UserManager.get(mContext));
+        }
+
+        return null;
     }
 
     /** Called when the dialog button is clicked. */
