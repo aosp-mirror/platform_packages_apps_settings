@@ -18,13 +18,16 @@ package com.android.settings.fuelgauge.batteryusage;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.os.Bundle;
 import android.text.TextUtils;
 
 import androidx.preference.PreferenceScreen;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
@@ -38,6 +41,21 @@ public class BatteryTipsController extends BasePreferenceController {
     private static final String CARD_PREFERENCE_KEY = "battery_tips_card";
 
     private final MetricsFeatureProvider mMetricsFeatureProvider;
+
+    /** A callback listener for the battery tips is confirmed. */
+    interface OnAnomalyConfirmListener {
+        /** The callback function for the battery tips is confirmed. */
+        void onAnomalyConfirm();
+    }
+
+    /** A callback listener for the battery tips is rejected. */
+    interface OnAnomalyRejectListener {
+        /** The callback function for the battery tips is rejected. */
+        void onAnomalyReject();
+    }
+
+    private OnAnomalyConfirmListener mOnAnomalyConfirmListener;
+    private OnAnomalyRejectListener mOnAnomalyRejectListener;
 
     @VisibleForTesting
     BatteryTipsCardPreference mCardPreference;
@@ -57,6 +75,14 @@ public class BatteryTipsController extends BasePreferenceController {
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mCardPreference = screen.findPreference(CARD_PREFERENCE_KEY);
+    }
+
+    void setOnAnomalyConfirmListener(OnAnomalyConfirmListener listener) {
+        mOnAnomalyConfirmListener = listener;
+    }
+
+    void setOnAnomalyRejectListener(OnAnomalyRejectListener listener) {
+        mOnAnomalyRejectListener = listener;
     }
 
     private <T> T getInfo(PowerAnomalyEvent powerAnomalyEvent,
@@ -95,6 +121,21 @@ public class BatteryTipsController extends BasePreferenceController {
                 : getStringFromResource(resourceId, resourceIndex);
     }
 
+    /** Generate a key string of current anomaly to record as dismissed in sharedPreferences. */
+    public static String getDismissRecordKey(PowerAnomalyEvent event) {
+        if (!event.hasKey()) {
+            return null;
+        }
+        switch (event.getKey()){
+            case KEY_APP:
+                return event.hasWarningItemInfo()
+                        && event.getWarningItemInfo().hasDismissRecordKey()
+                        ? event.getWarningItemInfo().getDismissRecordKey() : null;
+            default:
+                return event.getKey().name();
+        }
+    }
+
     void handleBatteryTipsCardUpdated(PowerAnomalyEvent powerAnomalyEvent) {
         if (powerAnomalyEvent == null) {
             mCardPreference.setVisible(false);
@@ -109,44 +150,76 @@ public class BatteryTipsController extends BasePreferenceController {
                 R.array.battery_tips_card_colors, cardStyleId, "color");
 
         // Get card preference strings and navigate fragment info
+        final String eventId = powerAnomalyEvent.hasEventId()
+                ? powerAnomalyEvent.getEventId() : null;
         final PowerAnomalyKey powerAnomalyKey = powerAnomalyEvent.hasKey()
                 ? powerAnomalyEvent.getKey() : null;
         final int resourceIndex = powerAnomalyKey != null ? powerAnomalyKey.getNumber() : -1;
 
-        String titleString = getString(powerAnomalyEvent, WarningBannerInfo::getTitleString,
+        final String titleString = getString(powerAnomalyEvent, WarningBannerInfo::getTitleString,
                 WarningItemInfo::getTitleString, R.array.power_anomaly_titles, resourceIndex);
         if (titleString.isEmpty()) {
             mCardPreference.setVisible(false);
             return;
         }
 
-        String mainBtnString = getString(powerAnomalyEvent,
+        final String mainBtnString = getString(powerAnomalyEvent,
                 WarningBannerInfo::getMainButtonString, WarningItemInfo::getMainButtonString,
                 R.array.power_anomaly_main_btn_strings, resourceIndex);
-        String dismissBtnString = getString(powerAnomalyEvent,
+        final String dismissBtnString = getString(powerAnomalyEvent,
                 WarningBannerInfo::getCancelButtonString, WarningItemInfo::getCancelButtonString,
                 R.array.power_anomaly_dismiss_btn_strings, resourceIndex);
 
-        String destinationClassName = getInfo(powerAnomalyEvent,
+        final String destinationClassName = getInfo(powerAnomalyEvent,
                 WarningBannerInfo::getMainButtonDestination, null);
-        Integer sourceMetricsCategory = getInfo(powerAnomalyEvent,
+        final Integer sourceMetricsCategory = getInfo(powerAnomalyEvent,
                 WarningBannerInfo::getMainButtonSourceMetricsCategory, null);
-        String preferenceHighlightKey = getInfo(powerAnomalyEvent,
+        final String preferenceHighlightKey = getInfo(powerAnomalyEvent,
                 WarningBannerInfo::getMainButtonSourceHighlightKey, null);
 
         // Update card preference and main button fragment launcher
-        mCardPreference.setAnomalyEventId(powerAnomalyEvent.getEventId());
-        mCardPreference.setPowerAnomalyKey(powerAnomalyKey);
         mCardPreference.setTitle(titleString);
         mCardPreference.setIconResourceId(iconResId);
         mCardPreference.setMainButtonStrokeColorResourceId(colorResId);
         mCardPreference.setMainButtonLabel(mainBtnString);
         mCardPreference.setDismissButtonLabel(dismissBtnString);
-        mCardPreference.setMainButtonLauncherInfo(
-                destinationClassName, sourceMetricsCategory, preferenceHighlightKey);
-        mCardPreference.setVisible(true);
 
-        mMetricsFeatureProvider.action(mContext,
-                SettingsEnums.ACTION_BATTERY_TIPS_CARD_SHOW, powerAnomalyEvent.getEventId());
+        // Set battery tips card listener
+        mCardPreference.setOnConfirmListener(() -> {
+            if (mOnAnomalyConfirmListener != null) {
+                mOnAnomalyConfirmListener.onAnomalyConfirm();
+            } else if (!TextUtils.isEmpty(destinationClassName)) {
+                // Navigate to sub setting page
+                Bundle arguments = Bundle.EMPTY;
+                if (!TextUtils.isEmpty(preferenceHighlightKey)) {
+                    arguments = new Bundle(1);
+                    arguments.putString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY,
+                            preferenceHighlightKey);
+                }
+                new SubSettingLauncher(mContext)
+                        .setDestination(destinationClassName)
+                        .setSourceMetricsCategory(sourceMetricsCategory)
+                        .setArguments(arguments)
+                        .launch();
+            }
+            mMetricsFeatureProvider.action(
+                    mContext, SettingsEnums.ACTION_BATTERY_TIPS_CARD_ACCEPT, eventId);
+        });
+        mCardPreference.setOnRejectListener(() -> {
+            if (mOnAnomalyRejectListener != null) {
+                mOnAnomalyRejectListener.onAnomalyReject();
+            }
+            // For anomaly events with same record key, dismissed until next time full charged.
+            final String dismissRecordKey = getDismissRecordKey(powerAnomalyEvent);
+            if (!TextUtils.isEmpty(dismissRecordKey)) {
+                DatabaseUtils.setDismissedPowerAnomalyKeys(mContext, dismissRecordKey);
+            }
+            mMetricsFeatureProvider.action(
+                    mContext, SettingsEnums.ACTION_BATTERY_TIPS_CARD_DISMISS, eventId);
+        });
+
+        mCardPreference.setVisible(true);
+        mMetricsFeatureProvider.action(
+                mContext, SettingsEnums.ACTION_BATTERY_TIPS_CARD_SHOW, eventId);
     }
 }
