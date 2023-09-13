@@ -374,9 +374,6 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             }
             mOnBatteryUsageUpdatedListener.onBatteryUsageUpdated(
                     slotUsageData, getSlotInformation(), isBatteryUsageMapNullOrEmpty());
-
-            Log.d(TAG, "isBatteryTipsEnabled = "
-                    + mPowerUsageFeatureProvider.isBatteryTipsEnabled());
             if (mOnBatteryTipsUpdatedListener != null) {
                 mExecutor.execute(() -> {
                     final PowerAnomalyEventList anomalyEventList = mPowerUsageFeatureProvider

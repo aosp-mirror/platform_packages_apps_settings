@@ -81,11 +81,6 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
-    public boolean isBatteryTipsFeedbackEnabled() {
-        return false;
-    }
-
-    @Override
     public double getBatteryUsageListScreenOnTimeThresholdInMs() {
         return 0;
     }
