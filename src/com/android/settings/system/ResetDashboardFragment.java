@@ -78,7 +78,6 @@ public class ResetDashboardFragment extends DashboardFragment {
         if (SubscriptionUtil.isSimHardwareVisible(context)) {
             controllers.add(new NetworkResetPreferenceController(context));
         }
-        controllers.add(new FactoryResetPreferenceController(context));
         controllers.add(new ResetAppPrefPreferenceController(context, lifecycle));
         return controllers;
     }
