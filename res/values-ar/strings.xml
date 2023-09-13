@@ -42,6 +42,12 @@
     <string name="preview_pager_content_description" msgid="3762247188224576303">"معاينة"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"تصغير"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"تكبير"</string>
+    <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"دائمًا"</string>
+    <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"يتم تشغيل الشاشة الأمامية عند طيّ الجهاز."</string>
+    <string name="selective_stay_awake_title" msgid="7887645333447645168">"الألعاب والفيديوهات فقط وغير ذلك"</string>
+    <string name="selective_stay_awake_summary" msgid="9055967322921984543">"يتم تشغيل الشاشة الأمامية للتطبيقات التي تمنع انتقال الشاشة إلى \"وضع عدم النشاط\"."</string>
+    <string name="sleep_on_fold_title" msgid="7626123024330501411">"أبدًا"</string>
+    <string name="sleep_on_fold_summary" msgid="7737992842459588846">"يتم قفل الشاشة الأمامية عند طيّ الجهاز."</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"استخدام التدوير التلقائي"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"‏تستخدم ميزة \"التعرّف على الوجوه\" الكاميرا الأمامية لتحسين دقة التدوير التلقائي. لا يتم تخزين الصور أو إرسالها إلى Google مطلقًا."</string>
     <string name="bluetooth" msgid="8898478620943459654">"بلوتوث"</string>
@@ -118,6 +124,7 @@
     <string name="connected_device_previously_connected_screen_title" msgid="8823331744788100605">"الأجهزة المتصلة سابقًا"</string>
     <string name="connected_device_bluetooth_turned_on_toast" msgid="144664089794199928">"تم تفعيل البلوتوث."</string>
     <string name="previous_connected_see_all" msgid="7759413145713251328">"عرض الكل"</string>
+    <string name="connected_device_fast_pair_device_see_all" msgid="4898279230458128620">"عرض الكل"</string>
     <string name="stylus_device_details_title" msgid="7618295136015480864">"قلم الشاشة"</string>
     <string name="stylus_default_notes_app" msgid="4165657465911764628">"الضغط على زرّ قلم الشاشة"</string>
     <string name="stylus_default_notes_summary_work" msgid="4554643411627934223">"تطبيق \"<xliff:g id="APP_NAME">%s</xliff:g>\" (الملف الشخصي للعمل)"</string>
@@ -389,6 +396,8 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"تمت إضافة وجه و\"<xliff:g id="WATCH">%s</xliff:g>\"."</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"تمت إضافة وجه وبصمة إصبع و\"<xliff:g id="WATCH">%s</xliff:g>\"."</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"تمت إضافة وجه وبصمات أصابع و\"<xliff:g id="WATCH">%s</xliff:g>\"."</string>
+    <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"‏فتح قفل Remote Authenticator"</string>
+    <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"تمت إضافة الساعة"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"ضبط إعدادات ساعتك"</string>
     <string name="security_settings_remoteauth_enroll_introduction_message" msgid="8737276885766036074">"إنّ ميزة \"فتح الهاتف من الساعة\" هي طريقة أخرى مناسبة لفتح قفل هذا الهاتف عندما لا يتم التعرّف على وجهك أو إصبعك.\n\nيمكنك استخدام ساعتك لفتح قفل هذا الهاتف عند:"</string>
     <string name="security_settings_remoteauth_enroll_introduction_disagree" msgid="7639258097401796028">"لاحقًا"</string>
@@ -522,6 +531,30 @@
     <string name="security_header" msgid="961514795852103424">"الأمان"</string>
     <string name="privacy_header" msgid="5526002421324257007">"الخصوصية"</string>
     <string name="work_profile_category_header" msgid="85707750968948517">"الملف الشخصي للعمل"</string>
+    <!-- no translation found for private_space_title (7078627930195569767) -->
+    <skip />
+    <!-- no translation found for private_space_summary (8237652417163408001) -->
+    <skip />
+    <!-- no translation found for private_space_one_lock_title (7306547190751832568) -->
+    <skip />
+    <!-- no translation found for private_space_hide_title (1615744426933304644) -->
+    <skip />
+    <!-- no translation found for private_space_category_system (1286843321867285700) -->
+    <skip />
+    <!-- no translation found for private_space_create_title (47273568884806726) -->
+    <skip />
+    <!-- no translation found for private_space_delete_title (3075645119800272800) -->
+    <skip />
+    <!-- no translation found for private_space_created (2978055968937762232) -->
+    <skip />
+    <!-- no translation found for private_space_already_exists (1253034947621867419) -->
+    <skip />
+    <!-- no translation found for private_space_create_failed (4908100791174213808) -->
+    <skip />
+    <!-- no translation found for private_space_deleted (7825768516955610897) -->
+    <skip />
+    <!-- no translation found for private_space_delete_failed (8500755484258565011) -->
+    <skip />
     <string name="fingerprint_add_max" msgid="8639321019299347447">"يمكنك إضافة ما يصل إلى <xliff:g id="COUNT">%d</xliff:g> بصمات إصبع"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"لقد أضفت الحد الأقصى لعدد بصمات الإصبع"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"يتعذر إضافة مزيد من بصمات الإصبع"</string>
@@ -896,20 +929,13 @@
     <string name="wifi_type_title" msgid="2174893488722015838">"النوع"</string>
     <string name="wifi_details_dns" msgid="273231528073312579">"نظام أسماء النطاقات"</string>
     <string name="wifi_details_ipv6_address_header" msgid="1913151339341722443">"‏عناوين IPv6"</string>
-    <!-- no translation found for hotspot_device_details_category (3110651914598697220) -->
-    <skip />
-    <!-- no translation found for hotspot_device_details_internet_source (1563266599673281875) -->
-    <skip />
-    <!-- no translation found for internet_source_wifi (6952593095166435179) -->
-    <skip />
-    <!-- no translation found for internet_source_mobile_data (877403889449201789) -->
-    <skip />
-    <!-- no translation found for internet_source_ethernet (8338472576454100966) -->
-    <skip />
-    <!-- no translation found for hotspot_connection_category (4320380513982923556) -->
-    <skip />
-    <!-- no translation found for hotspot_connection_strength (87359986943768421) -->
-    <skip />
+    <string name="hotspot_device_details_category" msgid="3110651914598697220">"تفاصيل جهاز نقطة الاتصال"</string>
+    <string name="hotspot_device_details_internet_source" msgid="1563266599673281875">"مصدر الإنترنت"</string>
+    <string name="internet_source_wifi" msgid="6952593095166435179">"Wi-Fi"</string>
+    <string name="internet_source_mobile_data" msgid="877403889449201789">"بيانات الجوّال"</string>
+    <string name="internet_source_ethernet" msgid="8338472576454100966">"إيثرنت"</string>
+    <string name="hotspot_connection_category" msgid="4320380513982923556">"الاتصال بالإنترنت عبر نقطة اتصال"</string>
+    <string name="hotspot_connection_strength" msgid="87359986943768421">"قوة الاتصال بالشبكة"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"الشبكات المحفوظة"</string>
     <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"الاشتراكات"</string>
     <string name="wifi_saved_other_networks_tab" msgid="7942647415716557293">"الشبكات الأخرى"</string>
@@ -1043,8 +1069,7 @@
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"غير مفعّل"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"موازنة اللون الأبيض للشاشة"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
-    <string name="stay_awake_on_fold_title" msgid="4195536619511589471">"إبقاء الشاشة مفتوحة عند طيّها"</string>
-    <string name="stay_awake_on_fold_summary" msgid="2413928869516675293">"يمكن إبقاء الشاشة الأمامية مفتوحة عند طيّها إلى أن تنتهي مهلة غلق الشاشة."</string>
+    <string name="fold_lock_behavior_title" msgid="786228803694268449">"مواصلة استخدام التطبيقات أثناء طيّ الهاتف"</string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"العرض السلس"</string>
     <string name="peak_refresh_rate_summary" msgid="3627278682437562787">"تعمل هذه الميزة على رفع معدل التحديث تلقائيًا من 60 إلى <xliff:g id="ID_1">%1$s</xliff:g> هرتز لبعض أنواع المحتوى. يؤدي هذا إلى زيادة استخدام البطارية."</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"فرض معدل إعادة التحميل الأقصى"</string>
@@ -1102,7 +1127,7 @@
     <string name="dark_ui_text" msgid="4392646155331126666">"يستخدم \"المظهر الداكن\" خلفية سوداء لتوفير طاقة البطارية والحفاظ عليها لفترة أطول في بعض الشاشات. لا يتم تفعيل الجداول الزمنية لعمل \"المظهر الداكن\" إلا بعد قفل الشاشة."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"يتبع وضع \"المظهر الداكن\" حاليًا الجدول الزمني لوضع \"وقت النوم\"."</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"إعدادات وضع \"وقت النوم\""</string>
-    <string name="screen_timeout" msgid="7709947617767439410">"مهلة غلق الشاشة"</string>
+    <string name="screen_timeout" msgid="7709947617767439410">"المهلة قبل غلق الشاشة"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"بعد <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> من عدم النشاط"</string>
     <string name="screen_timeout_summary_not_set" msgid="5107680774964178875">"لم يتم تحديد اقتراح مطابق."</string>
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"الخلفية"</string>
@@ -1464,19 +1489,19 @@
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"ضبط رقم تعريف لملف العمل"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"ضبط نقش"</string>
     <string name="lockpassword_choose_your_pattern_description" msgid="6808109256008481046">"لمزيد من الأمان، عليك ضبط نقش لفتح قفل الجهاز."</string>
-    <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"ضبط نقش للملف الشخصي للعمل"</string>
+    <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"ضبط نقش لملف العمل"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"لاستخدام بصمة الإصبع، يُرجى إعداد كلمة مرور"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"لاستخدام بصمة الإصبع، يُرجى رسم نقش من ابتكارك"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"لتعزيز أمان الجهاز، يجب تحديد رقم تعريف شخصي"</string>
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="2783879743691792556">"لاستخدام بصمة الإصبع، يُرجى إعداد رقم تعريف شخصي"</string>
     <string name="lockpassword_confirm_your_password_header" msgid="6132312814563023990">"أعِد إدخال كلمة المرور"</string>
     <string name="lockpassword_reenter_your_profile_password_header" msgid="3812040127714827685">"إعادة إدخال كلمة مرور ملف العمل"</string>
-    <string name="lockpassword_confirm_your_work_password_header" msgid="4647071231702288305">"أدخِل كلمة مرور العمل"</string>
+    <string name="lockpassword_confirm_your_work_password_header" msgid="4647071231702288305">"أدخِل كلمة مرور ملف العمل"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="4037701363240138651">"تأكيد النقش"</string>
-    <string name="lockpassword_confirm_your_work_pattern_header" msgid="2668883108969165844">"أدخِل نقش العمل"</string>
+    <string name="lockpassword_confirm_your_work_pattern_header" msgid="2668883108969165844">"أدخِل نقش ملف العمل"</string>
     <string name="lockpassword_confirm_your_pin_header" msgid="2241722970567131308">"أعِد إدخال رقم التعريف الشخصي"</string>
     <string name="lockpassword_reenter_your_profile_pin_header" msgid="2890233614560435538">"إعادة إدخال رقم التعريف لملف العمل"</string>
-    <string name="lockpassword_confirm_your_work_pin_header" msgid="4229765521391960255">"أدخِل رقم التعريف الشخصي لملفك الشخصي للعمل"</string>
+    <string name="lockpassword_confirm_your_work_pin_header" msgid="4229765521391960255">"أدخِل رقم التعريف الشخصي لملف العمل"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="2100071354970605232">"كلمتا المرور غير متطابقتَين"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="1103699575489401030">"رقما التعريف الشخصي غير متطابقَين"</string>
     <string name="lockpassword_draw_your_pattern_again_header" msgid="1045638030120803622">"رسم النقش مرة أخرى"</string>
@@ -2000,6 +2025,7 @@
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"اختصار قلب الألوان"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"يحوّل خيار \"قلب الألوان\" الشاشات المضيئة إلى شاشات معتمة. ويحوّل أيضًا الشاشات المعتمة إلى شاشات مضيئة."</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"‏&lt;b&gt;ملاحظات:&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; ستتغيّر الألوان في الوسائط والصور.&lt;/li&gt; &lt;li&gt; خيار \"قلب الألوان\" يعمل مع جميع التطبيقات.&lt;/li&gt; &lt;li&gt; لعرض خلفية معتمة، يمكنك استخدام \"المظهر الداكن\" بدلاً من ذلك.&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="accessibility_action_label_panel_slice" msgid="1313725957071602932">"لضبط الإعدادات"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"النقر التلقائي (فترة الثبات)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"حول النقر التلقائي (فترة الثبات)"</string>
     <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"تعرّف على مزيد من المعلومات حول النقر التلقائي (فترة الثبات)"</string>
@@ -2931,7 +2957,7 @@
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"جارٍ إنشاء نسخة طبق الأصل من \"<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>\""</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"تم إنشاء نسخة طبق الأصل من \"<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>\"."</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"اللغات والإيماءات والوقت والاحتفاظ بنسخة احتياطية"</string>
-    <string name="languages_setting_summary" msgid="7963053736715746726">"لغات النظام، لغات التطبيقات، الكلام"</string>
+    <string name="languages_setting_summary" msgid="2650807397396180351">"لغات النظام ولغات التطبيق والإعدادات المفضّلة للمنطقة والكلام"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"‏لاسلكي، wi-fi، اتصال شبكة، إنترنت، لاسلكي، بيانات، واي فاي"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"‏إشعار Wi-Fi، إشعار wifi"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"استخدام البيانات"</string>
@@ -2981,7 +3007,7 @@
     <string name="keywords_app_pinning" msgid="1564144561464945019">"تثبيت الشاشة"</string>
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"المنافسة في العمل، عمل، ملف شخصي"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"الملف الشخصي للعمل، ملف شخصي مُدار، يوحِّد، توحيد، عمل، ملف شخصي"</string>
-    <string name="keywords_stay_awake_on_lock" msgid="6338367464776295697">"الوضع النشط، وضع السكون، عدم القفل، إبقاء الجهاز مفتوحًا عند طيّه، طي الجهاز، إطفاء الجهاز، قفل الشاشة"</string>
+    <string name="keywords_fold_lock_behavior" msgid="6278990772113341581">"الوضع النشط، وضع السكون، عدم القفل، إبقاء الجهاز مفتوحًا عند طيّه، طي الجهاز، إطفاء الجهاز، قفل الشاشة"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"الإيماءات"</string>
     <string name="keywords_wallet" msgid="3757421969956996972">"محفظة"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"دفع، نقر، دفعات"</string>
@@ -3007,11 +3033,11 @@
     <string name="keywords_biometric_settings" msgid="2173605297939326549">"الوجه، بصمة الإصبع، إضافة بصمة إصبع"</string>
     <string name="keywords_active_unlock_settings" msgid="4511320720304388889">"فتح الهاتف من الساعة، إضافة ميزة \"فتح الهاتف من الساعة\""</string>
     <string name="keywords_display_auto_brightness" msgid="7162942396941827998">"تعتيم الشاشة، شاشة تعمل باللمس، بطارية، سطوع ذكي، سطوع ديناميكي، سطوع تلقائي"</string>
-    <string name="keywords_display_adaptive_sleep" msgid="4905300860114643966">"ذكي، إضاءة خافتة للشاشة، سكون، بطارية، مهلة غلق الشاشة، استعراض الشاشة، عرض، شاشة، عدم نشاط"</string>
+    <string name="keywords_display_adaptive_sleep" msgid="4905300860114643966">"ذكي، إضاءة خافتة للشاشة، سكون، بطارية، المهلة قبل غلق الشاشة، استعراض الشاشة، عرض، شاشة، عدم نشاط"</string>
     <string name="keywords_auto_rotate" msgid="7288697525101837071">"كاميرا، ذكي، تدوير تلقائي، التدوير التلقائي، تدوير، قلب، دوران، عمودي، أفقي، اتجاه، رأسي، عرضي"</string>
     <string name="keywords_system_update_settings" msgid="5769003488814164931">"‏ترقية، android"</string>
     <string name="keywords_zen_mode_settings" msgid="7810203406522669584">"عدم الإزعاج، جدول زمني، إشعارات، حظر، صامت، اهتزاز، سكون، عمل، تركيز، صوت، كتم الصوت، يوم، يوم من الأسبوع، عطلة نهاية الأسبوع، ليلة من الأسبوع، حدث"</string>
-    <string name="keywords_screen_timeout" msgid="8921857020437540572">"شاشة، وقت القفل، مهلة غلق الشاشة، شاشة قفل"</string>
+    <string name="keywords_screen_timeout" msgid="8921857020437540572">"شاشة، وقت القفل، المهلة قبل غلق الشاشة، شاشة قفل"</string>
     <string name="keywords_storage_settings" msgid="6018856193950281898">"ذاكرة، تخزين مؤقت، بيانات، حذف، محو، فارغة، مساحة"</string>
     <string name="keywords_bluetooth_settings" msgid="2588159530959868188">"متصل، جهاز، سماعات رأس، سماعة، مكبر صوت، لاسلكي، إقران، سمّاعات أذن، موسيقى، وسائط"</string>
     <string name="keywords_wallpaper" msgid="7332890404629446192">"الخلفية، المظهر، الشبكة، تخصيص، خصص"</string>
@@ -3867,7 +3893,6 @@
     <string name="no_carrier_update_text" msgid="5432798085593055966">"تم التحديث قبل <xliff:g id="ID_1">^2</xliff:g>."</string>
     <string name="carrier_and_update_now_text" msgid="5075861262344398849">"تم التحديث بواسطة <xliff:g id="ID_1">^1</xliff:g> الآن."</string>
     <string name="no_carrier_update_now_text" msgid="7898004907837200752">"تم التحديث الآن."</string>
-    <string name="launch_mdp_app_text" msgid="8791816789749304897">"عرض الخطة"</string>
     <string name="launch_wifi_text" msgid="976421974332512894">"عرض التفاصيل"</string>
     <string name="data_saver_title" msgid="2593804270788863815">"توفير البيانات"</string>
     <string name="unrestricted_data_saver" msgid="7922563266857367495">"استخدام البيانات بدون قيود"</string>
@@ -3953,9 +3978,8 @@
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"فئات مطوّري البرامج في الإعدادات السريعة"</string>
     <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"‏إيقاف مهلة تفويض أداة Adb"</string>
     <string name="adb_authorization_timeout_summary" msgid="409931540424019778">"‏إيقاف الإبطال التلقائي لتفويضات أداة Adb الممنوحة للأنظمة التي لم تُعد الاتصال خلال الفترة التلقائية (7 أيام) أو الفترة التي يضبطها المستخدم (الحد الأدنى يوم واحد)"</string>
-    <string name="winscope_trace_quick_settings_title" msgid="4104768565053226689">"‏تتبّع أنشطة Winscope"</string>
     <string name="sensors_off_quick_settings_title" msgid="8472151847125917167">"إيقاف أجهزة الاستشعار"</string>
-    <string name="managed_profile_settings_title" msgid="3400923723423564217">"إعدادات الملف الشخصي للعمل"</string>
+    <string name="managed_profile_settings_title" msgid="3400923723423564217">"إعدادات ملف العمل"</string>
     <string name="managed_profile_contact_search_title" msgid="6562061740814513737">"البحث عن جهات اتصال دليل العمل في التطبيقات الشخصية"</string>
     <string name="managed_profile_contact_search_summary" msgid="4974727886709219105">"قد تكون عمليات البحث والمكالمات الوارد مرئية لمشرف تكنولوجيا المعلومات."</string>
     <string name="cross_profile_calendar_title" msgid="7570277841490216947">"تقويم على جميع الملفات الشخصية"</string>
@@ -4214,6 +4238,7 @@
     <string name="platform_compat_dialog_text_no_apps" msgid="5715226015751055812">"يمكن تعديل تغييرات التوافق فقط للتطبيقات التي تتيح تصحيح الأخطاء فيها. ما عليك سوى تثبيت تطبيق يمكن تصحيح الأخطاء فيه، ثم إعادة المحاولة."</string>
     <string name="disabled_dependent_setting_summary" msgid="4508635725315852504">"يعتمد على إعداد آخر"</string>
     <string name="my_device_info_account_preference_title" msgid="9197139254007133175">"الحساب"</string>
+    <string name="my_device_info_account_preference_summary" msgid="3510582677937510545">"‏عدد الحسابات: %d"</string>
     <string name="my_device_info_device_name_preference_title" msgid="8053298498727237971">"اسم الجهاز"</string>
     <string name="my_device_info_basic_info_category_title" msgid="381963187269356548">"المعلومات الأساسية"</string>
     <string name="my_device_info_legal_category_title" msgid="7732792841537995127">"المعلومات القانونية والتنظيمية"</string>
@@ -4507,10 +4532,8 @@
     <string name="lockscreen_privacy_controls_summary" msgid="7522918441738915364">"من شاشة القفل"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="2174300719855112358">"استخدام ميزة \"أدوات التحكم بالجهاز\""</string>
     <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"لتتمكَّن من استخدام عناصر التحكّم، عليك أولاً تفعيل خيار \"إظهار عناصر التحكّم بالأجهزة\"."</string>
-    <!-- no translation found for lockscreen_double_line_clock_summary (4109235686687860393) -->
-    <skip />
-    <!-- no translation found for lockscreen_double_line_clock_setting_toggle (802271087416091548) -->
-    <skip />
+    <string name="lockscreen_double_line_clock_summary" msgid="4109235686687860393">"يتغيّر حجم الساعة وفقًا للمحتوى المعروض على شاشة القفل."</string>
+    <string name="lockscreen_double_line_clock_setting_toggle" msgid="802271087416091548">"ساعة ديناميكية"</string>
     <string name="lockscreen_quick_affordances_title" msgid="8615741551327565793">"الاختصارات"</string>
     <plurals name="lockscreen_quick_affordances_summary" formatted="false" msgid="4225396036524703997">
       <item quantity="zero">بدون قفل شاشة</item>
@@ -4769,7 +4792,8 @@
     <string name="aspect_ratio_title" msgid="2451826875939676101">"نسبة العرض إلى الارتفاع"</string>
     <string name="aspect_ratio_summary" msgid="5944347596728740547">"يمكنك اختيار نسبة العرض إلى الارتفاع لهذا التطبيق في حال لم يكن مصمّمًا ليلائم جهاز <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"التطبيقات المقترَحة"</string>
-    <string name="user_aspect_ratio_overridden_apps_label" msgid="1564914138276629704">"التطبيقات التي تم فيها إلغاء نسبة العرض إلى الارتفاع"</string>
+    <!-- no translation found for user_aspect_ratio_changed_apps_label (2096614916172567672) -->
+    <skip />
     <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"نسبة العرض إلى الارتفاع التلقائية في التطبيق"</string>
     <string name="user_aspect_ratio_fullscreen" msgid="1843427242540081996">"ملء الشاشة"</string>
     <string name="user_aspect_ratio_half_screen" msgid="1015852057094310209">"نصف الشاشة"</string>
