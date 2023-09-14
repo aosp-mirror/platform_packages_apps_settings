@@ -120,6 +120,7 @@ public final class BatteryUsageBroadcastReceiver extends BroadcastReceiver {
 
         mFetchBatteryUsageData = true;
         BatteryUsageDataLoader.enqueueWork(context, /*isFullChargeStart=*/ true);
+        BootBroadcastReceiver.invokeJobRecheck(context);
     }
 
     private void sendBatteryEventData(Context context, BatteryEventType batteryEventType) {

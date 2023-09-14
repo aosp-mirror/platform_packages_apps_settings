@@ -26,13 +26,11 @@ public class ResetPreferenceController extends BasePreferenceController {
 
     private final UserManager mUm;
     private final NetworkResetPreferenceController mNetworkReset;
-    private final FactoryResetPreferenceController mFactpruReset;
 
     public ResetPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         mUm = (UserManager) context.getSystemService(Context.USER_SERVICE);
         mNetworkReset = new NetworkResetPreferenceController(context);
-        mFactpruReset = new FactoryResetPreferenceController(context);
     }
 
     @Override

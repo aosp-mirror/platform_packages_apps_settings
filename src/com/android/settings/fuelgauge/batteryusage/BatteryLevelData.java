@@ -20,6 +20,7 @@ import static com.android.settingslib.fuelgauge.BatteryStatus.BATTERY_LEVEL_UNKN
 
 import android.text.format.DateUtils;
 import android.util.ArrayMap;
+import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -69,6 +70,16 @@ public final class BatteryLevelData {
             return String.format(Locale.ENGLISH, "timestamps: %s; levels: %s",
                     Objects.toString(mTimestamps), Objects.toString(mLevels));
         }
+
+        private int getIndexByTimestamps(long startTimestamp, long endTimestamp) {
+            for (int index = 0; index < mTimestamps.size() - 1; index++) {
+                if (mTimestamps.get(index) <= startTimestamp
+                        && endTimestamp <= mTimestamps.get(index + 1)) {
+                    return index;
+                }
+            }
+            return BatteryChartViewModel.SELECTED_INDEX_INVALID;
+        }
     }
 
     /**
@@ -98,6 +109,18 @@ public final class BatteryLevelData {
             mHourlyBatteryLevelsPerDay.add(
                     new PeriodBatteryLevelData(batteryLevelMap, hourlyTimestampsPerDay));
         }
+    }
+
+    /** Gets daily and hourly index between start and end timestamps. */
+    public Pair<Integer, Integer> getIndexByTimestamps(long startTimestamp, long endTimestamp) {
+        final int dailyHighlightIndex =
+                mDailyBatteryLevels.getIndexByTimestamps(startTimestamp, endTimestamp);
+        final int hourlyHighlightIndex =
+                (dailyHighlightIndex == BatteryChartViewModel.SELECTED_INDEX_INVALID)
+                        ? BatteryChartViewModel.SELECTED_INDEX_INVALID
+                        : mHourlyBatteryLevelsPerDay.get(dailyHighlightIndex)
+                        .getIndexByTimestamps(startTimestamp, endTimestamp);
+        return Pair.create(dailyHighlightIndex, hourlyHighlightIndex);
     }
 
     public PeriodBatteryLevelData getDailyBatteryLevels() {

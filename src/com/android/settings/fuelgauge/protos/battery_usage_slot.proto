@@ -26,7 +26,9 @@ message BatteryUsageDiff {
   optional double consume_power = 9;
   optional double foreground_usage_consume_power = 10;
   optional double background_usage_consume_power = 11;
-  optional int64 foreground_usage_time = 12;
-  optional int64 background_usage_time = 13;
-  optional int64 screen_on_time = 14;
+  optional double foreground_service_usage_consume_power = 12;
+  optional double cached_usage_consume_power = 13;
+  optional int64 foreground_usage_time = 14;
+  optional int64 background_usage_time = 15;
+  optional int64 screen_on_time = 16;
 }

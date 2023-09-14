@@ -35,21 +35,22 @@ import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowUserManager.class)
-public class FactoryResetPreferenceControllerTest {
+public class FactoryResetDemoUserPreferenceControllerTest {
 
-    private static final String FACTORY_RESET_KEY = "factory_reset";
+    private static final String FACTORY_RESET_DEMO_USER_KEY = "factory_reset_demo_user";
 
     private ShadowUserManager mShadowUserManager;
 
     private Context mContext;
-    private FactoryResetPreferenceController mController;
+    private FactoryResetDemoUserPreferenceController mController;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
         mShadowUserManager = ShadowUserManager.getShadow();
 
-        mController = new FactoryResetPreferenceController(mContext, FACTORY_RESET_KEY);
+        mController = new FactoryResetDemoUserPreferenceController(
+            mContext, FACTORY_RESET_DEMO_USER_KEY);
     }
 
     @After
@@ -64,7 +65,7 @@ public class FactoryResetPreferenceControllerTest {
     public void isAvailable_systemUser() {
         mShadowUserManager.setIsAdminUser(true);
 
-        assertThat(mController.isAvailable()).isTrue();
+        assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
@@ -85,11 +86,11 @@ public class FactoryResetPreferenceControllerTest {
         // Indicate the user is a demo user.
         mShadowUserManager.addUser(UserHandle.myUserId(), "test", UserInfo.FLAG_DEMO);
 
-        assertThat(mController.isAvailable()).isFalse();
+        assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
     public void getPreferenceKey() {
-        assertThat(mController.getPreferenceKey()).isEqualTo(FACTORY_RESET_KEY);
+        assertThat(mController.getPreferenceKey()).isEqualTo(FACTORY_RESET_DEMO_USER_KEY);
     }
 }

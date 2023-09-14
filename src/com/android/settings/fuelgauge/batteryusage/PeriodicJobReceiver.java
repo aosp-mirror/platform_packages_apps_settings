@@ -33,12 +33,23 @@ public final class PeriodicJobReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        try {
+            loadDataAndRefreshJob(context, intent);
+        } catch (Exception e) {
+            BatteryUsageLogUtils.writeLog(context, Action.SCHEDULE_JOB,
+                    String.format("loadDataAndRefreshJob() failed: %s", e));
+        }
+    }
+
+    private static void loadDataAndRefreshJob(Context context, Intent intent) {
         final String action = intent == null ? "" : intent.getAction();
         if (!ACTION_PERIODIC_JOB_UPDATE.equals(action)) {
             Log.w(TAG, "receive unexpected action=" + action);
             return;
         }
         if (DatabaseUtils.isWorkProfile(context)) {
+            BatteryUsageLogUtils.writeLog(context, Action.SCHEDULE_JOB,
+                    "do not refresh job for work profile");
             Log.w(TAG, "do not refresh job for work profile action=" + action);
             return;
         }
