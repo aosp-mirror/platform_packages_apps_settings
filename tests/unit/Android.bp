@@ -13,24 +13,19 @@ android_test {
     certificate: "platform",
 
     libs: [
-        "android.test.runner",
         "telephony-common",
         "ims-common",
-        "android.test.base",
-        "android.test.mock",
     ],
 
     static_libs: [
         "androidx.arch.core_core-testing",
         "androidx.test.core",
         "androidx.test.rules",
-        "androidx.test.espresso.core",
         "androidx.test.ext.junit",
         "androidx.preference_preference",
         "mockito-target-minus-junit4",
         "platform-test-annotations",
         "truth-prebuilt",
-        "androidx.test.uiautomator_uiautomator",
         "kotlinx_coroutines_test",
         // Don't add SettingsLib libraries here - you can use them directly as they are in the
         // instrumented Settings app.
