@@ -257,6 +257,8 @@
     <string name="connected_device_other_device_title">Other devices</string>
     <!-- Title for connected device group [CHAR LIMIT=none]-->
     <string name="connected_device_saved_title">Saved devices</string>
+    <!-- Title for fast pair device group [CHAR LIMIT=none]-->
+    <string name="connected_device_fast_pair_device_title">Associated with account</string>
     <!-- Summary for preference to add a device [CHAR LIMIT=none]-->
     <string name="connected_device_add_device_summary">Bluetooth will turn on to pair</string>
     <!-- Title for other connection preferences [CHAR LIMIT=none]-->
@@ -10062,7 +10064,7 @@
     <!-- Title text for edge to edge navigation [CHAR LIMIT=60] -->
     <string name="edge_to_edge_navigation_title">Gesture navigation</string>
     <!-- Summary text for edge to edge navigation [CHAR LIMIT=NONE] -->
-    <string name="edge_to_edge_navigation_summary">To go Home, swipe up from the bottom of the screen. To switch apps, swipe up from the bottom, hold, then release. To go back, swipe from either the left or right edge.</string>
+    <string name="edge_to_edge_navigation_summary">To go home, swipe up from the bottom of the screen. To switch apps, swipe up from the bottom, hold, then release. To go back, swipe from either the left or right edge.</string>
 
     <!-- Title text for 3-button navigation [CHAR LIMIT=60] -->
     <string name="legacy_navigation_title">3-button navigation</string>
@@ -12160,6 +12162,11 @@
     <!-- The summary of the head tracking [CHAR LIMIT=none] -->
     <string name="bluetooth_details_head_tracking_summary">Audio changes as you move your head to sound more natural</string>
 
+    <!-- The title of CDM Permissions Sync -->
+    <string name="bluetooth_details_permissions_sync_title">Sync permissions from phone</string>
+    <!-- The summary of CDM Permissions Sync -->
+    <string name="bluetooth_details_permissions_sync_summary">Give your watch the same app permissions that you’ve allowed on this phone</string>
+
     <!-- The title of the bluetooth audio device type selection [CHAR LIMIT=none] -->
     <string name="bluetooth_details_audio_device_types_title">Audio Device Type</string>
     <!-- The audio device type corresponding to unknown device type [CHAR LIMIT=none] -->
@@ -12270,7 +12277,9 @@
     <!-- [CHAR LIMIT=60] Aspect ratio title setting to choose app aspect ratio -->
     <string name="aspect_ratio_title">Aspect ratio</string>
     <!-- [CHAR LIMIT=NONE] Aspect ratio setting summary to choose aspect ratio for apps unoptimized for device -->
-    <string name="aspect_ratio_summary">Choose an aspect ratio to view this app if it hasn\'t been designed to fit your <xliff:g id="device_name">%1$s</xliff:g></string>
+    <string name="aspect_ratio_summary">Try a new aspect ratio to view this app if it hasn\'t been designed to fit your <xliff:g id="device_name">%1$s</xliff:g></string>
+    <!-- [CHAR LIMIT=NONE] Aspect ratio setting main summary on page to choose aspect ratio for apps unoptimized for device -->
+    <string name="aspect_ratio_main_summary">Try a new aspect ratio to view this app if it hasn\'t been designed to fit your <xliff:g id="device_name">%1$s</xliff:g>. Some apps may not be optimized for certain aspect ratios.</string>
     <!-- [CHAR LIMIT=NONE] Aspect ratio suggested apps filter label -->
     <string name="user_aspect_ratio_suggested_apps_label">Suggested apps</string>
     <!-- [CHAR LIMIT=14] Filter label for apps that have user aspect ratio changed -->
@@ -12290,7 +12299,7 @@
     <!-- [CHAR LIMIT=NONE] 4:3 aspect ratio entry -->
     <string name="user_aspect_ratio_4_3">4:3</string>
     <!-- [CHAR LIMIT=NONE] Warning description for app info aspect ratio page -->
-    <string name="app_aspect_ratio_footer">The app will restart when you change aspect ratio. You may lose unsaved changes.</string>
+    <string name="app_aspect_ratio_footer">The app will restart when you change aspect ratio. You may lose unsaved changes. Some apps may not be optimized for certain aspect ratios.</string>
 
 
     <!-- Accessibility label for fingerprint sensor [CHAR LIMIT=NONE] -->

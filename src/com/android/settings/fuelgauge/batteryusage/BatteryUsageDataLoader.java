@@ -28,6 +28,7 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.fuelgauge.BatteryUsageHistoricalLogEntry.Action;
 import com.android.settings.fuelgauge.batteryusage.bugreport.BatteryUsageLogUtils;
+import com.android.settings.overlay.FeatureFactory;
 
 import java.util.List;
 import java.util.Map;
@@ -138,6 +139,8 @@ public final class BatteryUsageDataLoader {
                 // No app usage data or battery diff data at this time.
                 loadAppUsageData(context);
                 preprocessBatteryUsageSlots(context);
+                FeatureFactory.getFeatureFactory().getPowerUsageFeatureProvider()
+                        .detectSettingsAnomaly(context, /* displayDrain= */ 0);
             }
             Log.d(TAG, String.format(
                     "loadUsageDataSafely() in %d/ms", System.currentTimeMillis() - start));

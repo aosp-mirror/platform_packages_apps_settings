@@ -109,7 +109,7 @@ fun UserAspectRatioAppList(
         appList = appList,
         header = {
             Box(Modifier.padding(SettingsDimension.itemPadding)) {
-                SettingsBody(UserAspectRatioAppsPageProvider.getSummary())
+                SettingsBody(stringResource(R.string.aspect_ratio_main_summary, Build.MODEL))
             }
             Illustration(object : IllustrationModel {
                 override val resId = R.raw.user_aspect_ratio_education
