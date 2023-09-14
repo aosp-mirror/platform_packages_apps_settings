@@ -17,6 +17,7 @@
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:androidprv="http://schemas.android.com/apk/prv/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -77,7 +78,7 @@
             android:layout_gravity="start"
             android:textAlignment="viewStart"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="?android:attr/textColorSecondary"
+            android:textColor="?androidprv:attr/materialColorOnSurfaceVariant"
             android:maxLines="4"
             android:hyphenationFrequency="normalFast"
             android:lineBreakWordStyle="phrase"
