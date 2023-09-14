@@ -28,6 +28,8 @@ import android.credentials.CredentialProviderInfo;
 import android.credentials.SetEnabledProvidersException;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.OutcomeReceiver;
 import android.os.UserHandle;
 import android.provider.Settings;
@@ -43,7 +45,6 @@ import com.android.internal.content.PackageMonitor;
 import com.android.settings.R;
 import com.android.settings.applications.defaultapps.DefaultAppPickerFragment;
 import com.android.settingslib.applications.DefaultAppInfo;
-import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.widget.CandidateInfo;
 
 import java.util.ArrayList;
@@ -64,6 +65,8 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
 
     private CredentialManager mCredentialManager;
     private int mIntentSenderUserId = -1;
+
+    private static final Handler sMainHandler = new Handler(Looper.getMainLooper());
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -132,17 +135,44 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
             new PackageMonitor() {
                 @Override
                 public void onPackageAdded(String packageName, int uid) {
-                    ThreadUtils.postOnMainThread(() -> update());
+                    sMainHandler.post(
+                            () -> {
+                                // See b/296164461 for context
+                                if (getContext() == null) {
+                                    Log.w(TAG, "context is null");
+                                    return;
+                                }
+
+                                update();
+                            });
                 }
 
                 @Override
                 public void onPackageModified(String packageName) {
-                    ThreadUtils.postOnMainThread(() -> update());
+                    sMainHandler.post(
+                            () -> {
+                                // See b/296164461 for context
+                                if (getContext() == null) {
+                                    Log.w(TAG, "context is null");
+                                    return;
+                                }
+
+                                update();
+                            });
                 }
 
                 @Override
                 public void onPackageRemoved(String packageName, int uid) {
-                    ThreadUtils.postOnMainThread(() -> update());
+                    sMainHandler.post(
+                            () -> {
+                                // See b/296164461 for context
+                                if (getContext() == null) {
+                                    Log.w(TAG, "context is null");
+                                    return;
+                                }
+
+                                update();
+                            });
                 }
             };
 
@@ -275,10 +305,7 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
     protected CharSequence getConfirmationMessage(CandidateInfo appInfo) {
         // If we are selecting none then show a warning label.
         if (appInfo == null) {
-            final String message =
-                    getContext()
-                            .getString(
-                                    R.string.credman_confirmation_message);
+            final String message = getContext().getString(R.string.credman_confirmation_message);
             return Html.fromHtml(message);
         }
         final CharSequence appName = appInfo.loadLabel();
