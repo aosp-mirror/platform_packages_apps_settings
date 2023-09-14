@@ -227,8 +227,7 @@ public class UserAspectRatioDetails extends AppInfoBase implements
             pref.setVisible(false);
             return;
         }
-        pref.setTitle(mUserAspectRatioManager.getUserMinAspectRatioEntry(aspectRatio,
-                mPackageName));
+        pref.setTitle(mUserAspectRatioManager.getAccessibleEntry(aspectRatio, mPackageName));
         pref.setOnClickListener(this);
         mAspectRatioPreferences.add(pref);
     }
