@@ -42,6 +42,12 @@
     <string name="preview_pager_content_description" msgid="3762247188224576303">"Aperçu"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Réduire"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Agrandir"</string>
+    <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"Toujours"</string>
+    <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"L\'écran avant s\'allume lorsque vous pliez votre appareil"</string>
+    <string name="selective_stay_awake_title" msgid="7887645333447645168">"Seulement des jeux, des vidéos et plus encore"</string>
+    <string name="selective_stay_awake_summary" msgid="9055967322921984543">"L\'écran avant s\'allume pour les applis qui empêchent la mise en veille de l\'écran."</string>
+    <string name="sleep_on_fold_title" msgid="7626123024330501411">"Jamais"</string>
+    <string name="sleep_on_fold_summary" msgid="7737992842459588846">"L\'écran avant se verrouille lorsque vous pliez votre appareil"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Utiliser la rotation automatique"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"La détection de visages utilise la caméra avant pour améliorer la précision de la rotation automatique. Les images ne sont jamais stockées ni envoyées à Google."</string>
     <string name="bluetooth" msgid="8898478620943459654">"Bluetooth"</string>
@@ -118,6 +124,7 @@
     <string name="connected_device_previously_connected_screen_title" msgid="8823331744788100605">"Connecté précédemment"</string>
     <string name="connected_device_bluetooth_turned_on_toast" msgid="144664089794199928">"Bluetooth activé"</string>
     <string name="previous_connected_see_all" msgid="7759413145713251328">"Tout afficher"</string>
+    <string name="connected_device_fast_pair_device_see_all" msgid="4898279230458128620">"Tout afficher"</string>
     <string name="stylus_device_details_title" msgid="7618295136015480864">"Stylet"</string>
     <string name="stylus_default_notes_app" msgid="4165657465911764628">"Appui sur le bouton du stylet"</string>
     <string name="stylus_default_notes_summary_work" msgid="4554643411627934223">"<xliff:g id="APP_NAME">%s</xliff:g> (Profil professionnel)"</string>
@@ -389,6 +396,8 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Déverrouillage par reconnaissance faciale et la <xliff:g id="WATCH">%s</xliff:g> ajouté"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Visage, empreinte digitale et <xliff:g id="WATCH">%s</xliff:g> ajoutés"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Visage, empreintes digitales et <xliff:g id="WATCH">%s</xliff:g> ajoutés"</string>
+    <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Déblocage de l\'authentificateur distant"</string>
+    <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"Montre ajoutée"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"Configurer votre montre"</string>
     <string name="security_settings_remoteauth_enroll_introduction_message" msgid="8737276885766036074">"Le Déverrouillage par une montre est un autre moyen pratique de déverrouiller ce téléphone, par exemple, lorsque vos doigts sont mouillés ou que votre visage n\'est pas reconnu.\n\nVous pouvez utiliser votre montre pour déverrouiller ce téléphone lorsque vous :"</string>
     <string name="security_settings_remoteauth_enroll_introduction_disagree" msgid="7639258097401796028">"Pas maintenant"</string>
@@ -522,6 +531,30 @@
     <string name="security_header" msgid="961514795852103424">"Sécurité"</string>
     <string name="privacy_header" msgid="5526002421324257007">"Confidentialité"</string>
     <string name="work_profile_category_header" msgid="85707750968948517">"Profil professionnel"</string>
+    <!-- no translation found for private_space_title (7078627930195569767) -->
+    <skip />
+    <!-- no translation found for private_space_summary (8237652417163408001) -->
+    <skip />
+    <!-- no translation found for private_space_one_lock_title (7306547190751832568) -->
+    <skip />
+    <!-- no translation found for private_space_hide_title (1615744426933304644) -->
+    <skip />
+    <!-- no translation found for private_space_category_system (1286843321867285700) -->
+    <skip />
+    <!-- no translation found for private_space_create_title (47273568884806726) -->
+    <skip />
+    <!-- no translation found for private_space_delete_title (3075645119800272800) -->
+    <skip />
+    <!-- no translation found for private_space_created (2978055968937762232) -->
+    <skip />
+    <!-- no translation found for private_space_already_exists (1253034947621867419) -->
+    <skip />
+    <!-- no translation found for private_space_create_failed (4908100791174213808) -->
+    <skip />
+    <!-- no translation found for private_space_deleted (7825768516955610897) -->
+    <skip />
+    <!-- no translation found for private_space_delete_failed (8500755484258565011) -->
+    <skip />
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Vous pouvez ajouter jusqu\'à <xliff:g id="COUNT">%d</xliff:g> empreintes digitales"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Vous avez ajouté le nombre maximal autorisé d\'empreintes digitales"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Impossible d\'ajouter d\'autres empreintes digitales"</string>
@@ -539,7 +572,7 @@
     <string name="lock_settings_picker_title" msgid="9219376327364915334">"Verrouillage de l\'écran"</string>
     <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"Choisir le verrouillage de l\'écran"</string>
     <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"Choisir un nouveau verrouillage de l\'écran"</string>
-    <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"Choisir le verrouillage des applis pro"</string>
+    <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"Choisir le verrouillage des applis professionnelles"</string>
     <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Choisir un nouveau verrouillage de profil pro"</string>
     <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"Pour plus de sécurité, définissez une méthode secondaire pour verrouiller l\'écran"</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Choisissez une méthode secondaire pour le verrouillage de l\'écran"</string>
@@ -896,20 +929,13 @@
     <string name="wifi_type_title" msgid="2174893488722015838">"Type"</string>
     <string name="wifi_details_dns" msgid="273231528073312579">"DNS"</string>
     <string name="wifi_details_ipv6_address_header" msgid="1913151339341722443">"Adresses IPv6"</string>
-    <!-- no translation found for hotspot_device_details_category (3110651914598697220) -->
-    <skip />
-    <!-- no translation found for hotspot_device_details_internet_source (1563266599673281875) -->
-    <skip />
-    <!-- no translation found for internet_source_wifi (6952593095166435179) -->
-    <skip />
-    <!-- no translation found for internet_source_mobile_data (877403889449201789) -->
-    <skip />
-    <!-- no translation found for internet_source_ethernet (8338472576454100966) -->
-    <skip />
-    <!-- no translation found for hotspot_connection_category (4320380513982923556) -->
-    <skip />
-    <!-- no translation found for hotspot_connection_strength (87359986943768421) -->
-    <skip />
+    <string name="hotspot_device_details_category" msgid="3110651914598697220">"Détails de l\'appareil du point d\'accès"</string>
+    <string name="hotspot_device_details_internet_source" msgid="1563266599673281875">"Source Internet"</string>
+    <string name="internet_source_wifi" msgid="6952593095166435179">"Wi-Fi"</string>
+    <string name="internet_source_mobile_data" msgid="877403889449201789">"Données mobiles"</string>
+    <string name="internet_source_ethernet" msgid="8338472576454100966">"Ethernet"</string>
+    <string name="hotspot_connection_category" msgid="4320380513982923556">"Connexion du point d\'accès"</string>
+    <string name="hotspot_connection_strength" msgid="87359986943768421">"Force de connexion"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"Réseaux enregistrés"</string>
     <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"Abonnements"</string>
     <string name="wifi_saved_other_networks_tab" msgid="7942647415716557293">"Autres réseaux"</string>
@@ -1043,8 +1069,7 @@
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Désactivé"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Balance des blancs de l\'écran"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
-    <string name="stay_awake_on_fold_title" msgid="4195536619511589471">"Ne se verrouille pas si plié"</string>
-    <string name="stay_awake_on_fold_summary" msgid="2413928869516675293">"L\'écran frontal reste déverrouillé lorsque l\'appareil est plié, jusqu\'à la mise en veille automatique de l\'écran"</string>
+    <string name="fold_lock_behavior_title" msgid="786228803694268449">"Continuer à utiliser les applis sur Fold"</string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Affichage fluide"</string>
     <string name="peak_refresh_rate_summary" msgid="3627278682437562787">"Augmente automatiquement la fréquence d\'actualisation de 60 à <xliff:g id="ID_1">%1$s</xliff:g> Hz pour certains contenus. Sollicite davantage la batterie."</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Forcer la fréquence d\'actualisation crête"</string>
@@ -1158,7 +1183,7 @@
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Utiliser <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="sim_preferred_title" msgid="8850185380445309835">"Modifier la SIM préférée ?"</string>
     <string name="sim_preferred_message" msgid="6004009449266648351">"<xliff:g id="NEW_SIM">%1$s</xliff:g> est la seule SIM de votre appareil. Voulez-vous l\'utiliser pour les données mobiles, les appels et les SMS ?"</string>
-    <string name="enable_auto_data_switch_dialog_title" msgid="3563043560556718994">"Améliorer couverture données ?"</string>
+    <string name="enable_auto_data_switch_dialog_title" msgid="3563043560556718994">"Améliorer la couverture des données ?"</string>
     <string name="enable_auto_data_switch_dialog_message" msgid="5777287241521946883">"Autorisez votre appareil à passer automatiquement sur <xliff:g id="BACKUP_CARRIER">%1$s</xliff:g> pour les données mobiles lorsque la disponibilité est meilleure."</string>
     <string name="auto_data_switch_dialog_managed_profile_warning" msgid="6839438290079866605">\n\n"Votre organisation est susceptible de voir les appels, les messages et le trafic réseau."</string>
     <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"Code PIN de la carte SIM incorrect. Vous devez désormais contacter votre opérateur pour déverrouiller votre appareil."</string>
@@ -1473,7 +1498,7 @@
     <string name="lockpassword_reenter_your_profile_password_header" msgid="3812040127714827685">"Confirmer votre mot de passe professionnel"</string>
     <string name="lockpassword_confirm_your_work_password_header" msgid="4647071231702288305">"Saisissez votre mot de passe professionnel"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="4037701363240138651">"Confirmez votre schéma"</string>
-    <string name="lockpassword_confirm_your_work_pattern_header" msgid="2668883108969165844">"Saisissez schéma professionnel"</string>
+    <string name="lockpassword_confirm_your_work_pattern_header" msgid="2668883108969165844">"Saisissez votre schéma professionnel"</string>
     <string name="lockpassword_confirm_your_pin_header" msgid="2241722970567131308">"Saisissez de nouveau votre code"</string>
     <string name="lockpassword_reenter_your_profile_pin_header" msgid="2890233614560435538">"Confirmer votre code professionnel"</string>
     <string name="lockpassword_confirm_your_work_pin_header" msgid="4229765521391960255">"Saisissez votre code professionnel"</string>
@@ -2000,6 +2025,7 @@
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Raccourci vers Inversion des couleurs"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"Avec l\'inversion des couleurs, les écrans clairs deviennent sombres et les écrans sombres deviennent clairs."</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"&lt;b&gt;À noter&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Les contenus multimédias et les images changeront de couleur&lt;/li&gt; &lt;li&gt; L\'inversion des couleurs fonctionne dans toutes les applis&lt;/li&gt; &lt;li&gt; Pour afficher un fond noir, le thème sombre peut être utilisé à la place&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="accessibility_action_label_panel_slice" msgid="1313725957071602932">"saisissez settings"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Clic automatique (temps d\'interaction)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"À propos clic auto (temps d\'interaction)"</string>
     <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"En savoir plus sur le clic automatique (temps d\'interaction)"</string>
@@ -2249,7 +2275,7 @@
     <string name="history_details_title" msgid="8628584613889559355">"Historique"</string>
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Utilisation de la batterie"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Voir l\'utilisation des dernières 24 h"</string>
-    <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"Voir utilisation depuis charge complète"</string>
+    <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"Voir l\'utilisation depuis la dernière charge complète"</string>
     <string name="battery_details_title" msgid="3289680399291090588">"Utilisation de la batterie par l\'appli"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Détails d\'utilisation"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Ajuster la consommation"</string>
@@ -2271,7 +2297,7 @@
     <string name="battery_tip_dock_defender_future_bypass_title" msgid="4332616280495788195">"Recharge optimisée pour protéger votre batterie"</string>
     <string name="battery_tip_dock_defender_future_bypass_summary" msgid="7870758621381307597">"Pour prolonger la durée de vie de votre batterie, la recharge est optimisée lorsque l\'appareil se trouve dans la station d\'accueil"</string>
     <string name="battery_tip_dock_defender_active_title" msgid="1414785238383255699">"Recharge optimisée pour protéger votre batterie"</string>
-    <string name="battery_tip_dock_defender_active_summary" msgid="3512082623718801459">"Pour prolonger la durée de vie de votre batterie, la recharge est optimisée lorsque l\'appareil se trouve dans la station d\'accueil"</string>
+    <string name="battery_tip_dock_defender_active_summary" msgid="3512082623718801459">"Pour prolonger la durée de vie de votre batterie, la recharge est optimisée lorsque l\'appareil se trouve sur la station d\'accueil"</string>
     <string name="battery_tip_dock_defender_temporarily_bypassed_title" msgid="1679449361090557201">"Recharge complète"</string>
     <string name="battery_tip_dock_defender_temporarily_bypassed_summary" msgid="1099500476761333281">"Pour protéger votre batterie, la recharge sera optimisée la prochaine fois que la tablette se trouvera sur la station d\'accueil"</string>
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"En savoir plus sur la suspension de la recharge"</string>
@@ -2931,7 +2957,7 @@
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"Création du clone <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>…"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"Clone <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> créé"</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"Langues, gestes, heure, sauvegarde"</string>
-    <string name="languages_setting_summary" msgid="7963053736715746726">"Langues du système, langues des applis, voix"</string>
+    <string name="languages_setting_summary" msgid="2650807397396180351">"Langues du système, langues des applications, préférences régionales, langage parlé"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, connexion réseau, internet, sans fil, données, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"notification Wi‑Fi, notification wi-fi"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"consommation des données"</string>
@@ -2981,7 +3007,7 @@
     <string name="keywords_app_pinning" msgid="1564144561464945019">"épinglage d\'écran"</string>
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"verrouillage profil pro, professionnel, profil"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"profil professionnel, profil géré, unifier, unification, professionnel, profil"</string>
-    <string name="keywords_stay_awake_on_lock" msgid="6338367464776295697">"activé, veille, ne pas verrouiller, ne se verrouille pas si plié, plier, fermer, plier, fermer, écran éteint"</string>
+    <string name="keywords_fold_lock_behavior" msgid="6278990772113341581">"activé, veille, ne pas verrouiller, ne se verrouille pas si plié, plier, fermer, plier, fermer, écran éteint"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"gestes"</string>
     <string name="keywords_wallet" msgid="3757421969956996972">"portefeuille"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"payer, appuyer, paiements"</string>
@@ -3241,7 +3267,7 @@
     <string name="lockscreen_bypass_title" msgid="6519964196744088573">"Ignorer l\'écran de verrouillage"</string>
     <string name="lockscreen_bypass_summary" msgid="4578154430436224161">"Vous accédez au dernier écran utilisé sans voir l\'écran de déverrouillage et les notifications qu\'il contient. Pour les voir, balayez vers le bas."</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Écran de verrouillage, verrouiller l\'écran, passer, ignorer"</string>
-    <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Quand le profil pro est verrouillé"</string>
+    <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Quand le profil professionnel est verrouillé"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"N\'afficher que les nouvelles notif. sur l\'écran verrouillage"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Supprimer automatiquement de l\'écran de verrouillage les notifications déjà consultées"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Notifications sur l\'écran de verrouillage"</string>
@@ -3258,7 +3284,7 @@
     <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"N\'afficher aucune notification"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="4688399629301178487">"Que souhaitez-vous afficher sur l\'écran de verrouillage ?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1360388192096354315">"Écran de verrouillage"</string>
-    <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"Afficher tout le contenu des notifications pro"</string>
+    <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"Afficher tout le contenu des notifications professionnelles"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"Masquer le contenu professionnel sensible"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"Lorsque votre appareil est verrouillé, comment voulez-vous que les notifications du profil s\'affichent ?"</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="6950124772255324448">"Notifications du profil"</string>
@@ -3356,7 +3382,7 @@
     <string name="picture_in_picture_app_detail_title" msgid="4442235098255164650">"Picture-in-picture"</string>
     <string name="picture_in_picture_app_detail_switch" msgid="8544190716075624017">"Autoriser le Picture-in-picture"</string>
     <string name="picture_in_picture_app_detail_summary" msgid="2503211101305358849">"Autoriser cette appli à créer une fenêtre Picture-in-picture pendant qu\'elle est ouverte ou après que vous l\'avez quittée (par exemple, pour continuer de regarder une vidéo). La fenêtre se superpose aux autres applis ouvertes."</string>
-    <string name="interact_across_profiles_title" msgid="7285906999927669971">"Applis pro et perso associées"</string>
+    <string name="interact_across_profiles_title" msgid="7285906999927669971">"Applis personnelles et professionnelles associées"</string>
     <string name="interact_across_profiles_summary_allowed" msgid="1365881452153799092">"Associées"</string>
     <string name="interact_across_profiles_summary_not_allowed" msgid="5802674212788171790">"Non associées"</string>
     <string name="interact_across_profiles_empty_text" msgid="419061031064397168">"Aucune application associée"</string>
@@ -3867,7 +3893,6 @@
     <string name="no_carrier_update_text" msgid="5432798085593055966">"Mis à jour il y a <xliff:g id="ID_1">^2</xliff:g>"</string>
     <string name="carrier_and_update_now_text" msgid="5075861262344398849">"Mis à jour par <xliff:g id="ID_1">^1</xliff:g> à l\'instant"</string>
     <string name="no_carrier_update_now_text" msgid="7898004907837200752">"Mis à jour à l\'instant"</string>
-    <string name="launch_mdp_app_text" msgid="8791816789749304897">"Afficher le forfait"</string>
     <string name="launch_wifi_text" msgid="976421974332512894">"Afficher les détails"</string>
     <string name="data_saver_title" msgid="2593804270788863815">"Économiseur de données"</string>
     <string name="unrestricted_data_saver" msgid="7922563266857367495">"Données sans restrictions"</string>
@@ -3885,12 +3910,9 @@
     <string name="battery_saver_off_summary" msgid="4411561435493109261">"Désactivé"</string>
     <string name="app_battery_usage_title" msgid="346558380609793334">"Utilisation de la batterie par les applis"</string>
     <string name="app_battery_usage_summary" msgid="6349965904306339539">"Définir l\'utilisation de la batterie pour les applis"</string>
-    <!-- no translation found for battery_tips_card_action_button (4897793527424711648) -->
-    <skip />
-    <!-- no translation found for battery_tips_card_dismiss_button (1885756985544936618) -->
-    <skip />
-    <!-- no translation found for battery_tips_card_feedback_info (767117835675157298) -->
-    <skip />
+    <string name="battery_tips_card_action_button" msgid="4897793527424711648">"Afficher les paramètres"</string>
+    <string name="battery_tips_card_dismiss_button" msgid="1885756985544936618">"OK"</string>
+    <string name="battery_tips_card_feedback_info" msgid="767117835675157298">"Ce message est-il utile ?"</string>
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Sans restriction"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Optimisée"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"Restreinte"</string>
@@ -3956,7 +3978,6 @@
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Blocs Réglages rapides pour les développeurs"</string>
     <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"Désactiver le délai d\'expiration des autorisations adb"</string>
     <string name="adb_authorization_timeout_summary" msgid="409931540424019778">"Désactiver la révocation automatique des autorisations adb pour les systèmes qui ne se sont pas reconnectés dans le délai par défaut (7 jours) ou configuré par l\'utilisateur (1 jour minimum)"</string>
-    <string name="winscope_trace_quick_settings_title" msgid="4104768565053226689">"Trace Winscope"</string>
     <string name="sensors_off_quick_settings_title" msgid="8472151847125917167">"Capteurs désactivés"</string>
     <string name="managed_profile_settings_title" msgid="3400923723423564217">"Paramètres du profil professionnel"</string>
     <string name="managed_profile_contact_search_title" msgid="6562061740814513737">"Rechercher les contacts de l\'annuaire pro dans les applis perso"</string>
@@ -4208,7 +4229,7 @@
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
     <string name="enable_angle_as_system_driver" msgid="3985105681812713612">"Activer ANGLE"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="6413038127558166972">"Activer ANGLE comme pilote OpenGL ES par défaut Son activation sur des appareils incompatibles peut endommager certaines applications."</string>
+    <string name="enable_angle_as_system_driver_summary" msgid="6413038127558166972">"Activer ANGLE comme pilote OpenGL ES par défaut. Son activation sur des appareils incompatibles peut endommager certaines applications."</string>
     <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"Un redémarrage est nécessaire pour modifier le pilote OpenGL ES système"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Changement de compatibilité des applications"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Activer/Désactiver les changements de compatibilité des applications"</string>
@@ -4217,6 +4238,8 @@
     <string name="platform_compat_dialog_text_no_apps" msgid="5715226015751055812">"Vous ne pouvez modifier la compatibilité des applications que si celles-ci sont débogables. Installez une application débogable, puis réessayez."</string>
     <string name="disabled_dependent_setting_summary" msgid="4508635725315852504">"Dépend d\'un autre paramètre"</string>
     <string name="my_device_info_account_preference_title" msgid="9197139254007133175">"Compte"</string>
+    <!-- no translation found for my_device_info_account_preference_summary (3510582677937510545) -->
+    <skip />
     <string name="my_device_info_device_name_preference_title" msgid="8053298498727237971">"Nom de l\'appareil"</string>
     <string name="my_device_info_basic_info_category_title" msgid="381963187269356548">"Infos générales"</string>
     <string name="my_device_info_legal_category_title" msgid="7732792841537995127">"Infos légales et réglementaires"</string>
@@ -4510,10 +4533,8 @@
     <string name="lockscreen_privacy_controls_summary" msgid="7522918441738915364">"À partir de l\'écran de verrouillage"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="2174300719855112358">"Utiliser les commandes de contrôle des appareils"</string>
     <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"Pour les utiliser, activez tout d\'abord \"Afficher les commandes de contrôle des appareils\""</string>
-    <!-- no translation found for lockscreen_double_line_clock_summary (4109235686687860393) -->
-    <skip />
-    <!-- no translation found for lockscreen_double_line_clock_setting_toggle (802271087416091548) -->
-    <skip />
+    <string name="lockscreen_double_line_clock_summary" msgid="4109235686687860393">"La taille de l\'horloge change selon le contenu de l\'écran de verrouillage"</string>
+    <string name="lockscreen_double_line_clock_setting_toggle" msgid="802271087416091548">"Horloge dynamique"</string>
     <string name="lockscreen_quick_affordances_title" msgid="8615741551327565793">"Raccourcis"</string>
     <plurals name="lockscreen_quick_affordances_summary" formatted="false" msgid="4225396036524703997">
       <item quantity="one"><xliff:g id="FIRST_1">%1$s</xliff:g>, <xliff:g id="SECOND">%2$s</xliff:g></item>
@@ -4643,7 +4664,7 @@
     <string name="uwb_settings_title" msgid="8578498712312002231">"Ultra-wideband (UWB)"</string>
     <string name="uwb_settings_summary" msgid="3074271396764672268">"Aide à identifier la position relative des appareils à proximité disposant de l\'UWB"</string>
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Désactiver le mode Avion pour utiliser l\'UWB"</string>
-    <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"BUL n\'est pas disponible dans le lieu actuel"</string>
+    <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"UWB n\'est pas disponible dans le lieu actuel"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"Accès à la caméra"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Accès au micro"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"Pour les applis et services"</string>
@@ -4768,7 +4789,8 @@
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Format"</string>
     <string name="aspect_ratio_summary" msgid="5944347596728740547">"Sélectionnez un format dans lequel afficher cette application si elle n\'a pas été conçue pour s\'adapter à votre <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"Applis suggérées"</string>
-    <string name="user_aspect_ratio_overridden_apps_label" msgid="1564914138276629704">"Applis que vous avez ignorées"</string>
+    <!-- no translation found for user_aspect_ratio_changed_apps_label (2096614916172567672) -->
+    <skip />
     <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"Paramètre par défaut de l\'appli"</string>
     <string name="user_aspect_ratio_fullscreen" msgid="1843427242540081996">"Plein écran"</string>
     <string name="user_aspect_ratio_half_screen" msgid="1015852057094310209">"Moitié de l\'écran"</string>
@@ -4784,7 +4806,7 @@
     <string name="flash_notifications_summary_on_camera" msgid="3286405833586333730">"Activé/Flash de l\'appareil photo"</string>
     <string name="flash_notifications_summary_on_screen" msgid="9040640799633336219">"Activé/Flash de l\'écran"</string>
     <string name="flash_notifications_summary_on_camera_and_screen" msgid="2326268141063768701">"Activé/Flash de l\'appareil photo et de l\'écran"</string>
-    <string name="flash_notifications_intro" msgid="8409873413480928249">"Faites clignoter l\'écran ou la lumière de l\'appareil photo lorsque vous recevez des notifications ou que des alarmes retentissent"</string>
+    <string name="flash_notifications_intro" msgid="8409873413480928249">"La lumière de l\'appareil photo ou l\'écran clignotent lorsque vous recevez des notifications ou que des alarmes retentissent"</string>
     <string name="flash_notifications_intro_without_camera_flash" msgid="6297337174487793891">"Soyez informé des nouvelles notifications ou de l\'activation d\'une alarme par le clignotement de l\'écran"</string>
     <string name="flash_notifications_note" msgid="2426125248448055075">"Utilisez les notifications avec flash avec prudence si vous êtes sensible à la lumière"</string>
     <string name="flash_notifications_keywords" msgid="2458759275318514836">"flash, lampe, malendant, perte d\'audition"</string>

@@ -14,32 +14,23 @@
 
 package com.android.settings.datausage;
 
-import static android.app.usage.NetworkStats.Bucket.UID_REMOVED;
-import static android.app.usage.NetworkStats.Bucket.UID_TETHERING;
-import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
-
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.settings.SettingsEnums;
 import android.app.usage.NetworkStats;
-import android.app.usage.NetworkStats.Bucket;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.UserInfo;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkPolicy;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
-import android.os.Process;
-import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.util.EventLog;
 import android.util.Log;
-import android.util.SparseArray;
 import android.view.View;
 import android.view.View.AccessibilityDelegate;
 import android.view.accessibility.AccessibilityEvent;
@@ -60,6 +51,7 @@ import androidx.preference.PreferenceGroup;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.datausage.CycleAdapter.SpinnerInterface;
+import com.android.settings.datausage.lib.AppDataUsageRepository;
 import com.android.settings.network.MobileDataEnabledListener;
 import com.android.settings.network.MobileNetworkRepository;
 import com.android.settings.network.ProxySubscriptionManager;
@@ -69,13 +61,10 @@ import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
 import com.android.settingslib.net.NetworkCycleChartData;
 import com.android.settingslib.net.NetworkCycleChartDataLoader;
 import com.android.settingslib.net.NetworkStatsSummaryLoader;
-import com.android.settingslib.net.UidDetail;
 import com.android.settingslib.net.UidDetailProvider;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -423,110 +412,19 @@ public class DataUsageList extends DataUsageBaseFragment
     }
 
     /**
-     * Bind the given {@link NetworkStats}, or {@code null} to clear list.
+     * Bind the given buckets.
      */
-    private void bindStats(NetworkStats stats, int[] restrictedUids) {
+    private void bindStats(List<AppDataUsageRepository.Bucket> buckets) {
         mApps.removeAll();
-        if (stats == null) {
-            if (LOGD) {
-                Log.d(TAG, "No network stats data. App list cleared.");
-            }
-            return;
-        }
-
-        final ArrayList<AppItem> items = new ArrayList<>();
-        long largest = 0;
-
-        final int currentUserId = ActivityManager.getCurrentUser();
-        final UserManager userManager = UserManager.get(getContext());
-        final List<UserHandle> profiles = userManager.getUserProfiles();
-        final SparseArray<AppItem> knownItems = new SparseArray<AppItem>();
-
-        final Bucket bucket = new Bucket();
-        while (stats.hasNextBucket() && stats.getNextBucket(bucket)) {
-            // Decide how to collapse items together
-            final int uid = bucket.getUid();
-            final int collapseKey;
-            final int category;
-            final int userId = UserHandle.getUserId(uid);
-            if (UserHandle.isApp(uid) || Process.isSdkSandboxUid(uid)) {
-                if (profiles.contains(new UserHandle(userId))) {
-                    if (userId != currentUserId) {
-                        // Add to a managed user item.
-                        final int managedKey = UidDetailProvider.buildKeyForUser(userId);
-                        largest = accumulate(managedKey, knownItems, bucket,
-                            AppItem.CATEGORY_USER, items, largest);
-                    }
-                    // Map SDK sandbox back to its corresponding app
-                    if (Process.isSdkSandboxUid(uid)) {
-                        collapseKey = Process.getAppUidForSdkSandboxUid(uid);
-                    } else {
-                        collapseKey = uid;
-                    }
-                    category = AppItem.CATEGORY_APP;
-                } else {
-                    // If it is a removed user add it to the removed users' key
-                    final UserInfo info = userManager.getUserInfo(userId);
-                    if (info == null) {
-                        collapseKey = UID_REMOVED;
-                        category = AppItem.CATEGORY_APP;
-                    } else {
-                        // Add to other user item.
-                        collapseKey = UidDetailProvider.buildKeyForUser(userId);
-                        category = AppItem.CATEGORY_USER;
-                    }
-                }
-            } else if (uid == UID_REMOVED || uid == UID_TETHERING
-                    || uid == Process.OTA_UPDATE_UID) {
-                collapseKey = uid;
-                category = AppItem.CATEGORY_APP;
-            } else {
-                collapseKey = android.os.Process.SYSTEM_UID;
-                category = AppItem.CATEGORY_APP;
-            }
-            largest = accumulate(collapseKey, knownItems, bucket, category, items, largest);
-        }
-        stats.close();
-
-        for (final int uid : restrictedUids) {
-            // Only splice in restricted state for current user or managed users
-            if (!profiles.contains(UserHandle.getUserHandleForUid(uid))) {
-                continue;
-            }
-
-            AppItem item = knownItems.get(uid);
-            if (item == null) {
-                item = new AppItem(uid);
-                item.total = -1;
-                item.addUid(uid);
-                items.add(item);
-                knownItems.put(item.key, item);
-            }
-            item.restricted = true;
-        }
-
-        Collections.sort(items);
-        final List<String> packageNames = Arrays.asList(getContext().getResources().getStringArray(
-                R.array.datausage_hiding_carrier_service_package_names));
-        // When there is no specified SubscriptionInfo, Wi-Fi data usage will be displayed.
-        // In this case, the carrier service package also needs to be hidden.
-        boolean shouldHidePackageName = mSubscriptionInfoEntity == null
-                || Arrays.stream(getContext().getResources().getIntArray(
-                        R.array.datausage_hiding_carrier_service_carrier_id))
-                .anyMatch(carrierId -> (carrierId == mSubscriptionInfoEntity.carrierId));
-
-        for (var item : items) {
-            UidDetail detail = mUidDetailProvider.getUidDetail(item.key, true);
-            // Do not show carrier service package in data usage list if it should be hidden for
-            // the carrier.
-            if (detail != null && shouldHidePackageName && packageNames.contains(
-                    detail.packageName)) {
-                continue;
-            }
-
-            final int percentTotal = largest != 0 ? (int) (item.total * 100 / largest) : 0;
+        AppDataUsageRepository repository = new AppDataUsageRepository(
+                requireContext(),
+                ActivityManager.getCurrentUser(),
+                mSubscriptionInfoEntity == null ? null : mSubscriptionInfoEntity.carrierId,
+                appItem -> mUidDetailProvider.getUidDetail(appItem.key, true).packageName
+        );
+        for (var itemPercentPair : repository.getAppPercent(buckets)) {
             final AppDataUsagePreference preference = new AppDataUsagePreference(getContext(),
-                    item, percentTotal, mUidDetailProvider);
+                    itemPercentPair.getFirst(), itemPercentPair.getSecond(), mUidDetailProvider);
             preference.setOnPreferenceClickListener(p -> {
                 AppDataUsagePreference pref = (AppDataUsagePreference) p;
                 startAppDataUsage(pref.getItem());
@@ -563,30 +461,6 @@ public class DataUsageList extends DataUsageBaseFragment
                 .setArguments(args)
                 .setSourceMetricsCategory(getMetricsCategory())
                 .launch();
-    }
-
-    /**
-     * Accumulate data usage of a network stats entry for the item mapped by the collapse key.
-     * Creates the item if needed.
-     *
-     * @param collapseKey  the collapse key used to map the item.
-     * @param knownItems   collection of known (already existing) items.
-     * @param bucket       the network stats bucket to extract data usage from.
-     * @param itemCategory the item is categorized on the list view by this category. Must be
-     */
-    private static long accumulate(int collapseKey, final SparseArray<AppItem> knownItems,
-            Bucket bucket, int itemCategory, ArrayList<AppItem> items, long largest) {
-        final int uid = bucket.getUid();
-        AppItem item = knownItems.get(collapseKey);
-        if (item == null) {
-            item = new AppItem(collapseKey);
-            item.category = itemCategory;
-            items.add(item);
-            knownItems.put(item.key, item);
-        }
-        item.addUid(uid);
-        item.total += bucket.getRxBytes() + bucket.getTxBytes();
-        return Math.max(largest, item.total);
     }
 
     private final OnItemSelectedListener mCycleListener = new OnItemSelectedListener() {
@@ -643,15 +517,13 @@ public class DataUsageList extends DataUsageBaseFragment
                 @Override
                 public void onLoadFinished(
                         @NonNull Loader<NetworkStats> loader, NetworkStats data) {
-                    final int[] restrictedUids = services.mPolicyManager.getUidsWithPolicy(
-                            POLICY_REJECT_METERED_BACKGROUND);
-                    bindStats(data, restrictedUids);
+                    bindStats(AppDataUsageRepository.Companion.convertToBuckets(data));
                     updateEmptyVisible();
                 }
 
                 @Override
                 public void onLoaderReset(@NonNull Loader<NetworkStats> loader) {
-                    bindStats(null, new int[0]);
+                    mApps.removeAll();
                     updateEmptyVisible();
                 }
 
