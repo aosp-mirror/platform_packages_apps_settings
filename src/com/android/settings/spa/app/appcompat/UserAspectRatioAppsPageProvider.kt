@@ -115,7 +115,8 @@ fun UserAspectRatioAppList(
                 override val resId = R.raw.user_aspect_ratio_education
                 override val resourceType = ResourceType.LOTTIE
             })
-        }
+        },
+        noMoreOptions = true,
     )
 }
 
