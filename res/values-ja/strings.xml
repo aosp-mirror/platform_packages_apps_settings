@@ -42,6 +42,12 @@
     <string name="preview_pager_content_description" msgid="3762247188224576303">"プレビュー"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"縮小"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"拡大"</string>
+    <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"常に ON"</string>
+    <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"デバイスを折りたたむとフロント ディスプレイが ON になります"</string>
+    <string name="selective_stay_awake_title" msgid="7887645333447645168">"ゲーム、動画などのみ"</string>
+    <string name="selective_stay_awake_summary" msgid="9055967322921984543">"フロント ディスプレイが ON になり、アプリによって画面がアイドル状態から復帰します"</string>
+    <string name="sleep_on_fold_title" msgid="7626123024330501411">"ON にしない"</string>
+    <string name="sleep_on_fold_summary" msgid="7737992842459588846">"デバイスを折りたたむとフロント ディスプレイがロックされます"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"画面を自動で回転させる"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"顔検出は、前面カメラを使用して自動回転の精度を高めます。画像が Google に保存されたり送信されたりすることはありません。"</string>
     <string name="bluetooth" msgid="8898478620943459654">"Bluetooth"</string>
@@ -118,6 +124,7 @@
     <string name="connected_device_previously_connected_screen_title" msgid="8823331744788100605">"ペア設定済み"</string>
     <string name="connected_device_bluetooth_turned_on_toast" msgid="144664089794199928">"Bluetooth を ON にしました"</string>
     <string name="previous_connected_see_all" msgid="7759413145713251328">"すべて表示"</string>
+    <string name="connected_device_fast_pair_device_see_all" msgid="4898279230458128620">"すべて表示"</string>
     <string name="stylus_device_details_title" msgid="7618295136015480864">"タッチペン"</string>
     <string name="stylus_default_notes_app" msgid="4165657465911764628">"テールボタンを押す"</string>
     <string name="stylus_default_notes_summary_work" msgid="4554643411627934223">"<xliff:g id="APP_NAME">%s</xliff:g>（仕事用プロファイル）"</string>
@@ -389,6 +396,8 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"顔、<xliff:g id="WATCH">%s</xliff:g>を登録しました"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"顔、指紋、<xliff:g id="WATCH">%s</xliff:g>を登録しました"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"顔、指紋、<xliff:g id="WATCH">%s</xliff:g>を登録しました"</string>
+    <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"リモート認証のロック解除"</string>
+    <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"スマートウォッチを追加しました"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"スマートウォッチのセットアップ"</string>
     <string name="security_settings_remoteauth_enroll_introduction_message" msgid="8737276885766036074">"ウォッチ認証を使用すると、たとえば指が濡れているときや顔が認識されないときでも、このスマートフォンをロック解除できます。\n\n次のようにして、スマートウォッチでこのスマートフォンをロック解除できます。"</string>
     <string name="security_settings_remoteauth_enroll_introduction_disagree" msgid="7639258097401796028">"後で"</string>
@@ -522,6 +531,30 @@
     <string name="security_header" msgid="961514795852103424">"セキュリティ"</string>
     <string name="privacy_header" msgid="5526002421324257007">"プライバシー"</string>
     <string name="work_profile_category_header" msgid="85707750968948517">"仕事用プロファイル"</string>
+    <!-- no translation found for private_space_title (7078627930195569767) -->
+    <skip />
+    <!-- no translation found for private_space_summary (8237652417163408001) -->
+    <skip />
+    <!-- no translation found for private_space_one_lock_title (7306547190751832568) -->
+    <skip />
+    <!-- no translation found for private_space_hide_title (1615744426933304644) -->
+    <skip />
+    <!-- no translation found for private_space_category_system (1286843321867285700) -->
+    <skip />
+    <!-- no translation found for private_space_create_title (47273568884806726) -->
+    <skip />
+    <!-- no translation found for private_space_delete_title (3075645119800272800) -->
+    <skip />
+    <!-- no translation found for private_space_created (2978055968937762232) -->
+    <skip />
+    <!-- no translation found for private_space_already_exists (1253034947621867419) -->
+    <skip />
+    <!-- no translation found for private_space_create_failed (4908100791174213808) -->
+    <skip />
+    <!-- no translation found for private_space_deleted (7825768516955610897) -->
+    <skip />
+    <!-- no translation found for private_space_delete_failed (8500755484258565011) -->
+    <skip />
     <string name="fingerprint_add_max" msgid="8639321019299347447">"最大で <xliff:g id="COUNT">%d</xliff:g> 件の指紋を追加できます"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"追加された指紋の数が上限に達しました"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"これ以上、指紋を追加できません"</string>
@@ -846,7 +879,7 @@
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"自動接続"</string>
     <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"このネットワークの圏内に入ると自動的に接続します"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"デバイスを追加"</string>
-    <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"QR コードを使用して、このネットワークにデバイスを追加できます"</string>
+    <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"QR コードを使用して、このネットワークにデバイスを追加します"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR コードの形式が無効です"</string>
     <string name="retry" msgid="7542103800274026915">"再試行"</string>
     <string name="wifi_shared" msgid="8850748923537589782">"他のデバイスユーザーと共有する"</string>
@@ -896,20 +929,13 @@
     <string name="wifi_type_title" msgid="2174893488722015838">"タイプ"</string>
     <string name="wifi_details_dns" msgid="273231528073312579">"DNS"</string>
     <string name="wifi_details_ipv6_address_header" msgid="1913151339341722443">"IPv6 アドレス"</string>
-    <!-- no translation found for hotspot_device_details_category (3110651914598697220) -->
-    <skip />
-    <!-- no translation found for hotspot_device_details_internet_source (1563266599673281875) -->
-    <skip />
-    <!-- no translation found for internet_source_wifi (6952593095166435179) -->
-    <skip />
-    <!-- no translation found for internet_source_mobile_data (877403889449201789) -->
-    <skip />
-    <!-- no translation found for internet_source_ethernet (8338472576454100966) -->
-    <skip />
-    <!-- no translation found for hotspot_connection_category (4320380513982923556) -->
-    <skip />
-    <!-- no translation found for hotspot_connection_strength (87359986943768421) -->
-    <skip />
+    <string name="hotspot_device_details_category" msgid="3110651914598697220">"アクセス ポイント デバイスの詳細"</string>
+    <string name="hotspot_device_details_internet_source" msgid="1563266599673281875">"インターネットへのアクセス ポイント"</string>
+    <string name="internet_source_wifi" msgid="6952593095166435179">"Wi-Fi"</string>
+    <string name="internet_source_mobile_data" msgid="877403889449201789">"モバイルデータ"</string>
+    <string name="internet_source_ethernet" msgid="8338472576454100966">"イーサネット"</string>
+    <string name="hotspot_connection_category" msgid="4320380513982923556">"アクセス ポイントへの接続"</string>
+    <string name="hotspot_connection_strength" msgid="87359986943768421">"接続強度"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"保存済みネットワーク"</string>
     <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"サブスクリプション"</string>
     <string name="wifi_saved_other_networks_tab" msgid="7942647415716557293">"その他のネットワーク"</string>
@@ -1043,8 +1069,7 @@
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"OFF"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"ディスプレイのホワイト バランス"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
-    <string name="stay_awake_on_fold_title" msgid="4195536619511589471">"折りたたみ時はロックを解除する"</string>
-    <string name="stay_awake_on_fold_summary" msgid="2413928869516675293">"折りたたんだ状態では、画面が自動消灯するまでフロント ディスプレイのロックを解除します"</string>
+    <string name="fold_lock_behavior_title" msgid="786228803694268449">"折りたたみ時もアプリを使い続けられます"</string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"スムーズ ディスプレイ"</string>
     <string name="peak_refresh_rate_summary" msgid="3627278682437562787">"コンテンツに応じて、リフレッシュ レートを自動的に 60 Hz から <xliff:g id="ID_1">%1$s</xliff:g> Hz に変更します。バッテリー使用量が増えます。"</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"ピーク時のリフレッシュ レートの適用"</string>
@@ -1158,7 +1183,7 @@
     <string name="sim_change_data_ok" msgid="4922114750417276560">"<xliff:g id="CARRIER">%1$s</xliff:g> を使用"</string>
     <string name="sim_preferred_title" msgid="8850185380445309835">"優先 SIM を変更しますか？"</string>
     <string name="sim_preferred_message" msgid="6004009449266648351">"デバイス内の SIM は <xliff:g id="NEW_SIM">%1$s</xliff:g> のみです。この SIM をモバイルデータ、通話、SMS メッセージ用に使用しますか？"</string>
-    <string name="enable_auto_data_switch_dialog_title" msgid="3563043560556718994">"モバイルデータを改善しますか？"</string>
+    <string name="enable_auto_data_switch_dialog_title" msgid="3563043560556718994">"モバイルデータの接続性を改善しますか？"</string>
     <string name="enable_auto_data_switch_dialog_message" msgid="5777287241521946883">"<xliff:g id="BACKUP_CARRIER">%1$s</xliff:g> のモバイルデータの方が安定している場合に、デバイスの接続を自動的に切り替えることができます。"</string>
     <string name="auto_data_switch_dialog_managed_profile_warning" msgid="6839438290079866605">\n\n"通話、メッセージ、ネットワーク トラフィックが組織に公開される可能性があります。"</string>
     <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"SIM PINコードが無効です。お使いのデバイスをロック解除するには携帯通信会社にお問い合わせいただく必要があります。"</string>
@@ -2000,6 +2025,7 @@
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"色反転のショートカット"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"色反転機能を利用すると、明るい画面が暗くなり、暗い画面が明るくなります。"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"&lt;b&gt;注意点&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; メディアや画像の色が変わります&lt;/li&gt; &lt;li&gt; 色反転機能はすべてのアプリでご利用いただけます&lt;/li&gt; &lt;li&gt; 背景を暗くするには、ダークモードを使うこともできます&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="accessibility_action_label_panel_slice" msgid="1313725957071602932">"「settings」と入力します"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"自動クリック（一定時間の静止）"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"自動クリック（一定時間の静止）について"</string>
     <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"自動クリック（一定時間の静止）の詳細"</string>
@@ -2360,7 +2386,7 @@
     <string name="battery_saver_turn_on_automatically_never" msgid="6194649389871448663">"使用しない"</string>
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"バッテリー残量が <xliff:g id="PERCENT">%1$s</xliff:g> になったとき"</string>
     <string name="battery_percentage" msgid="1779934245963043490">"バッテリー残量"</string>
-    <string name="battery_percentage_description" msgid="2321465139126125541">"ステータスバーにバッテリー残量を％で表示する"</string>
+    <string name="battery_percentage_description" msgid="2321465139126125541">"ステータスバーにバッテリー残量を％で表示"</string>
     <string name="battery_usage_chart_graph_hint_last_full_charge" msgid="6570336408060566877">"前回のフル充電以降のバッテリー残量"</string>
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"過去 24 時間のバッテリー使用量"</string>
     <string name="battery_app_usage" msgid="8976453608783133770">"前回のフル充電以降のアプリの使用状況"</string>
@@ -2931,7 +2957,7 @@
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> のクローンを作成しています"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> のクローンを作成しました"</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"言語、ジェスチャー、時間、バックアップ"</string>
-    <string name="languages_setting_summary" msgid="7963053736715746726">"システムの言語、アプリの言語、音声"</string>
+    <string name="languages_setting_summary" msgid="2650807397396180351">"システムの言語、アプリの言語、地域別の設定、音声認識"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, ネットワーク接続, インターネット, ワイヤレス, データ, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Wi‑Fi 通知, wifi 通知"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"データ使用量"</string>
@@ -2981,7 +3007,7 @@
     <string name="keywords_app_pinning" msgid="1564144561464945019">"画面固定"</string>
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"ワーク チャレンジ, 仕事用, プロファイル"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"仕事用プロファイル, 管理対象プロファイル, 統合する, 統合, 仕事, プロファイル"</string>
-    <string name="keywords_stay_awake_on_lock" msgid="6338367464776295697">"アクティブ, スリープ, ロックしない, 折りたたみ時はロックを解除する, 折りたたんでいる, 閉じている, 折りたたむ, 閉じる, 画面 OFF"</string>
+    <string name="keywords_fold_lock_behavior" msgid="6278990772113341581">"アクティブ, スリープ, ロックしない, 折りたたみ時はロックを解除する, 折りたたんでいる, 閉じている, 折りたたむ, 閉じる, 画面 OFF"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"ジェスチャー"</string>
     <string name="keywords_wallet" msgid="3757421969956996972">"ウォレット"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"支払い, タップ, ペイメント"</string>
@@ -3246,15 +3272,15 @@
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"以前表示された通知をロック画面から自動的に削除します"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"ロック画面上の通知"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"会話、デフォルト、サイレントを表示する"</string>
-    <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"デフォルトとサイレントの会話と通知を表示する"</string>
-    <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"サイレントの会話と通知を非表示にする"</string>
+    <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"デフォルト モードとサイレント モードの会話と通知を表示します"</string>
+    <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"サイレント モードでの会話と通知を非表示にします"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"通知を表示しない"</string>
     <string name="lock_screen_notifs_redact" msgid="9024158855454642296">"機密性の高い通知"</string>
-    <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"ロック中に機密性の高いコンテンツを表示する"</string>
+    <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"ロック中に機密性の高いコンテンツを表示します"</string>
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"機密性の高い仕事用プロファイルの通知"</string>
-    <string name="lock_screen_notifs_redact_work_summary" msgid="3238238380405430156">"ロック中に機密性の高い仕事用プロファイルのコンテンツを表示する"</string>
+    <string name="lock_screen_notifs_redact_work_summary" msgid="3238238380405430156">"ロック中に機密性の高い仕事用プロファイルのコンテンツを表示します"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"すべての通知の内容を表示する"</string>
-    <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"通知は表示するがプライベートな内容はロック解除後にのみ表示する"</string>
+    <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"機密性の高いコンテンツはロック解除時にのみ表示されます"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"通知を一切表示しない"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="4688399629301178487">"ロック画面に通知をどのように表示しますか？"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1360388192096354315">"ロック画面"</string>
@@ -3307,7 +3333,7 @@
     <string name="notifications_sent_weekly" msgid="7895656213187555346">"{count,plural, =1{1 週間あたりの通知の数: 約 # 件}other{1 週間あたりの通知の数: 約 # 件}}"</string>
     <string name="notifications_sent_never" msgid="9081278709126812062">"なし"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"デバイスとアプリの通知"</string>
-    <string name="manage_notification_access_summary" msgid="2907135226478903997">"通知を読み取れるアプリとデバイスの管理"</string>
+    <string name="manage_notification_access_summary" msgid="2907135226478903997">"通知を読み取れるアプリとデバイスを管理します"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8643809206612366067">"仕事用プロファイルの通知へのアクセスがブロックされています"</string>
     <string name="notification_assistant_title" msgid="5889201903272393099">"拡張通知"</string>
     <string name="notification_assistant_summary" msgid="1957783114840908887">"操作の候補、返信の候補などを利用する"</string>
@@ -3364,14 +3390,14 @@
     <string name="interact_across_profiles_switch_enabled" msgid="7294719120282287495">"接続済み"</string>
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"これらのアプリを接続"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"アプリを接続すると権限が共有され、互いのデータにアクセスできるようになります。"</string>
-    <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"個人データを IT 管理者と共有しないと考えられる、信頼できるアプリのみを接続してください。"</string>
+    <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"個人データが IT 管理者と共有されないと信頼できるアプリのみを接続してください。"</string>
     <string name="interact_across_profiles_summary_3" msgid="444428694843299854">"アプリの接続はデバイスのプライバシー設定からいつでも解除できます。"</string>
-    <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"仕事用の<xliff:g id="NAME">%1$s</xliff:g>に個人データの使用を許可しますか？"</string>
-    <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"個人データを IT 管理者と共有しないと考えられる、信頼できるアプリのみを接続してください。"</string>
+    <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"仕事用の <xliff:g id="NAME">%1$s</xliff:g> に個人データの使用を許可しますか？"</string>
+    <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"個人データが IT 管理者と共有されないと信頼できるアプリのみを接続してください。"</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"アプリデータ"</string>
-    <string name="interact_across_profiles_consent_dialog_app_data_summary" msgid="6057019384328088311">"このアプリは、個人用アプリである<xliff:g id="NAME">%1$s</xliff:g>内のデータにアクセスできます。"</string>
+    <string name="interact_across_profiles_consent_dialog_app_data_summary" msgid="6057019384328088311">"このアプリは、個人用アプリである <xliff:g id="NAME">%1$s</xliff:g> 内のデータにアクセスできます。"</string>
     <string name="interact_across_profiles_consent_dialog_permissions_title" msgid="2316852600280487055">"権限"</string>
-    <string name="interact_across_profiles_consent_dialog_permissions_summary" msgid="995051542847604039">"このアプリは、位置情報、ストレージ、連絡先へのアクセスなどに個人用の<xliff:g id="NAME">%1$s</xliff:g>の権限を使用できます。"</string>
+    <string name="interact_across_profiles_consent_dialog_permissions_summary" msgid="995051542847604039">"このアプリは、位置情報、ストレージ、連絡先へのアクセスなどに個人用の <xliff:g id="NAME">%1$s</xliff:g> の権限を使用できます。"</string>
     <string name="interact_across_profiles_number_of_connected_apps_none" msgid="8573289199942092964">"アクセス可能なアプリはありません"</string>
     <string name="interact_across_profiles_number_of_connected_apps" msgid="4000424798291479207">"{count,plural, =1{# 件のアプリが接続されています}other{# 件のアプリが接続されています}}"</string>
     <string name="interact_across_profiles_install_work_app_title" msgid="2821669067014436056">"これらのアプリを接続するには、仕事用プロファイルに<xliff:g id="NAME">%1$s</xliff:g>をインストールしてください"</string>
@@ -3867,7 +3893,6 @@
     <string name="no_carrier_update_text" msgid="5432798085593055966">"更新: <xliff:g id="ID_1">^2</xliff:g> 前"</string>
     <string name="carrier_and_update_now_text" msgid="5075861262344398849">"更新: <xliff:g id="ID_1">^1</xliff:g>、たった今"</string>
     <string name="no_carrier_update_now_text" msgid="7898004907837200752">"更新: たった今"</string>
-    <string name="launch_mdp_app_text" msgid="8791816789749304897">"プランを表示"</string>
     <string name="launch_wifi_text" msgid="976421974332512894">"詳細を表示"</string>
     <string name="data_saver_title" msgid="2593804270788863815">"データセーバー"</string>
     <string name="unrestricted_data_saver" msgid="7922563266857367495">"モバイルデータの無制限利用"</string>
@@ -3953,14 +3978,13 @@
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"クイック設定開発者用タイル"</string>
     <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"adb 承認無効のタイムアウト"</string>
     <string name="adb_authorization_timeout_summary" msgid="409931540424019778">"デフォルトの期間（7 日）またはユーザー設定の期間（1 日以上）内に再接続されなかったシステムに対する adb 承認の自動取り消しを無効にします。"</string>
-    <string name="winscope_trace_quick_settings_title" msgid="4104768565053226689">"ウィンスコープ トレース"</string>
     <string name="sensors_off_quick_settings_title" msgid="8472151847125917167">"センサー OFF"</string>
     <string name="managed_profile_settings_title" msgid="3400923723423564217">"仕事用プロファイルの設定"</string>
     <string name="managed_profile_contact_search_title" msgid="6562061740814513737">"個人用アプリで仕事用の連絡先リストを検索"</string>
     <string name="managed_profile_contact_search_summary" msgid="4974727886709219105">"検索と着信が IT 管理者に公開される可能性があります"</string>
     <string name="cross_profile_calendar_title" msgid="7570277841490216947">"クロスプロファイル カレンダー"</string>
     <string name="cross_profile_calendar_summary" msgid="8856185206722860069">"個人のカレンダーに仕事の予定を表示する"</string>
-    <string name="managed_profile_settings_footer" msgid="996500759305118103">"無効に設定された仕事用アプリは一時停止してアクセスできなくなり、通知も送信できなくなります"</string>
+    <string name="managed_profile_settings_footer" msgid="996500759305118103">"OFF にすると、仕事用アプリは一時停止され、アクセスできなくなり、通知も送信されなくなります"</string>
     <string name="automatic_storage_manager_settings" msgid="519158151463974656">"ストレージの管理"</string>
     <string name="automatic_storage_manager_text" msgid="6900593059927987273">"ストレージの空き容量を増やすため、ストレージ マネージャはバックアップした写真や動画をお使いのデバイスから削除します。"</string>
     <string name="automatic_storage_manager_days_title" msgid="5077286114860539367">"写真と動画を削除"</string>
@@ -4214,6 +4238,7 @@
     <string name="platform_compat_dialog_text_no_apps" msgid="5715226015751055812">"アプリの互換性の変更は、デバッグ可能アプリでのみ行えます。デバッグ可能アプリをインストールしてから、もう一度お試しください。"</string>
     <string name="disabled_dependent_setting_summary" msgid="4508635725315852504">"別の設定に依存しています"</string>
     <string name="my_device_info_account_preference_title" msgid="9197139254007133175">"アカウント"</string>
+    <string name="my_device_info_account_preference_summary" msgid="3510582677937510545">"%d 個のアカウント"</string>
     <string name="my_device_info_device_name_preference_title" msgid="8053298498727237971">"デバイス名"</string>
     <string name="my_device_info_basic_info_category_title" msgid="381963187269356548">"基本情報"</string>
     <string name="my_device_info_legal_category_title" msgid="7732792841537995127">"法律と規制"</string>
@@ -4507,10 +4532,8 @@
     <string name="lockscreen_privacy_controls_summary" msgid="7522918441738915364">"ロック画面からの操作"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="2174300719855112358">"デバイス コントロールを使用"</string>
     <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"使用するには、[デバイス コントロールを表示] を ON にしてください"</string>
-    <!-- no translation found for lockscreen_double_line_clock_summary (4109235686687860393) -->
-    <skip />
-    <!-- no translation found for lockscreen_double_line_clock_setting_toggle (802271087416091548) -->
-    <skip />
+    <string name="lockscreen_double_line_clock_summary" msgid="4109235686687860393">"時計のサイズはロック画面の内容に応じて変わります"</string>
+    <string name="lockscreen_double_line_clock_setting_toggle" msgid="802271087416091548">"ダイナミック クロック"</string>
     <string name="lockscreen_quick_affordances_title" msgid="8615741551327565793">"ショートカット"</string>
     <plurals name="lockscreen_quick_affordances_summary" formatted="false" msgid="4225396036524703997">
       <item quantity="other"><xliff:g id="FIRST_1">%1$s</xliff:g>、<xliff:g id="SECOND">%2$s</xliff:g></item>
@@ -4602,7 +4625,7 @@
     <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"ダークモードを使用"</string>
     <string name="bluetooth_main_switch_title" msgid="8409835540311309632">"Bluetooth を使用"</string>
     <string name="prevent_ringing_main_switch_title" msgid="4726252811262086643">"着信音ミュート用のショートカットを使用する"</string>
-    <string name="use_wifi_hotsopt_main_switch_title" msgid="3909731167290690539">"Wi-Fi アクセス ポイントの使用"</string>
+    <string name="use_wifi_hotsopt_main_switch_title" msgid="3909731167290690539">"Wi-Fi アクセス ポイントを使用する"</string>
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"アプリ固定機能を使用"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"開発者向けオプションを使用"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"印刷サービスを使用"</string>
@@ -4765,7 +4788,8 @@
     <string name="aspect_ratio_title" msgid="2451826875939676101">"アスペクト比"</string>
     <string name="aspect_ratio_summary" msgid="5944347596728740547">"お使いの <xliff:g id="DEVICE_NAME">%1$s</xliff:g> にあわせた設計になっていないアプリの場合は、表示のアスペクト比を変更してください"</string>
     <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"推奨アプリ"</string>
-    <string name="user_aspect_ratio_overridden_apps_label" msgid="1564914138276629704">"オーバーライドを指定したアプリ"</string>
+    <!-- no translation found for user_aspect_ratio_changed_apps_label (2096614916172567672) -->
+    <skip />
     <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"アプリのデフォルト"</string>
     <string name="user_aspect_ratio_fullscreen" msgid="1843427242540081996">"全画面表示"</string>
     <string name="user_aspect_ratio_half_screen" msgid="1015852057094310209">"画面半分のみ表示"</string>

@@ -42,6 +42,12 @@
     <string name="preview_pager_content_description" msgid="3762247188224576303">"Preview"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Paliitin"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Palakihin"</string>
+    <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"Palagi"</string>
+    <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"Mag-o-on ang display sa harap kapag na-fold mo ang iyong device"</string>
+    <string name="selective_stay_awake_title" msgid="7887645333447645168">"Para lang sa mga laro, video, at higit pa"</string>
+    <string name="selective_stay_awake_summary" msgid="9055967322921984543">"Mag-o-on ang display sa harap para sa mga app na pumipigil sa pag-idle ng iyong screen"</string>
+    <string name="sleep_on_fold_title" msgid="7626123024330501411">"Hindi kailanman"</string>
+    <string name="sleep_on_fold_summary" msgid="7737992842459588846">"Magla-lock ang display sa harap kapag na-fold mo ang iyong device"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Gumamit ng auto-rotate"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"Ginagamit ng Pag-detect ng Mukha ang camera sa harap para pahusayin ang katumpakan ng pag-auto rotate. Hindi kailanman sino-store o ipinapadala sa Google ang mga larawan."</string>
     <string name="bluetooth" msgid="8898478620943459654">"Bluetooth"</string>
@@ -118,6 +124,7 @@
     <string name="connected_device_previously_connected_screen_title" msgid="8823331744788100605">"Dating nakakonekta"</string>
     <string name="connected_device_bluetooth_turned_on_toast" msgid="144664089794199928">"Naka-on ang Bluetooth"</string>
     <string name="previous_connected_see_all" msgid="7759413145713251328">"Tingnan lahat"</string>
+    <string name="connected_device_fast_pair_device_see_all" msgid="4898279230458128620">"Tingnan lahat"</string>
     <string name="stylus_device_details_title" msgid="7618295136015480864">"Stylus"</string>
     <string name="stylus_default_notes_app" msgid="4165657465911764628">"Pagpindot sa tail button"</string>
     <string name="stylus_default_notes_summary_work" msgid="4554643411627934223">"<xliff:g id="APP_NAME">%s</xliff:g> (Profile sa trabaho)"</string>
@@ -389,6 +396,8 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Naidagdag ang mukha at <xliff:g id="WATCH">%s</xliff:g>"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Naidagdag ang mukha, fingerprint, at <xliff:g id="WATCH">%s</xliff:g>"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Naidagdag ang mukha, mga fingerprint, at <xliff:g id="WATCH">%s</xliff:g>"</string>
+    <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Remote Authenticator Unlock"</string>
+    <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"Idinagdag ang relo"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"I-set up ang iyong relo"</string>
     <string name="security_settings_remoteauth_enroll_introduction_message" msgid="8737276885766036074">"Ang Pag-unlock Gamit ang Relo ay isa pang madaling paraan para i-unlock ang teleponong ito, halimbawa, kapag basa ang iyong mga daliri o kung hindi nakikilala ang mukha mo.\n\nMagagamit mo ang iyong relo para i-unlock ang teleponong ito kapag ikaw ay:"</string>
     <string name="security_settings_remoteauth_enroll_introduction_disagree" msgid="7639258097401796028">"Hindi ngayon"</string>
@@ -522,6 +531,18 @@
     <string name="security_header" msgid="961514795852103424">"Seguridad"</string>
     <string name="privacy_header" msgid="5526002421324257007">"Privacy"</string>
     <string name="work_profile_category_header" msgid="85707750968948517">"Profile sa trabaho"</string>
+    <string name="private_space_title" msgid="7078627930195569767">"Pribadong Space"</string>
+    <string name="private_space_summary" msgid="8237652417163408001">"Itago ang mga app sa pribadong folder"</string>
+    <string name="private_space_one_lock_title" msgid="7306547190751832568">"I-unlock gamit ang lock ng screen"</string>
+    <string name="private_space_hide_title" msgid="1615744426933304644">"Ipakita ang Pribadong Space"</string>
+    <string name="private_space_category_system" msgid="1286843321867285700">"System"</string>
+    <string name="private_space_create_title" msgid="47273568884806726">"Gumawa ng Pribadong Space"</string>
+    <string name="private_space_delete_title" msgid="3075645119800272800">"I-delete ang Pribadong Space"</string>
+    <string name="private_space_created" msgid="2978055968937762232">"Nagawa ang Pribadong Space"</string>
+    <string name="private_space_already_exists" msgid="1253034947621867419">"Mayroon nang Pribadong Space"</string>
+    <string name="private_space_create_failed" msgid="4908100791174213808">"Hindi magawa ang Pribadong Space"</string>
+    <string name="private_space_deleted" msgid="7825768516955610897">"Na-delete ang Pribadong Space"</string>
+    <string name="private_space_delete_failed" msgid="8500755484258565011">"Hindi ma-delete ang Pribadong Space"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Puwede kang magdagdag ng hanggang <xliff:g id="COUNT">%d</xliff:g> (na) fingerprint"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Naidagdag mo na ang maximum na bilang ng mga fingerprint"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Hindi na makapagdagdag ng higit pang fingerprint"</string>
@@ -896,20 +917,13 @@
     <string name="wifi_type_title" msgid="2174893488722015838">"Uri"</string>
     <string name="wifi_details_dns" msgid="273231528073312579">"DNS"</string>
     <string name="wifi_details_ipv6_address_header" msgid="1913151339341722443">"Mga IPv6 address"</string>
-    <!-- no translation found for hotspot_device_details_category (3110651914598697220) -->
-    <skip />
-    <!-- no translation found for hotspot_device_details_internet_source (1563266599673281875) -->
-    <skip />
-    <!-- no translation found for internet_source_wifi (6952593095166435179) -->
-    <skip />
-    <!-- no translation found for internet_source_mobile_data (877403889449201789) -->
-    <skip />
-    <!-- no translation found for internet_source_ethernet (8338472576454100966) -->
-    <skip />
-    <!-- no translation found for hotspot_connection_category (4320380513982923556) -->
-    <skip />
-    <!-- no translation found for hotspot_connection_strength (87359986943768421) -->
-    <skip />
+    <string name="hotspot_device_details_category" msgid="3110651914598697220">"Mga detalye ng hotspot ng device"</string>
+    <string name="hotspot_device_details_internet_source" msgid="1563266599673281875">"Source ng internet"</string>
+    <string name="internet_source_wifi" msgid="6952593095166435179">"Wi‑Fi"</string>
+    <string name="internet_source_mobile_data" msgid="877403889449201789">"Mobile data"</string>
+    <string name="internet_source_ethernet" msgid="8338472576454100966">"Ethernet"</string>
+    <string name="hotspot_connection_category" msgid="4320380513982923556">"Koneksyon sa hotspot"</string>
+    <string name="hotspot_connection_strength" msgid="87359986943768421">"Lakas ng koneksyon"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"Naka-save na network"</string>
     <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"Mga Subscription"</string>
     <string name="wifi_saved_other_networks_tab" msgid="7942647415716557293">"Iba pang network"</string>
@@ -1043,8 +1057,7 @@
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Naka-off"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"White balance ng display"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
-    <string name="stay_awake_on_fold_title" msgid="4195536619511589471">"Naka-unlock kapag naka-fold"</string>
-    <string name="stay_awake_on_fold_summary" msgid="2413928869516675293">"Hayaang naka-unlock ang front display kapag naka-fold hanggang sa mag-timeout ang screen"</string>
+    <string name="fold_lock_behavior_title" msgid="786228803694268449">"Magpatuloy sa paggamit ng mga app kapag naka-fold"</string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth na Display"</string>
     <string name="peak_refresh_rate_summary" msgid="3627278682437562787">"Awtomatikong itinataas sa <xliff:g id="ID_1">%1$s</xliff:g> Hz, mula sa 60 Hz ang refresh rate para sa ilang content. Nakakadagdag sa paggamit ng baterya."</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Puwersahin sa pinakamataas na rate ng pag-refresh"</string>
@@ -2000,6 +2013,7 @@
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Shortcut ng pag-invert ng kulay"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"Pinapadilim ng pag-invert ng kulay ang maliliwanag na screen. Pinapaliwanag din nito ang madidilim na screen."</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"&lt;b&gt;Tandaan&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Magbabago ang mga kulay sa media at mga larawan&lt;/li&gt; &lt;li&gt; Gumagana ang pag-invert ng kulay sa lahat ng app&lt;/li&gt; &lt;li&gt; Para magpakita ng madilim na background, puwedeng gumamit na lang ng Madilim na tema&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="accessibility_action_label_panel_slice" msgid="1313725957071602932">"pumunta sa mga setting"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Awtomatikong pag-click (oras ng pananatili)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Tungkol sa autoclick (dwell timing)"</string>
     <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"Matuto pa tungkol sa awtomatikong pag-click (oras ng pananatili)"</string>
@@ -2931,7 +2945,7 @@
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"Gumagawa ng clone ng <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"Nakagawa ng clone ng <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>"</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"Mga wika, mga galaw, oras, pag-back up"</string>
-    <string name="languages_setting_summary" msgid="7963053736715746726">"Mga wika ng system, mga wika ng app, speech"</string>
+    <string name="languages_setting_summary" msgid="2650807397396180351">"Mga wika ng system, wika ng app, rehiyonal na setting, speech"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, koneksyon sa network, internet, wireless, data, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Notification sa Wi‑Fi, notification sa wifi"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"paggamit ng data"</string>
@@ -2981,7 +2995,7 @@
     <string name="keywords_app_pinning" msgid="1564144561464945019">"pag-pin sa screen"</string>
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"hamon sa trabaho, trabaho, profile"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"profile sa trabaho, pinamamahalaang profile, pagsamahin, pagsasama, trabaho, profile"</string>
-    <string name="keywords_stay_awake_on_lock" msgid="6338367464776295697">"naka-wake, sleep, huwag i-lock, manatiling naka-unlock kapag naka-fold, pag-fold, pagsara, i-fold, isara, i-off ang screen"</string>
+    <string name="keywords_fold_lock_behavior" msgid="6278990772113341581">"naka-wake, sleep, huwag i-lock, manatiling naka-unlock kapag naka-fold, pag-fold, pagsara, i-fold, isara, i-off ang screen"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"mga galaw"</string>
     <string name="keywords_wallet" msgid="3757421969956996972">"wallet"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"magbayad, mag-tap, mga pagbabayad"</string>
@@ -3364,7 +3378,7 @@
     <string name="interact_across_profiles_switch_enabled" msgid="7294719120282287495">"Nakakonekta"</string>
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"Ikonekta ang mga app na ito"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Pareho ang mga pahintulot ng mga nakakonektang app at magagawa ng mga app na ito na i-access ang data ng isa\'t isa."</string>
-    <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"Magkonekta lang ng mga app kung pinagkakatiwalaan mo ang mga ito na hindi magbahagi ng personal na data sa iyong IT admin."</string>
+    <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"Magkonekta lang ng mga app kung pinagkakatiwalaan mo ang mga ito na hindi magbabahagi ng personal na data sa iyong IT admin."</string>
     <string name="interact_across_profiles_summary_3" msgid="444428694843299854">"Puwede kang magdiskonekta ng mga app anumang oras sa mga setting ng privacy ng iyong device."</string>
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"Pagkatiwalaan ang <xliff:g id="NAME">%1$s</xliff:g> para sa trabaho sa pangangasiwa ng iyong personal na data?"</string>
     <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"Magkonekta lang ng mga app kung pinagkakatiwalaan mo ang mga ito na hindi magbahagi ng personal na data sa iyong IT admin."</string>
@@ -3867,7 +3881,6 @@
     <string name="no_carrier_update_text" msgid="5432798085593055966">"Na-update <xliff:g id="ID_1">^2</xliff:g> ang nakalipas"</string>
     <string name="carrier_and_update_now_text" msgid="5075861262344398849">"Kaka-update lang ng <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="no_carrier_update_now_text" msgid="7898004907837200752">"Kaka-update lang"</string>
-    <string name="launch_mdp_app_text" msgid="8791816789749304897">"Tingnan ang plan"</string>
     <string name="launch_wifi_text" msgid="976421974332512894">"Tingnan ang mga detalye"</string>
     <string name="data_saver_title" msgid="2593804270788863815">"Data Saver"</string>
     <string name="unrestricted_data_saver" msgid="7922563266857367495">"Hindi pinaghihigpitang data"</string>
@@ -3953,7 +3966,6 @@
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Mga tile ng developer para sa mga mabilisang setting"</string>
     <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"I-disable ang pag-time out ng pahintulot sa adb"</string>
     <string name="adb_authorization_timeout_summary" msgid="409931540424019778">"I-disable ang awtomatikong pagbawi ng mga pahintulot sa adb para sa mga system na hindi pa ulit kumokonekta sa loob ng default (7 araw) na haba ng oras o sa loob ng haba ng oras na na-configure ng user (minimum na 1 araw)."</string>
-    <string name="winscope_trace_quick_settings_title" msgid="4104768565053226689">"Trace ng Winscope"</string>
     <string name="sensors_off_quick_settings_title" msgid="8472151847125917167">"I-Off ang Mga Sensor"</string>
     <string name="managed_profile_settings_title" msgid="3400923723423564217">"Mga setting ng profile sa trabaho"</string>
     <string name="managed_profile_contact_search_title" msgid="6562061740814513737">"Maghanap ng mga contact ng directory ng trabaho sa mga personal na app"</string>
@@ -4214,6 +4226,7 @@
     <string name="platform_compat_dialog_text_no_apps" msgid="5715226015751055812">"Puwede lang baguhin ang mga pagbabago sa compatibility ng app para sa mga nade-debug na app. Mag-install ng nade-debug na app at subukan ulit."</string>
     <string name="disabled_dependent_setting_summary" msgid="4508635725315852504">"Nakadepende sa isa pang setting"</string>
     <string name="my_device_info_account_preference_title" msgid="9197139254007133175">"Account"</string>
+    <string name="my_device_info_account_preference_summary" msgid="3510582677937510545">"%d (na) account"</string>
     <string name="my_device_info_device_name_preference_title" msgid="8053298498727237971">"Pangalan ng device"</string>
     <string name="my_device_info_basic_info_category_title" msgid="381963187269356548">"Pangunahing impormasyon"</string>
     <string name="my_device_info_legal_category_title" msgid="7732792841537995127">"Legal at panregulasyon"</string>
@@ -4507,10 +4520,8 @@
     <string name="lockscreen_privacy_controls_summary" msgid="7522918441738915364">"Mula sa lock screen"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="2174300719855112358">"Gumamit ng mga kontrol ng device"</string>
     <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"Para magamit, i-on muna ang \"Ipakita ang mga kontrol ng device\""</string>
-    <!-- no translation found for lockscreen_double_line_clock_summary (4109235686687860393) -->
-    <skip />
-    <!-- no translation found for lockscreen_double_line_clock_setting_toggle (802271087416091548) -->
-    <skip />
+    <string name="lockscreen_double_line_clock_summary" msgid="4109235686687860393">"Mga pagbabago sa laki ng orasan ayon sa content ng lock screen"</string>
+    <string name="lockscreen_double_line_clock_setting_toggle" msgid="802271087416091548">"Dynamic na orasan"</string>
     <string name="lockscreen_quick_affordances_title" msgid="8615741551327565793">"Mga Shortcut"</string>
     <plurals name="lockscreen_quick_affordances_summary" formatted="false" msgid="4225396036524703997">
       <item quantity="one"><xliff:g id="FIRST_1">%1$s</xliff:g>, <xliff:g id="SECOND">%2$s</xliff:g></item>
@@ -4765,7 +4776,8 @@
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Aspect ratio"</string>
     <string name="aspect_ratio_summary" msgid="5944347596728740547">"Pumili ng aspect ratio para tingnan ang app na ito kung hindi pa ito idinisenyo para magkasya sa iyong <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"Mga iminumungkahing app"</string>
-    <string name="user_aspect_ratio_overridden_apps_label" msgid="1564914138276629704">"Mga app na na-override mo"</string>
+    <!-- no translation found for user_aspect_ratio_changed_apps_label (2096614916172567672) -->
+    <skip />
     <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"Default ng app"</string>
     <string name="user_aspect_ratio_fullscreen" msgid="1843427242540081996">"Full screen"</string>
     <string name="user_aspect_ratio_half_screen" msgid="1015852057094310209">"Kalahating screen"</string>
