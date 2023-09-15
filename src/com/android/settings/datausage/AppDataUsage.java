@@ -31,6 +31,7 @@ import android.telephony.SubscriptionManager;
 import android.util.ArraySet;
 import android.util.IconDrawableFactory;
 import android.util.Log;
+import android.util.Range;
 import android.view.View;
 import android.widget.AdapterView;
 
@@ -472,7 +473,9 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
                         List<NetworkCycleDataForUid> data) {
                     mUsageData = data;
                     mCycle.setOnItemSelectedListener(mCycleListener);
-                    mCycleAdapter.updateCycleList(data);
+                    mCycleAdapter.updateCycleList(data.stream()
+                            .map(cycle -> new Range<>(cycle.getStartTime(), cycle.getEndTime()))
+                            .toList());
                     if (mSelectedCycle > 0L) {
                         final int numCycles = data.size();
                         int position = 0;

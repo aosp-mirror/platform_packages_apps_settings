@@ -22,8 +22,8 @@ import android.net.NetworkTemplate
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.SettingsActivity
+import com.android.settings.datausage.lib.NetworkUsageData
 import com.android.settingslib.AppItem
-import com.android.settingslib.net.NetworkCycleChartData
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Test
@@ -48,11 +48,8 @@ class DataUsageListAppsControllerTest {
     @Before
     fun setUp() {
         controller.init(mock<NetworkTemplate>())
-        val data = NetworkCycleChartData.Builder().apply {
-            setStartTime(START_TIME)
-            setEndTime(END_TIME)
-        }.build()
-        controller.setCycleData(listOf(data))
+        val data = NetworkUsageData(START_TIME, END_TIME, 0)
+        controller.updateCycles(listOf(data))
     }
 
     @Test

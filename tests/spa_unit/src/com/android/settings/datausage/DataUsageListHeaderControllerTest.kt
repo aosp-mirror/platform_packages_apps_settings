@@ -21,10 +21,16 @@ import android.net.NetworkTemplate
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Spinner
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.testing.TestLifecycleOwner
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
+import com.android.settings.datausage.lib.INetworkCycleDataRepository
+import com.android.settings.datausage.lib.NetworkUsageData
 import com.google.common.truth.Truth.assertThat
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.any
@@ -40,6 +46,14 @@ class DataUsageListHeaderControllerTest {
         doNothing().whenever(mock).startActivity(any())
     }
 
+    private val repository = object : INetworkCycleDataRepository {
+        override suspend fun loadCycles() = emptyList<NetworkUsageData>()
+
+        override fun getPolicy() = null
+
+        override suspend fun querySummary(startTime: Long, endTime: Long) = null
+    }
+
     private val header =
         LayoutInflater.from(context).inflate(R.layout.apps_filter_spinner, null, false)
 
@@ -47,11 +61,16 @@ class DataUsageListHeaderControllerTest {
 
     private val spinner: Spinner = header.requireViewById(R.id.filter_spinner)
 
+    private val testLifecycleOwner = TestLifecycleOwner(initialState = Lifecycle.State.CREATED)
+
     private val controller = DataUsageListHeaderController(
         header = header,
         template = mock<NetworkTemplate>(),
         sourceMetricsCategory = 0,
-        onItemSelected = { _, _ -> },
+        viewLifecycleOwner = testLifecycleOwner,
+        onCyclesLoad = {},
+        onItemSelected = {},
+        repository = repository,
     )
 
     @Test
@@ -60,8 +79,9 @@ class DataUsageListHeaderControllerTest {
     }
 
     @Test
-    fun updateCycleData_shouldShowCycleSpinner() {
-        controller.updateCycleData(emptyList())
+    fun updateCycleData_shouldShowCycleSpinner() = runBlocking {
+        testLifecycleOwner.handleLifecycleEvent(Lifecycle.Event.ON_START)
+        delay(100)
 
         assertThat(spinner.visibility).isEqualTo(View.VISIBLE)
     }
