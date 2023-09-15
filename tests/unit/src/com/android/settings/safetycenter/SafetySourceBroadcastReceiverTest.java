@@ -30,9 +30,10 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Flags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.safetycenter.SafetyEvent;
 import android.safetycenter.SafetySourceData;
-import android.util.FeatureFlagUtils;
 
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -43,6 +44,7 @@ import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -62,6 +64,7 @@ public class SafetySourceBroadcastReceiverTest {
     @Mock private SafetyCenterManagerWrapper mSafetyCenterManagerWrapper;
 
     @Mock private LockPatternUtils mLockPatternUtils;
+    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     @Before
     public void setUp() {
@@ -241,15 +244,10 @@ public class SafetySourceBroadcastReceiverTest {
     }
 
     /** Tests that the PS source sets null data when it's disabled. */
-    // TODO(b/295516544): Modify this test for the new trunk stable flag instead when available.
     @Test
     public void onReceive_onRefresh_withPrivateSpaceFeatureDisabled_setsNullData() {
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
-        FeatureFlagUtils
-                .setEnabled(
-                        mApplicationContext,
-                        FeatureFlagUtils.SETTINGS_PRIVATE_SPACE_SETTINGS,
-                        false);
+        mSetFlagsRule.disableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE);
 
         Intent intent =
                 new Intent()
@@ -265,12 +263,6 @@ public class SafetySourceBroadcastReceiverTest {
                 .setSafetySourceData(any(), any(), captor.capture(), any());
 
         assertThat(captor.getValue()).isEqualTo(null);
-
-        FeatureFlagUtils
-                .setEnabled(
-                        mApplicationContext,
-                        FeatureFlagUtils.SETTINGS_PRIVATE_SPACE_SETTINGS,
-                        true);
     }
 
     @Test
