@@ -20,6 +20,7 @@ import static android.net.NetworkCapabilities.NET_CAPABILITY_PARTIAL_CONNECTIVIT
 import static android.net.NetworkCapabilities.NET_CAPABILITY_VALIDATED;
 import static android.net.NetworkCapabilities.TRANSPORT_WIFI;
 import static android.telephony.TelephonyManager.UNKNOWN_CARRIER_ID;
+
 import static com.android.settingslib.wifi.WifiUtils.getHotspotIconResource;
 
 import android.app.Activity;
@@ -428,8 +429,6 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
         ImageView iconView = headerPref.findViewById(R.id.entity_header_icon);
 
         iconView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-
-        mEntityHeaderController.setLabel(mWifiEntry.getTitle());
     }
 
     private String getExpiryTimeSummary() {
@@ -465,6 +464,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
 
     private void refreshEntityHeader() {
         mEntityHeaderController
+                .setLabel(mWifiEntry.getTitle())
                 .setSummary(mWifiEntry.getSummary())
                 .setSecondSummary(getExpiryTimeSummary())
                 .done(true /* rebind */);

@@ -305,6 +305,8 @@ public class WifiDetailPreferenceController2Test {
 
         ShadowEntityHeaderController.setUseMock(mMockHeaderController);
         // builder pattern
+        when(mMockHeaderController.setLabel(any(CharSequence.class)))
+                .thenReturn(mMockHeaderController);
         when(mMockHeaderController.setSummary(nullable(String.class)))
                 .thenReturn(mMockHeaderController);
         when(mMockHeaderController.setSecondSummary(nullable(String.class)))

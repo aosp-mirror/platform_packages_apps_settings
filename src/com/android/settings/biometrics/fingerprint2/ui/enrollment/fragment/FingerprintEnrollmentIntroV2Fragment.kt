@@ -21,7 +21,6 @@ import android.annotation.StringRes
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
-import android.hardware.fingerprint.FingerprintSensorProperties
 import android.os.Bundle
 import android.text.Html
 import android.text.method.LinkMovementMethod
@@ -39,6 +38,7 @@ import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.Fing
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintGatekeeperViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintScrollViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.Unicorn
+import com.android.systemui.biometrics.shared.model.FingerprintSensorType
 import com.google.android.setupcompat.template.FooterBarMixin
 import com.google.android.setupcompat.template.FooterButton
 import com.google.android.setupdesign.GlifLayout
@@ -144,8 +144,8 @@ class FingerprintEnrollmentIntroV2Fragment : Fragment(R.layout.fingerprint_v2_en
             val iconShield: ImageView = view.requireViewById(R.id.icon_shield)
             val footerMessage6: TextView = view.requireViewById(R.id.footer_message_6)
             when (sensorType) {
-              FingerprintSensorProperties.TYPE_UDFPS_ULTRASONIC,
-              FingerprintSensorProperties.TYPE_UDFPS_OPTICAL -> {
+              FingerprintSensorType.UDFPS_ULTRASONIC,
+              FingerprintSensorType.UDFPS_OPTICAL -> {
                 footerMessage6.visibility = View.VISIBLE
                 iconShield.visibility = View.VISIBLE
               }

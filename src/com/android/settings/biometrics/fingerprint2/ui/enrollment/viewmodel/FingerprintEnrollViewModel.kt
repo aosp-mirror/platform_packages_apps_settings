@@ -16,20 +16,24 @@
 
 package com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel
 
-import android.hardware.fingerprint.FingerprintSensorProperties
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.android.settings.biometrics.fingerprint2.domain.interactor.FingerprintManagerInteractor
+import com.android.systemui.biometrics.shared.model.FingerprintSensorType
+import com.android.systemui.biometrics.shared.model.toSensorType
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.transform
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.map
 
 /** Represents all of the fingerprint information needed for fingerprint enrollment. */
 class FingerprintEnrollViewModel(fingerprintManagerInteractor: FingerprintManagerInteractor) :
   ViewModel() {
 
-  /** Represents the stream of [FingerprintSensorProperties.SensorType] */
-  val sensorType: Flow<Int> =
-    fingerprintManagerInteractor.sensorPropertiesInternal.transform { it?.sensorType }
+  /** Represents the stream of [FingerprintSensorType] */
+  val sensorType: Flow<FingerprintSensorType> =
+    fingerprintManagerInteractor.sensorPropertiesInternal.filterNotNull().map {
+      it.sensorType.toSensorType()
+    }
 
   class FingerprintEnrollViewModelFactory(val interactor: FingerprintManagerInteractor) :
     ViewModelProvider.Factory {
