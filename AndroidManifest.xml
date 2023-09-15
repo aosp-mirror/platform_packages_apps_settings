@@ -4568,6 +4568,22 @@
         </activity>
 
         <activity
+            android:name=".Settings$PreviouslyConnectedDeviceActivity"
+            android:label="@string/connected_device_saved_title"
+            android:exported="true"
+            android:permission="android.permission.BLUETOOTH_CONNECT"
+            android:icon="@drawable/ic_homepage_connected_device">
+            <intent-filter android:priority="1">
+                <action android:name="com.android.settings.PREVIOUSLY_CONNECTED_DEVICE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.connecteddevice.PreviouslyConnectedDeviceDashboardFragment"/>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true" />
+        </activity>
+
+        <activity
             android:name="Settings$StylusUsiDetailsActivity"
             android:label="@string/stylus_device_details_title"
             android:exported="true">
