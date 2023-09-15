@@ -33,9 +33,13 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.net.Uri;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import androidx.lifecycle.LiveData;
 import androidx.slice.Slice;
@@ -44,6 +48,7 @@ import com.android.settings.R;
 import com.android.settings.panel.PanelSlicesAdapter.SliceRowViewHolder;
 import com.android.settings.testutils.FakeFeatureFactory;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -94,7 +99,6 @@ public class PanelSlicesAdapterTest {
                                 .get()
                                 .getSupportFragmentManager()
                                 .findFragmentById(R.id.main_content));
-
     }
 
     private void addTestLiveData(Uri uri) {
@@ -104,6 +108,61 @@ public class PanelSlicesAdapterTest {
         final LiveData<Slice> liveData = mock(LiveData.class);
         when(liveData.getValue()).thenReturn(slice);
         mData.put(uri, liveData);
+    }
+
+    /**
+     * Edge case where fragment context is not available.
+     */
+    @Test
+    public void withPanelFragmentContextNull_createAdapter_noExceptionThrown() {
+        when(mPanelFragment.getContext()).thenReturn(null);
+
+        final PanelSlicesAdapter adapter = spy(new PanelSlicesAdapter(mPanelFragment, mData, 0));
+
+        Assert.assertNotNull(adapter);
+    }
+
+    /**
+     * ViewHolder should load and set the action label correctly.
+     */
+    @Test
+    public void setActionLabel_loadsActionLabel() {
+        addTestLiveData(VOLUME_NOTIFICATION_URI);
+        final PanelSlicesAdapter adapter = new PanelSlicesAdapter(mPanelFragment, mData, 0);
+        final ViewGroup view = new FrameLayout(mContext);
+        final SliceRowViewHolder viewHolder = adapter.onCreateViewHolder(view, VIEW_TYPE_SLIDER);
+
+        // now let's see if setActionLabel can load and set the label correctly.
+        LinearLayout llRow = new LinearLayout(mContext);
+        viewHolder.setActionLabel(llRow);
+
+        boolean isLabelSet = isActionLabelSet(llRow);
+        Assert.assertTrue("Action label was not set correctly.", isLabelSet);
+    }
+
+    /**
+     * @param rowView the view with id row_view
+     * @return whether the accessibility action label is set
+     */
+    private boolean isActionLabelSet(View rowView) {
+        View.AccessibilityDelegate delegate = rowView.getAccessibilityDelegate();
+        if (delegate == null) {
+            return false;
+        }
+        AccessibilityNodeInfo node = new AccessibilityNodeInfo(rowView);
+        delegate.onInitializeAccessibilityNodeInfo(rowView, node);
+
+        boolean foundLabel = false;
+        final String expectedLabel =
+                mContext.getString(R.string.accessibility_action_label_panel_slice);
+        for (AccessibilityNodeInfo.AccessibilityAction action : node.getActionList()) {
+            if (action.equals(AccessibilityNodeInfo.AccessibilityAction.ACTION_CLICK)
+                    && TextUtils.equals(action.getLabel(), expectedLabel)) {
+                foundLabel = true;
+                break;
+            }
+        }
+        return foundLabel;
     }
 
     @Test
@@ -141,7 +200,7 @@ public class PanelSlicesAdapterTest {
     }
 
     @Test
-    public void onCreateViewHolder_viewTypeSlider_verifyActionLabelSet() {
+    public void onBindViewHolder_viewTypeSlider_verifyActionLabelSet() {
         addTestLiveData(VOLUME_NOTIFICATION_URI);
 
         final PanelSlicesAdapter adapter =
