@@ -43,12 +43,12 @@ import com.android.settings.biometrics.fingerprint2.domain.interactor.Fingerprin
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.fragment.FingerprintEnrollConfirmationV2Fragment
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.fragment.FingerprintEnrollEnrollingV2Fragment
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.fragment.FingerprintEnrollFindSensorV2Fragment
-import com.android.settings.biometrics.fingerprint2.ui.enrollment.fragment.FingerprintEnrollmentIntroV2Fragment
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.fragment.FingerprintEnrollIntroV2Fragment
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.Confirmation
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.Education
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.Enrollment
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollNavigationViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollViewModel
-import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollmentNavigationViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintGatekeeperViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintScrollViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.Finish
@@ -70,7 +70,7 @@ private const val TAG = "FingerprintEnrollmentV2Activity"
  * children fragments.
  */
 class FingerprintEnrollmentV2Activity : FragmentActivity() {
-  private lateinit var navigationViewModel: FingerprintEnrollmentNavigationViewModel
+  private lateinit var navigationViewModel: FingerprintEnrollNavigationViewModel
   private lateinit var gatekeeperViewModel: FingerprintGatekeeperViewModel
   private val coroutineDispatcher = Dispatchers.Default
 
@@ -170,18 +170,18 @@ class FingerprintEnrollmentV2Activity : FragmentActivity() {
     navigationViewModel =
       ViewModelProvider(
         this,
-        FingerprintEnrollmentNavigationViewModel.FingerprintEnrollmentNavigationViewModelFactory(
+        FingerprintEnrollNavigationViewModel.FingerprintEnrollNavigationViewModelFactory(
           backgroundDispatcher,
           interactor,
           gatekeeperViewModel,
           gatekeeperInfo is GatekeeperInfo.GatekeeperPasswordInfo, /* canSkipConfirm */
         )
-      )[FingerprintEnrollmentNavigationViewModel::class.java]
+      )[FingerprintEnrollNavigationViewModel::class.java]
 
     // Initialize FingerprintViewModel
     ViewModelProvider(
       this,
-      FingerprintEnrollViewModel.FingerprintEnrollViewModelFactory(interactor)
+      FingerprintEnrollViewModel.FingerprintEnrollViewModelFactory(interactor, backgroundDispatcher)
     )[FingerprintEnrollViewModel::class.java]
 
     // Initialize scroll view model
@@ -198,7 +198,7 @@ class FingerprintEnrollmentV2Activity : FragmentActivity() {
             Confirmation -> FingerprintEnrollConfirmationV2Fragment::class.java as Class<Fragment>
             Education -> FingerprintEnrollFindSensorV2Fragment::class.java as Class<Fragment>
             Enrollment -> FingerprintEnrollEnrollingV2Fragment::class.java as Class<Fragment>
-            Intro -> FingerprintEnrollmentIntroV2Fragment::class.java as Class<Fragment>
+            Intro -> FingerprintEnrollIntroV2Fragment::class.java as Class<Fragment>
             else -> null
           }
 

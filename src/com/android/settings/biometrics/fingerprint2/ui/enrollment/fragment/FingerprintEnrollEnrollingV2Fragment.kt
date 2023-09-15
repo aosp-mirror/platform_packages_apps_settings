@@ -19,7 +19,7 @@ package com.android.settings.biometrics.fingerprint2.ui.enrollment.fragment
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollmentNavigationViewModel
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollNavigationViewModel
 
 /** A fragment that is responsible for enrolling a users fingerprint. */
 class FingerprintEnrollEnrollingV2Fragment : Fragment() {
@@ -28,7 +28,7 @@ class FingerprintEnrollEnrollingV2Fragment : Fragment() {
     super.onCreate(savedInstanceState)
     if (savedInstanceState == null) {
       val navigationViewModel =
-        ViewModelProvider(requireActivity())[FingerprintEnrollmentNavigationViewModel::class.java]
+        ViewModelProvider(requireActivity())[FingerprintEnrollNavigationViewModel::class.java]
     }
   }
 }

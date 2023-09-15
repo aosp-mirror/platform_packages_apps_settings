@@ -27,12 +27,18 @@ import android.util.Log
 import com.android.settings.biometrics.GatekeeperPasswordProvider
 import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintAuthAttemptViewModel
 import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintViewModel
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.EnrollReason
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerEnrollStateViewModel
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.toOriginalReason
 import com.android.settings.password.ChooseLockSettingsHelper
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 import kotlinx.coroutines.CancellableContinuation
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.channels.onFailure
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
@@ -65,6 +71,16 @@ interface FingerprintManagerInteractor {
    * @return A [Pair] of the challenge and challenge token
    */
   suspend fun generateChallenge(gateKeeperPasswordHandle: Long): Pair<Long, ByteArray>
+
+  /**
+   * Runs [FingerprintManager.enroll] with the [hardwareAuthToken] and [EnrollReason] for this
+   * enrollment. Returning the [FingerEnrollStateViewModel] that represents this fingerprint
+   * enrollment state.
+   */
+  suspend fun enroll(
+    hardwareAuthToken: ByteArray?,
+    enrollReason: EnrollReason,
+  ): Flow<FingerEnrollStateViewModel>
 
   /**
    * Removes the given fingerprint, returning true if it was successfully removed and false
@@ -132,6 +148,51 @@ class FingerprintManagerInteractorImpl(
   }
 
   override val maxEnrollableFingerprints = flow { emit(maxFingerprints) }
+
+  override suspend fun enroll(
+    hardwareAuthToken: ByteArray?,
+    enrollReason: EnrollReason,
+  ): Flow<FingerEnrollStateViewModel> = callbackFlow {
+    var streamEnded = false
+    val enrollmentCallback =
+      object : FingerprintManager.EnrollmentCallback() {
+        override fun onEnrollmentProgress(remaining: Int) {
+          trySend(FingerEnrollStateViewModel.EnrollProgress(remaining)).onFailure { error ->
+            Log.d(TAG, "onEnrollmentProgress($remaining) failed to send, due to $error")
+          }
+          if (remaining == 0) {
+            streamEnded = true
+          }
+        }
+
+        override fun onEnrollmentHelp(helpMsgId: Int, helpString: CharSequence?) {
+          trySend(FingerEnrollStateViewModel.EnrollHelp(helpMsgId, helpString.toString()))
+            .onFailure { error -> Log.d(TAG, "onEnrollmentHelp failed to send, due to $error") }
+        }
+
+        override fun onEnrollmentError(errMsgId: Int, errString: CharSequence?) {
+          trySend(FingerEnrollStateViewModel.EnrollError(errMsgId, errString.toString()))
+            .onFailure { error -> Log.d(TAG, "onEnrollmentError failed to send, due to $error") }
+          streamEnded = true
+        }
+      }
+
+    val cancellationSignal = CancellationSignal()
+    fingerprintManager.enroll(
+      hardwareAuthToken,
+      cancellationSignal,
+      applicationContext.userId,
+      enrollmentCallback,
+      enrollReason.toOriginalReason()
+    )
+    awaitClose {
+      // If the stream has not been ended, and the user has stopped collecting the flow
+      // before it was over, send cancel.
+      if (!streamEnded) {
+        cancellationSignal.cancel()
+      }
+    }
+  }
 
   override suspend fun removeFingerprint(fp: FingerprintViewModel): Boolean = suspendCoroutine {
     val callback =
