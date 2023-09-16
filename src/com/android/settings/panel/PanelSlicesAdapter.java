@@ -61,15 +61,12 @@ public class PanelSlicesAdapter
     private final List<LiveData<Slice>> mSliceLiveData;
     private final int mMetricsCategory;
     private final PanelFragment mPanelFragment;
-    private final String mSliceClickActionLabel;
 
     public PanelSlicesAdapter(
             PanelFragment fragment, Map<Uri, LiveData<Slice>> sliceLiveData, int metricsCategory) {
         mPanelFragment = fragment;
         mSliceLiveData = new ArrayList<>(sliceLiveData.values());
         mMetricsCategory = metricsCategory;
-        mSliceClickActionLabel = mPanelFragment.getContext().getString(
-                R.string.accessibility_action_label_panel_slice);
     }
 
     @NonNull
@@ -77,7 +74,7 @@ public class PanelSlicesAdapter
     public SliceRowViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         final Context context = viewGroup.getContext();
         final LayoutInflater inflater = LayoutInflater.from(context);
-        View view;
+        final View view;
         if (viewType == PanelContent.VIEW_TYPE_SLIDER) {
             view = inflater.inflate(R.layout.panel_slice_slider_row, viewGroup, false);
         } else {
@@ -189,7 +186,6 @@ public class PanelSlicesAdapter
                     return;
                 }
                 sliceView.setTag(ROW_VIEW_TAG, new Object());
-
                 sliceView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
                     @Override
                     public void onLayoutChange(View v, int left, int top, int right, int bottom,
@@ -208,15 +204,17 @@ public class PanelSlicesAdapter
          * Update the action label for TalkBack to be more specific
          * @param view the RowView within the Slice
          */
-        private void setActionLabel(View view) {
+        @VisibleForTesting void setActionLabel(View view) {
             view.setAccessibilityDelegate(new View.AccessibilityDelegate() {
                 @Override
                 public void onInitializeAccessibilityNodeInfo(View host,
                         AccessibilityNodeInfo info) {
                     super.onInitializeAccessibilityNodeInfo(host, info);
+
                     AccessibilityNodeInfo.AccessibilityAction customClick =
-                            new AccessibilityNodeInfo.AccessibilityAction(
-                                    ACTION_CLICK, mSliceClickActionLabel);
+                            new AccessibilityNodeInfo.AccessibilityAction(ACTION_CLICK, host
+                                    .getResources()
+                                    .getString(R.string.accessibility_action_label_panel_slice));
                     info.addAction(customClick);
                 }
             });
