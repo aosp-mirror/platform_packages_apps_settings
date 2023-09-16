@@ -17,11 +17,15 @@
 package com.android.settings.datausage.lib
 
 import android.app.usage.NetworkStats
+import android.app.usage.NetworkStatsManager
 import android.content.Context
 import android.net.NetworkPolicyManager
+import android.net.NetworkTemplate
 import android.os.Process
 import android.os.UserHandle
+import android.util.Log
 import android.util.SparseArray
+import androidx.annotation.VisibleForTesting
 import com.android.settings.R
 import com.android.settingslib.AppItem
 import com.android.settingslib.net.UidDetailProvider
@@ -30,15 +34,18 @@ import com.android.settingslib.spaprivileged.framework.common.userManager
 class AppDataUsageRepository(
     private val context: Context,
     private val currentUserId: Int,
-    private val carrierId: Int?,
-    private val getPackageName: (AppItem) -> String,
+    private val template: NetworkTemplate,
+    private val getPackageName: (AppItem) -> String?,
 ) {
-    data class Bucket(
-        val uid: Int,
-        val bytes: Long,
-    )
+    private val networkStatsManager = context.getSystemService(NetworkStatsManager::class.java)!!
 
-    fun getAppPercent(buckets: List<Bucket>): List<Pair<AppItem, Int>> {
+    fun getAppPercent(carrierId: Int?, startTime: Long, endTime: Long): List<Pair<AppItem, Int>> {
+        val networkStats = querySummary(startTime, endTime) ?: return emptyList()
+        return getAppPercent(carrierId, convertToBuckets(networkStats))
+    }
+
+    @VisibleForTesting
+    fun getAppPercent(carrierId: Int?, buckets: List<Bucket>): List<Pair<AppItem, Int>> {
         val items = ArrayList<AppItem>()
         val knownItems = SparseArray<AppItem>()
         val profiles = context.userManager.userProfiles
@@ -61,7 +68,7 @@ class AppDataUsageRepository(
             item.restricted = true
         }
 
-        val filteredItems = filterItems(items).sorted()
+        val filteredItems = filterItems(carrierId, items).sorted()
         val largest: Long = filteredItems.maxOfOrNull { it.total } ?: 0
         return filteredItems.map { item ->
             val percentTotal = if (largest > 0) (item.total * 100 / largest).toInt() else 0
@@ -69,7 +76,14 @@ class AppDataUsageRepository(
         }
     }
 
-    private fun filterItems(items: List<AppItem>): List<AppItem> {
+    private fun querySummary(startTime: Long, endTime: Long): NetworkStats? = try {
+        networkStatsManager.querySummary(template, startTime, endTime)
+    } catch (e: RuntimeException) {
+        Log.e(TAG, "Exception querying network detail.", e)
+        null
+    }
+
+    private fun filterItems(carrierId: Int?, items: List<AppItem>): List<AppItem> {
         // When there is no specified SubscriptionInfo, Wi-Fi data usage will be displayed.
         // In this case, the carrier service package also needs to be hidden.
         if (carrierId != null && carrierId !in context.resources.getIntArray(
@@ -178,7 +192,15 @@ class AppDataUsageRepository(
     }
 
     companion object {
-        fun convertToBuckets(stats: NetworkStats): List<Bucket> {
+        private const val TAG = "AppDataUsageRepository"
+
+        @VisibleForTesting
+        data class Bucket(
+            val uid: Int,
+            val bytes: Long,
+        )
+
+        private fun convertToBuckets(stats: NetworkStats): List<Bucket> {
             val buckets = mutableListOf<Bucket>()
             stats.use {
                 val bucket = NetworkStats.Bucket()
