@@ -451,8 +451,6 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
         ImageView iconView = headerPref.findViewById(R.id.entity_header_icon);
 
         iconView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-
-        mEntityHeaderController.setLabel(mWifiEntry.getTitle());
     }
 
     private String getExpiryTimeSummary() {
@@ -491,6 +489,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
             mSummaryHeaderController.updateState(mDataUsageSummaryPref);
         } else {
             mEntityHeaderController
+                    .setLabel(mWifiEntry.getTitle())
                     .setSummary(mWifiEntry.getSummary())
                     .setSecondSummary(getExpiryTimeSummary())
                     .setRecyclerView(mFragment.getListView(), mLifecycle)
