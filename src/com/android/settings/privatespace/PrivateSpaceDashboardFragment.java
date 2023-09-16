@@ -18,7 +18,7 @@ package com.android.settings.privatespace;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.util.FeatureFlagUtils;
+import android.os.Flags;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -56,13 +56,8 @@ public class PrivateSpaceDashboardFragment extends DashboardFragment {
             new BaseSearchIndexProvider(R.xml.private_space_settings) {
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    // Temporary workaround for hiding PS Settings until the trunk stable feature
-                    // flag is available.
-                    // TODO(b/295516544): Remove this workaround when trunk stable feature flag is
-                    // available.
                     return SafetyCenterManagerWrapper.get().isEnabled(context)
-                            && FeatureFlagUtils.isEnabled(context,
-                            FeatureFlagUtils.SETTINGS_PRIVATE_SPACE_SETTINGS);
+                            && Flags.allowPrivateProfile();
                 }
 
                 @Override

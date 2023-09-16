@@ -16,13 +16,14 @@
 
 package com.android.settings.ui
 
-import android.os.SystemClock
 import android.provider.Settings
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
 import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiDevice
 import com.android.settings.ui.testutils.SettingsTestUtils.assertHasTexts
+import com.android.settings.ui.testutils.SettingsTestUtils.clickObject
 import com.android.settings.ui.testutils.SettingsTestUtils.startMainActivityFromHomeScreen
 import org.junit.Before
 import org.junit.Test
@@ -35,8 +36,11 @@ class DevelopmentSettingsTest {
 
     @Before
     fun setUp() {
-        device.executeShellCommand("settings put global development_settings_enabled 1")
-        SystemClock.sleep(1000)
+        device.startMainActivityFromHomeScreen(Settings.ACTION_DEVICE_INFO_SETTINGS)
+        device.assertHasTexts(listOf(BUILD_NUMBER))
+        repeat(7) {  // Enable development mode
+            device.clickObject(By.text(BUILD_NUMBER))
+        }
         device.startMainActivityFromHomeScreen(Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS)
     }
 
@@ -46,6 +50,7 @@ class DevelopmentSettingsTest {
     }
 
     private companion object {
+        private const val BUILD_NUMBER = "Build number"
         val ON_SCREEN_TEXTS = listOf(
             "Use developer options",
             "Memory",

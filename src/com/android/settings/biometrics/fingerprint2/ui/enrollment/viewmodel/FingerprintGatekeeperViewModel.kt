@@ -29,6 +29,8 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
+private const val TAG = "FingerprintGatekeeperViewModel"
+
 sealed interface GatekeeperInfo {
   object Invalid : GatekeeperInfo
   object Timeout : GatekeeperInfo

@@ -20,11 +20,11 @@ import android.app.PendingIntent;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Flags;
 import android.os.UserManager;
 import android.safetycenter.SafetyEvent;
 import android.safetycenter.SafetySourceData;
 import android.safetycenter.SafetySourceStatus;
-import android.util.FeatureFlagUtils;
 import android.util.Log;
 
 import com.android.settings.R;
@@ -35,7 +35,7 @@ import com.android.settingslib.transition.SettingsTransitionHelper;
 /** Private Space safety source for the Safety Center */
 public final class PrivateSpaceSafetySource {
     public static final String SAFETY_SOURCE_ID = "AndroidPrivateSpace";
-    private static final String TAG = "PrivateSpaceSafetySource";
+    private static final String TAG = "PrivateSpaceSafetySrc";
 
     private PrivateSpaceSafetySource() {}
 
@@ -54,10 +54,7 @@ public final class PrivateSpaceSafetySource {
             return;
         }
 
-        // Temporary workaround to help prevent the PS Settings showing up in droidfood builds.
-        // TODO(b/295516544): remove this when the trunk stable feature flag for PS is available.
-        if (!FeatureFlagUtils.isEnabled(context,
-                FeatureFlagUtils.SETTINGS_PRIVATE_SPACE_SETTINGS)) {
+        if (!Flags.allowPrivateProfile()) {
             // Setting null safetySourceData so that an old entry gets cleared out and this way
             // provide a response since SC always expects one on rescan.
             SafetyCenterManagerWrapper.get().setSafetySourceData(
