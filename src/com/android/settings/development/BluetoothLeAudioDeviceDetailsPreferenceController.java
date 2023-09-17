@@ -20,6 +20,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothManager;
 import android.bluetooth.BluetoothStatusCodes;
 import android.content.Context;
+import android.os.SystemProperties;
 import android.provider.DeviceConfig;
 
 import androidx.annotation.VisibleForTesting;
@@ -27,7 +28,6 @@ import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
 
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.core.SettingsUIDeviceConfig;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
 /**
@@ -40,8 +40,11 @@ public class BluetoothLeAudioDeviceDetailsPreferenceController
 
     private static final String PREFERENCE_KEY = "bluetooth_show_leaudio_device_details";
     private static final String CONFIG_LE_AUDIO_ENABLED_BY_DEFAULT = "le_audio_enabled_by_default";
-    private static final boolean LE_AUDIO_DEVICE_DETAIL_DEFAULT_VALUE = true;
+    private static final boolean LE_AUDIO_TOGGLE_VISIBLE_DEFAULT_VALUE = true;
     static int sLeAudioSupportedStateCache = BluetoothStatusCodes.ERROR_UNKNOWN;
+
+    static final String LE_AUDIO_TOGGLE_VISIBLE_PROPERTY =
+            "persist.bluetooth.leaudio.toggle_visible";
 
     @VisibleForTesting
     BluetoothAdapter mBluetoothAdapter;
@@ -73,10 +76,7 @@ public class BluetoothLeAudioDeviceDetailsPreferenceController
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final boolean isEnabled = (Boolean) newValue;
-        DeviceConfig.setProperty(
-                DeviceConfig.NAMESPACE_SETTINGS_UI,
-                SettingsUIDeviceConfig.BT_LE_AUDIO_DEVICE_DETAIL_ENABLED,
-                isEnabled ? "true" : "false", LE_AUDIO_DEVICE_DETAIL_DEFAULT_VALUE);
+        SystemProperties.set(LE_AUDIO_TOGGLE_VISIBLE_PROPERTY, Boolean.toString(isEnabled));
         return true;
     }
 
@@ -86,25 +86,13 @@ public class BluetoothLeAudioDeviceDetailsPreferenceController
             return;
         }
 
-        final boolean leAudioDeviceDetailEnabled = DeviceConfig.getBoolean(
-                DeviceConfig.NAMESPACE_SETTINGS_UI,
-                SettingsUIDeviceConfig.BT_LE_AUDIO_DEVICE_DETAIL_ENABLED,
-                LE_AUDIO_DEVICE_DETAIL_DEFAULT_VALUE);
+        final boolean isLeAudioToggleVisible = SystemProperties.getBoolean(
+                LE_AUDIO_TOGGLE_VISIBLE_PROPERTY, LE_AUDIO_TOGGLE_VISIBLE_DEFAULT_VALUE);
         final boolean leAudioEnabledByDefault = DeviceConfig.getBoolean(
                 DeviceConfig.NAMESPACE_BLUETOOTH, CONFIG_LE_AUDIO_ENABLED_BY_DEFAULT, false);
 
         mPreference.setEnabled(!leAudioEnabledByDefault);
-        ((SwitchPreference) mPreference).setChecked(leAudioDeviceDetailEnabled
+        ((SwitchPreference) mPreference).setChecked(isLeAudioToggleVisible
                 || leAudioEnabledByDefault);
-    }
-
-    @Override
-    protected void onDeveloperOptionsSwitchDisabled() {
-        super.onDeveloperOptionsSwitchDisabled();
-        // Reset the toggle to null when the developer option is disabled
-        DeviceConfig.setProperty(
-                DeviceConfig.NAMESPACE_SETTINGS_UI,
-                SettingsUIDeviceConfig.BT_LE_AUDIO_DEVICE_DETAIL_ENABLED, "null",
-                LE_AUDIO_DEVICE_DETAIL_DEFAULT_VALUE);
     }
 }
