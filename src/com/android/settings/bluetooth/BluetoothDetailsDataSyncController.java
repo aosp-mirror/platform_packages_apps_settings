@@ -64,6 +64,7 @@ public class BluetoothDetailsDataSyncController extends BluetoothDetailsControll
         mCompanionDeviceManager = context.getSystemService(CompanionDeviceManager.class);
 
         mCompanionDeviceManager.getAllAssociations().stream().filter(
+                a -> a.getDeviceMacAddress() != null).filter(
                 a -> Objects.equal(mCachedDevice.getAddress(),
                         a.getDeviceMacAddress().toString().toUpperCase())).max(
                 Comparator.comparingLong(AssociationInfo::getTimeApprovedMs)).ifPresent(
