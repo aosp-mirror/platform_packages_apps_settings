@@ -18,14 +18,12 @@ import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkPolicy;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
 import android.os.UserManager;
 import android.provider.Settings;
-import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.util.EventLog;
 import android.util.Log;
@@ -50,7 +48,6 @@ import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.datausage.CycleAdapter.SpinnerInterface;
 import com.android.settings.network.MobileDataEnabledListener;
 import com.android.settings.network.MobileNetworkRepository;
-import com.android.settings.network.ProxySubscriptionManager;
 import com.android.settings.widget.LoadingViewController;
 import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
 import com.android.settingslib.net.NetworkCycleChartData;
@@ -214,8 +211,6 @@ public class DataUsageList extends DataUsageBaseFragment
         // network history when showing app detail.
         getLoaderManager().restartLoader(LOADER_CHART_DATA,
                 buildArgs(mTemplate), mNetworkCycleDataCallbacks);
-
-        updateBody();
     }
 
     @Override
@@ -273,33 +268,6 @@ public class DataUsageList extends DataUsageBaseFragment
      */
     public void onMobileDataEnabledChange() {
         updatePolicy();
-    }
-
-    /**
-     * Update body content based on current tab. Loads network cycle data from system, and
-     * binds them to visible controls.
-     */
-    private void updateBody() {
-        if (!isAdded()) return;
-
-        final Context context = getActivity();
-
-        // detail mode can change visible menus, invalidate
-        getActivity().invalidateOptionsMenu();
-
-        int seriesColor = context.getColor(R.color.sim_noitification);
-        if (mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-            final SubscriptionInfo sir = ProxySubscriptionManager.getInstance(context)
-                    .getActiveSubscriptionInfo(mSubId);
-
-            if (sir != null) {
-                seriesColor = sir.getIconTint();
-            }
-        }
-
-        final int secondaryColor = Color.argb(127, Color.red(seriesColor), Color.green(seriesColor),
-                Color.blue(seriesColor));
-        mChart.setColors(seriesColor, secondaryColor);
     }
 
     private Bundle buildArgs(NetworkTemplate template) {
