@@ -120,12 +120,10 @@ public class BatteryTipsCardPreference extends Preference implements View.OnClic
     public void onClick(View view) {
         final int viewId = view.getId();
         if (viewId == R.id.main_button || viewId == R.id.tips_card) {
-            setVisible(false);
             if (mOnConfirmListener != null) {
                 mOnConfirmListener.onConfirm();
             }
         } else if (viewId == R.id.dismiss_button) {
-            setVisible(false);
             if (mOnRejectListener != null) {
                 mOnRejectListener.onReject();
             }

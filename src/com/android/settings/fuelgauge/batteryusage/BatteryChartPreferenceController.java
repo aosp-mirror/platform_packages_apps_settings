@@ -221,14 +221,20 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         refreshUi();
     }
 
+    boolean isHighlightSlotFocused() {
+        return (mDailyHighlightSlotIndex != BatteryChartViewModel.SELECTED_INDEX_INVALID
+                && mDailyHighlightSlotIndex == mDailyChartIndex
+                && mHourlyHighlightSlotIndex != BatteryChartViewModel.SELECTED_INDEX_INVALID
+                && mHourlyHighlightSlotIndex == mHourlyChartIndex);
+    }
+
     void onHighlightSlotIndexUpdate(int dailyHighlightSlotIndex, int hourlyHighlightSlotIndex) {
-        if (mDailyHighlightSlotIndex == dailyHighlightSlotIndex
-                && mHourlyHighlightSlotIndex == hourlyHighlightSlotIndex) {
-            return;
-        }
         mDailyHighlightSlotIndex = dailyHighlightSlotIndex;
         mHourlyHighlightSlotIndex = hourlyHighlightSlotIndex;
         refreshUi();
+        if (mOnSelectedIndexUpdatedListener != null) {
+            mOnSelectedIndexUpdatedListener.onSelectedIndexUpdated();
+        }
     }
 
     void selectHighlightSlotIndex() {
@@ -405,7 +411,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         final String slotInformation = getSlotInformation();
         return slotInformation == null
                 ? mPrefContext.getString(
-                       R.string.battery_usage_breakdown_title_since_last_full_charge)
+                        R.string.battery_usage_breakdown_title_since_last_full_charge)
                 : mPrefContext.getString(
                         R.string.battery_usage_breakdown_title_for_slot, slotInformation);
     }
