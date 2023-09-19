@@ -247,6 +247,7 @@ public class BatteryTestUtils {
                 .setEventId("BrightnessAnomaly")
                 .setType(PowerAnomalyType.TYPE_SETTINGS_BANNER)
                 .setKey(PowerAnomalyKey.KEY_BRIGHTNESS)
+                .setDismissRecordKey(PowerAnomalyKey.KEY_BRIGHTNESS.name())
                 .setScore(1.2f)
                 .setWarningBannerInfo(WarningBannerInfo.newBuilder()
                         .setMainButtonDestination(DisplaySettings.class.getName())
@@ -264,6 +265,7 @@ public class BatteryTestUtils {
                 .setEventId("ScreenTimeoutAnomaly")
                 .setType(PowerAnomalyType.TYPE_SETTINGS_BANNER)
                 .setKey(PowerAnomalyKey.KEY_SCREEN_TIMEOUT)
+                .setDismissRecordKey(PowerAnomalyKey.KEY_SCREEN_TIMEOUT.name())
                 .setScore(1.1f)
                 .setWarningBannerInfo(WarningBannerInfo.newBuilder()
                         .setMainButtonDestination(ScreenTimeoutSettings.class.getName())
@@ -280,15 +282,12 @@ public class BatteryTestUtils {
         return PowerAnomalyEvent.newBuilder()
                 .setEventId("AppAnomaly")
                 .setType(PowerAnomalyType.TYPE_APPS_ITEM)
-                .setKey(PowerAnomalyKey.KEY_APP)
+                .setKey(PowerAnomalyKey.KEY_APP_TOTAL_HIGHER_THAN_USUAL)
+                .setDismissRecordKey("KEY_APP_1")
                 .setScore(2.0f)
                 .setWarningItemInfo(WarningItemInfo.newBuilder()
-                        .setDismissRecordKey("KEY_APP_1")
                         .setStartTimestamp(1694361600000L)  // 2023-09-11 00:00:00
                         .setEndTimestamp(1694368800000L)    // 2023-09-11 02:00:00
-                        .setTitleString("Chrome used more battery than usual in foreground")
-                        .setMainButtonString("Check")
-                        .setCancelButtonString("Got it")
                         .build())
                 .build();
     }
