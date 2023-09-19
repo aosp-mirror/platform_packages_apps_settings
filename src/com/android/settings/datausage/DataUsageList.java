@@ -15,9 +15,7 @@
 package com.android.settings.datausage;
 
 import android.app.Activity;
-import android.app.ActivityManager;
 import android.app.settings.SettingsEnums;
-import android.app.usage.NetworkStats;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -46,25 +44,19 @@ import androidx.lifecycle.Lifecycle;
 import androidx.loader.app.LoaderManager.LoaderCallbacks;
 import androidx.loader.content.Loader;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceGroup;
 
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.datausage.CycleAdapter.SpinnerInterface;
-import com.android.settings.datausage.lib.AppDataUsageRepository;
 import com.android.settings.network.MobileDataEnabledListener;
 import com.android.settings.network.MobileNetworkRepository;
 import com.android.settings.network.ProxySubscriptionManager;
 import com.android.settings.widget.LoadingViewController;
-import com.android.settingslib.AppItem;
 import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
 import com.android.settingslib.net.NetworkCycleChartData;
 import com.android.settingslib.net.NetworkCycleChartDataLoader;
-import com.android.settingslib.net.NetworkStatsSummaryLoader;
-import com.android.settingslib.net.UidDetailProvider;
 import com.android.settingslib.utils.ThreadUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -85,14 +77,11 @@ public class DataUsageList extends DataUsageBaseFragment
 
     private static final String KEY_USAGE_AMOUNT = "usage_amount";
     private static final String KEY_CHART_DATA = "chart_data";
-    private static final String KEY_APPS_GROUP = "apps_group";
     private static final String KEY_TEMPLATE = "template";
     private static final String KEY_APP = "app";
 
     @VisibleForTesting
     static final int LOADER_CHART_DATA = 2;
-    @VisibleForTesting
-    static final int LOADER_SUMMARY = 3;
 
     @VisibleForTesting
     MobileDataEnabledListener mDataStateListener;
@@ -113,18 +102,15 @@ public class DataUsageList extends DataUsageBaseFragment
     @Nullable
     private List<NetworkCycleChartData> mCycleData;
 
-    // Caches the cycles for startAppDataUsage usage, which need be cleared when resumed.
-    private ArrayList<Long> mCycles;
     // Spinner will keep the selected cycle even after paused, this only keeps the displayed cycle,
     // which need be cleared when resumed.
     private CycleAdapter.CycleItem mLastDisplayedCycle;
-    private UidDetailProvider mUidDetailProvider;
     private CycleAdapter mCycleAdapter;
     private Preference mUsageAmount;
-    private PreferenceGroup mApps;
     private View mHeader;
     private MobileNetworkRepository mMobileNetworkRepository;
     private SubscriptionInfoEntity mSubscriptionInfoEntity;
+    private DataUsageListAppsController mDataUsageListAppsController;
 
     @Override
     public int getMetricsCategory() {
@@ -148,14 +134,19 @@ public class DataUsageList extends DataUsageBaseFragment
             return;
         }
 
-        mUidDetailProvider = new UidDetailProvider(activity);
         mUsageAmount = findPreference(KEY_USAGE_AMOUNT);
         mChart = findPreference(KEY_CHART_DATA);
-        mApps = findPreference(KEY_APPS_GROUP);
 
         processArgument();
+        if (mTemplate == null) {
+            Log.e(TAG, "No template; leaving");
+            finish();
+            return;
+        }
         updateSubscriptionInfoEntity();
         mDataStateListener = new MobileDataEnabledListener(activity, this);
+        mDataUsageListAppsController = use(DataUsageListAppsController.class);
+        mDataUsageListAppsController.init(mTemplate);
     }
 
     @Override
@@ -216,7 +207,6 @@ public class DataUsageList extends DataUsageBaseFragment
         super.onResume();
         mLoadingViewController.showLoadingViewDelayed();
         mDataStateListener.start(mSubId);
-        mCycles = null;
         mLastDisplayedCycle = null;
 
         // kick off loader for network history
@@ -234,16 +224,6 @@ public class DataUsageList extends DataUsageBaseFragment
         mDataStateListener.stop();
 
         getLoaderManager().destroyLoader(LOADER_CHART_DATA);
-        getLoaderManager().destroyLoader(LOADER_SUMMARY);
-    }
-
-    @Override
-    public void onDestroy() {
-        if (mUidDetailProvider != null) {
-            mUidDetailProvider.clearCache();
-            mUidDetailProvider = null;
-        }
-        super.onDestroy();
     }
 
     @Override
@@ -352,6 +332,7 @@ public class DataUsageList extends DataUsageBaseFragment
         if (mCycleData != null) {
             mCycleAdapter.updateCycleList(mCycleData);
         }
+        mDataUsageListAppsController.setCycleData(mCycleData);
         updateSelectedCycle();
     }
 
@@ -402,65 +383,16 @@ public class DataUsageList extends DataUsageBaseFragment
         if (LOGD) Log.d(TAG, "updateDetailData()");
 
         // kick off loader for detailed stats
-        getLoaderManager().restartLoader(LOADER_SUMMARY, null /* args */,
-                mNetworkStatsDetailCallbacks);
+        mDataUsageListAppsController.update(
+                mSubscriptionInfoEntity == null ? null : mSubscriptionInfoEntity.carrierId,
+                mChart.getInspectStart(),
+                mChart.getInspectEnd()
+        );
 
         final long totalBytes = mCycleData != null && !mCycleData.isEmpty()
-            ? mCycleData.get(mCycleSpinner.getSelectedItemPosition()).getTotalUsage() : 0;
+                ? mCycleData.get(mCycleSpinner.getSelectedItemPosition()).getTotalUsage() : 0;
         final CharSequence totalPhrase = DataUsageUtils.formatDataUsage(getActivity(), totalBytes);
         mUsageAmount.setTitle(getString(R.string.data_used_template, totalPhrase));
-    }
-
-    /**
-     * Bind the given buckets.
-     */
-    private void bindStats(List<AppDataUsageRepository.Bucket> buckets) {
-        mApps.removeAll();
-        AppDataUsageRepository repository = new AppDataUsageRepository(
-                requireContext(),
-                ActivityManager.getCurrentUser(),
-                mSubscriptionInfoEntity == null ? null : mSubscriptionInfoEntity.carrierId,
-                appItem -> mUidDetailProvider.getUidDetail(appItem.key, true).packageName
-        );
-        for (var itemPercentPair : repository.getAppPercent(buckets)) {
-            final AppDataUsagePreference preference = new AppDataUsagePreference(getContext(),
-                    itemPercentPair.getFirst(), itemPercentPair.getSecond(), mUidDetailProvider);
-            preference.setOnPreferenceClickListener(p -> {
-                AppDataUsagePreference pref = (AppDataUsagePreference) p;
-                startAppDataUsage(pref.getItem());
-                return true;
-            });
-            mApps.addPreference(preference);
-        }
-    }
-
-    @VisibleForTesting
-    void startAppDataUsage(AppItem item) {
-        if (mCycleData == null) {
-            return;
-        }
-        final Bundle args = new Bundle();
-        args.putParcelable(AppDataUsage.ARG_APP_ITEM, item);
-        args.putParcelable(AppDataUsage.ARG_NETWORK_TEMPLATE, mTemplate);
-        if (mCycles == null) {
-            mCycles = new ArrayList<>();
-            for (NetworkCycleChartData data : mCycleData) {
-                if (mCycles.isEmpty()) {
-                    mCycles.add(data.getEndTime());
-                }
-                mCycles.add(data.getStartTime());
-            }
-        }
-        args.putSerializable(AppDataUsage.ARG_NETWORK_CYCLES, mCycles);
-        args.putLong(AppDataUsage.ARG_SELECTED_CYCLE,
-            mCycleData.get(mCycleSpinner.getSelectedItemPosition()).getEndTime());
-
-        new SubSettingLauncher(getContext())
-                .setDestination(AppDataUsage.class.getName())
-                .setTitleRes(R.string.data_usage_app_summary_title)
-                .setArguments(args)
-                .setSourceMetricsCategory(getMetricsCategory())
-                .launch();
     }
 
     private final OnItemSelectedListener mCycleListener = new OnItemSelectedListener() {
@@ -499,44 +431,6 @@ public class DataUsageList extends DataUsageBaseFragment
                 @Override
                 public void onLoaderReset(@NonNull Loader<List<NetworkCycleChartData>> loader) {
                     mCycleData = null;
-                }
-            };
-
-    private final LoaderCallbacks<NetworkStats> mNetworkStatsDetailCallbacks =
-            new LoaderCallbacks<>() {
-                @Override
-                @NonNull
-                public Loader<NetworkStats> onCreateLoader(int id, Bundle args) {
-                    return new NetworkStatsSummaryLoader.Builder(getContext())
-                            .setStartTime(mChart.getInspectStart())
-                            .setEndTime(mChart.getInspectEnd())
-                            .setNetworkTemplate(mTemplate)
-                            .build();
-                }
-
-                @Override
-                public void onLoadFinished(
-                        @NonNull Loader<NetworkStats> loader, NetworkStats data) {
-                    bindStats(AppDataUsageRepository.Companion.convertToBuckets(data));
-                    updateEmptyVisible();
-                }
-
-                @Override
-                public void onLoaderReset(@NonNull Loader<NetworkStats> loader) {
-                    mApps.removeAll();
-                    updateEmptyVisible();
-                }
-
-                private void updateEmptyVisible() {
-                    if ((mApps.getPreferenceCount() != 0)
-                            != (getPreferenceScreen().getPreferenceCount() != 0)) {
-                        if (mApps.getPreferenceCount() != 0) {
-                            getPreferenceScreen().addPreference(mUsageAmount);
-                            getPreferenceScreen().addPreference(mApps);
-                        } else {
-                            getPreferenceScreen().removeAll();
-                        }
-                    }
                 }
             };
 

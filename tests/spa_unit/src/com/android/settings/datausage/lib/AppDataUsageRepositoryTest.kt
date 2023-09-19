@@ -20,12 +20,13 @@ import android.content.Context
 import android.content.pm.UserInfo
 import android.content.res.Resources
 import android.net.NetworkPolicyManager
+import android.net.NetworkTemplate
 import android.os.UserHandle
 import android.os.UserManager
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
-import com.android.settings.datausage.lib.AppDataUsageRepository.Bucket
+import com.android.settings.datausage.lib.AppDataUsageRepository.Companion.Bucket
 import com.android.settingslib.AppItem
 import com.android.settingslib.spaprivileged.framework.common.userManager
 import com.google.common.truth.Truth.assertThat
@@ -72,15 +73,15 @@ class AppDataUsageRepositoryTest {
         val repository = AppDataUsageRepository(
             context = context,
             currentUserId = USER_ID,
-            carrierId = null,
-            getPackageName = { "" },
+            template = Template,
+            getPackageName = { null },
         )
         val buckets = listOf(
             Bucket(uid = APP_ID_1, bytes = 1),
             Bucket(uid = APP_ID_2, bytes = 2),
         )
 
-        val appPercentList = repository.getAppPercent(buckets)
+        val appPercentList = repository.getAppPercent(null, buckets)
 
         assertThat(appPercentList).hasSize(2)
         appPercentList[0].first.apply {
@@ -102,15 +103,15 @@ class AppDataUsageRepositoryTest {
         val repository = AppDataUsageRepository(
             context = context,
             currentUserId = USER_ID,
-            carrierId = HIDING_CARRIER_ID,
-            getPackageName = { if (it.key == APP_ID_1) HIDING_PACKAGE_NAME else "" },
+            template = Template,
+            getPackageName = { if (it.key == APP_ID_1) HIDING_PACKAGE_NAME else null },
         )
         val buckets = listOf(
             Bucket(uid = APP_ID_1, bytes = 1),
             Bucket(uid = APP_ID_2, bytes = 2),
         )
 
-        val appPercentList = repository.getAppPercent(buckets)
+        val appPercentList = repository.getAppPercent(HIDING_CARRIER_ID, buckets)
 
         assertThat(appPercentList).hasSize(1)
         appPercentList[0].first.apply {
@@ -127,5 +128,7 @@ class AppDataUsageRepositoryTest {
         const val APP_ID_2 = 110002
         const val HIDING_CARRIER_ID = 4
         const val HIDING_PACKAGE_NAME = "hiding.package.name"
+
+        val Template: NetworkTemplate = mock<NetworkTemplate>()
     }
 }

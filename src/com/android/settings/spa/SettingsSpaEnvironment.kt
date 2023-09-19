@@ -18,6 +18,7 @@ package com.android.settings.spa
 
 import android.content.Context
 import android.util.FeatureFlagUtils
+import com.android.settings.network.apn.ApnEditPageProvider
 import com.android.settings.spa.about.AboutPhonePageProvider
 import com.android.settings.spa.app.AllAppListPageProvider
 import com.android.settings.spa.app.AppsMainPageProvider
@@ -34,8 +35,8 @@ import com.android.settings.spa.app.specialaccess.ModifySystemSettingsAppListPro
 import com.android.settings.spa.app.specialaccess.NfcTagAppsSettingsProvider
 import com.android.settings.spa.app.specialaccess.PictureInPictureListProvider
 import com.android.settings.spa.app.specialaccess.SpecialAppAccessPageProvider
-import com.android.settings.spa.app.specialaccess.WifiControlAppListProvider
 import com.android.settings.spa.app.specialaccess.UseFullScreenIntentAppListProvider
+import com.android.settings.spa.app.specialaccess.WifiControlAppListProvider
 import com.android.settings.spa.app.storage.StorageAppListPageProvider
 import com.android.settings.spa.core.instrumentation.SpaLogProvider
 import com.android.settings.spa.development.UsageStatsPageProvider
@@ -95,6 +96,7 @@ open class SettingsSpaEnvironment(context: Context) : SpaEnvironment(context) {
                 AboutPhonePageProvider,
                 StorageAppListPageProvider.Apps,
                 StorageAppListPageProvider.Games,
+                ApnEditPageProvider,
                 ) + togglePermissionAppListTemplate.createPageProviders(),
             rootPages = listOf(
                 HomePageProvider.createSettingsPage()

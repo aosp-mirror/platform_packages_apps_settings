@@ -174,6 +174,20 @@ public class HighlightablePreferenceGroupAdapterTest {
         assertThat(mViewHolder.itemView.getTag(R.id.preference_highlighted)).isNull();
     }
 
+    /**
+     * When background is being updated, we also request the a11y focus on the preference
+     */
+    @Test
+    public void updateBackground_shouldRequestAccessibilityFocus() {
+        View viewItem = mock(View.class);
+        mViewHolder = PreferenceViewHolder.createInstanceForTests(viewItem);
+        ReflectionHelpers.setField(mAdapter, "mHighlightPosition", 10);
+
+        mAdapter.updateBackground(mViewHolder, 10);
+
+        verify(viewItem).requestAccessibilityFocus();
+    }
+
     @Test
     public void updateBackground_highlight_shouldAnimateBackgroundAndSetHighlightedTag() {
         ReflectionHelpers.setField(mAdapter, "mHighlightPosition", 10);

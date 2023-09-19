@@ -122,6 +122,9 @@ public class HighlightablePreferenceGroupAdapter extends PreferenceGroupAdapter 
                 && TextUtils.equals(mHighlightKey, getItem(position).getKey()))) {
             // This position should be highlighted. If it's highlighted before - skip animation.
             addHighlightBackground(holder, !mFadeInAnimated);
+            if (v != null) {
+                v.requestAccessibilityFocus();
+            }
         } else if (Boolean.TRUE.equals(v.getTag(R.id.preference_highlighted))) {
             // View with highlight is reused for a view that should not have highlight
             removeHighlightBackground(holder, false /* animate */);

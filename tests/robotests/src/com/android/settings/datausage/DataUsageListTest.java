@@ -17,7 +17,6 @@
 package com.android.settings.datausage;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
@@ -44,19 +43,15 @@ import androidx.loader.app.LoaderManager;
 import androidx.preference.PreferenceManager;
 
 import com.android.settings.R;
-import com.android.settings.SettingsActivity;
 import com.android.settings.network.MobileDataEnabledListener;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.widget.LoadingViewController;
-import com.android.settingslib.AppItem;
 import com.android.settingslib.NetworkPolicyEditor;
 import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
-import com.android.settingslib.net.NetworkCycleChartData;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
@@ -66,9 +61,6 @@ import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.util.ReflectionHelpers;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 public class DataUsageListTest {
@@ -196,34 +188,6 @@ public class DataUsageListTest {
     }
 
     @Test
-    public void startAppDataUsage_shouldAddCyclesInfoToLaunchArguments() {
-        final long startTime = 1521583200000L;
-        final long endTime = 1521676800000L;
-        final List<NetworkCycleChartData> data = new ArrayList<>();
-        final NetworkCycleChartData.Builder builder = new NetworkCycleChartData.Builder();
-        builder.setStartTime(startTime)
-                .setEndTime(endTime);
-        data.add(builder.build());
-        ReflectionHelpers.setField(mDataUsageList, "mCycleData", data);
-        final Spinner spinner = mock(Spinner.class);
-        when(spinner.getSelectedItemPosition()).thenReturn(0);
-        ReflectionHelpers.setField(mDataUsageList, "mCycleSpinner", spinner);
-        final ArgumentCaptor<Intent> intent = ArgumentCaptor.forClass(Intent.class);
-
-        mDataUsageList.startAppDataUsage(new AppItem());
-
-        verify(mActivity).startActivity(intent.capture());
-        final Bundle arguments =
-                intent.getValue().getBundleExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS);
-        assertThat(arguments.getLong(AppDataUsage.ARG_SELECTED_CYCLE)).isEqualTo(endTime);
-        final ArrayList<Long> cycles =
-                (ArrayList) arguments.getSerializable(AppDataUsage.ARG_NETWORK_CYCLES);
-        assertThat(cycles).hasSize(2);
-        assertThat(cycles.get(0)).isEqualTo(endTime);
-        assertThat(cycles.get(1)).isEqualTo(startTime);
-    }
-
-    @Test
     public void onViewCreated_shouldHideCycleSpinner() {
         final View view = new View(mActivity);
         final View header = getHeader();
@@ -255,7 +219,6 @@ public class DataUsageListTest {
         mDataUsageList.onPause();
 
         verify(mLoaderManager).destroyLoader(DataUsageList.LOADER_CHART_DATA);
-        verify(mLoaderManager).destroyLoader(DataUsageList.LOADER_SUMMARY);
     }
 
     private View getHeader() {
