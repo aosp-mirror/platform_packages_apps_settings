@@ -69,7 +69,7 @@ public final class BatteryUsageBreakdownControllerTest {
     @Mock
     private BatteryHistEntry mBatteryHistEntry;
     @Mock
-    private PowerGaugePreference mPowerGaugePreference;
+    private AnomalyAppItemPreference mAnomalyAppItemPreference;
 
     private Context mContext;
     private FakeFeatureFactory mFeatureFactory;
@@ -123,13 +123,14 @@ public final class BatteryUsageBreakdownControllerTest {
         BatteryDiffEntry.sResourceCache.put(
                 "fakeBatteryDiffEntryKey",
                 new BatteryEntry.NameAndIcon("fakeName", /*icon=*/ null, /*iconId=*/ 1));
+        doReturn(mAnomalyAppItemPreference).when(mAppListPreferenceGroup).findPreference(PREF_KEY);
     }
 
     @Test
     public void onDestroy_clearPreferenceCacheAndPreferenceGroupRemoveAll() {
         // Ensures the testing environment is correct.
         mBatteryUsageBreakdownController.mPreferenceCache.put(
-                PREF_KEY, mPowerGaugePreference);
+                PREF_KEY, mAnomalyAppItemPreference);
         assertThat(mBatteryUsageBreakdownController.mPreferenceCache).hasSize(1);
 
         mBatteryUsageBreakdownController.onDestroy();
@@ -178,7 +179,6 @@ public final class BatteryUsageBreakdownControllerTest {
         doReturn(mDrawable).when(mBatteryDiffEntry).getAppIcon();
         doReturn(appLabel).when(mBatteryDiffEntry).getAppLabel();
         doReturn(PREF_KEY).when(mBatteryDiffEntry).getKey();
-        doReturn(mPowerGaugePreference).when(mAppListPreferenceGroup).findPreference(PREF_KEY);
 
         mBatteryUsageBreakdownController.addAllPreferences();
 
@@ -188,27 +188,25 @@ public final class BatteryUsageBreakdownControllerTest {
     @Test
     public void removeAndCacheAllUnusedPreferences_removePref_buildCacheAndRemoveAllPreference() {
         doReturn(1).when(mAppListPreferenceGroup).getPreferenceCount();
-        doReturn(mPowerGaugePreference).when(mAppListPreferenceGroup).getPreference(0);
+        doReturn(mAnomalyAppItemPreference).when(mAppListPreferenceGroup).getPreference(0);
         doReturn(PREF_KEY2).when(mBatteryHistEntry).getKey();
-        doReturn(PREF_KEY).when(mPowerGaugePreference).getKey();
-        doReturn(mPowerGaugePreference).when(mAppListPreferenceGroup).findPreference(PREF_KEY);
+        doReturn(PREF_KEY).when(mAnomalyAppItemPreference).getKey();
         // Ensures the testing data is correct.
         assertThat(mBatteryUsageBreakdownController.mPreferenceCache).isEmpty();
 
         mBatteryUsageBreakdownController.removeAndCacheAllUnusedPreferences();
 
         assertThat(mBatteryUsageBreakdownController.mPreferenceCache.get(PREF_KEY))
-                .isEqualTo(mPowerGaugePreference);
-        verify(mAppListPreferenceGroup).removePreference(mPowerGaugePreference);
+                .isEqualTo(mAnomalyAppItemPreference);
+        verify(mAppListPreferenceGroup).removePreference(mAnomalyAppItemPreference);
     }
 
     @Test
     public void removeAndCacheAllUnusedPreferences_keepPref_KeepAllPreference() {
         doReturn(1).when(mAppListPreferenceGroup).getPreferenceCount();
-        doReturn(mPowerGaugePreference).when(mAppListPreferenceGroup).getPreference(0);
+        doReturn(mAnomalyAppItemPreference).when(mAppListPreferenceGroup).getPreference(0);
         doReturn(PREF_KEY).when(mBatteryDiffEntry).getKey();
-        doReturn(PREF_KEY).when(mPowerGaugePreference).getKey();
-        doReturn(mPowerGaugePreference).when(mAppListPreferenceGroup).findPreference(PREF_KEY);
+        doReturn(PREF_KEY).when(mAnomalyAppItemPreference).getKey();
         // Ensures the testing data is correct.
         assertThat(mBatteryUsageBreakdownController.mPreferenceCache).isEmpty();
 
@@ -232,10 +230,10 @@ public final class BatteryUsageBreakdownControllerTest {
     @Test
     public void handlePreferenceTreeClick_forAppEntry_returnTrue() {
         mBatteryDiffEntry.mConsumerType = ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY;
-        doReturn(mBatteryDiffEntry).when(mPowerGaugePreference).getBatteryDiffEntry();
+        doReturn(mBatteryDiffEntry).when(mAnomalyAppItemPreference).getBatteryDiffEntry();
 
         assertThat(mBatteryUsageBreakdownController.handlePreferenceTreeClick(
-                mPowerGaugePreference)).isTrue();
+                mAnomalyAppItemPreference)).isTrue();
         verify(mMetricsFeatureProvider)
                 .action(
                         SettingsEnums.OPEN_BATTERY_USAGE,
@@ -248,10 +246,10 @@ public final class BatteryUsageBreakdownControllerTest {
     @Test
     public void handlePreferenceTreeClick_forSystemEntry_returnTrue() {
         mBatteryDiffEntry.mConsumerType = ConvertUtils.CONSUMER_TYPE_UID_BATTERY;
-        doReturn(mBatteryDiffEntry).when(mPowerGaugePreference).getBatteryDiffEntry();
+        doReturn(mBatteryDiffEntry).when(mAnomalyAppItemPreference).getBatteryDiffEntry();
 
         assertThat(mBatteryUsageBreakdownController.handlePreferenceTreeClick(
-                mPowerGaugePreference)).isTrue();
+                mAnomalyAppItemPreference)).isTrue();
         verify(mMetricsFeatureProvider)
                 .action(
                         SettingsEnums.OPEN_BATTERY_USAGE,

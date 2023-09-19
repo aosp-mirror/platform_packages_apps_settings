@@ -16,8 +16,6 @@
 
 package com.android.settings.fuelgauge.batteryusage;
 
-import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -70,22 +68,9 @@ public final class BatteryTipsControllerTest {
 
     @Test
     public void handleBatteryTipsCardUpdated_null_hidePreference() {
-        mBatteryTipsController.handleBatteryTipsCardUpdated(/* powerAnomalyEvents= */ null);
+        mBatteryTipsController.handleBatteryTipsCardUpdated(/* powerAnomalyEvents= */ null, false);
 
         verify(mBatteryTipsCardPreference).setVisible(false);
-    }
-
-    @Test
-    public void getDismissRecordKey_returnExpectedResult() {
-        assertThat(BatteryTipsController.getDismissRecordKey(
-                BatteryTestUtils.createAdaptiveBrightnessAnomalyEvent()))
-                .isEqualTo("KEY_BRIGHTNESS");
-        assertThat(BatteryTipsController.getDismissRecordKey(
-                BatteryTestUtils.createScreenTimeoutAnomalyEvent()))
-                .isEqualTo("KEY_SCREEN_TIMEOUT");
-        assertThat(BatteryTipsController.getDismissRecordKey(
-                BatteryTestUtils.createAppAnomalyEvent()))
-                .isEqualTo("KEY_APP_1");
     }
 
     @Test
@@ -93,7 +78,8 @@ public final class BatteryTipsControllerTest {
         PowerAnomalyEvent event = BatteryTestUtils.createAdaptiveBrightnessAnomalyEvent();
         when(mFeatureFactory.powerUsageFeatureProvider.isBatteryTipsEnabled()).thenReturn(true);
 
-        mBatteryTipsController.handleBatteryTipsCardUpdated(event);
+        mBatteryTipsController.handleBatteryTipsCardUpdated(
+                new AnomalyEventWrapper(mContext, event), false);
 
         // Check pre-defined string
         verify(mBatteryTipsCardPreference).setTitle(
@@ -114,7 +100,8 @@ public final class BatteryTipsControllerTest {
         PowerAnomalyEvent event = BatteryTestUtils.createScreenTimeoutAnomalyEvent();
         when(mFeatureFactory.powerUsageFeatureProvider.isBatteryTipsEnabled()).thenReturn(true);
 
-        mBatteryTipsController.handleBatteryTipsCardUpdated(event);
+        mBatteryTipsController.handleBatteryTipsCardUpdated(
+                new AnomalyEventWrapper(mContext, event), false);
 
         verify(mBatteryTipsCardPreference).setTitle("Reduce screen timeout to extend battery life");
         verify(mBatteryTipsCardPreference).setIconResourceId(R.drawable.ic_battery_tips_lightbulb);
@@ -139,7 +126,8 @@ public final class BatteryTipsControllerTest {
                 .build();
         when(mFeatureFactory.powerUsageFeatureProvider.isBatteryTipsEnabled()).thenReturn(true);
 
-        mBatteryTipsController.handleBatteryTipsCardUpdated(event);
+        mBatteryTipsController.handleBatteryTipsCardUpdated(
+                new AnomalyEventWrapper(mContext, event), false);
 
         verify(mBatteryTipsCardPreference).setTitle(testTitle);
         verify(mBatteryTipsCardPreference).setIconResourceId(R.drawable.ic_battery_tips_lightbulb);
@@ -157,10 +145,13 @@ public final class BatteryTipsControllerTest {
         PowerAnomalyEvent event = BatteryTestUtils.createAppAnomalyEvent();
         when(mFeatureFactory.powerUsageFeatureProvider.isBatteryTipsEnabled()).thenReturn(true);
 
-        mBatteryTipsController.handleBatteryTipsCardUpdated(event);
+        AnomalyEventWrapper eventWrapper = new AnomalyEventWrapper(mContext, event);
+        eventWrapper.setRelatedBatteryDiffEntry(
+                new BatteryDiffEntry(mContext, "", "Chrome", 0));
+        mBatteryTipsController.handleBatteryTipsCardUpdated(eventWrapper, false);
 
         verify(mBatteryTipsCardPreference).setTitle(
-                "Chrome used more battery than usual in foreground");
+                "Chrome used more battery than usual");
         verify(mBatteryTipsCardPreference).setIconResourceId(
                 R.drawable.ic_battery_tips_warning_icon);
         verify(mBatteryTipsCardPreference).setMainButtonStrokeColorResourceId(
