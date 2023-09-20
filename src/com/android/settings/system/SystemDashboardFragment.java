@@ -16,9 +16,7 @@
 package com.android.settings.system;
 
 import android.app.settings.SettingsEnums;
-import android.content.Context;
 import android.os.Bundle;
-import android.provider.SearchIndexableResource;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
@@ -28,9 +26,6 @@ import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
-
-import java.util.Arrays;
-import java.util.List;
 
 @SearchIndexable
 public class SystemDashboardFragment extends DashboardFragment {
@@ -85,13 +80,5 @@ public class SystemDashboardFragment extends DashboardFragment {
      * For Search.
      */
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(
-                        Context context, boolean enabled) {
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.system_dashboard_fragment;
-                    return Arrays.asList(sir);
-                }
-            };
+            new BaseSearchIndexProvider(R.xml.system_dashboard_fragment);
 }
