@@ -16,6 +16,17 @@
           "include-filter": "com.android.settings.biometrics2"
         }
       ]
+    },
+    {
+      "name": "SettingsUITests",
+      "options": [
+        {
+          "include-filter": "com.android.settings.ui"
+        },
+        {
+          "exclude-annotation": "org.junit.Ignore"
+        }
+      ]
     }
   ],
   "postsubmit": [
@@ -30,6 +41,9 @@
     {
       "name": "SettingsUITests",
       "options": [
+        {
+          "exclude-filter": "com.android.settings.ui"
+        },
         {
           "exclude-annotation": "org.junit.Ignore"
         }
