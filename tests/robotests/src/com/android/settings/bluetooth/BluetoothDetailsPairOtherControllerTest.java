@@ -34,6 +34,9 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /** Tests for {@link BluetoothDetailsPairOtherController}. */
 @RunWith(RobolectricTestRunner.class)
 public class BluetoothDetailsPairOtherControllerTest extends BluetoothDetailsControllerTestBase  {
@@ -60,8 +63,9 @@ public class BluetoothDetailsPairOtherControllerTest extends BluetoothDetailsCon
         mScreen.addPreference(mSpacePreference);
     }
 
+    /** Test the pair other side button title during initialization. */
     @Test
-    public void init_leftSideDevice_rightSideButtonTitle() {
+    public void init_leftSideDevice_pairRightSideButtonTitle() {
         when(mCachedDevice.getDeviceSide()).thenReturn(HearingAidInfo.DeviceSide.SIDE_LEFT);
 
         mController.init(mScreen);
@@ -70,8 +74,9 @@ public class BluetoothDetailsPairOtherControllerTest extends BluetoothDetailsCon
                 mContext.getString(R.string.bluetooth_pair_right_ear_button));
     }
 
+    /** Test the pair other side button title during initialization. */
     @Test
-    public void init_rightSideDevice_leftSideButtonTitle() {
+    public void init_rightSideDevice_pairLeftSideButtonTitle() {
         when(mCachedDevice.getDeviceSide()).thenReturn(HearingAidInfo.DeviceSide.SIDE_RIGHT);
 
         mController.init(mScreen);
@@ -80,9 +85,10 @@ public class BluetoothDetailsPairOtherControllerTest extends BluetoothDetailsCon
                 mContext.getString(R.string.bluetooth_pair_left_ear_button));
     }
 
+    /** Test the pair other side button visibility during initialization. */
     @Test
-    public void init_isNotConnectedAshaHearingAidDevice_notVisiblePreference() {
-        when(mCachedDevice.isConnectedAshaHearingAidDevice()).thenReturn(false);
+    public void init_isNotConnectedHearingAidDevice_preferenceIsNotVisible() {
+        when(mCachedDevice.isConnectedHearingAidDevice()).thenReturn(false);
 
         mController.init(mScreen);
 
@@ -90,23 +96,49 @@ public class BluetoothDetailsPairOtherControllerTest extends BluetoothDetailsCon
         assertThat(mSpacePreference.isVisible()).isFalse();
     }
 
+    /**
+     * Test if the controller is available.
+     * Conditions:
+     *      1. Hearing aids is not connected
+     * Expected result:
+     *      The controller is not available. No need to show pair other side hint for
+     *      not connected device.
+     */
     @Test
-    public void isAvailable_isNotConnectedAshaHearingAidDevice_notAvailable() {
-        when(mCachedDevice.isConnectedAshaHearingAidDevice()).thenReturn(false);
+    public void isAvailable_isNotConnectedHearingAidDevice_notAvailable() {
+        when(mCachedDevice.isConnectedHearingAidDevice()).thenReturn(false);
 
         assertThat(mController.isAvailable()).isFalse();
     }
 
+    /**
+     * Test if the controller is available.
+     * Conditions:
+     *      1. Monaural hearing aids
+     * Expected result:
+     *      The controller is not available. No need to show pair other side hint for
+     *      monaural device.
+     */
     @Test
-    public void isAvailable_isConnectedAshaHearingAidDevice_isMonaural_notAvailable() {
-        when(mCachedDevice.isConnectedAshaHearingAidDevice()).thenReturn(true);
+    public void isAvailable_isConnectedHearingAidDevice_isMonaural_notAvailable() {
+        when(mCachedDevice.isConnectedHearingAidDevice()).thenReturn(true);
         when(mCachedDevice.getDeviceMode()).thenReturn(HearingAidInfo.DeviceMode.MODE_MONAURAL);
 
         assertThat(mController.isAvailable()).isFalse();
     }
 
+    /**
+     * Test if the controller is available.
+     * Conditions:
+     *      1. Binaural ASHA hearing aids
+     *      2. Sub device is added
+     *      3. Sub device is connected
+     * Expected result:
+     *      The controller is not available. Both sides are already paired and connected.
+     */
     @Test
-    public void isAvailable_subDeviceIsConnectedAshaHearingAidDevice_notAvailable() {
+    public void isAvailable_ashaDevice_otherDeviceIsConnected_notAvailable() {
+        when(mCachedDevice.isConnectedHearingAidDevice()).thenReturn(true);
         when(mCachedDevice.isConnectedAshaHearingAidDevice()).thenReturn(true);
         when(mCachedDevice.getDeviceMode()).thenReturn(HearingAidInfo.DeviceMode.MODE_BINAURAL);
         when(mSubCachedDevice.isConnectedAshaHearingAidDevice()).thenReturn(true);
@@ -115,8 +147,18 @@ public class BluetoothDetailsPairOtherControllerTest extends BluetoothDetailsCon
         assertThat(mController.isAvailable()).isFalse();
     }
 
+    /**
+     * Test if the controller is available.
+     * Conditions:
+     *      1. Binaural ASHA hearing aids
+     *      2. Sub device is added
+     *      3. Sub device is not connected
+     * Expected result:
+     *      The controller is available. Need to show the hint to pair the other side.
+     */
     @Test
-    public void isAvailable_subDeviceIsNotConnectedAshaHearingAidDevice_available() {
+    public void isAvailable_ashaDevice_otherDeviceIsNotConnected_available() {
+        when(mCachedDevice.isConnectedHearingAidDevice()).thenReturn(true);
         when(mCachedDevice.isConnectedAshaHearingAidDevice()).thenReturn(true);
         when(mCachedDevice.getDeviceMode()).thenReturn(HearingAidInfo.DeviceMode.MODE_BINAURAL);
         when(mSubCachedDevice.isConnectedAshaHearingAidDevice()).thenReturn(false);
@@ -125,8 +167,17 @@ public class BluetoothDetailsPairOtherControllerTest extends BluetoothDetailsCon
         assertThat(mController.isAvailable()).isTrue();
     }
 
+    /**
+     * Test if the controller is available.
+     * Conditions:
+     *      1. Binaural ASHA hearing aids
+     *      2. No sub device added
+     * Expected result:
+     *      The controller is available. Need to show the hint to pair the other side.
+     */
     @Test
-    public void isAvailable_subDeviceNotExist_available() {
+    public void isAvailable_ashaDevice_otherDeviceIsNotExist_available() {
+        when(mCachedDevice.isConnectedHearingAidDevice()).thenReturn(true);
         when(mCachedDevice.isConnectedAshaHearingAidDevice()).thenReturn(true);
         when(mCachedDevice.getDeviceMode()).thenReturn(HearingAidInfo.DeviceMode.MODE_BINAURAL);
         when(mCachedDevice.getSubDevice()).thenReturn(null);
@@ -134,8 +185,67 @@ public class BluetoothDetailsPairOtherControllerTest extends BluetoothDetailsCon
         assertThat(mController.isAvailable()).isTrue();
     }
 
+    /**
+     * Test if the controller is available.
+     * Conditions:
+     *      1. Binaural LE Audio hearing aids
+     *      2. Member device is added
+     *      3. Member device is connected
+     * Expected result:
+     *      The controller is not available. Both sides are already paired and connected.
+     */
     @Test
-    public void refresh_leftSideDevice_leftSideButtonTitle() {
+    public void isAvailable_leAudioDevice_otherDeviceIsConnected_notAvailable() {
+        when(mCachedDevice.isConnectedHearingAidDevice()).thenReturn(true);
+        when(mCachedDevice.isConnectedLeAudioHearingAidDevice()).thenReturn(true);
+        when(mCachedDevice.getDeviceMode()).thenReturn(HearingAidInfo.DeviceMode.MODE_BINAURAL);
+        when(mSubCachedDevice.isConnectedLeAudioHearingAidDevice()).thenReturn(true);
+        when(mCachedDevice.getMemberDevice()).thenReturn(Set.of(mSubCachedDevice));
+
+        assertThat(mController.isAvailable()).isFalse();
+    }
+
+    /**
+     * Test if the controller is available.
+     * Conditions:
+     *      1. Binaural LE Audio hearing aids
+     *      2. Member device is added
+     *      3. Member device is not connected
+     * Expected result:
+     *      The controller is available. Need to show the hint to pair the other side.
+     */
+    @Test
+    public void isAvailable_leAudioDevice_otherDeviceIsNotConnected_available() {
+        when(mCachedDevice.isConnectedHearingAidDevice()).thenReturn(true);
+        when(mCachedDevice.isConnectedLeAudioHearingAidDevice()).thenReturn(true);
+        when(mCachedDevice.getDeviceMode()).thenReturn(HearingAidInfo.DeviceMode.MODE_BINAURAL);
+        when(mSubCachedDevice.isConnectedLeAudioHearingAidDevice()).thenReturn(false);
+        when(mCachedDevice.getMemberDevice()).thenReturn(Set.of(mSubCachedDevice));
+
+        assertThat(mController.isAvailable()).isTrue();
+    }
+
+    /**
+     * Test if the controller is available.
+     * Conditions:
+     *      1. Binaural LE Audio hearing aids
+     *      2. No member device added
+     * Expected result:
+     *      The controller is available. Need to show the hint to pair the other side.
+     */
+    @Test
+    public void isAvailable_leAudioDevice_otherDeviceIsNotExist_available() {
+        when(mCachedDevice.isConnectedHearingAidDevice()).thenReturn(true);
+        when(mCachedDevice.isConnectedLeAudioHearingAidDevice()).thenReturn(true);
+        when(mCachedDevice.getDeviceMode()).thenReturn(HearingAidInfo.DeviceMode.MODE_BINAURAL);
+        when(mCachedDevice.getMemberDevice()).thenReturn(new HashSet<>());
+
+        assertThat(mController.isAvailable()).isTrue();
+    }
+
+    /** Test the pair other side button title after refreshing. */
+    @Test
+    public void refresh_rightSideDevice_pairLeftSideButtonTitle() {
         when(mCachedDevice.getDeviceSide()).thenReturn(HearingAidInfo.DeviceSide.SIDE_RIGHT);
         mController.init(mScreen);
 
@@ -145,9 +255,10 @@ public class BluetoothDetailsPairOtherControllerTest extends BluetoothDetailsCon
                 mContext.getString(R.string.bluetooth_pair_left_ear_button));
     }
 
+    /** Test the pair other side button visibility after refreshing. */
     @Test
-    public void refresh_isNotConnectedAshaHearingAidDevice_notVisiblePreference() {
-        when(mCachedDevice.isConnectedAshaHearingAidDevice()).thenReturn(false);
+    public void refresh_isNotConnectedHearingAidDevice_preferenceIsNotVisible() {
+        when(mCachedDevice.isConnectedHearingAidDevice()).thenReturn(false);
         mController.init(mScreen);
 
         mController.refresh();
