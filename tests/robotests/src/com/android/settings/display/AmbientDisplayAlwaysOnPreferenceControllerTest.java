@@ -132,23 +132,23 @@ public class AmbientDisplayAlwaysOnPreferenceControllerTest {
     }
 
     @Test
-    public void isSliceableCorrectKey_returnsTrue() {
+    public void isPublicSliceCorrectKey_returnsTrue() {
         final AmbientDisplayAlwaysOnPreferenceController controller =
                 new AmbientDisplayAlwaysOnPreferenceController(mContext,
                         "ambient_display_always_on");
-        assertThat(controller.isSliceable()).isTrue();
+        assertThat(controller.isPublicSlice()).isTrue();
     }
 
     @Test
-    public void isSliceableIncorrectKey_returnsFalse() {
+    public void isPublicSliceIncorrectKey_returnsFalse() {
         final AmbientDisplayAlwaysOnPreferenceController controller =
                 new AmbientDisplayAlwaysOnPreferenceController(mContext, "bad_key");
-        assertThat(controller.isSliceable()).isFalse();
+        assertThat(controller.isPublicSlice()).isFalse();
     }
 
     @Test
-    public void isPublicSlice_returnTrue() {
-        assertThat(mController.isPublicSlice()).isTrue();
+    public void isSliceable_returnTrue() {
+        assertThat(mController.isSliceable()).isTrue();
     }
 
     @Test

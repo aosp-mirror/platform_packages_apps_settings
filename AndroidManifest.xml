@@ -645,6 +645,7 @@
         <activity android:name="Settings$FaceSettingsActivity"
             android:label="@string/security_settings_face_preference_title"
             android:exported="true"
+            android:theme="@style/Theme.Settings.NoActionBar"
             android:icon="@drawable/ic_face_header">
             <intent-filter>
                 <action android:name="android.settings.FACE_SETTINGS" />
@@ -659,6 +660,7 @@
         <activity android:name="Settings$FaceSettingsInternalActivity"
                   android:label="@string/security_settings_face_preference_title"
                   android:exported="false"
+                  android:theme="@style/Theme.Settings.NoActionBar"
                   android:icon="@drawable/ic_face_header"
                   android:taskAffinity="com.android.settings.root">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"

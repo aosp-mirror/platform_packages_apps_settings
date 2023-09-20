@@ -69,7 +69,9 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
     private static final String ENABLE_DUAL_MODE_AUDIO =
             "persist.bluetooth.enable_dual_mode_audio";
     private static final String CONFIG_LE_AUDIO_ENABLED_BY_DEFAULT = "le_audio_enabled_by_default";
-    private static final boolean LE_AUDIO_DEVICE_DETAIL_DEFAULT_VALUE = true;
+    private static final boolean LE_AUDIO_TOGGLE_VISIBLE_DEFAULT_VALUE = true;
+    private static final String LE_AUDIO_TOGGLE_VISIBLE_PROPERTY =
+            "persist.bluetooth.leaudio.toggle_visible";
 
     private LocalBluetoothManager mManager;
     private LocalBluetoothProfileManager mProfileManager;
@@ -465,15 +467,13 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
     private void updateLeAudioConfig() {
         mIsLeContactSharingEnabled = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_SETTINGS_UI,
                 SettingsUIDeviceConfig.BT_LE_AUDIO_CONTACT_SHARING_ENABLED, true);
-        boolean isLeDeviceDetailEnabled = DeviceConfig.getBoolean(
-                DeviceConfig.NAMESPACE_SETTINGS_UI,
-                SettingsUIDeviceConfig.BT_LE_AUDIO_DEVICE_DETAIL_ENABLED,
-                LE_AUDIO_DEVICE_DETAIL_DEFAULT_VALUE);
+        boolean isLeAudioToggleVisible = SystemProperties.getBoolean(
+                LE_AUDIO_TOGGLE_VISIBLE_PROPERTY, LE_AUDIO_TOGGLE_VISIBLE_DEFAULT_VALUE);
         boolean isLeEnabledByDefault = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_BLUETOOTH,
                 CONFIG_LE_AUDIO_ENABLED_BY_DEFAULT, false);
-        mIsLeAudioToggleEnabled = isLeDeviceDetailEnabled || isLeEnabledByDefault;
+        mIsLeAudioToggleEnabled = isLeAudioToggleVisible || isLeEnabledByDefault;
         Log.d(TAG, "BT_LE_AUDIO_CONTACT_SHARING_ENABLED:" + mIsLeContactSharingEnabled
-                + ", BT_LE_AUDIO_DEVICE_DETAIL_ENABLED:" + isLeDeviceDetailEnabled
+                + ", LE_AUDIO_TOGGLE_VISIBLE_PROPERTY:" + isLeAudioToggleVisible
                 + ", CONFIG_LE_AUDIO_ENABLED_BY_DEFAULT:" + isLeEnabledByDefault);
     }
 

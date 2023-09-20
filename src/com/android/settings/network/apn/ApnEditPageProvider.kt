@@ -16,16 +16,20 @@
 
 package com.android.settings.network.apn
 
-import android.content.Context
 import android.net.Uri
 import android.os.Bundle
+import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import com.android.settings.R
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
+import com.android.settingslib.spa.widget.editor.SettingsOutlinedTextField
 import com.android.settingslib.spa.widget.scaffold.RegularScaffold
 import java.util.Base64
 
@@ -51,8 +55,8 @@ object ApnEditPageProvider : SettingsPageProvider {
 
     @Composable
     override fun Page(arguments: Bundle?) {
-        val context = LocalContext.current
-        ApnPage(context)
+        val apnDataInit = ApnData()
+        ApnPage(apnDataInit)
     }
 
     fun getRoute(
@@ -67,9 +71,78 @@ object ApnEditPageProvider : SettingsPageProvider {
 }
 
 @Composable
-fun ApnPage(context: Context) {
+fun ApnPage(apnDataInit: ApnData) {
+    var apnData by remember { mutableStateOf(apnDataInit) }
     RegularScaffold(
         title = stringResource(id = R.string.apn_edit),
     ) {
+        Column() {
+            SettingsOutlinedTextField(
+                apnData.name,
+                stringResource(R.string.apn_name),
+                enabled = apnData.nameEnabled
+            ) { apnData = apnData.copy(name = it) }
+            SettingsOutlinedTextField(
+                apnData.apn,
+                stringResource(R.string.apn_apn),
+                enabled = apnData.apnEnabled
+            ) { apnData = apnData.copy(apn = it) }
+            SettingsOutlinedTextField(
+                apnData.proxy,
+                stringResource(R.string.apn_http_proxy),
+                enabled = apnData.proxyEnabled
+            ) { apnData = apnData.copy(proxy = it) }
+            SettingsOutlinedTextField(
+                apnData.port,
+                stringResource(R.string.apn_http_port),
+                enabled = apnData.portEnabled
+            ) { apnData = apnData.copy(port = it) }
+            SettingsOutlinedTextField(
+                apnData.userName,
+                stringResource(R.string.apn_user),
+                enabled = apnData.userNameEnabled
+            ) { apnData = apnData.copy(userName = it) }
+            // TODO: password
+            SettingsOutlinedTextField(
+                apnData.server,
+                stringResource(R.string.apn_server),
+                enabled = apnData.serverEnabled
+            ) { apnData = apnData.copy(server = it) }
+            SettingsOutlinedTextField(
+                apnData.mmsc,
+                stringResource(R.string.apn_mmsc),
+                enabled = apnData.mmscEnabled
+            ) { apnData = apnData.copy(mmsc = it) }
+            SettingsOutlinedTextField(
+                apnData.mmsProxy,
+                stringResource(R.string.apn_mms_proxy),
+                enabled = apnData.mmsProxyEnabled
+            ) { apnData = apnData.copy(mmsProxy = it) }
+            SettingsOutlinedTextField(
+                apnData.mmsPort,
+                stringResource(R.string.apn_mms_port),
+                enabled = apnData.mmsPortEnabled
+            ) { apnData = apnData.copy(mmsPort = it) }
+            SettingsOutlinedTextField(
+                apnData.mcc,
+                stringResource(R.string.apn_mcc),
+                enabled = apnData.mccEnabled
+            ) { apnData = apnData.copy(mcc = it) }
+            SettingsOutlinedTextField(
+                apnData.mnc,
+                stringResource(R.string.apn_mnc),
+                enabled = apnData.mncEnabled
+            ) { apnData = apnData.copy(mnc = it) }
+            SettingsOutlinedTextField(
+                apnData.apnType,
+                stringResource(R.string.apn_type),
+                enabled = apnData.apnTypeEnabled
+            ) { apnData = apnData.copy(apn = it) } // TODO: updateApnType
+            SettingsOutlinedTextField(
+                apnData.mvnoValue,
+                stringResource(R.string.mvno_match_data),
+                enabled = apnData.mvnoValueEnabled
+            ) { apnData = apnData.copy(mvnoValue = it) }
+        }
     }
 }

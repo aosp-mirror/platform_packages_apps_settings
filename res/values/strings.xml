@@ -7387,7 +7387,7 @@
     <string name="vibrate_when_ringing_option_ramping_ringer">Vibrate first then ring gradually</string>
 
     <!-- Sound: Title for the option enabling spatializer effect. [CHAR LIMIT=30] -->
-    <string name="spatial_audio_title">Spatial audio</string>
+    <string name="spatial_audio_title">Spatial Audio</string>
 
     <!-- Sound: Other sounds: Title for the option enabling touch sounds for dial pad tones. [CHAR LIMIT=30] -->
     <string name="dial_pad_tones_title">Dial pad tones</string>
@@ -7433,9 +7433,6 @@
 
     <!-- Setting summary for controlling how caption text display in real time [CHAR LIMIT=NONE]-->
     <string name="live_caption_summary">Automatically caption media</string>
-
-    <!-- Output device type for the phone speaker that is available for spatializer effect. [CHAR LIMIT=NONE]-->
-    <string name="spatial_audio_speaker">Phone speaker</string>
 
     <!-- Output device type for the wired headphones that is available for spatializer effect. [CHAR LIMIT=NONE]-->
     <string name="spatial_audio_wired_headphones">Wired headphones</string>
@@ -9821,11 +9818,50 @@
     <!-- Label of action button in battery tips card [CHAR LIMIT=50] -->
     <string name="battery_tips_card_action_button">View Settings</string>
 
+    <!-- Label of action button in battery tips card [CHAR LIMIT=50] -->
+    <string name="battery_tips_card_action_button_check">Check</string>
+
     <!-- Label of dismiss button in battery tips card [CHAR LIMIT=50] -->
     <string name="battery_tips_card_dismiss_button">Got it</string>
 
     <!-- Feedback card message in battery tips card [CHAR LIMIT=NONE] -->
     <string name="battery_tips_card_feedback_info">Is this message helpful?</string>
+
+    <!-- Content description for battery hints warning icon of app anomaly [CHAR LIMIT=NONE] -->
+    <string name="battery_hints_warning_icon_a11y">Battery tips warning icon</string>
+
+    <!-- Summary of settings anomaly for adaptive brightness [CHAR LIMIT=NONE] -->
+    <string name="battery_tips_settings_summary_brightness">Turn on adaptive brightness to extend battery life</string>
+
+    <!-- Summary of settings anomaly for screen timeout [CHAR LIMIT=NONE] -->
+    <string name="battery_tips_settings_summary_screen_timeout">Reduce screen timeout to extend battery life</string>
+
+    <!-- Summary of apps anomaly for always high [CHAR LIMIT=NONE] -->
+    <string name="battery_tips_apps_summary_always_high"><xliff:g id="app_label" example="Pokemon Go">%1$s</xliff:g> used more battery</string>
+
+    <!-- Summary of apps anomaly for higher than usual [CHAR LIMIT=NONE] -->
+    <string name="battery_tips_apps_summary_higher_than_usual"><xliff:g id="app_label" example="Pokemon Go">%1$s</xliff:g> used more battery than usual</string>
+
+    <!-- Summary of apps anomaly for always high in background [CHAR LIMIT=NONE] -->
+    <string name="battery_tips_apps_summary_always_high_in_background"><xliff:g id="app_label" example="Pokemon Go">%1$s</xliff:g> used more battery while in the background</string>
+
+    <!-- Summary of apps anomaly for higher than usual in background [CHAR LIMIT=NONE] -->
+    <string name="battery_tips_apps_summary_higher_than_usual_in_background"><xliff:g id="app_label" example="Pokemon Go">%1$s</xliff:g> used more battery than usual while in the background</string>
+
+    <!-- Summary of apps anomaly for always high in foreground [CHAR LIMIT=NONE] -->
+    <string name="battery_tips_apps_summary_always_high_in_foreground"><xliff:g id="app_label" example="Pokemon Go">%1$s</xliff:g> used more battery while in the foreground</string>
+
+    <!-- Summary of apps anomaly for higher than usual in foreground [CHAR LIMIT=NONE] -->
+    <string name="battery_tips_apps_summary_higher_than_usual_in_foreground"><xliff:g id="app_label" example="Pokemon Go">%1$s</xliff:g> used more battery than usual while in the foreground</string>
+
+    <!-- Label of hint for apps anomaly in battery usage [CHAR LIMIT=NONE] -->
+    <string name="battery_app_item_hint">High battery usage</string>
+
+    <!-- Label of hint for apps background anomaly in battery usage [CHAR LIMIT=NONE] -->
+    <string name="battery_app_item_hint_in_bg">High battery usage in the background</string>
+
+    <!-- Label of hint for apps foreground anomaly in battery usage [CHAR LIMIT=NONE] -->
+    <string name="battery_app_item_hint_in_fg">High battery usage in the foreground</string>
 
     <!-- Filter title for battery unrestricted[CHAR_LIMIT=50]-->
     <string name="filter_battery_unrestricted_title">Unrestricted</string>
