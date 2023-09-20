@@ -36,7 +36,7 @@ data class ApnData(
     val apnType: String = "",
     val apnProtocol: String = "",
     val apnRoaming: String = "",
-    val apnEnable: Int = 1,
+    val apnEnable: Boolean = true,
     val bearer: Int = 0,
     val mvnoType: String = "",
     var mvnoValue: String = "",
