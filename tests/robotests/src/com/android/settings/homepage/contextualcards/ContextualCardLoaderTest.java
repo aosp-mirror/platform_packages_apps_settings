@@ -145,7 +145,7 @@ public class ContextualCardLoaderTest {
     @Test
     public void getCardCount_hasConfiguredCardCount_returnConfiguredCardCount() {
         int configCount = 4;
-        Settings.Global.putLong(mContext.getContentResolver(),
+        Settings.Global.putInt(mContext.getContentResolver(),
                 ContextualCardLoader.CONTEXTUAL_CARD_COUNT, configCount);
 
         assertThat(mContextualCardLoader.getCardCount()).isEqualTo(configCount);

@@ -42,6 +42,7 @@ import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.ResolveInfoBuilder;
 import com.android.settings.testutils.shadow.ShadowDeviceStateRotationLockSettingsManager;
 import com.android.settings.testutils.shadow.ShadowSensorPrivacyManager;
+import com.android.settings.testutils.shadow.ShadowSystemSettings;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -55,6 +56,7 @@ import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
+        ShadowSystemSettings.class,
         ShadowSensorPrivacyManager.class,
         ShadowDeviceStateRotationLockSettingsManager.class
 })
