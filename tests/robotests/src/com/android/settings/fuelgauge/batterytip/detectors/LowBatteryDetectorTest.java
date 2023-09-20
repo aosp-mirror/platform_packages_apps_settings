@@ -53,7 +53,6 @@ public class LowBatteryDetectorTest {
         mPolicy = spy(new BatteryTipPolicy(RuntimeEnvironment.application));
         mContext = RuntimeEnvironment.application;
         ReflectionHelpers.setField(mPolicy, "lowBatteryEnabled", true);
-        ReflectionHelpers.setField(mPolicy, "lowBatteryHour", 3);
         mBatteryInfo.discharging = true;
 
         mLowBatteryDetector = new LowBatteryDetector(mContext, mPolicy, mBatteryInfo,
@@ -78,12 +77,8 @@ public class LowBatteryDetectorTest {
 
     @Test
     public void testDetect_lowBattery_tipNew() {
-        mBatteryInfo.batteryLevel = 3;
+        mBatteryInfo.batteryLevel = 20;
         mBatteryInfo.remainingTimeUs = TimeUnit.DAYS.toMillis(1);
-        assertThat(mLowBatteryDetector.detect().getState()).isEqualTo(BatteryTip.StateType.NEW);
-
-        mBatteryInfo.batteryLevel = 50;
-        mBatteryInfo.remainingTimeUs = TimeUnit.MINUTES.toMillis(1);
         assertThat(mLowBatteryDetector.detect().getState()).isEqualTo(BatteryTip.StateType.NEW);
     }
 
@@ -104,9 +99,9 @@ public class LowBatteryDetectorTest {
     }
 
     @Test
-    public void testDetect_timeEstimationZero_tipInvisible() {
+    public void testDetect_lowTimeEstimation_tipInvisible() {
         mBatteryInfo.batteryLevel = 50;
-        mBatteryInfo.remainingTimeUs = 0;
+        mBatteryInfo.remainingTimeUs = TimeUnit.MINUTES.toMillis(1);
         assertThat(mLowBatteryDetector.detect().isVisible()).isFalse();
     }
 

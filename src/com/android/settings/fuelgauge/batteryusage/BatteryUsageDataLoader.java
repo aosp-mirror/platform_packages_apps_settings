@@ -116,8 +116,16 @@ public final class BatteryUsageDataLoader {
         final Handler handler = new Handler(Looper.getMainLooper());
         final BatteryLevelData batteryLevelData = DataProcessManager.getBatteryLevelData(
                 context, handler, /*isFromPeriodJob=*/ true,
-                batteryDiffDataMap -> DatabaseUtils.sendBatteryUsageSlotData(context,
-                        ConvertUtils.convertToBatteryUsageSlotList(batteryDiffDataMap)));
+                batteryDiffDataMap -> {
+                    DatabaseUtils.sendBatteryUsageSlotData(context,
+                            ConvertUtils.convertToBatteryUsageSlotList(batteryDiffDataMap));
+                    if (batteryDiffDataMap.values().stream().anyMatch(data ->
+                            (!data.getAppDiffEntryList().isEmpty()
+                                    || !data.getSystemDiffEntryList().isEmpty()))) {
+                        FeatureFactory.getFeatureFactory().getPowerUsageFeatureProvider()
+                                .detectSettingsAnomaly(context, /* displayDrain= */ 0);
+                    }
+                });
         if (batteryLevelData == null) {
             Log.d(TAG, "preprocessBatteryUsageSlots() no new battery usage data.");
             return;
@@ -139,8 +147,6 @@ public final class BatteryUsageDataLoader {
                 // No app usage data or battery diff data at this time.
                 loadAppUsageData(context);
                 preprocessBatteryUsageSlots(context);
-                FeatureFactory.getFeatureFactory().getPowerUsageFeatureProvider()
-                        .detectSettingsAnomaly(context, /* displayDrain= */ 0);
             }
             Log.d(TAG, String.format(
                     "loadUsageDataSafely() in %d/ms", System.currentTimeMillis() - start));
