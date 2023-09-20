@@ -41,7 +41,7 @@ fun UserAspectRatioAppPreference(app: ApplicationInfo) {
     if (!presenter.isAvailableFlow.collectAsStateWithLifecycle(initialValue = false).value) return
 
     Preference(object : PreferenceModel {
-        override val title = stringResource(R.string.aspect_ratio_title)
+        override val title = stringResource(R.string.aspect_ratio_experimental_title)
         override val summary = presenter.summaryFlow.collectAsStateWithLifecycle(
             initialValue = stringResource(R.string.summary_placeholder),
         )
