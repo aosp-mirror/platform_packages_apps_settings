@@ -28,21 +28,21 @@ import static org.mockito.Mockito.verify;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.preference.PreferenceViewHolder;
+
 import com.android.settings.R;
-import com.android.settings.notification.app.ImportancePreference;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-
-import androidx.preference.PreferenceViewHolder;
 
 @RunWith(RobolectricTestRunner.class)
 public class ImportancePreferenceTest {
@@ -51,7 +51,8 @@ public class ImportancePreferenceTest {
 
     @Before
     public void setUp() {
-        mContext = RuntimeEnvironment.application;
+        Context context = spy(RuntimeEnvironment.application.getApplicationContext());
+        mContext = new ContextThemeWrapper(context, R.style.Theme_Settings);
     }
 
     @Test
