@@ -142,7 +142,7 @@ public class FastPairDevicePreferenceController extends BasePreferenceController
         // The insertion point is defined as the point at which the key would be inserted into the
         // list: the index of the first element greater than the key, or list.size() if all elements
         // in the list are less than the specified key.
-        if (idx > 0) {
+        if (idx >= 0) {
             if (DEBUG) {
                 Log.d(TAG, "onDeviceAdd receives duplicate preference. Ignore.");
             }
