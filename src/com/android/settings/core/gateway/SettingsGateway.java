@@ -42,6 +42,7 @@ import com.android.settings.applications.AppDashboardFragment;
 import com.android.settings.applications.ProcessStatsSummary;
 import com.android.settings.applications.ProcessStatsUi;
 import com.android.settings.applications.UsageAccessDetails;
+import com.android.settings.applications.appcompat.UserAspectRatioDetails;
 import com.android.settings.applications.appinfo.AlarmsAndRemindersDetails;
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
 import com.android.settings.applications.appinfo.AppLocaleDetails;
@@ -375,7 +376,8 @@ public class SettingsGateway {
             ColorAndMotionFragment.class.getName(),
             LongBackgroundTasksDetails.class.getName(),
             RegionalPreferencesEntriesFragment.class.getName(),
-            BatteryInfoFragment.class.getName()
+            BatteryInfoFragment.class.getName(),
+            UserAspectRatioDetails.class.getName()
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {
