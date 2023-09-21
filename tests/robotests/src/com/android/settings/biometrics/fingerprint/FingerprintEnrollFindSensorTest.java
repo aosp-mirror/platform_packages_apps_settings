@@ -19,6 +19,7 @@ package com.android.settings.biometrics.fingerprint;
 import static android.hardware.fingerprint.FingerprintSensorProperties.TYPE_POWER_BUTTON;
 import static android.hardware.fingerprint.FingerprintSensorProperties.TYPE_REAR;
 import static android.hardware.fingerprint.FingerprintSensorProperties.TYPE_UDFPS_OPTICAL;
+import static android.text.Layout.HYPHENATION_FREQUENCY_NORMAL;
 
 import static com.android.settings.biometrics.BiometricEnrollBase.RESULT_FINISHED;
 import static com.android.settings.biometrics.BiometricEnrollBase.RESULT_SKIP;
@@ -49,6 +50,7 @@ import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
 import android.os.Bundle;
 import android.os.CancellationSignal;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
@@ -62,6 +64,7 @@ import com.google.android.setupcompat.PartnerCustomizationLayout;
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.GlifLayout;
+import com.google.android.setupdesign.template.HeaderMixin;
 
 import org.junit.After;
 import org.junit.Before;
@@ -566,6 +569,15 @@ public class FingerprintEnrollFindSensorTest {
 
         final String appliedThemes = mTheme.toString();
         assertThat(appliedThemes.contains("SetupWizardPartnerResource")).isTrue();
+    }
+
+    @Test
+    public void fingerprintEnrollFindSensor_setHyphenationFrequencyNormalOnHeader() {
+        setupActivity_onUdfpsDevice();
+        PartnerCustomizationLayout layout = mActivity.findViewById(R.id.setup_wizard_layout);
+        final TextView textView = layout.getMixin(HeaderMixin.class).getTextView();
+
+        assertThat(textView.getHyphenationFrequency()).isEqualTo(HYPHENATION_FREQUENCY_NORMAL);
     }
 
     private void triggerEnrollProgressAndError_onRearDevice() {
