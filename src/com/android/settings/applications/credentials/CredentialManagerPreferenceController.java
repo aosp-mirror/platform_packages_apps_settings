@@ -317,10 +317,15 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
                 null);
     }
 
-    private Set<ComponentName> buildComponentNameSet(List<CredentialProviderInfo> providers) {
+    private Set<ComponentName> buildComponentNameSet(
+            List<CredentialProviderInfo> providers, boolean removeNonPrimary) {
         Set<ComponentName> output = new HashSet<>();
 
         for (CredentialProviderInfo cpi : providers) {
+            if (removeNonPrimary && !cpi.isPrimary()) {
+                continue;
+            }
+
             output.add(cpi.getComponentName());
         }
 
@@ -336,13 +341,16 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         List<CredentialProviderInfo> newProviders =
                 mCredentialManager.getCredentialProviderServices(
                         getUser(), CredentialManager.PROVIDER_FILTER_USER_PROVIDERS_ONLY);
-        Set<ComponentName> newComponents = buildComponentNameSet(newProviders);
+        Set<ComponentName> newComponents = buildComponentNameSet(newProviders, false);
+        Set<ComponentName> newPrimaryComponents = buildComponentNameSet(newProviders, true);
 
         // Get the list of old components
-        Set<ComponentName> oldComponents = buildComponentNameSet(mServices);
+        Set<ComponentName> oldComponents = buildComponentNameSet(mServices, false);
+        Set<ComponentName> oldPrimaryComponents = buildComponentNameSet(mServices, true);
 
         // If the sets are equal then don't update the UI.
-        if (oldComponents.equals(newComponents)) {
+        if (oldComponents.equals(newComponents)
+                && oldPrimaryComponents.equals(newPrimaryComponents)) {
             return;
         }
 

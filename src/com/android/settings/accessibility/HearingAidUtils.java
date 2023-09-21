@@ -42,9 +42,10 @@ public final class HearingAidUtils {
      */
     public static void launchHearingAidPairingDialog(FragmentManager fragmentManager,
             @NonNull CachedBluetoothDevice device, int launchPage) {
-        // No need to show the pair another ear dialog if the device supports and enables CSIP.
+        // No need to show the pair another ear dialog if the device supports CSIP.
         // CSIP will pair other devices in the same set automatically.
-        if (isCsipSupportedAndEnabled(device)) {
+        if (device.getProfiles().stream().anyMatch(
+                profile -> profile instanceof CsipSetCoordinatorProfile)) {
             return;
         }
         if (device.isConnectedAshaHearingAidDevice()
@@ -62,11 +63,5 @@ public final class HearingAidUtils {
         }
         HearingAidPairingDialogFragment.newInstance(device.getAddress(), launchPage)
                 .show(fragmentManager, HearingAidPairingDialogFragment.TAG);
-    }
-
-    private static boolean isCsipSupportedAndEnabled(@NonNull CachedBluetoothDevice device) {
-        return device.getProfiles().stream().anyMatch(
-                profile -> (profile instanceof CsipSetCoordinatorProfile)
-                        && (profile.isEnabled(device.getDevice())));
     }
 }
