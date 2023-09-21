@@ -16,8 +16,12 @@
 
 package com.android.settings.network.apn
 
+import android.content.Context
 import android.provider.Telephony
 import android.telephony.TelephonyManager
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.snapshots.SnapshotStateList
+import com.android.settings.R
 
 data class ApnData(
     val name: String = "",
@@ -65,4 +69,29 @@ data class ApnData(
     var bearerEnabled = true
     var mvnoTypeEnabled = true
     var mvnoValueEnabled = false
+}
+
+fun getBearerSelectedOptionsState(
+    bearer: Int,
+    bearerBitmask: Int,
+    context: Context
+): SnapshotStateList<Int> {
+    val bearerValues = context.resources.getStringArray(R.array.bearer_values)
+    val bearerSelectedOptionsState = mutableStateListOf<Int>()
+    if (bearerBitmask != 0) {
+        var i = 1
+        var _bearerBitmask = bearerBitmask
+        while (_bearerBitmask != 0) {
+            if (_bearerBitmask and 1 == 1 && !bearerSelectedOptionsState.contains(i)) {
+                bearerSelectedOptionsState.add(bearerValues.indexOf("$i") - 1)
+            }
+            _bearerBitmask = _bearerBitmask shr 1
+            i++
+        }
+    }
+    if (bearer != 0 && !bearerSelectedOptionsState.contains(bearer)) {
+        // add mBearerInitialVal to bearers
+        bearerSelectedOptionsState.add(bearerValues.indexOf("$bearer") - 1)
+    }
+    return bearerSelectedOptionsState
 }
