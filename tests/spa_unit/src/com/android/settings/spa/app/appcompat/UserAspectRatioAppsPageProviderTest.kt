@@ -60,7 +60,7 @@ class UserAspectRatioAppsPageProviderTest {
     @Test
     fun injectEntry_title() {
         setInjectEntry()
-        composeTestRule.onNodeWithText(context.getString(R.string.aspect_ratio_title))
+        composeTestRule.onNodeWithText(context.getString(R.string.aspect_ratio_experimental_title))
             .assertIsDisplayed()
     }
 
@@ -75,7 +75,8 @@ class UserAspectRatioAppsPageProviderTest {
     @Test
     fun injectEntry_onClick_navigate() {
         setInjectEntry()
-        composeTestRule.onNodeWithText(context.getString(R.string.aspect_ratio_title)).performClick()
+        composeTestRule.onNodeWithText(context.getString(R.string.aspect_ratio_experimental_title))
+            .performClick()
         assertThat(fakeNavControllerWrapper.navigateCalledWith).isEqualTo("UserAspectRatioAppsPage")
     }
 
@@ -93,7 +94,7 @@ class UserAspectRatioAppsPageProviderTest {
             UserAspectRatioAppList {}
         }
 
-        composeTestRule.onNodeWithText(context.getString(R.string.aspect_ratio_title))
+        composeTestRule.onNodeWithText(context.getString(R.string.aspect_ratio_experimental_title))
             .assertIsDisplayed()
     }
 
