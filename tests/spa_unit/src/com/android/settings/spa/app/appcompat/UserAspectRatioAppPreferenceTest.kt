@@ -37,7 +37,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.dx.mockito.inline.extended.ExtendedMockito
 import com.android.settings.R
 import com.android.settings.applications.appcompat.UserAspectRatioDetails
-import com.android.settings.applications.appcompat.UserAspectRatioManager
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment
 import com.android.settings.spa.app.appinfo.AppInfoSettingsProvider
 import com.android.settings.testutils.TestDeviceConfig
@@ -87,6 +86,8 @@ class UserAspectRatioAppPreferenceTest {
             .startMocking()
         whenever(context.resources).thenReturn(resources)
         whenever(context.packageManager).thenReturn(packageManager)
+        // True is ignored but need this here or getBoolean will complain null object
+        mockProperty(PROPERTY_COMPAT_ALLOW_USER_ASPECT_RATIO_OVERRIDE, true)
     }
 
     @After
@@ -124,8 +125,6 @@ class UserAspectRatioAppPreferenceTest {
 
     @Test
     fun whenCannotDisplayAspectRatioUiAndConfigTrue_notDisplayed() {
-        // True is ignored but need this here or getBoolean will complain null object
-        mockProperty(PROPERTY_COMPAT_ALLOW_USER_ASPECT_RATIO_OVERRIDE, true)
         setConfig(true)
 
         setContent()
@@ -135,8 +134,6 @@ class UserAspectRatioAppPreferenceTest {
 
     @Test
     fun whenCanDisplayAspectRatioUiAndConfigTrue_Displayed() {
-        // True is ignored but need this here or getBoolean will complain null object
-        mockProperty(PROPERTY_COMPAT_ALLOW_USER_ASPECT_RATIO_OVERRIDE, true)
         setConfig(true)
         whenever(packageManager.queryIntentActivities(any(), anyInt()))
             .thenReturn(listOf(RESOLVE_INFO))
@@ -145,7 +142,7 @@ class UserAspectRatioAppPreferenceTest {
 
         composeTestRule.onNode(
             hasTextExactly(
-                context.getString(R.string.aspect_ratio_title),
+                context.getString(R.string.aspect_ratio_experimental_title),
                 context.getString(R.string.user_aspect_ratio_app_default)
             ),
         ).assertIsDisplayed().assertIsEnabled()
@@ -153,8 +150,6 @@ class UserAspectRatioAppPreferenceTest {
 
     @Test
     fun onClick_startActivity() {
-        // True is ignored but need this here or getBoolean will complain null object
-        mockProperty(PROPERTY_COMPAT_ALLOW_USER_ASPECT_RATIO_OVERRIDE, true)
         setConfig(true)
         whenever(packageManager.queryIntentActivities(any(), anyInt()))
             .thenReturn(listOf(RESOLVE_INFO))
