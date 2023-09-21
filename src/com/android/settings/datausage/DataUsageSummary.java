@@ -183,9 +183,8 @@ public class DataUsageSummary extends DataUsageBaseFragment implements DataUsage
     private void addMobileSection(int subId, SubscriptionInfo subInfo) {
         TemplatePreferenceCategory category = (TemplatePreferenceCategory)
                 inflatePreferences(R.xml.data_usage_cellular);
-        category.setTemplate(DataUsageLib.getMobileTemplate(getContext(), subId),
-                subId, services);
-        category.pushTemplates(services);
+        category.setTemplate(DataUsageLib.getMobileTemplate(getContext(), subId), subId);
+        category.pushTemplates();
         final CharSequence displayName = SubscriptionUtil.getUniqueSubscriptionDisplayName(
                 subInfo, getContext());
         if (subInfo != null && !TextUtils.isEmpty(displayName)) {
@@ -198,15 +197,14 @@ public class DataUsageSummary extends DataUsageBaseFragment implements DataUsage
     void addWifiSection() {
         TemplatePreferenceCategory category = (TemplatePreferenceCategory)
                 inflatePreferences(R.xml.data_usage_wifi);
-        category.setTemplate(new NetworkTemplate.Builder(NetworkTemplate.MATCH_WIFI).build(),
-                0, services);
+        category.setTemplate(new NetworkTemplate.Builder(NetworkTemplate.MATCH_WIFI).build(), 0);
     }
 
     private void addEthernetSection() {
         TemplatePreferenceCategory category = (TemplatePreferenceCategory)
                 inflatePreferences(R.xml.data_usage_ethernet);
-        category.setTemplate(new NetworkTemplate.Builder(NetworkTemplate.MATCH_ETHERNET).build(),
-                0, services);
+        category.setTemplate(
+                new NetworkTemplate.Builder(NetworkTemplate.MATCH_ETHERNET).build(), 0);
     }
 
     private Preference inflatePreferences(int resId) {
@@ -259,10 +257,10 @@ public class DataUsageSummary extends DataUsageBaseFragment implements DataUsage
     private void updateState() {
         PreferenceScreen screen = getPreferenceScreen();
         for (int i = 1; i < screen.getPreferenceCount(); i++) {
-          Preference currentPreference = screen.getPreference(i);
-          if (currentPreference instanceof TemplatePreferenceCategory) {
-            ((TemplatePreferenceCategory) currentPreference).pushTemplates(services);
-          }
+            Preference currentPreference = screen.getPreference(i);
+            if (currentPreference instanceof TemplatePreferenceCategory) {
+                ((TemplatePreferenceCategory) currentPreference).pushTemplates();
+            }
         }
     }
 

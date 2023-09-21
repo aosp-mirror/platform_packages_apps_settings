@@ -23,7 +23,6 @@ import android.util.AttributeSet
 import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.core.SubSettingLauncher
-import com.android.settings.datausage.TemplatePreference.NetworkServices
 import com.android.settings.datausage.lib.BillingCycleRepository
 import com.android.settings.network.MobileDataEnabledListener
 
@@ -45,7 +44,7 @@ class BillingCyclePreference @JvmOverloads constructor(
         updateEnabled()
     }
 
-    override fun setTemplate(template: NetworkTemplate, subId: Int, services: NetworkServices?) {
+    override fun setTemplate(template: NetworkTemplate, subId: Int) {
         this.template = template
         this.subId = subId
         summary = null

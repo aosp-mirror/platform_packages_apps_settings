@@ -99,7 +99,7 @@ public class CellDataPreference extends CustomDialogPreferenceCompat
     }
 
     @Override
-    public void setTemplate(NetworkTemplate template, int subId, NetworkServices services) {
+    public void setTemplate(NetworkTemplate template, int subId) {
         if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             throw new IllegalArgumentException("CellDataPreference needs a SubscriptionInfo");
         }

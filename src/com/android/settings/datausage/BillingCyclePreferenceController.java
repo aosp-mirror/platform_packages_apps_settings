@@ -42,7 +42,7 @@ public class BillingCyclePreferenceController extends BasePreferenceController {
 
         NetworkTemplate template = DataUsageLib.getMobileTemplate(mContext, mSubscriptionId);
 
-        preference.setTemplate(template, mSubscriptionId, null);
+        preference.setTemplate(template, mSubscriptionId);
     }
 
     @Override

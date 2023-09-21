@@ -47,7 +47,7 @@ class BillingCyclePreferenceTest {
 
     @Test
     fun isEnabled_afterSetTemplate_updated() {
-        preference.setTemplate(mock<NetworkTemplate>(), SUB_ID, null)
+        preference.setTemplate(mock<NetworkTemplate>(), SUB_ID)
 
         val enabled = preference.isEnabled
 

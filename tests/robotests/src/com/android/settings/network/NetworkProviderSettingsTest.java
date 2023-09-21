@@ -317,7 +317,7 @@ public class NetworkProviderSettingsTest {
         mNetworkProviderSettings.onCreate(Bundle.EMPTY);
 
         verify(mDataUsagePreference).setVisible(true);
-        verify(mDataUsagePreference).setTemplate(any(), eq(0) /*subId*/, eq(null) /*service*/);
+        verify(mDataUsagePreference).setTemplate(any(), eq(0) /*subId*/);
     }
 
     @Test

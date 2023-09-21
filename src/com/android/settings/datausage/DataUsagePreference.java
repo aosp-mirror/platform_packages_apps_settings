@@ -49,7 +49,7 @@ public class DataUsagePreference extends Preference implements TemplatePreferenc
     }
 
     @Override
-    public void setTemplate(NetworkTemplate template, int subId, NetworkServices services) {
+    public void setTemplate(NetworkTemplate template, int subId) {
         mTemplate = template;
         mSubId = subId;
         final DataUsageController controller = getDataUsageController();
