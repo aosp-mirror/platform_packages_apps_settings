@@ -145,7 +145,7 @@ class UserAspectRatioAppPreferenceTest {
 
         composeTestRule.onNode(
             hasTextExactly(
-                context.getString(R.string.aspect_ratio_title),
+                context.getString(R.string.aspect_ratio_experimental_title),
                 context.getString(R.string.user_aspect_ratio_app_default)
             ),
         ).assertIsDisplayed().assertIsEnabled()
