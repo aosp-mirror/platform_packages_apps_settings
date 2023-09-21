@@ -40,7 +40,6 @@ import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityDialogUtils.DialogEnums;
 import com.android.settings.accessibility.TextReadingResetController.ResetStateListener;
 import com.android.settings.testutils.XmlTestUtils;
-import com.android.settings.utils.ActivityControllerWrapper;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -52,6 +51,8 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
+import org.robolectric.annotation.LooperMode;
 import org.robolectric.shadows.ShadowToast;
 
 import java.util.ArrayList;
@@ -60,6 +61,10 @@ import java.util.List;
 
 /** Tests for {@link TextReadingPreferenceFragment}. */
 @RunWith(RobolectricTestRunner.class)
+@LooperMode(LooperMode.Mode.LEGACY)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class TextReadingPreferenceFragmentTest {
 
     @Rule
@@ -77,9 +82,7 @@ public class TextReadingPreferenceFragmentTest {
         when(mFragment.getPreferenceManager()).thenReturn(mPreferenceManager);
         when(mFragment.getPreferenceManager().getContext()).thenReturn(mContext);
         when(mFragment.getContext()).thenReturn(mContext);
-        when(mFragment.getActivity()).thenReturn((FragmentActivity)
-                ActivityControllerWrapper.setup(Robolectric.buildActivity(
-                        FragmentActivity.class)).get());
+        when(mFragment.getActivity()).thenReturn(Robolectric.setupActivity(FragmentActivity.class));
 
         // Avoid a NPE is happened in ShadowWindowManagerGlobal
         doReturn(mock(DisplaySizeData.class)).when(mFragment).createDisplaySizeData(mContext);

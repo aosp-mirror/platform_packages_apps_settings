@@ -42,6 +42,7 @@ import com.android.settings.applications.AppDashboardFragment;
 import com.android.settings.applications.ProcessStatsSummary;
 import com.android.settings.applications.ProcessStatsUi;
 import com.android.settings.applications.UsageAccessDetails;
+import com.android.settings.applications.appcompat.UserAspectRatioDetails;
 import com.android.settings.applications.appinfo.AlarmsAndRemindersDetails;
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
 import com.android.settings.applications.appinfo.AppLocaleDetails;
@@ -72,7 +73,7 @@ import com.android.settings.biometrics.combination.CombinedBiometricProfileSetti
 import com.android.settings.biometrics.combination.CombinedBiometricSettings;
 import com.android.settings.biometrics.face.FaceSettings;
 import com.android.settings.biometrics.fingerprint.FingerprintSettings;
-import com.android.settings.biometrics.fingerprint2.ui.fragment.FingerprintSettingsV2Fragment;
+import com.android.settings.biometrics.fingerprint2.ui.settings.fragment.FingerprintSettingsV2Fragment;
 import com.android.settings.bluetooth.BluetoothBroadcastDialog;
 import com.android.settings.bluetooth.BluetoothDeviceDetailsFragment;
 import com.android.settings.bluetooth.BluetoothFindBroadcastsFragment;
@@ -185,7 +186,6 @@ import com.android.settings.wfd.WifiDisplaySettings;
 import com.android.settings.wifi.ConfigureWifiSettings;
 import com.android.settings.wifi.WifiAPITest;
 import com.android.settings.wifi.WifiInfo;
-import com.android.settings.wifi.WifiSettings;
 import com.android.settings.wifi.calling.WifiCallingDisclaimerFragment;
 import com.android.settings.wifi.calling.WifiCallingSettings;
 import com.android.settings.wifi.details.WifiNetworkDetailsFragment;
@@ -203,7 +203,6 @@ public class SettingsGateway {
             AdvancedConnectedDeviceDashboardFragment.class.getName(),
             CreateShortcut.class.getName(),
             BluetoothPairingDetail.class.getName(),
-            WifiSettings.class.getName(),
             WifiNetworkDetailsFragment.class.getName(),
             ConfigureWifiSettings.class.getName(),
             SavedAccessPointsWifiSettings2.class.getName(),
@@ -373,7 +372,8 @@ public class SettingsGateway {
             ColorAndMotionFragment.class.getName(),
             LongBackgroundTasksDetails.class.getName(),
             RegionalPreferencesEntriesFragment.class.getName(),
-            BatteryInfoFragment.class.getName()
+            BatteryInfoFragment.class.getName(),
+            UserAspectRatioDetails.class.getName()
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {

@@ -56,7 +56,6 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -76,6 +75,9 @@ import java.util.List;
 import java.util.Set;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public final class AppInfoDashboardFragmentTest {
 
     private static final String PACKAGE_NAME = "test_package_name";
@@ -153,7 +155,6 @@ public final class AppInfoDashboardFragmentTest {
         verify(menu.findItem(UNINSTALL_UPDATES), times(1)).setVisible(true);
     }
 
-    @Ignore
     @Test
     @Config(qualifiers = "mcc999")
     public void onPrepareOptionsMenu_setUpdateMenuVisible_ifDisabledByDevice_shouldBeFalse() {

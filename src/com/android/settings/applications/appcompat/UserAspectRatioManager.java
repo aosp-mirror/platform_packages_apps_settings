@@ -36,6 +36,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 
 import com.google.common.annotations.VisibleForTesting;
 
@@ -51,10 +52,10 @@ public class UserAspectRatioManager {
             new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER);
 
     // TODO(b/288142656): Enable user aspect ratio settings by default
-    private static final boolean DEFAULT_VALUE_ENABLE_USER_ASPECT_RATIO_SETTINGS = false;
+    private static final boolean DEFAULT_VALUE_ENABLE_USER_ASPECT_RATIO_SETTINGS = true;
     @VisibleForTesting
     static final String KEY_ENABLE_USER_ASPECT_RATIO_SETTINGS =
-            "enable_app_compat_user_aspect_ratio_settings";
+            "enable_app_compat_aspect_ratio_user_settings";
     static final String KEY_ENABLE_USER_ASPECT_RATIO_FULLSCREEN =
             "enable_app_compat_user_aspect_ratio_fullscreen";
     private static final boolean DEFAULT_VALUE_ENABLE_USER_ASPECT_RATIO_FULLSCREEN = true;
@@ -64,12 +65,14 @@ public class UserAspectRatioManager {
     /** Apps that have launcher entry defined in manifest */
     private final List<ResolveInfo> mInfoHasLauncherEntryList;
     private final Map<Integer, String> mUserAspectRatioMap;
+    private final Map<Integer, CharSequence> mUserAspectRatioA11yMap;
 
     public UserAspectRatioManager(@NonNull Context context) {
         mContext = context;
         mIPm = AppGlobals.getPackageManager();
         mInfoHasLauncherEntryList = mContext.getPackageManager().queryIntentActivities(
                 UserAspectRatioManager.LAUNCHER_ENTRY_INTENT, PackageManager.GET_META_DATA);
+        mUserAspectRatioA11yMap = new ArrayMap<>();
         mUserAspectRatioMap = getUserMinAspectRatioMapping();
     }
 
@@ -104,6 +107,16 @@ public class UserAspectRatioManager {
             return mUserAspectRatioMap.get(PackageManager.USER_MIN_ASPECT_RATIO_UNSET);
         }
         return mUserAspectRatioMap.get(aspectRatio);
+    }
+
+    /**
+     * @return corresponding accessible string for {@link PackageManager.UserMinAspectRatio} value
+     */
+    @NonNull
+    public CharSequence getAccessibleEntry(@PackageManager.UserMinAspectRatio int aspectRatio,
+            String packageName) {
+        return mUserAspectRatioA11yMap.getOrDefault(aspectRatio,
+                getUserMinAspectRatioEntry(aspectRatio, packageName));
     }
 
     /**
@@ -185,6 +198,7 @@ public class UserAspectRatioManager {
             final int aspectRatioVal = userMinAspectRatioValues[i];
             final String aspectRatioString = getAspectRatioStringOrDefault(
                     userMinAspectRatioStrings[i], aspectRatioVal);
+            boolean containsColon = aspectRatioString.contains(":");
             switch (aspectRatioVal) {
                 // Only map known values of UserMinAspectRatio and ignore unknown entries
                 case PackageManager.USER_MIN_ASPECT_RATIO_FULLSCREEN:
@@ -194,6 +208,14 @@ public class UserAspectRatioManager {
                 case PackageManager.USER_MIN_ASPECT_RATIO_4_3:
                 case PackageManager.USER_MIN_ASPECT_RATIO_16_9:
                 case PackageManager.USER_MIN_ASPECT_RATIO_3_2:
+                    if (containsColon) {
+                        String[] aspectRatioDigits = aspectRatioString.split(":");
+                        String accessibleString = getAccessibleOption(aspectRatioDigits[0],
+                                aspectRatioDigits[1]);
+                        final CharSequence accessibleSequence = Utils.createAccessibleSequence(
+                                aspectRatioString, accessibleString);
+                        mUserAspectRatioA11yMap.put(aspectRatioVal, accessibleSequence);
+                    }
                     userMinAspectRatioMap.put(aspectRatioVal, aspectRatioString);
             }
         }
@@ -202,6 +224,12 @@ public class UserAspectRatioManager {
                     + " USER_MIN_ASPECT_RATIO_UNSET value");
         }
         return userMinAspectRatioMap;
+    }
+
+    @NonNull
+    private String getAccessibleOption(String numerator, String denominator) {
+        return mContext.getResources().getString(R.string.user_aspect_ratio_option_a11y,
+                numerator, denominator);
     }
 
     @NonNull

@@ -27,7 +27,6 @@ import android.os.Bundle;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
-import com.android.settings.utils.ActivityControllerWrapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -35,8 +34,12 @@ import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class InputMethodAndSubtypeEnablerTest {
 
     private FragmentActivity mActivity;
@@ -45,8 +48,7 @@ public class InputMethodAndSubtypeEnablerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mActivity = (FragmentActivity) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(FragmentActivity.class)).get();
+        mActivity = Robolectric.setupActivity(FragmentActivity.class);
         mFragment = spy(new InputMethodAndSubtypeEnabler());
         when(mFragment.getActivity()).thenReturn(mActivity);
     }

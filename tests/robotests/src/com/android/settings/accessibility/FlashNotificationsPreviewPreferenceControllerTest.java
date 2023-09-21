@@ -131,7 +131,7 @@ public class FlashNotificationsPreviewPreferenceControllerTest {
     @Test
     public void testHandlePreferenceTreeClick_invalidPreference() {
         mController.handlePreferenceTreeClick(mock(Preference.class));
-        verify(mContext, never()).sendBroadcast(any());
+        verify(mContext, never()).sendBroadcastAsUser(any(), any());
     }
 
     @Test
@@ -139,7 +139,7 @@ public class FlashNotificationsPreviewPreferenceControllerTest {
         mController.handlePreferenceTreeClick(mPreference);
 
         ArgumentCaptor<Intent> captor = ArgumentCaptor.forClass(Intent.class);
-        verify(mContext).sendBroadcast(captor.capture());
+        verify(mContext).sendBroadcastAsUser(captor.capture(), any());
         Intent captured = captor.getValue();
 
         assertThat(captured.getAction()).isEqualTo(ACTION_FLASH_NOTIFICATION_START_PREVIEW);
@@ -150,7 +150,7 @@ public class FlashNotificationsPreviewPreferenceControllerTest {
         mController.handlePreferenceTreeClick(mPreference);
 
         ArgumentCaptor<Intent> captor = ArgumentCaptor.forClass(Intent.class);
-        verify(mContext).sendBroadcast(captor.capture());
+        verify(mContext).sendBroadcastAsUser(captor.capture(), any());
         Intent captured = captor.getValue();
 
         assertThat(captured.getIntExtra(EXTRA_FLASH_NOTIFICATION_PREVIEW_TYPE, TYPE_LONG_PREVIEW))

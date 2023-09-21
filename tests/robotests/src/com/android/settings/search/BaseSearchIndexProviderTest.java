@@ -31,7 +31,6 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexableRaw;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
@@ -96,7 +95,6 @@ public class BaseSearchIndexProviderTest {
         assertThat(mIndexProvider.getNonIndexableKeys(mContext)).isEqualTo(Collections.EMPTY_LIST);
     }
 
-    @Ignore
     @Test
     @Config(qualifiers = "mcc999")
     public void getAllPreferenceControllers_shouldCreateControllerFromCodeAndXml() {
@@ -180,7 +178,6 @@ public class BaseSearchIndexProviderTest {
         assertThat(nonIndexableKeys).contains("status_header");
     }
 
-    @Ignore
     @Test
     @Config(qualifiers = "mcc999")
     public void getNonIndexableKeys_hasSearchableAttributeInXml_shouldSuppressUnsearchable() {

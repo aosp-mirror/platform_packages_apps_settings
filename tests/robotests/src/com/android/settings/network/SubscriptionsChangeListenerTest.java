@@ -20,12 +20,14 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.robolectric.shadows.ShadowLooper.shadowMainLooper;
 
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
@@ -81,6 +83,7 @@ public class SubscriptionsChangeListenerTest {
         final ContentResolver contentResolver = mock(ContentResolver.class);
         when(mContext.getContentResolver()).thenReturn(contentResolver);
         initListener(false);
+        shadowMainLooper().idle();
         verify(contentResolver, never()).registerContentObserver(any(Uri.class), anyBoolean(),
                 any(ContentObserver.class));
         verify(mSubscriptionManager, never()).addOnSubscriptionsChangedListener(any(), any());
@@ -93,6 +96,7 @@ public class SubscriptionsChangeListenerTest {
         final ArgumentCaptor<SubscriptionManager.OnSubscriptionsChangedListener> captor =
                 ArgumentCaptor.forClass(SubscriptionManager.OnSubscriptionsChangedListener.class);
         verify(mSubscriptionManager).addOnSubscriptionsChangedListener(any(), captor.capture());
+        shadowMainLooper().idle();
         captor.getValue().onSubscriptionsChanged();
         verify(mClient).onSubscriptionsChanged();
     }
@@ -104,9 +108,11 @@ public class SubscriptionsChangeListenerTest {
         mContext.sendStickyBroadcast(intent);
 
         initListener(true);
+        shadowMainLooper().idle();
         verify(mClient, never()).onSubscriptionsChanged();
 
         mContext.sendStickyBroadcast(intent);
+        shadowMainLooper().idle();
         verify(mClient, times(1)).onSubscriptionsChanged();
     }
 
@@ -115,8 +121,10 @@ public class SubscriptionsChangeListenerTest {
         initListener(true);
         final ArgumentCaptor<BroadcastReceiver> broadcastReceiverCaptor =
                 ArgumentCaptor.forClass(BroadcastReceiver.class);
+        shadowMainLooper().idle();
         verify(mContext).registerReceiver(broadcastReceiverCaptor.capture(), any());
         broadcastReceiverCaptor.getValue().onReceive(mContext, null);
+        shadowMainLooper().idle();
         verify(mClient).onSubscriptionsChanged();
     }
 
@@ -125,7 +133,8 @@ public class SubscriptionsChangeListenerTest {
         initListener(true);
         Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 1);
         mListener.onChange(false, mAirplaneModeUri);
-        verify(mClient).onAirplaneModeChanged(true);
+        shadowMainLooper().idle();
+        verify(mClient, atLeastOnce()).onAirplaneModeChanged(true);
         assertThat(mListener.isAirplaneModeOn()).isTrue();
     }
 
@@ -134,7 +143,8 @@ public class SubscriptionsChangeListenerTest {
         initListener(true);
         Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 0);
         mListener.onChange(false, mAirplaneModeUri);
-        verify(mClient).onAirplaneModeChanged(false);
+        shadowMainLooper().idle();
+        verify(mClient, atLeastOnce()).onAirplaneModeChanged(false);
         assertThat(mListener.isAirplaneModeOn()).isFalse();
     }
 

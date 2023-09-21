@@ -295,7 +295,7 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
         if (mCachedDevice != null) {
             Lifecycle lifecycle = getSettingsLifecycle();
             controllers.add(new BluetoothDetailsHeaderController(context, this, mCachedDevice,
-                    lifecycle, mManager));
+                    lifecycle));
             controllers.add(new BluetoothDetailsButtonsController(context, this, mCachedDevice,
                     lifecycle));
             controllers.add(new BluetoothDetailsCompanionAppsController(context, this,
@@ -315,6 +315,8 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
             controllers.add(new BluetoothDetailsPairOtherController(context, this, mCachedDevice,
                     lifecycle));
             controllers.add(new BluetoothDetailsHearingDeviceControlsController(context, this,
+                    mCachedDevice, lifecycle));
+            controllers.add(new BluetoothDetailsDataSyncController(context, this,
                     mCachedDevice, lifecycle));
         }
         return controllers;

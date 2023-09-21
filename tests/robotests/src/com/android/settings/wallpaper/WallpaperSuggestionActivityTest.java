@@ -27,8 +27,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 
-import com.android.settings.utils.ActivityControllerWrapper;
-
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import org.junit.After;
@@ -121,13 +119,10 @@ public class WallpaperSuggestionActivityTest {
 
     @Test
     public void addExtras_intentNotFromSetupWizard_extrasHasFocusWallpaper() {
-        WallpaperSuggestionActivity activity =
-                (WallpaperSuggestionActivity) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(WallpaperSuggestionActivity.class,
-                        new Intent(Intent.ACTION_MAIN).setComponent(
+        WallpaperSuggestionActivity activity = Robolectric.buildActivity(
+                WallpaperSuggestionActivity.class, new Intent(Intent.ACTION_MAIN).setComponent(
                         new ComponentName(RuntimeEnvironment.application,
-                                PACKAGE_WALLPAPER_ACTIVITY)))).get();
-
+                                PACKAGE_WALLPAPER_ACTIVITY))).setup().get();
         Intent intent = Shadows.shadowOf(activity).getNextStartedActivity();
 
         assertThat(intent).isNotNull();

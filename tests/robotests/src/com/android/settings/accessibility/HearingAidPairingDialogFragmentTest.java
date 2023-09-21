@@ -43,10 +43,8 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.bluetooth.BluetoothPairingDetail;
 import com.android.settings.bluetooth.HearingAidPairingDialogFragment;
 import com.android.settings.bluetooth.Utils;
-import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
-import com.android.settings.utils.ActivityControllerWrapper;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.HearingAidInfo;
@@ -62,18 +60,25 @@ import org.mockito.junit.MockitoRule;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
+import org.robolectric.annotation.LooperMode;
 import org.robolectric.shadow.api.Shadow;
 
 /** Tests for {@link HearingAidPairingDialogFragment}. */
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowAlertDialogCompat.class, ShadowBluetoothAdapter.class,
-        ShadowBluetoothUtils.class})
+@LooperMode(LooperMode.Mode.LEGACY)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowAlertDialogCompat.class,
+        com.android.settings.testutils.shadow.ShadowBluetoothAdapter.class,
+        com.android.settings.testutils.shadow.ShadowBluetoothUtils.class,
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class HearingAidPairingDialogFragmentTest {
 
     @Rule
     public final MockitoRule mockito = MockitoJUnit.rule();
 
     private static final String TEST_DEVICE_ADDRESS = "00:A1:A1:A1:A1:A1";
+    private static final int TEST_LAUNCH_PAGE = SettingsEnums.SETTINGS_CONNECTED_DEVICE_CATEGORY;
 
     private final Context mContext = ApplicationProvider.getApplicationContext();
     @Mock
@@ -94,13 +99,7 @@ public class HearingAidPairingDialogFragmentTest {
     @Before
     public void setUp() {
         setupEnvironment();
-        mFragment = spy(HearingAidPairingDialogFragment.newInstance(TEST_DEVICE_ADDRESS));
-        mActivity = (FragmentActivity) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(FragmentActivity.class)).get();
-        mFragmentManager = mActivity.getSupportFragmentManager();
-        when(mFragment.getActivity()).thenReturn(mActivity);
-        doReturn(mFragmentManager).when(mFragment).getParentFragmentManager();
-        mFragment.onAttach(mContext);
+        setupDialog(TEST_LAUNCH_PAGE);
     }
 
     @Test
@@ -117,7 +116,8 @@ public class HearingAidPairingDialogFragmentTest {
     }
 
     @Test
-    public void dialogPositiveButtonClick_intentToExpectedClass() {
+    public void dialogPositiveButtonClick_intentToBluetoothPairingPage() {
+        setupDialog(SettingsEnums.SETTINGS_CONNECTED_DEVICE_CATEGORY);
         final AlertDialog dialog = (AlertDialog) mFragment.onCreateDialog(Bundle.EMPTY);
         dialog.show();
 
@@ -126,6 +126,19 @@ public class HearingAidPairingDialogFragmentTest {
         final Intent intent = shadowOf(mActivity).getNextStartedActivity();
         assertThat(intent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT))
                 .isEqualTo(BluetoothPairingDetail.class.getName());
+    }
+
+    @Test
+    public void dialogPositiveButtonClick_intentToA11yPairingPage() {
+        setupDialog(SettingsEnums.ACCESSIBILITY);
+        final AlertDialog dialog = (AlertDialog) mFragment.onCreateDialog(Bundle.EMPTY);
+        dialog.show();
+
+        dialog.getButton(DialogInterface.BUTTON_POSITIVE).performClick();
+
+        final Intent intent = shadowOf(mActivity).getNextStartedActivity();
+        assertThat(intent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT))
+                .isEqualTo(HearingDevicePairingDetail.class.getName());
     }
 
     @Test
@@ -152,6 +165,16 @@ public class HearingAidPairingDialogFragmentTest {
         mFragment.onDeviceAttributesChanged();
 
         verify(mFragment).dismiss();
+    }
+
+    private void setupDialog(int launchPage) {
+        mFragment = spy(
+                HearingAidPairingDialogFragment.newInstance(TEST_DEVICE_ADDRESS, launchPage));
+        mActivity = Robolectric.setupActivity(FragmentActivity.class);
+        mFragmentManager = mActivity.getSupportFragmentManager();
+        when(mFragment.getActivity()).thenReturn(mActivity);
+        doReturn(mFragmentManager).when(mFragment).getParentFragmentManager();
+        mFragment.onAttach(mContext);
     }
 
     private void setupEnvironment() {

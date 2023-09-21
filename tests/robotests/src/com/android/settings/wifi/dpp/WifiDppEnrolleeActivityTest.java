@@ -19,16 +19,15 @@ package com.android.settings.wifi.dpp;
 import static com.android.settings.wifi.dpp.WifiDppEnrolleeActivity.ACTION_ENROLLEE_QR_CODE_SCANNER;
 
 import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Intent;
 
-import com.android.settings.utils.ActivityControllerWrapper;
 import com.android.settingslib.wifi.WifiRestrictionsCache;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -58,18 +57,16 @@ public class WifiDppEnrolleeActivityTest {
         when(mIntent.getAction()).thenReturn(ACTION_ENROLLEE_QR_CODE_SCANNER);
         when(mIntent.getStringExtra(WifiDppUtils.EXTRA_WIFI_SSID)).thenReturn(WIFI_SSID);
 
-        mActivity = (WifiDppEnrolleeActivity) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(WifiDppEnrolleeActivity.class)).get();
+        mActivity = spy(Robolectric.setupActivity(WifiDppEnrolleeActivity.class));
         mActivity.mWifiRestrictionsCache = mWifiRestrictionsCache;
     }
 
     @Test
     public void launchActivity_noIntentAction_shouldNotFatalException() {
-        ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(WifiDppEnrolleeActivity.class)).get();
+        WifiDppEnrolleeActivity wifiDppEnrolleeActivity =
+                Robolectric.setupActivity(WifiDppEnrolleeActivity.class);
     }
 
-    @Ignore
     @Test
     public void handleIntent_noIntentAction_shouldFinish() {
         when(mIntent.getAction()).thenReturn(null);
@@ -79,7 +76,6 @@ public class WifiDppEnrolleeActivityTest {
         verify(mActivity).finish();
     }
 
-    @Ignore
     @Test
     public void handleIntent_notAllowedConfigWifi_shouldFinish() {
         when(mWifiRestrictionsCache.isConfigWifiAllowed()).thenReturn(false);
@@ -89,7 +85,6 @@ public class WifiDppEnrolleeActivityTest {
         verify(mActivity).finish();
     }
 
-    @Ignore
     @Test
     public void handleIntent_hasIntentDataAndAllowedConfigWifi_shouldShowFragment() {
         when(mWifiRestrictionsCache.isConfigWifiAllowed()).thenReturn(true);

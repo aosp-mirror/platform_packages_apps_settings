@@ -171,12 +171,20 @@ public class MediaOutputIndicatorWorker extends SliceBackgroundWorker implements
 
     /** Check if this device supports LE Audio Broadcast feature */
     public boolean isBroadcastSupported() {
+        if (mLocalBluetoothManager == null) {
+            Log.e(TAG, "isBroadcastSupported: Bluetooth is not supported on this device");
+            return false;
+        }
         LocalBluetoothLeBroadcast broadcast =
                 mLocalBluetoothManager.getProfileManager().getLeAudioBroadcastProfile();
         return broadcast != null ? true : false;
     }
 
     public boolean isDeviceBroadcasting() {
+        if (mLocalBluetoothManager == null) {
+            Log.e(TAG, "isDeviceBroadcasting: Bluetooth is not supported on this device");
+            return false;
+        }
         LocalBluetoothLeBroadcast broadcast =
                 mLocalBluetoothManager.getProfileManager().getLeAudioBroadcastProfile();
         if (broadcast == null) {

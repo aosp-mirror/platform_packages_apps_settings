@@ -30,6 +30,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
+import static org.robolectric.shadows.ShadowLooper.shadowMainLooper;
 
 import android.app.AppOpsManager;
 import android.app.backup.BackupManager;
@@ -46,7 +47,6 @@ import android.os.UserHandle;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.loader.app.LoaderManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -59,7 +59,6 @@ import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.LayoutPreference;
 import com.android.settingslib.widget.SelectorWithWidgetPreference;
@@ -78,10 +77,12 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
-import java.util.concurrent.TimeUnit;
-
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowEntityHeaderController.class, ShadowActivityManager.class})
+@Config(shadows = {
+        ShadowEntityHeaderController.class,
+        ShadowActivityManager.class,
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class AdvancedPowerUsageDetailTest {
     private static final String APP_LABEL = "app label";
     private static final String SUMMARY = "summary";
@@ -155,8 +156,6 @@ public class AdvancedPowerUsageDetailTest {
         doReturn(mLoaderManager).when(mFragment).getLoaderManager();
 
         ShadowEntityHeaderController.setUseMock(mEntityHeaderController);
-        doReturn(mEntityHeaderController).when(mEntityHeaderController)
-                .setRecyclerView(nullable(RecyclerView.class), nullable(Lifecycle.class));
         doReturn(mEntityHeaderController).when(mEntityHeaderController)
                 .setButtonActions(anyInt(), anyInt());
         doReturn(mEntityHeaderController).when(mEntityHeaderController)
@@ -768,7 +767,7 @@ public class AdvancedPowerUsageDetailTest {
         mFragment.onRadioButtonClicked(mOptimizePreference);
         mFragment.onPause();
 
-        TimeUnit.SECONDS.sleep(100);
+        shadowMainLooper().idle();
         verify(mMetricsFeatureProvider)
                 .action(
                         SettingsEnums.OPEN_APP_BATTERY_USAGE,
@@ -792,7 +791,7 @@ public class AdvancedPowerUsageDetailTest {
         mFragment.onRadioButtonClicked(mOptimizePreference);
         mFragment.onPause();
 
-        TimeUnit.SECONDS.sleep(100);
+        shadowMainLooper().idle();
         verifyNoInteractions(mMetricsFeatureProvider);
     }
 

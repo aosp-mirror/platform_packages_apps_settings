@@ -21,6 +21,7 @@ import static android.content.Context.POWER_SERVICE;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -39,7 +40,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.SettingsBaseActivity;
-import com.android.settings.utils.ActivityControllerWrapper;
 import com.android.settingslib.transition.SettingsTransitionHelper;
 
 import org.junit.Before;
@@ -85,7 +85,7 @@ public class BrightnessLevelPreferenceControllerTest {
         ShadowApplication.getInstance().setSystemService(POWER_SERVICE,
                 mPowerManager);
         when(mScreen.findPreference(anyString())).thenReturn(mPreference);
-        when(mContext.getDisplay()).thenReturn(mDisplay);
+        doReturn(mDisplay).when(mContext).getDisplay();
         mController = spy(new BrightnessLevelPreferenceController(mContext, null));
     }
 
@@ -165,9 +165,7 @@ public class BrightnessLevelPreferenceControllerTest {
 
     @Test
     public void handlePreferenceTreeClick_transitionTypeNone_shouldPassToNextActivity() {
-        final Activity activity = (Activity) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(Activity.class)).get();
-
+        final Activity activity = Robolectric.setupActivity(Activity.class);
         final BrightnessLevelPreferenceController controller =
                 new BrightnessLevelPreferenceController(activity, null);
         final ShadowActivity shadowActivity = shadowOf(activity);

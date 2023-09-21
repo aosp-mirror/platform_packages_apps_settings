@@ -42,6 +42,12 @@
     <string name="preview_pager_content_description" msgid="3762247188224576303">"Anteprima"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Rimpicciolisci"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Ingrandisci"</string>
+    <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"Sempre"</string>
+    <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"Il display frontale si attiva quando chiudi il dispositivo"</string>
+    <string name="selective_stay_awake_title" msgid="7887645333447645168">"Soltanto giochi, video e altro ancora"</string>
+    <string name="selective_stay_awake_summary" msgid="9055967322921984543">"Il display frontale si attiva per le app che impediscono allo schermo di diventare inattivo"</string>
+    <string name="sleep_on_fold_title" msgid="7626123024330501411">"Mai"</string>
+    <string name="sleep_on_fold_summary" msgid="7737992842459588846">"Il display frontale si blocca quando chiudi il dispositivo"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Usa la rotazione automatica"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"La funzionalità di riconoscimento facciale usa la fotocamera anteriore per migliorare la precisione della rotazione automatica. Le immagini non vengono mai memorizzate o inviate a Google."</string>
     <string name="bluetooth" msgid="8898478620943459654">"Bluetooth"</string>
@@ -118,6 +124,7 @@
     <string name="connected_device_previously_connected_screen_title" msgid="8823331744788100605">"Connessi in precedenza"</string>
     <string name="connected_device_bluetooth_turned_on_toast" msgid="144664089794199928">"Bluetooth attivato"</string>
     <string name="previous_connected_see_all" msgid="7759413145713251328">"Mostra tutti"</string>
+    <string name="connected_device_fast_pair_device_see_all" msgid="4898279230458128620">"Vedi tutto"</string>
     <string name="stylus_device_details_title" msgid="7618295136015480864">"Stilo"</string>
     <string name="stylus_default_notes_app" msgid="4165657465911764628">"Pressione del pulsante dello stilo"</string>
     <string name="stylus_default_notes_summary_work" msgid="4554643411627934223">"<xliff:g id="APP_NAME">%s</xliff:g> (Profilo di lavoro)"</string>
@@ -199,6 +206,7 @@
     <string name="terms_of_address_not_specified" msgid="4439257779351251973">"Non specificati"</string>
     <string name="terms_of_address_feminine" msgid="1743479869695539283">"Femminili"</string>
     <string name="terms_of_address_masculine" msgid="983106046135098856">"Maschili"</string>
+    <string name="terms_of_address_neutral" msgid="5475414185543112478">"Neutra"</string>
     <string name="dlg_remove_locales_title" msgid="3170501604483612114">"{count,plural, =1{Vuoi rimuovere la lingua selezionata?}other{Vuoi rimuovere le lingue selezionate?}}"</string>
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"Il testo verrà mostrato in un\'altra lingua."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Impossibile rimuovere tutte le lingue"</string>
@@ -250,7 +258,7 @@
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Ora solare"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"Selezione per regione"</string>
     <string name="zone_menu_by_offset" msgid="1257702747474426745">"Seleziona per scarto da UTC"</string>
-    <string name="lock_after_timeout" msgid="8682769000437403444">"Blocca dopo lo spegnimento schermo"</string>
+    <string name="lock_after_timeout" msgid="8682769000437403444">"Blocca dopo lo spegnimento dello schermo"</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> dopo il timeout"</string>
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"Subito dopo lo spegnimento dello schermo, tranne quando tenuto sbloccato da <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> dopo lo spegnimento dello schermo, tranne quando tenuto sbloccato da <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
@@ -277,14 +285,14 @@
     <string name="safety_center_summary" msgid="3554867379951053869">"Sicurezza delle app, blocco dispositivo, autorizzazioni"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Volto aggiunto"</string>
     <string name="security_settings_face_preference_summary_none" msgid="523320857738436024">"Configurazione richiesta"</string>
-    <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Sblocco con il volto"</string>
-    <string name="security_settings_face_profile_preference_title" msgid="7519527436266375005">"Sblocco con il volto per il lavoro"</string>
-    <string name="security_settings_face_enroll_education_title" msgid="6448806884597691208">"Come configurare lo sblocco con il volto"</string>
-    <string name="security_settings_face_enroll_education_title_accessibility" msgid="3701874093226957891">"Configura lo sblocco con il volto"</string>
+    <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Sblocco con il Volto"</string>
+    <string name="security_settings_face_profile_preference_title" msgid="7519527436266375005">"Sblocco con il Volto per il lavoro"</string>
+    <string name="security_settings_face_enroll_education_title" msgid="6448806884597691208">"Come configurare lo Sblocco con il Volto"</string>
+    <string name="security_settings_face_enroll_education_title_accessibility" msgid="3701874093226957891">"Configura lo Sblocco con il Volto"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"Usa il tuo volto per l\'autenticazione"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"Inizia"</string>
-    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="2965952386172202665">"Se lo sblocco con il volto (accessibilità) non è attivo, alcuni passaggi di configurazione potrebbero non funzionare correttamente con TalkBack."</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="2965952386172202665">"Se lo Sblocco con il Volto (accessibilità) non è attivo, alcuni passaggi di configurazione potrebbero non funzionare correttamente con TalkBack."</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"Indietro"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"Continua configurazione"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"Usa configurazione accessibilità"</string>
@@ -295,7 +303,7 @@
     <string name="security_settings_face_enroll_introduction_agree" msgid="6319476573697497750">"Accetto"</string>
     <string name="security_settings_face_enroll_introduction_more" msgid="1970820298889710532">"Altro"</string>
     <string name="security_settings_face_enroll_introduction_title" msgid="7061610077237098046">"Sblocca con il volto"</string>
-    <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"Consenti Sblocco con il volto"</string>
+    <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"Consenti Sblocco con il Volto"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"Usa il tuo volto per l\'autenticazione"</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"Utilizza il tuo volto per sbloccare il telefono o approvare gli acquisti.\n\nNota: non puoi utilizzare il tuo volto per sbloccare questo dispositivo. Per ulteriori informazioni, contatta l\'amministratore della tua organizzazione."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"Usa il tuo volto per sbloccare il telefono, autorizzare gli acquisti o accedere alle app"</string>
@@ -315,38 +323,38 @@
     <string name="security_settings_face_enroll_error_generic_dialog_message" msgid="3186810411630091490">"Registrazione del volto non riuscita."</string>
     <string name="security_settings_face_enroll_finish_title" msgid="5882322568359775393">"Fatto. Tutto OK."</string>
     <string name="security_settings_face_enroll_done" msgid="3048687969498187442">"Fine"</string>
-    <string name="security_settings_face_enroll_should_re_enroll_title" msgid="6835778900387289683">"Migliora le prestazioni dello sblocco con il volto"</string>
-    <string name="security_settings_face_enroll_should_re_enroll_subtitle" msgid="7055780282999744813">"Riconfigura lo sblocco con il volto"</string>
-    <string name="security_settings_face_enroll_must_re_enroll_title" msgid="4421818770682557621">"Riconfigura lo sblocco con il volto"</string>
+    <string name="security_settings_face_enroll_should_re_enroll_title" msgid="6835778900387289683">"Migliora le prestazioni dello Sblocco con il Volto"</string>
+    <string name="security_settings_face_enroll_should_re_enroll_subtitle" msgid="7055780282999744813">"Riconfigura lo Sblocco con il Volto"</string>
+    <string name="security_settings_face_enroll_must_re_enroll_title" msgid="4421818770682557621">"Riconfigura lo Sblocco con il Volto"</string>
     <string name="security_settings_face_enroll_must_re_enroll_subtitle" msgid="3584740139535177961">"Migliora la sicurezza e le prestazioni"</string>
-    <string name="security_settings_face_enroll_improve_face_alert_title" msgid="6194184776580066012">"Configura lo sblocco con il volto"</string>
-    <string name="security_settings_face_enroll_improve_face_alert_body" msgid="2670118180411127323">"Elimina l\'attuale modello del volto per riconfigurare lo sblocco con il volto.\n\nIl modello del volto verrà eliminato definitivamente e in sicurezza.\n\nDopo l\'eliminazione dovrai usare il PIN, la sequenza o la password per sbloccare il telefono o eseguire l\'autenticazione nelle app."</string>
-    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint" msgid="2469599074650327489">"Elimina l\'attuale modello del volto per riconfigurare lo sblocco con il volto.\n\nIl modello del volto verrà eliminato definitivamente e in sicurezza.\n\nDopo l\'eliminazione dovrai usare l\'impronta, il PIN, la sequenza o la password per sbloccare il telefono o eseguire l\'autenticazione nelle app."</string>
-    <string name="security_settings_face_settings_use_face_category" msgid="1638314154119800188">"Usa lo sblocco con il volto per"</string>
-    <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"Quando usi lo sblocco con il volto"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_title" msgid="6194184776580066012">"Configura lo Sblocco con il Volto"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_body" msgid="2670118180411127323">"Elimina l\'attuale modello del volto per riconfigurare lo Sblocco con il Volto.\n\nIl modello del volto verrà eliminato definitivamente e in sicurezza.\n\nDopo l\'eliminazione dovrai usare il PIN, la sequenza o la password per sbloccare il telefono o eseguire l\'autenticazione nelle app."</string>
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint" msgid="2469599074650327489">"Elimina l\'attuale modello del volto per riconfigurare lo Sblocco con il Volto.\n\nIl modello del volto verrà eliminato definitivamente e in sicurezza.\n\nDopo l\'eliminazione dovrai usare l\'impronta, il PIN, la sequenza o la password per sbloccare il telefono o eseguire l\'autenticazione nelle app."</string>
+    <string name="security_settings_face_settings_use_face_category" msgid="1638314154119800188">"Usa lo Sblocco con il Volto per"</string>
+    <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"Quando usi lo Sblocco con il Volto"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Gli occhi devono essere aperti"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"Per sbloccare il telefono gli occhi devono essere aperti"</string>
     <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"Chiedi sempre conferma"</string>
-    <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"Chiedi sempre conferma se viene usato lo sblocco con il volto nelle app"</string>
+    <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"Chiedi sempre conferma se viene usato lo Sblocco con il Volto nelle app"</string>
     <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"Elimina il modello del volto"</string>
-    <string name="security_settings_face_settings_enroll" msgid="3726313826693825029">"Configura lo sblocco con il volto"</string>
+    <string name="security_settings_face_settings_enroll" msgid="3726313826693825029">"Configura lo Sblocco con il Volto"</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2899669764446232715">"Eliminare il modello del volto?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="916131485988121592">"Il modello del volto verrà eliminato definitivamente e in sicurezza.\n\nDopo l\'eliminazione dovrai usare il PIN, la sequenza o la password per sbloccare lo smartphone o eseguire l\'autenticazione nelle app."</string>
     <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"Il modello del volto verrà eliminato definitivamente e in sicurezza.\n\nDopo l\'eliminazione dovrai usare il PIN, la sequenza o la password per sbloccare il telefono."</string>
     <string name="security_settings_face_remove_dialog_details_fingerprint" msgid="7609582230650860974">"Il modello del volto verrà eliminato definitivamente e in sicurezza.\n\nDopo l\'eliminazione dovrai usare l\'impronta, il PIN, la sequenza o la password per sbloccare lo smartphone o eseguire l\'autenticazione nelle app."</string>
     <string name="security_settings_face_remove_dialog_details_fingerprint_conv" msgid="2627374706274503259">"Il modello del volto verrà eliminato definitivamente e in sicurezza.\n\nDopo l\'eliminazione dovrai usare l\'impronta, il PIN, la sequenza o la password per sbloccare lo smartphone."</string>
-    <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Usa lo sblocco con il volto per sbloccare il tuo telefono"</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Usa lo Sblocco con il Volto per sbloccare il tuo telefono"</string>
     <string name="security_settings_fingerprint" msgid="6387775386189204201">"Impronta"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Impronta"</string>
-    <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"Quando usi lo sblocco con l\'impronta"</string>
+    <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"Quando usi lo Sblocco con l\'Impronta"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Impronta per lavoro"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Aggiungi impronta"</string>
     <string name="security_settings_fingerprint_preference_summary" msgid="8486134175759676037">"{count,plural, =1{Impronta aggiunta}other{# impronte aggiunte}}"</string>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1146977379031250790">"Configurazione richiesta"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Imposta la tua impronta"</string>
-    <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Consenti sblocco con l\'impronta"</string>
+    <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Consenti Sblocco con l\'Impronta"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Usa la tua impronta"</string>
-    <string name="security_settings_fingerprint_settings_footer_learn_more" msgid="2508322993726483601">"Scopri di più sullo sblocco con l\'impronta"</string>
+    <string name="security_settings_fingerprint_settings_footer_learn_more" msgid="2508322993726483601">"Scopri di più sullo Sblocco con l\'Impronta"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"Sei tu ad avere il controllo"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"Tu e tuo figlio avete il controllo"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"Ricorda"</string>
@@ -359,13 +367,13 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"Quando vedi questa icona, usa l\'impronta per l\'autenticazione, ad esempio per accedere alle app o approvare un acquisto"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_1" msgid="4360262371633254407">"Ricorda"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"Come funziona"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="5909924864816776516">"Lo sblocco con l\'impronta crea un modello univoco della tua impronta per poter verificare la tua identità. Per creare il modello dell\'impronta durante la configurazione, dovrai acquisire immagini della tua impronta da diverse posizioni."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2" msgid="3493356605815124807">"Lo sblocco con l\'impronta crea un modello univoco dell\'impronta di tuo figlio per poter verificare la sua identità. Per creare il modello dell\'impronta durante la configurazione, dovrà acquisire immagini della sua impronta da diverse posizioni."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="5909924864816776516">"Lo Sblocco con l\'Impronta crea un modello univoco della tua impronta per poter verificare la tua identità. Per creare il modello dell\'impronta durante la configurazione, dovrai acquisire immagini della tua impronta da diverse posizioni."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2" msgid="3493356605815124807">"Lo Sblocco con l\'Impronta crea un modello univoco dell\'impronta di tuo figlio per poter verificare la sua identità. Per creare il modello dell\'impronta durante la configurazione, dovrà acquisire immagini della sua impronta da diverse posizioni."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Per risultati ottimali, usa una protezione per lo schermo con la certificazione Made For Google. Con altre protezioni per lo schermo la tua impronta potrebbe non funzionare."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Per risultati ottimali, usa una protezione per lo schermo con la certificazione Made For Google. Con altre protezioni per lo schermo l\'impronta di tuo figlio potrebbe non funzionare."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"Sblocco dall\'orologio"</string>
-    <string name="biometric_settings_intro_with_activeunlock" msgid="6583248094453119314">"Se configuri lo sblocco con il volto e con l\'impronta, lo smartphone ti chiederà l\'impronta se indossi una mascherina o ti trovi in un luogo buio.\n\nSe il tuo volto o la tua impronta non vengono riconosciuti, puoi sbloccare con lo smartwatch."</string>
+    <string name="biometric_settings_intro_with_activeunlock" msgid="6583248094453119314">"Se configuri lo Sblocco con il Volto e con l\'impronta, lo smartphone ti chiederà l\'impronta se indossi una mascherina o ti trovi in un luogo buio.\n\nSe il tuo volto o la tua impronta non vengono riconosciuti, puoi sbloccare con lo smartwatch."</string>
     <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"Se la tua impronta non viene riconosciuta, puoi sbloccare con lo smartwatch."</string>
     <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"Se il tuo volto non viene riconosciuto, puoi sbloccare con lo smartwatch."</string>
     <string name="biometric_settings_use_fingerprint_or_watch_for" msgid="1160830065613858095">"Usa l\'impronta o l\'orologio per"</string>
@@ -376,11 +384,11 @@
     <string name="biometric_settings_use_fingerprint_or_watch_preference_summary" msgid="2425628094194828407">"Con impronta o smartwatch"</string>
     <string name="biometric_settings_use_face_fingerprint_or_watch_preference_summary" msgid="188805113048792007">"Con volto, impronta o smartwatch"</string>
     <string name="biometric_settings_use_watch_preference_summary" msgid="2311453276747908475">"Con smartwatch"</string>
-    <string name="security_settings_activeunlock_require_face_fingerprint_setup_title" msgid="8776904312629209685">"Prima configura lo sblocco con il volto o con l\'impronta"</string>
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_title" msgid="8776904312629209685">"Prima configura lo Sblocco con il Volto o con l\'impronta"</string>
     <string name="security_settings_activeunlock_require_face_fingerprint_setup_message" msgid="1669326067732567911">"Se il tuo volto o la tua impronta non vengono riconosciuti, puoi sbloccare con lo smartwatch"</string>
-    <string name="security_settings_activeunlock_require_fingerprint_setup_title" msgid="6703703635881050623">"Prima configura lo sblocco con l\'impronta"</string>
+    <string name="security_settings_activeunlock_require_fingerprint_setup_title" msgid="6703703635881050623">"Prima configura lo Sblocco con l\'Impronta"</string>
     <string name="security_settings_activeunlock_require_fingerprint_setup_message" msgid="4966813766409918392">"Se la tua impronta non viene riconosciuta, puoi sbloccare con lo smartwatch"</string>
-    <string name="security_settings_activeunlock_require_face_setup_title" msgid="1428795376597739880">"Prima configura lo sblocco con il volto"</string>
+    <string name="security_settings_activeunlock_require_face_setup_title" msgid="1428795376597739880">"Prima configura lo Sblocco con il Volto"</string>
     <string name="security_settings_activeunlock_require_face_setup_message" msgid="8904070645721933399">"Se il tuo volto non viene riconosciuto, puoi sbloccare con lo smartwatch"</string>
     <string name="security_settings_activeunlock_biometric_setup" msgid="8876454457817955475">"Configura"</string>
     <string name="security_settings_fingerprint_single_watch_preference_summary" msgid="6464470096384164369">"Impronta e <xliff:g id="WATCH">%s</xliff:g> aggiunti"</string>
@@ -388,12 +396,39 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Volto e <xliff:g id="WATCH">%s</xliff:g> aggiunti"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Volto, impronta e <xliff:g id="WATCH">%s</xliff:g> aggiunti"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Volto, impronte e <xliff:g id="WATCH">%s</xliff:g> aggiunti"</string>
-    <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"Sblocco con l\'impronta e con il volto"</string>
-    <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Sblocco con il volto e con l\'impronta per lavoro"</string>
+    <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Sblocco Remote Authenticator"</string>
+    <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"Smartwatch aggiunto"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"Configura l\'orologio"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_message" msgid="8737276885766036074">"Sblocco dall\'orologio è un altro modo pratico per sbloccare lo smartphone, ad esempio quando hai le dita bagnate o il volto non viene riconosciuto.\n\nPuoi usare lo smartwatch per sbloccare lo smartphone quando:"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_disagree" msgid="7639258097401796028">"Non ora"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_agree" msgid="5271119227172049339">"Continua"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_more" msgid="1644105894631257595">"Altro"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_how_title" msgid="6604152528267830349">"Come funziona"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_info_lock_open" msgid="8570511335628725116">"Lo smartwatch deve essere sbloccato, sul polso e vicino allo smartphone. Non sarà necessario sbloccare nuovamente lo smartwatch quando si trova sul polso."</string>
+    <string name="security_settings_remoteauth_enroll_introduction_info_notifications" msgid="4298855831154039694">"Quando lo smartphone viene sbloccato, riceverai una notifica sullo smartwatch. Se è stato sbloccato quando non era tua intenzione, tocca la notifica per bloccare di nuovo lo smartphone."</string>
+    <string name="security_settings_remoteauth_enroll_introduction_youre_in_control_title" msgid="7974976673323638524">"Sei tu ad avere il controllo"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_info_remove_watch" msgid="1888318677088986801">"Puoi rimuovere lo smartwatch da Sblocco dall\'orologio in qualsiasi momento in Impostazioni"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_animation_tap_notification" msgid="1597397399097952974">"Tocca una notifica"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_animation_swipe_up" msgid="2129230804324634653">"Scorri verso l\'alto sulla schermata di blocco"</string>
+    <string name="security_settings_remoteauth_enroll_enrolling_title" msgid="313016997943607675">"Scegli il tuo smartwatch"</string>
+    <string name="security_settings_remoteauth_enroll_enrolling_list_heading" msgid="8227585438932911013">"Smartwatch disponibili"</string>
+    <string name="security_settings_remoteauth_enroll_enrolling_disagree" msgid="1670201454188049863">"Annulla"</string>
+    <string name="security_settings_remoteauth_enroll_enrolling_agree" msgid="7048336252635730908">"Conferma"</string>
+    <string name="security_settings_remoteauth_enroll_finish_title" msgid="3807372930755413112">"Ecco fatto!"</string>
+    <string name="security_settings_remoteauth_enroll_finish_description" msgid="4876209907275244653">"Ora puoi usare lo smartwatch per sbloccare lo smartphone quando scorri verso l\'alto sulla schermata di blocco o tocchi una notifica"</string>
+    <string name="security_settings_remoteauth_enroll_finish_btn_next" msgid="8072138423143889592">"Fine"</string>
+    <string name="security_settings_remoteauth_settings_title" msgid="1564912618737165129">"Sblocco dall\'orologio"</string>
+    <string name="security_settings_remoteauth_settings_description" msgid="2758239650119457964">"Puoi usare l\'orologio per sbloccare lo smartphone quando scorri verso l\'alto sulla schermata di blocco o tocchi una notifica"</string>
+    <string name="security_settings_remoteauth_settings_info_footer" msgid="795894033901478120">"Per utilizzare Sblocco dall\'orologio, lo smartwatch deve essere sbloccato, al polso, a portata di mano e connesso allo smartphone. Se la connessione si interrompe, devi sbloccare lo smartphone prima di poter utilizzare Sblocco dall\'orologio.\n\nNota:\nÈ possibile configurare un solo smartwatch alla volta. Per aggiungerne un altro, devi prima rimuovere quello attuale."</string>
+    <string name="security_settings_remoteauth_settings_learn_more" msgid="5653556124819260050">"Scopri di più su Sblocco dall\'orologio"</string>
+    <string name="security_settings_remoteauth_settings_register_new_authenticator" msgid="9191331738306527887">"Aggiungi smartwatch"</string>
+    <string name="security_settings_remoteauth_settings_remove_device" msgid="2436226120578851282">"Rimuovi smartwatch"</string>
+    <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"Sblocco con l\'Impronta e con il volto"</string>
+    <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Sblocco con il Volto e con l\'impronta per lavoro"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"Configurazione richiesta"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Impronte e volto aggiunti"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"Impronta e volto aggiunti"</string>
-    <string name="biometric_settings_intro" msgid="4263069383955676756">"Se hai configurato lo sblocco con il volto e con l\'impronta, lo smartphone ti chiederà l\'impronta se indossi una mascherina o ti trovi in un luogo buio"</string>
+    <string name="biometric_settings_intro" msgid="4263069383955676756">"Se hai configurato lo Sblocco con il Volto e con l\'impronta, lo smartphone ti chiederà l\'impronta se indossi una mascherina o ti trovi in un luogo buio"</string>
     <string name="biometric_settings_category_ways_to_unlock" msgid="3384767901580915266">"Modi per sbloccare"</string>
     <string name="biometric_settings_category_use_face_fingerprint" msgid="4377659744376863913">"Uso del volto o dell\'impronta"</string>
     <string name="biometric_settings_use_biometric_unlock_phone" msgid="8180914579885804358">"Sblocca lo smartphone"</string>
@@ -402,10 +437,10 @@
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"Con impronta"</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"Con volto o impronta"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"OK"</string>
-    <string name="biometric_settings_add_face_in_split_mode_title" msgid="6041232223862753222">"Impossibile configurare lo sblocco con il volto"</string>
-    <string name="biometric_settings_add_face_in_split_mode_message" msgid="1904738532939614456">"Esci dallo schermo diviso per configurare lo sblocco con il volto"</string>
+    <string name="biometric_settings_add_face_in_split_mode_title" msgid="6041232223862753222">"Impossibile configurare lo Sblocco con il Volto"</string>
+    <string name="biometric_settings_add_face_in_split_mode_message" msgid="1904738532939614456">"Esci dallo schermo diviso per configurare lo Sblocco con il Volto"</string>
     <string name="biometric_settings_add_fingerprint_in_split_mode_title" msgid="9194670722730454903">"Impossibile configurare l\'impronta"</string>
-    <string name="biometric_settings_add_fingerprint_in_split_mode_message" msgid="6960548382076629454">"Esci da schermo diviso per impostare sblocco con l\'impronta"</string>
+    <string name="biometric_settings_add_fingerprint_in_split_mode_message" msgid="6960548382076629454">"Esci da schermo diviso per impostare Sblocco con l\'Impronta"</string>
     <string name="biometric_settings_add_biometrics_in_split_mode_ok" msgid="564103789097253645">"OK"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Ignorare il blocco schermo?"</string>
     <string name="skip_anyway_button_label" msgid="3442274117023270068">"Salta comunque"</string>
@@ -496,6 +531,30 @@
     <string name="security_header" msgid="961514795852103424">"Sicurezza"</string>
     <string name="privacy_header" msgid="5526002421324257007">"Privacy"</string>
     <string name="work_profile_category_header" msgid="85707750968948517">"Profilo di lavoro"</string>
+    <!-- no translation found for private_space_title (7078627930195569767) -->
+    <skip />
+    <!-- no translation found for private_space_summary (8237652417163408001) -->
+    <skip />
+    <!-- no translation found for private_space_one_lock_title (7306547190751832568) -->
+    <skip />
+    <!-- no translation found for private_space_hide_title (1615744426933304644) -->
+    <skip />
+    <!-- no translation found for private_space_category_system (1286843321867285700) -->
+    <skip />
+    <!-- no translation found for private_space_create_title (47273568884806726) -->
+    <skip />
+    <!-- no translation found for private_space_delete_title (3075645119800272800) -->
+    <skip />
+    <!-- no translation found for private_space_created (2978055968937762232) -->
+    <skip />
+    <!-- no translation found for private_space_already_exists (1253034947621867419) -->
+    <skip />
+    <!-- no translation found for private_space_create_failed (4908100791174213808) -->
+    <skip />
+    <!-- no translation found for private_space_deleted (7825768516955610897) -->
+    <skip />
+    <!-- no translation found for private_space_delete_failed (8500755484258565011) -->
+    <skip />
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Puoi aggiungere fino a <xliff:g id="COUNT">%d</xliff:g> impronte digitali"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Hai aggiunto il numero massimo di impronte digitali"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Impossibile aggiungere ulteriori impronte digitali"</string>
@@ -544,7 +603,7 @@
     <string name="face_unlock_set_unlock_pattern" msgid="4206669838203096608">"Sequenza • Volto"</string>
     <string name="face_unlock_set_unlock_pin" msgid="9034912683791069602">"PIN • Volto"</string>
     <string name="face_unlock_set_unlock_password" msgid="5874950853246424756">"Password • Volto"</string>
-    <string name="face_unlock_skip_face" msgid="189695556498300008">"Continua senza sblocco con il volto"</string>
+    <string name="face_unlock_skip_face" msgid="189695556498300008">"Continua senza Sblocco con il Volto"</string>
     <string name="biometrics_unlock_skip_biometrics" msgid="7399882488272450182">"Continua senza impronta o volto"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"Nessuno"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"Scorrimento"</string>
@@ -651,6 +710,8 @@
     <string name="bluetooth_enter_passkey_other_device" msgid="8270426446247344709">"Potrebbe inoltre essere necessario digitare questa passkey sull\'altro dispositivo."</string>
     <string name="bluetooth_paring_group_msg" msgid="4609515924670823316">"Conferma per eseguire l\'accoppiamento con il set coordinato"</string>
     <string name="bluetooth_pairing_shares_phonebook" msgid="4329325125260724843">"Consenti l\'accesso ai tuoi contatti e alla cronologia chiamate"</string>
+    <string name="bluetooth_pairing_phonebook_toggle_text" msgid="2474015367387690034">"Consenti anche l\'accesso ai contatti e alla cronologia delle chiamate"</string>
+    <string name="bluetooth_pairing_phonebook_toggle_details" msgid="1367197978487212581">"Le informazioni saranno utilizzate per gli annunci delle chiamate e altro ancora"</string>
     <string name="bluetooth_error_title" msgid="2284738188253690278"></string>
     <string name="bluetooth_connecting_error_message" msgid="3941893154784152112">"Impossibile collegarsi a <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_preference_found_media_devices" msgid="830061195998352840">"Dispositivi disponibili"</string>
@@ -812,7 +873,7 @@
     <string name="wifi_dpp_sharing_wifi_with_this_device" msgid="7250369936882080107">"Condivisione della rete Wi‑Fi con questo dispositivo…"</string>
     <string name="wifi_dpp_connecting" msgid="2312769193202897589">"Connessione…"</string>
     <string name="wifi_dpp_share_hotspot" msgid="6186452780604755316">"Condividi hotspot"</string>
-    <string name="wifi_dpp_lockscreen_title" msgid="4231438175617953652">"Verifica la tua identità"</string>
+    <string name="wifi_dpp_lockscreen_title" msgid="5246641326066972419">"Dimostra che sei tu"</string>
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Password Wi-Fi: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"Password hotspot: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"Connessione automatica"</string>
@@ -852,7 +913,6 @@
     <string name="wifi_not_in_range_message" msgid="3885327464037574739">"Rete fuori portata"</string>
     <string name="wifi_forget" msgid="3485573280364015620">"Elimina"</string>
     <string name="wifi_modify" msgid="5127926476383659412">"Modifica"</string>
-    <string name="wifi_failed_forget_message" msgid="8272732599235525880">"Impossibile eliminare la rete"</string>
     <string name="wifi_save" msgid="2312643132472226807">"Salva"</string>
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"Impossibile salvare la rete"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"Annulla"</string>
@@ -869,6 +929,13 @@
     <string name="wifi_type_title" msgid="2174893488722015838">"Tipo"</string>
     <string name="wifi_details_dns" msgid="273231528073312579">"DNS"</string>
     <string name="wifi_details_ipv6_address_header" msgid="1913151339341722443">"Indirizzi IPv6"</string>
+    <string name="hotspot_device_details_category" msgid="3110651914598697220">"Dettagli dispositivo hotspot"</string>
+    <string name="hotspot_device_details_internet_source" msgid="1563266599673281875">"Fonte internet"</string>
+    <string name="internet_source_wifi" msgid="6952593095166435179">"Wi‑Fi"</string>
+    <string name="internet_source_mobile_data" msgid="877403889449201789">"Dati mobili"</string>
+    <string name="internet_source_ethernet" msgid="8338472576454100966">"Ethernet"</string>
+    <string name="hotspot_connection_category" msgid="4320380513982923556">"Connessione tramite hotspot"</string>
+    <string name="hotspot_connection_strength" msgid="87359986943768421">"Potenza connessione"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"Reti salvate"</string>
     <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"Iscrizioni"</string>
     <string name="wifi_saved_other_networks_tab" msgid="7942647415716557293">"Altre reti"</string>
@@ -924,6 +991,9 @@
     <string name="wifi_hotspot_speed_footer" msgid="8846939503916795002">"Se la tua frequenza preferita non è disponibile, l\'hotspot potrebbe utilizzarne una diversa. Le impostazioni di sicurezza dell\'hotspot potrebbero cambiare se modifichi la frequenza."</string>
     <string name="wifi_hotspot_security_summary_unavailable" msgid="117582979310345853">"Non disponibile con 6 GHz"</string>
     <string name="wifi_hotspot_security_footer" msgid="4608329688744949796">"Le impostazioni di sicurezza potrebbero cambiare se modifichi la frequenza dell\'hotspot"</string>
+    <string name="wifi_hotspot_instant_title" msgid="7052526695338853703">"Hotspot istantaneo"</string>
+    <string name="wifi_hotspot_instant_summary_on" msgid="3142749148673081288">"On"</string>
+    <string name="wifi_hotspot_instant_summary_off" msgid="8594065628453795615">"Off"</string>
     <string name="wifi_tether_starting" msgid="8879874184033857814">"Attivazione hotspot…"</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"Disattivazione hotspot…"</string>
     <string name="wifi_tether_carrier_unsupport_dialog_title" msgid="3089432578433978073">"Tethering non disponibile"</string>
@@ -999,8 +1069,7 @@
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Off"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Bilanciamento bianco display"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
-    <string name="stay_awake_on_fold_title" msgid="4195536619511589471">"Tieni sbloccato quando chiuso"</string>
-    <string name="stay_awake_on_fold_summary" msgid="2413928869516675293">"Tieni sbloccato il display frontale quando è chiuso fino a spegnimento schermo"</string>
+    <string name="fold_lock_behavior_title" msgid="786228803694268449">"Continua a usare le app quando chiuso"</string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Display fluido"</string>
     <string name="peak_refresh_rate_summary" msgid="3627278682437562787">"Aumenta automaticamente la frequenza di aggiornamento da 60 a <xliff:g id="ID_1">%1$s</xliff:g> Hz per alcuni contenuti. Comporta un maggior utilizzo della batteria."</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Forza frequenza di aggiornamento massima"</string>
@@ -1058,7 +1127,7 @@
     <string name="dark_ui_text" msgid="4392646155331126666">"Il tema scuro usa uno sfondo nero per aumentare la durata della batteria su alcuni schermi. Le pianificazioni del tema scuro si attivano solo se lo schermo è spento."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Al momento il tema scuro viene attivato/disattivato in base alla pianificazione della modalità Riposo"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Impostazioni modalità Riposo"</string>
-    <string name="screen_timeout" msgid="7709947617767439410">"Spegnimento schermo"</string>
+    <string name="screen_timeout" msgid="7709947617767439410">"Spegnimento dello schermo"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"Dopo <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> di inattività"</string>
     <string name="screen_timeout_summary_not_set" msgid="5107680774964178875">"Nessuna impostazione"</string>
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"Sfondo"</string>
@@ -1133,7 +1202,7 @@
     <string name="kernel_version" msgid="3513538109381366881">"Versione kernel"</string>
     <string name="build_number" msgid="9009733242117579826">"Numero build"</string>
     <string name="module_version" msgid="1787518340082046658">"Aggiornamento di sistema Google Play"</string>
-    <string name="battery_info" msgid="7873528123969546728">"Informazioni batteria"</string>
+    <string name="battery_info" msgid="7873528123969546728">"Informazioni sulla batteria"</string>
     <string name="device_info_not_available" msgid="4804474466616712326">"Non disponibile"</string>
     <string name="storage_settings" msgid="7472188817781592677">"Spazio di archiviazione"</string>
     <string name="storage_settings_for_app" msgid="229425418984637483">"Spazio di archiviazione e cache"</string>
@@ -1427,7 +1496,7 @@
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="2783879743691792556">"Per usare l\'impronta, imposta un PIN"</string>
     <string name="lockpassword_confirm_your_password_header" msgid="6132312814563023990">"Inserisci di nuovo la password"</string>
     <string name="lockpassword_reenter_your_profile_password_header" msgid="3812040127714827685">"Reinserisci password per profilo lavoro"</string>
-    <string name="lockpassword_confirm_your_work_password_header" msgid="4647071231702288305">"Inserisci password profilo di lavoro"</string>
+    <string name="lockpassword_confirm_your_work_password_header" msgid="4647071231702288305">"Inserisci password del profilo di lavoro"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="4037701363240138651">"Conferma la tua sequenza"</string>
     <string name="lockpassword_confirm_your_work_pattern_header" msgid="2668883108969165844">"Ins. sequenza profilo lavoro"</string>
     <string name="lockpassword_confirm_your_pin_header" msgid="2241722970567131308">"Inserisci di nuovo il PIN"</string>
@@ -1440,19 +1509,19 @@
     <string name="lockpassword_password_set_toast" msgid="6615759749393973795">"Password impostata"</string>
     <string name="lockpassword_pin_set_toast" msgid="5415783847198570890">"PIN impostato"</string>
     <string name="lockpassword_pattern_set_toast" msgid="3090582314362416762">"Sequenza impostata"</string>
-    <string name="lockpassword_choose_your_password_header_for_face" msgid="622276003801157839">"Scegli password per sblocco con il volto"</string>
-    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="7333603579958317102">"Scegli sequenza per sblocco con il volto"</string>
-    <string name="lockpassword_choose_your_pin_header_for_face" msgid="704061826984851309">"Scegli PIN per sblocco con il volto"</string>
-    <string name="lockpassword_choose_your_password_header_for_biometrics" msgid="2053366309272487015">"Imposta password per sblocco con il volto o con l\'impronta"</string>
-    <string name="lockpassword_choose_your_pattern_header_for_biometrics" msgid="4038476475293734905">"Imposta sequenza per sblocco con il volto o con l\'impronta"</string>
+    <string name="lockpassword_choose_your_password_header_for_face" msgid="622276003801157839">"Scegli password per Sblocco con il Volto"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="7333603579958317102">"Scegli sequenza per Sblocco con il Volto"</string>
+    <string name="lockpassword_choose_your_pin_header_for_face" msgid="704061826984851309">"Scegli PIN per Sblocco con il Volto"</string>
+    <string name="lockpassword_choose_your_password_header_for_biometrics" msgid="2053366309272487015">"Imposta password per Sblocco con il Volto o con l\'impronta"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_biometrics" msgid="4038476475293734905">"Imposta sequenza per Sblocco con il Volto o con l\'impronta"</string>
     <string name="lockpassword_choose_your_pin_header_for_biometrics" msgid="9086039918921009380">"Imposta un PIN per usare il volto o l\'impronta"</string>
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Hai dimenticato la password?"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"Hai dimenticato la sequenza?"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"Hai dimenticato il PIN?"</string>
-    <string name="lockpassword_confirm_your_pattern_generic" msgid="7692794426682501482">"Inserisci la sequenza del dispositivo per continuare"</string>
-    <string name="lockpassword_confirm_your_pin_generic" msgid="9206928587904701094">"Per continuare devi inserire il PIN del dispositivo"</string>
-    <string name="lockpassword_confirm_your_password_generic" msgid="2616127423884477152">"Per continuare devi inserire la password del dispositivo"</string>
-    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="9110305410672321714">"Per continuare devi utilizzare la sequenza del tuo profilo di lavoro"</string>
+    <string name="lockpassword_confirm_your_pattern_generic" msgid="7401165571170203743">"Inserisci la sequenza per continuare"</string>
+    <string name="lockpassword_confirm_your_pin_generic" msgid="8990266101852808091">"Inserisci il PIN per continuare"</string>
+    <string name="lockpassword_confirm_your_password_generic" msgid="8823867445451497224">"Inserisci la password per continuare"</string>
+    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="7003851856761939690">"Inserisci la sequenza di lavoro per continuare"</string>
     <string name="lockpassword_confirm_your_pin_generic_profile" msgid="6524208128570235127">"Per continuare devi inserire il PIN del tuo profilo di lavoro"</string>
     <string name="lockpassword_confirm_your_password_generic_profile" msgid="5918738487760814147">"Per continuare devi inserire la password del tuo profilo di lavoro"</string>
     <string name="lockpassword_strong_auth_required_device_pattern" msgid="113817518413715557">"Per maggiore sicurezza, usa la sequenza del dispositivo"</string>
@@ -1956,6 +2025,7 @@
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Scorciatoia per l\'inversione dei colori"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"La funzionalità di inversione dei colori rende scure le schermate chiare e chiare le schermate scure"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"&lt;b&gt;Ricorda&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; I colori cambieranno nei contenuti multimediali e nelle immagini&lt;/li&gt; &lt;li&gt; L\'inversione dei colori funziona in tutte le app&lt;/li&gt; &lt;li&gt; Per visualizzare uno sfondo scuro, è possibile usare in alternativa il tema scuro&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="accessibility_action_label_panel_slice" msgid="1313725957071602932">"inserire impostazioni"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Clic automatico (tempo di interazione)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Info su Clic aut. (tempo interaz.)"</string>
     <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"Scopri di più su Clic automatico (tempo di interazione)"</string>
@@ -2128,10 +2198,10 @@
     <string name="accessibility_service_default_description" msgid="7801435825448138526">"Nessuna descrizione fornita."</string>
     <string name="settings_button" msgid="2195468788019730377">"Impostazioni"</string>
     <string name="keywords_reduce_bright_colors" msgid="1683190961013139183">"sensibilità alla luce, fotofobia, tema scuro, emicrania, mal di testa, modalità di lettura, modalità notturna, ridurre la luminosità, punto di bianco"</string>
-    <string name="keywords_accessibility" msgid="4263443239404659143">"facilità d\'uso, facilità di accesso, assistenza, assistivo"</string>
+    <string name="keywords_accessibility" msgid="8593989878379366798">"vista, udito, cieco, sordo, motorie, mobilità, assistivo, assistenza, facilità di utilizzo, facilità di accesso, mano, aiuto"</string>
     <string name="keywords_magnification" msgid="3908145308269840862">"ingrandimento della finestra, zoom, ingrandimento, ipovedente, ingrandimento, ingrandire"</string>
     <string name="keywords_talkback" msgid="2816435437095102527"></string>
-    <string name="keywords_live_caption" msgid="1667203998080567556">"sottotitoli codificati, sottotitolaggio codificato, CC, Trascrizione istantanea, problemi di udito, perdita dell\'udito, CART, conversione della voce in testo, sottotitolo"</string>
+    <string name="keywords_live_caption" msgid="1667203998080567556">"sottotitoli codificati, sottotitolaggio codificato, CC, Trascrizione Istantanea, problemi di udito, perdita dell\'udito, CART, conversione della voce in testo, sottotitolo"</string>
     <string name="keywords_live_transcribe" msgid="3226990195174890997"></string>
     <string name="keywords_sound_notifications" msgid="8183107485754075413"></string>
     <string name="keywords_sound_amplifier" msgid="939404835256246663"></string>
@@ -2143,10 +2213,13 @@
     <string name="keywords_contrast" msgid="4668393735398949873">"contrasto di colore"</string>
     <string name="keywords_accessibility_menu" msgid="4300579436464706608"></string>
     <string name="keywords_switch_access" msgid="5813094504384313402"></string>
-    <string name="keywords_auto_click" msgid="7151756353013736931">"motore, mouse"</string>
-    <string name="keywords_hearing_aids" msgid="4550504337687223314">"apparecchi acustici, disabilità uditiva, perdita dell\'udito, impianti cocleari, dispositivi di amplificazione, processori del suono"</string>
+    <string name="keywords_auto_click" msgid="6811744211216280998">"motorie, mouse, mouse esterno, head mouse, mouse adattivo, sedia a rotelle, joystick"</string>
+    <string name="keywords_hearing_aids" msgid="4657889873249157071">"apparecchi acustici, disabilità uditiva, perdita dell\'udito, impianti cocleari, dispositivi di amplificazione, processori del suono, PSAP"</string>
     <string name="keywords_rtt" msgid="2429130928152514402">"problemi di udito, perdita dell\'udito, sottotitoli, teletype, TTY"</string>
     <string name="keywords_voice_access" msgid="7807335263195876454"></string>
+    <string name="keywords_3_button_navigation" msgid="436361965016404218">"tre pulsanti"</string>
+    <string name="keywords_touch_and_hold_delay" msgid="7854640156419599912">"mobilità, motorie, anziani, artrite, lsr, ictus, tremore, sclerosi multipla, paralisi cerebrale, tremolio, lesioni da sforzo ripetuto, mano"</string>
+    <string name="keywords_accessibility_timeout" msgid="8903766864902000346">"ritardo, mobilità, anziani"</string>
     <string name="print_settings" msgid="8519810615863882491">"Stampa"</string>
     <string name="print_settings_summary_no_service" msgid="6721731154917653862">"Off"</string>
     <string name="print_settings_summary" msgid="1458773840720811915">"{count,plural, =1{1 servizio di stampa attivo}other{# servizi di stampa attivi}}"</string>
@@ -2224,9 +2297,9 @@
     <string name="battery_tip_dock_defender_future_bypass_title" msgid="4332616280495788195">"Ricarica ottimizzata per proteggere la batteria"</string>
     <string name="battery_tip_dock_defender_future_bypass_summary" msgid="7870758621381307597">"Per prolungare la durata della batteria, la ricarica viene ottimizzata quando il dispositivo è agganciato alla base"</string>
     <string name="battery_tip_dock_defender_active_title" msgid="1414785238383255699">"Ricarica ottimizzata per proteggere la batteria"</string>
-    <string name="battery_tip_dock_defender_active_summary" msgid="3512082623718801459">"Per prolungare la durata della batteria, la ricarica viene ottimizzata quando il dispositivo è agganciato alla base"</string>
+    <string name="battery_tip_dock_defender_active_summary" msgid="3512082623718801459">"Per prolungare la durata della batteria, la ricarica viene ottimizzata quando il dispositivo è agganciato al dock"</string>
     <string name="battery_tip_dock_defender_temporarily_bypassed_title" msgid="1679449361090557201">"Ricarica completa"</string>
-    <string name="battery_tip_dock_defender_temporarily_bypassed_summary" msgid="1099500476761333281">"Per proteggere la batteria, la ricarica verrà ottimizzata la prossima volta che il tablet verrà agganciato alla base"</string>
+    <string name="battery_tip_dock_defender_temporarily_bypassed_summary" msgid="1099500476761333281">"Per proteggere la batteria, la ricarica verrà ottimizzata la prossima volta che il tablet verrà agganciato al dock"</string>
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"Scopri di più sulla ricarica in pausa"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Riprendi la ricarica"</string>
     <string name="battery_tip_dialog_message_footer" msgid="986542164372177504">"Include attività in background a consumo elevato"</string>
@@ -2884,7 +2957,7 @@
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"Creazione del clone di <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> in corso…"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"Clone di <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> creato"</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"Lingue, gesti, ora, backup"</string>
-    <string name="languages_setting_summary" msgid="7963053736715746726">"Lingue di sistema, lingue delle app, voce"</string>
+    <string name="languages_setting_summary" msgid="2650807397396180351">"Lingue di sistema, lingue delle app, preferenze locali, voce"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, connessione di rete, internet, wireless, dati, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Notifica Wi‑Fi, notifica wifi"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"utilizzo dei dati"</string>
@@ -2907,7 +2980,7 @@
     <string name="keywords_battery" msgid="7040323668283600530">"consumo di energia, ricarica"</string>
     <string name="keywords_battery_usage" msgid="1763573071014260220">"visualizzare l\'utilizzo della batteria, utilizzo della batteria, consumo di energia"</string>
     <string name="keywords_battery_saver" msgid="6289682844453234359">"risparmio energetico, risparmio di energia, risparmio"</string>
-    <string name="keywords_battery_adaptive_preferences" msgid="1774870663426502938">"preferenze adattive, batteria adattiva"</string>
+    <string name="keywords_battery_adaptive_preferences" msgid="1774870663426502938">"preferenze adattive, Batteria Adattiva"</string>
     <string name="keywords_spell_checker" msgid="5148906820603481657">"ortografia, dizionario, correttore ortografico, correzione automatica"</string>
     <string name="keywords_voice_input" msgid="7534900094659358971">"funzione di riconoscimento, immissione, vocale, parlare, lingua, vivavoce, viva voce, riconoscimento, offensivo, parola, audio, cronologia, auricolare bluetooth"</string>
     <string name="keywords_text_to_speech_output" msgid="6728080502619011668">"velocità, lingua, predefinita, voce, parlare, sintesi vocale, accessibilità, screen reader, persona cieca"</string>
@@ -2934,7 +3007,7 @@
     <string name="keywords_app_pinning" msgid="1564144561464945019">"blocco su schermo"</string>
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"sfida lavoro, lavoro, profilo"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"profilo di lavoro, profilo gestito, unificare, unificazione, lavoro, profilo"</string>
-    <string name="keywords_stay_awake_on_lock" msgid="6338367464776295697">"riattivare, sospendere, non bloccare, tenere sbloccato quando chiuso, piegare, chiudere, piegatura, chiusura, schermo disattivato"</string>
+    <string name="keywords_fold_lock_behavior" msgid="6278990772113341581">"riattivare, sospendere, non bloccare, tenere sbloccato quando chiuso, piegare, chiudere, piegatura, chiusura, schermo disattivato"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"gesti"</string>
     <string name="keywords_wallet" msgid="3757421969956996972">"wallet"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"paga, tocca, pagamenti"</string>
@@ -3795,7 +3868,6 @@
     <string name="cell_data_warning" msgid="5664921950473359634">"Avviso sui dati: <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="cell_data_limit" msgid="256855024790622112">"Limite dati: <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="cell_data_warning_and_limit" msgid="8393200831986035724">"Avviso relativo ai dati: <xliff:g id="ID_1">^1</xliff:g> / Limite dati: <xliff:g id="ID_2">^2</xliff:g>"</string>
-    <string name="operator_warning" msgid="5672761970087591211">"La misurazione dell\'operatore potrebbe differire da quella del dispositivo"</string>
     <string name="non_carrier_data_usage_warning" msgid="4707184871368847697">"Sono esclusi i dati usati dalle reti dell\'operatore"</string>
     <string name="data_used_template" msgid="8229342096562327646">"Dati utilizzati: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="set_data_warning" msgid="1685771882794205462">"Imposta avviso sui dati"</string>
@@ -3821,7 +3893,6 @@
     <string name="no_carrier_update_text" msgid="5432798085593055966">"Aggiornato <xliff:g id="ID_1">^2</xliff:g> fa"</string>
     <string name="carrier_and_update_now_text" msgid="5075861262344398849">"Appena aggiornato da <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="no_carrier_update_now_text" msgid="7898004907837200752">"Appena aggiornato"</string>
-    <string name="launch_mdp_app_text" msgid="8791816789749304897">"Visualizza piano"</string>
     <string name="launch_wifi_text" msgid="976421974332512894">"Visualizza dettagli"</string>
     <string name="data_saver_title" msgid="2593804270788863815">"Risparmio dati"</string>
     <string name="unrestricted_data_saver" msgid="7922563266857367495">"Dati senza limitazioni"</string>
@@ -3839,6 +3910,9 @@
     <string name="battery_saver_off_summary" msgid="4411561435493109261">"Off"</string>
     <string name="app_battery_usage_title" msgid="346558380609793334">"Utilizzo della batteria per le app"</string>
     <string name="app_battery_usage_summary" msgid="6349965904306339539">"Imposta l\'utilizzo della batteria per le app"</string>
+    <string name="battery_tips_card_action_button" msgid="4897793527424711648">"Visualizza impostazioni"</string>
+    <string name="battery_tips_card_dismiss_button" msgid="1885756985544936618">"OK"</string>
+    <string name="battery_tips_card_feedback_info" msgid="767117835675157298">"Questo messaggio è utile?"</string>
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Senza limitazioni"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Ottimizzata"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"Con limitazioni"</string>
@@ -3904,7 +3978,6 @@
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Riquadri sviluppatore per impostazioni rapide"</string>
     <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"Disattiva timeout autorizzazione ADB"</string>
     <string name="adb_authorization_timeout_summary" msgid="409931540424019778">"Disattiva la revoca automatica delle autorizzazioni ADB per i sistemi che non si sono riconnessi entro l\'intervallo di tempo configurato dall\'utente (minimo 1 giorno) o predefinito (7 giorni)"</string>
-    <string name="winscope_trace_quick_settings_title" msgid="4104768565053226689">"Traccia Winscope"</string>
     <string name="sensors_off_quick_settings_title" msgid="8472151847125917167">"Sensori disattivati"</string>
     <string name="managed_profile_settings_title" msgid="3400923723423564217">"Impostazioni profilo di lavoro"</string>
     <string name="managed_profile_contact_search_title" msgid="6562061740814513737">"Cerca contatti della directory di lavoro nelle app personali"</string>
@@ -3933,7 +4006,7 @@
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"Torna indietro, vai alla schermata Home e cambia app usando i pulsanti nella parte inferiore dello schermo."</string>
     <string name="keywords_system_navigation" msgid="3131782378486554934">"navigazione del sistema, navigazione con due pulsanti, navigazione con tre pulsanti, navigazione tramite gesti, scorrimento"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Assistente digitale"</string>
-    <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Scorri per chiamare l\'assistente"</string>
+    <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Scorri per aprire l\'assistente"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"Scorri verso l\'alto da un angolo in basso per aprire l\'app dell\'assistente digitale."</string>
     <string name="assistant_long_press_home_gesture_title" msgid="4865972278738178753">"Tieni premuto Home per attivare l\'assistente"</string>
     <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"Tieni premuto il pulsante Home per aprire l\'app dell\'assistente digitale."</string>
@@ -4094,7 +4167,7 @@
     <string name="autofill_app" msgid="7595308061826307921">"Servizio di compilazione automatica"</string>
     <string name="default_autofill_app" msgid="372234803718251606">"Servizio di compilazione automatica predefinito"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"Password"</string>
-    <string name="credman_chosen_app_title" msgid="4547405511458518096">"Servizi per password, passkey e dati"</string>
+    <string name="credman_chosen_app_title" msgid="872524130208251505">"Servizi per password, passkey e dati"</string>
     <string name="credman_credentials" msgid="4931371941253324143">"Provider aggiuntivi"</string>
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# password}other{# password}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"automatica, compilazione, compilazione automatica, password"</string>
@@ -4102,13 +4175,13 @@
     <string name="credman_autofill_keywords" msgid="701180623776848914">"automatica, compilazione, compilazione automatica, dati, passkey, password"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Verifica che questa app sia attendibile&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=La Compilazione automatica di Google&gt;%1$s&lt;/xliff:g&gt; usa ciò che appare sullo schermo per stabilire quali contenuti possono essere compilati automaticamente."</string>
     <string name="credman_autofill_confirmation_message" msgid="4951846866327737417">"&lt;b&gt;Utilizzare &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; utilizza i contenuti sullo schermo per stabilire quali informazioni possono essere compilate automaticamente. D\'ora in poi le nuove password, passkey e altre informazioni verranno salvate qui."</string>
-    <string name="credman_picker_title" msgid="2642776965060619988">"Servizi per password, passkey e dati"</string>
+    <string name="credman_picker_title" msgid="8191267620665129205">"Servizi per password, passkey e dati"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Vuoi disattivare %1$s?"</string>
-    <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Disattiva questo servizio?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Le informazioni salvate, come password, passkey, metodi di pagamento e altre informazioni, non verranno inserite quando accedi. Per usare le informazioni salvate, scegli una password, una passkey o un servizio dati."</string>
+    <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Disattivare questo servizio?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Le informazioni salvate come password, passkey, metodi di pagamento e altre informazioni, non verranno inserite quando accedi. Per usare le informazioni salvate, scegli una password, una passkey o un servizio dati."</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"Vuoi usare %1$s?"</string>
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"%1$s usa i contenuti sullo schermo per stabilire quali informazioni possono essere compilate automaticamente."</string>
-    <string name="credman_error_message_title" msgid="4741457523969373713">"Limite di servizi per password, passkey e dati"</string>
-    <string name="credman_error_message" msgid="6793314648458925172">"Puoi attivare contemporaneamente fino a 5 servizi per password, passkey e dati. Per aggiungere un altro servizio devi disattivarne uno."</string>
+    <string name="credman_error_message_title" msgid="4099557206946333568">"Limite di servizi per password, passkey e dati"</string>
+    <string name="credman_error_message" msgid="8334797097200415449">"Puoi attivare contemporaneamente fino a 5 servizi per password, passkey e dati. Per aggiungere un altro servizio devi disattivarne uno."</string>
     <string name="credman_confirmation_message_positive_button" msgid="2812613187691345361">"Disattiva"</string>
     <string name="debug_autofill_category" msgid="5998163555428196185">"Compilazione automatica"</string>
     <string name="autofill_logging_level_title" msgid="3733958845861098307">"Livello di logging"</string>
@@ -4165,6 +4238,7 @@
     <string name="platform_compat_dialog_text_no_apps" msgid="5715226015751055812">"Le modifiche alla compatibilità delle app possono essere cambiate solo per le app di cui è possibile eseguire il debug. Installa un\'app di cui è possibile eseguire il debug e riprova."</string>
     <string name="disabled_dependent_setting_summary" msgid="4508635725315852504">"Dipende da un\'altra impostazione"</string>
     <string name="my_device_info_account_preference_title" msgid="9197139254007133175">"Account"</string>
+    <string name="my_device_info_account_preference_summary" msgid="3510582677937510545">"%d account"</string>
     <string name="my_device_info_device_name_preference_title" msgid="8053298498727237971">"Nome dispositivo"</string>
     <string name="my_device_info_basic_info_category_title" msgid="381963187269356548">"Informazioni di base"</string>
     <string name="my_device_info_legal_category_title" msgid="7732792841537995127">"Note legali e informazioni sulle normative"</string>
@@ -4458,8 +4532,8 @@
     <string name="lockscreen_privacy_controls_summary" msgid="7522918441738915364">"Dalla schermata di blocco"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="2174300719855112358">"Usa il controllo dei dispositivi"</string>
     <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"Per usare i controlli, devi prima attivare l\'opzione \"Mostra controlli dei dispositivi\""</string>
-    <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Mostra l\'orologio su due righe quando è disponibile"</string>
-    <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"Orologio su due righe"</string>
+    <string name="lockscreen_double_line_clock_summary" msgid="4109235686687860393">"Le dimensioni dell\'orologio cambiano in base ai contenuti della schermata di blocco"</string>
+    <string name="lockscreen_double_line_clock_setting_toggle" msgid="802271087416091548">"Orologio dinamico"</string>
     <string name="lockscreen_quick_affordances_title" msgid="8615741551327565793">"Scorciatoie"</string>
     <plurals name="lockscreen_quick_affordances_summary" formatted="false" msgid="4225396036524703997">
       <item quantity="other"><xliff:g id="FIRST_1">%1$s</xliff:g>, <xliff:g id="SECOND">%2$s</xliff:g></item>
@@ -4672,6 +4746,13 @@
     <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"L\'audio dei dispositivi multimediali compatibili diventa più immersivo"</string>
     <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"Rilevamento dei movimenti della testa"</string>
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"L\'audio cambia in base ai movimenti della testa per sembrare più naturale"</string>
+    <string name="bluetooth_details_audio_device_types_title" msgid="3381941189346781614">"Tipo di dispositivo audio"</string>
+    <string name="bluetooth_details_audio_device_type_unknown" msgid="839337391037998014">"Sconosciuto"</string>
+    <string name="bluetooth_details_audio_device_type_speaker" msgid="3706227767994792124">"Altoparlante"</string>
+    <string name="bluetooth_details_audio_device_type_headphones" msgid="7644588291215033798">"Cuffie"</string>
+    <string name="bluetooth_details_audio_device_type_hearing_aid" msgid="1310631131071939859">"Apparecchio acustico"</string>
+    <string name="bluetooth_details_audio_device_type_carkit" msgid="4439017600454703229">"Kit auto"</string>
+    <string name="bluetooth_details_audio_device_type_other" msgid="7019481234617207563">"Altro"</string>
     <string name="ingress_rate_limit_title" msgid="2106694002836274350">"Limite di velocità di download della rete"</string>
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"Configura il limite di velocità in entrata della larghezza di banda della rete applicato a tutte le reti che forniscono una connessione a Internet"</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"Configura il limite di velocità di download della rete"</string>
@@ -4704,24 +4785,19 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"Disinstalla app"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{App installate nell\'ultimo mese}other{App installate negli ultimi # mesi}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{App installate più di # mese fa}other{App installate più di # mesi fa}}"</string>
-    <!-- no translation found for aspect_ratio_title (2451826875939676101) -->
-    <skip />
-    <!-- no translation found for aspect_ratio_summary (5944347596728740547) -->
-    <skip />
+    <string name="aspect_ratio_title" msgid="2451826875939676101">"Proporzioni"</string>
+    <string name="aspect_ratio_summary" msgid="5944347596728740547">"Scegli le proporzioni per visualizzare questa app se non è stata progettata per adattarsi al tuo dispositivo <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"App consigliate"</string>
-    <string name="user_aspect_ratio_overridden_apps_label" msgid="1564914138276629704">"App sottoposte a override"</string>
+    <!-- no translation found for user_aspect_ratio_changed_apps_label (2096614916172567672) -->
+    <skip />
     <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"Valore predefinito dell\'app"</string>
-    <!-- no translation found for user_aspect_ratio_fullscreen (1843427242540081996) -->
-    <skip />
-    <!-- no translation found for user_aspect_ratio_half_screen (1015852057094310209) -->
-    <skip />
-    <!-- no translation found for user_aspect_ratio_device_size (2339820985120881199) -->
-    <skip />
+    <string name="user_aspect_ratio_fullscreen" msgid="1843427242540081996">"Schermo intero"</string>
+    <string name="user_aspect_ratio_half_screen" msgid="1015852057094310209">"Metà schermo"</string>
+    <string name="user_aspect_ratio_device_size" msgid="2339820985120881199">"Proporzioni del dispositivo"</string>
     <string name="user_aspect_ratio_16_9" msgid="2286644872775170164">"16:9"</string>
     <string name="user_aspect_ratio_3_2" msgid="199262962518318932">"3:2"</string>
     <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4:3"</string>
-    <!-- no translation found for app_aspect_ratio_footer (8661813386126142251) -->
-    <skip />
+    <string name="app_aspect_ratio_footer" msgid="8661813386126142251">"L\'app si riavvierà quando modifichi le proporzioni. Potresti perdere le modifiche non salvate."</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Sensore di impronte digitali"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Flash di notifica"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Informazioni sul flash di notifica"</string>
@@ -4756,10 +4832,9 @@
     <string name="contrast_medium" msgid="384414510709285811">"Medio"</string>
     <string name="contrast_high" msgid="3988567609694797696">"Alto"</string>
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"Questa app può essere aperta soltanto in 1 finestra"</string>
-    <string name="accessibility_feature_full_state_summary" msgid="8747170258807179670">"<xliff:g id="STATE_0">%1$s</xliff:g>/<xliff:g id="SHORTCUT_STATE">%2$s</xliff:g>/<xliff:g id="SERVICE_SUMMARY">%3$s</xliff:g>"</string>
-    <string name="generic_accessibility_service_on" msgid="2465820044606775562">"Servizio attivato"</string>
-    <string name="generic_accessibility_service_off" msgid="1752061696695346360">"Servizio disattivato"</string>
-    <string name="generic_accessibility_feature_shortcut_off" msgid="3669343136122187913">"Scorciatoia disattivata"</string>
+    <string name="generic_accessibility_service_on" msgid="4466229372357726824">"On"</string>
+    <string name="generic_accessibility_service_off" msgid="4759859497651675724">"Off"</string>
+    <string name="generic_accessibility_feature_shortcut_off" msgid="4022872394514077907">"Off"</string>
     <string name="accessibility_shortcut_state_off" msgid="8158137799007601475">"Off"</string>
     <string name="daltonizer_state_on" msgid="131013270022603983">"On"</string>
     <string name="daltonizer_state_off" msgid="1162285688069856179">"Off"</string>

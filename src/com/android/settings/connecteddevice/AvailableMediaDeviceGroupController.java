@@ -135,6 +135,11 @@ public class AvailableMediaDeviceGroupController extends BasePreferenceControlle
     }
 
     @VisibleForTesting
+    public void setFragmentManager(FragmentManager fragmentManager) {
+        mFragmentManager = fragmentManager;
+    }
+
+    @VisibleForTesting
     public void setBluetoothDeviceUpdater(BluetoothDeviceUpdater bluetoothDeviceUpdater) {
         mBluetoothDeviceUpdater = bluetoothDeviceUpdater;
     }
@@ -152,7 +157,8 @@ public class AvailableMediaDeviceGroupController extends BasePreferenceControlle
         }
 
         if (bluetoothProfile == BluetoothProfile.HEARING_AID) {
-            HearingAidUtils.launchHearingAidPairingDialog(mFragmentManager, activeDevice);
+            HearingAidUtils.launchHearingAidPairingDialog(mFragmentManager, activeDevice,
+                    getMetricsCategory());
         }
     }
 

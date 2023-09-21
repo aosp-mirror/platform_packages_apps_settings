@@ -40,7 +40,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.utils.ActivityControllerWrapper;
 
 import org.junit.After;
 import org.junit.Before;
@@ -65,6 +64,7 @@ import java.util.function.Consumer;
         ScreenFlashNotificationPreferenceControllerTest
                 .ShadowScreenFlashNotificationColorDialogFragment.class,
         ShadowFlashNotificationsUtils.class,
+        com.android.settings.testutils.shadow.ShadowFragment.class,
 })
 public class ScreenFlashNotificationPreferenceControllerTest {
     private static final String PREFERENCE_KEY = "preference_key";
@@ -90,10 +90,7 @@ public class ScreenFlashNotificationPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FragmentActivity fragmentActivity = (FragmentActivity) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(FragmentActivity.class)).get();
-
-
+        FragmentActivity fragmentActivity = Robolectric.setupActivity(FragmentActivity.class);
         Context context = fragmentActivity.getApplicationContext();
         ShadowScreenFlashNotificationColorDialogFragment.setInstance(mDialogFragment);
         ShadowFlashNotificationsUtils.setColorDescriptionText(COLOR_DESCRIPTION_TEXT);

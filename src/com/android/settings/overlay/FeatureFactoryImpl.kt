@@ -33,6 +33,8 @@ import com.android.settings.biometrics2.factory.BiometricsRepositoryProviderImpl
 import com.android.settings.bluetooth.BluetoothFeatureProvider
 import com.android.settings.bluetooth.BluetoothFeatureProviderImpl
 import com.android.settings.connecteddevice.dock.DockUpdaterFeatureProviderImpl
+import com.android.settings.connecteddevice.fastpair.FastPairFeatureProvider
+import com.android.settings.connecteddevice.fastpair.FastPairFeatureProviderImpl
 import com.android.settings.connecteddevice.stylus.StylusFeatureProvider
 import com.android.settings.connecteddevice.stylus.StylusFeatureProviderImpl
 import com.android.settings.core.instrumentation.SettingsMetricsFeatureProvider
@@ -171,5 +173,9 @@ open class FeatureFactoryImpl : FeatureFactory() {
 
     override val stylusFeatureProvider: StylusFeatureProvider by lazy {
         StylusFeatureProviderImpl()
+    }
+
+    override val fastPairFeatureProvider: FastPairFeatureProvider by lazy {
+        FastPairFeatureProviderImpl()
     }
 }

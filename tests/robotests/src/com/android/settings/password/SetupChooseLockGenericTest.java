@@ -44,7 +44,6 @@ import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowPasswordUtils;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.testutils.shadow.ShadowUtils;
-import com.android.settings.utils.ActivityControllerWrapper;
 
 import com.google.android.setupdesign.GlifPreferenceLayout;
 
@@ -58,9 +57,8 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.Shadows;
+import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowActivity;
 
 import java.util.List;
 
@@ -107,8 +105,7 @@ public class SetupChooseLockGenericTest {
         SetupChooseLockGeneric activity =
                 Robolectric.buildActivity(SetupChooseLockGeneric.class, intent).create().get();
 
-        ShadowActivity shadowActivity = Shadows.shadowOf(activity);
-        assertThat(shadowActivity.isFinishing()).isTrue();
+        assertThat(activity.isFinishing()).isTrue();
     }
 
     @Test
@@ -122,8 +119,7 @@ public class SetupChooseLockGenericTest {
         SetupChooseLockGeneric activity =
                 Robolectric.buildActivity(SetupChooseLockGeneric.class, intent).create().get();
 
-        ShadowActivity shadowActivity = Shadows.shadowOf(activity);
-        assertThat(shadowActivity.isFinishing()).isFalse();
+        assertThat(activity.isFinishing()).isFalse();
     }
 
     @Test
@@ -206,8 +202,8 @@ public class SetupChooseLockGenericTest {
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FACE, forFace);
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_BIOMETRICS, forBiometric);
 
-        SetupChooseLockGeneric activity = (SetupChooseLockGeneric) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(SetupChooseLockGeneric.class, intent)).get();
+        SetupChooseLockGeneric activity = ActivityController.of(
+                new SetupChooseLockGeneric(), intent).setup().get();
 
         List<Fragment> fragments = activity.getSupportFragmentManager().getFragments();
         assertThat(fragments).isNotNull();

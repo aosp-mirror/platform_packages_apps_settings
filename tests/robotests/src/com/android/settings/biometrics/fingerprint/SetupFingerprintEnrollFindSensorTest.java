@@ -31,7 +31,6 @@ import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.testutils.shadow.ShadowUtils;
-import com.android.settings.utils.ActivityControllerWrapper;
 
 import com.google.android.setupcompat.PartnerCustomizationLayout;
 import com.google.android.setupcompat.template.FooterBarMixin;
@@ -45,8 +44,10 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
+import org.robolectric.annotation.LooperMode;
 
 @RunWith(RobolectricTestRunner.class)
+@LooperMode(LooperMode.Mode.LEGACY)
 @Config(shadows = {ShadowUtils.class, ShadowAlertDialogCompat.class})
 public class SetupFingerprintEnrollFindSensorTest {
 
@@ -65,8 +66,8 @@ public class SetupFingerprintEnrollFindSensorTest {
         final Intent intent = new Intent()
                 // Set the challenge token so the confirm screen will not be shown
                 .putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, new byte[0]);
-        mActivity = (SetupFingerprintEnrollFindSensor) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(SetupFingerprintEnrollFindSensor.class, intent)).get();
+        mActivity = Robolectric.buildActivity(SetupFingerprintEnrollFindSensor.class,
+                intent).setup().get();
         mTheme = mActivity.getTheme();
     }
 

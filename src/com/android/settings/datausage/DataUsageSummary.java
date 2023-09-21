@@ -61,13 +61,6 @@ public class DataUsageSummary extends DataUsageBaseFragment implements DataUsage
 
     // Mobile data keys
     public static final String KEY_MOBILE_USAGE_TITLE = "mobile_category";
-    public static final String KEY_MOBILE_DATA_USAGE_TOGGLE = "data_usage_enable";
-    public static final String KEY_MOBILE_DATA_USAGE = "cellular_data_usage";
-    public static final String KEY_MOBILE_BILLING_CYCLE = "billing_preference";
-
-    // Wifi keys
-    public static final String KEY_WIFI_USAGE_TITLE = "wifi_category";
-    public static final String KEY_WIFI_DATA_USAGE = "wifi_data_usage";
 
     private DataUsageSummaryPreference mSummaryPreference;
     private DataUsageSummaryPreferenceController mSummaryController;
@@ -161,10 +154,9 @@ public class DataUsageSummary extends DataUsageBaseFragment implements DataUsage
             return controllers;
         }
         mSummaryController =
-                new DataUsageSummaryPreferenceController(activity, getSettingsLifecycle(), this,
+                new DataUsageSummaryPreferenceController(activity,
                         DataUsageUtils.getDefaultSubscriptionId(activity));
         controllers.add(mSummaryController);
-        getSettingsLifecycle().addObserver(mSummaryController);
         return controllers;
     }
 
@@ -191,9 +183,8 @@ public class DataUsageSummary extends DataUsageBaseFragment implements DataUsage
     private void addMobileSection(int subId, SubscriptionInfo subInfo) {
         TemplatePreferenceCategory category = (TemplatePreferenceCategory)
                 inflatePreferences(R.xml.data_usage_cellular);
-        category.setTemplate(DataUsageLib.getMobileTemplate(getContext(), subId),
-                subId, services);
-        category.pushTemplates(services);
+        category.setTemplate(DataUsageLib.getMobileTemplate(getContext(), subId), subId);
+        category.pushTemplates();
         final CharSequence displayName = SubscriptionUtil.getUniqueSubscriptionDisplayName(
                 subInfo, getContext());
         if (subInfo != null && !TextUtils.isEmpty(displayName)) {
@@ -206,15 +197,14 @@ public class DataUsageSummary extends DataUsageBaseFragment implements DataUsage
     void addWifiSection() {
         TemplatePreferenceCategory category = (TemplatePreferenceCategory)
                 inflatePreferences(R.xml.data_usage_wifi);
-        category.setTemplate(new NetworkTemplate.Builder(NetworkTemplate.MATCH_WIFI).build(),
-                0, services);
+        category.setTemplate(new NetworkTemplate.Builder(NetworkTemplate.MATCH_WIFI).build(), 0);
     }
 
     private void addEthernetSection() {
         TemplatePreferenceCategory category = (TemplatePreferenceCategory)
                 inflatePreferences(R.xml.data_usage_ethernet);
-        category.setTemplate(new NetworkTemplate.Builder(NetworkTemplate.MATCH_ETHERNET).build(),
-                0, services);
+        category.setTemplate(
+                new NetworkTemplate.Builder(NetworkTemplate.MATCH_ETHERNET).build(), 0);
     }
 
     private Preference inflatePreferences(int resId) {
@@ -267,10 +257,10 @@ public class DataUsageSummary extends DataUsageBaseFragment implements DataUsage
     private void updateState() {
         PreferenceScreen screen = getPreferenceScreen();
         for (int i = 1; i < screen.getPreferenceCount(); i++) {
-          Preference currentPreference = screen.getPreference(i);
-          if (currentPreference instanceof TemplatePreferenceCategory) {
-            ((TemplatePreferenceCategory) currentPreference).pushTemplates(services);
-          }
+            Preference currentPreference = screen.getPreference(i);
+            if (currentPreference instanceof TemplatePreferenceCategory) {
+                ((TemplatePreferenceCategory) currentPreference).pushTemplates();
+            }
         }
     }
 

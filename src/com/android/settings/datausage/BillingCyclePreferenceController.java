@@ -17,20 +17,12 @@
 package com.android.settings.datausage;
 
 import android.content.Context;
-import android.net.NetworkPolicyManager;
 import android.net.NetworkTemplate;
-import android.os.INetworkManagementService;
-import android.os.ServiceManager;
-import android.os.UserManager;
-import android.telephony.SubscriptionManager;
-import android.telephony.TelephonyManager;
 
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.datausage.DataUsageUtils;
 import com.android.settings.datausage.lib.DataUsageLib;
-import com.android.settingslib.NetworkPolicyEditor;
 
 public class BillingCyclePreferenceController extends BasePreferenceController {
     private int mSubscriptionId;
@@ -48,18 +40,9 @@ public class BillingCyclePreferenceController extends BasePreferenceController {
         super.displayPreference(screen);
         BillingCyclePreference preference = screen.findPreference(getPreferenceKey());
 
-        TemplatePreference.NetworkServices services = new TemplatePreference.NetworkServices();
-        services.mNetworkService = INetworkManagementService.Stub.asInterface(
-                ServiceManager.getService(Context.NETWORKMANAGEMENT_SERVICE));
-        services.mPolicyManager = mContext.getSystemService(NetworkPolicyManager.class);
-        services.mPolicyEditor = new NetworkPolicyEditor(services.mPolicyManager);
-        services.mTelephonyManager = mContext.getSystemService(TelephonyManager.class);
-        services.mSubscriptionManager = mContext.getSystemService(SubscriptionManager.class);
-        services.mUserManager = mContext.getSystemService(UserManager.class);
-
         NetworkTemplate template = DataUsageLib.getMobileTemplate(mContext, mSubscriptionId);
 
-        preference.setTemplate(template, mSubscriptionId, services);
+        preference.setTemplate(template, mSubscriptionId);
     }
 
     @Override

@@ -29,8 +29,6 @@ import com.android.settings.R;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
-import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
-import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.widget.LayoutPreference;
 
@@ -41,15 +39,10 @@ public class BluetoothDetailsHeaderController extends BluetoothDetailsController
     private static final String KEY_DEVICE_HEADER = "bluetooth_device_header";
 
     private EntityHeaderController mHeaderController;
-    private LocalBluetoothManager mLocalManager;
-    private CachedBluetoothDeviceManager mDeviceManager;
 
     public BluetoothDetailsHeaderController(Context context, PreferenceFragmentCompat fragment,
-            CachedBluetoothDevice device, Lifecycle lifecycle,
-            LocalBluetoothManager bluetoothManager) {
+            CachedBluetoothDevice device, Lifecycle lifecycle) {
         super(context, fragment, device, lifecycle);
-        mLocalManager = bluetoothManager;
-        mDeviceManager = mLocalManager.getCachedDeviceManager();
     }
 
     @Override
@@ -87,7 +80,7 @@ public class BluetoothDetailsHeaderController extends BluetoothDetailsController
     protected void refresh() {
         if (isAvailable()) {
             setHeaderProperties();
-            mHeaderController.done(mFragment.getActivity(), true /* rebindActions */);
+            mHeaderController.done(true /* rebindActions */);
         }
     }
 

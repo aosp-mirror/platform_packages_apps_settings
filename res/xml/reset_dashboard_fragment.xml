@@ -57,5 +57,13 @@
         settings:keywords="@string/keywords_factory_data_reset"
         settings:userRestriction="no_factory_reset"
         settings:useAdminDisabledSummary="true"
+        settings:controller="com.android.settings.system.FactoryResetPreferenceController"
+        android:fragment="com.android.settings.MainClear" />
+
+    <Preference
+        android:key="factory_reset_demo_user"
+        android:title="@string/main_clear_title"
+        settings:keywords="@string/keywords_factory_data_reset"
+        settings:controller="com.android.settings.system.FactoryResetDemoUserPreferenceController"
         android:fragment="com.android.settings.MainClear" />
 </PreferenceScreen>

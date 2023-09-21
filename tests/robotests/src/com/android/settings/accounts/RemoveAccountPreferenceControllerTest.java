@@ -35,13 +35,10 @@ import android.accounts.AuthenticatorDescription;
 import android.accounts.AuthenticatorException;
 import android.accounts.OperationCanceledException;
 import android.app.Activity;
-import android.content.ComponentName;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.UserHandle;
-import android.os.UserManager;
-import android.widget.Button;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -56,12 +53,11 @@ import com.android.settings.testutils.shadow.ShadowContentResolver;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settings.testutils.shadow.ShadowUserManager;
-import com.android.settings.utils.ActivityControllerWrapper;
+import com.android.settings.widget.RestrictedButton;
 import com.android.settingslib.widget.LayoutPreference;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -74,13 +70,12 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
         ShadowUserManager.class,
-        ShadowDevicePolicyManager.class
+        ShadowDevicePolicyManager.class,
+        ShadowFragment.class,
 })
 public class RemoveAccountPreferenceControllerTest {
 
@@ -117,8 +112,8 @@ public class RemoveAccountPreferenceControllerTest {
         when(mAccountManager.getAuthenticatorTypesAsUser(anyInt()))
                 .thenReturn(new AuthenticatorDescription[0]);
         when(mAccountManager.getAccountsAsUser(anyInt())).thenReturn(new Account[0]);
-        mController = new RemoveAccountPreferenceController((Context) ActivityControllerWrapper
-                .setup(Robolectric.buildActivity(Activity.class)).get(), mFragment);
+        mController = new RemoveAccountPreferenceController(
+                Robolectric.setupActivity(Activity.class), mFragment);
     }
 
     @After
@@ -129,7 +124,7 @@ public class RemoveAccountPreferenceControllerTest {
     @Test
     public void displayPreference_shouldAddClickListener() {
         when(mScreen.findPreference(KEY_REMOVE_ACCOUNT)).thenReturn(mPreference);
-        final Button button = mock(Button.class);
+        final RestrictedButton button = mock(RestrictedButton.class);
         when(mPreference.findViewById(R.id.button)).thenReturn(button);
 
         mController.displayPreference(mScreen);
@@ -143,32 +138,6 @@ public class RemoveAccountPreferenceControllerTest {
         mController.onClick(null);
 
         verify(mFragmentTransaction).add(
-                any(RemoveAccountPreferenceController.ConfirmRemoveAccountDialog.class),
-                eq(TAG_REMOVE_ACCOUNT_DIALOG));
-    }
-
-    @Ignore
-    @Test
-    public void onClick_modifyAccountsIsDisallowed_shouldNotStartConfirmDialog() {
-        when(mFragment.isAdded()).thenReturn(true);
-
-        final int userId = UserHandle.myUserId();
-        mController.init(new Account("test", "test"), UserHandle.of(userId));
-
-        List<UserManager.EnforcingUser> enforcingUsers = new ArrayList<>();
-        enforcingUsers.add(new UserManager.EnforcingUser(userId,
-                UserManager.RESTRICTION_SOURCE_DEVICE_OWNER));
-        ComponentName componentName = new ComponentName("test", "test");
-        // Ensure that RestrictedLockUtils.checkIfRestrictionEnforced doesn't return null.
-        ShadowUserManager.getShadow().setUserRestrictionSources(
-                UserManager.DISALLOW_MODIFY_ACCOUNTS,
-                UserHandle.of(userId),
-                enforcingUsers);
-        ShadowDevicePolicyManager.getShadow().setDeviceOwnerComponentOnAnyUser(componentName);
-
-        mController.onClick(null);
-
-        verify(mFragmentTransaction, never()).add(
                 any(RemoveAccountPreferenceController.ConfirmRemoveAccountDialog.class),
                 eq(TAG_REMOVE_ACCOUNT_DIALOG));
     }

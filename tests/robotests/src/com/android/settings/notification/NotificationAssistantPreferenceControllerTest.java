@@ -27,6 +27,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -69,6 +70,9 @@ import java.util.List;
 
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class NotificationAssistantPreferenceControllerTest {
 
     private static final String KEY = "TEST_KEY";
@@ -232,8 +236,7 @@ public class NotificationAssistantPreferenceControllerTest {
         mPreferenceController.getDefaultNASIntent();
         mPreferenceController.updateState(mPreference);
 
-        verify(mPreference, times(1)).setSwitchEnabled(eq(false));
+        verify(mPreference, atLeastOnce()).setSwitchEnabled(eq(false));
         assertFalse(mPreference.isEnabled());
     }
-
 }

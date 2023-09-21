@@ -43,11 +43,13 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.LooperMode;
 
 import java.util.Collections;
 
 
 @RunWith(RobolectricTestRunner.class)
+@LooperMode(LooperMode.Mode.LEGACY)
 public class ManagedProfileQuietModeEnablerTest {
     private static final int MANAGED_USER_ID = 10;
     private Context mContext;

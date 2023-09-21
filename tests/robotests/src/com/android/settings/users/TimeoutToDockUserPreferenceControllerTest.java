@@ -40,7 +40,6 @@ import com.android.settings.testutils.shadow.ShadowSecureSettings;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -127,7 +126,6 @@ public class TimeoutToDockUserPreferenceControllerTest {
                 BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
     }
 
-    @Ignore
     @Test
     public void getAvailabilityStatus_isCurrentlyMainUser_returnDisabledForUser() {
         when(Utils.canCurrentUserDream(mContext)).thenReturn(true);
@@ -136,7 +134,6 @@ public class TimeoutToDockUserPreferenceControllerTest {
                 BasePreferenceController.DISABLED_FOR_USER);
     }
 
-    @Ignore
     @Test
     public void getAvailabilityStatus_featureAndMultiUserEnabledAndNonMainUser_returnAvailable() {
         when(Utils.canCurrentUserDream(mContext)).thenReturn(false);

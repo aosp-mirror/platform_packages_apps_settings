@@ -45,10 +45,14 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 import java.util.Locale;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowDateFormat.class,
+})
 public class DarkModeActivationPreferenceControllerTest {
     private DarkModeActivationPreferenceController mController;
     private String mPreferenceKey = "key";

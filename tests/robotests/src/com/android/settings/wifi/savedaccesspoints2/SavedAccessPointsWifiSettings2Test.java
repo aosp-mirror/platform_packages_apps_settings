@@ -34,7 +34,6 @@ import androidx.fragment.app.FragmentTransaction;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowInteractionJankMonitor;
-import com.android.settings.utils.ActivityControllerWrapper;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import org.junit.Before;
@@ -66,8 +65,7 @@ public class SavedAccessPointsWifiSettings2Test {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
         mSettings = spy(new TestFragment());
-        mActivity = (FragmentActivity) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(FragmentActivity.class)).get();
+        mActivity = Robolectric.setupActivity(FragmentActivity.class);
 
         doReturn(mSubscribedApController).when(mSettings)
                 .use(SubscribedAccessPointsPreferenceController2.class);

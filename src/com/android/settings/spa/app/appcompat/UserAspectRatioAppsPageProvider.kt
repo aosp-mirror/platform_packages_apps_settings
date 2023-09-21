@@ -82,7 +82,7 @@ object UserAspectRatioAppsPageProvider : SettingsPageProvider {
     @VisibleForTesting
     fun EntryItem() =
         Preference(object : PreferenceModel {
-            override val title = stringResource(R.string.aspect_ratio_title)
+            override val title = stringResource(R.string.aspect_ratio_experimental_title)
             override val summary = getSummary().toState()
             override val onClick = navigator(name)
         })
@@ -104,18 +104,19 @@ fun UserAspectRatioAppList(
     = { AppList() },
 ) {
     AppListPage(
-        title = stringResource(R.string.aspect_ratio_title),
+        title = stringResource(R.string.aspect_ratio_experimental_title),
         listModel = rememberContext(::UserAspectRatioAppListModel),
         appList = appList,
         header = {
             Box(Modifier.padding(SettingsDimension.itemPadding)) {
-                SettingsBody(UserAspectRatioAppsPageProvider.getSummary())
+                SettingsBody(stringResource(R.string.aspect_ratio_main_summary, Build.MODEL))
             }
             Illustration(object : IllustrationModel {
                 override val resId = R.raw.user_aspect_ratio_education
                 override val resourceType = ResourceType.LOTTIE
             })
-        }
+        },
+        noMoreOptions = true,
     )
 }
 
@@ -215,5 +216,5 @@ class UserAspectRatioAppListModel(private val context: Context)
 private enum class SpinnerItem(val stringResId: Int) {
     Suggested(R.string.user_aspect_ratio_suggested_apps_label),
     All(R.string.filter_all_apps),
-    Overridden(R.string.user_aspect_ratio_overridden_apps_label)
+    Overridden(R.string.user_aspect_ratio_changed_apps_label)
 }

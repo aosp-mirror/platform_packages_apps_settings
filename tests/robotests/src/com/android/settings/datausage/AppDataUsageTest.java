@@ -67,7 +67,6 @@ import com.android.settingslib.net.UidDetailProvider;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -83,7 +82,6 @@ import org.robolectric.util.ReflectionHelpers;
 import java.util.ArrayList;
 import java.util.List;
 
-@Ignore
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowEntityHeaderController.class, ShadowRestrictedLockUtilsInternal.class})
 public class AppDataUsageTest {
@@ -100,7 +98,6 @@ public class AppDataUsageTest {
         MockitoAnnotations.initMocks(this);
 
         ShadowEntityHeaderController.setUseMock(mHeaderController);
-        when(mHeaderController.setRecyclerView(any(), any())).thenReturn(mHeaderController);
         when(mHeaderController.setUid(anyInt())).thenReturn(mHeaderController);
     }
 

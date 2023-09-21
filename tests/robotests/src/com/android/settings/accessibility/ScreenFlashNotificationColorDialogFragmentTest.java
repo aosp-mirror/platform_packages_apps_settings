@@ -39,20 +39,21 @@ import android.content.Intent;
 import android.graphics.Color;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.testing.FragmentScenario;
+import androidx.lifecycle.Lifecycle;
 
 import com.android.settings.R;
 import com.android.settings.testutils.FakeTimer;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.shadows.ShadowContextWrapper;
+import org.robolectric.RuntimeEnvironment;
+import org.robolectric.shadows.ShadowLooper;
 import org.robolectric.util.ReflectionHelpers;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.function.Consumer;
@@ -60,7 +61,7 @@ import java.util.function.Consumer;
 @RunWith(RobolectricTestRunner.class)
 public class ScreenFlashNotificationColorDialogFragmentTest {
 
-    private ShadowContextWrapper mShadowContextWrapper;
+    private FragmentScenario<TestScreenFlashNotificationColorDialogFragment> mFragmentScenario;
     private ScreenFlashNotificationColorDialogFragment mDialogFragment;
     private AlertDialog mAlertDialog;
     private ColorSelectorLayout mColorSelectorLayout;
@@ -68,18 +69,18 @@ public class ScreenFlashNotificationColorDialogFragmentTest {
 
     @Before
     public void setUp() {
-        FragmentActivity fragmentActivity = Robolectric.setupActivity(FragmentActivity.class);
-        mShadowContextWrapper = shadowOf(fragmentActivity);
-
         mCurrentColor = ROSE.mColorInt;
-        mDialogFragment = createFragment();
+        mFragmentScenario = FragmentScenario.launch(
+                TestScreenFlashNotificationColorDialogFragment.class,
+                /* fragmentArgs= */ null,
+                R.style.Theme_AlertDialog_SettingsLib,
+                Lifecycle.State.INITIALIZED);
+        setupFragment();
+    }
 
-        mDialogFragment.show(fragmentActivity.getSupportFragmentManager(), "test");
-
-        mAlertDialog = (AlertDialog) mDialogFragment.getDialog();
-        if (mAlertDialog != null) {
-            mColorSelectorLayout = mAlertDialog.findViewById(R.id.color_selector_preference);
-        }
+    @After
+    public void cleanUp() {
+        mFragmentScenario.close();
     }
 
     @Test
@@ -125,7 +126,8 @@ public class ScreenFlashNotificationColorDialogFragmentTest {
     public void clickNeutralAndPause_assertStopPreview() {
         performClickOnDialog(BUTTON_NEUTRAL);
         getTimerFromFragment().runOneTask();
-        mDialogFragment.onPause();
+        // move the state from RESUMED to CREATED to make fragment's onPause() to be called
+        mFragmentScenario.moveToState(Lifecycle.State.CREATED);
 
         assertStopPreview();
     }
@@ -188,23 +190,32 @@ public class ScreenFlashNotificationColorDialogFragmentTest {
 
     private void performClickOnDialog(int whichButton) {
         mAlertDialog.getButton(whichButton).performClick();
+        ShadowLooper.runUiThreadTasksIncludingDelayedTasks();
     }
 
     private Intent getLastCapturedIntent() {
-        final List<Intent> capturedIntents = new ArrayList<>(
-                mShadowContextWrapper.getBroadcastIntents());
+        final List<Intent> capturedIntents =
+                shadowOf(RuntimeEnvironment.getApplication()).getBroadcastIntents();
         final int size = capturedIntents.size();
         return capturedIntents.get(size - 1);
     }
 
-    private ScreenFlashNotificationColorDialogFragment createFragment() {
-        ScreenFlashNotificationColorDialogFragmentWithFakeTimer fragment =
-                new ScreenFlashNotificationColorDialogFragmentWithFakeTimer();
-        ReflectionHelpers.setField(fragment, "mCurrentColor", mCurrentColor);
-        ReflectionHelpers.setField(fragment, "mConsumer",
-                (Consumer<Integer>) selectedColor -> mCurrentColor = selectedColor);
+    private void setupFragment() {
+        mFragmentScenario.onFragment(fragment -> {
+            ReflectionHelpers.setField(fragment, "mCurrentColor", mCurrentColor);
+            ReflectionHelpers.setField(fragment, "mConsumer",
+                    (Consumer<Integer>) selectedColor -> mCurrentColor = selectedColor);
+        });
+        mFragmentScenario.moveToState(Lifecycle.State.RESUMED);
 
-        return fragment;
+        mFragmentScenario.onFragment(fragment -> {
+            assertThat(fragment.getDialog()).isNotNull();
+            assertThat(fragment.requireDialog().isShowing()).isTrue();
+            assertThat(fragment.requireDialog()).isInstanceOf(AlertDialog.class);
+            mAlertDialog = (AlertDialog) fragment.requireDialog();
+            mDialogFragment = fragment;
+            mColorSelectorLayout = mAlertDialog.findViewById(R.id.color_selector_preference);
+        });
     }
 
     private FakeTimer getTimerFromFragment() {
@@ -230,7 +241,7 @@ public class ScreenFlashNotificationColorDialogFragmentTest {
      * A {@link ScreenFlashNotificationColorDialogFragment} that uses a fake timer so that it won't
      * create unmanageable timer threads during test.
      */
-    public static class ScreenFlashNotificationColorDialogFragmentWithFakeTimer extends
+    public static class TestScreenFlashNotificationColorDialogFragment extends
             ScreenFlashNotificationColorDialogFragment {
 
         @Override

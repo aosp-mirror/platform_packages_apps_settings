@@ -18,11 +18,6 @@ package com.android.settings.inputmethod;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.verify;
-
-import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.UserHandle;
 import android.provider.Settings;
@@ -31,33 +26,29 @@ import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnit;
-import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 /** Tests for {@link TrackpadBottomPreferenceController} */
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowSystemSettings.class,
+})
 public class TrackpadBottomPreferenceControllerTest {
-    @Rule
-    public MockitoRule rule = MockitoJUnit.rule();
 
     private static final String PREFERENCE_KEY = "trackpad_bottom_right_tap";
     private static final String SETTING_KEY = Settings.System.TOUCHPAD_RIGHT_CLICK_ZONE;
 
     private Context mContext;
     private TrackpadBottomPreferenceController mController;
-    private FakeFeatureFactory mFeatureFactory;
 
     @Before
     public void setUp() {
         mContext = ApplicationProvider.getApplicationContext();
-        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mController = new TrackpadBottomPreferenceController(mContext, PREFERENCE_KEY);
     }
 
@@ -83,10 +74,6 @@ public class TrackpadBottomPreferenceControllerTest {
                 UserHandle.USER_CURRENT);
 
         assertThat(result).isEqualTo(1);
-        verify(mFeatureFactory.metricsFeatureProvider).action(
-                any(),
-                eq(SettingsEnums.ACTION_GESTURE_BOTTOM_RIGHT_TAP_CHANGED),
-                eq(true));
     }
 
     @Test
@@ -100,10 +87,6 @@ public class TrackpadBottomPreferenceControllerTest {
                 UserHandle.USER_CURRENT);
 
         assertThat(result).isEqualTo(0);
-        verify(mFeatureFactory.metricsFeatureProvider).action(
-                any(),
-                eq(SettingsEnums.ACTION_GESTURE_BOTTOM_RIGHT_TAP_CHANGED),
-                eq(false));
     }
 
     @Test

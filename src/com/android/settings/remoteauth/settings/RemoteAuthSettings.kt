@@ -20,9 +20,11 @@ import android.os.Bundle
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.settings.R
@@ -30,15 +32,14 @@ import kotlinx.coroutines.launch
 
 class RemoteAuthSettings : Fragment(R.layout.remote_auth_settings) {
 
-    // TODO(b/293906345): Scope viewModel to navigation graph when implementing navigation.
-    val viewModel = RemoteAuthSettingsViewModel()
+    val viewModel: RemoteAuthSettingsViewModel by viewModels()
     private val adapter = RemoteAuthSettingsRecyclerViewAdapter()
     private val recyclerView by lazy {
-        view!!.findViewById<RecyclerView>(R.id.registered_authenticator_list)
+        view!!.requireViewById<RecyclerView>(R.id.registered_authenticator_list)
     }
 
     private val addAuthenticatorLayout by lazy {
-        view!!.findViewById<ConstraintLayout>(R.id.add_authenticator_layout)
+        view!!.requireViewById<ConstraintLayout>(R.id.add_authenticator_layout)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -46,6 +47,11 @@ class RemoteAuthSettings : Fragment(R.layout.remote_auth_settings) {
 
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = adapter
+
+        // Add new remote authenticator click listener
+        addAuthenticatorLayout.setOnClickListener {
+            findNavController(this).navigate(R.id.action_settings_to_introduction)
+        }
 
         // Collect UIState and update UI on changes.
         lifecycleScope.launch {
@@ -55,10 +61,7 @@ class RemoteAuthSettings : Fragment(R.layout.remote_auth_settings) {
                 }
             }
         }
-        // Add new remote authenticator click listener
-        addAuthenticatorLayout.setOnClickListener {
-            // TODO(b/293906345): Wire up navigation
-        }
+
     }
 
     private fun updateUi(uiState: RemoteAuthSettingsUiState) {

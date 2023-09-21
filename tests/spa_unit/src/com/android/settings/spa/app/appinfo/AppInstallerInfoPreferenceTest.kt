@@ -30,7 +30,6 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
-import androidx.compose.ui.test.printToLog
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.dx.mockito.inline.extended.ExtendedMockito.mockitoSession
@@ -38,6 +37,7 @@ import com.android.settings.R
 import com.android.settings.Utils
 import com.android.settings.applications.AppStoreUtil
 import com.android.settingslib.applications.AppUtils
+import com.android.settingslib.spa.testutils.delay
 import com.android.settingslib.spa.testutils.waitUntilExists
 import com.android.settingslib.spaprivileged.model.app.userHandle
 import org.junit.After
@@ -45,13 +45,13 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mockito.any
-import org.mockito.Mockito.eq
-import org.mockito.Mockito.verify
 import org.mockito.MockitoSession
 import org.mockito.Spy
+import org.mockito.kotlin.any
+import org.mockito.kotlin.eq
+import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 import org.mockito.quality.Strictness
-import org.mockito.Mockito.`when` as whenever
 
 @RunWith(AndroidJUnit4::class)
 class AppInstallerInfoPreferenceTest {
@@ -136,7 +136,6 @@ class AppInstallerInfoPreferenceTest {
         setContent(instantApp)
         waitUntilDisplayed()
 
-        composeTestRule.onRoot().printToLog("AAA")
         composeTestRule.onNodeWithText("More info on installer label")
             .assertIsDisplayed()
             .assertIsEnabled()
@@ -147,7 +146,6 @@ class AppInstallerInfoPreferenceTest {
         setContent()
         waitUntilDisplayed()
 
-        composeTestRule.onRoot().printToLog("AAA")
         composeTestRule.onNodeWithText("App installed from installer label")
             .assertIsDisplayed()
             .assertIsEnabled()
@@ -158,6 +156,7 @@ class AppInstallerInfoPreferenceTest {
         setContent()
         waitUntilDisplayed()
         composeTestRule.onRoot().performClick()
+        composeTestRule.delay()
 
         verify(context).startActivityAsUser(STORE_LINK, APP.userHandle)
     }

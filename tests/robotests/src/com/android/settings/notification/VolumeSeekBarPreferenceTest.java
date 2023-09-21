@@ -116,6 +116,7 @@ public class VolumeSeekBarPreferenceTest {
         when(mPreference.isEnabled()).thenReturn(true);
         doCallRealMethod().when(mPreference).init();
 
+        mPreference.setStream(STREAM);
         mPreference.init();
 
         verify(mPreference, never()).updateContentDescription(CONTENT_DESCRIPTION);
@@ -136,6 +137,7 @@ public class VolumeSeekBarPreferenceTest {
     @Test
     public void init_changeProgress_overrideStateDescriptionCalled() {
         final int progress = 4;
+        when(mPreference.isEnabled()).thenReturn(true);
         when(mPreference.formatStateDescription(progress)).thenReturn(CONTENT_DESCRIPTION);
         doCallRealMethod().when(mPreference).init();
 
@@ -157,6 +159,7 @@ public class VolumeSeekBarPreferenceTest {
         when(mAudioManager.getStreamMaxVolume(STREAM)).thenReturn(max);
         when(mAudioManager.getStreamMinVolumeInt(STREAM)).thenReturn(min);
         when(mAudioManager.getStreamVolume(STREAM)).thenReturn(progress);
+        when(mPreference.isEnabled()).thenReturn(true);
         when(mPreference.getMin()).thenReturn(min);
         when(mPreference.getMax()).thenReturn(max);
         when(mPreference.getContext()).thenReturn(mContext);
@@ -167,6 +170,8 @@ public class VolumeSeekBarPreferenceTest {
 
         mPreference.setStream(STREAM);
         mPreference.init();
+
+        verify(mSeekBarVolumizerFactory).create(eq(STREAM), eq(null), mSbvc.capture());
 
         // On progress change, Round down the percent to match it with what the talkback says.
         // (b/285458191)

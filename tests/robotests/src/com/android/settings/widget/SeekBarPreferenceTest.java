@@ -39,7 +39,6 @@ import com.android.settings.testutils.shadow.ShadowInteractionJankMonitor;
 import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -49,7 +48,6 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.androidx.fragment.FragmentController;
 
-@Ignore
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowRestrictedLockUtilsInternal.class, ShadowInteractionJankMonitor.class})
 public class SeekBarPreferenceTest {
@@ -102,7 +100,6 @@ public class SeekBarPreferenceTest {
         assertThat(mSeekBarPreference.isSelectable()).isTrue();
     }
 
-    @Ignore
     @Test
     @Config(qualifiers = "mcc998")
     public void isSelectable_default_returnFalse() {

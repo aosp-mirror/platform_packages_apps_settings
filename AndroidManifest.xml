@@ -36,7 +36,7 @@
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED" />
     <uses-permission android:name="android.permission.QUERY_AUDIO_STATE" />
     <uses-permission android:name="android.permission.MASTER_CLEAR" />
-    <uses-permission android:name="com.google.android.googleapps.permission.GOOGLE_AUTH" />
+    <uses-permission android:name="com.google.android.googleapps.permission.GOOGLE_AUTH" android:maxSdkVersion="34"/>
     <uses-permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.WRITE_CONTACTS" />
@@ -645,6 +645,7 @@
         <activity android:name="Settings$FaceSettingsActivity"
             android:label="@string/security_settings_face_preference_title"
             android:exported="true"
+            android:theme="@style/Theme.Settings.NoActionBar"
             android:icon="@drawable/ic_face_header">
             <intent-filter>
                 <action android:name="android.settings.FACE_SETTINGS" />
@@ -659,6 +660,7 @@
         <activity android:name="Settings$FaceSettingsInternalActivity"
                   android:label="@string/security_settings_face_preference_title"
                   android:exported="false"
+                  android:theme="@style/Theme.Settings.NoActionBar"
                   android:icon="@drawable/ic_face_header"
                   android:taskAffinity="com.android.settings.root">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -1575,6 +1577,20 @@
                 android:value="com.android.settings.applications.manageapplications.ManageApplications" />
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
                 android:value="@string/menu_key_apps"/>
+        </activity>
+
+        <activity android:name="Settings$UserAspectRatioAppActivity"
+                  android:exported="true"
+                  android:label="@string/aspect_ratio_title">
+            <intent-filter>
+                <action android:name="android.settings.MANAGE_USER_ASPECT_RATIO_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="package" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.applications.appcompat.UserAspectRatioDetails" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_apps"/>
         </activity>
 
         <activity
@@ -2567,7 +2583,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".biometrics.fingerprint2.enrollment.ui.activity.FingerprintEnrollmentV2Activity"
+
+        <activity android:name=".biometrics.fingerprint2.ui.enrollment.activity.FingerprintEnrollmentV2Activity"
             android:exported="true"
             android:permission="android.permission.MANAGE_FINGERPRINT"
             android:theme="@style/GlifTheme.Light">
@@ -2608,6 +2625,18 @@
         </activity-alias>
 
         <activity android:name=".biometrics.activeunlock.ActiveUnlockRequireBiometricSetup" android:exported="false"/>
+
+        <activity android:name=".remoteauth.RemoteAuthActivity"
+                  android:exported="true">
+            <intent-filter>
+                <action android:name="android.settings.REMOTE_AUTHENTICATOR_ENROLL" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".remoteauth.RemoteAuthActivityInternal"
+                  android:exported="false"
+                  android:taskAffinity="com.android.settings.root" />
 
         <!-- Note this must not be exported since it returns the password in the intent -->
         <activity android:name=".password.ConfirmLockPattern$InternalActivity"
@@ -2794,6 +2823,8 @@
         <receiver android:name=".deviceinfo.StorageUnmountReceiver"
                 android:exported="true"
                 android:permission="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+
+        <receiver android:name=".localepicker.NotificationCancelReceiver" />
 
         <activity android:name="Settings$ApnEditorActivity"
                 android:configChanges="orientation|keyboardHidden|screenSize"
@@ -3284,6 +3315,7 @@
             android:name="Settings$DataUsageSummaryActivity"
             android:label="@string/data_usage_summary_title"
             android:exported="true"
+            android:enabled="@bool/config_show_sim_info"
             android:icon="@drawable/ic_homepage_data_usage">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.DATA_USAGE_SETTINGS" />
@@ -4389,20 +4421,6 @@
         </service>
 
         <service
-            android:name=".development.qstile.DevelopmentTiles$WinscopeTrace"
-            android:label="@string/winscope_trace_quick_settings_title"
-            android:icon="@drawable/tile_icon_winscope_trace"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
-            android:exported="true"
-            android:enabled="false">
-            <intent-filter>
-                <action android:name="android.service.quicksettings.action.QS_TILE" />
-            </intent-filter>
-            <meta-data android:name="android.service.quicksettings.TOGGLEABLE_TILE"
-                       android:value="true"/>
-        </service>
-
-        <service
             android:name=".development.qstile.DevelopmentTiles$SensorsOff"
             android:label="@string/sensors_off_quick_settings_title"
             android:icon="@drawable/tile_icon_sensors_off"
@@ -4442,22 +4460,6 @@
             </intent-filter>
             <meta-data android:name="android.service.quicksettings.TOGGLEABLE_TILE"
                        android:value="true"/>
-        </service>
-
-        <service
-            android:name=".development.qstile.DevelopmentTiles$DesktopMode"
-            android:label="@string/desktop_mode"
-            android:icon="@drawable/tile_icon_desktop_mode"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
-            android:exported="true"
-            android:enabled="false">
-            <intent-filter>
-                <action android:name="android.service.quicksettings.action.QS_TILE" />
-            </intent-filter>
-            <meta-data android:name="android.service.quicksettings.TOGGLEABLE_TILE"
-                android:value="true"/>
-            <meta-data android:name="com.android.settings.development.qstile.REQUIRES_SYSTEM_PROPERTY"
-                       android:value="persist.wm.debug.desktop_mode" />
         </service>
 
         <activity
@@ -4942,7 +4944,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.biometrics.fingerprint2.ui.fragment.FingerprintSettingsV2Fragment" />
+                android:value="com.android.settings.biometrics.fingerprint2.ui.settings.fragment.FingerprintSettingsV2Fragment" />
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
                 android:value="@string/menu_key_security"/>
         </activity>

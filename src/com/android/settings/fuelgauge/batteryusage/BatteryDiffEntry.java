@@ -15,7 +15,6 @@
  */
 package com.android.settings.fuelgauge.batteryusage;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -24,6 +23,7 @@ import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Log;
+import android.util.Pair;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -45,12 +45,29 @@ public class BatteryDiffEntry {
     static final Map<String, BatteryEntry.NameAndIcon> sResourceCache = new HashMap<>();
     // Whether a specific item is valid to launch restriction page?
     @VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
-    public static final Map<String, Boolean> sValidForRestriction = new HashMap<>();
-
+    static final Map<String, Boolean> sValidForRestriction = new HashMap<>();
     /** A comparator for {@link BatteryDiffEntry} based on the sorting key. */
-    public static final Comparator<BatteryDiffEntry> COMPARATOR =
+    static final Comparator<BatteryDiffEntry> COMPARATOR =
             (a, b) -> Double.compare(b.getSortingKey(), a.getSortingKey());
+    static final String SYSTEM_APPS_KEY = "A|SystemApps";
+    static final String OTHERS_KEY = "S|Others";
 
+    // key -> (label_id, icon_id)
+    private static final Map<String, Pair<Integer, Integer>> SPECIAL_ENTRY_MAP = Map.of(
+            SYSTEM_APPS_KEY,
+            Pair.create(R.string.battery_usage_system_apps, R.drawable.ic_power_system),
+            OTHERS_KEY,
+            Pair.create(R.string.battery_usage_others,
+                    R.drawable.ic_settings_battery_usage_others));
+
+    public long mUid;
+    public long mUserId;
+    public String mKey;
+    public boolean mIsHidden;
+    public int mComponentId;
+    public String mLegacyPackageName;
+    public String mLegacyLabel;
+    public int mConsumerType;
     public long mForegroundUsageTimeInMs;
     public long mBackgroundUsageTimeInMs;
     public long mScreenOnTimeInMs;
@@ -59,8 +76,6 @@ public class BatteryDiffEntry {
     public double mForegroundServiceUsageConsumePower;
     public double mBackgroundUsageConsumePower;
     public double mCachedUsageConsumePower;
-    // A BatteryHistEntry corresponding to this diff usage data.
-    public final BatteryHistEntry mBatteryHistEntry;
 
     protected Context mContext;
 
@@ -83,6 +98,14 @@ public class BatteryDiffEntry {
 
     public BatteryDiffEntry(
             Context context,
+            long uid,
+            long userId,
+            String key,
+            boolean isHidden,
+            int componentId,
+            String legacyPackageName,
+            String legacyLabel,
+            int consumerType,
             long foregroundUsageTimeInMs,
             long backgroundUsageTimeInMs,
             long screenOnTimeInMs,
@@ -90,19 +113,34 @@ public class BatteryDiffEntry {
             double foregroundUsageConsumePower,
             double foregroundServiceUsageConsumePower,
             double backgroundUsageConsumePower,
-            double cachedUsageConsumePower,
-            BatteryHistEntry batteryHistEntry) {
+            double cachedUsageConsumePower) {
         mContext = context;
+        mUid = uid;
+        mUserId = userId;
+        mKey = key;
+        mIsHidden = isHidden;
+        mComponentId = componentId;
+        mLegacyPackageName = legacyPackageName;
+        mLegacyLabel = legacyLabel;
+        mConsumerType = consumerType;
+        mForegroundUsageTimeInMs = foregroundUsageTimeInMs;
+        mBackgroundUsageTimeInMs = backgroundUsageTimeInMs;
+        mScreenOnTimeInMs = screenOnTimeInMs;
         mConsumePower = consumePower;
         mForegroundUsageConsumePower = foregroundUsageConsumePower;
         mForegroundServiceUsageConsumePower = foregroundServiceUsageConsumePower;
         mBackgroundUsageConsumePower = backgroundUsageConsumePower;
         mCachedUsageConsumePower = cachedUsageConsumePower;
-        mForegroundUsageTimeInMs = foregroundUsageTimeInMs;
-        mBackgroundUsageTimeInMs = backgroundUsageTimeInMs;
-        mScreenOnTimeInMs = screenOnTimeInMs;
-        mBatteryHistEntry = batteryHistEntry;
         mUserManager = context.getSystemService(UserManager.class);
+    }
+
+    public BatteryDiffEntry(Context context, String key, String legacyLabel, int consumerType) {
+        this(context, /*uid=*/ 0, /*userId=*/ 0, key, /*isHidden=*/ false, /*componentId=*/ -1,
+                /*legacyPackageName=*/ null, legacyLabel, consumerType,
+                /*foregroundUsageTimeInMs=*/ 0, /*backgroundUsageTimeInMs=*/ 0,
+                /*screenOnTimeInMs=*/ 0, /*consumePower=*/ 0, /*foregroundUsageConsumePower=*/ 0,
+                /*foregroundServiceUsageConsumePower=*/ 0, /*backgroundUsageConsumePower=*/ 0,
+                /*cachedUsageConsumePower=*/ 0);
     }
 
     /** Sets the total consumed power in a specific time slot. */
@@ -135,13 +173,22 @@ public class BatteryDiffEntry {
 
     /** Gets the key for sorting */
     public double getSortingKey() {
-        return getPercentage() + getAdjustPercentageOffset();
+        return getKey() != null && SPECIAL_ENTRY_MAP.containsKey(getKey())
+                ? -1 : getPercentage() + getAdjustPercentageOffset();
     }
 
     /** Clones a new instance. */
     public BatteryDiffEntry clone() {
         return new BatteryDiffEntry(
                 this.mContext,
+                this.mUid,
+                this.mUserId,
+                this.mKey,
+                this.mIsHidden,
+                this.mComponentId,
+                this.mLegacyPackageName,
+                this.mLegacyLabel,
+                this.mConsumerType,
                 this.mForegroundUsageTimeInMs,
                 this.mBackgroundUsageTimeInMs,
                 this.mScreenOnTimeInMs,
@@ -149,17 +196,14 @@ public class BatteryDiffEntry {
                 this.mForegroundUsageConsumePower,
                 this.mForegroundServiceUsageConsumePower,
                 this.mBackgroundUsageConsumePower,
-                this.mCachedUsageConsumePower,
-                this.mBatteryHistEntry /*same instance*/);
+                this.mCachedUsageConsumePower);
     }
 
     /** Gets the app label name for this entry. */
     public String getAppLabel() {
         loadLabelAndIcon();
-        // Returns default applicationn label if we cannot find it.
-        return mAppLabel == null || mAppLabel.length() == 0
-                ? mBatteryHistEntry.mAppLabel
-                : mAppLabel;
+        // Returns default application label if we cannot find it.
+        return mAppLabel == null || mAppLabel.length() == 0 ? mLegacyLabel : mAppLabel;
     }
 
     /** Gets the app icon {@link Drawable} for this entry. */
@@ -179,7 +223,7 @@ public class BatteryDiffEntry {
     /** Gets the searching package name for UID battery type. */
     public String getPackageName() {
         final String packageName = mDefaultPackageName != null
-                ? mDefaultPackageName : mBatteryHistEntry.mPackageName;
+                ? mDefaultPackageName : mLegacyPackageName;
         if (packageName == null) {
             return packageName;
         }
@@ -198,10 +242,10 @@ public class BatteryDiffEntry {
 
     /** Whether the current BatteryDiffEntry is system component or not. */
     public boolean isSystemEntry() {
-        if (mBatteryHistEntry.mIsHidden) {
+        if (mIsHidden) {
             return false;
         }
-        switch (mBatteryHistEntry.mConsumerType) {
+        switch (mConsumerType) {
             case ConvertUtils.CONSUMER_TYPE_USER_BATTERY:
             case ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY:
                 return true;
@@ -236,12 +280,22 @@ public class BatteryDiffEntry {
         updateRestrictionFlagState();
         sValidForRestriction.put(getKey(), Boolean.valueOf(mValidForRestriction));
 
+        if (getKey() != null && SPECIAL_ENTRY_MAP.containsKey(getKey())) {
+            Pair<Integer, Integer> pair = SPECIAL_ENTRY_MAP.get(getKey());
+            mAppLabel = mContext.getString(pair.first);
+            mAppIconId = pair.second;
+            mAppIcon = mContext.getDrawable(mAppIconId);
+            sResourceCache.put(
+                    getKey(),
+                    new BatteryEntry.NameAndIcon(mAppLabel, mAppIcon, mAppIconId));
+            return;
+        }
+
         // Loads application icon and label based on consumer type.
-        switch (mBatteryHistEntry.mConsumerType) {
+        switch (mConsumerType) {
             case ConvertUtils.CONSUMER_TYPE_USER_BATTERY:
                 final BatteryEntry.NameAndIcon nameAndIconForUser =
-                        BatteryEntry.getNameAndIconFromUserId(
-                                mContext, (int) mBatteryHistEntry.mUserId);
+                        BatteryEntry.getNameAndIconFromUserId(mContext, (int) mUserId);
                 if (nameAndIconForUser != null) {
                     mAppIcon = nameAndIconForUser.mIcon;
                     mAppLabel = nameAndIconForUser.mName;
@@ -252,8 +306,7 @@ public class BatteryDiffEntry {
                 break;
             case ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY:
                 final BatteryEntry.NameAndIcon nameAndIconForSystem =
-                        BatteryEntry.getNameAndIconFromPowerComponent(
-                                mContext, mBatteryHistEntry.mDrainType);
+                        BatteryEntry.getNameAndIconFromPowerComponent(mContext, mComponentId);
                 if (nameAndIconForSystem != null) {
                     mAppLabel = nameAndIconForSystem.mName;
                     if (nameAndIconForSystem.mIconId != 0) {
@@ -283,12 +336,12 @@ public class BatteryDiffEntry {
     }
 
     String getKey() {
-        return mBatteryHistEntry.getKey();
+        return mKey;
     }
 
     @VisibleForTesting
     void updateRestrictionFlagState() {
-        if (!mBatteryHistEntry.isAppEntry()) {
+        if (isSystemEntry()) {
             mValidForRestriction = false;
             return;
         }
@@ -348,7 +401,7 @@ public class BatteryDiffEntry {
             return;
         }
 
-        final int uid = (int) mBatteryHistEntry.mUid;
+        final int uid = (int) mUid;
         final String[] packages = packageManager.getPackagesForUid(uid);
         // Loads special defined application label and icon if available.
         if (packages == null || packages.length == 0) {
@@ -394,8 +447,7 @@ public class BatteryDiffEntry {
                         StringUtil.formatElapsedTime(mContext, (double) mScreenOnTimeInMs,
                                 /*withSeconds=*/ true, /*collapseTimeUnit=*/ false)))
                 .append(String.format("\n\tpackage:%s|%s uid:%d userId:%d",
-                        mBatteryHistEntry.mPackageName, getPackageName(),
-                        mBatteryHistEntry.mUid, mBatteryHistEntry.mUserId));
+                        mLegacyPackageName, getPackageName(), mUid, mUserId));
         return builder.toString();
     }
 
@@ -406,130 +458,8 @@ public class BatteryDiffEntry {
     }
 
     private Drawable getBadgeIconForUser(Drawable icon) {
-        final int userId = UserHandle.getUserId((int) mBatteryHistEntry.mUid);
+        final int userId = UserHandle.getUserId((int) mUid);
         return userId == UserHandle.USER_OWNER ? icon :
                 mUserManager.getBadgedIconForUser(icon, new UserHandle(userId));
-    }
-
-    /** Specific battery diff entry for system apps. */
-    static class SystemAppsBatteryDiffEntry extends BatteryDiffEntry {
-        SystemAppsBatteryDiffEntry(Context context) {
-            super(context,
-                    /*foregroundUsageTimeInMs=*/ 0,
-                    /*backgroundUsageTimeInMs=*/ 0,
-                    /*screenOnTimeInMs=*/ 0,
-                    /*consumePower=*/ 0,
-                    /*foregroundUsageConsumePower=*/ 0,
-                    /*foregroundServiceUsageConsumePower=*/ 0,
-                    /*backgroundUsageConsumePower=*/ 0,
-                    /*cachedUsageConsumePower=*/ 0,
-                    new BatteryHistEntry(new ContentValues()));
-        }
-
-        @Override
-        public String getKey() {
-            return "A|SystemApps";
-        }
-
-        @Override
-        public String getAppLabel() {
-            return mContext.getString(R.string.battery_usage_system_apps);
-        }
-
-        @Override
-        public Drawable getAppIcon() {
-            return mContext.getDrawable(R.drawable.ic_power_system);
-        }
-
-        @Override
-        public boolean validForRestriction() {
-            return false;
-        }
-
-        @Override
-        public boolean isSystemEntry() {
-            return false;
-        }
-
-        @Override
-        public double getSortingKey() {
-            // Always on the bottom of the app list.
-            return -1;
-        }
-
-        @Override
-        public BatteryDiffEntry clone() {
-            SystemAppsBatteryDiffEntry newEntry = new SystemAppsBatteryDiffEntry(this.mContext);
-            newEntry.mForegroundUsageTimeInMs = this.mForegroundUsageTimeInMs;
-            newEntry.mBackgroundUsageTimeInMs = this.mBackgroundUsageTimeInMs;
-            newEntry.mScreenOnTimeInMs = this.mScreenOnTimeInMs;
-            newEntry.mConsumePower = this.mConsumePower;
-            newEntry.mForegroundUsageConsumePower = this.mForegroundUsageConsumePower;
-            newEntry.mForegroundServiceUsageConsumePower = this.mForegroundServiceUsageConsumePower;
-            newEntry.mBackgroundUsageConsumePower = this.mBackgroundUsageConsumePower;
-            newEntry.mCachedUsageConsumePower = this.mCachedUsageConsumePower;
-            return newEntry;
-        }
-    }
-
-    /** Specific battery diff entry for others. */
-    static class OthersBatteryDiffEntry extends BatteryDiffEntry {
-        OthersBatteryDiffEntry(Context context) {
-            super(context,
-                    /*foregroundUsageTimeInMs=*/ 0,
-                    /*backgroundUsageTimeInMs=*/ 0,
-                    /*screenOnTimeInMs=*/ 0,
-                    /*consumePower=*/ 0,
-                    /*foregroundUsageConsumePower=*/ 0,
-                    /*foregroundServiceUsageConsumePower=*/ 0,
-                    /*backgroundUsageConsumePower=*/ 0,
-                    /*cachedUsageConsumePower=*/ 0,
-                    new BatteryHistEntry(new ContentValues()));
-        }
-
-        @Override
-        public String getKey() {
-            return "S|Others";
-        }
-
-        @Override
-        public String getAppLabel() {
-            return mContext.getString(R.string.battery_usage_others);
-        }
-
-        @Override
-        public Drawable getAppIcon() {
-            return mContext.getDrawable(R.drawable.ic_settings_battery_usage_others);
-        }
-
-        @Override
-        public boolean validForRestriction() {
-            return false;
-        }
-
-        @Override
-        public boolean isSystemEntry() {
-            return true;
-        }
-
-        @Override
-        public double getSortingKey() {
-            // Always on the bottom of the system list.
-            return -1;
-        }
-
-        @Override
-        public BatteryDiffEntry clone() {
-            OthersBatteryDiffEntry newEntry = new OthersBatteryDiffEntry(this.mContext);
-            newEntry.mForegroundUsageTimeInMs = this.mForegroundUsageTimeInMs;
-            newEntry.mBackgroundUsageTimeInMs = this.mBackgroundUsageTimeInMs;
-            newEntry.mScreenOnTimeInMs = this.mScreenOnTimeInMs;
-            newEntry.mConsumePower = this.mConsumePower;
-            newEntry.mForegroundUsageConsumePower = this.mForegroundUsageConsumePower;
-            newEntry.mForegroundServiceUsageConsumePower = this.mForegroundServiceUsageConsumePower;
-            newEntry.mBackgroundUsageConsumePower = this.mBackgroundUsageConsumePower;
-            newEntry.mCachedUsageConsumePower = this.mCachedUsageConsumePower;
-            return newEntry;
-        }
     }
 }

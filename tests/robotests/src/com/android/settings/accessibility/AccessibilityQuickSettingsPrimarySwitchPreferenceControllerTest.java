@@ -53,6 +53,7 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
+import org.robolectric.annotation.LooperMode;
 import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowApplication;
 
@@ -60,6 +61,7 @@ import org.robolectric.shadows.ShadowApplication;
  * Tests for {@link AccessibilityQuickSettingsPrimarySwitchPreferenceController}.
  */
 @RunWith(RobolectricTestRunner.class)
+@LooperMode(LooperMode.Mode.LEGACY)
 public class AccessibilityQuickSettingsPrimarySwitchPreferenceControllerTest {
 
     private static final String PLACEHOLDER_PACKAGE_NAME = "com.placeholder.example";

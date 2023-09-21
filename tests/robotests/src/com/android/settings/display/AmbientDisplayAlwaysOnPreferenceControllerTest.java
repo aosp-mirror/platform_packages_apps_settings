@@ -36,7 +36,6 @@ import com.android.internal.R;
 import com.android.settings.testutils.shadow.ShadowSecureSettings;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -133,25 +132,23 @@ public class AmbientDisplayAlwaysOnPreferenceControllerTest {
     }
 
     @Test
-    public void isSliceableCorrectKey_returnsTrue() {
+    public void isPublicSliceCorrectKey_returnsTrue() {
         final AmbientDisplayAlwaysOnPreferenceController controller =
                 new AmbientDisplayAlwaysOnPreferenceController(mContext,
                         "ambient_display_always_on");
-        assertThat(controller.isSliceable()).isTrue();
+        assertThat(controller.isPublicSlice()).isTrue();
     }
 
-    @Ignore
     @Test
-    public void isSliceableIncorrectKey_returnsFalse() {
+    public void isPublicSliceIncorrectKey_returnsFalse() {
         final AmbientDisplayAlwaysOnPreferenceController controller =
                 new AmbientDisplayAlwaysOnPreferenceController(mContext, "bad_key");
-        assertThat(controller.isSliceable()).isFalse();
+        assertThat(controller.isPublicSlice()).isFalse();
     }
 
-    @Ignore
     @Test
-    public void isPublicSlice_returnTrue() {
-        assertThat(mController.isPublicSlice()).isTrue();
+    public void isSliceable_returnTrue() {
+        assertThat(mController.isSliceable()).isTrue();
     }
 
     @Test

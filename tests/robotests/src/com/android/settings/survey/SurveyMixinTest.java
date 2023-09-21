@@ -11,7 +11,6 @@ import androidx.fragment.app.FragmentActivity;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.overlay.SurveyFeatureProvider;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.utils.ActivityControllerWrapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -43,8 +42,7 @@ public class SurveyMixinTest {
     @Test
     public void onResume_noActionIfActivityDoesNotExist() {
         // Pretend we are an activity that is starting up
-        FragmentActivity temp  = (FragmentActivity) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(FragmentActivity.class)).get();
+        FragmentActivity temp = Robolectric.setupActivity(FragmentActivity.class);
         when(mFragment.getActivity()).thenReturn(null);
         SurveyMixin mixin = new SurveyMixin(mFragment, FAKE_KEY);
         mixin.onResume();

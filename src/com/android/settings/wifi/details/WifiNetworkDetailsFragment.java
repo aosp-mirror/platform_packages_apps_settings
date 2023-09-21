@@ -15,14 +15,19 @@
  */
 package com.android.settings.wifi.details;
 
-import static com.android.settings.wifi.WifiSettings.WIFI_DIALOG_ID;
+import static com.android.settings.network.NetworkProviderSettings.WIFI_DIALOG_ID;
+import static com.android.settings.network.telephony.MobileNetworkUtils.NO_CELL_DATA_TYPE_ICON;
+import static com.android.settingslib.Utils.formatPercentage;
 
 import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.graphics.ColorFilter;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.wifi.WifiManager;
+import android.net.wifi.sharedconnectivity.app.HotspotNetwork;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -32,19 +37,24 @@ import android.os.SimpleClock;
 import android.os.SystemClock;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.telephony.SignalStrength;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
+import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.wifi.WifiConfigUiBase2;
 import com.android.settings.wifi.WifiDialog2;
+import com.android.settings.wifi.WifiUtils;
 import com.android.settings.wifi.details2.AddDevicePreferenceController2;
 import com.android.settings.wifi.details2.WifiAutoConnectPreferenceController2;
 import com.android.settings.wifi.details2.WifiDetailPreferenceController2;
@@ -52,10 +62,12 @@ import com.android.settings.wifi.details2.WifiMeteredPreferenceController2;
 import com.android.settings.wifi.details2.WifiPrivacyPreferenceController2;
 import com.android.settings.wifi.details2.WifiSecondSummaryController2;
 import com.android.settings.wifi.details2.WifiSubscriptionDetailPreferenceController2;
+import com.android.settings.wifi.repository.SharedConnectivityRepository;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.graph.ThemedBatteryDrawable;
 import com.android.wifitrackerlib.NetworkDetailsTracker;
 import com.android.wifitrackerlib.WifiEntry;
 
@@ -78,6 +90,12 @@ public class WifiNetworkDetailsFragment extends RestrictedDashboardFragment impl
     // Key of a Bundle to save/restore the selected WifiEntry
     public static final String KEY_CHOSEN_WIFIENTRY_KEY = "key_chosen_wifientry_key";
 
+    public static final String KEY_HOTSPOT_DEVICE_CATEGORY = "hotspot_device_details_category";
+    public static final String KEY_HOTSPOT_DEVICE_INTERNET_SOURCE =
+            "hotspot_device_details_internet_source";
+    public static final String KEY_HOTSPOT_DEVICE_BATTERY = "hotspot_device_details_battery";
+    public static final String KEY_HOTSPOT_CONNECTION_CATEGORY = "hotspot_connection_category";
+
     // Max age of tracked WifiEntries
     private static final long MAX_SCAN_AGE_MILLIS = 15_000;
     // Interval between initiating SavedNetworkTracker scans
@@ -88,10 +106,15 @@ public class WifiNetworkDetailsFragment extends RestrictedDashboardFragment impl
     @VisibleForTesting
     NetworkDetailsTracker mNetworkDetailsTracker;
     private HandlerThread mWorkerThread;
-    private WifiDetailPreferenceController2 mWifiDetailPreferenceController2;
+    @VisibleForTesting
+    WifiDetailPreferenceController2 mWifiDetailPreferenceController2;
     private List<WifiDialog2.WifiDialog2Listener> mWifiDialogListeners = new ArrayList<>();
     @VisibleForTesting
     List<AbstractPreferenceController> mControllers;
+    private boolean mIsInstantHotspotFeatureEnabled =
+            SharedConnectivityRepository.isDeviceConfigEnabled();
+    @VisibleForTesting
+    WifiNetworkDetailsViewModel mWifiNetworkDetailsViewModel;
 
     public WifiNetworkDetailsFragment() {
         super(UserManager.DISALLOW_CONFIG_WIFI);
@@ -158,8 +181,14 @@ public class WifiNetworkDetailsFragment extends RestrictedDashboardFragment impl
         }
 
         final WifiEntry wifiEntry = mNetworkDetailsTracker.getWifiEntry();
-        return WifiDialog2.createModal(getActivity(), this, wifiEntry,
-                WifiConfigUiBase2.MODE_MODIFY);
+        return new WifiDialog2(
+                getActivity(),
+                this,
+                wifiEntry,
+                WifiConfigUiBase2.MODE_MODIFY,
+                0,
+                false,
+                true);
     }
 
     @Override
@@ -207,6 +236,10 @@ public class WifiNetworkDetailsFragment extends RestrictedDashboardFragment impl
         setupNetworksDetailTracker();
         final WifiEntry wifiEntry = mNetworkDetailsTracker.getWifiEntry();
 
+        if (mIsInstantHotspotFeatureEnabled) {
+            getWifiNetworkDetailsViewModel().setWifiEntry(wifiEntry);
+        }
+
         final WifiSecondSummaryController2 wifiSecondSummaryController2 =
                 new WifiSecondSummaryController2(context);
         wifiSecondSummaryController2.setWifiEntry(wifiEntry);
@@ -250,14 +283,12 @@ public class WifiNetworkDetailsFragment extends RestrictedDashboardFragment impl
 
         // Sets callback listener for wifi dialog.
         mWifiDialogListeners.add(mWifiDetailPreferenceController2);
-        mWifiDialogListeners.add(privacyController2);
-        mWifiDialogListeners.add(meteredPreferenceController2);
 
         return mControllers;
     }
 
     @Override
-    public void onSubmit(WifiDialog2 dialog) {
+    public void onSubmit(@NonNull WifiDialog2 dialog) {
         for (WifiDialog2.WifiDialog2Listener listener : mWifiDialogListeners) {
             listener.onSubmit(dialog);
         }
@@ -335,5 +366,98 @@ public class WifiNetworkDetailsFragment extends RestrictedDashboardFragment impl
             }
             controller.displayPreference(screen);
         }
+        if (mIsInstantHotspotFeatureEnabled) {
+            getWifiNetworkDetailsViewModel().setWifiEntry(mNetworkDetailsTracker.getWifiEntry());
+        }
+    }
+
+    private WifiNetworkDetailsViewModel getWifiNetworkDetailsViewModel() {
+        if (mWifiNetworkDetailsViewModel == null) {
+            mWifiNetworkDetailsViewModel = FeatureFactory.getFeatureFactory()
+                    .getWifiFeatureProvider().getWifiNetworkDetailsViewModel(this);
+            mWifiNetworkDetailsViewModel.getHotspotNetworkData()
+                    .observe(this, this::onHotspotNetworkChanged);
+        }
+        return mWifiNetworkDetailsViewModel;
+    }
+
+    @VisibleForTesting
+    void onHotspotNetworkChanged(WifiNetworkDetailsViewModel.HotspotNetworkData data) {
+        PreferenceScreen screen = getPreferenceScreen();
+        if (screen == null) {
+            return;
+        }
+        if (data == null) {
+            screen.findPreference(KEY_HOTSPOT_DEVICE_CATEGORY).setVisible(false);
+            screen.findPreference(KEY_HOTSPOT_CONNECTION_CATEGORY).setVisible(false);
+            if (mWifiDetailPreferenceController2 != null) {
+                mWifiDetailPreferenceController2.setSignalStrengthTitle(R.string.wifi_signal);
+            }
+            return;
+        }
+        screen.findPreference(KEY_HOTSPOT_DEVICE_CATEGORY).setVisible(true);
+        updateInternetSource(data.getNetworkType(), data.getUpstreamConnectionStrength());
+        updateBattery(data.isBatteryCharging(), data.getBatteryPercentage());
+
+        screen.findPreference(KEY_HOTSPOT_CONNECTION_CATEGORY).setVisible(true);
+        if (mWifiDetailPreferenceController2 != null) {
+            mWifiDetailPreferenceController2
+                    .setSignalStrengthTitle(R.string.hotspot_connection_strength);
+        }
+    }
+
+    @VisibleForTesting
+    void updateInternetSource(int networkType, int upstreamConnectionStrength) {
+        Preference internetSource = getPreferenceScreen()
+                .findPreference(KEY_HOTSPOT_DEVICE_INTERNET_SOURCE);
+        Drawable drawable;
+        if (networkType == HotspotNetwork.NETWORK_TYPE_WIFI) {
+            internetSource.setSummary(R.string.internet_source_wifi);
+            drawable = getContext().getDrawable(
+                    WifiUtils.getInternetIconResource(upstreamConnectionStrength, false));
+        } else if (networkType == HotspotNetwork.NETWORK_TYPE_CELLULAR) {
+            internetSource.setSummary(R.string.internet_source_mobile_data);
+            drawable = getMobileDataIcon(upstreamConnectionStrength);
+        } else if (networkType == HotspotNetwork.NETWORK_TYPE_ETHERNET) {
+            internetSource.setSummary(R.string.internet_source_ethernet);
+            drawable = getContext().getDrawable(R.drawable.ic_settings_ethernet);
+        } else {
+            internetSource.setSummary(R.string.summary_placeholder);
+            drawable = null;
+        }
+        if (drawable != null) {
+            drawable.setTintList(
+                    Utils.getColorAttr(getContext(), android.R.attr.colorControlNormal));
+        }
+        internetSource.setIcon(drawable);
+    }
+
+    @VisibleForTesting
+    Drawable getMobileDataIcon(int level) {
+        return MobileNetworkUtils.getSignalStrengthIcon(getContext(), level,
+                SignalStrength.NUM_SIGNAL_STRENGTH_BINS, NO_CELL_DATA_TYPE_ICON, false, false);
+    }
+
+    @VisibleForTesting
+    void updateBattery(boolean isChanging, int percentage) {
+        Preference battery = getPreferenceScreen().findPreference(KEY_HOTSPOT_DEVICE_BATTERY);
+        battery.setSummary(formatPercentage(percentage));
+        ThemedBatteryDrawable drawable = getBatteryDrawable();
+        if (drawable != null) {
+            drawable.setCharging(isChanging);
+            drawable.setBatteryLevel(percentage);
+        }
+        battery.setIcon(drawable);
+    }
+
+    @VisibleForTesting
+    ThemedBatteryDrawable getBatteryDrawable() {
+        int frameColor = getContext()
+                .getColor(com.android.settingslib.R.color.meter_background_color);
+        ThemedBatteryDrawable drawable = new ThemedBatteryDrawable(getContext(), frameColor);
+        ColorFilter colorFilter = Utils.getAlphaInvariantColorFilterForColor(
+                Utils.getColorAttrDefaultColor(getContext(), android.R.attr.colorControlNormal));
+        drawable.setColorFilter(colorFilter);
+        return drawable;
     }
 }

@@ -73,7 +73,6 @@ import com.android.settingslib.search.SearchIndexableRaw;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.AdditionalMatchers;
@@ -97,6 +96,7 @@ import java.util.List;
         ShadowUserManager.class,
         ShadowDevicePolicyManager.class,
         SettingsShadowResources.class,
+        com.android.settings.testutils.shadow.ShadowFragment.class,
 })
 public class UserSettingsTest {
 
@@ -261,7 +261,6 @@ public class UserSettingsTest {
                 eq(SettingsEnums.ACTION_USER_GUEST_EXIT_CONFIRMED));
     }
 
-    @Ignore
     @Test
     public void withDisallowRemoveUser_ShouldDisableRemoveUser() {
         // TODO(b/115781615): Tidy robolectric tests

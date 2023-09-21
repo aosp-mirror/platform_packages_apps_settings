@@ -99,6 +99,9 @@ import org.robolectric.shadows.ShadowToast;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class NetworkProviderSettingsTest {
 
     private static final int XML_RES = R.xml.wifi_tether_settings;
@@ -314,7 +317,7 @@ public class NetworkProviderSettingsTest {
         mNetworkProviderSettings.onCreate(Bundle.EMPTY);
 
         verify(mDataUsagePreference).setVisible(true);
-        verify(mDataUsagePreference).setTemplate(any(), eq(0) /*subId*/, eq(null) /*service*/);
+        verify(mDataUsagePreference).setTemplate(any(), eq(0) /*subId*/);
     }
 
     @Test
@@ -479,8 +482,8 @@ public class NetworkProviderSettingsTest {
         when(mWifiEntry.canConnect()).thenReturn(true);
         final WifiConfigController2 controller = mock(WifiConfigController2.class);
         when(controller.getConfig()).thenReturn(config);
-        final WifiDialog2 wifiDialog2 = spy(WifiDialog2.createModal(mContext, null /* listener */,
-                mWifiEntry, mode));
+        WifiDialog2.WifiDialog2Listener listener = mock(WifiDialog2.WifiDialog2Listener.class);
+        final WifiDialog2 wifiDialog2 = spy(new WifiDialog2(mContext, listener, mWifiEntry, mode));
         when(wifiDialog2.getController()).thenReturn(controller);
         return wifiDialog2;
     }

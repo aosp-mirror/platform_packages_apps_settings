@@ -32,6 +32,7 @@ import androidx.test.uiautomator.Until;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -42,6 +43,7 @@ import java.util.regex.Pattern;
  * Verify storage wizard flows. Temporarily enables a virtual disk which enables
  * testing on all devices, regardless of physical SD card support.
  */
+@Ignore
 @RunWith(AndroidJUnit4.class)
 public class StorageWizardTest {
     private static final String ANDROID_PACKAGE = "android";

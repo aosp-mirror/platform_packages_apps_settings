@@ -21,20 +21,28 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.robolectric.Shadows.shadowOf;
 
 import android.content.Context;
+import android.content.pm.CrossProfileApps;
 import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.testutils.shadow.ShadowApplicationPackageManager;
+import com.android.settings.testutils.shadow.ShadowCrossProfileApps;
 
 import com.google.common.collect.ImmutableList;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        ShadowApplicationPackageManager.class,
+        ShadowCrossProfileApps.class,
+})
 public class InteractAcrossProfilesPreferenceControllerTest {
 
     private static final String CROSS_PROFILE_PACKAGE_NAME = "crossProfilePackage";
@@ -44,16 +52,27 @@ public class InteractAcrossProfilesPreferenceControllerTest {
     private static final int PROFILE_ID = 0;
 
     private final Context mContext = ApplicationProvider.getApplicationContext();
-    private final PackageManager mPackageManager = mContext.getPackageManager();
+    private ShadowApplicationPackageManager mShadowPackageManager;
     private final InteractAcrossProfilesDetailsPreferenceController mController =
             new InteractAcrossProfilesDetailsPreferenceController(mContext, "test_key");
+
+    @Before
+    public void setUp() {
+        mShadowPackageManager = (ShadowApplicationPackageManager) shadowOf(
+                mContext.getPackageManager()
+        );
+    }
 
     @Test
     public void getAvailabilityStatus_requestedCrossProfilePermission_returnsAvailable() {
         mController.setPackageName(CROSS_PROFILE_PACKAGE_NAME);
-        shadowOf(mPackageManager).setInstalledPackagesForUserId(
+        mShadowPackageManager.setInstalledPackagesForUserId(
                 PROFILE_ID, ImmutableList.of(CROSS_PROFILE_PACKAGE_NAME));
-        PackageInfo packageInfo = shadowOf(mPackageManager).getInternalMutablePackageInfo(
+        ShadowCrossProfileApps shadowCrossProfileApps = (ShadowCrossProfileApps) shadowOf(
+                mContext.getSystemService(CrossProfileApps.class)
+        );
+        shadowCrossProfileApps.addCrossProfilePackage(CROSS_PROFILE_PACKAGE_NAME);
+        PackageInfo packageInfo = mShadowPackageManager.getInternalMutablePackageInfo(
                 CROSS_PROFILE_PACKAGE_NAME);
         packageInfo.requestedPermissions = new String[]{
                 INTERACT_ACROSS_PROFILES_PERMISSION};
@@ -65,8 +84,12 @@ public class InteractAcrossProfilesPreferenceControllerTest {
     @Test
     public void getAvailabilityStatus_notRequestedCrossProfilePermission_returnsDisabled() {
         mController.setPackageName(NOT_CROSS_PROFILE_PACKAGE_NAME);
-        shadowOf(mPackageManager).setInstalledPackagesForUserId(
+        mShadowPackageManager.setInstalledPackagesForUserId(
                 PROFILE_ID, ImmutableList.of(NOT_CROSS_PROFILE_PACKAGE_NAME));
+        ShadowCrossProfileApps shadowCrossProfileApps = (ShadowCrossProfileApps) shadowOf(
+                mContext.getSystemService(CrossProfileApps.class)
+        );
+        shadowCrossProfileApps.addCrossProfilePackage(NOT_CROSS_PROFILE_PACKAGE_NAME);
 
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.DISABLED_FOR_USER);

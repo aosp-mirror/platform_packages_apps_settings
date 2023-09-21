@@ -571,7 +571,7 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
                         UserHandle.myUserId());
         if (disallow && !Utils.isDemoUser(context)) {
             return inflater.inflate(R.layout.main_clear_disallowed_screen, null);
-        } else if (admin != null) {
+        } else if (admin != null && !Utils.isDemoUser(context)) {
             new ActionDisabledByAdminDialogHelper(getActivity())
                     .prepareDialogBuilder(UserManager.DISALLOW_FACTORY_RESET, admin)
                     .setOnDismissListener(__ -> getActivity().finish())

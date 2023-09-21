@@ -46,7 +46,6 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.utils.ActivityControllerWrapper;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
@@ -62,10 +61,12 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.fakes.RoboMenu;
-import org.robolectric.shadows.ShadowUserManager;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = ShadowUserManager.class)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowUserManager.class,
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class BluetoothDeviceDetailsFragmentTest {
 
     private static final String TEST_ADDRESS = "55:66:77:88:99:AA";
@@ -229,9 +230,7 @@ public class BluetoothDeviceDetailsFragmentTest {
         doReturn(mPreferenceScreen).when(fragment).getPreferenceScreen();
         doReturn(mUserManager).when(fragment).getUserManager();
 
-        mActivity = spy((FragmentActivity) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(FragmentActivity.class)).get());
-
+        mActivity = spy(Robolectric.setupActivity(FragmentActivity.class));
         doReturn(mActivity).when(fragment).getActivity();
         doReturn(mContext).when(fragment).getContext();
 

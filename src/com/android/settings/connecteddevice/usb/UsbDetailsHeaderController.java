@@ -50,7 +50,7 @@ public class UsbDetailsHeaderController extends UsbDetailsController {
     protected void refresh(boolean connected, long functions, int powerRole, int dataRole) {
         mHeaderController.setLabel(mContext.getString(R.string.usb_pref));
         mHeaderController.setIcon(mContext.getDrawable(R.drawable.ic_usb));
-        mHeaderController.done(mFragment.getActivity(), true /* rebindActions */);
+        mHeaderController.done(true /* rebindActions */);
     }
 
     @Override

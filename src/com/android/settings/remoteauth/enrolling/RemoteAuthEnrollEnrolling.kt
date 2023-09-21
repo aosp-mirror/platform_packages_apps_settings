@@ -20,10 +20,13 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 
+
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -38,15 +41,15 @@ class RemoteAuthEnrollEnrolling :
         layoutResId = R.layout.remote_auth_enroll_enrolling,
         glifLayoutId = R.id.setup_wizard_layout,
     ) {
-    // TODO(b/293906345): Scope viewModel to navigation graph when implementing navigation.
-    private val viewModel = RemoteAuthEnrollEnrollingViewModel()
+    private val viewModel: RemoteAuthEnrollEnrollingViewModel by viewModels()
+    private val navController by lazy { findNavController(this) }
     private val adapter = RemoteAuthEnrollEnrollingRecyclerViewAdapter()
     private val progressBar by lazy {
-        view!!.findViewById<ProgressBar>(R.id.enrolling_list_progress_bar)
+        view!!.requireViewById<ProgressBar>(R.id.enrolling_list_progress_bar)
     }
-    private val errorText by lazy { view!!.findViewById<TextView>(R.id.error_text) }
+    private val errorText by lazy { view!!.requireViewById<TextView>(R.id.error_text) }
     private val recyclerView by lazy {
-        view!!.findViewById<RecyclerView>(R.id.discovered_authenticator_list)
+        view!!.requireViewById<RecyclerView>(R.id.discovered_authenticator_list)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -94,7 +97,7 @@ class RemoteAuthEnrollEnrolling :
     }
 
     private fun onSecondaryFooterButtonClick(view: View) {
-        // TODO(b/293906345): Wire up navigation
+        navController.navigateUp()
     }
 
     private fun updateUi(uiState: RemoteAuthEnrollEnrollingUiState) {
@@ -113,7 +116,7 @@ class RemoteAuthEnrollEnrolling :
 
             EnrollmentUiState.ENROLLING -> {}
             EnrollmentUiState.SUCCESS -> {
-                // TODO(b/293906345): Wire up navigation
+                navController.navigate(R.id.action_enrolling_to_finish)
             }
         }
         if (uiState.errorMsg != null) {

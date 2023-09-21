@@ -45,7 +45,6 @@ import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
-import com.android.settingslib.widget.LayoutPreference;
 
 import java.util.List;
 
@@ -68,8 +67,6 @@ public class PowerUsageSummary extends PowerUsageBase implements
     PowerUsageFeatureProvider mPowerFeatureProvider;
     @VisibleForTesting
     BatteryUtils mBatteryUtils;
-    @VisibleForTesting
-    LayoutPreference mBatteryLayoutPref;
     @VisibleForTesting
     BatteryInfo mBatteryInfo;
 
@@ -143,9 +140,6 @@ public class PowerUsageSummary extends PowerUsageBase implements
         final SettingsActivity activity = (SettingsActivity) getActivity();
 
         mBatteryHeaderPreferenceController = use(BatteryHeaderPreferenceController.class);
-        mBatteryHeaderPreferenceController.setActivity(activity);
-        mBatteryHeaderPreferenceController.setFragment(this);
-        mBatteryHeaderPreferenceController.setLifecycle(getSettingsLifecycle());
 
         mBatteryTipPreferenceController = use(BatteryTipPreferenceController.class);
         mBatteryTipPreferenceController.setActivity(activity);
@@ -208,11 +202,6 @@ public class PowerUsageSummary extends PowerUsageBase implements
         return R.string.help_url_battery;
     }
 
-    @Override
-    protected boolean isBatteryHistoryNeeded() {
-        return false;
-    }
-
     protected void refreshUi(@BatteryUpdateType int refreshType) {
         final Context context = getContext();
         if (context == null) {
@@ -237,11 +226,6 @@ public class PowerUsageSummary extends PowerUsageBase implements
     @VisibleForTesting
     void restartBatteryTipLoader() {
         restartLoader(LoaderIndex.BATTERY_TIP_LOADER, Bundle.EMPTY, mBatteryTipsCallbacks);
-    }
-
-    @VisibleForTesting
-    void setBatteryLayoutPreference(LayoutPreference layoutPreference) {
-        mBatteryLayoutPref = layoutPreference;
     }
 
     @VisibleForTesting

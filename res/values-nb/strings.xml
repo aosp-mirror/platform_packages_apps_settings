@@ -42,6 +42,12 @@
     <string name="preview_pager_content_description" msgid="3762247188224576303">"Forhåndsvisning"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Gjør mindre"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Gjør større"</string>
+    <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"Alltid"</string>
+    <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"Den ytre skjermen slås på når du legger sammen enheten"</string>
+    <string name="selective_stay_awake_title" msgid="7887645333447645168">"Bare spill, videoer med mer"</string>
+    <string name="selective_stay_awake_summary" msgid="9055967322921984543">"Den ytre skjermen slås på for apper som hindrer skjermen fra å bli inaktiv"</string>
+    <string name="sleep_on_fold_title" msgid="7626123024330501411">"Aldri"</string>
+    <string name="sleep_on_fold_summary" msgid="7737992842459588846">"Den ytre skjermen låses når du legger sammen enheten"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Bruk automatisk rotasjon"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"Ansiktsgjenkjenning bruker frontkameraet til å forbedre nøyaktigheten til automatisk rotasjon. Bilder blir aldri lagret eller sendt til Google."</string>
     <string name="bluetooth" msgid="8898478620943459654">"Bluetooth"</string>
@@ -118,11 +124,12 @@
     <string name="connected_device_previously_connected_screen_title" msgid="8823331744788100605">"Tidligere tilkoblet"</string>
     <string name="connected_device_bluetooth_turned_on_toast" msgid="144664089794199928">"Bluetooth er på"</string>
     <string name="previous_connected_see_all" msgid="7759413145713251328">"Se alle"</string>
+    <string name="connected_device_fast_pair_device_see_all" msgid="4898279230458128620">"Se alle"</string>
     <string name="stylus_device_details_title" msgid="7618295136015480864">"Pekepenn"</string>
     <string name="stylus_default_notes_app" msgid="4165657465911764628">"Trykk på bakre knapp"</string>
     <string name="stylus_default_notes_summary_work" msgid="4554643411627934223">"<xliff:g id="APP_NAME">%s</xliff:g> (jobbprofil)"</string>
     <string name="stylus_textfield_handwriting" msgid="2363579035338976327">"Skriv i tekstfelt"</string>
-    <string name="stylus_ignore_button" msgid="7734540973145241391">"Ignorer alle knappetrykk med pekepenn"</string>
+    <string name="stylus_ignore_button" msgid="7734540973145241391">"Ignorer alle knappetrykk på pekepennen"</string>
     <string name="stylus_connected_devices_title" msgid="2823967577941359812">"Pekepenn"</string>
     <string name="date_and_time" msgid="1788358029823431692">"Dato og klokkeslett"</string>
     <string name="proxy_settings_title" msgid="4201866858226087066">"Proxy-tjener"</string>
@@ -180,7 +187,7 @@
     <string name="temperature_preferences_title" msgid="5009881556503629058">"Temperatur"</string>
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"Første dag i uken"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"Tallpreferanser"</string>
-    <string name="default_string_of_regional_preference" msgid="3428899072914884203">"Bruk standardverdien"</string>
+    <string name="default_string_of_regional_preference" msgid="3428899072914884203">"Bruk standardinnstillingen"</string>
     <string name="celsius_temperature_unit" msgid="8896459071273084507">"Celsius (°C)"</string>
     <string name="fahrenheit_temperature_unit" msgid="1118677820614569801">"Fahrenheit (°F)"</string>
     <string name="sunday_first_day_of_week" msgid="7644548348295686051">"søndag"</string>
@@ -199,6 +206,7 @@
     <string name="terms_of_address_not_specified" msgid="4439257779351251973">"Ikke angitt"</string>
     <string name="terms_of_address_feminine" msgid="1743479869695539283">"Feminin"</string>
     <string name="terms_of_address_masculine" msgid="983106046135098856">"Maskulin"</string>
+    <string name="terms_of_address_neutral" msgid="5475414185543112478">"Nøytral"</string>
     <string name="dlg_remove_locales_title" msgid="3170501604483612114">"{count,plural, =1{Vil du fjerne det valgte språket?}other{Vil du fjerne de valgte språkene?}}"</string>
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"Da vises tekst på et annet språk."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Du kan ikke fjerne alle språkene"</string>
@@ -388,6 +396,33 @@
     <string name="security_settings_face_watch_preference_summary" msgid="5817376447253802793">"Ansiktet og <xliff:g id="WATCH">%s</xliff:g> er lagt til"</string>
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Ansiktet, fingeravtrykket og <xliff:g id="WATCH">%s</xliff:g> er lagt til"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Ansiktet, fingeravtrykkene og <xliff:g id="WATCH">%s</xliff:g> er lagt til"</string>
+    <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Opplåsing med Remote Authenticator"</string>
+    <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"Klokken er lagt til"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"Konfigurer klokken"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_message" msgid="8737276885766036074">"Klokkelåsen er en annen praktisk løsning for å låse opp denne telefonen – for eksempel når du har våte fingre eller ansiktet ditt ikke gjenkjennes.\n\nDu kan låse opp telefonen med klokken når du"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_disagree" msgid="7639258097401796028">"Ikke nå"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_agree" msgid="5271119227172049339">"Fortsett"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_more" msgid="1644105894631257595">"Mer"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_how_title" msgid="6604152528267830349">"Slik fungerer det"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_info_lock_open" msgid="8570511335628725116">"Klokken må være låst opp, på håndleddet ditt og innenfor rekkevidde for denne telefonen. Du trenger ikke å låse opp klokken igjen så lenge du har den på håndleddet."</string>
+    <string name="security_settings_remoteauth_enroll_introduction_info_notifications" msgid="4298855831154039694">"Når denne telefonen låses opp, varsles du på klokken. Hvis telefonen låses opp ved et uhell, kan du trykke på varselet for å låse den igjen."</string>
+    <string name="security_settings_remoteauth_enroll_introduction_youre_in_control_title" msgid="7974976673323638524">"Du har kontrollen"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_info_remove_watch" msgid="1888318677088986801">"Du kan fjerne klokken fra klokkelåsen når som helst i innstillingene"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_animation_tap_notification" msgid="1597397399097952974">"trykker på et varsel"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_animation_swipe_up" msgid="2129230804324634653">"sveiper opp på låseskjermen"</string>
+    <string name="security_settings_remoteauth_enroll_enrolling_title" msgid="313016997943607675">"Velg klokken din"</string>
+    <string name="security_settings_remoteauth_enroll_enrolling_list_heading" msgid="8227585438932911013">"Tilgjengelige klokker"</string>
+    <string name="security_settings_remoteauth_enroll_enrolling_disagree" msgid="1670201454188049863">"Avbryt"</string>
+    <string name="security_settings_remoteauth_enroll_enrolling_agree" msgid="7048336252635730908">"Bekreft"</string>
+    <string name="security_settings_remoteauth_enroll_finish_title" msgid="3807372930755413112">"Det var det!"</string>
+    <string name="security_settings_remoteauth_enroll_finish_description" msgid="4876209907275244653">"Nå kan du låse opp denne telefonen med klokken når du sveiper opp på låseskjermen eller trykker på et varsel"</string>
+    <string name="security_settings_remoteauth_enroll_finish_btn_next" msgid="8072138423143889592">"Ferdig"</string>
+    <string name="security_settings_remoteauth_settings_title" msgid="1564912618737165129">"Klokkelås"</string>
+    <string name="security_settings_remoteauth_settings_description" msgid="2758239650119457964">"Du kan låse opp denne telefonen med klokken når du sveiper opp på låseskjermen eller trykker på et varsel"</string>
+    <string name="security_settings_remoteauth_settings_info_footer" msgid="795894033901478120">"For å bruke klokkelåsen må klokken være låst opp, på håndleddet ditt, innenfor rekkevidde og koblet til denne telefonen. Hvis tilkoblingen blir brutt, må du låse opp telefonen før du kan bruke klokkelåsen.\n\nHusk:\nDu kan bare ha én klokke konfigurert om gangen. Du må fjerne den aktive klokken før du kan legge til en ny."</string>
+    <string name="security_settings_remoteauth_settings_learn_more" msgid="5653556124819260050">"Finn ut mer om klokkelåsen"</string>
+    <string name="security_settings_remoteauth_settings_register_new_authenticator" msgid="9191331738306527887">"Legg til en klokke"</string>
+    <string name="security_settings_remoteauth_settings_remove_device" msgid="2436226120578851282">"Fjern klokken"</string>
     <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"Opplåsing med fingeravtrykk og ansiktslås"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Ansiktslås og opplåsing med fingeravtrykk for jobb"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"Konfigurering kreves"</string>
@@ -496,6 +531,30 @@
     <string name="security_header" msgid="961514795852103424">"Sikkerhet"</string>
     <string name="privacy_header" msgid="5526002421324257007">"Personvern"</string>
     <string name="work_profile_category_header" msgid="85707750968948517">"Jobbprofil"</string>
+    <!-- no translation found for private_space_title (7078627930195569767) -->
+    <skip />
+    <!-- no translation found for private_space_summary (8237652417163408001) -->
+    <skip />
+    <!-- no translation found for private_space_one_lock_title (7306547190751832568) -->
+    <skip />
+    <!-- no translation found for private_space_hide_title (1615744426933304644) -->
+    <skip />
+    <!-- no translation found for private_space_category_system (1286843321867285700) -->
+    <skip />
+    <!-- no translation found for private_space_create_title (47273568884806726) -->
+    <skip />
+    <!-- no translation found for private_space_delete_title (3075645119800272800) -->
+    <skip />
+    <!-- no translation found for private_space_created (2978055968937762232) -->
+    <skip />
+    <!-- no translation found for private_space_already_exists (1253034947621867419) -->
+    <skip />
+    <!-- no translation found for private_space_create_failed (4908100791174213808) -->
+    <skip />
+    <!-- no translation found for private_space_deleted (7825768516955610897) -->
+    <skip />
+    <!-- no translation found for private_space_delete_failed (8500755484258565011) -->
+    <skip />
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Du kan legge til opptil <xliff:g id="COUNT">%d</xliff:g> fingeravtrykk"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Du har lagt til maksimalt antall fingeravtrykk"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Kan ikke legge til flere fingeravtrykk"</string>
@@ -651,6 +710,8 @@
     <string name="bluetooth_enter_passkey_other_device" msgid="8270426446247344709">"Det er mulig at du må oppgi dette passordet også på den andre enheten."</string>
     <string name="bluetooth_paring_group_msg" msgid="4609515924670823316">"Bekreft for å koble til det koordinerte settet"</string>
     <string name="bluetooth_pairing_shares_phonebook" msgid="4329325125260724843">"Gi tilgang til kontaktene dine og anropsloggen din"</string>
+    <string name="bluetooth_pairing_phonebook_toggle_text" msgid="2474015367387690034">"Gi også tilgang til kontakter og anropsloggen"</string>
+    <string name="bluetooth_pairing_phonebook_toggle_details" msgid="1367197978487212581">"Informasjonen brukes for anropskunngjøringer med mer"</string>
     <string name="bluetooth_error_title" msgid="2284738188253690278"></string>
     <string name="bluetooth_connecting_error_message" msgid="3941893154784152112">"Kunne ikke koble til <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_preference_found_media_devices" msgid="830061195998352840">"Tilgjengelige enheter"</string>
@@ -812,7 +873,7 @@
     <string name="wifi_dpp_sharing_wifi_with_this_device" msgid="7250369936882080107">"Deler Wifi med denne enheten …"</string>
     <string name="wifi_dpp_connecting" msgid="2312769193202897589">"Kobler til …"</string>
     <string name="wifi_dpp_share_hotspot" msgid="6186452780604755316">"Del wifi-sone"</string>
-    <string name="wifi_dpp_lockscreen_title" msgid="4231438175617953652">"Bekreft at det er deg"</string>
+    <string name="wifi_dpp_lockscreen_title" msgid="5246641326066972419">"Bekreft at det er deg"</string>
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Wifi-passord: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"Passord for wifi-sone: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"Automatisk tilkobling"</string>
@@ -852,7 +913,6 @@
     <string name="wifi_not_in_range_message" msgid="3885327464037574739">"Nettverket er ikke innen rekkevidde"</string>
     <string name="wifi_forget" msgid="3485573280364015620">"Glem"</string>
     <string name="wifi_modify" msgid="5127926476383659412">"Endre"</string>
-    <string name="wifi_failed_forget_message" msgid="8272732599235525880">"Kunne ikke slette nettverket"</string>
     <string name="wifi_save" msgid="2312643132472226807">"Lagre"</string>
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"Kunne ikke lagre nettverket"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"Avbryt"</string>
@@ -869,6 +929,13 @@
     <string name="wifi_type_title" msgid="2174893488722015838">"Type"</string>
     <string name="wifi_details_dns" msgid="273231528073312579">"DNS"</string>
     <string name="wifi_details_ipv6_address_header" msgid="1913151339341722443">"IPv6-adresser"</string>
+    <string name="hotspot_device_details_category" msgid="3110651914598697220">"Informasjon om enheten for wifi-sonen"</string>
+    <string name="hotspot_device_details_internet_source" msgid="1563266599673281875">"Internettkilde"</string>
+    <string name="internet_source_wifi" msgid="6952593095166435179">"Wifi"</string>
+    <string name="internet_source_mobile_data" msgid="877403889449201789">"Mobildata"</string>
+    <string name="internet_source_ethernet" msgid="8338472576454100966">"Ethernet"</string>
+    <string name="hotspot_connection_category" msgid="4320380513982923556">"Tilkobling til wifi-sone"</string>
+    <string name="hotspot_connection_strength" msgid="87359986943768421">"Tilkoblingsstyrke"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"Lagrede nettverk"</string>
     <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"Abonnementer"</string>
     <string name="wifi_saved_other_networks_tab" msgid="7942647415716557293">"Andre nettverk"</string>
@@ -924,6 +991,9 @@
     <string name="wifi_hotspot_speed_footer" msgid="8846939503916795002">"Hvis frekvensen du foretrekker, ikke er tilgjengelig, kan wifi-sonen bruke en annen. Sikkerhetsinnstillingene for wifi-sonen kan endres hvis du bytter frekvensen."</string>
     <string name="wifi_hotspot_security_summary_unavailable" msgid="117582979310345853">"Ikke tilgjengelig med 6 GHz"</string>
     <string name="wifi_hotspot_security_footer" msgid="4608329688744949796">"Sikkerhetsinnstillingene kan endres hvis du forandrer frekvensen for wifi-sonen"</string>
+    <string name="wifi_hotspot_instant_title" msgid="7052526695338853703">"Umiddelbar wifi-sone"</string>
+    <string name="wifi_hotspot_instant_summary_on" msgid="3142749148673081288">"På"</string>
+    <string name="wifi_hotspot_instant_summary_off" msgid="8594065628453795615">"Av"</string>
     <string name="wifi_tether_starting" msgid="8879874184033857814">"Slår på wifi-sone …"</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"Slår av trådløs sone …"</string>
     <string name="wifi_tether_carrier_unsupport_dialog_title" msgid="3089432578433978073">"Internettdeling er utilgjengelig"</string>
@@ -999,8 +1069,7 @@
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Av"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Vis hvitbalanse"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
-    <string name="stay_awake_on_fold_title" msgid="4195536619511589471">"Hold opplåst ved sammenlegging"</string>
-    <string name="stay_awake_on_fold_summary" msgid="2413928869516675293">"Hold den ytre skjermen låst opp når enheten er lagt sammen, inntil skjermspareren aktiveres"</string>
+    <string name="fold_lock_behavior_title" msgid="786228803694268449">"Fortsett å bruke apper etter sammenlegging"</string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="3627278682437562787">"Øker oppdateringsfrekvensen automatisk fra 60 til <xliff:g id="ID_1">%1$s</xliff:g> Hz for noe innhold. Øker batteribruken."</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Maks oppdateringsfrekvens"</string>
@@ -1429,7 +1498,7 @@
     <string name="lockpassword_reenter_your_profile_password_header" msgid="3812040127714827685">"Skriv inn jobbpassordet på nytt"</string>
     <string name="lockpassword_confirm_your_work_password_header" msgid="4647071231702288305">"Skriv inn jobbpassordet ditt"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="4037701363240138651">"Bekreft mønsteret"</string>
-    <string name="lockpassword_confirm_your_work_pattern_header" msgid="2668883108969165844">"Skriv inn jobbmønsteret ditt"</string>
+    <string name="lockpassword_confirm_your_work_pattern_header" msgid="2668883108969165844">"Tegn jobbmønsteret"</string>
     <string name="lockpassword_confirm_your_pin_header" msgid="2241722970567131308">"Skriv inn PIN-koden på nytt"</string>
     <string name="lockpassword_reenter_your_profile_pin_header" msgid="2890233614560435538">"Skriv inn jobb-PIN-koden på nytt"</string>
     <string name="lockpassword_confirm_your_work_pin_header" msgid="4229765521391960255">"Skriv inn jobb-PIN-koden din"</string>
@@ -1449,10 +1518,10 @@
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Har du glemt passordet ditt?"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"Har du glemt mønsteret ditt?"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"Har du glemt PIN-koden din?"</string>
-    <string name="lockpassword_confirm_your_pattern_generic" msgid="7692794426682501482">"Tegn mønsteret ditt for å fortsette"</string>
-    <string name="lockpassword_confirm_your_pin_generic" msgid="9206928587904701094">"Skriv inn PIN-koden til enheten din for å fortsette"</string>
-    <string name="lockpassword_confirm_your_password_generic" msgid="2616127423884477152">"Skriv inn enhetspassordet ditt for å fortsette"</string>
-    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="9110305410672321714">"Bruk jobbmønsteret ditt for å fortsette"</string>
+    <string name="lockpassword_confirm_your_pattern_generic" msgid="7401165571170203743">"Tegn mønsteret ditt for å fortsette"</string>
+    <string name="lockpassword_confirm_your_pin_generic" msgid="8990266101852808091">"Oppgi PIN-koden din for å fortsette"</string>
+    <string name="lockpassword_confirm_your_password_generic" msgid="8823867445451497224">"Oppgi passordet ditt for å fortsette"</string>
+    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="7003851856761939690">"Tegn jobbmønsteret ditt for å fortsette"</string>
     <string name="lockpassword_confirm_your_pin_generic_profile" msgid="6524208128570235127">"Skriv inn jobb-PIN-koden din for å fortsette"</string>
     <string name="lockpassword_confirm_your_password_generic_profile" msgid="5918738487760814147">"Skriv inn jobbpassordet ditt for å fortsette"</string>
     <string name="lockpassword_strong_auth_required_device_pattern" msgid="113817518413715557">"Bruk enhetsmønsteret ditt for bedre beskyttelse"</string>
@@ -1567,7 +1636,7 @@
     <string name="sort_order_alpha" msgid="3400680865280266582">"Sorter etter navn"</string>
     <string name="sort_order_size" msgid="7731928486199737223">"Sorter etter størrelse"</string>
     <string name="sort_order_recent_notification" msgid="1496198895330443073">"Siste varsler"</string>
-    <string name="sort_order_frequent_notification" msgid="4063700985742284794">"Oftest varsler"</string>
+    <string name="sort_order_frequent_notification" msgid="4063700985742284794">"Oftest"</string>
     <string name="show_running_services" msgid="8666008279959853318">"Vis aktive tjenester"</string>
     <string name="show_background_processes" msgid="5682856012453562151">"Vis bufrede prosesser"</string>
     <string name="default_emergency_app" msgid="1929974800666613803">"Nødapp"</string>
@@ -1956,6 +2025,7 @@
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Snarvei til fargeinvertering"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"Med fargeinvertering blir lyse skjermer mørke. I tillegg blir mørke skjermer lyse."</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"&lt;b&gt;Husk&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt;&amp;nbsp;Farger endres i medier og bilder.&lt;/li&gt; &lt;li&gt;&amp;nbsp;Fargeinvertering fungerer i alle apper.&lt;/li&gt; &lt;li&gt;&amp;nbsp;For å vise mørke bakgrunner kan mørkt tema brukes i stedet.&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="accessibility_action_label_panel_slice" msgid="1313725957071602932">"åpne innstillingene"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Autoklikk (holdetid)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Om autoklikk (holdetid)"</string>
     <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"Finn ut mer om autoklikk (holdetid)"</string>
@@ -2128,7 +2198,7 @@
     <string name="accessibility_service_default_description" msgid="7801435825448138526">"Beskrivelse ble ikke oppgitt."</string>
     <string name="settings_button" msgid="2195468788019730377">"Innstillinger"</string>
     <string name="keywords_reduce_bright_colors" msgid="1683190961013139183">"lyssensitivitet, fotofobi, mørkt tema, migrene, hodepine, lesemodus, nattmodus, reduser lysstyrke, hvitpunkt"</string>
-    <string name="keywords_accessibility" msgid="4263443239404659143">"Brukervennlighet, enkel tilgang, assistanse, assisterende"</string>
+    <string name="keywords_accessibility" msgid="8593989878379366798">"syn, hørsel, blind, døv, motorikk, førlighet, assisterende, assistanse, brukervennlighet, tilgjengelighet, hånd, hjelp"</string>
     <string name="keywords_magnification" msgid="3908145308269840862">"Vindusforstørrer, zoom, forstørring, nedsatt synsevne, forstørr, gjør større"</string>
     <string name="keywords_talkback" msgid="2816435437095102527"></string>
     <string name="keywords_live_caption" msgid="1667203998080567556">"Teksting, teksting for hørselshemmede, CC, Transkribering, hørselshemmet, hørselstap, CART, tale til tekst, undertekst"</string>
@@ -2143,10 +2213,13 @@
     <string name="keywords_contrast" msgid="4668393735398949873">"fargekontrast"</string>
     <string name="keywords_accessibility_menu" msgid="4300579436464706608"></string>
     <string name="keywords_switch_access" msgid="5813094504384313402"></string>
-    <string name="keywords_auto_click" msgid="7151756353013736931">"motor, mus"</string>
-    <string name="keywords_hearing_aids" msgid="4550504337687223314">"høreapparater, hørselshemmet, hørselstap, cochlea-implantater, enheter for lydforsterkning, lydbehandlere"</string>
+    <string name="keywords_auto_click" msgid="6811744211216280998">"motorikk, mus, ekstern mus, hodemus, adaptiv mus, rullestol, joystick"</string>
+    <string name="keywords_hearing_aids" msgid="4657889873249157071">"høreapparater, hørselshemmet, hørselstap, cochlea-implantater, enheter for lydforsterkning, lydbehandlere, nødsentral"</string>
     <string name="keywords_rtt" msgid="2429130928152514402">"hørselshemmet, hørselstap, teksting, fjernskriver, TTY"</string>
     <string name="keywords_voice_access" msgid="7807335263195876454"></string>
+    <string name="keywords_3_button_navigation" msgid="436361965016404218">"tre knapper"</string>
+    <string name="keywords_touch_and_hold_delay" msgid="7854640156419599912">"førlighet, motorikk, eldre, artritt, musesyke, slag, risting, multippel sklerose, cerebral parese, skjelving, hånd"</string>
+    <string name="keywords_accessibility_timeout" msgid="8903766864902000346">"forsinkelse, førlighet, eldre"</string>
     <string name="print_settings" msgid="8519810615863882491">"Utskrift"</string>
     <string name="print_settings_summary_no_service" msgid="6721731154917653862">"Av"</string>
     <string name="print_settings_summary" msgid="1458773840720811915">"{count,plural, =1{1 utskriftstjeneste er på}other{# utskriftstjenester er på}}"</string>
@@ -2224,7 +2297,7 @@
     <string name="battery_tip_dock_defender_future_bypass_title" msgid="4332616280495788195">"Ladingen er optimalisert for å beskytte batteriet"</string>
     <string name="battery_tip_dock_defender_future_bypass_summary" msgid="7870758621381307597">"For å forlenge brukstiden for batteriet er ladingen optimalisert i dokken"</string>
     <string name="battery_tip_dock_defender_active_title" msgid="1414785238383255699">"Ladingen er optimalisert for å beskytte batteriet"</string>
-    <string name="battery_tip_dock_defender_active_summary" msgid="3512082623718801459">"For å forlenge brukstiden for batteriet er ladingen optimalisert i dokken"</string>
+    <string name="battery_tip_dock_defender_active_summary" msgid="3512082623718801459">"For å forlenge batteriets brukstid optimaliseres ladingen i dokken"</string>
     <string name="battery_tip_dock_defender_temporarily_bypassed_title" msgid="1679449361090557201">"Lader batteriet helt opp"</string>
     <string name="battery_tip_dock_defender_temporarily_bypassed_summary" msgid="1099500476761333281">"For å beskytte batteriet optimaliseres ladingen neste gang nettbrettet er i dokken"</string>
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"Finn ut mer om lading satt på pause"</string>
@@ -2722,7 +2795,7 @@
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Vil du slette gjesteaktivitet?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Apper og data fra denne gjesteøkten slettes nå, og all fremtidig gjesteaktivitet slettes hver gang du avslutter gjestemodus"</string>
     <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"slett, gjest, aktivitet, fjern, data, besøkende, tøm"</string>
-    <string name="enable_guest_calling" msgid="4620657197834392094">"La gjester starte telefonanrop"</string>
+    <string name="enable_guest_calling" msgid="4620657197834392094">"La gjester ringe"</string>
     <string name="enable_guest_calling_summary" msgid="4748224917641204782">"Anropsloggen deles med gjestebrukeren"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Slå på telefonsamtaler og SMS"</string>
     <string name="user_grant_admin" msgid="5942118263054572074">"Gjør denne brukeren til administrator"</string>
@@ -2884,7 +2957,7 @@
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"Oppretter en klon av <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"Opprettet en klon av <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>"</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"Språk, bevegelser, klokkeslett, sikkerhetskopi"</string>
-    <string name="languages_setting_summary" msgid="7963053736715746726">"Systemspråk, appspråk, tale"</string>
+    <string name="languages_setting_summary" msgid="2650807397396180351">"Systemspråk, appspråk, regionsinnstillinger, tale"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, Wifi, nettverkstilkobling, Internett, trådløs, data, Wi Fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Wi‑Fi-varsel, wifi-varsel"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"databruk"</string>
@@ -2934,7 +3007,7 @@
     <string name="keywords_app_pinning" msgid="1564144561464945019">"én-appsmodus"</string>
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"jobbutfordring, jobb, profil"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"jobbprofil, administrert profil, forene, forening, jobb, profil"</string>
-    <string name="keywords_stay_awake_on_lock" msgid="6338367464776295697">"vekk, sov, ikke lås, vær låst opp ved sammenlegging, sammenlegging, lukking, legg sammen, lukk, skjerm av"</string>
+    <string name="keywords_fold_lock_behavior" msgid="6278990772113341581">"vekk, sov, ikke lås, vær låst opp ved sammenlegging, sammenlegging, lukking, legg sammen, lukk, skjerm av"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"bevegelser"</string>
     <string name="keywords_wallet" msgid="3757421969956996972">"Wallet"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"betal, trykk på, betalinger"</string>
@@ -3795,7 +3868,6 @@
     <string name="cell_data_warning" msgid="5664921950473359634">"Advarsel for databruk: <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="cell_data_limit" msgid="256855024790622112">"<xliff:g id="ID_1">^1</xliff:g> datagrense"</string>
     <string name="cell_data_warning_and_limit" msgid="8393200831986035724">"Advarsel for databruk: <xliff:g id="ID_1">^1</xliff:g> brukt, <xliff:g id="ID_2">^2</xliff:g> datagrense"</string>
-    <string name="operator_warning" msgid="5672761970087591211">"Operatørens måling av databruk samsvarer ikke nødvendigvis med enhetens måling."</string>
     <string name="non_carrier_data_usage_warning" msgid="4707184871368847697">"Inkluderer ikke data brukt av operatørnettverk"</string>
     <string name="data_used_template" msgid="8229342096562327646">"<xliff:g id="ID_1">%1$s</xliff:g> er brukt"</string>
     <string name="set_data_warning" msgid="1685771882794205462">"Angi varsel om databruk"</string>
@@ -3821,7 +3893,6 @@
     <string name="no_carrier_update_text" msgid="5432798085593055966">"Oppdatert for <xliff:g id="ID_1">^2</xliff:g> siden"</string>
     <string name="carrier_and_update_now_text" msgid="5075861262344398849">"Oppdatert av <xliff:g id="ID_1">^1</xliff:g> nå nettopp"</string>
     <string name="no_carrier_update_now_text" msgid="7898004907837200752">"Oppdatert nå nettopp"</string>
-    <string name="launch_mdp_app_text" msgid="8791816789749304897">"Se abonnement"</string>
     <string name="launch_wifi_text" msgid="976421974332512894">"Se detaljer"</string>
     <string name="data_saver_title" msgid="2593804270788863815">"Datasparing"</string>
     <string name="unrestricted_data_saver" msgid="7922563266857367495">"Ubegrenset datatilgang"</string>
@@ -3839,6 +3910,9 @@
     <string name="battery_saver_off_summary" msgid="4411561435493109261">"Av"</string>
     <string name="app_battery_usage_title" msgid="346558380609793334">"Batteribruk for apper"</string>
     <string name="app_battery_usage_summary" msgid="6349965904306339539">"Angi batteribruk for apper"</string>
+    <string name="battery_tips_card_action_button" msgid="4897793527424711648">"Se innstillingene"</string>
+    <string name="battery_tips_card_dismiss_button" msgid="1885756985544936618">"Greit"</string>
+    <string name="battery_tips_card_feedback_info" msgid="767117835675157298">"Er denne meldingen nyttig?"</string>
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Ubegrenset"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Optimalisert"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"Begrenset"</string>
@@ -3904,7 +3978,6 @@
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Hurtiginnstillingsruter for utviklere"</string>
     <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"Slå av tidsavbrudd for adb-autorisasjon"</string>
     <string name="adb_authorization_timeout_summary" msgid="409931540424019778">"Slå av automatisk opphevelse av adb-autorisasjoner for systemer som ikke har koblet til igjen innen standardtiden (7 dager) eller den brukerkonfigurerte tiden (minimum 1 dag)"</string>
-    <string name="winscope_trace_quick_settings_title" msgid="4104768565053226689">"Winscope-spor"</string>
     <string name="sensors_off_quick_settings_title" msgid="8472151847125917167">"Sensorene er av"</string>
     <string name="managed_profile_settings_title" msgid="3400923723423564217">"Innstillinger for jobbprofilen"</string>
     <string name="managed_profile_contact_search_title" msgid="6562061740814513737">"Søk etter kontakter i jobbkatalogen i personlige apper"</string>
@@ -4094,7 +4167,7 @@
     <string name="autofill_app" msgid="7595308061826307921">"Autofylltjeneste"</string>
     <string name="default_autofill_app" msgid="372234803718251606">"Standard autofylltjeneste"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"Passord"</string>
-    <string name="credman_chosen_app_title" msgid="4547405511458518096">"Passord, passnøkler og datatjenester"</string>
+    <string name="credman_chosen_app_title" msgid="872524130208251505">"Passord, passnøkler og datatjenester"</string>
     <string name="credman_credentials" msgid="4931371941253324143">"Andre leverandører"</string>
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# passord}other{# passord}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"auto, fyll, autofyll, passord"</string>
@@ -4102,13 +4175,13 @@
     <string name="credman_autofill_keywords" msgid="701180623776848914">"auto, fyll, autofyll, data, passnøkkel, passord"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Stoler du på denne appen?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google autofyll&gt;%1$s&lt;/xliff:g&gt; bruker det som er på skjermen, til å fastslå hva som kan fylles ut automatisk."</string>
     <string name="credman_autofill_confirmation_message" msgid="4951846866327737417">"&lt;b&gt;Vil du bruke &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; bruker det som er på skjermen din, til å avgjøre hva som kan autofylles. Nye passord, passnøkler og annen informasjon lagres her fra nå av."</string>
-    <string name="credman_picker_title" msgid="2642776965060619988">"Passord, passnøkler og datatjenester"</string>
+    <string name="credman_picker_title" msgid="8191267620665129205">"Passord, passnøkler og datatjenester"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Vil du slå av %1$s?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Vil du slå av denne tjenesten?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Lagret informasjon som passord, passnøkler, betalingsmåter og andre ting fylles ikke ut når du logger på. For å bruke informasjonen du har lagret, velg et passord, en passnøkkel eller en datatjeneste."</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"Vil du bruke %1$s?"</string>
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"%1$s bruker det som er på skjermen din, for å avgjøre hva som kan autofylles."</string>
-    <string name="credman_error_message_title" msgid="4741457523969373713">"Grense for passord, passnøkler og datatjenester"</string>
-    <string name="credman_error_message" msgid="6793314648458925172">"Du kan ha opptil 5 passord, passnøkler og datatjenester aktive samtidig. Slå av en tjeneste for å legge til flere."</string>
+    <string name="credman_error_message_title" msgid="4099557206946333568">"Grense for passord, passnøkler og datatjenester"</string>
+    <string name="credman_error_message" msgid="8334797097200415449">"Du kan ha opptil 5 passord, passnøkler og datatjenester aktive samtidig. Slå av en tjeneste for å legge til flere."</string>
     <string name="credman_confirmation_message_positive_button" msgid="2812613187691345361">"Slå av"</string>
     <string name="debug_autofill_category" msgid="5998163555428196185">"Autofyll"</string>
     <string name="autofill_logging_level_title" msgid="3733958845861098307">"Loggføringsnivå"</string>
@@ -4165,6 +4238,8 @@
     <string name="platform_compat_dialog_text_no_apps" msgid="5715226015751055812">"Endringer av appkompatibilitet kan bare modifiseres for feilsøkbare apper. Installer en feilsøkbar app og prøv igjen."</string>
     <string name="disabled_dependent_setting_summary" msgid="4508635725315852504">"Er avhengig av en annen innstilling"</string>
     <string name="my_device_info_account_preference_title" msgid="9197139254007133175">"Konto"</string>
+    <!-- no translation found for my_device_info_account_preference_summary (3510582677937510545) -->
+    <skip />
     <string name="my_device_info_device_name_preference_title" msgid="8053298498727237971">"Enhetsnavn"</string>
     <string name="my_device_info_basic_info_category_title" msgid="381963187269356548">"Grunnleggende info"</string>
     <string name="my_device_info_legal_category_title" msgid="7732792841537995127">"Juridisk og regelverk"</string>
@@ -4458,8 +4533,8 @@
     <string name="lockscreen_privacy_controls_summary" msgid="7522918441738915364">"Fra låseskjermen"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="2174300719855112358">"Bruk enhetskontroller"</string>
     <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"For å bruke, slå først på «Vis enhetsstyring»"</string>
-    <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Vis klokken på to linjer når det er tilgjengelig"</string>
-    <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"Klokke på to linjer"</string>
+    <string name="lockscreen_double_line_clock_summary" msgid="4109235686687860393">"Klokkens størrelse endres basert på innholdet på låseskjermen"</string>
+    <string name="lockscreen_double_line_clock_setting_toggle" msgid="802271087416091548">"Dynamisk klokke"</string>
     <string name="lockscreen_quick_affordances_title" msgid="8615741551327565793">"Snarveier"</string>
     <plurals name="lockscreen_quick_affordances_summary" formatted="false" msgid="4225396036524703997">
       <item quantity="other"><xliff:g id="FIRST_1">%1$s</xliff:g>, <xliff:g id="SECOND">%2$s</xliff:g></item>
@@ -4672,6 +4747,13 @@
     <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"Lyd fra kompatible enheter blir mer omsluttende"</string>
     <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"Hodesporing"</string>
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"Lyden endres når du beveger hodet, slik at den høres mer naturlig ut"</string>
+    <string name="bluetooth_details_audio_device_types_title" msgid="3381941189346781614">"Type lydenhet"</string>
+    <string name="bluetooth_details_audio_device_type_unknown" msgid="839337391037998014">"Ukjent"</string>
+    <string name="bluetooth_details_audio_device_type_speaker" msgid="3706227767994792124">"Høyttaler"</string>
+    <string name="bluetooth_details_audio_device_type_headphones" msgid="7644588291215033798">"Hodetelefoner"</string>
+    <string name="bluetooth_details_audio_device_type_hearing_aid" msgid="1310631131071939859">"Høreapparat"</string>
+    <string name="bluetooth_details_audio_device_type_carkit" msgid="4439017600454703229">"Bilsett"</string>
+    <string name="bluetooth_details_audio_device_type_other" msgid="7019481234617207563">"Annet"</string>
     <string name="ingress_rate_limit_title" msgid="2106694002836274350">"Grense for nedlastingshastighet for nettverket"</string>
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"Konfigurer grensen for innkommende båndbredde i nettverket, som benyttes for alle nettverk som gir internettilkobling."</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"Konfigurer grensen for nedlastingshastighet for nettverket"</string>
@@ -4704,24 +4786,19 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"Avinstaller app"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Apper installert den siste måneden}other{Apper installert de siste # månedene}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Apper installert for mer enn # måned siden}other{Apper installert for mer enn # måneder siden}}"</string>
-    <!-- no translation found for aspect_ratio_title (2451826875939676101) -->
-    <skip />
-    <!-- no translation found for aspect_ratio_summary (5944347596728740547) -->
-    <skip />
+    <string name="aspect_ratio_title" msgid="2451826875939676101">"Høyde/bredde-forhold"</string>
+    <string name="aspect_ratio_summary" msgid="5944347596728740547">"Velg et høyde/bredde-forhold for denne appen hvis den ikke er laget for å passe til <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"Foreslåtte apper"</string>
-    <string name="user_aspect_ratio_overridden_apps_label" msgid="1564914138276629704">"Apper du har overstyrt"</string>
+    <!-- no translation found for user_aspect_ratio_changed_apps_label (2096614916172567672) -->
+    <skip />
     <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"Appstandard"</string>
-    <!-- no translation found for user_aspect_ratio_fullscreen (1843427242540081996) -->
-    <skip />
-    <!-- no translation found for user_aspect_ratio_half_screen (1015852057094310209) -->
-    <skip />
-    <!-- no translation found for user_aspect_ratio_device_size (2339820985120881199) -->
-    <skip />
+    <string name="user_aspect_ratio_fullscreen" msgid="1843427242540081996">"Fullskjerm"</string>
+    <string name="user_aspect_ratio_half_screen" msgid="1015852057094310209">"Halv skjerm"</string>
+    <string name="user_aspect_ratio_device_size" msgid="2339820985120881199">"Høyde/bredde-forhold for enheten"</string>
     <string name="user_aspect_ratio_16_9" msgid="2286644872775170164">"16:9"</string>
     <string name="user_aspect_ratio_3_2" msgid="199262962518318932">"3:2"</string>
     <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4:3"</string>
-    <!-- no translation found for app_aspect_ratio_footer (8661813386126142251) -->
-    <skip />
+    <string name="app_aspect_ratio_footer" msgid="8661813386126142251">"Appen starter på nytt når du endrer høyde/bredde-forholdet. Du kan miste ulagrede endringer."</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Fingeravtrykkssensor"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Blitsvarsler"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Om blitsvarsler"</string>
@@ -4756,10 +4833,9 @@
     <string name="contrast_medium" msgid="384414510709285811">"Middels"</string>
     <string name="contrast_high" msgid="3988567609694797696">"Høy"</string>
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"Denne appen kan bare åpnes i ett vindu"</string>
-    <string name="accessibility_feature_full_state_summary" msgid="8747170258807179670">"<xliff:g id="STATE_0">%1$s</xliff:g> / <xliff:g id="SHORTCUT_STATE">%2$s</xliff:g> / <xliff:g id="SERVICE_SUMMARY">%3$s</xliff:g>"</string>
-    <string name="generic_accessibility_service_on" msgid="2465820044606775562">"Tjenesten er på"</string>
-    <string name="generic_accessibility_service_off" msgid="1752061696695346360">"Tjenesten er av"</string>
-    <string name="generic_accessibility_feature_shortcut_off" msgid="3669343136122187913">"Snarveien er av"</string>
+    <string name="generic_accessibility_service_on" msgid="4466229372357726824">"På"</string>
+    <string name="generic_accessibility_service_off" msgid="4759859497651675724">"Av"</string>
+    <string name="generic_accessibility_feature_shortcut_off" msgid="4022872394514077907">"Av"</string>
     <string name="accessibility_shortcut_state_off" msgid="8158137799007601475">"Av"</string>
     <string name="daltonizer_state_on" msgid="131013270022603983">"På"</string>
     <string name="daltonizer_state_off" msgid="1162285688069856179">"Av"</string>

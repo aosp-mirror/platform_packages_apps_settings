@@ -26,6 +26,7 @@ import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.biometrics.face.FaceFeatureProvider;
 import com.android.settings.biometrics2.factory.BiometricsRepositoryProvider;
 import com.android.settings.bluetooth.BluetoothFeatureProvider;
+import com.android.settings.connecteddevice.fastpair.FastPairFeatureProvider;
 import com.android.settings.connecteddevice.stylus.StylusFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
@@ -95,6 +96,7 @@ public class FakeFeatureFactory extends FeatureFactory {
     public KeyboardSettingsFeatureProvider mKeyboardSettingsFeatureProvider;
     public StylusFeatureProvider mStylusFeatureProvider;
     public OnboardingFeatureProvider mOnboardingFeatureProvider;
+    public FastPairFeatureProvider mFastPairFeatureProvider;
 
     /**
      * Call this in {@code @Before} method of the test class to use fake factory.
@@ -140,6 +142,7 @@ public class FakeFeatureFactory extends FeatureFactory {
         mKeyboardSettingsFeatureProvider = mock(KeyboardSettingsFeatureProvider.class);
         mStylusFeatureProvider = mock(StylusFeatureProvider.class);
         mOnboardingFeatureProvider = mock(OnboardingFeatureProvider.class);
+        mFastPairFeatureProvider = mock(FastPairFeatureProvider.class);
     }
 
     @Override
@@ -307,4 +310,10 @@ public class FakeFeatureFactory extends FeatureFactory {
     public OnboardingFeatureProvider getOnboardingFeatureProvider() {
         return mOnboardingFeatureProvider;
     }
+
+    @Override
+    public FastPairFeatureProvider getFastPairFeatureProvider() {
+        return mFastPairFeatureProvider;
+    }
 }
+

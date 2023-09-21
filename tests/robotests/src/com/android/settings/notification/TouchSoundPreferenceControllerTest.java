@@ -32,7 +32,6 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -42,6 +41,9 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class TouchSoundPreferenceControllerTest {
 
     @Mock
@@ -77,7 +79,6 @@ public class TouchSoundPreferenceControllerTest {
         assertThat(mController.isAvailable()).isTrue();
     }
 
-    @Ignore
     @Test
     @Config(qualifiers = "mcc999")
     public void isAvailable_whenNotVisible_isFalse() {

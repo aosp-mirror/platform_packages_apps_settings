@@ -47,9 +47,13 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowSystemProperties;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
 public class GraphicsDriverEnableAngleAsSystemDriverControllerTest {
     private static final String TAG = "GraphicsDriverEnableAngleAsSystemDriverControllerTest";
     @Mock private PreferenceScreen mScreen;

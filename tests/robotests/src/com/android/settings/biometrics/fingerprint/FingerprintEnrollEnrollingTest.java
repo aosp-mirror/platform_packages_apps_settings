@@ -78,6 +78,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
+import org.robolectric.annotation.LooperMode;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
@@ -85,6 +86,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 @RunWith(RobolectricTestRunner.class)
+@LooperMode(LooperMode.Mode.LEGACY)
 public class FingerprintEnrollEnrollingTest {
     private static final String ENROLL_PROGRESS_COLOR_LIGHT = "#699FF3";
     private static final String ENROLL_PROGRESS_COLOR_DARK = "#7DA7F1";
@@ -610,9 +612,10 @@ public class FingerprintEnrollEnrollingTest {
         mContext = spy(RuntimeEnvironment.application);
         mActivity = spy(FingerprintEnrollEnrolling.class);
 
-        when(mContext.getDisplay()).thenReturn(mMockDisplay);
+        doReturn(mMockDisplay).when(mContext).getDisplay();
         when(mMockDisplay.getRotation()).thenReturn(Surface.ROTATION_0);
 
+        doReturn(mMockDisplay).when(mActivity).getDisplay();
         doReturn(true).when(mActivity).shouldShowLottie();
         doReturn(mFingerprintManager).when(mActivity).getSystemService(FingerprintManager.class);
         doReturn(mVibrator).when(mActivity).getSystemService(Vibrator.class);
@@ -642,6 +645,7 @@ public class FingerprintEnrollEnrollingTest {
     }
 
     private void createActivity() {
+        System.setProperty("robolectric.createActivityContexts", "true");
         final Bundle savedInstanceState = new Bundle();
         savedInstanceState.putInt(KEY_STATE_PREVIOUS_ROTATION, Surface.ROTATION_90);
 

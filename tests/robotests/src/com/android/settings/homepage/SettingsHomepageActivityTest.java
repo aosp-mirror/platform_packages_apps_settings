@@ -48,13 +48,13 @@ import androidx.fragment.app.Fragment;
 import com.android.settings.R;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProviderImpl;
 import com.android.settings.testutils.shadow.ShadowActivityEmbeddingUtils;
+import com.android.settings.testutils.shadow.ShadowActivityManager;
 import com.android.settings.testutils.shadow.ShadowPasswordUtils;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -67,12 +67,14 @@ import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.shadow.api.Shadow;
-import org.robolectric.shadows.ShadowActivityManager;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowUserManager.class,
-        SettingsHomepageActivityTest.ShadowSuggestionFeatureProviderImpl.class})
+@Config(shadows = {
+        ShadowUserManager.class,
+        SettingsHomepageActivityTest.ShadowSuggestionFeatureProviderImpl.class,
+        ShadowActivityManager.class,
+})
 public class SettingsHomepageActivityTest {
 
     @Before
@@ -103,7 +105,6 @@ public class SettingsHomepageActivityTest {
         assertThat(avatarView.getVisibility()).isNotEqualTo(View.VISIBLE);
     }
 
-    @Ignore
     @Test
     @Config(qualifiers = "mcc999")
     public void launch_configEnabled_shouldShowAvatar() {

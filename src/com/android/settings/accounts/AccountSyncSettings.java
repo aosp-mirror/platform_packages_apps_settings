@@ -140,11 +140,10 @@ public class AccountSyncSettings extends AccountPreferenceBase {
         final Activity activity = getActivity();
         final Preference pref = EntityHeaderController
                 .newInstance(activity, this, null /* header */)
-                .setRecyclerView(getListView(), getSettingsLifecycle())
                 .setIcon(getDrawableForType(mAccount.type))
                 .setLabel(mAccount.name)
                 .setSummary(getLabelForType(mAccount.type))
-                .done(activity, getPrefContext());
+                .done(getPrefContext());
         pref.setOrder(0);
         getPreferenceScreen().addPreference(pref);
         if (savedInstanceState != null && savedInstanceState.containsKey(UID_REQUEST_KEY)) {

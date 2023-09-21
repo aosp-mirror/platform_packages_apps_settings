@@ -33,7 +33,7 @@ import org.mockito.Mock
 import org.mockito.Spy
 import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoRule
-import org.mockito.Mockito.`when` as whenever
+import org.mockito.kotlin.whenever
 
 @RunWith(AndroidJUnit4::class)
 class DataUsageLibTest {
@@ -82,19 +82,6 @@ class DataUsageLibTest {
 
         assertThat(mobileTemplate.matchRule).isEqualTo(NetworkTemplate.MATCH_CARRIER)
         assertThat(mobileTemplate.subscriberIds).containsExactly(DEFAULT_SUBSCRIBER_ID)
-        assertThat(mobileTemplate.meteredness).isEqualTo(NetworkStats.METERED_YES)
-    }
-
-    @Test
-    fun getMobileTemplate_mergedImsisFromGroupNull_returnRequestedSub() {
-        whenever(subscriptionManager.availableSubscriptionInfoList)
-            .thenReturn(listOf(SUBSCRIBER_INFO))
-        whenever(telephonyManager.mergedImsisFromGroup).thenReturn(null)
-
-        val mobileTemplate = DataUsageLib.getMobileTemplate(context, SUB_ID)
-
-        assertThat(mobileTemplate.matchRule).isEqualTo(NetworkTemplate.MATCH_CARRIER)
-        assertThat(mobileTemplate.subscriberIds).containsExactly(SUBSCRIBER_ID)
         assertThat(mobileTemplate.meteredness).isEqualTo(NetworkStats.METERED_YES)
     }
 

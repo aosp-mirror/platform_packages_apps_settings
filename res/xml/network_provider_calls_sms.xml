@@ -26,6 +26,7 @@
         settings:controller="com.android.settings.network.telephony.CallsDefaultSubscriptionController"
         android:order="10"
         android:icon="@drawable/ic_phone"
+        android:enabled="false"
         />
 
     <ListPreference
@@ -34,6 +35,7 @@
         settings:controller="com.android.settings.network.telephony.SmsDefaultSubscriptionController"
         android:order="15"
         android:icon="@drawable/ic_sms"
+        android:enabled="false"
         />
 
     <PreferenceCategory

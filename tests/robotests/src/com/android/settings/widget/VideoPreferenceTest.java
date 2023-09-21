@@ -40,7 +40,6 @@ import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowSettingsMediaPlayer;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -141,7 +140,6 @@ public class VideoPreferenceTest {
         assertThat(mAnimationController.isPlaying()).isTrue();
     }
 
-    @Ignore
     @Test
     @Config(qualifiers = "mcc999")
     public void onViewVisible_createAnimationController() {

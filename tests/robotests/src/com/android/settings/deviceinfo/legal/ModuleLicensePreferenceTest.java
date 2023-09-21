@@ -23,8 +23,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ModuleInfo;
 
-import com.android.settings.utils.ActivityControllerWrapper;
-
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -44,8 +42,7 @@ public class ModuleLicensePreferenceTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        mContext = (Context) ActivityControllerWrapper.setup(
-                Robolectric.buildActivity(Activity.class)).get();
+        mContext = Robolectric.setupActivity(Activity.class);
         mModuleInfo = new ModuleInfo();
         mModuleInfo.setPackageName(PACKAGE_NAME);
         mModuleInfo.setName(NAME);

@@ -76,7 +76,7 @@ public class ZenAutomaticRuleHeaderPreferenceController extends AbstractZenModeP
 
         mController.setIcon(getIcon())
                 .setLabel(mRule.getName())
-                .done(mFragment.getActivity(), false /* rebindActions */);
+                .done(false /* rebindActions */);
     }
 
     private Drawable getIcon() {

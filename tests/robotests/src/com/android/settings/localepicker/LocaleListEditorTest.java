@@ -17,7 +17,8 @@
 package com.android.settings.localepicker;
 
 import static com.android.settings.localepicker.AppLocalePickerActivity.EXTRA_APP_LOCALE;
-import static com.android.settings.localepicker.LocaleListEditor.EXTRA_SYSTEM_LOCALE_DIALOG_TYPE;
+import static com.android.settings.localepicker.AppLocalePickerActivity.EXTRA_NOTIFICATION_ID;
+import static com.android.settings.localepicker.LocaleDialogFragment.DIALOG_ADD_SYSTEM_LOCALE;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -29,7 +30,6 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.robolectric.Shadows.shadowOf;
 
 import android.app.Activity;
 import android.app.IActivityManager;
@@ -40,11 +40,13 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.LocaleList;
+import android.platform.test.annotations.RequiresFlagsEnabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -57,6 +59,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.android.internal.app.LocaleStore;
 import com.android.settings.R;
+import com.android.settings.flags.Flags;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowActivityManager;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
@@ -64,6 +67,7 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -72,6 +76,7 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.annotation.LooperMode;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
@@ -79,12 +84,19 @@ import java.util.List;
 import java.util.Locale;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowAlertDialogCompat.class, ShadowActivityManager.class})
+@Config(shadows = {
+        ShadowAlertDialogCompat.class,
+        ShadowActivityManager.class,
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+})
+@LooperMode(LooperMode.Mode.LEGACY)
 public class LocaleListEditorTest {
 
     private static final String ARG_DIALOG_TYPE = "arg_dialog_type";
     private static final String TAG_DIALOG_CONFIRM_SYSTEM_DEFAULT = "dialog_confirm_system_default";
     private static final String TAG_DIALOG_NOT_AVAILABLE = "dialog_not_available_locale";
+    private static final String TAG_DIALOG_ADD_SYSTEM_LOCALE = "dialog_add_system_locale";
+    private static final String EXTRA_SYSTEM_LOCALE_DIALOG_TYPE = "system_locale_dialog_type";
     private static final int DIALOG_CONFIRM_SYSTEM_DEFAULT = 1;
     private static final int REQUEST_CONFIRM_SYSTEM_DEFAULT = 1;
 
@@ -126,6 +138,12 @@ public class LocaleListEditorTest {
     private TextView mCurrentDefault;
     @Mock
     private ImageView mDragHandle;
+    @Mock
+    private NotificationController mNotificationController;
+
+    @Rule
+    public final CheckFlagsRule mCheckFlagsRule =
+            DeviceFlagsValueProvider.createCheckFlagsRule();
 
     @Before
     public void setUp() throws Exception {
@@ -135,6 +153,8 @@ public class LocaleListEditorTest {
         when(mLocaleListEditor.getContext()).thenReturn(mContext);
         mActivity = Robolectric.buildActivity(FragmentActivity.class).get();
         when(mLocaleListEditor.getActivity()).thenReturn(mActivity);
+        when(mLocaleListEditor.getNotificationController()).thenReturn(
+                mNotificationController);
         ReflectionHelpers.setField(mLocaleListEditor, "mEmptyTextView",
                 new TextView(RuntimeEnvironment.application));
         ReflectionHelpers.setField(mLocaleListEditor, "mRestrictionsManager",
@@ -335,44 +355,50 @@ public class LocaleListEditorTest {
     }
 
     @Test
+    @RequiresFlagsEnabled(Flags.FLAG_LOCALE_NOTIFICATION_ENABLED)
     public void showDiallogForAddedLocale_showConfirmDialog() {
         initIntentAndResourceForLocaleDialog();
         mLocaleListEditor.onViewStateRestored(null);
 
-        final AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
-        assertThat(dialog).isNotNull();
-        final ShadowAlertDialogCompat shadowDialog = ShadowAlertDialogCompat.shadowOf(dialog);
-        assertThat(shadowDialog.getView()).isNotNull();
-        TextView message = shadowDialog.getView().findViewById(R.id.dialog_msg);
-        assertThat(message.getText().toString()).isEqualTo(
-                "This lets apps and websites know you also prefer this language.");
+        verify(mFragmentTransaction).add(any(LocaleDialogFragment.class),
+                eq(TAG_DIALOG_ADD_SYSTEM_LOCALE));
     }
 
     @Test
+    @RequiresFlagsEnabled(Flags.FLAG_LOCALE_NOTIFICATION_ENABLED)
     public void showDiallogForAddedLocale_clickAdd() {
         initIntentAndResourceForLocaleDialog();
         mLocaleListEditor.onViewStateRestored(null);
+        LocaleStore.LocaleInfo info = LocaleStore.fromLocale(Locale.forLanguageTag("en-US"));
+        Bundle bundle = new Bundle();
+        bundle.putInt(ARG_DIALOG_TYPE, DIALOG_ADD_SYSTEM_LOCALE);
+        bundle.putSerializable(LocaleDialogFragment.ARG_TARGET_LOCALE, info);
+        Intent intent = new Intent().putExtras(bundle);
 
-        final AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
-        assertThat(dialog).isNotNull();
-        Button positive = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
-        positive.performClick();
+        mLocaleListEditor.onActivityResult(DIALOG_ADD_SYSTEM_LOCALE, Activity.RESULT_OK, intent);
+
         verify(mAdapter).addLocale(any(LocaleStore.LocaleInfo.class));
     }
 
     @Test
+    @RequiresFlagsEnabled(Flags.FLAG_LOCALE_NOTIFICATION_ENABLED)
     public void showDiallogForAddedLocale_clickCancel() {
         initIntentAndResourceForLocaleDialog();
         mLocaleListEditor.onViewStateRestored(null);
+        LocaleStore.LocaleInfo info = LocaleStore.fromLocale(Locale.forLanguageTag("en-US"));
+        Bundle bundle = new Bundle();
+        bundle.putInt(ARG_DIALOG_TYPE, DIALOG_ADD_SYSTEM_LOCALE);
+        bundle.putSerializable(LocaleDialogFragment.ARG_TARGET_LOCALE, info);
+        Intent intent = new Intent().putExtras(bundle);
 
-        final AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
-        assertThat(dialog).isNotNull();
-        Button negative = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);
-        negative.performClick();
+        mLocaleListEditor.onActivityResult(DIALOG_ADD_SYSTEM_LOCALE, Activity.RESULT_CANCELED,
+                intent);
+
         verify(mAdapter, never()).addLocale(any(LocaleStore.LocaleInfo.class));
     }
 
     @Test
+    @RequiresFlagsEnabled(Flags.FLAG_LOCALE_NOTIFICATION_ENABLED)
     public void showDiallogForAddedLocale_invalidLocale_noDialog() {
         Intent intent = new Intent("ACTION")
                 .putExtra(EXTRA_APP_LOCALE, "ab-CD") // invalid locale
@@ -381,11 +407,12 @@ public class LocaleListEditorTest {
 
         mLocaleListEditor.onViewStateRestored(null);
 
-        final AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
-        assertThat(dialog).isNull();
+        verify(mFragmentTransaction, never()).add(any(LocaleDialogFragment.class),
+                eq(TAG_DIALOG_ADD_SYSTEM_LOCALE));
     }
 
     @Test
+    @RequiresFlagsEnabled(Flags.FLAG_LOCALE_NOTIFICATION_ENABLED)
     public void showDiallogForAddedLocale_noDialogType_noDialog() {
         Intent intent = new Intent("ACTION")
                 .putExtra(EXTRA_APP_LOCALE, "ja-JP");
@@ -394,11 +421,12 @@ public class LocaleListEditorTest {
 
         mLocaleListEditor.onViewStateRestored(null);
 
-        final AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
-        assertThat(dialog).isNull();
+        verify(mFragmentTransaction, never()).add(any(LocaleDialogFragment.class),
+                eq(TAG_DIALOG_ADD_SYSTEM_LOCALE));
     }
 
     @Test
+    @RequiresFlagsEnabled(Flags.FLAG_LOCALE_NOTIFICATION_ENABLED)
     public void showDiallogForAddedLocale_inSystemLocale_noDialog() {
         LocaleList.setDefault(LocaleList.forLanguageTags("en-US,ar-AE-u-nu-arab"));
         Intent intent = new Intent("ACTION")
@@ -408,30 +436,22 @@ public class LocaleListEditorTest {
 
         mLocaleListEditor.onViewStateRestored(null);
 
-        final AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
-        assertThat(dialog).isNull();
+        verify(mFragmentTransaction, never()).add(any(LocaleDialogFragment.class),
+                eq(TAG_DIALOG_ADD_SYSTEM_LOCALE));
     }
 
     private void initIntentAndResourceForLocaleDialog() {
+        int notificationId = 1000;
         Intent intent = new Intent("ACTION")
                 .putExtra(EXTRA_APP_LOCALE, "ja-JP")
-                .putExtra(EXTRA_SYSTEM_LOCALE_DIALOG_TYPE, "locale_suggestion");
+                .putExtra(EXTRA_SYSTEM_LOCALE_DIALOG_TYPE, "locale_suggestion")
+                .putExtra(EXTRA_NOTIFICATION_ID, notificationId);
+
         mActivity.setIntent(intent);
-        shadowOf(mActivity).setCallingPackage("com.a.b");
-        String[] allowedPackage = new String[]{"com.a.b", "com.b.c"};
         String[] supportedLocales = new String[]{"en-US", "ja-JP"};
         View contentView = LayoutInflater.from(mActivity).inflate(R.layout.locale_dialog, null);
         doReturn(contentView).when(mLocaleListEditor).getLocaleDialogView();
-        when(mContext.getResources()).thenReturn(mResources);
-        when(mResources.getStringArray(
-                R.array.allowed_packages_for_locale_confirmation_diallog)).thenReturn(
-                allowedPackage);
-        when(mResources.getString(
-                R.string.title_system_locale_addition)).thenReturn(
-                "Add %s to preferred languages?");
-        when(mResources.getString(
-                R.string.desc_system_locale_addition)).thenReturn(
-                "This lets apps and websites know you also prefer this language.");
+        when(mNotificationController.getNotificationId("ja-JP")).thenReturn(notificationId);
         when(mLocaleListEditor.getSupportedLocales()).thenReturn(supportedLocales);
     }
 
@@ -445,7 +465,6 @@ public class LocaleListEditorTest {
 
         mAdapter = spy(new LocaleDragAndDropAdapter(mLocaleListEditor, mLocaleList));
         ReflectionHelpers.setField(mAdapter, "mFeedItemList", mLocaleList);
-        ReflectionHelpers.setField(mAdapter, "mParent", mLocaleListEditor);
         ReflectionHelpers.setField(mAdapter, "mCacheItemList", new ArrayList<>(mLocaleList));
         ReflectionHelpers.setField(mAdapter, "mContext", mContext);
         ViewGroup view = new FrameLayout(mContext);

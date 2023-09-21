@@ -14,7 +14,8 @@
      limitations under the License.
 -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory
         android:key="usage_amount"
@@ -32,6 +33,7 @@
 
     <PreferenceCategory
         android:key="apps_group"
-        android:layout="@layout/preference_category_no_label" />
+        android:layout="@layout/preference_category_no_label"
+        settings:controller="com.android.settings.datausage.DataUsageListAppsController" />
 
 </PreferenceScreen>

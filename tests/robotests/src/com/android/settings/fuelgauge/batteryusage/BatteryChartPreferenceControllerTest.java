@@ -16,6 +16,8 @@
 
 package com.android.settings.fuelgauge.batteryusage;
 
+import static com.android.settings.fuelgauge.batteryusage.BatteryChartViewModel.SELECTED_INDEX_ALL;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyFloat;
@@ -26,11 +28,11 @@ import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -39,9 +41,11 @@ import android.os.Bundle;
 import android.os.LocaleList;
 import android.os.UserManager;
 import android.text.format.DateUtils;
+import android.util.ArrayMap;
 import android.view.View;
 import android.view.ViewPropertyAnimator;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.android.settings.SettingsActivity;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -54,7 +58,6 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -69,6 +72,8 @@ public final class BatteryChartPreferenceControllerTest {
     private UserManager mUserManager;
     @Mock
     private SettingsActivity mSettingsActivity;
+    @Mock
+    private TextView mChartSummaryTextView;
     @Mock
     private BatteryChartView mDailyChartView;
     @Mock
@@ -110,8 +115,10 @@ public final class BatteryChartPreferenceControllerTest {
         setupHourlyChartViewAnimationMock();
         mBatteryChartPreferenceController = createController();
         mBatteryChartPreferenceController.mPrefContext = mContext;
+        mBatteryChartPreferenceController.mChartSummaryTextView = mChartSummaryTextView;
         mBatteryChartPreferenceController.mDailyChartView = mDailyChartView;
         mBatteryChartPreferenceController.mHourlyChartView = mHourlyChartView;
+        BatteryDiffEntry.clearCache();
         // Adds fake testing data.
         BatteryDiffEntry.sResourceCache.put(
                 "fakeBatteryDiffEntryKey",
@@ -144,7 +151,7 @@ public final class BatteryChartPreferenceControllerTest {
         reset(mHourlyChartView);
         setupHourlyChartViewAnimationMock();
 
-        mBatteryChartPreferenceController.setBatteryHistoryMap(createBatteryHistoryMap(6));
+        mBatteryChartPreferenceController.onBatteryLevelDataUpdate(createBatteryLevelData(6));
 
         verify(mDailyChartView, atLeastOnce()).setVisibility(View.GONE);
         // Ignore fast refresh ui from the data processor callback.
@@ -176,16 +183,17 @@ public final class BatteryChartPreferenceControllerTest {
                 BatteryChartViewModel.AxisLabelPosition.CENTER_OF_TRAPEZOIDS,
                 mBatteryChartPreferenceController.mDailyChartLabelTextGenerator);
 
-        mBatteryChartPreferenceController.setBatteryHistoryMap(createBatteryHistoryMap(60));
+        mBatteryChartPreferenceController.onBatteryLevelDataUpdate(createBatteryLevelData(60));
 
         verify(mDailyChartView, atLeastOnce()).setVisibility(View.VISIBLE);
         verify(mViewPropertyAnimator, atLeastOnce()).alpha(0f);
-        verify(mDailyChartView).setViewModel(expectedDailyViewModel);
+        verify(mDailyChartView, atLeastOnce()).setViewModel(expectedDailyViewModel);
 
         reset(mDailyChartView);
         reset(mHourlyChartView);
         setupHourlyChartViewAnimationMock();
         doReturn(mLayoutParams).when(mDailyChartView).getLayoutParams();
+        doReturn(View.GONE).when(mHourlyChartView).getVisibility();
         mBatteryChartPreferenceController.mDailyChartIndex = 0;
         mBatteryChartPreferenceController.refreshUi();
         verify(mDailyChartView).setVisibility(View.VISIBLE);
@@ -245,8 +253,7 @@ public final class BatteryChartPreferenceControllerTest {
         setupHourlyChartViewAnimationMock();
         doReturn(mLayoutParams).when(mDailyChartView).getLayoutParams();
         mBatteryChartPreferenceController.mDailyChartIndex = 2;
-        mBatteryChartPreferenceController.mHourlyChartIndex =
-                BatteryChartViewModel.SELECTED_INDEX_ALL;
+        mBatteryChartPreferenceController.mHourlyChartIndex = SELECTED_INDEX_ALL;
         mBatteryChartPreferenceController.refreshUi();
         verify(mDailyChartView).setVisibility(View.VISIBLE);
         verify(mViewPropertyAnimator, atLeastOnce()).alpha(1f);
@@ -271,63 +278,110 @@ public final class BatteryChartPreferenceControllerTest {
     }
 
     @Test
-    public void refreshUi_normalCase_returnTrue() {
-        mBatteryChartPreferenceController.setBatteryHistoryMap(createBatteryHistoryMap(6));
-        assertThat(mBatteryChartPreferenceController.refreshUi()).isTrue();
+    public void onBatteryLevelDataUpdate_oneDay_showHourlyChartOnly() {
+        doReturn(View.GONE).when(mHourlyChartView).getVisibility();
+
+        mBatteryChartPreferenceController.onBatteryLevelDataUpdate(createBatteryLevelData(6));
+
+        verify(mChartSummaryTextView).setVisibility(View.VISIBLE);
+        verify(mDailyChartView).setVisibility(View.GONE);
+        verify(mHourlyChartView).setVisibility(View.VISIBLE);
     }
 
     @Test
-    public void refreshUi_batteryIndexedMapIsNull_returnTrue() {
-        mBatteryChartPreferenceController.setBatteryHistoryMap(null);
-        assertThat(mBatteryChartPreferenceController.refreshUi()).isTrue();
+    public void onBatteryLevelDataUpdate_selectAllForMultipleDays_showDailyChartOnly() {
+        doReturn(View.GONE).when(mHourlyChartView).getVisibility();
+
+        mBatteryChartPreferenceController.mDailyChartIndex = SELECTED_INDEX_ALL;
+        mBatteryChartPreferenceController.onBatteryLevelDataUpdate(createBatteryLevelData(60));
+
+        verify(mChartSummaryTextView).setVisibility(View.VISIBLE);
+        verify(mDailyChartView).setVisibility(View.VISIBLE);
+        verify(mHourlyChartView, never()).setVisibility(View.VISIBLE);
+    }
+
+    @Test
+    public void onBatteryLevelDataUpdate_selectOneDayForMultipleDays_showBothCharts() {
+        doReturn(View.GONE).when(mHourlyChartView).getVisibility();
+
+        mBatteryChartPreferenceController.mDailyChartIndex = 0;
+        mBatteryChartPreferenceController.onBatteryLevelDataUpdate(createBatteryLevelData(60));
+
+        verify(mChartSummaryTextView).setVisibility(View.VISIBLE);
+        verify(mDailyChartView).setVisibility(View.VISIBLE);
+        verify(mHourlyChartView).setVisibility(View.VISIBLE);
+    }
+
+    @Test
+    public void onBatteryLevelDataUpdate_batteryLevelDataIsNull_showNoChart() {
+        doReturn(View.GONE).when(mHourlyChartView).getVisibility();
+
+        mBatteryChartPreferenceController.onBatteryLevelDataUpdate(null);
+
+        verify(mChartSummaryTextView).setVisibility(View.GONE);
+        verify(mDailyChartView).setVisibility(View.GONE);
+        verify(mHourlyChartView).setVisibility(View.GONE);
+    }
+
+    @Test
+    public void showEmptyChart_normalCase_showEmptyChart() {
+        doReturn(View.GONE).when(mHourlyChartView).getVisibility();
+
+        mBatteryChartPreferenceController.showEmptyChart();
+
+        verify(mChartSummaryTextView).setVisibility(View.VISIBLE);
+        verify(mDailyChartView).setVisibility(View.GONE);
+        verify(mHourlyChartView).setVisibility(View.VISIBLE);
     }
 
     @Test
     public void refreshUi_dailyChartViewIsNull_ignoreRefresh() {
         mBatteryChartPreferenceController.mDailyChartView = null;
-        assertThat(mBatteryChartPreferenceController.refreshUi()).isFalse();
+
+        mBatteryChartPreferenceController.refreshUi();
+
+        verify(mChartSummaryTextView, never()).setVisibility(anyInt());
     }
 
     @Test
     public void refreshUi_hourlyChartViewIsNull_ignoreRefresh() {
         mBatteryChartPreferenceController.mHourlyChartView = null;
-        assertThat(mBatteryChartPreferenceController.refreshUi()).isFalse();
+
+        mBatteryChartPreferenceController.refreshUi();
+
+        verify(mChartSummaryTextView, never()).setVisibility(anyInt());
     }
 
     @Test
     public void selectedSlotText_selectAllDaysAllHours_returnNull() {
-        mBatteryChartPreferenceController.setBatteryHistoryMap(createBatteryHistoryMap(60));
-        mBatteryChartPreferenceController.mDailyChartIndex =
-                BatteryChartViewModel.SELECTED_INDEX_ALL;
-        mBatteryChartPreferenceController.mHourlyChartIndex =
-                BatteryChartViewModel.SELECTED_INDEX_ALL;
+        mBatteryChartPreferenceController.onBatteryLevelDataUpdate(createBatteryLevelData(60));
+        mBatteryChartPreferenceController.mDailyChartIndex = SELECTED_INDEX_ALL;
+        mBatteryChartPreferenceController.mHourlyChartIndex = SELECTED_INDEX_ALL;
 
         assertThat(mBatteryChartPreferenceController.getSlotInformation()).isEqualTo(null);
     }
 
     @Test
     public void selectedSlotText_onlyOneDayDataSelectAllHours_returnNull() {
-        mBatteryChartPreferenceController.setBatteryHistoryMap(createBatteryHistoryMap(6));
+        mBatteryChartPreferenceController.onBatteryLevelDataUpdate(createBatteryLevelData(6));
         mBatteryChartPreferenceController.mDailyChartIndex = 0;
-        mBatteryChartPreferenceController.mHourlyChartIndex =
-                BatteryChartViewModel.SELECTED_INDEX_ALL;
+        mBatteryChartPreferenceController.mHourlyChartIndex = SELECTED_INDEX_ALL;
 
         assertThat(mBatteryChartPreferenceController.getSlotInformation()).isEqualTo(null);
     }
 
     @Test
     public void selectedSlotText_selectADayAllHours_onlyDayText() {
-        mBatteryChartPreferenceController.setBatteryHistoryMap(createBatteryHistoryMap(60));
+        mBatteryChartPreferenceController.onBatteryLevelDataUpdate(createBatteryLevelData(60));
         mBatteryChartPreferenceController.mDailyChartIndex = 1;
-        mBatteryChartPreferenceController.mHourlyChartIndex =
-                BatteryChartViewModel.SELECTED_INDEX_ALL;
+        mBatteryChartPreferenceController.mHourlyChartIndex = SELECTED_INDEX_ALL;
 
         assertThat(mBatteryChartPreferenceController.getSlotInformation()).isEqualTo("Sunday");
     }
 
     @Test
     public void selectedSlotText_onlyOneDayDataSelectAnHour_onlyHourText() {
-        mBatteryChartPreferenceController.setBatteryHistoryMap(createBatteryHistoryMap(6));
+        mBatteryChartPreferenceController.onBatteryLevelDataUpdate(createBatteryLevelData(6));
         mBatteryChartPreferenceController.mDailyChartIndex = 0;
         mBatteryChartPreferenceController.mHourlyChartIndex = 2;
 
@@ -337,7 +391,7 @@ public final class BatteryChartPreferenceControllerTest {
 
     @Test
     public void selectedSlotText_SelectADayAnHour_dayAndHourText() {
-        mBatteryChartPreferenceController.setBatteryHistoryMap(createBatteryHistoryMap(60));
+        mBatteryChartPreferenceController.onBatteryLevelDataUpdate(createBatteryLevelData(60));
         mBatteryChartPreferenceController.mDailyChartIndex = 1;
         mBatteryChartPreferenceController.mHourlyChartIndex = 8;
 
@@ -347,7 +401,7 @@ public final class BatteryChartPreferenceControllerTest {
 
     @Test
     public void selectedSlotText_selectFirstSlot_withMinuteText() {
-        mBatteryChartPreferenceController.setBatteryHistoryMap(createBatteryHistoryMap(6));
+        mBatteryChartPreferenceController.onBatteryLevelDataUpdate(createBatteryLevelData(6));
         mBatteryChartPreferenceController.mDailyChartIndex = 0;
         mBatteryChartPreferenceController.mHourlyChartIndex = 0;
 
@@ -357,7 +411,7 @@ public final class BatteryChartPreferenceControllerTest {
 
     @Test
     public void selectedSlotText_selectLastSlot_withNowText() {
-        mBatteryChartPreferenceController.setBatteryHistoryMap(createBatteryHistoryMap(6));
+        mBatteryChartPreferenceController.onBatteryLevelDataUpdate(createBatteryLevelData(6));
         mBatteryChartPreferenceController.mDailyChartIndex = 0;
         mBatteryChartPreferenceController.mHourlyChartIndex = 3;
 
@@ -367,7 +421,7 @@ public final class BatteryChartPreferenceControllerTest {
 
     @Test
     public void selectedSlotText_selectOnlySlot_withMinuteAndNowText() {
-        mBatteryChartPreferenceController.setBatteryHistoryMap(createBatteryHistoryMap(1));
+        mBatteryChartPreferenceController.onBatteryLevelDataUpdate(createBatteryLevelData(1));
         mBatteryChartPreferenceController.mDailyChartIndex = 0;
         mBatteryChartPreferenceController.mHourlyChartIndex = 0;
 
@@ -388,7 +442,7 @@ public final class BatteryChartPreferenceControllerTest {
         mBatteryChartPreferenceController.mHourlyChartIndex = -1;
 
         mBatteryChartPreferenceController.onCreate(bundle);
-        mBatteryChartPreferenceController.setBatteryHistoryMap(createBatteryHistoryMap(25));
+        mBatteryChartPreferenceController.onBatteryLevelDataUpdate(createBatteryLevelData(25));
 
         assertThat(mBatteryChartPreferenceController.mDailyChartIndex)
                 .isEqualTo(expectedDailyIndex);
@@ -398,9 +452,7 @@ public final class BatteryChartPreferenceControllerTest {
 
     @Test
     public void getTotalHours_getExpectedResult() {
-        Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap = createBatteryHistoryMap(60);
-        BatteryLevelData batteryLevelData =
-                DataProcessManager.getBatteryLevelData(mContext, null, batteryHistoryMap, null);
+        BatteryLevelData batteryLevelData = createBatteryLevelData(60);
 
         final int totalHour = BatteryChartPreferenceController.getTotalHours(batteryLevelData);
 
@@ -413,37 +465,21 @@ public final class BatteryChartPreferenceControllerTest {
         return 1619247600000L + index * DateUtils.HOUR_IN_MILLIS;
     }
 
-    private static Map<Long, Map<String, BatteryHistEntry>> createBatteryHistoryMap(
-            int numOfHours) {
-        final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap = new HashMap<>();
-        for (int index = 0; index < numOfHours; index++) {
-            final ContentValues values = new ContentValues();
-            final DeviceBatteryState deviceBatteryState =
-                    DeviceBatteryState
-                            .newBuilder()
-                            .setBatteryLevel(100 - index)
-                            .build();
-            final BatteryInformation batteryInformation =
-                    BatteryInformation
-                            .newBuilder()
-                            .setDeviceBatteryState(deviceBatteryState)
-                            .setConsumePower(100 - index)
-                            .build();
-            values.put(BatteryHistEntry.KEY_BATTERY_INFORMATION,
-                    ConvertUtils.convertBatteryInformationToString(batteryInformation));
-            values.put(BatteryHistEntry.KEY_PACKAGE_NAME, "package" + index);
-            final BatteryHistEntry entry = new BatteryHistEntry(values);
-            final Map<String, BatteryHistEntry> entryMap = new HashMap<>();
-            entryMap.put("fake_entry_key" + index, entry);
-            long timestamp = generateTimestamp(index);
+    private static BatteryLevelData createBatteryLevelData(int numOfHours) {
+        Map<Long, Integer> batteryLevelMap = new ArrayMap<>();
+        for (int index = 0; index < numOfHours; index += 2) {
+            final Integer level = 100 - index;
+            Long timestamp = generateTimestamp(index);
             if (index == 0) {
                 timestamp += DateUtils.MINUTE_IN_MILLIS;
+                index--;
             }
-            batteryHistoryMap.put(timestamp, entryMap);
+            batteryLevelMap.put(timestamp, level);
         }
-        DataProcessor.sTestCurrentTimeMillis =
-                generateTimestamp(numOfHours - 1) + DateUtils.MINUTE_IN_MILLIS * 2;
-        return batteryHistoryMap;
+        long current = generateTimestamp(numOfHours - 1) + DateUtils.MINUTE_IN_MILLIS * 2;
+        batteryLevelMap.put(current, 66);
+        DataProcessor.sTestCurrentTimeMillis = current;
+        return new BatteryLevelData(batteryLevelMap);
     }
 
     private BatteryChartPreferenceController createController() {

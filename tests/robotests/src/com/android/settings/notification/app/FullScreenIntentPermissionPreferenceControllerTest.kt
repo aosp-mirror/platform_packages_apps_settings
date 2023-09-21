@@ -43,6 +43,7 @@ import com.android.settings.notification.NotificationBackend.AppRow
 import com.android.settings.notification.app.FullScreenIntentPermissionPreferenceController.Companion.KEY_FSI_PERMISSION
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin
 import com.android.settingslib.RestrictedSwitchPreference
+import com.android.settingslib.testutils.shadow.ShadowPermissionChecker
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Before
@@ -58,11 +59,13 @@ import org.mockito.junit.MockitoJUnit
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.shadows.ShadowApplicationPackageManager
-import org.robolectric.shadows.ShadowPermissionChecker
 import org.mockito.Mockito.`when` as whenever
 
 @RunWith(RobolectricTestRunner::class)
-@Config(shadows = [ShadowApplicationPackageManager::class])
+@Config(shadows = [
+    ShadowApplicationPackageManager::class,
+    ShadowPermissionChecker::class,
+])
 class FullScreenIntentPermissionPreferenceControllerTest {
     @JvmField
     @Rule
