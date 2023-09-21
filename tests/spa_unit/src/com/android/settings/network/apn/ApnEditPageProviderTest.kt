@@ -49,13 +49,14 @@ class ApnEditPageProviderTest {
     private val apnType = "apn_type"
     private val apnRoaming = "IPv4"
     private val apnEnable = context.resources.getString(R.string.carrier_enabled)
+    private val apnProtocolOptions = context.resources.getStringArray(R.array.apn_protocol_entries).toList()
     private val apnData = ApnData(
         name = apnName,
         mmsc = mmsc,
         mmsProxy = mmsProxy,
         mnc = mnc,
         apnType = apnType,
-        apnRoaming = apnRoaming,
+        apnRoaming = apnProtocolOptions.indexOf(apnRoaming),
         apnEnable = true
     )
 
