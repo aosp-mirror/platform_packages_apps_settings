@@ -58,7 +58,6 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.wifi.WifiUtils;
 import com.android.settings.wifi.details2.WifiDetailPreferenceController2;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.graph.ThemedBatteryDrawable;
 import com.android.wifitrackerlib.NetworkDetailsTracker;
 import com.android.wifitrackerlib.WifiEntry;
 
@@ -67,7 +66,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
-import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnit;
@@ -112,8 +110,6 @@ public class WifiNetworkDetailsFragmentTest {
 
     FakeFragment mFragment;
     PreferenceScreen mScreen;
-    ArgumentCaptor<ThemedBatteryDrawable> mThemedBatteryDrawableCaptor =
-            ArgumentCaptor.forClass(ThemedBatteryDrawable.class);
 
     @Before
     public void setUp() {
@@ -290,25 +286,20 @@ public class WifiNetworkDetailsFragmentTest {
     }
 
     @Test
-    public void updateBattery_hiPercentageNoCharging_setResourceCorrect() {
+    public void updateBattery_hiPercentageNoCharging_setSummaryCorrect() {
         mFragment.updateBattery(false /* isChanging */, BATTERY_PERCENTAGE_MAX);
 
         verify(mBattery).setSummary(formatPercentage(BATTERY_PERCENTAGE_MAX));
-        verify(mBattery).setIcon(mThemedBatteryDrawableCaptor.capture());
-        ThemedBatteryDrawable drawable = mThemedBatteryDrawableCaptor.getValue();
-        assertThat(drawable.getCharging()).isFalse();
-        assertThat(drawable.getBatteryLevel()).isEqualTo(BATTERY_PERCENTAGE_MAX);
     }
 
     @Test
-    public void updateBattery_lowPercentageWithCharging_setResourceCorrect() {
+    public void updateBattery_lowPercentageWithCharging_setSummaryCorrect() {
+        String summary = mContext.getString(R.string.hotspot_battery_charging_summary,
+                formatPercentage(0));
+
         mFragment.updateBattery(true /* isChanging */, 0 /* percentage */);
 
-        verify(mBattery).setSummary(formatPercentage(0));
-        verify(mBattery).setIcon(mThemedBatteryDrawableCaptor.capture());
-        ThemedBatteryDrawable drawable = mThemedBatteryDrawableCaptor.getValue();
-        assertThat(drawable.getCharging()).isTrue();
-        assertThat(drawable.getBatteryLevel()).isEqualTo(0);
+        verify(mBattery).setSummary(summary);
     }
 
     // Fake WifiNetworkDetailsFragment to override the protected method as public.
