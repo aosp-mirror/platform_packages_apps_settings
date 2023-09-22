@@ -85,7 +85,7 @@ public class AndroidBeam extends InstrumentedFragment
             return new View(getContext());
         }
         mView = inflater.inflate(
-                com.android.settingslib.widget.R.layout.preference_footer, container, false);
+                com.android.settingslib.widget.preference.footer.R.layout.preference_footer, container, false);
 
         ImageView iconInfo = mView.findViewById(android.R.id.icon);
         iconInfo.setImageResource(R.drawable.ic_info_outline_24dp);

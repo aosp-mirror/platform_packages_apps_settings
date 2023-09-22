@@ -122,7 +122,7 @@ public class WifiEntryPreference extends RestrictedPreference implements
         view.itemView.setContentDescription(mContentDescription);
 
         // Turn off divider
-        view.findViewById(com.android.settingslib.widget.R.id.two_target_divider)
+        view.findViewById(com.android.settingslib.widget.preference.twotarget.R.id.two_target_divider)
                 .setVisibility(View.INVISIBLE);
 
         // Enable the icon button when the help string in this WifiEntry is not null.

@@ -550,7 +550,7 @@ public class AddAppNetworksFragment extends InstrumentedFragment implements
             }
 
             final View divider = view.findViewById(
-                    com.android.settingslib.widget.R.id.two_target_divider);
+                    com.android.settingslib.widget.preference.twotarget.R.id.two_target_divider);
             if (divider != null) {
                 divider.setVisibility(View.GONE);
             }

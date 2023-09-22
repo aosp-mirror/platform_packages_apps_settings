@@ -80,7 +80,7 @@ public class AppHeaderViewPreferenceControllerTest {
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
         mHeader = LayoutInflater.from(mContext).inflate(
-                com.android.settingslib.widget.R.layout.settings_entity_header, null);
+                com.android.settingslib.widget.preference.layout.R.layout.settings_entity_header, null);
 
         when(mFragment.getActivity()).thenReturn(mActivity);
         when(mScreen.findPreference(anyString())).thenReturn(mPreference);

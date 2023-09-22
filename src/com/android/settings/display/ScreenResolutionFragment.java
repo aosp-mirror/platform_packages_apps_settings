@@ -108,7 +108,7 @@ public class ScreenResolutionFragment extends RadioButtonPickerFragment {
         footerPreference.setTitle(R.string.screen_resolution_footer);
         footerPreference.setSelectable(false);
         footerPreference.setLayoutResource(
-                com.android.settingslib.widget.R.layout.preference_footer);
+                com.android.settingslib.widget.preference.footer.R.layout.preference_footer);
         screen.addPreference(footerPreference);
     }
 
