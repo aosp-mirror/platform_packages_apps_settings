@@ -25,6 +25,7 @@ import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.annotation.Resetter;
 
+/** Robolectric shadow for the bluetooth utils. */
 @Implements(Utils.class)
 public class ShadowBluetoothUtils {
 
@@ -35,6 +36,7 @@ public class ShadowBluetoothUtils {
         return sLocalBluetoothManager;
     }
 
+    /** Resets the local bluetooth manager to null. */
     @Resetter
     public static void reset() {
         sLocalBluetoothManager = null;
