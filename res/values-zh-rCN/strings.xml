@@ -119,6 +119,7 @@
     <string name="connected_device_call_device_title" msgid="88732390601723608">"通话设备"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"其他设备"</string>
     <string name="connected_device_saved_title" msgid="5607274378851905959">"保存的设备"</string>
+    <string name="connected_device_fast_pair_device_title" msgid="543124539265592392">"与账号相关联"</string>
     <string name="connected_device_add_device_summary" msgid="8671009879957120802">"系统将开启蓝牙以进行配对"</string>
     <string name="connected_device_connections_title" msgid="4164120115341579170">"连接偏好设置"</string>
     <string name="connected_device_previously_connected_screen_title" msgid="8823331744788100605">"之前连接的设备"</string>
@@ -531,30 +532,18 @@
     <string name="security_header" msgid="961514795852103424">"安全"</string>
     <string name="privacy_header" msgid="5526002421324257007">"隐私"</string>
     <string name="work_profile_category_header" msgid="85707750968948517">"工作资料"</string>
-    <!-- no translation found for private_space_title (7078627930195569767) -->
-    <skip />
-    <!-- no translation found for private_space_summary (8237652417163408001) -->
-    <skip />
-    <!-- no translation found for private_space_one_lock_title (7306547190751832568) -->
-    <skip />
-    <!-- no translation found for private_space_hide_title (1615744426933304644) -->
-    <skip />
-    <!-- no translation found for private_space_category_system (1286843321867285700) -->
-    <skip />
-    <!-- no translation found for private_space_create_title (47273568884806726) -->
-    <skip />
-    <!-- no translation found for private_space_delete_title (3075645119800272800) -->
-    <skip />
-    <!-- no translation found for private_space_created (2978055968937762232) -->
-    <skip />
-    <!-- no translation found for private_space_already_exists (1253034947621867419) -->
-    <skip />
-    <!-- no translation found for private_space_create_failed (4908100791174213808) -->
-    <skip />
-    <!-- no translation found for private_space_deleted (7825768516955610897) -->
-    <skip />
-    <!-- no translation found for private_space_delete_failed (8500755484258565011) -->
-    <skip />
+    <string name="private_space_title" msgid="7078627930195569767">"私密空间"</string>
+    <string name="private_space_summary" msgid="8237652417163408001">"将应用隐藏到私人文件夹中"</string>
+    <string name="private_space_one_lock_title" msgid="7306547190751832568">"使用屏幕解锁方式解锁"</string>
+    <string name="private_space_hide_title" msgid="1615744426933304644">"显示私密空间"</string>
+    <string name="private_space_category_system" msgid="1286843321867285700">"系统"</string>
+    <string name="private_space_create_title" msgid="47273568884806726">"创建私密空间"</string>
+    <string name="private_space_delete_title" msgid="3075645119800272800">"删除私密空间"</string>
+    <string name="private_space_created" msgid="2978055968937762232">"已成功创建私密空间"</string>
+    <string name="private_space_already_exists" msgid="1253034947621867419">"私密空间已存在"</string>
+    <string name="private_space_create_failed" msgid="4908100791174213808">"无法创建私密空间"</string>
+    <string name="private_space_deleted" msgid="7825768516955610897">"已成功删除私密空间"</string>
+    <string name="private_space_delete_failed" msgid="8500755484258565011">"无法删除私密空间"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"您最多可以添加 <xliff:g id="COUNT">%d</xliff:g> 个指纹"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"您添加的指纹数量已达到上限"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"无法添加更多的指纹"</string>
@@ -3081,7 +3070,8 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"默认通知提示音"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"默认闹钟提示音"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"先振动再响铃（铃声逐渐增大）"</string>
-    <string name="spatial_audio_title" msgid="6591051622375191603">"空间音频"</string>
+    <!-- no translation found for spatial_audio_title (1775370104206884711) -->
+    <skip />
     <string name="dial_pad_tones_title" msgid="3536945335367914892">"拨号键盘提示音"</string>
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"屏幕锁定提示音"</string>
     <string name="charging_sounds_title" msgid="5261683808537783668">"充电提示音和振动"</string>
@@ -3097,7 +3087,6 @@
     <string name="boot_sounds_title" msgid="5033062848948884111">"开机音效"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"实时字幕"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"自动生成媒体字幕"</string>
-    <string name="spatial_audio_speaker" msgid="9145233652433523302">"手机扬声器"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"有线耳机"</string>
     <string name="spatial_audio_text" msgid="8201387855375146000">"播放兼容的媒体内容时，音频更具沉浸感"</string>
     <string name="spatial_summary_off" msgid="8272678804629774378">"已关闭"</string>
@@ -3911,8 +3900,32 @@
     <string name="app_battery_usage_title" msgid="346558380609793334">"应用的电池用量"</string>
     <string name="app_battery_usage_summary" msgid="6349965904306339539">"设置应用的电池用量"</string>
     <string name="battery_tips_card_action_button" msgid="4897793527424711648">"查看设置"</string>
+    <!-- no translation found for battery_tips_card_action_button_check (1535140204105479318) -->
+    <skip />
     <string name="battery_tips_card_dismiss_button" msgid="1885756985544936618">"知道了"</string>
     <string name="battery_tips_card_feedback_info" msgid="767117835675157298">"这条消息是否有帮助？"</string>
+    <!-- no translation found for battery_hints_warning_icon_a11y (5312542323401447620) -->
+    <skip />
+    <string name="battery_tips_settings_summary_brightness" msgid="546145032616077783">"开启自适应亮度可延长电池续航时间"</string>
+    <string name="battery_tips_settings_summary_screen_timeout" msgid="556801426050962077">"缩短屏幕超时时间可延长电池续航时间"</string>
+    <!-- no translation found for battery_tips_apps_summary_always_high (6334519477067044920) -->
+    <skip />
+    <!-- no translation found for battery_tips_apps_summary_higher_than_usual (95676961671544628) -->
+    <skip />
+    <!-- no translation found for battery_tips_apps_summary_always_high_in_background (2953858181710181126) -->
+    <skip />
+    <!-- no translation found for battery_tips_apps_summary_higher_than_usual_in_background (1585002072567422199) -->
+    <skip />
+    <!-- no translation found for battery_tips_apps_summary_always_high_in_foreground (1910991243576404700) -->
+    <skip />
+    <!-- no translation found for battery_tips_apps_summary_higher_than_usual_in_foreground (7937337570425168210) -->
+    <skip />
+    <!-- no translation found for battery_app_item_hint (4850929961461039110) -->
+    <skip />
+    <!-- no translation found for battery_app_item_hint_in_bg (596240821466388336) -->
+    <skip />
+    <!-- no translation found for battery_app_item_hint_in_fg (5091860632260799910) -->
+    <skip />
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"无限制"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"优化"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"受限"</string>
@@ -4001,7 +4014,7 @@
     <string name="emergency_settings_preference_title" msgid="6183455153241187148">"安全和紧急情况"</string>
     <string name="emergency_dashboard_summary" msgid="401033951074039302">"紧急求救、医疗信息、警报"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"手势导航"</string>
-    <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"从屏幕底部向上滑动，可进入主屏幕；从底部向上滑动、按住再松开，可切换应用；从左侧或右侧边缘向另一侧滑动，可返回上一个屏幕。"</string>
+    <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"从屏幕底部向上滑动，可前往主屏幕；从底部向上滑动并按住再松开，可切换应用；从左侧或右侧边缘向另一侧滑动，可返回上一个屏幕。"</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"“三按钮”导航"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"使用屏幕底部的按钮即可轻松返回上一个屏幕、进入主屏幕和切换应用。"</string>
     <string name="keywords_system_navigation" msgid="3131782378486554934">"系统导航, “双按钮”导航, “三按钮”导航, 手势导航, 滑动"</string>
@@ -4746,6 +4759,8 @@
     <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"播放兼容的媒体时，音频更具沉浸感"</string>
     <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"头部跟踪"</string>
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"音频会随着头部移动而变化，让聆听效果更加自然"</string>
+    <string name="bluetooth_details_permissions_sync_title" msgid="7277580382321003521">"从手机同步权限"</string>
+    <string name="bluetooth_details_permissions_sync_summary" msgid="8125037984381432059">"为手表授予您已在这部手机上授予的那些应用权限"</string>
     <string name="bluetooth_details_audio_device_types_title" msgid="3381941189346781614">"音频设备类型"</string>
     <string name="bluetooth_details_audio_device_type_unknown" msgid="839337391037998014">"未知"</string>
     <string name="bluetooth_details_audio_device_type_speaker" msgid="3706227767994792124">"扬声器"</string>
@@ -4786,10 +4801,10 @@
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{过去 # 个月内安装的应用}other{过去 # 个月内安装的应用}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{# 个多月前安装的应用}other{# 个多月前安装的应用}}"</string>
     <string name="aspect_ratio_title" msgid="2451826875939676101">"宽高比"</string>
-    <string name="aspect_ratio_summary" msgid="5944347596728740547">"如果应用的设计不适配您的<xliff:g id="DEVICE_NAME">%1$s</xliff:g>，请选择一个宽高比进行查看"</string>
+    <string name="aspect_ratio_summary" msgid="4056406351663726494">"如果此应用的设计不适配您的<xliff:g id="DEVICE_NAME">%1$s</xliff:g>，请尝试使用新的宽高比查看此应用"</string>
+    <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"如果此应用的设计不适配您的<xliff:g id="DEVICE_NAME">%1$s</xliff:g>，请尝试使用新的宽高比查看此应用。某些应用可能无法针对特定宽高比进行优化。"</string>
     <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"有推荐宽高比的应用"</string>
-    <!-- no translation found for user_aspect_ratio_changed_apps_label (2096614916172567672) -->
-    <skip />
+    <string name="user_aspect_ratio_changed_apps_label" msgid="2096614916172567672">"发生改变的应用"</string>
     <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"应用默认设置"</string>
     <string name="user_aspect_ratio_fullscreen" msgid="1843427242540081996">"全屏"</string>
     <string name="user_aspect_ratio_half_screen" msgid="1015852057094310209">"半屏"</string>
@@ -4797,7 +4812,14 @@
     <string name="user_aspect_ratio_16_9" msgid="2286644872775170164">"16:9"</string>
     <string name="user_aspect_ratio_3_2" msgid="199262962518318932">"3:2"</string>
     <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4:3"</string>
-    <string name="app_aspect_ratio_footer" msgid="8661813386126142251">"更改宽高比后，应用将重启。未保存的更改可能会丢失。"</string>
+    <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="NUMERATOR">%1$s</xliff:g> 比 <xliff:g id="DENOMINATOR">%2$s</xliff:g>"</string>
+    <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"更改宽高比后，应用将重启。未保存的更改可能会丢失。某些应用可能无法针对特定宽高比进行优化。"</string>
+    <string name="aspect_ratio_experimental_title" msgid="9088785421062044831">"宽高比（实验性功能）"</string>
+    <string name="aspect_ratio_experiment_title" msgid="128614319422121040">"宽高比（实验）"</string>
+    <string name="aspect_ratio_labs_title" msgid="6733893837442759383">"宽高比（实验室）"</string>
+    <string name="aspect_ratio_experimental_label" msgid="6319009297672567578">"实验性功能"</string>
+    <string name="aspect_ratio_experiment_label" msgid="7861871612376167784">"实验"</string>
+    <string name="aspect_ratio_labs_label" msgid="7008498116297651342">"实验室"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"指纹传感器"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"闪烁通知"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"闪烁通知简介"</string>
@@ -4850,4 +4872,6 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"您安装的应用可以查看您的设备名称。此外，当您连接到蓝牙设备、连接到 WLAN 网络或设置 WLAN 热点时，其他人可能也会看到您的设备名称。"</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"语法性别"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"选择语法性别"</string>
+    <!-- no translation found for quarantined_apps_title (5713301345723474936) -->
+    <skip />
 </resources>

@@ -119,6 +119,7 @@
     <string name="connected_device_call_device_title" msgid="88732390601723608">"أجهزة الاتصال"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"أجهزة أخرى"</string>
     <string name="connected_device_saved_title" msgid="5607274378851905959">"الأجهزة المحفوظة"</string>
+    <string name="connected_device_fast_pair_device_title" msgid="543124539265592392">"الأجهزة المرتبطة بالحساب"</string>
     <string name="connected_device_add_device_summary" msgid="8671009879957120802">"سيتم تفعيل البلوتوث للإقران."</string>
     <string name="connected_device_connections_title" msgid="4164120115341579170">"إعدادات الاتصال المفضّلة"</string>
     <string name="connected_device_previously_connected_screen_title" msgid="8823331744788100605">"الأجهزة المتصلة سابقًا"</string>
@@ -531,30 +532,18 @@
     <string name="security_header" msgid="961514795852103424">"الأمان"</string>
     <string name="privacy_header" msgid="5526002421324257007">"الخصوصية"</string>
     <string name="work_profile_category_header" msgid="85707750968948517">"الملف الشخصي للعمل"</string>
-    <!-- no translation found for private_space_title (7078627930195569767) -->
-    <skip />
-    <!-- no translation found for private_space_summary (8237652417163408001) -->
-    <skip />
-    <!-- no translation found for private_space_one_lock_title (7306547190751832568) -->
-    <skip />
-    <!-- no translation found for private_space_hide_title (1615744426933304644) -->
-    <skip />
-    <!-- no translation found for private_space_category_system (1286843321867285700) -->
-    <skip />
-    <!-- no translation found for private_space_create_title (47273568884806726) -->
-    <skip />
-    <!-- no translation found for private_space_delete_title (3075645119800272800) -->
-    <skip />
-    <!-- no translation found for private_space_created (2978055968937762232) -->
-    <skip />
-    <!-- no translation found for private_space_already_exists (1253034947621867419) -->
-    <skip />
-    <!-- no translation found for private_space_create_failed (4908100791174213808) -->
-    <skip />
-    <!-- no translation found for private_space_deleted (7825768516955610897) -->
-    <skip />
-    <!-- no translation found for private_space_delete_failed (8500755484258565011) -->
-    <skip />
+    <string name="private_space_title" msgid="7078627930195569767">"مساحة خاصة"</string>
+    <string name="private_space_summary" msgid="8237652417163408001">"إخفاء التطبيقات في مجلّد خاص"</string>
+    <string name="private_space_one_lock_title" msgid="7306547190751832568">"فتح القفل باستخدام قفل الشاشة"</string>
+    <string name="private_space_hide_title" msgid="1615744426933304644">"عرض المساحة الخاصة"</string>
+    <string name="private_space_category_system" msgid="1286843321867285700">"النظام"</string>
+    <string name="private_space_create_title" msgid="47273568884806726">"إنشاء مساحة خاصة"</string>
+    <string name="private_space_delete_title" msgid="3075645119800272800">"حذف المساحة الخاصة"</string>
+    <string name="private_space_created" msgid="2978055968937762232">"تم إنشاء المساحة الخاصة بنجاح."</string>
+    <string name="private_space_already_exists" msgid="1253034947621867419">"سبق أن تم إنشاء مساحة خاصة."</string>
+    <string name="private_space_create_failed" msgid="4908100791174213808">"تعذَّر إنشاء مساحة خاصة."</string>
+    <string name="private_space_deleted" msgid="7825768516955610897">"تم حذف المساحة الخاصة بنجاح."</string>
+    <string name="private_space_delete_failed" msgid="8500755484258565011">"تعذَّر حذف المساحة الخاصة."</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"يمكنك إضافة ما يصل إلى <xliff:g id="COUNT">%d</xliff:g> بصمات إصبع"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"لقد أضفت الحد الأقصى لعدد بصمات الإصبع"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"يتعذر إضافة مزيد من بصمات الإصبع"</string>
@@ -3081,7 +3070,8 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"الصوت التلقائي للإشعارات"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"الصوت التلقائي للمنبّه"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"الاهتزاز أولاً ثم الرنين تدريجيًا"</string>
-    <string name="spatial_audio_title" msgid="6591051622375191603">"الصوت المكاني"</string>
+    <!-- no translation found for spatial_audio_title (1775370104206884711) -->
+    <skip />
     <string name="dial_pad_tones_title" msgid="3536945335367914892">"نغمات لوحة الاتصال"</string>
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"صوت قفل الشاشة"</string>
     <string name="charging_sounds_title" msgid="5261683808537783668">"الأصوات والاهتزاز عند الشحن"</string>
@@ -3097,7 +3087,6 @@
     <string name="boot_sounds_title" msgid="5033062848948884111">"أصوات تشغيل الجهاز"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"النسخ النصي التلقائي"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"شرح تلقائي للوسائط"</string>
-    <string name="spatial_audio_speaker" msgid="9145233652433523302">"مكبّر صوت الهاتف"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"سماعات الرأس السلكية"</string>
     <string name="spatial_audio_text" msgid="8201387855375146000">"الصوت الصادر من الوسائط المتوافقة يصبح أكثر وضوحًا."</string>
     <string name="spatial_summary_off" msgid="8272678804629774378">"غير مفعّل"</string>
@@ -3911,8 +3900,32 @@
     <string name="app_battery_usage_title" msgid="346558380609793334">"استخدام التطبيقات للبطارية"</string>
     <string name="app_battery_usage_summary" msgid="6349965904306339539">"ضبط إعدادات استخدام التطبيقات للبطارية"</string>
     <string name="battery_tips_card_action_button" msgid="4897793527424711648">"عرض الإعدادات"</string>
+    <!-- no translation found for battery_tips_card_action_button_check (1535140204105479318) -->
+    <skip />
     <string name="battery_tips_card_dismiss_button" msgid="1885756985544936618">"حسنًا"</string>
     <string name="battery_tips_card_feedback_info" msgid="767117835675157298">"هل هذه الرسالة مفيدة؟"</string>
+    <!-- no translation found for battery_hints_warning_icon_a11y (5312542323401447620) -->
+    <skip />
+    <string name="battery_tips_settings_summary_brightness" msgid="546145032616077783">"تفعيل ميزة \"السطوع التكيُّفي\" لإطالة عمر البطارية"</string>
+    <string name="battery_tips_settings_summary_screen_timeout" msgid="556801426050962077">"تقليل المهلة قبل غلق الشاشة لإطالة عمر البطارية"</string>
+    <!-- no translation found for battery_tips_apps_summary_always_high (6334519477067044920) -->
+    <skip />
+    <!-- no translation found for battery_tips_apps_summary_higher_than_usual (95676961671544628) -->
+    <skip />
+    <!-- no translation found for battery_tips_apps_summary_always_high_in_background (2953858181710181126) -->
+    <skip />
+    <!-- no translation found for battery_tips_apps_summary_higher_than_usual_in_background (1585002072567422199) -->
+    <skip />
+    <!-- no translation found for battery_tips_apps_summary_always_high_in_foreground (1910991243576404700) -->
+    <skip />
+    <!-- no translation found for battery_tips_apps_summary_higher_than_usual_in_foreground (7937337570425168210) -->
+    <skip />
+    <!-- no translation found for battery_app_item_hint (4850929961461039110) -->
+    <skip />
+    <!-- no translation found for battery_app_item_hint_in_bg (596240821466388336) -->
+    <skip />
+    <!-- no translation found for battery_app_item_hint_in_fg (5091860632260799910) -->
+    <skip />
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"الاستخدام غير المحدّد بقيود"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"تم التحسين لإطالة عمر البطارية"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"الاستخدام المحدّد بقيود"</string>
@@ -4001,13 +4014,13 @@
     <string name="emergency_settings_preference_title" msgid="6183455153241187148">"السلامة والطوارئ"</string>
     <string name="emergency_dashboard_summary" msgid="401033951074039302">"اتصالات الطوارئ والمعلومات الطبية والتنبيهات"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"التنقل بالإيماءات"</string>
-    <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"للانتقال إلى الشاشة الرئيسية، مرّر سريعًا من أسفل الشاشة إلى أعلاها. للتبديل بين التطبيقات، مرّر سريعًا من أسفل الشاشة إلى أعلاها وثبِّت إصبعك ثم ارفعه. للرجوع، مرّر سريعًا من الحافة اليمنى أو اليسرى للشاشة."</string>
+    <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"للانتقال إلى الشاشة الرئيسية، مرِّر سريعًا من أسفل الشاشة إلى أعلاها. للتبديل بين التطبيقات، مرّر سريعًا من أسفل الشاشة إلى أعلاها واضغط مع الاستمرار ثم ارفع إصبعك عن الشاشة. للرجوع، مرّر سريعًا من الحافة اليمنى أو اليسرى للشاشة."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"التنقل باستخدام ثلاثة أزرار"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"يمكنك الرجوع والانتقال إلى الشاشة الرئيسية والتبديل بين التطبيقات باستخدام الأزرار في أسفل الشاشة."</string>
     <string name="keywords_system_navigation" msgid="3131782378486554934">"التنقل داخل النظام، التنقُّل باستخدام زرّين، التنقُّل باستخدام ثلاثة أزرار، التنقل بالإيماءات، التمرير سريعًا"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"المساعد الرقمي"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"التمرير سريعًا لاستدعاء تطبيق المساعد"</string>
-    <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"التمرير سريعًا من الركن السفلي لاستدعاء تطبيق المساعد الرقمي"</string>
+    <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"مرِّر سريعًا من الزاوية السفلية لاستدعاء تطبيق المساعد الرقمي."</string>
     <string name="assistant_long_press_home_gesture_title" msgid="4865972278738178753">"تفعيل \"مساعد\" بالضغط مع الاستمرار على زر \"الشاشة الرئيسية\""</string>
     <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"اضغط مع الاستمرار على زر الشاشة الرئيسية لاستدعاء تطبيق المساعد الرقمي."</string>
     <string name="low_label" msgid="6525629096999711220">"منخفضة"</string>
@@ -4174,7 +4187,7 @@
     <string name="credman_keywords" msgid="8305600680836806170">"البيانات، مفتاح المرور، كلمة المرور"</string>
     <string name="credman_autofill_keywords" msgid="701180623776848914">"تلقائي، ملء، ملء تلقائي، بيانات، مفتاح مرور، كلمة مرور"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"‏&lt;b&gt;تأكّد من أنك تثق بهذا التطبيق&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; تستخدم البيانات المعروضة على الشاشة لتحديد ما يمكن ملؤه تلقائيًا."</string>
-    <string name="credman_autofill_confirmation_message" msgid="4951846866327737417">"‏&lt;b&gt;هل تريد استخدام &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;؟&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; يستخدم تطبيق &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; المحتوى الذي يظهر على شاشتك لتحديد ما يمكن ملؤه تلقائيًا. سيتم حفظ مفاتيح المرور وكلمات المرور الجديدة والمعلومات الأخرى هنا من الآن فصاعدًا."</string>
+    <string name="credman_autofill_confirmation_message" msgid="4951846866327737417">"‏&lt;b&gt;هل تريد استخدام \"&lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;\"؟&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; يستخدم تطبيق \"&lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;\" المحتوى الذي يظهر على شاشتك لتحديد ما يمكن ملؤه تلقائيًا. سيتم حفظ مفاتيح المرور وكلمات المرور الجديدة والمعلومات الأخرى هنا من الآن فصاعدًا."</string>
     <string name="credman_picker_title" msgid="8191267620665129205">"كلمات المرور ومفاتيح المرور وخدمات البيانات"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"‏هل تريد إيقاف %1$s؟"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"‏&lt;b&gt;هل تريد إيقاف هذه الخدمة؟&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; لن يتم ملء المعلومات المحفوظة، مثل كلمات المرور ومفاتيح المرور وطرق الدفع والمعلومات الأخرى عند تسجيل الدخول. لاستخدام معلوماتك المحفوظة، اختَر كلمة مرور أو مفتاح مرور أو خدمة بيانات."</string>
@@ -4750,6 +4763,8 @@
     <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"الصوت الصادر من الوسائط المتوافقة يصبح أكثر وضوحًا."</string>
     <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"تتبُّع حركة الرأس"</string>
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"يتغيّر الصوت بينما تُحرك رأسك ليبدو طبيعيًا جدًا."</string>
+    <string name="bluetooth_details_permissions_sync_title" msgid="7277580382321003521">"مزامنة الأذونات من الهاتف"</string>
+    <string name="bluetooth_details_permissions_sync_summary" msgid="8125037984381432059">"امنح ساعتك أذونات التطبيقات نفسها التي سبق أن سمحت بها على هذا الهاتف."</string>
     <string name="bluetooth_details_audio_device_types_title" msgid="3381941189346781614">"نوع الجهاز السماعي"</string>
     <string name="bluetooth_details_audio_device_type_unknown" msgid="839337391037998014">"غير معروف"</string>
     <string name="bluetooth_details_audio_device_type_speaker" msgid="3706227767994792124">"مكبّر صوت"</string>
@@ -4790,10 +4805,10 @@
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{التطبيقات التي تم تثبيتها خلال آخر شهر}zero{التطبيقات التي تم تثبيتها خلال آخر # شهر}two{التطبيقات التي تم تثبيتها خلال آخر شهرَين}few{التطبيقات التي تم تثبيتها خلال آخر # شهور}many{التطبيقات التي تم تثبيتها خلال آخر # شهرًا}other{التطبيقات التي تم تثبيتها خلال آخر # شهر}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{التطبيقات التي تم تثبيتها قبل أكثر من شهر واحد}zero{التطبيقات التي تم تثبيتها قبل أكثر من # شهر}two{التطبيقات التي تم تثبيتها قبل أكثر من شهرَين}few{التطبيقات التي تم تثبيتها قبل أكثر من # شهور}many{التطبيقات التي تم تثبيتها قبل أكثر من # شهرًا}other{التطبيقات التي تم تثبيتها قبل أكثر من # شهر}}"</string>
     <string name="aspect_ratio_title" msgid="2451826875939676101">"نسبة العرض إلى الارتفاع"</string>
-    <string name="aspect_ratio_summary" msgid="5944347596728740547">"يمكنك اختيار نسبة العرض إلى الارتفاع لهذا التطبيق في حال لم يكن مصمّمًا ليلائم جهاز <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
+    <string name="aspect_ratio_summary" msgid="4056406351663726494">"جرِّب نسبة عرض إلى ارتفاع جديدة لعرض هذا التطبيق في حال لم يكن مصمّمًا ليلائم \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\"."</string>
+    <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"جرِّب نسبة عرض إلى ارتفاع جديدة لعرض هذا التطبيق في حال لم يكن مصمّمًا ليلائم \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\". قد لا تتوافق بعض التطبيقات مع نِسب عرض إلى ارتفاع محدَّدة."</string>
     <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"التطبيقات المقترَحة"</string>
-    <!-- no translation found for user_aspect_ratio_changed_apps_label (2096614916172567672) -->
-    <skip />
+    <string name="user_aspect_ratio_changed_apps_label" msgid="2096614916172567672">"تطبيقات معدّلة"</string>
     <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"نسبة العرض إلى الارتفاع التلقائية في التطبيق"</string>
     <string name="user_aspect_ratio_fullscreen" msgid="1843427242540081996">"ملء الشاشة"</string>
     <string name="user_aspect_ratio_half_screen" msgid="1015852057094310209">"نصف الشاشة"</string>
@@ -4801,7 +4816,14 @@
     <string name="user_aspect_ratio_16_9" msgid="2286644872775170164">"16:9"</string>
     <string name="user_aspect_ratio_3_2" msgid="199262962518318932">"3:2"</string>
     <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4:3"</string>
-    <string name="app_aspect_ratio_footer" msgid="8661813386126142251">"ستتم إعادة تشغيل التطبيق عند تغيير نسبة العرض إلى الارتفاع. يُرجى العِلم أنّك قد تفقد التغييرات التي يتم حفظها."</string>
+    <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"‫<xliff:g id="NUMERATOR">%1$s</xliff:g> إلى <xliff:g id="DENOMINATOR">%2$s</xliff:g>"</string>
+    <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"سيُعاد تشغيل التطبيق بعد تغيير نسبة العرض إلى الارتفاع. ربما لا تظهر التغييرات غير المحفوظة. وقد لا تتوافق بعض التطبيقات مع نِسب عرض إلى ارتفاع محدَّدة."</string>
+    <string name="aspect_ratio_experimental_title" msgid="9088785421062044831">"نسبة العرض إلى الارتفاع (ميزة تجريبية)"</string>
+    <string name="aspect_ratio_experiment_title" msgid="128614319422121040">"نسبة العرض إلى الارتفاع (تجربة)"</string>
+    <string name="aspect_ratio_labs_title" msgid="6733893837442759383">"نسبة العرض إلى الارتفاع (ميزة اختبارية)"</string>
+    <string name="aspect_ratio_experimental_label" msgid="6319009297672567578">"ميزة تجريبية"</string>
+    <string name="aspect_ratio_experiment_label" msgid="7861871612376167784">"تجربة"</string>
+    <string name="aspect_ratio_labs_label" msgid="7008498116297651342">"ميزة اختبارية"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"أداة استشعار بصمة الإصبع"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"الإشعارات المصحوبة بوميض"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"لمحة عن الإشعارات المصحوبة بوميض"</string>
@@ -4810,7 +4832,7 @@
     <string name="flash_notifications_summary_on_screen" msgid="9040640799633336219">"الخيار مفعَّل / وميض الشاشة"</string>
     <string name="flash_notifications_summary_on_camera_and_screen" msgid="2326268141063768701">"الخيار مفعَّل / وميض فلاش الكاميرا والشاشة"</string>
     <string name="flash_notifications_intro" msgid="8409873413480928249">"وميض فلاش الكاميرا أو الشاشة عند تلقّي إشعارات أو عندما تبدأ المنبّهات"</string>
-    <string name="flash_notifications_intro_without_camera_flash" msgid="6297337174487793891">"وميض الشاشة عند تلقّي إشعارات أو عند إصدار أصوات المنبّهات"</string>
+    <string name="flash_notifications_intro_without_camera_flash" msgid="6297337174487793891">"وميض الشاشة عند تلقّي إشعارات أو عندما تبدأ المنبّهات"</string>
     <string name="flash_notifications_note" msgid="2426125248448055075">"يُرجى توخّي الحذر عند استخدام الإشعارات المصحوبة بوميض إذا كنت حساسًا للضوء."</string>
     <string name="flash_notifications_keywords" msgid="2458759275318514836">"فلاش، ضوء، ضعيف السمع، فقدان السمع"</string>
     <string name="flash_notifications_preview" msgid="5320176885050440874">"معاينة"</string>
@@ -4854,4 +4876,6 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"‏يظهر اسم جهازك للتطبيقات التي تم تثبيتها. وقد يظهر أيضًا للمستخدمين الآخرين عند الاتصال بأجهزة تتضمّن بلوتوث أو بشبكة Wi-Fi أو عند إعداد نقطة اتصال Wi-Fi."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"صيغة المخاطبة المناسبة نحويًا"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"اختيار صيغة مخاطبة مناسبة نحويًا"</string>
+    <!-- no translation found for quarantined_apps_title (5713301345723474936) -->
+    <skip />
 </resources>

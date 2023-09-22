@@ -42,18 +42,12 @@
     <string name="preview_pager_content_description" msgid="3762247188224576303">"Преглед"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Намали"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Зголеми"</string>
-    <!-- no translation found for stay_awake_on_fold_title (6590454679898134221) -->
-    <skip />
-    <!-- no translation found for stay_awake_on_fold_summary (1939963751585954262) -->
-    <skip />
-    <!-- no translation found for selective_stay_awake_title (7887645333447645168) -->
-    <skip />
-    <!-- no translation found for selective_stay_awake_summary (9055967322921984543) -->
-    <skip />
-    <!-- no translation found for sleep_on_fold_title (7626123024330501411) -->
-    <skip />
-    <!-- no translation found for sleep_on_fold_summary (7737992842459588846) -->
-    <skip />
+    <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"Секогаш"</string>
+    <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"Предниот екран се вклучува кога ќе го преклопите уредот"</string>
+    <string name="selective_stay_awake_title" msgid="7887645333447645168">"Само игри, видеа и друго"</string>
+    <string name="selective_stay_awake_summary" msgid="9055967322921984543">"Предниот екран се вклучува за апликациите што го спречуваат вашиот екран да работи при мирување"</string>
+    <string name="sleep_on_fold_title" msgid="7626123024330501411">"Никогаш"</string>
+    <string name="sleep_on_fold_summary" msgid="7737992842459588846">"Предниот екран се заклучува кога ќе го преклопите уредот"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Користи „Автоматско ротирање“"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"„Откривање лица“ ја користи предната камера за подобрување на прецизноста на автоматското ротирање. Сликите никогаш не се складираат и не се испраќаат во Google."</string>
     <string name="bluetooth" msgid="8898478620943459654">"Bluetooth"</string>
@@ -125,6 +119,7 @@
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Уреди за повикување"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Други уреди"</string>
     <string name="connected_device_saved_title" msgid="5607274378851905959">"Зачувани уреди"</string>
+    <string name="connected_device_fast_pair_device_title" msgid="543124539265592392">"Поврзано со сметка"</string>
     <string name="connected_device_add_device_summary" msgid="8671009879957120802">"Bluetooth ќе се вклучи за спарување"</string>
     <string name="connected_device_connections_title" msgid="4164120115341579170">"Поставки за врски"</string>
     <string name="connected_device_previously_connected_screen_title" msgid="8823331744788100605">"Претходно поврзани"</string>
@@ -537,30 +532,18 @@
     <string name="security_header" msgid="961514795852103424">"Безбедност"</string>
     <string name="privacy_header" msgid="5526002421324257007">"Приватност"</string>
     <string name="work_profile_category_header" msgid="85707750968948517">"Работен профил"</string>
-    <!-- no translation found for private_space_title (7078627930195569767) -->
-    <skip />
-    <!-- no translation found for private_space_summary (8237652417163408001) -->
-    <skip />
-    <!-- no translation found for private_space_one_lock_title (7306547190751832568) -->
-    <skip />
-    <!-- no translation found for private_space_hide_title (1615744426933304644) -->
-    <skip />
-    <!-- no translation found for private_space_category_system (1286843321867285700) -->
-    <skip />
-    <!-- no translation found for private_space_create_title (47273568884806726) -->
-    <skip />
-    <!-- no translation found for private_space_delete_title (3075645119800272800) -->
-    <skip />
-    <!-- no translation found for private_space_created (2978055968937762232) -->
-    <skip />
-    <!-- no translation found for private_space_already_exists (1253034947621867419) -->
-    <skip />
-    <!-- no translation found for private_space_create_failed (4908100791174213808) -->
-    <skip />
-    <!-- no translation found for private_space_deleted (7825768516955610897) -->
-    <skip />
-    <!-- no translation found for private_space_delete_failed (8500755484258565011) -->
-    <skip />
+    <string name="private_space_title" msgid="7078627930195569767">"Приватен простор"</string>
+    <string name="private_space_summary" msgid="8237652417163408001">"Скријте ги апликациите во приватна папка"</string>
+    <string name="private_space_one_lock_title" msgid="7306547190751832568">"Отклучете со заклучувањето екран"</string>
+    <string name="private_space_hide_title" msgid="1615744426933304644">"Прикажи „Приватен простор“"</string>
+    <string name="private_space_category_system" msgid="1286843321867285700">"Систем"</string>
+    <string name="private_space_create_title" msgid="47273568884806726">"Создајте „Приватен простор“"</string>
+    <string name="private_space_delete_title" msgid="3075645119800272800">"Избришете го „Приватниот простор“"</string>
+    <string name="private_space_created" msgid="2978055968937762232">"„Приватниот простор“ е успешно создаден"</string>
+    <string name="private_space_already_exists" msgid="1253034947621867419">"„Приватниот простор“ веќе постои"</string>
+    <string name="private_space_create_failed" msgid="4908100791174213808">"„Приватниот простор“ не можеше да се создаде"</string>
+    <string name="private_space_deleted" msgid="7825768516955610897">"„Приватниот простор“ е успешно избришан"</string>
+    <string name="private_space_delete_failed" msgid="8500755484258565011">"„Приватниот простор“ не можеше да се избрише"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Може да додадете до <xliff:g id="COUNT">%d</xliff:g> отпечатоци"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Додадовте максимален број на отпечатоци"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Не може да се додадат повеќе отпечатоци"</string>
@@ -936,7 +919,7 @@
     <string name="wifi_details_dns" msgid="273231528073312579">"DNS"</string>
     <string name="wifi_details_ipv6_address_header" msgid="1913151339341722443">"IPv6-адреси"</string>
     <string name="hotspot_device_details_category" msgid="3110651914598697220">"Детали за уредот на точката на пристап"</string>
-    <string name="hotspot_device_details_internet_source" msgid="1563266599673281875">"Интернет-извор"</string>
+    <string name="hotspot_device_details_internet_source" msgid="1563266599673281875">"Извор на интернет"</string>
     <string name="internet_source_wifi" msgid="6952593095166435179">"Wi-Fi"</string>
     <string name="internet_source_mobile_data" msgid="877403889449201789">"Мобилен интернет"</string>
     <string name="internet_source_ethernet" msgid="8338472576454100966">"Етернет"</string>
@@ -1075,8 +1058,7 @@
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Исклучена"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Баланс на бела боја на екранот"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
-    <!-- no translation found for fold_lock_behavior_title (786228803694268449) -->
-    <skip />
+    <string name="fold_lock_behavior_title" msgid="786228803694268449">"Продолжете да ги користите апликациите при преклопување"</string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Течен приказ"</string>
     <string name="peak_refresh_rate_summary" msgid="3627278682437562787">"Автоматски ја зголемува стапката на освежување од 60 на <xliff:g id="ID_1">%1$s</xliff:g> Hz за некои содржини. Го зголемува користењето на батеријата."</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Наметни максимална стапка на освежување"</string>
@@ -2302,9 +2284,9 @@
     <string name="battery_tip_limited_temporarily_title" msgid="6258554134146272311">"Полнењето е оптимизирано за да се заштити батеријата"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="5107379280241187562">"За да помогне да се продолжи работниот век на батеријата, полнењето е оптимизирано"</string>
     <string name="battery_tip_dock_defender_future_bypass_title" msgid="4332616280495788195">"Полнењето е оптимизирано за да се заштити батеријата"</string>
-    <string name="battery_tip_dock_defender_future_bypass_summary" msgid="7870758621381307597">"За да помогне да се продолжи работниот век на батеријата, полнењето е оптимизирано додека е приклучено на док"</string>
+    <string name="battery_tip_dock_defender_future_bypass_summary" msgid="7870758621381307597">"За да се продолжи работниот век на батеријата, полнењето е оптимизирано додека уредот е приклучен на док"</string>
     <string name="battery_tip_dock_defender_active_title" msgid="1414785238383255699">"Полнењето е оптимизирано за да се заштити батеријата"</string>
-    <string name="battery_tip_dock_defender_active_summary" msgid="3512082623718801459">"За да помогне да се продолжи работниот век на батеријата, полнењето е оптимизирано додека е приклучено на док"</string>
+    <string name="battery_tip_dock_defender_active_summary" msgid="3512082623718801459">"За да се продолжи работниот век на батеријата, полнењето е оптимизирано додека уредот е приклучен на док"</string>
     <string name="battery_tip_dock_defender_temporarily_bypassed_title" msgid="1679449361090557201">"Целосно полнење"</string>
     <string name="battery_tip_dock_defender_temporarily_bypassed_summary" msgid="1099500476761333281">"За да се заштити батеријата, полнењето ќе биде оптимизирано следниот пат кога таблетот ќе биде приклучен на док"</string>
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"Дознајте повеќе за паузираното полнење"</string>
@@ -3014,8 +2996,7 @@
     <string name="keywords_app_pinning" msgid="1564144561464945019">"прикачување екран"</string>
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"работен предизвик, работа, профил"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"работен профил, управуван профил, унифицирај, унифицирање, работа, профил"</string>
-    <!-- no translation found for keywords_fold_lock_behavior (6278990772113341581) -->
-    <skip />
+    <string name="keywords_fold_lock_behavior" msgid="6278990772113341581">"будна состојба, спиење, не заклучувај, остани отклучен при преклопување, затворање, преклопување, затворање, исклучен екран"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"движења"</string>
     <string name="keywords_wallet" msgid="3757421969956996972">"Wallet"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"плати, допри, плаќања"</string>
@@ -3089,7 +3070,8 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"Стандарден звук за известување"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"Стандарден звук за аларм"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"Прво вибрирај, па ѕвони постепено"</string>
-    <string name="spatial_audio_title" msgid="6591051622375191603">"Просторен звук"</string>
+    <!-- no translation found for spatial_audio_title (1775370104206884711) -->
+    <skip />
     <string name="dial_pad_tones_title" msgid="3536945335367914892">"Тонови на тастатура за бирање"</string>
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"Звук при заклучување екран"</string>
     <string name="charging_sounds_title" msgid="5261683808537783668">"Звуци и вибрации при полнење"</string>
@@ -3105,7 +3087,6 @@
     <string name="boot_sounds_title" msgid="5033062848948884111">"Вклучете ги звуците"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"Автоматски титлови"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"Автоматски титлува аудиовизуелни содржини"</string>
-    <string name="spatial_audio_speaker" msgid="9145233652433523302">"Телефонски звучник"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Жичени слушалки"</string>
     <string name="spatial_audio_text" msgid="8201387855375146000">"Звукот од компатибилните аудиовизуелни содржини е пореалистичен"</string>
     <string name="spatial_summary_off" msgid="8272678804629774378">"Исклучено"</string>
@@ -3919,8 +3900,32 @@
     <string name="app_battery_usage_title" msgid="346558380609793334">"Користење на батеријата за апликации"</string>
     <string name="app_battery_usage_summary" msgid="6349965904306339539">"Поставете користење на батеријата за апликации"</string>
     <string name="battery_tips_card_action_button" msgid="4897793527424711648">"Прикажи ги поставките"</string>
+    <!-- no translation found for battery_tips_card_action_button_check (1535140204105479318) -->
+    <skip />
     <string name="battery_tips_card_dismiss_button" msgid="1885756985544936618">"Сфатив"</string>
     <string name="battery_tips_card_feedback_info" msgid="767117835675157298">"Дали поракава е корисна?"</string>
+    <!-- no translation found for battery_hints_warning_icon_a11y (5312542323401447620) -->
+    <skip />
+    <string name="battery_tips_settings_summary_brightness" msgid="546145032616077783">"Вклучете ја адаптивната осветленост за да го продолжите траењето на батеријата"</string>
+    <string name="battery_tips_settings_summary_screen_timeout" msgid="556801426050962077">"Скратете го автоматското исклучување екран за да го продолжите траењето на батеријата"</string>
+    <!-- no translation found for battery_tips_apps_summary_always_high (6334519477067044920) -->
+    <skip />
+    <!-- no translation found for battery_tips_apps_summary_higher_than_usual (95676961671544628) -->
+    <skip />
+    <!-- no translation found for battery_tips_apps_summary_always_high_in_background (2953858181710181126) -->
+    <skip />
+    <!-- no translation found for battery_tips_apps_summary_higher_than_usual_in_background (1585002072567422199) -->
+    <skip />
+    <!-- no translation found for battery_tips_apps_summary_always_high_in_foreground (1910991243576404700) -->
+    <skip />
+    <!-- no translation found for battery_tips_apps_summary_higher_than_usual_in_foreground (7937337570425168210) -->
+    <skip />
+    <!-- no translation found for battery_app_item_hint (4850929961461039110) -->
+    <skip />
+    <!-- no translation found for battery_app_item_hint_in_bg (596240821466388336) -->
+    <skip />
+    <!-- no translation found for battery_app_item_hint_in_fg (5091860632260799910) -->
+    <skip />
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Неограничено"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Оптимизирано"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"Ограничено"</string>
@@ -4009,7 +4014,7 @@
     <string name="emergency_settings_preference_title" msgid="6183455153241187148">"Безбедност и итни случаи"</string>
     <string name="emergency_dashboard_summary" msgid="401033951074039302">"Итна помош, медицински податоци и предупредувања"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Навигација со движења"</string>
-    <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"За отворање на почетниот екран, повлечете нагоре од дното на екранот. За префрлање помеѓу апликациите, повлечете нагоре од дното, задржете, а потоа пуштете. За враќање назад, повлечете од левиот или десниот раб."</string>
+    <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"За да одите на почетниот екран, повлечете нагоре од дното на екранот. За префрлање меѓу апликации, повлечете нагоре од дното, задржете, а потоа пуштете. За да се вратите назад, повлечете од левиот или десниот раб."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Навигација со 3 копчиња"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"За враќање назад, отворање на почетниот екран и префрлање помеѓу апликациите, користете ги копчињата на дното од екранот."</string>
     <string name="keywords_system_navigation" msgid="3131782378486554934">"навигација на системот, навигација со 2 копчиња, навигација со 3 копчиња, навигација со движење, повлечи"</string>
@@ -4185,7 +4190,7 @@
     <string name="credman_autofill_confirmation_message" msgid="4951846866327737417">"&lt;b&gt;Да се користи &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; го користи она што е на екранот за да утврди што може автоматски да се пополни. Новите лозинки, криптографски клучеви и други податоци отсега ќе се зачувуваат овде."</string>
     <string name="credman_picker_title" msgid="8191267620665129205">"Услуги за лозинки, криптографски клучеви и податоци"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Да се исклучи %1$s?"</string>
-    <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Да се исклучи оваа услуга?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Зачуваните податоци како лозинки, криптографски клучеви, начини на плаќање и друго, нема да се пополнат кога ќе се најавите. За да ги користите зачуваните податоци, изберете лозинка, криптографски клуч или услуга за податоци."</string>
+    <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Да се исклучи оваа услуга?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Зачуваните податоци како лозинки, криптографски клучеви, начини на плаќање и други податоци нема да се пополнуваат кога ќе се најавувате. За да ги користите зачуваните податоци, изберете услуга за лозинки, криптографски клучеви или податоци."</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"Да се користи %1$s?"</string>
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"%1$s го користи она што е на вашиот екран за да одреди што може автоматски да се пополни."</string>
     <string name="credman_error_message_title" msgid="4099557206946333568">"Ограничување за услуги за лозинки, криптографски клучеви и податоци"</string>
@@ -4246,8 +4251,7 @@
     <string name="platform_compat_dialog_text_no_apps" msgid="5715226015751055812">"Промени во компатибилноста на апликациите може да се вршат само за апликации во кои може да се отстрануваат грешки. Инсталирајте апликација во која може да се отстрануваат грешки и обидете се повторно."</string>
     <string name="disabled_dependent_setting_summary" msgid="4508635725315852504">"Зависи од друга поставка"</string>
     <string name="my_device_info_account_preference_title" msgid="9197139254007133175">"Сметка"</string>
-    <!-- no translation found for my_device_info_account_preference_summary (3510582677937510545) -->
-    <skip />
+    <string name="my_device_info_account_preference_summary" msgid="3510582677937510545">"%d сметки"</string>
     <string name="my_device_info_device_name_preference_title" msgid="8053298498727237971">"Име на уредот"</string>
     <string name="my_device_info_basic_info_category_title" msgid="381963187269356548">"Основни информации"</string>
     <string name="my_device_info_legal_category_title" msgid="7732792841537995127">"Правни и регулаторни"</string>
@@ -4755,6 +4759,8 @@
     <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"Звукот од компатибилните аудиовизуелни содржини е пореалистичен"</string>
     <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"Следење на главата"</string>
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"Звукот се менува како што ја движите главата за да звучи поприродно"</string>
+    <string name="bluetooth_details_permissions_sync_title" msgid="7277580382321003521">"Синхронизирајте ги дозволите од телефонот"</string>
+    <string name="bluetooth_details_permissions_sync_summary" msgid="8125037984381432059">"Дајте му ги на вашиот часовник истите дозволи за апликацијата што сте ги дале на телефонов"</string>
     <string name="bluetooth_details_audio_device_types_title" msgid="3381941189346781614">"Тип аудиоуред"</string>
     <string name="bluetooth_details_audio_device_type_unknown" msgid="839337391037998014">"Непознато"</string>
     <string name="bluetooth_details_audio_device_type_speaker" msgid="3706227767994792124">"Звучник"</string>
@@ -4795,10 +4801,10 @@
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Апликации инсталирани во минатиот # месец}one{Апликации инсталирани во минатите # месец}other{Апликации инсталирани во минатите # месеци}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Апликации инсталирани пред повеќе од # месец}one{Апликации инсталирани пред повеќе од # месец}other{Апликации инсталирани пред повеќе од # месеци}}"</string>
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Сооднос"</string>
-    <string name="aspect_ratio_summary" msgid="5944347596728740547">"Изберете сооднос за да ја видите апликацијава ако не е дизајнирана да одговара на вашиот уред <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="aspect_ratio_summary" msgid="4056406351663726494">"Пробајте нов сооднос за да ја прегледате апликацијава ако не е дизајнирана да одговара на вашиот уред <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"Пробајте нов сооднос за да ја прегледате апликацијава ако не е дизајнирана да одговара на вашиот уред <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Некои апликации можеби не се оптимизирани за одредени соодноси."</string>
     <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"Предложени апликации"</string>
-    <!-- no translation found for user_aspect_ratio_changed_apps_label (2096614916172567672) -->
-    <skip />
+    <string name="user_aspect_ratio_changed_apps_label" msgid="2096614916172567672">"Сменети аплик."</string>
     <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"Стандардно за апликацијата"</string>
     <string name="user_aspect_ratio_fullscreen" msgid="1843427242540081996">"Цел екран"</string>
     <string name="user_aspect_ratio_half_screen" msgid="1015852057094310209">"Половина екран"</string>
@@ -4806,7 +4812,14 @@
     <string name="user_aspect_ratio_16_9" msgid="2286644872775170164">"16:9"</string>
     <string name="user_aspect_ratio_3_2" msgid="199262962518318932">"3:2"</string>
     <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4:3"</string>
-    <string name="app_aspect_ratio_footer" msgid="8661813386126142251">"Апликацијата ќе се рестартира кога ќе го промените соодносот. Може да ги изгубите незачуваните промени."</string>
+    <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="NUMERATOR">%1$s</xliff:g> од <xliff:g id="DENOMINATOR">%2$s</xliff:g>"</string>
+    <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"Апликацијата ќе се рестартира кога ќе го промените соодносот. Може да ги изгубите незачуваните промени. Некои апликации можеби не се оптимизирани за одредени соодноси."</string>
+    <string name="aspect_ratio_experimental_title" msgid="9088785421062044831">"Сооднос (експериментално)"</string>
+    <string name="aspect_ratio_experiment_title" msgid="128614319422121040">"Сооднос (експеримент)"</string>
+    <string name="aspect_ratio_labs_title" msgid="6733893837442759383">"Сооднос (лаборатории)"</string>
+    <string name="aspect_ratio_experimental_label" msgid="6319009297672567578">"Експериментално"</string>
+    <string name="aspect_ratio_experiment_label" msgid="7861871612376167784">"Експеримент"</string>
+    <string name="aspect_ratio_labs_label" msgid="7008498116297651342">"Лаборатории"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Сензор за отпечатоци"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Известувања со блиц"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"За известувањата со блиц"</string>
@@ -4814,14 +4827,14 @@
     <string name="flash_notifications_summary_on_camera" msgid="3286405833586333730">"Вклучено / блиц на камерата"</string>
     <string name="flash_notifications_summary_on_screen" msgid="9040640799633336219">"Вклучено / осветлување на екранот"</string>
     <string name="flash_notifications_summary_on_camera_and_screen" msgid="2326268141063768701">"Вклучено / блиц на камерата и осветлување на екранот"</string>
-    <string name="flash_notifications_intro" msgid="8409873413480928249">"Блицот на камерата или екранот светнуваат кога ќе добиете известување или кога ќе се активира аларм"</string>
+    <string name="flash_notifications_intro" msgid="8409873413480928249">"Блицот на камерата или екранот светка кога добивате известувања или кога се огласуваат аларми"</string>
     <string name="flash_notifications_intro_without_camera_flash" msgid="6297337174487793891">"Екранот светка кога добивате известувања или кога се огласуваат аларми"</string>
     <string name="flash_notifications_note" msgid="2426125248448055075">"Користете ги известувањата со блиц претпазливо ако сте чувствителни на светлина"</string>
     <string name="flash_notifications_keywords" msgid="2458759275318514836">"блесок, светлина, нарушување на слухот, загуба на слух"</string>
     <string name="flash_notifications_preview" msgid="5320176885050440874">"Преглед"</string>
     <string name="camera_flash_notification_title" msgid="2475084876382922732">"Блиц на камерата"</string>
     <string name="screen_flash_notification_title" msgid="3773100725793316708">"Блиц на екранот"</string>
-    <string name="screen_flash_notification_color_title" msgid="7213407653340970790">"Боја на осветлување на екранот"</string>
+    <string name="screen_flash_notification_color_title" msgid="7213407653340970790">"Боја на блиц на екранот"</string>
     <string name="screen_flash_color_blue" msgid="3585766657607931371">"Сина"</string>
     <string name="screen_flash_color_azure" msgid="8691198532944992243">"Азурна"</string>
     <string name="screen_flash_color_cyan" msgid="6878780006173747267">"Тиркизна"</string>
@@ -4859,4 +4872,6 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Името на уредот е видливо за апликациите што сте ги инсталирале. Може да го видат и други луѓе кога ќе се поврзете со уреди со Bluetooth, на Wi-Fi мрежа или кога ќе поставите точка на пристап за Wi-Fi."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Граматички род"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Изберете граматички род"</string>
+    <!-- no translation found for quarantined_apps_title (5713301345723474936) -->
+    <skip />
 </resources>
