@@ -329,7 +329,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         mDataUsagePreference = findPreference(PREF_KEY_DATA_USAGE);
         mDataUsagePreference.setVisible(DataUsageUtils.hasWifiRadio(getContext()));
         mDataUsagePreference.setTemplate(new NetworkTemplate.Builder(NetworkTemplate.MATCH_WIFI)
-                        .build(), 0 /*subId*/, null /*service*/);
+                        .build(), 0 /*subId*/);
         mResetInternetPreference = findPreference(PREF_KEY_RESET_INTERNET);
         if (mResetInternetPreference != null) {
             mResetInternetPreference.setVisible(false);

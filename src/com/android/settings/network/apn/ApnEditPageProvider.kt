@@ -148,13 +148,13 @@ fun ApnPage(apnDataCur: MutableState<ApnData>) {
                 stringResource(R.string.apn_mnc),
                 enabled = apnData.mncEnabled
             ) { apnData = apnData.copy(mnc = it) }
+            // Warning: apnProtocol, apnRoaming, mvnoType string2Int
             SettingsExposedDropdownMenuBox(
-                label = stringResource(R.string.apn_auth_type),
-                options = authTypeOptions,
-                selectedOptionText =
-                authTypeOptions.getOrElse(apnData.authType) { "" },
-                enabled = apnData.authTypeEnabled,
-            ) { apnData = apnData.copy(authType = authTypeOptions.indexOf(it)) }
+                stringResource(R.string.apn_auth_type),
+                authTypeOptions,
+                apnData.authType,
+                apnData.authTypeEnabled,
+            ) { apnData = apnData.copy(authType = it) }
             SettingsOutlinedTextField(
                 apnData.apnType,
                 stringResource(R.string.apn_type),

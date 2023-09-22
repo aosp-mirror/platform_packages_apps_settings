@@ -25,7 +25,8 @@ import com.android.settingslib.NetworkPolicyEditor;
 
 public interface TemplatePreference {
 
-    void setTemplate(NetworkTemplate template, int subId, NetworkServices services);
+    /** Sets the network template. */
+    void setTemplate(NetworkTemplate template, int subId);
 
     class NetworkServices {
         INetworkManagementService mNetworkService;
