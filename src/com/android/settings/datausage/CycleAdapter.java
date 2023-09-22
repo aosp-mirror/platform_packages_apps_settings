@@ -14,7 +14,6 @@
 package com.android.settings.datausage;
 
 import android.content.Context;
-import android.widget.AdapterView;
 
 import com.android.settings.Utils;
 import com.android.settingslib.net.NetworkCycleData;
@@ -25,13 +24,10 @@ import java.util.List;
 public class CycleAdapter extends SettingsSpinnerAdapter<CycleAdapter.CycleItem> {
 
     private final SpinnerInterface mSpinner;
-    private final AdapterView.OnItemSelectedListener mListener;
 
-    public CycleAdapter(Context context, SpinnerInterface spinner,
-            AdapterView.OnItemSelectedListener listener) {
+    public CycleAdapter(Context context, SpinnerInterface spinner) {
         super(context);
         mSpinner = spinner;
-        mListener = listener;
         mSpinner.setAdapter(this);
     }
 
@@ -67,7 +63,6 @@ public class CycleAdapter extends SettingsSpinnerAdapter<CycleAdapter.CycleItem>
      * updating the inspection range on chartData.
      */
     public void updateCycleList(List<? extends NetworkCycleData> cycleData) {
-        mSpinner.setOnItemSelectedListener(mListener);
         // stash away currently selected cycle to try restoring below
         final CycleAdapter.CycleItem previousItem = (CycleAdapter.CycleItem)
                 mSpinner.getSelectedItem();
@@ -121,8 +116,6 @@ public class CycleAdapter extends SettingsSpinnerAdapter<CycleAdapter.CycleItem>
 
     public interface SpinnerInterface {
         void setAdapter(CycleAdapter cycleAdapter);
-
-        void setOnItemSelectedListener(AdapterView.OnItemSelectedListener listener);
 
         Object getSelectedItem();
 
