@@ -103,7 +103,7 @@ public class DataUsageSummary extends DataUsageBaseFragment implements DataUsage
         mDefaultTemplate = DataUsageUtils.getDefaultTemplate(context, defaultSubId);
         mSummaryPreference = findPreference(KEY_STATUS_HEADER);
 
-        if (!hasMobileData || !isAdmin()) {
+        if (!hasMobileData || !UserManager.get(context).isAdminUser()) {
             removePreference(KEY_RESTRICT_BACKGROUND);
         }
         boolean hasWifiRadio = DataUsageUtils.hasWifiRadio(context);
