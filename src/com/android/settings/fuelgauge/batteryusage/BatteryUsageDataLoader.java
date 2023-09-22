@@ -120,7 +120,7 @@ public final class BatteryUsageDataLoader {
                     DatabaseUtils.sendBatteryUsageSlotData(context,
                             ConvertUtils.convertToBatteryUsageSlotList(batteryDiffDataMap));
                     if (batteryDiffDataMap.values().stream().anyMatch(data ->
-                            (!data.getAppDiffEntryList().isEmpty()
+                            data != null && (!data.getAppDiffEntryList().isEmpty()
                                     || !data.getSystemDiffEntryList().isEmpty()))) {
                         FeatureFactory.getFeatureFactory().getPowerUsageFeatureProvider()
                                 .detectSettingsAnomaly(context, /* displayDrain= */ 0);
