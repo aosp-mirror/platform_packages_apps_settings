@@ -1034,8 +1034,6 @@ public class ChooseLockPassword extends SettingsActivity {
                     getActivity().getWindow().getDecorView());
 
             mPasswordEntryInputDisabler.setInputEnabled(false);
-            setNextEnabled(false);
-
             mSaveAndFinishWorker = new SaveAndFinishWorker();
             mSaveAndFinishWorker
                     .setListener(this)
