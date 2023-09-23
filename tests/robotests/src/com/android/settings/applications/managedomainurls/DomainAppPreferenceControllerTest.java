@@ -72,7 +72,7 @@ public class DomainAppPreferenceControllerTest {
         final DomainAppPreference pref = new DomainAppPreference(mContext, mAppEntry);
 
         assertThat(pref.getLayoutResource())
-                .isEqualTo(com.android.settingslib.widget.R.layout.preference_app);
+                .isEqualTo(com.android.settingslib.widget.preference.app.R.layout.preference_app);
     }
 
     private ApplicationInfo createApplicationInfo(String packageName) {

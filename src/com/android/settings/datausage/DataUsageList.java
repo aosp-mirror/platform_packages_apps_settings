@@ -32,7 +32,6 @@ import android.view.View.AccessibilityDelegate;
 import android.view.accessibility.AccessibilityEvent;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ImageView;
 import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
@@ -46,6 +45,7 @@ import androidx.preference.Preference;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.datausage.CycleAdapter.SpinnerInterface;
+import com.android.settings.datausage.lib.BillingCycleRepository;
 import com.android.settings.network.MobileDataEnabledListener;
 import com.android.settings.network.MobileNetworkRepository;
 import com.android.settings.widget.LoadingViewController;
@@ -108,6 +108,7 @@ public class DataUsageList extends DataUsageBaseFragment
     private MobileNetworkRepository mMobileNetworkRepository;
     private SubscriptionInfoEntity mSubscriptionInfoEntity;
     private DataUsageListAppsController mDataUsageListAppsController;
+    private BillingCycleRepository mBillingCycleRepository;
 
     @Override
     public int getMetricsCategory() {
@@ -125,7 +126,8 @@ public class DataUsageList extends DataUsageBaseFragment
         }
 
         final Activity activity = getActivity();
-        if (!isBandwidthControlEnabled()) {
+        mBillingCycleRepository = createBillingCycleRepository();
+        if (!mBillingCycleRepository.isBandwidthControlEnabled()) {
             Log.w(TAG, "No bandwidth control; leaving");
             activity.finish();
             return;
@@ -144,6 +146,12 @@ public class DataUsageList extends DataUsageBaseFragment
         mDataStateListener = new MobileDataEnabledListener(activity, this);
         mDataUsageListAppsController = use(DataUsageListAppsController.class);
         mDataUsageListAppsController.init(mTemplate);
+    }
+
+    @VisibleForTesting
+    @NonNull
+    BillingCycleRepository createBillingCycleRepository() {
+        return new BillingCycleRepository(requireContext());
     }
 
     @Override
@@ -286,10 +294,9 @@ public class DataUsageList extends DataUsageBaseFragment
         final NetworkPolicy policy = services.mPolicyEditor.getPolicy(mTemplate);
         final View configureButton = mHeader.findViewById(R.id.filter_settings);
         //SUB SELECT
-        if (isNetworkPolicyModifiable(policy, mSubId) && isMobileDataAvailable(mSubId)) {
+        if (policy != null && isMobileDataAvailable()) {
             mChart.setNetworkPolicy(policy);
             configureButton.setVisibility(View.VISIBLE);
-            ((ImageView) configureButton).setColorFilter(android.R.color.white);
         } else {
             // controls are disabled; don't bind warning/limit sweeps
             mChart.setNetworkPolicy(null);
@@ -302,6 +309,12 @@ public class DataUsageList extends DataUsageBaseFragment
         }
         mDataUsageListAppsController.setCycleData(mCycleData);
         updateSelectedCycle();
+    }
+
+    private boolean isMobileDataAvailable() {
+        return mBillingCycleRepository.isModifiable(mSubId)
+                && SubscriptionManager.from(requireContext())
+                .getActiveSubscriptionInfo(mSubId) != null;
     }
 
     /**

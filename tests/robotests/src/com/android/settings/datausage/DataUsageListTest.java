@@ -17,6 +17,7 @@
 package com.android.settings.datausage;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
@@ -38,22 +39,28 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.Spinner;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.loader.app.LoaderManager;
 import androidx.preference.PreferenceManager;
 
 import com.android.settings.R;
+import com.android.settings.datausage.lib.BillingCycleRepository;
 import com.android.settings.network.MobileDataEnabledListener;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.widget.LoadingViewController;
 import com.android.settingslib.NetworkPolicyEditor;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.android.controller.ActivityController;
@@ -64,6 +71,8 @@ import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
 public class DataUsageListTest {
+    @Rule
+    public MockitoRule mMockitoRule = MockitoJUnit.rule();
 
     @Mock
     private MobileDataEnabledListener mMobileDataEnabledListener;
@@ -73,20 +82,23 @@ public class DataUsageListTest {
     private LoaderManager mLoaderManager;
     @Mock
     private UserManager mUserManager;
+    @Mock
+    private BillingCycleRepository mBillingCycleRepository;
 
     private Activity mActivity;
-    private DataUsageList mDataUsageList;
+
+    @Spy
+    private TestDataUsageList mDataUsageList;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
         FakeFeatureFactory.setupForTest();
         final ActivityController<Activity> mActivityController =
                 Robolectric.buildActivity(Activity.class);
         mActivity = spy(mActivityController.get());
         mNetworkServices.mPolicyEditor = mock(NetworkPolicyEditor.class);
-        mDataUsageList = spy(DataUsageList.class);
         mDataUsageList.mDataStateListener = mMobileDataEnabledListener;
+        mDataUsageList.mTemplate = mock(NetworkTemplate.class);
 
         doReturn(mActivity).when(mDataUsageList).getContext();
         doReturn(mUserManager).when(mActivity).getSystemService(UserManager.class);
@@ -97,6 +109,7 @@ public class DataUsageListTest {
         doReturn(mLoaderManager).when(mDataUsageList).getLoaderManager();
         mDataUsageList.mLoadingViewController = mock(LoadingViewController.class);
         doNothing().when(mDataUsageList).updateSubscriptionInfoEntity();
+        when(mBillingCycleRepository.isBandwidthControlEnabled()).thenReturn(true);
     }
 
     @Test
@@ -225,15 +238,13 @@ public class DataUsageListTest {
         final View rootView = LayoutInflater.from(mActivity)
                 .inflate(R.layout.preference_list_fragment, null, false);
         final FrameLayout pinnedHeader = rootView.findViewById(R.id.pinned_header);
-        final View header = mActivity.getLayoutInflater()
-                .inflate(R.layout.apps_filter_spinner, pinnedHeader, false);
 
-        return header;
+        return mActivity.getLayoutInflater()
+                .inflate(R.layout.apps_filter_spinner, pinnedHeader, false);
     }
 
     private Spinner getSpinner(View header) {
-        final Spinner spinner = header.findViewById(R.id.filter_spinner);
-        return spinner;
+        return header.findViewById(R.id.filter_spinner);
     }
 
     @Implements(DataUsageBaseFragment.class)
@@ -242,10 +253,18 @@ public class DataUsageListTest {
         public void onCreate(Bundle icicle) {
             // do nothing
         }
+    }
 
-        @Implementation
-        protected boolean isBandwidthControlEnabled() {
-            return true;
+    public class TestDataUsageList extends DataUsageList {
+        @Override
+        protected <T extends AbstractPreferenceController> T use(Class<T> clazz) {
+            return mock(clazz);
+        }
+
+        @NonNull
+        @Override
+        BillingCycleRepository createBillingCycleRepository() {
+            return mBillingCycleRepository;
         }
     }
 }

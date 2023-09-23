@@ -36,7 +36,7 @@ public class AppViewHolder {
     static public AppViewHolder createOrRecycle(LayoutInflater inflater, View convertView) {
         if (convertView == null) {
             convertView =
-                    inflater.inflate(com.android.settingslib.widget.R.layout.preference_app, null);
+                    inflater.inflate(com.android.settingslib.widget.preference.app.R.layout.preference_app, null);
 
             // Creates a ViewHolder and store references to the two children views
             // we want to bind data to.
@@ -46,7 +46,7 @@ public class AppViewHolder {
             holder.appIcon = convertView.findViewById(android.R.id.icon);
             holder.summary = convertView.findViewById(android.R.id.summary);
             holder.disabled =
-                    convertView.findViewById(com.android.settingslib.widget.R.id.appendix);
+                    convertView.findViewById(com.android.settingslib.widget.preference.app.R.id.appendix);
             holder.widget = convertView.findViewById(android.R.id.widget_frame);
             convertView.setTag(holder);
             return holder;

@@ -17,16 +17,22 @@
 package com.android.settings.network.apn
 
 import android.content.Context
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.assertIsOff
 import androidx.compose.ui.test.assertIsOn
 import androidx.compose.ui.test.hasText
+import androidx.compose.ui.test.isFocused
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onChild
 import androidx.compose.ui.test.onChildAt
+import androidx.compose.ui.test.onLast
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
+import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollToNode
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -49,15 +55,20 @@ class ApnEditPageProviderTest {
     private val apnType = "apn_type"
     private val apnRoaming = "IPv4"
     private val apnEnable = context.resources.getString(R.string.carrier_enabled)
-    private val apnProtocolOptions = context.resources.getStringArray(R.array.apn_protocol_entries).toList()
-    private val apnData = ApnData(
-        name = apnName,
-        mmsc = mmsc,
-        mmsProxy = mmsProxy,
-        mnc = mnc,
-        apnType = apnType,
-        apnRoaming = apnProtocolOptions.indexOf(apnRoaming),
-        apnEnable = true
+    private val apnProtocolOptions =
+        context.resources.getStringArray(R.array.apn_protocol_entries).toList()
+    private val bearer = context.resources.getString(R.string.bearer)
+    private val bearerOptions = context.resources.getStringArray(R.array.bearer_entries).toList()
+    private val apnData = mutableStateOf(
+        ApnData(
+            name = apnName,
+            mmsc = mmsc,
+            mmsProxy = mmsProxy,
+            mnc = mnc,
+            apnType = apnType,
+            apnRoaming = apnProtocolOptions.indexOf(apnRoaming),
+            apnEnable = true
+        )
     )
 
     @Test
@@ -69,7 +80,7 @@ class ApnEditPageProviderTest {
     fun title_displayed() {
         composeTestRule.setContent {
             ApnPage(remember {
-                mutableStateOf(apnData)
+                apnData
             })
         }
         composeTestRule.onNodeWithText(context.getString(R.string.apn_edit)).assertIsDisplayed()
@@ -79,7 +90,7 @@ class ApnEditPageProviderTest {
     fun name_displayed() {
         composeTestRule.setContent {
             ApnPage(remember {
-                mutableStateOf(apnData)
+                apnData
             })
         }
         composeTestRule.onNodeWithText(apnName, true).assertIsDisplayed()
@@ -89,7 +100,7 @@ class ApnEditPageProviderTest {
     fun mmsc_displayed() {
         composeTestRule.setContent {
             ApnPage(remember {
-                mutableStateOf(apnData)
+                apnData
             })
         }
         composeTestRule.onRoot().onChild().onChildAt(0)
@@ -101,7 +112,7 @@ class ApnEditPageProviderTest {
     fun mms_proxy_displayed() {
         composeTestRule.setContent {
             ApnPage(remember {
-                mutableStateOf(apnData)
+                apnData
             })
         }
         composeTestRule.onRoot().onChild().onChildAt(0)
@@ -113,7 +124,7 @@ class ApnEditPageProviderTest {
     fun mnc_displayed() {
         composeTestRule.setContent {
             ApnPage(remember {
-                mutableStateOf(apnData)
+                apnData
             })
         }
         composeTestRule.onRoot().onChild().onChildAt(0)
@@ -125,7 +136,7 @@ class ApnEditPageProviderTest {
     fun apn_type_displayed() {
         composeTestRule.setContent {
             ApnPage(remember {
-                mutableStateOf(apnData)
+                apnData
             })
         }
         composeTestRule.onRoot().onChild().onChildAt(0)
@@ -137,7 +148,7 @@ class ApnEditPageProviderTest {
     fun apn_roaming_displayed() {
         composeTestRule.setContent {
             ApnPage(remember {
-                mutableStateOf(apnData)
+                apnData
             })
         }
         composeTestRule.onRoot().onChild().onChildAt(0)
@@ -149,7 +160,7 @@ class ApnEditPageProviderTest {
     fun carrier_enabled_displayed() {
         composeTestRule.setContent {
             ApnPage(remember {
-                mutableStateOf(apnData)
+                apnData
             })
         }
         composeTestRule.onRoot().onChild().onChildAt(0)
@@ -161,11 +172,73 @@ class ApnEditPageProviderTest {
     fun carrier_enabled_isChecked() {
         composeTestRule.setContent {
             ApnPage(remember {
-                mutableStateOf(apnData)
+                apnData
             })
         }
         composeTestRule.onRoot().onChild().onChildAt(0)
             .performScrollToNode(hasText(apnEnable, true))
         composeTestRule.onNodeWithText(apnEnable, true).assertIsOn()
+    }
+
+    @Test
+    fun carrier_enabled_checkChanged() {
+        composeTestRule.setContent {
+            ApnPage(remember {
+                apnData
+            })
+        }
+        composeTestRule.onRoot().onChild().onChildAt(0)
+            .performScrollToNode(hasText(apnEnable, true))
+        composeTestRule.onNodeWithText(apnEnable, true).performClick()
+        composeTestRule.onNodeWithText(apnEnable, true).assertIsOff()
+    }
+
+    @Test
+    fun bearer_displayed() {
+        composeTestRule.setContent {
+            ApnPage(remember {
+                apnData
+            })
+        }
+        composeTestRule.onRoot().onChild().onChildAt(0)
+            .performScrollToNode(hasText(bearer, true))
+        composeTestRule.onNodeWithText(bearer, true).assertIsDisplayed()
+    }
+
+    @Test
+    fun bearer_changed() {
+        var apnDataa: MutableState<ApnData> = apnData
+        composeTestRule.setContent {
+            apnDataa = remember {
+                apnData
+            }
+            ApnPage(apnDataa)
+        }
+        composeTestRule.onRoot().onChild().onChildAt(0)
+            .performScrollToNode(hasText(bearer, true))
+        composeTestRule.onNodeWithText(bearer, true).performClick()
+        composeTestRule.onNodeWithText(bearerOptions[1], true).performClick()
+        composeTestRule.onNode(hasText(bearerOptions[0]) and isFocused(), true).assertDoesNotExist()
+        composeTestRule.onNode(hasText(bearerOptions[1]) and isFocused(), true).assertIsDisplayed()
+    }
+
+    @Test
+    fun bearer_changed_back2Default() {
+        var apnDataa: MutableState<ApnData> = apnData
+        composeTestRule.setContent {
+            apnDataa = remember {
+                apnData
+            }
+            ApnPage(apnDataa)
+        }
+        composeTestRule.onRoot().onChild().onChildAt(0)
+            .performScrollToNode(hasText(bearer, true))
+        composeTestRule.onNodeWithText(bearer, true).performClick()
+        composeTestRule.onNodeWithText(bearerOptions[1], true).performClick()
+        composeTestRule.onNode(hasText(bearerOptions[0]) and isFocused(), true).assertDoesNotExist()
+        composeTestRule.onNode(hasText(bearerOptions[1]) and isFocused(), true).assertIsDisplayed()
+        composeTestRule.onAllNodesWithText(bearerOptions[1], true).onLast().performClick()
+        composeTestRule.onNode(hasText(bearerOptions[0]) and isFocused(), true).assertIsDisplayed()
+        composeTestRule.onNode(hasText(bearerOptions[1]) and isFocused(), true).assertDoesNotExist()
     }
 }

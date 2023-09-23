@@ -209,7 +209,7 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
         }
 
         final ImageView personalIconView = mHeader.findViewById(
-                com.android.settingslib.widget.R.id.entity_header_icon_personal);
+                com.android.settingslib.widget.preference.layout.R.id.entity_header_icon_personal);
         if (personalIconView != null) {
             Drawable icon = IconDrawableFactory.newInstance(mContext)
                     .getBadgedIcon(mPackageInfo.applicationInfo, personalProfile.getIdentifier())
@@ -221,7 +221,7 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
         }
 
         final ImageView workIconView = mHeader.findViewById(
-                com.android.settingslib.widget.R.id.entity_header_icon_work);
+                com.android.settingslib.widget.preference.layout.R.id.entity_header_icon_work);
         if (workIconView != null) {
             Drawable icon = IconDrawableFactory.newInstance(mContext)
                     .getBadgedIcon(mPackageInfo.applicationInfo, workProfile.getIdentifier())
@@ -502,11 +502,11 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
         mSwitchPref.setChecked(true);
         mSwitchPref.setTitle(R.string.interact_across_profiles_switch_enabled);
         final ImageView horizontalArrowIcon =
-                mHeader.findViewById(com.android.settingslib.widget.R.id.entity_header_swap_horiz);
+                mHeader.findViewById(com.android.settingslib.widget.preference.layout.R.id.entity_header_swap_horiz);
         if (horizontalArrowIcon != null) {
             horizontalArrowIcon.setImageDrawable(
                     mContext.getDrawable(
-                            com.android.settingslib.widget.R.drawable.ic_swap_horiz_blue));
+                            com.android.settingslib.widget.preference.layout.R.drawable.ic_swap_horiz_blue));
         }
     }
 
@@ -514,11 +514,11 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
         mSwitchPref.setChecked(false);
         mSwitchPref.setTitle(R.string.interact_across_profiles_switch_disabled);
         final ImageView horizontalArrowIcon =
-                mHeader.findViewById(com.android.settingslib.widget.R.id.entity_header_swap_horiz);
+                mHeader.findViewById(com.android.settingslib.widget.preference.layout.R.id.entity_header_swap_horiz);
         if (horizontalArrowIcon != null) {
             horizontalArrowIcon.setImageDrawable(
                     mContext.getDrawable(
-                            com.android.settingslib.widget.R.drawable.ic_swap_horiz_grey));
+                            com.android.settingslib.widget.preference.layout.R.drawable.ic_swap_horiz_grey));
         }
     }
 

@@ -326,7 +326,7 @@ public class NetworkRequestDialogFragment extends NetworkRequestDialogBaseFragme
                 view = mInflater.inflate(mResourceId, parent, false);
 
                 final View divider = view.findViewById(
-                        com.android.settingslib.widget.R.id.two_target_divider);
+                        com.android.settingslib.widget.preference.twotarget.R.id.two_target_divider);
                 divider.setVisibility(View.GONE);
             }
 

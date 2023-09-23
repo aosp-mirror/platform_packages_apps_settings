@@ -20,6 +20,7 @@ import android.app.ActivityManager
 import android.content.Context
 import android.net.NetworkTemplate
 import android.os.Bundle
+import androidx.annotation.OpenForTesting
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.LifecycleOwner
@@ -37,7 +38,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class DataUsageListAppsController(context: Context, preferenceKey: String) :
+@OpenForTesting
+open class DataUsageListAppsController(context: Context, preferenceKey: String) :
     BasePreferenceController(context, preferenceKey) {
 
     private val uidDetailProvider = UidDetailProvider(context)
@@ -48,7 +50,7 @@ class DataUsageListAppsController(context: Context, preferenceKey: String) :
 
     private var cycleData: List<NetworkCycleChartData>? = null
 
-    fun init(template: NetworkTemplate) {
+    open fun init(template: NetworkTemplate) {
         this.template = template
         repository = AppDataUsageRepository(
             context = mContext,
