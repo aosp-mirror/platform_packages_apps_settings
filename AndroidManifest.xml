@@ -1568,7 +1568,7 @@
 
         <activity android:name="Settings$UserAspectRatioAppListActivity"
             android:exported="true"
-            android:label="@string/aspect_ratio_title">
+            android:label="@string/aspect_ratio_experimental_title">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.MANAGE_USER_ASPECT_RATIO_SETTINGS"/>
                 <category android:name="android.intent.category.DEFAULT" />
@@ -1581,7 +1581,7 @@
 
         <activity android:name="Settings$UserAspectRatioAppActivity"
                   android:exported="true"
-                  android:label="@string/aspect_ratio_title">
+                  android:label="@string/aspect_ratio_experimental_title">
             <intent-filter>
                 <action android:name="android.settings.MANAGE_USER_ASPECT_RATIO_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
