@@ -63,7 +63,7 @@ public class FlashNotificationsPreviewPreference extends Preference {
     private void init() {
         setLayoutResource(R.layout.flash_notification_preview_preference);
         mBackgroundEnabled = getContext().getDrawable(
-                com.android.settingslib.widget.R.drawable.settingslib_switch_bar_bg_on);
+                com.android.settingslib.widget.mainswitch.R.drawable.settingslib_switch_bar_bg_on);
         mBackgroundDisabled = getContext().getDrawable(R.drawable.switch_bar_bg_disabled);
         mTextColorDisabled = Utils.getColorAttrDefaultColor(getContext(),
                 android.R.attr.textColorPrimary);

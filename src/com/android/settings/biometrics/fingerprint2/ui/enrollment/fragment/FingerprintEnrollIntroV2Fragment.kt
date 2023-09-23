@@ -180,7 +180,10 @@ class FingerprintEnrollIntroV2Fragment : Fragment(R.layout.fingerprint_v2_enroll
     scrollView.importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_YES
     // Next button responsible for starting the next fragment.
     val onNextButtonClick: View.OnClickListener =
-      View.OnClickListener { Log.d(TAG, "OnNextClicked") }
+      View.OnClickListener {
+        Log.d(TAG, "OnNextClicked")
+        navigationViewModel.nextStep()
+      }
 
     val layout: GlifLayout = requireActivity().requireViewById(R.id.setup_wizard_layout)
     footerBarMixin = layout.getMixin(FooterBarMixin::class.java)

@@ -227,7 +227,7 @@ public class SettingsSliceProvider extends SliceProvider {
             final boolean nightMode = Utils.isNightMode(getContext());
             if (mNightMode == null) {
                 mNightMode = nightMode;
-                getContext().setTheme(com.android.settingslib.widget.R.style.Theme_SettingsBase);
+                getContext().setTheme(com.android.settingslib.widget.theme.R.style.Theme_SettingsBase);
             } else if (mNightMode != nightMode) {
                 Log.d(TAG, "Night mode changed, reload theme");
                 mNightMode = nightMode;

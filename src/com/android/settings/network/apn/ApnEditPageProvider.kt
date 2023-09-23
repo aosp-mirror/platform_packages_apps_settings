@@ -34,6 +34,7 @@ import com.android.settings.R
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
 import com.android.settingslib.spa.framework.compose.stateOf
 import com.android.settingslib.spa.widget.editor.SettingsExposedDropdownMenuBox
+import com.android.settingslib.spa.widget.editor.SettingsExposedDropdownMenuCheckBox
 import com.android.settingslib.spa.widget.editor.SettingsOutlinedTextField
 import com.android.settingslib.spa.widget.preference.SwitchPreference
 import com.android.settingslib.spa.widget.preference.SwitchPreferenceModel
@@ -86,8 +87,13 @@ fun ApnPage(apnDataCur: MutableState<ApnData>) {
     val context = LocalContext.current
     val authTypeOptions = stringArrayResource(R.array.apn_auth_entries).toList()
     val apnProtocolOptions = stringArrayResource(R.array.apn_protocol_entries).toList()
+    val bearerOptionsAll = stringArrayResource(R.array.bearer_entries)
+    val bearerOptions = bearerOptionsAll.drop(1).toList()
+    val bearerEmptyVal = bearerOptionsAll[0]
     val mvnoTypeOptions = stringArrayResource(R.array.mvno_type_entries).toList()
-
+    val bearerSelectedOptionsState = remember {
+        getBearerSelectedOptionsState(apnData.bearer, apnData.bearerBitmask, context)
+    }
     RegularScaffold(
         title = stringResource(id = R.string.apn_edit),
     ) {
@@ -184,6 +190,13 @@ fun ApnPage(apnDataCur: MutableState<ApnData>) {
                     }
                 }
             )
+            SettingsExposedDropdownMenuCheckBox(
+                stringResource(R.string.bearer),
+                bearerOptions,
+                bearerSelectedOptionsState,
+                bearerEmptyVal,
+                apnData.bearerEnabled
+            ) {}
             SettingsExposedDropdownMenuBox(
                 stringResource(R.string.mvno_type),
                 mvnoTypeOptions,

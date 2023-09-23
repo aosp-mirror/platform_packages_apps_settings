@@ -53,7 +53,7 @@ public class SettingsMainSwitchPreferenceTest {
         mPreference = new SettingsMainSwitchPreference(context);
         ReflectionHelpers.setField(mPreference, "mEnforcedAdmin", mEnforcedAdmin);
         ReflectionHelpers.setField(mPreference, "mMainSwitchBar", switchBar);
-        final View rootView = View.inflate(context, R.layout.preference_widget_main_switch,
+        final View rootView = View.inflate(context, com.android.settings.R.layout.preference_widget_main_switch,
                 null /* parent */);
         mHolder = PreferenceViewHolder.createInstanceForTests(rootView);
     }
@@ -64,7 +64,7 @@ public class SettingsMainSwitchPreferenceTest {
 
         final SettingsMainSwitchBar switchBar = mPreference.getSwitchBar();
         final ImageView restrictedIcon = switchBar.findViewById(
-                com.android.settingslib.widget.R.id.restricted_icon);
+                com.android.settingslib.widget.restricted.R.id.restricted_icon);
 
         assertThat(restrictedIcon.getVisibility() == View.VISIBLE).isTrue();
     }

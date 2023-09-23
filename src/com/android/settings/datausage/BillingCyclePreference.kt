@@ -49,6 +49,7 @@ class BillingCyclePreference @JvmOverloads constructor(
         this.subId = subId
         summary = null
         updateEnabled()
+        intent = intent
     }
 
     override fun onAttached() {

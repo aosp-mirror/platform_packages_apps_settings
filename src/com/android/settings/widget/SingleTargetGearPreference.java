@@ -59,7 +59,7 @@ public class SingleTargetGearPreference extends Preference {
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
         final View divider = holder.findViewById(
-                com.android.settingslib.widget.R.id.two_target_divider);
+                com.android.settingslib.widget.preference.twotarget.R.id.two_target_divider);
         if (divider != null) {
             divider.setVisibility(View.INVISIBLE);
         }

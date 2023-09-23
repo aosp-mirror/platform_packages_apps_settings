@@ -81,7 +81,7 @@ public class VibrationSettings extends DashboardFragment {
                 R.integer.config_vibration_supported_intensity_levels);
         if (rv != null && supportedIntensities > 1) {
             final int bottom_padding = res.getDimensionPixelSize(
-                    com.android.settingslib.widget.R.dimen.settingslib_listPreferredItemPaddingEnd);
+                    com.android.settingslib.widget.theme.R.dimen.settingslib_listPreferredItemPaddingEnd);
             rv.setPaddingRelative(rv.getPaddingStart(), rv.getPaddingTop(), rv.getPaddingEnd(),
                     rv.getPaddingBottom() + bottom_padding);
         }

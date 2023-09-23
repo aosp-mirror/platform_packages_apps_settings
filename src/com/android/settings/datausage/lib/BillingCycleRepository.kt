@@ -21,9 +21,11 @@ import android.os.INetworkManagementService
 import android.os.ServiceManager
 import android.telephony.TelephonyManager
 import android.util.Log
+import androidx.annotation.OpenForTesting
 import com.android.settingslib.spaprivileged.framework.common.userManager
 
-class BillingCycleRepository(
+@OpenForTesting
+open class BillingCycleRepository @JvmOverloads constructor(
     context: Context,
     private val networkService: INetworkManagementService =
         INetworkManagementService.Stub.asInterface(
@@ -36,7 +38,7 @@ class BillingCycleRepository(
     fun isModifiable(subId: Int): Boolean =
         isBandwidthControlEnabled() && userManager.isAdminUser && isDataEnabled(subId)
 
-    fun isBandwidthControlEnabled(): Boolean = try {
+    open fun isBandwidthControlEnabled(): Boolean = try {
         networkService.isBandwidthControlEnabled
     } catch (e: Exception) {
         Log.w(TAG, "problem talking with INetworkManagementService: ", e)

@@ -23,7 +23,6 @@ import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.graphics.ColorFilter;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.wifi.WifiManager;
@@ -67,7 +66,6 @@ import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.graph.ThemedBatteryDrawable;
 import com.android.wifitrackerlib.NetworkDetailsTracker;
 import com.android.wifitrackerlib.WifiEntry;
 
@@ -441,23 +439,8 @@ public class WifiNetworkDetailsFragment extends RestrictedDashboardFragment impl
     @VisibleForTesting
     void updateBattery(boolean isChanging, int percentage) {
         Preference battery = getPreferenceScreen().findPreference(KEY_HOTSPOT_DEVICE_BATTERY);
-        battery.setSummary(formatPercentage(percentage));
-        ThemedBatteryDrawable drawable = getBatteryDrawable();
-        if (drawable != null) {
-            drawable.setCharging(isChanging);
-            drawable.setBatteryLevel(percentage);
-        }
-        battery.setIcon(drawable);
-    }
-
-    @VisibleForTesting
-    ThemedBatteryDrawable getBatteryDrawable() {
-        int frameColor = getContext()
-                .getColor(com.android.settingslib.R.color.meter_background_color);
-        ThemedBatteryDrawable drawable = new ThemedBatteryDrawable(getContext(), frameColor);
-        ColorFilter colorFilter = Utils.getAlphaInvariantColorFilterForColor(
-                Utils.getColorAttrDefaultColor(getContext(), android.R.attr.colorControlNormal));
-        drawable.setColorFilter(colorFilter);
-        return drawable;
+        battery.setSummary((isChanging)
+                ? getString(R.string.hotspot_battery_charging_summary, formatPercentage(percentage))
+                : formatPercentage(percentage));
     }
 }
