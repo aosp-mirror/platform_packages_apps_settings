@@ -18,7 +18,6 @@ import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
 import android.net.NetworkPolicy;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
@@ -62,7 +61,6 @@ public class DataUsageList extends DataUsageBaseFragment
 
     static final String EXTRA_SUB_ID = "sub_id";
     static final String EXTRA_NETWORK_TEMPLATE = "network_template";
-    static final String EXTRA_NETWORK_TYPE = "network_type";
 
     private static final String TAG = "DataUsageList";
     private static final boolean LOGD = false;
@@ -82,8 +80,6 @@ public class DataUsageList extends DataUsageBaseFragment
     NetworkTemplate mTemplate;
     @VisibleForTesting
     int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
-    @VisibleForTesting
-    int mNetworkType;
     @VisibleForTesting
     LoadingViewController mLoadingViewController;
 
@@ -205,7 +201,6 @@ public class DataUsageList extends DataUsageBaseFragment
         if (args != null) {
             mSubId = args.getInt(EXTRA_SUB_ID, SubscriptionManager.INVALID_SUBSCRIPTION_ID);
             mTemplate = args.getParcelable(EXTRA_NETWORK_TEMPLATE);
-            mNetworkType = args.getInt(EXTRA_NETWORK_TYPE, ConnectivityManager.TYPE_MOBILE);
         }
         if (mTemplate == null && mSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             final Intent intent = getIntent();
