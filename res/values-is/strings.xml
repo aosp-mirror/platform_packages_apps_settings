@@ -42,18 +42,12 @@
     <string name="preview_pager_content_description" msgid="3762247188224576303">"Forskoðun"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Minnka"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Stækka"</string>
-    <!-- no translation found for stay_awake_on_fold_title (6590454679898134221) -->
-    <skip />
-    <!-- no translation found for stay_awake_on_fold_summary (1939963751585954262) -->
-    <skip />
-    <!-- no translation found for selective_stay_awake_title (7887645333447645168) -->
-    <skip />
-    <!-- no translation found for selective_stay_awake_summary (9055967322921984543) -->
-    <skip />
-    <!-- no translation found for sleep_on_fold_title (7626123024330501411) -->
-    <skip />
-    <!-- no translation found for sleep_on_fold_summary (7737992842459588846) -->
-    <skip />
+    <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"Alltaf"</string>
+    <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"Þegar þú brýtur tækið saman kviknar á framskjánum"</string>
+    <string name="selective_stay_awake_title" msgid="7887645333447645168">"Aðeins leikir, vídeó og fleira"</string>
+    <string name="selective_stay_awake_summary" msgid="9055967322921984543">"Forrit sem koma í veg fyrir skjáslokknun kveikja á framskjá"</string>
+    <string name="sleep_on_fold_title" msgid="7626123024330501411">"Aldrei"</string>
+    <string name="sleep_on_fold_summary" msgid="7737992842459588846">"Framskjárinn læsist þegar þú brýtur tækið saman"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Nota sjálfvirkan snúning"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"Andlitsgreining notar fremri myndavélina til að bæta nákvæmni sjálfvirks snúnings. Myndir eru aldrei vistaðar eða sendar til Google."</string>
     <string name="bluetooth" msgid="8898478620943459654">"Bluetooth"</string>
@@ -1012,8 +1006,7 @@
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Slökkt"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Sýna hvítjöfnun"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
-    <!-- no translation found for fold_lock_behavior_title (786228803694268449) -->
-    <skip />
+    <string name="fold_lock_behavior_title" msgid="786228803694268449">"Halda áfram að nota forrit þegar tæki er brotið saman"</string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Hnökralaus skjár"</string>
     <string name="peak_refresh_rate_summary" msgid="3627278682437562787">"Breytir endurnýjunarhraða sjálfkrafa úr 60 í <xliff:g id="ID_1">%1$s</xliff:g> Hz fyrir sumt efni. Eykur rafhlöðunotkun."</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Þvinga fram mesta endurnýjunarhraða"</string>
@@ -1071,7 +1064,7 @@
     <string name="dark_ui_text" msgid="4392646155331126666">"Dökkt þema notar svartan bakgrunn á sumum skjámyndum til að rafhlaðan endist lengur. Áætlanir fyrir dökkt þema verða ekki virkar fyrr en það slokknar á skjánum."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Dökkt þema fylgir áætlun háttatímastillingar eins og er"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Valkostir háttatímastillingar"</string>
-    <string name="screen_timeout" msgid="7709947617767439410">"Tímamörk skjás"</string>
+    <string name="screen_timeout" msgid="7709947617767439410">"Tími þar til skjár slekkur á sér"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"Eftir <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> af aðgerðaleysi"</string>
     <string name="screen_timeout_summary_not_set" msgid="5107680774964178875">"Ekki stillt"</string>
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"Veggfóður"</string>
@@ -2949,8 +2942,7 @@
     <string name="keywords_app_pinning" msgid="1564144561464945019">"skjáfesting"</string>
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"verkefni í vinnu, vinna, snið"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"vinnusnið, stýrt snið, sameina, sameining, vinna, snið"</string>
-    <!-- no translation found for keywords_fold_lock_behavior (6278990772113341581) -->
-    <skip />
+    <string name="keywords_fold_lock_behavior" msgid="6278990772113341581">"vakandi, sofa, ekki læsa, haldast ólæstur þegar brotinn saman, brjóta saman, loka, brjóta, lokun, slökkt á skjá"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"bendingar"</string>
     <string name="keywords_wallet" msgid="3757421969956996972">"veski"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"borga, ýta, greiðslur"</string>
@@ -3025,7 +3017,8 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"Sjálfgefið hljóð tilkynninga"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"Sjálfgefið hljóð í vekjara"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"Titra og hækka hringitón smám saman"</string>
-    <string name="spatial_audio_title" msgid="6591051622375191603">"Rýmishljóð"</string>
+    <!-- no translation found for spatial_audio_title (1775370104206884711) -->
+    <skip />
     <string name="dial_pad_tones_title" msgid="3536945335367914892">"Tónar takkaborðs"</string>
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"Hljóð skjáláss"</string>
     <string name="charging_sounds_title" msgid="5261683808537783668">"Hljóð og titringur við hleðslu"</string>
@@ -3041,7 +3034,12 @@
     <string name="boot_sounds_title" msgid="5033062848948884111">"Ræsingarhljóð"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"Skjátextar í rauntíma"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"Setja sjálfkrafa skjátexta við efni"</string>
-    <string name="spatial_audio_speaker" msgid="9145233652433523302">"Símahátalari"</string>
+    <!-- no translation found for spatial_audio_speaker (3956755613908467186) -->
+    <skip />
+    <!-- no translation found for spatial_audio_speaker (2261196916411018248) -->
+    <skip />
+    <!-- no translation found for spatial_audio_speaker (3012868526054155189) -->
+    <skip />
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Heyrnartól með snúru"</string>
     <string name="spatial_audio_text" msgid="8201387855375146000">"Hljómgæði samhæfs efnis verða betri"</string>
     <string name="spatial_summary_off" msgid="8272678804629774378">"Slökkt"</string>
@@ -3857,8 +3855,32 @@
     <string name="app_battery_usage_title" msgid="346558380609793334">"Rafhlöðunotkun forrits"</string>
     <string name="app_battery_usage_summary" msgid="6349965904306339539">"Stilla rafhlöðunotkun fyrir forrit"</string>
     <string name="battery_tips_card_action_button" msgid="4897793527424711648">"Skoða stillingar"</string>
+    <!-- no translation found for battery_tips_card_action_button_check (1535140204105479318) -->
+    <skip />
     <string name="battery_tips_card_dismiss_button" msgid="1885756985544936618">"Ég skil"</string>
     <string name="battery_tips_card_feedback_info" msgid="767117835675157298">"Eru þessi skilaboð gagnleg?"</string>
+    <!-- no translation found for battery_hints_warning_icon_a11y (5312542323401447620) -->
+    <skip />
+    <string name="battery_tips_settings_summary_brightness" msgid="546145032616077783">"Kveiktu á aðlögun birtustigs til að bæta rafhlöðuendingu"</string>
+    <string name="battery_tips_settings_summary_screen_timeout" msgid="556801426050962077">"Styttu tíma þar til skjár slekkur á sér til að bæta rafhlöðuendingu"</string>
+    <!-- no translation found for battery_tips_apps_summary_always_high (6334519477067044920) -->
+    <skip />
+    <!-- no translation found for battery_tips_apps_summary_higher_than_usual (95676961671544628) -->
+    <skip />
+    <!-- no translation found for battery_tips_apps_summary_always_high_in_background (2953858181710181126) -->
+    <skip />
+    <!-- no translation found for battery_tips_apps_summary_higher_than_usual_in_background (1585002072567422199) -->
+    <skip />
+    <!-- no translation found for battery_tips_apps_summary_always_high_in_foreground (1910991243576404700) -->
+    <skip />
+    <!-- no translation found for battery_tips_apps_summary_higher_than_usual_in_foreground (7937337570425168210) -->
+    <skip />
+    <!-- no translation found for battery_app_item_hint (4850929961461039110) -->
+    <skip />
+    <!-- no translation found for battery_app_item_hint_in_bg (596240821466388336) -->
+    <skip />
+    <!-- no translation found for battery_app_item_hint_in_fg (5091860632260799910) -->
+    <skip />
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Ótakmarkað"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Fínstillt"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"Takmarkað"</string>
@@ -3948,7 +3970,7 @@
     <string name="emergency_settings_preference_title" msgid="6183455153241187148">"Öryggi og neyðartilvik"</string>
     <string name="emergency_dashboard_summary" msgid="401033951074039302">"Neyðartilkynning, heilsufarsupplýsingar, viðvaranir"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Bendingastjórnun"</string>
-    <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"Til að fara á upphafssíðu skaltu strjúka upp frá neðri hluta skjásins. Til að skipta um forrit skaltu strjúka upp frá neðri hluta skjásins og halda inni áður en þú sleppir. Til að fara til baka skaltu strjúka frá vinstri eða hægri brún skjásins."</string>
+    <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"Til að fara á upphafssíðu skaltu strjúka upp frá neðri hluta skjásins. Til að skipta um forrit skaltu strjúka upp frá neðri hluta skjásins og halda inni áður en þú sleppir. Til að fara til baka skaltu strjúka frá vinstri eða hægri brún skjásins."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Þriggja hnappa stjórnun"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"Farðu til baka, á upphafssíðu og skiptu um forrit með hnöppum neðst á skjánum."</string>
     <string name="keywords_system_navigation" msgid="3131782378486554934">"kerfisstjórnun, tveggja hnappa stjórnun, þriggja hnappa stjórnun, bendingastjórnun, strjúka"</string>
@@ -4692,6 +4714,10 @@
     <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"Hljómgæði samhæfs efnis verða betri"</string>
     <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"Rakning höfuðs"</string>
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"Hljóðið aðlagast höfuðhreyfingum til að allt hljómi sem eðlilegast"</string>
+    <!-- no translation found for bluetooth_details_permissions_sync_title (584337314155926373) -->
+    <skip />
+    <!-- no translation found for bluetooth_details_permissions_sync_summary (3426601558010545762) -->
+    <skip />
     <string name="bluetooth_details_audio_device_types_title" msgid="3381941189346781614">"Tegund hljómtækis"</string>
     <string name="bluetooth_details_audio_device_type_unknown" msgid="839337391037998014">"Óþekkt"</string>
     <string name="bluetooth_details_audio_device_type_speaker" msgid="3706227767994792124">"Hátalari"</string>
@@ -4732,10 +4758,10 @@
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Forrit sem voru sett upp á síðasta # mánuði}one{Forrit sem voru sett upp á síðasta # mánuði}other{Forrit sem voru sett upp á síðustu # mánuðum}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Forrit sem voru sett upp fyrir # mánuði}one{Forrit sem voru sett upp fyrir # mánuði}other{Forrit sem voru sett upp fyrir # mánuðum}}"</string>
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Myndhlutfall"</string>
-    <string name="aspect_ratio_summary" msgid="5944347596728740547">"Veldu myndhlutfall fyrir þetta forrit ef það er ekki sniðið að <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="aspect_ratio_summary" msgid="4056406351663726494">"Prófaðu nýtt myndhlutfall fyrir þetta forrit ef það er ekki sniðið að <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"Prófaðu nýtt myndhlutfall fyrir þetta forrit ef það er ekki sniðið að <xliff:g id="DEVICE_NAME">%1$s</xliff:g> Sum forrit eru ef til vill ekki fínstillt fyrir tiltekin myndhlutföll."</string>
     <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"Tillögur að forritum"</string>
-    <!-- no translation found for user_aspect_ratio_changed_apps_label (2096614916172567672) -->
-    <skip />
+    <string name="user_aspect_ratio_changed_apps_label" msgid="2096614916172567672">"Breytt forrit"</string>
     <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"Sjálfgefið í forriti"</string>
     <string name="user_aspect_ratio_fullscreen" msgid="1843427242540081996">"Allur skjárinn"</string>
     <string name="user_aspect_ratio_half_screen" msgid="1015852057094310209">"Hálfur skjárinn"</string>
@@ -4743,7 +4769,14 @@
     <string name="user_aspect_ratio_16_9" msgid="2286644872775170164">"16:9"</string>
     <string name="user_aspect_ratio_3_2" msgid="199262962518318932">"3:2"</string>
     <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4:3"</string>
-    <string name="app_aspect_ratio_footer" msgid="8661813386126142251">"Forritið verður endurræst þegar þú breytir myndhlutfallinu. Óvistaðar breytingar gætu glatast."</string>
+    <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="NUMERATOR">%1$s</xliff:g> sinnum <xliff:g id="DENOMINATOR">%2$s</xliff:g>"</string>
+    <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"Forritið verður endurræst þegar þú breytir myndhlutfallinu. Óvistaðar breytingar gætu glatast. Sum forrit eru ef til vill ekki fínstillt fyrir tiltekin myndhlutföll."</string>
+    <string name="aspect_ratio_experimental_title" msgid="9088785421062044831">"Myndhlutfall (tilraun)"</string>
+    <string name="aspect_ratio_experiment_title" msgid="128614319422121040">"Myndhlutfall (tilraun)"</string>
+    <string name="aspect_ratio_labs_title" msgid="6733893837442759383">"Myndhlutfall (tilraunaeiginleikar)"</string>
+    <string name="aspect_ratio_experimental_label" msgid="6319009297672567578">"Tilraun"</string>
+    <string name="aspect_ratio_experiment_label" msgid="7861871612376167784">"Tilraun"</string>
+    <string name="aspect_ratio_labs_label" msgid="7008498116297651342">"Tilraunaeiginleikar"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Fingrafaralesari"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Flasstilkynningar"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Um flasstilkynningar"</string>

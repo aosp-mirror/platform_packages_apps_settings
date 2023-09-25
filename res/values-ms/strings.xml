@@ -2232,7 +2232,7 @@
     <string name="battery_tip_dock_defender_future_bypass_title" msgid="4332616280495788195">"Pengecasan dioptimumkan untuk melindungi bateri anda"</string>
     <string name="battery_tip_dock_defender_future_bypass_summary" msgid="7870758621381307597">"Untuk membantu dalam memanjangkan jangka hayat bateri anda, pengecasan dioptimumkan ketika didok"</string>
     <string name="battery_tip_dock_defender_active_title" msgid="1414785238383255699">"Pengecasan dioptimumkan untuk melindungi bateri anda"</string>
-    <string name="battery_tip_dock_defender_active_summary" msgid="3512082623718801459">"Untuk membantu dalam memanjangkan jangka hayat bateri anda, pengecasan dioptimumkan ketika didok"</string>
+    <string name="battery_tip_dock_defender_active_summary" msgid="3512082623718801459">"Bagi membantu jangka hayat bateri anda dilanjutkan, pengecasan dioptimumkan ketika didok"</string>
     <string name="battery_tip_dock_defender_temporarily_bypassed_title" msgid="1679449361090557201">"Mengecas hingga penuh"</string>
     <string name="battery_tip_dock_defender_temporarily_bypassed_summary" msgid="1099500476761333281">"Untuk melindungi bateri anda, pengecasan akan dioptimumkan pada kali seterusnya tablet anda didok"</string>
     <string name="battery_tip_limited_temporarily_sec_button_content_description" msgid="5648444926736883551">"Ketahui lebih lanjut tentang pengecasan dijeda"</string>
@@ -3017,7 +3017,7 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"Bunyi pemberitahuan lalai"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"Bunyi penggera lalai"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"Bergetar, kemudian berdering beransur-ansur"</string>
-    <string name="spatial_audio_title" msgid="6591051622375191603">"Audio ruang"</string>
+    <string name="spatial_audio_title" msgid="1775370104206884711">"Audio Ruang"</string>
     <string name="dial_pad_tones_title" msgid="3536945335367914892">"Nada pad dail"</string>
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"Bunyi skrin dikunci"</string>
     <string name="charging_sounds_title" msgid="5261683808537783668">"Bunyi dan getaran pengecasan"</string>
@@ -3033,7 +3033,9 @@
     <string name="boot_sounds_title" msgid="5033062848948884111">"Bunyi semasa kuasa dihidupkan"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"Sari Kata Langsung"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"Sari kata media automatik"</string>
-    <string name="spatial_audio_speaker" msgid="9145233652433523302">"Pembesar suara telefon"</string>
+    <string name="spatial_audio_speaker" product="default" msgid="3956755613908467186">"Pembesar suara telefon"</string>
+    <string name="spatial_audio_speaker" product="tablet" msgid="2261196916411018248">"Pembesar suara tablet"</string>
+    <string name="spatial_audio_speaker" product="device" msgid="3012868526054155189">"Pembesar suara peranti"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Fon kepala berwayar"</string>
     <string name="spatial_audio_text" msgid="8201387855375146000">"Audio daripada media yang serasi kedengaran lebih mengasyikkan"</string>
     <string name="spatial_summary_off" msgid="8272678804629774378">"Mati"</string>
@@ -3733,7 +3735,7 @@
     <string name="display_dashboard_summary" msgid="1599453894989339454">"Tema gelap, saiz fon, kecerahan"</string>
     <string name="memory_summary" msgid="8221954450951651735">"Purata <xliff:g id="USED_MEMORY">%1$s</xliff:g> daripada <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> memori digunakan"</string>
     <string name="users_summary" msgid="8473589474976307510">"Dilog masuk sebagai <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
-    <string name="android_version_summary" msgid="7818952662015042768">"Dikemas kini kepada Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
+    <string name="android_version_summary" msgid="7818952662015042768">"Dikemaskinikan kepada Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="5404532347171027730">"Kemas kini tersedia"</string>
     <string name="disabled_by_policy_title" msgid="6852347040813204503">"Disekat oleh dasar kerja"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="1669689058213728099">"Kelantangan tidak boleh ditukar"</string>
@@ -3849,8 +3851,21 @@
     <string name="app_battery_usage_title" msgid="346558380609793334">"Penggunaan bateri apl"</string>
     <string name="app_battery_usage_summary" msgid="6349965904306339539">"Tetapkan penggunaan bateri untuk apl"</string>
     <string name="battery_tips_card_action_button" msgid="4897793527424711648">"Lihat Tetapan"</string>
+    <string name="battery_tips_card_action_button_check" msgid="1535140204105479318">"Semak"</string>
     <string name="battery_tips_card_dismiss_button" msgid="1885756985544936618">"OK"</string>
     <string name="battery_tips_card_feedback_info" msgid="767117835675157298">"Adakah mesej ini berguna?"</string>
+    <string name="battery_hints_warning_icon_a11y" msgid="5312542323401447620">"Ikon amaran petua bateri"</string>
+    <string name="battery_tips_settings_summary_brightness" msgid="546145032616077783">"Hidupkan kecerahan boleh suai untuk melanjutkan hayat bateri"</string>
+    <string name="battery_tips_settings_summary_screen_timeout" msgid="556801426050962077">"Kurangkan tamat masa skrin untuk melanjutkan hayat bateri"</string>
+    <string name="battery_tips_apps_summary_always_high" msgid="6334519477067044920">"<xliff:g id="APP_LABEL">%1$s</xliff:g> menggunakan lebih banyak kuasa bateri"</string>
+    <string name="battery_tips_apps_summary_higher_than_usual" msgid="95676961671544628">"<xliff:g id="APP_LABEL">%1$s</xliff:g> menggunakan lebih banyak kuasa bateri daripada biasa"</string>
+    <string name="battery_tips_apps_summary_always_high_in_background" msgid="2953858181710181126">"<xliff:g id="APP_LABEL">%1$s</xliff:g> menggunakan lebih banyak kuasa bateri semasa dalam latar"</string>
+    <string name="battery_tips_apps_summary_higher_than_usual_in_background" msgid="1585002072567422199">"<xliff:g id="APP_LABEL">%1$s</xliff:g> menggunakan lebih banyak kuasa bateri daripada biasa semasa dalam latar"</string>
+    <string name="battery_tips_apps_summary_always_high_in_foreground" msgid="1910991243576404700">"<xliff:g id="APP_LABEL">%1$s</xliff:g> menggunakan lebih banyak kuasa bateri semasa dalam latar depan"</string>
+    <string name="battery_tips_apps_summary_higher_than_usual_in_foreground" msgid="7937337570425168210">"<xliff:g id="APP_LABEL">%1$s</xliff:g> menggunakan lebih banyak kuasa bateri daripada biasa semasa dalam latar depan"</string>
+    <string name="battery_app_item_hint" msgid="4850929961461039110">"Penggunaan kuasa bateri yang tinggi"</string>
+    <string name="battery_app_item_hint_in_bg" msgid="596240821466388336">"Penggunaan kuasa bateri yang tinggi dalam latar"</string>
+    <string name="battery_app_item_hint_in_fg" msgid="5091860632260799910">"Penggunaan kuasa bateri yang tinggi dalam latar depan"</string>
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Tiada sekatan"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Dioptimumkan"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"Terhad"</string>
@@ -3940,7 +3955,7 @@
     <string name="emergency_settings_preference_title" msgid="6183455153241187148">"Keselamatan &amp; kecemasan"</string>
     <string name="emergency_dashboard_summary" msgid="401033951074039302">"SOS Kecemasan, maklumat perubatan, makluman"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Navigasi gerak isyarat"</string>
-    <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"Untuk pergi ke Skrin Utama, leret ke atas dari bahagian bawah skrin. Untuk beralih  antara apl, leret ke atas dari bawah, tahan, kemudian lepaskan. Untuk kembali, leret dari sisi kiri atau kanan."</string>
+    <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"Untuk mengakses skrin utama, leret ke atas dari bahagian bawah skrin. Untuk beralih apl, leret ke atas dari bawah, tekan, kemudian lepaskan. Untuk kembali, leret dari sisi kiri atau kanan."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Navigasi 3 butang"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"Kembali, pergi ke Skrin Utama dan beralih antara apl menggunakan butang di bahagian bawah skrin anda."</string>
     <string name="keywords_system_navigation" msgid="3131782378486554934">"navigasi sistem, navigasi 2 butang, navigasi 3 butang, navigasi gerak isyarat, leret"</string>
@@ -4684,6 +4699,8 @@
     <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"Audio daripada media yang serasi kedengaran lebih mengasyikkan"</string>
     <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"Penjejakan kepala"</string>
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"Audio berubah apabila anda menggerakkan kepala anda untuk kedengaran lebih semula jadi"</string>
+    <string name="bluetooth_details_permissions_sync_title" msgid="584337314155926373">"Segerakkan kebenaran"</string>
+    <string name="bluetooth_details_permissions_sync_summary" msgid="3426601558010545762">"Beri <xliff:g id="REMOTE_DEVICE_NAME">%1$s</xliff:g> kebenaran apl yang sama yang telah anda benarkan pada <xliff:g id="LOCAL_DEVICE_NAME">%2$s</xliff:g>"</string>
     <string name="bluetooth_details_audio_device_types_title" msgid="3381941189346781614">"Jenis Peranti Audio"</string>
     <string name="bluetooth_details_audio_device_type_unknown" msgid="839337391037998014">"Tidak diketahui"</string>
     <string name="bluetooth_details_audio_device_type_speaker" msgid="3706227767994792124">"Pembesar suara"</string>
@@ -4724,10 +4741,10 @@
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Apl dipasang dalam tempoh # bulan yang lalu}other{Apl dipasang dalam tempoh # bulan yang lalu}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Apl dipasang lebih dari # bulan yang lalu}other{Apl dipasang lebih dari # bulan yang lalu}}"</string>
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Nisbah bidang"</string>
-    <string name="aspect_ratio_summary" msgid="5944347596728740547">"Pilih nisbah bidang untuk melihat apl ini jika apl belum direka bentuk untuk disesuaikan dengan <xliff:g id="DEVICE_NAME">%1$s</xliff:g> anda"</string>
+    <string name="aspect_ratio_summary" msgid="4056406351663726494">"Cuba nisbah bidang baharu untuk melihat apl ini jika apl ini tidak direka bentuk untuk dimuatkan pada skrin <xliff:g id="DEVICE_NAME">%1$s</xliff:g> anda"</string>
+    <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"Cuba nisbah bidang baharu untuk melihat apl ini jika apl ini tidak direka bentuk untuk dimuatkan pada skrin <xliff:g id="DEVICE_NAME">%1$s</xliff:g> anda. Sesetengah apl mungkin tidak dioptimumkan untuk nisbah bidang tertentu."</string>
     <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"Apl yang dicadangkan"</string>
-    <!-- no translation found for user_aspect_ratio_changed_apps_label (2096614916172567672) -->
-    <skip />
+    <string name="user_aspect_ratio_changed_apps_label" msgid="2096614916172567672">"Apl ditukar"</string>
     <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"Lalai apl"</string>
     <string name="user_aspect_ratio_fullscreen" msgid="1843427242540081996">"Skrin penuh"</string>
     <string name="user_aspect_ratio_half_screen" msgid="1015852057094310209">"Skrin separuh"</string>
@@ -4735,7 +4752,14 @@
     <string name="user_aspect_ratio_16_9" msgid="2286644872775170164">"16:9"</string>
     <string name="user_aspect_ratio_3_2" msgid="199262962518318932">"3:2"</string>
     <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4:3"</string>
-    <string name="app_aspect_ratio_footer" msgid="8661813386126142251">"Apl akan dimulakan semula apabila anda mengubah nisbah bidang. Anda mungkin kehilangan perubahan yang belum disimpan."</string>
+    <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="NUMERATOR">%1$s</xliff:g> oleh <xliff:g id="DENOMINATOR">%2$s</xliff:g>"</string>
+    <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"Apl akan dimulakan semula apabila anda mengubah nisbah bidang. Anda mungkin kehilangan perubahan yang belum disimpan. Sesetengah apl mungkin tidak dioptimumkan untuk nisbah bidang tertentu."</string>
+    <string name="aspect_ratio_experimental_title" msgid="9088785421062044831">"Nisbah bidang (percubaan)"</string>
+    <string name="aspect_ratio_experiment_title" msgid="128614319422121040">"Nisbah bidang (percubaan)"</string>
+    <string name="aspect_ratio_labs_title" msgid="6733893837442759383">"Nisbah bidang (makmal)"</string>
+    <string name="aspect_ratio_experimental_label" msgid="6319009297672567578">"Percubaan"</string>
+    <string name="aspect_ratio_experiment_label" msgid="7861871612376167784">"Percubaan"</string>
+    <string name="aspect_ratio_labs_label" msgid="7008498116297651342">"Makmal"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Penderia cap jari"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Pemberitahuan denyar"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Perihal pemberitahuan denyar"</string>
