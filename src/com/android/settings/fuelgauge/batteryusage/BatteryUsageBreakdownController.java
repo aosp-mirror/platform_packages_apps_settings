@@ -102,6 +102,8 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
     String mAnomalyEntryKey;
     @VisibleForTesting
     String mAnomalyHintString;
+    @VisibleForTesting
+    String mAnomalyHintPrefKey;
 
     public BatteryUsageBreakdownController(
             Context context, Lifecycle lifecycle, SettingsActivity activity,
@@ -174,8 +176,13 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
                 (int) Math.round(diffEntry.getPercentage()));
         Log.d(TAG, String.format("handleClick() label=%s key=%s package=%s",
                 diffEntry.getAppLabel(), diffEntry.getKey(), diffEntry.getPackageName()));
-        AdvancedPowerUsageDetail.startBatteryDetailPage(
-                mActivity, mFragment, diffEntry, powerPref.getPercentage(), mSlotTimestamp);
+        final String anomalyHintPrefKey = isAnomalyBatteryDiffEntry(diffEntry)
+                ? mAnomalyHintPrefKey : null;
+        final String anomalyHintText = isAnomalyBatteryDiffEntry(diffEntry)
+                ? mAnomalyHintString : null;
+        AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mFragment.getMetricsCategory(),
+                diffEntry, powerPref.getPercentage(), mSlotTimestamp,
+                /*showTimeInformation=*/ true, anomalyHintPrefKey, anomalyHintText);
         return true;
     }
 
@@ -246,6 +253,8 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
                     ? anomalyEventWrapper.getAnomalyEntryKey() : null;
             mAnomalyHintString = anomalyEventWrapper != null
                     ? anomalyEventWrapper.getAnomalyHintString() : null;
+            mAnomalyHintPrefKey = anomalyEventWrapper != null
+                    ? anomalyEventWrapper.getAnomalyHintPrefKey() : null;
         }
 
         showCategoryTitle(slotTimestamp);
