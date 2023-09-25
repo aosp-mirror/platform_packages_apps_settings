@@ -119,6 +119,7 @@
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Uređaji za pozive"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Ostali uređaji"</string>
     <string name="connected_device_saved_title" msgid="5607274378851905959">"Spremljeni uređaji"</string>
+    <string name="connected_device_fast_pair_device_title" msgid="543124539265592392">"Povezano s računom"</string>
     <string name="connected_device_add_device_summary" msgid="8671009879957120802">"Bluetooth će se uključiti radi uparivanja"</string>
     <string name="connected_device_connections_title" msgid="4164120115341579170">"Postavke povezivanja"</string>
     <string name="connected_device_previously_connected_screen_title" msgid="8823331744788100605">"Prethodno povezano"</string>
@@ -531,30 +532,18 @@
     <string name="security_header" msgid="961514795852103424">"Sigurnost"</string>
     <string name="privacy_header" msgid="5526002421324257007">"Privatnost"</string>
     <string name="work_profile_category_header" msgid="85707750968948517">"Poslovni profil"</string>
-    <!-- no translation found for private_space_title (7078627930195569767) -->
-    <skip />
-    <!-- no translation found for private_space_summary (8237652417163408001) -->
-    <skip />
-    <!-- no translation found for private_space_one_lock_title (7306547190751832568) -->
-    <skip />
-    <!-- no translation found for private_space_hide_title (1615744426933304644) -->
-    <skip />
-    <!-- no translation found for private_space_category_system (1286843321867285700) -->
-    <skip />
-    <!-- no translation found for private_space_create_title (47273568884806726) -->
-    <skip />
-    <!-- no translation found for private_space_delete_title (3075645119800272800) -->
-    <skip />
-    <!-- no translation found for private_space_created (2978055968937762232) -->
-    <skip />
-    <!-- no translation found for private_space_already_exists (1253034947621867419) -->
-    <skip />
-    <!-- no translation found for private_space_create_failed (4908100791174213808) -->
-    <skip />
-    <!-- no translation found for private_space_deleted (7825768516955610897) -->
-    <skip />
-    <!-- no translation found for private_space_delete_failed (8500755484258565011) -->
-    <skip />
+    <string name="private_space_title" msgid="7078627930195569767">"Privatni prostor"</string>
+    <string name="private_space_summary" msgid="8237652417163408001">"Sakrivanje aplikacija u privatnoj mapi"</string>
+    <string name="private_space_one_lock_title" msgid="7306547190751832568">"Otključavanje pomoću funkcije za zaključavanje zaslona"</string>
+    <string name="private_space_hide_title" msgid="1615744426933304644">"Prikaz privatnog prostora"</string>
+    <string name="private_space_category_system" msgid="1286843321867285700">"Sustav"</string>
+    <string name="private_space_create_title" msgid="47273568884806726">"Izrada privatnog prostora"</string>
+    <string name="private_space_delete_title" msgid="3075645119800272800">"Brisanje privatnog prostora"</string>
+    <string name="private_space_created" msgid="2978055968937762232">"Privatni prostor uspješno je izrađen"</string>
+    <string name="private_space_already_exists" msgid="1253034947621867419">"Privatni prostor već postoji"</string>
+    <string name="private_space_create_failed" msgid="4908100791174213808">"Privatni prostor nije moguće izraditi"</string>
+    <string name="private_space_deleted" msgid="7825768516955610897">"Privatni prostor uspješno je izbrisan"</string>
+    <string name="private_space_delete_failed" msgid="8500755484258565011">"Privatni prostor nije moguće izbrisati"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Maksimalni broj otisaka prstiju koji možete dodati: <xliff:g id="COUNT">%d</xliff:g>"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Dodali ste maksimalan broj otisaka prstiju"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Nije moguće dodati više otisaka prstiju"</string>
@@ -3081,7 +3070,8 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"Zadani zvuk obavijesti"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"Zadani zvuk alarma"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"Najprije vibriraj, zatim postupno zvoni"</string>
-    <string name="spatial_audio_title" msgid="6591051622375191603">"Prostorni zvuk"</string>
+    <!-- no translation found for spatial_audio_title (1775370104206884711) -->
+    <skip />
     <string name="dial_pad_tones_title" msgid="3536945335367914892">"Tonovi brojčanika"</string>
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"Zvuk zaključavanja zaslona"</string>
     <string name="charging_sounds_title" msgid="5261683808537783668">"Zvukovi i vibracija punjenja"</string>
@@ -3097,7 +3087,6 @@
     <string name="boot_sounds_title" msgid="5033062848948884111">"Uključi zvukove"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"Automatski titlovi"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"Automatski titlovi za medije"</string>
-    <string name="spatial_audio_speaker" msgid="9145233652433523302">"Zvučnik telefona"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Žičane slušalice"</string>
     <string name="spatial_audio_text" msgid="8201387855375146000">"Zvuk s kompatibilnih medija postaje realističniji"</string>
     <string name="spatial_summary_off" msgid="8272678804629774378">"Isključeno"</string>
@@ -3911,8 +3900,32 @@
     <string name="app_battery_usage_title" msgid="346558380609793334">"Potrošnja baterije za aplikacije"</string>
     <string name="app_battery_usage_summary" msgid="6349965904306339539">"Postavite potrošnju baterije za aplikacije"</string>
     <string name="battery_tips_card_action_button" msgid="4897793527424711648">"Prikaz postavki"</string>
+    <!-- no translation found for battery_tips_card_action_button_check (1535140204105479318) -->
+    <skip />
     <string name="battery_tips_card_dismiss_button" msgid="1885756985544936618">"Shvaćam"</string>
     <string name="battery_tips_card_feedback_info" msgid="767117835675157298">"Je li ova poruka korisna?"</string>
+    <!-- no translation found for battery_hints_warning_icon_a11y (5312542323401447620) -->
+    <skip />
+    <string name="battery_tips_settings_summary_brightness" msgid="546145032616077783">"Uključite prilagodljivu svjetlinu radi produljenja trajanja baterije"</string>
+    <string name="battery_tips_settings_summary_screen_timeout" msgid="556801426050962077">"Smanjite automatsko isključivanje zaslona radi produljenja trajanja baterije"</string>
+    <!-- no translation found for battery_tips_apps_summary_always_high (6334519477067044920) -->
+    <skip />
+    <!-- no translation found for battery_tips_apps_summary_higher_than_usual (95676961671544628) -->
+    <skip />
+    <!-- no translation found for battery_tips_apps_summary_always_high_in_background (2953858181710181126) -->
+    <skip />
+    <!-- no translation found for battery_tips_apps_summary_higher_than_usual_in_background (1585002072567422199) -->
+    <skip />
+    <!-- no translation found for battery_tips_apps_summary_always_high_in_foreground (1910991243576404700) -->
+    <skip />
+    <!-- no translation found for battery_tips_apps_summary_higher_than_usual_in_foreground (7937337570425168210) -->
+    <skip />
+    <!-- no translation found for battery_app_item_hint (4850929961461039110) -->
+    <skip />
+    <!-- no translation found for battery_app_item_hint_in_bg (596240821466388336) -->
+    <skip />
+    <!-- no translation found for battery_app_item_hint_in_fg (5091860632260799910) -->
+    <skip />
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Neograničeno"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Optimizirano"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"Ograničeno"</string>
@@ -4001,7 +4014,7 @@
     <string name="emergency_settings_preference_title" msgid="6183455153241187148">"Sigurnost i hitni slučajevi"</string>
     <string name="emergency_dashboard_summary" msgid="401033951074039302">"SOS poziv, zdravstveni podaci, upozorenja"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Navigacija pokretima"</string>
-    <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"Da biste otvorili početni zaslon, prijeđite prstom od dna zaslona prema gore. Da biste promijenili aplikaciju, prijeđite prstom od dna prema gore, zadržite i otpustite. Da biste se vratili, prijeđite prstom od lijevog ili desnog ruba."</string>
+    <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"Da biste otvorili početni zaslon, prijeđite prstom od dna zaslona prema gore. Da biste promijenili aplikaciju, prijeđite prstom od dna prema gore, zadržite i otpustite. Da biste se vratili, prijeđite prstom od lijevog ili desnog ruba."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Navigacija pomoću tri gumba"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"Za povratak, otvaranje početnog zaslona i promjenu aplikacije koristite se gumbima pri dnu zaslona."</string>
     <string name="keywords_system_navigation" msgid="3131782378486554934">"navigacija za sustav, navigacija pomoću dva gumba, navigacija pomoću tri gumba, navigacija pokretima, prelazak prstom"</string>
@@ -4747,6 +4760,8 @@
     <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"Zvuk s kompatibilnih medija postaje realističniji"</string>
     <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"Praćenje glave"</string>
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"Zvuk se mijenja kako pomičete glavu kako bi prirodnije zvučao"</string>
+    <string name="bluetooth_details_permissions_sync_title" msgid="7277580382321003521">"Sinkronizacija dopuštenja s telefona"</string>
+    <string name="bluetooth_details_permissions_sync_summary" msgid="8125037984381432059">"Svojem satu dajte jednaka dopuštenja aplikacija koja ste dopustili na ovom telefonu"</string>
     <string name="bluetooth_details_audio_device_types_title" msgid="3381941189346781614">"Vrsta audiouređaja"</string>
     <string name="bluetooth_details_audio_device_type_unknown" msgid="839337391037998014">"Nepoznato"</string>
     <string name="bluetooth_details_audio_device_type_speaker" msgid="3706227767994792124">"Zvučnik"</string>
@@ -4787,10 +4802,10 @@
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Aplikacije instalirane u posljednji # mjesec}one{Aplikacije instalirane u posljednji # mjesec}few{Aplikacije instalirane u posljednja # mjeseca}other{Aplikacije instalirane u posljednjih # mjeseci}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Aplikacije instalirane prije više od # mjeseca}one{Aplikacije instalirane prije više od # mjeseca}few{Aplikacije instalirane prije više od # mjeseca}other{Aplikacije instalirane prije više od # mjeseci}}"</string>
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Omjer slike"</string>
-    <string name="aspect_ratio_summary" msgid="5944347596728740547">"Odaberite omjer slike za pregled ove aplikacije ako nije osmišljena da odgovara uređaju <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="aspect_ratio_summary" msgid="4056406351663726494">"Isprobajte novi omjer slike za pregled ove aplikacije ako nije osmišljena da odgovara uređaju <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"Isprobajte novi omjer slike za pregled ove aplikacije ako nije osmišljena da odgovara uređaju <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Neke aplikacije možda nisu optimizirane za određene omjere slike."</string>
     <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"Predložene aplikacije"</string>
-    <!-- no translation found for user_aspect_ratio_changed_apps_label (2096614916172567672) -->
-    <skip />
+    <string name="user_aspect_ratio_changed_apps_label" msgid="2096614916172567672">"Promijenjene aplikacije"</string>
     <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"Zadano za aplikaciju"</string>
     <string name="user_aspect_ratio_fullscreen" msgid="1843427242540081996">"Cijeli zaslon"</string>
     <string name="user_aspect_ratio_half_screen" msgid="1015852057094310209">"Pola zaslona"</string>
@@ -4798,7 +4813,14 @@
     <string name="user_aspect_ratio_16_9" msgid="2286644872775170164">"16:9"</string>
     <string name="user_aspect_ratio_3_2" msgid="199262962518318932">"3:2"</string>
     <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4:3"</string>
-    <string name="app_aspect_ratio_footer" msgid="8661813386126142251">"Aplikacija će se ponovno pokrenuti kad promijenite omjer slike. Možda ćete izgubiti nespremljene promjene."</string>
+    <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="NUMERATOR">%1$s</xliff:g>, <xliff:g id="DENOMINATOR">%2$s</xliff:g>"</string>
+    <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"Aplikacija će se ponovno pokrenuti kad promijenite omjer slike. Možda ćete izgubiti nespremljene promjene. Neke aplikacije možda nisu optimizirane za određene omjere slike."</string>
+    <string name="aspect_ratio_experimental_title" msgid="9088785421062044831">"Omjer slike (eksperimentalno)"</string>
+    <string name="aspect_ratio_experiment_title" msgid="128614319422121040">"Omjer slike (eksperiment)"</string>
+    <string name="aspect_ratio_labs_title" msgid="6733893837442759383">"Omjer slike (Labs)"</string>
+    <string name="aspect_ratio_experimental_label" msgid="6319009297672567578">"Eksperimentalno"</string>
+    <string name="aspect_ratio_experiment_label" msgid="7861871612376167784">"Eksperiment"</string>
+    <string name="aspect_ratio_labs_label" msgid="7008498116297651342">"Labs"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Senzor otiska prsta"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Bljeskajuće obavijesti"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"O bljeskajućim obavijestima"</string>
@@ -4851,4 +4873,6 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Naziv vašeg uređaja vidljiv je aplikacijama koje ste instalirali. Mogu ga vidjeti i drugi ljudi kada se povežete s Bluetooth uređajima ili Wi-Fi mrežom ili postavite Wi-Fi žarišnu točku."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Gramatički rod"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Odaberite gramatički rod"</string>
+    <!-- no translation found for quarantined_apps_title (5713301345723474936) -->
+    <skip />
 </resources>

@@ -119,6 +119,7 @@
     <string name="connected_device_call_device_title" msgid="88732390601723608">"কল ডিভাইচসমূহ"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"অন্য ডিভাইচসমূহ"</string>
     <string name="connected_device_saved_title" msgid="5607274378851905959">"ছেভ কৰি থোৱা ডিভাইচসমূহ"</string>
+    <string name="connected_device_fast_pair_device_title" msgid="543124539265592392">"একাউণ্টৰ সৈতে সম্পৰ্কিত"</string>
     <string name="connected_device_add_device_summary" msgid="8671009879957120802">"পেয়াৰ কৰিবলৈ ব্লুটুথ অন হ’ব"</string>
     <string name="connected_device_connections_title" msgid="4164120115341579170">"সংযোগৰ অগ্ৰাধিকাৰসমূহ"</string>
     <string name="connected_device_previously_connected_screen_title" msgid="8823331744788100605">"আগতে সংযোগ কৰা"</string>
@@ -531,30 +532,18 @@
     <string name="security_header" msgid="961514795852103424">"সুৰক্ষা"</string>
     <string name="privacy_header" msgid="5526002421324257007">"গোপনীয়তা"</string>
     <string name="work_profile_category_header" msgid="85707750968948517">"কৰ্মস্থানৰ প্ৰ’ফাইল"</string>
-    <!-- no translation found for private_space_title (7078627930195569767) -->
-    <skip />
-    <!-- no translation found for private_space_summary (8237652417163408001) -->
-    <skip />
-    <!-- no translation found for private_space_one_lock_title (7306547190751832568) -->
-    <skip />
-    <!-- no translation found for private_space_hide_title (1615744426933304644) -->
-    <skip />
-    <!-- no translation found for private_space_category_system (1286843321867285700) -->
-    <skip />
-    <!-- no translation found for private_space_create_title (47273568884806726) -->
-    <skip />
-    <!-- no translation found for private_space_delete_title (3075645119800272800) -->
-    <skip />
-    <!-- no translation found for private_space_created (2978055968937762232) -->
-    <skip />
-    <!-- no translation found for private_space_already_exists (1253034947621867419) -->
-    <skip />
-    <!-- no translation found for private_space_create_failed (4908100791174213808) -->
-    <skip />
-    <!-- no translation found for private_space_deleted (7825768516955610897) -->
-    <skip />
-    <!-- no translation found for private_space_delete_failed (8500755484258565011) -->
-    <skip />
+    <string name="private_space_title" msgid="7078627930195569767">"ব্যক্তিগত স্পে’চ"</string>
+    <string name="private_space_summary" msgid="8237652417163408001">"এপ্‌সমূহ এটা ব্যক্তিগত ফ’ল্ডাৰত লুকুৱাওক"</string>
+    <string name="private_space_one_lock_title" msgid="7306547190751832568">"স্ক্ৰীন লক ব্যৱহাৰ কৰি আনলক কৰক"</string>
+    <string name="private_space_hide_title" msgid="1615744426933304644">"ব্যক্তিগত স্পে’চ দেখুৱাওক"</string>
+    <string name="private_space_category_system" msgid="1286843321867285700">"ছিষ্টেম"</string>
+    <string name="private_space_create_title" msgid="47273568884806726">"ব্যক্তিগত স্পে’চ সৃষ্টি কৰক"</string>
+    <string name="private_space_delete_title" msgid="3075645119800272800">"ব্যক্তিগত স্পে’চ মচক"</string>
+    <string name="private_space_created" msgid="2978055968937762232">"ব্যক্তিগত স্পে’চ সফলতাৰে সৃষ্টি কৰা হৈছে"</string>
+    <string name="private_space_already_exists" msgid="1253034947621867419">"ব্যক্তিগত স্পে’চ পূৰ্বৰে পৰা আছে"</string>
+    <string name="private_space_create_failed" msgid="4908100791174213808">"ব্যক্তিগত স্পে’চ সৃষ্টি কৰিব পৰা নগ’ল"</string>
+    <string name="private_space_deleted" msgid="7825768516955610897">"ব্যক্তিগত স্পে’চ সফলতাৰে মচা হৈছে"</string>
+    <string name="private_space_delete_failed" msgid="8500755484258565011">"ব্যক্তিগত স্পে’চ মচিব পৰা নগ’ল"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"আপুনি <xliff:g id="COUNT">%d</xliff:g> টালৈকে ফিংগাৰপ্ৰিণ্ট যোগ কৰিব পাৰে"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"আপুনি সৰ্বাধিক সংখ্যক ফিংগাৰপ্ৰিণ্টবোৰ যোগ কৰিছে"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"আৰু অধিক ফিংগাৰপ্ৰিণ্ট যোগ কৰিব নোৱাৰি"</string>
@@ -3081,7 +3070,8 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"জাননীৰ ডিফ\'ল্ট ধ্বনি"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"এলাৰ্মৰ ডিফ\'ল্ট ধ্বনি"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"প্ৰথমে কম্পন হৈ তাৰপাছত ক্ৰমে ৰিং হ’ব লাগে"</string>
-    <string name="spatial_audio_title" msgid="6591051622375191603">"প্ৰকৃত অভিজ্ঞতা দিয়া অডিঅ’"</string>
+    <!-- no translation found for spatial_audio_title (1775370104206884711) -->
+    <skip />
     <string name="dial_pad_tones_title" msgid="3536945335367914892">"ডায়েল পেডৰ ট\'নসমূহ"</string>
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"স্ক্ৰীন লক কৰাৰ ধ্বনি"</string>
     <string name="charging_sounds_title" msgid="5261683808537783668">"চাৰ্জ কৰাৰ ধ্বনি আৰু কম্পন"</string>
@@ -3097,7 +3087,6 @@
     <string name="boot_sounds_title" msgid="5033062848948884111">"পাৱাৰ অনৰ ধ্বনিসমূহ"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"লাইভ কেপশ্বন"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"স্বয়ংক্ৰিয় কেপশ্বন মিডিয়া"</string>
-    <string name="spatial_audio_speaker" msgid="9145233652433523302">"ফ’নৰ স্পীকাৰ"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"তাঁৰযুক্ত হেডফ’ন"</string>
     <string name="spatial_audio_text" msgid="8201387855375146000">"সমিল মিডিয়াৰ পৰা অহা অডিঅ’ অধিক নিমগ্ন হৈ পৰে"</string>
     <string name="spatial_summary_off" msgid="8272678804629774378">"অফ আছে"</string>
@@ -3911,8 +3900,32 @@
     <string name="app_battery_usage_title" msgid="346558380609793334">"এপৰ বেটাৰীৰ ব্যৱহাৰ"</string>
     <string name="app_battery_usage_summary" msgid="6349965904306339539">"এপ্‌সমূহৰ বাবে বেটাৰীৰ ব্যৱহাৰ ছেট কৰক"</string>
     <string name="battery_tips_card_action_button" msgid="4897793527424711648">"ছেটিং চাওক"</string>
+    <!-- no translation found for battery_tips_card_action_button_check (1535140204105479318) -->
+    <skip />
     <string name="battery_tips_card_dismiss_button" msgid="1885756985544936618">"বুজি পালোঁ"</string>
     <string name="battery_tips_card_feedback_info" msgid="767117835675157298">"এই বাৰ্তাটো সহায়ক হয়নে?"</string>
+    <!-- no translation found for battery_hints_warning_icon_a11y (5312542323401447620) -->
+    <skip />
+    <string name="battery_tips_settings_summary_brightness" msgid="546145032616077783">"বেটাৰীৰ জীৱনকাল বৃদ্ধি কৰিবলৈ অভিযোজিত উজ্জ্বলতা অন কৰক"</string>
+    <string name="battery_tips_settings_summary_screen_timeout" msgid="556801426050962077">"বেটাৰীৰ জীৱনকাল বৃদ্ধি কৰিবলৈ স্ক্ৰীন টাইমআউট হ্ৰাস কৰক"</string>
+    <!-- no translation found for battery_tips_apps_summary_always_high (6334519477067044920) -->
+    <skip />
+    <!-- no translation found for battery_tips_apps_summary_higher_than_usual (95676961671544628) -->
+    <skip />
+    <!-- no translation found for battery_tips_apps_summary_always_high_in_background (2953858181710181126) -->
+    <skip />
+    <!-- no translation found for battery_tips_apps_summary_higher_than_usual_in_background (1585002072567422199) -->
+    <skip />
+    <!-- no translation found for battery_tips_apps_summary_always_high_in_foreground (1910991243576404700) -->
+    <skip />
+    <!-- no translation found for battery_tips_apps_summary_higher_than_usual_in_foreground (7937337570425168210) -->
+    <skip />
+    <!-- no translation found for battery_app_item_hint (4850929961461039110) -->
+    <skip />
+    <!-- no translation found for battery_app_item_hint_in_bg (596240821466388336) -->
+    <skip />
+    <!-- no translation found for battery_app_item_hint_in_fg (5091860632260799910) -->
+    <skip />
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"অপ্ৰতিবন্ধিত"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"অপ্টিমাইজ কৰা"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"প্ৰতিবন্ধিত"</string>
@@ -4001,7 +4014,7 @@
     <string name="emergency_settings_preference_title" msgid="6183455153241187148">"সুৰক্ষা আৰু জৰুৰীকালীন"</string>
     <string name="emergency_dashboard_summary" msgid="401033951074039302">"জৰুৰীকালীন SOS, স্বাস্থ্য সম্পৰ্কীয় তথ্য, সতৰ্কবাণী"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"আঙুলিৰ স্পৰ্শৰ নিৰ্দেশেৰে কৰা নেভিগেশ্বন"</string>
-    <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"গৃহপৃষ্ঠালৈ যাবলৈ স্ক্ৰীনৰ তলৰ অংশৰ পৰা ওপৰলৈ ছোৱাইপ কৰক। এপ্‌সমূহ সলনি কৰিবলৈ তলৰ পৰা ওপৰলৈ ছোৱাইপ কৰক, ধৰি ৰাখক আৰু তাৰ পাছত এৰি দিয়ক। উভতি যাবলৈ, বাওঁফালে অথবা সোঁফালে কাষৰ পৰা ছোৱাইপ কৰক।"</string>
+    <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"গৃহপৃষ্ঠালৈ যাবলৈ স্ক্ৰীনৰ তলৰ অংশৰ পৰা ওপৰলৈ ছোৱাইপ কৰক। এপ্‌সমূহ সলনি কৰিবলৈ তলৰ পৰা ওপৰলৈ ছোৱাইপ কৰক, ধৰি ৰাখক আৰু তাৰ পাছত এৰি দিয়ক। উভতি যাবলৈ, বাওঁফালে অথবা সোঁফালে কাষৰ পৰা ছোৱাইপ কৰক।"</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"৩টা বুটামেৰে কৰা নেভিগেশ্বন"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"আপোনাৰ স্ক্ৰীনৰ তলৰ অংশত থকা বুটামবোৰৰ জৰিয়তে উভতি যাওক, গৃহলৈ যাওক আৰু এপ্‌সমূহ সলনি কৰক।"</string>
     <string name="keywords_system_navigation" msgid="3131782378486554934">"ছিষ্টেম নেভিগেশ্বন, ২ টা বুটামেৰে কৰা নেভিগেশ্বন, ৩ টা বুটামেৰে কৰা নেভিগেশ্বন, আঙুলিৰ স্পৰ্শৰ নিৰ্দেশেৰে কৰা নেভিগেশ্বন, ছোৱাইপ"</string>
@@ -4746,6 +4759,8 @@
     <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"সমিল মিডিয়াৰ পৰা অহা অডিঅ’ অধিক ইমাৰ্ছিভ হৈ পৰে"</string>
     <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"হে’ড ট্ৰেকিং"</string>
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"আপুনি নিজৰ মূৰটো লৰচৰ কৰিলে শ্ৰৱণৰ অভিজ্ঞতা অধিক স্বতঃস্ফূৰ্ত কৰিবলৈ অডিঅ’ সলনি হয়"</string>
+    <string name="bluetooth_details_permissions_sync_title" msgid="7277580382321003521">"ফ’নৰ পৰা অনুমতিসমূহ ছিংক কৰক"</string>
+    <string name="bluetooth_details_permissions_sync_summary" msgid="8125037984381432059">"আপোনাৰ ঘড়ীটোক আপুনি এই ফ’নটোত দিয়া একে এপৰ অনুমতি দিয়ক"</string>
     <string name="bluetooth_details_audio_device_types_title" msgid="3381941189346781614">"অডিঅ’ ডিভাইচৰ প্ৰকাৰ"</string>
     <string name="bluetooth_details_audio_device_type_unknown" msgid="839337391037998014">"অজ্ঞাত"</string>
     <string name="bluetooth_details_audio_device_type_speaker" msgid="3706227767994792124">"স্পীকাৰ"</string>
@@ -4786,10 +4801,10 @@
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{যোৱা # মাহত ইনষ্টল কৰা এপ্‌}one{যোৱা # মাহত ইনষ্টল কৰা এপ্‌}other{যোৱা # মাহত ইনষ্টল কৰা এপ্‌}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{# মাহতকৈ আগত ইনষ্টল কৰা এপ্‌}one{# মাহতকৈ আগত ইনষ্টল কৰা এপ্‌}other{# মাহতকৈ আগত ইনষ্টল কৰা এপ্‌}}"</string>
     <string name="aspect_ratio_title" msgid="2451826875939676101">"আকাৰৰ অনুপাত"</string>
-    <string name="aspect_ratio_summary" msgid="5944347596728740547">"এই এপ্‌টো চাবলৈ এটা আকাৰৰ অনুপাত বাছনি কৰক যদি এইটো আপোনাৰ <xliff:g id="DEVICE_NAME">%1$s</xliff:g>ৰ সৈতে মিলাকৈ ডিজাইন কৰা হোৱা নাই"</string>
+    <string name="aspect_ratio_summary" msgid="4056406351663726494">"এই এপ্‌টো চাবলৈ এটা আকাৰৰ অনুপাত ব্যৱহাৰ কৰি চাওক যদি এইটো আপোনাৰ <xliff:g id="DEVICE_NAME">%1$s</xliff:g>ৰ সৈতে মিলাকৈ ডিজাইন কৰা হোৱা নাই"</string>
+    <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"এই এপ্‌টো চাবলৈ এটা আকাৰৰ অনুপাত ব্যৱহাৰ কৰি চাওক যদি এইটো আপোনাৰ <xliff:g id="DEVICE_NAME">%1$s</xliff:g>ৰ সৈতে মিলাকৈ ডিজাইন কৰা হোৱা নাই। নিৰ্দিষ্ট কিছুমান আকাৰৰ অনুপাতৰ বাবে কিছুমান এপ্‌ অপ্টিমাইজ কৰা নহ’বও পাৰে।"</string>
     <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"পৰামৰ্শিত এপ্‌সমূহ"</string>
-    <!-- no translation found for user_aspect_ratio_changed_apps_label (2096614916172567672) -->
-    <skip />
+    <string name="user_aspect_ratio_changed_apps_label" msgid="2096614916172567672">"সলনি কৰা এপ্‌"</string>
     <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"এপৰ ডিফ’ল্ট"</string>
     <string name="user_aspect_ratio_fullscreen" msgid="1843427242540081996">"সম্পূৰ্ণ স্ক্ৰীন"</string>
     <string name="user_aspect_ratio_half_screen" msgid="1015852057094310209">"অৰ্ধ-স্ক্ৰীন"</string>
@@ -4797,7 +4812,14 @@
     <string name="user_aspect_ratio_16_9" msgid="2286644872775170164">"১৬:৯"</string>
     <string name="user_aspect_ratio_3_2" msgid="199262962518318932">"৩:২"</string>
     <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"৪:৩"</string>
-    <string name="app_aspect_ratio_footer" msgid="8661813386126142251">"আপুনি আকাৰৰ অনুপাত সলনি কৰিলে এপ্‌টো পুনৰ আৰম্ভ হ’ব। আপুনি ছেভ নকৰা সালসলনিসমূহ হেৰুৱাব পাৰে।"</string>
+    <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="NUMERATOR">%1$s</xliff:g> অনুপাত <xliff:g id="DENOMINATOR">%2$s</xliff:g>"</string>
+    <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"আপুনি আকাৰৰ অনুপাত সলনি কৰিলে এপ্‌টো পুনৰ আৰম্ভ হ’ব। আপুনি ছেভ নকৰা সালসলনিসমূহ হেৰুৱাব পাৰে। নিৰ্দিষ্ট কিছুমান আকাৰৰ অনুপাতৰ বাবে কিছুমান এপ্‌ অপ্টিমাইজ কৰা নহ’বও পাৰে।"</string>
+    <string name="aspect_ratio_experimental_title" msgid="9088785421062044831">"আকাৰৰ আনুপাত (পৰীক্ষামূলক)"</string>
+    <string name="aspect_ratio_experiment_title" msgid="128614319422121040">"আকাৰৰ আনুপাত (পৰীক্ষণ)"</string>
+    <string name="aspect_ratio_labs_title" msgid="6733893837442759383">"আকাৰৰ আনুপাত (লেব)"</string>
+    <string name="aspect_ratio_experimental_label" msgid="6319009297672567578">"পৰীক্ষামূলক"</string>
+    <string name="aspect_ratio_experiment_label" msgid="7861871612376167784">"পৰীক্ষণ"</string>
+    <string name="aspect_ratio_labs_label" msgid="7008498116297651342">"লেব"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"ফিংগাৰপ্ৰিণ্ট ছেন্সৰ"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"ফ্লেশ্ব জাননী"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"ফ্লেশ্ব জাননীৰ বিষয়ে"</string>
@@ -4850,4 +4872,6 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"আপোনাৰ ডিভাইচৰ নাম আপুনি ইনষ্টল কৰা এপত দেখা পোৱা যায়। আপুনি ব্লুটুথ ডিভাইচৰ সৈতে সংযোগ কৰিলে, ৱাই-ফাই নেটৱৰ্কৰ সৈতে সংযোগ কৰিলে অথবা ৱাই-ফাই হটস্পট ছেট আপ কৰিলে এইটো অন্য লোকেও দেখা পাব পাৰে।"</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"ব্যাকৰণ বিষয়ক লিংগ"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"ব্যাকৰণ বিষয়ক লিংগ বাছনি কৰক"</string>
+    <!-- no translation found for quarantined_apps_title (5713301345723474936) -->
+    <skip />
 </resources>

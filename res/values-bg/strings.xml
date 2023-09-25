@@ -119,6 +119,7 @@
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Устройства за обаждания"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Други устройства"</string>
     <string name="connected_device_saved_title" msgid="5607274378851905959">"Запазени устройства"</string>
+    <string name="connected_device_fast_pair_device_title" msgid="543124539265592392">"Асоциирано с профила"</string>
     <string name="connected_device_add_device_summary" msgid="8671009879957120802">"Bluetooth ще се включи с цел сдвояване"</string>
     <string name="connected_device_connections_title" msgid="4164120115341579170">"Предпочитания за свързването"</string>
     <string name="connected_device_previously_connected_screen_title" msgid="8823331744788100605">"По-рано свързвани"</string>
@@ -258,7 +259,7 @@
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Стандартно време"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"Избиране по регион"</string>
     <string name="zone_menu_by_offset" msgid="1257702747474426745">"Избиране по отместване от UTC"</string>
-    <string name="lock_after_timeout" msgid="8682769000437403444">"Заключв. след времето за изчакване"</string>
+    <string name="lock_after_timeout" msgid="8682769000437403444">"Заключв. след времето до авт. изкл."</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> след времето за изчакване"</string>
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"Веднага след времето за изчакване, освен когато екранът се поддържа отключен от <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> след времето за изчакване, освен когато екранът се поддържа отключен от <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
@@ -531,30 +532,18 @@
     <string name="security_header" msgid="961514795852103424">"Сигурност"</string>
     <string name="privacy_header" msgid="5526002421324257007">"Поверителност"</string>
     <string name="work_profile_category_header" msgid="85707750968948517">"Служебен потребителски профил"</string>
-    <!-- no translation found for private_space_title (7078627930195569767) -->
-    <skip />
-    <!-- no translation found for private_space_summary (8237652417163408001) -->
-    <skip />
-    <!-- no translation found for private_space_one_lock_title (7306547190751832568) -->
-    <skip />
-    <!-- no translation found for private_space_hide_title (1615744426933304644) -->
-    <skip />
-    <!-- no translation found for private_space_category_system (1286843321867285700) -->
-    <skip />
-    <!-- no translation found for private_space_create_title (47273568884806726) -->
-    <skip />
-    <!-- no translation found for private_space_delete_title (3075645119800272800) -->
-    <skip />
-    <!-- no translation found for private_space_created (2978055968937762232) -->
-    <skip />
-    <!-- no translation found for private_space_already_exists (1253034947621867419) -->
-    <skip />
-    <!-- no translation found for private_space_create_failed (4908100791174213808) -->
-    <skip />
-    <!-- no translation found for private_space_deleted (7825768516955610897) -->
-    <skip />
-    <!-- no translation found for private_space_delete_failed (8500755484258565011) -->
-    <skip />
+    <string name="private_space_title" msgid="7078627930195569767">"Лично пространство"</string>
+    <string name="private_space_summary" msgid="8237652417163408001">"Скриване на приложенията в лична папка"</string>
+    <string name="private_space_one_lock_title" msgid="7306547190751832568">"Отключване с опцията за заключване на екрана"</string>
+    <string name="private_space_hide_title" msgid="1615744426933304644">"Показване на личното пространство"</string>
+    <string name="private_space_category_system" msgid="1286843321867285700">"Система"</string>
+    <string name="private_space_create_title" msgid="47273568884806726">"Създаване на лично пространство"</string>
+    <string name="private_space_delete_title" msgid="3075645119800272800">"Изтриване на личното пространство"</string>
+    <string name="private_space_created" msgid="2978055968937762232">"Личното пространство бе създадено успешно"</string>
+    <string name="private_space_already_exists" msgid="1253034947621867419">"Личното пространство вече съществува"</string>
+    <string name="private_space_create_failed" msgid="4908100791174213808">"Създаването на личното пространство не бе успешно"</string>
+    <string name="private_space_deleted" msgid="7825768516955610897">"Личното пространство бе изтрито успешно"</string>
+    <string name="private_space_delete_failed" msgid="8500755484258565011">"Изтриването на личното пространство не бе успешно"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Можете да добавите до <xliff:g id="COUNT">%d</xliff:g> отпечатъка"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Добавихте максималния брой отпечатъци"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Не могат да се добавят още отпечатъци"</string>
@@ -1127,7 +1116,7 @@
     <string name="dark_ui_text" msgid="4392646155331126666">"Тъмната тема използва черен фон с цел удължаване на живота на батерията на някои екрани. Графиците за нея изчакват с включването, докато екранът ви не се изключи."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Понастоящем тъмната тема следва графика ви за режима „Време за сън“"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Настройки за режима „Време за сън“"</string>
-    <string name="screen_timeout" msgid="7709947617767439410">"Време за изчакване на екрана"</string>
+    <string name="screen_timeout" msgid="7709947617767439410">"Време до автоматично изключване на екрана"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"След <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> неактивност"</string>
     <string name="screen_timeout_summary_not_set" msgid="5107680774964178875">"Не е зададено"</string>
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"Тапет"</string>
@@ -3081,7 +3070,8 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"Стандартен звук за известяване"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"Стандартен звук за будилника"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"Вибриране, звънене постепенно"</string>
-    <string name="spatial_audio_title" msgid="6591051622375191603">"Пространствено аудио"</string>
+    <!-- no translation found for spatial_audio_title (1775370104206884711) -->
+    <skip />
     <string name="dial_pad_tones_title" msgid="3536945335367914892">"Тонове при набиране"</string>
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"Звук при заключване на екрана"</string>
     <string name="charging_sounds_title" msgid="5261683808537783668">"Звуци при зарежд. и вибриране"</string>
@@ -3097,7 +3087,6 @@
     <string name="boot_sounds_title" msgid="5033062848948884111">"Звуци при включване"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"Надписи на живо"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"Мултимедия с автоматични надписи"</string>
-    <string name="spatial_audio_speaker" msgid="9145233652433523302">"Високоговорител на телефона"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Слушалки с кабел"</string>
     <string name="spatial_audio_text" msgid="8201387855375146000">"Звукът от съвместимите източници става по-реалистичен"</string>
     <string name="spatial_summary_off" msgid="8272678804629774378">"Изкл."</string>
@@ -3911,8 +3900,32 @@
     <string name="app_battery_usage_title" msgid="346558380609793334">"Използване на батерията от приложения"</string>
     <string name="app_battery_usage_summary" msgid="6349965904306339539">"Задаване на използв. на батерията за приложенията"</string>
     <string name="battery_tips_card_action_button" msgid="4897793527424711648">"Преглед на настройките"</string>
+    <!-- no translation found for battery_tips_card_action_button_check (1535140204105479318) -->
+    <skip />
     <string name="battery_tips_card_dismiss_button" msgid="1885756985544936618">"Разбрах"</string>
     <string name="battery_tips_card_feedback_info" msgid="767117835675157298">"Полезно ли е това съобщение?"</string>
+    <!-- no translation found for battery_hints_warning_icon_a11y (5312542323401447620) -->
+    <skip />
+    <string name="battery_tips_settings_summary_brightness" msgid="546145032616077783">"Включете адаптивната яркост с цел удължаване на живота на батерията"</string>
+    <string name="battery_tips_settings_summary_screen_timeout" msgid="556801426050962077">"Намалете времето до автоматично изключване на екрана с цел удължаване на живота на батерията"</string>
+    <!-- no translation found for battery_tips_apps_summary_always_high (6334519477067044920) -->
+    <skip />
+    <!-- no translation found for battery_tips_apps_summary_higher_than_usual (95676961671544628) -->
+    <skip />
+    <!-- no translation found for battery_tips_apps_summary_always_high_in_background (2953858181710181126) -->
+    <skip />
+    <!-- no translation found for battery_tips_apps_summary_higher_than_usual_in_background (1585002072567422199) -->
+    <skip />
+    <!-- no translation found for battery_tips_apps_summary_always_high_in_foreground (1910991243576404700) -->
+    <skip />
+    <!-- no translation found for battery_tips_apps_summary_higher_than_usual_in_foreground (7937337570425168210) -->
+    <skip />
+    <!-- no translation found for battery_app_item_hint (4850929961461039110) -->
+    <skip />
+    <!-- no translation found for battery_app_item_hint_in_bg (596240821466388336) -->
+    <skip />
+    <!-- no translation found for battery_app_item_hint_in_fg (5091860632260799910) -->
+    <skip />
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Неограничено"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Оптимизирано"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"Ограничено"</string>
@@ -4001,7 +4014,7 @@
     <string name="emergency_settings_preference_title" msgid="6183455153241187148">"Безопасност и спешни случаи"</string>
     <string name="emergency_dashboard_summary" msgid="401033951074039302">"Спешно повикване SOS, медицинска информация, сигнали"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Навигиране с жестове"</string>
-    <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"За достъп до началния екран плъзнете пръста си нагоре от долната част на дисплея. За превключване между приложенията плъзнете пръста си нагоре от долната част, задръжте и след това освободете. За връщане назад плъзнете пръста си настрани от левия или десния край."</string>
+    <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"За достъп до началния екран прекарайте пръст нагоре от долната част на дисплея. За превключване между приложенията прекарайте пръст нагоре от долната част, задръжте и след това освободете. За връщане назад прекарайте пръст настрани от левия или десния край."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Навигиране с 3 бутона"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"Връщане назад, достъп до началния екран и превключване между приложенията посредством бутоните в долната част на екрана."</string>
     <string name="keywords_system_navigation" msgid="3131782378486554934">"навигиране в системата, навигиране с 2 бутона, навигиране с 3 бутона, навигиране с жестове, прекарване на пръст"</string>
@@ -4746,6 +4759,8 @@
     <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"Звукът от съвместимите източници става по-реалистичен"</string>
     <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"Проследяване на движенията на главата"</string>
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"Звукът се променя, докато движите главата си, с цел да бъде по-естествен"</string>
+    <string name="bluetooth_details_permissions_sync_title" msgid="7277580382321003521">"Синхронизиране на разрешенията от телефона"</string>
+    <string name="bluetooth_details_permissions_sync_summary" msgid="8125037984381432059">"Часовникът ви получава същите разрешения за приложенията, които сте предоставили на този телефон"</string>
     <string name="bluetooth_details_audio_device_types_title" msgid="3381941189346781614">"Тип аудиоустройство"</string>
     <string name="bluetooth_details_audio_device_type_unknown" msgid="839337391037998014">"Неизвестно"</string>
     <string name="bluetooth_details_audio_device_type_speaker" msgid="3706227767994792124">"Високоговорител"</string>
@@ -4786,10 +4801,10 @@
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Приложения, инсталирани през последния # месец}other{Приложения, инсталирани през последните # месеца}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Приложения, инсталирани преди повече от # месец}other{Приложения, инсталирани преди повече от # месеца}}"</string>
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Съотношение"</string>
-    <string name="aspect_ratio_summary" msgid="5944347596728740547">"Изберете съотношение за показване на това приложение, ако то не е оптимизирано за устройството ви <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="aspect_ratio_summary" msgid="4056406351663726494">"Изпробвайте ново съотношение за показване на това приложение, ако то не е оптимизирано за устройството ви <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"Изпробвайте ново съотношение за показване на това приложение, ако то не е оптимизирано за устройството ви <xliff:g id="DEVICE_NAME">%1$s</xliff:g> Някои приложения може да не са оптимизирани за определени съотношения."</string>
     <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"Предложени приложения"</string>
-    <!-- no translation found for user_aspect_ratio_changed_apps_label (2096614916172567672) -->
-    <skip />
+    <string name="user_aspect_ratio_changed_apps_label" msgid="2096614916172567672">"Промен. прил."</string>
     <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"Стандартно за приложението"</string>
     <string name="user_aspect_ratio_fullscreen" msgid="1843427242540081996">"Цял екран"</string>
     <string name="user_aspect_ratio_half_screen" msgid="1015852057094310209">"Половин екран"</string>
@@ -4797,7 +4812,14 @@
     <string name="user_aspect_ratio_16_9" msgid="2286644872775170164">"16:9"</string>
     <string name="user_aspect_ratio_3_2" msgid="199262962518318932">"3:2"</string>
     <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4:3"</string>
-    <string name="app_aspect_ratio_footer" msgid="8661813386126142251">"Когато промените съотношението, приложението ще се рестартира. Възможно е да изгубите незапазените промени."</string>
+    <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="NUMERATOR">%1$s</xliff:g> от <xliff:g id="DENOMINATOR">%2$s</xliff:g>"</string>
+    <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"Когато промените съотношението, приложението ще се рестартира. Възможно е да изгубите незапазените промени. Някои приложения може да не са оптимизирани за определени съотношения."</string>
+    <string name="aspect_ratio_experimental_title" msgid="9088785421062044831">"Съотношение (експериментално)"</string>
+    <string name="aspect_ratio_experiment_title" msgid="128614319422121040">"Съотношение (експеримент)"</string>
+    <string name="aspect_ratio_labs_title" msgid="6733893837442759383">"Съотношение (експериментални функции)"</string>
+    <string name="aspect_ratio_experimental_label" msgid="6319009297672567578">"Експериментално"</string>
+    <string name="aspect_ratio_experiment_label" msgid="7861871612376167784">"Експеримент"</string>
+    <string name="aspect_ratio_labs_label" msgid="7008498116297651342">"Експериментални функции"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Сензор за отпечатъци"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Известия с премигване"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Всичко за известията с премигване"</string>
@@ -4850,4 +4872,6 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Името на устройството ви е видимо за инсталираните от вас приложения. То може да се вижда и от други хора, когато се свържете с устройства с Bluetooth или с Wi-Fi мрежа или настроите точка за достъп до Wi-Fi."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Граматически род"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Изберете граматически род"</string>
+    <!-- no translation found for quarantined_apps_title (5713301345723474936) -->
+    <skip />
 </resources>

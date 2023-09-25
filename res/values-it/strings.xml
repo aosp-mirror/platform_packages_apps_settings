@@ -119,6 +119,7 @@
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Dispositivi di chiamata"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Altri dispositivi"</string>
     <string name="connected_device_saved_title" msgid="5607274378851905959">"Dispositivi salvati"</string>
+    <string name="connected_device_fast_pair_device_title" msgid="543124539265592392">"Associato all\'account"</string>
     <string name="connected_device_add_device_summary" msgid="8671009879957120802">"Il Bluetooth verrà attivato per consentire l\'accoppiamento"</string>
     <string name="connected_device_connections_title" msgid="4164120115341579170">"Preferenze di connessione"</string>
     <string name="connected_device_previously_connected_screen_title" msgid="8823331744788100605">"Connessi in precedenza"</string>
@@ -373,7 +374,7 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Per risultati ottimali, usa una protezione per lo schermo con la certificazione Made For Google. Con altre protezioni per lo schermo l\'impronta di tuo figlio potrebbe non funzionare."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"Sblocco dall\'orologio"</string>
-    <string name="biometric_settings_intro_with_activeunlock" msgid="6583248094453119314">"Se configuri lo Sblocco con il Volto e con l\'impronta, lo smartphone ti chiederà l\'impronta se indossi una mascherina o ti trovi in un luogo buio.\n\nSe il tuo volto o la tua impronta non vengono riconosciuti, puoi sbloccare con lo smartwatch."</string>
+    <string name="biometric_settings_intro_with_activeunlock" msgid="6583248094453119314">"Se configuri lo Sblocco con il Volto e l\'Impronta, lo smartphone ti chiederà l\'impronta se indossi una mascherina o ti trovi in un luogo buio.\n\nSe il tuo volto o la tua impronta non vengono riconosciuti, puoi sbloccare con lo smartwatch."</string>
     <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"Se la tua impronta non viene riconosciuta, puoi sbloccare con lo smartwatch."</string>
     <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"Se il tuo volto non viene riconosciuto, puoi sbloccare con lo smartwatch."</string>
     <string name="biometric_settings_use_fingerprint_or_watch_for" msgid="1160830065613858095">"Usa l\'impronta o l\'orologio per"</string>
@@ -423,7 +424,7 @@
     <string name="security_settings_remoteauth_settings_learn_more" msgid="5653556124819260050">"Scopri di più su Sblocco dall\'orologio"</string>
     <string name="security_settings_remoteauth_settings_register_new_authenticator" msgid="9191331738306527887">"Aggiungi smartwatch"</string>
     <string name="security_settings_remoteauth_settings_remove_device" msgid="2436226120578851282">"Rimuovi smartwatch"</string>
-    <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"Sblocco con l\'Impronta e con il volto"</string>
+    <string name="security_settings_biometric_preference_title" msgid="5012627247749093938">"Sblocco con l\'Impronta e il Volto"</string>
     <string name="security_settings_work_biometric_preference_title" msgid="3121755615533533585">"Sblocco con il Volto e con l\'impronta per lavoro"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"Configurazione richiesta"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Impronte e volto aggiunti"</string>
@@ -531,30 +532,18 @@
     <string name="security_header" msgid="961514795852103424">"Sicurezza"</string>
     <string name="privacy_header" msgid="5526002421324257007">"Privacy"</string>
     <string name="work_profile_category_header" msgid="85707750968948517">"Profilo di lavoro"</string>
-    <!-- no translation found for private_space_title (7078627930195569767) -->
-    <skip />
-    <!-- no translation found for private_space_summary (8237652417163408001) -->
-    <skip />
-    <!-- no translation found for private_space_one_lock_title (7306547190751832568) -->
-    <skip />
-    <!-- no translation found for private_space_hide_title (1615744426933304644) -->
-    <skip />
-    <!-- no translation found for private_space_category_system (1286843321867285700) -->
-    <skip />
-    <!-- no translation found for private_space_create_title (47273568884806726) -->
-    <skip />
-    <!-- no translation found for private_space_delete_title (3075645119800272800) -->
-    <skip />
-    <!-- no translation found for private_space_created (2978055968937762232) -->
-    <skip />
-    <!-- no translation found for private_space_already_exists (1253034947621867419) -->
-    <skip />
-    <!-- no translation found for private_space_create_failed (4908100791174213808) -->
-    <skip />
-    <!-- no translation found for private_space_deleted (7825768516955610897) -->
-    <skip />
-    <!-- no translation found for private_space_delete_failed (8500755484258565011) -->
-    <skip />
+    <string name="private_space_title" msgid="7078627930195569767">"Spazio privato"</string>
+    <string name="private_space_summary" msgid="8237652417163408001">"Nascondi le app in una cartella privata"</string>
+    <string name="private_space_one_lock_title" msgid="7306547190751832568">"Sblocca usando il blocco schermo"</string>
+    <string name="private_space_hide_title" msgid="1615744426933304644">"Mostra Spazio privato"</string>
+    <string name="private_space_category_system" msgid="1286843321867285700">"Sistema"</string>
+    <string name="private_space_create_title" msgid="47273568884806726">"Crea Spazio privato"</string>
+    <string name="private_space_delete_title" msgid="3075645119800272800">"Elimina Spazio privato"</string>
+    <string name="private_space_created" msgid="2978055968937762232">"Spazio privato creato"</string>
+    <string name="private_space_already_exists" msgid="1253034947621867419">"Lo Spazio privato esiste già"</string>
+    <string name="private_space_create_failed" msgid="4908100791174213808">"Impossibile creare lo Spazio privato"</string>
+    <string name="private_space_deleted" msgid="7825768516955610897">"Spazio privato eliminato"</string>
+    <string name="private_space_delete_failed" msgid="8500755484258565011">"Impossibile eliminare lo Spazio privato"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Puoi aggiungere fino a <xliff:g id="COUNT">%d</xliff:g> impronte digitali"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Hai aggiunto il numero massimo di impronte digitali"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Impossibile aggiungere ulteriori impronte digitali"</string>
@@ -1071,7 +1060,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="fold_lock_behavior_title" msgid="786228803694268449">"Continua a usare le app quando chiuso"</string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Display fluido"</string>
-    <string name="peak_refresh_rate_summary" msgid="3627278682437562787">"Aumenta automaticamente la frequenza di aggiornamento da 60 a <xliff:g id="ID_1">%1$s</xliff:g> Hz per alcuni contenuti. Comporta un maggior utilizzo della batteria."</string>
+    <string name="peak_refresh_rate_summary" msgid="3627278682437562787">"Aumenta automaticamente la frequenza di aggiornamento da 60 a <xliff:g id="ID_1">%1$s</xliff:g> Hz per alcuni contenuti. Comporta un maggior utilizzo della batteria"</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Forza frequenza di aggiornamento massima"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Massima frequenza di aggiornamento per migliore reattività al tocco e qualità dell\'animazione; aumenta il consumo della batteria"</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Schermo vigile"</string>
@@ -3081,7 +3070,8 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"Suono di notifica predefinito"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"Suoneria sveglia predefinita"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"Prima vibrazione, poi squillo graduale"</string>
-    <string name="spatial_audio_title" msgid="6591051622375191603">"Audio spaziale"</string>
+    <!-- no translation found for spatial_audio_title (1775370104206884711) -->
+    <skip />
     <string name="dial_pad_tones_title" msgid="3536945335367914892">"Toni tastierino"</string>
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"Suono blocco schermo"</string>
     <string name="charging_sounds_title" msgid="5261683808537783668">"Suoni e vibrazione ricarica"</string>
@@ -3097,7 +3087,6 @@
     <string name="boot_sounds_title" msgid="5033062848948884111">"Attiva suoni"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"Sottotitoli in tempo reale"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"Sottotitoli codificati automatici"</string>
-    <string name="spatial_audio_speaker" msgid="9145233652433523302">"Altoparlante telefono"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Cuffie con cavo"</string>
     <string name="spatial_audio_text" msgid="8201387855375146000">"L\'audio dei dispositivi multimediali compatibili diventa più immersivo"</string>
     <string name="spatial_summary_off" msgid="8272678804629774378">"Off"</string>
@@ -3911,8 +3900,32 @@
     <string name="app_battery_usage_title" msgid="346558380609793334">"Utilizzo della batteria per le app"</string>
     <string name="app_battery_usage_summary" msgid="6349965904306339539">"Imposta l\'utilizzo della batteria per le app"</string>
     <string name="battery_tips_card_action_button" msgid="4897793527424711648">"Visualizza impostazioni"</string>
+    <!-- no translation found for battery_tips_card_action_button_check (1535140204105479318) -->
+    <skip />
     <string name="battery_tips_card_dismiss_button" msgid="1885756985544936618">"OK"</string>
     <string name="battery_tips_card_feedback_info" msgid="767117835675157298">"Questo messaggio è utile?"</string>
+    <!-- no translation found for battery_hints_warning_icon_a11y (5312542323401447620) -->
+    <skip />
+    <string name="battery_tips_settings_summary_brightness" msgid="546145032616077783">"Attiva la luminosità adattiva per prolungare la durata della batteria"</string>
+    <string name="battery_tips_settings_summary_screen_timeout" msgid="556801426050962077">"Riduci il tempo di spegnimento dello schermo per prolungare la durata della batteria"</string>
+    <!-- no translation found for battery_tips_apps_summary_always_high (6334519477067044920) -->
+    <skip />
+    <!-- no translation found for battery_tips_apps_summary_higher_than_usual (95676961671544628) -->
+    <skip />
+    <!-- no translation found for battery_tips_apps_summary_always_high_in_background (2953858181710181126) -->
+    <skip />
+    <!-- no translation found for battery_tips_apps_summary_higher_than_usual_in_background (1585002072567422199) -->
+    <skip />
+    <!-- no translation found for battery_tips_apps_summary_always_high_in_foreground (1910991243576404700) -->
+    <skip />
+    <!-- no translation found for battery_tips_apps_summary_higher_than_usual_in_foreground (7937337570425168210) -->
+    <skip />
+    <!-- no translation found for battery_app_item_hint (4850929961461039110) -->
+    <skip />
+    <!-- no translation found for battery_app_item_hint_in_bg (596240821466388336) -->
+    <skip />
+    <!-- no translation found for battery_app_item_hint_in_fg (5091860632260799910) -->
+    <skip />
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Senza limitazioni"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Ottimizzata"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"Con limitazioni"</string>
@@ -4001,7 +4014,7 @@
     <string name="emergency_settings_preference_title" msgid="6183455153241187148">"Sicurezza ed emergenza"</string>
     <string name="emergency_dashboard_summary" msgid="401033951074039302">"SOS emergenze, informazioni mediche, avvisi"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Navigazione tramite gesti"</string>
-    <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"Per andare alla schermata Home, scorri verso l\'alto dalla parte inferiore dello schermo. Per cambiare app, scorri verso l\'alto dalla parte inferiore dello schermo, tieni premuto e rilascia. Per tornare indietro, scorri dal bordo sinistro o destro."</string>
+    <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"Per andare alla schermata Home, scorri verso l\'alto dalla parte inferiore dello schermo. Per cambiare app, scorri verso l\'alto dalla parte inferiore dello schermo, tieni premuto e rilascia. Per tornare indietro, scorri dal bordo sinistro o destro."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Navigazione con tre pulsanti"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"Torna indietro, vai alla schermata Home e cambia app usando i pulsanti nella parte inferiore dello schermo."</string>
     <string name="keywords_system_navigation" msgid="3131782378486554934">"navigazione del sistema, navigazione con due pulsanti, navigazione con tre pulsanti, navigazione tramite gesti, scorrimento"</string>
@@ -4746,6 +4759,8 @@
     <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"L\'audio dei dispositivi multimediali compatibili diventa più immersivo"</string>
     <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"Rilevamento dei movimenti della testa"</string>
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"L\'audio cambia in base ai movimenti della testa per sembrare più naturale"</string>
+    <string name="bluetooth_details_permissions_sync_title" msgid="7277580382321003521">"Sincronizzare le autorizzazioni dal telefono"</string>
+    <string name="bluetooth_details_permissions_sync_summary" msgid="8125037984381432059">"Fornisci all\'orologio le stesse autorizzazioni app concesse su questo telefono"</string>
     <string name="bluetooth_details_audio_device_types_title" msgid="3381941189346781614">"Tipo di dispositivo audio"</string>
     <string name="bluetooth_details_audio_device_type_unknown" msgid="839337391037998014">"Sconosciuto"</string>
     <string name="bluetooth_details_audio_device_type_speaker" msgid="3706227767994792124">"Altoparlante"</string>
@@ -4786,10 +4801,10 @@
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{App installate nell\'ultimo mese}other{App installate negli ultimi # mesi}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{App installate più di # mese fa}other{App installate più di # mesi fa}}"</string>
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Proporzioni"</string>
-    <string name="aspect_ratio_summary" msgid="5944347596728740547">"Scegli le proporzioni per visualizzare questa app se non è stata progettata per adattarsi al tuo dispositivo <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="aspect_ratio_summary" msgid="4056406351663726494">"Prova una nuova proporzione per visualizzare questa app se non è stata progettata per adattarsi al tuo dispositivo <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"Prova una nuova proporzione per visualizzare questa app se non è stata progettata per adattarsi al tuo dispositivo <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Alcune app potrebbero non essere ottimizzate per alcune proporzioni."</string>
     <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"App consigliate"</string>
-    <!-- no translation found for user_aspect_ratio_changed_apps_label (2096614916172567672) -->
-    <skip />
+    <string name="user_aspect_ratio_changed_apps_label" msgid="2096614916172567672">"App modificate"</string>
     <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"Valore predefinito dell\'app"</string>
     <string name="user_aspect_ratio_fullscreen" msgid="1843427242540081996">"Schermo intero"</string>
     <string name="user_aspect_ratio_half_screen" msgid="1015852057094310209">"Metà schermo"</string>
@@ -4797,7 +4812,14 @@
     <string name="user_aspect_ratio_16_9" msgid="2286644872775170164">"16:9"</string>
     <string name="user_aspect_ratio_3_2" msgid="199262962518318932">"3:2"</string>
     <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4:3"</string>
-    <string name="app_aspect_ratio_footer" msgid="8661813386126142251">"L\'app si riavvierà quando modifichi le proporzioni. Potresti perdere le modifiche non salvate."</string>
+    <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="NUMERATOR">%1$s</xliff:g> di <xliff:g id="DENOMINATOR">%2$s</xliff:g>"</string>
+    <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"Se modifichi le proporzioni, l\'app verrà riavviata. Potresti perdere le modifiche non salvate. Alcune app potrebbero non essere ottimizzate per alcune proporzioni."</string>
+    <string name="aspect_ratio_experimental_title" msgid="9088785421062044831">"Formato (sperimentale)"</string>
+    <string name="aspect_ratio_experiment_title" msgid="128614319422121040">"Formato (esperimento)"</string>
+    <string name="aspect_ratio_labs_title" msgid="6733893837442759383">"Formato (lab)"</string>
+    <string name="aspect_ratio_experimental_label" msgid="6319009297672567578">"Sperimentale"</string>
+    <string name="aspect_ratio_experiment_label" msgid="7861871612376167784">"Esperimento"</string>
+    <string name="aspect_ratio_labs_label" msgid="7008498116297651342">"Lab"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Sensore di impronte digitali"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Flash di notifica"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Informazioni sul flash di notifica"</string>
@@ -4850,4 +4872,6 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Il nome del tuo dispositivo è visibile alle app installate. Potrebbe essere visibile anche ad altre persone quando ti connetti a dispositivi Bluetooth, a una rete Wi-Fi o configuri un hotspot Wi-Fi."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Genere grammaticale"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Seleziona genere grammaticale"</string>
+    <!-- no translation found for quarantined_apps_title (5713301345723474936) -->
+    <skip />
 </resources>
