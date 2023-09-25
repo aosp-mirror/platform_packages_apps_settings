@@ -29,7 +29,6 @@ import static org.mockito.Mockito.when;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.ConnectivityManager;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
 import android.os.UserManager;
@@ -174,18 +173,6 @@ public class DataUsageListTest {
 
         assertThat(mDataUsageList.mTemplate).isNotNull();
         assertThat(mDataUsageList.mSubId).isEqualTo(3);
-    }
-
-    @Test
-    public void processArgument_shouldGetNetworkTypeFromArgument() {
-        final Bundle args = new Bundle();
-        args.putInt(DataUsageList.EXTRA_NETWORK_TYPE, ConnectivityManager.TYPE_WIFI);
-        args.putInt(DataUsageList.EXTRA_SUB_ID, 3);
-        mDataUsageList.setArguments(args);
-
-        mDataUsageList.processArgument();
-
-        assertThat(mDataUsageList.mNetworkType).isEqualTo(ConnectivityManager.TYPE_WIFI);
     }
 
     @Test
