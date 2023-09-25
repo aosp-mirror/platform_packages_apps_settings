@@ -42,18 +42,12 @@
     <string name="preview_pager_content_description" msgid="3762247188224576303">"Voorbeeld"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Verkleinen"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Vergroten"</string>
-    <!-- no translation found for stay_awake_on_fold_title (6590454679898134221) -->
-    <skip />
-    <!-- no translation found for stay_awake_on_fold_summary (1939963751585954262) -->
-    <skip />
-    <!-- no translation found for selective_stay_awake_title (7887645333447645168) -->
-    <skip />
-    <!-- no translation found for selective_stay_awake_summary (9055967322921984543) -->
-    <skip />
-    <!-- no translation found for sleep_on_fold_title (7626123024330501411) -->
-    <skip />
-    <!-- no translation found for sleep_on_fold_summary (7737992842459588846) -->
-    <skip />
+    <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"Altijd"</string>
+    <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"Het scherm aan de voorkant gaat aan als je het apparaat vouwt"</string>
+    <string name="selective_stay_awake_title" msgid="7887645333447645168">"Alleen games, video\'s en meer"</string>
+    <string name="selective_stay_awake_summary" msgid="9055967322921984543">"Het scherm aan de voorkant gaat aan voor apps die voorkomen dat je scherm inactief wordt"</string>
+    <string name="sleep_on_fold_title" msgid="7626123024330501411">"Nooit"</string>
+    <string name="sleep_on_fold_summary" msgid="7737992842459588846">"Het scherm aan de voorkant wordt vergrendeld als je het apparaat vouwt"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Automatisch draaien gebruiken"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"Gezichtsherkenning gebruikt de camera aan de voorzijde om de nauwkeurigheid van automatisch draaien te verbeteren. Afbeeldingen worden nooit opgeslagen of naar Google gestuurd."</string>
     <string name="bluetooth" msgid="8898478620943459654">"Bluetooth"</string>
@@ -1012,8 +1006,7 @@
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Uit"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Witbalans van scherm"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
-    <!-- no translation found for fold_lock_behavior_title (786228803694268449) -->
-    <skip />
+    <string name="fold_lock_behavior_title" msgid="786228803694268449">"Apps blijven gebruiken bij vouwen"</string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="3627278682437562787">"Hiermee wordt de vernieuwingssnelheid automatisch verhoogd van 60 naar <xliff:g id="ID_1">%1$s</xliff:g> Hz voor bepaalde content. Het batterijgebruik neemt toe."</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Piekvernieuwingssnelheid afdwingen"</string>
@@ -2949,8 +2942,7 @@
     <string name="keywords_app_pinning" msgid="1564144561464945019">"scherm vastzetten"</string>
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"werkuitdaging, werk, profiel"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"werkprofiel, beheerd profiel, gelijkschakelen, unificatie, werk, profiel"</string>
-    <!-- no translation found for keywords_fold_lock_behavior (6278990772113341581) -->
-    <skip />
+    <string name="keywords_fold_lock_behavior" msgid="6278990772113341581">"wakker, slaap, niet vergrendelen, ontgrendeld blijven bij vouwen, vouwen, sluiten, dichtvouwen, dichtdoen, scherm uit"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"gebaren"</string>
     <string name="keywords_wallet" msgid="3757421969956996972">"portemonnee"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"betalen, tikken, betalingen"</string>
@@ -3025,7 +3017,8 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"Standaard meldingsgeluid"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"Standaard alarmgeluid"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"Eerst trillen en dan geleidelijk bellen"</string>
-    <string name="spatial_audio_title" msgid="6591051622375191603">"Ruimtelijke audio"</string>
+    <!-- no translation found for spatial_audio_title (1775370104206884711) -->
+    <skip />
     <string name="dial_pad_tones_title" msgid="3536945335367914892">"Toetsenbloktonen"</string>
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"Geluid schermvergrendeling"</string>
     <string name="charging_sounds_title" msgid="5261683808537783668">"Oplaadgeluiden en -trillingen"</string>
@@ -3041,8 +3034,13 @@
     <string name="boot_sounds_title" msgid="5033062848948884111">"Opstartgeluiden"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"Live ondertiteling"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"Ondertitel media automatisch"</string>
-    <string name="spatial_audio_speaker" msgid="9145233652433523302">"Telefoonspeaker"</string>
-    <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Bedrade hoofdtelefoon"</string>
+    <!-- no translation found for spatial_audio_speaker (3956755613908467186) -->
+    <skip />
+    <!-- no translation found for spatial_audio_speaker (2261196916411018248) -->
+    <skip />
+    <!-- no translation found for spatial_audio_speaker (3012868526054155189) -->
+    <skip />
+    <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Bedrade koptelefoon"</string>
     <string name="spatial_audio_text" msgid="8201387855375146000">"Compatibele media leveren een royaler geluid"</string>
     <string name="spatial_summary_off" msgid="8272678804629774378">"Uit"</string>
     <string name="spatial_summary_on_one" msgid="6239933399496282994">"Aan: <xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
@@ -3857,8 +3855,32 @@
     <string name="app_battery_usage_title" msgid="346558380609793334">"Batterijgebruik voor app"</string>
     <string name="app_battery_usage_summary" msgid="6349965904306339539">"Batterijgebruik instellen voor apps"</string>
     <string name="battery_tips_card_action_button" msgid="4897793527424711648">"Instellingen bekijken"</string>
+    <!-- no translation found for battery_tips_card_action_button_check (1535140204105479318) -->
+    <skip />
     <string name="battery_tips_card_dismiss_button" msgid="1885756985544936618">"OK"</string>
     <string name="battery_tips_card_feedback_info" msgid="767117835675157298">"Is dit bericht nuttig?"</string>
+    <!-- no translation found for battery_hints_warning_icon_a11y (5312542323401447620) -->
+    <skip />
+    <string name="battery_tips_settings_summary_brightness" msgid="546145032616077783">"Aanpasbare helderheid aanzetten om de batterijduur te verlengen"</string>
+    <string name="battery_tips_settings_summary_screen_timeout" msgid="556801426050962077">"Time-out voor scherm beperken om de batterijduur te verlengen"</string>
+    <!-- no translation found for battery_tips_apps_summary_always_high (6334519477067044920) -->
+    <skip />
+    <!-- no translation found for battery_tips_apps_summary_higher_than_usual (95676961671544628) -->
+    <skip />
+    <!-- no translation found for battery_tips_apps_summary_always_high_in_background (2953858181710181126) -->
+    <skip />
+    <!-- no translation found for battery_tips_apps_summary_higher_than_usual_in_background (1585002072567422199) -->
+    <skip />
+    <!-- no translation found for battery_tips_apps_summary_always_high_in_foreground (1910991243576404700) -->
+    <skip />
+    <!-- no translation found for battery_tips_apps_summary_higher_than_usual_in_foreground (7937337570425168210) -->
+    <skip />
+    <!-- no translation found for battery_app_item_hint (4850929961461039110) -->
+    <skip />
+    <!-- no translation found for battery_app_item_hint_in_bg (596240821466388336) -->
+    <skip />
+    <!-- no translation found for battery_app_item_hint_in_fg (5091860632260799910) -->
+    <skip />
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Onbeperkt"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Geoptimaliseerd"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"Beperkt"</string>
@@ -3948,7 +3970,7 @@
     <string name="emergency_settings_preference_title" msgid="6183455153241187148">"Veiligheid en noodgevallen"</string>
     <string name="emergency_dashboard_summary" msgid="401033951074039302">"SOS, medische info, waarschuwingen"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Navigatie met gebaren"</string>
-    <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"Als je naar het startscherm wilt gaan, swipe je omhoog vanaf de onderkant van het scherm. Om tussen apps te schakelen, swipe je omhoog vanaf de onderkant, houd je het scherm vast en laat je het los. Om terug te gaan, swipe je vanaf de linker- of rechterrand."</string>
+    <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"Als je naar het startscherm wilt gaan, swipe je omhoog vanaf de onderkant van het scherm. Swipe omhoog vanaf de onderkant, houd vast en laat los om tussen apps te schakelen. Swipe vanaf de linker- of rechterrand om terug te gaan."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Navigatie met 3 knoppen"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"Met de knoppen onderaan je scherm kun je teruggaan, naar het startscherm gaan en tussen apps schakelen."</string>
     <string name="keywords_system_navigation" msgid="3131782378486554934">"systeemnavigatie, navigatie met 2 knoppen, navigatie met 3 knoppen, navigatie met gebaren, swipen, vegen"</string>
@@ -4105,7 +4127,7 @@
     <string name="storage_usage_summary" msgid="4591121727356723463">"<xliff:g id="NUMBER">%1$s</xliff:g> <xliff:g id="UNIT">%2$s</xliff:g> gebruikt"</string>
     <string name="storage_total_summary" msgid="7163360249534964272">"<xliff:g id="NUMBER">%1$s</xliff:g> <xliff:g id="UNIT">%2$s</xliff:g> in totaal"</string>
     <string name="clear_instant_app_data" msgid="5951258323364386357">"Gegevens van app wissen"</string>
-    <string name="clear_instant_app_confirmation" msgid="3964731334459209482">"Wil je deze instant-app verwijderen?"</string>
+    <string name="clear_instant_app_confirmation" msgid="3964731334459209482">"Wil je deze instant app verwijderen?"</string>
     <string name="launch_instant_app" msgid="8503927414339606561">"Openen"</string>
     <string name="game_storage_settings" msgid="2521393115726178837">"Games"</string>
     <string name="app_info_storage_title" msgid="4076977173803093808">"Gebruikte ruimte"</string>
@@ -4148,7 +4170,7 @@
     <string name="default_theme" msgid="4815428567082263639">"Standaard"</string>
     <string name="show_operator_name_title" msgid="3355910331531144028">"Netwerknaam"</string>
     <string name="show_operator_name_summary" msgid="5352696579216501773">"Netwerknaam weergeven in statusbalk"</string>
-    <string name="install_type_instant" msgid="7685381859060486009">"Instant-app"</string>
+    <string name="install_type_instant" msgid="7685381859060486009">"Instant app"</string>
     <string name="automatic_storage_manager_deactivation_warning" msgid="4905106133215702099">"Opslagbeheer uitzetten?"</string>
     <string name="zen_suggestion_title" msgid="4555260320474465668">"\'Niet storen\' updaten"</string>
     <string name="zen_suggestion_summary" msgid="1984990920503217">"Meldingen onderbreken om gefocust te blijven"</string>
@@ -4692,6 +4714,8 @@
     <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"Compatibele media leveren een royaler geluid"</string>
     <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"Bewegingen van het hoofd volgen"</string>
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"De audio wordt aangepast als je je hoofd beweegt, voor een natuurlijker geluid"</string>
+    <string name="bluetooth_details_permissions_sync_title" msgid="584337314155926373">"Rechten synchroniseren"</string>
+    <string name="bluetooth_details_permissions_sync_summary" msgid="3426601558010545762">"Geef <xliff:g id="REMOTE_DEVICE_NAME">%1$s</xliff:g> dezelfde app-rechten die je op <xliff:g id="LOCAL_DEVICE_NAME">%2$s</xliff:g> hebt toegestaan"</string>
     <string name="bluetooth_details_audio_device_types_title" msgid="3381941189346781614">"Type audioapparaat"</string>
     <string name="bluetooth_details_audio_device_type_unknown" msgid="839337391037998014">"Onbekend"</string>
     <string name="bluetooth_details_audio_device_type_speaker" msgid="3706227767994792124">"Speaker"</string>
@@ -4732,10 +4756,10 @@
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Apps in de afgelopen # maand geïnstalleerd}other{Apps in de afgelopen # maanden geïnstalleerd}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Apps meer dan # maand geleden geïnstalleerd}other{Apps meer dan # maanden geleden geïnstalleerd}}"</string>
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Beeldverhouding"</string>
-    <string name="aspect_ratio_summary" msgid="5944347596728740547">"Kies een beeldverhouding om deze app te bekijken als die niet is ontworpen om op je <xliff:g id="DEVICE_NAME">%1$s</xliff:g> te passen"</string>
+    <string name="aspect_ratio_summary" msgid="4056406351663726494">"Probeer een nieuwe beeldverhouding om deze app te bekijken als die niet is ontworpen voor je <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"Probeer een nieuwe beeldverhouding om deze app te bekijken als die niet is ontworpen voor je <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Sommige apps zijn misschien niet geoptimaliseerd voor bepaalde beeldverhoudingen."</string>
     <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"Voorgestelde apps"</string>
-    <!-- no translation found for user_aspect_ratio_changed_apps_label (2096614916172567672) -->
-    <skip />
+    <string name="user_aspect_ratio_changed_apps_label" msgid="2096614916172567672">"Gewijzigde apps"</string>
     <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"App-standaard"</string>
     <string name="user_aspect_ratio_fullscreen" msgid="1843427242540081996">"Volledig scherm"</string>
     <string name="user_aspect_ratio_half_screen" msgid="1015852057094310209">"Half scherm"</string>
@@ -4743,7 +4767,14 @@
     <string name="user_aspect_ratio_16_9" msgid="2286644872775170164">"16:9"</string>
     <string name="user_aspect_ratio_3_2" msgid="199262962518318932">"3:2"</string>
     <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4:3"</string>
-    <string name="app_aspect_ratio_footer" msgid="8661813386126142251">"De app wordt opnieuw opgestart als je de beeldverhouding wijzigt. Je kunt niet-opgeslagen wijzigingen verliezen."</string>
+    <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="NUMERATOR">%1$s</xliff:g> bij <xliff:g id="DENOMINATOR">%2$s</xliff:g>"</string>
+    <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"De app wordt opnieuw opgestart als je de beeldverhouding wijzigt. Je kunt niet-opgeslagen wijzigingen verliezen. Sommige apps zijn misschien niet geoptimaliseerd voor bepaalde beeldverhoudingen."</string>
+    <string name="aspect_ratio_experimental_title" msgid="9088785421062044831">"Beeldverhouding (experimenteel)"</string>
+    <string name="aspect_ratio_experiment_title" msgid="128614319422121040">"Beeldverhouding (experiment)"</string>
+    <string name="aspect_ratio_labs_title" msgid="6733893837442759383">"Beeldverhouding (labs)"</string>
+    <string name="aspect_ratio_experimental_label" msgid="6319009297672567578">"Experimenteel"</string>
+    <string name="aspect_ratio_experiment_label" msgid="7861871612376167784">"Experiment"</string>
+    <string name="aspect_ratio_labs_label" msgid="7008498116297651342">"Labs"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Vingerafdruksensor"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Meldingen met flits"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Over meldingen met flits"</string>
