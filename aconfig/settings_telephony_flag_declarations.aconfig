@@ -1,0 +1,8 @@
+package: "com.android.settings.flags"
+
+flag {
+    name: "remove_key_hide_enable_2g"
+    namespace: "cellular_security"
+    description: "Stop honoring CarrierConfigManager.KEY_HIDE_ENABLE_2G. Allow 2G toggle cannot be hidden from users by carriers."
+    bug: "300248708"
+}
