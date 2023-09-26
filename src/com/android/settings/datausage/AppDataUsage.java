@@ -310,7 +310,7 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
 
     private void initCycle() {
         mCycle = findPreference(KEY_CYCLE);
-        mCycleAdapter = new CycleAdapter(mContext, mCycle, mCycleListener);
+        mCycleAdapter = new CycleAdapter(mContext, mCycle);
         if (mCycles != null) {
             // If coming from a page like DataUsageList where already has a selected cycle, display
             // that before loading to reduce flicker.
@@ -435,7 +435,7 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
         return SettingsEnums.APP_DATA_USAGE;
     }
 
-    private AdapterView.OnItemSelectedListener mCycleListener =
+    private final AdapterView.OnItemSelectedListener mCycleListener =
             new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -471,6 +471,7 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
                 public void onLoadFinished(@NonNull Loader<List<NetworkCycleDataForUid>> loader,
                         List<NetworkCycleDataForUid> data) {
                     mUsageData = data;
+                    mCycle.setOnItemSelectedListener(mCycleListener);
                     mCycleAdapter.updateCycleList(data);
                     if (mSelectedCycle > 0L) {
                         final int numCycles = data.size();

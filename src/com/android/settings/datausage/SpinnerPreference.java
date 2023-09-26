@@ -47,7 +47,6 @@ public class SpinnerPreference extends Preference implements CycleAdapter.Spinne
         notifyChanged();
     }
 
-    @Override
     public void setOnItemSelectedListener(AdapterView.OnItemSelectedListener listener) {
         mListener = listener;
     }
