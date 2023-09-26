@@ -29,22 +29,16 @@ import static org.mockito.Mockito.when;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.ConnectivityManager;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
 import android.os.UserManager;
 import android.provider.Settings;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
 import androidx.loader.app.LoaderManager;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 
-import com.android.settings.R;
 import com.android.settings.datausage.lib.BillingCycleRepository;
 import com.android.settings.network.MobileDataEnabledListener;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -52,6 +46,7 @@ import com.android.settings.widget.LoadingViewController;
 import com.android.settingslib.NetworkPolicyEditor;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
+import com.android.settingslib.net.NetworkCycleChartData;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -69,7 +64,11 @@ import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.util.ReflectionHelpers;
 
+import java.util.Collections;
+import java.util.List;
+
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = DataUsageListTest.ShadowDataUsageBaseFragment.class)
 public class DataUsageListTest {
     @Rule
     public MockitoRule mMockitoRule = MockitoJUnit.rule();
@@ -84,6 +83,8 @@ public class DataUsageListTest {
     private UserManager mUserManager;
     @Mock
     private BillingCycleRepository mBillingCycleRepository;
+    @Mock
+    private DataUsageListHeaderController mDataUsageListHeaderController;
 
     private Activity mActivity;
 
@@ -98,7 +99,6 @@ public class DataUsageListTest {
         mActivity = spy(mActivityController.get());
         mNetworkServices.mPolicyEditor = mock(NetworkPolicyEditor.class);
         mDataUsageList.mDataStateListener = mMobileDataEnabledListener;
-        mDataUsageList.mTemplate = mock(NetworkTemplate.class);
 
         doReturn(mActivity).when(mDataUsageList).getContext();
         doReturn(mUserManager).when(mActivity).getSystemService(UserManager.class);
@@ -110,11 +110,12 @@ public class DataUsageListTest {
         mDataUsageList.mLoadingViewController = mock(LoadingViewController.class);
         doNothing().when(mDataUsageList).updateSubscriptionInfoEntity();
         when(mBillingCycleRepository.isBandwidthControlEnabled()).thenReturn(true);
+        mDataUsageList.mDataUsageListHeaderController = mDataUsageListHeaderController;
     }
 
     @Test
-    @Config(shadows = ShadowDataUsageBaseFragment.class)
     public void onCreate_isNotGuestUser_shouldNotFinish() {
+        mDataUsageList.mTemplate = mock(NetworkTemplate.class);
         doReturn(false).when(mUserManager).isGuestUser();
         doNothing().when(mDataUsageList).processArgument();
 
@@ -124,7 +125,6 @@ public class DataUsageListTest {
     }
 
     @Test
-    @Config(shadows = ShadowDataUsageBaseFragment.class)
     public void onCreate_isGuestUser_shouldFinish() {
         doReturn(true).when(mUserManager).isGuestUser();
 
@@ -135,6 +135,7 @@ public class DataUsageListTest {
 
     @Test
     public void resume_shouldListenDataStateChange() {
+        mDataUsageList.onCreate(null);
         ReflectionHelpers.setField(
                 mDataUsageList, "mVisibilityLoggerMixin", mock(VisibilityLoggerMixin.class));
         ReflectionHelpers.setField(
@@ -149,6 +150,7 @@ public class DataUsageListTest {
 
     @Test
     public void pause_shouldUnlistenDataStateChange() {
+        mDataUsageList.onCreate(null);
         ReflectionHelpers.setField(
                 mDataUsageList, "mVisibilityLoggerMixin", mock(VisibilityLoggerMixin.class));
         ReflectionHelpers.setField(
@@ -174,25 +176,11 @@ public class DataUsageListTest {
     }
 
     @Test
-    public void processArgument_shouldGetNetworkTypeFromArgument() {
-        final Bundle args = new Bundle();
-        args.putInt(DataUsageList.EXTRA_NETWORK_TYPE, ConnectivityManager.TYPE_WIFI);
-        args.putInt(DataUsageList.EXTRA_SUB_ID, 3);
-        mDataUsageList.setArguments(args);
-
-        mDataUsageList.processArgument();
-
-        assertThat(mDataUsageList.mNetworkType).isEqualTo(ConnectivityManager.TYPE_WIFI);
-    }
-
-    @Test
     public void processArgument_fromIntent_shouldGetTemplateFromIntent() {
-        final FragmentActivity activity = mock(FragmentActivity.class);
         final Intent intent = new Intent();
         intent.putExtra(Settings.EXTRA_NETWORK_TEMPLATE, mock(NetworkTemplate.class));
         intent.putExtra(Settings.EXTRA_SUB_ID, 3);
-        when(activity.getIntent()).thenReturn(intent);
-        doReturn(activity).when(mDataUsageList).getActivity();
+        doReturn(intent).when(mDataUsageList).getIntent();
 
         mDataUsageList.processArgument();
 
@@ -201,30 +189,16 @@ public class DataUsageListTest {
     }
 
     @Test
-    public void onViewCreated_shouldHideCycleSpinner() {
-        final View view = new View(mActivity);
-        final View header = getHeader();
-        final Spinner spinner = getSpinner(header);
-        spinner.setVisibility(View.VISIBLE);
-        doReturn(header).when(mDataUsageList).setPinnedHeaderView(anyInt());
-        doReturn(view).when(mDataUsageList).getView();
-
-        mDataUsageList.onViewCreated(view, null);
-
-        assertThat(spinner.getVisibility()).isEqualTo(View.GONE);
-    }
-
-    @Test
     public void onLoadFinished_networkCycleDataCallback_shouldShowCycleSpinner() {
-        final Spinner spinner = getSpinner(getHeader());
-        spinner.setVisibility(View.INVISIBLE);
-        mDataUsageList.mCycleSpinner = spinner;
-        assertThat(spinner.getVisibility()).isEqualTo(View.INVISIBLE);
-        doNothing().when(mDataUsageList).updatePolicy();
+        mDataUsageList.mTemplate = mock(NetworkTemplate.class);
+        mDataUsageList.onCreate(null);
+        mDataUsageList.updatePolicy();
+        List<NetworkCycleChartData> mockData = Collections.emptyList();
 
-        mDataUsageList.mNetworkCycleDataCallbacks.onLoadFinished(null, null);
+        mDataUsageList.mNetworkCycleDataCallbacks.onLoadFinished(null, mockData);
 
-        assertThat(spinner.getVisibility()).isEqualTo(View.VISIBLE);
+        verify(mDataUsageListHeaderController).updateCycleData(mockData);
+        verify(mDataUsageListHeaderController).setConfigButtonVisible(true);
     }
 
     @Test
@@ -232,19 +206,6 @@ public class DataUsageListTest {
         mDataUsageList.onPause();
 
         verify(mLoaderManager).destroyLoader(DataUsageList.LOADER_CHART_DATA);
-    }
-
-    private View getHeader() {
-        final View rootView = LayoutInflater.from(mActivity)
-                .inflate(R.layout.preference_list_fragment, null, false);
-        final FrameLayout pinnedHeader = rootView.findViewById(R.id.pinned_header);
-
-        return mActivity.getLayoutInflater()
-                .inflate(R.layout.apps_filter_spinner, pinnedHeader, false);
-    }
-
-    private Spinner getSpinner(View header) {
-        return header.findViewById(R.id.filter_spinner);
     }
 
     @Implements(DataUsageBaseFragment.class)
@@ -261,10 +222,28 @@ public class DataUsageListTest {
             return mock(clazz);
         }
 
+        @Override
+        public <T extends Preference> T findPreference(CharSequence key) {
+            if (key.toString().equals("chart_data")) {
+                return (T) mock(ChartDataUsagePreference.class);
+            }
+            return (T) mock(Preference.class);
+        }
+
+        @Override
+        public Intent getIntent() {
+            return new Intent();
+        }
+
         @NonNull
         @Override
         BillingCycleRepository createBillingCycleRepository() {
             return mBillingCycleRepository;
+        }
+
+        @Override
+        boolean isBillingCycleModifiable() {
+            return true;
         }
     }
 }

@@ -294,14 +294,6 @@ public class ChartDataUsagePreference extends Preference {
         notifyChanged();
     }
 
-    public long getInspectStart() {
-        return mStart;
-    }
-
-    public long getInspectEnd() {
-        return mEnd;
-    }
-
     public void setNetworkCycleData(NetworkCycleChartData data) {
         mNetworkCycleChartData = data;
         mStart = data.getStartTime();

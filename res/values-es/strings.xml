@@ -119,6 +119,7 @@
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Dispositivos de llamada"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Otros dispositivos"</string>
     <string name="connected_device_saved_title" msgid="5607274378851905959">"Dispositivos guardados"</string>
+    <string name="connected_device_fast_pair_device_title" msgid="543124539265592392">"Asociado a la cuenta"</string>
     <string name="connected_device_add_device_summary" msgid="8671009879957120802">"El Bluetooth se activará para emparejar"</string>
     <string name="connected_device_connections_title" msgid="4164120115341579170">"Preferencias de conexión"</string>
     <string name="connected_device_previously_connected_screen_title" msgid="8823331744788100605">"Conectado anteriormente"</string>
@@ -531,30 +532,18 @@
     <string name="security_header" msgid="961514795852103424">"Seguridad"</string>
     <string name="privacy_header" msgid="5526002421324257007">"Privacidad"</string>
     <string name="work_profile_category_header" msgid="85707750968948517">"Perfil de trabajo"</string>
-    <!-- no translation found for private_space_title (7078627930195569767) -->
-    <skip />
-    <!-- no translation found for private_space_summary (8237652417163408001) -->
-    <skip />
-    <!-- no translation found for private_space_one_lock_title (7306547190751832568) -->
-    <skip />
-    <!-- no translation found for private_space_hide_title (1615744426933304644) -->
-    <skip />
-    <!-- no translation found for private_space_category_system (1286843321867285700) -->
-    <skip />
-    <!-- no translation found for private_space_create_title (47273568884806726) -->
-    <skip />
-    <!-- no translation found for private_space_delete_title (3075645119800272800) -->
-    <skip />
-    <!-- no translation found for private_space_created (2978055968937762232) -->
-    <skip />
-    <!-- no translation found for private_space_already_exists (1253034947621867419) -->
-    <skip />
-    <!-- no translation found for private_space_create_failed (4908100791174213808) -->
-    <skip />
-    <!-- no translation found for private_space_deleted (7825768516955610897) -->
-    <skip />
-    <!-- no translation found for private_space_delete_failed (8500755484258565011) -->
-    <skip />
+    <string name="private_space_title" msgid="7078627930195569767">"Espacio privado"</string>
+    <string name="private_space_summary" msgid="8237652417163408001">"Oculta aplicaciones en una carpeta privada"</string>
+    <string name="private_space_one_lock_title" msgid="7306547190751832568">"Desbloquear con el bloqueo de pantalla"</string>
+    <string name="private_space_hide_title" msgid="1615744426933304644">"Mostrar espacio privado"</string>
+    <string name="private_space_category_system" msgid="1286843321867285700">"Sistema"</string>
+    <string name="private_space_create_title" msgid="47273568884806726">"Crear espacio privado"</string>
+    <string name="private_space_delete_title" msgid="3075645119800272800">"Eliminar espacio privado"</string>
+    <string name="private_space_created" msgid="2978055968937762232">"Espacio privado creado correctamente"</string>
+    <string name="private_space_already_exists" msgid="1253034947621867419">"El espacio privado ya existe"</string>
+    <string name="private_space_create_failed" msgid="4908100791174213808">"El espacio privado no se ha podido crear"</string>
+    <string name="private_space_deleted" msgid="7825768516955610897">"Espacio privado eliminado correctamente"</string>
+    <string name="private_space_delete_failed" msgid="8500755484258565011">"El espacio privado no se ha podido eliminar"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Puedes añadir hasta <xliff:g id="COUNT">%d</xliff:g> huellas digitales"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Has añadido el número máximo de huellas digitales"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"No se pueden añadir más huellas digitales"</string>
@@ -987,7 +976,7 @@
     <string name="wifi_hotspot_speed_2g_5g_summary" msgid="8104575293617700173">"Velocidades rápidas. Este punto de acceso de doble banda es compatible con la mayoría de los dispositivos."</string>
     <string name="wifi_hotspot_speed_6g" msgid="3787697484862730500">"6 GHz"</string>
     <string name="wifi_hotspot_speed_6g_summary" msgid="8675262219242174548">"Velocidades aún más rápidas. Compatible con pocos dispositivos."</string>
-    <string name="wifi_hotspot_speed_summary_unavailable" msgid="7276080644693388756">"No está disponible en tu país o zona"</string>
+    <string name="wifi_hotspot_speed_summary_unavailable" msgid="7276080644693388756">"No disponible en tu tu país ni zona"</string>
     <string name="wifi_hotspot_speed_footer" msgid="8846939503916795002">"Si tu frecuencia preferida no está disponible, tu punto de acceso puede usar una diferente. La configuración de seguridad del punto de acceso puede cambiar si modificas la frecuencia."</string>
     <string name="wifi_hotspot_security_summary_unavailable" msgid="117582979310345853">"No disponible con 6 GHz"</string>
     <string name="wifi_hotspot_security_footer" msgid="4608329688744949796">"La configuración de seguridad puede cambiar si modificas la frecuencia del punto de acceso"</string>
@@ -3081,7 +3070,8 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"Sonido de notificación predeterminado"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"Sonido de alarma predeterminado"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"Vibrar primero y sonar cada vez más alto"</string>
-    <string name="spatial_audio_title" msgid="6591051622375191603">"Audio espacial"</string>
+    <!-- no translation found for spatial_audio_title (1775370104206884711) -->
+    <skip />
     <string name="dial_pad_tones_title" msgid="3536945335367914892">"Tonos del teclado telefónico"</string>
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"Sonido de bloqueo de pantalla"</string>
     <string name="charging_sounds_title" msgid="5261683808537783668">"Vibración y sonidos de carga"</string>
@@ -3097,7 +3087,6 @@
     <string name="boot_sounds_title" msgid="5033062848948884111">"Sonidos de encendido"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"Subtítulos automáticos"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"Subtitula automáticamente el contenido multimedia"</string>
-    <string name="spatial_audio_speaker" msgid="9145233652433523302">"Altavoz del teléfono"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Auriculares con cable"</string>
     <string name="spatial_audio_text" msgid="8201387855375146000">"El audio del contenido multimedia compatible se hace más inmersivo"</string>
     <string name="spatial_summary_off" msgid="8272678804629774378">"Desactivado"</string>
@@ -3911,8 +3900,32 @@
     <string name="app_battery_usage_title" msgid="346558380609793334">"Uso de batería de la aplicación"</string>
     <string name="app_battery_usage_summary" msgid="6349965904306339539">"Configura el uso de batería de las aplicaciones"</string>
     <string name="battery_tips_card_action_button" msgid="4897793527424711648">"Ver Ajustes"</string>
+    <!-- no translation found for battery_tips_card_action_button_check (1535140204105479318) -->
+    <skip />
     <string name="battery_tips_card_dismiss_button" msgid="1885756985544936618">"Entendido"</string>
     <string name="battery_tips_card_feedback_info" msgid="767117835675157298">"¿Es útil este mensaje?"</string>
+    <!-- no translation found for battery_hints_warning_icon_a11y (5312542323401447620) -->
+    <skip />
+    <string name="battery_tips_settings_summary_brightness" msgid="546145032616077783">"Activa el brillo adaptativo para prolongar la duración de la batería"</string>
+    <string name="battery_tips_settings_summary_screen_timeout" msgid="556801426050962077">"Reduce el tiempo de espera de la pantalla para prolongar la duración de la batería"</string>
+    <!-- no translation found for battery_tips_apps_summary_always_high (6334519477067044920) -->
+    <skip />
+    <!-- no translation found for battery_tips_apps_summary_higher_than_usual (95676961671544628) -->
+    <skip />
+    <!-- no translation found for battery_tips_apps_summary_always_high_in_background (2953858181710181126) -->
+    <skip />
+    <!-- no translation found for battery_tips_apps_summary_higher_than_usual_in_background (1585002072567422199) -->
+    <skip />
+    <!-- no translation found for battery_tips_apps_summary_always_high_in_foreground (1910991243576404700) -->
+    <skip />
+    <!-- no translation found for battery_tips_apps_summary_higher_than_usual_in_foreground (7937337570425168210) -->
+    <skip />
+    <!-- no translation found for battery_app_item_hint (4850929961461039110) -->
+    <skip />
+    <!-- no translation found for battery_app_item_hint_in_bg (596240821466388336) -->
+    <skip />
+    <!-- no translation found for battery_app_item_hint_in_fg (5091860632260799910) -->
+    <skip />
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Sin restricciones"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Optimizado"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"Restringido"</string>
@@ -4001,13 +4014,13 @@
     <string name="emergency_settings_preference_title" msgid="6183455153241187148">"Seguridad y emergencias"</string>
     <string name="emergency_dashboard_summary" msgid="401033951074039302">"Emergencia SOS, información médica, alertas"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Navegación por gestos"</string>
-    <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"Para ir a la pantalla de inicio, desliza hacia arriba desde la parte inferior de la pantalla. Para cambiar de aplicación, desliza hacia arriba desde la parte inferior de la pantalla, mantenla pulsada y levanta el dedo. Para ir atrás, desliza desde el borde izquierdo o el derecho."</string>
+    <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"Para ir a la pantalla de inicio, desliza hacia arriba desde la parte inferior de la pantalla. Para cambiar de aplicación, desliza hacia arriba desde la parte inferior de la pantalla, mantenla pulsada y levanta el dedo. Para ir atrás, desliza desde el borde izquierdo o el derecho."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Navegación con 3 botones"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"Ve hacia atrás, a la pantalla de inicio o cambia de aplicación con botones en la parte inferior de la pantalla."</string>
     <string name="keywords_system_navigation" msgid="3131782378486554934">"navegación del sistema, navegación con 2 botones, navegación con 3 botones, navegación por gestos, deslizar"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Asistente digital"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Deslizar para abrir asistente"</string>
-    <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"Desliza el dedo desde una de las esquinas inferiores de la pantalla para abrir una aplicación de asistente digital"</string>
+    <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"Desliza el dedo desde una de las esquinas inferiores de la pantalla para abrir una aplicación de asistente digital."</string>
     <string name="assistant_long_press_home_gesture_title" msgid="4865972278738178753">"Mantener pulsado Inicio para activar el Asistente"</string>
     <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"Mantén pulsado el botón de inicio para abrir la aplicación del asistente digital"</string>
     <string name="low_label" msgid="6525629096999711220">"Baja"</string>
@@ -4238,8 +4251,7 @@
     <string name="platform_compat_dialog_text_no_apps" msgid="5715226015751055812">"Los cambios en la compatibilidad de las aplicaciones solo se pueden modificar en aplicaciones depurables; instala una aplicación de este tipo e inténtalo de nuevo."</string>
     <string name="disabled_dependent_setting_summary" msgid="4508635725315852504">"Depende de otra opción"</string>
     <string name="my_device_info_account_preference_title" msgid="9197139254007133175">"Cuenta"</string>
-    <!-- no translation found for my_device_info_account_preference_summary (3510582677937510545) -->
-    <skip />
+    <string name="my_device_info_account_preference_summary" msgid="3510582677937510545">"%d cuentas"</string>
     <string name="my_device_info_device_name_preference_title" msgid="8053298498727237971">"Nombre del dispositivo"</string>
     <string name="my_device_info_basic_info_category_title" msgid="381963187269356548">"Información básica"</string>
     <string name="my_device_info_legal_category_title" msgid="7732792841537995127">"Legislación y normativa"</string>
@@ -4747,6 +4759,8 @@
     <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"El audio del contenido multimedia compatible se hace más inmersivo"</string>
     <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"Seguimiento de cabeza"</string>
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"El audio cambia a medida que mueves la cabeza para sonar más natural"</string>
+    <string name="bluetooth_details_permissions_sync_title" msgid="7277580382321003521">"Sincronizar permisos desde el teléfono"</string>
+    <string name="bluetooth_details_permissions_sync_summary" msgid="8125037984381432059">"Concede a tu reloj los mismos permisos de aplicaciones que has permitido en este teléfono"</string>
     <string name="bluetooth_details_audio_device_types_title" msgid="3381941189346781614">"Tipo de dispositivo de audio"</string>
     <string name="bluetooth_details_audio_device_type_unknown" msgid="839337391037998014">"Desconocido"</string>
     <string name="bluetooth_details_audio_device_type_speaker" msgid="3706227767994792124">"Altavoz"</string>
@@ -4787,10 +4801,10 @@
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Aplicaciones instaladas desde hace # mes}other{Aplicaciones instaladas desde hace # meses}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Aplicaciones instaladas hace más de # mes}other{Aplicaciones instaladas hace más de # meses}}"</string>
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Relación de aspecto"</string>
-    <string name="aspect_ratio_summary" msgid="5944347596728740547">"Elige una relación de aspecto para ver esta aplicación si no se ha diseñado para adaptarse a tu <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="aspect_ratio_summary" msgid="4056406351663726494">"Prueba una nueva relación de aspecto para ver esta aplicación si no se ha diseñado para adaptarse a tu <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"Prueba una nueva relación de aspecto para ver esta aplicación si no se ha diseñado para adaptarse a tu <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Puede que algunas aplicaciones no estén optimizadas para determinadas relaciones de aspecto."</string>
     <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"Aplicaciones sugeridas"</string>
-    <!-- no translation found for user_aspect_ratio_changed_apps_label (2096614916172567672) -->
-    <skip />
+    <string name="user_aspect_ratio_changed_apps_label" msgid="2096614916172567672">"Apps cambiadas"</string>
     <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"Predeterminado de la aplicación"</string>
     <string name="user_aspect_ratio_fullscreen" msgid="1843427242540081996">"Pantalla completa"</string>
     <string name="user_aspect_ratio_half_screen" msgid="1015852057094310209">"Media pantalla"</string>
@@ -4798,7 +4812,14 @@
     <string name="user_aspect_ratio_16_9" msgid="2286644872775170164">"16:9"</string>
     <string name="user_aspect_ratio_3_2" msgid="199262962518318932">"3:2"</string>
     <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4:3"</string>
-    <string name="app_aspect_ratio_footer" msgid="8661813386126142251">"La aplicación se reiniciará cuando cambies la relación de aspecto. Puede que pierdas los cambios sin guardar."</string>
+    <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="NUMERATOR">%1$s</xliff:g> de <xliff:g id="DENOMINATOR">%2$s</xliff:g>"</string>
+    <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"La aplicación se reiniciará cuando cambies la relación de aspecto. Puede que pierdas los cambios sin guardar. Puede que algunas aplicaciones no estén optimizadas para determinadas relaciones de aspecto."</string>
+    <string name="aspect_ratio_experimental_title" msgid="9088785421062044831">"Relación de aspecto (experimental)"</string>
+    <string name="aspect_ratio_experiment_title" msgid="128614319422121040">"Relación de aspecto (experimento)"</string>
+    <string name="aspect_ratio_labs_title" msgid="6733893837442759383">"Relación de aspecto (Labs)"</string>
+    <string name="aspect_ratio_experimental_label" msgid="6319009297672567578">"Experimental"</string>
+    <string name="aspect_ratio_experiment_label" msgid="7861871612376167784">"Experimento"</string>
+    <string name="aspect_ratio_labs_label" msgid="7008498116297651342">"Labs"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Sensor de huellas digitales"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Notificaciones con flash"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Acerca de las notificaciones con flash"</string>
@@ -4851,4 +4872,6 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Las aplicaciones que hayas instalado pueden ver el nombre de tu dispositivo. También es posible que lo vean otros usuarios si lo conectas con dispositivos Bluetooth, si te conectas a una red Wi-Fi o si configuras un punto de acceso Wi-Fi."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Género gramatical"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Selecciona el género gramatical"</string>
+    <!-- no translation found for quarantined_apps_title (5713301345723474936) -->
+    <skip />
 </resources>
