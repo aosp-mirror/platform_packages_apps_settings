@@ -66,6 +66,7 @@ import java.util.Collections;
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
         ShadowUserManager.class,
+        com.android.settings.testutils.shadow.ShadowFragment.class,
 })
 public class WebViewAppPickerTest {
 

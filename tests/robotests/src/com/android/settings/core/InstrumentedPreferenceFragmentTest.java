@@ -23,6 +23,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.FragmentActivity;
@@ -38,6 +39,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
@@ -53,7 +55,7 @@ public class InstrumentedPreferenceFragmentTest {
     private PreferenceManager mPreferenceManager;
     @Mock
     private FragmentActivity mActivity;
-
+    private Context mContext;
     private InstrumentedPreferenceFragmentTestable mFragment;
 
     @Before
@@ -61,7 +63,9 @@ public class InstrumentedPreferenceFragmentTest {
         MockitoAnnotations.initMocks(this);
         when(mPreferenceManager.getPreferenceScreen()).thenReturn(mScreen);
 
+        mContext = RuntimeEnvironment.application;
         mFragment = spy(new InstrumentedPreferenceFragmentTestable());
+        when(mFragment.getContext()).thenReturn(mContext);
         ReflectionHelpers.setField(mFragment, "mPreferenceManager", mPreferenceManager);
     }
 
