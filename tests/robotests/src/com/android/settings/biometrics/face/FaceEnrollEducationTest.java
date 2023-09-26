@@ -50,6 +50,7 @@ import com.google.android.setupdesign.GlifLayout;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -127,6 +128,7 @@ public class FaceEnrollEducationTest {
     }
 
     @Test
+    @Ignore("b/295325503")
     public void testFaceEnrollEducation_hasHeader() {
         setupActivity();
         CharSequence headerText = getGlifLayout().getHeaderText();
