@@ -169,7 +169,8 @@ public class SmartAutoRotatePreferenceController extends TogglePreferenceControl
         final boolean isLocked = !isChecked;
         mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_ROTATION_LOCK,
                 isLocked);
-        RotationPolicy.setRotationLock(mContext, isLocked);
+        RotationPolicy.setRotationLock(mContext, isLocked,
+                /* caller= */ "SmartAutoRotatePreferenceController#setChecked");
         return true;
     }
 
