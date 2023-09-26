@@ -335,6 +335,29 @@ public final class BatteryChartPreferenceControllerTest {
     }
 
     @Test
+    public void showEmptyChart_dailyChartViewIsNull_ignoreShowEmptyChart() {
+        mBatteryChartPreferenceController.mDailyChartView = null;
+        doReturn(View.GONE).when(mHourlyChartView).getVisibility();
+
+        mBatteryChartPreferenceController.showEmptyChart();
+
+        verify(mChartSummaryTextView, never()).setVisibility(View.VISIBLE);
+        verify(mDailyChartView, never()).setVisibility(View.GONE);
+        verify(mHourlyChartView, never()).setVisibility(View.VISIBLE);
+    }
+
+    @Test
+    public void showEmptyChart_hourlyChartViewIsNull_ignoreShowEmptyChart() {
+        mBatteryChartPreferenceController.mHourlyChartView = null;
+
+        mBatteryChartPreferenceController.showEmptyChart();
+
+        verify(mChartSummaryTextView, never()).setVisibility(View.VISIBLE);
+        verify(mDailyChartView, never()).setVisibility(View.GONE);
+        verify(mHourlyChartView, never()).setVisibility(View.VISIBLE);
+    }
+
+    @Test
     public void refreshUi_dailyChartViewIsNull_ignoreRefresh() {
         mBatteryChartPreferenceController.mDailyChartView = null;
 
