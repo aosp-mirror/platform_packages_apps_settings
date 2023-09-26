@@ -16,8 +16,9 @@
 
 package com.android.settings.development;
 
-import static com.android.settings.development.ForcePeakRefreshRatePreferenceController.DEFAULT_REFRESH_RATE;
+import static com.android.internal.display.RefreshRateSettingsUtils.DEFAULT_REFRESH_RATE;
 import static com.android.settings.development.ForcePeakRefreshRatePreferenceController.NO_CONFIG;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.verify;
@@ -37,8 +38,6 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-
-import android.util.Log;
 
 @RunWith(RobolectricTestRunner.class)
 public class ForcePeakRefreshRatePreferenceControllerTest {
@@ -68,7 +67,7 @@ public class ForcePeakRefreshRatePreferenceControllerTest {
         mController.onPreferenceChange(mPreference, true);
 
         assertThat(Settings.System.getFloat(mContext.getContentResolver(),
-                Settings.System.MIN_REFRESH_RATE, NO_CONFIG)).isEqualTo(88f);
+                Settings.System.MIN_REFRESH_RATE, NO_CONFIG)).isPositiveInfinity();
     }
 
     @Test
