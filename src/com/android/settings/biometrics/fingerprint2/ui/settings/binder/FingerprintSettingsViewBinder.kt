@@ -34,7 +34,6 @@ import com.android.settings.biometrics.fingerprint2.ui.settings.viewmodel.Prefer
 import com.android.settings.biometrics.fingerprint2.ui.settings.viewmodel.ShowSettings
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
@@ -55,7 +54,6 @@ object FingerprintSettingsViewBinder {
       challenge: Long?,
       challengeToken: ByteArray?
     )
-
     /** Helper to launch an add fingerprint request */
     fun launchAddFingerprint(userId: Int, challengeToken: ByteArray?)
     /**
@@ -63,10 +61,8 @@ object FingerprintSettingsViewBinder {
      * choose a PIN/PATTERN/PASS.
      */
     fun launchConfirmOrChooseLock(userId: Int)
-
     /** Used to indicate that FingerprintSettings is finished. */
     fun finish()
-
     /** Indicates what result should be set for the returning callee */
     fun setResultExternal(resultCode: Int)
     /** Indicates the settings UI should be shown */

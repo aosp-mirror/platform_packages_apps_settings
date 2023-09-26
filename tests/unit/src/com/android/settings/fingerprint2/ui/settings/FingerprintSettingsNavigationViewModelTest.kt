@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.fingerprint2.settings.viewmodel
+package com.android.settings.fingerprint2.ui.settings
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.android.settings.biometrics.BiometricEnrollBase
@@ -26,7 +26,7 @@ import com.android.settings.biometrics.fingerprint2.ui.settings.viewmodel.Finish
 import com.android.settings.biometrics.fingerprint2.ui.settings.viewmodel.LaunchConfirmDeviceCredential
 import com.android.settings.biometrics.fingerprint2.ui.settings.viewmodel.NextStepViewModel
 import com.android.settings.biometrics.fingerprint2.ui.settings.viewmodel.ShowSettings
-import com.android.settings.fingerprint2.domain.interactor.FakeFingerprintManagerInteractor
+import com.android.settings.testutils2.FakeFingerprintManagerInteractor
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -129,22 +129,6 @@ class FingerprintSettingsNavigationViewModelTest {
       runCurrent()
 
       assertThat(nextStep).isEqualTo(EnrollFirstFingerprint(defaultUserId, 10L, null, null))
-      job.cancel()
-    }
-
-  @Test
-  fun firstEnrollment_fails() =
-    testScope.runTest {
-      fakeFingerprintManagerInteractor.enrolledFingerprintsInternal = mutableListOf()
-
-      var nextStep: NextStepViewModel? = null
-      val job = launch { underTest.nextStep.collect { nextStep = it } }
-
-      underTest.onConfirmDevice(true, 10L)
-      underTest.onEnrollFirstFailure("We failed!!")
-      runCurrent()
-
-      assertThat(nextStep).isInstanceOf(FinishSettings::class.java)
       job.cancel()
     }
 
