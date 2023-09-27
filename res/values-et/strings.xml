@@ -871,6 +871,7 @@
     <string name="internet_source_wifi" msgid="6952593095166435179">"WiFi"</string>
     <string name="internet_source_mobile_data" msgid="877403889449201789">"Mobiilne andmeside"</string>
     <string name="internet_source_ethernet" msgid="8338472576454100966">"Ethernet"</string>
+    <string name="hotspot_battery_charging_summary" msgid="6690892148553288457">"<xliff:g id="BATTERY_PERCENTAGE">%s</xliff:g> – laadimine"</string>
     <string name="hotspot_connection_category" msgid="4320380513982923556">"Kuumkoha ühendus"</string>
     <string name="hotspot_connection_strength" msgid="87359986943768421">"Ühenduse tugevus"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"Salvestatud võrgud"</string>
@@ -4182,8 +4183,10 @@
     <!-- no translation found for graphics_driver_app_preference_values:1 (485288770206606512) -->
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
-    <string name="enable_angle_as_system_driver" msgid="3985105681812713612">"Luba ANGLE"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="6413038127558166972">"ANGLE-i lubamine vaikimisi OpenGL ES-i draiverina. Selle lubamine ühildumatutes seadmetes võib mõne rakenduse rikkuda."</string>
+    <!-- no translation found for enable_angle_as_system_driver (4648827560023949786) -->
+    <skip />
+    <!-- no translation found for enable_angle_as_system_driver_summary (2170215556348477481) -->
+    <skip />
     <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"Süsteemi OpenGL ES-i draiveri muutmiseks on vajalik taaskäivitamine"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Rakenduste ühilduvuse muudatused"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Rakenduse ühilduvuse muudatuste lüliti"</string>
@@ -4699,10 +4702,8 @@
     <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"Ühilduva meedia heli muutub ruumilisemaks"</string>
     <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"Pea jälgimine"</string>
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"Heli muutub pead liigutades, et kõla oleks loomulikum"</string>
-    <!-- no translation found for bluetooth_details_permissions_sync_title (584337314155926373) -->
-    <skip />
-    <!-- no translation found for bluetooth_details_permissions_sync_summary (3426601558010545762) -->
-    <skip />
+    <string name="bluetooth_details_permissions_sync_title" msgid="584337314155926373">"Lubade sünkroonimine"</string>
+    <string name="bluetooth_details_permissions_sync_summary" msgid="3426601558010545762">"Andke seadmele <xliff:g id="REMOTE_DEVICE_NAME">%1$s</xliff:g> samad rakenduse load, mille olete lubanud seadmes <xliff:g id="LOCAL_DEVICE_NAME">%2$s</xliff:g>"</string>
     <string name="bluetooth_details_audio_device_types_title" msgid="3381941189346781614">"Heliseadme tüüp"</string>
     <string name="bluetooth_details_audio_device_type_unknown" msgid="839337391037998014">"Teadmata"</string>
     <string name="bluetooth_details_audio_device_type_speaker" msgid="3706227767994792124">"Kõlar"</string>
@@ -4745,6 +4746,10 @@
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Kuvasuhe"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"Kui rakendus ei ole teie seadme <xliff:g id="DEVICE_NAME">%1$s</xliff:g> jaoks optimeeritud, valige rakenduse vaatamiseks uus kuvasuhe"</string>
     <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"Kui rakendus ei ole teie seadme <xliff:g id="DEVICE_NAME">%1$s</xliff:g> jaoks optimeeritud, valige rakenduse vaatamiseks uus kuvasuhe. Teatud kuvasuhete korral ei pruugita mõningaid rakendusi optimeerida."</string>
+    <!-- no translation found for aspect_ratio_summary_text (4737461467467220325) -->
+    <skip />
+    <!-- no translation found for aspect_ratio_main_summary_text (5544816872094235840) -->
+    <skip />
     <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"Soovitatud rakendused"</string>
     <string name="user_aspect_ratio_changed_apps_label" msgid="2096614916172567672">"Muudetud äpid"</string>
     <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"Rakenduse vaikeseade"</string>

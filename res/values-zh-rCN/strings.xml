@@ -871,6 +871,7 @@
     <string name="internet_source_wifi" msgid="6952593095166435179">"Wi‑Fi"</string>
     <string name="internet_source_mobile_data" msgid="877403889449201789">"移动数据网络"</string>
     <string name="internet_source_ethernet" msgid="8338472576454100966">"以太网"</string>
+    <string name="hotspot_battery_charging_summary" msgid="6690892148553288457">"<xliff:g id="BATTERY_PERCENTAGE">%s</xliff:g> - 正在充电"</string>
     <string name="hotspot_connection_category" msgid="4320380513982923556">"热点连接"</string>
     <string name="hotspot_connection_strength" msgid="87359986943768421">"连接信号强度"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"已保存的网络"</string>
@@ -3017,8 +3018,7 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"默认通知提示音"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"默认闹钟提示音"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"先振动再响铃（铃声逐渐增大）"</string>
-    <!-- no translation found for spatial_audio_title (1775370104206884711) -->
-    <skip />
+    <string name="spatial_audio_title" msgid="1775370104206884711">"空间音频"</string>
     <string name="dial_pad_tones_title" msgid="3536945335367914892">"拨号键盘提示音"</string>
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"屏幕锁定提示音"</string>
     <string name="charging_sounds_title" msgid="5261683808537783668">"充电提示音和振动"</string>
@@ -3034,12 +3034,9 @@
     <string name="boot_sounds_title" msgid="5033062848948884111">"开机音效"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"实时字幕"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"自动生成媒体字幕"</string>
-    <!-- no translation found for spatial_audio_speaker (3956755613908467186) -->
-    <skip />
-    <!-- no translation found for spatial_audio_speaker (2261196916411018248) -->
-    <skip />
-    <!-- no translation found for spatial_audio_speaker (3012868526054155189) -->
-    <skip />
+    <string name="spatial_audio_speaker" product="default" msgid="3956755613908467186">"手机扬声器"</string>
+    <string name="spatial_audio_speaker" product="tablet" msgid="2261196916411018248">"平板电脑扬声器"</string>
+    <string name="spatial_audio_speaker" product="device" msgid="3012868526054155189">"设备扬声器"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"有线耳机"</string>
     <string name="spatial_audio_text" msgid="8201387855375146000">"播放兼容的媒体内容时，音频更具沉浸感"</string>
     <string name="spatial_summary_off" msgid="8272678804629774378">"已关闭"</string>
@@ -3855,32 +3852,21 @@
     <string name="app_battery_usage_title" msgid="346558380609793334">"应用的电池用量"</string>
     <string name="app_battery_usage_summary" msgid="6349965904306339539">"设置应用的电池用量"</string>
     <string name="battery_tips_card_action_button" msgid="4897793527424711648">"查看设置"</string>
-    <!-- no translation found for battery_tips_card_action_button_check (1535140204105479318) -->
-    <skip />
+    <string name="battery_tips_card_action_button_check" msgid="1535140204105479318">"检查"</string>
     <string name="battery_tips_card_dismiss_button" msgid="1885756985544936618">"知道了"</string>
     <string name="battery_tips_card_feedback_info" msgid="767117835675157298">"这条消息是否有帮助？"</string>
-    <!-- no translation found for battery_hints_warning_icon_a11y (5312542323401447620) -->
-    <skip />
+    <string name="battery_hints_warning_icon_a11y" msgid="5312542323401447620">"电池提示警告图标"</string>
     <string name="battery_tips_settings_summary_brightness" msgid="546145032616077783">"开启自适应亮度可延长电池续航时间"</string>
     <string name="battery_tips_settings_summary_screen_timeout" msgid="556801426050962077">"缩短屏幕超时时间可延长电池续航时间"</string>
-    <!-- no translation found for battery_tips_apps_summary_always_high (6334519477067044920) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_higher_than_usual (95676961671544628) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_always_high_in_background (2953858181710181126) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_higher_than_usual_in_background (1585002072567422199) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_always_high_in_foreground (1910991243576404700) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_higher_than_usual_in_foreground (7937337570425168210) -->
-    <skip />
-    <!-- no translation found for battery_app_item_hint (4850929961461039110) -->
-    <skip />
-    <!-- no translation found for battery_app_item_hint_in_bg (596240821466388336) -->
-    <skip />
-    <!-- no translation found for battery_app_item_hint_in_fg (5091860632260799910) -->
-    <skip />
+    <string name="battery_tips_apps_summary_always_high" msgid="6334519477067044920">"<xliff:g id="APP_LABEL">%1$s</xliff:g> 电池用量较高"</string>
+    <string name="battery_tips_apps_summary_higher_than_usual" msgid="95676961671544628">"<xliff:g id="APP_LABEL">%1$s</xliff:g> 电池用量比平时高"</string>
+    <string name="battery_tips_apps_summary_always_high_in_background" msgid="2953858181710181126">"<xliff:g id="APP_LABEL">%1$s</xliff:g> 后台电池用量较高"</string>
+    <string name="battery_tips_apps_summary_higher_than_usual_in_background" msgid="1585002072567422199">"<xliff:g id="APP_LABEL">%1$s</xliff:g> 后台电池用量比平时高"</string>
+    <string name="battery_tips_apps_summary_always_high_in_foreground" msgid="1910991243576404700">"<xliff:g id="APP_LABEL">%1$s</xliff:g> 前台电池用量较高"</string>
+    <string name="battery_tips_apps_summary_higher_than_usual_in_foreground" msgid="7937337570425168210">"<xliff:g id="APP_LABEL">%1$s</xliff:g> 前台电池用量比平时高"</string>
+    <string name="battery_app_item_hint" msgid="4850929961461039110">"电池用量高"</string>
+    <string name="battery_app_item_hint_in_bg" msgid="596240821466388336">"后台电池用量高"</string>
+    <string name="battery_app_item_hint_in_fg" msgid="5091860632260799910">"前台电池用量高"</string>
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"无限制"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"优化"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"受限"</string>
@@ -4197,8 +4183,10 @@
     <!-- no translation found for graphics_driver_app_preference_values:1 (485288770206606512) -->
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
-    <string name="enable_angle_as_system_driver" msgid="3985105681812713612">"启用 ANGLE"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="6413038127558166972">"启用 ANGLE 作为默认 OpenGL ES 驱动程序。在不兼容的设备上启用该功能可能会导致某些应用崩溃。"</string>
+    <!-- no translation found for enable_angle_as_system_driver (4648827560023949786) -->
+    <skip />
+    <!-- no translation found for enable_angle_as_system_driver_summary (2170215556348477481) -->
+    <skip />
     <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"必须重新启动，才能更改系统 OpenGL ES 驱动程序"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"应用兼容性变更"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"在应用兼容性变更之间切换"</string>
@@ -4758,6 +4746,10 @@
     <string name="aspect_ratio_title" msgid="2451826875939676101">"宽高比"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"如果此应用的设计不适配您的<xliff:g id="DEVICE_NAME">%1$s</xliff:g>，请尝试使用新的宽高比查看此应用"</string>
     <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"如果此应用的设计不适配您的<xliff:g id="DEVICE_NAME">%1$s</xliff:g>，请尝试使用新的宽高比查看此应用。某些应用可能无法针对特定宽高比进行优化。"</string>
+    <!-- no translation found for aspect_ratio_summary_text (4737461467467220325) -->
+    <skip />
+    <!-- no translation found for aspect_ratio_main_summary_text (5544816872094235840) -->
+    <skip />
     <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"有推荐宽高比的应用"</string>
     <string name="user_aspect_ratio_changed_apps_label" msgid="2096614916172567672">"发生改变的应用"</string>
     <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"应用默认设置"</string>

@@ -871,6 +871,7 @@
     <string name="internet_source_wifi" msgid="6952593095166435179">"Wi-Fi"</string>
     <string name="internet_source_mobile_data" msgid="877403889449201789">"Données cellulaires"</string>
     <string name="internet_source_ethernet" msgid="8338472576454100966">"Ethernet"</string>
+    <string name="hotspot_battery_charging_summary" msgid="6690892148553288457">"<xliff:g id="BATTERY_PERCENTAGE">%s</xliff:g> – Recharge en cours…"</string>
     <string name="hotspot_connection_category" msgid="4320380513982923556">"Connexion du point d\'accès sans fil"</string>
     <string name="hotspot_connection_strength" msgid="87359986943768421">"Puissance de la connexion"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"Réseaux enregistrés"</string>
@@ -3970,8 +3971,7 @@
     <string name="emergency_settings_preference_title" msgid="6183455153241187148">"Sécurité et urgence"</string>
     <string name="emergency_dashboard_summary" msgid="401033951074039302">"Appel d\'urgence, données médicales, alertes"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Navigation par gestes"</string>
-    <!-- no translation found for edge_to_edge_navigation_summary (818109176611921504) -->
-    <skip />
+    <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"Pour accéder à l\'écran d\'accueil, balayez l\'écran du bas vers le haut. Pour changer d\'application, balayez l\'écran du bas vers le haut, maintenez le doigt sur l\'écran, puis relâchez-le. Pour revenir en arrière, balayez l\'écran à partir du bord gauche ou droit."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Navigation à trois boutons"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"Revenez en arrière, retournez à l\'écran d\'accueil ou changez d\'application à l\'aide des boutons dans le bas de votre écran."</string>
     <string name="keywords_system_navigation" msgid="3131782378486554934">"navigation système, navigation à deux boutons, navigation à trois boutons, navigation par gestes, balayer"</string>
@@ -4198,8 +4198,10 @@
     <!-- no translation found for graphics_driver_app_preference_values:1 (485288770206606512) -->
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
-    <string name="enable_angle_as_system_driver" msgid="3985105681812713612">"Activer ANGLE"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="6413038127558166972">"Activer ANGLE en tant que pilote OpenGL ES par défaut. Activer cette fonction sur des appareils incompatibles peut compromettre le fonctionnement de certaines applications."</string>
+    <!-- no translation found for enable_angle_as_system_driver (4648827560023949786) -->
+    <skip />
+    <!-- no translation found for enable_angle_as_system_driver_summary (2170215556348477481) -->
+    <skip />
     <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"Un redémarrage est nécessaire pour modifier le pilote OpenGL ES du système"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Changements dans la compatibilité des applications"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Basculez les changements de compatibilité des applications"</string>
@@ -4715,10 +4717,8 @@
     <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"Le son des appareils multimédias compatibles devient plus immersif"</string>
     <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"Suivi de la tête"</string>
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"Le son est modifié en fonction des mouvements de votre tête pour produire un son plus naturel"</string>
-    <!-- no translation found for bluetooth_details_permissions_sync_title (584337314155926373) -->
-    <skip />
-    <!-- no translation found for bluetooth_details_permissions_sync_summary (3426601558010545762) -->
-    <skip />
+    <string name="bluetooth_details_permissions_sync_title" msgid="584337314155926373">"Synchroniser les autorisations"</string>
+    <string name="bluetooth_details_permissions_sync_summary" msgid="3426601558010545762">"Donner à <xliff:g id="REMOTE_DEVICE_NAME">%1$s</xliff:g> les mêmes autorisations que vous avez donné à <xliff:g id="LOCAL_DEVICE_NAME">%2$s</xliff:g>"</string>
     <string name="bluetooth_details_audio_device_types_title" msgid="3381941189346781614">"Type d\'appareil audio"</string>
     <string name="bluetooth_details_audio_device_type_unknown" msgid="839337391037998014">"Inconnu"</string>
     <string name="bluetooth_details_audio_device_type_speaker" msgid="3706227767994792124">"Haut-parleur"</string>
@@ -4761,6 +4761,10 @@
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Proportions"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"Essayez d\'autres proportions pour afficher cette application si elle n\'a pas été conçue pour s\'adapter à votre <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"Essayez d\'autres proportions pour afficher cette application si elle n\'a pas été conçue pour s\'adapter à votre <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Il se peut que certaines applications ne soient pas optimisées pour certaines proportions."</string>
+    <!-- no translation found for aspect_ratio_summary_text (4737461467467220325) -->
+    <skip />
+    <!-- no translation found for aspect_ratio_main_summary_text (5544816872094235840) -->
+    <skip />
     <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"Applications suggérées"</string>
     <string name="user_aspect_ratio_changed_apps_label" msgid="2096614916172567672">"Applis modif."</string>
     <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"Application par défaut"</string>

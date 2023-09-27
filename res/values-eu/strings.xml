@@ -871,6 +871,8 @@
     <string name="internet_source_wifi" msgid="6952593095166435179">"Wifia"</string>
     <string name="internet_source_mobile_data" msgid="877403889449201789">"Datu-konexioa"</string>
     <string name="internet_source_ethernet" msgid="8338472576454100966">"Etherneta"</string>
+    <!-- no translation found for hotspot_battery_charging_summary (6690892148553288457) -->
+    <skip />
     <string name="hotspot_connection_category" msgid="4320380513982923556">"Wifi-gunerako konexioa"</string>
     <string name="hotspot_connection_strength" msgid="87359986943768421">"Konexioaren indarra"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"Gordetako sareak"</string>
@@ -3017,8 +3019,7 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"Jakinarazpenen soinu lehenetsia"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"Alarmaren soinu lehenetsia"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"Hasi dardararekin eta jo tonua pixkanaka"</string>
-    <!-- no translation found for spatial_audio_title (1775370104206884711) -->
-    <skip />
+    <string name="spatial_audio_title" msgid="1775370104206884711">"Audio espaziala"</string>
     <string name="dial_pad_tones_title" msgid="3536945335367914892">"Markagailuaren tonuak"</string>
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"Pantailaren blokeoaren soinua"</string>
     <string name="charging_sounds_title" msgid="5261683808537783668">"Kargatzearen soinuak eta dardara"</string>
@@ -3034,12 +3035,9 @@
     <string name="boot_sounds_title" msgid="5033062848948884111">"Pizteko soinuak"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"Istanteko azpitituluak"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"Ezarri azpitituluak automatikoki"</string>
-    <!-- no translation found for spatial_audio_speaker (3956755613908467186) -->
-    <skip />
-    <!-- no translation found for spatial_audio_speaker (2261196916411018248) -->
-    <skip />
-    <!-- no translation found for spatial_audio_speaker (3012868526054155189) -->
-    <skip />
+    <string name="spatial_audio_speaker" product="default" msgid="3956755613908467186">"Telefonoaren bozgorailuak"</string>
+    <string name="spatial_audio_speaker" product="tablet" msgid="2261196916411018248">"Tabletaren bozgorailuak"</string>
+    <string name="spatial_audio_speaker" product="device" msgid="3012868526054155189">"Gailuaren bozgorailuak"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Entzungailu kabledunak"</string>
     <string name="spatial_audio_text" msgid="8201387855375146000">"Euskarri bateragarrietako audioa murgiltzaileagoa da"</string>
     <string name="spatial_summary_off" msgid="8272678804629774378">"Desaktibatuta"</string>
@@ -3855,32 +3853,21 @@
     <string name="app_battery_usage_title" msgid="346558380609793334">"Bateria-erabilera"</string>
     <string name="app_battery_usage_summary" msgid="6349965904306339539">"Ezarri zenbat bateria erabil dezaketen aplikazioek"</string>
     <string name="battery_tips_card_action_button" msgid="4897793527424711648">"Ikusi ezarpenak"</string>
-    <!-- no translation found for battery_tips_card_action_button_check (1535140204105479318) -->
-    <skip />
+    <string name="battery_tips_card_action_button_check" msgid="1535140204105479318">"Ikusi"</string>
     <string name="battery_tips_card_dismiss_button" msgid="1885756985544936618">"Ados"</string>
     <string name="battery_tips_card_feedback_info" msgid="767117835675157298">"Lagungarria izan al da mezua?"</string>
-    <!-- no translation found for battery_hints_warning_icon_a11y (5312542323401447620) -->
-    <skip />
+    <string name="battery_hints_warning_icon_a11y" msgid="5312542323401447620">"Bateriari buruzko aholkuen abisu-ikonoa"</string>
     <string name="battery_tips_settings_summary_brightness" msgid="546145032616077783">"Aktibatu Distira egokitua bateriaren iraupena luzatzeko"</string>
     <string name="battery_tips_settings_summary_screen_timeout" msgid="556801426050962077">"Murriztu pantailaren denbora-muga bateriaren iraupena luzatzeko"</string>
-    <!-- no translation found for battery_tips_apps_summary_always_high (6334519477067044920) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_higher_than_usual (95676961671544628) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_always_high_in_background (2953858181710181126) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_higher_than_usual_in_background (1585002072567422199) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_always_high_in_foreground (1910991243576404700) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_higher_than_usual_in_foreground (7937337570425168210) -->
-    <skip />
-    <!-- no translation found for battery_app_item_hint (4850929961461039110) -->
-    <skip />
-    <!-- no translation found for battery_app_item_hint_in_bg (596240821466388336) -->
-    <skip />
-    <!-- no translation found for battery_app_item_hint_in_fg (5091860632260799910) -->
-    <skip />
+    <string name="battery_tips_apps_summary_always_high" msgid="6334519477067044920">"<xliff:g id="APP_LABEL">%1$s</xliff:g> aplikazioak bateria gehiago erabili du"</string>
+    <string name="battery_tips_apps_summary_higher_than_usual" msgid="95676961671544628">"<xliff:g id="APP_LABEL">%1$s</xliff:g> aplikazioak ohi baino bateria gehiago erabili du"</string>
+    <string name="battery_tips_apps_summary_always_high_in_background" msgid="2953858181710181126">"<xliff:g id="APP_LABEL">%1$s</xliff:g> aplikazioak bateria gehiago erabili du atzeko planoan egon bitartean"</string>
+    <string name="battery_tips_apps_summary_higher_than_usual_in_background" msgid="1585002072567422199">"<xliff:g id="APP_LABEL">%1$s</xliff:g> aplikazioak ohi baino bateria gehiago erabili du atzeko planoan"</string>
+    <string name="battery_tips_apps_summary_always_high_in_foreground" msgid="1910991243576404700">"<xliff:g id="APP_LABEL">%1$s</xliff:g> aplikazioak bateria gehiago erabili du aurreko planoan"</string>
+    <string name="battery_tips_apps_summary_higher_than_usual_in_foreground" msgid="7937337570425168210">"<xliff:g id="APP_LABEL">%1$s</xliff:g> aplikazioak ohi baino bateria gehiago erabili du aurreko planoan"</string>
+    <string name="battery_app_item_hint" msgid="4850929961461039110">"Bateriaren erabilera handia"</string>
+    <string name="battery_app_item_hint_in_bg" msgid="596240821466388336">"Bateriaren atzeko planoko erabilera handia"</string>
+    <string name="battery_app_item_hint_in_fg" msgid="5091860632260799910">"Bateriaren aurreko planoko erabilera handia"</string>
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Mugagabea"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Optimizatua"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"Murriztua"</string>
@@ -3897,8 +3884,8 @@
     <string name="notification_log_details_importance" msgid="8516198274667183446">"garrantzia"</string>
     <string name="notification_log_details_explanation" msgid="6966274549873070059">"azalpena"</string>
     <string name="notification_log_details_badge" msgid="648647240928645446">"bereizgarria bistara dezake"</string>
-    <string name="notification_log_details_content_intent" msgid="2768423554375629089">"helburua"</string>
-    <string name="notification_log_details_delete_intent" msgid="8296434571041573503">"ezabatzeko helburua"</string>
+    <string name="notification_log_details_content_intent" msgid="2768423554375629089">"intent-a"</string>
+    <string name="notification_log_details_delete_intent" msgid="8296434571041573503">"ezabatzeko intent-a"</string>
     <string name="notification_log_details_full_screen_intent" msgid="4151243693072002296">"pantaila osoko intent-a"</string>
     <string name="notification_log_details_actions" msgid="2269605330470905236">"ekintzak"</string>
     <string name="notification_log_details_title" msgid="8365761340979164197">"izena"</string>
@@ -4197,8 +4184,10 @@
     <!-- no translation found for graphics_driver_app_preference_values:1 (485288770206606512) -->
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
-    <string name="enable_angle_as_system_driver" msgid="3985105681812713612">"Gaitu ANGLE"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="6413038127558166972">"Gaitu ANGLE OpenGL ES-aren kontrolatzaile lehenetsi gisa. Bateragarriak ez diren gailuetan gaituz gero, baliteke aplikazio batzuek funtzionatzeari uztea."</string>
+    <!-- no translation found for enable_angle_as_system_driver (4648827560023949786) -->
+    <skip />
+    <!-- no translation found for enable_angle_as_system_driver_summary (2170215556348477481) -->
+    <skip />
     <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"Gailua berrabiarazi egin behar da OpenGL ES-aren kontrolatzailea (sistemarena) aldatzeko"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Aplikazioaren bateragarritasun-aldaketak"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Aktibatu/Desaktibatu aplikazioaren bateragarritasun-aldaketak"</string>
@@ -4714,10 +4703,8 @@
     <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"Euskarri bateragarrietako audioa murgiltzaileagoa da"</string>
     <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"Buruaren jarraipena"</string>
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"Burua mugitu ahala audioa aldatu egiten da, soinua naturalagoa izan dadin"</string>
-    <!-- no translation found for bluetooth_details_permissions_sync_title (584337314155926373) -->
-    <skip />
-    <!-- no translation found for bluetooth_details_permissions_sync_summary (3426601558010545762) -->
-    <skip />
+    <string name="bluetooth_details_permissions_sync_title" msgid="584337314155926373">"Sinkronizatu baimenak"</string>
+    <string name="bluetooth_details_permissions_sync_summary" msgid="3426601558010545762">"Eman <xliff:g id="REMOTE_DEVICE_NAME">%1$s</xliff:g> gailuari <xliff:g id="LOCAL_DEVICE_NAME">%2$s</xliff:g> gailuak dituen aplikazio-baimen berak"</string>
     <string name="bluetooth_details_audio_device_types_title" msgid="3381941189346781614">"Audio-gailu mota"</string>
     <string name="bluetooth_details_audio_device_type_unknown" msgid="839337391037998014">"Ezezaguna"</string>
     <string name="bluetooth_details_audio_device_type_speaker" msgid="3706227767994792124">"Bozgorailua"</string>
@@ -4760,6 +4747,10 @@
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Aspektu-erlazioa"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"Aplikazioa <xliff:g id="DEVICE_NAME">%1$s</xliff:g> gailura doitzeko diseinatu ez bada, probatu aplikazioa ikusteko beste aspektu-erlazio bat"</string>
     <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"Aplikazioa <xliff:g id="DEVICE_NAME">%1$s</xliff:g> gailura doitzeko diseinatu ez bada, probatu aplikazioa ikusteko beste aspektu-erlazio bat. Agian aplikazio batzuk ez daude aspektu-erlazio jakin batzuetarako optimizatuta."</string>
+    <!-- no translation found for aspect_ratio_summary_text (4737461467467220325) -->
+    <skip />
+    <!-- no translation found for aspect_ratio_main_summary_text (5544816872094235840) -->
+    <skip />
     <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"Iradokitako aplikazioak"</string>
     <string name="user_aspect_ratio_changed_apps_label" msgid="2096614916172567672">"Aspektu-erlazioa aldatuta daukatenak"</string>
     <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"Aplikazioen balio lehenetsia"</string>
@@ -4770,7 +4761,7 @@
     <string name="user_aspect_ratio_3_2" msgid="199262962518318932">"3:2"</string>
     <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4:3"</string>
     <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="NUMERATOR">%1$s</xliff:g> bider <xliff:g id="DENOMINATOR">%2$s</xliff:g>"</string>
-    <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"Aspektu-erlazioa aldatzean berrabiaraziko da aplikazioa. Litekeena da gorde gabeko aldaketak galtzea. Agian aplikazio batzuk ez daude aspektu-erlazio jakin batzuetarako optimizatuta."</string>
+    <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"Aspektu-erlazioa aldatzean, aplikazioa berrabiarazi egingo da. Litekeena da gorde gabeko aldaketak galtzea. Agian aplikazio batzuk ez daude aspektu-erlazio jakin batzuetarako optimizatuta."</string>
     <string name="aspect_ratio_experimental_title" msgid="9088785421062044831">"Aspektu-erlazioa (esperimentala)"</string>
     <string name="aspect_ratio_experiment_title" msgid="128614319422121040">"Aspektu-erlazioa (esperimentua)"</string>
     <string name="aspect_ratio_labs_title" msgid="6733893837442759383">"Aspektu-erlazioa (eginbide esperimentalak)"</string>
