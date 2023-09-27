@@ -190,7 +190,10 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     @VisibleForTesting
     final Runnable mUpdateWifiEntryPreferencesRunnable = () -> {
         updateWifiEntryPreferences();
-        getView().postDelayed(mRemoveLoadingRunnable, 10);
+        View view = getView();
+        if (view != null) {
+            view.postDelayed(mRemoveLoadingRunnable, 10);
+        }
     };
     @VisibleForTesting
     final Runnable mHideProgressBarRunnable = () -> {
