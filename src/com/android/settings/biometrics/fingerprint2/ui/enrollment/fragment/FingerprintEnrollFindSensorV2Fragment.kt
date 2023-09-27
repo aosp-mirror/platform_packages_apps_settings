@@ -29,7 +29,6 @@ import com.airbnb.lottie.LottieAnimationView
 import com.android.settings.R
 import com.android.settings.biometrics.fingerprint.FingerprintErrorDialog
 import com.android.settings.biometrics.fingerprint.FingerprintFindSensorAnimation
-import com.android.settings.biometrics.fingerprint2.shared.model.SensorType
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollFindSensorViewModel
 import com.android.systemui.biometrics.shared.model.FingerprintSensorType
 import com.google.android.setupcompat.template.FooterBarMixin
@@ -66,9 +65,9 @@ class FingerprintEnrollFindSensorV2Fragment : Fragment() {
       viewModel.sensorType.collect {
         contentLayoutId =
           when (it) {
-            SensorType.Optical,
-            SensorType.Ultrasonic -> R.layout.udfps_enroll_find_sensor_layout
-            SensorType.SFPS -> R.layout.sfps_enroll_find_sensor_layout
+            FingerprintSensorType.UDFPS_OPTICAL,
+            FingerprintSensorType.UDFPS_ULTRASONIC -> R.layout.udfps_enroll_find_sensor_layout
+            FingerprintSensorType.POWER_BUTTON -> R.layout.sfps_enroll_find_sensor_layout
             else -> R.layout.fingerprint_v2_enroll_find_sensor
           }
       }
@@ -171,14 +170,14 @@ class FingerprintEnrollFindSensorV2Fragment : Fragment() {
     illustrationLottie?.visibility = View.VISIBLE
   }
 
-  private fun setTexts(sensorType: SensorType, view: GlifLayout) {
+  private fun setTexts(sensorType: FingerprintSensorType, view: GlifLayout) {
     when (sensorType) {
-      SensorType.Optical,
-      SensorType.Ultrasonic -> {
+      FingerprintSensorType.UDFPS_OPTICAL,
+      FingerprintSensorType.UDFPS_ULTRASONIC -> {
         view.setHeaderText(R.string.security_settings_udfps_enroll_find_sensor_title)
         view.setDescriptionText(R.string.security_settings_udfps_enroll_find_sensor_message)
       }
-      SensorType.SFPS -> {
+      FingerprintSensorType.POWER_BUTTON -> {
         view.setHeaderText(R.string.security_settings_sfps_enroll_find_sensor_title)
         view.setDescriptionText(R.string.security_settings_sfps_enroll_find_sensor_message)
       }

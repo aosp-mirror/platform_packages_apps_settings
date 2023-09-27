@@ -24,7 +24,7 @@ import androidx.lifecycle.viewModelScope
 import com.android.settings.biometrics.fingerprint2.shared.domain.interactor.FingerprintManagerInteractor
 import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintAuthAttemptViewModel
 import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintViewModel
-import com.android.settings.biometrics.fingerprint2.shared.model.SensorType
+import com.android.systemui.biometrics.shared.model.FingerprintSensorType
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -89,7 +89,7 @@ class FingerprintSettingsViewModel(
 
   private val _consumerShouldAuthenticate: MutableStateFlow<Boolean> = MutableStateFlow(false)
 
-  private val _fingerprintSensorType: Flow<SensorType> =
+  private val _fingerprintSensorType: Flow<FingerprintSensorType> =
     fingerprintManagerInteractor.sensorPropertiesInternal.filterNotNull().map { it.sensorType }
 
   private val _sensorNullOrEmpty: Flow<Boolean> =
@@ -146,7 +146,10 @@ class FingerprintSettingsViewModel(
         if (sensorNullOrEmpty) {
           return@combine false
         }
-        if (listOf(SensorType.Ultrasonic, SensorType.Optical).contains(sensorType)) {
+        if (
+          listOf(FingerprintSensorType.UDFPS_ULTRASONIC, FingerprintSensorType.UDFPS_OPTICAL)
+            .contains(sensorType)
+        ) {
           return@combine false
         }
 

@@ -22,7 +22,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.android.settings.biometrics.fingerprint2.shared.model.EnrollReason
 import com.android.settings.biometrics.fingerprint2.shared.model.FingerEnrollStateViewModel
-import com.android.settings.biometrics.fingerprint2.shared.model.SensorType
 import com.android.systemui.biometrics.shared.model.FingerprintSensorType
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -45,13 +44,13 @@ class FingerprintEnrollFindSensorViewModel(
   orientationStateViewModel: OrientationStateViewModel
 ) : ViewModel() {
   /** Represents the stream of sensor type. */
-  val sensorType: Flow<SensorType> =
+  val sensorType: Flow<FingerprintSensorType> =
     fingerprintEnrollViewModel.sensorType.filterWhenEducationIsShown()
   private val _isUdfps: Flow<Boolean> =
     sensorType.map {
-      it == SensorType.Optical || it == SensorType.Ultrasonic
+      it == FingerprintSensorType.UDFPS_OPTICAL || it == FingerprintSensorType.UDFPS_ULTRASONIC
     }
-  private val _isSfps: Flow<Boolean> = sensorType.map { it == SensorType.RFPS }
+  private val _isSfps: Flow<Boolean> = sensorType.map { it == FingerprintSensorType.POWER_BUTTON }
   private val _isRearSfps: Flow<Boolean> =
     combineTransform(_isSfps, _isUdfps) { v1, v2 -> !v1 && !v2 }
 
@@ -95,8 +94,8 @@ class FingerprintEnrollFindSensorViewModel(
         ) { sensorType, hasValidGatekeeperInfo, gatekeeperInfo, navigationViewModel ->
           val shouldStartEnroll =
             navigationViewModel.currStep == Education &&
-              sensorType != SensorType.Optical &&
-              sensorType != SensorType.Ultrasonic &&
+              sensorType != FingerprintSensorType.UDFPS_OPTICAL &&
+              sensorType != FingerprintSensorType.UDFPS_ULTRASONIC &&
               hasValidGatekeeperInfo
           if (shouldStartEnroll) (gatekeeperInfo as GatekeeperInfo.GatekeeperPasswordInfo).token
           else null

@@ -20,7 +20,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.android.settings.biometrics.fingerprint2.shared.domain.interactor.FingerprintManagerInteractor
 import com.android.settings.biometrics.fingerprint2.shared.model.EnrollReason
 import com.android.settings.biometrics.fingerprint2.shared.model.FingerEnrollStateViewModel
-import com.android.settings.biometrics.fingerprint2.shared.model.SensorType
 import com.android.systemui.biometrics.shared.model.FingerprintSensorType
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
@@ -46,7 +45,7 @@ class FingerprintEnrollViewModel(
   private var _consumerShouldEnroll: MutableStateFlow<Boolean> = MutableStateFlow(false)
 
   /** Represents the stream of [FingerprintSensorType] */
-  val sensorType: Flow<SensorType> =
+  val sensorType: Flow<FingerprintSensorType> =
     fingerprintManagerInteractor.sensorPropertiesInternal.filterNotNull().map { it.sensorType }
 
   /**
