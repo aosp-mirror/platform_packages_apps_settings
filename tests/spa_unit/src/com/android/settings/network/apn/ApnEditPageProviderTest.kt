@@ -59,6 +59,7 @@ class ApnEditPageProviderTest {
         context.resources.getStringArray(R.array.apn_protocol_entries).toList()
     private val bearer = context.resources.getString(R.string.bearer)
     private val bearerOptions = context.resources.getStringArray(R.array.bearer_entries).toList()
+    private val passwordTitle = context.resources.getString(R.string.apn_password)
     private val apnData = mutableStateOf(
         ApnData(
             name = apnName,
@@ -240,5 +241,17 @@ class ApnEditPageProviderTest {
         composeTestRule.onAllNodesWithText(bearerOptions[1], true).onLast().performClick()
         composeTestRule.onNode(hasText(bearerOptions[0]) and isFocused(), true).assertIsDisplayed()
         composeTestRule.onNode(hasText(bearerOptions[1]) and isFocused(), true).assertDoesNotExist()
+    }
+
+    @Test
+    fun password_displayed() {
+        composeTestRule.setContent {
+            ApnPage(remember {
+                apnData
+            })
+        }
+        composeTestRule.onRoot().onChild().onChildAt(0)
+            .performScrollToNode(hasText(passwordTitle, true))
+        composeTestRule.onNodeWithText(passwordTitle, true).assertIsDisplayed()
     }
 }
