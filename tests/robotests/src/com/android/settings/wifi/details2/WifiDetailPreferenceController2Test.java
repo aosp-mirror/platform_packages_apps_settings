@@ -437,16 +437,6 @@ public class WifiDetailPreferenceController2Test {
     }
 
     @Test
-    public void latestWifiInfo_shouldBeFetchedInDisplayPreferenceForConnectedNetwork() {
-        setUpForConnectedNetwork();
-        setUpSpyController();
-
-        displayAndResume();
-
-        verify(mMockWifiManager, times(1)).getConnectionInfo();
-    }
-
-    @Test
     public void latestWifiInfo_shouldNotBeFetchedInDisplayPreferenceForDisconnectedNetwork() {
         setUpForDisconnectedNetwork();
 
@@ -462,16 +452,6 @@ public class WifiDetailPreferenceController2Test {
         displayAndResume();
 
         verify(mMockWifiManager, never()).getConnectionInfo();
-    }
-
-    @Test
-    public void latestNetworkInfo_shouldBeFetchedInDisplayPreferenceForConnectedNetwork() {
-        setUpForConnectedNetwork();
-        setUpSpyController();
-
-        displayAndResume();
-
-        verify(mMockConnectivityManager, times(1)).getNetworkInfo(any(Network.class));
     }
 
     @Test
@@ -1283,8 +1263,9 @@ public class WifiDetailPreferenceController2Test {
 
         displayAndResume();
 
-        verify(mMockConnectivityManager, times(1)).getNetworkInfo(any(Network.class));
-        verify(mMockWifiManager, times(1)).getConnectionInfo();
+        verify(mMockWifiManager, times(1)).getCurrentNetwork();
+        verify(mMockConnectivityManager, times(1)).getLinkProperties(any(Network.class));
+        verify(mMockConnectivityManager, times(1)).getNetworkCapabilities(any(Network.class));
     }
 
     @Test
