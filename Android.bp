@@ -55,6 +55,9 @@ android_library {
     ],
 
     srcs: ["src/**/*.java", "src/**/*.kt"],
+    exclude_srcs: [
+        "src/com/android/settings/biometrics/fingerprint2/shared/**/*.kt",
+    ],
     use_resource_processor: true,
     resource_dirs: [
         "res",
@@ -113,6 +116,7 @@ android_library {
         "SystemUIUnfoldLib",
         "aconfig_settings_flags_lib",
         "android.content.pm.flags-aconfig-java",
+        "FingerprintManagerInteractor",
     ],
 
     plugins: [

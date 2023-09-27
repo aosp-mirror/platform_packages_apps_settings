@@ -1,5 +1,6 @@
 package com.android.settings.search;
 
+import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_SEARCHABLE;
 import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_TITLE;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -203,6 +204,19 @@ public class SettingsSearchIndexablesProviderTest {
                 CategoryKey.CATEGORY_CONNECT);
 
         assertThat(mProvider.isEligibleForIndexing(PACKAGE_NAME, activityTile)).isTrue();
+    }
+
+    @Test
+    public void isEligibleForIndexing_disabledByMetadata_shouldReturnFalse() {
+        final ActivityInfo activityInfo = new ActivityInfo();
+        activityInfo.packageName = PACKAGE_NAME;
+        activityInfo.name = "class";
+        activityInfo.metaData = new Bundle();
+        activityInfo.metaData.putBoolean(META_DATA_PREFERENCE_SEARCHABLE, false);
+        final ActivityTile activityTile = new ActivityTile(activityInfo,
+                CategoryKey.CATEGORY_CONNECT);
+
+        assertThat(mProvider.isEligibleForIndexing(PACKAGE_NAME, activityTile)).isFalse();
     }
 
     @Implements(CategoryManager.class)

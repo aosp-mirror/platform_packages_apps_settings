@@ -21,7 +21,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.android.settings.biometrics.BiometricEnrollBase
-import com.android.settings.biometrics.fingerprint2.domain.interactor.FingerprintManagerInteractor
+import com.android.settings.biometrics.fingerprint2.shared.domain.interactor.FingerprintManagerInteractor
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -32,17 +32,18 @@ import kotlinx.coroutines.launch
 
 /** A Viewmodel that represents the navigation of the FingerprintSettings activity. */
 class FingerprintSettingsNavigationViewModel(
-  private val userId: Int,
-  private val fingerprintManagerInteractor: FingerprintManagerInteractor,
-  private val backgroundDispatcher: CoroutineDispatcher,
-  tokenInit: ByteArray?,
-  challengeInit: Long?,
+    private val userId: Int,
+    private val fingerprintManagerInteractor: FingerprintManagerInteractor,
+    private val backgroundDispatcher: CoroutineDispatcher,
+    tokenInit: ByteArray?,
+    challengeInit: Long?,
 ) : ViewModel() {
 
   private var token = tokenInit
   private var challenge = challengeInit
 
   private val _nextStep: MutableStateFlow<NextStepViewModel?> = MutableStateFlow(null)
+
   /** This flow represents the high level state for the FingerprintSettingsV2Fragment. */
   val nextStep: StateFlow<NextStepViewModel?> = _nextStep.asStateFlow()
 
@@ -118,8 +119,8 @@ class FingerprintSettingsNavigationViewModel(
       launchFinishSettings("Error, empty keyChallenge")
       return
     }
-    token = theToken!!
-    challenge = theChallenge!!
+    token = theToken
+    challenge = theChallenge
 
     showSettingsHelper()
   }
@@ -170,12 +171,13 @@ class FingerprintSettingsNavigationViewModel(
   private fun launchFinishSettings(reason: String, errorCode: Int) {
     _nextStep.update { FinishSettingsWithResult(errorCode, reason) }
   }
+
   class FingerprintSettingsNavigationModelFactory(
-    private val userId: Int,
-    private val interactor: FingerprintManagerInteractor,
-    private val backgroundDispatcher: CoroutineDispatcher,
-    private val token: ByteArray?,
-    private val challenge: Long?,
+      private val userId: Int,
+      private val interactor: FingerprintManagerInteractor,
+      private val backgroundDispatcher: CoroutineDispatcher,
+      private val token: ByteArray?,
+      private val challenge: Long?,
   ) : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")

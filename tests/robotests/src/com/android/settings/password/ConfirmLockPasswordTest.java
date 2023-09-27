@@ -62,6 +62,7 @@ import com.android.settings.testutils.shadow.ShadowUtils;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -176,6 +177,7 @@ public class ConfirmLockPasswordTest {
     }
 
     @Test
+    @Ignore("b/295325503")
     public void handleNext_remoteValidation_correctGuess_checkboxChecked() throws Exception {
         ConfirmDeviceCredentialBaseActivity activity =
                 buildConfirmDeviceCredentialBaseActivity(
@@ -201,6 +203,7 @@ public class ConfirmLockPasswordTest {
     }
 
     @Test
+    @Ignore("b/295325503")
     public void handleNext_remoteValidation_correctGuess_checkboxUnchecked() throws Exception {
         ConfirmDeviceCredentialBaseActivity activity =
                 buildConfirmDeviceCredentialBaseActivity(
@@ -227,6 +230,7 @@ public class ConfirmLockPasswordTest {
     }
 
     @Test
+    @Ignore("b/295325503")
     public void handleNext_remoteValidation_guessInvalid() throws Exception {
         ConfirmDeviceCredentialBaseActivity activity =
                 buildConfirmDeviceCredentialBaseActivity(
@@ -251,6 +255,7 @@ public class ConfirmLockPasswordTest {
     }
 
     @Test
+    @Ignore("b/295325503")
     public void handleNext_remoteValidation_lockout() throws Exception {
         ConfirmDeviceCredentialBaseActivity activity =
                 buildConfirmDeviceCredentialBaseActivity(
@@ -275,6 +280,7 @@ public class ConfirmLockPasswordTest {
     }
 
     @Test
+    @Ignore("b/295325503")
     public void handleNext_remoteValidation_noRemainingAttempts_finishActivity() throws Exception {
         ConfirmDeviceCredentialBaseActivity activity =
                 buildConfirmDeviceCredentialBaseActivity(

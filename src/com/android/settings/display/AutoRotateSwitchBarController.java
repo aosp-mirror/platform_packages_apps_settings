@@ -82,7 +82,8 @@ public class AutoRotateSwitchBarController extends SettingsMainSwitchPreferenceC
         final boolean isLocked = !isChecked;
         mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_ROTATE_ROTATE_MASTER_TOGGLE,
                 isLocked);
-        RotationPolicy.setRotationLock(mContext, isLocked);
+        RotationPolicy.setRotationLock(mContext, isLocked,
+                /* caller= */ "AutoRotateSwitchBarController#setChecked");
         return true;
     }
 

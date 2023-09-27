@@ -120,7 +120,10 @@ import java.util.stream.Collectors;
 
 // TODO(b/143326832): Should add test cases for connect button.
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowDevicePolicyManager.class, ShadowEntityHeaderController.class})
+@Config(shadows = {
+        ShadowDevicePolicyManager.class,
+        com.android.settings.testutils.shadow.ShadowFragment.class,
+        ShadowEntityHeaderController.class})
 public class WifiDetailPreferenceController2Test {
 
     private static final int LEVEL = 1;

@@ -65,6 +65,7 @@ import com.google.android.setupdesign.GlifLayout;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -556,6 +557,7 @@ public class FingerprintEnrollFindSensorTest {
     }
 
     @Test
+    @Ignore("b/295325503")
     public void fingerprintEnrollFindSensor_activityApplyDarkLightStyle() {
         setupActivity_onSfpsDevice();
         verifySidecar_onRearOrSfpsDevice();

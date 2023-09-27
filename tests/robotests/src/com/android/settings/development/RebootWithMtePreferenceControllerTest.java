@@ -26,6 +26,8 @@ import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settingslib.development.DevelopmentSettingsEnabler;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -52,6 +54,7 @@ public class RebootWithMtePreferenceControllerTest {
         mContext = ApplicationProvider.getApplicationContext();
         mController = new RebootWithMtePreferenceController(mContext);
         mController.setFragment(mFragment);
+        DevelopmentSettingsEnabler.setDevelopmentSettingsEnabled(mContext, true);
     }
 
     @Test
