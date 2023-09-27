@@ -265,9 +265,8 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
 
     /**@return {@code true} if subId is the default data sub. **/
     private boolean isDds(int subId) {
-        return mSubscriptionManager.getDefaultDataSubscriptionInfo() != null
-                && mSubscriptionManager.getDefaultDataSubscriptionInfo().getSubscriptionId()
-                == subId;
+        SubscriptionInfo info = mSubscriptionManager.getDefaultDataSubscriptionInfo();
+        return info != null && info.getSubscriptionId() == subId;
     }
 
     private CharSequence getMobilePreferenceSummary(int subId) {
