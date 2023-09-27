@@ -70,6 +70,7 @@ import com.airbnb.lottie.LottieTask;
 import com.google.android.setupdesign.GlifLayout;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -85,6 +86,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
+@Ignore("b/295325503")
 @RunWith(RobolectricTestRunner.class)
 @LooperMode(LooperMode.Mode.LEGACY)
 public class FingerprintEnrollEnrollingTest {

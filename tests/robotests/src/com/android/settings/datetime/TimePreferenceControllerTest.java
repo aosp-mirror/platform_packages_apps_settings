@@ -36,7 +36,6 @@ import org.robolectric.RuntimeEnvironment;
 @RunWith(RobolectricTestRunner.class)
 public class TimePreferenceControllerTest {
 
-    @Mock
     private Context mContext;
     @Mock
     private TimePreferenceController.TimePreferenceHost mHost;
@@ -49,6 +48,7 @@ public class TimePreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        mContext = RuntimeEnvironment.application;
         mPreference = new RestrictedPreference(RuntimeEnvironment.application);
         mController = new TimePreferenceController(mContext, mHost, mDatePreferenceController);
     }

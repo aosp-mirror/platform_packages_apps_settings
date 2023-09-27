@@ -17,13 +17,14 @@ package com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.android.settings.biometrics.fingerprint2.domain.interactor.FingerprintManagerInteractor
+import com.android.settings.biometrics.fingerprint2.shared.domain.interactor.FingerprintManagerInteractor
+import com.android.settings.biometrics.fingerprint2.shared.model.EnrollReason
+import com.android.settings.biometrics.fingerprint2.shared.model.FingerEnrollStateViewModel
+import com.android.settings.biometrics.fingerprint2.shared.model.SensorType
 import com.android.systemui.biometrics.shared.model.FingerprintSensorType
-import com.android.systemui.biometrics.shared.model.toSensorType
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.flowOn
@@ -39,16 +40,14 @@ class FingerprintEnrollViewModel(
   backgroundDispatcher: CoroutineDispatcher,
 ) : ViewModel() {
 
-  /** Represents the stream of [FingerprintSensorType] */
-  val sensorType: Flow<FingerprintSensorType> =
-    fingerprintManagerInteractor.sensorPropertiesInternal.filterNotNull().map {
-      it.sensorType.toSensorType()
-    }
-
   private var _enrollReason: MutableStateFlow<EnrollReason> =
     MutableStateFlow(EnrollReason.FindSensor)
   private var _hardwareAuthToken: MutableStateFlow<ByteArray?> = MutableStateFlow(null)
   private var _consumerShouldEnroll: MutableStateFlow<Boolean> = MutableStateFlow(false)
+
+  /** Represents the stream of [FingerprintSensorType] */
+  val sensorType: Flow<SensorType> =
+    fingerprintManagerInteractor.sensorPropertiesInternal.filterNotNull().map { it.sensorType }
 
   /**
    * A flow that contains a [FingerprintEnrollViewModel] which contains the relevant information for

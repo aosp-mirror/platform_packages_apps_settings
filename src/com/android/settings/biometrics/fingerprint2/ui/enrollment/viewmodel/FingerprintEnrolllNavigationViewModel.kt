@@ -20,7 +20,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.android.settings.biometrics.fingerprint2.domain.interactor.FingerprintManagerInteractor
+import com.android.settings.biometrics.fingerprint2.shared.domain.interactor.FingerprintManagerInteractor
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -39,7 +39,7 @@ interface Validator {
 /**
  * The [EnrollType] for fingerprint enrollment indicates information on how the flow should behave.
  */
-sealed class EnrollType()
+sealed class EnrollType
 
 /** The default enrollment experience, typically called from Settings */
 object Default : EnrollType()

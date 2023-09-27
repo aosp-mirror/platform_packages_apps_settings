@@ -32,3 +32,36 @@ sealed class FingerprintAuthAttemptViewModel {
     val message: String,
   ) : FingerprintAuthAttemptViewModel()
 }
+
+/** The various types of fingerprint sensors */
+sealed class SensorType {
+  /** Rear fingerprint sensor */
+  data object RFPS : SensorType()
+
+  /** Optical under display sensor */
+  data object Optical : SensorType()
+
+  /** Ultrasonic under display sensor */
+  data object Ultrasonic : SensorType()
+
+  /** Side fingerprint sensor */
+  data object SFPS : SensorType()
+
+  /** Unkonwn fingerprint sensor */
+  data object Unknown : SensorType()
+}
+
+/** The strength of a given sensor */
+sealed class SensorStrength {
+  data object Convenient : SensorStrength()
+  data object Weak : SensorStrength()
+  data object Strong : SensorStrength()
+  data object Unknown : SensorStrength()
+}
+
+data class FingerprintSensorPropertyViewModel(
+  val sensorId: Int,
+  val sensorStrength: SensorStrength,
+  val maxEnrollmentsPerUser: Int,
+  val sensorType: SensorType
+)

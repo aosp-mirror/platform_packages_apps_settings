@@ -327,6 +327,10 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
 
     // Show empty hourly chart view only if there is no valid battery usage data.
     void showEmptyChart() {
+        if (mDailyChartView == null || mHourlyChartView == null) {
+            // Chart views are not initialized.
+            return;
+        }
         setChartSummaryVisible(true);
         mDailyChartView.setVisibility(View.GONE);
         mHourlyChartView.setVisibility(View.VISIBLE);

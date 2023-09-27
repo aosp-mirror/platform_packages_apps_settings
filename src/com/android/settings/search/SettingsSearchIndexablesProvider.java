@@ -454,7 +454,7 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
             // Skip Settings injected items because they should be indexed in the sub-pages.
             return false;
         }
-        return true;
+        return tile.isSearchable();
     }
 
     private static Object[] createIndexableRawColumnObjects(SearchIndexableRaw raw) {

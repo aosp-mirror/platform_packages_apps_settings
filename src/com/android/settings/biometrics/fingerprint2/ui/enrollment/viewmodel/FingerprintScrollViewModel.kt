@@ -27,6 +27,7 @@ import kotlinx.coroutines.flow.update
 class FingerprintScrollViewModel : ViewModel() {
 
   private val _hasReadConsentScreen: MutableStateFlow<Boolean> = MutableStateFlow(false)
+
   /** Indicates if a user has consented to FingerprintEnrollment */
   val hasReadConsentScreen: Flow<Boolean> = _hasReadConsentScreen.asStateFlow()
 
@@ -35,7 +36,7 @@ class FingerprintScrollViewModel : ViewModel() {
     _hasReadConsentScreen.update { true }
   }
 
-  class FingerprintScrollViewModelFactory() : ViewModelProvider.Factory {
+  class FingerprintScrollViewModelFactory : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(
