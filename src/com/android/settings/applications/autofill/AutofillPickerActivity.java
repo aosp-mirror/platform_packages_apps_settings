@@ -18,10 +18,10 @@ import android.os.Bundle;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.applications.defaultapps.DefaultAutofillPicker;
+import com.android.settings.applications.credentials.DefaultCombinedPicker;
 
 /**
- * Standalone activity used to launch a {@link DefaultAutofillPicker} fragment from a
+ * Standalone activity used to launch a {@link DefaultCombinedPicker} fragment from a
  * {@link android.provider.Settings#ACTION_REQUEST_SET_AUTOFILL_SERVICE} intent.
  */
 public class AutofillPickerActivity extends SettingsActivity {
@@ -30,15 +30,15 @@ public class AutofillPickerActivity extends SettingsActivity {
     protected void onCreate(Bundle savedInstanceState) {
         final Intent intent = getIntent();
         final String packageName = intent.getData().getSchemeSpecificPart();
-        intent.putExtra(EXTRA_SHOW_FRAGMENT, DefaultAutofillPicker.class.getName());
-        intent.putExtra(EXTRA_SHOW_FRAGMENT_TITLE_RESID, R.string.autofill_app);
-        intent.putExtra(DefaultAutofillPicker.EXTRA_PACKAGE_NAME, packageName);
+        intent.putExtra(EXTRA_SHOW_FRAGMENT, DefaultCombinedPicker.class.getName());
+        intent.putExtra(EXTRA_SHOW_FRAGMENT_TITLE_RESID, R.string.credman_picker_title);
+        intent.putExtra(DefaultCombinedPicker.EXTRA_PACKAGE_NAME, packageName);
         super.onCreate(savedInstanceState);
     }
 
     @Override
     protected boolean isValidFragment(String fragmentName) {
         return super.isValidFragment(fragmentName)
-                || DefaultAutofillPicker.class.getName().equals(fragmentName);
+                || DefaultCombinedPicker.class.getName().equals(fragmentName);
     }
 }
