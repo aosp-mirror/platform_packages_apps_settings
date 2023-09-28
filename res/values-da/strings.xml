@@ -871,6 +871,7 @@
     <string name="internet_source_wifi" msgid="6952593095166435179">"Wi-Fi"</string>
     <string name="internet_source_mobile_data" msgid="877403889449201789">"Mobildata"</string>
     <string name="internet_source_ethernet" msgid="8338472576454100966">"Ethernet"</string>
+    <string name="hotspot_battery_charging_summary" msgid="6690892148553288457">"<xliff:g id="BATTERY_PERCENTAGE">%s</xliff:g> – Oplades"</string>
     <string name="hotspot_connection_category" msgid="4320380513982923556">"Hotspot-forbindelse"</string>
     <string name="hotspot_connection_strength" msgid="87359986943768421">"Signalstyrke"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"Gemte netværk"</string>
@@ -2462,12 +2463,12 @@
     <string name="privacy_settings_title" msgid="6437057228255974577">"Sikkerheds­kopiering"</string>
     <string name="backup_summary_state_on" msgid="9018954639693085240">"Til"</string>
     <string name="backup_summary_state_off" msgid="5341339397224835909">"Fra"</string>
-    <string name="backup_section_title" msgid="6539706829848457794">"Backup og gendannelse"</string>
+    <string name="backup_section_title" msgid="6539706829848457794">"Sikkerhedskopiering og gendannelse"</string>
     <string name="personal_data_section_title" msgid="6368610168625722682">"Personlige oplysninger"</string>
     <string name="backup_data_title" msgid="507663517227498525">"Sikkerhedskopiér data"</string>
     <string name="backup_data_summary" msgid="8054551085241427531">"Sikkerhedskopiér appdata, Wi-Fi-adgangskoder og andre indstillinger på Googles servere"</string>
-    <string name="backup_configure_account_title" msgid="8574055186903658842">"Konto til backup"</string>
-    <string name="backup_data_management_title" msgid="6596830198441939702">"Administrer konto til backup"</string>
+    <string name="backup_configure_account_title" msgid="8574055186903658842">"Konto til sikkerhedskopiering"</string>
+    <string name="backup_data_management_title" msgid="6596830198441939702">"Administrer konto til sikkerhedskopiering"</string>
     <string name="include_app_data_title" msgid="2969603876620594523">"Inkluder appdata"</string>
     <string name="auto_restore_title" msgid="4124345897936637561">"Automatisk gendannelse"</string>
     <string name="auto_restore_summary" msgid="6830198851045584001">"Ved geninstallation af en app gendannes sikkerhedskopierede indstillinger og data"</string>
@@ -2476,7 +2477,7 @@
     <string name="backup_erase_dialog_title" msgid="5892431263348766484"></string>
     <string name="backup_erase_dialog_message" msgid="2250872501409574331">"Vil du stoppe sikkerhedskopieringen af dine Wi-Fi-adgangskoder, bogmærker, andre indstillinger og appdata samt slette alle kopier på Googles servere?"</string>
     <string name="fullbackup_erase_dialog_message" msgid="2379053988557486162">"Vil du stoppe med at sikkerhedskopiere enhedsdata (f.eks. Wi-Fi-adgangskoder og opkaldshistorik) og appdata (f.eks. indstillinger og filer, som apps har gemt) og slette alle kopier på fjernservere?"</string>
-    <string name="fullbackup_data_summary" msgid="971587401251601473">"Foretag automatisk ekstern backup af enhedsdata (f.eks. Wi-Fi-adgangskoder og opkaldshistorik) og appdata (f.eks. indstillinger og filer, der er gemt i apps).\n\n Når du slår automatisk backup til, gemmes enheds- og appdata med jævne mellemrum eksternt. Appdata kan være alle former for data, som en app har gemt (afhængigt af udviklerens indstillinger), f.eks. potentielt følsomme data, såsom kontakter, beskeder og billeder."</string>
+    <string name="fullbackup_data_summary" msgid="971587401251601473">"Foretag automatisk ekstern sikkerhedskopiering af enhedsdata (f.eks. Wi-Fi-adgangskoder og opkaldshistorik) og appdata (f.eks. indstillinger og filer, der er gemt i apps).\n\n Når du slår automatisk sikkerhedskopiering til, gemmes enheds- og appdata med jævne mellemrum eksternt. Appdata kan være alle former for data, som en app har gemt (afhængigt af udviklerens indstillinger), f.eks. potentielt følsomme data, såsom kontakter, beskeder og billeder."</string>
     <string name="device_admin_settings_title" msgid="31392408594557070">"Indstillinger for enhedsadministrator"</string>
     <string name="active_device_admin_msg" msgid="7744106305636543184">"App til enhedsadministration"</string>
     <string name="remove_device_admin" msgid="3143059558744287259">"Deaktiver denne app til enhedsadministration"</string>
@@ -2525,7 +2526,7 @@
     <string name="sync_error" msgid="846923369794727644">"Synkroniseringsfejl"</string>
     <string name="last_synced" msgid="1527008461298110443">"Sidst synkroniseret <xliff:g id="LAST_SYNC_TIME">%1$s</xliff:g>"</string>
     <string name="sync_in_progress" msgid="6200093151211458977">"Synkroniserer nu…"</string>
-    <string name="settings_backup" msgid="5357973563989458049">"Indstillinger for backup"</string>
+    <string name="settings_backup" msgid="5357973563989458049">"Indstillinger for sikkerhedskopiering"</string>
     <string name="settings_backup_summary" msgid="6803046376335724034">"Sikkerhedskopier mine indstillinger"</string>
     <string name="sync_menu_sync_now" msgid="3948443642329221882">"Synkroniser nu"</string>
     <string name="sync_menu_sync_cancel" msgid="2422994461106269813">"Annuller synkronisering"</string>
@@ -2682,9 +2683,9 @@
     <string name="user_credential_none_installed" msgid="918620912366836994">"Der er ikke installeret nogen brugerloginoplysninger"</string>
     <string name="spellcheckers_settings_title" msgid="2799021700580591443">"Stavekontrol"</string>
     <string name="spellcheckers_settings_for_work_title" msgid="6471603934176062893">"Stavekontrol til arbejdsprofil"</string>
-    <string name="current_backup_pw_prompt" msgid="4962276598546381140">"Angiv din aktuelle adgangskode til fuldstændig backup:"</string>
-    <string name="new_backup_pw_prompt" msgid="4884439230209419503">"Angiv din nye adgangskode til fuldstændig backup:"</string>
-    <string name="confirm_new_backup_pw_prompt" msgid="5753796799743881356">"Gentag din nye adgangskode til fuldstændig backup:"</string>
+    <string name="current_backup_pw_prompt" msgid="4962276598546381140">"Angiv din aktuelle adgangskode til fuldstændig sikkerhedskopiering:"</string>
+    <string name="new_backup_pw_prompt" msgid="4884439230209419503">"Angiv din nye adgangskode til fuldstændig sikkerhedskopiering:"</string>
+    <string name="confirm_new_backup_pw_prompt" msgid="5753796799743881356">"Gentag din nye adgangskode til fuldstændig sikkerhedskopiering:"</string>
     <string name="backup_pw_set_button_text" msgid="8892357974661340070">"Angiv adgangskode til sikkerhedskopi"</string>
     <string name="backup_pw_cancel_button_text" msgid="2244399819018756323">"Annuller"</string>
     <string name="additional_system_update_settings_list_item_title" msgid="7230385345152138051">"Yderligere systemopdateringer"</string>
@@ -2891,7 +2892,7 @@
     <string name="cloned_app_created_summary" msgid="7277912971544890710">"Klonet"</string>
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"Opretter en klon af <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"En klon af <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> blev oprettet"</string>
-    <string name="system_dashboard_summary" msgid="7400745270362833832">"Sprog, bevægelser, klokkeslæt, backup"</string>
+    <string name="system_dashboard_summary" msgid="7400745270362833832">"Sprog, bevægelser, klokkeslæt, sikkerhedskopiering"</string>
     <string name="languages_setting_summary" msgid="2650807397396180351">"Systemsprog, appsprog, regionsindstillinger, tale"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, netværksforbindelse, internet, trådløs, data, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Wi‑Fi-notifikation, wifi-notifikation"</string>
@@ -2946,7 +2947,7 @@
     <string name="keywords_gesture" msgid="3456930847450080520">"bevægelser"</string>
     <string name="keywords_wallet" msgid="3757421969956996972">"Wallet"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"betal, tryk, betalinger"</string>
-    <string name="keywords_backup" msgid="707735920706667685">"backup, sikkerhedskopiér"</string>
+    <string name="keywords_backup" msgid="707735920706667685">"sikkerhedskopiering, sikkerhedskopiér"</string>
     <string name="keywords_assist_gesture_launch" msgid="7710762655355161924">"bevægelse"</string>
     <string name="keywords_face_unlock" msgid="545338452730885392">"ansigt, oplåsning, godkendelse, log ind"</string>
     <string name="keywords_biometric_unlock" msgid="8569545388717753692">"ansigt, lås op, ansigtsoplåsning, godkendelse, log ind, fingeraftryk, biometri, biometrisk"</string>
@@ -3017,8 +3018,7 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"Standardlyd for notifikationer"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"Standardlyd for alarmer"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"Vibrer først, og ring så gradvist højere"</string>
-    <!-- no translation found for spatial_audio_title (1775370104206884711) -->
-    <skip />
+    <string name="spatial_audio_title" msgid="1775370104206884711">"Rumlig lyd"</string>
     <string name="dial_pad_tones_title" msgid="3536945335367914892">"Toner for tastatur"</string>
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"Lyd ved skærmlåsning"</string>
     <string name="charging_sounds_title" msgid="5261683808537783668">"Lyd og vibration ved opladning"</string>
@@ -3034,12 +3034,9 @@
     <string name="boot_sounds_title" msgid="5033062848948884111">"Aktivér lyde"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"Livetekstning"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"Undertekster til medier"</string>
-    <!-- no translation found for spatial_audio_speaker (3956755613908467186) -->
-    <skip />
-    <!-- no translation found for spatial_audio_speaker (2261196916411018248) -->
-    <skip />
-    <!-- no translation found for spatial_audio_speaker (3012868526054155189) -->
-    <skip />
+    <string name="spatial_audio_speaker" product="default" msgid="3956755613908467186">"Telefonens højttalere"</string>
+    <string name="spatial_audio_speaker" product="tablet" msgid="2261196916411018248">"Tablettens højttalere"</string>
+    <string name="spatial_audio_speaker" product="device" msgid="3012868526054155189">"Enhedens højttalere"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Høretelefoner med ledning"</string>
     <string name="spatial_audio_text" msgid="8201387855375146000">"Lyden fra kompatible medieenheder bliver endnu bedre"</string>
     <string name="spatial_summary_off" msgid="8272678804629774378">"Fra"</string>
@@ -3855,32 +3852,21 @@
     <string name="app_battery_usage_title" msgid="346558380609793334">"Batteriforbrug for apps"</string>
     <string name="app_battery_usage_summary" msgid="6349965904306339539">"Indstil batteriforbrug for apps"</string>
     <string name="battery_tips_card_action_button" msgid="4897793527424711648">"Se indstillinger"</string>
-    <!-- no translation found for battery_tips_card_action_button_check (1535140204105479318) -->
-    <skip />
+    <string name="battery_tips_card_action_button_check" msgid="1535140204105479318">"Tjek"</string>
     <string name="battery_tips_card_dismiss_button" msgid="1885756985544936618">"OK"</string>
     <string name="battery_tips_card_feedback_info" msgid="767117835675157298">"Er denne meddelelse nyttig?"</string>
-    <!-- no translation found for battery_hints_warning_icon_a11y (5312542323401447620) -->
-    <skip />
+    <string name="battery_hints_warning_icon_a11y" msgid="5312542323401447620">"Advarselsikon med batteritips"</string>
     <string name="battery_tips_settings_summary_brightness" msgid="546145032616077783">"Aktivér automatisk lysstyrke for at forlænge batteritiden"</string>
     <string name="battery_tips_settings_summary_screen_timeout" msgid="556801426050962077">"Reducer timeout for skærm for at forlænge batteritiden"</string>
-    <!-- no translation found for battery_tips_apps_summary_always_high (6334519477067044920) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_higher_than_usual (95676961671544628) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_always_high_in_background (2953858181710181126) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_higher_than_usual_in_background (1585002072567422199) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_always_high_in_foreground (1910991243576404700) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_higher_than_usual_in_foreground (7937337570425168210) -->
-    <skip />
-    <!-- no translation found for battery_app_item_hint (4850929961461039110) -->
-    <skip />
-    <!-- no translation found for battery_app_item_hint_in_bg (596240821466388336) -->
-    <skip />
-    <!-- no translation found for battery_app_item_hint_in_fg (5091860632260799910) -->
-    <skip />
+    <string name="battery_tips_apps_summary_always_high" msgid="6334519477067044920">"<xliff:g id="APP_LABEL">%1$s</xliff:g> brugte mere batteri"</string>
+    <string name="battery_tips_apps_summary_higher_than_usual" msgid="95676961671544628">"<xliff:g id="APP_LABEL">%1$s</xliff:g> brugte mere batteri end normalt"</string>
+    <string name="battery_tips_apps_summary_always_high_in_background" msgid="2953858181710181126">"<xliff:g id="APP_LABEL">%1$s</xliff:g> brugte mere batteri i baggrunden"</string>
+    <string name="battery_tips_apps_summary_higher_than_usual_in_background" msgid="1585002072567422199">"<xliff:g id="APP_LABEL">%1$s</xliff:g> brugte mere batteri end normalt i baggrunden"</string>
+    <string name="battery_tips_apps_summary_always_high_in_foreground" msgid="1910991243576404700">"<xliff:g id="APP_LABEL">%1$s</xliff:g> brugte mere batteri i forgrunden"</string>
+    <string name="battery_tips_apps_summary_higher_than_usual_in_foreground" msgid="7937337570425168210">"<xliff:g id="APP_LABEL">%1$s</xliff:g> brugte mere batteri end normalt i forgrunden"</string>
+    <string name="battery_app_item_hint" msgid="4850929961461039110">"Højt batteriforbrug"</string>
+    <string name="battery_app_item_hint_in_bg" msgid="596240821466388336">"Højt batteriforbrug i baggrunden"</string>
+    <string name="battery_app_item_hint_in_fg" msgid="5091860632260799910">"Højt batteriforbrug i forgrunden"</string>
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Ubegrænset"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Optimeret"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"Begrænset"</string>
@@ -4197,8 +4183,10 @@
     <!-- no translation found for graphics_driver_app_preference_values:1 (485288770206606512) -->
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
-    <string name="enable_angle_as_system_driver" msgid="3985105681812713612">"Aktivér ANGLE"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="6413038127558166972">"Aktivér ANGLE som OpenGL ES-standarddriver. Hvis du aktiverer den på inkompatible enheder, fungerer visse apps muligvis ikke."</string>
+    <!-- no translation found for enable_angle_as_system_driver (4648827560023949786) -->
+    <skip />
+    <!-- no translation found for enable_angle_as_system_driver_summary (2170215556348477481) -->
+    <skip />
     <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"Du skal genstarte for at ændre OpenGL ES-systemdriveren"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Ændringer i appkompatibilitet"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Skift appens kompatibilitetsændringer"</string>
@@ -4714,10 +4702,8 @@
     <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"Lyden fra kompatible medieenheder bliver endnu bedre"</string>
     <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"Registrering af hovedbevægelser"</string>
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"Lyden ændrer sig, når du bevæger dit hoved, for at opnå en mere naturlig lyd"</string>
-    <!-- no translation found for bluetooth_details_permissions_sync_title (584337314155926373) -->
-    <skip />
-    <!-- no translation found for bluetooth_details_permissions_sync_summary (3426601558010545762) -->
-    <skip />
+    <string name="bluetooth_details_permissions_sync_title" msgid="584337314155926373">"Synkroniser tilladelser"</string>
+    <string name="bluetooth_details_permissions_sync_summary" msgid="3426601558010545762">"Giv <xliff:g id="REMOTE_DEVICE_NAME">%1$s</xliff:g> de samme apptilladelser, som du har givet på <xliff:g id="LOCAL_DEVICE_NAME">%2$s</xliff:g>"</string>
     <string name="bluetooth_details_audio_device_types_title" msgid="3381941189346781614">"Type af lydenhed"</string>
     <string name="bluetooth_details_audio_device_type_unknown" msgid="839337391037998014">"Ukendt"</string>
     <string name="bluetooth_details_audio_device_type_speaker" msgid="3706227767994792124">"Højttaler"</string>
@@ -4760,6 +4746,10 @@
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Billedformat"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"Prøv et nyt billedformat for at se denne app, hvis den ikke er designet til at vises korrekt på din <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"Prøv et nyt billedformat for at se denne app, hvis den ikke er designet til at vises korrekt på din <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Visse apps er muligvis ikke optimeret til bestemte billedformater."</string>
+    <!-- no translation found for aspect_ratio_summary_text (4737461467467220325) -->
+    <skip />
+    <!-- no translation found for aspect_ratio_main_summary_text (5544816872094235840) -->
+    <skip />
     <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"Foreslåede apps"</string>
     <string name="user_aspect_ratio_changed_apps_label" msgid="2096614916172567672">"Ændrede apps"</string>
     <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"Standardindstilling for appen"</string>

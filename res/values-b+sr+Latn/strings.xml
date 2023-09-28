@@ -787,8 +787,8 @@
     <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"Postavite QR kôd u nastavku da biste dodali uređaj na mrežu „<xliff:g id="SSID">%1$s</xliff:g>“"</string>
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"Povežite se na Wi‑Fi mrežu tako što ćete skenirati QR kôd"</string>
     <string name="wifi_dpp_share_wifi" msgid="2431744447544057866">"Delite WiFi"</string>
-    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="6967364080214325016">"Skenirajte ovaj QR kôd pomoću drugog uređaja da biste se pridružili mreži <xliff:g id="SSID">%1$s</xliff:g>"</string>
-    <string name="wifi_dpp_scan_open_network_qr_code_with_another_device" msgid="5398619697898444311">"Skenirajte ovaj QR kôd da biste se pridružili mreži „<xliff:g id="SSID">%1$s</xliff:g>“"</string>
+    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="6967364080214325016">"Skenirajte ovaj QR kôd pomoću drugog uređaja da biste se povezali sa <xliff:g id="SSID">%1$s</xliff:g>"</string>
+    <string name="wifi_dpp_scan_open_network_qr_code_with_another_device" msgid="5398619697898444311">"Skenirajte ovaj QR kôd da biste se povezali sa <xliff:g id="SSID">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_failure_authentication_or_configuration" msgid="847551626830740204">"Probajte ponovo. Ako se problem nastavi, kontaktirajte proizvođača uređaja"</string>
     <string name="wifi_dpp_failure_not_compatible" msgid="4453775826337805825">"Došlo je do greške"</string>
     <string name="wifi_dpp_failure_timeout" msgid="7902971341771145564">"Uverite se da je uređaj priključen na struju, napunjen i uključen"</string>
@@ -871,6 +871,7 @@
     <string name="internet_source_wifi" msgid="6952593095166435179">"WiFi"</string>
     <string name="internet_source_mobile_data" msgid="877403889449201789">"Mobilni podaci"</string>
     <string name="internet_source_ethernet" msgid="8338472576454100966">"Eternet"</string>
+    <string name="hotspot_battery_charging_summary" msgid="6690892148553288457">"<xliff:g id="BATTERY_PERCENTAGE">%s</xliff:g> – Punjenje"</string>
     <string name="hotspot_connection_category" msgid="4320380513982923556">"Hotspot veza"</string>
     <string name="hotspot_connection_strength" msgid="87359986943768421">"Jačina veze"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"Sačuvane mreže"</string>
@@ -3017,8 +3018,7 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"Podrazumevani zvuk obaveštenja"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"Podrazumevani zvuk alarma"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"Vibriraj, pa postepeno zvoni"</string>
-    <!-- no translation found for spatial_audio_title (1775370104206884711) -->
-    <skip />
+    <string name="spatial_audio_title" msgid="1775370104206884711">"Prostorni zvuk"</string>
     <string name="dial_pad_tones_title" msgid="3536945335367914892">"Tonovi numeričke tastature"</string>
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"Zvuk zaključavanja ekrana"</string>
     <string name="charging_sounds_title" msgid="5261683808537783668">"Zvukovi i vibracija punjenja"</string>
@@ -3034,12 +3034,9 @@
     <string name="boot_sounds_title" msgid="5033062848948884111">"Zvukovi pri uključivanju"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"Titl uživo"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"Automatski titl za medije"</string>
-    <!-- no translation found for spatial_audio_speaker (3956755613908467186) -->
-    <skip />
-    <!-- no translation found for spatial_audio_speaker (2261196916411018248) -->
-    <skip />
-    <!-- no translation found for spatial_audio_speaker (3012868526054155189) -->
-    <skip />
+    <string name="spatial_audio_speaker" product="default" msgid="3956755613908467186">"Zvučnici telefona"</string>
+    <string name="spatial_audio_speaker" product="tablet" msgid="2261196916411018248">"Zvučnici tableta"</string>
+    <string name="spatial_audio_speaker" product="device" msgid="3012868526054155189">"Zvučnici uređaja"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Žičane slušalice"</string>
     <string name="spatial_audio_text" msgid="8201387855375146000">"Zvuk kompatibilnih medija postaje realističniji"</string>
     <string name="spatial_summary_off" msgid="8272678804629774378">"Isključeno"</string>
@@ -3855,32 +3852,21 @@
     <string name="app_battery_usage_title" msgid="346558380609793334">"Potrošnja baterije za aplikacije"</string>
     <string name="app_battery_usage_summary" msgid="6349965904306339539">"Podesite potrošnju baterije za aplikacije"</string>
     <string name="battery_tips_card_action_button" msgid="4897793527424711648">"Prikaži podešavanja"</string>
-    <!-- no translation found for battery_tips_card_action_button_check (1535140204105479318) -->
-    <skip />
+    <string name="battery_tips_card_action_button_check" msgid="1535140204105479318">"Proveri"</string>
     <string name="battery_tips_card_dismiss_button" msgid="1885756985544936618">"Važi"</string>
     <string name="battery_tips_card_feedback_info" msgid="767117835675157298">"Da li vam je ova poruka bila korisna?"</string>
-    <!-- no translation found for battery_hints_warning_icon_a11y (5312542323401447620) -->
-    <skip />
+    <string name="battery_hints_warning_icon_a11y" msgid="5312542323401447620">"Ikona upozorenja za savete o bateriji"</string>
     <string name="battery_tips_settings_summary_brightness" msgid="546145032616077783">"Uključite prilagodljivu osvetljenost da biste produžili trajanje baterije"</string>
     <string name="battery_tips_settings_summary_screen_timeout" msgid="556801426050962077">"Skratite vreme do gašenja ekrana da biste produžili trajanje baterije"</string>
-    <!-- no translation found for battery_tips_apps_summary_always_high (6334519477067044920) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_higher_than_usual (95676961671544628) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_always_high_in_background (2953858181710181126) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_higher_than_usual_in_background (1585002072567422199) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_always_high_in_foreground (1910991243576404700) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_higher_than_usual_in_foreground (7937337570425168210) -->
-    <skip />
-    <!-- no translation found for battery_app_item_hint (4850929961461039110) -->
-    <skip />
-    <!-- no translation found for battery_app_item_hint_in_bg (596240821466388336) -->
-    <skip />
-    <!-- no translation found for battery_app_item_hint_in_fg (5091860632260799910) -->
-    <skip />
+    <string name="battery_tips_apps_summary_always_high" msgid="6334519477067044920">"<xliff:g id="APP_LABEL">%1$s</xliff:g> koristi više baterije"</string>
+    <string name="battery_tips_apps_summary_higher_than_usual" msgid="95676961671544628">"<xliff:g id="APP_LABEL">%1$s</xliff:g> koristi više baterije nego obično"</string>
+    <string name="battery_tips_apps_summary_always_high_in_background" msgid="2953858181710181126">"<xliff:g id="APP_LABEL">%1$s</xliff:g> koristi više baterije dok je u pozadini"</string>
+    <string name="battery_tips_apps_summary_higher_than_usual_in_background" msgid="1585002072567422199">"<xliff:g id="APP_LABEL">%1$s</xliff:g> koristi više baterije nego obično dok je u pozadini"</string>
+    <string name="battery_tips_apps_summary_always_high_in_foreground" msgid="1910991243576404700">"<xliff:g id="APP_LABEL">%1$s</xliff:g> koristi više energije dok je u prvom planu"</string>
+    <string name="battery_tips_apps_summary_higher_than_usual_in_foreground" msgid="7937337570425168210">"<xliff:g id="APP_LABEL">%1$s</xliff:g> koristi više energije nego obično dok je u prvom planu"</string>
+    <string name="battery_app_item_hint" msgid="4850929961461039110">"Velika potrošnja baterije"</string>
+    <string name="battery_app_item_hint_in_bg" msgid="596240821466388336">"Velika potrošnja baterije u pozadini"</string>
+    <string name="battery_app_item_hint_in_fg" msgid="5091860632260799910">"Velika potrošnja baterije u prvom planu"</string>
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Neograničeno"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Optimizovano"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"Zabranjeno"</string>
@@ -4197,8 +4183,10 @@
     <!-- no translation found for graphics_driver_app_preference_values:1 (485288770206606512) -->
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
-    <string name="enable_angle_as_system_driver" msgid="3985105681812713612">"Omogući ANGLE"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="6413038127558166972">"Omogućava ANGLE kao podrazumevani OpenGL ES upravljački program. Ako ovo omogućite na nekompatibilnim uređajima, možda ćete oštetiti neke aplikacije."</string>
+    <!-- no translation found for enable_angle_as_system_driver (4648827560023949786) -->
+    <skip />
+    <!-- no translation found for enable_angle_as_system_driver_summary (2170215556348477481) -->
+    <skip />
     <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"Morate da restartujete da biste promenili OpenGL ES upravljački program sistema"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Promene kompatibilnosti aplikacije"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Uključite/isključite promene kompatibilnosti aplikacije"</string>
@@ -4759,6 +4747,10 @@
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Razmera"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"Isprobajte novu razmeru da biste pregledali sadržaj ove aplikacije ako nije dizajnirana da staje na uređaj <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"Isprobajte novu razmeru da biste pregledali sadržaj ove aplikacije ako nije dizajnirana da staje na uređaj <xliff:g id="DEVICE_NAME">%1$s</xliff:g> Neke aplikacije možda neće biti optimizovane za određene razmere."</string>
+    <!-- no translation found for aspect_ratio_summary_text (4737461467467220325) -->
+    <skip />
+    <!-- no translation found for aspect_ratio_main_summary_text (5544816872094235840) -->
+    <skip />
     <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"Predložene aplikacije"</string>
     <string name="user_aspect_ratio_changed_apps_label" msgid="2096614916172567672">"Izmenjene apl."</string>
     <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"Podrazumevana za aplikacije"</string>

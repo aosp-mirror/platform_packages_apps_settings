@@ -787,7 +787,7 @@
     <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"\"<xliff:g id="SSID">%1$s</xliff:g>\" тармагына кошулуу үчүн камераны төмөнкү QR кодго алып келиңиз"</string>
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"Wi‑Fi\'га кошулуу үчүн QR кодду скандаңыз"</string>
     <string name="wifi_dpp_share_wifi" msgid="2431744447544057866">"Wi‑Fi\'ды бөлүшүү"</string>
-    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="6967364080214325016">"\"<xliff:g id="SSID">%1$s</xliff:g>\" тармагына кошулуу үчүн башка түзмөктө QR кодду скандаңыз"</string>
+    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="6967364080214325016">"\"<xliff:g id="SSID">%1$s</xliff:g>\" тармагына кошулуу үчүн башка түзмөктөгү QR кодду скандаңыз"</string>
     <string name="wifi_dpp_scan_open_network_qr_code_with_another_device" msgid="5398619697898444311">"\"<xliff:g id="SSID">%1$s</xliff:g>\" тармагына туташуу үчүн, бул QR кодду скандаңыз"</string>
     <string name="wifi_dpp_failure_authentication_or_configuration" msgid="847551626830740204">"Кайталап көрүңүз. Эгер маселе чечилбесе, түзмөктү өндүрүүчүгө кайрылыңыз"</string>
     <string name="wifi_dpp_failure_not_compatible" msgid="4453775826337805825">"Бир жерден ката кетти"</string>
@@ -871,6 +871,7 @@
     <string name="internet_source_wifi" msgid="6952593095166435179">"Wi‑Fi"</string>
     <string name="internet_source_mobile_data" msgid="877403889449201789">"Мобилдик трафик"</string>
     <string name="internet_source_ethernet" msgid="8338472576454100966">"Ethernet"</string>
+    <string name="hotspot_battery_charging_summary" msgid="6690892148553288457">"<xliff:g id="BATTERY_PERCENTAGE">%s</xliff:g> ‑ Кубатталууда"</string>
     <string name="hotspot_connection_category" msgid="4320380513982923556">"Байланыш түйүнүнө туташуу"</string>
     <string name="hotspot_connection_strength" msgid="87359986943768421">"Туташуунун күчү"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"Сакталган тармактар"</string>
@@ -1521,7 +1522,7 @@
     <string name="lock_settings_profile_unification_title" msgid="5777961097706546513">"Бир кулпулоо ыкмасын колдонуу"</string>
     <string name="lock_settings_profile_unification_summary" msgid="1317553536289481654">"Жумуш профили менен түзмөктүн экраны бир ыкма менен кулпуланат"</string>
     <string name="lock_settings_profile_unification_dialog_title" msgid="5163178097464820825">"Бир эле кулпу пайдаланасызбы?"</string>
-    <string name="lock_settings_profile_unification_dialog_body" msgid="1222905637428672355">"Түзмөгүңүз менен жумуш профилиңиз окшош ыкма менен кулпуланат. Жумуш профилинин саясаттары эки кулпуга тең тиешелүү болот."</string>
+    <string name="lock_settings_profile_unification_dialog_body" msgid="1222905637428672355">"Түзмөгүңүз менен жумуш профилиңиз окшош ыкма менен кулпуланат. Жумуш профилинин эрежелери эки кулпуга тең тиешелүү болот."</string>
     <string name="lock_settings_profile_unification_dialog_uncompliant_body" msgid="8844682343443755895">"Учурдагы экранды кулпулоо параметрлери уюмуңуздун коопсуздук талаптарына жооп бербейт. Түзмөгүңүздүн экраны менен жумуш профилиңиз үчүн бир эле кулпуну койсоңуз болот, эң негизгиси, ал уюмдун талаптарына жооп бериши керек."</string>
     <string name="lock_settings_profile_unification_dialog_confirm" msgid="6276915393736137843">"Бир кулпулоо ыкмасын колдонуу"</string>
     <string name="lock_settings_profile_unification_dialog_uncompliant_confirm" msgid="8509287115116369677">"Бир кулпулоо ыкмасын колдонуу"</string>
@@ -3017,8 +3018,7 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"Билдирменин демейки үнү"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"Ойготкучтун демейки үнү"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"Дирилдеп, анан катуулап шыңгырасын"</string>
-    <!-- no translation found for spatial_audio_title (1775370104206884711) -->
-    <skip />
+    <string name="spatial_audio_title" msgid="1775370104206884711">"Мейкиндиктүү үн"</string>
     <string name="dial_pad_tones_title" msgid="3536945335367914892">"Номерлерди тергенде үн чыксын"</string>
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"Экранды кулпулоо добушу"</string>
     <string name="charging_sounds_title" msgid="5261683808537783668">"Кубаттоо үндөрү жана дирилдөө"</string>
@@ -3034,12 +3034,9 @@
     <string name="boot_sounds_title" msgid="5033062848948884111">"Түзмөк күйгүзүлгөндөгү үндөр"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"Ыкчам коштомо жазуулар"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"Автоматтык коштомо жазуулар"</string>
-    <!-- no translation found for spatial_audio_speaker (3956755613908467186) -->
-    <skip />
-    <!-- no translation found for spatial_audio_speaker (2261196916411018248) -->
-    <skip />
-    <!-- no translation found for spatial_audio_speaker (3012868526054155189) -->
-    <skip />
+    <string name="spatial_audio_speaker" product="default" msgid="3956755613908467186">"Телефондун динамиктери"</string>
+    <string name="spatial_audio_speaker" product="tablet" msgid="2261196916411018248">"Планшеттин динамиктери"</string>
+    <string name="spatial_audio_speaker" product="device" msgid="3012868526054155189">"Түзмөктүн динамиктери"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Зымдуу гарнитура"</string>
     <string name="spatial_audio_text" msgid="8201387855375146000">"Шайкеш түзмөктөрдөн чыккан үн таасирдүү угулат"</string>
     <string name="spatial_summary_off" msgid="8272678804629774378">"Өчүк"</string>
@@ -3855,32 +3852,21 @@
     <string name="app_battery_usage_title" msgid="346558380609793334">"Колдонмонун батареяны колдонушу"</string>
     <string name="app_battery_usage_summary" msgid="6349965904306339539">"Колдонмолордо батареянын керектелишин тууралоо"</string>
     <string name="battery_tips_card_action_button" msgid="4897793527424711648">"Параметрлерди көрүү"</string>
-    <!-- no translation found for battery_tips_card_action_button_check (1535140204105479318) -->
-    <skip />
+    <string name="battery_tips_card_action_button_check" msgid="1535140204105479318">"Текшерүү"</string>
     <string name="battery_tips_card_dismiss_button" msgid="1885756985544936618">"Түшүндүм"</string>
     <string name="battery_tips_card_feedback_info" msgid="767117835675157298">"Бул билдирүү пайдалуубу?"</string>
-    <!-- no translation found for battery_hints_warning_icon_a11y (5312542323401447620) -->
-    <skip />
+    <string name="battery_hints_warning_icon_a11y" msgid="5312542323401447620">"Батареянын колдонулушу боюнча эскертүүнүн сүрөтчөсү"</string>
     <string name="battery_tips_settings_summary_brightness" msgid="546145032616077783">"Батареяны көпкө жеткирүү үчүн ыңгайлашуучу жарыкты күйгүзүңүз"</string>
     <string name="battery_tips_settings_summary_screen_timeout" msgid="556801426050962077">"Батареяны көпкө жеткирүү үчүн экрандын өчүү убакытын кыскартыңыз"</string>
-    <!-- no translation found for battery_tips_apps_summary_always_high (6334519477067044920) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_higher_than_usual (95676961671544628) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_always_high_in_background (2953858181710181126) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_higher_than_usual_in_background (1585002072567422199) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_always_high_in_foreground (1910991243576404700) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_higher_than_usual_in_foreground (7937337570425168210) -->
-    <skip />
-    <!-- no translation found for battery_app_item_hint (4850929961461039110) -->
-    <skip />
-    <!-- no translation found for battery_app_item_hint_in_bg (596240821466388336) -->
-    <skip />
-    <!-- no translation found for battery_app_item_hint_in_fg (5091860632260799910) -->
-    <skip />
+    <string name="battery_tips_apps_summary_always_high" msgid="6334519477067044920">"<xliff:g id="APP_LABEL">%1$s</xliff:g> батареяны көбүрөөк колдонду"</string>
+    <string name="battery_tips_apps_summary_higher_than_usual" msgid="95676961671544628">"<xliff:g id="APP_LABEL">%1$s</xliff:g> батареяны адаттагыдан көбүрөөк колдонду"</string>
+    <string name="battery_tips_apps_summary_always_high_in_background" msgid="2953858181710181126">"<xliff:g id="APP_LABEL">%1$s</xliff:g> батареяны фондо көбүрөөк колдонду"</string>
+    <string name="battery_tips_apps_summary_higher_than_usual_in_background" msgid="1585002072567422199">"<xliff:g id="APP_LABEL">%1$s</xliff:g> батареяны фондо адаттагыдан көбүрөөк колдонду"</string>
+    <string name="battery_tips_apps_summary_always_high_in_foreground" msgid="1910991243576404700">"<xliff:g id="APP_LABEL">%1$s</xliff:g> батареяны активдүү режимде көбүрөөк колдонду"</string>
+    <string name="battery_tips_apps_summary_higher_than_usual_in_foreground" msgid="7937337570425168210">"<xliff:g id="APP_LABEL">%1$s</xliff:g> батареяны активдүү режимде адаттагыдан көбүрөөк колдонду"</string>
+    <string name="battery_app_item_hint" msgid="4850929961461039110">"Батарея көбүрөөк колдонулууда."</string>
+    <string name="battery_app_item_hint_in_bg" msgid="596240821466388336">"Батарея фондо көбүрөөк колдонулууда"</string>
+    <string name="battery_app_item_hint_in_fg" msgid="5091860632260799910">"Батарея активдүү режимде көбүрөөк колдонулууда"</string>
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Чектелген эмес"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Оптималдаштырылган"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"Чектелген"</string>
@@ -4197,8 +4183,10 @@
     <!-- no translation found for graphics_driver_app_preference_values:1 (485288770206606512) -->
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
-    <string name="enable_angle_as_system_driver" msgid="3985105681812713612">"ANGLE\'ди иштетүү"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="6413038127558166972">"ANGLE\'ди демейки OpenGL ES драйвери катары иштетиңиз. Ал шайкеш келбеген түзмөктөрдө иштетилсе, айрым колдонмолор бузулушу мүмкүн."</string>
+    <!-- no translation found for enable_angle_as_system_driver (4648827560023949786) -->
+    <skip />
+    <!-- no translation found for enable_angle_as_system_driver_summary (2170215556348477481) -->
+    <skip />
     <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"Тутумдун OpenGL ES драйверин өзгөртүү үчүн өчүрүп-күйгүзүү керек"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Колдонмонун шайкештигиндеги өзгөрүүлөр"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Колдонмонун шайкештигине киргизилген өзртүүлөрдү өчүрүү/күйгүзүү"</string>
@@ -4435,7 +4423,7 @@
     <string name="wfc_disclaimer_agree_button_text" msgid="4082872292910770344">"ООБА"</string>
     <string name="wfc_disclaimer_disagree_text" msgid="8424457394700137703">"ЖОК, РАХМАТ"</string>
     <string name="wfc_disclaimer_location_title_text" msgid="7913919887475418423">"Жайгашкан жер"</string>
-    <string name="wfc_disclaimer_location_desc_text" msgid="1417004513415772582">"Шашылыш чалуулар үчүн бул кызматты колдонгонуңузда, байланыш операторуңуз жайгашкан жериңиз тууралуу маалыматты чогултушу мүмкүн.\n\nКеңири маалымат алуу үчүн байланыш операторуңуздун купуялык саясатына баш багыңыз."</string>
+    <string name="wfc_disclaimer_location_desc_text" msgid="1417004513415772582">"Шашылыш чалуулар үчүн бул кызматты колдонгонуңузда, байланыш операторуңуз жайгашкан жериңиз тууралуу маалыматты чогултушу мүмкүн.\n\nКеңири маалымат алуу үчүн байланыш операторуңуздун купуялык эрежелерине баш багыңыз."</string>
     <string name="forget_passpoint_dialog_message" msgid="2433875063907365760">"Калган убакытты же маалыматтарды пайдалануу мүмкүнчүлүгүнөн айрыласыз. Өчүрүүдөн мурда, операторуңузга байланышыңыз."</string>
     <string name="content_capture" msgid="868372905432812238">"Колдонмонун мазмуну"</string>
     <string name="content_capture_summary" msgid="49720773699715531">"Колдонмолорго Android системасында материалдарды жөнөтүүгө уруксат бересиз"</string>
@@ -4714,10 +4702,8 @@
     <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"Шайкеш түзмөктөрдөн чыккан үн таасирдүү угулат"</string>
     <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"Баштын кыймылына көз салуу"</string>
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"Үн табигый угулушу үчүн башыңызды кыймылдатканыңызда аудио өзгөрөт"</string>
-    <!-- no translation found for bluetooth_details_permissions_sync_title (584337314155926373) -->
-    <skip />
-    <!-- no translation found for bluetooth_details_permissions_sync_summary (3426601558010545762) -->
-    <skip />
+    <string name="bluetooth_details_permissions_sync_title" msgid="584337314155926373">"Уруксаттарды шайкештирүү"</string>
+    <string name="bluetooth_details_permissions_sync_summary" msgid="3426601558010545762">"<xliff:g id="REMOTE_DEVICE_NAME">%1$s</xliff:g> түзмөгүндө <xliff:g id="LOCAL_DEVICE_NAME">%2$s</xliff:g> түзмөгүндөгү колдонмонун уруксаттарын иштетиңиз"</string>
     <string name="bluetooth_details_audio_device_types_title" msgid="3381941189346781614">"Аудио түзмөктүн түрү"</string>
     <string name="bluetooth_details_audio_device_type_unknown" msgid="839337391037998014">"Белгисиз"</string>
     <string name="bluetooth_details_audio_device_type_speaker" msgid="3706227767994792124">"Динамик"</string>
@@ -4760,6 +4746,10 @@
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Тараптардын катнашы"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"Эгер колдонмо <xliff:g id="DEVICE_NAME">%1$s</xliff:g> үчүн түзүлбөсө, аны көрүү үчүн жаңы тараптардын катнашын колдонуп көрүңүз"</string>
     <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"Эгер колдонмо <xliff:g id="DEVICE_NAME">%1$s</xliff:g> үчүн түзүлгөн эмес болсо, аны көрүү үчүн жаңы тараптардын катнашын колдонуп көрүңүз. Айрым колдонмолор белгилүү бир тараптардын катнаштары үчүн оптималдаштырылбашы мүмкүн."</string>
+    <!-- no translation found for aspect_ratio_summary_text (4737461467467220325) -->
+    <skip />
+    <!-- no translation found for aspect_ratio_main_summary_text (5544816872094235840) -->
+    <skip />
     <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"Сунушталган колдонмолор"</string>
     <string name="user_aspect_ratio_changed_apps_label" msgid="2096614916172567672">"Өзгөртүлгөндөр"</string>
     <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"Колдонмодогу демейки маани"</string>

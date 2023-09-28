@@ -519,7 +519,7 @@
     <string name="lock_settings_picker_profile_message" msgid="9142379549980873478">"Wenn du diese Sperre vergisst, bitte deinen IT-Administrator, sie zurückzusetzen"</string>
     <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"Optionen für die Displaysperre"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="7985107300517468569">"Optionen für die Displaysperre"</string>
-    <string name="lock_screen_auto_pin_confirm_title" msgid="3012128112186088375">"Zum Entsperren automatisch bestätigen"</string>
+    <string name="lock_screen_auto_pin_confirm_title" msgid="3012128112186088375">"Entsperren mit automatischer Bestätigung"</string>
     <string name="lock_screen_auto_pin_confirm_summary" msgid="9050818870806580819">"Der Bildschirm wird automatisch entsperrt, wenn du eine korrekte PIN mit 6 oder mehr Ziffern eingibst. Diese Option ist etwas weniger sicher, als wenn du zum Bestätigen auf „Eingabe“ tippst."</string>
     <string name="auto_pin_confirm_user_message" msgid="6194556173488939314">"Korrekte PIN automatisch bestätigen"</string>
     <string name="auto_pin_confirm_opt_in_security_message" msgid="580773976736184893">"Die Bestätigung deiner PIN durch Tippen auf „Eingabe“ ist sicherer als die automatische Bestätigung"</string>
@@ -871,6 +871,7 @@
     <string name="internet_source_wifi" msgid="6952593095166435179">"WLAN"</string>
     <string name="internet_source_mobile_data" msgid="877403889449201789">"Mobile Daten"</string>
     <string name="internet_source_ethernet" msgid="8338472576454100966">"Ethernet"</string>
+    <string name="hotspot_battery_charging_summary" msgid="6690892148553288457">"<xliff:g id="BATTERY_PERCENTAGE">%s</xliff:g> – Wird geladen"</string>
     <string name="hotspot_connection_category" msgid="4320380513982923556">"Hotspot-Verbindung"</string>
     <string name="hotspot_connection_strength" msgid="87359986943768421">"Verbindungsstärke"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"Gespeicherte WLANs"</string>
@@ -3284,7 +3285,7 @@
     <string name="notification_access_detail_switch" msgid="46386786409608330">"Benachrichtigungszugriff erlauben"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Die adaptiven Benachrichtigungen wurden in Android 12 durch die Funktion „Erweiterte Benachrichtigungen“ ersetzt. Diese Funktion zeigt Vorschläge für Aktionen und Antworten an und sortiert Benachrichtigungen. \n\nDie Funktion hat Zugriff auf alle Benachrichtigungen, darunter auch personenbezogene Daten wie Kontaktnamen und Nachrichten. Außerdem kann sie auf Benachrichtigungen antworten oder diese schließen und so beispielsweise Anrufe entgegennehmen oder „Bitte nicht stören“ steuern."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Benachrichtigungszugriff für <xliff:g id="SERVICE">%1$s</xliff:g> zulassen?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="1131986567509818121">"Die App „<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>“ kann alle Benachrichtigungen abrufen, darunter auch personenbezogene Daten wie Kontaktnamen, Fotos und eingehende Nachrichten. Außerdem kann die App Benachrichtigungen zurückstellen oder schließen sowie Schaltflächen in Benachrichtigungen auslösen und so beispielsweise Anrufe entgegennehmen. \n\nZusätzlich wird sie in die Lage versetzt, die „Bitte nicht stören“-Funktion zu aktivieren oder zu deaktivieren und zugehörige Einstellungen zu ändern."</string>
+    <string name="notification_listener_security_warning_summary" msgid="1131986567509818121">"Die App „<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>“ kann alle Benachrichtigungen lesen, darunter auch personenbezogene Daten wie Kontaktnamen, Fotos und eingehende Nachrichten. Außerdem kann die App Benachrichtigungen zurückstellen oder schließen sowie Schaltflächen in Benachrichtigungen auslösen und so beispielsweise Anrufe entgegennehmen. \n\nZusätzlich wird sie in die Lage versetzt, die „Bitte nicht stören“-Funktion zu aktivieren oder zu deaktivieren und zugehörige Einstellungen zu ändern."</string>
     <string name="nls_warning_prompt" msgid="1486887096703743841">"Die App „<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>“ kann Folgendes:"</string>
     <string name="nls_feature_read_title" msgid="7629713268744220437">"Benachrichtigungen abrufen"</string>
     <string name="nls_feature_read_summary" msgid="1064698238110273593">"Sie kann deine Benachrichtigungen abrufen, darunter auch personenbezogene Daten wie Kontakte, Nachrichten und Fotos."</string>
@@ -4197,8 +4198,10 @@
     <!-- no translation found for graphics_driver_app_preference_values:1 (485288770206606512) -->
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
-    <string name="enable_angle_as_system_driver" msgid="3985105681812713612">"ANGLE aktivieren"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="6413038127558166972">"ANGLE als OpenGL ES-Standardtreiber aktivieren. Wenn du diese Option auf nicht kompatiblen Geräten aktivierst, funktionieren manche Apps möglicherweise nicht."</string>
+    <!-- no translation found for enable_angle_as_system_driver (4648827560023949786) -->
+    <skip />
+    <!-- no translation found for enable_angle_as_system_driver_summary (2170215556348477481) -->
+    <skip />
     <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"Ein Neustart ist erforderlich, um den OpenGL ES-Systemtreiber zu ändern"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Änderungen der Kompatibilität von Apps"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Änderungen bei der Kompatibilität von Apps festlegen"</string>
@@ -4714,10 +4717,8 @@
     <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"Klang von kompatiblen Medien wird noch voller"</string>
     <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"Erfassung von Kopfbewegungen"</string>
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"Änderungen am Ton, während du deinen Kopf bewegst, damit er natürlicher klingt"</string>
-    <!-- no translation found for bluetooth_details_permissions_sync_title (584337314155926373) -->
-    <skip />
-    <!-- no translation found for bluetooth_details_permissions_sync_summary (3426601558010545762) -->
-    <skip />
+    <string name="bluetooth_details_permissions_sync_title" msgid="584337314155926373">"Berechtigungen synchronisieren"</string>
+    <string name="bluetooth_details_permissions_sync_summary" msgid="3426601558010545762">"Gib <xliff:g id="REMOTE_DEVICE_NAME">%1$s</xliff:g> dieselben App-Berechtigungen, die du auch auf <xliff:g id="LOCAL_DEVICE_NAME">%2$s</xliff:g> gewährt hast"</string>
     <string name="bluetooth_details_audio_device_types_title" msgid="3381941189346781614">"Audiogerätetyp"</string>
     <string name="bluetooth_details_audio_device_type_unknown" msgid="839337391037998014">"Unbekannt"</string>
     <string name="bluetooth_details_audio_device_type_speaker" msgid="3706227767994792124">"Lautsprecher"</string>
@@ -4760,6 +4761,10 @@
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Seitenverhältnis"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"Probiere ein neues Seitenverhältnis für diese App aus, wenn sie nicht für dein Gerät (<xliff:g id="DEVICE_NAME">%1$s</xliff:g>) optimiert ist"</string>
     <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"Probiere ein neues Seitenverhältnis für diese App aus, wenn sie nicht für dein Gerät (<xliff:g id="DEVICE_NAME">%1$s</xliff:g>) optimiert ist. Einige Apps sind möglicherweise nicht für bestimmte Seitenverhältnisse optimiert."</string>
+    <!-- no translation found for aspect_ratio_summary_text (4737461467467220325) -->
+    <skip />
+    <!-- no translation found for aspect_ratio_main_summary_text (5544816872094235840) -->
+    <skip />
     <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"Vorgeschlagene Apps"</string>
     <string name="user_aspect_ratio_changed_apps_label" msgid="2096614916172567672">"Geänderte Apps"</string>
     <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"App-Standard"</string>

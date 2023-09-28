@@ -810,7 +810,7 @@
     <string name="wifi_dpp_connecting" msgid="2312769193202897589">"جارٍ الاتصال…"</string>
     <string name="wifi_dpp_share_hotspot" msgid="6186452780604755316">"مشاركة نقطة الاتصال"</string>
     <string name="wifi_dpp_lockscreen_title" msgid="5246641326066972419">"التحقق من هويتك"</string>
-    <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"‏كلمة مرور Wi-Fi هي:  <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
+    <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"‏كلمة مرور Wi-Fi هي: ‎ ‎<xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"كلمة مرور نقطة الاتصال: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"اتصال تلقائي"</string>
     <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"السماح بالاتصال بهذه الشبكة عندما تكون في نطاقها"</string>
@@ -871,6 +871,7 @@
     <string name="internet_source_wifi" msgid="6952593095166435179">"Wi-Fi"</string>
     <string name="internet_source_mobile_data" msgid="877403889449201789">"بيانات الجوّال"</string>
     <string name="internet_source_ethernet" msgid="8338472576454100966">"إيثرنت"</string>
+    <string name="hotspot_battery_charging_summary" msgid="6690892148553288457">"‫<xliff:g id="BATTERY_PERCENTAGE">%s</xliff:g> - جارٍ الشحن"</string>
     <string name="hotspot_connection_category" msgid="4320380513982923556">"الاتصال بالإنترنت عبر نقطة اتصال"</string>
     <string name="hotspot_connection_strength" msgid="87359986943768421">"قوة الاتصال بالشبكة"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"الشبكات المحفوظة"</string>
@@ -1140,7 +1141,7 @@
     <string name="build_number" msgid="9009733242117579826">"رقم الإصدار"</string>
     <string name="module_version" msgid="1787518340082046658">"‏تحديث نظام Google Play"</string>
     <string name="battery_info" msgid="7873528123969546728">"معلومات البطارية"</string>
-    <string name="device_info_not_available" msgid="4804474466616712326">"غير متاح"</string>
+    <string name="device_info_not_available" msgid="4804474466616712326">"غير متاحة"</string>
     <string name="storage_settings" msgid="7472188817781592677">"التخزين"</string>
     <string name="storage_settings_for_app" msgid="229425418984637483">"مساحة التخزين وذاكرة التخزين المؤقت"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"إعدادات وحدة التخزين"</string>
@@ -2246,7 +2247,7 @@
     <string name="battery_tip_restrict_app_dialog_message" msgid="137856003724730751">"لتوفير شحن البطارية، أوقف <xliff:g id="APP">%1$s</xliff:g> عن استخدام البطارية في الخلفية علمًا بأن هذا التطبيق قد لا يعمل على نحو صحيح وقد تتأخر الإشعارات."</string>
     <string name="battery_tip_restrict_apps_less_than_5_dialog_message" msgid="5894648804112181324">"لتوفير شحن البطارية، أوقف هذه التطبيقات عن استخدام البطارية في الخلفية علمًا بأن التطبيقات المقيدة قد لا تعمل على نحو صحيح وقد تتأخر الإشعارات.\n\nالتطبيقات:"</string>
     <string name="battery_tip_restrict_apps_more_than_5_dialog_message" msgid="4546838397423565138">"لتوفير شحن البطارية، أوقف هذه التطبيقات عن استخدام البطارية في الخلفية علمًا بأن التطبيقات المقيدة قد لا تعمل على نحو صحيح وقد تتأخر الإشعارات.\n\nالتطبيقات:\n<xliff:g id="APP_LIST">%1$s</xliff:g>."</string>
-    <string name="battery_tip_restrict_app_dialog_ok" msgid="7025027696689301916">"تقييد"</string>
+    <string name="battery_tip_restrict_app_dialog_ok" msgid="7025027696689301916">"حظر"</string>
     <string name="battery_tip_unrestrict_app_dialog_title" msgid="5501997201160532301">"هل تريد إزالة التقييد؟"</string>
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"سيتمكّن هذا التطبيق من استخدام البطارية في الخلفية، وقد يؤدي ذلك إلى نفاد شحنها قبل الوقت المتوقع."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"إزالة"</string>
@@ -3017,8 +3018,7 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"الصوت التلقائي للإشعارات"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"الصوت التلقائي للمنبّه"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"الاهتزاز أولاً ثم الرنين تدريجيًا"</string>
-    <!-- no translation found for spatial_audio_title (1775370104206884711) -->
-    <skip />
+    <string name="spatial_audio_title" msgid="1775370104206884711">"الصوت المكاني"</string>
     <string name="dial_pad_tones_title" msgid="3536945335367914892">"نغمات لوحة الاتصال"</string>
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"صوت قفل الشاشة"</string>
     <string name="charging_sounds_title" msgid="5261683808537783668">"الأصوات والاهتزاز عند الشحن"</string>
@@ -3034,12 +3034,9 @@
     <string name="boot_sounds_title" msgid="5033062848948884111">"أصوات تشغيل الجهاز"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"النسخ النصي التلقائي"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"شرح تلقائي للوسائط"</string>
-    <!-- no translation found for spatial_audio_speaker (3956755613908467186) -->
-    <skip />
-    <!-- no translation found for spatial_audio_speaker (2261196916411018248) -->
-    <skip />
-    <!-- no translation found for spatial_audio_speaker (3012868526054155189) -->
-    <skip />
+    <string name="spatial_audio_speaker" product="default" msgid="3956755613908467186">"مكبّرات صوت الهاتف"</string>
+    <string name="spatial_audio_speaker" product="tablet" msgid="2261196916411018248">"مكبّرات صوت الجهاز اللوحي"</string>
+    <string name="spatial_audio_speaker" product="device" msgid="3012868526054155189">"مكبّرات صوت الجهاز"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"سماعات الرأس السلكية"</string>
     <string name="spatial_audio_text" msgid="8201387855375146000">"الصوت الصادر من الوسائط المتوافقة يصبح أكثر وضوحًا."</string>
     <string name="spatial_summary_off" msgid="8272678804629774378">"غير مفعّل"</string>
@@ -3855,32 +3852,21 @@
     <string name="app_battery_usage_title" msgid="346558380609793334">"استخدام التطبيقات للبطارية"</string>
     <string name="app_battery_usage_summary" msgid="6349965904306339539">"ضبط إعدادات استخدام التطبيقات للبطارية"</string>
     <string name="battery_tips_card_action_button" msgid="4897793527424711648">"عرض الإعدادات"</string>
-    <!-- no translation found for battery_tips_card_action_button_check (1535140204105479318) -->
-    <skip />
+    <string name="battery_tips_card_action_button_check" msgid="1535140204105479318">"التحقّق"</string>
     <string name="battery_tips_card_dismiss_button" msgid="1885756985544936618">"حسنًا"</string>
     <string name="battery_tips_card_feedback_info" msgid="767117835675157298">"هل هذه الرسالة مفيدة؟"</string>
-    <!-- no translation found for battery_hints_warning_icon_a11y (5312542323401447620) -->
-    <skip />
+    <string name="battery_hints_warning_icon_a11y" msgid="5312542323401447620">"رمز تحذير ضِمن نصائح حول البطارية"</string>
     <string name="battery_tips_settings_summary_brightness" msgid="546145032616077783">"تفعيل ميزة \"السطوع التكيُّفي\" لإطالة عمر البطارية"</string>
     <string name="battery_tips_settings_summary_screen_timeout" msgid="556801426050962077">"تقليل المهلة قبل غلق الشاشة لإطالة عمر البطارية"</string>
-    <!-- no translation found for battery_tips_apps_summary_always_high (6334519477067044920) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_higher_than_usual (95676961671544628) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_always_high_in_background (2953858181710181126) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_higher_than_usual_in_background (1585002072567422199) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_always_high_in_foreground (1910991243576404700) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_higher_than_usual_in_foreground (7937337570425168210) -->
-    <skip />
-    <!-- no translation found for battery_app_item_hint (4850929961461039110) -->
-    <skip />
-    <!-- no translation found for battery_app_item_hint_in_bg (596240821466388336) -->
-    <skip />
-    <!-- no translation found for battery_app_item_hint_in_fg (5091860632260799910) -->
-    <skip />
+    <string name="battery_tips_apps_summary_always_high" msgid="6334519477067044920">"استهلك تطبيق \"<xliff:g id="APP_LABEL">%1$s</xliff:g>\" مقدارًا أعلى من طاقة البطارية."</string>
+    <string name="battery_tips_apps_summary_higher_than_usual" msgid="95676961671544628">"استهلك تطبيق \"<xliff:g id="APP_LABEL">%1$s</xliff:g>\" مقدارًا أكبر من المُعتاد من طاقة البطارية."</string>
+    <string name="battery_tips_apps_summary_always_high_in_background" msgid="2953858181710181126">"استهلك تطبيق \"<xliff:g id="APP_LABEL">%1$s</xliff:g>\" مقدارًا أعلى من طاقة البطارية أثناء تشغيله في الخلفية."</string>
+    <string name="battery_tips_apps_summary_higher_than_usual_in_background" msgid="1585002072567422199">"استهلك تطبيق \"<xliff:g id="APP_LABEL">%1$s</xliff:g>\" مقدارًا أكبر من المُعتاد من طاقة البطارية أثناء تشغيله في الخلفية."</string>
+    <string name="battery_tips_apps_summary_always_high_in_foreground" msgid="1910991243576404700">"استهلك تطبيق \"<xliff:g id="APP_LABEL">%1$s</xliff:g>\" مقدارًا أعلى من طاقة البطارية أثناء تشغيله في المقدّمة."</string>
+    <string name="battery_tips_apps_summary_higher_than_usual_in_foreground" msgid="7937337570425168210">"استهلك تطبيق \"<xliff:g id="APP_LABEL">%1$s</xliff:g>\" مقدارًا أكبر من المُعتاد من طاقة البطارية أثناء تشغيله في المقدّمة."</string>
+    <string name="battery_app_item_hint" msgid="4850929961461039110">"استهلاك مرتفع للبطارية"</string>
+    <string name="battery_app_item_hint_in_bg" msgid="596240821466388336">"استهلاك مرتفع للبطارية في الخلفية"</string>
+    <string name="battery_app_item_hint_in_fg" msgid="5091860632260799910">"استهلاك مرتفع للبطارية في المقدّمة"</string>
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"الاستخدام غير المحدّد بقيود"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"تم التحسين لإطالة عمر البطارية"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"الاستخدام المحدّد بقيود"</string>
@@ -4197,8 +4183,10 @@
     <!-- no translation found for graphics_driver_app_preference_values:1 (485288770206606512) -->
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
-    <string name="enable_angle_as_system_driver" msgid="3985105681812713612">"‏تفعيل محرِّك ANGLE"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="6413038127558166972">"‏يمكنك تفعيل محرّك ANGLE على أنّه برنامج التشغيل التلقائي OpenGL ES. ويُرجى العِلم بأنّ تفعيله على الأجهزة غير المتوافقة قد يؤدي إلى إيقاف بعض التطبيقات."</string>
+    <!-- no translation found for enable_angle_as_system_driver (4648827560023949786) -->
+    <skip />
+    <!-- no translation found for enable_angle_as_system_driver_summary (2170215556348477481) -->
+    <skip />
     <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"‏يجب إعادة التشغيل لتغيير برنامج تشغيل OpenGL ES الخاص بالنظام."</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"التغييرات في توافق التطبيقات"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"التبديل بين تغييرات توافق التطبيقات"</string>
@@ -4718,10 +4706,8 @@
     <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"الصوت الصادر من الوسائط المتوافقة يصبح أكثر وضوحًا."</string>
     <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"تتبُّع حركة الرأس"</string>
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"يتغيّر الصوت بينما تُحرك رأسك ليبدو طبيعيًا جدًا."</string>
-    <!-- no translation found for bluetooth_details_permissions_sync_title (584337314155926373) -->
-    <skip />
-    <!-- no translation found for bluetooth_details_permissions_sync_summary (3426601558010545762) -->
-    <skip />
+    <string name="bluetooth_details_permissions_sync_title" msgid="584337314155926373">"مزامنة الأذونات"</string>
+    <string name="bluetooth_details_permissions_sync_summary" msgid="3426601558010545762">"منح <xliff:g id="REMOTE_DEVICE_NAME">%1$s</xliff:g> أذونات التطبيقات نفسها التي سبق السماح بها على <xliff:g id="LOCAL_DEVICE_NAME">%2$s</xliff:g>"</string>
     <string name="bluetooth_details_audio_device_types_title" msgid="3381941189346781614">"نوع الجهاز السماعي"</string>
     <string name="bluetooth_details_audio_device_type_unknown" msgid="839337391037998014">"غير معروف"</string>
     <string name="bluetooth_details_audio_device_type_speaker" msgid="3706227767994792124">"مكبّر صوت"</string>
@@ -4764,6 +4750,10 @@
     <string name="aspect_ratio_title" msgid="2451826875939676101">"نسبة العرض إلى الارتفاع"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"جرِّب نسبة عرض إلى ارتفاع جديدة لعرض هذا التطبيق في حال لم يكن مصمّمًا ليلائم \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\"."</string>
     <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"جرِّب نسبة عرض إلى ارتفاع جديدة لعرض هذا التطبيق في حال لم يكن مصمّمًا ليلائم \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\". قد لا تتوافق بعض التطبيقات مع نِسب عرض إلى ارتفاع محدَّدة."</string>
+    <!-- no translation found for aspect_ratio_summary_text (4737461467467220325) -->
+    <skip />
+    <!-- no translation found for aspect_ratio_main_summary_text (5544816872094235840) -->
+    <skip />
     <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"التطبيقات المقترَحة"</string>
     <string name="user_aspect_ratio_changed_apps_label" msgid="2096614916172567672">"تطبيقات معدّلة"</string>
     <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"نسبة العرض إلى الارتفاع التلقائية في التطبيق"</string>
