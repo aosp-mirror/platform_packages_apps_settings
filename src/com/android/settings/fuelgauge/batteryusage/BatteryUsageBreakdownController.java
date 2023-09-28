@@ -146,10 +146,15 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
         return false;
     }
 
-    private String getActionKey(String packageName) {
-        final String actionKey = TextUtils.isEmpty(packageName)
-                ? PACKAGE_NAME_NONE : packageName;
-        return mAnomalyEventId == null ? actionKey : actionKey + "|"  + mAnomalyEventId;
+    private boolean isAnomalyBatteryDiffEntry(BatteryDiffEntry entry) {
+        return mIsHighlightSlot && mAnomalyEntryKey != null
+                && mAnomalyEntryKey.equals(entry.getKey());
+    }
+
+    private String getActionKey(BatteryDiffEntry entry) {
+        final String actionKey = TextUtils.isEmpty(entry.getPackageName())
+                ? PACKAGE_NAME_NONE : entry.getPackageName();
+        return !isAnomalyBatteryDiffEntry(entry) ? actionKey : actionKey + "|"  + mAnomalyEventId;
     }
 
     @Override
@@ -159,17 +164,16 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
         }
         final PowerGaugePreference powerPref = (PowerGaugePreference) preference;
         final BatteryDiffEntry diffEntry = powerPref.getBatteryDiffEntry();
-        final String packageName = diffEntry.getPackageName();
         mMetricsFeatureProvider.action(
                 /* attribution */ SettingsEnums.OPEN_BATTERY_USAGE,
                 /* action */ diffEntry.isSystemEntry()
                         ? SettingsEnums.ACTION_BATTERY_USAGE_SYSTEM_ITEM
                         : SettingsEnums.ACTION_BATTERY_USAGE_APP_ITEM,
                 /* pageId */ SettingsEnums.OPEN_BATTERY_USAGE,
-                getActionKey(packageName),
+                getActionKey(diffEntry),
                 (int) Math.round(diffEntry.getPercentage()));
         Log.d(TAG, String.format("handleClick() label=%s key=%s package=%s",
-                diffEntry.getAppLabel(), diffEntry.getKey(), packageName));
+                diffEntry.getAppLabel(), diffEntry.getKey(), diffEntry.getPackageName()));
         AdvancedPowerUsageDetail.startBatteryDetailPage(
                 mActivity, mFragment, diffEntry, powerPref.getPercentage(), mSlotTimestamp);
         return true;
@@ -324,9 +328,7 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
             pref.setOrder(prefIndex);
             pref.setSingleLineTitle(true);
             // Updates App item preference style
-            pref.setAnomalyHint(mIsHighlightSlot && mAnomalyEntryKey != null
-                    && mAnomalyEntryKey.equals(entry.getKey())
-                    ? mAnomalyHintString : null);
+            pref.setAnomalyHint(isAnomalyBatteryDiffEntry(entry) ? mAnomalyHintString : null);
             // Sets the BatteryDiffEntry to preference for launching detailed page.
             pref.setBatteryDiffEntry(entry);
             pref.setSelectable(entry.validForRestriction());
