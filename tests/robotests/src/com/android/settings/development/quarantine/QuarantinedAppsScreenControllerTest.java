@@ -20,6 +20,7 @@ import static org.mockito.AdditionalMatchers.aryEq;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.ArgumentMatchers.isNull;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -28,6 +29,7 @@ import static org.mockito.Mockito.verify;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.SuspendDialogInfo;
 import android.os.UserHandle;
 
 import androidx.test.core.app.ApplicationProvider;
@@ -70,12 +72,12 @@ public class QuarantinedAppsScreenControllerTest {
 
         mController.onPreferenceChange(preference, true);
         verify(packageManager).setPackagesSuspended(aryEq(new String[] {TEST_PACKAGE}), eq(true),
-                any(), any(), any(),
+                isNull(), isNull(), any(SuspendDialogInfo.class),
                 eq(PackageManager.FLAG_SUSPEND_QUARANTINED));
 
         mController.onPreferenceChange(preference, false);
         verify(packageManager).setPackagesSuspended(aryEq(new String[] {TEST_PACKAGE}), eq(false),
-                any(), any(), any(),
+                isNull(), isNull(), isNull(),
                 eq(PackageManager.FLAG_SUSPEND_QUARANTINED));
     }
 
