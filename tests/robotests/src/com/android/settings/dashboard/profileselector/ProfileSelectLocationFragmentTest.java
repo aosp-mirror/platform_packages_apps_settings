@@ -39,10 +39,12 @@ public class ProfileSelectLocationFragmentTest {
 
     @Test
     public void getFragments_containsCorrectBundle() {
-        assertThat(mProfileSelectLocationFragment.getFragments().length).isEqualTo(2);
+        assertThat(mProfileSelectLocationFragment.getFragments().length).isEqualTo(3);
         assertThat(mProfileSelectLocationFragment.getFragments()[0].getArguments().getInt(
                 EXTRA_PROFILE, -1)).isEqualTo(ProfileSelectFragment.ProfileType.PERSONAL);
         assertThat(mProfileSelectLocationFragment.getFragments()[1].getArguments().getInt(
                 EXTRA_PROFILE, -1)).isEqualTo(ProfileSelectFragment.ProfileType.WORK);
+        assertThat(mProfileSelectLocationFragment.getFragments()[1].getArguments().getInt(
+                EXTRA_PROFILE, -1)).isEqualTo(ProfileSelectFragment.ProfileType.PRIVATE);
     }
 }

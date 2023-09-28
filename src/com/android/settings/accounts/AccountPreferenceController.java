@@ -296,14 +296,15 @@ public class AccountPreferenceController extends AbstractPreferenceController
             updateProfileUi(userInfo);
         } else {
             List<UserInfo> profiles = mUm.getProfiles(UserHandle.myUserId());
-            final int profilesCount = profiles.size();
-            for (int i = 0; i < profilesCount; i++) {
-                if (profiles.get(i).isManagedProfile()
-                        && (mType & ProfileSelectFragment.ProfileType.WORK) != 0) {
-                    updateProfileUi(profiles.get(i));
-                } else if (!profiles.get(i).isManagedProfile()
-                        && (mType & ProfileSelectFragment.ProfileType.PERSONAL) != 0) {
-                    updateProfileUi(profiles.get(i));
+            for (UserInfo profile : profiles) {
+                if ((profile.isManagedProfile()
+                            && (mType & ProfileSelectFragment.ProfileType.WORK) != 0)
+                        || (profile.isPrivateProfile()
+                            && (mType & ProfileSelectFragment.ProfileType.PRIVATE) != 0)
+                        || (!profile.isManagedProfile()
+                            && !profile.isPrivateProfile()
+                            && (mType & ProfileSelectFragment.ProfileType.PERSONAL) != 0)) {
+                    updateProfileUi(profile);
                 }
             }
         }
