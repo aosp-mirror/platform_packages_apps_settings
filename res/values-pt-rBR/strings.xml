@@ -871,6 +871,7 @@
     <string name="internet_source_wifi" msgid="6952593095166435179">"Wi-Fi"</string>
     <string name="internet_source_mobile_data" msgid="877403889449201789">"Dados móveis"</string>
     <string name="internet_source_ethernet" msgid="8338472576454100966">"Ethernet"</string>
+    <string name="hotspot_battery_charging_summary" msgid="6690892148553288457">"<xliff:g id="BATTERY_PERCENTAGE">%s</xliff:g> ‑ Carregando"</string>
     <string name="hotspot_connection_category" msgid="4320380513982923556">"Conexão de ponto de acesso"</string>
     <string name="hotspot_connection_strength" msgid="87359986943768421">"Potência da conexão"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"Redes salvas"</string>
@@ -3017,8 +3018,7 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"Som de notificação padrão"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"Som de alarme padrão"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"Vibrar primeiro e usar o toque gradual"</string>
-    <!-- no translation found for spatial_audio_title (1775370104206884711) -->
-    <skip />
+    <string name="spatial_audio_title" msgid="1775370104206884711">"Áudio espacial"</string>
     <string name="dial_pad_tones_title" msgid="3536945335367914892">"Sons do teclado"</string>
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"Som do bloqueio da tela"</string>
     <string name="charging_sounds_title" msgid="5261683808537783668">"Sons e vibração ao carregar"</string>
@@ -3034,12 +3034,9 @@
     <string name="boot_sounds_title" msgid="5033062848948884111">"Ativar sons"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"Legenda Instantânea"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"Legendar mídias automaticamente"</string>
-    <!-- no translation found for spatial_audio_speaker (3956755613908467186) -->
-    <skip />
-    <!-- no translation found for spatial_audio_speaker (2261196916411018248) -->
-    <skip />
-    <!-- no translation found for spatial_audio_speaker (3012868526054155189) -->
-    <skip />
+    <string name="spatial_audio_speaker" product="default" msgid="3956755613908467186">"Alto-falantes do smartphone"</string>
+    <string name="spatial_audio_speaker" product="tablet" msgid="2261196916411018248">"Alto-falantes do tablet"</string>
+    <string name="spatial_audio_speaker" product="device" msgid="3012868526054155189">"Alto-falantes do dispositivo"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Fones de ouvido com fio"</string>
     <string name="spatial_audio_text" msgid="8201387855375146000">"O áudio de dispositivos de mídia compatíveis fica mais imersivo"</string>
     <string name="spatial_summary_off" msgid="8272678804629774378">"Desativado"</string>
@@ -3284,7 +3281,7 @@
     <string name="notification_access_detail_switch" msgid="46386786409608330">"Permitir acesso às notificações"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"No Android 12, as notificações avançadas substituíram as notificações adaptáveis. Esse recurso exibe ações e respostas sugeridas, além de organizar suas notificações. \n\nAs notificações avançadas podem acessar o conteúdo das notificações, incluindo informações pessoais como nomes de contatos e mensagens. Elas também podem dispensar ou responder às notificações, como atender ligações telefônicas e controlar o Não perturbe."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Permitir que <xliff:g id="SERVICE">%1$s</xliff:g> acesse as notificações?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="1131986567509818121">"O app <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> poderá ler todas as notificações, incluindo informações pessoais como nomes de contatos, fotos e o texto das mensagens que você recebe. Ele também poderá adiar ou dispensar notificações, assim como acionar botões que elas contenham, inclusive para atender ligações. \n\nIsso também autoriza o app a ativar ou desativar o modo \"Não perturbe\" e mudar as configurações relacionadas."</string>
+    <string name="notification_listener_security_warning_summary" msgid="1131986567509818121">"O app <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> poderá ler todas as notificações, incluindo informações pessoais como nomes de contatos, fotos e o texto das mensagens que você receber. Ele também poderá adiar ou dispensar notificações, assim como acionar botões que elas contenham, inclusive para atender ligações. \n\nIsso também autoriza o app a ativar ou desativar o modo \"Não perturbe\" e mudar as configurações relacionadas."</string>
     <string name="nls_warning_prompt" msgid="1486887096703743841">"O app <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> poderá:"</string>
     <string name="nls_feature_read_title" msgid="7629713268744220437">"Ler suas notificações"</string>
     <string name="nls_feature_read_summary" msgid="1064698238110273593">"Ele pode ler suas notificações, incluindo informações pessoais como contatos, mensagens e fotos."</string>
@@ -3305,7 +3302,7 @@
     <string name="notif_type_silent_summary" msgid="7820923063105060844">"Notificações que nunca fazem o dispositivo tocar ou vibrar"</string>
     <string name="notification_listener_allowed" msgid="5536962633536318551">"Permitidas"</string>
     <string name="notification_listener_not_allowed" msgid="3352962779597846538">"Não permitidas"</string>
-    <string name="notif_listener_excluded_app_title" msgid="6679316209330349730">"Ver todos os apps"</string>
+    <string name="notif_listener_excluded_app_title" msgid="6679316209330349730">"Mostrar todos os apps"</string>
     <string name="notif_listener_excluded_app_summary" msgid="2914567678047195396">"Mude as configurações para cada app que envia notificações"</string>
     <string name="notif_listener_excluded_app_screen_title" msgid="8636196723227432994">"Apps que aparecem no dispositivo"</string>
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"O app não é compatível com as configurações avançadas."</string>
@@ -3855,32 +3852,21 @@
     <string name="app_battery_usage_title" msgid="346558380609793334">"Uso da bateria pelo app"</string>
     <string name="app_battery_usage_summary" msgid="6349965904306339539">"Definir o uso da bateria para apps"</string>
     <string name="battery_tips_card_action_button" msgid="4897793527424711648">"Mostrar configurações"</string>
-    <!-- no translation found for battery_tips_card_action_button_check (1535140204105479318) -->
-    <skip />
+    <string name="battery_tips_card_action_button_check" msgid="1535140204105479318">"Conferir"</string>
     <string name="battery_tips_card_dismiss_button" msgid="1885756985544936618">"Entendi"</string>
     <string name="battery_tips_card_feedback_info" msgid="767117835675157298">"Essa mensagem foi útil?"</string>
-    <!-- no translation found for battery_hints_warning_icon_a11y (5312542323401447620) -->
-    <skip />
+    <string name="battery_hints_warning_icon_a11y" msgid="5312542323401447620">"Ícone de aviso de dicas da bateria"</string>
     <string name="battery_tips_settings_summary_brightness" msgid="546145032616077783">"Ative o brilho adaptável para prolongar a duração da bateria"</string>
     <string name="battery_tips_settings_summary_screen_timeout" msgid="556801426050962077">"Diminua o tempo limite da tela para prolongar a duração da bateria"</string>
-    <!-- no translation found for battery_tips_apps_summary_always_high (6334519477067044920) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_higher_than_usual (95676961671544628) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_always_high_in_background (2953858181710181126) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_higher_than_usual_in_background (1585002072567422199) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_always_high_in_foreground (1910991243576404700) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_higher_than_usual_in_foreground (7937337570425168210) -->
-    <skip />
-    <!-- no translation found for battery_app_item_hint (4850929961461039110) -->
-    <skip />
-    <!-- no translation found for battery_app_item_hint_in_bg (596240821466388336) -->
-    <skip />
-    <!-- no translation found for battery_app_item_hint_in_fg (5091860632260799910) -->
-    <skip />
+    <string name="battery_tips_apps_summary_always_high" msgid="6334519477067044920">"<xliff:g id="APP_LABEL">%1$s</xliff:g> usou mais bateria"</string>
+    <string name="battery_tips_apps_summary_higher_than_usual" msgid="95676961671544628">"<xliff:g id="APP_LABEL">%1$s</xliff:g> usou bateria além do normal"</string>
+    <string name="battery_tips_apps_summary_always_high_in_background" msgid="2953858181710181126">"<xliff:g id="APP_LABEL">%1$s</xliff:g> usou mais bateria em segundo plano"</string>
+    <string name="battery_tips_apps_summary_higher_than_usual_in_background" msgid="1585002072567422199">"<xliff:g id="APP_LABEL">%1$s</xliff:g> usou bateria além do normal em segundo plano"</string>
+    <string name="battery_tips_apps_summary_always_high_in_foreground" msgid="1910991243576404700">"<xliff:g id="APP_LABEL">%1$s</xliff:g> usou mais bateria em primeiro plano"</string>
+    <string name="battery_tips_apps_summary_higher_than_usual_in_foreground" msgid="7937337570425168210">"<xliff:g id="APP_LABEL">%1$s</xliff:g> usou bateria além do normal em primeiro plano"</string>
+    <string name="battery_app_item_hint" msgid="4850929961461039110">"Alto uso da bateria"</string>
+    <string name="battery_app_item_hint_in_bg" msgid="596240821466388336">"Alto uso da bateria em segundo plano"</string>
+    <string name="battery_app_item_hint_in_fg" msgid="5091860632260799910">"Alto uso da bateria em primeiro plano"</string>
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Sem restrições"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Otimizada"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"Restrita"</string>
@@ -4197,8 +4183,10 @@
     <!-- no translation found for graphics_driver_app_preference_values:1 (485288770206606512) -->
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
-    <string name="enable_angle_as_system_driver" msgid="3985105681812713612">"Ativar o ANGLE"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="6413038127558166972">"Ative o ANGLE como o driver do OpenGL ES padrão. A ativação desse driver em dispositivos incompatíveis pode corromper alguns aplicativos."</string>
+    <!-- no translation found for enable_angle_as_system_driver (4648827560023949786) -->
+    <skip />
+    <!-- no translation found for enable_angle_as_system_driver_summary (2170215556348477481) -->
+    <skip />
     <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"É necessário reiniciar o dispositivo para mudar o driver do OpenGL ES do sistema"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Mudanças na compatibilidade do app"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Alternar mudanças de compatibilidade do app"</string>
@@ -4605,7 +4593,7 @@
     <string name="nfc_main_switch_title" msgid="6295839988954817432">"Usar a NFC"</string>
     <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"Usar o Brilho adaptável"</string>
     <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"Usar a chamada no Wi-Fi"</string>
-    <string name="default_see_all_apps_title" msgid="7481113230662612178">"Ver todos os apps"</string>
+    <string name="default_see_all_apps_title" msgid="7481113230662612178">"Mostrar todos os apps"</string>
     <string name="smart_forwarding_title" msgid="8368634861971949799">"Encaminhamento inteligente"</string>
     <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"Encaminhamento inteligente ativado"</string>
     <string name="smart_forwarding_summary_disabled" msgid="5033880700091914809">"Encaminhamento inteligente desativado"</string>
@@ -4758,6 +4746,10 @@
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Proporção"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"Teste uma nova proporção para esse app caso ele não tenha sido criado para caber no seu dispositivo <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"Teste uma nova proporção para esse app caso ele não tenha sido criado para caber no seu dispositivo <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Talvez alguns apps não estejam otimizados para algumas proporções."</string>
+    <!-- no translation found for aspect_ratio_summary_text (4737461467467220325) -->
+    <skip />
+    <!-- no translation found for aspect_ratio_main_summary_text (5544816872094235840) -->
+    <skip />
     <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"Apps sugeridos"</string>
     <string name="user_aspect_ratio_changed_apps_label" msgid="2096614916172567672">"Apps modificados"</string>
     <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"Padrão do app"</string>

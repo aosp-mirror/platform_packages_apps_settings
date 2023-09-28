@@ -16,6 +16,7 @@
 
 package com.android.settings.applications.appcompat;
 
+import static android.os.UserHandle.getUserHandleForUid;
 import static android.view.WindowManager.PROPERTY_COMPAT_ALLOW_USER_ASPECT_RATIO_FULLSCREEN_OVERRIDE;
 import static android.view.WindowManager.PROPERTY_COMPAT_ALLOW_USER_ASPECT_RATIO_OVERRIDE;
 
@@ -26,8 +27,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.IPackageManager;
+import android.content.pm.LauncherApps;
 import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.os.RemoteException;
 import android.provider.DeviceConfig;
 import android.util.ArrayMap;
@@ -40,7 +41,6 @@ import com.android.settings.Utils;
 
 import com.google.common.annotations.VisibleForTesting;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -63,15 +63,12 @@ public class UserAspectRatioManager {
     private final Context mContext;
     private final IPackageManager mIPm;
     /** Apps that have launcher entry defined in manifest */
-    private final List<ResolveInfo> mInfoHasLauncherEntryList;
     private final Map<Integer, String> mUserAspectRatioMap;
     private final Map<Integer, CharSequence> mUserAspectRatioA11yMap;
 
     public UserAspectRatioManager(@NonNull Context context) {
         mContext = context;
         mIPm = AppGlobals.getPackageManager();
-        mInfoHasLauncherEntryList = mContext.getPackageManager().queryIntentActivities(
-                UserAspectRatioManager.LAUNCHER_ENTRY_INTENT, PackageManager.GET_META_DATA);
         mUserAspectRatioA11yMap = new ArrayMap<>();
         mUserAspectRatioMap = getUserMinAspectRatioMapping();
     }
@@ -159,9 +156,7 @@ public class UserAspectRatioManager {
         Boolean appAllowsUserAspectRatioOverride = readComponentProperty(
                 mContext.getPackageManager(), app.packageName,
                 PROPERTY_COMPAT_ALLOW_USER_ASPECT_RATIO_OVERRIDE);
-        boolean hasLauncherEntry = mInfoHasLauncherEntryList.stream()
-                .anyMatch(info -> info.activityInfo.packageName.equals(app.packageName));
-        return !FALSE.equals(appAllowsUserAspectRatioOverride) && hasLauncherEntry;
+        return !FALSE.equals(appAllowsUserAspectRatioOverride) && hasLauncherEntry(app);
     }
 
     /**
@@ -176,6 +171,15 @@ public class UserAspectRatioManager {
         return !FALSE.equals(appAllowsFullscreenOption) && isBuildTimeFlagEnabled
                 && getValueFromDeviceConfig(KEY_ENABLE_USER_ASPECT_RATIO_FULLSCREEN,
                     DEFAULT_VALUE_ENABLE_USER_ASPECT_RATIO_FULLSCREEN);
+    }
+
+    LauncherApps getLauncherApps() {
+        return mContext.getSystemService(LauncherApps.class);
+    }
+
+    private boolean hasLauncherEntry(@NonNull ApplicationInfo app) {
+        return !getLauncherApps().getActivityList(app.packageName, getUserHandleForUid(app.uid))
+                .isEmpty();
     }
 
     private static boolean getValueFromDeviceConfig(String name, boolean defaultValue) {
@@ -266,10 +270,5 @@ public class UserAspectRatioManager {
             // No such property name
         }
         return null;
-    }
-
-    @VisibleForTesting
-    void addInfoHasLauncherEntry(@NonNull ResolveInfo infoHasLauncherEntry) {
-        mInfoHasLauncherEntryList.add(infoHasLauncherEntry);
     }
 }
