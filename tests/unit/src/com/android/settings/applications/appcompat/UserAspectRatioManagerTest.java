@@ -32,15 +32,18 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.LauncherActivityInfo;
+import android.content.pm.LauncherApps;
 import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.provider.DeviceConfig;
 
@@ -55,6 +58,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.List;
+
 /**
  * To run this test: atest SettingsUnitTests:UserAspectRatioManagerTest
  */
@@ -67,14 +72,23 @@ public class UserAspectRatioManagerTest {
     private String mOriginalSettingsFlag;
     private String mOriginalFullscreenFlag;
     private String mPackageName = "com.test.mypackage";
-
+    private LauncherApps mLauncherApps;
+    private List<LauncherActivityInfo> mLauncherActivities;
     @Before
     public void setUp() {
         mContext = spy(ApplicationProvider.getApplicationContext());
         mResources = spy(mContext.getResources());
-        mUtils = new UserAspectRatioManager(mContext);
+        mLauncherApps = mock(LauncherApps.class);
+        mLauncherActivities = mock(List.class);
+        mUtils = new UserAspectRatioManager(mContext) {
+            @Override
+            LauncherApps getLauncherApps() {
+                return mLauncherApps;
+            }
+        };
 
         when(mContext.getResources()).thenReturn(mResources);
+        doReturn(mLauncherActivities).when(mLauncherApps).getActivityList(anyString(), any());
 
         mOriginalSettingsFlag = DeviceConfig.getProperty(
                 DeviceConfig.NAMESPACE_WINDOW_MANAGER, KEY_ENABLE_USER_ASPECT_RATIO_SETTINGS);
@@ -98,13 +112,14 @@ public class UserAspectRatioManagerTest {
     public void testCanDisplayAspectRatioUi() {
         final ApplicationInfo canDisplay = new ApplicationInfo();
         canDisplay.packageName = "com.app.candisplay";
-        addResolveInfoLauncherEntry(canDisplay.packageName);
 
+        doReturn(false).when(mLauncherActivities).isEmpty();
         assertTrue(mUtils.canDisplayAspectRatioUi(canDisplay));
 
         final ApplicationInfo noLauncherEntry = new ApplicationInfo();
         noLauncherEntry.packageName = "com.app.nolauncherentry";
 
+        doReturn(true).when(mLauncherActivities).isEmpty();
         assertFalse(mUtils.canDisplayAspectRatioUi(noLauncherEntry));
     }
 
@@ -112,10 +127,10 @@ public class UserAspectRatioManagerTest {
     public void testCanDisplayAspectRatioUi_hasLauncher_propertyFalse_returnFalse()
             throws PackageManager.NameNotFoundException {
         mockProperty(PROPERTY_COMPAT_ALLOW_USER_ASPECT_RATIO_OVERRIDE, false);
+        doReturn(true).when(mLauncherActivities).isEmpty();
 
         final ApplicationInfo canDisplay = new ApplicationInfo();
         canDisplay.packageName = mPackageName;
-        addResolveInfoLauncherEntry(canDisplay.packageName);
 
         assertFalse(mUtils.canDisplayAspectRatioUi(canDisplay));
     }
@@ -124,6 +139,7 @@ public class UserAspectRatioManagerTest {
     public void testCanDisplayAspectRatioUi_noLauncher_propertyTrue_returnFalse()
             throws PackageManager.NameNotFoundException {
         mockProperty(PROPERTY_COMPAT_ALLOW_USER_ASPECT_RATIO_OVERRIDE, true);
+        doReturn(true).when(mLauncherActivities).isEmpty();
 
         final ApplicationInfo noLauncherEntry = new ApplicationInfo();
         noLauncherEntry.packageName = mPackageName;
@@ -266,13 +282,5 @@ public class UserAspectRatioManagerTest {
     private void setAspectRatioFullscreenDeviceConfigEnabled(String enabled, boolean makeDefault) {
         DeviceConfig.setProperty(DeviceConfig.NAMESPACE_WINDOW_MANAGER,
                 KEY_ENABLE_USER_ASPECT_RATIO_FULLSCREEN, enabled, makeDefault);
-    }
-
-    private void addResolveInfoLauncherEntry(String packageName) {
-        final ResolveInfo resolveInfo = mock(ResolveInfo.class);
-        final ActivityInfo activityInfo = mock(ActivityInfo.class);
-        activityInfo.packageName = packageName;
-        resolveInfo.activityInfo = activityInfo;
-        mUtils.addInfoHasLauncherEntry(resolveInfo);
     }
 }
