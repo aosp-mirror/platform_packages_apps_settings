@@ -76,6 +76,7 @@
 
     <PreferenceCategory
         android:key="app_list"
-        android:title="@string/data_usage_other_apps" />
+        android:title="@string/data_usage_other_apps"
+        settings:controller="com.android.settings.datausage.AppDataUsageListController" />
 
 </PreferenceScreen>

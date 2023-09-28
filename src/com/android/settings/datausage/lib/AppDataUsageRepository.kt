@@ -126,12 +126,7 @@ class AppDataUsageRepository(
                             items = items,
                         )
                     }
-                    // Map SDK sandbox back to its corresponding app
-                    collapseKey = if (Process.isSdkSandboxUid(uid)) {
-                        Process.getAppUidForSdkSandboxUid(uid)
-                    } else {
-                        uid
-                    }
+                    collapseKey = getAppUid(uid)
                     category = AppItem.CATEGORY_APP
                 } else {
                     // If it is a removed user add it to the removed users' key
@@ -199,6 +194,15 @@ class AppDataUsageRepository(
             val uid: Int,
             val bytes: Long,
         )
+
+        @JvmStatic
+        fun getAppUid(uid: Int): Int {
+            if (Process.isSdkSandboxUid(uid)) {
+                // For a sandbox process, get the associated app UID
+                return Process.getAppUidForSdkSandboxUid(uid)
+            }
+            return uid
+        }
 
         private fun convertToBuckets(stats: NetworkStats): List<Bucket> {
             val buckets = mutableListOf<Bucket>()
