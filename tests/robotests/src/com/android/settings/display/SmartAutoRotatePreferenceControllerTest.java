@@ -236,15 +236,17 @@ public class SmartAutoRotatePreferenceControllerTest {
     private void enableAutoRotationPreference() {
         when(mPackageManager.hasSystemFeature(anyString())).thenReturn(true);
         when(mResources.getBoolean(anyInt())).thenReturn(true);
-        Settings.System.putInt(mContentResolver,
-                Settings.System.HIDE_ROTATION_LOCK_TOGGLE_FOR_ACCESSIBILITY, 0);
+        Settings.System.putIntForUser(mContentResolver,
+                Settings.System.HIDE_ROTATION_LOCK_TOGGLE_FOR_ACCESSIBILITY, 0,
+                UserHandle.USER_CURRENT);
     }
 
     private void disableAutoRotationPreference() {
         when(mPackageManager.hasSystemFeature(anyString())).thenReturn(true);
         when(mResources.getBoolean(anyInt())).thenReturn(true);
-        Settings.System.putInt(mContentResolver,
-                Settings.System.HIDE_ROTATION_LOCK_TOGGLE_FOR_ACCESSIBILITY, 1);
+        Settings.System.putIntForUser(mContentResolver,
+                Settings.System.HIDE_ROTATION_LOCK_TOGGLE_FOR_ACCESSIBILITY, 1,
+                UserHandle.USER_CURRENT);
     }
 
     private void enableAutoRotation() {
