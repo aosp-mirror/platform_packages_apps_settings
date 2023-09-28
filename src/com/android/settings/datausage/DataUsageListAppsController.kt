@@ -31,8 +31,8 @@ import com.android.settings.R
 import com.android.settings.core.BasePreferenceController
 import com.android.settings.core.SubSettingLauncher
 import com.android.settings.datausage.lib.AppDataUsageRepository
+import com.android.settings.datausage.lib.NetworkUsageData
 import com.android.settingslib.AppItem
-import com.android.settingslib.net.NetworkCycleChartData
 import com.android.settingslib.net.UidDetailProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -48,7 +48,7 @@ open class DataUsageListAppsController(context: Context, preferenceKey: String) 
     private lateinit var preference: PreferenceGroup
     private lateinit var lifecycleScope: LifecycleCoroutineScope
 
-    private var cycleData: List<NetworkCycleChartData>? = null
+    private var cycleData: List<NetworkUsageData>? = null
 
     open fun init(template: NetworkTemplate) {
         this.template = template
@@ -70,7 +70,7 @@ open class DataUsageListAppsController(context: Context, preferenceKey: String) 
         lifecycleScope = viewLifecycleOwner.lifecycleScope
     }
 
-    fun setCycleData(cycleData: List<NetworkCycleChartData>?) {
+    fun updateCycles(cycleData: List<NetworkUsageData>) {
         this.cycleData = cycleData
     }
 

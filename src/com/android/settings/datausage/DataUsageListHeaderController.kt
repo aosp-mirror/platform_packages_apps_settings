@@ -18,25 +18,39 @@ package com.android.settings.datausage
 
 import android.net.NetworkTemplate
 import android.os.Bundle
+import android.util.Range
 import android.view.View
 import android.view.accessibility.AccessibilityEvent
 import android.widget.AdapterView
 import android.widget.Spinner
 import androidx.annotation.OpenForTesting
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.android.settings.R
 import com.android.settings.core.SubSettingLauncher
-import com.android.settings.datausage.CycleAdapter.CycleItem
 import com.android.settings.datausage.CycleAdapter.SpinnerInterface
-import com.android.settingslib.net.NetworkCycleChartData
+import com.android.settings.datausage.lib.INetworkCycleDataRepository
+import com.android.settings.datausage.lib.NetworkCycleDataRepository
+import com.android.settings.datausage.lib.NetworkUsageData
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @OpenForTesting
 open class DataUsageListHeaderController(
     header: View,
     template: NetworkTemplate,
     sourceMetricsCategory: Int,
-    private val onItemSelected: (cycleItem: CycleItem, position: Int) -> Unit,
+    viewLifecycleOwner: LifecycleOwner,
+    private val onCyclesLoad: (usageDataList: List<NetworkUsageData>) -> Unit,
+    private val onItemSelected: (usageData: NetworkUsageData) -> Unit,
+    private val repository: INetworkCycleDataRepository =
+        NetworkCycleDataRepository(header.context, template),
 ) {
     private val context = header.context
+
     private val configureButton: View = header.requireViewById(R.id.filter_settings)
     private val cycleSpinner: Spinner = header.requireViewById(R.id.filter_spinner)
     private val cycleAdapter = CycleAdapter(context, object : SpinnerInterface {
@@ -50,13 +64,12 @@ open class DataUsageListHeaderController(
             cycleSpinner.setSelection(position)
         }
     })
+    private var cycles: List<NetworkUsageData> = emptyList()
 
     private val cycleListener = object : AdapterView.OnItemSelectedListener {
         override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
             if (0 <= position && position < cycleAdapter.count) {
-                cycleAdapter.getItem(position)?.let { cycleItem ->
-                    onItemSelected(cycleItem, position)
-                }
+                cycles.getOrNull(position)?.let(onItemSelected)
             }
         }
 
@@ -80,11 +93,18 @@ open class DataUsageListHeaderController(
         cycleSpinner.visibility = View.GONE
         cycleSpinner.accessibilityDelegate = object : View.AccessibilityDelegate() {
             override fun sendAccessibilityEvent(host: View, eventType: Int) {
-                if (eventType == AccessibilityEvent.TYPE_VIEW_SELECTED) {
-                    // Ignore TYPE_VIEW_SELECTED or TalkBack will speak for it at onResume.
-                    return
-                }
+                // Ignore TYPE_VIEW_SELECTED or TalkBack will speak for it at onResume.
+                if (eventType == AccessibilityEvent.TYPE_VIEW_SELECTED) return
                 super.sendAccessibilityEvent(host, eventType)
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                cycles = withContext(Dispatchers.Default) {
+                    repository.loadCycles()
+                }
+                updateCycleData()
             }
         }
     }
@@ -93,11 +113,12 @@ open class DataUsageListHeaderController(
         configureButton.visibility = if (visible) View.VISIBLE else View.GONE
     }
 
-    open fun updateCycleData(cycleData: List<NetworkCycleChartData>) {
+    private fun updateCycleData() {
         cycleSpinner.onItemSelectedListener = cycleListener
         // calculate policy cycles based on available data
         // generate cycle list based on policy and available history
-        cycleAdapter.updateCycleList(cycleData)
+        cycleAdapter.updateCycleList(cycles.map { Range(it.startTime, it.endTime) })
         cycleSpinner.visibility = View.VISIBLE
+        onCyclesLoad(cycles)
     }
 }
