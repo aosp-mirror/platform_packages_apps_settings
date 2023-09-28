@@ -17,6 +17,7 @@
 package com.android.settings.development.graphicsdriver;
 
 import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableAngleAsSystemDriverController.ANGLE_DRIVER_SUFFIX;
+import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableAngleAsSystemDriverController.PROPERTY_DEBUG_ANGLE_DEVELOPER_OPTION;
 import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableAngleAsSystemDriverController.PROPERTY_PERSISTENT_GRAPHICS_EGL;
 import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableAngleAsSystemDriverController.PROPERTY_RO_GFX_ANGLE_SUPPORTED;
 
@@ -71,6 +72,7 @@ public class GraphicsDriverEnableAngleAsSystemDriverControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
+        ShadowSystemProperties.override(PROPERTY_DEBUG_ANGLE_DEVELOPER_OPTION, "true");
         doReturn(mTransaction).when(mFragmentManager).beginTransaction();
         doReturn(mFragmentManager).when(mActivity).getSupportFragmentManager();
         doReturn(mActivity).when(mFragment).getActivity();

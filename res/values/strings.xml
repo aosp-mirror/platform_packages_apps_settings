@@ -10732,9 +10732,9 @@
     </string-array>
 
     <!-- Debugging developer settings: enable angle as system driver? [CHAR LIMIT=50] -->
-    <string name="enable_angle_as_system_driver">Enable ANGLE</string>
+    <string name="enable_angle_as_system_driver">Experimental: Enable ANGLE</string>
     <!-- Debugging developer settings: enable angle as system driver summary [CHAR LIMIT=NONE] -->
-    <string name="enable_angle_as_system_driver_summary">Enable ANGLE as default OpenGL ES driver. Enabling it on incompatible devices may break some applications.</string>
+    <string name="enable_angle_as_system_driver_summary">Warning: Enable ANGLE as default OpenGL ES driver. This feature is in experiment and may not be compatible with some camera and video apps.</string>
     <!--Dialog body text used to explain a reboot is required after changing ANGLE as system GLES driver setting-->
     <string name="reboot_dialog_enable_angle_as_system_driver">A reboot is required to change the system OpenGL ES driver</string>
 
@@ -12301,6 +12301,10 @@
     <string name="aspect_ratio_summary">Try a new aspect ratio to view this app if it hasn\'t been designed to fit your <xliff:g id="device_name">%1$s</xliff:g></string>
     <!-- [CHAR LIMIT=NONE] Aspect ratio setting main summary on page to choose aspect ratio for apps unoptimized for device -->
     <string name="aspect_ratio_main_summary">Try a new aspect ratio to view this app if it hasn\'t been designed to fit your <xliff:g id="device_name">%1$s</xliff:g>. Some apps may not be optimized for certain aspect ratios.</string>
+    <!-- [CHAR LIMIT=NONE] Aspect ratio setting summary to choose aspect ratio for apps unoptimized for device -->
+    <string name="aspect_ratio_summary_text">Try a new aspect ratio to view an app if it hasn\'t been designed to fit your <xliff:g id="device_name">%1$s</xliff:g></string>
+    <!-- [CHAR LIMIT=NONE] Aspect ratio setting main summary on page to choose aspect ratio for apps unoptimized for device -->
+    <string name="aspect_ratio_main_summary_text">Try a new aspect ratio to view an app if it hasn\'t been designed to fit your <xliff:g id="device_name">%1$s</xliff:g>. Some apps may not be optimized for certain aspect ratios.</string>
     <!-- [CHAR LIMIT=NONE] Aspect ratio suggested apps filter label -->
     <string name="user_aspect_ratio_suggested_apps_label">Suggested apps</string>
     <!-- [CHAR LIMIT=14] Filter label for apps that have user aspect ratio changed -->

@@ -120,7 +120,7 @@ public class NotificationSbnAdapter extends
             holder.setDividerVisible(position < (mValues.size() -1));
             int userId = normalizeUserId(sbn);
             if (!mUserBadgeCache.containsKey(userId)) {
-                Drawable profile = mContext.getPackageManager().getUserBadgeForDensity(
+                Drawable profile = mContext.getPackageManager().getUserBadgeForDensityNoBackground(
                         UserHandle.of(userId), 0);
                 mUserBadgeCache.put(userId, profile);
             }

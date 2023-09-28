@@ -41,4 +41,13 @@ interface GraphicsDriverSystemPropertiesWrapper {
      * SELinux. libc will log the underlying reason.
      */
     void set(@NonNull String key, @Nullable String val);
+
+    /**
+     * Get the boolean value for the given {@code key}.
+     *
+     * @param key the key to lookup
+     * @param def the default value in case the property is not set or empty
+     * @return if the {@code key} isn't found, return {@code def}.
+     */
+    boolean getBoolean(@NonNull String key, @NonNull boolean def);
 }

@@ -36,6 +36,7 @@ import com.android.settingslib.spa.framework.compose.stateOf
 import com.android.settingslib.spa.widget.editor.SettingsExposedDropdownMenuBox
 import com.android.settingslib.spa.widget.editor.SettingsExposedDropdownMenuCheckBox
 import com.android.settingslib.spa.widget.editor.SettingsOutlinedTextField
+import com.android.settingslib.spa.widget.editor.SettingsTextFieldPassword
 import com.android.settingslib.spa.widget.preference.SwitchPreference
 import com.android.settingslib.spa.widget.preference.SwitchPreferenceModel
 import com.android.settingslib.spa.widget.scaffold.RegularScaffold
@@ -123,7 +124,10 @@ fun ApnPage(apnDataCur: MutableState<ApnData>) {
                 stringResource(R.string.apn_user),
                 enabled = apnData.userNameEnabled
             ) { apnData = apnData.copy(userName = it) }
-            // TODO: password
+            SettingsTextFieldPassword(
+                apnData.passWord,
+                stringResource(R.string.apn_password)
+            ) { apnData = apnData.copy(passWord = it) }
             SettingsOutlinedTextField(
                 apnData.server,
                 stringResource(R.string.apn_server),

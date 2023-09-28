@@ -71,6 +71,14 @@ data class ApnData(
     var mvnoValueEnabled = false
 }
 
+/**
+ * Initialize the selected Bearer Selected Options according to bearer.
+ * @param bearer Initialized bearer options.
+ * @param bearerBitmask Initialized bearer bitmask, often multiple bearer options may be included.
+ * @param context The context to get bearerValues.
+ *
+ * @return An error message if the apn data is invalid, otherwise return null.
+ */
 fun getBearerSelectedOptionsState(
     bearer: Int,
     bearerBitmask: Int,

@@ -203,6 +203,16 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
         slicePreferenceController.setSliceUri(sliceEnabled ? controlUri : null);
         slicePreferenceController.onStart();
         slicePreferenceController.displayPreference(getPreferenceScreen());
+
+        // Temporarily fix the issue that the page will be automatically scrolled to a wrong
+        // position when entering the page. This will make sure the bluetooth header is shown on top
+        // of the page.
+        use(LeAudioBluetoothDetailsHeaderController.class).displayPreference(
+                getPreferenceScreen());
+        use(AdvancedBluetoothDetailsHeaderController.class).displayPreference(
+                getPreferenceScreen());
+        use(BluetoothDetailsHeaderController.class).displayPreference(
+                getPreferenceScreen());
     }
 
     private final ViewTreeObserver.OnGlobalLayoutListener mOnGlobalLayoutListener =
