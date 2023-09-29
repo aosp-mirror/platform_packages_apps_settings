@@ -22,7 +22,9 @@
         android:title="@string/summary_placeholder">
 
         <com.android.settings.datausage.ChartDataUsagePreference
-            android:key="chart_data" />
+            android:key="chart_data"
+            settings:controller="com.android.settings.datausage.ChartDataUsagePreferenceController"
+            />
 
         <Preference
             android:key="non_carrier_data_usage_warning"

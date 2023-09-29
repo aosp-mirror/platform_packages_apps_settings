@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2023 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:title="@string/terms_of_address_title">
+
+    <com.android.settingslib.widget.TopIntroPreference
+        android:title="@string/terms_of_address_intro_title"
+        android:persistent="false"/>
+
+    <com.android.settings.widget.TickButtonPreference
+        android:key="key_terms_of_address_not_specified"
+        android:title="@string/terms_of_address_not_specified"
+        settings:controller="com.android.settings.localepicker.TermsOfAddressNotSpecifiedController"/>
+
+    <com.android.settings.widget.TickButtonPreference
+        android:key="key_terms_of_address_feminine"
+        android:title="@string/terms_of_address_feminine"
+        settings:controller="com.android.settings.localepicker.TermsOfAddressFeminineController"/>
+
+    <com.android.settings.widget.TickButtonPreference
+        android:key="key_terms_of_address_masculine"
+        android:title="@string/terms_of_address_masculine"
+        settings:controller="com.android.settings.localepicker.TermsOfAddressMasculineController"/>
+
+    <com.android.settings.widget.TickButtonPreference
+        android:key="key_terms_of_address_neutral"
+        android:title="@string/terms_of_address_neutral"
+        settings:controller="com.android.settings.localepicker.TermsOfAddressNeutralController"/>
+
+</PreferenceScreen>

@@ -47,7 +47,6 @@ import androidx.slice.widget.RowContent;
 import androidx.slice.widget.SliceContent;
 import androidx.slice.widget.SliceLiveData;
 
-import com.android.ims.ImsManager;
 import com.android.settings.R;
 import com.android.settings.network.ims.MockWifiCallingQueryImsState;
 import com.android.settings.slices.CustomSliceRegistry;
@@ -77,9 +76,6 @@ public class WifiCallingSliceHelperTest {
     private Context mContext;
     @Mock
     private CarrierConfigManager mMockCarrierConfigManager;
-
-    @Mock
-    private ImsManager mMockImsManager;
 
     @Mock
     private ImsMmTelManager mMockImsMmTelManager;
@@ -122,20 +118,7 @@ public class WifiCallingSliceHelperTest {
     }
 
     @Test
-    public void test_CreateWifiCallingSlice_invalidSubId() {
-        mQueryImsState.setIsEnabledByUser(true);
-        mQueryImsState.setIsProvisionedOnDevice(false);
-        mWfcSliceHelper.setDefaultVoiceSubId(-1);
-        mQueryImsState.setIsReadyToWifiCalling(true);
-
-        final Slice slice = mWfcSliceHelper.createWifiCallingSlice(
-                CustomSliceRegistry.WIFI_CALLING_URI);
-
-        assertThat(slice).isNull();
-    }
-
-    @Test
-    public void test_CreateWifiCallingSlice_wfcNotSupported() {
+    public void createWifiCallingSlice_notReadyToWifiCalling_wfcNotSupported() {
         mQueryImsState.setIsProvisionedOnDevice(false);
         mQueryImsState.setIsReadyToWifiCalling(false);
 

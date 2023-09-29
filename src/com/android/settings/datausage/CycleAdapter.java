@@ -14,9 +14,9 @@
 package com.android.settings.datausage;
 
 import android.content.Context;
+import android.util.Range;
 
 import com.android.settings.Utils;
-import com.android.settingslib.net.NetworkCycleData;
 import com.android.settingslib.widget.SettingsSpinnerAdapter;
 
 import java.util.List;
@@ -62,15 +62,15 @@ public class CycleAdapter extends SettingsSpinnerAdapter<CycleAdapter.CycleItem>
      * Rebuild list based on network data. Always selects the newest item,
      * updating the inspection range on chartData.
      */
-    public void updateCycleList(List<? extends NetworkCycleData> cycleData) {
+    public void updateCycleList(List<Range<Long>> cycleData) {
         // stash away currently selected cycle to try restoring below
         final CycleAdapter.CycleItem previousItem = (CycleAdapter.CycleItem)
                 mSpinner.getSelectedItem();
         clear();
 
         final Context context = getContext();
-        for (NetworkCycleData data : cycleData) {
-            add(new CycleAdapter.CycleItem(context, data.getStartTime(), data.getEndTime()));
+        for (Range<Long> cycle : cycleData) {
+            add(new CycleAdapter.CycleItem(context, cycle.getLower(), cycle.getUpper()));
         }
 
         // force pick the current cycle (first item)

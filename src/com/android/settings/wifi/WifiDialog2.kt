@@ -25,6 +25,7 @@ import android.view.WindowManager
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.annotation.OpenForTesting
 import androidx.appcompat.app.AlertDialog
 import com.android.settings.R
 import com.android.settingslib.RestrictedLockUtils
@@ -34,7 +35,8 @@ import com.android.wifitrackerlib.WifiEntry
 /**
  * Dialog for users to edit a Wi-Fi network.
  */
-class WifiDialog2 @JvmOverloads constructor(
+@OpenForTesting
+open class WifiDialog2 @JvmOverloads constructor(
     context: Context,
     private val listener: WifiDialog2Listener,
     val wifiEntry: WifiEntry?,
