@@ -94,7 +94,6 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
     static final int KEYGUARD_REQUEST = 55;
     @VisibleForTesting
     static final int CREDENTIAL_CONFIRM_REQUEST = 56;
-
     private static final String KEY_SHOW_ESIM_RESET_CHECKBOX =
             "masterclear.allow_retain_esim_profiles_after_fdr";
 
