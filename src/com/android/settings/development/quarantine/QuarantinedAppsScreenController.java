@@ -19,6 +19,7 @@ package com.android.settings.development.quarantine;
 import android.app.Application;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.pm.SuspendDialogInfo;
 import android.os.UserHandle;
 
 import androidx.annotation.VisibleForTesting;
@@ -181,8 +182,17 @@ public class QuarantinedAppsScreenController extends BasePreferenceController im
     private void setPackageQuarantined(String pkg, int uid, boolean quarantined) {
         final PackageManager pm = mContext.createContextAsUser(
                 UserHandle.getUserHandleForUid(uid), 0).getPackageManager();
+        final SuspendDialogInfo dialogInfo;
+        if (quarantined) {
+            dialogInfo = new SuspendDialogInfo.Builder()
+                    .setNeutralButtonText(R.string.unquarantine_app_button)
+                    .setNeutralButtonAction(SuspendDialogInfo.BUTTON_ACTION_UNSUSPEND)
+                    .build();
+        } else {
+            dialogInfo = null;
+        }
         pm.setPackagesSuspended(new String[] {pkg}, quarantined, null /* appExtras */,
-                null /* launcherExtras */, null /* dialogInfo */,
+                null /* launcherExtras */, dialogInfo,
                 PackageManager.FLAG_SUSPEND_QUARANTINED);
     }
 

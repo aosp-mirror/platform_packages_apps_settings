@@ -52,7 +52,9 @@ import java.util.List;
 public class ConnectedDeviceDashboardFragmentTest {
     private static final String KEY_NEARBY_DEVICES = "bt_nearby_slice";
     private static final String KEY_DISCOVERABLE_FOOTER = "discoverable_footer";
-    private static final String KEY_SEE_ALL = "previously_connected_devices_see_all";
+    private static final String KEY_SAVED_DEVICE_SEE_ALL = "previously_connected_devices_see_all";
+    private static final String KEY_FAST_PAIR_DEVICE_SEE_ALL = "fast_pair_devices_see_all";
+    private static final String KEY_FAST_PAIR_DEVICE_LIST = "fast_pair_devices";
     private static final String KEY_ADD_BT_DEVICES = "add_bt_devices";
     private static final String SETTINGS_PACKAGE_NAME = "com.android.settings";
     private static final String SYSTEMUI_PACKAGE_NAME = "com.android.systemui";
@@ -92,7 +94,8 @@ public class ConnectedDeviceDashboardFragmentTest {
                 .getNonIndexableKeys(mContext);
 
         assertThat(niks).containsExactly(KEY_CONNECTED_DEVICES, KEY_AVAILABLE_DEVICES,
-                KEY_NEARBY_DEVICES, KEY_DISCOVERABLE_FOOTER, KEY_SEE_ALL);
+                KEY_NEARBY_DEVICES, KEY_DISCOVERABLE_FOOTER, KEY_SAVED_DEVICE_SEE_ALL,
+                KEY_FAST_PAIR_DEVICE_SEE_ALL, KEY_FAST_PAIR_DEVICE_LIST);
     }
 
     @Test
