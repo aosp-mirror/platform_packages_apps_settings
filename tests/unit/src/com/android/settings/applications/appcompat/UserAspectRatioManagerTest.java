@@ -17,7 +17,6 @@
 package com.android.settings.applications.appcompat;
 
 import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_16_9;
-import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_3_2;
 import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_4_3;
 import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_FULLSCREEN;
 import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_SPLIT_SCREEN;
@@ -45,6 +44,10 @@ import android.content.pm.LauncherActivityInfo;
 import android.content.pm.LauncherApps;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.platform.test.rule.DeviceTypeRule;
+import android.platform.test.rule.FoldableOnly;
+import android.platform.test.rule.LargeScreenOnly;
+import android.platform.test.rule.TabletOnly;
 import android.provider.DeviceConfig;
 
 import androidx.test.core.app.ApplicationProvider;
@@ -55,7 +58,9 @@ import com.android.settings.testutils.ResourcesUtils;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TestRule;
 import org.junit.runner.RunWith;
 
 import java.util.List;
@@ -64,6 +69,7 @@ import java.util.List;
  * To run this test: atest SettingsUnitTests:UserAspectRatioManagerTest
  */
 @RunWith(AndroidJUnit4.class)
+@LargeScreenOnly
 public class UserAspectRatioManagerTest {
 
     private Context mContext;
@@ -74,6 +80,10 @@ public class UserAspectRatioManagerTest {
     private String mPackageName = "com.test.mypackage";
     private LauncherApps mLauncherApps;
     private List<LauncherActivityInfo> mLauncherActivities;
+
+    @Rule
+    public TestRule mDeviceTypeRule = new DeviceTypeRule();
+
     @Before
     public void setUp() {
         mContext = spy(ApplicationProvider.getApplicationContext());
@@ -219,7 +229,8 @@ public class UserAspectRatioManagerTest {
     }
 
     @Test
-    public void testGetUserMinAspectRatioEntry() {
+    @FoldableOnly
+    public void testGetUserMinAspectRatioEntry_Foldable() {
         // R.string.user_aspect_ratio_app_default
         final String appDefault = ResourcesUtils.getResourcesString(mContext,
                 "user_aspect_ratio_app_default");
@@ -232,19 +243,35 @@ public class UserAspectRatioManagerTest {
         assertThat(mUtils.getUserMinAspectRatioEntry(USER_MIN_ASPECT_RATIO_SPLIT_SCREEN,
                 mPackageName)).isEqualTo(ResourcesUtils.getResourcesString(mContext,
                         "user_aspect_ratio_half_screen"));
-        // R.string.user_aspect_ratio_3_2
-        assertThat(mUtils.getUserMinAspectRatioEntry(USER_MIN_ASPECT_RATIO_3_2, mPackageName))
-                .isEqualTo(ResourcesUtils.getResourcesString(mContext, "user_aspect_ratio_3_2"));
         // R,string.user_aspect_ratio_4_3
         assertThat(mUtils.getUserMinAspectRatioEntry(USER_MIN_ASPECT_RATIO_4_3, mPackageName))
                 .isEqualTo(ResourcesUtils.getResourcesString(mContext, "user_aspect_ratio_4_3"));
-        // R.string.user_aspect_ratio_16_9
+        assertThat(mUtils.getUserMinAspectRatioEntry(USER_MIN_ASPECT_RATIO_FULLSCREEN,
+                mPackageName)).isEqualTo(ResourcesUtils.getResourcesString(mContext,
+                        "user_aspect_ratio_fullscreen"));
+    }
+
+    @Test
+    @TabletOnly
+    public void testGetUserMinAspectRatioEntry_Tablet() {
+        // R.string.user_aspect_ratio_app_default
+        final String appDefault = ResourcesUtils.getResourcesString(mContext,
+                "user_aspect_ratio_app_default");
+        assertThat(mUtils.getUserMinAspectRatioEntry(USER_MIN_ASPECT_RATIO_UNSET, mPackageName))
+                .isEqualTo(appDefault);
+        // should always return default if value does not correspond to anything
+        assertThat(mUtils.getUserMinAspectRatioEntry(-1, mPackageName))
+                .isEqualTo(appDefault);
+        // R.string.user_aspect_ratio_half_screen
+        assertThat(mUtils.getUserMinAspectRatioEntry(USER_MIN_ASPECT_RATIO_SPLIT_SCREEN,
+                mPackageName)).isEqualTo(ResourcesUtils.getResourcesString(mContext,
+                "user_aspect_ratio_half_screen"));
         assertThat(mUtils.getUserMinAspectRatioEntry(USER_MIN_ASPECT_RATIO_16_9, mPackageName))
                 .isEqualTo(ResourcesUtils.getResourcesString(mContext, "user_aspect_ratio_16_9"));
         // R.string.user_aspect_ratio_fullscreen
         assertThat(mUtils.getUserMinAspectRatioEntry(USER_MIN_ASPECT_RATIO_FULLSCREEN,
                 mPackageName)).isEqualTo(ResourcesUtils.getResourcesString(mContext,
-                        "user_aspect_ratio_fullscreen"));
+                "user_aspect_ratio_fullscreen"));
     }
 
     @Test
