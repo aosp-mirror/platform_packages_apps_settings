@@ -18,14 +18,14 @@ package com.android.settings.fingerprint2.ui.settings
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintAuthAttemptViewModel
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintSensorPropertyViewModel
 import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintViewModel
-import com.android.settings.biometrics.fingerprint2.shared.model.SensorStrength
-import com.android.settings.biometrics.fingerprint2.shared.model.SensorType
 import com.android.settings.biometrics.fingerprint2.ui.settings.viewmodel.FingerprintSettingsNavigationViewModel
 import com.android.settings.biometrics.fingerprint2.ui.settings.viewmodel.FingerprintSettingsViewModel
 import com.android.settings.biometrics.fingerprint2.ui.settings.viewmodel.PreferenceViewModel
 import com.android.settings.testutils2.FakeFingerprintManagerInteractor
+import com.android.systemui.biometrics.shared.model.FingerprintSensor
+import com.android.systemui.biometrics.shared.model.FingerprintSensorType
+import com.android.systemui.biometrics.shared.model.SensorStrength
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
@@ -96,11 +96,11 @@ class FingerprintSettingsViewModelTest {
   fun authenticate_DoesNotRun_ifOptical() =
     testScope.runTest {
       fakeFingerprintManagerInteractor.sensorProp =
-        FingerprintSensorPropertyViewModel(
+        FingerprintSensor(
           0 /* sensorId */,
-          SensorStrength.Strong,
+          SensorStrength.STRONG,
           5 /* maxEnrollmentsPerUser */,
-          SensorType.Optical,
+          FingerprintSensorType.UDFPS_OPTICAL,
         )
       fakeFingerprintManagerInteractor.enrolledFingerprintsInternal =
         mutableListOf(FingerprintViewModel("a", 1, 3L))
@@ -132,11 +132,11 @@ class FingerprintSettingsViewModelTest {
   fun authenticate_DoesNotRun_ifUltrasonic() =
     testScope.runTest {
       fakeFingerprintManagerInteractor.sensorProp =
-        FingerprintSensorPropertyViewModel(
+        FingerprintSensor(
           0 /* sensorId */,
-          SensorStrength.Strong,
+          SensorStrength.STRONG,
           5 /* maxEnrollmentsPerUser */,
-          SensorType.Ultrasonic,
+          FingerprintSensorType.UDFPS_ULTRASONIC,
         )
       fakeFingerprintManagerInteractor.enrolledFingerprintsInternal =
         mutableListOf(FingerprintViewModel("a", 1, 3L))
@@ -166,11 +166,11 @@ class FingerprintSettingsViewModelTest {
   fun authenticate_DoesRun_ifNotUdfps() =
     testScope.runTest {
       fakeFingerprintManagerInteractor.sensorProp =
-        FingerprintSensorPropertyViewModel(
+        FingerprintSensor(
           0 /* sensorId */,
-          SensorStrength.Strong,
+          SensorStrength.STRONG,
           5 /* maxEnrollmentsPerUser */,
-          SensorType.SFPS
+          FingerprintSensorType.POWER_BUTTON
         )
       fakeFingerprintManagerInteractor.enrolledFingerprintsInternal =
         mutableListOf(FingerprintViewModel("a", 1, 3L))
@@ -372,11 +372,11 @@ class FingerprintSettingsViewModelTest {
 
   private fun setupAuth(): MutableList<FingerprintViewModel> {
     fakeFingerprintManagerInteractor.sensorProp =
-      FingerprintSensorPropertyViewModel(
+      FingerprintSensor(
         0 /* sensorId */,
-        SensorStrength.Strong,
+        SensorStrength.STRONG,
         5 /* maxEnrollmentsPerUser */,
-        SensorType.SFPS
+        FingerprintSensorType.POWER_BUTTON
       )
     val fingerprints =
       mutableListOf(FingerprintViewModel("a", 1, 3L), FingerprintViewModel("b", 2, 5L))
