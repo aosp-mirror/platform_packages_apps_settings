@@ -947,6 +947,11 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".localepicker.NotificationActionActivity"
+            android:excludeFromRecents="true"
+            android:theme="@android:style/Theme.NoDisplay">
+        </activity>
+
         <activity
             android:name=".Settings$LanguageAndInputSettingsActivity"
             android:label="@string/language_settings"
