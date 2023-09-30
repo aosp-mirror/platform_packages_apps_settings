@@ -30,6 +30,7 @@ import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.content.pm.PackageManager.FLAG_PERMISSION_USER_SET
 import android.content.pm.PackageManager.GET_PERMISSIONS
+import android.content.pm.PackageManager.NameNotFoundException
 import android.os.UserHandle
 import android.permission.PermissionManager.PERMISSION_GRANTED
 import android.permission.PermissionManager.PERMISSION_HARD_DENIED
@@ -131,6 +132,14 @@ class FullScreenIntentPermissionPreferenceControllerTest {
         initController()
 
         assertTrue(controller.isAvailable)
+    }
+
+    @Test
+    fun testIsAvailable_notWhenPackageNotFound() {
+        setPackageInfoNotFound()
+        initController()
+
+        assertFalse(controller.isAvailable)
     }
 
     @Test
@@ -240,6 +249,12 @@ class FullScreenIntentPermissionPreferenceControllerTest {
                 applicationInfo = ApplicationInfo().apply { packageName = TEST_PACKAGE }
                 requestedPermissions = if (requested) arrayOf(USE_FULL_SCREEN_INTENT) else arrayOf()
             })
+    }
+
+    private fun setPackageInfoNotFound() {
+        whenever(packageManager.getPackageInfo(TEST_PACKAGE, GET_PERMISSIONS)).thenThrow(
+            NameNotFoundException(TEST_PACKAGE)
+        )
     }
 
     private fun setPermissionResult(@PermissionResult result: Int) {
