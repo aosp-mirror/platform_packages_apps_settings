@@ -24,14 +24,14 @@ import android.hardware.fingerprint.FingerprintManager.RemovalCallback
 import android.os.CancellationSignal
 import android.util.Log
 import com.android.settings.biometrics.GatekeeperPasswordProvider
-import com.android.settings.biometrics.fingerprint2.conversion.Util
 import com.android.settings.biometrics.fingerprint2.conversion.toOriginalReason
 import com.android.settings.biometrics.fingerprint2.shared.domain.interactor.FingerprintManagerInteractor
 import com.android.settings.biometrics.fingerprint2.shared.model.EnrollReason
+import com.android.settings.biometrics.fingerprint2.shared.model.FingerEnrollStateViewModel
 import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintAuthAttemptViewModel
 import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintViewModel
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerEnrollStateViewModel
 import com.android.settings.password.ChooseLockSettingsHelper
+import com.android.systemui.biometrics.shared.model.toFingerprintSensor
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 import kotlinx.coroutines.CancellableContinuation
@@ -94,7 +94,7 @@ class FingerprintManagerInteractorImpl(
     val sensorPropertiesInternal = fingerprintManager.sensorPropertiesInternal
     emit(
       if (sensorPropertiesInternal.isEmpty()) null
-      else Util.sensorPropsToViewModel(sensorPropertiesInternal.first())
+      else sensorPropertiesInternal.first().toFingerprintSensor()
     )
   }
 

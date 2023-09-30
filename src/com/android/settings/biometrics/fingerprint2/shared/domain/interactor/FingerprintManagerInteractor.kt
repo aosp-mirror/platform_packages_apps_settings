@@ -18,9 +18,9 @@ package com.android.settings.biometrics.fingerprint2.shared.domain.interactor
 
 import com.android.settings.biometrics.fingerprint2.shared.model.EnrollReason
 import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintAuthAttemptViewModel
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintSensorPropertyViewModel
 import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintViewModel
 import com.android.settings.biometrics.fingerprint2.shared.model.FingerEnrollStateViewModel
+import com.android.systemui.biometrics.shared.model.FingerprintSensor
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -40,7 +40,7 @@ interface FingerprintManagerInteractor {
   val canEnrollFingerprints: Flow<Boolean>
 
   /** Retrieves the sensor properties of a device */
-  val sensorPropertiesInternal: Flow<FingerprintSensorPropertyViewModel?>
+  val sensorPropertiesInternal: Flow<FingerprintSensor?>
 
   /** Runs the authenticate flow */
   suspend fun authenticate(): FingerprintAuthAttemptViewModel
