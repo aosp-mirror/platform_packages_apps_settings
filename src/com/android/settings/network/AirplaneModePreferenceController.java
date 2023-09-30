@@ -141,7 +141,9 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
 
     @Override
     public void onDestroy() {
-        mAirplaneModeEnabler.close();
+        if (isAvailable()) {
+            mAirplaneModeEnabler.close();
+        }
     }
 
 
