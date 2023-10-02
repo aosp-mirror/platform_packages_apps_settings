@@ -57,7 +57,7 @@ object PlaceHolderState : NextStepViewModel() {
  * This state is the initial state for the current step, and will be used to determine if the user
  * needs to [LaunchConfirmDeviceCredential] if not, it will go to [Intro]
  */
-object Start : NextStepViewModel() {
+data object Start : NextStepViewModel() {
   override fun next(state: NavState): NextStepViewModel =
     if (state.confirmedDevice) Intro else LaunchConfirmDeviceCredential
 
@@ -71,19 +71,19 @@ class Finish(val resultCode: Int?) : NextStepViewModel() {
 }
 
 /** State for the FingerprintEnrollment introduction */
-object Intro : NextStepViewModel() {
+data object Intro : NextStepViewModel() {
   override fun next(state: NavState): NextStepViewModel = Education
   override fun prev(state: NavState): NextStepViewModel = Finish(null)
 }
 
 /** State for the FingerprintEnrollment education */
-object Education : NextStepViewModel() {
+data object Education : NextStepViewModel() {
   override fun next(state: NavState): NextStepViewModel = Enrollment
   override fun prev(state: NavState): NextStepViewModel = Intro
 }
 
 /** State for the FingerprintEnrollment enrollment */
-object Enrollment : NextStepViewModel() {
+data object Enrollment : NextStepViewModel() {
   override fun next(state: NavState): NextStepViewModel = Confirmation
   override fun prev(state: NavState): NextStepViewModel = Education
 }

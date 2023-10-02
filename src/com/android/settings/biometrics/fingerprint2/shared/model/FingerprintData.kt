@@ -14,17 +14,21 @@
  * limitations under the License.
  */
 
-package com.android.settings.biometrics.fingerprint2.ui.settings.viewmodel
+package com.android.settings.biometrics.fingerprint2.shared.model
 
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintData
+data class FingerprintData(
+  val name: String,
+  val fingerId: Int,
+  val deviceId: Long,
+)
 
-/** Classed use to represent a Dialogs state. */
-sealed class PreferenceViewModel {
-  data class RenameDialog(
-      val fingerprintViewModel: FingerprintData,
-  ) : PreferenceViewModel()
+sealed class FingerprintAuthAttemptModel {
+  data class Success(
+    val fingerId: Int,
+  ) : FingerprintAuthAttemptModel()
 
-  data class DeleteDialog(
-      val fingerprintViewModel: FingerprintData,
-  ) : PreferenceViewModel()
+  data class Error(
+    val error: Int,
+    val message: String,
+  ) : FingerprintAuthAttemptModel()
 }

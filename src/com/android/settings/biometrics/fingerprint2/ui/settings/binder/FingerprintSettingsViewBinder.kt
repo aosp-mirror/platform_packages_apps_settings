@@ -19,8 +19,8 @@ package com.android.settings.biometrics.fingerprint2.ui.settings.binder
 import android.hardware.fingerprint.FingerprintManager
 import android.util.Log
 import androidx.lifecycle.LifecycleCoroutineScope
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintAuthAttemptViewModel
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintViewModel
+import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintAuthAttemptModel
+import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintData
 import com.android.settings.biometrics.fingerprint2.ui.settings.binder.FingerprintSettingsViewBinder.FingerprintView
 import com.android.settings.biometrics.fingerprint2.ui.settings.viewmodel.EnrollAdditionalFingerprint
 import com.android.settings.biometrics.fingerprint2.ui.settings.viewmodel.EnrollFirstFingerprint
@@ -66,21 +66,21 @@ object FingerprintSettingsViewBinder {
     /** Indicates what result should be set for the returning callee */
     fun setResultExternal(resultCode: Int)
     /** Indicates the settings UI should be shown */
-    fun showSettings(enrolledFingerprints: List<FingerprintViewModel>)
+    fun showSettings(enrolledFingerprints: List<FingerprintData>)
     /** Updates the add fingerprints preference */
     fun updateAddFingerprintsPreference(canEnroll: Boolean, maxFingerprints: Int)
     /** Updates the sfps fingerprints preference */
     fun updateSfpsPreference(isSfpsPrefVisible: Boolean)
     /** Indicates that a user has been locked out */
-    fun userLockout(authAttemptViewModel: FingerprintAuthAttemptViewModel.Error)
+    fun userLockout(authAttemptViewModel: FingerprintAuthAttemptModel.Error)
     /** Indicates a fingerprint preference should be highlighted */
     suspend fun highlightPref(fingerId: Int)
     /** Indicates a user should be prompted to delete a fingerprint */
-    suspend fun askUserToDeleteDialog(fingerprintViewModel: FingerprintViewModel): Boolean
+    suspend fun askUserToDeleteDialog(fingerprintViewModel: FingerprintData): Boolean
     /** Indicates a user should be asked to renae ma dialog */
     suspend fun askUserToRenameDialog(
-      fingerprintViewModel: FingerprintViewModel
-    ): Pair<FingerprintViewModel, String>?
+      fingerprintViewModel: FingerprintData
+    ): Pair<FingerprintData, String>?
   }
 
   fun bind(
@@ -131,10 +131,10 @@ object FingerprintSettingsViewBinder {
     lifecycleScope.launch {
       viewModel.authFlow.filterNotNull().collect {
         when (it) {
-          is FingerprintAuthAttemptViewModel.Success -> {
+          is FingerprintAuthAttemptModel.Success -> {
             view.highlightPref(it.fingerId)
           }
-          is FingerprintAuthAttemptViewModel.Error -> {
+          is FingerprintAuthAttemptModel.Error -> {
             if (it.error == FingerprintManager.FINGERPRINT_ERROR_LOCKOUT) {
               view.userLockout(it)
             }

@@ -17,9 +17,9 @@
 package com.android.settings.biometrics.fingerprint2.shared.domain.interactor
 
 import com.android.settings.biometrics.fingerprint2.shared.model.EnrollReason
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintAuthAttemptViewModel
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintViewModel
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerEnrollStateViewModel
+import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintAuthAttemptModel
+import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintData
+import com.android.settings.biometrics.fingerprint2.shared.model.FingerEnrollState
 import com.android.systemui.biometrics.shared.model.FingerprintSensor
 import kotlinx.coroutines.flow.Flow
 
@@ -31,7 +31,7 @@ import kotlinx.coroutines.flow.Flow
  */
 interface FingerprintManagerInteractor {
   /** Returns the list of current fingerprints. */
-  val enrolledFingerprints: Flow<List<FingerprintViewModel>>
+  val enrolledFingerprints: Flow<List<FingerprintData>>
 
   /** Returns the max enrollable fingerprints, note during SUW this might be 1 */
   val maxEnrollableFingerprints: Flow<Int>
@@ -43,7 +43,7 @@ interface FingerprintManagerInteractor {
   val sensorPropertiesInternal: Flow<FingerprintSensor?>
 
   /** Runs the authenticate flow */
-  suspend fun authenticate(): FingerprintAuthAttemptViewModel
+  suspend fun authenticate(): FingerprintAuthAttemptModel
 
   /**
    * Generates a challenge with the provided [gateKeeperPasswordHandle] and on success returns a
@@ -56,22 +56,22 @@ interface FingerprintManagerInteractor {
 
   /**
    * Runs [FingerprintManager.enroll] with the [hardwareAuthToken] and [EnrollReason] for this
-   * enrollment. Returning the [FingerEnrollStateViewModel] that represents this fingerprint
+   * enrollment. Returning the [FingerEnrollState] that represents this fingerprint
    * enrollment state.
    */
   suspend fun enroll(
-    hardwareAuthToken: ByteArray?,
-    enrollReason: EnrollReason,
-  ): Flow<FingerEnrollStateViewModel>
+      hardwareAuthToken: ByteArray?,
+      enrollReason: EnrollReason,
+  ): Flow<FingerEnrollState>
 
   /**
    * Removes the given fingerprint, returning true if it was successfully removed and false
    * otherwise
    */
-  suspend fun removeFingerprint(fp: FingerprintViewModel): Boolean
+  suspend fun removeFingerprint(fp: FingerprintData): Boolean
 
   /** Renames the given fingerprint if one exists */
-  suspend fun renameFingerprint(fp: FingerprintViewModel, newName: String)
+  suspend fun renameFingerprint(fp: FingerprintData, newName: String)
 
   /** Indicates if the device has side fingerprint */
   suspend fun hasSideFps(): Boolean

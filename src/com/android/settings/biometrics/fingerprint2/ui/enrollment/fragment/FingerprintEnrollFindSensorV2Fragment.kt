@@ -30,6 +30,7 @@ import com.android.settings.R
 import com.android.settings.biometrics.fingerprint.FingerprintErrorDialog
 import com.android.settings.biometrics.fingerprint.FingerprintFindSensorAnimation
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollFindSensorViewModel
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollViewModel
 import com.android.systemui.biometrics.shared.model.FingerprintSensorType
 import com.google.android.setupcompat.template.FooterBarMixin
 import com.google.android.setupcompat.template.FooterButton
@@ -54,23 +55,8 @@ class FingerprintEnrollFindSensorV2Fragment : Fragment() {
   private var animation: FingerprintFindSensorAnimation? = null
 
   private var contentLayoutId: Int = -1
-  private lateinit var viewModel: FingerprintEnrollFindSensorViewModel
-
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    viewModel =
-      ViewModelProvider(requireActivity())[FingerprintEnrollFindSensorViewModel::class.java]
-    lifecycleScope.launch {
-      viewModel.sensorType.collect {
-        contentLayoutId =
-          when (it) {
-            FingerprintSensorType.UDFPS_OPTICAL,
-            FingerprintSensorType.UDFPS_ULTRASONIC -> R.layout.udfps_enroll_find_sensor_layout
-            FingerprintSensorType.POWER_BUTTON -> R.layout.sfps_enroll_find_sensor_layout
-            else -> R.layout.fingerprint_v2_enroll_find_sensor
-          }
-      }
-    }
+  private val viewModel: FingerprintEnrollFindSensorViewModel by lazy {
+    ViewModelProvider(requireActivity())[FingerprintEnrollFindSensorViewModel::class.java]
   }
 
   override fun onCreateView(
@@ -78,6 +64,18 @@ class FingerprintEnrollFindSensorV2Fragment : Fragment() {
     container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? {
+
+    val sensorType =
+      ViewModelProvider(requireActivity())[FingerprintEnrollViewModel::class.java].sensorTypeCached
+
+    contentLayoutId =
+      when (sensorType) {
+        FingerprintSensorType.UDFPS_OPTICAL,
+        FingerprintSensorType.UDFPS_ULTRASONIC -> R.layout.udfps_enroll_find_sensor_layout
+        FingerprintSensorType.POWER_BUTTON -> R.layout.sfps_enroll_find_sensor_layout
+        else -> R.layout.fingerprint_v2_enroll_find_sensor
+      }
+
     return inflater.inflate(contentLayoutId, container, false).also { it ->
       val view = it!! as GlifLayout
 
@@ -106,7 +104,8 @@ class FingerprintEnrollFindSensorV2Fragment : Fragment() {
       }
       lifecycleScope.launch {
         viewModel.showRfpsAnimation.collect {
-          animation = view.findViewById(R.id.fingerprint_sensor_location_animation)
+          animation =
+            view.findViewById(R.id.fingerprint_sensor_location_animation)
           animation!!.startAnimation()
         }
       }
