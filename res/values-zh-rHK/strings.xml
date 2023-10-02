@@ -3852,21 +3852,21 @@
     <string name="app_battery_usage_title" msgid="346558380609793334">"應用程式電池用量"</string>
     <string name="app_battery_usage_summary" msgid="6349965904306339539">"為應用程式設定電池用量"</string>
     <string name="battery_tips_card_action_button" msgid="4897793527424711648">"查看設定"</string>
-    <string name="battery_tips_card_action_button_check" msgid="1535140204105479318">"查看"</string>
+    <string name="battery_tips_card_action_button_check" msgid="1535140204105479318">"檢查"</string>
     <string name="battery_tips_card_dismiss_button" msgid="1885756985544936618">"知道了"</string>
     <string name="battery_tips_card_feedback_info" msgid="767117835675157298">"這則訊息實用嗎？"</string>
     <string name="battery_hints_warning_icon_a11y" msgid="5312542323401447620">"電池提示警告圖示"</string>
     <string name="battery_tips_settings_summary_brightness" msgid="546145032616077783">"開啟自動調校光暗功能以延長電池壽命"</string>
     <string name="battery_tips_settings_summary_screen_timeout" msgid="556801426050962077">"縮短螢幕逾時時間以延長電池壽命"</string>
     <string name="battery_tips_apps_summary_always_high" msgid="6334519477067044920">"「<xliff:g id="APP_LABEL">%1$s</xliff:g>」比較耗電"</string>
-    <string name="battery_tips_apps_summary_higher_than_usual" msgid="95676961671544628">"「<xliff:g id="APP_LABEL">%1$s</xliff:g>」比平常耗電"</string>
+    <string name="battery_tips_apps_summary_higher_than_usual" msgid="95676961671544628">"「<xliff:g id="APP_LABEL">%1$s</xliff:g>」比平時耗電"</string>
     <string name="battery_tips_apps_summary_always_high_in_background" msgid="2953858181710181126">"「<xliff:g id="APP_LABEL">%1$s</xliff:g>」在背景執行時比較耗電"</string>
-    <string name="battery_tips_apps_summary_higher_than_usual_in_background" msgid="1585002072567422199">"「<xliff:g id="APP_LABEL">%1$s</xliff:g>」在背景執行時比平常耗電"</string>
+    <string name="battery_tips_apps_summary_higher_than_usual_in_background" msgid="1585002072567422199">"「<xliff:g id="APP_LABEL">%1$s</xliff:g>」在背景執行時比平時耗電"</string>
     <string name="battery_tips_apps_summary_always_high_in_foreground" msgid="1910991243576404700">"「<xliff:g id="APP_LABEL">%1$s</xliff:g>」在前景執行時比較耗電"</string>
-    <string name="battery_tips_apps_summary_higher_than_usual_in_foreground" msgid="7937337570425168210">"「<xliff:g id="APP_LABEL">%1$s</xliff:g>」在前景執行時比比平常耗電"</string>
-    <string name="battery_app_item_hint" msgid="4850929961461039110">"高電池用量"</string>
-    <string name="battery_app_item_hint_in_bg" msgid="596240821466388336">"在背景執行時耗用大量電池電力"</string>
-    <string name="battery_app_item_hint_in_fg" msgid="5091860632260799910">"在前景執行時耗用大量電池電力"</string>
+    <string name="battery_tips_apps_summary_higher_than_usual_in_foreground" msgid="7937337570425168210">"「<xliff:g id="APP_LABEL">%1$s</xliff:g>」在前景執行時比平時耗電"</string>
+    <string name="battery_app_item_hint" msgid="4850929961461039110">"耗電量高"</string>
+    <string name="battery_app_item_hint_in_bg" msgid="596240821466388336">"在背景執行時耗電量高"</string>
+    <string name="battery_app_item_hint_in_fg" msgid="5091860632260799910">"在前景執行時耗電量高"</string>
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"無限制"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"優化"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"受限制"</string>
@@ -4183,10 +4183,8 @@
     <!-- no translation found for graphics_driver_app_preference_values:1 (485288770206606512) -->
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
-    <!-- no translation found for enable_angle_as_system_driver (4648827560023949786) -->
-    <skip />
-    <!-- no translation found for enable_angle_as_system_driver_summary (2170215556348477481) -->
-    <skip />
+    <string name="enable_angle_as_system_driver" msgid="4648827560023949786">"實驗功能：啟用 ANGLE"</string>
+    <string name="enable_angle_as_system_driver_summary" msgid="2170215556348477481">"警告：啟用 ANGLE 為預設 OpenGL ES 驅動程式。此功能目前處於實驗階段，可能無法與部分相機和影片應用程式兼容。"</string>
     <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"你需要重新開機，才能變更 OpenGL ES 驅動程式"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"應用程式兼容性變更"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"切換應用程式兼容性變更"</string>
@@ -4746,10 +4744,8 @@
     <string name="aspect_ratio_title" msgid="2451826875939676101">"長寬比"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"如果此應用程式未提供適合「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」的設計，請試用新的長寬比查看應用程式"</string>
     <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"如果此應用程式未提供適合「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」的設計，請試用新的長寬比查看應用程式。部分應用程式可能並未針對特定長寬比進行優化。"</string>
-    <!-- no translation found for aspect_ratio_summary_text (4737461467467220325) -->
-    <skip />
-    <!-- no translation found for aspect_ratio_main_summary_text (5544816872094235840) -->
-    <skip />
+    <string name="aspect_ratio_summary_text" msgid="4737461467467220325">"如果應用程式未提供適合「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」的設計，請試用新的長寬比查看應用程式"</string>
+    <string name="aspect_ratio_main_summary_text" msgid="5544816872094235840">"如果應用程式未提供適合「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」的設計，請試用新的長寬比查看應用程式。部分應用程式可能並未針對特定長寬比進行優化。"</string>
     <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"有建議顯示長寬比的應用程式"</string>
     <string name="user_aspect_ratio_changed_apps_label" msgid="2096614916172567672">"已變更的應用程式"</string>
     <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"應用程式預設"</string>
