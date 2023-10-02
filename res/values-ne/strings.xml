@@ -273,7 +273,8 @@
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"लोड गर्दै…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"वरपर रहेका ब्लुटुथ चल्ने डिभाइसहरू खोज्ने अनुमति दिइएका एपहरूले कनेक्ट गरिएका डिभाइसहरूको सापेक्ष लोकेसन पत्ता लगाउन सक्छन्।"</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"एप तथा सेवाहरूलाई लोकेसन प्रयोग गर्ने अनुमति दिइएको छैन। तपाईंले कुनै आपत्‌कालीन नम्बरमा कल गर्दा वा टेक्स्ट म्यासेज पठाउँदा भने आपत्‌कालीन सेवा प्रदान गर्ने निकायलाई तपाईंको डिभाइसको लोकेसन पठाइन सक्छ।"</string>
-    <string name="location_settings_footer_learn_more_content_description" msgid="5329024810729665156">"लोकेसन सेटिङका बारेमा थप जान्नुहोस्।"</string>
+    <!-- no translation found for location_settings_footer_learn_more_content_description (349380666660145540) -->
+    <skip />
     <string name="account_settings_title" msgid="9138880127246241885">"खाताहरू"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"सुरक्षा"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"इन्क्रिप्सन र क्रिडेन्सियल"</string>
@@ -923,6 +924,7 @@
     <string name="internet_source_wifi" msgid="6952593095166435179">"Wi‑Fi"</string>
     <string name="internet_source_mobile_data" msgid="877403889449201789">"मोबाइल डेटा"</string>
     <string name="internet_source_ethernet" msgid="8338472576454100966">"इथरनेट"</string>
+    <string name="hotspot_battery_charging_summary" msgid="6690892148553288457">"<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> ‑ चार्ज गरिँदै छ"</string>
     <string name="hotspot_connection_category" msgid="4320380513982923556">"हटस्पट कनेक्सन"</string>
     <string name="hotspot_connection_strength" msgid="87359986943768421">"कनेक्सनको क्षमता"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"सेभ गरिएका नेटवर्कहरू"</string>
@@ -2843,11 +2845,6 @@
     <string name="amber_alerts_title" msgid="5238275758191804575">"AMBER चेतावनीहरू"</string>
     <string name="amber_alerts_summary" msgid="5755221775246075883">"बच्चा अपहरण बारेमा बुलेटिनहरू प्राप्त"</string>
     <string name="repeat_title" msgid="8676570486899483606">"दोहोर्‍याउनुहोस्"</string>
-    <string name="call_manager_enable_title" msgid="1214301265395158720">"कल प्रबन्धक सक्षम गर्नुहोस्"</string>
-    <string name="call_manager_enable_summary" msgid="7362506369604163030">"तपाईँका कलहरू कसरी गरिन्छ व्यवस्थित गर्न यो सेवालाई अनुमति दिनुहोस्।"</string>
-    <string name="call_manager_title" msgid="3397433159509629466">"प्रबन्धक कल"</string>
-    <!-- no translation found for call_manager_summary (2558839230880919191) -->
-    <skip />
     <string name="cell_broadcast_settings" msgid="2416980110093867199">"आपत्‌कालीन वायरलेस अलर्टहरू"</string>
     <string name="network_operators_settings" msgid="5105453353329748954">"सञ्जाल संचालकहरू"</string>
     <string name="access_point_names" msgid="5768430498022188057">"बिन्दु नामहरूमा पहुँच"</string>
@@ -3070,8 +3067,7 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"सूचना आउँदा बज्ने डिफल्ट साउन्ड"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"अलार्मको डिफल्ट साउन्ड"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"सुरुमा भाइब्रेट होस् र घन्टी बजोस्"</string>
-    <!-- no translation found for spatial_audio_title (1775370104206884711) -->
-    <skip />
+    <string name="spatial_audio_title" msgid="1775370104206884711">"स्पेसियल अडियो"</string>
     <string name="dial_pad_tones_title" msgid="3536945335367914892">"डायल प्याडको टोन"</string>
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"स्क्रिन लक हुँदा बज्ने साउन्ड"</string>
     <string name="charging_sounds_title" msgid="5261683808537783668">"चार्ज गर्दा बज्ने साउन्ड र भाइब्रेसन"</string>
@@ -3900,32 +3896,21 @@
     <string name="app_battery_usage_title" msgid="346558380609793334">"एपका हकमा तोकिएको ब्याट्रीको खपत"</string>
     <string name="app_battery_usage_summary" msgid="6349965904306339539">"कुन एपले कति ब्याट्री खपत गर्ने भन्ने कुरा तोक्नु"</string>
     <string name="battery_tips_card_action_button" msgid="4897793527424711648">"सेटिङ हेर्नुहोस्"</string>
-    <!-- no translation found for battery_tips_card_action_button_check (1535140204105479318) -->
-    <skip />
+    <string name="battery_tips_card_action_button_check" msgid="1535140204105479318">"जाँच्नुहोस्"</string>
     <string name="battery_tips_card_dismiss_button" msgid="1885756985544936618">"बुझेँ"</string>
     <string name="battery_tips_card_feedback_info" msgid="767117835675157298">"यो म्यासेज उपयोगी छ?"</string>
-    <!-- no translation found for battery_hints_warning_icon_a11y (5312542323401447620) -->
-    <skip />
+    <string name="battery_hints_warning_icon_a11y" msgid="5312542323401447620">"ब्याट्रीसम्बन्धी सुझावका बारेमा चेतावनी जनाउने आइकन"</string>
     <string name="battery_tips_settings_summary_brightness" msgid="546145032616077783">"ब्याट्रीको आयु बढाउन एडाप्टिभ ब्राइटनेस अन गर्नुहोस्"</string>
     <string name="battery_tips_settings_summary_screen_timeout" msgid="556801426050962077">"ब्याट्रीको आयु बढाउन स्क्रिन टाइमआउट हुने समय घटाउनुहोस्"</string>
-    <!-- no translation found for battery_tips_apps_summary_always_high (6334519477067044920) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_higher_than_usual (95676961671544628) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_always_high_in_background (2953858181710181126) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_higher_than_usual_in_background (1585002072567422199) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_always_high_in_foreground (1910991243576404700) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_higher_than_usual_in_foreground (7937337570425168210) -->
-    <skip />
-    <!-- no translation found for battery_app_item_hint (4850929961461039110) -->
-    <skip />
-    <!-- no translation found for battery_app_item_hint_in_bg (596240821466388336) -->
-    <skip />
-    <!-- no translation found for battery_app_item_hint_in_fg (5091860632260799910) -->
-    <skip />
+    <string name="battery_tips_apps_summary_always_high" msgid="6334519477067044920">"<xliff:g id="APP_LABEL">%1$s</xliff:g> ले धेरै ब्याट्री खपत गरेको छ"</string>
+    <string name="battery_tips_apps_summary_higher_than_usual" msgid="95676961671544628">"<xliff:g id="APP_LABEL">%1$s</xliff:g> ले सामान्यभन्दा धेरै ब्याट्री खपत गरेको छ"</string>
+    <string name="battery_tips_apps_summary_always_high_in_background" msgid="2953858181710181126">"<xliff:g id="APP_LABEL">%1$s</xliff:g> ले ब्याकग्राउन्डमा धेरै ब्याट्री खपत गरेको छ"</string>
+    <string name="battery_tips_apps_summary_higher_than_usual_in_background" msgid="1585002072567422199">"<xliff:g id="APP_LABEL">%1$s</xliff:g> ले ब्याकग्राउन्डमा सामान्यभन्दा धेरै ब्याट्री खपत गरेको छ"</string>
+    <string name="battery_tips_apps_summary_always_high_in_foreground" msgid="1910991243576404700">"<xliff:g id="APP_LABEL">%1$s</xliff:g> ले फोरग्राउन्डमा धेरै ब्याट्री खपत गरेको छ"</string>
+    <string name="battery_tips_apps_summary_higher_than_usual_in_foreground" msgid="7937337570425168210">"<xliff:g id="APP_LABEL">%1$s</xliff:g> ले फोरग्राउन्डमा सामान्यभन्दा धेरै ब्याट्री खपत गरेको छ"</string>
+    <string name="battery_app_item_hint" msgid="4850929961461039110">"धेरै ब्याट्री खपत गर्ने एप"</string>
+    <string name="battery_app_item_hint_in_bg" msgid="596240821466388336">"ब्याकग्राउन्डमा धेरै ब्याट्री खपत गर्ने एप"</string>
+    <string name="battery_app_item_hint_in_fg" msgid="5091860632260799910">"फोर्टफोरग्राउन्डमा धेरै ब्याट्री खपत गर्ने एप"</string>
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"असीमित"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"अप्टिमाइज गरिएको"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"प्रतिबन्धित"</string>
@@ -4241,8 +4226,10 @@
     <!-- no translation found for graphics_driver_app_preference_values:1 (485288770206606512) -->
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
-    <string name="enable_angle_as_system_driver" msgid="3985105681812713612">"ANGLE अन गरियोस्"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="6413038127558166972">"ANGLE लाई डिफल्ट OpenGL ES ड्राइभर बनाउनुहोस्। यो सुविधा प्रयोग गर्न नमिल्ने डिभाइसहरूमा यसलाई अन गर्दा केही एपहरू नचल्न सक्छन्।"</string>
+    <!-- no translation found for enable_angle_as_system_driver (4648827560023949786) -->
+    <skip />
+    <!-- no translation found for enable_angle_as_system_driver_summary (2170215556348477481) -->
+    <skip />
     <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"सिस्टम OpenGL ES ड्राइभर बदल्न रिबुट गर्नु पर्ने हुन्छ"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"एपको कम्प्याटिबिलिटीमा भएका परिवर्तनहरू"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"एपको कम्प्याटिबिलिटीमा गरिएको परिवर्तन टगल गर्नुहोस्"</string>
@@ -4504,9 +4491,6 @@
     <string name="wfc_disclaimer_emergency_limitation_title_text" msgid="8276287227589397162">"आपताकालीन कल"</string>
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"तपाईंको सेवा प्रदायकले Wi‑Fi मार्फत आपत्‌कालीन कल गर्ने सुविधा समर्थन गदैन। \nअपतकालीन कल गर्नका लागि उक्त यन्त्रले स्वतः सेलुलर नेटवर्क प्रयोग गर्छ।\n सेलुलर नेटवर्कको कभरेज राम्रो भएका क्षेत्रमा मात्र अपतकालीन कल गर्न सम्भव हुन्छ।"</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"कलको गुणस्तर सुधार्न Wi‑Fi प्रयोग गरी कल गर्नुहोस्"</string>
-    <string name="backup_calling_settings_title" msgid="519714752900364326">"ब्याकअप कलिङ"</string>
-    <string name="backup_calling_setting_summary" msgid="599493254305348733">"<xliff:g id="BACKUP_CALLING_OPERATOR_TEXT">%1$s</xliff:g> प्रयोग गरी रोमिङ सुविधा चलाउन नमिल्ने भएमा कल गर्न <xliff:g id="BACKUP_CALLING_CARRIER_TEXT">%1$s</xliff:g> को मोबाइल डेटा SIM प्रयोग गर्नुहोस्।"</string>
-    <string name="keywords_backup_calling" msgid="8592800915478816800">"ब्याकअप कलिङ"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"आगमन MMS म्यासेज"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"MMS म्यासेज पठाउन सकिएन"</string>
     <string name="enable_mms_notification_summary" msgid="6432752438276672500">"मोबाइल डेटा निष्क्रिय हुँदा <xliff:g id="OPERATOR_NAME">%1$s</xliff:g> लाई MMS म्यासेज पठाउने अनुमति दिन ट्याप गर्नुहोस्"</string>
@@ -4803,6 +4787,8 @@
     <string name="aspect_ratio_title" msgid="2451826875939676101">"एस्पेक्ट रेसियो"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"यो एप तपाईंको <xliff:g id="DEVICE_NAME">%1$s</xliff:g> मा प्रयोग गर्न मिल्ने गरी डिजाइन गरिएको छैन भने यो एप हेर्न नयाँ एस्पेक्ट रेसियो प्रयोग गरी हेर्नुहोस्"</string>
     <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"यो एप तपाईंको <xliff:g id="DEVICE_NAME">%1$s</xliff:g> मा प्रयोग गर्न मिल्ने गरी डिजाइन गरिएको छैन भने यो एप हेर्न नयाँ एस्पेक्ट रेसियो प्रयोग गरी हेर्नुहोस्। केही एपहरू निश्चित एस्पेक्ट रेसियोका लागि अप्टिमाइज नगरिन सक्छन्।"</string>
+    <string name="aspect_ratio_summary_text" msgid="4737461467467220325">"कुनै एप तपाईंको <xliff:g id="DEVICE_NAME">%1$s</xliff:g> मा प्रयोग गर्न मिल्ने गरी डिजाइन गरिएको छैन भने त्यो एप हेर्न नयाँ एस्पेक्ट रेसियो प्रयोग गरी हेर्नुहोस्"</string>
+    <string name="aspect_ratio_main_summary_text" msgid="5544816872094235840">"कुनै एप तपाईंको <xliff:g id="DEVICE_NAME">%1$s</xliff:g> मा प्रयोग गर्न मिल्ने गरी डिजाइन गरिएको छैन भने त्यो एप हेर्न नयाँ एस्पेक्ट रेसियो प्रयोग गरी हेर्नुहोस्। केही एपहरू निश्चित एस्पेक्ट रेसियोका लागि अप्टिमाइज नगरिन सक्छन्।"</string>
     <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"सिफारिस गरिएका एपहरू"</string>
     <string name="user_aspect_ratio_changed_apps_label" msgid="2096614916172567672">"बदलिएका एपहरू"</string>
     <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"एपको डिफल्ट एस्पेक्ट रेसियो"</string>
@@ -4872,6 +4858,4 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"तपाईंका डिभाइसमा इन्स्टल गरिएका एपहरूले तपाईंको डिभाइसको नाम हेर्न सक्छन्। तपाईंले ब्लुटुथ चल्ने डिभाइसमा कनेक्ट गर्दा, कुनै Wi-Fi नेटवर्कमा कनेक्ट गर्दा वा कुनै Wi-Fi हटस्पट सेटअप गर्दा अरू मान्छेहरूले पनि डिभाइसको नाम देख्न सक्छन्।"</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"ग्रामाटिकल जेन्डर"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"ग्रामाटिकल जेन्डर चयन गर्नुहोस्"</string>
-    <!-- no translation found for quarantined_apps_title (5713301345723474936) -->
-    <skip />
 </resources>

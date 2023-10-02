@@ -273,7 +273,8 @@
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Wird geladen…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Apps mit der Berechtigung zum Zugriff auf Geräte in der Nähe können die relative Position von verbundenen Geräten ermitteln."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Standortzugriff ist für Apps und Dienste deaktiviert. Wenn du eine Notrufnummer wählst oder eine Nachricht an eine solche Nummer schickst, kann dein Standort dennoch an den Notdienst gesendet werden."</string>
-    <string name="location_settings_footer_learn_more_content_description" msgid="5329024810729665156">"Weitere Informationen zu Standorteinstellungen"</string>
+    <!-- no translation found for location_settings_footer_learn_more_content_description (349380666660145540) -->
+    <skip />
     <string name="account_settings_title" msgid="9138880127246241885">"Konten"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Sicherheit"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Verschlüsselung &amp; Anmeldedaten"</string>
@@ -570,7 +571,7 @@
     <string name="lock_settings_picker_profile_message" msgid="9142379549980873478">"Wenn du diese Sperre vergisst, bitte deinen IT-Administrator, sie zurückzusetzen"</string>
     <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"Optionen für die Displaysperre"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="7985107300517468569">"Optionen für die Displaysperre"</string>
-    <string name="lock_screen_auto_pin_confirm_title" msgid="3012128112186088375">"Zum Entsperren automatisch bestätigen"</string>
+    <string name="lock_screen_auto_pin_confirm_title" msgid="3012128112186088375">"Entsperren mit automatischer Bestätigung"</string>
     <string name="lock_screen_auto_pin_confirm_summary" msgid="9050818870806580819">"Der Bildschirm wird automatisch entsperrt, wenn du eine korrekte PIN mit 6 oder mehr Ziffern eingibst. Diese Option ist etwas weniger sicher, als wenn du zum Bestätigen auf „Eingabe“ tippst."</string>
     <string name="auto_pin_confirm_user_message" msgid="6194556173488939314">"Korrekte PIN automatisch bestätigen"</string>
     <string name="auto_pin_confirm_opt_in_security_message" msgid="580773976736184893">"Die Bestätigung deiner PIN durch Tippen auf „Eingabe“ ist sicherer als die automatische Bestätigung"</string>
@@ -923,6 +924,7 @@
     <string name="internet_source_wifi" msgid="6952593095166435179">"WLAN"</string>
     <string name="internet_source_mobile_data" msgid="877403889449201789">"Mobile Daten"</string>
     <string name="internet_source_ethernet" msgid="8338472576454100966">"Ethernet"</string>
+    <string name="hotspot_battery_charging_summary" msgid="6690892148553288457">"<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> – Wird geladen"</string>
     <string name="hotspot_connection_category" msgid="4320380513982923556">"Hotspot-Verbindung"</string>
     <string name="hotspot_connection_strength" msgid="87359986943768421">"Verbindungsstärke"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"Gespeicherte WLANs"</string>
@@ -2843,11 +2845,6 @@
     <string name="amber_alerts_title" msgid="5238275758191804575">"AMBER Alerts"</string>
     <string name="amber_alerts_summary" msgid="5755221775246075883">"Bulletins über Kindesentführungen erhalten"</string>
     <string name="repeat_title" msgid="8676570486899483606">"Wiederholen"</string>
-    <string name="call_manager_enable_title" msgid="1214301265395158720">"Anrufverwaltung aktivieren"</string>
-    <string name="call_manager_enable_summary" msgid="7362506369604163030">"Diesem Dienst die Verwaltung der Anrufabwicklung gestatten"</string>
-    <string name="call_manager_title" msgid="3397433159509629466">"Anrufverwaltung"</string>
-    <!-- no translation found for call_manager_summary (2558839230880919191) -->
-    <skip />
     <string name="cell_broadcast_settings" msgid="2416980110093867199">"Notfall­benachrichtigungen an Mobilgeräte"</string>
     <string name="network_operators_settings" msgid="5105453353329748954">"Netzbetreiber"</string>
     <string name="access_point_names" msgid="5768430498022188057">"Zugangspunkte (APNs)"</string>
@@ -3331,7 +3328,7 @@
     <string name="notification_access_detail_switch" msgid="46386786409608330">"Benachrichtigungszugriff erlauben"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Die adaptiven Benachrichtigungen wurden in Android 12 durch die Funktion „Erweiterte Benachrichtigungen“ ersetzt. Diese Funktion zeigt Vorschläge für Aktionen und Antworten an und sortiert Benachrichtigungen. \n\nDie Funktion hat Zugriff auf alle Benachrichtigungen, darunter auch personenbezogene Daten wie Kontaktnamen und Nachrichten. Außerdem kann sie auf Benachrichtigungen antworten oder diese schließen und so beispielsweise Anrufe entgegennehmen oder „Bitte nicht stören“ steuern."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Benachrichtigungszugriff für <xliff:g id="SERVICE">%1$s</xliff:g> zulassen?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="1131986567509818121">"Die App „<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>“ kann alle Benachrichtigungen abrufen, darunter auch personenbezogene Daten wie Kontaktnamen, Fotos und eingehende Nachrichten. Außerdem kann die App Benachrichtigungen zurückstellen oder schließen sowie Schaltflächen in Benachrichtigungen auslösen und so beispielsweise Anrufe entgegennehmen. \n\nZusätzlich wird sie in die Lage versetzt, die „Bitte nicht stören“-Funktion zu aktivieren oder zu deaktivieren und zugehörige Einstellungen zu ändern."</string>
+    <string name="notification_listener_security_warning_summary" msgid="1131986567509818121">"Die App „<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>“ kann alle Benachrichtigungen lesen, darunter auch personenbezogene Daten wie Kontaktnamen, Fotos und eingehende Nachrichten. Außerdem kann die App Benachrichtigungen zurückstellen oder schließen sowie Schaltflächen in Benachrichtigungen auslösen und so beispielsweise Anrufe entgegennehmen. \n\nZusätzlich wird sie in die Lage versetzt, die „Bitte nicht stören“-Funktion zu aktivieren oder zu deaktivieren und zugehörige Einstellungen zu ändern."</string>
     <string name="nls_warning_prompt" msgid="1486887096703743841">"Die App „<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>“ kann Folgendes:"</string>
     <string name="nls_feature_read_title" msgid="7629713268744220437">"Benachrichtigungen abrufen"</string>
     <string name="nls_feature_read_summary" msgid="1064698238110273593">"Sie kann deine Benachrichtigungen abrufen, darunter auch personenbezogene Daten wie Kontakte, Nachrichten und Fotos."</string>
@@ -4241,8 +4238,8 @@
     <!-- no translation found for graphics_driver_app_preference_values:1 (485288770206606512) -->
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
-    <string name="enable_angle_as_system_driver" msgid="3985105681812713612">"ANGLE aktivieren"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="6413038127558166972">"ANGLE als OpenGL ES-Standardtreiber aktivieren. Wenn du diese Option auf nicht kompatiblen Geräten aktivierst, funktionieren manche Apps möglicherweise nicht."</string>
+    <string name="enable_angle_as_system_driver" msgid="4648827560023949786">"Experimentelle Funktion: ANGLE aktivieren"</string>
+    <string name="enable_angle_as_system_driver_summary" msgid="2170215556348477481">"Beachte bei Aktivierung von ANGLE als OpenGL ES-Standardtreiber Folgendes: Es handelt sich um eine experimentelle Funktion, die möglicherweise mit einigen Kamera- und Video-Apps nicht kompatibel ist."</string>
     <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"Ein Neustart ist erforderlich, um den OpenGL ES-Systemtreiber zu ändern"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Änderungen der Kompatibilität von Apps"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Änderungen bei der Kompatibilität von Apps festlegen"</string>
@@ -4504,9 +4501,6 @@
     <string name="wfc_disclaimer_emergency_limitation_title_text" msgid="8276287227589397162">"Notrufe"</string>
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"Notrufe über WLAN-Telefonie werden von deinem Mobilfunkanbieter nicht unterstützt.\nDas Gerät wechselt automatisch zu einem Mobilfunknetz, um einen Notruf abzusetzen.\nNotrufe sind nur in Bereichen mit Mobilfunkabdeckung möglich."</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"Für Anrufe WLAN verwenden, um die Qualität zu verbessern"</string>
-    <string name="backup_calling_settings_title" msgid="519714752900364326">"Back-up für Anrufe"</string>
-    <string name="backup_calling_setting_summary" msgid="599493254305348733">"Wenn <xliff:g id="BACKUP_CALLING_OPERATOR_TEXT">%1$s</xliff:g> oder Roaming nicht verfügbar ist, kannst du über deine SIM für mobile Daten <xliff:g id="BACKUP_CALLING_CARRIER_TEXT">%1$s</xliff:g>-Anrufe starten und annehmen."</string>
-    <string name="keywords_backup_calling" msgid="8592800915478816800">"Back-up für Anrufe"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"Eingehende MMS"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"MMS kann nicht gesendet werden"</string>
     <string name="enable_mms_notification_summary" msgid="6432752438276672500">"Tippen, um MMS über <xliff:g id="OPERATOR_NAME">%1$s</xliff:g> zuzulassen, wenn mobile Daten deaktiviert sind"</string>
@@ -4803,6 +4797,10 @@
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Seitenverhältnis"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"Probiere ein neues Seitenverhältnis für diese App aus, wenn sie nicht für dein Gerät (<xliff:g id="DEVICE_NAME">%1$s</xliff:g>) optimiert ist"</string>
     <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"Probiere ein neues Seitenverhältnis für diese App aus, wenn sie nicht für dein Gerät (<xliff:g id="DEVICE_NAME">%1$s</xliff:g>) optimiert ist. Einige Apps sind möglicherweise nicht für bestimmte Seitenverhältnisse optimiert."</string>
+    <!-- no translation found for aspect_ratio_summary_text (4737461467467220325) -->
+    <skip />
+    <!-- no translation found for aspect_ratio_main_summary_text (5544816872094235840) -->
+    <skip />
     <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"Vorgeschlagene Apps"</string>
     <string name="user_aspect_ratio_changed_apps_label" msgid="2096614916172567672">"Geänderte Apps"</string>
     <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"App-Standard"</string>
@@ -4872,6 +4870,4 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Dein Gerätename ist für Apps, die du installiert hast, sichtbar. Wenn du dein Gerät mit Bluetooth-Geräten oder einem WLAN verbindest oder einen WLAN-Hotspot einrichtest, kann der Name möglicherweise auch von anderen Personen gesehen werden."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Genus"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Genus auswählen"</string>
-    <!-- no translation found for quarantined_apps_title (5713301345723474936) -->
-    <skip />
 </resources>
