@@ -9,7 +9,7 @@ aconfig_declarations {
         "settings_connecteddevice_flag_declarations.aconfig",
         "settings_globalintl_flag_declarations.aconfig",
         "settings_apn_flag_declarations.aconfig",
-        "settings_onboarding_experience_flag_declarations.aconfig"
+        "settings_onboarding_experience_flag_declarations.aconfig",
     ],
 }
 
@@ -18,3 +18,13 @@ java_aconfig_library {
     aconfig_declarations: "aconfig_settings_flags",
 }
 
+aconfig_declarations {
+    name: "factory_reset_flags",
+    package: "com.android.settings.factory_reset",
+    srcs: ["factory_reset/*.aconfig"],
+}
+
+java_aconfig_library {
+    name: "factory_reset_flags_lib",
+    aconfig_declarations: "factory_reset_flags",
+}
