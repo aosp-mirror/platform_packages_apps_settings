@@ -16,6 +16,8 @@
 
 package com.android.settings;
 
+import android.content.ContentProvider;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
@@ -23,9 +25,11 @@ import android.media.AudioAttributes;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.Settings.System;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
@@ -233,6 +237,84 @@ public class RingtonePreference extends Preference {
 
             if (callChangeListener(uri != null ? uri.toString() : "")) {
                 onSaveRingtone(uri);
+            }
+        }
+
+        return true;
+    }
+
+    public boolean isDefaultRingtone(Uri ringtoneUri) {
+        // null URIs are valid (None/silence)
+        return ringtoneUri == null || RingtoneManager.isDefault(ringtoneUri);
+    }
+
+    protected boolean isValidRingtoneUri(Uri ringtoneUri) {
+        if (isDefaultRingtone(ringtoneUri)) {
+            return true;
+        }
+
+        // Return early for android resource URIs
+        if (ContentResolver.SCHEME_ANDROID_RESOURCE.equals(ringtoneUri.getScheme())) {
+            return true;
+        }
+
+        String mimeType = mUserContext.getContentResolver().getType(ringtoneUri);
+        if (mimeType == null) {
+            Log.e(TAG, "isValidRingtoneUri for URI:" + ringtoneUri
+                    + " failed: failure to find mimeType (no access from this context?)");
+            return false;
+        }
+
+        if (!(mimeType.startsWith("audio/") || mimeType.equals("application/ogg")
+                || mimeType.equals("application/x-flac"))) {
+            Log.e(TAG, "isValidRingtoneUri for URI:" + ringtoneUri
+                    + " failed: associated mimeType:" + mimeType + " is not an audio type");
+            return false;
+        }
+
+        // Validate userId from URIs: content://{userId}@...
+        final int userIdFromUri = ContentProvider.getUserIdFromUri(ringtoneUri, mUserId);
+        if (userIdFromUri != mUserId) {
+            final UserManager userManager = mUserContext.getSystemService(UserManager.class);
+
+            if (!userManager.isSameProfileGroup(mUserId, userIdFromUri)) {
+                Log.e(TAG,
+                    "isValidRingtoneUri for URI:" + ringtoneUri + " failed: user " + userIdFromUri
+                        + " and user " + mUserId + " are not in the same profile group");
+                return false;
+            }
+
+            final int parentUserId;
+            final int profileUserId;
+            if (userManager.isProfile()) {
+                profileUserId = mUserId;
+                parentUserId = userIdFromUri;
+            } else {
+                parentUserId = mUserId;
+                profileUserId = userIdFromUri;
+            }
+
+            final UserHandle parent = userManager.getProfileParent(UserHandle.of(profileUserId));
+            if (parent == null || parent.getIdentifier() != parentUserId) {
+                Log.e(TAG,
+                    "isValidRingtoneUri for URI:" + ringtoneUri + " failed: user " + profileUserId
+                        + " is not a profile of user " + parentUserId);
+                return false;
+            }
+
+            // Allow parent <-> managed profile sharing, unless restricted
+            if (userManager.hasUserRestrictionForUser(
+                UserManager.DISALLOW_SHARE_INTO_MANAGED_PROFILE, UserHandle.of(parentUserId))) {
+                Log.e(TAG,
+                    "isValidRingtoneUri for URI:" + ringtoneUri + " failed: user " + parentUserId
+                        + " has restriction: " + UserManager.DISALLOW_SHARE_INTO_MANAGED_PROFILE);
+                return false;
+            }
+
+            if (!userManager.isManagedProfile(profileUserId)) {
+                Log.e(TAG, "isValidRingtoneUri for URI:" + ringtoneUri
+                    + " failed: user " + profileUserId + " is not a managed profile");
+                return false;
             }
         }
 
