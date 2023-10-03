@@ -273,7 +273,8 @@
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Φόρτωση…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Οι εφαρμογές με άδεια Συσκευές σε κοντινή απόσταση μπορούν να προσδιορίσουν τη σχετική θέση των συνδεδεμένων συσκευών."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Η πρόσβαση στην τοποθεσία είναι απενεργοποιημένη για τις εφαρμογές και τις υπηρεσίες. Η τοποθεσία της συσκευής σας ενδέχεται ωστόσο να αποστέλλεται στους χειριστές των κέντρων εκτάκτων αναγκών, όταν καλείτε ή στέλνετε μήνυμα σε έναν αριθμό έκτακτης ανάγκης."</string>
-    <string name="location_settings_footer_learn_more_content_description" msgid="5329024810729665156">"Μάθετε περισσότερα σχετικά με τις ρυθμίσεις τοποθεσίας."</string>
+    <!-- no translation found for location_settings_footer_learn_more_content_description (349380666660145540) -->
+    <skip />
     <string name="account_settings_title" msgid="9138880127246241885">"Λογαριασμοί"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Ασφάλεια"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Κρυπτογράφηση και διαπιστευτήρια"</string>
@@ -923,6 +924,7 @@
     <string name="internet_source_wifi" msgid="6952593095166435179">"Wi‑Fi"</string>
     <string name="internet_source_mobile_data" msgid="877403889449201789">"Δεδομένα κινητής τηλεφωνίας"</string>
     <string name="internet_source_ethernet" msgid="8338472576454100966">"Ethernet"</string>
+    <string name="hotspot_battery_charging_summary" msgid="6690892148553288457">"<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> ‑ Φόρτιση σε εξέλιξη"</string>
     <string name="hotspot_connection_category" msgid="4320380513982923556">"Σύνδεση σε σημείο πρόσβασης Wi-Fi"</string>
     <string name="hotspot_connection_strength" msgid="87359986943768421">"Ισχύς σύνδεσης"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"Αποθηκευμένα δίκτυα"</string>
@@ -2843,11 +2845,6 @@
     <string name="amber_alerts_title" msgid="5238275758191804575">"Ειδοποιήσεις AMBER"</string>
     <string name="amber_alerts_summary" msgid="5755221775246075883">"Λήψη ανακοινώσεων σχετικά με απαγωγές παιδιών"</string>
     <string name="repeat_title" msgid="8676570486899483606">"Επανάληψη"</string>
-    <string name="call_manager_enable_title" msgid="1214301265395158720">"Ενεργοποίηση Διαχειριστή κλήσεων"</string>
-    <string name="call_manager_enable_summary" msgid="7362506369604163030">"Επιτρέψτε σε αυτή την υπηρεσία να διαχειριστεί πώς γίνονται οι κλήσεις σας."</string>
-    <string name="call_manager_title" msgid="3397433159509629466">"Διαχειριστής κλήσεων"</string>
-    <!-- no translation found for call_manager_summary (2558839230880919191) -->
-    <skip />
     <string name="cell_broadcast_settings" msgid="2416980110093867199">"Ασύρματες ειδοποιήσεις έκτακτης ανάγκης"</string>
     <string name="network_operators_settings" msgid="5105453353329748954">"Εταιρείες δικτύου"</string>
     <string name="access_point_names" msgid="5768430498022188057">"Ονόματα σημείων πρόσβασης"</string>
@@ -3070,8 +3067,7 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"Προεπιλεγμένος ήχος ειδοποίησης"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"Προεπιλεγμ. ήχος ξυπνητηριού"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"Δόνηση και σταδιακό κουδούν."</string>
-    <!-- no translation found for spatial_audio_title (1775370104206884711) -->
-    <skip />
+    <string name="spatial_audio_title" msgid="1775370104206884711">"Χωρικός ήχος"</string>
     <string name="dial_pad_tones_title" msgid="3536945335367914892">"Ήχοι πληκτρολογίου κλήσης"</string>
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"Ήχος κλειδώματος οθόνης"</string>
     <string name="charging_sounds_title" msgid="5261683808537783668">"Ήχοι φόρτισης και δόνηση"</string>
@@ -3900,32 +3896,21 @@
     <string name="app_battery_usage_title" msgid="346558380609793334">"Χρήση μπαταρίας εφαρμογής"</string>
     <string name="app_battery_usage_summary" msgid="6349965904306339539">"Ορισμός χρήσης μπαταρίας για εφαρμογές"</string>
     <string name="battery_tips_card_action_button" msgid="4897793527424711648">"Προβολή Ρυθμίσεων"</string>
-    <!-- no translation found for battery_tips_card_action_button_check (1535140204105479318) -->
-    <skip />
+    <string name="battery_tips_card_action_button_check" msgid="1535140204105479318">"Έλεγχος"</string>
     <string name="battery_tips_card_dismiss_button" msgid="1885756985544936618">"Το κατάλαβα"</string>
     <string name="battery_tips_card_feedback_info" msgid="767117835675157298">"Είναι χρήσιμο αυτό το μήνυμα;"</string>
-    <!-- no translation found for battery_hints_warning_icon_a11y (5312542323401447620) -->
-    <skip />
+    <string name="battery_hints_warning_icon_a11y" msgid="5312542323401447620">"Εικονίδιο προειδοποίησης με συμβουλές για την μπαταρία"</string>
     <string name="battery_tips_settings_summary_brightness" msgid="546145032616077783">"Ενεργοποιήστε την προσαρμοστική φωτεινότητα για να επεκτείνετε τη διάρκεια ζωής της μπαταρίας"</string>
     <string name="battery_tips_settings_summary_screen_timeout" msgid="556801426050962077">"Μειώστε τη λήξη χρονικού ορίου οθόνης για να επεκτείνετε τη διάρκεια ζωής της μπαταρίας"</string>
-    <!-- no translation found for battery_tips_apps_summary_always_high (6334519477067044920) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_higher_than_usual (95676961671544628) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_always_high_in_background (2953858181710181126) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_higher_than_usual_in_background (1585002072567422199) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_always_high_in_foreground (1910991243576404700) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_higher_than_usual_in_foreground (7937337570425168210) -->
-    <skip />
-    <!-- no translation found for battery_app_item_hint (4850929961461039110) -->
-    <skip />
-    <!-- no translation found for battery_app_item_hint_in_bg (596240821466388336) -->
-    <skip />
-    <!-- no translation found for battery_app_item_hint_in_fg (5091860632260799910) -->
-    <skip />
+    <string name="battery_tips_apps_summary_always_high" msgid="6334519477067044920">"Η εφαρμογή <xliff:g id="APP_LABEL">%1$s</xliff:g> χρησιμοποίησε περισσότερη μπαταρία"</string>
+    <string name="battery_tips_apps_summary_higher_than_usual" msgid="95676961671544628">"Η εφαρμογή <xliff:g id="APP_LABEL">%1$s</xliff:g> χρησιμοποίησε περισσότερη μπαταρία από ό,τι συνήθως"</string>
+    <string name="battery_tips_apps_summary_always_high_in_background" msgid="2953858181710181126">"Η εφαρμογή <xliff:g id="APP_LABEL">%1$s</xliff:g> χρησιμοποίησε περισσότερη μπαταρία στο παρασκήνιο"</string>
+    <string name="battery_tips_apps_summary_higher_than_usual_in_background" msgid="1585002072567422199">"Η εφαρμογή <xliff:g id="APP_LABEL">%1$s</xliff:g> χρησιμοποίησε περισσότερη μπαταρία στο παρασκήνιο από ό,τι συνήθως"</string>
+    <string name="battery_tips_apps_summary_always_high_in_foreground" msgid="1910991243576404700">"Η εφαρμογή <xliff:g id="APP_LABEL">%1$s</xliff:g> χρησιμοποίησε περισσότερη μπαταρία στο προσκήνιο"</string>
+    <string name="battery_tips_apps_summary_higher_than_usual_in_foreground" msgid="7937337570425168210">"Η εφαρμογή <xliff:g id="APP_LABEL">%1$s</xliff:g> χρησιμοποίησε περισσότερη μπαταρία στο προσκήνιο από ό,τι συνήθως"</string>
+    <string name="battery_app_item_hint" msgid="4850929961461039110">"Υψηλή χρήση μπαταρίας"</string>
+    <string name="battery_app_item_hint_in_bg" msgid="596240821466388336">"Υψηλή χρήση μπαταρίας στο παρασκήνιο"</string>
+    <string name="battery_app_item_hint_in_fg" msgid="5091860632260799910">"Υψηλή χρήση μπαταρίας στο προσκήνιο"</string>
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Απεριόριστη"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Βελτιστοποιημένη"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"Περιορισμένη"</string>
@@ -4241,8 +4226,8 @@
     <!-- no translation found for graphics_driver_app_preference_values:1 (485288770206606512) -->
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
-    <string name="enable_angle_as_system_driver" msgid="3985105681812713612">"Ενεργοποίηση ANGLE"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="6413038127558166972">"Ενεργοποιήστε το ANGLE ως το προεπιλεγμένο πρόγραμμα οδήγησης OpenGL ES. Αν το ενεργοποιήσετε σε μη συμβατές συσκευές, ενδέχεται να διακοπεί η λειτουργία ορισμένων εφαρμογών."</string>
+    <string name="enable_angle_as_system_driver" msgid="4648827560023949786">"Πειραματικό: Ενεργοποιήστε το ANGLE"</string>
+    <string name="enable_angle_as_system_driver_summary" msgid="2170215556348477481">"Προειδοποίηση: Ενεργοποιήστε το ANGLE ως προεπιλεγμένο πρόγραμμα οδήγησης OpenGL ES. Αυτή η λειτουργία βρίσκεται σε πειραματικό στάδιο και ενδέχεται να μην είναι συμβατή με ορισμένες εφαρμογές κάμερας και βίντεο."</string>
     <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"Για την αλλαγή του προγράμματος οδήγησης OpenGL ES του συστήματος απαιτείται επανεκκίνηση"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Αλλαγές συμβατότητας εφαρμογής"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Εναλλαγή αλλαγών συμβατότητας εφαρμογών"</string>
@@ -4504,9 +4489,6 @@
     <string name="wfc_disclaimer_emergency_limitation_title_text" msgid="8276287227589397162">"Κλήσεις έκτακτης ανάγκης"</string>
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"Οι κλήσεις έκτακτης ανάγκης μέσω Κλήσης Wi‑Fi δεν υποστηρίζονται από την εταιρεία κινητής τηλεφωνίας σας.\nΗ συσκευή αλλάζει αυτόματα σε δίκτυο κινητής τηλεφωνίας για την πραγματοποίηση μιας κλήσης έκτακτης ανάγκης.\nΗ πραγματοποίηση κλήσεων έκτακτης ανάγκης είναι δυνατή μόνο σε περιοχές με κάλυψη δικτύου κινητής τηλεφωνίας."</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"Χρήση Wi‑Fi για κλήσεις για βελτίωση της ποιότητας"</string>
-    <string name="backup_calling_settings_title" msgid="519714752900364326">"Δημιουργία αντιγράφων ασφαλείας κλήσεων"</string>
-    <string name="backup_calling_setting_summary" msgid="599493254305348733">"Όταν δεν είναι διαθέσιμο το <xliff:g id="BACKUP_CALLING_OPERATOR_TEXT">%1$s</xliff:g> ή κατά την περιαγωγή, χρησιμοπ. SIM δεδομένων κιν. τηλεφ. για κλήσεις <xliff:g id="BACKUP_CALLING_CARRIER_TEXT">%1$s</xliff:g>."</string>
-    <string name="keywords_backup_calling" msgid="8592800915478816800">"δημιουργία αντιγράφων ασφαλείας κλήσεων"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"Εισερχόμενο μήνυμα MMS"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"Αδυναμία αποστολής μηνύματος MMS"</string>
     <string name="enable_mms_notification_summary" msgid="6432752438276672500">"Πατήστε για να επιτρέψετε τα μηνύματα MMS στο <xliff:g id="OPERATOR_NAME">%1$s</xliff:g> όταν τα δεδομένα κιν. τηλεφ. είναι απενεργοποιημένα"</string>
@@ -4803,6 +4785,8 @@
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Λόγος διαστάσεων"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"Εάν αυτή η εφαρμογή δεν έχει σχεδιαστεί για να ταιριάζει με τη συσκευή <xliff:g id="DEVICE_NAME">%1$s</xliff:g>, δοκιμάστε έναν νέο λόγο διαστάσεων για την προβολή της."</string>
     <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"Εάν αυτή η εφαρμογή δεν έχει σχεδιαστεί για να ταιριάζει με τη συσκευή <xliff:g id="DEVICE_NAME">%1$s</xliff:g>, δοκιμάστε έναν νέο λόγο διαστάσεων για την προβολή της. Ορισμένες εφαρμογές μπορεί να μην έχουν βελτιστοποιηθεί για συγκεκριμένους λόγους διαστάσεων."</string>
+    <string name="aspect_ratio_summary_text" msgid="4737461467467220325">"Εάν αυτή η εφαρμογή δεν έχει σχεδιαστεί για να ταιριάζει με τη συσκευή <xliff:g id="DEVICE_NAME">%1$s</xliff:g>, δοκιμάστε έναν νέο λόγο διαστάσεων για την προβολή της."</string>
+    <string name="aspect_ratio_main_summary_text" msgid="5544816872094235840">"Εάν αυτή η εφαρμογή δεν έχει σχεδιαστεί για να ταιριάζει με τη συσκευή <xliff:g id="DEVICE_NAME">%1$s</xliff:g>, δοκιμάστε έναν νέο λόγο διαστάσεων για την προβολή της. Ορισμένες εφαρμογές μπορεί να μην έχουν βελτιστοποιηθεί για συγκεκριμένους λόγους διαστάσεων."</string>
     <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"Προτεινόμενες εφαρμογές"</string>
     <string name="user_aspect_ratio_changed_apps_label" msgid="2096614916172567672">"Αλλαγμ. εφαρμ."</string>
     <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"Προεπιλογή εφαρμογής"</string>
@@ -4872,6 +4856,4 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Το όνομα της συσκευής σας είναι ορατό στις εφαρμογές που εγκαθιστάτε. Ενδέχεται επίσης να είναι ορατό και σε άλλα άτομα, όταν συνδέεστε σε συσκευές Bluetooth, συνδέεστε σε ένα δίκτυο Wi-Fi ή ρυθμίζετε ένα σημείο πρόσβασης Wi-Fi."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Γραμματικό γένος"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Επιλογή γραμματικού γένους"</string>
-    <!-- no translation found for quarantined_apps_title (5713301345723474936) -->
-    <skip />
 </resources>

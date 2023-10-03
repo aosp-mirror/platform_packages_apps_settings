@@ -198,7 +198,7 @@
     <string name="thursday_first_day_of_week" msgid="3035885630945594833">"Khamis"</string>
     <string name="friday_first_day_of_week" msgid="7074795061812083541">"Jumaat"</string>
     <string name="saturday_first_day_of_week" msgid="3702282590450322727">"Sabtu"</string>
-    <string name="title_regional_pref_footer" msgid="7450438024324794380">"Jika apl tidak menyokong tetapan wilayah, tetapan penempatan lalai akan digunakan."</string>
+    <string name="title_regional_pref_footer" msgid="7450438024324794380">"Jika apl tidak menyokong pilihan serantau, tetapan penempatan lalai akan digunakan."</string>
     <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"Ketahui lebih lanjut tentang pilihan bahasa."</string>
     <string name="category_title_terms_of_address" msgid="4309422700380895278">"Pilihan tambahan"</string>
     <string name="terms_of_address_title" msgid="4064593634733842458">"Panggilan hormat"</string>
@@ -273,7 +273,8 @@
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Memuatkan…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Apl dengan kebenaran peranti Berdekatan boleh menentukan kedudukan relatif peranti tersambung."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Akses lokasi dimatikan untuk apl dan perkhidmatan. Lokasi peranti anda mungkin tetap dihantar kepada pasukan bantuan kecemasan apabila anda menghubungi atau menghantar teks kepada nombor kecemasan."</string>
-    <string name="location_settings_footer_learn_more_content_description" msgid="5329024810729665156">"Ketahui lebih lanjut tentang Tetapan Lokasi."</string>
+    <!-- no translation found for location_settings_footer_learn_more_content_description (349380666660145540) -->
+    <skip />
     <string name="account_settings_title" msgid="9138880127246241885">"Akaun"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Keselamatan"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Penyulitan &amp; bukti kelayakan"</string>
@@ -923,6 +924,7 @@
     <string name="internet_source_wifi" msgid="6952593095166435179">"Wi‑Fi"</string>
     <string name="internet_source_mobile_data" msgid="877403889449201789">"Data mudah alih"</string>
     <string name="internet_source_ethernet" msgid="8338472576454100966">"Ethernet"</string>
+    <string name="hotspot_battery_charging_summary" msgid="6690892148553288457">"<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> ‑ Mengecas"</string>
     <string name="hotspot_connection_category" msgid="4320380513982923556">"Sambungan tempat liputan"</string>
     <string name="hotspot_connection_strength" msgid="87359986943768421">"Kekuatan sambungan"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"Rangkaian disimpan"</string>
@@ -2843,11 +2845,6 @@
     <string name="amber_alerts_title" msgid="5238275758191804575">"Amaran AMBER"</string>
     <string name="amber_alerts_summary" msgid="5755221775246075883">"Terima buletin mengenai penculikan kanak-kanak"</string>
     <string name="repeat_title" msgid="8676570486899483606">"Ulang"</string>
-    <string name="call_manager_enable_title" msgid="1214301265395158720">"Dayakan Pengurus Panggilan"</string>
-    <string name="call_manager_enable_summary" msgid="7362506369604163030">"Benarkan perkhidmatan ini mengurus cara panggilan anda dibuat."</string>
-    <string name="call_manager_title" msgid="3397433159509629466">"Panggil Pengurus"</string>
-    <!-- no translation found for call_manager_summary (2558839230880919191) -->
-    <skip />
     <string name="cell_broadcast_settings" msgid="2416980110093867199">"Makluman kecemasan wayarles"</string>
     <string name="network_operators_settings" msgid="5105453353329748954">"Pengendali rangkaian"</string>
     <string name="access_point_names" msgid="5768430498022188057">"Nama titik capaian"</string>
@@ -4229,8 +4226,8 @@
     <!-- no translation found for graphics_driver_app_preference_values:1 (485288770206606512) -->
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
-    <string name="enable_angle_as_system_driver" msgid="3985105681812713612">"Dayakan ANGLE"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="6413038127558166972">"Dayakan ANGLE sebagai pemacu OpenGL ES lalai. Tindakan mendayakan ANGLE pada peranti yang tidak serasi mungkin merosakkan sesetengah aplikasi."</string>
+    <string name="enable_angle_as_system_driver" msgid="4648827560023949786">"Percubaan: Dayakan ANGLE"</string>
+    <string name="enable_angle_as_system_driver_summary" msgid="2170215556348477481">"Amaran: Dayakan ANGLE sebagai pemacu OpenGL ES lalai. Ciri ini sedang dalam percubaan dan mungkin tidak serasi dengan sesetengah apl kamera dan video."</string>
     <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"But semula diperlukan untuk menukar pemacu OpenGL ES sistem"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Perubahan Keserasian Apl"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Togol perubahan keserasian apl"</string>
@@ -4492,9 +4489,6 @@
     <string name="wfc_disclaimer_emergency_limitation_title_text" msgid="8276287227589397162">"Panggilan kecemasan"</string>
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"Panggilan kecemasan melalui Panggilan Wi‑Fi tidak disokong oleh pembawa anda.\nPeranti akan bertukar kepada rangkaian selular secara automatik untuk membuat panggilan kecemasan.\nPanggilan kecemasan hanya boleh dibuat di kawasan yang terdapat liputan selular."</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"Gunakan Wi-Fi untuk panggilan untuk meningkatkan kualiti"</string>
-    <string name="backup_calling_settings_title" msgid="519714752900364326">"Panggilan sandaran"</string>
-    <string name="backup_calling_setting_summary" msgid="599493254305348733">"Jika <xliff:g id="BACKUP_CALLING_OPERATOR_TEXT">%1$s</xliff:g> tidak tersedia atau sedang dalam perayauan, gunakan SIM data mudah alih anda untuk panggilan <xliff:g id="BACKUP_CALLING_CARRIER_TEXT">%1$s</xliff:g>."</string>
-    <string name="keywords_backup_calling" msgid="8592800915478816800">"panggilan sandaran"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"Mesej MMS masuk"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"Tidak dapat menghantar mesej MMS"</string>
     <string name="enable_mms_notification_summary" msgid="6432752438276672500">"Ketik untuk membenarkan pemesejan MMS pada <xliff:g id="OPERATOR_NAME">%1$s</xliff:g> apabila data mudah alih dimatikan"</string>
@@ -4791,6 +4785,8 @@
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Nisbah bidang"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"Cuba nisbah bidang baharu untuk melihat apl ini jika apl ini tidak direka bentuk untuk dimuatkan pada skrin <xliff:g id="DEVICE_NAME">%1$s</xliff:g> anda"</string>
     <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"Cuba nisbah bidang baharu untuk melihat apl ini jika apl ini tidak direka bentuk untuk dimuatkan pada skrin <xliff:g id="DEVICE_NAME">%1$s</xliff:g> anda. Sesetengah apl mungkin tidak dioptimumkan untuk nisbah bidang tertentu."</string>
+    <string name="aspect_ratio_summary_text" msgid="4737461467467220325">"Cuba nisbah bidang baharu untuk melihat apl jika apl itu tidak direka bentuk untuk dimuatkan pada skrin <xliff:g id="DEVICE_NAME">%1$s</xliff:g> anda"</string>
+    <string name="aspect_ratio_main_summary_text" msgid="5544816872094235840">"Cuba nisbah bidang baharu untuk melihat apl jika apl itu tidak direka bentuk untuk dimuatkan pada skrin <xliff:g id="DEVICE_NAME">%1$s</xliff:g> anda. Sesetengah apl mungkin tidak dioptimumkan untuk nisbah bidang tertentu."</string>
     <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"Apl yang dicadangkan"</string>
     <string name="user_aspect_ratio_changed_apps_label" msgid="2096614916172567672">"Apl ditukar"</string>
     <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"Lalai apl"</string>
@@ -4860,6 +4856,4 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Nama peranti anda boleh dilihat oleh apl yang anda pasang. Nama peranti anda juga boleh dilihat oleh orang lain apabila anda menyambung kepada peranti Bluetooth, menyambung kepada rangkaian Wi-Fi atau menyediakan tempat liputan Wi-Fi."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Jantina tatabahasa"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Pilih Jantina tatabahasa"</string>
-    <!-- no translation found for quarantined_apps_title (5713301345723474936) -->
-    <skip />
 </resources>
