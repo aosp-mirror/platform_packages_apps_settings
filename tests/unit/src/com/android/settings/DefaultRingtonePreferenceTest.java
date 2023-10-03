@@ -16,16 +16,19 @@
 
 package com.android.settings;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.content.ContentInterface;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.UserHandle;
+import android.os.UserManager;
 
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -34,17 +37,22 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 /** Unittest for DefaultRingtonePreference. */
 @RunWith(AndroidJUnit4.class)
 public class DefaultRingtonePreferenceTest {
 
+    private static final int OWNER_USER_ID = 1;
+    private static final int OTHER_USER_ID = 10;
+    private static final int INVALID_RINGTONE_TYPE = 0;
     private DefaultRingtonePreference mDefaultRingtonePreference;
 
     @Mock
     private ContentResolver mContentResolver;
     @Mock
+    private UserManager mUserManager;
     private Uri mRingtoneUri;
 
     @Before
@@ -52,14 +60,24 @@ public class DefaultRingtonePreferenceTest {
         MockitoAnnotations.initMocks(this);
 
         Context context = spy(ApplicationProvider.getApplicationContext());
-        doReturn(mContentResolver).when(context).getContentResolver();
+        mContentResolver = ContentResolver.wrap(Mockito.mock(ContentInterface.class));
+        when(context.getContentResolver()).thenReturn(mContentResolver);
 
         mDefaultRingtonePreference = spy(new DefaultRingtonePreference(context, null /* attrs */));
         doReturn(context).when(mDefaultRingtonePreference).getContext();
+
+        // Use INVALID_RINGTONE_TYPE to return early in RingtoneManager.setActualDefaultRingtoneUri
         when(mDefaultRingtonePreference.getRingtoneType())
-                .thenReturn(RingtoneManager.TYPE_RINGTONE);
-        mDefaultRingtonePreference.setUserId(1);
+                .thenReturn(INVALID_RINGTONE_TYPE);
+
+        mDefaultRingtonePreference.setUserId(OWNER_USER_ID);
         mDefaultRingtonePreference.mUserContext = context;
+        when(mDefaultRingtonePreference.isDefaultRingtone(any(Uri.class))).thenReturn(false);
+
+        when(context.getSystemServiceName(UserManager.class)).thenReturn(Context.USER_SERVICE);
+        when(context.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
+
+        mRingtoneUri = Uri.parse("content://none");
     }
 
     @Test
@@ -78,5 +96,54 @@ public class DefaultRingtonePreferenceTest {
         mDefaultRingtonePreference.onSaveRingtone(mRingtoneUri);
 
         verify(mDefaultRingtonePreference, never()).setActualDefaultRingtoneUri(mRingtoneUri);
+    }
+
+    @Test
+    public void onSaveRingtone_notManagedProfile_shouldNotSetRingtone() {
+        mRingtoneUri = Uri.parse("content://" + OTHER_USER_ID + "@ringtone");
+        when(mContentResolver.getType(mRingtoneUri)).thenReturn("audio/*");
+        when(mUserManager.isSameProfileGroup(OWNER_USER_ID, OTHER_USER_ID)).thenReturn(true);
+        when(mUserManager.getProfileParent(UserHandle.of(OTHER_USER_ID))).thenReturn(
+                UserHandle.of(OWNER_USER_ID));
+        when(mUserManager.isManagedProfile(OTHER_USER_ID)).thenReturn(false);
+
+        mDefaultRingtonePreference.onSaveRingtone(mRingtoneUri);
+
+        verify(mDefaultRingtonePreference, never()).setActualDefaultRingtoneUri(mRingtoneUri);
+    }
+
+    @Test
+    public void onSaveRingtone_notSameUser_shouldNotSetRingtone() {
+        mRingtoneUri = Uri.parse("content://" + OTHER_USER_ID + "@ringtone");
+        when(mContentResolver.getType(mRingtoneUri)).thenReturn("audio/*");
+        when(mUserManager.isSameProfileGroup(OWNER_USER_ID, OTHER_USER_ID)).thenReturn(false);
+
+        mDefaultRingtonePreference.onSaveRingtone(mRingtoneUri);
+
+        verify(mDefaultRingtonePreference, never()).setActualDefaultRingtoneUri(mRingtoneUri);
+    }
+
+    @Test
+    public void onSaveRingtone_isManagedProfile_shouldSetRingtone() {
+        mRingtoneUri = Uri.parse("content://" + OTHER_USER_ID + "@ringtone");
+        when(mContentResolver.getType(mRingtoneUri)).thenReturn("audio/*");
+        when(mUserManager.isSameProfileGroup(OWNER_USER_ID, OTHER_USER_ID)).thenReturn(true);
+        when(mUserManager.getProfileParent(UserHandle.of(OTHER_USER_ID))).thenReturn(
+                UserHandle.of(OWNER_USER_ID));
+        when(mUserManager.isManagedProfile(OTHER_USER_ID)).thenReturn(true);
+
+        mDefaultRingtonePreference.onSaveRingtone(mRingtoneUri);
+
+        verify(mDefaultRingtonePreference).setActualDefaultRingtoneUri(mRingtoneUri);
+    }
+
+    @Test
+    public void onSaveRingtone_defaultUri_shouldSetRingtone() {
+        mRingtoneUri = Uri.parse("default_ringtone");
+        when(mDefaultRingtonePreference.isDefaultRingtone(any(Uri.class))).thenReturn(true);
+
+        mDefaultRingtonePreference.onSaveRingtone(mRingtoneUri);
+
+        verify(mDefaultRingtonePreference).setActualDefaultRingtoneUri(mRingtoneUri);
     }
 }
