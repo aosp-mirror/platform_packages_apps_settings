@@ -53,7 +53,6 @@ public class CodeInspectionTest {
     }
 
     @Test
-    @Ignore
     public void runSliceControllerInXmlInspection() throws Exception {
         new SliceControllerInXmlCodeInspector(mClasses).run();
     }
