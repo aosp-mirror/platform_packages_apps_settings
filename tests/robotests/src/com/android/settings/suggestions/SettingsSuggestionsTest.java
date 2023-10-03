@@ -97,7 +97,8 @@ public class SettingsSuggestionsTest {
         final ComponentName componentName = new ComponentName(context, activityName);
         final ActivityInfo info;
         try {
-            info = pm.getActivityInfo(componentName, PackageManager.GET_META_DATA);
+            info = pm.getActivityInfo(componentName, PackageManager.GET_META_DATA
+                    | PackageManager.MATCH_DISABLED_COMPONENTS);
         } catch (NameNotFoundException e) {
             throw new RuntimeException(e);
         }
