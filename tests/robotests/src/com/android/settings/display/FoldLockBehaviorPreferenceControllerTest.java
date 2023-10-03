@@ -25,9 +25,8 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.content.res.Resources;
 
-import com.android.internal.R;
+import com.android.internal.foldables.FoldLockSettingAvailabilityProvider;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -41,27 +40,29 @@ import org.robolectric.RuntimeEnvironment;
 public class FoldLockBehaviorPreferenceControllerTest {
 
     @Mock
-    private Resources mResources;
+    private FoldLockSettingAvailabilityProvider mFoldLockSettingAvailabilityProvider;
     private Context mContext;
     private FoldLockBehaviorPreferenceController mController;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
-        mResources = Mockito.mock(Resources.class);
-        mController = new FoldLockBehaviorPreferenceController(mContext, "key", mResources);
+        mFoldLockSettingAvailabilityProvider = Mockito.mock(
+                FoldLockSettingAvailabilityProvider.class);
+        mController = new FoldLockBehaviorPreferenceController(mContext, "key",
+                mFoldLockSettingAvailabilityProvider);
     }
 
     @Test
     public void getAvailabilityStatus_withConfigNoShow_returnUnsupported() {
-        when(mResources.getBoolean(R.bool.config_fold_lock_behavior)).thenReturn(false);
+        when(mFoldLockSettingAvailabilityProvider.isFoldLockBehaviorAvailable()).thenReturn(false);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 
     @Test
     public void getAvailabilityStatus_withConfigNoShow_returnAvailable() {
-        when(mResources.getBoolean(R.bool.config_fold_lock_behavior)).thenReturn(true);
+        when(mFoldLockSettingAvailabilityProvider.isFoldLockBehaviorAvailable()).thenReturn(true);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }

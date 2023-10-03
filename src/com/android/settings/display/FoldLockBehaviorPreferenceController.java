@@ -24,12 +24,12 @@ import static com.android.settings.display.FoldLockBehaviorSettings.SETTING_VALU
 import static com.android.settings.display.FoldLockBehaviorSettings.SETTING_VALUE_STAY_AWAKE_ON_FOLD;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.os.UserHandle;
 import android.provider.Settings;
 
 import androidx.preference.Preference;
 
+import com.android.internal.foldables.FoldLockSettingAvailabilityProvider;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
@@ -45,17 +45,17 @@ import java.util.Map;
  */
 public class FoldLockBehaviorPreferenceController extends BasePreferenceController {
 
-    private final Resources mResources;
-
-    private static Map<String, String> KEY_TO_TEXT = new HashMap<>();
+    private static final Map<String, String> KEY_TO_TEXT = new HashMap<>();
+    private final FoldLockSettingAvailabilityProvider mFoldLockSettingAvailabilityProvider;
 
     public FoldLockBehaviorPreferenceController(Context context, String key) {
-        this(context, key, context.getResources());
+        this(context, key, new FoldLockSettingAvailabilityProvider(context.getResources()));
     }
 
-    public FoldLockBehaviorPreferenceController(Context context, String key, Resources resources) {
+    public FoldLockBehaviorPreferenceController(Context context, String key,
+            FoldLockSettingAvailabilityProvider foldLockSettingAvailabilityProvider) {
         super(context, key);
-        mResources = resources;
+        mFoldLockSettingAvailabilityProvider = foldLockSettingAvailabilityProvider;
         KEY_TO_TEXT.put(SETTING_VALUE_STAY_AWAKE_ON_FOLD,
                 resourceToString(R.string.stay_awake_on_fold_title));
         KEY_TO_TEXT.put(SETTING_VALUE_SELECTIVE_STAY_AWAKE,
@@ -66,7 +66,9 @@ public class FoldLockBehaviorPreferenceController extends BasePreferenceControll
 
     @Override
     public int getAvailabilityStatus() {
-        return mResources.getBoolean(com.android.internal.R.bool.config_fold_lock_behavior)
+        boolean isFoldLockBehaviorAvailable =
+                mFoldLockSettingAvailabilityProvider.isFoldLockBehaviorAvailable();
+        return isFoldLockBehaviorAvailable
                 ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
