@@ -163,6 +163,8 @@ class AppBatteryPreferenceTest {
                 "10%",
                 null,
                 false,
+                null,
+                null
             )
         }
     }

@@ -126,8 +126,10 @@ private class AppBatteryPresenter(private val context: Context, private val app:
             AppInfoSettingsProvider.METRICS_CATEGORY,
             this,
             Utils.formatPercentage(percentage, true),
-            null,
-            false,
+            /*slotInformation=*/ null,
+            /*showTimeInformation=*/ false,
+            /*anomalyHintPrefKey=*/ null,
+            /*anomalyHintText=*/ null
         )
     }
 

@@ -98,10 +98,10 @@ final class AnomalyEventWrapper {
     }
 
     String getTitleString() {
-        final String protoTitleString = getInfo(WarningBannerInfo::getTitleString,
+        final String titleStringFromProto = getInfo(WarningBannerInfo::getTitleString,
                 WarningItemInfo::getTitleString);
-        if (!TextUtils.isEmpty(protoTitleString)) {
-            return protoTitleString;
+        if (!TextUtils.isEmpty(titleStringFromProto)) {
+            return titleStringFromProto;
         }
         final int titleFormatResId = getResourceId(R.array.power_anomaly_title_ids,
                 mResourceIndex, "string");
@@ -127,7 +127,15 @@ final class AnomalyEventWrapper {
     }
 
     String getAnomalyHintString() {
-        return getStringFromArrayResource(R.array.power_anomaly_hint_messages, mResourceIndex);
+        final String anomalyHintStringFromProto = getInfo(null,
+                WarningItemInfo::getWarningInfoString);
+        return TextUtils.isEmpty(anomalyHintStringFromProto)
+                ? getStringFromArrayResource(R.array.power_anomaly_hint_messages, mResourceIndex)
+                : anomalyHintStringFromProto;
+    }
+
+    String getAnomalyHintPrefKey() {
+        return getInfo(null, WarningItemInfo::getAnomalyHintPrefKey);
     }
 
     String getDismissRecordKey() {
