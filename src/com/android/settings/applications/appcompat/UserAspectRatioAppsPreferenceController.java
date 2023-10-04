@@ -43,6 +43,6 @@ public class UserAspectRatioAppsPreferenceController extends BasePreferenceContr
 
     @Override
     public CharSequence getSummary() {
-        return mContext.getResources().getString(R.string.aspect_ratio_summary, Build.MODEL);
+        return mContext.getResources().getString(R.string.aspect_ratio_summary_text, Build.MODEL);
     }
 }
