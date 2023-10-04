@@ -100,7 +100,7 @@ public class PreferredSimDialogFragment extends SimDialogFragment implements
         final SubscriptionInfo info = getPreferredSubscription();
         if (info == null || (info.isEmbedded()
             && (info.getProfileClass() == PROFILE_CLASS_PROVISIONING
-            || (Flags.oemEnabledSatelliteFlag() && info.isNtn())))) {
+                || (Flags.oemEnabledSatelliteFlag() && info.isOnlyNonTerrestrialNetwork())))) {
             dismiss();
             return;
         }
