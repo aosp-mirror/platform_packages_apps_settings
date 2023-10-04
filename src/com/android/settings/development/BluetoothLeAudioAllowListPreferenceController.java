@@ -36,7 +36,7 @@ public class BluetoothLeAudioAllowListPreferenceController
         extends DeveloperOptionsPreferenceController
         implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
 
-    private static final String PREFERENCE_KEY = "bluetooth_enable_leaudio_allow_list";
+    private static final String PREFERENCE_KEY = "bluetooth_bypass_leaudio_allowlist";
 
     private static final String LE_AUDIO_ALLOW_LIST_SWITCH_SUPPORT_PROPERTY =
             "ro.bluetooth.leaudio_allow_list.supported";
@@ -86,7 +86,7 @@ public class BluetoothLeAudioAllowListPreferenceController
         if (leAudioEnabled && leAudioAllowListSupport) {
             final boolean leAudioAllowListEnabled =
                     SystemProperties.getBoolean(LE_AUDIO_ALLOW_LIST_ENABLED_PROPERTY, false);
-            ((SwitchPreference) mPreference).setChecked(leAudioAllowListEnabled);
+            ((SwitchPreference) mPreference).setChecked(!leAudioAllowListEnabled);
         } else {
             mPreference.setEnabled(false);
             ((SwitchPreference) mPreference).setChecked(false);
@@ -104,7 +104,7 @@ public class BluetoothLeAudioAllowListPreferenceController
         final boolean leAudioAllowListEnabled =
                 SystemProperties.getBoolean(LE_AUDIO_ALLOW_LIST_ENABLED_PROPERTY, false);
         SystemProperties.set(LE_AUDIO_ALLOW_LIST_ENABLED_PROPERTY,
-                Boolean.toString(!leAudioAllowListEnabled));
+                Boolean.toString(leAudioAllowListEnabled));
     }
 
     /**
