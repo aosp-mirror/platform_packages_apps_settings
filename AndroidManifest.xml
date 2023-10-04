@@ -4986,6 +4986,10 @@
             </intent-filter>
         </provider>
 
+        <activity android:name=".privatespace.PrivateSpaceAuthenticationActivity"
+                  android:theme="@*android:style/Theme.DeviceDefault.Settings.Dialog.NoActionBar"
+                  android:exported="false"/>
+
         <activity-alias android:name="UsageStatsActivity"
                         android:exported="true"
                         android:label="@string/testing_usage_stats"
