@@ -33,7 +33,9 @@
         android:icon="@drawable/ic_nfc"
         android:order="-7"
         settings:searchable="false"
-        settings:controller="com.android.settings.connecteddevice.NfcAndPaymentFragmentController"/>
+        settings:controller="com.android.settings.connecteddevice.NfcAndPaymentFragmentController"
+        settings:userRestriction="no_near_field_communication_radio"
+        settings:useAdminDisabledSummary="true"/>
 
     <Preference
         android:fragment="com.android.settings.wfd.WifiDisplaySettings"
