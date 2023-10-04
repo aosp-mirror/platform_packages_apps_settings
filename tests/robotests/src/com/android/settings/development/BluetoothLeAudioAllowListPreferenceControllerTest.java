@@ -18,23 +18,16 @@ package com.android.settings.development;
 
 import static android.bluetooth.BluetoothStatusCodes.FEATURE_SUPPORTED;
 
-import static com.android.settings.development.BluetoothLeAudioAllowListPreferenceController
-        .LE_AUDIO_ALLOW_LIST_ENABLED_PROPERTY;
-
-import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
-import android.os.SystemProperties;
 
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import org.junit.Before;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -68,39 +61,5 @@ public class BluetoothLeAudioAllowListPreferenceControllerTest {
         mController.displayPreference(mPreferenceScreen);
         when(mBluetoothAdapter.isLeAudioSupported())
             .thenReturn(FEATURE_SUPPORTED);
-    }
-
-    @Test
-    public void onRebootDialogConfirmedAsLeAudioAllowListDisabled_shouldSwitchStatus() {
-        SystemProperties.set(LE_AUDIO_ALLOW_LIST_ENABLED_PROPERTY, Boolean.toString(false));
-        mController.mChanged = true;
-
-        mController.onRebootDialogConfirmed();
-        final boolean mode = SystemProperties.getBoolean(
-                LE_AUDIO_ALLOW_LIST_ENABLED_PROPERTY, false);
-        assertThat(mode).isFalse();
-    }
-
-
-    @Test
-    public void onRebootDialogConfirmedAsLeAudioAllowListEnabled_shouldSwitchStatus() {
-        SystemProperties.set(LE_AUDIO_ALLOW_LIST_ENABLED_PROPERTY, Boolean.toString(true));
-        mController.mChanged = true;
-
-        mController.onRebootDialogConfirmed();
-        final boolean status = SystemProperties.getBoolean(
-                LE_AUDIO_ALLOW_LIST_ENABLED_PROPERTY, false);
-        assertThat(status).isTrue();
-    }
-
-    @Test
-    public void onRebootDialogCanceled_shouldNotSwitchStatus() {
-        SystemProperties.set(LE_AUDIO_ALLOW_LIST_ENABLED_PROPERTY, Boolean.toString(false));
-        mController.mChanged = true;
-
-        mController.onRebootDialogCanceled();
-        final boolean status = SystemProperties.getBoolean(
-                LE_AUDIO_ALLOW_LIST_ENABLED_PROPERTY, false);
-        assertThat(status).isFalse();
     }
 }

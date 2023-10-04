@@ -49,9 +49,6 @@ public class BluetoothLeAudioAllowListPreferenceController
 
     private final DevelopmentSettingsDashboardFragment mFragment;
 
-    @VisibleForTesting
-    boolean mChanged = false;
-
     public BluetoothLeAudioAllowListPreferenceController(Context context,
             DevelopmentSettingsDashboardFragment fragment) {
         super(context);
@@ -66,8 +63,6 @@ public class BluetoothLeAudioAllowListPreferenceController
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        BluetoothRebootDialog.show(mFragment);
-        mChanged = true;
         return false;
     }
 
@@ -91,26 +86,5 @@ public class BluetoothLeAudioAllowListPreferenceController
             mPreference.setEnabled(false);
             ((SwitchPreference) mPreference).setChecked(false);
         }
-    }
-
-    /**
-     * Called when the RebootDialog confirm is clicked.
-     */
-    public void onRebootDialogConfirmed() {
-        if (!mChanged) {
-            return;
-        }
-
-        final boolean leAudioAllowListEnabled =
-                SystemProperties.getBoolean(LE_AUDIO_ALLOW_LIST_ENABLED_PROPERTY, false);
-        SystemProperties.set(LE_AUDIO_ALLOW_LIST_ENABLED_PROPERTY,
-                Boolean.toString(leAudioAllowListEnabled));
-    }
-
-    /**
-     * Called when the RebootDialog cancel is clicked.
-     */
-    public void onRebootDialogCanceled() {
-        mChanged = false;
     }
 }

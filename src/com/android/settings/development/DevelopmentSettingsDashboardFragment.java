@@ -442,11 +442,6 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                 getDevelopmentOptionsController(
                         BluetoothLeAudioPreferenceController.class);
         leAudioFeatureController.onRebootDialogConfirmed();
-
-        final BluetoothLeAudioAllowListPreferenceController leAudioAllowListController =
-                getDevelopmentOptionsController(
-                    BluetoothLeAudioAllowListPreferenceController.class);
-        leAudioAllowListController.onRebootDialogConfirmed();
     }
 
     @Override
@@ -464,11 +459,6 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                 getDevelopmentOptionsController(
                         BluetoothLeAudioPreferenceController.class);
         leAudioFeatureController.onRebootDialogCanceled();
-
-        final BluetoothLeAudioAllowListPreferenceController leAudioAllowListController =
-                getDevelopmentOptionsController(
-                    BluetoothLeAudioAllowListPreferenceController.class);
-        leAudioAllowListController.onRebootDialogCanceled();
     }
 
     @Override
