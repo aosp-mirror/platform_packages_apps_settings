@@ -273,8 +273,7 @@
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Cargando…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"As aplicacións con permiso para buscar dispositivos próximos poden determinar a posición relativa dos dispositivos conectados."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"O acceso á localización está desactivado para as aplicacións e os dispositivos. Con todo, é posible que a localización do dispositivo se envíe aos servizos de emerxencias cando chames a un número de emerxencias ou lle envíes unha mensaxe."</string>
-    <!-- no translation found for location_settings_footer_learn_more_content_description (349380666660145540) -->
-    <skip />
+    <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Máis información sobre a configuración de localización"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Contas"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Seguranza"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Encriptación e credenciais"</string>
@@ -2245,11 +2244,17 @@
     <string name="power_usage_level_and_status" msgid="821521456989429593">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="6997529817917076536">"<xliff:g id="REMAIN">%1$s</xliff:g> restante(s)"</string>
     <string name="power_charge_remaining" msgid="7046064326172265116">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> para completar a carga"</string>
+    <!-- no translation found for power_usage_detail_screen_time (6027274749498485283) -->
+    <skip />
+    <!-- no translation found for power_usage_detail_background_time (3661437083554322691) -->
+    <skip />
     <string name="low_battery_summary" msgid="4458925347316501953">"Pouca batería"</string>
     <string name="background_activity_summary" msgid="3817376868497046016">"Permite que a aplicación se execute en segundo plano"</string>
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"Queres limitar a actividade en segundo plano?"</string>
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"Si limitas a actividade en segundo plano para unha aplicación, é posible que non funcione correctamente"</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"Non podes limitar a aplicación porque non se configurou para optimizar a batería.\n\nPrimeiro activa a optimización da batería."</string>
+    <!-- no translation found for manager_battery_usage_category_title (1493303237531629961) -->
+    <skip />
     <string name="manager_battery_usage_unrestricted_title" msgid="2426486290463258032">"Sen restricións"</string>
     <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"Optimizado"</string>
     <string name="manager_battery_usage_restricted_title" msgid="7702863764130323118">"Restrinxido"</string>
@@ -2391,6 +2396,8 @@
     <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"Total: menos dun minuto"</string>
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"En segundo plano: menos dun minuto"</string>
     <string name="battery_usage_screen_time_less_than_one_minute" msgid="2911989465891679033">"Tempo diante da pantalla: menos dun minuto"</string>
+    <!-- no translation found for power_usage_time_less_than_one_minute (8407404329381010144) -->
+    <skip />
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Total: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"Segundo plano: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_screen_time" msgid="3973865893520804115">"Tempo diante da pantalla: <xliff:g id="TIME">%s</xliff:g>"</string>
@@ -3893,7 +3900,7 @@
     <string name="battery_saver_on_summary" msgid="4605146593966255848">"Activado"</string>
     <string name="battery_saver_off_scheduled_summary" msgid="2193875981740829819">"Activarase cando a batería estea ao <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_saver_off_summary" msgid="4411561435493109261">"Desactivado"</string>
-    <string name="app_battery_usage_title" msgid="346558380609793334">"Uso da batería pola aplicación"</string>
+    <string name="app_battery_usage_title" msgid="346558380609793334">"Uso da batería por parte das aplicacións"</string>
     <string name="app_battery_usage_summary" msgid="6349965904306339539">"Define o uso da batería para as aplicacións"</string>
     <string name="battery_tips_card_action_button" msgid="4897793527424711648">"Ver configuración"</string>
     <string name="battery_tips_card_action_button_check" msgid="1535140204105479318">"Comprobar"</string>
@@ -4172,7 +4179,8 @@
     <string name="credman_keywords" msgid="8305600680836806170">"datos, claves de acceso, contrasinal"</string>
     <string name="credman_autofill_keywords" msgid="701180623776848914">"automático, completar, autocompletar, datos, clave de acceso, contrasinal"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Asegúrate de que confías nesta aplicación&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Autocompletar de Google&gt;%1$s&lt;/xliff:g&gt; utiliza o contido da pantalla para determinar o que se pode completar."</string>
-    <string name="credman_autofill_confirmation_message" msgid="4951846866327737417">"&lt;b&gt;Utilizas &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; usa o que aparece na pantalla para determinar o que se pode autocompletar. A partir de agora, determinada información nova (contrasinais, claves de acceso e outros datos) gardarase aquí."</string>
+    <!-- no translation found for credman_autofill_confirmation_message (843829628024668466) -->
+    <skip />
     <string name="credman_picker_title" msgid="8191267620665129205">"Contrasinais, claves de acceso e servizos de datos"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Queres desactivar %1$s?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Queres desactivar este servizo?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; A información gardada (por exemplo, contrasinais, claves de acceso, métodos de pago…) non se completará cando inicies sesión. Para usar a información gardada, escolle un servizo de contrasinais, claves de acceso ou datos."</string>
@@ -4226,10 +4234,8 @@
     <!-- no translation found for graphics_driver_app_preference_values:1 (485288770206606512) -->
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
-    <!-- no translation found for enable_angle_as_system_driver (4648827560023949786) -->
-    <skip />
-    <!-- no translation found for enable_angle_as_system_driver_summary (2170215556348477481) -->
-    <skip />
+    <string name="enable_angle_as_system_driver" msgid="4648827560023949786">"Experimental: Activar ANGLE"</string>
+    <string name="enable_angle_as_system_driver_summary" msgid="2170215556348477481">"Advertencia: Activa ANGLE como controlador OpenGL ES predeterminado. Esta función é experimental e pode que non sexa compatible con algunhas aplicacións de cámara e vídeo."</string>
     <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"Cómpre reiniciar o dispositivo para cambiar o controlador do OpenGL ES do sistema"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Cambios na compatibilidade das aplicacións"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Activa/desactiva os cambios de compatibilidade das aplicacións"</string>
@@ -4787,10 +4793,8 @@
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Proporción"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"Proba unha nova proporción para ver esta aplicación no caso de que non se deseñase para adaptarse ao teu dispositivo (<xliff:g id="DEVICE_NAME">%1$s</xliff:g>)"</string>
     <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"Proba unha nova proporción para ver esta aplicación no caso de que non se deseñase para adaptarse ao teu dispositivo (<xliff:g id="DEVICE_NAME">%1$s</xliff:g>). É posible que algunhas aplicacións non estean optimizadas para determinadas proporcións."</string>
-    <!-- no translation found for aspect_ratio_summary_text (4737461467467220325) -->
-    <skip />
-    <!-- no translation found for aspect_ratio_main_summary_text (5544816872094235840) -->
-    <skip />
+    <string name="aspect_ratio_summary_text" msgid="4737461467467220325">"Proba unha nova proporción para ver unha aplicación no caso de que non se deseñase para adaptarse ao teu dispositivo (<xliff:g id="DEVICE_NAME">%1$s</xliff:g>)"</string>
+    <string name="aspect_ratio_main_summary_text" msgid="5544816872094235840">"Proba unha nova proporción para ver unha aplicación no caso de que non se deseñase para adaptarse ao teu dispositivo (<xliff:g id="DEVICE_NAME">%1$s</xliff:g>). É posible que algunhas aplicacións non estean optimizadas para determinadas proporcións."</string>
     <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"Aplicacións recomendadas"</string>
     <string name="user_aspect_ratio_changed_apps_label" msgid="2096614916172567672">"Apps cambiadas"</string>
     <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"Opción predeterminada da aplicación"</string>

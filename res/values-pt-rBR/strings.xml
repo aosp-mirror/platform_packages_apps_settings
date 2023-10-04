@@ -407,7 +407,7 @@
     <string name="security_settings_remoteauth_enroll_introduction_more" msgid="1644105894631257595">"Mais"</string>
     <string name="security_settings_remoteauth_enroll_introduction_how_title" msgid="6604152528267830349">"Como funciona"</string>
     <string name="security_settings_remoteauth_enroll_introduction_info_lock_open" msgid="8570511335628725116">"O relógio precisa estar desbloqueado, no pulso e perto do smartphone. Não é necessário desbloquear o relógio novamente enquanto ele está no seu pulso."</string>
-    <string name="security_settings_remoteauth_enroll_introduction_info_notifications" msgid="4298855831154039694">"Quando este smartphone estiver desbloqueado, você vai receber uma notificação no relógio. Se ele foi desbloqueado sem querer, toque na notificação para bloquear o dispositivo de novo."</string>
+    <string name="security_settings_remoteauth_enroll_introduction_info_notifications" msgid="4298855831154039694">"Quando este smartphone for desbloqueado, você vai receber uma notificação no relógio. Se ele foi desbloqueado sem querer, toque na notificação para bloquear o dispositivo de novo."</string>
     <string name="security_settings_remoteauth_enroll_introduction_youre_in_control_title" msgid="7974976673323638524">"Você no controle"</string>
     <string name="security_settings_remoteauth_enroll_introduction_info_remove_watch" msgid="1888318677088986801">"Você pode remover seu relógio do recurso \"Desbloqueio do relógio\" a qualquer momento nas Configurações."</string>
     <string name="security_settings_remoteauth_enroll_introduction_animation_tap_notification" msgid="1597397399097952974">"Toque em uma notificação"</string>
@@ -2245,11 +2245,17 @@
     <string name="power_usage_level_and_status" msgid="821521456989429593">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="6997529817917076536">"<xliff:g id="REMAIN">%1$s</xliff:g> restantes"</string>
     <string name="power_charge_remaining" msgid="7046064326172265116">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> até carregar"</string>
+    <!-- no translation found for power_usage_detail_screen_time (6027274749498485283) -->
+    <skip />
+    <!-- no translation found for power_usage_detail_background_time (3661437083554322691) -->
+    <skip />
     <string name="low_battery_summary" msgid="4458925347316501953">"Bateria fraca"</string>
     <string name="background_activity_summary" msgid="3817376868497046016">"Permitir que o app seja executado em segundo plano"</string>
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"Limitar atividade em segundo plano?"</string>
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"Se você limitar as atividades em segundo plano de um app, ele poderá apresentar mau funcionamento"</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"Como o app não está configurado para otimizar bateria, não é possível restringi-lo.\n\nPara restringir, ative a otimização."</string>
+    <!-- no translation found for manager_battery_usage_category_title (1493303237531629961) -->
+    <skip />
     <string name="manager_battery_usage_unrestricted_title" msgid="2426486290463258032">"Sem restrições"</string>
     <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"Otimizado"</string>
     <string name="manager_battery_usage_restricted_title" msgid="7702863764130323118">"Restrito"</string>
@@ -2391,6 +2397,8 @@
     <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"Total: menos de um minuto"</string>
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"Segundo plano: menos de um minuto"</string>
     <string name="battery_usage_screen_time_less_than_one_minute" msgid="2911989465891679033">"Tempo de uso: menos de um minuto"</string>
+    <!-- no translation found for power_usage_time_less_than_one_minute (8407404329381010144) -->
+    <skip />
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Total: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"Segundo plano: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_screen_time" msgid="3973865893520804115">"Tempo de uso: <xliff:g id="TIME">%s</xliff:g>"</string>
@@ -3781,7 +3789,7 @@
     <string name="storage_summary" msgid="5903562203143572768">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> usado - <xliff:g id="FREE_SPACE">%2$s</xliff:g> livres"</string>
     <string name="display_dashboard_summary" msgid="1599453894989339454">"Tema escuro, tamanho da fonte, brilho"</string>
     <string name="memory_summary" msgid="8221954450951651735">"Média de <xliff:g id="USED_MEMORY">%1$s</xliff:g> de <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> de memória usados"</string>
-    <string name="users_summary" msgid="8473589474976307510">"Conectado como <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
+    <string name="users_summary" msgid="8473589474976307510">"Conta conectada: <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="android_version_summary" msgid="7818952662015042768">"Atualizado para o Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="5404532347171027730">"Atualização disponível"</string>
     <string name="disabled_by_policy_title" msgid="6852347040813204503">"Ação bloqueada pela política de trabalho"</string>
@@ -4172,7 +4180,8 @@
     <string name="credman_keywords" msgid="8305600680836806170">"dados, chave de acesso, senha"</string>
     <string name="credman_autofill_keywords" msgid="701180623776848914">"automático, preenchimento, preenchimento automático, dados, chave de acesso, senha"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Você precisa confiar nesse app&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=O Preenchimento automático do Google&gt;%1$s&lt;/xliff:g&gt; usa o que está na sua tela para determinar o que pode ser preenchido automaticamente."</string>
-    <string name="credman_autofill_confirmation_message" msgid="4951846866327737417">"&lt;b&gt;Usar o &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt;O &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; usa o que aparece na sua tela para determinar o que pode ser preenchido automaticamente. Novas senhas, chaves de acesso e outras informações serão salvas aqui a partir de agora."</string>
+    <!-- no translation found for credman_autofill_confirmation_message (843829628024668466) -->
+    <skip />
     <string name="credman_picker_title" msgid="8191267620665129205">"Senhas, chaves de acesso e serviços de dados"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Desativar %1$s?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Desativar este serviço?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Senhas, chaves de acesso, formas de pagamento e outras informações salvas não serão preenchidas quando você fizer login. Para usar suas informações salvas, escolha uma senha, uma chave de acesso ou um serviço de dados."</string>
@@ -4226,10 +4235,8 @@
     <!-- no translation found for graphics_driver_app_preference_values:1 (485288770206606512) -->
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
-    <!-- no translation found for enable_angle_as_system_driver (4648827560023949786) -->
-    <skip />
-    <!-- no translation found for enable_angle_as_system_driver_summary (2170215556348477481) -->
-    <skip />
+    <string name="enable_angle_as_system_driver" msgid="4648827560023949786">"Experimental: ativar ANGLE"</string>
+    <string name="enable_angle_as_system_driver_summary" msgid="2170215556348477481">"Atenção: ative o ANGLE como o driver padrão do OpenGL ES. Esse recurso é experimental e pode não ser compatível com alguns apps de câmera e vídeo."</string>
     <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"É necessário reiniciar o dispositivo para mudar o driver do OpenGL ES do sistema"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Mudanças na compatibilidade do app"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Alternar mudanças de compatibilidade do app"</string>
@@ -4787,10 +4794,8 @@
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Proporção"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"Teste uma nova proporção para esse app caso ele não tenha sido criado para caber no seu dispositivo <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"Teste uma nova proporção para esse app caso ele não tenha sido criado para caber no seu dispositivo <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Talvez alguns apps não estejam otimizados para algumas proporções."</string>
-    <!-- no translation found for aspect_ratio_summary_text (4737461467467220325) -->
-    <skip />
-    <!-- no translation found for aspect_ratio_main_summary_text (5544816872094235840) -->
-    <skip />
+    <string name="aspect_ratio_summary_text" msgid="4737461467467220325">"Teste uma nova proporção para um app caso ele não tenha sido criado para caber no seu dispositivo <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="aspect_ratio_main_summary_text" msgid="5544816872094235840">"Teste uma nova proporção para um app caso ele não tenha sido criado para caber no seu dispositivo <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Talvez alguns apps não estejam otimizados para certas proporções."</string>
     <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"Apps sugeridos"</string>
     <string name="user_aspect_ratio_changed_apps_label" msgid="2096614916172567672">"Apps modificados"</string>
     <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"Padrão do app"</string>
