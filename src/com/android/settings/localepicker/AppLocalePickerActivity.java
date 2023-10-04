@@ -29,7 +29,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.LocaleList;
 import android.os.SystemClock;
-import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
@@ -52,8 +51,6 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
     private static final String TAG = AppLocalePickerActivity.class.getSimpleName();
     private static final String CHANNEL_ID_SUGGESTION = "suggestion";
     private static final String CHANNEL_ID_SUGGESTION_TO_USER = "Locale suggestion";
-    private static final String EXTRA_SYSTEM_LOCALE_DIALOG_TYPE = "system_locale_dialog_type";
-    private static final String LOCALE_SUGGESTION = "locale_suggestion";
     static final String EXTRA_APP_LOCALE = "app_locale";
     static final String EXTRA_NOTIFICATION_ID = "notification_id";
 
@@ -194,7 +191,6 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
             channel.setSound(/* sound */ null, /* audioAttributes */ null); // silent notification
             notificationManager.createNotificationChannel(channel);
         }
-
         final NotificationCompat.Builder builder =
                 new NotificationCompat.Builder(this, CHANNEL_ID_SUGGESTION)
                         .setSmallIcon(R.drawable.ic_settings_language)
@@ -213,8 +209,7 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
             boolean isDeleteIntent) {
         Intent intent = isDeleteIntent
                 ? new Intent(this, NotificationCancelReceiver.class)
-                : new Intent(Settings.ACTION_LOCALE_SETTINGS)
-                        .putExtra(EXTRA_SYSTEM_LOCALE_DIALOG_TYPE, LOCALE_SUGGESTION)
+                : new Intent(this, NotificationActionActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
         intent.putExtra(EXTRA_APP_LOCALE, locale)

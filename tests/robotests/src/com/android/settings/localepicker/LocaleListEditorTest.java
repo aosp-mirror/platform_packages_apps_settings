@@ -17,8 +17,9 @@
 package com.android.settings.localepicker;
 
 import static com.android.settings.localepicker.AppLocalePickerActivity.EXTRA_APP_LOCALE;
-import static com.android.settings.localepicker.AppLocalePickerActivity.EXTRA_NOTIFICATION_ID;
 import static com.android.settings.localepicker.LocaleDialogFragment.DIALOG_ADD_SYSTEM_LOCALE;
+import static com.android.settings.localepicker.LocaleListEditor.EXTRA_SYSTEM_LOCALE_DIALOG_TYPE;
+import static com.android.settings.localepicker.LocaleListEditor.LOCALE_SUGGESTION;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -96,7 +97,6 @@ public class LocaleListEditorTest {
     private static final String TAG_DIALOG_CONFIRM_SYSTEM_DEFAULT = "dialog_confirm_system_default";
     private static final String TAG_DIALOG_NOT_AVAILABLE = "dialog_not_available_locale";
     private static final String TAG_DIALOG_ADD_SYSTEM_LOCALE = "dialog_add_system_locale";
-    private static final String EXTRA_SYSTEM_LOCALE_DIALOG_TYPE = "system_locale_dialog_type";
     private static final int DIALOG_CONFIRM_SYSTEM_DEFAULT = 1;
     private static final int REQUEST_CONFIRM_SYSTEM_DEFAULT = 1;
 
@@ -151,7 +151,7 @@ public class LocaleListEditorTest {
         mContext = spy(RuntimeEnvironment.application);
         mLocaleListEditor = spy(new LocaleListEditor());
         when(mLocaleListEditor.getContext()).thenReturn(mContext);
-        mActivity = Robolectric.buildActivity(FragmentActivity.class).get();
+        mActivity = spy(Robolectric.buildActivity(FragmentActivity.class).get());
         when(mLocaleListEditor.getActivity()).thenReturn(mActivity);
         when(mLocaleListEditor.getNotificationController()).thenReturn(
                 mNotificationController);
@@ -402,7 +402,7 @@ public class LocaleListEditorTest {
     public void showDiallogForAddedLocale_invalidLocale_noDialog() {
         Intent intent = new Intent("ACTION")
                 .putExtra(EXTRA_APP_LOCALE, "ab-CD") // invalid locale
-                .putExtra(EXTRA_SYSTEM_LOCALE_DIALOG_TYPE, "locale_suggestion");
+                .putExtra(EXTRA_SYSTEM_LOCALE_DIALOG_TYPE, LOCALE_SUGGESTION);
         mActivity.setIntent(intent);
 
         mLocaleListEditor.onViewStateRestored(null);
@@ -431,7 +431,7 @@ public class LocaleListEditorTest {
         LocaleList.setDefault(LocaleList.forLanguageTags("en-US,ar-AE-u-nu-arab"));
         Intent intent = new Intent("ACTION")
                 .putExtra(EXTRA_APP_LOCALE, "ar-AE")
-                .putExtra(EXTRA_SYSTEM_LOCALE_DIALOG_TYPE, "locale_suggestion");
+                .putExtra(EXTRA_SYSTEM_LOCALE_DIALOG_TYPE, LOCALE_SUGGESTION);
         mActivity.setIntent(intent);
 
         mLocaleListEditor.onViewStateRestored(null);
@@ -441,18 +441,17 @@ public class LocaleListEditorTest {
     }
 
     private void initIntentAndResourceForLocaleDialog() {
-        int notificationId = 1000;
         Intent intent = new Intent("ACTION")
                 .putExtra(EXTRA_APP_LOCALE, "ja-JP")
-                .putExtra(EXTRA_SYSTEM_LOCALE_DIALOG_TYPE, "locale_suggestion")
-                .putExtra(EXTRA_NOTIFICATION_ID, notificationId);
+                .putExtra(EXTRA_SYSTEM_LOCALE_DIALOG_TYPE, LOCALE_SUGGESTION);
 
         mActivity.setIntent(intent);
         String[] supportedLocales = new String[]{"en-US", "ja-JP"};
         View contentView = LayoutInflater.from(mActivity).inflate(R.layout.locale_dialog, null);
         doReturn(contentView).when(mLocaleListEditor).getLocaleDialogView();
-        when(mNotificationController.getNotificationId("ja-JP")).thenReturn(notificationId);
         when(mLocaleListEditor.getSupportedLocales()).thenReturn(supportedLocales);
+        when(mContext.getPackageName()).thenReturn("com.android.settings");
+        when(mActivity.getCallingPackage()).thenReturn("com.android.settings");
     }
 
     @Test

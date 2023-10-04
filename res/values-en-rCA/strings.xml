@@ -273,7 +273,7 @@
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Loading…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Apps with the Nearby devices permission can determine the relative position of connected devices."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Location access is off for apps and services. Your device location may still be sent to emergency responders when you call or text an emergency number."</string>
-    <string name="location_settings_footer_learn_more_content_description" msgid="5329024810729665156">"Learn more about Location Settings."</string>
+    <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Learn more about Location settings"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Accounts"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Security"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Encryption &amp; credentials"</string>
@@ -923,6 +923,7 @@
     <string name="internet_source_wifi" msgid="6952593095166435179">"Wi‑Fi"</string>
     <string name="internet_source_mobile_data" msgid="877403889449201789">"Mobile data"</string>
     <string name="internet_source_ethernet" msgid="8338472576454100966">"Ethernet"</string>
+    <string name="hotspot_battery_charging_summary" msgid="6690892148553288457">"<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> ‑ Charging"</string>
     <string name="hotspot_connection_category" msgid="4320380513982923556">"Hotspot connection"</string>
     <string name="hotspot_connection_strength" msgid="87359986943768421">"Connection strength"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"Saved networks"</string>
@@ -2843,11 +2844,6 @@
     <string name="amber_alerts_title" msgid="5238275758191804575">"AMBER alerts"</string>
     <string name="amber_alerts_summary" msgid="5755221775246075883">"Receive bulletins about child abductions"</string>
     <string name="repeat_title" msgid="8676570486899483606">"Repeat"</string>
-    <string name="call_manager_enable_title" msgid="1214301265395158720">"Enable Call Manager"</string>
-    <string name="call_manager_enable_summary" msgid="7362506369604163030">"Allow this service to manage how your calls are made."</string>
-    <string name="call_manager_title" msgid="3397433159509629466">"Call Manager"</string>
-    <!-- no translation found for call_manager_summary (2558839230880919191) -->
-    <skip />
     <string name="cell_broadcast_settings" msgid="2416980110093867199">"Wireless emergency alerts"</string>
     <string name="network_operators_settings" msgid="5105453353329748954">"Network operators"</string>
     <string name="access_point_names" msgid="5768430498022188057">"Access point names"</string>
@@ -4229,8 +4225,8 @@
     <!-- no translation found for graphics_driver_app_preference_values:1 (485288770206606512) -->
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
-    <string name="enable_angle_as_system_driver" msgid="3985105681812713612">"Enable ANGLE"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="6413038127558166972">"Enable ANGLE as default OpenGL ES driver. Enabling it on incompatible devices may break some applications."</string>
+    <string name="enable_angle_as_system_driver" msgid="4648827560023949786">"Experimental: Enable ANGLE"</string>
+    <string name="enable_angle_as_system_driver_summary" msgid="2170215556348477481">"Warning: Enable ANGLE as default OpenGL ES driver. This feature is in experiment and may not be compatible with some camera and video apps."</string>
     <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"A reboot is required to change the system OpenGL ES driver"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"App Compatibility Changes"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Toggle app compatibility changes"</string>
@@ -4492,9 +4488,6 @@
     <string name="wfc_disclaimer_emergency_limitation_title_text" msgid="8276287227589397162">"Emergency calls"</string>
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"Emergency calls over Wi‑Fi Calling are not supported by your carrier.\nThe device switches automatically to a cellular network to place an emergency call.\nEmergency calls are only possible in areas with cellular coverage."</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"Use Wi‑Fi for calls to improve quality"</string>
-    <string name="backup_calling_settings_title" msgid="519714752900364326">"Backup calling"</string>
-    <string name="backup_calling_setting_summary" msgid="599493254305348733">"If <xliff:g id="BACKUP_CALLING_OPERATOR_TEXT">%1$s</xliff:g> is unavailable or roaming, use your mobile data SIM for <xliff:g id="BACKUP_CALLING_CARRIER_TEXT">%1$s</xliff:g> calls."</string>
-    <string name="keywords_backup_calling" msgid="8592800915478816800">"backup calling"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"Incoming MMS message"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"Can’t send MMS message"</string>
     <string name="enable_mms_notification_summary" msgid="6432752438276672500">"Tap to allow MMS messaging on <xliff:g id="OPERATOR_NAME">%1$s</xliff:g> when mobile data is off"</string>
@@ -4791,6 +4784,8 @@
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Aspect ratio"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"Try a new aspect ratio to view this app if it hasn\'t been designed to fit your <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"Try a new aspect ratio to view this app if it hasn\'t been designed to fit your <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Some apps may not be optimized for certain aspect ratios."</string>
+    <string name="aspect_ratio_summary_text" msgid="4737461467467220325">"Try a new aspect ratio to view an app if it hasn\'t been designed to fit your <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="aspect_ratio_main_summary_text" msgid="5544816872094235840">"Try a new aspect ratio to view an app if it hasn\'t been designed to fit your <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Some apps may not be optimized for certain aspect ratios."</string>
     <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"Suggested apps"</string>
     <string name="user_aspect_ratio_changed_apps_label" msgid="2096614916172567672">"Changed apps"</string>
     <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"App default"</string>
@@ -4860,6 +4855,4 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Your device name is visible to apps you installed. It may also be seen by other people when you connect to Bluetooth devices, connect to a Wi-Fi network or set up a Wi-Fi hotspot."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Grammatical gender"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Select Grammatical gender"</string>
-    <!-- no translation found for quarantined_apps_title (5713301345723474936) -->
-    <skip />
 </resources>
