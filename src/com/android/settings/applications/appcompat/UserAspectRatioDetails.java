@@ -30,6 +30,7 @@ import android.app.ActivityManager;
 import android.app.IActivityManager;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.UserHandle;
@@ -57,6 +58,7 @@ public class UserAspectRatioDetails extends AppInfoBase implements
         RadioWithImagePreference.OnClickListener {
     private static final String TAG = UserAspectRatioDetails.class.getSimpleName();
 
+    private static final String KEY_HEADER_SUMMARY = "app_aspect_ratio_summary";
     private static final String KEY_HEADER_BUTTONS = "header_view";
     private static final String KEY_PREF_FULLSCREEN = "fullscreen_pref";
     private static final String KEY_PREF_HALF_SCREEN = "half_screen_pref";
@@ -202,6 +204,10 @@ public class UserAspectRatioDetails extends AppInfoBase implements
 
     private void initPreferences() {
         addPreferencesFromResource(R.xml.user_aspect_ratio_details);
+
+        final String summary = getContext().getResources().getString(
+                R.string.aspect_ratio_main_summary, Build.MODEL);
+        findPreference(KEY_HEADER_SUMMARY).setTitle(summary);
 
         ((ActionButtonsPreference) findPreference(KEY_HEADER_BUTTONS))
                 .setButton1Text(R.string.launch_instant_app)
