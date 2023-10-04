@@ -59,7 +59,8 @@ public class CallsSimListDialogFragment extends SimListDialogFragment {
             SubscriptionInfo info = subscriptionManager.getActiveSubscriptionInfo(subId);
             if (info == null || (info.isEmbedded()
                 && (info.getProfileClass() == PROFILE_CLASS_PROVISIONING
-                || (Flags.oemEnabledSatelliteFlag() && info.isNtn())))) {
+                    || (Flags.oemEnabledSatelliteFlag()
+                        && info.isOnlyNonTerrestrialNetwork())))) {
                 continue;
             }
             result.add(subscriptionManager.getActiveSubscriptionInfo(subId));

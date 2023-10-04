@@ -145,7 +145,7 @@ public class SimListDialogFragment extends SimDialogFragment {
         // Remove the provisioning or satellite eSIM from the subscription list.
         currentSubscriptions.removeIf(info -> info.isEmbedded()
             && (info.getProfileClass() == PROFILE_CLASS_PROVISIONING
-            || (Flags.oemEnabledSatelliteFlag() && info.isNtn())));
+                || (Flags.oemEnabledSatelliteFlag() && info.isOnlyNonTerrestrialNetwork())));
 
         boolean includeAskEveryTime = getArguments().getBoolean(KEY_INCLUDE_ASK_EVERY_TIME);
         boolean isCancelItemShowed = getArguments().getBoolean(KEY_SHOW_CANCEL_ITEM);
