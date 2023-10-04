@@ -273,7 +273,8 @@
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Đang tải…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Những ứng dụng có quyền đối với các Thiết bị ở gần có thể xác định vị trí tương đối của các thiết bị đã kết nối."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Các ứng dụng và dịch vụ sẽ không có quyền truy cập vào thông tin vị trí. Khi bạn gọi điện hoặc nhắn tin đến một số khẩn cấp, những người ứng cứu khẩn cấp vẫn có thể nhận được thông tin vị trí thiết bị của bạn."</string>
-    <string name="location_settings_footer_learn_more_content_description" msgid="5329024810729665156">"Tìm hiểu thêm về chế độ Cài đặt vị trí."</string>
+    <!-- no translation found for location_settings_footer_learn_more_content_description (349380666660145540) -->
+    <skip />
     <string name="account_settings_title" msgid="9138880127246241885">"Tài khoản"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Bảo mật"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Mã hóa và thông tin xác thực"</string>
@@ -923,6 +924,7 @@
     <string name="internet_source_wifi" msgid="6952593095166435179">"Wi‑Fi"</string>
     <string name="internet_source_mobile_data" msgid="877403889449201789">"Dữ liệu di động"</string>
     <string name="internet_source_ethernet" msgid="8338472576454100966">"Ethernet"</string>
+    <string name="hotspot_battery_charging_summary" msgid="6690892148553288457">"<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> – Đang sạc"</string>
     <string name="hotspot_connection_category" msgid="4320380513982923556">"Kết nối điểm phát sóng"</string>
     <string name="hotspot_connection_strength" msgid="87359986943768421">"Cường độ tín hiệu kết nối"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"Mạng đã lưu"</string>
@@ -2365,7 +2367,7 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Đặt lịch biểu"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Kéo dài thời lượng pin"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Tắt khi sạc đầy"</string>
-    <string name="battery_saver_sticky_title_percentage" msgid="1178162022087559148">"Tắt khi pin còn <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="battery_saver_sticky_title_percentage" msgid="1178162022087559148">"Tắt khi pin đạt mức <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_saver_sticky_description_new" msgid="6472610662679038342">"Trình tiết kiệm pin tắt khi pin đạt mức <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
@@ -2843,11 +2845,6 @@
     <string name="amber_alerts_title" msgid="5238275758191804575">"Cảnh báo AMBER"</string>
     <string name="amber_alerts_summary" msgid="5755221775246075883">"Nhận bản tin về bắt cóc trẻ em"</string>
     <string name="repeat_title" msgid="8676570486899483606">"Lặp lại"</string>
-    <string name="call_manager_enable_title" msgid="1214301265395158720">"Bật Trình quản lý cuộc gọi"</string>
-    <string name="call_manager_enable_summary" msgid="7362506369604163030">"Cho phép dịch vụ này quản lý cách thực hiện cuộc gọi của bạn."</string>
-    <string name="call_manager_title" msgid="3397433159509629466">"Trình quản lý cuộc gọi"</string>
-    <!-- no translation found for call_manager_summary (2558839230880919191) -->
-    <skip />
     <string name="cell_broadcast_settings" msgid="2416980110093867199">"Cảnh báo khẩn cấp không dây"</string>
     <string name="network_operators_settings" msgid="5105453353329748954">"Nhà cung cấp dịch vụ mạng"</string>
     <string name="access_point_names" msgid="5768430498022188057">"Tên điểm truy cập"</string>
@@ -3070,8 +3067,7 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"Âm thanh thông báo mặc định"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"Âm thanh chuông báo mặc định"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"Rung trước rồi đổ chuông to dần"</string>
-    <!-- no translation found for spatial_audio_title (1775370104206884711) -->
-    <skip />
+    <string name="spatial_audio_title" msgid="1775370104206884711">"Âm thanh không gian"</string>
     <string name="dial_pad_tones_title" msgid="3536945335367914892">"Âm bàn phím số"</string>
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"Âm thanh khóa màn hình"</string>
     <string name="charging_sounds_title" msgid="5261683808537783668">"Âm thanh và rung khi sạc"</string>
@@ -3900,32 +3896,21 @@
     <string name="app_battery_usage_title" msgid="346558380609793334">"Mức sử dụng pin của ứng dụng"</string>
     <string name="app_battery_usage_summary" msgid="6349965904306339539">"Đặt mức sử dụng pin cho các ứng dụng"</string>
     <string name="battery_tips_card_action_button" msgid="4897793527424711648">"Xem mục Cài đặt"</string>
-    <!-- no translation found for battery_tips_card_action_button_check (1535140204105479318) -->
-    <skip />
+    <string name="battery_tips_card_action_button_check" msgid="1535140204105479318">"Kiểm tra"</string>
     <string name="battery_tips_card_dismiss_button" msgid="1885756985544936618">"Tôi hiểu"</string>
     <string name="battery_tips_card_feedback_info" msgid="767117835675157298">"Tin nhắn này có hữu ích không?"</string>
-    <!-- no translation found for battery_hints_warning_icon_a11y (5312542323401447620) -->
-    <skip />
+    <string name="battery_hints_warning_icon_a11y" msgid="5312542323401447620">"Biểu tượng nhắc nhở về mẹo sử dụng pin"</string>
     <string name="battery_tips_settings_summary_brightness" msgid="546145032616077783">"Bật tính năng độ sáng thích ứng để kéo dài thời lượng pin"</string>
     <string name="battery_tips_settings_summary_screen_timeout" msgid="556801426050962077">"Giảm thời gian chờ khoá màn hình để kéo dài thời lượng pin"</string>
-    <!-- no translation found for battery_tips_apps_summary_always_high (6334519477067044920) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_higher_than_usual (95676961671544628) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_always_high_in_background (2953858181710181126) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_higher_than_usual_in_background (1585002072567422199) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_always_high_in_foreground (1910991243576404700) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_higher_than_usual_in_foreground (7937337570425168210) -->
-    <skip />
-    <!-- no translation found for battery_app_item_hint (4850929961461039110) -->
-    <skip />
-    <!-- no translation found for battery_app_item_hint_in_bg (596240821466388336) -->
-    <skip />
-    <!-- no translation found for battery_app_item_hint_in_fg (5091860632260799910) -->
-    <skip />
+    <string name="battery_tips_apps_summary_always_high" msgid="6334519477067044920">"<xliff:g id="APP_LABEL">%1$s</xliff:g> dùng nhiều pin hơn"</string>
+    <string name="battery_tips_apps_summary_higher_than_usual" msgid="95676961671544628">"<xliff:g id="APP_LABEL">%1$s</xliff:g> dùng nhiều pin hơn thường lệ"</string>
+    <string name="battery_tips_apps_summary_always_high_in_background" msgid="2953858181710181126">"<xliff:g id="APP_LABEL">%1$s</xliff:g> dùng nhiều pin hơn khi ở chế độ nền"</string>
+    <string name="battery_tips_apps_summary_higher_than_usual_in_background" msgid="1585002072567422199">"<xliff:g id="APP_LABEL">%1$s</xliff:g> dùng nhiều pin hơn thường lệ khi ở chế độ nền"</string>
+    <string name="battery_tips_apps_summary_always_high_in_foreground" msgid="1910991243576404700">"<xliff:g id="APP_LABEL">%1$s</xliff:g> dùng nhiều pin hơn khi ở chế độ nền trước"</string>
+    <string name="battery_tips_apps_summary_higher_than_usual_in_foreground" msgid="7937337570425168210">"<xliff:g id="APP_LABEL">%1$s</xliff:g> dùng nhiều pin hơn thường lệ khi ở chế độ nền trước"</string>
+    <string name="battery_app_item_hint" msgid="4850929961461039110">"Mức sử dụng pin cao"</string>
+    <string name="battery_app_item_hint_in_bg" msgid="596240821466388336">"Mức sử dụng pin cao trong nền"</string>
+    <string name="battery_app_item_hint_in_fg" msgid="5091860632260799910">"Mức sử dụng pin cao trong nền trước"</string>
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"Không hạn chế"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"Được tối ưu hóa"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"Bị hạn chế"</string>
@@ -4241,8 +4226,10 @@
     <!-- no translation found for graphics_driver_app_preference_values:1 (485288770206606512) -->
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
-    <string name="enable_angle_as_system_driver" msgid="3985105681812713612">"Bật ANGLE"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="6413038127558166972">"Bật ANGLE làm trình điều khiển hệ thống OpenGL ES. Bật tính năng này trên thiết bị không tương thích có thể làm hỏng một số ứng dụng."</string>
+    <!-- no translation found for enable_angle_as_system_driver (4648827560023949786) -->
+    <skip />
+    <!-- no translation found for enable_angle_as_system_driver_summary (2170215556348477481) -->
+    <skip />
     <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"Cần phải khởi động lại để thay đổi trình điều khiển hệ thống OpenGL ES"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Các thay đổi về khả năng tương thích của ứng dụng"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Bật/tắt các thay đổi về khả năng tương thích của ứng dụng"</string>
@@ -4504,9 +4491,6 @@
     <string name="wfc_disclaimer_emergency_limitation_title_text" msgid="8276287227589397162">"Cuộc gọi khẩn cấp"</string>
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"Nhà mạng của bạn không hỗ trợ các cuộc gọi khẩn cấp qua tính năng Gọi qua Wi‑Fi.\nKhi cần thực hiện cuộc gọi khẩn cấp, thiết bị sẽ tự động chuyển sang mạng di động.\nBạn chỉ có thể thực hiện cuộc gọi khẩn cấp ở các khu vực có mạng di động."</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"Sử dụng Wi‑Fi cho cuộc gọi để cải thiện chất lượng"</string>
-    <string name="backup_calling_settings_title" msgid="519714752900364326">"Gọi điện dự phòng"</string>
-    <string name="backup_calling_setting_summary" msgid="599493254305348733">"Nếu <xliff:g id="BACKUP_CALLING_OPERATOR_TEXT">%1$s</xliff:g> không có sẵn hoặc đang chuyển vùng, hãy dùng dữ liệu di động của SIM cho những cuộc gọi qua <xliff:g id="BACKUP_CALLING_CARRIER_TEXT">%1$s</xliff:g>."</string>
-    <string name="keywords_backup_calling" msgid="8592800915478816800">"gọi điện dự phòng"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"Tin nhắn MMS đến"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"Không thể gửi tin nhắn MMS"</string>
     <string name="enable_mms_notification_summary" msgid="6432752438276672500">"Nhấn để cho phép nhắn tin MMS qua <xliff:g id="OPERATOR_NAME">%1$s</xliff:g> khi dữ liệu di động đang tắt"</string>
@@ -4803,6 +4787,10 @@
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Tỷ lệ khung hình"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"Hãy thử một tỷ lệ khung hình mới để xem ứng dụng này trong trường hợp ứng dụng này chưa được thiết kế cho vừa với <xliff:g id="DEVICE_NAME">%1$s</xliff:g> của bạn"</string>
     <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"Hãy thử một tỷ lệ khung hình mới để xem ứng dụng này trong trường hợp ứng dụng này chưa được thiết kế cho vừa với <xliff:g id="DEVICE_NAME">%1$s</xliff:g> của bạn Có thể một số ứng dụng chưa được tối ưu hoá cho một số tỷ lệ khung hình nhất định."</string>
+    <!-- no translation found for aspect_ratio_summary_text (4737461467467220325) -->
+    <skip />
+    <!-- no translation found for aspect_ratio_main_summary_text (5544816872094235840) -->
+    <skip />
     <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"Ứng dụng đề xuất"</string>
     <string name="user_aspect_ratio_changed_apps_label" msgid="2096614916172567672">"Đã thay đổi"</string>
     <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"Mặc định của ứng dụng"</string>
@@ -4872,6 +4860,4 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Các ứng dụng bạn đã cài đặt sẽ biết được tên thiết bị của bạn. Những người khác cũng có thể thấy tên thiết bị này khi bạn kết nối với thiết bị Bluetooth, một mạng Wi-Fi hoặc thiết lập một điểm phát sóng Wi-Fi."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Giống trong ngữ pháp"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Chọn giống trong ngữ pháp"</string>
-    <!-- no translation found for quarantined_apps_title (5713301345723474936) -->
-    <skip />
 </resources>

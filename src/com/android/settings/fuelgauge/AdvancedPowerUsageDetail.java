@@ -75,6 +75,9 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     public static final String EXTRA_FOREGROUND_TIME = "extra_foreground_time";
     public static final String EXTRA_BACKGROUND_TIME = "extra_background_time";
     public static final String EXTRA_SCREEN_ON_TIME = "extra_screen_on_time";
+    public static final String EXTRA_ANOMALY_HINT_PREF_KEY = "extra_anomaly_hint_pref_key";
+    public static final String EXTRA_ANOMALY_HINT_TEXT = "extra_anomaly_hint_text";
+    public static final String EXTRA_SHOW_TIME_INFO = "extra_show_time_info";
     public static final String EXTRA_SLOT_TIME = "extra_slot_time";
     public static final String EXTRA_LABEL = "extra_label";
     public static final String EXTRA_ICON_ID = "extra_icon_id";
@@ -120,6 +123,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     StringBuilder mLogStringBuilder;
 
     private AppButtonsPreferenceController mAppButtonsPreferenceController;
+    private PowerUsageTimeController mPowerUsageTimeController;
 
     // A wrapper class to carry LaunchBatteryDetailPage required arguments.
     private static final class LaunchBatteryDetailPageArgs {
@@ -127,29 +131,23 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         private String mPackageName;
         private String mAppLabel;
         private String mSlotInformation;
+        private String mAnomalyHintText;
+        private String mAnomalyHintPrefKey;
         private int mUid;
         private int mIconId;
         private int mConsumedPower;
         private long mForegroundTimeMs;
         private long mBackgroundTimeMs;
         private long mScreenOnTimeMs;
+        private boolean mShowTimeInformation;
         private boolean mIsUserEntry;
-    }
-
-    /** Launches battery details page for an individual battery consumer. */
-    public static void startBatteryDetailPage(
-            Activity caller, InstrumentedPreferenceFragment fragment,
-            BatteryDiffEntry diffEntry, String usagePercent, String slotInformation) {
-        startBatteryDetailPage(
-                caller, fragment.getMetricsCategory(), diffEntry, usagePercent, slotInformation,
-                /*showTimeInformation=*/ true);
     }
 
     /** Launches battery details page for an individual battery consumer fragment. */
     public static void startBatteryDetailPage(
             Context context, int sourceMetricsCategory,
             BatteryDiffEntry diffEntry, String usagePercent, String slotInformation,
-            boolean showTimeInformation) {
+            boolean showTimeInformation, String anomalyHintPrefKey, String anomalyHintText) {
         final LaunchBatteryDetailPageArgs launchArgs = new LaunchBatteryDetailPageArgs();
         // configure the launch argument.
         launchArgs.mUsagePercent = usagePercent;
@@ -159,10 +157,13 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         launchArgs.mUid = (int) diffEntry.mUid;
         launchArgs.mIconId = diffEntry.getAppIconId();
         launchArgs.mConsumedPower = (int) diffEntry.mConsumePower;
-        if (showTimeInformation) {
+        launchArgs.mShowTimeInformation = showTimeInformation;
+        if (launchArgs.mShowTimeInformation) {
             launchArgs.mForegroundTimeMs = diffEntry.mForegroundUsageTimeInMs;
             launchArgs.mBackgroundTimeMs = diffEntry.mBackgroundUsageTimeInMs;
             launchArgs.mScreenOnTimeMs = diffEntry.mScreenOnTimeInMs;
+            launchArgs.mAnomalyHintPrefKey = anomalyHintPrefKey;
+            launchArgs.mAnomalyHintText = anomalyHintText;
         }
         launchArgs.mIsUserEntry = isUserConsumer(diffEntry.mConsumerType);
         startBatteryDetailPage(context, sourceMetricsCategory, launchArgs);
@@ -180,6 +181,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         launchArgs.mIconId = entry.mIconId;
         launchArgs.mConsumedPower = (int) entry.getConsumedPower();
         launchArgs.mIsUserEntry = entry.isUserEntry();
+        launchArgs.mShowTimeInformation = false;
         startBatteryDetailPage(caller, fragment.getMetricsCategory(), launchArgs);
     }
 
@@ -203,6 +205,9 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         args.putString(EXTRA_SLOT_TIME, launchArgs.mSlotInformation);
         args.putString(EXTRA_POWER_USAGE_PERCENT, launchArgs.mUsagePercent);
         args.putInt(EXTRA_POWER_USAGE_AMOUNT, launchArgs.mConsumedPower);
+        args.putBoolean(EXTRA_SHOW_TIME_INFO, launchArgs.mShowTimeInformation);
+        args.putString(EXTRA_ANOMALY_HINT_PREF_KEY, launchArgs.mAnomalyHintPrefKey);
+        args.putString(EXTRA_ANOMALY_HINT_TEXT, launchArgs.mAnomalyHintText);
         final int userId = launchArgs.mIsUserEntry ? ActivityManager.getCurrentUser()
             : UserHandle.getUserId(launchArgs.mUid);
 
@@ -335,7 +340,15 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
             controller.setIsInstantApp(AppUtils.isInstant(mAppEntry.info));
         }
 
-        controller.setSummary(getHeaderSummary(bundle));
+        if (mPowerUsageTimeController != null) {
+            final String slotTime = bundle.getString(EXTRA_SLOT_TIME);
+            final long screenOnTimeInMs = bundle.getLong(EXTRA_SCREEN_ON_TIME);
+            final long backgroundTimeMs = bundle.getLong(EXTRA_BACKGROUND_TIME);
+            final String anomalyHintPrefKey = bundle.getString(EXTRA_ANOMALY_HINT_PREF_KEY);
+            final String anomalyHintText = bundle.getString(EXTRA_ANOMALY_HINT_TEXT);
+            mPowerUsageTimeController.handleScreenTimeUpdated(slotTime, screenOnTimeInMs,
+                    backgroundTimeMs, anomalyHintPrefKey, anomalyHintText);
+        }
         controller.done(true /* rebindActions */);
     }
 
@@ -394,6 +407,10 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         mAppButtonsPreferenceController = new AppButtonsPreferenceController(
                 (SettingsActivity) getActivity(), this, getSettingsLifecycle(),
                 packageName, mState, REQUEST_UNINSTALL, REQUEST_REMOVE_DEVICE_ADMIN);
+        if (bundle.getBoolean(EXTRA_SHOW_TIME_INFO, false)) {
+            mPowerUsageTimeController = new PowerUsageTimeController(getContext());
+            controllers.add(mPowerUsageTimeController);
+        }
         controllers.add(mAppButtonsPreferenceController);
         controllers.add(new UnrestrictedPreferenceController(context, uid, packageName));
         controllers.add(new OptimizedPreferenceController(context, uid, packageName));
@@ -487,23 +504,6 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
             return BatteryOptimizeUtils.MODE_OPTIMIZED;
         } else {
             return BatteryOptimizeUtils.MODE_UNKNOWN;
-        }
-    }
-
-    private CharSequence getHeaderSummary(Bundle bundle) {
-        final long foregroundTimeMs = bundle.getLong(EXTRA_FOREGROUND_TIME);
-        final long backgroundTimeMs = bundle.getLong(EXTRA_BACKGROUND_TIME);
-        final long screenOnTimeInMs = bundle.getLong(EXTRA_SCREEN_ON_TIME);
-        final String slotTime = bundle.getString(EXTRA_SLOT_TIME, null);
-        final String usageSummary = BatteryUtils.buildBatteryUsageTimeSummary(getContext(),
-                /* isSystem= */ false, foregroundTimeMs, backgroundTimeMs, screenOnTimeInMs);
-
-        if (usageSummary.isEmpty()) {
-            return getText(R.string.battery_usage_without_time);
-        } else {
-            CharSequence slotSummary = slotTime == null
-                    ? getText(R.string.battery_usage_since_last_full_charge) : slotTime;
-            return String.format("%s\n(%s)", usageSummary, slotSummary);
         }
     }
 

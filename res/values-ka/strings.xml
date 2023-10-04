@@ -273,7 +273,8 @@
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"მიმდინარეობს ჩატვირთვა…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"ახლომდებარე მოწყობილობების ნებართვების მქონე აპებს შეუძლია დაკავშირებული მოწყობილობების პოზიციის განსაზღვრა."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"აპებისა და სერვისების მდებარეობაზე წვდომა გამორთულია. თქვენი მოწყობილობის მდებარეობა მაინც გაიგზავნება გადაუდებელი დახმარების სამსახურში, როცა გადაუდებელი დახმარების სამსახურის ნომერზე დარეკავთ ან ტექსტურ შეტყობინებას გაგზავნით."</string>
-    <string name="location_settings_footer_learn_more_content_description" msgid="5329024810729665156">"შეიტყვეთ მეტი მდებარეობის პარამეტრების შესახებ."</string>
+    <!-- no translation found for location_settings_footer_learn_more_content_description (349380666660145540) -->
+    <skip />
     <string name="account_settings_title" msgid="9138880127246241885">"ანგარიშები"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"უსაფრთხოება"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"დაშიფვრა და ავტორიზაციის მონაცემები"</string>
@@ -923,6 +924,7 @@
     <string name="internet_source_wifi" msgid="6952593095166435179">"Wi‑Fi"</string>
     <string name="internet_source_mobile_data" msgid="877403889449201789">"მობილური ინტერნეტი"</string>
     <string name="internet_source_ethernet" msgid="8338472576454100966">"Ethernet"</string>
+    <string name="hotspot_battery_charging_summary" msgid="6690892148553288457">"<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> – იტენება"</string>
     <string name="hotspot_connection_category" msgid="4320380513982923556">"უსადენო ქსელთან კავშირი"</string>
     <string name="hotspot_connection_strength" msgid="87359986943768421">"კავშირის სიძლიერე"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"დამახს. ქსელები"</string>
@@ -2843,11 +2845,6 @@
     <string name="amber_alerts_title" msgid="5238275758191804575">"AMBER განცხადებები"</string>
     <string name="amber_alerts_summary" msgid="5755221775246075883">"ბავშვების მოტაცებების შესახებ ცნობების მიღება"</string>
     <string name="repeat_title" msgid="8676570486899483606">"გამეორება"</string>
-    <string name="call_manager_enable_title" msgid="1214301265395158720">"ზარების მენეჯერის ჩართვა"</string>
-    <string name="call_manager_enable_summary" msgid="7362506369604163030">"მიეცეს ნება ამ სერვისს თქვენი ზარების განხორციელების გზის მართვისთვის."</string>
-    <string name="call_manager_title" msgid="3397433159509629466">"ზარების მენეჯერი"</string>
-    <!-- no translation found for call_manager_summary (2558839230880919191) -->
-    <skip />
     <string name="cell_broadcast_settings" msgid="2416980110093867199">"უსადენო საგანგებო გაფრთხილებები"</string>
     <string name="network_operators_settings" msgid="5105453353329748954">"ქსელის ოპერატორები"</string>
     <string name="access_point_names" msgid="5768430498022188057">"წვდომის წერტილის სახელი (APN)"</string>
@@ -3070,8 +3067,7 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"შეტყობინებების ნაგულისხმევი ხმა"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"მაღვიძარას ნაგულ. ხმა"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"ვიბრაცია, შემდეგ კი ზრდადი ზარი"</string>
-    <!-- no translation found for spatial_audio_title (1775370104206884711) -->
-    <skip />
+    <string name="spatial_audio_title" msgid="1775370104206884711">"სივრცითი აუდიო"</string>
     <string name="dial_pad_tones_title" msgid="3536945335367914892">"ციფერბლატის ტონური რეჟიმი"</string>
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"ეკრანის დაბლოკვის ხმა"</string>
     <string name="charging_sounds_title" msgid="5261683808537783668">"დატენის ხმები და ვიბრაცია"</string>
@@ -3900,32 +3896,21 @@
     <string name="app_battery_usage_title" msgid="346558380609793334">"აპლიკაციის ბატარეის გამოყენება"</string>
     <string name="app_battery_usage_summary" msgid="6349965904306339539">"დააყენეთ ბატარეის მოხმარება აპებისთვის"</string>
     <string name="battery_tips_card_action_button" msgid="4897793527424711648">"პარამეტრების ნახვა"</string>
-    <!-- no translation found for battery_tips_card_action_button_check (1535140204105479318) -->
-    <skip />
+    <string name="battery_tips_card_action_button_check" msgid="1535140204105479318">"შემოწმება"</string>
     <string name="battery_tips_card_dismiss_button" msgid="1885756985544936618">"გასაგებია"</string>
     <string name="battery_tips_card_feedback_info" msgid="767117835675157298">"სასარგებლოა ეს შეტყობინება?"</string>
-    <!-- no translation found for battery_hints_warning_icon_a11y (5312542323401447620) -->
-    <skip />
+    <string name="battery_hints_warning_icon_a11y" msgid="5312542323401447620">"ბატარეასთან დაკავშირებული გაფრთხილებების ეკრანი"</string>
     <string name="battery_tips_settings_summary_brightness" msgid="546145032616077783">"ჩართეთ მორგებადი სიკაშკაშე, რათა ბატარეის მუშაობის ხანგრძლივობა გაზარდოთ"</string>
     <string name="battery_tips_settings_summary_screen_timeout" msgid="556801426050962077">"შეამცირეთ ეკრანის დროის ლიმიტი, რათა ბატარეის მუშაობის ხანგრძლივობა გაზარდოთ"</string>
-    <!-- no translation found for battery_tips_apps_summary_always_high (6334519477067044920) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_higher_than_usual (95676961671544628) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_always_high_in_background (2953858181710181126) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_higher_than_usual_in_background (1585002072567422199) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_always_high_in_foreground (1910991243576404700) -->
-    <skip />
-    <!-- no translation found for battery_tips_apps_summary_higher_than_usual_in_foreground (7937337570425168210) -->
-    <skip />
-    <!-- no translation found for battery_app_item_hint (4850929961461039110) -->
-    <skip />
-    <!-- no translation found for battery_app_item_hint_in_bg (596240821466388336) -->
-    <skip />
-    <!-- no translation found for battery_app_item_hint_in_fg (5091860632260799910) -->
-    <skip />
+    <string name="battery_tips_apps_summary_always_high" msgid="6334519477067044920">"<xliff:g id="APP_LABEL">%1$s</xliff:g>-მა გამოიყენა მეტი ბატარეა"</string>
+    <string name="battery_tips_apps_summary_higher_than_usual" msgid="95676961671544628">"<xliff:g id="APP_LABEL">%1$s</xliff:g>-მა გამოიყენა ჩვეულებრივზე მეტი ბატარეა"</string>
+    <string name="battery_tips_apps_summary_always_high_in_background" msgid="2953858181710181126">"<xliff:g id="APP_LABEL">%1$s</xliff:g>-მა გამოიყენა მეტი ბატარეა ფონში"</string>
+    <string name="battery_tips_apps_summary_higher_than_usual_in_background" msgid="1585002072567422199">"<xliff:g id="APP_LABEL">%1$s</xliff:g>-მა გამოიყენა ჩვეულებრივზე მეტი ბატარეა ფონში"</string>
+    <string name="battery_tips_apps_summary_always_high_in_foreground" msgid="1910991243576404700">"<xliff:g id="APP_LABEL">%1$s</xliff:g>-მა გამოიყენა მეტი ბატარეა წინა პლანზე"</string>
+    <string name="battery_tips_apps_summary_higher_than_usual_in_foreground" msgid="7937337570425168210">"<xliff:g id="APP_LABEL">%1$s</xliff:g>-მა გამოიყენა ჩვეულებრივზე მეტი ბატარეა წინა პლანზე"</string>
+    <string name="battery_app_item_hint" msgid="4850929961461039110">"ბატარეის მაღალი მოხმარება"</string>
+    <string name="battery_app_item_hint_in_bg" msgid="596240821466388336">"ბატარეის მაღალი მოხმარება ფონში"</string>
+    <string name="battery_app_item_hint_in_fg" msgid="5091860632260799910">"ბატარეის მაღალი მოხმარება წინა პლანზე"</string>
     <string name="filter_battery_unrestricted_title" msgid="821027369424198223">"შეუზღუდავი"</string>
     <string name="filter_battery_optimized_title" msgid="8236647176487754796">"ოპტიმიზებული"</string>
     <string name="filter_battery_restricted_title" msgid="5886859505802563232">"შეზღუდული"</string>
@@ -4241,8 +4226,8 @@
     <!-- no translation found for graphics_driver_app_preference_values:1 (485288770206606512) -->
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
-    <string name="enable_angle_as_system_driver" msgid="3985105681812713612">"ANGLE-ის ჩართვა"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="6413038127558166972">"ANGLE-ის ჩართვა როგორც OpenGL ES სისტემის ნაგულისხმევი დრაივერის. ამის ჩართვამ არათავსებად მოწყობილობებზე შესაძლოა ზოგი აპლიკაციის დაზიანება გამოიწვიოს."</string>
+    <string name="enable_angle_as_system_driver" msgid="4648827560023949786">"ექსპერიმენტული: ANGLE-ის ჩართვა"</string>
+    <string name="enable_angle_as_system_driver_summary" msgid="2170215556348477481">"გაფრთხილება: ANGLE-ის, როგორც OpenGL ES-ის ნაგულისხმევი დრაივერის, ჩართვა. ეს ფუნქცია ექსპერიმენტულია და შეიძლება არ იყოს თავსებადი კამერის და ვიდეოს ზოგიერთ აპთან."</string>
     <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"OpenGL ES სისტემის დრაივერის შესაცვლელად საჭიროა გადატვირთვა"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"აპის თავსებადობის ცვლილებები"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"აპის თავსებადობის ცვლილებების გადართვა"</string>
@@ -4504,9 +4489,6 @@
     <string name="wfc_disclaimer_emergency_limitation_title_text" msgid="8276287227589397162">"გადაუდებელი ზარები"</string>
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"გადაუდებელი ზარების Wi‑Fi დარეკვის საშუალებით შესრულება არ არის მხარდაჭერილი თქვენი ოპერატორის მიერ.\nგადაუდებელი ზარის განსახორციელებლად მოწყობილობა ავტომატურად გადაერთვება ფიჭურ ქსელზე.\nგადაუდებელი ზარები მხოლოდ იმ არეალებშია შესაძლებელი, სადაც ფიჭური კავშირგაბმულობა არსებობს."</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"ხარისხის გასაუმჯობესებლად ზარებისთვის Wi‑Fi გამოიყენეთ"</string>
-    <string name="backup_calling_settings_title" msgid="519714752900364326">"დარეკვის სარეზერვო ხერხი"</string>
-    <string name="backup_calling_setting_summary" msgid="599493254305348733">"თუ <xliff:g id="BACKUP_CALLING_OPERATOR_TEXT">%1$s</xliff:g> მიუწვდომელი არის ან როუმინგზეა, <xliff:g id="BACKUP_CALLING_CARRIER_TEXT">%1$s</xliff:g> ზარებისთვის გამოიყენეთ თქვენი მობილური ინტერნეტის SIM."</string>
-    <string name="keywords_backup_calling" msgid="8592800915478816800">"დარეკვის სარეზერვო ხერხი"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"შემომავალი MMS შეტყობინება"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"MMS შეტყობინების გაგზავნა ვერ ხერხდება"</string>
     <string name="enable_mms_notification_summary" msgid="6432752438276672500">"შეეხეთ MMS შეტყობინებების დასაშვებად <xliff:g id="OPERATOR_NAME">%1$s</xliff:g>-ზე, როდესაც მობილური ინტერნეტი გამორთულია"</string>
@@ -4803,6 +4785,10 @@
     <string name="aspect_ratio_title" msgid="2451826875939676101">"თანაფარდობა"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"სცადეთ ახალი თანაფარდობა ამ აპის სანახავად, თუ ის არ არის შემუშავებული თქვენი <xliff:g id="DEVICE_NAME">%1$s</xliff:g>-ის შესაფერისად"</string>
     <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"სცადეთ ახალი თანაფარდობა ამ აპის სანახავად, თუ ის არ არის შემუშავებული თქვენი <xliff:g id="DEVICE_NAME">%1$s</xliff:g>-ის შესაფერისად. ზოგიერთი აპი შესაძლოა არ იყოს ოპტიმიზებული კონკრეტული თანაფარდობებისადმი."</string>
+    <!-- no translation found for aspect_ratio_summary_text (4737461467467220325) -->
+    <skip />
+    <!-- no translation found for aspect_ratio_main_summary_text (5544816872094235840) -->
+    <skip />
     <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"შემოთავაზებული აპები"</string>
     <string name="user_aspect_ratio_changed_apps_label" msgid="2096614916172567672">"შეცვლილი აპები"</string>
     <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"აპი ნაგულისხმევად"</string>
@@ -4872,6 +4858,4 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"თქვენი მოწყობილობის სახელი ხილულია დაინსტალირებული აპებისთვის. მის დანახვას შეძლებენ სხვა პირებიც, როცა Bluetooth მოწყობილობებს ან Wi-Fi ქსელს დაუკავშირდებით, ან Wi-Fi უსადენო ქსელს დააყენებთ."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"გრამატიკული სქესი"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"აირჩიეთ გრამატიკული სქესი"</string>
-    <!-- no translation found for quarantined_apps_title (5713301345723474936) -->
-    <skip />
 </resources>

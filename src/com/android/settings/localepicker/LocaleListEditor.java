@@ -20,7 +20,6 @@ import static android.os.UserManager.DISALLOW_CONFIG_LOCALE;
 
 import static com.android.settings.flags.Flags.localeNotificationEnabled;
 import static com.android.settings.localepicker.AppLocalePickerActivity.EXTRA_APP_LOCALE;
-import static com.android.settings.localepicker.AppLocalePickerActivity.EXTRA_NOTIFICATION_ID;
 import static com.android.settings.localepicker.LocaleDialogFragment.DIALOG_ADD_SYSTEM_LOCALE;
 import static com.android.settings.localepicker.LocaleDialogFragment.DIALOG_CONFIRM_SYSTEM_DEFAULT;
 
@@ -71,6 +70,8 @@ import java.util.Locale;
 @SearchIndexable
 public class LocaleListEditor extends RestrictedSettingsFragment implements View.OnTouchListener {
     protected static final String INTENT_LOCALE_KEY = "localeInfo";
+    protected static final String EXTRA_SYSTEM_LOCALE_DIALOG_TYPE = "system_locale_dialog_type";
+    protected static final String LOCALE_SUGGESTION = "locale_suggestion";
 
     private static final String TAG = LocaleListEditor.class.getSimpleName();
     private static final String CFGKEY_REMOVE_MODE = "localeRemoveMode";
@@ -78,14 +79,12 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
     private static final String CFGKEY_ADD_LOCALE = "localeAdded";
     private static final String INDEX_KEY_ADD_LANGUAGE = "add_language";
     private static final String KEY_LANGUAGES_PICKER = "languages_picker";
+    private static final String KEY_CATEGORY_TERMS_OF_ADDRESS = "key_category_terms_of_address";
     private static final String TAG_DIALOG_CONFIRM_SYSTEM_DEFAULT = "dialog_confirm_system_default";
     private static final String TAG_DIALOG_NOT_AVAILABLE = "dialog_not_available_locale";
     private static final String TAG_DIALOG_ADD_SYSTEM_LOCALE = "dialog_add_system_locale";
-    private static final String EXTRA_SYSTEM_LOCALE_DIALOG_TYPE = "system_locale_dialog_type";
-    private static final String LOCALE_SUGGESTION = "locale_suggestion";
     private static final int MENU_ID_REMOVE = Menu.FIRST + 1;
     private static final int REQUEST_LOCALE_PICKER = 0;
-    private static final int INVALID_NOTIFICATION_ID = -1;
 
     private LocaleDragAndDropAdapter mAdapter;
     private Menu mMenu;
@@ -99,6 +98,7 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
     private LayoutPreference mLocalePickerPreference;
     private LocaleHelperPreferenceController mLocaleHelperPreferenceController;
     private FragmentManager mFragmentManager;
+    private TermsOfAddressCategoryController mTermsOfAddressCategoryController;
 
     public LocaleListEditor() {
         super(DISALLOW_CONFIG_LOCALE);
@@ -120,6 +120,9 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
         final PreferenceScreen screen = getPreferenceScreen();
         mLocalePickerPreference = screen.findPreference(KEY_LANGUAGES_PICKER);
         mLocaleHelperPreferenceController.displayPreference(screen);
+        mTermsOfAddressCategoryController = new TermsOfAddressCategoryController(activity,
+                KEY_CATEGORY_TERMS_OF_ADDRESS);
+        mTermsOfAddressCategoryController.displayPreference(screen);
 
         LocaleStore.fillCache(this.getContext());
         final List<LocaleStore.LocaleInfo> feedsList = getUserLocaleList();
@@ -282,22 +285,15 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
         Intent intent = this.getIntent();
         String dialogType = intent.getStringExtra(EXTRA_SYSTEM_LOCALE_DIALOG_TYPE);
         String localeTag = intent.getStringExtra(EXTRA_APP_LOCALE);
-        int notificationId = intent.getIntExtra(EXTRA_NOTIFICATION_ID, INVALID_NOTIFICATION_ID);
+        String callingPackage = getActivity().getCallingPackage();
         if (!localeNotificationEnabled()
-                || !isValidNotificationId(localeTag, notificationId)
+                || !getContext().getPackageName().equals(callingPackage)
                 || !isValidDialogType(dialogType)
                 || !isValidLocale(localeTag)
                 || LocaleUtils.isInSystemLocale(localeTag)) {
             return false;
         }
         return true;
-    }
-
-    private boolean isValidNotificationId(String localeTag, long id) {
-        if (id == -1) {
-            return false;
-        }
-        return id == getNotificationController().getNotificationId(localeTag);
     }
 
     @VisibleForTesting
@@ -328,7 +324,7 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
     }
 
     private void showDialogForAddedLocale() {
-        Log.d(TAG, "Show confirmation dialog");
+        Log.d(TAG, "show confirmation dialog");
         Intent intent = this.getIntent();
         String dialogType = intent.getStringExtra(EXTRA_SYSTEM_LOCALE_DIALOG_TYPE);
         String appLocaleTag = intent.getStringExtra(EXTRA_APP_LOCALE);

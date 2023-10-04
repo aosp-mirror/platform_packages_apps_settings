@@ -273,7 +273,8 @@
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Laadimine …"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Rakendused, millel on luba läheduses olevatele seadmetele juurde pääseda, saavad määrata ühendatud seadmete suhtelise asukoha."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Juurdepääs asukohale on rakenduste ja teenuste jaoks välja lülitatud. Teie seadme asukoht võidakse siiski päästeteenistusele saata, kui helistate või saadate sõnumi hädaabinumbrile."</string>
-    <string name="location_settings_footer_learn_more_content_description" msgid="5329024810729665156">"Vaadake lisateavet asukohaseadete kohta."</string>
+    <!-- no translation found for location_settings_footer_learn_more_content_description (349380666660145540) -->
+    <skip />
     <string name="account_settings_title" msgid="9138880127246241885">"Kontod"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Turvalisus"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Krüpteerimine ja mandaadid"</string>
@@ -923,6 +924,7 @@
     <string name="internet_source_wifi" msgid="6952593095166435179">"WiFi"</string>
     <string name="internet_source_mobile_data" msgid="877403889449201789">"Mobiilne andmeside"</string>
     <string name="internet_source_ethernet" msgid="8338472576454100966">"Ethernet"</string>
+    <string name="hotspot_battery_charging_summary" msgid="6690892148553288457">"<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> – laadimine"</string>
     <string name="hotspot_connection_category" msgid="4320380513982923556">"Kuumkoha ühendus"</string>
     <string name="hotspot_connection_strength" msgid="87359986943768421">"Ühenduse tugevus"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"Salvestatud võrgud"</string>
@@ -2843,11 +2845,6 @@
     <string name="amber_alerts_title" msgid="5238275758191804575">"Lasteröövi märguanded"</string>
     <string name="amber_alerts_summary" msgid="5755221775246075883">"Teadaannete vastuvõtmine lasteröövide kohta"</string>
     <string name="repeat_title" msgid="8676570486899483606">"Kordamine"</string>
-    <string name="call_manager_enable_title" msgid="1214301265395158720">"Kõnehalduri lubamine"</string>
-    <string name="call_manager_enable_summary" msgid="7362506369604163030">"Lubage sellel teenusel hallata, kuidas kõnesid tehakse."</string>
-    <string name="call_manager_title" msgid="3397433159509629466">"Kõnehaldur"</string>
-    <!-- no translation found for call_manager_summary (2558839230880919191) -->
-    <skip />
     <string name="cell_broadcast_settings" msgid="2416980110093867199">"Eriolukorra raadiosideteatised"</string>
     <string name="network_operators_settings" msgid="5105453353329748954">"Võrguoperaatorid"</string>
     <string name="access_point_names" msgid="5768430498022188057">"Pääsupunktide nimed"</string>
@@ -4229,8 +4226,10 @@
     <!-- no translation found for graphics_driver_app_preference_values:1 (485288770206606512) -->
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
-    <string name="enable_angle_as_system_driver" msgid="3985105681812713612">"Luba ANGLE"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="6413038127558166972">"ANGLE-i lubamine vaikimisi OpenGL ES-i draiverina. Selle lubamine ühildumatutes seadmetes võib mõne rakenduse rikkuda."</string>
+    <!-- no translation found for enable_angle_as_system_driver (4648827560023949786) -->
+    <skip />
+    <!-- no translation found for enable_angle_as_system_driver_summary (2170215556348477481) -->
+    <skip />
     <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"Süsteemi OpenGL ES-i draiveri muutmiseks on vajalik taaskäivitamine"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Rakenduste ühilduvuse muudatused"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Rakenduse ühilduvuse muudatuste lüliti"</string>
@@ -4492,9 +4491,6 @@
     <string name="wfc_disclaimer_emergency_limitation_title_text" msgid="8276287227589397162">"Hädaabikõned"</string>
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"Teie operaator ei toeta hädaabikõnesid WiFi-kõnede kaudu.\nSeade lülitub hädaabikõne tegemiseks automaatselt mobiilsidevõrgule.\nHädaabikõned on võimalikud ainult mobiilsidevõrgu levialas."</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"Kvaliteedi parandamiseks kasutage kõnede puhul WiFi-t"</string>
-    <string name="backup_calling_settings_title" msgid="519714752900364326">"Helistamise varuviis"</string>
-    <string name="backup_calling_setting_summary" msgid="599493254305348733">"Kui <xliff:g id="BACKUP_CALLING_OPERATOR_TEXT">%1$s</xliff:g> pole rändluseks saadaval, kasutage operaatori <xliff:g id="BACKUP_CALLING_CARRIER_TEXT">%1$s</xliff:g> kõnede puhul mobiilse andmeside SIM-kaarti."</string>
-    <string name="keywords_backup_calling" msgid="8592800915478816800">"helistamise varuviis"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"Sissetulev MMS-sõnum"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"MMS-i ei saa saata"</string>
     <string name="enable_mms_notification_summary" msgid="6432752438276672500">"Puudutage, et lubada MMS-sõnumside operaatori <xliff:g id="OPERATOR_NAME">%1$s</xliff:g> võrgus, kui mobiilne andmeside on välja lülitatud"</string>
@@ -4791,8 +4787,10 @@
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Kuvasuhe"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"Kui rakendus ei ole teie seadme <xliff:g id="DEVICE_NAME">%1$s</xliff:g> jaoks optimeeritud, valige rakenduse vaatamiseks uus kuvasuhe"</string>
     <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"Kui rakendus ei ole teie seadme <xliff:g id="DEVICE_NAME">%1$s</xliff:g> jaoks optimeeritud, valige rakenduse vaatamiseks uus kuvasuhe. Teatud kuvasuhete korral ei pruugita mõningaid rakendusi optimeerida."</string>
+    <string name="aspect_ratio_summary_text" msgid="4737461467467220325">"Kui rakendus ei ole teie seadme <xliff:g id="DEVICE_NAME">%1$s</xliff:g> jaoks optimeeritud, valige rakenduse vaatamiseks uus kuvasuhe"</string>
+    <string name="aspect_ratio_main_summary_text" msgid="5544816872094235840">"Kui rakendus ei ole teie seadme <xliff:g id="DEVICE_NAME">%1$s</xliff:g> jaoks optimeeritud, valige rakenduse vaatamiseks uus kuvasuhe. Teatud kuvasuhete korral ei pruugita mõnda rakendust optimeerida."</string>
     <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"Soovitatud rakendused"</string>
-    <string name="user_aspect_ratio_changed_apps_label" msgid="2096614916172567672">"Muudetud äpid"</string>
+    <string name="user_aspect_ratio_changed_apps_label" msgid="2096614916172567672">"Muudetud rakendused"</string>
     <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"Rakenduse vaikeseade"</string>
     <string name="user_aspect_ratio_fullscreen" msgid="1843427242540081996">"Täisekraan"</string>
     <string name="user_aspect_ratio_half_screen" msgid="1015852057094310209">"Pool ekraani"</string>
@@ -4860,6 +4858,4 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Teie seadme nimi on teie installitud rakendustele nähtav. Bluetooth-seadmetega või WiFi-võrguga ühenduse loomisel või WiFi-kuumkoha seadistamisel võivad seda näha ka teised inimesed."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Grammatiline sugu"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Grammatilise soo valimine"</string>
-    <!-- no translation found for quarantined_apps_title (5713301345723474936) -->
-    <skip />
 </resources>

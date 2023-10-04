@@ -1,0 +1,8 @@
+package: "com.android.settings.flags"
+
+flag {
+  name: "separate_accessibility_vibration_settings_fragments"
+  namespace: "accessibility"
+  description: "Splits VibrationSettings into two fragments, one per XML resource"
+  bug: "289967175"
+}

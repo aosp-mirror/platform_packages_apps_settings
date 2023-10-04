@@ -273,7 +273,8 @@
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"読み込んでいます…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"付近のデバイスへのアクセス許可を持つアプリは、接続されたデバイスの相対位置を確認できます。"</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"アプリとサービスの位置情報へのアクセスは OFF になっています。緊急通報番号に電話をかけたりテキスト メッセージを送信したりした場合は、デバイスの位置情報が緊急サービスに送信されることがあります。"</string>
-    <string name="location_settings_footer_learn_more_content_description" msgid="5329024810729665156">"位置情報の設定の詳細"</string>
+    <!-- no translation found for location_settings_footer_learn_more_content_description (349380666660145540) -->
+    <skip />
     <string name="account_settings_title" msgid="9138880127246241885">"アカウント"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"セキュリティ"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"暗号化と認証情報"</string>
@@ -923,6 +924,7 @@
     <string name="internet_source_wifi" msgid="6952593095166435179">"Wi-Fi"</string>
     <string name="internet_source_mobile_data" msgid="877403889449201789">"モバイルデータ"</string>
     <string name="internet_source_ethernet" msgid="8338472576454100966">"イーサネット"</string>
+    <string name="hotspot_battery_charging_summary" msgid="6690892148553288457">"<xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g> ‑ 充電中"</string>
     <string name="hotspot_connection_category" msgid="4320380513982923556">"アクセス ポイントへの接続"</string>
     <string name="hotspot_connection_strength" msgid="87359986943768421">"接続強度"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"保存済みネットワーク"</string>
@@ -2843,11 +2845,6 @@
     <string name="amber_alerts_title" msgid="5238275758191804575">"誘拐事件速報"</string>
     <string name="amber_alerts_summary" msgid="5755221775246075883">"児童誘拐についての速報を受信する"</string>
     <string name="repeat_title" msgid="8676570486899483606">"繰り返し"</string>
-    <string name="call_manager_enable_title" msgid="1214301265395158720">"通話マネージャを有効にする"</string>
-    <string name="call_manager_enable_summary" msgid="7362506369604163030">"このサービスを使って通話方法を管理することを許可します。"</string>
-    <string name="call_manager_title" msgid="3397433159509629466">"通話マネージャ"</string>
-    <!-- no translation found for call_manager_summary (2558839230880919191) -->
-    <skip />
     <string name="cell_broadcast_settings" msgid="2416980110093867199">"緊急速報メール"</string>
     <string name="network_operators_settings" msgid="5105453353329748954">"携帯通信会社"</string>
     <string name="access_point_names" msgid="5768430498022188057">"アクセスポイント名"</string>
@@ -3330,7 +3327,7 @@
     <string name="notification_access_detail_switch" msgid="46386786409608330">"通知へのアクセスを許可"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Android 12 では Android 通知の自動調整が拡張通知に切り替えられました。この機能が操作や返信の候補を提示し、通知の整理を行います。\n\n拡張通知は通知コンテンツにアクセスできます。これには、連絡先の名前などの個人情報やメッセージも含まれます。また、この機能は、通知を非表示にしたり通知に応答したりすることもできます。たとえば、電話に出ることやサイレント モードを管理することができます。"</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"<xliff:g id="SERVICE">%1$s</xliff:g> による通知へのアクセスを許可しますか？"</string>
-    <string name="notification_listener_security_warning_summary" msgid="1131986567509818121">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> アプリはすべての通知を読み取ることができます。通知には、連絡先名、写真などの個人情報や受信したメッセージの本文も含まれます。また、通知をスヌーズ、非表示にしたり、電話に出るなどの通知内のボタン操作を実行したりすることもできます。\n\nこれにより、アプリがサイレント モード設定を切り替えたり、関連する設定を変更したりすることも可能になります。"</string>
+    <string name="notification_listener_security_warning_summary" msgid="1131986567509818121">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> アプリはすべての通知を読み取ることができるようになります。通知には、連絡先名、写真などの個人情報や受信したメッセージの本文も含まれます。また、通知をスヌーズ、非表示にしたり、電話に出るなどの通知内のボタン操作を実行したりすることもできるようになります。\n\nこれにより、アプリがサイレント モード設定を切り替えたり、関連する設定を変更したりすることも可能になります。"</string>
     <string name="nls_warning_prompt" msgid="1486887096703743841">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> アプリは次のことができるようになります。"</string>
     <string name="nls_feature_read_title" msgid="7629713268744220437">"通知の読み取り"</string>
     <string name="nls_feature_read_summary" msgid="1064698238110273593">"通知を読み取ることができます。通知には、連絡先、メッセージ、写真などの個人情報も含まれます。"</string>
@@ -4229,8 +4226,8 @@
     <!-- no translation found for graphics_driver_app_preference_values:1 (485288770206606512) -->
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
-    <string name="enable_angle_as_system_driver" msgid="3985105681812713612">"ANGLE を有効にする"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="6413038127558166972">"デフォルトの OpenGL ES ドライバとして ANGLE を有効にします。互換性のないデバイスで有効にすると、一部のアプリケーションに問題が発生するおそれがあります。"</string>
+    <string name="enable_angle_as_system_driver" msgid="4648827560023949786">"試験運用機能: ANGLE を有効にする"</string>
+    <string name="enable_angle_as_system_driver_summary" msgid="2170215556348477481">"警告: デフォルトの OpenGL ES ドライバとして ANGLE を有効にします。この機能は試験運用中であり、一部のカメラアプリと動画アプリには対応していない可能性があります。"</string>
     <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"システムの OpenGL ES ドライバを変更するには再起動が必要です"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"アプリの互換性の変更"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"「アプリの互換性の変更」を切り替えます"</string>
@@ -4492,9 +4489,6 @@
     <string name="wfc_disclaimer_emergency_limitation_title_text" msgid="8276287227589397162">"緊急通報"</string>
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"お使いの携帯通信会社は、Wi‑Fi 通話による緊急通報には対応していません。\n緊急通報できるようデバイスはモバイル ネットワークに自動的に切り替わります。\n緊急通報が可能なのは、通信エリア内の地域のみです。"</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"通話に Wi-Fi を使用して品質を改善する"</string>
-    <string name="backup_calling_settings_title" msgid="519714752900364326">"通話のバックアップ"</string>
-    <string name="backup_calling_setting_summary" msgid="599493254305348733">"<xliff:g id="BACKUP_CALLING_OPERATOR_TEXT">%1$s</xliff:g> が利用できない場合やローミング中の場合は、モバイルデータ SIM を使って <xliff:g id="BACKUP_CALLING_CARRIER_TEXT">%1$s</xliff:g> の発着信を行ってください。"</string>
-    <string name="keywords_backup_calling" msgid="8592800915478816800">"通話のバックアップ"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"MMS メッセージの受信"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"MMS メッセージを送信できません"</string>
     <string name="enable_mms_notification_summary" msgid="6432752438276672500">"モバイルデータが OFF のときに <xliff:g id="OPERATOR_NAME">%1$s</xliff:g> で MMS メッセージを送受信できるようにするには、タップします"</string>
@@ -4791,6 +4785,8 @@
     <string name="aspect_ratio_title" msgid="2451826875939676101">"アスペクト比"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"このアプリがお使いの <xliff:g id="DEVICE_NAME">%1$s</xliff:g> 用に設計されていない場合は、新しいアスペクト比で表示してみてください"</string>
     <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"このアプリがお使いの <xliff:g id="DEVICE_NAME">%1$s</xliff:g> 用に設計されていない場合は、新しいアスペクト比で表示してみてください。一部のアプリは特定のアスペクト比に合わせて最適化できない場合があります。"</string>
+    <string name="aspect_ratio_summary_text" msgid="4737461467467220325">"このアプリがお使いの <xliff:g id="DEVICE_NAME">%1$s</xliff:g> 用に設計されていない場合は、新しいアスペクト比で表示してみてください"</string>
+    <string name="aspect_ratio_main_summary_text" msgid="5544816872094235840">"このアプリがお使いの <xliff:g id="DEVICE_NAME">%1$s</xliff:g> 用に設計されていない場合は、新しいアスペクト比で表示してみてください。一部のアプリは特定のアスペクト比に合わせて最適化できない場合があります。"</string>
     <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"候補アプリ"</string>
     <string name="user_aspect_ratio_changed_apps_label" msgid="2096614916172567672">"変更したアプリ"</string>
     <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"アプリのデフォルト"</string>
@@ -4860,6 +4856,4 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"インストールしたアプリにデバイス名が表示されます。また、Bluetooth デバイスや Wi-Fi ネットワークに接続したり Wi-Fi アクセス ポイントを設定したりすると、他のユーザーもデバイス名を確認できるようになります。"</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"文法性"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"文法性の選択"</string>
-    <!-- no translation found for quarantined_apps_title (5713301345723474936) -->
-    <skip />
 </resources>

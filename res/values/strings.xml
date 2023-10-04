@@ -5307,6 +5307,10 @@
     <string name="power_discharge_remaining"><xliff:g id="remain">%1$s</xliff:g> remaining</string>
     <!-- Display time remaining until battery is charged [CHAR_LIMIT=60] -->
     <string name="power_charge_remaining"><xliff:g id="until_charged">%1$s</xliff:g> to charge</string>
+    <!-- Title for app screen time in power usage detail page [CHAR LIMIT=NONE] -->
+    <string name="power_usage_detail_screen_time">Screen time</string>
+    <!-- Title for app background time in power usage detail page [CHAR LIMIT=NONE] -->
+    <string name="power_usage_detail_background_time">Background time</string>
 
     <!-- Description of battery state and remaining time (e.g. Charging rapidly • 1hr 23 min left until full)-->
     <string name="battery_state_and_duration" translatable="false"><xliff:g id="state">%1$s</xliff:g> • <xliff:g id="time">%2$s</xliff:g></string>
@@ -5322,6 +5326,8 @@
     <!-- Dialog message when app can't been restricted because it is not optimized [CHAR_LIMIT=120] -->
     <string name="background_activity_disabled_dialog_text">Since this app is not set to optimize battery, you can\u2019t restrict it.\n\nTo restrict the app, first turn on battery optimization.</string>
 
+    <!-- Category title for battery background settings in power usage detail page [CHAR LIMIT=NONE] -->
+    <string name="manager_battery_usage_category_title">Manage battery usage</string>
     <!-- Title for the battery unrestricted settings [CHAR_LIMIT=40] -->
     <string name="manager_battery_usage_unrestricted_title">Unrestricted</string>
     <!-- Title for the battery optimized settings [CHAR_LIMIT=40] -->
@@ -5668,6 +5674,8 @@
     <string name="battery_usage_background_less_than_one_minute">Background: less than a min</string>
     <!-- [CHAR_LIMIT=NONE] Device screen on time less than a minute -->
     <string name="battery_usage_screen_time_less_than_one_minute">Screen time: less than a min</string>
+    <!-- [CHAR_LIMIT=NONE] Power usage time less than a minute -->
+    <string name="power_usage_time_less_than_one_minute">Less than a min</string>
     <!-- [CHAR_LIMIT=NONE] Battery usage item for total usage time -->
     <string name="battery_usage_for_total_time">Total: <xliff:g id="time">%s</xliff:g></string>
     <!-- [CHAR_LIMIT=NONE] Battery usage item for background usage time -->
@@ -10557,8 +10565,9 @@
         <b>Use <xliff:g id="app_name" example="Provider">%1$s</xliff:g>\?</b>
         <br/>
         <br/>
-        <xliff:g id="app_name" example="Provider">%1$s</xliff:g> uses what\'s on
-        your screen to determine what can be autofilled. New passwords, passkeys and other info will be saved here from now on.
+        New passwords, passkeys, and other info will be saved here from now on.
+        <xliff:g id="app_name" example="Provider">%1$s</xliff:g> may use what\'s on your
+        screen to determine what can be autofilled.
         ]]>
     </string>
 
