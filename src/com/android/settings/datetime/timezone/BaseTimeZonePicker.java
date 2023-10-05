@@ -16,6 +16,7 @@
 
 package com.android.settings.datetime.timezone;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -97,7 +98,7 @@ public abstract class BaseTimeZonePicker extends InstrumentedFragment
                 LinearLayoutManager.VERTICAL, /* reverseLayout */ false));
         mRecyclerView.setAdapter(mAdapter);
         mAppBarLayout = getActivity().findViewById(R.id.app_bar);
-        disableToolBarScrollableBehavior();
+        autoSetCollapsingToolbarLayoutScrolling();
 
         // Initialize TimeZoneDataLoader only when mRecyclerView is ready to avoid race
         // during onDateLoaderReady callback.
@@ -194,7 +195,7 @@ public abstract class BaseTimeZonePicker extends InstrumentedFragment
         void onListItemClick(T item);
     }
 
-    private void disableToolBarScrollableBehavior() {
+    private void autoSetCollapsingToolbarLayoutScrolling() {
         CoordinatorLayout.LayoutParams params =
                 (CoordinatorLayout.LayoutParams) mAppBarLayout.getLayoutParams();
         AppBarLayout.Behavior behavior = new AppBarLayout.Behavior();
@@ -202,7 +203,8 @@ public abstract class BaseTimeZonePicker extends InstrumentedFragment
                 new AppBarLayout.Behavior.DragCallback() {
                     @Override
                     public boolean canDrag(@NonNull AppBarLayout appBarLayout) {
-                        return false;
+                        return appBarLayout.getResources().getConfiguration().orientation
+                                == Configuration.ORIENTATION_LANDSCAPE;
                     }
                 });
         params.setBehavior(behavior);

@@ -16,6 +16,7 @@
 
 package com.android.settings.wifi;
 
+import static com.android.settings.wifi.WifiConfigController2.DEFAULT_ANONYMOUS_ID;
 import static com.android.settings.wifi.WifiConfigController2.WIFI_EAP_METHOD_SIM;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -73,10 +74,15 @@ import org.robolectric.shadows.ShadowInputMethodManager;
 import org.robolectric.shadows.ShadowSubscriptionManager;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowConnectivityManager.class)
 public class WifiConfigController2Test {
+
+    static final String WIFI_EAP_TLS_V1_3 = "TLS v1.3";
 
     @Mock
     private WifiConfigUiBase2 mConfigUiBase;
@@ -464,7 +470,7 @@ public class WifiConfigController2Test {
 
     private void checkSavedMacRandomizedValue(int macRandomizedValue) {
         when(mWifiEntry.isSaved()).thenReturn(true);
-        final WifiConfiguration mockWifiConfig = mock(WifiConfiguration.class);
+        final WifiConfiguration mockWifiConfig = spy(new WifiConfiguration());
         when(mockWifiConfig.getIpConfiguration()).thenReturn(mock(IpConfiguration.class));
         when(mWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfig);
         mockWifiConfig.macRandomizationSetting = macRandomizedValue;
@@ -803,9 +809,10 @@ public class WifiConfigController2Test {
     private void setUpModifyingSavedPeapConfigController() {
         when(mWifiEntry.isSaved()).thenReturn(true);
         when(mWifiEntry.getSecurity()).thenReturn(WifiEntry.SECURITY_EAP);
-        final WifiConfiguration mockWifiConfig = mock(WifiConfiguration.class);
+        final WifiConfiguration mockWifiConfig = spy(new WifiConfiguration());
+        mockWifiConfig.setSecurityParams(WifiConfiguration.SECURITY_TYPE_EAP);
         when(mockWifiConfig.getIpConfiguration()).thenReturn(mock(IpConfiguration.class));
-        final WifiEnterpriseConfig mockWifiEnterpriseConfig = mock(WifiEnterpriseConfig.class);
+        final WifiEnterpriseConfig mockWifiEnterpriseConfig = spy(new WifiEnterpriseConfig());
         when(mockWifiEnterpriseConfig.getEapMethod()).thenReturn(Eap.PEAP);
         mockWifiConfig.enterpriseConfig = mockWifiEnterpriseConfig;
         when(mWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfig);
@@ -938,10 +945,44 @@ public class WifiConfigController2Test {
         assertThat(mEapUserCertSpinner.getSelectedItem()).isEqualTo(SAVED_USER_CERT);
     }
 
+    @Test
+    public void getEapMinTlsVerSpinner_isTlsV13Supported_containsTlsV13() {
+        Spinner spinner = mController.getEapMinTlsVerSpinner(true /* isTlsV13Supported */);
+
+        List<Object> list = IntStream.range(0, spinner.getAdapter().getCount())
+                .mapToObj(spinner.getAdapter()::getItem)
+                .collect(Collectors.toList());
+        assertThat(list).contains(WIFI_EAP_TLS_V1_3);
+    }
+
+    @Test
+    public void getEapMinTlsVerSpinner_isNotTlsV13Supported_doesNotContainTlsV13() {
+        Spinner spinner = mController.getEapMinTlsVerSpinner(false /* isTlsV13Supported */);
+
+        List<Object> list = IntStream.range(0, spinner.getAdapter().getCount())
+                .mapToObj(spinner.getAdapter()::getItem)
+                .collect(Collectors.toList());
+        assertThat(list).doesNotContain(WIFI_EAP_TLS_V1_3);
+    }
+
+    @Test
+    public void setAnonymousIdVisible_showAnonymousIdAndSetDefaultId() {
+        View anonymousLayout = mView.findViewById(R.id.l_anonymous);
+        TextView anonymousId = mView.findViewById(R.id.anonymous);
+        mController.mEapAnonymousView = anonymousId;
+        anonymousLayout.setVisibility(View.GONE);
+        anonymousId.setText("");
+
+        mController.setAnonymousIdVisible();
+
+        assertThat(anonymousLayout.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(anonymousId.getText().toString()).isEqualTo(DEFAULT_ANONYMOUS_ID);
+    }
+
     private void setUpModifyingSavedCertificateConfigController(String savedCaCertificate,
             String savedUserCertificate) {
-        final WifiConfiguration mockWifiConfig = mock(WifiConfiguration.class);
-        final WifiEnterpriseConfig mockWifiEnterpriseConfig = mock(WifiEnterpriseConfig.class);
+        final WifiConfiguration mockWifiConfig = spy(new WifiConfiguration());
+        final WifiEnterpriseConfig mockWifiEnterpriseConfig = spy(new WifiEnterpriseConfig());
 
         mockWifiConfig.enterpriseConfig = mockWifiEnterpriseConfig;
         when(mWifiEntry.isSaved()).thenReturn(true);

@@ -94,7 +94,7 @@ public class FingerprintSettingsRequireScreenOnToAuthPreferenceController
                 && mFingerprintManager.isHardwareDetected()
                 && mFingerprintManager.isPowerbuttonFps()) {
             return mFingerprintManager.hasEnrolledTemplates(getUserId())
-                    ? AVAILABLE : DISABLED_DEPENDENT_SETTING;
+                    ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
         } else {
             return UNSUPPORTED_ON_DEVICE;
         }

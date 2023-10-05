@@ -42,6 +42,7 @@ import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.HighUsageTip;
 import com.android.settings.fuelgauge.batterytip.tips.RestrictAppTip;
 import com.android.settings.fuelgauge.batterytip.tips.UnrestrictAppTip;
+import com.android.settingslib.utils.StringUtil;
 
 import java.util.List;
 
@@ -107,8 +108,8 @@ public class BatteryTipDialogFragment extends InstrumentedDialogFragment impleme
                         restrictedAppList.get(0).packageName);
 
                 final AlertDialog.Builder builder = new AlertDialog.Builder(context)
-                        .setTitle(context.getResources().getQuantityString(
-                                R.plurals.battery_tip_restrict_app_dialog_title, num, num))
+                        .setTitle(StringUtil.getIcuPluralsString(context, num,
+                                R.string.battery_tip_restrict_app_dialog_title))
                         .setPositiveButton(R.string.battery_tip_restrict_app_dialog_ok, this)
                         .setNegativeButton(android.R.string.cancel, null);
                 if (num == 1) {

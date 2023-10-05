@@ -20,6 +20,7 @@ import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -102,11 +103,18 @@ public class SimStatusDialogFragment extends InstrumentedDialogFragment {
      **/
     private static final int[] sViewIdsInDigitFormat = IntStream
             .of(SimStatusDialogController.ICCID_INFO_VALUE_ID,
-                    SimStatusDialogController.PHONE_NUMBER_VALUE_ID,
-                    SimStatusDialogController.EID_INFO_VALUE_ID)
+                    SimStatusDialogController.PHONE_NUMBER_VALUE_ID)
             .sorted().toArray();
 
     public void setText(int viewId, CharSequence text) {
+        if (!isAdded()) {
+            Log.d(TAG, "Fragment not attached yet.");
+            return;
+        }
+        setText(viewId, text, true);
+    }
+
+    public void setText(int viewId, CharSequence text, boolean enableCopy) {
         final TextView textView = mRootView.findViewById(viewId);
         if (textView == null) {
             return;
@@ -117,5 +125,6 @@ public class SimStatusDialogFragment extends InstrumentedDialogFragment {
             text = PhoneNumberUtil.expandByTts(text);
         }
         textView.setText(text);
+        textView.setTextIsSelectable(enableCopy);
     }
 }

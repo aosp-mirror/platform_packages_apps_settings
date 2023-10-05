@@ -30,7 +30,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.BatteryConsumer;
-import android.os.Handler;
 import android.os.Process;
 import android.os.UidBatteryConsumer;
 import android.os.UserBatteryConsumer;
@@ -70,8 +69,6 @@ public class BatteryEntryTest {
     private Context mMockContext;
     private Context mContext;
     @Mock
-    private Handler mMockHandler;
-    @Mock
     private PackageManager mMockPackageManager;
     @Mock
     private UserManager mMockUserManager;
@@ -102,22 +99,31 @@ public class BatteryEntryTest {
         UidBatteryConsumer consumer = mock(UidBatteryConsumer.class);
         when(consumer.getUid()).thenReturn(APP_UID);
         when(consumer.getPackageWithHighestDrain()).thenReturn(highDrainPackage);
-        return new BatteryEntry(mMockContext, mMockHandler, mMockUserManager,
+        return new BatteryEntry(mMockContext, mMockUserManager,
                 consumer, false, APP_UID, packages, packageName);
     }
 
     private BatteryEntry createAggregateBatteryEntry(int powerComponentId) {
-        return new BatteryEntry(mMockContext, powerComponentId, 200, 100, 1000);
+        return new BatteryEntry(
+                mMockContext,
+                powerComponentId,
+                /* devicePowerMah= */ 200,
+                /* usageDurationMs= */ 1000,
+                /* isHidden= */ false);
     }
 
     private BatteryEntry createCustomAggregateBatteryEntry(int powerComponentId) {
-        return new BatteryEntry(mMockContext, powerComponentId, "CUSTOM", 200, 100);
+        return new BatteryEntry(
+                mMockContext,
+                powerComponentId,
+                /* powerComponentName= */ "CUSTOM",
+                /* devicePowerMah= */ 200);
     }
 
     private BatteryEntry createUserBatteryConsumer(int userId) {
         UserBatteryConsumer consumer = mock(UserBatteryConsumer.class);
         when(consumer.getUserId()).thenReturn(userId);
-        return new BatteryEntry(mMockContext, mMockHandler, mMockUserManager,
+        return new BatteryEntry(mMockContext, mMockUserManager,
                 consumer, false, 0, null, null);
     }
 
@@ -162,7 +168,10 @@ public class BatteryEntryTest {
     @Test
     public void batteryEntryForAOD_containCorrectInfo() {
         final BatteryEntry entry = new BatteryEntry(RuntimeEnvironment.application,
-                BatteryConsumer.POWER_COMPONENT_AMBIENT_DISPLAY, 200, 100, 1000);
+                BatteryConsumer.POWER_COMPONENT_AMBIENT_DISPLAY,
+                /* devicePowerMah= */ 200,
+                /* usageDurationMs= */ 1000,
+                /* isHidden= */ false);
 
         assertThat(entry.mIconId).isEqualTo(R.drawable.ic_settings_aod);
         assertThat(entry.mName).isEqualTo("Ambient display");
@@ -171,7 +180,9 @@ public class BatteryEntryTest {
     @Test
     public void batteryEntryForCustomComponent_containCorrectInfo() {
         final BatteryEntry entry = new BatteryEntry(RuntimeEnvironment.application,
-                BatteryConsumer.FIRST_CUSTOM_POWER_COMPONENT_ID + 42, "ABC", 200, 100);
+                BatteryConsumer.FIRST_CUSTOM_POWER_COMPONENT_ID + 42,
+                /* powerComponentName= */ "ABC",
+                /* devicePowerMah= */ 200);
 
         assertThat(entry.mIconId).isEqualTo(R.drawable.ic_power_system);
         assertThat(entry.mName).isEqualTo("ABC");
@@ -182,7 +193,7 @@ public class BatteryEntryTest {
         when(mUidBatteryConsumer.getTimeInStateMs(UidBatteryConsumer.STATE_FOREGROUND))
                 .thenReturn(100L);
 
-        final BatteryEntry entry = new BatteryEntry(RuntimeEnvironment.application, mMockHandler,
+        final BatteryEntry entry = new BatteryEntry(RuntimeEnvironment.application,
                 mMockUserManager, mUidBatteryConsumer, false, 0, null, null);
 
         assertThat(entry.getTimeInForegroundMs()).isEqualTo(100L);
@@ -191,7 +202,10 @@ public class BatteryEntryTest {
     @Test
     public void getTimeInForegroundMs_aggregateBatteryConsumer() {
         final BatteryEntry entry = new BatteryEntry(RuntimeEnvironment.application,
-                BatteryConsumer.POWER_COMPONENT_BLUETOOTH, 10, 20, 100);
+                BatteryConsumer.POWER_COMPONENT_BLUETOOTH,
+                /* devicePowerMah= */ 10,
+                /* usageDurationMs= */ 100,
+                /* isHidden= */ false);
 
         assertThat(entry.getTimeInForegroundMs()).isEqualTo(100L);
     }
@@ -201,7 +215,7 @@ public class BatteryEntryTest {
         when(mUidBatteryConsumer.getTimeInStateMs(UidBatteryConsumer.STATE_BACKGROUND))
                 .thenReturn(100L);
 
-        final BatteryEntry entry = new BatteryEntry(RuntimeEnvironment.application, mMockHandler,
+        final BatteryEntry entry = new BatteryEntry(RuntimeEnvironment.application,
                 mMockUserManager, mUidBatteryConsumer, false, 0, null, null);
 
         assertThat(entry.getTimeInBackgroundMs()).isEqualTo(100L);
@@ -210,15 +224,16 @@ public class BatteryEntryTest {
     @Test
     public void getTimeInBackgroundMs_systemConsumer() {
         final BatteryEntry entry = new BatteryEntry(RuntimeEnvironment.application,
-                BatteryConsumer.POWER_COMPONENT_BLUETOOTH, 100, 200, 1000);
+                BatteryConsumer.POWER_COMPONENT_BLUETOOTH,
+                /* devicePowerMah= */ 100,
+                /* usageDurationMs= */ 1000,
+                /* isHidden= */ false);
 
         assertThat(entry.getTimeInBackgroundMs()).isEqualTo(0);
     }
 
     @Test
     public void testUidCache_switchLocale_shouldCleanCache() {
-        BatteryEntry.stopRequestQueue();
-
         Locale.setDefault(new Locale("en_US"));
         BatteryEntry.sUidCache.put(Integer.toString(APP_UID), null);
         assertThat(BatteryEntry.sUidCache).isNotEmpty();
@@ -302,33 +317,36 @@ public class BatteryEntryTest {
 
     @Test
     public void getNameAndIconFromPowerComponent_rerturnExpectedNameAndIcon() {
-        assertNameAndIcon(BatteryConsumer.POWER_COMPONENT_AMBIENT_DISPLAY,
-                R.string.ambient_display_screen_title,
-                R.drawable.ic_settings_aod);
+        assertNameAndIcon(BatteryConsumer.POWER_COMPONENT_SCREEN,
+                R.string.power_screen,
+                R.drawable.ic_settings_display);
+        assertNameAndIcon(BatteryConsumer.POWER_COMPONENT_CPU,
+                R.string.power_cpu,
+                R.drawable.ic_settings_cpu);
         assertNameAndIcon(BatteryConsumer.POWER_COMPONENT_BLUETOOTH,
                 R.string.power_bluetooth,
                 R.drawable.ic_settings_bluetooth);
         assertNameAndIcon(BatteryConsumer.POWER_COMPONENT_CAMERA,
                 R.string.power_camera,
                 R.drawable.ic_settings_camera);
-        assertNameAndIcon(BatteryConsumer.POWER_COMPONENT_MOBILE_RADIO,
-                R.string.power_cell,
-                R.drawable.ic_cellular_1_bar);
         assertNameAndIcon(BatteryConsumer.POWER_COMPONENT_FLASHLIGHT,
                 R.string.power_flashlight,
-                R.drawable.ic_settings_display);
-        assertNameAndIcon(BatteryConsumer.POWER_COMPONENT_PHONE,
-                R.string.power_phone,
-                R.drawable.ic_settings_voice_calls);
-        assertNameAndIcon(BatteryConsumer.POWER_COMPONENT_SCREEN,
-                R.string.power_screen,
-                R.drawable.ic_settings_display);
+                R.drawable.ic_settings_flashlight);
+        assertNameAndIcon(BatteryConsumer.POWER_COMPONENT_MOBILE_RADIO,
+                R.string.power_cell,
+                R.drawable.ic_settings_cellular);
+        assertNameAndIcon(BatteryConsumer.POWER_COMPONENT_GNSS,
+                R.string.power_gps,
+                R.drawable.ic_settings_gps);
         assertNameAndIcon(BatteryConsumer.POWER_COMPONENT_WIFI,
                 R.string.power_wifi,
                 R.drawable.ic_settings_wireless_no_theme);
-        assertNameAndIcon(BatteryConsumer.POWER_COMPONENT_IDLE,
-                R.string.power_idle,
-                R.drawable.ic_settings_phone_idle);
+        assertNameAndIcon(BatteryConsumer.POWER_COMPONENT_PHONE,
+                R.string.power_phone,
+                R.drawable.ic_settings_voice_calls);
+        assertNameAndIcon(BatteryConsumer.POWER_COMPONENT_AMBIENT_DISPLAY,
+                R.string.ambient_display_screen_title,
+                R.drawable.ic_settings_aod);
     }
 
     private void assertNameAndIcon(String name, int stringId) {

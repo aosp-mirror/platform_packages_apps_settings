@@ -16,50 +16,39 @@
 package com.android.settings.fuelgauge.batteryusage;
 
 import android.annotation.IntDef;
+import android.annotation.Nullable;
+import android.app.usage.IUsageStatsManager;
+import android.app.usage.UsageEvents.Event;
+import android.app.usage.UsageStatsManager;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.os.BatteryUsageStats;
+import android.os.Build;
 import android.os.LocaleList;
+import android.os.RemoteException;
 import android.os.UserHandle;
-import android.os.UserManager;
+import android.text.TextUtils;
 import android.text.format.DateFormat;
-import android.text.format.DateUtils;
-import android.util.ArraySet;
+import android.util.Base64;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
-import com.android.settings.Utils;
 import com.android.settings.fuelgauge.BatteryUtils;
-import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.fuelgauge.batteryusage.db.AppUsageEventEntity;
+import com.android.settings.fuelgauge.batteryusage.db.BatteryEventEntity;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-import java.time.Duration;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
 import java.util.TimeZone;
 
 /** A utility class to convert data into another types. */
 public final class ConvertUtils {
-    private static final boolean DEBUG = false;
     private static final String TAG = "ConvertUtils";
-    private static final Map<String, BatteryHistEntry> EMPTY_BATTERY_MAP = new HashMap<>();
-    private static final BatteryHistEntry EMPTY_BATTERY_HIST_ENTRY =
-            new BatteryHistEntry(new ContentValues());
-    // Maximum total time value for each slot cumulative data at most 2 hours.
-    private static final float TOTAL_TIME_THRESHOLD = DateUtils.HOUR_IN_MILLIS * 2;
 
-    @VisibleForTesting
-    static double PERCENTAGE_OF_TOTAL_THRESHOLD = 1f;
-
-    /** Invalid system battery consumer drain type. */
-    public static final int INVALID_DRAIN_TYPE = -1;
     /** A fake package name to represent no BatteryEntry data. */
     public static final String FAKE_PACKAGE_NAME = "fake_package";
 
@@ -70,7 +59,7 @@ public final class ConvertUtils {
             CONSUMER_TYPE_SYSTEM_BATTERY,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public static @interface ConsumerType {
+    public @interface ConsumerType {
     }
 
     public static final int CONSUMER_TYPE_UNKNOWN = 0;
@@ -81,48 +70,96 @@ public final class ConvertUtils {
     private ConvertUtils() {
     }
 
-    /** Converts to content values */
-    public static ContentValues convertToContentValues(
-            BatteryEntry entry,
-            BatteryUsageStats batteryUsageStats,
-            int batteryLevel,
-            int batteryStatus,
-            int batteryHealth,
-            long bootTimestamp,
-            long timestamp) {
+    /** Converts {@link BatteryEntry} to content values */
+    public static ContentValues convertBatteryEntryToContentValues(
+            final BatteryEntry entry,
+            final BatteryUsageStats batteryUsageStats,
+            final int batteryLevel,
+            final int batteryStatus,
+            final int batteryHealth,
+            final long bootTimestamp,
+            final long timestamp,
+            final boolean isFullChargeStart) {
         final ContentValues values = new ContentValues();
         if (entry != null && batteryUsageStats != null) {
             values.put(BatteryHistEntry.KEY_UID, Long.valueOf(entry.getUid()));
             values.put(BatteryHistEntry.KEY_USER_ID,
                     Long.valueOf(UserHandle.getUserId(entry.getUid())));
-            values.put(BatteryHistEntry.KEY_APP_LABEL, entry.getLabel());
             values.put(BatteryHistEntry.KEY_PACKAGE_NAME,
                     entry.getDefaultPackageName());
-            values.put(BatteryHistEntry.KEY_IS_HIDDEN, Boolean.valueOf(entry.isHidden()));
-            values.put(BatteryHistEntry.KEY_TOTAL_POWER,
-                    Double.valueOf(batteryUsageStats.getConsumedPower()));
-            values.put(BatteryHistEntry.KEY_CONSUME_POWER,
-                    Double.valueOf(entry.getConsumedPower()));
-            values.put(BatteryHistEntry.KEY_PERCENT_OF_TOTAL,
-                    Double.valueOf(entry.mPercent));
-            values.put(BatteryHistEntry.KEY_FOREGROUND_USAGE_TIME,
-                    Long.valueOf(entry.getTimeInForegroundMs()));
-            values.put(BatteryHistEntry.KEY_BACKGROUND_USAGE_TIME,
-                    Long.valueOf(entry.getTimeInBackgroundMs()));
-            values.put(BatteryHistEntry.KEY_DRAIN_TYPE,
-                    Integer.valueOf(entry.getPowerComponentId()));
             values.put(BatteryHistEntry.KEY_CONSUMER_TYPE,
                     Integer.valueOf(entry.getConsumerType()));
         } else {
             values.put(BatteryHistEntry.KEY_PACKAGE_NAME, FAKE_PACKAGE_NAME);
         }
-        values.put(BatteryHistEntry.KEY_BOOT_TIMESTAMP, Long.valueOf(bootTimestamp));
         values.put(BatteryHistEntry.KEY_TIMESTAMP, Long.valueOf(timestamp));
-        values.put(BatteryHistEntry.KEY_ZONE_ID, TimeZone.getDefault().getID());
-        values.put(BatteryHistEntry.KEY_BATTERY_LEVEL, Integer.valueOf(batteryLevel));
-        values.put(BatteryHistEntry.KEY_BATTERY_STATUS, Integer.valueOf(batteryStatus));
-        values.put(BatteryHistEntry.KEY_BATTERY_HEALTH, Integer.valueOf(batteryHealth));
+        values.put(BatteryHistEntry.KEY_IS_FULL_CHARGE_CYCLE_START,
+                Boolean.valueOf(isFullChargeStart));
+        final BatteryInformation batteryInformation =
+                constructBatteryInformation(
+                        entry,
+                        batteryUsageStats,
+                        batteryLevel,
+                        batteryStatus,
+                        batteryHealth,
+                        bootTimestamp);
+        values.put(BatteryHistEntry.KEY_BATTERY_INFORMATION,
+                convertBatteryInformationToString(batteryInformation));
+        // Save the BatteryInformation unencoded string into database for debugging.
+        if (Build.TYPE.equals("userdebug")) {
+            values.put(
+                    BatteryHistEntry.KEY_BATTERY_INFORMATION_DEBUG, batteryInformation.toString());
+        }
         return values;
+    }
+
+    /** Converts {@link AppUsageEvent} to content values */
+    public static ContentValues convertAppUsageEventToContentValues(final AppUsageEvent event) {
+        final ContentValues values = new ContentValues();
+        values.put(AppUsageEventEntity.KEY_UID, event.getUid());
+        values.put(AppUsageEventEntity.KEY_USER_ID, event.getUserId());
+        values.put(AppUsageEventEntity.KEY_TIMESTAMP, event.getTimestamp());
+        values.put(AppUsageEventEntity.KEY_APP_USAGE_EVENT_TYPE, event.getType().getNumber());
+        values.put(AppUsageEventEntity.KEY_PACKAGE_NAME, event.getPackageName());
+        values.put(AppUsageEventEntity.KEY_INSTANCE_ID, event.getInstanceId());
+        values.put(AppUsageEventEntity.KEY_TASK_ROOT_PACKAGE_NAME, event.getTaskRootPackageName());
+        return values;
+    }
+
+    /** Converts {@link BatteryEvent} to content values */
+    public static ContentValues convertBatteryEventToContentValues(final BatteryEvent event) {
+        final ContentValues values = new ContentValues();
+        values.put(BatteryEventEntity.KEY_TIMESTAMP, event.getTimestamp());
+        values.put(BatteryEventEntity.KEY_BATTERY_EVENT_TYPE, event.getType().getNumber());
+        values.put(BatteryEventEntity.KEY_BATTERY_LEVEL, event.getBatteryLevel());
+        return values;
+    }
+
+    /** Gets the encoded string from {@link BatteryInformation} instance. */
+    public static String convertBatteryInformationToString(
+            final BatteryInformation batteryInformation) {
+        return Base64.encodeToString(batteryInformation.toByteArray(), Base64.DEFAULT);
+    }
+
+    /** Gets the {@link BatteryInformation} instance from {@link ContentValues}. */
+    public static BatteryInformation getBatteryInformation(
+            final ContentValues values, final String key) {
+        final BatteryInformation defaultInstance = BatteryInformation.getDefaultInstance();
+        if (values != null && values.containsKey(key)) {
+            return BatteryUtils.parseProtoFromString(values.getAsString(key), defaultInstance);
+        }
+        return defaultInstance;
+    }
+
+    /** Gets the {@link BatteryInformation} instance from {@link Cursor}. */
+    public static BatteryInformation getBatteryInformation(final Cursor cursor, final String key) {
+        final BatteryInformation defaultInstance = BatteryInformation.getDefaultInstance();
+        final int columnIndex = cursor.getColumnIndex(key);
+        if (columnIndex >= 0) {
+            return BatteryUtils.parseProtoFromString(
+                    cursor.getString(columnIndex), defaultInstance);
+        }
+        return defaultInstance;
     }
 
     /** Converts to {@link BatteryHistEntry} */
@@ -130,31 +167,125 @@ public final class ConvertUtils {
             BatteryEntry entry,
             BatteryUsageStats batteryUsageStats) {
         return new BatteryHistEntry(
-                convertToContentValues(
+                convertBatteryEntryToContentValues(
                         entry,
                         batteryUsageStats,
                         /*batteryLevel=*/ 0,
                         /*batteryStatus=*/ 0,
                         /*batteryHealth=*/ 0,
                         /*bootTimestamp=*/ 0,
-                        /*timestamp=*/ 0));
+                        /*timestamp=*/ 0,
+                        /*isFullChargeStart=*/ false));
     }
 
-    /** Converts UTC timestamp to human readable local time string. */
-    public static String utcToLocalTime(Context context, long timestamp) {
-        final Locale locale = getLocale(context);
+    /** Converts to {@link AppUsageEvent} from {@link Event} */
+    @Nullable
+    public static AppUsageEvent convertToAppUsageEvent(
+            Context context, final IUsageStatsManager usageStatsManager, final Event event,
+            final long userId) {
+        final String packageName = event.getPackageName();
+        if (packageName == null) {
+            // See b/190609174: Event package names should never be null, but sometimes they are.
+            // Note that system events like device shutting down should still come with the android
+            // package name.
+            Log.w(TAG, String.format(
+                    "Ignoring a usage event with null package name (timestamp=%d, type=%d)",
+                    event.getTimeStamp(), event.getEventType()));
+            return null;
+        }
+
+        final AppUsageEvent.Builder appUsageEventBuilder = AppUsageEvent.newBuilder();
+        appUsageEventBuilder
+                .setTimestamp(event.getTimeStamp())
+                .setType(getAppUsageEventType(event.getEventType()))
+                .setPackageName(packageName)
+                .setUserId(userId);
+
+        final String taskRootPackageName = getTaskRootPackageName(event);
+        if (taskRootPackageName != null) {
+            appUsageEventBuilder.setTaskRootPackageName(taskRootPackageName);
+        }
+
+        final String effectivePackageName =
+                getEffectivePackageName(usageStatsManager, packageName, taskRootPackageName);
+        try {
+            final long uid = context
+                    .getPackageManager()
+                    .getPackageUidAsUser(effectivePackageName, (int) userId);
+            appUsageEventBuilder.setUid(uid);
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.w(TAG, String.format(
+                    "Fail to get uid for package %s of user %d)", event.getPackageName(), userId));
+            return null;
+        }
+
+        try {
+            appUsageEventBuilder.setInstanceId(event.getInstanceId());
+        } catch (NoClassDefFoundError | NoSuchMethodError e) {
+            Log.w(TAG, "UsageEvent instance ID API error");
+        }
+
+        return appUsageEventBuilder.build();
+    }
+
+    /** Converts to {@link AppUsageEvent} from {@link Cursor} */
+    public static AppUsageEvent convertToAppUsageEventFromCursor(final Cursor cursor) {
+        final AppUsageEvent.Builder eventBuilder = AppUsageEvent.newBuilder();
+        eventBuilder.setTimestamp(getLongFromCursor(cursor, AppUsageEventEntity.KEY_TIMESTAMP));
+        eventBuilder.setType(
+                AppUsageEventType.forNumber(
+                        getIntegerFromCursor(
+                                cursor, AppUsageEventEntity.KEY_APP_USAGE_EVENT_TYPE)));
+        eventBuilder.setPackageName(
+                getStringFromCursor(cursor, AppUsageEventEntity.KEY_PACKAGE_NAME));
+        eventBuilder.setInstanceId(
+                getIntegerFromCursor(cursor, AppUsageEventEntity.KEY_INSTANCE_ID));
+        eventBuilder.setTaskRootPackageName(
+                getStringFromCursor(cursor, AppUsageEventEntity.KEY_TASK_ROOT_PACKAGE_NAME));
+        eventBuilder.setUserId(getLongFromCursor(cursor, AppUsageEventEntity.KEY_USER_ID));
+        eventBuilder.setUid(getLongFromCursor(cursor, AppUsageEventEntity.KEY_UID));
+        return eventBuilder.build();
+    }
+
+    /** Converts to {@link BatteryEvent} from {@link BatteryEventType} */
+    public static BatteryEvent convertToBatteryEvent(
+            long timestamp, BatteryEventType type, int batteryLevel) {
+        final BatteryEvent.Builder eventBuilder = BatteryEvent.newBuilder();
+        eventBuilder.setTimestamp(timestamp);
+        eventBuilder.setType(type);
+        eventBuilder.setBatteryLevel(batteryLevel);
+        return eventBuilder.build();
+    }
+
+    /** Converts to {@link BatteryEvent} from {@link Cursor} */
+    public static BatteryEvent convertToBatteryEventFromCursor(final Cursor cursor) {
+        final BatteryEvent.Builder eventBuilder = BatteryEvent.newBuilder();
+        eventBuilder.setTimestamp(getLongFromCursor(cursor, BatteryEventEntity.KEY_TIMESTAMP));
+        eventBuilder.setType(
+                BatteryEventType.forNumber(
+                        getIntegerFromCursor(
+                                cursor, BatteryEventEntity.KEY_BATTERY_EVENT_TYPE)));
+        eventBuilder.setBatteryLevel(
+                getIntegerFromCursor(cursor, BatteryEventEntity.KEY_BATTERY_LEVEL));
+        return eventBuilder.build();
+    }
+
+    /** Converts UTC timestamp to local time string for logging only, so use the US locale for
+     *  better readability in debugging. */
+    public static String utcToLocalTimeForLogging(long timestamp) {
+        final Locale locale = Locale.US;
         final String pattern =
                 DateFormat.getBestDateTimePattern(locale, "MMM dd,yyyy HH:mm:ss");
         return DateFormat.format(pattern, timestamp).toString();
     }
 
     /** Converts UTC timestamp to local time hour data. */
-    public static String utcToLocalTimeHour(
-            final Context context, final long timestamp, final boolean is24HourFormat) {
+    public static String utcToLocalTimeHour(final Context context, final long timestamp,
+            final boolean is24HourFormat, final boolean showMinute) {
         final Locale locale = getLocale(context);
         // e.g. for 12-hour format: 9 PM
         // e.g. for 24-hour format: 09:00
-        final String skeleton = is24HourFormat ? "HHm" : "ha";
+        final String skeleton = is24HourFormat ? "HHm" : (showMinute ? "hma" : "ha");
         final String pattern = DateFormat.getBestDateTimePattern(locale, skeleton);
         return DateFormat.format(pattern, timestamp).toString();
     }
@@ -168,249 +299,6 @@ public final class ConvertUtils {
         return DateFormat.format(pattern, timestamp).toString();
     }
 
-    /** Gets indexed battery usage data for each corresponding time slot. */
-    public static Map<Integer, List<BatteryDiffEntry>> getIndexedUsageMap(
-            final Context context,
-            final int timeSlotSize,
-            final long[] batteryHistoryKeys,
-            final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap,
-            final boolean purgeLowPercentageAndFakeData) {
-        if (batteryHistoryMap == null || batteryHistoryMap.isEmpty()) {
-            return new HashMap<>();
-        }
-        final Map<Integer, List<BatteryDiffEntry>> resultMap = new HashMap<>();
-        // Each time slot usage diff data =
-        //     Math.abs(timestamp[i+2] data - timestamp[i+1] data) +
-        //     Math.abs(timestamp[i+1] data - timestamp[i] data);
-        // since we want to aggregate every two hours data into a single time slot.
-        final int timestampStride = 2;
-        for (int index = 0; index < timeSlotSize; index++) {
-            final Long currentTimestamp =
-                    Long.valueOf(batteryHistoryKeys[index * timestampStride]);
-            final Long nextTimestamp =
-                    Long.valueOf(batteryHistoryKeys[index * timestampStride + 1]);
-            final Long nextTwoTimestamp =
-                    Long.valueOf(batteryHistoryKeys[index * timestampStride + 2]);
-            // Fetches BatteryHistEntry data from corresponding time slot.
-            final Map<String, BatteryHistEntry> currentBatteryHistMap =
-                    batteryHistoryMap.getOrDefault(currentTimestamp, EMPTY_BATTERY_MAP);
-            final Map<String, BatteryHistEntry> nextBatteryHistMap =
-                    batteryHistoryMap.getOrDefault(nextTimestamp, EMPTY_BATTERY_MAP);
-            final Map<String, BatteryHistEntry> nextTwoBatteryHistMap =
-                    batteryHistoryMap.getOrDefault(nextTwoTimestamp, EMPTY_BATTERY_MAP);
-            // We should not get the empty list since we have at least one fake data to record
-            // the battery level and status in each time slot, the empty list is used to
-            // represent there is no enough data to apply interpolation arithmetic.
-            if (currentBatteryHistMap.isEmpty()
-                    || nextBatteryHistMap.isEmpty()
-                    || nextTwoBatteryHistMap.isEmpty()) {
-                resultMap.put(Integer.valueOf(index), new ArrayList<BatteryDiffEntry>());
-                continue;
-            }
-
-            // Collects all keys in these three time slot records as all populations.
-            final Set<String> allBatteryHistEntryKeys = new ArraySet<>();
-            allBatteryHistEntryKeys.addAll(currentBatteryHistMap.keySet());
-            allBatteryHistEntryKeys.addAll(nextBatteryHistMap.keySet());
-            allBatteryHistEntryKeys.addAll(nextTwoBatteryHistMap.keySet());
-
-            double totalConsumePower = 0.0;
-            final List<BatteryDiffEntry> batteryDiffEntryList = new ArrayList<>();
-            // Adds a specific time slot BatteryDiffEntry list into result map.
-            resultMap.put(Integer.valueOf(index), batteryDiffEntryList);
-
-            // Calculates all packages diff usage data in a specific time slot.
-            for (String key : allBatteryHistEntryKeys) {
-                final BatteryHistEntry currentEntry =
-                        currentBatteryHistMap.getOrDefault(key, EMPTY_BATTERY_HIST_ENTRY);
-                final BatteryHistEntry nextEntry =
-                        nextBatteryHistMap.getOrDefault(key, EMPTY_BATTERY_HIST_ENTRY);
-                final BatteryHistEntry nextTwoEntry =
-                        nextTwoBatteryHistMap.getOrDefault(key, EMPTY_BATTERY_HIST_ENTRY);
-                // Cumulative values is a specific time slot for a specific app.
-                long foregroundUsageTimeInMs =
-                        getDiffValue(
-                                currentEntry.mForegroundUsageTimeInMs,
-                                nextEntry.mForegroundUsageTimeInMs,
-                                nextTwoEntry.mForegroundUsageTimeInMs);
-                long backgroundUsageTimeInMs =
-                        getDiffValue(
-                                currentEntry.mBackgroundUsageTimeInMs,
-                                nextEntry.mBackgroundUsageTimeInMs,
-                                nextTwoEntry.mBackgroundUsageTimeInMs);
-                double consumePower =
-                        getDiffValue(
-                                currentEntry.mConsumePower,
-                                nextEntry.mConsumePower,
-                                nextTwoEntry.mConsumePower);
-                // Excludes entry since we don't have enough data to calculate.
-                if (foregroundUsageTimeInMs == 0
-                        && backgroundUsageTimeInMs == 0
-                        && consumePower == 0) {
-                    continue;
-                }
-                final BatteryHistEntry selectedBatteryEntry =
-                        selectBatteryHistEntry(currentEntry, nextEntry, nextTwoEntry);
-                if (selectedBatteryEntry == null) {
-                    continue;
-                }
-                // Forces refine the cumulative value since it may introduce deviation
-                // error since we will apply the interpolation arithmetic.
-                final float totalUsageTimeInMs =
-                        foregroundUsageTimeInMs + backgroundUsageTimeInMs;
-                if (totalUsageTimeInMs > TOTAL_TIME_THRESHOLD) {
-                    final float ratio = TOTAL_TIME_THRESHOLD / totalUsageTimeInMs;
-                    if (DEBUG) {
-                        Log.w(TAG, String.format("abnormal usage time %d|%d for:\n%s",
-                                Duration.ofMillis(foregroundUsageTimeInMs).getSeconds(),
-                                Duration.ofMillis(backgroundUsageTimeInMs).getSeconds(),
-                                currentEntry));
-                    }
-                    foregroundUsageTimeInMs =
-                            Math.round(foregroundUsageTimeInMs * ratio);
-                    backgroundUsageTimeInMs =
-                            Math.round(backgroundUsageTimeInMs * ratio);
-                    consumePower = consumePower * ratio;
-                }
-                totalConsumePower += consumePower;
-                batteryDiffEntryList.add(
-                        new BatteryDiffEntry(
-                                context,
-                                foregroundUsageTimeInMs,
-                                backgroundUsageTimeInMs,
-                                consumePower,
-                                selectedBatteryEntry));
-            }
-            // Sets total consume power data into all BatteryDiffEntry in the same slot.
-            for (BatteryDiffEntry diffEntry : batteryDiffEntryList) {
-                diffEntry.setTotalConsumePower(totalConsumePower);
-            }
-        }
-        insert24HoursData(BatteryChartViewModel.SELECTED_INDEX_ALL, resultMap);
-        resolveMultiUsersData(context, resultMap);
-        if (purgeLowPercentageAndFakeData) {
-            purgeLowPercentageAndFakeData(context, resultMap);
-        }
-        return resultMap;
-    }
-
-    @VisibleForTesting
-    static void resolveMultiUsersData(
-            final Context context,
-            final Map<Integer, List<BatteryDiffEntry>> indexedUsageMap) {
-        final int currentUserId = context.getUserId();
-        final UserHandle userHandle =
-                Utils.getManagedProfile(context.getSystemService(UserManager.class));
-        final int workProfileUserId =
-                userHandle != null ? userHandle.getIdentifier() : Integer.MIN_VALUE;
-        // Loops for all BatteryDiffEntry in the different slots.
-        for (List<BatteryDiffEntry> entryList : indexedUsageMap.values()) {
-            double consumePowerFromOtherUsers = 0f;
-            double consumePercentageFromOtherUsers = 0f;
-            final Iterator<BatteryDiffEntry> iterator = entryList.iterator();
-            while (iterator.hasNext()) {
-                final BatteryDiffEntry entry = iterator.next();
-                final BatteryHistEntry batteryHistEntry = entry.mBatteryHistEntry;
-                if (batteryHistEntry.mConsumerType != CONSUMER_TYPE_UID_BATTERY) {
-                    continue;
-                }
-                // Whether the BatteryHistEntry represents the current user data?
-                if (batteryHistEntry.mUserId == currentUserId
-                        || batteryHistEntry.mUserId == workProfileUserId) {
-                    continue;
-                }
-                // Removes and aggregates non-current users data from the list.
-                iterator.remove();
-                consumePowerFromOtherUsers += entry.mConsumePower;
-                consumePercentageFromOtherUsers += entry.getPercentOfTotal();
-            }
-            if (consumePercentageFromOtherUsers != 0) {
-                entryList.add(createOtherUsersEntry(context, consumePowerFromOtherUsers,
-                        consumePercentageFromOtherUsers));
-            }
-        }
-    }
-
-    private static void insert24HoursData(
-            final int desiredIndex,
-            final Map<Integer, List<BatteryDiffEntry>> indexedUsageMap) {
-        final Map<String, BatteryDiffEntry> resultMap = new HashMap<>();
-        double totalConsumePower = 0f;
-        // Loops for all BatteryDiffEntry and aggregate them together.
-        for (List<BatteryDiffEntry> entryList : indexedUsageMap.values()) {
-            for (BatteryDiffEntry entry : entryList) {
-                final String key = entry.mBatteryHistEntry.getKey();
-                final BatteryDiffEntry oldBatteryDiffEntry = resultMap.get(key);
-                // Creates new BatteryDiffEntry if we don't have it.
-                if (oldBatteryDiffEntry == null) {
-                    resultMap.put(key, entry.clone());
-                } else {
-                    // Sums up some fields data into the existing one.
-                    oldBatteryDiffEntry.mForegroundUsageTimeInMs +=
-                            entry.mForegroundUsageTimeInMs;
-                    oldBatteryDiffEntry.mBackgroundUsageTimeInMs +=
-                            entry.mBackgroundUsageTimeInMs;
-                    oldBatteryDiffEntry.mConsumePower += entry.mConsumePower;
-                }
-                totalConsumePower += entry.mConsumePower;
-            }
-        }
-        final List<BatteryDiffEntry> resultList = new ArrayList<>(resultMap.values());
-        // Sets total 24 hours consume power data into all BatteryDiffEntry.
-        for (BatteryDiffEntry entry : resultList) {
-            entry.setTotalConsumePower(totalConsumePower);
-        }
-        indexedUsageMap.put(Integer.valueOf(desiredIndex), resultList);
-    }
-
-    // Removes low percentage data and fake usage data, which will be zero value.
-    private static void purgeLowPercentageAndFakeData(
-            final Context context,
-            final Map<Integer, List<BatteryDiffEntry>> indexedUsageMap) {
-        final Set<CharSequence> backgroundUsageTimeHideList =
-                FeatureFactory.getFactory(context)
-                        .getPowerUsageFeatureProvider(context)
-                        .getHideBackgroundUsageTimeSet(context);
-        for (List<BatteryDiffEntry> entries : indexedUsageMap.values()) {
-            final Iterator<BatteryDiffEntry> iterator = entries.iterator();
-            while (iterator.hasNext()) {
-                final BatteryDiffEntry entry = iterator.next();
-                if (entry.getPercentOfTotal() < PERCENTAGE_OF_TOTAL_THRESHOLD
-                        || FAKE_PACKAGE_NAME.equals(entry.getPackageName())) {
-                    iterator.remove();
-                }
-                final String packageName = entry.getPackageName();
-                if (packageName != null
-                        && !backgroundUsageTimeHideList.isEmpty()
-                        && backgroundUsageTimeHideList.contains(packageName)) {
-                    entry.mBackgroundUsageTimeInMs = 0;
-                }
-            }
-        }
-    }
-
-    private static long getDiffValue(long v1, long v2, long v3) {
-        return (v2 > v1 ? v2 - v1 : 0) + (v3 > v2 ? v3 - v2 : 0);
-    }
-
-    private static double getDiffValue(double v1, double v2, double v3) {
-        return (v2 > v1 ? v2 - v1 : 0) + (v3 > v2 ? v3 - v2 : 0);
-    }
-
-    private static BatteryHistEntry selectBatteryHistEntry(
-            BatteryHistEntry entry1,
-            BatteryHistEntry entry2,
-            BatteryHistEntry entry3) {
-        if (entry1 != null && entry1 != EMPTY_BATTERY_HIST_ENTRY) {
-            return entry1;
-        } else if (entry2 != null && entry2 != EMPTY_BATTERY_HIST_ENTRY) {
-            return entry2;
-        } else {
-            return entry3 != null && entry3 != EMPTY_BATTERY_HIST_ENTRY
-                    ? entry3 : null;
-        }
-    }
-
     @VisibleForTesting
     static Locale getLocale(Context context) {
         if (context == null) {
@@ -422,21 +310,154 @@ public final class ConvertUtils {
                 : Locale.getDefault();
     }
 
-    private static BatteryDiffEntry createOtherUsersEntry(
-            Context context, double consumePower, double consumePercentage) {
-        final ContentValues values = new ContentValues();
-        values.put(BatteryHistEntry.KEY_UID, BatteryUtils.UID_OTHER_USERS);
-        values.put(BatteryHistEntry.KEY_USER_ID, BatteryUtils.UID_OTHER_USERS);
-        values.put(BatteryHistEntry.KEY_CONSUMER_TYPE, CONSUMER_TYPE_UID_BATTERY);
-        // We will show the percentage for the "other users" item only, the aggregated
-        // running time information is useless for users to identify individual apps.
-        final BatteryDiffEntry batteryDiffEntry = new BatteryDiffEntry(
-                context,
-                /*foregroundUsageTimeInMs=*/ 0,
-                /*backgroundUsageTimeInMs=*/ 0,
-                consumePower,
-                new BatteryHistEntry(values));
-        batteryDiffEntry.setTotalConsumePower(100 * consumePower / consumePercentage);
-        return batteryDiffEntry;
+    /**
+     * Returns the package name the app usage should be attributed to.
+     *
+     * <ul>
+     *   <li>If {@link UsageStatsManager#getUsageSource()} returns {@link
+     *       UsageStatsManager#USAGE_SOURCE_CURRENT_ACTIVITY}, this method will return packageName.
+     *   <li>If {@link UsageStatsManager#getUsageSource()} returns {@link
+     *       UsageStatsManager#USAGE_SOURCE_TASK_ROOT_ACTIVITY}, this method will return
+     *       taskRootPackageName if it exists, or packageName otherwise.
+     * </ul>
+     */
+    @VisibleForTesting
+    static String getEffectivePackageName(
+            final IUsageStatsManager usageStatsManager, final String packageName,
+            final String taskRootPackageName) {
+        int usageSource = getUsageSource(usageStatsManager);
+        switch (usageSource) {
+            case UsageStatsManager.USAGE_SOURCE_TASK_ROOT_ACTIVITY:
+                return !TextUtils.isEmpty(taskRootPackageName)
+                        ? taskRootPackageName
+                        : packageName;
+            case UsageStatsManager.USAGE_SOURCE_CURRENT_ACTIVITY:
+                return packageName;
+            default:
+                Log.e(TAG, "Unexpected usage source: " + usageSource);
+                return packageName;
+        }
+    }
+
+    /**
+     * Returns the package name of the task root when this event was reported when {@code event} is
+     * one of:
+     *
+     * <ul>
+     *   <li>{@link Event#ACTIVITY_RESUMED}
+     *   <li>{@link Event#ACTIVITY_STOPPED}
+     * </ul>
+     */
+    @Nullable
+    private static String getTaskRootPackageName(Event event) {
+        int eventType = event.getEventType();
+        if (eventType != Event.ACTIVITY_RESUMED && eventType != Event.ACTIVITY_STOPPED) {
+            // Task root is only relevant for ACTIVITY_* events.
+            return null;
+        }
+
+        try {
+            String taskRootPackageName = event.getTaskRootPackageName();
+            if (taskRootPackageName == null) {
+                Log.w(TAG, String.format(
+                        "Null task root in event with timestamp %d, type=%d, package %s",
+                        event.getTimeStamp(), event.getEventType(), event.getPackageName()));
+            }
+            return taskRootPackageName;
+        } catch (NoSuchMethodError e) {
+            Log.w(TAG, "Failed to call Event#getTaskRootPackageName()");
+            return null;
+        }
+    }
+
+    /**
+     * Returns what App Usage Observers will consider the source of usage for an activity.
+     *
+     * @see UsageStatsManager#getUsageSource()
+     */
+    private static int getUsageSource(final IUsageStatsManager usageStatsManager) {
+        try {
+            return usageStatsManager.getUsageSource();
+        } catch (RemoteException e) {
+            Log.e(TAG, "Failed to getUsageSource", e);
+            return UsageStatsManager.USAGE_SOURCE_CURRENT_ACTIVITY;
+        }
+    }
+
+    private static AppUsageEventType getAppUsageEventType(final int eventType) {
+        switch (eventType) {
+            case Event.ACTIVITY_RESUMED:
+                return AppUsageEventType.ACTIVITY_RESUMED;
+            case Event.ACTIVITY_STOPPED:
+                return AppUsageEventType.ACTIVITY_STOPPED;
+            case Event.DEVICE_SHUTDOWN:
+                return AppUsageEventType.DEVICE_SHUTDOWN;
+            default:
+                return AppUsageEventType.UNKNOWN;
+        }
+    }
+
+    private static BatteryInformation constructBatteryInformation(
+            final BatteryEntry entry,
+            final BatteryUsageStats batteryUsageStats,
+            final int batteryLevel,
+            final int batteryStatus,
+            final int batteryHealth,
+            final long bootTimestamp) {
+        final DeviceBatteryState deviceBatteryState =
+                DeviceBatteryState
+                        .newBuilder()
+                        .setBatteryLevel(batteryLevel)
+                        .setBatteryStatus(batteryStatus)
+                        .setBatteryHealth(batteryHealth)
+                        .build();
+        final BatteryInformation.Builder batteryInformationBuilder =
+                BatteryInformation
+                        .newBuilder()
+                        .setDeviceBatteryState(deviceBatteryState)
+                        .setBootTimestamp(bootTimestamp)
+                        .setZoneId(TimeZone.getDefault().getID());
+        if (entry != null && batteryUsageStats != null) {
+            batteryInformationBuilder
+                    .setIsHidden(entry.isHidden())
+                    .setAppLabel(entry.getLabel() != null ? entry.getLabel() : "")
+                    .setTotalPower(batteryUsageStats.getConsumedPower())
+                    .setConsumePower(entry.getConsumedPower())
+                    .setForegroundUsageConsumePower(entry.getConsumedPowerInForeground())
+                    .setForegroundServiceUsageConsumePower(
+                            entry.getConsumedPowerInForegroundService())
+                    .setBackgroundUsageConsumePower(entry.getConsumedPowerInBackground())
+                    .setCachedUsageConsumePower(entry.getConsumedPowerInCached())
+                    .setPercentOfTotal(entry.mPercent)
+                    .setDrainType(entry.getPowerComponentId())
+                    .setForegroundUsageTimeInMs(entry.getTimeInForegroundMs())
+                    .setBackgroundUsageTimeInMs(entry.getTimeInBackgroundMs());
+        }
+
+        return batteryInformationBuilder.build();
+    }
+
+    private static int getIntegerFromCursor(final Cursor cursor, final String key) {
+        final int columnIndex = cursor.getColumnIndex(key);
+        if (columnIndex >= 0) {
+            return cursor.getInt(columnIndex);
+        }
+        return 0;
+    }
+
+    private static long getLongFromCursor(final Cursor cursor, final String key) {
+        final int columnIndex = cursor.getColumnIndex(key);
+        if (columnIndex >= 0) {
+            return cursor.getLong(columnIndex);
+        }
+        return 0L;
+    }
+
+    private static String getStringFromCursor(final Cursor cursor, final String key) {
+        final int columnIndex = cursor.getColumnIndex(key);
+        if (columnIndex >= 0) {
+            return cursor.getString(columnIndex);
+        }
+        return "";
     }
 }

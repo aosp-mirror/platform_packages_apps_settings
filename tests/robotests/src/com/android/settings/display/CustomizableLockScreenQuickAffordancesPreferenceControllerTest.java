@@ -21,6 +21,8 @@ import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -28,8 +30,11 @@ import static org.mockito.Mockito.when;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.database.MatrixCursor;
-import android.text.TextUtils;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -37,6 +42,7 @@ import androidx.test.core.app.ApplicationProvider;
 import androidx.test.filters.SmallTest;
 
 import com.android.settings.R;
+import com.android.settings.testutils.shadow.ShadowThreadUtils;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -54,6 +60,7 @@ public class CustomizableLockScreenQuickAffordancesPreferenceControllerTest {
 
     @Mock private Context mContext;
     @Mock private ContentResolver mContentResolver;
+    @Mock private PackageManager mPackageManager;
 
     private CustomizableLockScreenQuickAffordancesPreferenceController mUnderTest;
 
@@ -63,20 +70,29 @@ public class CustomizableLockScreenQuickAffordancesPreferenceControllerTest {
         when(mContext.getContentResolver()).thenReturn(mContentResolver);
         when(mContext.getResources())
                 .thenReturn(ApplicationProvider.getApplicationContext().getResources());
+        when(mContext.getPackageManager()).thenReturn(mPackageManager);
+        ShadowThreadUtils.setIsMainThread(true);
 
         mUnderTest = new CustomizableLockScreenQuickAffordancesPreferenceController(mContext, KEY);
     }
 
     @Test
-    public void getAvailabilityStatus_whenEnabled() {
-        setEnabled(true);
+    public void getAvailabilityStatus_whenFeatureEnabled() {
+        setEnabled(/* isWallpaperPickerInstalled= */ true, /* isFeatureEnabled = */ true);
 
         assertThat(mUnderTest.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
     @Test
-    public void getAvailabilityStatus_whenNotEnabled() {
-        setEnabled(false);
+    public void getAvailabilityStatus_whenWallpaperPickerNotInstalledEnabled() {
+        setEnabled(/* isWallpaperPickerInstalled= */ false, /* isFeatureEnabled = */ true);
+
+        assertThat(mUnderTest.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_whenFeatureNotEnabled() {
+        setEnabled(/* isWallpaperPickerInstalled= */ true, /* isFeatureEnabled = */ false);
 
         assertThat(mUnderTest.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
@@ -84,11 +100,7 @@ public class CustomizableLockScreenQuickAffordancesPreferenceControllerTest {
     @Test
     public void displayPreference_click() {
         setSelectedAffordanceNames("one", "two");
-        final PreferenceScreen screen = mock(PreferenceScreen.class);
-        final Preference preference = mock(Preference.class);
-        when(screen.findPreference(KEY)).thenReturn(preference);
-
-        mUnderTest.displayPreference(screen);
+        final Preference preference = invokeDisplayPreference();
 
         final ArgumentCaptor<Preference.OnPreferenceClickListener> clickCaptor =
                 ArgumentCaptor.forClass(Preference.OnPreferenceClickListener.class);
@@ -102,6 +114,9 @@ public class CustomizableLockScreenQuickAffordancesPreferenceControllerTest {
         assertThat(intentCaptor.getValue().getPackage()).isEqualTo(
                 mContext.getString(R.string.config_wallpaper_picker_package));
         assertThat(intentCaptor.getValue().getAction()).isEqualTo(Intent.ACTION_SET_WALLPAPER);
+        assertThat(intentCaptor.getValue().getStringExtra(
+                CustomizableLockScreenUtils.WALLPAPER_LAUNCH_SOURCE)).isEqualTo(
+                        CustomizableLockScreenUtils.LAUNCH_SOURCE_SETTINGS);
         assertThat(intentCaptor.getValue().getStringExtra("destination"))
                 .isEqualTo("quick_affordances");
     }
@@ -109,31 +124,50 @@ public class CustomizableLockScreenQuickAffordancesPreferenceControllerTest {
     @Test
     public void getSummary_whenNoneAreSelected() {
         setSelectedAffordanceNames();
+        final Preference preference = invokeDisplayPreference();
 
-        assertThat(mUnderTest.getSummary()).isNull();
+        verify(preference).setSummary(null);
     }
 
     @Test
     public void getSummary_whenOneIsSelected() {
         setSelectedAffordanceNames("one");
+        final Preference preference = invokeDisplayPreference();
 
-        assertThat(TextUtils.equals(mUnderTest.getSummary(), "one")).isTrue();
+        verify(preference).setSummary("one");
     }
 
     @Test
     public void getSummary_whenTwoAreSelected() {
         setSelectedAffordanceNames("one", "two");
+        final Preference preference = invokeDisplayPreference();
 
-        assertThat(TextUtils.equals(mUnderTest.getSummary(), "one, two")).isTrue();
+        verify(preference).setSummary("one, two");
     }
 
-    private void setEnabled(boolean isEnabled) {
+    private void setEnabled(boolean isWallpaperPickerInstalled, boolean isFeatureEnabled) {
+        if (isWallpaperPickerInstalled) {
+            final ResolveInfo resolveInfo = new ResolveInfo();
+            final ActivityInfo activityInfo = new ActivityInfo();
+            final ApplicationInfo applicationInfo = new ApplicationInfo();
+            applicationInfo.packageName = "com.fake.name";
+            activityInfo.applicationInfo = applicationInfo;
+            activityInfo.name = "someName";
+            resolveInfo.activityInfo = activityInfo;
+            when(mPackageManager.resolveActivity(any(), anyInt())).thenReturn(resolveInfo);
+        } else {
+            when(mPackageManager.resolveActivity(any(), anyInt())).thenReturn(null);
+        }
+
         final MatrixCursor cursor = new MatrixCursor(
                 new String[] {
                         CustomizableLockScreenUtils.NAME,
                         CustomizableLockScreenUtils.VALUE
                 });
-        cursor.addRow(new Object[] { CustomizableLockScreenUtils.ENABLED_FLAG, isEnabled ? 1 : 0 });
+        cursor.addRow(
+                new Object[] {
+                    CustomizableLockScreenUtils.ENABLED_FLAG, isFeatureEnabled ? 1 : 0
+                });
         when(
                 mContentResolver.query(
                         CustomizableLockScreenUtils.FLAGS_URI, null, null, null))
@@ -151,5 +185,13 @@ public class CustomizableLockScreenQuickAffordancesPreferenceControllerTest {
                 mContentResolver.query(
                         CustomizableLockScreenUtils.SELECTIONS_URI, null, null, null))
                 .thenReturn(cursor);
+    }
+
+    private Preference invokeDisplayPreference() {
+        final PreferenceScreen screen = mock(PreferenceScreen.class);
+        final Preference preference = mock(Preference.class);
+        when(screen.findPreference(KEY)).thenReturn(preference);
+        mUnderTest.displayPreference(screen);
+        return preference;
     }
 }

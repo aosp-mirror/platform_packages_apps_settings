@@ -19,7 +19,12 @@ package com.android.settings.localepicker;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.LocaleList;
+import android.provider.Settings;
+import android.util.Log;
 import android.view.MenuItem;
+
+import androidx.core.view.ViewCompat;
 
 import com.android.internal.app.LocalePickerWithRegion;
 import com.android.internal.app.LocaleStore;
@@ -28,22 +33,37 @@ import com.android.settings.core.SettingsBaseActivity;
 
 /** A activity to show the locale picker page. */
 public class LocalePickerWithRegionActivity extends SettingsBaseActivity
-        implements LocalePickerWithRegion.LocaleSelectedListener {
-
+        implements LocalePickerWithRegion.LocaleSelectedListener, MenuItem.OnActionExpandListener {
+    private static final String TAG = LocalePickerWithRegionActivity.class.getSimpleName();
     private static final String PARENT_FRAGMENT_NAME = "localeListEditor";
+
+    private LocalePickerWithRegion mSelector;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle(R.string.add_a_language);
+        LocaleList explicitLocales = null;
+        if (isDeviceDemoMode()) {
+            Bundle bundle = getIntent().getExtras();
+            explicitLocales = bundle == null
+                    ? null
+                    : bundle.getParcelable(Settings.EXTRA_EXPLICIT_LOCALES, LocaleList.class);
+            Log.i(TAG, "Has explicit locales : " + explicitLocales);
+        }
 
-        final LocalePickerWithRegion selector = LocalePickerWithRegion.createLanguagePicker(
-                this, LocalePickerWithRegionActivity.this, false /* translate only */);
+        mSelector = LocalePickerWithRegion.createLanguagePicker(
+                this,
+                LocalePickerWithRegionActivity.this,
+                false /* translate only */,
+                explicitLocales,
+                null /* appPackageName */,
+                this);
         getFragmentManager()
                 .beginTransaction()
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                .replace(R.id.content_frame, selector)
+                .replace(R.id.content_frame, mSelector)
                 .addToBackStack(PARENT_FRAGMENT_NAME)
                 .commit();
     }
@@ -77,6 +97,27 @@ public class LocalePickerWithRegionActivity extends SettingsBaseActivity
             setResult(RESULT_CANCELED);
             finish();
         }
+    }
+
+    private boolean isDeviceDemoMode() {
+        return Settings.Global.getInt(
+                getContentResolver(), Settings.Global.DEVICE_DEMO_MODE, 0) == 1;
+    }
+
+    @Override
+    public boolean onMenuItemActionExpand(MenuItem item) {
+        // To prevent a large space on tool bar.
+        mAppBarLayout.setExpanded(false /*expanded*/, false /*animate*/);
+        // To prevent user can expand the collpasing tool bar view.
+        ViewCompat.setNestedScrollingEnabled(mSelector.getListView(), false);
+        return true;
+    }
+
+    @Override
+    public boolean onMenuItemActionCollapse(MenuItem item) {
+        mAppBarLayout.setExpanded(false /*expanded*/, false /*animate*/);
+        ViewCompat.setNestedScrollingEnabled(mSelector.getListView(), true);
+        return true;
     }
 }
 

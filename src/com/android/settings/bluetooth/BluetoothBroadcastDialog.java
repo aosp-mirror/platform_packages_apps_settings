@@ -19,6 +19,7 @@ package com.android.settings.bluetooth;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -27,6 +28,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.R;
@@ -125,8 +127,13 @@ public class BluetoothBroadcastDialog extends InstrumentedDialogFragment {
 
     @Override
     public int getMetricsCategory() {
-        //TODO(b/228255796) : add new enum for find broadcast fragment
-        return SettingsEnums.PAGE_UNKNOWN;
+        return SettingsEnums.DIALOG_LE_AUDIO_BROADCAST;
+    }
+
+    @Override
+    public void onCancel(@NonNull DialogInterface dialog) {
+        dismiss();
+        getActivity().finish();
     }
 
     private void launchFindBroadcastsActivity() {

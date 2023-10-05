@@ -54,7 +54,6 @@ import com.android.internal.widget.LockPatternView.Cell;
 import com.android.internal.widget.LockPatternView.DisplayMode;
 import com.android.internal.widget.LockscreenCredential;
 import com.android.internal.widget.VerifyCredentialResponse;
-import com.android.settings.EncryptionInterstitial;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SetupWizardUtils;
@@ -106,7 +105,6 @@ public class ChooseLockPattern extends SettingsActivity {
 
         public IntentBuilder(Context context) {
             mIntent = new Intent(context, ChooseLockPattern.class);
-            mIntent.putExtra(EncryptionInterstitial.EXTRA_REQUIRE_PASSWORD, false);
             mIntent.putExtra(ChooseLockGeneric.CONFIRM_CREDENTIALS, false);
         }
 
@@ -461,18 +459,6 @@ public class ChooseLockPattern extends SettingsActivity {
 
             mLockPatternUtils = new LockPatternUtils(getActivity());
 
-            if (intent.getBooleanExtra(
-                    ChooseLockSettingsHelper.EXTRA_KEY_FOR_CHANGE_CRED_REQUIRED_FOR_BOOT, false)) {
-                SaveAndFinishWorker w = new SaveAndFinishWorker();
-                final boolean required = getActivity().getIntent().getBooleanExtra(
-                        EncryptionInterstitial.EXTRA_REQUIRE_PASSWORD, true);
-                LockscreenCredential current = intent.getParcelableExtra(
-                        ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
-                w.setBlocking(true);
-                w.setListener(this);
-                w.start(mLockPatternUtils, required, false /* requestGatekeeperPassword */, current,
-                        current, mUserId);
-            }
             mForFingerprint = intent.getBooleanExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, false);
             mForFace = intent.getBooleanExtra(
@@ -812,7 +798,12 @@ public class ChooseLockPattern extends SettingsActivity {
             // If the stage changed, announce the header for accessibility. This
             // is a no-op when accessibility is disabled.
             if (previousStage != stage || announceAlways) {
-                mHeaderText.announceForAccessibility(mHeaderText.getText());
+                if (stage == Stage.NeedToConfirm) {
+                    // If the Stage is NeedToConfirm, move the a11y focus to the header.
+                    mHeaderText.requestAccessibilityFocus();
+                } else {
+                    mHeaderText.announceForAccessibility(mHeaderText.getText());
+                }
             }
         }
 
@@ -849,8 +840,6 @@ public class ChooseLockPattern extends SettingsActivity {
             getFragmentManager().executePendingTransactions();
 
             final Intent intent = getActivity().getIntent();
-            final boolean required = intent.getBooleanExtra(
-                    EncryptionInterstitial.EXTRA_REQUIRE_PASSWORD, true);
             if (intent.hasExtra(EXTRA_KEY_UNIFICATION_PROFILE_ID)) {
                 try (LockscreenCredential profileCredential = (LockscreenCredential)
                         intent.getParcelableExtra(EXTRA_KEY_UNIFICATION_PROFILE_CREDENTIAL)) {
@@ -860,8 +849,8 @@ public class ChooseLockPattern extends SettingsActivity {
                             profileCredential);
                 }
             }
-            mSaveAndFinishWorker.start(mLockPatternUtils, required,
-                    mRequestGatekeeperPassword, mChosenPattern, mCurrentCredential, mUserId);
+            mSaveAndFinishWorker.start(mLockPatternUtils, mRequestGatekeeperPassword,
+                    mChosenPattern, mCurrentCredential, mUserId);
         }
 
         @Override
@@ -890,10 +879,10 @@ public class ChooseLockPattern extends SettingsActivity {
         private LockscreenCredential mChosenPattern;
         private LockscreenCredential mCurrentCredential;
 
-        public void start(LockPatternUtils utils, boolean credentialRequired,
-                boolean requestGatekeeperPassword, LockscreenCredential chosenPattern,
-                LockscreenCredential currentCredential, int userId) {
-            prepare(utils, credentialRequired, requestGatekeeperPassword, userId);
+        public void start(LockPatternUtils utils, boolean requestGatekeeperPassword,
+                LockscreenCredential chosenPattern, LockscreenCredential currentCredential,
+                int userId) {
+            prepare(utils, requestGatekeeperPassword, userId);
 
             mCurrentCredential = currentCredential != null ? currentCredential
                     : LockscreenCredential.createNone();
@@ -906,8 +895,13 @@ public class ChooseLockPattern extends SettingsActivity {
         @Override
         protected Pair<Boolean, Intent> saveAndVerifyInBackground() {
             final int userId = mUserId;
-            final boolean success = mUtils.setLockCredential(mChosenPattern, mCurrentCredential,
-                    userId);
+            boolean success;
+            try {
+                success = mUtils.setLockCredential(mChosenPattern, mCurrentCredential, userId);
+            } catch (RuntimeException e) {
+                Log.e(TAG, "Failed to set lockscreen credential", e);
+                success = false;
+            }
             if (success) {
                 unifyProfileCredentialIfRequested();
             }

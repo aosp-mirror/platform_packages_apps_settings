@@ -30,20 +30,14 @@ import com.android.settings.biometrics.fingerprint.FingerprintSuggestionActivity
 import com.android.settings.display.NightDisplayPreferenceController;
 import com.android.settings.notification.zen.ZenOnboardingActivity;
 import com.android.settings.notification.zen.ZenSuggestionActivity;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ScreenLockSuggestionActivity;
 import com.android.settings.wallpaper.StyleSuggestionActivity;
 import com.android.settings.wallpaper.WallpaperSuggestionActivity;
 import com.android.settings.wifi.calling.WifiCallingSuggestionActivity;
-import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider {
 
-    private static final String TAG = "SuggestionFeature";
-
     private static final String SHARED_PREF_FILENAME = "suggestions";
-
-    private final MetricsFeatureProvider mMetricsFeatureProvider;
 
     @Override
     public boolean isSuggestionEnabled(Context context) {
@@ -90,11 +84,5 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
     @Override
     public Class<? extends Fragment> getContextualSuggestionFragment() {
         return null;
-    }
-
-    public SuggestionFeatureProviderImpl(Context context) {
-        final Context appContext = context.getApplicationContext();
-        mMetricsFeatureProvider = FeatureFactory.getFactory(appContext)
-                .getMetricsFeatureProvider();
     }
 }

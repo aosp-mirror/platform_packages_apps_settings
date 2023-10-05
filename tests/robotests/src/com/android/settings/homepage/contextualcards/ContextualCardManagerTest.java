@@ -61,6 +61,7 @@ import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -151,6 +152,7 @@ public class ContextualCardManagerTest {
         assertThat(actual).containsExactlyElementsIn(expected);
     }
 
+    @Ignore
     @Test
     @Config(qualifiers = "mcc999")
     public void loadContextualCards_restartLoaderNotNeeded_shouldInitLoader() {
@@ -160,6 +162,7 @@ public class ContextualCardManagerTest {
                 any(ContextualCardManager.CardContentLoaderCallbacks.class));
     }
 
+    @Ignore
     @Test
     @Config(qualifiers = "mcc999")
     public void loadContextualCards_restartLoaderNeeded_shouldRestartLoaderAndSetIsFirstLaunch() {

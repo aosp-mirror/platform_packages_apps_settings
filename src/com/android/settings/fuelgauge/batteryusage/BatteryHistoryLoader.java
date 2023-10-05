@@ -17,10 +17,9 @@ package com.android.settings.fuelgauge.batteryusage;
 
 import android.content.Context;
 
-import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.utils.AsyncLoaderCompat;
 
+import java.util.Calendar;
 import java.util.Map;
 
 /** Loader that can be used to load battery history information. */
@@ -41,8 +40,6 @@ public class BatteryHistoryLoader
 
     @Override
     public Map<Long, Map<String, BatteryHistEntry>> loadInBackground() {
-        final PowerUsageFeatureProvider powerUsageFeatureProvider =
-                FeatureFactory.getFactory(mContext).getPowerUsageFeatureProvider(mContext);
-        return powerUsageFeatureProvider.getBatteryHistorySinceLastFullCharge(mContext);
+        return DatabaseUtils.getHistoryMapSinceLastFullCharge(mContext, Calendar.getInstance());
     }
 }

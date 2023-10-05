@@ -48,7 +48,9 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import com.android.settings.Settings;
 import com.android.settings.biometrics.face.FaceEnrollIntroductionInternal;
 import com.android.settings.biometrics.fingerprint.FingerprintSettings;
+import com.android.settings.testutils.ActiveUnlockTestUtils;
 import com.android.settings.testutils.ResourcesUtils;
+import com.android.settingslib.utils.StringUtil;
 
 import org.junit.After;
 import org.junit.Before;
@@ -408,6 +410,62 @@ public class BiometricsSafetySourceTest {
     }
 
     @Test
+    public void setSafetySourceData_activeUnlockEnabled_withFingerprintOnly_setsData() {
+        final int enrolledFingerprintsCount = 1;
+        when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
+        when(mFaceManager.isHardwareDetected()).thenReturn(false);
+        when(mFingerprintManager.getEnrolledFingerprints(anyInt())).thenReturn(
+                createFingerprintList(enrolledFingerprintsCount));
+
+        ActiveUnlockTestUtils.enable(mApplicationContext);
+
+        BiometricsSafetySource.setSafetySourceData(mApplicationContext, EVENT_SOURCE_STATE_CHANGED);
+
+        assertSafetySourceEnabledDataSetWithPluralSummary(
+                "security_settings_fingerprint_preference_title",
+                "security_settings_fingerprint_preference_summary",
+                enrolledFingerprintsCount,
+                Settings.CombinedBiometricSettingsActivity.class.getName());
+    }
+
+    @Test
+    public void setSafetySourceData_activeUnlockEnabled_withFaceOnly_setsData() {
+        when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(false);
+        when(mFaceManager.isHardwareDetected()).thenReturn(true);
+        when(mFaceManager.hasEnrolledTemplates(anyInt())).thenReturn(true);
+        ActiveUnlockTestUtils.enable(mApplicationContext);
+
+        BiometricsSafetySource.setSafetySourceData(mApplicationContext, EVENT_SOURCE_STATE_CHANGED);
+
+        assertSafetySourceEnabledDataSetWithSingularSummary(
+                "security_settings_face_preference_title",
+                "security_settings_face_preference_summary",
+                Settings.CombinedBiometricSettingsActivity.class.getName());
+    }
+
+    @Test
+    public void setSafetySourceData_activeUnlockEnabled_withFaceAndFingerprint_setsData() {
+        final int enrolledFingerprintsCount = 1;
+        when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
+        when(mFaceManager.isHardwareDetected()).thenReturn(true);
+        when(mFaceManager.hasEnrolledTemplates(anyInt())).thenReturn(true);
+        when(mFingerprintManager.getEnrolledFingerprints(anyInt())).thenReturn(
+                createFingerprintList(enrolledFingerprintsCount));
+        ActiveUnlockTestUtils.enable(mApplicationContext);
+
+        BiometricsSafetySource.setSafetySourceData(mApplicationContext, EVENT_SOURCE_STATE_CHANGED);
+
+        assertSafetySourceEnabledDataSetWithSingularSummary(
+                "security_settings_biometric_preference_title",
+                "security_settings_biometric_preference_summary_both_fp_single",
+                Settings.CombinedBiometricSettingsActivity.class.getName());
+
+    }
+
+    @Test
     public void setSafetySourceData_faceAndFingerprint_whenNoFaceEnrolled_withFingers_setsData() {
         final int enrolledFingerprintsCount = 1;
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
@@ -568,13 +626,12 @@ public class BiometricsSafetySourceTest {
     private void assertSafetySourceDisabledDataSetWithPluralSummary(String expectedTitleResName,
             String expectedSummaryResName, int expectedSummaryQuantity) {
         final int stringResId = ResourcesUtils.getResourcesId(
-                ApplicationProvider.getApplicationContext(), "plurals",
+                ApplicationProvider.getApplicationContext(), "string",
                 expectedSummaryResName);
         assertSafetySourceDisabledDataSet(
                 ResourcesUtils.getResourcesString(mApplicationContext, expectedTitleResName),
-                mApplicationContext.getResources().getQuantityString(stringResId,
-                        expectedSummaryQuantity /* quantity */,
-                        expectedSummaryQuantity /* formatArgs */)
+                StringUtil.getIcuPluralsString(mApplicationContext,
+                        expectedSummaryQuantity, stringResId)
         );
     }
 
@@ -582,13 +639,12 @@ public class BiometricsSafetySourceTest {
             String expectedSummaryResName, int expectedSummaryQuantity,
             String expectedSettingsClassName) {
         final int stringResId = ResourcesUtils.getResourcesId(
-                ApplicationProvider.getApplicationContext(), "plurals",
+                ApplicationProvider.getApplicationContext(), "string",
                 expectedSummaryResName);
         assertSafetySourceEnabledDataSet(
                 ResourcesUtils.getResourcesString(mApplicationContext, expectedTitleResName),
-                mApplicationContext.getResources().getQuantityString(stringResId,
-                        expectedSummaryQuantity /* quantity */,
-                        expectedSummaryQuantity /* formatArgs */),
+                StringUtil.getIcuPluralsString(mApplicationContext,
+                        expectedSummaryQuantity, stringResId),
                 expectedSettingsClassName
         );
     }

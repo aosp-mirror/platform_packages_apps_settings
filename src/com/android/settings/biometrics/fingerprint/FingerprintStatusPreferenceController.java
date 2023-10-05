@@ -87,6 +87,11 @@ public class FingerprintStatusPreferenceController extends BiometricStatusPrefer
     }
 
     @Override
+    protected boolean isHardwareSupported() {
+        return Utils.hasFingerprintHardware(mContext);
+    }
+
+    @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
         updateStateInternal();

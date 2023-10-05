@@ -19,21 +19,30 @@ package com.android.settings.accessibility;
 import android.content.Context;
 import android.provider.Settings;
 
+import androidx.annotation.IntDef;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 
-import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
 import com.google.common.primitives.Ints;
 
-import java.util.Optional;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 /** Preference controller that controls the button or gesture in accessibility button page. */
 public class AccessibilityButtonGesturePreferenceController extends BasePreferenceController
         implements Preference.OnPreferenceChangeListener {
 
-    private Optional<Integer> mDefaultGesture = Optional.empty();
+    @Retention(RetentionPolicy.SOURCE)
+    @IntDef({
+            Mode.BUTTON,
+            Mode.GESTURE,
+    })
+    private @interface Mode {
+        int BUTTON = 1;
+        int GESTURE = 2;
+    }
 
     public AccessibilityButtonGesturePreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -47,12 +56,9 @@ public class AccessibilityButtonGesturePreferenceController extends BasePreferen
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        final ListPreference listPreference = (ListPreference) preference;
         final Integer value = Ints.tryParse((String) newValue);
         if (value != null) {
-            Settings.Secure.putInt(mContext.getContentResolver(),
-                    Settings.Secure.ACCESSIBILITY_BUTTON_MODE, value);
-            updateState(listPreference);
+            putCurrentAccessibilityButtonMode(value);
         }
         return true;
     }
@@ -62,21 +68,17 @@ public class AccessibilityButtonGesturePreferenceController extends BasePreferen
         super.updateState(preference);
         final ListPreference listPreference = (ListPreference) preference;
 
-        listPreference.setValue(getCurrentAccessibilityButtonMode());
+        listPreference.setValue(String.valueOf(getCurrentAccessibilityButtonMode()));
     }
 
-    private String getCurrentAccessibilityButtonMode() {
-        final int mode = Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_BUTTON_MODE, getDefaultGestureValue());
-        return String.valueOf(mode);
+    @Mode
+    private int getCurrentAccessibilityButtonMode() {
+        return Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_BUTTON_MODE, Mode.BUTTON);
     }
 
-    private int getDefaultGestureValue() {
-        if (!mDefaultGesture.isPresent()) {
-            final String[] valuesList = mContext.getResources().getStringArray(
-                    R.array.accessibility_button_gesture_selector_values);
-            mDefaultGesture = Optional.of(Integer.parseInt(valuesList[0]));
-        }
-        return mDefaultGesture.get();
+    private void putCurrentAccessibilityButtonMode(@Mode int mode) {
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_BUTTON_MODE, mode);
     }
 }

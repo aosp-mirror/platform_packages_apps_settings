@@ -41,12 +41,6 @@
         <item name="android:textAppearance">@style/TextAppearance.info_value</item>
     </style>
 
-    <style name="info_small">
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:textAppearance">@style/TextAppearance.info_small</item>
-    </style>
-
     <style name="info_layout">
         <item name="android:orientation">vertical</item>
         <item name="android:paddingStart">10dip</item>
@@ -63,11 +57,6 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="form_value">
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">match_parent</item>
-    </style>
-
     <style name="PreferenceFragmentListSinglePane" parent="@*android:style/PreferenceFragmentList">
         <item name="android:layout_marginStart">0dp</item>
         <item name="android:layout_marginEnd">0dp</item>
@@ -78,22 +67,6 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:scrollbarStyle">outsideOverlay</item>
-    </style>
-
-    <style name="bt_item">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginTop">8dip</item>
-        <item name="android:layout_marginStart">16dip</item>
-        <item name="android:layout_marginEnd">16dip</item>
-        <item name="android:orientation">vertical</item>
-        <item name="android:gravity">start</item>
-    </style>
-
-    <style name="bt_item_edit_content">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">18sp</item>
     </style>
 
     <style name="wifi_item">
@@ -198,18 +171,6 @@
         <item name="android:activityOpenExitAnimation">@anim/confirm_credential_open_exit</item>
     </style>
 
-    <style name="SetupWizardButton.Negative" parent="@style/SudGlifButton.Secondary">
-        <!-- Negative margin to offset for padding of the button itself. We want the label to be
-             aligned with the text above it -->
-        <item name="android:layout_marginStart">-16dp</item>
-    </style>
-
-    <style name="SetupWizardButton.Positive" parent="@style/SudGlifButton.Primary"/>
-
-    <style name="AccentColorHighlightBorderlessButton">
-        <item name="android:colorControlHighlight">?android:attr/colorAccent</item>
-    </style>
-
     <style name="vpn_label">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -233,26 +194,11 @@
         <item name="android:textAppearance">@android:style/TextAppearance.DeviceDefault.Small</item>
     </style>
 
-    <style name="vpn_app_management_version_title">
-        <item name="android:textAppearance">?android:attr/textAppearanceListItem</item>
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
-    </style>
-
-    <style name="vpn_app_management_version_summary">
-        <item name="android:textAppearance">?android:attr/textAppearanceListItemSecondary</item>
-        <item name="android:textColor">?android:attr/textColorSecondary</item>
-    </style>
-
     <style name="TextAppearance" parent="android:TextAppearance.DeviceDefault"/>
 
     <style name="TextAppearance.info_label">
         <item name="android:textSize">14sp</item>
         <item name="android:textStyle">bold</item>
-    </style>
-
-    <style name="TextAppearance.info_small">
-        <item name="android:textSize">12sp</item>
-        <item name="android:textStyle">normal</item>
     </style>
 
     <style name="TextAppearance.info_value">
@@ -336,15 +282,6 @@
         <item name="android:padding">8dp</item>
     </style>
 
-    <style name="TextAppearance.NotificationHistory" parent="@android:style/Theme.DeviceDefault.DayNight">
-        <item name="android:textSize">14sp</item>
-    </style>
-
-    <style name="TextAppearance.NotificationHistory.AppName">
-        <item name="android:fontFamily">@*android:string/config_bodyFontFamily</item>
-        <item name="android:textSize">12sp</item>
-    </style>
-
     <style name="TextAppearance.ContextualCardDismissalText"
            parent="@*android:style/TextAppearance.DeviceDefault.Body1">
         <item name="android:fontFamily">@*android:string/config_headlineFontFamilyMedium</item>
@@ -382,10 +319,8 @@
     </style>
 
     <style name="LanguageCheckboxAndLabel">
-        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginStart">?android:attr/listPreferredItemPaddingStart</item>
-        <item name="android:minHeight">?android:attr/listPreferredItemHeight</item>
         <item name="android:textAppearance">?android:attr/textAppearanceListItem</item>
         <item name="android:gravity">center_vertical</item>
     </style>
@@ -431,6 +366,34 @@
         <item name="android:colorControlHighlight">@color/ripple_material_inverse</item>
     </style>
 
+    <style name="ModifierKeyButtonCancel" parent="@android:style/Widget.Material.Button">
+        <item name="android:background">@drawable/modifier_key_bordered</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:padding">4dp</item>
+    </style>
+
+    <style name="ModifierKeyButtonDone" parent="@android:style/Widget.Material.Button">
+        <item name="android:background">@drawable/modifier_key_colored</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:padding">4dp</item>
+    </style>
+
+    <style name="TrackpadButtonDone" parent="@android:style/Widget.Material.Button">
+        <item name="android:background">@drawable/trackpad_button_done_colored</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:padding">4dp</item>
+    </style>
+
+    <style name="TrackpadButtonCancel" parent="@android:style/Widget.Material.Button">
+        <item name="android:background">@drawable/trackpad_bordered</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:padding">4dp</item>
+    </style>
+
     <style name="LockPatternContainerStyle">
         <item name="android:gravity">center</item>
         <item name="android:maxHeight">@dimen/biometric_auth_pattern_view_max_size</item>
@@ -455,6 +418,17 @@
         <item name="android:layout_gravity">start|top</item>
     </style>
 
+    <style name="WorkChallengeEmergencyButtonStyle">
+        <item name="android:background">@drawable/work_challenge_emergency_button_background</item>
+        <item name="android:textColor">@android:color/system_accent3_900</item>
+        <item name="android:outlineProvider">none</item>
+        <item name="android:paddingTop">15dp</item>
+        <item name="android:paddingBottom">15dp</item>
+        <item name="android:paddingLeft">30dp</item>
+        <item name="android:paddingRight">30dp</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+
     <style name="device_info_dialog_label">
         <item name="android:textAlignment">viewStart</item>
         <item name="android:fontFamily">@*android:string/config_headlineFontFamily</item>
@@ -474,7 +448,7 @@
         <item name="android:layout_marginBottom">@dimen/contextual_card_vertical_margin</item>
         <item name="android:layout_marginStart">@dimen/contextual_card_side_margin</item>
         <item name="android:layout_marginEnd">@dimen/contextual_card_side_margin</item>
-        <item name="cardBackgroundColor">?androidprv:attr/colorSurface</item>
+        <item name="cardBackgroundColor">?androidprv:attr/materialColorSurfaceContainer</item>
         <item name="cardCornerRadius">@dimen/contextual_card_corner_radius</item>
         <item name="cardElevation">0dp</item>
         <item name="rippleColor">?android:attr/colorControlHighlight</item>
@@ -538,10 +512,6 @@
         <item name="headerSubtitleSize">14dp</item>
     </style>
 
-    <style name="Widget.SliceView.Panel.Slider.LargeIcon">
-        <item name="rowStyle">@style/SliceRow.Slider.LargeIcon</item>
-    </style>
-
     <style name="SliceRow">
         <!-- 2dp start padding for the start icon -->
         <item name="titleItemStartPadding">2dp</item>
@@ -591,15 +561,6 @@
         <item name="iconSize">25dp</item>
     </style>
 
-    <style name="SliceRow.Slider.LargeIcon">
-        <!-- 10dp start padding for the start icon -->
-        <item name="titleItemStartPadding">10dp</item>
-        <!-- Title icon size -->
-        <item name="iconSize">36dp</item>
-        <!-- RecycleView item animator -->
-        <item name="disableRecyclerViewItemAnimator">true</item>
-    </style>
-
     <style name="DisclaimerPositiveButton" parent="@style/SudGlifButton.Primary">
         <item name="android:layout_margin">16dp</item>
         <item name="android:paddingStart">8dp</item>
@@ -638,10 +599,6 @@
         <item name="android:textSize">@dimen/notification_importance_button_text</item>
         <item name="android:fontFamily">@*android:string/config_headlineFontFamilyMedium</item>
         <item name="android:gravity">center</item>
-    </style>
-
-    <style name="TextAppearance.NotificationImportanceButton.Selected" parent="TextAppearance.NotificationImportanceButton">
-        <item name="android:textColor">?android:attr/colorAccent</item>
     </style>
 
     <style name="TextAppearance.NotificationImportanceButton.Unselected" parent="TextAppearance.NotificationImportanceButton">
@@ -801,16 +758,6 @@
         <item name="android:gravity">start</item>
     </style>
 
-    <style name="TextAppearance.HeadLineFontFamily"
-           parent="@*android:style/TextAppearance.DeviceDefault.Title">
-        <item name="android:fontFamily">@*android:string/config_headlineFontFamily</item>
-    </style>
-
-    <style name="TextAppearance.HeadLineFontFamily.Subhead"
-           parent="@*android:style/TextAppearance.DeviceDefault.Subhead">
-        <item name="android:fontFamily">@*android:string/config_headlineFontFamily</item>
-    </style>
-
     <style name="HomepageTitleText" parent="CollapsingToolbarTitle.Expanded">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -894,7 +841,6 @@
     </style>
 
     <style name="AppAuthenticationPolicyText">
-        <item name="android:maxLines">1</item>
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">?android:attr/textColorPrimary</item>
     </style>
@@ -991,5 +937,14 @@
         <item name="android:textSize">14sp</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="BiometricsEnrollStyle">
+        <item name="biometricsEnrollIcon">@color/udfps_enroll_icon</item>
+        <item name="biometricsMovingTargetFill">@color/udfps_moving_target_fill</item>
+        <item name="biometricsMovingTargetFillError">@color/udfps_moving_target_fill_error</item>
+        <item name="biometricsEnrollProgress">@color/udfps_enroll_progress</item>
+        <item name="biometricsEnrollProgressHelp">@color/udfps_enroll_progress_help</item>
+        <item name="biometricsEnrollProgressHelpWithTalkback">@color/udfps_enroll_progress_help_with_talkback</item>
     </style>
 </resources>

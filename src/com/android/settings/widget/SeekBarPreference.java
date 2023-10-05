@@ -27,6 +27,7 @@ import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.SeekBar;
@@ -42,7 +43,7 @@ import com.android.settingslib.RestrictedPreference;
  * Based on android.preference.SeekBarPreference, but uses support preference as base.
  */
 public class SeekBarPreference extends RestrictedPreference
-        implements OnSeekBarChangeListener, View.OnKeyListener {
+        implements OnSeekBarChangeListener, View.OnKeyListener, View.OnHoverListener {
 
     public static final int HAPTIC_FEEDBACK_MODE_NONE = 0;
     public static final int HAPTIC_FEEDBACK_MODE_ON_TICKS = 1;
@@ -64,6 +65,7 @@ public class SeekBarPreference extends RestrictedPreference
     private CharSequence mOverrideSeekBarStateDescription;
     private CharSequence mSeekBarContentDescription;
     private CharSequence mSeekBarStateDescription;
+    private OnSeekBarChangeListener mOnSeekBarChangeListener;
 
     public SeekBarPreference(
             Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
@@ -101,6 +103,14 @@ public class SeekBarPreference extends RestrictedPreference
         this(context, null);
     }
 
+    /**
+     * A callback that notifies clients when the seekbar progress level has been
+     * changed. See {@link OnSeekBarChangeListener} for more info.
+     */
+    public void setOnSeekBarChangeListener(OnSeekBarChangeListener listener) {
+        mOnSeekBarChangeListener = listener;
+    }
+
     public void setShouldBlink(boolean shouldBlink) {
         mShouldBlink = shouldBlink;
         notifyChanged();
@@ -119,6 +129,7 @@ public class SeekBarPreference extends RestrictedPreference
     public void onBindViewHolder(PreferenceViewHolder view) {
         super.onBindViewHolder(view);
         view.itemView.setOnKeyListener(this);
+        view.itemView.setOnHoverListener(this);
         mSeekBar = (SeekBar) view.findViewById(
                 com.android.internal.R.id.seekbar);
         mSeekBar.setOnSeekBarChangeListener(this);
@@ -301,6 +312,9 @@ public class SeekBarPreference extends RestrictedPreference
         if (fromUser && (mContinuousUpdates || !mTrackingTouch)) {
             syncProgress(seekBar);
         }
+        if (mOnSeekBarChangeListener != null) {
+            mOnSeekBarChangeListener.onProgressChanged(seekBar, progress, fromUser);
+        }
     }
 
     @Override
@@ -309,6 +323,9 @@ public class SeekBarPreference extends RestrictedPreference
         mJankMonitor.begin(InteractionJankMonitor.Configuration.Builder
                 .withView(CUJ_SETTINGS_SLIDER, seekBar)
                 .setTag(getKey()));
+        if (mOnSeekBarChangeListener != null) {
+            mOnSeekBarChangeListener.onStartTrackingTouch(seekBar);
+        }
     }
 
     @Override
@@ -316,6 +333,9 @@ public class SeekBarPreference extends RestrictedPreference
         mTrackingTouch = false;
         if (seekBar.getProgress() != mProgress) {
             syncProgress(seekBar);
+        }
+        if (mOnSeekBarChangeListener != null) {
+            mOnSeekBarChangeListener.onStopTrackingTouch(seekBar);
         }
         mJankMonitor.end(CUJ_SETTINGS_SLIDER);
     }
@@ -394,6 +414,19 @@ public class SeekBarPreference extends RestrictedPreference
         mMax = myState.max;
         mMin = myState.min;
         notifyChanged();
+    }
+
+    @Override
+    public boolean onHover(View v, MotionEvent event) {
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_HOVER_ENTER:
+                v.setHovered(true);
+                break;
+            case MotionEvent.ACTION_HOVER_EXIT:
+                v.setHovered(false);
+                break;
+        }
+        return false;
     }
 
     /**

@@ -59,7 +59,7 @@ public class AppLocalePreferenceController extends AppInfoPreferenceControllerBa
 
     @Override
     public CharSequence getSummary() {
-        return AppLocaleDetails.getSummary(mContext, mParent.getAppEntry());
+        return AppLocaleDetails.getSummary(mContext, mParent.getAppEntry().info);
     }
 
     @Override
@@ -82,6 +82,6 @@ public class AppLocalePreferenceController extends AppInfoPreferenceControllerBa
     @VisibleForTesting
     boolean canDisplayLocaleUi() {
         return AppLocaleUtil
-                .canDisplayLocaleUi(mContext, mParent.getAppEntry().info.packageName, mListInfos);
+                .canDisplayLocaleUi(mContext, mParent.getAppEntry().info, mListInfos);
     }
 }

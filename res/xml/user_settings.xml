@@ -73,10 +73,18 @@
         android:order="55"/>
 
     <com.android.settingslib.RestrictedSwitchPreference
-            android:key="remove_guest_on_exit"
-            android:title="@string/remove_guest_on_exit"
-            android:summary="@string/remove_guest_on_exit_summary"
-            android:order="60"/>
+        android:key="remove_guest_on_exit"
+        android:title="@string/remove_guest_on_exit"
+        android:summary="@string/remove_guest_on_exit_summary"
+        android:order="60"
+        settings:keywords="@string/remove_guest_on_exit_keywords"/>
+
+    <com.android.settingslib.RestrictedSwitchPreference
+        android:key="enable_guest_calling"
+        android:title="@string/enable_guest_calling"
+        android:summary="@string/enable_guest_calling_summary"
+        android:singleLineTitle="false"
+        android:order="65"/>
 
     <com.android.settingslib.RestrictedSwitchPreference
         android:key="user_settings_add_users_when_locked"

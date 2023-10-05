@@ -44,7 +44,6 @@ import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
-import android.sysprop.VoldProperties;
 import android.telephony.euicc.EuiccManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -64,6 +63,7 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
+import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.ConfirmLockPattern;
 import com.android.settingslib.RestrictedLockUtilsInternal;
@@ -309,12 +309,9 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
          * If the external storage is emulated, it will be erased with a factory
          * reset at any rate. There is no need to have a separate option until
          * we have a factory reset that only erases some directories and not
-         * others. Likewise, if it's non-removable storage, it could potentially have been
-         * encrypted, and will also need to be wiped.
+         * others.
          */
-        boolean isExtStorageEmulated = Environment.isExternalStorageEmulated();
-        if (isExtStorageEmulated
-                || (!Environment.isExternalStorageRemovable() && isExtStorageEncrypted())) {
+        if (Environment.isExternalStorageEmulated()) {
             mExternalStorageContainer.setVisibility(View.GONE);
 
             final View externalOption = mContentView.findViewById(R.id.erase_external_option_text);
@@ -323,9 +320,7 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
             final View externalAlsoErased = mContentView.findViewById(R.id.also_erases_external);
             externalAlsoErased.setVisibility(View.VISIBLE);
 
-            // If it's not emulated, it is on a separate partition but it means we're doing
-            // a force wipe due to encryption.
-            mExternalStorage.setChecked(!isExtStorageEmulated);
+            mExternalStorage.setChecked(false);
         } else {
             mExternalStorageContainer.setOnClickListener(new View.OnClickListener() {
 
@@ -382,6 +377,14 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
     }
 
     /**
+     * Whether to show any UI which is SIM related.
+     */
+    @VisibleForTesting
+    boolean showAnySubscriptionInfo(Context context) {
+        return (context != null) && SubscriptionUtil.isSimHardwareVisible(context);
+    }
+
+    /**
      * Whether to show strings indicating that the eUICC will be wiped.
      *
      * <p>We show the strings on any device which supports eUICC as long as the eUICC was ever
@@ -390,7 +393,7 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
     @VisibleForTesting
     boolean showWipeEuicc() {
         Context context = getContext();
-        if (!isEuiccEnabled(context)) {
+        if (!showAnySubscriptionInfo(context) || !isEuiccEnabled(context)) {
             return false;
         }
         ContentResolver cr = context.getContentResolver();
@@ -455,11 +458,6 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
             description.append(vText.getText());
             description.append(","); // Allow Talkback to pause between sections.
         }
-    }
-
-    private boolean isExtStorageEncrypted() {
-        String state = VoldProperties.decrypt().orElse("");
-        return !"".equals(state);
     }
 
     private void loadAccountList(final UserManager um) {

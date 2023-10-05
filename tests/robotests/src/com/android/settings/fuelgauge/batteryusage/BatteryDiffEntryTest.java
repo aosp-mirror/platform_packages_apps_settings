@@ -17,10 +17,10 @@ package com.android.settings.fuelgauge.batteryusage;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.spy;
 
 import android.content.ContentValues;
@@ -97,11 +97,16 @@ public final class BatteryDiffEntryTest {
                         mContext,
                         /*foregroundUsageTimeInMs=*/ 10001L,
                         /*backgroundUsageTimeInMs=*/ 20002L,
+                        /*screenOnTimeInMs=*/ 30003L,
                         /*consumePower=*/ 22.0,
+                        /*foregroundUsageConsumePower=*/ 10.0,
+                        /*foregroundServiceUsageConsumePower=*/ 10.0,
+                        /*backgroundUsageConsumePower=*/ 1.0,
+                        /*cachedUsageConsumePower=*/ 1.0,
                         /*batteryHistEntry=*/ null);
         entry.setTotalConsumePower(100.0);
 
-        assertThat(entry.getPercentOfTotal()).isEqualTo(22.0);
+        assertThat(entry.getPercentage()).isEqualTo(22.0);
     }
 
     @Test
@@ -111,25 +116,37 @@ public final class BatteryDiffEntryTest {
                         mContext,
                         /*foregroundUsageTimeInMs=*/ 10001L,
                         /*backgroundUsageTimeInMs=*/ 20002L,
+                        /*screenOnTimeInMs=*/ 30003L,
                         /*consumePower=*/ 22.0,
+                        /*foregroundUsageConsumePower=*/ 10.0,
+                        /*foregroundServiceUsageConsumePower=*/ 10.0,
+                        /*backgroundUsageConsumePower=*/ 1.0,
+                        /*cachedUsageConsumePower=*/ 1.0,
                         /*batteryHistEntry=*/ null);
         entry.setTotalConsumePower(0);
 
-        assertThat(entry.getPercentOfTotal()).isEqualTo(0);
+        assertThat(entry.getPercentage()).isEqualTo(0);
     }
 
     @Test
     public void testComparator_sortCollectionsInDescOrder() {
         final List<BatteryDiffEntry> entryList = new ArrayList<>();
         // Generates fake testing data.
+        BatteryDiffEntry systemAppsBatteryDiffEntry =
+                new BatteryDiffEntry.SystemAppsBatteryDiffEntry(mContext);
+        systemAppsBatteryDiffEntry.mConsumePower = 16;
+        systemAppsBatteryDiffEntry.setTotalConsumePower(100);
+        entryList.add(systemAppsBatteryDiffEntry);
         entryList.add(createBatteryDiffEntry(30, mBatteryHistEntry));
         entryList.add(createBatteryDiffEntry(20, mBatteryHistEntry));
         entryList.add(createBatteryDiffEntry(10, mBatteryHistEntry));
+
         Collections.sort(entryList, BatteryDiffEntry.COMPARATOR);
 
-        assertThat(entryList.get(0).getPercentOfTotal()).isEqualTo(30);
-        assertThat(entryList.get(1).getPercentOfTotal()).isEqualTo(20);
-        assertThat(entryList.get(2).getPercentOfTotal()).isEqualTo(10);
+        assertThat(entryList.get(0).getPercentage()).isEqualTo(30);
+        assertThat(entryList.get(1).getPercentage()).isEqualTo(20);
+        assertThat(entryList.get(2).getPercentage()).isEqualTo(10);
+        assertThat(entryList.get(3).getPercentage()).isEqualTo(16);
     }
 
     @Test
@@ -138,8 +155,13 @@ public final class BatteryDiffEntryTest {
         // Generates fake testing data.
         final ContentValues values = getContentValuesWithType(
                 ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY);
-        values.put(BatteryHistEntry.KEY_DRAIN_TYPE,
-                Integer.valueOf(BatteryConsumer.POWER_COMPONENT_AMBIENT_DISPLAY));
+        final BatteryInformation batteryInformation =
+                BatteryInformation
+                        .newBuilder()
+                        .setDrainType(BatteryConsumer.POWER_COMPONENT_AMBIENT_DISPLAY)
+                        .build();
+        values.put(BatteryHistEntry.KEY_BATTERY_INFORMATION,
+                ConvertUtils.convertBatteryInformationToString(batteryInformation));
         final BatteryHistEntry batteryHistEntry = new BatteryHistEntry(values);
 
         final BatteryDiffEntry entry = createBatteryDiffEntry(10, batteryHistEntry);
@@ -153,8 +175,8 @@ public final class BatteryDiffEntryTest {
         assertThat(nameAndIcon.mName).isEqualTo(expectedName);
         assertThat(nameAndIcon.mIconId).isEqualTo(R.drawable.ic_settings_aod);
         // Verifies the restrictable flag in the cache.
-        assertThat(entry.mValidForRestriction).isTrue();
-        assertThat(BatteryDiffEntry.sValidForRestriction.get(entry.getKey())).isTrue();
+        assertThat(entry.mValidForRestriction).isFalse();
+        assertThat(BatteryDiffEntry.sValidForRestriction.get(entry.getKey())).isFalse();
     }
 
     @Test
@@ -179,8 +201,8 @@ public final class BatteryDiffEntryTest {
         assertThat(nameAndIcon.mName).isEqualTo(expectedName);
         assertThat(nameAndIcon.mIconId).isEqualTo(0);
         // Verifies the restrictable flag in the cache.
-        assertThat(entry.mValidForRestriction).isTrue();
-        assertThat(BatteryDiffEntry.sValidForRestriction.get(entry.getKey())).isTrue();
+        assertThat(entry.mValidForRestriction).isFalse();
+        assertThat(BatteryDiffEntry.sValidForRestriction.get(entry.getKey())).isFalse();
     }
 
     @Test
@@ -233,7 +255,13 @@ public final class BatteryDiffEntryTest {
         final String expectedAppLabel = "fake app label";
         final ContentValues values = getContentValuesWithType(
                 ConvertUtils.CONSUMER_TYPE_UID_BATTERY);
-        values.put(BatteryHistEntry.KEY_APP_LABEL, expectedAppLabel);
+        final BatteryInformation batteryInformation =
+                BatteryInformation
+                        .newBuilder()
+                        .setAppLabel(expectedAppLabel)
+                        .build();
+        values.put(BatteryHistEntry.KEY_BATTERY_INFORMATION,
+                ConvertUtils.convertBatteryInformationToString(batteryInformation));
         final BatteryHistEntry batteryHistEntry = new BatteryHistEntry(values);
 
         final BatteryDiffEntry entry = createBatteryDiffEntry(10, batteryHistEntry);
@@ -350,39 +378,12 @@ public final class BatteryDiffEntryTest {
     }
 
     @Test
-    public void testIsSystemEntry_uidBatteryWithHiddenState_returnTrue() {
-        final BatteryDiffEntry entry =
-                createBatteryDiffEntry(
-                        ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
-                        /*uid=*/ 123, /*isHidden=*/ true);
-        assertThat(entry.isSystemEntry()).isTrue();
-    }
-
-    @Test
     public void testIsSystemEntry_uidBatteryWithSystemProcess_returnFalse() {
         final BatteryDiffEntry entry =
                 createBatteryDiffEntry(
                         ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
                         /*uid=*/ 1230, /*isHidden=*/ false);
         assertThat(entry.isSystemEntry()).isFalse();
-    }
-
-    @Test
-    public void testIsSystemEntry_uidBatteryWithTetheringProcess_returnTrue() {
-        final BatteryDiffEntry entry =
-                createBatteryDiffEntry(
-                        ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
-                        /*uid=*/ BatteryUtils.UID_TETHERING, /*isHidden=*/ false);
-        assertThat(entry.isSystemEntry()).isTrue();
-    }
-
-    @Test
-    public void testIsSystemEntry_uidBatteryWithRemovedAppsProcess_returnTrue() {
-        final BatteryDiffEntry entry =
-                createBatteryDiffEntry(
-                        ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
-                        /*uid=*/ BatteryUtils.UID_REMOVED_APPS, /*isHidden=*/ false);
-        assertThat(entry.isSystemEntry()).isTrue();
     }
 
     @Test
@@ -445,29 +446,27 @@ public final class BatteryDiffEntryTest {
         assertThat(entry.getPackageName()).isEqualTo(expectedPackageName);
     }
 
-    @Test
-    public void getAppLabel_withOtherUsersUid_returnExpectedLabel() {
-        final ContentValues values = getContentValuesWithType(
-                ConvertUtils.CONSUMER_TYPE_UID_BATTERY);
-        values.put(BatteryHistEntry.KEY_UID, BatteryUtils.UID_OTHER_USERS);
-
-        final BatteryDiffEntry batteryDiffEntry = createBatteryDiffEntry(
-                /*consumePower=*/ 0, new BatteryHistEntry(values));
-
-        assertThat(batteryDiffEntry.getAppLabel())
-                .isEqualTo(mContext.getString(R.string.battery_usage_other_users));
-    }
-
     private BatteryDiffEntry createBatteryDiffEntry(
             int consumerType, long uid, boolean isHidden) {
         final ContentValues values = getContentValuesWithType(consumerType);
-        values.put(BatteryHistEntry.KEY_IS_HIDDEN, isHidden);
+        final BatteryInformation batteryInformation =
+                BatteryInformation
+                        .newBuilder()
+                        .setIsHidden(isHidden)
+                        .build();
+        values.put(BatteryHistEntry.KEY_BATTERY_INFORMATION,
+                ConvertUtils.convertBatteryInformationToString(batteryInformation));
         values.put(BatteryHistEntry.KEY_UID, uid);
         return new BatteryDiffEntry(
                 mContext,
                 /*foregroundUsageTimeInMs=*/ 0,
                 /*backgroundUsageTimeInMs=*/ 0,
+                /*screenOnTimeInMs=*/ 0,
                 /*consumePower=*/ 0,
+                /*foregroundUsageConsumePower=*/ 0,
+                /*foregroundServiceUsageConsumePower=*/ 0,
+                /*backgroundUsageConsumePower=*/ 0,
+                /*cachedUsageConsumePower=*/ 0,
                 new BatteryHistEntry(values));
     }
 
@@ -477,7 +476,12 @@ public final class BatteryDiffEntryTest {
                 mContext,
                 /*foregroundUsageTimeInMs=*/ 0,
                 /*backgroundUsageTimeInMs=*/ 0,
+                /*screenOnTimeInMs=*/ 0,
                 consumePower,
+                /*foregroundUsageConsumePower=*/ 0,
+                /*foregroundServiceUsageConsumePower=*/ 0,
+                /*backgroundUsageConsumePower=*/ 0,
+                /*cachedUsageConsumePower=*/ 0,
                 batteryHistEntry);
         entry.setTotalConsumePower(100.0);
         return entry;

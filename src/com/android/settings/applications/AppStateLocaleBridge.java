@@ -55,8 +55,7 @@ public class AppStateLocaleBridge extends AppStateBaseBridge {
         AppInfoByProfiles appInfoByProfiles = getAppInfo(UserHandle.getUserId(uid));
 
         app.extraInfo = AppLocaleUtil.canDisplayLocaleUi(appInfoByProfiles.mContextAsUser,
-                app.info.packageName,
-                appInfoByProfiles.mListInfos) ? Boolean.TRUE : Boolean.FALSE;
+                app.info, appInfoByProfiles.mListInfos) ? Boolean.TRUE : Boolean.FALSE;
     }
 
     @Override
@@ -67,8 +66,7 @@ public class AppStateLocaleBridge extends AppStateBaseBridge {
             AppInfoByProfiles appInfoByProfiles = getAppInfo(UserHandle.getUserId(app.info.uid));
 
             app.extraInfo = AppLocaleUtil.canDisplayLocaleUi(appInfoByProfiles.mContextAsUser,
-                    app.info.packageName,
-                    appInfoByProfiles.mListInfos) ? Boolean.TRUE : Boolean.FALSE;
+                    app.info, appInfoByProfiles.mListInfos) ? Boolean.TRUE : Boolean.FALSE;
         }
     }
 

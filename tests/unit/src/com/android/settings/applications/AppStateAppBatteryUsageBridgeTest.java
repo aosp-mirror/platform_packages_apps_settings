@@ -40,7 +40,7 @@ public final class AppStateAppBatteryUsageBridgeTest {
 
   @Test
   public void updateExtraInfo_updatesRestricted() {
-    when(mPowerAllowlistBackend.isAllowlisted(TEST_PACKAGE_1)).thenReturn(false);
+    when(mPowerAllowlistBackend.isAllowlisted(TEST_PACKAGE_1, UID_1)).thenReturn(false);
     when(mAppOpsManager.checkOpNoThrow(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND,
             UID_1, TEST_PACKAGE_1)).thenReturn(AppOpsManager.MODE_IGNORED);
     AppStateAppBatteryUsageBridge bridge =
@@ -59,7 +59,7 @@ public final class AppStateAppBatteryUsageBridgeTest {
 
   @Test
   public void updateExtraInfo_updatesUnrestricted() {
-    when(mPowerAllowlistBackend.isAllowlisted(TEST_PACKAGE_1)).thenReturn(true);
+    when(mPowerAllowlistBackend.isAllowlisted(TEST_PACKAGE_1, UID_1)).thenReturn(true);
     when(mAppOpsManager.checkOpNoThrow(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND,
             UID_2, TEST_PACKAGE_2)).thenReturn(AppOpsManager.MODE_ALLOWED);
     AppStateAppBatteryUsageBridge bridge =
