@@ -67,7 +67,7 @@ class UserAspectRatioAppsPageProviderTest {
     fun injectEntry_summary() {
         setInjectEntry()
         composeTestRule
-            .onNodeWithText(context.getString(R.string.aspect_ratio_summary, Build.MODEL))
+            .onNodeWithText(context.getString(R.string.aspect_ratio_summary_text, Build.MODEL))
             .assertIsDisplayed()
     }
 

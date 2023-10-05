@@ -112,18 +112,20 @@
         android:title="@string/advanced_apps"
         android:order="21"
         android:visibility="gone"
-        settings:searchable="false"/>
+        settings:searchable="false"
+        settings:controller="com.android.settings.widget.PreferenceCategoryController">
 
-    <Preference
-        android:key="aspect_ratio_apps"
-        android:title="@string/aspect_ratio_experimental_title"
-        android:summary="@string/summary_placeholder"
-        android:order="22"
-        settings:controller="com.android.settings.applications.appcompat.UserAspectRatioAppsPreferenceController"
-        android:fragment="com.android.settings.applications.manageapplications.ManageApplications">
-        <extra android:name="classname"
-               android:value="com.android.settings.Settings$UserAspectRatioAppListActivity"/>
-        <intent android:action="android.settings.MANAGE_USER_ASPECT_RATIO_SETTINGS"/>
-    </Preference>
+        <Preference
+            android:key="aspect_ratio_apps"
+            android:title="@string/aspect_ratio_experimental_title"
+            android:summary="@string/summary_placeholder"
+            android:order="22"
+            settings:controller="com.android.settings.applications.appcompat.UserAspectRatioAppsPreferenceController"
+            android:fragment="com.android.settings.applications.manageapplications.ManageApplications">
+            <extra android:name="classname"
+                   android:value="com.android.settings.Settings$UserAspectRatioAppListActivity"/>
+            <intent android:action="android.settings.MANAGE_USER_ASPECT_RATIO_SETTINGS"/>
+        </Preference>
+    </PreferenceCategory>
 
 </PreferenceScreen>

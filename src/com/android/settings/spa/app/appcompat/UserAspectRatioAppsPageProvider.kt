@@ -95,7 +95,7 @@ object UserAspectRatioAppsPageProvider : SettingsPageProvider {
 
     @Composable
     @VisibleForTesting
-    fun getSummary(): String = stringResource(R.string.aspect_ratio_summary, Build.MODEL)
+    fun getSummary(): String = stringResource(R.string.aspect_ratio_summary_text, Build.MODEL)
 }
 
 @Composable
@@ -109,7 +109,7 @@ fun UserAspectRatioAppList(
         appList = appList,
         header = {
             Box(Modifier.padding(SettingsDimension.itemPadding)) {
-                SettingsBody(stringResource(R.string.aspect_ratio_main_summary, Build.MODEL))
+                SettingsBody(stringResource(R.string.aspect_ratio_main_summary_text, Build.MODEL))
             }
             Illustration(object : IllustrationModel {
                 override val resId = R.raw.user_aspect_ratio_education
