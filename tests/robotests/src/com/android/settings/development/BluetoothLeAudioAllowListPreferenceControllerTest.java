@@ -18,16 +18,24 @@ package com.android.settings.development;
 
 import static android.bluetooth.BluetoothStatusCodes.FEATURE_SUPPORTED;
 
+import static com.android.settings.development.BluetoothLeAudioAllowListPreferenceController
+        .BYPASS_LE_AUDIO_ALLOWLIST_PROPERTY;
+
+import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verify;
 
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
+import android.os.SystemProperties;
 
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -41,25 +49,59 @@ public class BluetoothLeAudioAllowListPreferenceControllerTest {
     private PreferenceScreen mPreferenceScreen;
     @Mock
     private DevelopmentSettingsDashboardFragment mFragment;
-
     @Mock
     private BluetoothAdapter mBluetoothAdapter;
-
-    private Context mContext;
+    @Mock
     private SwitchPreference mPreference;
-    private BluetoothLeAudioPreferenceController mController;
+    private Context mContext;
+    private BluetoothLeAudioAllowListPreferenceController mController;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mPreference = new SwitchPreference(mContext);
-        mController = spy(new BluetoothLeAudioPreferenceController(mContext, mFragment));
+        mController = spy(new BluetoothLeAudioAllowListPreferenceController(mContext, mFragment));
         when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))
             .thenReturn(mPreference);
         mController.mBluetoothAdapter = mBluetoothAdapter;
         mController.displayPreference(mPreferenceScreen);
         when(mBluetoothAdapter.isLeAudioSupported())
             .thenReturn(FEATURE_SUPPORTED);
+    }
+
+    @Test
+    public void onPreferenceChange_setCheck_shouldBypassLeAudioAllowlist() {
+        mController.onPreferenceChange(mPreference, Boolean.TRUE);
+        assertThat(SystemProperties.getBoolean(BYPASS_LE_AUDIO_ALLOWLIST_PROPERTY,
+                false)).isTrue();
+    }
+
+    @Test
+    public void onPreferenceChange_setUnCheck_shouldNotBypassLeAudioAllowlist() {
+        mController.onPreferenceChange(mPreference, Boolean.FALSE);
+        assertThat(SystemProperties.getBoolean(BYPASS_LE_AUDIO_ALLOWLIST_PROPERTY,
+                true)).isFalse();
+    }
+
+    @Test
+    public void updateState_bluetoothOff_shouldDisableToggle() {
+        mController.mBluetoothAdapter = null;
+        mController.updateState(mPreference);
+        verify(mPreference).setEnabled(false);
+    }
+
+    @Test
+    public void updateState_bluetoothOn_shouldShowStatus() {
+        SystemProperties.set(BYPASS_LE_AUDIO_ALLOWLIST_PROPERTY, Boolean.toString(true));
+        mController.updateState(mPreference);
+        verify(mPreference).setChecked(true);
+    }
+
+    @Test
+    public void onDeveloperOptionsSwitchDisabled_shouldSetBypassLeAudioAllowlistToFalse() {
+        SystemProperties.set(BYPASS_LE_AUDIO_ALLOWLIST_PROPERTY, Boolean.toString(true));
+        mController.onDeveloperOptionsSwitchDisabled();
+        verify(mPreference).setEnabled(false);
+        assertThat(SystemProperties.getBoolean(BYPASS_LE_AUDIO_ALLOWLIST_PROPERTY, true)).isFalse();
     }
 }

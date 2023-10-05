@@ -21,6 +21,7 @@ import android.bluetooth.BluetoothManager;
 import android.bluetooth.BluetoothStatusCodes;
 import android.content.Context;
 import android.os.SystemProperties;
+import android.sysprop.BluetoothProperties;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -38,14 +39,15 @@ public class BluetoothLeAudioAllowListPreferenceController
 
     private static final String PREFERENCE_KEY = "bluetooth_bypass_leaudio_allowlist";
 
-    private static final String LE_AUDIO_ALLOW_LIST_SWITCH_SUPPORT_PROPERTY =
-            "ro.bluetooth.leaudio_allow_list.supported";
+    static final String LE_AUDIO_CONNECTION_BY_DEFAULT_PROPERTY =
+            "ro.bluetooth.leaudio.le_audio_connection_by_default";
     @VisibleForTesting
-    static final String LE_AUDIO_ALLOW_LIST_ENABLED_PROPERTY =
-            "persist.bluetooth.leaudio.enable_allow_list";
+    static final String BYPASS_LE_AUDIO_ALLOWLIST_PROPERTY =
+            "persist.bluetooth.leaudio.bypass_allow_list";
 
     @VisibleForTesting
     BluetoothAdapter mBluetoothAdapter;
+    @VisibleForTesting boolean mLeAudioConnectionByDefault;
 
     private final DevelopmentSettingsDashboardFragment mFragment;
 
@@ -54,6 +56,8 @@ public class BluetoothLeAudioAllowListPreferenceController
         super(context);
         mFragment = fragment;
         mBluetoothAdapter = context.getSystemService(BluetoothManager.class).getAdapter();
+        mLeAudioConnectionByDefault =
+                SystemProperties.getBoolean(LE_AUDIO_CONNECTION_BY_DEFAULT_PROPERTY, true);
     }
 
     @Override
@@ -62,28 +66,47 @@ public class BluetoothLeAudioAllowListPreferenceController
     }
 
     @Override
+    public boolean isAvailable() {
+        return BluetoothProperties.isProfileBapUnicastClientEnabled().orElse(false)
+                && mLeAudioConnectionByDefault;
+    }
+
+    @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        return false;
+        final boolean isBypassed = (Boolean) newValue;
+        SystemProperties.set(BYPASS_LE_AUDIO_ALLOWLIST_PROPERTY,
+                isBypassed ? "true" : "false");
+        return true;
     }
 
     @Override
     public void updateState(Preference preference) {
         if (mBluetoothAdapter == null) {
+            mPreference.setEnabled(false);
             return;
         }
 
-        final int leAudioSupportedState = mBluetoothAdapter.isLeAudioSupported();
-        final boolean leAudioEnabled =
-                (leAudioSupportedState == BluetoothStatusCodes.FEATURE_SUPPORTED);
-        final boolean leAudioAllowListSupport =
-                SystemProperties.getBoolean(LE_AUDIO_ALLOW_LIST_SWITCH_SUPPORT_PROPERTY, false);
-
-        if (leAudioEnabled && leAudioAllowListSupport) {
-            final boolean leAudioAllowListEnabled =
-                    SystemProperties.getBoolean(LE_AUDIO_ALLOW_LIST_ENABLED_PROPERTY, false);
-            ((SwitchPreference) mPreference).setChecked(!leAudioAllowListEnabled);
-        } else {
+        final boolean isLeAudioSupported =
+                (mBluetoothAdapter.isLeAudioSupported() == BluetoothStatusCodes.FEATURE_SUPPORTED);
+        if (!isLeAudioSupported) {
             mPreference.setEnabled(false);
+            ((SwitchPreference) mPreference).setChecked(false);
+            return;
+        }
+
+        mPreference.setEnabled(true);
+        final boolean isLeAudioAllowlistBypassed =
+                SystemProperties.getBoolean(BYPASS_LE_AUDIO_ALLOWLIST_PROPERTY, false);
+        ((SwitchPreference) mPreference).setChecked(isLeAudioAllowlistBypassed);
+    }
+
+    @Override
+    protected void onDeveloperOptionsSwitchDisabled() {
+        super.onDeveloperOptionsSwitchDisabled();
+        final boolean isBypassed =
+                SystemProperties.getBoolean(BYPASS_LE_AUDIO_ALLOWLIST_PROPERTY, false);
+        if (isBypassed) {
+            SystemProperties.set(BYPASS_LE_AUDIO_ALLOWLIST_PROPERTY, Boolean.toString(false));
             ((SwitchPreference) mPreference).setChecked(false);
         }
     }
