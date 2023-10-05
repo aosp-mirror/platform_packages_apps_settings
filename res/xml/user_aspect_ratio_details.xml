@@ -21,6 +21,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title="@string/aspect_ratio_experimental_title">
 
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="app_aspect_ratio_summary"
+        android:order="-1001"
+        android:title="@string/summary_placeholder"
+        settings:searchable="false"/>
+
     <com.android.settingslib.widget.ActionButtonsPreference
         android:key="header_view" />
 

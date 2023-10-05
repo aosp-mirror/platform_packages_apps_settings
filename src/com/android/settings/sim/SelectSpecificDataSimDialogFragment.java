@@ -136,10 +136,12 @@ public class SelectSpecificDataSimDialogFragment extends SimDialogFragment imple
 
         if ((newSubInfo.isEmbedded()
             && (newSubInfo.getProfileClass() == PROFILE_CLASS_PROVISIONING
-            || (Flags.oemEnabledSatelliteFlag() && newSubInfo.isNtn())))
+                || (Flags.oemEnabledSatelliteFlag()
+                    && newSubInfo.isOnlyNonTerrestrialNetwork())))
             || (currentDataSubInfo.isEmbedded()
             && (currentDataSubInfo.getProfileClass() == PROFILE_CLASS_PROVISIONING
-            || (Flags.oemEnabledSatelliteFlag() && currentDataSubInfo.isNtn())))) {
+                || (Flags.oemEnabledSatelliteFlag()
+                    && currentDataSubInfo.isOnlyNonTerrestrialNetwork())))) {
             Log.d(TAG, "do not set the provisioning or satellite eSIM");
             dismiss();
             return;
