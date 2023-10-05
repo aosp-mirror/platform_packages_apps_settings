@@ -31,7 +31,7 @@ import java.util.Map;
  * information.
  */
 public class LocaleNotificationDataManager {
-    private static final String LOCALE_NOTIFICATION = "locale_notification";
+    public static final String LOCALE_NOTIFICATION = "locale_notification";
     private Context mContext;
 
     /**
