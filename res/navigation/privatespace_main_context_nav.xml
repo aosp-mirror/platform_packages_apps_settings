@@ -21,5 +21,29 @@
             app:startDestination="@id/ps_education_fragment">
     <fragment android:id="@+id/ps_education_fragment"
               android:name="com.android.settings.privatespace.PrivateSpaceEducation"
-              android:label="fragment_ps_education"/>
+              android:label="fragment_ps_education">
+        <action
+            android:id="@+id/action_education_to_auto_advance"
+            app:destination="@id/ps_auto_advance_fragment"/>
+    </fragment>
+    <fragment android:id="@+id/ps_auto_advance_fragment"
+              android:name="com.android.settings.privatespace.AutoAdvanceSetupFragment"
+              android:label="fragment_ps_auto_advance">
+        <action
+            android:id="@+id/action_advance_profile_error"
+            app:destination="@id/ps_profile_error_fragment"/>
+        <action
+            android:id="@+id/action_advance_to_success"
+            app:destination="@id/ps_profile_success_fragment"/>
+    </fragment>
+    <fragment android:id="@+id/ps_profile_error_fragment"
+              android:name="com.android.settings.privatespace.PrivateProfileCreationError"
+              android:label="fragment_ps_error">
+        <action
+            android:id="@+id/action_retry_profile_creation"
+            app:destination="@id/ps_auto_advance_fragment"/>
+    </fragment>
+    <fragment android:id="@+id/ps_profile_success_fragment"
+              android:name="com.android.settings.privatespace.SetupSuccessFragment"
+              android:label="fragment_ps_success"/>
 </navigation>

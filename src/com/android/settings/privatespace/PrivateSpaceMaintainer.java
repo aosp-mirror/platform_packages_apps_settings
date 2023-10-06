@@ -162,6 +162,15 @@ public class PrivateSpaceMaintainer {
                 /* title= */ null, /* description= */ null);
     }
 
+    /** Returns Private profile user handle if private profile exists otherwise returns null. */
+    @Nullable
+    public synchronized UserHandle getPrivateProfileHandle() {
+        if (doesPrivateSpaceExist()) {
+            return mUserHandle;
+        }
+        return null;
+    }
+
     /** Returns the instance of {@link PrivateSpaceMaintainer} */
     public static synchronized PrivateSpaceMaintainer getInstance(Context context) {
         if (sPrivateSpaceMaintainer == null) {

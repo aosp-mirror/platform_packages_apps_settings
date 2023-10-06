@@ -22,6 +22,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
@@ -32,8 +33,8 @@ import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.GlifLayout;
 
-/** Fragment educating about the usage of Private Space. */
-public class PrivateSpaceEducation extends Fragment {
+/** Fragment to display error screen if creation of private profile failed for any reason. */
+public class PrivateProfileCreationError extends Fragment {
     @Override
     public View onCreateView(
             LayoutInflater inflater,
@@ -41,12 +42,12 @@ public class PrivateSpaceEducation extends Fragment {
             @Nullable Bundle savedInstanceState) {
         GlifLayout rootView =
                 (GlifLayout)
-                        inflater.inflate(R.layout.privatespace_education_screen, container, false);
+                        inflater.inflate(R.layout.privatespace_creation_error, container, false);
         final FooterBarMixin mixin = rootView.getMixin(FooterBarMixin.class);
         mixin.setPrimaryButton(
                 new FooterButton.Builder(getContext())
-                        .setText(R.string.privatespace_setup_button_label)
-                        .setListener(onSetup())
+                        .setText(R.string.privatespace_tryagain_label)
+                        .setListener(onTryAgain())
                         .setButtonType(FooterButton.ButtonType.NEXT)
                         .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Primary)
                         .build());
@@ -59,15 +60,23 @@ public class PrivateSpaceEducation extends Fragment {
                                 androidx.appcompat.R.style
                                         .Base_TextAppearance_AppCompat_Widget_Button)
                         .build());
+        OnBackPressedCallback callback =
+                new OnBackPressedCallback(true /* enabled by default */) {
+                    @Override
+                    public void handleOnBackPressed() {
+                        // Handle the back button event. We intentionally don't want to allow back
+                        // button to work in this screen during the setup flow.
+                    }
+                };
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
 
         return rootView;
     }
 
-    private View.OnClickListener onSetup() {
+    private View.OnClickListener onTryAgain() {
         return v -> {
-            NavHostFragment.findNavController(PrivateSpaceEducation.this)
-                                        .navigate(R.id.action_education_to_auto_advance);
-
+            NavHostFragment.findNavController(PrivateProfileCreationError.this)
+                                        .navigate(R.id.action_retry_profile_creation);
         };
     }
 
