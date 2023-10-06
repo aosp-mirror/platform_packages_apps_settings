@@ -273,8 +273,7 @@
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"로드 중…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"근처 기기 액세스 권한이 있는 앱은 연결된 기기 간의 상대적인 위치를 파악할 수 있습니다."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"앱 및 서비스에 대한 위치 정보 액세스가 사용 중지되어 있습니다. 그래도 긴급 전화번호로 전화를 걸거나 문자 메시지를 보내면 기기의 위치 정보가 긴급 구조원에게 전달될 수 있습니다."</string>
-    <!-- no translation found for location_settings_footer_learn_more_content_description (349380666660145540) -->
-    <skip />
+    <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"위치 설정에 대해 자세히 알아보기"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"계정"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"보안"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"암호화 및 사용자 인증 정보"</string>
@@ -2245,11 +2244,17 @@
     <string name="power_usage_level_and_status" msgid="821521456989429593">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="6997529817917076536">"<xliff:g id="REMAIN">%1$s</xliff:g> 남음"</string>
     <string name="power_charge_remaining" msgid="7046064326172265116">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> 후 완충"</string>
+    <!-- no translation found for power_usage_detail_screen_time (6027274749498485283) -->
+    <skip />
+    <!-- no translation found for power_usage_detail_background_time (3661437083554322691) -->
+    <skip />
     <string name="low_battery_summary" msgid="4458925347316501953">"배터리 잔량 부족"</string>
     <string name="background_activity_summary" msgid="3817376868497046016">"앱이 백그라운드에서 실행되도록 허용"</string>
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"백그라운드 활동을 제한하시겠습니까?"</string>
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"앱의 백그라운드 활동을 제한하면 앱이 정상적으로 작동하지 않을 수도 있습니다."</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"배터리 최적화를 설정하지 않아 이 앱을 제한할 수 없습니다.\n\n앱을 제한하려면 먼저 배터리 최적화를 사용 설정하세요."</string>
+    <!-- no translation found for manager_battery_usage_category_title (1493303237531629961) -->
+    <skip />
     <string name="manager_battery_usage_unrestricted_title" msgid="2426486290463258032">"제한 없음"</string>
     <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"최적화"</string>
     <string name="manager_battery_usage_restricted_title" msgid="7702863764130323118">"제한됨"</string>
@@ -2391,6 +2396,8 @@
     <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"총 시간: 1분 미만"</string>
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"백그라운드: 1분 미만"</string>
     <string name="battery_usage_screen_time_less_than_one_minute" msgid="2911989465891679033">"기기 사용 시간: 1분 미만"</string>
+    <!-- no translation found for power_usage_time_less_than_one_minute (8407404329381010144) -->
+    <skip />
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"총 시간: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"백그라운드: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_screen_time" msgid="3973865893520804115">"기기 사용 시간: <xliff:g id="TIME">%s</xliff:g>"</string>
@@ -4172,7 +4179,8 @@
     <string name="credman_keywords" msgid="8305600680836806170">"데이터, 패스키, 비밀번호"</string>
     <string name="credman_autofill_keywords" msgid="701180623776848914">"자동, 완성, 자동 완성, 데이터, 패스키, 비밀번호"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;신뢰할 수 있는 앱인지 확인하세요&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt;에서는 자동 완성할 수 있는 항목을 결정하기 위해 화면의 내용을 사용합니다."</string>
-    <string name="credman_autofill_confirmation_message" msgid="4951846866327737417">"&lt;b&gt;&lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;을(를) 사용하시겠습니까?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;에서는 자동 완성할 수 있는 항목을 결정하기 위해 화면에 표시된 내용을 사용합니다. 이제 새 비밀번호, 패스키, 기타 정보가 여기에 저장됩니다."</string>
+    <!-- no translation found for credman_autofill_confirmation_message (843829628024668466) -->
+    <skip />
     <string name="credman_picker_title" msgid="8191267620665129205">"비밀번호, 패스키, 데이터 서비스"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"%1$s을(를) 사용 중지하시겠습니까?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;이 서비스를 사용 중지하시겠습니까?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; 로그인할 때 비밀번호, 패스키, 결제 수단 등의 저장된 정보가 채워지지 않습니다. 저장된 정보를 사용하려면 비밀번호, 패스키 또는 데이터 서비스를 선택하세요."</string>
@@ -4785,10 +4793,8 @@
     <string name="aspect_ratio_title" msgid="2451826875939676101">"가로세로 비율"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>에 맞지 않게 만들어졌다면 새로운 가로세로 비율로 이 앱을 표시해 보세요."</string>
     <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>에 맞지 않게 만들어졌다면 새로운 가로세로 비율로 이 앱을 표시해 보세요. 일부 앱은 특정 가로세로 비율에 최적화되어 있지 않을 수 있습니다."</string>
-    <!-- no translation found for aspect_ratio_summary_text (4737461467467220325) -->
-    <skip />
-    <!-- no translation found for aspect_ratio_main_summary_text (5544816872094235840) -->
-    <skip />
+    <string name="aspect_ratio_summary_text" msgid="4737461467467220325">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>에 맞지 않게 만들어졌다면 새로운 가로세로 비율로 앱을 표시해 보세요."</string>
+    <string name="aspect_ratio_main_summary_text" msgid="5544816872094235840">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>에 맞지 않게 만들어졌다면 새로운 가로세로 비율로 앱을 표시해 보세요. 일부 앱은 특정 가로세로 비율에 최적화되어 있지 않을 수 있습니다."</string>
     <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"추천 앱"</string>
     <string name="user_aspect_ratio_changed_apps_label" msgid="2096614916172567672">"변경된 앱"</string>
     <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"앱 기본값"</string>

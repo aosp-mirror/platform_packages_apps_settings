@@ -273,8 +273,7 @@
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Cargando…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Las apps que tienen el permiso de dispositivos cercanos pueden determinar la posición relativa de los dispositivos conectados."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"El acceso a la ubicación está desactivado para las apps y los servicios. Todavía se puede enviar la ubicación del dispositivo a los servicios de emergencia cuando llamas o mandas un mensaje a un número de emergencia."</string>
-    <!-- no translation found for location_settings_footer_learn_more_content_description (349380666660145540) -->
-    <skip />
+    <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Más información sobre la configuración de la ubicación"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Cuentas"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Seguridad"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Encriptación y credenciales"</string>
@@ -1666,7 +1665,7 @@
     <string name="force_stop_dlg_title" msgid="86745852555490146">"¿Deseas forzar la detención?"</string>
     <string name="force_stop_dlg_text" msgid="1527286468544457368">"Si fuerzas la detención de una aplicación, es posible que funcione incorrectamente."</string>
     <string name="app_disable_dlg_positive" msgid="1414218905322009505">"Inhabilitar la aplicación"</string>
-    <string name="app_disable_dlg_text" msgid="2449382902751908916">"Si inhabilitas esta app, es posible que Android y otras apps ya no funcionen correctamente. Ten en cuenta que no puedes borrar esta app ya que vino preinstalada en el dispositivo. Si la inhabilitas, se desactivarás y se ocultará en tu dispositivo."</string>
+    <string name="app_disable_dlg_text" msgid="2449382902751908916">"Si inhabilitas esta app, es posible que Android y otras apps ya no funcionen correctamente. Ten en cuenta que no puedes borrar esta app porque estaba preinstalada en el dispositivo. Si la inhabilitas, se desactivará y se ocultará en tu dispositivo."</string>
     <string name="app_install_details_group_title" msgid="1172114479073704677">"Tienda"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"Detalles de la app"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"App instalada desde <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
@@ -2245,11 +2244,17 @@
     <string name="power_usage_level_and_status" msgid="821521456989429593">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="6997529817917076536">"Tiempo restante: <xliff:g id="REMAIN">%1$s</xliff:g>"</string>
     <string name="power_charge_remaining" msgid="7046064326172265116">"Carga completa en <xliff:g id="UNTIL_CHARGED">%1$s</xliff:g>"</string>
+    <!-- no translation found for power_usage_detail_screen_time (6027274749498485283) -->
+    <skip />
+    <!-- no translation found for power_usage_detail_background_time (3661437083554322691) -->
+    <skip />
     <string name="low_battery_summary" msgid="4458925347316501953">"Batería baja"</string>
     <string name="background_activity_summary" msgid="3817376868497046016">"Permite que la app se ejecute en segundo plano"</string>
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"¿Limitar actividad en segundo plano?"</string>
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"Si limitas la actividad en segundo plano de una app, es posible que no funcione correctamente"</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"Como no se configuró la app para optimizar la batería, no puedes restringirla.\n\nPrimero, activa optimización de batería."</string>
+    <!-- no translation found for manager_battery_usage_category_title (1493303237531629961) -->
+    <skip />
     <string name="manager_battery_usage_unrestricted_title" msgid="2426486290463258032">"Sin restricciones"</string>
     <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"Optimizado"</string>
     <string name="manager_battery_usage_restricted_title" msgid="7702863764130323118">"Restringido"</string>
@@ -2391,6 +2396,8 @@
     <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"Total: menos de un minuto"</string>
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"En segundo plano: menos de un minuto"</string>
     <string name="battery_usage_screen_time_less_than_one_minute" msgid="2911989465891679033">"Tiempo de uso: menos de un minuto"</string>
+    <!-- no translation found for power_usage_time_less_than_one_minute (8407404329381010144) -->
+    <skip />
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Total: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"En segundo plano: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_screen_time" msgid="3973865893520804115">"Tiempo de uso: <xliff:g id="TIME">%s</xliff:g>"</string>
@@ -4172,7 +4179,8 @@
     <string name="credman_keywords" msgid="8305600680836806170">"datos, llave de acceso, contraseña"</string>
     <string name="credman_autofill_keywords" msgid="701180623776848914">"automático, rellenar, autocompletar, datos, llave de acceso, contraseña"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Asegúrate de que esta app sea confiable&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; usa el contenido de tu pantalla para determinar qué se puede autocompletar."</string>
-    <string name="credman_autofill_confirmation_message" msgid="4951846866327737417">"&lt;b&gt;¿Quieres usar &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; usa el contenido de tu pantalla para determinar qué se puede autocompletar. A partir de ahora, las nuevas contraseñas, llaves de acceso y otros datos se guardarán aquí."</string>
+    <!-- no translation found for credman_autofill_confirmation_message (843829628024668466) -->
+    <skip />
     <string name="credman_picker_title" msgid="8191267620665129205">"Servicios de contraseñas, llaves de acceso y datos"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"¿Quieres desactivar %1$s?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;¿Quieres desactivar este servicio?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; La información guardada, como contraseñas, llaves de acceso, formas de pago y otros datos, no se rellenará cuando accedas. Para usar la información guardada, elige un servicio de contraseña, llave de acceso o datos."</string>
@@ -4226,10 +4234,8 @@
     <!-- no translation found for graphics_driver_app_preference_values:1 (485288770206606512) -->
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
-    <!-- no translation found for enable_angle_as_system_driver (4648827560023949786) -->
-    <skip />
-    <!-- no translation found for enable_angle_as_system_driver_summary (2170215556348477481) -->
-    <skip />
+    <string name="enable_angle_as_system_driver" msgid="4648827560023949786">"Experimental: Habilitar ANGLE"</string>
+    <string name="enable_angle_as_system_driver_summary" msgid="2170215556348477481">"Advertencia: Habilita ANGLE como controlador predeterminado de OpenGL ES. Esta función es experimental y tal vez no sea compatible con algunas apps de video o cámara."</string>
     <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"Se debe reiniciar para cambiar el controlador del sistema OpenGL ES"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Cambios en la compatibilidad de la app"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Activa o desactiva los cambios de compatibilidad de la app"</string>
@@ -4787,10 +4793,8 @@
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Relación de aspecto"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"Prueba una relación de aspecto nueva para ver esta app si no se diseñó para adaptarse a tu <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"Prueba una relación de aspecto nueva para ver esta app si no se diseñó para adaptarse a tu <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Algunas apps podrían no estar optimizadas para ciertas relaciones de aspecto."</string>
-    <!-- no translation found for aspect_ratio_summary_text (4737461467467220325) -->
-    <skip />
-    <!-- no translation found for aspect_ratio_main_summary_text (5544816872094235840) -->
-    <skip />
+    <string name="aspect_ratio_summary_text" msgid="4737461467467220325">"Prueba una nueva relación de aspecto para ver una app que no se haya diseñado para adaptarse a tu <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
+    <string name="aspect_ratio_main_summary_text" msgid="5544816872094235840">"Prueba una nueva relación de aspecto para ver una app que no se haya diseñado para adaptarse a tu <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Ten en cuenta que algunas apps podrían no estar optimizadas para determinadas relaciones de aspecto."</string>
     <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"Apps sugeridas"</string>
     <string name="user_aspect_ratio_changed_apps_label" msgid="2096614916172567672">"Apps cambiadas"</string>
     <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"Predeterminada de la app"</string>
