@@ -19,8 +19,6 @@ package com.android.settings.fuelgauge.batterytip.tips;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.os.BatteryManager;
 import android.os.Parcel;
 import android.util.Log;
 
@@ -39,8 +37,11 @@ public class BatteryDefenderTip extends BatteryTip {
 
     private static final String TAG = "BatteryDefenderTip";
 
-    public BatteryDefenderTip(@StateType int state) {
+    private boolean mIsPluggedIn;
+
+    public BatteryDefenderTip(@StateType int state, boolean isPluggedIn) {
         super(TipType.BATTERY_DEFENDER, state, false /* showDialog */);
+        mIsPluggedIn = isPluggedIn;
     }
 
     private BatteryDefenderTip(Parcel in) {
@@ -59,7 +60,7 @@ public class BatteryDefenderTip extends BatteryTip {
 
     @Override
     public int getIconId() {
-        return R.drawable.ic_battery_status_good_24dp;
+        return R.drawable.ic_battery_status_good_theme;
     }
 
     @Override
@@ -92,7 +93,7 @@ public class BatteryDefenderTip extends BatteryTip {
                     resumeCharging(context);
                     preference.setVisible(false);
                 });
-        cardPreference.setPrimaryButtonVisible(isPluggedIn(context));
+        cardPreference.setPrimaryButtonVisible(mIsPluggedIn);
 
         cardPreference.setSecondaryButtonText(context.getString(R.string.learn_more));
         cardPreference.setSecondaryButtonClickListener(
@@ -104,10 +105,6 @@ public class BatteryDefenderTip extends BatteryTip {
         cardPreference.setSecondaryButtonVisible(true);
         cardPreference.setSecondaryButtonContentDescription(context.getString(
                 R.string.battery_tip_limited_temporarily_sec_button_content_description));
-    }
-
-    private CardPreference castToCardPreferenceSafely(Preference preference) {
-        return preference instanceof CardPreference ? (CardPreference) preference : null;
     }
 
     private void resumeCharging(Context context) {
@@ -122,14 +119,6 @@ public class BatteryDefenderTip extends BatteryTip {
         Log.i(TAG, "send resume charging broadcast intent=" + intent);
     }
 
-    private boolean isPluggedIn(Context context) {
-        final Intent batteryIntent =
-                context.registerReceiver(
-                        /* receiver= */ null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-        return batteryIntent != null
-                && batteryIntent.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0) != 0;
-    }
-
     public static final Creator CREATOR = new Creator() {
         public BatteryTip createFromParcel(Parcel in) {
             return new BatteryDefenderTip(in);
@@ -139,5 +128,4 @@ public class BatteryDefenderTip extends BatteryTip {
             return new BatteryDefenderTip[size];
         }
     };
-
 }

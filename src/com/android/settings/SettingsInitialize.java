@@ -37,9 +37,9 @@ import android.os.UserManager;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
-import androidx.window.embedding.SplitController;
 
 import com.android.settings.Settings.CreateShortcutActivity;
+import com.android.settings.activityembedding.ActivityEmbeddingUtils;
 import com.android.settings.homepage.DeepLinkHomepageActivity;
 import com.android.settings.search.SearchStateReceiver;
 import com.android.settingslib.utils.ThreadUtils;
@@ -66,6 +66,7 @@ public class SettingsInitialize extends BroadcastReceiver {
         UserInfo userInfo = um.getUserInfo(UserHandle.myUserId());
         final PackageManager pm = context.getPackageManager();
         managedProfileSetup(context, pm, broadcast, userInfo);
+        cloneProfileSetup(context, pm, userInfo);
         webviewSettingSetup(context, pm, userInfo);
         ThreadUtils.postOnBackgroundThread(() -> refreshExistingShortcuts(context));
         enableTwoPaneDeepLinkActivityIfNecessary(pm, context);
@@ -104,13 +105,24 @@ public class SettingsInitialize extends BroadcastReceiver {
         }
 
         // Disable launcher icon
-        ComponentName settingsComponentName = new ComponentName(context, Settings.class);
-        pm.setComponentEnabledSetting(settingsComponentName,
-                PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
+        disableComponent(pm, new ComponentName(context, Settings.class));
         // Disable shortcut picker.
-        ComponentName shortcutComponentName = new ComponentName(
-                context, CreateShortcutActivity.class);
-        pm.setComponentEnabledSetting(shortcutComponentName,
+        disableComponent(pm, new ComponentName(context, CreateShortcutActivity.class));
+    }
+
+    private void cloneProfileSetup(Context context, PackageManager pm, UserInfo userInfo) {
+        if (userInfo == null || !userInfo.isCloneProfile()) {
+            return;
+        }
+        // Disable launcher icon
+        disableComponent(pm, new ComponentName(context, Settings.class));
+
+        //Disable Shortcut picker
+        disableComponent(pm, new ComponentName(context, CreateShortcutActivity.class));
+    }
+
+    private void disableComponent(PackageManager pm, ComponentName componentName) {
+        pm.setComponentEnabledSetting(componentName,
                 PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
     }
 
@@ -154,7 +166,7 @@ public class SettingsInitialize extends BroadcastReceiver {
                 DeepLinkHomepageActivity.class);
         final ComponentName searchStateReceiver = new ComponentName(context,
                 SearchStateReceiver.class);
-        final int enableState = SplitController.getInstance(context).isSplitSupported()
+        final int enableState = ActivityEmbeddingUtils.isSettingsSplitEnabled(context)
                 ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED
                 : PackageManager.COMPONENT_ENABLED_STATE_DISABLED;
         pm.setComponentEnabledSetting(deepLinkHome, enableState, PackageManager.DONT_KILL_APP);

@@ -36,6 +36,10 @@ android_test {
         // instrumented Settings app.
     ],
 
+    errorprone: {
+        javacflags: ["-Xep:CheckReturnValue:WARN"]
+    },
+
     // Include all test java files.
     srcs: ["src/**/*.java"],
 

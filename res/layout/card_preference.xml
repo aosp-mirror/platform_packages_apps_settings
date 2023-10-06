@@ -67,12 +67,15 @@
             android:maxLines="10"
             style="@style/PreferenceSummaryTextStyle"/>
 
-        <RelativeLayout
+        <LinearLayout
             android:id="@+id/card_preference_buttons"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="10dp"
             android:layout_below="@android:id/summary"
+            android:gravity="center_vertical|end"
+            android:orientation="horizontal"
+            android:paddingEnd="20dp"
             android:visibility="gone">
             <Button
                 android:id="@android:id/button1"
@@ -80,17 +83,15 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_toStartOf="@android:id/button2"
                 android:visibility="gone"/>
             <Button
                 android:id="@android:id/button2"
                 style="@style/CardPreferenceBorderlessButton"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:layout_alignParentEnd="true"
+                android:layout_marginStart="20dp"
                 android:visibility="gone"/>
-        </RelativeLayout>
+        </LinearLayout>
     </RelativeLayout>
 
     <!-- Preference should place its actual preference widget here. -->

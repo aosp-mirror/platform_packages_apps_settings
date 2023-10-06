@@ -35,13 +35,4 @@ public class ShadowPowerManager {
         return 0;
     }
 
-    @Implementation
-    protected int getMinimumScreenBrightnessForVrSetting() {
-        return 0;
-    }
-
-    @Implementation
-    protected int getMaximumScreenBrightnessForVrSetting() {
-        return 0;
-    }
 }

@@ -20,10 +20,12 @@ import static android.provider.Settings.Secure.TIMEOUT_TO_DOCK_USER;
 
 import android.content.Context;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.Settings;
 
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
 
 import java.util.Arrays;
@@ -33,12 +35,16 @@ import java.util.Arrays;
  * automatically switch to the designated Dock User when the device is docked.
  */
 public class TimeoutToDockUserPreferenceController extends BasePreferenceController {
+    private final UserManager mUserManager;
+
     private final String[] mEntries;
     private final String[] mValues;
 
     public TimeoutToDockUserPreferenceController(Context context,
             String preferenceKey) {
         super(context, preferenceKey);
+
+        mUserManager = context.getSystemService(UserManager.class);
 
         mEntries = mContext.getResources().getStringArray(
                 com.android.settings.R.array.switch_to_dock_user_when_docked_timeout_entries);
@@ -61,15 +67,14 @@ public class TimeoutToDockUserPreferenceController extends BasePreferenceControl
             return UNSUPPORTED_ON_DEVICE;
         }
 
-        // Multi-user feature disabled by user.
+        // Multi-user feature disabled by user, or user switching blocked on the user.
         if (Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.USER_SWITCHER_ENABLED, 0) != 1) {
+                Settings.Global.USER_SWITCHER_ENABLED, 0) != 1
+                || mUserManager.hasUserRestriction(UserManager.DISALLOW_USER_SWITCH)) {
             return CONDITIONALLY_UNAVAILABLE;
         }
 
-        // Is currently user zero. Only non user zero can have this setting.
-        // TODO(b/257333623): Allow the Dock User to be non-SystemUser user in HSUM.
-        if (UserHandle.myUserId() == UserHandle.USER_SYSTEM) {
+        if (Utils.canCurrentUserDream(mContext)) {
             return DISABLED_FOR_USER;
         }
 

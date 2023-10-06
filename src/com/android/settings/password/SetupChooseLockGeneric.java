@@ -19,6 +19,7 @@ package com.android.settings.password;
 import static android.Manifest.permission.REQUEST_PASSWORD_COMPLEXITY;
 import static android.app.admin.DevicePolicyManager.EXTRA_PASSWORD_COMPLEXITY;
 
+import static com.android.internal.widget.LockPatternUtils.CREDENTIAL_TYPE_NONE;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_REQUESTED_MIN_COMPLEXITY;
 
 import android.app.RemoteServiceException.MissingRequestPasswordComplexityPermissionException;
@@ -40,10 +41,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
-import com.android.settings.SetupEncryptionInterstitial;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.utils.SettingsDividerItemDecoration;
 
+import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.GlifPreferenceLayout;
 import com.google.android.setupdesign.util.ThemeHelper;
 
@@ -188,14 +189,14 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
             final String key = preference.getKey();
             if (KEY_UNLOCK_SET_DO_LATER.equals(key)) {
                 // show warning.
+                final Intent intent = getActivity().getIntent();
                 SetupSkipDialog dialog = SetupSkipDialog.newInstance(
-                        getActivity().getIntent()
-                                .getBooleanExtra(SetupSkipDialog.EXTRA_FRP_SUPPORTED, false),
-                        /* isPatternMode= */ false,
-                        /* isAlphaMode= */ false,
+                        CREDENTIAL_TYPE_NONE,
+                        intent.getBooleanExtra(SetupSkipDialog.EXTRA_FRP_SUPPORTED, false),
                         /* forFingerprint= */ false,
                         /* forFace= */ false,
-                        /* forBiometrics= */ false
+                        /* forBiometrics= */ false,
+                        WizardManagerHelper.isAnySetupWizard(intent)
                 );
                 dialog.show(getFragmentManager());
                 return true;
@@ -215,15 +216,6 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
         protected Intent getLockPatternIntent() {
             final Intent intent = SetupChooseLockPattern.modifyIntentForSetup(
                     getContext(), super.getLockPatternIntent());
-            SetupWizardUtils.copySetupExtras(getActivity().getIntent(), intent);
-            return intent;
-        }
-
-        @Override
-        protected Intent getEncryptionInterstitialIntent(Context context, int quality,
-                boolean required, Intent unlockMethodIntent) {
-            Intent intent = SetupEncryptionInterstitial.createStartIntent(context, quality,
-                    required, unlockMethodIntent);
             SetupWizardUtils.copySetupExtras(getActivity().getIntent(), intent);
             return intent;
         }

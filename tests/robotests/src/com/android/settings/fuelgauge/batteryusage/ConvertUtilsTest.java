@@ -15,22 +15,31 @@
  */
 package com.android.settings.fuelgauge.batteryusage;
 
+import static android.app.usage.UsageStatsManager.USAGE_SOURCE_CURRENT_ACTIVITY;
+import static android.app.usage.UsageStatsManager.USAGE_SOURCE_TASK_ROOT_ACTIVITY;
+
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
+import android.app.usage.IUsageStatsManager;
+import android.app.usage.UsageEvents;
+import android.app.usage.UsageEvents.Event;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.database.MatrixCursor;
 import android.os.BatteryManager;
 import android.os.BatteryUsageStats;
 import android.os.LocaleList;
+import android.os.RemoteException;
 import android.os.UserHandle;
-import android.text.format.DateUtils;
 
-import com.android.settings.fuelgauge.BatteryUtils;
-import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
-import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.fuelgauge.batteryusage.db.AppUsageEventEntity;
+import com.android.settings.fuelgauge.batteryusage.db.BatteryEventEntity;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -40,13 +49,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.TimeZone;
 
 @RunWith(RobolectricTestRunner.class)
@@ -55,23 +58,23 @@ public final class ConvertUtilsTest {
     private Context mContext;
 
     @Mock
+    private PackageManager mMockPackageManager;
+    @Mock
     private BatteryUsageStats mBatteryUsageStats;
     @Mock
+    private IUsageStatsManager mUsageStatsManager;
+    @Mock
     private BatteryEntry mMockBatteryEntry;
-
-    private FakeFeatureFactory mFeatureFactory;
-    private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
-        mFeatureFactory = FakeFeatureFactory.setupForTest();
-        mPowerUsageFeatureProvider = mFeatureFactory.powerUsageFeatureProvider;
+        when(mContext.getPackageManager()).thenReturn(mMockPackageManager);
     }
 
     @Test
-    public void convertToContentValues_returnsExpectedContentValues() {
+    public void convertBatteryEntryToContentValues_returnsExpectedContentValues() {
         final int expectedType = 3;
         when(mMockBatteryEntry.getUid()).thenReturn(1001);
         when(mMockBatteryEntry.getLabel()).thenReturn("Settings");
@@ -80,6 +83,10 @@ public final class ConvertUtilsTest {
         when(mMockBatteryEntry.isHidden()).thenReturn(true);
         when(mBatteryUsageStats.getConsumedPower()).thenReturn(5.1);
         when(mMockBatteryEntry.getConsumedPower()).thenReturn(1.1);
+        when(mMockBatteryEntry.getConsumedPowerInForeground()).thenReturn(1.2);
+        when(mMockBatteryEntry.getConsumedPowerInForegroundService()).thenReturn(1.3);
+        when(mMockBatteryEntry.getConsumedPowerInBackground()).thenReturn(1.4);
+        when(mMockBatteryEntry.getConsumedPowerInCached()).thenReturn(1.5);
         mMockBatteryEntry.mPercent = 0.3;
         when(mMockBatteryEntry.getTimeInForegroundMs()).thenReturn(1234L);
         when(mMockBatteryEntry.getTimeInBackgroundMs()).thenReturn(5689L);
@@ -88,70 +95,120 @@ public final class ConvertUtilsTest {
                 .thenReturn(ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY);
 
         final ContentValues values =
-                ConvertUtils.convertToContentValues(
+                ConvertUtils.convertBatteryEntryToContentValues(
                         mMockBatteryEntry,
                         mBatteryUsageStats,
                         /*batteryLevel=*/ 12,
                         /*batteryStatus=*/ BatteryManager.BATTERY_STATUS_FULL,
                         /*batteryHealth=*/ BatteryManager.BATTERY_HEALTH_COLD,
                         /*bootTimestamp=*/ 101L,
-                        /*timestamp=*/ 10001L);
+                        /*timestamp=*/ 10001L,
+                        /*isFullChargeStart=*/ true);
+        final BatteryInformation batteryInformation =
+                ConvertUtils.getBatteryInformation(
+                        values, BatteryHistEntry.KEY_BATTERY_INFORMATION);
+        final DeviceBatteryState deviceBatteryState = batteryInformation.getDeviceBatteryState();
 
         assertThat(values.getAsLong(BatteryHistEntry.KEY_UID)).isEqualTo(1001L);
         assertThat(values.getAsLong(BatteryHistEntry.KEY_USER_ID))
                 .isEqualTo(UserHandle.getUserId(1001));
-        assertThat(values.getAsString(BatteryHistEntry.KEY_APP_LABEL))
-                .isEqualTo("Settings");
         assertThat(values.getAsString(BatteryHistEntry.KEY_PACKAGE_NAME))
                 .isEqualTo("com.google.android.settings.battery");
-        assertThat(values.getAsBoolean(BatteryHistEntry.KEY_IS_HIDDEN)).isTrue();
-        assertThat(values.getAsLong(BatteryHistEntry.KEY_BOOT_TIMESTAMP))
-                .isEqualTo(101L);
         assertThat(values.getAsLong(BatteryHistEntry.KEY_TIMESTAMP)).isEqualTo(10001L);
-        assertThat(values.getAsString(BatteryHistEntry.KEY_ZONE_ID))
-                .isEqualTo(TimeZone.getDefault().getID());
-        assertThat(values.getAsDouble(BatteryHistEntry.KEY_TOTAL_POWER)).isEqualTo(5.1);
-        assertThat(values.getAsDouble(BatteryHistEntry.KEY_CONSUME_POWER)).isEqualTo(1.1);
-        assertThat(values.getAsDouble(BatteryHistEntry.KEY_PERCENT_OF_TOTAL)).isEqualTo(0.3);
-        assertThat(values.getAsLong(BatteryHistEntry.KEY_FOREGROUND_USAGE_TIME))
-                .isEqualTo(1234L);
-        assertThat(values.getAsLong(BatteryHistEntry.KEY_BACKGROUND_USAGE_TIME))
-                .isEqualTo(5689L);
-        assertThat(values.getAsInteger(BatteryHistEntry.KEY_DRAIN_TYPE)).isEqualTo(expectedType);
         assertThat(values.getAsInteger(BatteryHistEntry.KEY_CONSUMER_TYPE))
                 .isEqualTo(ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY);
-        assertThat(values.getAsInteger(BatteryHistEntry.KEY_BATTERY_LEVEL)).isEqualTo(12);
-        assertThat(values.getAsInteger(BatteryHistEntry.KEY_BATTERY_STATUS))
+        assertThat(values.getAsBoolean(BatteryHistEntry.KEY_IS_FULL_CHARGE_CYCLE_START)).isTrue();
+        assertThat(batteryInformation.getAppLabel()).isEqualTo("Settings");
+        assertThat(batteryInformation.getIsHidden()).isTrue();
+        assertThat(batteryInformation.getBootTimestamp()).isEqualTo(101L);
+        assertThat(batteryInformation.getZoneId()).isEqualTo(TimeZone.getDefault().getID());
+        assertThat(batteryInformation.getTotalPower()).isEqualTo(5.1);
+        assertThat(batteryInformation.getConsumePower()).isEqualTo(1.1);
+        assertThat(batteryInformation.getForegroundUsageConsumePower()).isEqualTo(1.2);
+        assertThat(batteryInformation.getForegroundServiceUsageConsumePower()).isEqualTo(1.3);
+        assertThat(batteryInformation.getBackgroundUsageConsumePower()).isEqualTo(1.4);
+        assertThat(batteryInformation.getCachedUsageConsumePower()).isEqualTo(1.5);
+        assertThat(batteryInformation.getPercentOfTotal()).isEqualTo(0.3);
+        assertThat(batteryInformation.getForegroundUsageTimeInMs()).isEqualTo(1234L);
+        assertThat(batteryInformation.getBackgroundUsageTimeInMs()).isEqualTo(5689L);
+        assertThat(batteryInformation.getDrainType()).isEqualTo(expectedType);
+        assertThat(deviceBatteryState.getBatteryLevel()).isEqualTo(12);
+        assertThat(deviceBatteryState.getBatteryStatus())
                 .isEqualTo(BatteryManager.BATTERY_STATUS_FULL);
-        assertThat(values.getAsInteger(BatteryHistEntry.KEY_BATTERY_HEALTH))
+        assertThat(deviceBatteryState.getBatteryHealth())
                 .isEqualTo(BatteryManager.BATTERY_HEALTH_COLD);
     }
 
     @Test
-    public void convertToContentValues_nullBatteryEntry_returnsExpectedContentValues() {
+    public void convertBatteryEntryToContentValues_nullBatteryEntry_returnsExpectedContentValues() {
         final ContentValues values =
-                ConvertUtils.convertToContentValues(
+                ConvertUtils.convertBatteryEntryToContentValues(
                         /*entry=*/ null,
                         /*batteryUsageStats=*/ null,
                         /*batteryLevel=*/ 12,
                         /*batteryStatus=*/ BatteryManager.BATTERY_STATUS_FULL,
                         /*batteryHealth=*/ BatteryManager.BATTERY_HEALTH_COLD,
                         /*bootTimestamp=*/ 101L,
-                        /*timestamp=*/ 10001L);
+                        /*timestamp=*/ 10001L,
+                        /*isFullChargeStart=*/ false);
 
-        assertThat(values.getAsLong(BatteryHistEntry.KEY_BOOT_TIMESTAMP))
-                .isEqualTo(101L);
+        final BatteryInformation batteryInformation =
+                ConvertUtils.getBatteryInformation(
+                        values, BatteryHistEntry.KEY_BATTERY_INFORMATION);
+        final DeviceBatteryState deviceBatteryState = batteryInformation.getDeviceBatteryState();
+        assertThat(batteryInformation.getBootTimestamp()).isEqualTo(101L);
+        assertThat(batteryInformation.getZoneId()).isEqualTo(TimeZone.getDefault().getID());
+        assertThat(values.getAsBoolean(BatteryHistEntry.KEY_IS_FULL_CHARGE_CYCLE_START)).isFalse();
+        assertThat(deviceBatteryState.getBatteryLevel()).isEqualTo(12);
+        assertThat(deviceBatteryState.getBatteryStatus())
+                .isEqualTo(BatteryManager.BATTERY_STATUS_FULL);
+        assertThat(deviceBatteryState.getBatteryHealth())
+                .isEqualTo(BatteryManager.BATTERY_HEALTH_COLD);
         assertThat(values.getAsLong(BatteryHistEntry.KEY_TIMESTAMP))
                 .isEqualTo(10001L);
-        assertThat(values.getAsString(BatteryHistEntry.KEY_ZONE_ID))
-                .isEqualTo(TimeZone.getDefault().getID());
-        assertThat(values.getAsInteger(BatteryHistEntry.KEY_BATTERY_LEVEL)).isEqualTo(12);
-        assertThat(values.getAsInteger(BatteryHistEntry.KEY_BATTERY_STATUS))
-                .isEqualTo(BatteryManager.BATTERY_STATUS_FULL);
-        assertThat(values.getAsInteger(BatteryHistEntry.KEY_BATTERY_HEALTH))
-                .isEqualTo(BatteryManager.BATTERY_HEALTH_COLD);
         assertThat(values.getAsString(BatteryHistEntry.KEY_PACKAGE_NAME))
                 .isEqualTo(ConvertUtils.FAKE_PACKAGE_NAME);
+    }
+
+    @Test
+    public void convertAppUsageEventToContentValues_returnsExpectedContentValues() {
+        final AppUsageEvent appUsageEvent =
+                AppUsageEvent.newBuilder()
+                        .setUid(101L)
+                        .setUserId(1001L)
+                        .setTimestamp(10001L)
+                        .setType(AppUsageEventType.ACTIVITY_RESUMED)
+                        .setPackageName("com.android.settings1")
+                        .setInstanceId(100001)
+                        .setTaskRootPackageName("com.android.settings2")
+                        .build();
+        final ContentValues values =
+                ConvertUtils.convertAppUsageEventToContentValues(appUsageEvent);
+        assertThat(values.getAsLong(AppUsageEventEntity.KEY_UID)).isEqualTo(101L);
+        assertThat(values.getAsLong(AppUsageEventEntity.KEY_USER_ID)).isEqualTo(1001L);
+        assertThat(values.getAsLong(AppUsageEventEntity.KEY_TIMESTAMP)).isEqualTo(10001L);
+        assertThat(values.getAsInteger(AppUsageEventEntity.KEY_APP_USAGE_EVENT_TYPE)).isEqualTo(1);
+        assertThat(values.getAsString(AppUsageEventEntity.KEY_PACKAGE_NAME))
+                .isEqualTo("com.android.settings1");
+        assertThat(values.getAsInteger(AppUsageEventEntity.KEY_INSTANCE_ID)).isEqualTo(100001);
+        assertThat(values.getAsString(AppUsageEventEntity.KEY_TASK_ROOT_PACKAGE_NAME))
+                .isEqualTo("com.android.settings2");
+    }
+
+    @Test
+    public void convertBatteryEventToContentValues_normalCase_returnsExpectedContentValues() {
+        final BatteryEvent batteryEvent =
+                BatteryEvent.newBuilder()
+                        .setTimestamp(10001L)
+                        .setType(BatteryEventType.POWER_CONNECTED)
+                        .setBatteryLevel(66)
+                        .build();
+        final ContentValues values =
+                ConvertUtils.convertBatteryEventToContentValues(batteryEvent);
+        assertThat(values.getAsLong(BatteryEventEntity.KEY_TIMESTAMP)).isEqualTo(10001L);
+        assertThat(values.getAsInteger(BatteryEventEntity.KEY_BATTERY_EVENT_TYPE)).isEqualTo(
+                BatteryEventType.POWER_CONNECTED.getNumber());
+        assertThat(values.getAsInteger(BatteryEventEntity.KEY_BATTERY_LEVEL)).isEqualTo(66);
     }
 
     @Test
@@ -164,6 +221,10 @@ public final class ConvertUtilsTest {
         when(mMockBatteryEntry.isHidden()).thenReturn(true);
         when(mBatteryUsageStats.getConsumedPower()).thenReturn(5.1);
         when(mMockBatteryEntry.getConsumedPower()).thenReturn(1.1);
+        when(mMockBatteryEntry.getConsumedPowerInForeground()).thenReturn(1.2);
+        when(mMockBatteryEntry.getConsumedPowerInForegroundService()).thenReturn(1.3);
+        when(mMockBatteryEntry.getConsumedPowerInBackground()).thenReturn(1.4);
+        when(mMockBatteryEntry.getConsumedPowerInCached()).thenReturn(1.5);
         mMockBatteryEntry.mPercent = 0.3;
         when(mMockBatteryEntry.getTimeInForegroundMs()).thenReturn(1234L);
         when(mMockBatteryEntry.getTimeInBackgroundMs()).thenReturn(5689L);
@@ -191,6 +252,10 @@ public final class ConvertUtilsTest {
                 .isEqualTo(TimeZone.getDefault().getID());
         assertThat(batteryHistEntry.mTotalPower).isEqualTo(5.1);
         assertThat(batteryHistEntry.mConsumePower).isEqualTo(1.1);
+        assertThat(batteryHistEntry.mForegroundUsageConsumePower).isEqualTo(1.2);
+        assertThat(batteryHistEntry.mForegroundServiceUsageConsumePower).isEqualTo(1.3);
+        assertThat(batteryHistEntry.mBackgroundUsageConsumePower).isEqualTo(1.4);
+        assertThat(batteryHistEntry.mCachedUsageConsumePower).isEqualTo(1.5);
         assertThat(batteryHistEntry.mPercentOfTotal).isEqualTo(0.3);
         assertThat(batteryHistEntry.mForegroundUsageTimeInMs)
                 .isEqualTo(1234L);
@@ -225,206 +290,145 @@ public final class ConvertUtilsTest {
     }
 
     @Test
-    public void getIndexedUsageMap_nullOrEmptyHistoryMap_returnEmptyCollection() {
-        final int timeSlotSize = 2;
-        final long[] batteryHistoryKeys = new long[]{101L, 102L, 103L, 104L, 105L};
+    public void convertToAppUsageEvent_returnsExpectedResult()
+            throws PackageManager.NameNotFoundException {
+        final Event event = new Event();
+        event.mEventType = UsageEvents.Event.ACTIVITY_RESUMED;
+        event.mPackage = "com.android.settings1";
+        event.mTimeStamp = 101L;
+        event.mInstanceId = 100001;
+        event.mTaskRootPackage = "com.android.settings2";
+        when(mMockPackageManager.getPackageUidAsUser(any(), anyInt())).thenReturn(1001);
 
-        assertThat(ConvertUtils.getIndexedUsageMap(
-                mContext, timeSlotSize, batteryHistoryKeys,
-                /*batteryHistoryMap=*/ null, /*purgeLowPercentageAndFakeData=*/ true))
-                .isEmpty();
-        assertThat(ConvertUtils.getIndexedUsageMap(
-                mContext, timeSlotSize, batteryHistoryKeys,
-                new HashMap<Long, Map<String, BatteryHistEntry>>(),
-                /*purgeLowPercentageAndFakeData=*/ true))
-                .isEmpty();
+        final long userId = 2;
+        final AppUsageEvent appUsageEvent = ConvertUtils.convertToAppUsageEvent(
+                mContext, mUsageStatsManager, event, userId);
+        assertThat(appUsageEvent.getTimestamp()).isEqualTo(101L);
+        assertThat(appUsageEvent.getType()).isEqualTo(AppUsageEventType.ACTIVITY_RESUMED);
+        assertThat(appUsageEvent.getPackageName()).isEqualTo("com.android.settings1");
+        assertThat(appUsageEvent.getInstanceId()).isEqualTo(100001);
+        assertThat(appUsageEvent.getTaskRootPackageName()).isEqualTo("com.android.settings2");
+        assertThat(appUsageEvent.getUid()).isEqualTo(1001L);
+        assertThat(appUsageEvent.getUserId()).isEqualTo(userId);
     }
 
     @Test
-    public void getIndexedUsageMap_returnsExpectedResult() {
-        // Creates the fake testing data.
-        final int timeSlotSize = 2;
-        final long[] batteryHistoryKeys = new long[]{generateTimestamp(0), generateTimestamp(1),
-                generateTimestamp(2), generateTimestamp(3), generateTimestamp(4)};
-        final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap =
-                new HashMap<>();
-        final BatteryHistEntry fakeEntry = createBatteryHistEntry(
-                ConvertUtils.FAKE_PACKAGE_NAME, "fake_label", 0, 0L, 0L, 0L);
-        // Adds the index = 0 data.
-        Map<String, BatteryHistEntry> entryMap = new HashMap<>();
-        BatteryHistEntry entry = createBatteryHistEntry(
-                "package1", "label1", 5.0, 1L, 10L, 20L);
-        entryMap.put(entry.getKey(), entry);
-        entryMap.put(fakeEntry.getKey(), fakeEntry);
-        batteryHistoryMap.put(Long.valueOf(batteryHistoryKeys[0]), entryMap);
-        // Adds the index = 1 data.
-        entryMap = new HashMap<>();
-        entryMap.put(fakeEntry.getKey(), fakeEntry);
-        batteryHistoryMap.put(Long.valueOf(batteryHistoryKeys[1]), entryMap);
-        // Adds the index = 2 data.
-        entryMap = new HashMap<>();
-        entry = createBatteryHistEntry(
-                "package2", "label2", 10.0, 2L, 15L, 25L);
-        entryMap.put(entry.getKey(), entry);
-        entryMap.put(fakeEntry.getKey(), fakeEntry);
-        batteryHistoryMap.put(Long.valueOf(batteryHistoryKeys[2]), entryMap);
-        // Adds the index = 3 data.
-        entryMap = new HashMap<>();
-        entry = createBatteryHistEntry(
-                "package2", "label2", 15.0, 2L, 25L, 35L);
-        entryMap.put(entry.getKey(), entry);
-        entry = createBatteryHistEntry(
-                "package3", "label3", 5.0, 3L, 5L, 5L);
-        entryMap.put(entry.getKey(), entry);
-        entryMap.put(fakeEntry.getKey(), fakeEntry);
-        batteryHistoryMap.put(Long.valueOf(batteryHistoryKeys[3]), entryMap);
-        // Adds the index = 4 data.
-        entryMap = new HashMap<>();
-        entry = createBatteryHistEntry(
-                "package2", "label2", 30.0, 2L, 30L, 40L);
-        entryMap.put(entry.getKey(), entry);
-        entry = createBatteryHistEntry(
-                "package2", "label2", 75.0, 4L, 40L, 50L);
-        entryMap.put(entry.getKey(), entry);
-        entry = createBatteryHistEntry(
-                "package3", "label3", 5.0, 3L, 5L, 5L);
-        entryMap.put(entry.getKey(), entry);
-        entryMap.put(fakeEntry.getKey(), fakeEntry);
-        batteryHistoryMap.put(Long.valueOf(batteryHistoryKeys[4]), entryMap);
+    public void convertToAppUsageEvent_emptyInstanceIdAndRootName_returnsExpectedResult()
+            throws PackageManager.NameNotFoundException {
+        final Event event = new Event();
+        event.mEventType = UsageEvents.Event.DEVICE_SHUTDOWN;
+        event.mPackage = "com.android.settings1";
+        event.mTimeStamp = 101L;
+        when(mMockPackageManager.getPackageUidAsUser(any(), anyInt())).thenReturn(1001);
 
-        final Map<Integer, List<BatteryDiffEntry>> resultMap =
-                ConvertUtils.getIndexedUsageMap(
-                        mContext, timeSlotSize, batteryHistoryKeys, batteryHistoryMap,
-                        /*purgeLowPercentageAndFakeData=*/ false);
-
-        assertThat(resultMap).hasSize(3);
-        // Verifies the first timestamp result.
-        List<BatteryDiffEntry> entryList = resultMap.get(Integer.valueOf(0));
-        assertThat(entryList).hasSize(1);
-        assertBatteryDiffEntry(entryList.get(0), 100, 15L, 25L);
-        // Verifies the second timestamp result.
-        entryList = resultMap.get(Integer.valueOf(1));
-        assertThat(entryList).hasSize(3);
-        assertBatteryDiffEntry(entryList.get(1), 5, 5L, 5L);
-        assertBatteryDiffEntry(entryList.get(2), 75, 40L, 50L);
-        assertBatteryDiffEntry(entryList.get(0), 20, 15L, 15L);
-        // Verifies the last 24 hours aggregate result.
-        entryList = resultMap.get(Integer.valueOf(-1));
-        assertThat(entryList).hasSize(3);
-        assertBatteryDiffEntry(entryList.get(1), 4, 5L, 5L);
-        assertBatteryDiffEntry(entryList.get(2), 68, 40L, 50L);
-        assertBatteryDiffEntry(entryList.get(0), 27, 30L, 40L);
-
-        // Test getIndexedUsageMap() with purged data.
-        ConvertUtils.PERCENTAGE_OF_TOTAL_THRESHOLD = 50;
-        final Map<Integer, List<BatteryDiffEntry>> purgedResultMap =
-                ConvertUtils.getIndexedUsageMap(
-                        mContext, timeSlotSize, batteryHistoryKeys, batteryHistoryMap,
-                        /*purgeLowPercentageAndFakeData=*/ true);
-
-        assertThat(purgedResultMap).hasSize(3);
-        // Verifies the first timestamp result.
-        entryList = purgedResultMap.get(Integer.valueOf(0));
-        assertThat(entryList).hasSize(1);
-        // Verifies the second timestamp result.
-        entryList = purgedResultMap.get(Integer.valueOf(1));
-        assertThat(entryList).hasSize(1);
-        assertBatteryDiffEntry(entryList.get(0), 75, 40L, 50L);
-        // Verifies the last 24 hours aggregate result.
-        entryList = purgedResultMap.get(Integer.valueOf(-1));
-        assertThat(entryList).hasSize(1);
-        // Verifies the fake data is cleared out.
-        assertThat(entryList.get(0).getPackageName())
-                .isNotEqualTo(ConvertUtils.FAKE_PACKAGE_NAME);
-
-        // Adds lacked data into the battery history map.
-        final int remainingSize = 25 - batteryHistoryKeys.length;
-        for (int index = 0; index < remainingSize; index++) {
-            batteryHistoryMap.put(105L + index + 1, new HashMap<>());
-        }
-        when(mPowerUsageFeatureProvider.getBatteryHistorySinceLastFullCharge(mContext))
-                .thenReturn(batteryHistoryMap);
-
-        final List<BatteryDiffEntry> batteryDiffEntryList =
-                BatteryChartPreferenceController.getAppBatteryUsageData(mContext);
-
-        assertThat(batteryDiffEntryList).isNotEmpty();
-        final BatteryDiffEntry resultEntry = batteryDiffEntryList.get(0);
-        assertThat(resultEntry.getPackageName()).isEqualTo("package2");
+        final long userId = 1;
+        final AppUsageEvent appUsageEvent = ConvertUtils.convertToAppUsageEvent(
+                mContext, mUsageStatsManager, event, userId);
+        assertThat(appUsageEvent.getTimestamp()).isEqualTo(101L);
+        assertThat(appUsageEvent.getType()).isEqualTo(AppUsageEventType.DEVICE_SHUTDOWN);
+        assertThat(appUsageEvent.getPackageName()).isEqualTo("com.android.settings1");
+        assertThat(appUsageEvent.getInstanceId()).isEqualTo(0);
+        assertThat(appUsageEvent.getTaskRootPackageName()).isEqualTo("");
+        assertThat(appUsageEvent.getUid()).isEqualTo(1001L);
+        assertThat(appUsageEvent.getUserId()).isEqualTo(userId);
     }
 
     @Test
-    public void getIndexedUsageMap_usageTimeExceed_returnsExpectedResult() {
-        final int timeSlotSize = 1;
-        final long[] batteryHistoryKeys = new long[]{101L, 102L, 103L};
-        final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap =
-                new HashMap<>();
-        final BatteryHistEntry fakeEntry = createBatteryHistEntry(
-                ConvertUtils.FAKE_PACKAGE_NAME, "fake_label", 0, 0L, 0L, 0L);
-        // Adds the index = 0 data.
-        Map<String, BatteryHistEntry> entryMap = new HashMap<>();
-        entryMap.put(fakeEntry.getKey(), fakeEntry);
-        batteryHistoryMap.put(Long.valueOf(batteryHistoryKeys[0]), entryMap);
-        // Adds the index = 1 data.
-        entryMap = new HashMap<>();
-        entryMap.put(fakeEntry.getKey(), fakeEntry);
-        batteryHistoryMap.put(Long.valueOf(batteryHistoryKeys[1]), entryMap);
-        // Adds the index = 2 data.
-        entryMap = new HashMap<>();
-        final BatteryHistEntry entry = createBatteryHistEntry(
-                "package3", "label3", 500, 5L, 3600000L, 7200000L);
-        entryMap.put(entry.getKey(), entry);
-        batteryHistoryMap.put(Long.valueOf(batteryHistoryKeys[2]), entryMap);
+    public void convertToAppUsageEvent_emptyPackageName_returnsNull() {
+        final Event event = new Event();
+        event.mPackage = null;
 
-        final Map<Integer, List<BatteryDiffEntry>> purgedResultMap =
-                ConvertUtils.getIndexedUsageMap(
-                        mContext, timeSlotSize, batteryHistoryKeys, batteryHistoryMap,
-                        /*purgeLowPercentageAndFakeData=*/ true);
+        final AppUsageEvent appUsageEvent = ConvertUtils.convertToAppUsageEvent(
+                mContext, mUsageStatsManager, event, /*userId=*/ 0);
 
-        assertThat(purgedResultMap).hasSize(2);
-        final List<BatteryDiffEntry> entryList = purgedResultMap.get(0);
-        assertThat(entryList).hasSize(1);
-        // Verifies the clipped usage time.
-        final float ratio = (float) (7200) / (float) (3600 + 7200);
-        final BatteryDiffEntry resultEntry = entryList.get(0);
-        assertThat(resultEntry.mForegroundUsageTimeInMs)
-                .isEqualTo(Math.round(entry.mForegroundUsageTimeInMs * ratio));
-        assertThat(resultEntry.mBackgroundUsageTimeInMs)
-                .isEqualTo(Math.round(entry.mBackgroundUsageTimeInMs * ratio));
-        assertThat(resultEntry.mConsumePower)
-                .isEqualTo(entry.mConsumePower * ratio);
+        assertThat(appUsageEvent).isNull();
     }
 
     @Test
-    public void getIndexedUsageMap_hideBackgroundUsageTime_returnsExpectedResult() {
-        final long[] batteryHistoryKeys = new long[]{101L, 102L, 103L};
-        final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap = new HashMap<>();
-        final BatteryHistEntry fakeEntry = createBatteryHistEntry(
-                ConvertUtils.FAKE_PACKAGE_NAME, "fake_label", 0, 0L, 0L, 0L);
-        // Adds the index = 0 data.
-        Map<String, BatteryHistEntry> entryMap = new HashMap<>();
-        entryMap.put(fakeEntry.getKey(), fakeEntry);
-        batteryHistoryMap.put(Long.valueOf(batteryHistoryKeys[0]), entryMap);
-        // Adds the index = 1 data.
-        entryMap = new HashMap<>();
-        entryMap.put(fakeEntry.getKey(), fakeEntry);
-        batteryHistoryMap.put(Long.valueOf(batteryHistoryKeys[1]), entryMap);
-        // Adds the index = 2 data.
-        entryMap = new HashMap<>();
-        final BatteryHistEntry entry = createBatteryHistEntry(
-                "package3", "label3", 500, 5L, 3600000L, 7200000L);
-        entryMap.put(entry.getKey(), entry);
-        batteryHistoryMap.put(Long.valueOf(batteryHistoryKeys[2]), entryMap);
-        when(mPowerUsageFeatureProvider.getHideBackgroundUsageTimeSet(mContext))
-                .thenReturn(new HashSet(Arrays.asList((CharSequence) "package3")));
+    public void convertToAppUsageEvent_failToGetUid_returnsNull()
+            throws PackageManager.NameNotFoundException  {
+        final Event event = new Event();
+        event.mEventType = UsageEvents.Event.DEVICE_SHUTDOWN;
+        event.mPackage = "com.android.settings1";
+        when(mMockPackageManager.getPackageUidAsUser(any(), anyInt()))
+                .thenThrow(new PackageManager.NameNotFoundException());
 
-        final Map<Integer, List<BatteryDiffEntry>> purgedResultMap =
-                ConvertUtils.getIndexedUsageMap(
-                        mContext, /*timeSlotSize=*/ 1, batteryHistoryKeys, batteryHistoryMap,
-                        /*purgeLowPercentageAndFakeData=*/ true);
+        final long userId = 1;
+        final AppUsageEvent appUsageEvent = ConvertUtils.convertToAppUsageEvent(
+                mContext, mUsageStatsManager, event, userId);
 
-        final BatteryDiffEntry resultEntry = purgedResultMap.get(0).get(0);
-        assertThat(resultEntry.mBackgroundUsageTimeInMs).isEqualTo(0);
+        assertThat(appUsageEvent).isNull();
+    }
+
+    @Test
+    public void convertToAppUsageEventFromCursor_returnExpectedResult() {
+        final MatrixCursor cursor = new MatrixCursor(
+                new String[]{
+                        AppUsageEventEntity.KEY_UID,
+                        AppUsageEventEntity.KEY_USER_ID,
+                        AppUsageEventEntity.KEY_PACKAGE_NAME,
+                        AppUsageEventEntity.KEY_TIMESTAMP,
+                        AppUsageEventEntity.KEY_APP_USAGE_EVENT_TYPE,
+                        AppUsageEventEntity.KEY_TASK_ROOT_PACKAGE_NAME,
+                        AppUsageEventEntity.KEY_INSTANCE_ID});
+        cursor.addRow(
+                new Object[]{
+                        101L,
+                        1001L,
+                        "com.android.settings1",
+                        10001L,
+                        AppUsageEventType.DEVICE_SHUTDOWN.getNumber(),
+                        "com.android.settings2",
+                        100001L});
+        cursor.moveToFirst();
+
+        final AppUsageEvent appUsageEvent = ConvertUtils.convertToAppUsageEventFromCursor(cursor);
+
+        assertThat(appUsageEvent.getUid()).isEqualTo(101L);
+        assertThat(appUsageEvent.getUserId()).isEqualTo(1001L);
+        assertThat(appUsageEvent.getPackageName()).isEqualTo("com.android.settings1");
+        assertThat(appUsageEvent.getTimestamp()).isEqualTo(10001L);
+        assertThat(appUsageEvent.getType()).isEqualTo(AppUsageEventType.DEVICE_SHUTDOWN);
+        assertThat(appUsageEvent.getTaskRootPackageName()).isEqualTo("com.android.settings2");
+        assertThat(appUsageEvent.getInstanceId()).isEqualTo(100001L);
+    }
+
+    @Test
+    public void convertToAppUsageEventFromCursor_emptyInstanceIdAndRootName_returnExpectedResult() {
+        final MatrixCursor cursor = new MatrixCursor(
+                new String[]{
+                        AppUsageEventEntity.KEY_UID,
+                        AppUsageEventEntity.KEY_USER_ID,
+                        AppUsageEventEntity.KEY_PACKAGE_NAME,
+                        AppUsageEventEntity.KEY_TIMESTAMP,
+                        AppUsageEventEntity.KEY_APP_USAGE_EVENT_TYPE});
+        cursor.addRow(
+                new Object[]{
+                        101L,
+                        1001L,
+                        "com.android.settings1",
+                        10001L,
+                        AppUsageEventType.DEVICE_SHUTDOWN.getNumber()});
+        cursor.moveToFirst();
+
+        final AppUsageEvent appUsageEvent = ConvertUtils.convertToAppUsageEventFromCursor(cursor);
+
+        assertThat(appUsageEvent.getUid()).isEqualTo(101L);
+        assertThat(appUsageEvent.getUserId()).isEqualTo(1001L);
+        assertThat(appUsageEvent.getPackageName()).isEqualTo("com.android.settings1");
+        assertThat(appUsageEvent.getTimestamp()).isEqualTo(10001L);
+        assertThat(appUsageEvent.getType()).isEqualTo(AppUsageEventType.DEVICE_SHUTDOWN);
+        assertThat(appUsageEvent.getTaskRootPackageName()).isEqualTo("");
+        assertThat(appUsageEvent.getInstanceId()).isEqualTo(0);
+    }
+
+    @Test
+    public void convertToBatteryEvent_normalCase_returnsExpectedResult() {
+        final BatteryEvent batteryEvent = ConvertUtils.convertToBatteryEvent(
+                666L, BatteryEventType.POWER_DISCONNECTED, 88);
+        assertThat(batteryEvent.getTimestamp()).isEqualTo(666L);
+        assertThat(batteryEvent.getType()).isEqualTo(BatteryEventType.POWER_DISCONNECTED);
+        assertThat(batteryEvent.getBatteryLevel()).isEqualTo(88);
     }
 
     @Test
@@ -446,107 +450,51 @@ public final class ConvertUtilsTest {
     }
 
     @Test
-    public void resolveMultiUsersData_replaceOtherUsersItemWithExpectedEntry() {
-        final int currentUserId = mContext.getUserId();
-        final Map<Integer, List<BatteryDiffEntry>> entryMap = new HashMap<>();
-        // Without other users time slot.
-        entryMap.put(0, Arrays.asList(
-                createBatteryDiffEntry(
-                        currentUserId,
-                        ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
-                        /*consumePercentage=*/ 50)));
-        // With other users time slot.
-        final List<BatteryDiffEntry> withOtherUsersList = new ArrayList<>();
-        entryMap.put(1, withOtherUsersList);
-        withOtherUsersList.add(
-                createBatteryDiffEntry(
-                        currentUserId + 1,
-                        ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY,
-                        /*consumePercentage=*/ 20));
-        withOtherUsersList.add(
-                createBatteryDiffEntry(
-                        currentUserId + 2,
-                        ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
-                        /*consumePercentage=*/ 30));
-        withOtherUsersList.add(
-                createBatteryDiffEntry(
-                        currentUserId + 3,
-                        ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
-                        /*consumePercentage=*/ 40));
+    public void getEffectivePackageName_currentActivity_returnPackageName() throws RemoteException {
+        when(mUsageStatsManager.getUsageSource()).thenReturn(USAGE_SOURCE_CURRENT_ACTIVITY);
+        final String packageName = "com.android.settings1";
+        final String taskRootPackageName = "com.android.settings2";
 
-        ConvertUtils.resolveMultiUsersData(mContext, entryMap);
-
-        assertThat(entryMap.get(0).get(0).getPercentOfTotal()).isEqualTo(50);
-        // Asserts with other users items.
-        final List<BatteryDiffEntry> entryList = entryMap.get(1);
-        assertThat(entryList).hasSize(2);
-        assertBatteryDiffEntry(
-                entryList.get(0),
-                currentUserId + 1,
-                /*uid=*/ 0,
-                ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY,
-                /*consumePercentage=*/ 20);
-        assertBatteryDiffEntry(
-                entryList.get(1),
-                BatteryUtils.UID_OTHER_USERS,
-                BatteryUtils.UID_OTHER_USERS,
-                ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
-                /*consumePercentage=*/ 70);
+        assertThat(ConvertUtils.getEffectivePackageName(
+                mUsageStatsManager, packageName, taskRootPackageName))
+                .isEqualTo(packageName);
     }
 
-    private BatteryDiffEntry createBatteryDiffEntry(
-            long userId, int counsumerType, double consumePercentage) {
-        final ContentValues values = new ContentValues();
-        values.put(BatteryHistEntry.KEY_USER_ID, userId);
-        values.put(BatteryHistEntry.KEY_CONSUMER_TYPE, counsumerType);
-        final BatteryDiffEntry batteryDiffEntry =
-                new BatteryDiffEntry(
-                        mContext,
-                        /*foregroundUsageTimeInMs=*/ 0,
-                        /*backgroundUsageTimeInMs=*/ 0,
-                        /*consumePower=*/ consumePercentage,
-                        new BatteryHistEntry(values));
-        batteryDiffEntry.setTotalConsumePower(100f);
-        return batteryDiffEntry;
+    @Test
+    public void getEffectivePackageName_usageSourceThrowException_returnPackageName()
+            throws RemoteException {
+        when(mUsageStatsManager.getUsageSource()).thenThrow(new RemoteException());
+        final String packageName = "com.android.settings1";
+        final String taskRootPackageName = "com.android.settings2";
+
+        assertThat(ConvertUtils.getEffectivePackageName(
+                mUsageStatsManager, packageName, taskRootPackageName))
+                .isEqualTo(packageName);
     }
 
-    private static BatteryHistEntry createBatteryHistEntry(
-            String packageName, String appLabel, double consumePower,
-            long uid, long foregroundUsageTimeInMs, long backgroundUsageTimeInMs) {
-        // Only insert required fields.
-        final ContentValues values = new ContentValues();
-        values.put(BatteryHistEntry.KEY_PACKAGE_NAME, packageName);
-        values.put(BatteryHistEntry.KEY_APP_LABEL, appLabel);
-        values.put(BatteryHistEntry.KEY_UID, Long.valueOf(uid));
-        values.put(BatteryHistEntry.KEY_CONSUMER_TYPE,
-                Integer.valueOf(ConvertUtils.CONSUMER_TYPE_UID_BATTERY));
-        values.put(BatteryHistEntry.KEY_CONSUME_POWER, consumePower);
-        values.put(BatteryHistEntry.KEY_FOREGROUND_USAGE_TIME,
-                Long.valueOf(foregroundUsageTimeInMs));
-        values.put(BatteryHistEntry.KEY_BACKGROUND_USAGE_TIME,
-                Long.valueOf(backgroundUsageTimeInMs));
-        return new BatteryHistEntry(values);
+    @Test
+    public void getEffectivePackageName_rootActivity_returnTaskRootPackageName()
+            throws RemoteException {
+        when(mUsageStatsManager.getUsageSource()).thenReturn(USAGE_SOURCE_TASK_ROOT_ACTIVITY);
+        final String packageName = "com.android.settings1";
+        final String taskRootPackageName = "com.android.settings2";
+
+        assertThat(ConvertUtils.getEffectivePackageName(
+                mUsageStatsManager, packageName, taskRootPackageName))
+                .isEqualTo(taskRootPackageName);
     }
 
-    private static void assertBatteryDiffEntry(
-            BatteryDiffEntry entry, long userId, long uid, int counsumerType,
-            double consumePercentage) {
-        assertThat(entry.mBatteryHistEntry.mUid).isEqualTo(uid);
-        assertThat(entry.mBatteryHistEntry.mUserId).isEqualTo(userId);
-        assertThat(entry.mBatteryHistEntry.mConsumerType).isEqualTo(counsumerType);
-        assertThat(entry.getPercentOfTotal()).isEqualTo(consumePercentage);
-    }
+    @Test
+    public void getEffectivePackageName_nullOrEmptyTaskRoot_returnPackageName()
+            throws RemoteException {
+        when(mUsageStatsManager.getUsageSource()).thenReturn(USAGE_SOURCE_TASK_ROOT_ACTIVITY);
+        final String packageName = "com.android.settings1";
 
-    private static void assertBatteryDiffEntry(
-            BatteryDiffEntry entry, int percentOfTotal,
-            long foregroundUsageTimeInMs, long backgroundUsageTimeInMs) {
-        assertThat((int) entry.getPercentOfTotal()).isEqualTo(percentOfTotal);
-        assertThat(entry.mForegroundUsageTimeInMs).isEqualTo(foregroundUsageTimeInMs);
-        assertThat(entry.mBackgroundUsageTimeInMs).isEqualTo(backgroundUsageTimeInMs);
-    }
-
-    private static Long generateTimestamp(int index) {
-        // "2021-04-23 07:00:00 UTC" + index hours
-        return 1619247600000L + index * DateUtils.HOUR_IN_MILLIS;
+        assertThat(ConvertUtils.getEffectivePackageName(
+                mUsageStatsManager, packageName, /*taskRootPackageName=*/ null))
+                .isEqualTo(packageName);
+        assertThat(ConvertUtils.getEffectivePackageName(
+                mUsageStatsManager, packageName, /*taskRootPackageName=*/ ""))
+                .isEqualTo(packageName);
     }
 }

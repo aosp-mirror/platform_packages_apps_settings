@@ -19,6 +19,7 @@
     android:layout_height="@dimen/notif_channel_panel_max_height"
     android:maxHeight="@dimen/notif_channel_panel_max_height"
     android:background="@drawable/settings_panel_background"
+    android:fitsSystemWindows="true"
     android:orientation="vertical"
     android:layout_width="match_parent">
 
@@ -29,7 +30,6 @@
         android:layout_width="match_parent"/>
 
     <View
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/footer_divider"
         android:layout_width="match_parent"
         android:layout_height="@dimen/horizontal_divider_height"

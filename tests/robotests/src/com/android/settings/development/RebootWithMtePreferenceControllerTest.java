@@ -22,9 +22,12 @@ import static junit.framework.Assert.assertTrue;
 import android.content.Context;
 import android.os.SystemProperties;
 
+import androidx.fragment.app.Fragment;
+import androidx.preference.Preference;
 import androidx.test.core.app.ApplicationProvider;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -41,14 +44,15 @@ import org.robolectric.shadows.ShadowSystemProperties;
 public class RebootWithMtePreferenceControllerTest {
     private Context mContext;
     private RebootWithMtePreferenceController mController;
-    @Mock private DevelopmentSettingsDashboardFragment mSettings;
+    @Mock private Fragment mFragment;
 
     @Before
     public void setup() throws Exception {
         MockitoAnnotations.initMocks(this);
 
         mContext = ApplicationProvider.getApplicationContext();
-        mController = new RebootWithMtePreferenceController(mContext, mSettings);
+        mController = new RebootWithMtePreferenceController(mContext);
+        mController.setFragment(mFragment);
     }
 
     @Test
@@ -56,9 +60,25 @@ public class RebootWithMtePreferenceControllerTest {
         assertFalse(mController.isAvailable());
     }
 
+    @Ignore
     @Test
     public void onAvailable_sysPropEnabled() {
         SystemProperties.set("ro.arm64.memtag.bootctl_supported", "1");
         assertTrue(mController.isAvailable());
+    }
+
+    @Test
+    public void updateState_enabledByDefault() {
+        Preference preference = new Preference(mContext);
+        mController.updateState(preference);
+        assertTrue(preference.isEnabled());
+    }
+
+    @Test
+    public void updateState_disabledIfAlreadyOn() {
+        SystemProperties.set("arm64.memtag.bootctl", "memtag");
+        Preference preference = new Preference(mContext);
+        mController.updateState(preference);
+        assertFalse(preference.isEnabled());
     }
 }

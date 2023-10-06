@@ -31,10 +31,14 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
+import com.android.settings.R;
+import com.android.settings.fuelgauge.BatteryOptimizeHistoricalLogEntry.Action;
 import com.android.settingslib.fuelgauge.PowerAllowlistBackend;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.Arrays;
+import java.util.List;
 
 /** A utility class for application usage operation. */
 public class BatteryOptimizeUtils {
@@ -48,6 +52,7 @@ public class BatteryOptimizeUtils {
     @VisibleForTesting boolean mAllowListed;
 
     private final String mPackageName;
+    private final Context mContext;
     private final int mUid;
 
     // If current user is admin, match apps from all users. Otherwise, only match the currect user.
@@ -76,13 +81,13 @@ public class BatteryOptimizeUtils {
 
     public BatteryOptimizeUtils(Context context, int uid, String packageName) {
         mUid = uid;
+        mContext = context;
         mPackageName = packageName;
         mAppOpsManager = context.getSystemService(AppOpsManager.class);
         mBatteryUtils = BatteryUtils.getInstance(context);
         mPowerAllowListBackend = PowerAllowlistBackend.getInstance(context);
-        mMode = mAppOpsManager
-                .checkOpNoThrow(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, mUid, mPackageName);
-        mAllowListed = mPowerAllowListBackend.isAllowlisted(mPackageName);
+        mMode = getMode(mAppOpsManager, mUid, mPackageName);
+        mAllowListed = mPowerAllowListBackend.isAllowlisted(mPackageName, mUid);
     }
 
     /** Gets the {@link OptimizationMode} based on mode and allowed list. */
@@ -114,19 +119,19 @@ public class BatteryOptimizeUtils {
     }
 
     /** Sets the {@link OptimizationMode} for associated app. */
-    public void setAppUsageState(@OptimizationMode int mode) {
-        if (getAppOptimizationMode(mMode, mAllowListed) == mode) {
+    public void setAppUsageState(@OptimizationMode int mode, Action action) {
+        if (getAppOptimizationMode() == mode) {
             Log.w(TAG, "set the same optimization mode for: " + mPackageName);
             return;
         }
-        setAppUsageStateInternal(mode, mUid, mPackageName, mBatteryUtils, mPowerAllowListBackend);
+        setAppUsageStateInternal(
+                mContext, mode, mUid, mPackageName, mBatteryUtils, mPowerAllowListBackend, action);
     }
 
-    /**
-     * Return {@code true} if package name is valid (can get an uid).
-     */
-    public boolean isValidPackageName() {
-        return mBatteryUtils.getPackageUid(mPackageName) != BatteryUtils.UID_NULL;
+    /** Return {@code true} if it is disabled for default optimized mode only. */
+    public boolean isDisabledForOptimizeModeOnly() {
+        return getAllowList(mContext).contains(mPackageName)
+                || mBatteryUtils.getPackageUid(mPackageName) == BatteryUtils.UID_NULL;
     }
 
     /**
@@ -134,7 +139,7 @@ public class BatteryOptimizeUtils {
      */
     public boolean isSystemOrDefaultApp() {
         mPowerAllowListBackend.refreshList();
-        return isSystemOrDefaultApp(mPowerAllowListBackend, mPackageName);
+        return isSystemOrDefaultApp(mPowerAllowListBackend, mPackageName, mUid);
     }
 
     /**
@@ -182,17 +187,17 @@ public class BatteryOptimizeUtils {
                     AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, info.uid, info.packageName);
             @OptimizationMode
             final int optimizationMode = getAppOptimizationMode(
-                    mode, allowlistBackend.isAllowlisted(info.packageName));
+                    mode, allowlistBackend.isAllowlisted(info.packageName, info.uid));
             // Ignores default optimized/unknown state or system/default apps.
             if (optimizationMode == MODE_OPTIMIZED
                     || optimizationMode == MODE_UNKNOWN
-                    || isSystemOrDefaultApp(allowlistBackend, info.packageName)) {
+                    || isSystemOrDefaultApp(allowlistBackend, info.packageName, info.uid)) {
                 continue;
             }
 
             // Resets to the default mode: MODE_OPTIMIZED.
-            setAppUsageStateInternal(MODE_OPTIMIZED, info.uid, info.packageName, batteryUtils,
-                    allowlistBackend);
+            setAppUsageStateInternal(context, MODE_OPTIMIZED, info.uid, info.packageName,
+                    batteryUtils, allowlistBackend, Action.RESET);
         }
     }
 
@@ -200,15 +205,26 @@ public class BatteryOptimizeUtils {
         return mPackageName == null ? UNKNOWN_PACKAGE : mPackageName;
     }
 
-    private static boolean isSystemOrDefaultApp(
-            PowerAllowlistBackend powerAllowlistBackend, String packageName) {
+    static int getMode(AppOpsManager appOpsManager, int uid, String packageName) {
+        return appOpsManager.checkOpNoThrow(
+                AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, uid, packageName);
+    }
+
+    static boolean isSystemOrDefaultApp(
+            PowerAllowlistBackend powerAllowlistBackend, String packageName, int uid) {
         return powerAllowlistBackend.isSysAllowlisted(packageName)
-                || powerAllowlistBackend.isDefaultActiveApp(packageName);
+                || powerAllowlistBackend.isDefaultActiveApp(packageName, uid);
+    }
+
+    static List<String> getAllowList(Context context) {
+        return Arrays.asList(context.getResources().getStringArray(
+                R.array.config_disable_optimization_mode_apps));
     }
 
     private static void setAppUsageStateInternal(
-            @OptimizationMode int mode, int uid, String packageName, BatteryUtils batteryUtils,
-            PowerAllowlistBackend powerAllowlistBackend) {
+            Context context, @OptimizationMode int mode, int uid, String packageName,
+            BatteryUtils batteryUtils, PowerAllowlistBackend powerAllowlistBackend,
+            Action action) {
         if (mode == MODE_UNKNOWN) {
             Log.d(TAG, "set unknown app optimization mode.");
             return;
@@ -221,13 +237,16 @@ public class BatteryOptimizeUtils {
                 mode == MODE_RESTRICTED ? AppOpsManager.MODE_IGNORED : AppOpsManager.MODE_ALLOWED;
         final boolean allowListed = mode == MODE_UNRESTRICTED;
 
-        setAppOptimizationModeInternal(appOpsManagerMode, allowListed, uid, packageName,
-                    batteryUtils, powerAllowlistBackend);
+        setAppOptimizationModeInternal(context, appOpsManagerMode, allowListed, uid,
+                packageName, batteryUtils, powerAllowlistBackend, action);
     }
 
     private static void setAppOptimizationModeInternal(
-            int appStandbyMode, boolean allowListed, int uid, String packageName,
-            BatteryUtils batteryUtils, PowerAllowlistBackend powerAllowlistBackend) {
+            Context context, int appStandbyMode, boolean allowListed, int uid, String packageName,
+            BatteryUtils batteryUtils, PowerAllowlistBackend powerAllowlistBackend,
+            Action action) {
+        final String packageNameKey = BatteryHistoricalLogUtil
+                .getPackageNameWithUserId(packageName, UserHandle.myUserId());
         try {
             batteryUtils.setForceAppStandby(uid, packageName, appStandbyMode);
             if (allowListed) {
@@ -236,16 +255,31 @@ public class BatteryOptimizeUtils {
                 powerAllowlistBackend.removeApp(packageName);
             }
         } catch (Exception e) {
+            // Error cases, set standby mode as -1 for logging.
+            appStandbyMode = -1;
             Log.e(TAG, "set OPTIMIZATION MODE failed for " + packageName, e);
         }
+        BatteryHistoricalLogUtil.writeLog(
+                context,
+                action,
+                packageNameKey,
+                createLogEvent(appStandbyMode, allowListed));
     }
 
     private void refreshState() {
         mPowerAllowListBackend.refreshList();
-        mAllowListed = mPowerAllowListBackend.isAllowlisted(mPackageName);
+        mAllowListed = mPowerAllowListBackend.isAllowlisted(mPackageName, mUid);
         mMode = mAppOpsManager
                 .checkOpNoThrow(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, mUid, mPackageName);
         Log.d(TAG, String.format("refresh %s state, allowlisted = %s, mode = %d",
                 mPackageName, mAllowListed, mMode));
+    }
+
+    private static String createLogEvent(int appStandbyMode, boolean allowListed) {
+        return appStandbyMode < 0 ? "Apply optimize setting ERROR" :
+                String.format("\tStandbyMode: %s, allowListed: %s, mode: %s",
+                        appStandbyMode,
+                        allowListed,
+                        getAppOptimizationMode(appStandbyMode, allowListed));
     }
 }

@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.android.settings.accessibility;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -78,6 +79,7 @@ public class ToggleScreenReaderPreferenceFragmentForSetupWizardTest {
     @Test
     public void onViewCreated_verifyAction() {
         mFragment.onViewCreated(mGlifLayoutView, null);
+
         verify(mGlifLayoutView).setHeaderText(TEST_TITLE);
         verify(mGlifLayoutView).setDescriptionText(
                 mContext.getString(R.string.talkback_summary));

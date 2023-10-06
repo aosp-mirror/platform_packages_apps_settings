@@ -22,11 +22,9 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.R;
 import com.android.settings.accessibility.TextReadingPreferenceFragment.EntryPoint;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.instrumentation.SettingsStatsLog;
-import com.android.settingslib.widget.LayoutPreference;
 
 /**
  * The controller of the reset button in the text and reading options page.
@@ -53,9 +51,9 @@ class TextReadingResetController extends BasePreferenceController {
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
 
-        final LayoutPreference layoutPreference = screen.findPreference(getPreferenceKey());
-        final View view = layoutPreference.findViewById(R.id.reset_button);
-        view.setOnClickListener(v -> {
+        final TextReadingResetPreference resetPreference =
+                (TextReadingResetPreference) screen.findPreference(getPreferenceKey());
+        resetPreference.setOnResetClickListener(v -> {
             if (mOnResetClickListener != null) {
                 mOnResetClickListener.onClick(v);
 

@@ -6,7 +6,7 @@
  * You may obtain a copy of the License at
  *
  *      http://www.apache.org/licenses/LICENSE-2.0
- *
+ *Visibility_setGoneForPrimaryButton_buttonGroupIsGone
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -48,8 +48,8 @@ public class CardPreferenceTest {
         context.setTheme(R.style.Theme_Settings);
         mCardPreference = new CardPreference(context);
 
-        View rootView = View.inflate(context, R.layout.card_preference_layout, /* parent= */ null);
-        mHolder = PreferenceViewHolder.createInstanceForTests(rootView);
+        mHolder = PreferenceViewHolder.createInstanceForTests(
+                View.inflate(context, R.layout.card_preference_layout, /* parent= */ null));
     }
 
     @Test
@@ -63,14 +63,14 @@ public class CardPreferenceTest {
     }
 
     @Test
-    public void onBindViewHolder_noButtonVisible_buttonsLayoutShouldBeGone() {
+    public void onBindViewHolder_noButtonVisible_buttonsLayoutIsGone() {
         mCardPreference.onBindViewHolder(mHolder);
 
         assertThat(getCardPreferenceButtonsView().getVisibility()).isEqualTo(GONE);
     }
 
     @Test
-    public void onBindViewHolder_setPrimaryButtonVisibility_buttonsLayoutShouldBeVisible() {
+    public void onBindViewHolder_setPrimaryButtonVisibility_buttonsLayoutIsVisible() {
         mCardPreference.setPrimaryButtonVisible(true);
 
         mCardPreference.onBindViewHolder(mHolder);
@@ -79,7 +79,7 @@ public class CardPreferenceTest {
     }
 
     @Test
-    public void onBindViewHolder_setPrimaryButtonVisibility_shouldApplyToPrimaryButton() {
+    public void onBindViewHolder_setPrimaryButtonVisibilityToVisible() {
         mCardPreference.setPrimaryButtonVisible(true);
 
         mCardPreference.onBindViewHolder(mHolder);
@@ -88,7 +88,7 @@ public class CardPreferenceTest {
     }
 
     @Test
-    public void onBindViewHolder_setSecondaryButtonVisibility_buttonsLayoutShouldBeVisible() {
+    public void onBindViewHolder_setSecondaryButtonVisibility_buttonsLayoutIsVisible() {
         mCardPreference.setSecondaryButtonVisible(true);
 
         mCardPreference.onBindViewHolder(mHolder);
@@ -97,7 +97,7 @@ public class CardPreferenceTest {
     }
 
     @Test
-    public void onBindViewHolder_setSecondaryButtonVisibility_shouldApplyToSecondaryButton() {
+    public void onBindViewHolder_setSecondaryButtonVisibilityToVisible() {
         mCardPreference.setSecondaryButtonVisible(true);
 
         mCardPreference.onBindViewHolder(mHolder);
@@ -106,7 +106,7 @@ public class CardPreferenceTest {
     }
 
     @Test
-    public void onBindViewHolder_setPrimaryButtonText_shouldApplyToPrimaryButton() {
+    public void onBindViewHolder_setPrimaryButtonTextToExpectedText() {
         String expectedText = "primary-button";
         mCardPreference.setPrimaryButtonText(expectedText);
 
@@ -116,7 +116,7 @@ public class CardPreferenceTest {
     }
 
     @Test
-    public void onBindViewHolder_setSecondaryButtonText_shouldApplyToSecondaryButton() {
+    public void onBindViewHolder_setSecondaryButtonTextToExpectedText() {
         String expectedText = "secondary-button";
         mCardPreference.setSecondaryButtonText(expectedText);
 
@@ -140,7 +140,7 @@ public class CardPreferenceTest {
     }
 
     @Test
-    public void performClickOnPrimaryButton_shouldCalledClickListener() {
+    public void performClickOnPrimaryButton_callClickListener() {
         final boolean[] hasCalled = {false};
         View.OnClickListener clickListener = v -> hasCalled[0] = true;
         mCardPreference.setPrimaryButtonClickListener(clickListener);
@@ -152,7 +152,7 @@ public class CardPreferenceTest {
     }
 
     @Test
-    public void performClickOnSecondaryButton_shouldCalledClickListener() {
+    public void performClickOnSecondaryButton_callClickListener() {
         final boolean[] hasCalled = {false};
         View.OnClickListener clickListener = v -> hasCalled[0] = true;
         mCardPreference.setSecondaryButtonClickListener(clickListener);
@@ -178,7 +178,7 @@ public class CardPreferenceTest {
     }
 
     @Test
-    public void setPrimaryButtonVisibility_setTrueAfterBindViewHolder_shouldBeVisible() {
+    public void setPrimaryButtonVisibility_setTrueAfterBindViewHolder_isVisible() {
         mCardPreference.setPrimaryButtonVisible(false);
         mCardPreference.onBindViewHolder(mHolder);
 
@@ -198,7 +198,7 @@ public class CardPreferenceTest {
     }
 
     @Test
-    public void setPrimaryButtonText_setNull_shouldBeEmptyText() {
+    public void setPrimaryButtonText_setNull_isEmptyText() {
         final String emptyString = "";
         mCardPreference.setPrimaryButtonText("1234");
         mCardPreference.onBindViewHolder(mHolder);
@@ -222,7 +222,7 @@ public class CardPreferenceTest {
     }
 
     @Test
-    public void setPrimaryButtonClickListener_setNull_shouldClearTheOnClickListener() {
+    public void setPrimaryButtonClickListener_setNull_clearTheOnClickListener() {
         final String[] hasCalled = {"not called"};
         View.OnClickListener clickListener = v -> hasCalled[0] = "called once";
         mCardPreference.setPrimaryButtonClickListener(clickListener);
@@ -235,7 +235,7 @@ public class CardPreferenceTest {
     }
 
     @Test
-    public void setSecondaryButtonVisibility_setTrueAfterBindViewHolder_shouldBeVisible() {
+    public void setSecondaryButtonVisibility_setTrueAfterBindViewHolder_isVisible() {
         mCardPreference.setSecondaryButtonVisible(false);
         mCardPreference.onBindViewHolder(mHolder);
 
@@ -255,7 +255,7 @@ public class CardPreferenceTest {
     }
 
     @Test
-    public void setSecondaryButtonText_setNull_shouldBeEmptyText() {
+    public void setSecondaryButtonText_setNull_isEmptyText() {
         String emptyString = "";
         mCardPreference.setSecondaryButtonText("1234");
         mCardPreference.onBindViewHolder(mHolder);
@@ -279,7 +279,7 @@ public class CardPreferenceTest {
     }
 
     @Test
-    public void setSecondaryButtonClickListener_setNull_shouldClearTheOnClickListener() {
+    public void setSecondaryButtonClickListener_setNull_clearTheOnClickListener() {
         final String[] hasCalled = {"not called"};
         View.OnClickListener clickListener = v -> hasCalled[0] = "called once";
         mCardPreference.setSecondaryButtonClickListener(clickListener);
@@ -292,8 +292,7 @@ public class CardPreferenceTest {
     }
 
     @Test
-    public void
-            setPrimaryButtonVisibility_onlyPrimaryButtonVisible_setGone_buttonGroupShouldBeGone() {
+    public void setPrimaryButtonVisibility_setGoneForSecondaryButton_buttonGroupIsGone() {
         mCardPreference.setPrimaryButtonVisible(true);
         mCardPreference.setSecondaryButtonVisible(false);
         mCardPreference.onBindViewHolder(mHolder);
@@ -307,8 +306,7 @@ public class CardPreferenceTest {
     }
 
     @Test
-    public void
-            setSecondaryButtonVisibility_only2ndButtonVisible_setGone_buttonGroupShouldBeGone() {
+    public void setSecondaryButtonVisibility_setGoneForPrimaryButton_buttonGroupIsGone() {
         mCardPreference.setPrimaryButtonVisible(false);
         mCardPreference.setSecondaryButtonVisible(true);
         mCardPreference.onBindViewHolder(mHolder);
@@ -317,6 +315,17 @@ public class CardPreferenceTest {
                 .isEqualTo(VISIBLE);
 
         mCardPreference.setSecondaryButtonVisible(false);
+
+        assertThat(getCardPreferenceButtonsView().getVisibility()).isEqualTo(GONE);
+    }
+
+    @Test
+    public void resetLayoutState_buttonGroupIsGone() {
+        mCardPreference.setPrimaryButtonVisible(true);
+        mCardPreference.setSecondaryButtonVisible(true);
+        mCardPreference.onBindViewHolder(mHolder);
+
+        mCardPreference.resetLayoutState();
 
         assertThat(getCardPreferenceButtonsView().getVisibility()).isEqualTo(GONE);
     }

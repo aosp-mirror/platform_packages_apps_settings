@@ -21,17 +21,16 @@ import static com.android.settings.Utils.SYSTEMUI_PACKAGE_NAME;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Process;
+import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.SparseIntArray;
 
 import com.android.internal.util.ArrayUtils;
-import com.android.settings.R;
-import com.android.settings.fuelgauge.batteryusage.BatteryHistEntry;
 import com.android.settingslib.fuelgauge.Estimate;
 
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 /** Implementation of {@code PowerUsageFeatureProvider} */
@@ -71,28 +70,33 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
-    public boolean isLocationSettingEnabled(String[] packages) {
-        return false;
+    public boolean isBatteryUsageEnabled() {
+        return true;
     }
 
     @Override
-    public boolean isAdditionalBatteryInfoEnabled() {
+    public double getBatteryUsageListScreenOnTimeThresholdInMs() {
+        return 0;
+    }
+
+    @Override
+    public double getBatteryUsageListConsumePowerThreshold() {
+        return 0;
+    }
+
+    @Override
+    public List<String> getSystemAppsAllowlist() {
+        return new ArrayList<>();
+    }
+
+    @Override
+    public boolean isLocationSettingEnabled(String[] packages) {
         return false;
     }
 
     @Override
     public Intent getAdditionalBatteryInfoIntent() {
         return null;
-    }
-
-    @Override
-    public boolean isAdvancedUiEnabled() {
-        return true;
-    }
-
-    @Override
-    public boolean isPowerAccountingToggleEnabled() {
-        return true;
     }
 
     @Override
@@ -126,33 +130,13 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
-    public String getAdvancedUsageScreenInfoString() {
-        return null;
-    }
-
-    @Override
-    public boolean getEarlyWarningSignal(Context context, String id) {
-        return false;
-    }
-
-    @Override
     public boolean isSmartBatterySupported() {
         return mContext.getResources().getBoolean(
                 com.android.internal.R.bool.config_smart_battery_available);
     }
 
     @Override
-    public boolean isChartGraphEnabled(Context context) {
-        return false;
-    }
-
-    @Override
     public boolean isChartGraphSlotsEnabled(Context context) {
-        return false;
-    }
-
-    @Override
-    public boolean isAdaptiveChargingSupported() {
         return false;
     }
 
@@ -162,39 +146,62 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
+    public String getFullChargeIntentAction() {
+        return Intent.ACTION_BATTERY_LEVEL_CHANGED;
+    }
+
+    @Override
     public boolean isExtraDefend() {
         return false;
     }
 
     @Override
-    public Map<Long, Map<String, BatteryHistEntry>> getBatteryHistory(Context context) {
-        return null;
+    public boolean delayHourlyJobWhenBooting() {
+        return true;
     }
 
     @Override
-    public Map<Long, Map<String, BatteryHistEntry>> getBatteryHistorySinceLastFullCharge(
-            Context context) {
-        return null;
-    }
-
-    @Override
-    public Uri getBatteryHistoryUri() {
-        return null;
-    }
-
-    @Override
-    public Set<CharSequence> getHideBackgroundUsageTimeSet(Context context) {
+    public Set<Integer> getOthersSystemComponentSet() {
         return new ArraySet<>();
     }
 
     @Override
-    public CharSequence[] getHideApplicationEntries(Context context) {
-        return new CharSequence[0];
+    public Set<String> getOthersCustomComponentNameSet() {
+        return new ArraySet<>();
     }
 
     @Override
-    public CharSequence[] getHideApplicationSummary(Context context) {
-        return context.getResources().getTextArray(
-                R.array.allowlist_hide_summary_in_battery_usage);
+    public Set<Integer> getHideSystemComponentSet() {
+        return new ArraySet<>();
+    }
+
+    @Override
+    public Set<String> getHideApplicationSet() {
+        return new ArraySet<>();
+    }
+
+    @Override
+    public Set<String> getHideBackgroundUsageTimeSet() {
+        return new ArraySet<>();
+    }
+
+    @Override
+    public Set<String> getIgnoreScreenOnTimeTaskRootSet() {
+        return new ArraySet<>();
+    }
+
+    @Override
+    public String getBuildMetadata1(Context context) {
+        return null;
+    }
+
+    @Override
+    public String getBuildMetadata2(Context context) {
+        return null;
+    }
+
+    @Override
+    public boolean isValidToRestoreOptimizationMode(ArrayMap<String, String> deviceInfoMap) {
+        return false;
     }
 }

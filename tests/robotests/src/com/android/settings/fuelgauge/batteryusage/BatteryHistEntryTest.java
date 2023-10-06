@@ -57,6 +57,10 @@ public final class BatteryHistEntryTest {
         when(mMockBatteryEntry.isHidden()).thenReturn(true);
         when(mBatteryUsageStats.getConsumedPower()).thenReturn(5.1);
         when(mMockBatteryEntry.getConsumedPower()).thenReturn(1.1);
+        when(mMockBatteryEntry.getConsumedPowerInForeground()).thenReturn(1.2);
+        when(mMockBatteryEntry.getConsumedPowerInForegroundService()).thenReturn(1.3);
+        when(mMockBatteryEntry.getConsumedPowerInBackground()).thenReturn(1.4);
+        when(mMockBatteryEntry.getConsumedPowerInCached()).thenReturn(1.5);
         mMockBatteryEntry.mPercent = 0.3;
         when(mMockBatteryEntry.getTimeInForegroundMs()).thenReturn(1234L);
         when(mMockBatteryEntry.getTimeInBackgroundMs()).thenReturn(5689L);
@@ -64,14 +68,15 @@ public final class BatteryHistEntryTest {
         when(mMockBatteryEntry.getConsumerType())
                 .thenReturn(ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY);
         final ContentValues values =
-                ConvertUtils.convertToContentValues(
+                ConvertUtils.convertBatteryEntryToContentValues(
                         mMockBatteryEntry,
                         mBatteryUsageStats,
                         /*batteryLevel=*/ 12,
                         /*batteryStatus=*/ BatteryManager.BATTERY_STATUS_FULL,
                         /*batteryHealth=*/ BatteryManager.BATTERY_HEALTH_COLD,
                         /*bootTimestamp=*/ 101L,
-                        /*timestamp=*/ 10001L);
+                        /*timestamp=*/ 10001L,
+                        /*isFullChargeStart=*/ false);
 
         assertBatteryHistEntry(
                 new BatteryHistEntry(values),
@@ -93,6 +98,10 @@ public final class BatteryHistEntryTest {
                         /*timestamp=*/ 10001L,
                         /*totalPower=*/ 5.1,
                         /*consumePower=*/ 1.1,
+                        /*foregroundUsageConsumePower=*/ 1.2,
+                        /*foregroundServiceUsageConsumePower=*/ 1.3,
+                        /*backgroundUsageConsumePower=*/ 1.4,
+                        /*cachedUsageConsumePower=*/ 1.5,
                         /*foregroundUsageTimeInMs=*/ 1234L,
                         /*backgroundUsageTimeInMs=*/ 5689L,
                         /*batteryLevel=*/ 12),
@@ -124,7 +133,13 @@ public final class BatteryHistEntryTest {
     public void testGetKey_consumerSystemType_returnExpectedString() {
         final ContentValues values = getContentValuesWithType(
                 ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY);
-        values.put(BatteryHistEntry.KEY_DRAIN_TYPE, 1);
+        final BatteryInformation batteryInformation =
+                BatteryInformation
+                        .newBuilder()
+                        .setDrainType(1)
+                        .build();
+        values.put(BatteryHistEntry.KEY_BATTERY_INFORMATION,
+                ConvertUtils.convertBatteryInformationToString(batteryInformation));
         final BatteryHistEntry batteryHistEntry = new BatteryHistEntry(values);
 
         assertThat(batteryHistEntry.getKey()).isEqualTo("S|1");
@@ -171,6 +186,10 @@ public final class BatteryHistEntryTest {
                 lowerTimestamp,
                 /*totalPower=*/ 50,
                 /*consumePower=*/ 10,
+                /*foregroundUsageConsumePower=*/ 1,
+                /*foregroundServiceUsageConsumePower=*/ 2,
+                /*backgroundUsageConsumePower=*/ 3,
+                /*cachedUsageConsumePower=*/ 4,
                 /*foregroundUsageTimeInMs=*/ 100,
                 /*backgroundUsageTimeInMs=*/ 200,
                 /*batteryLevel=*/ 90);
@@ -179,6 +198,10 @@ public final class BatteryHistEntryTest {
                 upperTimestamp,
                 /*totalPower=*/ 80,
                 /*consumePower=*/ 20,
+                /*foregroundUsageConsumePower=*/ 4,
+                /*foregroundServiceUsageConsumePower=*/ 5,
+                /*backgroundUsageConsumePower=*/ 6,
+                /*cachedUsageConsumePower=*/ 5,
                 /*foregroundUsageTimeInMs=*/ 200,
                 /*backgroundUsageTimeInMs=*/ 300,
                 /*batteryLevel=*/ 80);
@@ -197,6 +220,10 @@ public final class BatteryHistEntryTest {
                 /*timestamp=*/ slotTimestamp,
                 /*totalPower=*/ 50 + 0.5 * (80 - 50),
                 /*consumePower=*/ 10 + 0.5 * (20 - 10),
+                /*foregroundUsageConsumePower=*/ 1 + 0.5 * (4 - 1),
+                /*foregroundServiceUsageConsumePower=*/ 2 + 0.5 * (5 - 2),
+                /*backgroundUsageConsumePower=*/ 3 + 0.5 * (6 - 3),
+                /*cachedUsageConsumePower=*/ 4 + 0.5 * (5 - 4),
                 /*foregroundUsageTimeInMs=*/ Math.round(100 + 0.5 * (200 - 100)),
                 /*backgroundUsageTimeInMs=*/ Math.round(200 + 0.5 * (300 - 200)),
                 /*batteryLevel=*/ (int) Math.round(90 + 0.5 * (80 - 90)));
@@ -206,13 +233,16 @@ public final class BatteryHistEntryTest {
     public void testInterpolate_withoutLowerEntryData_returnExpectedResult() {
         final long slotTimestamp = 200L;
         final long upperTimestamp = 300L;
-        final long lowerTimestamp = 100L;
         final double ratio = 0.5;
         final BatteryHistEntry upperHistEntry = createBatteryHistEntry(
                 /*bootTimestamp=*/ 1200L,
                 upperTimestamp,
                 /*totalPower=*/ 80,
                 /*consumePower=*/ 20,
+                /*foregroundUsageConsumePower=*/ 4,
+                /*foregroundServiceUsageConsumePower=*/ 5,
+                /*backgroundUsageConsumePower=*/ 6,
+                /*cachedUsageConsumePower=*/ 5,
                 /*foregroundUsageTimeInMs=*/ 200,
                 /*backgroundUsageTimeInMs=*/ 300,
                 /*batteryLevel=*/ 80);
@@ -231,6 +261,10 @@ public final class BatteryHistEntryTest {
                 /*timestamp=*/ slotTimestamp,
                 /*totalPower=*/ 0.5 * 80,
                 /*consumePower=*/ 0.5 * 20,
+                /*foregroundUsageConsumePower=*/ 0.5 * 4,
+                /*foregroundServiceUsageConsumePower=*/ 0.5 * 5,
+                /*backgroundUsageConsumePower=*/ 0.5 * 6,
+                /*cachedUsageConsumePower=*/ 0.5 * 5,
                 /*foregroundUsageTimeInMs=*/ Math.round(0.5 * 200),
                 /*backgroundUsageTimeInMs=*/ Math.round(0.5 * 300),
                 /*batteryLevel=*/ upperHistEntry.mBatteryLevel);
@@ -255,6 +289,10 @@ public final class BatteryHistEntryTest {
                 /*timestamp=*/ 10001L,
                 /*totalPower=*/ 5.1,
                 /*consumePower=*/ 1.1,
+                /*foregroundUsageConsumePower=*/ 1.2,
+                /*foregroundServiceUsageConsumePower=*/ 1.3,
+                /*backgroundUsageConsumePower=*/ 1.4,
+                /*cachedUsageConsumePower=*/ 1.5,
                 /*foregroundUsageTimeInMs=*/ 1234L,
                 /*backgroundUsageTimeInMs=*/ 5689L,
                 /*batteryLevel=*/ 12);
@@ -268,6 +306,10 @@ public final class BatteryHistEntryTest {
             long timestamp,
             double totalPower,
             double consumePower,
+            double foregroundUsageConsumePower,
+            double foregroundServiceUsageConsumePower,
+            double backgroundUsageConsumePower,
+            double cachedUsageConsumePower,
             long foregroundUsageTimeInMs,
             long backgroundUsageTimeInMs,
             int batteryLevel) {
@@ -283,6 +325,11 @@ public final class BatteryHistEntryTest {
         assertThat(entry.mZoneId).isEqualTo(TimeZone.getDefault().getID());
         assertThat(entry.mTotalPower).isEqualTo(totalPower);
         assertThat(entry.mConsumePower).isEqualTo(consumePower);
+        assertThat(entry.mForegroundUsageConsumePower).isEqualTo(foregroundUsageConsumePower);
+        assertThat(entry.mForegroundServiceUsageConsumePower)
+                .isEqualTo(foregroundServiceUsageConsumePower);
+        assertThat(entry.mBackgroundUsageConsumePower).isEqualTo(backgroundUsageConsumePower);
+        assertThat(entry.mCachedUsageConsumePower).isEqualTo(cachedUsageConsumePower);
         assertThat(entry.mPercentOfTotal).isEqualTo(percentOfTotal);
         assertThat(entry.mForegroundUsageTimeInMs).isEqualTo(foregroundUsageTimeInMs);
         assertThat(entry.mBackgroundUsageTimeInMs).isEqualTo(backgroundUsageTimeInMs);
@@ -301,6 +348,10 @@ public final class BatteryHistEntryTest {
             long timestamp,
             double totalPower,
             double consumePower,
+            double foregroundUsageConsumePower,
+            double foregroundServiceUsageConsumePower,
+            double backgroundUsageConsumePower,
+            double cachedUsageConsumePower,
             long foregroundUsageTimeInMs,
             long backgroundUsageTimeInMs,
             int batteryLevel) {
@@ -308,42 +359,44 @@ public final class BatteryHistEntryTest {
             new String[]{
                 BatteryHistEntry.KEY_UID,
                 BatteryHistEntry.KEY_USER_ID,
-                BatteryHistEntry.KEY_APP_LABEL,
                 BatteryHistEntry.KEY_PACKAGE_NAME,
-                BatteryHistEntry.KEY_IS_HIDDEN,
-                BatteryHistEntry.KEY_BOOT_TIMESTAMP,
                 BatteryHistEntry.KEY_TIMESTAMP,
-                BatteryHistEntry.KEY_ZONE_ID,
-                BatteryHistEntry.KEY_TOTAL_POWER,
-                BatteryHistEntry.KEY_CONSUME_POWER,
-                BatteryHistEntry.KEY_PERCENT_OF_TOTAL,
-                BatteryHistEntry.KEY_FOREGROUND_USAGE_TIME,
-                BatteryHistEntry.KEY_BACKGROUND_USAGE_TIME,
-                BatteryHistEntry.KEY_DRAIN_TYPE,
                 BatteryHistEntry.KEY_CONSUMER_TYPE,
-                BatteryHistEntry.KEY_BATTERY_LEVEL,
-                BatteryHistEntry.KEY_BATTERY_STATUS,
-                BatteryHistEntry.KEY_BATTERY_HEALTH});
+                BatteryHistEntry.KEY_BATTERY_INFORMATION});
+        DeviceBatteryState deviceBatteryState =
+                DeviceBatteryState
+                        .newBuilder()
+                        .setBatteryLevel(batteryLevel)
+                        .setBatteryStatus(BatteryManager.BATTERY_STATUS_FULL)
+                        .setBatteryHealth(BatteryManager.BATTERY_HEALTH_COLD)
+                        .build();
+        BatteryInformation batteryInformation =
+                BatteryInformation
+                        .newBuilder()
+                        .setDeviceBatteryState(deviceBatteryState)
+                        .setIsHidden(true)
+                        .setBootTimestamp(bootTimestamp)
+                        .setZoneId(TimeZone.getDefault().getID())
+                        .setAppLabel("Settings")
+                        .setTotalPower(totalPower)
+                        .setConsumePower(consumePower)
+                        .setForegroundUsageConsumePower(foregroundUsageConsumePower)
+                        .setForegroundServiceUsageConsumePower(foregroundServiceUsageConsumePower)
+                        .setBackgroundUsageConsumePower(backgroundUsageConsumePower)
+                        .setCachedUsageConsumePower(cachedUsageConsumePower)
+                        .setPercentOfTotal(0.3)
+                        .setDrainType(3)
+                        .setForegroundUsageTimeInMs(foregroundUsageTimeInMs)
+                        .setBackgroundUsageTimeInMs(backgroundUsageTimeInMs)
+                        .build();
         cursor.addRow(
             new Object[]{
                 Long.valueOf(1001),
                 Long.valueOf(UserHandle.getUserId(1001)),
-                "Settings",
                 "com.google.android.settings.battery",
-                Integer.valueOf(1),
-                Long.valueOf(bootTimestamp),
                 Long.valueOf(timestamp),
-                TimeZone.getDefault().getID(),
-                Double.valueOf(totalPower),
-                Double.valueOf(consumePower),
-                Double.valueOf(0.3),
-                Long.valueOf(foregroundUsageTimeInMs),
-                Long.valueOf(backgroundUsageTimeInMs),
-                Integer.valueOf(3),
                 Integer.valueOf(ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY),
-                Integer.valueOf(batteryLevel),
-                Integer.valueOf(BatteryManager.BATTERY_STATUS_FULL),
-                Integer.valueOf(BatteryManager.BATTERY_HEALTH_COLD)});
+                ConvertUtils.convertBatteryInformationToString(batteryInformation)});
         cursor.moveToFirst();
         return new BatteryHistEntry(cursor);
     }

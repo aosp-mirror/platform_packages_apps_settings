@@ -240,7 +240,7 @@ public class SetupFingerprintEnrollIntroductionTest {
     @Test
     @Ignore
     public void testLockPattern() {
-        ShadowStorageManager.setIsFileEncryptedNativeOrEmulated(false);
+        ShadowStorageManager.setIsFileEncrypted(false);
 
         mController.create().postCreate(null).resume();
 

@@ -16,6 +16,8 @@
 
 package com.android.settings.support;
 
+import static com.android.settings.support.SupportDashboardActivity.ACTION_SUPPORT_SETTINGS;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
@@ -59,7 +61,7 @@ public class SupportDashboardActivityTest {
                 mContext.getString(R.string.page_tab_title_support));
         assertThat(value.intentTargetPackage).isEqualTo(mContext.getPackageName());
         assertThat(value.intentTargetClass).isEqualTo(SupportDashboardActivity.class.getName());
-        assertThat(value.intentAction).isEqualTo(Intent.ACTION_MAIN);
+        assertThat(value.intentAction).isEqualTo(ACTION_SUPPORT_SETTINGS);
     }
 
     @Test

@@ -16,6 +16,10 @@
 
 package com.android.settings;
 
+import android.content.Context;
+import android.content.Intent;
+import android.provider.Settings;
+
 /**
  * Convenience methods and constants for testing.
  */
@@ -23,4 +27,15 @@ public class TestUtils {
     public static final long KILOBYTE = 1024L; // TODO: Change to 1000 in O Robolectric.
     public static final long MEGABYTE = KILOBYTE * KILOBYTE;
     public static final long GIGABYTE = KILOBYTE * MEGABYTE;
+
+    public static void setScheduledLevel(Context context, int scheduledLevel) {
+        Settings.Global.putInt(context.getContentResolver(),
+                Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, scheduledLevel);
+    }
+
+    public static int getScheduledLevel(Context context) {
+        return Settings.Global.getInt(context.getContentResolver(),
+                Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, /*defaultValue*/ 0);
+    }
+
 }

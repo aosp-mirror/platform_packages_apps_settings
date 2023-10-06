@@ -18,27 +18,6 @@
 */
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <!-- Choices for timezone picker first level.
-         These values will be used as search terms for TimeZone displayName
-         strings. --> <skip />
-    <!-- The time zone picker screen has two levels.  The first level allows the user to choose a region. -->
-    <string-array name="timezone_filters">
-        <!-- The next level of the time zoner picker should show time zones from the Americas. -->
-        <item>America</item>
-        <!-- The next level of the time zoner picker should show time zones from Europe. -->
-        <item>Europe</item>
-        <!-- The next level of the time zoner picker should show time zones from Africa. -->
-        <item>Africa</item>
-        <!-- The next level of the time zoner picker should show time zones from Asia. -->
-        <item>Asia</item>
-        <!-- The next level of the time zoner picker should show time zones from Australia. -->
-        <item>Australia</item>
-        <!-- The next level of the time zoner picker should show time zones from Pacific. -->
-        <item>Pacific</item>
-        <!-- The next level of the time zoner picker should show time zones from ALL regions. -->
-        <item>All</item>
-    </string-array>
-
     <!-- Display settings.  The delay in inactivity before the screen is turned off. These are shown in a list dialog. -->
     <string-array name="screen_timeout_entries">
         <item>15 seconds</item>
@@ -52,38 +31,6 @@
 
     <!-- Do not translate. -->
     <string-array name="screen_timeout_values" translatable="false">
-        <!-- Do not translate. -->
-        <item>15000</item>
-        <!-- Do not translate. -->
-        <item>30000</item>
-        <!-- Do not translate. -->
-        <item>60000</item>
-        <!-- Do not translate. -->
-        <item>120000</item>
-        <!-- Do not translate. -->
-        <item>300000</item>
-        <!-- Do not translate. -->
-        <item>600000</item>
-        <!-- Do not translate. -->
-        <item>1800000</item>
-    </string-array>
-
-    <!-- Display settings.  The delay in inactivity before the dream is shown. These are shown in a list dialog. -->
-    <string-array name="dream_timeout_entries">
-        <item>Never</item>
-        <item>15 seconds</item>
-        <item>30 seconds</item>
-        <item>1 minute</item>
-        <item>2 minutes</item>
-        <item>5 minutes</item>
-        <item>10 minutes</item>
-        <item>30 minutes</item>
-    </string-array>
-
-    <!-- Do not translate. -->
-    <string-array name="dream_timeout_values" translatable="false">
-        <!-- Do not translate. -->
-        <item>0</item>
         <!-- Do not translate. -->
         <item>15000</item>
         <!-- Do not translate. -->
@@ -189,35 +136,6 @@
         <item>Temporarily avoiding poor connection</item>
     </string-array>
 
-    <!-- Match this with the order of NetworkInfo.DetailedState. --> <skip />
-    <!-- Wi-Fi settings. The status messages when the network is known. -->
-    <string-array name="wifi_status_with_ssid">
-        <!-- Status message of Wi-Fi when it is idle. -->
-        <item></item>
-        <!-- Status message of Wi-Fi when it is scanning. -->
-        <item>Scanning\u2026</item>
-        <!-- Status message of Wi-Fi when it is connecting to a network. -->
-        <item>Connecting to <xliff:g id="network_name">%1$s</xliff:g>\u2026</item>
-        <!-- Status message of Wi-Fi when it is authenticating with a network. -->
-        <item>Authenticating with <xliff:g id="network_name">%1$s</xliff:g>\u2026</item>
-        <!-- Status message of Wi-Fi when it is obtaining IP address from a network. -->
-        <item>Obtaining IP address from <xliff:g id="network_name">%1$s</xliff:g>\u2026</item>
-        <!-- Status message of Wi-Fi when it is connected to a network. -->
-        <item>Connected to <xliff:g id="network_name">%1$s</xliff:g></item>
-        <!-- Status message of Wi-Fi when it is suspended. -->
-        <item>Suspended</item>
-        <!-- Status message of Wi-Fi when it is disconnecting from a network. -->
-        <item>Disconnecting from <xliff:g id="network_name">%1$s</xliff:g>\u2026</item>
-        <!-- Status message of Wi-Fi when it is disconnected. -->
-        <item>Disconnected</item>
-        <!-- Status message of Wi-Fi when it is a failure. -->
-        <item>Unsuccessful</item>
-        <!-- Status message of Wi-Fi when it is blocked. -->
-        <item>Blocked</item>
-        <!-- Status message of Wi-Fi when connectiong is being verified. -->
-        <item>Temporarily avoiding poor connection</item>
-    </string-array>
-
     <!-- Security types for wireless tether -->
     <string-array name="wifi_tether_security">
         <!-- Do not translate. -->
@@ -281,6 +199,15 @@
         <item>Require certificate status</item>
     </string-array>
 
+    <!-- Match this with the integer value of WifiEnterpriseConfig.TlsVersion -->
+    <!-- Type of TlsVersion -->
+    <string-array name="wifi_eap_tls_ver" translatable="false">
+        <item>TLS v1.0</item>
+        <item>TLS v1.1</item>
+        <item>TLS v1.2</item>
+        <item>TLS v1.3</item>
+    </string-array>
+
     <!-- Wi-Fi AP band settings.  Either 2.4GHz or 5GHz prefer. -->
     <!-- Note that adding/removing/moving the items will need wifi settings code change. -->
     <string-array translatable="false" name="wifi_ap_band">
@@ -291,22 +218,6 @@
     <string-array translatable="false" name="wifi_ap_band_summary">
         <item>@string/wifi_ap_choose_2G</item>
         <item>@string/wifi_ap_prefer_5G</item>
-    </string-array>
-
-    <string-array translatable="false" name="wifi_ap_band_config_2G_only">
-        <item>@string/wifi_ap_choose_auto</item>
-        <item>@string/wifi_ap_choose_2G</item>
-    </string-array>
-
-    <!-- Wi-Fi WPS setup for p2p connections.  -->
-    <!-- Note that adding/removing/moving the items will need wifi settings code change. -->
-    <string-array name="wifi_p2p_wps_setup">
-        <!-- Push button based configuration involves pushing a button on two connecting devices [CHAR LIMIT=30]-->
-        <item>Push button</item>
-        <!-- This involves entering a pin obtained from a peer device [CHAR LIMIT=30] -->
-        <item>PIN from peer device</item>
-        <!-- This involves generating a pin from this device [CHAR LIMIT=20] -->
-        <item>PIN from this device</item>
     </string-array>
 
     <!-- Match this with the order of WifiP2pDevice.Status -->
@@ -321,14 +232,6 @@
 
 
     <!-- Bluetooth Settings -->
-
-    <!-- Discoverable mode timeout options -->
-    <string-array name="bluetooth_visibility_timeout_entries">
-        <item>2 minutes</item>
-        <item>5 minutes</item>
-        <item>1 hour</item>
-        <item>Never time out</item>
-    </string-array>
 
     <!-- Bluetooth developer settings: Titles for maximum number of connected audio devices -->
     <string-array name="bluetooth_max_connected_audio_devices">
@@ -350,6 +253,23 @@
         <item>5</item>
     </string-array>
 
+    <!-- Bluetooth audio routing settings: Titles for audio routing options -->
+    <string-array name="bluetooth_audio_routing_titles">
+        <item>Use app default</item>
+        <item>Play on hearing device</item>
+        <item>Play on phone speaker</item>
+    </string-array>
+
+    <!-- Bluetooth audio routing settings: Values for audio routing options -->
+    <string-array name="bluetooth_audio_routing_values" translatable="false">
+        <!-- Decide automatically -->
+        <item>0</item>
+        <!-- Play on hearing device -->
+        <item>1</item>
+        <!-- Play on phone speaker -->
+        <item>2</item>
+    </string-array>
+
     <!-- Match this with drawable.wifi_signal. --> <skip />
     <!-- Wi-Fi settings. The signal strength a Wi-Fi network has. -->
     <string-array name="wifi_signal">
@@ -358,29 +278,6 @@
         <item>Fair</item>
         <item>Good</item>
         <item>Excellent</item>
-    </string-array>
-
-    <!-- Data Usage settings. Range of data usage. -->
-    <string-array name="data_usage_data_range">
-        <!-- Last 30 days [CHAR LIMIT=25]-->
-        <item>Last 30 days</item>
-        <!-- Set usage cycle [CHAR LIMIT=25]-->
-        <item>Set usage cycle...</item>
-    </string-array>
-
-    <!-- Display options for UsageStats class -->
-    <string-array name="usage_stats_display_order_types">
-        <item>Usage time</item>
-        <item>Last time used</item>
-        <item>App name</item>
-    </string-array>
-
-    <!-- EAP method -->
-    <string-array name="wifi_eap_entries">
-        <item>PEAP</item>
-        <item>TLS</item>
-        <item>TTLS</item>
-        <item>PWD</item>
     </string-array>
 
     <!-- Phase 2 options for PEAP -->
@@ -536,29 +433,6 @@
         <item>imsi</item>
         <!-- Do not translate. -->
         <item>gid</item>
-    </string-array>
-
-    <!-- Apps on SD installation location options in ApplicationSettings -->
-    <string-array name="app_install_location_entries">
-        <item>Internal device storage</item>
-        <item>Removable SD card</item>
-        <item>Let the system decide</item>
-    </string-array>
-
-    <!-- Do not translate. -->
-    <string-array name="app_install_location_values" translatable="false">
-        <item>device</item>
-        <item>sdcard</item>
-        <item>auto</item>
-    </string-array>
-
-    <!-- Names of categories of app ops tabs -->
-    <string-array name="app_ops_categories">
-        <item>Location</item>
-        <item>Personal</item>
-        <item>Messaging</item>
-        <item>Media</item>
-        <item>Device</item>
     </string-array>
 
     <!-- User display names for app ops codes -->
@@ -1012,20 +886,6 @@
         <item>IKEv2/IPSec RSA</item>
     </string-array>
 
-    <!-- Match this with the constants in VpnProfile. --> <skip />
-    <!-- Longer descriptions for each VPN type. [CHAR LIMIT=100] -->
-    <string-array name="vpn_types_long">
-        <item>PPTP VPN</item>
-        <item>L2TP/IPSec VPN with pre-shared keys</item>
-        <item>L2TP/IPSec VPN with certificates</item>
-        <item>IPSec VPN with pre-shared keys and Xauth authentication</item>
-        <item>IPSec VPN with certificates and Xauth authentication</item>
-        <item>IPSec VPN with certificates and hybrid authentication</item>
-        <item>IKEv2/IPSec VPN with certificates and username/password authentication</item>
-        <item>IKEv2/IPSec VPN with pre-shared keys</item>
-        <item>IKEv2/IPSec VPN with certificates</item>
-    </string-array>
-
     <!-- VPN proxy settings. -->
     <string-array name="vpn_proxy_settings">
         <!-- No HTTP proxy is used for the current VPN [CHAR LIMIT=25] -->
@@ -1049,24 +909,6 @@
         <item>Timeout</item>
         <!-- Status message when VPN is failed. -->
         <item>Unsuccessful</item>
-    </string-array>
-
-    <!-- User content ratings for restricted users [CHAR LIMIT=30] -->
-    <string-array name="user_content_ratings_entries" translatable="false">
-        <item>Ascended being</item>
-        <item>Human</item>
-        <item>Neanderthal</item>
-        <item>Chimp</item>
-        <item>Monkey</item>
-    </string-array>
-
-    <!-- Values for user content ratings for restricted users -->
-    <string-array name="user_content_ratings_values" translatable="false">
-        <item>5</item>
-        <item>4</item>
-        <item>3</item>
-        <item>2</item>
-        <item>1</item>
     </string-array>
 
     <!-- Values for premium SMS permission selector [CHAR LIMIT=30] -->
@@ -1110,13 +952,6 @@
         <item>3</item>
     </integer-array>
 
-    <!-- Summary for color space adjustment modes for accessibility -->
-    <string-array name="daltonizer_mode_summaries" translatable="false">
-        <item>@string/daltonizer_mode_deuteranomaly</item>
-        <item>@string/daltonizer_mode_protanomaly</item>
-        <item>@string/daltonizer_mode_tritanomaly</item>
-    </string-array>
-
     <!-- Keys for color space adjustment modes for accessibility -->
     <string-array name="daltonizer_mode_keys" translatable="false">
         <item>daltonizer_mode_deuteranomaly</item>
@@ -1132,41 +967,6 @@
         <item>13</item>
         <item>0</item>
     </integer-array>
-
-    <!-- Battery saver mode: allowable trigger threshold levels. -->
-    <integer-array name="battery_saver_trigger_values" translatable="false" >
-        <item>0</item>
-        <item>5</item>
-        <item>15</item>
-        <item>50</item>
-        <item>100</item>
-    </integer-array>
-
-    <!-- Process stats memory use details: labels for memory states -->
-    <string-array name="proc_stats_memory_states" >
-        <item>Normal</item>
-        <item>Moderate</item>
-        <item>Low</item>
-        <item>Critical</item>
-    </string-array>
-
-    <!-- Process stats memory use details: labels for process -->
-    <string-array name="proc_stats_process_states" >
-        <item>Persistent</item>
-        <item>Top activity</item>
-        <item>Important (foreground)</item>
-        <item>Important (background)</item>
-        <item>Backup</item>
-        <item>Heavy weight</item>
-        <item>Service (running)</item>
-        <item>Service (restarting)</item>
-        <item>Receiver</item>
-        <item>Home</item>
-        <item>Last activity</item>
-        <item>Cached (activity)</item>
-        <item>Cached (activity client)</item>
-        <item>Cached (empty)</item>
-    </string-array>
 
     <!-- Array of color for sim color for multi-sim in light mode -->
     <integer-array name="sim_color_light">
@@ -1228,13 +1028,6 @@
         <item>either_charging_or_docked</item>
     </string-array>
 
-    <string-array name="zen_mode_contacts_messages_entries" translatable="false">
-        <item>@string/zen_mode_from_anyone</item>
-        <item>@string/zen_mode_from_contacts</item>
-        <item>@string/zen_mode_from_starred</item>
-        <item>@string/zen_mode_none_messages</item>
-    </string-array>
-
     <string-array name="zen_mode_contacts_calls_entries" translatable="false">
         <item>@string/zen_mode_from_anyone</item>
         <item>@string/zen_mode_from_contacts</item>
@@ -1247,19 +1040,6 @@
         <item>zen_mode_from_contacts</item>
         <item>zen_mode_from_starred</item>
         <item>zen_mode_from_none</item>
-    </string-array>
-
-    <string-array name="zen_mode_conversations_entries" translatable="false">
-        <item>@string/zen_mode_from_all_conversations</item>
-        <item>@string/zen_mode_from_important_conversations</item>
-        <item>@string/zen_mode_from_no_conversations</item>
-    </string-array>
-
-    <!-- these values correspond with ZenPolicy.ConversationSenders -->
-    <string-array name="zen_mode_conversations_values" translatable="false">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
     </string-array>
 
     <!--String arrays for notification swipe direction -->
@@ -1300,31 +1080,6 @@
         <item>0</item>
     </string-array>
 
-    <!-- Titles for ui dark mode preference. -->
-    <string-array name="dark_ui_mode_entries" >
-        <item>Dark</item>
-        <item>Light</item>
-    </string-array>
-
-    <!-- Values for ui dark mode preference. -->
-    <string-array name="dark_ui_mode_values" translatable="false" >
-        <item>yes</item>
-        <item>no</item>
-    </string-array>
-
-    <string-array name="gesture_prevent_ringing_entries" translatable="false">
-        <item>@string/prevent_ringing_option_vibrate</item>
-        <item>@string/prevent_ringing_option_mute</item>
-        <item>@string/prevent_ringing_option_none</item>
-    </string-array>
-
-    <!-- Keep in sync with Settings.Secure.VOLUME_HUSH_* -->
-    <string-array name="gesture_prevent_ringing_values" translatable="false">
-        <item>1</item>
-        <item>2</item>
-        <item>0</item>
-    </string-array>
-
     <!-- Titles for autofill logging level preference. [CHAR LIMIT=50] -->
     <string-array name="autofill_logging_level_entries">
         <item>Off</item>
@@ -1341,11 +1096,6 @@
 
     <string-array name="enabled_networks_choices" translatable="false">
         <item>@string/network_lte</item>
-        <item>@string/network_3G</item>
-        <item>@string/network_2G</item>
-    </string-array>
-    <string-array name="enabled_networks_4g_choices" translatable="false">
-        <item>@string/network_4G</item>
         <item>@string/network_3G</item>
         <item>@string/network_2G</item>
     </string-array>
@@ -1531,16 +1281,6 @@
         <item>@string/enhanced_4g_lte_mode_title_4g_calling</item>
     </string-array>
 
-    <!-- Carrier variant of Enhaced 4G LTE Mode summary.  [CHAR LIMIT=NONE] -->
-    <string-array name="enhanced_4g_lte_mode_sumary_variant">
-        <!-- 0: Default -->
-        <item>@string/enhanced_4g_lte_mode_summary</item>
-        <!-- 1: Verizon -->
-        <item>@string/enhanced_4g_lte_mode_summary</item>
-        <!-- 2: All carriers who want 4G -->
-        <item>@string/enhanced_4g_lte_mode_summary_4g_calling</item>
-    </string-array>
-
     <!-- Array of titles palette list for accessibility. -->
     <string-array name="setting_palette_data" translatable="false" >
         <item>@string/color_red</item>
@@ -1575,31 +1315,6 @@
         <item>@string/rtt_settings_visible_during_call</item>
         <!-- 3:  Always visible -->
         <item>@string/rtt_settings_always_visible</item>
-    </string-array>
-
-    <!-- Values of list for one-handed timeout options. [DO NOT TRANSLATE] -->
-    <string-array name="one_handed_timeout_values" translatable="false">
-        <item>0</item>
-        <item>4</item>
-        <item>8</item>
-        <item>12</item>
-    </string-array>
-
-    <!-- Array of titles list for notification listener notification types. [DO NOT TRANSLATE] -->
-    <string-array name="notif_types_titles" translatable="false">
-        <item>@string/notif_type_ongoing</item>
-        <item>@string/notif_type_conversation</item>
-        <item>@string/notif_type_alerting</item>
-        <item>@string/notif_type_silent</item>
-    </string-array>
-
-    <!-- Values of list for notification listener notification types. Values need to match
-    android.service.notification.NotificationListenerService. [DO NOT TRANSLATE] -->
-    <string-array name="notif_types_values" translatable="false">
-        <item>8</item>
-        <item>1</item>
-        <item>2</item>
-        <item>4</item>
     </string-array>
 
     <!-- All the preference when the open app supports TapPay -->
@@ -1654,6 +1369,41 @@
          [CHAR LIMIT=NONE] -->
     <string-array name="allowlist_hide_summary_in_battery_usage" translatable="false">
     </string-array>
+
+    <!-- A list for all temperature units. [DO NOT TRANSLATE] -->
+    <string-array name="temperature_units">
+        <item>default</item>
+        <item>celsius</item>
+        <item>fahrenhe</item>
+    </string-array>
+
+    <!-- A list for all days of a week. [DO NOT TRANSLATE] -->
+    <string-array name="first_day_of_week">
+        <item>default</item>
+        <item>sun</item>
+        <item>mon</item>
+        <item>tue</item>
+        <item>wed</item>
+        <item>thu</item>
+        <item>fri</item>
+        <item>sat</item>
+    </string-array>
+
+    <!-- Screen flash notification color when activating -->
+    <array name="screen_flash_notification_preset_opacity_colors">
+        <item>@color/screen_flash_preset_opacity_color_01</item>
+        <item>@color/screen_flash_preset_opacity_color_02</item>
+        <item>@color/screen_flash_preset_opacity_color_03</item>
+        <item>@color/screen_flash_preset_opacity_color_04</item>
+        <item>@color/screen_flash_preset_opacity_color_05</item>
+        <item>@color/screen_flash_preset_opacity_color_06</item>
+        <item>@color/screen_flash_preset_opacity_color_07</item>
+        <item>@color/screen_flash_preset_opacity_color_08</item>
+        <item>@color/screen_flash_preset_opacity_color_09</item>
+        <item>@color/screen_flash_preset_opacity_color_10</item>
+        <item>@color/screen_flash_preset_opacity_color_11</item>
+        <item>@color/screen_flash_preset_opacity_color_12</item>
+    </array>
 
     <!-- hide 3G option from preferred network type UI -->
     <integer-array name="network_mode_3g_deprecated_carrier_id" translatable="false">

@@ -21,24 +21,18 @@ import static android.content.Context.FINGERPRINT_SERVICE;
 import static android.content.pm.PackageManager.FEATURE_FACE;
 import static android.content.pm.PackageManager.FEATURE_FINGERPRINT;
 
-import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_KEY;
-import static com.android.settings.core.PreferenceXmlParserUtils.MetadataFlag.FLAG_INCLUDE_PREF_SCREEN;
-import static com.android.settings.core.PreferenceXmlParserUtils.MetadataFlag.FLAG_NEED_KEY;
-
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
-import android.annotation.XmlRes;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.hardware.face.FaceManager;
 import android.hardware.fingerprint.FingerprintManager;
-import android.os.Bundle;
 import android.os.Looper;
-import android.provider.SearchIndexableResource;
 
 import androidx.lifecycle.Lifecycle;
 import androidx.preference.Preference;
@@ -48,10 +42,11 @@ import androidx.test.annotation.UiThreadTest;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import com.android.settings.TestUtils;
 import com.android.settings.biometrics.combination.CombinedBiometricStatusPreferenceController;
 import com.android.settings.biometrics.face.FaceStatusPreferenceController;
 import com.android.settings.biometrics.fingerprint.FingerprintStatusPreferenceController;
-import com.android.settings.core.PreferenceXmlParserUtils;
+import com.android.settings.safetycenter.SafetyCenterManagerWrapper;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.security.trustagent.TrustAgentManager;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -64,7 +59,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(AndroidJUnit4.class)
@@ -85,6 +79,8 @@ public class SecuritySettingsTest {
     private FingerprintManager mFingerprintManager;
     @Mock
     private PackageManager mPackageManager;
+    @Mock
+    private SafetyCenterManagerWrapper mSafetyCenterManagerWrapper;
 
     private PreferenceScreen mScreen;
 
@@ -96,6 +92,7 @@ public class SecuritySettingsTest {
         }
 
         MockitoAnnotations.initMocks(this);
+        SafetyCenterManagerWrapper.sInstance = mSafetyCenterManagerWrapper;
         mContext = spy(ApplicationProvider.getApplicationContext());
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
         when(mPackageManager.hasSystemFeature(FEATURE_FACE)).thenReturn(true);
@@ -132,12 +129,14 @@ public class SecuritySettingsTest {
     }
 
     @Test
-    public void noAlternativeFragmentAvailable_pageIndexIncluded() throws Exception {
+    public void noAlternativeFragmentAvailableAndSafetyCenterIsDisabled_pageIndexIncluded()
+            throws Exception {
         when(mSecuritySettingsFeatureProvider.hasAlternativeSecuritySettingsFragment()).thenReturn(
                 false);
+        when(mSafetyCenterManagerWrapper.isEnabled(any())).thenReturn(false);
         BaseSearchIndexProvider indexProvider = SecuritySettings.SEARCH_INDEX_DATA_PROVIDER;
 
-        List<String> allXmlKeys = getAllXmlKeys(indexProvider);
+        List<String> allXmlKeys = TestUtils.getAllXmlKeys(mContext, indexProvider);
         List<String> nonIndexableKeys = indexProvider.getNonIndexableKeys(mContext);
         allXmlKeys.removeAll(nonIndexableKeys);
 
@@ -150,7 +149,7 @@ public class SecuritySettingsTest {
                 true);
         BaseSearchIndexProvider indexProvider = SecuritySettings.SEARCH_INDEX_DATA_PROVIDER;
 
-        List<String> allXmlKeys = getAllXmlKeys(indexProvider);
+        List<String> allXmlKeys = TestUtils.getAllXmlKeys(mContext, indexProvider);
         List<String> nonIndexableKeys = indexProvider.getNonIndexableKeys(mContext);
         allXmlKeys.removeAll(nonIndexableKeys);
 
@@ -338,29 +337,6 @@ public class SecuritySettingsTest {
         assertThat(mPreferenceFace.isVisible()).isFalse();
         assertThat(mPreferenceFingerprint.isVisible()).isTrue();
         assertThat(mPreferenceCombined.isVisible()).isFalse();
-    }
-
-    private List<String> getAllXmlKeys(BaseSearchIndexProvider indexProvider) throws Exception {
-        final List<SearchIndexableResource> resources = indexProvider.getXmlResourcesToIndex(
-                mContext, true /* not used*/);
-        if (resources == null || resources.isEmpty()) {
-            return new ArrayList<>();
-        }
-        final List<String> keys = new ArrayList<>();
-        for (SearchIndexableResource res : resources) {
-            keys.addAll(getKeysFromXml(res.xmlResId));
-        }
-        return keys;
-    }
-
-    private List<String> getKeysFromXml(@XmlRes int xmlResId) throws Exception {
-        final List<String> keys = new ArrayList<>();
-        final List<Bundle> metadata = PreferenceXmlParserUtils.extractMetadata(mContext, xmlResId,
-                FLAG_NEED_KEY | FLAG_INCLUDE_PREF_SCREEN);
-        for (Bundle bundle : metadata) {
-            keys.add(bundle.getString(METADATA_KEY));
-        }
-        return keys;
     }
 
     boolean isFacePrefAvailable(List<AbstractPreferenceController> controllers) {
