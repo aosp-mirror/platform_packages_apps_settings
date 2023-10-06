@@ -2244,17 +2244,14 @@
     <string name="power_usage_level_and_status" msgid="821521456989429593">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="6997529817917076536">"Батарея будет разряжена через <xliff:g id="REMAIN">%1$s</xliff:g>"</string>
     <string name="power_charge_remaining" msgid="7046064326172265116">"Батарея будет заряжена через <xliff:g id="UNTIL_CHARGED">%1$s</xliff:g>"</string>
-    <!-- no translation found for power_usage_detail_screen_time (6027274749498485283) -->
-    <skip />
-    <!-- no translation found for power_usage_detail_background_time (3661437083554322691) -->
-    <skip />
+    <string name="power_usage_detail_screen_time" msgid="6027274749498485283">"Время в активном режиме"</string>
+    <string name="power_usage_detail_background_time" msgid="3661437083554322691">"Время в фоновом режиме"</string>
     <string name="low_battery_summary" msgid="4458925347316501953">"Низкий заряд батареи"</string>
     <string name="background_activity_summary" msgid="3817376868497046016">"Разрешить приложению работать в фоновом режиме"</string>
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"Ограничить работу в фоновом режиме?"</string>
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"Это действие может привести к неправильной работе приложения."</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"Оптимизация расхода заряда батареи для этого приложения не настроена.\n\nВключите ее, чтобы установить ограничения."</string>
-    <!-- no translation found for manager_battery_usage_category_title (1493303237531629961) -->
-    <skip />
+    <string name="manager_battery_usage_category_title" msgid="1493303237531629961">"Управление расходом заряда"</string>
     <string name="manager_battery_usage_unrestricted_title" msgid="2426486290463258032">"Без ограничений"</string>
     <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"С оптимизацией"</string>
     <string name="manager_battery_usage_restricted_title" msgid="7702863764130323118">"Ограничено"</string>
@@ -2396,8 +2393,7 @@
     <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"Всего: меньше минуты"</string>
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"В фоновом режиме: меньше минуты"</string>
     <string name="battery_usage_screen_time_less_than_one_minute" msgid="2911989465891679033">"Время использования устройства: меньше минуты"</string>
-    <!-- no translation found for power_usage_time_less_than_one_minute (8407404329381010144) -->
-    <skip />
+    <string name="power_usage_time_less_than_one_minute" msgid="8407404329381010144">"Менее минуты"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Всего: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"В фоновом режиме: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_screen_time" msgid="3973865893520804115">"Время использования: <xliff:g id="TIME">%s</xliff:g>"</string>
@@ -4179,8 +4175,7 @@
     <string name="credman_keywords" msgid="8305600680836806170">"данные, ключ доступа, пароль"</string>
     <string name="credman_autofill_keywords" msgid="701180623776848914">"авто, заполнение, автозаполнение, данные, ключ доступа, пароль"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Подтвердите, что вы доверяете этому приложению&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; анализирует содержимое экрана и находит поля, которые можно заполнить автоматически."</string>
-    <!-- no translation found for credman_autofill_confirmation_message (843829628024668466) -->
-    <skip />
+    <string name="credman_autofill_confirmation_message" msgid="843829628024668466">"&lt;b&gt;Использовать приложение \"&lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;\"?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; С этого момента в нем будут сохраняться новые пароли, ключи доступа и другие данные. Приложение \"&lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;\" может анализировать содержимое экрана и находить поля, для которых доступно автозаполнение."</string>
     <string name="credman_picker_title" msgid="8191267620665129205">"Сервисы для паролей, ключей доступа и данных"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Отключить %1$s?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Отключить этот сервис?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt;Пароли, ключи доступа, способы оплаты и другая сохраненная информация не будут подставляться при входе. Чтобы использовать эти данные, выберите пароль, ключ доступа или сервис."</string>
@@ -4793,10 +4788,10 @@
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Приложения, установленные в течение # последнего месяца}one{Приложения, установленные в течение # последнего месяца}few{Приложения, установленные в течение # последних месяцев}many{Приложения, установленные в течение # последних месяцев}other{Приложения, установленные в течение # последнего месяца}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Приложения, установленные более # месяца назад}one{Приложения, установленные более # месяца назад}few{Приложения, установленные более # месяцев назад}many{Приложения, установленные более # месяцев назад}other{Приложения, установленные более # месяца назад}}"</string>
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Соотношение сторон"</string>
-    <string name="aspect_ratio_summary" msgid="4056406351663726494">"Если приложение не адаптировано для устройства <xliff:g id="DEVICE_NAME">%1$s</xliff:g>, выберите другое соотношение сторон"</string>
-    <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"Если приложение неправильно отображается на устройстве \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\", попробуйте другое соотношение сторон. Некоторые приложения оптимизированы не для всех соотношений сторон."</string>
-    <string name="aspect_ratio_summary_text" msgid="4737461467467220325">"Если приложение неправильно отображается на устройстве \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\", попробуйте другое соотношение сторон."</string>
-    <string name="aspect_ratio_main_summary_text" msgid="5544816872094235840">"Если приложение неправильно отображается на устройстве \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\", попробуйте другое соотношение сторон. Некоторые приложения оптимизированы не для всех соотношений сторон."</string>
+    <string name="aspect_ratio_summary" msgid="4056406351663726494">"Если приложение неправильно отображается на устройстве <xliff:g id="DEVICE_NAME">%1$s</xliff:g>, попробуйте другое соотношение сторон."</string>
+    <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"Если приложение неправильно отображается на устройстве <xliff:g id="DEVICE_NAME">%1$s</xliff:g>, попробуйте другое соотношение сторон. Некоторые приложения оптимизированы не для всех соотношений сторон."</string>
+    <string name="aspect_ratio_summary_text" msgid="4737461467467220325">"Если приложение неправильно отображается на устройстве <xliff:g id="DEVICE_NAME">%1$s</xliff:g>, попробуйте другое соотношение сторон."</string>
+    <string name="aspect_ratio_main_summary_text" msgid="5544816872094235840">"Если приложение неправильно отображается на устройстве <xliff:g id="DEVICE_NAME">%1$s</xliff:g>, попробуйте другое соотношение сторон. Некоторые приложения оптимизированы не для всех соотношений сторон."</string>
     <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"Рекомендуемые приложения"</string>
     <string name="user_aspect_ratio_changed_apps_label" msgid="2096614916172567672">"Измененные приложения"</string>
     <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"Значение по умолчанию в приложении"</string>
