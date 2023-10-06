@@ -16,12 +16,24 @@
 
 package com.android.settings.applications;
 
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
+
 import static com.google.common.truth.Truth.assertThat;
 
-import android.content.Context;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import android.content.Context;
+import android.os.Bundle;
+
+import com.android.settings.applications.appcompat.UserAspectRatioAppsPreferenceController;
 import com.android.settings.testutils.XmlTestUtils;
 import com.android.settings.testutils.shadow.ShadowUserManager;
+import com.android.settings.widget.PreferenceCategoryController;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.drawer.CategoryKey;
 
@@ -31,6 +43,7 @@ import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.androidx.fragment.FragmentController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,5 +78,23 @@ public class AppDashboardFragmentTest {
         }
 
         assertThat(preferenceScreenKeys).containsAtLeastElementsIn(preferenceKeys);
+    }
+
+    @Test
+    @Config(shadows = ShadowUserManager.class)
+    public void testAdvancedAppsCategory() {
+        AppDashboardFragment fragment = FragmentController.of(new AppDashboardFragment(),
+                new Bundle()).create().get();
+        UserAspectRatioAppsPreferenceController controller =
+                mock(UserAspectRatioAppsPreferenceController.class);
+        final PreferenceCategoryController advancedController =
+                fragment.getAdvancedAppsPreferenceCategoryController();
+        advancedController.setChildren(List.of(controller));
+
+        when(controller.getAvailabilityStatus()).thenReturn(AVAILABLE);
+        assertTrue(advancedController.isAvailable());
+
+        when(controller.getAvailabilityStatus()).thenReturn(CONDITIONALLY_UNAVAILABLE);
+        assertFalse(advancedController.isAvailable());
     }
 }
