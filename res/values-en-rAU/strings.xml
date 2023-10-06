@@ -273,8 +273,7 @@
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Loading…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Apps with the Nearby devices permission can determine the relative position of connected devices."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Location access is off for apps and services. Your device location may still be sent to emergency responders when you call or text an emergency number."</string>
-    <!-- no translation found for location_settings_footer_learn_more_content_description (349380666660145540) -->
-    <skip />
+    <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Learn more about location settings"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Accounts"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Security"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Encryption and credentials"</string>
@@ -2245,11 +2244,17 @@
     <string name="power_usage_level_and_status" msgid="821521456989429593">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="6997529817917076536">"<xliff:g id="REMAIN">%1$s</xliff:g> remaining"</string>
     <string name="power_charge_remaining" msgid="7046064326172265116">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> to charge"</string>
+    <!-- no translation found for power_usage_detail_screen_time (6027274749498485283) -->
+    <skip />
+    <!-- no translation found for power_usage_detail_background_time (3661437083554322691) -->
+    <skip />
     <string name="low_battery_summary" msgid="4458925347316501953">"Low battery"</string>
     <string name="background_activity_summary" msgid="3817376868497046016">"Allow the app to run in the background"</string>
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"Limit background activity?"</string>
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"If you limit background activity for an app, it may misbehave"</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"Since this app is not set to optimise battery, you can’t restrict it.\n\nTo restrict the app, first turn on battery optimisation."</string>
+    <!-- no translation found for manager_battery_usage_category_title (1493303237531629961) -->
+    <skip />
     <string name="manager_battery_usage_unrestricted_title" msgid="2426486290463258032">"Unrestricted"</string>
     <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"Optimised"</string>
     <string name="manager_battery_usage_restricted_title" msgid="7702863764130323118">"Restricted"</string>
@@ -2391,6 +2396,8 @@
     <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"Total: less than a min."</string>
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"Background: less than a min"</string>
     <string name="battery_usage_screen_time_less_than_one_minute" msgid="2911989465891679033">"Screen time: less than a min"</string>
+    <!-- no translation found for power_usage_time_less_than_one_minute (8407404329381010144) -->
+    <skip />
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Total: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"Background: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_screen_time" msgid="3973865893520804115">"Screen time: <xliff:g id="TIME">%s</xliff:g>"</string>
@@ -4172,7 +4179,8 @@
     <string name="credman_keywords" msgid="8305600680836806170">"data, passkey, password"</string>
     <string name="credman_autofill_keywords" msgid="701180623776848914">"auto, fill, autofill, data, passkey, password"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Make sure that you trust this app&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Auto-fill&gt;%1$s&lt;/xliff:g&gt; uses what\'s on your screen to determine what can be auto-filled."</string>
-    <string name="credman_autofill_confirmation_message" msgid="4951846866327737417">"&lt;b&gt;Use &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; uses what\'s on your screen to determine what can be autofilled. New passwords, passkeys and other info will be saved here from now on."</string>
+    <!-- no translation found for credman_autofill_confirmation_message (843829628024668466) -->
+    <skip />
     <string name="credman_picker_title" msgid="8191267620665129205">"Passwords, passkeys and data services"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Turn off %1$s?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Turn off this service?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Saved info like passwords, passkeys, payment methods and other info won\'t be filled in when you sign in. To use your saved info, choose a password, passkey or data service."</string>
@@ -4227,7 +4235,7 @@
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
     <string name="enable_angle_as_system_driver" msgid="4648827560023949786">"Experimental: Enable ANGLE"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="2170215556348477481">"Warning: Enable ANGLE as default OpenGL ES driver. This feature is in experiment and may not be compatible with some camera and video apps."</string>
+    <string name="enable_angle_as_system_driver_summary" msgid="2170215556348477481">"Warning: Enable ANGLE as default OpenGL ES driver. This feature is experimental and may not be compatible with some camera and video apps."</string>
     <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"A reboot is required to change the system OpenGL ES driver"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"App compatibility changes"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Toggle app compatibility changes"</string>
