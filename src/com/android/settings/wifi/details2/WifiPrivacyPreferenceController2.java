@@ -72,6 +72,10 @@ public class WifiPrivacyPreferenceController2 extends BasePreferenceController i
     @Override
     public boolean onPreferenceChange(@NonNull Preference preference, Object newValue) {
         final int privacy = Integer.parseInt((String) newValue);
+        if (mWifiEntry.getPrivacy() == privacy) {
+            // Prevent disconnection + reconnection if settings not changed.
+            return true;
+        }
         mWifiEntry.setPrivacy(privacy);
 
         // To activate changing, we need to reconnect network. WiFi will auto connect to
