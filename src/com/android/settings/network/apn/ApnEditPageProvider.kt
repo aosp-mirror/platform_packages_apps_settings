@@ -88,12 +88,12 @@ fun ApnPage(apnDataCur: MutableState<ApnData>) {
     val context = LocalContext.current
     val authTypeOptions = stringArrayResource(R.array.apn_auth_entries).toList()
     val apnProtocolOptions = stringArrayResource(R.array.apn_protocol_entries).toList()
-    val bearerOptionsAll = stringArrayResource(R.array.bearer_entries)
-    val bearerOptions = bearerOptionsAll.drop(1).toList()
-    val bearerEmptyVal = bearerOptionsAll[0]
+    val networkTypeOptionsAll = stringArrayResource(R.array.network_type_entries)
+    val networkTypeOptions = networkTypeOptionsAll.drop(1).toList()
+    val networkTypeEmptyVal = networkTypeOptionsAll[0]
     val mvnoTypeOptions = stringArrayResource(R.array.mvno_type_entries).toList()
-    val bearerSelectedOptionsState = remember {
-        getBearerSelectedOptionsState(apnData.bearer, apnData.bearerBitmask, context)
+    val networkTypeSelectedOptionsState = remember {
+        getNetworkTypeSelectedOptionsState(apnData.networkType, context)
     }
     RegularScaffold(
         title = stringResource(id = R.string.apn_edit),
@@ -196,11 +196,11 @@ fun ApnPage(apnDataCur: MutableState<ApnData>) {
                 }
             )
             SettingsExposedDropdownMenuCheckBox(
-                label = stringResource(R.string.bearer),
-                options = bearerOptions,
-                selectedOptionsState = bearerSelectedOptionsState,
-                emptyVal = bearerEmptyVal,
-                enabled = apnData.bearerEnabled
+                label = stringResource(R.string.network_type),
+                options = networkTypeOptions,
+                selectedOptionsState = networkTypeSelectedOptionsState,
+                emptyVal = networkTypeEmptyVal,
+                enabled = apnData.networkTypeEnabled
             ) {}
             SettingsExposedDropdownMenuBox(
                 label = stringResource(R.string.mvno_type),
