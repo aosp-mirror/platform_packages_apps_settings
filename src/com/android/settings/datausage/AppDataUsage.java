@@ -16,6 +16,8 @@ package com.android.settings.datausage;
 
 import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
 
+import static com.android.settings.datausage.lib.AppDataUsageRepository.getAppUid;
+
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -32,6 +34,7 @@ import android.util.ArraySet;
 import android.util.IconDrawableFactory;
 import android.util.Log;
 import android.util.Range;
+import android.util.SparseBooleanArray;
 import android.view.View;
 import android.widget.AdapterView;
 
@@ -42,7 +45,6 @@ import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
-import androidx.preference.PreferenceCategory;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -78,12 +80,10 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
     private static final String KEY_BACKGROUND_USAGE = "background_usage";
     private static final String KEY_APP_SETTINGS = "app_settings";
     private static final String KEY_RESTRICT_BACKGROUND = "restrict_background";
-    private static final String KEY_APP_LIST = "app_list";
     private static final String KEY_CYCLE = "cycle";
     private static final String KEY_UNRESTRICTED_DATA = "unrestricted_data_saver";
 
     private static final int LOADER_APP_USAGE_DATA = 2;
-    private static final int LOADER_APP_PREF = 3;
 
     private PackageManager mPackageManager;
     private final ArraySet<String> mPackages = new ArraySet<>();
@@ -92,7 +92,6 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
     private Preference mBackgroundUsage;
     private Preference mAppSettings;
     private RestrictedSwitchPreference mRestrictBackground;
-    private PreferenceCategory mAppList;
 
     private Drawable mIcon;
     @VisibleForTesting
@@ -170,6 +169,7 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
 
         final UidDetailProvider uidDetailProvider = getUidDetailProvider();
 
+        final var appDataUsageListController = use(AppDataUsageListController.class);
         if (mAppItem.key > 0) {
             if ((!isSimHardwareVisible(mContext)) || !UserHandle.isApp(mAppItem.key)) {
                 final UidDetail uidDetail = uidDetailProvider.getUidDetail(mAppItem.key, true);
@@ -212,14 +212,8 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
                 removePreference(KEY_APP_SETTINGS);
                 mAppSettings = null;
             }
+            appDataUsageListController.init(mAppItem.uids);
 
-            if (mPackages.size() > 1) {
-                mAppList = findPreference(KEY_APP_LIST);
-                LoaderManager.getInstance(this).restartLoader(LOADER_APP_PREF, Bundle.EMPTY,
-                        mAppPrefCallbacks);
-            } else {
-                removePreference(KEY_APP_LIST);
-            }
         } else {
             final Context context = getActivity();
             final UidDetail uidDetail = uidDetailProvider.getUidDetail(mAppItem.key, true);
@@ -230,7 +224,7 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
             removePreference(KEY_UNRESTRICTED_DATA);
             removePreference(KEY_APP_SETTINGS);
             removePreference(KEY_RESTRICT_BACKGROUND);
-            removePreference(KEY_APP_LIST);
+            appDataUsageListController.init(new SparseBooleanArray());
         }
 
         addEntityHeader();
@@ -360,11 +354,7 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
     }
 
     private void addUid(int uid) {
-        if (Process.isSdkSandboxUid(uid)) {
-            // For a sandbox process, get the associated app UID
-            uid = Process.getAppUidForSdkSandboxUid(uid);
-        }
-        String[] packages = mPackageManager.getPackagesForUid(uid);
+        String[] packages = mPackageManager.getPackagesForUid(getAppUid(uid));
         if (packages != null) {
             Collections.addAll(mPackages, packages);
         }
@@ -498,29 +488,6 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
 
                 @Override
                 public void onLoaderReset(@NonNull Loader<List<NetworkCycleDataForUid>> loader) {
-                }
-            };
-
-    private final LoaderManager.LoaderCallbacks<ArraySet<Preference>> mAppPrefCallbacks =
-            new LoaderManager.LoaderCallbacks<>() {
-                @Override
-                @NonNull
-                public Loader<ArraySet<Preference>> onCreateLoader(int i, Bundle bundle) {
-                    return new AppPrefLoader(getPrefContext(), mPackages, getPackageManager());
-                }
-
-                @Override
-                public void onLoadFinished(@NonNull Loader<ArraySet<Preference>> loader,
-                        ArraySet<Preference> preferences) {
-                    if (preferences != null && mAppList != null) {
-                        for (Preference preference : preferences) {
-                            mAppList.addPreference(preference);
-                        }
-                    }
-                }
-
-                @Override
-                public void onLoaderReset(@NonNull Loader<ArraySet<Preference>> loader) {
                 }
             };
 
