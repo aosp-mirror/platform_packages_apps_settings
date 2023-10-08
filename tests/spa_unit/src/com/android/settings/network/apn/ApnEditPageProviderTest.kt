@@ -256,7 +256,7 @@ class ApnEditPageProviderTest {
             .performScrollToNode(hasText(passwordTitle, true))
         composeTestRule.onNodeWithText(passwordTitle, true).assertIsDisplayed()
     }
-    
+
     private companion object {
         const val NETWORK_TYPE_UNSPECIFIED = "Unspecified"
         const val NETWORK_TYPE_LTE = "LTE"

@@ -50,6 +50,7 @@ const val SUB_ID = "subId"
 const val MVNO_TYPE = "mvnoType"
 const val MVNO_MATCH_DATA = "mvnoMatchData"
 const val EDIT_URL = "editUrl"
+const val INSERT_URL = "insertUrl"
 
 object ApnEditPageProvider : SettingsPageProvider {
 
@@ -66,7 +67,10 @@ object ApnEditPageProvider : SettingsPageProvider {
 
     @Composable
     override fun Page(arguments: Bundle?) {
-        val apnDataInit = ApnData()
+        val uriString = arguments!!.getString(URI)
+        val uriInit = Uri.parse(String(Base64.getDecoder().decode(uriString)))
+        val subId = arguments.getInt(SUB_ID)
+        val apnDataInit = getApnDataInit(arguments, LocalContext.current, uriInit, subId)
         val apnDataCur = remember {
             mutableStateOf(apnDataInit)
         }
