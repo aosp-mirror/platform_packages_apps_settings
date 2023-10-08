@@ -1397,12 +1397,14 @@ public final class DataProcessorTest {
     }
 
     @Test
-    public void generateBatteryDiffData_emptyBatteryEntryList_returnNull() {
-        assertThat(DataProcessor.generateBatteryDiffData(mContext,
+    public void generateBatteryDiffData_emptyBatteryEntryList_returnEmptyBatteryDiffData() {
+        final BatteryDiffData batteryDiffData = DataProcessor.generateBatteryDiffData(mContext,
                 System.currentTimeMillis(),
                 DataProcessor.convertToBatteryHistEntry(null, mBatteryUsageStats),
                 /* systemAppsPackageNames= */ Set.of(),
-                /* systemAppsUids= */ Set.of())).isNull();
+                /* systemAppsUids= */ Set.of());
+        assertThat(batteryDiffData.getAppDiffEntryList()).isEmpty();
+        assertThat(batteryDiffData.getSystemDiffEntryList()).isEmpty();
     }
 
     @Test
