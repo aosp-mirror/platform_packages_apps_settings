@@ -41,10 +41,9 @@ data class ApnData(
     val apnProtocol: Int = -1,
     val apnRoaming: Int = -1,
     val apnEnable: Boolean = true,
-    val bearer: Int = 0,
+    val networkType: Int = 0,
     val mvnoType: Int = -1,
     var mvnoValue: String = "",
-    val bearerBitmask: Int = 0,
     val edited: Int = Telephony.Carriers.USER_EDITED,
     val userEditable: Int = 1,
     val carrierId: Int = TelephonyManager.UNKNOWN_CARRIER_ID
@@ -66,40 +65,36 @@ data class ApnData(
     var apnProtocolEnabled = true
     var apnRoamingEnabled = true
     var apnEnableEnabled = true
-    var bearerEnabled = true
+    var networkTypeEnabled = true
     var mvnoTypeEnabled = true
     var mvnoValueEnabled = false
 }
 
 /**
- * Initialize the selected Bearer Selected Options according to bearer.
- * @param bearer Initialized bearer options.
- * @param bearerBitmask Initialized bearer bitmask, often multiple bearer options may be included.
- * @param context The context to get bearerValues.
+ * Initialize the selected Network type Selected Options according to network type.
+ * @param networkType Initialized network type bitmask, often multiple network type options may be included.
+ * @param context The context to get network type values.
  *
  * @return An error message if the apn data is invalid, otherwise return null.
  */
-fun getBearerSelectedOptionsState(
-    bearer: Int,
-    bearerBitmask: Int,
+fun getNetworkTypeSelectedOptionsState(
+    networkType: Int,
     context: Context
 ): SnapshotStateList<Int> {
-    val bearerValues = context.resources.getStringArray(R.array.bearer_values)
-    val bearerSelectedOptionsState = mutableStateListOf<Int>()
-    if (bearerBitmask != 0) {
+    val networkTypeValues = context.resources.getStringArray(R.array.network_type_values)
+    val networkTypeSelectedOptionsState = mutableStateListOf<Int>()
+    if (networkType != 0) {
         var i = 1
-        var _bearerBitmask = bearerBitmask
-        while (_bearerBitmask != 0) {
-            if (_bearerBitmask and 1 == 1 && !bearerSelectedOptionsState.contains(i)) {
-                bearerSelectedOptionsState.add(bearerValues.indexOf("$i") - 1)
+        var networkTypeBitMask = networkType
+        while (networkTypeBitMask != 0) {
+            if (networkTypeBitMask and 1 == 1 && !networkTypeSelectedOptionsState.contains(i)) {
+                networkTypeSelectedOptionsState.add(networkTypeValues.indexOf("$i") - 1)
             }
-            _bearerBitmask = _bearerBitmask shr 1
+            networkTypeBitMask = networkTypeBitMask shr 1
             i++
         }
     }
-    if (bearer != 0 && !bearerSelectedOptionsState.contains(bearer)) {
-        // add mBearerInitialVal to bearers
-        bearerSelectedOptionsState.add(bearerValues.indexOf("$bearer") - 1)
-    }
-    return bearerSelectedOptionsState
+    return networkTypeSelectedOptionsState
 }
+
+
