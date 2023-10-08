@@ -17,6 +17,7 @@ package com.android.settings.datausage;
 import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
 
 import static com.android.settings.datausage.lib.AppDataUsageRepository.getAppUid;
+import static com.android.settings.datausage.lib.AppDataUsageRepository.getAppUidList;
 
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
@@ -32,15 +33,9 @@ import android.telephony.SubscriptionManager;
 import android.util.ArraySet;
 import android.util.IconDrawableFactory;
 import android.util.Log;
-import android.util.Range;
-import android.view.View;
-import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
-import androidx.loader.app.LoaderManager;
-import androidx.loader.content.Loader;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -48,16 +43,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
+import com.android.settings.datausage.lib.AppDataUsageDetailsRepository;
+import com.android.settings.datausage.lib.NetworkUsageDetailsData;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.AppItem;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedSwitchPreference;
-import com.android.settingslib.net.NetworkCycleDataForUid;
-import com.android.settingslib.net.NetworkCycleDataForUidLoader;
 import com.android.settingslib.net.UidDetail;
 import com.android.settingslib.net.UidDetailProvider;
+
+import kotlin.Unit;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -77,10 +74,7 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
     private static final String KEY_FOREGROUND_USAGE = "foreground_usage";
     private static final String KEY_BACKGROUND_USAGE = "background_usage";
     private static final String KEY_RESTRICT_BACKGROUND = "restrict_background";
-    private static final String KEY_CYCLE = "cycle";
     private static final String KEY_UNRESTRICTED_DATA = "unrestricted_data_saver";
-
-    private static final int LOADER_APP_USAGE_DATA = 2;
 
     private PackageManager mPackageManager;
     private final ArraySet<String> mPackages = new ArraySet<>();
@@ -94,14 +88,10 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
     CharSequence mLabel;
     @VisibleForTesting
     String mPackageName;
-    private CycleAdapter mCycleAdapter;
 
-    @Nullable
-    private List<NetworkCycleDataForUid> mUsageData;
     @VisibleForTesting
     NetworkTemplate mTemplate;
     private AppItem mAppItem;
-    private SpinnerPreference mCycle;
     private RestrictedSwitchPreference mUnrestrictedData;
     private DataSaverBackend mDataSaverBackend;
     private Context mContext;
@@ -160,7 +150,8 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
         mForegroundUsage = findPreference(KEY_FOREGROUND_USAGE);
         mBackgroundUsage = findPreference(KEY_BACKGROUND_USAGE);
 
-        initCycle();
+        final List<Integer> uidList = getAppUidList(mAppItem.uids);
+        initCycle(uidList);
 
         final UidDetailProvider uidDetailProvider = getUidDetailProvider();
 
@@ -191,7 +182,7 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
             }
             mDataSaverBackend = new DataSaverBackend(mContext);
 
-            use(AppDataUsageListController.class).init(mAppItem.uids);
+            use(AppDataUsageListController.class).init(uidList);
         } else {
             final Context context = getActivity();
             final UidDetail uidDetail = uidDetailProvider.getUidDetail(mAppItem.key, true);
@@ -207,11 +198,9 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        // No animations will occur before:
-        //  - LOADER_APP_USAGE_DATA initially updates the cycle
-        //  - updatePrefs() initially updates the preference visibility
+    public void onStart() {
+        super.onStart();
+        // No animations will occur before bindData() initially updates the cycle.
         // This is mainly for the cycle spinner, because when the page is entered from the
         // AppInfoDashboardFragment, there is no way to know whether the cycle data is available
         // before finished the async loading.
@@ -219,11 +208,14 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
         // setBackPreferenceListAnimatorIfLoaded().
         mIsLoading = true;
         getListView().setItemAnimator(null);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         if (mDataSaverBackend != null) {
             mDataSaverBackend.addListener(this);
         }
-        LoaderManager.getInstance(this).restartLoader(LOADER_APP_USAGE_DATA, null /* args */,
-                mUidDataCallbacks);
         updatePrefs();
     }
 
@@ -268,14 +260,16 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
         return new UidDetailProvider(mContext);
     }
 
-    private void initCycle() {
-        mCycle = findPreference(KEY_CYCLE);
-        mCycleAdapter = new CycleAdapter(mContext, mCycle);
+    @VisibleForTesting
+    void initCycle(List<Integer> uidList) {
+        var controller = use(AppDataUsageCycleController.class);
+        var repository = new AppDataUsageDetailsRepository(mContext, mTemplate, mCycles, uidList);
+        controller.init(repository, data -> {
+            bindData(data);
+            return Unit.INSTANCE;
+        });
         if (mCycles != null) {
-            // If coming from a page like DataUsageList where already has a selected cycle, display
-            // that before loading to reduce flicker.
-            mCycleAdapter.setInitialCycleList(mCycles, mSelectedCycle);
-            mCycle.setHasCycles(true);
+            controller.setInitialCycles(mCycles, mSelectedCycle);
         }
     }
 
@@ -326,22 +320,13 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
     }
 
     @VisibleForTesting
-    void bindData(int position) {
-        final long backgroundBytes, foregroundBytes;
-        if (mUsageData == null || position >= mUsageData.size()) {
-            backgroundBytes = foregroundBytes = 0;
-            mCycle.setHasCycles(false);
-        } else {
-            mCycle.setHasCycles(true);
-            final NetworkCycleDataForUid data = mUsageData.get(position);
-            backgroundBytes = data.getBackgroudUsage();
-            foregroundBytes = data.getForegroudUsage();
-        }
-        final long totalBytes = backgroundBytes + foregroundBytes;
-
-        mTotalUsage.setSummary(DataUsageUtils.formatDataUsage(mContext, totalBytes));
-        mForegroundUsage.setSummary(DataUsageUtils.formatDataUsage(mContext, foregroundBytes));
-        mBackgroundUsage.setSummary(DataUsageUtils.formatDataUsage(mContext, backgroundBytes));
+    void bindData(@NonNull NetworkUsageDetailsData data) {
+        mIsLoading = false;
+        mTotalUsage.setSummary(DataUsageUtils.formatDataUsage(mContext, data.getTotalUsage()));
+        mForegroundUsage.setSummary(
+                DataUsageUtils.formatDataUsage(mContext, data.getForegroundUsage()));
+        mBackgroundUsage.setSummary(
+                DataUsageUtils.formatDataUsage(mContext, data.getBackgroundUsage()));
     }
 
     private boolean getAppRestrictBackground() {
@@ -390,71 +375,6 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
     public int getMetricsCategory() {
         return SettingsEnums.APP_DATA_USAGE;
     }
-
-    private final AdapterView.OnItemSelectedListener mCycleListener =
-            new AdapterView.OnItemSelectedListener() {
-        @Override
-        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            bindData(position);
-        }
-
-        @Override
-        public void onNothingSelected(AdapterView<?> parent) {
-            // ignored
-        }
-    };
-
-    @VisibleForTesting
-    final LoaderManager.LoaderCallbacks<List<NetworkCycleDataForUid>> mUidDataCallbacks =
-            new LoaderManager.LoaderCallbacks<>() {
-                @Override
-                @NonNull
-                public Loader<List<NetworkCycleDataForUid>> onCreateLoader(int id, Bundle args) {
-                    final NetworkCycleDataForUidLoader.Builder<?> builder =
-                            NetworkCycleDataForUidLoader.builder(mContext);
-                    builder.setRetrieveDetail(true)
-                            .setNetworkTemplate(mTemplate);
-                    for (int i = 0; i < mAppItem.uids.size(); i++) {
-                        builder.addUid(mAppItem.uids.keyAt(i));
-                    }
-                    if (mCycles != null) {
-                        builder.setCycles(mCycles);
-                    }
-                    return builder.build();
-                }
-
-                @Override
-                public void onLoadFinished(@NonNull Loader<List<NetworkCycleDataForUid>> loader,
-                        List<NetworkCycleDataForUid> data) {
-                    mUsageData = data;
-                    mCycle.setOnItemSelectedListener(mCycleListener);
-                    mCycleAdapter.updateCycleList(data.stream()
-                            .map(cycle -> new Range<>(cycle.getStartTime(), cycle.getEndTime()))
-                            .toList());
-                    if (mSelectedCycle > 0L) {
-                        final int numCycles = data.size();
-                        int position = 0;
-                        for (int i = 0; i < numCycles; i++) {
-                            final NetworkCycleDataForUid cycleData = data.get(i);
-                            if (cycleData.getEndTime() == mSelectedCycle) {
-                                position = i;
-                                break;
-                            }
-                        }
-                        if (position > 0) {
-                            mCycle.setSelection(position);
-                        }
-                        bindData(position);
-                    } else {
-                        bindData(0 /* position */);
-                    }
-                    mIsLoading = false;
-                }
-
-                @Override
-                public void onLoaderReset(@NonNull Loader<List<NetworkCycleDataForUid>> loader) {
-                }
-            };
 
     @Override
     public void onDataSaverChanged(boolean isDataSaving) {

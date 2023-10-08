@@ -17,7 +17,6 @@
 package com.android.settings.datausage
 
 import android.content.Context
-import android.util.SparseBooleanArray
 import androidx.lifecycle.testing.TestLifecycleOwner
 import androidx.preference.Preference
 import androidx.preference.PreferenceCategory
@@ -63,9 +62,7 @@ class AppDataUsageListControllerTest {
 
     @Test
     fun onViewCreated_singleUid_hidePreference(): Unit = runBlocking {
-        controller.init(SparseBooleanArray().apply {
-            put(UID_0, true)
-        })
+        controller.init(listOf(UID_0))
         controller.displayPreference(preferenceScreen)
 
         controller.onViewCreated(TestLifecycleOwner())
@@ -76,10 +73,7 @@ class AppDataUsageListControllerTest {
 
     @Test
     fun onViewCreated_twoUid_showPreference(): Unit = runBlocking {
-        controller.init(SparseBooleanArray().apply {
-            put(UID_0, true)
-            put(UID_1, true)
-        })
+        controller.init(listOf(UID_0, UID_1))
         controller.displayPreference(preferenceScreen)
 
         controller.onViewCreated(TestLifecycleOwner())

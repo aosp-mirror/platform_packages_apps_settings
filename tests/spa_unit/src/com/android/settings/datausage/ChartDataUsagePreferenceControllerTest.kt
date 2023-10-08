@@ -17,6 +17,7 @@
 package com.android.settings.datausage
 
 import android.content.Context
+import android.util.Range
 import androidx.lifecycle.testing.TestLifecycleOwner
 import androidx.preference.PreferenceScreen
 import androidx.test.core.app.ApplicationProvider
@@ -39,7 +40,7 @@ class ChartDataUsagePreferenceControllerTest {
 
     private val repository = object : INetworkCycleDataRepository {
         override suspend fun loadCycles() = emptyList<NetworkUsageData>()
-
+        override fun getCycles() = emptyList<Range<Long>>()
         override fun getPolicy() = null
 
         override suspend fun querySummary(startTime: Long, endTime: Long) = when {
