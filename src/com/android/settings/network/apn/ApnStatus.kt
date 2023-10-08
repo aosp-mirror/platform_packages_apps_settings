@@ -16,12 +16,8 @@
 
 package com.android.settings.network.apn
 
-import android.content.Context
 import android.provider.Telephony
 import android.telephony.TelephonyManager
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.snapshots.SnapshotStateList
-import com.android.settings.R
 
 data class ApnData(
     val name: String = "",
@@ -41,7 +37,7 @@ data class ApnData(
     val apnProtocol: Int = -1,
     val apnRoaming: Int = -1,
     val apnEnable: Boolean = true,
-    val networkType: Int = 0,
+    val networkType: Long = 0,
     val mvnoType: Int = -1,
     var mvnoValue: String = "",
     val edited: Int = Telephony.Carriers.USER_EDITED,
@@ -69,32 +65,3 @@ data class ApnData(
     var mvnoTypeEnabled = true
     var mvnoValueEnabled = false
 }
-
-/**
- * Initialize the selected Network type Selected Options according to network type.
- * @param networkType Initialized network type bitmask, often multiple network type options may be included.
- * @param context The context to get network type values.
- *
- * @return An error message if the apn data is invalid, otherwise return null.
- */
-fun getNetworkTypeSelectedOptionsState(
-    networkType: Int,
-    context: Context
-): SnapshotStateList<Int> {
-    val networkTypeValues = context.resources.getStringArray(R.array.network_type_values)
-    val networkTypeSelectedOptionsState = mutableStateListOf<Int>()
-    if (networkType != 0) {
-        var i = 1
-        var networkTypeBitMask = networkType
-        while (networkTypeBitMask != 0) {
-            if (networkTypeBitMask and 1 == 1 && !networkTypeSelectedOptionsState.contains(i)) {
-                networkTypeSelectedOptionsState.add(networkTypeValues.indexOf("$i") - 1)
-            }
-            networkTypeBitMask = networkTypeBitMask shr 1
-            i++
-        }
-    }
-    return networkTypeSelectedOptionsState
-}
-
-

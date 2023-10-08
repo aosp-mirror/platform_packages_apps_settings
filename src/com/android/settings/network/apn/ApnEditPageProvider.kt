@@ -31,6 +31,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import com.android.settings.R
+import com.android.settings.network.apn.ApnNetworkTypes.getNetworkTypeDisplayNames
+import com.android.settings.network.apn.ApnNetworkTypes.getNetworkTypeSelectedOptionsState
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
 import com.android.settingslib.spa.framework.compose.stateOf
 import com.android.settingslib.spa.widget.editor.SettingsExposedDropdownMenuBox
@@ -51,8 +53,8 @@ const val EDIT_URL = "editUrl"
 
 object ApnEditPageProvider : SettingsPageProvider {
 
-    override val name = "Apn"
-    const val TAG = "ApnPageProvider"
+    override val name = "ApnEdit"
+    const val TAG = "ApnEditPageProvider"
 
     override val parameter = listOf(
         navArgument(URI_TYPE) { type = NavType.StringType },
@@ -88,12 +90,9 @@ fun ApnPage(apnDataCur: MutableState<ApnData>) {
     val context = LocalContext.current
     val authTypeOptions = stringArrayResource(R.array.apn_auth_entries).toList()
     val apnProtocolOptions = stringArrayResource(R.array.apn_protocol_entries).toList()
-    val networkTypeOptionsAll = stringArrayResource(R.array.network_type_entries)
-    val networkTypeOptions = networkTypeOptionsAll.drop(1).toList()
-    val networkTypeEmptyVal = networkTypeOptionsAll[0]
     val mvnoTypeOptions = stringArrayResource(R.array.mvno_type_entries).toList()
     val networkTypeSelectedOptionsState = remember {
-        getNetworkTypeSelectedOptionsState(apnData.networkType, context)
+        getNetworkTypeSelectedOptionsState(apnData.networkType)
     }
     RegularScaffold(
         title = stringResource(id = R.string.apn_edit),
@@ -197,9 +196,9 @@ fun ApnPage(apnDataCur: MutableState<ApnData>) {
             )
             SettingsExposedDropdownMenuCheckBox(
                 label = stringResource(R.string.network_type),
-                options = networkTypeOptions,
+                options = getNetworkTypeDisplayNames(),
                 selectedOptionsState = networkTypeSelectedOptionsState,
-                emptyVal = networkTypeEmptyVal,
+                emptyVal = stringResource(R.string.network_type_unspecified),
                 enabled = apnData.networkTypeEnabled
             ) {}
             SettingsExposedDropdownMenuBox(
