@@ -26,13 +26,17 @@ import org.mockito.kotlin.mock
 
 @RunWith(AndroidJUnit4::class)
 class ApnStatusTest {
-    private val subId = 1
+    private val apnData = mock<ApnData> {
+        on {
+            it.subId
+        } doReturn 1
+    }
     private val configManager = mock<CarrierConfigManager> {
         val p = PersistableBundle()
         p.putBoolean(CarrierConfigManager.KEY_ALLOW_ADDING_APNS_BOOL, true)
         on {
             getConfigForSubId(
-                subId,
+                apnData.subId,
                 CarrierConfigManager.KEY_READ_ONLY_APN_TYPES_STRING_ARRAY,
                 CarrierConfigManager.KEY_READ_ONLY_APN_FIELDS_STRING_ARRAY,
                 CarrierConfigManager.KEY_APN_SETTINGS_DEFAULT_APN_TYPES_STRING_ARRAY,
@@ -45,6 +49,6 @@ class ApnStatusTest {
 
     @Test
     fun getCarrierCustomizedConfig_test() {
-        assert(getCarrierCustomizedConfig(configManager, subId).isAddApnAllowed)
+        assert(getCarrierCustomizedConfig(apnData, configManager).isAddApnAllowed)
     }
 }

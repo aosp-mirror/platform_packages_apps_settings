@@ -38,16 +38,12 @@ data class ApnData(
     val mmsc: String = "",
     val mmsProxy: String = "",
     val mmsPort: String = "",
-    val mcc: String = "",
-    val mnc: String = "",
     val authType: Int = -1,
     val apnType: String = "",
     val apnProtocol: Int = -1,
     val apnRoaming: Int = -1,
     val apnEnable: Boolean = true,
     val networkType: Long = 0,
-    val mvnoType: Int = -1,
-    var mvnoValue: String = "",
     val edited: Int = Telephony.Carriers.USER_EDITED,
     val userEditable: Int = 1,
     val carrierId: Int = TelephonyManager.UNKNOWN_CARRIER_ID,
@@ -61,17 +57,15 @@ data class ApnData(
     val mmscEnabled: Boolean = true,
     val mmsProxyEnabled: Boolean = true,
     val mmsPortEnabled: Boolean = true,
-    val mccEnabled: Boolean = true,
-    val mncEnabled: Boolean = true,
     val authTypeEnabled: Boolean = true,
     val apnTypeEnabled: Boolean = true,
     val apnProtocolEnabled: Boolean = true,
     val apnRoamingEnabled: Boolean = true,
     val apnEnableEnabled: Boolean = true,
     val networkTypeEnabled: Boolean = true,
-    val mvnoTypeEnabled: Boolean = true,
-    val mvnoValueEnabled: Boolean = false,
     val newApn: Boolean = false,
+    val subId: Int = -1,
+    val customizedConfig: CustomizedConfig = CustomizedConfig()
 )
 
 data class CustomizedConfig(
@@ -96,13 +90,6 @@ data class CustomizedConfig(
 fun getApnDataInit(arguments: Bundle, context: Context, uriInit: Uri, subId: Int): ApnData {
 
     val uriType = arguments.getString(URI_TYPE)!!
-    val mvnoType = arguments.getString(MVNO_TYPE)
-    val mvnoValue = arguments.getString(MVNO_MATCH_DATA)
-    val mvnoTypeOptions = context.resources.getStringArray(R.array.mvno_type_entries).toList()
-
-    val configManager =
-        context.getSystemService(Context.CARRIER_CONFIG_SERVICE) as CarrierConfigManager
-    getCarrierCustomizedConfig(configManager, subId)
 
     if (!uriInit.isPathPrefixMatch(Telephony.Carriers.CONTENT_URI)) {
         Log.e(TAG, "Insert request not for carrier table. Uri: $uriInit")
@@ -111,19 +98,20 @@ fun getApnDataInit(arguments: Bundle, context: Context, uriInit: Uri, subId: Int
 
     var apnDataInit = when (uriType) {
         EDIT_URL -> getApnDataFromUri(uriInit, context)
-        INSERT_URL -> ApnData(
-            mvnoType = mvnoTypeOptions.indexOf(mvnoType!!),
-            mvnoValue = mvnoValue!!
-        )
-
+        INSERT_URL -> ApnData()
         else -> ApnData() //TODO: finish
     }
+
+    apnDataInit = apnDataInit.copy(subId = subId)
+    val configManager =
+        context.getSystemService(Context.CARRIER_CONFIG_SERVICE) as CarrierConfigManager
+    apnDataInit =
+        apnDataInit.copy(customizedConfig = getCarrierCustomizedConfig(apnDataInit, configManager))
 
     if (uriType == INSERT_URL) {
         apnDataInit = apnDataInit.copy(newApn = true)
     }
 
-    // TODO: mvnoDescription
     apnDataInit = apnDataInit.copy(
         apnEnableEnabled =
         context.resources.getBoolean(R.bool.config_allow_edit_carrier_enabled)
@@ -138,9 +126,12 @@ fun getApnDataInit(arguments: Bundle, context: Context, uriInit: Uri, subId: Int
  *
  * @return Initialized CustomizedConfig information.
  */
-fun getCarrierCustomizedConfig(configManager: CarrierConfigManager, subId: Int): CustomizedConfig {
+fun getCarrierCustomizedConfig(
+    apnInit: ApnData,
+    configManager: CarrierConfigManager
+): CustomizedConfig {
     val b = configManager.getConfigForSubId(
-        subId,
+        apnInit.subId,
         CarrierConfigManager.KEY_READ_ONLY_APN_TYPES_STRING_ARRAY,
         CarrierConfigManager.KEY_READ_ONLY_APN_FIELDS_STRING_ARRAY,
         CarrierConfigManager.KEY_APN_SETTINGS_DEFAULT_APN_TYPES_STRING_ARRAY,

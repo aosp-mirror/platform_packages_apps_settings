@@ -157,7 +157,7 @@ public class ApnPreference extends Preference
         final Uri url = ContentUris.withAppendedId(Telephony.Carriers.CONTENT_URI, pos);
 
         if (Flags.newApnPageEnabled()) {
-            String route = ApnEditPageProvider.INSTANCE.getRoute(EDIT_URL, url, mSubId, "_", "_");
+            String route = ApnEditPageProvider.INSTANCE.getRoute(EDIT_URL, url, mSubId);
             SpaActivity.startSpaActivity(context, route);
         } else {
             final Intent editIntent = new Intent(Intent.ACTION_EDIT, url);

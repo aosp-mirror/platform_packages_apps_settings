@@ -47,8 +47,6 @@ import java.util.Base64
 const val URI_TYPE = "uriType"
 const val URI = "uri"
 const val SUB_ID = "subId"
-const val MVNO_TYPE = "mvnoType"
-const val MVNO_MATCH_DATA = "mvnoMatchData"
 const val EDIT_URL = "editUrl"
 const val INSERT_URL = "insertUrl"
 
@@ -61,8 +59,6 @@ object ApnEditPageProvider : SettingsPageProvider {
         navArgument(URI_TYPE) { type = NavType.StringType },
         navArgument(URI) { type = NavType.StringType },
         navArgument(SUB_ID) { type = NavType.IntType },
-        navArgument(MVNO_TYPE) { type = NavType.StringType },
-        navArgument(MVNO_MATCH_DATA) { type = NavType.StringType },
     )
 
     @Composable
@@ -80,12 +76,10 @@ object ApnEditPageProvider : SettingsPageProvider {
     fun getRoute(
         uriType: String,
         uri: Uri,
-        subId: Int,
-        mMvnoType: String,
-        mMvnoMatchData: String
+        subId: Int
     ): String = "${name}/$uriType/${
         Base64.getUrlEncoder().encodeToString(uri.toString().toByteArray())
-    }/$subId/$mMvnoType/$mMvnoMatchData"
+    }/$subId"
 }
 
 @Composable
@@ -94,7 +88,6 @@ fun ApnPage(apnDataCur: MutableState<ApnData>) {
     val context = LocalContext.current
     val authTypeOptions = stringArrayResource(R.array.apn_auth_entries).toList()
     val apnProtocolOptions = stringArrayResource(R.array.apn_protocol_entries).toList()
-    val mvnoTypeOptions = stringArrayResource(R.array.mvno_type_entries).toList()
     val networkTypeSelectedOptionsState = remember {
         getNetworkTypeSelectedOptionsState(apnData.networkType)
     }
@@ -152,16 +145,6 @@ fun ApnPage(apnDataCur: MutableState<ApnData>) {
                 label = stringResource(R.string.apn_mms_port),
                 enabled = apnData.mmsPortEnabled
             ) { apnData = apnData.copy(mmsPort = it) }
-            SettingsOutlinedTextField(
-                value = apnData.mcc,
-                label = stringResource(R.string.apn_mcc),
-                enabled = apnData.mccEnabled
-            ) { apnData = apnData.copy(mcc = it) }
-            SettingsOutlinedTextField(
-                value = apnData.mnc,
-                label = stringResource(R.string.apn_mnc),
-                enabled = apnData.mncEnabled
-            ) { apnData = apnData.copy(mnc = it) }
             // Warning: apnProtocol, apnRoaming, mvnoType string2Int
             SettingsExposedDropdownMenuBox(
                 label = stringResource(R.string.apn_auth_type),
@@ -205,19 +188,6 @@ fun ApnPage(apnDataCur: MutableState<ApnData>) {
                 emptyVal = stringResource(R.string.network_type_unspecified),
                 enabled = apnData.networkTypeEnabled
             ) {}
-            SettingsExposedDropdownMenuBox(
-                label = stringResource(R.string.mvno_type),
-                options = mvnoTypeOptions,
-                selectedOptionIndex = apnData.mvnoType,
-                enabled = apnData.mvnoTypeEnabled
-            ) {
-                apnData = apnData.copy(mvnoType = it)
-            } // TODO: mvnoDescription
-            SettingsOutlinedTextField(
-                value = apnData.mvnoValue,
-                label = stringResource(R.string.mvno_match_data),
-                enabled = apnData.mvnoValueEnabled
-            ) { apnData = apnData.copy(mvnoValue = it) }
         }
     }
 }
