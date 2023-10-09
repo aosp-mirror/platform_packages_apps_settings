@@ -417,7 +417,6 @@ public class AppDataUsageTest {
     public void onCreate_noNetworkTemplateAndInvalidDataSubscription_shouldUseWifiTemplate() {
         ShadowDataUsageUtils.IS_MOBILE_DATA_SUPPORTED = true;
         ShadowDataUsageUtils.IS_WIFI_SUPPORTED = true;
-        ShadowDataUsageUtils.HAS_SIM = false;
         ShadowSubscriptionManager.setDefaultDataSubscriptionId(
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
         mFragment = spy(new TestFragment());
