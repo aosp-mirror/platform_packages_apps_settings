@@ -56,7 +56,8 @@
 
         <Preference
             android:key="app_settings"
-            android:title="@string/data_usage_app_settings" />
+            android:title="@string/data_usage_app_settings"
+            settings:controller="com.android.settings.datausage.AppDataUsageAppSettingsController" />
 
         <com.android.settingslib.RestrictedSwitchPreference
             android:key="restrict_background"
