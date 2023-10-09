@@ -185,6 +185,24 @@ public class ChooseLockPasswordTest {
     }
 
     @Test
+    public void processAndValidatePasswordRequirements_cannotIncludeInvalidChar() {
+        PasswordPolicy policy = new PasswordPolicy();
+        policy.quality = PASSWORD_QUALITY_UNSPECIFIED;
+        // Only ASCII 31–127 should be allowed.  The invalid character error should also take
+        // priority over the error that says the password is too short.
+        String[] passwords = new String[] { "§µ¿¶¥£", "™™™™", "\n\n\n\n", "¡", "é" };
+
+        for (String password : passwords) {
+            assertPasswordValidationResult(
+                    /* minMetrics */ policy.getMinMetrics(),
+                    /* minComplexity= */ PASSWORD_COMPLEXITY_NONE,
+                    /* passwordType= */ PASSWORD_QUALITY_ALPHABETIC,
+                    /* userEnteredPassword= */ LockscreenCredential.createPassword(password),
+                    "This can't include an invalid character");
+        }
+    }
+
+    @Test
     public void processAndValidatePasswordRequirements_noMinPasswordComplexity() {
         PasswordPolicy policy = new PasswordPolicy();
         policy.quality = PASSWORD_QUALITY_ALPHABETIC;
@@ -194,7 +212,7 @@ public class ChooseLockPasswordTest {
                 /* minMetrics */ policy.getMinMetrics(),
                 /* minComplexity= */ PASSWORD_COMPLEXITY_NONE,
                 /* passwordType= */ PASSWORD_QUALITY_ALPHABETIC,
-                /* userEnteredPassword= */ LockscreenCredential.createNone(),
+                /* userEnteredPassword= */ LockscreenCredential.createPassword(""),
                 "Must contain at least 1 non-numerical character",
                 "Must be at least 10 characters");
     }
@@ -208,7 +226,7 @@ public class ChooseLockPasswordTest {
                 /* minMetrics */ policy.getMinMetrics(),
                 /* minComplexity= */ PASSWORD_COMPLEXITY_HIGH,
                 /* passwordType= */ PASSWORD_QUALITY_NUMERIC,
-                /* userEnteredPassword= */ LockscreenCredential.createNone(),
+                /* userEnteredPassword= */ LockscreenCredential.createPin(""),
                 "PIN must be at least 8 digits");
     }
 
@@ -221,7 +239,7 @@ public class ChooseLockPasswordTest {
                 /* minMetrics */ policy.getMinMetrics(),
                 /* minComplexity= */ PASSWORD_COMPLEXITY_MEDIUM,
                 /* passwordType= */ PASSWORD_QUALITY_ALPHABETIC,
-                /* userEnteredPassword= */ LockscreenCredential.createNone(),
+                /* userEnteredPassword= */ LockscreenCredential.createPassword(""),
                 "Must be at least 4 characters");
     }
 
@@ -235,7 +253,7 @@ public class ChooseLockPasswordTest {
                 /* minMetrics */ policy.getMinMetrics(),
                 /* minComplexity= */ PASSWORD_COMPLEXITY_LOW,
                 /* passwordType= */ PASSWORD_QUALITY_ALPHABETIC,
-                /* userEnteredPassword= */ LockscreenCredential.createNone(),
+                /* userEnteredPassword= */ LockscreenCredential.createPassword(""),
                 "Must contain at least 1 non-numerical character",
                 "Must contain at least 1 numerical digit",
                 "Must be at least 9 characters");
@@ -251,7 +269,7 @@ public class ChooseLockPasswordTest {
                 /* minMetrics */ policy.getMinMetrics(),
                 /* minComplexity= */ PASSWORD_COMPLEXITY_MEDIUM,
                 /* passwordType= */ PASSWORD_QUALITY_NUMERIC,
-                /* userEnteredPassword= */ LockscreenCredential.createNone(),
+                /* userEnteredPassword= */ LockscreenCredential.createPin(""),
                 "PIN must be at least 11 digits");
     }
 
@@ -265,7 +283,7 @@ public class ChooseLockPasswordTest {
                 /* minMetrics */ policy.getMinMetrics(),
                 /* minComplexity= */ PASSWORD_COMPLEXITY_HIGH,
                 /* passwordType= */ PASSWORD_QUALITY_ALPHABETIC,
-                /* userEnteredPassword= */ LockscreenCredential.createNone(),
+                /* userEnteredPassword= */ LockscreenCredential.createPassword(""),
                 "Must contain at least 2 special symbols",
                 "Must be at least 6 characters",
                 "Must contain at least 1 letter",
@@ -351,7 +369,7 @@ public class ChooseLockPasswordTest {
                 /* minMetrics */ policy.getMinMetrics(),
                 /* minComplexity= */ PASSWORD_COMPLEXITY_HIGH,
                 /* passwordType= */ PASSWORD_QUALITY_ALPHABETIC,
-                /* userEnteredPassword= */ LockscreenCredential.createNone(),
+                /* userEnteredPassword= */ LockscreenCredential.createPassword(""),
                 "Must be at least 6 characters",
                 "If using only numbers, must be at least 8 digits");
     }
@@ -448,7 +466,7 @@ public class ChooseLockPasswordTest {
                 /* minMetrics */ null,
                 /* minComplexity= */ PASSWORD_COMPLEXITY_HIGH,
                 /* passwordType= */ PASSWORD_QUALITY_NUMERIC,
-                /* userEnteredPassword= */ LockscreenCredential.createNone(),
+                /* userEnteredPassword= */ LockscreenCredential.createPin(""),
                 "PIN must be at least 8 digits");
     }
 
