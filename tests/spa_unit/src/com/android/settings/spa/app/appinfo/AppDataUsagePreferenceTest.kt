@@ -38,6 +38,7 @@ import com.android.settings.R
 import com.android.settings.Utils
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment
 import com.android.settings.datausage.AppDataUsage
+import com.android.settings.datausage.lib.INetworkTemplates
 import com.android.settingslib.net.NetworkCycleDataForUid
 import com.android.settingslib.net.NetworkCycleDataForUidLoader
 import com.android.settingslib.spa.testutils.delay
@@ -106,7 +107,7 @@ class AppDataUsagePreferenceTest {
 
         setContent(notInstalledApp)
 
-        composeTestRule.onNodeWithText(context.getString(R.string.data_usage_app_summary_title))
+        composeTestRule.onNodeWithText(context.getString(R.string.cellular_data_usage))
             .assertIsDisplayed()
             .assertIsNotEnabled()
     }
@@ -115,7 +116,7 @@ class AppDataUsagePreferenceTest {
     fun whenAppInstalled_enabled() {
         setContent(APP)
 
-        composeTestRule.onNodeWithText(context.getString(R.string.data_usage_app_summary_title))
+        composeTestRule.onNodeWithText(context.getString(R.string.cellular_data_usage))
             .assertIsDisplayed()
             .assertIsEnabled()
     }
@@ -169,14 +170,19 @@ class AppDataUsagePreferenceTest {
     private fun setContent(app: ApplicationInfo = APP) {
         composeTestRule.setContent {
             CompositionLocalProvider(LocalContext provides context) {
-                AppDataUsagePreference(app)
+                AppDataUsagePreference(app, TestNetworkTemplates)
             }
         }
         composeTestRule.delay()
     }
 
+    private object TestNetworkTemplates : INetworkTemplates {
+        override fun getDefaultTemplate(context: Context): NetworkTemplate =
+            NetworkTemplate.Builder(NetworkTemplate.MATCH_MOBILE).build()
+    }
+
     private companion object {
-        const val PACKAGE_NAME = "packageName"
+        const val PACKAGE_NAME = "package.name"
         const val UID = 123
         val APP = ApplicationInfo().apply {
             packageName = PACKAGE_NAME
