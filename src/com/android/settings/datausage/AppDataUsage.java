@@ -21,7 +21,6 @@ import static com.android.settings.datausage.lib.AppDataUsageRepository.getAppUi
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
@@ -34,7 +33,6 @@ import android.util.ArraySet;
 import android.util.IconDrawableFactory;
 import android.util.Log;
 import android.util.Range;
-import android.util.SparseBooleanArray;
 import android.view.View;
 import android.widget.AdapterView;
 
@@ -78,7 +76,6 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
     private static final String KEY_TOTAL_USAGE = "total_usage";
     private static final String KEY_FOREGROUND_USAGE = "foreground_usage";
     private static final String KEY_BACKGROUND_USAGE = "background_usage";
-    private static final String KEY_APP_SETTINGS = "app_settings";
     private static final String KEY_RESTRICT_BACKGROUND = "restrict_background";
     private static final String KEY_CYCLE = "cycle";
     private static final String KEY_UNRESTRICTED_DATA = "unrestricted_data_saver";
@@ -90,7 +87,6 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
     private Preference mTotalUsage;
     private Preference mForegroundUsage;
     private Preference mBackgroundUsage;
-    private Preference mAppSettings;
     private RestrictedSwitchPreference mRestrictBackground;
 
     private Drawable mIcon;
@@ -105,7 +101,6 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
     @VisibleForTesting
     NetworkTemplate mTemplate;
     private AppItem mAppItem;
-    private Intent mAppSettingsIntent;
     private SpinnerPreference mCycle;
     private RestrictedSwitchPreference mUnrestrictedData;
     private DataSaverBackend mDataSaverBackend;
@@ -169,7 +164,6 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
 
         final UidDetailProvider uidDetailProvider = getUidDetailProvider();
 
-        final var appDataUsageListController = use(AppDataUsageListController.class);
         if (mAppItem.key > 0) {
             if ((!isSimHardwareVisible(mContext)) || !UserHandle.isApp(mAppItem.key)) {
                 final UidDetail uidDetail = uidDetailProvider.getUidDetail(mAppItem.key, true);
@@ -179,14 +173,16 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
                 removePreference(KEY_RESTRICT_BACKGROUND);
             } else {
                 if (mPackages.size() != 0) {
+                    int userId = UserHandle.getUserId(mAppItem.key);
                     try {
                         final ApplicationInfo info = mPackageManager.getApplicationInfoAsUser(
-                            mPackages.valueAt(0), 0, UserHandle.getUserId(mAppItem.key));
+                                mPackages.valueAt(0), 0, userId);
                         mIcon = IconDrawableFactory.newInstance(getActivity()).getBadgedIcon(info);
                         mLabel = info.loadLabel(mPackageManager);
                         mPackageName = info.packageName;
                     } catch (PackageManager.NameNotFoundException e) {
                     }
+                    use(AppDataUsageAppSettingsController.class).init(mPackages, userId);
                 }
                 mRestrictBackground = findPreference(KEY_RESTRICT_BACKGROUND);
                 mRestrictBackground.setOnPreferenceChangeListener(this);
@@ -194,26 +190,8 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
                 mUnrestrictedData.setOnPreferenceChangeListener(this);
             }
             mDataSaverBackend = new DataSaverBackend(mContext);
-            mAppSettings = findPreference(KEY_APP_SETTINGS);
 
-            mAppSettingsIntent = new Intent(Intent.ACTION_MANAGE_NETWORK_USAGE);
-            mAppSettingsIntent.addCategory(Intent.CATEGORY_DEFAULT);
-
-            final PackageManager pm = getPackageManager();
-            boolean matchFound = false;
-            for (String packageName : mPackages) {
-                mAppSettingsIntent.setPackage(packageName);
-                if (pm.resolveActivity(mAppSettingsIntent, 0) != null) {
-                    matchFound = true;
-                    break;
-                }
-            }
-            if (!matchFound) {
-                removePreference(KEY_APP_SETTINGS);
-                mAppSettings = null;
-            }
-            appDataUsageListController.init(mAppItem.uids);
-
+            use(AppDataUsageListController.class).init(mAppItem.uids);
         } else {
             final Context context = getActivity();
             final UidDetail uidDetail = uidDetailProvider.getUidDetail(mAppItem.key, true);
@@ -222,9 +200,7 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
             mPackageName = context.getPackageName();
 
             removePreference(KEY_UNRESTRICTED_DATA);
-            removePreference(KEY_APP_SETTINGS);
             removePreference(KEY_RESTRICT_BACKGROUND);
-            appDataUsageListController.init(new SparseBooleanArray());
         }
 
         addEntityHeader();
@@ -270,17 +246,6 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
             return true;
         }
         return false;
-    }
-
-    @Override
-    public boolean onPreferenceTreeClick(Preference preference) {
-        if (preference == mAppSettings) {
-            // TODO: target towards entire UID instead of just first package
-            getActivity().startActivityAsUser(mAppSettingsIntent, new UserHandle(
-                    UserHandle.getUserId(mAppItem.key)));
-            return true;
-        }
-        return super.onPreferenceTreeClick(preference);
     }
 
     @Override

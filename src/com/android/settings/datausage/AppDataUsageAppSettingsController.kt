@@ -17,37 +17,38 @@
 package com.android.settings.datausage
 
 import android.content.Context
-import android.util.SparseBooleanArray
+import android.content.Intent
+import android.os.UserHandle
 import androidx.annotation.OpenForTesting
-import androidx.core.util.keyIterator
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.preference.PreferenceGroup
+import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
 import com.android.settings.core.BasePreferenceController
-import com.android.settings.datausage.lib.AppDataUsageRepository.Companion.getAppUid
-import com.android.settings.datausage.lib.AppPreferenceRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 @OpenForTesting
-open class AppDataUsageListController @JvmOverloads constructor(
-    context: Context,
-    preferenceKey: String,
-    private val repository: AppPreferenceRepository = AppPreferenceRepository(context),
-) : BasePreferenceController(context, preferenceKey) {
+open class AppDataUsageAppSettingsController(context: Context, preferenceKey: String) :
+    BasePreferenceController(context, preferenceKey) {
 
-    private var uids: List<Int> = emptyList()
-    private lateinit var preference: PreferenceGroup
+    private var packageNames: Iterable<String> = emptyList()
+    private var userId: Int = -1
+    private lateinit var preference: Preference
+    private var resolvedIntent: Intent? = null
 
-    fun init(uids: SparseBooleanArray) {
-        this.uids = uids.keyIterator().asSequence().map { getAppUid(it) }.distinct().toList()
-    }
+    private val packageManager = mContext.packageManager
 
     override fun getAvailabilityStatus() = AVAILABLE
+
+    fun init(packageNames: Iterable<String>, userId: Int) {
+        this.packageNames = packageNames
+        this.userId = userId
+    }
 
     override fun displayPreference(screen: PreferenceScreen) {
         super.displayPreference(screen)
@@ -57,23 +58,33 @@ open class AppDataUsageListController @JvmOverloads constructor(
     override fun onViewCreated(viewLifecycleOwner: LifecycleOwner) {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                updateList()
+                update()
             }
         }
     }
 
-    private suspend fun updateList() {
-        if (uids.size <= 1) {
-            preference.isVisible = false
-            return
+    private suspend fun update() {
+        resolvedIntent = withContext(Dispatchers.Default) {
+            packageNames.map { packageName ->
+                Intent(SettingsIntent).setPackage(packageName)
+            }.firstOrNull { intent ->
+                packageManager.resolveActivityAsUser(intent, 0, userId) != null
+            }
         }
-        preference.isVisible = true
-        val appPreferences = withContext(Dispatchers.Default) {
-            repository.loadAppPreferences(uids)
+        preference.isVisible = resolvedIntent != null
+    }
+
+    override fun handlePreferenceTreeClick(preference: Preference): Boolean {
+        if (preference.key == mPreferenceKey) {
+            resolvedIntent?.let { mContext.startActivityAsUser(it, UserHandle.of(userId)) }
+            return true
         }
-        preference.removeAll()
-        for (appPreference in appPreferences) {
-            preference.addPreference(appPreference)
+        return false
+    }
+
+    private companion object {
+        val SettingsIntent = Intent(Intent.ACTION_MANAGE_NETWORK_USAGE).apply {
+            addCategory(Intent.CATEGORY_DEFAULT)
         }
     }
 }
