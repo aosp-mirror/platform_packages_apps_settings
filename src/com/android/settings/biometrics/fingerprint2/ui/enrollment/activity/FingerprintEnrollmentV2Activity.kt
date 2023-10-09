@@ -255,6 +255,9 @@ class FingerprintEnrollmentV2Activity : FragmentActivity() {
           }
 
         if (theClass != null) {
+          supportFragmentManager.fragments.onEach { fragment ->
+            supportFragmentManager.beginTransaction().remove(fragment).commit()
+          }
           supportFragmentManager
             .beginTransaction()
             .setReorderingAllowed(true)
