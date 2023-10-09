@@ -31,10 +31,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.UserHandle;
-import android.os.UserManager;
 
 import com.android.settings.TestUtils;
-import com.android.settings.fuelgauge.BatteryOptimizeHistoricalLogEntry;
 import com.android.settings.fuelgauge.batterysaver.BatterySaverScheduleRadioButtonsController;
 
 import org.junit.After;
@@ -75,6 +73,7 @@ public final class BatterySettingsMigrateCheckerTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
+        BatteryUtils.getInstance(mContext).reset();
         doReturn(mContext).when(mContext).getApplicationContext();
         doReturn(mPackageManager).when(mContext).getPackageManager();
         doReturn(UID).when(mPackageManager)
