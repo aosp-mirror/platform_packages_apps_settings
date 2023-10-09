@@ -203,6 +203,10 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         final int currentDensity = displayDensity.getDefaultDisplayDensityValues()
                 [currentDensityIndex];
         final int defaultDensity = displayDensity.getDefaultDensityForDefaultDisplay();
+
+        if (getResources().getConfiguration().fontScale > 1) {
+            return false;
+        }
         return defaultDensity == currentDensity;
     }
 
