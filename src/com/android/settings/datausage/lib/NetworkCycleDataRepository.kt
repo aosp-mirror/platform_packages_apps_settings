@@ -16,16 +16,12 @@
 
 package com.android.settings.datausage.lib
 
-import android.app.usage.NetworkStats
-import android.app.usage.NetworkStatsManager
 import android.content.Context
 import android.net.NetworkPolicy
 import android.net.NetworkPolicyManager
 import android.net.NetworkTemplate
 import android.text.format.DateUtils
-import android.util.Log
 import android.util.Range
-import androidx.annotation.VisibleForTesting
 import com.android.settingslib.NetworkPolicyEditor
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
@@ -41,8 +37,9 @@ interface INetworkCycleDataRepository {
 class NetworkCycleDataRepository(
     context: Context,
     private val networkTemplate: NetworkTemplate,
+    private val networkStatsRepository: NetworkStatsRepository =
+        NetworkStatsRepository(context, networkTemplate),
 ) : INetworkCycleDataRepository {
-    private val networkStatsManager = context.getSystemService(NetworkStatsManager::class.java)!!
 
     private val policyManager = context.getSystemService(NetworkPolicyManager::class.java)!!
 
@@ -57,28 +54,12 @@ class NetworkCycleDataRepository(
     }
 
     private fun queryCyclesAsFourWeeks(): List<Range<Long>> {
-        val timeRange = getTimeRange()
+        val timeRange = networkStatsRepository.getTimeRange() ?: return emptyList()
         return reverseBucketRange(
             startTime = timeRange.lower,
             endTime = timeRange.upper,
             bucketSize = DateUtils.WEEK_IN_MILLIS * 4,
         )
-    }
-
-    @VisibleForTesting
-    fun getTimeRange(): Range<Long> = getTimeRangeOf(
-        networkStatsManager.queryDetailsForDevice(networkTemplate, Long.MIN_VALUE, Long.MAX_VALUE)
-    )
-
-    private fun getTimeRangeOf(stats: NetworkStats): Range<Long> {
-        var start = Long.MAX_VALUE
-        var end = Long.MIN_VALUE
-        val bucket = NetworkStats.Bucket()
-        while (stats.getNextBucket(bucket)) {
-            start = start.coerceAtMost(bucket.startTimeStamp)
-            end = end.coerceAtLeast(bucket.endTimeStamp)
-        }
-        return Range(start, end)
     }
 
     override fun getPolicy(): NetworkPolicy? =
@@ -88,7 +69,7 @@ class NetworkCycleDataRepository(
         }
 
     override suspend fun querySummary(startTime: Long, endTime: Long): NetworkCycleChartData? {
-        val usage = getUsage(startTime, endTime)
+        val usage = networkStatsRepository.querySummaryForDevice(startTime, endTime)
         if (usage > 0L) {
             return NetworkCycleChartData(
                 total = NetworkUsageData(startTime, endTime, usage),
@@ -108,7 +89,7 @@ class NetworkCycleDataRepository(
                 NetworkUsageData(
                     startTime = range.lower,
                     endTime = range.upper,
-                    usage = getUsage(range.lower, range.upper),
+                    usage = networkStatsRepository.querySummaryForDevice(range.lower, range.upper),
                 )
             }
         }.awaitAll()
@@ -138,18 +119,5 @@ class NetworkCycleDataRepository(
             currentEnd = bucketStart
         }
         return buckets
-    }
-
-    private fun getUsage(start: Long, end: Long): Long = try {
-        networkStatsManager.querySummaryForDevice(networkTemplate, start, end).let {
-            it.rxBytes + it.txBytes
-        }
-    } catch (e: Exception) {
-        Log.e(TAG, "Exception querying network detail.", e)
-        0
-    }
-
-    companion object {
-        private const val TAG = "NetworkCycleDataRepository"
     }
 }

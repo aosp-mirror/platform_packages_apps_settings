@@ -38,9 +38,9 @@ import com.android.settings.R
 import com.android.settings.Utils
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment
 import com.android.settings.datausage.AppDataUsage
+import com.android.settings.datausage.lib.IAppDataUsageSummaryRepository
 import com.android.settings.datausage.lib.INetworkTemplates
-import com.android.settingslib.net.NetworkCycleDataForUid
-import com.android.settingslib.net.NetworkCycleDataForUidLoader
+import com.android.settings.datausage.lib.NetworkUsageData
 import com.android.settingslib.spa.testutils.delay
 import com.android.settingslib.spa.testutils.waitUntilExists
 import org.junit.After
@@ -48,11 +48,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mock
-import org.mockito.Mockito.mock
-import org.mockito.Mockito.verify
 import org.mockito.MockitoSession
-import org.mockito.Spy
 import org.mockito.quality.Strictness
 import org.mockito.Mockito.`when` as whenever
 
@@ -63,28 +59,26 @@ class AppDataUsagePreferenceTest {
 
     private lateinit var mockSession: MockitoSession
 
-    @Spy
     private val context: Context = ApplicationProvider.getApplicationContext()
 
-    @Mock
-    private lateinit var builder: NetworkCycleDataForUidLoader.Builder<NetworkCycleDataForUidLoader>
+    private var networkUsageData: NetworkUsageData? = null
 
-    @Mock
-    private lateinit var loader: NetworkCycleDataForUidLoader
+    private inner class TestRepository : IAppDataUsageSummaryRepository {
+        override suspend fun querySummary(uid: Int): NetworkUsageData? = when (uid) {
+            UID -> networkUsageData
+            else -> null
+        }
+    }
 
     @Before
     fun setUp() {
         mockSession = mockitoSession()
             .initMocks(this)
             .mockStatic(Utils::class.java)
-            .mockStatic(NetworkCycleDataForUidLoader::class.java)
-            .mockStatic(NetworkTemplate::class.java)
             .mockStatic(AppInfoDashboardFragment::class.java)
             .strictness(Strictness.LENIENT)
             .startMocking()
         whenever(Utils.isBandwidthControlEnabled()).thenReturn(true)
-        whenever(NetworkCycleDataForUidLoader.builder(context)).thenReturn(builder)
-        whenever(builder.build()).thenReturn(loader)
     }
 
     @After
@@ -122,16 +116,8 @@ class AppDataUsagePreferenceTest {
     }
 
     @Test
-    fun setCorrectValuesForBuilder() {
-        setContent()
-
-        verify(builder).setRetrieveDetail(false)
-        verify(builder).addUid(UID)
-    }
-
-    @Test
     fun whenNoDataUsage() {
-        whenever(loader.loadInBackground()).thenReturn(emptyList())
+        networkUsageData = null
 
         setContent()
 
@@ -140,10 +126,11 @@ class AppDataUsagePreferenceTest {
 
     @Test
     fun whenHasDataUsage() {
-        val cycleData = mock(NetworkCycleDataForUid::class.java)
-        whenever(cycleData.totalUsage).thenReturn(123)
-        whenever(cycleData.startTime).thenReturn(1666666666666)
-        whenever(loader.loadInBackground()).thenReturn(listOf(cycleData))
+        networkUsageData = NetworkUsageData(
+            startTime = 1666666666666L,
+            endTime = 1666666666666L,
+            usage = 123L,
+        )
 
         setContent()
 
@@ -152,8 +139,6 @@ class AppDataUsagePreferenceTest {
 
     @Test
     fun whenClick_startActivity() {
-        whenever(loader.loadInBackground()).thenReturn(emptyList())
-
         setContent()
         composeTestRule.onRoot().performClick()
 
@@ -170,7 +155,9 @@ class AppDataUsagePreferenceTest {
     private fun setContent(app: ApplicationInfo = APP) {
         composeTestRule.setContent {
             CompositionLocalProvider(LocalContext provides context) {
-                AppDataUsagePreference(app, TestNetworkTemplates)
+                AppDataUsagePreference(app, TestNetworkTemplates) { _, _ ->
+                    TestRepository()
+                }
             }
         }
         composeTestRule.delay()

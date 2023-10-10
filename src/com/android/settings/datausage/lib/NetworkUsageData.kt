@@ -16,6 +16,8 @@
 
 package com.android.settings.datausage.lib
 
+import android.util.Range
+
 /**
  * Base data structure representing usage data in a period.
  */
@@ -23,4 +25,15 @@ data class NetworkUsageData(
     val startTime: Long,
     val endTime: Long,
     val usage: Long,
-)
+) {
+    val timeRange = Range(startTime, endTime)
+}
+
+fun List<NetworkUsageData>.aggregate(): NetworkUsageData? = when {
+    isEmpty() -> null
+    else -> NetworkUsageData(
+        startTime = minOf { it.startTime },
+        endTime = maxOf { it.endTime },
+        usage = sumOf { it.usage },
+    )
+}
