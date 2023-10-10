@@ -98,7 +98,7 @@ class NetworkCycleDataRepositoryTest {
 
     @Test
     fun querySummary() = runTest {
-        val summary = repository.querySummary(CYCLE3_START_TIME, CYCLE4_END_TIME)
+        val summary = repository.queryChartData(CYCLE3_START_TIME, CYCLE4_END_TIME)
 
         assertThat(summary).isEqualTo(
             NetworkCycleChartData(
