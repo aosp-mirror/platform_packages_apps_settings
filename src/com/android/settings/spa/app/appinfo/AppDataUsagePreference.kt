@@ -19,7 +19,6 @@ package com.android.settings.spa.app.appinfo
 import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.net.NetworkTemplate
-import android.os.Process
 import android.text.format.DateUtils
 import android.text.format.Formatter
 import androidx.compose.runtime.Composable
@@ -32,11 +31,11 @@ import com.android.settings.R
 import com.android.settings.Utils
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment
 import com.android.settings.datausage.AppDataUsage
+import com.android.settings.datausage.lib.AppDataUsageSummaryRepository
+import com.android.settings.datausage.lib.IAppDataUsageSummaryRepository
 import com.android.settings.datausage.lib.INetworkTemplates
 import com.android.settings.datausage.lib.NetworkTemplates
 import com.android.settings.datausage.lib.NetworkTemplates.getTitleResId
-import com.android.settingslib.net.NetworkCycleDataForUid
-import com.android.settingslib.net.NetworkCycleDataForUidLoader
 import com.android.settingslib.spa.framework.compose.toState
 import com.android.settingslib.spa.widget.preference.Preference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
@@ -53,11 +52,17 @@ import kotlinx.coroutines.withContext
 fun AppDataUsagePreference(
     app: ApplicationInfo,
     networkTemplates: INetworkTemplates = NetworkTemplates,
+    repositoryFactory: (
+        context: Context,
+        networkTemplate: NetworkTemplate,
+    ) -> IAppDataUsageSummaryRepository = { context, networkTemplate ->
+        AppDataUsageSummaryRepository(context, networkTemplate)
+    }
 ) {
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
     val presenter = remember {
-        AppDataUsagePresenter(context, app, coroutineScope, networkTemplates)
+        AppDataUsagePresenter(context, app, coroutineScope, networkTemplates, repositoryFactory)
     }
     if (!presenter.isAvailableFlow.collectAsStateWithLifecycle(initialValue = false).value) return
 
@@ -80,6 +85,10 @@ private class AppDataUsagePresenter(
     private val app: ApplicationInfo,
     coroutineScope: CoroutineScope,
     networkTemplates: INetworkTemplates,
+    private val repositoryFactory: (
+        context: Context,
+        networkTemplate: NetworkTemplate,
+    ) -> IAppDataUsageSummaryRepository,
 ) {
     val isAvailableFlow = flow { emit(isAvailable()) }
 
@@ -99,35 +108,17 @@ private class AppDataUsagePresenter(
     val summaryFlow = templateFlow.map { getSummary(it) }
 
     private suspend fun getSummary(template: NetworkTemplate) = withContext(Dispatchers.IO) {
-        val appUsageData = getAppUsageData(template)
-        val totalBytes = appUsageData.sumOf { it.totalUsage }
-        if (totalBytes == 0L) {
+        val appUsageData = repositoryFactory(context, template).querySummary(app.uid)
+        if (appUsageData == null || appUsageData.usage == 0L) {
             context.getString(R.string.no_data_usage)
         } else {
-            val startTime = appUsageData.minOfOrNull { it.startTime } ?: System.currentTimeMillis()
             context.getString(
                 R.string.data_summary_format,
-                Formatter.formatFileSize(context, totalBytes, Formatter.FLAG_IEC_UNITS),
-                DateUtils.formatDateTime(context, startTime, DATE_FORMAT),
+                Formatter.formatFileSize(context, appUsageData.usage, Formatter.FLAG_IEC_UNITS),
+                DateUtils.formatDateTime(context, appUsageData.startTime, DATE_FORMAT),
             )
         }
     }
-
-    private suspend fun getAppUsageData(template: NetworkTemplate): List<NetworkCycleDataForUid> =
-        withContext(Dispatchers.IO) {
-            createLoader(template).loadInBackground() ?: emptyList()
-        }
-
-    private fun createLoader(template: NetworkTemplate): NetworkCycleDataForUidLoader =
-        NetworkCycleDataForUidLoader.builder(context).apply {
-            setRetrieveDetail(false)
-            setNetworkTemplate(template)
-            addUid(app.uid)
-            if (Process.isApplicationUid(app.uid)) {
-                // Also add in network usage for the app's SDK sandbox
-                addUid(Process.toSdkSandboxUid(app.uid))
-            }
-        }.build()
 
     fun startActivity() {
         AppInfoDashboardFragment.startAppInfoFragment(

@@ -26,7 +26,7 @@ import android.os.UserManager
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
-import com.android.settings.datausage.lib.AppDataUsageRepository.Companion.Bucket
+import com.android.settings.datausage.lib.NetworkStatsRepository.Companion.Bucket
 import com.android.settingslib.AppItem
 import com.android.settingslib.spaprivileged.framework.common.userManager
 import com.google.common.truth.Truth.assertThat

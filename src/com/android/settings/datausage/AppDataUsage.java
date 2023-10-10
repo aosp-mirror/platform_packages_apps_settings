@@ -27,7 +27,6 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
-import android.os.Process;
 import android.os.UserHandle;
 import android.util.ArraySet;
 import android.util.IconDrawableFactory;
@@ -139,14 +138,6 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
             }
         }
 
-        if (mAppItem.key > 0 && UserHandle.isApp(mAppItem.key)) {
-            // In case we've been asked data usage for an app, automatically
-            // include data usage of the corresponding SDK sandbox
-            final int appSandboxUid = Process.toSdkSandboxUid(mAppItem.key);
-            if (!mAppItem.uids.get(appSandboxUid)) {
-                mAppItem.addUid(appSandboxUid);
-            }
-        }
         mTotalUsage = findPreference(KEY_TOTAL_USAGE);
         mForegroundUsage = findPreference(KEY_FOREGROUND_USAGE);
         mBackgroundUsage = findPreference(KEY_BACKGROUND_USAGE);
