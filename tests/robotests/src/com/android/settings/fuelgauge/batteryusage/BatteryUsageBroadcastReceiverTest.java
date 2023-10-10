@@ -30,6 +30,7 @@ import android.os.BatteryManager;
 import android.os.SystemClock;
 import android.text.format.DateUtils;
 
+import com.android.settings.testutils.BatteryTestUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
@@ -63,6 +64,16 @@ public final class BatteryUsageBroadcastReceiverTest {
     @Test
     public void onReceive_invalidIntent_notStartService() {
         mBatteryUsageBroadcastReceiver.onReceive(mContext, new Intent("invalid intent"));
+
+        assertThat(mBatteryUsageBroadcastReceiver.mFetchBatteryUsageData).isFalse();
+    }
+
+    @Test
+    public void onReceive_workProfile_doNothing() {
+        BatteryTestUtils.setWorkProfile(mContext);
+
+        mBatteryUsageBroadcastReceiver.onReceive(mContext,
+                new Intent(BatteryUsageBroadcastReceiver.ACTION_BATTERY_UNPLUGGING));
 
         assertThat(mBatteryUsageBroadcastReceiver.mFetchBatteryUsageData).isFalse();
     }
