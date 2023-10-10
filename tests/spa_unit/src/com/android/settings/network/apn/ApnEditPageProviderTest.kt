@@ -51,7 +51,6 @@ class ApnEditPageProviderTest {
     private val apnName = "apn_name"
     private val mmsc = "mmsc"
     private val mmsProxy = "mms_proxy"
-    private val mnc = "mnc"
     private val apnType = "apn_type"
     private val apnRoaming = "IPv4"
     private val apnEnable = context.resources.getString(R.string.carrier_enabled)
@@ -64,7 +63,6 @@ class ApnEditPageProviderTest {
             name = apnName,
             mmsc = mmsc,
             mmsProxy = mmsProxy,
-            mnc = mnc,
             apnType = apnType,
             apnRoaming = apnProtocolOptions.indexOf(apnRoaming),
             apnEnable = true
@@ -118,18 +116,6 @@ class ApnEditPageProviderTest {
         composeTestRule.onRoot().onChild().onChildAt(0)
             .performScrollToNode(hasText(mmsProxy, true))
         composeTestRule.onNodeWithText(mmsProxy, true).assertIsDisplayed()
-    }
-
-    @Test
-    fun mnc_displayed() {
-        composeTestRule.setContent {
-            ApnPage(remember {
-                apnData
-            })
-        }
-        composeTestRule.onRoot().onChild().onChildAt(0)
-            .performScrollToNode(hasText(mnc, true))
-        composeTestRule.onNodeWithText(mnc, true).assertIsDisplayed()
     }
 
     @Test
