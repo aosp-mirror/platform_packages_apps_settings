@@ -19,6 +19,7 @@ package com.android.settings.bluetooth;
 import static android.os.Process.BLUETOOTH_UID;
 
 import android.app.settings.SettingsEnums;
+import android.bluetooth.BluetoothCsipSetCoordinator;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
@@ -28,23 +29,25 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.UserHandle;
-import android.provider.DeviceConfig;
 import android.provider.Settings;
-import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.R;
-import com.android.settings.core.SettingsUIDeviceConfig;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.BluetoothUtils.ErrorListener;
+import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothManager.BluetoothManagerCallback;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.FutureTask;
 
 /**
  * Utils is a helper class that contains constants for various
@@ -136,6 +139,24 @@ public final class Utils {
         return LocalBluetoothManager.getInstance(context, mOnInitCallback);
     }
 
+    /**
+     * Obtains a {@link LocalBluetoothManager}.
+     *
+     * To avoid StrictMode ThreadPolicy violation, will get it in another thread.
+     */
+    public static LocalBluetoothManager getLocalBluetoothManager(Context context) {
+        final FutureTask<LocalBluetoothManager> localBtManagerFutureTask = new FutureTask<>(
+                // Avoid StrictMode ThreadPolicy violation
+                () -> getLocalBtManager(context));
+        try {
+            localBtManagerFutureTask.run();
+            return localBtManagerFutureTask.get();
+        } catch (InterruptedException | ExecutionException e) {
+            Log.w(TAG, "Error getting LocalBluetoothManager.", e);
+            return null;
+        }
+    }
+
     public static String createRemoteName(Context context, BluetoothDevice device) {
         String mRemoteName = device != null ? device.getAlias() : null;
 
@@ -163,38 +184,6 @@ public final class Utils {
     public static boolean isBluetoothScanningEnabled(Context context) {
         return Settings.Global.getInt(context.getContentResolver(),
                 Settings.Global.BLE_SCAN_ALWAYS_AVAILABLE, 0) == 1;
-    }
-
-    /**
-     * Check if the Bluetooth device supports advanced details header
-     *
-     * @param bluetoothDevice the BluetoothDevice to get metadata
-     * @return true if it supports advanced details header, false otherwise.
-     */
-    public static boolean isAdvancedDetailsHeader(@NonNull BluetoothDevice bluetoothDevice) {
-        final boolean advancedEnabled = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_SETTINGS_UI,
-                SettingsUIDeviceConfig.BT_ADVANCED_HEADER_ENABLED, true);
-        if (!advancedEnabled) {
-            Log.d(TAG, "isAdvancedDetailsHeader: advancedEnabled is false");
-            return false;
-        }
-        // The metadata is for Android R
-        final boolean untetheredHeadset = BluetoothUtils.getBooleanMetaData(bluetoothDevice,
-                BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET);
-        if (untetheredHeadset) {
-            Log.d(TAG, "isAdvancedDetailsHeader: untetheredHeadset is true");
-            return true;
-        }
-        // The metadata is for Android S
-        final String deviceType = BluetoothUtils.getStringMetaData(bluetoothDevice,
-                BluetoothDevice.METADATA_DEVICE_TYPE);
-        if (TextUtils.equals(deviceType, BluetoothDevice.DEVICE_TYPE_UNTETHERED_HEADSET)
-                || TextUtils.equals(deviceType, BluetoothDevice.DEVICE_TYPE_WATCH)
-                || TextUtils.equals(deviceType, BluetoothDevice.DEVICE_TYPE_DEFAULT)) {
-            Log.d(TAG, "isAdvancedDetailsHeader: deviceType is " + deviceType);
-            return true;
-        }
-        return false;
     }
 
     /**
@@ -239,5 +228,48 @@ public final class Utils {
             return matchedPackage;
         }
         throw new NameNotFoundException("Could not find main bluetooth package");
+    }
+
+    /**
+     * Returns all cachedBluetoothDevices with the same groupId.
+     * @param cachedBluetoothDevice The main cachedBluetoothDevice.
+     * @return all cachedBluetoothDevices with the same groupId.
+     */
+    public static List<CachedBluetoothDevice> getAllOfCachedBluetoothDevices(Context context,
+            CachedBluetoothDevice cachedBluetoothDevice) {
+        List<CachedBluetoothDevice> cachedBluetoothDevices = new ArrayList<>();
+        if (cachedBluetoothDevice == null) {
+            Log.e(TAG, "getAllOfCachedBluetoothDevices: no cachedBluetoothDevice");
+            return cachedBluetoothDevices;
+        }
+        int deviceGroupId = cachedBluetoothDevice.getGroupId();
+        if (deviceGroupId == BluetoothCsipSetCoordinator.GROUP_ID_INVALID) {
+            cachedBluetoothDevices.add(cachedBluetoothDevice);
+            return cachedBluetoothDevices;
+        }
+
+        final LocalBluetoothManager localBtMgr = Utils.getLocalBtManager(context);
+        if (localBtMgr == null) {
+            Log.e(TAG, "getAllOfCachedBluetoothDevices: no LocalBluetoothManager");
+            return cachedBluetoothDevices;
+        }
+        CachedBluetoothDevice mainDevice =
+                localBtMgr.getCachedDeviceManager().getCachedDevicesCopy().stream()
+                        .filter(cachedDevice -> cachedDevice.getGroupId() == deviceGroupId)
+                        .findFirst().orElse(null);
+        if (mainDevice == null) {
+            Log.e(TAG, "getAllOfCachedBluetoothDevices: groupId = " + deviceGroupId
+                    + ", no main device.");
+            return cachedBluetoothDevices;
+        }
+        cachedBluetoothDevice = mainDevice;
+        cachedBluetoothDevices.add(cachedBluetoothDevice);
+        for (CachedBluetoothDevice member : cachedBluetoothDevice.getMemberDevice()) {
+            cachedBluetoothDevices.add(member);
+        }
+        Log.d(TAG, "getAllOfCachedBluetoothDevices: groupId = " + deviceGroupId
+                + " , cachedBluetoothDevice = " + cachedBluetoothDevice
+                + " , deviceList = " + cachedBluetoothDevices);
+        return cachedBluetoothDevices;
     }
 }

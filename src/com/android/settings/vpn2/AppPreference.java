@@ -29,6 +29,7 @@ import com.android.internal.net.LegacyVpnInfo;
 import com.android.internal.net.VpnConfig;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settings.R;
 
 /**
  * {@link androidx.preference.Preference} containing information about a VPN
@@ -42,7 +43,7 @@ public class AppPreference extends ManageablePreference {
     private final String mName;
 
     public AppPreference(Context context, int userId, String packageName) {
-        super(context, null /* attrs */);
+        super(context, null /* attrs */, R.style.VpnAppManagementPreferenceStyle, 0);
         super.setUserId(userId);
 
         mPackageName = packageName;

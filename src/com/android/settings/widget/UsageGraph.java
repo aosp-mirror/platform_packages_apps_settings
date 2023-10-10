@@ -37,8 +37,8 @@ import android.view.View;
 
 import androidx.annotation.VisibleForTesting;
 
+import com.android.settings.R;
 import com.android.settings.fuelgauge.BatteryUtils;
-import com.android.settingslib.R;
 
 public class UsageGraph extends View {
 

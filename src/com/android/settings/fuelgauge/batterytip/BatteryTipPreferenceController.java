@@ -18,7 +18,9 @@ package com.android.settings.fuelgauge.batterytip;
 
 import android.annotation.Nullable;
 import android.content.Context;
+import android.os.BadParcelableException;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -36,6 +38,7 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * Controller in charge of the battery tip group
@@ -98,15 +101,7 @@ public class BatteryTipPreferenceController extends BasePreferenceController {
         if (batteryTips == null) {
             return;
         }
-        if (mBatteryTips == null) {
-            mBatteryTips = batteryTips;
-        } else {
-            // mBatteryTips and batteryTips always have the same length and same sequence.
-            for (int i = 0, size = batteryTips.size(); i < size; i++) {
-                mBatteryTips.get(i).updateState(batteryTips.get(i));
-            }
-        }
-
+        mBatteryTips = batteryTips;
         mCardPreference.setVisible(false);
         for (int i = 0, size = batteryTips.size(); i < size; i++) {
             final BatteryTip batteryTip = mBatteryTips.get(i);
@@ -149,14 +144,26 @@ public class BatteryTipPreferenceController extends BasePreferenceController {
     }
 
     public void restoreInstanceState(Bundle bundle) {
-        if (bundle != null) {
+        if (bundle == null) {
+            return;
+        }
+        try {
             List<BatteryTip> batteryTips = bundle.getParcelableArrayList(KEY_BATTERY_TIPS);
             updateBatteryTips(batteryTips);
+        } catch (BadParcelableException e) {
+            Log.e(TAG, "failed to invoke restoreInstanceState()", e);
         }
     }
 
-    public void saveInstanceState(Bundle outState) {
-        outState.putParcelableList(KEY_BATTERY_TIPS, mBatteryTips);
+    public void saveInstanceState(Bundle bundle) {
+        if (bundle == null) {
+            return;
+        }
+        try {
+            bundle.putParcelableList(KEY_BATTERY_TIPS, mBatteryTips);
+        } catch (BadParcelableException e) {
+            Log.e(TAG, "failed to invoke saveInstanceState()", e);
+        }
     }
 
     public boolean needUpdate() {
@@ -171,9 +178,9 @@ public class BatteryTipPreferenceController extends BasePreferenceController {
         if (mBatteryTips == null) {
             return null;
         }
-
-        return mBatteryTips.stream().anyMatch(BatteryTip::isVisible)
-                ? mBatteryTips.stream().filter(BatteryTip::isVisible).findFirst().get() : null;
+        Optional<BatteryTip> visibleBatteryTip =
+                mBatteryTips.stream().filter(BatteryTip::isVisible).findFirst();
+        return visibleBatteryTip.orElse(null);
     }
 
     /**

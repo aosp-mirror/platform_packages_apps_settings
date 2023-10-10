@@ -18,13 +18,12 @@ package com.android.settings.fuelgauge;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
+import android.util.ArrayMap;
 import android.util.SparseIntArray;
 
-import com.android.settings.fuelgauge.batteryusage.BatteryHistEntry;
 import com.android.settingslib.fuelgauge.Estimate;
 
-import java.util.Map;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -33,24 +32,34 @@ import java.util.Set;
 public interface PowerUsageFeatureProvider {
 
     /**
+     * Check whether the battery usage button is enabled in the battery page
+     */
+    boolean isBatteryUsageEnabled();
+
+    /**
+     * Returns a threshold (in milliseconds) for the minimal screen on time in battery usage list
+     */
+    double getBatteryUsageListScreenOnTimeThresholdInMs();
+
+    /**
+     * Returns a threshold (mA) for the minimal comsume power in battery usage list
+     */
+    double getBatteryUsageListConsumePowerThreshold();
+
+    /**
+     * Returns an allowlist of app names combined into the system-apps item
+     */
+    List<String> getSystemAppsAllowlist();
+
+    /**
      * Check whether location setting is enabled
      */
     boolean isLocationSettingEnabled(String[] packages);
 
     /**
-     * Check whether additional battery info feature is enabled.
-     */
-    boolean isAdditionalBatteryInfoEnabled();
-
-    /**
-     * Gets an {@link Intent} to show additional battery info.
+     * Gets an {@link Intent} to show additional battery info
      */
     Intent getAdditionalBatteryInfoIntent();
-
-    /**
-     * Check whether advanced ui is enabled
-     */
-    boolean isAdvancedUiEnabled();
 
     /**
      * Check whether it is type service
@@ -63,61 +72,41 @@ public interface PowerUsageFeatureProvider {
     boolean isTypeSystem(int uid, String[] packages);
 
     /**
-     * Check whether the toggle for power accounting is enabled
-     */
-    boolean isPowerAccountingToggleEnabled();
-
-    /**
-     * Returns an improved prediction for battery time remaining.
+     * Returns an improved prediction for battery time remaining
      */
     Estimate getEnhancedBatteryPrediction(Context context);
 
     /**
-     * Returns an improved projection curve for future battery level.
+     * Returns an improved projection curve for future battery level
      *
      * @param zeroTime timestamps (array keys) are shifted by this amount
      */
     SparseIntArray getEnhancedBatteryPredictionCurve(Context context, long zeroTime);
 
     /**
-     * Checks whether the toggle for enhanced battery predictions is enabled.
+     * Checks whether the toggle for enhanced battery predictions is enabled
      */
     boolean isEnhancedBatteryPredictionEnabled(Context context);
 
     /**
-     * Checks whether debugging should be enabled for battery estimates.
+     * Checks whether debugging should be enabled for battery estimates
      */
     boolean isEstimateDebugEnabled();
 
     /**
      * Converts the provided string containing the remaining time into a debug string for enhanced
-     * estimates.
+     * estimates
      *
      * @return A string containing the estimate and a label indicating it is an enhanced estimate
      */
     String getEnhancedEstimateDebugString(String timeRemaining);
 
     /**
-     * Converts the provided string containing the remaining time into a debug string.
+     * Converts the provided string containing the remaining time into a debug string
      *
      * @return A string containing the estimate and a label indicating it is a normal estimate
      */
     String getOldEstimateDebugString(String timeRemaining);
-
-    /**
-     * Returns the string to show in the advanced usage battery page when enhanced estimates are
-     * enabled. This string notifies users that the estimate is using enhanced prediction.
-     */
-    String getAdvancedUsageScreenInfoString();
-
-    /**
-     * Returns a signal to indicate if the device will need to warn the user they may not make it
-     * to their next charging time.
-     *
-     * @param id Optional string used to identify the caller for metrics. Usually the class name of
-     *           the caller
-     */
-    boolean getEarlyWarningSignal(Context context, String id);
 
     /**
      * Checks whether smart battery feature is supported in this device
@@ -125,19 +114,9 @@ public interface PowerUsageFeatureProvider {
     boolean isSmartBatterySupported();
 
     /**
-     * Checks whether we should enable chart graph design or not.
-     */
-    boolean isChartGraphEnabled(Context context);
-
-    /**
-     * Checks whether we should show usage information by slots or not.
+     * Checks whether we should show usage information by slots or not
      */
     boolean isChartGraphSlotsEnabled(Context context);
-
-    /**
-     * Checks whether adaptive charging feature is supported in this device
-     */
-    boolean isAdaptiveChargingSupported();
 
     /**
      * Returns {@code true} if current defender mode is extra defend
@@ -145,37 +124,62 @@ public interface PowerUsageFeatureProvider {
     boolean isExtraDefend();
 
     /**
-     * Gets a intent for one time bypass charge limited to resume charging.
+     * Returns {@code true} if delay the hourly job when device is booting
+     */
+    boolean delayHourlyJobWhenBooting();
+
+    /**
+     * Gets an intent for one time bypass charge limited to resume charging.
      */
     Intent getResumeChargeIntent(boolean isDockDefender);
 
     /**
-     * Returns battery history data with corresponding timestamp key.
+     * Returns the intent action used to mark as the full charge start event.
      */
-    Map<Long, Map<String, BatteryHistEntry>> getBatteryHistory(Context context);
+    String getFullChargeIntentAction();
 
     /**
-     * Returns battery history data since last full charge with corresponding timestamp key.
+     * Returns {@link Set} for the system component ids which are combined into others
      */
-    Map<Long, Map<String, BatteryHistEntry>> getBatteryHistorySinceLastFullCharge(Context context);
+    Set<Integer> getOthersSystemComponentSet();
 
     /**
-     * Returns {@link Uri} to monitor battery history data is update.
+     * Returns {@link Set} for the custom system component names which are combined into others
      */
-    Uri getBatteryHistoryUri();
+    Set<String> getOthersCustomComponentNameSet();
 
     /**
-     * Returns {@link Set} for hidding applications background usage time.
+     * Returns {@link Set} for hiding system component ids in the usage screen
      */
-    Set<CharSequence> getHideBackgroundUsageTimeSet(Context context);
+    Set<Integer> getHideSystemComponentSet();
 
     /**
-     * Returns package names for hidding application in the usage screen.
+     * Returns {@link Set} for hiding application package names in the usage screen
      */
-    CharSequence[] getHideApplicationEntries(Context context);
+    Set<String> getHideApplicationSet();
 
     /**
-     * Returns package names for hidding summary in the usage screen.
+     * Returns {@link Set} for hiding applications background usage time
      */
-    CharSequence[] getHideApplicationSummary(Context context);
+    Set<String> getHideBackgroundUsageTimeSet();
+
+    /**
+     * Returns {@link Set} for ignoring task root class names for screen on time
+     */
+    Set<String> getIgnoreScreenOnTimeTaskRootSet();
+
+    /**
+     * Returns the customized device build information for data backup
+     */
+    String getBuildMetadata1(Context context);
+
+    /**
+     * Returns the customized device build information for data backup
+     */
+    String getBuildMetadata2(Context context);
+
+    /**
+     * Whether the app optimization mode is valid to restore
+     */
+    boolean isValidToRestoreOptimizationMode(ArrayMap<String, String> deviceInfoMap);
 }

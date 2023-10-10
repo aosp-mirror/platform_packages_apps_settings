@@ -13,6 +13,7 @@ import androidx.lifecycle.LifecycleOwner;
 
 import com.android.settings.R;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.utils.StringUtil;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -21,6 +22,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RunWith(RobolectricTestRunner.class)
 public class AppLocationPermissionPreferenceControllerTest {
@@ -86,8 +90,11 @@ public class AppLocationPermissionPreferenceControllerTest {
         mController.mNumHasLocation = 1;
         mController.mNumTotal = 1;
 
-        assertThat(mController.getSummary()).isEqualTo(mContext.getResources().getQuantityString(
-                R.plurals.location_app_permission_summary_location_on, 1, 1, 1));
+        Map<String, Object> arguments = new HashMap<>();
+        arguments.put("count", 1);
+        arguments.put("total", 1);
+        assertThat(mController.getSummary()).isEqualTo(StringUtil.getIcuPluralsString(mContext,
+                arguments, R.string.location_app_permission_summary_location_on));
     }
 
     @Test
@@ -96,7 +103,10 @@ public class AppLocationPermissionPreferenceControllerTest {
         mController.mNumHasLocation = 5;
         mController.mNumTotal = 10;
 
-        assertThat(mController.getSummary()).isEqualTo(mContext.getResources().getQuantityString(
-                R.plurals.location_app_permission_summary_location_on, 5, 5, 10));
+        Map<String, Object> arguments = new HashMap<>();
+        arguments.put("count", 5);
+        arguments.put("total", 10);
+        assertThat(mController.getSummary()).isEqualTo(StringUtil.getIcuPluralsString(mContext,
+                arguments, R.string.location_app_permission_summary_location_on));
     }
 }

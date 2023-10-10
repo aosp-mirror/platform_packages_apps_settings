@@ -14,7 +14,6 @@
 package com.android.settings.display;
 
 import android.content.Context;
-import android.os.UserManager;
 
 import com.android.settings.R;
 import com.android.settings.Utils;

@@ -53,6 +53,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadow.api.Shadow;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowSensorPrivacyManager.class)
@@ -171,16 +172,14 @@ public class SmartAutoRotateControllerTest {
     }
 
     private void lockDeviceStateRotation() {
-        mDeviceStateAutoRotateSettingsManager.updateSetting(
-                /* deviceState= */0, /* rotationLocked= */ true);
-        mDeviceStateAutoRotateSettingsManager.updateSetting(
-                /* deviceState= */1, /* rotationLocked= */ true);
+        ShadowDeviceStateRotationLockSettingsManager shadowManager =
+                Shadow.extract(mDeviceStateAutoRotateSettingsManager);
+        shadowManager.setRotationLockedForAllStates(true);
     }
 
     private void unlockDeviceStateRotation() {
-        mDeviceStateAutoRotateSettingsManager.updateSetting(
-                /* deviceState= */0, /* rotationLocked= */ false);
-        mDeviceStateAutoRotateSettingsManager.updateSetting(
-                /* deviceState= */1, /* rotationLocked= */ true);
+        ShadowDeviceStateRotationLockSettingsManager shadowManager =
+                Shadow.extract(mDeviceStateAutoRotateSettingsManager);
+        shadowManager.setRotationLockedForAllStates(false);
     }
 }

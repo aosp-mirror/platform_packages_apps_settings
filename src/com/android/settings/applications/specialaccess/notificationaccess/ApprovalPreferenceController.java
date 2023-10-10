@@ -81,6 +81,8 @@ public class ApprovalPreferenceController extends BasePreferenceController {
         final RestrictedSwitchPreference preference =
                 (RestrictedSwitchPreference) pref;
         final CharSequence label = mPkgInfo.applicationInfo.loadLabel(mPm);
+        final boolean isAllowedCn = mCn.flattenToShortString().length()
+                <= NotificationManager.MAX_SERVICE_COMPONENT_NAME_LENGTH;
         final boolean isEnabled = isServiceEnabled(mCn);
         preference.setChecked(isEnabled);
         preference.setOnPreferenceChangeListener((p, newValue) -> {
@@ -105,7 +107,8 @@ public class ApprovalPreferenceController extends BasePreferenceController {
                 return false;
             }
         });
-        preference.updateState(mCn.getPackageName(), mPkgInfo.applicationInfo.uid, isEnabled);
+        preference.updateState(
+                mCn.getPackageName(), mPkgInfo.applicationInfo.uid, isAllowedCn, isEnabled);
     }
 
     public void disable(final ComponentName cn) {

@@ -38,7 +38,6 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
-import androidx.annotation.StringRes;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;

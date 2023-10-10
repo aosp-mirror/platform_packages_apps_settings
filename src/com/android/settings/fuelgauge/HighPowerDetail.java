@@ -81,7 +81,7 @@ public class HighPowerDetail extends InstrumentedDialogFragment implements OnCli
             mLabel = mPackageName;
         }
         mDefaultOn = getArguments().getBoolean(ARG_DEFAULT_ON);
-        mIsEnabled = mDefaultOn || mBackend.isAllowlisted(mPackageName);
+        mIsEnabled = mDefaultOn || mBackend.isAllowlisted(mPackageName, mPackageUid);
     }
 
     public Checkable setup(View view, boolean on) {
@@ -137,7 +137,7 @@ public class HighPowerDetail extends InstrumentedDialogFragment implements OnCli
     public void onClick(DialogInterface dialog, int which) {
         if (which == DialogInterface.BUTTON_POSITIVE) {
             boolean newValue = mIsEnabled;
-            boolean oldValue = mBackend.isAllowlisted(mPackageName);
+            boolean oldValue = mBackend.isAllowlisted(mPackageName, mPackageUid);
             if (newValue != oldValue) {
                 logSpecialPermissionChange(newValue, mPackageName, getContext());
                 if (newValue) {
@@ -169,20 +169,20 @@ public class HighPowerDetail extends InstrumentedDialogFragment implements OnCli
     }
 
     public static CharSequence getSummary(Context context, AppEntry entry) {
-        return getSummary(context, entry.info.packageName);
+        return getSummary(context, entry.info.packageName, entry.info.uid);
     }
 
-    public static CharSequence getSummary(Context context, String pkg) {
-        return getSummary(context, PowerAllowlistBackend.getInstance(context), pkg);
+    public static CharSequence getSummary(Context context, String pkg, int uid) {
+        return getSummary(context, PowerAllowlistBackend.getInstance(context), pkg, uid);
     }
 
     @VisibleForTesting
     static CharSequence getSummary(Context context, PowerAllowlistBackend powerAllowlist,
-            String pkg) {
+            String pkg, int uid) {
         return context.getString(
-                powerAllowlist.isSysAllowlisted(pkg) || powerAllowlist.isDefaultActiveApp(pkg)
+                powerAllowlist.isSysAllowlisted(pkg) || powerAllowlist.isDefaultActiveApp(pkg, uid)
                         ? R.string.high_power_system
-                        : powerAllowlist.isAllowlisted(pkg)
+                        : powerAllowlist.isAllowlisted(pkg, uid)
                                 ? R.string.high_power_on
                                 : R.string.high_power_off);
     }

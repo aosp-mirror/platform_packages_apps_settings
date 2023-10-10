@@ -38,6 +38,7 @@ public class UsbDetailsTranscodeMtpController extends UsbDetailsController
         implements Preference.OnPreferenceClickListener {
     private static final String TRANSCODE_MTP_SYS_PROP_KEY = "sys.fuse.transcode_mtp";
     private static final String PREFERENCE_KEY = "usb_transcode_mtp";
+    private static final String KEY_USB_TRANSCODE_FILES = "usb_transcode_files";
 
     private PreferenceCategory mPreferenceCategory;
     private SwitchPreference mSwitchPreference;
@@ -54,6 +55,7 @@ public class UsbDetailsTranscodeMtpController extends UsbDetailsController
         mPreferenceCategory = screen.findPreference(getPreferenceKey());
         mSwitchPreference = new SwitchPreference(mPreferenceCategory.getContext());
         mSwitchPreference.setTitle(R.string.usb_transcode_files);
+        mSwitchPreference.setKey(KEY_USB_TRANSCODE_FILES);
         mSwitchPreference.setOnPreferenceClickListener(this);
         mSwitchPreference.setSummaryOn(R.string.usb_transcode_files_summary);
         mPreferenceCategory.addPreference(mSwitchPreference);

@@ -153,12 +153,10 @@ public class AccessibilityQuickSettingsPrimarySwitchPreferenceControllerTest {
     @Test
     @Config(shadows = ShadowFragment.class)
     public void restoreValueFromSavedInstanceState_showTooltipView() {
-        mController.displayPreference(mScreen);
-        mController.setChecked(true);
         final Bundle savedInstanceState = new Bundle();
         savedInstanceState.putBoolean(KEY_SAVED_QS_TOOLTIP_RESHOW, /* value= */ true);
+        mController.onCreate(savedInstanceState);
 
-        mFragment.onCreate(savedInstanceState);
         mController.displayPreference(mScreen);
 
         assertThat(getLatestPopupWindow().isShowing()).isTrue();

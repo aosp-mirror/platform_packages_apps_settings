@@ -40,14 +40,13 @@ import android.telephony.TelephonyManager;
 import android.telephony.euicc.EuiccManager;
 import android.text.TextUtils;
 
-import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.Settings.MobileNetworkActivity;
-import com.android.settings.network.helper.SubscriptionAnnotation;
-import com.android.settings.network.helper.SubscriptionGrouping;
 import com.android.settings.widget.AddPreference;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.After;
 import org.junit.Before;
@@ -64,8 +63,7 @@ import java.util.Arrays;
 
 @RunWith(RobolectricTestRunner.class)
 public class MobileNetworkSummaryControllerTest {
-    @Mock
-    private Lifecycle mLifecycle;
+
     @Mock
     private TelephonyManager mTelephonyManager;
     @Mock
@@ -76,10 +74,16 @@ public class MobileNetworkSummaryControllerTest {
     private PreferenceScreen mPreferenceScreen;
     @Mock
     private UserManager mUserManager;
+    @Mock
+    private MobileNetworkRepository mMobileNetworkRepository;
+    @Mock
+    private MobileNetworkRepository.MobileNetworkCallback mMobileNetworkCallback;
 
     private AddPreference mPreference;
     private Context mContext;
     private MobileNetworkSummaryController mController;
+    private LifecycleOwner mLifecycleOwner;
+    private Lifecycle mLifecycle;
 
     @Before
     public void setUp() {
@@ -89,13 +93,18 @@ public class MobileNetworkSummaryControllerTest {
         doReturn(mSubscriptionManager).when(mContext).getSystemService(SubscriptionManager.class);
         doReturn(mEuiccManager).when(mContext).getSystemService(EuiccManager.class);
         doReturn(mUserManager).when(mContext).getSystemService(UserManager.class);
+        mMobileNetworkRepository = MobileNetworkRepository.getInstance(mContext);
+        mLifecycleOwner = () -> mLifecycle;
+        mLifecycle = new Lifecycle(mLifecycleOwner);
+        mMobileNetworkRepository.addRegister(mLifecycleOwner, mMobileNetworkCallback,
+                SubscriptionManager.INVALID_SUBSCRIPTION_ID);
 
         when(mTelephonyManager.getNetworkCountryIso()).thenReturn("");
         when(mSubscriptionManager.isActiveSubscriptionId(anyInt())).thenReturn(true);
         when(mEuiccManager.isEnabled()).thenReturn(true);
         Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.EUICC_PROVISIONED, 1);
 
-        mController = new MobileNetworkSummaryController(mContext, mLifecycle);
+        mController = new MobileNetworkSummaryController(mContext, mLifecycle, mLifecycleOwner);
         mPreference = spy(new AddPreference(mContext, null));
         mPreference.setKey(mController.getPreferenceKey());
         when(mPreferenceScreen.findPreference(eq(mController.getPreferenceKey()))).thenReturn(
@@ -104,6 +113,7 @@ public class MobileNetworkSummaryControllerTest {
 
     @After
     public void tearDown() {
+        mMobileNetworkRepository.removeRegister(mMobileNetworkCallback);
         SubscriptionUtil.setActiveSubscriptionsForTesting(null);
         SubscriptionUtil.setAvailableSubscriptionsForTesting(null);
     }
@@ -123,18 +133,12 @@ public class MobileNetworkSummaryControllerTest {
         assertThat(mController.isAvailable()).isFalse();
     }
 
-
     @Test
-    public void getSummary_noSubscriptions_correctSummaryAndClickHandler() {
+    public void getSummary_noSubscriptions_returnSummaryCorrectly() {
         mController.displayPreference(mPreferenceScreen);
         mController.onResume();
-        assertThat(mController.getSummary()).isEqualTo("Add a network");
 
-        final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
-        doNothing().when(mContext).startActivity(intentCaptor.capture());
-        mPreference.getOnPreferenceClickListener().onPreferenceClick(mPreference);
-        assertThat(intentCaptor.getValue().getAction()).isEqualTo(
-                EuiccManager.ACTION_PROVISION_EMBEDDED_SUBSCRIPTION);
+        assertThat(mController.getSummary()).isEqualTo("Add a network");
     }
 
     @Test
@@ -291,13 +295,12 @@ public class MobileNetworkSummaryControllerTest {
     }
 
     @Test
-    public void onResume_noSubscriptionEsimDisabled_isDisabled() {
+    public void onAvailableSubInfoChanged_noSubscriptionEsimDisabled_isDisabled() {
         Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 0);
-        SubscriptionUtil.setAvailableSubscriptionsForTesting(null);
         when(mEuiccManager.isEnabled()).thenReturn(false);
         mController.displayPreference(mPreferenceScreen);
 
-        mController.onResume();
+        mController.onAvailableSubInfoChanged(null);
 
         assertThat(mPreference.isEnabled()).isFalse();
     }

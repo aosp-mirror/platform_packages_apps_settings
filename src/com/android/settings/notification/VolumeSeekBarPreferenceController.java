@@ -36,6 +36,7 @@ public abstract class VolumeSeekBarPreferenceController extends
     protected VolumeSeekBarPreference mPreference;
     protected VolumeSeekBarPreference.Callback mVolumePreferenceCallback;
     protected AudioHelper mHelper;
+    protected VolumeSeekBarPreference.Listener mVolumePreferenceListener;
 
     public VolumeSeekBarPreferenceController(Context context, String key) {
         super(context, key);
@@ -62,6 +63,7 @@ public abstract class VolumeSeekBarPreferenceController extends
     protected void setupVolPreference(PreferenceScreen screen) {
         mPreference = screen.findPreference(getPreferenceKey());
         mPreference.setCallback(mVolumePreferenceCallback);
+        mPreference.setListener(mVolumePreferenceListener);
         mPreference.setStream(getAudioStream());
         mPreference.setMuteIcon(getMuteIcon());
     }

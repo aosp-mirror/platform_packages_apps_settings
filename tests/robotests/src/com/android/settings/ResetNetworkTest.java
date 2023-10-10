@@ -27,6 +27,8 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.CheckBox;
 
+import com.android.settings.utils.ActivityControllerWrapper;
+
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -41,7 +43,8 @@ public class ResetNetworkTest {
 
     @Before
     public void setUp() {
-        mActivity = Robolectric.setupActivity(Activity.class);
+        mActivity = (Activity) ActivityControllerWrapper.setup(
+                Robolectric.buildActivity(Activity.class)).get();
         mResetNetwork = spy(new ResetNetwork());
         when(mResetNetwork.getContext()).thenReturn(mActivity);
         mResetNetwork.mEsimContainer = new View(mActivity);

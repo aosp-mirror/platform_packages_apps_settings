@@ -55,6 +55,7 @@ import com.android.internal.os.IResultReceiver;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settingslib.utils.StringUtil;
 import com.android.settingslib.widget.AppPreference;
 
 import java.lang.ref.WeakReference;
@@ -153,9 +154,8 @@ public class PasswordsPreferenceController extends BasePreferenceController
             passwordCount.observe(
                     mLifecycleOwner, count -> {
                         // TODO(b/169455298): Validate the result.
-                        final CharSequence summary =
-                                mContext.getResources().getQuantityString(
-                                        R.plurals.autofill_passwords_count, count, count);
+                        final CharSequence summary = StringUtil.getIcuPluralsString(mContext, count,
+                                R.string.autofill_passwords_count);
                         pref.setSummary(summary);
                     });
             // TODO(b/169455298): Limit the number of concurrent queries.

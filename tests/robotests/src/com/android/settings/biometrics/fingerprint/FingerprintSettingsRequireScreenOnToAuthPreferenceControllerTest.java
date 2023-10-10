@@ -17,7 +17,7 @@
 package com.android.settings.biometrics.fingerprint;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
-import static com.android.settings.core.BasePreferenceController.DISABLED_DEPENDENT_SETTING;
+import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -103,15 +103,15 @@ public class FingerprintSettingsRequireScreenOnToAuthPreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable_isDisabled_whenSfpsHardwareDetected_AndNoEnrolledFingerprints() {
+    public void isUnavailable_isDisabled_whenSfpsHardwareDetected_AndNoEnrolledFingerprints() {
         assertThat(mController.isAvailable()).isEqualTo(false);
         assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
         configure_hardwareDetected_isSfps_hasEnrolledTemplates(
                 true /* isHardwareDetected */,
                 true /* isPowerbuttonFps */,
                 false /* hasEnrolledTemplates */);
-        assertThat(mController.isAvailable()).isEqualTo(true);
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(DISABLED_DEPENDENT_SETTING);
+        assertThat(mController.isAvailable()).isEqualTo(false);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 
     @Test
@@ -122,7 +122,7 @@ public class FingerprintSettingsRequireScreenOnToAuthPreferenceControllerTest {
                 false /* isHardwareDetected */,
                 true /* isPowerbuttonFps */,
                 true /* hasEnrolledTemplates */);
-        assertThat(mController.isAvailable()).isFalse();
+        assertThat(mController.isAvailable()).isEqualTo(false);
         assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 

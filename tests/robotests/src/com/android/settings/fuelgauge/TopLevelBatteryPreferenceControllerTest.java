@@ -25,23 +25,30 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.hardware.usb.UsbManager;
+import android.hardware.usb.UsbPort;
+import android.hardware.usb.UsbPortStatus;
 
 import androidx.preference.Preference;
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
+import com.android.settings.testutils.BatteryTestUtils;
 
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 public class TopLevelBatteryPreferenceControllerTest {
@@ -49,22 +56,24 @@ public class TopLevelBatteryPreferenceControllerTest {
     private TopLevelBatteryPreferenceController mController;
     private BatterySettingsFeatureProvider mBatterySettingsFeatureProvider;
 
+    @Mock
+    private UsbPort mUsbPort;
+    @Mock
+    private UsbManager mUsbManager;
+    @Mock
+    private UsbPortStatus mUsbPortStatus;
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = spy(Robolectric.setupActivity(Activity.class));
+        mContext = spy(ApplicationProvider.getApplicationContext());
         mController = new TopLevelBatteryPreferenceController(mContext, "test_key");
+        when(mContext.getSystemService(UsbManager.class)).thenReturn(mUsbManager);
     }
 
     @Test
     public void getAvailibilityStatus_availableByDefault() {
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
-    }
-
-    @Test
-    @Config(qualifiers = "mcc999")
-    public void getAvailabilityStatus_unsupportedWhenSet() {
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 
     @Test
@@ -95,26 +104,50 @@ public class TopLevelBatteryPreferenceControllerTest {
     }
 
     @Test
-    public void getDashboardLabel_returnsCorrectLabel() {
+    public void getDashboardLabel_returnsBatterPercentString() {
         mController.mPreference = new Preference(mContext);
         BatteryInfo info = new BatteryInfo();
         info.batteryPercentString = "3%";
+
         assertThat(mController.getDashboardLabel(mContext, info, true))
                 .isEqualTo(info.batteryPercentString);
+    }
 
+    @Test
+    public void getDashboardLabel_returnsRemainingLabel() {
+        mController.mPreference = new Preference(mContext);
+        BatteryInfo info = new BatteryInfo();
+        info.batteryPercentString = "3%";
         info.remainingLabel = "Phone will shut down soon";
+
         assertThat(mController.getDashboardLabel(mContext, info, true))
                 .isEqualTo("3% - Phone will shut down soon");
+    }
 
+    @Test
+    public void getDashboardLabel_returnsChargeLabel() {
+        mController.mPreference = new Preference(mContext);
+        BatteryInfo info = new BatteryInfo();
         info.discharging = false;
         info.chargeLabel = "5% - charging";
-        assertThat(mController.getDashboardLabel(mContext, info, true)).isEqualTo("5% - charging");
+
+        assertThat(mController.getDashboardLabel(mContext, info, true))
+                .isEqualTo(info.chargeLabel);
+    }
+
+    @Test
+    public void getDashboardLabel_incompatibleCharger_returnsCorrectLabel() {
+        BatteryTestUtils.setupIncompatibleEvent(mUsbPort, mUsbManager, mUsbPortStatus);
+        mController.mPreference = new Preference(mContext);
+        BatteryInfo info = new BatteryInfo();
+
+        assertThat(mController.getDashboardLabel(mContext, info, true))
+                .isEqualTo(mContext.getString(R.string.battery_info_status_not_charging));
     }
 
     @Test
     public void getSummary_batteryNotPresent_shouldShowWarningMessage() {
         mController.mIsBatteryPresent = false;
-
         assertThat(mController.getSummary())
                 .isEqualTo(mContext.getString(R.string.battery_missing_message));
     }

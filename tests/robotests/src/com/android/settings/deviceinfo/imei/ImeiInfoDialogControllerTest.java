@@ -39,7 +39,6 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -197,11 +196,10 @@ public class ImeiInfoDialogControllerTest {
     }
 
     @Test
-    @Ignore
     public void populateImeiInfo_emptyImei_shouldSetMeid_imeiSetToEmptyString() {
         doReturn(true).when(mController).isCdmaLteEnabled();
         when(mTelephonyManager.getPhoneType()).thenReturn(TelephonyManager.PHONE_TYPE_CDMA);
-        when(mTelephonyManager.getImei(anyInt())).thenReturn(null);
+        when(mTelephonyManager.getImei(anyInt())).thenReturn("");
 
         mController.populateImeiInfo();
 

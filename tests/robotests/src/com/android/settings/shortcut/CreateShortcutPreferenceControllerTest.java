@@ -84,7 +84,7 @@ public class CreateShortcutPreferenceControllerTest {
         mShadowConnectivityManager = ShadowConnectivityManager.getShadow();
         mShadowConnectivityManager.setTetheringSupported(true);
 
-        mController = new CreateShortcutPreferenceController(mContext, "key");
+        mController = spy(new CreateShortcutPreferenceController(mContext, "key"));
         mController.setActivity(mHost);
     }
 
@@ -159,27 +159,39 @@ public class CreateShortcutPreferenceControllerTest {
     @Test
     public void queryShortcuts_setSupportOneHandedMode_ShouldEnableShortcuts() {
         SystemProperties.set(SUPPORT_ONE_HANDED_MODE, "true");
+        setupActivityInfo(Settings.OneHandedSettingsActivity.class.getSimpleName());
 
-        setupOneHandedModeActivityInfo();
-        final List<ResolveInfo> info = mController.queryShortcuts();
-
-        assertThat(info).hasSize(1);
+        assertThat(mController.queryShortcuts()).hasSize(1);
     }
 
     @Test
     public void queryShortcuts_setUnsupportOneHandedMode_ShouldDisableShortcuts() {
         SystemProperties.set(SUPPORT_ONE_HANDED_MODE, "false");
+        setupActivityInfo(Settings.OneHandedSettingsActivity.class.getSimpleName());
 
-        setupOneHandedModeActivityInfo();
-        final List<ResolveInfo> info = mController.queryShortcuts();
-
-        assertThat(info).hasSize(0);
+        assertThat(mController.queryShortcuts()).hasSize(0);
     }
 
-    private void setupOneHandedModeActivityInfo() {
-        final ResolveInfo ri = new ResolveInfo();
+    @Test
+    public void queryShortcuts_configShowWifiHotspot_ShouldEnableShortcuts() {
+        when(mController.canShowWifiHotspot()).thenReturn(true);
+        setupActivityInfo(Settings.WifiTetherSettingsActivity.class.getSimpleName());
+
+        assertThat(mController.queryShortcuts()).hasSize(1);
+    }
+
+    @Test
+    public void queryShortcuts_configNotShowWifiHotspot_ShouldDisableShortcuts() {
+        when(mController.canShowWifiHotspot()).thenReturn(false);
+        setupActivityInfo(Settings.WifiTetherSettingsActivity.class.getSimpleName());
+
+        assertThat(mController.queryShortcuts()).hasSize(0);
+    }
+
+    private void setupActivityInfo(String name) {
+        ResolveInfo ri = new ResolveInfo();
         ri.activityInfo = new ActivityInfo();
-        ri.activityInfo.name = Settings.OneHandedSettingsActivity.class.getSimpleName();
+        ri.activityInfo.name = name;
         ri.activityInfo.applicationInfo = new ApplicationInfo();
         ri.activityInfo.applicationInfo.flags = ApplicationInfo.FLAG_SYSTEM;
 

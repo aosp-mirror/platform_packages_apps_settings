@@ -46,23 +46,23 @@ public class OptimizedPreferenceController extends AbstractPreferenceController
 
     @Override
     public void updateState(Preference preference) {
-        if (!mBatteryOptimizeUtils.isValidPackageName()) {
-            Log.d(TAG, "invalid package name, optimized states only");
+        if (mBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()) {
+            Log.d(TAG, "disable preference for " + mBatteryOptimizeUtils.getPackageName());
             preference.setEnabled(true);
             ((SelectorWithWidgetPreference) preference).setChecked(true);
             return;
         }
 
-        if (mBatteryOptimizeUtils.isSystemOrDefaultApp()) {
-            Log.d(TAG, "is system or default app, disable pref");
-            ((SelectorWithWidgetPreference) preference).setChecked(false);
-            preference.setEnabled(false);
-        } else if (mBatteryOptimizeUtils.getAppOptimizationMode()
+        if (mBatteryOptimizeUtils.getAppOptimizationMode()
                 == BatteryOptimizeUtils.MODE_OPTIMIZED) {
             Log.d(TAG, "is optimized states");
             ((SelectorWithWidgetPreference) preference).setChecked(true);
         } else {
             ((SelectorWithWidgetPreference) preference).setChecked(false);
+            if (mBatteryOptimizeUtils.isSystemOrDefaultApp()) {
+                Log.d(TAG, "is system or default app, disable pref");
+                preference.setEnabled(false);
+            }
         }
     }
 

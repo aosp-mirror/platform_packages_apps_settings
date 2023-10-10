@@ -18,9 +18,6 @@ package com.android.settings.nfc;
 
 import android.content.Context;
 import android.nfc.NfcAdapter;
-import android.provider.Settings;
-
-import androidx.annotation.VisibleForTesting;
 
 import com.android.settingslib.widget.MainSwitchPreference;
 
@@ -41,7 +38,7 @@ public class NfcEnabler extends BaseNfcEnabler {
         switch (newState) {
             case NfcAdapter.STATE_OFF:
                 mPreference.updateStatus(false);
-                mPreference.setEnabled(isToggleable());
+                mPreference.setEnabled(true);
                 break;
             case NfcAdapter.STATE_ON:
                 mPreference.updateStatus(true);
@@ -56,16 +53,5 @@ public class NfcEnabler extends BaseNfcEnabler {
                 mPreference.setEnabled(false);
                 break;
         }
-    }
-
-    @VisibleForTesting
-    boolean isToggleable() {
-        if (NfcPreferenceController.isToggleableInAirplaneMode(mContext)
-                || !NfcPreferenceController.shouldTurnOffNFCInAirplaneMode(mContext)) {
-            return true;
-        }
-        final int airplaneMode = Settings.Global.getInt(
-                mContext.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 0);
-        return airplaneMode != 1;
     }
 }

@@ -16,6 +16,9 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
+import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
@@ -30,10 +33,9 @@ import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
+/** Tests for {@link CaptioningPreferenceController}. */
 @RunWith(RobolectricTestRunner.class)
 public class CaptioningPreferenceControllerTest {
-    private static final int ON = 1;
-    private static final int OFF = 0;
 
     private Context mContext;
     private CaptioningPreferenceController mController;

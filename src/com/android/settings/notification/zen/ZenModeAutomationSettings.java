@@ -22,7 +22,6 @@ import android.app.NotificationManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.os.Bundle;
 import android.service.notification.ConditionProviderService;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -59,10 +58,12 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Fragment parent, ZenServiceListing serviceListing, Lifecycle lifecycle) {
+        ZenModeBackend backend = new ZenModeBackend(context);
         List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new ZenModeAddAutomaticRulePreferenceController(context, parent,
                 serviceListing, lifecycle));
-        controllers.add(new ZenModeAutomaticRulesPreferenceController(context, parent, lifecycle));
+        controllers.add(new ZenModeAutomaticRulesPreferenceController(
+                context, parent, lifecycle, backend));
 
         return controllers;
     }

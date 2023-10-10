@@ -24,6 +24,7 @@ import com.android.settings.applications.manageapplications.ResetAppPrefPreferen
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.network.EraseEuiccDataController;
 import com.android.settings.network.NetworkResetPreferenceController;
+import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -61,7 +62,9 @@ public class ResetDashboardFragment extends DashboardFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        use(EraseEuiccDataController.class).setFragment(this);
+        if (SubscriptionUtil.isSimHardwareVisible(context)) {
+            use(EraseEuiccDataController.class).setFragment(this);
+        }
     }
 
     @Override
@@ -72,7 +75,9 @@ public class ResetDashboardFragment extends DashboardFragment {
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Lifecycle lifecycle) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new NetworkResetPreferenceController(context));
+        if (SubscriptionUtil.isSimHardwareVisible(context)) {
+            controllers.add(new NetworkResetPreferenceController(context));
+        }
         controllers.add(new FactoryResetPreferenceController(context));
         controllers.add(new ResetAppPrefPreferenceController(context, lifecycle));
         return controllers;

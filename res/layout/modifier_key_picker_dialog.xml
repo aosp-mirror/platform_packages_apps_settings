@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2022 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:androidprv="http://schemas.android.com/apk/prv/res/android"
+    android:id="@+id/modifier_key_fragment_scroll_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/modifier_key_fragment_container"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout android:orientation="vertical"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:divider="?android:dividerHorizontal"
+                      android:showDividers="end" >
+            <TextView
+                android:id="@+id/modifier_key_picker_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="?android:attr/textColorPrimary"
+                android:text="@string/modifier_keys_picker_title"/>
+
+            <TextView
+                android:id="@+id/modifier_key_picker_summary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="?android:attr/textColorSecondary"/>
+        </LinearLayout>
+
+        <LinearLayout android:orientation="vertical"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:divider="?android:dividerHorizontal"
+                      android:showDividers="end">
+            <ListView
+                android:id="@+id/modifier_key_picker"
+                android:layout_width="wrap_content"
+                android:layout_height="352dp"
+                android:divider="@null"
+                android:dividerHeight="8dp"
+                android:padding="16dp"
+                android:listSelector="@drawable/modifier_key_lisetview_background"
+            />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp">
+
+            <Button
+                android:id="@+id/modifier_key_cancel_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp"
+                android:layout_marginStart="8dp"
+                android:layout_alignParentStart="true"
+                android:paddingVertical="14dp"
+                android:drawablePadding="9dp"
+                style="@style/ModifierKeyButtonCancel"
+                android:textColor="?android:attr/textColorPrimary"
+                android:text="@string/modifier_keys_cancel"/>
+
+            <Button
+                android:id="@+id/modifier_key_done_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp"
+                android:layout_marginEnd="8dp"
+                android:layout_alignParentEnd="true"
+                android:paddingVertical="14dp"
+                android:drawablePadding="9dp"
+                style="@style/ModifierKeyButtonDone"
+                android:textColor="?androidprv:attr/materialColorOnPrimary"
+                android:text="@string/modifier_keys_done"/>
+
+        </RelativeLayout>
+    </LinearLayout>
+</ScrollView>

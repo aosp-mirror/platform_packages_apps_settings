@@ -26,6 +26,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.utils.ThreadUtils;
 
 /**
  * Preference for accessing an experience to customize lock screen quick affordances.
@@ -50,7 +51,7 @@ public class CustomizableLockScreenQuickAffordancesPreferenceController extends
         final Preference preference = screen.findPreference(getPreferenceKey());
         if (preference != null) {
             preference.setOnPreferenceClickListener(preference1 -> {
-                final Intent intent = new Intent(Intent.ACTION_SET_WALLPAPER);
+                final Intent intent = CustomizableLockScreenUtils.newIntent();
                 final String packageName =
                         mContext.getString(R.string.config_wallpaper_picker_package);
                 if (!TextUtils.isEmpty(packageName)) {
@@ -65,7 +66,11 @@ public class CustomizableLockScreenQuickAffordancesPreferenceController extends
     }
 
     @Override
-    public CharSequence getSummary() {
-        return CustomizableLockScreenUtils.getQuickAffordanceSummary(mContext);
+    protected void refreshSummary(Preference preference) {
+        ThreadUtils.postOnBackgroundThread(() -> {
+            final CharSequence summary =
+                    CustomizableLockScreenUtils.getQuickAffordanceSummary(mContext);
+            ThreadUtils.postOnMainThread(() -> preference.setSummary(summary));
+        });
     }
 }

@@ -37,8 +37,6 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
-import java.util.function.Consumer;
-import java.util.stream.Collectors;
 
 public class EnableSmartForwardingTask
         implements Callable<EnableSmartForwardingTask.FeatureResult> {
@@ -94,14 +92,9 @@ public class EnableSmartForwardingTask
 
             mSlotUTData = new SlotUTData[tm.getActiveModemCount()];
             for (int i = 0; i < mSlotUTData.length; i++) {
-                int[] subIdList = sm.getSubscriptionIds(i);
-                if (subIdList.length < 1) {
-                    Log.e(TAG, "getSubscriptionIds() return empty sub id list.");
-                    return false;
-                }
-                int subId = subIdList[0];
+                int subId = SubscriptionManager.getSubscriptionId(i);
 
-                if (!sm.isActiveSubId(subId)) {
+                if (!SubscriptionManager.isValidSubscriptionId(subId)) {
                     mResult.setReason(FeatureResult.FailedReason.SIM_NOT_ACTIVE);
                     return false;
                 }

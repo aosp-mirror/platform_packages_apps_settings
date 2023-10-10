@@ -33,7 +33,6 @@ import android.provider.Settings;
 import android.telephony.CarrierConfigManager;
 import android.telephony.ServiceState;
 import android.telephony.SubscriptionManager;
-import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
@@ -48,6 +47,7 @@ import androidx.preference.SwitchPreference;
 import com.android.settings.R;
 import com.android.settings.network.AllowedNetworkTypesListener;
 import com.android.settings.network.CarrierConfigCache;
+import com.android.settings.network.helper.ServiceStateStatus;
 import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.network.telephony.TelephonyTogglePreferenceController;
 import com.android.settingslib.utils.ThreadUtils;
@@ -82,7 +82,7 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
     private AtomicBoolean mUpdatingConfig;
     private int mCacheOfModeStatus;
     private AtomicLong mRecursiveUpdate;
-    TelephonyCallbackListener mTelephonyCallbackListener;
+    ServiceStateStatus mServiceStateStatus;
 
     public AutoSelectPreferenceController(Context context, String key) {
         super(context, key);
@@ -97,7 +97,6 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
                 new HandlerExecutor(mUiHandler));
         mAllowedNetworkTypesListener.setAllowedNetworkTypesListener(
                 () -> updatePreference());
-        mTelephonyCallbackListener = new TelephonyCallbackListener();
     }
 
     private void updatePreference() {
@@ -114,14 +113,11 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
     @OnLifecycleEvent(ON_START)
     public void onStart() {
         mAllowedNetworkTypesListener.register(mContext, mSubId);
-        mTelephonyManager.registerTelephonyCallback(new HandlerExecutor(mUiHandler),
-                mTelephonyCallbackListener);
     }
 
     @OnLifecycleEvent(ON_STOP)
     public void onStop() {
         mAllowedNetworkTypesListener.unregister(mContext, mSubId);
-        mTelephonyManager.unregisterTelephonyCallback(mTelephonyCallbackListener);
     }
 
     @Override
@@ -237,9 +233,19 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
                 CarrierConfigManager.KEY_ONLY_AUTO_SELECT_IN_HOME_NETWORK_BOOL)
                 : false;
 
+        mServiceStateStatus = new ServiceStateStatus(lifecycle, mTelephonyManager,
+                new HandlerExecutor(mUiHandler)) {
+            @Override
+            protected void setValue(ServiceState status) {
+                if (status == null) {
+                    return;
+                }
+                updateUiAutoSelectValue(status);
+            }
+        };
+
         ThreadUtils.postOnBackgroundThread(() -> {
             queryNetworkSelectionMode(INTERNAL_LOG_TAG_INIT);
-
             //Update UI in UI thread
             mUiHandler.post(() -> {
                 if (mSwitchPreference != null) {
@@ -321,14 +327,5 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
      */
     public interface OnNetworkSelectModeListener {
         void onNetworkSelectModeUpdated(int mode);
-    }
-
-    private class TelephonyCallbackListener extends TelephonyCallback
-            implements TelephonyCallback.ServiceStateListener {
-
-        @Override
-        public void onServiceStateChanged(ServiceState serviceState) {
-            updateUiAutoSelectValue(serviceState);
-        }
     }
 }

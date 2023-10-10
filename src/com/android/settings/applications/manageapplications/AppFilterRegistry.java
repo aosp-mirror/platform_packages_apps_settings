@@ -21,15 +21,19 @@ import androidx.annotation.IntDef;
 import com.android.settings.R;
 import com.android.settings.applications.AppStateAlarmsAndRemindersBridge;
 import com.android.settings.applications.AppStateAppBatteryUsageBridge;
+import com.android.settings.applications.AppStateClonedAppsBridge;
 import com.android.settings.applications.AppStateInstallAppsBridge;
 import com.android.settings.applications.AppStateLocaleBridge;
+import com.android.settings.applications.AppStateLongBackgroundTasksBridge;
 import com.android.settings.applications.AppStateManageExternalStorageBridge;
 import com.android.settings.applications.AppStateMediaManagementAppsBridge;
 import com.android.settings.applications.AppStateNotificationBridge;
 import com.android.settings.applications.AppStateOverlayBridge;
 import com.android.settings.applications.AppStatePowerBridge;
+import com.android.settings.applications.AppStateTurnScreenOnBridge;
 import com.android.settings.applications.AppStateUsageBridge;
 import com.android.settings.applications.AppStateWriteSettingsBridge;
+import com.android.settings.nfc.AppStateNfcTagAppsBridge;
 import com.android.settings.wifi.AppStateChangeWifiStateBridge;
 import com.android.settingslib.applications.ApplicationsState;
 
@@ -61,6 +65,10 @@ public class AppFilterRegistry {
                 FILTER_APPS_BATTERY_UNRESTRICTED,
                 FILTER_APPS_BATTERY_OPTIMIZED,
                 FILTER_APPS_BATTERY_RESTRICTED,
+                FILTER_LONG_BACKGROUND_TASKS,
+                FILTER_APPS_CLONE,
+                FILTER_APPS_NFC_TAG,
+                FILTER_APPS_TURN_SCREEN_ON,
             })
     @interface FilterType {}
 
@@ -89,8 +97,12 @@ public class AppFilterRegistry {
     public static final int FILTER_APPS_BATTERY_UNRESTRICTED = 21;
     public static final int FILTER_APPS_BATTERY_OPTIMIZED = 22;
     public static final int FILTER_APPS_BATTERY_RESTRICTED = 23;
-    // Next id: 24. If you add an entry here, please change NUM_FILTER_ENTRIES.
-    private static final int NUM_FILTER_ENTRIES = 24;
+    public static final int FILTER_LONG_BACKGROUND_TASKS = 24;
+    public static final int FILTER_APPS_CLONE = 25;
+    public static final int FILTER_APPS_NFC_TAG = 26;
+    public static final int FILTER_APPS_TURN_SCREEN_ON = 27;
+    private static final int NUM_FILTER_ENTRIES = 28;
+    // Next id: 28. If you add an entry here, please change NUM_FILTER_ENTRIES.
 
     private static AppFilterRegistry sRegistry;
 
@@ -242,9 +254,33 @@ public class AppFilterRegistry {
                         AppStateAppBatteryUsageBridge.FILTER_BATTERY_RESTRICTED_APPS,
                         FILTER_APPS_BATTERY_RESTRICTED,
                         R.string.filter_battery_restricted_title);
+
+        // Apps that can run long background tasks
+        mFilters[FILTER_LONG_BACKGROUND_TASKS] = new AppFilterItem(
+                AppStateLongBackgroundTasksBridge.FILTER_LONG_JOBS_APPS,
+                FILTER_LONG_BACKGROUND_TASKS,
+                R.string.long_background_tasks_title);
+
+        // Apps that are cloneable or cloned.
+        mFilters[FILTER_APPS_CLONE] =
+                new AppFilterItem(
+                        AppStateClonedAppsBridge.FILTER_APPS_CLONE,
+                        FILTER_APPS_CLONE,
+                        R.string.cloned_apps_dashboard_title);
+
+        // Apps that are nfc tag allowlisted.
+        mFilters[FILTER_APPS_NFC_TAG] =
+                new AppFilterItem(
+                        AppStateNfcTagAppsBridge.FILTER_APPS_NFC_TAG,
+                        FILTER_APPS_NFC_TAG,
+                        R.string.change_nfc_tag_apps_title);
+
+        // Apps that are allowed to turn the screen on.
+        mFilters[FILTER_APPS_TURN_SCREEN_ON] = new AppFilterItem(
+                AppStateTurnScreenOnBridge.FILTER_TURN_SCREEN_ON_APPS,
+                FILTER_APPS_TURN_SCREEN_ON,
+                R.string.turn_screen_on_title);
     }
-
-
 
     public static AppFilterRegistry getInstance() {
         if (sRegistry == null) {
@@ -280,6 +316,14 @@ public class AppFilterRegistry {
                 return FILTER_APPS_LOCALE;
             case ManageApplications.LIST_TYPE_BATTERY_OPTIMIZATION:
                 return FILTER_APPS_BATTERY_OPTIMIZED;
+            case ManageApplications.LIST_TYPE_LONG_BACKGROUND_TASKS:
+                return FILTER_LONG_BACKGROUND_TASKS;
+            case ManageApplications.LIST_TYPE_CLONED_APPS:
+                return FILTER_APPS_CLONE;
+            case ManageApplications.LIST_TYPE_NFC_TAG_APPS:
+                return FILTER_APPS_NFC_TAG;
+            case ManageApplications.LIST_TYPE_TURN_SCREEN_ON:
+                return FILTER_APPS_TURN_SCREEN_ON;
             default:
                 return FILTER_APPS_ALL;
         }

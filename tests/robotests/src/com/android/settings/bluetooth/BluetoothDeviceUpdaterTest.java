@@ -34,7 +34,6 @@ import androidx.preference.Preference;
 
 import com.android.settings.SettingsActivity;
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
-import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
@@ -63,8 +62,6 @@ public class BluetoothDeviceUpdaterTest {
     private static final String TEST_NAME = "test_name";
 
     @Mock
-    private DashboardFragment mDashboardFragment;
-    @Mock
     private DevicePreferenceCallback mDevicePreferenceCallback;
     @Mock
     private CachedBluetoothDevice mCachedBluetoothDevice;
@@ -84,7 +81,7 @@ public class BluetoothDeviceUpdaterTest {
     private Drawable mDrawable;
 
     private Context mContext;
-    private BluetoothDeviceUpdater mBluetoothDeviceUpdater;
+    private TestBluetoothDeviceUpdater mBluetoothDeviceUpdater;
     private BluetoothDevicePreference mPreference;
     private ShadowBluetoothAdapter mShadowBluetoothAdapter;
     private List<CachedBluetoothDevice> mCachedDevices = new ArrayList<>();
@@ -97,7 +94,6 @@ public class BluetoothDeviceUpdaterTest {
         mContext = RuntimeEnvironment.application;
         mShadowBluetoothAdapter = Shadow.extract(BluetoothAdapter.getDefaultAdapter());
         mCachedDevices.add(mCachedBluetoothDevice);
-        doReturn(mContext).when(mDashboardFragment).getContext();
         when(mCachedBluetoothDevice.getDevice()).thenReturn(mBluetoothDevice);
         when(mSubCachedBluetoothDevice.getDevice()).thenReturn(mSubBluetoothDevice);
         when(mLocalManager.getCachedDeviceManager()).thenReturn(mCachedDeviceManager);
@@ -107,20 +103,10 @@ public class BluetoothDeviceUpdaterTest {
         when(mCachedBluetoothDevice.getDrawableWithDescription()).thenReturn(pairs);
 
         mPreference = new BluetoothDevicePreference(mContext, mCachedBluetoothDevice,
-                false, BluetoothDevicePreference.SortType.TYPE_DEFAULT);
-        mBluetoothDeviceUpdater =
-            new BluetoothDeviceUpdater(mContext, mDashboardFragment, mDevicePreferenceCallback,
-                    mLocalManager) {
-                @Override
-                public boolean isFilterMatched(CachedBluetoothDevice cachedBluetoothDevice) {
-                    return true;
-                }
-
-                @Override
-                protected String getPreferenceKey() {
-                    return "test_bt";
-                }
-            };
+                /* showDeviceWithoutNames= */ false,
+                BluetoothDevicePreference.SortType.TYPE_DEFAULT);
+        mBluetoothDeviceUpdater = new TestBluetoothDeviceUpdater(mContext,
+                mDevicePreferenceCallback, mLocalManager, /* metricsCategory= */  0);
         mBluetoothDeviceUpdater.setPrefContext(mContext);
     }
 
@@ -185,7 +171,8 @@ public class BluetoothDeviceUpdaterTest {
 
     @Test
     public void testDeviceProfilesListener_click_startBluetoothDeviceDetailPage() {
-        doReturn(mSettingsActivity).when(mDashboardFragment).getContext();
+        mBluetoothDeviceUpdater = new TestBluetoothDeviceUpdater(mSettingsActivity,
+                mDevicePreferenceCallback, mLocalManager, /* metricsCategory= */  0);
 
         final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
         mBluetoothDeviceUpdater.mDeviceProfilesListener.onGearClick(mPreference);
@@ -273,5 +260,23 @@ public class BluetoothDeviceUpdaterTest {
         mBluetoothDeviceUpdater.refreshPreference();
 
         assertThat(mPreference.getTitle()).isEqualTo(TEST_NAME);
+    }
+
+    public static class TestBluetoothDeviceUpdater extends BluetoothDeviceUpdater {
+        public TestBluetoothDeviceUpdater(Context context,
+                DevicePreferenceCallback devicePreferenceCallback,
+                LocalBluetoothManager localManager, int metricsCategory) {
+            super(context, devicePreferenceCallback, localManager, metricsCategory);
+        }
+
+        @Override
+        public boolean isFilterMatched(CachedBluetoothDevice cachedBluetoothDevice) {
+            return true;
+        }
+
+        @Override
+        protected String getPreferenceKey() {
+            return "test_bt";
+        }
     }
 }

@@ -60,6 +60,7 @@ import com.android.settings.widget.LoadingViewController;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.ApplicationsState.AppFilter;
+import com.android.settingslib.testutils.shadow.ShadowInteractionJankMonitor;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -75,7 +76,8 @@ import org.robolectric.util.ReflectionHelpers;
 import java.util.ArrayList;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowUserManager.class, ShadowAppUtils.class})
+@Config(shadows = {ShadowUserManager.class, ShadowAppUtils.class,
+        ShadowInteractionJankMonitor.class})
 public class ManageApplicationsTest {
 
     @Mock
