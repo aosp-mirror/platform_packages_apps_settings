@@ -25,7 +25,9 @@ import android.os.Process
 import android.os.UserHandle
 import android.util.Log
 import android.util.SparseArray
+import android.util.SparseBooleanArray
 import androidx.annotation.VisibleForTesting
+import androidx.core.util.keyIterator
 import com.android.settings.R
 import com.android.settingslib.AppItem
 import com.android.settingslib.net.UidDetailProvider
@@ -194,6 +196,10 @@ class AppDataUsageRepository(
             val uid: Int,
             val bytes: Long,
         )
+
+        @JvmStatic
+        fun getAppUidList(uids: SparseBooleanArray) =
+            uids.keyIterator().asSequence().map { getAppUid(it) }.distinct().toList()
 
         @JvmStatic
         fun getAppUid(uid: Int): Int {

@@ -28,6 +28,7 @@ import androidx.preference.PreferenceGroup
 import androidx.preference.PreferenceScreen
 import com.android.settings.core.BasePreferenceController
 import com.android.settings.datausage.lib.AppDataUsageRepository.Companion.getAppUid
+import com.android.settings.datausage.lib.AppDataUsageRepository.Companion.getAppUidList
 import com.android.settings.datausage.lib.AppPreferenceRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -43,8 +44,8 @@ open class AppDataUsageListController @JvmOverloads constructor(
     private var uids: List<Int> = emptyList()
     private lateinit var preference: PreferenceGroup
 
-    fun init(uids: SparseBooleanArray) {
-        this.uids = uids.keyIterator().asSequence().map { getAppUid(it) }.distinct().toList()
+    fun init(uids: List<Int>) {
+        this.uids = uids
     }
 
     override fun getAvailabilityStatus() = AVAILABLE
