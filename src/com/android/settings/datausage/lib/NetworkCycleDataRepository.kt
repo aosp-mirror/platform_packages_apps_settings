@@ -33,6 +33,7 @@ import kotlinx.coroutines.coroutineScope
 
 interface INetworkCycleDataRepository {
     suspend fun loadCycles(): List<NetworkUsageData>
+    fun getCycles(): List<Range<Long>>
     fun getPolicy(): NetworkPolicy?
     suspend fun querySummary(startTime: Long, endTime: Long): NetworkCycleChartData?
 }
@@ -48,7 +49,7 @@ class NetworkCycleDataRepository(
     override suspend fun loadCycles(): List<NetworkUsageData> =
         getCycles().queryUsage().filter { it.usage > 0 }
 
-    private fun getCycles(): List<Range<Long>> {
+    override fun getCycles(): List<Range<Long>> {
         val policy = getPolicy() ?: return queryCyclesAsFourWeeks()
         return policy.cycleIterator().asSequence().map {
             Range(it.lower.toInstant().toEpochMilli(), it.upper.toInstant().toEpochMilli())

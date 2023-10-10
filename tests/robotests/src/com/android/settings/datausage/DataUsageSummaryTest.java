@@ -27,15 +27,11 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
-import android.app.usage.NetworkStatsManager;
 import android.content.Context;
 import android.content.res.Resources;
-import android.net.NetworkPolicyManager;
 import android.os.UserManager;
 import android.telephony.SubscriptionManager;
-import android.telephony.TelephonyManager;
 
-import androidx.fragment.app.FragmentActivity;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
@@ -45,7 +41,6 @@ import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.testutils.shadow.ShadowUtils;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -53,13 +48,9 @@ import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
-import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.shadows.ShadowSubscriptionManager;
-import org.robolectric.shadows.ShadowTelephonyManager;
 
 @Config(shadows = {
         ShadowUtils.class,
@@ -75,13 +66,6 @@ public class DataUsageSummaryTest {
     Context mContext = ApplicationProvider.getApplicationContext();
     @Mock
     private UserManager mUserManager;
-    @Mock
-    private NetworkPolicyManager mNetworkPolicyManager;
-    @Mock
-    private NetworkStatsManager mNetworkStatsManager;
-    private TelephonyManager mTelephonyManager;
-    private Resources mResources;
-    private FragmentActivity mActivity;
 
     private DataUsageSummary mDataUsageSummary;
 
@@ -95,22 +79,11 @@ public class DataUsageSummaryTest {
         doReturn(mUserManager).when(mContext).getSystemService(UserManager.class);
         doReturn(false).when(mUserManager).isGuestUser();
 
-        ShadowApplication shadowContext = ShadowApplication.getInstance();
         ShadowUserManager.getShadow().setIsAdminUser(true);
-        shadowContext.setSystemService(Context.NETWORK_POLICY_SERVICE, mNetworkPolicyManager);
 
-        mTelephonyManager = mContext.getSystemService(TelephonyManager.class);
-        final ShadowTelephonyManager shadowTelephonyManager = Shadows.shadowOf(mTelephonyManager);
-        shadowTelephonyManager.setTelephonyManagerForSubscriptionId(
-                SubscriptionManager.INVALID_SUBSCRIPTION_ID, mTelephonyManager);
-        shadowTelephonyManager.setTelephonyManagerForSubscriptionId(1, mTelephonyManager);
-        mActivity = spy(Robolectric.buildActivity(FragmentActivity.class).get());
-
-        mResources = spy(mContext.getResources());
+        Resources mResources = spy(mContext.getResources());
         doReturn(mResources).when(mContext).getResources();
         doReturn(true).when(mResources).getBoolean(R.bool.config_show_sim_info);
-
-        doReturn(mNetworkStatsManager).when(mActivity).getSystemService(NetworkStatsManager.class);
 
         mDataUsageSummary = spy(new DataUsageSummary());
         doReturn(mContext).when(mDataUsageSummary).getContext();
@@ -130,12 +103,10 @@ public class DataUsageSummaryTest {
 
     @Test
     @Config(shadows = ShadowSubscriptionManager.class)
-    @Ignore
     public void configuration_withSim_shouldShowMobileAndWifi() {
         ShadowDataUsageUtils.IS_MOBILE_DATA_SUPPORTED = true;
         ShadowDataUsageUtils.IS_WIFI_SUPPORTED = true;
         ShadowSubscriptionManager.setDefaultDataSubscriptionId(1);
-        ShadowDataUsageUtils.HAS_SIM = true;
 
         final DataUsageSummary dataUsageSummary = spy(new DataUsageSummary());
         doNothing().when(dataUsageSummary).enableProxySubscriptionManager(any());
@@ -156,7 +127,6 @@ public class DataUsageSummaryTest {
     public void configuration_withoutSim_shouldShowWifiSectionOnly() {
         ShadowDataUsageUtils.IS_MOBILE_DATA_SUPPORTED = true;
         ShadowDataUsageUtils.IS_WIFI_SUPPORTED = true;
-        ShadowDataUsageUtils.HAS_SIM = false;
 
         final DataUsageSummary dataUsageSummary = spy(new DataUsageSummary());
         doNothing().when(dataUsageSummary).enableProxySubscriptionManager(any());
@@ -177,7 +147,6 @@ public class DataUsageSummaryTest {
     public void configuration_withoutMobile_shouldShowWifiSectionOnly() {
         ShadowDataUsageUtils.IS_MOBILE_DATA_SUPPORTED = false;
         ShadowDataUsageUtils.IS_WIFI_SUPPORTED = true;
-        ShadowDataUsageUtils.HAS_SIM = false;
 
         final DataUsageSummary dataUsageSummary = spy(new DataUsageSummary());
         doNothing().when(dataUsageSummary).enableProxySubscriptionManager(any());
@@ -199,7 +168,6 @@ public class DataUsageSummaryTest {
     public void configuration_invalidDataSusbscription_shouldShowWifiSectionOnly() {
         ShadowDataUsageUtils.IS_MOBILE_DATA_SUPPORTED = true;
         ShadowDataUsageUtils.IS_WIFI_SUPPORTED = true;
-        ShadowDataUsageUtils.HAS_SIM = false;
         ShadowSubscriptionManager.setDefaultDataSubscriptionId(
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
 

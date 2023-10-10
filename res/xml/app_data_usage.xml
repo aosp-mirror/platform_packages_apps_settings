@@ -21,7 +21,8 @@
     android:title="@string/data_usage_app_summary_title">
 
     <com.android.settings.datausage.SpinnerPreference
-        android:key="cycle" />
+        android:key="cycle"
+        settings:controller="com.android.settings.datausage.AppDataUsageCycleController" />
 
     <PreferenceCategory
         android:key="app_data_usage_summary_category">

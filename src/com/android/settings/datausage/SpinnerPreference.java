@@ -94,7 +94,6 @@ public class SpinnerPreference extends Preference implements CycleAdapter.Spinne
                 @Override
                 public void onItemSelected(
                         AdapterView<?> parent, View view, int position, long id) {
-                    if (mPosition == position) return;
                     mPosition = position;
                     mCurrentObject = mAdapter.getItem(position);
                     if (mListener != null) {
