@@ -26,6 +26,8 @@ import android.text.TextUtils
 import android.util.Log
 import com.android.internal.util.ArrayUtils
 import com.android.settings.R
+import java.util.Arrays
+import java.util.Locale
 
 data class ApnData(
     val name: String = "",
@@ -102,21 +104,22 @@ fun getApnDataInit(arguments: Bundle, context: Context, uriInit: Uri, subId: Int
         else -> ApnData() //TODO: finish
     }
 
+    if (uriType == INSERT_URL) {
+        apnDataInit = apnDataInit.copy(newApn = true)
+    }
+
     apnDataInit = apnDataInit.copy(subId = subId)
     val configManager =
         context.getSystemService(Context.CARRIER_CONFIG_SERVICE) as CarrierConfigManager
     apnDataInit =
         apnDataInit.copy(customizedConfig = getCarrierCustomizedConfig(apnDataInit, configManager))
 
-    if (uriType == INSERT_URL) {
-        apnDataInit = apnDataInit.copy(newApn = true)
-    }
-
     apnDataInit = apnDataInit.copy(
         apnEnableEnabled =
         context.resources.getBoolean(R.bool.config_allow_edit_carrier_enabled)
     )
-    // TODO: mIsCarrierIdApn & disableInit(apnDataInit)
+    // TODO: mIsCarrierIdApn
+    disableInit(apnDataInit)
     return apnDataInit
 }
 
@@ -184,4 +187,127 @@ fun getCarrierCustomizedConfig(
         Log.d(TAG, "getCarrierCustomizedConfig: not allow to add new APN")
     }
     return customizedConfig
+}
+
+fun disableInit(apnDataInit : ApnData): ApnData {
+    var apnData = apnDataInit
+    val isUserEdited = apnDataInit.edited == Telephony.Carriers.USER_EDITED
+    Log.d(TAG, "disableInit: EDITED $isUserEdited")
+    // if it's not a USER_EDITED apn, check if it's read-only
+    if (!isUserEdited && (apnDataInit.userEditable == 0
+            || apnTypesMatch(apnDataInit.customizedConfig.readOnlyApnTypes, apnDataInit.apnType))
+    ) {
+        Log.d(TAG, "disableInit: read-only APN")
+        apnData = apnDataInit.copy(customizedConfig = apnDataInit.customizedConfig.copy(readOnlyApn = true))
+        apnData = disableAllFields(apnData)
+    } else if (!ArrayUtils.isEmpty(apnData.customizedConfig.readOnlyApnFields)) {
+        Log.d(TAG, "disableInit: mReadOnlyApnFields ${apnData.customizedConfig.readOnlyApnFields.joinToString(", ")})")
+        apnData = disableFields(apnData.customizedConfig.readOnlyApnFields, apnData)
+    }
+    return apnData
+}
+
+/**
+ * Disables all fields so that user cannot modify the APN
+ */
+private fun disableAllFields(apnDataInit : ApnData): ApnData {
+    var apnData = apnDataInit
+    apnData = apnData.copy(nameEnabled = false)
+    apnData = apnData.copy(apnEnabled = false)
+    apnData = apnData.copy(proxyEnabled = false)
+    apnData = apnData.copy(portEnabled = false)
+    apnData = apnData.copy(userNameEnabled = false)
+    apnData = apnData.copy(passWordEnabled = false)
+    apnData = apnData.copy(serverEnabled = false)
+    apnData = apnData.copy(mmscEnabled = false)
+    apnData = apnData.copy(mmsProxyEnabled = false)
+    apnData = apnData.copy(mmsPortEnabled = false)
+    apnData = apnData.copy(authTypeEnabled = false)
+    apnData = apnData.copy(apnTypeEnabled = false)
+    apnData = apnData.copy(apnProtocolEnabled = false)
+    apnData = apnData.copy(apnRoamingEnabled = false)
+    apnData = apnData.copy(apnEnableEnabled = false)
+    apnData = apnData.copy(networkTypeEnabled = false)
+    return apnData
+}
+
+/**
+ * Disables given fields so that user cannot modify them
+ *
+ * @param apnFields fields to be disabled
+ */
+private fun disableFields(apnFields: List<String>, apnDataInit : ApnData): ApnData {
+    var apnData = apnDataInit
+    for (apnField in apnFields) {
+        apnData = disableByFieldName(apnField, apnDataInit)
+    }
+    return apnData
+}
+
+private fun disableByFieldName(apnField: String, apnDataInit : ApnData): ApnData {
+    var apnData = apnDataInit
+    when (apnField) {
+        Telephony.Carriers.NAME -> apnData = apnData.copy(nameEnabled = false)
+        Telephony.Carriers.APN -> apnData = apnData.copy(apnEnabled = false)
+        Telephony.Carriers.PROXY -> apnData = apnData.copy(proxyEnabled = false)
+        Telephony.Carriers.PORT -> apnData = apnData.copy(portEnabled = false)
+        Telephony.Carriers.USER -> apnData = apnData.copy(userNameEnabled = false)
+        Telephony.Carriers.SERVER -> apnData = apnData.copy(serverEnabled = false)
+        Telephony.Carriers.PASSWORD -> apnData = apnData.copy(passWordEnabled = false)
+        Telephony.Carriers.MMSPROXY -> apnData = apnData.copy(mmsProxyEnabled = false)
+        Telephony.Carriers.MMSPORT -> apnData = apnData.copy(mmsPortEnabled = false)
+        Telephony.Carriers.MMSC -> apnData = apnData.copy(mmscEnabled = false)
+        Telephony.Carriers.TYPE -> apnData = apnData.copy(apnTypeEnabled = false)
+        Telephony.Carriers.AUTH_TYPE -> apnData = apnData.copy(authTypeEnabled = false)
+        Telephony.Carriers.PROTOCOL -> apnData = apnData.copy(apnProtocolEnabled = false)
+        Telephony.Carriers.ROAMING_PROTOCOL -> apnData = apnData.copy(apnRoamingEnabled = false)
+        Telephony.Carriers.CARRIER_ENABLED -> apnData = apnData.copy(apnEnableEnabled = false)
+        Telephony.Carriers.BEARER, Telephony.Carriers.BEARER_BITMASK -> apnData = apnData.copy(networkTypeEnabled =
+            false)
+    }
+    return apnData
+}
+
+private fun apnTypesMatch(apnTypesArray: List<String>, apnTypesCur: String?): Boolean {
+    if (ArrayUtils.isEmpty(apnTypesArray)) {
+        return false
+    }
+    val apnTypesArrayLowerCase = arrayOfNulls<String>(
+        apnTypesArray.size
+    )
+    for (i in apnTypesArray.indices) {
+        apnTypesArrayLowerCase[i] = apnTypesArray[i].lowercase(Locale.getDefault())
+    }
+    if (hasAllApns(apnTypesArrayLowerCase) || TextUtils.isEmpty(apnTypesCur)) {
+        return true
+    }
+    val apnTypesList: List<*> = listOf(*apnTypesArrayLowerCase)
+    val apnTypesArrayCur =
+        apnTypesCur!!.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+    for (apn in apnTypesArrayCur) {
+        if (apnTypesList.contains(apn.trim { it <= ' ' }.lowercase(Locale.getDefault()))) {
+            Log.d(TAG, "apnTypesMatch: true because match found for " + apn.trim { it <= ' ' })
+            return true
+        }
+    }
+    Log.d(TAG, "apnTypesMatch: false")
+    return false
+}
+
+fun hasAllApns(apnTypes: Array<String?>): Boolean {
+    if (ArrayUtils.isEmpty(apnTypes)) {
+        return false
+    }
+    val apnList: List<*> = Arrays.asList(*apnTypes)
+    if (apnList.contains(ApnEditor.APN_TYPE_ALL)) {
+        Log.d(TAG, "hasAllApns: true because apnList.contains(APN_TYPE_ALL)")
+        return true
+    }
+    for (apn in ApnEditor.APN_TYPES) {
+        if (!apnList.contains(apn)) {
+            return false
+        }
+    }
+    Log.d(TAG, "hasAllApns: true")
+    return true
 }
