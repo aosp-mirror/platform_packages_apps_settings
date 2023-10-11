@@ -1,4 +1,4 @@
-    //############################################################
+//############################################################
 // Build SettingsRoboTestStub.apk which includes test-only resources.#
 //############################################################
 
@@ -47,7 +47,7 @@ android_app {
         "jsr305",
         "settings-contextual-card-protos-lite",
         "settings-log-bridge-protos-lite",
-	"settings-telephony-protos-lite",
+        "settings-telephony-protos-lite",
         "contextualcards",
         "settings-logtags",
         "zxing-core-1.7",
@@ -90,7 +90,10 @@ android_robolectric_test {
         "ims-common",
     ],
 
-    java_resource_dirs: ["config", "resources"],
+    java_resource_dirs: [
+        "config",
+        "resources",
+    ],
 
     instrumentation_for: "SettingsRoboTestStub",
 
@@ -114,6 +117,6 @@ java_library {
         "Settings-core",
         "Robolectric_all-target",
         "mockito-robolectric-prebuilt",
-        "truth-prebuilt",
+        "truth",
     ],
 }
