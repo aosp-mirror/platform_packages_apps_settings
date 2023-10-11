@@ -131,7 +131,17 @@ public class PrivateSpaceMaintainer {
         return false;
     }
 
-    static synchronized PrivateSpaceMaintainer getInstance(Context context) {
+    /** Returns true when the PS is locked or when PS doesn't exist, false otherwise. */
+    public synchronized boolean isPrivateSpaceLocked() {
+        if (!doesPrivateSpaceExist()) {
+            return true;
+        }
+
+        return mUserManager.isQuietModeEnabled(mUserHandle);
+    }
+
+    /** Returns the instance of {@link PrivateSpaceMaintainer} */
+    public static synchronized PrivateSpaceMaintainer getInstance(Context context) {
         if (sPrivateSpaceMaintainer == null) {
             sPrivateSpaceMaintainer = new PrivateSpaceMaintainer(context);
         }

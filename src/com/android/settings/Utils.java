@@ -18,6 +18,9 @@ package com.android.settings;
 
 import static android.content.Intent.EXTRA_USER;
 import static android.content.Intent.EXTRA_USER_ID;
+import static android.os.UserManager.USER_TYPE_FULL_SYSTEM;
+import static android.os.UserManager.USER_TYPE_PROFILE_MANAGED;
+import static android.os.UserManager.USER_TYPE_PROFILE_PRIVATE;
 import static android.text.format.DateUtils.FORMAT_ABBREV_MONTH;
 import static android.text.format.DateUtils.FORMAT_SHOW_DATE;
 
@@ -63,6 +66,7 @@ import android.os.BatteryManager;
 import android.os.Binder;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Flags;
 import android.os.IBinder;
 import android.os.INetworkManagementService;
 import android.os.RemoteException;
@@ -111,6 +115,7 @@ import com.android.internal.util.ArrayUtils;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.dashboard.profileselector.ProfileFragmentBridge;
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
+import com.android.settings.dashboard.profileselector.ProfileSelectFragment.ProfileType;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settingslib.widget.ActionBarShadowController;
 import com.android.settingslib.widget.AdaptiveIcon;
@@ -118,6 +123,7 @@ import com.android.settingslib.widget.AdaptiveIcon;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.Set;
 
 public final class Utils extends com.android.settingslib.Utils {
@@ -441,6 +447,38 @@ public final class Utils extends com.android.settingslib.Utils {
     }
 
     /**
+     * Returns the profile of userType of the current user or {@code null} if none is found or a
+     * profile exists, but it is disabled.
+     */
+    @Nullable
+    public static UserHandle getProfileOfType(
+            @NonNull UserManager userManager, @ProfileType int userType) {
+        final List<UserHandle> userProfiles = userManager.getUserProfiles();
+        String umUserType = getUmUserType(userType);
+        for (UserHandle profile : userProfiles) {
+            if (profile.getIdentifier() == UserHandle.myUserId()) {
+                continue;
+            }
+            final UserInfo userInfo = userManager.getUserInfo(profile.getIdentifier());
+            if (Objects.equals(umUserType, userInfo.userType)) {
+                return profile;
+            }
+        }
+        return null;
+    }
+
+    private static String getUmUserType(@ProfileType int userType) throws IllegalArgumentException {
+        if (userType == ProfileType.WORK) {
+            return USER_TYPE_PROFILE_MANAGED;
+        } else if (userType == ProfileType.PRIVATE) {
+            return USER_TYPE_PROFILE_PRIVATE;
+        } else if (userType == ProfileType.PERSONAL) {
+            return USER_TYPE_FULL_SYSTEM;
+        }
+        throw new IllegalArgumentException("Cannot get user type for ALL types");
+    }
+
+    /**
      * Returns the managed profile of the current user or {@code null} if none is found. Unlike
      * {@link #getManagedProfile} this method returns enabled and disabled managed profiles.
      */
@@ -479,15 +517,20 @@ public final class Utils extends com.android.settingslib.Utils {
         return UserHandle.USER_NULL;
     }
 
-    /** Returns user ID of current user, throws IllegalStateException if it's not available. */
-    public static int getCurrentUserId(UserManager userManager, boolean isWorkProfile)
-            throws IllegalStateException {
-        if (isWorkProfile) {
-            final UserHandle managedUserHandle = getManagedProfile(userManager);
-            if (managedUserHandle == null) {
-                throw new IllegalStateException("Work profile user ID is not available.");
+    /**
+     * Returns user ID of the user of specified type under the current context, throws
+     * IllegalStateException if it's not available.
+     */
+    public static int getCurrentUserIdOfType(
+            @NonNull UserManager userManager,
+            @ProfileType int userType) throws IllegalStateException {
+        if (userType != ProfileType.PERSONAL) {
+            final UserHandle userHandle = getProfileOfType(userManager, userType);
+            if (userHandle == null) {
+                throw new IllegalStateException("User ID of requested profile type is not "
+                        + "available.");
             }
-            return managedUserHandle.getIdentifier();
+            return userHandle.getIdentifier();
         }
         return UserHandle.myUserId();
     }
@@ -1223,8 +1266,10 @@ public final class Utils extends com.android.settingslib.Utils {
         List<UserHandle> profiles = userManager.getUserProfiles();
         for (UserHandle userHandle : profiles) {
             UserProperties userProperties = userManager.getUserProperties(userHandle);
-            if (userProperties.getShowInSettings()
-                    == UserProperties.SHOW_IN_SETTINGS_SEPARATE) {
+            if (userProperties.getShowInSettings() == UserProperties.SHOW_IN_SETTINGS_SEPARATE) {
+                if (Flags.allowPrivateProfile() && userProperties.getHideInSettingsInQuietMode()) {
+                    return !userManager.isQuietModeEnabled(userHandle);
+                }
                 return true;
             }
         }
