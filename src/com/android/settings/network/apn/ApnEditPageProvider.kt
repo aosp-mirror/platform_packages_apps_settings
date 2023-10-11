@@ -165,7 +165,7 @@ fun ApnPage(apnDataInit: ApnData, apnDataCur: MutableState<ApnData>, uriInit: Ur
                 value = apnData.apnType,
                 label = stringResource(R.string.apn_type),
                 enabled = apnData.apnTypeEnabled
-            ) { apnData = apnData.copy(apn = it) } // TODO: updateApnType
+            ) { apnData = apnData.copy(apnType = updateApnType(apnData.copy(apnType = it))) }
             SettingsExposedDropdownMenuBox(
                 label = stringResource(R.string.apn_protocol),
                 options = apnProtocolOptions,
