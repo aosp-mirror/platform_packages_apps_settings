@@ -16,6 +16,7 @@
 
 package com.android.settings.network.apn
 
+import android.content.ContentValues
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
@@ -68,7 +69,29 @@ data class ApnData(
     val newApn: Boolean = false,
     val subId: Int = -1,
     val customizedConfig: CustomizedConfig = CustomizedConfig()
-)
+) {
+    fun getContentValues(context: Context): ContentValues {
+        val values = ContentValues()
+        values.put(Telephony.Carriers.NAME, name)
+        values.put(Telephony.Carriers.APN, apn)
+        values.put(Telephony.Carriers.PROXY, proxy)
+        values.put(Telephony.Carriers.PORT, port)
+        values.put(Telephony.Carriers.MMSPROXY, mmsProxy)
+        values.put(Telephony.Carriers.MMSPORT, mmsPort)
+        values.put(Telephony.Carriers.USER, userName)
+        values.put(Telephony.Carriers.SERVER, server)
+        values.put(Telephony.Carriers.PASSWORD, passWord)
+        values.put(Telephony.Carriers.MMSC, mmsc)
+        values.put(Telephony.Carriers.AUTH_TYPE, authType)
+        values.put(Telephony.Carriers.PROTOCOL, convertOptions2Protocol(apnProtocol, context))
+        values.put(Telephony.Carriers.ROAMING_PROTOCOL, convertOptions2Protocol(apnRoaming, context))
+        values.put(Telephony.Carriers.TYPE, apnType)
+        values.put(Telephony.Carriers.NETWORK_TYPE_BITMASK, networkType)
+        values.put(Telephony.Carriers.CARRIER_ENABLED, apnEnable)
+        values.put(Telephony.Carriers.EDITED_STATUS, Telephony.Carriers.USER_EDITED)
+        return values
+    }
+}
 
 data class CustomizedConfig(
     val newApn: Boolean = false,
@@ -181,7 +204,7 @@ fun getApnDataInit(arguments: Bundle, context: Context, uriInit: Uri, subId: Int
  *
  * @return true if there is no error
  */
-fun validateAndSaveApnData(apnDataInit: ApnData, apnData: ApnData, context: Context): Boolean {
+fun validateAndSaveApnData(apnDataInit: ApnData, apnData: ApnData, context: Context, uriInit: Uri): Boolean {
     // Nothing to do if it's a read only APN
     if (apnData.customizedConfig.readOnlyApn) {
         return true
@@ -193,7 +216,7 @@ fun validateAndSaveApnData(apnDataInit: ApnData, apnData: ApnData, context: Cont
     }
     if (apnData.newApn || (apnData != apnDataInit)) {
         Log.d(TAG, "validateAndSaveApnData: apnData ${apnData.name}")
-        // TODO: updateApnDataToDatabase
+        updateApnDataToDatabase(apnData.newApn, apnData.getContentValues(context), context, uriInit)
     }
     return true
 }

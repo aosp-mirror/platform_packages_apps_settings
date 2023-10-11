@@ -74,7 +74,7 @@ object ApnEditPageProvider : SettingsPageProvider {
         val apnDataCur = remember {
             mutableStateOf(apnDataInit)
         }
-        ApnPage(apnDataInit, apnDataCur)
+        ApnPage(apnDataInit, apnDataCur, uriInit)
     }
 
     fun getRoute(
@@ -87,7 +87,7 @@ object ApnEditPageProvider : SettingsPageProvider {
 }
 
 @Composable
-fun ApnPage(apnDataInit: ApnData, apnDataCur: MutableState<ApnData>) {
+fun ApnPage(apnDataInit: ApnData, apnDataCur: MutableState<ApnData>, uriInit: Uri) {
     var apnData by apnDataCur
     val context = LocalContext.current
     val authTypeOptions = stringArrayResource(R.array.apn_auth_entries).toList()
@@ -99,7 +99,7 @@ fun ApnPage(apnDataInit: ApnData, apnDataCur: MutableState<ApnData>) {
         title = stringResource(id = R.string.apn_edit),
         actions = {
             IconButton(onClick = {
-                validateAndSaveApnData(apnDataInit, apnData, context)
+                validateAndSaveApnData(apnDataInit, apnData, context, uriInit)
             }) { Icon(imageVector = Icons.Outlined.Done, contentDescription = "Save APN") }
         }
     ) {
