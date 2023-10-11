@@ -25,10 +25,13 @@ import android.os.Bundle
 import android.text.Html
 import android.text.method.LinkMovementMethod
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ScrollView
 import android.widget.TextView
+import androidx.annotation.VisibleForTesting
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -72,48 +75,69 @@ private data class TextModel(
  * 2. How the data will be stored
  * 3. How the user can access and remove their data
  */
-class FingerprintEnrollIntroV2Fragment : Fragment(R.layout.fingerprint_v2_enroll_introduction) {
-  private lateinit var footerBarMixin: FooterBarMixin
-  private lateinit var textModel: TextModel
-  private lateinit var navigationViewModel: FingerprintEnrollNavigationViewModel
-  private lateinit var fingerprintEnrollViewModel: FingerprintEnrollViewModel
-  private lateinit var fingerprintScrollViewModel: FingerprintScrollViewModel
-  private lateinit var gateKeeperViewModel: FingerprintGatekeeperViewModel
+class FingerprintEnrollIntroV2Fragment() : Fragment(R.layout.fingerprint_v2_enroll_introduction) {
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    navigationViewModel =
-      ViewModelProvider(requireActivity())[FingerprintEnrollNavigationViewModel::class.java]
-    fingerprintEnrollViewModel =
-      ViewModelProvider(requireActivity())[FingerprintEnrollViewModel::class.java]
-    fingerprintScrollViewModel =
-      ViewModelProvider(requireActivity())[FingerprintScrollViewModel::class.java]
-    gateKeeperViewModel =
-      ViewModelProvider(requireActivity())[FingerprintGatekeeperViewModel::class.java]
+  /** Used for testing purposes */
+  private var factory: ViewModelProvider.Factory? = null
+
+  @VisibleForTesting
+  constructor(theFactory: ViewModelProvider.Factory) : this() {
+    factory = theFactory
   }
 
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
+  private val viewModelProvider: ViewModelProvider by lazy {
+    if (factory != null) {
+      ViewModelProvider(requireActivity(), factory!!)
+    } else {
+      ViewModelProvider(requireActivity())
+    }
+  }
 
-    lifecycleScope.launch {
-      combine(
-          navigationViewModel.enrollType,
-          fingerprintEnrollViewModel.sensorType,
-        ) { enrollType, sensorType ->
-          Pair(enrollType, sensorType)
-        }
-        .collect { (enrollType, sensorType) ->
-          textModel =
-            when (enrollType) {
-              Unicorn -> getUnicornTextModel()
-              else -> getNormalTextModel()
-            }
+  private lateinit var footerBarMixin: FooterBarMixin
+  private lateinit var textModel: TextModel
 
-          setupFooterBarAndScrollView(view)
+  // Note that the ViewModels cannot be requested before the onCreate call
+  private val navigationViewModel: FingerprintEnrollNavigationViewModel by lazy {
+    viewModelProvider[FingerprintEnrollNavigationViewModel::class.java]
+  }
+  private val fingerprintViewModel: FingerprintEnrollViewModel by lazy {
+    viewModelProvider[FingerprintEnrollViewModel::class.java]
+  }
+  private val fingerprintScrollViewModel: FingerprintScrollViewModel by lazy {
+    viewModelProvider[FingerprintScrollViewModel::class.java]
+  }
+  private val gateKeeperViewModel: FingerprintGatekeeperViewModel by lazy {
+    viewModelProvider[FingerprintGatekeeperViewModel::class.java]
+  }
 
-          if (savedInstanceState == null) {
-            getLayout()?.setHeaderText(textModel.headerText)
-            getLayout()?.setDescriptionText(textModel.descriptionText)
+  override fun onCreateView(
+    inflater: LayoutInflater,
+    container: ViewGroup?,
+    savedInstanceState: Bundle?
+  ): View? =
+    super.onCreateView(inflater, container, savedInstanceState).also { theView ->
+      val view = theView!!
+
+      viewLifecycleOwner.lifecycleScope.launch {
+        combine(
+            navigationViewModel.enrollType,
+            fingerprintViewModel.sensorType,
+          ) { enrollType, sensorType ->
+            Pair(enrollType, sensorType)
+          }
+          .collect { (enrollType, sensorType) ->
+            textModel =
+              when (enrollType) {
+                Unicorn -> getUnicornTextModel()
+                else -> getNormalTextModel()
+              }
+
+            setupFooterBarAndScrollView(view)
+
+            val layout = view as GlifLayout
+
+            layout.setHeaderText(textModel.headerText)
+            layout.setDescriptionText(textModel.descriptionText)
 
             // Set color filter for the following icons.
             val colorFilter = getIconColorFilter()
@@ -158,9 +182,9 @@ class FingerprintEnrollIntroV2Fragment : Fragment(R.layout.fingerprint_v2_enroll
             view.requireViewById<TextView?>(R.id.footer_title_1).setText(textModel.footerTitleOne)
             view.requireViewById<TextView?>(R.id.footer_title_2).setText(textModel.footerTitleOne)
           }
-        }
+      }
+      return view
     }
-  }
 
   private fun setFooterLink(view: View) {
     val footerLink: TextView = view.requireViewById(R.id.footer_learn_more)
@@ -185,17 +209,18 @@ class FingerprintEnrollIntroV2Fragment : Fragment(R.layout.fingerprint_v2_enroll
         navigationViewModel.nextStep()
       }
 
-    val layout: GlifLayout = requireActivity().requireViewById(R.id.setup_wizard_layout)
+    val layout: GlifLayout = view.findViewById(R.id.setup_wizard_layout)!!
     footerBarMixin = layout.getMixin(FooterBarMixin::class.java)
     footerBarMixin.primaryButton =
-      FooterButton.Builder(requireActivity())
+      FooterButton.Builder(requireContext())
         .setText(R.string.security_settings_face_enroll_introduction_more)
         .setListener(onNextButtonClick)
         .setButtonType(FooterButton.ButtonType.OPT_IN)
         .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Primary)
         .build()
+
     footerBarMixin.setSecondaryButton(
-      FooterButton.Builder(requireActivity())
+      FooterButton.Builder(requireContext())
         .setText(textModel.negativeButton)
         .setListener({ Log.d(TAG, "prevClicked") })
         .setButtonType(FooterButton.ButtonType.NEXT)
@@ -211,8 +236,8 @@ class FingerprintEnrollIntroV2Fragment : Fragment(R.layout.fingerprint_v2_enroll
 
     val requireScrollMixin = layout.getMixin(RequireScrollMixin::class.java)
     requireScrollMixin.requireScrollWithButton(
-      requireActivity(),
-      footerBarMixin.primaryButton,
+      requireContext(),
+      primaryButton,
       R.string.security_settings_face_enroll_introduction_more,
       onNextButtonClick
     )
@@ -224,7 +249,7 @@ class FingerprintEnrollIntroV2Fragment : Fragment(R.layout.fingerprint_v2_enroll
       }
     }
 
-    lifecycleScope.launch {
+    viewLifecycleOwner.lifecycleScope.launch {
       fingerprintScrollViewModel.hasReadConsentScreen.collect { consented ->
         if (consented) {
           primaryButton.setText(
@@ -244,7 +269,7 @@ class FingerprintEnrollIntroV2Fragment : Fragment(R.layout.fingerprint_v2_enroll
     // the flow. For instance if someone launches the activity with an invalid challenge, it
     // either 1) Fails or 2) Launched confirmDeviceCredential
     primaryButton.isEnabled = false
-    lifecycleScope.launch {
+    viewLifecycleOwner.lifecycleScope.launch {
       gateKeeperViewModel.hasValidGatekeeperInfo.collect { primaryButton.isEnabled = it }
     }
   }
@@ -283,9 +308,5 @@ class FingerprintEnrollIntroV2Fragment : Fragment(R.layout.fingerprint_v2_enroll
       DynamicColorPalette.getColor(context, DynamicColorPalette.ColorType.ACCENT),
       PorterDuff.Mode.SRC_IN
     )
-  }
-
-  private fun getLayout(): GlifLayout? {
-    return requireView().findViewById(R.id.setup_wizard_layout) as GlifLayout?
   }
 }
