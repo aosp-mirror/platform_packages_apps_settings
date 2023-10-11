@@ -44,6 +44,7 @@ import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.datausage.lib.NetworkTemplates;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -128,8 +129,7 @@ public class BillingCycleSettings extends DataUsageBaseFragment implements
         }
 
         if (mNetworkTemplate == null) {
-            mNetworkTemplate = DataUsageUtils.getDefaultTemplate(context,
-                DataUsageUtils.getDefaultSubscriptionId(context));
+            mNetworkTemplate = NetworkTemplates.INSTANCE.getDefaultTemplate(context);
         }
 
         mBillingCycle = findPreference(KEY_BILLING_CYCLE);

@@ -123,6 +123,13 @@ android_library {
         "androidx.room_room-compiler-plugin",
     ],
 
+    errorprone: {
+        extra_check_modules: ["//external/nullaway:nullaway_plugin"],
+        javacflags: [
+            "-XepOpt:NullAway:AnnotatedPackages=com.android.settings",
+        ],
+    },
+
     libs: [
         "telephony-common",
         "ims-common",

@@ -16,8 +16,6 @@
 
 package com.android.settings.datausage.lib
 
-import android.app.usage.NetworkStats.Bucket
-import android.app.usage.NetworkStatsManager
 import android.content.Context
 import android.net.NetworkPolicy
 import android.net.NetworkTemplate
@@ -32,44 +30,37 @@ import java.time.ZonedDateTime
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.kotlin.any
 import org.mockito.kotlin.doReturn
-import org.mockito.kotlin.eq
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.spy
+import org.mockito.kotlin.stub
 import org.mockito.kotlin.whenever
 
 @RunWith(AndroidJUnit4::class)
 class NetworkCycleDataRepositoryTest {
-    private val mockNetworkStatsManager = mock<NetworkStatsManager> {
-        on { querySummaryForDevice(any(), eq(CYCLE1_START_TIME), eq(CYCLE1_END_TIME)) } doReturn
-            CYCLE1_BUCKET
+    private val mockNetworkStatsRepository = mock<NetworkStatsRepository> {
+        on { querySummaryForDevice(CYCLE1_START_TIME, CYCLE1_END_TIME) } doReturn CYCLE1_BYTES
 
         on {
             querySummaryForDevice(
-                any(),
-                eq(CYCLE2_END_TIME - DateUtils.WEEK_IN_MILLIS * 4),
-                eq(CYCLE2_END_TIME),
+                startTime = CYCLE2_END_TIME - DateUtils.WEEK_IN_MILLIS * 4,
+                endTime = CYCLE2_END_TIME,
             )
-        } doReturn CYCLE2_BUCKET
+        } doReturn CYCLE2_BYTES
 
-        on { querySummaryForDevice(any(), eq(CYCLE3_START_TIME), eq(CYCLE4_END_TIME)) } doReturn
-            CYCLE3_AND_4_BUCKET
+        on { querySummaryForDevice(CYCLE3_START_TIME, CYCLE4_END_TIME) } doReturn
+            CYCLE3_BYTES + CYCLE4_BYTES
 
-        on { querySummaryForDevice(any(), eq(CYCLE3_START_TIME), eq(CYCLE3_END_TIME)) } doReturn
-            CYCLE3_BUCKET
-
-        on { querySummaryForDevice(any(), eq(CYCLE4_START_TIME), eq(CYCLE4_END_TIME)) } doReturn
-            CYCLE4_BUCKET
+        on { querySummaryForDevice(CYCLE3_START_TIME, CYCLE3_END_TIME) } doReturn CYCLE3_BYTES
+        on { querySummaryForDevice(CYCLE4_START_TIME, CYCLE4_END_TIME) } doReturn CYCLE4_BYTES
     }
 
-    private val context: Context = spy(ApplicationProvider.getApplicationContext()) {
-        on { getSystemService(NetworkStatsManager::class.java) } doReturn mockNetworkStatsManager
-    }
+    private val context: Context = ApplicationProvider.getApplicationContext()
 
     private val template = mock<NetworkTemplate>()
 
-    private val repository = spy(NetworkCycleDataRepository(context, template))
+    private val repository =
+        spy(NetworkCycleDataRepository(context, template, mockNetworkStatsRepository))
 
     @Test
     fun loadCycles_byPolicy() = runTest {
@@ -82,13 +73,17 @@ class NetworkCycleDataRepositoryTest {
 
         val cycles = repository.loadCycles()
 
-        assertThat(cycles).containsExactly(NetworkUsageData(startTime = 1, endTime = 2, usage = 11))
+        assertThat(cycles).containsExactly(
+            NetworkUsageData(startTime = 1, endTime = 2, usage = CYCLE1_BYTES),
+        )
     }
 
     @Test
     fun loadCycles_asFourWeeks() = runTest {
         doReturn(null).whenever(repository).getPolicy()
-        doReturn(Range(CYCLE2_START_TIME, CYCLE2_END_TIME)).whenever(repository).getTimeRange()
+        mockNetworkStatsRepository.stub {
+            on { getTimeRange() } doReturn Range(CYCLE2_START_TIME, CYCLE2_END_TIME)
+        }
 
         val cycles = repository.loadCycles()
 
@@ -96,7 +91,7 @@ class NetworkCycleDataRepositoryTest {
             NetworkUsageData(
                 startTime = CYCLE2_END_TIME - DateUtils.WEEK_IN_MILLIS * 4,
                 endTime = CYCLE2_END_TIME,
-                usage = 22,
+                usage = CYCLE2_BYTES,
             ),
         )
     }
@@ -110,18 +105,18 @@ class NetworkCycleDataRepositoryTest {
                 total = NetworkUsageData(
                     startTime = CYCLE3_START_TIME,
                     endTime = CYCLE4_END_TIME,
-                    usage = 77,
+                    usage = CYCLE3_BYTES + CYCLE4_BYTES,
                 ),
                 dailyUsage = listOf(
                     NetworkUsageData(
                         startTime = CYCLE3_START_TIME,
                         endTime = CYCLE3_END_TIME,
-                        usage = 33,
+                        usage = CYCLE3_BYTES,
                     ),
                     NetworkUsageData(
                         startTime = CYCLE4_START_TIME,
                         endTime = CYCLE4_END_TIME,
-                        usage = 44,
+                        usage = CYCLE4_BYTES,
                     ),
                 ),
             )
@@ -134,35 +129,18 @@ class NetworkCycleDataRepositoryTest {
     private companion object {
         const val CYCLE1_START_TIME = 1L
         const val CYCLE1_END_TIME = 2L
-        val CYCLE1_BUCKET = mock<Bucket> {
-            on { rxBytes } doReturn 1
-            on { txBytes } doReturn 10
-        }
+        const val CYCLE1_BYTES = 11L
 
         const val CYCLE2_START_TIME = 1695555555000L
         const val CYCLE2_END_TIME = 1695566666000L
-        val CYCLE2_BUCKET = mock<Bucket> {
-            on { rxBytes } doReturn 2
-            on { txBytes } doReturn 20
-        }
+        const val CYCLE2_BYTES = 22L
 
         const val CYCLE3_START_TIME = 1695555555000L
         const val CYCLE3_END_TIME = CYCLE3_START_TIME + DateUtils.DAY_IN_MILLIS
-        val CYCLE3_BUCKET = mock<Bucket> {
-            on { rxBytes } doReturn 3
-            on { txBytes } doReturn 30
-        }
+        const val CYCLE3_BYTES = 33L
 
         const val CYCLE4_START_TIME = CYCLE3_END_TIME
         const val CYCLE4_END_TIME = CYCLE4_START_TIME + DateUtils.DAY_IN_MILLIS
-        val CYCLE4_BUCKET = mock<Bucket> {
-            on { rxBytes } doReturn 4
-            on { txBytes } doReturn 40
-        }
-
-        val CYCLE3_AND_4_BUCKET = mock<Bucket> {
-            on { rxBytes } doReturn 7
-            on { txBytes } doReturn 70
-        }
+        const val CYCLE4_BYTES = 44L
     }
 }

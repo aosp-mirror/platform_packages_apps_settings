@@ -41,10 +41,26 @@ class ApnRepositoryTest {
         val cursor = MatrixCursor(sProjection)
         cursor.addRow(
             arrayOf<Any?>(
-                0, "name", "apn", "proxy", "port",
-                "userName", "server", "passWord", "mmsc", "mcc", "mnc", "numeric",
-                "mmsProxy", "mmsPort", 0, "apnType", "apnProtocol", 0,
-                0, "apnRoaming", "mvnoType", "mvnoValue", 0, 1, 0
+                0,
+                "name",
+                "apn",
+                "proxy",
+                "port",
+                "userName",
+                "server",
+                "passWord",
+                "mmsc",
+                "mmsProxy",
+                "mmsPort",
+                0,
+                "apnType",
+                "apnProtocol",
+                0,
+                0,
+                "apnRoaming",
+                0,
+                1,
+                0
             )
         )
         val context = Mockito.spy(context)

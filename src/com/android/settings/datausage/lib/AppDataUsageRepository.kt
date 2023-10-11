@@ -17,18 +17,17 @@
 package com.android.settings.datausage.lib
 
 import android.app.usage.NetworkStats
-import android.app.usage.NetworkStatsManager
 import android.content.Context
 import android.net.NetworkPolicyManager
 import android.net.NetworkTemplate
 import android.os.Process
 import android.os.UserHandle
-import android.util.Log
 import android.util.SparseArray
 import android.util.SparseBooleanArray
 import androidx.annotation.VisibleForTesting
 import androidx.core.util.keyIterator
 import com.android.settings.R
+import com.android.settings.datausage.lib.NetworkStatsRepository.Companion.Bucket
 import com.android.settingslib.AppItem
 import com.android.settingslib.net.UidDetailProvider
 import com.android.settingslib.spaprivileged.framework.common.userManager
@@ -36,14 +35,14 @@ import com.android.settingslib.spaprivileged.framework.common.userManager
 class AppDataUsageRepository(
     private val context: Context,
     private val currentUserId: Int,
-    private val template: NetworkTemplate,
+    template: NetworkTemplate,
     private val getPackageName: (AppItem) -> String?,
 ) {
-    private val networkStatsManager = context.getSystemService(NetworkStatsManager::class.java)!!
+    private val networkStatsRepository = NetworkStatsRepository(context, template)
 
     fun getAppPercent(carrierId: Int?, startTime: Long, endTime: Long): List<Pair<AppItem, Int>> {
-        val networkStats = querySummary(startTime, endTime) ?: return emptyList()
-        return getAppPercent(carrierId, convertToBuckets(networkStats))
+        val buckets = networkStatsRepository.querySummary(startTime, endTime)
+        return getAppPercent(carrierId, buckets)
     }
 
     @VisibleForTesting
@@ -76,13 +75,6 @@ class AppDataUsageRepository(
             val percentTotal = if (largest > 0) (item.total * 100 / largest).toInt() else 0
             item to percentTotal
         }
-    }
-
-    private fun querySummary(startTime: Long, endTime: Long): NetworkStats? = try {
-        networkStatsManager.querySummary(template, startTime, endTime)
-    } catch (e: RuntimeException) {
-        Log.e(TAG, "Exception querying network detail.", e)
-        null
     }
 
     private fun filterItems(carrierId: Int?, items: List<AppItem>): List<AppItem> {
@@ -189,14 +181,6 @@ class AppDataUsageRepository(
     }
 
     companion object {
-        private const val TAG = "AppDataUsageRepository"
-
-        @VisibleForTesting
-        data class Bucket(
-            val uid: Int,
-            val bytes: Long,
-        )
-
         @JvmStatic
         fun getAppUidList(uids: SparseBooleanArray) =
             uids.keyIterator().asSequence().map { getAppUid(it) }.distinct().toList()
@@ -210,15 +194,20 @@ class AppDataUsageRepository(
             return uid
         }
 
-        private fun convertToBuckets(stats: NetworkStats): List<Bucket> {
-            val buckets = mutableListOf<Bucket>()
-            stats.use {
-                val bucket = NetworkStats.Bucket()
-                while (it.getNextBucket(bucket)) {
-                    buckets += Bucket(uid = bucket.uid, bytes = bucket.rxBytes + bucket.txBytes)
+        /**
+         * Gets the apps' uids, also add the apps' SDK sandboxes' uids.
+         *
+         * In case we've been asked data usage for an app, include data usage of the corresponding
+         * SDK sandbox.
+         */
+        fun withSdkSandboxUids(uids: List<Int>): List<Int> {
+            val set = uids.toMutableSet()
+            for (uid in uids) {
+                if (Process.isApplicationUid(uid)) {
+                    set += Process.toSdkSandboxUid(uid)
                 }
             }
-            return buckets
+            return set.toList()
         }
     }
 }

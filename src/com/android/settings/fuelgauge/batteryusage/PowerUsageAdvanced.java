@@ -236,10 +236,8 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         final int hourlyIndex = mBatteryChartPreferenceController.getHourlyChartIndex();
         final String slotInformation = mBatteryChartPreferenceController.getSlotInformation();
         final BatteryDiffData slotUsageData = mBatteryUsageMap.get(dailyIndex).get(hourlyIndex);
-        if (slotUsageData != null) {
-            mScreenOnTimeController.handleSceenOnTimeUpdated(
-                    slotUsageData.getScreenOnTime(), slotInformation);
-        }
+        mScreenOnTimeController.handleSceenOnTimeUpdated(
+                slotUsageData != null ? slotUsageData.getScreenOnTime() : 0L, slotInformation);
         // Hide card tips if the related highlight slot was clicked.
         if (isAppsAnomalyEventFocused()) {
             mBatteryTipsController.acceptTipsCard();
