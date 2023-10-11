@@ -21,6 +21,8 @@
           package="com.android.settings">
     <uses-permission android:name="android.permission.READ_DEVICE_CONFIG" />
 
-    <application/>
+    <application>
+        <activity android:name="com.android.settings.security.TestActivity" android:exported="true" />
+    </application>
 
 </manifest>
