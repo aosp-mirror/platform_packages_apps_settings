@@ -17,7 +17,6 @@
 package com.android.settings.network.apn
 
 import android.content.Context
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.test.assertIsDisplayed
@@ -58,15 +57,16 @@ class ApnEditPageProviderTest {
         context.resources.getStringArray(R.array.apn_protocol_entries).toList()
     private val networkType = context.resources.getString(R.string.network_type)
     private val passwordTitle = context.resources.getString(R.string.apn_password)
+    private val apnInit = ApnData(
+        name = apnName,
+        mmsc = mmsc,
+        mmsProxy = mmsProxy,
+        apnType = apnType,
+        apnRoaming = apnProtocolOptions.indexOf(apnRoaming),
+        apnEnable = true
+    )
     private val apnData = mutableStateOf(
-        ApnData(
-            name = apnName,
-            mmsc = mmsc,
-            mmsProxy = mmsProxy,
-            apnType = apnType,
-            apnRoaming = apnProtocolOptions.indexOf(apnRoaming),
-            apnEnable = true
-        )
+        apnInit
     )
 
     @Test
@@ -77,7 +77,7 @@ class ApnEditPageProviderTest {
     @Test
     fun title_displayed() {
         composeTestRule.setContent {
-            ApnPage(remember {
+            ApnPage(apnInit, remember {
                 apnData
             })
         }
@@ -87,7 +87,7 @@ class ApnEditPageProviderTest {
     @Test
     fun name_displayed() {
         composeTestRule.setContent {
-            ApnPage(remember {
+            ApnPage(apnInit, remember {
                 apnData
             })
         }
@@ -97,7 +97,7 @@ class ApnEditPageProviderTest {
     @Test
     fun mmsc_displayed() {
         composeTestRule.setContent {
-            ApnPage(remember {
+            ApnPage(apnInit, remember {
                 apnData
             })
         }
@@ -109,7 +109,7 @@ class ApnEditPageProviderTest {
     @Test
     fun mms_proxy_displayed() {
         composeTestRule.setContent {
-            ApnPage(remember {
+            ApnPage(apnInit, remember {
                 apnData
             })
         }
@@ -121,7 +121,7 @@ class ApnEditPageProviderTest {
     @Test
     fun apn_type_displayed() {
         composeTestRule.setContent {
-            ApnPage(remember {
+            ApnPage(apnInit, remember {
                 apnData
             })
         }
@@ -133,7 +133,7 @@ class ApnEditPageProviderTest {
     @Test
     fun apn_roaming_displayed() {
         composeTestRule.setContent {
-            ApnPage(remember {
+            ApnPage(apnInit, remember {
                 apnData
             })
         }
@@ -145,7 +145,7 @@ class ApnEditPageProviderTest {
     @Test
     fun carrier_enabled_displayed() {
         composeTestRule.setContent {
-            ApnPage(remember {
+            ApnPage(apnInit, remember {
                 apnData
             })
         }
@@ -157,7 +157,7 @@ class ApnEditPageProviderTest {
     @Test
     fun carrier_enabled_isChecked() {
         composeTestRule.setContent {
-            ApnPage(remember {
+            ApnPage(apnInit, remember {
                 apnData
             })
         }
@@ -169,7 +169,7 @@ class ApnEditPageProviderTest {
     @Test
     fun carrier_enabled_checkChanged() {
         composeTestRule.setContent {
-            ApnPage(remember {
+            ApnPage(apnInit, remember {
                 apnData
             })
         }
@@ -182,7 +182,7 @@ class ApnEditPageProviderTest {
     @Test
     fun network_type_displayed() {
         composeTestRule.setContent {
-            ApnPage(remember {
+            ApnPage(apnInit, remember {
                 apnData
             })
         }
@@ -193,12 +193,10 @@ class ApnEditPageProviderTest {
 
     @Test
     fun network_type_changed() {
-        var apnDataa: MutableState<ApnData> = apnData
         composeTestRule.setContent {
-            apnDataa = remember {
+            ApnPage(apnInit, remember {
                 apnData
-            }
-            ApnPage(apnDataa)
+            })
         }
         composeTestRule.onRoot().onChild().onChildAt(0)
             .performScrollToNode(hasText(networkType, true))
@@ -211,12 +209,10 @@ class ApnEditPageProviderTest {
 
     @Test
     fun network_type_changed_back2Default() {
-        var apnDataa: MutableState<ApnData> = apnData
         composeTestRule.setContent {
-            apnDataa = remember {
+            ApnPage(apnInit, remember {
                 apnData
-            }
-            ApnPage(apnDataa)
+            })
         }
         composeTestRule.onRoot().onChild().onChildAt(0)
             .performScrollToNode(hasText(networkType, true))
@@ -234,7 +230,7 @@ class ApnEditPageProviderTest {
     @Test
     fun password_displayed() {
         composeTestRule.setContent {
-            ApnPage(remember {
+            ApnPage(apnInit, remember {
                 apnData
             })
         }

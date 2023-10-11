@@ -82,6 +82,55 @@ data class CustomizedConfig(
 )
 
 /**
+ * APN types for data connections.  These are usage categories for an APN
+ * entry.  One APN entry may support multiple APN types, eg, a single APN
+ * may service regular internet traffic ("default") as well as MMS-specific
+ * connections.<br></br>
+ * APN_TYPE_ALL is a special type to indicate that this APN entry can
+ * service all data connections.
+ */
+const val APN_TYPE_ALL = "*"
+/** APN type for default data traffic  */
+const val APN_TYPE_DEFAULT = "default"
+/** APN type for MMS traffic  */
+const val APN_TYPE_MMS = "mms"
+/** APN type for SUPL assisted GPS  */
+const val APN_TYPE_SUPL = "supl"
+/** APN type for DUN traffic  */
+const val APN_TYPE_DUN = "dun"
+/** APN type for HiPri traffic  */
+const val APN_TYPE_HIPRI = "hipri"
+/** APN type for FOTA  */
+const val APN_TYPE_FOTA = "fota"
+/** APN type for IMS  */
+const val APN_TYPE_IMS = "ims"
+/** APN type for CBS  */
+const val APN_TYPE_CBS = "cbs"
+/** APN type for IA Initial Attach APN  */
+const val APN_TYPE_IA = "ia"
+/** APN type for Emergency PDN. This is not an IA apn, but is used
+ * for access to carrier services in an emergency call situation.  */
+const val APN_TYPE_EMERGENCY = "emergency"
+/** APN type for Mission Critical Services  */
+const val APN_TYPE_MCX = "mcx"
+/** APN type for XCAP  */
+const val APN_TYPE_XCAP = "xcap"
+val APN_TYPES = arrayOf(
+    APN_TYPE_DEFAULT,
+    APN_TYPE_MMS,
+    APN_TYPE_SUPL,
+    APN_TYPE_DUN,
+    APN_TYPE_HIPRI,
+    APN_TYPE_FOTA,
+    APN_TYPE_IMS,
+    APN_TYPE_CBS,
+    APN_TYPE_IA,
+    APN_TYPE_EMERGENCY,
+    APN_TYPE_MCX,
+    APN_TYPE_XCAP
+)
+
+/**
  * Initialize ApnData according to the arguments.
  * @param arguments The data passed in when the user calls PageProvider.
  * @param uriInit The decoded user incoming uri data in Page.
@@ -121,6 +170,108 @@ fun getApnDataInit(arguments: Bundle, context: Context, uriInit: Uri, subId: Int
     // TODO: mIsCarrierIdApn
     disableInit(apnDataInit)
     return apnDataInit
+}
+
+/**
+ * Validates the apn data and save it to the database if it's valid.
+ *
+ *
+ *
+ * A dialog with error message will be displayed if the APN data is invalid.
+ *
+ * @return true if there is no error
+ */
+fun validateAndSaveApnData(apnDataInit: ApnData, apnData: ApnData, context: Context): Boolean {
+    // Nothing to do if it's a read only APN
+    if (apnData.customizedConfig.readOnlyApn) {
+        return true
+    }
+    val errorMsg = validateApnData(apnData, context)
+    if (errorMsg != null) {
+        //TODO: showError(this)
+        return false
+    }
+    if (apnData.newApn || (apnData != apnDataInit)) {
+        Log.d(TAG, "validateAndSaveApnData: apnData ${apnData.name}")
+        // TODO: updateApnDataToDatabase
+    }
+    return true
+}
+
+/**
+ * Validates whether the apn data is valid.
+ *
+ * @return An error message if the apn data is invalid, otherwise return null.
+ */
+fun validateApnData(apnData: ApnData, context: Context): String? {
+    var errorMsg: String? = null
+    val name = apnData.name
+    val apn = apnData.apn
+    if (name == "") {
+        errorMsg = context.resources.getString(R.string.error_name_empty)
+    } else if (apn == "") {
+        errorMsg = context.resources.getString(R.string.error_apn_empty)
+    }
+    if (errorMsg == null) {
+        // if carrier does not allow editing certain apn types, make sure type does not include
+        // those
+        if (!ArrayUtils.isEmpty(apnData.customizedConfig.readOnlyApnTypes)
+            && apnTypesMatch(apnData.customizedConfig.readOnlyApnTypes, getUserEnteredApnType(apnData.apnType, apnData.customizedConfig.readOnlyApnTypes))
+        ) {
+            val stringBuilder = StringBuilder()
+            for (type in apnData.customizedConfig.readOnlyApnTypes) {
+                stringBuilder.append(type).append(", ")
+                Log.d(TAG, "validateApnData: appending type: $type")
+            }
+            // remove last ", "
+            if (stringBuilder.length >= 2) {
+                stringBuilder.delete(stringBuilder.length - 2, stringBuilder.length)
+            }
+            errorMsg = String.format(
+                context.resources.getString(R.string.error_adding_apn_type),
+                stringBuilder
+            )
+        }
+    }
+    return errorMsg
+}
+
+private fun getUserEnteredApnType(apnType: String, readOnlyApnTypes: List<String>): String {
+    // if user has not specified a type, map it to "ALL APN TYPES THAT ARE NOT READ-ONLY"
+    // but if user enter empty type, map it just for default
+    var userEnteredApnType = apnType
+    if (userEnteredApnType != "") userEnteredApnType =
+        userEnteredApnType.trim { it <= ' ' }
+    if (TextUtils.isEmpty(userEnteredApnType) || APN_TYPE_ALL == userEnteredApnType) {
+        userEnteredApnType = getEditableApnType(readOnlyApnTypes)
+    }
+    Log.d(
+        TAG, "getUserEnteredApnType: changed apn type to editable apn types: "
+            + userEnteredApnType
+    )
+    return userEnteredApnType
+}
+
+private fun getEditableApnType(readOnlyApnTypes: List<String>): String {
+    val editableApnTypes = StringBuilder()
+    var first = true
+    for (apnType in APN_TYPES) {
+        // add APN type if it is not read-only and is not wild-cardable
+        if (!readOnlyApnTypes.contains(apnType)
+            && apnType != APN_TYPE_IA
+            && apnType != APN_TYPE_EMERGENCY
+            && apnType != APN_TYPE_MCX
+            && apnType != APN_TYPE_IMS
+        ) {
+            if (first) {
+                first = false
+            } else {
+                editableApnTypes.append(",")
+            }
+            editableApnTypes.append(apnType)
+        }
+    }
+    return editableApnTypes.toString()
 }
 
 /**
@@ -299,11 +450,11 @@ fun hasAllApns(apnTypes: Array<String?>): Boolean {
         return false
     }
     val apnList: List<*> = Arrays.asList(*apnTypes)
-    if (apnList.contains(ApnEditor.APN_TYPE_ALL)) {
+    if (apnList.contains(APN_TYPE_ALL)) {
         Log.d(TAG, "hasAllApns: true because apnList.contains(APN_TYPE_ALL)")
         return true
     }
-    for (apn in ApnEditor.APN_TYPES) {
+    for (apn in APN_TYPES) {
         if (!apnList.contains(apn)) {
             return false
         }
