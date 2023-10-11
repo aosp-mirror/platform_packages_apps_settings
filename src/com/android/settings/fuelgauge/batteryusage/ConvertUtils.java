@@ -111,8 +111,8 @@ public final class ConvertUtils {
             values.put(BatteryHistEntry.KEY_UID, Long.valueOf(entry.getUid()));
             values.put(BatteryHistEntry.KEY_USER_ID,
                     Long.valueOf(UserHandle.getUserId(entry.getUid())));
-            values.put(BatteryHistEntry.KEY_PACKAGE_NAME,
-                    entry.getDefaultPackageName());
+            final String packageName = entry.getDefaultPackageName();
+            values.put(BatteryHistEntry.KEY_PACKAGE_NAME, packageName != null ? packageName : "");
             values.put(BatteryHistEntry.KEY_CONSUMER_TYPE,
                     Integer.valueOf(entry.getConsumerType()));
         } else {

@@ -32,6 +32,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.database.MatrixCursor;
+import android.os.BatteryConsumer;
 import android.os.BatteryManager;
 import android.os.BatteryUsageStats;
 import android.os.LocaleList;
@@ -80,8 +81,7 @@ public final class ConvertUtilsTest {
     }
 
     @Test
-    public void convertBatteryEntryToContentValues_returnsExpectedContentValues() {
-        final int expectedType = 3;
+    public void convertBatteryEntryToContentValues_appEntry_returnsExpectedContentValues() {
         when(mMockBatteryEntry.getUid()).thenReturn(1001);
         when(mMockBatteryEntry.getLabel()).thenReturn("Settings");
         when(mMockBatteryEntry.getDefaultPackageName())
@@ -96,9 +96,9 @@ public final class ConvertUtilsTest {
         mMockBatteryEntry.mPercent = 0.3;
         when(mMockBatteryEntry.getTimeInForegroundMs()).thenReturn(1234L);
         when(mMockBatteryEntry.getTimeInBackgroundMs()).thenReturn(5689L);
-        when(mMockBatteryEntry.getPowerComponentId()).thenReturn(expectedType);
+        when(mMockBatteryEntry.getPowerComponentId()).thenReturn(-1);
         when(mMockBatteryEntry.getConsumerType())
-                .thenReturn(ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY);
+                .thenReturn(ConvertUtils.CONSUMER_TYPE_UID_BATTERY);
 
         final ContentValues values =
                 ConvertUtils.convertBatteryEntryToContentValues(
@@ -122,7 +122,7 @@ public final class ConvertUtilsTest {
                 .isEqualTo("com.google.android.settings.battery");
         assertThat(values.getAsLong(BatteryHistEntry.KEY_TIMESTAMP)).isEqualTo(10001L);
         assertThat(values.getAsInteger(BatteryHistEntry.KEY_CONSUMER_TYPE))
-                .isEqualTo(ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY);
+                .isEqualTo(ConvertUtils.CONSUMER_TYPE_UID_BATTERY);
         assertThat(values.getAsBoolean(BatteryHistEntry.KEY_IS_FULL_CHARGE_CYCLE_START)).isTrue();
         assertThat(batteryInformation.getAppLabel()).isEqualTo("Settings");
         assertThat(batteryInformation.getIsHidden()).isTrue();
@@ -137,7 +137,71 @@ public final class ConvertUtilsTest {
         assertThat(batteryInformation.getPercentOfTotal()).isEqualTo(0.3);
         assertThat(batteryInformation.getForegroundUsageTimeInMs()).isEqualTo(1234L);
         assertThat(batteryInformation.getBackgroundUsageTimeInMs()).isEqualTo(5689L);
-        assertThat(batteryInformation.getDrainType()).isEqualTo(expectedType);
+        assertThat(batteryInformation.getDrainType()).isEqualTo(-1);
+        assertThat(deviceBatteryState.getBatteryLevel()).isEqualTo(12);
+        assertThat(deviceBatteryState.getBatteryStatus())
+                .isEqualTo(BatteryManager.BATTERY_STATUS_FULL);
+        assertThat(deviceBatteryState.getBatteryHealth())
+                .isEqualTo(BatteryManager.BATTERY_HEALTH_COLD);
+    }
+
+    @Test
+    public void convertBatteryEntryToContentValues_systemEntry_returnsExpectedContentValues() {
+        when(mMockBatteryEntry.getUid()).thenReturn(-1);
+        when(mMockBatteryEntry.getLabel()).thenReturn("CPU");
+        when(mMockBatteryEntry.getDefaultPackageName()).thenReturn(null);
+        when(mMockBatteryEntry.getPowerComponentId()).thenReturn(
+                BatteryConsumer.POWER_COMPONENT_CPU);
+        when(mBatteryUsageStats.getConsumedPower()).thenReturn(5.1);
+        when(mMockBatteryEntry.getConsumedPower()).thenReturn(1.1);
+        when(mMockBatteryEntry.getConsumedPowerInForeground()).thenReturn(1.2);
+        when(mMockBatteryEntry.getConsumedPowerInForegroundService()).thenReturn(1.3);
+        when(mMockBatteryEntry.getConsumedPowerInBackground()).thenReturn(1.4);
+        when(mMockBatteryEntry.getConsumedPowerInCached()).thenReturn(1.5);
+        mMockBatteryEntry.mPercent = 0.3;
+        when(mMockBatteryEntry.getTimeInForegroundMs()).thenReturn(1234L);
+        when(mMockBatteryEntry.getTimeInBackgroundMs()).thenReturn(5689L);
+        when(mMockBatteryEntry.getConsumerType())
+                .thenReturn(ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY);
+
+        final ContentValues values =
+                ConvertUtils.convertBatteryEntryToContentValues(
+                        mMockBatteryEntry,
+                        mBatteryUsageStats,
+                        /*batteryLevel=*/ 12,
+                        /*batteryStatus=*/ BatteryManager.BATTERY_STATUS_FULL,
+                        /*batteryHealth=*/ BatteryManager.BATTERY_HEALTH_COLD,
+                        /*bootTimestamp=*/ 101L,
+                        /*timestamp=*/ 10001L,
+                        /*isFullChargeStart=*/ true);
+        final BatteryInformation batteryInformation =
+                ConvertUtils.getBatteryInformation(
+                        values, BatteryHistEntry.KEY_BATTERY_INFORMATION);
+        final DeviceBatteryState deviceBatteryState = batteryInformation.getDeviceBatteryState();
+
+        assertThat(values.getAsLong(BatteryHistEntry.KEY_UID)).isEqualTo(-1);
+        assertThat(values.getAsLong(BatteryHistEntry.KEY_USER_ID))
+                .isEqualTo(UserHandle.getUserId(1001));
+        assertThat(values.getAsString(BatteryHistEntry.KEY_PACKAGE_NAME)).isEqualTo("");
+        assertThat(values.getAsLong(BatteryHistEntry.KEY_TIMESTAMP)).isEqualTo(10001L);
+        assertThat(values.getAsInteger(BatteryHistEntry.KEY_CONSUMER_TYPE))
+                .isEqualTo(ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY);
+        assertThat(values.getAsBoolean(BatteryHistEntry.KEY_IS_FULL_CHARGE_CYCLE_START)).isTrue();
+        assertThat(batteryInformation.getAppLabel()).isEqualTo("CPU");
+        assertThat(batteryInformation.getIsHidden()).isFalse();
+        assertThat(batteryInformation.getBootTimestamp()).isEqualTo(101L);
+        assertThat(batteryInformation.getZoneId()).isEqualTo(TimeZone.getDefault().getID());
+        assertThat(batteryInformation.getTotalPower()).isEqualTo(5.1);
+        assertThat(batteryInformation.getConsumePower()).isEqualTo(1.1);
+        assertThat(batteryInformation.getForegroundUsageConsumePower()).isEqualTo(1.2);
+        assertThat(batteryInformation.getForegroundServiceUsageConsumePower()).isEqualTo(1.3);
+        assertThat(batteryInformation.getBackgroundUsageConsumePower()).isEqualTo(1.4);
+        assertThat(batteryInformation.getCachedUsageConsumePower()).isEqualTo(1.5);
+        assertThat(batteryInformation.getPercentOfTotal()).isEqualTo(0.3);
+        assertThat(batteryInformation.getForegroundUsageTimeInMs()).isEqualTo(1234L);
+        assertThat(batteryInformation.getBackgroundUsageTimeInMs()).isEqualTo(5689L);
+        assertThat(batteryInformation.getDrainType()).isEqualTo(
+                BatteryConsumer.POWER_COMPONENT_CPU);
         assertThat(deviceBatteryState.getBatteryLevel()).isEqualTo(12);
         assertThat(deviceBatteryState.getBatteryStatus())
                 .isEqualTo(BatteryManager.BATTERY_STATUS_FULL);
