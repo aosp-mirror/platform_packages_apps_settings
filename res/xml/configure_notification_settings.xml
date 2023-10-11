@@ -180,5 +180,13 @@
             android:title="@string/notification_assistant_title"
             android:summary="@string/notification_assistant_summary"
             settings:controller="com.android.settings.notification.NotificationAssistantPreferenceController"/>
+
+        <Preference
+            android:fragment="com.android.settings.notification.PoliteNotificationsPreferenceFragment"
+            android:key="polite_notifications_preference"
+            android:order="26"
+            android:persistent="false"
+            android:title="@string/notification_polite_title"
+            settings:controller="com.android.settings.notification.PoliteNotificationsPreferenceController" />
     </PreferenceCategory>
 </PreferenceScreen>
