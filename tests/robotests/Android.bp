@@ -72,7 +72,10 @@ android_robolectric_test {
         "ims-common",
     ],
 
-    java_resource_dirs: ["config", "resources"],
+    java_resource_dirs: [
+        "config",
+        "resources",
+    ],
 
     instrumentation_for: "SettingsRoboTestStub",
 
@@ -97,6 +100,6 @@ java_library {
         "Robolectric_all-target_upstream",
         "Settings-core",
         "mockito-robolectric-prebuilt",
-        "truth-prebuilt",
+        "truth",
     ],
 }
