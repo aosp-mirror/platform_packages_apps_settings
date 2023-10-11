@@ -17,12 +17,11 @@
 package com.android.settings.datausage.lib
 
 import android.app.usage.NetworkStats
-import android.app.usage.NetworkStatsManager
 import android.content.Context
 import android.net.NetworkTemplate
-import android.util.Log
 import android.util.Range
 import androidx.annotation.VisibleForTesting
+import com.android.settings.datausage.lib.AppDataUsageRepository.Companion.withSdkSandboxUids
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
@@ -35,11 +34,12 @@ class AppDataUsageDetailsRepository @JvmOverloads constructor(
     context: Context,
     private val template: NetworkTemplate,
     private val cycles: List<Long>?,
-    private val uids: List<Int>,
+    uids: List<Int>,
     private val networkCycleDataRepository: INetworkCycleDataRepository =
-        NetworkCycleDataRepository(context, template)
+        NetworkCycleDataRepository(context, template),
 ) : IAppDataUsageDetailsRepository {
-    private val networkStatsManager = context.getSystemService(NetworkStatsManager::class.java)!!
+    private val withSdkSandboxUids = withSdkSandboxUids(uids)
+    private val networkStatsRepository = NetworkStatsRepository(context, template)
 
     override suspend fun queryDetailsForCycles(): List<NetworkUsageDetailsData> = coroutineScope {
         getCycles().map {
@@ -56,12 +56,11 @@ class AppDataUsageDetailsRepository @JvmOverloads constructor(
     private fun queryDetails(range: Range<Long>): NetworkUsageDetailsData {
         var totalUsage = 0L
         var foregroundUsage = 0L
-        for (uid in uids) {
+        for (uid in withSdkSandboxUids) {
             val usage = getUsage(range, uid, NetworkStats.Bucket.STATE_ALL)
             if (usage > 0L) {
                 totalUsage += usage
-                foregroundUsage +=
-                    getUsage(range, uid, NetworkStats.Bucket.STATE_FOREGROUND)
+                foregroundUsage += getUsage(range, uid, NetworkStats.Bucket.STATE_FOREGROUND)
             }
         }
         return NetworkUsageDetailsData(
@@ -73,25 +72,6 @@ class AppDataUsageDetailsRepository @JvmOverloads constructor(
     }
 
     @VisibleForTesting
-    fun getUsage(range: Range<Long>, uid: Int, state: Int): Long = try {
-        networkStatsManager.queryDetailsForUidTagState(
-            template, range.lower, range.upper, uid, NetworkStats.Bucket.TAG_NONE, state,
-        ).getTotalUsage()
-    } catch (e: Exception) {
-        Log.e(TAG, "Exception querying network detail.", e)
-        0
-    }
-
-    private fun NetworkStats.getTotalUsage(): Long = use {
-        var bytes = 0L
-        val bucket = NetworkStats.Bucket()
-        while (getNextBucket(bucket)) {
-            bytes += bucket.rxBytes + bucket.txBytes
-        }
-        return bytes
-    }
-
-    private companion object {
-        private const val TAG = "AppDataUsageDetailsRepo"
-    }
+    fun getUsage(range: Range<Long>, uid: Int, state: Int): Long =
+        networkStatsRepository.queryAggregateForUid(range, uid, state)?.usage ?: 0
 }

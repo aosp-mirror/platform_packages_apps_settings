@@ -31,21 +31,17 @@ const val USER_INDEX = 5
 const val SERVER_INDEX = 6
 const val PASSWORD_INDEX = 7
 const val MMSC_INDEX = 8
-const val MCC_INDEX = 9
-const val MNC_INDEX = 10
-const val MMSPROXY_INDEX = 12
-const val MMSPORT_INDEX = 13
-const val AUTH_TYPE_INDEX = 14
-const val TYPE_INDEX = 15
-const val PROTOCOL_INDEX = 16
-const val CARRIER_ENABLED_INDEX = 17
-const val NETWORK_TYPE_INDEX = 18
-const val ROAMING_PROTOCOL_INDEX = 19
-const val MVNO_TYPE_INDEX = 20
-const val MVNO_MATCH_DATA_INDEX = 21
-const val EDITED_INDEX = 22
-const val USER_EDITABLE_INDEX = 23
-const val CARRIER_ID_INDEX = 24
+const val MMSPROXY_INDEX = 9
+const val MMSPORT_INDEX = 10
+const val AUTH_TYPE_INDEX = 11
+const val TYPE_INDEX = 12
+const val PROTOCOL_INDEX = 13
+const val CARRIER_ENABLED_INDEX = 14
+const val NETWORK_TYPE_INDEX = 15
+const val ROAMING_PROTOCOL_INDEX = 16
+const val EDITED_INDEX = 17
+const val USER_EDITABLE_INDEX = 18
+const val CARRIER_ID_INDEX = 19
 
 val sProjection = arrayOf(
     Telephony.Carriers._ID,  // 0
@@ -57,22 +53,17 @@ val sProjection = arrayOf(
     Telephony.Carriers.SERVER,  // 6
     Telephony.Carriers.PASSWORD,  // 7
     Telephony.Carriers.MMSC,  // 8
-    Telephony.Carriers.MCC,  // 9
-    Telephony.Carriers.MNC,  // 10
-    Telephony.Carriers.NUMERIC,  // 11
-    Telephony.Carriers.MMSPROXY,  // 12
-    Telephony.Carriers.MMSPORT,  // 13
-    Telephony.Carriers.AUTH_TYPE,  // 14
-    Telephony.Carriers.TYPE,  // 15
-    Telephony.Carriers.PROTOCOL,  // 16
-    Telephony.Carriers.CARRIER_ENABLED,  // 17
-    Telephony.Carriers.NETWORK_TYPE_BITMASK, // 18
-    Telephony.Carriers.ROAMING_PROTOCOL,  // 19
-    Telephony.Carriers.MVNO_TYPE,  // 20
-    Telephony.Carriers.MVNO_MATCH_DATA,  // 21
-    Telephony.Carriers.EDITED_STATUS,  // 22
-    Telephony.Carriers.USER_EDITABLE,  // 23
-    Telephony.Carriers.CARRIER_ID // 24
+    Telephony.Carriers.MMSPROXY,  // 9
+    Telephony.Carriers.MMSPORT,  // 10
+    Telephony.Carriers.AUTH_TYPE,  // 11
+    Telephony.Carriers.TYPE,  // 12
+    Telephony.Carriers.PROTOCOL,  // 13
+    Telephony.Carriers.CARRIER_ENABLED,  // 14
+    Telephony.Carriers.NETWORK_TYPE_BITMASK, // 15
+    Telephony.Carriers.ROAMING_PROTOCOL,  // 16
+    Telephony.Carriers.EDITED_STATUS,  // 17
+    Telephony.Carriers.USER_EDITABLE,  // 18
+    Telephony.Carriers.CARRIER_ID // 19
 )
 
 const val TAG = "ApnRepository"
@@ -87,7 +78,6 @@ fun getApnDataFromUri(uri: Uri, context: Context): ApnData {
     var apnData = ApnData()
     val contentResolver = context.contentResolver
     val apnProtocolOptions = context.resources.getStringArray(R.array.apn_protocol_entries).toList()
-    val mvnoTypeOptions = context.resources.getStringArray(R.array.mvno_type_entries).toList()
 
     contentResolver.query(
         uri,
@@ -105,8 +95,6 @@ fun getApnDataFromUri(uri: Uri, context: Context): ApnData {
             val server = cursor.getString(SERVER_INDEX)
             val passWord = cursor.getString(PASSWORD_INDEX)
             val mmsc = cursor.getString(MMSC_INDEX)
-            val mcc = cursor.getString(MCC_INDEX)
-            val mnc = cursor.getString(MNC_INDEX)
             val mmsProxy = cursor.getString(MMSPROXY_INDEX)
             val mmsPort = cursor.getString(MMSPORT_INDEX)
             val authType = cursor.getInt(AUTH_TYPE_INDEX)
@@ -116,8 +104,6 @@ fun getApnDataFromUri(uri: Uri, context: Context): ApnData {
                 convertProtocol2Options(cursor.getString(ROAMING_PROTOCOL_INDEX), context)
             val apnEnable = cursor.getInt(CARRIER_ENABLED_INDEX) == 1
             val networkType = cursor.getLong(NETWORK_TYPE_INDEX)
-            val mvnoType = cursor.getString(MVNO_TYPE_INDEX)
-            val mvnoValue = cursor.getString(MVNO_MATCH_DATA_INDEX)
 
             val edited = cursor.getInt(EDITED_INDEX)
             val userEditable = cursor.getInt(USER_EDITABLE_INDEX)
@@ -134,16 +120,12 @@ fun getApnDataFromUri(uri: Uri, context: Context): ApnData {
                 mmsc = mmsc,
                 mmsProxy = mmsProxy,
                 mmsPort = mmsPort,
-                mcc = mcc,
-                mnc = mnc,
                 authType = authType,
                 apnType = apnType,
                 apnProtocol = apnProtocolOptions.indexOf(apnProtocol),
                 apnRoaming = apnProtocolOptions.indexOf(apnRoaming),
                 apnEnable = apnEnable,
                 networkType = networkType,
-                mvnoType = mvnoTypeOptions.indexOf(mvnoType),
-                mvnoValue = mvnoValue,
                 edited = edited,
                 userEditable = userEditable,
                 carrierId = carrierId

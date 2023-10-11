@@ -27,9 +27,7 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
-import android.os.Process;
 import android.os.UserHandle;
-import android.telephony.SubscriptionManager;
 import android.util.ArraySet;
 import android.util.IconDrawableFactory;
 import android.util.Log;
@@ -44,6 +42,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.datausage.lib.AppDataUsageDetailsRepository;
+import com.android.settings.datausage.lib.NetworkTemplates;
 import com.android.settings.datausage.lib.NetworkUsageDetailsData;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.widget.EntityHeaderController;
@@ -118,15 +117,16 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
         mSelectedCycle = (args != null) ? args.getLong(ARG_SELECTED_CYCLE) : 0L;
 
         if (mTemplate == null) {
-            mTemplate = DataUsageUtils.getDefaultTemplate(mContext,
-                    SubscriptionManager.getDefaultDataSubscriptionId());
+            mTemplate = NetworkTemplates.INSTANCE.getDefaultTemplate(mContext);
         }
+        final Activity activity = requireActivity();
+        activity.setTitle(NetworkTemplates.getTitleResId(mTemplate));
         if (mAppItem == null) {
             int uid = (args != null) ? args.getInt(AppInfoBase.ARG_PACKAGE_UID, -1)
                     : getActivity().getIntent().getIntExtra(AppInfoBase.ARG_PACKAGE_UID, -1);
             if (uid == -1) {
                 // TODO: Log error.
-                getActivity().finish();
+                activity.finish();
             } else {
                 addUid(uid);
                 mAppItem = new AppItem(uid);
@@ -138,14 +138,6 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
             }
         }
 
-        if (mAppItem.key > 0 && UserHandle.isApp(mAppItem.key)) {
-            // In case we've been asked data usage for an app, automatically
-            // include data usage of the corresponding SDK sandbox
-            final int appSandboxUid = Process.toSdkSandboxUid(mAppItem.key);
-            if (!mAppItem.uids.get(appSandboxUid)) {
-                mAppItem.addUid(appSandboxUid);
-            }
-        }
         mTotalUsage = findPreference(KEY_TOTAL_USAGE);
         mForegroundUsage = findPreference(KEY_FOREGROUND_USAGE);
         mBackgroundUsage = findPreference(KEY_BACKGROUND_USAGE);

@@ -25,11 +25,13 @@ import com.android.settings.biometrics.fingerprint2.shared.model.FingerEnrollSta
 import com.android.systemui.biometrics.shared.model.FingerprintSensorType
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.combineTransform
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.shareIn
 import kotlinx.coroutines.flow.transform
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -45,7 +47,9 @@ class FingerprintEnrollFindSensorViewModel(
 ) : ViewModel() {
   /** Represents the stream of sensor type. */
   val sensorType: Flow<FingerprintSensorType> =
-    fingerprintEnrollViewModel.sensorType.filterWhenEducationIsShown()
+    fingerprintEnrollViewModel.sensorType
+      .filterWhenEducationIsShown()
+      .shareIn(viewModelScope, SharingStarted.WhileSubscribed(), 1)
   private val _isUdfps: Flow<Boolean> =
     sensorType.map {
       it == FingerprintSensorType.UDFPS_OPTICAL || it == FingerprintSensorType.UDFPS_ULTRASONIC
