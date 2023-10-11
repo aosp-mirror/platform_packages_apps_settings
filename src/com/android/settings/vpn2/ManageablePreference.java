@@ -44,7 +44,12 @@ public abstract class ManageablePreference extends GearPreference {
     int mUserId;
 
     public ManageablePreference(Context context, AttributeSet attrs) {
-        super(context, attrs);
+        this(context, attrs, 0, 0);
+    }
+
+    public ManageablePreference(Context context, AttributeSet attrs,
+            int defStyleAttr, int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
         setPersistent(false);
         setOrder(0);
         setUserId(UserHandle.myUserId());

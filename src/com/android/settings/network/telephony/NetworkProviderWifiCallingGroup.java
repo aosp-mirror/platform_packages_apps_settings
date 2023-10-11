@@ -22,7 +22,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.os.PersistableBundle;
 import android.provider.Settings;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
@@ -314,27 +313,10 @@ public class NetworkProviderWifiCallingGroup extends
     @VisibleForTesting
     protected boolean shouldShowWifiCallingForSub(int subId) {
         if (SubscriptionManager.isValidSubscriptionId(subId)
-                && MobileNetworkUtils.isWifiCallingEnabled(
-                mContext, subId, queryImsState(subId),
-                getPhoneAccountHandleForSubscriptionId(subId))
-                && isWifiCallingAvailableForCarrier(subId)) {
+                && MobileNetworkUtils.isWifiCallingEnabled(mContext, subId, queryImsState(subId))) {
             return true;
         }
         return false;
-    }
-
-    private boolean isWifiCallingAvailableForCarrier(int subId) {
-        boolean isWifiCallingAvailableForCarrier = false;
-        if (mCarrierConfigManager != null) {
-            final PersistableBundle carrierConfig =
-                    mCarrierConfigManager.getConfigForSubId(subId);
-            if (carrierConfig != null) {
-                isWifiCallingAvailableForCarrier = carrierConfig.getBoolean(
-                        CarrierConfigManager.KEY_CARRIER_WFC_IMS_AVAILABLE_BOOL);
-            }
-        }
-        Log.d(TAG, "isWifiCallingAvailableForCarrier:" + isWifiCallingAvailableForCarrier);
-        return isWifiCallingAvailableForCarrier;
     }
 
     @Override

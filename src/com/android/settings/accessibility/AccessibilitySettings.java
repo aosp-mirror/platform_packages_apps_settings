@@ -31,11 +31,13 @@ import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.view.accessibility.AccessibilityManager;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 
 import com.android.internal.accessibility.AccessibilityShortcutController;
+import com.android.internal.accessibility.util.AccessibilityUtils;
 import com.android.internal.content.PackageMonitor;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityUtil.AccessibilityServiceFragmentType;
@@ -43,6 +45,7 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.RestrictedPreference;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.search.SearchIndexableRaw;
 
@@ -61,13 +64,15 @@ public class AccessibilitySettings extends DashboardFragment {
     private static final String CATEGORY_SCREEN_READER = "screen_reader_category";
     private static final String CATEGORY_CAPTIONS = "captions_category";
     private static final String CATEGORY_AUDIO = "audio_category";
+    private static final String CATEGORY_SPEECH = "speech_category";
     private static final String CATEGORY_DISPLAY = "display_category";
-    private static final String CATEGORY_INTERACTION_CONTROL = "interaction_control_category";
     private static final String CATEGORY_DOWNLOADED_SERVICES = "user_installed_services_category";
+    @VisibleForTesting
+    static final String CATEGORY_INTERACTION_CONTROL = "interaction_control_category";
 
     private static final String[] CATEGORIES = new String[]{
             CATEGORY_SCREEN_READER, CATEGORY_CAPTIONS, CATEGORY_AUDIO, CATEGORY_DISPLAY,
-            CATEGORY_INTERACTION_CONTROL, CATEGORY_DOWNLOADED_SERVICES
+            CATEGORY_SPEECH, CATEGORY_INTERACTION_CONTROL, CATEGORY_DOWNLOADED_SERVICES
     };
 
     // Extras passed to sub-fragments.
@@ -87,6 +92,7 @@ public class AccessibilitySettings extends DashboardFragment {
     static final String EXTRA_ANIMATED_IMAGE_RES = "animated_image_res";
     static final String EXTRA_HTML_DESCRIPTION = "html_description";
     static final String EXTRA_TIME_FOR_LOGGING = "start_time_to_log_a11y_tool";
+    static final String EXTRA_METRICS_CATEGORY = "metrics_category";
 
     // Timeout before we update the services if packages are added/removed
     // since the AccessibilityManagerService has to do that processing first
@@ -108,6 +114,11 @@ public class AccessibilitySettings extends DashboardFragment {
     private final PackageMonitor mSettingsPackageMonitor = new PackageMonitor() {
         @Override
         public void onPackageAdded(String packageName, int uid) {
+            sendUpdate();
+        }
+
+        @Override
+        public void onPackageModified(@NonNull String packageName) {
             sendUpdate();
         }
 
@@ -136,7 +147,8 @@ public class AccessibilitySettings extends DashboardFragment {
 
     private final Map<String, PreferenceCategory> mCategoryToPrefCategoryMap =
             new ArrayMap<>();
-    private final Map<Preference, PreferenceCategory> mServicePreferenceToPreferenceCategoryMap =
+    @VisibleForTesting
+    final Map<Preference, PreferenceCategory> mServicePreferenceToPreferenceCategoryMap =
             new ArrayMap<>();
     private final Map<ComponentName, PreferenceCategory> mPreBundledServiceComponentToCategoryMap =
             new ArrayMap<>();
@@ -146,11 +158,14 @@ public class AccessibilitySettings extends DashboardFragment {
 
     public AccessibilitySettings() {
         // Observe changes to anything that the shortcut can toggle, so we can reflect updates
-        final Collection<AccessibilityShortcutController.ToggleableFrameworkFeatureInfo> features =
+        final Collection<AccessibilityShortcutController.FrameworkFeatureInfo> features =
                 AccessibilityShortcutController.getFrameworkShortcutFeaturesMap().values();
         final List<String> shortcutFeatureKeys = new ArrayList<>(features.size());
-        for (AccessibilityShortcutController.ToggleableFrameworkFeatureInfo feature : features) {
-            shortcutFeatureKeys.add(feature.getSettingKey());
+        for (AccessibilityShortcutController.FrameworkFeatureInfo feature : features) {
+            final String key = feature.getSettingKey();
+            if (key != null) {
+                shortcutFeatureKeys.add(key);
+            }
         }
 
         // Observe changes from accessibility selection menu
@@ -302,6 +317,7 @@ public class AccessibilitySettings extends DashboardFragment {
     void updateAllPreferences() {
         updateSystemPreferences();
         updateServicePreferences();
+        updatePreferencesState();
     }
 
     private void registerContentMonitors() {
@@ -337,8 +353,16 @@ public class AccessibilitySettings extends DashboardFragment {
                 R.array.config_preinstalled_audio_services);
         initializePreBundledServicesMapFromArray(CATEGORY_DISPLAY,
                 R.array.config_preinstalled_display_services);
+        initializePreBundledServicesMapFromArray(CATEGORY_SPEECH,
+                R.array.config_preinstalled_speech_services);
         initializePreBundledServicesMapFromArray(CATEGORY_INTERACTION_CONTROL,
                 R.array.config_preinstalled_interaction_control_services);
+
+        // ACCESSIBILITY_MENU_IN_SYSTEM is a default pre-bundled interaction control service.
+        // If the device opts out of including this service then this is a no-op.
+        mPreBundledServiceComponentToCategoryMap.put(
+                AccessibilityUtils.ACCESSIBILITY_MENU_IN_SYSTEM,
+                mCategoryToPrefCategoryMap.get(CATEGORY_INTERACTION_CONTROL));
 
         final List<RestrictedPreference> preferenceList = getInstalledAccessibilityList(
                 getPrefContext());
@@ -370,6 +394,8 @@ public class AccessibilitySettings extends DashboardFragment {
                 R.array.config_order_interaction_control_services);
         updateCategoryOrderFromArray(CATEGORY_DISPLAY,
                 R.array.config_order_display_services);
+        updateCategoryOrderFromArray(CATEGORY_SPEECH,
+                R.array.config_order_speech_services);
 
         // Need to check each time when updateServicePreferences() called.
         if (downloadedServicesCategory.getPreferenceCount() == 0) {
@@ -378,8 +404,9 @@ public class AccessibilitySettings extends DashboardFragment {
             getPreferenceScreen().addPreference(downloadedServicesCategory);
         }
 
-        // Hide screen reader category if it is empty.
+        // Hide category if it is empty.
         updatePreferenceCategoryVisibility(CATEGORY_SCREEN_READER);
+        updatePreferenceCategoryVisibility(CATEGORY_SPEECH);
     }
 
     private List<RestrictedPreference> getInstalledAccessibilityList(Context context) {
@@ -475,6 +502,13 @@ public class AccessibilitySettings extends DashboardFragment {
      */
     protected void updateSystemPreferences() {
         // Do nothing.
+    }
+
+    private void updatePreferencesState() {
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        getPreferenceControllers().forEach(controllers::addAll);
+        controllers.forEach(controller -> controller.updateState(
+                findPreference(controller.getPreferenceKey())));
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

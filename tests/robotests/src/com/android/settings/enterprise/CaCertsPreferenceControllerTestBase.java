@@ -18,6 +18,8 @@ package com.android.settings.enterprise;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -29,6 +31,7 @@ import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settingslib.utils.StringUtil;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -59,8 +62,10 @@ public abstract class CaCertsPreferenceControllerTestBase {
     public void testUpdateState() {
         final Preference preference = new Preference(mContext, null, 0, 0);
 
-        when(mContext.getResources().getQuantityString(R.plurals.enterprise_privacy_number_ca_certs,
-                10, 10)).thenReturn("10 certs");
+        when(mContext.getResources().getString(R.string.enterprise_privacy_number_ca_certs))
+                .thenReturn("# certs");
+        when(StringUtil.getIcuPluralsString(mContext, 10,
+                R.string.enterprise_privacy_number_ca_certs)).thenReturn("10 certs");
         mockGetNumberOfCaCerts(10);
         mController.updateState(preference);
         assertThat(preference.getSummary()).isEqualTo("10 certs");

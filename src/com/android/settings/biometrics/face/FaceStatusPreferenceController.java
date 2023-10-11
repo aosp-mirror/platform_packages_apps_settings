@@ -87,6 +87,11 @@ public class FaceStatusPreferenceController extends BiometricStatusPreferenceCon
     }
 
     @Override
+    protected boolean isHardwareSupported() {
+        return Utils.hasFaceHardware(mContext);
+    }
+
+    @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
         updateStateInternal();

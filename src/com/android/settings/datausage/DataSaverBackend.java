@@ -27,6 +27,8 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.utils.ThreadUtils;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 
 public class DataSaverBackend {
@@ -43,10 +45,11 @@ public class DataSaverBackend {
     private boolean mDenylistInitialized;
 
     // TODO: Staticize into only one.
-    public DataSaverBackend(Context context) {
-        mContext = context;
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
-        mPolicyManager = NetworkPolicyManager.from(context);
+    public DataSaverBackend(@NotNull Context context) {
+        // TODO(b/246537614):Use fragment context to DataSaverBackend class will caused memory leak
+        mContext = context.getApplicationContext();
+        mMetricsFeatureProvider = FeatureFactory.getFactory(mContext).getMetricsFeatureProvider();
+        mPolicyManager = NetworkPolicyManager.from(mContext);
     }
 
     public void addListener(Listener listener) {

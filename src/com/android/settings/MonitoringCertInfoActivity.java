@@ -33,6 +33,7 @@ import android.provider.Settings;
 import androidx.appcompat.app.AlertDialog;
 
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.utils.StringUtil;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -65,16 +66,17 @@ public class MonitoringCertInfoActivity extends Activity implements OnClickListe
         final int numberOfCertificates = getIntent().getIntExtra(
                 Settings.EXTRA_NUMBER_OF_CERTIFICATES, 1);
         final int titleId = RestrictedLockUtils.getProfileOrDeviceOwner(this, user) != null
-                ? R.plurals.ssl_ca_cert_settings_button // Check certificate
-                : R.plurals.ssl_ca_cert_dialog_title; // Trust or remove certificate
-        final CharSequence title = getResources().getQuantityText(titleId, numberOfCertificates);
+                ? R.string.ssl_ca_cert_settings_button // Check certificate
+                : R.string.ssl_ca_cert_dialog_title; // Trust or remove certificate
+        final CharSequence title = StringUtil.getIcuPluralsString(this, numberOfCertificates,
+                titleId);
         setTitle(title);
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(title);
         builder.setCancelable(true);
-        builder.setPositiveButton(getResources().getQuantityText(
-                R.plurals.ssl_ca_cert_settings_button, numberOfCertificates) , this);
+        builder.setPositiveButton(StringUtil.getIcuPluralsString(this, numberOfCertificates,
+                R.string.ssl_ca_cert_settings_button) , this);
         builder.setNeutralButton(R.string.cancel, null);
         builder.setOnDismissListener(this);
 

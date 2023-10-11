@@ -191,7 +191,7 @@ public class BluetoothDevicesSliceTest {
     public void getSlice_hasAvailableMediaDevice_shouldBuildPrimaryBluetoothAction() {
         mockBluetoothDeviceList(1);
         when(mBluetoothDeviceList.get(0).getDevice().isConnected()).thenReturn(true);
-        doReturn(true).when(mBluetoothDeviceList.get(0)).isConnectedHearingAidDevice();
+        doReturn(true).when(mBluetoothDeviceList.get(0)).isConnectedAshaHearingAidDevice();
         doReturn(mBluetoothDeviceList).when(mBluetoothDevicesSlice).getPairedBluetoothDevices();
 
         mBluetoothDevicesSlice.getSlice();

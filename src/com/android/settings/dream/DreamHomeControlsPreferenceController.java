@@ -17,6 +17,9 @@
 package com.android.settings.dream;
 
 import android.content.Context;
+import android.provider.Settings;
+
+import androidx.preference.Preference;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
@@ -46,12 +49,21 @@ public class DreamHomeControlsPreferenceController extends TogglePreferenceContr
         final boolean supported =
                 mBackend.getSupportedComplications()
                         .contains(DreamBackend.COMPLICATION_TYPE_HOME_CONTROLS);
-        return supported ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+
+        return controlsEnabledOnLockscreen() ? (supported ? AVAILABLE : CONDITIONALLY_UNAVAILABLE)
+                : DISABLED_DEPENDENT_SETTING;
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        preference.setEnabled(getAvailabilityStatus() == AVAILABLE);
+        refreshSummary(preference);
     }
 
     @Override
     public boolean isChecked() {
-        return mBackend.getEnabledComplications().contains(
+        return controlsEnabledOnLockscreen() && mBackend.getEnabledComplications().contains(
                 DreamBackend.COMPLICATION_TYPE_HOME_CONTROLS);
     }
 
@@ -59,6 +71,12 @@ public class DreamHomeControlsPreferenceController extends TogglePreferenceContr
     public boolean setChecked(boolean isChecked) {
         mBackend.setHomeControlsEnabled(isChecked);
         return true;
+    }
+
+    private boolean controlsEnabledOnLockscreen() {
+        return Settings.Secure.getInt(
+                mContext.getContentResolver(),
+                Settings.Secure.LOCKSCREEN_SHOW_CONTROLS, 0) != 0;
     }
 
     @Override

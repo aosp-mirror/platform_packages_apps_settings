@@ -18,8 +18,16 @@ package com.android.settings.biometrics.face;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.hardware.biometrics.SensorProperties;
+import android.hardware.face.FaceManager;
+import android.hardware.face.FaceSensorPropertiesInternal;
+import android.hardware.face.IFaceAuthenticatorsRegisteredCallback;
+import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
@@ -27,18 +35,32 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.utils.AnnotationSpan;
 import com.android.settingslib.HelpUtils;
 
+import java.util.List;
+
 /**
  * Footer for face settings showing the help text and help link.
  */
 public class FaceSettingsFooterPreferenceController extends BasePreferenceController {
-
+    private static final String TAG = "FaceSettingsFooterPreferenceController";
     private static final String ANNOTATION_URL = "url";
-
-    private FaceFeatureProvider mProvider;
+    private final FaceFeatureProvider mProvider;
+    private Preference mPreference;
+    private boolean mIsFaceStrong;
 
     public FaceSettingsFooterPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         mProvider = FeatureFactory.getFactory(context).getFaceFeatureProvider();
+    }
+
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        mPreference = screen.findPreference(mPreferenceKey);
+        if (screen.getContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_FACE)) {
+            addAuthenticatorsRegisteredCallback(screen.getContext());
+        } else {
+            Log.w(TAG, "Not support FEATURE_FACE");
+        }
     }
 
     @Override
@@ -55,11 +77,41 @@ public class FaceSettingsFooterPreferenceController extends BasePreferenceContro
         final AnnotationSpan.LinkInfo linkInfo =
                 new AnnotationSpan.LinkInfo(mContext, ANNOTATION_URL, helpIntent);
 
-        final int footerRes = mProvider.isAttentionSupported(mContext)
-                ? R.string.security_settings_face_settings_footer
-                : R.string.security_settings_face_settings_footer_attention_not_supported;
-
+        int footerRes;
+        boolean isAttentionSupported = mProvider.isAttentionSupported(mContext);
+        if (mIsFaceStrong) {
+            footerRes = isAttentionSupported
+                    ? R.string.security_settings_face_settings_footer_class3
+                    : R.string.security_settings_face_settings_footer_attention_not_supported;
+        } else {
+            footerRes = isAttentionSupported
+                    ? R.string.security_settings_face_settings_footer
+                    : R.string.security_settings_face_settings_footer_class3_attention_not_supported;
+        }
         preference.setTitle(AnnotationSpan.linkify(
                 mContext.getText(footerRes), linkInfo));
+    }
+
+    private void addAuthenticatorsRegisteredCallback(Context context) {
+        final FaceManager faceManager = context.getSystemService(FaceManager.class);
+        faceManager.addAuthenticatorsRegisteredCallback(
+                new IFaceAuthenticatorsRegisteredCallback.Stub() {
+                    @Override
+                    public void onAllAuthenticatorsRegistered(
+                            @NonNull List<FaceSensorPropertiesInternal> sensors) {
+                        if (sensors.isEmpty()) {
+                            Log.e(TAG, "No sensors");
+                            return;
+                        }
+
+                        boolean isFaceStrong = sensors.get(0).sensorStrength
+                                == SensorProperties.STRENGTH_STRONG;
+                        if (mIsFaceStrong == isFaceStrong) {
+                            return;
+                        }
+                        mIsFaceStrong = isFaceStrong;
+                        updateState(mPreference);
+                    }
+                });
     }
 }

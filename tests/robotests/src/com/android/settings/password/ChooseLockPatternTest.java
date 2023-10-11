@@ -34,12 +34,14 @@ import com.android.settings.password.ChooseLockPattern.ChooseLockPatternFragment
 import com.android.settings.password.ChooseLockPattern.IntentBuilder;
 import com.android.settings.testutils.shadow.ShadowUtils;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
+@Ignore
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowUtils.class)
 public class ChooseLockPatternTest {

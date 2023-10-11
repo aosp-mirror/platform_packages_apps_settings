@@ -64,14 +64,6 @@
         settings:searchable="false"
         settings:controller="com.android.settings.sound.HandsFreeProfileOutputPreferenceController"/>
 
-    <!-- Ring volume -->
-    <com.android.settings.notification.VolumeSeekBarPreference
-        android:key="ring_volume"
-        android:icon="@drawable/ic_notifications"
-        android:title="@string/ring_volume_option_title"
-        android:order="-160"
-        settings:controller="com.android.settings.notification.RingVolumePreferenceController"/>
-
     <!-- Separate Ring volume -->
     <com.android.settings.notification.VolumeSeekBarPreference
         android:key="separate_ring_volume"

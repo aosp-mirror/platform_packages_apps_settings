@@ -18,12 +18,12 @@ package com.android.settings.localepicker;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.annotation.Nullable;
 import android.app.Activity;
 import android.app.ApplicationPackageManager;
 import android.app.LocaleConfig;
@@ -44,6 +44,7 @@ import androidx.annotation.ArrayRes;
 
 import com.android.internal.app.LocaleStore;
 import com.android.settings.applications.AppInfoBase;
+import com.android.settings.applications.AppLocaleUtil;
 
 import org.junit.After;
 import org.junit.Before;
@@ -63,6 +64,7 @@ import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.shadows.ShadowPackageManager;
 import org.robolectric.shadows.ShadowTelephonyManager;
+import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,7 +75,6 @@ import java.util.Locale;
         shadows = {
                 AppLocalePickerActivityTest.ShadowApplicationPackageManager.class,
                 AppLocalePickerActivityTest.ShadowResources.class,
-                AppLocalePickerActivityTest.ShadowLocaleConfig.class,
         })
 public class AppLocalePickerActivityTest {
     private static final String TEST_PACKAGE_NAME = "com.android.settings";
@@ -81,6 +82,8 @@ public class AppLocalePickerActivityTest {
 
     @Mock
     LocaleStore.LocaleInfo mLocaleInfo;
+    @Mock
+    private LocaleConfig mLocaleConfig;
 
     @Rule
     public MockitoRule rule = MockitoJUnit.rule();
@@ -92,14 +95,18 @@ public class AppLocalePickerActivityTest {
     public void setUp() {
         mContext = spy(RuntimeEnvironment.application);
         mPackageManager = Shadows.shadowOf(mContext.getPackageManager());
+        mLocaleConfig = mock(LocaleConfig.class);
+        when(mLocaleConfig.getStatus()).thenReturn(LocaleConfig.STATUS_SUCCESS);
+        when(mLocaleConfig.getSupportedLocales()).thenReturn(LocaleList.forLanguageTags("en-US"));
+        ReflectionHelpers.setStaticField(AppLocaleUtil.class, "sLocaleConfig", mLocaleConfig);
     }
 
     @After
     public void tearDown() {
         mPackageManager.removePackage(TEST_PACKAGE_NAME);
+        ReflectionHelpers.setStaticField(AppLocaleUtil.class, "sLocaleConfig", null);
         ShadowResources.setDisAllowPackage(false);
         ShadowApplicationPackageManager.setNoLaunchEntry(false);
-        ShadowLocaleConfig.setStatus(LocaleConfig.STATUS_SUCCESS);
     }
 
     @Test
@@ -113,7 +120,7 @@ public class AppLocalePickerActivityTest {
 
     @Test
     public void launchAppLocalePickerActivity_appNoLocaleConfig_failed() {
-        ShadowLocaleConfig.setStatus(LocaleConfig.STATUS_NOT_SPECIFIED);
+        when(mLocaleConfig.getStatus()).thenReturn(LocaleConfig.STATUS_NOT_SPECIFIED);
 
         ActivityController<TestAppLocalePickerActivity> controller =
                 initActivityController(true);
@@ -270,25 +277,6 @@ public class AppLocalePickerActivityTest {
 
         private static void setDisAllowPackage(boolean disAllowPackage) {
             sDisAllowPackage = disAllowPackage;
-        }
-    }
-
-    @Implements(LocaleConfig.class)
-    public static class ShadowLocaleConfig {
-        private static int sStatus = 0;
-
-        @Implementation
-        public @Nullable LocaleList getSupportedLocales() {
-            return LocaleList.forLanguageTags("en-US");
-        }
-
-        private static void setStatus(@LocaleConfig.Status int status) {
-            sStatus = status;
-        }
-
-        @Implementation
-        public @LocaleConfig.Status int getStatus() {
-            return sStatus;
         }
     }
 }

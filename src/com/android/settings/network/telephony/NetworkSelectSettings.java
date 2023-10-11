@@ -228,10 +228,10 @@ public class NetworkSelectSettings extends DashboardFragment {
 
     @Override
     public void onStop() {
-        super.onStop();
         if (mWaitingForNumberOfScanResults <= 0) {
             stopNetworkQuery();
         }
+        super.onStop();
     }
 
     @Override

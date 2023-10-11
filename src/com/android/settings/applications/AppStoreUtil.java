@@ -24,7 +24,9 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.util.Log;
 
-// This class provides methods that help dealing with app stores.
+import androidx.annotation.Nullable;
+
+/** This class provides methods that help dealing with app stores. */
 public class AppStoreUtil {
     private static final String LOG_TAG = "AppStoreUtil";
 
@@ -34,8 +36,11 @@ public class AppStoreUtil {
                 .setClassName(result.activityInfo.packageName, result.activityInfo.name) : null;
     }
 
-    // Returns the package name of the app that we consider to be the user-visible 'installer'
-    // of given packageName, if one is available.
+    /**
+     * Returns the package name of the app that we consider to be the user-visible 'installer'
+     * of given packageName, if one is available.
+     */
+    @Nullable
     public static String getInstallerPackageName(Context context, String packageName) {
         String installerPackageName;
         try {
@@ -48,7 +53,8 @@ public class AppStoreUtil {
             // so we choose to ignore this when supplied by a non-system app.
             String originatingPackageName = source.getOriginatingPackageName();
             String initiatingPackageName = source.getInitiatingPackageName();
-            if (originatingPackageName != null && initiatingPackageName != null) {
+            if (originatingPackageName != null && initiatingPackageName != null
+                    && !initiatingPackageName.equals("com.android.shell")) {
                 ApplicationInfo ai = context.getPackageManager().getApplicationInfo(
                         initiatingPackageName, 0);
                 if ((ai.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
@@ -62,7 +68,8 @@ public class AppStoreUtil {
         return installerPackageName;
     }
 
-    // Returns a link to the installer app store for a given package name.
+    /** Returns a link to the installer app store for a given package name. */
+    @Nullable
     public static Intent getAppStoreLink(Context context, String installerPackageName,
             String packageName) {
         Intent intent = new Intent(Intent.ACTION_SHOW_APP_INFO)
@@ -75,7 +82,7 @@ public class AppStoreUtil {
         return null;
     }
 
-    // Convenience method that looks up the installerPackageName for you.
+    /** Convenience method that looks up the installerPackageName for you. */
     public static Intent getAppStoreLink(Context context, String packageName) {
       String installerPackageName = getInstallerPackageName(context, packageName);
       return getAppStoreLink(context, installerPackageName, packageName);

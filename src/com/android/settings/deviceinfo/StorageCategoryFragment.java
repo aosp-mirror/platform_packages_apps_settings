@@ -16,6 +16,8 @@
 
 package com.android.settings.deviceinfo;
 
+import static java.util.Collections.EMPTY_LIST;
+
 import android.app.settings.SettingsEnums;
 import android.app.usage.StorageStatsManager;
 import android.content.Context;
@@ -24,18 +26,19 @@ import android.os.Bundle;
 import android.os.UserManager;
 import android.os.storage.StorageManager;
 import android.util.SparseArray;
-import android.view.View;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
+import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 import com.android.settings.deviceinfo.storage.ManageStoragePreferenceController;
-import com.android.settings.deviceinfo.storage.SecondaryUserController;
+import com.android.settings.deviceinfo.storage.NonCurrentUserController;
 import com.android.settings.deviceinfo.storage.StorageAsyncLoader;
 import com.android.settings.deviceinfo.storage.StorageCacheHelper;
 import com.android.settings.deviceinfo.storage.StorageEntry;
@@ -49,7 +52,6 @@ import com.android.settingslib.deviceinfo.StorageManagerVolumeProvider;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Storage Settings main UI is composed by 3 fragments:
@@ -70,6 +72,7 @@ public class StorageCategoryFragment extends DashboardFragment
     private static final String TAG = "StorageCategoryFrag";
     private static final String SELECTED_STORAGE_ENTRY_KEY = "selected_storage_entry_key";
     private static final String SUMMARY_PREF_KEY = "storage_summary";
+    private static final String TARGET_PREFERENCE_GROUP_KEY = "pref_non_current_users";
     private static final int STORAGE_JOB_ID = 0;
     private static final int ICON_JOB_ID = 1;
     private static final int VOLUME_SIZE_JOB_ID = 2;
@@ -81,7 +84,7 @@ public class StorageCategoryFragment extends DashboardFragment
     private SparseArray<StorageAsyncLoader.StorageResult> mAppsResult;
 
     private StorageItemPreferenceController mPreferenceController;
-    private List<AbstractPreferenceController> mSecondaryUsers;
+    private List<NonCurrentUserController> mNonCurrentUsers;
     private boolean mIsWorkProfile;
     private int mUserId;
     private boolean mIsLoadedFromCache;
@@ -98,9 +101,9 @@ public class StorageCategoryFragment extends DashboardFragment
             return;
         }
 
-        // To prevent flicker, hides secondary users preference.
+        // To prevent flicker, hides non-current users preference.
         // onReceivedSizes will set it visible for private storage.
-        setSecondaryUsersVisible(false);
+        setNonCurrentUsersVisible(false);
 
         if (!mSelectedStorageEntry.isMounted()) {
             // Set null volume to hide category stats.
@@ -150,8 +153,8 @@ public class StorageCategoryFragment extends DashboardFragment
             if (mSelectedStorageEntry != null) {
                 refreshUi(mSelectedStorageEntry);
             }
-            updateSecondaryUserControllers(mSecondaryUsers, mAppsResult);
-            setSecondaryUsersVisible(true);
+            updateNonCurrentUserControllers(mNonCurrentUsers, mAppsResult);
+            setNonCurrentUsersVisible(true);
         }
     }
 
@@ -206,9 +209,7 @@ public class StorageCategoryFragment extends DashboardFragment
             return;
         }
 
-        if (getView().findViewById(R.id.loading_container).getVisibility() == View.VISIBLE) {
-            setLoading(false /* loading */, true /* animate */);
-        }
+        setLoading(false /* loading */, false /* animate */);
 
         final long privateUsedBytes = mStorageInfo.totalBytes - mStorageInfo.freeBytes;
         mPreferenceController.setVolume(mSelectedStorageEntry.getVolumeInfo());
@@ -217,22 +218,19 @@ public class StorageCategoryFragment extends DashboardFragment
         // Cache total size infor and used size info
         mStorageCacheHelper
                 .cacheTotalSizeAndTotalUsedSize(mStorageInfo.totalBytes, privateUsedBytes);
-        for (int i = 0, size = mSecondaryUsers.size(); i < size; i++) {
-            final AbstractPreferenceController controller = mSecondaryUsers.get(i);
-            if (controller instanceof SecondaryUserController) {
-                SecondaryUserController userController = (SecondaryUserController) controller;
-                userController.setTotalSize(mStorageInfo.totalBytes);
-            }
+        for (NonCurrentUserController userController : mNonCurrentUsers) {
+            userController.setTotalSize(mStorageInfo.totalBytes);
         }
 
         mPreferenceController.onLoadFinished(mAppsResult, mUserId);
-        updateSecondaryUserControllers(mSecondaryUsers, mAppsResult);
-        setSecondaryUsersVisible(true);
+        updateNonCurrentUserControllers(mNonCurrentUsers, mAppsResult);
+        setNonCurrentUsersVisible(true);
     }
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.SETTINGS_STORAGE_CATEGORY;
+        return mIsWorkProfile ? SettingsEnums.SETTINGS_STORAGE_CATEGORY_WORK :
+                SettingsEnums.SETTINGS_STORAGE_CATEGORY;
     }
 
     @Override
@@ -253,20 +251,18 @@ public class StorageCategoryFragment extends DashboardFragment
                 null /* volume */, new StorageManagerVolumeProvider(sm), mIsWorkProfile);
         controllers.add(mPreferenceController);
 
-        mSecondaryUsers = SecondaryUserController.getSecondaryUserControllers(context,
-                mUserManager, mIsWorkProfile /* isWorkProfileOnly */);
-        controllers.addAll(mSecondaryUsers);
-
+        mNonCurrentUsers = mIsWorkProfile ? EMPTY_LIST :
+                NonCurrentUserController.getNonCurrentUserControllers(context, mUserManager);
+        controllers.addAll(mNonCurrentUsers);
         return controllers;
     }
 
     /**
-     * Updates the secondary user controller sizes.
+     * Updates the non-current user controller sizes.
      */
-    private void updateSecondaryUserControllers(List<AbstractPreferenceController> controllers,
+    private void updateNonCurrentUserControllers(List<NonCurrentUserController> controllers,
             SparseArray<StorageAsyncLoader.StorageResult> stats) {
-        for (int i = 0, size = controllers.size(); i < size; i++) {
-            final AbstractPreferenceController controller = controllers.get(i);
+        for (AbstractPreferenceController controller : controllers) {
             if (controller instanceof StorageAsyncLoader.ResultHandler) {
                 StorageAsyncLoader.ResultHandler userController =
                         (StorageAsyncLoader.ResultHandler) controller;
@@ -294,6 +290,15 @@ public class StorageCategoryFragment extends DashboardFragment
 
     @Override
     public void onLoaderReset(Loader<SparseArray<StorageAsyncLoader.StorageResult>> loader) {
+    }
+
+    @Override
+    public void displayResourceTilesToScreen(PreferenceScreen screen) {
+        final PreferenceGroup group = screen.findPreference(TARGET_PREFERENCE_GROUP_KEY);
+        if (mNonCurrentUsers.isEmpty()) {
+            screen.removePreference(group);
+        }
+        super.displayResourceTilesToScreen(screen);
     }
 
     @VisibleForTesting
@@ -335,13 +340,9 @@ public class StorageCategoryFragment extends DashboardFragment
                         .isQuotaSupported(mSelectedStorageEntry.getFsUuid());
     }
 
-    private void setSecondaryUsersVisible(boolean visible) {
-        final Optional<SecondaryUserController> secondaryUserController = mSecondaryUsers.stream()
-                .filter(controller -> controller instanceof SecondaryUserController)
-                .map(controller -> (SecondaryUserController) controller)
-                .findAny();
-        if (secondaryUserController.isPresent()) {
-            secondaryUserController.get().setPreferenceGroupVisible(visible);
+    private void setNonCurrentUsersVisible(boolean visible) {
+        if (!mNonCurrentUsers.isEmpty()) {
+            mNonCurrentUsers.get(0).setPreferenceGroupVisible(visible);
         }
     }
 
@@ -361,7 +362,7 @@ public class StorageCategoryFragment extends DashboardFragment
         @Override
         public void onLoadFinished(
                 Loader<SparseArray<Drawable>> loader, SparseArray<Drawable> data) {
-            mSecondaryUsers
+            mNonCurrentUsers
                     .stream()
                     .filter(controller -> controller instanceof UserIconLoader.UserIconHandler)
                     .forEach(

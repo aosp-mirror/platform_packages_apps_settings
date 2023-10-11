@@ -25,6 +25,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.internal.annotations.VisibleForTesting;
+import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricStatusPreferenceController;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreference;
@@ -82,6 +83,11 @@ public class CombinedBiometricStatusPreferenceController extends
     @Override
     protected boolean isDeviceSupported() {
         return mCombinedBiometricStatusUtils.isAvailable();
+    }
+
+    @Override
+    protected boolean isHardwareSupported() {
+        return Utils.hasFaceHardware(mContext) || Utils.hasFingerprintHardware(mContext);
     }
 
     @Override

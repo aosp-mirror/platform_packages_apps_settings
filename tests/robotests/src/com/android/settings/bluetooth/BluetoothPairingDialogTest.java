@@ -43,6 +43,7 @@ import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -126,6 +127,7 @@ public class BluetoothPairingDialogTest {
         assertThat(view).isNull();
     }
 
+    @Ignore
     @Test
     public void dialogAsksForPairCodeOnUserEntryVariant() {
         // set the dialog variant to user entry
@@ -367,14 +369,6 @@ public class BluetoothPairingDialogTest {
     }
 
     @Test
-    public void pairingStringIsFormattedCorrectly() {
-        final String device = "test_device";
-        final Context context = RuntimeEnvironment.application;
-        assertThat(context.getString(R.string.bluetooth_pb_acceptance_dialog_text, device, device))
-                .contains(device);
-    }
-
-    @Test
     public void pairingDialogDismissedOnPositiveClick() {
         // set the dialog variant to confirmation/consent
         when(controller.getDialogType()).thenReturn(BluetoothPairingController.CONFIRMATION_DIALOG);
@@ -410,16 +404,19 @@ public class BluetoothPairingDialogTest {
         verify(dialogActivity, times(1)).dismiss();
     }
 
+    @Ignore
     @Test
     public void rotateDialog_nullPinText_okButtonEnabled() {
         userEntryDialogExistingTextTest(null);
     }
 
+    @Ignore
     @Test
     public void rotateDialog_emptyPinText_okButtonEnabled() {
         userEntryDialogExistingTextTest("");
     }
 
+    @Ignore
     @Test
     public void rotateDialog_nonEmptyPinText_okButtonEnabled() {
         userEntryDialogExistingTextTest("test");

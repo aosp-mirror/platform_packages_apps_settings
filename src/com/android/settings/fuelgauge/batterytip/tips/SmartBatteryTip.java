@@ -48,7 +48,7 @@ public class SmartBatteryTip extends BatteryTip {
 
     @Override
     public int getIconId() {
-        return R.drawable.ic_perm_device_information_red_24dp;
+        return R.drawable.ic_perm_device_information_theme;
     }
 
     @Override

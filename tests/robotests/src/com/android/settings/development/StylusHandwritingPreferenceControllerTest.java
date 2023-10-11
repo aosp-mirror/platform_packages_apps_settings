@@ -63,8 +63,8 @@ public class StylusHandwritingPreferenceControllerTest {
     public void onPreferenceChange_settingEnabled_stylusHandwritingShouldBeOn() {
         mController.onPreferenceChange(mPreference, true /* new value */);
 
-        final int mode = Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.STYLUS_HANDWRITING_ENABLED, -1 /* default */);
+        final int mode = Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.STYLUS_HANDWRITING_ENABLED, -1 /* default */);
 
         assertThat(mode).isEqualTo(SETTING_VALUE_ON);
     }
@@ -73,16 +73,16 @@ public class StylusHandwritingPreferenceControllerTest {
     public void onPreferenceChange_settingEnabled_stylusHandwritingShouldBeOff() {
         mController.onPreferenceChange(mPreference, false /* new value */);
 
-        final int mode = Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.STYLUS_HANDWRITING_ENABLED, -1 /* default */);
+        final int mode = Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.STYLUS_HANDWRITING_ENABLED, -1 /* default */);
 
         assertThat(mode).isEqualTo(SETTING_VALUE_OFF);
     }
 
     @Test
     public void updateState_settingDisabled_preferenceShouldNotBeChecked() {
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.STYLUS_HANDWRITING_ENABLED, SETTING_VALUE_OFF);
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.STYLUS_HANDWRITING_ENABLED, SETTING_VALUE_OFF);
         mController.updateState(mPreference);
 
         verify(mPreference).setChecked(false);
@@ -90,22 +90,11 @@ public class StylusHandwritingPreferenceControllerTest {
 
     @Test
     public void updateState_settingEnabled_preferenceShouldBeChecked() {
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.STYLUS_HANDWRITING_ENABLED, SETTING_VALUE_ON);
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.STYLUS_HANDWRITING_ENABLED, SETTING_VALUE_ON);
         mController.updateState(mPreference);
 
         verify(mPreference).setChecked(true);
     }
 
-    @Test
-    public void onDeveloperOptionsSwitchDisabled_shouldDisablePreference() {
-        mController.onDeveloperOptionsSwitchDisabled();
-
-        final int mode = Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.STYLUS_HANDWRITING_ENABLED, -1 /* default */);
-
-        assertThat(mode).isEqualTo(SETTING_VALUE_OFF);
-        verify(mPreference).setChecked(false);
-        verify(mPreference).setEnabled(false);
-    }
 }

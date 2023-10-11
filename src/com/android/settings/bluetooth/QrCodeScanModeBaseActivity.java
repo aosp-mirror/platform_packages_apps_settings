@@ -18,14 +18,20 @@ package com.android.settings.bluetooth;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemProperties;
 
 import androidx.fragment.app.FragmentManager;
 
-import com.android.settingslib.R;
+import com.android.settings.R;
 import com.android.settingslib.core.lifecycle.ObservableActivity;
+
+import com.google.android.setupdesign.util.ThemeHelper;
+import com.google.android.setupdesign.util.ThemeResolver;
 
 public abstract class QrCodeScanModeBaseActivity extends ObservableActivity {
 
+    private static final String THEME_KEY = "setupwizard.theme";
+    private static final String THEME_DEFAULT_VALUE = "SudThemeGlifV3_DayNight";
     protected FragmentManager mFragmentManager;
 
     protected abstract void handleIntent(Intent intent);
@@ -34,7 +40,18 @@ public abstract class QrCodeScanModeBaseActivity extends ObservableActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setTheme(R.style.SudThemeGlifV3_DayNight);
+        int defaultTheme =
+                ThemeHelper.isSetupWizardDayNightEnabled(this)
+                        ? R.style.SudThemeGlifV3_DayNight
+                        : R.style.SudThemeGlifV3_Light;
+        ThemeResolver themeResolver =
+                new ThemeResolver.Builder(ThemeResolver.getDefault())
+                        .setDefaultTheme(defaultTheme)
+                        .setUseDayNight(true)
+                        .build();
+        setTheme(themeResolver.resolve(
+                SystemProperties.get(THEME_KEY, THEME_DEFAULT_VALUE),
+                /* suppressDayNight= */ !ThemeHelper.isSetupWizardDayNightEnabled(this)));
 
         setContentView(R.layout.qrcode_scan_mode_activity);
         mFragmentManager = getSupportFragmentManager();

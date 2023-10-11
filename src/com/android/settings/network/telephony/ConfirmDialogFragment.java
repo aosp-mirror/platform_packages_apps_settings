@@ -17,24 +17,27 @@
 package com.android.settings.network.telephony;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /** Fragment to show a confirm dialog. The caller should implement onConfirmListener. */
 public class ConfirmDialogFragment extends BaseDialogFragment
@@ -136,28 +139,10 @@ public class ConfirmDialogFragment extends BaseDialogFragment
                 dialogMessage.setVisibility(View.VISIBLE);
             }
 
-            final ArrayAdapter<String> arrayAdapterItems = new ArrayAdapter<String>(
-                    getContext(),
-                    R.layout.sim_confirm_dialog_item_multiple_enabled_profiles_supported, list);
             final ListView lvItems = content.findViewById(R.id.carrier_list);
             if (lvItems != null) {
                 lvItems.setVisibility(View.VISIBLE);
-                lvItems.setAdapter(arrayAdapterItems);
-                lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position,
-                            long id) {
-                        Log.i(TAG, "list onClick =" + position);
-                        Log.i(TAG, "list item =" + list.get(position));
-
-                        if (position == list.size() - 1) {
-                            // user select the "cancel" item;
-                            informCaller(false, -1);
-                        } else {
-                            informCaller(true, position);
-                        }
-                    }
-                });
+                lvItems.setAdapter(new ButtonArrayAdapter(getContext(), list));
             }
             final LinearLayout infoOutline = content.findViewById(R.id.info_outline_layout);
             if (infoOutline != null) {
@@ -196,5 +181,33 @@ public class ConfirmDialogFragment extends BaseDialogFragment
             return;
         }
         listener.onConfirm(getTagInCaller(), confirmed, itemPosition);
+    }
+
+    private class ButtonArrayAdapter extends ArrayAdapter<String> {
+        private final List<String> mList;
+
+        ButtonArrayAdapter(Context context, List<String> list) {
+            super(context, R.layout.sim_confirm_dialog_item_multiple_enabled_profiles_supported,
+                    list);
+            mList = list;
+        }
+
+        @NonNull
+        @Override
+        public View getView(int position, View convertView, @NonNull ViewGroup parent) {
+            View view = super.getView(position, convertView, parent);
+            view.setOnClickListener(v -> {
+                Log.i(TAG, "list onClick =" + position);
+                Log.i(TAG, "list item =" + mList.get(position));
+
+                if (position == mList.size() - 1) {
+                    // user select the "cancel" item;
+                    informCaller(false, -1);
+                } else {
+                    informCaller(true, position);
+                }
+            });
+            return view;
+        }
     }
 }

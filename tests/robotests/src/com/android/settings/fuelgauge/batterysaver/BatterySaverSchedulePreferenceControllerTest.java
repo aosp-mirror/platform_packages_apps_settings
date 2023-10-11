@@ -80,17 +80,4 @@ public class BatterySaverSchedulePreferenceControllerTest {
 
         assertThat(mPreference.getSummary()).isEqualTo("Will turn on at 20%");
     }
-
-    @Test
-    public void testPreference_percentageRoutine_summaryRoutine() {
-        // It doesn't matter what this is set to for routine mode
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, TRIGGER_LEVEL);
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Global.AUTOMATIC_POWER_SAVE_MODE, PowerManager.POWER_SAVE_MODE_TRIGGER_DYNAMIC);
-
-        mController.updateState(mPreference);
-
-        assertThat(mPreference.getSummary()).isEqualTo("Based on your routine");
-    }
 }

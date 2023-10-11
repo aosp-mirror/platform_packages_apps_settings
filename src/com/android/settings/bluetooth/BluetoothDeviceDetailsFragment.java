@@ -23,11 +23,15 @@ import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.hardware.input.InputManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.UserManager;
 import android.provider.DeviceConfig;
 import android.text.TextUtils;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
+import android.view.InputDevice;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -36,13 +40,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
+import com.android.settings.connecteddevice.stylus.StylusDevicesController;
 import com.android.settings.core.SettingsUIDeviceConfig;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
+import com.android.settings.inputmethod.KeyboardSettingsPreferenceController;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.slices.BlockingSlicePrefController;
 import com.android.settings.slices.SlicePreferenceController;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
@@ -71,6 +77,8 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
         CachedBluetoothDevice getDevice(String deviceAddress);
 
         LocalBluetoothManager getManager(Context context);
+
+        UserManager getUserManager();
     }
 
     @VisibleForTesting
@@ -82,6 +90,11 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
     LocalBluetoothManager mManager;
     @VisibleForTesting
     CachedBluetoothDevice mCachedDevice;
+
+    @Nullable
+    InputDevice mInputDevice;
+
+    private UserManager mUserManager;
 
     public BluetoothDeviceDetailsFragment() {
         super(DISALLOW_CONFIG_BLUETOOTH);
@@ -105,6 +118,30 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
         return mManager.getCachedDeviceManager().findDevice(remoteDevice);
     }
 
+    @VisibleForTesting
+    UserManager getUserManager() {
+        if (sTestDataFactory != null) {
+            return sTestDataFactory.getUserManager();
+        }
+
+        return getSystemService(UserManager.class);
+    }
+
+    @Nullable
+    @VisibleForTesting
+    InputDevice getInputDevice(Context context) {
+        InputManager im = context.getSystemService(InputManager.class);
+
+        for (int deviceId : im.getInputDeviceIds()) {
+            String btAddress = im.getInputDeviceBluetoothAddress(deviceId);
+
+            if (btAddress != null && btAddress.equals(mDeviceAddress)) {
+                return im.getInputDevice(deviceId);
+            }
+        }
+        return null;
+    }
+
     public static BluetoothDeviceDetailsFragment newInstance(String deviceAddress) {
         Bundle args = new Bundle(1);
         args.putString(KEY_DEVICE_ADDRESS, deviceAddress);
@@ -118,6 +155,13 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
         mDeviceAddress = getArguments().getString(KEY_DEVICE_ADDRESS);
         mManager = getLocalBluetoothManager(context);
         mCachedDevice = getCachedDevice(mDeviceAddress);
+        mUserManager = getUserManager();
+
+        if (FeatureFlagUtils.isEnabled(context,
+                FeatureFlagUtils.SETTINGS_SHOW_STYLUS_PREFERENCES)) {
+            mInputDevice = getInputDevice(context);
+        }
+
         super.onAttach(context);
         if (mCachedDevice == null) {
             // Close this page if device is null with invalid device mac address
@@ -127,13 +171,14 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
         }
         use(AdvancedBluetoothDetailsHeaderController.class).init(mCachedDevice);
         use(LeAudioBluetoothDetailsHeaderController.class).init(mCachedDevice, mManager);
+        use(KeyboardSettingsPreferenceController.class).init(mCachedDevice);
 
         final BluetoothFeatureProvider featureProvider = FeatureFactory.getFactory(
                 context).getBluetoothFeatureProvider();
         final boolean sliceEnabled = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_SETTINGS_UI,
                 SettingsUIDeviceConfig.BT_SLICE_SETTINGS_ENABLED, true);
 
-        use(BlockingSlicePrefController.class).setSliceUri(sliceEnabled
+        use(BlockingPrefWithSliceController.class).setSliceUri(sliceEnabled
                 ? featureProvider.getBluetoothDeviceSettingsUri(mCachedDevice.getDevice())
                 : null);
     }
@@ -178,6 +223,12 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
             };
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setTitleForInputDevice();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
@@ -218,9 +269,12 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        MenuItem item = menu.add(0, EDIT_DEVICE_NAME_ITEM_ID, 0, R.string.bluetooth_rename_button);
-        item.setIcon(com.android.internal.R.drawable.ic_mode_edit);
-        item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        if (!mUserManager.isGuestUser()) {
+            MenuItem item = menu.add(0, EDIT_DEVICE_NAME_ITEM_ID, 0,
+                    R.string.bluetooth_rename_button);
+            item.setIcon(com.android.internal.R.drawable.ic_mode_edit);
+            item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        }
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -252,10 +306,14 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
                     mCachedDevice, lifecycle));
             controllers.add(new BluetoothDetailsMacAddressController(context, this, mCachedDevice,
                     lifecycle));
+            controllers.add(new StylusDevicesController(context, mInputDevice, mCachedDevice,
+                    lifecycle));
             controllers.add(new BluetoothDetailsRelatedToolsController(context, this, mCachedDevice,
                     lifecycle));
             controllers.add(new BluetoothDetailsPairOtherController(context, this, mCachedDevice,
                     lifecycle));
+            controllers.add(new BluetoothDetailsHearingDeviceControlsController(context, this,
+                    mCachedDevice, lifecycle));
         }
         return controllers;
     }
@@ -271,5 +329,15 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
                 + resolvedAttributes.getDimensionPixelSize(1, 0);
         resolvedAttributes.recycle();
         return width;
+    }
+
+    @VisibleForTesting
+    void setTitleForInputDevice() {
+        if (StylusDevicesController.isDeviceStylus(mInputDevice, mCachedDevice)) {
+            // This will override the default R.string.device_details_title "Device Details"
+            // that will show on non-stylus bluetooth devices.
+            // That title is set via the manifest and also from BluetoothDeviceUpdater.
+            getActivity().setTitle(getContext().getString(R.string.stylus_device_details_title));
+        }
     }
 }

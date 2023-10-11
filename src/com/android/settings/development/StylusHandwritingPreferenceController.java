@@ -45,8 +45,8 @@ class StylusHandwritingPreferenceController extends DeveloperOptionsPreferenceCo
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final boolean isEnabled = (Boolean) newValue;
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.STYLUS_HANDWRITING_ENABLED,
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.STYLUS_HANDWRITING_ENABLED,
                 isEnabled ? SETTING_VALUE_ON : SETTING_VALUE_OFF);
 
         return true;
@@ -54,16 +54,18 @@ class StylusHandwritingPreferenceController extends DeveloperOptionsPreferenceCo
 
     @Override
     public void updateState(Preference preference) {
-        final int enable = Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.STYLUS_HANDWRITING_ENABLED, SETTING_VALUE_OFF);
+        final int enable = Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.STYLUS_HANDWRITING_ENABLED,
+                Settings.Secure.STYLUS_HANDWRITING_DEFAULT_VALUE);
         ((SwitchPreference) mPreference).setChecked(enable != SETTING_VALUE_OFF);
     }
 
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
         super.onDeveloperOptionsSwitchDisabled();
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.STYLUS_HANDWRITING_ENABLED, SETTING_VALUE_OFF);
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.STYLUS_HANDWRITING_ENABLED,
+                Settings.Secure.STYLUS_HANDWRITING_DEFAULT_VALUE);
         ((SwitchPreference) mPreference).setChecked(false);
     }
 }

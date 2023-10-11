@@ -16,6 +16,7 @@
 
 package com.android.settings.biometrics;
 
+import static android.hardware.biometrics.BiometricManager.Authenticators.BIOMETRIC_STRONG;
 import static android.provider.Settings.ACTION_BIOMETRIC_ENROLL;
 
 import static androidx.test.espresso.intent.Intents.intended;
@@ -33,7 +34,13 @@ import static org.junit.Assume.assumeTrue;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.hardware.biometrics.SensorProperties;
+import android.hardware.face.FaceManager;
+import android.hardware.face.FaceSensorPropertiesInternal;
+import android.hardware.fingerprint.FingerprintManager;
+import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
 import android.os.UserHandle;
+import android.provider.Settings;
 
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.core.app.ApplicationProvider;
@@ -56,6 +63,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.List;
+
 @RunWith(AndroidJUnit4.class)
 @MediumTest
 public class BiometricEnrollActivityTest {
@@ -67,6 +76,8 @@ public class BiometricEnrollActivityTest {
     private final Context  mContext = ApplicationProvider.getApplicationContext();
     private boolean mHasFace;
     private boolean mHasFingerprint;
+    private boolean mIsFaceStrong;
+    private boolean mIsFingerprintStrong;
 
     @Before
     public void setup() {
@@ -74,6 +85,28 @@ public class BiometricEnrollActivityTest {
         final PackageManager pm = mContext.getPackageManager();
         mHasFingerprint = pm.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT);
         mHasFace = pm.hasSystemFeature(PackageManager.FEATURE_FACE);
+
+        if (mHasFace) {
+            final FaceManager faceManager = mContext.getSystemService(FaceManager.class);
+            final List<FaceSensorPropertiesInternal> faceProperties =
+                    faceManager.getSensorPropertiesInternal();
+            if (!faceProperties.isEmpty()) {
+                final FaceSensorPropertiesInternal faceProp = faceProperties.get(0);
+                mIsFaceStrong = faceProp.sensorStrength == SensorProperties.STRENGTH_STRONG;
+            }
+        }
+
+        if (mHasFingerprint) {
+            final FingerprintManager fingerprintManager = mContext.getSystemService(
+                    FingerprintManager.class);
+            final List<FingerprintSensorPropertiesInternal> fingerProperties =
+                    fingerprintManager.getSensorPropertiesInternal();
+            if (!fingerProperties.isEmpty()) {
+                final FingerprintSensorPropertiesInternal fingerProp = fingerProperties.get(0);
+                mIsFingerprintStrong =
+                        fingerProp.sensorStrength == SensorProperties.STRENGTH_STRONG;
+            }
+        }
     }
 
     @After
@@ -126,6 +159,27 @@ public class BiometricEnrollActivityTest {
             intended(hasComponent(mHasFace && !mHasFingerprint
                     ? FaceEnrollIntroduction.class.getName()
                     : FingerprintEnrollIntroduction.class.getName()));
+        }
+    }
+
+    @Test
+    public void launchWithStrongBiometricAllowed_doNotEnrollWeak() throws Exception {
+        assumeTrue(mHasFace || mHasFingerprint);
+
+        // Allow only strong biometrics
+        Intent intent = getIntent();
+        intent.putExtra(Settings.EXTRA_BIOMETRIC_AUTHENTICATORS_ALLOWED, BIOMETRIC_STRONG);
+
+        try (ActivityScenario<BiometricEnrollActivity> scenario =
+                     ActivityScenario.launch(intent)) {
+            intended(hasComponent(ChooseLockGeneric.class.getName()));
+            if (mIsFaceStrong && mIsFingerprintStrong) {
+                intended(hasExtra(EXTRA_KEY_FOR_BIOMETRICS, true));
+            } else if (mIsFaceStrong) {
+                intended(hasExtra(EXTRA_KEY_FOR_FACE, true));
+            } else if (mIsFingerprintStrong) {
+                intended(hasExtra(EXTRA_KEY_FOR_FINGERPRINT, true));
+            }
         }
     }
 

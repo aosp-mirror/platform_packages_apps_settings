@@ -30,6 +30,8 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.text.TextUtils;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
@@ -46,6 +48,7 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 public class UsageAccessDetails extends AppInfoWithHeader implements OnPreferenceChangeListener,
         OnPreferenceClickListener {
 
+    private static final String TAG = UsageAccessDetails.class.getSimpleName();
     private static final String KEY_APP_OPS_PREFERENCE_SCREEN = "app_ops_preference_screen";
     private static final String KEY_APP_OPS_SETTINGS_SWITCH = "app_ops_settings_switch";
     private static final String KEY_APP_OPS_SETTINGS_DESC = "app_ops_settings_description";
@@ -65,6 +68,11 @@ public class UsageAccessDetails extends AppInfoWithHeader implements OnPreferenc
         super.onCreate(savedInstanceState);
 
         Context context = getActivity();
+        if (TextUtils.equals(mPackageName, context.getPackageName())) {
+            Log.w(TAG, "Unsupported app package.");
+            finish();
+        }
+
         mUsageBridge = new AppStateUsageBridge(context, mState, null);
         mAppOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
         mDpm = context.getSystemService(DevicePolicyManager.class);

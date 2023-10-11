@@ -16,12 +16,10 @@
 
 package com.android.settings.password;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.UserHandle;
-import android.os.UserManager;
 import android.util.Pair;
 import android.widget.Toast;
 
@@ -68,21 +66,12 @@ abstract class SaveChosenLockWorkerBase extends Fragment {
         }
     }
 
-    protected void prepare(LockPatternUtils utils, boolean credentialRequired,
-            boolean requestGatekeeperPassword, int userId) {
+    protected void prepare(LockPatternUtils utils, boolean requestGatekeeperPassword, int userId) {
         mUtils = utils;
         mUserId = userId;
         mRequestGatekeeperPassword = requestGatekeeperPassword;
         // This will be a no-op for non managed profiles.
         mWasSecureBefore = mUtils.isSecure(mUserId);
-
-        Context context = getContext();
-        // If context is null, we're being invoked to change the setCredentialRequiredToDecrypt,
-        // and we made sure that this is the primary user already.
-        if (context == null || UserManager.get(context).getUserInfo(mUserId).isPrimary()) {
-            mUtils.setCredentialRequiredToDecrypt(credentialRequired);
-        }
-
         mFinished = false;
         mResultData = null;
     }

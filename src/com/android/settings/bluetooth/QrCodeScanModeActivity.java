@@ -26,7 +26,7 @@ import android.util.Log;
 
 import androidx.fragment.app.FragmentTransaction;
 
-import com.android.settingslib.R;
+import com.android.settings.R;
 import com.android.settingslib.bluetooth.BluetoothBroadcastUtils;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 

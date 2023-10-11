@@ -28,6 +28,7 @@ import android.os.UserManager;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import com.android.settings.Utils;
 import com.android.settings.testutils.ResourcesUtils;
 
 import org.junit.Before;
@@ -41,6 +42,7 @@ public class CommunalPreferenceControllerTest {
     @Mock
     private UserManager mUserManager;
 
+    private Context mContext;
     private Resources mResources;
     private CommunalPreferenceController mController;
 
@@ -49,33 +51,33 @@ public class CommunalPreferenceControllerTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final Context context = spy(ApplicationProvider.getApplicationContext());
-        mResources = spy(context.getResources());
+        mContext = spy(ApplicationProvider.getApplicationContext());
+        mResources = spy(mContext.getResources());
 
-        mController = new CommunalPreferenceController(context, PREF_KEY);
+        mController = new CommunalPreferenceController(mContext, PREF_KEY);
 
-        when(context.getResources()).thenReturn(mResources);
-        when(context.getSystemService(UserManager.class)).thenReturn(mUserManager);
+        when(mContext.getResources()).thenReturn(mResources);
+        when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
     }
 
     @Test
-    public void isAvailable_communalEnabled_shouldBeTrueForSystemUser() {
+    public void isAvailable_communalEnabled_shouldBeTrueForDockUser() {
         setCommunalEnabled(true);
-        when(mUserManager.isSystemUser()).thenReturn(true);
+        when(Utils.canCurrentUserDream(mContext)).thenReturn(true);
         assertTrue(mController.isAvailable());
     }
 
     @Test
-    public void isAvailable_communalEnabled_shouldBeFalseForNonSystemUser() {
+    public void isAvailable_communalEnabled_shouldBeFalseForNonDockUser() {
         setCommunalEnabled(true);
-        when(mUserManager.isSystemUser()).thenReturn(false);
+        when(Utils.canCurrentUserDream(mContext)).thenReturn(false);
         assertFalse(mController.isAvailable());
     }
 
     @Test
-    public void isAvailable_communalDisabled_shouldBeFalseForSystemUser() {
+    public void isAvailable_communalDisabled_shouldBeFalseForDockUser() {
         setCommunalEnabled(false);
-        when(mUserManager.isSystemUser()).thenReturn(true);
+        when(Utils.canCurrentUserDream(mContext)).thenReturn(true);
         assertFalse(mController.isAvailable());
     }
 

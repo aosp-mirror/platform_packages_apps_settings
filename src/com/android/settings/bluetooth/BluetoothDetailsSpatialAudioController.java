@@ -101,7 +101,6 @@ public class BluetoothDetailsSpatialAudioController extends BluetoothDetailsCont
     @Override
     protected void init(PreferenceScreen screen) {
         mProfilesContainer = screen.findPreference(getPreferenceKey());
-        mProfilesContainer.setLayoutResource(R.layout.preference_bluetooth_profile_category);
         refresh();
     }
 

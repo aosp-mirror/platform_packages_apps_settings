@@ -36,6 +36,7 @@ import android.util.ArraySet;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 
+import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settingslib.widget.FooterPreference;
 
@@ -144,8 +145,9 @@ public class OpenSupportedLinksTest {
                 anyInt());
         doReturn(mCategory).when(mSettings).findPreference(any(CharSequence.class));
         doReturn(mResources).when(mSettings).getResources();
-        when(mResources.getQuantityString(anyInt(), anyInt(), anyInt())).thenReturn(TEST_SUMMARY);
         doReturn(true).when(mCategory).addPreference(any(Preference.class));
+        when(mResources.getString(R.string.app_link_open_always_summary))
+                .thenReturn("App claims to handle # links");
     }
 
     public static class TestFragment extends OpenSupportedLinks {

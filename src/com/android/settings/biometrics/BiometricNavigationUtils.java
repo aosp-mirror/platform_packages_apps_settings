@@ -26,6 +26,9 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.annotation.Nullable;
+
 import com.android.internal.app.UnlaunchableAppActivity;
 import com.android.settings.core.SettingsBaseActivity;
 import com.android.settingslib.RestrictedLockUtils;
@@ -49,15 +52,23 @@ public class BiometricNavigationUtils {
      *
      * @param className The class name of Settings screen to launch.
      * @param extras    Extras to put into the launching {@link Intent}.
+     * @param launcher  Launcher to launch activity if non-quiet mode
      * @return true if the Settings screen is launching.
      */
-    public boolean launchBiometricSettings(Context context, String className, Bundle extras) {
+    public boolean launchBiometricSettings(Context context, String className, Bundle extras,
+            @Nullable ActivityResultLauncher<Intent> launcher) {
         final Intent quietModeDialogIntent = getQuietModeDialogIntent(context);
         if (quietModeDialogIntent != null) {
             context.startActivity(quietModeDialogIntent);
             return false;
         }
-        context.startActivity(getSettingsPageIntent(className, extras));
+
+        final Intent settingsPageIntent = getSettingsPageIntent(className, extras);
+        if (launcher != null) {
+            launcher.launch(settingsPageIntent);
+        } else {
+            context.startActivity(settingsPageIntent);
+        }
         return true;
     }
 

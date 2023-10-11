@@ -17,6 +17,7 @@
 package com.android.settings.accessibility;
 
 import static com.android.internal.accessibility.AccessibilityShortcutController.ACCESSIBILITY_BUTTON_COMPONENT_NAME;
+import static com.android.internal.accessibility.AccessibilityShortcutController.ACCESSIBILITY_HEARING_AIDS_COMPONENT_NAME;
 import static com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_COMPONENT_NAME;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -28,6 +29,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -35,6 +37,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.os.Bundle;
+import android.util.FeatureFlagUtils;
 import android.view.accessibility.AccessibilityManager;
 
 import androidx.fragment.app.FragmentActivity;
@@ -60,6 +63,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/** Tests for {@link AccessibilityDetailsSettingsFragment}. */
 @Config(shadows = ShadowFragment.class)
 @RunWith(RobolectricTestRunner.class)
 public class AccessibilityDetailsSettingsFragmentTest {
@@ -167,6 +171,27 @@ public class AccessibilityDetailsSettingsFragmentTest {
 
         assertStartActivityWithExpectedFragment(mActivity,
                 AccessibilityButtonFragment.class.getName());
+    }
+
+    @Test
+    public void onCreate_hearingAidsComponentName_launchAccessibilityHearingAidsFragment() {
+        FeatureFlagUtils.setEnabled(mContext,
+                FeatureFlagUtils.SETTINGS_ACCESSIBILITY_HEARING_AID_PAGE, true);
+        final Intent intent = new Intent();
+        intent.putExtra(Intent.EXTRA_COMPONENT_NAME,
+                ACCESSIBILITY_HEARING_AIDS_COMPONENT_NAME.flattenToString());
+        doReturn(intent).when(mActivity).getIntent();
+
+        mFragment.onCreate(Bundle.EMPTY);
+
+        assertStartActivityWithExpectedFragment(mActivity,
+                AccessibilityHearingAidsFragment.class.getName());
+    }
+
+    @Test
+    public void getMetricsCategory_returnsCorrectCategory() {
+        assertThat(mFragment.getMetricsCategory()).isEqualTo(
+                SettingsEnums.ACCESSIBILITY_DETAILS_SETTINGS);
     }
 
     private AccessibilityServiceInfo getMockAccessibilityServiceInfo() {
