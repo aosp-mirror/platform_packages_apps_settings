@@ -21,41 +21,37 @@ import static android.provider.Settings.Secure.HIDE_PRIVATESPACE_ENTRY_POINT;
 import android.content.Context;
 import android.provider.Settings;
 
-import com.android.settings.core.TogglePreferenceController;
+import com.android.settings.R;
+import com.android.settings.core.BasePreferenceController;
+
 
 /**
- *  A class that is used to show details page for the setting to hide private space entry point
- *  in All Apps.
+ * Represents the preference controller for (un)hiding Private Space entry point in All Apps and
+ * shows On/Off summary depending upon the settings provider value.
  */
-public class HidePrivateSpaceController extends TogglePreferenceController {
-    private static final int DISABLED_VALUE = 0;
-    private static final int ENABLED_VALUE = 1;
-
-    public HidePrivateSpaceController(Context context, String key) {
-        super(context, key);
+public final class HidePrivateSpaceSummaryController extends BasePreferenceController {
+    public HidePrivateSpaceSummaryController(Context context, String preferenceKey) {
+        super(context, preferenceKey);
     }
 
     @Override
-    @AvailabilityStatus
     public int getAvailabilityStatus() {
         return AVAILABLE;
     }
 
     @Override
-    public boolean isChecked() {
-        return Settings.Secure.getInt(mContext.getContentResolver(),
-                HIDE_PRIVATESPACE_ENTRY_POINT, DISABLED_VALUE) != DISABLED_VALUE;
-    }
-
-    @Override
-    public boolean setChecked(boolean isChecked) {
-        Settings.Secure.putInt(mContext.getContentResolver(), HIDE_PRIVATESPACE_ENTRY_POINT,
-                isChecked ? ENABLED_VALUE : DISABLED_VALUE);
-        return true;
-    }
-
-    @Override
     public int getSliceHighlightMenuRes() {
         return 0;
+    }
+
+    @Override
+    public CharSequence getSummary() {
+        return isHidden() ? mContext.getString(R.string.privatespace_hide_on_summary)
+                : mContext.getString(R.string.privatespace_hide_off_summary);
+    }
+
+    private boolean isHidden() {
+        return Settings.Secure.getInt(mContext.getContentResolver(),
+                HIDE_PRIVATESPACE_ENTRY_POINT, 0) == 1;
     }
 }

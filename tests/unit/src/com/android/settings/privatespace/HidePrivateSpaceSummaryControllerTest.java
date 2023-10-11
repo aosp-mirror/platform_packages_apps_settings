@@ -41,16 +41,12 @@ import org.junit.runner.RunWith;
 
 @RunWith(AndroidJUnit4.class)
 @RequiresFlagsEnabled(Flags.FLAG_ALLOW_PRIVATE_PROFILE)
-public class HidePrivateSpaceControllerTest {
+public class HidePrivateSpaceSummaryControllerTest {
     @Rule
     public final CheckFlagsRule mCheckFlagsRule =
             DeviceFlagsValueProvider.createCheckFlagsRule();
-
-    private static final String KEY = "private_space_hidden";
-    private static final String DETAIL_PAGE_KEY = "private_space_hidden_details";
     private Context mContext;
     private HidePrivateSpaceSummaryController mHidePrivateSpaceSummaryController;
-    private HidePrivateSpaceController mHidePrivateSpaceController;
     private ContentResolver mContentResolver;
     private int mOriginalHiddenValue;
 
@@ -59,9 +55,10 @@ public class HidePrivateSpaceControllerTest {
     public void setUp() {
         mContext = spy(ApplicationProvider.getApplicationContext());
         mContentResolver = mContext.getContentResolver();
-        mHidePrivateSpaceSummaryController = new HidePrivateSpaceSummaryController(mContext, KEY);
-        mHidePrivateSpaceController =
-                new HidePrivateSpaceController(mContext, DETAIL_PAGE_KEY);
+        final String preferenceKey = "private_space_hidden";
+
+        mHidePrivateSpaceSummaryController =
+                new HidePrivateSpaceSummaryController(mContext, preferenceKey);
         mOriginalHiddenValue = Settings.Secure.getInt(mContentResolver,
                 Settings.Secure.HIDE_PRIVATESPACE_ENTRY_POINT, 0);
     }
@@ -75,35 +72,28 @@ public class HidePrivateSpaceControllerTest {
     /** Tests that the controller is always available. */
     @Test
     public void getAvailabilityStatus_returnsAvailable() {
-        assertThat(mHidePrivateSpaceController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+        assertThat(mHidePrivateSpaceSummaryController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
-    /** Tests that hide preference summary displays On when hide toggle is enabled.*/
+    /** Tests that the preference summary displays On when hide is enabled.*/
     @Test
-    public void setChecked_enable_shouldDisplayOn() {
-        Settings.Secure.putInt(mContentResolver, Settings.Secure.HIDE_PRIVATESPACE_ENTRY_POINT,
-                0);
-        assertThat(mHidePrivateSpaceController.isChecked()).isFalse();
+    public void setEnabled_shouldDisplayOn() {
+        Settings.Secure.putInt(mContentResolver, Settings.Secure.HIDE_PRIVATESPACE_ENTRY_POINT, 1);
 
-        mHidePrivateSpaceController.setChecked(true);
-
+        assertThat(Settings.Secure.getInt(mContentResolver,
+                Settings.Secure.HIDE_PRIVATESPACE_ENTRY_POINT, -1)).isEqualTo(1);
         assertThat(mHidePrivateSpaceSummaryController.getSummary().toString())
                 .isEqualTo("On");
-        assertThat(mHidePrivateSpaceController.isChecked()).isTrue();
     }
 
-    /** Tests that hide preference summary displays Off when toggle is disabled.*/
+    /** Tests that the preference summary displays Off when hide is disabled.*/
     @Test
-    public void setChecked_disable_shouldDisplayOff() {
-        Settings.Secure.putInt(mContentResolver, Settings.Secure.HIDE_PRIVATESPACE_ENTRY_POINT,
-                1);
+    public void setDisabled_shouldDisplayOff() {
+        Settings.Secure.putInt(mContentResolver, Settings.Secure.HIDE_PRIVATESPACE_ENTRY_POINT, 0);
 
-        assertThat(mHidePrivateSpaceController.isChecked()).isTrue();
-
-        mHidePrivateSpaceController.setChecked(false);
-
+        assertThat(Settings.Secure.getInt(mContentResolver,
+                Settings.Secure.HIDE_PRIVATESPACE_ENTRY_POINT, -1)).isEqualTo(0);
         assertThat(mHidePrivateSpaceSummaryController.getSummary().toString())
                 .isEqualTo("Off");
-        assertThat(mHidePrivateSpaceController.isChecked()).isFalse();
     }
 }
