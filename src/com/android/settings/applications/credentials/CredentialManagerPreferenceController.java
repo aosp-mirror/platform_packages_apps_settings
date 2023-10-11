@@ -45,7 +45,6 @@ import android.os.UserManager;
 import android.provider.Settings;
 import android.service.autofill.AutofillServiceInfo;
 import android.text.TextUtils;
-import android.util.IconDrawableFactory;
 import android.util.Log;
 import android.view.View;
 import android.widget.Switch;
@@ -98,7 +97,6 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
     private static final int MAX_SELECTABLE_PROVIDERS = 5;
 
     private final PackageManager mPm;
-    private final IconDrawableFactory mIconFactory;
     private final List<CredentialProviderInfo> mServices;
     private final Set<String> mEnabledPackageNames;
     private final @Nullable CredentialManager mCredentialManager;
@@ -119,7 +117,6 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
     public CredentialManagerPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         mPm = context.getPackageManager();
-        mIconFactory = IconDrawableFactory.newInstance(mContext);
         mServices = new ArrayList<>();
         mEnabledPackageNames = new HashSet<>();
         mExecutor = ContextCompat.getMainExecutor(mContext);
@@ -575,8 +572,10 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         pref.setTitle(title);
 
         if (icon != null) {
-            pref.setIcon(Utils.getSafeIcon(icon));
+            pref.setIcon(icon);
         }
+
+        pref.setLayoutResource(R.layout.preference_icon_credman);
 
         if (subtitle != null) {
             pref.setSummary(subtitle);
