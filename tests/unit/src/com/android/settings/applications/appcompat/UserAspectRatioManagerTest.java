@@ -17,7 +17,6 @@
 package com.android.settings.applications.appcompat;
 
 import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_16_9;
-import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_4_3;
 import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_FULLSCREEN;
 import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_SPLIT_SCREEN;
 import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_UNSET;
@@ -243,9 +242,6 @@ public class UserAspectRatioManagerTest {
         assertThat(mUtils.getUserMinAspectRatioEntry(USER_MIN_ASPECT_RATIO_SPLIT_SCREEN,
                 mPackageName)).isEqualTo(ResourcesUtils.getResourcesString(mContext,
                         "user_aspect_ratio_half_screen"));
-        // R,string.user_aspect_ratio_4_3
-        assertThat(mUtils.getUserMinAspectRatioEntry(USER_MIN_ASPECT_RATIO_4_3, mPackageName))
-                .isEqualTo(ResourcesUtils.getResourcesString(mContext, "user_aspect_ratio_4_3"));
         assertThat(mUtils.getUserMinAspectRatioEntry(USER_MIN_ASPECT_RATIO_FULLSCREEN,
                 mPackageName)).isEqualTo(ResourcesUtils.getResourcesString(mContext,
                         "user_aspect_ratio_fullscreen"));
