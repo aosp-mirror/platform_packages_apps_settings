@@ -22,6 +22,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.util.Pair;
 
@@ -43,22 +44,33 @@ public class BatteryDiffEntry {
     static Locale sCurrentLocale = null;
     // Caches app label and icon to improve loading performance.
     static final Map<String, BatteryEntry.NameAndIcon> sResourceCache = new HashMap<>();
+
     // Whether a specific item is valid to launch restriction page?
     @VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
     static final Map<String, Boolean> sValidForRestriction = new HashMap<>();
+
     /** A comparator for {@link BatteryDiffEntry} based on the sorting key. */
     static final Comparator<BatteryDiffEntry> COMPARATOR =
             (a, b) -> Double.compare(b.getSortingKey(), a.getSortingKey());
+
     static final String SYSTEM_APPS_KEY = "A|SystemApps";
+    static final String UNINSTALLED_APPS_KEY = "A|UninstalledApps";
     static final String OTHERS_KEY = "S|Others";
 
     // key -> (label_id, icon_id)
-    private static final Map<String, Pair<Integer, Integer>> SPECIAL_ENTRY_MAP = Map.of(
-            SYSTEM_APPS_KEY,
-            Pair.create(R.string.battery_usage_system_apps, R.drawable.ic_power_system),
-            OTHERS_KEY,
-            Pair.create(R.string.battery_usage_others,
-                    R.drawable.ic_settings_battery_usage_others));
+    private static final Map<String, Pair<Integer, Integer>> SPECIAL_ENTRY_MAP =
+            Map.of(
+                    SYSTEM_APPS_KEY,
+                    Pair.create(
+                            R.string.battery_usage_system_apps, R.drawable.ic_power_system),
+                    UNINSTALLED_APPS_KEY,
+                    Pair.create(
+                            R.string.battery_usage_uninstalled_apps,
+                            R.drawable.ic_battery_uninstalled),
+                    OTHERS_KEY,
+                    Pair.create(
+                            R.string.battery_usage_others,
+                            R.drawable.ic_settings_battery_usage_others));
 
     public long mUid;
     public long mUserId;
@@ -146,8 +158,7 @@ public class BatteryDiffEntry {
     /** Sets the total consumed power in a specific time slot. */
     public void setTotalConsumePower(double totalConsumePower) {
         mTotalConsumePower = totalConsumePower;
-        mPercentage = totalConsumePower == 0
-                ? 0 : (mConsumePower / mTotalConsumePower) * 100.0;
+        mPercentage = totalConsumePower == 0 ? 0 : (mConsumePower / mTotalConsumePower) * 100.0;
         mAdjustPercentageOffset = 0;
     }
 
@@ -173,8 +184,21 @@ public class BatteryDiffEntry {
 
     /** Gets the key for sorting */
     public double getSortingKey() {
-        return getKey() != null && SPECIAL_ENTRY_MAP.containsKey(getKey())
-                ? -1 : getPercentage() + getAdjustPercentageOffset();
+        String key = getKey();
+        if (key == null) {
+            return getPercentage() + getAdjustPercentageOffset();
+        }
+
+        // For special entries, put them to the end of the list.
+        switch (key) {
+            case UNINSTALLED_APPS_KEY:
+            case OTHERS_KEY:
+                return -1;
+            case SYSTEM_APPS_KEY:
+                return -2;
+            default:
+                return getPercentage() + getAdjustPercentageOffset();
+        }
     }
 
     /** Clones a new instance. */
@@ -222,8 +246,8 @@ public class BatteryDiffEntry {
 
     /** Gets the searching package name for UID battery type. */
     public String getPackageName() {
-        final String packageName = mDefaultPackageName != null
-                ? mDefaultPackageName : mLegacyPackageName;
+        final String packageName =
+                mDefaultPackageName != null ? mDefaultPackageName : mLegacyPackageName;
         if (packageName == null) {
             return packageName;
         }
@@ -231,7 +255,8 @@ public class BatteryDiffEntry {
         // From "com.opera.browser:privileged_process0" to "com.opera.browser"
         final String[] splitPackageNames = packageName.split(":");
         return splitPackageNames != null && splitPackageNames.length > 0
-                ? splitPackageNames[0] : packageName;
+                ? splitPackageNames[0]
+                : packageName;
     }
 
     /** Whether this item is valid for users to launch restriction page? */
@@ -253,6 +278,17 @@ public class BatteryDiffEntry {
             default:
                 return false;
         }
+    }
+
+    /** Whether the current BatteryDiffEntry is uninstalled app or not. */
+    public boolean isUninstalledEntry() {
+        final String packageName = getPackageName();
+        if (TextUtils.isEmpty(packageName) || isSystemEntry()) {
+            return false;
+        }
+
+        final int uid = BatteryUtils.getInstance(mContext).getPackageUid(packageName);
+        return uid == BatteryUtils.UID_REMOVED_APPS || uid == BatteryUtils.UID_NULL;
     }
 
     void loadLabelAndIcon() {
@@ -286,8 +322,7 @@ public class BatteryDiffEntry {
             mAppIconId = pair.second;
             mAppIcon = mContext.getDrawable(mAppIconId);
             sResourceCache.put(
-                    getKey(),
-                    new BatteryEntry.NameAndIcon(mAppLabel, mAppIcon, mAppIconId));
+                    getKey(), new BatteryEntry.NameAndIcon(mAppLabel, mAppIcon, mAppIconId));
             return;
         }
 
@@ -301,7 +336,7 @@ public class BatteryDiffEntry {
                     mAppLabel = nameAndIconForUser.mName;
                     sResourceCache.put(
                             getKey(),
-                            new BatteryEntry.NameAndIcon(mAppLabel, mAppIcon, /*iconId=*/ 0));
+                            new BatteryEntry.NameAndIcon(mAppLabel, mAppIcon, /* iconId= */ 0));
                 }
                 break;
             case ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY:
@@ -329,7 +364,7 @@ public class BatteryDiffEntry {
                 if (mAppLabel != null || mAppIcon != null) {
                     sResourceCache.put(
                             getKey(),
-                            new BatteryEntry.NameAndIcon(mAppLabel, mAppIcon, /*iconId=*/ 0));
+                            new BatteryEntry.NameAndIcon(mAppLabel, mAppIcon, /* iconId= */ 0));
                 }
                 break;
         }
@@ -354,16 +389,20 @@ public class BatteryDiffEntry {
         }
         try {
             mValidForRestriction =
-                    mContext.getPackageManager().getPackageInfo(
-                            getPackageName(),
-                            PackageManager.MATCH_DISABLED_COMPONENTS
-                                    | PackageManager.MATCH_ANY_USER
-                                    | PackageManager.GET_SIGNATURES
-                                    | PackageManager.GET_PERMISSIONS)
+                    mContext.getPackageManager()
+                                    .getPackageInfo(
+                                            getPackageName(),
+                                            PackageManager.MATCH_DISABLED_COMPONENTS
+                                                    | PackageManager.MATCH_ANY_USER
+                                                    | PackageManager.GET_SIGNATURES
+                                                    | PackageManager.GET_PERMISSIONS)
                             != null;
         } catch (Exception e) {
-            Log.e(TAG, String.format("getPackageInfo() error %s for package=%s",
-                    e.getCause(), getPackageName()));
+            Log.e(
+                    TAG,
+                    String.format(
+                            "getPackageInfo() error %s for package=%s",
+                            e.getCause(), getPackageName()));
             mValidForRestriction = false;
         }
     }
@@ -371,8 +410,11 @@ public class BatteryDiffEntry {
     private BatteryEntry.NameAndIcon getCache() {
         final Locale locale = Locale.getDefault();
         if (sCurrentLocale != locale) {
-            Log.d(TAG, String.format("clearCache() locale is changed from %s to %s",
-                    sCurrentLocale, locale));
+            Log.d(
+                    TAG,
+                    String.format(
+                            "clearCache() locale is changed from %s to %s",
+                            sCurrentLocale, locale));
             sCurrentLocale = locale;
             clearCache();
         }
@@ -421,8 +463,11 @@ public class BatteryDiffEntry {
             mDefaultPackageName = nameAndIcon.mPackageName;
             if (mDefaultPackageName != null
                     && !mDefaultPackageName.equals(nameAndIcon.mPackageName)) {
-                Log.w(TAG, String.format("found different package: %s | %s",
-                        mDefaultPackageName, nameAndIcon.mPackageName));
+                Log.w(
+                        TAG,
+                        String.format(
+                                "found different package: %s | %s",
+                                mDefaultPackageName, nameAndIcon.mPackageName));
             }
         }
     }
@@ -459,7 +504,8 @@ public class BatteryDiffEntry {
 
     private Drawable getBadgeIconForUser(Drawable icon) {
         final int userId = UserHandle.getUserId((int) mUid);
-        return userId == UserHandle.USER_OWNER ? icon :
-                mUserManager.getBadgedIconForUser(icon, new UserHandle(userId));
+        return userId == UserHandle.USER_OWNER
+                ? icon
+                : mUserManager.getBadgedIconForUser(icon, new UserHandle(userId));
     }
 }
