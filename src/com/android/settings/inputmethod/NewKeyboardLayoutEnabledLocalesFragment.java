@@ -77,6 +77,15 @@ public class NewKeyboardLayoutEnabledLocalesFragment extends DashboardFragment
                         ? currentUserId : Utils.getManagedProfileId(userManager, currentUserId);
                 break;
             }
+            case ProfileSelectFragment.ProfileType.PRIVATE: {
+                // If the user is a private profile user, use currentUserId directly. Or get the
+                // private profile userId instead.
+                newUserId = userManager.isPrivateProfile()
+                        ? currentUserId
+                        : Utils.getCurrentUserIdOfType(
+                                userManager, ProfileSelectFragment.ProfileType.PRIVATE);
+                break;
+            }
             case ProfileSelectFragment.ProfileType.PERSONAL: {
                 final UserHandle primaryUser = userManager.getPrimaryUser().getUserHandle();
                 newUserId = primaryUser.getIdentifier();

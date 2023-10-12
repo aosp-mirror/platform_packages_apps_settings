@@ -63,6 +63,10 @@ public final class BatteryUsageBroadcastReceiver extends BroadcastReceiver {
         }
         final String action = intent.getAction();
         Log.d(TAG, "onReceive:" + action);
+        if (DatabaseUtils.isWorkProfile(context)) {
+            Log.w(TAG, "do nothing for work profile action=" + action);
+            return;
+        }
         DatabaseUtils.recordDateTime(context, action);
         final String fullChargeIntentAction = FeatureFactory.getFeatureFactory()
                 .getPowerUsageFeatureProvider()

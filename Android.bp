@@ -117,11 +117,10 @@ android_library {
         "factory_reset_flags_lib",
         "android.content.pm.flags-aconfig-java",
         "FingerprintManagerInteractor",
+        "notification_flags_lib",
     ],
 
-    plugins: [
-        "androidx.room_room-compiler-plugin",
-    ],
+    plugins: ["androidx.room_room-compiler-plugin"],
 
     errorprone: {
         extra_check_modules: ["//external/nullaway:nullaway_plugin"],

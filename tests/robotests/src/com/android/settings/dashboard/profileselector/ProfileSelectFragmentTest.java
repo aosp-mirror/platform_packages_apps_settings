@@ -19,6 +19,7 @@ package com.android.settings.dashboard.profileselector;
 import static android.content.Intent.EXTRA_USER_ID;
 
 import static com.android.settings.dashboard.profileselector.ProfileSelectFragment.PERSONAL_TAB;
+import static com.android.settings.dashboard.profileselector.ProfileSelectFragment.PRIVATE_TAB;
 import static com.android.settings.dashboard.profileselector.ProfileSelectFragment.WORK_TAB;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -29,6 +30,9 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Flags;
+import android.os.UserHandle;
+import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -38,6 +42,7 @@ import com.android.settings.SettingsPreferenceFragmentTest;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
@@ -60,6 +65,7 @@ public class ProfileSelectFragmentTest {
     private TestProfileSelectFragment mFragment;
     private FragmentActivity mActivity;
     private ShadowUserManager mUserManager;
+    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     @Before
     public void setUp() {
@@ -86,6 +92,14 @@ public class ProfileSelectFragmentTest {
     }
 
     @Test
+    public void getTabId_setArgumentPrivate_setCorrectTab() {
+        final Bundle bundle = new Bundle();
+        bundle.putInt(SettingsActivity.EXTRA_SHOW_FRAGMENT_TAB, PRIVATE_TAB);
+
+        assertThat(mFragment.getTabId(mActivity, bundle)).isEqualTo(PRIVATE_TAB);
+    }
+
+    @Test
     public void getTabId_setArgumentPersonal_setCorrectTab() {
         final Bundle bundle = new Bundle();
         bundle.putInt(SettingsActivity.EXTRA_SHOW_FRAGMENT_TAB, PERSONAL_TAB);
@@ -102,6 +116,16 @@ public class ProfileSelectFragmentTest {
         mUserManager.setManagedProfiles(profileIds);
 
         assertThat(mFragment.getTabId(mActivity, bundle)).isEqualTo(WORK_TAB);
+    }
+
+    @Test
+    public void getTabId_setPrivateId_getCorrectTab() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE);
+        final Bundle bundle = new Bundle();
+        bundle.putInt(EXTRA_USER_ID, 11);
+        mUserManager.setPrivateProfile(11, "private", 0);
+
+        assertThat(mFragment.getTabId(mActivity, bundle)).isEqualTo(PRIVATE_TAB);
     }
 
     @Test
@@ -124,12 +148,120 @@ public class ProfileSelectFragmentTest {
         assertThat(mFragment.getTabId(mActivity, null)).isEqualTo(WORK_TAB);
     }
 
+    @Test
+    public void testGetFragments_whenOnlyPersonal_returnsOneFragment() {
+        mSetFlagsRule.disableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE);
+        Fragment[] fragments = ProfileSelectFragment.getFragments(
+                mContext,
+                null /* bundle */,
+                TestProfileSelectFragment::new,
+                TestProfileSelectFragment::new,
+                TestProfileSelectFragment::new);
+        assertThat(fragments).hasLength(1);
+    }
+
+    @Test
+    public void testGetFragments_whenPrivateDisabled_returnsOneFragment() {
+        Fragment[] fragments = ProfileSelectFragment.getFragments(
+                mContext,
+                null /* bundle */,
+                TestProfileSelectFragment::new,
+                TestProfileSelectFragment::new,
+                TestProfileSelectFragment::new,
+                new ProfileSelectFragment.PrivateSpaceInfoProvider() {
+                    @Override
+                    public boolean isPrivateSpaceLocked(Context context) {
+                        return true;
+                    }
+                },
+                new ProfileSelectFragment.ManagedProfileInfoProvider() {
+                    @Override
+                    public UserHandle getManagedProfile(Context context) {
+                        return null;
+                    }
+                });
+        assertThat(fragments).hasLength(1);
+    }
+
+    @Test
+    public void testGetFragments_whenPrivateEnabled_returnsTwoFragments() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE);
+        Fragment[] fragments = ProfileSelectFragment.getFragments(
+                mContext,
+                null /* bundle */,
+                TestProfileSelectFragment::new,
+                TestProfileSelectFragment::new,
+                TestProfileSelectFragment::new,
+                new ProfileSelectFragment.PrivateSpaceInfoProvider() {
+                    @Override
+                    public boolean isPrivateSpaceLocked(Context context) {
+                        return false;
+                    }
+                },
+                new ProfileSelectFragment.ManagedProfileInfoProvider() {
+                    @Override
+                    public UserHandle getManagedProfile(Context context) {
+                        return null;
+                    }
+                });
+        assertThat(fragments).hasLength(2);
+    }
+
+    @Test
+    public void testGetFragments_whenManagedProfile_returnsTwoFragments() {
+        mSetFlagsRule.disableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE);
+        Fragment[] fragments = ProfileSelectFragment.getFragments(
+                mContext,
+                null /* bundle */,
+                TestProfileSelectFragment::new,
+                TestProfileSelectFragment::new,
+                TestProfileSelectFragment::new,
+                new ProfileSelectFragment.PrivateSpaceInfoProvider() {
+                    @Override
+                    public boolean isPrivateSpaceLocked(Context context) {
+                        return false;
+                    }
+                },
+                new ProfileSelectFragment.ManagedProfileInfoProvider() {
+                    @Override
+                    public UserHandle getManagedProfile(Context context) {
+                        return new UserHandle(123);
+                    }
+                });
+        assertThat(fragments).hasLength(2);
+    }
+
+    @Test
+    public void testGetFragments_whenAllProfiles_returnsThreeFragments() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE);
+        Fragment[] fragments = ProfileSelectFragment.getFragments(
+                mContext,
+                null /* bundle */,
+                TestProfileSelectFragment::new,
+                TestProfileSelectFragment::new,
+                TestProfileSelectFragment::new,
+                new ProfileSelectFragment.PrivateSpaceInfoProvider() {
+                    @Override
+                    public boolean isPrivateSpaceLocked(Context context) {
+                        return false;
+                    }
+                },
+                new ProfileSelectFragment.ManagedProfileInfoProvider() {
+                    @Override
+                    public UserHandle getManagedProfile(Context context) {
+                        return new UserHandle(123);
+                    }
+                });
+        assertThat(fragments).hasLength(3);
+    }
+
     public static class TestProfileSelectFragment extends ProfileSelectFragment {
 
         @Override
         public Fragment[] getFragments() {
             return new Fragment[]{
                     new SettingsPreferenceFragmentTest.TestFragment(), //0
+                    new SettingsPreferenceFragmentTest.TestFragment(),
                     new SettingsPreferenceFragmentTest.TestFragment()
             };
         }

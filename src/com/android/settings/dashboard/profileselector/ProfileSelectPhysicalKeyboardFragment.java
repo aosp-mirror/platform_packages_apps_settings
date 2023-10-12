@@ -51,22 +51,11 @@ public final class ProfileSelectPhysicalKeyboardFragment extends ProfileSelectFr
 
     @Override
     public Fragment[] getFragments() {
-        final Bundle personalOnly = new Bundle();
-        personalOnly.putInt(EXTRA_PROFILE, ProfileType.PERSONAL);
-        final Fragment personalFragment = new NewKeyboardLayoutEnabledLocalesFragment();
-        personalOnly.putParcelable(
-                Settings.EXTRA_INPUT_DEVICE_IDENTIFIER, mInputDeviceIdentifier);
-        personalFragment.setArguments(personalOnly);
-
-        final Bundle workOnly = new Bundle();
-        workOnly.putInt(EXTRA_PROFILE, ProfileType.WORK);
-        final Fragment workFragment = new NewKeyboardLayoutEnabledLocalesFragment();
-        workOnly.putParcelable(Settings.EXTRA_INPUT_DEVICE_IDENTIFIER, mInputDeviceIdentifier);
-        workFragment.setArguments(workOnly);
-
-        return new Fragment[]{
-                personalFragment,
-                workFragment
-        };
+        return ProfileSelectFragment.getFragments(
+                getContext(),
+                null /* bundle */,
+                NewKeyboardLayoutEnabledLocalesFragment::new,
+                NewKeyboardLayoutEnabledLocalesFragment::new,
+                NewKeyboardLayoutEnabledLocalesFragment::new);
     }
 }
