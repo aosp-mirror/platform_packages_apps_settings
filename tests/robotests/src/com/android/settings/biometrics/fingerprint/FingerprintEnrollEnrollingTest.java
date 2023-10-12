@@ -53,9 +53,6 @@ import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
 import android.os.Bundle;
 import android.os.CancellationSignal;
 import android.os.Vibrator;
-import android.platform.test.annotations.RequiresFlagsDisabled;
-import android.platform.test.flag.junit.CheckFlagsRule;
-import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.view.Display;
 import android.view.Surface;
 import android.view.View;
@@ -65,9 +62,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.settings.R;
-import com.android.settings.biometrics.fingerprint.feature.SfpsEnrollmentFeatureImpl;
-import com.android.settings.flags.Flags;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.widget.RingProgressBar;
 
@@ -77,7 +71,6 @@ import com.google.android.setupdesign.GlifLayout;
 
 import org.junit.Before;
 import org.junit.Ignore;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -100,8 +93,6 @@ public class FingerprintEnrollEnrollingTest {
     private static final String ENROLL_PROGRESS_COLOR_LIGHT = "#699FF3";
     private static final String ENROLL_PROGRESS_COLOR_DARK = "#7DA7F1";
 
-    @Rule
-    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
 
     @Mock private FingerprintManager mFingerprintManager;
 
@@ -601,23 +592,6 @@ public class FingerprintEnrollEnrollingTest {
         mActivity.configureEnrollmentStage(0 /* lottie */);
 
         assertThat(getLayout().getDescriptionTextView().getVisibility()).isEqualTo(View.GONE);
-    }
-
-    @Test
-    @RequiresFlagsDisabled(Flags.FLAG_SFPS_ENROLL_REFINEMENT)
-    public void testFingerprintFeatureProvider_impl() {
-        // We should always get default implementation when the flag is disabled.
-        assertThat(FeatureFactory.getFeatureFactory().getFingerprintFeatureProvider())
-                .isInstanceOf(FingerprintFeatureProviderImpl.class);
-    }
-
-    @Test
-    @RequiresFlagsDisabled(Flags.FLAG_SFPS_ENROLL_REFINEMENT)
-    public void testFingerprintFeatureProvider_sfpsEnrollmentFeatureImpl() {
-        // We should always get default implementation when the flag is disabled.
-        assertThat(FeatureFactory.getFeatureFactory()
-                .getFingerprintFeatureProvider().getSfpsEnrollmentFeature())
-                .isInstanceOf(SfpsEnrollmentFeatureImpl.class);
     }
 
     private GlifLayout getLayout() {
