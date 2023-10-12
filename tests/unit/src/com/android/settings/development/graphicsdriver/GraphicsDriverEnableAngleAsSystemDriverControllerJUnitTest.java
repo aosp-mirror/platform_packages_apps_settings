@@ -24,6 +24,8 @@ import static com.android.settings.development.graphicsdriver.GraphicsDriverEnab
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.eq;
@@ -471,5 +473,28 @@ public class GraphicsDriverEnableAngleAsSystemDriverControllerJUnitTest {
         // Done with the test, remove the callback
         SystemProperties.removeChangeCallback(propertyChangeSignal1.getCountDownJob());
         SystemProperties.removeChangeCallback(propertyChangeSignal2.getCountDownJob());
+    }
+
+    @Test
+    public void updateState_DeveloperOptionPropertyIsFalse() {
+        // Test that when debug.graphics.angle.developeroption.enable is false:
+        when(mSystemPropertiesMock.getBoolean(eq(PROPERTY_DEBUG_ANGLE_DEVELOPER_OPTION),
+                                              anyBoolean())).thenReturn(false);
+        when(mSystemPropertiesMock.get(eq(PROPERTY_RO_GFX_ANGLE_SUPPORTED), any()))
+                .thenReturn("true");
+
+        // 1. "Enable ANGLE" switch is on, the switch should be enabled.
+        when(mSystemPropertiesMock.get(eq(PROPERTY_PERSISTENT_GRAPHICS_EGL), any()))
+                .thenReturn(ANGLE_DRIVER_SUFFIX);
+        mController.updateState(mPreference);
+        assertTrue(mPreference.isChecked());
+        assertTrue(mPreference.isEnabled());
+
+        // 2. "Enable ANGLE" switch is off, the switch should be disabled.
+        when(mSystemPropertiesMock.get(eq(PROPERTY_PERSISTENT_GRAPHICS_EGL), any()))
+                .thenReturn("");
+        mController.updateState(mPreference);
+        assertFalse(mPreference.isChecked());
+        assertFalse(mPreference.isEnabled());
     }
 }
