@@ -21,7 +21,6 @@ import com.android.settings.accessibility.AccessibilitySearchFeatureProvider
 import com.android.settings.accounts.AccountFeatureProvider
 import com.android.settings.applications.ApplicationFeatureProvider
 import com.android.settings.biometrics.face.FaceFeatureProvider
-import com.android.settings.biometrics.fingerprint.FingerprintFeatureProvider
 import com.android.settings.biometrics2.factory.BiometricsRepositoryProvider
 import com.android.settings.bluetooth.BluetoothFeatureProvider
 import com.android.settings.connecteddevice.fastpair.FastPairFeatureProvider
@@ -105,15 +104,7 @@ abstract class FeatureFactory {
      */
     abstract val bluetoothFeatureProvider: BluetoothFeatureProvider
 
-    /**
-     * Retrieves implementation for Face feature.
-     */
     abstract val faceFeatureProvider: FaceFeatureProvider
-
-    /**
-     * Retrieves implementation for Fingerprint feature.
-     */
-    abstract val fingerprintFeatureProvider: FingerprintFeatureProvider
 
     /**
      * Gets implementation for Biometrics repository provider.
