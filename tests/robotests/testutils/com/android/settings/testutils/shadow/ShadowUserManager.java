@@ -17,6 +17,7 @@
 package com.android.settings.testutils.shadow;
 
 import static android.os.Build.VERSION_CODES.LOLLIPOP;
+import static android.os.UserManager.USER_TYPE_PROFILE_PRIVATE;
 
 import android.annotation.UserIdInt;
 import android.content.pm.UserInfo;
@@ -221,6 +222,10 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
     public void setManagedProfiles(Set<Integer> profileIds) {
         mManagedProfiles.clear();
         mManagedProfiles.addAll(profileIds);
+    }
+
+    public void setPrivateProfile(int id, String name, int flags) {
+        mUserProfileInfos.add(new UserInfo(id, name, null, flags, USER_TYPE_PROFILE_PRIVATE));
     }
 
     public void setUserSwitcherEnabled(boolean userSwitchEnabled) {

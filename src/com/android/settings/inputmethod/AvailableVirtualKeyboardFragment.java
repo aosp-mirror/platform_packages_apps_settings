@@ -84,6 +84,16 @@ public class AvailableVirtualKeyboardFragment extends DashboardFragment
                 newUserAwareContext = context.createContextAsUser(UserHandle.of(newUserId), 0);
                 break;
             }
+            case ProfileSelectFragment.ProfileType.PRIVATE: {
+                // If the user is a private profile user, use currentUserId directly. Or get the
+                // private profile userId instead.
+                newUserId = userManager.isPrivateProfile()
+                        ? currentUserId
+                        : Utils.getCurrentUserIdOfType(
+                                userManager, ProfileSelectFragment.ProfileType.PRIVATE);
+                newUserAwareContext = context.createContextAsUser(UserHandle.of(newUserId), 0);
+                break;
+            }
             case ProfileSelectFragment.ProfileType.PERSONAL: {
                 // Use the parent user of the current user if the current user is profile.
                 final UserHandle currentUser = UserHandle.of(currentUserId);

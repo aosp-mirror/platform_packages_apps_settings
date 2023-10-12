@@ -16,11 +16,13 @@
 
 package com.android.settings.network.apn
 
+import android.content.ContentValues
 import android.content.Context
 import android.net.Uri
 import android.provider.Telephony
 import android.util.Log
 import com.android.settings.R
+import com.android.settingslib.utils.ThreadUtils
 import java.util.Locale
 
 const val NAME_INDEX = 1
@@ -159,6 +161,37 @@ private fun convertProtocol2Options(raw: String, context: Context): String {
             apnProtocolOptions[protocolIndex]
         } catch (e: ArrayIndexOutOfBoundsException) {
             ""
+        }
+    }
+}
+
+fun convertOptions2Protocol(protocolIndex: Int, context: Context): String {
+    val apnProtocolValues = context.resources.getStringArray(R.array.apn_protocol_values).toList()
+
+    return if (protocolIndex == -1) {
+        ""
+    } else {
+        try {
+            apnProtocolValues[protocolIndex]
+        } catch (e: ArrayIndexOutOfBoundsException) {
+            ""
+        }
+    }
+}
+
+fun updateApnDataToDatabase(newApn: Boolean, values: ContentValues, context: Context, uriInit: Uri) {
+    ThreadUtils.postOnBackgroundThread {
+        if (newApn) {
+            // Add a new apn to the database
+            val newUri = context.contentResolver.insert(uriInit, values)
+            if (newUri == null) {
+                Log.e(TAG, "Can't add a new apn to database $uriInit")
+            }
+        } else {
+            // Update the existing apn
+            context.contentResolver.update(
+                uriInit, values, null /* where */, null /* selection Args */
+            )
         }
     }
 }

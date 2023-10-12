@@ -6184,6 +6184,8 @@
     <string name="account_settings_menu_auto_sync_personal">Auto-sync personal data</string>
     <!--  Title for menu option to enable global auto-sync of work account data [CHAR LIMIT=30] -->
     <string name="account_settings_menu_auto_sync_work">Auto-sync work data</string>
+    <!--  Title for menu option to enable global auto-sync of private account data [CHAR LIMIT=30] -->
+    <string name="account_settings_menu_auto_sync_private">Auto-sync private data</string>
 
     <!-- Title for option to change data usage cycle day. [CHAR LIMIT=32] -->
     <string name="data_usage_change_cycle">Change cycle\u2026</string>
@@ -8209,6 +8211,20 @@
     <string name="notif_listener_not_migrated">This app doesn\u2019t support enhanced settings</string>
     <string name="notif_listener_more_settings">More settings</string>
     <string name="notif_listener_more_settings_desc">More settings are available inside this app</string>
+
+    <!-- Title for Polite Notifications setting  [CHAR LIMIT=30]-->
+    <string name="notification_polite_title">Notification cooldown</string>
+    <string name="notification_polite_all_apps">Apply cooldown to all notifications</string>
+    <string name="notification_polite_all_apps_summary">Gradually lower the notification volume when you get many successive notifications from the same app</string>
+    <string name="notification_polite_conversations">Apply cooldown to conversations</string>
+    <string name="notification_polite_conversations_summary">Gradually lower the notification volume when you get many messages from the same chat within a short period of time</string>
+    <string name="notification_polite_disabled">Don\'t use notification cooldown</string>
+    <string name="notification_polite_disabled_summary">Never lower notification volume, regardless of the amount of successive notifications from the same app</string>
+    <string name="notification_polite_vibrate_unlocked">Vibrate when unlocked</string>
+    <string name="notification_polite_vibrate_unlocked_summary">Only vibrate when screen is unlocked</string>
+    <string name="notification_polite_work">Apply to work profiles</string>
+    <string name="notification_polite_work_summary">Apply the notification cooldown settings from your personal profile to your work profile</string>
+
 
     <!-- Title for managing VR (virtual reality) helper services. [CHAR LIMIT=50] -->
     <string name="vr_listeners_title">VR helper services</string>

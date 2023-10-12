@@ -626,17 +626,20 @@ public final class DataProcessor {
             final List<BatteryHistEntry> batteryHistEntryList,
             final @NonNull Set<String> systemAppsPackageNames,
             final @NonNull Set<Integer> systemAppsUids) {
+        final List<BatteryDiffEntry> appEntries = new ArrayList<>();
+        final List<BatteryDiffEntry> systemEntries = new ArrayList<>();
         if (batteryHistEntryList == null || batteryHistEntryList.isEmpty()) {
             Log.w(TAG, "batteryHistEntryList is null or empty in generateBatteryDiffData()");
-            return null;
+            return new BatteryDiffData(context, startTimestamp, getCurrentTimeMillis(),
+                    /* startBatteryLevel =*/ 100, getCurrentLevel(context), /* screenOnTime= */ 0L,
+                    appEntries, systemEntries, systemAppsPackageNames, systemAppsUids,
+                    /* isAccumulated= */ false);
         }
         final int currentUserId = context.getUserId();
         final UserHandle userHandle =
                 Utils.getManagedProfile(context.getSystemService(UserManager.class));
         final int workProfileUserId =
                 userHandle != null ? userHandle.getIdentifier() : Integer.MIN_VALUE;
-        final List<BatteryDiffEntry> appEntries = new ArrayList<>();
-        final List<BatteryDiffEntry> systemEntries = new ArrayList<>();
 
         for (BatteryHistEntry entry : batteryHistEntryList) {
             final boolean isFromOtherUsers = isConsumedFromOtherUsers(
@@ -669,11 +672,6 @@ public final class DataProcessor {
                     appEntries.add(currentBatteryDiffEntry);
                 }
             }
-        }
-
-        // If there is no data, return null instead of empty item.
-        if (appEntries.isEmpty() && systemEntries.isEmpty()) {
-            return null;
         }
         return new BatteryDiffData(context, startTimestamp, getCurrentTimeMillis(),
                 /* startBatteryLevel =*/ 100, getCurrentLevel(context), /* screenOnTime= */ 0L,
@@ -1318,7 +1316,9 @@ public final class DataProcessor {
                 // We should not get the empty list since we have at least one fake data to record
                 // the battery level and status in each time slot, the empty list is used to
                 // represent there is no enough data to apply interpolation arithmetic.
-                return null;
+                return new BatteryDiffData(context, startTimestamp, endTimestamp, startBatteryLevel,
+                        endBatteryLevel, /* screenOnTime= */ 0L, appEntries, systemEntries,
+                        systemAppsPackageNames, systemAppsUids, /* isAccumulated= */ false);
             }
             allBatteryHistEntryKeys.addAll(slotBatteryHistMap.keySet());
         }
@@ -1458,12 +1458,6 @@ public final class DataProcessor {
                 appEntries.add(currentBatteryDiffEntry);
             }
         }
-
-        // If there is no data, return null instead of empty item.
-        if (appEntries.isEmpty() && systemEntries.isEmpty()) {
-            return null;
-        }
-
         return new BatteryDiffData(context, startTimestamp, endTimestamp, startBatteryLevel,
                 endBatteryLevel, slotScreenOnTime, appEntries, systemEntries,
                 systemAppsPackageNames, systemAppsUids, /* isAccumulated= */ false);
@@ -1563,9 +1557,9 @@ public final class DataProcessor {
             }
         }
 
-        return diffEntryList.isEmpty() ? null : new BatteryDiffData(context, startTimestamp,
-                endTimestamp, startBatteryLevel, endBatteryLevel, totalScreenOnTime, appEntries,
-                systemEntries, /* systemAppsPackageNames= */ new ArraySet<>(),
+        return new BatteryDiffData(context, startTimestamp, endTimestamp, startBatteryLevel,
+                endBatteryLevel, totalScreenOnTime, appEntries, systemEntries,
+                /* systemAppsPackageNames= */ new ArraySet<>(),
                 /* systemAppsUids= */ new ArraySet<>(), /* isAccumulated= */ true);
     }
 

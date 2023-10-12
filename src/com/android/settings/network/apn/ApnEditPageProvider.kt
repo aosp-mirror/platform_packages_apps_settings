@@ -19,6 +19,10 @@ package com.android.settings.network.apn
 import android.net.Uri
 import android.os.Bundle
 import androidx.compose.foundation.layout.Column
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Done
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
@@ -70,7 +74,7 @@ object ApnEditPageProvider : SettingsPageProvider {
         val apnDataCur = remember {
             mutableStateOf(apnDataInit)
         }
-        ApnPage(apnDataCur)
+        ApnPage(apnDataInit, apnDataCur, uriInit)
     }
 
     fun getRoute(
@@ -83,7 +87,7 @@ object ApnEditPageProvider : SettingsPageProvider {
 }
 
 @Composable
-fun ApnPage(apnDataCur: MutableState<ApnData>) {
+fun ApnPage(apnDataInit: ApnData, apnDataCur: MutableState<ApnData>, uriInit: Uri) {
     var apnData by apnDataCur
     val context = LocalContext.current
     val authTypeOptions = stringArrayResource(R.array.apn_auth_entries).toList()
@@ -93,6 +97,11 @@ fun ApnPage(apnDataCur: MutableState<ApnData>) {
     }
     RegularScaffold(
         title = stringResource(id = R.string.apn_edit),
+        actions = {
+            IconButton(onClick = {
+                validateAndSaveApnData(apnDataInit, apnData, context, uriInit)
+            }) { Icon(imageVector = Icons.Outlined.Done, contentDescription = "Save APN") }
+        }
     ) {
         Column() {
             SettingsOutlinedTextField(
@@ -156,7 +165,7 @@ fun ApnPage(apnDataCur: MutableState<ApnData>) {
                 value = apnData.apnType,
                 label = stringResource(R.string.apn_type),
                 enabled = apnData.apnTypeEnabled
-            ) { apnData = apnData.copy(apn = it) } // TODO: updateApnType
+            ) { apnData = apnData.copy(apnType = updateApnType(apnData.copy(apnType = it))) }
             SettingsExposedDropdownMenuBox(
                 label = stringResource(R.string.apn_protocol),
                 options = apnProtocolOptions,
