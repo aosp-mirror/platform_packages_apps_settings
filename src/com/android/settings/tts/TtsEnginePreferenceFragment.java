@@ -165,16 +165,16 @@ public class TtsEnginePreferenceFragment extends RadioButtonPickerFragment {
     private void updateDefaultEngine(String engine) {
         Log.d(TAG, "Updating default synth to : " + engine);
 
-        // Keep track of the previous engine that was being used. So that
-        // we can reuse the previous engine.
-        //
-        // Note that if TextToSpeech#getCurrentEngine is not null, it means at
-        // the very least that we successfully bound to the engine service.
-        mPreviousEngine = mTts.getCurrentEngine();
-
         // Step 1: Shut down the existing TTS engine.
         Log.i(TAG, "Shutting down current tts engine");
         if (mTts != null) {
+            // Keep track of the previous engine that was being used. So that
+            // we can reuse the previous engine.
+            //
+            // Note that if TextToSpeech#getCurrentEngine is not null, it means at
+            // the very least that we successfully bound to the engine service.
+            mPreviousEngine = mTts.getCurrentEngine();
+
             try {
                 mTts.shutdown();
                 mTts = null;
