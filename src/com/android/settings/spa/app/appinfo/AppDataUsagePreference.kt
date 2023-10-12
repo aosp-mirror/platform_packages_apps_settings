@@ -19,8 +19,6 @@ package com.android.settings.spa.app.appinfo
 import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.net.NetworkTemplate
-import android.text.format.DateUtils
-import android.text.format.Formatter
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -114,8 +112,8 @@ private class AppDataUsagePresenter(
         } else {
             context.getString(
                 R.string.data_summary_format,
-                Formatter.formatFileSize(context, appUsageData.usage, Formatter.FLAG_IEC_UNITS),
-                DateUtils.formatDateTime(context, appUsageData.startTime, DATE_FORMAT),
+                appUsageData.formatUsage(context),
+                appUsageData.formatStartDate(context),
             )
         }
     }
@@ -127,9 +125,5 @@ private class AppDataUsagePresenter(
             context,
             AppInfoSettingsProvider.METRICS_CATEGORY,
         )
-    }
-
-    private companion object {
-        const val DATE_FORMAT = DateUtils.FORMAT_SHOW_DATE or DateUtils.FORMAT_ABBREV_MONTH
     }
 }
