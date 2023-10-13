@@ -51,7 +51,7 @@ class DataUsageListHeaderControllerTest {
         override suspend fun loadCycles() = emptyList<NetworkUsageData>()
         override fun getCycles() = emptyList<Range<Long>>()
         override fun getPolicy() = null
-        override suspend fun querySummary(startTime: Long, endTime: Long) = null
+        override suspend fun queryChartData(startTime: Long, endTime: Long) = null
     }
 
     private val header =

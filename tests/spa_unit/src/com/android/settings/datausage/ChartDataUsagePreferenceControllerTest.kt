@@ -43,7 +43,7 @@ class ChartDataUsagePreferenceControllerTest {
         override fun getCycles() = emptyList<Range<Long>>()
         override fun getPolicy() = null
 
-        override suspend fun querySummary(startTime: Long, endTime: Long) = when {
+        override suspend fun queryChartData(startTime: Long, endTime: Long) = when {
             startTime == START_TIME && endTime == END_TIME -> CycleChartDate
             else -> null
         }

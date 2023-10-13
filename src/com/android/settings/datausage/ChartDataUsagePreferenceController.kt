@@ -74,7 +74,7 @@ open class ChartDataUsagePreferenceController(context: Context, preferenceKey: S
         preference.setTime(startTime, endTime)
         lifecycleScope.launch {
             val chartData = withContext(Dispatchers.Default) {
-                repository.querySummary(startTime, endTime)
+                repository.queryChartData(startTime, endTime)
             }
             preference.setNetworkCycleData(chartData)
         }

@@ -16,10 +16,13 @@
 
 package com.android.settings.backup;
 
+import static com.android.settings.localepicker.LocaleNotificationDataManager.LOCALE_NOTIFICATION;
+
 import android.app.backup.BackupAgentHelper;
 import android.app.backup.BackupDataInputStream;
 import android.app.backup.BackupDataOutput;
 import android.app.backup.BackupHelper;
+import android.app.backup.SharedPreferencesBackupHelper;
 import android.os.ParcelFileDescriptor;
 
 import com.android.settings.fuelgauge.BatteryBackupHelper;
@@ -33,12 +36,15 @@ import java.io.IOException;
  * Backup agent for Settings APK
  */
 public class SettingsBackupHelper extends BackupAgentHelper {
+    private static final String PREF_LOCALE_NOTIFICATION = "localeNotificationSharedPref";
 
     @Override
     public void onCreate() {
         super.onCreate();
         addHelper("no-op", new NoOpHelper());
         addHelper(BatteryBackupHelper.TAG, new BatteryBackupHelper(this));
+        addHelper(PREF_LOCALE_NOTIFICATION,
+                new SharedPreferencesBackupHelper(this, LOCALE_NOTIFICATION));
     }
 
     @Override

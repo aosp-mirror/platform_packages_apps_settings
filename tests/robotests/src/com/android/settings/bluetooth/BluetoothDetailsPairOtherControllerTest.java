@@ -20,6 +20,8 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.when;
 
+import android.bluetooth.BluetoothDevice;
+
 import com.android.settings.R;
 import com.android.settings.applications.SpacePreference;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
@@ -65,7 +67,7 @@ public class BluetoothDetailsPairOtherControllerTest extends BluetoothDetailsCon
 
     /** Test the pair other side button title during initialization. */
     @Test
-    public void init_leftSideDevice_pairRightSideButtonTitle() {
+    public void init_deviceIsLeftSide_showPairRightSideTitle() {
         when(mCachedDevice.getDeviceSide()).thenReturn(HearingAidInfo.DeviceSide.SIDE_LEFT);
 
         mController.init(mScreen);
@@ -76,7 +78,7 @@ public class BluetoothDetailsPairOtherControllerTest extends BluetoothDetailsCon
 
     /** Test the pair other side button title during initialization. */
     @Test
-    public void init_rightSideDevice_pairLeftSideButtonTitle() {
+    public void init_deviceIsRightSide_showPairLeftSideTitle() {
         when(mCachedDevice.getDeviceSide()).thenReturn(HearingAidInfo.DeviceSide.SIDE_RIGHT);
 
         mController.init(mScreen);
@@ -87,7 +89,7 @@ public class BluetoothDetailsPairOtherControllerTest extends BluetoothDetailsCon
 
     /** Test the pair other side button visibility during initialization. */
     @Test
-    public void init_isNotConnectedHearingAidDevice_preferenceIsNotVisible() {
+    public void init_deviceIsNotConnectedHearingAid_preferenceIsNotVisible() {
         when(mCachedDevice.isConnectedHearingAidDevice()).thenReturn(false);
 
         mController.init(mScreen);
@@ -99,13 +101,13 @@ public class BluetoothDetailsPairOtherControllerTest extends BluetoothDetailsCon
     /**
      * Test if the controller is available.
      * Conditions:
-     *      1. Hearing aids is not connected
+     *      1. The device is not a connected hearing aid
      * Expected result:
      *      The controller is not available. No need to show pair other side hint for
-     *      not connected device.
+     *      non-hearing aid device or not connected device.
      */
     @Test
-    public void isAvailable_isNotConnectedHearingAidDevice_notAvailable() {
+    public void isAvailable_deviceIsNotConnectedHearingAid_notAvailable() {
         when(mCachedDevice.isConnectedHearingAidDevice()).thenReturn(false);
 
         assertThat(mController.isAvailable()).isFalse();
@@ -114,13 +116,13 @@ public class BluetoothDetailsPairOtherControllerTest extends BluetoothDetailsCon
     /**
      * Test if the controller is available.
      * Conditions:
-     *      1. Monaural hearing aids
+     *      1. Monaural hearing aid
      * Expected result:
      *      The controller is not available. No need to show pair other side hint for
      *      monaural device.
      */
     @Test
-    public void isAvailable_isConnectedHearingAidDevice_isMonaural_notAvailable() {
+    public void isAvailable_deviceIsConnectedHearingAid_isMonaural_notAvailable() {
         when(mCachedDevice.isConnectedHearingAidDevice()).thenReturn(true);
         when(mCachedDevice.getDeviceMode()).thenReturn(HearingAidInfo.DeviceMode.MODE_MONAURAL);
 
@@ -130,18 +132,17 @@ public class BluetoothDetailsPairOtherControllerTest extends BluetoothDetailsCon
     /**
      * Test if the controller is available.
      * Conditions:
-     *      1. Binaural ASHA hearing aids
+     *      1. Binaural hearing aids
      *      2. Sub device is added
-     *      3. Sub device is connected
+     *      3. Sub device is bonded
      * Expected result:
-     *      The controller is not available. Both sides are already paired and connected.
+     *      The controller is not available. Both sides are already paired.
      */
     @Test
-    public void isAvailable_ashaDevice_otherDeviceIsConnected_notAvailable() {
+    public void isAvailable_deviceIsConnectedHearingAid_subDeviceIsBonded_notAvailable() {
         when(mCachedDevice.isConnectedHearingAidDevice()).thenReturn(true);
-        when(mCachedDevice.isConnectedAshaHearingAidDevice()).thenReturn(true);
         when(mCachedDevice.getDeviceMode()).thenReturn(HearingAidInfo.DeviceMode.MODE_BINAURAL);
-        when(mSubCachedDevice.isConnectedAshaHearingAidDevice()).thenReturn(true);
+        when(mSubCachedDevice.getBondState()).thenReturn(BluetoothDevice.BOND_BONDED);
         when(mCachedDevice.getSubDevice()).thenReturn(mSubCachedDevice);
 
         assertThat(mController.isAvailable()).isFalse();
@@ -150,18 +151,17 @@ public class BluetoothDetailsPairOtherControllerTest extends BluetoothDetailsCon
     /**
      * Test if the controller is available.
      * Conditions:
-     *      1. Binaural ASHA hearing aids
+     *      1. Binaural hearing aids
      *      2. Sub device is added
-     *      3. Sub device is not connected
+     *      3. Sub device is not bonded
      * Expected result:
      *      The controller is available. Need to show the hint to pair the other side.
      */
     @Test
-    public void isAvailable_ashaDevice_otherDeviceIsNotConnected_available() {
+    public void isAvailable_deviceIsConnectedHearingAid_subDeviceIsNotBonded_available() {
         when(mCachedDevice.isConnectedHearingAidDevice()).thenReturn(true);
-        when(mCachedDevice.isConnectedAshaHearingAidDevice()).thenReturn(true);
         when(mCachedDevice.getDeviceMode()).thenReturn(HearingAidInfo.DeviceMode.MODE_BINAURAL);
-        when(mSubCachedDevice.isConnectedAshaHearingAidDevice()).thenReturn(false);
+        when(mSubCachedDevice.getBondState()).thenReturn(BluetoothDevice.BOND_NONE);
         when(mCachedDevice.getSubDevice()).thenReturn(mSubCachedDevice);
 
         assertThat(mController.isAvailable()).isTrue();
@@ -170,74 +170,55 @@ public class BluetoothDetailsPairOtherControllerTest extends BluetoothDetailsCon
     /**
      * Test if the controller is available.
      * Conditions:
-     *      1. Binaural ASHA hearing aids
-     *      2. No sub device added
+     *      1. Binaural hearing aids
+     *      2. Member device is added
+     *      3. Member device is bonded
+     * Expected result:
+     *      The controller is not available. Both sides are already paired.
+     */
+    @Test
+    public void isAvailable_deviceIsConnectedHearingAid_memberDeviceIsBonded_notAvailable() {
+        when(mCachedDevice.isConnectedHearingAidDevice()).thenReturn(true);
+        when(mCachedDevice.getDeviceMode()).thenReturn(HearingAidInfo.DeviceMode.MODE_BINAURAL);
+        when(mSubCachedDevice.getBondState()).thenReturn(BluetoothDevice.BOND_BONDED);
+        when(mCachedDevice.getMemberDevice()).thenReturn(Set.of(mSubCachedDevice));
+
+        assertThat(mController.isAvailable()).isFalse();
+    }
+
+    /**
+     * Test if the controller is available.
+     * Conditions:
+     *      1. Binaural hearing aids
+     *      2. Member device is added
+     *      3. Member device is not bonded
      * Expected result:
      *      The controller is available. Need to show the hint to pair the other side.
      */
     @Test
-    public void isAvailable_ashaDevice_otherDeviceIsNotExist_available() {
+    public void isAvailable_deviceIsConnectedHearingAid_memberDeviceIsNotBonded_available() {
         when(mCachedDevice.isConnectedHearingAidDevice()).thenReturn(true);
-        when(mCachedDevice.isConnectedAshaHearingAidDevice()).thenReturn(true);
+        when(mCachedDevice.getDeviceMode()).thenReturn(HearingAidInfo.DeviceMode.MODE_BINAURAL);
+        when(mSubCachedDevice.getBondState()).thenReturn(BluetoothDevice.BOND_NONE);
+        when(mCachedDevice.getMemberDevice()).thenReturn(Set.of(mSubCachedDevice));
+
+        assertThat(mController.isAvailable()).isTrue();
+    }
+
+    /**
+     * Test if the controller is available.
+     * Conditions:
+     *      1. Binaural hearing aids
+     *      2. No sub device is added
+     *      2. No member device is added
+     * Expected result:
+     *      The controller is available. Need to show the hint to pair the other side.
+     */
+    @Test
+    public void isAvailable_deviceIsConnectedHearingAid_otherDeviceIsNotExist_available() {
+        when(mCachedDevice.isConnectedHearingAidDevice()).thenReturn(true);
         when(mCachedDevice.getDeviceMode()).thenReturn(HearingAidInfo.DeviceMode.MODE_BINAURAL);
         when(mCachedDevice.getSubDevice()).thenReturn(null);
-
-        assertThat(mController.isAvailable()).isTrue();
-    }
-
-    /**
-     * Test if the controller is available.
-     * Conditions:
-     *      1. Binaural LE Audio hearing aids
-     *      2. Member device is added
-     *      3. Member device is connected
-     * Expected result:
-     *      The controller is not available. Both sides are already paired and connected.
-     */
-    @Test
-    public void isAvailable_leAudioDevice_otherDeviceIsConnected_notAvailable() {
-        when(mCachedDevice.isConnectedHearingAidDevice()).thenReturn(true);
-        when(mCachedDevice.isConnectedLeAudioHearingAidDevice()).thenReturn(true);
-        when(mCachedDevice.getDeviceMode()).thenReturn(HearingAidInfo.DeviceMode.MODE_BINAURAL);
-        when(mSubCachedDevice.isConnectedLeAudioHearingAidDevice()).thenReturn(true);
-        when(mCachedDevice.getMemberDevice()).thenReturn(Set.of(mSubCachedDevice));
-
-        assertThat(mController.isAvailable()).isFalse();
-    }
-
-    /**
-     * Test if the controller is available.
-     * Conditions:
-     *      1. Binaural LE Audio hearing aids
-     *      2. Member device is added
-     *      3. Member device is not connected
-     * Expected result:
-     *      The controller is available. Need to show the hint to pair the other side.
-     */
-    @Test
-    public void isAvailable_leAudioDevice_otherDeviceIsNotConnected_available() {
-        when(mCachedDevice.isConnectedHearingAidDevice()).thenReturn(true);
-        when(mCachedDevice.isConnectedLeAudioHearingAidDevice()).thenReturn(true);
-        when(mCachedDevice.getDeviceMode()).thenReturn(HearingAidInfo.DeviceMode.MODE_BINAURAL);
-        when(mSubCachedDevice.isConnectedLeAudioHearingAidDevice()).thenReturn(false);
-        when(mCachedDevice.getMemberDevice()).thenReturn(Set.of(mSubCachedDevice));
-
-        assertThat(mController.isAvailable()).isTrue();
-    }
-
-    /**
-     * Test if the controller is available.
-     * Conditions:
-     *      1. Binaural LE Audio hearing aids
-     *      2. No member device added
-     * Expected result:
-     *      The controller is available. Need to show the hint to pair the other side.
-     */
-    @Test
-    public void isAvailable_leAudioDevice_otherDeviceIsNotExist_available() {
-        when(mCachedDevice.isConnectedHearingAidDevice()).thenReturn(true);
-        when(mCachedDevice.isConnectedLeAudioHearingAidDevice()).thenReturn(true);
-        when(mCachedDevice.getDeviceMode()).thenReturn(HearingAidInfo.DeviceMode.MODE_BINAURAL);
         when(mCachedDevice.getMemberDevice()).thenReturn(new HashSet<>());
 
         assertThat(mController.isAvailable()).isTrue();
@@ -245,7 +226,7 @@ public class BluetoothDetailsPairOtherControllerTest extends BluetoothDetailsCon
 
     /** Test the pair other side button title after refreshing. */
     @Test
-    public void refresh_rightSideDevice_pairLeftSideButtonTitle() {
+    public void refresh_deviceIsRightSide_showPairLeftSideTitle() {
         when(mCachedDevice.getDeviceSide()).thenReturn(HearingAidInfo.DeviceSide.SIDE_RIGHT);
         mController.init(mScreen);
 
@@ -257,7 +238,7 @@ public class BluetoothDetailsPairOtherControllerTest extends BluetoothDetailsCon
 
     /** Test the pair other side button visibility after refreshing. */
     @Test
-    public void refresh_isNotConnectedHearingAidDevice_preferenceIsNotVisible() {
+    public void refresh_deviceIsNotConnectedHearingAid_preferenceIsNotVisible() {
         when(mCachedDevice.isConnectedHearingAidDevice()).thenReturn(false);
         mController.init(mScreen);
 

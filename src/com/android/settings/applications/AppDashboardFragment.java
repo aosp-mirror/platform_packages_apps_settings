@@ -20,9 +20,12 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
+import com.android.settings.applications.appcompat.UserAspectRatioAppsPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.widget.PreferenceCategoryController;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
 
@@ -35,11 +38,21 @@ import java.util.List;
 public class AppDashboardFragment extends DashboardFragment {
 
     private static final String TAG = "AppDashboardFragment";
+    private static final String ADVANCED_CATEGORY_KEY = "advanced_category";
+    private static final String ASPECT_RATIO_PREF_KEY = "aspect_ratio_apps";
     private AppsPreferenceController mAppsPreferenceController;
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new AppsPreferenceController(context));
+
+        final UserAspectRatioAppsPreferenceController aspectRatioAppsPreferenceController =
+                new UserAspectRatioAppsPreferenceController(context, ASPECT_RATIO_PREF_KEY);
+        final AdvancedAppsPreferenceCategoryController advancedCategoryController =
+                new AdvancedAppsPreferenceCategoryController(context, ADVANCED_CATEGORY_KEY);
+        advancedCategoryController.setChildren(List.of(aspectRatioAppsPreferenceController));
+        controllers.add(advancedCategoryController);
+
         return controllers;
     }
 
@@ -73,6 +86,11 @@ public class AppDashboardFragment extends DashboardFragment {
         final HibernatedAppsPreferenceController hibernatedAppsPreferenceController =
                 use(HibernatedAppsPreferenceController.class);
         getSettingsLifecycle().addObserver(hibernatedAppsPreferenceController);
+    }
+
+    @VisibleForTesting
+    PreferenceCategoryController getAdvancedAppsPreferenceCategoryController() {
+        return use(AdvancedAppsPreferenceCategoryController.class);
     }
 
     @Override

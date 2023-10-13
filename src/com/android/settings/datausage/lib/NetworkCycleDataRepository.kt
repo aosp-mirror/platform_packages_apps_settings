@@ -23,15 +23,13 @@ import android.net.NetworkTemplate
 import android.text.format.DateUtils
 import android.util.Range
 import com.android.settingslib.NetworkPolicyEditor
-import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
-import kotlinx.coroutines.coroutineScope
+import com.android.settingslib.spa.framework.util.asyncMap
 
 interface INetworkCycleDataRepository {
     suspend fun loadCycles(): List<NetworkUsageData>
     fun getCycles(): List<Range<Long>>
     fun getPolicy(): NetworkPolicy?
-    suspend fun querySummary(startTime: Long, endTime: Long): NetworkCycleChartData?
+    suspend fun queryChartData(startTime: Long, endTime: Long): NetworkCycleChartData?
 }
 
 class NetworkCycleDataRepository(
@@ -45,6 +43,8 @@ class NetworkCycleDataRepository(
 
     override suspend fun loadCycles(): List<NetworkUsageData> =
         getCycles().queryUsage().filter { it.usage > 0 }
+
+    fun loadFirstCycle(): NetworkUsageData? = getCycles().firstOrNull()?.let { queryUsage(it) }
 
     override fun getCycles(): List<Range<Long>> {
         val policy = getPolicy() ?: return queryCyclesAsFourWeeks()
@@ -68,7 +68,7 @@ class NetworkCycleDataRepository(
             getPolicy(networkTemplate)
         }
 
-    override suspend fun querySummary(startTime: Long, endTime: Long): NetworkCycleChartData? {
+    override suspend fun queryChartData(startTime: Long, endTime: Long): NetworkCycleChartData? {
         val usage = networkStatsRepository.querySummaryForDevice(startTime, endTime)
         if (usage > 0L) {
             return NetworkCycleChartData(
@@ -83,17 +83,14 @@ class NetworkCycleDataRepository(
         return null
     }
 
-    private suspend fun List<Range<Long>>.queryUsage(): List<NetworkUsageData> = coroutineScope {
-        map { range ->
-            async {
-                NetworkUsageData(
-                    startTime = range.lower,
-                    endTime = range.upper,
-                    usage = networkStatsRepository.querySummaryForDevice(range.lower, range.upper),
-                )
-            }
-        }.awaitAll()
-    }
+    private suspend fun List<Range<Long>>.queryUsage(): List<NetworkUsageData> =
+        asyncMap { queryUsage(it) }
+
+    fun queryUsage(range: Range<Long>) = NetworkUsageData(
+        startTime = range.lower,
+        endTime = range.upper,
+        usage = networkStatsRepository.querySummaryForDevice(range.lower, range.upper),
+    )
 
     private fun bucketRange(startTime: Long, endTime: Long, bucketSize: Long): List<Range<Long>> {
         val buckets = mutableListOf<Range<Long>>()

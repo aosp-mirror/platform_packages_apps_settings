@@ -195,8 +195,7 @@ open class DataUsageList : DataUsageBaseFragment(), MobileDataEnabledListener.Cl
         lastDisplayedUsageData = usageData
         Log.d(TAG, "showing cycle $usageData")
 
-        val totalPhrase = DataUsageUtils.formatDataUsage(requireContext(), usageData.usage)
-        usageAmount.title = getString(R.string.data_used_template, totalPhrase)
+        usageAmount.title = usageData.getDataUsedString(requireContext())
 
         updateChart(usageData)
         updateApps(usageData)
