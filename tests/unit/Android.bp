@@ -27,7 +27,7 @@ android_test {
         "mockito-target-minus-junit4",
         "platform-test-annotations",
         "platform-test-rules",
-        "truth-prebuilt",
+        "truth",
         "kotlinx_coroutines_test",
         "flag-junit",
         "Settings-testutils2",
@@ -36,7 +36,7 @@ android_test {
     ],
 
     errorprone: {
-        javacflags: ["-Xep:CheckReturnValue:WARN"]
+        javacflags: ["-Xep:CheckReturnValue:WARN"],
     },
     // Include all test java/kotlin files.
     srcs: [

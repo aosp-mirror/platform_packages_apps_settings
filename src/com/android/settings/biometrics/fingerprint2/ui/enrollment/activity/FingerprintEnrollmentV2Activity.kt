@@ -42,6 +42,7 @@ import com.android.settings.biometrics.BiometricEnrollBase.CONFIRM_REQUEST
 import com.android.settings.biometrics.BiometricEnrollBase.RESULT_FINISHED
 import com.android.settings.biometrics.GatekeeperPasswordProvider
 import com.android.settings.biometrics.fingerprint2.domain.interactor.FingerprintManagerInteractorImpl
+import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.fragment.FingerprintEnrollConfirmationV2Fragment
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.fragment.FingerprintEnrollEnrollingV2Fragment
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.fragment.FingerprintEnrollFindSensorV2Fragment
@@ -82,6 +83,7 @@ class FingerprintEnrollmentV2Activity : FragmentActivity() {
   private lateinit var accessibilityViewModel: AccessibilityViewModel
   private lateinit var foldStateViewModel: FoldStateViewModel
   private lateinit var orientationStateViewModel: OrientationStateViewModel
+  private lateinit var fingerprintScrollViewModel: FingerprintScrollViewModel
   private val coroutineDispatcher = Dispatchers.Default
 
   /** Result listener for ChooseLock activity flow. */
@@ -210,8 +212,9 @@ class FingerprintEnrollmentV2Activity : FragmentActivity() {
       )[FingerprintEnrollViewModel::class.java]
 
     // Initialize scroll view model
-    ViewModelProvider(this, FingerprintScrollViewModel.FingerprintScrollViewModelFactory())[
-      FingerprintScrollViewModel::class.java]
+    fingerprintScrollViewModel =
+      ViewModelProvider(this, FingerprintScrollViewModel.FingerprintScrollViewModelFactory())[
+        FingerprintScrollViewModel::class.java]
 
     // Initialize AccessibilityViewModel
     accessibilityViewModel =

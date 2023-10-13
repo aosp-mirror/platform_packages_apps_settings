@@ -31,11 +31,6 @@ import kotlinx.coroutines.launch
 
 private const val TAG = "FingerprintEnrollNavigationViewModel"
 
-/** Interface to validate a gatekeeper hat */
-interface Validator {
-  fun validateGateKeeper(challenge: Long?): Boolean
-}
-
 /**
  * The [EnrollType] for fingerprint enrollment indicates information on how the flow should behave.
  */
@@ -56,7 +51,6 @@ object Unicorn : EnrollType()
  */
 class FingerprintEnrollNavigationViewModel(
   private val dispatcher: CoroutineDispatcher,
-  private val validator: Validator,
   private val fingerprintManagerInteractor: FingerprintManagerInteractor,
   private val gatekeeperViewModel: FingerprintGatekeeperViewModel,
   private val canSkipConfirm: Boolean
@@ -145,11 +139,6 @@ class FingerprintEnrollNavigationViewModel(
 
       return FingerprintEnrollNavigationViewModel(
         backgroundDispatcher,
-        object : Validator {
-          override fun validateGateKeeper(challenge: Long?): Boolean {
-            return challenge != null
-          }
-        },
         fingerprintManagerInteractor,
         fingerprintGatekeeperViewModel,
         canSkipConfirm,

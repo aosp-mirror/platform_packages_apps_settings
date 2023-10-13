@@ -653,6 +653,9 @@ public class WifiConfigController implements TextWatcher,
             case AccessPoint.SECURITY_EAP:
             case AccessPoint.SECURITY_EAP_WPA3_ENTERPRISE:
             case AccessPoint.SECURITY_EAP_SUITE_B:
+                if (mEapMethodSpinner == null || mPhase2Spinner == null) {
+                    break;
+                }
                 if (mAccessPointSecurity == AccessPoint.SECURITY_EAP_SUITE_B) {
                     // allowedSuiteBCiphers will be set according to certificate type
                     config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_EAP_SUITE_B);

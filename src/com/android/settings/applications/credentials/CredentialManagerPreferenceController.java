@@ -45,7 +45,6 @@ import android.os.UserManager;
 import android.provider.Settings;
 import android.service.autofill.AutofillServiceInfo;
 import android.text.TextUtils;
-import android.util.IconDrawableFactory;
 import android.util.Log;
 import android.view.View;
 import android.widget.Switch;
@@ -96,9 +95,11 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
     private static final String ALTERNATE_INTENT = "android.settings.SYNC_SETTINGS";
     private static final String PRIMARY_INTENT = "android.settings.CREDENTIAL_PROVIDER";
     private static final int MAX_SELECTABLE_PROVIDERS = 5;
+    private static final String SETTINGS_ACTIVITY_INTENT_ACTION = "android.intent.action.MAIN";
+    private static final String SETTINGS_ACTIVITY_INTENT_CATEGORY =
+            "android.intent.category.LAUNCHER";
 
     private final PackageManager mPm;
-    private final IconDrawableFactory mIconFactory;
     private final List<CredentialProviderInfo> mServices;
     private final Set<String> mEnabledPackageNames;
     private final @Nullable CredentialManager mCredentialManager;
@@ -119,7 +120,6 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
     public CredentialManagerPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         mPm = context.getPackageManager();
-        mIconFactory = IconDrawableFactory.newInstance(mContext);
         mServices = new ArrayList<>();
         mEnabledPackageNames = new HashSet<>();
         mExecutor = ContextCompat.getMainExecutor(mContext);
@@ -484,13 +484,22 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
                 continue;
             }
 
+            // Get the settings activity.
+            CharSequence settingsActivity =
+                    combinedInfo.getCredentialProviderInfos().get(0).getSettingsActivity();
+
             Drawable icon = combinedInfo.getAppIcon(context, getUser());
             CharSequence title = combinedInfo.getAppName(context);
 
             // Build the pref and add it to the output & group.
             CombiPreference pref =
                     addProviderPreference(
-                            context, title, icon, packageName, combinedInfo.getSettingsSubtitle());
+                            context,
+                            title == null ? "" : title,
+                            icon,
+                            packageName,
+                            combinedInfo.getSettingsSubtitle(),
+                            settingsActivity);
             output.put(packageName, pref);
             group.addPreference(pref);
         }
@@ -510,7 +519,8 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
                 label == null ? "" : label,
                 service.getServiceIcon(mContext),
                 service.getServiceInfo().packageName,
-                service.getSettingsSubtitle());
+                service.getSettingsSubtitle(),
+                service.getSettingsActivity());
     }
 
     /**
@@ -569,43 +579,90 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
             @NonNull CharSequence title,
             @Nullable Drawable icon,
             @NonNull String packageName,
-            @Nullable CharSequence subtitle) {
+            @Nullable CharSequence subtitle,
+            @Nullable CharSequence settingsActivity) {
         final CombiPreference pref =
                 new CombiPreference(prefContext, mEnabledPackageNames.contains(packageName));
         pref.setTitle(title);
 
         if (icon != null) {
-            pref.setIcon(Utils.getSafeIcon(icon));
+            pref.setIcon(icon);
         }
+
+        pref.setLayoutResource(R.layout.preference_icon_credman);
 
         if (subtitle != null) {
             pref.setSummary(subtitle);
         }
 
         pref.setPreferenceListener(
-                (p, isChecked) -> {
-                    if (isChecked) {
-                        if (mEnabledPackageNames.size() >= MAX_SELECTABLE_PROVIDERS) {
-                            // Show the error if too many enabled.
-                            pref.setChecked(false);
-                            final DialogFragment fragment = newErrorDialogFragment();
+                new CombiPreference.OnCombiPreferenceClickListener() {
+                    @Override
+                    public void onCheckChanged(CombiPreference p, boolean isChecked) {
+                        if (isChecked) {
+                            if (mEnabledPackageNames.size() >= MAX_SELECTABLE_PROVIDERS) {
+                                // Show the error if too many enabled.
+                                pref.setChecked(false);
+                                final DialogFragment fragment = newErrorDialogFragment();
 
-                            if (fragment == null || mFragmentManager == null) {
+                                if (fragment == null || mFragmentManager == null) {
+                                    return;
+                                }
+
+                                fragment.show(mFragmentManager, ErrorDialogFragment.TAG);
                                 return;
                             }
 
-                            fragment.show(mFragmentManager, ErrorDialogFragment.TAG);
+                            togglePackageNameEnabled(packageName);
+
+                            // Enable all prefs.
+                            if (mPrefs.containsKey(packageName)) {
+                                mPrefs.get(packageName).setChecked(true);
+                            }
+                        } else {
+                            togglePackageNameDisabled(packageName);
+                        }
+                    }
+
+                    @Override
+                    public void onLeftSideClicked() {
+                        if (settingsActivity == null) {
+                            Log.w(TAG, "settingsActivity was null");
                             return;
                         }
 
-                        togglePackageNameEnabled(packageName);
-
-                        // Enable all prefs.
-                        if (mPrefs.containsKey(packageName)) {
-                            mPrefs.get(packageName).setChecked(true);
+                        String settingsActivityStr = String.valueOf(settingsActivity);
+                        ComponentName cn = ComponentName.unflattenFromString(settingsActivityStr);
+                        if (cn == null) {
+                            Log.w(
+                                    TAG,
+                                    "Failed to deserialize settingsActivity attribute, we got: "
+                                            + settingsActivityStr);
+                            return;
                         }
-                    } else {
-                        togglePackageNameDisabled(packageName);
+
+                        Intent intent = new Intent(SETTINGS_ACTIVITY_INTENT_ACTION);
+                        intent.addCategory(SETTINGS_ACTIVITY_INTENT_CATEGORY);
+                        intent.setComponent(cn);
+
+                        Context context = mContext;
+                        int currentUserId = getUser();
+                        int contextUserId = context.getUser().getIdentifier();
+
+                        if (currentUserId != contextUserId) {
+                            Log.d(
+                                    TAG,
+                                    "onLeftSideClicked(): using context for current user ("
+                                            + currentUserId
+                                            + ") instead of user "
+                                            + contextUserId
+                                            + " on headless system user mode");
+                            context =
+                                    context.createContextAsUser(
+                                            UserHandle.of(currentUserId), /* flags= */ 0);
+                        }
+
+                        context.startActivity(intent);
                     }
                 });
 
@@ -921,6 +978,9 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         public interface OnCombiPreferenceClickListener {
             /** Called when the check is updated */
             void onCheckChanged(CombiPreference p, boolean isChecked);
+
+            /** Called when the left side is clicked. */
+            void onLeftSideClicked();
         }
 
         public CombiPreference(Context context, boolean initialValue) {
@@ -969,6 +1029,18 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
                 // Store this for later.
                 mSwitch = switchView;
             }
+
+            super.setOnPreferenceClickListener(
+                    new Preference.OnPreferenceClickListener() {
+                        @Override
+                        public boolean onPreferenceClick(Preference preference) {
+                            if (mOnClickListener != null) {
+                                mOnClickListener.onLeftSideClicked();
+                            }
+
+                            return true;
+                        }
+                    });
         }
     }
 }
