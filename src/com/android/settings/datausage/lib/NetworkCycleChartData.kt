@@ -26,6 +26,11 @@ data class NetworkCycleChartData(
     val dailyUsage: List<NetworkUsageData>,
 ) {
     companion object {
+        val AllZero = NetworkCycleChartData(
+            total = NetworkUsageData.AllZero,
+            dailyUsage = emptyList(),
+        )
+
         val BUCKET_DURATION = 1.days
     }
 }
