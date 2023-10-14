@@ -45,7 +45,7 @@ open class DataUsageListHeaderController(
     sourceMetricsCategory: Int,
     viewLifecycleOwner: LifecycleOwner,
     private val onCyclesLoad: (usageDataList: List<NetworkUsageData>) -> Unit,
-    private val onItemSelected: (usageData: NetworkUsageData) -> Unit,
+    private val updateSelectedCycle: (usageData: NetworkUsageData) -> Unit,
     private val repository: INetworkCycleDataRepository =
         NetworkCycleDataRepository(header.context, template),
 ) {
@@ -53,6 +53,17 @@ open class DataUsageListHeaderController(
 
     private val configureButton: View = header.requireViewById(R.id.filter_settings)
     private val cycleSpinner: Spinner = header.requireViewById(R.id.filter_spinner)
+
+    private val cycleListener = object : AdapterView.OnItemSelectedListener {
+        override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+            setSelectedCycle(position)
+        }
+
+        override fun onNothingSelected(parent: AdapterView<*>?) {
+            // ignored
+        }
+    }
+
     private val cycleAdapter = CycleAdapter(context, object : SpinnerInterface {
         override fun setAdapter(cycleAdapter: CycleAdapter) {
             cycleSpinner.adapter = cycleAdapter
@@ -62,21 +73,15 @@ open class DataUsageListHeaderController(
 
         override fun setSelection(position: Int) {
             cycleSpinner.setSelection(position)
-        }
-    })
-    private var cycles: List<NetworkUsageData> = emptyList()
-
-    private val cycleListener = object : AdapterView.OnItemSelectedListener {
-        override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-            if (0 <= position && position < cycleAdapter.count) {
-                cycles.getOrNull(position)?.let(onItemSelected)
+            if (cycleSpinner.onItemSelectedListener == null) {
+                cycleSpinner.onItemSelectedListener = cycleListener
+            } else {
+                setSelectedCycle(position)
             }
         }
+    })
 
-        override fun onNothingSelected(parent: AdapterView<*>?) {
-            // ignored
-        }
-    }
+    private var cycles: List<NetworkUsageData> = emptyList()
 
     init {
         configureButton.setOnClickListener {
@@ -114,11 +119,12 @@ open class DataUsageListHeaderController(
     }
 
     private fun updateCycleData() {
-        cycleSpinner.onItemSelectedListener = cycleListener
-        // calculate policy cycles based on available data
-        // generate cycle list based on policy and available history
         cycleAdapter.updateCycleList(cycles.map { Range(it.startTime, it.endTime) })
         cycleSpinner.visibility = View.VISIBLE
         onCyclesLoad(cycles)
+    }
+
+    private fun setSelectedCycle(position: Int) {
+        cycles.getOrNull(position)?.let(updateSelectedCycle)
     }
 }
