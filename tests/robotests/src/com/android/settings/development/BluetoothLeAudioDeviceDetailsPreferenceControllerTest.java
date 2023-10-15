@@ -114,6 +114,7 @@ public class BluetoothLeAudioDeviceDetailsPreferenceControllerTest {
 
     @Test
     public void isAvailable_leAudioSupported() {
+        mController.mLeAudioEnabledByDefault = false;
         mController.sLeAudioSupportedStateCache = BluetoothStatusCodes.ERROR_UNKNOWN;
         when(mBluetoothAdapter.isLeAudioSupported())
                 .thenReturn(BluetoothStatusCodes.FEATURE_SUPPORTED);
@@ -122,9 +123,16 @@ public class BluetoothLeAudioDeviceDetailsPreferenceControllerTest {
 
     @Test
     public void isAvailable_leAudioNotSupported() {
+        mController.mLeAudioEnabledByDefault = false;
         mController.sLeAudioSupportedStateCache = BluetoothStatusCodes.ERROR_UNKNOWN;
         when(mBluetoothAdapter.isLeAudioSupported())
                 .thenReturn(BluetoothStatusCodes.FEATURE_NOT_SUPPORTED);
+        assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @Test
+    public void isUnAvailable_ifLeAudioConnectionByDefault() {
+        mController.mLeAudioEnabledByDefault = true;
         assertThat(mController.isAvailable()).isFalse();
     }
 }
