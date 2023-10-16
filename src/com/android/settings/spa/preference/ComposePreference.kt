@@ -40,6 +40,8 @@ class ComposePreference @JvmOverloads constructor(
 
     override fun onBindViewHolder(holder: PreferenceViewHolder) {
         super.onBindViewHolder(holder)
+        holder.isDividerAllowedAbove = false
+        holder.isDividerAllowedBelow = false
 
         (holder.itemView as ComposeView).apply {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
