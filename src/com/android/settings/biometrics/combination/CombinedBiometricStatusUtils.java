@@ -20,6 +20,7 @@ import android.content.Context;
 import android.hardware.biometrics.BiometricAuthenticator;
 import android.hardware.face.FaceManager;
 import android.hardware.fingerprint.FingerprintManager;
+import android.os.UserManager;
 
 import androidx.annotation.Nullable;
 
@@ -28,6 +29,7 @@ import com.android.settings.Settings;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.ParentalControlsUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.utils.StringUtil;
 
 /**
  * Utilities for combined biometric details shared between Security Settings and Safety Center.
@@ -86,6 +88,18 @@ public class CombinedBiometricStatusUtils {
     }
 
     /**
+     * Returns the title of combined biometric settings entity.
+     */
+    public String getTitle() {
+        UserManager userManager = mContext.getSystemService(UserManager.class);
+        if (userManager != null && userManager.isProfile()) {
+            return mContext.getString(R.string.security_settings_work_biometric_preference_title);
+        } else {
+            return mContext.getString(R.string.security_settings_biometric_preference_title);
+        }
+    }
+
+    /**
      * Returns the summary of combined biometric settings entity.
      */
     public String getSummary() {
@@ -102,9 +116,8 @@ public class CombinedBiometricStatusUtils {
         } else if (faceEnrolled) {
             return mContext.getString(R.string.security_settings_face_preference_summary);
         } else if (numFingerprintsEnrolled > 0) {
-            return mContext.getResources().getQuantityString(
-                    R.plurals.security_settings_fingerprint_preference_summary,
-                    numFingerprintsEnrolled, numFingerprintsEnrolled);
+            return StringUtil.getIcuPluralsString(mContext, numFingerprintsEnrolled,
+                    R.string.security_settings_fingerprint_preference_summary);
         } else {
             return mContext.getString(
                     R.string.security_settings_biometric_preference_summary_none_enrolled);
@@ -117,6 +130,19 @@ public class CombinedBiometricStatusUtils {
 
     private boolean hasEnrolledFace() {
         return mFaceManager != null && mFaceManager.hasEnrolledTemplates(mUserId);
+    }
+
+    /**
+     * Returns the class name of the Settings page corresponding to combined biometric settings
+     * based on the current user.
+     */
+    public String getSettingsClassNameBasedOnUser() {
+        UserManager userManager = mContext.getSystemService(UserManager.class);
+        if (userManager != null && userManager.isProfile()) {
+            return getProfileSettingsClassName();
+        } else {
+            return getSettingsClassName();
+        }
     }
 
     /**

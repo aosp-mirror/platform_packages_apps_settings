@@ -24,7 +24,6 @@ import static android.view.View.VISIBLE;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
-import android.graphics.drawable.Drawable;
 import android.transition.AutoTransition;
 import android.transition.TransitionManager;
 import android.util.AttributeSet;
@@ -37,8 +36,8 @@ import android.widget.TextView;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
+import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settingslib.R;
 
 public class ConversationPriorityPreference extends Preference {
 
@@ -128,12 +127,14 @@ public class ConversationPriorityPreference extends Preference {
         });
     }
 
-    private ColorStateList getAccentTint() {
-        return Utils.getColorAccent(getContext());
+    private ColorStateList getSelectedColor() {
+        return Utils.getColorAttr(getContext(),
+                R.attr.notification_importance_button_foreground_color_selected);
     }
 
-    private ColorStateList getRegularTint() {
-        return Utils.getColorAttr(getContext(), android.R.attr.textColorPrimary);
+    private ColorStateList getUnselectedColor() {
+        return Utils.getColorAttr(getContext(),
+                R.attr.notification_importance_button_foreground_color_unselected);
     }
 
     void updateToggles(ViewGroup parent, int importance, boolean isPriority,
@@ -162,20 +163,21 @@ public class ConversationPriorityPreference extends Preference {
     }
 
     void setSelected(View view, boolean selected) {
-        ColorStateList colorAccent = getAccentTint();
-        ColorStateList colorNormal = getRegularTint();
+        ColorStateList colorSelected = getSelectedColor();
+        ColorStateList colorUnselected = getUnselectedColor();
 
         ImageView icon = view.findViewById(R.id.icon);
         TextView label = view.findViewById(R.id.label);
         TextView summary = view.findViewById(R.id.summary);
 
-        icon.setImageTintList(selected ? colorAccent : colorNormal);
-        label.setTextColor(selected ? colorAccent : colorNormal);
+        icon.setImageTintList(selected ? colorSelected : colorUnselected);
+        label.setTextColor(selected ? colorSelected : colorUnselected);
+        summary.setTextColor(selected ? colorSelected : colorUnselected);
         summary.setVisibility(selected ? VISIBLE : GONE);
 
         view.setBackground(mContext.getDrawable(selected
-                ? R.drawable.button_border_selected
-                : R.drawable.button_border_unselected));
+                ? R.drawable.notification_importance_button_background_selected
+                : R.drawable.notification_importance_button_background_unselected));
         // a11y service won't always read the newly appearing text in the right order if the
         // selection happens too soon (readback happens on a different thread as layout). post
         // the selection to make that conflict less likely

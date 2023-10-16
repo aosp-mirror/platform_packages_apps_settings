@@ -115,8 +115,6 @@ public class PowerUsageSummaryTest {
         when(mFragment.getActivity()).thenReturn(mSettingsActivity);
         when(mFeatureFactory.powerUsageFeatureProvider.getAdditionalBatteryInfoIntent())
                 .thenReturn(sAdditionalBatteryInfoIntent);
-        when(mFeatureFactory.powerUsageFeatureProvider.isChartGraphEnabled(mRealContext))
-                .thenReturn(true);
         mFragment.mBatteryUtils = Mockito.spy(new BatteryUtils(mRealContext));
         ReflectionHelpers.setField(mFragment, "mVisibilityLoggerMixin", mVisibilityLoggerMixin);
         ReflectionHelpers.setField(mFragment, "mBatteryBroadcastReceiver",

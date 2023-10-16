@@ -17,6 +17,7 @@ package com.android.settings.applications;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.icu.text.MessageFormat;
 import android.os.Bundle;
 import android.text.format.Formatter;
 import android.text.format.Formatter.BytesResult;
@@ -29,6 +30,10 @@ import com.android.settings.SummaryPreference;
 import com.android.settings.Utils;
 import com.android.settings.applications.ProcStatsData.MemInfo;
 import com.android.settings.core.SubSettingLauncher;
+
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 
 public class ProcessStatsSummary extends ProcessStatsBase implements OnPreferenceClickListener {
 
@@ -94,8 +99,12 @@ public class ProcessStatsSummary extends ProcessStatsBase implements OnPreferenc
         mFree.setSummary(freeString);
         String durationString = getString(sDurationLabels[mDurationIndex]);
         int numApps = mStatsManager.getEntries().size();
-        mAppListPreference.setSummary(getResources().getQuantityString(
-                R.plurals.memory_usage_apps_summary, numApps, numApps, durationString));
+        MessageFormat msgFormat = new MessageFormat(
+                getResources().getString(R.string.memory_usage_apps_summary), Locale.getDefault());
+        Map<String, Object> arguments = new HashMap<>();
+        arguments.put("count", numApps);
+        arguments.put("time", durationString);
+        mAppListPreference.setSummary(msgFormat.format(arguments));
     }
 
     @Override

@@ -19,10 +19,9 @@
                   android:key="managed_profile_settings_screen"
                   android:title="@string/managed_profile_settings_title">
 
-    <SwitchPreference
+    <com.android.settingslib.widget.MainSwitchPreference
         android:key="work_mode"
         android:title="@string/work_mode_label"
-        android:summary="@string/summary_placeholder"
         settings:controller="com.android.settings.accounts.WorkModePreferenceController"/>
 
     <com.android.settingslib.RestrictedSwitchPreference
@@ -37,5 +36,10 @@
         android:summary="@string/cross_profile_calendar_summary"
         android:title="@string/cross_profile_calendar_title"
         settings:controller="com.android.settings.accounts.CrossProfileCalendarPreferenceController"/>
+
+    <com.android.settingslib.widget.FooterPreference
+        android:title="@string/managed_profile_settings_footer"
+        android:key="managed_profile_footer"
+        settings:searchable="false"/>
 
 </PreferenceScreen>

@@ -45,8 +45,9 @@
             android:title="@string/capture_system_heap_dump_title" />
 
         <Preference
-            android:key="reboot_with_mte"
-            android:title="@string/reboot_with_mte_title" />
+            android:key="development_memtag_page"
+            android:title="@string/development_memtag_page_title"
+            android:fragment="com.android.settings.development.DevelopmentMemtagPage" />
 
         <Preference
             android:key="local_backup_password"
@@ -242,6 +243,11 @@
             android:title="@string/enable_gpu_debug_layers"
             android:summary="@string/enable_gpu_debug_layers_summary" />
 
+        <SwitchPreference
+            android:key="enable_angle_as_system_driver"
+            android:title="@string/enable_angle_as_system_driver"
+            android:summary="@string/enable_angle_as_system_driver_summary" />
+
         <Preference
             android:key="graphics_driver_dashboard"
             android:title="@string/graphics_driver_dashboard_title"
@@ -343,6 +349,10 @@
             android:key="bluetooth_disable_leaudio"
             android:title="@string/bluetooth_disable_leaudio"
             android:summary="@string/bluetooth_disable_leaudio_summary" />
+
+        <SwitchPreference
+            android:key="bluetooth_show_leaudio_device_details"
+            android:title="@string/bluetooth_show_leaudio_device_details"/>
 
         <SwitchPreference
             android:key="bluetooth_enable_leaudio_allow_list"
@@ -509,6 +519,17 @@
             android:title="@string/display_cutout_emulation"
             settings:keywords="@string/display_cutout_emulation_keywords" />
 
+        <SwitchPreference
+            android:key="transparent_navigation_bar"
+            android:title="@string/transparent_navigation_bar"
+            android:summary="@string/transparent_navigation_bar_summary" />
+
+        <Preference
+            android:key="contrast_preference"
+            android:title="@string/contrast_title"
+            android:persistent="false"
+            settings:keywords="@string/keywords_contrast" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -657,9 +678,6 @@
         <Preference
             android:key="tare"
             android:title="@string/tare_title" >
-            <intent
-                android:targetPackage="com.android.settings"
-                android:targetClass="com.android.settings.development.tare.TareHomePage" />
         </Preference>
 
         <SwitchPreference
@@ -695,6 +713,17 @@
         <Preference
             android:key="reset_shortcut_manager_throttling"
             android:title="@string/reset_shortcut_manager_throttling" />
+
+        <SwitchPreference
+            android:key="disable_phantom_process_monitor"
+            android:title="@string/disable_phantom_process_monitor_title"
+            android:summary="@string/disable_phantom_process_monitor_summary" />
+
+        <SwitchPreference
+            android:key="force_enable_notes_role"
+            android:title="@string/enable_notes_role_title"
+            android:summary="@string/enable_notes_role_summary" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -767,6 +796,7 @@
         <SwitchPreference
             android:key="stylus_handwriting"
             android:title="@string/stylus_handwriting"
+            android:defaultValue="true"
             android:summary="@string/stylus_handwriting_summary" />
     </PreferenceCategory>
 </PreferenceScreen>

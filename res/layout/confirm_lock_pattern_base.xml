@@ -29,8 +29,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingBottom="24dp">
+            android:orientation="vertical">
 
             <Button
                 android:id="@+id/cancelButton"
@@ -87,7 +86,19 @@
                 android:paddingStart="?attr/sudMarginStart"
                 android:paddingEnd="?attr/sudMarginEnd"
                 android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
                 android:gravity="center_vertical"/>
+
+            <Button
+                android:id="@+id/emergencyCallButton"
+                style="@style/WorkChallengeEmergencyButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="?attr/sudMarginStart"
+                android:layout_marginEnd="?attr/sudMarginEnd"
+                android:visibility="gone"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/work_challenge_emergency_button_text"/>
 
         </LinearLayout>
 

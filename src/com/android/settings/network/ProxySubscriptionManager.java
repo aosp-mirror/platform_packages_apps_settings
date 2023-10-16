@@ -20,6 +20,7 @@ import static androidx.lifecycle.Lifecycle.Event.ON_DESTROY;
 import static androidx.lifecycle.Lifecycle.Event.ON_START;
 import static androidx.lifecycle.Lifecycle.Event.ON_STOP;
 
+import android.annotation.NonNull;
 import android.content.Context;
 import android.os.Looper;
 import android.provider.Settings;
@@ -239,6 +240,15 @@ public class ProxySubscriptionManager implements LifecycleObserver {
      */
     public SubscriptionInfo getAccessibleSubscriptionInfo(int subId) {
         return mSubscriptionMonitor.getAccessibleSubscriptionInfo(subId);
+    }
+
+    /**
+     * Gets a list of active, visible subscription Id(s) of the currently active SIM(s).
+     *
+     * @return the list of subId's that are active and visible; the length may be 0.
+     */
+    public @NonNull int[] getActiveSubscriptionIdList() {
+        return mSubscriptionMonitor.getActiveSubscriptionIdList();
     }
 
     /**

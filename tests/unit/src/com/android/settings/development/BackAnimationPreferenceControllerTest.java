@@ -56,6 +56,7 @@ public class BackAnimationPreferenceControllerTest {
 
     private Context mContext;
     private BackAnimationPreferenceController mController;
+    private Looper mLooper;
 
     @Before
     public void setUp() {
@@ -67,6 +68,7 @@ public class BackAnimationPreferenceControllerTest {
         if (Looper.myLooper() == null) {
             Looper.prepare();
         }
+        mLooper = Looper.myLooper();
 
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.ENABLE_BACK_ANIMATION, -1);
@@ -127,7 +129,7 @@ public class BackAnimationPreferenceControllerTest {
     private int doAndWaitForSettingChange(Runnable runnable, ContentResolver contentResolver) {
         CountDownLatch countDownLatch = new CountDownLatch(1);
         ContentObserver settingsObserver =
-                new ContentObserver(new Handler(Looper.myLooper())) {
+                new ContentObserver(new Handler(mLooper)) {
                     @Override
                     public void onChange(boolean selfChange, Uri uri) {
                         countDownLatch.countDown();

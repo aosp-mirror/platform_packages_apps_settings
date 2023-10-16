@@ -19,6 +19,8 @@ package com.android.settings.fuelgauge.batteryusage;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.preference.PreferenceViewHolder;
@@ -35,6 +37,11 @@ import com.android.settingslib.widget.AppPreference;
  * won't show any icon if it is null.
  */
 public class PowerGaugePreference extends AppPreference {
+
+    // Please see go/battery-usage-app-list-alpha
+    private static final float SELECTABLE_ALPHA = 1f;
+    private static final float UNSELECTABLE_ALPHA_LIGHT_MODE = 0.65f;
+    private static final float UNSELECTABLE_ALPHA_DARK_MODE = 0.5f;
 
     private BatteryEntry mInfo;
     private BatteryDiffEntry mBatteryDiffEntry;
@@ -73,26 +80,15 @@ public class PowerGaugePreference extends AppPreference {
         notifyChanged();
     }
 
-    /** Sets the percent of total. */
-    public void setPercent(double percentOfTotal) {
-        mProgress = Utils.formatPercentage(percentOfTotal, true);
+    /** Sets the percentage to show. */
+    public void setPercentage(CharSequence percentage) {
+        mProgress = percentage;
         notifyChanged();
     }
 
-    /** Gets the percent of total. */
-    public String getPercent() {
+    /** Gets the percentage to show. */
+    public String getPercentage() {
         return mProgress.toString();
-    }
-
-    /** Sets the subtitle. */
-    public void setSubtitle(CharSequence subtitle) {
-        mProgress = subtitle;
-        notifyChanged();
-    }
-
-    /** Gets the subtitle. */
-    public CharSequence getSubtitle() {
-        return mProgress;
     }
 
     /** Sets whether to show anomaly icon */
@@ -122,6 +118,11 @@ public class PowerGaugePreference extends AppPreference {
     public void onBindViewHolder(PreferenceViewHolder view) {
         super.onBindViewHolder(view);
 
+        final boolean isNightMode = Utils.isNightMode(getContext());
+        final float alpha = isSelectable() ? SELECTABLE_ALPHA
+                : (isNightMode ? UNSELECTABLE_ALPHA_DARK_MODE : UNSELECTABLE_ALPHA_LIGHT_MODE);
+        setViewAlpha(view.itemView, alpha);
+
         final TextView subtitle = (TextView) view.findViewById(R.id.widget_summary);
         subtitle.setText(mProgress);
         if (mShowAnomalyIcon) {
@@ -133,6 +134,17 @@ public class PowerGaugePreference extends AppPreference {
         if (mContentDescription != null) {
             final TextView titleView = (TextView) view.findViewById(android.R.id.title);
             titleView.setContentDescription(mContentDescription);
+        }
+    }
+
+    private static void setViewAlpha(View view, float alpha) {
+        if (view instanceof ViewGroup) {
+            final ViewGroup viewGroup = (ViewGroup) view;
+            for (int i = viewGroup.getChildCount() - 1; i >= 0; i--) {
+                setViewAlpha(viewGroup.getChildAt(i), alpha);
+            }
+        } else {
+            view.setAlpha(alpha);
         }
     }
 }

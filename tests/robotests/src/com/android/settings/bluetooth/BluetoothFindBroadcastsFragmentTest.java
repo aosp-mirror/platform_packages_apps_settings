@@ -36,6 +36,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.PreferenceCategory;
 
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.utils.ActivityControllerWrapper;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
@@ -86,7 +87,10 @@ public class BluetoothFindBroadcastsFragmentTest {
         doReturn(mCachedDevice).when(mFragment).getCachedDevice(any());
         doReturn(mBroadcastAssistant).when(mFragment).getLeBroadcastAssistant();
         doReturn(mPreferenceCategroy).when(mFragment).findPreference(any());
-        mActivity = Robolectric.setupActivity(FragmentActivity.class);
+
+        mActivity = (FragmentActivity) ActivityControllerWrapper.setup(
+                Robolectric.buildActivity(FragmentActivity.class)).get();
+
         when(mFragment.getActivity()).thenReturn(mActivity);
 
         FragmentManager fragmentManager = mock(FragmentManager.class);

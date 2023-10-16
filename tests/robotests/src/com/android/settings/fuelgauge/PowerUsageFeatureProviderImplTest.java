@@ -63,6 +63,16 @@ public class PowerUsageFeatureProviderImplTest {
     }
 
     @Test
+    public void testIsBatteryUsageEnabled_returnFalse() {
+        assertThat(mPowerFeatureProvider.isBatteryUsageEnabled()).isTrue();
+    }
+
+    @Test
+    public void testGetBatteryUsageListConsumePowerThreshold_return0() {
+        assertThat(mPowerFeatureProvider.getBatteryUsageListConsumePowerThreshold()).isEqualTo(0.0);
+    }
+
+    @Test
     public void testIsTypeSystem_uidRoot_returnTrue() {
         assertThat(mPowerFeatureProvider.isTypeSystem(Process.ROOT_UID, null)).isTrue();
     }
@@ -101,16 +111,6 @@ public class PowerUsageFeatureProviderImplTest {
     }
 
     @Test
-    public void testIsAdvancedUiEnabled_returnTrue() {
-        assertThat(mPowerFeatureProvider.isAdvancedUiEnabled()).isTrue();
-    }
-
-    @Test
-    public void testIsPowerAccountingToggleEnabled_returnTrue() {
-        assertThat(mPowerFeatureProvider.isPowerAccountingToggleEnabled()).isTrue();
-    }
-
-    @Test
     public void testIsSmartBatterySupported_smartBatterySupported_returnTrue() {
         when(mContext.getResources().getBoolean(
                 com.android.internal.R.bool.config_smart_battery_available)).thenReturn(true);
@@ -124,11 +124,6 @@ public class PowerUsageFeatureProviderImplTest {
                 com.android.internal.R.bool.config_smart_battery_available)).thenReturn(false);
 
         assertThat(mPowerFeatureProvider.isSmartBatterySupported()).isFalse();
-    }
-
-    @Test
-    public void testIsAdaptiveChargingSupported_returnFalse() {
-        assertThat(mPowerFeatureProvider.isAdaptiveChargingSupported()).isFalse();
     }
 
     @Test

@@ -57,7 +57,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.window.embedding.ActivityEmbeddingController;
 import androidx.window.embedding.SplitRule;
 
 import com.android.settings.R;
@@ -74,6 +73,8 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.safetycenter.SafetyCenterManagerWrapper;
 import com.android.settingslib.Utils;
 import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
+
+import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import java.net.URISyntaxException;
 import java.util.Set;
@@ -106,7 +107,6 @@ public class SettingsHomepageActivity extends FragmentActivity implements
     private View mTwoPaneSuggestionView;
     private CategoryMixin mCategoryMixin;
     private Set<HomepageLoadedListener> mLoadedListeners;
-    private ActivityEmbeddingController mActivityEmbeddingController;
     private boolean mIsEmbeddingActivityEnabled;
     private boolean mIsTwoPane;
     // A regular layout shows icons on homepage, whereas a simplified layout doesn't.
@@ -189,7 +189,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
                     intent.setClass(this, DeepLinkHomepageActivityInternal.class);
                 }
                 intent.removeFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivityAsUser(intent, um.getPrimaryUser().getUserHandle());
+                startActivityAsUser(intent, um.getProfileParent(userInfo.id).getUserHandle());
                 finish();
                 return;
             }
@@ -198,8 +198,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         setupEdgeToEdge();
         setContentView(R.layout.settings_homepage_container);
 
-        mActivityEmbeddingController = ActivityEmbeddingController.getInstance(this);
-        mIsTwoPane = mActivityEmbeddingController.isActivityEmbedded(this);
+        mIsTwoPane = ActivityEmbeddingUtils.isAlreadyEmbedded(this);
 
         updateAppBarMinHeight();
         initHomepageContainer();
@@ -234,9 +233,26 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         }, R.id.main_content);
 
         // Launch the intent from deep link for large screen devices.
-        launchDeepLinkIntentToRight();
+        if (shouldLaunchDeepLinkIntentToRight()) {
+            launchDeepLinkIntentToRight();
+        }
+
+        // Settings app may be launched on an existing task. Reset SplitPairRule of SubSettings here
+        // to prevent SplitPairRule of an existing task applied on a new started Settings app.
+        if (mIsEmbeddingActivityEnabled
+                && (getIntent().getFlags() & Intent.FLAG_ACTIVITY_CLEAR_TOP) != 0) {
+            initSplitPairRules();
+        }
+
         updateHomepagePaddings();
         updateSplitLayout();
+
+        enableTaskLocaleOverride();
+    }
+
+    @VisibleForTesting
+    void initSplitPairRules() {
+        new ActivityEmbeddingRulesController(getApplicationContext()).initRules();
     }
 
     @Override
@@ -256,25 +272,16 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         if (isFinishing()) {
             return;
         }
-
-        if (ActivityEmbeddingUtils.isEmbeddingActivityEnabled(this)
-                && (intent.getFlags() & Intent.FLAG_ACTIVITY_CLEAR_TOP) != 0) {
-            initSplitPairRules();
-        }
-
         // Launch the intent from deep link for large screen devices.
-        launchDeepLinkIntentToRight();
-    }
-
-    @VisibleForTesting
-    void initSplitPairRules() {
-        new ActivityEmbeddingRulesController(getApplicationContext()).initRules();
+        if (shouldLaunchDeepLinkIntentToRight()) {
+            launchDeepLinkIntentToRight();
+        }
     }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        final boolean newTwoPaneState = mActivityEmbeddingController.isActivityEmbedded(this);
+        final boolean newTwoPaneState = ActivityEmbeddingUtils.isAlreadyEmbedded(this);
         if (mIsTwoPane != newTwoPaneState) {
             mIsTwoPane = newTwoPaneState;
             updateHomepageAppBar();
@@ -377,7 +384,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
 
     private void showSuggestionFragment(boolean scrollNeeded) {
         final Class<? extends Fragment> fragmentClass = FeatureFactory.getFactory(this)
-                .getSuggestionFeatureProvider(this).getContextualSuggestionFragment();
+                .getSuggestionFeatureProvider().getContextualSuggestionFragment();
         if (fragmentClass == null) {
             return;
         }
@@ -416,17 +423,19 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         return showFragment;
     }
 
+    private boolean shouldLaunchDeepLinkIntentToRight() {
+        if (!ActivityEmbeddingUtils.isSettingsSplitEnabled(this)
+                || !FeatureFlagUtils.isEnabled(this,
+                        FeatureFlagUtils.SETTINGS_SUPPORT_LARGE_SCREEN)) {
+            return false;
+        }
+
+        Intent intent = getIntent();
+        return intent != null && TextUtils.equals(intent.getAction(),
+                ACTION_SETTINGS_EMBED_DEEP_LINK_ACTIVITY);
+    }
+
     private void launchDeepLinkIntentToRight() {
-        if (!mIsEmbeddingActivityEnabled) {
-            return;
-        }
-
-        final Intent intent = getIntent();
-        if (intent == null || !TextUtils.equals(intent.getAction(),
-                ACTION_SETTINGS_EMBED_DEEP_LINK_ACTIVITY)) {
-            return;
-        }
-
         if (!(this instanceof DeepLinkHomepageActivity
                 || this instanceof DeepLinkHomepageActivityInternal)) {
             Log.e(TAG, "Not a deep link component");
@@ -434,6 +443,13 @@ public class SettingsHomepageActivity extends FragmentActivity implements
             return;
         }
 
+        if (!WizardManagerHelper.isUserSetupComplete(this)) {
+            Log.e(TAG, "Cancel deep link before SUW completed");
+            finish();
+            return;
+        }
+
+        final Intent intent = getIntent();
         final String intentUriString = intent.getStringExtra(
                 EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_INTENT_URI);
         if (TextUtils.isEmpty(intentUriString)) {
@@ -451,6 +467,8 @@ public class SettingsHomepageActivity extends FragmentActivity implements
             return;
         }
 
+        targetIntent.setData(intent.getParcelableExtra(
+                SettingsHomepageActivity.EXTRA_SETTINGS_LARGE_SCREEN_DEEP_LINK_INTENT_DATA));
         final ComponentName targetComponentName = targetIntent.resolveActivity(getPackageManager());
         if (targetComponentName == null) {
             Log.e(TAG, "No valid target for the deep link intent: " + targetIntent);
@@ -497,6 +515,19 @@ public class SettingsHomepageActivity extends FragmentActivity implements
             }
         }
 
+        // Only allow FLAG_GRANT_READ/WRITE_URI_PERMISSION if calling app has the permission to
+        // access specified Uri.
+        int uriPermissionFlags = targetIntent.getFlags()
+                & (Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+        if (targetIntent.getData() != null
+                && uriPermissionFlags != 0
+                && checkUriPermission(targetIntent.getData(), /* pid= */ -1, callerUid,
+                        uriPermissionFlags) == PackageManager.PERMISSION_DENIED) {
+            Log.e(TAG, "Calling app must have the permission to access Uri and grant permission");
+            finish();
+            return;
+        }
+
         targetIntent.setComponent(targetComponentName);
 
         // To prevent launchDeepLinkIntentToRight again for configuration change.
@@ -510,22 +541,6 @@ public class SettingsHomepageActivity extends FragmentActivity implements
 
         targetIntent.putExtra(EXTRA_IS_FROM_SETTINGS_HOMEPAGE, true);
         targetIntent.putExtra(SettingsActivity.EXTRA_IS_FROM_SLICE, false);
-
-        targetIntent.setData(intent.getParcelableExtra(
-                SettingsHomepageActivity.EXTRA_SETTINGS_LARGE_SCREEN_DEEP_LINK_INTENT_DATA));
-
-        // Only allow FLAG_GRANT_READ/WRITE_URI_PERMISSION if calling app has the permission to
-        // access specified Uri.
-        int uriPermissionFlags = targetIntent.getFlags()
-                & (Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-        if (targetIntent.getData() != null
-                && uriPermissionFlags != 0
-                && checkUriPermission(targetIntent.getData(), /* pid= */ -1, callerUid,
-                        uriPermissionFlags) == PackageManager.PERMISSION_DENIED) {
-            Log.e(TAG, "Calling app must have the permission to access Uri and grant permission");
-            finish();
-            return;
-        }
 
         // Set 2-pane pair rule for the deep link page.
         ActivityEmbeddingRulesController.registerTwoPanePairRule(this,
@@ -638,8 +653,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         return menuKey;
     }
 
-    @VisibleForTesting
-    void reloadHighlightMenuKey() {
+    private void reloadHighlightMenuKey() {
         mMainFragment.getArguments().putString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY,
                 getHighlightMenuKey());
         mMainFragment.reloadHighlightMenuKey();

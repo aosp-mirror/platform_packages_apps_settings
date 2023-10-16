@@ -18,8 +18,6 @@ package com.android.settings.accessibility;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -27,59 +25,57 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings;
 
-import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
-import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 
+/** Tests for {@link AccessibilityTimeoutController}. */
 @RunWith(RobolectricTestRunner.class)
-public class AccessibilityTimeoutControllerTest
-        implements AccessibilityTimeoutController.OnChangeListener {
+public class AccessibilityTimeoutControllerTest {
+
     private static final String PREF_KEY = "accessibility_control_timeout_30secs";
 
-    private AccessibilityTimeoutController mController;
-
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
     @Mock
     private SelectorWithWidgetPreference mMockPref;
-    private Context mContext;
-    private ContentResolver mContentResolver;
-
     @Mock
     private PreferenceScreen mScreen;
+    @Mock
+    private AccessibilitySettingsContentObserver mAccessibilitySettingsContentObserver;
+    private Context mContext = ApplicationProvider.getApplicationContext();
+    private ContentResolver mContentResolver;
+    private AccessibilityTimeoutController mController;
 
     @Before
     public void setup() {
-        MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
-        mController = new AccessibilityTimeoutController(mContext, mock(Lifecycle.class), PREF_KEY);
-        mController.setOnChangeListener(this);
         mContentResolver = mContext.getContentResolver();
-        String prefTitle = mContext.getResources().getString(R.string.accessibility_timeout_30secs);
-
+        mController = new AccessibilityTimeoutController(mContext, PREF_KEY,
+                mAccessibilitySettingsContentObserver);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mMockPref);
         when(mMockPref.getKey()).thenReturn(PREF_KEY);
+        final String prefTitle =
+                mContext.getResources().getString(R.string.accessibility_timeout_30secs);
         when(mMockPref.getTitle()).thenReturn(prefTitle);
         mController.displayPreference(mScreen);
     }
 
-    @Override
-    public void onCheckedChanged(Preference preference) {
-        mController.updateState(preference);
-    }
-
     @Test
-    public void isAvailable() {
-        assertTrue(mController.isAvailable());
+    public void getAvailabilityStatus_shouldReturnAvailable() {
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                BasePreferenceController.AVAILABLE);
     }
 
     @Test
@@ -114,5 +110,19 @@ public class AccessibilityTimeoutControllerTest
                 Settings.Secure.ACCESSIBILITY_INTERACTIVE_UI_TIMEOUT_MS);
 
         assertThat(accessibilityUiTimeoutValue).isEqualTo("30000");
+    }
+
+    @Test
+    public void onStart_registerSpecificContentObserverForSpecificKeys() {
+        mController.onStart();
+
+        verify(mAccessibilitySettingsContentObserver).register(mContentResolver);
+    }
+
+    @Test
+    public void onStop_unregisterContentObserver() {
+        mController.onStop();
+
+        verify(mAccessibilitySettingsContentObserver).unregister(mContentResolver);
     }
 }

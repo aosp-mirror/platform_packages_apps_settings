@@ -51,10 +51,15 @@ android_library {
     defaults: [
         "SettingsLibDefaults",
         "SettingsLib-search-defaults",
+        "SpaPrivilegedLib-defaults",
     ],
 
     srcs: ["src/**/*.java", "src/**/*.kt"],
-
+    resource_dirs: [
+        "res",
+        "res-export", // for external usage
+        "res-product",
+    ],
     static_libs: [
         "androidx-constraintlayout_constraintlayout",
         "androidx.slice_slice-builders",
@@ -63,6 +68,7 @@ android_library {
         "androidx.core_core",
         "androidx.appcompat_appcompat",
         "androidx.cardview_cardview",
+        "androidx.compose.runtime_runtime-livedata",
         "androidx.preference_preference",
         "androidx.recyclerview_recyclerview",
         "androidx.window_window",
@@ -70,14 +76,19 @@ android_library {
         "setupcompat",
         "setupdesign",
         "androidx.lifecycle_lifecycle-runtime",
-        "androidx.lifecycle_lifecycle-extensions",
+        "androidx.lifecycle_lifecycle-viewmodel",
         "guava",
         "jsr305",
         "net-utils-framework-common",
+        "app-usage-event-protos-lite",
+        "battery-event-protos-lite",
         "settings-contextual-card-protos-lite",
         "settings-log-bridge-protos-lite",
         "settings-telephony-protos-lite",
+        "fuelgauge-log-protos-lite",
+        "fuelgauge-usage-state-protos-lite",
         "contextualcards",
+        "securebox",
         "settings-logtags",
         "statslog-settings",
         "zxing-core-1.7",
@@ -88,8 +99,11 @@ android_library {
         "WifiTrackerLib",
         "SettingsLibActivityEmbedding",
         "Settings-change-ids",
+        "androidx.room_room-runtime",
         "SystemUIUnfoldLib",
     ],
+
+    plugins: ["androidx.room_room-compiler-plugin"],
 
     libs: [
         "telephony-common",
@@ -105,7 +119,10 @@ platform_compat_config {
 
 android_app {
     name: "Settings",
-    defaults: ["platform_app_defaults"],
+    defaults: [
+        "platform_app_defaults",
+        "SpaPrivilegedLib-defaults",
+    ],
     platform_apis: true,
     certificate: "platform",
     system_ext_specific: true,

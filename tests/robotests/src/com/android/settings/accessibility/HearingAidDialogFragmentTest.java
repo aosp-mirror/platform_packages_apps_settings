@@ -23,6 +23,7 @@ import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -33,6 +34,7 @@ import androidx.fragment.app.FragmentActivity;
 import com.android.settings.SettingsActivity;
 import com.android.settings.bluetooth.BluetoothPairingDetail;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
+import com.android.settings.utils.ActivityControllerWrapper;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -44,7 +46,7 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
-
+/** Tests for {@link HearingAidDialogFragment}. */
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowAlertDialogCompat.class)
 public class HearingAidDialogFragmentTest {
@@ -58,7 +60,8 @@ public class HearingAidDialogFragmentTest {
     @Before
     public void setUpTestFragment() {
         mFragment = spy(HearingAidDialogFragment.newInstance());
-        mActivity = Robolectric.setupActivity(FragmentActivity.class);
+        mActivity = (FragmentActivity) ActivityControllerWrapper.setup(
+                Robolectric.buildActivity(FragmentActivity.class)).get();
         when(mFragment.getActivity()).thenReturn(mActivity);
     }
 
@@ -89,5 +92,11 @@ public class HearingAidDialogFragmentTest {
         dialog.getButton(DialogInterface.BUTTON_NEGATIVE).performClick();
 
         assertThat(dialog.isShowing()).isFalse();
+    }
+
+    @Test
+    public void getMetricsCategory_returnsCorrectCategory() {
+        assertThat(mFragment.getMetricsCategory()).isEqualTo(
+                SettingsEnums.DIALOG_ACCESSIBILITY_HEARINGAID);
     }
 }

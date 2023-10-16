@@ -77,7 +77,7 @@ public class TimeZonePreferenceController extends AbstractPreferenceController
         TimeZoneCapabilities timeZoneCapabilities =
                 mTimeManager.getTimeZoneCapabilitiesAndConfig().getCapabilities();
         int suggestManualTimeZoneCapability =
-                timeZoneCapabilities.getSuggestManualTimeZoneCapability();
+                timeZoneCapabilities.getSetManualTimeZoneCapability();
         return suggestManualTimeZoneCapability == CAPABILITY_POSSESSED;
     }
 }

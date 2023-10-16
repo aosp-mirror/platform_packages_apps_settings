@@ -18,6 +18,7 @@ package com.android.settings.network.telephony;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -104,7 +105,7 @@ public class ContactDiscoveryDialogFragment extends InstrumentedDialogFragment
 
     @Override
     public int getMetricsCategory() {
-        return METRICS_CATEGORY_UNKNOWN;
+        return SettingsEnums.SETTINGS_CONTACT_DISCOVERY;
     }
 
     @VisibleForTesting

@@ -126,16 +126,24 @@ public interface SearchFeatureProvider {
                 true /* finishSecondaryWithPrimary */,
                 false /* clearTop */);
 
-        toolbar.setOnClickListener(tb -> {
-            FeatureFactory.getFactory(context).getSlicesFeatureProvider()
-                    .indexSliceDataAsync(context);
+        toolbar.setOnClickListener(tb -> startSearchActivity(context, activity, pageId, intent));
 
-            FeatureFactory.getFactory(context).getMetricsFeatureProvider()
-                    .logSettingsTileClick(KEY_HOMEPAGE_SEARCH_BAR, pageId);
+        toolbar.setHandwritingDelegatorCallback(
+                () -> startSearchActivity(context, activity, pageId, intent));
+        toolbar.setAllowedHandwritingDelegatePackage(intent.getPackage());
+    }
 
-            final Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(activity).toBundle();
-            activity.startActivity(intent, bundle);
-        });
+    /** Start the search activity. */
+    private static void startSearchActivity(
+            Context context, FragmentActivity activity, int pageId, Intent intent) {
+        FeatureFactory.getFactory(context).getSlicesFeatureProvider()
+                .indexSliceDataAsync(context);
+
+        FeatureFactory.getFactory(context).getMetricsFeatureProvider()
+                .logSettingsTileClick(KEY_HOMEPAGE_SEARCH_BAR, pageId);
+
+        final Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(activity).toBundle();
+        activity.startActivity(intent, bundle);
     }
 
     Intent buildSearchIntent(Context context, int pageId);

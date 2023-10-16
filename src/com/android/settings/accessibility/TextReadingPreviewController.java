@@ -112,8 +112,10 @@ class TextReadingPreviewController extends BasePreferenceController implements
         mPreviewPreference.setPreviewAdapter(pagerAdapter);
         mPreviewPreference.setCurrentItem(
                 isLayoutRtl ? PREVIEW_SAMPLE_RES_IDS.length - 1 : FRAME_INITIAL_INDEX);
+
         final int initialPagerIndex =
                 mLastFontProgress * mDisplaySizeData.getValues().size() + mLastDisplayProgress;
+        mPreviewPreference.setLastLayerIndex(initialPagerIndex);
         pagerAdapter.setPreviewLayer(initialPagerIndex, LAYER_INITIAL_INDEX,
                 FRAME_INITIAL_INDEX, /* animate= */ false);
     }
@@ -131,6 +133,14 @@ class TextReadingPreviewController extends BasePreferenceController implements
     @Override
     public void onEndTrackingTouch() {
         postCommitDelayed(CHANGE_BY_SEEKBAR_DELAY_MS);
+    }
+
+    void setCurrentItem(int index) {
+        mPreviewPreference.setCurrentItem(index);
+    }
+
+    int getCurrentItem() {
+        return mPreviewPreference.getCurrentItem();
     }
 
     /**

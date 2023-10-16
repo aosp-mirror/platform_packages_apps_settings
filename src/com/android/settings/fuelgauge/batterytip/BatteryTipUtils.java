@@ -44,9 +44,7 @@ import com.android.settings.fuelgauge.batterytip.tips.UnrestrictAppTip;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Utility class for {@link BatteryTip}
- */
+/** Utility class for {@link BatteryTip} */
 public class BatteryTipUtils {
     private static final int REQUEST_CODE = 0;
 
@@ -85,6 +83,7 @@ public class BatteryTipUtils {
 
     /**
      * Get a corresponding action based on {@code batteryTip}
+     *
      * @param batteryTip used to detect which action to choose
      * @param settingsActivity used to populate {@link BatteryTipAction}
      * @param fragment used to populate {@link BatteryTipAction}

@@ -37,6 +37,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.settings.testutils.ResourcesUtils;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.utils.StringUtil;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -165,11 +166,10 @@ public class FingerprintStatusUtilsTest {
     public void getSummary_whenEnrolled_returnsSummary() {
         final int enrolledFingerprintsCount = 2;
         final int stringResId = ResourcesUtils.getResourcesId(
-                ApplicationProvider.getApplicationContext(), "plurals",
+                ApplicationProvider.getApplicationContext(), "string",
                 "security_settings_fingerprint_preference_summary");
-        final String summary = mApplicationContext.getResources().getQuantityString(
-                stringResId, enrolledFingerprintsCount /* quantity */,
-                enrolledFingerprintsCount /* formatArgs */);
+        final String summary = StringUtil.getIcuPluralsString(mApplicationContext,
+                enrolledFingerprintsCount, stringResId);
 
         when(mFingerprintManager.hasEnrolledFingerprints(anyInt())).thenReturn(true);
         when(mFingerprintManager.getEnrolledFingerprints(anyInt())).thenReturn(

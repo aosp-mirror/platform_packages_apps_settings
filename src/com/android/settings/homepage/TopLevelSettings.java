@@ -30,6 +30,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
@@ -72,6 +73,13 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
         // Disable the search icon because this page uses a full search view in actionbar.
         args.putBoolean(NEED_SEARCH_ICON_IN_ACTION_BAR, false);
         setArguments(args);
+    }
+
+    /** Dependency injection ctor only for testing. */
+    @VisibleForTesting
+    public TopLevelSettings(TopLevelHighlightMixin highlightMixin) {
+        this();
+        mHighlightMixin = highlightMixin;
     }
 
     @Override
@@ -147,8 +155,10 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
         boolean activityEmbedded = isActivityEmbedded();
         if (icicle != null) {
             mHighlightMixin = icicle.getParcelable(SAVED_HIGHLIGHT_MIXIN);
-            mScrollNeeded = !mHighlightMixin.isActivityEmbedded() && activityEmbedded;
-            mHighlightMixin.setActivityEmbedded(activityEmbedded);
+            if (mHighlightMixin != null) {
+                mScrollNeeded = !mHighlightMixin.isActivityEmbedded() && activityEmbedded;
+                mHighlightMixin.setActivityEmbedded(activityEmbedded);
+            }
         }
         if (mHighlightMixin == null) {
             mHighlightMixin = new TopLevelHighlightMixin(activityEmbedded);
@@ -156,6 +166,7 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
     }
 
     /** Wrap ActivityEmbeddingController#isActivityEmbedded for testing. */
+    @VisibleForTesting
     public boolean isActivityEmbedded() {
         if (mActivityEmbeddingController == null) {
             mActivityEmbeddingController = ActivityEmbeddingController.getInstance(getActivity());

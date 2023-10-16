@@ -25,7 +25,7 @@ import com.android.settings.R;
 import com.android.settings.applications.SpacePreference;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
-import com.android.settingslib.bluetooth.HearingAidProfile;
+import com.android.settingslib.bluetooth.HearingAidInfo;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.widget.ButtonPreference;
 
@@ -62,21 +62,27 @@ public class BluetoothDetailsPairOtherController extends BluetoothDetailsControl
 
     @Override
     protected void init(PreferenceScreen screen) {
-        final int side = mCachedDevice.getDeviceSide();
-        final int stringRes = (side == HearingAidProfile.DeviceSide.SIDE_LEFT)
-                ? R.string.bluetooth_pair_right_ear_button
-                : R.string.bluetooth_pair_left_ear_button;
-
         mPreference = screen.findPreference(getPreferenceKey());
         mSpacePreference = screen.findPreference(KEY_SPACE);
-        mPreference.setTitle(stringRes);
+        updateButtonPreferenceTitle(mPreference);
         setPreferencesVisibility(getButtonPreferenceVisibility(mCachedDevice));
         mPreference.setOnClickListener(v -> launchPairingDetail());
     }
 
     @Override
     protected void refresh() {
+        updateButtonPreferenceTitle(mPreference);
         setPreferencesVisibility(getButtonPreferenceVisibility(mCachedDevice));
+
+    }
+
+    private void updateButtonPreferenceTitle(ButtonPreference preference) {
+        final int side = mCachedDevice.getDeviceSide();
+        final int stringRes = (side == HearingAidInfo.DeviceSide.SIDE_LEFT)
+                ? R.string.bluetooth_pair_right_ear_button
+                : R.string.bluetooth_pair_left_ear_button;
+
+        preference.setTitle(stringRes);
     }
 
     private void setPreferencesVisibility(boolean visible) {
@@ -97,16 +103,16 @@ public class BluetoothDetailsPairOtherController extends BluetoothDetailsControl
     }
 
     private boolean isBinauralMode(CachedBluetoothDevice cachedDevice) {
-        return cachedDevice.getDeviceMode() == HearingAidProfile.DeviceMode.MODE_BINAURAL;
+        return cachedDevice.getDeviceMode() == HearingAidInfo.DeviceMode.MODE_BINAURAL;
     }
 
     private boolean isOnlyOneSideConnected(CachedBluetoothDevice cachedDevice) {
-        if (!cachedDevice.isConnectedHearingAidDevice()) {
+        if (!cachedDevice.isConnectedAshaHearingAidDevice()) {
             return false;
         }
 
         final CachedBluetoothDevice subDevice = cachedDevice.getSubDevice();
-        if (subDevice != null && subDevice.isConnectedHearingAidDevice()) {
+        if (subDevice != null && subDevice.isConnectedAshaHearingAidDevice()) {
             return false;
         }
 

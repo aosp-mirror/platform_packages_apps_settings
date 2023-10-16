@@ -15,6 +15,7 @@
  */
 package com.android.settings.location;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 import android.provider.DeviceConfig;
@@ -24,7 +25,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.android.internal.config.sysui.SystemUiDeviceConfigFlags;
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -47,7 +47,7 @@ public class RecentLocationAccessSeeAllFragment extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.RECENT_LOCATION_REQUESTS_ALL;
+        return SettingsEnums.LOCATION_RECENT_ACCESS_ALL;
     }
 
     @Override

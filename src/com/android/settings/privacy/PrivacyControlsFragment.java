@@ -45,7 +45,7 @@ public class PrivacyControlsFragment extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.TOP_LEVEL_PRIVACY;
+        return SettingsEnums.PRIVACY_CONTROLS;
     }
 
     @Override

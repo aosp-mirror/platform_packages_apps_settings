@@ -31,6 +31,7 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.pm.UserInfo;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.UserManager;
 
@@ -48,6 +49,8 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
+
+import java.util.Arrays;
 
 @RunWith(RobolectricTestRunner.class)
 public class VisiblePatternProfilePreferenceControllerTest {
@@ -82,7 +85,9 @@ public class VisiblePatternProfilePreferenceControllerTest {
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         when(mFeatureFactory.securityFeatureProvider.getLockPatternUtils(mContext))
                 .thenReturn(mLockPatternUtils);
-        when(mUm.getProfileIdsWithDisabled(anyInt())).thenReturn(new int[] {FAKE_PROFILE_USER_ID});
+        when(mUm.getProfiles(anyInt())).thenReturn(Arrays.asList(new UserInfo(
+                FAKE_PROFILE_USER_ID, "", UserInfo.FLAG_MANAGED_PROFILE | UserInfo.FLAG_PROFILE)));
+
 
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);

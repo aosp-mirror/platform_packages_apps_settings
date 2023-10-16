@@ -16,15 +16,12 @@
 
 package com.android.settings.nfc;
 
-import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-import android.content.ContentResolver;
 import android.content.Context;
 import android.nfc.NfcAdapter;
-import android.provider.Settings;
 
 import com.android.settingslib.widget.MainSwitchPreference;
 
@@ -53,54 +50,13 @@ public class NfcEnablerTest {
     }
 
     @Test
-    public void isToggleable_AirplaneModeOff_shouldReturnTrue() {
-        final ContentResolver contentResolver = mContext.getContentResolver();
-        Settings.Global.putInt(contentResolver, Settings.Global.AIRPLANE_MODE_ON, 0);
-        Settings.Global.putString(contentResolver,
-            Settings.Global.AIRPLANE_MODE_RADIOS, Settings.Global.RADIO_NFC);
-        Settings.Global.putString(contentResolver,
-            Settings.Global.AIRPLANE_MODE_TOGGLEABLE_RADIOS, Settings.Global.RADIO_NFC);
-
-        assertThat(mNfcEnabler.isToggleable()).isTrue();
-    }
-
-    @Test
-    public void isToggleable_AirplaneModeOnNfcNotInAirplaneModeRadio_shouldReturnTrue() {
-        final ContentResolver contentResolver = mContext.getContentResolver();
-        Settings.Global.putInt(contentResolver, Settings.Global.AIRPLANE_MODE_ON, 1);
-        Settings.Global.putString(contentResolver, Settings.Global.AIRPLANE_MODE_RADIOS, "");
-
-        assertThat(mNfcEnabler.isToggleable()).isTrue();
-    }
-
-    @Test
-    public void isToggleable_AirplaneModeOnNfcToggleable_shouldReturnTrue() {
-        final ContentResolver contentResolver = mContext.getContentResolver();
-        Settings.Global.putInt(contentResolver, Settings.Global.AIRPLANE_MODE_ON, 1);
-        Settings.Global.putString(contentResolver,
-            Settings.Global.AIRPLANE_MODE_RADIOS, Settings.Global.RADIO_NFC);
-        Settings.Global.putString(contentResolver,
-            Settings.Global.AIRPLANE_MODE_TOGGLEABLE_RADIOS, Settings.Global.RADIO_NFC);
-
-        assertThat(mNfcEnabler.isToggleable()).isTrue();
-    }
-
-    @Test
-    public void isToggleable_AirplaneModeOnNfcNotToggleable_shouldReturnFalse() {
-        final ContentResolver contentResolver = mContext.getContentResolver();
-        Settings.Global.putInt(contentResolver, Settings.Global.AIRPLANE_MODE_ON, 1);
-        Settings.Global.putString(contentResolver,
-            Settings.Global.AIRPLANE_MODE_RADIOS, Settings.Global.RADIO_NFC);
-        Settings.Global.putString(contentResolver,
-                Settings.Global.AIRPLANE_MODE_TOGGLEABLE_RADIOS, "");
-
-        assertThat(mNfcEnabler.isToggleable()).isFalse();
-    }
-
-    @Test
     public void handleNfcStateChanged_stateOff_shouldCheckIfPreferenceEnableState() {
         mNfcEnabler.handleNfcStateChanged(NfcAdapter.STATE_OFF);
+        verify(mNfcPreference).updateStatus(false);
+        verify(mNfcPreference).setEnabled(true);
 
-        verify(mNfcEnabler).isToggleable();
+        mNfcEnabler.handleNfcStateChanged(NfcAdapter.STATE_ON);
+        verify(mNfcPreference).updateStatus(true);
+        verify(mNfcPreference, times(2)).setEnabled(true);
     }
 }

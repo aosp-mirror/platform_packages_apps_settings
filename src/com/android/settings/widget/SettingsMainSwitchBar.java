@@ -18,18 +18,15 @@ package com.android.settings.widget;
 
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
-import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.Switch;
 
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.widget.MainSwitchBar;
-import com.android.settingslib.widget.R;
 
 /**
  * A {@link MainSwitchBar} with a customized Switch and provides the metrics feature.
@@ -48,14 +45,13 @@ public class SettingsMainSwitchBar extends MainSwitchBar {
         boolean onBeforeCheckedChanged(Switch switchView, boolean isChecked);
     }
 
-    private ImageView mRestrictedIcon;
     private EnforcedAdmin mEnforcedAdmin;
     private boolean mDisabledByAdmin;
 
     private final MetricsFeatureProvider mMetricsFeatureProvider;
     private OnBeforeCheckedChangeListener mOnBeforeListener;
 
-    private String mMetricsTag;
+    private int mMetricsCategory;
 
     public SettingsMainSwitchBar(Context context) {
         this(context, null);
@@ -75,14 +71,6 @@ public class SettingsMainSwitchBar extends MainSwitchBar {
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
 
         addOnSwitchChangeListener((switchView, isChecked) -> logMetrics(isChecked));
-
-        mRestrictedIcon = findViewById(R.id.restricted_icon);
-        mRestrictedIcon.setOnClickListener((View v) -> {
-            if (mDisabledByAdmin) {
-                RestrictedLockUtils.sendShowAdminSupportDetailsIntent(context, mEnforcedAdmin);
-                onRestrictedIconClick();
-            }
-        });
     }
 
     /**
@@ -96,12 +84,9 @@ public class SettingsMainSwitchBar extends MainSwitchBar {
             mDisabledByAdmin = true;
             mTextView.setEnabled(false);
             mSwitch.setEnabled(false);
-            mSwitch.setVisibility(View.GONE);
-            mRestrictedIcon.setVisibility(View.VISIBLE);
         } else {
             mDisabledByAdmin = false;
             mSwitch.setVisibility(View.VISIBLE);
-            mRestrictedIcon.setVisibility(View.GONE);
             setEnabled(isEnabled());
         }
     }
@@ -121,16 +106,12 @@ public class SettingsMainSwitchBar extends MainSwitchBar {
 
     @Override
     public boolean performClick() {
-        return getDelegatingView().performClick();
-    }
+        if (mDisabledByAdmin) {
+            performRestrictedClick();
+            return true;
+        }
 
-    protected void onRestrictedIconClick() {
-        mMetricsFeatureProvider.action(
-                SettingsEnums.PAGE_UNKNOWN,
-                SettingsEnums.ACTION_SETTINGS_PREFERENCE_CHANGE,
-                SettingsEnums.PAGE_UNKNOWN,
-                mMetricsTag + "/switch_bar|restricted",
-                1);
+        return mSwitch.performClick();
     }
 
     @Override
@@ -159,20 +140,16 @@ public class SettingsMainSwitchBar extends MainSwitchBar {
     /**
      * Set the metrics tag.
      */
-    public void setMetricsTag(String tag) {
-        mMetricsTag = tag;
-    }
-
-    private View getDelegatingView() {
-        return mDisabledByAdmin ? mRestrictedIcon : mSwitch;
+    public void setMetricsCategory(int category) {
+        mMetricsCategory = category;
     }
 
     private void logMetrics(boolean isChecked) {
-        mMetricsFeatureProvider.action(
-                SettingsEnums.PAGE_UNKNOWN,
-                SettingsEnums.ACTION_SETTINGS_PREFERENCE_CHANGE,
-                SettingsEnums.PAGE_UNKNOWN,
-                mMetricsTag + "/switch_bar",
-                isChecked ? 1 : 0);
+        mMetricsFeatureProvider.changed(mMetricsCategory, "switch_bar", isChecked ? 1 : 0);
+    }
+
+    private void performRestrictedClick() {
+        RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getContext(), mEnforcedAdmin);
+        mMetricsFeatureProvider.clicked(mMetricsCategory, "switch_bar|restricted");
     }
 }

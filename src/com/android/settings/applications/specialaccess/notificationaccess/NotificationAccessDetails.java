@@ -123,6 +123,9 @@ public class NotificationAccessDetails extends DashboardFragment {
                 .setCn(mComponentName)
                 .setUserId(mUserId)
                 .setTargetSdk(listenerTargetSdk);
+        use(MoreSettingsPreferenceController.class)
+                .setPackage(mComponentName.getPackageName())
+                .setPackageManager(mPm);
         final int finalListenerTargetSdk = listenerTargetSdk;
         getPreferenceControllers().forEach(controllers -> {
             controllers.forEach(controller -> {

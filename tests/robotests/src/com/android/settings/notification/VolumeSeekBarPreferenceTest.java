@@ -18,11 +18,14 @@ package com.android.settings.notification;
 
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doCallRealMethod;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.media.AudioManager;
+import android.preference.SeekBarVolumizer;
+import android.widget.SeekBar;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -34,18 +37,28 @@ import org.robolectric.RobolectricTestRunner;
 @RunWith(RobolectricTestRunner.class)
 public class VolumeSeekBarPreferenceTest {
 
+    private static final CharSequence CONTENT_DESCRIPTION = "TEST";
     @Mock
     private AudioManager mAudioManager;
     @Mock
     private VolumeSeekBarPreference mPreference;
     @Mock
     private Context mContext;
+    @Mock
+    private SeekBar mSeekBar;
+    @Mock
+    private SeekBarVolumizer mVolumizer;
+    private VolumeSeekBarPreference.Listener mListener;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         when(mContext.getSystemService(Context.AUDIO_SERVICE)).thenReturn(mAudioManager);
+        doCallRealMethod().when(mPreference).updateContentDescription(CONTENT_DESCRIPTION);
+        mPreference.mSeekBar = mSeekBar;
         mPreference.mAudioManager = mAudioManager;
+        mPreference.mVolumizer = mVolumizer;
+        mListener = () -> mPreference.updateContentDescription(CONTENT_DESCRIPTION);
     }
 
     @Test
@@ -64,5 +77,25 @@ public class VolumeSeekBarPreferenceTest {
         verify(mPreference).setMax(max);
         verify(mPreference).setMin(min);
         verify(mPreference).setProgress(progress);
+    }
+
+    @Test
+    public void init_listenerIsCalled() {
+        doCallRealMethod().when(mPreference).setListener(mListener);
+        doCallRealMethod().when(mPreference).init();
+
+        mPreference.setListener(mListener);
+        mPreference.init();
+
+        verify(mPreference).updateContentDescription(CONTENT_DESCRIPTION);
+    }
+
+    @Test
+    public void init_listenerNotSet_noException() {
+        doCallRealMethod().when(mPreference).init();
+
+        mPreference.init();
+
+        verify(mPreference, never()).updateContentDescription(CONTENT_DESCRIPTION);
     }
 }

@@ -21,7 +21,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
 import android.nfc.NfcAdapter;
-import android.provider.Settings;
 import android.util.Log;
 import android.widget.Switch;
 
@@ -126,18 +125,6 @@ public class NfcPreferenceController extends TogglePreferenceController
         if (mNfcEnabler != null) {
             mNfcEnabler.pause();
         }
-    }
-
-    public static boolean shouldTurnOffNFCInAirplaneMode(Context context) {
-        final String airplaneModeRadios = Settings.Global.getString(context.getContentResolver(),
-                Settings.Global.AIRPLANE_MODE_RADIOS);
-        return airplaneModeRadios != null && airplaneModeRadios.contains(Settings.Global.RADIO_NFC);
-    }
-
-    public static boolean isToggleableInAirplaneMode(Context context) {
-        final String toggleable = Settings.Global.getString(context.getContentResolver(),
-                Settings.Global.AIRPLANE_MODE_TOGGLEABLE_RADIOS);
-        return toggleable != null && toggleable.contains(Settings.Global.RADIO_NFC);
     }
 
     /**

@@ -21,6 +21,7 @@ import android.text.BidiFormatter;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.activityembedding.ActivityEmbeddingUtils;
 import com.android.settings.core.BasePreferenceController;
 
 public class TopLevelNetworkEntryPreferenceController extends BasePreferenceController {
@@ -34,7 +35,11 @@ public class TopLevelNetworkEntryPreferenceController extends BasePreferenceCont
 
     @Override
     public int getAvailabilityStatus() {
-        return Utils.isDemoUser(mContext) ? UNSUPPORTED_ON_DEVICE : AVAILABLE;
+        // TODO(b/281597506): Update the ActivityEmbeddingUtils.isEmbeddingActivityEnabled
+        //   while getting the new API.
+        return (Utils.isDemoUser(mContext)
+            && !ActivityEmbeddingUtils.isEmbeddingActivityEnabled(mContext))
+                ? UNSUPPORTED_ON_DEVICE : AVAILABLE;
     }
 
     @Override

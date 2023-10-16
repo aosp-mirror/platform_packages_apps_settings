@@ -75,6 +75,7 @@ import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.search.Indexable;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.utils.StringUtil;
 import com.android.settingslib.wifi.WifiSavedConfigUtils;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiEntry.ConnectCallback;
@@ -915,17 +916,19 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     private String getSavedNetworkSettingsSummaryText(
             int numSavedNetworks, int numSavedSubscriptions) {
+        if (getContext() == null) {
+            return "";
+        }
         if (numSavedSubscriptions == 0) {
-            return getResources().getQuantityString(R.plurals.wifi_saved_access_points_summary,
-                    numSavedNetworks, numSavedNetworks);
+            return StringUtil.getIcuPluralsString(getContext(), numSavedNetworks,
+                    R.string.wifi_saved_access_points_summary);
         } else if (numSavedNetworks == 0) {
-            return getResources().getQuantityString(
-                    R.plurals.wifi_saved_passpoint_access_points_summary,
-                    numSavedSubscriptions, numSavedSubscriptions);
+            return StringUtil.getIcuPluralsString(getContext(), numSavedSubscriptions,
+                    R.string.wifi_saved_passpoint_access_points_summary);
         } else {
             final int numTotalEntries = numSavedNetworks + numSavedSubscriptions;
-            return getResources().getQuantityString(R.plurals.wifi_saved_all_access_points_summary,
-                    numTotalEntries, numTotalEntries);
+            return StringUtil.getIcuPluralsString(getContext(), numTotalEntries,
+                    R.string.wifi_saved_all_access_points_summary);
         }
     }
 

@@ -105,26 +105,28 @@ public class JobSchedulerFragment extends Fragment implements
 
         mChildren = new String[][]{
                 resources.getStringArray(R.array.tare_consumption_limit_subfactors),
-                resources.getStringArray(R.array.tare_app_balance_subfactors),
+                resources.getStringArray(R.array.tare_job_scheduler_app_balance_subfactors),
                 // TODO: support
                 // mResources.getStringArray(R.array.tare_modifiers_subfactors),
                 resources.getStringArray(R.array.tare_job_scheduler_actions),
                 resources.getStringArray(R.array.tare_job_scheduler_actions),
-                resources.getStringArray(R.array.tare_rewards_subfactors),
+                resources.getStringArray(R.array.tare_job_scheduler_rewards_subfactors),
                 {resources.getString(R.string.tare_top_activity)},
-                resources.getStringArray(R.array.tare_rewards_subfactors)
+                resources.getStringArray(R.array.tare_job_scheduler_rewards_subfactors)
         };
 
         mKeys = new String[][]{
                 {
                         EconomyManager.KEY_JS_INITIAL_CONSUMPTION_LIMIT,
-                        EconomyManager.KEY_JS_HARD_CONSUMPTION_LIMIT
+                        EconomyManager.KEY_JS_MIN_CONSUMPTION_LIMIT,
+                        EconomyManager.KEY_JS_MAX_CONSUMPTION_LIMIT,
                 },
                 {
                         EconomyManager.KEY_JS_MAX_SATIATED_BALANCE,
                         EconomyManager.KEY_JS_MIN_SATIATED_BALANCE_EXEMPTED,
                         EconomyManager.KEY_JS_MIN_SATIATED_BALANCE_HEADLESS_SYSTEM_APP,
-                        EconomyManager.KEY_JS_MIN_SATIATED_BALANCE_OTHER_APP
+                        EconomyManager.KEY_JS_MIN_SATIATED_BALANCE_OTHER_APP,
+                        EconomyManager.KEY_JS_MIN_SATIATED_BALANCE_INCREMENT_APP_UPDATER,
                 },
                 // {},
                 {
@@ -159,6 +161,7 @@ public class JobSchedulerFragment extends Fragment implements
                         EconomyManager.KEY_JS_REWARD_NOTIFICATION_INTERACTION_INSTANT,
                         EconomyManager.KEY_JS_REWARD_WIDGET_INTERACTION_INSTANT,
                         EconomyManager.KEY_JS_REWARD_OTHER_USER_INTERACTION_INSTANT,
+                        EconomyManager.KEY_JS_REWARD_APP_INSTALL_INSTANT,
                 },
                 {EconomyManager.KEY_JS_REWARD_TOP_ACTIVITY_ONGOING},
                 {
@@ -167,6 +170,7 @@ public class JobSchedulerFragment extends Fragment implements
                         EconomyManager.KEY_JS_REWARD_NOTIFICATION_INTERACTION_MAX,
                         EconomyManager.KEY_JS_REWARD_WIDGET_INTERACTION_MAX,
                         EconomyManager.KEY_JS_REWARD_OTHER_USER_INTERACTION_MAX,
+                        EconomyManager.KEY_JS_REWARD_APP_INSTALL_MAX,
                 }
         };
     }

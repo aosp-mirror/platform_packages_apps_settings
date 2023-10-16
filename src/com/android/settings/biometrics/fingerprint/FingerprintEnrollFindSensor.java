@@ -329,7 +329,8 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
         if (mNextClicked && errMsgId == FingerprintManager.FINGERPRINT_ERROR_CANCELED) {
             proceedToEnrolling(false /* cancelEnrollment */);
         } else {
-            FingerprintErrorDialog.showErrorDialog(this, errMsgId, mCanAssumeUdfps);
+            FingerprintErrorDialog.showErrorDialog(this, errMsgId,
+                    this instanceof SetupFingerprintEnrollFindSensor);
         }
     }
 

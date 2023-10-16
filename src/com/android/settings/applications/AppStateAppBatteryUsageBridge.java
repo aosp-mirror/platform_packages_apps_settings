@@ -96,7 +96,7 @@ public class AppStateAppBatteryUsageBridge extends AppStateBaseBridge {
         // Unrestricted = AppOpsManager.MODE_ALLOWED + allowListed
         // Optimized = AppOpsManager.MODE_ALLOWED + !allowListed
 
-        boolean allowListed = mPowerAllowlistBackend.isAllowlisted(pkg);
+        boolean allowListed = mPowerAllowlistBackend.isAllowlisted(pkg, uid);
         int aomMode =
                 mAppOpsManager.checkOpNoThrow(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, uid, pkg);
         @OptimizationMode int mode = MODE_UNKNOWN;

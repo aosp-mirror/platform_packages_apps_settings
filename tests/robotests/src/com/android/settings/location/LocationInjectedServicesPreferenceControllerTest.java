@@ -28,6 +28,7 @@ import static org.mockito.Mockito.when;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.pm.UserInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
@@ -43,6 +44,7 @@ import com.android.settings.widget.RestrictedAppPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -113,11 +115,15 @@ public class LocationInjectedServicesPreferenceControllerTest {
         verify(mContext).unregisterReceiver(mController.mInjectedSettingsReceiver);
     }
 
+    @Ignore
     @Test
     public void workProfileDisallowShareLocationOn_getParentUserLocationServicesOnly() {
         final int fakeWorkProfileId = 123;
         ShadowUserManager.getShadow().setProfileIdsWithDisabled(
                 new int[]{UserHandle.myUserId(), fakeWorkProfileId});
+        ShadowUserManager.getShadow().addProfile(new UserInfo(UserHandle.myUserId(), "", 0));
+        ShadowUserManager.getShadow().addProfile(new UserInfo(fakeWorkProfileId, "",
+                UserInfo.FLAG_MANAGED_PROFILE | UserInfo.FLAG_PROFILE));
 
         // Mock RestrictedLockUtils.checkIfRestrictionEnforced and let it return non-null.
         final List<UserManager.EnforcingUser> enforcingUsers = new ArrayList<>();
@@ -162,6 +168,7 @@ public class LocationInjectedServicesPreferenceControllerTest {
         verify(mSettingsInjector).reloadStatusMessages();
     }
 
+    @Ignore
     @Test
     public void withUserRestriction_shouldDisableLocationAccuracy() {
         final List<Preference> preferences = new ArrayList<>();

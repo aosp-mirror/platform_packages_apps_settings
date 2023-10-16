@@ -16,36 +16,29 @@
 
 package com.android.settings.privacy;
 
-import static android.app.admin.DevicePolicyResources.Strings.Settings.CONNECTED_WORK_AND_PERSONAL_APPS_TITLE;
-import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_LOCKED_NOTIFICATION_TITLE;
-import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_NOTIFICATIONS_SECTION_HEADER;
-import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_PRIVACY_POLICY_INFO;
-import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_PRIVACY_POLICY_INFO_SUMMARY;
-
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.notification.LockScreenNotificationPreferenceController;
 import com.android.settings.safetycenter.SafetyCenterManagerWrapper;
+import com.android.settings.safetycenter.SafetyCenterUtils;
+import com.android.settings.safetycenter.SafetyCenterUtils.EnterpriseOverrideString;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @SearchIndexable
 public class PrivacyDashboardFragment extends DashboardFragment {
     private static final String TAG = "PrivacyDashboardFrag";
-    private static final String KEY_LOCK_SCREEN_NOTIFICATIONS = "privacy_lock_screen_notifications";
-    private static final String KEY_WORK_PROFILE_CATEGORY =
-            "privacy_work_profile_notifications_category";
     private static final String KEY_NOTIFICATION_WORK_PROFILE_NOTIFICATIONS =
             "privacy_lock_screen_work_profile_notifications";
 
@@ -62,18 +55,15 @@ public class PrivacyDashboardFragment extends DashboardFragment {
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        replaceEnterpriseStringTitle("privacy_lock_screen_work_profile_notifications",
-                WORK_PROFILE_LOCKED_NOTIFICATION_TITLE,
-                R.string.locked_work_profile_notification_title);
-        replaceEnterpriseStringTitle("interact_across_profiles_privacy",
-                CONNECTED_WORK_AND_PERSONAL_APPS_TITLE, R.string.interact_across_profiles_title);
-        replaceEnterpriseStringTitle("privacy_work_profile_notifications_category",
-                WORK_PROFILE_NOTIFICATIONS_SECTION_HEADER, R.string.profile_section_header);
-        replaceEnterpriseStringTitle("work_policy_info",
-                WORK_PROFILE_PRIVACY_POLICY_INFO, R.string.work_policy_privacy_settings);
-        replaceEnterpriseStringSummary("work_policy_info",
-                WORK_PROFILE_PRIVACY_POLICY_INFO_SUMMARY,
-                R.string.work_policy_privacy_settings_summary);
+        List<EnterpriseOverrideString> privacyOverrideStrings =
+                SafetyCenterUtils.getEnterpriseOverrideStringForPrivacyEntries();
+        for (int i = 0; i < privacyOverrideStrings.size(); i++) {
+            EnterpriseOverrideString overrideString = privacyOverrideStrings.get(i);
+            replaceEnterpriseStringTitle(
+                    overrideString.getPreferenceKey(),
+                    overrideString.getOverrideKey(),
+                    overrideString.getResource());
+        }
     }
 
     @Override
@@ -88,48 +78,56 @@ public class PrivacyDashboardFragment extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return getPreferenceScreenResId(getContext());
-    }
-
-    private static int getPreferenceScreenResId(Context context) {
-        if (SafetyCenterManagerWrapper.get().isEnabled(context)) {
-            return R.xml.privacy_advanced_settings;
-        } else {
-            return R.xml.privacy_dashboard_settings;
-        }
+        return R.xml.privacy_dashboard_settings;
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(
             Context context, Lifecycle lifecycle) {
-        final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        final LockScreenNotificationPreferenceController notificationController =
-                new LockScreenNotificationPreferenceController(context,
-                        KEY_LOCK_SCREEN_NOTIFICATIONS,
-                        KEY_WORK_PROFILE_CATEGORY,
-                        KEY_NOTIFICATION_WORK_PROFILE_NOTIFICATIONS);
-        if (lifecycle != null) {
-            lifecycle.addObserver(notificationController);
-        }
-        controllers.add(notificationController);
-
-        return controllers;
-
+        return SafetyCenterUtils.getControllersForAdvancedPrivacy(context, lifecycle);
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
+            new BaseSearchIndexProvider(R.xml.privacy_dashboard_settings) {
+                /**
+                 * If SafetyCenter is enabled, all of these entries will be in the More Settings
+                 * page, and we don't want to index these entries.
+                 */
                 @Override
                 public List<SearchIndexableResource> getXmlResourcesToIndex(
                         Context context, boolean enabled) {
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = getPreferenceScreenResId(context);
-                    return Arrays.asList(sir);
+                    // NOTE: This check likely should be moved to the super method. This is done
+                    // here to avoid potentially undesired side effects for existing implementors.
+                    if (!isPageSearchEnabled(context)) {
+                        return null;
+                    }
+                    return super.getXmlResourcesToIndex(context, enabled);
                 }
 
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
                     return buildPreferenceControllers(context, null);
+                }
+
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    final List<String> keys = super.getNonIndexableKeys(context);
+                    final int profileUserId =
+                            Utils.getManagedProfileId(
+                                    UserManager.get(context), UserHandle.myUserId());
+                    // If work profile is supported, we should keep the search result.
+                    if (profileUserId != UserHandle.USER_NULL) {
+                        return keys;
+                    }
+
+                    // Otherwise, we should hide the search result.
+                    keys.add(KEY_NOTIFICATION_WORK_PROFILE_NOTIFICATIONS);
+                    return keys;
+                }
+
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return !SafetyCenterManagerWrapper.get().isEnabled(context);
                 }
             };
 }

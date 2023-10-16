@@ -16,10 +16,8 @@
 package com.android.settings.applications.specialaccess.interactacrossprofiles;
 
 import static android.app.admin.DevicePolicyResources.Strings.Settings.CONNECTED_WORK_AND_PERSONAL_APPS_TITLE;
-import static android.content.pm.PackageManager.GET_ACTIVITIES;
 
 import android.annotation.Nullable;
-import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -157,9 +155,9 @@ public class InteractAcrossProfilesSettings extends EmptyTextSettings {
     private static List<PackageInfo> getAllInstalledPackages(
             PackageManager packageManager, UserHandle personalProfile, UserHandle workProfile) {
         List<PackageInfo> personalPackages = packageManager.getInstalledPackagesAsUser(
-                GET_ACTIVITIES, personalProfile.getIdentifier());
+                /* flags= */ 0, personalProfile.getIdentifier());
         List<PackageInfo> workPackages = packageManager.getInstalledPackagesAsUser(
-                GET_ACTIVITIES, workProfile.getIdentifier());
+                /* flags= */ 0, workProfile.getIdentifier());
         List<PackageInfo> allPackages = new ArrayList<>(personalPackages);
         for (PackageInfo workPackage : workPackages) {
             if (allPackages.stream().noneMatch(

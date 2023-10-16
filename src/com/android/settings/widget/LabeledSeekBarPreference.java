@@ -63,6 +63,8 @@ public class LabeledSeekBarPreference extends SeekBarPreference {
     private OnPreferenceChangeListener mStopListener;
     private SeekBar.OnSeekBarChangeListener mSeekBarChangeListener;
 
+    private SeekBar mSeekBar;
+
     public LabeledSeekBarPreference(Context context, AttributeSet attrs, int defStyleAttr,
             int defStyleRes) {
 
@@ -104,6 +106,10 @@ public class LabeledSeekBarPreference extends SeekBarPreference {
                 com.android.internal.R.attr.seekBarPreferenceStyle), 0);
     }
 
+    public SeekBar getSeekbar() {
+        return mSeekBar;
+    }
+
     @Override
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
@@ -133,19 +139,19 @@ public class LabeledSeekBarPreference extends SeekBarPreference {
         final boolean isValidTextResIdExist = mTextStartId > 0 || mTextEndId > 0;
         labelFrame.setVisibility(isValidTextResIdExist ? View.VISIBLE : View.GONE);
 
-        final SeekBar seekBar = (SeekBar) holder.findViewById(com.android.internal.R.id.seekbar);
+        mSeekBar = (SeekBar) holder.findViewById(com.android.internal.R.id.seekbar);
         if (mTickMarkId != 0) {
             final Drawable tickMark = getContext().getDrawable(mTickMarkId);
-            seekBar.setTickMark(tickMark);
+            mSeekBar.setTickMark(tickMark);
         }
 
         final ViewGroup iconStartFrame = (ViewGroup) holder.findViewById(R.id.icon_start_frame);
         final ImageView iconStartView = (ImageView) holder.findViewById(R.id.icon_start);
-        updateIconStartIfNeeded(iconStartFrame, iconStartView, seekBar);
+        updateIconStartIfNeeded(iconStartFrame, iconStartView, mSeekBar);
 
         final ViewGroup iconEndFrame = (ViewGroup) holder.findViewById(R.id.icon_end_frame);
         final ImageView iconEndView = (ImageView) holder.findViewById(R.id.icon_end);
-        updateIconEndIfNeeded(iconEndFrame, iconEndView, seekBar);
+        updateIconEndIfNeeded(iconEndFrame, iconEndView, mSeekBar);
     }
 
     public void setOnPreferenceChangeStopListener(OnPreferenceChangeListener listener) {

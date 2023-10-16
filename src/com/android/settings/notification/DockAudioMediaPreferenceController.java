@@ -19,6 +19,8 @@ package com.android.settings.notification;
 import static com.android.settings.notification.SettingPref.TYPE_GLOBAL;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.provider.Settings.Global;
 
@@ -41,7 +43,7 @@ public class DockAudioMediaPreferenceController extends SettingPrefController {
             DEFAULT_DOCK_AUDIO_MEDIA, DOCK_AUDIO_MEDIA_DISABLED, DOCK_AUDIO_MEDIA_ENABLED) {
             @Override
             public boolean isApplicable(Context context) {
-                return context.getResources().getBoolean(
+                return isLeDesk() && context.getResources().getBoolean(
                     com.android.settings.R.bool.has_dock_settings);
             }
 
@@ -59,5 +61,19 @@ public class DockAudioMediaPreferenceController extends SettingPrefController {
                 }
             }
         };
+    }
+
+    /**
+     * Checks the state of docking type
+     * @return true if it is low-end dock types
+     */
+    private boolean isLeDesk() {
+        IntentFilter intentFilter = new IntentFilter(Intent.ACTION_DOCK_EVENT);
+        Intent dockStatus = mContext.registerReceiver(null, intentFilter);
+        if (dockStatus == null) {
+            return false;
+        }
+        int dockState = dockStatus.getIntExtra(Intent.EXTRA_DOCK_STATE, -1);
+        return dockState == Intent.EXTRA_DOCK_STATE_LE_DESK;
     }
 }

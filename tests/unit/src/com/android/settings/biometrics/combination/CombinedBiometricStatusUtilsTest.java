@@ -41,6 +41,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import com.android.settings.Settings;
 import com.android.settings.testutils.ResourcesUtils;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.utils.StringUtil;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -244,11 +245,10 @@ public class CombinedBiometricStatusUtilsTest {
     public void getSummary_whenNoFaceEnrolled_whenMultipleFingerprints_returnsFingerprints() {
         final int enrolledFingerprintsCount = 2;
         final int stringResId = ResourcesUtils.getResourcesId(
-                ApplicationProvider.getApplicationContext(), "plurals",
+                ApplicationProvider.getApplicationContext(), "string",
                 "security_settings_fingerprint_preference_summary");
-        final String summary = mApplicationContext.getResources().getQuantityString(
-                stringResId, enrolledFingerprintsCount /* quantity */,
-                enrolledFingerprintsCount /* formatArgs */);
+        final String summary = StringUtil.getIcuPluralsString(mApplicationContext,
+                enrolledFingerprintsCount, stringResId);
 
         when(mFaceManager.hasEnrolledTemplates(anyInt())).thenReturn(false);
         when(mFingerprintManager.getEnrolledFingerprints(anyInt()))
@@ -261,11 +261,10 @@ public class CombinedBiometricStatusUtilsTest {
     public void getSummary_whenNoFaceEnrolled_whenSingleFingerprints_returnsFingerprints() {
         final int enrolledFingerprintsCount = 1;
         final int stringResId = ResourcesUtils.getResourcesId(
-                ApplicationProvider.getApplicationContext(), "plurals",
+                ApplicationProvider.getApplicationContext(), "string",
                 "security_settings_fingerprint_preference_summary");
-        final String summary = mApplicationContext.getResources().getQuantityString(
-                stringResId, enrolledFingerprintsCount /* quantity */,
-                enrolledFingerprintsCount /* formatArgs */);
+        final String summary = StringUtil.getIcuPluralsString(mApplicationContext,
+                enrolledFingerprintsCount, stringResId);
 
         when(mFaceManager.hasEnrolledTemplates(anyInt())).thenReturn(false);
         when(mFingerprintManager.getEnrolledFingerprints(anyInt()))

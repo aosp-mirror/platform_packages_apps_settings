@@ -57,6 +57,7 @@ import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowUtils;
+import com.android.settings.utils.ActivityControllerWrapper;
 
 import com.google.android.setupcompat.PartnerCustomizationLayout;
 import com.google.android.setupcompat.template.FooterBarMixin;
@@ -119,7 +120,7 @@ public class FingerprintEnrollFindSensorTest {
         props.add(newFingerprintSensorPropertiesInternal(TYPE_REAR));
         doReturn(props).when(mFingerprintManager).getSensorPropertiesInternal();
 
-        mActivityController.setup();
+        ActivityControllerWrapper.setup(mActivityController);
     }
 
     private void setupActivity_onUdfpsDevice() {
@@ -127,7 +128,7 @@ public class FingerprintEnrollFindSensorTest {
         props.add(newFingerprintSensorPropertiesInternal(TYPE_UDFPS_OPTICAL));
         doReturn(props).when(mFingerprintManager).getSensorPropertiesInternal();
 
-        mActivityController.setup();
+        ActivityControllerWrapper.setup(mActivityController);
     }
 
     private void setupActivity_onSfpsDevice() {
@@ -135,7 +136,7 @@ public class FingerprintEnrollFindSensorTest {
         props.add(newFingerprintSensorPropertiesInternal(TYPE_POWER_BUTTON));
         doReturn(props).when(mFingerprintManager).getSensorPropertiesInternal();
 
-        mActivityController.setup();
+        ActivityControllerWrapper.setup(mActivityController);
     }
 
     private FingerprintSensorPropertiesInternal newFingerprintSensorPropertiesInternal(
@@ -591,7 +592,7 @@ public class FingerprintEnrollFindSensorTest {
     private void gotEnrollingResult_resumeActivityAndVerifyResultThenForward(
             int testActivityResult) {
         // resume activity
-        mActivityController.start().resume().visible();
+        mActivityController.start().resume();
         verifyNoSidecar();
 
         // onActivityResult from Enrolling activity shall be forward back
@@ -611,7 +612,8 @@ public class FingerprintEnrollFindSensorTest {
             int testActivityResult, @NonNull Bundle savedInstance) {
         // Rebuild activity and use savedInstance to restore.
         buildActivity();
-        mActivityController.setup(savedInstance);
+        ActivityControllerWrapper.setup(mActivityController, savedInstance);
+        //mActivityController.setup(savedInstance);
         verifyNoSidecar();
 
         // onActivityResult from Enrolling activity shall be forward back

@@ -31,6 +31,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
@@ -58,6 +59,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     private static final String KEY_CONFIRMING_CREDENTIALS = "confirming_credentials";
     private static final String KEY_SCROLLED_TO_BOTTOM = "scrolled";
 
+    private GatekeeperPasswordProvider mGatekeeperPasswordProvider;
     private UserManager mUserManager;
     private boolean mHasPassword;
     private boolean mBiometricUnlockDisabledByAdmin;
@@ -180,7 +182,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
 
         mErrorText = getErrorTextView();
 
-        mUserManager = UserManager.get(this);
+        mUserManager = getUserManager();
         updatePasswordQuality();
 
         // Check isFinishing() because FaceEnrollIntroduction may finish self to launch
@@ -222,7 +224,9 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
 
                     // Show secondary button once scroll is completed.
                     if (!scrollNeeded) {
-                        getSecondaryFooterButton().setVisibility(View.VISIBLE);
+                        if (!enrollmentCompleted) {
+                            getSecondaryFooterButton().setVisibility(View.VISIBLE);
+                        }
                         mHasScrolledToBottom = true;
                     }
                 });
@@ -242,6 +246,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
             mErrorText.setVisibility(View.VISIBLE);
             getNextButton().setText(getResources().getString(R.string.done));
             getNextButton().setVisibility(View.VISIBLE);
+            getSecondaryFooterButton().setVisibility(View.INVISIBLE);
         }
     }
 
@@ -257,8 +262,28 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         return super.shouldFinishWhenBackgrounded() && !mConfirmingCredentials && !mNextClicked;
     }
 
+    @VisibleForTesting
+    @NonNull
+    protected GatekeeperPasswordProvider getGatekeeperPasswordProvider() {
+        if (mGatekeeperPasswordProvider == null) {
+            mGatekeeperPasswordProvider = new GatekeeperPasswordProvider(getLockPatternUtils());
+        }
+        return mGatekeeperPasswordProvider;
+    }
+
+    @VisibleForTesting
+    protected UserManager getUserManager() {
+        return UserManager.get(this);
+    }
+
+    @VisibleForTesting
+    @NonNull
+    protected LockPatternUtils getLockPatternUtils() {
+        return new LockPatternUtils(this);
+    }
+
     private void updatePasswordQuality() {
-        final int passwordQuality = new LockPatternUtils(this)
+        final int passwordQuality = getLockPatternUtils()
                 .getActivePasswordQuality(mUserManager.getCredentialOwnerProfile(mUserId));
         mHasPassword = passwordQuality != DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
     }
@@ -306,6 +331,14 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         startActivityForResult(intent, BIOMETRIC_FIND_SENSOR_REQUEST);
     }
 
+    /**
+     * Returns the intent extra data for setResult(), null means nothing need to been sent back
+     */
+    @Nullable
+    protected Intent getSetResultIntentExtra(@Nullable Intent activityResultIntent) {
+        return activityResultIntent;
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.d(TAG,
@@ -315,7 +348,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
                 && BiometricUtils.isMultiBiometricFingerprintEnrollmentFlow(this);
         if (requestCode == BIOMETRIC_FIND_SENSOR_REQUEST) {
             if (isResultFinished(resultCode)) {
-                handleBiometricResultSkipOrFinished(resultCode, data);
+                handleBiometricResultSkipOrFinished(resultCode, getSetResultIntentExtra(data));
             } else if (isResultSkipped(resultCode)) {
                 if (!BiometricUtils.tryStartingNextBiometricEnroll(this,
                         ENROLL_NEXT_BIOMETRIC_REQUEST, "BIOMETRIC_FIND_SENSOR_SKIPPED")) {
@@ -456,13 +489,16 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         finish();
     }
 
-    @Override
-    protected void initViews() {
-        super.initViews();
-
+    protected void updateDescriptionText() {
         if (mBiometricUnlockDisabledByAdmin && !mParentalConsentRequired) {
             setDescriptionText(getDescriptionDisabledByAdmin());
         }
+    }
+
+    @Override
+    protected void initViews() {
+        super.initViews();
+        updateDescriptionText();
     }
 
     @NonNull

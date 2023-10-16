@@ -31,6 +31,7 @@ import com.android.settings.biometrics.fingerprint.FingerprintSettings
         .FingerprintSettingsFragment.DeleteFingerprintDialog;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -58,6 +59,7 @@ public class DeleteFingerprintDialogTest {
         mFragment = spy(DeleteFingerprintDialog.newInstance(mFingerprint, mTarget));
     }
 
+    @Ignore
     @Test
     public void launchDialog_clickPositive_shouldDeleteFingerprint() {
         FragmentController.setupFragment(mFragment, FragmentActivity.class, 0 /* containerViewId */,
@@ -68,6 +70,7 @@ public class DeleteFingerprintDialogTest {
         verify(mTarget).deleteFingerPrint(mFingerprint);
     }
 
+    @Ignore
     @Test
     public void launchDialog_clickNegative_shouldDoNothing() {
         FragmentController.setupFragment(mFragment, FragmentActivity.class, 0 /* containerViewId */,

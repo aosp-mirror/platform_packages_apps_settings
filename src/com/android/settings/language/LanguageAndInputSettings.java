@@ -24,6 +24,7 @@ import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.FeatureFlagUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -104,8 +105,6 @@ public class LanguageAndInputSettings extends DashboardFragment {
     private static List<AbstractPreferenceController> buildPreferenceControllers(
             @NonNull Context context, @Nullable Lifecycle lifecycle) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        // Language
-        controllers.add(new PhoneLanguagePreferenceController(context));
 
         // Input
         final VirtualKeyboardPreferenceController virtualKeyboardPreferenceController =
@@ -154,11 +153,16 @@ public class LanguageAndInputSettings extends DashboardFragment {
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.language_and_input) {
-
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
                     return buildPreferenceControllers(context, null);
+                }
+
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return !FeatureFlagUtils
+                            .isEnabled(context, FeatureFlagUtils.SETTINGS_NEW_KEYBOARD_UI);
                 }
             };
 }
