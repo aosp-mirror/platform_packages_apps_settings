@@ -17,9 +17,7 @@
 package com.android.settings.datausage
 
 import android.content.Context
-import android.util.SparseBooleanArray
 import androidx.annotation.OpenForTesting
-import androidx.core.util.keyIterator
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
@@ -27,8 +25,6 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.preference.PreferenceGroup
 import androidx.preference.PreferenceScreen
 import com.android.settings.core.BasePreferenceController
-import com.android.settings.datausage.lib.AppDataUsageRepository.Companion.getAppUid
-import com.android.settings.datausage.lib.AppDataUsageRepository.Companion.getAppUidList
 import com.android.settings.datausage.lib.AppPreferenceRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
