@@ -28,6 +28,7 @@ import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
+import android.sysprop.BluetoothProperties;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
@@ -40,6 +41,8 @@ import com.android.settingslib.bluetooth.LocalBluetoothProfile;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 import com.android.settingslib.bluetooth.MapProfile;
 import com.android.settingslib.bluetooth.PbapServerProfile;
+
+import com.google.common.collect.Lists;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -60,6 +63,8 @@ import java.util.Set;
 @Config(shadows = ShadowBluetoothDevice.class)
 public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsControllerTestBase {
 
+    private static final String LE_DEVICE_MODEL = "le_audio_headset";
+    private static final String NON_LE_DEVICE_MODEL = "non_le_audio_headset";
     private BluetoothDetailsProfilesController mController;
     private List<LocalBluetoothProfile> mConnectableProfiles;
     private PreferenceCategory mProfiles;
@@ -88,6 +93,7 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
         mProfiles.setKey(mController.getPreferenceKey());
         mController.mProfilesContainer = mProfiles;
         mScreen.addPreference(mProfiles);
+        BluetoothProperties.le_audio_allow_list(Lists.newArrayList(LE_DEVICE_MODEL));
     }
 
     static class FakeBluetoothProfile implements LocalBluetoothProfile {
@@ -471,5 +477,16 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
         mController.onPause();
 
         verify(mProfileManager).removeServiceListener(mController);
+    }
+
+    @Test
+    public void isDeviceInAllowList_returnTrue() {
+        assertThat(mController.isModelNameInAllowList(LE_DEVICE_MODEL)).isTrue();
+    }
+
+    @Test
+    public void isDeviceInAllowList_returnFalse() {
+        assertThat(mController.isModelNameInAllowList(null)).isFalse();
+        assertThat(mController.isModelNameInAllowList(NON_LE_DEVICE_MODEL)).isFalse();
     }
 }
