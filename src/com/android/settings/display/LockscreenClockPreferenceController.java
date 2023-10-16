@@ -37,7 +37,8 @@ public class LockscreenClockPreferenceController extends TogglePreferenceControl
 
     @Override
     public boolean isChecked() {
-        return Settings.Secure.getInt(mContext.getContentResolver(), SETTING_KEY, 1) != 0;
+        return Settings.Secure.getInt(mContext.getContentResolver(), SETTING_KEY,
+                getDoublelineClockDefault()) != 0;
     }
 
     @Override
@@ -66,5 +67,10 @@ public class LockscreenClockPreferenceController extends TogglePreferenceControl
     @Override
     public int getSliceHighlightMenuRes() {
         return R.string.menu_key_display;
+    }
+
+    protected int getDoublelineClockDefault() {
+        return mContext.getResources()
+            .getInteger(com.android.internal.R.integer.config_doublelineClockDefault);
     }
 }

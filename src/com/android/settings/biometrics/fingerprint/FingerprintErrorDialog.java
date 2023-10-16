@@ -23,9 +23,9 @@ import static com.android.settings.biometrics.fingerprint.FingerprintEnrollEnrol
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.hardware.biometrics.BiometricConstants;
+import android.hardware.biometrics.BiometricFingerprintConstants;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 
@@ -50,52 +50,44 @@ public class FingerprintErrorDialog extends InstrumentedDialogFragment {
         final CharSequence errorString = getArguments().getCharSequence(KEY_ERROR_MSG);
         final CharSequence errorTitle = getArguments().getCharSequence(KEY_ERROR_TITLE);
         final int errMsgId = getArguments().getInt(KEY_ERROR_ID);
-        final boolean canAssumeUdfps = getArguments().getBoolean(KEY_UDFPS, false);
         final boolean wasTimeout = errMsgId == BiometricConstants.BIOMETRIC_ERROR_TIMEOUT;
+        final boolean showTryAgain = errMsgId
+                == BiometricFingerprintConstants.FINGERPRINT_ERROR_UNABLE_TO_PROCESS;
 
         builder.setTitle(errorTitle)
                 .setMessage(errorString)
                 .setCancelable(false)
                 .setPositiveButton(
                         R.string.security_settings_fingerprint_enroll_dialog_ok,
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
+                        (dialog, which) -> {
+                            dialog.dismiss();
+                            final Activity activity = getActivity();
+                            if (wasTimeout) {
+                                activity.setResult(RESULT_TIMEOUT);
+                            } else {
+                                activity.setResult(RESULT_FINISHED);
+                            }
+                            activity.finish();
+                        });
+
+        if (showTryAgain) {
+            builder.setPositiveButton(
+                    R.string.security_settings_fingerprint_enroll_dialog_try_again,
+                    (dialog, which) -> {
+                        dialog.dismiss();
+                        final Activity activity = getActivity();
+                        final Intent intent = activity.getIntent();
+                        intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+                        intent.putExtra(KEY_STATE_CANCELED, false);
+                        activity.startActivity(intent);
+                        activity.finish();
+                    })
+                    .setNegativeButton(R.string.security_settings_fingerprint_enroll_dialog_ok,
+                            (dialog, which) -> {
                                 dialog.dismiss();
                                 final Activity activity = getActivity();
-                                if (wasTimeout && !canAssumeUdfps) {
-                                    activity.setResult(RESULT_TIMEOUT);
-                                } else {
-                                    activity.setResult(RESULT_FINISHED);
-                                }
+                                activity.setResult(RESULT_FINISHED);
                                 activity.finish();
-                            }
-                        });
-        if (wasTimeout && canAssumeUdfps) {
-            builder.setPositiveButton(
-                            R.string.security_settings_fingerprint_enroll_dialog_try_again,
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                    final Activity activity = getActivity();
-                                    final Intent intent = activity.getIntent();
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
-                                    intent.putExtra(KEY_STATE_CANCELED, false);
-                                    activity.startActivity(intent);
-                                    activity.finish();
-                                }
-                            })
-                    .setNegativeButton(
-                            R.string.security_settings_fingerprint_enroll_dialog_ok,
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                    final Activity activity = getActivity();
-                                    activity.setResult(RESULT_TIMEOUT);
-                                    activity.finish();
-                                }
                             });
         }
         final AlertDialog dialog = builder.create();
@@ -103,8 +95,7 @@ public class FingerprintErrorDialog extends InstrumentedDialogFragment {
         return dialog;
     }
 
-    public static void showErrorDialog(BiometricEnrollBase host, int errMsgId,
-            boolean canAssumeUdfps) {
+    public static void showErrorDialog(BiometricEnrollBase host, int errMsgId, boolean isSetup) {
         if (host.isFinishing()) {
             return;
         }
@@ -112,18 +103,43 @@ public class FingerprintErrorDialog extends InstrumentedDialogFragment {
         if (fragmentManager.isDestroyed() || fragmentManager.isStateSaved()) {
             return;
         }
-        CharSequence errMsg = host.getText(getErrorMessage(errMsgId));
-        final CharSequence errTitle = host.getText(getErrorTitle(errMsgId));
-        if (!canAssumeUdfps
-                && errMsgId == BiometricConstants.BIOMETRIC_ERROR_TIMEOUT) {
-            errMsg = host.getText(getErrorMessage(BiometricConstants.BIOMETRIC_ERROR_CANCELED));
+        CharSequence errMsg;
+        if (isSetup) {
+            errMsg = host.getText(getSetupErrorMessage(errMsgId));
+        } else {
+            errMsg = host.getText(getErrorMessage(errMsgId));
         }
-        final FingerprintErrorDialog dialog = newInstance(errMsg, errTitle,
-                errMsgId, canAssumeUdfps);
+        final CharSequence errTitle = host.getText(getErrorTitle(errMsgId));
+        final FingerprintErrorDialog dialog = newInstance(errMsg, errTitle, errMsgId);
         dialog.show(fragmentManager, FingerprintErrorDialog.class.getName());
     }
 
-    private static int getErrorMessage(int errMsgId) {
+    /**
+     * Gets dialog message as error id inside {@link FingerprintManager}
+     */
+    public static int getSetupErrorMessage(int errMsgId) {
+        switch (errMsgId) {
+            case FingerprintManager.FINGERPRINT_ERROR_TIMEOUT:
+                // This message happens when the underlying crypto layer decides to revoke
+                // the enrollment auth token.
+                return R.string
+                        .security_settings_fingerprint_enroll_error_timeout_dialog_message_setup;
+            case FingerprintManager.FINGERPRINT_ERROR_BAD_CALIBRATION:
+                return R.string.security_settings_fingerprint_bad_calibration;
+            case FingerprintManager.FINGERPRINT_ERROR_UNABLE_TO_PROCESS:
+                return R.string
+                        .security_settings_fingerprint_enroll_error_unable_to_process_message_setup;
+            default:
+                // There's nothing specific to tell the user about. Ask them to try again.
+                return R.string
+                        .security_settings_fingerprint_enroll_error_generic_dialog_message_setup;
+        }
+    }
+
+    /**
+     * Gets dialog message as error id inside {@link FingerprintManager}
+     */
+    public static int getErrorMessage(int errMsgId) {
         switch (errMsgId) {
             case FingerprintManager.FINGERPRINT_ERROR_TIMEOUT:
                 // This message happens when the underlying crypto layer decides to revoke
@@ -131,30 +147,37 @@ public class FingerprintErrorDialog extends InstrumentedDialogFragment {
                 return R.string.security_settings_fingerprint_enroll_error_timeout_dialog_message;
             case FingerprintManager.FINGERPRINT_ERROR_BAD_CALIBRATION:
                 return R.string.security_settings_fingerprint_bad_calibration;
+            case FingerprintManager.FINGERPRINT_ERROR_UNABLE_TO_PROCESS:
+                return R.string
+                        .security_settings_fingerprint_enroll_error_unable_to_process_message;
             default:
                 // There's nothing specific to tell the user about. Ask them to try again.
                 return R.string.security_settings_fingerprint_enroll_error_generic_dialog_message;
         }
     }
 
-    private static int getErrorTitle(int errMsgId) {
+    /**
+     * Gets dialog title as error id inside {@link FingerprintManager}
+     */
+    public static int getErrorTitle(int errMsgId) {
         switch (errMsgId) {
-            case FingerprintManager.FINGERPRINT_ERROR_UNABLE_TO_PROCESS:
+            case FingerprintManager.FINGERPRINT_ERROR_TIMEOUT:
+                return R.string.security_settings_fingerprint_enroll_error_dialog_title;
+            case FingerprintManager.FINGERPRINT_ERROR_BAD_CALIBRATION:
+                return R.string.security_settings_fingerprint_bad_calibration_title;
+            default:
                 return R.string
                         .security_settings_fingerprint_enroll_error_unable_to_process_dialog_title;
-            default:
-                return R.string.security_settings_fingerprint_enroll_error_dialog_title;
         }
     }
 
     private static FingerprintErrorDialog newInstance(CharSequence msg, CharSequence title,
-            int msgId, boolean canAssumeUdfps) {
+            int msgId) {
         final FingerprintErrorDialog dialog = new FingerprintErrorDialog();
         final Bundle args = new Bundle();
         args.putCharSequence(KEY_ERROR_MSG, msg);
         args.putCharSequence(KEY_ERROR_TITLE, title);
         args.putInt(KEY_ERROR_ID, msgId);
-        args.putBoolean(KEY_UDFPS, canAssumeUdfps);
         dialog.setArguments(args);
         return dialog;
     }

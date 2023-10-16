@@ -49,7 +49,7 @@ public class InstantAppButtonDialogFragment extends InstrumentedDialogFragment i
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.DIALOG_APP_INFO_ACTION;
+        return SettingsEnums.DIALOG_INSTANT_APP_INFO_ACTION;
     }
 
     @Override

@@ -27,6 +27,7 @@ import org.robolectric.annotation.Implements;
 public class ShadowDeviceStateRotationLockSettingsManager {
 
     private static boolean sDeviceStateRotationLockEnabled;
+    private boolean mIsRotationLockedForAllStates;
 
     @Implementation
     public static boolean isDeviceStateRotationLockEnabled(Context context) {
@@ -35,5 +36,14 @@ public class ShadowDeviceStateRotationLockSettingsManager {
 
     public static void setDeviceStateRotationLockEnabled(boolean enabled) {
         sDeviceStateRotationLockEnabled = enabled;
+    }
+
+    @Implementation
+    public boolean isRotationLockedForAllStates() {
+        return mIsRotationLockedForAllStates;
+    }
+
+    public void setRotationLockedForAllStates(boolean value) {
+        mIsRotationLockedForAllStates = value;
     }
 }

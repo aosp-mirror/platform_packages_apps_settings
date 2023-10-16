@@ -1,5 +1,9 @@
 package com.android.settings.password;
 
+import static com.android.settings.password.TestUtils.COMPONENT_NAME;
+import static com.android.settings.password.TestUtils.VALID_REMAINING_ATTEMPTS;
+import static com.android.settings.password.TestUtils.createRemoteLockscreenValidationSession;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.junit.Assert.assertEquals;
@@ -10,6 +14,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import android.app.Activity;
+import android.app.KeyguardManager;
+import android.app.RemoteLockscreenValidationSession;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Intent;
@@ -18,6 +24,7 @@ import android.os.UserHandle;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.testutils.shadow.ShadowUtils;
+import com.android.settings.utils.ActivityControllerWrapper;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.util.ThemeHelper;
@@ -37,7 +44,8 @@ public class ChooseLockSettingsHelperTest {
 
     @Test
     public void testLaunchConfirmationActivityWithExternal() {
-        final Activity activity = Robolectric.setupActivity(Activity.class);
+        final Activity activity  = (Activity) ActivityControllerWrapper.setup(
+                Robolectric.buildActivity(Activity.class)).get();
 
         ChooseLockSettingsHelper.Builder builder = new ChooseLockSettingsHelper.Builder(activity);
         builder.setRequestCode(100)
@@ -122,7 +130,8 @@ public class ChooseLockSettingsHelperTest {
 
     @Test
     public void launchConfirmPattern_ForceVerify_shouldLaunchInternalActivity() {
-        final Activity activity = Robolectric.setupActivity(Activity.class);
+        final Activity activity  = (Activity) ActivityControllerWrapper.setup(
+                Robolectric.buildActivity(Activity.class)).get();
 
         ChooseLockSettingsHelper.Builder builder = new ChooseLockSettingsHelper.Builder(activity);
         builder.setRequestCode(100)
@@ -142,7 +151,8 @@ public class ChooseLockSettingsHelperTest {
 
     @Test
     public void launchConfirmPassword_ForceVerify_shouldLaunchInternalActivity() {
-        final Activity activity = Robolectric.setupActivity(Activity.class);
+        final Activity activity  = (Activity) ActivityControllerWrapper.setup(
+                Robolectric.buildActivity(Activity.class)).get();
 
         ChooseLockSettingsHelper.Builder builder = new ChooseLockSettingsHelper.Builder(activity);
         builder.setRequestCode(100)
@@ -158,6 +168,97 @@ public class ChooseLockSettingsHelperTest {
         assertEquals(new ComponentName("com.android.settings",
                         ConfirmLockPassword.InternalActivity.class.getName()),
                 startedIntent.getComponent());
+    }
+
+    @Test
+    public void launchConfirmPassword_remoteValidation_passwordLockType() throws Exception {
+        final Activity activity  = (Activity) ActivityControllerWrapper.setup(
+                Robolectric.buildActivity(Activity.class)).get();
+        ShadowActivity shadowActivity = Shadows.shadowOf(activity);
+        RemoteLockscreenValidationSession request = createRemoteLockscreenValidationSession(
+                KeyguardManager.PASSWORD, VALID_REMAINING_ATTEMPTS);
+
+        ChooseLockSettingsHelper chooseLockSettingsHelper = getChooseLockSettingsHelper(
+                new ChooseLockSettingsHelper.Builder(activity)
+                        .setRemoteLockscreenValidation(true)
+                        .setRemoteLockscreenValidationSession(request)
+                        .setRemoteLockscreenValidationServiceComponent(COMPONENT_NAME));
+        chooseLockSettingsHelper.launch();
+
+        Intent startedIntent = shadowActivity.getNextStartedActivity();
+        assertEquals(new ComponentName("com.android.settings",
+                ConfirmLockPassword.class.getName()), startedIntent.getComponent());
+        assertThat(startedIntent.getBooleanExtra(
+                ConfirmDeviceCredentialBaseFragment.IS_REMOTE_LOCKSCREEN_VALIDATION, false)
+        ).isTrue();
+        assertThat(startedIntent.getParcelableExtra(
+                KeyguardManager.EXTRA_REMOTE_LOCKSCREEN_VALIDATION_SESSION,
+                RemoteLockscreenValidationSession.class)
+        ).isEqualTo(request);
+        assertThat(startedIntent.getParcelableExtra(
+                Intent.EXTRA_COMPONENT_NAME, ComponentName.class)
+        ).isEqualTo(COMPONENT_NAME);
+    }
+
+    @Test
+    public void launchConfirmPassword_remoteValidation_pinLockType() throws Exception {
+        Activity activity  = (Activity) ActivityControllerWrapper.setup(
+                Robolectric.buildActivity(Activity.class)).get();
+
+        ShadowActivity shadowActivity = Shadows.shadowOf(activity);
+        RemoteLockscreenValidationSession request = createRemoteLockscreenValidationSession(
+                KeyguardManager.PIN, VALID_REMAINING_ATTEMPTS);
+
+        ChooseLockSettingsHelper chooseLockSettingsHelper = getChooseLockSettingsHelper(
+                new ChooseLockSettingsHelper.Builder(activity)
+                        .setRemoteLockscreenValidation(true)
+                        .setRemoteLockscreenValidationSession(request)
+                        .setRemoteLockscreenValidationServiceComponent(COMPONENT_NAME));
+        chooseLockSettingsHelper.launch();
+
+        Intent startedIntent = shadowActivity.getNextStartedActivity();
+        assertEquals(new ComponentName("com.android.settings",
+                ConfirmLockPassword.class.getName()), startedIntent.getComponent());
+        assertThat(startedIntent.getBooleanExtra(
+                ConfirmDeviceCredentialBaseFragment.IS_REMOTE_LOCKSCREEN_VALIDATION, false)
+        ).isTrue();
+        assertThat(startedIntent.getParcelableExtra(
+                KeyguardManager.EXTRA_REMOTE_LOCKSCREEN_VALIDATION_SESSION,
+                RemoteLockscreenValidationSession.class)
+        ).isEqualTo(request);
+        assertThat(startedIntent.getParcelableExtra(
+                Intent.EXTRA_COMPONENT_NAME, ComponentName.class)
+        ).isEqualTo(COMPONENT_NAME);
+    }
+
+    @Test
+    public void launchConfirmPattern_remoteValidation_patternLockType() throws Exception {
+        Activity activity  = (Activity) ActivityControllerWrapper.setup(
+                Robolectric.buildActivity(Activity.class)).get();
+        ShadowActivity shadowActivity = Shadows.shadowOf(activity);
+        RemoteLockscreenValidationSession request = createRemoteLockscreenValidationSession(
+                KeyguardManager.PATTERN, VALID_REMAINING_ATTEMPTS);
+
+        ChooseLockSettingsHelper chooseLockSettingsHelper = getChooseLockSettingsHelper(
+                new ChooseLockSettingsHelper.Builder(activity)
+                        .setRemoteLockscreenValidation(true)
+                        .setRemoteLockscreenValidationSession(request)
+                        .setRemoteLockscreenValidationServiceComponent(COMPONENT_NAME));
+        chooseLockSettingsHelper.launch();
+
+        Intent startedIntent = shadowActivity.getNextStartedActivity();
+        assertEquals(new ComponentName("com.android.settings",
+                ConfirmLockPattern.class.getName()), startedIntent.getComponent());
+        assertThat(startedIntent.getBooleanExtra(
+                ConfirmDeviceCredentialBaseFragment.IS_REMOTE_LOCKSCREEN_VALIDATION, false)
+        ).isTrue();
+        assertThat(startedIntent.getParcelableExtra(
+                KeyguardManager.EXTRA_REMOTE_LOCKSCREEN_VALIDATION_SESSION,
+                RemoteLockscreenValidationSession.class)
+        ).isEqualTo(request);
+        assertThat(startedIntent.getParcelableExtra(
+                Intent.EXTRA_COMPONENT_NAME, ComponentName.class)
+        ).isEqualTo(COMPONENT_NAME);
     }
 
     private ChooseLockSettingsHelper getChooseLockSettingsHelper(

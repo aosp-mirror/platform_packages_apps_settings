@@ -41,7 +41,7 @@ import android.widget.TextView;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
-import com.android.settings.SetupWizardUtils;
+import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
@@ -85,6 +85,7 @@ public abstract class StorageWizardBase extends FragmentActivity {
         this.setTheme(sudTheme);
         ThemeHelper.trySetDynamicColor(this);
         super.onCreate(savedInstanceState);
+        getLifecycle().addObserver(new HideNonSystemOverlayMixin(this));
 
         mStorage = getSystemService(StorageManager.class);
 

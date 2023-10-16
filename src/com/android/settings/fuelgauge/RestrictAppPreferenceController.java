@@ -31,6 +31,7 @@ import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
 import com.android.settings.fuelgauge.batterytip.BatteryTipUtils;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.utils.StringUtil;
 
 import java.util.List;
 
@@ -75,9 +76,8 @@ public class RestrictAppPreferenceController extends BasePreferenceController {
         final int num = mAppInfos.size();
         // Fragment change RestrictedAppsList after onPause(), UI needs to be updated in onResume()
         preference.setVisible(num > 0);
-        preference.setSummary(
-                mContext.getResources().getQuantityString(R.plurals.restricted_app_summary, num,
-                        num));
+        preference.setSummary(StringUtil.getIcuPluralsString(mContext, num,
+                        R.string.restricted_app_summary));
     }
 
     @Override

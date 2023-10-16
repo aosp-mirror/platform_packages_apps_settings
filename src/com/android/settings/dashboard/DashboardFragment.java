@@ -19,12 +19,15 @@ import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager.OnActivityResultListener;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
 
 import androidx.annotation.CallSuper;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.preference.Preference;
@@ -224,8 +227,6 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     public void onResume() {
         super.onResume();
         updatePreferenceStates();
-        writeElapsedTimeMetric(SettingsEnums.ACTION_DASHBOARD_VISIBLE_TIME,
-                "isParalleledControllers:false");
     }
 
     @Override
@@ -265,6 +266,19 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         mMetricsFeatureProvider.action(SettingsEnums.PAGE_UNKNOWN,
                 SettingsEnums.ACTION_SETTINGS_ADVANCED_BUTTON_EXPAND,
                 getMetricsCategory(), null, 0);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        for (List<AbstractPreferenceController> controllerList : mPreferenceControllers.values()) {
+            for (AbstractPreferenceController controller : controllerList) {
+                if (controller instanceof OnActivityResultListener) {
+                    ((OnActivityResultListener) controller).onActivityResult(
+                            requestCode, resultCode, data);
+                }
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     protected boolean shouldForceRoundedIcon() {

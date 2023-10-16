@@ -124,8 +124,8 @@ public class SettingsActivityTest {
                 "com.android.internal.app.PlatLogoActivity");
         Intent intent = new Intent(android.provider.Settings.ACTION_DISPLAY_SETTINGS);
         intent.setComponent(intent.resolveActivity(mContext.getPackageManager()));
-        intent.setSelector(new
-        Intent().setData(Uri.fromParts(targetIntent.toUri(Intent.URI_INTENT_SCHEME), /* ssp= */ "",
+        intent.setSelector(new Intent().setData(
+                Uri.fromParts(targetIntent.toUri(Intent.URI_INTENT_SCHEME), /* ssp= */ "",
                 /* fragment= */ null)));
 
         Intent resultIntent = SettingsActivity.getTrampolineIntent(intent, "menu_key");

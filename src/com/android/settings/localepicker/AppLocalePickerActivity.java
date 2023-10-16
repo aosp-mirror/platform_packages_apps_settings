@@ -29,6 +29,8 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 
+import androidx.core.view.ViewCompat;
+
 import com.android.internal.app.LocalePickerWithRegion;
 import com.android.internal.app.LocaleStore;
 import com.android.settings.R;
@@ -74,6 +76,7 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
                 this,
                 this,
                 false /* translate only */,
+                null,
                 mPackageName,
                 this);
         mAppLocaleDetails = AppLocaleDetails.newInstance(mPackageName, getUserId());
@@ -104,12 +107,16 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
     @Override
     public boolean onMenuItemActionCollapse(MenuItem item) {
         mAppBarLayout.setExpanded(false /*expanded*/, false /*animate*/);
+        ViewCompat.setNestedScrollingEnabled(mAppLocaleDetails.getListView(), true);
+        ViewCompat.setNestedScrollingEnabled(mLocalePickerWithRegion.getListView(), true);
         return true;
     }
 
     @Override
     public boolean onMenuItemActionExpand(MenuItem item) {
         mAppBarLayout.setExpanded(false /*expanded*/, false /*animate*/);
+        ViewCompat.setNestedScrollingEnabled(mAppLocaleDetails.getListView(), false);
+        ViewCompat.setNestedScrollingEnabled(mLocalePickerWithRegion.getListView(), false);
         return true;
     }
 
@@ -158,8 +165,16 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
     }
 
     private boolean canDisplayLocaleUi() {
-        return AppLocaleUtil.canDisplayLocaleUi(this, mPackageName,
-                getPackageManager().queryIntentActivities(AppLocaleUtil.LAUNCHER_ENTRY_INTENT,
-                        PackageManager.GET_META_DATA));
+        try {
+            PackageManager packageManager = getPackageManager();
+            return AppLocaleUtil.canDisplayLocaleUi(this,
+                    packageManager.getApplicationInfo(mPackageName, 0),
+                    packageManager.queryIntentActivities(AppLocaleUtil.LAUNCHER_ENTRY_INTENT,
+                            PackageManager.GET_META_DATA));
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.e(TAG, "Unable to find info for package: " + mPackageName);
+        }
+
+        return false;
     }
 }

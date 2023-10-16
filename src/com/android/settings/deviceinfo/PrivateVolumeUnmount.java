@@ -40,7 +40,7 @@ public class PrivateVolumeUnmount extends InstrumentedFragment {
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.DEVICEINFO_STORAGE;
+        return SettingsEnums.PRIVATE_VOLUME_UNMOUNT;
     }
 
     @Override

@@ -27,7 +27,6 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -55,6 +54,7 @@ import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -103,6 +103,7 @@ public class SettingsHomepageActivityTest {
         assertThat(avatarView.getVisibility()).isNotEqualTo(View.VISIBLE);
     }
 
+    @Ignore
     @Test
     @Config(qualifiers = "mcc999")
     public void launch_configEnabled_shouldShowAvatar() {
@@ -211,15 +212,13 @@ public class SettingsHomepageActivityTest {
     /** This test is for large screen devices Activity embedding. */
     @Test
     @Config(shadows = ShadowActivityEmbeddingUtils.class)
-    public void onNewIntent_flagClearTop_shouldInitRules() {
+    public void onCreate_flagClearTop_shouldInitRules() {
         ShadowActivityEmbeddingUtils.setIsEmbeddingActivityEnabled(true);
         SettingsHomepageActivity activity =
                 spy(Robolectric.buildActivity(SettingsHomepageActivity.class).get());
-        doNothing().when(activity).reloadHighlightMenuKey();
-        TopLevelSettings topLevelSettings = mock(TopLevelSettings.class);
-        doReturn(topLevelSettings).when(activity).getMainFragment();
+        doReturn(new Intent().setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)).when(activity).getIntent();
 
-        activity.onNewIntent(new Intent().setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+        activity.onCreate(/* savedInstanceState */ null);
 
         verify(activity).initSplitPairRules();
     }

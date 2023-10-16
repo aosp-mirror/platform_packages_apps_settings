@@ -41,7 +41,6 @@ public class NotificationAssistantPreferenceController extends TogglePreferenceC
     private static final String TAG = "NASPreferenceController";
     static final String KEY_NAS = "notification_assistant";
 
-    private static final int AVAILABLE = 1;
     private final UserManager mUserManager;
     private final PackageManager mPackageManager;
     private Fragment mFragment;

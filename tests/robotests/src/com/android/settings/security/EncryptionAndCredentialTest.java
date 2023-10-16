@@ -20,7 +20,11 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
+import android.os.Bundle;
 import android.os.UserManager;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 
@@ -32,6 +36,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.shadows.androidx.fragment.FragmentController;
 
 @RunWith(RobolectricTestRunner.class)
 public class EncryptionAndCredentialTest {
@@ -58,4 +63,24 @@ public class EncryptionAndCredentialTest {
         assertThat(fragment.getMetricsCategory()).isEqualTo(MetricsEvent.ENCRYPTION_AND_CREDENTIAL);
     }
 
+    @Test
+    public void isSelectable_encryptionPreferenceStatus_isNotSelectable() {
+        final PreferenceFragmentCompat fragment =
+                FragmentController.of(new TestFragment(), new Bundle())
+                .create()
+                .start()
+                .resume()
+                .get();
+        final Preference preference =
+                fragment.findPreference("encryption_and_credentials_encryption_status");
+
+        assertThat(preference.isSelectable()).isFalse();
+    }
+
+    public static class TestFragment extends PreferenceFragmentCompat {
+        @Override
+        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+            addPreferencesFromResource(com.android.settings.R.xml.encryption_and_credential);
+        }
+    }
 }

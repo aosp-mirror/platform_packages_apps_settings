@@ -21,6 +21,7 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
+import com.android.settingslib.utils.StringUtil;
 
 import java.util.Arrays;
 import java.util.List;
@@ -63,8 +64,8 @@ public class TopLevelLocationPreferenceController extends BasePreferenceControll
 
     @VisibleForTesting
     void setLocationAppCount(int numApps) {
-        sSummary = mContext.getResources().getQuantityString(
-                R.plurals.location_settings_summary_location_on, numApps, numApps);
+        sSummary = StringUtil.getIcuPluralsString(mContext, numApps,
+                R.string.location_settings_summary_location_on);
         refreshSummary(mPreference);
     }
 

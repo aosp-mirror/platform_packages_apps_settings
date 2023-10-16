@@ -19,6 +19,7 @@ package com.android.settings.applications.intentpicker;
 import static android.content.pm.verify.domain.DomainVerificationUserState.DOMAIN_STATE_NONE;
 
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.verify.domain.DomainOwner;
@@ -35,7 +36,7 @@ import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
@@ -62,7 +63,7 @@ public class ProgressDialogFragment extends InstrumentedDialogFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this.getActivity()).get(SupportedLinkViewModel.class);
+        mViewModel = new ViewModelProvider(this.getActivity()).get(SupportedLinkViewModel.class);
     }
 
     @Override
@@ -113,7 +114,7 @@ public class ProgressDialogFragment extends InstrumentedDialogFragment {
 
     @Override
     public int getMetricsCategory() {
-        return 0;
+        return SettingsEnums.PROGRESS_DIALOG;
     }
 
     /**

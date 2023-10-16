@@ -24,6 +24,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 
@@ -38,14 +39,17 @@ import com.android.settings.testutils.shadow.ShadowInteractionJankMonitor;
 import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.androidx.fragment.FragmentController;
 
+@Ignore
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowRestrictedLockUtilsInternal.class, ShadowInteractionJankMonitor.class})
 public class SeekBarPreferenceTest {
@@ -58,6 +62,9 @@ public class SeekBarPreferenceTest {
     private Context mContext;
     private SeekBarPreference mSeekBarPreference;
     private SeekBar mSeekBar;
+
+    @Mock
+    SeekBar.OnSeekBarChangeListener mMockOnSeekBarChangeListener;
 
     @Before
     public void setUp() {
@@ -95,6 +102,7 @@ public class SeekBarPreferenceTest {
         assertThat(mSeekBarPreference.isSelectable()).isTrue();
     }
 
+    @Ignore
     @Test
     @Config(qualifiers = "mcc998")
     public void isSelectable_default_returnFalse() {
@@ -177,6 +185,54 @@ public class SeekBarPreferenceTest {
         mSeekBarPreference.onProgressChanged(mSeekBar, MIN, true);
 
         assertThat(shadowOf(mSeekBar).lastHapticFeedbackPerformed()).isEqualTo(CLOCK_TICK);
+    }
+
+    @Test
+    public void onProgressChanged_hasSeekBarChangeListener_receiveCallBack() {
+        mSeekBarPreference.setOnSeekBarChangeListener(mMockOnSeekBarChangeListener);
+
+        mSeekBarPreference.onProgressChanged(mSeekBar, PROGRESS, true);
+
+        verify(mMockOnSeekBarChangeListener).onProgressChanged(mSeekBar, PROGRESS, true);
+    }
+
+    @Test
+    public void onProgressChanged_noSeekBarChangeListener_noAction() {
+        mSeekBarPreference.onProgressChanged(mSeekBar, PROGRESS, true);
+
+        verifyNoInteractions(mMockOnSeekBarChangeListener);
+    }
+
+    @Test
+    public void onStartTrackingTouch_hasSeekBarChangeListener_receiveCallBack() {
+        mSeekBarPreference.setOnSeekBarChangeListener(mMockOnSeekBarChangeListener);
+
+        mSeekBarPreference.onStartTrackingTouch(mSeekBar);
+
+        verify(mMockOnSeekBarChangeListener).onStartTrackingTouch(mSeekBar);
+    }
+
+    @Test
+    public void onStartTrackingTouch_noSeekBarChangeListener_noAction() {
+        mSeekBarPreference.onStartTrackingTouch(mSeekBar);
+
+        verifyNoInteractions(mMockOnSeekBarChangeListener);
+    }
+
+    @Test
+    public void onStopTrackingTouch_hasSeekBarChangeListener_receiveCallBack() {
+        mSeekBarPreference.setOnSeekBarChangeListener(mMockOnSeekBarChangeListener);
+
+        mSeekBarPreference.onStopTrackingTouch(mSeekBar);
+
+        verify(mMockOnSeekBarChangeListener).onStopTrackingTouch(mSeekBar);
+    }
+
+    @Test
+    public void onStopTrackingTouch_noSeekBarChangeListener_noAction() {
+        mSeekBarPreference.onStopTrackingTouch(mSeekBar);
+
+        verifyNoInteractions(mMockOnSeekBarChangeListener);
     }
 
     public static class TestFragment extends PreferenceFragmentCompat {

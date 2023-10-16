@@ -84,7 +84,7 @@ public class SuggestionStateProvider extends ContentProvider {
             } else {
                 final Context context = getContext();
                 isComplete = FeatureFactory.getFactory(context)
-                        .getSuggestionFeatureProvider(context)
+                        .getSuggestionFeatureProvider()
                         .isSuggestionComplete(context, cn);
             }
             Log.d(TAG, "Suggestion " + id + " complete: " + isComplete);

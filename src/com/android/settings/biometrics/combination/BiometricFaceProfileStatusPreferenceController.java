@@ -46,4 +46,9 @@ public class BiometricFaceProfileStatusPreferenceController extends
     protected int getUserId() {
         return mProfileChallengeUserId;
     }
+
+    @Override
+    protected boolean isWorkProfileController() {
+        return true;
+    }
 }

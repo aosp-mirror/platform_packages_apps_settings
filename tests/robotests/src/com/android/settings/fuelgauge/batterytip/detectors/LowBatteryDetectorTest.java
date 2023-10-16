@@ -21,7 +21,6 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.spy;
 
 import android.content.Context;
-import android.os.PowerManager;
 
 import com.android.settings.fuelgauge.BatteryInfo;
 import com.android.settings.fuelgauge.batterytip.BatteryTipPolicy;
@@ -34,8 +33,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.Shadows;
-import org.robolectric.shadows.ShadowPowerManager;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.concurrent.TimeUnit;
@@ -47,7 +44,6 @@ public class LowBatteryDetectorTest {
     private BatteryInfo mBatteryInfo;
     private BatteryTipPolicy mPolicy;
     private LowBatteryDetector mLowBatteryDetector;
-    private ShadowPowerManager mShadowPowerManager;
     private Context mContext;
 
     @Before
@@ -56,18 +52,19 @@ public class LowBatteryDetectorTest {
 
         mPolicy = spy(new BatteryTipPolicy(RuntimeEnvironment.application));
         mContext = RuntimeEnvironment.application;
-        mShadowPowerManager = Shadows.shadowOf(mContext.getSystemService(PowerManager.class));
         ReflectionHelpers.setField(mPolicy, "lowBatteryEnabled", true);
         ReflectionHelpers.setField(mPolicy, "lowBatteryHour", 3);
         mBatteryInfo.discharging = true;
 
-        mLowBatteryDetector = new LowBatteryDetector(mContext, mPolicy, mBatteryInfo);
+        mLowBatteryDetector = new LowBatteryDetector(mContext, mPolicy, mBatteryInfo,
+                false /* isPowerSaveMode */);
     }
 
     @Test
     public void testDetect_disabledByPolicy_tipInvisible() {
         ReflectionHelpers.setField(mPolicy, "lowBatteryEnabled", false);
-        mShadowPowerManager.setIsPowerSaveMode(true);
+        mLowBatteryDetector = new LowBatteryDetector(mContext, mPolicy, mBatteryInfo,
+                true /* isPowerSaveMode */);
 
         assertThat(mLowBatteryDetector.detect().isVisible()).isFalse();
     }
@@ -92,7 +89,8 @@ public class LowBatteryDetectorTest {
 
     @Test
     public void testDetect_batterySaverOn_tipInvisible() {
-        mShadowPowerManager.setIsPowerSaveMode(true);
+        mLowBatteryDetector = new LowBatteryDetector(mContext, mPolicy, mBatteryInfo,
+                true /* isPowerSaveMode */);
 
         assertThat(mLowBatteryDetector.detect().getState())
                 .isEqualTo(BatteryTip.StateType.INVISIBLE);

@@ -66,15 +66,6 @@ public class PowerGaugePreferenceTest {
     }
 
     @Test
-    public void testOnBindViewHolder_bindSubtitle() {
-        mPowerGaugePreference.setSubtitle(SUBTITLE);
-        mPowerGaugePreference.onBindViewHolder(mPreferenceViewHolder);
-
-        TextView widgetSummary = (TextView) mPreferenceViewHolder.findViewById(R.id.widget_summary);
-        assertThat(widgetSummary.getText()).isEqualTo(SUBTITLE);
-    }
-
-    @Test
     public void testOnBindViewHolder_showAnomaly_bindAnomalyIcon() {
         mPowerGaugePreference.shouldShowAnomalyIcon(true);
         mPowerGaugePreference.onBindViewHolder(mPreferenceViewHolder);

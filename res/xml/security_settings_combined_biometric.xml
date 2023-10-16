@@ -20,6 +20,7 @@
     android:title="@string/security_settings_biometric_preference_title">
 
     <com.android.settingslib.widget.TopIntroPreference
+        android:key="biometric_intro"
         android:title="@string/biometric_settings_intro" />
 
     <PreferenceCategory
@@ -40,10 +41,17 @@
             settings:keywords="@string/keywords_fingerprint_settings"
             settings:controller="com.android.settings.biometrics.combination.BiometricFingerprintStatusPreferenceController" />
 
+        <com.android.settingslib.RestrictedPreference
+            android:key="biometric_active_unlock_settings"
+            android:title="@string/security_settings_activeunlock_preference_title"
+            android:summary="@string/summary_placeholder"
+            settings:keywords="@string/keywords_active_unlock_settings"
+            settings:controller="com.android.settings.biometrics.activeunlock.ActiveUnlockStatusPreferenceController" />
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:key="biometric_ways_to_use">
+        android:key="biometric_ways_to_use"
+        android:title="@string/biometric_settings_category_use_face_fingerprint">
 
         <com.android.settingslib.RestrictedSwitchPreference
             android:key="biometric_settings_biometric_keyguard"

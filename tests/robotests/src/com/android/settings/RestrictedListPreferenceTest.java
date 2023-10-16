@@ -30,6 +30,7 @@ import android.os.Bundle;
 import android.util.AttributeSet;
 
 import com.android.settings.testutils.shadow.ShadowUserManager;
+import com.android.settings.utils.ActivityControllerWrapper;
 import com.android.settingslib.RestrictedPreferenceHelper;
 
 import org.junit.Before;
@@ -58,7 +59,8 @@ public class RestrictedListPreferenceTest {
 
     @Before
     public void setUp() {
-        mActivity = Robolectric.setupActivity(Activity.class);
+        mActivity = (Activity) ActivityControllerWrapper.setup(
+                Robolectric.buildActivity(Activity.class)).get();
         mShadowKeyguardManager =
                 Shadows.shadowOf(application.getSystemService(KeyguardManager.class));
         mMockHelper = mock(RestrictedPreferenceHelper.class);

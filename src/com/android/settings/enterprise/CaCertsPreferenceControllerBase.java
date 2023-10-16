@@ -22,6 +22,7 @@ import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.utils.StringUtil;
 
 public abstract class CaCertsPreferenceControllerBase
         extends AbstractPreferenceController implements PreferenceControllerMixin {
@@ -36,9 +37,8 @@ public abstract class CaCertsPreferenceControllerBase
 
     @Override
     public void updateState(Preference preference) {
-        final int certs = getNumberOfCaCerts();
-        preference.setSummary(mContext.getResources().getQuantityString(
-                R.plurals.enterprise_privacy_number_ca_certs, certs, certs));
+        preference.setSummary(StringUtil.getIcuPluralsString(mContext, getNumberOfCaCerts(),
+                R.string.enterprise_privacy_number_ca_certs));
     }
 
     @Override

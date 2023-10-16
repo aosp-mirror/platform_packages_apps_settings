@@ -35,6 +35,7 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.utils.StringUtil;
 
 import org.junit.After;
 import org.junit.Before;
@@ -148,8 +149,8 @@ public class RestrictAppTipTest {
     @Test
     public void getSummary_oneAppHandled_showHandledSummary() {
         assertThat(mHandledBatteryTip.getSummary(mContext).toString())
-                .isEqualTo(mContext.getResources().getQuantityString(
-                        R.plurals.battery_tip_restrict_handled_summary, 1));
+                .isEqualTo(StringUtil.getIcuPluralsString(mContext, 1,
+                        R.string.battery_tip_restrict_handled_summary));
     }
 
     @Test
@@ -157,8 +158,8 @@ public class RestrictAppTipTest {
         mUsageAppList.add(new AppInfo.Builder().build());
         mHandledBatteryTip = new RestrictAppTip(BatteryTip.StateType.HANDLED, mUsageAppList);
         assertThat(mHandledBatteryTip.getSummary(mContext))
-                .isEqualTo(mContext.getResources().getQuantityString(
-                        R.plurals.battery_tip_restrict_handled_summary, 2));
+                .isEqualTo(StringUtil.getIcuPluralsString(mContext, 2,
+                        R.string.battery_tip_restrict_handled_summary));
     }
 
     @Test

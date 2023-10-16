@@ -338,4 +338,12 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
         }
         throw new IllegalStateException("Missing ComponentInfo!");
     }
+
+    @Override
+    public boolean isLongBackgroundTaskPermissionToggleSupported() {
+        // Since the RUN_USER_INITIATED_JOBS permission related to this controller is a normal
+        // app-op permission allowed by default, this should always return false - if it is ever
+        // converted to a special app-op permission, this should be updated.
+        return false;
+    }
 }

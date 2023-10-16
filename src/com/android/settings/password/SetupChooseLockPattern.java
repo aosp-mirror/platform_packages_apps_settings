@@ -18,6 +18,8 @@ package com.android.settings.password;
 
 import static android.content.res.Configuration.ORIENTATION_LANDSCAPE;
 
+import static com.android.internal.widget.LockPatternUtils.CREDENTIAL_TYPE_PATTERN;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -31,6 +33,8 @@ import androidx.fragment.app.Fragment;
 
 import com.android.settings.R;
 import com.android.settings.SetupRedactionInterstitial;
+
+import com.google.android.setupcompat.util.WizardManagerHelper;
 
 /**
  * Setup Wizard's version of ChooseLockPattern screen. It inherits the logic and basic structure
@@ -101,14 +105,13 @@ public class SetupChooseLockPattern extends ChooseLockPattern {
                         .getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FACE, false);
                 final boolean forBiometrics = intent
                         .getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_BIOMETRICS, false);
-
                 final SetupSkipDialog dialog = SetupSkipDialog.newInstance(
+                        CREDENTIAL_TYPE_PATTERN,
                         frpSupported,
-                        /* isPatternMode= */ true,
-                        /* isAlphaMode= */ false,
                         forFingerprint,
                         forFace,
-                        forBiometrics);
+                        forBiometrics,
+                        WizardManagerHelper.isAnySetupWizard(intent));
                 dialog.show(getFragmentManager());
                 return;
             }

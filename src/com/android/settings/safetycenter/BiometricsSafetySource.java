@@ -22,14 +22,16 @@ import android.content.Intent;
 import android.hardware.face.FaceManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
+import android.os.Process;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.safetycenter.SafetyEvent;
 import android.safetycenter.SafetySourceData;
 import android.safetycenter.SafetySourceStatus;
 
-import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricNavigationUtils;
+import com.android.settings.biometrics.activeunlock.ActiveUnlockStatusUtils;
 import com.android.settings.biometrics.combination.CombinedBiometricStatusUtils;
 import com.android.settings.biometrics.face.FaceStatusUtils;
 import com.android.settings.biometrics.fingerprint.FingerprintStatusUtils;
@@ -43,8 +45,7 @@ public final class BiometricsSafetySource {
     private static final int REQUEST_CODE_FACE_SETTING = 20;
     private static final int REQUEST_CODE_FINGERPRINT_SETTING = 30;
 
-    private BiometricsSafetySource() {
-    }
+    private BiometricsSafetySource() {}
 
     /** Sets biometric safety data for Safety Center. */
     public static void setSafetySourceData(Context context, SafetyEvent safetyEvent) {
@@ -52,23 +53,59 @@ public final class BiometricsSafetySource {
             return;
         }
 
-        final int userId = UserHandle.myUserId();
+        final UserHandle userHandle = Process.myUserHandle();
+        final int userId = userHandle.getIdentifier();
+        final UserManager userManager = UserManager.get(context);
+        UserHandle profileParentUserHandle = userManager.getProfileParent(userHandle);
+        if (profileParentUserHandle == null) {
+            profileParentUserHandle = userHandle;
+        }
+        final Context profileParentContext =
+                context.createContextAsUser(profileParentUserHandle, 0);
 
-        final BiometricNavigationUtils biometricNavigationUtils = new BiometricNavigationUtils(
-                userId);
+        final BiometricNavigationUtils biometricNavigationUtils =
+                new BiometricNavigationUtils(userId);
         final CombinedBiometricStatusUtils combinedBiometricStatusUtils =
                 new CombinedBiometricStatusUtils(context, userId);
-
+        final ActiveUnlockStatusUtils activeUnlockStatusUtils =
+                new ActiveUnlockStatusUtils(context);
+        if (!userManager.isProfile() && activeUnlockStatusUtils.isAvailable()) {
+            final RestrictedLockUtils.EnforcedAdmin disablingAdmin =
+                    combinedBiometricStatusUtils.getDisablingAdmin();
+            setBiometricSafetySourceData(
+                    context,
+                    activeUnlockStatusUtils.getTitleForActiveUnlock(),
+                    combinedBiometricStatusUtils.getSummary(),
+                    createPendingIntent(
+                            context,
+                            biometricNavigationUtils.getBiometricSettingsIntent(
+                                    context,
+                                    combinedBiometricStatusUtils.getSettingsClassName(),
+                                    disablingAdmin,
+                                    Bundle.EMPTY),
+                            REQUEST_CODE_COMBINED_BIOMETRIC_SETTING),
+                    disablingAdmin == null /* enabled */,
+                    combinedBiometricStatusUtils.hasEnrolled(),
+                    safetyEvent);
+            return;
+        }
         if (combinedBiometricStatusUtils.isAvailable()) {
             final RestrictedLockUtils.EnforcedAdmin disablingAdmin =
                     combinedBiometricStatusUtils.getDisablingAdmin();
-            setBiometricSafetySourceData(context,
-                    context.getString(R.string.security_settings_biometric_preference_title),
+            setBiometricSafetySourceData(
+                    context,
+                    combinedBiometricStatusUtils.getTitle(),
                     combinedBiometricStatusUtils.getSummary(),
-                    createPendingIntent(context,
-                            biometricNavigationUtils.getBiometricSettingsIntent(context,
-                                    combinedBiometricStatusUtils.getSettingsClassName(),
-                                    disablingAdmin, Bundle.EMPTY),
+                    createPendingIntent(
+                            profileParentContext,
+                            biometricNavigationUtils
+                                    .getBiometricSettingsIntent(
+                                            context,
+                                            combinedBiometricStatusUtils
+                                                    .getSettingsClassNameBasedOnUser(),
+                                            disablingAdmin,
+                                            Bundle.EMPTY)
+                                    .setIdentifier(Integer.toString(userId)),
                             REQUEST_CODE_COMBINED_BIOMETRIC_SETTING),
                     disablingAdmin == null /* enabled */,
                     combinedBiometricStatusUtils.hasEnrolled(),
@@ -82,13 +119,19 @@ public final class BiometricsSafetySource {
         if (faceStatusUtils.isAvailable()) {
             final RestrictedLockUtils.EnforcedAdmin disablingAdmin =
                     faceStatusUtils.getDisablingAdmin();
-            setBiometricSafetySourceData(context,
-                    context.getString(R.string.security_settings_face_preference_title),
+            setBiometricSafetySourceData(
+                    context,
+                    faceStatusUtils.getTitle(),
                     faceStatusUtils.getSummary(),
-                    createPendingIntent(context,
-                            biometricNavigationUtils.getBiometricSettingsIntent(context,
-                                    faceStatusUtils.getSettingsClassName(), disablingAdmin,
-                                    Bundle.EMPTY),
+                    createPendingIntent(
+                            profileParentContext,
+                            biometricNavigationUtils
+                                    .getBiometricSettingsIntent(
+                                            context,
+                                            faceStatusUtils.getSettingsClassName(),
+                                            disablingAdmin,
+                                            Bundle.EMPTY)
+                                    .setIdentifier(Integer.toString(userId)),
                             REQUEST_CODE_FACE_SETTING),
                     disablingAdmin == null /* enabled */,
                     faceStatusUtils.hasEnrolled(),
@@ -98,19 +141,25 @@ public final class BiometricsSafetySource {
         }
 
         final FingerprintManager fingerprintManager = Utils.getFingerprintManagerOrNull(context);
-        final FingerprintStatusUtils fingerprintStatusUtils = new FingerprintStatusUtils(context,
-                fingerprintManager, userId);
+        final FingerprintStatusUtils fingerprintStatusUtils =
+                new FingerprintStatusUtils(context, fingerprintManager, userId);
 
         if (fingerprintStatusUtils.isAvailable()) {
             final RestrictedLockUtils.EnforcedAdmin disablingAdmin =
                     fingerprintStatusUtils.getDisablingAdmin();
-            setBiometricSafetySourceData(context,
-                    context.getString(R.string.security_settings_fingerprint_preference_title),
+            setBiometricSafetySourceData(
+                    context,
+                    fingerprintStatusUtils.getTitle(),
                     fingerprintStatusUtils.getSummary(),
-                    createPendingIntent(context,
-                            biometricNavigationUtils.getBiometricSettingsIntent(context,
-                                    fingerprintStatusUtils.getSettingsClassName(), disablingAdmin,
-                                    Bundle.EMPTY),
+                    createPendingIntent(
+                            profileParentContext,
+                            biometricNavigationUtils
+                                    .getBiometricSettingsIntent(
+                                            context,
+                                            fingerprintStatusUtils.getSettingsClassName(),
+                                            disablingAdmin,
+                                            Bundle.EMPTY)
+                                    .setIdentifier(Integer.toString(userId)),
                             REQUEST_CODE_FINGERPRINT_SETTING),
                     disablingAdmin == null /* enabled */,
                     fingerprintStatusUtils.hasEnrolled(),
@@ -122,33 +171,38 @@ public final class BiometricsSafetySource {
     public static void onBiometricsChanged(Context context) {
         setSafetySourceData(
                 context,
-                new SafetyEvent.Builder(SafetyEvent.SAFETY_EVENT_TYPE_SOURCE_STATE_CHANGED).build()
-        );
+                new SafetyEvent.Builder(SafetyEvent.SAFETY_EVENT_TYPE_SOURCE_STATE_CHANGED)
+                        .build());
     }
 
-    private static void setBiometricSafetySourceData(Context context, String title, String summary,
-            PendingIntent pendingIntent, boolean enabled, boolean hasEnrolled,
+    private static void setBiometricSafetySourceData(
+            Context context,
+            String title,
+            String summary,
+            PendingIntent pendingIntent,
+            boolean enabled,
+            boolean hasEnrolled,
             SafetyEvent safetyEvent) {
         final int severityLevel =
-                enabled && hasEnrolled ? SafetySourceData.SEVERITY_LEVEL_INFORMATION
+                enabled && hasEnrolled
+                        ? SafetySourceData.SEVERITY_LEVEL_INFORMATION
                         : SafetySourceData.SEVERITY_LEVEL_UNSPECIFIED;
 
-        final SafetySourceStatus status = new SafetySourceStatus.Builder(title, summary,
-                severityLevel).setPendingIntent(pendingIntent).setEnabled(enabled).build();
+        final SafetySourceStatus status =
+                new SafetySourceStatus.Builder(title, summary, severityLevel)
+                        .setPendingIntent(pendingIntent)
+                        .setEnabled(enabled)
+                        .build();
         final SafetySourceData safetySourceData =
                 new SafetySourceData.Builder().setStatus(status).build();
 
-        SafetyCenterManagerWrapper.get().setSafetySourceData(
-                context, SAFETY_SOURCE_ID, safetySourceData, safetyEvent);
+        SafetyCenterManagerWrapper.get()
+                .setSafetySourceData(context, SAFETY_SOURCE_ID, safetySourceData, safetyEvent);
     }
 
-    private static PendingIntent createPendingIntent(Context context, Intent intent,
-            int requestCode) {
-        return PendingIntent
-                .getActivity(
-                        context,
-                        requestCode,
-                        intent,
-                        PendingIntent.FLAG_IMMUTABLE);
+    private static PendingIntent createPendingIntent(
+            Context context, Intent intent, int requestCode) {
+        return PendingIntent.getActivity(
+                context, requestCode, intent, PendingIntent.FLAG_IMMUTABLE);
     }
 }

@@ -33,6 +33,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.Activity;
@@ -41,6 +42,9 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.hardware.face.Face;
 import android.hardware.face.FaceManager;
+import android.hardware.face.FaceSensorProperties;
+import android.hardware.face.FaceSensorPropertiesInternal;
+import android.hardware.face.IFaceAuthenticatorsRegisteredCallback;
 import android.os.UserHandle;
 import android.view.View;
 import android.widget.TextView;
@@ -56,6 +60,7 @@ import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowSensorPrivacyManager;
@@ -72,6 +77,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
@@ -91,7 +98,8 @@ import java.util.List;
         ShadowUserManager.class,
         ShadowUtils.class,
         ShadowDevicePolicyManager.class,
-        ShadowSensorPrivacyManager.class
+        ShadowSensorPrivacyManager.class,
+        SettingsShadowResources.class
 })
 public class FaceEnrollIntroductionTest {
 
@@ -99,6 +107,8 @@ public class FaceEnrollIntroductionTest {
     private FaceManager mFaceManager;
     @Mock
     private LockPatternUtils mLockPatternUtils;
+    @Captor
+    private ArgumentCaptor<IFaceAuthenticatorsRegisteredCallback> mCaptor;
 
     private Context mContext;
     private ActivityController<? extends Activity> mController;
@@ -107,7 +117,7 @@ public class FaceEnrollIntroductionTest {
     private FakeFeatureFactory mFakeFeatureFactory;
     private ShadowUserManager mUserManager;
 
-    enum GateKeeperAction { CALL_SUPER, RETURN_BYTE_ARRAY, THROW_CREDENTIAL_NOT_MATCH }
+    enum GateKeeperAction {CALL_SUPER, RETURN_BYTE_ARRAY, THROW_CREDENTIAL_NOT_MATCH}
 
     public static class TestFaceEnrollIntroduction extends FaceEnrollIntroduction {
 
@@ -127,7 +137,6 @@ public class FaceEnrollIntroductionTest {
             return mConfirmingCredentials;
         }
 
-        public FaceManager mOverrideFaceManager = null;
         @NonNull
         public GateKeeperAction mGateKeeperAction = GateKeeperAction.CALL_SUPER;
 
@@ -143,12 +152,6 @@ public class FaceEnrollIntroductionTest {
                 default:
                     return super.requestGatekeeperHat(challenge);
             }
-        }
-
-        @Nullable
-        @Override
-        protected FaceManager getFaceManager() {
-            return mOverrideFaceManager;
         }
 
         @Override
@@ -186,7 +189,6 @@ public class FaceEnrollIntroductionTest {
         mController = Robolectric.buildActivity(
                 TestFaceEnrollIntroduction.class, testIntent);
         mActivity = (TestFaceEnrollIntroduction) spy(mController.get());
-        mActivity.mOverrideFaceManager = mFaceManager;
         when(mActivity.getPostureGuidanceIntent()).thenReturn(null);
         when(mContext.getApplicationContext()).thenReturn(mContext);
         when(mContext.getSystemService(Context.FACE_SERVICE)).thenReturn(mFaceManager);
@@ -229,7 +231,6 @@ public class FaceEnrollIntroductionTest {
         }).when(mFaceManager).generateChallenge(anyInt(), any());
         mController = Robolectric.buildActivity(TestFaceEnrollIntroduction.class, intent);
         mActivity = (TestFaceEnrollIntroduction) mController.get();
-        mActivity.mOverrideFaceManager = mFaceManager;
     }
 
     private GlifLayout getGlifLayout(Activity activity) {
@@ -310,12 +311,65 @@ public class FaceEnrollIntroductionTest {
     }
 
     @Test
-    public void testFaceEnrollIntroduction_hasDescription() {
+    public void testFaceEnrollIntroduction_hasDescription_weakFace() throws Exception {
         setupActivity();
-        CharSequence desc = getGlifLayout(mActivity).getDescriptionText();
+        SettingsShadowResources.overrideResource(
+                R.bool.config_face_intro_show_less_secure,
+                true);
+        verify(mFaceManager).addAuthenticatorsRegisteredCallback(mCaptor.capture());
 
-        assertThat(desc.toString()).isEqualTo(
+        assertThat(getGlifLayout(mActivity).getDescriptionText().toString()).isEqualTo(
                 mContext.getString(R.string.security_settings_face_enroll_introduction_message));
+        assertThat(mActivity.findViewById(R.id.info_row_less_secure).getVisibility()).isEqualTo(
+                View.GONE);
+
+        List<FaceSensorPropertiesInternal> props = List.of(new FaceSensorPropertiesInternal(
+                0 /* id */,
+                FaceSensorProperties.STRENGTH_WEAK,
+                1 /* maxTemplatesAllowed */,
+                new ArrayList<>() /* componentInfo */,
+                FaceSensorProperties.TYPE_UNKNOWN,
+                true /* supportsFaceDetection */,
+                true /* supportsSelfIllumination */,
+                false /* resetLockoutRequiresChallenge */));
+        mCaptor.getValue().onAllAuthenticatorsRegistered(props);
+
+        assertThat(getGlifLayout(mActivity).getDescriptionText().toString()).isEqualTo(
+                mContext.getString(R.string.security_settings_face_enroll_introduction_message));
+        assertThat(mActivity.findViewById(R.id.info_row_less_secure).getVisibility()).isEqualTo(
+                View.VISIBLE);
+    }
+
+    @Test
+    public void testFaceEnrollIntroduction_hasDescriptionNoLessSecure_strongFace()
+            throws Exception {
+        setupActivity();
+        SettingsShadowResources.overrideResource(
+                R.bool.config_face_intro_show_less_secure,
+                true);
+        verify(mFaceManager).addAuthenticatorsRegisteredCallback(mCaptor.capture());
+
+        assertThat(getGlifLayout(mActivity).getDescriptionText().toString()).isEqualTo(
+                mContext.getString(R.string.security_settings_face_enroll_introduction_message));
+        assertThat(mActivity.findViewById(R.id.info_row_less_secure).getVisibility()).isEqualTo(
+                View.GONE);
+
+        List<FaceSensorPropertiesInternal> props = List.of(new FaceSensorPropertiesInternal(
+                0 /* id */,
+                FaceSensorProperties.STRENGTH_STRONG,
+                1 /* maxTemplatesAllowed */,
+                new ArrayList<>() /* componentInfo */,
+                FaceSensorProperties.TYPE_UNKNOWN,
+                true /* supportsFaceDetection */,
+                true /* supportsSelfIllumination */,
+                false /* resetLockoutRequiresChallenge */));
+        mCaptor.getValue().onAllAuthenticatorsRegistered(props);
+
+        assertThat(getGlifLayout(mActivity).getDescriptionText().toString()).isEqualTo(
+                mContext.getString(
+                        R.string.security_settings_face_enroll_introduction_message_class3));
+        assertThat(mActivity.findViewById(R.id.info_row_less_secure).getVisibility()).isEqualTo(
+                View.GONE);
     }
 
     @Test
@@ -412,7 +466,6 @@ public class FaceEnrollIntroductionTest {
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, new byte[0]);
         mController = Robolectric.buildActivity(TestFaceEnrollIntroduction.class, intent);
         mActivity = (TestFaceEnrollIntroduction) mController.get();
-        mActivity.mOverrideFaceManager = mFaceManager;
 
         mController.create();
 
@@ -432,7 +485,6 @@ public class FaceEnrollIntroductionTest {
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, new byte[0]);
         mController = Robolectric.buildActivity(TestFaceEnrollIntroduction.class, intent);
         mActivity = (TestFaceEnrollIntroduction) mController.get();
-        mActivity.mOverrideFaceManager = mFaceManager;
 
         mController.create();
 
@@ -450,7 +502,6 @@ public class FaceEnrollIntroductionTest {
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, new byte[0]);
         mController = Robolectric.buildActivity(TestFaceEnrollIntroduction.class, intent);
         mActivity = (TestFaceEnrollIntroduction) mController.get();
-        mActivity.mOverrideFaceManager = mFaceManager;
 
         mController.create();
 
@@ -470,7 +521,6 @@ public class FaceEnrollIntroductionTest {
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, new byte[0]);
         mController = Robolectric.buildActivity(TestFaceEnrollIntroduction.class, intent);
         mActivity = (TestFaceEnrollIntroduction) mController.get();
-        mActivity.mOverrideFaceManager = mFaceManager;
 
         mController.create();
         mController.start();
@@ -489,7 +539,6 @@ public class FaceEnrollIntroductionTest {
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, new byte[0]);
         mController = Robolectric.buildActivity(TestFaceEnrollIntroduction.class, intent);
         mActivity = (TestFaceEnrollIntroduction) mController.get();
-        mActivity.mOverrideFaceManager = mFaceManager;
 
         mController.create();
         mController.start();

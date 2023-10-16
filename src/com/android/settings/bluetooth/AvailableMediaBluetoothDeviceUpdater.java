@@ -23,7 +23,6 @@ import android.util.Log;
 import androidx.preference.Preference;
 
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
-import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 
 /**
@@ -33,15 +32,15 @@ public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
         implements Preference.OnPreferenceClickListener {
 
     private static final String TAG = "AvailableMediaBluetoothDeviceUpdater";
-    private static final boolean DBG = Log.isLoggable(TAG, Log.DEBUG);
+    private static final boolean DBG = Log.isLoggable(BluetoothDeviceUpdater.TAG, Log.DEBUG);
 
     private static final String PREF_KEY = "available_media_bt";
 
     private final AudioManager mAudioManager;
 
-    public AvailableMediaBluetoothDeviceUpdater(Context context, DashboardFragment fragment,
-            DevicePreferenceCallback devicePreferenceCallback) {
-        super(context, fragment, devicePreferenceCallback);
+    public AvailableMediaBluetoothDeviceUpdater(Context context,
+            DevicePreferenceCallback devicePreferenceCallback, int metricsCategory) {
+        super(context, devicePreferenceCallback, metricsCategory);
         mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
     }
 
@@ -72,7 +71,7 @@ public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
             }
             // If device is Hearing Aid or LE Audio, it is compatible with HFP and A2DP.
             // It would show in Available Devices group.
-            if (cachedDevice.isConnectedHearingAidDevice()
+            if (cachedDevice.isConnectedAshaHearingAidDevice()
                     || cachedDevice.isConnectedLeAudioDevice()) {
                 Log.d(TAG, "isFilterMatched() device : " +
                         cachedDevice.getName() + ", the profile is connected.");
@@ -102,7 +101,7 @@ public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
-        mMetricsFeatureProvider.logClickedPreference(preference, mFragment.getMetricsCategory());
+        mMetricsFeatureProvider.logClickedPreference(preference, mMetricsCategory);
         final CachedBluetoothDevice device = ((BluetoothDevicePreference) preference)
                 .getBluetoothDevice();
         return device.setActive();
@@ -111,5 +110,16 @@ public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
     @Override
     protected String getPreferenceKey() {
         return PREF_KEY;
+    }
+
+    @Override
+    protected String getLogTag() {
+        return TAG;
+    }
+
+    @Override
+    protected void update(CachedBluetoothDevice cachedBluetoothDevice) {
+        super.update(cachedBluetoothDevice);
+        Log.d(TAG, "Map : " + mPreferenceMap);
     }
 }
