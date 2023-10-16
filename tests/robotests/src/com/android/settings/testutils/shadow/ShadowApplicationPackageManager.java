@@ -16,9 +16,12 @@
 
 package com.android.settings.testutils.shadow;
 
+import android.annotation.NonNull;
 import android.app.ApplicationPackageManager;
 import android.content.pm.PackageInfo;
+import android.os.IRemoteCallback;
 
+import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 
 import java.util.ArrayList;
@@ -49,4 +52,10 @@ public class ShadowApplicationPackageManager
         }
         return packages;
     }
+
+    @Implementation
+    public void registerPackageMonitorCallback(@NonNull IRemoteCallback callback, int userId) {}
+
+    @Implementation
+    public void unregisterPackageMonitorCallback(@NonNull IRemoteCallback callback) {}
 }
