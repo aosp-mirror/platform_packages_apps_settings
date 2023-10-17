@@ -261,6 +261,7 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
             return Unit.INSTANCE;
         });
         if (mCycles != null) {
+            Log.d(TAG, "setInitialCycles: " + mCycles + " " + mSelectedCycle);
             controller.setInitialCycles(mCycles, mSelectedCycle);
         }
     }

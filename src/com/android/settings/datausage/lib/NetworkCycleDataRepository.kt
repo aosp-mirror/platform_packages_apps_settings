@@ -58,7 +58,7 @@ class NetworkCycleDataRepository(
         return reverseBucketRange(
             startTime = timeRange.lower,
             endTime = timeRange.upper,
-            bucketSize = DateUtils.WEEK_IN_MILLIS * 4,
+            step = DateUtils.WEEK_IN_MILLIS * 4,
         )
     }
 
@@ -76,7 +76,7 @@ class NetworkCycleDataRepository(
                 dailyUsage = bucketRange(
                     startTime = startTime,
                     endTime = endTime,
-                    bucketSize = NetworkCycleChartData.BUCKET_DURATION.inWholeMilliseconds,
+                    step = NetworkCycleChartData.BUCKET_DURATION.inWholeMilliseconds,
                 ).queryUsage(),
             )
         }
@@ -92,29 +92,10 @@ class NetworkCycleDataRepository(
         usage = networkStatsRepository.querySummaryForDevice(range.lower, range.upper),
     )
 
-    private fun bucketRange(startTime: Long, endTime: Long, bucketSize: Long): List<Range<Long>> {
-        val buckets = mutableListOf<Range<Long>>()
-        var currentStart = startTime
-        while (currentStart < endTime) {
-            val bucketEnd = currentStart + bucketSize
-            buckets += Range(currentStart, bucketEnd)
-            currentStart = bucketEnd
-        }
-        return buckets
-    }
+    private fun bucketRange(startTime: Long, endTime: Long, step: Long): List<Range<Long>> =
+        (startTime..endTime step step).zipWithNext(::Range)
 
-    private fun reverseBucketRange(
-        startTime: Long,
-        endTime: Long,
-        bucketSize: Long,
-    ): List<Range<Long>> {
-        val buckets = mutableListOf<Range<Long>>()
-        var currentEnd = endTime
-        while (currentEnd > startTime) {
-            val bucketStart = currentEnd - bucketSize
-            buckets += Range(bucketStart, currentEnd)
-            currentEnd = bucketStart
-        }
-        return buckets
-    }
+    private fun reverseBucketRange(startTime: Long, endTime: Long, step: Long): List<Range<Long>> =
+        (endTime downTo (startTime - step + 1) step step)
+            .zipWithNext { bucketEnd, bucketStart -> Range(bucketStart, bucketEnd) }
 }

@@ -55,9 +55,6 @@ open class DataUsageList : DataUsageBaseFragment(), MobileDataEnabledListener.Cl
     @VisibleForTesting
     var subId = SubscriptionManager.INVALID_SUBSCRIPTION_ID
 
-    // Spinner will keep the selected cycle even after paused, this only keeps the displayed cycle,
-    // which need be cleared when resumed.
-    private var lastDisplayedUsageData: NetworkUsageData? = null
     private lateinit var usageAmount: Preference
     private var subscriptionInfoEntity: SubscriptionInfoEntity? = null
     private lateinit var dataUsageListAppsController: DataUsageListAppsController
@@ -77,7 +74,7 @@ open class DataUsageList : DataUsageBaseFragment(), MobileDataEnabledListener.Cl
             finish()
             return
         }
-        billingCycleRepository = createBillingCycleRepository();
+        billingCycleRepository = createBillingCycleRepository()
         if (!billingCycleRepository.isBandwidthControlEnabled()) {
             Log.w(TAG, "No bandwidth control; leaving")
             finish()
@@ -120,7 +117,6 @@ open class DataUsageList : DataUsageBaseFragment(), MobileDataEnabledListener.Cl
     override fun onResume() {
         super.onResume()
         dataStateListener.start(subId)
-        lastDisplayedUsageData = null
         updatePolicy()
     }
 
@@ -188,11 +184,6 @@ open class DataUsageList : DataUsageBaseFragment(), MobileDataEnabledListener.Cl
      * Updates the chart and detail data when initial loaded or selected cycle changed.
      */
     private fun updateSelectedCycle(usageData: NetworkUsageData) {
-        if (usageData == lastDisplayedUsageData) {
-            // Avoid duplicate update to avoid page flash.
-            return
-        }
-        lastDisplayedUsageData = usageData
         Log.d(TAG, "showing cycle $usageData")
 
         usageAmount.title = usageData.getDataUsedString(requireContext())

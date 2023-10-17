@@ -16,11 +16,14 @@
 
 package com.android.settings.bluetooth;
 
+import static android.bluetooth.BluetoothDevice.METADATA_MODEL_NAME;
+
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.os.SystemProperties;
 import android.provider.DeviceConfig;
+import android.sysprop.BluetoothProperties;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -34,6 +37,7 @@ import androidx.preference.SwitchPreference;
 import com.android.settings.R;
 import com.android.settings.core.SettingsUIDeviceConfig;
 import com.android.settingslib.bluetooth.A2dpProfile;
+import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.HeadsetProfile;
 import com.android.settingslib.bluetooth.LeAudioProfile;
@@ -121,10 +125,26 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
         pref.setOnPreferenceClickListener(this);
         pref.setOrder(profile.getOrdinal());
 
-        if (profile instanceof LeAudioProfile) {
+        if (profile instanceof LeAudioProfile && !isModelNameInAllowList(
+                BluetoothUtils.getStringMetaData(mCachedDevice.getDevice(),
+                        METADATA_MODEL_NAME))) {
             pref.setSummary(R.string.device_details_leaudio_toggle_summary);
         }
         return pref;
+    }
+
+    /**
+     * Checks if the device model name is in the LE audio allow list based on its model name.
+     *
+     * @param modelName The model name of the device to be checked.
+     * @return true if the device is in the allow list, false otherwise.
+     */
+    @VisibleForTesting
+    boolean isModelNameInAllowList(String modelName) {
+        if (modelName == null || modelName.isEmpty()) {
+            return false;
+        }
+        return BluetoothProperties.le_audio_allow_list().contains(modelName);
     }
 
     /**

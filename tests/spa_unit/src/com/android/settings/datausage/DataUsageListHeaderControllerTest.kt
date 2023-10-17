@@ -69,7 +69,7 @@ class DataUsageListHeaderControllerTest {
         sourceMetricsCategory = 0,
         viewLifecycleOwner = testLifecycleOwner,
         onCyclesLoad = {},
-        onItemSelected = {},
+        updateSelectedCycle = {},
         repository = repository,
     )
 

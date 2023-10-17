@@ -98,7 +98,7 @@ class AppDataUsageRepository(
 
     private fun bindStats(
         buckets: List<Bucket>,
-        profiles: MutableList<UserHandle>,
+        profiles: List<UserHandle>,
         knownItems: SparseArray<AppItem>,
         items: ArrayList<AppItem>,
     ) {
