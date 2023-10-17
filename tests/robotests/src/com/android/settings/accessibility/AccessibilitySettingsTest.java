@@ -19,52 +19,46 @@ package com.android.settings.accessibility;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyBoolean;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.ArgumentMatchers.isNull;
-import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.robolectric.Shadows.shadowOf;
 
 import static java.util.Collections.singletonList;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.accessibilityservice.AccessibilityShortcutInfo;
-import android.app.AppOpsManager;
+import android.app.Application;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
-import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
+import android.database.ContentObserver;
 import android.os.Build;
-import android.os.Bundle;
 import android.provider.Settings;
 import android.view.accessibility.AccessibilityManager;
 
-import androidx.fragment.app.FragmentActivity;
-import androidx.preference.PreferenceManager;
+import androidx.fragment.app.Fragment;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.internal.accessibility.util.AccessibilityUtils;
 import com.android.internal.content.PackageMonitor;
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.testutils.XmlTestUtils;
+import com.android.settings.testutils.shadow.ShadowApplicationPackageManager;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
-import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexableRaw;
+import com.android.settingslib.testutils.shadow.ShadowColorDisplayManager;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -74,21 +68,25 @@ import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowAccessibilityManager;
+import org.robolectric.shadows.ShadowContentResolver;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /** Test for {@link AccessibilitySettings}. */
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
-        ShadowBluetoothUtils.class,
         ShadowBluetoothAdapter.class,
-        ShadowFragment.class,
+        ShadowUserManager.class,
+        ShadowColorDisplayManager.class,
+        ShadowApplicationPackageManager.class,
 })
 public class AccessibilitySettingsTest {
     private static final String PACKAGE_NAME = "com.android.test";
@@ -103,50 +101,34 @@ public class AccessibilitySettingsTest {
 
     @Rule
     public final MockitoRule mocks = MockitoJUnit.rule();
-    @Spy
     private final Context mContext = ApplicationProvider.getApplicationContext();
     @Spy
     private final AccessibilityServiceInfo mServiceInfo = getMockAccessibilityServiceInfo(
             PACKAGE_NAME, CLASS_NAME);
-    @Spy
-    private final AccessibilitySettings mFragment = new AccessibilitySettings();
     @Mock
     private AccessibilityShortcutInfo mShortcutInfo;
-    @Mock
-    private FragmentActivity mActivity;
-    @Mock
-    private ContentResolver mContentResolver;
-    @Mock
-    private PreferenceManager mPreferenceManager;
     private ShadowAccessibilityManager mShadowAccessibilityManager;
     @Mock
-    private AppOpsManager mAppOpsManager;
-    @Mock
     private LocalBluetoothManager mLocalBluetoothManager;
-
-    private Lifecycle mLifecycle;
+    private ActivityController<SettingsActivity> mActivityController;
+    private AccessibilitySettings mFragment;
 
     @Before
     public void setup() {
         mShadowAccessibilityManager = Shadow.extract(AccessibilityManager.getInstance(mContext));
         mShadowAccessibilityManager.setInstalledAccessibilityServiceList(new ArrayList<>());
-        when(mFragment.getContext()).thenReturn(mContext);
-        when(mFragment.getActivity()).thenReturn(mActivity);
-        when(mActivity.getContentResolver()).thenReturn(mContentResolver);
-        when(mFragment.getPreferenceManager()).thenReturn(mPreferenceManager);
-        when(mFragment.getPreferenceManager().getContext()).thenReturn(mContext);
         mContext.setTheme(androidx.appcompat.R.style.Theme_AppCompat);
-        when(mContext.getSystemService(AppOpsManager.class)).thenReturn(mAppOpsManager);
-        when(mAppOpsManager.noteOpNoThrow(eq(AppOpsManager.OP_ACCESS_RESTRICTED_SETTINGS),
-                anyInt(), anyString())).thenReturn(AppOpsManager.MODE_ALLOWED);
-        mLifecycle = new Lifecycle(() -> mLifecycle);
-        when(mFragment.getSettingsLifecycle()).thenReturn(mLifecycle);
         ShadowBluetoothUtils.sLocalBluetoothManager = mLocalBluetoothManager;
         setMockAccessibilityShortcutInfo(mShortcutInfo);
+
+        Intent intent = new Intent();
+        intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT,
+                AccessibilitySettings.class.getName());
+
+        mActivityController = ActivityController.of(new SettingsActivity(), intent);
     }
 
     @Test
-    @Ignore
     public void getNonIndexableKeys_existInXmlLayout() {
         final List<String> niks = AccessibilitySettings.SEARCH_INDEX_DATA_PROVIDER
                 .getNonIndexableKeys(mContext);
@@ -157,16 +139,15 @@ public class AccessibilitySettingsTest {
     }
 
     @Test
-    @Ignore
     public void getRawDataToIndex_isNull() {
         final List<SearchIndexableRaw> indexableRawList =
-                AccessibilitySettings.SEARCH_INDEX_DATA_PROVIDER.getRawDataToIndex(mContext, true);
+                AccessibilitySettings.SEARCH_INDEX_DATA_PROVIDER
+                        .getRawDataToIndex(mContext, true);
 
         assertThat(indexableRawList).isNull();
     }
 
     @Test
-    @Ignore
     public void getServiceSummary_serviceCrash_showsStopped() {
         mServiceInfo.crashed = true;
 
@@ -178,7 +159,6 @@ public class AccessibilitySettingsTest {
     }
 
     @Test
-    @Ignore
     public void getServiceSummary_invisibleToggle_shortcutEnabled_showsOnSummary() {
         setInvisibleToggleFragmentType(mServiceInfo);
         doReturn(DEFAULT_SUMMARY).when(mServiceInfo).loadSummary(any());
@@ -194,7 +174,6 @@ public class AccessibilitySettingsTest {
     }
 
     @Test
-    @Ignore
     public void getServiceSummary_invisibleToggle_shortcutDisabled_showsOffSummary() {
         setInvisibleToggleFragmentType(mServiceInfo);
         setShortcutEnabled(mServiceInfo.getComponentName(), false);
@@ -210,7 +189,6 @@ public class AccessibilitySettingsTest {
     }
 
     @Test
-    @Ignore
     public void getServiceSummary_enableServiceShortcutOn_showsServiceEnabledShortcutOn() {
         doReturn(EMPTY_STRING).when(mServiceInfo).loadSummary(any());
         setShortcutEnabled(mServiceInfo.getComponentName(), true);
@@ -223,7 +201,6 @@ public class AccessibilitySettingsTest {
     }
 
     @Test
-    @Ignore
     public void getServiceSummary_enableServiceShortcutOff_showsServiceEnabledShortcutOff() {
         doReturn(EMPTY_STRING).when(mServiceInfo).loadSummary(any());
         setShortcutEnabled(mServiceInfo.getComponentName(), false);
@@ -236,7 +213,6 @@ public class AccessibilitySettingsTest {
     }
 
     @Test
-    @Ignore
     public void getServiceSummary_disableServiceShortcutOff_showsDisabledShortcutOff() {
         doReturn(EMPTY_STRING).when(mServiceInfo).loadSummary(any());
         setShortcutEnabled(mServiceInfo.getComponentName(), false);
@@ -249,7 +225,6 @@ public class AccessibilitySettingsTest {
     }
 
     @Test
-    @Ignore
     public void getServiceSummary_disableServiceShortcutOn_showsDisabledShortcutOn() {
         doReturn(EMPTY_STRING).when(mServiceInfo).loadSummary(any());
         setShortcutEnabled(mServiceInfo.getComponentName(), true);
@@ -262,7 +237,6 @@ public class AccessibilitySettingsTest {
     }
 
     @Test
-    @Ignore
     public void getServiceSummary_enableServiceShortcutOffAndHasSummary_showsEnabledSummary() {
         setShortcutEnabled(mServiceInfo.getComponentName(), false);
         doReturn(DEFAULT_SUMMARY).when(mServiceInfo).loadSummary(any());
@@ -277,7 +251,6 @@ public class AccessibilitySettingsTest {
     }
 
     @Test
-    @Ignore
     public void getServiceSummary_enableServiceShortcutOnAndHasSummary_showsEnabledSummary() {
         doReturn(DEFAULT_SUMMARY).when(mServiceInfo).loadSummary(any());
         setShortcutEnabled(mServiceInfo.getComponentName(), true);
@@ -292,7 +265,6 @@ public class AccessibilitySettingsTest {
     }
 
     @Test
-    @Ignore
     public void getServiceSummary_disableServiceShortcutOnAndHasSummary_showsDisabledSummary() {
         doReturn(DEFAULT_SUMMARY).when(mServiceInfo).loadSummary(any());
         setShortcutEnabled(mServiceInfo.getComponentName(), true);
@@ -307,7 +279,6 @@ public class AccessibilitySettingsTest {
     }
 
     @Test
-    @Ignore
     public void getServiceSummary_disableServiceShortcutOffAndHasSummary_showsDisabledSummary() {
         setShortcutEnabled(mServiceInfo.getComponentName(), false);
         doReturn(DEFAULT_SUMMARY).when(mServiceInfo).loadSummary(any());
@@ -322,7 +293,6 @@ public class AccessibilitySettingsTest {
     }
 
     @Test
-    @Ignore
     public void getServiceDescription_serviceCrash_showsStopped() {
         mServiceInfo.crashed = true;
 
@@ -334,7 +304,6 @@ public class AccessibilitySettingsTest {
     }
 
     @Test
-    @Ignore
     public void getServiceDescription_haveDescription_showsDescription() {
         doReturn(DEFAULT_DESCRIPTION).when(mServiceInfo).loadDescription(any());
 
@@ -345,42 +314,66 @@ public class AccessibilitySettingsTest {
     }
 
     @Test
-    @Ignore
-    @Config(shadows = {ShadowFragment.class, ShadowUserManager.class})
     public void onCreate_haveRegisterToSpecificUrisAndActions() {
-        mFragment.onAttach(mContext);
+        setupFragment();
 
-        mFragment.onCreate(Bundle.EMPTY);
-
-        verify(mContentResolver).registerContentObserver(
-                eq(Settings.Secure.getUriFor(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS)),
-                anyBoolean(),
-                any(AccessibilitySettingsContentObserver.class));
-        verify(mContentResolver).registerContentObserver(eq(Settings.Secure.getUriFor(
-                        Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE)), anyBoolean(),
-                any(AccessibilitySettingsContentObserver.class));
-        verify(mActivity, atLeast(1)).registerReceiver(
-                any(PackageMonitor.class), any(), isNull(), any());
+        ShadowContentResolver shadowContentResolver = shadowOf(mContext.getContentResolver());
+        Collection<ContentObserver> a11yButtonTargetsObservers =
+                shadowContentResolver.getContentObservers(
+                        Settings.Secure.getUriFor(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS));
+        Collection<ContentObserver> a11yShortcutTargetServiceObservers =
+                shadowContentResolver.getContentObservers(Settings.Secure.getUriFor(
+                        Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE));
+        List<BroadcastReceiver> broadcastReceivers =
+                shadowOf((Application) ApplicationProvider.getApplicationContext())
+                        .getRegisteredReceivers()
+                        .stream().map(wrapper -> wrapper.broadcastReceiver).toList();
+        assertThat(
+                a11yButtonTargetsObservers.stream()
+                        .anyMatch(contentObserver ->
+                                contentObserver instanceof AccessibilitySettingsContentObserver))
+                .isTrue();
+        assertThat(
+                a11yShortcutTargetServiceObservers.stream()
+                        .anyMatch(contentObserver ->
+                                contentObserver instanceof AccessibilitySettingsContentObserver))
+                .isTrue();
+        assertThat(broadcastReceivers.stream().anyMatch(
+                broadcastReceiver -> broadcastReceiver instanceof PackageMonitor)).isTrue();
     }
 
     @Test
-    @Ignore
-    @Config(shadows = {ShadowFragment.class, ShadowUserManager.class})
     public void onDestroy_unregisterObserverAndReceiver() {
         setupFragment();
-        mFragment.onPause();
-        mFragment.onStop();
 
-        mFragment.onDestroy();
+        mActivityController.pause().stop().destroy();
 
-        verify(mContentResolver).unregisterContentObserver(
-                any(AccessibilitySettingsContentObserver.class));
-        verify(mActivity).unregisterReceiver(any(PackageMonitor.class));
+        ShadowContentResolver shadowContentResolver = shadowOf(mContext.getContentResolver());
+        Collection<ContentObserver> a11yButtonTargetsObservers =
+                shadowContentResolver.getContentObservers(
+                        Settings.Secure.getUriFor(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS));
+        Collection<ContentObserver> a11yShortcutTargetServiceObservers =
+                shadowContentResolver.getContentObservers(Settings.Secure.getUriFor(
+                        Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE));
+        List<BroadcastReceiver> broadcastReceivers =
+                shadowOf((Application) ApplicationProvider.getApplicationContext())
+                        .getRegisteredReceivers()
+                        .stream().map(wrapper -> wrapper.broadcastReceiver).toList();
+        assertThat(
+                a11yButtonTargetsObservers.stream()
+                        .anyMatch(contentObserver ->
+                                contentObserver instanceof AccessibilitySettingsContentObserver))
+                .isFalse();
+        assertThat(
+                a11yShortcutTargetServiceObservers.stream()
+                        .anyMatch(contentObserver ->
+                                contentObserver instanceof AccessibilitySettingsContentObserver))
+                .isFalse();
+        assertThat(broadcastReceivers.stream().anyMatch(
+                broadcastReceiver -> broadcastReceiver instanceof PackageMonitor)).isFalse();
     }
 
     @Test
-    @Ignore
-    @Config(shadows = {ShadowFragment.class, ShadowUserManager.class})
     public void onContentChanged_updatePreferenceInForeground_preferenceUpdated() {
         setupFragment();
         mShadowAccessibilityManager.setInstalledAccessibilityServiceList(
@@ -396,8 +389,6 @@ public class AccessibilitySettingsTest {
     }
 
     @Test
-    @Ignore
-    @Config(shadows = {ShadowFragment.class, ShadowUserManager.class})
     public void onContentChanged_updatePreferenceInBackground_preferenceUpdated() {
         setupFragment();
         mFragment.onPause();
@@ -417,8 +408,6 @@ public class AccessibilitySettingsTest {
     }
 
     @Test
-    @Ignore
-    @Config(shadows = {ShadowFragment.class, ShadowUserManager.class})
     public void testAccessibilityMenuInSystem_IncludedInInteractionControl() {
         mShadowAccessibilityManager.setInstalledAccessibilityServiceList(
                 List.of(getMockAccessibilityServiceInfo(
@@ -433,8 +422,6 @@ public class AccessibilitySettingsTest {
     }
 
     @Test
-    @Ignore
-    @Config(shadows = {ShadowFragment.class, ShadowUserManager.class})
     public void testAccessibilityMenuInSystem_NoPrefWhenNotInstalled() {
         mShadowAccessibilityManager.setInstalledAccessibilityServiceList(List.of());
         setupFragment();
@@ -487,10 +474,14 @@ public class AccessibilitySettingsTest {
     }
 
     private void setupFragment() {
-        mFragment.onAttach(mContext);
-        mFragment.onCreate(Bundle.EMPTY);
-        mFragment.onStart();
-        mFragment.onResume();
+        mActivityController.create().start().resume();
+        Fragment fragment = mActivityController.get().getSupportFragmentManager().findFragmentById(
+                R.id.main_content);
+
+        assertThat(fragment).isNotNull();
+        assertThat(fragment).isInstanceOf(AccessibilitySettings.class);
+
+        mFragment = (AccessibilitySettings) fragment;
     }
 
     private void setShortcutEnabled(ComponentName componentName, boolean enabled) {

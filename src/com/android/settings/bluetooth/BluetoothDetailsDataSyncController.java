@@ -112,6 +112,11 @@ public class BluetoothDetailsDataSyncController extends BluetoothDetailsControll
             mPreferenceCategory.addPreference(permSyncPref);
         }
 
+        if (mAssociationId == DUMMY_ASSOCIATION_ID) {
+            permSyncPref.setVisible(false);
+            return;
+        }
+
         boolean visible = false;
         boolean checked = false;
         PermissionSyncRequest request = mCompanionDeviceManager.getPermissionSyncRequest(
