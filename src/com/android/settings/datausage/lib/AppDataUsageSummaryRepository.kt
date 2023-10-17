@@ -20,9 +20,7 @@ import android.content.Context
 import android.net.NetworkTemplate
 import com.android.settings.datausage.lib.AppDataUsageRepository.Companion.withSdkSandboxUids
 import com.android.settings.datausage.lib.NetworkStatsRepository.Companion.AllTimeRange
-import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
-import kotlinx.coroutines.coroutineScope
+import com.android.settingslib.spa.framework.util.asyncMap
 
 interface IAppDataUsageSummaryRepository {
     suspend fun querySummary(uid: Int): NetworkUsageData?
@@ -35,11 +33,8 @@ class AppDataUsageSummaryRepository(
         NetworkStatsRepository(context, template),
 ) : IAppDataUsageSummaryRepository {
 
-    override suspend fun querySummary(uid: Int): NetworkUsageData? = coroutineScope {
-        withSdkSandboxUids(listOf(uid)).map { uid ->
-            async {
-                networkStatsRepository.queryAggregateForUid(range = AllTimeRange, uid = uid)
-            }
-        }.awaitAll().filterNotNull().aggregate()
-    }
+    override suspend fun querySummary(uid: Int): NetworkUsageData? =
+        withSdkSandboxUids(listOf(uid)).asyncMap {
+            networkStatsRepository.queryAggregateForUid(range = AllTimeRange, uid = it)
+        }.filterNotNull().aggregate()
 }
