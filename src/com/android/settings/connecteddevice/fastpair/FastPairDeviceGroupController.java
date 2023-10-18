@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
@@ -44,7 +45,10 @@ import com.android.settings.overlay.FeatureFactory;
 public class FastPairDeviceGroupController extends BasePreferenceController
         implements PreferenceControllerMixin, DefaultLifecycleObserver, DevicePreferenceCallback {
 
+    private static final String TAG = "FastPairDeviceGroupCtr";
+
     private static final String KEY = "fast_pair_device_list";
+    private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
     @VisibleForTesting PreferenceGroup mPreferenceGroup;
     private final FastPairDeviceUpdater mFastPairDeviceUpdater;
@@ -68,6 +72,7 @@ public class FastPairDeviceGroupController extends BasePreferenceController
             mFastPairDeviceUpdater =
                     fastPairFeatureProvider.getFastPairDeviceUpdater(context, this);
         } else {
+            Log.d(TAG, "Flag disabled. Ignored.");
             mFastPairDeviceUpdater = null;
         }
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -78,6 +83,10 @@ public class FastPairDeviceGroupController extends BasePreferenceController
     public void onStart(@NonNull LifecycleOwner owner) {
         if (mFastPairDeviceUpdater != null) {
             mFastPairDeviceUpdater.registerCallback();
+        } else {
+            if (DEBUG) {
+                Log.d(TAG, "Callback register: Fast Pair device updater is null. Ignore.");
+            }
         }
         mContext.registerReceiver(mReceiver, mIntentFilter, Context.RECEIVER_EXPORTED_UNAUDITED);
     }
@@ -86,6 +95,10 @@ public class FastPairDeviceGroupController extends BasePreferenceController
     public void onStop(@NonNull LifecycleOwner owner) {
         if (mFastPairDeviceUpdater != null) {
             mFastPairDeviceUpdater.unregisterCallback();
+        } else {
+            if (DEBUG) {
+                Log.d(TAG, "Callback unregister: Fast Pair device updater is null. Ignore.");
+            }
         }
         mContext.unregisterReceiver(mReceiver);
     }
@@ -117,14 +130,24 @@ public class FastPairDeviceGroupController extends BasePreferenceController
 
     @Override
     public void onDeviceAdded(Preference preference) {
-        if (preference == null) return;
+        if (preference == null) {
+            if (DEBUG) {
+                Log.d(TAG, "onDeviceAdded receives null preference. Ignore.");
+            }
+            return;
+        }
         mPreferenceGroup.addPreference(preference);
         updatePreferenceVisibility();
     }
 
     @Override
     public void onDeviceRemoved(Preference preference) {
-        if (preference == null) return;
+        if (preference == null) {
+            if (DEBUG) {
+                Log.d(TAG, "onDeviceRemoved receives null preference. Ignore.");
+            }
+            return;
+        }
         mPreferenceGroup.removePreference(preference);
         updatePreferenceVisibility();
     }
