@@ -77,6 +77,12 @@
             app:keywords="@string/keywords_media_vibration"
             app:controller="com.android.settings.accessibility.MediaVibrationTogglePreferenceController" />
 
+        <SwitchPreference
+            android:key="vibration_preference_keyboard"
+            android:title="@string/accessibility_keyboard_vibration_title"
+            app:keywords="@string/keywords_keyboard_vibration"
+            app:controller="com.android.settings.accessibility.KeyboardVibrationTogglePreferenceController"/>
+
     </PreferenceCategory>
 
 </PreferenceScreen>

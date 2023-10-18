@@ -226,6 +226,9 @@
          Can be overridden for specific product builds if the target device does not support it -->
     <bool name="config_media_vibration_supported">true</bool>
 
+    <!-- Whether to show Keyboard vibration settings in the vibration and haptics screen. -->
+    <bool name="config_keyboard_vibration_supported">false</bool>
+
     <!--
         Whether or not the homepage should be powered by legacy suggestion (versus contextual cards)
         Default to true as not all devices support contextual cards.
