@@ -16,6 +16,8 @@
 
 package com.android.settings.biometrics.fingerprint;
 
+import static android.text.Layout.HYPHENATION_FREQUENCY_NORMAL;
+
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -98,6 +100,7 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
                         .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Secondary)
                         .build()
         );
+        getLayout().getHeaderTextView().setHyphenationFrequency(HYPHENATION_FREQUENCY_NORMAL);
 
         listenOrientationEvent();
 
