@@ -94,6 +94,7 @@ public final class AccessibilityUtil {
             UserShortcutType.SOFTWARE,
             UserShortcutType.HARDWARE,
             UserShortcutType.TRIPLETAP,
+            UserShortcutType.TWOFINGERTRIPLETAP,
     })
 
     /** Denotes the user shortcut type. */
@@ -102,6 +103,7 @@ public final class AccessibilityUtil {
         int SOFTWARE = 1; // 1 << 0
         int HARDWARE = 2; // 1 << 1
         int TRIPLETAP = 4; // 1 << 2
+        int TWOFINGERTRIPLETAP = 8; // 1 << 3
     }
 
     /**
