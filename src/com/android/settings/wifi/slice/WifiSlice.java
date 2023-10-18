@@ -20,6 +20,7 @@ import static android.app.slice.Slice.EXTRA_TOGGLE_STATE;
 import static android.provider.SettingsSlicesContract.KEY_WIFI;
 
 import static com.android.settings.slices.CustomSliceRegistry.WIFI_SLICE_URI;
+import static com.android.settingslib.wifi.WifiUtils.getHotspotIconResource;
 
 import android.annotation.ColorInt;
 import android.app.PendingIntent;
@@ -264,11 +265,17 @@ public class WifiSlice implements CustomSliceable {
                     android.R.attr.colorControlNormal));
         }
 
-        final Drawable drawable = mContext.getDrawable(
-                WifiUtils.getInternetIconResource(wifiSliceItem.getLevel(),
-                        wifiSliceItem.shouldShowXLevelIcon()));
+        Drawable drawable = mContext.getDrawable(getWifiIconResId(wifiSliceItem));
         drawable.setTint(tint);
         return Utils.createIconWithDrawable(drawable);
+    }
+
+    @VisibleForTesting
+    int getWifiIconResId(WifiSliceItem wifiSliceItem) {
+        return (wifiSliceItem.isInstantHotspotNetwork())
+                ? getHotspotIconResource(wifiSliceItem.getInstantHotspotDeviceType())
+                : WifiUtils.getInternetIconResource(wifiSliceItem.getLevel(),
+                        wifiSliceItem.shouldShowXLevelIcon());
     }
 
     protected IconCompat getEndIcon(WifiSliceItem wifiSliceItem) {

@@ -199,7 +199,7 @@ public final class BatteryBackupHelper implements BackupHelper {
                     info.packageName + DELIMITER_MODE + optimizationMode;
             builder.append(packageOptimizeMode + DELIMITER);
             Log.d(TAG, "backupOptimizationMode: " + packageOptimizeMode);
-            BatteryHistoricalLogUtil.writeLog(
+            BatteryOptimizeLogUtils.writeLog(
                     sharedPreferences, Action.BACKUP, info.packageName,
                     /* actionDescription */ "mode: " + optimizationMode);
             backupCount++;
@@ -275,7 +275,7 @@ public final class BatteryBackupHelper implements BackupHelper {
 
     /** Dump the app optimization mode backup history data. */
     public static void dumpHistoricalData(Context context, PrintWriter writer) {
-        BatteryHistoricalLogUtil.printBatteryOptimizeHistoricalLog(
+        BatteryOptimizeLogUtils.printBatteryOptimizeHistoricalLog(
                 getSharedPreferences(context), writer);
     }
 

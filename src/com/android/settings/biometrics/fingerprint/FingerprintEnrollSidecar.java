@@ -124,13 +124,18 @@ public class FingerprintEnrollSidecar extends BiometricEnrollSidecar {
         }
 
         @Override
-        public void onPointerDown(int sensorId) {
-            FingerprintEnrollSidecar.super.onPointerDown(sensorId);
+        public void onUdfpsPointerDown(int sensorId) {
+            FingerprintEnrollSidecar.super.onUdfpsPointerDown(sensorId);
         }
 
         @Override
-        public void onPointerUp(int sensorId) {
-            FingerprintEnrollSidecar.super.onPointerUp(sensorId);
+        public void onUdfpsPointerUp(int sensorId) {
+            FingerprintEnrollSidecar.super.onUdfpsPointerUp(sensorId);
+        }
+
+        @Override
+        public void onUdfpsOverlayShown() {
+            FingerprintEnrollSidecar.super.onUdfpsOverlayShown();
         }
     };
 

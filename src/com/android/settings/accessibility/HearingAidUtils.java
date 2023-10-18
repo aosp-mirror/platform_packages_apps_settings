@@ -23,6 +23,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.android.settings.bluetooth.HearingAidPairingDialogFragment;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.bluetooth.CsipSetCoordinatorProfile;
 import com.android.settingslib.bluetooth.HearingAidInfo;
 
 /** Provides utility methods related hearing aids. */
@@ -40,6 +41,11 @@ public final class HearingAidUtils {
      */
     public static void launchHearingAidPairingDialog(FragmentManager fragmentManager,
             @NonNull CachedBluetoothDevice device) {
+        // No need to show the pair another ear dialog if the device supports and enables CSIP.
+        // CSIP will pair other devices in the same set automatically.
+        if (isCsipSupportedAndEnabled(device)) {
+            return;
+        }
         if (device.isConnectedAshaHearingAidDevice()
                 && device.getDeviceMode() == HearingAidInfo.DeviceMode.MODE_BINAURAL
                 && device.getSubDevice() == null) {
@@ -55,5 +61,11 @@ public final class HearingAidUtils {
         }
         HearingAidPairingDialogFragment.newInstance(device.getAddress()).show(fragmentManager,
                 HearingAidPairingDialogFragment.TAG);
+    }
+
+    private static boolean isCsipSupportedAndEnabled(@NonNull CachedBluetoothDevice device) {
+        return device.getProfiles().stream().anyMatch(
+                profile -> (profile instanceof CsipSetCoordinatorProfile)
+                        && (profile.isEnabled(device.getDevice())));
     }
 }

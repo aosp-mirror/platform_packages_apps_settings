@@ -16,6 +16,9 @@
 
 package com.android.settings.development;
 
+import static com.android.settings.development.BluetoothLeAudioDeviceDetailsPreferenceController
+        .LE_AUDIO_TOGGLE_VISIBLE_PROPERTY;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.spy;
@@ -25,12 +28,11 @@ import static org.mockito.Mockito.when;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothStatusCodes;
 import android.content.Context;
-import android.provider.DeviceConfig;
+import android.os.SystemProperties;
 
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
-import com.android.settings.core.SettingsUIDeviceConfig;
 import com.android.settings.testutils.shadow.ShadowDeviceConfig;
 
 import org.junit.After;
@@ -77,9 +79,8 @@ public class BluetoothLeAudioDeviceDetailsPreferenceControllerTest {
     public void onPreferenceChanged_settingEnabled_shouldTurnOnLeAudioDeviceDetailSetting() {
         mController.sLeAudioSupportedStateCache = BluetoothStatusCodes.FEATURE_SUPPORTED;
         mController.onPreferenceChange(mPreference, true /* new value */);
-        final boolean isEnabled = DeviceConfig.getBoolean(
-                DeviceConfig.NAMESPACE_SETTINGS_UI,
-                SettingsUIDeviceConfig.BT_LE_AUDIO_DEVICE_DETAIL_ENABLED, false);
+        final boolean isEnabled = SystemProperties.getBoolean(
+                LE_AUDIO_TOGGLE_VISIBLE_PROPERTY, false);
 
         assertThat(isEnabled).isTrue();
     }
@@ -88,9 +89,8 @@ public class BluetoothLeAudioDeviceDetailsPreferenceControllerTest {
     public void onPreferenceChanged_settingDisabled_shouldTurnOffLeAudioDeviceDetailSetting() {
         mController.sLeAudioSupportedStateCache = BluetoothStatusCodes.FEATURE_SUPPORTED;
         mController.onPreferenceChange(mPreference, false /* new value */);
-        final boolean isEnabled = DeviceConfig.getBoolean(
-                DeviceConfig.NAMESPACE_SETTINGS_UI,
-                SettingsUIDeviceConfig.BT_LE_AUDIO_DEVICE_DETAIL_ENABLED, false);
+        final boolean isEnabled = SystemProperties.getBoolean(
+                LE_AUDIO_TOGGLE_VISIBLE_PROPERTY, true);
 
         assertThat(isEnabled).isFalse();
     }
@@ -98,18 +98,15 @@ public class BluetoothLeAudioDeviceDetailsPreferenceControllerTest {
     @Test
     public void updateState_settingEnabled_preferenceShouldBeChecked() {
         mController.sLeAudioSupportedStateCache = BluetoothStatusCodes.FEATURE_SUPPORTED;
-        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_SETTINGS_UI,
-                SettingsUIDeviceConfig.BT_LE_AUDIO_DEVICE_DETAIL_ENABLED, "true", false);
+        SystemProperties.set(LE_AUDIO_TOGGLE_VISIBLE_PROPERTY, "true");
         mController.updateState(mPreference);
-
         verify(mPreference).setChecked(true);
     }
 
     @Test
     public void updateState_settingDisabled_preferenceShouldNotBeChecked() {
         mController.sLeAudioSupportedStateCache = BluetoothStatusCodes.FEATURE_SUPPORTED;
-        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_SETTINGS_UI,
-                SettingsUIDeviceConfig.BT_LE_AUDIO_DEVICE_DETAIL_ENABLED, "false", false);
+        SystemProperties.set(LE_AUDIO_TOGGLE_VISIBLE_PROPERTY, "false");
         mController.updateState(mPreference);
 
         verify(mPreference).setChecked(false);

@@ -27,6 +27,7 @@ import android.util.ArraySet;
 import android.util.SparseIntArray;
 
 import com.android.internal.util.ArrayUtils;
+import com.android.settings.fuelgauge.batteryusage.PowerAnomalyEventList;
 import com.android.settingslib.fuelgauge.Estimate;
 
 import java.util.ArrayList;
@@ -72,6 +73,11 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     @Override
     public boolean isBatteryUsageEnabled() {
         return true;
+    }
+
+    @Override
+    public boolean isBatteryTipsEnabled() {
+        return false;
     }
 
     @Override
@@ -158,6 +164,14 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     @Override
     public boolean delayHourlyJobWhenBooting() {
         return true;
+    }
+
+    @Override
+    public void insertSettingsData(Context context, double displayDrain) {}
+
+    @Override
+    public PowerAnomalyEventList detectSettingsAnomaly(Context context, double displayDrain) {
+        return null;
     }
 
     @Override

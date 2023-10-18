@@ -23,7 +23,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.RecoverySystem;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -62,7 +61,7 @@ public class EraseEuiccDataDialogFragment extends InstrumentedDialogFragment imp
         return new AlertDialog.Builder(getActivity())
                 .setTitle(R.string.reset_esim_title)
                 .setMessage(R.string.reset_esim_desc)
-                .setPositiveButton(R.string.erase_euicc_data_button, this)
+                .setPositiveButton(R.string.erase_sim_confirm_button, this)
                 .setNegativeButton(R.string.cancel, null)
                 .setOnDismissListener(this)
                 .create();

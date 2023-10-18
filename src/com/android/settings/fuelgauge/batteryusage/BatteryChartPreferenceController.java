@@ -67,39 +67,16 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     private static final String KEY_DAILY_CHART_INDEX = "daily_chart_index";
     private static final String KEY_HOURLY_CHART_INDEX = "hourly_chart_index";
 
-    /**
-     * A callback listener for battery usage is updated.
-     * This happens when battery usage data is ready or the selected index is changed.
-     */
-    public interface OnBatteryUsageUpdatedListener {
-        /**
-         * The callback function for battery usage is updated.
-         * @param slotUsageData The battery usage diff data for the selected slot. This is used in
-         *                      the app list.
-         * @param slotTimestamp The selected slot timestamp information. This is used in the battery
-         *                      usage breakdown category.
-         * @param isAllUsageDataEmpty Whether all the battery usage data is null or empty. This is
-         *                            used when showing the footer.
-         */
-        void onBatteryUsageUpdated(
-                BatteryDiffData slotUsageData, String slotTimestamp, boolean isAllUsageDataEmpty);
-    }
-
-    /**
-     * A callback listener for the device screen on time is updated.
-     * This happens when screen on time data is ready or the selected index is changed.
-     */
-    public interface OnScreenOnTimeUpdatedListener {
-        /**
-         * The callback function for the device screen on time is updated.
-         * @param screenOnTime The selected slot device screen on time.
-         * @param slotTimestamp The selected slot timestamp information.
-         */
-        void onScreenOnTimeUpdated(Long screenOnTime, String slotTimestamp);
+    /** A callback listener for the selected index is updated. */
+    interface OnSelectedIndexUpdatedListener {
+        /** The callback function for the selected index is updated. */
+        void onSelectedIndexUpdated();
     }
 
     @VisibleForTesting
     Context mPrefContext;
+    @VisibleForTesting
+    TextView mChartSummaryTextView;
     @VisibleForTesting
     BatteryChartView mDailyChartView;
     @VisibleForTesting
@@ -109,16 +86,15 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     @VisibleForTesting
     int mHourlyChartIndex = BatteryChartViewModel.SELECTED_INDEX_ALL;
     @VisibleForTesting
-    Map<Integer, Map<Integer, BatteryDiffData>> mBatteryUsageMap;
+    int mDailyHighlightSlotIndex = BatteryChartViewModel.SELECTED_INDEX_INVALID;
+    @VisibleForTesting
+    int mHourlyHighlightSlotIndex = BatteryChartViewModel.SELECTED_INDEX_INVALID;
 
     private boolean mIs24HourFormat;
-    private boolean mHourlyChartVisible = true;
     private View mBatteryChartViewGroup;
-    private TextView mChartSummaryTextView;
     private BatteryChartViewModel mDailyViewModel;
     private List<BatteryChartViewModel> mHourlyViewModels;
-    private OnBatteryUsageUpdatedListener mOnBatteryUsageUpdatedListener;
-    private OnScreenOnTimeUpdatedListener mOnScreenOnTimeUpdatedListener;
+    private OnSelectedIndexUpdatedListener mOnSelectedIndexUpdatedListener;
 
     private final SettingsActivity mActivity;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
@@ -201,28 +177,20 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         return PREFERENCE_KEY;
     }
 
-    void setOnBatteryUsageUpdatedListener(OnBatteryUsageUpdatedListener listener) {
-        mOnBatteryUsageUpdatedListener = listener;
+    int getDailyChartIndex() {
+        return mDailyChartIndex;
     }
 
-    void setOnScreenOnTimeUpdatedListener(OnScreenOnTimeUpdatedListener listener) {
-        mOnScreenOnTimeUpdatedListener = listener;
+    int getHourlyChartIndex() {
+        return mHourlyChartIndex;
     }
 
-    void setBatteryHistoryMap(
-            final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap) {
-        Log.d(TAG, "setBatteryHistoryMap() " + (batteryHistoryMap == null ? "null"
-                : ("size=" + batteryHistoryMap.size())));
-        // Ensure the battery chart group is visible for users.
-        animateBatteryChartViewGroup();
-        final BatteryLevelData batteryLevelData =
-                DataProcessManager.getBatteryLevelData(mContext, mHandler, batteryHistoryMap,
-                        batteryUsageMap -> {
-                            mBatteryUsageMap = batteryUsageMap;
-                            logScreenUsageTime();
-                            refreshUi();
-                        });
-        Log.d(TAG, "getBatteryLevelData: " + batteryLevelData);
+    void setOnSelectedIndexUpdatedListener(OnSelectedIndexUpdatedListener listener) {
+        mOnSelectedIndexUpdatedListener = listener;
+    }
+
+    void onBatteryLevelDataUpdate(final BatteryLevelData batteryLevelData) {
+        Log.d(TAG, "onBatteryLevelDataUpdate: " + batteryLevelData);
         mMetricsFeatureProvider.action(
                 mPrefContext,
                 SettingsEnums.ACTION_BATTERY_HISTORY_LOADED,
@@ -251,6 +219,43 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
                     mHourlyChartLabelTextGenerator.updateSpecialCaseContext(batteryLevelData)));
         }
         refreshUi();
+    }
+
+    boolean isHighlightSlotFocused() {
+        return (mDailyHighlightSlotIndex != BatteryChartViewModel.SELECTED_INDEX_INVALID
+                && mDailyHighlightSlotIndex == mDailyChartIndex
+                && mHourlyHighlightSlotIndex != BatteryChartViewModel.SELECTED_INDEX_INVALID
+                && mHourlyHighlightSlotIndex == mHourlyChartIndex);
+    }
+
+    void onHighlightSlotIndexUpdate(int dailyHighlightSlotIndex, int hourlyHighlightSlotIndex) {
+        mDailyHighlightSlotIndex = dailyHighlightSlotIndex;
+        mHourlyHighlightSlotIndex = hourlyHighlightSlotIndex;
+        refreshUi();
+        if (mOnSelectedIndexUpdatedListener != null) {
+            mOnSelectedIndexUpdatedListener.onSelectedIndexUpdated();
+        }
+    }
+
+    void selectHighlightSlotIndex() {
+        if (mDailyHighlightSlotIndex == BatteryChartViewModel.SELECTED_INDEX_INVALID
+                || mHourlyHighlightSlotIndex == BatteryChartViewModel.SELECTED_INDEX_INVALID) {
+            return;
+        }
+        if (mDailyHighlightSlotIndex == mDailyChartIndex
+                && mHourlyHighlightSlotIndex == mHourlyChartIndex) {
+            return;
+        }
+        mDailyChartIndex = mDailyHighlightSlotIndex;
+        mHourlyChartIndex = mHourlyHighlightSlotIndex;
+        Log.d(TAG, String.format("onDailyChartSelect:%d, onHourlyChartSelect:%d",
+                mDailyChartIndex, mHourlyChartIndex));
+        refreshUi();
+        mHandler.post(() -> mDailyChartView.announceForAccessibility(
+                getAccessibilityAnnounceMessage()));
+        if (mOnSelectedIndexUpdatedListener != null) {
+            mOnSelectedIndexUpdatedListener.onSelectedIndexUpdated();
+        }
     }
 
     void setBatteryChartView(@NonNull final BatteryChartView dailyChartView,
@@ -289,6 +294,9 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
                             ? SettingsEnums.ACTION_BATTERY_USAGE_DAILY_SHOW_ALL
                             : SettingsEnums.ACTION_BATTERY_USAGE_DAILY_TIME_SLOT,
                     mDailyChartIndex);
+            if (mOnSelectedIndexUpdatedListener != null) {
+                mOnSelectedIndexUpdatedListener.onSelectedIndexUpdated();
+            }
         });
         mHourlyChartView = hourlyChartView;
         mHourlyChartView.setOnSelectListener(trapezoidIndex -> {
@@ -310,67 +318,37 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
                             ? SettingsEnums.ACTION_BATTERY_USAGE_SHOW_ALL
                             : SettingsEnums.ACTION_BATTERY_USAGE_TIME_SLOT,
                     mHourlyChartIndex);
+            if (mOnSelectedIndexUpdatedListener != null) {
+                mOnSelectedIndexUpdatedListener.onSelectedIndexUpdated();
+            }
         });
         refreshUi();
     }
 
-    @VisibleForTesting
-    boolean refreshUi() {
-        if (mDailyChartView == null || mHourlyChartView == null) {
-            // Chart views are not initialized.
-            return false;
-        }
-
-        // When mDailyViewModel or mHourlyViewModels is null, there is no battery level data.
-        // This is mainly in 2 cases:
-        // 1) battery data is within 2 hours
-        // 2) no battery data in the latest 7 days (power off >= 7 days)
-        final boolean refreshUiResult = mDailyViewModel == null || mHourlyViewModels == null
-                ? refreshUiWithNoLevelDataCase()
-                : refreshUiWithLevelDataCase();
-
-        if (!refreshUiResult) {
-            return false;
-        }
-
-        if (mOnBatteryUsageUpdatedListener != null && mBatteryUsageMap != null
-                && mBatteryUsageMap.get(mDailyChartIndex) != null) {
-            final BatteryDiffData slotUsageData =
-                    mBatteryUsageMap.get(mDailyChartIndex).get(mHourlyChartIndex);
-            if (slotUsageData != null) {
-                mOnScreenOnTimeUpdatedListener.onScreenOnTimeUpdated(
-                        slotUsageData.getScreenOnTime(),
-                        getSlotInformation());
-            }
-            mOnBatteryUsageUpdatedListener.onBatteryUsageUpdated(
-                    slotUsageData, getSlotInformation(), isBatteryUsageMapNullOrEmpty());
-        }
-        return true;
+    // Show empty hourly chart view only if there is no valid battery usage data.
+    void showEmptyChart() {
+        setChartSummaryVisible(true);
+        mDailyChartView.setVisibility(View.GONE);
+        mHourlyChartView.setVisibility(View.VISIBLE);
+        mHourlyChartView.setViewModel(null);
     }
 
-    private boolean refreshUiWithNoLevelDataCase() {
-        setChartSummaryVisible(false);
-        if (mBatteryUsageMap == null) {
-            // There is no battery level data and battery usage data is not ready, wait for data
-            // ready to refresh UI. Show nothing temporarily.
+    @VisibleForTesting
+    void refreshUi() {
+        if (mDailyChartView == null || mHourlyChartView == null) {
+            // Chart views are not initialized.
+            return;
+        }
+
+        if (mDailyViewModel == null || mHourlyViewModels == null) {
+            setChartSummaryVisible(false);
             mDailyChartView.setVisibility(View.GONE);
             mHourlyChartView.setVisibility(View.GONE);
             mDailyChartView.setViewModel(null);
             mHourlyChartView.setViewModel(null);
-            return false;
-        } else if (mBatteryUsageMap
-                .get(BatteryChartViewModel.SELECTED_INDEX_ALL)
-                .get(BatteryChartViewModel.SELECTED_INDEX_ALL) == null) {
-            // There is no battery level data and battery usage data, show an empty hourly chart
-            // view.
-            mDailyChartView.setVisibility(View.GONE);
-            mHourlyChartView.setVisibility(View.VISIBLE);
-            mHourlyChartView.setViewModel(null);
+            return;
         }
-        return true;
-    }
 
-    private boolean refreshUiWithLevelDataCase() {
         setChartSummaryVisible(true);
         // Gets valid battery level data.
         if (isBatteryLevelDataInOneDay()) {
@@ -383,6 +361,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
                 mDailyChartIndex = BatteryChartViewModel.SELECTED_INDEX_ALL;
             }
             mDailyViewModel.setSelectedIndex(mDailyChartIndex);
+            mDailyViewModel.setHighlightSlotIndex(mDailyHighlightSlotIndex);
             mDailyChartView.setViewModel(mDailyViewModel);
         }
 
@@ -397,17 +376,13 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
                 mHourlyChartIndex = BatteryChartViewModel.SELECTED_INDEX_ALL;
             }
             hourlyViewModel.setSelectedIndex(mHourlyChartIndex);
+            hourlyViewModel.setHighlightSlotIndex((mDailyChartIndex == mDailyHighlightSlotIndex)
+                    ? mHourlyHighlightSlotIndex
+                    : BatteryChartViewModel.SELECTED_INDEX_INVALID);
             mHourlyChartView.setViewModel(hourlyViewModel);
         }
-
-        if (mBatteryUsageMap == null) {
-            // Battery usage data is not ready, wait for data ready to refresh UI.
-            return false;
-        }
-        return true;
     }
 
-    @VisibleForTesting
     String getSlotInformation() {
         if (mDailyViewModel == null || mHourlyViewModels == null) {
             // No data
@@ -436,7 +411,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         final String slotInformation = getSlotInformation();
         return slotInformation == null
                 ? mPrefContext.getString(
-                       R.string.battery_usage_breakdown_title_since_last_full_charge)
+                        R.string.battery_usage_breakdown_title_since_last_full_charge)
                 : mPrefContext.getString(
                         R.string.battery_usage_breakdown_title_for_slot, slotInformation);
     }
@@ -449,10 +424,10 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     }
 
     private void animateBatteryHourlyChartView(final boolean visible) {
-        if (mHourlyChartView == null || mHourlyChartVisible == visible) {
+        if (mHourlyChartView == null
+                || (mHourlyChartView.getVisibility() == View.VISIBLE) == visible) {
             return;
         }
-        mHourlyChartVisible = visible;
 
         if (visible) {
             mHourlyChartView.setVisibility(View.VISIBLE);
@@ -498,44 +473,6 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         };
     }
 
-    private void logScreenUsageTime() {
-        if (mBatteryUsageMap == null) {
-            return;
-        }
-        final BatteryDiffData allBatteryDiffData = mBatteryUsageMap.get(
-                BatteryChartViewModel.SELECTED_INDEX_ALL).get(
-                BatteryChartViewModel.SELECTED_INDEX_ALL);
-        if (allBatteryDiffData == null) {
-            return;
-        }
-        mMetricsFeatureProvider.action(
-                mPrefContext,
-                SettingsEnums.ACTION_BATTERY_USAGE_SCREEN_ON_TIME,
-                (int) allBatteryDiffData.getScreenOnTime());
-        mMetricsFeatureProvider.action(
-                mPrefContext,
-                SettingsEnums.ACTION_BATTERY_USAGE_FOREGROUND_USAGE_TIME,
-                (int) getTotalForegroundUsageTime());
-    }
-
-    private long getTotalForegroundUsageTime() {
-        if (mBatteryUsageMap == null) {
-            return 0;
-        }
-        final BatteryDiffData totalBatteryUsageDiffData =
-                mBatteryUsageMap
-                        .get(BatteryChartViewModel.SELECTED_INDEX_ALL)
-                        .get(BatteryChartViewModel.SELECTED_INDEX_ALL);
-        if (totalBatteryUsageDiffData == null) {
-            return 0;
-        }
-        long totalValue = 0;
-        for (final BatteryDiffEntry entry : totalBatteryUsageDiffData.getAppDiffEntryList()) {
-            totalValue += entry.mForegroundUsageTimeInMs;
-        }
-        return totalValue;
-    }
-
     private boolean isBatteryLevelDataInOneDay() {
         return mHourlyViewModels != null && mHourlyViewModels.size() == 1;
     }
@@ -544,19 +481,6 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         return (isBatteryLevelDataInOneDay()
                 || mDailyChartIndex == BatteryChartViewModel.SELECTED_INDEX_ALL)
                 && mHourlyChartIndex == BatteryChartViewModel.SELECTED_INDEX_ALL;
-    }
-
-    private boolean isBatteryUsageMapNullOrEmpty() {
-        if (mBatteryUsageMap == null) {
-            return true;
-        }
-        BatteryDiffData allBatteryDiffData = mBatteryUsageMap
-                .get(BatteryChartViewModel.SELECTED_INDEX_ALL)
-                .get(BatteryChartViewModel.SELECTED_INDEX_ALL);
-        // If all data is null or empty, each slot must be null or empty.
-        return allBatteryDiffData == null
-                || (allBatteryDiffData.getAppDiffEntryList().isEmpty()
-                && allBatteryDiffData.getSystemDiffEntryList().isEmpty());
     }
 
     @VisibleForTesting
@@ -609,10 +533,8 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             return null;
         }
         for (BatteryDiffEntry entry : entries) {
-            final BatteryHistEntry batteryHistEntry = entry.mBatteryHistEntry;
-            if (batteryHistEntry != null
-                    && batteryHistEntry.mConsumerType == ConvertUtils.CONSUMER_TYPE_UID_BATTERY
-                    && batteryHistEntry.mUserId == userId
+            if (!entry.isSystemEntry()
+                    && entry.mUserId == userId
                     && packageName.equals(entry.getPackageName())) {
                 return entry;
             }

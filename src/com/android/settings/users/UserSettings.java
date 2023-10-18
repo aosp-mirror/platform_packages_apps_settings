@@ -885,7 +885,6 @@ public class UserSettings extends SettingsPreferenceFragment
                 this::startActivityForResult,
                 userIcon,
                 user.name,
-                getString(com.android.settingslib.R.string.profile_info_settings_title),
                 (newUserName, newUserIcon) -> {
                     if (newUserIcon != userIcon) {
                         ThreadUtils.postOnBackgroundThread(() ->
@@ -978,10 +977,10 @@ public class UserSettings extends SettingsPreferenceFragment
             return;
         }
         try {
-            getContext().getSystemService(UserManager.class)
-                    .removeUserWhenPossible(UserHandle.of(UserHandle.myUserId()),
-                            /* overrideDevicePolicy= */ false);
-            ActivityManager.getService().switchUser(UserHandle.USER_SYSTEM);
+            mUserManager.removeUserWhenPossible(
+                    UserHandle.of(UserHandle.myUserId()), /* overrideDevicePolicy= */ false);
+            ActivityManager.getService().switchUser(
+                    mUserManager.getPreviousForegroundUser().getIdentifier());
         } catch (RemoteException re) {
             Log.e(TAG, "Unable to remove self user");
         }
@@ -1100,7 +1099,7 @@ public class UserSettings extends SettingsPreferenceFragment
         }
         mMetricsFeatureProvider.action(getActivity(),
                 SettingsEnums.ACTION_USER_GUEST_EXIT_CONFIRMED);
-        switchToUserId(UserHandle.USER_SYSTEM);
+        switchToUserId(mUserManager.getPreviousForegroundUser().getIdentifier());
     }
 
     private int createGuest() {
@@ -1140,8 +1139,8 @@ public class UserSettings extends SettingsPreferenceFragment
             // Create a new guest in the foreground, and then immediately switch to it
             int newGuestUserId = createGuest();
             if (newGuestUserId == UserHandle.USER_NULL) {
-                Log.e(TAG, "Could not create new guest, switching back to system user");
-                switchToUserId(UserHandle.USER_SYSTEM);
+                Log.e(TAG, "Could not create new guest, switching back to previous user");
+                switchToUserId(mUserManager.getPreviousForegroundUser().getIdentifier());
                 mUserManager.removeUser(oldGuestUserId);
                 WindowManagerGlobal.getWindowManagerService().lockNow(/* options= */ null);
                 return;
@@ -1629,7 +1628,7 @@ public class UserSettings extends SettingsPreferenceFragment
             mRemovingUserId = -1;
             updateUserList();
             if (mCreateUserDialogController.isActive()) {
-                mCreateUserDialogController.clear();
+                mCreateUserDialogController.finish();
             }
         }
     }

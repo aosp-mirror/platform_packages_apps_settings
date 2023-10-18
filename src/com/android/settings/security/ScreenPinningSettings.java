@@ -23,7 +23,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.widget.Switch;
 
@@ -38,14 +37,12 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.password.ChooseLockGeneric;
+import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.OnMainSwitchChangeListener;
-
-import java.util.Arrays;
-import java.util.List;
 /**
  * Screen pinning settings.
  */
@@ -56,6 +53,7 @@ public class ScreenPinningSettings extends SettingsPreferenceFragment
     private static final String KEY_USE_SCREEN_LOCK = "use_screen_lock";
     private static final String KEY_FOOTER = "screen_pinning_settings_screen_footer";
     private static final int CHANGE_LOCK_METHOD_REQUEST = 43;
+    private static final int CONFIRM_REQUEST = 1000;
 
     private SettingsMainSwitchBar mSwitchBar;
     private SwitchPreference mUseScreenLock;
@@ -129,10 +127,10 @@ public class ScreenPinningSettings extends SettingsPreferenceFragment
     }
 
     private boolean setScreenLockUsed(boolean isEnabled) {
+        LockPatternUtils lockPatternUtils = new LockPatternUtils(getActivity());
+        final int passwordQuality = lockPatternUtils
+                .getKeyguardStoredPasswordQuality(UserHandle.myUserId());
         if (isEnabled) {
-            LockPatternUtils lockPatternUtils = new LockPatternUtils(getActivity());
-            int passwordQuality = lockPatternUtils
-                    .getKeyguardStoredPasswordQuality(UserHandle.myUserId());
             if (passwordQuality == DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED) {
                 Intent chooseLockIntent = new Intent(DevicePolicyManager.ACTION_SET_NEW_PASSWORD);
                 chooseLockIntent.putExtra(
@@ -140,6 +138,12 @@ public class ScreenPinningSettings extends SettingsPreferenceFragment
                         true);
                 startActivityForResult(chooseLockIntent, CHANGE_LOCK_METHOD_REQUEST);
                 return false;
+            }
+        }  else {
+            if (passwordQuality != DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED) {
+                final ChooseLockSettingsHelper.Builder builder =
+                        new ChooseLockSettingsHelper.Builder(getActivity(), this);
+                return builder.setRequestCode(CONFIRM_REQUEST).show();
             }
         }
         setScreenLockUsedSetting(isEnabled);
@@ -162,6 +166,8 @@ public class ScreenPinningSettings extends SettingsPreferenceFragment
             setScreenLockUsed(validPassQuality);
             // Make sure the screen updates.
             mUseScreenLock.setChecked(validPassQuality);
+        } else if (requestCode == CONFIRM_REQUEST) {
+            setScreenLockUsedSetting(false);
         }
     }
 
@@ -245,14 +251,5 @@ public class ScreenPinningSettings extends SettingsPreferenceFragment
      * For search
      */
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
-                        boolean enabled) {
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.screen_pinning_settings;
-                    return Arrays.asList(sir);
-                }
-            };
+            new BaseSearchIndexProvider(R.xml.screen_pinning_settings);
 }

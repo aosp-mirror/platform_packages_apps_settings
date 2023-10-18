@@ -256,6 +256,12 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
             return InternalSetupChooseLockGenericFragment.class;
         }
 
+        @Override
+        protected boolean isToolbarEnabled() {
+            // Hide the action bar from this page.
+            return false;
+        }
+
         public static class InternalSetupChooseLockGenericFragment
                 extends ChooseLockGenericFragment {
             @Override

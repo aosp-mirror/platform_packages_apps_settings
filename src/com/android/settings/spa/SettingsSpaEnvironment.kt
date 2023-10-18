@@ -20,6 +20,7 @@ import android.content.Context
 import android.util.FeatureFlagUtils
 import com.android.settings.spa.app.AllAppListPageProvider
 import com.android.settings.spa.app.AppsMainPageProvider
+import com.android.settings.spa.app.appcompat.UserAspectRatioAppsPageProvider
 import com.android.settings.spa.app.appinfo.AppInfoSettingsProvider
 import com.android.settings.spa.app.appinfo.CloneAppInfoSettingsProvider
 import com.android.settings.spa.app.backgroundinstall.BackgroundInstalledAppsPageProvider
@@ -29,12 +30,14 @@ import com.android.settings.spa.app.specialaccess.DisplayOverOtherAppsAppListPro
 import com.android.settings.spa.app.specialaccess.InstallUnknownAppsListProvider
 import com.android.settings.spa.app.specialaccess.MediaManagementAppsAppListProvider
 import com.android.settings.spa.app.specialaccess.ModifySystemSettingsAppListProvider
+import com.android.settings.spa.app.specialaccess.NfcTagAppsSettingsProvider
 import com.android.settings.spa.app.specialaccess.PictureInPictureListProvider
 import com.android.settings.spa.app.specialaccess.SpecialAppAccessPageProvider
 import com.android.settings.spa.app.specialaccess.WifiControlAppListProvider
 import com.android.settings.spa.app.specialaccess.UseFullScreenIntentAppListProvider
 import com.android.settings.spa.core.instrumentation.SpaLogProvider
 import com.android.settings.spa.development.UsageStatsPageProvider
+import com.android.settings.spa.development.compat.PlatformCompatAppListPageProvider
 import com.android.settings.spa.home.HomePageProvider
 import com.android.settings.spa.network.NetworkAndInternetPageProvider
 import com.android.settings.spa.notification.AppListNotificationsPageProvider
@@ -61,6 +64,7 @@ open class SettingsSpaEnvironment(context: Context) : SpaEnvironment(context) {
             InstallUnknownAppsListProvider,
             AlarmsAndRemindersAppListProvider,
             WifiControlAppListProvider,
+            NfcTagAppsSettingsProvider,
         )
     }
 
@@ -81,7 +85,9 @@ open class SettingsSpaEnvironment(context: Context) : SpaEnvironment(context) {
                 LanguageAndInputPageProvider,
                 AppLanguagesPageProvider,
                 UsageStatsPageProvider,
+                PlatformCompatAppListPageProvider,
                 BackgroundInstalledAppsPageProvider,
+                UserAspectRatioAppsPageProvider,
                 CloneAppInfoSettingsProvider,
                 NetworkAndInternetPageProvider,
                 ) + togglePermissionAppListTemplate.createPageProviders(),
@@ -93,5 +99,5 @@ open class SettingsSpaEnvironment(context: Context) : SpaEnvironment(context) {
     override val logger =
         if (FeatureFlagUtils.isEnabled(context, FeatureFlagUtils.SETTINGS_ENABLE_SPA_METRICS))
             SpaLogProvider
-        else object: SpaLogger {}
+        else object : SpaLogger {}
 }
