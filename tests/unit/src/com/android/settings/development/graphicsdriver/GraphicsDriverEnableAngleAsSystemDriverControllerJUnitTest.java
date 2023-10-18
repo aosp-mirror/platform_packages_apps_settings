@@ -18,12 +18,14 @@ package com.android.settings.development.graphicsdriver;
 
 import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableAngleAsSystemDriverController.ANGLE_DRIVER_SUFFIX;
 import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableAngleAsSystemDriverController.Injector;
+import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableAngleAsSystemDriverController.PROPERTY_DEBUG_ANGLE_DEVELOPER_OPTION;
 import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableAngleAsSystemDriverController.PROPERTY_PERSISTENT_GRAPHICS_EGL;
 import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableAngleAsSystemDriverController.PROPERTY_RO_GFX_ANGLE_SUPPORTED;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
@@ -98,6 +100,8 @@ public class GraphicsDriverEnableAngleAsSystemDriverControllerJUnitTest {
         }
 
         mContext = ApplicationProvider.getApplicationContext();
+        when(mSystemPropertiesMock.getBoolean(eq(PROPERTY_DEBUG_ANGLE_DEVELOPER_OPTION),
+                                              anyBoolean())).thenReturn(true);
 
         // Construct a GraphicsDriverEnableAngleAsSystemDriverController with two Overrides:
         // 1) Override the mSystemProperties with mSystemPropertiesMock,
