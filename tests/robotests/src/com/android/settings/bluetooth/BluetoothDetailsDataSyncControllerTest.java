@@ -92,6 +92,14 @@ public class BluetoothDetailsDataSyncControllerTest extends BluetoothDetailsCont
     }
 
     @Test
+    public void refresh_noAssociations_checkPreferenceInvisible() {
+        mController.mAssociationId = DUMMY_ASSOCIATION_ID;
+        mController.refresh();
+
+        assertThat(mPermSyncPreference.isVisible()).isFalse();
+    }
+
+    @Test
     public void refresh_permSyncNull_checkPreferenceInvisible() {
         mPermissionSyncRequest = null;
         when(mCompanionDeviceManager.getPermissionSyncRequest(ASSOCIATION_ID)).thenReturn(
