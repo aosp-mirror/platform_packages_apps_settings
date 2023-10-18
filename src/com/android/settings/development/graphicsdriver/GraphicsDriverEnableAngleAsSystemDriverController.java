@@ -170,9 +170,10 @@ public class GraphicsDriverEnableAngleAsSystemDriverController
             ((SwitchPreference) mPreference).setChecked(false);
         }
 
-        // Regardless of whether ANGLE is enabled, disable the developer option UI
-        // as long as UI is not enabled via debug property.
-        if (!isAngleDeveloperOptionEnabled()) {
+        // Disable the developer option toggle UI if ANGLE is disabled, this means next time the
+        // debug property needs to be set to true again to enable ANGLE. If ANGLE is enabled, don't
+        // disable the developer option toggle UI so that it can be turned off easily.
+        if (!isAngleDeveloperOptionEnabled() && !((SwitchPreference) mPreference).isChecked()) {
             mPreference.setEnabled(false);
         }
     }
