@@ -26,6 +26,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceScreen
 import com.android.settings.core.BasePreferenceController
 import com.android.settings.datausage.lib.INetworkCycleDataRepository
+import com.android.settings.datausage.lib.NetworkCycleChartData
 import com.android.settings.datausage.lib.NetworkCycleDataRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -72,6 +73,7 @@ open class ChartDataUsagePreferenceController(context: Context, preferenceKey: S
 
     fun update(startTime: Long, endTime: Long) {
         preference.setTime(startTime, endTime)
+        preference.setNetworkCycleData(NetworkCycleChartData.AllZero)
         lifecycleScope.launch {
             val chartData = withContext(Dispatchers.Default) {
                 repository.queryChartData(startTime, endTime)

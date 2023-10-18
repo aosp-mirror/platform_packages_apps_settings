@@ -43,8 +43,14 @@ data class NetworkUsageData(
     fun getDataUsedString(context: Context): String =
         context.getString(R.string.data_used_template, formatUsage(context))
 
-    private companion object {
-        const val DATE_FORMAT = DateUtils.FORMAT_SHOW_DATE or DateUtils.FORMAT_ABBREV_MONTH
+    companion object {
+        val AllZero = NetworkUsageData(
+            startTime = 0L,
+            endTime = 0L,
+            usage = 0L,
+        )
+
+        private const val DATE_FORMAT = DateUtils.FORMAT_SHOW_DATE or DateUtils.FORMAT_ABBREV_MONTH
     }
 }
 

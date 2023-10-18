@@ -20,11 +20,8 @@ import android.app.usage.NetworkStats
 import android.content.Context
 import android.net.NetworkTemplate
 import android.util.Range
-import androidx.annotation.VisibleForTesting
 import com.android.settings.datausage.lib.AppDataUsageRepository.Companion.withSdkSandboxUids
-import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
-import kotlinx.coroutines.coroutineScope
+import com.android.settingslib.spa.framework.util.asyncMap
 
 interface IAppDataUsageDetailsRepository {
     suspend fun queryDetailsForCycles(): List<NetworkUsageDetailsData>
@@ -37,32 +34,24 @@ class AppDataUsageDetailsRepository @JvmOverloads constructor(
     uids: List<Int>,
     private val networkCycleDataRepository: INetworkCycleDataRepository =
         NetworkCycleDataRepository(context, template),
+    private val networkStatsRepository: NetworkStatsRepository =
+        NetworkStatsRepository(context, template),
 ) : IAppDataUsageDetailsRepository {
     private val withSdkSandboxUids = withSdkSandboxUids(uids)
-    private val networkStatsRepository = NetworkStatsRepository(context, template)
 
-    override suspend fun queryDetailsForCycles(): List<NetworkUsageDetailsData> = coroutineScope {
-        getCycles().map {
-            async {
-                queryDetails(it)
-            }
-        }.awaitAll().filter { it.totalUsage > 0 }
-    }
+    override suspend fun queryDetailsForCycles(): List<NetworkUsageDetailsData> =
+        getCycles().asyncMap { queryDetails(it) }.filter { it.totalUsage > 0 }
 
     private fun getCycles(): List<Range<Long>> =
         cycles?.zipWithNext { endTime, startTime -> Range(startTime, endTime) }
             ?: networkCycleDataRepository.getCycles()
 
     private fun queryDetails(range: Range<Long>): NetworkUsageDetailsData {
-        var totalUsage = 0L
-        var foregroundUsage = 0L
-        for (uid in withSdkSandboxUids) {
-            val usage = getUsage(range, uid, NetworkStats.Bucket.STATE_ALL)
-            if (usage > 0L) {
-                totalUsage += usage
-                foregroundUsage += getUsage(range, uid, NetworkStats.Bucket.STATE_FOREGROUND)
-            }
-        }
+        val buckets = networkStatsRepository.queryBuckets(range.lower, range.upper)
+            .filter { it.uid in withSdkSandboxUids }
+        val totalUsage = buckets.sumOf { it.bytes }
+        val foregroundUsage =
+            buckets.filter { it.state == NetworkStats.Bucket.STATE_FOREGROUND }.sumOf { it.bytes }
         return NetworkUsageDetailsData(
             range = range,
             totalUsage = totalUsage,
@@ -70,8 +59,4 @@ class AppDataUsageDetailsRepository @JvmOverloads constructor(
             backgroundUsage = totalUsage - foregroundUsage,
         )
     }
-
-    @VisibleForTesting
-    fun getUsage(range: Range<Long>, uid: Int, state: Int): Long =
-        networkStatsRepository.queryAggregateForUid(range, uid, state)?.usage ?: 0
 }

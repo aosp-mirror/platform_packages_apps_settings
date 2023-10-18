@@ -16,7 +16,7 @@
 
 package com.android.settings.datausage.lib
 
-import android.app.usage.NetworkStats.Bucket
+import android.app.usage.NetworkStats
 import android.content.Context
 import android.net.NetworkTemplate
 import android.util.Range
@@ -28,8 +28,8 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
-import org.mockito.kotlin.spy
-import org.mockito.kotlin.whenever
+import org.mockito.kotlin.stub
+import com.android.settings.datausage.lib.NetworkStatsRepository.Companion.Bucket
 
 @RunWith(AndroidJUnit4::class)
 class AppDataUsageDetailsRepositoryTest {
@@ -41,58 +41,78 @@ class AppDataUsageDetailsRepositoryTest {
         on { getCycles() } doReturn listOf(Range(CYCLE1_END_TIME, CYCLE2_END_TIME))
     }
 
+    private val networkStatsRepository = mock<NetworkStatsRepository>()
+
     @Test
     fun queryDetailsForCycles_hasCycles(): Unit = runBlocking {
-        val range = Range(CYCLE1_START_TIME, CYCLE1_END_TIME)
-        val repository = spy(
-            AppDataUsageDetailsRepository(
-                context = context,
-                cycles = listOf(CYCLE1_END_TIME, CYCLE1_START_TIME),
-                template = template,
-                uids = listOf(UID),
-                networkCycleDataRepository = networkCycleDataRepository,
+        networkStatsRepository.stub {
+            on { queryBuckets(CYCLE1_START_TIME, CYCLE1_END_TIME) } doReturn listOf(
+                Bucket(
+                    uid = UID,
+                    state = NetworkStats.Bucket.STATE_DEFAULT,
+                    bytes = BACKGROUND_USAGE,
+                ),
+                Bucket(
+                    uid = UID,
+                    state = NetworkStats.Bucket.STATE_FOREGROUND,
+                    bytes = FOREGROUND_USAGE,
+                ),
             )
-        ) {
-            doReturn(ALL_USAGE).whenever(mock).getUsage(range, UID, Bucket.STATE_ALL)
-            doReturn(FOREGROUND_USAGE).whenever(mock).getUsage(range, UID, Bucket.STATE_FOREGROUND)
         }
+        val repository = AppDataUsageDetailsRepository(
+            context = context,
+            cycles = listOf(CYCLE1_END_TIME, CYCLE1_START_TIME),
+            template = template,
+            uids = listOf(UID),
+            networkCycleDataRepository = networkCycleDataRepository,
+            networkStatsRepository = networkStatsRepository,
+        )
 
         val detailsForCycles = repository.queryDetailsForCycles()
 
         assertThat(detailsForCycles).containsExactly(
             NetworkUsageDetailsData(
-                range = range,
-                totalUsage = ALL_USAGE,
+                range = Range(CYCLE1_START_TIME, CYCLE1_END_TIME),
+                totalUsage = BACKGROUND_USAGE + FOREGROUND_USAGE,
                 foregroundUsage = FOREGROUND_USAGE,
-                backgroundUsage = ALL_USAGE - FOREGROUND_USAGE,
+                backgroundUsage = BACKGROUND_USAGE,
             )
         )
     }
 
     @Test
     fun queryDetailsForCycles_defaultCycles(): Unit = runBlocking {
-        val range = Range(CYCLE1_END_TIME, CYCLE2_END_TIME)
-        val repository = spy(
-            AppDataUsageDetailsRepository(
-                context = context,
-                cycles = null,
-                template = template,
-                uids = listOf(UID),
-                networkCycleDataRepository = networkCycleDataRepository,
+        networkStatsRepository.stub {
+            on { queryBuckets(CYCLE1_END_TIME, CYCLE2_END_TIME) } doReturn listOf(
+                Bucket(
+                    uid = UID,
+                    state = NetworkStats.Bucket.STATE_DEFAULT,
+                    bytes = BACKGROUND_USAGE,
+                ),
+                Bucket(
+                    uid = UID,
+                    state = NetworkStats.Bucket.STATE_FOREGROUND,
+                    bytes = FOREGROUND_USAGE,
+                ),
             )
-        ) {
-            doReturn(ALL_USAGE).whenever(mock).getUsage(range, UID, Bucket.STATE_ALL)
-            doReturn(FOREGROUND_USAGE).whenever(mock).getUsage(range, UID, Bucket.STATE_FOREGROUND)
         }
+        val repository = AppDataUsageDetailsRepository(
+            context = context,
+            cycles = null,
+            template = template,
+            uids = listOf(UID),
+            networkCycleDataRepository = networkCycleDataRepository,
+            networkStatsRepository = networkStatsRepository,
+        )
 
         val detailsForCycles = repository.queryDetailsForCycles()
 
         assertThat(detailsForCycles).containsExactly(
             NetworkUsageDetailsData(
-                range = range,
-                totalUsage = ALL_USAGE,
+                range = Range(CYCLE1_END_TIME, CYCLE2_END_TIME),
+                totalUsage = BACKGROUND_USAGE + FOREGROUND_USAGE,
                 foregroundUsage = FOREGROUND_USAGE,
-                backgroundUsage = ALL_USAGE - FOREGROUND_USAGE,
+                backgroundUsage = BACKGROUND_USAGE,
             )
         )
     }
@@ -103,7 +123,7 @@ class AppDataUsageDetailsRepositoryTest {
         const val CYCLE2_END_TIME = 1695566666000L
         const val UID = 10000
 
-        const val ALL_USAGE = 10L
+        const val BACKGROUND_USAGE = 8L
         const val FOREGROUND_USAGE = 2L
     }
 }

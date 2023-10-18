@@ -41,7 +41,7 @@ class AppDataUsageRepository(
     private val networkStatsRepository = NetworkStatsRepository(context, template)
 
     fun getAppPercent(carrierId: Int?, startTime: Long, endTime: Long): List<Pair<AppItem, Int>> {
-        val buckets = networkStatsRepository.querySummary(startTime, endTime)
+        val buckets = networkStatsRepository.queryBuckets(startTime, endTime)
         return getAppPercent(carrierId, buckets)
     }
 

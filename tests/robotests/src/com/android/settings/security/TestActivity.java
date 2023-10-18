@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 The Android Open Source Project
+ * Copyright (C) 2022 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,23 +14,23 @@
  * limitations under the License.
  */
 
-package com.android.settings.datausage.lib
+package com.android.settings.security;
 
-import kotlin.time.Duration.Companion.days
+import android.os.Bundle;
 
-/**
- * Usage data in a billing cycle with daily data for plotting the usage chart.
- */
-data class NetworkCycleChartData(
-    val total: NetworkUsageData,
-    val dailyUsage: List<NetworkUsageData>,
-) {
-    companion object {
-        val AllZero = NetworkCycleChartData(
-            total = NetworkUsageData.AllZero,
-            dailyUsage = emptyList(),
-        )
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentContainerView;
 
-        val BUCKET_DURATION = 1.days
+public final class TestActivity extends FragmentActivity {
+
+    static final int CONTAINER_VIEW_ID = 1234;
+
+    @Override
+    protected void onCreate(Bundle bundle) {
+        super.onCreate(bundle);
+
+        FragmentContainerView contentView = new FragmentContainerView(this);
+        contentView.setId(CONTAINER_VIEW_ID);
+        setContentView(contentView);
     }
 }
