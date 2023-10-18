@@ -54,7 +54,7 @@ class NetworkStatsRepository(context: Context, private val template: NetworkTemp
         0
     }
 
-    fun querySummary(startTime: Long, endTime: Long): List<Bucket> = try {
+    fun queryBuckets(startTime: Long, endTime: Long): List<Bucket> = try {
         networkStatsManager.querySummary(template, startTime, endTime).convertToBuckets()
     } catch (e: Exception) {
         Log.e(TAG, "Exception querySummary", e)
@@ -69,13 +69,14 @@ class NetworkStatsRepository(context: Context, private val template: NetworkTemp
         data class Bucket(
             val uid: Int,
             val bytes: Long,
+            val state: Int = NetworkStats.Bucket.STATE_ALL,
         )
 
         private fun NetworkStats.convertToBuckets(): List<Bucket> = use {
             val buckets = mutableListOf<Bucket>()
             val bucket = NetworkStats.Bucket()
             while (getNextBucket(bucket)) {
-                buckets += Bucket(uid = bucket.uid, bytes = bucket.bytes)
+                buckets += Bucket(uid = bucket.uid, bytes = bucket.bytes, state = bucket.state)
             }
             buckets
         }

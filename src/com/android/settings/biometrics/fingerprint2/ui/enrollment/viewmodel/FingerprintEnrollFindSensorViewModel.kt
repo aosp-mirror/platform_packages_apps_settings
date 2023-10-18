@@ -26,13 +26,12 @@ import com.android.systemui.biometrics.shared.model.FingerprintSensorType
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.combineTransform
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.shareIn
-import kotlinx.coroutines.flow.transform
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -47,41 +46,43 @@ class FingerprintEnrollFindSensorViewModel(
 ) : ViewModel() {
   /** Represents the stream of sensor type. */
   val sensorType: Flow<FingerprintSensorType> =
-    fingerprintEnrollViewModel.sensorType
-      .filterWhenEducationIsShown()
-      .shareIn(viewModelScope, SharingStarted.WhileSubscribed(), 1)
+    fingerprintEnrollViewModel.sensorType.shareIn(
+      viewModelScope,
+      SharingStarted.WhileSubscribed(),
+      1
+    )
   private val _isUdfps: Flow<Boolean> =
     sensorType.map {
       it == FingerprintSensorType.UDFPS_OPTICAL || it == FingerprintSensorType.UDFPS_ULTRASONIC
     }
   private val _isSfps: Flow<Boolean> = sensorType.map { it == FingerprintSensorType.POWER_BUTTON }
-  private val _isRearSfps: Flow<Boolean> =
-    combineTransform(_isSfps, _isUdfps) { v1, v2 -> !v1 && !v2 }
+  private val _isRearSfps: Flow<Boolean> = sensorType.map { it == FingerprintSensorType.REAR }
 
   /** Represents the stream of showing primary button. */
-  val showPrimaryButton: Flow<Boolean> = _isUdfps.transform { if (it) emit(true) }
+  val showPrimaryButton: Flow<Boolean> = _isUdfps.filter { it }
 
-  /** Represents the stream of showing sfps lottie, Pair(isFolded, rotation). */
-  val showSfpsLottie: Flow<Pair<Boolean, Int>> =
+  private val _showSfpsLottie = _isSfps.filter { it }
+  /** Represents the stream of showing sfps lottie and the information Pair(isFolded, rotation). */
+  val sfpsLottieInfo: Flow<Pair<Boolean, Int>> =
     combineTransform(
-      _isSfps,
+      _showSfpsLottie,
       foldStateViewModel.isFolded,
       orientationStateViewModel.rotation,
-    ) { isSfps, isFolded, rotation ->
-      if (isSfps) emit(Pair(isFolded, rotation))
+    ) { _, isFolded, rotation ->
+      emit(Pair(isFolded, rotation))
     }
 
-  /** Represents the stream of showing udfps lottie. */
-  val showUdfpsLottie: Flow<Boolean> =
-    combineTransform(
-      _isUdfps,
-      accessibilityViewModel.isAccessibilityEnabled,
-    ) { isUdfps, isAccessibilityEnabled ->
-      if (isUdfps) emit(isAccessibilityEnabled)
+  private val _showUdfpsLottie = _isUdfps.filter { it }
+  /** Represents the stream of showing udfps lottie and whether accessibility is enabled. */
+  val udfpsLottieInfo: Flow<Boolean> =
+    _showUdfpsLottie.combine(accessibilityViewModel.isAccessibilityEnabled) {
+      _,
+      isAccessibilityEnabled ->
+      isAccessibilityEnabled
     }
 
   /** Represents the stream of showing rfps animation. */
-  val showRfpsAnimation: Flow<Boolean> = _isRearSfps.transform { if (it) emit(true) }
+  val showRfpsAnimation: Flow<Boolean> = _isRearSfps.filter { it }
 
   private val _showErrorDialog: MutableStateFlow<Pair<Int, Boolean>?> = MutableStateFlow(null)
   /** Represents the stream of showing error dialog. */
@@ -144,16 +145,6 @@ class FingerprintEnrollFindSensorViewModel(
   fun proceedToEnrolling() {
     navigationViewModel.nextStep()
   }
-
-  // TODO: If we decide to remove previous fragment from activity, then we don't need to check
-  // whether education is shown for the flows that are subscribed by
-  // [FingerprintEnrollFindSensorV2Fragment].
-  private fun <T> Flow<T>.filterWhenEducationIsShown() =
-    combineTransform(navigationViewModel.navigationViewModel) { value, navigationViewModel ->
-      if (navigationViewModel.currStep == Education) {
-        emit(value)
-      }
-    }
 
   class FingerprintEnrollFindSensorViewModelFactory(
     private val navigationViewModel: FingerprintEnrollNavigationViewModel,
