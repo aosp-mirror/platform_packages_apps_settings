@@ -32,7 +32,12 @@ import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.platform.test.annotations.RequiresFlagsEnabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,6 +47,7 @@ import android.widget.PopupWindow;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
@@ -50,10 +56,12 @@ import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityDialogUtils.DialogType;
 import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
+import com.android.settings.flags.Flags;
 import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settingslib.widget.TopIntroPreference;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -73,6 +81,9 @@ import org.robolectric.shadows.ShadowApplication;
         ShadowFragment.class,
 })
 public class ToggleFeaturePreferenceFragmentTest {
+
+    @Rule
+    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
 
     private static final String PLACEHOLDER_PACKAGE_NAME = "com.placeholder.example";
     private static final String PLACEHOLDER_CLASS_NAME = PLACEHOLDER_PACKAGE_NAME + ".placeholder";
@@ -105,6 +116,8 @@ public class ToggleFeaturePreferenceFragmentTest {
     private FragmentActivity mActivity;
     @Mock
     private ContentResolver mContentResolver;
+    @Mock
+    private PackageManager mPackageManager;
 
     @Before
     public void setUpTestFragment() {
@@ -116,6 +129,7 @@ public class ToggleFeaturePreferenceFragmentTest {
         when(mFragment.getContext()).thenReturn(mContext);
         when(mFragment.getActivity()).thenReturn(mActivity);
         when(mActivity.getContentResolver()).thenReturn(mContentResolver);
+        when(mContext.getPackageManager()).thenReturn(mPackageManager);
         final PreferenceScreen screen = spy(new PreferenceScreen(mContext, null));
         when(screen.getPreferenceManager()).thenReturn(mPreferenceManager);
         doReturn(screen).when(mFragment).getPreferenceScreen();
@@ -315,6 +329,53 @@ public class ToggleFeaturePreferenceFragmentTest {
         mFragment.initTopIntroPreference();
 
         assertThat(mFragment.getPreferenceScreen().getPreferenceCount()).isEqualTo(0);
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_ACCESSIBILITY_SHOW_APP_INFO_BUTTON)
+    public void createAppInfoPreference_withValidComponentName() {
+        when(mPackageManager.isPackageAvailable(PLACEHOLDER_PACKAGE_NAME)).thenReturn(true);
+        mFragment.mComponentName = PLACEHOLDER_COMPONENT_NAME;
+
+        final Preference preference = mFragment.createAppInfoPreference();
+
+        assertThat(preference).isNotNull();
+        final Intent appInfoIntent = preference.getIntent();
+        assertThat(appInfoIntent.getAction())
+                .isEqualTo(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        assertThat(appInfoIntent.getDataString()).isEqualTo("package:" + PLACEHOLDER_PACKAGE_NAME);
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_ACCESSIBILITY_SHOW_APP_INFO_BUTTON)
+    public void createAppInfoPreference_noComponentName_shouldBeNull() {
+        mFragment.mComponentName = null;
+
+        final Preference preference = mFragment.createAppInfoPreference();
+
+        assertThat(preference).isNull();
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_ACCESSIBILITY_SHOW_APP_INFO_BUTTON)
+    public void createAppInfoPreference_withUnavailablePackage_shouldBeNull() {
+        when(mPackageManager.isPackageAvailable(PLACEHOLDER_PACKAGE_NAME)).thenReturn(false);
+        mFragment.mComponentName = PLACEHOLDER_COMPONENT_NAME;
+
+        final Preference preference = mFragment.createAppInfoPreference();
+
+        assertThat(preference).isNull();
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_ACCESSIBILITY_SHOW_APP_INFO_BUTTON)
+    public void createAppInfoPreference_inSetupWizard_shouldBeNull() {
+        when(mFragment.isAnySetupWizard()).thenReturn(true);
+        mFragment.mComponentName = PLACEHOLDER_COMPONENT_NAME;
+
+        final Preference preference = mFragment.createAppInfoPreference();
+
+        assertThat(preference).isNull();
     }
 
     @Test

@@ -47,6 +47,7 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.Switch;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
@@ -58,6 +59,7 @@ import com.android.settings.accessibility.AccessibilityDialogUtils.DialogType;
 import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.flags.Flags;
 import com.android.settings.utils.LocaleUtils;
 import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settings.widget.SettingsMainSwitchPreference;
@@ -188,6 +190,7 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
         initGeneralCategory();
         initShortcutPreference();
         initSettingsPreference();
+        initAppInfoPreference();
         initHtmlTextPreference();
         initFooterPreference();
 
@@ -208,7 +211,7 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
     public Dialog onCreateDialog(int dialogId) {
         switch (dialogId) {
             case DialogEnums.EDIT_SHORTCUT:
-                final int dialogType = WizardManagerHelper.isAnySetupWizard(getIntent())
+                final int dialogType = isAnySetupWizard()
                         ? DialogType.EDIT_SHORTCUT_GENERIC_SUW : DialogType.EDIT_SHORTCUT_GENERIC;
                 mDialog = AccessibilityDialogUtils.showEditShortcutDialog(
                         getPrefContext(), dialogType, getShortcutTitle(),
@@ -216,7 +219,7 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
                 setupEditShortcutDialog(mDialog);
                 return mDialog;
             case DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL:
-                if (WizardManagerHelper.isAnySetupWizard(getIntent())) {
+                if (isAnySetupWizard()) {
                     mDialog = AccessibilityGestureNavigationTutorial
                             .createAccessibilityTutorialDialogForSetupWizard(
                                     getPrefContext(), getUserShortcutTypes(),
@@ -539,6 +542,44 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
 
         final PreferenceCategory generalCategory = findPreference(KEY_GENERAL_CATEGORY);
         generalCategory.addPreference(mSettingsPreference);
+    }
+
+    @VisibleForTesting
+    @Nullable
+    Preference createAppInfoPreference() {
+        if (!Flags.accessibilityShowAppInfoButton()) {
+            return null;
+        }
+        // App Info is not available in Setup Wizard.
+        if (isAnySetupWizard()) {
+            return null;
+        }
+        // Only show the button for pages with valid component package names.
+        if (mComponentName == null) {
+            return null;
+        }
+        final String packageName = mComponentName.getPackageName();
+        final PackageManager packageManager = getPrefContext().getPackageManager();
+        if (!packageManager.isPackageAvailable(packageName)) {
+            return null;
+        }
+
+        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        intent.setData(Uri.parse("package:" + packageName));
+
+        final Preference appInfoPreference = new Preference(getPrefContext());
+        appInfoPreference.setTitle(getString(R.string.application_info_label));
+        appInfoPreference.setIconSpaceReserved(false);
+        appInfoPreference.setIntent(intent);
+        return appInfoPreference;
+    }
+
+    private void initAppInfoPreference() {
+        final Preference appInfoPreference = createAppInfoPreference();
+        if (appInfoPreference != null) {
+            final PreferenceCategory generalCategory = findPreference(KEY_GENERAL_CATEGORY);
+            generalCategory.addPreference(appInfoPreference);
+        }
     }
 
     private void initHtmlTextPreference() {
@@ -901,5 +942,10 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
             }
         }
         return null;
+    }
+
+    @VisibleForTesting
+    boolean isAnySetupWizard() {
+        return WizardManagerHelper.isAnySetupWizard(getIntent());
     }
 }
