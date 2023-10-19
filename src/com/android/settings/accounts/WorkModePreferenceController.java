@@ -70,6 +70,9 @@ public class WorkModePreferenceController extends BasePreferenceController
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         mQuietModeEnabler.setQuietModeEnabled(!isChecked);
+        if (android.app.admin.flags.Flags.quietModeCredentialBugFix()) {
+            updateState(mPreference);
+        }
     }
 
     @Override
