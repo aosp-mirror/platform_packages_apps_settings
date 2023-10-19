@@ -29,6 +29,8 @@ import com.android.settings.accounts.AccountFeatureProviderImpl
 import com.android.settings.applications.ApplicationFeatureProviderImpl
 import com.android.settings.biometrics.face.FaceFeatureProvider
 import com.android.settings.biometrics.face.FaceFeatureProviderImpl
+import com.android.settings.biometrics.fingerprint.FingerprintFeatureProvider
+import com.android.settings.biometrics.fingerprint.FingerprintFeatureProviderImpl
 import com.android.settings.biometrics2.factory.BiometricsRepositoryProviderImpl
 import com.android.settings.bluetooth.BluetoothFeatureProvider
 import com.android.settings.bluetooth.BluetoothFeatureProviderImpl
@@ -144,6 +146,10 @@ open class FeatureFactoryImpl : FeatureFactory() {
     }
 
     override val faceFeatureProvider: FaceFeatureProvider by lazy { FaceFeatureProviderImpl() }
+
+    override val fingerprintFeatureProvider: FingerprintFeatureProvider by lazy {
+        FingerprintFeatureProviderImpl()
+    }
 
     override val biometricsRepositoryProvider by lazy { BiometricsRepositoryProviderImpl() }
 
