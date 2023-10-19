@@ -42,6 +42,7 @@ import com.android.settings.applications.AppDashboardFragment;
 import com.android.settings.applications.ProcessStatsSummary;
 import com.android.settings.applications.ProcessStatsUi;
 import com.android.settings.applications.UsageAccessDetails;
+import com.android.settings.applications.appcompat.UserAspectRatioDetails;
 import com.android.settings.applications.appinfo.AlarmsAndRemindersDetails;
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
 import com.android.settings.applications.appinfo.AppLocaleDetails;
@@ -72,6 +73,7 @@ import com.android.settings.biometrics.combination.CombinedBiometricProfileSetti
 import com.android.settings.biometrics.combination.CombinedBiometricSettings;
 import com.android.settings.biometrics.face.FaceSettings;
 import com.android.settings.biometrics.fingerprint.FingerprintSettings;
+import com.android.settings.biometrics.fingerprint2.ui.fragment.FingerprintSettingsV2Fragment;
 import com.android.settings.bluetooth.BluetoothBroadcastDialog;
 import com.android.settings.bluetooth.BluetoothDeviceDetailsFragment;
 import com.android.settings.bluetooth.BluetoothFindBroadcastsFragment;
@@ -94,6 +96,7 @@ import com.android.settings.deviceinfo.PrivateVolumeForget;
 import com.android.settings.deviceinfo.PublicVolumeSettings;
 import com.android.settings.deviceinfo.StorageDashboardFragment;
 import com.android.settings.deviceinfo.aboutphone.MyDeviceInfoFragment;
+import com.android.settings.deviceinfo.batteryinfo.BatteryInfoFragment;
 import com.android.settings.deviceinfo.firmwareversion.FirmwareVersionSettings;
 import com.android.settings.deviceinfo.legal.ModuleLicensesDashboard;
 import com.android.settings.display.AutoBrightnessSettings;
@@ -265,6 +268,7 @@ public class SettingsGateway {
             AssistGestureSettings.class.getName(),
             FaceSettings.class.getName(),
             FingerprintSettings.FingerprintSettingsFragment.class.getName(),
+            FingerprintSettingsV2Fragment.class.getName(),
             CombinedBiometricSettings.class.getName(),
             CombinedBiometricProfileSettings.class.getName(),
             SwipeToNotificationSettings.class.getName(),
@@ -371,7 +375,9 @@ public class SettingsGateway {
             NfcAndPaymentFragment.class.getName(),
             ColorAndMotionFragment.class.getName(),
             LongBackgroundTasksDetails.class.getName(),
-            RegionalPreferencesEntriesFragment.class.getName()
+            RegionalPreferencesEntriesFragment.class.getName(),
+            BatteryInfoFragment.class.getName(),
+            UserAspectRatioDetails.class.getName()
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {

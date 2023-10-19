@@ -133,6 +133,7 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
     protected long mChallenge;
     protected boolean mFromSettingsSummary;
     protected FooterBarMixin mFooterBarMixin;
+    protected boolean mShouldSetFooterBarBackground = true;
     @Nullable
     protected ScreenSizeFoldProvider mScreenSizeFoldProvider;
     @Nullable
@@ -191,12 +192,14 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
         super.onPostCreate(savedInstanceState);
         initViews();
 
-        @SuppressLint("VisibleForTests")
-        final LinearLayout buttonContainer = mFooterBarMixin != null
-                ? mFooterBarMixin.getButtonContainer()
-                : null;
-        if (buttonContainer != null) {
-            buttonContainer.setBackgroundColor(getBackgroundColor());
+        if (mShouldSetFooterBarBackground) {
+            @SuppressLint("VisibleForTests")
+            final LinearLayout buttonContainer = mFooterBarMixin != null
+                    ? mFooterBarMixin.getButtonContainer()
+                    : null;
+            if (buttonContainer != null) {
+                buttonContainer.setBackgroundColor(getBackgroundColor());
+            }
         }
     }
 
@@ -331,7 +334,7 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
     }
 
     @ColorInt
-    private int getBackgroundColor() {
+    public int getBackgroundColor() {
         final ColorStateList stateList = Utils.getColorAttr(this, android.R.attr.windowBackground);
         return stateList != null ? stateList.getDefaultColor() : Color.TRANSPARENT;
     }

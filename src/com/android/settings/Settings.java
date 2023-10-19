@@ -52,27 +52,11 @@ public class Settings extends SettingsActivity {
     public static class AssistGestureSettingsActivity extends SettingsActivity { /* empty */}
     public static class BluetoothSettingsActivity extends SettingsActivity { /* empty */ }
     public static class CreateShortcutActivity extends SettingsActivity { /* empty */ }
-    public static class FaceSettingsActivity extends SettingsActivity {
-        @Override
-        protected void onCreate(Bundle savedState) {
-            setTheme(SetupWizardUtils.getTheme(this, getIntent()));
-            setTheme(R.style.SettingsPreferenceTheme_SetupWizard);
-            ThemeHelper.trySetDynamicColor(this);
-            super.onCreate(savedState);
-        }
-    }
+    public static class FaceSettingsActivity extends SettingsActivity { /* empty */ }
     /** Container for {@link FaceSettings} to use with a pre-defined task affinity. */
-    public static class FaceSettingsInternalActivity extends SettingsActivity {
-        @Override
-        protected void onCreate(Bundle savedState) {
-            setTheme(SetupWizardUtils.getTheme(this, getIntent()));
-            setTheme(R.style.SettingsPreferenceTheme_SetupWizard);
-            ThemeHelper.trySetDynamicColor(this);
-            super.onCreate(savedState);
-        }
-    }
-
+    public static class FaceSettingsInternalActivity extends SettingsActivity { /* empty */ }
     public static class FingerprintSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class FingerprintSettingsActivityV2 extends SettingsActivity { /* empty */ }
     public static class CombinedBiometricSettingsActivity extends SettingsActivity { /* empty */ }
     public static class CombinedBiometricProfileSettingsActivity extends SettingsActivity { /* empty */ }
     public static class TetherSettingsActivity extends SettingsActivity {
@@ -377,6 +361,10 @@ public class Settings extends SettingsActivity {
     public static class NotificationAppListActivity extends SettingsActivity { /* empty */ }
     /** Activity to manage Cloned Apps page */
     public static class ClonedAppsListActivity extends SettingsActivity { /* empty */ }
+    /** Activity to manage Aspect Ratio app list page */
+    public static class UserAspectRatioAppListActivity extends SettingsActivity { /* empty */ }
+    /** Activity to manage Aspect Ratio app page */
+    public static class UserAspectRatioAppActivity extends SettingsActivity { /* empty */ }
     public static class NotificationReviewPermissionsActivity extends SettingsActivity { /* empty */ }
     public static class AppNotificationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ChannelNotificationSettingsActivity extends SettingsActivity { /* empty */ }

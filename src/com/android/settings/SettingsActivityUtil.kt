@@ -35,6 +35,7 @@ import com.android.settings.spa.app.specialaccess.DisplayOverOtherAppsAppListPro
 import com.android.settings.spa.app.specialaccess.InstallUnknownAppsListProvider
 import com.android.settings.spa.app.specialaccess.MediaManagementAppsAppListProvider
 import com.android.settings.spa.app.specialaccess.ModifySystemSettingsAppListProvider
+import com.android.settings.spa.app.specialaccess.NfcTagAppsSettingsProvider
 import com.android.settings.spa.app.specialaccess.PictureInPictureListProvider
 import com.android.settings.spa.app.specialaccess.WifiControlAppListProvider
 import com.android.settings.wifi.ChangeWifiStateDetails
@@ -62,6 +63,8 @@ object SettingsActivityUtil {
             MediaManagementAppsAppListProvider.getAppInfoRoutePrefix(),
         ChangeWifiStateDetails::class.qualifiedName to
             WifiControlAppListProvider.getAppInfoRoutePrefix(),
+        NfcTagAppsSettingsProvider::class.qualifiedName to
+            NfcTagAppsSettingsProvider.getAppInfoRoutePrefix(),
     )
 
     @JvmStatic

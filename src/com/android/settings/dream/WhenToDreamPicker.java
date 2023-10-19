@@ -50,7 +50,7 @@ public class WhenToDreamPicker extends RadioButtonPickerFragment {
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.DREAM;
+        return SettingsEnums.SETTINGS_WHEN_TO_DREAM;
     }
 
     @Override

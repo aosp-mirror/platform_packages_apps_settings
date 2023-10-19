@@ -33,6 +33,7 @@ import androidx.fragment.app.DialogFragment;
 import com.android.settings.R;
 
 public class ModifierKeysResetDialogFragment extends DialogFragment {
+
     private static final String MODIFIER_KEYS_CAPS_LOCK = "modifier_keys_caps_lock";
     private static final String MODIFIER_KEYS_CTRL = "modifier_keys_ctrl";
     private static final String MODIFIER_KEYS_META = "modifier_keys_meta";

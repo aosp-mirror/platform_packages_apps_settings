@@ -69,6 +69,9 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
     private static final String ENABLE_DUAL_MODE_AUDIO =
             "persist.bluetooth.enable_dual_mode_audio";
     private static final String CONFIG_LE_AUDIO_ENABLED_BY_DEFAULT = "le_audio_enabled_by_default";
+    private static final boolean LE_AUDIO_TOGGLE_VISIBLE_DEFAULT_VALUE = true;
+    private static final String LE_AUDIO_TOGGLE_VISIBLE_PROPERTY =
+            "persist.bluetooth.leaudio.toggle_visible";
 
     private LocalBluetoothManager mManager;
     private LocalBluetoothProfileManager mProfileManager;
@@ -88,7 +91,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
         mManager = manager;
         mProfileManager = mManager.getProfileManager();
         mCachedDevice = device;
-        mAllOfCachedDevices = Utils.getAllOfCachedBluetoothDevices(mContext, mCachedDevice);
+        mAllOfCachedDevices = Utils.getAllOfCachedBluetoothDevices(mManager, mCachedDevice);
         lifecycle.addObserver(this);
     }
 
@@ -96,12 +99,6 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
     protected void init(PreferenceScreen screen) {
         mProfilesContainer = (PreferenceCategory)screen.findPreference(getPreferenceKey());
         mProfilesContainer.setLayoutResource(R.layout.preference_bluetooth_profile_category);
-        mIsLeContactSharingEnabled = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_SETTINGS_UI,
-                SettingsUIDeviceConfig.BT_LE_AUDIO_CONTACT_SHARING_ENABLED, true);
-        mIsLeAudioToggleEnabled = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_SETTINGS_UI,
-                SettingsUIDeviceConfig.BT_LE_AUDIO_DEVICE_DETAIL_ENABLED, false)
-                || DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_BLUETOOTH,
-                CONFIG_LE_AUDIO_ENABLED_BY_DEFAULT, false);
         // Call refresh here even though it will get called later in onResume, to avoid the
         // list of switches appearing to "pop" into the page.
         refresh();
@@ -151,8 +148,8 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
             profilePref.setEnabled(!mCachedDevice.isBusy());
         }
 
-        if (profile instanceof LeAudioProfile && !mIsLeAudioToggleEnabled) {
-            profilePref.setVisible(false);
+        if (profile instanceof LeAudioProfile) {
+            profilePref.setVisible(mIsLeAudioToggleEnabled);
         }
 
         if (profile instanceof MapProfile) {
@@ -329,11 +326,16 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
             return;
         }
 
+        LocalBluetoothProfile asha = mProfileManager.getHearingAidProfile();
+
         for (CachedBluetoothDevice leAudioDevice : mProfileDeviceMap.get(profile.toString())) {
             Log.d(TAG,
                     "device:" + leAudioDevice.getDevice().getAnonymizedAddress()
                             + "disable LE profile");
             profile.setEnabled(leAudioDevice.getDevice(), false);
+            if (asha != null) {
+                asha.setEnabled(leAudioDevice.getDevice(), true);
+            }
         }
 
         if (!SystemProperties.getBoolean(ENABLE_DUAL_MODE_AUDIO, false)) {
@@ -359,12 +361,16 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
             disableProfileBeforeUserEnablesLeAudio(mProfileManager.getA2dpProfile());
             disableProfileBeforeUserEnablesLeAudio(mProfileManager.getHeadsetProfile());
         }
+        LocalBluetoothProfile asha = mProfileManager.getHearingAidProfile();
 
         for (CachedBluetoothDevice leAudioDevice : mProfileDeviceMap.get(profile.toString())) {
             Log.d(TAG,
                     "device:" + leAudioDevice.getDevice().getAnonymizedAddress()
                             + "enable LE profile");
             profile.setEnabled(leAudioDevice.getDevice(), true);
+            if (asha != null) {
+                asha.setEnabled(leAudioDevice.getDevice(), false);
+            }
         }
     }
 
@@ -381,6 +387,12 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
                             + profile.toString() + " profile is disabled. Do nothing.");
                 }
             }
+        } else {
+            if (profile == null) {
+                Log.w(TAG, "profile is null");
+            } else {
+                Log.w(TAG, profile.toString() + " is not in " + mProfileDeviceMap);
+            }
         }
     }
 
@@ -396,6 +408,12 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
                     Log.d(TAG, "The " + profileDevice.getDevice().getAnonymizedAddress() + ":"
                             + profile.toString() + " profile is enabled. Do nothing.");
                 }
+            }
+        } else {
+            if (profile == null) {
+                Log.w(TAG, "profile is null");
+            } else {
+                Log.w(TAG, profile.toString() + " is not in " + mProfileDeviceMap);
             }
         }
     }
@@ -437,6 +455,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
 
     @Override
     public void onResume() {
+        updateLeAudioConfig();
         for (CachedBluetoothDevice item : mAllOfCachedDevices) {
             item.registerCallback(this);
         }
@@ -444,12 +463,25 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
         refresh();
     }
 
+    private void updateLeAudioConfig() {
+        mIsLeContactSharingEnabled = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_SETTINGS_UI,
+                SettingsUIDeviceConfig.BT_LE_AUDIO_CONTACT_SHARING_ENABLED, true);
+        boolean isLeAudioToggleVisible = SystemProperties.getBoolean(
+                LE_AUDIO_TOGGLE_VISIBLE_PROPERTY, LE_AUDIO_TOGGLE_VISIBLE_DEFAULT_VALUE);
+        boolean isLeEnabledByDefault = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_BLUETOOTH,
+                CONFIG_LE_AUDIO_ENABLED_BY_DEFAULT, false);
+        mIsLeAudioToggleEnabled = isLeAudioToggleVisible || isLeEnabledByDefault;
+        Log.d(TAG, "BT_LE_AUDIO_CONTACT_SHARING_ENABLED:" + mIsLeContactSharingEnabled
+                + ", LE_AUDIO_TOGGLE_VISIBLE_PROPERTY:" + isLeAudioToggleVisible
+                + ", CONFIG_LE_AUDIO_ENABLED_BY_DEFAULT:" + isLeEnabledByDefault);
+    }
+
     @Override
     public void onDeviceAttributesChanged() {
         for (CachedBluetoothDevice item : mAllOfCachedDevices) {
             item.unregisterCallback(this);
         }
-        mAllOfCachedDevices = Utils.getAllOfCachedBluetoothDevices(mContext, mCachedDevice);
+        mAllOfCachedDevices = Utils.getAllOfCachedBluetoothDevices(mManager, mCachedDevice);
         for (CachedBluetoothDevice item : mAllOfCachedDevices) {
             item.registerCallback(this);
         }
