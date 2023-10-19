@@ -32,6 +32,7 @@
     <!-- Bluetooth and WiFi reset -->
     <com.android.settings.spa.preference.ComposePreference
         android:key="network_reset_bluetooth_wifi_pref"
+        android:title="@string/reset_bluetooth_wifi_title"
         settings:controller="com.android.settings.network.BluetoothWiFiResetPreferenceController" />
 
     <!-- Reset app preferences -->
