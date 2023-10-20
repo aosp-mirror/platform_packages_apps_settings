@@ -113,6 +113,10 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Khubaza umsindo we-Bluetooth LE"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Kukhubaza isakhi somsindo we-Bluetooth LE uma idivayisi isekela amakhono wehadiwe yomsindo we-LE."</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Bonisa ukuguqulwa komsindo we-LE Emininingwaneni Yedivayisi"</string>
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist (7392319491894565552) -->
+    <skip />
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist_summary (8999245286359656738) -->
+    <skip />
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Amadivayisi emidiya"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Shayela amadivayisi"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Amanye amadivayisi"</string>
@@ -1318,6 +1322,8 @@
     <string name="carrier_enabled_summaryOn" msgid="5212067975273903381">"I-APN ivunyeliwe"</string>
     <string name="carrier_enabled_summaryOff" msgid="8541959867953738521">"I-APN ayisebenzi"</string>
     <string name="bearer" msgid="3231443241639159358">"Umthwali"</string>
+    <string name="network_type" msgid="748590707422733595">"Uhlobo lwenethiwekhi"</string>
+    <string name="network_type_unspecified" msgid="7756349656194518725">"Okungacacisiwe"</string>
     <string name="mvno_type" msgid="4734654257494971247">"Uhlobo lwe-MVNO"</string>
     <string name="mvno_match_data" msgid="5213193073684321156">"Inani le-MVNO"</string>
     <string name="menu_delete" msgid="9199740901584348273">"Susa i-APN"</string>
@@ -2042,6 +2048,8 @@
     <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Sebenzisa ukudlidliza nama-haptic"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Ukudlidliza kwe-alamu"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Ukudlidliza kwemidiya"</string>
+    <!-- no translation found for accessibility_keyboard_vibration_title (7559967730626765441) -->
+    <skip />
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Ukudlidliza kokukhala"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Ukudlidliza kwesaziso"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Impendulo yokuthinta"</string>
@@ -2243,17 +2251,14 @@
     <string name="power_usage_level_and_status" msgid="821521456989429593">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="6997529817917076536">"<xliff:g id="REMAIN">%1$s</xliff:g> osele"</string>
     <string name="power_charge_remaining" msgid="7046064326172265116">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> ukuze lishajiwe"</string>
-    <!-- no translation found for power_usage_detail_screen_time (6027274749498485283) -->
-    <skip />
-    <!-- no translation found for power_usage_detail_background_time (3661437083554322691) -->
-    <skip />
+    <string name="power_usage_detail_screen_time" msgid="6027274749498485283">"Isikhathi sesikrini"</string>
+    <string name="power_usage_detail_background_time" msgid="3661437083554322691">"Isikhathi sangemuva"</string>
     <string name="low_battery_summary" msgid="4458925347316501953">"Ibhethri liphansi"</string>
     <string name="background_activity_summary" msgid="3817376868497046016">"Vumela uhlelo lokusebenza ukuthi lusebenze ngemuva"</string>
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"Khawulela umsebenzi wasemuva?"</string>
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"Uma ukhawulela umsebenzi wangasemuva wohlelo lokusebenza, lungahle lungasebenzi kahle"</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"Njengoba lolu hlelo lokusebenza lungasethiwe ukuze kulungiselelwe ibhethri, awukwazi ukulikhawulela.\n\nUkuze ukhawulele uhlelo lokusebenza, qala uvule ukulungiselelwa kwebhethri."</string>
-    <!-- no translation found for manager_battery_usage_category_title (1493303237531629961) -->
-    <skip />
+    <string name="manager_battery_usage_category_title" msgid="1493303237531629961">"Phatha ukusetshenziswa kwebhethri"</string>
     <string name="manager_battery_usage_unrestricted_title" msgid="2426486290463258032">"Akunamkhawulo"</string>
     <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"Kulungisiwe"</string>
     <string name="manager_battery_usage_restricted_title" msgid="7702863764130323118">"Kuvinjelwe"</string>
@@ -2352,6 +2357,7 @@
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_since_last_full_charge" msgid="3488425008925924769">"kusukela ekushajeni okugcwele kokugcina"</string>
     <string name="battery_usage_system_apps" msgid="8659537819731575299">"I-app yesistimu"</string>
+    <string name="battery_usage_uninstalled_apps" msgid="8170405012552803662">"Ama-app akhishiwe"</string>
     <string name="battery_usage_others" msgid="311793281613609986">"Abanye"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Isikhathi esilinganiselwe esisele"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"Kuze kushaje ngokuphelele"</string>
@@ -2395,8 +2401,7 @@
     <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"Ingqikithi: ngaphansi komzuzu"</string>
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"Ingemuva: ngaphansi komzuzu"</string>
     <string name="battery_usage_screen_time_less_than_one_minute" msgid="2911989465891679033">"Isikhathi sesikrini: ngaphansi komzuzu"</string>
-    <!-- no translation found for power_usage_time_less_than_one_minute (8407404329381010144) -->
-    <skip />
+    <string name="power_usage_time_less_than_one_minute" msgid="8407404329381010144">"Ngaphansi kweminithi"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Inani: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"Ingemuva: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_screen_time" msgid="3973865893520804115">"Isikhathi sesikrini: <xliff:g id="TIME">%s</xliff:g>"</string>
@@ -2612,6 +2617,7 @@
     <string name="data_usage_app_summary_title" msgid="4933742247928064178">"Idatha yeselula kanye ne-Wi‑Fi"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Vumelanisa ngokuzenzakalelayo idatha yakho"</string>
     <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Vumelanisa ngokuzenzakalelayo idatha yomsebenzi"</string>
+    <string name="account_settings_menu_auto_sync_private" msgid="2315144351530596228">"Vumelanisa ngokuzenzakalelayo idatha eyimfihlo"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"Shintsha umjikelezo"</string>
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"Usuku lwenyanga lokusetha kabusha ukusebenza kwedatha:"</string>
     <string name="data_usage_empty" msgid="5619908658853726866">"Azikho izinhlelo zokusebenza ezisebenzise idatha phakathi nalesi sikhathi."</string>
@@ -3054,6 +3060,8 @@
     <string name="keywords_font_size" msgid="1643198841815006447">"usayizi wombhalo, ukuphrinta okukhulu, ifonti enkulu, umbhalo omkhulu, umbono ophansi, yenza umbhalo ube mkhulu, ukukhulisa ifonti, ukukhulisa ifonti"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"isibonisi esihlala sikhanya se-ambient, i-AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"i-nfc, umaka, isifundi"</string>
+    <!-- no translation found for keywords_keyboard_vibration (6485149510591654697) -->
+    <skip />
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Ivolomu, ukudlidliza, ungaphazamisi"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Ivolumu yabezindaba"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Ivolumu yokusakaza"</string>
@@ -3360,6 +3368,17 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"Le app ayisekeli amasethingi athuthukisiwe"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"Amanye amasethingi"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"Amasethingi engeziwe ayatholakala ngaphakathi kwale app"</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"Isikhathi sokuphola sezaziso"</string>
+    <string name="notification_polite_all_apps" msgid="1118651561594250059">"Faka isikhathi sokuphola kuzo zonke izaziso"</string>
+    <string name="notification_polite_all_apps_summary" msgid="540268373207498126">"Yehlisa kancane kancane ivolumu yezaziso uma uthola izaziso eziningi ezilandelanayo ku-app eyodwa"</string>
+    <string name="notification_polite_conversations" msgid="8197695136727245741">"Faka isikhathi sokuphola ezingxoxweni"</string>
+    <string name="notification_polite_conversations_summary" msgid="2677141765664359994">"Yehlisa kancane kancane ivolumu yezaziso uma uthola imilayezo eminingi elandelanayo engxoxweni eyodwa phakathi nesikhathi esifushane"</string>
+    <string name="notification_polite_disabled" msgid="1378078021594282842">"Ungasisebenzisi isikhathi sokuphola sezaziso"</string>
+    <string name="notification_polite_disabled_summary" msgid="1145341260283746936">"Ungalokothi wehlise ivolumu yezaziso, kungakhathaliseki ukuthi zingaki izaziso ezingena zilandelana zivela ku-app eyodwa"</string>
+    <string name="notification_polite_vibrate_unlocked" msgid="6142573851761357903">"Dlidliza uma ivulwa"</string>
+    <string name="notification_polite_vibrate_unlocked_summary" msgid="1678472892282874459">"Dlidliza kuphela uma isikrini sivulwa"</string>
+    <string name="notification_polite_work" msgid="8823596456640216391">"Sebenzisa kumaphrofayela omsebenzi"</string>
+    <string name="notification_polite_work_summary" msgid="8260947839104352075">"Sebenzisa amasethingi okuphola kwezaziso kuphrofayela yakho eqondene nawe nakuphrofayela yakho yomsebenzi"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Amasevisi omsizi we-VR"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Azikho izinhlelo zokusebenza ezifakiwe ezicele ukusetshenziswa njengamasevisi wesisizi se-VR."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Vumela isevisi ye-VR ukufinyelela i-<xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -4178,8 +4197,7 @@
     <string name="credman_keywords" msgid="8305600680836806170">"idatha, ukhiye wokudlula, iphasiwedi"</string>
     <string name="credman_autofill_keywords" msgid="701180623776848914">"okuzenzakalelayo, gcwalisa, gcwalisa ngokuzenzakalelayo, idatha, ukhiye wokudlula, iphasiwedi"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Qiniseka ukuthi wethemba lolu hlelo lokusebenza&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; isebenzisa okusesikrinini sakho ukunquma okungagcwaliswa ngokuzenzakalela."</string>
-    <!-- no translation found for credman_autofill_confirmation_message (843829628024668466) -->
-    <skip />
+    <string name="credman_autofill_confirmation_message" msgid="843829628024668466">"&lt;b&gt;Sebenzisa i-&lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Amaphasiwedi amasha, okhiye bokudlula, nolunye ulwazi kuzolondolozwa lapha kusukela manje kuqhubeke. I-&lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; ingase isebenzise okusesikrinini sakho ukuze inqume ukuthi yini engagcwaliswa ngokuzenzakalela."</string>
     <string name="credman_picker_title" msgid="8191267620665129205">"Amaphasiwedi, okhiye bokudlula namasevisi edatha"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Vala i-%1$s?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Vala le sevisi?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Ulwazi olulondoloziwe olufana namaphasiwedi, okhiye bokudlula, izindlela zokukhokha, nolunye ulwazi ngeke lugcwaliswe lapho ungena ngemvume. Ukuze usebenzise ulwazi lwakho olulondoloziwe, khetha iphasiwedi, ukhiye wokudlula, noma isevisi yedatha."</string>
@@ -4863,4 +4881,10 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Igama ledivayisi yakho liyabonakala kuma-app owafakile. Lingase futhi libonwe ngabanye abantu lapho uxhuma kumadivayisi e-Bluetooth, uxhuma kunethiwekhi ye-Wi-Fi noma usetha i-hotspot ye-Wi-Fi."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Ubulili bohlelo lolimi"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Khetha ubulili Bohlelo lolimi"</string>
+    <string name="content_protection_preference_title" msgid="5069260032659193074">"Iskena ukuze ithole ama-app akhohlisayo"</string>
+    <string name="content_protection_preference_summary" msgid="2252393849408445391">"Hlola umsebenzi we-app wobugebengu bokweba imininingwane ebucayi"</string>
+    <string name="content_protection_preference_user_consent_switch_title" msgid="60088482227901638">"Sebenzisa ukuskena"</string>
+    <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="2868495870224174097">"Sebenzisa ukuskena kuma-app omsebenzi"</string>
+    <string name="content_protection_preference_subpage_summary" msgid="7707255571476950976">"Ukuskena kusebenza ngokuyimfihlo khona kanye kudivayisi yakho, kubheka umsebenzi we-app ukuthola ubugebengu bokweba imininingwane ebucayi noma okunye ukuziphatha okukhohlisayo. Uma kutholwa, olunye ulwazi lwe-app luthunyelwa ku-Google Play Protect ukuze kuqinisekiswe usongo nokuxwayisa abasebenzisi be-app."</string>
+    <string name="content_protection_preference_subpage_info" msgid="6010628258453929862">"Lesi isakhi esiqondene nezokuvikela esivikelwe. Ayikho idivayisi noma ulwazi lomuntu siqu olwabiwe ne-Google. \n\nUbugebengu bokweba imininingwane ebucayi kuwumzamo wokweba izimfanelo zokungena ngemvume noma olunye ulwazi lomuntu siqu."</string>
 </resources>

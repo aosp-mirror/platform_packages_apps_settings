@@ -44,7 +44,7 @@
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Agrandir"</string>
     <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"Toujours"</string>
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"L\'écran frontal s\'allume lorsque vous pliez votre appareil"</string>
-    <string name="selective_stay_awake_title" msgid="7887645333447645168">"Seulement des jeux, des vidéos et plus"</string>
+    <string name="selective_stay_awake_title" msgid="7887645333447645168">"Seulement pour les jeux, les vidéos et plus"</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"L\'écran frontal s\'allume pour les applications qui empêchent la mise en veille de votre écran"</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"Jamais"</string>
     <string name="sleep_on_fold_summary" msgid="7737992842459588846">"L\'écran frontal se verrouille lorsque vous pliez votre appareil"</string>
@@ -113,6 +113,10 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Désactiver le Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Désactive la fonctionnalité Bluetooth LE Audio si l\'appareil prend en charge les capacités matérielles LE Audio."</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Afficher comm. LE Audio dans les détails"</string>
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist (7392319491894565552) -->
+    <skip />
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist_summary (8999245286359656738) -->
+    <skip />
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Appareils de stockage multimédia"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Appareils avec fonctionnalités d\'appel"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Autres appareils"</string>
@@ -1317,6 +1321,8 @@
     <string name="carrier_enabled_summaryOn" msgid="5212067975273903381">"APN activé"</string>
     <string name="carrier_enabled_summaryOff" msgid="8541959867953738521">"APN désactivé"</string>
     <string name="bearer" msgid="3231443241639159358">"Réseau"</string>
+    <string name="network_type" msgid="748590707422733595">"Type de réseau"</string>
+    <string name="network_type_unspecified" msgid="7756349656194518725">"Non précisé"</string>
     <string name="mvno_type" msgid="4734654257494971247">"Type MVNO"</string>
     <string name="mvno_match_data" msgid="5213193073684321156">"Valeur MVNO"</string>
     <string name="menu_delete" msgid="9199740901584348273">"Supprimer l\'APN"</string>
@@ -2041,6 +2047,8 @@
     <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Utiliser les vibrations et les effets tactils"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Vibration pour les alarmes"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Vibration multimédia"</string>
+    <!-- no translation found for accessibility_keyboard_vibration_title (7559967730626765441) -->
+    <skip />
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Vibration pour la sonnerie"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Vibration pour les notifications"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Retour tactile"</string>
@@ -2348,6 +2356,7 @@
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_since_last_full_charge" msgid="3488425008925924769">"depuis la dernière recharge complète"</string>
     <string name="battery_usage_system_apps" msgid="8659537819731575299">"Applications système"</string>
+    <string name="battery_usage_uninstalled_apps" msgid="8170405012552803662">"Applications désinstallées"</string>
     <string name="battery_usage_others" msgid="311793281613609986">"Autres"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Temps restant estimé"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"Jusqu\'à la charge complète"</string>
@@ -2607,6 +2616,7 @@
     <string name="data_usage_app_summary_title" msgid="4933742247928064178">"Données cellulaires et Wi-Fi"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Synchro auto des données perso"</string>
     <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Synchro auto des données pros"</string>
+    <string name="account_settings_menu_auto_sync_private" msgid="2315144351530596228">"Sync. auto des données privées"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"Changer le cycle..."</string>
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"Jour du mois de réinitialisation du cycle utilisation données :"</string>
     <string name="data_usage_empty" msgid="5619908658853726866">"Aucune donnée utilisée par les applications pendant cette période."</string>
@@ -3049,6 +3059,8 @@
     <string name="keywords_font_size" msgid="1643198841815006447">"taille du texte, grands caractères, police de grande taille, texte de grande taille, vision faible, agrandir le texte, agrandisseur de police, agrandissement de la police"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"affichage en mode Veille toujours activé, affichage toujours activé"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"ccp, balise, lecteur"</string>
+    <!-- no translation found for keywords_keyboard_vibration (6485149510591654697) -->
+    <skip />
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Volume, vibration, Ne pas déranger"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Volume du contenu multimédia"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Volume de diffusion"</string>
@@ -3355,6 +3367,17 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"Cette application ne prend pas en charge les paramètres améliorés"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"Plus de paramètres"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"Plus de paramètres sont accessibles dans cette application"</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"Période de stabil. des notif."</string>
+    <string name="notification_polite_all_apps" msgid="1118651561594250059">"Appliquer une période de stabilisation à toutes les notifications"</string>
+    <string name="notification_polite_all_apps_summary" msgid="540268373207498126">"Diminuer progressivement le volume des notifications lorsque vous recevez plusieurs notifications successives de la même application"</string>
+    <string name="notification_polite_conversations" msgid="8197695136727245741">"Appliquer une période de stabilisation aux conversations"</string>
+    <string name="notification_polite_conversations_summary" msgid="2677141765664359994">"Diminuer progressivement le volume des notifications lorsque vous recevez plusieurs messages d\'un même clavardage dans un court laps de temps"</string>
+    <string name="notification_polite_disabled" msgid="1378078021594282842">"Ne pas utiliser la période de stabilisation des notifications"</string>
+    <string name="notification_polite_disabled_summary" msgid="1145341260283746936">"Ne jamais réduire le volume des notifications, quel que soit le nombre de notifications successives provenant de la même application"</string>
+    <string name="notification_polite_vibrate_unlocked" msgid="6142573851761357903">"Faire vibrer lors du déverrouillage"</string>
+    <string name="notification_polite_vibrate_unlocked_summary" msgid="1678472892282874459">"Ne faire vibrer que lorsque l\'écran est déverrouillé"</string>
+    <string name="notification_polite_work" msgid="8823596456640216391">"Appliquer aux profils professionnels"</string>
+    <string name="notification_polite_work_summary" msgid="8260947839104352075">"Appliquer les paramètres de période de stabilisation des notifications de votre profil personnel à votre profil professionnel"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Services d\'assistance pour la réalité virtuelle"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Aucune demande d\'exécution en tant que services d\'assistance pour la réalité virtuelle n\'a été envoyée pour les applications installées."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Autoriser <xliff:g id="SERVICE">%1$s</xliff:g> à accéder au service de réalité virtuelle?"</string>
@@ -4228,7 +4251,7 @@
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
     <string name="enable_angle_as_system_driver" msgid="4648827560023949786">"Expérimental : Activer ANGLE"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="2170215556348477481">"Avertissement : Activez ANGLE en tant que pilote OpenGL ES par défaut. Cette fonctionnalité est en cours de test et peut ne pas être compatible avec certains appareils photo et applications vidéo."</string>
+    <string name="enable_angle_as_system_driver_summary" msgid="2170215556348477481">"Avertissement : Activer ANGLE en tant que pilote OpenGL ES par défaut. Cette fonctionnalité est en cours de test et peut ne pas être compatible avec certaines applications vidéo et d\'appareils photo."</string>
     <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"Un redémarrage est nécessaire pour modifier le pilote OpenGL ES du système"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Changements dans la compatibilité des applications"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Basculez les changements de compatibilité des applications"</string>
@@ -4857,4 +4880,16 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Le nom de votre appareil est visible aux applications que vous avez installées. Il est également possible que d\'autres personnes voient le nom de votre appareil lorsque vous vous connectez à des appareils Bluetooth ou à un réseau Wi-Fi, ou lorsque vous configurez un point d\'accès Wi-Fi."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Genre grammatical"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Sélectionnez un genre grammatical"</string>
+    <!-- no translation found for content_protection_preference_title (5069260032659193074) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_summary (2252393849408445391) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_user_consent_switch_title (60088482227901638) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_user_consent_work_profile_switch_title (2868495870224174097) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_subpage_summary (7707255571476950976) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_subpage_info (6010628258453929862) -->
+    <skip />
 </resources>

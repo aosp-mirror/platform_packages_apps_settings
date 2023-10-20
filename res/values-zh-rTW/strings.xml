@@ -113,6 +113,10 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"停用藍牙 LE Audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"如果裝置支援 LE Audio 硬體功能，就停用藍牙 LE Audio 功能。"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"在「裝置詳細資料」中顯示 LE Audio 切換鈕"</string>
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist (7392319491894565552) -->
+    <skip />
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist_summary (8999245286359656738) -->
+    <skip />
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"媒體裝置"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"通話裝置"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"其他裝置"</string>
@@ -1317,6 +1321,8 @@
     <string name="carrier_enabled_summaryOn" msgid="5212067975273903381">"APN 已啟用"</string>
     <string name="carrier_enabled_summaryOff" msgid="8541959867953738521">"APN 已停用"</string>
     <string name="bearer" msgid="3231443241639159358">"承載系統"</string>
+    <string name="network_type" msgid="748590707422733595">"網路類型"</string>
+    <string name="network_type_unspecified" msgid="7756349656194518725">"未指定"</string>
     <string name="mvno_type" msgid="4734654257494971247">"MVNO 類型"</string>
     <string name="mvno_match_data" msgid="5213193073684321156">"MVNO 值"</string>
     <string name="menu_delete" msgid="9199740901584348273">"刪除 APN"</string>
@@ -1878,7 +1884,7 @@
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"放大目前輸入的內容"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"放大輸入的文字"</string>
     <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"切換應用程式時保持開啟"</string>
-    <string name="accessibility_screen_magnification_always_on_summary" msgid="306908451430863049">"切換應用程式時，放大鏡會保持開啟並縮小畫面"</string>
+    <string name="accessibility_screen_magnification_always_on_summary" msgid="306908451430863049">"切換應用程式時，放大鏡會保持開啟"</string>
     <string name="accessibility_screen_magnification_joystick_title" msgid="1803769708582404964">"搖桿"</string>
     <string name="accessibility_screen_magnification_joystick_summary" msgid="4640300148573982720">"使用螢幕上的搖桿啟用及移動放大鏡。只要按住並在搖桿上拖曳，即可控制放大鏡；輕觸並拖曳則可移動搖桿。"</string>
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"關於放大功能"</string>
@@ -2041,6 +2047,8 @@
     <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"使用震動與觸覺回饋"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"鬧鐘震動"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"媒體震動"</string>
+    <!-- no translation found for accessibility_keyboard_vibration_title (7559967730626765441) -->
+    <skip />
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"響鈴震動"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"通知震動"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"觸覺回饋"</string>
@@ -2348,6 +2356,7 @@
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_since_last_full_charge" msgid="3488425008925924769">"自上次充飽電後"</string>
     <string name="battery_usage_system_apps" msgid="8659537819731575299">"系統應用程式"</string>
+    <string name="battery_usage_uninstalled_apps" msgid="8170405012552803662">"已解除安裝的應用程式"</string>
     <string name="battery_usage_others" msgid="311793281613609986">"其他"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"預估剩餘時間"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"充飽所需時間"</string>
@@ -2607,6 +2616,7 @@
     <string name="data_usage_app_summary_title" msgid="4933742247928064178">"行動數據和 Wi‑Fi"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"自動同步處理個人資料"</string>
     <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"自動同步處理工作資料"</string>
+    <string name="account_settings_menu_auto_sync_private" msgid="2315144351530596228">"自動同步私人資料"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"變更週期…"</string>
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"數據用量週期的重設日期："</string>
     <string name="data_usage_empty" msgid="5619908658853726866">"沒有任何應用程式在這段期間產生數據用量。"</string>
@@ -3049,6 +3059,8 @@
     <string name="keywords_font_size" msgid="1643198841815006447">"文字大小, 大字, 大字型, 大型文字, 低視能, 放大文字, 放大字型, 使用大字型"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"一律開啟微光螢幕, 螢幕長亮模式"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, 標記, 感應器"</string>
+    <!-- no translation found for keywords_keyboard_vibration (6485149510591654697) -->
+    <skip />
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"音量、震動、零打擾"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"媒體音量"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"投放音量"</string>
@@ -3355,6 +3367,17 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"這個應用程式不支援加強型設定"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"更多設定"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"應用程式內提供更多設定"</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"通知緩和功能"</string>
+    <string name="notification_polite_all_apps" msgid="1118651561594250059">"將緩和功能套用至所有通知"</string>
+    <string name="notification_polite_all_apps_summary" msgid="540268373207498126">"從同一應用程式連續收到大量通知時，逐漸降低通知音量"</string>
+    <string name="notification_polite_conversations" msgid="8197695136727245741">"將緩和功能套用至對話"</string>
+    <string name="notification_polite_conversations_summary" msgid="2677141765664359994">"在短時間內從同一對話連續收到大量訊息時，逐漸降低通知音量"</string>
+    <string name="notification_polite_disabled" msgid="1378078021594282842">"不使用通知緩和功能"</string>
+    <string name="notification_polite_disabled_summary" msgid="1145341260283746936">"無論從同一應用程式連續收到多少通知，一律不降低通知音量"</string>
+    <string name="notification_polite_vibrate_unlocked" msgid="6142573851761357903">"在解鎖時震動"</string>
+    <string name="notification_polite_vibrate_unlocked_summary" msgid="1678472892282874459">"只在螢幕解鎖狀態下震動"</string>
+    <string name="notification_polite_work" msgid="8823596456640216391">"套用至工作資料夾"</string>
+    <string name="notification_polite_work_summary" msgid="8260947839104352075">"將個人資料夾的通知緩和設定套用至工作資料夾"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR 小幫手服務"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"沒有任何已安裝的應用程式要求以 VR 小幫手服務的形式執行。"</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"要允許 <xliff:g id="SERVICE">%1$s</xliff:g> 存取 VR 服務嗎？"</string>
@@ -4857,4 +4880,16 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"你安裝的應用程式會取得裝置名稱。當你連上藍牙裝置、Wi-Fi 網路或者設定 Wi-Fi 無線基地台時，其他人也可能會看到這個裝置名稱。"</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"語法性別"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"選取語法性別"</string>
+    <!-- no translation found for content_protection_preference_title (5069260032659193074) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_summary (2252393849408445391) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_user_consent_switch_title (60088482227901638) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_user_consent_work_profile_switch_title (2868495870224174097) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_subpage_summary (7707255571476950976) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_subpage_info (6010628258453929862) -->
+    <skip />
 </resources>

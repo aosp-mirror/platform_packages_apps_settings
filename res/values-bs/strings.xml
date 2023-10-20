@@ -113,6 +113,10 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Onemogući Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Onemogućava funkciju Bluetooth LE Audio ako uređaj podržava mogućnosti hardvera za LE Audio."</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Prikaži prekidač za LE Audio u Detalj. uređ."</string>
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist (7392319491894565552) -->
+    <skip />
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist_summary (8999245286359656738) -->
+    <skip />
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Uređaji za medije"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Uređaji za pozive"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Drugi uređaji"</string>
@@ -1057,7 +1061,7 @@
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Isključeno"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Balans bijele boje prikaza"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
-    <string name="fold_lock_behavior_title" msgid="786228803694268449">"Nastavi koristiti aplikacije prilikom sklapanja"</string>
+    <string name="fold_lock_behavior_title" msgid="786228803694268449">"Nastavak korištenja aplikacija nakon sklapanja"</string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Glatki prikaz"</string>
     <string name="peak_refresh_rate_summary" msgid="3627278682437562787">"Automatski povećava učestalost osvježavanja sa 60 na <xliff:g id="ID_1">%1$s</xliff:g> Hz za određeni sadržaj. Povećava potrošnju baterije."</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Nametni maksimalnu brzinu osvježavanja"</string>
@@ -1317,6 +1321,8 @@
     <string name="carrier_enabled_summaryOn" msgid="5212067975273903381">"APN omogućen"</string>
     <string name="carrier_enabled_summaryOff" msgid="8541959867953738521">"APN onemogućen"</string>
     <string name="bearer" msgid="3231443241639159358">"Nosilac"</string>
+    <string name="network_type" msgid="748590707422733595">"Vrsta mreže"</string>
+    <string name="network_type_unspecified" msgid="7756349656194518725">"Neodređeno"</string>
     <string name="mvno_type" msgid="4734654257494971247">"MVNO vrsta"</string>
     <string name="mvno_match_data" msgid="5213193073684321156">"MVNO vrijednost"</string>
     <string name="menu_delete" msgid="9199740901584348273">"Izbriši APN"</string>
@@ -2041,6 +2047,8 @@
     <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Koristi vibraciju i haptiku"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Vibracija pri alarmu"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Vibracija medijskog sadržaja"</string>
+    <!-- no translation found for accessibility_keyboard_vibration_title (7559967730626765441) -->
+    <skip />
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Vibracija pri zvonu"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Vibracija pri obavještenjima"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Povratne informacije na dodir"</string>
@@ -2348,6 +2356,7 @@
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_since_last_full_charge" msgid="3488425008925924769">"od posljednjeg potpunog punjenja"</string>
     <string name="battery_usage_system_apps" msgid="8659537819731575299">"Sistemske aplikacije"</string>
+    <string name="battery_usage_uninstalled_apps" msgid="8170405012552803662">"Deinstalirane aplikacije"</string>
     <string name="battery_usage_others" msgid="311793281613609986">"Ostalo"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Procjena preostalog vremena"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"Do potpune napunjenosti"</string>
@@ -2607,6 +2616,7 @@
     <string name="data_usage_app_summary_title" msgid="4933742247928064178">"Prijenos podataka na mobilnoj mreži i WiFi"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Automatska sinhronizacija ličnih podataka"</string>
     <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Automatska sinhronizacija podataka za posao"</string>
+    <string name="account_settings_menu_auto_sync_private" msgid="2315144351530596228">"Automatski sinhroniziraj privatne podatke"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"Promijeni ciklus…"</string>
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"Dan u mjesecu za poništavanje ciklusa prijenosa podataka:"</string>
     <string name="data_usage_empty" msgid="5619908658853726866">"Nijedna apl. nije koristila pod. u ovom periodu."</string>
@@ -3049,6 +3059,8 @@
     <string name="keywords_font_size" msgid="1643198841815006447">"veličina teksta, velika slova, veliki font, veliki tekst, slabi vid, povećavanje teksta, povećalo fonta, povećavanje fonta"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"uvijek uključeni ambijentalni prikaz (always on ambient display, AOD)"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"NFC, oznaka, čitač"</string>
+    <!-- no translation found for keywords_keyboard_vibration (6485149510591654697) -->
+    <skip />
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Jačina zvuka, vibracija, Ne ometaj"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Jačina zvuka medija"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Jačina zvuka emitiranja"</string>
@@ -3355,6 +3367,17 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"Ova aplikacija ne podržava poboljšane postavke"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"Više postavki"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"Više postavki dostupno je unutar aplikacije"</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"Mirovanje za obavještenja"</string>
+    <string name="notification_polite_all_apps" msgid="1118651561594250059">"Primijeni mirovanje na sva obavještenja"</string>
+    <string name="notification_polite_all_apps_summary" msgid="540268373207498126">"Postepeno smanjujte jačinu zvuka obavještenja kada dobijate previše uzastopnih obavještenja od iste aplikacije"</string>
+    <string name="notification_polite_conversations" msgid="8197695136727245741">"Primijeni mirovanje na razgovore"</string>
+    <string name="notification_polite_conversations_summary" msgid="2677141765664359994">"Postepeno smanjujte jačinu zvuka obavještenja kada u kratkom periodu dobijate previše poruka od istog chata"</string>
+    <string name="notification_polite_disabled" msgid="1378078021594282842">"Nemoj koristiti mirovanje za obavještenja"</string>
+    <string name="notification_polite_disabled_summary" msgid="1145341260283746936">"Jačina zvuka obavještenja se nikad ne smanjuje, bez obzira na količinu uzastopnih obavještenja od iste aplikacije"</string>
+    <string name="notification_polite_vibrate_unlocked" msgid="6142573851761357903">"Vibriraj kada je otključano"</string>
+    <string name="notification_polite_vibrate_unlocked_summary" msgid="1678472892282874459">"Vibrira samo kada je ekran otključan"</string>
+    <string name="notification_polite_work" msgid="8823596456640216391">"Primijeni na poslovne profile"</string>
+    <string name="notification_polite_work_summary" msgid="8260947839104352075">"Primijenite postavke mirovanja za obavještajna s ličnog profila na poslovni profil"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Usluge pomagača za VR"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Nijedna instalirana aplikacija nije zatražila da bude pokrenuta kao usluga pomagača za VR."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Dozvoliti pristup usluzi VR-a za uslugu <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -4858,4 +4881,10 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Naziv uređaja je vidljiv aplikacijama koje ste instalirali. Također će ga moći vidjeti druge osobe prilikom povezivanja s Bluetooth uređajima i WiFi mrežom ili postavljanja WiFi pristupne tačke."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Gramatički rod"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Odaberite gramatički rod"</string>
+    <string name="content_protection_preference_title" msgid="5069260032659193074">"Skeniranje obmanjujućih aplikacija"</string>
+    <string name="content_protection_preference_summary" msgid="2252393849408445391">"Provjerite aktivnost aplikacije radi otkrivanja krađe identiteta"</string>
+    <string name="content_protection_preference_user_consent_switch_title" msgid="60088482227901638">"Koristi skeniranje"</string>
+    <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="2868495870224174097">"Koristi skeniranje poslovnih aplikacija"</string>
+    <string name="content_protection_preference_subpage_summary" msgid="7707255571476950976">"Skeniranje se privatno provodi direktno na uređaju i njime se provjerava aktivnost aplikacije radi otkrivanja krađe identiteta ili drugog obmanjujućeg ponašanja. Ako se otkrije, određene informacije o aplikaciji se šalju Google Play zaštiti da se potvrdi prijetnja i upozore korisnici aplikacije."</string>
+    <string name="content_protection_preference_subpage_info" msgid="6010628258453929862">"Ovo je zaštićena sigurnosna funkcija. S Googleom se ne dijele nikakve informacije o uređaju ni lične informacije. \n\nKrađa identiteta je pokušaj krađe akreditiva za prijavu ili drugih ličnih informacija."</string>
 </resources>

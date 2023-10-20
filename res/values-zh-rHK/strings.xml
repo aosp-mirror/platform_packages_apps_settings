@@ -46,7 +46,7 @@
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"裝置摺疊時開啟前方螢幕"</string>
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"只限遊戲、影片等"</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"如果應用程式不讓螢幕進入閒置狀態，前方螢幕就會開啟"</string>
-    <string name="sleep_on_fold_title" msgid="7626123024330501411">"從未"</string>
+    <string name="sleep_on_fold_title" msgid="7626123024330501411">"永不"</string>
     <string name="sleep_on_fold_summary" msgid="7737992842459588846">"裝置摺疊時鎖定前方螢幕"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"使用自動旋轉"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"面孔偵測功能會使用前置鏡頭提高自動旋轉的準確度。系統絕不會將相關圖像儲存或傳送給 Google。"</string>
@@ -113,6 +113,10 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"停用藍牙 LE Audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"如果裝置支援 LE Audio 硬件功能，則停用藍牙 LE Audio 功能。"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"在「裝置詳情」中顯示 LE Audio 切換按鈕"</string>
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist (7392319491894565552) -->
+    <skip />
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist_summary (8999245286359656738) -->
+    <skip />
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"媒體裝置"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"通話裝置"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"其他裝置"</string>
@@ -1317,6 +1321,8 @@
     <string name="carrier_enabled_summaryOn" msgid="5212067975273903381">"APN 已啟用"</string>
     <string name="carrier_enabled_summaryOff" msgid="8541959867953738521">"APN 已停用"</string>
     <string name="bearer" msgid="3231443241639159358">"承載網絡"</string>
+    <string name="network_type" msgid="748590707422733595">"網絡類型"</string>
+    <string name="network_type_unspecified" msgid="7756349656194518725">"未指定"</string>
     <string name="mvno_type" msgid="4734654257494971247">"MVNO 類型"</string>
     <string name="mvno_match_data" msgid="5213193073684321156">"MVNO 值"</string>
     <string name="menu_delete" msgid="9199740901584348273">"刪除 APN"</string>
@@ -2041,6 +2047,8 @@
     <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"使用震動和觸感反應"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"鬧鐘震動"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"媒體震動"</string>
+    <!-- no translation found for accessibility_keyboard_vibration_title (7559967730626765441) -->
+    <skip />
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"鈴聲震動"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"通知震動"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"輕觸反應"</string>
@@ -2348,6 +2356,7 @@
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_since_last_full_charge" msgid="3488425008925924769">"上次充滿電後"</string>
     <string name="battery_usage_system_apps" msgid="8659537819731575299">"系統應用程式"</string>
+    <string name="battery_usage_uninstalled_apps" msgid="8170405012552803662">"已解除安裝的應用程式"</string>
     <string name="battery_usage_others" msgid="311793281613609986">"其他"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"估計剩餘時間"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"剩餘充電時間"</string>
@@ -2607,6 +2616,7 @@
     <string name="data_usage_app_summary_title" msgid="4933742247928064178">"流動數據與 Wi-Fi"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"自動同步處理個人資料"</string>
     <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"自動同步處理工作資料"</string>
+    <string name="account_settings_menu_auto_sync_private" msgid="2315144351530596228">"自動同步私人資料"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"變更週期…"</string>
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"資料用量週期的重設日期："</string>
     <string name="data_usage_empty" msgid="5619908658853726866">"這段期間沒有應用程式使用數據。"</string>
@@ -3049,6 +3059,8 @@
     <string name="keywords_font_size" msgid="1643198841815006447">"文字大小, 大字, 大字體, 大型文字, 低視力, 放大字體, 字體放大工具, 字體放大"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"一律開啟氛圍畫面, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, 標籤, 閱讀器"</string>
+    <!-- no translation found for keywords_keyboard_vibration (6485149510591654697) -->
+    <skip />
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"音量、震動、請勿騷擾"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"媒體音量"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"投放音量"</string>
@@ -3355,6 +3367,17 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"此應用程式不支援進階設定"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"更多設定"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"你可在應用程式中使用更多設定"</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"通知緩和功能"</string>
+    <string name="notification_polite_all_apps" msgid="1118651561594250059">"將緩和功能套用至所有通知"</string>
+    <string name="notification_polite_all_apps_summary" msgid="540268373207498126">"從同一應用程式連續收到大量通知時，逐漸降低通知音量"</string>
+    <string name="notification_polite_conversations" msgid="8197695136727245741">"將緩和功能套用至對話"</string>
+    <string name="notification_polite_conversations_summary" msgid="2677141765664359994">"在短時間內從同一對話連續收到大量訊息時，逐漸降低通知音量"</string>
+    <string name="notification_polite_disabled" msgid="1378078021594282842">"不使用通知緩和功能"</string>
+    <string name="notification_polite_disabled_summary" msgid="1145341260283746936">"無論從同一應用程式連續收到多少通知，一律不降低通知音量"</string>
+    <string name="notification_polite_vibrate_unlocked" msgid="6142573851761357903">"解鎖時震動"</string>
+    <string name="notification_polite_vibrate_unlocked_summary" msgid="1678472892282874459">"僅在螢幕解鎖時震動"</string>
+    <string name="notification_polite_work" msgid="8823596456640216391">"套用至工作設定檔"</string>
+    <string name="notification_polite_work_summary" msgid="8260947839104352075">"將個人設定檔的通知緩和設定套用至工作設定檔"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR 助手服務"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"沒有已安裝的應用程式要求提供 VR 助手服務。"</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"允許 VR 服務存取 <xliff:g id="SERVICE">%1$s</xliff:g> 嗎？"</string>
@@ -4228,7 +4251,7 @@
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
     <string name="enable_angle_as_system_driver" msgid="4648827560023949786">"實驗功能：啟用 ANGLE"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="2170215556348477481">"警告：啟用 ANGLE 為預設 OpenGL ES 驅動程式。此功能目前處於實驗階段，可能無法與部分相機和影片應用程式兼容。"</string>
+    <string name="enable_angle_as_system_driver_summary" msgid="2170215556348477481">"警告：啟用 ANGLE 作為預設 OpenGL ES 驅動程式。此功能目前處於實驗階段，可能與部分相機和影片應用程式不兼容。"</string>
     <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"你需要重新開機，才能變更 OpenGL ES 驅動程式"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"應用程式兼容性變更"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"切換應用程式兼容性變更"</string>
@@ -4857,4 +4880,16 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"你安裝的應用程式可以取得你的裝置名稱。當你連接藍牙裝置或 Wi-Fi 網絡，或設定 Wi-Fi 熱點時，其他人亦可能會看到你的裝置名稱。"</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"語法性別"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"選取語法性別"</string>
+    <!-- no translation found for content_protection_preference_title (5069260032659193074) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_summary (2252393849408445391) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_user_consent_switch_title (60088482227901638) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_user_consent_work_profile_switch_title (2868495870224174097) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_subpage_summary (7707255571476950976) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_subpage_info (6010628258453929862) -->
+    <skip />
 </resources>

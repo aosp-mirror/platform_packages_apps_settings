@@ -113,6 +113,10 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Deaktivovať Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Deaktivovať funkciu Bluetooth LE Audio, keď zariadenie podporuje možnosti hardvéru LE Audio"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Zobrazovať LE Audio v podr. o zariadení"</string>
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist (7392319491894565552) -->
+    <skip />
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist_summary (8999245286359656738) -->
+    <skip />
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Mediálne zariadenia"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Zariadenia na telefonovanie"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Iné zariadenia"</string>
@@ -1317,6 +1321,8 @@
     <string name="carrier_enabled_summaryOn" msgid="5212067975273903381">"Prístupový bod zapnutý"</string>
     <string name="carrier_enabled_summaryOff" msgid="8541959867953738521">"Prístupový bod vypnutý"</string>
     <string name="bearer" msgid="3231443241639159358">"Nositeľ"</string>
+    <string name="network_type" msgid="748590707422733595">"Typ siete"</string>
+    <string name="network_type_unspecified" msgid="7756349656194518725">"Neurčený"</string>
     <string name="mvno_type" msgid="4734654257494971247">"Typ MVNO"</string>
     <string name="mvno_match_data" msgid="5213193073684321156">"Hodnota MVNO"</string>
     <string name="menu_delete" msgid="9199740901584348273">"Odstrániť názov prístupového bodu (APN)"</string>
@@ -2041,6 +2047,8 @@
     <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Použiť vibrácie a hmatovú spätnú väzbu"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Vibrovanie pri budíku"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Vibrovanie pri médiách"</string>
+    <!-- no translation found for accessibility_keyboard_vibration_title (7559967730626765441) -->
+    <skip />
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Vibrovanie pri zvonení"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Vibrovanie pri upozornení"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Odozva pri klepnutí"</string>
@@ -2348,6 +2356,7 @@
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_since_last_full_charge" msgid="3488425008925924769">"od posledného úplného nabitia"</string>
     <string name="battery_usage_system_apps" msgid="8659537819731575299">"Systémové aplikácie"</string>
+    <string name="battery_usage_uninstalled_apps" msgid="8170405012552803662">"Odinštalované aplikácie"</string>
     <string name="battery_usage_others" msgid="311793281613609986">"Iné"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Odhadovaný zostávajúci čas:"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"Do úplného dobitia"</string>
@@ -2607,6 +2616,7 @@
     <string name="data_usage_app_summary_title" msgid="4933742247928064178">"Mobilné dáta a Wi‑Fi"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Autom. synchr. osobné údaje"</string>
     <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Autom. synchr. pracovné údaje"</string>
+    <string name="account_settings_menu_auto_sync_private" msgid="2315144351530596228">"Aut. synchrizovať súkr. údaje"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"Zmeniť cyklus..."</string>
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"Deň v mesiaci, kedy sa má resetovať cyklus spotreby:"</string>
     <string name="data_usage_empty" msgid="5619908658853726866">"V tomto období nevyužili dátové pripojenie žiadne aplikácie."</string>
@@ -3049,6 +3059,8 @@
     <string name="keywords_font_size" msgid="1643198841815006447">"veľkosť textu, veľkoformátová tlač, veľké písmo, veľký text, slabozrakosť, zväčšenie textu, zväčšovač písma, zväčšenie písma"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"vždy zapnuté ambientné zobrazenie"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, štítok, čítačka"</string>
+    <!-- no translation found for keywords_keyboard_vibration (6485149510591654697) -->
+    <skip />
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Hlasitosť, vibrovanie, režim bez vyrušení"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Hlasitosť médií"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Hlasitosť prenášania"</string>
@@ -3355,6 +3367,17 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"Táto aplikácia nepodporuje zlepšené nastavenia"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"Ďalšie nastavenia"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"V tejto aplikácii sú k dispozícii ďalšie nastavenia"</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"Stlmenie upozornení"</string>
+    <string name="notification_polite_all_apps" msgid="1118651561594250059">"Použiť stlmenie na všetky upozornenia"</string>
+    <string name="notification_polite_all_apps_summary" msgid="540268373207498126">"Postupne znížiť hlasitosti upozornení, keď dostanete veľa po sebe idúcich upozornení z tej istej aplikácie"</string>
+    <string name="notification_polite_conversations" msgid="8197695136727245741">"Použiť stlmenie na všetky konverzácie"</string>
+    <string name="notification_polite_conversations_summary" msgid="2677141765664359994">"Postupne znížiť hlasitosti upozornení, keď v krátkom čase dostanete veľa správ z toho istého četu"</string>
+    <string name="notification_polite_disabled" msgid="1378078021594282842">"Nepoužívať stlmenie upozornení"</string>
+    <string name="notification_polite_disabled_summary" msgid="1145341260283746936">"Nikdy neznížiť hlasitosť upozornení bez ohľadu na počet po sebe idúcich upozornení z tej istej aplikácie"</string>
+    <string name="notification_polite_vibrate_unlocked" msgid="6142573851761357903">"Vibrovanie pri odomknutí"</string>
+    <string name="notification_polite_vibrate_unlocked_summary" msgid="1678472892282874459">"Vibrovať iba pri odomknutej obrazovke"</string>
+    <string name="notification_polite_work" msgid="8823596456640216391">"Použiť na pracovné profily"</string>
+    <string name="notification_polite_work_summary" msgid="8260947839104352075">"Použiť nastavenia stlmenia upozornení z osobného profilu na pracovný profil"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Pomocné služby VR"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Žiadne nainštalované aplikácie nežiadali, aby boli spúšťané ako pomocné služby VR."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Umožniť službe VR prístup do služby <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -4859,4 +4882,10 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Názov zariadenia je viditeľný pre aplikácie, ktoré ste nainštalovali. Keď sa pripojíte k zariadeniam s rozhraním Bluetooth alebo sieti Wi‑Fi, prípadne nastavíte hotspot Wi‑Fi, môžu ho uvidieť aj ďalší ľudia."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Gramatický rod"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Výber gramatického rodu"</string>
+    <string name="content_protection_preference_title" msgid="5069260032659193074">"Kontrola prítomnosti klamlivých aplikácií"</string>
+    <string name="content_protection_preference_summary" msgid="2252393849408445391">"Kontrola aktivity v aplikácii, či nedochádza k phishingu"</string>
+    <string name="content_protection_preference_user_consent_switch_title" msgid="60088482227901638">"Použiť kontrolu"</string>
+    <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="2868495870224174097">"Použiť kontrolu pracovných aplikácií"</string>
+    <string name="content_protection_preference_subpage_summary" msgid="7707255571476950976">"Kontrola prebieha súkromne priamo v zariadení, pričom sa preveruje aktivita v aplikácii, či nedochádza k phishingu alebo inému klamlivému správaniu. Ak sa zistí, niektoré informácie o aplikácii sa odošlú do súpravy Google Play Protect na potvrdenie hrozby a upozornenie používateľov aplikácie."</string>
+    <string name="content_protection_preference_subpage_info" msgid="6010628258453929862">"Toto je chránená bezpečnostná funkcia. S Googlom sa nezdieľajú žiadne informácie zo zariadení ani osobné údaje. \n\nPhishing je pokus o krádež prihlasovacích údajov alebo iných osobných údajov."</string>
 </resources>

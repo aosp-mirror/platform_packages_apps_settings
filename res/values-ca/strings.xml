@@ -113,6 +113,10 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Desactiva Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Desactiva la funció Bluetooth LE Audio si el dispositiu admet les funcions de maquinari d\'LE Audio."</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Botó d\'LE Audio a Detalls del dispositiu"</string>
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist (7392319491894565552) -->
+    <skip />
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist_summary (8999245286359656738) -->
+    <skip />
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Dispositius multimèdia"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Dispositius de trucada"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Altres dispositius"</string>
@@ -1317,6 +1321,8 @@
     <string name="carrier_enabled_summaryOn" msgid="5212067975273903381">"APN activat"</string>
     <string name="carrier_enabled_summaryOff" msgid="8541959867953738521">"APN desactivat"</string>
     <string name="bearer" msgid="3231443241639159358">"Portador"</string>
+    <string name="network_type" msgid="748590707422733595">"Tipus de xarxa"</string>
+    <string name="network_type_unspecified" msgid="7756349656194518725">"Sense especificar"</string>
     <string name="mvno_type" msgid="4734654257494971247">"Tipus d\'OMV"</string>
     <string name="mvno_match_data" msgid="5213193073684321156">"Valor d\'OMV"</string>
     <string name="menu_delete" msgid="9199740901584348273">"Suprimeix l\'APN"</string>
@@ -2041,6 +2047,8 @@
     <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Utilitza la vibració i la tecnologia hàptica"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Vibració de les alarmes"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Vibració del contingut multimèdia"</string>
+    <!-- no translation found for accessibility_keyboard_vibration_title (7559967730626765441) -->
+    <skip />
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Vibració de les trucades"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Vibració de les notificacions"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Resposta tàctil"</string>
@@ -2348,6 +2356,7 @@
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_since_last_full_charge" msgid="3488425008925924769">"des de l\'última càrrega completa"</string>
     <string name="battery_usage_system_apps" msgid="8659537819731575299">"Aplicacions del sistema"</string>
+    <string name="battery_usage_uninstalled_apps" msgid="8170405012552803662">"Aplicacions desinstal·lades"</string>
     <string name="battery_usage_others" msgid="311793281613609986">"Altres"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Temps estimat restant"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"Fins a completar la càrrega"</string>
@@ -2607,6 +2616,7 @@
     <string name="data_usage_app_summary_title" msgid="4933742247928064178">"Dades mòbils i Wi‑Fi"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Sincronitza les dades personals automàticament"</string>
     <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Sincronitza les dades professionals automàticament"</string>
+    <string name="account_settings_menu_auto_sync_private" msgid="2315144351530596228">"Sincronitza automàticament"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"Canvia el cicle..."</string>
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"Dia del mes per restablir el cicle d\'ús de dades:"</string>
     <string name="data_usage_empty" msgid="5619908658853726866">"Cap aplicació no ha utilitzat dades en aquest període."</string>
@@ -3049,6 +3059,8 @@
     <string name="keywords_font_size" msgid="1643198841815006447">"mida del text, impressió gran, lletra gran, text gran, poca visió, fer el text més gran, ampliador de font, ampliació de font"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"pantalla ambient sempre activa, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, etiqueta, lector"</string>
+    <!-- no translation found for keywords_keyboard_vibration (6485149510591654697) -->
+    <skip />
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Volum, vibració, No molestis"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Volum de multimèdia"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Volum emès"</string>
@@ -3355,6 +3367,17 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"Aquesta aplicació no és compatible amb la configuració avançada"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"Més opcions de configuració"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"Hi ha més opcions de configuració disponibles en aquesta aplicació"</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"Abaixa el volum de notificacions"</string>
+    <string name="notification_polite_all_apps" msgid="1118651561594250059">"Abaixa el volum de totes les notificacions"</string>
+    <string name="notification_polite_all_apps_summary" msgid="540268373207498126">"Abaixa gradualment el volum de les notificacions quan en reps moltes seguides de la mateixa aplicació"</string>
+    <string name="notification_polite_conversations" msgid="8197695136727245741">"Abaixa el volum de les converses"</string>
+    <string name="notification_polite_conversations_summary" msgid="2677141765664359994">"Abaixa gradualment el volum de les notificacions quan reps molts missatges del mateix xat en un període curt de temps"</string>
+    <string name="notification_polite_disabled" msgid="1378078021594282842">"No abaixis el volum de les notificacions"</string>
+    <string name="notification_polite_disabled_summary" msgid="1145341260283746936">"No abaixis mai el volum de les notificacions, independentment de la quantitat de notificacions seguides de la mateixa aplicació"</string>
+    <string name="notification_polite_vibrate_unlocked" msgid="6142573851761357903">"Vibra quan estigui desbloquejada"</string>
+    <string name="notification_polite_vibrate_unlocked_summary" msgid="1678472892282874459">"Vibra només quan la pantalla estigui desbloquejada"</string>
+    <string name="notification_polite_work" msgid="8823596456640216391">"Aplica als perfils de treball"</string>
+    <string name="notification_polite_work_summary" msgid="8260947839104352075">"Aplica la configuració per abaixar el volum de les notificacions del teu perfil personal al perfil de treball"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Serveis d\'ajuda per a RV"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Cap aplicació instal·lada no ha sol·licitat que s\'executi com un servei d\'ajuda per a RV."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Vols permetre que <xliff:g id="SERVICE">%1$s</xliff:g> accedeixi al servei RV?"</string>
@@ -4790,7 +4813,7 @@
     <string name="aspect_ratio_main_summary_text" msgid="5544816872094235840">"Prova una nova relació d\'aspecte per veure una aplicació en cas que no s\'hagi dissenyat per adaptar-se al teu dispositiu (<xliff:g id="DEVICE_NAME">%1$s</xliff:g>). Pot ser que algunes aplicacions no s\'optimitzin per a determinades relacions d\'aspecte."</string>
     <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"Aplicacions suggerides"</string>
     <string name="user_aspect_ratio_changed_apps_label" msgid="2096614916172567672">"Apps canviades"</string>
-    <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"Configuració predeterminada de l\'aplicació"</string>
+    <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"Predeterminat de l\'aplicació"</string>
     <string name="user_aspect_ratio_fullscreen" msgid="1843427242540081996">"Pantalla completa"</string>
     <string name="user_aspect_ratio_half_screen" msgid="1015852057094310209">"Mitja pantalla"</string>
     <string name="user_aspect_ratio_device_size" msgid="2339820985120881199">"Relació d\'aspecte del dispositiu"</string>
@@ -4857,4 +4880,10 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"El nom del dispositiu és visible per a les aplicacions que has instal·lat. També el poden veure altres persones si el connectes a un dispositiu Bluetooth o a una xarxa Wi‑Fi, o si configures un punt d\'accés Wi‑Fi."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Gènere gramatical"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Selecciona el gènere gramatical"</string>
+    <string name="content_protection_preference_title" msgid="5069260032659193074">"S\'estan cercant aplicacions enganyoses"</string>
+    <string name="content_protection_preference_summary" msgid="2252393849408445391">"Comprova l\'activitat de les aplicacions per detectar pesca de credencials"</string>
+    <string name="content_protection_preference_user_consent_switch_title" msgid="60088482227901638">"Utilitza l\'anàlisi"</string>
+    <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="2868495870224174097">"Utilitza l\'anàlisi per a les aplicacions de treball"</string>
+    <string name="content_protection_preference_subpage_summary" msgid="7707255571476950976">"L\'anàlisi s\'executa de manera privada directament des del dispositiu, i es comprova l\'activitat de les aplicacions per detectar pesca de credencials o altres comportaments enganyosos. Si s\'identifica algun d\'aquests comportaments, s\'enviarà determinada informació de les aplicacions en qüestió a Google Play Protect per confirmar l\'amenaça i avisar-ne els usuaris."</string>
+    <string name="content_protection_preference_subpage_info" msgid="6010628258453929862">"És una funció de seguretat protegida. No es comparteix cap informació personal ni del dispositiu amb Google. \n\nLa pesca de credencials és un intent de robar les credencials d\'inici de sessió o altres dades personals."</string>
 </resources>

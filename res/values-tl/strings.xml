@@ -113,6 +113,10 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"I-disable ang Bluetooth LE audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Dini-disable ang feature na Bluetooth LE audio kung sinusuportahan ng device ang mga kakayahan ng LE audio hardware."</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Ipakita ang toggle ng LE audio sa Mga Detalye ng Device"</string>
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist (7392319491894565552) -->
+    <skip />
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist_summary (8999245286359656738) -->
+    <skip />
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Mga media device"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Mga device sa pagtawag"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Iba pang device"</string>
@@ -1317,6 +1321,8 @@
     <string name="carrier_enabled_summaryOn" msgid="5212067975273903381">"Pinagana ang APN"</string>
     <string name="carrier_enabled_summaryOff" msgid="8541959867953738521">"Hindi pinagana ang APN"</string>
     <string name="bearer" msgid="3231443241639159358">"Bearer"</string>
+    <string name="network_type" msgid="748590707422733595">"Network type"</string>
+    <string name="network_type_unspecified" msgid="7756349656194518725">"Hindi tinukoy"</string>
     <string name="mvno_type" msgid="4734654257494971247">"Uri ng MVNO"</string>
     <string name="mvno_match_data" msgid="5213193073684321156">"MVNO value"</string>
     <string name="menu_delete" msgid="9199740901584348273">"I-delete ang APN"</string>
@@ -2041,6 +2047,8 @@
     <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Gumamit ng pag-vibrate at haptics"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Pag-vibrate ng alarm"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Pag-vibrate ng media"</string>
+    <!-- no translation found for accessibility_keyboard_vibration_title (7559967730626765441) -->
+    <skip />
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Pag-vibrate kapag nag-ring"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Pag-vibrate kapag may notification"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Feedback sa pagpindot"</string>
@@ -2348,6 +2356,7 @@
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_since_last_full_charge" msgid="3488425008925924769">"mula noong huling ma-full charge"</string>
     <string name="battery_usage_system_apps" msgid="8659537819731575299">"Mga system app"</string>
+    <string name="battery_usage_uninstalled_apps" msgid="8170405012552803662">"Mga na-uninstall na app"</string>
     <string name="battery_usage_others" msgid="311793281613609986">"Iba pa"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Tinatayang natitirang oras"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"Hanggang mapuno ang baterya"</string>
@@ -2607,6 +2616,7 @@
     <string name="data_usage_app_summary_title" msgid="4933742247928064178">"Mobile data at Wi‑Fi"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"I-auto sync ang personal data"</string>
     <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"I-auto sync ang work data"</string>
+    <string name="account_settings_menu_auto_sync_private" msgid="2315144351530596228">"I-auto sync ang pribadong data"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"Baguhin ang cycle…"</string>
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"Araw ng buwan pang i-reset ang ikot ng paggamit ng data:"</string>
     <string name="data_usage_empty" msgid="5619908658853726866">"Walang apps ang gumamit ng data sa panahong ito."</string>
@@ -3049,6 +3059,8 @@
     <string name="keywords_font_size" msgid="1643198841815006447">"laki ng text, malaking print, malaking font, malaking text, malabong paningin, palakihin ang text, pampalaki ng font, pagpapalaki ng font"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"palaging naka-on na ambient display, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, tag, reader"</string>
+    <!-- no translation found for keywords_keyboard_vibration (6485149510591654697) -->
+    <skip />
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Volume, pag-vibrate, Huwag Istorbohin"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Volume ng media"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Volume ng pag-cast"</string>
@@ -3355,6 +3367,17 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"Hindi sinusuportahan ng app na ito ang mga pinahusay na setting"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"Higit pang setting"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"May higit pang setting na available sa loob ng app na ito"</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"Cooldown sa notification"</string>
+    <string name="notification_polite_all_apps" msgid="1118651561594250059">"Ilapat ang cooldown sa lahat ng notification"</string>
+    <string name="notification_polite_all_apps_summary" msgid="540268373207498126">"Dahan-dahang babaan ang volume ng notification kapag nakakuha ka ng maraming sunod-sunod na notification mula sa parehong app"</string>
+    <string name="notification_polite_conversations" msgid="8197695136727245741">"Ilapat ang cooldown sa mga pag-uusap"</string>
+    <string name="notification_polite_conversations_summary" msgid="2677141765664359994">"Dahan-dahang babaan ang volume ng notification kapag nakakuha ka ng maraming mensahe mula sa parehong chat sa loob ng maikling panahon"</string>
+    <string name="notification_polite_disabled" msgid="1378078021594282842">"Huwag gumamit ng cooldown sa notification"</string>
+    <string name="notification_polite_disabled_summary" msgid="1145341260283746936">"Huwag kailanman babaan ang volume ng notification, gaano man karami ang magkakasunod na notification mula sa parehong app"</string>
+    <string name="notification_polite_vibrate_unlocked" msgid="6142573851761357903">"Mag-vibrate kapag naka-unlock"</string>
+    <string name="notification_polite_vibrate_unlocked_summary" msgid="1678472892282874459">"Mag-vibrate lang kapag naka-unlock ang screen"</string>
+    <string name="notification_polite_work" msgid="8823596456640216391">"Ilapat sa mga profile sa trabaho"</string>
+    <string name="notification_polite_work_summary" msgid="8260947839104352075">"Ilapat sa iyong profile sa trabaho ang mga setting ng cooldown sa notification mula sa iyong personal na profile"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Mga serbisyong pantulong sa VR"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Walang mga naka-install na app ang humiling na mapagana bilang mga serbisyong pantulong sa VR."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Payagan ang access sa serbisyo ng VR para sa <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -4857,4 +4880,10 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Nakikita ang pangalan ng device sa mga app na na-install mo. Puwede rin itong makita ng ibang tao kapag ikaw ay kumonekta sa mga Bluetooth device, kumonekta sa Wi-Fi network, o nag-set up ng Wi-Fi hotspot."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Kasarian para sa grammar"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Pumili ng Kasarian para sa grammar"</string>
+    <string name="content_protection_preference_title" msgid="5069260032659193074">"Nagsa-scan para sa mga mapanlinlang na app"</string>
+    <string name="content_protection_preference_summary" msgid="2252393849408445391">"Suriin ang aktibidad sa app para mag-detect ng phishing"</string>
+    <string name="content_protection_preference_user_consent_switch_title" msgid="60088482227901638">"Gamitin ang pag-scan"</string>
+    <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="2868495870224174097">"Gamitin ang pag-scan para sa mga app pra sa trabaho"</string>
+    <string name="content_protection_preference_subpage_summary" msgid="7707255571476950976">"Pribadong tumatakbo ang pag-scan sa iyong device, na sumusuri sa aktibidad sa app para mag-detect ng phishing o iba pang mapanlinlang na gawi. Kung ma-detect ito, ipapadala ang ilang impormasyon ng app sa Google Play Protect para kumpirmahin ang banta at bigyan ng babala ang mga user ng app."</string>
+    <string name="content_protection_preference_subpage_info" msgid="6010628258453929862">"Isa itong protektadong panseguridad na feature. Walang device o personal na impormasyong ibinabahagi sa Google. \n\nAng phishing ay isang pagtatangkang magnakaw ng mga kredensyal sa pag-sign in o iba pang personal na impormasyon."</string>
 </resources>

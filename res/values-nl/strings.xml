@@ -113,6 +113,10 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Bluetooth LE Audio uitzetten"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Hiermee zet je de functie voor Bluetooth LE Audio uit als het apparaat hardwaremogelijkheden voor LE Audio ondersteunt."</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Schakelaar voor LE Audio tonen in Apparaatgegevens"</string>
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist (7392319491894565552) -->
+    <skip />
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist_summary (8999245286359656738) -->
+    <skip />
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Media-apparaten"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Apparaten voor gesprekken"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Andere apparaten"</string>
@@ -189,13 +193,13 @@
     <string name="default_string_of_regional_preference" msgid="3428899072914884203">"Standaard gebruiken"</string>
     <string name="celsius_temperature_unit" msgid="8896459071273084507">"Celsius (°C)"</string>
     <string name="fahrenheit_temperature_unit" msgid="1118677820614569801">"Fahrenheit (°F)"</string>
-    <string name="sunday_first_day_of_week" msgid="7644548348295686051">"zondag"</string>
-    <string name="monday_first_day_of_week" msgid="7244698610476506771">"maandag"</string>
-    <string name="tuesday_first_day_of_week" msgid="5085370946936582391">"dinsdag"</string>
-    <string name="wednesday_first_day_of_week" msgid="6544537589727042869">"woensdag"</string>
-    <string name="thursday_first_day_of_week" msgid="3035885630945594833">"donderdag"</string>
-    <string name="friday_first_day_of_week" msgid="7074795061812083541">"vrijdag"</string>
-    <string name="saturday_first_day_of_week" msgid="3702282590450322727">"zaterdag"</string>
+    <string name="sunday_first_day_of_week" msgid="7644548348295686051">"Zondag"</string>
+    <string name="monday_first_day_of_week" msgid="7244698610476506771">"Maandag"</string>
+    <string name="tuesday_first_day_of_week" msgid="5085370946936582391">"Dinsdag"</string>
+    <string name="wednesday_first_day_of_week" msgid="6544537589727042869">"Woensdag"</string>
+    <string name="thursday_first_day_of_week" msgid="3035885630945594833">"Donderdag"</string>
+    <string name="friday_first_day_of_week" msgid="7074795061812083541">"Vrijdag"</string>
+    <string name="saturday_first_day_of_week" msgid="3702282590450322727">"Zaterdag"</string>
     <string name="title_regional_pref_footer" msgid="7450438024324794380">"Als een app geen regionale voorkeuren ondersteunt, worden de standaard landinstellingen van de app gebruikt."</string>
     <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"Meer informatie over taalvoorkeuren"</string>
     <string name="category_title_terms_of_address" msgid="4309422700380895278">"Aanvullende voorkeuren"</string>
@@ -1317,6 +1321,8 @@
     <string name="carrier_enabled_summaryOn" msgid="5212067975273903381">"APN staat aan"</string>
     <string name="carrier_enabled_summaryOff" msgid="8541959867953738521">"APN staat uit"</string>
     <string name="bearer" msgid="3231443241639159358">"Drager"</string>
+    <string name="network_type" msgid="748590707422733595">"Netwerktype"</string>
+    <string name="network_type_unspecified" msgid="7756349656194518725">"Niet aangegeven"</string>
     <string name="mvno_type" msgid="4734654257494971247">"MVNO-type"</string>
     <string name="mvno_match_data" msgid="5213193073684321156">"MVNO-waarde"</string>
     <string name="menu_delete" msgid="9199740901584348273">"APN verwijderen"</string>
@@ -2041,6 +2047,8 @@
     <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Trillen en haptische technologie gebruiken"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Trilling bij wekker"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Trilling bij media"</string>
+    <!-- no translation found for accessibility_keyboard_vibration_title (7559967730626765441) -->
+    <skip />
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Trilling bij bellen"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Trilling bij melding"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Tikfeedback"</string>
@@ -2348,6 +2356,7 @@
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_since_last_full_charge" msgid="3488425008925924769">"sinds laatste volledige lading"</string>
     <string name="battery_usage_system_apps" msgid="8659537819731575299">"Systeem-apps"</string>
+    <string name="battery_usage_uninstalled_apps" msgid="8170405012552803662">"Verwijderde apps"</string>
     <string name="battery_usage_others" msgid="311793281613609986">"Anders"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Geschatte resterende tijd"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"Tot volledige lading"</string>
@@ -2607,6 +2616,7 @@
     <string name="data_usage_app_summary_title" msgid="4933742247928064178">"Mobiele data en wifi"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Persoonsgegevens autom. synchr."</string>
     <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Werkgegevens autom. synchr."</string>
+    <string name="account_settings_menu_auto_sync_private" msgid="2315144351530596228">"Privégegevens automatisch synchroniseren"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"Cyclus aanpassen..."</string>
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"Dag van maand voor resetten van datagebruikscyclus:"</string>
     <string name="data_usage_empty" msgid="5619908658853726866">"Geen gegevens gebruikt tijdens deze periode."</string>
@@ -3049,6 +3059,8 @@
     <string name="keywords_font_size" msgid="1643198841815006447">"tekstgrootte, grote letters, groot lettertype, grote tekst, slechtziend, tekst groter maken, lettertype vergroten, vergroting van lettertype"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"inactief scherm altijd aan, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, tag, lezer"</string>
+    <!-- no translation found for keywords_keyboard_vibration (6485149510591654697) -->
+    <skip />
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Volume, trillen, niet storen"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Mediavolume"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Castvolume"</string>
@@ -3355,6 +3367,17 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"Deze app ondersteunt geen uitgebreide instellingen"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"Meer instellingen"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"Er zijn meer instellingen beschikbaar in deze app"</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"Afkoelperiode voor meldingen"</string>
+    <string name="notification_polite_all_apps" msgid="1118651561594250059">"Afkoelperiode toepassen op alle meldingen"</string>
+    <string name="notification_polite_all_apps_summary" msgid="540268373207498126">"Het meldingsvolume geleidelijk verlagen als je veel opeenvolgende meldingen van dezelfde app krijgt"</string>
+    <string name="notification_polite_conversations" msgid="8197695136727245741">"Afkoelperiode toepassen op gesprekken"</string>
+    <string name="notification_polite_conversations_summary" msgid="2677141765664359994">"Het meldingsvolume geleidelijk verlagen als je in korte tijd veel berichten van dezelfde chat krijgt"</string>
+    <string name="notification_polite_disabled" msgid="1378078021594282842">"Afkoelperiode voor meldingen niet gebruiken"</string>
+    <string name="notification_polite_disabled_summary" msgid="1145341260283746936">"Meldingsvolume nooit verlagen, ongeacht het aantal opeenvolgende meldingen van dezelfde app"</string>
+    <string name="notification_polite_vibrate_unlocked" msgid="6142573851761357903">"Trillen indien ontgrendeld"</string>
+    <string name="notification_polite_vibrate_unlocked_summary" msgid="1678472892282874459">"Alleen trillen als het scherm ontgrendeld is"</string>
+    <string name="notification_polite_work" msgid="8823596456640216391">"Toepassen op werkprofielen"</string>
+    <string name="notification_polite_work_summary" msgid="8260947839104352075">"De instellingen voor de afkoelperiode voor meldingen van je persoonlijke profiel toepassen op je werkprofiel"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR-helperservices"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Er zijn geen geïnstalleerde apps die hebben gevraagd om te worden uitgevoerd als VR-helperservices."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"VR-servicetoegang toestaan voor <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -4857,4 +4880,10 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Je apparaatnaam is zichtbaar voor apps die je hebt geïnstalleerd. De apparaatnaam kan ook door andere mensen worden gezien als je verbinding maakt met bluetooth-apparaten of een wifi-netwerk, of als je een wifi-hotspot instelt."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Grammaticaal geslacht"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Grammaticaal geslacht selecteren"</string>
+    <string name="content_protection_preference_title" msgid="5069260032659193074">"Scannen op misleidende apps"</string>
+    <string name="content_protection_preference_summary" msgid="2252393849408445391">"App-activiteit checken op phishing"</string>
+    <string name="content_protection_preference_user_consent_switch_title" msgid="60088482227901638">"Scannen gebruiken"</string>
+    <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="2868495870224174097">"Scannen gebruiken voor werk-apps"</string>
+    <string name="content_protection_preference_subpage_summary" msgid="7707255571476950976">"Scans worden privé uitgevoerd op je apparaat, waarbij de app-activiteit wordt gecheckt op phishing of ander misleidend gedrag. Als er iets wordt gevonden, worden bepaalde app-gegevens naar Google Play Protect gestuurd om de dreiging te bevestigen en app-gebruikers te waarschuwen."</string>
+    <string name="content_protection_preference_subpage_info" msgid="6010628258453929862">"Dit is een beschermde beveiligingsfunctie. Er worden geen apparaatgegevens of persoonlijke informatie gedeeld met Google. \n\nPhishing is een poging om inloggegevens of andere persoonlijke informatie te stelen."</string>
 </resources>

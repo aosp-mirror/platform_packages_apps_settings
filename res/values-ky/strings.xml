@@ -43,9 +43,9 @@
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Кичирээк кылуу"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Чоңураак кылуу"</string>
     <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"Ар дайым"</string>
-    <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"Түзмөгүңүздү бүктөгөнүңүздө алдыңкы экран күйгүзүлөт"</string>
+    <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"Түзмөгүңүздү бүктөгөнүңүздө алдыңкы экран күйөт"</string>
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"Оюндар, видеолор жана башкалар гана"</string>
-    <string name="selective_stay_awake_summary" msgid="9055967322921984543">"Алдыңкы экран экраныңыздын иштебей калышын токтоткон колдонмолор үчүн күйгүзүлөт"</string>
+    <string name="selective_stay_awake_summary" msgid="9055967322921984543">"Алдыңкы экран колдонулуп жаткан экранды күтүү режимине өткөрбөгөн колдонмолор үчүн күйөт"</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"Эч качан"</string>
     <string name="sleep_on_fold_summary" msgid="7737992842459588846">"Түзмөгүңүздү бүктөгөнүңүздө алдыңкы экран кулпуланат"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Автоматтык түрдө бурулууну иштетүү"</string>
@@ -113,6 +113,10 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Bluetooth LE audio\'ну өчүрүү"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Эгер түзмөктө аппараттык мүмкүнчүлүктөр болсо, Bluetooth LE Audio функциясы өчүрүлөт."</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Түзмөктүн чоо-жайынан LE Audio которгучун көрсөтүү"</string>
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist (7392319491894565552) -->
+    <skip />
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist_summary (8999245286359656738) -->
+    <skip />
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Медиа түзмөктөр"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Түзмөктөргө чалуу"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Башка түзмөктөр"</string>
@@ -1057,7 +1061,7 @@
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Өчүк"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Экрандын ак балансы"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
-    <string name="fold_lock_behavior_title" msgid="786228803694268449">"Түзмөк бүктөлгөндө колдонмолорду пайдалана бериңиз"</string>
+    <string name="fold_lock_behavior_title" msgid="786228803694268449">"Түзмөк бүктөлгөндө колдонмолорду пайдалана берүү"</string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="3627278682437562787">"Айрым нерселер үчүн экрандын жаңыруу жыштыгы 60 Герцтен <xliff:g id="ID_1">%1$s</xliff:g> Герцке чейин өзгөрөт. Батарея тез отуруп калышы мүмкүн"</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Экрандын жаңыруу жыштыгын жогорулатуу"</string>
@@ -1189,7 +1193,7 @@
     <string name="baseband_version" msgid="2600182227599835857">"Радиомодуль версиясы"</string>
     <string name="kernel_version" msgid="3513538109381366881">"Өзөктүн версиясы"</string>
     <string name="build_number" msgid="9009733242117579826">"Курама номери"</string>
-    <string name="module_version" msgid="1787518340082046658">"Google Play тутуму качан жаңырган"</string>
+    <string name="module_version" msgid="1787518340082046658">"Google Play системасын жаңыртуу"</string>
     <string name="battery_info" msgid="7873528123969546728">"Батарея жөнүндө маалымат"</string>
     <string name="device_info_not_available" msgid="4804474466616712326">"Жеткиликтүү эмес"</string>
     <string name="storage_settings" msgid="7472188817781592677">"Сактагыч"</string>
@@ -1317,6 +1321,8 @@
     <string name="carrier_enabled_summaryOn" msgid="5212067975273903381">"APN иштөөдө"</string>
     <string name="carrier_enabled_summaryOff" msgid="8541959867953738521">"APN өчүк"</string>
     <string name="bearer" msgid="3231443241639159358">"Канал"</string>
+    <string name="network_type" msgid="748590707422733595">"Тармактын түрү"</string>
+    <string name="network_type_unspecified" msgid="7756349656194518725">"Көрсөтүлгөн эмес"</string>
     <string name="mvno_type" msgid="4734654257494971247">"MVNO түрү"</string>
     <string name="mvno_match_data" msgid="5213193073684321156">"MVNO көрсөткүчү"</string>
     <string name="menu_delete" msgid="9199740901584348273">"APN жок кылуу"</string>
@@ -2041,6 +2047,8 @@
     <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Дирилдөөнү жана сенсорлорду колдонуу"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Ойготкучтун дирилдөөсү"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Медианы дирилдетүү"</string>
+    <!-- no translation found for accessibility_keyboard_vibration_title (7559967730626765441) -->
+    <skip />
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Шыңгырдын дирилдөөсү"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Билдирменин дирилдөөсү"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Басып жооп берүү"</string>
@@ -2348,6 +2356,7 @@
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_since_last_full_charge" msgid="3488425008925924769">"толук кубатталгандан бери"</string>
     <string name="battery_usage_system_apps" msgid="8659537819731575299">"Системдик колдонмолор"</string>
+    <string name="battery_usage_uninstalled_apps" msgid="8170405012552803662">"Чыгарылып салынган колдонмолор"</string>
     <string name="battery_usage_others" msgid="311793281613609986">"Башкалар"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Болжолдуу калган убакыт"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"Батарея толгонго чейин калган убакыт"</string>
@@ -2607,6 +2616,7 @@
     <string name="data_usage_app_summary_title" msgid="4933742247928064178">"Мобилдик Интернет жана Wi‑Fi"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Жеке маалыматтарды авто-шайкештирүү"</string>
     <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Жумуш маалыматын автошайкештирүү"</string>
+    <string name="account_settings_menu_auto_sync_private" msgid="2315144351530596228">"Купуя маалыматты авто-шайкештирүү"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"Циклди өзгөртүү…"</string>
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"Дайындарды колдонуу циклин баштапкы абалга келтире турган күн:"</string>
     <string name="data_usage_empty" msgid="5619908658853726866">"Бул мезгилде колдонмолор трафик сарптаган жок."</string>
@@ -3049,6 +3059,8 @@
     <string name="keywords_font_size" msgid="1643198841815006447">"тексттин өлчөмү, чоң өлчөмдө басып чыгаруу, чоң арип, чоң текст, начар көрүү, текстти чоңойтуу, арип чоңойткуч, арипти чоңойтуу"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"динамикалык жарык ар дайым күйүк, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, тег, окугуч"</string>
+    <!-- no translation found for keywords_keyboard_vibration (6485149510591654697) -->
+    <skip />
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Үн деңгээли, дирилдөө, \"Тынчымды алба\" режими"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Мультимедианын катуулугу"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Үндү алыстан башкаруу"</string>
@@ -3355,6 +3367,17 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"Бул колдонмодо кеңири жөндөөлөр колдоого алынбайт"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"Дагы параметрлер"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"Бул колдонмодо кошумча параметрлер бар"</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"Билдирмелердин үнүн басаңдатуу"</string>
+    <string name="notification_polite_all_apps" msgid="1118651561594250059">"Бардык билдирмелердин үнүн басаңдатуу"</string>
+    <string name="notification_polite_all_apps_summary" msgid="540268373207498126">"Бир колдонмодон катары менен бир нече билдирме келгенде, ар бир кийинки билдирменин үнүн акырындатуу"</string>
+    <string name="notification_polite_conversations" msgid="8197695136727245741">"Сүйлөшүүлөрдүн үнүн басаңдатуу"</string>
+    <string name="notification_polite_conversations_summary" msgid="2677141765664359994">"Кыска убакытта бир маекте бир нече билдирүү алганда, ар бир кийинки билдирменин үнүн акырындатуу"</string>
+    <string name="notification_polite_disabled" msgid="1378078021594282842">"Билдирмелердин үнү басаңдабасын"</string>
+    <string name="notification_polite_disabled_summary" msgid="1145341260283746936">"Бир колдонмодо катары менен бир нече билдирме келсе да, алардын үнү акырындабасын"</string>
+    <string name="notification_polite_vibrate_unlocked" msgid="6142573851761357903">"Кулпусу ачылып турганда дирилдесин"</string>
+    <string name="notification_polite_vibrate_unlocked_summary" msgid="1678472892282874459">"Экрандын кулпусу ачылып турганда гана дирилдесин"</string>
+    <string name="notification_polite_work" msgid="8823596456640216391">"Жумуш профилдерине колдонуу"</string>
+    <string name="notification_polite_work_summary" msgid="8260947839104352075">"Жеке профилден жумуш профилине билдирмелердин үнүн басаңдатуу параметрлерин колдонуу"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR көмөкчү кызматтары"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Орнотулган колдонмолор көмөкчү VR кызматы катары иштөөгө уруксат сураган жок."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"VR кызматына <xliff:g id="SERVICE">%1$s</xliff:g> кызматын жеткиликтүү кыласызбы?"</string>
@@ -4857,4 +4880,10 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Түзмөгүңүздүн аталышы орнотулган колдонмолорго көрүнүп турат. Ошондой эле, Bluetooth түзмөктөрүнө, Wi‑Fi тармагына туташып же Wi‑Fi байланыш түйүнүн тууралаганыңызда башка адамдарга көрүнүшү мүмкүн."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Грамматикалык жак"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Грамматикалык жакты тандаңыз"</string>
+    <string name="content_protection_preference_title" msgid="5069260032659193074">"Алдамчы колдонмолор изделүүдө"</string>
+    <string name="content_protection_preference_summary" msgid="2252393849408445391">"Колдонмолордо жасалган аракеттерде фишингди текшерүү"</string>
+    <string name="content_protection_preference_user_consent_switch_title" msgid="60088482227901638">"Скандоону колдонуу"</string>
+    <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="2868495870224174097">"Жумуш колдонмолору үчүн скандоону колдонуу"</string>
+    <string name="content_protection_preference_subpage_summary" msgid="7707255571476950976">"Скандоо түзмөгүңүздө жеке иштетилип, колдонмолордо жасалган аракеттерде фишинг же башка алдамчы аракеттер текшерилет. Эгер мындай аракеттер аныкталса, коркунучту ырастоо жана колдонмонун колдонуучуларына эскертүү берүү үчүн колдонмонун айрым маалыматы Google Play Protect кызматына жөнөтүлөт."</string>
+    <string name="content_protection_preference_subpage_info" msgid="6010628258453929862">"Бул – корголгон коопсуздук функциясы. Түзмөк тууралуу же жеке маалымат Google менен бөлүшүлбөйт. \n\nФишинг – кирүү эсептик дайындарын же башка жеке маалыматты уурдоо аракети."</string>
 </resources>

@@ -42,11 +42,11 @@
     <string name="preview_pager_content_description" msgid="3762247188224576303">"プレビュー"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"縮小"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"拡大"</string>
-    <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"常に ON"</string>
+    <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"常時"</string>
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"デバイスを折りたたむとフロント ディスプレイが ON になります"</string>
-    <string name="selective_stay_awake_title" msgid="7887645333447645168">"ゲーム、動画などのみ"</string>
-    <string name="selective_stay_awake_summary" msgid="9055967322921984543">"フロント ディスプレイが ON になり、アプリによって画面がアイドル状態から復帰します"</string>
-    <string name="sleep_on_fold_title" msgid="7626123024330501411">"ON にしない"</string>
+    <string name="selective_stay_awake_title" msgid="7887645333447645168">"ゲームや動画などの場合のみ"</string>
+    <string name="selective_stay_awake_summary" msgid="9055967322921984543">"画面がアイドル状態にならないアプリを使用している場合にフロント ディスプレイが ON になります"</string>
+    <string name="sleep_on_fold_title" msgid="7626123024330501411">"継続しない"</string>
     <string name="sleep_on_fold_summary" msgid="7737992842459588846">"デバイスを折りたたむとフロント ディスプレイがロックされます"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"画面を自動で回転させる"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"顔検出は、前面カメラを使用して自動回転の精度を高めます。画像が Google に保存されたり送信されたりすることはありません。"</string>
@@ -113,6 +113,10 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Bluetooth LE Audio を無効にする"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"デバイスが LE オーディオ ハードウェア機能に対応している場合に、Bluetooth LE Audio 機能を無効にします。"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"LE Audio の切替をデバイスの詳細に表示"</string>
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist (7392319491894565552) -->
+    <skip />
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist_summary (8999245286359656738) -->
+    <skip />
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"メディア デバイス"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"通話デバイス"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"その他のデバイス"</string>
@@ -1057,7 +1061,7 @@
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"OFF"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"ディスプレイのホワイト バランス"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
-    <string name="fold_lock_behavior_title" msgid="786228803694268449">"折りたたみ時もアプリを使い続けられます"</string>
+    <string name="fold_lock_behavior_title" msgid="786228803694268449">"折りたたみ時もアプリの使用を継続"</string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"スムーズ ディスプレイ"</string>
     <string name="peak_refresh_rate_summary" msgid="3627278682437562787">"コンテンツに応じて、リフレッシュ レートを自動的に 60 Hz から <xliff:g id="ID_1">%1$s</xliff:g> Hz に変更します。バッテリー使用量が増えます。"</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"ピーク時のリフレッシュ レートの適用"</string>
@@ -1317,6 +1321,8 @@
     <string name="carrier_enabled_summaryOn" msgid="5212067975273903381">"APNは有効です"</string>
     <string name="carrier_enabled_summaryOff" msgid="8541959867953738521">"APNは無効です"</string>
     <string name="bearer" msgid="3231443241639159358">"ベアラー"</string>
+    <string name="network_type" msgid="748590707422733595">"ネットワークの種類"</string>
+    <string name="network_type_unspecified" msgid="7756349656194518725">"不明"</string>
     <string name="mvno_type" msgid="4734654257494971247">"MVNOの種類"</string>
     <string name="mvno_match_data" msgid="5213193073684321156">"MVNO値"</string>
     <string name="menu_delete" msgid="9199740901584348273">"APNを削除"</string>
@@ -2041,6 +2047,8 @@
     <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"バイブレーションとハプティクスの使用"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"アラームのバイブレーション"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"メディアのバイブレーション"</string>
+    <!-- no translation found for accessibility_keyboard_vibration_title (7559967730626765441) -->
+    <skip />
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"着信時のバイブレーション"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"通知時のバイブレーション"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"触覚フィードバック"</string>
@@ -2348,6 +2356,7 @@
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_since_last_full_charge" msgid="3488425008925924769">"前回のフル充電以降"</string>
     <string name="battery_usage_system_apps" msgid="8659537819731575299">"システムアプリ"</string>
+    <string name="battery_usage_uninstalled_apps" msgid="8170405012552803662">"アンインストールしたアプリ"</string>
     <string name="battery_usage_others" msgid="311793281613609986">"その他"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"予測される残り時間"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"フル充電まで"</string>
@@ -2607,6 +2616,7 @@
     <string name="data_usage_app_summary_title" msgid="4933742247928064178">"モバイルデータと Wi-Fi"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"個人データの自動同期"</string>
     <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"仕事データの自動同期"</string>
+    <string name="account_settings_menu_auto_sync_private" msgid="2315144351530596228">"非公開データの自動同期"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"サイクルを変更…"</string>
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"毎月データ使用サイクルをリセットする日:"</string>
     <string name="data_usage_empty" msgid="5619908658853726866">"この期間中にデータを使用したアプリはありません。"</string>
@@ -3049,6 +3059,8 @@
     <string name="keywords_font_size" msgid="1643198841815006447">"テキスト サイズ, 大きい 活字, 大きい フォント, 大きい テキスト, ロー ビジョン, 切り替え テキスト 大きく, フォント 大きく, フォント 拡大"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"常時オンのアンビエント表示, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, タグ, リーダー"</string>
+    <!-- no translation found for keywords_keyboard_vibration (6485149510591654697) -->
+    <skip />
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"音量、バイブレーション、サイレント モード"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"メディアの音量"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"キャストの音量"</string>
@@ -3355,6 +3367,17 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"このアプリは拡張設定に対応していません"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"その他の設定"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"このアプリ内でその他の設定を利用できます"</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"通知のクールダウン"</string>
+    <string name="notification_polite_all_apps" msgid="1118651561594250059">"すべての通知にクールダウンを適用する"</string>
+    <string name="notification_polite_all_apps_summary" msgid="540268373207498126">"同じアプリから連続して大量の通知が届く場合に通知の数が徐々に減ります"</string>
+    <string name="notification_polite_conversations" msgid="8197695136727245741">"会話にクールダウンを適用する"</string>
+    <string name="notification_polite_conversations_summary" msgid="2677141765664359994">"同じチャットから短い期間内に大量のメッセージが届く場合に通知の数が徐々に減ります"</string>
+    <string name="notification_polite_disabled" msgid="1378078021594282842">"通知のクールダウンを使用しない"</string>
+    <string name="notification_polite_disabled_summary" msgid="1145341260283746936">"同じアプリから連続して届く通知の数にかかわらず、通知の数は減りません"</string>
+    <string name="notification_polite_vibrate_unlocked" msgid="6142573851761357903">"ロック解除時にバイブレーションで知らせる"</string>
+    <string name="notification_polite_vibrate_unlocked_summary" msgid="1678472892282874459">"画面のロックが解除されたときのみバイブレーションが作動します"</string>
+    <string name="notification_polite_work" msgid="8823596456640216391">"仕事用プロファイルに適用する"</string>
+    <string name="notification_polite_work_summary" msgid="8260947839104352075">"個人用プロファイルの通知のクールダウンの設定を仕事用プロファイルに適用します"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR ヘルパー サービス"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"VR ヘルパー サービスとしての実行権限をリクエストしたインストール済みアプリはありません。"</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"VR サービスから <xliff:g id="SERVICE">%1$s</xliff:g> へのアクセスの許可"</string>
@@ -4857,4 +4880,10 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"インストールしたアプリにデバイス名が表示されます。また、Bluetooth デバイスや Wi-Fi ネットワークに接続したり Wi-Fi アクセス ポイントを設定したりすると、他のユーザーもデバイス名を確認できるようになります。"</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"文法性"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"文法性の選択"</string>
+    <string name="content_protection_preference_title" msgid="5069260032659193074">"虚偽の振る舞いをするアプリをスキャンする"</string>
+    <string name="content_protection_preference_summary" msgid="2252393849408445391">"フィッシングに関するアプリのアクティビティを確認する"</string>
+    <string name="content_protection_preference_user_consent_switch_title" msgid="60088482227901638">"スキャンを使用する"</string>
+    <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="2868495870224174097">"仕事用アプリにスキャンを使用する"</string>
+    <string name="content_protection_preference_subpage_summary" msgid="7707255571476950976">"お使いのデバイス上でスキャンを非公開で実行し、フィッシングなどの不正な動作をアプリが行っていないか確認します。不正な動作を確認した場合は、一部のアプリ情報を Google Play プロテクトに送信し、危険度を判別して、アプリのユーザーに警告を行います。"</string>
+    <string name="content_protection_preference_subpage_info" msgid="6010628258453929862">"これは保護されたセキュリティ機能です。デバイス情報や個人情報は Google と共有されません。\n\nフィッシングとは、ログイン認証情報などの個人情報を不正に入手しようとする試みのことです。"</string>
 </resources>

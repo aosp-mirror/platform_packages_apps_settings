@@ -113,6 +113,10 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"停用蓝牙 LE 音频"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"如果设备支持 LE 音频硬件功能，则停用蓝牙 LE 音频功能。"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"在“设备详细信息”中显示 LE 音频切换开关"</string>
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist (7392319491894565552) -->
+    <skip />
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist_summary (8999245286359656738) -->
+    <skip />
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"媒体设备"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"通话设备"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"其他设备"</string>
@@ -1317,6 +1321,8 @@
     <string name="carrier_enabled_summaryOn" msgid="5212067975273903381">"APN 已启用"</string>
     <string name="carrier_enabled_summaryOff" msgid="8541959867953738521">"未启用 APN"</string>
     <string name="bearer" msgid="3231443241639159358">"承载系统"</string>
+    <string name="network_type" msgid="748590707422733595">"网络类型"</string>
+    <string name="network_type_unspecified" msgid="7756349656194518725">"未指定"</string>
     <string name="mvno_type" msgid="4734654257494971247">"MVNO 类型"</string>
     <string name="mvno_match_data" msgid="5213193073684321156">"MVNO 值"</string>
     <string name="menu_delete" msgid="9199740901584348273">"删除 APN"</string>
@@ -2041,6 +2047,8 @@
     <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"使用振动和触感反馈"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"闹钟振动"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"媒体振动"</string>
+    <!-- no translation found for accessibility_keyboard_vibration_title (7559967730626765441) -->
+    <skip />
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"响铃振动"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"通知振动"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"按触反馈"</string>
@@ -2348,6 +2356,7 @@
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_since_last_full_charge" msgid="3488425008925924769">"自上次充满电"</string>
     <string name="battery_usage_system_apps" msgid="8659537819731575299">"系统应用"</string>
+    <string name="battery_usage_uninstalled_apps" msgid="8170405012552803662">"已卸载的应用"</string>
     <string name="battery_usage_others" msgid="311793281613609986">"其他"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"预计剩余时间"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"剩余充电时间"</string>
@@ -2607,6 +2616,7 @@
     <string name="data_usage_app_summary_title" msgid="4933742247928064178">"移动数据和 WLAN"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"自动同步个人账号数据"</string>
     <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"自动同步工作账号数据"</string>
+    <string name="account_settings_menu_auto_sync_private" msgid="2315144351530596228">"自动同步私有数据"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"更改周期..."</string>
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"每月流量消耗重计日期："</string>
     <string name="data_usage_empty" msgid="5619908658853726866">"没有任何应用在此期间产生过数据流量。"</string>
@@ -3049,6 +3059,8 @@
     <string name="keywords_font_size" msgid="1643198841815006447">"文字大小, 大字版, 大字体, 大文字, 弱视, 放大文字, 字体放大工具, 字体放大, text size, large print, large font, large text, low vision, make text bigger, font enlarger, font enlargement"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"氛围屏保始终保持开启状态, AOD, always on ambient display, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"NFC, 标签, tag, 读取器, reader"</string>
+    <!-- no translation found for keywords_keyboard_vibration (6485149510591654697) -->
+    <skip />
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"音量、振动、勿扰"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"媒体音量"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"投放音量"</string>
@@ -3355,6 +3367,17 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"此应用不支持增强型设置"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"更多设置"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"您可以在此应用中使用更多设置"</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"通知音量渐降"</string>
+    <string name="notification_polite_all_apps" msgid="1118651561594250059">"为所有通知应用音量渐降"</string>
+    <string name="notification_polite_all_apps_summary" msgid="540268373207498126">"当您从同一应用连续收到很多通知时，系统会逐渐降低通知音量"</string>
+    <string name="notification_polite_conversations" msgid="8197695136727245741">"为对话应用音量渐降"</string>
+    <string name="notification_polite_conversations_summary" msgid="2677141765664359994">"当您在短时间内从同一聊天对话收到很多消息时，系统会逐渐降低通知音量"</string>
+    <string name="notification_polite_disabled" msgid="1378078021594282842">"不使用通知音量渐降功能"</string>
+    <string name="notification_polite_disabled_summary" msgid="1145341260283746936">"无论您从同一应用连续收到多少通知，系统会都不降低通知音量"</string>
+    <string name="notification_polite_vibrate_unlocked" msgid="6142573851761357903">"解锁时振动"</string>
+    <string name="notification_polite_vibrate_unlocked_summary" msgid="1678472892282874459">"屏幕解锁时仅振动"</string>
+    <string name="notification_polite_work" msgid="8823596456640216391">"应用于工作资料"</string>
+    <string name="notification_polite_work_summary" msgid="8260947839104352075">"将个人资料中的通知音量渐降设置应用于工作资料"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR 助手服务"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"没有任何已安装的应用请求以 VR 助手服务的形式运行。"</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"允许<xliff:g id="SERVICE">%1$s</xliff:g>访问 VR 服务吗？"</string>
@@ -4227,8 +4250,8 @@
     <!-- no translation found for graphics_driver_app_preference_values:1 (485288770206606512) -->
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
     <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
-    <string name="enable_angle_as_system_driver" msgid="4648827560023949786">"实验性功能：启用 ANGLE"</string>
-    <string name="enable_angle_as_system_driver_summary" msgid="2170215556348477481">"警告：这会启用 ANGLE 作为默认 OpenGL ES 驱动程序。此功能目前处于实验阶段，可能与某些相机应用和视频应用不兼容。"</string>
+    <string name="enable_angle_as_system_driver" msgid="4648827560023949786">"实验功能：启用 ANGLE"</string>
+    <string name="enable_angle_as_system_driver_summary" msgid="2170215556348477481">"警告：启用 ANGLE 作为默认 OpenGL ES 驱动程序。此功能目前处于实验阶段，可能与某些相机和视频应用不兼容。"</string>
     <string name="reboot_dialog_enable_angle_as_system_driver" msgid="2619263039763150810">"必须重新启动，才能更改系统 OpenGL ES 驱动程序"</string>
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"应用兼容性变更"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"在应用兼容性变更之间切换"</string>
@@ -4631,7 +4654,7 @@
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"使用“图形驱动程序偏好设置”"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"使用“护眼模式”"</string>
     <string name="nfc_main_switch_title" msgid="6295839988954817432">"使用 NFC"</string>
-    <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"使用“自适应亮度”"</string>
+    <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"使用自适应亮度"</string>
     <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"使用“WLAN 通话”"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"查看所有应用"</string>
     <string name="smart_forwarding_title" msgid="8368634861971949799">"智能转接"</string>
@@ -4857,4 +4880,16 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"您安装的应用可以查看您的设备名称。此外，当您连接到蓝牙设备、连接到 WLAN 网络或设置 WLAN 热点时，其他人可能也会看到您的设备名称。"</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"语法性别"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"选择语法性别"</string>
+    <!-- no translation found for content_protection_preference_title (5069260032659193074) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_summary (2252393849408445391) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_user_consent_switch_title (60088482227901638) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_user_consent_work_profile_switch_title (2868495870224174097) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_subpage_summary (7707255571476950976) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_subpage_info (6010628258453929862) -->
+    <skip />
 </resources>
