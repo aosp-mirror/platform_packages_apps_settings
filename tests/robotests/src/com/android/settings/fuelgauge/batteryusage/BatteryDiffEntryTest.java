@@ -62,6 +62,8 @@ public final class BatteryDiffEntryTest {
     private static final int UNINSTALLED_UID = 101;
     private static final String PACKAGE_NAME = "com.android.testing";
     private static final String UNINSTALLED_PACKAGE_NAME = "com.android.testing.uninstalled";
+    private static final String UID_ZERO_PACKAGE_NAME = "com.android.testing.uid.zero";
+
 
     private Context mContext;
 
@@ -89,6 +91,9 @@ public final class BatteryDiffEntryTest {
         doReturn(BatteryUtils.UID_NULL)
                 .when(mMockPackageManager)
                 .getPackageUid(UNINSTALLED_PACKAGE_NAME, PackageManager.GET_META_DATA);
+        doReturn(BatteryUtils.UID_ZERO)
+                .when(mMockPackageManager)
+                .getPackageUid(UID_ZERO_PACKAGE_NAME, PackageManager.GET_META_DATA);
         BatteryDiffEntry.clearCache();
     }
 
@@ -435,6 +440,18 @@ public final class BatteryDiffEntryTest {
         final ContentValues values =
                 getContentValuesWithType(ConvertUtils.CONSUMER_TYPE_UID_BATTERY);
         values.put(BatteryHistEntry.KEY_UID, UID);
+        values.put(BatteryHistEntry.KEY_PACKAGE_NAME, PACKAGE_NAME);
+        final BatteryDiffEntry entry = createBatteryDiffEntry(10, new BatteryHistEntry(values));
+
+        assertThat(entry.isSystemEntry()).isFalse();
+        assertThat(entry.isUninstalledEntry()).isFalse();
+    }
+
+    @Test
+    public void testIsUninstalledEntry_uidZero_returnFalse() throws Exception {
+        final ContentValues values =
+                getContentValuesWithType(ConvertUtils.CONSUMER_TYPE_UID_BATTERY);
+        values.put(BatteryHistEntry.KEY_UID, BatteryUtils.UID_ZERO);
         values.put(BatteryHistEntry.KEY_PACKAGE_NAME, PACKAGE_NAME);
         final BatteryDiffEntry entry = createBatteryDiffEntry(10, new BatteryHistEntry(values));
 

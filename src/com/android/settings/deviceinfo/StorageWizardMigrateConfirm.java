@@ -30,6 +30,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockSettingsHelper;
@@ -97,10 +98,19 @@ public class StorageWizardMigrateConfirm extends StorageWizardBase {
     @Override
     public void onNavigateNext(View view) {
         // Ensure that all users are unlocked so that we can move their data
+        final LockPatternUtils lpu = new LockPatternUtils(this);
         if (StorageManager.isFileEncrypted()) {
             for (UserInfo user : getSystemService(UserManager.class).getUsers()) {
-                if (!StorageManager.isUserKeyUnlocked(user.id)) {
-                    Log.d(TAG, "User " + user.id + " is currently locked; requesting unlock");
+                if (StorageManager.isUserKeyUnlocked(user.id)) {
+                    continue;
+                }
+                if (!lpu.isSecure(user.id)) {
+                    Log.d(TAG, "Unsecured user " + user.id + " is currently locked; attempting "
+                            + "automatic unlock");
+                    lpu.unlockUserKeyIfUnsecured(user.id);
+                } else {
+                    Log.d(TAG, "Secured user " + user.id + " is currently locked; requesting "
+                            + "manual unlock");
                     final CharSequence description = TextUtils.expandTemplate(
                             getText(R.string.storage_wizard_move_unlock), user.name);
                     final ChooseLockSettingsHelper.Builder builder =

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 The Android Open Source Project
+ * Copyright (C) 2023 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,6 +46,7 @@ import android.telephony.ServiceState;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.ListPreference;
 import androidx.preference.PreferenceManager;
@@ -64,6 +65,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.Collections;
+
 @RunWith(AndroidJUnit4.class)
 public class EnabledNetworkModePreferenceControllerTest {
     private static final int SUB_ID = 2;
@@ -80,6 +83,8 @@ public class EnabledNetworkModePreferenceControllerTest {
     private CarrierConfigCache mCarrierConfigCache;
     @Mock
     private ServiceState mServiceState;
+    @Mock
+    private FragmentManager mFragmentManager;
 
     private PersistableBundle mPersistableBundle;
     private EnabledNetworkModePreferenceController mController;
@@ -111,7 +116,8 @@ public class EnabledNetworkModePreferenceControllerTest {
         mController = new EnabledNetworkModePreferenceController(mContext, KEY);
         mockAllowedNetworkTypes(ALLOWED_ALL_NETWORK_TYPE);
         mockAccessFamily(TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA);
-        mController.init(SUB_ID);
+        when(mFragmentManager.getFragments()).thenReturn(Collections.emptyList());
+        mController.init(SUB_ID, mFragmentManager);
         mPreference.setKey(mController.getPreferenceKey());
     }
 
@@ -205,7 +211,7 @@ public class EnabledNetworkModePreferenceControllerTest {
     public void updateState_5gWorldPhone_GlobalHasNr() {
         mockAllowedNetworkTypes(ALLOWED_ALL_NETWORK_TYPE);
         mockAccessFamily(TelephonyManager.NETWORK_MODE_NR_LTE_CDMA_EVDO_GSM_WCDMA);
-        mController.init(SUB_ID);
+        mController.init(SUB_ID, mFragmentManager);
         mPersistableBundle.putBoolean(CarrierConfigManager.KEY_WORLD_MODE_ENABLED_BOOL, true);
 
         mController.updateState(mPreference);
@@ -221,7 +227,7 @@ public class EnabledNetworkModePreferenceControllerTest {
         mockAllowedNetworkTypes(ALLOWED_ALL_NETWORK_TYPE);
         mockEnabledNetworkMode(TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA_GSM_WCDMA);
         mockAccessFamily(TelephonyManager.NETWORK_MODE_NR_LTE_TDSCDMA_GSM_WCDMA);
-        mController.init(SUB_ID);
+        mController.init(SUB_ID, mFragmentManager);
 
         // NETWORK_MODE_NR_LTE_TDSCDMA_GSM_WCDMA = NR | LTE | RAF_TD_SCDMA | GSM | WCDMA
         when(mTelephonyManager.getAllowedNetworkTypesForReason(
@@ -241,7 +247,7 @@ public class EnabledNetworkModePreferenceControllerTest {
         mockEnabledNetworkMode(TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA_GSM_WCDMA);
         mockAccessFamily(TelephonyManager.NETWORK_MODE_NR_LTE_TDSCDMA_GSM_WCDMA);
         mockAllowedNetworkTypes(DISABLED_5G_NETWORK_TYPE);
-        mController.init(SUB_ID);
+        mController.init(SUB_ID, mFragmentManager);
 
         // NETWORK_MODE_NR_LTE_TDSCDMA_GSM_WCDMA = NR | LTE | RAF_TD_SCDMA | GSM | WCDMA
         when(mTelephonyManager.getAllowedNetworkTypesForReason(
@@ -261,7 +267,7 @@ public class EnabledNetworkModePreferenceControllerTest {
         mockEnabledNetworkMode(TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA_GSM_WCDMA);
         mockAccessFamily(TelephonyManager.NETWORK_MODE_NR_LTE_TDSCDMA_GSM_WCDMA);
         mockAllowedNetworkTypes(DISABLED_5G_NETWORK_TYPE);
-        mController.init(SUB_ID);
+        mController.init(SUB_ID, mFragmentManager);
 
         // NETWORK_MODE_NR_LTE_TDSCDMA_GSM_WCDMA = NR | LTE | RAF_TD_SCDMA | GSM | WCDMA
         when(mTelephonyManager.getAllowedNetworkTypesForReason(
@@ -281,7 +287,7 @@ public class EnabledNetworkModePreferenceControllerTest {
         mockAccessFamily(TelephonyManager.NETWORK_MODE_NR_LTE_CDMA_EVDO_GSM_WCDMA);
         mockAllowedNetworkTypes(DISABLED_5G_NETWORK_TYPE);
 
-        mController.init(SUB_ID);
+        mController.init(SUB_ID, mFragmentManager);
 
         // NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA = LTE | CDMA | EVDO | GSM | WCDMA
         when(mTelephonyManager.getAllowedNetworkTypesForReason(
@@ -304,7 +310,7 @@ public class EnabledNetworkModePreferenceControllerTest {
     public void updateState_GlobalDisAllowed5g_GlobalWithoutNR() {
         mockAccessFamily(TelephonyManager.NETWORK_MODE_NR_LTE_CDMA_EVDO_GSM_WCDMA);
         mockAllowedNetworkTypes(DISABLED_5G_NETWORK_TYPE);
-        mController.init(SUB_ID);
+        mController.init(SUB_ID, mFragmentManager);
         mPersistableBundle.putBoolean(CarrierConfigManager.KEY_WORLD_MODE_ENABLED_BOOL, true);
 
         // NETWORK_MODE_NR_LTE_CDMA_EVDO_GSM_WCDMA = NR | LTE | CDMA | EVDO | GSM | WCDMA
@@ -324,7 +330,7 @@ public class EnabledNetworkModePreferenceControllerTest {
     public void updateState_GlobalDisAllowed5g_SelectOnGlobal() {
         mockAccessFamily(TelephonyManager.NETWORK_MODE_NR_LTE_CDMA_EVDO_GSM_WCDMA);
         mockAllowedNetworkTypes(DISABLED_5G_NETWORK_TYPE);
-        mController.init(SUB_ID);
+        mController.init(SUB_ID, mFragmentManager);
         mPersistableBundle.putBoolean(CarrierConfigManager.KEY_WORLD_MODE_ENABLED_BOOL, true);
 
         // NETWORK_MODE_NR_LTE_CDMA_EVDO_GSM_WCDMA = NR | LTE | CDMA | EVDO | GSM | WCDMA
@@ -497,7 +503,7 @@ public class EnabledNetworkModePreferenceControllerTest {
             mPersistableBundle.putBoolean(CarrierConfigManager.KEY_PREFER_2G_BOOL, true);
             mPersistableBundle.putBoolean(CarrierConfigManager.KEY_LTE_ENABLED_BOOL, true);
         }
-        mController.init(SUB_ID);
+        mController.init(SUB_ID, mFragmentManager);
     }
 
     private void mockAllowedNetworkTypes(long allowedNetworkType) {

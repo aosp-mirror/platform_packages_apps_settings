@@ -74,6 +74,7 @@ import java.util.List;
  * Utils for battery operation
  */
 public class BatteryUtils {
+    public static final int UID_ZERO = 0;
     public static final int UID_NULL = -1;
     public static final int SDK_NULL = -1;
     /** Special UID value for data usage by removed apps. */

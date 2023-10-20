@@ -19,26 +19,19 @@ package com.android.settings.network;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.UserManager;
-import android.provider.SearchIndexableResource;
 
-import androidx.annotation.VisibleForTesting;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class MobileNetworkListFragment extends DashboardFragment {
     private static final String LOG_TAG = "NetworkListFragment";
 
-    static final String KEY_PREFERENCE_CATEGORY_SIM = "provider_model_sim_category";
     private static final String KEY_ADD_SIM = "add_sim";
 
     @Override
@@ -68,34 +61,8 @@ public class MobileNetworkListFragment extends DashboardFragment {
         return SettingsEnums.MOBILE_NETWORK_LIST;
     }
 
-    @Override
-    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        if (!SubscriptionUtil.isSimHardwareVisible(getContext())) {
-            finish();
-            return controllers;
-        }
-
-        NetworkProviderSimsCategoryController simCategoryPrefCtrl =
-                new NetworkProviderSimsCategoryController(context, KEY_PREFERENCE_CATEGORY_SIM,
-                        getSettingsLifecycle(), this);
-        controllers.add(simCategoryPrefCtrl);
-
-        return controllers;
-    }
-
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
-                        boolean enabled) {
-                    final ArrayList<SearchIndexableResource> result = new ArrayList<>();
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.network_provider_sims_list;
-                    result.add(sir);
-                    return result;
-                }
+            new BaseSearchIndexProvider(R.xml.network_provider_sims_list) {
 
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
