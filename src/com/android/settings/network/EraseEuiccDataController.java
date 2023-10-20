@@ -18,10 +18,12 @@ package com.android.settings.network;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.os.UserManager;
 import android.text.TextUtils;
 
 import androidx.preference.Preference;
 
+import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.network.telephony.MobileNetworkUtils;
@@ -33,8 +35,11 @@ import com.android.settings.system.ResetDashboardFragment;
 public class EraseEuiccDataController extends BasePreferenceController {
     private ResetDashboardFragment mHostFragment;
 
+    private final UserManager mUm;
+
     public EraseEuiccDataController(Context context, String preferenceKey) {
         super(context, preferenceKey);
+        mUm = context.getSystemService(UserManager.class);
     }
 
     public void setFragment(ResetDashboardFragment hostFragment) {
@@ -52,10 +57,12 @@ public class EraseEuiccDataController extends BasePreferenceController {
 
     @Override
     public int getAvailabilityStatus() {
-        return SubscriptionUtil.isSimHardwareVisible(mContext) &&
-                (!MobileNetworkUtils.isMobileNetworkUserRestricted(mContext)) &&
-                mContext.getPackageManager().hasSystemFeature(
-                PackageManager.FEATURE_TELEPHONY_EUICC) ? AVAILABLE_UNSEARCHABLE
-                : UNSUPPORTED_ON_DEVICE;
+        boolean isAllowedUser = (mUm.isAdminUser() || Utils.isDemoUser(mContext))
+                && !MobileNetworkUtils.isMobileNetworkUserRestricted(mContext);
+        boolean hasEuiccFeature = mContext.getPackageManager().hasSystemFeature(
+                PackageManager.FEATURE_TELEPHONY_EUICC);
+        return SubscriptionUtil.isSimHardwareVisible(mContext)
+                && isAllowedUser
+                && hasEuiccFeature ? AVAILABLE_UNSEARCHABLE : UNSUPPORTED_ON_DEVICE;
     }
 }
