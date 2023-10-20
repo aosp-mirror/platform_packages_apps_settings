@@ -6,3 +6,10 @@ flag {
   description: "Gates whether to enable subsequent pair Settings integration."
   bug: "299405720"
 }
+
+flag {
+  name: "enable_le_audio_sharing"
+  namespace: "pixel_cross_device_control"
+  description: "Gates whether to enable LE audio sharing"
+  bug: "305620450"
+}
