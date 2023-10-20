@@ -283,7 +283,9 @@ public class BatteryDiffEntry {
     /** Whether the current BatteryDiffEntry is uninstalled app or not. */
     public boolean isUninstalledEntry() {
         final String packageName = getPackageName();
-        if (TextUtils.isEmpty(packageName) || isSystemEntry()) {
+        if (TextUtils.isEmpty(packageName) || isSystemEntry()
+                // Some special package UIDs could be 0. Those packages are not installed by users.
+                || mUid == BatteryUtils.UID_ZERO) {
             return false;
         }
 
