@@ -46,11 +46,16 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.spaprivileged.template.app.AppListItemKt;
+import com.android.settingslib.spaprivileged.template.app.AppListPageKt;
 import com.android.settingslib.widget.LottieColorUtils;
 
 import com.airbnb.lottie.LottieAnimationView;
 
-
+/**
+ * @deprecated Will be removed, use {@link AppListItemKt} {@link AppListPageKt} instead.
+ */
+@Deprecated(forRemoval = true)
 public class ApplicationViewHolder extends RecyclerView.ViewHolder {
 
     @VisibleForTesting
@@ -74,7 +79,7 @@ public class ApplicationViewHolder extends RecyclerView.ViewHolder {
         mAppIcon = itemView.findViewById(android.R.id.icon);
         mSummary = itemView.findViewById(android.R.id.summary);
         mDisabled = itemView.findViewById(com.android.settingslib.widget.preference.app.R.id.appendix);
-        mSwitch = itemView.findViewById(R.id.switchWidget);
+        mSwitch = itemView.findViewById(com.android.settingslib.R.id.switchWidget);
         mWidgetContainer = itemView.findViewById(android.R.id.widget_frame);
         mAddIcon = itemView.findViewById(R.id.add_preference_widget);
         mProgressBar = itemView.findViewById(R.id.progressBar_cyclic);
@@ -94,8 +99,9 @@ public class ApplicationViewHolder extends RecyclerView.ViewHolder {
                     LayoutInflater.from(parent.getContext())
                             .inflate(R.layout.preference_widget_add_progressbar, widgetFrame, true);
                 } else {
-                    LayoutInflater.from(parent.getContext())
-                            .inflate(R.layout.preference_widget_primary_switch, widgetFrame, true);
+                    LayoutInflater.from(parent.getContext()).inflate(
+                            com.android.settingslib.R.layout.preference_widget_primary_switch,
+                            widgetFrame, true);
                 }
                 View divider = LayoutInflater.from(parent.getContext()).inflate(
                         com.android.settingslib.widget.preference.twotarget.R.layout.preference_two_target_divider,
