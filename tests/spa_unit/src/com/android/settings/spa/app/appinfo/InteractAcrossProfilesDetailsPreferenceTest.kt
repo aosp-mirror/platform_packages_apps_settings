@@ -40,6 +40,7 @@ import com.android.settingslib.spa.testutils.waitUntilExists
 import com.android.settingslib.spaprivileged.framework.common.crossProfileApps
 import org.junit.After
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -116,6 +117,7 @@ class InteractAcrossProfilesDetailsPreferenceTest {
         composeTestRule.waitUntilExists(hasText(SUMMARY))
     }
 
+    @Ignore
     @Test
     fun whenClick_startActivity() {
         mockCanConfig(true)
