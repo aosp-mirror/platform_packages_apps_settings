@@ -113,6 +113,10 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Inaktivera Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Inaktiverar Bluetooth LE Audio-funktionen om enheten har stöd för funktioner för LE Audio-maskinvara."</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Visa reglage för LE Audio i Enhetsinfo"</string>
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist (7392319491894565552) -->
+    <skip />
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist_summary (8999245286359656738) -->
+    <skip />
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Medieenheter"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Telefonenheter"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Andra enheter"</string>
@@ -1317,6 +1321,8 @@
     <string name="carrier_enabled_summaryOn" msgid="5212067975273903381">"APN aktiverat"</string>
     <string name="carrier_enabled_summaryOff" msgid="8541959867953738521">"APN inaktiverat"</string>
     <string name="bearer" msgid="3231443241639159358">"Bearer"</string>
+    <string name="network_type" msgid="748590707422733595">"Nätverkstyp"</string>
+    <string name="network_type_unspecified" msgid="7756349656194518725">"Ej angiven"</string>
     <string name="mvno_type" msgid="4734654257494971247">"MVNO-typ"</string>
     <string name="mvno_match_data" msgid="5213193073684321156">"MVNO-värde"</string>
     <string name="menu_delete" msgid="9199740901584348273">"Ta bort APN"</string>
@@ -2041,6 +2047,8 @@
     <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Använd vibration och haptik"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Vibration för alarm"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Vibration för medieinnehåll"</string>
+    <!-- no translation found for accessibility_keyboard_vibration_title (7559967730626765441) -->
+    <skip />
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Vibration för ringsignal"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Vibration för aviseringar"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Tryckåterkoppling"</string>
@@ -2348,6 +2356,7 @@
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_since_last_full_charge" msgid="3488425008925924769">"sedan senaste fulladdningen"</string>
     <string name="battery_usage_system_apps" msgid="8659537819731575299">"Systemappar"</string>
+    <string name="battery_usage_uninstalled_apps" msgid="8170405012552803662">"Avinstallerade appar"</string>
     <string name="battery_usage_others" msgid="311793281613609986">"Annat"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Beräknad återstående tid"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"Tills fulladdad"</string>
@@ -2607,6 +2616,7 @@
     <string name="data_usage_app_summary_title" msgid="4933742247928064178">"Mobildata och wifi"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Autosynka personuppgifter"</string>
     <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Autosynka arbetsuppgifter"</string>
+    <string name="account_settings_menu_auto_sync_private" msgid="2315144351530596228">"Synka privat data automatiskt"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"Ändra cykel…"</string>
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"Dag i månaden för att återställa dataanvändningscykeln:"</string>
     <string name="data_usage_empty" msgid="5619908658853726866">"Inga data användes i appar under den här perioden."</string>
@@ -3049,6 +3059,8 @@
     <string name="keywords_font_size" msgid="1643198841815006447">"textstorlek, stora tecken, stort teckensnitt, stor text, nedsatt syn, göra texten större, teckenförstoring, förstora teckensnitt"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"aktiv låsskärm alltid på, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, etikett, läsare"</string>
+    <!-- no translation found for keywords_keyboard_vibration (6485149510591654697) -->
+    <skip />
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Volym, vibrera, stör ej"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Medievolym"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Castvolym"</string>
@@ -3355,6 +3367,17 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"Den här appen har inte stöd för avancerade inställningar"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"Fler inställningar"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"Fler inställningar är tillgängliga i appen"</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"Gradvis sänkning – aviseringar"</string>
+    <string name="notification_polite_all_apps" msgid="1118651561594250059">"Använd gradvis sänkning för alla aviseringar"</string>
+    <string name="notification_polite_all_apps_summary" msgid="540268373207498126">"Sänker gradvis volymen för aviseringar när du får många aviseringar i rad från samma app"</string>
+    <string name="notification_polite_conversations" msgid="8197695136727245741">"Använd gradvis sänkning för alla konversationer"</string>
+    <string name="notification_polite_conversations_summary" msgid="2677141765664359994">"Sänker gradvis volymen för aviseringar när du får många meddelanden i rad från samma chatt"</string>
+    <string name="notification_polite_disabled" msgid="1378078021594282842">"Använd inte gradvis sänkning för aviseringar"</string>
+    <string name="notification_polite_disabled_summary" msgid="1145341260283746936">"Sänk aldrig aviseringsvolymen, oavsett hur många aviseringar i rad du får från samma app"</string>
+    <string name="notification_polite_vibrate_unlocked" msgid="6142573851761357903">"Vibrera när enheten är upplåst"</string>
+    <string name="notification_polite_vibrate_unlocked_summary" msgid="1678472892282874459">"Vibrera endast när skärmen är upplåst"</string>
+    <string name="notification_polite_work" msgid="8823596456640216391">"Använd för jobbprofiler"</string>
+    <string name="notification_polite_work_summary" msgid="8260947839104352075">"Använd inställningarna för gradvis sänkning för aviseringar från den privata profilen i jobbprofilen"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Hjälptjänster för VR"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Inga installerade appar har begärt att få köras som hjälptjänster för VR."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Vill du tillåta att tjänsten för VR får tillgång till <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -4857,4 +4880,16 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Enhetens namn är synligt för appar du har installerat. Det kan också vara synligt för andra personer när du ansluter till Bluetooth-enheter eller ett wifi-nätverk, eller om du skapar en wifi-surfzon."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Genus"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Välj genus"</string>
+    <!-- no translation found for content_protection_preference_title (5069260032659193074) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_summary (2252393849408445391) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_user_consent_switch_title (60088482227901638) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_user_consent_work_profile_switch_title (2868495870224174097) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_subpage_summary (7707255571476950976) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_subpage_info (6010628258453929862) -->
+    <skip />
 </resources>

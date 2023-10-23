@@ -113,6 +113,10 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Bluetooth LE аудиог идэвхгүй болгох"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Хэрэв төхөөрөмж LE аудио техник хангамжийн чадамжийг дэмждэг бол Bluetooth LE аудио онцлогийг идэвхгүй болгоно."</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Төхөөрөмжийн дэлгэрэнгүйд LE аудионы асаах/унтраахыг харуул"</string>
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist (7392319491894565552) -->
+    <skip />
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist_summary (8999245286359656738) -->
+    <skip />
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Медиа төхөөрөмжүүд"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Дуудлага хийх төхөөрөмжүүд"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Бусад төхөөрөмж"</string>
@@ -1317,6 +1321,8 @@
     <string name="carrier_enabled_summaryOn" msgid="5212067975273903381">"APN идэвхжүүлсэн"</string>
     <string name="carrier_enabled_summaryOff" msgid="8541959867953738521">"APN идэвхгүйжүүлсэн"</string>
     <string name="bearer" msgid="3231443241639159358">"Тулгуур"</string>
+    <string name="network_type" msgid="748590707422733595">"Сүлжээний төрөл"</string>
+    <string name="network_type_unspecified" msgid="7756349656194518725">"Тодорхойлоогүй"</string>
     <string name="mvno_type" msgid="4734654257494971247">"MVNO төрөл"</string>
     <string name="mvno_match_data" msgid="5213193073684321156">"MVNO утга"</string>
     <string name="menu_delete" msgid="9199740901584348273">"APN устгах"</string>
@@ -2041,6 +2047,8 @@
     <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Чичиргээ болон хүртэхүйг ашиглах"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Сэрүүлгийн чичиргээ"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Медиагийн чичиргээ"</string>
+    <!-- no translation found for accessibility_keyboard_vibration_title (7559967730626765441) -->
+    <skip />
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Хонхны чичиргээ"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Мэдэгдлийн чичиргээ"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Хүрэхэд хариу чичрэх"</string>
@@ -2348,6 +2356,7 @@
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_since_last_full_charge" msgid="3488425008925924769">"сүүлд бүрэн цэнэглэснээс хойш"</string>
     <string name="battery_usage_system_apps" msgid="8659537819731575299">"Системийн аппууд"</string>
+    <string name="battery_usage_uninstalled_apps" msgid="8170405012552803662">"Устгасан аппууд"</string>
     <string name="battery_usage_others" msgid="311793281613609986">"Бусад"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Барагцаалсан үлдсэн хугацаа"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"Бүрэн цэнэглэх хүртэл"</string>
@@ -2607,6 +2616,7 @@
     <string name="data_usage_app_summary_title" msgid="4933742247928064178">"Мобайл дата ба Wi‑Fi"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Хувийн өгөгдлийг автоматаар синк хийх"</string>
     <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Ажлын өгөгдлийг автоматаар синк хийх"</string>
+    <string name="account_settings_menu_auto_sync_private" msgid="2315144351530596228">"Хувийн өгөгдлийг автоматаар синк хийх"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"Циклийг өөрчлөх…"</string>
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"Дата ашиглалтын циклийг шинэчлэх сарын өдөр:"</string>
     <string name="data_usage_empty" msgid="5619908658853726866">"Энэ хугацаанд дата ашигласан апп байхгүй."</string>
@@ -3049,6 +3059,8 @@
     <string name="keywords_font_size" msgid="1643198841815006447">"текстийн хэмжээ, том хэвлэл, том фонт, том текст, сул хараа, текстийг илүү том болгох, фонт томруулагч, фонт томруулалт"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"дэлгэц амраагчид үргэлж, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, шошго, уншигч"</string>
+    <!-- no translation found for keywords_keyboard_vibration (6485149510591654697) -->
+    <skip />
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Түвшин, чичиргээ, Бүү саад бол"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Медиа дууны түвшин"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Дамжуулах түвшин"</string>
@@ -3355,6 +3367,17 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"Энэ апп нь сайжруулсан тохиргоог дэмждэггүй"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"Бусад тохиргоо"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"Энэ аппад бусад тохиргоо боломжтой"</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"Мэдэгдлийн хөргөлт"</string>
+    <string name="notification_polite_all_apps" msgid="1118651561594250059">"Бүх мэдэгдэлд хөргөлт хэрэгжүүлэх"</string>
+    <string name="notification_polite_all_apps_summary" msgid="540268373207498126">"Та нэг аппаас амжилттай олон мэдэгдэл авах үедээ мэдэгдлийн дууны түвшнийг аажмаар бууруулаарай"</string>
+    <string name="notification_polite_conversations" msgid="8197695136727245741">"Харилцан яриануудад хөргөлт хэрэгжүүлэх"</string>
+    <string name="notification_polite_conversations_summary" msgid="2677141765664359994">"Та нэг чатаас богино хугацаанд олон мессеж авах үедээ мэдэгдлийн дууны түвшнийг аажмаар бууруулаарай"</string>
+    <string name="notification_polite_disabled" msgid="1378078021594282842">"Мэдэгдлийн хөргөлтийг бүү ашигла"</string>
+    <string name="notification_polite_disabled_summary" msgid="1145341260283746936">"Нэг аппаас олон амжилттай мэдэгдэл авсан ч бай мэдэгдлийн дууны түвшнийг хэзээ ч бүү бууруул"</string>
+    <string name="notification_polite_vibrate_unlocked" msgid="6142573851761357903">"Түгжээг тайлсан үед чичрэх"</string>
+    <string name="notification_polite_vibrate_unlocked_summary" msgid="1678472892282874459">"Зөвхөн дэлгэцийн түгжээг тайлсан үед чичрэх"</string>
+    <string name="notification_polite_work" msgid="8823596456640216391">"Ажлын профайлуудад хэрэгжүүлэх"</string>
+    <string name="notification_polite_work_summary" msgid="8260947839104352075">"Хувийн профайлаасаа мэдэгдлийн хөргөлтийн тохиргоог ажлын профайлдаа хэрэгжүүлээрэй"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR туслагч үйлчилгээ"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Суулгасан апп-с VR туслагч үйлчилгээгээр ажиллах хүсэлт гаргаагүй байна."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"VR үйлчилгээг <xliff:g id="SERVICE">%1$s</xliff:g>-д хандахыг зөвшөөрөх үү?"</string>
@@ -4619,7 +4642,7 @@
     <string name="category_name_display_controls" msgid="7046581691184725216">"Дэлгэцийн бусад хяналт"</string>
     <string name="category_name_general" msgid="7737273712848115886">"Ерөнхий"</string>
     <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"Бараан загварыг ашиглах"</string>
-    <string name="bluetooth_main_switch_title" msgid="8409835540311309632">"Bluetooth-г ашиглах"</string>
+    <string name="bluetooth_main_switch_title" msgid="8409835540311309632">"Bluetooth ашиглах"</string>
     <string name="prevent_ringing_main_switch_title" msgid="4726252811262086643">"Хонх дуугаргахаас сэргийлэхийг ашиглах"</string>
     <string name="use_wifi_hotsopt_main_switch_title" msgid="3909731167290690539">"Wi-Fi сүлжээний цэгийг ашиглах"</string>
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Апп бэхлэхийг ашиглах"</string>
@@ -4857,4 +4880,16 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Таны төхөөрөмжийн нэр суулгасан аппуудад тань харагдана. Таныг Bluetooth төхөөрөмжүүд, Wi-Fi сүлжээнд холбогдох эсвэл Wi-Fi сүлжээний цэг тохируулах үед үүнийг мөн бусад хүн харж магадгүй."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Хэл зүйн хүйс"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Хэл зүйн хүйс сонгох"</string>
+    <!-- no translation found for content_protection_preference_title (5069260032659193074) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_summary (2252393849408445391) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_user_consent_switch_title (60088482227901638) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_user_consent_work_profile_switch_title (2868495870224174097) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_subpage_summary (7707255571476950976) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_subpage_info (6010628258453929862) -->
+    <skip />
 </resources>

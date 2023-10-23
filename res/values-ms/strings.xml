@@ -45,7 +45,7 @@
     <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"Sentiasa"</string>
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"Paparan depan dihidupkan semasa anda melipatkan peranti anda"</string>
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"Hanya permainan, video dan pelbagai lagi"</string>
-    <string name="selective_stay_awake_summary" msgid="9055967322921984543">"Paparan hadapan dihidupkan untuk apl yang menghentikan skrin anda daripada melahu"</string>
+    <string name="selective_stay_awake_summary" msgid="9055967322921984543">"Paparan depan dihidupkan untuk apl yang menghentikan skrin anda daripada melahu"</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"Jangan sekali-kali"</string>
     <string name="sleep_on_fold_summary" msgid="7737992842459588846">"Paparan depan dikunci semasa anda melipatkan peranti anda"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Gunakan autoputar"</string>
@@ -113,6 +113,10 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Lumpuhkan Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Melumpuhkan ciri Bluetooth LE Audio jika peranti menyokong keupayaan perkakasan LE Audio."</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Tunjukkan togol LE Audio pada Butiran Peranti"</string>
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist (7392319491894565552) -->
+    <skip />
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist_summary (8999245286359656738) -->
+    <skip />
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Peranti media"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Panggil peranti"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Peranti lain"</string>
@@ -1317,6 +1321,8 @@
     <string name="carrier_enabled_summaryOn" msgid="5212067975273903381">"APN didayakan"</string>
     <string name="carrier_enabled_summaryOff" msgid="8541959867953738521">"APN dilumpuhkan"</string>
     <string name="bearer" msgid="3231443241639159358">"Pembawa"</string>
+    <string name="network_type" msgid="748590707422733595">"Jenis rangkaian"</string>
+    <string name="network_type_unspecified" msgid="7756349656194518725">"Tidak dinyatakan"</string>
     <string name="mvno_type" msgid="4734654257494971247">"Jenis MVNO"</string>
     <string name="mvno_match_data" msgid="5213193073684321156">"Nilai MVNO"</string>
     <string name="menu_delete" msgid="9199740901584348273">"Padam APN"</string>
@@ -2041,6 +2047,8 @@
     <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Gunakan getaran &amp; haptik"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Getaran penggera"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Getaran media"</string>
+    <!-- no translation found for accessibility_keyboard_vibration_title (7559967730626765441) -->
+    <skip />
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Getaran deringan"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Getaran pemberitahuan"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Maklum balas sentuhan"</string>
@@ -2348,6 +2356,7 @@
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_since_last_full_charge" msgid="3488425008925924769">"sejak cas penuh terakhir"</string>
     <string name="battery_usage_system_apps" msgid="8659537819731575299">"Apl sistem"</string>
+    <string name="battery_usage_uninstalled_apps" msgid="8170405012552803662">"Apl yang dinyahpasang"</string>
     <string name="battery_usage_others" msgid="311793281613609986">"Lain-lain"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Anggaran baki masa"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"Sehingga dicas penuh"</string>
@@ -2607,6 +2616,7 @@
     <string name="data_usage_app_summary_title" msgid="4933742247928064178">"Data mudah alih &amp; Wi‑Fi"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Auto segerak data peribadi"</string>
     <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Auto segerak data kerja"</string>
+    <string name="account_settings_menu_auto_sync_private" msgid="2315144351530596228">"Autosegerakkan data peribadi"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"Tukar kitaran..."</string>
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"Hari dalam bulan untuk menetapkan semula kitaran penggunaan data:"</string>
     <string name="data_usage_empty" msgid="5619908658853726866">"Tiada aplikasi menggunakan data dalam tempoh ini."</string>
@@ -3049,6 +3059,8 @@
     <string name="keywords_font_size" msgid="1643198841815006447">"saiz teks, huruf cetak besar, fon besar, teks besar, rabun, jadikan teks lebih besar, besarkan teks, pembesaran fon"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"paparan ambien sentiasa hidup, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, tag, pembaca"</string>
+    <!-- no translation found for keywords_keyboard_vibration (6485149510591654697) -->
+    <skip />
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Kelantangan, getaran, Jangan Ganggu"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Kelantangan media"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Kelantangan penghantaran"</string>
@@ -3355,6 +3367,17 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"Apl ini tidak menyokong tetapan dipertingkatkan"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"Lagi tetapan"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"Lagi tetapan tersedia dalam apl ini"</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"Tempoh bertenang pemberitahuan"</string>
+    <string name="notification_polite_all_apps" msgid="1118651561594250059">"Gunakan tempoh bertenang pada semua pemberitahuan"</string>
+    <string name="notification_polite_all_apps_summary" msgid="540268373207498126">"Rendahkan kelantangan pemberitahuan secara berperingkat apabila anda menerima pemberitahuan daripada apl yang sama secara berturutan"</string>
+    <string name="notification_polite_conversations" msgid="8197695136727245741">"Gunakan tempoh bertenang pada perbualan"</string>
+    <string name="notification_polite_conversations_summary" msgid="2677141765664359994">"Rendahkan kelantangan pemberitahuan secara berperingkat apabila anda menerima mesej daripada sembang yang sama dalam tempoh masa yang singkat"</string>
+    <string name="notification_polite_disabled" msgid="1378078021594282842">"Jangan gunakan tempoh bertenang pemberitahuan"</string>
+    <string name="notification_polite_disabled_summary" msgid="1145341260283746936">"Jangan sesekali merendahkan kelantangan pemberitahuan tanpa mengira jumlah pemberitahuan daripada apl yang sama secara berturutan"</string>
+    <string name="notification_polite_vibrate_unlocked" msgid="6142573851761357903">"Bergetar apabila tidak berkunci"</string>
+    <string name="notification_polite_vibrate_unlocked_summary" msgid="1678472892282874459">"Hanya bergetar apabila skrin tidak berkunci"</string>
+    <string name="notification_polite_work" msgid="8823596456640216391">"Gunakan pada profil kerja"</string>
+    <string name="notification_polite_work_summary" msgid="8260947839104352075">"Gunakan tetapan tempoh bertenang pemberitahuan daripada profil peribadi anda pada profil kerja anda"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Perkhidmatan pembantu VR"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Tiada apl terpasang yang telah meminta untuk dijalankan sebagai perkhidmatan pembantu VR."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Benarkan akses perkhidmatan VR untuk <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -4857,4 +4880,10 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Nama peranti anda boleh dilihat oleh apl yang anda pasang. Nama peranti anda juga boleh dilihat oleh orang lain apabila anda menyambung kepada peranti Bluetooth, menyambung kepada rangkaian Wi-Fi atau menyediakan tempat liputan Wi-Fi."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Jantina tatabahasa"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Pilih Jantina tatabahasa"</string>
+    <string name="content_protection_preference_title" msgid="5069260032659193074">"Mengimbas untuk mengesan apl yang mengelirukan"</string>
+    <string name="content_protection_preference_summary" msgid="2252393849408445391">"Semak aktiviti apl untuk mengesan pancingan data"</string>
+    <string name="content_protection_preference_user_consent_switch_title" msgid="60088482227901638">"Gunakan pengimbasan"</string>
+    <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="2868495870224174097">"Gunakan pengimbasan untuk apl kerja"</string>
+    <string name="content_protection_preference_subpage_summary" msgid="7707255571476950976">"Pengimbasan dijalankan secara peribadi terus pada peranti anda, menyemak aktiviti apl untuk mengesan pancingan data atau gelagat mengelirukan yang lain. Jika aktiviti itu dikesan, sesetengah maklumat apl dihantar kepada Google Play Protect untuk mengesahkan ancaman dan memberikan amaran kepada pengguna apl."</string>
+    <string name="content_protection_preference_subpage_info" msgid="6010628258453929862">"Ciri ini merupakan ciri keselamatan dilindungi. Tiada maklumat peranti atau peribadi dikongsi dengan Google. \n\nPancingan data ialah percubaan untuk mencuri bukti kelayakan log masuk atau maklumat peribadi lain."</string>
 </resources>

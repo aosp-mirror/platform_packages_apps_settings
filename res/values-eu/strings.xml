@@ -113,6 +113,10 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Desgaitu Kontsumo txikiko Bluetooth bidezko audioa"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Kontsumo txikiko Bluetooth bidezko audioa darabilten hardware-gaitasunak gailuarekin bateragarriak badira, Kontsumo txikiko Bluetooth bidezko audioa eginbidea desgaitzen du."</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Erakutsi kontsumo txikiko Bluetooth bidezko audioaren etengailua gailuaren xehetasunetan"</string>
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist (7392319491894565552) -->
+    <skip />
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist_summary (8999245286359656738) -->
+    <skip />
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Multimedia-gailuak"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Deiak jaso eta egiteko gailuak"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Beste gailu batzuk"</string>
@@ -1057,7 +1061,7 @@
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Desaktibatuta"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Pantailaren zuri-balantzea"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
-    <string name="fold_lock_behavior_title" msgid="786228803694268449">"Jarraitu aplikazioak gailua tolestuta egon bitartean erabiltzen"</string>
+    <string name="fold_lock_behavior_title" msgid="786228803694268449">"Jarraitu aplikazioak erabiltzen gailua tolestuta egon bitartean"</string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="3627278682437562787">"Automatikoki igotzen du freskatze-abiadura 60 Hz-tik <xliff:g id="ID_1">%1$s</xliff:g> Hz-ra zenbait edukitarako. Bateria gehiago erabiltzen du."</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Erabili gehieneko freskatze-abiadura"</string>
@@ -1317,6 +1321,8 @@
     <string name="carrier_enabled_summaryOn" msgid="5212067975273903381">"APNa gaituta"</string>
     <string name="carrier_enabled_summaryOff" msgid="8541959867953738521">"APNa desgaituta"</string>
     <string name="bearer" msgid="3231443241639159358">"Jabea"</string>
+    <string name="network_type" msgid="748590707422733595">"Sare mota"</string>
+    <string name="network_type_unspecified" msgid="7756349656194518725">"Zehaztugabea"</string>
     <string name="mvno_type" msgid="4734654257494971247">"MVNO mota"</string>
     <string name="mvno_match_data" msgid="5213193073684321156">"MVNO balioa"</string>
     <string name="menu_delete" msgid="9199740901584348273">"Ezabatu APNa"</string>
@@ -2041,6 +2047,8 @@
     <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Erabili dardara eta teknologia haptikoa"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Alarmen dardara"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Multimedia-edukiaren dardara"</string>
+    <!-- no translation found for accessibility_keyboard_vibration_title (7559967730626765441) -->
+    <skip />
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Tonuaren dardara"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Jakinarazpenen dardara"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Ukipen bidezko interakzioa"</string>
@@ -2348,6 +2356,7 @@
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_since_last_full_charge" msgid="3488425008925924769">"guztiz kargatu zenetik"</string>
     <string name="battery_usage_system_apps" msgid="8659537819731575299">"Sistemaren aplikazioak"</string>
+    <string name="battery_usage_uninstalled_apps" msgid="8170405012552803662">"Desinstalatutako aplikazioak"</string>
     <string name="battery_usage_others" msgid="311793281613609986">"Beste batzuk"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Geratzen den denbora estimatua"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"guztiz kargatu arte"</string>
@@ -2607,6 +2616,7 @@
     <string name="data_usage_app_summary_title" msgid="4933742247928064178">"Datu- eta wifi-konexioa"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Sinkr. datu pertsonalak auto."</string>
     <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Sinkronizatu laneko datuak auto."</string>
+    <string name="account_settings_menu_auto_sync_private" msgid="2315144351530596228">"Sinkronizatu datu pribatuak automatikoki"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"Aldatu zikloa…"</string>
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"Datu-erabilera-zikloa berrezarri beharreko hilabeteko eguna:"</string>
     <string name="data_usage_empty" msgid="5619908658853726866">"Ez dago epean daturik erabili duen aplikaziorik."</string>
@@ -3049,6 +3059,8 @@
     <string name="keywords_font_size" msgid="1643198841815006447">"testuaren tamaina, letra-tipo handia, letra handia, testu handia, ikusmen txarra, handitu testua, testua handitzea, letra handitzea, letra handiagoa"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"girotzeko irudia beti aktibatuta, pantaila etengabe piztuta mantentzeko eginbidea"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc-a, etiketa, irakurgailua"</string>
+    <!-- no translation found for keywords_keyboard_vibration (6485149510591654697) -->
+    <skip />
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Bolumena, dardara, ez molestatzeko modua"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Multimedia-edukiaren bolumena"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Igorpenaren bolumena"</string>
@@ -3355,6 +3367,17 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"Aplikazio honek ez ditu onartzen ezarpen hobetuak"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"Ezarpen gehiago"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"Aplikazioaren barruan dituzu ezarpen gehiago"</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"Jakinarazpenen bolumena jaisteko aldia"</string>
+    <string name="notification_polite_all_apps" msgid="1118651561594250059">"Aplikatu bolumena jaisteko aldia jakinarazpen guztiei"</string>
+    <string name="notification_polite_all_apps_summary" msgid="540268373207498126">"Jaitsi jakinarazpenen bolumena pixkanaka, aplikazio berak jakinarazpen ugari jarraian bidaltzen dizkizunean"</string>
+    <string name="notification_polite_conversations" msgid="8197695136727245741">"Aplikatu bolumena jaisteko aldia elkarrizketa guztiei"</string>
+    <string name="notification_polite_conversations_summary" msgid="2677141765664359994">"Jaitsi jakinarazpenen bolumena pixkanaka, txat berean mezu ugari jarraian jasotzen dituzunean"</string>
+    <string name="notification_polite_disabled" msgid="1378078021594282842">"Ez aplikatu jakinarazpenen bolumena jaisteko aldia"</string>
+    <string name="notification_polite_disabled_summary" msgid="1145341260283746936">"Ez jaitsi jakinarazpenen bolumena inoiz, aplikazio berak jakinarazpen ugari jarraian bidatzen badizkit ere"</string>
+    <string name="notification_polite_vibrate_unlocked" msgid="6142573851761357903">"Egin dardara desblokeatuta dagoenean"</string>
+    <string name="notification_polite_vibrate_unlocked_summary" msgid="1678472892282874459">"Egin dardara pantaila desblokeatuta dagoenean soilik"</string>
+    <string name="notification_polite_work" msgid="8823596456640216391">"Aplikatu laneko profiletan"</string>
+    <string name="notification_polite_work_summary" msgid="8260947839104352075">"Aplikatu profil pertsonaleko jakinarazpenen bolumena jaisteko ezarpenak laneko profilean"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Errealitate birtualeko laguntza-zerbitzuak"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Ez dago errealitate birtualeko laguntza-zerbitzu gisa abiaraztea eskatu duen aplikaziorik instalatuta."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Errealitate birtualeko zerbitzuak erabiltzeko baimena eman nahi diozu <xliff:g id="SERVICE">%1$s</xliff:g> zerbitzuari?"</string>
@@ -4857,4 +4880,16 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Instalatu dituzun aplikazioek gailuaren izena ikus dezakete. Baliteke jendeak ere ikustea Bluetooth bidezko gailuetara edo wifi-sare batera konektatzean, edo wifi-gune bat konfiguratzean."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Genero gramatikala"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Hautatu genero gramatikala"</string>
+    <!-- no translation found for content_protection_preference_title (5069260032659193074) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_summary (2252393849408445391) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_user_consent_switch_title (60088482227901638) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_user_consent_work_profile_switch_title (2868495870224174097) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_subpage_summary (7707255571476950976) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_subpage_info (6010628258453929862) -->
+    <skip />
 </resources>

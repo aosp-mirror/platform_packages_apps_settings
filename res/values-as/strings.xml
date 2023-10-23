@@ -113,6 +113,10 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"ব্লুটুথ LE অডিঅ’ অক্ষম কৰক"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"ডিভাইচটোৱে LE অডিঅ’ হাৰ্ডৱেৰ ক্ষমতাসমূহ সমৰ্থন কৰিলে ই ব্লুটুথ LE অডিঅ’ সুবিধাসমূহ অক্ষম কৰে।"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"ডিভাইচৰ সবিশেষত LE অডিঅ’ৰ ট’গল দেখুৱাওক"</string>
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist (7392319491894565552) -->
+    <skip />
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist_summary (8999245286359656738) -->
+    <skip />
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"মিডিয়া ডিভাইচসমূহ"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"কল ডিভাইচসমূহ"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"অন্য ডিভাইচসমূহ"</string>
@@ -1057,7 +1061,7 @@
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"অফ হৈ আছে"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"শুভ্ৰতাৰ সমতা দেখুৱাওক"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
-    <string name="fold_lock_behavior_title" msgid="786228803694268449">"জপাই থোৱা অৱস্থান এপ্ ব্যৱহাৰ কৰি থাকক"</string>
+    <string name="fold_lock_behavior_title" msgid="786228803694268449">"জপাই থোৱা অৱস্থাত এপ্ ব্যৱহাৰ কৰি থাকক"</string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"মসৃণ ডিছপ্লে’"</string>
     <string name="peak_refresh_rate_summary" msgid="3627278682437562787">"কিছুমান সমলৰ বাবে ৰিফ্ৰেশ্বৰ হাৰ স্বয়ংক্ৰিয়ভাৱে ৬০ৰ পৰা <xliff:g id="ID_1">%1$s</xliff:g> হাৰ্টজলৈ বঢ়ায়। বেটাৰীৰ ব্যৱহাৰ বৃদ্ধি কৰে।"</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"সৰ্বাধিক ৰিফ্ৰেশ্বৰ হাৰ বলপূৰ্বকভাৱে প্ৰয়োগ কৰক"</string>
@@ -1317,6 +1321,8 @@
     <string name="carrier_enabled_summaryOn" msgid="5212067975273903381">"APN সক্ষম হৈছে"</string>
     <string name="carrier_enabled_summaryOff" msgid="8541959867953738521">"এপিএন অক্ষম কৰা হৈছে"</string>
     <string name="bearer" msgid="3231443241639159358">"বহনকাৰী"</string>
+    <string name="network_type" msgid="748590707422733595">"নেটৱৰ্কৰ প্ৰকাৰ"</string>
+    <string name="network_type_unspecified" msgid="7756349656194518725">"অনিৰ্দিষ্ট"</string>
     <string name="mvno_type" msgid="4734654257494971247">"MVNOৰ প্ৰকাৰ"</string>
     <string name="mvno_match_data" msgid="5213193073684321156">"এমভিএনঔ মান"</string>
     <string name="menu_delete" msgid="9199740901584348273">"এপিএন মচক"</string>
@@ -2041,6 +2047,8 @@
     <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"কম্পন আৰু হেপ্‌টিক ব্যৱহাৰ কৰক"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"এলাৰ্মৰ কম্পন"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"মিডিয়াৰ কম্পন"</string>
+    <!-- no translation found for accessibility_keyboard_vibration_title (7559967730626765441) -->
+    <skip />
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"ৰিং কম্পন"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"জাননীৰ কম্পন"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"স্পৰ্শৰ প্ৰতিক্ৰিয়া"</string>
@@ -2348,6 +2356,7 @@
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_since_last_full_charge" msgid="3488425008925924769">"অন্তিমবাৰ সম্পূৰ্ণৰূপে চাৰ্জ কৰাৰ পৰা"</string>
     <string name="battery_usage_system_apps" msgid="8659537819731575299">"ছিষ্টেম এপ্‌"</string>
+    <string name="battery_usage_uninstalled_apps" msgid="8170405012552803662">"আনইনষ্টল কৰা এপ্"</string>
     <string name="battery_usage_others" msgid="311793281613609986">"অন্য"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"বাকী থকা মোটামুটি সময়"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"সম্পূৰ্ণৰূপে চাৰ্জ নোহোৱা পৰ্যন্ত"</string>
@@ -2607,6 +2616,7 @@
     <string name="data_usage_app_summary_title" msgid="4933742247928064178">"ম’বাইল ডেটা আৰু ৱাই-ফাই"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"ব্যক্তিগত ডেটা স্বয়ং-ছিংক কৰক"</string>
     <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"কৰ্মস্থানৰ ডেটা স্বয়ং-ছিংক কৰক"</string>
+    <string name="account_settings_menu_auto_sync_private" msgid="2315144351530596228">"ব্যক্তিগত ডেটা স্বয়ং-ছিংক কৰক"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"চক্ৰ সলনি কৰক…"</string>
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"ডেটা চক্ৰ ৰিছেট কৰিবলৈ মাহৰ দিনটো:"</string>
     <string name="data_usage_empty" msgid="5619908658853726866">"এই সময় চোৱাত এটাও এপে ডেটা ব্যৱহাৰ কৰা নাছিল।"</string>
@@ -3049,6 +3059,8 @@
     <string name="keywords_font_size" msgid="1643198841815006447">"পাঠৰ আকাৰ, ডাঙৰ প্ৰিণ্ট, ডাঙৰ ফণ্ট, ডাঙৰ পাঠ, কম দৃষ্টিশক্তি, পাঠৰ আকাৰ ডাঙৰ কৰক, ফণ্ট প্ৰসাৰিত কৰোঁতা, ফণ্টৰ প্ৰসাৰণ"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"এম্বিয়েণ্ট ডিছপ্লে’ সদায় অন কৰি ৰাখক, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, টেগ, ৰীডাৰ"</string>
+    <!-- no translation found for keywords_keyboard_vibration (6485149510591654697) -->
+    <skip />
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"ভলিউম, কম্পন, অসুবিধা নিদিব"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"মিডিয়াৰ ভলিউম"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"ভলিউম কাষ্ট কৰক"</string>
@@ -3355,6 +3367,17 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"এই এপ্‌টোৱে উন্নত ছেটিং সমৰ্থন নকৰে"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"অধিক ছেটিং"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"এই এপ্‌টোৰ ভিতৰত অধিক ছেটিং উপলব্ধ"</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"জাননী কুলডাউন কৰা"</string>
+    <string name="notification_polite_all_apps" msgid="1118651561594250059">"আটাইবোৰ জাননীত কুলডাউন প্ৰয়োগ কৰক"</string>
+    <string name="notification_polite_all_apps_summary" msgid="540268373207498126">"আপুনি একেটা এপৰ পৰা ক্ৰমাগতভাৱে বহুতো জাননী পালে জাননীৰ ভলিউম পৰ্যায়ক্ৰমে কমাওক"</string>
+    <string name="notification_polite_conversations" msgid="8197695136727245741">"বাৰ্তালাপসমূহত কুলডাউন প্ৰয়োগ কৰক"</string>
+    <string name="notification_polite_conversations_summary" msgid="2677141765664359994">"আপুনি একেটা চাটৰ পৰা কম সময়ৰ ভিতৰতে বহুতো বাৰ্তা পালে জাননীৰ ভলিউম পৰ্যায়ক্ৰমে কমাওক"</string>
+    <string name="notification_polite_disabled" msgid="1378078021594282842">"জাননী কুলডাউন কৰাটো ব্যৱহাৰ নকৰিব"</string>
+    <string name="notification_polite_disabled_summary" msgid="1145341260283746936">"একেটা এপৰ পৰা যিমান জাননী ক্ৰমাগতভাৱে পালেও কেতিয়াও জাননীৰ ভলিউম নকমাব"</string>
+    <string name="notification_polite_vibrate_unlocked" msgid="6142573851761357903">"আনলক হৈ থকাৰ সময়ত কম্পন কৰক"</string>
+    <string name="notification_polite_vibrate_unlocked_summary" msgid="1678472892282874459">"কেৱল স্ক্ৰীনখন আনলক হৈ থাকিলেহে কম্পন কৰক"</string>
+    <string name="notification_polite_work" msgid="8823596456640216391">"কৰ্মস্থানৰ প্ৰ’ফাইলত প্ৰয়োগ কৰক"</string>
+    <string name="notification_polite_work_summary" msgid="8260947839104352075">"আপোনাৰ ব্যক্তিগত প্ৰ’ফাইলৰ পৰা আপোনাৰ কৰ্মস্থানৰ প্ৰ’ফাইলত জাননী কুলডাউন কৰাৰ ছেটিং প্ৰয়োগ কৰক"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"ভিআৰ সহায়ক সেৱা"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"ইনষ্টল কৰি থোৱা কোনো এপে ভিআৰ সহায়ক সেৱা হিচাপে চলাবলৈ অনুৰোধ কৰা নাই।"</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"VR সেৱাক <xliff:g id="SERVICE">%1$s</xliff:g>ৰ এক্সেছ দিবনে?"</string>
@@ -4857,4 +4880,10 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"আপোনাৰ ডিভাইচৰ নাম আপুনি ইনষ্টল কৰা এপত দেখা পোৱা যায়। আপুনি ব্লুটুথ ডিভাইচৰ সৈতে সংযোগ কৰিলে, ৱাই-ফাই নেটৱৰ্কৰ সৈতে সংযোগ কৰিলে অথবা ৱাই-ফাই হটস্পট ছেট আপ কৰিলে এইটো অন্য লোকেও দেখা পাব পাৰে।"</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"ব্যাকৰণ বিষয়ক লিংগ"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"ব্যাকৰণ বিষয়ক লিংগ বাছনি কৰক"</string>
+    <string name="content_protection_preference_title" msgid="5069260032659193074">"প্ৰতাৰণামূলক এপৰ বাবে স্কেন কৰি থকা হৈছে"</string>
+    <string name="content_protection_preference_summary" msgid="2252393849408445391">"ফিশ্বিঙৰ বাবে এপৰ কাৰ্যকলাপ পৰীক্ষা কৰক"</string>
+    <string name="content_protection_preference_user_consent_switch_title" msgid="60088482227901638">"স্কেন কৰাৰ সুবিধা ব্যৱহাৰ কৰক"</string>
+    <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="2868495870224174097">"কাম সম্পর্কীয় এপৰ বাবে স্কেন কৰাৰ সুবিধা ব্যৱহাৰ কৰক"</string>
+    <string name="content_protection_preference_subpage_summary" msgid="7707255571476950976">"ফিশ্বিং বা অন্য প্ৰতাৰণামূলক আচৰণৰ বাবে এপৰ কাৰ্যকলাপ পৰীক্ষা কৰি থাকিবলৈ আপোনাৰ ডিভাইচত ব্যক্তিগতভাৱে স্কেনিং চলি থাকে। যদি এইটো ধৰা পৰে, ভাবুকিটো নিশ্চিত কৰিবলৈ আৰু এপৰ ব্যৱহাৰকাৰীসকলক সতৰ্ক কৰিবলৈ কিছুমান এপৰ তথ্য Google Play Protectলৈ প্ৰেৰণ কৰা হয়।"</string>
+    <string name="content_protection_preference_subpage_info" msgid="6010628258453929862">"এইটো হৈছে এটা সুৰক্ষিত সুৰক্ষা সম্পৰ্কীয় সুবিধা। কোনো ডিভাইচ বা ব্যক্তিগত তথ্য Googleৰ সৈতে শ্বেয়াৰ কৰা নহয়। \n\nফিশ্বিং হৈছে ছাইন-ইন ক্ৰিডেনশ্বিয়েলসমূহ বা অন্য ব্যক্তিগত তথ্য চুৰি কৰাৰ এটা প্ৰয়াস।"</string>
 </resources>

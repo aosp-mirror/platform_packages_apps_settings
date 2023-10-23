@@ -113,6 +113,10 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Απενεργοποίηση Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Απενεργοποιεί τη λειτουργία Bluetooth LE Audio αν η συσκευή υποστηρίζει δυνατότητες εξοπλισμού LE Audio."</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Εναλλαγή LE Audio στις λεπτομ. συσκευής"</string>
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist (7392319491894565552) -->
+    <skip />
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist_summary (8999245286359656738) -->
+    <skip />
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Συσκευές μέσων"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Συσκευές κλήσεων"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Άλλες συσκευές"</string>
@@ -1317,6 +1321,8 @@
     <string name="carrier_enabled_summaryOn" msgid="5212067975273903381">"Το APN έχει ενεργοποιηθεί"</string>
     <string name="carrier_enabled_summaryOff" msgid="8541959867953738521">"Απενεργοποιημένο APN"</string>
     <string name="bearer" msgid="3231443241639159358">"Φορέας"</string>
+    <string name="network_type" msgid="748590707422733595">"Τύπος δικτύου"</string>
+    <string name="network_type_unspecified" msgid="7756349656194518725">"Δεν έχει καθοριστεί"</string>
     <string name="mvno_type" msgid="4734654257494971247">"Τύπος MVNO"</string>
     <string name="mvno_match_data" msgid="5213193073684321156">"Τιμή MVNO"</string>
     <string name="menu_delete" msgid="9199740901584348273">"Διαγραφή APN"</string>
@@ -2041,6 +2047,8 @@
     <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Χρήση δόνησης και απτικής λειτουργίας"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Δόνηση ξυπνητηριού"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Δόνηση μέσων"</string>
+    <!-- no translation found for accessibility_keyboard_vibration_title (7559967730626765441) -->
+    <skip />
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Δόνηση κλήσης"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Δόνηση ειδοποίησης"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Ανάδραση αφής"</string>
@@ -2348,6 +2356,7 @@
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_since_last_full_charge" msgid="3488425008925924769">"από την τελευταία πλήρη φόρτιση"</string>
     <string name="battery_usage_system_apps" msgid="8659537819731575299">"Εφαρμογές συστήματος"</string>
+    <string name="battery_usage_uninstalled_apps" msgid="8170405012552803662">"Απεγκατεστημένες εφαρμογές"</string>
     <string name="battery_usage_others" msgid="311793281613609986">"Άλλα"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Εκτιμώμενος υπολειπόμενος χρόνος"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"Μέχρι την πλήρη φόρτιση"</string>
@@ -2607,6 +2616,7 @@
     <string name="data_usage_app_summary_title" msgid="4933742247928064178">"Δεδ. κιν. τηλ. &amp; Wi‑Fi"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Αυτόματος συγχ. προσ. δεδομ."</string>
     <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Αυτόματος συγχρ. δεδ.εργασίας"</string>
+    <string name="account_settings_menu_auto_sync_private" msgid="2315144351530596228">"Αυτόμ. συγχρον. ιδιωτ. δεδομ."</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"Αλλαγή κύκλου..."</string>
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"Η ημέρα που θα γίνει η επαναφορά του κύκλου χρήσης δεδομένων:"</string>
     <string name="data_usage_empty" msgid="5619908658853726866">"Καμία εφαρμ. δεν χρησιμ. δεδ. αυτή την περίοδο"</string>
@@ -3049,6 +3059,8 @@
     <string name="keywords_font_size" msgid="1643198841815006447">"μέγεθος οθόνης, μεγάλη εκτύπωση, μεγάλη γραμματοσειρά, μεγάλο κείμενο, χαμηλή όραση, αύξηση μεγέθους κειμένου, εργαλείο αύξησης μεγέθους γραμματοσειράς, αύξηση μεγέθους γραμματοσειράς"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"πάντα ενεργή οθόνη ambient, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"εκπ, ετικέτα, αναγνώστης"</string>
+    <!-- no translation found for keywords_keyboard_vibration (6485149510591654697) -->
+    <skip />
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Ένταση ήχου, δόνηση, λειτουργία \"Μην ενοχλείτε\""</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Ένταση ήχου πολυμέσων"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Ένταση ήχου μετάδοσης"</string>
@@ -3355,6 +3367,17 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"Αυτή η εφαρμογή δεν υποστηρίζει βελτιωμένες ρυθμίσεις"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"Περισσότερες ρυθμίσεις"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"Περισσότερες ρυθμίσεις είναι διαθέσιμες μέσα σε αυτή την εφαρμογή"</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"Περίοδος cooldown ειδοποιήσεων"</string>
+    <string name="notification_polite_all_apps" msgid="1118651561594250059">"Εφαρμογή περιόδου cooldown σε όλες τις ειδοποιήσεις"</string>
+    <string name="notification_polite_all_apps_summary" msgid="540268373207498126">"Σταδιακή μείωση της έντασης ήχου των ειδοποιήσεων όταν λαμβάνετε διαδοχικά πολλές ειδοποιήσεις από την ίδια εφαρμογή"</string>
+    <string name="notification_polite_conversations" msgid="8197695136727245741">"Εφαρμογή περιόδου cooldown σε συζητήσεις"</string>
+    <string name="notification_polite_conversations_summary" msgid="2677141765664359994">"Σταδιακή μείωση της έντασης ήχου των ειδοποιήσεων όταν λαμβάνετε πολλά μηνύματα από την ίδια συζήτηση σε σύντομο χρονικό διάστημα"</string>
+    <string name="notification_polite_disabled" msgid="1378078021594282842">"Να μην χρησιμοποιείται περίοδος cooldown για τις ειδοποιήσεις"</string>
+    <string name="notification_polite_disabled_summary" msgid="1145341260283746936">"Να μην μειώνεται ποτέ η ένταση ήχου των ειδοποιήσεων, ανεξάρτητα από τον αριθμό των διαδοχικών ειδοποιήσεων από την ίδια εφαρμογή"</string>
+    <string name="notification_polite_vibrate_unlocked" msgid="6142573851761357903">"Δόνηση όταν είναι ξεκλειδωμένη"</string>
+    <string name="notification_polite_vibrate_unlocked_summary" msgid="1678472892282874459">"Να δονείται μόνο όταν είναι ξεκλειδωμένη η οθόνη"</string>
+    <string name="notification_polite_work" msgid="8823596456640216391">"Εφαρμογή σε προφίλ εργασίας"</string>
+    <string name="notification_polite_work_summary" msgid="8260947839104352075">"Εφαρμογή των ρυθμίσεων περιόδου cooldown ειδοποιήσεων από το προσωπικό προφίλ σας στο προφίλ εργασίας σας"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Βοηθητικές υπηρεσίες Εικονικής Πραγματικότητας"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Δεν έχει ζητηθεί η εκτέλεση εγκατεστημένων εφαρμογών ως βοηθητικών υπηρεσιών Εικονικής Πραγματικότητας."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Να επιτρέπεται στην υπηρεσία <xliff:g id="SERVICE">%1$s</xliff:g> να έχει πρόσβαση στην υπηρεσία Εικονικής Πραγματικότητας;"</string>
@@ -4857,4 +4880,10 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Το όνομα της συσκευής σας είναι ορατό στις εφαρμογές που εγκαθιστάτε. Ενδέχεται επίσης να είναι ορατό και σε άλλα άτομα, όταν συνδέεστε σε συσκευές Bluetooth, συνδέεστε σε ένα δίκτυο Wi-Fi ή ρυθμίζετε ένα σημείο πρόσβασης Wi-Fi."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Γραμματικό γένος"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Επιλογή γραμματικού γένους"</string>
+    <string name="content_protection_preference_title" msgid="5069260032659193074">"Σάρωση για παραπλανητικές εφαρμογές"</string>
+    <string name="content_protection_preference_summary" msgid="2252393849408445391">"Έλεγχος δραστηριότητας σε εφαρμογές για ηλεκτρονικό ψάρεμα (phishing)"</string>
+    <string name="content_protection_preference_user_consent_switch_title" msgid="60088482227901638">"Χρήση σάρωσης"</string>
+    <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="2868495870224174097">"Χρήση σάρωσης για εφαρμογές εργασιών"</string>
+    <string name="content_protection_preference_subpage_summary" msgid="7707255571476950976">"Η σάρωση εκτελείται ιδιωτικά απευθείας στη συσκευή σας, ελέγχοντας τη δραστηριότητα σε εφαρμογές για ηλεκτρονικό ψάρεμα (phishing) ή άλλη παραπλανητική συμπεριφορά. Αν εντοπιστεί κάτι από τα παραπάνω, ορισμένες πληροφορίες εφαρμογής αποστέλλονται στο Google Play Protect για να επιβεβαιωθεί η απειλή και να ειδοποιηθούν οι χρήστες της εφαρμογής."</string>
+    <string name="content_protection_preference_subpage_info" msgid="6010628258453929862">"Αυτή είναι μια προστατευόμενη λειτουργία ασφάλειας. Δεν κοινοποιούνται προσωπικά στοιχεία ή πληροφορίες συσκευής στην Google. \n\nΤο ηλεκτρονικό ψάρεμα (phishing) είναι μια απόπειρα κλοπής διαπιστευτηρίων σύνδεσης ή άλλων προσωπικών στοιχείων."</string>
 </resources>

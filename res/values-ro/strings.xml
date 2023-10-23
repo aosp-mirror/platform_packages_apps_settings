@@ -113,6 +113,10 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Dezactivează Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Dezactivează funcția Bluetooth LE Audio dacă dispozitivul acceptă capacitățile de hardware LE Audio."</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Comutator LE Audio în Detalii dispozitiv"</string>
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist (7392319491894565552) -->
+    <skip />
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist_summary (8999245286359656738) -->
+    <skip />
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Dispozitive media"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Dispozitive de apel"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Alte dispozitive"</string>
@@ -1317,6 +1321,8 @@
     <string name="carrier_enabled_summaryOn" msgid="5212067975273903381">"APN activat"</string>
     <string name="carrier_enabled_summaryOff" msgid="8541959867953738521">"APN dezactivat"</string>
     <string name="bearer" msgid="3231443241639159358">"Purtător"</string>
+    <string name="network_type" msgid="748590707422733595">"Tip de rețea"</string>
+    <string name="network_type_unspecified" msgid="7756349656194518725">"Nespecificată"</string>
     <string name="mvno_type" msgid="4734654257494971247">"Tip MVNO"</string>
     <string name="mvno_match_data" msgid="5213193073684321156">"Valoare MVNO"</string>
     <string name="menu_delete" msgid="9199740901584348273">"Ștergeți APN"</string>
@@ -2041,6 +2047,8 @@
     <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Folosește vibrațiile și feedbackul tactil"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Vibrație pentru alarmă"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Vibrație pentru conținut media"</string>
+    <!-- no translation found for accessibility_keyboard_vibration_title (7559967730626765441) -->
+    <skip />
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Vibrațiile soneriei"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Vibrații la notificare"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Feedback la atingere"</string>
@@ -2348,6 +2356,7 @@
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_since_last_full_charge" msgid="3488425008925924769">"de la ultima încărcare completă"</string>
     <string name="battery_usage_system_apps" msgid="8659537819731575299">"Aplicații de sistem"</string>
+    <string name="battery_usage_uninstalled_apps" msgid="8170405012552803662">"Aplicații dezinstalate"</string>
     <string name="battery_usage_others" msgid="311793281613609986">"Altele"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Timp estimat rămas"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"Până la încărcarea completă"</string>
@@ -2607,6 +2616,7 @@
     <string name="data_usage_app_summary_title" msgid="4933742247928064178">"Date mobile și Wi-Fi"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Sincronizare automată a datelor"</string>
     <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Autosincronizare date serviciu"</string>
+    <string name="account_settings_menu_auto_sync_private" msgid="2315144351530596228">"Sincronizează automat datele private"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"Schimbă data ciclului..."</string>
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"Ziua din lună pentru resetarea ciclului de utilizare a datelor:"</string>
     <string name="data_usage_empty" msgid="5619908658853726866">"Nicio aplic. nu a utilizat date în ac. perioadă."</string>
@@ -3049,6 +3059,8 @@
     <string name="keywords_font_size" msgid="1643198841815006447">"dimensiunea textului, caractere mari, font mare, text mare, vedere slabă, mărește textul, instrument de mărire a fontului, mărirea fontului"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"afișaj ambiental activat permanent, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, etichetă, cititor"</string>
+    <!-- no translation found for keywords_keyboard_vibration (6485149510591654697) -->
+    <skip />
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Volum, vibrații, Nu deranja"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Volum media"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Volumul proiectării"</string>
@@ -3355,6 +3367,17 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"Aplicația nu acceptă setările optimizate"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"Mai multe setări"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"Mai multe setări sunt disponibile în această aplicație"</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"Reducerea volumului notificărilor"</string>
+    <string name="notification_polite_all_apps" msgid="1118651561594250059">"Aplică reducerea volumului tuturor notificărilor"</string>
+    <string name="notification_polite_all_apps_summary" msgid="540268373207498126">"Redu treptat volumul notificărilor când primești multe notificări succesive de la aceeași aplicație"</string>
+    <string name="notification_polite_conversations" msgid="8197695136727245741">"Aplică reducerea volumului conversațiilor"</string>
+    <string name="notification_polite_conversations_summary" msgid="2677141765664359994">"Redu treptat volumul notificărilor când primești multe mesaje din același chat într-un interval de timp scurt"</string>
+    <string name="notification_polite_disabled" msgid="1378078021594282842">"Nu folosi reducerea volumului notificărilor"</string>
+    <string name="notification_polite_disabled_summary" msgid="1145341260283746936">"Nu reduce niciodată volumul notificărilor, indiferent de numărul de notificări succesive de la aceeași aplicație"</string>
+    <string name="notification_polite_vibrate_unlocked" msgid="6142573851761357903">"Vibrează la deblocare"</string>
+    <string name="notification_polite_vibrate_unlocked_summary" msgid="1678472892282874459">"Vibrează doar când ecranul este deblocat"</string>
+    <string name="notification_polite_work" msgid="8823596456640216391">"Aplică profilurilor de serviciu"</string>
+    <string name="notification_polite_work_summary" msgid="8260947839104352075">"Aplică setările pentru reducerea volumului notificărilor din profilul personal în profilul de serviciu"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Servicii de ajutor pentru RV"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Nicio aplicație instalată nu a solicitat să fie rulată ca un serviciu de ajutor pentru RV."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Permiți accesul la serviciul RV pentru <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -4858,4 +4881,10 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Numele dispozitivului este vizibil pentru aplicațiile instalate. Poate fi văzut și de alte persoane când te conectezi la dispozitivele Bluetooth sau la o rețea Wi-Fi sau când configurezi un hotspot Wi-Fi."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Genul gramatical"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Selectează genul gramatical"</string>
+    <string name="content_protection_preference_title" msgid="5069260032659193074">"Se caută aplicații înșelătoare"</string>
+    <string name="content_protection_preference_summary" msgid="2252393849408445391">"Verifică activitatea în aplicații pentru phishing"</string>
+    <string name="content_protection_preference_user_consent_switch_title" msgid="60088482227901638">"Folosește scanarea"</string>
+    <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="2868495870224174097">"Folosește scanarea în aplicațiile pentru lucru"</string>
+    <string name="content_protection_preference_subpage_summary" msgid="7707255571476950976">"Scanarea rulează în mod privat direct pe dispozitiv, verificând activitatea în aplicații pentru phishing sau alte comportamente înșelătoare. Dacă sunt detectate astfel de comportamente, unele informații din aplicații sunt trimise la Google Play Protect pentru a confirma amenințarea și a avertiza utilizatorii aplicațiilor."</string>
+    <string name="content_protection_preference_subpage_info" msgid="6010628258453929862">"Aceasta este o funcție de siguranță protejată. Nu sunt trimise la Google informații de pe dispozitiv sau informații cu caracter personal. \n\nPhishingul este o încercare de a fura date de conectare sau alte informații cu caracter personal."</string>
 </resources>

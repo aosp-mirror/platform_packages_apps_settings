@@ -113,6 +113,10 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"બ્લૂટૂથ LE ઑડિયો બંધ કરો"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"જો ડિવાઇસ LE ઑડિયો હાર્ડવેર ક્ષમતાઓને સપોર્ટ કરતું હોય, તો બ્લૂટૂથ LE ઑડિયો સુવિધા બંધ કરે છે."</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"ડિવાઇસની વિગતોમાં LE ઑડિયો ટૉગલ બતાવો"</string>
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist (7392319491894565552) -->
+    <skip />
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist_summary (8999245286359656738) -->
+    <skip />
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"મીડિયા ડિવાઇસ"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"કૉલ ડિવાઇસ"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"અન્ય ડિવાઇસ"</string>
@@ -1317,6 +1321,8 @@
     <string name="carrier_enabled_summaryOn" msgid="5212067975273903381">"APN ચાલુ છે"</string>
     <string name="carrier_enabled_summaryOff" msgid="8541959867953738521">"APN અક્ષમ"</string>
     <string name="bearer" msgid="3231443241639159358">"બેરર"</string>
+    <string name="network_type" msgid="748590707422733595">"નેટવર્કનો પ્રકાર"</string>
+    <string name="network_type_unspecified" msgid="7756349656194518725">"અનુલ્લેખિત"</string>
     <string name="mvno_type" msgid="4734654257494971247">"MVNO પ્રકાર"</string>
     <string name="mvno_match_data" msgid="5213193073684321156">"MVNO મૂલ્ય"</string>
     <string name="menu_delete" msgid="9199740901584348273">"APN કાઢી નાખો"</string>
@@ -2041,6 +2047,8 @@
     <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"વાઇબ્રેશન અને હેપ્ટિકનો ઉપયોગ કરો"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"અલાર્મ વાઇબ્રેશન"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"મીડિયા વાઇબ્રેશન"</string>
+    <!-- no translation found for accessibility_keyboard_vibration_title (7559967730626765441) -->
+    <skip />
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"રિંગ વાઇબ્રેશન"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"નોટિફિકેશન વાઇબ્રેશન"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"પ્રતિસાદને ટચ કરો"</string>
@@ -2348,6 +2356,7 @@
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_since_last_full_charge" msgid="3488425008925924769">"છેલ્લા પૂર્ણ ચાર્જ થયા પછીથી"</string>
     <string name="battery_usage_system_apps" msgid="8659537819731575299">"સિસ્ટમ ઍપ"</string>
+    <string name="battery_usage_uninstalled_apps" msgid="8170405012552803662">"અનઇન્સ્ટૉલ કરવામાં આવેલી ઍપ"</string>
     <string name="battery_usage_others" msgid="311793281613609986">"અન્ય"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"અંદાજિત બાકી સમય"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"સંપૂર્ણપણે ચાર્જ થવામાં"</string>
@@ -2607,6 +2616,7 @@
     <string name="data_usage_app_summary_title" msgid="4933742247928064178">"મોબાઇલ ડેટા અને વાઇ-ફાઇ"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"વ્યક્તિગત ડેટાને ઑટો સિંક કરો"</string>
     <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"ઑફિસના ડેટાને ઑટો સિંક કરો"</string>
+    <string name="account_settings_menu_auto_sync_private" msgid="2315144351530596228">"ખાનગી ડેટા ઑટો સિંક કરો"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"ચક્ર બદલો…"</string>
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"ડેટા વપરાશ ચક્ર ફરીથી સેટ કરવા માટે મહિનાનો દિવસ:"</string>
     <string name="data_usage_empty" msgid="5619908658853726866">"આ સમયગાળા દરમ્યાન કોઈ એપ્લિકેશને ડેટાનો ઉપયોગ કર્યો નથી."</string>
@@ -3049,6 +3059,8 @@
     <string name="keywords_font_size" msgid="1643198841815006447">"ટેક્સ્ટનું કદ, મોટી પ્રિન્ટ, મોટા ફૉન્ટ, મોટી ટેક્સ્ટ, ઓછું વિઝન, ટેક્સ્ટને મોટી બનાવો, ફૉન્ટ મોટા બનાવનાર, ફૉન્ટની વૃદ્ધિ"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"હંમેશાં ચાલુ રહેતું ઍમ્બિઅન્ટ ડિસ્પ્લે, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"NFC, ટૅગ, રીડર"</string>
+    <!-- no translation found for keywords_keyboard_vibration (6485149510591654697) -->
+    <skip />
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"વૉલ્યૂમ, વાઇબ્રેશન, ખલેલ પાડશો નહીં"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"મીડિયા વૉલ્યૂમ"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"કાસ્ટનું વૉલ્યૂમ"</string>
@@ -3355,6 +3367,17 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"આ ઍપ વધારાના સેટિંગને સપોર્ટ કરતી નથી"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"વધુ સેટિંગ"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"આ ઍપમાં વધુ સેટિંગ ઉપલબ્ધ છે"</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"નોટિફિકેશન કૂલડાઉન"</string>
+    <string name="notification_polite_all_apps" msgid="1118651561594250059">"બધા નોટિફિકેશન પર કૂલડાઉન લાગુ કરો"</string>
+    <string name="notification_polite_all_apps_summary" msgid="540268373207498126">"જ્યારે તમને એક જ ઍપમાંથી એક પછી એક ઘણા નોટિફિકેશન મળે ત્યારે ધીમે-ધીમે નોટિફિકેશનનું વૉલ્યૂમ ઓછું કરો"</string>
+    <string name="notification_polite_conversations" msgid="8197695136727245741">"વાતચીતો પર કૂલડાઉન લાગુ કરો"</string>
+    <string name="notification_polite_conversations_summary" msgid="2677141765664359994">"જ્યારે તમને ટૂંકા ગાળામાં એક જ ચૅટમાંથી ઘણા મેસેજ મળે ત્યારે ધીમે-ધીમે નોટિફિકેશનનું વૉલ્યૂમ ઓછું કરો"</string>
+    <string name="notification_polite_disabled" msgid="1378078021594282842">"નોટિફિકેશન કૂલડાઉનનો ઉપયોગ કરશો નહીં"</string>
+    <string name="notification_polite_disabled_summary" msgid="1145341260283746936">"કોઈ એક જ ઍપમાંથી એક પછી એક ઘણા નોટિફિકેશન આવે તો પણ, નોટિફિકેશનનું વૉલ્યૂમ ઓછું ક્યારેય ઓછું કરશો નહીં"</string>
+    <string name="notification_polite_vibrate_unlocked" msgid="6142573851761357903">"અનલૉક કરેલું હોય ત્યારે વાઇબ્રેટ કરો"</string>
+    <string name="notification_polite_vibrate_unlocked_summary" msgid="1678472892282874459">"જ્યારે સ્ક્રીન અનલૉક કરેલી હોય, ત્યારે જ વાઇબ્રેટ કરો"</string>
+    <string name="notification_polite_work" msgid="8823596456640216391">"ઑફિસની પ્રોફાઇલ પર લાગુ કરો"</string>
+    <string name="notification_polite_work_summary" msgid="8260947839104352075">"તમારી વ્યક્તિગત પ્રોફાઇલથી તમારી ઑફિસની પ્રોફાઇલ પર નોટિફિકેશન કૂલડાઉન સેટિંગ લાગુ કરો"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR સહાયક સેવાઓ"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"કોઇ ઇન્સ્ટૉલ કરેલ ઍપએ VR સહાયક સેવાઓ તરીકે શરૂ કરવાની વિનંતી કરી નથી."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"<xliff:g id="SERVICE">%1$s</xliff:g> માટે VR સેવા ઍક્સેસની મંજૂરી આપીએ?"</string>
@@ -4857,4 +4880,10 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"તમે ઇન્સ્ટૉલ કરેલી ઍપ તમારા ડિવાઇસનું નામ જોઈ શકે છે. જ્યારે તમે બ્લૂટૂથ ડિવાઇસથી કનેક્ટ કરો, કોઈ વાઇ-ફાઇ નેટવર્કથી કનેક્ટ કરો અથવા કોઈ વાઇ-ફાઇ હૉટસ્પૉટ સેટઅપ કરો ત્યારે અન્ય લોકો પણ તે જોઈ શકે છે."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"વ્યાકરણ અનુસારનું લિંગ"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"વ્યાકરણ અનુસારનું લિંગ પસંદ કરો"</string>
+    <string name="content_protection_preference_title" msgid="5069260032659193074">"છોતરામણી ઍપ માટે સ્કૅન કરી રહ્યાં છીએ"</string>
+    <string name="content_protection_preference_summary" msgid="2252393849408445391">"ફિશિંગ માટે ઍપ પ્રવૃત્તિ ચેક કરો"</string>
+    <string name="content_protection_preference_user_consent_switch_title" msgid="60088482227901638">"સ્કૅનિંગનો ઉપયોગ કરો"</string>
+    <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="2868495870224174097">"ઑફિસ માટેની ઍપ માટે સ્કૅનિંગનો ઉપયોગ કરો"</string>
+    <string name="content_protection_preference_subpage_summary" msgid="7707255571476950976">"ફિશિંગ અથવા અન્ય છેતરામણા વર્તન માટે ઍપ પ્રવૃત્તિ ચેક કરીને, સ્કૅનિંગ સીધા તમારા ડિવાઇસ પર ખાનગી રીતે ચલાવવામાં આવે છે. જો તેની ભાળ મળે, તો જોખમને કન્ફર્મ કરવા અને ઍપના વપરાશકર્તાઓને ચેતવણી આપવા માટે ઍપની કેટલીક માહિતી Google Play Protectને મોકલવામાં આવે છે."</string>
+    <string name="content_protection_preference_subpage_info" msgid="6010628258453929862">"આ સુરક્ષિત કરેલી સુરક્ષા સંબંધિત સુવિધા છે. Google સાથે ડિવાઇસની કે વ્યક્તિગત માહિતી શેર કરવામાં આવતી નથી. \n\nફિશિંગ એ સાઇન ઇન માટેની વિગતો અથવા અન્ય વ્યક્તિગત માહિતી ચોરવાનો પ્રયાસ છે."</string>
 </resources>

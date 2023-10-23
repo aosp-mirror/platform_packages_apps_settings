@@ -113,6 +113,10 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"‏השבתה של Bluetooth LE audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"‏האפשרות הזו משביתה את התכונה Bluetooth LE Audio אם המכשיר תומך ביכולות חומרה של LE audio."</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"‏הצגת המתג של LE audio בפרטי המכשיר"</string>
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist (7392319491894565552) -->
+    <skip />
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist_summary (8999245286359656738) -->
+    <skip />
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"מכשירים לאחסון מדיה"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"מכשירי התקשרות"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"מכשירים אחרים"</string>
@@ -1317,6 +1321,8 @@
     <string name="carrier_enabled_summaryOn" msgid="5212067975273903381">"‏APN מופעל"</string>
     <string name="carrier_enabled_summaryOff" msgid="8541959867953738521">"‏APN מושבת"</string>
     <string name="bearer" msgid="3231443241639159358">"פרמטרים לרשת"</string>
+    <string name="network_type" msgid="748590707422733595">"סוג הרשת"</string>
+    <string name="network_type_unspecified" msgid="7756349656194518725">"לא צוין"</string>
     <string name="mvno_type" msgid="4734654257494971247">"‏סוג MVNO"</string>
     <string name="mvno_match_data" msgid="5213193073684321156">"‏ערך MVNO"</string>
     <string name="menu_delete" msgid="9199740901584348273">"‏מחיקת APN"</string>
@@ -2041,6 +2047,8 @@
     <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"שימוש ברטט ובמשוב פיזי"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"רטט של שעון מעורר"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"רטט של פריט מדיה"</string>
+    <!-- no translation found for accessibility_keyboard_vibration_title (7559967730626765441) -->
+    <skip />
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"רטט הצלצול"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"רטט של התראה"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"משוב מגע"</string>
@@ -2242,17 +2250,14 @@
     <string name="power_usage_level_and_status" msgid="821521456989429593">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="6997529817917076536">"נותרו <xliff:g id="REMAIN">%1$s</xliff:g>"</string>
     <string name="power_charge_remaining" msgid="7046064326172265116">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> לסיום הטעינה"</string>
-    <!-- no translation found for power_usage_detail_screen_time (6027274749498485283) -->
-    <skip />
-    <!-- no translation found for power_usage_detail_background_time (3661437083554322691) -->
-    <skip />
+    <string name="power_usage_detail_screen_time" msgid="6027274749498485283">"זמן מסך"</string>
+    <string name="power_usage_detail_background_time" msgid="3661437083554322691">"זמן פעולה ברקע"</string>
     <string name="low_battery_summary" msgid="4458925347316501953">"הסוללה חלשה"</string>
     <string name="background_activity_summary" msgid="3817376868497046016">"התרה לאפליקציה לפעול ברקע"</string>
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"להגביל את הפעילות ברקע?"</string>
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"הגבלת הפעילות של אפליקציה ברקע עלולה לשבש את פעולתה"</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"מכיוון שהאפליקציה לא מוגדרת לאופטימיזציה של הסוללה, לא ניתן להגבילה.\n\nכדי להגביל אותה, תחילה יש להפעיל אופטימיזציה של הסוללה."</string>
-    <!-- no translation found for manager_battery_usage_category_title (1493303237531629961) -->
-    <skip />
+    <string name="manager_battery_usage_category_title" msgid="1493303237531629961">"ניהול השימוש בסוללה"</string>
     <string name="manager_battery_usage_unrestricted_title" msgid="2426486290463258032">"ללא הגבלות"</string>
     <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"אופטימיזציה"</string>
     <string name="manager_battery_usage_restricted_title" msgid="7702863764130323118">"מוגבל"</string>
@@ -2351,6 +2356,7 @@
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_since_last_full_charge" msgid="3488425008925924769">"מאז הטעינה המלאה האחרונה"</string>
     <string name="battery_usage_system_apps" msgid="8659537819731575299">"אפליקציות מערכת"</string>
+    <string name="battery_usage_uninstalled_apps" msgid="8170405012552803662">"אפליקציות שהוסרו"</string>
     <string name="battery_usage_others" msgid="311793281613609986">"אחרים"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"זמן משוער שנותר"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"עד לטעינה מלאה"</string>
@@ -2394,8 +2400,7 @@
     <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"סה\"כ: פחות מדקה"</string>
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"ברקע: פחות מדקה"</string>
     <string name="battery_usage_screen_time_less_than_one_minute" msgid="2911989465891679033">"זמן מסך: פחות מדקה"</string>
-    <!-- no translation found for power_usage_time_less_than_one_minute (8407404329381010144) -->
-    <skip />
+    <string name="power_usage_time_less_than_one_minute" msgid="8407404329381010144">"פחות מדקה"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"סה\"כ: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"ברקע: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_screen_time" msgid="3973865893520804115">"זמן מסך: <xliff:g id="TIME">%s</xliff:g>"</string>
@@ -2611,6 +2616,7 @@
     <string name="data_usage_app_summary_title" msgid="4933742247928064178">"‏חבילת גלישה ו-Wi‑Fi"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"סנכרון אוטומטי לנתונים האישיים"</string>
     <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"סנכרון אוטומטי של נתוני העבודה"</string>
+    <string name="account_settings_menu_auto_sync_private" msgid="2315144351530596228">"סנכרון אוטומטי של מידע פרטי"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"שינוי הגדרת המחזור…"</string>
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"היום בחודש שבו יש לאפס את מחזור השימוש בנתונים:"</string>
     <string name="data_usage_empty" msgid="5619908658853726866">"אף אפליקציה לא השתמשה בנתונים במהלך פרק זמן זה."</string>
@@ -3053,6 +3059,8 @@
     <string name="keywords_font_size" msgid="1643198841815006447">"גודל הטקסט, אותיות גדולות, גופן גדול, טקסט גדול, לקוי ראייה, הגדלת טקסט, מגדיל טקסט"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"‏תצוגת אווירה פועלת כל הזמן (AOD)"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"‏תג NFC‏, nfc, תג, קורא"</string>
+    <!-- no translation found for keywords_keyboard_vibration (6485149510591654697) -->
+    <skip />
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"עוצמת קול, רטט ומצב \'נא לא להפריע\'"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"עוצמת קול של מדיה"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"עוצמת הקול בהעברה"</string>
@@ -3359,6 +3367,17 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"האפליקציה הזו לא תומכת בהגדרות המשופרות"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"הגדרות נוספות"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"הגדרות נוספות זמינות בתוך האפליקציה הזו"</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"הפחתה הדרגתית של ההתראות"</string>
+    <string name="notification_polite_all_apps" msgid="1118651561594250059">"הפעלת הפחתה הדרגתית על כל ההתראות"</string>
+    <string name="notification_polite_all_apps_summary" msgid="540268373207498126">"הפחתה בהדרגה של כמות ההתראות כשמקבלים התראות רצופות מרובות מאותה האפליקציה"</string>
+    <string name="notification_polite_conversations" msgid="8197695136727245741">"הפעלת הפחתה הדרגתית על השיחות"</string>
+    <string name="notification_polite_conversations_summary" msgid="2677141765664359994">"הפחתה בהדרגה של כמות ההתראות כשמקבלים הודעות מרובות מאותו הצ\'אט בפרק זמן קצר"</string>
+    <string name="notification_polite_disabled" msgid="1378078021594282842">"לא להפעיל הפחתה הדרגתית על ההתראות"</string>
+    <string name="notification_polite_disabled_summary" msgid="1145341260283746936">"לא להפחית אף פעם את כמות ההתראות, בלי קשר לכמות ההתראות הרצופות מאותה האפליקציה"</string>
+    <string name="notification_polite_vibrate_unlocked" msgid="6142573851761357903">"רטט כשמבטלים את הנעילה"</string>
+    <string name="notification_polite_vibrate_unlocked_summary" msgid="1678472892282874459">"רטט רק כשנעילת המסך מתבטלת"</string>
+    <string name="notification_polite_work" msgid="8823596456640216391">"הפעלה בפרופילי העבודה"</string>
+    <string name="notification_polite_work_summary" msgid="8260947839104352075">"הפעלת ההגדרות של ההפחתה ההדרגתית על ההתראות מהפרופיל האישי בפרופיל העבודה"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"‏שירותי סיוע של VR"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"‏לא התקבלו בקשות מאפליקציות מותקנות לפעול כשירותי סיוע של VR."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"‏האם לאפשר לשירות VR גישה אל <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -4177,8 +4196,7 @@
     <string name="credman_keywords" msgid="8305600680836806170">"נתונים, מפתח גישה, סיסמה"</string>
     <string name="credman_autofill_keywords" msgid="701180623776848914">"מילוי, אוטומטי, מילוי אוטומטי, נתונים, מפתח גישה, סיסמה"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"‏&lt;b&gt;חשוב לוודא שהאפליקציה הזו מהימנה&lt;/b&gt;‏ ‏&lt;br/&gt; &lt;br/&gt;‏ ‏&lt;xliff:g id=app_name example=Google Autofill&gt;‏%1$s‏&lt;/xliff:g&gt; משתמשת במידע שמופיע במסך כדי לזהות אילו שדות אפשר למלא באופן אוטומטי."</string>
-    <!-- no translation found for credman_autofill_confirmation_message (843829628024668466) -->
-    <skip />
+    <string name="credman_autofill_confirmation_message" msgid="843829628024668466">"‏&lt;b&gt;להשתמש באפליקציה &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; סיסמאות, מפתחות גישה ופרטים חדשים נוספים יישמרו כאן מעכשיו. האפליקציה &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; יכולה לבדוק את אילו מהפריטים במסך אפשר למלא באופן אוטומטי."</string>
     <string name="credman_picker_title" msgid="8191267620665129205">"סיסמאות, מפתחות גישה ושירותי נתונים"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"‏להשבית את %1$s?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"‏&lt;b&gt;להשבית את השירות הזה?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; מידע שנשמר כמו סיסמאות, מפתחות גישה, אמצעי תשלום ופרטים נוספים לא ימולא כשתתבצע כניסה. כדי להשתמש במידע שנשמר, צריך לבחור סיסמה, מפתח גישה או שירות נתונים."</string>
@@ -4863,4 +4881,10 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"‏המכשיר שלך גלוי לאפליקציות שהתקנת. כמו כן, ייתכן שאנשים אחרים יראו אותו בהתחברות למכשירי Bluetooth, לרשת Wi-Fi, או בהגדרת נקודת Wi-Fi לשיתוף אינטרנט."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"לשון הפנייה"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"בחירת לשון הפנייה"</string>
+    <string name="content_protection_preference_title" msgid="5069260032659193074">"מתבצעת סריקה לאיתור אפליקציות מטעות"</string>
+    <string name="content_protection_preference_summary" msgid="2252393849408445391">"בדיקת הפעילות באפליקציה לאיתור פישינג"</string>
+    <string name="content_protection_preference_user_consent_switch_title" msgid="60088482227901638">"שימוש בסריקה"</string>
+    <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="2868495870224174097">"שימוש בסריקה באפליקציה לעבודה"</string>
+    <string name="content_protection_preference_subpage_summary" msgid="7707255571476950976">"‏הסריקה פועלת ישירות במכשיר באופן פרטי ובודקת את הפעילות באפליקציה לאיתור פישינג או התנהגות מטעה אחרת. במקרה שהתנהגות כזו אותרה, חלק מהמידע של האפליקציה נשלח אל Google Play Protect כדי לאשר שנמצא איום ולהזהיר את משתמשי האפליקציה."</string>
+    <string name="content_protection_preference_subpage_info" msgid="6010628258453929862">"‏זהו אמצעי אבטחה מוגן. אף אחד מפרטי המכשיר או הפרטים האישיים לא משותף עם Google. \n\nפישינג הוא ניסיון לגנוב פרטי כניסה או פרטים אישיים אחרים."</string>
 </resources>

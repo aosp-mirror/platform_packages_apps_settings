@@ -113,6 +113,10 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Deaktiver Bluetooth LE-lyd"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Deaktiverer funktionen Bluetooth LE-lyd, hvis enheden understøtter denne LE-lyd til hardware."</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Vis kontakten til LE-lyd i Enhedsoplysninger"</string>
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist (7392319491894565552) -->
+    <skip />
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist_summary (8999245286359656738) -->
+    <skip />
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Medieenheder"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Opkaldsenheder"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Andre enheder"</string>
@@ -1317,6 +1321,8 @@
     <string name="carrier_enabled_summaryOn" msgid="5212067975273903381">"Adgangspunktet er aktiveret"</string>
     <string name="carrier_enabled_summaryOff" msgid="8541959867953738521">"Adgangspunktet er deaktiveret"</string>
     <string name="bearer" msgid="3231443241639159358">"Bærer"</string>
+    <string name="network_type" msgid="748590707422733595">"Netværkstype"</string>
+    <string name="network_type_unspecified" msgid="7756349656194518725">"Ikke angivet"</string>
     <string name="mvno_type" msgid="4734654257494971247">"MVNO-type"</string>
     <string name="mvno_match_data" msgid="5213193073684321156">"MVNO-værdi"</string>
     <string name="menu_delete" msgid="9199740901584348273">"Slet adgangspunkt"</string>
@@ -2041,6 +2047,8 @@
     <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Brug vibration og haptik"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Vibration for alarm"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Vibration for medier"</string>
+    <!-- no translation found for accessibility_keyboard_vibration_title (7559967730626765441) -->
+    <skip />
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Vibration ved opkald"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Vibration ved notifikation"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Feedback ved tryk"</string>
@@ -2348,6 +2356,7 @@
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_since_last_full_charge" msgid="3488425008925924769">"siden sidste fulde opladning"</string>
     <string name="battery_usage_system_apps" msgid="8659537819731575299">"Systemapps"</string>
+    <string name="battery_usage_uninstalled_apps" msgid="8170405012552803662">"Afinstallerede apps"</string>
     <string name="battery_usage_others" msgid="311793281613609986">"Andre"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Estimeret resterende tid"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"Indtil den er fuldt opladet"</string>
@@ -2607,6 +2616,7 @@
     <string name="data_usage_app_summary_title" msgid="4933742247928064178">"Mobildata og Wi‑Fi"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Automatisk synk. af persondata"</string>
     <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Synkroniser arbejdsdata automatisk"</string>
+    <string name="account_settings_menu_auto_sync_private" msgid="2315144351530596228">"Automatisk synkronisering af private data"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"Skift cyklus..."</string>
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"Dag i måneden, hvor cyklus for dataforbrug skal nulstilles"</string>
     <string name="data_usage_empty" msgid="5619908658853726866">"Ingen apps har brugt data i denne periode."</string>
@@ -3049,6 +3059,8 @@
     <string name="keywords_font_size" msgid="1643198841815006447">"tekststørrelse, stor skrifttype, store bogstaver, stor skrifttype, stor tekst, nedsat syn, gør teksten større, større skrifttype, forstørrelse af skrifttype"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"altid tændt pauseskærm, AOD (always on ambient display)"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, tag, læser"</string>
+    <!-- no translation found for keywords_keyboard_vibration (6485149510591654697) -->
+    <skip />
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Lydstyrke, vibration, Forstyr ikke"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Lydstyrke for medier"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Lydstyrke for castet indhold"</string>
@@ -3355,6 +3367,17 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"Denne app understøtter ikke avancerede indstillinger"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"Flere indstillinger"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"Der er flere tilgængelige indstillinger inde i appen"</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"Dæmpning af notifikationer"</string>
+    <string name="notification_polite_all_apps" msgid="1118651561594250059">"Anvend dæmpning på alle notifikationer"</string>
+    <string name="notification_polite_all_apps_summary" msgid="540268373207498126">"Dæmp gradvist lydstyrken for notifikationer, når du får mange notifikationer i træk fra samme app"</string>
+    <string name="notification_polite_conversations" msgid="8197695136727245741">"Anvend dæmpning på alle samtaler"</string>
+    <string name="notification_polite_conversations_summary" msgid="2677141765664359994">"Sænk gradvist lydstyrken for notifikationer, når du får mange beskeder fra samme chat på kort tid"</string>
+    <string name="notification_polite_disabled" msgid="1378078021594282842">"Brug ikke dæmpning for notifikationer"</string>
+    <string name="notification_polite_disabled_summary" msgid="1145341260283746936">"Sænk aldrig lydstyrken for notifikationer, uanset hvor mange notifikationer du får i træk fra samme app"</string>
+    <string name="notification_polite_vibrate_unlocked" msgid="6142573851761357903">"Vibrer, når enheden er ulåst"</string>
+    <string name="notification_polite_vibrate_unlocked_summary" msgid="1678472892282874459">"Vibrer kun, når skærmen er ulåst"</string>
+    <string name="notification_polite_work" msgid="8823596456640216391">"Anvend på arbejdsprofiler"</string>
+    <string name="notification_polite_work_summary" msgid="8260947839104352075">"Anvend indstillingen for dæmpning af notifikationer fra din personlige profil på din arbejdsprofil"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR-hjælpetjenester"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Ingen installerede apps har anmodet om at blive kørt som VR-hjælpetjenester."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Vil du tillade, at <xliff:g id="SERVICE">%1$s</xliff:g> får adgang til VR-tjenesten?"</string>
@@ -4857,4 +4880,10 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Din enheds navn er synligt for apps, du har installeret. Det kan muligvis også ses af andre, når du opretter forbindelse til Bluetooth-enheder eller et Wi-Fi-netværk, eller når du konfigurerer et Wi-Fi-hotspot."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Grammatisk køn"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Vælg grammatisk køn"</string>
+    <string name="content_protection_preference_title" msgid="5069260032659193074">"Scanning af vildledende apps"</string>
+    <string name="content_protection_preference_summary" msgid="2252393849408445391">"Tjek appaktivitet for phishing"</string>
+    <string name="content_protection_preference_user_consent_switch_title" msgid="60088482227901638">"Brug scanning"</string>
+    <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="2868495870224174097">"Brug scanning til arbejdsapps"</string>
+    <string name="content_protection_preference_subpage_summary" msgid="7707255571476950976">"Scanningen kører privat og direkte på din enhed. Den tjekker appaktivitet for phishing eller anden form for vildledende adfærd. Hvis en sådan adfærd registreres, sendes visse appoplysninger til Google Play Protect for at bekræfte tilstedeværelsen af truslen og advare appbrugerne."</string>
+    <string name="content_protection_preference_subpage_info" msgid="6010628258453929862">"Dette er en beskyttet sikkerhedsfunktion. Ingen oplysninger om enheden eller personlige oplysninger deles med Google. \n\nPhishing er et forsøg på at stjæle loginoplysninger eller andre personlige oplysninger."</string>
 </resources>

@@ -113,6 +113,10 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Оневозможи Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Ја оневозможува функцијата Bluetooth LE Audio ако уредот поддржува хардверски способности за LE Audio."</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Прекинувач за LE Audio во „Детали за уредот“"</string>
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist (7392319491894565552) -->
+    <skip />
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist_summary (8999245286359656738) -->
+    <skip />
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Преносливи уреди"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Уреди за повикување"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Други уреди"</string>
@@ -1317,6 +1321,8 @@
     <string name="carrier_enabled_summaryOn" msgid="5212067975273903381">"Овозможен APN"</string>
     <string name="carrier_enabled_summaryOff" msgid="8541959867953738521">"Оневозможен APN"</string>
     <string name="bearer" msgid="3231443241639159358">"Носител"</string>
+    <string name="network_type" msgid="748590707422733595">"Тип мрежа"</string>
+    <string name="network_type_unspecified" msgid="7756349656194518725">"Неодреденo"</string>
     <string name="mvno_type" msgid="4734654257494971247">"Тип MVNO"</string>
     <string name="mvno_match_data" msgid="5213193073684321156">"Вредност на MVNO"</string>
     <string name="menu_delete" msgid="9199740901584348273">"Избриши APN"</string>
@@ -2041,6 +2047,8 @@
     <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Користи вибрации и хаптика"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Вибрации за аларм"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Вибрации за аудиовизуелни содржини"</string>
+    <!-- no translation found for accessibility_keyboard_vibration_title (7559967730626765441) -->
+    <skip />
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Вибрации при ѕвонење"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Вибрации при известување"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Вибрации при допир"</string>
@@ -2348,6 +2356,7 @@
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_since_last_full_charge" msgid="3488425008925924769">"од последното целосно полнење"</string>
     <string name="battery_usage_system_apps" msgid="8659537819731575299">"Системски апликации"</string>
+    <string name="battery_usage_uninstalled_apps" msgid="8170405012552803662">"Деинсталирани апликации"</string>
     <string name="battery_usage_others" msgid="311793281613609986">"Други"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Проценето преостанато време"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"До целосно полнење"</string>
@@ -2607,6 +2616,7 @@
     <string name="data_usage_app_summary_title" msgid="4933742247928064178">"Мобилен интернет и Wi‑Fi"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Авто. синхрон. лични подат."</string>
     <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Авто. синхрон. службени подат."</string>
+    <string name="account_settings_menu_auto_sync_private" msgid="2315144351530596228">"Авто. синхр. на прив. податоци"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"Промени циклус..."</string>
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"Ден од месецот за ресетирање циклус на користење на интернет:"</string>
     <string name="data_usage_empty" msgid="5619908658853726866">"Нема податоци за користење апликации во овој период."</string>
@@ -3049,6 +3059,8 @@
     <string name="keywords_font_size" msgid="1643198841815006447">"големина на текст, големи букви, голем фонт, голем текст, слаб вид, зголемување текст, фонт, зголеми, зголеми фонт"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"секогаш вклучено амбиентален екран, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"NFC, ознака, читач"</string>
+    <!-- no translation found for keywords_keyboard_vibration (6485149510591654697) -->
+    <skip />
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Јачина на звук, вибрации и „Не вознемирувај“"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Јачина на аудио/видео звук"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Јачина на звук на емитување"</string>
@@ -3355,6 +3367,17 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"Апликацијава не поддржува подобрени поставки"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"Повеќе поставки"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"Повеќе поставки се достапни во апликацијава"</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"Намалување на известувањата"</string>
+    <string name="notification_polite_all_apps" msgid="1118651561594250059">"Намали ги сите известувања"</string>
+    <string name="notification_polite_all_apps_summary" msgid="540268373207498126">"Постепено намалувајте ја јачината на звукот на известувањата кога добивате многу последователни известувања од истата апликација"</string>
+    <string name="notification_polite_conversations" msgid="8197695136727245741">"Намали ги разговорите"</string>
+    <string name="notification_polite_conversations_summary" msgid="2677141765664359994">"Постепено намалувајте ја јачината на звукот на известувањата кога добивате многу пораки од истиот разговор за кус период"</string>
+    <string name="notification_polite_disabled" msgid="1378078021594282842">"Не намалувај ги известувањата"</string>
+    <string name="notification_polite_disabled_summary" msgid="1145341260283746936">"Никогаш не намалувајте ја јачината на звукот на известувањата, независно од бројот последователни известувања од истата апликација"</string>
+    <string name="notification_polite_vibrate_unlocked" msgid="6142573851761357903">"Вибрирај кога е отклучен"</string>
+    <string name="notification_polite_vibrate_unlocked_summary" msgid="1678472892282874459">"Вибрирај само кога екранот е отклучен"</string>
+    <string name="notification_polite_work" msgid="8823596456640216391">"Примени на работни профили"</string>
+    <string name="notification_polite_work_summary" msgid="8260947839104352075">"Применете ги поставките за намалување на известувањата од приватниот на работниот профил"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR помошни услуги"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Ниедна инсталирана апликација не побара да се извршува како VR помошните услуги."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Да се дозволи пристап до VR-услугата за <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -4857,4 +4880,16 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Името на уредот е видливо за апликациите што сте ги инсталирале. Може да го видат и други луѓе кога ќе се поврзете со уреди со Bluetooth, на Wi-Fi мрежа или кога ќе поставите точка на пристап за Wi-Fi."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Граматички род"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Изберете граматички род"</string>
+    <!-- no translation found for content_protection_preference_title (5069260032659193074) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_summary (2252393849408445391) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_user_consent_switch_title (60088482227901638) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_user_consent_work_profile_switch_title (2868495870224174097) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_subpage_summary (7707255571476950976) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_subpage_info (6010628258453929862) -->
+    <skip />
 </resources>
