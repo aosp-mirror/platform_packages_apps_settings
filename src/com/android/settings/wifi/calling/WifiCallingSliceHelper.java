@@ -349,7 +349,13 @@ public class WifiCallingSliceHelper {
         final FutureTask<Integer> wfcModeTask = new FutureTask<>(new Callable<Integer>() {
             @Override
             public Integer call() {
-                return imsMmTelManager.getVoWiFiModeSetting();
+                int wfcMode = ImsMmTelManager.WIFI_MODE_UNKNOWN;
+                try {
+                    wfcMode = imsMmTelManager.getVoWiFiModeSetting();
+                } catch (IllegalArgumentException e) {
+                    Log.e(TAG, "getResourceIdForWfcMode: Exception", e);
+                }
+                return wfcMode;
             }
         });
         final ExecutorService executor = Executors.newSingleThreadExecutor();
@@ -381,7 +387,11 @@ public class WifiCallingSliceHelper {
                     // If either the action is to turn off wifi calling setting
                     // or there is no activation involved - Update the setting
                     final ImsMmTelManager imsMmTelManager = getImsMmTelManager(subId);
-                    imsMmTelManager.setVoWiFiSettingEnabled(newValue);
+                    try {
+                        imsMmTelManager.setVoWiFiSettingEnabled(newValue);
+                    } catch (IllegalArgumentException e) {
+                        Log.e(TAG, "handleWifiCallingChanged: Exception", e);
+                    }
                 } else {
                     Log.w(TAG, "action not taken: subId " + subId
                             + " from " + currentValue + " to " + newValue);
@@ -425,7 +435,14 @@ public class WifiCallingSliceHelper {
                 // Change the preference only when wifi calling is enabled
                 // And when wifi calling preference is editable for the current carrier
                 final ImsMmTelManager imsMmTelManager = getImsMmTelManager(subId);
-                final int currentValue = imsMmTelManager.getVoWiFiModeSetting();
+                int currentValue = ImsMmTelManager.WIFI_MODE_UNKNOWN;
+                try {
+                    currentValue = imsMmTelManager.getVoWiFiModeSetting();
+                } catch (IllegalArgumentException e) {
+                    Log.e(TAG, "handleWifiCallingPreferenceChanged: Exception", e);
+                    return;
+                }
+
                 int newValue = errorValue;
                 switch (intent.getAction()) {
                     case ACTION_WIFI_CALLING_PREFERENCE_WIFI_ONLY:
@@ -443,7 +460,11 @@ public class WifiCallingSliceHelper {
                 }
                 if (newValue != errorValue && newValue != currentValue) {
                     // Update the setting only when there is a valid update
-                    imsMmTelManager.setVoWiFiModeSetting(newValue);
+                    try {
+                        imsMmTelManager.setVoWiFiModeSetting(newValue);
+                    } catch (IllegalArgumentException e) {
+                        Log.e(TAG, "handleWifiCallingPreferenceChanged: Exception", e);
+                    }
                 }
             }
         }
