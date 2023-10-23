@@ -24,7 +24,7 @@ import android.os.SystemProperties;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
@@ -93,6 +93,6 @@ public class BluetoothLeAudioDeviceDetailsPreferenceController
         final boolean isLeAudioToggleVisible = SystemProperties.getBoolean(
                 LE_AUDIO_TOGGLE_VISIBLE_PROPERTY, LE_AUDIO_TOGGLE_VISIBLE_DEFAULT_VALUE);
 
-        ((SwitchPreference) mPreference).setChecked(isLeAudioToggleVisible);
+        ((TwoStatePreference) mPreference).setChecked(isLeAudioToggleVisible);
     }
 }

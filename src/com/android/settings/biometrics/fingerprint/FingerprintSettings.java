@@ -60,7 +60,7 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceViewHolder;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
@@ -615,7 +615,7 @@ public class FingerprintSettings extends SubSettings {
                     mRequireScreenOnToAuthPreferenceController.isChecked());
             mRequireScreenOnToAuthPreference.setOnPreferenceChangeListener(
                     (preference, newValue) -> {
-                        final boolean isChecked = ((SwitchPreference) preference).isChecked();
+                        final boolean isChecked = ((TwoStatePreference) preference).isChecked();
                         mRequireScreenOnToAuthPreferenceController.setChecked(!isChecked);
                         return true;
                     });

@@ -16,8 +16,6 @@
 
 package com.android.settings.inputmethod;
 
-import android.annotation.NonNull;
-import android.annotation.Nullable;
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
@@ -37,11 +35,13 @@ import android.util.FeatureFlagUtils;
 import android.view.InputDevice;
 import android.view.inputmethod.InputMethodManager;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.internal.util.Preconditions;
 import com.android.settings.R;
@@ -79,8 +79,8 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
     private KeyboardSettingsFeatureProvider mFeatureProvider;
     @NonNull
     private PreferenceCategory mKeyboardAssistanceCategory;
-    @NonNull
-    private SwitchPreference mShowVirtualKeyboardSwitch;
+    @Nullable
+    private TwoStatePreference mShowVirtualKeyboardSwitch = null;
 
     private Intent mIntentWaitingForResult;
     private boolean mIsNewKeyboardSettings;
@@ -104,7 +104,7 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
         mKeyboardAssistanceCategory = Preconditions.checkNotNull(
                 (PreferenceCategory) findPreference(KEYBOARD_OPTIONS_CATEGORY));
         mShowVirtualKeyboardSwitch = Preconditions.checkNotNull(
-                (SwitchPreference) mKeyboardAssistanceCategory.findPreference(
+                (TwoStatePreference) mKeyboardAssistanceCategory.findPreference(
                         SHOW_VIRTUAL_KEYBOARD_SWITCH));
 
         FeatureFactory featureFactory = FeatureFactory.getFeatureFactory();

@@ -17,7 +17,7 @@ import android.content.Context;
 import android.provider.Settings;
 
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -43,7 +43,7 @@ public class BluetoothScanningPreferenceController extends AbstractPreferenceCon
 
     @Override
     public void updateState(Preference preference) {
-        ((SwitchPreference) preference).setChecked(
+        ((TwoStatePreference) preference).setChecked(
                 Settings.Global.getInt(mContext.getContentResolver(),
                         Settings.Global.BLE_SCAN_ALWAYS_AVAILABLE, 0) == 1);
     }
@@ -53,7 +53,7 @@ public class BluetoothScanningPreferenceController extends AbstractPreferenceCon
         if (KEY_BLUETOOTH_SCAN_ALWAYS_AVAILABLE.equals(preference.getKey())) {
             Settings.Global.putInt(mContext.getContentResolver(),
                     Settings.Global.BLE_SCAN_ALWAYS_AVAILABLE,
-                    ((SwitchPreference) preference).isChecked() ? 1 : 0);
+                    ((TwoStatePreference) preference).isChecked() ? 1 : 0);
             return true;
         }
         return false;

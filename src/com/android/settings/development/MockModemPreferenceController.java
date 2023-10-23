@@ -22,7 +22,7 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
@@ -67,7 +67,7 @@ public class MockModemPreferenceController extends
         try {
             final boolean isEnabled = SystemProperties.getBoolean(
                     ALLOW_MOCK_MODEM_PROPERTY, false /* default */);
-            ((SwitchPreference) mPreference).setChecked(isEnabled);
+            ((TwoStatePreference) mPreference).setChecked(isEnabled);
         } catch (RuntimeException e) {
             Log.e(TAG, "Fail to get radio system property: " + e.getMessage());
         }
@@ -78,7 +78,7 @@ public class MockModemPreferenceController extends
         super.onDeveloperOptionsSwitchDisabled();
         try {
             SystemProperties.set(ALLOW_MOCK_MODEM_PROPERTY, "false");
-            ((SwitchPreference) mPreference).setChecked(false);
+            ((TwoStatePreference) mPreference).setChecked(false);
         } catch (RuntimeException e) {
             Log.e(TAG, "Fail to set radio system property: " + e.getMessage());
         }

@@ -22,7 +22,7 @@ import android.provider.Settings;
 import android.text.TextUtils;
 
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
@@ -72,7 +72,7 @@ public class SmartBatteryPreferenceController extends BasePreferenceController i
         super.updateState(preference);
         final boolean smartBatteryOn = Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.ADAPTIVE_BATTERY_MANAGEMENT_ENABLED, ON) == ON;
-        ((SwitchPreference) preference).setChecked(smartBatteryOn);
+        ((TwoStatePreference) preference).setChecked(smartBatteryOn);
     }
 
     @Override

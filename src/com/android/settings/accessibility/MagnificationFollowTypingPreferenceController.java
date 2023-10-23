@@ -26,7 +26,7 @@ import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
@@ -39,7 +39,7 @@ public class MagnificationFollowTypingPreferenceController extends TogglePrefere
             MagnificationFollowTypingPreferenceController.class.getSimpleName();
     static final String PREF_KEY = "magnification_follow_typing";
 
-    private SwitchPreference mFollowTypingPreference;
+    private TwoStatePreference mFollowTypingPreference;
 
     public MagnificationFollowTypingPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);

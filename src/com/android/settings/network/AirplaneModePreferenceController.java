@@ -30,7 +30,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.AirplaneModeEnabler;
 import com.android.settings.R;
@@ -58,7 +58,7 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
 
     private Fragment mFragment;
     private AirplaneModeEnabler mAirplaneModeEnabler;
-    private SwitchPreference mAirplaneModePreference;
+    private TwoStatePreference mAirplaneModePreference;
 
     public AirplaneModePreferenceController(Context context, String key) {
         super(context, key);

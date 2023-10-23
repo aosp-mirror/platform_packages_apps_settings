@@ -20,7 +20,7 @@ import android.content.Context;
 import android.provider.Settings;
 
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
@@ -54,13 +54,13 @@ public abstract class SecureSettingSwitchPreferenceController extends
     public void updateState(Preference preference) {
         final int mode = Settings.Secure.getInt(
             mContext.getContentResolver(), mSettingsKey, SETTING_VALUE_OFF);
-        ((SwitchPreference) mPreference).setChecked(mode != SETTING_VALUE_OFF);
+        ((TwoStatePreference) mPreference).setChecked(mode != SETTING_VALUE_OFF);
     }
 
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
         super.onDeveloperOptionsSwitchDisabled();
         Settings.Secure.putInt(mContext.getContentResolver(), mSettingsKey, SETTING_VALUE_OFF);
-        ((SwitchPreference) mPreference).setChecked(false);
+        ((TwoStatePreference) mPreference).setChecked(false);
     }
 }

@@ -32,7 +32,7 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -89,7 +89,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
 
     @VisibleForTesting
     RestrictedPreference mSwitchUserPref;
-    private SwitchPreference mPhonePref;
+    private TwoStatePreference mPhonePref;
     @VisibleForTesting
     Preference mAppAndContentAccessPref;
     @VisibleForTesting
@@ -97,7 +97,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     @VisibleForTesting
     Preference mRemoveUserPref;
     @VisibleForTesting
-    SwitchPreference mGrantAdminPref;
+    TwoStatePreference mGrantAdminPref;
 
     @VisibleForTesting
     /** The user being studied (not the user doing the studying). */
