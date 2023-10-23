@@ -12560,12 +12560,9 @@
     <string name="content_protection_preference_user_consent_switch_title">Use scanning</string>
     <!-- Title of the toggle switch of work apps on the subpage of content protection settings -->
     <string name="content_protection_preference_user_consent_work_profile_switch_title">Use scanning for work apps</string>
-    <!-- Summary of the subpage of content protection settings -->
-    <string name="content_protection_preference_subpage_summary">Scanning runs privately right on your device, checking app activity for phishing or other deceptive behavior. If it\’s detected, some app info is sent to Google Play Protect to confirm the threat and warn app users.</string>
-    <!-- Information at the bottom of the subpage of content protection settings -->
-    <string name="content_protection_preference_subpage_info">
-        <![CDATA[
-        This is a protected security feature. No device or personal info is shared with Google.
-        \n\nPhishing is an attempt to steal sign-in credentials or other personal info.
-        ]]></string>
+
+    <!-- Default summary of the subpage of content protection settings. Will be overlaid by OEM. -->
+    <string name="content_protection_preference_subpage_summary"></string>
+    <!-- Default information at the bottom of the subpage of content protection settings. Will be overlaid by OEM. -->
+    <string name="content_protection_preference_subpage_info"></string>
 </resources>
