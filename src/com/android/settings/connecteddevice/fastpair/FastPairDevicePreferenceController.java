@@ -91,6 +91,7 @@ public class FastPairDevicePreferenceController extends BasePreferenceController
     @Override
     public void onStart(@NonNull LifecycleOwner owner) {
         if (mFastPairDeviceUpdater != null) {
+            mFastPairDeviceUpdater.setPreferenceContext(mContext);
             mFastPairDeviceUpdater.registerCallback();
         } else {
             if (DEBUG) {
@@ -103,6 +104,7 @@ public class FastPairDevicePreferenceController extends BasePreferenceController
     @Override
     public void onStop(@NonNull LifecycleOwner owner) {
         if (mFastPairDeviceUpdater != null) {
+            mFastPairDeviceUpdater.setPreferenceContext(null);
             mFastPairDeviceUpdater.unregisterCallback();
         } else {
             if (DEBUG) {
@@ -118,7 +120,6 @@ public class FastPairDevicePreferenceController extends BasePreferenceController
         mPreferenceGroup = screen.findPreference(getPreferenceKey());
         mSeeAllPreference = mPreferenceGroup.findPreference(KEY_SEE_ALL);
         updatePreferenceVisibility();
-
         if (isAvailable()) {
             final Context context = screen.getContext();
             mFastPairDeviceUpdater.setPreferenceContext(context);
