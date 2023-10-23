@@ -62,7 +62,7 @@ public class ShortcutPreference extends Preference {
     ShortcutPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         setLayoutResource(R.layout.accessibility_shortcut_secondary_action);
-        setWidgetLayoutResource(R.layout.preference_widget_primary_switch);
+        setWidgetLayoutResource(com.android.settingslib.R.layout.preference_widget_primary_switch);
         setIconSpaceReserved(false);
         // Treat onSettingsClicked as this preference's click.
         setOnPreferenceClickListener(preference -> {
@@ -88,7 +88,8 @@ public class ShortcutPreference extends Preference {
                     mSettingsEditable ? outValue.resourceId : /* Remove background */ 0);
         }
 
-        Switch switchWidget = holder.itemView.findViewById(R.id.switchWidget);
+        Switch switchWidget =
+                holder.itemView.findViewById(com.android.settingslib.R.id.switchWidget);
         if (switchWidget != null) {
             // Consumes move events to ignore drag actions.
             switchWidget.setOnTouchListener((v, event) -> {

@@ -1012,7 +1012,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
 
         @Override
         protected int getSecondTargetResId() {
-            return R.layout.preference_widget_primary_switch;
+            return com.android.settingslib.R.layout.preference_widget_primary_switch;
         }
 
         @Override
@@ -1020,9 +1020,9 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
             super.onBindViewHolder(view);
 
             // Setup the switch.
-            View checkableView = view.itemView.findViewById(R.id.switchWidget);
-            if (checkableView != null && checkableView instanceof Switch) {
-                final Switch switchView = (Switch) checkableView;
+            View checkableView =
+                    view.itemView.findViewById(com.android.settingslib.R.id.switchWidget);
+            if (checkableView instanceof Switch switchView) {
                 switchView.setChecked(mChecked);
                 switchView.setOnClickListener(mListener);
 
