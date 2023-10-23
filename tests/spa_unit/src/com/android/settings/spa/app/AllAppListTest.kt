@@ -18,6 +18,8 @@ package com.android.settings.spa.app
 
 import android.content.Context
 import android.content.pm.ApplicationInfo
+import android.content.pm.PackageManager
+import android.graphics.drawable.Drawable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.State
 import androidx.compose.ui.test.assertIsDisplayed
@@ -38,15 +40,27 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.kotlin.any
+import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.spy
+import org.mockito.kotlin.stub
+
 
 @RunWith(AndroidJUnit4::class)
 class AllAppListTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
-    private val context: Context = ApplicationProvider.getApplicationContext()
-
     private val fakeNavControllerWrapper = FakeNavControllerWrapper()
+
+    private val packageManager = mock<PackageManager> {
+        on { getPackagesForUid(USER_ID) } doReturn arrayOf(PACKAGE_NAME)
+    }
+
+    private val context: Context = spy(ApplicationProvider.getApplicationContext()) {
+        on { packageManager } doReturn packageManager
+    }
 
     @Test
     fun allAppListPageProvider_name() {
@@ -175,6 +189,33 @@ class AllAppListTest {
             .isEqualTo("$SUMMARY${System.lineSeparator()}Not installed for this user")
     }
 
+    @Test
+    fun allAppListModel_archivedApp() {
+        val app = mock<ApplicationInfo> {
+            on { loadUnbadgedIcon(any()) } doReturn UNBADGED_ICON
+            on { loadLabel(any()) } doReturn LABEL
+        }
+        app.isArchived = true
+        packageManager.stub {
+            on {
+                getApplicationInfoAsUser(PACKAGE_NAME, 0, USER_ID)
+            } doReturn app
+        }
+        composeTestRule.setContent {
+            fakeNavControllerWrapper.Wrapper {
+                with(AllAppListModel(context)) {
+                    AppListItemModel(
+                        record = AppRecordWithSize(app = app),
+                        label = LABEL,
+                        summary = stateOf(SUMMARY),
+                    ).AppItem()
+                }
+            }
+        }
+
+        composeTestRule.onNodeWithText(LABEL).assertIsDisplayed()
+    }
+
     private fun getAppListInput(): AppListInput<AppRecordWithSize> {
         lateinit var input: AppListInput<AppRecordWithSize>
         composeTestRule.setContent {
@@ -206,6 +247,7 @@ class AllAppListTest {
         const val PACKAGE_NAME = "package.name"
         const val LABEL = "Label"
         const val SUMMARY = "Summary"
+        val UNBADGED_ICON = mock<Drawable>()
         val APP = ApplicationInfo().apply {
             packageName = PACKAGE_NAME
             flags = ApplicationInfo.FLAG_INSTALLED
