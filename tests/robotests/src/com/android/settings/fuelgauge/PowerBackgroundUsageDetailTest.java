@@ -39,7 +39,7 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.UserHandle;
-import android.widget.Switch;
+import android.widget.CompoundButton;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.loader.app.LoaderManager;
@@ -109,7 +109,7 @@ public class PowerBackgroundUsageDetailTest {
     @Mock private BackupManager mBackupManager;
     @Mock private PackageManager mPackageManager;
     @Mock private AppOpsManager mAppOpsManager;
-    @Mock private Switch mMockSwitch;
+    @Mock private CompoundButton mMockSwitch;
 
     @Before
     public void setUp() {
@@ -259,7 +259,7 @@ public class PowerBackgroundUsageDetailTest {
         final int optimizedMode = BatteryOptimizeUtils.MODE_OPTIMIZED;
         mFragment.mOptimizationMode = optimizedMode;
 
-        mFragment.onSwitchChanged(mMockSwitch, /* isChecked= */ false);
+        mFragment.onCheckedChanged(mMockSwitch, /* isChecked= */ false);
 
         verify(mOptimizePreference).setEnabled(false);
         verify(mUnrestrictedPreference).setEnabled(false);
@@ -275,7 +275,7 @@ public class PowerBackgroundUsageDetailTest {
         final int optimizedMode = BatteryOptimizeUtils.MODE_OPTIMIZED;
         mFragment.mOptimizationMode = restrictedMode;
 
-        mFragment.onSwitchChanged(mMockSwitch, /* isChecked= */ true);
+        mFragment.onCheckedChanged(mMockSwitch, /* isChecked= */ true);
 
         verify(mOptimizePreference).setEnabled(true);
         verify(mUnrestrictedPreference).setEnabled(true);

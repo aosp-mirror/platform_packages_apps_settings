@@ -160,7 +160,7 @@ public class DevelopmentSettingsDashboardFragmentTest {
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0);
 
-        mDashboard.onSwitchChanged(null, false /* isChecked */);
+        mDashboard.onCheckedChanged(null, false /* isChecked */);
         assertThat(ShadowEnableDevelopmentSettingWarningDialog.mShown).isFalse();
     }
 
@@ -172,7 +172,7 @@ public class DevelopmentSettingsDashboardFragmentTest {
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0);
 
-        mDashboard.onSwitchChanged(null, true /* isChecked */);
+        mDashboard.onCheckedChanged(null, true /* isChecked */);
         assertThat(ShadowEnableDevelopmentSettingWarningDialog.mShown).isTrue();
     }
 
@@ -184,7 +184,7 @@ public class DevelopmentSettingsDashboardFragmentTest {
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 1);
 
-        mDashboard.onSwitchChanged(null, false /* isChecked */);
+        mDashboard.onCheckedChanged(null, false /* isChecked */);
 
         assertThat(ShadowEnableDevelopmentSettingWarningDialog.mShown).isFalse();
         assertThat(DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(mContext)).isFalse();
@@ -203,7 +203,7 @@ public class DevelopmentSettingsDashboardFragmentTest {
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 1);
 
-        mDashboard.onSwitchChanged(null, false /* isChecked */);
+        mDashboard.onCheckedChanged(null, false /* isChecked */);
 
         AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(dialog).isNotNull();
