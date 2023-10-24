@@ -54,7 +54,8 @@ import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.Preference.OnPreferenceClickListener;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceViewHolder;
-import androidx.preference.SwitchPreference;
+import androidx.preference.SwitchPreferenceCompat;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -132,7 +133,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         }
     };
 
-    static class AppRestrictionsPreference extends SwitchPreference {
+    static class AppRestrictionsPreference extends SwitchPreferenceCompat {
         private boolean hasSettings;
         private OnClickListener listener;
         private ArrayList<RestrictionEntry> restrictions;
@@ -687,10 +688,10 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
             Preference p = null;
             switch (entry.getType()) {
             case RestrictionEntry.TYPE_BOOLEAN:
-                p = new SwitchPreference(getPrefContext());
+                p = new SwitchPreferenceCompat(getPrefContext());
                 p.setTitle(entry.getTitle());
                 p.setSummary(entry.getDescription());
-                ((SwitchPreference)p).setChecked(entry.getSelectedState());
+                ((TwoStatePreference) p).setChecked(entry.getSelectedState());
                 break;
             case RestrictionEntry.TYPE_CHOICE:
             case RestrictionEntry.TYPE_CHOICE_LEVEL:

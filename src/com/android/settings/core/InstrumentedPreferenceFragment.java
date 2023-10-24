@@ -27,7 +27,7 @@ import android.util.Log;
 import androidx.annotation.XmlRes;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.internal.jank.InteractionJankMonitor;
@@ -71,9 +71,9 @@ public abstract class InstrumentedPreferenceFragment extends ObservablePreferenc
         super.onStart();
         // Override the OnPreferenceTreeClickListener in super.onStart() to inject jank detection.
         getPreferenceManager().setOnPreferenceTreeClickListener((preference) -> {
-            if (preference instanceof SwitchPreference) {
+            if (preference instanceof TwoStatePreference twoStatePreference) {
                 SettingsJankMonitor.detectSwitchPreferenceClickJank(
-                        getListView(), (SwitchPreference) preference);
+                        getListView(), twoStatePreference);
             }
             return onPreferenceTreeClick(preference);
         });

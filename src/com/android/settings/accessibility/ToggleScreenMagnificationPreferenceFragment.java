@@ -44,7 +44,8 @@ import android.widget.CheckBox;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
-import androidx.preference.SwitchPreference;
+import androidx.preference.SwitchPreferenceCompat;
+import androidx.preference.TwoStatePreference;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.DialogCreatable;
@@ -75,7 +76,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     private static final TextUtils.SimpleStringSplitter sStringColonSplitter =
             new TextUtils.SimpleStringSplitter(COMPONENT_NAME_SEPARATOR);
 
-    protected SwitchPreference mFollowingTypingSwitchPreference;
+    protected TwoStatePreference mFollowingTypingSwitchPreference;
 
     // TODO(b/147021230): Move duplicated functions with android/internal/accessibility into util.
     private TouchExplorationStateChangeListener mTouchExplorationStateChangeListener;
@@ -201,8 +202,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         getSettingsLifecycle().addObserver(magnificationModePreferenceController);
         magnificationModePreferenceController.displayPreference(getPreferenceScreen());
 
-        mFollowingTypingSwitchPreference =
-                new SwitchPreference(getPrefContext());
+        mFollowingTypingSwitchPreference = new SwitchPreferenceCompat(getPrefContext());
         mFollowingTypingSwitchPreference.setTitle(
                 R.string.accessibility_screen_magnification_follow_typing_title);
         mFollowingTypingSwitchPreference.setSummary(
@@ -260,7 +260,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
             return;
         }
 
-        var alwaysOnPreference = new SwitchPreference(getPrefContext());
+        var alwaysOnPreference = new SwitchPreferenceCompat(getPrefContext());
         alwaysOnPreference.setTitle(
                 R.string.accessibility_screen_magnification_always_on_title);
         alwaysOnPreference.setSummary(
@@ -285,7 +285,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
             return;
         }
 
-        SwitchPreference joystickPreference = new SwitchPreference(getPrefContext());
+        TwoStatePreference joystickPreference = new SwitchPreferenceCompat(getPrefContext());
         joystickPreference.setTitle(
                 R.string.accessibility_screen_magnification_joystick_title);
         joystickPreference.setSummary(
