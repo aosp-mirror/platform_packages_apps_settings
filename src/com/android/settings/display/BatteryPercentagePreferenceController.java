@@ -23,7 +23,7 @@ import android.provider.Settings;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.internal.R;
 import com.android.settings.Utils;
@@ -71,7 +71,7 @@ public class BatteryPercentagePreferenceController extends BasePreferenceControl
                 mContext.getResources().getBoolean(
                 R.bool.config_defaultBatteryPercentageSetting) ? 1 : 0);
 
-        ((SwitchPreference) preference).setChecked(setting == 1);
+        ((TwoStatePreference) preference).setChecked(setting == 1);
     }
 
     @Override

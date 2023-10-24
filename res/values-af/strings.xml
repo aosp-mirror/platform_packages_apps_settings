@@ -113,6 +113,10 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Deaktiveer Bluetooth LE-oudio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Deaktiveer Bluetooth LE oudio-kenmerk as die toestel LE oudiohardewarevermoëns ondersteun."</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Wys LE-oudiowisselaar in Toestelbesonderhede"</string>
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist (7392319491894565552) -->
+    <skip />
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist_summary (8999245286359656738) -->
+    <skip />
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Mediatoestelle"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Oproeptoestelle"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Ander toestelle"</string>
@@ -1317,6 +1321,8 @@
     <string name="carrier_enabled_summaryOn" msgid="5212067975273903381">"APN is geaktiveer"</string>
     <string name="carrier_enabled_summaryOff" msgid="8541959867953738521">"APN gedeaktiveer"</string>
     <string name="bearer" msgid="3231443241639159358">"Draer"</string>
+    <string name="network_type" msgid="748590707422733595">"Netwerktipe"</string>
+    <string name="network_type_unspecified" msgid="7756349656194518725">"Ongespesifiseer"</string>
     <string name="mvno_type" msgid="4734654257494971247">"MVNO-tipe"</string>
     <string name="mvno_match_data" msgid="5213193073684321156">"MVNO-waarde"</string>
     <string name="menu_delete" msgid="9199740901584348273">"Vee toegangspunt uit"</string>
@@ -2041,6 +2047,8 @@
     <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Gebruik vibrasie en fisiese terugvoer"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Wekkervibrasie"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Mediavibrasie"</string>
+    <!-- no translation found for accessibility_keyboard_vibration_title (7559967730626765441) -->
+    <skip />
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Luivibrasie"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Kennisgewingvibrasie"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Raakterugvoer"</string>
@@ -2348,6 +2356,7 @@
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_since_last_full_charge" msgid="3488425008925924769">"sedert battery laas volgelaai is"</string>
     <string name="battery_usage_system_apps" msgid="8659537819731575299">"Stelselprogramme"</string>
+    <string name="battery_usage_uninstalled_apps" msgid="8170405012552803662">"Gedeïnstalleerde apps"</string>
     <string name="battery_usage_others" msgid="311793281613609986">"Ander"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Geskatte tyd oor"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"Tot battery volgelaai is"</string>
@@ -2607,6 +2616,7 @@
     <string name="data_usage_app_summary_title" msgid="4933742247928064178">"Mobiele data en wi‑fi"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Outosinkroniseer persoonlike data"</string>
     <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Outo-sinkroniseer werkdata"</string>
+    <string name="account_settings_menu_auto_sync_private" msgid="2315144351530596228">"Outosinkroniseer privaat data"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"Verander siklus..."</string>
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"Dag van maand om dataverbruiksiklus terug te stel:"</string>
     <string name="data_usage_empty" msgid="5619908658853726866">"Geen programme het gedurende hierdie tydperk data gebruik nie."</string>
@@ -3049,6 +3059,8 @@
     <string name="keywords_font_size" msgid="1643198841815006447">"teksgrootte, grootdruk, groot lettertipe, groot teks, swak sig, maak teks groter, teksvergroter, lettertipevergroting"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"altyd-aan-stemmingsaansig, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, merker, leser"</string>
+    <!-- no translation found for keywords_keyboard_vibration (6485149510591654697) -->
+    <skip />
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Volume, vibrasie, Moenie Steur Nie"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Mediavolume"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Uitsaaivolume"</string>
@@ -3355,6 +3367,17 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"Hierdie program steun nie verbeterde instellings nie"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"Meer instellings"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"Meer instellings is binne hierdie app beskikbaar"</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"Kennisgewingbedaring"</string>
+    <string name="notification_polite_all_apps" msgid="1118651561594250059">"Pas bedaring toe op alle kennisgewings"</string>
+    <string name="notification_polite_all_apps_summary" msgid="540268373207498126">"Verminder die aantal kennisgewings geleidelik wanneer jy baie agtereenvolgende kennisgewings van dieselfde app af kry"</string>
+    <string name="notification_polite_conversations" msgid="8197695136727245741">"Pas bedaring toe op gesprekke"</string>
+    <string name="notification_polite_conversations_summary" msgid="2677141765664359994">"Verminder die aantal kennisgewings geleidelik wanneer jy in ’n kort tydperk baie boodskappe van dieselfde klets af kry"</string>
+    <string name="notification_polite_disabled" msgid="1378078021594282842">"Moenie kennisgewingbedaring gebruik nie"</string>
+    <string name="notification_polite_disabled_summary" msgid="1145341260283746936">"Moet nooit die aantal kennisgewings verminder nie, ongeag hoeveel agtereenvolgende kennisgewings daar van dieselfde app af kom"</string>
+    <string name="notification_polite_vibrate_unlocked" msgid="6142573851761357903">"Vibreer wanneer dit ontsluit is"</string>
+    <string name="notification_polite_vibrate_unlocked_summary" msgid="1678472892282874459">"Vibreer slegs wanneer skerm ontsluit is"</string>
+    <string name="notification_polite_work" msgid="8823596456640216391">"Pas toe op werkprofiele"</string>
+    <string name="notification_polite_work_summary" msgid="8260947839104352075">"Pas jou persoonlike profiel se kennisgewingbedaringinstellings op jou werkprofiel toe"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR-helperdienste"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Geen geïnstalleerde programme het versoek om as VR-helperdienste te werk nie."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Gee <xliff:g id="SERVICE">%1$s</xliff:g> toegang tot VR-diens?"</string>
@@ -4857,4 +4880,10 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Jou toestelnaam is sigbaar vir apps wat jy geïnstalleer het. Ander mense sal dit dalk ook kan sien as jy aan Bluetooth-toestelle koppel, aan ’n wi-fi-netwerk koppel, of ’n wi-fi-warmkol opstel."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Grammatikale geslag"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Kies grammatikale geslag"</string>
+    <string name="content_protection_preference_title" msgid="5069260032659193074">"Skandeer vir misleidende apps"</string>
+    <string name="content_protection_preference_summary" msgid="2252393849408445391">"Gaan appaktiwiteit na vir uitvissing"</string>
+    <string name="content_protection_preference_user_consent_switch_title" msgid="60088482227901638">"Gebruik skandering"</string>
+    <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="2868495870224174097">"Gebruik skandering vir werkapps"</string>
+    <string name="content_protection_preference_subpage_summary" msgid="7707255571476950976">"Skandering word privaat direk op jou toestel gedoen en gaan appaktiwiteit na vir uitvissing of ander misleidende optrede. As dit bespeur word, word sekere inligting na Google Play Beskerming toe gestuur om die bedreiging te bevestig en appgebruikers te waarsku."</string>
+    <string name="content_protection_preference_subpage_info" msgid="6010628258453929862">"Dit is ’n beskermde sekuriteitskenmerk. Geen toestel of persoonlike inligting word met Google gedeel nie. \n\nUitvissing is ’n poging om aanmeldeiebewyse of ander persoonlike inligting te steel."</string>
 </resources>

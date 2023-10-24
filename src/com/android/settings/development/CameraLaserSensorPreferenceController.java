@@ -22,7 +22,7 @@ import android.text.TextUtils;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
@@ -72,7 +72,7 @@ public class CameraLaserSensorPreferenceController extends DeveloperOptionsPrefe
     @Override
     public void updateState(Preference preference) {
         final boolean enabled = isLaserSensorEnabled();
-        ((SwitchPreference) mPreference).setChecked(enabled);
+        ((TwoStatePreference) mPreference).setChecked(enabled);
     }
 
     // There should be no impact on the current

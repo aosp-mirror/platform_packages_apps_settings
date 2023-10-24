@@ -21,7 +21,7 @@ import android.provider.Settings;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
@@ -59,7 +59,7 @@ public class MobileDataAlwaysOnPreferenceController extends
         final int mobileDataAlwaysOnMode = Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.MOBILE_DATA_ALWAYS_ON, SETTING_VALUE_ON);
 
-        ((SwitchPreference) mPreference).setChecked(mobileDataAlwaysOnMode != SETTING_VALUE_OFF);
+        ((TwoStatePreference) mPreference).setChecked(mobileDataAlwaysOnMode != SETTING_VALUE_OFF);
     }
 
     @Override
@@ -67,6 +67,6 @@ public class MobileDataAlwaysOnPreferenceController extends
         super.onDeveloperOptionsSwitchDisabled();
         Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.MOBILE_DATA_ALWAYS_ON,
                 SETTING_VALUE_ON);
-        ((SwitchPreference) mPreference).setChecked(true);
+        ((TwoStatePreference) mPreference).setChecked(true);
     }
 }

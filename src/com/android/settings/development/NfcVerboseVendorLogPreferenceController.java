@@ -22,7 +22,7 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
@@ -69,7 +69,7 @@ public class NfcVerboseVendorLogPreferenceController
     public void updateState(Preference preference) {
         try {
             final String currentValue = SystemProperties.get(NFC_VERBOSE_VENDOR_LOG_PROPERTY);
-            ((SwitchPreference) mPreference)
+            ((TwoStatePreference) mPreference)
                     .setChecked(currentValue.equals(VERBOSE_VENDOR_LOG_ENABLED));
         } catch (RuntimeException e) {
             Log.e(TAG, "Fail to get nfc system property: " + e.getMessage());
@@ -81,7 +81,7 @@ public class NfcVerboseVendorLogPreferenceController
         super.onDeveloperOptionsSwitchDisabled();
         try {
             SystemProperties.set(NFC_VERBOSE_VENDOR_LOG_PROPERTY, VERBOSE_VENDOR_LOG_DISABLED);
-            ((SwitchPreference) mPreference).setChecked(false);
+            ((TwoStatePreference) mPreference).setChecked(false);
         } catch (RuntimeException e) {
             Log.e(TAG, "Fail to set nfc system property: " + e.getMessage());
         }

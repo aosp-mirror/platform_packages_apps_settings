@@ -113,6 +113,10 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Zima Bluetooth LE audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Huzima kipengele cha Bluetooth LE audio ikiwa kifaa kinatumia maunzi yenye uwezo wa kutumia LE audio."</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Onyesha LE Audio kwenye Maelezo ya Kifaa"</string>
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist (7392319491894565552) -->
+    <skip />
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist_summary (8999245286359656738) -->
+    <skip />
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Vifaa vya kuhifadhia data"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Vifaa vya kupiga simu"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Vifaa vingine"</string>
@@ -1317,6 +1321,8 @@
     <string name="carrier_enabled_summaryOn" msgid="5212067975273903381">"APN imewashwa"</string>
     <string name="carrier_enabled_summaryOff" msgid="8541959867953738521">"APN imezimwa"</string>
     <string name="bearer" msgid="3231443241639159358">"Mwenye"</string>
+    <string name="network_type" msgid="748590707422733595">"Aina ya mtandao"</string>
+    <string name="network_type_unspecified" msgid="7756349656194518725">"Haijabainishwa"</string>
     <string name="mvno_type" msgid="4734654257494971247">"Aina ya MVNO"</string>
     <string name="mvno_match_data" msgid="5213193073684321156">"Thamani ya MVNO"</string>
     <string name="menu_delete" msgid="9199740901584348273">"Futa APN"</string>
@@ -2041,6 +2047,8 @@
     <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Tumia mtetemo na miguso"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Mtetemo wa kengele"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Mtetemo wa maudhui"</string>
+    <!-- no translation found for accessibility_keyboard_vibration_title (7559967730626765441) -->
+    <skip />
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Mtetemo wa mlio"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Mtetemo wa arifa"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Mtetemo kifaa kinapoguswa"</string>
@@ -2348,6 +2356,7 @@
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_since_last_full_charge" msgid="3488425008925924769">"tangu ilipojaa chaji mara ya mwisho"</string>
     <string name="battery_usage_system_apps" msgid="8659537819731575299">"Programu za mfumo"</string>
+    <string name="battery_usage_uninstalled_apps" msgid="8170405012552803662">"Programu zilizoondolewa"</string>
     <string name="battery_usage_others" msgid="311793281613609986">"Nyingine"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Kadirio la muda uliosalia"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"Hadi chaji ijae"</string>
@@ -2607,6 +2616,7 @@
     <string name="data_usage_app_summary_title" msgid="4933742247928064178">"Wi‑Fi na data ya mtandao wa simu"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Sawazisha kiotomatiki data ya binafsi"</string>
     <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Sawazisha kiotomatiki data ya kazi"</string>
+    <string name="account_settings_menu_auto_sync_private" msgid="2315144351530596228">"Sawazisha kiotomatiki data ya faragha"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"badilisha mzunguko..."</string>
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"Siku katika mwezi ya kuweka kipindi kipya cha kutumia data:"</string>
     <string name="data_usage_empty" msgid="5619908658853726866">"Hakuna programu zilizotumia data wakati wa kipindi hiki."</string>
@@ -3049,6 +3059,8 @@
     <string name="keywords_font_size" msgid="1643198841815006447">"ukubwa wa maandishi, chapa kubwa, fonti kubwa, maandishi makubwa, uwezo mdogo wa kuona, ongeza ukubwa wa maandishi, kikuza fonti, kuongeza ukubwa wa fonti"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"onyesho tulivu lisilozimwa kamwe, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, tagi, kisomaji"</string>
+    <!-- no translation found for keywords_keyboard_vibration (6485149510591654697) -->
+    <skip />
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Kiwango cha sauti, mtetemo, Usinisumbue"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Sauti ya maudhui"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Sauti ya maudhui ya kutumwa"</string>
@@ -3355,6 +3367,17 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"Programu hii haitumii mipangilio iliyoboreshwa"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"Mipangilio zaidi"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"Mipangilio zaidi inapatikana ndani ya programu hii"</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"Kupungua kwa shughuli ya arifa"</string>
+    <string name="notification_polite_all_apps" msgid="1118651561594250059">"Tumia hali ya kupungua kwa shughuli kwenye programu zote"</string>
+    <string name="notification_polite_all_apps_summary" msgid="540268373207498126">"Punguza polepole sauti ya arifa unapopata arifa nyingi zinazofuatana kutoka kwa programu moja"</string>
+    <string name="notification_polite_conversations" msgid="8197695136727245741">"Tumia hali ya kupungua kwa shughuli katika mazungumzo"</string>
+    <string name="notification_polite_conversations_summary" msgid="2677141765664359994">"Punguza polepole sauti ya arifa unapopokea ujumbe mwingi kutoka kwa gumzo moja ndani ya kipindi kifupi cha muda"</string>
+    <string name="notification_polite_disabled" msgid="1378078021594282842">"Usitumie arifa ya hali ya kupungua kwa shughuli"</string>
+    <string name="notification_polite_disabled_summary" msgid="1145341260283746936">"Usipunguze kamwe sauti ya arifa, bila kujali idadi ya arifa zinazofuatana kutoka kwa programu moja"</string>
+    <string name="notification_polite_vibrate_unlocked" msgid="6142573851761357903">"Iteteme inapofunguliwa"</string>
+    <string name="notification_polite_vibrate_unlocked_summary" msgid="1678472892282874459">"Iteteme tu wakati skrini imefunguliwa"</string>
+    <string name="notification_polite_work" msgid="8823596456640216391">"Tumia kwenye wasifu wa kazini"</string>
+    <string name="notification_polite_work_summary" msgid="8260947839104352075">"Tumia mipangilio ya kupungua kwa shughuli ya arifa ya wasifu wa binafsi kwenye wasifu wa kazini"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Huduma za kisaidizi cha Uhalisia Pepe"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Hakuna programu zilizosakinishwa ambazo zinaweza kutekeleza huduma za kisaidizi cha Uhalisia Pepe."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Ungependa kuruhusu huduma za Uhalisia Pepe katika <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -4857,4 +4880,10 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Jina la kifaa chako litaonekana kwa programu ambazo umesakinisha. Huenda likaonekana pia na watu wengine unapooanisha na vifaa vyenye Bluetooth, unapounganisha kwenye mtandao wa Wi-Fi au unapoweka mipangilio ya mtandao pepe wa Wi-Fi."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Jinsia ya kisarufi"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Chagua Jinsia ya kisarufi"</string>
+    <string name="content_protection_preference_title" msgid="5069260032659193074">"Inatafuta programu hasidi"</string>
+    <string name="content_protection_preference_summary" msgid="2252393849408445391">"Kagua shughuli kwenye programu ili kubaini iwapo kuna wizi wa data binafsi"</string>
+    <string name="content_protection_preference_user_consent_switch_title" msgid="60088482227901638">"Tumia ukaguzi"</string>
+    <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="2868495870224174097">"Tumia ukaguzi kwa programu za kazini"</string>
+    <string name="content_protection_preference_subpage_summary" msgid="7707255571476950976">"Ukaguzi huendeshwa kwa faragha kwenye kifaa chako kukagua shughuli kwenye programu ili kubaini iwapo kuna wizi wa data binafsi au tabia nyingine ya udanganyifu. Ikitambuliwa, maelezo fulani ya programu hutumwa kwa Google Play Protect ili kuthibitisha tishio na kutoa tahadhari kwa watumiaji wa programu."</string>
+    <string name="content_protection_preference_subpage_info" msgid="6010628258453929862">"Hiki ni kipengele cha usalama kinacholindwa. Hakuna taarifa binafsi au maelezo ya kifaa yanayoshirikiwa kwa Google. \n\nWizi wa data binafsi ni jaribio la kuiba vitambulisho vya kuingia katika akaunti au taarifa nyingine binafsi."</string>
 </resources>

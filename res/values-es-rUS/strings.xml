@@ -113,6 +113,10 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Inhabilitar Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Inhabilita la función Bluetooth LE Audio si el dispositivo admite funciones de hardware de ese tipo."</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Botón de LE Audio en Detalles del disp."</string>
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist (7392319491894565552) -->
+    <skip />
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist_summary (8999245286359656738) -->
+    <skip />
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Dispositivos de medios"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Dispositivos para llamar"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Otros dispositivos"</string>
@@ -1317,6 +1321,8 @@
     <string name="carrier_enabled_summaryOn" msgid="5212067975273903381">"APN activado"</string>
     <string name="carrier_enabled_summaryOff" msgid="8541959867953738521">"APN inhabilitado"</string>
     <string name="bearer" msgid="3231443241639159358">"Portador"</string>
+    <string name="network_type" msgid="748590707422733595">"Tipo de red"</string>
+    <string name="network_type_unspecified" msgid="7756349656194518725">"Sin especificar"</string>
     <string name="mvno_type" msgid="4734654257494971247">"Tipo de OMV"</string>
     <string name="mvno_match_data" msgid="5213193073684321156">"Valor de OMV"</string>
     <string name="menu_delete" msgid="9199740901584348273">"Eliminar APN"</string>
@@ -1939,7 +1945,7 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="7292969929578621958">"Para usar una función de accesibilidad, desliza 3 dedos hacia arriba desde la parte inferior de la pantalla.\n\nSi quieres cambiar de función, desliza 3 dedos hacia arriba y mantén presionada la pantalla."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Entendido"</string>
     <string name="accessibility_tutorial_dialog_link_button" msgid="6797349445794031781">"Configuración del botón"</string>
-    <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Combinación de accesibilidad para: <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
+    <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Combinación de accesibilidad para <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Botón de accesibilidad"</string>
     <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"Gesto de accesibilidad"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Deslizar dos dedos hacia arriba"</string>
@@ -2041,6 +2047,8 @@
     <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Usar vibración y tecnología táctil"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Vibración de alarmas"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Vibración de contenido multimedia"</string>
+    <!-- no translation found for accessibility_keyboard_vibration_title (7559967730626765441) -->
+    <skip />
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Vibración del tono"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Vibración de las notificaciones"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Respuesta táctil"</string>
@@ -2348,6 +2356,7 @@
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_since_last_full_charge" msgid="3488425008925924769">"desde la última carga completa"</string>
     <string name="battery_usage_system_apps" msgid="8659537819731575299">"Apps del sistema"</string>
+    <string name="battery_usage_uninstalled_apps" msgid="8170405012552803662">"Apps desinstalada"</string>
     <string name="battery_usage_others" msgid="311793281613609986">"Otros"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Tiempo restante estimado"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"Para completar la carga"</string>
@@ -2607,6 +2616,7 @@
     <string name="data_usage_app_summary_title" msgid="4933742247928064178">"Wi-Fi y datos móviles"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Sincronizar datos personales"</string>
     <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Sincronizar datos de trabajo"</string>
+    <string name="account_settings_menu_auto_sync_private" msgid="2315144351530596228">"Sinc. auto. datos privados"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"Cambiar el ciclo..."</string>
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"Día del mes para restablecer el ciclo de uso de datos:"</string>
     <string name="data_usage_empty" msgid="5619908658853726866">"Ninguna aplicación usó datos durante este período."</string>
@@ -2970,7 +2980,7 @@
     <string name="keywords_battery_adaptive_preferences" msgid="1774870663426502938">"preferencias adaptables, batería adaptable"</string>
     <string name="keywords_spell_checker" msgid="5148906820603481657">"ortografía, diccionario, corrector ortográfico, corrección automática"</string>
     <string name="keywords_voice_input" msgid="7534900094659358971">"herramienta de reconocimiento, entrada, voz, hablar, idioma, manos libres, mano libre, reconocimiento, ofensiva, palabra, historial, audio, auriculares Bluetooth"</string>
-    <string name="keywords_text_to_speech_output" msgid="6728080502619011668">"tarifa, idioma, predeterminado, hablar, texto a voz, accesibilidad, lector de pantalla, ciego"</string>
+    <string name="keywords_text_to_speech_output" msgid="6728080502619011668">"tarifa, idioma, predeterminado, hablar, texto a voz, accesibilidad, lector de pantalla, persona ciega"</string>
     <string name="keywords_date_and_time" msgid="4402136313104901312">"reloj, horario militar"</string>
     <string name="keywords_network_reset" msgid="4075670452112218042">"restablecer, configuración de fábrica"</string>
     <string name="keywords_factory_data_reset" msgid="4979623326958976773">"borrar, eliminar, restaurar, quitar, restablecer a la configuración de fábrica"</string>
@@ -3049,6 +3059,8 @@
     <string name="keywords_font_size" msgid="1643198841815006447">"tamaño del texto, letra grande, fuente grande, texto grande, visión reducida, agrandar el texto, agrandar la fuente, agrandamiento de la fuente"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"pantalla ambiente siempre encendida, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, etiqueta, lector"</string>
+    <!-- no translation found for keywords_keyboard_vibration (6485149510591654697) -->
+    <skip />
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Volumen, vibración, No interrumpir"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Volumen multimedia"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Volumen de transmisión"</string>
@@ -3355,6 +3367,17 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"Esta app no admite opciones de configuración mejoradas"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"Más parámetros de configuración"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"Puedes encontrar más parámetros de configuración disponibles dentro de esta app"</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"Inactividad de notificaciones"</string>
+    <string name="notification_polite_all_apps" msgid="1118651561594250059">"Aplicar período de inactividad a todas las notificaciones"</string>
+    <string name="notification_polite_all_apps_summary" msgid="540268373207498126">"Disminuir gradualmente el volumen de notificación cuando recibes muchas consecutivas de la misma app"</string>
+    <string name="notification_polite_conversations" msgid="8197695136727245741">"Aplicar período de inactividad a las conversaciones"</string>
+    <string name="notification_polite_conversations_summary" msgid="2677141765664359994">"Disminuir gradualmente el volumen de notificación cuando recibes muchos mensajes del mismo chat en un período breve"</string>
+    <string name="notification_polite_disabled" msgid="1378078021594282842">"No usar el período de inactividad de las notificaciones"</string>
+    <string name="notification_polite_disabled_summary" msgid="1145341260283746936">"Nunca disminuir el volumen de notificación, sin importar la cantidad de notificaciones sucesivas de la misma app"</string>
+    <string name="notification_polite_vibrate_unlocked" msgid="6142573851761357903">"Vibrar cuando se desbloquea"</string>
+    <string name="notification_polite_vibrate_unlocked_summary" msgid="1678472892282874459">"Solo vibrar cuando la pantalla está desbloqueada"</string>
+    <string name="notification_polite_work" msgid="8823596456640216391">"Aplicar a perfiles de trabajo"</string>
+    <string name="notification_polite_work_summary" msgid="8260947839104352075">"Aplicar la configuración de período de inactividad de notificaciones de tu perfil personal al de trabajo"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Servicio de ayuda de RV"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Ninguna app instalada solicitó que se la ejecutara como servicio de ayuda de RV."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"¿Quieres permitir que el servicio de RV acceda a <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -3901,8 +3924,8 @@
     <string name="battery_tips_card_dismiss_button" msgid="1885756985544936618">"Entendido"</string>
     <string name="battery_tips_card_feedback_info" msgid="767117835675157298">"¿Fue útil este mensaje?"</string>
     <string name="battery_hints_warning_icon_a11y" msgid="5312542323401447620">"Ícono de advertencia de consejos sobre la batería"</string>
-    <string name="battery_tips_settings_summary_brightness" msgid="546145032616077783">"Activa el brillo automático para extender la duración de batería"</string>
-    <string name="battery_tips_settings_summary_screen_timeout" msgid="556801426050962077">"Reduce el tiempo de espera de la pantalla para extender la duración de batería"</string>
+    <string name="battery_tips_settings_summary_brightness" msgid="546145032616077783">"Activa el brillo automático para extender la duración de la batería"</string>
+    <string name="battery_tips_settings_summary_screen_timeout" msgid="556801426050962077">"Reduce el tiempo de espera de la pantalla para extender la duración de la batería"</string>
     <string name="battery_tips_apps_summary_always_high" msgid="6334519477067044920">"<xliff:g id="APP_LABEL">%1$s</xliff:g> usó más batería"</string>
     <string name="battery_tips_apps_summary_higher_than_usual" msgid="95676961671544628">"<xliff:g id="APP_LABEL">%1$s</xliff:g> usó más batería de la habitual"</string>
     <string name="battery_tips_apps_summary_always_high_in_background" msgid="2953858181710181126">"<xliff:g id="APP_LABEL">%1$s</xliff:g> usó más batería estando en segundo plano"</string>
@@ -4857,4 +4880,16 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"El nombre de tu dispositivo es visible para las apps instaladas. Es posible que también lo vean otras personas cuando te conectes a dispositivos Bluetooth o a una red Wi-Fi, o cuando configures un hotspot de Wi-Fi."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Género gramatical"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Selecciona un género gramatical"</string>
+    <!-- no translation found for content_protection_preference_title (5069260032659193074) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_summary (2252393849408445391) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_user_consent_switch_title (60088482227901638) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_user_consent_work_profile_switch_title (2868495870224174097) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_subpage_summary (7707255571476950976) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_subpage_info (6010628258453929862) -->
+    <skip />
 </resources>

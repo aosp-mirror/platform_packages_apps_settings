@@ -24,7 +24,7 @@ import android.os.ServiceManager;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
@@ -71,7 +71,7 @@ public class HardwareOverlaysPreferenceController extends DeveloperOptionsPrefer
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
         super.onDeveloperOptionsSwitchDisabled();
-        final SwitchPreference switchPreference = (SwitchPreference) mPreference;
+        final TwoStatePreference switchPreference = (TwoStatePreference) mPreference;
         if (switchPreference.isChecked()) {
             // Writing false to the preference when the setting is already off will have a
             // side effect of turning on the preference that we wish to avoid
@@ -96,7 +96,7 @@ public class HardwareOverlaysPreferenceController extends DeveloperOptionsPrefer
             @SuppressWarnings("unused") final int showUpdates = reply.readInt();
             @SuppressWarnings("unused") final int showBackground = reply.readInt();
             final int disableOverlays = reply.readInt();
-            ((SwitchPreference) mPreference).setChecked(disableOverlays != SETTING_VALUE_OFF);
+            ((TwoStatePreference) mPreference).setChecked(disableOverlays != SETTING_VALUE_OFF);
             reply.recycle();
             data.recycle();
         } catch (RemoteException ex) {

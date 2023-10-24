@@ -16,13 +16,12 @@
 
 package com.android.settings.applications.specialaccess.zenaccess;
 
-import android.app.ActivityManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoWithHeader;
@@ -66,7 +65,7 @@ public class ZenAccessDetails extends AppInfoWithHeader implements
         return null;
     }
 
-    public void updatePreference(Context context, SwitchPreference preference) {
+    private void updatePreference(Context context, TwoStatePreference preference) {
         final CharSequence label = mPackageInfo.applicationInfo.loadLabel(mPm);
         final Set<String> autoApproved = ZenAccessController.getAutoApprovedPackages(context);
         if (autoApproved.contains(mPackageName)) {

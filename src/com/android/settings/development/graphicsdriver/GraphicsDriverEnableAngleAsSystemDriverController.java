@@ -25,7 +25,7 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
@@ -164,16 +164,16 @@ public class GraphicsDriverEnableAngleAsSystemDriverController
             final String currentGlesDriver =
                     mSystemProperties.get(PROPERTY_PERSISTENT_GRAPHICS_EGL, "");
             final boolean isAngle = TextUtils.equals(ANGLE_DRIVER_SUFFIX, currentGlesDriver);
-            ((SwitchPreference) mPreference).setChecked(isAngle);
+            ((TwoStatePreference) mPreference).setChecked(isAngle);
         } else {
             mPreference.setEnabled(false);
-            ((SwitchPreference) mPreference).setChecked(false);
+            ((TwoStatePreference) mPreference).setChecked(false);
         }
 
         // Disable the developer option toggle UI if ANGLE is disabled, this means next time the
         // debug property needs to be set to true again to enable ANGLE. If ANGLE is enabled, don't
         // disable the developer option toggle UI so that it can be turned off easily.
-        if (!isAngleDeveloperOptionEnabled() && !((SwitchPreference) mPreference).isChecked()) {
+        if (!isAngleDeveloperOptionEnabled() && !((TwoStatePreference) mPreference).isChecked()) {
             mPreference.setEnabled(false);
         }
     }
@@ -186,7 +186,7 @@ public class GraphicsDriverEnableAngleAsSystemDriverController
             // 2) set the persist.graphics.egl empty string
             GraphicsEnvironment.getInstance().toggleAngleAsSystemDriver(false);
             // 3) reset the switch
-            ((SwitchPreference) mPreference).setChecked(false);
+            ((TwoStatePreference) mPreference).setChecked(false);
         }
     }
 
@@ -197,7 +197,7 @@ public class GraphicsDriverEnableAngleAsSystemDriverController
             // if persist.graphics.egl = "angle", set the property value back to ""
             GraphicsEnvironment.getInstance().toggleAngleAsSystemDriver(false);
             // toggle switch off
-            ((SwitchPreference) mPreference).setChecked(false);
+            ((TwoStatePreference) mPreference).setChecked(false);
             return;
         }
 
@@ -205,7 +205,7 @@ public class GraphicsDriverEnableAngleAsSystemDriverController
             // if persist.graphicx.egl = "", set the persist.graphics.egl back to "angle"
             GraphicsEnvironment.getInstance().toggleAngleAsSystemDriver(true);
             // toggle switch on
-            ((SwitchPreference) mPreference).setChecked(true);
+            ((TwoStatePreference) mPreference).setChecked(true);
             return;
         }
 

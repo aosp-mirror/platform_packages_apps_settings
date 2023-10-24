@@ -113,6 +113,10 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Nonaktifkan Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Nonaktifkan fitur Bluetooth LE Audio jika perangkat mendukung kemampuan hardware LE Audio."</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Tampilkan tombol LE audio di Detail Perangkat"</string>
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist (7392319491894565552) -->
+    <skip />
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist_summary (8999245286359656738) -->
+    <skip />
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Perangkat Media"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Perangkat panggilan telepon"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Perangkat lain"</string>
@@ -1057,7 +1061,7 @@
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Nonaktif"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"White balance layar"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
-    <string name="fold_lock_behavior_title" msgid="786228803694268449">"Lanjutkan menggunakan aplikasi saat perangkat dilipat"</string>
+    <string name="fold_lock_behavior_title" msgid="786228803694268449">"Terus pakai aplikasi saat dilipat"</string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="3627278682437562787">"Otomatis meningkatkan kecepatan refresh dari 60 menjadi <xliff:g id="ID_1">%1$s</xliff:g> Hz untuk beberapa konten. Meningkatkan penggunaan baterai."</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Paksa kecepatan refresh tertinggi"</string>
@@ -1317,6 +1321,8 @@
     <string name="carrier_enabled_summaryOn" msgid="5212067975273903381">"APN diaktifkan"</string>
     <string name="carrier_enabled_summaryOff" msgid="8541959867953738521">"APN dinonaktifkan"</string>
     <string name="bearer" msgid="3231443241639159358">"Operator"</string>
+    <string name="network_type" msgid="748590707422733595">"Jenis jaringan"</string>
+    <string name="network_type_unspecified" msgid="7756349656194518725">"Tidak ditentukan"</string>
     <string name="mvno_type" msgid="4734654257494971247">"Jenis MVNO"</string>
     <string name="mvno_match_data" msgid="5213193073684321156">"Nilai MVNO"</string>
     <string name="menu_delete" msgid="9199740901584348273">"Hapus APN"</string>
@@ -2041,6 +2047,8 @@
     <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Gunakan getaran &amp; sentuhan"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Getaran alarm"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Getaran media"</string>
+    <!-- no translation found for accessibility_keyboard_vibration_title (7559967730626765441) -->
+    <skip />
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Getaran dering"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Getaran notifikasi"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Respons sentuhan"</string>
@@ -2348,6 +2356,7 @@
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_since_last_full_charge" msgid="3488425008925924769">"sejak terakhir kali baterai terisi penuh"</string>
     <string name="battery_usage_system_apps" msgid="8659537819731575299">"Aplikasi sistem"</string>
+    <string name="battery_usage_uninstalled_apps" msgid="8170405012552803662">"Aplikasi yang di-uninstal"</string>
     <string name="battery_usage_others" msgid="311793281613609986">"Lainnya"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Perkiraan sisa waktu"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"Sampai terisi penuh"</string>
@@ -2607,6 +2616,7 @@
     <string name="data_usage_app_summary_title" msgid="4933742247928064178">"Data seluler &amp; Wi‑Fi"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Sinkronisasi otomatis data pribadi"</string>
     <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Sinkronisasi otomatis data kerja"</string>
+    <string name="account_settings_menu_auto_sync_private" msgid="2315144351530596228">"Sinkronisasi otomatis data pribadi"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"Ubah daur..."</string>
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"Tanggal dalam bulan untuk menyetel ulang daur penggunaan data:"</string>
     <string name="data_usage_empty" msgid="5619908658853726866">"Tak ada apl yg menggunakan data dlm periode ini."</string>
@@ -3049,6 +3059,8 @@
     <string name="keywords_font_size" msgid="1643198841815006447">"ukuran teks, hasil cetak besar, font besar, teks besar, gangguan penglihatan, buat teks lebih besar, pembesar font, pembesaran font"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"tampilan standby selalu aktif, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, tag, pembaca"</string>
+    <!-- no translation found for keywords_keyboard_vibration (6485149510591654697) -->
+    <skip />
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Volume, getar, Jangan Ganggu"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Volume media"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Volume transmisi"</string>
@@ -3355,6 +3367,17 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"Aplikasi ini tidak mendukung setelan yang ditingkatkan"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"Setelan lainnya"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"Setelan lainnya tersedia di dalam aplikasi ini"</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"Periode tunggu notifikasi"</string>
+    <string name="notification_polite_all_apps" msgid="1118651561594250059">"Terapkan periode tunggu pada semua notifikasi"</string>
+    <string name="notification_polite_all_apps_summary" msgid="540268373207498126">"Menurunkan volume notifikasi secara bertahap saat Anda mendapatkan notifikasi berturut-turut dari aplikasi yang sama"</string>
+    <string name="notification_polite_conversations" msgid="8197695136727245741">"Terapkan periode tunggu pada percakapan"</string>
+    <string name="notification_polite_conversations_summary" msgid="2677141765664359994">"Mengurangi volume notifikasi secara bertahap saat Anda menerima banyak pesan dari chat yang sama dalam waktu singkat"</string>
+    <string name="notification_polite_disabled" msgid="1378078021594282842">"Jangan gunakan periode tunggu notifikasi"</string>
+    <string name="notification_polite_disabled_summary" msgid="1145341260283746936">"Jangan pernah mengurangi volume notifikasi meskipun menerima serangkaian notifikasi berturut-turut dari aplikasi yang sama"</string>
+    <string name="notification_polite_vibrate_unlocked" msgid="6142573851761357903">"Bergetar saat tidak terkunci"</string>
+    <string name="notification_polite_vibrate_unlocked_summary" msgid="1678472892282874459">"Hanya bergetar saat layar tidak terkunci"</string>
+    <string name="notification_polite_work" msgid="8823596456640216391">"Terapkan pada profil kerja"</string>
+    <string name="notification_polite_work_summary" msgid="8260947839104352075">"Menerapkan setelan periode tunggu notifikasi dari profil pribadi ke profil kerja Anda"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Layanan bantuan VR"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Tidak ada aplikasi terinstal yang meminta dijalankan sebagai layanan bantuan VR"</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Izinkan akses layanan VR untuk <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -4857,4 +4880,16 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Nama perangkat Anda dapat dilihat oleh aplikasi yang diinstal. Juga mungkin dilihat oleh orang lain saat Anda terhubung ke perangkat Bluetooth atau jaringan Wi-Fi, atau saat menyiapkan hotspot Wi-Fi."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Gender gramatikal"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Pilih Gender gramatikal"</string>
+    <!-- no translation found for content_protection_preference_title (5069260032659193074) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_summary (2252393849408445391) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_user_consent_switch_title (60088482227901638) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_user_consent_work_profile_switch_title (2868495870224174097) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_subpage_summary (7707255571476950976) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_subpage_info (6010628258453929862) -->
+    <skip />
 </resources>

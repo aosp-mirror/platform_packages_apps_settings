@@ -31,7 +31,7 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.network.MobileNetworkRepository;
@@ -51,7 +51,7 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
 
     private static final String DIALOG_TAG = "MobileDataDialog";
 
-    private SwitchPreference mPreference;
+    private TwoStatePreference mPreference;
     private TelephonyManager mTelephonyManager;
     private SubscriptionManager mSubscriptionManager;
     private FragmentManager mFragmentManager;
@@ -143,7 +143,7 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        mPreference = (SwitchPreference) preference;
+        mPreference = (TwoStatePreference) preference;
         update();
     }
 

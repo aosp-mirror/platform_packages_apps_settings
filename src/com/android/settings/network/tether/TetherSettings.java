@@ -52,7 +52,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
@@ -99,9 +99,9 @@ public class TetherSettings extends RestrictedSettingsFragment
     @VisibleForTesting
     RestrictedSwitchPreference mUsbTether;
     @VisibleForTesting
-    SwitchPreference mBluetoothTether;
+    TwoStatePreference mBluetoothTether;
     @VisibleForTesting
-    SwitchPreference mEthernetTether;
+    TwoStatePreference mEthernetTether;
 
     private BroadcastReceiver mTetherChangeReceiver;
     private BroadcastReceiver mBluetoothStateReceiver;
@@ -247,8 +247,8 @@ public class TetherSettings extends RestrictedSettingsFragment
     @VisibleForTesting
     void setupTetherPreference() {
         mUsbTether = (RestrictedSwitchPreference) findPreference(KEY_USB_TETHER_SETTINGS);
-        mBluetoothTether = (SwitchPreference) findPreference(KEY_ENABLE_BLUETOOTH_TETHERING);
-        mEthernetTether = (SwitchPreference) findPreference(KEY_ENABLE_ETHERNET_TETHERING);
+        mBluetoothTether = (TwoStatePreference) findPreference(KEY_ENABLE_BLUETOOTH_TETHERING);
+        mEthernetTether = (TwoStatePreference) findPreference(KEY_ENABLE_ETHERNET_TETHERING);
     }
 
     @Override

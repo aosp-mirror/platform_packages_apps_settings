@@ -113,6 +113,10 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"\'ब्लूटूथ LE Audio\' को बंद करें"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"अगर डिवाइस पर LE Audio हार्डवेयर चलता है, तो \'ब्लूटूथ LE Audio\' को बंद करें."</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"डिवाइस डिटेल में LE Audio टॉगल दिखाएं"</string>
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist (7392319491894565552) -->
+    <skip />
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist_summary (8999245286359656738) -->
+    <skip />
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"मीडिया डिवाइस"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"कॉल की सुविधा वाले डिवाइस"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"दूसरे डिवाइस"</string>
@@ -1057,7 +1061,7 @@
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"बंद"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"डिसप्ले का वाइट बैलेंस"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
-    <string name="fold_lock_behavior_title" msgid="786228803694268449">"फ़ोल्ड करने पर ऐप्लिकेशन का इस्तेमाल जारी रखें"</string>
+    <string name="fold_lock_behavior_title" msgid="786228803694268449">"फ़ोल्ड करने पर भी, ऐप्लिकेशन का इस्तेमाल जारी रखें"</string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"स्मूद डिसप्ले"</string>
     <string name="peak_refresh_rate_summary" msgid="3627278682437562787">"कुछ कॉन्टेंट के लिए, यह अपने-आप ही रीफ़्रेश दर को 60 से बढ़ाकर <xliff:g id="ID_1">%1$s</xliff:g> हर्ट्ज़ कर देता है. इसे चालू करने पर, बैटरी ज़्यादा खर्च होती है."</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"रीफ़्रेश दर को सबसे ज़्यादा पर सेट करें"</string>
@@ -1317,6 +1321,8 @@
     <string name="carrier_enabled_summaryOn" msgid="5212067975273903381">"एपीएन चालू है"</string>
     <string name="carrier_enabled_summaryOff" msgid="8541959867953738521">"एपीएन बंद है"</string>
     <string name="bearer" msgid="3231443241639159358">"धारक"</string>
+    <string name="network_type" msgid="748590707422733595">"नेटवर्क टाइप"</string>
+    <string name="network_type_unspecified" msgid="7756349656194518725">"तय नहीं है"</string>
     <string name="mvno_type" msgid="4734654257494971247">"MVNO टाइप"</string>
     <string name="mvno_match_data" msgid="5213193073684321156">"MVNO वैल्यू"</string>
     <string name="menu_delete" msgid="9199740901584348273">"APN मिटाएं"</string>
@@ -2041,6 +2047,8 @@
     <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"वाइब्रेशन और हैप्टिक का इस्तेमाल करें"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"अलार्म के लिए वाइब्रेशन"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"मीडिया के लिए वाइब्रेशन"</string>
+    <!-- no translation found for accessibility_keyboard_vibration_title (7559967730626765441) -->
+    <skip />
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"रिंग के लिए वाइब्रेशन"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"सूचना के लिए वाइब्रेशन"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"टच के लिए वाइब्रेशन"</string>
@@ -2348,6 +2356,7 @@
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_since_last_full_charge" msgid="3488425008925924769">"पूरी चार्ज होने के बाद"</string>
     <string name="battery_usage_system_apps" msgid="8659537819731575299">"सिस्टम के ऐप्लिकेशन"</string>
+    <string name="battery_usage_uninstalled_apps" msgid="8170405012552803662">"अनइंस्टॉल किए गए ऐप्लिकेशन"</string>
     <string name="battery_usage_others" msgid="311793281613609986">"अन्य"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"अनुमानित बचा हुआ समय"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"पूरी तरह चार्ज होने तक"</string>
@@ -2607,6 +2616,7 @@
     <string name="data_usage_app_summary_title" msgid="4933742247928064178">"मोबाइल डेटा और वाई-फ़ाई"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"निजी डेटा अपने-आप सिंक हो जाए"</string>
     <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"वर्क डेटा अपने-आप सिंक हो"</string>
+    <string name="account_settings_menu_auto_sync_private" msgid="2315144351530596228">"निजी डेटा ऑटो-सिंक होने दें"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"चक्र बदलें ..."</string>
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"डेटा खर्च की अवधि रीसेट करने के लिए महीने का दिन:"</string>
     <string name="data_usage_empty" msgid="5619908658853726866">"इस दौरान कि‍सी भी ऐप्लिकेशन ने डेटा का उपयोग नहीं कि‍या."</string>
@@ -3049,6 +3059,8 @@
     <string name="keywords_font_size" msgid="1643198841815006447">"टेक्स्ट का साइज़, बड़ा प्रिंट, बड़ा फ़ॉन्ट, बड़ा टेक्स्ट, कम दृष्टि, टेक्स्ट बड़ा करना, फ़ॉन्ट बड़ा करने वाला टूल, फ़ॉन्ट बड़ा करना"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"हमेशा चालू रहने वाला ऐंबियंट डिसप्ले, एओडी"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"एनएफ़सी, टैग, रीडर"</string>
+    <!-- no translation found for keywords_keyboard_vibration (6485149510591654697) -->
+    <skip />
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"आवाज़, वाइब्रेशन, परेशान न करें"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"मीडिया की आवाज़"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"आवाज़ कास्ट करें"</string>
@@ -3355,6 +3367,17 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"यह ऐप्लिकेशन, बेहतर सेटिंग के साथ काम नहीं करता है"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"अन्य सेटिंग"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"इस ऐप्लिकेशन में ज़्यादा सेटिंग उपलब्ध हैं"</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"सूचनाओं की कूलडाउन सेटिंग"</string>
+    <string name="notification_polite_all_apps" msgid="1118651561594250059">"सभी सूचनाओं पर कूलडाउन सेटिंग लागू करें"</string>
+    <string name="notification_polite_all_apps_summary" msgid="540268373207498126">"एक ही ऐप्लिकेशन से बार-बार कई सूचनाएं मिलने पर, सूचनाओं की संख्या धीरे-धीरे कम हो जाती है"</string>
+    <string name="notification_polite_conversations" msgid="8197695136727245741">"बातचीत पर कूलडाउन सेटिंग लागू करें"</string>
+    <string name="notification_polite_conversations_summary" msgid="2677141765664359994">"एक ही चैट से बहुत कम समय में कई मैसेज मिलने पर, सूचनाओं की संख्या धीरे-धीरे कम हो जाती है"</string>
+    <string name="notification_polite_disabled" msgid="1378078021594282842">"सूचनाओं पर कूलडाउन सेटिंग का इस्तेमाल न करें"</string>
+    <string name="notification_polite_disabled_summary" msgid="1145341260283746936">"सूचनाओं की संख्या को कभी कम नहीं होती, फिर चाहे एक ही ऐप्लिकेशन से बार-बार कितनी भी सूचनाएं मिल रही हों"</string>
+    <string name="notification_polite_vibrate_unlocked" msgid="6142573851761357903">"स्क्रीन अनलॉक होने पर वाइब्रेट हो"</string>
+    <string name="notification_polite_vibrate_unlocked_summary" msgid="1678472892282874459">"स्क्रीन अनलॉक होने पर ही वाइब्रेट हो"</string>
+    <string name="notification_polite_work" msgid="8823596456640216391">"वर्क प्रोफ़ाइल पर लागू करें"</string>
+    <string name="notification_polite_work_summary" msgid="8260947839104352075">"अपनी निजी प्रोफ़ाइल से वर्क प्रोफ़ाइल पर, सूचनाओं की कूलडाउन सेटिंग लागू करें"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"वीआर सहायक सेवाएं"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"इंस्टॉल किए गए किसी भी ऐप्लिकेशन ने, वीआर सहायक सेवाओं के तौर पर चलाए जाने का अनुरोध नहीं किया है."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"<xliff:g id="SERVICE">%1$s</xliff:g> को वीआर सेवा के इस्तेमाल की अनुमति दें?"</string>
@@ -4857,4 +4880,16 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"आपके इंस्टॉल किए गए ऐप्लिकेशन, आपके डिवाइस के नाम की जानकारी ऐक्सेस कर सकते हैं. इसके अलावा, ब्लूटूथ डिवाइसों या वाई-फ़ाई नेटवर्क से कनेक्ट करने पर या वाई-फ़ाई हॉटस्पॉट सेट अप करने पर, अन्य लोग भी इसे देख सकते हैं."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"व्याकरण के हिसाब से लिंग"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"व्याकरण के हिसाब से लिंग चुनें"</string>
+    <!-- no translation found for content_protection_preference_title (5069260032659193074) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_summary (2252393849408445391) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_user_consent_switch_title (60088482227901638) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_user_consent_work_profile_switch_title (2868495870224174097) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_subpage_summary (7707255571476950976) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_subpage_info (6010628258453929862) -->
+    <skip />
 </resources>

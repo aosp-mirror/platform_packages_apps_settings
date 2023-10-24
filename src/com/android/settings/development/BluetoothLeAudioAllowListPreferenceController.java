@@ -25,7 +25,7 @@ import android.sysprop.BluetoothProperties;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
@@ -90,14 +90,14 @@ public class BluetoothLeAudioAllowListPreferenceController
                 (mBluetoothAdapter.isLeAudioSupported() == BluetoothStatusCodes.FEATURE_SUPPORTED);
         if (!isLeAudioSupported) {
             mPreference.setEnabled(false);
-            ((SwitchPreference) mPreference).setChecked(false);
+            ((TwoStatePreference) mPreference).setChecked(false);
             return;
         }
 
         mPreference.setEnabled(true);
         final boolean isLeAudioAllowlistBypassed =
                 SystemProperties.getBoolean(BYPASS_LE_AUDIO_ALLOWLIST_PROPERTY, false);
-        ((SwitchPreference) mPreference).setChecked(isLeAudioAllowlistBypassed);
+        ((TwoStatePreference) mPreference).setChecked(isLeAudioAllowlistBypassed);
     }
 
     @Override
@@ -107,7 +107,7 @@ public class BluetoothLeAudioAllowListPreferenceController
                 SystemProperties.getBoolean(BYPASS_LE_AUDIO_ALLOWLIST_PROPERTY, false);
         if (isBypassed) {
             SystemProperties.set(BYPASS_LE_AUDIO_ALLOWLIST_PROPERTY, Boolean.toString(false));
-            ((SwitchPreference) mPreference).setChecked(false);
+            ((TwoStatePreference) mPreference).setChecked(false);
         }
     }
 }

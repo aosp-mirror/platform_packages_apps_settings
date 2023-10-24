@@ -37,7 +37,7 @@ import android.util.Slog;
 
 import androidx.annotation.NonNull;
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.google.common.annotations.VisibleForTesting;
 
@@ -107,7 +107,7 @@ public final class HibernationSwitchPreferenceController extends AppInfoPreferen
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        ((SwitchPreference) preference).setChecked(isAppEligibleForHibernation()
+        ((TwoStatePreference) preference).setChecked(isAppEligibleForHibernation()
                 && !isPackageHibernationExemptByUser());
         preference.setEnabled(isAppEligibleForHibernation());
         if (!mHibernationEligibilityLoaded) {

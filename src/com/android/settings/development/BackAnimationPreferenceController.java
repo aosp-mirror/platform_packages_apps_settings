@@ -20,7 +20,7 @@ import android.content.Context;
 import android.provider.Settings;
 
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.core.PreferenceControllerMixin;
@@ -76,7 +76,7 @@ public class BackAnimationPreferenceController extends DeveloperOptionsPreferenc
     public void updateState(Preference preference) {
         final int mode = Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.ENABLE_BACK_ANIMATION, SETTING_VALUE_OFF);
-        ((SwitchPreference) mPreference).setChecked(mode != SETTING_VALUE_OFF);
+        ((TwoStatePreference) mPreference).setChecked(mode != SETTING_VALUE_OFF);
     }
 
     @Override
@@ -84,6 +84,6 @@ public class BackAnimationPreferenceController extends DeveloperOptionsPreferenc
         super.onDeveloperOptionsSwitchDisabled();
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.ENABLE_BACK_ANIMATION, SETTING_VALUE_OFF);
-        ((SwitchPreference) mPreference).setChecked(false);
+        ((TwoStatePreference) mPreference).setChecked(false);
     }
 }
