@@ -113,6 +113,10 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Bluetooth LE hangátvitel kikapcsolása"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Kikapcsolja a Bluetooth alacsony energiaszintű hangátvitel funkciót, ha az eszköz támogatja az Alacsony energiaszintű hangátvitel hardver működését."</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"„Alacsony energiaszintű hangátvitel” az Eszközadatokban"</string>
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist (7392319491894565552) -->
+    <skip />
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist_summary (8999245286359656738) -->
+    <skip />
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Médiaeszközök"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Hívóeszközök"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Egyéb eszközök"</string>
@@ -1057,7 +1061,7 @@
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Kikapcsolva"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Kijelző fehéregyensúlya"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
-    <string name="fold_lock_behavior_title" msgid="786228803694268449">"Alkalmazások használatának folytatása összehajtáskor"</string>
+    <string name="fold_lock_behavior_title" msgid="786228803694268449">"Appok megtartása összehajtáskor"</string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="3627278682437562787">"Néhány tartalomnál automatikusan megemeli a frissítési gyakoriságot 60-ról <xliff:g id="ID_1">%1$s</xliff:g> Hz-re. Növeli az akkumulátorhasználatot."</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Legmagasabb frissítési gyakoriság kényszerítése"</string>
@@ -1317,6 +1321,8 @@
     <string name="carrier_enabled_summaryOn" msgid="5212067975273903381">"APN engedélyezve"</string>
     <string name="carrier_enabled_summaryOff" msgid="8541959867953738521">"APN kikapcsolva"</string>
     <string name="bearer" msgid="3231443241639159358">"Hordozószolgáltatás"</string>
+    <string name="network_type" msgid="748590707422733595">"Hálózat típusa"</string>
+    <string name="network_type_unspecified" msgid="7756349656194518725">"Nincs megadva"</string>
     <string name="mvno_type" msgid="4734654257494971247">"MVNO típusa"</string>
     <string name="mvno_match_data" msgid="5213193073684321156">"MVNO értéke"</string>
     <string name="menu_delete" msgid="9199740901584348273">"APN törlése"</string>
@@ -2041,6 +2047,8 @@
     <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Rezgés és haptikus visszajelzés használata"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Ébresztés rezgése"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Rezgés médiatartalommal"</string>
+    <!-- no translation found for accessibility_keyboard_vibration_title (7559967730626765441) -->
+    <skip />
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Csengés rezgése"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Értesítések rezgése"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Visszajelzés az érintésekről"</string>
@@ -2348,6 +2356,7 @@
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_since_last_full_charge" msgid="3488425008925924769">"az utolsó teljes feltöltés óta"</string>
     <string name="battery_usage_system_apps" msgid="8659537819731575299">"Rendszeralkalmazások"</string>
+    <string name="battery_usage_uninstalled_apps" msgid="8170405012552803662">"Eltávolított alkalmazások"</string>
     <string name="battery_usage_others" msgid="311793281613609986">"Egyéb"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Becsült hátralévő idő"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"A teljes feltöltésig"</string>
@@ -2607,6 +2616,7 @@
     <string name="data_usage_app_summary_title" msgid="4933742247928064178">"Mobiladat és Wi‑Fi"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Személyesadat-szinkronizálás"</string>
     <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Munkaadat-szinkronizálás"</string>
+    <string name="account_settings_menu_auto_sync_private" msgid="2315144351530596228">"Privát adatok automatikus szinkronizálása"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"Ciklus módosítása..."</string>
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"Az adatforgalmi ciklus visszaállítása a hónap e napján:"</string>
     <string name="data_usage_empty" msgid="5619908658853726866">"Egy alkalmazás sem használt adatokat ekkor."</string>
@@ -3049,6 +3059,8 @@
     <string name="keywords_font_size" msgid="1643198841815006447">"betűméret, nagybetű, nagy betűtípus, nagy szöveg, gyengénlátó, szöveg nagyítása, betűtípusnagyító, betűtípus-nagyítás"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"Mindig bekapcsolt környezeti kijelző (Always on Ambient Display, AOD)"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, címke, olvasó"</string>
+    <!-- no translation found for keywords_keyboard_vibration (6485149510591654697) -->
+    <skip />
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Hangerő, rezgés, Ne zavarjanak"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Média hangereje"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Átküldés hangereje"</string>
@@ -3355,6 +3367,17 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"Az alkalmazás nem támogatja a speciális beállításokat"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"További beállítások"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"Ebben az alkalmazásban további beállítások állnak rendelkezésre"</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"Értesítések befagyasztása"</string>
+    <string name="notification_polite_all_apps" msgid="1118651561594250059">"Befagyasztás alkalmazása az összes értesítésre"</string>
+    <string name="notification_polite_all_apps_summary" msgid="540268373207498126">"Az értesítések mennyiségének fokozatos csökkentése, ha több értesítés is érkezik egymást követően ugyanattól az alkalmazástól"</string>
+    <string name="notification_polite_conversations" msgid="8197695136727245741">"Befagyasztás alkalmazása a beszélgetésekre"</string>
+    <string name="notification_polite_conversations_summary" msgid="2677141765664359994">"Az értesítések mennyiségének fokozatos csökkentése, ha sorozatban több értesítés is érkezik rövid időn belül ugyanabból a beszélgetésből"</string>
+    <string name="notification_polite_disabled" msgid="1378078021594282842">"Ne használja az értesítések befagyasztását"</string>
+    <string name="notification_polite_disabled_summary" msgid="1145341260283746936">"Sose csökkentse az értesítések mennyiségét az ugyanattól az alkalmazástól egymást követően érkező értesítések mennyiségének ellenére se"</string>
+    <string name="notification_polite_vibrate_unlocked" msgid="6142573851761357903">"Rezgés a zárolás feloldásakor"</string>
+    <string name="notification_polite_vibrate_unlocked_summary" msgid="1678472892282874459">"Rezgés csak akkor, ha a képernyő zárolása fel van oldva"</string>
+    <string name="notification_polite_work" msgid="8823596456640216391">"Alkalmazás munkaprofilokra"</string>
+    <string name="notification_polite_work_summary" msgid="8260947839104352075">"Az értesítések személyes profilban megadott befagyasztására vonatkozó beállítások alkalmazása a munkaprofilban"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Virtuálisvalóság-segédszolgáltatás"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Egy telepített alkalmazás sem kérte, hogy virtuálisvalóság-segédszolgáltatásként legyen futtatva."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Hozzáférhet a(z) <xliff:g id="SERVICE">%1$s</xliff:g> a virtuálisvalóság-szolgáltatáshoz?"</string>
@@ -4857,4 +4880,16 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Eszköze neve látható a telepített alkalmazások számára. Mások is láthatják, ha csatlakoztatja telefonját más Bluetooth-eszközökhöz, Wi-Fi-hálózathoz, vagy ha Wi-Fi-hotspotot állít be."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Nyelvtani nem"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Nyelvtani nem kiválasztása"</string>
+    <!-- no translation found for content_protection_preference_title (5069260032659193074) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_summary (2252393849408445391) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_user_consent_switch_title (60088482227901638) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_user_consent_work_profile_switch_title (2868495870224174097) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_subpage_summary (7707255571476950976) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_subpage_info (6010628258453929862) -->
+    <skip />
 </resources>

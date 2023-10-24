@@ -16,37 +16,24 @@
 
 package com.android.settings.connecteddevice.fastpair;
 
-import android.annotation.NonNull;
+import android.annotation.Nullable;
 import android.content.Context;
 
 /**
- * Updates the Fast Pair devices. It notifies the upper level whether to add/remove the
- * preference through {@link DevicePreferenceCallback}
+ * Updates the Fast Pair devices. It notifies the upper level whether to add/remove the preference
+ * through {@link DevicePreferenceCallback}
  */
 public interface FastPairDeviceUpdater {
 
-    /**
-     * Registers the Fast Pair event callback and update the list
-     */
-    default void registerCallback() {
-    }
+    /** Registers the Fast Pair event callback and update the list */
+    default void registerCallback() {}
 
-    /**
-     * Unregisters the Fast Pair event callback
-     */
-    default void unregisterCallback() {
-    }
+    /** Unregisters the Fast Pair event callback */
+    default void unregisterCallback() {}
 
-    /**
-     * Forces to update the list of Fast Pair devices
-     */
-    default void forceUpdate() {
-    }
+    /** Forces to update the list of Fast Pair devices */
+    default void forceUpdate() {}
 
-    /**
-     * Sets the context to generate the {@link Preference}, so it could get the correct theme.
-     */
-    default void setPreferenceContext(@NonNull Context preferenceContext) {
-    }
+    /** Sets the context to generate the {@link Preference}, so it could get the correct theme. */
+    default void setPreferenceContext(@Nullable Context preferenceContext) {}
 }
-

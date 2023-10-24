@@ -7,7 +7,7 @@ import android.os.UserManager;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
@@ -63,7 +63,7 @@ public class LocalTerminalPreferenceController extends DeveloperOptionsPreferenc
     public void updateState(Preference preference) {
         final boolean isTerminalEnabled = mPackageManager.getApplicationEnabledSetting(
                 TERMINAL_APP_PACKAGE) == PackageManager.COMPONENT_ENABLED_STATE_ENABLED;
-        ((SwitchPreference) mPreference).setChecked(isTerminalEnabled);
+        ((TwoStatePreference) mPreference).setChecked(isTerminalEnabled);
     }
 
     @Override
@@ -78,7 +78,7 @@ public class LocalTerminalPreferenceController extends DeveloperOptionsPreferenc
         super.onDeveloperOptionsSwitchDisabled();
         mPackageManager.setApplicationEnabledSetting(TERMINAL_APP_PACKAGE,
                 PackageManager.COMPONENT_ENABLED_STATE_DEFAULT, 0 /* flags */);
-        ((SwitchPreference) mPreference).setChecked(false);
+        ((TwoStatePreference) mPreference).setChecked(false);
     }
 
     @VisibleForTesting

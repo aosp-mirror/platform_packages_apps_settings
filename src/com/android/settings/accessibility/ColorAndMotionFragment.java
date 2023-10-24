@@ -24,7 +24,7 @@ import android.provider.Settings;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -49,8 +49,8 @@ public class ColorAndMotionFragment extends DashboardFragment {
     private static final String TOGGLE_LARGE_POINTER_ICON = "toggle_large_pointer_icon";
 
     private Preference mDisplayDaltonizerPreferenceScreen;
-    private SwitchPreference mToggleDisableAnimationsPreference;
-    private SwitchPreference mToggleLargePointerIconPreference;
+    private TwoStatePreference mToggleDisableAnimationsPreference;
+    private TwoStatePreference mToggleLargePointerIconPreference;
     private AccessibilitySettingsContentObserver mSettingsContentObserver;
 
     private final List<String> mShortcutFeatureKeys = new ArrayList<>();

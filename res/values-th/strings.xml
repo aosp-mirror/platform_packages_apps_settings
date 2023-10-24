@@ -113,6 +113,10 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"ปิดใช้ Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"ปิดใช้ฟีเจอร์ Bluetooth LE Audio หากอุปกรณ์รองรับความสามารถของฮาร์ดแวร์ LE Audio"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"แสดงปุ่มสลับ LE Audio ในรายละเอียดอุปกรณ์"</string>
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist (7392319491894565552) -->
+    <skip />
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist_summary (8999245286359656738) -->
+    <skip />
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"อุปกรณ์สื่อ"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"อุปกรณ์สำหรับโทร"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"อุปกรณ์อื่นๆ"</string>
@@ -1317,6 +1321,8 @@
     <string name="carrier_enabled_summaryOn" msgid="5212067975273903381">"เปิดใช้งาน APN แล้ว"</string>
     <string name="carrier_enabled_summaryOff" msgid="8541959867953738521">"ปิดใช้งาน APN แล้ว"</string>
     <string name="bearer" msgid="3231443241639159358">"Bearer"</string>
+    <string name="network_type" msgid="748590707422733595">"ประเภทเครือข่าย"</string>
+    <string name="network_type_unspecified" msgid="7756349656194518725">"ไม่ระบุ"</string>
     <string name="mvno_type" msgid="4734654257494971247">"ประเภท MVNO"</string>
     <string name="mvno_match_data" msgid="5213193073684321156">"ค่า MVNO"</string>
     <string name="menu_delete" msgid="9199740901584348273">"ลบ APN"</string>
@@ -2041,6 +2047,8 @@
     <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"ใช้การสั่นและการโต้ตอบการสัมผัส"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"การสั่นเมื่อปลุก"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"การสั่นของสื่อ"</string>
+    <!-- no translation found for accessibility_keyboard_vibration_title (7559967730626765441) -->
+    <skip />
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"การสั่นเมื่อมีเสียงเรียกเข้า"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"การสั่นเมื่อมีการแจ้งเตือน"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"การตอบสนองการสัมผัส"</string>
@@ -2348,6 +2356,7 @@
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_since_last_full_charge" msgid="3488425008925924769">"ตั้งแต่ชาร์จจนเต็มครั้งล่าสุด"</string>
     <string name="battery_usage_system_apps" msgid="8659537819731575299">"แอประบบ"</string>
+    <string name="battery_usage_uninstalled_apps" msgid="8170405012552803662">"แอปที่ถอนการติดตั้งแล้ว"</string>
     <string name="battery_usage_others" msgid="311793281613609986">"อื่นๆ"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"เวลาที่เหลือโดยประมาณ"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"จนกว่าจะชาร์จเต็ม"</string>
@@ -2607,6 +2616,7 @@
     <string name="data_usage_app_summary_title" msgid="4933742247928064178">"อินเทอร์เน็ตมือถือและ Wi‑Fi"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"ซิงค์ข้อมูลส่วนตัวอัตโนมัติ"</string>
     <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"ซิงค์ข้อมูลงานอัตโนมัติ"</string>
+    <string name="account_settings_menu_auto_sync_private" msgid="2315144351530596228">"ซิงค์ข้อมูลส่วนตัวโดยอัตโนมัติ"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"เปลี่ยนรอบ..."</string>
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"วันที่ของเดือนในการรีเซ็ตรอบการใช้ข้อมูล:"</string>
     <string name="data_usage_empty" msgid="5619908658853726866">"ไม่มีข้อมูลการใช้แอปพลิเคชันในช่วงเวลานี้"</string>
@@ -3049,6 +3059,8 @@
     <string name="keywords_font_size" msgid="1643198841815006447">"ขนาดข้อความ, ตัวอักษรขนาดใหญ่, แบบอักษรขนาดใหญ่, ข้อความขนาดใหญ่, สายตาเลือนราง, ทำให้ข้อความใหญ่ขึ้น, เครื่องมือขยายแบบอักษร, การขยายแบบอักษร"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"การแสดงภาพพักหน้าจอเปิดตลอดเวลา, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"NFC, แท็ก, เครื่องอ่าน"</string>
+    <!-- no translation found for keywords_keyboard_vibration (6485149510591654697) -->
+    <skip />
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"ระดับเสียง การสั่น ห้ามรบกวน"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"ระดับเสียงของสื่อ"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"ระดับเสียงเมื่อแคสต์"</string>
@@ -3355,6 +3367,17 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"แอปนี้ไม่รองรับการตั้งค่าที่ปรับปรุง"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"การตั้งค่าเพิ่มเติม"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"สามารถใช้งานการตั้งค่าเพิ่มเติมได้ในแอปนี้"</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"ระยะเวลาพักการแจ้งเตือน"</string>
+    <string name="notification_polite_all_apps" msgid="1118651561594250059">"ใช้ระยะเวลาพักกับการแจ้งเตือนทั้งหมด"</string>
+    <string name="notification_polite_all_apps_summary" msgid="540268373207498126">"ค่อยๆ ลดระดับเสียงการแจ้งเตือนลงเมื่อคุณได้รับการแจ้งเตือนต่อเนื่องเป็นจำนวนมากจากแอปเดียวกัน"</string>
+    <string name="notification_polite_conversations" msgid="8197695136727245741">"ใช้ระยะเวลาพักกับการแจ้งเตือน"</string>
+    <string name="notification_polite_conversations_summary" msgid="2677141765664359994">"ค่อยๆ ลดระดับเสียงการแจ้งเตือนลงเมื่อคุณได้รับข้อความเป็นจำนวนมากจากแชทเดียวกันในระยะเวลาสั้นๆ"</string>
+    <string name="notification_polite_disabled" msgid="1378078021594282842">"ไม่ใช้ระยะเวลาพักการแจ้งเตือน"</string>
+    <string name="notification_polite_disabled_summary" msgid="1145341260283746936">"ไม่ลดระดับเสียงการแจ้งเตือนลง ไม่ว่าจะมีจำนวนการแจ้งเตือนต่อเนื่องจากแอปเดียวกันเท่าใดก็ตาม"</string>
+    <string name="notification_polite_vibrate_unlocked" msgid="6142573851761357903">"สั่นเมื่อปลดล็อก"</string>
+    <string name="notification_polite_vibrate_unlocked_summary" msgid="1678472892282874459">"สั่นเฉพาะเวลาที่ไม่ได้ล็อกหน้าจอเท่านั้น"</string>
+    <string name="notification_polite_work" msgid="8823596456640216391">"ใช้กับโปรไฟล์งาน"</string>
+    <string name="notification_polite_work_summary" msgid="8260947839104352075">"ใช้การตั้งค่าระยะเวลาพักการแจ้งเตือนจากโปรไฟล์ส่วนตัวกับโปรไฟล์งาน"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"บริการตัวช่วย VR"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"แอปที่ติดตั้งอยู่ไม่ได้ขอให้เรียกใช้เป็นบริการตัวช่วย VR"</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"อนุญาตให้ <xliff:g id="SERVICE">%1$s</xliff:g> เข้าถึงบริการ VR ไหม"</string>
@@ -3780,7 +3803,7 @@
     <string name="keyboard_disconnected" msgid="796053864561894531">"ไม่ได้เชื่อมต่อ"</string>
     <string name="apps_summary" msgid="4007416751775414252">"ติดตั้งแล้ว <xliff:g id="COUNT">%1$d</xliff:g> แอป"</string>
     <string name="storage_summary" msgid="5903562203143572768">"ใช้ไป <xliff:g id="PERCENTAGE">%1$s</xliff:g> - เหลือ <xliff:g id="FREE_SPACE">%2$s</xliff:g>"</string>
-    <string name="display_dashboard_summary" msgid="1599453894989339454">"ธีมมืด, ขนาดตัวอักษร, ความสว่าง"</string>
+    <string name="display_dashboard_summary" msgid="1599453894989339454">"ธีมมืด ขนาดตัวอักษร ความสว่าง"</string>
     <string name="memory_summary" msgid="8221954450951651735">"ใช้หน่วยความจำไป <xliff:g id="USED_MEMORY">%1$s</xliff:g> จาก <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> โดยเฉลี่ย"</string>
     <string name="users_summary" msgid="8473589474976307510">"ลงชื่อเข้าใช้ในฐานะ<xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="android_version_summary" msgid="7818952662015042768">"อัปเดตเป็น Android <xliff:g id="VERSION">%1$s</xliff:g> แล้ว"</string>
@@ -4857,4 +4880,10 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"แอปที่คุณติดตั้งจะเห็นชื่อของอุปกรณ์ และคนอื่นก็อาจเห็นเช่นกันหากคุณเชื่อมต่อกับอุปกรณ์บลูทูธหรือเครือข่าย Wi-Fi หรือตั้งค่าฮอตสปอต Wi-Fi"</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"เพศทางไวยากรณ์"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"เลือกเพศทางไวยากรณ์"</string>
+    <string name="content_protection_preference_title" msgid="5069260032659193074">"การสแกนหาแอปที่หลอกลวง"</string>
+    <string name="content_protection_preference_summary" msgid="2252393849408445391">"ตรวจสอบกิจกรรมบนแอปเพื่อหาฟิชชิง"</string>
+    <string name="content_protection_preference_user_consent_switch_title" msgid="60088482227901638">"ใช้การสแกน"</string>
+    <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="2868495870224174097">"ใช้การสแกนกับแอปงาน"</string>
+    <string name="content_protection_preference_subpage_summary" msgid="7707255571476950976">"การสแกนจะเกิดขึ้นในอุปกรณ์ของคุณอย่างเป็นส่วนตัวเพื่อตรวจสอบกิจกรรมบนแอปหาฟิชชิงหรือลักษณะการทำงานที่หลอกลวงอื่นๆ หากตรวจพบ ระบบจะส่งข้อมูลแอปบางส่วนไปยัง Google Play Protect เพื่อยืนยันภัยคุกคามและเตือนผู้ใช้แอป"</string>
+    <string name="content_protection_preference_subpage_info" msgid="6010628258453929862">"นี่เป็นฟีเจอร์ความปลอดภัยที่มีการป้องกัน ไม่มีการแชร์ข้อมูลอุปกรณ์หรือข้อมูลส่วนบุคคลใดๆ กับ Google \n\nฟิชชิงคือการพยายามขโมยข้อมูลเข้าสู่ระบบหรือข้อมูลส่วนบุคคลอื่นๆ"</string>
 </resources>

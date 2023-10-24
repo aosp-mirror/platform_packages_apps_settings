@@ -113,6 +113,10 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Bluetooth LE Audioni faolsizlantirish"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Qurilmada LE audio apparatli taʼminoti boʻlsa, Bluetooth LE audio funksiyasi faolsizlantiriladi."</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Qurilma axborotida LE audio tugmasi chiqsin"</string>
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist (7392319491894565552) -->
+    <skip />
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist_summary (8999245286359656738) -->
+    <skip />
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Media qurilmalar"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Chaqiruv qurilmalari"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Boshqa qurilmalar"</string>
@@ -1317,6 +1321,8 @@
     <string name="carrier_enabled_summaryOn" msgid="5212067975273903381">"APN yoniq"</string>
     <string name="carrier_enabled_summaryOff" msgid="8541959867953738521">"APN o‘chiq"</string>
     <string name="bearer" msgid="3231443241639159358">"Kanal"</string>
+    <string name="network_type" msgid="748590707422733595">"Tarmoq turi"</string>
+    <string name="network_type_unspecified" msgid="7756349656194518725">"Belgilanmagan"</string>
     <string name="mvno_type" msgid="4734654257494971247">"MVNO turi"</string>
     <string name="mvno_match_data" msgid="5213193073684321156">"MVNO qiymati"</string>
     <string name="menu_delete" msgid="9199740901584348273">"APNni o‘chirish"</string>
@@ -2041,6 +2047,8 @@
     <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Tebranish va teginish effektidan foydalanish"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Bildirishnomalar kelganda tebranish"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Media tebranish"</string>
+    <!-- no translation found for accessibility_keyboard_vibration_title (7559967730626765441) -->
+    <skip />
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Jiringlaganda tebranish"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Bildirishnomada tebranish"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Teginganda tebranish"</string>
@@ -2348,6 +2356,7 @@
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_since_last_full_charge" msgid="3488425008925924769">"toʻliq quvvat olganidan buyon"</string>
     <string name="battery_usage_system_apps" msgid="8659537819731575299">"Tizim ilovalari"</string>
+    <string name="battery_usage_uninstalled_apps" msgid="8170405012552803662">"Oʻchirilgan ilovalar"</string>
     <string name="battery_usage_others" msgid="311793281613609986">"Boshqalar"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Taxminiy qolgan vaqt"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"Quvvati to‘lishigacha qolgan vaqt"</string>
@@ -2607,6 +2616,7 @@
     <string name="data_usage_app_summary_title" msgid="4933742247928064178">"Mobil internet va Wi‑Fi"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Avtomatik sinxronlash (shaxsiy)"</string>
     <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Avtomatik sinxronlash (ish)"</string>
+    <string name="account_settings_menu_auto_sync_private" msgid="2315144351530596228">"Yopiq maʼlumotlarni avto-sinxronlash"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"O‘zgartirish…"</string>
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"Oyning qaysi kunida trafik sarfi davri yangilansin:"</string>
     <string name="data_usage_empty" msgid="5619908658853726866">"Ushbu vaqt oralig‘ida hech qanday ilova trafik sarflamadi."</string>
@@ -3049,6 +3059,8 @@
     <string name="keywords_font_size" msgid="1643198841815006447">"matn oʻlchami, katta bosma, katta yozuv, katta matn, zaif koʻrish, matnni kattalashtirish, yozuvni kattalashtirish, katta yozuv"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"doim yoniq ambient display, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, teg, rider"</string>
+    <!-- no translation found for keywords_keyboard_vibration (6485149510591654697) -->
+    <skip />
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Tovush balandligi, tebranish, Bezovta qilinmasin rejimi"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Multimedia tovushi"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Translatsiya tovushi balandligi"</string>
@@ -3355,6 +3367,17 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"Bu ilovada kengaytirilgan sozlamalar ishlamaydi"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"Boshqa sozlamalar"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"Boshqa sozlamalar bu ilova ichida joylashgan"</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"Bildirishnomalarni cheklash"</string>
+    <string name="notification_polite_all_apps" msgid="1118651561594250059">"Barcha bildirishnomalarga cheklov muddatini belgilash"</string>
+    <string name="notification_polite_all_apps_summary" msgid="540268373207498126">"Bitta ilovadan ketma-ket koʻplab bildirishnomalar olinganda bildirishnomalar tovushi asta-sekin pasaytiriladi"</string>
+    <string name="notification_polite_conversations" msgid="8197695136727245741">"Suhbatlarga cheklov muddatini belgilash"</string>
+    <string name="notification_polite_conversations_summary" msgid="2677141765664359994">"Bitta chatdan qisqa vaqt ichida ketma-ket koʻplab xabarlar olinganda bildirishnomalar tovushi asta-sekin pasaytiriladi"</string>
+    <string name="notification_polite_disabled" msgid="1378078021594282842">"Bildirishnomalar cheklanmasin"</string>
+    <string name="notification_polite_disabled_summary" msgid="1145341260283746936">"Bitta ilovadan kelayotgan bildirishnomalar sonidan qatʼi nazar, hech qachon bildirishnomalar cheklanmasin"</string>
+    <string name="notification_polite_vibrate_unlocked" msgid="6142573851761357903">"Ochilganda tebransin"</string>
+    <string name="notification_polite_vibrate_unlocked_summary" msgid="1678472892282874459">"Ekran qulfi ochilgandagina tebransin"</string>
+    <string name="notification_polite_work" msgid="8823596456640216391">"Ish profillariga tatbiq qilinsin"</string>
+    <string name="notification_polite_work_summary" msgid="8260947839104352075">"Bildirishnomalarni cheklash sozlamalari shaxsiy profildan ish profiliga tatbiq qilinsin"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Yordamchi VR xizmatlar"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Hech qanday ilova yordamchi VR xizmatlar sifatida ishga tushirilishiga ruxsat so‘ramagan."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"VR xizmatiga “<xliff:g id="SERVICE">%1$s</xliff:g>” xizmatidan foydalanishga ruxsat berilsinmi?"</string>
@@ -4857,4 +4880,16 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Qurilma nomi siz oʻrnatgan ilovalarga koʻrinadi. Bluetooth qurilmalarga yoki Wi-Fi tarmoqqa ulanganingizda, Wi-Fi hotspot sozlaganingizda boshqalarga ham koʻrinishi mumkin."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Grammatik jins"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Grammatik jinsni tanlang"</string>
+    <!-- no translation found for content_protection_preference_title (5069260032659193074) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_summary (2252393849408445391) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_user_consent_switch_title (60088482227901638) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_user_consent_work_profile_switch_title (2868495870224174097) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_subpage_summary (7707255571476950976) -->
+    <skip />
+    <!-- no translation found for content_protection_preference_subpage_info (6010628258453929862) -->
+    <skip />
 </resources>

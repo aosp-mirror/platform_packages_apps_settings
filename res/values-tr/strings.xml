@@ -113,6 +113,10 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Bluetooth LE Audio\'yu devre dışı bırak"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Cihaz, LE Audio donanımı özelliklerini destekliyorsa Bluetooth LE Audio özelliğini devre dışı bırakır."</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Cihaz Ayrıntıları\'nda LE Audio açma/kapatmayı göster"</string>
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist (7392319491894565552) -->
+    <skip />
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist_summary (8999245286359656738) -->
+    <skip />
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Medya cihazları"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Cihazları ara"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Diğer cihazlar"</string>
@@ -1317,6 +1321,8 @@
     <string name="carrier_enabled_summaryOn" msgid="5212067975273903381">"APN etkin"</string>
     <string name="carrier_enabled_summaryOff" msgid="8541959867953738521">"APN devre dışı"</string>
     <string name="bearer" msgid="3231443241639159358">"Taşıyıcı"</string>
+    <string name="network_type" msgid="748590707422733595">"Ağ türü"</string>
+    <string name="network_type_unspecified" msgid="7756349656194518725">"Belirtilmemiş"</string>
     <string name="mvno_type" msgid="4734654257494971247">"MVNO türü"</string>
     <string name="mvno_match_data" msgid="5213193073684321156">"MVNO değeri"</string>
     <string name="menu_delete" msgid="9199740901584348273">"APN\'yi sil"</string>
@@ -2041,6 +2047,8 @@
     <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Titreşimi ve dokunma teknolojisini kullan"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Alarm titreşimi"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Medya titreşimi"</string>
+    <!-- no translation found for accessibility_keyboard_vibration_title (7559967730626765441) -->
+    <skip />
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Zili çaldırma titreşimi"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Bildirim titreşimi"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Dokunma geri bildirimi"</string>
@@ -2348,6 +2356,7 @@
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_since_last_full_charge" msgid="3488425008925924769">"son tam şarjdan bu yana"</string>
     <string name="battery_usage_system_apps" msgid="8659537819731575299">"Sistem uygulamaları"</string>
+    <string name="battery_usage_uninstalled_apps" msgid="8170405012552803662">"Kaldırılan uygulamalar"</string>
     <string name="battery_usage_others" msgid="311793281613609986">"Diğer"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Kalan tahmini süre"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"sonra tam olarak şarj olacak"</string>
@@ -2607,6 +2616,7 @@
     <string name="data_usage_app_summary_title" msgid="4933742247928064178">"Mobil veri ve Kablosuz"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Kişisel verileri otomatik senk. et"</string>
     <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"İş verilerini otomatik senk. et"</string>
+    <string name="account_settings_menu_auto_sync_private" msgid="2315144351530596228">"Gizli verileri otomatik senkronize et"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"Dönemi değiştir..."</string>
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"Ayın, veri kullanım döneminin sıfırlandığı günü:"</string>
     <string name="data_usage_empty" msgid="5619908658853726866">"Bu dönem içinde hiçbir uygulama veri kullanmadı."</string>
@@ -3049,6 +3059,8 @@
     <string name="keywords_font_size" msgid="1643198841815006447">"metin boyutu, büyük baskı, büyük harfler, büyük metin, az görme, metni büyüt, yazı tipi büyütücü, yazı tipi büyütme"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"ambiyans ekranı her zaman açık, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, etiket, okuyucu"</string>
+    <!-- no translation found for keywords_keyboard_vibration (6485149510591654697) -->
+    <skip />
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Ses düzeyi, titreşim, Rahatsız Etmeyin"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Medya ses düzeyi"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Yayın ses düzeyi"</string>
@@ -3355,6 +3367,17 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"Bu uygulama, gelişmiş ayarları desteklemiyor"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"Diğer ayarlar"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"Bu uygulamada daha fazla ayar mevcut"</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"Bildirim bekleme süresi"</string>
+    <string name="notification_polite_all_apps" msgid="1118651561594250059">"Tüm bildirimlere bekleme süresi uygula"</string>
+    <string name="notification_polite_all_apps_summary" msgid="540268373207498126">"Aynı uygulamadan art arda birçok bildirim aldığınızda bildirim ses seviyesi kademeli olarak azalır"</string>
+    <string name="notification_polite_conversations" msgid="8197695136727245741">"Görüşmelere bekleme süresi uygula"</string>
+    <string name="notification_polite_conversations_summary" msgid="2677141765664359994">"Kısa süre içinde aynı sohbetten birçok mesaj aldığınızda bildirim ses seviyesi kademeli olarak azalır"</string>
+    <string name="notification_polite_disabled" msgid="1378078021594282842">"Bildirim bekleme süresini kullanma"</string>
+    <string name="notification_polite_disabled_summary" msgid="1145341260283746936">"Aynı uygulamadan art arda gelen bildirim sayısından bağımsız olarak bildirim ses seviyesi hiçbir zaman azalmaz"</string>
+    <string name="notification_polite_vibrate_unlocked" msgid="6142573851761357903">"Kilit açıldığında titreş"</string>
+    <string name="notification_polite_vibrate_unlocked_summary" msgid="1678472892282874459">"Yalnızca ekranın kilidi açıldığında titreşir"</string>
+    <string name="notification_polite_work" msgid="8823596456640216391">"İş profillerine uygula"</string>
+    <string name="notification_polite_work_summary" msgid="8260947839104352075">"Kişisel profilinizdeki bildirim bekleme süresi ayarları, iş profilinize uygulanır"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR yardımcı hizmetleri"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Yüklü hiçbir uygulama VR yardımcı hizmetleri olarak çalışma isteğinde bulunmadı."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"<xliff:g id="SERVICE">%1$s</xliff:g> için VR hizmetine erişim izni verilsin mi?"</string>
@@ -4170,7 +4193,7 @@
     <string name="credman_credentials" msgid="4931371941253324143">"Ek sağlayıcılar"</string>
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{# şifre}other{# şifre}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"otomatik, doldurma, otomatik doldurma, şifre"</string>
-    <string name="credman_keywords" msgid="8305600680836806170">"veri, şifre anahtarı, şifre"</string>
+    <string name="credman_keywords" msgid="8305600680836806170">"veri, geçiş anahtarı, şifre"</string>
     <string name="credman_autofill_keywords" msgid="701180623776848914">"otomatik, doldurma, otomatik doldurma, veriler, geçiş anahtarı, şifre"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Bu uygulamaya güvendiğinizden emin olun&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Otomatik Doldurma&gt;%1$s&lt;/xliff:g&gt; otomatik doldurulabilecek öğeleri belirlemek için ekranınızdaki bilgileri kullanır."</string>
     <string name="credman_autofill_confirmation_message" msgid="843829628024668466">"&lt;b&gt;&lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; kullanılsın mı?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Yeni şifreler, geçiş anahtarları ve diğer bilgiler artık buraya kaydedilecek. &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; otomatik doldurulabilecek alanları belirlemek için ekranınızdaki bilgileri kullanabilir."</string>
@@ -4857,4 +4880,10 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Yüklediğiniz uygulamalar, cihazınızın adını görebilecek. Cihazınızın adı ayrıca Bluetooth cihazlara bağlandığınızda, kablosuz ağa bağlandığınızda veya kablosuz hotspot oluşturduğunuzda diğer kişiler tarafından görülecektir."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Dil bilgisine uygun cinsiyet"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Dil bilgisine uygun cinsiyet seçin"</string>
+    <string name="content_protection_preference_title" msgid="5069260032659193074">"Yanıltıcı uygulamaları tarama"</string>
+    <string name="content_protection_preference_summary" msgid="2252393849408445391">"Uygulama etkinliğini kimlik avı açısından kontrol edin"</string>
+    <string name="content_protection_preference_user_consent_switch_title" msgid="60088482227901638">"Taramayı kullan"</string>
+    <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="2868495870224174097">"İş uygulamaları için taramayı kullan"</string>
+    <string name="content_protection_preference_subpage_summary" msgid="7707255571476950976">"Doğrudan cihazınızda gizli olarak yürütülen tarama işlemi, uygulama etkinliğini kimlik avı veya diğer yanıltıcı davranışlar açısından kontrol eder. Böyle bir durum tespit edilirse tehdidi onaylamak ve uygulama kullanıcılarını uyarmak için bazı uygulama bilgileri Google Play Protect\'e gönderilir."</string>
+    <string name="content_protection_preference_subpage_info" msgid="6010628258453929862">"Bu, koruma amaçlı bir güvenlik özelliğidir. Cihaz veya kişisel bilgileriniz Google ile paylaşılmaz. \n\nKimlik avı, oturum açma kimlik bilgilerini veya diğer kişisel bilgileri çalmaya yönelik bir girişimdir."</string>
 </resources>

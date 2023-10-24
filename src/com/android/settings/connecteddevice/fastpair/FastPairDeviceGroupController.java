@@ -82,6 +82,7 @@ public class FastPairDeviceGroupController extends BasePreferenceController
     @Override
     public void onStart(@NonNull LifecycleOwner owner) {
         if (mFastPairDeviceUpdater != null) {
+            mFastPairDeviceUpdater.setPreferenceContext(mContext);
             mFastPairDeviceUpdater.registerCallback();
         } else {
             if (DEBUG) {
@@ -94,6 +95,7 @@ public class FastPairDeviceGroupController extends BasePreferenceController
     @Override
     public void onStop(@NonNull LifecycleOwner owner) {
         if (mFastPairDeviceUpdater != null) {
+            mFastPairDeviceUpdater.setPreferenceContext(null);
             mFastPairDeviceUpdater.unregisterCallback();
         } else {
             if (DEBUG) {

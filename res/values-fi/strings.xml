@@ -113,6 +113,10 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Poista Bluetooth LE audio käytöstä"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Poistaa Bluetooth LE ‑audio-ominaisuuden käytöstä, jos laite tukee LE-audiolaitteistoja"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Näytä LE Audio ‑valitsin laitetiedoissa"</string>
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist (7392319491894565552) -->
+    <skip />
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist_summary (8999245286359656738) -->
+    <skip />
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Medialaitteet"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Soittolaitteet"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Muut laitteet"</string>
@@ -1317,6 +1321,8 @@
     <string name="carrier_enabled_summaryOn" msgid="5212067975273903381">"APN otettu käyttöön"</string>
     <string name="carrier_enabled_summaryOff" msgid="8541959867953738521">"APN poistettu käytöstä"</string>
     <string name="bearer" msgid="3231443241639159358">"Bearer"</string>
+    <string name="network_type" msgid="748590707422733595">"Verkon tyyppi"</string>
+    <string name="network_type_unspecified" msgid="7756349656194518725">"Ei määritetty"</string>
     <string name="mvno_type" msgid="4734654257494971247">"MVNO-tyyppi"</string>
     <string name="mvno_match_data" msgid="5213193073684321156">"MVNO-arvo"</string>
     <string name="menu_delete" msgid="9199740901584348273">"Poista APN"</string>
@@ -2041,6 +2047,8 @@
     <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Käytä värinää ja haptista palautetta"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Värinähälytys"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Median värinä"</string>
+    <!-- no translation found for accessibility_keyboard_vibration_title (7559967730626765441) -->
+    <skip />
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Soittoäänen värinä"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Ilmoitusvärinä"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Kosketuspalaute"</string>
@@ -2348,6 +2356,7 @@
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_since_last_full_charge" msgid="3488425008925924769">"edellisen täyden latauksen jälkeen"</string>
     <string name="battery_usage_system_apps" msgid="8659537819731575299">"Järjestelmäsovellukset"</string>
+    <string name="battery_usage_uninstalled_apps" msgid="8170405012552803662">"Poistetut sovellukset"</string>
     <string name="battery_usage_others" msgid="311793281613609986">"Muut"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Arvioitu jäljellä oleva aika"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"Täyteen lataukseen"</string>
@@ -2607,6 +2616,7 @@
     <string name="data_usage_app_summary_title" msgid="4933742247928064178">"Mobiilidata ja Wi‑Fi"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Henkilödatan aut. synkronointi"</string>
     <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Työdatan autom. synkronointi"</string>
+    <string name="account_settings_menu_auto_sync_private" msgid="2315144351530596228">"Yksityisen datan synkronointi"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"Muuta jaksoa…"</string>
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"Tiedonsiirtojakson nollauspäivä (kk):"</string>
     <string name="data_usage_empty" msgid="5619908658853726866">"Sovellukset eivät käyttäneet tiedonsiirtoa."</string>
@@ -3049,6 +3059,8 @@
     <string name="keywords_font_size" msgid="1643198841815006447">"tekstin koko, suurikokoinen teksti, suuri fontti, suuri teksti, heikko näkö, suurenna tekstiä, fontin suurentaja, fontin suurennus"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"aina päällä oleva näyttö, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, tagi, lukija"</string>
+    <!-- no translation found for keywords_keyboard_vibration (6485149510591654697) -->
+    <skip />
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Äänenvoimakkuus, värinä, Älä häiritse"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Median äänenvoimakkuus"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Suoratoiston äänenvoimakkuus"</string>
@@ -3355,6 +3367,17 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"Tämä sovellus ei tue tehostettuja asetuksia"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"Lisää asetuksia"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"Lisää asetuksia on saatavilla sovelluksen sisällä"</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"Ilmoitusten hiljentäminen"</string>
+    <string name="notification_polite_all_apps" msgid="1118651561594250059">"Käytä hiljentämistä kaikkiin ilmoituksiin"</string>
+    <string name="notification_polite_all_apps_summary" msgid="540268373207498126">"Laske ilmoitusten äänenvoimakkutta vähitellen, kun saat paljon peräkkäisiä ilmoituksia samasta sovelluksesta"</string>
+    <string name="notification_polite_conversations" msgid="8197695136727245741">"Käytä hiljentämistä keskusteluihin"</string>
+    <string name="notification_polite_conversations_summary" msgid="2677141765664359994">"Laske ilmoitusten äänenvoimakkutta vähitellen, kun saat paljon viestejä samasta keskustelusta lyhyen ajan sisällä"</string>
+    <string name="notification_polite_disabled" msgid="1378078021594282842">"Älä hiljennä ilmoituksia"</string>
+    <string name="notification_polite_disabled_summary" msgid="1145341260283746936">"Älä koskaan laske ilmoitusten äänenvoimakkuutta siitä huolimatta, miten paljon perättäisiä ilmoituksia sovellus lähettää"</string>
+    <string name="notification_polite_vibrate_unlocked" msgid="6142573851761357903">"Värinä, kun lukitus auki"</string>
+    <string name="notification_polite_vibrate_unlocked_summary" msgid="1678472892282874459">"Käytä värinää vain, kun näytön lukitus on avattu"</string>
+    <string name="notification_polite_work" msgid="8823596456640216391">"Käytä työprofiileissa"</string>
+    <string name="notification_polite_work_summary" msgid="8260947839104352075">"Käytä henkilökohtaisen profiilin ilmoitusten hiljennysasetuksia työprofiilissa"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR-avustinpalvelut"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Asennettuja sovelluksia ei ole pyydetty toimimaan VR-avustinpalveluina."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Sallitaanko VR-palveluiden käyttöoikeus palvelulle <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -4857,4 +4880,10 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Laitteesi nimi näkyy asentamillesi sovelluksille. Myös muut käyttäjät voivat nähdä nimen, kun muodostat Bluetooth-yhteyden laitteisiin, yhteyden Wi-Fi-verkkoon tai aktivoit Wi-Fi-hotspotin."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Kieliopillinen suku"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Valitse kieliopillinen suku"</string>
+    <string name="content_protection_preference_title" msgid="5069260032659193074">"Tarkistetaan löytyykö petollisia sovelluksia"</string>
+    <string name="content_protection_preference_summary" msgid="2252393849408445391">"Tarkista sovellustoiminta tietojenkalastelun osalta"</string>
+    <string name="content_protection_preference_user_consent_switch_title" msgid="60088482227901638">"Käytä tarkistusta"</string>
+    <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="2868495870224174097">"Käytä tarkistusta työsovelluksiin"</string>
+    <string name="content_protection_preference_subpage_summary" msgid="7707255571476950976">"Tarkistus tapahtuu yksityisesti laitteellasi. Siinä tarkistetaan sovellustoiminta tietojenkalastelun tai muun petollisen toiminnan varalta. Jos sellaista havaitaan, joitakin sovelluksen tietoja lähetetään Google Play Protectille uhkien varmistamiseksi ja käyttäjien varoittamiseksi."</string>
+    <string name="content_protection_preference_subpage_info" msgid="6010628258453929862">"Tämä on suojattu turvaominaisuus. Yhtäkään laitetta tai henkilökohtaisia tietoja ei jaeta Googlelle. \n\nTietojenkalastelu on yritys varastaa kirjautumistietoja tai muita henkilökohtaisia tietoja."</string>
 </resources>

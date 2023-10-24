@@ -113,6 +113,10 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"غیرفعال کردن «صدای بلوتوث کم‌مصرف»"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"اگر دستگاه از ویژگی‌های سخت‌افزار «صدای کم‌مصرف» پشتیبانی کند، ویژگی «صدای بلوتوث کم‌مصرف» را غیرفعال می‌کند."</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"نمایش تنظیم «صدای کم‌مصرف» در جزئیات دستگاه"</string>
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist (7392319491894565552) -->
+    <skip />
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist_summary (8999245286359656738) -->
+    <skip />
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"دستگاه‌های ذخیره‌سازی"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"دستگاه‌های برقراری تماس"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"دستگاه‌های دیگر"</string>
@@ -1057,7 +1061,7 @@
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"خاموش"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"تعادل سفیدی نمایشگر"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
-    <string name="fold_lock_behavior_title" msgid="786228803694268449">"ادامه استفاده از برنامه‌ها درحالت تاخوردگی"</string>
+    <string name="fold_lock_behavior_title" msgid="786228803694268449">"ادامه دادن به استفاده از برنامه‌ها درحالت تاخوردگی"</string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"نمایشگر روان"</string>
     <string name="peak_refresh_rate_summary" msgid="3627278682437562787">"به‌طور خودکار نرخ بازآوری را برای بعضی محتوا، از ۶۰ هرتز تا <xliff:g id="ID_1">%1$s</xliff:g> هرتز بالا می‌برد. مصرف باتری را افزایش می‌دهد."</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"اعمال بالاترین نرخ بازآوری"</string>
@@ -1317,6 +1321,8 @@
     <string name="carrier_enabled_summaryOn" msgid="5212067975273903381">"نام نقطه دستیابی فعال است"</string>
     <string name="carrier_enabled_summaryOff" msgid="8541959867953738521">"نام نقطه دستیابی غیرفعال است"</string>
     <string name="bearer" msgid="3231443241639159358">"حامل"</string>
+    <string name="network_type" msgid="748590707422733595">"نوع شبکه"</string>
+    <string name="network_type_unspecified" msgid="7756349656194518725">"نامشخص"</string>
     <string name="mvno_type" msgid="4734654257494971247">"‏نوع MVNO"</string>
     <string name="mvno_match_data" msgid="5213193073684321156">"‏مقدار MVNO"</string>
     <string name="menu_delete" msgid="9199740901584348273">"حذف نام نقطه دستیابی"</string>
@@ -2041,6 +2047,8 @@
     <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"استفاده از لرزش و فناوری لمسی"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"لرزش هشدار"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"لرزش رسانه‌ها"</string>
+    <!-- no translation found for accessibility_keyboard_vibration_title (7559967730626765441) -->
+    <skip />
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"لرزش هنگام زنگ خوردن"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"لرزش برای اعلان"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"بازخورد لمسی"</string>
@@ -2348,6 +2356,7 @@
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_since_last_full_charge" msgid="3488425008925924769">"از آخرین شارژ کامل"</string>
     <string name="battery_usage_system_apps" msgid="8659537819731575299">"برنامه‌های سیستم"</string>
+    <string name="battery_usage_uninstalled_apps" msgid="8170405012552803662">"برنامه‌های حذف نصب‌شده"</string>
     <string name="battery_usage_others" msgid="311793281613609986">"غیره"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"زمان باقی‌مانده تخمینی"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"مانده تا شارژ کامل"</string>
@@ -2607,6 +2616,7 @@
     <string name="data_usage_app_summary_title" msgid="4933742247928064178">"‏داده تلفن همراه و Wi‑Fi"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"همگام‌سازی خودکار داده‌های شخصی"</string>
     <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"همگام‌سازی خودکار داده‌های کاری"</string>
+    <string name="account_settings_menu_auto_sync_private" msgid="2315144351530596228">"همگام‌سازی خودکار داده خصوصی"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"تغییر چرخه..."</string>
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"روزِ تنظیم مجدد چرخه مصرف داده:"</string>
     <string name="data_usage_empty" msgid="5619908658853726866">"در این مدت، هیچ برنامه‌ای از داده‌ها استفاده نکرده‌ است."</string>
@@ -3049,6 +3059,8 @@
     <string name="keywords_font_size" msgid="1643198841815006447">"اندازه نوشتار، چاپ درشت، قلم بزرگ، نوشتار بزرگ، کم‌بینا، بزرگ کردن نوشتار، بزرگ‌کننده قلم، بزرگ کردن قلم"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"‏نمایشگر محیطی همیشه روشن، AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"‏nfc، برچسب، خوانش‌گر"</string>
+    <!-- no translation found for keywords_keyboard_vibration (6485149510591654697) -->
+    <skip />
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"میزان صدا، لرزش، «مزاحم نشوید»"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"میزان صدای رسانه"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"میزان صدای محتوای ارسالی"</string>
@@ -3355,6 +3367,17 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"این برنامه از تنظیمات پیشرفته پشتیبانی نمی‌کند"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"تنظیمات بیشتر"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"تنظیمات بیشتر داخل این برنامه دردسترس است"</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"استراحت اعلان"</string>
+    <string name="notification_polite_all_apps" msgid="1118651561594250059">"اعمال کردن استراحت بر همه اعلان‌ها"</string>
+    <string name="notification_polite_all_apps_summary" msgid="540268373207498126">"کاهش تدریجی صدای اعلان‌ها هنگامی که اعلان‌های متوالی زیادی از یک برنامه دریافت می‌کنید"</string>
+    <string name="notification_polite_conversations" msgid="8197695136727245741">"اعمال کردن استراحت بر همه مکالمه‌ها"</string>
+    <string name="notification_polite_conversations_summary" msgid="2677141765664359994">"کاهش تدریجی صدای اعلان‌ها هنگامی که در مدت‌زمانی کوتاه پیام‌های زیادی از یک گپ دریافت می‌کنید"</string>
+    <string name="notification_polite_disabled" msgid="1378078021594282842">"از استراحت اعلان استفاده نشود"</string>
+    <string name="notification_polite_disabled_summary" msgid="1145341260283746936">"صرف‌نظر از تعداد اعلان‌های متوالی دریافتی از یک برنامه، هرگز صدای اعلان‌ها کاهش نیابد"</string>
+    <string name="notification_polite_vibrate_unlocked" msgid="6142573851761357903">"لرزش در زمانی که قفل صفحه باز می‌شود"</string>
+    <string name="notification_polite_vibrate_unlocked_summary" msgid="1678472892282874459">"لرزش فقط در زمانی که قفل صفحه باز می‌شود"</string>
+    <string name="notification_polite_work" msgid="8823596456640216391">"اعمال کردن بر نمایه‌های کاری"</string>
+    <string name="notification_polite_work_summary" msgid="8260947839104352075">"اعمال کردن تنظیمات استراحت اعلان از نمایه شخصی به نمایه کاری"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"‏خدمات یاور VR"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"‏هیچ برنامه نصب‌شده‌ای درخواست نکرده به‌عنوان خدمات یاور VR اجرا شود."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"‏به <xliff:g id="SERVICE">%1$s</xliff:g> امکان داده شود به خدمات VR دسترسی یابد؟"</string>
@@ -4857,4 +4880,10 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"‏نام دستگاه شما برای برنامه‌هایی که نصب کرده‌اید قابل‌مشاهده است. همچنین ممکن است هنگام اتصال به دستگاه‌های بلوتوث، اتصال به شبکه Wi-Fi، یا راه‌اندازی نقطه اتصال Wi-Fi، برای افراد دیگر قابل‌مشاهده باشد."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"جنسیت دستوری"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"انتخاب جنسیت دستوری"</string>
+    <string name="content_protection_preference_title" msgid="5069260032659193074">"اسکن برای یافتن برنامه‌های گمراه‌کننده"</string>
+    <string name="content_protection_preference_summary" msgid="2252393849408445391">"بررسی فعالیت برنامه ازنظر رمزگیری"</string>
+    <string name="content_protection_preference_user_consent_switch_title" msgid="60088482227901638">"استفاده از اسکن"</string>
+    <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="2868495870224174097">"استفاده از اسکن برای برنامه‌های کاری"</string>
+    <string name="content_protection_preference_subpage_summary" msgid="7707255571476950976">"‏اسکن به‌صورت خصوصی روی دستگاهتان اجرا می‌شود و فعالیت برنامه‌ها را ازنظر رمزگیری یا سایر رفتارهای گمراه‌کننده بررسی می‌کند. درصورت شناسایی، برخی‌از اطلاعات برنامه برای تأیید تهدید و ارسال هشدار به کاربران برنامه به «سپر ایمنی Google Play» ارسال می‌شود."</string>
+    <string name="content_protection_preference_subpage_info" msgid="6010628258453929862">"‏این یک ویژگی امنیتی محافظت‌شده است. هیچ‌گونه اطلاعات دستگاه یا اطلاعات شخصی با Google هم‌رسانی نمی‌شود. \n\nرمزگیری تلاشی برای سرقت اطلاعات اعتباری ورود به سیستم یا سایر اطلاعات شخصی است."</string>
 </resources>

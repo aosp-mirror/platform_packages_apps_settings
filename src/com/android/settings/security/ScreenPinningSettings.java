@@ -33,7 +33,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
@@ -59,7 +59,7 @@ public class ScreenPinningSettings extends SettingsPreferenceFragment
     private static final int CONFIRM_REQUEST = 1000;
 
     private SettingsMainSwitchBar mSwitchBar;
-    private SwitchPreference mUseScreenLock;
+    private TwoStatePreference mUseScreenLock;
     private FooterPreference mFooterPreference;
     private LockPatternUtils mLockPatternUtils;
     private UserManager mUserManager;

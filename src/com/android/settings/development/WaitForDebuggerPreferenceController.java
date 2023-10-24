@@ -29,7 +29,7 @@ import android.text.TextUtils;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
@@ -79,7 +79,7 @@ public class WaitForDebuggerPreferenceController extends DeveloperOptionsPrefere
     }
 
     private void updateState(Preference preference, String debugApp) {
-        final SwitchPreference switchPreference = (SwitchPreference) preference;
+        final TwoStatePreference switchPreference = (TwoStatePreference) preference;
         final boolean debuggerEnabled = Settings.Global.getInt(mContext.getContentResolver(),
             Settings.Global.WAIT_FOR_DEBUGGER, SETTING_VALUE_OFF) != SETTING_VALUE_OFF;
         writeDebuggerAppOptions(debugApp, debuggerEnabled, true /* persistent */);
@@ -92,7 +92,7 @@ public class WaitForDebuggerPreferenceController extends DeveloperOptionsPrefere
         super.onDeveloperOptionsSwitchDisabled();
         writeDebuggerAppOptions(null /* package name */,
                 false /* waitForDebugger */, false /* persistent */);
-        ((SwitchPreference) mPreference).setChecked(false);
+        ((TwoStatePreference) mPreference).setChecked(false);
     }
 
     @VisibleForTesting

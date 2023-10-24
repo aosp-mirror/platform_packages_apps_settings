@@ -113,6 +113,10 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"블루투스 LE 오디오 사용 중지"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"기기가 LE 오디오 하드웨어 기능을 지원하는 경우 블루투스 LE 오디오 기능을 사용 중지합니다."</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"기기 세부정보에 LE 오디오 전환 버튼 표시"</string>
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist (7392319491894565552) -->
+    <skip />
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist_summary (8999245286359656738) -->
+    <skip />
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"미디어 기기"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"통화 기기"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"다른 기기"</string>
@@ -1317,6 +1321,8 @@
     <string name="carrier_enabled_summaryOn" msgid="5212067975273903381">"APN 사용"</string>
     <string name="carrier_enabled_summaryOff" msgid="8541959867953738521">"APN 사용 중지됨"</string>
     <string name="bearer" msgid="3231443241639159358">"베어러(Bearer)"</string>
+    <string name="network_type" msgid="748590707422733595">"네트워크 유형"</string>
+    <string name="network_type_unspecified" msgid="7756349656194518725">"명시되지 않음"</string>
     <string name="mvno_type" msgid="4734654257494971247">"MVNO 유형"</string>
     <string name="mvno_match_data" msgid="5213193073684321156">"MVNO 값"</string>
     <string name="menu_delete" msgid="9199740901584348273">"APN 삭제"</string>
@@ -2041,6 +2047,8 @@
     <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"진동 및 햅틱 사용"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"알람 진동"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"미디어 진동"</string>
+    <!-- no translation found for accessibility_keyboard_vibration_title (7559967730626765441) -->
+    <skip />
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"벨소리 진동"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"알림 진동"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"터치 반응"</string>
@@ -2348,6 +2356,7 @@
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_since_last_full_charge" msgid="3488425008925924769">"마지막으로 완충한 이후"</string>
     <string name="battery_usage_system_apps" msgid="8659537819731575299">"시스템 앱"</string>
+    <string name="battery_usage_uninstalled_apps" msgid="8170405012552803662">"앱을 제거했습니다."</string>
     <string name="battery_usage_others" msgid="311793281613609986">"기타"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"남은 예상 시간"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"충전 완료까지 남은 시간"</string>
@@ -2607,6 +2616,7 @@
     <string name="data_usage_app_summary_title" msgid="4933742247928064178">"모바일 데이터 및 Wi-Fi"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"개인 데이터 자동 동기화"</string>
     <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"직장 데이터 자동 동기화"</string>
+    <string name="account_settings_menu_auto_sync_private" msgid="2315144351530596228">"비공개 데이터 자동 동기화"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"주기 변경..."</string>
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"데이터 사용 주기를 재설정할 날짜:"</string>
     <string name="data_usage_empty" msgid="5619908658853726866">"이 기간 동안 데이터를 사용한 앱이 없습니다."</string>
@@ -3049,6 +3059,8 @@
     <string name="keywords_font_size" msgid="1643198841815006447">"텍스트 크기, 큰 글자, 큰 글꼴, 큰 텍스트, 저시력, 텍스트 크게, 텍스트 확대, 글꼴 확대"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"화면 보호 모드 상시 사용 설정(AOD)"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, 태그, 리더"</string>
+    <!-- no translation found for keywords_keyboard_vibration (6485149510591654697) -->
+    <skip />
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"볼륨, 진동, 방해 금지 모드"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"미디어 볼륨"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"전송 볼륨"</string>
@@ -3355,6 +3367,17 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"이 앱은 향상된 설정을 지원하지 않습니다."</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"기타 설정"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"앱 안에서 추가 설정을 볼 수 있음"</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"알림 쿨다운"</string>
+    <string name="notification_polite_all_apps" msgid="1118651561594250059">"모든 알림에 쿨다운 적용"</string>
+    <string name="notification_polite_all_apps_summary" msgid="540268373207498126">"동일한 앱에서 알림을 연속적으로 많이 받는 경우 알림 볼륨을 서서히 낮춥니다."</string>
+    <string name="notification_polite_conversations" msgid="8197695136727245741">"대화에 쿨다운 적용"</string>
+    <string name="notification_polite_conversations_summary" msgid="2677141765664359994">"짧은 시간 동안 동일한 채팅에서 많은 메시지를 받는 경우 알림 볼륨을 서서히 낮춥니다."</string>
+    <string name="notification_polite_disabled" msgid="1378078021594282842">"알림 쿨다운 사용 안함"</string>
+    <string name="notification_polite_disabled_summary" msgid="1145341260283746936">"동일한 앱에서 알림을 연속적으로 많이 받더라도 알림 볼륨을 낮추지 않습니다."</string>
+    <string name="notification_polite_vibrate_unlocked" msgid="6142573851761357903">"잠금 해제 시 진동"</string>
+    <string name="notification_polite_vibrate_unlocked_summary" msgid="1678472892282874459">"화면이 잠금 해제되었을 때만 진동합니다."</string>
+    <string name="notification_polite_work" msgid="8823596456640216391">"직장 프로필에 적용"</string>
+    <string name="notification_polite_work_summary" msgid="8260947839104352075">"개인 프로필의 알림 쿨다운 설정을 직장 프로필에 적용합니다."</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR 도우미 서비스"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"설치된 앱 중에서 VR 도우미 서비스로 실행되도록 요청한 앱이 없습니다."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"VR 서비스가 <xliff:g id="SERVICE">%1$s</xliff:g>에 액세스하도록 허용하시겠습니까?"</string>
@@ -4857,4 +4880,10 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"기기 이름이 설치한 앱에 표시됩니다. 블루투스 기기 및 Wi-Fi 네트워크에 연결하거나 Wi-Fi 핫스팟을 설정할 때도 기기 이름이 다른 사용자에게 표시될 수 있습니다."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"문법적 성별"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"문법적 성별 선택"</string>
+    <string name="content_protection_preference_title" msgid="5069260032659193074">"사기성 앱 검사"</string>
+    <string name="content_protection_preference_summary" msgid="2252393849408445391">"앱 활동에서 피싱 확인"</string>
+    <string name="content_protection_preference_user_consent_switch_title" msgid="60088482227901638">"검사 사용"</string>
+    <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="2868495870224174097">"직장 앱에 검사 사용"</string>
+    <string name="content_protection_preference_subpage_summary" msgid="7707255571476950976">"기기에서 바로 검사가 실행되어 앱 활동에서 피싱 또는 기타 사기 행위를 확인합니다. 피싱 또는 기타 사기 행위가 감지되는 경우, 위협을 확인하고 앱 사용자에게 경고를 표시할 수 있도록 일부 앱 정보가 Google Play 프로텍트로 전송됩니다."</string>
+    <string name="content_protection_preference_subpage_info" msgid="6010628258453929862">"보호되는 보안 기능으로, 기기 또는 개인 정보가 Google과 공유되지 않습니다. \n\n피싱은 로그인 사용자 인증 정보 또는 기타 개인 정보를 도용하려는 시도입니다."</string>
 </resources>

@@ -37,7 +37,7 @@ import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
@@ -59,7 +59,7 @@ public class KeyboardVibrationTogglePreferenceController extends TogglePreferenc
     private final Vibrator mVibrator;
 
     @Nullable
-    private SwitchPreference mPreference;
+    private TwoStatePreference mPreference;
 
     public KeyboardVibrationTogglePreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);

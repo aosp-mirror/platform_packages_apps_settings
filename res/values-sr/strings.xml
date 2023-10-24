@@ -113,6 +113,10 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Онемогући Bluetooth LE audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Онемогућава функцију Bluetooth LE audio ако уређај подржава могућности LE audio хардвера."</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"LE Audio прекидач у детаљима о уређају"</string>
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist (7392319491894565552) -->
+    <skip />
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist_summary (8999245286359656738) -->
+    <skip />
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Медијски уређаји"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Уређаји за позивање"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Други уређаји"</string>
@@ -1317,6 +1321,8 @@
     <string name="carrier_enabled_summaryOn" msgid="5212067975273903381">"Назив приступне тачке је омогућен"</string>
     <string name="carrier_enabled_summaryOff" msgid="8541959867953738521">"Назив приступне тачке је онемогућен"</string>
     <string name="bearer" msgid="3231443241639159358">"Носилац"</string>
+    <string name="network_type" msgid="748590707422733595">"Тип мреже"</string>
+    <string name="network_type_unspecified" msgid="7756349656194518725">"Није наведено"</string>
     <string name="mvno_type" msgid="4734654257494971247">"Тип MVNO-а"</string>
     <string name="mvno_match_data" msgid="5213193073684321156">"Вредност MVNO-а"</string>
     <string name="menu_delete" msgid="9199740901584348273">"Избриши назив приступне тачке"</string>
@@ -1503,7 +1509,7 @@
     <string name="lockpassword_choose_your_password_header_for_biometrics" msgid="2053366309272487015">"Подесите лозинку да бисте користили лице или отисак прста"</string>
     <string name="lockpassword_choose_your_pattern_header_for_biometrics" msgid="4038476475293734905">"Подесите шаблон да бисте користили лице или отисак прста"</string>
     <string name="lockpassword_choose_your_pin_header_for_biometrics" msgid="9086039918921009380">"Подесите PIN да бисте користили лице или отисак прста"</string>
-    <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Заборавили сте лозинку?"</string>
+    <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Заборављена лозинка?"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"Заборавили сте шаблон?"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"Заборавили сте PIN?"</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="7401165571170203743">"Нацртајте шаблон да бисте наставили"</string>
@@ -2041,6 +2047,8 @@
     <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Користи вибрирање и хаптику"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Вибрирање аларма"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Вибрирање медија"</string>
+    <!-- no translation found for accessibility_keyboard_vibration_title (7559967730626765441) -->
+    <skip />
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Вибрирање звона"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Вибрирање обавештења"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Тактилни одзив"</string>
@@ -2348,6 +2356,7 @@
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_since_last_full_charge" msgid="3488425008925924769">"од последњег потпуног пуњења"</string>
     <string name="battery_usage_system_apps" msgid="8659537819731575299">"Системске апликације"</string>
+    <string name="battery_usage_uninstalled_apps" msgid="8170405012552803662">"Деинсталиране апликације"</string>
     <string name="battery_usage_others" msgid="311793281613609986">"Друго"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Процењено преостало време"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"До потпуног пуњења"</string>
@@ -2607,6 +2616,7 @@
     <string name="data_usage_app_summary_title" msgid="4933742247928064178">"Мобилни подаци и WiFi"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Аутом. синхрон. личне податке"</string>
     <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Аутом. синхр. податке за посао"</string>
+    <string name="account_settings_menu_auto_sync_private" msgid="2315144351530596228">"Синхронизуј приватне податке"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"Промена циклуса..."</string>
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"Дан у месецу када се поново поставља циклус потрошње података:"</string>
     <string name="data_usage_empty" msgid="5619908658853726866">"У овом периоду апликације нису користиле податке."</string>
@@ -3049,6 +3059,8 @@
     <string name="keywords_font_size" msgid="1643198841815006447">"величина текста, велика слова, велик фонт, велик текст, слабовидост, повећање текста, увећавање фонта, повећање фонта"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"звек укључен амбијентални приказ, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, ознака, читач"</string>
+    <!-- no translation found for keywords_keyboard_vibration (6485149510591654697) -->
+    <skip />
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Јачина звука, вибрација, Не узнемиравај"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Јачина звука медија"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Јачина звука за пребацивање"</string>
@@ -3355,6 +3367,17 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"Ова апликација не подржава побољшана подешавања"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"Још подешавања"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"Доступно је још подешавања у апликацији"</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"Мировање за обавештења"</string>
+    <string name="notification_polite_all_apps" msgid="1118651561594250059">"Примени мировање на сва обавештења"</string>
+    <string name="notification_polite_all_apps_summary" msgid="540268373207498126">"Постепено смањује јачину звука обавештења када добијете много узастопних обавештења из исте апликације"</string>
+    <string name="notification_polite_conversations" msgid="8197695136727245741">"Примени мировање на све конверзације"</string>
+    <string name="notification_polite_conversations_summary" msgid="2677141765664359994">"Постепено смањује јачину звука обавештења када добијете много порука из истог ћаскања у кратком периоду"</string>
+    <string name="notification_polite_disabled" msgid="1378078021594282842">"Не користи мировање за обавештења"</string>
+    <string name="notification_polite_disabled_summary" msgid="1145341260283746936">"Никада не смањује јачину звука обавештења, без обзира на број узастопних порука из исте апликације"</string>
+    <string name="notification_polite_vibrate_unlocked" msgid="6142573851761357903">"Вибрирај када је екран откључан"</string>
+    <string name="notification_polite_vibrate_unlocked_summary" msgid="1678472892282874459">"Вибрира само када је екран откључан"</string>
+    <string name="notification_polite_work" msgid="8823596456640216391">"Примени на пословне профиле"</string>
+    <string name="notification_polite_work_summary" msgid="8260947839104352075">"Примењује подешавања мировања за обавештења са личног профила на пословни профил"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Услуге помагача за виртуелну реалност"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Ниједна инсталирана апликација није захтевала да се покрене као услуга помагача за виртуелну реалност."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Дозвољавате приступ услузи виртуелне реалности за <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -4858,4 +4881,10 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Апликације које сте инсталирали могу да виде назив уређаја. И други људи могу да виде назив уређаја када се повежете са Bluetooth уређајима или WiFi мрежом или подесите WiFi хотспот."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Граматички род"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Изаберите граматички род"</string>
+    <string name="content_protection_preference_title" msgid="5069260032659193074">"Провера ради откривања обмањујућих апликација"</string>
+    <string name="content_protection_preference_summary" msgid="2252393849408445391">"Проверите активности у апликацијама ради откривања „пецања“"</string>
+    <string name="content_protection_preference_user_consent_switch_title" msgid="60088482227901638">"Користи проверу"</string>
+    <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="2868495870224174097">"Користи проверу за пословне апликације"</string>
+    <string name="content_protection_preference_subpage_summary" msgid="7707255571476950976">"Провера се обавља приватно и директно на уређају, а њоме се проверавају активности у апликацијама ради откривања „пецања“ или другог обмањујућег понашања. Ако се то открије, неки подаци о апликацији се шаљу Google Play заштити да би се потврдила претња и упозорили корисници."</string>
+    <string name="content_protection_preference_subpage_info" msgid="6010628258453929862">"Ово је заштићена безбедносна функција. Са Google-ом се не деле подаци о уређају ни лични подаци. \n\n„Пецање“ је покушај крађе акредитива за пријављивање или других личних података."</string>
 </resources>

@@ -86,7 +86,7 @@
     <string name="progress_scanning" msgid="2564746192843011826">"Pesquisar"</string>
     <string name="bluetooth_no_devices_found" msgid="7704539337219953182">"Nenhum dispositivo Bluetooth encontrado."</string>
     <string name="bluetooth_notif_ticker" msgid="209515545257862858">"Solicitação de pareamento Bluetooth"</string>
-    <string name="bluetooth_notif_title" msgid="1196532269131348647">"Solicitação de pareamento"</string>
+    <string name="bluetooth_notif_title" msgid="1196532269131348647">"Pedido de pareamento"</string>
     <string name="bluetooth_notif_message" msgid="5584717784198086653">"Toque para parear com <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_devices_card_off_title" msgid="1320149821945129127">"Bluetooth desativado"</string>
     <string name="bluetooth_devices_card_off_summary" msgid="2276527382891105858">"Toque para ativar"</string>
@@ -113,6 +113,10 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Desativar LE Audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Desativa o recurso de áudio Bluetooth de baixo consumo caso o hardware do dispositivo tenha essa opção."</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Mostrar a chave do LE Audio nos Detalhes do dispositivo"</string>
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist (7392319491894565552) -->
+    <skip />
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist_summary (8999245286359656738) -->
+    <skip />
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Dispositivos portáteis de mídia"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Dispositivos de chamada"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Outros dispositivos"</string>
@@ -789,7 +793,7 @@
     <string name="wifi_configure_settings_preference_summary_wakeup_on" msgid="7822368955551467382">"O Wi‑Fi é reativado automaticamente"</string>
     <string name="wifi_configure_settings_preference_summary_wakeup_off" msgid="5710203586018223864">"O Wi‑Fi não é reativado automaticamente"</string>
     <string name="wifi_menu_p2p" msgid="5234165837732940385">"Wi-Fi Direct"</string>
-    <string name="wifi_empty_list_wifi_off" msgid="7697422506708419298">"Para ver as redes disponíveis, ative o Wi-Fi."</string>
+    <string name="wifi_empty_list_wifi_off" msgid="7697422506708419298">"Para acessar as redes disponíveis, ative o Wi-Fi."</string>
     <string name="wifi_empty_list_wifi_on" msgid="2448010040478321376">"Procurando redes…"</string>
     <string name="wifi_empty_list_user_restricted" msgid="454861411536708709">"Você não tem permissão para alterar a rede Wi-Fi."</string>
     <string name="wifi_settings_scanning_required_title" msgid="1088663325396007484">"Ativar a busca por Wi‑Fi?"</string>
@@ -1317,6 +1321,8 @@
     <string name="carrier_enabled_summaryOn" msgid="5212067975273903381">"APN ativado"</string>
     <string name="carrier_enabled_summaryOff" msgid="8541959867953738521">"APN desativado"</string>
     <string name="bearer" msgid="3231443241639159358">"Portador"</string>
+    <string name="network_type" msgid="748590707422733595">"Tipo de rede"</string>
+    <string name="network_type_unspecified" msgid="7756349656194518725">"Não especificado"</string>
     <string name="mvno_type" msgid="4734654257494971247">"Tipo de MVNO"</string>
     <string name="mvno_match_data" msgid="5213193073684321156">"Valor de MVNO"</string>
     <string name="menu_delete" msgid="9199740901584348273">"Excluir APN"</string>
@@ -1426,7 +1432,7 @@
     <string name="location_app_permission_summary_location_on" msgid="7552095451731948984">"{count,plural, =1{# app de {total} tem acesso à localização}one{# app de {total} tem acesso à localização}other{# apps de {total} têm acesso à localização}}"</string>
     <string name="location_category_recent_location_access" msgid="2558063524482178146">"Acesso recente"</string>
     <string name="location_recent_location_access_see_all" msgid="4203102419355323325">"Ver tudo"</string>
-    <string name="location_recent_location_access_view_details" msgid="5803264082558504544">"Ver detalhes"</string>
+    <string name="location_recent_location_access_view_details" msgid="5803264082558504544">"Mais detalhes"</string>
     <string name="location_no_recent_apps" msgid="6814206631456177033">"Nenhum app solicitou a localização recentemente"</string>
     <string name="location_no_recent_accesses" msgid="6031735777805464247">"Nenhum app acessou a localização recentemente"</string>
     <string name="location_high_battery_use" msgid="4277318891200626524">"Uso da bateria elevado"</string>
@@ -2041,6 +2047,8 @@
     <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Usar vibração e retorno tátil"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Vibração do alarme"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Vibração de mídia"</string>
+    <!-- no translation found for accessibility_keyboard_vibration_title (7559967730626765441) -->
+    <skip />
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Vibração do toque"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Vibração das notificações"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Feedback por toque"</string>
@@ -2348,6 +2356,7 @@
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_since_last_full_charge" msgid="3488425008925924769">"desde a última carga completa"</string>
     <string name="battery_usage_system_apps" msgid="8659537819731575299">"Apps do sistema"</string>
+    <string name="battery_usage_uninstalled_apps" msgid="8170405012552803662">"Apps desinstalados"</string>
     <string name="battery_usage_others" msgid="311793281613609986">"Outros"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Tempo restante estimado"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"Até a carga completa"</string>
@@ -2607,6 +2616,7 @@
     <string name="data_usage_app_summary_title" msgid="4933742247928064178">"Dados móveis e Wi‑Fi"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Sincronizar dados pessoais"</string>
     <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Sincronizar dados de trabalho automaticamente"</string>
+    <string name="account_settings_menu_auto_sync_private" msgid="2315144351530596228">"Sincronizar dados particulares automaticamente"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"Alterar ciclo..."</string>
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"Dia do mês para redefinir o ciclo de uso dos dados:"</string>
     <string name="data_usage_empty" msgid="5619908658853726866">"Nenhum app usou dados durante o período."</string>
@@ -2748,8 +2758,8 @@
     <string name="ssl_ca_cert_warning" msgid="3898387588657346106">"A rede pode ser monitorada"</string>
     <string name="done_button" msgid="6269449526248267">"Concluído"</string>
     <string name="ssl_ca_cert_dialog_title" msgid="1032088078702042090">"{count,plural, =1{Confiar ou remover certificado}one{Confiar ou remover certificado}other{Confiar ou remover certificados}}"</string>
-    <string name="ssl_ca_cert_info_message_device_owner" msgid="7528581447864707873">"{numberOfCertificates,plural, =1{A organização {orgName} instalou uma autoridade certificadora no seu dispositivo, o que pode permitir que ela monitore sua atividade na rede dele, incluindo e-mails, apps e sites seguros.\n\nPara ver mais informações sobre esse certificado, entre em contato com o administrador.}one{A organização {orgName} instalou uma autoridade certificadora no seu dispositivo, o que pode permitir que ela monitore sua atividade na rede dele, incluindo e-mails, apps e sites seguros.\n\nPara ver mais informações sobre esse certificado, entre em contato com o administrador.}other{A organização {orgName} instalou autoridades certificadoras no seu dispositivo, o que pode permitir que ela monitore sua atividade na rede dele, incluindo e-mails, apps e sites seguros.\n\nPara ver mais informações sobre esses certificados, entre em contato com o administrador.}}"</string>
-    <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{A organização {orgName} instalou uma autoridade certificadora para seu perfil de trabalho, o que pode permitir que ela monitore sua atividade profissional na rede, incluindo e-mails, apps e sites seguros.\n\nPara ver mais informações sobre esse certificado, entre em contato com o administrador.}one{A organização {orgName} instalou uma autoridade certificadora para seu perfil de trabalho, o que pode permitir que ela monitore sua atividade profissional na rede, incluindo e-mails, apps e sites seguros.\n\nPara ver mais informações sobre esse certificado, entre em contato com o administrador.}other{A organização {orgName} instalou autoridades certificadoras para seu perfil de trabalho, o que pode permitir que ela monitore sua atividade profissional na rede, incluindo e-mails, apps e sites seguros.\n\nPara ver mais informações sobre esses certificados, entre em contato com o administrador.}}"</string>
+    <string name="ssl_ca_cert_info_message_device_owner" msgid="7528581447864707873">"{numberOfCertificates,plural, =1{A organização {orgName} instalou uma autoridade certificadora no seu dispositivo, o que pode permitir que ela monitore sua atividade na rede dele, incluindo e-mails, apps e sites seguros.\n\nPara acessar mais informações sobre esse certificado, entre em contato com o administrador.}one{A organização {orgName} instalou uma autoridade certificadora no seu dispositivo, o que pode permitir que ela monitore sua atividade na rede dele, incluindo e-mails, apps e sites seguros.\n\nPara acessar mais informações sobre esse certificado, entre em contato com o administrador.}other{A organização {orgName} instalou autoridades certificadoras no seu dispositivo, o que pode permitir que ela monitore sua atividade na rede dele, incluindo e-mails, apps e sites seguros.\n\nPara acessar mais informações sobre esses certificados, entre em contato com o administrador.}}"</string>
+    <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{A organização {orgName} instalou uma autoridade certificadora para seu perfil de trabalho, o que pode permitir que ela monitore sua atividade profissional na rede, incluindo e-mails, apps e sites seguros.\n\nPara acessar mais informações sobre esse certificado, entre em contato com o administrador.}one{A organização {orgName} instalou uma autoridade certificadora para seu perfil de trabalho, o que pode permitir que ela monitore sua atividade profissional na rede, incluindo e-mails, apps e sites seguros.\n\nPara acessar mais informações sobre esse certificado, entre em contato com o administrador.}other{A organização {orgName} instalou autoridades certificadoras para seu perfil de trabalho, o que pode permitir que ela monitore sua atividade profissional na rede, incluindo e-mails, apps e sites seguros.\n\nPara acessar mais informações sobre esses certificados, entre em contato com o administrador.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"Sua atividade na rede, incluindo e-mails, apps e websites seguros, pode ser monitorada por terceiros.\n\nUma credencial confiável instalada no dispositivo permite isso."</string>
     <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{Verificar certificado}one{Verificar certificado}other{Verificar certificados}}"</string>
     <string name="user_settings_title" msgid="6550866465409807877">"Vários usuários"</string>
@@ -2943,7 +2953,7 @@
     <string name="cloned_app_created_summary" msgid="7277912971544890710">"Clonado"</string>
     <string name="cloned_app_creation_toast_summary" msgid="3854494347144867870">"Criando clone de <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>"</string>
     <string name="cloned_app_created_toast_summary" msgid="755225403495544163">"O clone de <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> foi criado"</string>
-    <string name="system_dashboard_summary" msgid="7400745270362833832">"Idiomas, gestos, tempo, backup"</string>
+    <string name="system_dashboard_summary" msgid="7400745270362833832">"Idiomas, gestos, hora, backup"</string>
     <string name="languages_setting_summary" msgid="2650807397396180351">"Idiomas do sistema, idiomas do app, preferências regionais, fala"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, Wi-Fi, conexão de rede, Internet, sem fio, dados, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Notificação de Wi‑Fi, notificação de wifi"</string>
@@ -3049,6 +3059,8 @@
     <string name="keywords_font_size" msgid="1643198841815006447">"tamanho do texto, letras grandes, fonte grande, texto grande, baixa visão, aumentar texto, ampliador de fonte, aumento de fonte"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"tela ambiente sempre ativada, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, etiqueta, leitor"</string>
+    <!-- no translation found for keywords_keyboard_vibration (6485149510591654697) -->
+    <skip />
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Volume, vibração, Não perturbe"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Volume de mídia"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Volume da transmissão"</string>
@@ -3355,6 +3367,17 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"O app não é compatível com as configurações avançadas."</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"Mais configurações"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"Mais configurações estão disponíveis neste app"</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"Período de espera para notificações"</string>
+    <string name="notification_polite_all_apps" msgid="1118651561594250059">"Aplicar um período de espera a todas as notificações"</string>
+    <string name="notification_polite_all_apps_summary" msgid="540268373207498126">"Diminuir gradualmente o volume de notificações quando você receber muitas seguidas do mesmo app"</string>
+    <string name="notification_polite_conversations" msgid="8197695136727245741">"Aplicar um período de espera a conversas"</string>
+    <string name="notification_polite_conversations_summary" msgid="2677141765664359994">"Diminuir gradualmente o volume de notificações quando você receber muitas mensagens seguidas da mesma conversa em um curto período"</string>
+    <string name="notification_polite_disabled" msgid="1378078021594282842">"Não usar o período de espera para notificações"</string>
+    <string name="notification_polite_disabled_summary" msgid="1145341260283746936">"Nunca diminuir o volume de notificações, independente da quantidade de notificações seguidas do mesmo app"</string>
+    <string name="notification_polite_vibrate_unlocked" msgid="6142573851761357903">"Vibrar quando desbloqueado"</string>
+    <string name="notification_polite_vibrate_unlocked_summary" msgid="1678472892282874459">"Vibrar apenas quando a tela estiver desbloqueada"</string>
+    <string name="notification_polite_work" msgid="8823596456640216391">"Aplicar a perfis de trabalho"</string>
+    <string name="notification_polite_work_summary" msgid="8260947839104352075">"Aplique as configurações de período de espera para notificações do seu perfil pessoal ao seu perfil de trabalho"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Serviços de ajuda para RV"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Nenhum app instalado solicitou ser executado como serviço de ajuda para RV."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Permitir acesso ao serviço de RV para <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -3879,7 +3902,7 @@
     <string name="no_carrier_update_text" msgid="5432798085593055966">"Atualizado há <xliff:g id="ID_1">^2</xliff:g>"</string>
     <string name="carrier_and_update_now_text" msgid="5075861262344398849">"Atualizado pela <xliff:g id="ID_1">^1</xliff:g> agora mesmo"</string>
     <string name="no_carrier_update_now_text" msgid="7898004907837200752">"Atualizado agora"</string>
-    <string name="launch_wifi_text" msgid="976421974332512894">"Ver detalhes"</string>
+    <string name="launch_wifi_text" msgid="976421974332512894">"Mais detalhes"</string>
     <string name="data_saver_title" msgid="2593804270788863815">"Economia de dados"</string>
     <string name="unrestricted_data_saver" msgid="7922563266857367495">"Dados ilimitados"</string>
     <string name="restrict_background_blocklisted" msgid="2308345280442438232">"Os dados em segundo plano estão desativados"</string>
@@ -3996,7 +4019,7 @@
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Modo de navegação"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="6677266952021118342">"Navegação com dois botões"</string>
-    <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"Para mudar de app, deslize o botão home para cima. Para ver todos os apps, deslize para cima novamente. Para retornar, toque no botão \"Voltar\"."</string>
+    <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"Para mudar de app, deslize o botão home para cima. Para acessar todos os apps, deslize para cima novamente. Para retornar, toque no botão \"Voltar\"."</string>
     <string name="emergency_settings_preference_title" msgid="6183455153241187148">"Segurança e emergência"</string>
     <string name="emergency_dashboard_summary" msgid="401033951074039302">"SOS de emergência, informações de saúde, alertas"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Navegação por gestos"</string>
@@ -4031,9 +4054,9 @@
     <string name="one_handed_action_pull_down_screen_summary" msgid="7582432473450036628">"A parte superior da tela se moverá para ficar ao alcance do seu polegar."</string>
     <string name="one_handed_action_show_notification_title" msgid="8789305491485437130">"Mostrar notificações"</string>
     <string name="one_handed_action_show_notification_summary" msgid="8281689861222000436">"As notificações e configurações serão exibidas."</string>
-    <string name="ambient_display_summary" msgid="2650326740502690434">"Para ver a hora, as notificações e outras informações, toque duas vezes na tela."</string>
+    <string name="ambient_display_summary" msgid="2650326740502690434">"Para acessar a hora, as notificações e outras informações, toque duas vezes na tela."</string>
     <string name="ambient_display_wake_screen_title" msgid="7637678749035378085">"Ativar a tela"</string>
-    <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"Para ver a hora, as notificações e outras informações, toque na tela."</string>
+    <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"Para acessar a hora, as notificações e outras informações, toque na tela."</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"SOS de emergência"</string>
     <string name="emergency_gesture_switchbar_title" msgid="7421353963329899514">"Usar o SOS de emergência"</string>
     <string name="emergency_gesture_screen_summary" msgid="6640521030845132507">"Pressione o botão liga/desliga rapidamente cinco vezes ou mais para iniciar as ações abaixo"</string>
@@ -4857,4 +4880,10 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"O nome do dispositivo fica visível para os apps que você instalou. Ele também vai ficar visível para outras pessoas quando você se conectar a dispositivos Bluetooth ou a uma rede Wi-Fi ou quando configurar um ponto de acesso Wi-Fi."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Gênero gramatical"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Selecionar gênero gramatical"</string>
+    <string name="content_protection_preference_title" msgid="5069260032659193074">"Verificação de apps enganosos"</string>
+    <string name="content_protection_preference_summary" msgid="2252393849408445391">"Verificar atividades no app para detectar phishing"</string>
+    <string name="content_protection_preference_user_consent_switch_title" msgid="60088482227901638">"Usar a verificação"</string>
+    <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="2868495870224174097">"Usar a verificação para apps de trabalho"</string>
+    <string name="content_protection_preference_subpage_summary" msgid="7707255571476950976">"A verificação é executada de forma particular e direta em seu dispositivo, analisando as atividades no app para detectar phishing ou outros comportamentos enganosos. Quando algo é detectado, algumas informações do app são enviadas ao Google Play Protect para confirmar a ameaça e alertar usuários do app."</string>
+    <string name="content_protection_preference_subpage_info" msgid="6010628258453929862">"Este é um recurso de segurança protegido. Nenhuma informação pessoal ou do dispositivo será compartilhada com o Google. \n\nPhishing é uma tentativa de roubar credenciais de login ou outras informações pessoais."</string>
 </resources>

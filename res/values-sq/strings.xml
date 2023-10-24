@@ -113,6 +113,10 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Çaktivizo Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Çaktivizon veçorinë Bluetooth LE Audio nëse pajisja mbështet aftësitë e harduerit të LE Audio."</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Shfaq çelësin për LE Audio te \"Detajet e pajisjes\""</string>
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist (7392319491894565552) -->
+    <skip />
+    <!-- no translation found for bluetooth_bypass_leaudio_allowlist_summary (8999245286359656738) -->
+    <skip />
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Pajisjet për median"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Pajisjet për telefonata"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Pajisjet e tjera"</string>
@@ -1317,6 +1321,8 @@
     <string name="carrier_enabled_summaryOn" msgid="5212067975273903381">"Rrjeti APN u aktivizua"</string>
     <string name="carrier_enabled_summaryOff" msgid="8541959867953738521">"Rrjeti APN u çaktivizua"</string>
     <string name="bearer" msgid="3231443241639159358">"Bartësi"</string>
+    <string name="network_type" msgid="748590707422733595">"Lloji i rrjetit"</string>
+    <string name="network_type_unspecified" msgid="7756349656194518725">"I papërcaktuar"</string>
     <string name="mvno_type" msgid="4734654257494971247">"Lloji i MVNO-së"</string>
     <string name="mvno_match_data" msgid="5213193073684321156">"Vlera e MVNO-së"</string>
     <string name="menu_delete" msgid="9199740901584348273">"Fshi APN-në"</string>
@@ -2041,6 +2047,8 @@
     <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Përdor dridhjen dhe prekjen"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Dridhja e alarmit"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Dridhja e medias"</string>
+    <!-- no translation found for accessibility_keyboard_vibration_title (7559967730626765441) -->
+    <skip />
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Dridhja e ziles"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Dridhja e njoftimit"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Reagimi me prekje"</string>
@@ -2348,6 +2356,7 @@
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="battery_usage_since_last_full_charge" msgid="3488425008925924769">"që nga karikimi i fundit i plotë"</string>
     <string name="battery_usage_system_apps" msgid="8659537819731575299">"Aplikacionet e sistemit"</string>
+    <string name="battery_usage_uninstalled_apps" msgid="8170405012552803662">"Aplikacionet e çinstaluara"</string>
     <string name="battery_usage_others" msgid="311793281613609986">"Të tjera"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Koha e vlerësuar e mbetur"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"Deri në ngarkimin e plotë"</string>
@@ -2607,6 +2616,7 @@
     <string name="data_usage_app_summary_title" msgid="4933742247928064178">"Të dhënat celulare dhe Wi‑Fi"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Sinkronizo automatikisht të dhënat personale"</string>
     <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Sinkronizo automatikisht të dhënat e punës"</string>
+    <string name="account_settings_menu_auto_sync_private" msgid="2315144351530596228">"Sinkronizo të dhënat private"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"Ndrysho ciklin…"</string>
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"Dita për rivendosjen e ciklit të përdorimit të të dhënave:"</string>
     <string name="data_usage_empty" msgid="5619908658853726866">"Nuk janë përdorur të dhëna gjatë kësaj periudhe."</string>
@@ -3049,6 +3059,8 @@
     <string name="keywords_font_size" msgid="1643198841815006447">"madhësia e tekstit, shkronja të mëdha, fonti i madh, teksti i madh, shikim i dobët, bëje tekstin më të madh, zmadhuesi i fontit, zmadhimi i fontit"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"shfaqja e ambientit gjithmonë aktive, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, etiketë, lexues"</string>
+    <!-- no translation found for keywords_keyboard_vibration (6485149510591654697) -->
+    <skip />
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Volum, dridhje, \"Mos shqetëso\""</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Volumi i medias"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Volumi i transmetimit"</string>
@@ -3355,6 +3367,17 @@
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"Ky aplikacion nuk i mbështet cilësimet e përmirësuara"</string>
     <string name="notif_listener_more_settings" msgid="1348409392307208921">"Cilësime të tjera"</string>
     <string name="notif_listener_more_settings_desc" msgid="7995492074281663658">"Brenda këtij aplikacioni ofrohen cilësime të tjera"</string>
+    <string name="notification_polite_title" msgid="6121016426991791557">"Reduktimi i njoftimeve"</string>
+    <string name="notification_polite_all_apps" msgid="1118651561594250059">"Zbato reduktimin për të gjitha njoftimet"</string>
+    <string name="notification_polite_all_apps_summary" msgid="540268373207498126">"Ul gradualisht volumin e njoftimeve kur merr shumë njoftime të njëpasnjëshme nga i njëjti aplikacion"</string>
+    <string name="notification_polite_conversations" msgid="8197695136727245741">"Zbato reduktimin për bisedat"</string>
+    <string name="notification_polite_conversations_summary" msgid="2677141765664359994">"Ul gradualisht volumin e njoftimeve kur merr shumë mesazhe nga e njëjta bisedë brenda një periudhe të shkurtër kohore"</string>
+    <string name="notification_polite_disabled" msgid="1378078021594282842">"Mos e përdor reduktimin e njoftimeve"</string>
+    <string name="notification_polite_disabled_summary" msgid="1145341260283746936">"Mos e ul asnjëherë volumin e njoftimeve, pavarësisht sasisë së njoftimeve të njëpasnjëshme nga i njëjti aplikacion"</string>
+    <string name="notification_polite_vibrate_unlocked" msgid="6142573851761357903">"Lësho dridhje kur është i shkyçur"</string>
+    <string name="notification_polite_vibrate_unlocked_summary" msgid="1678472892282874459">"Lësho dridhje vetëm kur ekrani është i shkyçur"</string>
+    <string name="notification_polite_work" msgid="8823596456640216391">"Zbato në profilet e punës"</string>
+    <string name="notification_polite_work_summary" msgid="8260947839104352075">"Zbato cilësimet e reduktimit të njoftimeve nga profili yt personal tek ai i punës"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Shërbimet e ndihmësit VR"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Asnjë aplikacion i instaluar nuk ka kërkuar të ekzekutohet si shërbim ndihmësi VR."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Të lejohet qasja e shërbimit VR për <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -4857,4 +4880,10 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Emri i pajisjes sate është i dukshëm për aplikacionet që ke instaluar. Ai mund të shikohet po ashtu nga persona të tjerë kur lidhesh me pajisje me Bluetooth, kur lidhesh me një rrjet Wi-Fi ose kur konfiguron një zonë të qasjes për internet me Wi-Fi."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Gjinia gramatikore"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Zgjidh gjininë gramatikore"</string>
+    <string name="content_protection_preference_title" msgid="5069260032659193074">"Po skanon për aplikacione mashtruese"</string>
+    <string name="content_protection_preference_summary" msgid="2252393849408445391">"Kontrollo aktivitetin e aplikacioneve për mashtrime"</string>
+    <string name="content_protection_preference_user_consent_switch_title" msgid="60088482227901638">"Përdor skanimin"</string>
+    <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="2868495870224174097">"Përdor skanimin për aplikacionet e punës"</string>
+    <string name="content_protection_preference_subpage_summary" msgid="7707255571476950976">"Skanimi ekzekutohet në mënyrë private pikërisht në pajisjen tënde, duke kontrolluar aktivitetin e aplikacioneve për mashtrime ose sjellje të tjera mashtruese. Nëse zbulohen, disa informacione të aplikacionit dërgohen te Google Play Protect për të konfirmuar kërcënimin dhe për të paralajmëruar përdoruesit e tjerë të aplikacionit."</string>
+    <string name="content_protection_preference_subpage_info" msgid="6010628258453929862">"Kjo është një veçori e mbrojtur sigurie. Nuk ndahen informacionet e pajisjes apo informacione personale me Google. \n\nMashtrimi është një përpjekje për të vjedhur kredencialet e identifikimit ose informacione të tjera personale."</string>
 </resources>

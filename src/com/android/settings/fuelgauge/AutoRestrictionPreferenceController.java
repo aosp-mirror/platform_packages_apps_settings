@@ -19,7 +19,7 @@ import android.content.Context;
 import android.provider.Settings;
 
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
@@ -52,7 +52,7 @@ public class AutoRestrictionPreferenceController extends BasePreferenceControlle
         super.updateState(preference);
         final boolean smartBatteryOn = Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.APP_AUTO_RESTRICTION_ENABLED, ON) == ON;
-        ((SwitchPreference) preference).setChecked(smartBatteryOn);
+        ((TwoStatePreference) preference).setChecked(smartBatteryOn);
     }
 
     @Override

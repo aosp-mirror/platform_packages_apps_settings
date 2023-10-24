@@ -23,7 +23,6 @@ import android.text.TextUtils;
 import android.text.format.DateFormat;
 
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
 import androidx.preference.TwoStatePreference;
 
 import com.android.settings.core.PreferenceControllerMixin;
@@ -82,7 +81,7 @@ public class TimeFormatPreferenceController extends AbstractPreferenceController
                 || !TextUtils.equals(KEY_TIME_FORMAT, preference.getKey())) {
             return false;
         }
-        final boolean is24Hour = ((SwitchPreference) preference).isChecked();
+        final boolean is24Hour = ((TwoStatePreference) preference).isChecked();
         update24HourFormat(mContext, is24Hour);
         mUpdateTimeAndDateCallback.updateTimeAndDateDisplay(mContext);
         return true;

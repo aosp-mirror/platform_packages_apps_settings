@@ -17,7 +17,7 @@ import android.content.Context;
 import android.provider.Settings;
 
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -46,7 +46,7 @@ public class TapToWakePreferenceController extends AbstractPreferenceController 
     public void updateState(Preference preference) {
         int value = Settings.Secure.getInt(
                 mContext.getContentResolver(), Settings.Secure.DOUBLE_TAP_TO_WAKE, 0);
-        ((SwitchPreference) preference).setChecked(value != 0);
+        ((TwoStatePreference) preference).setChecked(value != 0);
     }
 
     @Override

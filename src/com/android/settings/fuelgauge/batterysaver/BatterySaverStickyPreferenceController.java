@@ -5,7 +5,7 @@ import android.provider.Settings;
 import android.provider.Settings.Global;
 
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -54,7 +54,7 @@ public class BatterySaverStickyPreferenceController extends TogglePreferenceCont
         int setting = Settings.Global.getInt(mContext.getContentResolver(),
             Global.LOW_POWER_MODE_STICKY_AUTO_DISABLE_ENABLED, 1);
 
-        ((SwitchPreference) preference).setChecked(setting == 1);
+        ((TwoStatePreference) preference).setChecked(setting == 1);
         refreshSummary(preference);
     }
 

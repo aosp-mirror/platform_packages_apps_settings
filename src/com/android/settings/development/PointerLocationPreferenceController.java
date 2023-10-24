@@ -21,7 +21,7 @@ import android.provider.Settings;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
@@ -57,7 +57,7 @@ public class PointerLocationPreferenceController extends DeveloperOptionsPrefere
     public void updateState(Preference preference) {
         final int pointerLocationMode = Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.POINTER_LOCATION, SETTING_VALUE_OFF);
-        ((SwitchPreference) mPreference).setChecked(pointerLocationMode != SETTING_VALUE_OFF);
+        ((TwoStatePreference) mPreference).setChecked(pointerLocationMode != SETTING_VALUE_OFF);
     }
 
     @Override
@@ -65,6 +65,6 @@ public class PointerLocationPreferenceController extends DeveloperOptionsPrefere
         super.onDeveloperOptionsSwitchDisabled();
         Settings.System.putInt(mContext.getContentResolver(), Settings.System.POINTER_LOCATION,
                 SETTING_VALUE_OFF);
-        ((SwitchPreference) mPreference).setChecked(false);
+        ((TwoStatePreference) mPreference).setChecked(false);
     }
 }
