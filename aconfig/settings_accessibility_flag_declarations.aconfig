@@ -1,8 +1,21 @@
 package: "com.android.settings.flags"
 
+# NOTE: Keep alphabetized to help limit merge conflicts from multiple simultaneous editors.
+
+# NOTE: All Settings flags share the same Flags class, so prefix our
+# flags with 'accessibility' to prevent naming collision.
+
+flag {
+  name: "accessibility_show_app_info_button"
+  namespace: "accessibility"
+  description: "Shows an 'app info' button on non-framework a11y Service and Activity pages."
+  bug: "277378550"
+}
+
 flag {
   name: "separate_accessibility_vibration_settings_fragments"
   namespace: "accessibility"
   description: "Splits VibrationSettings into two fragments, one per XML resource"
   bug: "289967175"
 }
+
