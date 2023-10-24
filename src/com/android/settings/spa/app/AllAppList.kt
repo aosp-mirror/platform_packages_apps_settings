@@ -136,7 +136,7 @@ class AllAppListModel(
             derivedStateOf {
                 storageSummary.value +
                     when {
-                        !record.app.installed -> {
+                        !record.app.installed && !record.app.isArchived -> {
                             System.lineSeparator() + context.getString(R.string.not_installed)
                         }
                         isDisabled(record) -> {
