@@ -18,6 +18,8 @@ package com.android.settings.spa.app.appinfo
 
 import android.app.settings.SettingsEnums
 import android.content.pm.ApplicationInfo
+import android.content.pm.FeatureFlags
+import android.content.pm.FeatureFlagsImpl
 import android.os.Bundle
 import android.os.UserHandle
 import android.util.FeatureFlagUtils
@@ -119,9 +121,11 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
     LifecycleEffect(onStart = { packageInfoPresenter.reloadPackageInfo() })
     val packageInfo = packageInfoPresenter.flow.collectAsStateWithLifecycle().value ?: return
     val app = checkNotNull(packageInfo.applicationInfo)
+    val featureFlags: FeatureFlags = FeatureFlagsImpl()
     RegularScaffold(
         title = stringResource(R.string.application_info_label),
         actions = {
+            if (featureFlags.archiving()) TopBarAppLaunchButton(packageInfoPresenter, app)
             AppInfoSettingsMoreOptions(packageInfoPresenter, app)
         }
     ) {
