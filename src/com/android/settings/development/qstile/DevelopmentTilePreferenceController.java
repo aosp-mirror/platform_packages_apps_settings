@@ -31,7 +31,8 @@ import android.util.Log;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.SwitchPreferenceCompat;
+import androidx.preference.TwoStatePreference;
 
 import com.android.internal.statusbar.IStatusBarService;
 import com.android.settings.core.BasePreferenceController;
@@ -82,7 +83,7 @@ public class DevelopmentTilePreferenceController extends BasePreferenceControlle
                     || ((enabledSetting == PackageManager.COMPONENT_ENABLED_STATE_DEFAULT)
                     && sInfo.enabled);
 
-            SwitchPreference preference = new SwitchPreference(context);
+            TwoStatePreference preference = new SwitchPreferenceCompat(context);
             preference.setTitle(sInfo.loadLabel(mPackageManager));
             preference.setIcon(sInfo.icon);
             preference.setKey(sInfo.name);
