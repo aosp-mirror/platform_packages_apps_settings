@@ -25,13 +25,13 @@
     <PreferenceCategory
         android:title="@string/security_header">
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="private_space_use_one_lock"
             android:title="@string/private_space_one_lock_title"
             settings:controller="com.android.settings.privatespace.UseOneLockController"
             settings:searchable="false" />
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="private_space_hidden"
             android:title="@string/private_space_hide_title"
             settings:controller="com.android.settings.privatespace.HidePrivateSpaceController"

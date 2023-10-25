@@ -42,7 +42,7 @@
             android:summary="@string/unlock_set_unlock_mode_pattern"
             settings:keywords="@string/keywords_lockscreen" />
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="visiblepattern_profile"
             android:title="@string/lockpattern_settings_enable_visible_pattern_title_profile"
             settings:controller="com.android.settings.security.VisiblePatternProfilePreferenceController" />
@@ -86,7 +86,7 @@
             settings:searchable="false"/>
 
         <!-- Show media on lock screen -->
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="privacy_media_controls_lockscreen"
             android:title="@string/media_controls_lockscreen_title"
             android:summary="@string/media_controls_lockscreen_description"
@@ -98,7 +98,7 @@
              ContentCaptureService implementations defines a custom settings activitiy on its manifest.
              Hence, we show both here, but the controller itself will decide if it's available or not.
         -->
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="content_capture"
             android:title="@string/content_capture"
             android:summary="@string/content_capture_summary"
@@ -195,7 +195,7 @@
         settings:keywords="@string/keywords_app_pinning"
         settings:controller="com.android.settings.security.ScreenPinningPreferenceController" />
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:order="290"
         android:key="confirm_sim_deletion"
         android:title="@string/confirm_sim_deletion_title"

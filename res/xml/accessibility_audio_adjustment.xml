@@ -21,7 +21,7 @@
     android:persistent="false"
     android:title="@string/accessibility_audio_adjustment_title">
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="toggle_primary_mono"
         android:persistent="false"
         android:summary="@string/accessibility_toggle_primary_mono_summary"

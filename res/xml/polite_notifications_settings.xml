@@ -27,14 +27,14 @@
         android:entryValues="@array/notification_polite_options_values"
         settings:controller="com.android.settings.notification.PoliteNotificationFilterController"/>
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="notification_polite_vibrate_unlocked"
         android:persistent="false"
         android:title="@string/notification_polite_vibrate_unlocked"
         android:summary="@string/notification_polite_vibrate_unlocked_summary"
         settings:controller="com.android.settings.notification.PoliteNotifVibrateUnlockedToggleController" />
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="notification_polite_work_profile"
         android:persistent="false"
         android:title="@string/notification_polite_work"

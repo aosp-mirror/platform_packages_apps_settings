@@ -35,7 +35,7 @@
             app:keywords="@string/keywords_ring_vibration"
             app:controller="com.android.settings.accessibility.RingVibrationIntensityPreferenceController" />
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="vibration_intensity_preference_ramping_ringer"
             android:title="@string/vibrate_when_ringing_option_ramping_ringer"
             app:keywords="@string/keywords_ramping_ringer_vibration"
@@ -77,7 +77,7 @@
             app:keywords="@string/keywords_media_vibration"
             app:controller="com.android.settings.accessibility.MediaVibrationIntensityPreferenceController" />
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="vibration_intensity_preference_keyboard"
             android:title="@string/accessibility_keyboard_vibration_title"
             app:keywords="@string/keywords_keyboard_vibration"
