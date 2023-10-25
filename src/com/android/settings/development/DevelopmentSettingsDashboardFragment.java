@@ -334,9 +334,6 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
 
     @Override
     public void onSwitchChanged(Switch switchView, boolean isChecked) {
-        if (switchView != mSwitchBar.getSwitch()) {
-            return;
-        }
         final boolean developmentEnabledState =
                 DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(getContext());
         if (isChecked != developmentEnabledState) {
