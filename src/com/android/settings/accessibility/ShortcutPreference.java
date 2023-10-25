@@ -21,8 +21,8 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
-import android.widget.Switch;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
@@ -88,7 +88,7 @@ public class ShortcutPreference extends Preference {
                     mSettingsEditable ? outValue.resourceId : /* Remove background */ 0);
         }
 
-        Switch switchWidget =
+        CompoundButton switchWidget =
                 holder.itemView.findViewById(com.android.settingslib.R.id.switchWidget);
         if (switchWidget != null) {
             // Consumes move events to ignore drag actions.

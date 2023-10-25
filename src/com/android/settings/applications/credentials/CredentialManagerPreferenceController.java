@@ -47,7 +47,7 @@ import android.service.autofill.AutofillServiceInfo;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.Switch;
+import android.widget.CompoundButton;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
@@ -969,7 +969,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         }
 
         // Stores a reference to the switch view.
-        private @Nullable Switch mSwitch;
+        private @Nullable CompoundButton mSwitch;
 
         // Switch text for on and off states
         private @NonNull boolean mChecked = false;
@@ -1022,7 +1022,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
             // Setup the switch.
             View checkableView =
                     view.itemView.findViewById(com.android.settingslib.R.id.switchWidget);
-            if (checkableView instanceof Switch switchView) {
+            if (checkableView instanceof CompoundButton switchView) {
                 switchView.setChecked(mChecked);
                 switchView.setOnClickListener(mListener);
 
