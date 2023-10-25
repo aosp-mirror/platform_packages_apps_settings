@@ -20,13 +20,17 @@ import static android.os.UserManager.USER_TYPE_PROFILE_PRIVATE;
 
 import android.app.ActivityManager;
 import android.app.IActivityManager;
+import android.app.KeyguardManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.UserInfo;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.ArraySet;
 import android.util.Log;
+
+import androidx.annotation.Nullable;
 
 import com.android.internal.annotations.GuardedBy;
 
@@ -43,6 +47,7 @@ public class PrivateSpaceMaintainer {
     private final UserManager mUserManager;
     @GuardedBy("this")
     private UserHandle mUserHandle;
+    private final KeyguardManager mKeyguardManager;
 
     public enum ErrorDeletingPrivateSpace {
             DELETE_PS_ERROR_NONE,
@@ -140,6 +145,23 @@ public class PrivateSpaceMaintainer {
         return mUserManager.isQuietModeEnabled(mUserHandle);
     }
 
+    /**
+     * Returns an intent to prompt the user to confirm private profile credentials if it is set
+     * otherwise returns intent to confirm device credentials.
+     */
+    @Nullable
+    public synchronized Intent getPrivateProfileLockCredentialIntent() {
+        //TODO(b/307281644): To replace with check for doesPrivateSpaceExist() method once Auth
+        // changes are merged.
+        if (isPrivateProfileLockSet()) {
+            return mKeyguardManager.createConfirmDeviceCredentialIntent(
+                    /* title= */ null,  /* description= */null, mUserHandle.getIdentifier());
+        }
+        // TODO(b/304796434) Need to try changing this intent to use BiometricPrompt
+        return mKeyguardManager.createConfirmDeviceCredentialIntent(
+                /* title= */ null, /* description= */ null);
+    }
+
     /** Returns the instance of {@link PrivateSpaceMaintainer} */
     public static synchronized PrivateSpaceMaintainer getInstance(Context context) {
         if (sPrivateSpaceMaintainer == null) {
@@ -151,5 +173,19 @@ public class PrivateSpaceMaintainer {
     private PrivateSpaceMaintainer(Context context) {
         mContext = context.getApplicationContext();
         mUserManager = mContext.getSystemService(UserManager.class);
+        mKeyguardManager = mContext.getSystemService(KeyguardManager.class);
+    }
+
+
+    // TODO(b/307281644): Remove this method once new auth change is merged
+    /**
+     * Returns true if private space exists and a separate private profile lock is set
+     * otherwise false when the private space does not exit or exists but does not have a
+     * separate profile lock.
+     */
+    @GuardedBy("this")
+    private boolean isPrivateProfileLockSet() {
+        return doesPrivateSpaceExist()
+                && mKeyguardManager.isDeviceSecure(mUserHandle.getIdentifier());
     }
 }

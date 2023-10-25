@@ -11,6 +11,11 @@
         android:name="com.android.settings.BATTERY_DATA"
         android:protectionLevel="signature|privileged"/>
 
+    <!-- Permission for using the Biometric Settings Provider. -->
+    <permission
+        android:name="com.android.settings.USE_BIOMETRIC_PROVIDER"
+        android:protectionLevel="signature|privileged"/>
+
     <uses-permission android:name="android.permission.REQUEST_NETWORK_SCORES" />
     <uses-permission android:name="android.permission.WRITE_MEDIA_STORAGE" />
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
@@ -4970,6 +4975,20 @@
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
                 android:value="@string/menu_key_security"/>
         </activity>
+
+         <provider
+            android:name=".biometrics.BiometricSettingsProvider"
+            android:authorities="${applicationId}.biometrics.provider"
+            android:exported="true"
+            android:permission="com.android.settings.USE_BIOMETRIC_PROVIDER">
+            <intent-filter>
+                <action android:name="com.android.settings.biometrics.BIOMETRIC_SETTINGS_PROVIDER" />
+            </intent-filter>
+        </provider>
+
+        <activity android:name=".privatespace.PrivateSpaceAuthenticationActivity"
+                  android:theme="@*android:style/Theme.DeviceDefault.Settings.Dialog.NoActionBar"
+                  android:exported="false"/>
 
         <activity-alias android:name="UsageStatsActivity"
                         android:exported="true"

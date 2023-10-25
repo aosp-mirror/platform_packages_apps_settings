@@ -32,7 +32,7 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.SwitchPreferenceCompat;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
@@ -124,7 +124,7 @@ public class ToggleScreenMagnificationPreferenceFragmentForSetupWizardTest {
             mPreferenceManager.setPreferences(mPreferenceManager.createPreferenceScreen(context));
             mTopIntroPreference = new TopIntroPreference(context);
             mSettingsPreference = new Preference(context);
-            mFollowingTypingSwitchPreference = new SwitchPreference(context);
+            mFollowingTypingSwitchPreference = new SwitchPreferenceCompat(context);
         }
 
         @Override

@@ -17,7 +17,6 @@
 package com.android.settings.privatespace;
 
 import android.app.PendingIntent;
-import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Flags;
@@ -28,9 +27,7 @@ import android.safetycenter.SafetySourceStatus;
 import android.util.Log;
 
 import com.android.settings.R;
-import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.safetycenter.SafetyCenterManagerWrapper;
-import com.android.settingslib.transition.SettingsTransitionHelper;
 
 /** Private Space safety source for the Safety Center */
 public final class PrivateSpaceSafetySource {
@@ -86,18 +83,15 @@ public final class PrivateSpaceSafetySource {
     }
 
     private static PendingIntent getPendingIntentForPsDashboard(Context context) {
-        Intent privateSpaceDashboardIntent = new SubSettingLauncher(context)
-                .setDestination(PrivateSpaceDashboardFragment.class.getName())
-                .setTransitionType(SettingsTransitionHelper.TransitionType.TRANSITION_SLIDE)
-                .setSourceMetricsCategory(SettingsEnums.PRIVATE_SPACE_SETTINGS)
-                .toIntent()
-                .setIdentifier(SAFETY_SOURCE_ID);
+        Intent privateSpaceAuthenticationIntent =
+                new Intent(context, PrivateSpaceAuthenticationActivity.class)
+                        .setIdentifier(SAFETY_SOURCE_ID);
 
         return PendingIntent
                 .getActivity(
                         context,
                         /* requestCode */ 0,
-                        privateSpaceDashboardIntent,
+                        privateSpaceAuthenticationIntent,
                         PendingIntent.FLAG_IMMUTABLE);
     }
 }

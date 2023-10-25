@@ -1,0 +1,8 @@
+package: "com.android.settings.flags"
+
+flag {
+  name: "biometric_settings_provider"
+  namespace: "biometrics_framework"
+  description: "This flag enables or disables the BiometricSettingsProvider"
+  bug: "303595205"
+}

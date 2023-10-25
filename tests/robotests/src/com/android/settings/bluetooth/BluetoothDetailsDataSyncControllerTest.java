@@ -25,7 +25,7 @@ import android.companion.CompanionDeviceManager;
 import android.companion.datatransfer.PermissionSyncRequest;
 
 import androidx.preference.PreferenceCategory;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -56,7 +56,7 @@ public class BluetoothDetailsDataSyncControllerTest extends BluetoothDetailsCont
     private CompanionDeviceManager mCompanionDeviceManager;
 
     private PermissionSyncRequest mPermissionSyncRequest;
-    private SwitchPreference mPermSyncPreference;
+    private TwoStatePreference mPermSyncPreference;
 
     @Before
     public void setUp() {

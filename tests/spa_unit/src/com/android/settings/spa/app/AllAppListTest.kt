@@ -216,6 +216,23 @@ class AllAppListTest {
         composeTestRule.onNodeWithText(LABEL).assertIsDisplayed()
     }
 
+    @Test
+    fun allAppListModel_getSummaryWhenArchived() {
+        val listModel = AllAppListModel(context) { stateOf(SUMMARY) }
+        val archivedApp = ApplicationInfo().apply {
+            packageName = PACKAGE_NAME
+            isArchived = true
+        }
+
+        lateinit var summaryState: State<String>
+        composeTestRule.setContent {
+            summaryState =
+                listModel.getSummary(option = 0, record = AppRecordWithSize(app = archivedApp))
+        }
+
+        assertThat(summaryState.value).isEqualTo(SUMMARY)
+    }
+
     private fun getAppListInput(): AppListInput<AppRecordWithSize> {
         lateinit var input: AppListInput<AppRecordWithSize>
         composeTestRule.setContent {
