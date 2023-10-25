@@ -52,13 +52,13 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.CompoundButton;
 import android.widget.ExpandableListView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -456,10 +456,10 @@ public class TrustedCredentialsFragment extends ObservableFragment
             return "Group" + getUserIdByGroup(groupPosition);
         }
 
-        private class ViewHolder {
+        private static class ViewHolder {
             private TextView mSubjectPrimaryView;
             private TextView mSubjectSecondaryView;
-            private Switch mSwitch;
+            private CompoundButton mSwitch;
         }
     }
 
