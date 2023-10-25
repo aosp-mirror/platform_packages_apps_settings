@@ -28,17 +28,17 @@
         android:summary="@string/summary_placeholder"
         settings:searchable="false"/>
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="context"
         android:title="@string/assist_access_context_title"
         android:summary="@string/assist_access_context_summary" />
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="screenshot"
         android:title="@string/assist_access_screenshot_title"
         android:summary="@string/assist_access_screenshot_summary" />
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="flash"
         android:title="@string/assist_flash_title"
         android:summary="@string/assist_flash_summary" />
