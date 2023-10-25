@@ -18,8 +18,11 @@ package com.android.settings.privatespace;
 
 
 import static android.safetycenter.SafetyEvent.SAFETY_EVENT_TYPE_DEVICE_REBOOTED;
+
 import static com.android.settings.privatespace.PrivateSpaceSafetySource.SAFETY_SOURCE_ID;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.never;
@@ -122,9 +125,9 @@ public class PrivateSpaceSafetySourceTest {
         assertThat(safetySourceStatus.isEnabled()).isTrue();
     }
 
-    /** Tests that setSafetySourceData sets the PS settings page intent. */
+    /** Tests that setSafetySourceData sets the PS settings page authenticator intent. */
     @Test
-    public void setSafetySourceData_setsPsIntent() {
+    public void setSafetySourceData_setsPsAuthenticatorIntent() {
         when(mSafetyCenterManagerWrapper.isEnabled(mContext)).thenReturn(true);
         mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE);
 
@@ -135,7 +138,7 @@ public class PrivateSpaceSafetySourceTest {
                 any(), eq(SAFETY_SOURCE_ID), captor.capture(), eq(EVENT_TYPE_DEVICE_REBOOTED));
         SafetySourceData safetySourceData = captor.getValue();
         SafetySourceStatus safetySourceStatus = safetySourceData.getStatus();
-        assertThat(safetySourceStatus.getPendingIntent().getIntent().getIdentifier())
-                .isEqualTo(SAFETY_SOURCE_ID);
+        assertThat(safetySourceStatus.getPendingIntent().getIntent()
+                .equals(PrivateSpaceAuthenticationActivity.class));
     }
 }

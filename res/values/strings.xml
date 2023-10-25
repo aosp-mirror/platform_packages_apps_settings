@@ -288,6 +288,11 @@
     <!-- Name shown in the title of individual stylus preference in the connected devices page [CHAR LIMIT=60] -->
     <string name="stylus_connected_devices_title">Stylus</string>
 
+    <!-- Title for audio sharing page [CHAR LIMIT=none]-->
+    <string name="audio_sharing_title">Audio sharing</string>
+    <!-- Title for audio sharing primary switch [CHAR LIMIT=none]-->
+    <string name="audio_sharing_switch_title">Share audio</string>
+
     <!-- Date & time settings screen title -->
     <string name="date_and_time">Date &amp; time</string>
 
@@ -782,7 +787,7 @@
     <string name="security_settings_face_settings_remove_face_model">Delete face model</string>
     <!-- Button text in face settings which lets the user enroll their face [CHAR LIMIT=40] -->
     <string name="security_settings_face_settings_enroll">Set up Face Unlock</string>
-   <!-- Dialog title shown when the user removes an enrollment [CHAR LIMIT=35] -->
+    <!-- Dialog title shown when the user removes an enrollment [CHAR LIMIT=35] -->
     <string name="security_settings_face_settings_remove_dialog_title">Delete face model?</string>
     <!-- Dialog contents shown when the user removes an enrollment [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_settings_remove_dialog_details">Your face model will be permanently and securely deleted.\n\nAfter deletion, you will need your PIN, pattern, or password to unlock your phone or for authentication in apps.</string>
@@ -866,7 +871,7 @@
     <string name="biometric_settings_intro_with_activeunlock">When you set up Face Unlock and Fingerprint Unlock, your phone will ask for your fingerprint when you wear a mask or are in a dark area.\n\nYou can unlock with your watch when your face or fingerprint isn\u2019t recognized.</string>
     <!-- Introduction shown in fingerprint page to explain that watch unlock can be used if fingerprint isn't recognized. [CHAR LIMIT=NONE]-->
     <string name="biometric_settings_intro_with_fingerprint">You can unlock with your watch when your fingerprint isn\u2019t recognized.</string>
-     <!-- Introduction shown in face page to explain that watch unlock can be used if face isn't recognized. [CHAR LIMIT=NONE]-->
+    <!-- Introduction shown in face page to explain that watch unlock can be used if face isn't recognized. [CHAR LIMIT=NONE]-->
     <string name="biometric_settings_intro_with_face">You can unlock with your watch when your face isn\u2019t recognized.</string>
     <string name="biometric_settings_use_fingerprint_or_watch_for"> Use fingerprint or watch to</string>
     <string name="biometric_settings_use_face_or_watch_for"> Use face or watch to</string>
@@ -1210,6 +1215,14 @@
     <string name="private_space_deleted">Private Space successfully deleted</string>
     <!-- Toast to show when the private space could not be deleted. [CHAR LIMIT=NONE] -->
     <string name="private_space_delete_failed">Private Space could not be deleted</string>
+    <!-- Title of the Alert Dialog when no screen lock is set [CHAR LIMIT=30] -->
+    <string name="no_device_lock_title">Set a screen lock</string>
+    <!-- Summary of the alert when no screen lock is set [CHAR LIMIT=60] -->
+    <string name="no_device_lock_summary">To use Private Space, set a screen lock on this device.</string>
+    <!-- Action label for dialog when no screen lock is set [CHAR LIMIT=30] -->
+    <string name="no_device_lock_action_label">Set screen lock</string>
+    <!-- Action label to cancel Alert dialog when no screen lock is set [CHAR LIMIT=30] -->
+    <string name="no_device_lock_cancel">Cancel</string>
 
     <!-- Text shown when "Add fingerprint" button is disabled -->
     <string name="fingerprint_add_max">You can add up to <xliff:g id="count" example="5">%d</xliff:g> fingerprints</string>
@@ -2001,7 +2014,7 @@
     <string name="wifi_dpp_connect_network_using_qr_code">Use a QR code to add a device to this network</string>
     <!-- Hint for QR code process failure [CHAR LIMIT=NONE]  -->
     <string name="wifi_dpp_qr_code_is_not_valid_format">QR code isn\u0027t a valid format</string>
-     <!-- Label for the try again button [CHAR LIMIT=20]-->
+    <!-- Label for the try again button [CHAR LIMIT=20]-->
     <string name="retry">Retry</string>
     <!-- Label for the check box to share a network with other users on the same device -->
     <string name="wifi_shared">Share with other device users</string>
@@ -2569,7 +2582,7 @@
     <string name="night_display_temperature_title">Intensity</string>
     <!-- Display settings screen, summary of night display when off and will *never* turn on automatically. [CHAR LIMIT=NONE] -->
     <string name="night_display_summary_off_auto_mode_never">Will never turn on automatically</string>
-         <!-- Display settings screen, summary format of night display when off and will turn on automatically at a user defined time. [CHAR LIMIT=NONE] -->
+    <!-- Display settings screen, summary format of night display when off and will turn on automatically at a user defined time. [CHAR LIMIT=NONE] -->
     <string name="night_display_summary_off_auto_mode_custom">Will turn on automatically at <xliff:g name="time" example="6 AM">%1$s</xliff:g></string>
     <!-- Display settings screen, summary of night display when off and will turn on automatically at sunset. [CHAR LIMIT=NONE] -->
     <string name="night_display_summary_off_auto_mode_twilight">Will turn on automatically at sunset</string>
@@ -2615,7 +2628,7 @@
     <string name="dark_ui_summary_off_auto_mode_never">Will never turn on automatically</string>
     <!-- Display settings screen, summary of Dark UI when off and will turn on automatically at sunset. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_summary_off_auto_mode_auto">Will turn on automatically at sunset</string>
-        <!-- Display settings screen, summary format of night display when off and will turn on automatically at a user defined time. [CHAR LIMIT=NONE] -->
+    <!-- Display settings screen, summary format of night display when off and will turn on automatically at a user defined time. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_summary_off_auto_mode_custom">Will turn on automatically at <xliff:g name="time" example="6 AM">%1$s</xliff:g></string>
     <!-- Display settings screen, summary of Dark UI when off and will turn on automatically at bedtime. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_summary_off_auto_mode_custom_bedtime">Will turn on automatically at bedtime</string>
@@ -2977,8 +2990,8 @@
     <!-- Body of dialog informing user about the storage used by the Android System [CHAR LIMIT=NONE]-->
     <string name="storage_detail_dialog_system">System includes files used to run Android version <xliff:g id="version" example="8.0">%s</xliff:g></string>
 
-  <!-- Message to notify guest users as to why they can't set up the storage device [CHAR LIMIT=50]-->
-  <string name="storage_wizard_guest">Guest mode users cannot format SD cards</string>
+    <!-- Message to notify guest users as to why they can't set up the storage device [CHAR LIMIT=50]-->
+    <string name="storage_wizard_guest">Guest mode users cannot format SD cards</string>
 
     <!-- In-progress title. This string lets the user know the SD card is being formatted. The user won't be able to proceed with setup until this step is finished. The placeholder is for the name of the device (e.g. brand name of the SD card). [CHAR LIMIT=32] -->
     <string name="storage_wizard_format_progress_title">Formatting <xliff:g id="name" example="SD card">^1</xliff:g>\u2026</string>
@@ -3023,7 +3036,7 @@
     <!-- Body of a dialog. This text is confirming that the user wants to use their SD card as extra phone storage, but the formatting process will erase existing content on the card. The first placeholder is for the name of the device (e.g. a brand name of the SD card or USB drive). The second and third placeholders are for the general references (e.g. SD card, USB drive). [CHAR LIMIT=NONE] -->
     <string name="storage_wizard_format_confirm_v2_body">This <xliff:g id="name" example="SanDisk SD card">^1</xliff:g> needs to be formatted to store apps, files, and media.
 \n\nFormatting will erase existing content on the <xliff:g id="name" example="SD card">^2</xliff:g>. To avoid losing content, back it up to another <xliff:g id="name" example="SD card">^3</xliff:g> or device.</string>
-  <!-- Body of a dialog. This text is confirming that the user wants to use their SD card as portable storage, but the formatting process will erase existing content on the card. The first placeholder is for the name of the device (e.g. a brand name of the SD card or USB drive). The second and third placeholders are for the general references (e.g. SD card, USB drive). [CHAR LIMIT=NONE] -->
+    <!-- Body of a dialog. This text is confirming that the user wants to use their SD card as portable storage, but the formatting process will erase existing content on the card. The first placeholder is for the name of the device (e.g. a brand name of the SD card or USB drive). The second and third placeholders are for the general references (e.g. SD card, USB drive). [CHAR LIMIT=NONE] -->
     <string name="storage_wizard_format_confirm_v2_body_external">This <xliff:g id="name" example="SanDisk SD card">^1</xliff:g> needs to be formatted to store photos, videos, music, and more.
         \n\nFormatting will erase existing content on the <xliff:g id="name" example="SD card">^2</xliff:g>. To avoid losing content, back it up to another <xliff:g id="name" example="SD card">^3</xliff:g> or device.</string>
     <!-- Button text. If a user taps this button, their SD card or USB device will be formatted and used as extra phone storage. The placeholder is for the specific device (e.g. SD card, USB drive, etc.). [CHAR LIMIT=16] -->
@@ -6908,6 +6921,8 @@
     <string name="help_url_insecure_vpn" translatable="false"></string>
     <!-- url for learning more about IT admin policy disabling -->
     <string name="help_url_action_disabled_by_it_admin" translatable="false"></string>
+    <!-- url for learning more about bluetooth audio sharing -->
+    <string name="help_url_audio_sharing" translatable="false"></string>
 
     <!-- User account title [CHAR LIMIT=30] -->
     <string name="user_account_title">Account for content</string>
@@ -7839,7 +7854,7 @@
     <string name="notification_history_off_title_extended">Notification history turned off</string>
 
     <!--  Notification history screen; summary when history is off [CHAR LIMIT=NONE] -->
-   <string name="notification_history_off_summary">Turn on notification history to see recent notifications and snoozed notifications</string>
+    <string name="notification_history_off_summary">Turn on notification history to see recent notifications and snoozed notifications</string>
 
     <!-- Notification history screen; title when history is newly turned on [CHAR LIMIT=200] -->
     <string name="history_toggled_on_title">No recent notifications</string>

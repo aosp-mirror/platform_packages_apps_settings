@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-package com.android.settings.ui
+package com.android.settings.ui.privatespace
+
 
 import android.os.Flags
 import android.platform.test.annotations.RequiresFlagsEnabled
@@ -22,9 +23,12 @@ import android.platform.test.flag.junit.DeviceFlagsValueProvider
 import android.provider.Settings
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiDevice
 import com.android.settings.ui.testutils.SettingsTestUtils.assertHasTexts
+import com.android.settings.ui.testutils.SettingsTestUtils.clickObject
 import com.android.settings.ui.testutils.SettingsTestUtils.startMainActivityFromHomeScreen
+import com.android.settings.ui.testutils.SettingsTestUtils.waitObject
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -32,7 +36,8 @@ import org.junit.runner.RunWith
 
 
 @RunWith(AndroidJUnit4::class)
-class SecuritySettingsTest {
+@RequiresFlagsEnabled(Flags.FLAG_ALLOW_PRIVATE_PROFILE)
+class PrivateSpaceAuthenticationActivityTest {
     private val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
 
     @get:Rule
@@ -41,25 +46,46 @@ class SecuritySettingsTest {
     @Before
     fun setUp() {
         device.startMainActivityFromHomeScreen(Settings.ACTION_SECURITY_SETTINGS)
+        device.assertHasTexts(listOf(PRIVATE_SPACE_SETTING))
     }
 
     @Test
-    fun hasTexts() {
-        device.assertHasTexts(ON_SCREEN_TEXTS)
+    fun showAuthenticationScreen() {
+        Thread.sleep(1000)
+        device.clickObject(By.text(PRIVATE_SPACE_SETTING))
+        device.waitObject(By.text(DIALOG_TITLE))
+        Thread.sleep(1000)
+        device.assertHasTexts(listOf("Set a screen lock","Cancel"))
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_ALLOW_PRIVATE_PROFILE)
-    fun privateSpace_ifFlagON() {
-        device.assertHasTexts(listOf("Private Space"))
+    fun onCancelLockExitSetup() {
+        Thread.sleep(1000)
+        device.clickObject(By.text(PRIVATE_SPACE_SETTING))
+        device.waitObject(By.text(DIALOG_TITLE))
+        Thread.sleep(1000)
+        device.assertHasTexts(listOf(SET_LOCK_BUTTON, CANCEL_TEXT))
+        device.clickObject(By.text(CANCEL_TEXT))
+        device.assertHasTexts(listOf(PRIVATE_SPACE_SETTING))
+    }
+
+    @Test
+    fun onSetupSetLock() {
+        Thread.sleep(1000)
+        device.clickObject(By.text(PRIVATE_SPACE_SETTING))
+        device.waitObject(By.text(DIALOG_TITLE))
+        Thread.sleep(1000)
+        device.assertHasTexts(listOf(SET_LOCK_BUTTON,CANCEL_TEXT))
+        device.clickObject(By.text(SET_LOCK_BUTTON))
+        device.assertHasTexts(listOf(LOCK_SCREEN_TITLE))
     }
 
     private companion object {
         // Items we really want to always show
-        val ON_SCREEN_TEXTS = listOf(
-            "Device unlock",
-            "Privacy",
-            "More security & privacy",
-        )
+        val PRIVATE_SPACE_SETTING = "Private Space"
+        const val SET_LOCK_BUTTON = "Set screen lock"
+        val CANCEL_TEXT = "Cancel"
+        val DIALOG_TITLE = "Set a screen lock"
+        val LOCK_SCREEN_TITLE = "Choose screen lock"
     }
 }

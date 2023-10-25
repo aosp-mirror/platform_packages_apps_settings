@@ -409,11 +409,19 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
         final boolean wfcEnabled = queryIms.isEnabledByUser()
                 && queryIms.isAllowUserControl();
         mSwitchBar.setChecked(wfcEnabled);
-        final int wfcMode = mImsMmTelManager.getVoWiFiModeSetting();
-        final int wfcRoamingMode = mImsMmTelManager.getVoWiFiRoamingModeSetting();
+        int wfcMode = ImsMmTelManager.WIFI_MODE_UNKNOWN;
+        int wfcRoamingMode = ImsMmTelManager.WIFI_MODE_UNKNOWN;
+        boolean hasException = false;
+        try {
+            wfcMode = mImsMmTelManager.getVoWiFiModeSetting();
+            wfcRoamingMode = mImsMmTelManager.getVoWiFiRoamingModeSetting();
+        } catch (IllegalArgumentException e) {
+            hasException = true;
+            Log.e(TAG, "getResourceIdForWfcMode: Exception", e);
+        }
         mButtonWfcMode.setValue(Integer.toString(wfcMode));
         mButtonWfcRoamingMode.setValue(Integer.toString(wfcRoamingMode));
-        updateButtonWfcMode(wfcEnabled, wfcMode, wfcRoamingMode);
+        updateButtonWfcMode(wfcEnabled && !hasException, wfcMode, wfcRoamingMode);
     }
 
     @Override
@@ -508,11 +516,26 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
      */
     private void updateWfcMode(boolean wfcEnabled) {
         Log.i(TAG, "updateWfcMode(" + wfcEnabled + ")");
-        mImsMmTelManager.setVoWiFiSettingEnabled(wfcEnabled);
+        boolean hasException = false;
+        try {
+            mImsMmTelManager.setVoWiFiSettingEnabled(wfcEnabled);
+        } catch (IllegalArgumentException e) {
+            Log.e(TAG, "updateWfcMode: Exception", e);
+            hasException = true;
+        }
 
-        final int wfcMode = mImsMmTelManager.getVoWiFiModeSetting();
-        final int wfcRoamingMode = mImsMmTelManager.getVoWiFiRoamingModeSetting();
-        updateButtonWfcMode(wfcEnabled, wfcMode, wfcRoamingMode);
+        int wfcMode = ImsMmTelManager.WIFI_MODE_UNKNOWN;
+        int wfcRoamingMode = ImsMmTelManager.WIFI_MODE_UNKNOWN;
+        if (!hasException) {
+            try {
+                wfcMode = mImsMmTelManager.getVoWiFiModeSetting();
+                wfcRoamingMode = mImsMmTelManager.getVoWiFiRoamingModeSetting();
+            } catch (IllegalArgumentException e) {
+                hasException = true;
+                Log.e(TAG, "updateWfcMode: Exception", e);
+            }
+        }
+        updateButtonWfcMode(wfcEnabled && !hasException, wfcMode, wfcRoamingMode);
         if (wfcEnabled) {
             mMetricsFeatureProvider.action(getActivity(), getMetricsCategory(), wfcMode);
         } else {
@@ -523,9 +546,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         Log.d(TAG, "WFC activity request = " + requestCode + " result = " + resultCode);
-
         switch (requestCode) {
             case REQUEST_CHECK_WFC_EMERGENCY_ADDRESS:
                 if (resultCode == Activity.RESULT_OK) {
@@ -594,29 +615,52 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
+        boolean hasException = false;
+
         if (preference == mButtonWfcMode) {
             Log.d(TAG, "onPreferenceChange mButtonWfcMode " + newValue);
             mButtonWfcMode.setValue((String) newValue);
             final int buttonMode = Integer.valueOf((String) newValue);
-            final int currentWfcMode = mImsMmTelManager.getVoWiFiModeSetting();
-            if (buttonMode != currentWfcMode) {
-                mImsMmTelManager.setVoWiFiModeSetting(buttonMode);
-                mButtonWfcMode.setSummary(getWfcModeSummary(buttonMode));
-                mMetricsFeatureProvider.action(getActivity(), getMetricsCategory(), buttonMode);
+            int currentWfcMode = ImsMmTelManager.WIFI_MODE_UNKNOWN;
+            try {
+                currentWfcMode = mImsMmTelManager.getVoWiFiModeSetting();
+            } catch (IllegalArgumentException e) {
+                hasException = true;
+                Log.e(TAG, "onPreferenceChange: Exception", e);
+            }
+            if (buttonMode != currentWfcMode && !hasException) {
+                try {
+                    mImsMmTelManager.setVoWiFiModeSetting(buttonMode);
+                    mButtonWfcMode.setSummary(getWfcModeSummary(buttonMode));
+                    mMetricsFeatureProvider.action(getActivity(), getMetricsCategory(), buttonMode);
 
-                if (mUseWfcHomeModeForRoaming) {
-                    mImsMmTelManager.setVoWiFiRoamingModeSetting(buttonMode);
-                    // mButtonWfcRoamingMode.setSummary is not needed; summary is selected value
+                    if (mUseWfcHomeModeForRoaming) {
+                        mImsMmTelManager.setVoWiFiRoamingModeSetting(buttonMode);
+                        // mButtonWfcRoamingMode.setSummary is not needed; summary is selected value
+                    }
+                } catch (IllegalArgumentException e) {
+                    Log.e(TAG, "onPreferenceChange: Exception", e);
                 }
             }
         } else if (preference == mButtonWfcRoamingMode) {
             mButtonWfcRoamingMode.setValue((String) newValue);
             final int buttonMode = Integer.valueOf((String) newValue);
-            final int currentMode = mImsMmTelManager.getVoWiFiRoamingModeSetting();
-            if (buttonMode != currentMode) {
-                mImsMmTelManager.setVoWiFiRoamingModeSetting(buttonMode);
-                // mButtonWfcRoamingMode.setSummary is not needed; summary is just selected value.
-                mMetricsFeatureProvider.action(getActivity(), getMetricsCategory(), buttonMode);
+            int currentMode = ImsMmTelManager.WIFI_MODE_UNKNOWN;
+            try {
+                currentMode = mImsMmTelManager.getVoWiFiRoamingModeSetting();
+            } catch (IllegalArgumentException e) {
+                hasException = true;
+                Log.e(TAG, "updateWfcMode: Exception", e);
+            }
+            if (buttonMode != currentMode && !hasException) {
+                try {
+                    mImsMmTelManager.setVoWiFiRoamingModeSetting(buttonMode);
+                    // mButtonWfcRoamingMode.setSummary is not needed; summary is just selected
+                    // value.
+                    mMetricsFeatureProvider.action(getActivity(), getMetricsCategory(), buttonMode);
+                } catch (IllegalArgumentException e) {
+                    Log.e(TAG, "onPreferenceChange: Exception", e);
+                }
             }
         }
         return true;

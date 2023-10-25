@@ -43,7 +43,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.DialogCreatable;
@@ -133,7 +133,7 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
 
         mFragController.create(R.id.main_content, /* bundle= */ null).start().resume();
 
-        final SwitchPreference switchPreference =
+        final TwoStatePreference switchPreference =
                 mFragController.get().findPreference(
                         MagnificationFollowTypingPreferenceController.PREF_KEY);
         assertThat(switchPreference).isNotNull();
@@ -146,7 +146,7 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
 
         mFragController.create(R.id.main_content, /* bundle= */ null).start().resume();
 
-        final SwitchPreference switchPreference =
+        final TwoStatePreference switchPreference =
                 mFragController.get().findPreference(
                         MagnificationFollowTypingPreferenceController.PREF_KEY);
         assertThat(switchPreference).isNotNull();
