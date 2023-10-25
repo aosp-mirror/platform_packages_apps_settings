@@ -235,7 +235,7 @@ public class ProfileSelectDialog extends DialogFragment implements UserAdapter.O
     private static boolean shouldHideUserInQuietMode(
             UserHandle userHandle, UserManager userManager) {
         UserProperties userProperties = userManager.getUserProperties(userHandle);
-        return userProperties.getHideInSettingsInQuietMode()
+        return userProperties.getShowInQuietMode() == UserProperties.SHOW_IN_QUIET_MODE_HIDDEN
                 && userManager.isQuietModeEnabled(userHandle);
     }
 }
