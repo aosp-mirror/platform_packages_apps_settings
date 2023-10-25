@@ -31,10 +31,11 @@
             settings:controller="com.android.settings.privatespace.UseOneLockController"
             settings:searchable="false" />
 
-        <SwitchPreferenceCompat
+        <Preference
             android:key="private_space_hidden"
             android:title="@string/private_space_hide_title"
-            settings:controller="com.android.settings.privatespace.HidePrivateSpaceController"
+            android:fragment="com.android.settings.privatespace.HidePrivateSpaceSettings"
+            settings:controller="com.android.settings.privatespace.HidePrivateSpaceSummaryController"
             settings:searchable="false" />
 
     </PreferenceCategory>
