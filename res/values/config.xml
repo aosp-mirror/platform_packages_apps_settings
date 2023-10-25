@@ -765,4 +765,11 @@
 
     <!-- Allowed packages to show the confirmation dialog for a system locale suggestion  -->
     <string-array name="allowed_packages_for_locale_confirmation_diallog" translatable="false"/>
+
+    <!-- Array of text reading preview layouts. Must contain at least 1 layout -->
+    <array name="config_text_reading_preview_samples">
+        <item>@layout/accessibility_text_reading_preview_app_grid</item>
+        <item>@layout/screen_zoom_preview_1</item>
+        <item>@layout/accessibility_text_reading_preview_mail_content</item>
+    </array>
 </resources>
