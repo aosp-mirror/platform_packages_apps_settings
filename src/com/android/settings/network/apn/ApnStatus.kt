@@ -25,8 +25,10 @@ import android.telephony.CarrierConfigManager
 import android.telephony.TelephonyManager
 import android.text.TextUtils
 import android.util.Log
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import com.android.internal.util.ArrayUtils
 import com.android.settings.R
+import com.android.settings.network.apn.ApnNetworkTypes.getNetworkType
 import java.util.Locale
 
 data class ApnData(
@@ -211,9 +213,6 @@ fun getApnDataInit(arguments: Bundle, context: Context, uriInit: Uri, subId: Int
 
 /**
  * Validates the apn data and save it to the database if it's valid.
- *
- *
- *
  * A dialog with error message will be displayed if the APN data is invalid.
  *
  * @return true if there is no error
@@ -222,7 +221,8 @@ fun validateAndSaveApnData(
     apnDataInit: ApnData,
     apnData: ApnData,
     context: Context,
-    uriInit: Uri
+    uriInit: Uri,
+    networkTypeSelectedOptionsState: SnapshotStateList<Int>
 ): Boolean {
     // Nothing to do if it's a read only APN
     if (apnData.customizedConfig.readOnlyApn) {
@@ -233,9 +233,15 @@ fun validateAndSaveApnData(
         //TODO: showError(this)
         return false
     }
-    if (apnData.newApn || (apnData != apnDataInit)) {
-        Log.d(TAG, "validateAndSaveApnData: apnData ${apnData.name}")
-        updateApnDataToDatabase(apnData.newApn, apnData.getContentValues(context), context, uriInit)
+    val newApnData = apnData.copy(networkType = getNetworkType(networkTypeSelectedOptionsState))
+    if (newApnData.newApn || (newApnData != apnDataInit)) {
+        Log.d(TAG, "[validateAndSaveApnData] newApnData.networkType: ${newApnData.networkType}")
+        updateApnDataToDatabase(
+            newApnData.newApn,
+            newApnData.getContentValues(context),
+            context,
+            uriInit
+        )
     }
     return true
 }

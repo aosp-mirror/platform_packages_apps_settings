@@ -50,10 +50,22 @@ object ApnNetworkTypes {
     fun getNetworkTypeSelectedOptionsState(networkType: Long): SnapshotStateList<Int> {
         val networkTypeSelectedOptionsState = mutableStateListOf<Int>()
         Types.forEachIndexed { index, type ->
-            if (networkType and TelephonyManager.getBitMaskForNetworkType(type) == 1L) {
+            if (networkType and TelephonyManager.getBitMaskForNetworkType(type) != 0L) {
                 networkTypeSelectedOptionsState.add(index)
             }
         }
         return networkTypeSelectedOptionsState
+    }
+
+    /**
+     * Gets the network type according to the selected Network type Selected Options.
+     * @param networkTypeSelectedOptionsState the selected Network type Selected Options.
+     */
+    fun getNetworkType(networkTypeSelectedOptionsState: SnapshotStateList<Int>): Long {
+        var networkType = 0L
+        networkTypeSelectedOptionsState.forEach { option ->
+            networkType = networkType or TelephonyManager.getBitMaskForNetworkType(Types[option])
+        }
+        return networkType
     }
 }

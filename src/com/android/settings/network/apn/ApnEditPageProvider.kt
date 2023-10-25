@@ -99,7 +99,13 @@ fun ApnPage(apnDataInit: ApnData, apnDataCur: MutableState<ApnData>, uriInit: Ur
         title = stringResource(id = R.string.apn_edit),
         actions = {
             IconButton(onClick = {
-                validateAndSaveApnData(apnDataInit, apnData, context, uriInit)
+                validateAndSaveApnData(
+                    apnDataInit,
+                    apnData,
+                    context,
+                    uriInit,
+                    networkTypeSelectedOptionsState
+                )
             }) { Icon(imageVector = Icons.Outlined.Done, contentDescription = "Save APN") }
         }
     ) {
@@ -154,7 +160,6 @@ fun ApnPage(apnDataInit: ApnData, apnDataCur: MutableState<ApnData>, uriInit: Ur
                 label = stringResource(R.string.apn_mms_port),
                 enabled = apnData.mmsPortEnabled
             ) { apnData = apnData.copy(mmsPort = it) }
-            // Warning: apnProtocol, apnRoaming, mvnoType string2Int
             SettingsExposedDropdownMenuBox(
                 label = stringResource(R.string.apn_auth_type),
                 options = authTypeOptions,
