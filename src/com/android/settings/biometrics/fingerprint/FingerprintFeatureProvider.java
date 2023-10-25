@@ -16,11 +16,14 @@
 
 package com.android.settings.biometrics.fingerprint;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.android.settings.biometrics.fingerprint.feature.SfpsEnrollmentFeature;
-
-import java.util.UUID;
 
 public interface FingerprintFeatureProvider {
     /**
@@ -29,11 +32,16 @@ public interface FingerprintFeatureProvider {
      */
     SfpsEnrollmentFeature getSfpsEnrollmentFeature();
 
+
     /**
-     * Gets calibrator to calibrate the FPS before enrolling udfps
-     * @param uuid unique id for passed between different activities
-     * @return udfps calibrator
+     * Gets calibrator for udfps pre-enroll
+     * @param appContext application context
+     * @param activitySavedInstanceState activity savedInstanceState
+     * @param activityIntent activity intent
      */
     @Nullable
-    UdfpsEnrollCalibrator getUdfpsEnrollCalibrator(@Nullable UUID uuid);
+    default UdfpsEnrollCalibrator getUdfpsEnrollCalibrator(@NonNull Context appContext,
+            @Nullable Bundle activitySavedInstanceState, @Nullable Intent activityIntent) {
+        return null;
+    }
 }
