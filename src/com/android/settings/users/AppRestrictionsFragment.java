@@ -45,7 +45,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.Switch;
 
 import androidx.preference.ListPreference;
 import androidx.preference.MultiSelectListPreference;
@@ -175,10 +174,6 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
             panelOpen = open;
         }
 
-        List<Preference> getChildren() {
-            return mChildren;
-        }
-
         @Override
         public void onBindViewHolder(PreferenceViewHolder view) {
             super.onBindViewHolder(view);
@@ -197,7 +192,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
             ViewGroup widget = (ViewGroup) view.findViewById(android.R.id.widget_frame);
             widget.setEnabled(!isImmutable());
             if (widget.getChildCount() > 0) {
-                final Switch toggle = (Switch) widget.getChildAt(0);
+                final CompoundButton toggle = (CompoundButton) widget.getChildAt(0);
                 toggle.setEnabled(!isImmutable());
                 toggle.setTag(this);
                 toggle.setClickable(true);

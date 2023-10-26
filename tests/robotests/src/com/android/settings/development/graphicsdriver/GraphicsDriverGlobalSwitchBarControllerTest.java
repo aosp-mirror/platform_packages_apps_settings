@@ -27,8 +27,6 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings;
 
-import com.android.settings.widget.SwitchBar;
-import com.android.settings.widget.SwitchBarController;
 import com.android.settings.widget.SwitchWidgetController;
 
 import org.junit.Before;
@@ -42,8 +40,6 @@ import org.robolectric.RuntimeEnvironment;
 @RunWith(RobolectricTestRunner.class)
 public class GraphicsDriverGlobalSwitchBarControllerTest {
 
-    @Mock
-    private SwitchBar mSwitchBar;
     @Mock
     private SwitchWidgetController mSwitchWidgetController;
     @Mock
@@ -65,9 +61,9 @@ public class GraphicsDriverGlobalSwitchBarControllerTest {
         Settings.Global.putInt(
                 mResolver, Settings.Global.UPDATABLE_DRIVER_ALL_APPS, UPDATABLE_DRIVER_DEFAULT);
         mController = new GraphicsDriverGlobalSwitchBarController(
-                mContext, new SwitchBarController(mSwitchBar));
+                mContext, mSwitchWidgetController);
 
-        verify(mSwitchBar).setChecked(true);
+        verify(mSwitchWidgetController).setChecked(true);
     }
 
     @Test
@@ -75,34 +71,33 @@ public class GraphicsDriverGlobalSwitchBarControllerTest {
         Settings.Global.putInt(mResolver, Settings.Global.UPDATABLE_DRIVER_ALL_APPS,
                 UPDATABLE_DRIVER_OFF);
         mController = new GraphicsDriverGlobalSwitchBarController(
-                mContext, new SwitchBarController(mSwitchBar));
+                mContext, mSwitchWidgetController);
 
-        verify(mSwitchBar).setChecked(false);
+        verify(mSwitchWidgetController).setChecked(false);
     }
 
     @Test
     public void constructor_developmentSettingsEnabled_shouldEnableSwitchBar() {
         Settings.Global.putInt(mResolver, Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 1);
         mController = new GraphicsDriverGlobalSwitchBarController(
-                mContext, new SwitchBarController(mSwitchBar));
+                mContext, mSwitchWidgetController);
 
-        verify(mSwitchBar).setEnabled(true);
+        verify(mSwitchWidgetController).setEnabled(true);
     }
 
     @Test
     public void constructor_developmentSettingsDisabled_shouldDisableSwitchBar() {
         Settings.Global.putInt(mResolver, Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0);
         mController = new GraphicsDriverGlobalSwitchBarController(
-                mContext, new SwitchBarController(mSwitchBar));
+                mContext, mSwitchWidgetController);
 
-        verify(mSwitchBar).setEnabled(false);
+        verify(mSwitchWidgetController).setEnabled(false);
     }
 
     @Test
     public void onStart_shouldStartListeningAndRegister() {
         mController = new GraphicsDriverGlobalSwitchBarController(
-                mContext, new SwitchBarController(mSwitchBar));
-        mController.mSwitchWidgetController = mSwitchWidgetController;
+                mContext, mSwitchWidgetController);
         mController.mGraphicsDriverContentObserver = mGraphicsDriverContentObserver;
         mController.onStart();
 
@@ -113,8 +108,7 @@ public class GraphicsDriverGlobalSwitchBarControllerTest {
     @Test
     public void onStop_shouldStopListeningAndUnregister() {
         mController = new GraphicsDriverGlobalSwitchBarController(
-                mContext, new SwitchBarController(mSwitchBar));
-        mController.mSwitchWidgetController = mSwitchWidgetController;
+                mContext, mSwitchWidgetController);
         mController.mGraphicsDriverContentObserver = mGraphicsDriverContentObserver;
         mController.onStop();
 
@@ -127,7 +121,7 @@ public class GraphicsDriverGlobalSwitchBarControllerTest {
         Settings.Global.putInt(mResolver, Settings.Global.UPDATABLE_DRIVER_ALL_APPS,
                 UPDATABLE_DRIVER_OFF);
         mController = new GraphicsDriverGlobalSwitchBarController(
-                mContext, new SwitchBarController(mSwitchBar));
+                mContext, mSwitchWidgetController);
         mController.onSwitchToggled(true);
 
         assertThat(Settings.Global.getInt(
@@ -141,7 +135,7 @@ public class GraphicsDriverGlobalSwitchBarControllerTest {
         Settings.Global.putInt(
                 mResolver, Settings.Global.UPDATABLE_DRIVER_ALL_APPS, UPDATABLE_DRIVER_DEFAULT);
         mController = new GraphicsDriverGlobalSwitchBarController(
-                mContext, new SwitchBarController(mSwitchBar));
+                mContext, mSwitchWidgetController);
         mController.onSwitchToggled(false);
 
         assertThat(Settings.Global.getInt(

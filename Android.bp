@@ -43,13 +43,10 @@ java_library {
     ],
 }
 
-
-// Build the Settings APK
 android_library {
     name: "Settings-core",
     platform_apis: true,
     defaults: [
-        "SettingsLibDefaults",
         "SettingsLib-search-defaults",
         "SpaPrivilegedLib-defaults",
     ],
@@ -65,59 +62,43 @@ android_library {
         "res-product",
     ],
     static_libs: [
-        "androidx-constraintlayout_constraintlayout",
-        "androidx.slice_slice-builders",
-        "androidx.slice_slice-core",
-        "androidx.slice_slice-view",
-        "androidx.core_core",
-        "androidx.appcompat_appcompat",
-        "androidx.cardview_cardview",
-        "androidx.compose.runtime_runtime-livedata",
-        "androidx.activity_activity-ktx",
+        // External dependencies
         "androidx.navigation_navigation-fragment-ktx",
-        "androidx.navigation_navigation-ui-ktx",
-        "androidx.preference_preference",
-        "androidx.recyclerview_recyclerview",
-        "androidx.window_window",
         "androidx.window_window-java",
-        "com.google.android.material_material",
-        "setupcompat",
-        "setupdesign",
-        "androidx.lifecycle_lifecycle-runtime",
-        "androidx.lifecycle_lifecycle-runtime-ktx",
-        "androidx.lifecycle_lifecycle-viewmodel",
         "gson",
         "guava",
-        "jsr305",
+
+        // Android internal dependencies
+        "BiometricsSharedLib",
+        "SystemUIUnfoldLib",
+        "WifiTrackerLib",
+        "android.content.pm.flags-aconfig-java",
+        "android.hardware.dumpstate-V1-java",
+        "android.hardware.dumpstate-V1.0-java",
+        "android.hardware.dumpstate-V1.1-java",
         "net-utils-framework-common",
+        "notification_flags_lib",
+        "securebox",
+
+        // Settings dependencies
+        "FingerprintManagerInteractor",
+        "Settings-change-ids",
+        "SettingsLib",
+        "SettingsLibActivityEmbedding",
+        "aconfig_settings_flags_lib",
         "app-usage-event-protos-lite",
         "battery-event-protos-lite",
         "battery-usage-slot-protos-lite",
+        "contextualcards",
+        "factory_reset_flags_lib",
+        "fuelgauge-log-protos-lite",
+        "fuelgauge-usage-state-protos-lite",
         "power-anomaly-event-protos-lite",
         "settings-contextual-card-protos-lite",
         "settings-log-bridge-protos-lite",
-        "settings-telephony-protos-lite",
-        "fuelgauge-log-protos-lite",
-        "fuelgauge-usage-state-protos-lite",
-        "contextualcards",
-        "securebox",
         "settings-logtags",
+        "settings-telephony-protos-lite",
         "statslog-settings",
-        "android.hardware.dumpstate-V1.0-java",
-        "android.hardware.dumpstate-V1.1-java",
-        "android.hardware.dumpstate-V1-java",
-        "lottie",
-        "BiometricsSharedLib",
-        "WifiTrackerLib",
-        "SettingsLibActivityEmbedding",
-        "Settings-change-ids",
-        "androidx.room_room-runtime",
-        "SystemUIUnfoldLib",
-        "aconfig_settings_flags_lib",
-        "factory_reset_flags_lib",
-        "android.content.pm.flags-aconfig-java",
-        "FingerprintManagerInteractor",
-        "notification_flags_lib",
     ],
 
     plugins: ["androidx.room_room-compiler-plugin"],
@@ -142,6 +123,7 @@ platform_compat_config {
     system_ext_specific: true,
 }
 
+// Build the Settings APK
 android_app {
     name: "Settings",
     defaults: [

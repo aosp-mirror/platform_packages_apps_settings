@@ -98,7 +98,7 @@
             android:summary="@string/lock_screen_notifs_redact_work_summary"
             settings:controller="com.android.settings.notification.RedactNotificationPreferenceController" />
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="notification_lockscreen_bypass"
             android:order="16"
             android:title="@string/lockscreen_bypass_title"
@@ -120,7 +120,7 @@
             settings:controller="com.android.settings.notification.zen.ZenModePreferenceController"
         />
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="lock_screen_show_only_unseen_notifs"
             android:order="18"
             android:title="@string/unseen_notifs_lock_screen"
@@ -148,27 +148,27 @@
                 android:targetClass="com.android.cellbroadcastreceiver.CellBroadcastSettings"/>
         </com.android.settingslib.RestrictedPreference>
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
              android:key="silent_icons"
              android:order="21"
              android:title="@string/silent_notifications_status_bar"
              settings:controller="com.android.settings.notification.SilentStatusBarPreferenceController"/>
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="show_snooze_options"
             android:order="22"
             android:title="@string/snooze_options_title"
             settings:controller="com.android.settings.notification.SnoozeNotificationPreferenceController" />
 
         <!-- Notification badging -->
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="notification_badging"
             android:order="23"
             android:title="@string/notification_badging_title"
             settings:controller="com.android.settings.notification.BadgingNotificationPreferenceController"/>
 
         <!-- Pulse notification light, on devices that support it -->
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="notification_pulse"
             android:order="24"
             android:title="@string/notification_pulse_title"

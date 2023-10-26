@@ -16,6 +16,11 @@
         android:name="com.android.settings.USE_BIOMETRIC_PROVIDER"
         android:protectionLevel="signature|privileged"/>
 
+    <!-- Permissions for acting as the factory reset preparation application. -->
+    <permission
+        android:name="com.android.settings.permissions.PREPARE_FACTORY_RESET"
+        android:protectionLevel="signature|privileged"/>
+
     <uses-permission android:name="android.permission.REQUEST_NETWORK_SCORES" />
     <uses-permission android:name="android.permission.WRITE_MEDIA_STORAGE" />
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
@@ -4985,6 +4990,11 @@
                 <action android:name="com.android.settings.biometrics.BIOMETRIC_SETTINGS_PROVIDER" />
             </intent-filter>
         </provider>
+
+        <activity
+            android:name=".privatespace.PrivateSpaceSetupActivity"
+            android:theme="@style/GlifV3Theme.Light"
+            android:exported="false" />
 
         <activity android:name=".privatespace.PrivateSpaceAuthenticationActivity"
                   android:theme="@*android:style/Theme.DeviceDefault.Settings.Dialog.NoActionBar"

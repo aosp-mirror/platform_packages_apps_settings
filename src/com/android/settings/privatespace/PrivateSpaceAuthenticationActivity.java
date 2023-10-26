@@ -92,20 +92,24 @@ public class PrivateSpaceAuthenticationActivity extends FragmentActivity {
         }
     }
 
-    /** Show private space settings page on device lock authentications */
+    /** Starts private space setup flow or the PS settings page on device lock authentication */
     @VisibleForTesting
     public void onLockAuthentication(Context context) {
-        new SubSettingLauncher(context)
-                        .setDestination(PrivateSpaceDashboardFragment.class.getName())
-                        .setTransitionType(
-                                SettingsTransitionHelper.TransitionType.TRANSITION_SLIDE)
-                        .setSourceMetricsCategory(SettingsEnums.PRIVATE_SPACE_SETTINGS)
-                        .launch();
+        if (mPrivateSpaceMaintainer.doesPrivateSpaceExist()) {
+            new SubSettingLauncher(context)
+                    .setDestination(PrivateSpaceDashboardFragment.class.getName())
+                    .setTransitionType(
+                            SettingsTransitionHelper.TransitionType.TRANSITION_SLIDE)
+                    .setSourceMetricsCategory(SettingsEnums.PRIVATE_SPACE_SETTINGS)
+                    .launch();
+        } else {
+            startActivity(new Intent(context, PrivateSpaceSetupActivity.class));
+        }
     }
 
     @VisibleForTesting
     public void setPrivateSpaceMaintainer(Injector injector) {
-        mPrivateSpaceMaintainer = injector.injectPrivateSpaceMaintainer(getApplicationContext());
+        mPrivateSpaceMaintainer = injector.injectPrivateSpaceMaintainer(this);
     }
 
     private void promptToSetDeviceLock() {

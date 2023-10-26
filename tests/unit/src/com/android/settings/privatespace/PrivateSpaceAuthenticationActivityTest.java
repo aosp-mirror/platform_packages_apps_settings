@@ -16,14 +16,13 @@
 
 package com.android.settings.privatespace;
 
-import static com.android.settings.privatespace.PrivateSpaceSafetySource.SAFETY_SOURCE_ID;
-
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.Intent;
@@ -86,13 +85,17 @@ public class PrivateSpaceAuthenticationActivityTest {
         mPrivateSpaceAuthenticationActivity.setPrivateSpaceMaintainer(injector);
     }
 
-    /** Tests that on lock authentication Private space settings is launched. */
+    /** Tests that when Private does not exist setup flow is started. */
+    //TODO(b/307729746) Plan to add more tests for complete setup flow
     @Test
     @RequiresFlagsEnabled(Flags.FLAG_ALLOW_PRIVATE_PROFILE)
-    public void deviceSecurePrivateSpaceExists() {
+    public void whenPrivateProfileDoesNotExist_triggersSetupFlow() {
+        when(mPrivateSpaceMaintainer.doesPrivateSpaceExist()).thenReturn(false);
+
         final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
         mPrivateSpaceAuthenticationActivity.onLockAuthentication(mContext);
         verify(mPrivateSpaceAuthenticationActivity).startActivity(intentCaptor.capture());
-        assertThat(intentCaptor.getValue().getIdentifier()).isEqualTo(SAFETY_SOURCE_ID);
+        assertThat(intentCaptor.getValue().getComponent().getClassName())
+                .isEqualTo(PrivateSpaceSetupActivity.class.getName());
     }
 }

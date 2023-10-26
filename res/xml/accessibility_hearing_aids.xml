@@ -53,7 +53,7 @@
             android:fragment="com.android.settings.accessibility.AccessibilityAudioRoutingFragment"
             settings:controller="com.android.settings.accessibility.HearingAidAudioRoutingPreferenceController"/>
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="hearing_aid_compatibility"
             android:order="30"
             android:title="@string/accessibility_hac_mode_title"

@@ -23,7 +23,7 @@
         android:title="@string/app_pinning_intro"
         settings:searchable="false"/>
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="use_screen_lock"
         android:title="@string/screen_pinning_unlock_none"
         settings:allowDividerAbove="true"/>

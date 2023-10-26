@@ -138,7 +138,9 @@ public class PrivateSpaceSafetySourceTest {
                 any(), eq(SAFETY_SOURCE_ID), captor.capture(), eq(EVENT_TYPE_DEVICE_REBOOTED));
         SafetySourceData safetySourceData = captor.getValue();
         SafetySourceStatus safetySourceStatus = safetySourceData.getStatus();
-        assertThat(safetySourceStatus.getPendingIntent().getIntent()
-                .equals(PrivateSpaceAuthenticationActivity.class));
+        assertThat(safetySourceStatus.getPendingIntent().getIntent().getComponent().getClassName())
+                .isEqualTo(PrivateSpaceAuthenticationActivity.class.getName());
+        assertThat(safetySourceStatus.getPendingIntent().getIntent().getIdentifier())
+                .isEqualTo(SAFETY_SOURCE_ID);
     }
 }
