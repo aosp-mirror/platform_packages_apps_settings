@@ -16,6 +16,7 @@
 
 package com.android.settings.spa.app.specialaccess
 
+import android.app.AppOpsManager
 import android.app.AppOpsManager.OP_PICTURE_IN_PICTURE
 import android.content.Context
 import android.content.pm.ActivityInfo
@@ -53,6 +54,7 @@ class PictureInPictureListModel(private val context: Context) :
     override val pageTitleResId = R.string.picture_in_picture_title
     override val switchTitleResId = R.string.picture_in_picture_app_detail_switch
     override val footerResId = R.string.picture_in_picture_app_detail_summary
+    override val enhancedConfirmationKey: String = AppOpsManager.OPSTR_PICTURE_IN_PICTURE
 
     private val packageManager = context.packageManager
 
