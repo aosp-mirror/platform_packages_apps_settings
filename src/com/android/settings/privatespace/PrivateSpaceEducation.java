@@ -56,7 +56,7 @@ public class PrivateSpaceEducation extends Fragment {
                         .setListener(onCancel())
                         .setButtonType(FooterButton.ButtonType.CANCEL)
                         .setTheme(
-                                com.google.android.setupdesign.R.style
+                                androidx.appcompat.R.style
                                         .Base_TextAppearance_AppCompat_Widget_Button)
                         .build());
         mixin.getSecondaryButtonView().setFilterTouchesWhenObscured(true);
