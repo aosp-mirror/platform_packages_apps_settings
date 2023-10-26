@@ -13,9 +13,16 @@ flag {
 }
 
 flag {
-  name: "separate_accessibility_vibration_settings_fragments"
-  namespace: "accessibility"
-  description: "Splits VibrationSettings into two fragments, one per XML resource"
-  bug: "289967175"
+    name: "separate_accessibility_vibration_settings_fragments"
+    namespace: "accessibility"
+    description: "Splits VibrationSettings into two fragments, one per XML resource"
+    bug: "289967175"
+}
+
+flag {
+    name: "new_hearing_device_pairing_page"
+    namespace: "accessibility"
+    description: "New hearing device pairing page with deny list method"
+    bug: "307473972"
 }
 
