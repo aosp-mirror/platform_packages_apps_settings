@@ -54,7 +54,6 @@ public class WifiTetherSwitchBarController implements
 
     private final Context mContext;
     private final SettingsMainSwitchBar mSwitchBar;
-    private final Switch mSwitch;
     private final ConnectivityManager mConnectivityManager;
     private final WifiManager mWifiManager;
 
@@ -78,7 +77,6 @@ public class WifiTetherSwitchBarController implements
     WifiTetherSwitchBarController(Context context, SettingsMainSwitchBar switchBar) {
         mContext = context;
         mSwitchBar = switchBar;
-        mSwitch = mSwitchBar.getSwitch();
         mDataSaverBackend = new DataSaverBackend(context);
         mConnectivityManager =
                 (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -153,8 +151,8 @@ public class WifiTetherSwitchBarController implements
         if (state == WIFI_AP_STATE_ENABLING || state == WIFI_AP_STATE_DISABLING) return;
 
         final boolean shouldBeChecked = (state == WIFI_AP_STATE_ENABLED);
-        if (mSwitch.isChecked() != shouldBeChecked) {
-            mSwitch.setChecked(shouldBeChecked);
+        if (mSwitchBar.isChecked() != shouldBeChecked) {
+            mSwitchBar.setChecked(shouldBeChecked);
         }
         updateWifiSwitch();
     }

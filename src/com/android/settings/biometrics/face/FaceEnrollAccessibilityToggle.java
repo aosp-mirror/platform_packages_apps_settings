@@ -22,7 +22,6 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import com.android.settings.R;
@@ -32,7 +31,7 @@ import com.android.settings.R;
  */
 public class FaceEnrollAccessibilityToggle extends LinearLayout {
 
-    private Switch mSwitch;
+    private final CompoundButton mSwitch;
 
     public FaceEnrollAccessibilityToggle(Context context) {
         this(context, null /* attrs */);
@@ -76,7 +75,7 @@ public class FaceEnrollAccessibilityToggle extends LinearLayout {
         mSwitch.setOnCheckedChangeListener(listener);
     }
 
-    public Switch getSwitch() {
+    public CompoundButton getSwitch() {
         return mSwitch;
     }
 }

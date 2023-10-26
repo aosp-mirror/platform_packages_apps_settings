@@ -36,7 +36,7 @@
             android:persistent="false"
             android:title="@string/wifi_hotspot_password_title"/>
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="wifi_tether_auto_turn_off_2"
             android:title="@string/wifi_hotspot_auto_off_title"
             android:summary="@string/wifi_hotspot_auto_off_summary"/>
@@ -57,28 +57,28 @@
         android:key="tethering_options_group"
         android:title="@string/tethering_interface_options"
         settings:searchable="false">
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="enable_usb_tethering"
             android:title="@string/usb_tethering_button_text"
             android:summary="@string/usb_tethering_subtext"
             settings:controller="com.android.settings.network.UsbTetherPreferenceController"
             settings:keywords="@string/keywords_hotspot_tethering" />
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="enable_bluetooth_tethering_2"
             android:title="@string/bluetooth_tether_checkbox_text"
             android:summary="@string/bluetooth_tethering_subtext"
             settings:controller="com.android.settings.network.BluetoothTetherPreferenceController"
             settings:keywords="@string/keywords_hotspot_tethering" />
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="enable_ethernet_tethering_2"
             android:title="@string/ethernet_tether_checkbox_text"
             android:summary="@string/ethernet_tethering_subtext"
             settings:controller="com.android.settings.network.EthernetTetherPreferenceController"
             settings:keywords="@string/keywords_hotspot_tethering"/>
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="disable_wifi_tethering"
             android:title="@string/disable_wifi_hotspot_title"
             android:summary="@string/summary_placeholder"

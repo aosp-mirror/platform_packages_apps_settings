@@ -27,7 +27,6 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
-import android.widget.Switch;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
@@ -65,7 +64,6 @@ import java.util.List;
 })
 public class DevelopmentSettingsDashboardFragmentTest {
 
-    private Switch mSwitch;
     private Context mContext;
     private ShadowUserManager mShadowUserManager;
     private DevelopmentSettingsDashboardFragment mDashboard;
@@ -75,7 +73,6 @@ public class DevelopmentSettingsDashboardFragmentTest {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
         SettingsMainSwitchBar switchBar = new SettingsMainSwitchBar(mContext);
-        mSwitch = switchBar.getSwitch();
         mDashboard = spy(new DevelopmentSettingsDashboardFragment());
         ReflectionHelpers.setField(mDashboard, "mSwitchBar", switchBar);
         mShadowUserManager = Shadow.extract(mContext.getSystemService(Context.USER_SERVICE));
@@ -163,7 +160,7 @@ public class DevelopmentSettingsDashboardFragmentTest {
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0);
 
-        mDashboard.onSwitchChanged(mSwitch, false /* isChecked */);
+        mDashboard.onSwitchChanged(null, false /* isChecked */);
         assertThat(ShadowEnableDevelopmentSettingWarningDialog.mShown).isFalse();
     }
 
@@ -175,7 +172,7 @@ public class DevelopmentSettingsDashboardFragmentTest {
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0);
 
-        mDashboard.onSwitchChanged(mSwitch, true /* isChecked */);
+        mDashboard.onSwitchChanged(null, true /* isChecked */);
         assertThat(ShadowEnableDevelopmentSettingWarningDialog.mShown).isTrue();
     }
 
@@ -187,7 +184,7 @@ public class DevelopmentSettingsDashboardFragmentTest {
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 1);
 
-        mDashboard.onSwitchChanged(mSwitch, false /* isChecked */);
+        mDashboard.onSwitchChanged(null, false /* isChecked */);
 
         assertThat(ShadowEnableDevelopmentSettingWarningDialog.mShown).isFalse();
         assertThat(DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(mContext)).isFalse();
@@ -206,7 +203,7 @@ public class DevelopmentSettingsDashboardFragmentTest {
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 1);
 
-        mDashboard.onSwitchChanged(mSwitch, false /* isChecked */);
+        mDashboard.onSwitchChanged(null, false /* isChecked */);
 
         AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(dialog).isNotNull();

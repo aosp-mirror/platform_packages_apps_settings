@@ -53,7 +53,7 @@
             settings:controller="com.android.settings.datetime.LocationProviderStatusPreferenceController"/>
 
         <!-- This preference gets removed if location-based time zone detection is not supported -->
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="location_time_zone_detection"
             android:title="@string/location_time_zone_detection_toggle_title"
             settings:controller="com.android.settings.datetime.LocationTimeZoneDetectionPreferenceController"/>
@@ -72,11 +72,11 @@
         android:key="time_format_preference_category"
         android:title="@string/time_format_category_title"
         settings:keywords="@string/keywords_time_format">
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="auto_24hour"
             android:title="@string/date_time_24hour_auto"/>
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="24 hour"
             android:title="@string/date_time_24hour" />
     </PreferenceCategory>

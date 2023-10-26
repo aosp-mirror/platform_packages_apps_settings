@@ -29,9 +29,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.fragment.app.ListFragment;
@@ -244,14 +244,12 @@ public class AppOpsCategory extends ListFragment implements
     public static class AppListAdapter extends BaseAdapter {
         private final Resources mResources;
         private final LayoutInflater mInflater;
-        private final AppOpsState mState;
 
         List<AppOpEntry> mList;
 
-        public AppListAdapter(Context context, AppOpsState state) {
+        public AppListAdapter(Context context) {
             mResources = context.getResources();
             mInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            mState = state;
         }
 
         public void setData(List<AppOpEntry> data) {
@@ -294,7 +292,7 @@ public class AppOpsCategory extends ListFragment implements
             ((TextView) view.findViewById(R.id.op_name)).setText(
                     item.getTimeText(mResources, false));
             view.findViewById(R.id.op_time).setVisibility(View.GONE);
-            ((Switch) view.findViewById(R.id.op_switch)).setChecked(
+            ((CompoundButton) view.findViewById(R.id.op_switch)).setChecked(
                     item.getPrimaryOpMode() == AppOpsManager.MODE_ALLOWED);
 
             return view;
@@ -318,7 +316,7 @@ public class AppOpsCategory extends ListFragment implements
         setHasOptionsMenu(true);
 
         // Create an empty adapter we will use to display the loaded data.
-        mAdapter = new AppListAdapter(getActivity(), mState);
+        mAdapter = new AppListAdapter(getActivity());
         setListAdapter(mAdapter);
 
         // Start out with a progress indicator.
@@ -332,7 +330,7 @@ public class AppOpsCategory extends ListFragment implements
         AppOpEntry entry = mAdapter.getItem(position);
         if (entry != null) {
             // We treat this as tapping on the check box, toggling the app op state.
-            Switch sw = v.findViewById(R.id.op_switch);
+            CompoundButton sw = v.findViewById(R.id.op_switch);
             boolean checked = !sw.isChecked();
             sw.setChecked(checked);
             AppOpsManager.OpEntry op = entry.getOpEntry(0);

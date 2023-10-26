@@ -33,13 +33,11 @@ public class AudioSharingSwitchBarController
 
     private final Context mContext;
     private final SettingsMainSwitchBar mSwitchBar;
-    private final Switch mSwitch;
 
     AudioSharingSwitchBarController(Context context, SettingsMainSwitchBar switchBar) {
         mContext = context;
         mSwitchBar = switchBar;
-        mSwitch = mSwitchBar.getSwitch();
-        mSwitch.setChecked(false);
+        mSwitchBar.setChecked(false);
     }
 
     @Override

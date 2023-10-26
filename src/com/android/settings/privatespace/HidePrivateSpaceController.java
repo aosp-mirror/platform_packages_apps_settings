@@ -16,30 +16,41 @@
 
 package com.android.settings.privatespace;
 
+import static android.provider.Settings.Secure.HIDE_PRIVATESPACE_ENTRY_POINT;
+
 import android.content.Context;
+import android.provider.Settings;
 
 import com.android.settings.core.TogglePreferenceController;
 
-/** Represents the preference controller for (un)hiding the Private Space */
-public final class HidePrivateSpaceController extends TogglePreferenceController {
-    public HidePrivateSpaceController(Context context, String preferenceKey) {
-        super(context, preferenceKey);
+/**
+ *  A class that is used to show details page for the setting to hide private space entry point
+ *  in All Apps.
+ */
+public class HidePrivateSpaceController extends TogglePreferenceController {
+    private static final int DISABLED_VALUE = 0;
+    private static final int ENABLED_VALUE = 1;
+
+    public HidePrivateSpaceController(Context context, String key) {
+        super(context, key);
     }
 
     @Override
+    @AvailabilityStatus
     public int getAvailabilityStatus() {
         return AVAILABLE;
     }
 
     @Override
     public boolean isChecked() {
-        // TODO(b/293569406) Need to check this from a persistent store, maybe like SettingsProvider
-        return false;
+        return Settings.Secure.getInt(mContext.getContentResolver(),
+                HIDE_PRIVATESPACE_ENTRY_POINT, DISABLED_VALUE) != DISABLED_VALUE;
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        // TODO(b/293569406) Need to save this to a persistent store, maybe like SettingsProvider
+        Settings.Secure.putInt(mContext.getContentResolver(), HIDE_PRIVATESPACE_ENTRY_POINT,
+                isChecked ? ENABLED_VALUE : DISABLED_VALUE);
         return true;
     }
 

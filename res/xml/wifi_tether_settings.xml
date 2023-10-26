@@ -44,12 +44,12 @@
         android:persistent="false"
         android:title="@string/wifi_hotspot_password_title"/>
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="wifi_tether_auto_turn_off"
         android:title="@string/wifi_hotspot_auto_off_title"
         android:summary="@string/wifi_hotspot_auto_off_summary"/>
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="wifi_tether_maximize_compatibility"
         android:title="@string/wifi_hotspot_maximize_compatibility"/>
 

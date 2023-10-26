@@ -31,9 +31,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.StringRes;
@@ -67,7 +67,7 @@ public class ApplicationViewHolder extends RecyclerView.ViewHolder {
     @VisibleForTesting
     final ViewGroup mWidgetContainer;
     @VisibleForTesting
-    final Switch mSwitch;
+    final CompoundButton mSwitch;
     final ImageView mAddIcon;
     final ProgressBar mProgressBar;
 
@@ -173,10 +173,6 @@ public class ApplicationViewHolder extends RecyclerView.ViewHolder {
         mAppName.setContentDescription(contentDescription);
     }
 
-    void setIcon(int drawableRes) {
-        mAppIcon.setImageResource(drawableRes);
-    }
-
     void setIcon(Drawable icon) {
         if (icon == null) {
             return;
@@ -219,7 +215,8 @@ public class ApplicationViewHolder extends RecyclerView.ViewHolder {
         }
     }
 
-    void updateSwitch(Switch.OnCheckedChangeListener listener, boolean enabled, boolean checked) {
+    void updateSwitch(CompoundButton.OnCheckedChangeListener listener, boolean enabled,
+            boolean checked) {
         if (mSwitch != null && mWidgetContainer != null) {
             mWidgetContainer.setFocusable(false);
             mWidgetContainer.setClickable(false);

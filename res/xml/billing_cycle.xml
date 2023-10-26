@@ -23,7 +23,7 @@
         android:key="billing_cycle"
         android:title="@string/app_usage_cycle" />
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="set_data_warning"
         android:title="@string/set_data_warning"/>
 
@@ -31,7 +31,7 @@
         android:key="data_warning"
         android:title="@string/data_warning" />
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="set_data_limit"
         android:title="@string/set_data_limit" />
 
