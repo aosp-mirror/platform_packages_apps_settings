@@ -944,4 +944,40 @@
         <item name="android:fontFamily">google-sans-text</item>
     </style>
 
+    <style name="PrivateSpaceSetupTextFontStyle">
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:fontFamily">google-sans-text</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="PrivateSpaceSetupSubHeaderStyle" parent="@style/PrivateSpaceSetupTextFontStyle">
+        <item name="android:paddingLeft">24dp</item>
+        <item name="android:paddingRight">24dp</item>
+        <item name="android:paddingTop">20dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="PrivateSpaceSetupBulletPointLayoutStyle">
+        <item name="android:paddingLeft">24dp</item>
+        <item name="android:paddingRight">24dp</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">16dp</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="PrivateSpaceBulletPointTextFontStyle" parent="@style/PrivateSpaceSetupTextFontStyle">
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="PrivateSpaceBulletPointIconStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:layout_alignParentTop">true</item>
+    </style>
+
 </resources>

@@ -119,6 +119,15 @@
         android:key="security_category"
         android:title="@string/security_header" />
 
+    <Preference
+        android:order="230"
+        android:key="content_protection_preference"
+        android:title="@string/content_protection_preference_title"
+        android:summary="@string/content_protection_preference_summary"
+        android:fragment="com.android.settings.security.ContentProtectionPreferenceFragment"
+        settings:keywords="@string/content_protection_preference_title"
+        settings:controller="com.android.settings.security.ContentProtectionPreferenceController" />
+
     <PreferenceCategory
         android:order="240"
         android:key="security_settings_device_admin_category"

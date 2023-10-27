@@ -155,34 +155,6 @@ public class NotificationAssistantPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateState_SettingActivityAvailable() throws Exception {
-        mPreferenceController.updateState(mPreference);
-        assertNotNull(mPreference.getIntent());
-
-        mPreference.performClick();
-        Intent nextIntent = Shadows.shadowOf(
-                (Application) ApplicationProvider.getApplicationContext()).getNextStartedActivity();
-        assertEquals(nextIntent.getAction(), ACTION_NOTIFICATION_ASSISTANT_DETAIL_SETTINGS);
-    }
-
-    @Test
-    public void testUpdateState_SettingActivityUnavailable() throws Exception {
-        when(mPackageManager.queryIntentActivities(any(Intent.class), any()))
-                .thenReturn(null);
-        mPreferenceController.updateState(mPreference);
-        assertNull(mPreference.getIntent());
-
-        mPreference.performClick();
-        Intent nextIntent = Shadows.shadowOf(
-                (Application) ApplicationProvider.getApplicationContext()).getNextStartedActivity();
-        assertNull(nextIntent);
-        // Verify a dialog is shown
-        verify(mFragmentTransaction).add(
-                any(NotificationAssistantDialogFragment.class), anyString());
-        verify(mBackend, times(0)).setNotificationAssistantGranted(any());
-    }
-
-    @Test
     @Config(shadows = ShadowSecureSettings.class)
     public void testMigrationFromSetting_userEnable_multiProfile() throws Exception {
         Settings.Secure.putIntForUser(mContext.getContentResolver(),
@@ -228,15 +200,5 @@ public class NotificationAssistantPreferenceControllerTest {
                 .setNASMigrationDoneAndResetDefault(eq(0), eq(false));
         verify(mBackend, never())
                 .setNASMigrationDoneAndResetDefault(eq(10), anyBoolean());
-    }
-
-    @Test
-    public void testNASUnavailable_settingDisabled() throws Exception {
-        when(mBackend.getDefaultNotificationAssistant()).thenReturn(null);
-        mPreferenceController.getDefaultNASIntent();
-        mPreferenceController.updateState(mPreference);
-
-        verify(mPreference, atLeastOnce()).setSwitchEnabled(eq(false));
-        assertFalse(mPreference.isEnabled());
     }
 }

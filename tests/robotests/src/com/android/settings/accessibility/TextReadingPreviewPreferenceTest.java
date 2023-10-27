@@ -16,8 +16,6 @@
 
 package com.android.settings.accessibility;
 
-import static com.android.settings.accessibility.TextReadingPreviewController.PREVIEW_SAMPLE_RES_IDS;
-
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyBoolean;
@@ -39,6 +37,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.android.settings.R;
 import com.android.settings.display.PreviewPagerAdapter;
 
+import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -54,15 +53,18 @@ public class TextReadingPreviewPreferenceTest {
     private PreferenceViewHolder mHolder;
     private ViewPager mViewPager;
     private PreviewPagerAdapter mPreviewPagerAdapter;
+    private int mPreviewSampleCount;
 
     @Before
     public void setUp() {
         final Context context = ApplicationProvider.getApplicationContext();
-        final Configuration[] configurations = createConfigurations(PREVIEW_SAMPLE_RES_IDS.length);
+        final int[] previewSamples = TextReadingPreviewController.getPreviewSampleLayouts(context);
+        mPreviewSampleCount = previewSamples.length;
+        final Configuration[] configurations = createConfigurations(mPreviewSampleCount);
         mTextReadingPreviewPreference = new TextReadingPreviewPreference(context);
         mPreviewPagerAdapter =
                 spy(new PreviewPagerAdapter(context, /* isLayoutRtl= */ false,
-                        PREVIEW_SAMPLE_RES_IDS, configurations));
+                        previewSamples, configurations));
         final LayoutInflater inflater = LayoutInflater.from(context);
         final View view =
                 inflater.inflate(mTextReadingPreviewPreference.getLayoutResource(),
@@ -81,7 +83,7 @@ public class TextReadingPreviewPreferenceTest {
 
     @Test
     public void setPreviewAdapterWithNull_resetCurrentItem() {
-        final int currentItem = 2;
+        final int currentItem = mPreviewSampleCount - 1;
         mTextReadingPreviewPreference.setPreviewAdapter(mPreviewPagerAdapter);
         mTextReadingPreviewPreference.setCurrentItem(currentItem);
         mTextReadingPreviewPreference.onBindViewHolder(mHolder);
@@ -94,7 +96,7 @@ public class TextReadingPreviewPreferenceTest {
 
     @Test
     public void setCurrentItem_success() {
-        final int currentItem = 1;
+        final int currentItem = mPreviewSampleCount - 1;
         mTextReadingPreviewPreference.setPreviewAdapter(mPreviewPagerAdapter);
         mTextReadingPreviewPreference.onBindViewHolder(mHolder);
 
@@ -106,21 +108,25 @@ public class TextReadingPreviewPreferenceTest {
 
     @Test(expected = NullPointerException.class)
     public void setCurrentItemBeforeSetPreviewAdapter_throwNPE() {
-        final int currentItem = 5;
+        final int currentItem = mPreviewSampleCount + 2;
 
         mTextReadingPreviewPreference.setCurrentItem(currentItem);
     }
 
     @Test(expected = NullPointerException.class)
     public void updatePagerWithoutPreviewAdapter_throwNPE() {
-        final int index = 1;
+        final int index = mPreviewSampleCount - 1;
 
         mTextReadingPreviewPreference.notifyPreviewPagerChanged(index);
     }
 
     @Test
     public void notifyPreviewPager_setPreviewLayer() {
-        final int index = 2;
+        // The preview pager cannot switch page if there is only one preview layout, so skip the
+        // test if so
+        Assume.assumeTrue(mPreviewSampleCount > 1);
+
+        final int index = mPreviewSampleCount - 1;
         mTextReadingPreviewPreference.setPreviewAdapter(mPreviewPagerAdapter);
         mTextReadingPreviewPreference.onBindViewHolder(mHolder);
 
@@ -131,7 +137,7 @@ public class TextReadingPreviewPreferenceTest {
 
     @Test
     public void afterPagerChange_updateCurrentItem() {
-        final int currentItem = 2;
+        final int currentItem = mPreviewSampleCount - 1;
         mTextReadingPreviewPreference.setPreviewAdapter(mPreviewPagerAdapter);
         mTextReadingPreviewPreference.onBindViewHolder(mHolder);
 

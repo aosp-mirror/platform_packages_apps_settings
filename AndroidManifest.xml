@@ -4991,6 +4991,11 @@
             </intent-filter>
         </provider>
 
+        <activity
+            android:name=".privatespace.PrivateSpaceSetupActivity"
+            android:theme="@style/GlifV3Theme.Light"
+            android:exported="false" />
+
         <activity android:name=".privatespace.PrivateSpaceAuthenticationActivity"
                   android:theme="@*android:style/Theme.DeviceDefault.Settings.Dialog.NoActionBar"
                   android:exported="false"/>
