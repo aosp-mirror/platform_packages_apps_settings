@@ -19,8 +19,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingVertical="@dimen/settingslib_illustration_padding"
-    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
-    android:paddingStart="?android:attr/listPreferredItemPaddingStart">
+    android:paddingEnd="@dimen/text_reading_preview_padding_end"
+    android:paddingStart="@dimen/text_reading_preview_padding_start">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,7 +28,8 @@
         android:background="@drawable/accessibility_text_reading_preview"
         android:clipChildren="true"
         android:orientation="vertical"
-        android:padding="18dp">
+        android:paddingVertical="@dimen/text_reading_preview_background_padding_vertical"
+        android:paddingHorizontal="@dimen/text_reading_preview_background_padding_horizontal">
 
         <TextView
             android:id="@+id/preview_label"
