@@ -131,30 +131,12 @@ public class NotificationAssistantPreferenceController extends TogglePreferenceC
         return (mFragment != null && mFragment instanceof ConfigureNotificationSettings);
     }
 
-    private boolean isNASSettingActivityAvailable() {
-        final List<ResolveInfo> resolved = mPackageManager.queryIntentActivities(mNASSettingIntent,
-                PackageManager.ResolveInfoFlags.of(PackageManager.MATCH_ALL));
-        return (resolved != null && !resolved.isEmpty());
-    }
-
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
         if (mDefaultNASComponent == null) {
             preference.setEnabled(false);
             ((PrimarySwitchPreference) preference).setSwitchEnabled(false);
-        } else if (isNASSettingActivityAvailable()) {
-            preference.setIntent(mNASSettingIntent);
-        } else {
-            // Cannot find settings activity from the default NAS app
-            preference.setIntent(null);
-            preference.setOnPreferenceClickListener(
-                    preference1 -> {
-                        onPreferenceChange(preference1, !isChecked());
-                        ((PrimarySwitchPreference) preference1).setChecked(isChecked());
-                        return true;
-                    }
-            );
         }
     }
 }
