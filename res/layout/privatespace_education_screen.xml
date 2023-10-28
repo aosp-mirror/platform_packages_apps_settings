@@ -15,12 +15,12 @@
   -->
 
 <com.google.android.setupdesign.GlifLayout
-    xmlns:aapt="http://schemas.android.com/aapt"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/ps_education_screen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:filterTouchesWhenObscured="true"
     app:sucHeaderText="@string/privatespace_setup_title"
     app:sudDescriptionText="@string/privatespace_hide_apps_summary"
     android:icon="@drawable/ic_privatespace_icon">

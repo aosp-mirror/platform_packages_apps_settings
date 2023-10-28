@@ -16,10 +16,8 @@
 
 package com.android.settings.privatespace;
 
-import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -28,26 +26,17 @@ import com.android.settings.SetupWizardUtils;
 
 import com.google.android.setupdesign.util.ThemeHelper;
 
-/** Activity class that helps in setting up of private space */
-public class PrivateSpaceSetupActivity extends FragmentActivity {
-    public static final int SET_LOCK_ACTION = 1;
-    private NavHostFragment mNavHostFragment;
+/** Activity that is started as private profile user that helps to set private profile lock. */
+public class PrivateProfileContextHelperActivity extends FragmentActivity {
+    private static final String TAG = "PrivateProfileHelper";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(SetupWizardUtils.getTheme(this, getIntent()));
         ThemeHelper.trySetDynamicColor(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.privatespace_setup_root);
-        mNavHostFragment = (NavHostFragment) getSupportFragmentManager()
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.ps_nav_host_fragment);
-        mNavHostFragment.getNavController().setGraph(R.navigation.privatespace_main_context_nav);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (requestCode == SET_LOCK_ACTION && resultCode == RESULT_OK) {
-            mNavHostFragment.getNavController().navigate(R.id.action_advance_to_success);
-        }
-        super.onActivityResult(requestCode, resultCode, data);
+        navHostFragment.getNavController().setGraph(R.navigation.privatespace_private_context_nav);
     }
 }

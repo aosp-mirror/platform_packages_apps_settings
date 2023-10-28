@@ -17,14 +17,16 @@
 package com.android.settings.privatespace;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 
 import com.android.settings.R;
 
@@ -32,8 +34,10 @@ import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.GlifLayout;
 
-/** Fragment educating about the usage of Private Space. */
-public class PrivateSpaceEducation extends Fragment {
+/** Fragment for the final screen shown on successful completion of private space setup. */
+public class SetupSuccessFragment extends Fragment {
+    private static final String TAG = "SetupSuccessFragment";
+
     @Override
     public View onCreateView(
             LayoutInflater inflater,
@@ -41,42 +45,43 @@ public class PrivateSpaceEducation extends Fragment {
             @Nullable Bundle savedInstanceState) {
         GlifLayout rootView =
                 (GlifLayout)
-                        inflater.inflate(R.layout.privatespace_education_screen, container, false);
+                        inflater.inflate(R.layout.privatespace_setup_success, container, false);
         final FooterBarMixin mixin = rootView.getMixin(FooterBarMixin.class);
         mixin.setPrimaryButton(
                 new FooterButton.Builder(getContext())
-                        .setText(R.string.privatespace_setup_button_label)
-                        .setListener(onSetup())
+                        .setText(R.string.privatespace_done_label)
+                        .setListener(onClickNext())
                         .setButtonType(FooterButton.ButtonType.NEXT)
                         .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Primary)
                         .build());
-        mixin.setSecondaryButton(
-                new FooterButton.Builder(getContext())
-                        .setText(R.string.privatespace_cancel_label)
-                        .setListener(onCancel())
-                        .setButtonType(FooterButton.ButtonType.CANCEL)
-                        .setTheme(
-                                androidx.appcompat.R.style
-                                        .Base_TextAppearance_AppCompat_Widget_Button)
-                        .build());
+        OnBackPressedCallback callback =
+                new OnBackPressedCallback(true /* enabled by default */) {
+                    @Override
+                    public void handleOnBackPressed() {
+                        // Handle the back button event. We intentionally don't want to allow back
+                        // button to work in this screen during the setup flow.
+                    }
+                };
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
 
         return rootView;
     }
 
-    private View.OnClickListener onSetup() {
+    private View.OnClickListener onClickNext() {
         return v -> {
-            NavHostFragment.findNavController(PrivateSpaceEducation.this)
-                                        .navigate(R.id.action_education_to_auto_advance);
-
-        };
-    }
-
-    private View.OnClickListener onCancel() {
-        return v -> {
+            accessPrivateSpaceToast();
+            // TODO: Replace with the intent to launch PS/PS Launch Settings
+            Intent startMain = new Intent(Intent.ACTION_MAIN);
+            startMain.addCategory(Intent.CATEGORY_HOME);
+            startActivity(startMain);
             Activity activity = getActivity();
             if (activity != null) {
                 activity.finish();
             }
         };
+    }
+
+    private void accessPrivateSpaceToast() {
+        Toast.makeText(getContext(), R.string.scrolldown_to_access, Toast.LENGTH_SHORT).show();
     }
 }
