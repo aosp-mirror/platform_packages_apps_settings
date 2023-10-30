@@ -16,18 +16,12 @@
 
 package com.android.settings.notification;
 
-import static android.service.notification.NotificationAssistantService.ACTION_NOTIFICATION_ASSISTANT_DETAIL_SETTINGS;
-
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -35,24 +29,19 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.Application;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
-import android.os.UserManager;
 import android.provider.Settings;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreferenceCompat;
+import androidx.preference.TwoStatePreference;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.testutils.shadow.ShadowSecureSettings;
-import com.android.settingslib.PrimarySwitchPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -61,12 +50,7 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 @RunWith(RobolectricTestRunner.class)
@@ -86,27 +70,19 @@ public class NotificationAssistantPreferenceControllerTest {
     private FragmentTransaction mFragmentTransaction;
     @Mock
     private NotificationBackend mBackend;
-    @Mock
-    private UserManager mUserManager;
-    @Mock
-    private PackageManager mPackageManager;
     private NotificationAssistantPreferenceController mPreferenceController;
     ComponentName mNASComponent = new ComponentName("pkgname", "clsname");
-    private PrimarySwitchPreference mPreference;
-    private ShadowApplication mShadowApplication;
+    private TwoStatePreference mPreference;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(ApplicationProvider.getApplicationContext());
-        mPreference = spy(new PrimarySwitchPreference(mContext));
-        mShadowApplication = ShadowApplication.getInstance();
-        mShadowApplication.setSystemService(Context.USER_SERVICE, mUserManager);
+        mPreference = spy(new SwitchPreferenceCompat(mContext));
         doReturn(mContext).when(mFragment).getContext();
         when(mFragment.getFragmentManager()).thenReturn(mFragmentManager);
         when(mFragmentManager.beginTransaction()).thenReturn(mFragmentTransaction);
         when(mBackend.getDefaultNotificationAssistant()).thenReturn(mNASComponent);
-        when(mContext.getPackageManager()).thenReturn(mPackageManager);
         mPreferenceController = new NotificationAssistantPreferenceController(mContext);
         mPreferenceController.setBackend(mBackend);
         mPreferenceController.setFragment(mFragment);
@@ -117,19 +93,6 @@ public class NotificationAssistantPreferenceControllerTest {
         mPreference.setKey(NotificationAssistantPreferenceController.KEY_NAS);
         screen.addPreference(mPreference);
         mPreferenceController.displayPreference(screen);
-
-        when(mUserManager.getProfileIds(eq(0), anyBoolean())).thenReturn(new int[] {0, 10});
-        when(mUserManager.getProfileIds(eq(20), anyBoolean())).thenReturn(new int[] {20});
-
-        ActivityInfo activityInfo1 = new ActivityInfo();
-        activityInfo1.packageName = "pkgname";
-        activityInfo1.name = "name";
-        ResolveInfo resolveInfo1 = new ResolveInfo();
-        resolveInfo1.activityInfo = activityInfo1;
-        List<ResolveInfo> resolvers1 = new ArrayList<>();
-        resolvers1.add(resolveInfo1);
-        when(mPackageManager.queryIntentActivities(any(Intent.class), any()))
-                .thenReturn(resolvers1);
     }
 
     @Test
