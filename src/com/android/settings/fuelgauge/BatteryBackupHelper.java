@@ -268,7 +268,7 @@ public final class BatteryBackupHelper implements BackupHelper {
         // Start to restore the app optimization mode data.
         final int restoreCount = restoreOptimizationMode(mOptimizationModeBytes);
         if (restoreCount > 0) {
-            BatterySettingsMigrateChecker.verifyOptimizationModes(mContext);
+            BatterySettingsMigrateChecker.verifyBatteryOptimizeModes(mContext);
         }
         mOptimizationModeBytes = null; // clear data
     }
