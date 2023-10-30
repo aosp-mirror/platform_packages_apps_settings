@@ -30,7 +30,10 @@ import com.android.settingslib.spa.widget.button.ActionButtons
 /**
  * @param featureFlags can be overridden in tests
  */
-fun AppButtons(packageInfoPresenter: PackageInfoPresenter, featureFlags: FeatureFlags = FeatureFlagsImpl()) {
+fun AppButtons(
+    packageInfoPresenter: PackageInfoPresenter,
+    featureFlags: FeatureFlags = FeatureFlagsImpl()
+) {
     if (remember(packageInfoPresenter) { packageInfoPresenter.isMainlineModule() }) return
     val presenter = remember { AppButtonsPresenter(packageInfoPresenter, featureFlags) }
     ActionButtons(actionButtons = presenter.getActionButtons())
@@ -49,6 +52,7 @@ private class AppButtonsPresenter(
     private val appUninstallButton = AppUninstallButton(packageInfoPresenter)
     private val appClearButton = AppClearButton(packageInfoPresenter)
     private val appForceStopButton = AppForceStopButton(packageInfoPresenter)
+    private val appArchiveButton = AppArchiveButton(packageInfoPresenter)
 
     @Composable
     fun getActionButtons() =
@@ -58,7 +62,11 @@ private class AppButtonsPresenter(
 
     @Composable
     private fun getActionButtons(app: ApplicationInfo): List<ActionButton> = listOfNotNull(
-        if (featureFlags.archiving()) null else appLaunchButton.getActionButton(app),
+        if (featureFlags.archiving()) {
+            appArchiveButton.getActionButton(app)
+        } else {
+            appLaunchButton.getActionButton(app)
+        },
         appInstallButton.getActionButton(app),
         appDisableButton.getActionButton(app),
         appUninstallButton.getActionButton(app),
