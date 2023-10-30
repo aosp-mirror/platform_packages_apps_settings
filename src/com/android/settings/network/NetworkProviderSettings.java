@@ -173,10 +173,6 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     private static final String EXTRA_START_CONNECT_SSID = "wifi_start_connect_ssid";
     private String mOpenSsid;
 
-    private static boolean isVerboseLoggingEnabled() {
-        return WifiPickerTracker.isVerboseLoggingEnabled();
-    }
-
     private boolean mIsViewLoading;
     @VisibleForTesting
     final Runnable mRemoveLoadingRunnable = () -> {
@@ -798,7 +794,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         }
         final int wifiState = mWifiPickerTracker.getWifiState();
 
-        if (isVerboseLoggingEnabled()) {
+        if (mWifiPickerTracker.isVerboseLoggingEnabled()) {
             Log.i(TAG, "onWifiStateChanged called with wifi state: " + wifiState);
         }
 
