@@ -54,14 +54,6 @@
         settings:keywords="@string/keywords_wifi_display_settings"/>
 
     <com.android.settingslib.RestrictedPreference
-        android:fragment="com.android.settings.nfc.AndroidBeam"
-        android:key="android_beam_settings"
-        android:title="@string/android_beam_settings_title"
-        settings:controller="com.android.settings.nfc.AndroidBeamPreferenceController"
-        android:icon="@drawable/ic_android"
-        android:order="-5"/>
-
-    <com.android.settingslib.RestrictedPreference
         android:key="connected_device_printing"
         android:title="@string/print_settings"
         android:summary="@string/summary_placeholder"
