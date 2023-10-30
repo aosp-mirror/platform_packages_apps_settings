@@ -16,7 +16,8 @@
 
 package com.android.settings.privatespace;
 
-import static com.android.settings.privatespace.PrivateSpaceSetupActivity.SET_LOCK_ACTION;
+import static com.android.settings.privatespace.PrivateSpaceSetupActivity.ACCOUNT_LOGIN_ACTION;
+import static com.android.settings.privatespace.PrivateSpaceSetupActivity.EXTRA_ACTION_TYPE;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -134,7 +135,8 @@ public class AutoAdvanceSetupFragment extends Fragment {
     private void startActivityInPrivateUser(UserHandle userHandle) {
         /* Start new activity in private profile which is needed to set private profile lock */
         Intent intent = new Intent(getContext(), PrivateProfileContextHelperActivity.class);
-        getActivity().startActivityForResultAsUser(intent, SET_LOCK_ACTION, userHandle);
+        intent.putExtra(EXTRA_ACTION_TYPE, ACCOUNT_LOGIN_ACTION);
+        getActivity().startActivityForResultAsUser(intent, ACCOUNT_LOGIN_ACTION, userHandle);
     }
 
     private void showPrivateSpaceErrorScreen() {

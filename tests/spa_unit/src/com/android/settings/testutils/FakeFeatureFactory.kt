@@ -41,6 +41,7 @@ import com.android.settings.overlay.DockUpdaterFeatureProvider
 import com.android.settings.overlay.FeatureFactory
 import com.android.settings.overlay.SurveyFeatureProvider
 import com.android.settings.panel.PanelFeatureProvider
+import com.android.settings.privatespace.PrivateSpaceLoginFeatureProvider
 import com.android.settings.search.SearchFeatureProvider
 import com.android.settings.security.SecurityFeatureProvider
 import com.android.settings.security.SecuritySettingsFeatureProvider
@@ -142,5 +143,7 @@ class FakeFeatureFactory : FeatureFactory() {
     override val stylusFeatureProvider: StylusFeatureProvider
         get() = TODO("Not yet implemented")
     override val fastPairFeatureProvider: FastPairFeatureProvider
+        get() = TODO("Not yet implemented")
+    override val privateSpaceLoginFeatureProvider: PrivateSpaceLoginFeatureProvider
         get() = TODO("Not yet implemented")
 }
