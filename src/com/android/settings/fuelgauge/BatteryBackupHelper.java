@@ -342,7 +342,7 @@ public final class BatteryBackupHelper implements BackupHelper {
 
     private boolean isSystemOrDefaultApp(String packageName, int uid) {
         return BatteryOptimizeUtils.isSystemOrDefaultApp(
-                getPowerAllowlistBackend(), packageName, uid);
+                mContext, getPowerAllowlistBackend(), packageName, uid);
     }
 
     private ArraySet<ApplicationInfo> getInstalledApplications() {

@@ -56,12 +56,21 @@ public final class BatterySettingsMigrateChecker extends BroadcastReceiver {
     /** Avoid users set important apps into the unexpected battery optimize modes */
     static void verifyBatteryOptimizeModes(Context context) {
         Log.d(TAG, "invoke verifyOptimizationModes()");
-        verifyBatteryOptimizeModes(context,
+        verifyBatteryOptimizeModeApps(
+                context,
+                BatteryOptimizeUtils.MODE_OPTIMIZED,
                 BatteryOptimizeUtils.getForceBatteryOptimizeModeList(context));
+        verifyBatteryOptimizeModeApps(
+                context,
+                BatteryOptimizeUtils.MODE_UNRESTRICTED,
+                BatteryOptimizeUtils.getForceBatteryUnrestrictModeList(context));
     }
 
     @VisibleForTesting
-    static void verifyBatteryOptimizeModes(Context context, List<String> allowList) {
+    static void verifyBatteryOptimizeModeApps(
+            Context context,
+            @BatteryOptimizeUtils.OptimizationMode int optimizationMode,
+            List<String> allowList) {
         allowList.forEach(packageName -> {
             final BatteryOptimizeUtils batteryOptimizeUtils =
                     BatteryBackupHelper.newBatteryOptimizeUtils(context, packageName,
@@ -69,10 +78,10 @@ public final class BatterySettingsMigrateChecker extends BroadcastReceiver {
             if (batteryOptimizeUtils == null) {
                 return;
             }
-            if (batteryOptimizeUtils.getAppOptimizationMode() !=
-                    BatteryOptimizeUtils.MODE_OPTIMIZED) {
-                Log.w(TAG, "Reset optimization mode for: " + packageName);
-                batteryOptimizeUtils.setAppUsageState(BatteryOptimizeUtils.MODE_OPTIMIZED,
+            if (batteryOptimizeUtils.getAppOptimizationMode() != optimizationMode) {
+                Log.w(TAG, "Reset " + packageName + " battery mode into " + optimizationMode);
+                batteryOptimizeUtils.setAppUsageState(
+                        optimizationMode,
                         BatteryOptimizeHistoricalLogEntry.Action.FORCE_RESET);
             }
         });

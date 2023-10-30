@@ -45,6 +45,10 @@ public class BatteryOptimizeUtils {
     private static final String TAG = "BatteryOptimizeUtils";
     private static final String UNKNOWN_PACKAGE = "unknown";
 
+    // Avoid reload the data again since it is predefined in the resource/config.
+    private static List<String> sBatteryOptimizeModeList = null;
+    private static List<String> sBatteryUnrestrictModeList = null;
+
     @VisibleForTesting AppOpsManager mAppOpsManager;
     @VisibleForTesting BatteryUtils mBatteryUtils;
     @VisibleForTesting PowerAllowlistBackend mPowerAllowListBackend;
@@ -139,7 +143,7 @@ public class BatteryOptimizeUtils {
      */
     public boolean isSystemOrDefaultApp() {
         mPowerAllowListBackend.refreshList();
-        return isSystemOrDefaultApp(mPowerAllowListBackend, mPackageName, mUid);
+        return isSystemOrDefaultApp(mContext, mPowerAllowListBackend, mPackageName, mUid);
     }
 
     /**
@@ -191,7 +195,8 @@ public class BatteryOptimizeUtils {
             // Ignores default optimized/unknown state or system/default apps.
             if (optimizationMode == MODE_OPTIMIZED
                     || optimizationMode == MODE_UNKNOWN
-                    || isSystemOrDefaultApp(allowlistBackend, info.packageName, info.uid)) {
+                    || isSystemOrDefaultApp(
+                            context, allowlistBackend, info.packageName, info.uid)) {
                 continue;
             }
 
@@ -211,14 +216,32 @@ public class BatteryOptimizeUtils {
     }
 
     static boolean isSystemOrDefaultApp(
-            PowerAllowlistBackend powerAllowlistBackend, String packageName, int uid) {
+            Context context,
+            PowerAllowlistBackend powerAllowlistBackend,
+            String packageName,
+            int uid) {
         return powerAllowlistBackend.isSysAllowlisted(packageName)
+                // Always forced unrestricted apps are one type of system important apps.
+                || getForceBatteryUnrestrictModeList(context).contains(packageName)
                 || powerAllowlistBackend.isDefaultActiveApp(packageName, uid);
     }
 
     static List<String> getForceBatteryOptimizeModeList(Context context) {
-        return Arrays.asList(context.getResources().getStringArray(
-                R.array.config_force_battery_optimize_mode_apps));
+        if (sBatteryOptimizeModeList == null) {
+            sBatteryOptimizeModeList = Arrays.asList(
+                    context.getResources().getStringArray(
+                            R.array.config_force_battery_optimize_mode_apps));
+        }
+        return sBatteryOptimizeModeList;
+    }
+
+    static List<String> getForceBatteryUnrestrictModeList(Context context) {
+        if (sBatteryUnrestrictModeList == null) {
+            sBatteryUnrestrictModeList = Arrays.asList(
+                    context.getResources().getStringArray(
+                            R.array.config_force_battery_unrestrict_mode_apps));
+        }
+        return sBatteryUnrestrictModeList;
     }
 
     private static void setAppUsageStateInternal(
