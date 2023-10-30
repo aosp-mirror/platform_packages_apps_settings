@@ -50,17 +50,18 @@ public final class BatterySettingsMigrateChecker extends BroadcastReceiver {
     static void verifyConfiguration(Context context) {
         context = context.getApplicationContext();
         verifySaverConfiguration(context);
-        verifyOptimizationModes(context);
+        verifyBatteryOptimizeModes(context);
     }
 
     /** Avoid users set important apps into the unexpected battery optimize modes */
-    static void verifyOptimizationModes(Context context) {
+    static void verifyBatteryOptimizeModes(Context context) {
         Log.d(TAG, "invoke verifyOptimizationModes()");
-        verifyOptimizationModes(context, BatteryOptimizeUtils.getAllowList(context));
+        verifyBatteryOptimizeModes(context,
+                BatteryOptimizeUtils.getForceBatteryOptimizeModeList(context));
     }
 
     @VisibleForTesting
-    static void verifyOptimizationModes(Context context, List<String> allowList) {
+    static void verifyBatteryOptimizeModes(Context context, List<String> allowList) {
         allowList.forEach(packageName -> {
             final BatteryOptimizeUtils batteryOptimizeUtils =
                     BatteryBackupHelper.newBatteryOptimizeUtils(context, packageName,

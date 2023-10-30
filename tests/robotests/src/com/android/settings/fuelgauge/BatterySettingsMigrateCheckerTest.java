@@ -151,11 +151,11 @@ public final class BatterySettingsMigrateCheckerTest {
     }
 
     @Test
-    public void verifyOptimizationModes_inAllowList_resetOptimizationMode() throws Exception {
+    public void verifyBatteryOptimizeModes_inAllowList_resetOptimizationMode() throws Exception {
         doReturn(BatteryOptimizeUtils.MODE_RESTRICTED).when(mBatteryOptimizeUtils)
                 .getAppOptimizationMode();
 
-        mBatterySettingsMigrateChecker.verifyOptimizationModes(
+        mBatterySettingsMigrateChecker.verifyBatteryOptimizeModes(
                 mContext, Arrays.asList(PACKAGE_NAME));
 
         final InOrder inOrder = inOrder(mBatteryOptimizeUtils);
@@ -166,22 +166,22 @@ public final class BatterySettingsMigrateCheckerTest {
     }
 
     @Test
-    public void verifyOptimizationModes_optimizedMode_noAction() throws Exception {
+    public void verifyBatteryOptimizeModes_optimizedMode_noAction() throws Exception {
         doReturn(BatteryOptimizeUtils.MODE_OPTIMIZED).when(mBatteryOptimizeUtils)
                 .getAppOptimizationMode();
 
-        mBatterySettingsMigrateChecker.verifyOptimizationModes(
+        mBatterySettingsMigrateChecker.verifyBatteryOptimizeModes(
                 mContext, Arrays.asList(PACKAGE_NAME));
 
         verify(mBatteryOptimizeUtils, never()).setAppUsageState(anyInt(), any());
     }
 
     @Test
-    public void verifyOptimizationModes_notInAllowList_noAction() throws Exception {
+    public void verifyBatteryOptimizeModes_notInAllowList_noAction() throws Exception {
         doReturn(BatteryOptimizeUtils.MODE_RESTRICTED).when(mBatteryOptimizeUtils)
                 .getAppOptimizationMode();
 
-        mBatterySettingsMigrateChecker.verifyOptimizationModes(
+        mBatterySettingsMigrateChecker.verifyBatteryOptimizeModes(
                 mContext, new ArrayList<String>());
 
         verifyNoInteractions(mBatteryOptimizeUtils);

@@ -130,7 +130,7 @@ public class BatteryOptimizeUtils {
 
     /** Return {@code true} if it is disabled for default optimized mode only. */
     public boolean isDisabledForOptimizeModeOnly() {
-        return getAllowList(mContext).contains(mPackageName)
+        return getForceBatteryOptimizeModeList(mContext).contains(mPackageName)
                 || mBatteryUtils.getPackageUid(mPackageName) == BatteryUtils.UID_NULL;
     }
 
@@ -216,9 +216,9 @@ public class BatteryOptimizeUtils {
                 || powerAllowlistBackend.isDefaultActiveApp(packageName, uid);
     }
 
-    static List<String> getAllowList(Context context) {
+    static List<String> getForceBatteryOptimizeModeList(Context context) {
         return Arrays.asList(context.getResources().getStringArray(
-                R.array.config_disable_optimization_mode_apps));
+                R.array.config_force_battery_optimize_mode_apps));
     }
 
     private static void setAppUsageStateInternal(
