@@ -98,6 +98,14 @@ public class ChooseLockPattern extends SettingsActivity {
         return modIntent;
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (!isChangingConfigurations()) {
+            finish();
+        }
+    }
+
     public static class IntentBuilder {
         private final Intent mIntent;
 
