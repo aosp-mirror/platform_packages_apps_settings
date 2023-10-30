@@ -151,12 +151,15 @@ public final class BatterySettingsMigrateCheckerTest {
     }
 
     @Test
-    public void verifyBatteryOptimizeModes_inAllowList_resetOptimizationMode() throws Exception {
+    public void verifyBatteryOptimizeModeApps_inAllowList_resetOptimizationMode()
+            throws Exception {
         doReturn(BatteryOptimizeUtils.MODE_RESTRICTED).when(mBatteryOptimizeUtils)
                 .getAppOptimizationMode();
 
-        mBatterySettingsMigrateChecker.verifyBatteryOptimizeModes(
-                mContext, Arrays.asList(PACKAGE_NAME));
+        mBatterySettingsMigrateChecker.verifyBatteryOptimizeModeApps(
+                mContext,
+                BatteryOptimizeUtils.MODE_OPTIMIZED,
+                Arrays.asList(PACKAGE_NAME));
 
         final InOrder inOrder = inOrder(mBatteryOptimizeUtils);
         inOrder.verify(mBatteryOptimizeUtils).getAppOptimizationMode();
@@ -166,23 +169,27 @@ public final class BatterySettingsMigrateCheckerTest {
     }
 
     @Test
-    public void verifyBatteryOptimizeModes_optimizedMode_noAction() throws Exception {
+    public void verifyBatteryOptimizeModeApps_optimizedMode_noAction() throws Exception {
         doReturn(BatteryOptimizeUtils.MODE_OPTIMIZED).when(mBatteryOptimizeUtils)
                 .getAppOptimizationMode();
 
-        mBatterySettingsMigrateChecker.verifyBatteryOptimizeModes(
-                mContext, Arrays.asList(PACKAGE_NAME));
+        mBatterySettingsMigrateChecker.verifyBatteryOptimizeModeApps(
+                mContext,
+                BatteryOptimizeUtils.MODE_OPTIMIZED,
+                Arrays.asList(PACKAGE_NAME));
 
         verify(mBatteryOptimizeUtils, never()).setAppUsageState(anyInt(), any());
     }
 
     @Test
-    public void verifyBatteryOptimizeModes_notInAllowList_noAction() throws Exception {
+    public void verifyBatteryOptimizeModeApps_notInAllowList_noAction() throws Exception {
         doReturn(BatteryOptimizeUtils.MODE_RESTRICTED).when(mBatteryOptimizeUtils)
                 .getAppOptimizationMode();
 
-        mBatterySettingsMigrateChecker.verifyBatteryOptimizeModes(
-                mContext, new ArrayList<String>());
+        mBatterySettingsMigrateChecker.verifyBatteryOptimizeModeApps(
+                mContext,
+                BatteryOptimizeUtils.MODE_OPTIMIZED,
+                new ArrayList<String>());
 
         verifyNoInteractions(mBatteryOptimizeUtils);
     }
