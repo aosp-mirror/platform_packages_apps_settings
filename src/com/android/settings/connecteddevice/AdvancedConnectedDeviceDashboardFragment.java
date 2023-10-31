@@ -17,12 +17,10 @@ package com.android.settings.connecteddevice;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.nfc.AndroidBeamPreferenceController;
 import com.android.settings.print.PrintSettingPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.uwb.UwbPreferenceController;
@@ -109,17 +107,6 @@ public class AdvancedConnectedDeviceDashboardFragment extends DashboardFragment 
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
                     sir.xmlResId = R.xml.connected_devices_advanced;
                     return Arrays.asList(sir);
-                }
-
-                @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    final List<String> keys = super.getNonIndexableKeys(context);
-                    PackageManager pm = context.getPackageManager();
-                    if (!pm.hasSystemFeature(PackageManager.FEATURE_NFC)) {
-                        keys.add(AndroidBeamPreferenceController.KEY_ANDROID_BEAM_SETTINGS);
-                    }
-
-                    return keys;
                 }
 
                 @Override
