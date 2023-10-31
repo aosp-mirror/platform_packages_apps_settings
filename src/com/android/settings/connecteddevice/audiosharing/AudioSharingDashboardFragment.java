@@ -75,6 +75,8 @@ public class AudioSharingDashboardFragment extends DashboardFragment {
         mMainSwitchBar = activity.getSwitchBar();
         mMainSwitchBar.setTitle(getText(R.string.audio_sharing_switch_title));
         mSwitchBarController = new AudioSharingSwitchBarController(activity, mMainSwitchBar);
+        mSwitchBarController.init(this);
+        getSettingsLifecycle().addObserver(mSwitchBarController);
         mMainSwitchBar.show();
     }
 }
