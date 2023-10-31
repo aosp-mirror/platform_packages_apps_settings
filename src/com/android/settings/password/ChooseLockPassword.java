@@ -219,13 +219,6 @@ public class ChooseLockPassword extends SettingsActivity {
         findViewById(R.id.content_parent).setFitsSystemWindows(false);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
     }
-    @Override
-    public void onPause() {
-        super.onPause();
-        if (!isChangingConfigurations()) {
-            finish();
-        }
-    }
 
     public static class ChooseLockPasswordFragment extends InstrumentedFragment
             implements OnEditorActionListener, TextWatcher, SaveAndFinishWorker.Listener {
