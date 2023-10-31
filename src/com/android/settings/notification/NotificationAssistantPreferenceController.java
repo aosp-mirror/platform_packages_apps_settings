@@ -18,44 +18,31 @@ package com.android.settings.notification;
 
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.os.UserHandle;
-import android.os.UserManager;
 import android.provider.Settings;
-import android.service.notification.NotificationAssistantService;
 
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
-import com.android.settingslib.PrimarySwitchPreference;
 
 import com.google.common.annotations.VisibleForTesting;
-
-import java.util.List;
 
 public class NotificationAssistantPreferenceController extends TogglePreferenceController {
     private static final String TAG = "NASPreferenceController";
     static final String KEY_NAS = "notification_assistant";
 
-    private final UserManager mUserManager;
-    private final PackageManager mPackageManager;
     private Fragment mFragment;
     private int mUserId = UserHandle.myUserId();
 
     @VisibleForTesting
     protected NotificationBackend mNotificationBackend;
     private ComponentName mDefaultNASComponent;
-    private Intent mNASSettingIntent;
 
     public NotificationAssistantPreferenceController(Context context) {
         super(context, KEY_NAS);
-        mUserManager = UserManager.get(context);
         mNotificationBackend = new NotificationBackend();
-        mPackageManager = context.getPackageManager();
         getDefaultNASIntent();
     }
 
@@ -118,12 +105,6 @@ public class NotificationAssistantPreferenceController extends TogglePreferenceC
     @VisibleForTesting
     void getDefaultNASIntent() {
         mDefaultNASComponent = mNotificationBackend.getDefaultNotificationAssistant();
-        if (mDefaultNASComponent != null) {
-            mNASSettingIntent = new Intent(
-                    NotificationAssistantService.ACTION_NOTIFICATION_ASSISTANT_DETAIL_SETTINGS);
-            mNASSettingIntent.setPackage(mDefaultNASComponent.getPackageName());
-            mNASSettingIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        }
     }
 
     @Override
@@ -136,7 +117,6 @@ public class NotificationAssistantPreferenceController extends TogglePreferenceC
         super.updateState(preference);
         if (mDefaultNASComponent == null) {
             preference.setEnabled(false);
-            ((PrimarySwitchPreference) preference).setSwitchEnabled(false);
         }
     }
 }

@@ -23,7 +23,6 @@ import android.content.Context;
 import android.nfc.NfcAdapter;
 import android.provider.SearchIndexableResource;
 
-import com.android.settings.nfc.AndroidBeamPreferenceController;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
 import com.android.settings.testutils.shadow.ShadowNfcAdapter;
 import com.android.settings.testutils.shadow.ShadowUserManager;
@@ -77,15 +76,5 @@ public class AdvancedConnectedDeviceDashboardFragmentTest {
     @Test
     public void testGetCategoryKey_returnCategoryDevice() {
         assertThat(mFragment.getCategoryKey()).isEqualTo(CategoryKey.CATEGORY_DEVICE);
-    }
-
-    @Test
-    public void testSearchIndexProvider_correctNonIndexables() {
-        mShadowNfcAdapter.setSecureNfcSupported(true);
-        final List<String> niks =
-                AdvancedConnectedDeviceDashboardFragment.SEARCH_INDEX_DATA_PROVIDER
-                        .getNonIndexableKeys(mContext);
-
-        assertThat(niks).contains(AndroidBeamPreferenceController.KEY_ANDROID_BEAM_SETTINGS);
     }
 }

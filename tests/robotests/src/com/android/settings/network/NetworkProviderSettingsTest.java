@@ -286,7 +286,8 @@ public class NetworkProviderSettingsTest {
 
     private void setUpForOnCreate() {
         final FragmentActivity activity = mock(FragmentActivity.class);
-        when(mNetworkProviderSettings.getActivity()).thenReturn(activity);
+        doReturn(activity).when(mNetworkProviderSettings).requireActivity();
+        doReturn(activity).when(mNetworkProviderSettings).getActivity();
         final Resources.Theme theme = mContext.getTheme();
         when(activity.getTheme()).thenReturn(theme);
         UserManager userManager = mock(UserManager.class);
@@ -484,59 +485,95 @@ public class NetworkProviderSettingsTest {
         when(controller.getConfig()).thenReturn(config);
         WifiDialog2.WifiDialog2Listener listener = mock(WifiDialog2.WifiDialog2Listener.class);
         final WifiDialog2 wifiDialog2 = spy(new WifiDialog2(mContext, listener, mWifiEntry, mode));
-        when(wifiDialog2.getController()).thenReturn(controller);
+        doReturn(controller).when(wifiDialog2).getController();
         return wifiDialog2;
     }
 
-    @Test
-    public void onCreateOptionsMenu_isGuest_neverAddFixConnectivityMenu() {
-        mNetworkProviderSettings.mIsGuest = true;
+    private void mockMenuConditions(boolean isGuest, boolean isAirplaneModeOn, boolean isWifiOn) {
+        mNetworkProviderSettings.mIsGuest = isGuest;
+        doReturn(isAirplaneModeOn).when(mAirplaneModeEnabler).isAirplaneModeOn();
+        when(mMockWifiPickerTracker.getWifiState()).thenReturn(
+                isWifiOn ? WifiManager.WIFI_STATE_ENABLED : WifiManager.WIFI_STATE_DISABLED);
 
-        mNetworkProviderSettings.onCreateOptionsMenu(mMenu, null /* inflater */);
+        doReturn(mMenuItem).when(mMenu).findItem(MENU_FIX_CONNECTIVITY);
+        mNetworkProviderSettings.mAirplaneModeEnabler = mAirplaneModeEnabler;
+        mNetworkProviderSettings.mWifiPickerTracker = mMockWifiPickerTracker;
 
-        verify(mMenu, never()).add(anyInt(), eq(MENU_FIX_CONNECTIVITY), anyInt(), anyInt());
     }
 
     @Test
-    public void onCreateOptionsMenu_isNotGuest_addFixConnectivityMenu() {
-        mNetworkProviderSettings.mIsGuest = false;
+    public void onCreateOptionsMenu_isGuest_hideFixConnectivityMenu() {
+        setUpForOnCreate();
+        mNetworkProviderSettings.onCreate(null);
+        mockMenuConditions(/*isGuest=*/ true, /*isAirplaneModeOn=*/ false, /*isWifiOn=*/ true);
 
-        mNetworkProviderSettings.onCreateOptionsMenu(mMenu, null /* inflater */);
+        mNetworkProviderSettings.mMenuProvider.onPrepareMenu(mMenu);
 
-        verify(mMenu).add(anyInt(), eq(MENU_FIX_CONNECTIVITY), anyInt(), anyInt());
+        verify(mMenuItem).setVisible(false);
+
     }
 
     @Test
-    public void onCreateOptionsMenu_isAirplaneModeOn_neverAddFixConnectivityMenu() {
-        doReturn(true).when(mAirplaneModeEnabler).isAirplaneModeOn();
+    public void onCreateOptionsMenu_isNotGuest_showFixConnectivityMenu() {
+        setUpForOnCreate();
+        mNetworkProviderSettings.onCreate(null);
+        mockMenuConditions(/*isGuest=*/ false, /*isAirplaneModeOn=*/ false, /*isWifiOn=*/ true);
 
-        mNetworkProviderSettings.onCreateOptionsMenu(mMenu, null /* inflater */);
+        mNetworkProviderSettings.mMenuProvider.onPrepareMenu(mMenu);
 
-        verify(mMenu, never()).add(anyInt(), eq(MENU_FIX_CONNECTIVITY), anyInt(), anyInt());
+        verify(mMenuItem).setVisible(true);
+
     }
 
     @Test
-    public void onCreateOptionsMenu_isNotAirplaneModeOn_addFixConnectivityMenu() {
-        doReturn(false).when(mAirplaneModeEnabler).isAirplaneModeOn();
+    public void onCreateOptionsMenu_isAirplaneModeOnAndWifiOff_hideFixConnectivityMenu() {
+        setUpForOnCreate();
+        mNetworkProviderSettings.onCreate(null);
+        mockMenuConditions(/*isGuest=*/ false, /*isAirplaneModeOn=*/ true, /*isWifiOn=*/ false);
 
-        mNetworkProviderSettings.onCreateOptionsMenu(mMenu, null /* inflater */);
+        mNetworkProviderSettings.mMenuProvider.onPrepareMenu(mMenu);
 
-        verify(mMenu).add(anyInt(), eq(MENU_FIX_CONNECTIVITY), anyInt(), anyInt());
+        verify(mMenuItem).setVisible(false);
+    }
+
+    @Test
+    public void onCreateOptionsMenu_isAirplaneModeOnAndWifiOn_showFixConnectivityMenu() {
+        setUpForOnCreate();
+        mNetworkProviderSettings.onCreate(null);
+        mockMenuConditions(/*isGuest=*/ false, /*isAirplaneModeOn=*/ true, /*isWifiOn=*/ true);
+
+        mNetworkProviderSettings.mMenuProvider.onPrepareMenu(mMenu);
+
+        verify(mMenuItem).setVisible(true);
+    }
+
+    @Test
+    public void onCreateOptionsMenu_isNotAirplaneModeOn_showFixConnectivityMenu() {
+        setUpForOnCreate();
+        mNetworkProviderSettings.onCreate(null);
+        mockMenuConditions(/*isGuest=*/ false, /*isAirplaneModeOn=*/ false, /*isWifiOn=*/ true);
+
+        mNetworkProviderSettings.mMenuProvider.onPrepareMenu(mMenu);
+
+        verify(mMenuItem).setVisible(true);
     }
 
     @Test
     public void onOptionsItemSelected_fixConnectivity_restartInternet() {
-        mNetworkProviderSettings.mInternetResetHelper = mInternetResetHelper;
+        setUpForOnCreate();
         doReturn(false).when(mNetworkProviderSettings).isPhoneOnCall();
-        doReturn(NetworkProviderSettings.MENU_FIX_CONNECTIVITY).when(mMenuItem).getItemId();
+        doReturn(MENU_FIX_CONNECTIVITY).when(mMenuItem).getItemId();
+        mNetworkProviderSettings.onCreate(null);
+        mNetworkProviderSettings.mInternetResetHelper = mInternetResetHelper;
 
-        mNetworkProviderSettings.onOptionsItemSelected(mMenuItem);
+        mNetworkProviderSettings.mMenuProvider.onMenuItemSelected(mMenuItem);
 
         verify(mInternetResetHelper).restart();
     }
 
     @Test
     public void onAirplaneModeChanged_apmIsOn_showApmMsg() {
+        setUpForOnCreate();
         mNetworkProviderSettings.onAirplaneModeChanged(true);
 
         verify(mAirplaneModeMsgPreference).setVisible(true);
@@ -544,6 +581,7 @@ public class NetworkProviderSettingsTest {
 
     @Test
     public void onAirplaneModeChanged_apmIsOff_hideApmMsg() {
+        setUpForOnCreate();
         mNetworkProviderSettings.onAirplaneModeChanged(false);
 
         verify(mAirplaneModeMsgPreference).setVisible(false);

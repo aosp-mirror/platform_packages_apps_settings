@@ -47,6 +47,9 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import androidx.lifecycle.Lifecycle;
+import androidx.test.core.app.ActivityScenario;
+
 import com.android.internal.widget.LockscreenCredential;
 import com.android.settings.R;
 import com.android.settings.password.ChooseLockPassword.ChooseLockPasswordFragment;
@@ -515,16 +518,31 @@ public class ChooseLockPasswordTest {
         assertThat(pinAutoConfirmOption.isChecked()).isFalse();
     }
 
+    @Test
+    public void activity_dismisses_InBackground() {
+        ActivityScenario<ChooseLockPassword> scenario =
+                ActivityScenario.launchActivityForResult(getLockPasswordIntent());
+        scenario.moveToState(Lifecycle.State.RESUMED);
+        scenario.moveToState(Lifecycle.State.CREATED);
+        assertThat(scenario.getResult()).isNotNull();
+    }
+
     private ChooseLockPassword setupActivityWithPinTypeAndDefaultPolicy() {
         PasswordPolicy policy = new PasswordPolicy();
         policy.quality = PASSWORD_QUALITY_UNSPECIFIED;
 
         return buildChooseLockPasswordActivity(
-                new IntentBuilder(application)
-                        .setUserId(UserHandle.myUserId())
-                        .setPasswordType(PASSWORD_QUALITY_NUMERIC)
-                        .setPasswordRequirement(PASSWORD_COMPLEXITY_NONE, policy.getMinMetrics())
-                        .build());
+                getLockPasswordIntent());
+    }
+
+    private Intent getLockPasswordIntent() {
+        PasswordPolicy policy = new PasswordPolicy();
+        policy.quality = PASSWORD_QUALITY_UNSPECIFIED;
+        return new IntentBuilder(application)
+                .setUserId(UserHandle.myUserId())
+                .setPasswordType(PASSWORD_QUALITY_NUMERIC)
+                .setPasswordRequirement(PASSWORD_COMPLEXITY_NONE, policy.getMinMetrics())
+                .build();
     }
 
     private ChooseLockPassword buildChooseLockPasswordActivity(Intent intent) {
