@@ -62,7 +62,7 @@ public class ShortcutPreference extends Preference {
     ShortcutPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         setLayoutResource(R.layout.accessibility_shortcut_secondary_action);
-        setWidgetLayoutResource(com.android.settingslib.R.layout.preference_widget_primary_switch);
+        setWidgetLayoutResource(androidx.preference.R.layout.preference_widget_switch_compat);
         setIconSpaceReserved(false);
         // Treat onSettingsClicked as this preference's click.
         setOnPreferenceClickListener(preference -> {
@@ -89,7 +89,7 @@ public class ShortcutPreference extends Preference {
         }
 
         CompoundButton switchWidget =
-                holder.itemView.findViewById(com.android.settingslib.R.id.switchWidget);
+                holder.itemView.findViewById(androidx.preference.R.id.switchWidget);
         if (switchWidget != null) {
             // Consumes move events to ignore drag actions.
             switchWidget.setOnTouchListener((v, event) -> {
