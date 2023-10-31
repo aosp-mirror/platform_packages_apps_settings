@@ -19,4 +19,10 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/audio_sharing_title">
 
+    <Preference
+        android:key="calls_and_alarms"
+        android:title="@string/calls_and_alarms_device_title"
+        android:icon="@drawable/ic_audio_calls_and_alarms"
+        settings:controller="com.android.settings.connecteddevice.audiosharing.CallsAndAlarmsPreferenceController"
+        android:summary=""/>
 </PreferenceScreen>

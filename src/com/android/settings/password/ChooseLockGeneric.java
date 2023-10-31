@@ -201,6 +201,14 @@ public class ChooseLockGeneric extends SettingsActivity {
         }
 
         @Override
+        public void onPause() {
+            super.onPause();
+            if (!getActivity().isChangingConfigurations() && !mWaitingForConfirmation) {
+                finish();
+            }
+        }
+
+        @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             final Activity activity = getActivity();

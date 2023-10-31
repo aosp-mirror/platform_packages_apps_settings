@@ -49,9 +49,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.view.MenuProvider;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
@@ -249,6 +251,8 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     ConnectedEthernetNetworkController mConnectedEthernetNetworkController;
     @VisibleForTesting
     FooterPreference mWifiStatusMessagePreference;
+    @VisibleForTesting
+    MenuProvider mMenuProvider;
 
     /**
      * Mobile networks list for provider model
@@ -306,6 +310,44 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
 
         mIsRestricted = isUiRestricted();
         updateUserType();
+
+        mMenuProvider = new MenuProvider() {
+            @Override
+            public void onCreateMenu(@NonNull Menu menu, @NonNull MenuInflater menuInflater) {
+                MenuItem fixConnectivityItem = menu.add(0, MENU_FIX_CONNECTIVITY, 0,
+                        R.string.fix_connectivity);
+                fixConnectivityItem.setIcon(R.drawable.ic_repair_24dp);
+                fixConnectivityItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+            }
+
+            @Override
+            public boolean onMenuItemSelected(@NonNull MenuItem menuItem) {
+                if (menuItem.getItemId() == MENU_FIX_CONNECTIVITY) {
+                    if (isPhoneOnCall()) {
+                        showResetInternetDialog();
+                        return true;
+                    }
+                    fixConnectivity();
+                    return true;
+                }
+                return false;
+            }
+
+            @Override
+            public void onPrepareMenu(@NonNull Menu menu) {
+                MenuProvider.super.onPrepareMenu(menu);
+
+                boolean isWifiEnabled = mWifiPickerTracker != null
+                        && mWifiPickerTracker.getWifiState() == WifiManager.WIFI_STATE_ENABLED;
+                boolean isAirplaneModeOn =
+                        mAirplaneModeEnabler != null && mAirplaneModeEnabler.isAirplaneModeOn();
+                MenuItem fixConnectivityItem = menu.findItem(MENU_FIX_CONNECTIVITY);
+                if (fixConnectivityItem == null) {
+                    return;
+                }
+                fixConnectivityItem.setVisible(!mIsGuest && (!isAirplaneModeOn || isWifiEnabled));
+            }
+        };
     }
 
     private void updateUserType() {
@@ -425,7 +467,6 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
                 }
             }
         };
-        setHasOptionsMenu(true);
 
         if (savedInstanceState != null) {
             mDialogMode = savedInstanceState.getInt(SAVE_DIALOG_MODE);
@@ -444,12 +485,13 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         if (mNetworkMobileProviderController != null) {
             mNetworkMobileProviderController.setWifiPickerTrackerHelper(mWifiPickerTrackerHelper);
         }
+
+        requireActivity().addMenuProvider(mMenuProvider);
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
     }
 
     @Override
@@ -806,6 +848,9 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
             Log.w(TAG, "onWifiStateChanged shouldn't run when fragment is finishing or destroyed");
             return;
         }
+
+        // update the menu item
+        requireActivity().invalidateMenu();
 
         switch (wifiState) {
             case WifiManager.WIFI_STATE_ENABLED:
@@ -1397,29 +1442,6 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         return HelpUtils.getHelpIntent(context, helpUrlString, context.getClass().getName());
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        if (!mIsGuest && !mAirplaneModeEnabler.isAirplaneModeOn()) {
-            MenuItem item = menu.add(0, MENU_FIX_CONNECTIVITY, 0, R.string.fix_connectivity);
-            item.setIcon(R.drawable.ic_repair_24dp);
-            item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-        }
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem menuItem) {
-        if (menuItem.getItemId() == MENU_FIX_CONNECTIVITY) {
-            if (isPhoneOnCall()) {
-                showResetInternetDialog();
-                return true;
-            }
-            fixConnectivity();
-            return true;
-        }
-        return super.onOptionsItemSelected(menuItem);
-    }
-
     @VisibleForTesting
     void showResetInternetDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -1462,6 +1484,8 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     @Override
     public void onAirplaneModeChanged(boolean isAirplaneModeOn) {
         updateAirplaneModeMsgPreference(isAirplaneModeOn /* visible */);
+        // update the menu item
+        requireActivity().invalidateMenu();
     }
 
     /**

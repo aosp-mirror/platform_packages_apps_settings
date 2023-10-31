@@ -16,6 +16,7 @@
 
 package com.android.settings.connecteddevice.audiosharing;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -36,8 +37,7 @@ public class AudioSharingDashboardFragment extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        // TODO: update category id.
-        return 0;
+        return SettingsEnums.AUDIO_SHARING_SETTINGS;
     }
 
     @Override
@@ -63,6 +63,7 @@ public class AudioSharingDashboardFragment extends DashboardFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        use(CallsAndAlarmsPreferenceController.class).init(this);
     }
 
     @Override

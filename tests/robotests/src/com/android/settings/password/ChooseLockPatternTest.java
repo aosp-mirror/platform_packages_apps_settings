@@ -30,6 +30,9 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.view.View;
 
+import androidx.lifecycle.Lifecycle;
+import androidx.test.core.app.ActivityScenario;
+
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockscreenCredential;
 import com.android.settings.R;
@@ -137,14 +140,27 @@ public class ChooseLockPatternTest {
                 R.string.lockpassword_draw_your_pattern_again_header));
     }
 
+    @Test
+    public void activity_dismisses_InBackground() {
+        ActivityScenario<ChooseLockPattern> scenario =
+                ActivityScenario.launchActivityForResult(getLockPatternIntent(false));
+        scenario.moveToState(Lifecycle.State.RESUMED);
+        scenario.moveToState(Lifecycle.State.CREATED);
+        assertThat(scenario.getResult()).isNotNull();
+    }
+
     private ChooseLockPattern createActivity(boolean addFingerprintExtra) {
         return Robolectric.buildActivity(
-                ChooseLockPattern.class,
-                new IntentBuilder(application)
-                        .setUserId(UserHandle.myUserId())
-                        .setForFingerprint(addFingerprintExtra)
-                        .build())
+                        ChooseLockPattern.class,
+                        getLockPatternIntent(addFingerprintExtra))
                 .setup().get();
+    }
+
+    private Intent getLockPatternIntent(boolean addFingerprintExtra) {
+        return new IntentBuilder(application)
+                .setUserId(UserHandle.myUserId())
+                .setForFingerprint(addFingerprintExtra)
+                .build();
     }
 
     private LockscreenCredential createPattern(String patternString) {
