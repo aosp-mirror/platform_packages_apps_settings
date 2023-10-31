@@ -18,17 +18,22 @@ package com.android.settings.development.widevine;
 
 import android.content.Context;
 import android.sysprop.WidevineProperties;
+import android.util.Log;
+
+import androidx.preference.Preference;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
+import com.android.settings.media_drm.Flags;
 
 /**
  * The controller (in the Media Widevine settings) enforces L3 security level
 * of Widevine CDM.
 */
 public class ForceL3FallbackPreferenceController extends TogglePreferenceController {
+    private static final String TAG = "ForceL3FallbackPreferenceController";
 
     public ForceL3FallbackPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -43,6 +48,20 @@ public class ForceL3FallbackPreferenceController extends TogglePreferenceControl
     public boolean setChecked(boolean isChecked) {
         WidevineProperties.forcel3_enabled(isChecked);
         return true;
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        if (Flags.forceL3Enabled()) {
+            preference.setEnabled(true);
+            Log.i(TAG, "forceL3Enabled is on");
+        } else {
+            preference.setEnabled(false);
+            // In case of flag rollback, the controller should be unchecked.
+            WidevineProperties.forcel3_enabled(false);
+            Log.i(TAG, "forceL3Enabled is off");
+        }
+        super.updateState(preference);
     }
 
     @Override
