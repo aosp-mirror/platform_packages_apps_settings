@@ -113,15 +113,14 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Tắt âm thanh năng lượng thấp qua Bluetooth"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Tắt tính năng âm thanh năng lượng thấp qua Bluetooth nếu thiết bị hỗ trợ chức năng phần cứng âm thanh năng lượng thấp."</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Hiện nút bật/tắt Âm thanh năng lượng thấp"</string>
-    <!-- no translation found for bluetooth_bypass_leaudio_allowlist (7392319491894565552) -->
-    <skip />
-    <!-- no translation found for bluetooth_bypass_leaudio_allowlist_summary (8999245286359656738) -->
-    <skip />
+    <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Bỏ qua danh sách cho phép đối với tính năng Bluetooth Âm thanh năng lượng thấp"</string>
+    <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Sử dụng Âm thanh năng lượng thấp theo mặc định, ngay cả khi chưa xác minh được rằng thiết bị ngoại vi Âm thanh năng lượng thấp đáp ứng tiêu chí của danh sách cho phép."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Thiết bị truyền thông"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Thiết bị gọi điện"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Thiết bị khác"</string>
     <string name="connected_device_saved_title" msgid="5607274378851905959">"Thiết bị đã lưu"</string>
     <string name="connected_device_fast_pair_device_title" msgid="543124539265592392">"Được liên kết với tài khoản"</string>
+    <string name="connected_device_previously_associated_fast_pair_device_title" msgid="8353405823992023457">"Đã dùng trước đây với tài khoản"</string>
     <string name="connected_device_add_device_summary" msgid="8671009879957120802">"Bluetooth sẽ bật để ghép nối"</string>
     <string name="connected_device_connections_title" msgid="4164120115341579170">"Lựa chọn ưu tiên về kết nối"</string>
     <string name="connected_device_previously_connected_screen_title" msgid="8823331744788100605">"Đã kết nối trước đây"</string>
@@ -134,6 +133,10 @@
     <string name="stylus_textfield_handwriting" msgid="2363579035338976327">"Viết vào trường văn bản"</string>
     <string name="stylus_ignore_button" msgid="7734540973145241391">"Bỏ qua tất cả các lần nhấn nút bằng bút cảm ứng"</string>
     <string name="stylus_connected_devices_title" msgid="2823967577941359812">"Bút cảm ứng"</string>
+    <string name="audio_sharing_title" msgid="4144157137502923821">"Chia sẻ âm thanh"</string>
+    <string name="audio_sharing_switch_title" msgid="7052827328670825701">"Chia sẻ âm thanh"</string>
+    <!-- no translation found for calls_and_alarms_device_title (6993559028175454198) -->
+    <skip />
     <string name="date_and_time" msgid="1788358029823431692">"Ngày và giờ"</string>
     <string name="proxy_settings_title" msgid="4201866858226087066">"Proxy"</string>
     <string name="proxy_clear_text" msgid="6529658759984031149">"Xóa"</string>
@@ -537,7 +540,24 @@
     <string name="private_space_title" msgid="7078627930195569767">"Không gian riêng tư"</string>
     <string name="private_space_summary" msgid="8237652417163408001">"Ẩn ứng dụng trong thư mục riêng tư"</string>
     <string name="private_space_one_lock_title" msgid="7306547190751832568">"Mở khoá bằng phương thức khoá màn hình"</string>
-    <string name="private_space_hide_title" msgid="1615744426933304644">"Hiện Không gian riêng tư"</string>
+    <!-- no translation found for private_space_hide_title (8687034008994037610) -->
+    <skip />
+    <!-- no translation found for privatespace_hide_page_title (972581369094289386) -->
+    <skip />
+    <!-- no translation found for privatespace_hide_page_summary (1052569521186403642) -->
+    <skip />
+    <!-- no translation found for privatespace_access_header (982809349769470185) -->
+    <skip />
+    <!-- no translation found for privatespace_search_description (983837656432484282) -->
+    <skip />
+    <!-- no translation found for privatespace_tap_tile_description (4146608898639668340) -->
+    <skip />
+    <!-- no translation found for privatespace_unlock_description (4132755357482447360) -->
+    <skip />
+    <!-- no translation found for privatespace_hide_off_summary (7227778747159633671) -->
+    <skip />
+    <!-- no translation found for privatespace_hide_on_summary (6136704537527640183) -->
+    <skip />
     <string name="private_space_category_system" msgid="1286843321867285700">"Hệ thống"</string>
     <string name="private_space_create_title" msgid="47273568884806726">"Tạo Không gian riêng tư"</string>
     <string name="private_space_delete_title" msgid="3075645119800272800">"Xoá Không gian riêng tư"</string>
@@ -546,6 +566,58 @@
     <string name="private_space_create_failed" msgid="4908100791174213808">"Không tạo được Không gian riêng tư"</string>
     <string name="private_space_deleted" msgid="7825768516955610897">"Đã xoá xong Không gian riêng tư"</string>
     <string name="private_space_delete_failed" msgid="8500755484258565011">"Không xoá được Không gian riêng tư"</string>
+    <string name="no_device_lock_title" msgid="1078223464721029954">"Đặt phương thức khoá màn hình"</string>
+    <string name="no_device_lock_summary" msgid="7653477413589207824">"Để dùng Không gian riêng tư, hãy đặt một phương thức khoá màn hình trên thiết bị này."</string>
+    <string name="no_device_lock_action_label" msgid="2640487005629001288">"Đặt phương thức khoá màn hình"</string>
+    <string name="no_device_lock_cancel" msgid="4412602160321228863">"Huỷ"</string>
+    <!-- no translation found for privatespace_cancel_label (362351004019511784) -->
+    <skip />
+    <!-- no translation found for privatespace_setup_button_label (3696372546231047258) -->
+    <skip />
+    <!-- no translation found for privatespace_setup_title (177623114624330394) -->
+    <skip />
+    <!-- no translation found for privatespace_hide_apps_summary (4016518749055602268) -->
+    <skip />
+    <!-- no translation found for privatespace_how_title (8794102046435526065) -->
+    <skip />
+    <!-- no translation found for privatespace_access_bottom_text (1075244097441349030) -->
+    <skip />
+    <!-- no translation found for privatespace_protected_lock_text (7320604832432017423) -->
+    <skip />
+    <!-- no translation found for privatespace_hidden_notifications_text (8121285743543004812) -->
+    <skip />
+    <!-- no translation found for privatespace_apps_permission_text (4418511924151828812) -->
+    <skip />
+    <!-- no translation found for privatespace_setting_up_text (8532777749891406509) -->
+    <skip />
+    <!-- no translation found for privatespace_lock_protected_title (7409801274869666860) -->
+    <skip />
+    <!-- no translation found for privatespace_apps_hidden_title (6146605677591599107) -->
+    <skip />
+    <!-- no translation found for privatespace_access_from_apps_title (6787000636686810564) -->
+    <skip />
+    <!-- no translation found for privatespace_error_screen_title (8658511165913662275) -->
+    <skip />
+    <!-- no translation found for privatespace_error_screen_summary (5679626031159521676) -->
+    <skip />
+    <!-- no translation found for privatespace_tryagain_label (4091466165724929876) -->
+    <skip />
+    <!-- no translation found for privatespace_lockscreen_title (7459425150560213662) -->
+    <skip />
+    <!-- no translation found for privatespace_lockscreen_summary (980268845497843861) -->
+    <skip />
+    <!-- no translation found for privatespace_use_screenlock_label (2775404941450049991) -->
+    <skip />
+    <!-- no translation found for privatespace_set_lock_label (6277529807188602545) -->
+    <skip />
+    <!-- no translation found for privatespace_success_title (4854425684898602993) -->
+    <skip />
+    <!-- no translation found for privatespace_access_text (8756118686974614618) -->
+    <skip />
+    <!-- no translation found for privatespace_done_label (5534818213879562387) -->
+    <skip />
+    <!-- no translation found for scrolldown_to_access (5160743933093369151) -->
+    <skip />
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Bạn có thể thêm tối đa <xliff:g id="COUNT">%d</xliff:g> vân tay"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Bạn đã thêm số vân tay tối đa"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Không thể thêm dấu vân tay khác"</string>
@@ -1063,7 +1135,8 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="fold_lock_behavior_title" msgid="786228803694268449">"Tiếp tục dùng ứng dụng sau khi gập điện thoại"</string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Hình ảnh mượt"</string>
-    <string name="peak_refresh_rate_summary" msgid="3627278682437562787">"Tự động tăng tốc độ làm mới từ 60 lên <xliff:g id="ID_1">%1$s</xliff:g> Hz đối với một số nội dung. Chế độ cài đặt này sẽ làm tăng mức sử dụng pin."</string>
+    <!-- no translation found for peak_refresh_rate_summary (3212309985294885790) -->
+    <skip />
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Buộc chuyển sang tốc độ làm mới cao nhất"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Tốc độ làm mới cao nhất giúp cải thiện khả năng phản hồi khi chạm và chất lượng ảnh động. Tính năng này làm tăng mức sử dụng pin."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Phát hiện ánh mắt"</string>
@@ -1960,6 +2033,12 @@
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Giữ phím âm lượng"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"giữ các phím âm lượng"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Nhấn và giữ cả 2 phím âm lượng"</string>
+    <!-- no translation found for accessibility_shortcut_edit_dialog_title_two_finger_triple_tap (6687765191490040899) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_two_finger_triple_tap_keyword (4200744613585702430) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_two_finger_triple_tap (2631127444247448793) -->
+    <skip />
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"Nhấn 3 lần vào màn hình"</string>
     <string name="accessibility_shortcut_triple_tap_keyword" msgid="6863958573135995927">"nhấn 3 lần vào màn hình"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="2102327956423320536">"Nhấn nhanh vào màn hình {0,number,integer} lần. Phím tắt này có thể làm chậm thiết bị"</string>
@@ -2047,8 +2126,7 @@
     <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Sử dụng chế độ rung và phản hồi xúc giác"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Rung khi có chuông báo"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Rung khi có nội dung nghe nhìn"</string>
-    <!-- no translation found for accessibility_keyboard_vibration_title (7559967730626765441) -->
-    <skip />
+    <string name="accessibility_keyboard_vibration_title" msgid="7559967730626765441">"Chế độ rung của bàn phím"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Rung khi đổ chuông"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Rung khi có thông báo"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Phản hồi khi chạm"</string>
@@ -3059,8 +3137,7 @@
     <string name="keywords_font_size" msgid="1643198841815006447">"cỡ chữ, bản in lớn, phông chữ lớn, chữ lớn, thị lực kém, tăng cỡ chữ, tăng kích cỡ phông chữ, phóng to phông chữ"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"luôn bật chế độ màn hình chờ theo môi trường xung quanh (AOD)"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, thẻ, trình đọc"</string>
-    <!-- no translation found for keywords_keyboard_vibration (6485149510591654697) -->
-    <skip />
+    <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"bàn phím, xúc giác, rung,"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Âm lượng, rung, Không làm phiền"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Âm lượng nội dung nghe nhìn"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Âm lượng truyền"</string>
@@ -4642,7 +4719,7 @@
     <string name="category_name_display_controls" msgid="7046581691184725216">"Các chế độ điều khiển màn hình khác"</string>
     <string name="category_name_general" msgid="7737273712848115886">"Chung"</string>
     <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"Sử dụng Giao diện tối"</string>
-    <string name="bluetooth_main_switch_title" msgid="8409835540311309632">"Sử dụng Bluetooth"</string>
+    <string name="bluetooth_main_switch_title" msgid="8409835540311309632">"Bật Bluetooth"</string>
     <string name="prevent_ringing_main_switch_title" msgid="4726252811262086643">"Sử dụng chế độ ngăn đổ chuông"</string>
     <string name="use_wifi_hotsopt_main_switch_title" msgid="3909731167290690539">"Sử dụng điểm phát sóng Wi-Fi"</string>
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Sử dụng tính năng ghim ứng dụng"</string>
@@ -4880,16 +4957,10 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Các ứng dụng bạn đã cài đặt sẽ biết được tên thiết bị của bạn. Những người khác cũng có thể thấy tên thiết bị này khi bạn kết nối với thiết bị Bluetooth, một mạng Wi-Fi hoặc thiết lập một điểm phát sóng Wi-Fi."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Giống trong ngữ pháp"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Chọn giống trong ngữ pháp"</string>
-    <!-- no translation found for content_protection_preference_title (5069260032659193074) -->
-    <skip />
-    <!-- no translation found for content_protection_preference_summary (2252393849408445391) -->
-    <skip />
-    <!-- no translation found for content_protection_preference_user_consent_switch_title (60088482227901638) -->
-    <skip />
-    <!-- no translation found for content_protection_preference_user_consent_work_profile_switch_title (2868495870224174097) -->
-    <skip />
-    <!-- no translation found for content_protection_preference_subpage_summary (7707255571476950976) -->
-    <skip />
-    <!-- no translation found for content_protection_preference_subpage_info (6010628258453929862) -->
-    <skip />
+    <string name="content_protection_preference_title" msgid="5069260032659193074">"Đang quét tìm ứng dụng lừa đảo"</string>
+    <string name="content_protection_preference_summary" msgid="2252393849408445391">"Kiểm tra hoạt động trong ứng dụng để phát hiện hành vi lừa đảo"</string>
+    <string name="content_protection_preference_user_consent_switch_title" msgid="60088482227901638">"Sử dụng tính năng quét"</string>
+    <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="2868495870224174097">"Sử dụng tính năng quét cho các ứng dụng công việc"</string>
+    <string name="content_protection_preference_subpage_summary" msgid="3595621220981703364"></string>
+    <string name="content_protection_preference_subpage_info" msgid="6890886357653365489"></string>
 </resources>

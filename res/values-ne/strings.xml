@@ -88,7 +88,7 @@
     <string name="bluetooth_notif_ticker" msgid="209515545257862858">"ब्लुटुथ जोडा मिलाउन अनुरोध"</string>
     <string name="bluetooth_notif_title" msgid="1196532269131348647">"कनेक्ट गर्ने अनुरोध"</string>
     <string name="bluetooth_notif_message" msgid="5584717784198086653">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> सँग कनेक्ट गर्न ट्याप गर्नुहोस्।"</string>
-    <string name="bluetooth_devices_card_off_title" msgid="1320149821945129127">"ब्लुटुथ निष्क्रिय छ"</string>
+    <string name="bluetooth_devices_card_off_title" msgid="1320149821945129127">"ब्लुटुथ अफ छ"</string>
     <string name="bluetooth_devices_card_off_summary" msgid="2276527382891105858">"यसलाई सक्रिय गर्न ट्याप गर्नुहोस्"</string>
     <string name="device_picker" msgid="2427027896389445414">"ब्लुटुथ डिभाइस छान्नुहोस्"</string>
     <string name="bluetooth_ask_enablement" msgid="1529030199895339199">"<xliff:g id="APP_NAME">%1$s</xliff:g> ब्लुटुथ सक्रिय गर्न चाहन्छ"</string>
@@ -113,15 +113,14 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"\"ब्लुटुथ लो इनर्जी अडियो\" अफ गरियोस्"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"डिभाइसमा LE अडियो हार्डवेयर चलाउन मिल्छ भने \"ब्लुटुथ लो इनर्जी अडियो\" सुविधा अफ हुन्छ।"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"डिभाइसको विवरणमा LE अडियोको टगल देखाइयोस्"</string>
-    <!-- no translation found for bluetooth_bypass_leaudio_allowlist (7392319491894565552) -->
-    <skip />
-    <!-- no translation found for bluetooth_bypass_leaudio_allowlist_summary (8999245286359656738) -->
-    <skip />
+    <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"ब्लुटुथ लो इनर्जी अडियोको श्वेतसूची बाइपास गरियोस्"</string>
+    <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"LE अडियो पेरिफरलले श्वेतसूचीको मापदण्ड पूरा गर्छ भन्ने कुरा पुष्टि नगरिए तापनि LE अडियो डिफल्ट रूपमा प्रयोग गरियोस्।"</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"मिडियासम्बन्धी यन्त्रहरू"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"कल गर्ने सुविधा भएका यन्त्रहरू"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"अन्य डिभाइसहरू"</string>
     <string name="connected_device_saved_title" msgid="5607274378851905959">"सेभ गरिएका डिभाइस"</string>
     <string name="connected_device_fast_pair_device_title" msgid="543124539265592392">"खातासँग लिंक गरिएको"</string>
+    <string name="connected_device_previously_associated_fast_pair_device_title" msgid="8353405823992023457">"यसअघि खातासँग प्रयोग गरिएको"</string>
     <string name="connected_device_add_device_summary" msgid="8671009879957120802">"कनेक्ट गर्नका लागि ब्लुटुथ अन हुने छ"</string>
     <string name="connected_device_connections_title" msgid="4164120115341579170">"कनेक्सनका प्राथमिकताहरू"</string>
     <string name="connected_device_previously_connected_screen_title" msgid="8823331744788100605">"यसअघि कनेक्ट गरिएका डिभाइस"</string>
@@ -134,6 +133,10 @@
     <string name="stylus_textfield_handwriting" msgid="2363579035338976327">"टेक्स्ट फिल्डमा लेख्नुहोस्"</string>
     <string name="stylus_ignore_button" msgid="7734540973145241391">"स्टाइलसमार्फत थिचिने सबै बटन बेवास्ता गरियोस्"</string>
     <string name="stylus_connected_devices_title" msgid="2823967577941359812">"स्टाइलस"</string>
+    <string name="audio_sharing_title" msgid="4144157137502923821">"अडियो सेयरिङ"</string>
+    <string name="audio_sharing_switch_title" msgid="7052827328670825701">"अडियो सेयर गर्नुहोस्"</string>
+    <!-- no translation found for calls_and_alarms_device_title (6993559028175454198) -->
+    <skip />
     <string name="date_and_time" msgid="1788358029823431692">"मिति र समय"</string>
     <string name="proxy_settings_title" msgid="4201866858226087066">"प्रोक्सी"</string>
     <string name="proxy_clear_text" msgid="6529658759984031149">"मेटाउनुहोस्"</string>
@@ -537,7 +540,24 @@
     <string name="private_space_title" msgid="7078627930195569767">"निजी स्पेस"</string>
     <string name="private_space_summary" msgid="8237652417163408001">"एपहरू निजी फोल्डरमा लुकाउनुहोस्"</string>
     <string name="private_space_one_lock_title" msgid="7306547190751832568">"स्क्रिन लक प्रयोग गरेर अनलक गर्नुहोस्"</string>
-    <string name="private_space_hide_title" msgid="1615744426933304644">"निजी स्पेस देखाउनुहोस्"</string>
+    <!-- no translation found for private_space_hide_title (8687034008994037610) -->
+    <skip />
+    <!-- no translation found for privatespace_hide_page_title (972581369094289386) -->
+    <skip />
+    <!-- no translation found for privatespace_hide_page_summary (1052569521186403642) -->
+    <skip />
+    <!-- no translation found for privatespace_access_header (982809349769470185) -->
+    <skip />
+    <!-- no translation found for privatespace_search_description (983837656432484282) -->
+    <skip />
+    <!-- no translation found for privatespace_tap_tile_description (4146608898639668340) -->
+    <skip />
+    <!-- no translation found for privatespace_unlock_description (4132755357482447360) -->
+    <skip />
+    <!-- no translation found for privatespace_hide_off_summary (7227778747159633671) -->
+    <skip />
+    <!-- no translation found for privatespace_hide_on_summary (6136704537527640183) -->
+    <skip />
     <string name="private_space_category_system" msgid="1286843321867285700">"सिस्टम"</string>
     <string name="private_space_create_title" msgid="47273568884806726">"निजी स्पेस बनाउनुहोस्"</string>
     <string name="private_space_delete_title" msgid="3075645119800272800">"निजी स्पेस मेटाउनुहोस्"</string>
@@ -546,6 +566,58 @@
     <string name="private_space_create_failed" msgid="4908100791174213808">"निजी स्पेस बनाउन सकिएन"</string>
     <string name="private_space_deleted" msgid="7825768516955610897">"निजी स्पेस मेटाइएको छ"</string>
     <string name="private_space_delete_failed" msgid="8500755484258565011">"निजी स्पेस मेटाउन सकिएन"</string>
+    <string name="no_device_lock_title" msgid="1078223464721029954">"स्क्रिन लक सेट गर्नुहोस्"</string>
+    <string name="no_device_lock_summary" msgid="7653477413589207824">"निजी स्पेस प्रयोग गर्न यो डिभाइसमा स्क्रिन लक सेट गर्नुहोस्।"</string>
+    <string name="no_device_lock_action_label" msgid="2640487005629001288">"स्क्रिन लक सेट गर्नुहोस्"</string>
+    <string name="no_device_lock_cancel" msgid="4412602160321228863">"रद्द गर्नुहोस्"</string>
+    <!-- no translation found for privatespace_cancel_label (362351004019511784) -->
+    <skip />
+    <!-- no translation found for privatespace_setup_button_label (3696372546231047258) -->
+    <skip />
+    <!-- no translation found for privatespace_setup_title (177623114624330394) -->
+    <skip />
+    <!-- no translation found for privatespace_hide_apps_summary (4016518749055602268) -->
+    <skip />
+    <!-- no translation found for privatespace_how_title (8794102046435526065) -->
+    <skip />
+    <!-- no translation found for privatespace_access_bottom_text (1075244097441349030) -->
+    <skip />
+    <!-- no translation found for privatespace_protected_lock_text (7320604832432017423) -->
+    <skip />
+    <!-- no translation found for privatespace_hidden_notifications_text (8121285743543004812) -->
+    <skip />
+    <!-- no translation found for privatespace_apps_permission_text (4418511924151828812) -->
+    <skip />
+    <!-- no translation found for privatespace_setting_up_text (8532777749891406509) -->
+    <skip />
+    <!-- no translation found for privatespace_lock_protected_title (7409801274869666860) -->
+    <skip />
+    <!-- no translation found for privatespace_apps_hidden_title (6146605677591599107) -->
+    <skip />
+    <!-- no translation found for privatespace_access_from_apps_title (6787000636686810564) -->
+    <skip />
+    <!-- no translation found for privatespace_error_screen_title (8658511165913662275) -->
+    <skip />
+    <!-- no translation found for privatespace_error_screen_summary (5679626031159521676) -->
+    <skip />
+    <!-- no translation found for privatespace_tryagain_label (4091466165724929876) -->
+    <skip />
+    <!-- no translation found for privatespace_lockscreen_title (7459425150560213662) -->
+    <skip />
+    <!-- no translation found for privatespace_lockscreen_summary (980268845497843861) -->
+    <skip />
+    <!-- no translation found for privatespace_use_screenlock_label (2775404941450049991) -->
+    <skip />
+    <!-- no translation found for privatespace_set_lock_label (6277529807188602545) -->
+    <skip />
+    <!-- no translation found for privatespace_success_title (4854425684898602993) -->
+    <skip />
+    <!-- no translation found for privatespace_access_text (8756118686974614618) -->
+    <skip />
+    <!-- no translation found for privatespace_done_label (5534818213879562387) -->
+    <skip />
+    <!-- no translation found for scrolldown_to_access (5160743933093369151) -->
+    <skip />
     <string name="fingerprint_add_max" msgid="8639321019299347447">"तपाईं बढीमा <xliff:g id="COUNT">%d</xliff:g> वटा फिंगरप्रिन्टहरू हाल्न सक्नुहुन्छ"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"तपाईंले अधिकतम संख्यामा फिंगरप्रिन्टहरू थप्नुभएको छ"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"थप फिंगरप्रिन्टहरू थप्न सकिँदैन"</string>
@@ -1063,7 +1135,8 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="fold_lock_behavior_title" msgid="786228803694268449">"फोल्ड गर्दा एपहरू प्रयोग गरिराखियोस्"</string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
-    <string name="peak_refresh_rate_summary" msgid="3627278682437562787">"केही सामग्रीका हकमा रिफ्रेस रेट स्वतः ६० हर्जबाट बढाएर <xliff:g id="ID_1">%1$s</xliff:g> हर्ज बनाउँछ। यसले गर्दा ब्याट्रीको खपत बढ्छ।"</string>
+    <!-- no translation found for peak_refresh_rate_summary (3212309985294885790) -->
+    <skip />
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"रिफ्रेस गर्ने दर बलपूर्वक सबैभन्दा बढी बनाउनुहोस्"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"स्क्रिनमा छुँदा स्क्रिनले जनाउने प्रतिक्रिया र एनिमेसनको गुणस्तर सुधार्न उच्चतम रिफ्रेस रेट। ब्याट्रीको खपत बढाउँछ।"</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"स्क्रिनमा हेरिरहँदा"</string>
@@ -1960,6 +2033,12 @@
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"भोल्युम कीहरू थिचिरहनुहोस्"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"भोल्युम कीहरू थिचिराख्नुहोस्"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"दुवै भोल्युम की थिचिराख्नुहोस्"</string>
+    <!-- no translation found for accessibility_shortcut_edit_dialog_title_two_finger_triple_tap (6687765191490040899) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_two_finger_triple_tap_keyword (4200744613585702430) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_two_finger_triple_tap (2631127444247448793) -->
+    <skip />
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"स्क्रिनमा तीन पटक ट्याप गर्नुहोस्"</string>
     <string name="accessibility_shortcut_triple_tap_keyword" msgid="6863958573135995927">"स्क्रिनमा तीन पटक ट्याप गर्नुहोस्"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="2102327956423320536">"स्क्रिनमा द्रुत रूपमा {0,number,integer} पटक ट्याप गर्नुहोस्। यो सर्टकट प्रयोग गर्दा तपाईंको डिभाइस ढिलो चल्न सक्छ"</string>
@@ -2047,8 +2126,7 @@
     <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"भाइब्रेसन र ह्याप्टिक्स प्रयोग गरियोस्"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"अलार्म भाइब्रेसन"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"मिडिया भाइब्रेसन"</string>
-    <!-- no translation found for accessibility_keyboard_vibration_title (7559967730626765441) -->
-    <skip />
+    <string name="accessibility_keyboard_vibration_title" msgid="7559967730626765441">"किबोर्ड भाइब्रेसन"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"घन्टीको भाइब्रेसन"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"सूचना आएको जनाउन भाइब्रेट हुँदा"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"टच गर्दाको भाइब्रेसन"</string>
@@ -3059,8 +3137,7 @@
     <string name="keywords_font_size" msgid="1643198841815006447">"पाठको आकार, ठुलो आकारको पाठ, ठुलो फन्ट, ठुलो पाठ, कमजोर दृष्टि, पाठ अझ ठुलो बनाउनुहोस्, फन्ट ठुलो बनाउने टुल, फन्ट ठुलो बनाउने प्रक्रिया"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"सधैँ अन हुने एम्बियन्ट डिस्प्ले, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, ट्याग, रिडर"</string>
-    <!-- no translation found for keywords_keyboard_vibration (6485149510591654697) -->
-    <skip />
+    <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"किबोर्ड, ह्याप्टिक्स, भाइब्रेट"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"भोल्युम, भाइब्रेसन, Do Not Disturb"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"मिडियाको भोल्युम"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"भोल्युम cast गर्नुहोस्"</string>
@@ -4880,16 +4957,10 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"तपाईंका डिभाइसमा इन्स्टल गरिएका एपहरूले तपाईंको डिभाइसको नाम हेर्न सक्छन्। तपाईंले ब्लुटुथ चल्ने डिभाइसमा कनेक्ट गर्दा, कुनै Wi-Fi नेटवर्कमा कनेक्ट गर्दा वा कुनै Wi-Fi हटस्पट सेटअप गर्दा अरू मान्छेहरूले पनि डिभाइसको नाम देख्न सक्छन्।"</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"ग्रामाटिकल जेन्डर"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"ग्रामाटिकल जेन्डर चयन गर्नुहोस्"</string>
-    <!-- no translation found for content_protection_preference_title (5069260032659193074) -->
-    <skip />
-    <!-- no translation found for content_protection_preference_summary (2252393849408445391) -->
-    <skip />
-    <!-- no translation found for content_protection_preference_user_consent_switch_title (60088482227901638) -->
-    <skip />
-    <!-- no translation found for content_protection_preference_user_consent_work_profile_switch_title (2868495870224174097) -->
-    <skip />
-    <!-- no translation found for content_protection_preference_subpage_summary (7707255571476950976) -->
-    <skip />
-    <!-- no translation found for content_protection_preference_subpage_info (6010628258453929862) -->
-    <skip />
+    <string name="content_protection_preference_title" msgid="5069260032659193074">"छलकपट गर्ने उद्देश्यले बनाइएका एपहरू छन् कि छैनन् भन्ने कुरा पत्ता लगाउन स्क्यान गरिँदै छ"</string>
+    <string name="content_protection_preference_summary" msgid="2252393849408445391">"फिसिङसम्बन्धी गतिविधि गरिएको छ कि छैन भन्ने कुरा पत्ता लगाउनका निम्ति एपमा गरिएका गतिविधि हेर्नुहोस्"</string>
+    <string name="content_protection_preference_user_consent_switch_title" msgid="60088482227901638">"स्क्यान गर्ने कार्य प्रयोग गर्नुहोस्"</string>
+    <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="2868495870224174097">"कामसम्बन्धी एपका लागि स्क्यान गर्ने सुविधा प्रयोग गर्नुहोस्"</string>
+    <string name="content_protection_preference_subpage_summary" msgid="3595621220981703364"></string>
+    <string name="content_protection_preference_subpage_info" msgid="6890886357653365489"></string>
 </resources>
