@@ -77,6 +77,7 @@ import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.password.ChooseLockSettingsHelper;
+import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.HelpUtils;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
@@ -84,6 +85,7 @@ import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.activityembedding.ActivityEmbeddingUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.transition.SettingsTransitionHelper;
 import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.TwoTargetPreference;
@@ -146,11 +148,46 @@ public class FingerprintSettings extends SubSettings {
         return manager != null && isHardwareDetected;
     }
 
+
     /**
      *
      */
+    @SearchIndexable
     public static class FingerprintSettingsFragment extends DashboardFragment
             implements OnPreferenceChangeListener, FingerprintPreference.OnDeleteClickListener {
+
+        public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+                new BaseSearchIndexProvider(R.xml.security_settings_fingerprint) {
+                    @Override
+                    public List<AbstractPreferenceController>
+                            createPreferenceControllers(Context context) {
+                        return createThePreferenceControllers(context);
+                    }
+                };
+
+        private static List<AbstractPreferenceController> createThePreferenceControllers(Context
+                context) {
+            final List<AbstractPreferenceController> controllers = new ArrayList<>();
+            FingerprintManager manager = Utils.getFingerprintManagerOrNull(context);
+            if (manager == null || !manager.isHardwareDetected()) {
+                return null;
+            }
+            if (manager.isPowerbuttonFps()) {
+                controllers.add(
+                        new FingerprintUnlockCategoryController(
+                                context,
+                                KEY_FINGERPRINT_UNLOCK_CATEGORY
+                        ));
+                controllers.add(
+                        new FingerprintSettingsRequireScreenOnToAuthPreferenceController(
+                                context,
+                                KEY_REQUIRE_SCREEN_ON_TO_AUTH
+                        ));
+            }
+            controllers.add(new FingerprintsEnrolledCategoryPreferenceController(context,
+                    KEY_FINGERPRINTS_ENROLLED_CATEGORY));
+            return controllers;
+        }
 
         private static class FooterColumn {
             CharSequence mTitle = null;
@@ -741,7 +778,7 @@ public class FingerprintSettings extends SubSettings {
                 // If it's in split mode, show the error dialog and don't need to show adding
                 // fingerprint intent.
                 final boolean isActivityEmbedded = ActivityEmbeddingUtils.isActivityEmbedded(
-                                getActivity());
+                        getActivity());
                 if (getActivity().isInMultiWindowMode() && !isActivityEmbedded) {
                     BiometricsSplitScreenDialog.newInstance(TYPE_FINGERPRINT).show(
                             getActivity().getSupportFragmentManager(),
@@ -847,20 +884,20 @@ public class FingerprintSettings extends SubSettings {
         }
 
         private List<AbstractPreferenceController> buildPreferenceControllers(Context context) {
-            final List<AbstractPreferenceController> controllers = new ArrayList<>();
+            final List<AbstractPreferenceController> controllers =
+                    createThePreferenceControllers(context);
             if (isSfps()) {
-                mFingerprintUnlockCategoryPreferenceController =
-                    new FingerprintUnlockCategoryController(
-                        context,
-                        KEY_FINGERPRINT_UNLOCK_CATEGORY
-                    );
-                mRequireScreenOnToAuthPreferenceController =
-                        new FingerprintSettingsRequireScreenOnToAuthPreferenceController(
-                                context,
-                                KEY_REQUIRE_SCREEN_ON_TO_AUTH
-                        );
-                controllers.add(mFingerprintUnlockCategoryPreferenceController);
-                controllers.add(mRequireScreenOnToAuthPreferenceController);
+                for (AbstractPreferenceController controller : controllers) {
+                    if (controller.getPreferenceKey() == KEY_FINGERPRINT_UNLOCK_CATEGORY) {
+                        mFingerprintUnlockCategoryPreferenceController =
+                                (FingerprintUnlockCategoryController) controller;
+                    } else if (controller.getPreferenceKey() == KEY_REQUIRE_SCREEN_ON_TO_AUTH) {
+                        mRequireScreenOnToAuthPreferenceController =
+                                (FingerprintSettingsRequireScreenOnToAuthPreferenceController)
+                                        controller;
+                    }
+
+                }
             }
             return controllers;
         }
