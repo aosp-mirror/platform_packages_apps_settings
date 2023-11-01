@@ -32,7 +32,6 @@ import android.net.NetworkTemplate;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.PowerManager;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -184,7 +183,6 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         }
     };
 
-    private boolean mIsWifiEntryListStale = true;
     @VisibleForTesting
     final Runnable mUpdateWifiEntryPreferencesRunnable = () -> {
         updateWifiEntryPreferences();
@@ -536,7 +534,6 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
 
     @Override
     public void onStop() {
-        mIsWifiEntryListStale = true;
         getView().removeCallbacks(mRemoveLoadingRunnable);
         getView().removeCallbacks(mUpdateWifiEntryPreferencesRunnable);
         getView().removeCallbacks(mHideProgressBarRunnable);
@@ -878,6 +875,11 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         }
     }
 
+    @Override
+    public void onScanRequested() {
+        setProgressBarVisible(true);
+    }
+
     @VisibleForTesting
     void setWifiScanMessage(boolean isWifiEnabled) {
         final Context context = getContext();
@@ -908,12 +910,10 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     }
 
     @Override
-    public void onWifiEntriesChanged() {
-        if (mIsWifiEntryListStale) {
-            mIsWifiEntryListStale = false;
-            updateWifiEntryPreferences();
-        } else {
-            updateWifiEntryPreferencesDelayed();
+    public void onWifiEntriesChanged(@WifiPickerTracker.WifiEntriesChangedReason int reason) {
+        updateWifiEntryPreferences();
+        if (reason == WifiPickerTracker.WIFI_ENTRIES_CHANGED_REASON_SCAN_RESULTS) {
+            setProgressBarVisible(false);
         }
         changeNextButtonState(mWifiPickerTracker != null
                 && mWifiPickerTracker.getConnectedWifiEntry() != null);
@@ -948,24 +948,6 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
             return;
         }
         setAdditionalSettingsSummaries();
-    }
-
-    /**
-     * Updates WifiEntries from {@link WifiPickerTracker#getWifiEntries()}. Adds a delay to have
-     * progress bar displayed before starting to modify entries.
-     */
-    private void updateWifiEntryPreferencesDelayed() {
-        // Safeguard from some delayed event handling
-        if (getActivity() != null && !mIsRestricted && mWifiPickerTracker != null
-                && mWifiPickerTracker.getWifiState() == WifiManager.WIFI_STATE_ENABLED) {
-            final View view = getView();
-            final Handler handler = view.getHandler();
-            if (handler != null && handler.hasCallbacks(mUpdateWifiEntryPreferencesRunnable)) {
-                return;
-            }
-            setProgressBarVisible(true);
-            view.postDelayed(mUpdateWifiEntryPreferencesRunnable, 300);
-        }
     }
 
     protected void updateWifiEntryPreferences() {
@@ -1050,16 +1032,12 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         removeCachedPrefs(mWifiEntryPreferenceCategory);
 
         if (!hasAvailableWifiEntries) {
-            setProgressBarVisible(true);
             Preference pref = new Preference(getPrefContext());
             pref.setSelectable(false);
             pref.setSummary(R.string.wifi_empty_list_wifi_on);
             pref.setOrder(index++);
             pref.setKey(PREF_KEY_EMPTY_WIFI_LIST);
             mWifiEntryPreferenceCategory.addPreference(pref);
-        } else {
-            // Continuing showing progress bar for an additional delay to overlap with animation
-            getView().postDelayed(mHideProgressBarRunnable, 1700 /* delay millis */);
         }
 
         mAddWifiNetworkPreference.setOrder(index++);
