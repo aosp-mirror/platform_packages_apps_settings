@@ -21,7 +21,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.android.settings.biometrics.fingerprint2.shared.domain.interactor.FingerprintManagerInteractor
+import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.FingerprintManagerInteractor
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -29,11 +29,11 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-private const val TAG = "FingerprintGatekeeperViewModel"
-
 sealed interface GatekeeperInfo {
   object Invalid : GatekeeperInfo
+
   object Timeout : GatekeeperInfo
+
   data class GatekeeperPasswordInfo(val token: ByteArray?, val passwordHandle: Long?) :
     GatekeeperInfo
 }
@@ -97,7 +97,19 @@ class FingerprintGatekeeperViewModel(
       }
   }
 
+  class FingerprintGatekeeperViewModelFactory(
+    private val gatekeeperInfo: GatekeeperInfo?,
+    private val fingerprintManagerInteractor: FingerprintManagerInteractor,
+  ) : ViewModelProvider.Factory {
+
+    @Suppress("UNCHECKED_CAST")
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+      return FingerprintGatekeeperViewModel(gatekeeperInfo, fingerprintManagerInteractor) as T
+    }
+  }
+
   companion object {
+    private const val TAG = "FingerprintGatekeeperViewModel"
     /**
      * A function that checks if the challenge and token are valid, in which case a
      * [GatekeeperInfo.GatekeeperPasswordInfo] is provided, else [GatekeeperInfo.Invalid]
@@ -108,19 +120,6 @@ class FingerprintGatekeeperViewModel(
         return GatekeeperInfo.Invalid
       }
       return GatekeeperInfo.GatekeeperPasswordInfo(token, challenge)
-    }
-  }
-
-  class FingerprintGatekeeperViewModelFactory(
-    private val gatekeeperInfo: GatekeeperInfo?,
-    private val fingerprintManagerInteractor: FingerprintManagerInteractor,
-  ) : ViewModelProvider.Factory {
-
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel> create(
-      modelClass: Class<T>,
-    ): T {
-      return FingerprintGatekeeperViewModel(gatekeeperInfo, fingerprintManagerInteractor) as T
     }
   }
 }

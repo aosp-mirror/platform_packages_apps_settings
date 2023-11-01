@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 The Android Open Source Project
+ * Copyright (C) 2024 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.android.settings.biometrics.fingerprint2.shared.domain.interactor
+package com.android.settings.biometrics.fingerprint2.lib.domain.interactor
 
-import com.android.settings.biometrics.fingerprint2.shared.model.EnrollReason
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintAuthAttemptModel
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintData
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerEnrollState
+import com.android.settings.biometrics.fingerprint2.lib.model.EnrollReason
+import com.android.settings.biometrics.fingerprint2.lib.model.FingerEnrollState
+import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintAuthAttemptModel
+import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintData
 import com.android.systemui.biometrics.shared.model.FingerprintSensor
 import kotlinx.coroutines.flow.Flow
 
@@ -56,12 +56,12 @@ interface FingerprintManagerInteractor {
 
   /**
    * Runs [FingerprintManager.enroll] with the [hardwareAuthToken] and [EnrollReason] for this
-   * enrollment. Returning the [FingerEnrollState] that represents this fingerprint
-   * enrollment state.
+   * enrollment. Returning the [FingerEnrollState] that represents this fingerprint enrollment
+   * state.
    */
   suspend fun enroll(
-      hardwareAuthToken: ByteArray?,
-      enrollReason: EnrollReason,
+    hardwareAuthToken: ByteArray?,
+    enrollReason: EnrollReason,
   ): Flow<FingerEnrollState>
 
   /**
@@ -78,5 +78,4 @@ interface FingerprintManagerInteractor {
 
   /** Indicates if the press to auth feature has been enabled */
   suspend fun pressToAuthEnabled(): Boolean
-
 }

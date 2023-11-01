@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.biometrics.fingerprint2.shared.model
+package com.android.settings.biometrics.fingerprint2.lib.model
 
 /** The reason for enrollment */
 enum class EnrollReason {

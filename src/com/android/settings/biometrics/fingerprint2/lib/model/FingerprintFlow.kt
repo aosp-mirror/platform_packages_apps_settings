@@ -14,10 +14,11 @@
  * limitations under the License.
  */
 
-package com.android.settings.biometrics.fingerprint2.shared.model
+package com.android.settings.biometrics.fingerprint2.lib.model
 
 /**
- * The [FingerprintFlow] for fingerprint enrollment indicates information on how the flow should behave.
+ * The [FingerprintFlow] for fingerprint enrollment indicates information on how the flow should
+ * behave.
  */
 sealed class FingerprintFlow
 
@@ -32,3 +33,6 @@ data object Unicorn : FingerprintFlow()
 
 /** Flow to specify settings type */
 data object Settings : FingerprintFlow()
+
+/** Indicates that the fast enroll experience should occur */
+data object FastEnroll : FingerprintFlow()
