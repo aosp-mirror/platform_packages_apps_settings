@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 The Android Open Source Project
+ * Copyright (C) 2023 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.pm.PackageManager;
 
-import com.android.settingslib.widget.SelectorWithWidgetPreference;
+import com.android.settingslib.widget.MainSwitchPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -36,15 +36,15 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
-public class UnrestrictedPreferenceControllerTest {
+public class AllowBackgroundPreferenceControllerTest {
     private static final int UID = 12345;
     private static final String PACKAGE_NAME = "com.android.app";
 
-    private UnrestrictedPreferenceController mController;
-    private SelectorWithWidgetPreference mPreference;
+    private AllowBackgroundPreferenceController mController;
+    private MainSwitchPreference mMainSwitchPreference;
     private BatteryOptimizeUtils mBatteryOptimizeUtils;
 
-    @Mock PackageManager mMockPackageManager;
+    @Mock private PackageManager mMockPackageManager;
 
     @Before
     public void setUp() throws Exception {
@@ -56,8 +56,8 @@ public class UnrestrictedPreferenceControllerTest {
                 .when(mMockPackageManager)
                 .getPackageUid(PACKAGE_NAME, PackageManager.GET_META_DATA);
 
-        mController = new UnrestrictedPreferenceController(context, UID, PACKAGE_NAME);
-        mPreference = new SelectorWithWidgetPreference(RuntimeEnvironment.application);
+        mController = new AllowBackgroundPreferenceController(context, UID, PACKAGE_NAME);
+        mMainSwitchPreference = new MainSwitchPreference(RuntimeEnvironment.application);
         mBatteryOptimizeUtils = spy(new BatteryOptimizeUtils(context, UID, PACKAGE_NAME));
         mController.mBatteryOptimizeUtils = mBatteryOptimizeUtils;
     }
@@ -67,10 +67,10 @@ public class UnrestrictedPreferenceControllerTest {
         when(mBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()).thenReturn(false);
         when(mBatteryOptimizeUtils.isSystemOrDefaultApp()).thenReturn(false);
 
-        mController.updateState(mPreference);
+        mController.updateState(mMainSwitchPreference);
 
         assertThat(mBatteryOptimizeUtils.isOptimizeModeMutable()).isTrue();
-        assertThat(mPreference.isEnabled()).isTrue();
+        assertThat(mMainSwitchPreference.isEnabled()).isTrue();
     }
 
     @Test
@@ -78,22 +78,23 @@ public class UnrestrictedPreferenceControllerTest {
         when(mBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()).thenReturn(true);
         when(mBatteryOptimizeUtils.isSystemOrDefaultApp()).thenReturn(false);
 
-        mController.updateState(mPreference);
+        mController.updateState(mMainSwitchPreference);
 
         assertThat(mBatteryOptimizeUtils.isOptimizeModeMutable()).isFalse();
-        assertThat(mPreference.isEnabled()).isFalse();
+        assertThat(mMainSwitchPreference.isEnabled()).isFalse();
     }
 
     @Test
-    public void testUpdateState_isSystemOrDefaultAppAndUnrestrictedStates_prefChecked() {
+    public void testUpdateState_isSystemOrDefaultAppAndRestrictedStates_prefChecked() {
         when(mBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()).thenReturn(false);
         when(mBatteryOptimizeUtils.isSystemOrDefaultApp()).thenReturn(true);
         when(mBatteryOptimizeUtils.getAppOptimizationMode()).thenReturn(
-                BatteryOptimizeUtils.MODE_UNRESTRICTED);
+                BatteryOptimizeUtils.MODE_RESTRICTED);
 
-        mController.updateState(mPreference);
+        mController.updateState(mMainSwitchPreference);
 
-        assertThat(mPreference.isChecked()).isTrue();
+        assertThat(mMainSwitchPreference.isEnabled()).isFalse();
+        assertThat(mMainSwitchPreference.isChecked()).isFalse();
     }
 
     @Test
@@ -103,22 +104,22 @@ public class UnrestrictedPreferenceControllerTest {
         when(mBatteryOptimizeUtils.getAppOptimizationMode()).thenReturn(
                 BatteryOptimizeUtils.MODE_OPTIMIZED);
 
-        mController.updateState(mPreference);
+        mController.updateState(mMainSwitchPreference);
 
-        assertThat(mPreference.isEnabled()).isFalse();
-        assertThat(mPreference.isChecked()).isFalse();
+        assertThat(mMainSwitchPreference.isEnabled()).isFalse();
+        assertThat(mMainSwitchPreference.isChecked()).isTrue();
     }
 
     @Test
-    public void testUpdateState_isUnrestrictedStates_prefChecked() {
+    public void testUpdateState_isRestrictedStates_prefChecked() {
         when(mBatteryOptimizeUtils.isOptimizeModeMutable()).thenReturn(true);
         when(mBatteryOptimizeUtils.getAppOptimizationMode()).thenReturn(
-                BatteryOptimizeUtils.MODE_UNRESTRICTED);
+                BatteryOptimizeUtils.MODE_RESTRICTED);
 
-        mController.updateState(mPreference);
+        mController.updateState(mMainSwitchPreference);
 
-        assertThat(mPreference.isEnabled()).isTrue();
-        assertThat(mPreference.isChecked()).isTrue();
+        assertThat(mMainSwitchPreference.isEnabled()).isTrue();
+        assertThat(mMainSwitchPreference.isChecked()).isFalse();
     }
 
     @Test
@@ -127,22 +128,23 @@ public class UnrestrictedPreferenceControllerTest {
         when(mBatteryOptimizeUtils.getAppOptimizationMode()).thenReturn(
                 BatteryOptimizeUtils.MODE_OPTIMIZED);
 
-        mController.updateState(mPreference);
+        mController.updateState(mMainSwitchPreference);
 
-        assertThat(mPreference.isEnabled()).isTrue();
-        assertThat(mPreference.isChecked()).isFalse();
+        assertThat(mMainSwitchPreference.isEnabled()).isTrue();
+        assertThat(mMainSwitchPreference.isChecked()).isTrue();
     }
 
     @Test
     public void testHandlePreferenceTreeClick_samePrefKey_verifyAction() {
-        mPreference.setKey(mController.KEY_UNRESTRICTED_PREF);
-        mController.handlePreferenceTreeClick(mPreference);
+        mMainSwitchPreference.setKey(
+                AllowBackgroundPreferenceController.KEY_ALLOW_BACKGROUND_USAGE);
+        mController.handlePreferenceTreeClick(mMainSwitchPreference);
 
-        assertThat(mController.handlePreferenceTreeClick(mPreference)).isTrue();
+        assertThat(mController.handlePreferenceTreeClick(mMainSwitchPreference)).isTrue();
     }
 
     @Test
     public void testHandlePreferenceTreeClick_incorrectPrefKey_noAction() {
-        assertThat(mController.handlePreferenceTreeClick(mPreference)).isFalse();
+        assertThat(mController.handlePreferenceTreeClick(mMainSwitchPreference)).isFalse();
     }
 }

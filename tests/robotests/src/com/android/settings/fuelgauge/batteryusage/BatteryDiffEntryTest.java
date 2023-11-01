@@ -82,6 +82,7 @@ public final class BatteryDiffEntryTest {
         MockitoAnnotations.initMocks(this);
         ShadowUserHandle.reset();
         mContext = spy(RuntimeEnvironment.application);
+        BatteryUtils.getInstance(mContext).reset();
         doReturn(mContext).when(mContext).getApplicationContext();
         doReturn(mMockUserManager).when(mContext).getSystemService(UserManager.class);
         doReturn(mMockPackageManager).when(mContext).getPackageManager();
@@ -461,9 +462,6 @@ public final class BatteryDiffEntryTest {
 
     @Test
     public void testIsUninstalledEntry_uninstalledApp_returnTrue() throws Exception {
-        doReturn(BatteryUtils.UID_NULL)
-                .when(mMockPackageManager)
-                .getPackageUid(PACKAGE_NAME, PackageManager.GET_META_DATA);
         final ContentValues values =
                 getContentValuesWithType(ConvertUtils.CONSUMER_TYPE_UID_BATTERY);
         values.put(BatteryHistEntry.KEY_UID, UNINSTALLED_UID);
