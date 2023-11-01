@@ -113,15 +113,14 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"停用蓝牙 LE 音频"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"如果设备支持 LE 音频硬件功能，则停用蓝牙 LE 音频功能。"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"在“设备详细信息”中显示 LE 音频切换开关"</string>
-    <!-- no translation found for bluetooth_bypass_leaudio_allowlist (7392319491894565552) -->
-    <skip />
-    <!-- no translation found for bluetooth_bypass_leaudio_allowlist_summary (8999245286359656738) -->
-    <skip />
+    <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"绕过蓝牙 LE 音频许可名单"</string>
+    <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"默认使用 LE 音频，即使 LE 音频外围设备尚未通过旨在确保满足许可名单条件的验证，也是如此。"</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"媒体设备"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"通话设备"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"其他设备"</string>
     <string name="connected_device_saved_title" msgid="5607274378851905959">"保存的设备"</string>
     <string name="connected_device_fast_pair_device_title" msgid="543124539265592392">"与账号相关联"</string>
+    <string name="connected_device_previously_associated_fast_pair_device_title" msgid="8353405823992023457">"之前曾与账号配对"</string>
     <string name="connected_device_add_device_summary" msgid="8671009879957120802">"系统将开启蓝牙以进行配对"</string>
     <string name="connected_device_connections_title" msgid="4164120115341579170">"连接偏好设置"</string>
     <string name="connected_device_previously_connected_screen_title" msgid="8823331744788100605">"之前连接的设备"</string>
@@ -134,6 +133,10 @@
     <string name="stylus_textfield_handwriting" msgid="2363579035338976327">"在文本字段中书写"</string>
     <string name="stylus_ignore_button" msgid="7734540973145241391">"忽略所有通过触控笔按下按钮的动作"</string>
     <string name="stylus_connected_devices_title" msgid="2823967577941359812">"触控笔"</string>
+    <string name="audio_sharing_title" msgid="4144157137502923821">"音频分享"</string>
+    <string name="audio_sharing_switch_title" msgid="7052827328670825701">"分享音频"</string>
+    <!-- no translation found for calls_and_alarms_device_title (6993559028175454198) -->
+    <skip />
     <string name="date_and_time" msgid="1788358029823431692">"日期和时间"</string>
     <string name="proxy_settings_title" msgid="4201866858226087066">"代理"</string>
     <string name="proxy_clear_text" msgid="6529658759984031149">"清除"</string>
@@ -537,7 +540,24 @@
     <string name="private_space_title" msgid="7078627930195569767">"私密空间"</string>
     <string name="private_space_summary" msgid="8237652417163408001">"将应用隐藏到私人文件夹中"</string>
     <string name="private_space_one_lock_title" msgid="7306547190751832568">"使用屏幕解锁方式解锁"</string>
-    <string name="private_space_hide_title" msgid="1615744426933304644">"显示私密空间"</string>
+    <!-- no translation found for private_space_hide_title (8687034008994037610) -->
+    <skip />
+    <!-- no translation found for privatespace_hide_page_title (972581369094289386) -->
+    <skip />
+    <!-- no translation found for privatespace_hide_page_summary (1052569521186403642) -->
+    <skip />
+    <!-- no translation found for privatespace_access_header (982809349769470185) -->
+    <skip />
+    <!-- no translation found for privatespace_search_description (983837656432484282) -->
+    <skip />
+    <!-- no translation found for privatespace_tap_tile_description (4146608898639668340) -->
+    <skip />
+    <!-- no translation found for privatespace_unlock_description (4132755357482447360) -->
+    <skip />
+    <!-- no translation found for privatespace_hide_off_summary (7227778747159633671) -->
+    <skip />
+    <!-- no translation found for privatespace_hide_on_summary (6136704537527640183) -->
+    <skip />
     <string name="private_space_category_system" msgid="1286843321867285700">"系统"</string>
     <string name="private_space_create_title" msgid="47273568884806726">"创建私密空间"</string>
     <string name="private_space_delete_title" msgid="3075645119800272800">"删除私密空间"</string>
@@ -546,6 +566,58 @@
     <string name="private_space_create_failed" msgid="4908100791174213808">"无法创建私密空间"</string>
     <string name="private_space_deleted" msgid="7825768516955610897">"已成功删除私密空间"</string>
     <string name="private_space_delete_failed" msgid="8500755484258565011">"无法删除私密空间"</string>
+    <string name="no_device_lock_title" msgid="1078223464721029954">"设置屏锁"</string>
+    <string name="no_device_lock_summary" msgid="7653477413589207824">"若要使用“私密空间”功能，请在此设备上设置屏锁。"</string>
+    <string name="no_device_lock_action_label" msgid="2640487005629001288">"设置屏锁"</string>
+    <string name="no_device_lock_cancel" msgid="4412602160321228863">"取消"</string>
+    <!-- no translation found for privatespace_cancel_label (362351004019511784) -->
+    <skip />
+    <!-- no translation found for privatespace_setup_button_label (3696372546231047258) -->
+    <skip />
+    <!-- no translation found for privatespace_setup_title (177623114624330394) -->
+    <skip />
+    <!-- no translation found for privatespace_hide_apps_summary (4016518749055602268) -->
+    <skip />
+    <!-- no translation found for privatespace_how_title (8794102046435526065) -->
+    <skip />
+    <!-- no translation found for privatespace_access_bottom_text (1075244097441349030) -->
+    <skip />
+    <!-- no translation found for privatespace_protected_lock_text (7320604832432017423) -->
+    <skip />
+    <!-- no translation found for privatespace_hidden_notifications_text (8121285743543004812) -->
+    <skip />
+    <!-- no translation found for privatespace_apps_permission_text (4418511924151828812) -->
+    <skip />
+    <!-- no translation found for privatespace_setting_up_text (8532777749891406509) -->
+    <skip />
+    <!-- no translation found for privatespace_lock_protected_title (7409801274869666860) -->
+    <skip />
+    <!-- no translation found for privatespace_apps_hidden_title (6146605677591599107) -->
+    <skip />
+    <!-- no translation found for privatespace_access_from_apps_title (6787000636686810564) -->
+    <skip />
+    <!-- no translation found for privatespace_error_screen_title (8658511165913662275) -->
+    <skip />
+    <!-- no translation found for privatespace_error_screen_summary (5679626031159521676) -->
+    <skip />
+    <!-- no translation found for privatespace_tryagain_label (4091466165724929876) -->
+    <skip />
+    <!-- no translation found for privatespace_lockscreen_title (7459425150560213662) -->
+    <skip />
+    <!-- no translation found for privatespace_lockscreen_summary (980268845497843861) -->
+    <skip />
+    <!-- no translation found for privatespace_use_screenlock_label (2775404941450049991) -->
+    <skip />
+    <!-- no translation found for privatespace_set_lock_label (6277529807188602545) -->
+    <skip />
+    <!-- no translation found for privatespace_success_title (4854425684898602993) -->
+    <skip />
+    <!-- no translation found for privatespace_access_text (8756118686974614618) -->
+    <skip />
+    <!-- no translation found for privatespace_done_label (5534818213879562387) -->
+    <skip />
+    <!-- no translation found for scrolldown_to_access (5160743933093369151) -->
+    <skip />
     <string name="fingerprint_add_max" msgid="8639321019299347447">"您最多可以添加 <xliff:g id="COUNT">%d</xliff:g> 个指纹"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"您添加的指纹数量已达到上限"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"无法添加更多的指纹"</string>
@@ -1063,7 +1135,8 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="fold_lock_behavior_title" msgid="786228803694268449">"折叠时继续使用应用"</string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"流畅画面"</string>
-    <string name="peak_refresh_rate_summary" msgid="3627278682437562787">"自动将某些内容的刷新率从 60 Hz 调高到 <xliff:g id="ID_1">%1$s</xliff:g> Hz。但会增加耗电量。"</string>
+    <!-- no translation found for peak_refresh_rate_summary (3212309985294885790) -->
+    <skip />
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"强制使用峰值刷新频率"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"使用最高刷新频率可提升按触操作响应和动画质量，但会增加耗电量。"</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"屏幕感知"</string>
@@ -1960,6 +2033,12 @@
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"按住两个音量键"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"按住两个音量键"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"同时按住两个音量键"</string>
+    <!-- no translation found for accessibility_shortcut_edit_dialog_title_two_finger_triple_tap (6687765191490040899) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_two_finger_triple_tap_keyword (4200744613585702430) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_two_finger_triple_tap (2631127444247448793) -->
+    <skip />
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"点按屏幕三次"</string>
     <string name="accessibility_shortcut_triple_tap_keyword" msgid="6863958573135995927">"点按屏幕三次"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="2102327956423320536">"在屏幕上快速点按 {0,number,integer} 次。此快捷方式可能会减慢设备的运行速度"</string>
@@ -2047,8 +2126,7 @@
     <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"使用振动和触感反馈"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"闹钟振动"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"媒体振动"</string>
-    <!-- no translation found for accessibility_keyboard_vibration_title (7559967730626765441) -->
-    <skip />
+    <string name="accessibility_keyboard_vibration_title" msgid="7559967730626765441">"键盘振动"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"响铃振动"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"通知振动"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"按触反馈"</string>
@@ -3059,8 +3137,7 @@
     <string name="keywords_font_size" msgid="1643198841815006447">"文字大小, 大字版, 大字体, 大文字, 弱视, 放大文字, 字体放大工具, 字体放大, text size, large print, large font, large text, low vision, make text bigger, font enlarger, font enlargement"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"氛围屏保始终保持开启状态, AOD, always on ambient display, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"NFC, 标签, tag, 读取器, reader"</string>
-    <!-- no translation found for keywords_keyboard_vibration (6485149510591654697) -->
-    <skip />
+    <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"键盘、触感反馈、振动、"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"音量、振动、勿扰"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"媒体音量"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"投放音量"</string>
@@ -4880,16 +4957,10 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"您安装的应用可以查看您的设备名称。此外，当您连接到蓝牙设备、连接到 WLAN 网络或设置 WLAN 热点时，其他人可能也会看到您的设备名称。"</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"语法性别"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"选择语法性别"</string>
-    <!-- no translation found for content_protection_preference_title (5069260032659193074) -->
-    <skip />
-    <!-- no translation found for content_protection_preference_summary (2252393849408445391) -->
-    <skip />
-    <!-- no translation found for content_protection_preference_user_consent_switch_title (60088482227901638) -->
-    <skip />
-    <!-- no translation found for content_protection_preference_user_consent_work_profile_switch_title (2868495870224174097) -->
-    <skip />
-    <!-- no translation found for content_protection_preference_subpage_summary (7707255571476950976) -->
-    <skip />
-    <!-- no translation found for content_protection_preference_subpage_info (6010628258453929862) -->
-    <skip />
+    <string name="content_protection_preference_title" msgid="5069260032659193074">"扫描是否存在欺骗性应用"</string>
+    <string name="content_protection_preference_summary" msgid="2252393849408445391">"检查应用活动是否存在钓鱼式攻击"</string>
+    <string name="content_protection_preference_user_consent_switch_title" msgid="60088482227901638">"使用扫描功能"</string>
+    <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="2868495870224174097">"针对工作应用使用扫描功能"</string>
+    <string name="content_protection_preference_subpage_summary" msgid="3595621220981703364"></string>
+    <string name="content_protection_preference_subpage_info" msgid="6890886357653365489"></string>
 </resources>

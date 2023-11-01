@@ -54,9 +54,7 @@ import android.os.Bundle;
 import android.provider.Settings.Global;
 
 import androidx.annotation.Nullable;
-import androidx.lifecycle.Lifecycle;
 import androidx.preference.Preference;
-import androidx.test.core.app.ActivityScenario;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockscreenCredential;
@@ -615,29 +613,15 @@ public class ChooseLockGenericTest {
                 mFragment.getString(R.string.face_unlock_set_unlock_password));
     }
 
-    @Test
-    public void activity_dismisses_InBackground() {
-        ActivityScenario<ChooseLockPassword> scenario =
-                ActivityScenario.launchActivityForResult(getChooseLockGenericIntent(null));
-        scenario.moveToState(Lifecycle.State.RESUMED);
-        scenario.moveToState(Lifecycle.State.CREATED);
-        assertThat(scenario.getResult()).isNotNull();
-    }
-
     private void initActivity(@Nullable Intent intent) {
-        final Intent theIntent = getChooseLockGenericIntent(intent);
-        // TODO(b/275023433) This presents the activity from being made 'visible` is workaround
-        mActivity = Robolectric.buildActivity(ChooseLockGeneric.InternalActivity.class, theIntent)
-                .create().start().postCreate(null).resume().get();
-        mActivity.getSupportFragmentManager().beginTransaction().add(mFragment, null).commitNow();
-    }
-
-    private Intent getChooseLockGenericIntent(@Nullable Intent intent) {
         if (intent == null) {
             intent = new Intent();
         }
         intent.putExtra(ChooseLockGeneric.CONFIRM_CREDENTIALS, false);
-        return intent;
+        // TODO(b/275023433) This presents the activity from being made 'visible` is workaround
+        mActivity = Robolectric.buildActivity(ChooseLockGeneric.InternalActivity.class, intent)
+                .create().start().postCreate(null).resume().get();
+        mActivity.getSupportFragmentManager().beginTransaction().add(mFragment, null).commitNow();
     }
 
     private static String capitalize(final String input) {
