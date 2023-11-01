@@ -27,7 +27,7 @@ import android.util.Log
 import android.widget.ImeAwareEditText
 import androidx.appcompat.app.AlertDialog
 import com.android.settings.R
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintViewModel
+import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintData
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment
 import kotlin.coroutines.resume
 import kotlinx.coroutines.suspendCancellableCoroutine
@@ -46,7 +46,7 @@ class FingerprintSettingsRenameDialog : InstrumentedDialogFragment() {
   override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
     Log.d(TAG, "onCreateDialog $this")
     val fp = requireArguments().get(KEY_FINGERPRINT) as android.hardware.fingerprint.Fingerprint
-    val fingerprintViewModel = FingerprintViewModel(fp.name.toString(), fp.biometricId, fp.deviceId)
+    val fingerprintViewModel = FingerprintData(fp.name.toString(), fp.biometricId, fp.deviceId)
 
     val context = requireContext()
     val alertDialog =
@@ -101,7 +101,7 @@ class FingerprintSettingsRenameDialog : InstrumentedDialogFragment() {
   companion object {
     private const val KEY_FINGERPRINT = "fingerprint"
 
-    suspend fun showInstance(fp: FingerprintViewModel, target: FingerprintSettingsV2Fragment) =
+    suspend fun showInstance(fp: FingerprintData, target: FingerprintSettingsV2Fragment) =
       suspendCancellableCoroutine { continuation ->
         val dialog = FingerprintSettingsRenameDialog()
         val onClick =

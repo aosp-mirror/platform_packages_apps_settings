@@ -16,12 +16,11 @@
 
 package com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel
 
-import android.hardware.fingerprint.FingerprintManager
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.android.settings.biometrics.fingerprint2.shared.model.EnrollReason
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerEnrollStateViewModel
+import com.android.settings.biometrics.fingerprint2.shared.model.FingerEnrollState
+import com.android.settings.biometrics.fingerprint2.shared.model.SetupWizard
 import com.android.systemui.biometrics.shared.model.FingerprintSensorType
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -40,6 +39,7 @@ class FingerprintEnrollFindSensorViewModel(
   private val navigationViewModel: FingerprintEnrollNavigationViewModel,
   private val fingerprintEnrollViewModel: FingerprintEnrollViewModel,
   private val gatekeeperViewModel: FingerprintGatekeeperViewModel,
+  backgroundViewModel: BackgroundViewModel,
   accessibilityViewModel: AccessibilityViewModel,
   foldStateViewModel: FoldStateViewModel,
   orientationStateViewModel: OrientationStateViewModel
@@ -88,6 +88,14 @@ class FingerprintEnrollFindSensorViewModel(
   /** Represents the stream of showing error dialog. */
   val showErrorDialog = _showErrorDialog.filterNotNull()
 
+  private var _didTryEducation = false
+  private var _education: MutableStateFlow<Boolean> = MutableStateFlow(false)
+  /** Indicates if the education flow should be running. */
+  private val educationFlowShouldBeRunning: Flow<Boolean> =
+    _education.combine(backgroundViewModel.background) { shouldRunEducation, isInBackground ->
+      !isInBackground && shouldRunEducation
+    }
+
   init {
     // Start or end enroll flow
     viewModelScope.launch {
@@ -107,38 +115,56 @@ class FingerprintEnrollFindSensorViewModel(
         }
         .collect { token ->
           if (token != null) {
-            fingerprintEnrollViewModel.startEnroll(token, EnrollReason.FindSensor)
+            canStartEducation()
           } else {
-            fingerprintEnrollViewModel.stopEnroll()
+            stopEducation()
           }
         }
     }
 
     // Enroll progress flow
     viewModelScope.launch {
-      combine(
-          navigationViewModel.enrollType,
-          fingerprintEnrollViewModel.enrollFlow.filterNotNull()
-        ) { enrollType, enrollFlow ->
-          Pair(enrollType, enrollFlow)
-        }
-        .collect { (enrollType, enrollFlow) ->
-          when (enrollFlow) {
-            // TODO: Cancel the enroll() when EnrollProgress is received instead of proceeding to
-            // Enrolling page. Otherwise Enrolling page will receive the EnrollError.
-            is FingerEnrollStateViewModel.EnrollProgress -> proceedToEnrolling()
-            is FingerEnrollStateViewModel.EnrollError -> {
-              val errMsgId = enrollFlow.errMsgId
-              if (errMsgId == FingerprintManager.FINGERPRINT_ERROR_CANCELED) {
-                proceedToEnrolling()
-              } else {
-                _showErrorDialog.update { Pair(errMsgId, enrollType == SetupWizard) }
+      educationFlowShouldBeRunning.collect {
+        // Only collect the flow when we should be running.
+        if (it) {
+          combine(
+              navigationViewModel.fingerprintFlow,
+              fingerprintEnrollViewModel.educationEnrollFlow.filterNotNull(),
+            ) { enrollType, educationFlow ->
+              Pair(enrollType, educationFlow)
+            }
+            .collect { (enrollType, educationFlow) ->
+              when (educationFlow) {
+                // TODO: Cancel the enroll() when EnrollProgress is received instead of proceeding
+                // to
+                // Enrolling page. Otherwise Enrolling page will receive the EnrollError.
+                is FingerEnrollState.EnrollProgress -> proceedToEnrolling()
+                is FingerEnrollState.EnrollError -> {
+                  if (educationFlow.isCancelled) {
+                    proceedToEnrolling()
+                  } else {
+                    _showErrorDialog.update { Pair(educationFlow.errString, enrollType == SetupWizard) }
+                  }
+                }
+                is FingerEnrollState.EnrollHelp -> {}
               }
             }
-            is FingerEnrollStateViewModel.EnrollHelp -> {}
-          }
         }
+      }
     }
+  }
+
+  /** Indicates if education can begin */
+  private fun canStartEducation() {
+    if (!_didTryEducation) {
+      _didTryEducation = true
+      _education.update { true }
+    }
+  }
+
+  /** Indicates that education has finished */
+  private fun stopEducation() {
+    _education.update { false }
   }
 
   /** Proceed to EnrollEnrolling page. */
@@ -150,6 +176,7 @@ class FingerprintEnrollFindSensorViewModel(
     private val navigationViewModel: FingerprintEnrollNavigationViewModel,
     private val fingerprintEnrollViewModel: FingerprintEnrollViewModel,
     private val gatekeeperViewModel: FingerprintGatekeeperViewModel,
+    private val backgroundViewModel: BackgroundViewModel,
     private val accessibilityViewModel: AccessibilityViewModel,
     private val foldStateViewModel: FoldStateViewModel,
     private val orientationStateViewModel: OrientationStateViewModel
@@ -160,6 +187,7 @@ class FingerprintEnrollFindSensorViewModel(
         navigationViewModel,
         fingerprintEnrollViewModel,
         gatekeeperViewModel,
+        backgroundViewModel,
         accessibilityViewModel,
         foldStateViewModel,
         orientationStateViewModel

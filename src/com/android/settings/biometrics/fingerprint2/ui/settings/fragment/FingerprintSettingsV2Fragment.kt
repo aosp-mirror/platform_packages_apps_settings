@@ -46,8 +46,10 @@ import com.android.settings.biometrics.GatekeeperPasswordProvider
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollEnrolling
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollIntroductionInternal
 import com.android.settings.biometrics.fingerprint2.domain.interactor.FingerprintManagerInteractorImpl
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintAuthAttemptViewModel
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintViewModel
+import com.android.settings.biometrics.fingerprint2.repository.PressToAuthProviderImpl
+import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintAuthAttemptModel
+import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintData
+import com.android.settings.biometrics.fingerprint2.shared.model.Settings
 import com.android.settings.biometrics.fingerprint2.ui.settings.binder.FingerprintSettingsViewBinder
 import com.android.settings.biometrics.fingerprint2.ui.settings.viewmodel.FingerprintSettingsNavigationViewModel
 import com.android.settings.biometrics.fingerprint2.ui.settings.viewmodel.FingerprintSettingsViewModel
@@ -142,7 +144,7 @@ class FingerprintSettingsV2Fragment :
       }
     }
 
-  override fun userLockout(authAttemptViewModel: FingerprintAuthAttemptViewModel.Error) {
+  override fun userLockout(authAttemptViewModel: FingerprintAuthAttemptModel.Error) {
     Toast.makeText(activity, authAttemptViewModel.message, Toast.LENGTH_SHORT).show()
   }
 
@@ -186,40 +188,46 @@ class FingerprintSettingsV2Fragment :
     val backgroundDispatcher = Dispatchers.IO
     val activity = requireActivity()
     val userHandle = activity.user.identifier
+    // Note that SUW should not be launching FingerprintSettings
+    val isAnySuw = Settings
+
+    val pressToAuthProvider = {
+      var toReturn: Int =
+        Secure.getIntForUser(
+          context.contentResolver,
+          Secure.SFPS_PERFORMANT_AUTH_ENABLED,
+          -1,
+          userHandle,
+        )
+      if (toReturn == -1) {
+        toReturn =
+          if (
+            context.resources.getBoolean(com.android.internal.R.bool.config_performantAuthDefault)
+          ) {
+            1
+          } else {
+            0
+          }
+        Secure.putIntForUser(
+          context.contentResolver,
+          Secure.SFPS_PERFORMANT_AUTH_ENABLED,
+          toReturn,
+          userHandle
+        )
+      }
+
+      toReturn == 1
+    }
 
     val interactor =
       FingerprintManagerInteractorImpl(
         context.applicationContext,
         backgroundDispatcher,
         fingerprintManager,
-        GatekeeperPasswordProvider(LockPatternUtils(context.applicationContext))
-      ) {
-        var toReturn: Int =
-          Secure.getIntForUser(
-            context.contentResolver,
-            Secure.SFPS_PERFORMANT_AUTH_ENABLED,
-            -1,
-            userHandle,
-          )
-        if (toReturn == -1) {
-          toReturn =
-            if (
-              context.resources.getBoolean(com.android.internal.R.bool.config_performantAuthDefault)
-            ) {
-              1
-            } else {
-              0
-            }
-          Secure.putIntForUser(
-            context.contentResolver,
-            Secure.SFPS_PERFORMANT_AUTH_ENABLED,
-            toReturn,
-            userHandle
-          )
-        }
-
-        toReturn == 1
-      }
+        GatekeeperPasswordProvider(LockPatternUtils(context.applicationContext)),
+        PressToAuthProviderImpl(context),
+        isAnySuw
+      )
 
     val token = intent.getByteArrayExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN)
     val challenge = intent.getLongExtra(BiometricEnrollBase.EXTRA_KEY_CHALLENGE, -1L)
@@ -292,18 +300,18 @@ class FingerprintSettingsV2Fragment :
   }
 
   /** Used to indicate that preference has been clicked */
-  fun onPrefClicked(fingerprintViewModel: FingerprintViewModel) {
+  fun onPrefClicked(fingerprintViewModel: FingerprintData) {
     Log.d(TAG, "onPrefClicked(${fingerprintViewModel})")
     settingsViewModel.onPrefClicked(fingerprintViewModel)
   }
 
   /** Used to indicate that a delete pref has been clicked */
-  fun onDeletePrefClicked(fingerprintViewModel: FingerprintViewModel) {
+  fun onDeletePrefClicked(fingerprintViewModel: FingerprintData) {
     Log.d(TAG, "onDeletePrefClicked(${fingerprintViewModel})")
     settingsViewModel.onDeleteClicked(fingerprintViewModel)
   }
 
-  override fun showSettings(enrolledFingerprints: List<FingerprintViewModel>) {
+  override fun showSettings(enrolledFingerprints: List<FingerprintData>) {
     val category =
       this@FingerprintSettingsV2Fragment.findPreference(KEY_FINGERPRINTS_ENROLLED_CATEGORY)
         as PreferenceCategory?
@@ -422,7 +430,7 @@ class FingerprintSettingsV2Fragment :
     }
   }
 
-  override suspend fun askUserToDeleteDialog(fingerprintViewModel: FingerprintViewModel): Boolean {
+  override suspend fun askUserToDeleteDialog(fingerprintViewModel: FingerprintData): Boolean {
     Log.d(TAG, "showing delete dialog for (${fingerprintViewModel})")
 
     try {
@@ -446,8 +454,8 @@ class FingerprintSettingsV2Fragment :
   }
 
   override suspend fun askUserToRenameDialog(
-    fingerprintViewModel: FingerprintViewModel
-  ): Pair<FingerprintViewModel, String>? {
+    fingerprintViewModel: FingerprintData
+  ): Pair<FingerprintData, String>? {
     Log.d(TAG, "showing rename dialog for (${fingerprintViewModel})")
     try {
       val toReturn =

@@ -21,29 +21,18 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.android.settings.biometrics.fingerprint2.shared.domain.interactor.FingerprintManagerInteractor
+import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintFlow
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.shareIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 private const val TAG = "FingerprintEnrollNavigationViewModel"
-
-/**
- * The [EnrollType] for fingerprint enrollment indicates information on how the flow should behave.
- */
-sealed class EnrollType
-
-/** The default enrollment experience, typically called from Settings */
-object Default : EnrollType()
-
-/** SetupWizard/Out of box experience (OOBE) enrollment type. */
-object SetupWizard : EnrollType()
-
-/** Unicorn enrollment type */
-object Unicorn : EnrollType()
 
 /**
  * This class is responsible for sending a [NavigationStep] which indicates where the user is in the
@@ -53,31 +42,26 @@ class FingerprintEnrollNavigationViewModel(
   private val dispatcher: CoroutineDispatcher,
   private val fingerprintManagerInteractor: FingerprintManagerInteractor,
   private val gatekeeperViewModel: FingerprintGatekeeperViewModel,
-  private val canSkipConfirm: Boolean
+  private val firstStep: NextStepViewModel,
+  private val navState: NavState,
+  private val theFingerprintFlow: FingerprintFlow,
 ) : ViewModel() {
 
   private class InternalNavigationStep(
     lastStep: NextStepViewModel,
     nextStep: NextStepViewModel,
     forward: Boolean,
-    var canNavigate: Boolean
+    var canNavigate: Boolean,
   ) : NavigationStep(lastStep, nextStep, forward)
 
-  private var _enrollType = MutableStateFlow<EnrollType?>(Default)
+  private var _fingerprintFlow = MutableStateFlow<FingerprintFlow?>(theFingerprintFlow)
 
-  /** A flow that indicates the [EnrollType] */
-  val enrollType: Flow<EnrollType?> = _enrollType.asStateFlow()
-
-  private var navState = NavState(canSkipConfirm)
+  /** A flow that indicates the [FingerprintFlow] */
+  val fingerprintFlow: Flow<FingerprintFlow?> = _fingerprintFlow.asStateFlow()
 
   private val _navigationStep =
     MutableStateFlow(
-      InternalNavigationStep(
-        PlaceHolderState,
-        Start.next(navState),
-        forward = false,
-        canNavigate = true
-      )
+      InternalNavigationStep(PlaceHolderState, firstStep, forward = false, canNavigate = true)
     )
 
   init {
@@ -95,6 +79,10 @@ class FingerprintEnrollNavigationViewModel(
    * user is.
    */
   val navigationViewModel: Flow<NavigationStep> = _navigationStep.asStateFlow()
+
+  /** This action indicates that the UI should actually update the navigation to the given step. */
+  val navigationAction: Flow<NavigationStep?> =
+    _navigationStep.shareIn(viewModelScope, SharingStarted.Lazily, 0)
 
   /** Used to start the next step of Fingerprint Enrollment. */
   fun nextStep() {
@@ -130,6 +118,7 @@ class FingerprintEnrollNavigationViewModel(
     private val fingerprintManagerInteractor: FingerprintManagerInteractor,
     private val fingerprintGatekeeperViewModel: FingerprintGatekeeperViewModel,
     private val canSkipConfirm: Boolean,
+    private val fingerprintFlow: FingerprintFlow,
   ) : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")
@@ -137,11 +126,14 @@ class FingerprintEnrollNavigationViewModel(
       modelClass: Class<T>,
     ): T {
 
+      val navState = NavState(canSkipConfirm)
       return FingerprintEnrollNavigationViewModel(
         backgroundDispatcher,
         fingerprintManagerInteractor,
         fingerprintGatekeeperViewModel,
-        canSkipConfirm,
+        Start.next(navState),
+        navState,
+        fingerprintFlow,
       )
         as T
     }

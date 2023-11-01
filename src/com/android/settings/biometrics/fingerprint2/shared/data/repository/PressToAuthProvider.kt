@@ -14,17 +14,14 @@
  * limitations under the License.
  */
 
-package com.android.settings.biometrics.fingerprint2.ui.settings.viewmodel
+package com.android.settings.biometrics.fingerprint2.shared.data.repository
 
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintData
-
-/** Classed use to represent a Dialogs state. */
-sealed class PreferenceViewModel {
-  data class RenameDialog(
-      val fingerprintViewModel: FingerprintData,
-  ) : PreferenceViewModel()
-
-  data class DeleteDialog(
-      val fingerprintViewModel: FingerprintData,
-  ) : PreferenceViewModel()
+/**
+ * Interface that indicates if press to auth is on or off.
+ */
+interface PressToAuthProvider {
+    /**
+     * Indicates true if the PressToAuth feature is enabled, false otherwise.
+     */
+    val isEnabled: Boolean
 }

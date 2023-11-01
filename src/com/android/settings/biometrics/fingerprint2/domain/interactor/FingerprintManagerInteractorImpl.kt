@@ -24,12 +24,16 @@ import android.hardware.fingerprint.FingerprintManager.RemovalCallback
 import android.os.CancellationSignal
 import android.util.Log
 import com.android.settings.biometrics.GatekeeperPasswordProvider
-import com.android.settings.biometrics.fingerprint2.conversion.toOriginalReason
+import com.android.settings.biometrics.fingerprint2.conversion.Util.toEnrollError
+import com.android.settings.biometrics.fingerprint2.conversion.Util.toOriginalReason
+import com.android.settings.biometrics.fingerprint2.shared.data.repository.PressToAuthProvider
 import com.android.settings.biometrics.fingerprint2.shared.domain.interactor.FingerprintManagerInteractor
 import com.android.settings.biometrics.fingerprint2.shared.model.EnrollReason
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerEnrollStateViewModel
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintAuthAttemptViewModel
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintViewModel
+import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintFlow
+import com.android.settings.biometrics.fingerprint2.shared.model.FingerEnrollState
+import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintAuthAttemptModel
+import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintData
+import com.android.settings.biometrics.fingerprint2.shared.model.SetupWizard
 import com.android.settings.password.ChooseLockSettingsHelper
 import com.android.systemui.biometrics.shared.model.toFingerprintSensor
 import kotlin.coroutines.resume
@@ -38,9 +42,12 @@ import kotlinx.coroutines.CancellableContinuation
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.channels.onFailure
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
 
@@ -51,7 +58,8 @@ class FingerprintManagerInteractorImpl(
   private val backgroundDispatcher: CoroutineDispatcher,
   private val fingerprintManager: FingerprintManager,
   private val gatekeeperPasswordProvider: GatekeeperPasswordProvider,
-  private val pressToAuthProvider: () -> Boolean,
+  private val pressToAuthProvider: PressToAuthProvider,
+  private val fingerprintFlow: FingerprintFlow,
 ) : FingerprintManagerInteractor {
 
   private val maxFingerprints =
@@ -59,6 +67,8 @@ class FingerprintManagerInteractorImpl(
       com.android.internal.R.integer.config_fingerprintMaxTemplatesPerUser
     )
   private val applicationContext = applicationContext.applicationContext
+
+  private val enrollRequestOutstanding = MutableStateFlow(false)
 
   override suspend fun generateChallenge(gateKeeperPasswordHandle: Long): Pair<Long, ByteArray> =
     suspendCoroutine {
@@ -75,11 +85,11 @@ class FingerprintManagerInteractorImpl(
       fingerprintManager.generateChallenge(applicationContext.userId, callback)
     }
 
-  override val enrolledFingerprints: Flow<List<FingerprintViewModel>> = flow {
+  override val enrolledFingerprints: Flow<List<FingerprintData>> = flow {
     emit(
       fingerprintManager
         .getEnrolledFingerprints(applicationContext.userId)
-        .map { (FingerprintViewModel(it.name.toString(), it.biometricId, it.deviceId)) }
+        .map { (FingerprintData(it.name.toString(), it.biometricId, it.deviceId)) }
         .toList()
     )
   }
@@ -103,28 +113,51 @@ class FingerprintManagerInteractorImpl(
   override suspend fun enroll(
     hardwareAuthToken: ByteArray?,
     enrollReason: EnrollReason,
-  ): Flow<FingerEnrollStateViewModel> = callbackFlow {
+  ): Flow<FingerEnrollState> = callbackFlow {
+    // TODO (b/308456120) Improve this logic
+    if (enrollRequestOutstanding.value) {
+      Log.d(TAG, "Outstanding enroll request, waiting 150ms")
+      delay(150)
+      if (enrollRequestOutstanding.value) {
+        Log.e(TAG, "Request still present, continuing")
+      }
+    }
+
+    enrollRequestOutstanding.update { true }
+
     var streamEnded = false
+    var totalSteps: Int? = null
     val enrollmentCallback =
       object : FingerprintManager.EnrollmentCallback() {
         override fun onEnrollmentProgress(remaining: Int) {
-          trySend(FingerEnrollStateViewModel.EnrollProgress(remaining)).onFailure { error ->
+          // This is sort of an implementation detail, but unfortunately the API isn't
+          // very expressive. If anything we should look at changing the FingerprintManager API.
+          if (totalSteps == null) {
+            totalSteps = remaining + 1
+          }
+
+          trySend(FingerEnrollState.EnrollProgress(remaining, totalSteps!!)).onFailure {
+            error ->
             Log.d(TAG, "onEnrollmentProgress($remaining) failed to send, due to $error")
           }
+
           if (remaining == 0) {
             streamEnded = true
+            enrollRequestOutstanding.update { false }
           }
         }
 
         override fun onEnrollmentHelp(helpMsgId: Int, helpString: CharSequence?) {
-          trySend(FingerEnrollStateViewModel.EnrollHelp(helpMsgId, helpString.toString()))
+          trySend(FingerEnrollState.EnrollHelp(helpMsgId, helpString.toString()))
             .onFailure { error -> Log.d(TAG, "onEnrollmentHelp failed to send, due to $error") }
         }
 
         override fun onEnrollmentError(errMsgId: Int, errString: CharSequence?) {
-          trySend(FingerEnrollStateViewModel.EnrollError(errMsgId, errString.toString()))
+          trySend(errMsgId.toEnrollError(fingerprintFlow == SetupWizard))
             .onFailure { error -> Log.d(TAG, "onEnrollmentError failed to send, due to $error") }
+          Log.d(TAG, "onEnrollmentError($errMsgId)")
           streamEnded = true
+          enrollRequestOutstanding.update { false }
         }
       }
 
@@ -140,12 +173,13 @@ class FingerprintManagerInteractorImpl(
       // If the stream has not been ended, and the user has stopped collecting the flow
       // before it was over, send cancel.
       if (!streamEnded) {
+        Log.e(TAG, "Cancel is sent from settings for enroll()")
         cancellationSignal.cancel()
       }
     }
   }
 
-  override suspend fun removeFingerprint(fp: FingerprintViewModel): Boolean = suspendCoroutine {
+  override suspend fun removeFingerprint(fp: FingerprintData): Boolean = suspendCoroutine {
     val callback =
       object : RemovalCallback() {
         override fun onRemovalError(
@@ -170,7 +204,7 @@ class FingerprintManagerInteractorImpl(
     )
   }
 
-  override suspend fun renameFingerprint(fp: FingerprintViewModel, newName: String) {
+  override suspend fun renameFingerprint(fp: FingerprintData, newName: String) {
     withContext(backgroundDispatcher) {
       fingerprintManager.rename(fp.fingerId, applicationContext.userId, newName)
     }
@@ -181,11 +215,11 @@ class FingerprintManagerInteractorImpl(
   }
 
   override suspend fun pressToAuthEnabled(): Boolean = suspendCancellableCoroutine {
-    it.resume(pressToAuthProvider())
+    it.resume(pressToAuthProvider.isEnabled)
   }
 
-  override suspend fun authenticate(): FingerprintAuthAttemptViewModel =
-    suspendCancellableCoroutine { c: CancellableContinuation<FingerprintAuthAttemptViewModel> ->
+  override suspend fun authenticate(): FingerprintAuthAttemptModel =
+    suspendCancellableCoroutine { c: CancellableContinuation<FingerprintAuthAttemptModel> ->
       val authenticationCallback =
         object : FingerprintManager.AuthenticationCallback() {
 
@@ -195,7 +229,7 @@ class FingerprintManagerInteractorImpl(
               Log.d(TAG, "framework sent down onAuthError after finish")
               return
             }
-            c.resume(FingerprintAuthAttemptViewModel.Error(errorCode, errString.toString()))
+            c.resume(FingerprintAuthAttemptModel.Error(errorCode, errString.toString()))
           }
 
           override fun onAuthenticationSucceeded(result: FingerprintManager.AuthenticationResult) {
@@ -204,7 +238,7 @@ class FingerprintManagerInteractorImpl(
               Log.d(TAG, "framework sent down onAuthError after finish")
               return
             }
-            c.resume(FingerprintAuthAttemptViewModel.Success(result.fingerprint?.biometricId ?: -1))
+            c.resume(FingerprintAuthAttemptModel.Success(result.fingerprint?.biometricId ?: -1))
           }
         }
 
