@@ -113,15 +113,14 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Bluetooth LE hangátvitel kikapcsolása"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Kikapcsolja a Bluetooth alacsony energiaszintű hangátvitel funkciót, ha az eszköz támogatja az Alacsony energiaszintű hangátvitel hardver működését."</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"„Alacsony energiaszintű hangátvitel” az Eszközadatokban"</string>
-    <!-- no translation found for bluetooth_bypass_leaudio_allowlist (7392319491894565552) -->
-    <skip />
-    <!-- no translation found for bluetooth_bypass_leaudio_allowlist_summary (8999245286359656738) -->
-    <skip />
+    <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Bluetooth alacsony energiaszintű hangátvitel engedélyezőlistájának megkerülése"</string>
+    <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Alacsony energiaszintű hangátvitel használata alapértelmezés szerint akkor is, ha az Alacsony energiaszintű hangátvitelt használó periféria nem teljesíti igazoltan az engedélyezőlista feltételeit."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Médiaeszközök"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Hívóeszközök"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Egyéb eszközök"</string>
     <string name="connected_device_saved_title" msgid="5607274378851905959">"Mentett eszközök"</string>
     <string name="connected_device_fast_pair_device_title" msgid="543124539265592392">"Fiókkal társítva"</string>
+    <string name="connected_device_previously_associated_fast_pair_device_title" msgid="8353405823992023457">"Korábban használva a fiókkal"</string>
     <string name="connected_device_add_device_summary" msgid="8671009879957120802">"A Bluetooth bekapcsol a párosítás végrehajtása érdekében"</string>
     <string name="connected_device_connections_title" msgid="4164120115341579170">"Kapcsolati beállítások"</string>
     <string name="connected_device_previously_connected_screen_title" msgid="8823331744788100605">"Korábban csatlakoztatva"</string>
@@ -134,6 +133,10 @@
     <string name="stylus_textfield_handwriting" msgid="2363579035338976327">"Írás a szövegmezőkben"</string>
     <string name="stylus_ignore_button" msgid="7734540973145241391">"Az érintőceruza összes gombnyomásának figyelmen kívül hagyása"</string>
     <string name="stylus_connected_devices_title" msgid="2823967577941359812">"Érintőceruza"</string>
+    <string name="audio_sharing_title" msgid="4144157137502923821">"Hang megosztása"</string>
+    <string name="audio_sharing_switch_title" msgid="7052827328670825701">"Hang megosztása"</string>
+    <!-- no translation found for calls_and_alarms_device_title (6993559028175454198) -->
+    <skip />
     <string name="date_and_time" msgid="1788358029823431692">"Dátum és idő"</string>
     <string name="proxy_settings_title" msgid="4201866858226087066">"Proxy"</string>
     <string name="proxy_clear_text" msgid="6529658759984031149">"Törlés"</string>
@@ -537,7 +540,15 @@
     <string name="private_space_title" msgid="7078627930195569767">"Privát terület"</string>
     <string name="private_space_summary" msgid="8237652417163408001">"Alkalmazások elrejtése privát mappában"</string>
     <string name="private_space_one_lock_title" msgid="7306547190751832568">"Feloldás képernyőzárral"</string>
-    <string name="private_space_hide_title" msgid="1615744426933304644">"Privát terület mutatása"</string>
+    <string name="private_space_hide_title" msgid="8687034008994037610">"Elrejtés lezárt állapotban"</string>
+    <string name="privatespace_hide_page_title" msgid="972581369094289386">"Privát terület elrejtése lezárt állapotban"</string>
+    <string name="privatespace_hide_page_summary" msgid="1052569521186403642">"A privát terület elrejthető az applistából, ha titkolná mások előtt"</string>
+    <string name="privatespace_access_header" msgid="982809349769470185">"Hozzáférés a privát területhez rejtett állapotban"</string>
+    <string name="privatespace_search_description" msgid="983837656432484282">"A „privát terület” kifejezés keresése a keresősávban"</string>
+    <string name="privatespace_tap_tile_description" msgid="4146608898639668340">"Koppintson a privát terület mozaikjára"</string>
+    <string name="privatespace_unlock_description" msgid="4132755357482447360">"Oldja fel a privát területet"</string>
+    <string name="privatespace_hide_off_summary" msgid="7227778747159633671">"Ki"</string>
+    <string name="privatespace_hide_on_summary" msgid="6136704537527640183">"Be"</string>
     <string name="private_space_category_system" msgid="1286843321867285700">"Rendszer"</string>
     <string name="private_space_create_title" msgid="47273568884806726">"Privát terület létrehozása"</string>
     <string name="private_space_delete_title" msgid="3075645119800272800">"Privát terület törlése"</string>
@@ -546,6 +557,51 @@
     <string name="private_space_create_failed" msgid="4908100791174213808">"Nem sikerült létrehozni a privát területet"</string>
     <string name="private_space_deleted" msgid="7825768516955610897">"Privát terület sikeresen törölve"</string>
     <string name="private_space_delete_failed" msgid="8500755484258565011">"Nem sikerült törölni a privát területet"</string>
+    <string name="no_device_lock_title" msgid="1078223464721029954">"Képernyőzár beállítása"</string>
+    <string name="no_device_lock_summary" msgid="7653477413589207824">"Privát terület használatához állítson be képernyőzárat."</string>
+    <string name="no_device_lock_action_label" msgid="2640487005629001288">"Képernyőzár beállítása"</string>
+    <string name="no_device_lock_cancel" msgid="4412602160321228863">"Mégse"</string>
+    <string name="privatespace_cancel_label" msgid="362351004019511784">"Mégse"</string>
+    <string name="privatespace_setup_button_label" msgid="3696372546231047258">"Beállítás"</string>
+    <string name="privatespace_setup_title" msgid="177623114624330394">"Privát terület beállítása"</string>
+    <string name="privatespace_hide_apps_summary" msgid="4016518749055602268">"Elrejtheti a privát alkalmazásokat egy biztonságos helyen, amelyhez csak Ön férhet hozzá"</string>
+    <string name="privatespace_how_title" msgid="8794102046435526065">"Hogyan működik?"</string>
+    <string name="privatespace_access_bottom_text" msgid="1075244097441349030">"A privát terület az alkalmazások listájának alján érhető el."</string>
+    <string name="privatespace_protected_lock_text" msgid="7320604832432017423">"A privát területen lévő alkalmazásokat zárolás védi"</string>
+    <!-- no translation found for privatespace_hidden_notifications_text (8121285743543004812) -->
+    <skip />
+    <!-- no translation found for privatespace_apps_permission_text (4418511924151828812) -->
+    <skip />
+    <!-- no translation found for privatespace_setting_up_text (8532777749891406509) -->
+    <skip />
+    <!-- no translation found for privatespace_lock_protected_title (7409801274869666860) -->
+    <skip />
+    <!-- no translation found for privatespace_apps_hidden_title (6146605677591599107) -->
+    <skip />
+    <!-- no translation found for privatespace_access_from_apps_title (6787000636686810564) -->
+    <skip />
+    <!-- no translation found for privatespace_error_screen_title (8658511165913662275) -->
+    <skip />
+    <!-- no translation found for privatespace_error_screen_summary (5679626031159521676) -->
+    <skip />
+    <!-- no translation found for privatespace_tryagain_label (4091466165724929876) -->
+    <skip />
+    <!-- no translation found for privatespace_lockscreen_title (7459425150560213662) -->
+    <skip />
+    <!-- no translation found for privatespace_lockscreen_summary (980268845497843861) -->
+    <skip />
+    <!-- no translation found for privatespace_use_screenlock_label (2775404941450049991) -->
+    <skip />
+    <!-- no translation found for privatespace_set_lock_label (6277529807188602545) -->
+    <skip />
+    <!-- no translation found for privatespace_success_title (4854425684898602993) -->
+    <skip />
+    <!-- no translation found for privatespace_access_text (8756118686974614618) -->
+    <skip />
+    <!-- no translation found for privatespace_done_label (5534818213879562387) -->
+    <skip />
+    <!-- no translation found for scrolldown_to_access (5160743933093369151) -->
+    <skip />
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Legfeljebb <xliff:g id="COUNT">%d</xliff:g> ujjlenyomatot adhat hozzá"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Elérte a hozzáadható ujjlenyomatok maximális számát"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Nem lehet több ujjlenyomatot hozzáadni"</string>
@@ -1063,7 +1119,8 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="fold_lock_behavior_title" msgid="786228803694268449">"Appok megtartása összehajtáskor"</string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
-    <string name="peak_refresh_rate_summary" msgid="3627278682437562787">"Néhány tartalomnál automatikusan megemeli a frissítési gyakoriságot 60-ról <xliff:g id="ID_1">%1$s</xliff:g> Hz-re. Növeli az akkumulátorhasználatot."</string>
+    <!-- no translation found for peak_refresh_rate_summary (3212309985294885790) -->
+    <skip />
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Legmagasabb frissítési gyakoriság kényszerítése"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Legnagyobb frissítési gyakoriság a kifinomultabb érintési érzékenység és a jobb minőségű animációk érdekében. Növeli az akkumulátorhasználatot."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Képernyőfigyelő"</string>
@@ -1960,6 +2017,12 @@
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Hangerőgombok nyomva tartása"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"hangerőgombok nyomva tartása"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Tartsa lenyomva mindkét hangerőgombot"</string>
+    <!-- no translation found for accessibility_shortcut_edit_dialog_title_two_finger_triple_tap (6687765191490040899) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_two_finger_triple_tap_keyword (4200744613585702430) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_two_finger_triple_tap (2631127444247448793) -->
+    <skip />
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"Háromszori koppintás a képernyőre"</string>
     <string name="accessibility_shortcut_triple_tap_keyword" msgid="6863958573135995927">"háromszori koppintás a képernyőre"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="2102327956423320536">"Koppintson a képernyőre gyorsan, {0,number,integer} alkalommal. Ez a gyorsparancs lelassíthatja az eszközét."</string>
@@ -2047,8 +2110,7 @@
     <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Rezgés és haptikus visszajelzés használata"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Ébresztés rezgése"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Rezgés médiatartalommal"</string>
-    <!-- no translation found for accessibility_keyboard_vibration_title (7559967730626765441) -->
-    <skip />
+    <string name="accessibility_keyboard_vibration_title" msgid="7559967730626765441">"Billentyűzet rezgése"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Csengés rezgése"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Értesítések rezgése"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Visszajelzés az érintésekről"</string>
@@ -3059,8 +3121,7 @@
     <string name="keywords_font_size" msgid="1643198841815006447">"betűméret, nagybetű, nagy betűtípus, nagy szöveg, gyengénlátó, szöveg nagyítása, betűtípusnagyító, betűtípus-nagyítás"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"Mindig bekapcsolt környezeti kijelző (Always on Ambient Display, AOD)"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, címke, olvasó"</string>
-    <!-- no translation found for keywords_keyboard_vibration (6485149510591654697) -->
-    <skip />
+    <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"billentyűzet, rezgés, vibrálás,"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Hangerő, rezgés, Ne zavarjanak"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Média hangereje"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Átküldés hangereje"</string>
@@ -4880,16 +4941,10 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Eszköze neve látható a telepített alkalmazások számára. Mások is láthatják, ha csatlakoztatja telefonját más Bluetooth-eszközökhöz, Wi-Fi-hálózathoz, vagy ha Wi-Fi-hotspotot állít be."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Nyelvtani nem"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Nyelvtani nem kiválasztása"</string>
-    <!-- no translation found for content_protection_preference_title (5069260032659193074) -->
-    <skip />
-    <!-- no translation found for content_protection_preference_summary (2252393849408445391) -->
-    <skip />
-    <!-- no translation found for content_protection_preference_user_consent_switch_title (60088482227901638) -->
-    <skip />
-    <!-- no translation found for content_protection_preference_user_consent_work_profile_switch_title (2868495870224174097) -->
-    <skip />
-    <!-- no translation found for content_protection_preference_subpage_summary (7707255571476950976) -->
-    <skip />
-    <!-- no translation found for content_protection_preference_subpage_info (6010628258453929862) -->
-    <skip />
+    <string name="content_protection_preference_title" msgid="5069260032659193074">"Megtévesztő alkalmazások keresése…"</string>
+    <string name="content_protection_preference_summary" msgid="2252393849408445391">"Adathalászat keresése az alkalmazástevékenységekben"</string>
+    <string name="content_protection_preference_user_consent_switch_title" msgid="60088482227901638">"Ellenőrzés"</string>
+    <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="2868495870224174097">"Ellenőrzés munkahelyi alkalmazásoknál"</string>
+    <string name="content_protection_preference_subpage_summary" msgid="3595621220981703364"></string>
+    <string name="content_protection_preference_subpage_info" msgid="6890886357653365489"></string>
 </resources>

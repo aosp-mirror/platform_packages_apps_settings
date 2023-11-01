@@ -20,6 +20,8 @@ import android.app.ActivityManager
 import android.app.settings.SettingsEnums
 import android.content.Context
 import android.content.Intent
+import android.content.pm.FakeFeatureFlagsImpl
+import android.content.pm.Flags
 import android.content.pm.PackageManager
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -153,6 +155,41 @@ class PackageInfoPresenterTest {
         packageInfoPresenter.logAction(123)
 
         verifyAction(123)
+    }
+
+    @Test
+    fun reloadPackageInfo_archivingDisabled() = runTest {
+        coroutineScope {
+            val fakeFeatureFlags = FakeFeatureFlagsImpl()
+            fakeFeatureFlags.setFlag(Flags.FLAG_ARCHIVING, false)
+            val packageInfoPresenter =
+                PackageInfoPresenter(context, PACKAGE_NAME, USER_ID, this, packageManagers, fakeFeatureFlags)
+
+            packageInfoPresenter.reloadPackageInfo()
+        }
+
+        val flags = PackageManager.MATCH_ANY_USER.toLong() or
+            PackageManager.MATCH_DISABLED_COMPONENTS.toLong() or
+            PackageManager.GET_PERMISSIONS.toLong()
+        verify(packageManagers).getPackageInfoAsUser(PACKAGE_NAME, flags, USER_ID)
+    }
+
+    @Test
+    fun reloadPackageInfo_archivingEnabled() = runTest {
+        coroutineScope {
+            val fakeFeatureFlags = FakeFeatureFlagsImpl()
+            fakeFeatureFlags.setFlag(Flags.FLAG_ARCHIVING, true)
+            val packageInfoPresenter =
+                PackageInfoPresenter(context, PACKAGE_NAME, USER_ID, this, packageManagers, fakeFeatureFlags)
+
+            packageInfoPresenter.reloadPackageInfo()
+        }
+
+        val flags = PackageManager.MATCH_ANY_USER.toLong() or
+            PackageManager.MATCH_DISABLED_COMPONENTS.toLong() or
+            PackageManager.GET_PERMISSIONS.toLong() or
+            PackageManager.MATCH_ARCHIVED_PACKAGES
+        verify(packageManagers).getPackageInfoAsUser(PACKAGE_NAME, flags, USER_ID)
     }
 
     private fun verifyAction(category: Int) {

@@ -24,7 +24,6 @@ import android.provider.Settings;
 import androidx.preference.Preference;
 
 import com.android.internal.annotations.VisibleForTesting;
-import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
@@ -108,6 +107,10 @@ public class FingerprintSettingsRequireScreenOnToAuthPreferenceController
         return UserHandle.of(getUserId()).getIdentifier();
     }
 
+    /**
+     * This feature is not directly searchable.
+     */
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.security_settings_fingerprint) {};
+            new BaseSearchIndexProvider() {};
+
 }

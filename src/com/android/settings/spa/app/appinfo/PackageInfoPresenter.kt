@@ -20,6 +20,8 @@ import android.app.settings.SettingsEnums
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.content.pm.FeatureFlags
+import android.content.pm.FeatureFlagsImpl
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.os.UserHandle
@@ -50,6 +52,7 @@ class PackageInfoPresenter(
     val userId: Int,
     private val coroutineScope: CoroutineScope,
     private val packageManagers: IPackageManagers = PackageManagers,
+    private val featureFlags: FeatureFlags = FeatureFlagsImpl(),
 ) {
     private val metricsFeatureProvider = featureFactory.metricsFeatureProvider
     private val userHandle = UserHandle.of(userId)
@@ -141,9 +144,10 @@ class PackageInfoPresenter(
     private fun getPackageInfo() =
         packageManagers.getPackageInfoAsUser(
             packageName = packageName,
-            flags = PackageManager.MATCH_ANY_USER or
-                PackageManager.MATCH_DISABLED_COMPONENTS or
-                PackageManager.GET_PERMISSIONS,
+            flags = PackageManager.MATCH_ANY_USER.toLong() or
+                PackageManager.MATCH_DISABLED_COMPONENTS.toLong() or
+                PackageManager.GET_PERMISSIONS.toLong() or
+                if (featureFlags.archiving()) PackageManager.MATCH_ARCHIVED_PACKAGES else 0,
             userId = userId,
         )
 }
