@@ -16,6 +16,8 @@
 
 package com.android.settings.network.telephony;
 
+import static com.android.settings.network.MobileNetworkListFragment.observeAirplaneModeAndFinishIfOn;
+
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -31,7 +33,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
@@ -327,6 +332,12 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     }
 
     @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        observeAirplaneModeAndFinishIfOn(this);
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         mMobileNetworkRepository.addRegister(this, this, mSubId);
@@ -359,11 +370,6 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     public void onPause() {
         mMobileNetworkRepository.removeRegister(this);
         super.onPause();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
     }
 
     @VisibleForTesting
