@@ -17,6 +17,8 @@
 package com.android.settings.spa.app.appinfo
 
 import android.content.pm.ApplicationInfo
+import android.content.pm.FeatureFlags
+import android.content.pm.FeatureFlagsImpl
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -25,16 +27,22 @@ import com.android.settingslib.spa.widget.button.ActionButton
 import com.android.settingslib.spa.widget.button.ActionButtons
 
 @Composable
-fun AppButtons(packageInfoPresenter: PackageInfoPresenter) {
+/**
+ * @param featureFlags can be overridden in tests
+ */
+fun AppButtons(packageInfoPresenter: PackageInfoPresenter, featureFlags: FeatureFlags = FeatureFlagsImpl()) {
     if (remember(packageInfoPresenter) { packageInfoPresenter.isMainlineModule() }) return
-    val presenter = remember { AppButtonsPresenter(packageInfoPresenter) }
+    val presenter = remember { AppButtonsPresenter(packageInfoPresenter, featureFlags) }
     ActionButtons(actionButtons = presenter.getActionButtons())
 }
 
 private fun PackageInfoPresenter.isMainlineModule(): Boolean =
     AppUtils.isMainlineModule(userPackageManager, packageName)
 
-private class AppButtonsPresenter(private val packageInfoPresenter: PackageInfoPresenter) {
+private class AppButtonsPresenter(
+    private val packageInfoPresenter: PackageInfoPresenter,
+    private val featureFlags: FeatureFlags
+) {
     private val appLaunchButton = AppLaunchButton(packageInfoPresenter)
     private val appInstallButton = AppInstallButton(packageInfoPresenter)
     private val appDisableButton = AppDisableButton(packageInfoPresenter)
@@ -50,7 +58,7 @@ private class AppButtonsPresenter(private val packageInfoPresenter: PackageInfoP
 
     @Composable
     private fun getActionButtons(app: ApplicationInfo): List<ActionButton> = listOfNotNull(
-        appLaunchButton.getActionButton(app),
+        if (featureFlags.archiving()) null else appLaunchButton.getActionButton(app),
         appInstallButton.getActionButton(app),
         appDisableButton.getActionButton(app),
         appUninstallButton.getActionButton(app),

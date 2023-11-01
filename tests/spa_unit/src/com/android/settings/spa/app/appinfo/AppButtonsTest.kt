@@ -17,16 +17,21 @@
 package com.android.settings.spa.app.appinfo
 
 import android.content.Context
+import android.content.Intent
 import android.content.pm.ApplicationInfo
+import android.content.pm.FakeFeatureFlagsImpl
+import android.content.pm.Flags
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsNotDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.dx.mockito.inline.extended.ExtendedMockito
+import com.android.settings.R
 import com.android.settingslib.applications.AppUtils
 import com.android.settingslib.spa.testutils.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -57,6 +62,8 @@ class AppButtonsTest {
     @Mock
     private lateinit var packageManager: PackageManager
 
+    private val featureFlags = FakeFeatureFlagsImpl()
+
     @Before
     fun setUp() {
         mockSession = ExtendedMockito.mockitoSession()
@@ -69,6 +76,7 @@ class AppButtonsTest {
         whenever(packageInfoPresenter.userPackageManager).thenReturn(packageManager)
         whenever(packageManager.getPackageInfo(PACKAGE_NAME, 0)).thenReturn(PACKAGE_INFO)
         whenever(AppUtils.isMainlineModule(packageManager, PACKAGE_NAME)).thenReturn(false)
+        featureFlags.setFlag(Flags.FLAG_ARCHIVING, true)
     }
 
     @After
@@ -92,10 +100,28 @@ class AppButtonsTest {
         composeTestRule.onRoot().assertIsDisplayed()
     }
 
+    @Test
+    fun launchButton_displayed_archivingDisabled() {
+        whenever(packageManager.getLaunchIntentForPackage(PACKAGE_NAME)).thenReturn(Intent())
+        featureFlags.setFlag(Flags.FLAG_ARCHIVING, false)
+        setContent()
+
+        composeTestRule.onNodeWithText(context.getString(R.string.launch_instant_app)).assertIsDisplayed()
+    }
+
+    @Test
+    fun launchButton_notDisplayed_archivingEnabled() {
+        whenever(packageManager.getLaunchIntentForPackage(PACKAGE_NAME)).thenReturn(Intent())
+        featureFlags.setFlag(Flags.FLAG_ARCHIVING, true)
+        setContent()
+
+        composeTestRule.onNodeWithText(context.getString(R.string.launch_instant_app)).assertIsNotDisplayed()
+    }
+
     private fun setContent() {
         whenever(packageInfoPresenter.flow).thenReturn(MutableStateFlow(PACKAGE_INFO))
         composeTestRule.setContent {
-            AppButtons(packageInfoPresenter)
+            AppButtons(packageInfoPresenter, featureFlags)
         }
 
         composeTestRule.delay()
