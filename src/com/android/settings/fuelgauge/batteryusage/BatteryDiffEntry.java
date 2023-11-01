@@ -45,6 +45,9 @@ public class BatteryDiffEntry {
     // Caches app label and icon to improve loading performance.
     static final Map<String, BatteryEntry.NameAndIcon> sResourceCache = new HashMap<>();
 
+    // Caches package name and uid to improve loading performance.
+    static final Map<String, Integer> sPackageNameAndUidCache = new HashMap<>();
+
     // Whether a specific item is valid to launch restriction page?
     @VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
     static final Map<String, Boolean> sValidForRestriction = new HashMap<>();
@@ -289,8 +292,18 @@ public class BatteryDiffEntry {
             return false;
         }
 
-        final int uid = BatteryUtils.getInstance(mContext).getPackageUid(packageName);
+        final int uid = getPackageUid(packageName);
         return uid == BatteryUtils.UID_REMOVED_APPS || uid == BatteryUtils.UID_NULL;
+    }
+
+    private int getPackageUid(String packageName) {
+        if (sPackageNameAndUidCache.containsKey(packageName)) {
+            return sPackageNameAndUidCache.get(packageName);
+        }
+
+        int uid = BatteryUtils.getInstance(mContext).getPackageUid(packageName);
+        sPackageNameAndUidCache.put(packageName, uid);
+        return uid;
     }
 
     void loadLabelAndIcon() {
@@ -498,10 +511,11 @@ public class BatteryDiffEntry {
         return builder.toString();
     }
 
-    /** Clears app icon and label cache data. */
+    /** Clears all cache data. */
     public static void clearCache() {
         sResourceCache.clear();
         sValidForRestriction.clear();
+        sPackageNameAndUidCache.clear();
     }
 
     private Drawable getBadgeIconForUser(Drawable icon) {
