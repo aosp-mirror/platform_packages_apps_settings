@@ -157,28 +157,55 @@ public class ToggleAccessibilityServicePreferenceFragment extends
                 if (info == null) {
                     return null;
                 }
-                mWarningDialog = AccessibilityServiceWarning
-                        .createCapabilitiesDialog(getPrefContext(), info,
-                                this::onDialogButtonFromEnableToggleClicked,
-                                this::onDialogButtonFromUninstallClicked);
+                if (android.view.accessibility.Flags.deduplicateAccessibilityWarningDialog()) {
+                    mWarningDialog =
+                            com.android.internal.accessibility.dialog.AccessibilityServiceWarning
+                                    .createAccessibilityServiceWarningDialog(getPrefContext(), info,
+                                            v -> onAllowButtonFromEnableToggleClicked(),
+                                            v -> onDenyButtonFromEnableToggleClicked(),
+                                            v -> onDialogButtonFromUninstallClicked());
+                } else {
+                    mWarningDialog = AccessibilityServiceWarning
+                            .createCapabilitiesDialog(getPrefContext(), info,
+                                    this::onDialogButtonFromEnableToggleClicked,
+                                    this::onDialogButtonFromUninstallClicked);
+                }
                 return mWarningDialog;
             case DialogEnums.ENABLE_WARNING_FROM_SHORTCUT_TOGGLE:
                 if (info == null) {
                     return null;
                 }
-                mWarningDialog = AccessibilityServiceWarning
-                        .createCapabilitiesDialog(getPrefContext(), info,
-                                this::onDialogButtonFromShortcutToggleClicked,
-                                this::onDialogButtonFromUninstallClicked);
+                if (android.view.accessibility.Flags.deduplicateAccessibilityWarningDialog()) {
+                    mWarningDialog =
+                            com.android.internal.accessibility.dialog.AccessibilityServiceWarning
+                                    .createAccessibilityServiceWarningDialog(getPrefContext(), info,
+                                            v -> onAllowButtonFromShortcutToggleClicked(),
+                                            v -> onDenyButtonFromShortcutToggleClicked(),
+                                            v -> onDialogButtonFromUninstallClicked());
+                } else {
+                    mWarningDialog = AccessibilityServiceWarning
+                            .createCapabilitiesDialog(getPrefContext(), info,
+                                    this::onDialogButtonFromShortcutToggleClicked,
+                                    this::onDialogButtonFromUninstallClicked);
+                }
                 return mWarningDialog;
             case DialogEnums.ENABLE_WARNING_FROM_SHORTCUT:
                 if (info == null) {
                     return null;
                 }
-                mWarningDialog = AccessibilityServiceWarning
-                        .createCapabilitiesDialog(getPrefContext(), info,
-                                this::onDialogButtonFromShortcutClicked,
-                                this::onDialogButtonFromUninstallClicked);
+                if (android.view.accessibility.Flags.deduplicateAccessibilityWarningDialog()) {
+                    mWarningDialog =
+                            com.android.internal.accessibility.dialog.AccessibilityServiceWarning
+                                    .createAccessibilityServiceWarningDialog(getPrefContext(), info,
+                                            v -> onAllowButtonFromShortcutClicked(),
+                                            v -> onDenyButtonFromShortcutClicked(),
+                                            v -> onDialogButtonFromUninstallClicked());
+                } else {
+                    mWarningDialog = AccessibilityServiceWarning
+                            .createCapabilitiesDialog(getPrefContext(), info,
+                                    this::onDialogButtonFromShortcutClicked,
+                                    this::onDialogButtonFromUninstallClicked);
+                }
                 return mWarningDialog;
             case DialogEnums.DISABLE_WARNING_FROM_TOGGLE:
                 if (info == null) {
@@ -459,7 +486,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
         }
     }
 
-    private void onAllowButtonFromShortcutToggleClicked() {
+    void onAllowButtonFromShortcutToggleClicked() {
         mShortcutPreference.setChecked(true);
 
         final int shortcutTypes = retrieveUserShortcutType(getPrefContext(),
