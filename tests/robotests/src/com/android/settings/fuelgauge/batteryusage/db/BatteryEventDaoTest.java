@@ -149,4 +149,31 @@ public final class BatteryEventDaoTest {
         mBatteryEventDao.clearAll();
         assertThat(mBatteryEventDao.getAll()).isEmpty();
     }
+
+    @Test
+    public void getAllAfter_filterTimestamp_returnExpectedResult() {
+        mBatteryEventDao.insert(BatteryEventEntity.newBuilder()
+                .setTimestamp(100L)
+                .setBatteryEventType(1)
+                .setBatteryLevel(66)
+                .build());
+        mBatteryEventDao.insert(BatteryEventEntity.newBuilder()
+                .setTimestamp(200L)
+                .setBatteryEventType(1)
+                .setBatteryLevel(88)
+                .build());
+
+        final Cursor cursor = mBatteryEventDao.getAllAfter(200L, List.of(1));
+        assertThat(cursor.getCount()).isEqualTo(1);
+        cursor.moveToFirst();
+        assertThat(cursor.getLong(cursor.getColumnIndex(KEY_TIMESTAMP)))
+                .isEqualTo(200L);
+        assertThat(cursor.getInt(cursor.getColumnIndex(KEY_BATTERY_EVENT_TYPE)))
+                .isEqualTo(1);
+        assertThat(cursor.getInt(cursor.getColumnIndex(KEY_BATTERY_LEVEL)))
+                .isEqualTo(88);
+
+        mBatteryEventDao.clearAll();
+        assertThat(mBatteryEventDao.getAll()).isEmpty();
+    }
 }
