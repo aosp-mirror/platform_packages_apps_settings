@@ -35,6 +35,7 @@ import com.android.settings.spa.app.specialaccess.ModifySystemSettingsAppListPro
 import com.android.settings.spa.app.specialaccess.NfcTagAppsSettingsProvider
 import com.android.settings.spa.app.specialaccess.PictureInPictureListProvider
 import com.android.settings.spa.app.specialaccess.SpecialAppAccessPageProvider
+import com.android.settings.spa.app.specialaccess.TurnScreenOnAppsAppListProvider
 import com.android.settings.spa.app.specialaccess.UseFullScreenIntentAppListProvider
 import com.android.settings.spa.app.specialaccess.WifiControlAppListProvider
 import com.android.settings.spa.app.storage.StorageAppListPageProvider
@@ -68,6 +69,7 @@ open class SettingsSpaEnvironment(context: Context) : SpaEnvironment(context) {
             AlarmsAndRemindersAppListProvider,
             WifiControlAppListProvider,
             NfcTagAppsSettingsProvider,
+            TurnScreenOnAppsAppListProvider,
         )
     }
 
