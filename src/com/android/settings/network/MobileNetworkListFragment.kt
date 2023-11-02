@@ -28,15 +28,16 @@ import com.android.settings.SettingsPreferenceFragment
 import com.android.settings.dashboard.DashboardFragment
 import com.android.settings.network.telephony.MobileNetworkUtils
 import com.android.settings.search.BaseSearchIndexProvider
-import com.android.settings.utils.observeSettingsGlobalBoolean
 import com.android.settingslib.search.SearchIndexable
+import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
 import com.android.settingslib.spaprivileged.framework.common.userManager
+import com.android.settingslib.spaprivileged.settingsprovider.settingsGlobalBooleanFlow
 
 @SearchIndexable(forTarget = SearchIndexable.ALL and SearchIndexable.ARC.inv())
 class MobileNetworkListFragment : DashboardFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        observeAirplaneModeAndFinishIfOn()
+        collectAirplaneModeAndFinishIfOn()
     }
 
     override fun onResume() {
@@ -59,15 +60,13 @@ class MobileNetworkListFragment : DashboardFragment() {
         private const val KEY_ADD_SIM = "add_sim"
 
         @JvmStatic
-        fun SettingsPreferenceFragment.observeAirplaneModeAndFinishIfOn() {
-            requireContext().observeSettingsGlobalBoolean(
-                name = Settings.Global.AIRPLANE_MODE_ON,
-                lifecycle = viewLifecycleOwner.lifecycle,
-            ) { isAirplaneModeOn: Boolean ->
-                if (isAirplaneModeOn) {
-                    finish()
+        fun SettingsPreferenceFragment.collectAirplaneModeAndFinishIfOn() {
+            requireContext().settingsGlobalBooleanFlow(Settings.Global.AIRPLANE_MODE_ON)
+                .collectLatestWithLifecycle(viewLifecycleOwner) { isAirplaneModeOn ->
+                    if (isAirplaneModeOn) {
+                        finish()
+                    }
                 }
-            }
         }
 
         @JvmField

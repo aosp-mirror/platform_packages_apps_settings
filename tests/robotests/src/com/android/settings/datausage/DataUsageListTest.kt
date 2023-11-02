@@ -23,22 +23,18 @@ import android.os.Bundle
 import android.os.UserManager
 import android.provider.Settings
 import androidx.preference.Preference
-import androidx.preference.PreferenceManager
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.datausage.DataUsageListTest.ShadowDataUsageBaseFragment
 import com.android.settings.datausage.TemplatePreference.NetworkServices
 import com.android.settings.datausage.lib.BillingCycleRepository
-import com.android.settings.network.MobileDataEnabledListener
 import com.android.settings.testutils.FakeFeatureFactory
 import com.android.settingslib.NetworkPolicyEditor
 import com.android.settingslib.core.AbstractPreferenceController
-import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.ArgumentMatchers
 import org.mockito.Mock
 import org.mockito.Mockito.doNothing
 import org.mockito.Mockito.doReturn
@@ -62,9 +58,6 @@ class DataUsageListTest {
     val mockito: MockitoRule = MockitoJUnit.rule()
 
     @Mock
-    private lateinit var mobileDataEnabledListener: MobileDataEnabledListener
-
-    @Mock
     private lateinit var networkServices: NetworkServices
 
     @Mock
@@ -86,7 +79,6 @@ class DataUsageListTest {
     fun setUp() {
         FakeFeatureFactory.setupForTest()
         networkServices.mPolicyEditor = mock(NetworkPolicyEditor::class.java)
-        dataUsageList.dataStateListener = mobileDataEnabledListener
         doReturn(context).`when`(dataUsageList).context
         doReturn(userManager).`when`(context).getSystemService(UserManager::class.java)
         doReturn(false).`when`(userManager).isGuestUser
@@ -110,46 +102,6 @@ class DataUsageListTest {
         doReturn(true).`when`(userManager).isGuestUser
         dataUsageList.onCreate(null)
         verify(dataUsageList).finish()
-    }
-
-    @Test
-    fun resume_shouldListenDataStateChange() {
-        dataUsageList.template = mock(NetworkTemplate::class.java)
-        dataUsageList.onCreate(null)
-        dataUsageList.dataStateListener = mobileDataEnabledListener
-        ReflectionHelpers.setField(
-            dataUsageList,
-            "mVisibilityLoggerMixin",
-            mock(VisibilityLoggerMixin::class.java),
-        )
-        ReflectionHelpers.setField(
-            dataUsageList,
-            "mPreferenceManager",
-            mock(PreferenceManager::class.java),
-        )
-        dataUsageList.onResume()
-        verify(mobileDataEnabledListener).start(ArgumentMatchers.anyInt())
-        dataUsageList.onPause()
-    }
-
-    @Test
-    fun pause_shouldUnlistenDataStateChange() {
-        dataUsageList.template = mock(NetworkTemplate::class.java)
-        dataUsageList.onCreate(null)
-        dataUsageList.dataStateListener = mobileDataEnabledListener
-        ReflectionHelpers.setField(
-            dataUsageList, "mVisibilityLoggerMixin", mock(
-                VisibilityLoggerMixin::class.java
-            )
-        )
-        ReflectionHelpers.setField(
-            dataUsageList, "mPreferenceManager", mock(
-                PreferenceManager::class.java
-            )
-        )
-        dataUsageList.onResume()
-        dataUsageList.onPause()
-        verify(mobileDataEnabledListener).stop()
     }
 
     @Test
