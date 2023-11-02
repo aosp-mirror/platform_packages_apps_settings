@@ -29,7 +29,6 @@ import androidx.compose.ui.test.performClick
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
-import com.android.settingslib.spa.framework.compose.stateOf
 import com.android.settingslib.spa.testutils.FakeNavControllerWrapper
 import com.android.settingslib.spaprivileged.template.app.AppListItemModel
 import com.google.common.truth.Truth.assertThat
@@ -244,7 +243,7 @@ class BackgroundInstalledAppsPageProviderTest {
                                 app = APP,
                                 dateOfInstall = TEST_FIRST_INSTALL_TIME),
                             label = TEST_LABEL,
-                            summary = stateOf(TEST_SUMMARY),
+                            summary = { TEST_SUMMARY },
                         ).AppItem()
                     }
                 }

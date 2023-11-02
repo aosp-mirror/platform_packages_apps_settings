@@ -46,14 +46,14 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-import com.android.settingslib.spaprivileged.template.app.AppListItemKt;
+import com.android.settingslib.spaprivileged.template.app.AppListItemModelKt;
 import com.android.settingslib.spaprivileged.template.app.AppListPageKt;
 import com.android.settingslib.widget.LottieColorUtils;
 
 import com.airbnb.lottie.LottieAnimationView;
 
 /**
- * @deprecated Will be removed, use {@link AppListItemKt} {@link AppListPageKt} instead.
+ * @deprecated Will be removed, use {@link AppListItemModelKt} {@link AppListPageKt} instead.
  */
 @Deprecated(forRemoval = true)
 public class ApplicationViewHolder extends RecyclerView.ViewHolder {

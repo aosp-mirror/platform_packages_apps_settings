@@ -19,6 +19,7 @@ package com.android.settings.spa.app.appcompat
 import android.content.Context
 import android.content.pm.ApplicationInfo
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -40,11 +41,12 @@ fun UserAspectRatioAppPreference(app: ApplicationInfo) {
     val presenter = remember { UserAspectRatioAppPresenter(context, app) }
     if (!presenter.isAvailableFlow.collectAsStateWithLifecycle(initialValue = false).value) return
 
+    val summary by presenter.summaryFlow.collectAsStateWithLifecycle(
+        initialValue = stringResource(R.string.summary_placeholder),
+    )
     Preference(object : PreferenceModel {
         override val title = stringResource(R.string.aspect_ratio_experimental_title)
-        override val summary = presenter.summaryFlow.collectAsStateWithLifecycle(
-            initialValue = stringResource(R.string.summary_placeholder),
-        )
+        override val summary = { summary }
         override val onClick = presenter::startActivity
     })
 }

@@ -22,7 +22,6 @@ import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.util.Log
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
@@ -52,8 +51,8 @@ fun AppPermissionPreference(
         model = remember {
             object : PreferenceModel {
                 override val title = context.getString(R.string.permissions_label)
-                override val summary = derivedStateOf { summaryState.value.summary }
-                override val enabled = derivedStateOf { summaryState.value.enabled }
+                override val summary = { summaryState.value.summary }
+                override val enabled = { summaryState.value.enabled }
                 override val onClick = { startManagePermissionsActivity(context, app) }
             }
         },

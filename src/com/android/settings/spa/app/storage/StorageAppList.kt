@@ -22,7 +22,7 @@ import android.os.Bundle
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
-import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -121,13 +121,9 @@ class StorageAppListModel(
     ): Flow<List<AppRecordWithSize>> = recordListFlow.filterItem { type.filter(it) }
 
     @Composable
-    override fun getSummary(option: Int, record: AppRecordWithSize): State<String> {
-        val storageSummary = record.app.getStorageSummary()
-        return remember {
-            derivedStateOf {
-                storageSummary.value
-            }
-        }
+    override fun getSummary(option: Int, record: AppRecordWithSize): () -> String {
+        val storageSummary by record.app.getStorageSummary()
+        return { storageSummary }
     }
 
     @Composable
