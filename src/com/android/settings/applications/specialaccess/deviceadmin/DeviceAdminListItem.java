@@ -86,6 +86,14 @@ class DeviceAdminListItem implements Comparable<DeviceAdminListItem> {
         return new UserHandle(getUserIdFromDeviceAdminInfo(mInfo));
     }
 
+    public int getUid() {
+        return mInfo.getActivityInfo().applicationInfo.uid;
+    }
+
+    public String getPackageName() {
+        return mInfo.getPackageName();
+    }
+
     public Intent getLaunchIntent(Context context) {
         return new Intent(context, DeviceAdminAdd.class)
                 .putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, mInfo.getComponent());
