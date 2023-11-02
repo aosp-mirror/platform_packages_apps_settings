@@ -18,9 +18,9 @@ package com.android.settings.fuelgauge.batterytip.tips;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.content.res.Resources;
 import android.icu.text.ListFormatter;
 import android.os.Parcel;
+import android.util.ArrayMap;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -31,7 +31,6 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.utils.StringUtil;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -66,7 +65,7 @@ public class RestrictAppTip extends BatteryTip {
         final CharSequence appLabel = num > 0 ? Utils.getApplicationLabel(context,
                 mRestrictAppList.get(0).packageName) : "";
 
-        Map<String, Object> arguments = new HashMap<>();
+        Map<String, Object> arguments = new ArrayMap<>();
         arguments.put("count", num);
         arguments.put("label", appLabel);
         return mState == StateType.HANDLED
@@ -84,7 +83,7 @@ public class RestrictAppTip extends BatteryTip {
         final int resId = mState == StateType.HANDLED
                 ? R.string.battery_tip_restrict_handled_summary
                 : R.string.battery_tip_restrict_summary;
-        Map<String, Object> arguments = new HashMap<>();
+        Map<String, Object> arguments = new ArrayMap<>();
         arguments.put("count", num);
         arguments.put("label", appLabel);
         return StringUtil.getIcuPluralsString(context, arguments, resId);

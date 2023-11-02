@@ -23,6 +23,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
+import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Log;
 import android.view.View;
@@ -50,7 +51,6 @@ import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.widget.FooterPreference;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -75,7 +75,7 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
     private final Handler mHandler = new Handler(Looper.getMainLooper());
 
     @VisibleForTesting
-    final Map<String, Preference> mPreferenceCache = new HashMap<>();
+    final Map<String, Preference> mPreferenceCache = new ArrayMap<>();
 
     private int mSpinnerPosition;
     private String mSlotTimestamp;

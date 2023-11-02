@@ -34,7 +34,6 @@ import com.android.settings.Utils;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -295,7 +294,7 @@ public class DataProcessManager {
                     Log.d(TAG, "there is no work profile");
                 }
 
-                final Map<Long, UsageEvents> usageEventsMap = new HashMap<>();
+                final Map<Long, UsageEvents> usageEventsMap = new ArrayMap<>();
                 usageEventsMap.put(Long.valueOf(currentUserId), usageEventsForCurrentUser);
                 if (usageEventsForWorkProfile != null) {
                     Log.d(TAG, "usageEventsForWorkProfile is null");

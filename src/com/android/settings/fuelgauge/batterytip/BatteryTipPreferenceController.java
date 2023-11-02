@@ -20,6 +20,7 @@ import android.annotation.Nullable;
 import android.content.Context;
 import android.os.BadParcelableException;
 import android.os.Bundle;
+import android.util.ArrayMap;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
@@ -35,7 +36,6 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.CardPreference;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -65,7 +65,7 @@ public class BatteryTipPreferenceController extends BasePreferenceController {
 
     public BatteryTipPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
-        mBatteryTipMap = new HashMap<>();
+        mBatteryTipMap = new ArrayMap<>();
         mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
         mNeedUpdate = true;
     }
