@@ -121,6 +121,7 @@ public final class BatteryBackupHelperTest {
         mContext = spy(RuntimeEnvironment.application);
         mStringWriter = new StringWriter();
         mPrintWriter = new PrintWriter(mStringWriter);
+        BatteryUtils.getInstance(mContext).reset();
         doReturn(mContext).when(mContext).getApplicationContext();
         doReturn(mAppOpsManager).when(mContext).getSystemService(AppOpsManager.class);
         doReturn(mUserManager).when(mContext).getSystemService(UserManager.class);

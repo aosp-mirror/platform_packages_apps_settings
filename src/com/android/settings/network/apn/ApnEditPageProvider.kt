@@ -96,7 +96,7 @@ fun ApnPage(apnDataInit: ApnData, apnDataCur: MutableState<ApnData>, uriInit: Ur
         getNetworkTypeSelectedOptionsState(apnData.networkType)
     }
     RegularScaffold(
-        title = stringResource(id = R.string.apn_edit),
+        title = if(apnDataInit.newApn) stringResource(id = R.string.apn_add) else stringResource(id = R.string.apn_edit),
         actions = {
             IconButton(onClick = {
                 validateAndSaveApnData(

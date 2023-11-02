@@ -147,6 +147,22 @@ public class BatteryOptimizeUtils {
     }
 
     /**
+     * Return {@code true} if the optimization mode of this package can be changed
+     */
+    public boolean isOptimizeModeMutable() {
+        return !isDisabledForOptimizeModeOnly() && !isSystemOrDefaultApp();
+    }
+
+    /**
+     * Return {@code true} if the optimization mode is mutable and current state is not restricted
+     */
+    public boolean isSelectorPreferenceEnabled() {
+        // Enable the preference if apps are not set into restricted mode, otherwise disable it
+        return isOptimizeModeMutable()
+                && getAppOptimizationMode() != BatteryOptimizeUtils.MODE_RESTRICTED;
+    }
+
+    /**
       * Gets the list of installed applications.
       */
     public static ArraySet<ApplicationInfo> getInstalledApplications(

@@ -17,6 +17,7 @@
 package com.android.settings.fuelgauge;
 
 import static com.android.settings.SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS;
+import static com.android.settings.fuelgauge.BatteryOptimizeHistoricalLogEntry.Action;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -53,13 +54,12 @@ import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowActivityManager;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.widget.EntityHeaderController;
+import com.android.settingslib.PrimarySwitchPreference;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.LayoutPreference;
-import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import org.junit.After;
 import org.junit.Before;
@@ -95,9 +95,7 @@ public class AdvancedPowerUsageDetailTest {
     private static final long FOREGROUND_SERVICE_TIME_MS = 444;
     private static final long FOREGROUND_TIME_MS =
             FOREGROUND_ACTIVITY_TIME_MS + FOREGROUND_SERVICE_TIME_MS;
-    private static final String KEY_PREF_UNRESTRICTED = "unrestricted_pref";
-    private static final String KEY_PREF_OPTIMIZED = "optimized_pref";
-    private static final String KEY_PREF_RESTRICTED = "restricted_pref";
+    private static final String KEY_ALLOW_BACKGROUND_USAGE = "allow_background_usage";
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private FragmentActivity mActivity;
@@ -127,10 +125,7 @@ public class AdvancedPowerUsageDetailTest {
     private BackupManager mBackupManager;
 
     private Context mContext;
-    private FooterPreference mFooterPreference;
-    private SelectorWithWidgetPreference mRestrictedPreference;
-    private SelectorWithWidgetPreference mOptimizePreference;
-    private SelectorWithWidgetPreference mUnrestrictedPreference;
+    private PrimarySwitchPreference mAllowBackgroundUsagePreference;
     private AdvancedPowerUsageDetail mFragment;
     private SettingsActivity mTestActivity;
     private FakeFeatureFactory mFeatureFactory;
@@ -198,14 +193,9 @@ public class AdvancedPowerUsageDetailTest {
                 nullable(UserHandle.class));
         doAnswer(callable).when(mActivity).startActivity(captor.capture());
 
-        mFooterPreference = new FooterPreference(mContext);
-        mRestrictedPreference = new SelectorWithWidgetPreference(mContext);
-        mOptimizePreference = new SelectorWithWidgetPreference(mContext);
-        mUnrestrictedPreference = new SelectorWithWidgetPreference(mContext);
-        mFragment.mFooterPreference = mFooterPreference;
-        mFragment.mRestrictedPreference = mRestrictedPreference;
-        mFragment.mOptimizePreference = mOptimizePreference;
-        mFragment.mUnrestrictedPreference = mUnrestrictedPreference;
+        mAllowBackgroundUsagePreference = new PrimarySwitchPreference(mContext);
+        mAllowBackgroundUsagePreference.setKey(KEY_ALLOW_BACKGROUND_USAGE);
+        mFragment.mAllowBackgroundUsagePreference = mAllowBackgroundUsagePreference;
     }
 
     @After
@@ -307,70 +297,60 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
-    public void initPreferenceForTriState_isValidPackageName_hasCorrectString() {
+    public void initFooter_isValidPackageName_hasCorrectString() {
         when(mBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()).thenReturn(true);
 
-        mFragment.initPreferenceForTriState(mContext);
+        mFragment.initFooter();
 
-        assertThat(mFooterPreference.getTitle().toString())
+        assertThat(mAllowBackgroundUsagePreference.getSummary().toString())
                 .isEqualTo("This app requires optimized battery usage.");
     }
 
     @Test
-    public void initPreferenceForTriState_isSystemOrDefaultApp_hasCorrectString() {
+    public void initFooter_isSystemOrDefaultApp_hasCorrectString() {
         when(mBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()).thenReturn(false);
         when(mBatteryOptimizeUtils.isSystemOrDefaultApp()).thenReturn(true);
 
-        mFragment.initPreferenceForTriState(mContext);
+        mFragment.initFooter();
 
-        assertThat(mFooterPreference.getTitle()
-                .toString()).isEqualTo("This app requires unrestricted battery usage.");
+        assertThat(mAllowBackgroundUsagePreference.getSummary().toString())
+                .isEqualTo("This app requires unrestricted battery usage.");
     }
 
     @Test
-    public void initPreferenceForTriState_hasCorrectString() {
+    public void initFooter_hasCorrectString() {
         when(mBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()).thenReturn(false);
         when(mBatteryOptimizeUtils.isSystemOrDefaultApp()).thenReturn(false);
 
-        mFragment.initPreferenceForTriState(mContext);
+        mFragment.initFooter();
 
-        assertThat(mFooterPreference.getTitle().toString())
-                .isEqualTo("Changing how an app uses your battery can affect its performance.");
-    }
-
-    @Test
-    public void onRadioButtonClicked_clickOptimizePref_optimizePreferenceChecked() {
-        mOptimizePreference.setKey(KEY_PREF_OPTIMIZED);
-        mRestrictedPreference.setKey(KEY_PREF_RESTRICTED);
-        mUnrestrictedPreference.setKey(KEY_PREF_UNRESTRICTED);
-        mFragment.onRadioButtonClicked(mOptimizePreference);
-
-        assertThat(mOptimizePreference.isChecked()).isTrue();
-        assertThat(mRestrictedPreference.isChecked()).isFalse();
-        assertThat(mUnrestrictedPreference.isChecked()).isFalse();
+        assertThat(mAllowBackgroundUsagePreference.getSummary().toString())
+                .isEqualTo("Enable for real-time updates, disable to save battery");
     }
 
     @Test
     public void onPause_optimizationModeChanged_logPreference()
             throws PackageManager.NameNotFoundException, InterruptedException {
         final String packageName = "testPackageName";
-        final int mode = BatteryOptimizeUtils.MODE_RESTRICTED;
-        mFragment.mOptimizationMode = mode;
-        when(mBatteryOptimizeUtils.getAppOptimizationMode()).thenReturn(mode);
+        final int restrictedMode = BatteryOptimizeUtils.MODE_RESTRICTED;
+        final int optimizedMode = BatteryOptimizeUtils.MODE_OPTIMIZED;
+        mFragment.mOptimizationMode = restrictedMode;
+        when(mBatteryOptimizeUtils.getAppOptimizationMode()).thenReturn(restrictedMode);
         when(mBatteryOptimizeUtils.getPackageName()).thenReturn(packageName);
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
         when(mPackageManager.getInstallSourceInfo(anyString())).thenReturn(mInstallSourceInfo);
         when(mInstallSourceInfo.getInitiatingPackageName()).thenReturn("com.android.vending");
-        mOptimizePreference.setKey(KEY_PREF_OPTIMIZED);
 
-        mFragment.onRadioButtonClicked(mOptimizePreference);
+        mFragment.onPreferenceChange(mAllowBackgroundUsagePreference, true);
+        verify(mBatteryOptimizeUtils).setAppUsageState(optimizedMode, Action.APPLY);
+        when(mBatteryOptimizeUtils.getAppOptimizationMode()).thenReturn(optimizedMode);
         mFragment.onPause();
 
         TimeUnit.SECONDS.sleep(1);
         verify(mMetricsFeatureProvider)
                 .action(
                         SettingsEnums.OPEN_APP_BATTERY_USAGE,
-                        SettingsEnums.ACTION_APP_BATTERY_USAGE_OPTIMIZED,
+                        SettingsEnums.ACTION_APP_BATTERY_USAGE_ALLOW_BACKGROUND,
                         SettingsEnums.OPEN_APP_BATTERY_USAGE,
                         packageName,
                         /* consumed battery */ 0);
@@ -379,15 +359,20 @@ public class AdvancedPowerUsageDetailTest {
     @Test
     public void onPause_optimizationModeIsNotChanged_notInvokeLogging()
             throws PackageManager.NameNotFoundException, InterruptedException {
-        final int mode = BatteryOptimizeUtils.MODE_OPTIMIZED;
-        mFragment.mOptimizationMode = mode;
-        when(mBatteryOptimizeUtils.getAppOptimizationMode()).thenReturn(mode);
+        final int restrictedMode = BatteryOptimizeUtils.MODE_RESTRICTED;
+        final int optimizedMode = BatteryOptimizeUtils.MODE_OPTIMIZED;
+        mFragment.mOptimizationMode = restrictedMode;
+        when(mBatteryOptimizeUtils.getAppOptimizationMode()).thenReturn(restrictedMode);
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
         when(mPackageManager.getInstallSourceInfo(anyString())).thenReturn(mInstallSourceInfo);
         when(mInstallSourceInfo.getInitiatingPackageName()).thenReturn("com.android.vending");
-        mOptimizePreference.setKey(KEY_PREF_OPTIMIZED);
 
-        mFragment.onRadioButtonClicked(mOptimizePreference);
+        mFragment.onPreferenceChange(mAllowBackgroundUsagePreference, true);
+        verify(mBatteryOptimizeUtils).setAppUsageState(optimizedMode, Action.APPLY);
+        when(mBatteryOptimizeUtils.getAppOptimizationMode()).thenReturn(optimizedMode);
+        mFragment.onPreferenceChange(mAllowBackgroundUsagePreference, false);
+        verify(mBatteryOptimizeUtils).setAppUsageState(restrictedMode, Action.APPLY);
+        when(mBatteryOptimizeUtils.getAppOptimizationMode()).thenReturn(restrictedMode);
         mFragment.onPause();
 
         TimeUnit.SECONDS.sleep(1);
