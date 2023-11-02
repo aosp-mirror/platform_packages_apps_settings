@@ -26,9 +26,7 @@ import androidx.preference.PreferenceViewHolder;
 import com.android.settings.R;
 import com.android.settings.fuelgauge.BatteryUtils;
 
-/**
- * Custom preference for displaying the battery level as chart graph.
- */
+/** Custom preference for displaying the battery level as chart graph. */
 public class BatteryHistoryPreference extends Preference {
     private static final String TAG = "BatteryHistoryPreference";
 

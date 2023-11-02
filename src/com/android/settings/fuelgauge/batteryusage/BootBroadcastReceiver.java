@@ -103,6 +103,6 @@ public final class BootBroadcastReceiver extends BroadcastReceiver {
     }
 
     private static void refreshJobs(Context context) {
-        PeriodicJobManager.getInstance(context).refreshJob(/*fromBoot=*/ true);
+        PeriodicJobManager.getInstance(context).refreshJob(/* fromBoot= */ true);
     }
 }

@@ -30,10 +30,8 @@ public class OptimizedPreferenceController extends AbstractPreferenceController
 
     private static final String TAG = "OPTIMIZED_PREF";
 
-    @VisibleForTesting
-    static final String KEY_OPTIMIZED_PREF = "optimized_preference";
-    @VisibleForTesting
-    BatteryOptimizeUtils mBatteryOptimizeUtils;
+    @VisibleForTesting static final String KEY_OPTIMIZED_PREF = "optimized_preference";
+    @VisibleForTesting BatteryOptimizeUtils mBatteryOptimizeUtils;
 
     public OptimizedPreferenceController(Context context, int uid, String packageName) {
         super(context);
@@ -49,9 +47,10 @@ public class OptimizedPreferenceController extends AbstractPreferenceController
     public void updateState(Preference preference) {
         preference.setEnabled(mBatteryOptimizeUtils.isSelectorPreferenceEnabled());
 
-        final boolean isOptimized = mBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()
-                || mBatteryOptimizeUtils.getAppOptimizationMode()
-                == BatteryOptimizeUtils.MODE_OPTIMIZED;
+        final boolean isOptimized =
+                mBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()
+                        || mBatteryOptimizeUtils.getAppOptimizationMode()
+                                == BatteryOptimizeUtils.MODE_OPTIMIZED;
         ((SelectorWithWidgetPreference) preference).setChecked(isOptimized);
     }
 

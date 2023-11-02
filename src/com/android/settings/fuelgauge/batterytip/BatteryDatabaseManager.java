@@ -47,8 +47,8 @@ import java.util.Map;
 /**
  * Database manager for battery data. Now it only contains anomaly data stored in {@link AppInfo}.
  *
- * This manager may be accessed by multi-threads. All the database related methods are synchronized
- * so each operation won't be interfered by other threads.
+ * <p>This manager may be accessed by multi-threads. All the database related methods are
+ * synchronized so each operation won't be interfered by other threads.
  */
 public class BatteryDatabaseManager {
     private static BatteryDatabaseManager sSingleton;
@@ -74,16 +74,15 @@ public class BatteryDatabaseManager {
     /**
      * Insert an anomaly log to database.
      *
-     * @param uid          the uid of the app
-     * @param packageName  the package name of the app
-     * @param type         the type of the anomaly
+     * @param uid the uid of the app
+     * @param packageName the package name of the app
+     * @param type the type of the anomaly
      * @param anomalyState the state of the anomaly
-     * @param timestampMs  the time when it is happened
+     * @param timestampMs the time when it is happened
      * @return {@code true} if insert operation succeed
      */
-    public synchronized boolean insertAnomaly(int uid, String packageName, int type,
-            int anomalyState,
-            long timestampMs) {
+    public synchronized boolean insertAnomaly(
+            int uid, String packageName, int type, int anomalyState, long timestampMs) {
         final SQLiteDatabase db = mDatabaseHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(UID, uid);
@@ -105,22 +104,31 @@ public class BatteryDatabaseManager {
         final String orderBy = AnomalyDatabaseHelper.AnomalyColumns.TIME_STAMP_MS + " DESC";
         final Map<Integer, AppInfo.Builder> mAppInfoBuilders = new ArrayMap<>();
         final String selection = TIME_STAMP_MS + " > ? AND " + ANOMALY_STATE + " = ? ";
-        final String[] selectionArgs = new String[]{String.valueOf(timestampMsAfter),
-                String.valueOf(state)};
+        final String[] selectionArgs =
+                new String[] {String.valueOf(timestampMsAfter), String.valueOf(state)};
 
-        try (Cursor cursor = db.query(TABLE_ANOMALY, projection, selection, selectionArgs,
-                null /* groupBy */, null /* having */, orderBy)) {
+        try (Cursor cursor =
+                db.query(
+                        TABLE_ANOMALY,
+                        projection,
+                        selection,
+                        selectionArgs,
+                        null /* groupBy */,
+                        null /* having */,
+                        orderBy)) {
             while (cursor.moveToNext()) {
                 final int uid = cursor.getInt(cursor.getColumnIndex(UID));
                 if (!mAppInfoBuilders.containsKey(uid)) {
-                    final AppInfo.Builder builder = new AppInfo.Builder()
-                            .setUid(uid)
-                            .setPackageName(
-                                    cursor.getString(cursor.getColumnIndex(PACKAGE_NAME)));
+                    final AppInfo.Builder builder =
+                            new AppInfo.Builder()
+                                    .setUid(uid)
+                                    .setPackageName(
+                                            cursor.getString(cursor.getColumnIndex(PACKAGE_NAME)));
                     mAppInfoBuilders.put(uid, builder);
                 }
-                mAppInfoBuilders.get(uid).addAnomalyType(
-                        cursor.getInt(cursor.getColumnIndex(ANOMALY_TYPE)));
+                mAppInfoBuilders
+                        .get(uid)
+                        .addAnomalyType(cursor.getInt(cursor.getColumnIndex(ANOMALY_TYPE)));
             }
         }
 
@@ -133,15 +141,15 @@ public class BatteryDatabaseManager {
 
     public synchronized void deleteAllAnomaliesBeforeTimeStamp(long timestampMs) {
         final SQLiteDatabase db = mDatabaseHelper.getWritableDatabase();
-        db.delete(TABLE_ANOMALY, TIME_STAMP_MS + " < ?",
-                new String[]{String.valueOf(timestampMs)});
+        db.delete(
+                TABLE_ANOMALY, TIME_STAMP_MS + " < ?", new String[] {String.valueOf(timestampMs)});
     }
 
     /**
      * Update the type of anomalies to {@code state}
      *
      * @param appInfos represents the anomalies
-     * @param state    which state to update to
+     * @param state which state to update to
      */
     public synchronized void updateAnomalies(List<AppInfo> appInfos, int state) {
         if (!appInfos.isEmpty()) {
@@ -154,8 +162,14 @@ public class BatteryDatabaseManager {
             final SQLiteDatabase db = mDatabaseHelper.getWritableDatabase();
             final ContentValues values = new ContentValues();
             values.put(ANOMALY_STATE, state);
-            db.update(TABLE_ANOMALY, values, PACKAGE_NAME + " IN (" + TextUtils.join(",",
-                    Collections.nCopies(appInfos.size(), "?")) + ")", whereArgs);
+            db.update(
+                    TABLE_ANOMALY,
+                    values,
+                    PACKAGE_NAME
+                            + " IN ("
+                            + TextUtils.join(",", Collections.nCopies(appInfos.size(), "?"))
+                            + ")",
+                    whereArgs);
         }
     }
 
@@ -171,10 +185,17 @@ public class BatteryDatabaseManager {
         final SQLiteDatabase db = mDatabaseHelper.getReadableDatabase();
         final String[] projection = {ActionColumns.UID, ActionColumns.TIME_STAMP_MS};
         final String selection = ActionColumns.ACTION_TYPE + " = ? ";
-        final String[] selectionArgs = new String[]{String.valueOf(type)};
+        final String[] selectionArgs = new String[] {String.valueOf(type)};
 
-        try (Cursor cursor = db.query(TABLE_ACTION, projection, selection, selectionArgs,
-                null /* groupBy */, null /* having */, null /* orderBy */)) {
+        try (Cursor cursor =
+                db.query(
+                        TABLE_ACTION,
+                        projection,
+                        selection,
+                        selectionArgs,
+                        null /* groupBy */,
+                        null /* having */,
+                        null /* orderBy */)) {
             final int uidIndex = cursor.getColumnIndex(ActionColumns.UID);
             final int timestampIndex = cursor.getColumnIndex(ActionColumns.TIME_STAMP_MS);
 
@@ -188,11 +209,12 @@ public class BatteryDatabaseManager {
         return timeStamps;
     }
 
-    /**
-     * Insert an action, or update it if already existed
-     */
-    public synchronized boolean insertAction(@AnomalyDatabaseHelper.ActionType int type,
-            int uid, String packageName, long timestampMs) {
+    /** Insert an action, or update it if already existed */
+    public synchronized boolean insertAction(
+            @AnomalyDatabaseHelper.ActionType int type,
+            int uid,
+            String packageName,
+            long timestampMs) {
         final SQLiteDatabase db = mDatabaseHelper.getWritableDatabase();
         final ContentValues values = new ContentValues();
         values.put(ActionColumns.UID, uid);
@@ -203,17 +225,21 @@ public class BatteryDatabaseManager {
         return db.insertWithOnConflict(TABLE_ACTION, null, values, CONFLICT_REPLACE) != -1;
     }
 
-    /**
-     * Remove an action
-     */
-    public synchronized boolean deleteAction(@AnomalyDatabaseHelper.ActionType int type,
-            int uid, String packageName) {
+    /** Remove an action */
+    public synchronized boolean deleteAction(
+            @AnomalyDatabaseHelper.ActionType int type, int uid, String packageName) {
         SQLiteDatabase db = mDatabaseHelper.getWritableDatabase();
         final String where =
-                ActionColumns.ACTION_TYPE + " = ? AND " + ActionColumns.UID + " = ? AND "
-                        + ActionColumns.PACKAGE_NAME + " = ? ";
-        final String[] whereArgs = new String[]{String.valueOf(type), String.valueOf(uid),
-                String.valueOf(packageName)};
+                ActionColumns.ACTION_TYPE
+                        + " = ? AND "
+                        + ActionColumns.UID
+                        + " = ? AND "
+                        + ActionColumns.PACKAGE_NAME
+                        + " = ? ";
+        final String[] whereArgs =
+                new String[] {
+                    String.valueOf(type), String.valueOf(uid), String.valueOf(packageName)
+                };
 
         return db.delete(TABLE_ACTION, where, whereArgs) != 0;
     }

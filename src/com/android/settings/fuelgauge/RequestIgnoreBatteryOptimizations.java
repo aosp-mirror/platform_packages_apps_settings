@@ -31,8 +31,8 @@ import com.android.internal.app.AlertActivity;
 import com.android.internal.app.AlertController;
 import com.android.settings.R;
 
-public class RequestIgnoreBatteryOptimizations extends AlertActivity implements
-        DialogInterface.OnClickListener {
+public class RequestIgnoreBatteryOptimizations extends AlertActivity
+        implements DialogInterface.OnClickListener {
     private static final String TAG = "RequestIgnoreBatteryOptimizations";
     private static final boolean DEBUG = false;
 
@@ -42,22 +42,24 @@ public class RequestIgnoreBatteryOptimizations extends AlertActivity implements
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().addSystemFlags(android.view.WindowManager.LayoutParams
-                .SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
+        getWindow()
+                .addSystemFlags(
+                        android.view.WindowManager.LayoutParams
+                                .SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
 
         mPowerWhitelistManager = getSystemService(PowerWhitelistManager.class);
 
         Uri data = getIntent().getData();
         if (data == null) {
-            debugLog("No data supplied for IGNORE_BATTERY_OPTIMIZATION_SETTINGS in: "
-                    + getIntent());
+            debugLog(
+                    "No data supplied for IGNORE_BATTERY_OPTIMIZATION_SETTINGS in: " + getIntent());
             finish();
             return;
         }
         mPackageName = data.getSchemeSpecificPart();
         if (mPackageName == null) {
-            debugLog("No data supplied for IGNORE_BATTERY_OPTIMIZATION_SETTINGS in: "
-                    + getIntent());
+            debugLog(
+                    "No data supplied for IGNORE_BATTERY_OPTIMIZATION_SETTINGS in: " + getIntent());
             finish();
             return;
         }
@@ -69,11 +71,16 @@ public class RequestIgnoreBatteryOptimizations extends AlertActivity implements
             return;
         }
 
-        if (getPackageManager().checkPermission(
-                Manifest.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS, mPackageName)
+        if (getPackageManager()
+                        .checkPermission(
+                                Manifest.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS,
+                                mPackageName)
                 != PackageManager.PERMISSION_GRANTED) {
-            debugLog("Requested package " + mPackageName + " does not hold permission "
-                    + Manifest.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
+            debugLog(
+                    "Requested package "
+                            + mPackageName
+                            + " does not hold permission "
+                            + Manifest.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
             finish();
             return;
         }
@@ -88,9 +95,12 @@ public class RequestIgnoreBatteryOptimizations extends AlertActivity implements
         }
 
         final AlertController.AlertParams p = mAlertParams;
-        final CharSequence appLabel = ai.loadSafeLabel(getPackageManager(),
-                PackageItemInfo.DEFAULT_MAX_LABEL_SIZE_PX, PackageItemInfo.SAFE_LABEL_FLAG_TRIM
-                        | PackageItemInfo.SAFE_LABEL_FLAG_FIRST_LINE);
+        final CharSequence appLabel =
+                ai.loadSafeLabel(
+                        getPackageManager(),
+                        PackageItemInfo.DEFAULT_MAX_LABEL_SIZE_PX,
+                        PackageItemInfo.SAFE_LABEL_FLAG_TRIM
+                                | PackageItemInfo.SAFE_LABEL_FLAG_FIRST_LINE);
         p.mTitle = getText(R.string.high_power_prompt_title);
         p.mMessage = getString(R.string.high_power_prompt_body, appLabel);
         p.mPositiveButtonText = getText(R.string.allow);

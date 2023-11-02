@@ -30,8 +30,7 @@ public class UnrestrictedPreferenceController extends AbstractPreferenceControll
 
     private static final String TAG = "UNRESTRICTED_PREF";
 
-    @VisibleForTesting
-    static final String KEY_UNRESTRICTED_PREF = "unrestricted_preference";
+    @VisibleForTesting static final String KEY_UNRESTRICTED_PREF = "unrestricted_preference";
 
     @VisibleForTesting BatteryOptimizeUtils mBatteryOptimizeUtils;
 
@@ -44,8 +43,9 @@ public class UnrestrictedPreferenceController extends AbstractPreferenceControll
     public void updateState(Preference preference) {
         preference.setEnabled(mBatteryOptimizeUtils.isSelectorPreferenceEnabled());
 
-        final boolean isUnrestricted = mBatteryOptimizeUtils.getAppOptimizationMode()
-                == BatteryOptimizeUtils.MODE_UNRESTRICTED;
+        final boolean isUnrestricted =
+                mBatteryOptimizeUtils.getAppOptimizationMode()
+                        == BatteryOptimizeUtils.MODE_UNRESTRICTED;
         ((SelectorWithWidgetPreference) preference).setChecked(isUnrestricted);
     }
 

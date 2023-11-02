@@ -23,9 +23,7 @@ import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.DockDefenderTip;
 
-/**
- * Detect whether the dock defender mode is enabled.
- */
+/** Detect whether the dock defender mode is enabled. */
 public class DockDefenderDetector implements BatteryTipDetector {
     private final BatteryInfo mBatteryInfo;
     private final Context mContext;
@@ -44,5 +42,4 @@ public class DockDefenderDetector implements BatteryTipDetector {
                         : BatteryTip.StateType.INVISIBLE,
                 mode);
     }
-
 }
