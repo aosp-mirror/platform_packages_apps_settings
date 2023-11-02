@@ -23,10 +23,12 @@ import android.accounts.AccountManager;
 import android.accounts.AuthenticatorDescription;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -39,6 +41,7 @@ import android.os.Environment;
 import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.os.image.DynamicSystemManager;
 import android.provider.Settings;
 import android.sysprop.VoldProperties;
 import android.telephony.euicc.EuiccManager;
@@ -253,6 +256,19 @@ public class MasterClear extends InstrumentedFragment implements OnGlobalLayoutL
                             .setAction(Intent.ACTION_FACTORY_RESET);
                     context.startActivity(requestFactoryReset);
                 }
+                return;
+            }
+
+            final DynamicSystemManager dsuManager = (DynamicSystemManager)
+                    getActivity().getSystemService(Context.DYNAMIC_SYSTEM_SERVICE);
+            if (dsuManager.isInUse()) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle(R.string.dsu_is_running);
+                builder.setPositiveButton(R.string.okay, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {}
+                });
+                AlertDialog dsuAlertdialog = builder.create();
+                dsuAlertdialog.show();
                 return;
             }
 
