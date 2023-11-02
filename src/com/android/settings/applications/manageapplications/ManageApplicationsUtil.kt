@@ -64,6 +64,7 @@ import com.android.settings.spa.app.specialaccess.AlarmsAndRemindersAppListProvi
 import com.android.settings.spa.app.specialaccess.AllFilesAccessAppListProvider
 import com.android.settings.spa.app.specialaccess.DisplayOverOtherAppsAppListProvider
 import com.android.settings.spa.app.specialaccess.InstallUnknownAppsListProvider
+import com.android.settings.spa.app.specialaccess.LongBackgroundTasksAppListProvider
 import com.android.settings.spa.app.specialaccess.MediaManagementAppsAppListProvider
 import com.android.settings.spa.app.specialaccess.ModifySystemSettingsAppListProvider
 import com.android.settings.spa.app.specialaccess.NfcTagAppsSettingsProvider
@@ -121,6 +122,7 @@ object ManageApplicationsUtil {
             LIST_TYPE_MAIN -> AllAppListPageProvider.name
             LIST_TYPE_NFC_TAG_APPS -> NfcTagAppsSettingsProvider.getAppListRoute()
             LIST_TYPE_USER_ASPECT_RATIO_APPS -> UserAspectRatioAppsPageProvider.name
+            LIST_TYPE_LONG_BACKGROUND_TASKS -> LongBackgroundTasksAppListProvider.getAppListRoute()
             LIST_TYPE_TURN_SCREEN_ON -> TurnScreenOnAppsAppListProvider.getAppListRoute()
             // TODO(b/292165031) enable once sorting is supported
             //LIST_TYPE_STORAGE -> StorageAppListPageProvider.Apps.name
