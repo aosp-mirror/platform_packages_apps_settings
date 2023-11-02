@@ -38,7 +38,6 @@ import com.android.settingslib.R;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.Utils;
 import com.android.settingslib.wifi.WifiUtils;
-import com.android.wifitrackerlib.BaseWifiTracker;
 import com.android.wifitrackerlib.HotspotNetworkEntry;
 import com.android.wifitrackerlib.WifiEntry;
 
@@ -108,7 +107,7 @@ public class WifiEntryPreference extends RestrictedPreference implements
     @Override
     public void onBindViewHolder(final PreferenceViewHolder view) {
         super.onBindViewHolder(view);
-        if (BaseWifiTracker.isVerboseLoggingEnabled()) {
+        if (mWifiEntry.isVerboseSummaryEnabled()) {
             TextView summary = (TextView) view.findViewById(android.R.id.summary);
             if (summary != null) {
                 summary.setMaxLines(100);

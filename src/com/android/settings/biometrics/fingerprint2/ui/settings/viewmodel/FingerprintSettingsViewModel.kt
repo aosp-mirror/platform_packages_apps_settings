@@ -22,8 +22,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.android.settings.biometrics.fingerprint2.shared.domain.interactor.FingerprintManagerInteractor
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintAuthAttemptViewModel
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintViewModel
+import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintAuthAttemptModel
+import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintData
 import com.android.systemui.biometrics.shared.model.FingerprintSensorType
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
@@ -53,11 +53,11 @@ class FingerprintSettingsViewModel(
   private val backgroundDispatcher: CoroutineDispatcher,
   private val navigationViewModel: FingerprintSettingsNavigationViewModel,
 ) : ViewModel() {
-  private val _enrolledFingerprints: MutableStateFlow<List<FingerprintViewModel>?> =
+  private val _enrolledFingerprints: MutableStateFlow<List<FingerprintData>?> =
     MutableStateFlow(null)
 
   /** Represents the stream of enrolled fingerprints. */
-  val enrolledFingerprints: Flow<List<FingerprintViewModel>> =
+  val enrolledFingerprints: Flow<List<FingerprintData>> =
     _enrolledFingerprints.asStateFlow().filterNotNull().filterOnlyWhenSettingsIsShown()
 
   /** Represents the stream of the information of "Add Fingerprint" preference. */
@@ -95,10 +95,10 @@ class FingerprintSettingsViewModel(
   private val _sensorNullOrEmpty: Flow<Boolean> =
     fingerprintManagerInteractor.sensorPropertiesInternal.map { it == null }
 
-  private val _isLockedOut: MutableStateFlow<FingerprintAuthAttemptViewModel.Error?> =
+  private val _isLockedOut: MutableStateFlow<FingerprintAuthAttemptModel.Error?> =
     MutableStateFlow(null)
 
-  private val _authSucceeded: MutableSharedFlow<FingerprintAuthAttemptViewModel.Success?> =
+  private val _authSucceeded: MutableSharedFlow<FingerprintAuthAttemptModel.Success?> =
     MutableSharedFlow()
 
   private val _attemptsSoFar: MutableStateFlow<Int> = MutableStateFlow(0)
@@ -164,7 +164,7 @@ class FingerprintSettingsViewModel(
       .distinctUntilChanged()
 
   /** Represents a consistent stream of authentication attempts. */
-  val authFlow: Flow<FingerprintAuthAttemptViewModel> =
+  val authFlow: Flow<FingerprintAuthAttemptModel> =
     canAuthenticate
       .transformLatest {
         try {
@@ -173,11 +173,11 @@ class FingerprintSettingsViewModel(
             Log.d(TAG, "canAuthenticate authing")
             attemptingAuth()
             when (val authAttempt = fingerprintManagerInteractor.authenticate()) {
-              is FingerprintAuthAttemptViewModel.Success -> {
+              is FingerprintAuthAttemptModel.Success -> {
                 onAuthSuccess(authAttempt)
                 emit(authAttempt)
               }
-              is FingerprintAuthAttemptViewModel.Error -> {
+              is FingerprintAuthAttemptModel.Error -> {
                 if (authAttempt.error == FingerprintManager.FINGERPRINT_ERROR_LOCKOUT) {
                   lockout(authAttempt)
                   emit(authAttempt)
@@ -219,7 +219,7 @@ class FingerprintSettingsViewModel(
   }
 
   /** The fingerprint delete button has been clicked. */
-  fun onDeleteClicked(fingerprintViewModel: FingerprintViewModel) {
+  fun onDeleteClicked(fingerprintViewModel: FingerprintData) {
     viewModelScope.launch {
       if (_isShowingDialog.value == null || navigationViewModel.nextStep.value != ShowSettings) {
         _isShowingDialog.tryEmit(PreferenceViewModel.DeleteDialog(fingerprintViewModel))
@@ -230,7 +230,7 @@ class FingerprintSettingsViewModel(
   }
 
   /** The rename fingerprint dialog has been clicked. */
-  fun onPrefClicked(fingerprintViewModel: FingerprintViewModel) {
+  fun onPrefClicked(fingerprintViewModel: FingerprintData) {
     viewModelScope.launch {
       if (_isShowingDialog.value == null || navigationViewModel.nextStep.value != ShowSettings) {
         _isShowingDialog.tryEmit(PreferenceViewModel.RenameDialog(fingerprintViewModel))
@@ -241,7 +241,7 @@ class FingerprintSettingsViewModel(
   }
 
   /** A request to delete a fingerprint */
-  fun deleteFingerprint(fp: FingerprintViewModel) {
+  fun deleteFingerprint(fp: FingerprintData) {
     viewModelScope.launch(backgroundDispatcher) {
       if (fingerprintManagerInteractor.removeFingerprint(fp)) {
         updateEnrolledFingerprints()
@@ -250,7 +250,7 @@ class FingerprintSettingsViewModel(
   }
 
   /** A request to rename a fingerprint */
-  fun renameFingerprint(fp: FingerprintViewModel, newName: String) {
+  fun renameFingerprint(fp: FingerprintData, newName: String) {
     viewModelScope.launch {
       fingerprintManagerInteractor.renameFingerprint(fp, newName)
       updateEnrolledFingerprints()
@@ -261,12 +261,12 @@ class FingerprintSettingsViewModel(
     _attemptsSoFar.update { it + 1 }
   }
 
-  private suspend fun onAuthSuccess(success: FingerprintAuthAttemptViewModel.Success) {
+  private suspend fun onAuthSuccess(success: FingerprintAuthAttemptModel.Success) {
     _authSucceeded.emit(success)
     _attemptsSoFar.update { 0 }
   }
 
-  private fun lockout(attemptViewModel: FingerprintAuthAttemptViewModel.Error) {
+  private fun lockout(attemptViewModel: FingerprintAuthAttemptModel.Error) {
     _isLockedOut.update { attemptViewModel }
   }
 

@@ -16,19 +16,19 @@
 
 package com.android.settings.biometrics.fingerprint2.shared.model
 
-data class FingerprintViewModel(
-  val name: String,
-  val fingerId: Int,
-  val deviceId: Long,
-)
+/**
+ * The [FingerprintFlow] for fingerprint enrollment indicates information on how the flow should behave.
+ */
+sealed class FingerprintFlow
 
-sealed class FingerprintAuthAttemptViewModel {
-  data class Success(
-    val fingerId: Int,
-  ) : FingerprintAuthAttemptViewModel()
+/** The default enrollment experience, typically called from Settings */
+data object Default : FingerprintFlow()
 
-  data class Error(
-    val error: Int,
-    val message: String,
-  ) : FingerprintAuthAttemptViewModel()
-}
+/** SetupWizard/Out of box experience (OOBE) enrollment type. */
+data object SetupWizard : FingerprintFlow()
+
+/** Unicorn enrollment type */
+data object Unicorn : FingerprintFlow()
+
+/** Flow to specify settings type */
+data object Settings : FingerprintFlow()

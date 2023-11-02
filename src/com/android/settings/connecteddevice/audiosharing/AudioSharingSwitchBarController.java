@@ -17,24 +17,30 @@
 package com.android.settings.connecteddevice.audiosharing;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Switch;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 
+import com.android.settings.core.BasePreferenceController;
+import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.flags.Flags;
 import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
-public class AudioSharingSwitchBarController
+public class AudioSharingSwitchBarController extends BasePreferenceController
         implements DefaultLifecycleObserver, OnMainSwitchChangeListener {
-
     private static final String TAG = "AudioSharingSwitchBarCtl";
+    private static final String PREF_KEY = "audio_sharing_main_switch";
 
     private final Context mContext;
     private final SettingsMainSwitchBar mSwitchBar;
+    private DashboardFragment mFragment;
 
     AudioSharingSwitchBarController(Context context, SettingsMainSwitchBar switchBar) {
+        super(context, PREF_KEY);
         mContext = context;
         mSwitchBar = switchBar;
         mSwitchBar.setChecked(false);
@@ -54,11 +60,32 @@ public class AudioSharingSwitchBarController
     public void onSwitchChanged(Switch switchView, boolean isChecked) {
         // Filter out unnecessary callbacks when switch is disabled.
         if (!switchView.isEnabled()) return;
-
         if (isChecked) {
-            // TODO: start sharing
+            startAudioSharing();
         } else {
             // TODO: stop sharing
+        }
+    }
+
+    @Override
+    public int getAvailabilityStatus() {
+        return Flags.enableLeAudioSharing() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+    }
+
+    /**
+     * Initialize the controller.
+     *
+     * @param fragment The fragment to host the {@link AudioSharingSwitchBarController} dialog.
+     */
+    public void init(DashboardFragment fragment) {
+        this.mFragment = fragment;
+    }
+
+    private void startAudioSharing() {
+        if (mFragment != null) {
+            AudioSharingDialogFragment.show(mFragment);
+        } else {
+            Log.w(TAG, "Dialog fail to show due to null fragment.");
         }
     }
 }

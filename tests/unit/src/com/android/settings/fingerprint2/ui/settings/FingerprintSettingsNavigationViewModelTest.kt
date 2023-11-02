@@ -18,7 +18,7 @@ package com.android.settings.fingerprint2.ui.settings
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.android.settings.biometrics.BiometricEnrollBase
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintViewModel
+import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintData
 import com.android.settings.biometrics.fingerprint2.ui.settings.viewmodel.EnrollFirstFingerprint
 import com.android.settings.biometrics.fingerprint2.ui.settings.viewmodel.FingerprintSettingsNavigationViewModel
 import com.android.settings.biometrics.fingerprint2.ui.settings.viewmodel.FinishSettings
@@ -208,7 +208,7 @@ class FingerprintSettingsNavigationViewModelTest {
   fun enrollAdditionalFingerprints_fails() =
     testScope.runTest {
       fakeFingerprintManagerInteractor.enrolledFingerprintsInternal =
-        mutableListOf(FingerprintViewModel("a", 1, 3L))
+        mutableListOf(FingerprintData("a", 1, 3L))
       fakeFingerprintManagerInteractor.challengeToGenerate = Pair(4L, byteArrayOf(3, 3, 1))
 
       var nextStep: NextStepViewModel? = null
@@ -227,7 +227,7 @@ class FingerprintSettingsNavigationViewModelTest {
   fun enrollAdditional_success() =
     testScope.runTest {
       fakeFingerprintManagerInteractor.enrolledFingerprintsInternal =
-        mutableListOf(FingerprintViewModel("a", 1, 3L))
+        mutableListOf(FingerprintData("a", 1, 3L))
 
       var nextStep: NextStepViewModel? = null
       val job = launch { underTest.nextStep.collect { nextStep = it } }
@@ -245,7 +245,7 @@ class FingerprintSettingsNavigationViewModelTest {
   fun confirmDeviceCredential_withEnrolledFingerprint_showsSettings() =
     testScope.runTest {
       fakeFingerprintManagerInteractor.enrolledFingerprintsInternal =
-        mutableListOf(FingerprintViewModel("a", 1, 3L))
+        mutableListOf(FingerprintData("a", 1, 3L))
       fakeFingerprintManagerInteractor.challengeToGenerate = Pair(10L, byteArrayOf(1, 2, 3))
 
       var nextStep: NextStepViewModel? = null
@@ -320,7 +320,7 @@ class FingerprintSettingsNavigationViewModelTest {
   fun showSettings_shouldFinish() =
     testScope.runTest {
       fakeFingerprintManagerInteractor.enrolledFingerprintsInternal =
-        mutableListOf(FingerprintViewModel("a", 1, 3L))
+        mutableListOf(FingerprintData("a", 1, 3L))
 
       var nextStep: NextStepViewModel? = null
       val job = launch { underTest.nextStep.collect { nextStep = it } }

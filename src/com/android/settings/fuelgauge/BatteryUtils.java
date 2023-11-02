@@ -88,6 +88,7 @@ public class BatteryUtils {
     public static final String BYPASS_DOCK_DEFENDER_ACTION = "battery.dock.defender.bypass";
 
     private static final String GOOGLE_PLAY_STORE_PACKAGE = "com.android.vending";
+    private static final String PACKAGE_NAME_NONE = "none";
 
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({StatusType.SCREEN_USAGE,
@@ -138,6 +139,12 @@ public class BatteryUtils {
         mAppOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
         mPowerUsageFeatureProvider =
                 FeatureFactory.getFeatureFactory().getPowerUsageFeatureProvider();
+    }
+
+    /** For test to reset single instance. */
+    @VisibleForTesting
+    public void reset() {
+        sInstance = null;
     }
 
     public long getProcessTimeMs(@StatusType int type, @Nullable BatteryStats.Uid uid,
@@ -614,6 +621,12 @@ public class BatteryUtils {
         }
         return installSourceInfo != null
                 && GOOGLE_PLAY_STORE_PACKAGE.equals(installSourceInfo.getInitiatingPackageName());
+    }
+
+    /** Gets the logging package name. */
+    public static String getLoggingPackageName(Context context, String originalPackingName) {
+        return BatteryUtils.isAppInstalledFromGooglePlayStore(context, originalPackingName)
+                ? originalPackingName : PACKAGE_NAME_NONE;
     }
 
     /** Gets the latest sticky battery intent from the Android system. */

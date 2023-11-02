@@ -26,12 +26,14 @@ import android.os.CancellationSignal
 import android.os.Handler
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.biometrics.GatekeeperPasswordProvider
-import com.android.settings.biometrics.fingerprint2.shared.domain.interactor.FingerprintManagerInteractor
 import com.android.settings.biometrics.fingerprint2.domain.interactor.FingerprintManagerInteractorImpl
+import com.android.settings.biometrics.fingerprint2.shared.data.repository.PressToAuthProvider
+import com.android.settings.biometrics.fingerprint2.shared.domain.interactor.FingerprintManagerInteractor
+import com.android.settings.biometrics.fingerprint2.shared.model.Default
 import com.android.settings.biometrics.fingerprint2.shared.model.EnrollReason
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintAuthAttemptViewModel
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintViewModel
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerEnrollStateViewModel
+import com.android.settings.biometrics.fingerprint2.shared.model.FingerEnrollState
+import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintAuthAttemptModel
+import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintData
 import com.android.settings.password.ChooseLockSettingsHelper
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.cancelAndJoin
@@ -69,7 +71,11 @@ class FingerprintManagerInteractorTest {
   @Mock private lateinit var gateKeeperPasswordProvider: GatekeeperPasswordProvider
 
   private var testScope = TestScope(backgroundDispatcher)
-  private var pressToAuthProvider = { true }
+  private var pressToAuthProvider =
+    object : PressToAuthProvider {
+      override val isEnabled: Boolean
+        get() = false
+    }
 
   @Before
   fun setup() {
@@ -80,6 +86,7 @@ class FingerprintManagerInteractorTest {
         fingerprintManager,
         gateKeeperPasswordProvider,
         pressToAuthProvider,
+        Default,
       )
   }
 
@@ -164,7 +171,7 @@ class FingerprintManagerInteractorTest {
   @Test
   fun testRemoveFingerprint_succeeds() =
     testScope.runTest {
-      val fingerprintViewModelToRemove = FingerprintViewModel("Finger 2", 1, 2L)
+      val fingerprintViewModelToRemove = FingerprintData("Finger 2", 1, 2L)
       val fingerprintToRemove = Fingerprint("Finger 2", 1, 2L)
 
       val removalCallback: ArgumentCaptor<FingerprintManager.RemovalCallback> = argumentCaptor()
@@ -187,7 +194,7 @@ class FingerprintManagerInteractorTest {
   @Test
   fun testRemoveFingerprint_fails() =
     testScope.runTest {
-      val fingerprintViewModelToRemove = FingerprintViewModel("Finger 2", 1, 2L)
+      val fingerprintViewModelToRemove = FingerprintData("Finger 2", 1, 2L)
       val fingerprintToRemove = Fingerprint("Finger 2", 1, 2L)
 
       val removalCallback: ArgumentCaptor<FingerprintManager.RemovalCallback> = argumentCaptor()
@@ -214,7 +221,7 @@ class FingerprintManagerInteractorTest {
   @Test
   fun testRenameFingerprint_succeeds() =
     testScope.runTest {
-      val fingerprintToRename = FingerprintViewModel("Finger 2", 1, 2L)
+      val fingerprintToRename = FingerprintData("Finger 2", 1, 2L)
 
       underTest.renameFingerprint(fingerprintToRename, "Woo")
 
@@ -226,7 +233,7 @@ class FingerprintManagerInteractorTest {
     testScope.runTest {
       val fingerprint = Fingerprint("Woooo", 100, 101L)
 
-      var result: FingerprintAuthAttemptViewModel? = null
+      var result: FingerprintAuthAttemptModel? = null
       val job = launch { result = underTest.authenticate() }
 
       val authCallback: ArgumentCaptor<FingerprintManager.AuthenticationCallback> = argumentCaptor()
@@ -247,13 +254,13 @@ class FingerprintManagerInteractorTest {
 
       runCurrent()
       job.cancelAndJoin()
-      assertThat(result).isEqualTo(FingerprintAuthAttemptViewModel.Success(fingerprint.biometricId))
+      assertThat(result).isEqualTo(FingerprintAuthAttemptModel.Success(fingerprint.biometricId))
     }
 
   @Test
   fun testAuth_lockout() =
     testScope.runTest {
-      var result: FingerprintAuthAttemptViewModel? = null
+      var result: FingerprintAuthAttemptModel? = null
       val job = launch { result = underTest.authenticate() }
 
       val authCallback: ArgumentCaptor<FingerprintManager.AuthenticationCallback> = argumentCaptor()
@@ -274,7 +281,7 @@ class FingerprintManagerInteractorTest {
       job.cancelAndJoin()
       assertThat(result)
         .isEqualTo(
-          FingerprintAuthAttemptViewModel.Error(FINGERPRINT_ERROR_LOCKOUT_PERMANENT, "Lockout!!")
+          FingerprintAuthAttemptModel.Error(FINGERPRINT_ERROR_LOCKOUT_PERMANENT, "Lockout!!")
         )
     }
 
@@ -282,7 +289,7 @@ class FingerprintManagerInteractorTest {
   fun testEnroll_progress() =
     testScope.runTest {
       val token = byteArrayOf(5, 3, 2)
-      var result: FingerEnrollStateViewModel? = null
+      var result: FingerEnrollState? = null
       val job = launch { underTest.enroll(token, EnrollReason.FindSensor).collect { result = it } }
       val enrollCallback: ArgumentCaptor<FingerprintManager.EnrollmentCallback> = argumentCaptor()
       runCurrent()
@@ -299,14 +306,14 @@ class FingerprintManagerInteractorTest {
       runCurrent()
       job.cancelAndJoin()
 
-      assertThat(result).isEqualTo(FingerEnrollStateViewModel.EnrollProgress(1))
+      assertThat(result).isEqualTo(FingerEnrollState.EnrollProgress(1, 2))
     }
 
   @Test
   fun testEnroll_help() =
     testScope.runTest {
       val token = byteArrayOf(5, 3, 2)
-      var result: FingerEnrollStateViewModel? = null
+      var result: FingerEnrollState? = null
       val job = launch { underTest.enroll(token, EnrollReason.FindSensor).collect { result = it } }
       val enrollCallback: ArgumentCaptor<FingerprintManager.EnrollmentCallback> = argumentCaptor()
       runCurrent()
@@ -323,14 +330,14 @@ class FingerprintManagerInteractorTest {
       runCurrent()
       job.cancelAndJoin()
 
-      assertThat(result).isEqualTo(FingerEnrollStateViewModel.EnrollHelp(-1, "help"))
+      assertThat(result).isEqualTo(FingerEnrollState.EnrollHelp(-1, "help"))
     }
 
   @Test
   fun testEnroll_error() =
     testScope.runTest {
       val token = byteArrayOf(5, 3, 2)
-      var result: FingerEnrollStateViewModel? = null
+      var result: FingerEnrollState? = null
       val job = launch { underTest.enroll(token, EnrollReason.FindSensor).collect { result = it } }
       val enrollCallback: ArgumentCaptor<FingerprintManager.EnrollmentCallback> = argumentCaptor()
       runCurrent()
@@ -343,17 +350,20 @@ class FingerprintManagerInteractorTest {
           capture(enrollCallback),
           eq(FingerprintManager.ENROLL_FIND_SENSOR)
         )
-      enrollCallback.value.onEnrollmentError(-2, "error")
+      enrollCallback.value.onEnrollmentError(-1, "error")
       runCurrent()
       job.cancelAndJoin()
-
-      assertThat(result).isEqualTo(FingerEnrollStateViewModel.EnrollError(-2, "error"))
+      assertThat(result).isInstanceOf(FingerEnrollState.EnrollError::class.java)
     }
 
   private fun <T : Any> safeEq(value: T): T = eq(value) ?: value
+
   private fun <T> capture(argumentCaptor: ArgumentCaptor<T>): T = argumentCaptor.capture()
+
   private fun <T> any(type: Class<T>): T = Mockito.any<T>(type)
+
   private fun <T> whenever(methodCall: T): OngoingStubbing<T> = `when`(methodCall)
+
   inline fun <reified T : Any> argumentCaptor(): ArgumentCaptor<T> =
     ArgumentCaptor.forClass(T::class.java)
 }
