@@ -28,7 +28,7 @@ import android.permission.PermissionControllerManager.HIBERNATION_ELIGIBILITY_UN
 import android.provider.DeviceConfig
 import android.provider.DeviceConfig.NAMESPACE_APP_HIBERNATION
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -56,18 +56,14 @@ fun HibernationSwitchPreference(app: ApplicationInfo) {
     val presenter = remember { HibernationSwitchPresenter(context, app) }
     if (!presenter.isAvailable()) return
 
-    val isEligibleState = presenter.isEligibleFlow.collectAsStateWithLifecycle(initialValue = false)
+    val isEligibleState by presenter.isEligibleFlow.collectAsStateWithLifecycle(initialValue = false)
     val isCheckedState = presenter.isCheckedFlow.collectAsStateWithLifecycle(initialValue = null)
     SwitchPreference(remember {
         object : SwitchPreferenceModel {
             override val title = context.getString(R.string.unused_apps_switch)
             override val summary = { context.getString(R.string.unused_apps_switch_summary) }
-            override val changeable = isEligibleState
-
-            override val checked = derivedStateOf {
-                if (!changeable.value) false else isCheckedState.value
-            }
-
+            override val changeable = { isEligibleState }
+            override val checked = { if (changeable()) isCheckedState.value else false }
             override val onCheckedChange = presenter::onCheckedChange
         }
     })
