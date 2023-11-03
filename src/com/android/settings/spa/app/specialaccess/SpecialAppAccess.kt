@@ -68,6 +68,7 @@ object SpecialAppAccessPageProvider : SettingsPageProvider {
                 AlarmsAndRemindersAppListProvider,
                 VoiceActivationAppsListProvider,
                 WifiControlAppListProvider,
+                TurnScreenOnAppsAppListProvider,
             )
             .map { it.buildAppListInjectEntry().setLink(fromPage = owner).build() }
     }

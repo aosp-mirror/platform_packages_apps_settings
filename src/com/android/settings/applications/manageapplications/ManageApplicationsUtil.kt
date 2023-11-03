@@ -67,6 +67,7 @@ import com.android.settings.spa.app.specialaccess.InstallUnknownAppsListProvider
 import com.android.settings.spa.app.specialaccess.MediaManagementAppsAppListProvider
 import com.android.settings.spa.app.specialaccess.ModifySystemSettingsAppListProvider
 import com.android.settings.spa.app.specialaccess.NfcTagAppsSettingsProvider
+import com.android.settings.spa.app.specialaccess.TurnScreenOnAppsAppListProvider
 import com.android.settings.spa.app.specialaccess.WifiControlAppListProvider
 import com.android.settings.spa.app.storage.StorageAppListPageProvider
 import com.android.settings.spa.notification.AppListNotificationsPageProvider
@@ -120,6 +121,7 @@ object ManageApplicationsUtil {
             LIST_TYPE_MAIN -> AllAppListPageProvider.name
             LIST_TYPE_NFC_TAG_APPS -> NfcTagAppsSettingsProvider.getAppListRoute()
             LIST_TYPE_USER_ASPECT_RATIO_APPS -> UserAspectRatioAppsPageProvider.name
+            LIST_TYPE_TURN_SCREEN_ON -> TurnScreenOnAppsAppListProvider.getAppListRoute()
             // TODO(b/292165031) enable once sorting is supported
             //LIST_TYPE_STORAGE -> StorageAppListPageProvider.Apps.name
             //LIST_TYPE_GAMES -> StorageAppListPageProvider.Games.name
