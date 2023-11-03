@@ -21,21 +21,27 @@ import static com.android.settings.applications.appcompat.UserAspectRatioDetails
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.IActivityManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.RemoteException;
 
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowActivityManager;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InOrder;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
@@ -56,6 +62,7 @@ public class UserAspectRatioDetailsTest {
     private RadioWithImagePreference mRadioButtonPref;
     private Context mContext;
     private UserAspectRatioDetails mFragment;
+    private MetricsFeatureProvider mMetricsFeatureProvider;
 
     @Before
     public void setUp() {
@@ -67,6 +74,8 @@ public class UserAspectRatioDetailsTest {
         when(mFragment.getAspectRatioManager()).thenReturn(mUserAspectRatioManager);
         ShadowActivityManager.setService(mAm);
         mRadioButtonPref = new RadioWithImagePreference(mContext);
+        final FakeFeatureFactory featureFactory = FakeFeatureFactory.setupForTest();
+        mMetricsFeatureProvider = featureFactory.metricsFeatureProvider;
     }
 
     @Test
@@ -92,5 +101,32 @@ public class UserAspectRatioDetailsTest {
         // Only triggered once when preference changes
         verify(mUserAspectRatioManager).setUserMinAspectRatio(
                 any(), anyInt(), anyInt());
+    }
+
+    @Test
+    public void onRadioButtonClicked_prefChange_logMetrics() throws NullPointerException {
+        // Default was already selected
+        mRadioButtonPref.setKey(KEY_PREF_DEFAULT);
+        mFragment.onRadioButtonClicked(mRadioButtonPref);
+        // Preference changed
+        mRadioButtonPref.setKey(KEY_PREF_3_2);
+        mFragment.onRadioButtonClicked(mRadioButtonPref);
+        InOrder inOrder = inOrder(mMetricsFeatureProvider);
+        // Check the old aspect ratio value is logged as having been unselected
+        inOrder.verify(mMetricsFeatureProvider)
+                .action(
+                        eq(SettingsEnums.PAGE_UNKNOWN),
+                        eq(SettingsEnums.ACTION_USER_ASPECT_RATIO_APP_DEFAULT_UNSELECTED),
+                        eq(SettingsEnums.USER_ASPECT_RATIO_APP_INFO_SETTINGS),
+                        any(),
+                        anyInt());
+        // Check the new aspect ratio value is logged as having been selected
+        inOrder.verify(mMetricsFeatureProvider)
+                .action(
+                        eq(SettingsEnums.PAGE_UNKNOWN),
+                        eq(SettingsEnums.ACTION_USER_ASPECT_RATIO_3_2_SELECTED),
+                        eq(SettingsEnums.USER_ASPECT_RATIO_APP_INFO_SETTINGS),
+                        any(),
+                        anyInt());
     }
 }
