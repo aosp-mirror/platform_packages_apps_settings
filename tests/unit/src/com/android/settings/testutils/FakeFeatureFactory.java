@@ -46,6 +46,7 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.overlay.SupportFeatureProvider;
 import com.android.settings.overlay.SurveyFeatureProvider;
 import com.android.settings.panel.PanelFeatureProvider;
+import com.android.settings.privatespace.PrivateSpaceLoginFeatureProvider;
 import com.android.settings.search.SearchFeatureProvider;
 import com.android.settings.security.SecurityFeatureProvider;
 import com.android.settings.security.SecuritySettingsFeatureProvider;
@@ -98,6 +99,7 @@ public class FakeFeatureFactory extends FeatureFactory {
     public StylusFeatureProvider mStylusFeatureProvider;
     public OnboardingFeatureProvider mOnboardingFeatureProvider;
     public FastPairFeatureProvider mFastPairFeatureProvider;
+    public PrivateSpaceLoginFeatureProvider mPrivateSpaceLoginFeatureProvider;
 
     /**
      * Call this in {@code @Before} method of the test class to use fake factory.
@@ -145,6 +147,7 @@ public class FakeFeatureFactory extends FeatureFactory {
         mStylusFeatureProvider = mock(StylusFeatureProvider.class);
         mOnboardingFeatureProvider = mock(OnboardingFeatureProvider.class);
         mFastPairFeatureProvider = mock(FastPairFeatureProvider.class);
+        mPrivateSpaceLoginFeatureProvider = mock(PrivateSpaceLoginFeatureProvider.class);
     }
 
     @Override
@@ -321,5 +324,10 @@ public class FakeFeatureFactory extends FeatureFactory {
     @Override
     public FastPairFeatureProvider getFastPairFeatureProvider() {
         return mFastPairFeatureProvider;
+    }
+
+    @Override
+    public PrivateSpaceLoginFeatureProvider getPrivateSpaceLoginFeatureProvider() {
+        return mPrivateSpaceLoginFeatureProvider;
     }
 }

@@ -16,25 +16,21 @@
 
 package com.android.settings.privatespace;
 
-import static android.app.Activity.RESULT_OK;
-import static android.app.admin.DevicePolicyManager.ACTION_SET_NEW_PASSWORD;
-import static android.app.admin.DevicePolicyManager.EXTRA_PASSWORD_COMPLEXITY;
-import static android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_LOW;
+import static com.android.settings.privatespace.PrivateSpaceSetupActivity.EXTRA_ACTION_TYPE;
+import static com.android.settings.privatespace.PrivateSpaceSetupActivity.SET_LOCK_ACTION;
 
-import android.app.Activity;
-import android.app.KeyguardManager;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.activity.OnBackPressedCallback;
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.android.settings.R;
 
@@ -45,9 +41,6 @@ import com.google.android.setupdesign.GlifLayout;
 /** Fragment that provides an option to user to choose between the existing screen lock or set a
  * separate private profile lock. */
 public class PrivateSpaceSetLockFragment extends Fragment {
-    private final ActivityResultLauncher<Intent> mVerifyDeviceLock =
-            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
-                    this::onSetDeviceNewLock);
 
     @Override
     public View onCreateView(
@@ -90,11 +83,8 @@ public class PrivateSpaceSetLockFragment extends Fragment {
     private View.OnClickListener onClickUse() {
         return v -> {
             // Simply Use default screen lock. No need to handle
-            Activity activity = getActivity();
-            if (activity != null) {
-                activity.setResult(RESULT_OK);
-                activity.finish();
-            }
+            NavHostFragment.findNavController(PrivateSpaceSetLockFragment.this)
+                    .navigate(R.id.action_success_fragment);
         };
     }
 
@@ -104,22 +94,17 @@ public class PrivateSpaceSetLockFragment extends Fragment {
         };
     }
 
+    @SuppressLint("MissingPermission")
     private void createPrivateSpaceLock() {
-        final Intent intent = new Intent(ACTION_SET_NEW_PASSWORD);
-        intent.putExtra(EXTRA_PASSWORD_COMPLEXITY, PASSWORD_COMPLEXITY_LOW);
-        mVerifyDeviceLock.launch(intent);
-    }
-
-    private void onSetDeviceNewLock(@Nullable ActivityResult result) {
-        // TODO(b/307281644) : Verify this for biometrics and check result code after new
-        //  Authentication changes are merged.
-        if (result != null) {
-            Activity profileContextHelperActivity = getActivity();
-            if (profileContextHelperActivity != null && profileContextHelperActivity
-                    .getSystemService(KeyguardManager.class).isDeviceSecure()) {
-                profileContextHelperActivity.setResult(RESULT_OK);
-                profileContextHelperActivity.finish();
-            }
+        PrivateSpaceMaintainer privateSpaceMaintainer = PrivateSpaceMaintainer
+                .getInstance(getActivity());
+        UserHandle userHandle;
+        if (privateSpaceMaintainer.doesPrivateSpaceExist() && (userHandle =
+                privateSpaceMaintainer.getPrivateProfileHandle()) != null) {
+            Intent intent = new Intent(getContext(), PrivateProfileContextHelperActivity.class);
+            intent.putExtra(EXTRA_ACTION_TYPE, SET_LOCK_ACTION);
+            getActivity().startActivityForResultAsUser(intent, SET_LOCK_ACTION,
+                    userHandle);
         }
     }
 }

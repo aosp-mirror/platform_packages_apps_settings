@@ -31,6 +31,8 @@ import com.google.android.setupdesign.util.ThemeHelper;
 /** Activity class that helps in setting up of private space */
 public class PrivateSpaceSetupActivity extends FragmentActivity {
     public static final int SET_LOCK_ACTION = 1;
+    public static final int ACCOUNT_LOGIN_ACTION = 2;
+    public static final String EXTRA_ACTION_TYPE = "action_type";
     private NavHostFragment mNavHostFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +48,13 @@ public class PrivateSpaceSetupActivity extends FragmentActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == SET_LOCK_ACTION && resultCode == RESULT_OK) {
-            mNavHostFragment.getNavController().navigate(R.id.action_advance_to_success);
+            mNavHostFragment.getNavController().navigate(R.id.action_success_fragment);
+        } else if (requestCode == ACCOUNT_LOGIN_ACTION) {
+            if (resultCode == RESULT_OK) {
+                mNavHostFragment.getNavController().navigate(R.id.action_set_lock_fragment);
+            } else {
+                mNavHostFragment.getNavController().navigate(R.id.action_advance_login_error);
+            }
         }
         super.onActivityResult(requestCode, resultCode, data);
     }

@@ -39,6 +39,7 @@ import com.android.settings.localepicker.LocaleFeatureProvider
 import com.android.settings.onboarding.OnboardingFeatureProvider
 import com.android.settings.overlay.FeatureFactory.Companion.setFactory
 import com.android.settings.panel.PanelFeatureProvider
+import com.android.settings.privatespace.PrivateSpaceLoginFeatureProvider
 import com.android.settings.search.SearchFeatureProvider
 import com.android.settings.security.SecurityFeatureProvider
 import com.android.settings.security.SecuritySettingsFeatureProvider
@@ -169,6 +170,11 @@ abstract class FeatureFactory {
      * Gets implementation for Fast Pair device updater provider.
      */
     abstract val fastPairFeatureProvider: FastPairFeatureProvider
+
+    /**
+     * Gets implementation for Private Space account login feature.
+     */
+    abstract val privateSpaceLoginFeatureProvider: PrivateSpaceLoginFeatureProvider
 
     companion object {
         private var _factory: FeatureFactory? = null

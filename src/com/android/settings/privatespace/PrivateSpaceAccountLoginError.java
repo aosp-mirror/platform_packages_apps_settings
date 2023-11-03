@@ -16,13 +16,16 @@
 
 package com.android.settings.privatespace;
 
-import android.app.Activity;
+import static com.android.settings.privatespace.PrivateSpaceSetupActivity.ACCOUNT_LOGIN_ACTION;
+import static com.android.settings.privatespace.PrivateSpaceSetupActivity.EXTRA_ACTION_TYPE;
+
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
@@ -34,23 +37,21 @@ import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.GlifLayout;
 
-/** Fragment for the final screen shown on successful completion of private space setup. */
-public class SetupSuccessFragment extends Fragment {
-    private static final String TAG = "SetupSuccessFragment";
-
+/** Fragment to display error screen if the profile is not signed in with a Google account. */
+public class PrivateSpaceAccountLoginError extends Fragment {
     @Override
     public View onCreateView(
             LayoutInflater inflater,
             @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
         GlifLayout rootView =
-                (GlifLayout)
-                        inflater.inflate(R.layout.privatespace_setup_success, container, false);
+                (GlifLayout) inflater
+                        .inflate(R.layout.privatespace_account_login_error, container, false);
         final FooterBarMixin mixin = rootView.getMixin(FooterBarMixin.class);
         mixin.setPrimaryButton(
                 new FooterButton.Builder(getContext())
-                        .setText(R.string.privatespace_done_label)
-                        .setListener(onClickNext())
+                        .setText(R.string.privatespace_tryagain_label)
+                        .setListener(nextScreen())
                         .setButtonType(FooterButton.ButtonType.NEXT)
                         .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Primary)
                         .build());
@@ -58,8 +59,7 @@ public class SetupSuccessFragment extends Fragment {
                 new OnBackPressedCallback(true /* enabled by default */) {
                     @Override
                     public void handleOnBackPressed() {
-                        // Handle the back button event. We intentionally don't want to allow back
-                        // button to work in this screen during the setup flow.
+                        // Handle the back button event
                     }
                 };
         requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
@@ -67,21 +67,19 @@ public class SetupSuccessFragment extends Fragment {
         return rootView;
     }
 
-    private View.OnClickListener onClickNext() {
+    @SuppressLint("MissingPermission")
+    private View.OnClickListener nextScreen() {
         return v -> {
-            accessPrivateSpaceToast();
-            // TODO(b/306228087): Replace with the intent to launch All Apps once it is working.
-            Intent startMain = new Intent(Intent.ACTION_MAIN);
-            startMain.addCategory(Intent.CATEGORY_HOME);
-            startActivity(startMain);
-            Activity activity = getActivity();
-            if (activity != null) {
-                activity.finish();
+            PrivateSpaceMaintainer privateSpaceMaintainer = PrivateSpaceMaintainer
+                    .getInstance(getActivity());
+            UserHandle userHandle;
+            if (privateSpaceMaintainer.doesPrivateSpaceExist() && (userHandle =
+                    privateSpaceMaintainer.getPrivateProfileHandle()) != null) {
+                Intent intent = new Intent(getContext(), PrivateProfileContextHelperActivity.class);
+                intent.putExtra(EXTRA_ACTION_TYPE, ACCOUNT_LOGIN_ACTION);
+                getActivity().startActivityForResultAsUser(intent, ACCOUNT_LOGIN_ACTION,
+                        userHandle);
             }
         };
-    }
-
-    private void accessPrivateSpaceToast() {
-        Toast.makeText(getContext(), R.string.scrolldown_to_access, Toast.LENGTH_SHORT).show();
     }
 }
