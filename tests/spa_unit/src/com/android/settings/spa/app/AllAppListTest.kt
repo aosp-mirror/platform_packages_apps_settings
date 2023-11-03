@@ -21,7 +21,6 @@ import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
 import androidx.compose.runtime.SideEffect
-import androidx.compose.runtime.State
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
@@ -146,12 +145,12 @@ class AllAppListTest {
     fun allAppListModel_getSummary() {
         val listModel = AllAppListModel(context) { stateOf(SUMMARY) }
 
-        lateinit var summaryState: State<String>
+        lateinit var summary: () -> String
         composeTestRule.setContent {
-            summaryState = listModel.getSummary(option = 0, record = AppRecordWithSize(app = APP))
+            summary = listModel.getSummary(option = 0, record = AppRecordWithSize(app = APP))
         }
 
-        assertThat(summaryState.value).isEqualTo(SUMMARY)
+        assertThat(summary()).isEqualTo(SUMMARY)
     }
 
     @Test
@@ -163,13 +162,13 @@ class AllAppListTest {
             enabled = false
         }
 
-        lateinit var summaryState: State<String>
+        lateinit var summary: () -> String
         composeTestRule.setContent {
-            summaryState =
+            summary =
                 listModel.getSummary(option = 0, record = AppRecordWithSize(app = disabledApp))
         }
 
-        assertThat(summaryState.value).isEqualTo("$SUMMARY${System.lineSeparator()}Disabled")
+        assertThat(summary()).isEqualTo("$SUMMARY${System.lineSeparator()}Disabled")
     }
 
     @Test
@@ -179,13 +178,13 @@ class AllAppListTest {
             packageName = PACKAGE_NAME
         }
 
-        lateinit var summaryState: State<String>
+        lateinit var summary: () -> String
         composeTestRule.setContent {
-            summaryState =
+            summary =
                 listModel.getSummary(option = 0, record = AppRecordWithSize(app = notInstalledApp))
         }
 
-        assertThat(summaryState.value)
+        assertThat(summary())
             .isEqualTo("$SUMMARY${System.lineSeparator()}Not installed for this user")
     }
 
@@ -207,7 +206,7 @@ class AllAppListTest {
                     AppListItemModel(
                         record = AppRecordWithSize(app = app),
                         label = LABEL,
-                        summary = stateOf(SUMMARY),
+                        summary = { SUMMARY },
                     ).AppItem()
                 }
             }
@@ -224,13 +223,13 @@ class AllAppListTest {
             isArchived = true
         }
 
-        lateinit var summaryState: State<String>
+        lateinit var summary: () -> String
         composeTestRule.setContent {
-            summaryState =
+            summary =
                 listModel.getSummary(option = 0, record = AppRecordWithSize(app = archivedApp))
         }
 
-        assertThat(summaryState.value).isEqualTo(SUMMARY)
+        assertThat(summary()).isEqualTo(SUMMARY)
     }
 
     private fun getAppListInput(): AppListInput<AppRecordWithSize> {
@@ -252,7 +251,7 @@ class AllAppListTest {
                     AppListItemModel(
                         record = AppRecordWithSize(app = APP),
                         label = LABEL,
-                        summary = stateOf(SUMMARY),
+                        summary = { SUMMARY },
                     ).AppItem()
                 }
             }

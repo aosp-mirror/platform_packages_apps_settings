@@ -32,6 +32,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.produceState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -88,9 +89,10 @@ object BackgroundInstalledAppsPageProvider : SettingsPageProvider {
     @Composable
     fun EntryItem() {
         if(featureIsDisabled) return
+        val summary by generatePreferenceSummary()
         Preference(object : PreferenceModel {
             override val title = stringResource(R.string.background_install_title)
-            override val summary = generatePreferenceSummary()
+            override val summary = { summary }
             override val onClick = navigator(name)
         })
     }

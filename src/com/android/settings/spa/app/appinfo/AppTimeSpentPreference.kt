@@ -22,6 +22,7 @@ import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager.ResolveInfoFlags
 import android.provider.Settings
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
@@ -29,7 +30,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.liveData
 import com.android.settings.R
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
-import com.android.settingslib.spa.framework.compose.stateOf
 import com.android.settingslib.spa.widget.preference.Preference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
 import com.android.settingslib.spaprivileged.model.app.hasFlag
@@ -43,12 +43,13 @@ fun AppTimeSpentPreference(app: ApplicationInfo) {
     val presenter = remember { AppTimeSpentPresenter(context, app) }
     if (!presenter.isAvailable()) return
 
+    val summary by presenter.summaryLiveData.observeAsState(
+        initial = stringResource(R.string.summary_placeholder),
+    )
     Preference(object : PreferenceModel {
         override val title = stringResource(R.string.time_spent_in_app_pref_title)
-        override val summary = presenter.summaryLiveData.observeAsState(
-            initial = stringResource(R.string.summary_placeholder),
-        )
-        override val enabled = stateOf(presenter.isEnabled())
+        override val summary = { summary }
+        override val enabled = { presenter.isEnabled() }
         override val onClick = presenter::startActivity
     })
 }
