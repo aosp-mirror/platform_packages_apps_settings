@@ -15,12 +15,12 @@
  */
 package com.android.settings.security;
 
-import static android.view.contentprotection.flags.Flags.settingUiEnabled;
-
 import static com.android.internal.R.string.config_defaultContentProtectionService;
 
 import android.content.ComponentName;
 import android.content.Context;
+import android.provider.DeviceConfig;
+import android.view.contentcapture.ContentCaptureManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -55,5 +55,13 @@ public class ContentProtectionPreferenceController extends BasePreferenceControl
             return null;
         }
         return ComponentName.unflattenFromString(flatComponentName);
+    }
+
+    @VisibleForTesting
+    protected boolean settingUiEnabled() {
+        return DeviceConfig.getBoolean(
+                DeviceConfig.NAMESPACE_CONTENT_CAPTURE,
+                ContentCaptureManager.DEVICE_CONFIG_PROPERTY_ENABLE_CONTENT_PROTECTION_RECEIVER,
+                ContentCaptureManager.DEFAULT_ENABLE_CONTENT_PROTECTION_RECEIVER);
     }
 }
