@@ -39,9 +39,11 @@ import java.lang.annotation.RetentionPolicy;
  * pre-defined action(e.g. turn on battery saver)
  */
 public abstract class BatteryTip implements Comparable<BatteryTip>, Parcelable {
+
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({StateType.NEW, StateType.HANDLED, StateType.INVISIBLE})
     public @interface StateType {
+
         int NEW = 0;
         int HANDLED = 1;
         int INVISIBLE = 2;
@@ -59,7 +61,8 @@ public abstract class BatteryTip implements Comparable<BatteryTip>, Parcelable {
         TipType.REMOVE_APP_RESTRICTION,
         TipType.BATTERY_DEFENDER,
         TipType.DOCK_DEFENDER,
-        TipType.INCOMPATIBLE_CHARGER
+        TipType.INCOMPATIBLE_CHARGER,
+        TipType.BATTERY_WARNING
     })
     public @interface TipType {
         int SMART_BATTERY_MANAGER = 0;
@@ -73,6 +76,7 @@ public abstract class BatteryTip implements Comparable<BatteryTip>, Parcelable {
         int BATTERY_DEFENDER = 8;
         int DOCK_DEFENDER = 9;
         int INCOMPATIBLE_CHARGER = 10;
+        int BATTERY_WARNING = 11;
     }
 
     @VisibleForTesting static final SparseIntArray TIP_ORDER;
@@ -90,25 +94,26 @@ public abstract class BatteryTip implements Comparable<BatteryTip>, Parcelable {
         TIP_ORDER.append(TipType.SMART_BATTERY_MANAGER, 8);
         TIP_ORDER.append(TipType.REDUCED_BATTERY, 9);
         TIP_ORDER.append(TipType.REMOVE_APP_RESTRICTION, 10);
+        TIP_ORDER.append(TipType.BATTERY_WARNING, 11);
     }
 
     private static final String KEY_PREFIX = "key_battery_tip";
 
-    protected int mType;
     protected int mState;
+    protected int mType;
     protected boolean mShowDialog;
 
     /** Whether we need to update battery tip when configuration change */
     protected boolean mNeedUpdate;
 
-    BatteryTip(Parcel in) {
+    public BatteryTip(Parcel in) {
         mType = in.readInt();
         mState = in.readInt();
         mShowDialog = in.readBoolean();
         mNeedUpdate = in.readBoolean();
     }
 
-    BatteryTip(int type, int state, boolean showDialog) {
+    public BatteryTip(int type, int state, boolean showDialog) {
         mType = type;
         mState = state;
         mShowDialog = showDialog;
@@ -201,7 +206,7 @@ public abstract class BatteryTip implements Comparable<BatteryTip>, Parcelable {
         return "type=" + mType + " state=" + mState;
     }
 
-    CardPreference castToCardPreferenceSafely(Preference preference) {
+    public CardPreference castToCardPreferenceSafely(Preference preference) {
         return preference instanceof CardPreference ? (CardPreference) preference : null;
     }
 }
