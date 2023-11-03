@@ -112,9 +112,6 @@ public class ChartDataUsagePreference extends Preference {
             // increment by current bucket total
             totalData += data.getUsage();
 
-            if (points.size() == 1) {
-                points.put(toInt(startTime - mStart) - 1, -1);
-            }
             points.put(toInt(startTime - mStart + 1), (int) (totalData / RESOLUTION));
             points.put(toInt(endTime - mStart), (int) (totalData / RESOLUTION));
         }

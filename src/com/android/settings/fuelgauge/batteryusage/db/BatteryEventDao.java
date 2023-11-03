@@ -43,7 +43,7 @@ public interface BatteryEventDao {
 
     /** Gets the {@link Cursor} of all recorded data after a specific timestamp. */
     @Query("SELECT * FROM BatteryEventEntity"
-            + " WHERE timestamp > :timestamp AND batteryEventType IN (:batteryEventTypes)"
+            + " WHERE timestamp >= :timestamp AND batteryEventType IN (:batteryEventTypes)"
             + " ORDER BY timestamp DESC")
     Cursor getAllAfter(long timestamp, List<Integer> batteryEventTypes);
 
