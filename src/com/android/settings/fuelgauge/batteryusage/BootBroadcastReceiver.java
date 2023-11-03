@@ -70,8 +70,7 @@ public final class BootBroadcastReceiver extends BroadcastReceiver {
                 break;
             case Intent.ACTION_TIME_CHANGED:
                 Log.d(TAG, "refresh job and clear all data from action=" + action);
-                DatabaseUtils.clearAll(context);
-                PeriodicJobManager.getInstance(context).refreshJob(/*fromBoot=*/ false);
+                DatabaseUtils.clearDataAfterTimeChangedIfNeeded(context);
                 break;
             default:
                 Log.w(TAG, "receive unsupported action=" + action);

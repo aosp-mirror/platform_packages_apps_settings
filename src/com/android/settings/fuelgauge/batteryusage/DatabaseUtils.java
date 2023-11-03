@@ -53,6 +53,7 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
@@ -133,6 +134,9 @@ public final class DatabaseUtils {
                     .authority(AUTHORITY)
                     .appendPath(BATTERY_USAGE_SLOT_TABLE)
                     .build();
+    /** A list of level record event types to access battery usage data. */
+    public static final List<BatteryEventType> BATTERY_LEVEL_RECORD_EVENTS =
+            List.of(BatteryEventType.FULL_CHARGED, BatteryEventType.EVEN_HOUR);
 
     // For testing only.
     @VisibleForTesting
@@ -404,6 +408,35 @@ public final class DatabaseUtils {
                 database.batteryUsageSlotDao().clearAllBefore(earliestTimestamp);
             } catch (RuntimeException e) {
                 Log.e(TAG, "clearAllBefore() failed", e);
+            }
+        });
+    }
+
+    /** Clears all data and jobs if current timestamp is out of the range of last recorded job. */
+    public static void clearDataAfterTimeChangedIfNeeded(Context context) {
+        AsyncTask.execute(() -> {
+            try {
+                final List<BatteryEvent> batteryLevelRecordEvents =
+                        DatabaseUtils.getBatteryEvents(context, Calendar.getInstance(),
+                                getLastFullChargeTime(context), BATTERY_LEVEL_RECORD_EVENTS);
+                final long lastRecordTimestamp = batteryLevelRecordEvents.isEmpty()
+                        ? INVALID_TIMESTAMP : batteryLevelRecordEvents.get(0).getTimestamp();
+                final long nextRecordTimestamp =
+                        TimestampUtils.getNextEvenHourTimestamp(lastRecordTimestamp);
+                final long currentTime = System.currentTimeMillis();
+                final boolean isOutOfTimeRange = lastRecordTimestamp == INVALID_TIMESTAMP
+                        || currentTime < lastRecordTimestamp || currentTime > nextRecordTimestamp;
+                final String logInfo = String.format(Locale.ENGLISH,
+                        "clear database = %b, current time = %d, last record time = %d",
+                        isOutOfTimeRange, currentTime, lastRecordTimestamp);
+                Log.d(TAG, logInfo);
+                BatteryUsageLogUtils.writeLog(context, Action.TIME_UPDATED, logInfo);
+                if (isOutOfTimeRange) {
+                    DatabaseUtils.clearAll(context);
+                    PeriodicJobManager.getInstance(context).refreshJob(/* fromBoot= */ false);
+                }
+            } catch (RuntimeException e) {
+                Log.e(TAG, "refreshDataAndJobIfNeededAfterTimeChanged() failed", e);
             }
         });
     }
