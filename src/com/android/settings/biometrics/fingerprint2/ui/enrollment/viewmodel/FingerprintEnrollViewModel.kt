@@ -17,32 +17,41 @@ package com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import com.android.settings.biometrics.fingerprint2.shared.domain.interactor.FingerprintManagerInteractor
 import com.android.settings.biometrics.fingerprint2.shared.model.EnrollReason
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerEnrollStateViewModel
+import com.android.settings.biometrics.fingerprint2.shared.model.FingerEnrollState
 import com.android.systemui.biometrics.shared.model.FingerprintSensorType
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.filterNotNull
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.shareIn
 import kotlinx.coroutines.flow.transformLatest
-import kotlinx.coroutines.flow.update
-
-private const val TAG = "FingerprintEnrollViewModel"
 
 /** Represents all of the fingerprint information needed for a fingerprint enrollment process. */
 class FingerprintEnrollViewModel(
   private val fingerprintManagerInteractor: FingerprintManagerInteractor,
-  backgroundDispatcher: CoroutineDispatcher,
+  gatekeeperViewModel: FingerprintGatekeeperViewModel,
+  navigationViewModel: FingerprintEnrollNavigationViewModel,
 ) : ViewModel() {
 
-  private var _enrollReason: MutableStateFlow<EnrollReason> =
-    MutableStateFlow(EnrollReason.FindSensor)
-  private var _hardwareAuthToken: MutableStateFlow<ByteArray?> = MutableStateFlow(null)
-  private var _consumerShouldEnroll: MutableStateFlow<Boolean> = MutableStateFlow(false)
+  /**
+   * Cached value of [FingerprintSensorType]
+   *
+   * This is typically used by fragments that change their layout/behavior based on this
+   * information. This value should be set before any fragment is created.
+   */
+  var sensorTypeCached: FingerprintSensorType? = null
+  private var _enrollReason: Flow<EnrollReason?> =
+    navigationViewModel.navigationViewModel.map {
+      when (it.currStep) {
+        is Enrollment -> EnrollReason.EnrollEnrolling
+        is Education -> EnrollReason.FindSensor
+        else -> null
+      }
+    }
 
   /** Represents the stream of [FingerprintSensorType] */
   val sensorType: Flow<FingerprintSensorType> =
@@ -51,47 +60,68 @@ class FingerprintEnrollViewModel(
   /**
    * A flow that contains a [FingerprintEnrollViewModel] which contains the relevant information for
    * an enrollment process
+   *
+   * This flow should be the only flow which calls enroll().
    */
-  val enrollFlow: Flow<FingerEnrollStateViewModel> =
-    combine(_consumerShouldEnroll, _hardwareAuthToken, _enrollReason) {
-        consumerShouldEnroll,
-        hardwareAuthToken,
-        enrollReason ->
-        Triple(consumerShouldEnroll, hardwareAuthToken, enrollReason)
+  val _enrollFlow: Flow<FingerEnrollState> =
+    combine(gatekeeperViewModel.gatekeeperInfo, _enrollReason) { hardwareAuthToken, enrollReason,
+        ->
+        Pair(hardwareAuthToken, enrollReason)
       }
       .transformLatest {
-        // transformLatest() instead of transform() is used here for cancelling previous enroll()
-        // whenever |consumerShouldEnroll| is changed. Otherwise the latest value will be suspended
-        // since enroll() is an infinite callback flow.
-        (consumerShouldEnroll, hardwareAuthToken, enrollReason) ->
-        if (consumerShouldEnroll && hardwareAuthToken != null) {
-          fingerprintManagerInteractor.enroll(hardwareAuthToken, enrollReason).collect { emit(it) }
+        /** [transformLatest] is used as we want to make sure to cancel previous API call. */
+        (hardwareAuthToken, enrollReason) ->
+        if (hardwareAuthToken is GatekeeperInfo.GatekeeperPasswordInfo && enrollReason != null) {
+          fingerprintManagerInteractor.enroll(hardwareAuthToken.token, enrollReason).collect {
+            emit(it)
+          }
         }
       }
-      .flowOn(backgroundDispatcher)
+      .shareIn(viewModelScope, SharingStarted.WhileSubscribed(), 0)
 
-  /** Used to indicate the consumer of the view model is ready for an enrollment. */
-  fun startEnroll(hardwareAuthToken: ByteArray?, enrollReason: EnrollReason) {
-    _enrollReason.update { enrollReason }
-    _hardwareAuthToken.update { hardwareAuthToken }
-    // Update _consumerShouldEnroll after updating the other values.
-    _consumerShouldEnroll.update { true }
-  }
+  /**
+   * This flow will kick off education when
+   * 1) There is an active subscriber to this flow
+   * 2) shouldEnroll is true and we are on the FindSensor step
+   */
+  val educationEnrollFlow: Flow<FingerEnrollState?> =
+    _enrollReason.filterNotNull().transformLatest { enrollReason ->
+      if (enrollReason == EnrollReason.FindSensor) {
+        _enrollFlow.collect { event -> emit(event) }
+      } else {
+        emit(null)
+      }
+    }
 
-  /** Used to indicate to stop the enrollment. */
-  fun stopEnroll() {
-    _consumerShouldEnroll.update { false }
-  }
+  /**
+   * This flow will kick off enrollment when
+   * 1) There is an active subscriber to this flow
+   * 2) shouldEnroll is true and we are on the EnrollEnrolling step
+   */
+  val enrollFlow: Flow<FingerEnrollState?> =
+    _enrollReason.filterNotNull().transformLatest { enrollReason ->
+      if (enrollReason == EnrollReason.EnrollEnrolling) {
+        _enrollFlow.collect { event -> emit(event) }
+      } else {
+        emit(null)
+      }
+    }
 
   class FingerprintEnrollViewModelFactory(
     val interactor: FingerprintManagerInteractor,
-    val backgroundDispatcher: CoroutineDispatcher
+    val gatekeeperViewModel: FingerprintGatekeeperViewModel,
+    val navigationViewModel: FingerprintEnrollNavigationViewModel,
   ) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(
       modelClass: Class<T>,
     ): T {
-      return FingerprintEnrollViewModel(interactor, backgroundDispatcher) as T
+      return FingerprintEnrollViewModel(
+        interactor,
+        gatekeeperViewModel,
+        navigationViewModel,
+      )
+        as T
     }
   }
 }

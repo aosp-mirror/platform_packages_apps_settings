@@ -21,7 +21,9 @@ import android.content.res.Configuration
 import android.view.accessibility.AccessibilityManager
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.core.app.ApplicationProvider
+import com.android.settings.biometrics.fingerprint2.shared.model.Default
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.AccessibilityViewModel
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.BackgroundViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.Education
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollFindSensorViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollNavigationViewModel
@@ -70,6 +72,7 @@ class FingerprintEnrollFindSensorViewModelV2Test {
   private lateinit var foldStateViewModel: FoldStateViewModel
   private lateinit var orientationStateViewModel: OrientationStateViewModel
   private lateinit var underTest: FingerprintEnrollFindSensorViewModel
+  private lateinit var backgroundViewModel: BackgroundViewModel
   private val context: Context = ApplicationProvider.getApplicationContext()
   private val accessibilityManager: AccessibilityManager =
     context.getSystemService(AccessibilityManager::class.java)!!
@@ -93,12 +96,18 @@ class FingerprintEnrollFindSensorViewModelV2Test {
           fakeFingerprintManagerInteractor,
           gatekeeperViewModel,
           canSkipConfirm = true,
+          Default,
         )
         .create(FingerprintEnrollNavigationViewModel::class.java)
+
+    backgroundViewModel =
+      BackgroundViewModel.BackgroundViewModelFactory().create(BackgroundViewModel::class.java)
+    backgroundViewModel.inForeground()
     enrollViewModel =
       FingerprintEnrollViewModel.FingerprintEnrollViewModelFactory(
           fakeFingerprintManagerInteractor,
-          backgroundDispatcher
+          gatekeeperViewModel,
+          navigationViewModel,
         )
         .create(FingerprintEnrollViewModel::class.java)
     accessibilityViewModel =
@@ -114,6 +123,7 @@ class FingerprintEnrollFindSensorViewModelV2Test {
           navigationViewModel,
           enrollViewModel,
           gatekeeperViewModel,
+          backgroundViewModel,
           accessibilityViewModel,
           foldStateViewModel,
           orientationStateViewModel
@@ -123,6 +133,7 @@ class FingerprintEnrollFindSensorViewModelV2Test {
     // Navigate to Education page
     navigationViewModel.nextStep()
   }
+
   @After
   fun tearDown() {
     Dispatchers.resetMain()

@@ -17,8 +17,8 @@
 package com.android.settings.fingerprint2.ui.settings
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintAuthAttemptViewModel
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintViewModel
+import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintAuthAttemptModel
+import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintData
 import com.android.settings.biometrics.fingerprint2.ui.settings.viewmodel.FingerprintSettingsNavigationViewModel
 import com.android.settings.biometrics.fingerprint2.ui.settings.viewmodel.FingerprintSettingsViewModel
 import com.android.settings.biometrics.fingerprint2.ui.settings.viewmodel.PreferenceViewModel
@@ -103,7 +103,7 @@ class FingerprintSettingsViewModelTest {
           FingerprintSensorType.UDFPS_OPTICAL,
         )
       fakeFingerprintManagerInteractor.enrolledFingerprintsInternal =
-        mutableListOf(FingerprintViewModel("a", 1, 3L))
+        mutableListOf(FingerprintData("a", 1, 3L))
 
       underTest =
         FingerprintSettingsViewModel.FingerprintSettingsViewModelFactory(
@@ -114,7 +114,7 @@ class FingerprintSettingsViewModelTest {
           )
           .create(FingerprintSettingsViewModel::class.java)
 
-      var authAttempt: FingerprintAuthAttemptViewModel? = null
+      var authAttempt: FingerprintAuthAttemptModel? = null
       val job = launch { underTest.authFlow.take(5).collectLatest { authAttempt = it } }
 
       underTest.shouldAuthenticate(true)
@@ -139,7 +139,7 @@ class FingerprintSettingsViewModelTest {
           FingerprintSensorType.UDFPS_ULTRASONIC,
         )
       fakeFingerprintManagerInteractor.enrolledFingerprintsInternal =
-        mutableListOf(FingerprintViewModel("a", 1, 3L))
+        mutableListOf(FingerprintData("a", 1, 3L))
 
       underTest =
         FingerprintSettingsViewModel.FingerprintSettingsViewModelFactory(
@@ -150,7 +150,7 @@ class FingerprintSettingsViewModelTest {
           )
           .create(FingerprintSettingsViewModel::class.java)
 
-      var authAttempt: FingerprintAuthAttemptViewModel? = null
+      var authAttempt: FingerprintAuthAttemptModel? = null
       val job = launch { underTest.authFlow.take(5).collectLatest { authAttempt = it } }
 
       underTest.shouldAuthenticate(true)
@@ -173,8 +173,8 @@ class FingerprintSettingsViewModelTest {
           FingerprintSensorType.POWER_BUTTON
         )
       fakeFingerprintManagerInteractor.enrolledFingerprintsInternal =
-        mutableListOf(FingerprintViewModel("a", 1, 3L))
-      val success = FingerprintAuthAttemptViewModel.Success(1)
+        mutableListOf(FingerprintData("a", 1, 3L))
+      val success = FingerprintAuthAttemptModel.Success(1)
       fakeFingerprintManagerInteractor.authenticateAttempt = success
 
       underTest =
@@ -186,7 +186,7 @@ class FingerprintSettingsViewModelTest {
           )
           .create(FingerprintSettingsViewModel::class.java)
 
-      var authAttempt: FingerprintAuthAttemptViewModel? = null
+      var authAttempt: FingerprintAuthAttemptModel? = null
 
       val job = launch { underTest.authFlow.take(5).collectLatest { authAttempt = it } }
       underTest.shouldAuthenticate(true)
@@ -200,7 +200,7 @@ class FingerprintSettingsViewModelTest {
 
   @Test
   fun deleteDialog_showAndDismiss() = runTest {
-    val fingerprintToDelete = FingerprintViewModel("A", 1, 10L)
+    val fingerprintToDelete = FingerprintData("A", 1, 10L)
     fakeFingerprintManagerInteractor.enrolledFingerprintsInternal =
       mutableListOf(fingerprintToDelete)
 
@@ -236,7 +236,7 @@ class FingerprintSettingsViewModelTest {
 
   @Test
   fun renameDialog_showAndDismiss() = runTest {
-    val fingerprintToRename = FingerprintViewModel("World", 1, 10L)
+    val fingerprintToRename = FingerprintData("World", 1, 10L)
     fakeFingerprintManagerInteractor.enrolledFingerprintsInternal =
       mutableListOf(fingerprintToRename)
 
@@ -274,7 +274,7 @@ class FingerprintSettingsViewModelTest {
 
   @Test
   fun testTwoDialogsCannotShow_atSameTime() = runTest {
-    val fingerprintToDelete = FingerprintViewModel("A", 1, 10L)
+    val fingerprintToDelete = FingerprintData("A", 1, 10L)
     fakeFingerprintManagerInteractor.enrolledFingerprintsInternal =
       mutableListOf(fingerprintToDelete)
 
@@ -311,9 +311,9 @@ class FingerprintSettingsViewModelTest {
   fun authenticatePauses_whenPaused() =
     testScope.runTest {
       val fingerprints = setupAuth()
-      val success = FingerprintAuthAttemptViewModel.Success(fingerprints.first().fingerId)
+      val success = FingerprintAuthAttemptModel.Success(fingerprints.first().fingerId)
 
-      var authAttempt: FingerprintAuthAttemptViewModel? = null
+      var authAttempt: FingerprintAuthAttemptModel? = null
 
       val job = launch { underTest.authFlow.take(5).collectLatest { authAttempt = it } }
 
@@ -325,7 +325,7 @@ class FingerprintSettingsViewModelTest {
       assertThat(authAttempt).isEqualTo(success)
 
       fakeFingerprintManagerInteractor.authenticateAttempt =
-        FingerprintAuthAttemptViewModel.Success(10)
+        FingerprintAuthAttemptModel.Success(10)
       underTest.shouldAuthenticate(false)
       advanceTimeBy(400)
       runCurrent()
@@ -340,7 +340,7 @@ class FingerprintSettingsViewModelTest {
     testScope.runTest {
       val fingerprints = setupAuth()
 
-      var authAttempt: FingerprintAuthAttemptViewModel? = null
+      var authAttempt: FingerprintAuthAttemptModel? = null
       val job = launch { underTest.authFlow.take(1).collectLatest { authAttempt = it } }
       underTest.shouldAuthenticate(true)
       navigationViewModel.onConfirmDevice(true, 10L)
@@ -357,7 +357,7 @@ class FingerprintSettingsViewModelTest {
     testScope.runTest {
       val fingerprints = setupAuth()
 
-      var authAttempt: FingerprintAuthAttemptViewModel? = null
+      var authAttempt: FingerprintAuthAttemptModel? = null
       val job = launch { underTest.authFlow.take(1).collectLatest { authAttempt = it } }
       underTest.shouldAuthenticate(true)
       navigationViewModel.onConfirmDevice(true, 10L)
@@ -370,7 +370,7 @@ class FingerprintSettingsViewModelTest {
       assertThat(authAttempt).isEqualTo(null)
     }
 
-  private fun setupAuth(): MutableList<FingerprintViewModel> {
+  private fun setupAuth(): MutableList<FingerprintData> {
     fakeFingerprintManagerInteractor.sensorProp =
       FingerprintSensor(
         0 /* sensorId */,
@@ -379,9 +379,9 @@ class FingerprintSettingsViewModelTest {
         FingerprintSensorType.POWER_BUTTON
       )
     val fingerprints =
-      mutableListOf(FingerprintViewModel("a", 1, 3L), FingerprintViewModel("b", 2, 5L))
+      mutableListOf(FingerprintData("a", 1, 3L), FingerprintData("b", 2, 5L))
     fakeFingerprintManagerInteractor.enrolledFingerprintsInternal = fingerprints
-    val success = FingerprintAuthAttemptViewModel.Success(1)
+    val success = FingerprintAuthAttemptModel.Success(1)
     fakeFingerprintManagerInteractor.authenticateAttempt = success
 
     underTest =

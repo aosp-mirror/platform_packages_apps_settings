@@ -26,7 +26,7 @@ import android.os.Bundle
 import android.os.UserManager
 import androidx.appcompat.app.AlertDialog
 import com.android.settings.R
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintViewModel
+import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintData
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment
 import kotlin.coroutines.resume
 import kotlinx.coroutines.suspendCancellableCoroutine
@@ -34,7 +34,7 @@ import kotlinx.coroutines.suspendCancellableCoroutine
 private const val KEY_IS_LAST_FINGERPRINT = "IS_LAST_FINGERPRINT"
 
 class FingerprintDeletionDialog : InstrumentedDialogFragment() {
-  private lateinit var fingerprintViewModel: FingerprintViewModel
+  private lateinit var fingerprintViewModel: FingerprintData
   private var isLastFingerprint: Boolean = false
   private lateinit var alertDialog: AlertDialog
   lateinit var onClickListener: DialogInterface.OnClickListener
@@ -51,7 +51,7 @@ class FingerprintDeletionDialog : InstrumentedDialogFragment() {
 
   override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
     val fp = requireArguments().get(KEY_FINGERPRINT) as android.hardware.fingerprint.Fingerprint
-    fingerprintViewModel = FingerprintViewModel(fp.name.toString(), fp.biometricId, fp.deviceId)
+    fingerprintViewModel = FingerprintData(fp.name.toString(), fp.biometricId, fp.deviceId)
     isLastFingerprint = requireArguments().getBoolean(KEY_IS_LAST_FINGERPRINT)
     val title = getString(R.string.fingerprint_delete_title, fingerprintViewModel.name)
     var message = getString(R.string.fingerprint_v2_delete_message, fingerprintViewModel.name)
@@ -95,9 +95,9 @@ class FingerprintDeletionDialog : InstrumentedDialogFragment() {
   companion object {
     private const val KEY_FINGERPRINT = "fingerprint"
     suspend fun showInstance(
-      fp: FingerprintViewModel,
-      lastFingerprint: Boolean,
-      target: FingerprintSettingsV2Fragment,
+        fp: FingerprintData,
+        lastFingerprint: Boolean,
+        target: FingerprintSettingsV2Fragment,
     ) = suspendCancellableCoroutine { continuation ->
       val dialog = FingerprintDeletionDialog()
       dialog.onClickListener = DialogInterface.OnClickListener { _, _ -> continuation.resume(true) }

@@ -37,6 +37,7 @@ import com.android.settings.spa.app.specialaccess.MediaManagementAppsAppListProv
 import com.android.settings.spa.app.specialaccess.ModifySystemSettingsAppListProvider
 import com.android.settings.spa.app.specialaccess.NfcTagAppsSettingsProvider
 import com.android.settings.spa.app.specialaccess.PictureInPictureListProvider
+import com.android.settings.spa.app.specialaccess.VoiceActivationAppsListProvider
 import com.android.settings.spa.app.specialaccess.WifiControlAppListProvider
 import com.android.settings.wifi.ChangeWifiStateDetails
 
@@ -65,6 +66,8 @@ object SettingsActivityUtil {
             WifiControlAppListProvider.getAppInfoRoutePrefix(),
         NfcTagAppsSettingsProvider::class.qualifiedName to
             NfcTagAppsSettingsProvider.getAppInfoRoutePrefix(),
+        VoiceActivationAppsListProvider::class.qualifiedName to
+            VoiceActivationAppsListProvider.getAppInfoRoutePrefix(),
     )
 
     @JvmStatic

@@ -22,19 +22,28 @@ import android.annotation.StringRes
  * Represents a fingerprint enrollment state. See [FingerprintManager.EnrollmentCallback] for more
  * information
  */
-sealed class FingerEnrollStateViewModel {
-  /** Represents enrollment step progress. */
+sealed class FingerEnrollState {
+  /**
+   * Represents an enrollment step progress.
+   *
+   * Progress is obtained by (totalStepsRequired - remainingSteps) / totalStepsRequired
+   */
   data class EnrollProgress(
     val remainingSteps: Int,
-  ) : FingerEnrollStateViewModel()
+    val totalStepsRequired: Int,
+  ) : FingerEnrollState()
+
   /** Represents that recoverable error has been encountered during enrollment. */
   data class EnrollHelp(
     @StringRes val helpMsgId: Int,
     val helpString: String,
-  ) : FingerEnrollStateViewModel()
+  ) : FingerEnrollState()
+
   /** Represents that an unrecoverable error has been encountered and the operation is complete. */
   data class EnrollError(
-    @StringRes val errMsgId: Int,
-    val errString: String,
-  ) : FingerEnrollStateViewModel()
+    @StringRes val errTitle: Int,
+    @StringRes val errString: Int,
+    val shouldRetryEnrollment: Boolean,
+    val isCancelled: Boolean,
+  ) : FingerEnrollState()
 }

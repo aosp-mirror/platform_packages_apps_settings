@@ -33,12 +33,15 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.runner.AndroidJUnit4
 import com.android.settings.R
+import com.android.settings.biometrics.fingerprint2.shared.model.Default
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.fragment.FingerprintEnrollIntroV2Fragment
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollNavigationViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintGatekeeperViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintScrollViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.GatekeeperInfo
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.Intro
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.NavState
 import com.android.settings.testutils2.FakeFingerprintManagerInteractor
 import com.google.android.setupdesign.GlifLayout
 import com.google.android.setupdesign.template.RequireScrollMixin
@@ -65,9 +68,12 @@ class FingerprintEnrollIntroFragmentTest {
       backgroundDispatcher,
       interactor,
       gatekeeperViewModel,
-      canSkipConfirm = true,
+      Intro,
+      NavState(true),
+      Default,
     )
-  private var fingerprintViewModel = FingerprintEnrollViewModel(interactor, backgroundDispatcher)
+  private var fingerprintViewModel =
+    FingerprintEnrollViewModel(interactor, gatekeeperViewModel, navigationViewModel)
   private var fingerprintScrollViewModel = FingerprintScrollViewModel()
 
   @Before

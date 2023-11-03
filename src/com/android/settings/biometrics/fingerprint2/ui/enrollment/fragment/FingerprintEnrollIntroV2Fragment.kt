@@ -36,11 +36,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.android.settings.R
+import com.android.settings.biometrics.fingerprint2.shared.model.Unicorn
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollNavigationViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintGatekeeperViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintScrollViewModel
-import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.Unicorn
 import com.android.systemui.biometrics.shared.model.FingerprintSensorType
 import com.google.android.setupcompat.template.FooterBarMixin
 import com.google.android.setupcompat.template.FooterButton
@@ -120,7 +120,7 @@ class FingerprintEnrollIntroV2Fragment() : Fragment(R.layout.fingerprint_v2_enro
 
       viewLifecycleOwner.lifecycleScope.launch {
         combine(
-            navigationViewModel.enrollType,
+            navigationViewModel.fingerprintFlow,
             fingerprintViewModel.sensorType,
           ) { enrollType, sensorType ->
             Pair(enrollType, sensorType)

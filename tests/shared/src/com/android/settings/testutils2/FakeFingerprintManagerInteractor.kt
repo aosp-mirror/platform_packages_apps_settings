@@ -18,9 +18,9 @@ package com.android.settings.testutils2
 
 import com.android.settings.biometrics.fingerprint2.shared.domain.interactor.FingerprintManagerInteractor
 import com.android.settings.biometrics.fingerprint2.shared.model.EnrollReason
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerEnrollStateViewModel
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintAuthAttemptViewModel
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintViewModel
+import com.android.settings.biometrics.fingerprint2.shared.model.FingerEnrollState
+import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintAuthAttemptModel
+import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintData
 import com.android.systemui.biometrics.shared.model.FingerprintSensor
 import com.android.systemui.biometrics.shared.model.FingerprintSensorType
 import com.android.systemui.biometrics.shared.model.SensorStrength
@@ -32,10 +32,11 @@ import kotlinx.coroutines.flow.flowOf
 class FakeFingerprintManagerInteractor : FingerprintManagerInteractor {
 
   var enrollableFingerprints: Int = 5
-  var enrolledFingerprintsInternal: MutableList<FingerprintViewModel> = mutableListOf()
+  var enrolledFingerprintsInternal: MutableList<FingerprintData> = mutableListOf()
   var challengeToGenerate: Pair<Long, ByteArray> = Pair(-1L, byteArrayOf())
-  var authenticateAttempt = FingerprintAuthAttemptViewModel.Success(1)
-  val enrollStateViewModel = FingerEnrollStateViewModel.EnrollProgress(1)
+  var authenticateAttempt = FingerprintAuthAttemptModel.Success(1)
+  var enrollStateViewModel: List<FingerEnrollState> =
+    listOf(FingerEnrollState.EnrollProgress(5, 5))
   var pressToAuthEnabled = true
 
   var sensorProp =
@@ -46,7 +47,7 @@ class FakeFingerprintManagerInteractor : FingerprintManagerInteractor {
       FingerprintSensorType.POWER_BUTTON
     )
 
-  override suspend fun authenticate(): FingerprintAuthAttemptViewModel {
+  override suspend fun authenticate(): FingerprintAuthAttemptModel {
     return authenticateAttempt
   }
 
@@ -54,7 +55,7 @@ class FakeFingerprintManagerInteractor : FingerprintManagerInteractor {
     return challengeToGenerate
   }
 
-  override val enrolledFingerprints: Flow<List<FingerprintViewModel>> = flow {
+  override val enrolledFingerprints: Flow<List<FingerprintData>> = flow {
     emit(enrolledFingerprintsInternal)
   }
 
@@ -62,24 +63,22 @@ class FakeFingerprintManagerInteractor : FingerprintManagerInteractor {
     emit(enrolledFingerprintsInternal.size < enrollableFingerprints)
   }
 
-  override val sensorPropertiesInternal: Flow<FingerprintSensor?> = flow {
-    emit(sensorProp)
-  }
+  override val sensorPropertiesInternal: Flow<FingerprintSensor?> = flow { emit(sensorProp) }
 
   override val maxEnrollableFingerprints: Flow<Int> = flow { emit(enrollableFingerprints) }
 
   override suspend fun enroll(
     hardwareAuthToken: ByteArray?,
     enrollReason: EnrollReason
-  ): Flow<FingerEnrollStateViewModel> = flowOf(enrollStateViewModel)
+  ): Flow<FingerEnrollState> = flowOf(*enrollStateViewModel.toTypedArray())
 
-  override suspend fun removeFingerprint(fp: FingerprintViewModel): Boolean {
+  override suspend fun removeFingerprint(fp: FingerprintData): Boolean {
     return enrolledFingerprintsInternal.remove(fp)
   }
 
-  override suspend fun renameFingerprint(fp: FingerprintViewModel, newName: String) {
+  override suspend fun renameFingerprint(fp: FingerprintData, newName: String) {
     if (enrolledFingerprintsInternal.remove(fp)) {
-      enrolledFingerprintsInternal.add(FingerprintViewModel(newName, fp.fingerId, fp.deviceId))
+      enrolledFingerprintsInternal.add(FingerprintData(newName, fp.fingerId, fp.deviceId))
     }
   }
 

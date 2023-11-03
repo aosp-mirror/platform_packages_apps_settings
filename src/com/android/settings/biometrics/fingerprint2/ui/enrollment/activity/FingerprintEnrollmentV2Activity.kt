@@ -16,12 +16,9 @@
 
 package com.android.settings.biometrics.fingerprint2.ui.enrollment.activity
 
-import android.annotation.ColorInt
 import android.app.Activity
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.content.res.Configuration
-import android.graphics.Color
 import android.hardware.fingerprint.FingerprintManager
 import android.os.Bundle
 import android.provider.Settings
@@ -35,22 +32,27 @@ import androidx.lifecycle.lifecycleScope
 import com.android.internal.widget.LockPatternUtils
 import com.android.settings.R
 import com.android.settings.SetupWizardUtils
-import com.android.settings.Utils
 import com.android.settings.Utils.SETTINGS_PACKAGE_NAME
 import com.android.settings.biometrics.BiometricEnrollBase
 import com.android.settings.biometrics.BiometricEnrollBase.CONFIRM_REQUEST
 import com.android.settings.biometrics.BiometricEnrollBase.RESULT_FINISHED
 import com.android.settings.biometrics.GatekeeperPasswordProvider
 import com.android.settings.biometrics.fingerprint2.domain.interactor.FingerprintManagerInteractorImpl
-import com.android.settings.biometrics.fingerprint2.shared.model.FingerprintViewModel
+import com.android.settings.biometrics.fingerprint2.shared.model.Default
+import com.android.settings.biometrics.fingerprint2.shared.model.SetupWizard
+import com.android.settings.biometrics.fingerprint2.repository.PressToAuthProviderImpl
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.fragment.FingerprintEnrollConfirmationV2Fragment
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.fragment.FingerprintEnrollEnrollingV2Fragment
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.fragment.FingerprintEnrollFindSensorV2Fragment
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.fragment.FingerprintEnrollIntroV2Fragment
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.rfps.ui.fragment.RFPSEnrollFragment
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.rfps.ui.viewmodel.RFPSViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.AccessibilityViewModel
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.BackgroundViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.Confirmation
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.Education
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.Enrollment
+import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollEnrollingViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollFindSensorViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollNavigationViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollViewModel
@@ -65,8 +67,11 @@ import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.Orie
 import com.android.settings.password.ChooseLockGeneric
 import com.android.settings.password.ChooseLockSettingsHelper
 import com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE
+import com.android.systemui.biometrics.shared.model.FingerprintSensorType
+import com.google.android.setupcompat.util.WizardManagerHelper
 import com.google.android.setupdesign.util.ThemeHelper
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 
@@ -77,6 +82,7 @@ private const val TAG = "FingerprintEnrollmentV2Activity"
  * children fragments.
  */
 class FingerprintEnrollmentV2Activity : FragmentActivity() {
+  private lateinit var fingerprintEnrollEnrollingViewModel: FingerprintEnrollEnrollingViewModel
   private lateinit var navigationViewModel: FingerprintEnrollNavigationViewModel
   private lateinit var gatekeeperViewModel: FingerprintGatekeeperViewModel
   private lateinit var fingerprintEnrollViewModel: FingerprintEnrollViewModel
@@ -84,6 +90,7 @@ class FingerprintEnrollmentV2Activity : FragmentActivity() {
   private lateinit var foldStateViewModel: FoldStateViewModel
   private lateinit var orientationStateViewModel: OrientationStateViewModel
   private lateinit var fingerprintScrollViewModel: FingerprintScrollViewModel
+  private lateinit var backgroundViewModel: BackgroundViewModel
   private val coroutineDispatcher = Dispatchers.Default
 
   /** Result listener for ChooseLock activity flow. */
@@ -101,21 +108,20 @@ class FingerprintEnrollmentV2Activity : FragmentActivity() {
     }
   }
 
-  override fun onAttachedToWindow() {
-    window.statusBarColor = getBackgroundColor()
-    super.onAttachedToWindow()
+  override fun onStop() {
+    super.onStop()
+    if (!isChangingConfigurations) {
+      backgroundViewModel.wentToBackground()
+    }
   }
 
+  override fun onResume() {
+    super.onResume()
+    backgroundViewModel.inForeground()
+  }
   override fun onConfigurationChanged(newConfig: Configuration) {
     super.onConfigurationChanged(newConfig)
     foldStateViewModel.onConfigurationChange(newConfig)
-  }
-
-  @ColorInt
-  private fun getBackgroundColor(): Int {
-    val stateList: ColorStateList? =
-      Utils.getColorAttr(applicationContext, android.R.attr.windowBackground)
-    return stateList?.defaultColor ?: Color.TRANSPARENT
   }
 
   private fun onConfirmDevice(resultCode: Int, data: Intent?) {
@@ -137,39 +143,28 @@ class FingerprintEnrollmentV2Activity : FragmentActivity() {
 
     val context = applicationContext
     val fingerprintManager = context.getSystemService(FINGERPRINT_SERVICE) as FingerprintManager
+    val isAnySuw = WizardManagerHelper.isAnySetupWizard(intent)
+    val enrollType =
+      if (isAnySuw) {
+        SetupWizard
+      } else {
+        Default
+      }
+
+    backgroundViewModel =
+      ViewModelProvider(this, BackgroundViewModel.BackgroundViewModelFactory())[
+        BackgroundViewModel::class.java]
+
 
     val interactor =
       FingerprintManagerInteractorImpl(
         context,
         backgroundDispatcher,
         fingerprintManager,
-        GatekeeperPasswordProvider(LockPatternUtils(context))
-      ) {
-        var toReturn: Int =
-          Settings.Secure.getIntForUser(
-            context.contentResolver,
-            Settings.Secure.SFPS_PERFORMANT_AUTH_ENABLED,
-            -1,
-            context.userId,
-          )
-        if (toReturn == -1) {
-          toReturn =
-            if (
-              context.resources.getBoolean(com.android.internal.R.bool.config_performantAuthDefault)
-            ) {
-              1
-            } else {
-              0
-            }
-          Settings.Secure.putIntForUser(
-            context.contentResolver,
-            Settings.Secure.SFPS_PERFORMANT_AUTH_ENABLED,
-            toReturn,
-            context.userId
-          )
-        }
-        toReturn == 1
-      }
+        GatekeeperPasswordProvider(LockPatternUtils(context)),
+        PressToAuthProviderImpl(context),
+        enrollType,
+      )
 
     var challenge: Long? = intent.getExtra(BiometricEnrollBase.EXTRA_KEY_CHALLENGE) as Long?
     val token = intent.getByteArrayExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN)
@@ -191,7 +186,8 @@ class FingerprintEnrollmentV2Activity : FragmentActivity() {
           backgroundDispatcher,
           interactor,
           gatekeeperViewModel,
-          gatekeeperInfo is GatekeeperInfo.GatekeeperPasswordInfo, /* canSkipConfirm */
+          gatekeeperInfo is GatekeeperInfo.GatekeeperPasswordInfo,
+          enrollType,
         )
       )[FingerprintEnrollNavigationViewModel::class.java]
 
@@ -207,7 +203,8 @@ class FingerprintEnrollmentV2Activity : FragmentActivity() {
         this,
         FingerprintEnrollViewModel.FingerprintEnrollViewModelFactory(
           interactor,
-          backgroundDispatcher
+          gatekeeperViewModel,
+          navigationViewModel,
         )
       )[FingerprintEnrollViewModel::class.java]
 
@@ -230,6 +227,16 @@ class FingerprintEnrollmentV2Activity : FragmentActivity() {
       ViewModelProvider(this, OrientationStateViewModel.OrientationViewModelFactory(context))[
         OrientationStateViewModel::class.java]
 
+    // Initialize FingerprintEnrollEnrollingViewModel
+    fingerprintEnrollEnrollingViewModel =
+      ViewModelProvider(
+        this,
+        FingerprintEnrollEnrollingViewModel.FingerprintEnrollEnrollingViewModelFactory(
+          fingerprintEnrollViewModel,
+          backgroundViewModel
+        )
+      )[FingerprintEnrollEnrollingViewModel::class.java]
+
     // Initialize FingerprintEnrollFindSensorViewModel
     ViewModelProvider(
       this,
@@ -237,48 +244,65 @@ class FingerprintEnrollmentV2Activity : FragmentActivity() {
         navigationViewModel,
         fingerprintEnrollViewModel,
         gatekeeperViewModel,
+        backgroundViewModel,
         accessibilityViewModel,
         foldStateViewModel,
         orientationStateViewModel
       )
     )[FingerprintEnrollFindSensorViewModel::class.java]
 
+    // Initialize RFPS View Model
+    ViewModelProvider(
+      this,
+      RFPSViewModel.RFPSViewModelFactory(fingerprintEnrollEnrollingViewModel)
+    )[RFPSViewModel::class.java]
+
     lifecycleScope.launch {
-      navigationViewModel.navigationViewModel.filterNotNull().collect {
-        Log.d(TAG, "navigationStep $it")
-        val isForward = it.forward
-        val currStep = it.currStep
-        val theClass: Class<Fragment>? =
-          when (currStep) {
-            Confirmation -> FingerprintEnrollConfirmationV2Fragment::class.java as Class<Fragment>
-            Education -> FingerprintEnrollFindSensorV2Fragment::class.java as Class<Fragment>
-            Enrollment -> FingerprintEnrollEnrollingV2Fragment::class.java as Class<Fragment>
-            Intro -> FingerprintEnrollIntroV2Fragment::class.java as Class<Fragment>
-            else -> null
-          }
-
-        if (theClass != null) {
-          supportFragmentManager.fragments.onEach { fragment ->
-            supportFragmentManager.beginTransaction().remove(fragment).commit()
-          }
-          supportFragmentManager
-            .beginTransaction()
-            .setReorderingAllowed(true)
-            .add(R.id.fragment_container_view, theClass, null)
-            .commit()
-        } else {
-
-          if (currStep is Finish) {
-            if (currStep.resultCode != null) {
-              finishActivity(currStep.resultCode)
-            } else {
-              finish()
+      navigationViewModel.navigationViewModel
+        .filterNotNull()
+        .combine(fingerprintEnrollViewModel.sensorType) { nav, sensorType -> Pair(nav, sensorType) }
+        .collect { (nav, sensorType) ->
+          Log.d(TAG, "navigationStep $nav")
+          fingerprintEnrollViewModel.sensorTypeCached = sensorType
+          val isForward = nav.forward
+          val currStep = nav.currStep
+          val theClass: Class<Fragment>? =
+            when (currStep) {
+              Confirmation -> FingerprintEnrollConfirmationV2Fragment::class.java as Class<Fragment>
+              Education -> FingerprintEnrollFindSensorV2Fragment::class.java as Class<Fragment>
+              is Enrollment -> {
+                when (sensorType) {
+                  FingerprintSensorType.REAR -> RFPSEnrollFragment::class.java as Class<Fragment>
+                  else -> FingerprintEnrollEnrollingV2Fragment::class.java as Class<Fragment>
+                }
+              }
+              Intro -> FingerprintEnrollIntroV2Fragment::class.java as Class<Fragment>
+              else -> null
             }
-          } else if (currStep == LaunchConfirmDeviceCredential) {
-            launchConfirmOrChooseLock(userId)
+
+          if (theClass != null) {
+            supportFragmentManager.fragments.onEach { fragment ->
+              supportFragmentManager.beginTransaction().remove(fragment).commit()
+            }
+
+            supportFragmentManager
+              .beginTransaction()
+              .setReorderingAllowed(true)
+              .add(R.id.fragment_container_view, theClass, null)
+              .commit()
+          } else {
+
+            if (currStep is Finish) {
+              if (currStep.resultCode != null) {
+                finishActivity(currStep.resultCode)
+              } else {
+                finish()
+              }
+            } else if (currStep == LaunchConfirmDeviceCredential) {
+              launchConfirmOrChooseLock(userId)
+            }
           }
         }
-      }
     }
 
     val fromSettingsSummary =

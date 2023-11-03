@@ -26,6 +26,12 @@
         settings:controller="com.android.settings.connecteddevice.audiosharing.CallsAndAlarmsPreferenceController"
         android:summary=""/>
 
+    <com.android.settings.connecteddevice.audiosharing.AudioSharingNamePreference
+        android:key="audio_sharing_stream_name"
+        android:title="Stream name"
+        android:summary="********"
+        settings:controller="com.android.settings.connecteddevice.audiosharing.AudioSharingNamePreferenceController"/>
+
     <PreferenceCategory
         android:key="audio_streams_settings_category"
         android:title="@string/audio_sharing_streams_category_title"
@@ -38,5 +44,4 @@
             android:icon="@drawable/ic_chevron_right_24dp" />
 
     </PreferenceCategory>
-
 </PreferenceScreen>
