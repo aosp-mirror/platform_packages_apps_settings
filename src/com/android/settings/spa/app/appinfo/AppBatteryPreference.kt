@@ -21,7 +21,6 @@ import android.content.pm.ApplicationInfo
 import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -91,16 +90,17 @@ private class AppBatteryPresenter(private val context: Context, private val app:
         }
     }
 
-    val enabled = derivedStateOf { batteryDiffEntryState is LoadingState.Done }
+    val enabled = { batteryDiffEntryState is LoadingState.Done }
 
-    val summary = derivedStateOf<String> {
-        if (!app.installed) return@derivedStateOf ""
-        batteryDiffEntryState.let { batteryDiffEntryState ->
-            when (batteryDiffEntryState) {
-                is LoadingState.Loading -> context.getString(R.string.summary_placeholder)
-                is LoadingState.Done -> batteryDiffEntryState.result.getSummary()
+    val summary = {
+        if (app.installed) {
+            batteryDiffEntryState.let { batteryDiffEntryState ->
+                when (batteryDiffEntryState) {
+                    is LoadingState.Loading -> context.getString(R.string.summary_placeholder)
+                    is LoadingState.Done -> batteryDiffEntryState.result.getSummary()
+                }
             }
-        }
+        } else ""
     }
 
     private fun BatteryDiffEntry?.getSummary(): String =
@@ -155,7 +155,7 @@ private class AppBatteryPresenter(private val context: Context, private val app:
 }
 
 private sealed class LoadingState<out T> {
-    object Loading : LoadingState<Nothing>()
+    data object Loading : LoadingState<Nothing>()
 
     data class Done<T>(val result: T) : LoadingState<T>()
 

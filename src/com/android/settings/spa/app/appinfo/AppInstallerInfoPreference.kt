@@ -19,15 +19,16 @@ package com.android.settings.spa.app.appinfo
 import android.content.Context
 import android.content.pm.ApplicationInfo
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settings.R
 import com.android.settings.Utils
 import com.android.settings.applications.AppStoreUtil
 import com.android.settingslib.applications.AppUtils
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settingslib.spa.widget.preference.Preference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
 import com.android.settingslib.spaprivileged.framework.common.asUser
@@ -49,13 +50,14 @@ fun AppInstallerInfoPreference(app: ApplicationInfo) {
     val presenter = remember { AppInstallerInfoPresenter(context, app, coroutineScope) }
     if (!presenter.isAvailableFlow.collectAsStateWithLifecycle(initialValue = false).value) return
 
+    val summary by presenter.summaryFlow.collectAsStateWithLifecycle(
+        initialValue = stringResource(R.string.summary_placeholder),
+    )
+    val enabled by presenter.enabledFlow.collectAsStateWithLifecycle(initialValue = false)
     Preference(object : PreferenceModel {
         override val title = stringResource(R.string.app_install_details_title)
-        override val summary = presenter.summaryFlow.collectAsStateWithLifecycle(
-            initialValue = stringResource(R.string.summary_placeholder),
-        )
-        override val enabled =
-            presenter.enabledFlow.collectAsStateWithLifecycle(initialValue = false)
+        override val summary = { summary }
+        override val enabled = { enabled }
         override val onClick = presenter::startActivity
     })
 }

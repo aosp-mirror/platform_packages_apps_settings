@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ Copyright (C) 2023 The Android Open Source Project
   ~
@@ -14,11 +15,14 @@
   ~ limitations under the License.
   -->
 
-<navigation xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/private_space_navigation"
-            app:startDestination="@id/ps_profile_lock_fragment">
-    <fragment android:id="@+id/ps_profile_lock_fragment"
-              android:name="com.android.settings.privatespace.PrivateSpaceSetLockFragment"
-              android:label="fragment_ps_lock"/>
-</navigation>
+<com.google.android.setupdesign.GlifLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ps_error_page_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:filterTouchesWhenObscured="true"
+    app:sucHeaderText="@string/privatespace_retry_signin_title"
+    app:sudDescriptionText="@string/privatespace_retry_summary"
+    android:icon="@drawable/ic_error_red">
+</com.google.android.setupdesign.GlifLayout>

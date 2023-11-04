@@ -59,6 +59,8 @@ import com.android.settings.search.SearchFeatureProviderImpl
 import com.android.settings.security.SecurityFeatureProviderImpl
 import com.android.settings.security.SecuritySettingsFeatureProvider
 import com.android.settings.security.SecuritySettingsFeatureProviderImpl
+import com.android.settings.privatespace.PrivateSpaceLoginFeatureProvider
+import com.android.settings.privatespace.PrivateSpaceLoginFeatureProviderImpl
 import com.android.settings.slices.SlicesFeatureProviderImpl
 import com.android.settings.users.UserFeatureProviderImpl
 import com.android.settings.vpn2.AdvancedVpnFeatureProviderImpl
@@ -183,5 +185,9 @@ open class FeatureFactoryImpl : FeatureFactory() {
 
     override val fastPairFeatureProvider: FastPairFeatureProvider by lazy {
         FastPairFeatureProviderImpl()
+    }
+
+    override val privateSpaceLoginFeatureProvider: PrivateSpaceLoginFeatureProvider by lazy {
+        PrivateSpaceLoginFeatureProviderImpl()
     }
 }

@@ -27,7 +27,6 @@ import com.android.settings.R
 import com.android.settings.applications.AppInfoBase
 import com.android.settings.notification.app.AppNotificationSettings
 import com.android.settings.spa.notification.SpinnerItem.Companion.toSpinnerItem
-import com.android.settingslib.spa.framework.compose.stateOf
 import com.android.settingslib.spa.framework.util.asyncFilter
 import com.android.settingslib.spa.framework.util.asyncForEach
 import com.android.settingslib.spa.widget.ui.SpinnerOption
@@ -91,16 +90,17 @@ class AppNotificationsListModel(
     }.then(super.getComparator(option))
 
     @Composable
-    override fun getSummary(option: Int, record: AppNotificationsRecord) = record.sentState?.let {
-        when (option.toSpinnerItem()) {
-            SpinnerItem.MostRecent -> stateOf(formatLastSent(it.lastSent))
-            SpinnerItem.MostFrequent -> stateOf(repository.calculateFrequencySummary(it.sentCount))
-            else -> null
+    override fun getSummary(option: Int, record: AppNotificationsRecord): (() -> String)? =
+        record.sentState?.let {
+            when (option.toSpinnerItem()) {
+                SpinnerItem.MostRecent -> ({ formatLastSent(it.lastSent) })
+                SpinnerItem.MostFrequent -> ({ repository.calculateFrequencySummary(it.sentCount) })
+                else -> null
+            }
         }
-    }
 
     override fun getSpinnerOptions(recordList: List<AppNotificationsRecord>): List<SpinnerOption> =
-        SpinnerItem.values().map {
+        SpinnerItem.entries.map {
             SpinnerOption(
                 id = it.ordinal,
                 text = context.getString(it.stringResId),
@@ -145,6 +145,6 @@ private enum class SpinnerItem(val stringResId: Int) {
     TurnedOff(R.string.filter_notif_blocked_apps);
 
     companion object {
-        fun Int.toSpinnerItem(): SpinnerItem = values()[this]
+        fun Int.toSpinnerItem(): SpinnerItem = entries[this]
     }
 }

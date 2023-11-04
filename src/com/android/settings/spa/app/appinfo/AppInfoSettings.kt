@@ -32,6 +32,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
+import com.android.settings.flags.Flags
 import com.android.settings.R
 import com.android.settings.applications.AppInfoBase
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment
@@ -42,6 +43,7 @@ import com.android.settings.spa.app.specialaccess.DisplayOverOtherAppsAppListPro
 import com.android.settings.spa.app.specialaccess.InstallUnknownAppsListProvider
 import com.android.settings.spa.app.specialaccess.ModifySystemSettingsAppListProvider
 import com.android.settings.spa.app.specialaccess.PictureInPictureListProvider
+import com.android.settings.spa.app.specialaccess.VoiceActivationAppsListProvider
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
 import com.android.settingslib.spa.framework.compose.LifecycleEffect
 import com.android.settingslib.spa.framework.compose.navigator
@@ -160,6 +162,9 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
             InstallUnknownAppsListProvider.InfoPageEntryItem(app)
             InteractAcrossProfilesDetailsPreference(app)
             AlarmsAndRemindersAppListProvider.InfoPageEntryItem(app)
+            if (Flags.enableVoiceActivationAppsInSettings()) {
+                VoiceActivationAppsListProvider.InfoPageEntryItem(app)
+            }
         }
 
         Category(title = stringResource(R.string.app_install_details_group_title)) {
