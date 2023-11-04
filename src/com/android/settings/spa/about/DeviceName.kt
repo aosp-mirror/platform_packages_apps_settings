@@ -24,7 +24,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import com.android.settings.R
 import com.android.settings.deviceinfo.DeviceNamePreferenceController
-import com.android.settingslib.spa.framework.compose.toState
 import com.android.settingslib.spa.widget.dialog.AlertDialogButton
 import com.android.settingslib.spa.widget.dialog.rememberAlertDialogPresenter
 import com.android.settingslib.spa.widget.preference.Preference
@@ -48,7 +47,7 @@ object DeviceNamePreference {
         Preference(object : PreferenceModel {
             override val title =
                 stringResource(R.string.my_device_info_device_name_preference_title)
-            override val summary = deviceNamePresenter.deviceName.toState()
+            override val summary = { deviceNamePresenter.deviceName }
             override val onClick = dialogPresenter::open
         })
 

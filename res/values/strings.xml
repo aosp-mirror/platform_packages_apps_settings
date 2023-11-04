@@ -1298,6 +1298,10 @@
     <string name="privatespace_done_label">Done</string>
     <!-- Toast to show on private space setup completion informing user to scroll down All apps to access private space. [CHAR LIMIT=60] -->
     <string name="scrolldown_to_access">Scroll down to access Private Space</string>
+    <!-- Title for Private Space account login error screen. [CHAR LIMIT=60] -->
+    <string name="privatespace_retry_signin_title">Sign in to set up Private Space</string>
+    <!-- Summary for the Private Space account login error screen. [CHAR LIMIT=NONE] -->
+    <string name="privatespace_retry_summary">You need to sign in to a Account to set up Private Space</string>
 
     <!-- Text shown when "Add fingerprint" button is disabled -->
     <string name="fingerprint_add_max">You can add up to <xliff:g id="count" example="5">%d</xliff:g> fingerprints</string>
@@ -1852,6 +1856,11 @@
     <string name="show_refresh_rate">Show refresh rate</string>
     <!-- Debugging developer settings: show refresh rate summary [CHAR LIMIT=58] -->
     <string name="show_refresh_rate_summary">Show the current display refresh rate</string>
+
+    <!-- Debugging developer settings: show HDR/SDR ratio? [CHAR LIMIT=36] -->
+    <string name="show_hdr_sdr_ratio">Show HDR/SDR ratio</string>
+    <!-- Debugging developer settings: show HDR/SDR ratio summary [CHAR LIMIT=58] -->
+    <string name="show_hdr_sdr_ratio_summary">Show the current HDR/SDR ratio</string>
 
     <!-- NFC settings -->
     <!-- Used in the 1st-level settings screen to turn on NFC -->
@@ -9525,7 +9534,7 @@
     <!-- Label for a setting which controls whether an app can be voice activated [CHAR LIMIT=NONE] -->
     <string name="permit_voice_activation_apps">Allow voice activation</string>
     <!-- Description for a setting which controls whether an app can be voice activated [CHAR LIMIT=NONE] -->
-    <string name ="allow_voice_activation_apps_description">Voice activation turns-on approved apps, hands-free, using voice command.\n\nUntill activated, none of these apps can directly access your microphone.Instead, this device uses built-in proteced adaptive sensing to turn-on aprroved apps for you.\n\n<a href="">More about protected adaptive sensing</a></string>
+    <string name ="allow_voice_activation_apps_description">Voice activation turns-on approved apps, hands-free, using voice command. Built-in adaptive sensing ensures data stays private only to you.\n\n<a href="">More about protected adaptive sensing</a></string>
 
     <!-- Manage full screen intent permission title [CHAR LIMIT=40] -->
     <string name="full_screen_intent_title">Full screen notifications</string>

@@ -20,6 +20,7 @@ import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.net.NetworkTemplate
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.LocalContext
@@ -34,7 +35,6 @@ import com.android.settings.datausage.lib.IAppDataUsageSummaryRepository
 import com.android.settings.datausage.lib.INetworkTemplates
 import com.android.settings.datausage.lib.NetworkTemplates
 import com.android.settings.datausage.lib.NetworkTemplates.getTitleResId
-import com.android.settingslib.spa.framework.compose.toState
 import com.android.settingslib.spa.widget.preference.Preference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
 import com.android.settingslib.spaprivileged.model.app.hasFlag
@@ -64,16 +64,17 @@ fun AppDataUsagePreference(
     }
     if (!presenter.isAvailableFlow.collectAsStateWithLifecycle(initialValue = false).value) return
 
+    val summary by presenter.summaryFlow.collectAsStateWithLifecycle(
+        initialValue = stringResource(R.string.computing_size),
+    )
     Preference(object : PreferenceModel {
         override val title = stringResource(
             presenter.titleResIdFlow.collectAsStateWithLifecycle(
                 initialValue = R.string.summary_placeholder,
             ).value
         )
-        override val summary = presenter.summaryFlow.collectAsStateWithLifecycle(
-            initialValue = stringResource(R.string.computing_size),
-        )
-        override val enabled = presenter.isEnabled().toState()
+        override val summary = { summary }
+        override val enabled = { presenter.isEnabled() }
         override val onClick = presenter::startActivity
     })
 }

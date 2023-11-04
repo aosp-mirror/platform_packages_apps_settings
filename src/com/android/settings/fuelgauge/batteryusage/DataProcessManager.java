@@ -72,8 +72,6 @@ public class DataProcessManager {
     private static final String TAG = "DataProcessManager";
     private static final List<BatteryEventType> POWER_CONNECTION_EVENTS =
             List.of(BatteryEventType.POWER_CONNECTED, BatteryEventType.POWER_DISCONNECTED);
-    private static final List<BatteryEventType> BATTERY_LEVEL_RECORD_EVENTS =
-            List.of(BatteryEventType.FULL_CHARGED, BatteryEventType.EVEN_HOUR);
 
     // For testing only.
     @VisibleForTesting
@@ -575,7 +573,7 @@ public class DataProcessManager {
         final List<BatteryEvent> batteryLevelRecordEvents =
                 DatabaseUtils.getBatteryEvents(
                         context, Calendar.getInstance(), lastFullChargeTime,
-                        BATTERY_LEVEL_RECORD_EVENTS);
+                        DatabaseUtils.BATTERY_LEVEL_RECORD_EVENTS);
         final long startTimestamp = batteryLevelRecordEvents.isEmpty()
                 ? lastFullChargeTime : batteryLevelRecordEvents.get(0).getTimestamp();
         final BatteryLevelData batteryLevelData = getPeriodBatteryLevelData(context, handler,
