@@ -22,7 +22,6 @@ import androidx.lifecycle.testing.TestLifecycleOwner
 import androidx.preference.PreferenceManager
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.android.settings.datausage.lib.AppDataUsageDetailsRepository
 import com.android.settings.datausage.lib.IAppDataUsageDetailsRepository
 import com.android.settings.datausage.lib.NetworkUsageDetailsData
 import com.google.common.truth.Truth.assertThat
@@ -31,23 +30,18 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.kotlin.doReturn
-import org.mockito.kotlin.mock
 import org.mockito.kotlin.spy
-import org.mockito.kotlin.stub
 import org.mockito.kotlin.verify
 
 @RunWith(AndroidJUnit4::class)
 class AppDataUsageCycleControllerTest {
     private val context: Context = ApplicationProvider.getApplicationContext()
 
-    private val controller = AppDataUsageCycleController(context, KEY)
-
     private val preference = spy(SpinnerPreference(context, null).apply { key = KEY })
 
     private val preferenceScreen = PreferenceManager(context).createPreferenceScreen(context)
 
-    private val onUsageDataUpdated: (NetworkUsageDetailsData) -> Unit = {}
+    private val controller = AppDataUsageCycleController(context, KEY)
 
     @Before
     fun setUp() {
@@ -59,8 +53,8 @@ class AppDataUsageCycleControllerTest {
         val repository = object : IAppDataUsageDetailsRepository {
             override suspend fun queryDetailsForCycles() = emptyList<NetworkUsageDetailsData>()
         }
-        controller.init(repository, onUsageDataUpdated)
         controller.displayPreference(preferenceScreen)
+        controller.init(repository) {}
 
         controller.onViewCreated(TestLifecycleOwner())
         delay(100)
@@ -79,8 +73,8 @@ class AppDataUsageCycleControllerTest {
         val repository = object : IAppDataUsageDetailsRepository {
             override suspend fun queryDetailsForCycles() = listOf(detailsData)
         }
-        controller.init(repository, onUsageDataUpdated)
         controller.displayPreference(preferenceScreen)
+        controller.init(repository) {}
 
         controller.onViewCreated(TestLifecycleOwner())
         delay(100)
@@ -93,13 +87,13 @@ class AppDataUsageCycleControllerTest {
         val repository = object : IAppDataUsageDetailsRepository {
             override suspend fun queryDetailsForCycles() = emptyList<NetworkUsageDetailsData>()
         }
-        controller.init(repository, onUsageDataUpdated)
+        controller.displayPreference(preferenceScreen)
+        controller.init(repository) {}
+
         controller.setInitialCycles(
             initialCycles = listOf(CYCLE2_END_TIME, CYCLE1_END_TIME, CYCLE1_START_TIME),
             initialSelectedEndTime = CYCLE1_END_TIME,
         )
-
-        controller.displayPreference(preferenceScreen)
 
         verify(preference).setSelection(1)
     }
