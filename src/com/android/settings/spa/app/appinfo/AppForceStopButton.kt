@@ -20,7 +20,7 @@ import android.app.settings.SettingsEnums
 import android.content.pm.ApplicationInfo
 import android.os.UserManager
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.WarningAmber
+import androidx.compose.material.icons.outlined.Report
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
@@ -48,7 +48,7 @@ class AppForceStopButton(
         val dialogPresenter = confirmDialogPresenter()
         return ActionButton(
             text = context.getString(R.string.force_stop),
-            imageVector = Icons.Outlined.WarningAmber,
+            imageVector = Icons.Outlined.Report,
             enabled = isForceStopButtonEnable(app),
         ) { onForceStopButtonClicked(app, dialogPresenter) }
     }
