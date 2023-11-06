@@ -108,6 +108,7 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
                         SHOW_VIRTUAL_KEYBOARD_SWITCH));
 
         FeatureFactory featureFactory = FeatureFactory.getFeatureFactory();
+        mMetricsFeatureProvider = featureFactory.getMetricsFeatureProvider();
         mFeatureProvider = featureFactory.getKeyboardSettingsFeatureProvider();
         mSupportsFirmwareUpdate = mFeatureProvider.supportsFirmwareUpdate();
         if (mSupportsFirmwareUpdate) {
@@ -124,6 +125,10 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
                 KeyboardLayoutPickerFragment.EXTRA_INPUT_DEVICE_IDENTIFIER);
         int intentFromWhere =
                 activity.getIntent().getIntExtra(android.provider.Settings.EXTRA_ENTRYPOINT, -1);
+        if (intentFromWhere != -1) {
+            mMetricsFeatureProvider.action(
+                    getContext(), SettingsEnums.ACTION_OPEN_PK_SETTINGS_FROM, intentFromWhere);
+        }
         if (inputDeviceIdentifier != null) {
             mAutoInputDeviceIdentifier = inputDeviceIdentifier;
         }
@@ -254,6 +259,16 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
                         });
             }
             category.addPreference(pref);
+            StringBuilder vendorAndProductId = new StringBuilder();
+            String vendorId = String.valueOf(hardKeyboardDeviceInfo.mVendorId);
+            String productId = String.valueOf(hardKeyboardDeviceInfo.mProductId);
+            vendorAndProductId.append(vendorId);
+            vendorAndProductId.append("-");
+            vendorAndProductId.append(productId);
+            mMetricsFeatureProvider.action(
+                    getContext(),
+                    SettingsEnums.ACTION_USE_SPECIFIC_KEYBOARD,
+                    vendorAndProductId.toString());
         }
         mKeyboardAssistanceCategory.setOrder(1);
         preferenceScreen.addPreference(mKeyboardAssistanceCategory);
@@ -374,7 +389,9 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
                     device.getName(),
                     device.getIdentifier(),
                     getLayoutLabel(device, context, im),
-                    device.getBluetoothAddress()));
+                    device.getBluetoothAddress(),
+                    device.getVendorId(),
+                    device.getProductId()));
         }
 
         // We intentionally don't reuse Comparator because Collator may not be thread-safe.
@@ -403,16 +420,24 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
         public final String mLayoutLabel;
         @Nullable
         public final String mBluetoothAddress;
+        @NonNull
+        public final int mVendorId;
+        @NonNull
+        public final int mProductId;
 
         public HardKeyboardDeviceInfo(
                 @Nullable String deviceName,
                 @NonNull InputDeviceIdentifier deviceIdentifier,
                 @NonNull String layoutLabel,
-                @Nullable String bluetoothAddress) {
+                @Nullable String bluetoothAddress,
+                @NonNull int vendorId,
+                @NonNull int productId) {
             mDeviceName = TextUtils.emptyIfNull(deviceName);
             mDeviceIdentifier = deviceIdentifier;
             mLayoutLabel = layoutLabel;
             mBluetoothAddress = bluetoothAddress;
+            mVendorId = vendorId;
+            mProductId = productId;
         }
 
         @Override
