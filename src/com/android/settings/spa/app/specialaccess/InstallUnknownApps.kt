@@ -24,8 +24,8 @@ import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.os.UserManager
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.livedata.observeAsState
 import com.android.settings.R
+import com.android.settingslib.spa.livedata.observeAsCallback
 import com.android.settingslib.spaprivileged.model.app.AppOpsController
 import com.android.settingslib.spaprivileged.model.app.AppRecord
 import com.android.settingslib.spaprivileged.model.app.userId
@@ -79,7 +79,7 @@ class InstallUnknownAppsListModel(private val context: Context) :
 
     @Composable
     override fun isAllowed(record: InstallUnknownAppsRecord) =
-        record.appOpsController.isAllowed.observeAsState()
+        record.appOpsController.isAllowed.observeAsCallback()
 
     override fun isChangeable(record: InstallUnknownAppsRecord) =
         isChangeable(record, getPotentialPackageNames(record.app.userId))
