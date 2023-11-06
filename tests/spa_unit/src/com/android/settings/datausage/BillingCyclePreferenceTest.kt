@@ -18,40 +18,69 @@ package com.android.settings.datausage
 
 import android.content.Context
 import android.net.NetworkTemplate
+import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.assertIsEnabled
+import androidx.compose.ui.test.assertIsNotEnabled
+import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onNodeWithText
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.settings.R
 import com.android.settings.datausage.lib.BillingCycleRepository
-import com.google.common.truth.Truth.assertThat
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
+import org.mockito.kotlin.stub
 
 @RunWith(AndroidJUnit4::class)
 class BillingCyclePreferenceTest {
+    @get:Rule
+    val composeTestRule = createComposeRule()
 
-    private val mockBillingCycleRepository = mock<BillingCycleRepository> {
-        on { isModifiable(SUB_ID) } doReturn false
-    }
+    private val mockBillingCycleRepository = mock<BillingCycleRepository>()
 
     private val context: Context = ApplicationProvider.getApplicationContext()
 
     private val preference = BillingCyclePreference(context, null, mockBillingCycleRepository)
 
     @Test
-    fun isEnabled_initialState() {
-        val enabled = preference.isEnabled
+    fun setTemplate_titleDisplayed() {
+        setTemplate()
 
-        assertThat(enabled).isTrue()
+        composeTestRule.onNodeWithText(context.getString(R.string.billing_cycle))
+            .assertIsDisplayed()
     }
 
     @Test
-    fun isEnabled_afterSetTemplate_updated() {
+    fun setTemplate_modifiable_enabled() {
+        mockBillingCycleRepository.stub {
+            on { isModifiable(SUB_ID) } doReturn true
+        }
+
+        setTemplate()
+
+        composeTestRule.onNodeWithText(context.getString(R.string.billing_cycle)).assertIsEnabled()
+    }
+
+    @Test
+    fun setTemplate_notModifiable_notEnabled() {
+        mockBillingCycleRepository.stub {
+            on { isModifiable(SUB_ID) } doReturn false
+        }
+
+        setTemplate()
+
+        composeTestRule.onNodeWithText(context.getString(R.string.billing_cycle))
+            .assertIsNotEnabled()
+    }
+
+    private fun setTemplate() {
         preference.setTemplate(mock<NetworkTemplate>(), SUB_ID)
-
-        val enabled = preference.isEnabled
-
-        assertThat(enabled).isFalse()
+        composeTestRule.setContent {
+            preference.Content()
+        }
     }
 
     private companion object {
