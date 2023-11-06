@@ -48,6 +48,8 @@ public class ContentProtectionPreferenceControllerTest {
 
     private ContentProtectionPreferenceController mController;
 
+    private boolean mSettingUiEnabled;
+
     @Before
     public void setUp() {
         mController = new TestContentProtectionPreferenceController();
@@ -55,7 +57,7 @@ public class ContentProtectionPreferenceControllerTest {
 
     @Test
     public void isAvailable_flagSettingUiDisabled_isFalse() {
-        mSetFlagsRule.disableFlags(FLAG_SETTING_UI_ENABLED);
+        mSettingUiEnabled = false;
 
         assertThat(mController.isAvailable()).isFalse();
     }
@@ -98,7 +100,7 @@ public class ContentProtectionPreferenceControllerTest {
 
     @Test
     public void isAvailable_flagSettingUiEnabled_componentNameValid_isTrue() {
-        mSetFlagsRule.enableFlags(FLAG_SETTING_UI_ENABLED);
+        mSettingUiEnabled = true;
 
         assertThat(mController.isAvailable()).isTrue();
     }
@@ -113,6 +115,11 @@ public class ContentProtectionPreferenceControllerTest {
         @Override
         protected String getContentProtectionServiceFlatComponentName() {
             return mConfigDefaultContentProtectionService;
+        }
+
+        @Override
+        protected boolean settingUiEnabled() {
+            return mSettingUiEnabled;
         }
     }
 }
