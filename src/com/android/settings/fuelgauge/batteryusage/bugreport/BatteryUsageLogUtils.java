@@ -25,6 +25,7 @@ import com.android.settings.fuelgauge.BatteryUsageHistoricalLogEntry;
 import com.android.settings.fuelgauge.BatteryUsageHistoricalLogEntry.Action;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.batteryusage.ConvertUtils;
+
 import com.google.common.annotations.VisibleForTesting;
 
 import java.io.PrintWriter;
@@ -62,16 +63,13 @@ public final class BatteryUsageLogUtils {
 
         final String loggingContent =
                 Base64.encodeToString(newLogBuilder.build().toByteArray(), Base64.DEFAULT);
-        sharedPreferences
-                .edit()
-                .putString(LOGS_KEY, loggingContent)
-                .apply();
+        sharedPreferences.edit().putString(LOGS_KEY, loggingContent).apply();
     }
 
     /** Prints the historical log that has previously been stored by this utility. */
     public static void printHistoricalLog(Context context, PrintWriter writer) {
-        final BatteryUsageHistoricalLog existingLog = parseLogFromString(
-                getSharedPreferences(context).getString(LOGS_KEY, ""));
+        final BatteryUsageHistoricalLog existingLog =
+                parseLogFromString(getSharedPreferences(context).getString(LOGS_KEY, ""));
         final List<BatteryUsageHistoricalLogEntry> logEntryList = existingLog.getLogEntryList();
         if (logEntryList.isEmpty()) {
             writer.println("\tnothing to dump");
@@ -92,9 +90,10 @@ public final class BatteryUsageLogUtils {
     }
 
     private static String toString(BatteryUsageHistoricalLogEntry entry) {
-        final StringBuilder builder = new StringBuilder("\t")
-                .append(ConvertUtils.utcToLocalTimeForLogging(entry.getTimestamp()))
-                .append(" " + entry.getAction());
+        final StringBuilder builder =
+                new StringBuilder("\t")
+                        .append(ConvertUtils.utcToLocalTimeForLogging(entry.getTimestamp()))
+                        .append(" " + entry.getAction());
         final String description = entry.getActionDescription();
         if (description != null && !description.isEmpty()) {
             builder.append(" " + description);

@@ -34,21 +34,16 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.Utils;
 import com.android.settingslib.widget.UsageProgressBarPreference;
 
-/**
- * Controller that update the battery header view
- */
+/** Controller that update the battery header view */
 public class BatteryHeaderPreferenceController extends BasePreferenceController
         implements PreferenceControllerMixin, BatteryPreferenceController {
     private static final String TAG = "BatteryHeaderPreferenceController";
 
-    @VisibleForTesting
-    static final String KEY_BATTERY_HEADER = "battery_header";
+    @VisibleForTesting static final String KEY_BATTERY_HEADER = "battery_header";
     private static final int BATTERY_MAX_LEVEL = 100;
 
-    @VisibleForTesting
-    BatteryStatusFeatureProvider mBatteryStatusFeatureProvider;
-    @VisibleForTesting
-    UsageProgressBarPreference mBatteryUsageProgressBarPref;
+    @VisibleForTesting BatteryStatusFeatureProvider mBatteryStatusFeatureProvider;
+    @VisibleForTesting UsageProgressBarPreference mBatteryUsageProgressBarPref;
 
     private BatteryTip mBatteryTip;
     private final PowerManager mPowerManager;
@@ -56,8 +51,8 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
     public BatteryHeaderPreferenceController(Context context, String key) {
         super(context, key);
         mPowerManager = context.getSystemService(PowerManager.class);
-        mBatteryStatusFeatureProvider = FeatureFactory.getFeatureFactory()
-                .getBatteryStatusFeatureProvider();
+        mBatteryStatusFeatureProvider =
+                FeatureFactory.getFeatureFactory().getBatteryStatusFeatureProvider();
     }
 
     @Override
@@ -96,12 +91,11 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
                     R.string.battery_state_and_duration, info.statusLabel, info.remainingLabel);
         } else if (mPowerManager.isPowerSaveMode()) {
             // Power save mode is on
-            final String powerSaverOn = mContext.getString(
-                    R.string.battery_tip_early_heads_up_done_title);
+            final String powerSaverOn =
+                    mContext.getString(R.string.battery_tip_early_heads_up_done_title);
             return mContext.getString(
                     R.string.battery_state_and_duration, powerSaverOn, info.remainingLabel);
-        } else if (mBatteryTip != null
-                && mBatteryTip.getType() == BatteryTip.TipType.LOW_BATTERY) {
+        } else if (mBatteryTip != null && mBatteryTip.getType() == BatteryTip.TipType.LOW_BATTERY) {
             // Low battery state
             final String lowBattery = mContext.getString(R.string.low_battery_summary);
             return mContext.getString(
@@ -122,9 +116,7 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
         mBatteryUsageProgressBarPref.setPercent(info.batteryLevel, BATTERY_MAX_LEVEL);
     }
 
-    /**
-     * Callback which receives text for the summary line.
-     */
+    /** Callback which receives text for the summary line. */
     public void updateBatteryStatus(String label, BatteryInfo info) {
         final CharSequence summary = label != null ? label : generateLabel(info);
         mBatteryUsageProgressBarPref.setBottomSummary(summary);
@@ -132,8 +124,8 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
     }
 
     public void quickUpdateHeaderPreference() {
-        Intent batteryBroadcast = com.android.settingslib.fuelgauge.BatteryUtils
-                .getBatteryIntent(mContext);
+        Intent batteryBroadcast =
+                com.android.settingslib.fuelgauge.BatteryUtils.getBatteryIntent(mContext);
         final int batteryLevel = Utils.getBatteryLevel(batteryBroadcast);
         final boolean discharging =
                 batteryBroadcast.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1) == 0;
@@ -142,9 +134,7 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
         mBatteryUsageProgressBarPref.setPercent(batteryLevel, BATTERY_MAX_LEVEL);
     }
 
-    /**
-     * Update summary when battery tips changed.
-     */
+    /** Update summary when battery tips changed. */
     public void updateHeaderByBatteryTips(BatteryTip batteryTip, BatteryInfo batteryInfo) {
         mBatteryTip = batteryTip;
 
@@ -154,7 +144,8 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
     }
 
     private CharSequence formatBatteryPercentageText(int batteryLevel) {
-        return TextUtils.expandTemplate(mContext.getText(R.string.battery_header_title_alternate),
+        return TextUtils.expandTemplate(
+                mContext.getText(R.string.battery_header_title_alternate),
                 NumberFormat.getIntegerInstance().format(batteryLevel));
     }
 }

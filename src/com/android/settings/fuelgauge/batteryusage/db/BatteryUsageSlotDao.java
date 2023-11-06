@@ -37,8 +37,9 @@ public interface BatteryUsageSlotDao {
     List<BatteryUsageSlotEntity> getAll();
 
     /** Gets the {@link Cursor} of all recorded data after a specific timestamp. */
-    @Query("SELECT * FROM BatteryUsageSlotEntity WHERE timestamp >= :timestamp"
-            + " ORDER BY timestamp ASC")
+    @Query(
+            "SELECT * FROM BatteryUsageSlotEntity WHERE timestamp >= :timestamp"
+                    + " ORDER BY timestamp ASC")
     Cursor getAllAfter(long timestamp);
 
     /** Deletes all recorded data before a specific timestamp. */

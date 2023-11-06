@@ -57,14 +57,18 @@ class BatteryChartViewModel {
     private int mSelectedIndex = SELECTED_INDEX_ALL;
     private int mHighlightSlotIndex = SELECTED_INDEX_INVALID;
 
-    BatteryChartViewModel(@NonNull List<Integer> levels, @NonNull List<Long> timestamps,
+    BatteryChartViewModel(
+            @NonNull List<Integer> levels,
+            @NonNull List<Long> timestamps,
             @NonNull AxisLabelPosition axisLabelPosition,
             @NonNull LabelTextGenerator labelTextGenerator) {
         Preconditions.checkArgument(
                 levels.size() == timestamps.size() && levels.size() >= MIN_LEVELS_DATA_SIZE,
-                String.format(Locale.ENGLISH,
+                String.format(
+                        Locale.ENGLISH,
                         "Invalid BatteryChartViewModel levels.size: %d, timestamps.size: %d.",
-                        levels.size(), timestamps.size()));
+                        levels.size(),
+                        timestamps.size()));
         mLevels = levels;
         mTimestamps = timestamps;
         mAxisLabelPosition = axisLabelPosition;

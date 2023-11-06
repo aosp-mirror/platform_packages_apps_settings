@@ -36,7 +36,9 @@ public final class PeriodicJobReceiver extends BroadcastReceiver {
         try {
             loadDataAndRefreshJob(context, intent);
         } catch (Exception e) {
-            BatteryUsageLogUtils.writeLog(context, Action.SCHEDULE_JOB,
+            BatteryUsageLogUtils.writeLog(
+                    context,
+                    Action.SCHEDULE_JOB,
                     String.format("loadDataAndRefreshJob() failed: %s", e));
         }
     }
@@ -48,15 +50,15 @@ public final class PeriodicJobReceiver extends BroadcastReceiver {
             return;
         }
         if (DatabaseUtils.isWorkProfile(context)) {
-            BatteryUsageLogUtils.writeLog(context, Action.SCHEDULE_JOB,
-                    "do not refresh job for work profile");
+            BatteryUsageLogUtils.writeLog(
+                    context, Action.SCHEDULE_JOB, "do not refresh job for work profile");
             Log.w(TAG, "do not refresh job for work profile action=" + action);
             return;
         }
         BatteryUsageLogUtils.writeLog(context, Action.EXECUTE_JOB, "");
-        BatteryUsageDataLoader.enqueueWork(context, /*isFullChargeStart=*/ false);
+        BatteryUsageDataLoader.enqueueWork(context, /* isFullChargeStart= */ false);
         Log.d(TAG, "refresh periodic job from action=" + action);
-        PeriodicJobManager.getInstance(context).refreshJob(/*fromBoot=*/ false);
+        PeriodicJobManager.getInstance(context).refreshJob(/* fromBoot= */ false);
         DatabaseUtils.clearExpiredDataIfNeeded(context);
     }
 }

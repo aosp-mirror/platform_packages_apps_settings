@@ -35,14 +35,12 @@ import java.lang.annotation.RetentionPolicy;
 /**
  * Base model for a battery tip(e.g. suggest user to turn on battery saver)
  *
- * Each {@link BatteryTip} contains basic data(e.g. title, summary, icon) as well as the
+ * <p>Each {@link BatteryTip} contains basic data(e.g. title, summary, icon) as well as the
  * pre-defined action(e.g. turn on battery saver)
  */
 public abstract class BatteryTip implements Comparable<BatteryTip>, Parcelable {
     @Retention(RetentionPolicy.SOURCE)
-    @IntDef({StateType.NEW,
-            StateType.HANDLED,
-            StateType.INVISIBLE})
+    @IntDef({StateType.NEW, StateType.HANDLED, StateType.INVISIBLE})
     public @interface StateType {
         int NEW = 0;
         int HANDLED = 1;
@@ -50,17 +48,19 @@ public abstract class BatteryTip implements Comparable<BatteryTip>, Parcelable {
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    @IntDef({TipType.SUMMARY,
-            TipType.BATTERY_SAVER,
-            TipType.HIGH_DEVICE_USAGE,
-            TipType.SMART_BATTERY_MANAGER,
-            TipType.APP_RESTRICTION,
-            TipType.REDUCED_BATTERY,
-            TipType.LOW_BATTERY,
-            TipType.REMOVE_APP_RESTRICTION,
-            TipType.BATTERY_DEFENDER,
-            TipType.DOCK_DEFENDER,
-            TipType.INCOMPATIBLE_CHARGER})
+    @IntDef({
+        TipType.SUMMARY,
+        TipType.BATTERY_SAVER,
+        TipType.HIGH_DEVICE_USAGE,
+        TipType.SMART_BATTERY_MANAGER,
+        TipType.APP_RESTRICTION,
+        TipType.REDUCED_BATTERY,
+        TipType.LOW_BATTERY,
+        TipType.REMOVE_APP_RESTRICTION,
+        TipType.BATTERY_DEFENDER,
+        TipType.DOCK_DEFENDER,
+        TipType.INCOMPATIBLE_CHARGER
+    })
     public @interface TipType {
         int SMART_BATTERY_MANAGER = 0;
         int APP_RESTRICTION = 1;
@@ -75,8 +75,8 @@ public abstract class BatteryTip implements Comparable<BatteryTip>, Parcelable {
         int INCOMPATIBLE_CHARGER = 10;
     }
 
-    @VisibleForTesting
-    static final SparseIntArray TIP_ORDER;
+    @VisibleForTesting static final SparseIntArray TIP_ORDER;
+
     static {
         TIP_ORDER = new SparseIntArray();
         TIP_ORDER.append(TipType.BATTERY_SAVER, 0);
@@ -97,9 +97,8 @@ public abstract class BatteryTip implements Comparable<BatteryTip>, Parcelable {
     protected int mType;
     protected int mState;
     protected boolean mShowDialog;
-    /**
-     * Whether we need to update battery tip when configuration change
-     */
+
+    /** Whether we need to update battery tip when configuration change */
     protected boolean mNeedUpdate;
 
     BatteryTip(Parcel in) {
@@ -146,15 +145,14 @@ public abstract class BatteryTip implements Comparable<BatteryTip>, Parcelable {
 
     /**
      * Check whether data is still make sense. If not, try recover.
+     *
      * @param context used to do validate check
      */
     public void validateCheck(Context context) {
         // do nothing
     }
 
-    /**
-     * Log the battery tip
-     */
+    /** Log the battery tip */
     public abstract void log(Context context, MetricsFeatureProvider metricsFeatureProvider);
 
     public void updatePreference(Preference preference) {

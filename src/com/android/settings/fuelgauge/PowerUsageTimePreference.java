@@ -28,18 +28,13 @@ import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
 
-/**
- * Custom preference for displaying the app power usage time.
- */
+/** Custom preference for displaying the app power usage time. */
 public class PowerUsageTimePreference extends Preference {
     private static final String TAG = "PowerUsageTimePreference";
 
-    @VisibleForTesting
-    CharSequence mTimeTitle;
-    @VisibleForTesting
-    CharSequence mTimeSummary;
-    @VisibleForTesting
-    CharSequence mAnomalyHintText;
+    @VisibleForTesting CharSequence mTimeTitle;
+    @VisibleForTesting CharSequence mTimeSummary;
+    @VisibleForTesting CharSequence mAnomalyHintText;
 
     public PowerUsageTimePreference(Context context, AttributeSet attrs) {
         super(context, attrs);

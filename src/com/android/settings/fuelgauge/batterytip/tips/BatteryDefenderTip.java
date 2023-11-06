@@ -30,9 +30,7 @@ import com.android.settings.widget.CardPreference;
 import com.android.settingslib.HelpUtils;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
-/**
- * Tip to show current battery is overheated
- */
+/** Tip to show current battery is overheated */
 public class BatteryDefenderTip extends BatteryTip {
 
     private static final String TAG = "BatteryDefenderTip";
@@ -70,8 +68,7 @@ public class BatteryDefenderTip extends BatteryTip {
 
     @Override
     public void log(Context context, MetricsFeatureProvider metricsFeatureProvider) {
-        metricsFeatureProvider.action(context, SettingsEnums.ACTION_BATTERY_DEFENDER_TIP,
-                mState);
+        metricsFeatureProvider.action(context, SettingsEnums.ACTION_BATTERY_DEFENDER_TIP, mState);
     }
 
     @Override
@@ -97,14 +94,17 @@ public class BatteryDefenderTip extends BatteryTip {
 
         cardPreference.setSecondaryButtonText(context.getString(R.string.learn_more));
         cardPreference.setSecondaryButtonClickListener(
-                button -> button.startActivityForResult(
-                        HelpUtils.getHelpIntent(
-                                context,
-                                context.getString(R.string.help_url_battery_defender),
-                                /* backupContext */ ""), /* requestCode */ 0));
+                button ->
+                        button.startActivityForResult(
+                                HelpUtils.getHelpIntent(
+                                        context,
+                                        context.getString(R.string.help_url_battery_defender),
+                                        /* backupContext */ ""), /* requestCode */
+                                0));
         cardPreference.setSecondaryButtonVisible(true);
-        cardPreference.setSecondaryButtonContentDescription(context.getString(
-                R.string.battery_tip_limited_temporarily_sec_button_content_description));
+        cardPreference.setSecondaryButtonContentDescription(
+                context.getString(
+                        R.string.battery_tip_limited_temporarily_sec_button_content_description));
     }
 
     private void resumeCharging(Context context) {
@@ -119,13 +119,14 @@ public class BatteryDefenderTip extends BatteryTip {
         Log.i(TAG, "send resume charging broadcast intent=" + intent);
     }
 
-    public static final Creator CREATOR = new Creator() {
-        public BatteryTip createFromParcel(Parcel in) {
-            return new BatteryDefenderTip(in);
-        }
+    public static final Creator CREATOR =
+            new Creator() {
+                public BatteryTip createFromParcel(Parcel in) {
+                    return new BatteryDefenderTip(in);
+                }
 
-        public BatteryTip[] newArray(int size) {
-            return new BatteryDefenderTip[size];
-        }
-    };
+                public BatteryTip[] newArray(int size) {
+                    return new BatteryDefenderTip[size];
+                }
+            };
 }

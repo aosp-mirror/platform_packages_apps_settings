@@ -40,9 +40,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-/**
- * Controller in charge of the battery tip group
- */
+/** Controller in charge of the battery tip group */
 public class BatteryTipPreferenceController extends BasePreferenceController {
 
     public static final String PREF_NAME = "battery_tip";
@@ -57,10 +55,8 @@ public class BatteryTipPreferenceController extends BasePreferenceController {
     private SettingsActivity mSettingsActivity;
     private MetricsFeatureProvider mMetricsFeatureProvider;
     private boolean mNeedUpdate;
-    @VisibleForTesting
-    CardPreference mCardPreference;
-    @VisibleForTesting
-    Context mPrefContext;
+    @VisibleForTesting CardPreference mCardPreference;
+    @VisibleForTesting Context mPrefContext;
     InstrumentedPreferenceFragment mFragment;
 
     public BatteryTipPreferenceController(Context context, String preferenceKey) {
@@ -122,13 +118,15 @@ public class BatteryTipPreferenceController extends BasePreferenceController {
         final BatteryTip batteryTip = mBatteryTipMap.get(preference.getKey());
         if (batteryTip != null) {
             if (batteryTip.shouldShowDialog()) {
-                BatteryTipDialogFragment dialogFragment = BatteryTipDialogFragment.newInstance(
-                        batteryTip, mFragment.getMetricsCategory());
+                BatteryTipDialogFragment dialogFragment =
+                        BatteryTipDialogFragment.newInstance(
+                                batteryTip, mFragment.getMetricsCategory());
                 dialogFragment.setTargetFragment(mFragment, REQUEST_ANOMALY_ACTION);
                 dialogFragment.show(mFragment.getFragmentManager(), TAG);
             } else {
-                final BatteryTipAction action = BatteryTipUtils.getActionForBatteryTip(batteryTip,
-                        mSettingsActivity, mFragment);
+                final BatteryTipAction action =
+                        BatteryTipUtils.getActionForBatteryTip(
+                                batteryTip, mSettingsActivity, mFragment);
                 if (action != null) {
                     action.handlePositiveAction(mFragment.getMetricsCategory());
                 }
@@ -183,13 +181,11 @@ public class BatteryTipPreferenceController extends BasePreferenceController {
         return visibleBatteryTip.orElse(null);
     }
 
-    /**
-     * Listener to give the control back to target fragment
-     */
+    /** Listener to give the control back to target fragment */
     public interface BatteryTipListener {
         /**
-         * This method is invoked once battery tip is handled, then target fragment could do
-         * extra work.
+         * This method is invoked once battery tip is handled, then target fragment could do extra
+         * work.
          *
          * @param batteryTip that has been handled
          */

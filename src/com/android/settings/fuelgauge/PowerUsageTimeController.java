@@ -36,12 +36,9 @@ public class PowerUsageTimeController extends BasePreferenceController {
     private static final String KEY_SCREEN_TIME_PREF = "battery_usage_screen_time";
     private static final String KEY_BACKGROUND_TIME_PREF = "battery_usage_background_time";
 
-    @VisibleForTesting
-    PreferenceCategory mPowerUsageTimeCategory;
-    @VisibleForTesting
-    PowerUsageTimePreference mScreenTimePreference;
-    @VisibleForTesting
-    PowerUsageTimePreference mBackgroundTimePreference;
+    @VisibleForTesting PreferenceCategory mPowerUsageTimeCategory;
+    @VisibleForTesting PowerUsageTimePreference mScreenTimePreference;
+    @VisibleForTesting PowerUsageTimePreference mBackgroundTimePreference;
 
     public PowerUsageTimeController(Context context) {
         super(context, KEY_POWER_USAGE_TIME);
@@ -61,22 +58,37 @@ public class PowerUsageTimeController extends BasePreferenceController {
         mPowerUsageTimeCategory.setVisible(false);
     }
 
-    void handleScreenTimeUpdated(final String slotTime,
-            final long screenOnTimeInMs, final long backgroundTimeInMs,
-            final String anomalyHintPrefKey, final String anomalyHintText) {
-        final boolean isShowScreenOnTime = showTimePreference(
-                mScreenTimePreference, R.string.power_usage_detail_screen_time,
-                screenOnTimeInMs, anomalyHintPrefKey, anomalyHintText);
-        final boolean isShowBackgroundTime = showTimePreference(
-                mBackgroundTimePreference, R.string.power_usage_detail_background_time,
-                backgroundTimeInMs, anomalyHintPrefKey, anomalyHintText);
+    void handleScreenTimeUpdated(
+            final String slotTime,
+            final long screenOnTimeInMs,
+            final long backgroundTimeInMs,
+            final String anomalyHintPrefKey,
+            final String anomalyHintText) {
+        final boolean isShowScreenOnTime =
+                showTimePreference(
+                        mScreenTimePreference,
+                        R.string.power_usage_detail_screen_time,
+                        screenOnTimeInMs,
+                        anomalyHintPrefKey,
+                        anomalyHintText);
+        final boolean isShowBackgroundTime =
+                showTimePreference(
+                        mBackgroundTimePreference,
+                        R.string.power_usage_detail_background_time,
+                        backgroundTimeInMs,
+                        anomalyHintPrefKey,
+                        anomalyHintText);
         if (isShowScreenOnTime || isShowBackgroundTime) {
             showCategoryTitle(slotTime);
         }
     }
 
-    boolean showTimePreference(PowerUsageTimePreference preference,
-            int titleResId, long summaryTimeMs, String anomalyHintKey, String anomalyHintText) {
+    boolean showTimePreference(
+            PowerUsageTimePreference preference,
+            int titleResId,
+            long summaryTimeMs,
+            String anomalyHintKey,
+            String anomalyHintText) {
         if (preference == null
                 || (summaryTimeMs == 0 && !TextUtils.equals(anomalyHintKey, preference.getKey()))) {
             return false;
@@ -94,15 +106,19 @@ public class PowerUsageTimeController extends BasePreferenceController {
         if (timeInMs < DateUtils.MINUTE_IN_MILLIS) {
             return mContext.getString(R.string.power_usage_time_less_than_one_minute);
         }
-        return formatElapsedTimeWithoutComma(mContext, (double) timeInMs,
-                /*withSeconds=*/ false, /*collapseTimeUnit=*/ false);
+        return formatElapsedTimeWithoutComma(
+                mContext,
+                (double) timeInMs,
+                /* withSeconds= */ false,
+                /* collapseTimeUnit= */ false);
     }
 
     @VisibleForTesting
     void showCategoryTitle(String slotTimestamp) {
-        mPowerUsageTimeCategory.setTitle(slotTimestamp == null
-                ? mContext.getString(R.string.battery_app_usage)
-                : mContext.getString(R.string.battery_app_usage_for, slotTimestamp));
+        mPowerUsageTimeCategory.setTitle(
+                slotTimestamp == null
+                        ? mContext.getString(R.string.battery_app_usage)
+                        : mContext.getString(R.string.battery_app_usage_for, slotTimestamp));
         mPowerUsageTimeCategory.setVisible(true);
     }
 }
