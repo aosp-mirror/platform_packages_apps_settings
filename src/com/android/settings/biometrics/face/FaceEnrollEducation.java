@@ -25,6 +25,8 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.hardware.face.FaceManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -32,6 +34,7 @@ import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ScrollView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -83,6 +86,23 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
                         showDefaultIllustration();
                         mIllustrationAccessibility.setVisibility(View.INVISIBLE);
                     }
+                }
+            };
+
+    final View.OnLayoutChangeListener mSwitchDiversityOnLayoutChangeListener =
+            (v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> {
+                if (oldBottom == 0 && bottom != 0) {
+                    new Handler(Looper.getMainLooper()).post(() -> {
+                        final ScrollView scrollView =
+                                findViewById(com.google.android.setupdesign.R.id.sud_scroll_view);
+                        if (scrollView != null) {
+                            scrollView.fullScroll(View.FOCUS_DOWN); // scroll down
+                        }
+                        if (mSwitchDiversity != null) {
+                            mSwitchDiversity.removeOnLayoutChangeListener(
+                                    this.mSwitchDiversityOnLayoutChangeListener);
+                        }
+                    });
                 }
             };
 
@@ -155,6 +175,7 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
             mSwitchDiversity.setChecked(true);
             accessibilityButton.setVisibility(View.GONE);
             mSwitchDiversity.setVisibility(View.VISIBLE);
+            mSwitchDiversity.addOnLayoutChangeListener(mSwitchDiversityOnLayoutChangeListener);
         });
 
         mSwitchDiversity = findViewById(R.id.toggle_diversity);
