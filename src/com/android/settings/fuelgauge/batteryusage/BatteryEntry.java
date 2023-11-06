@@ -33,6 +33,7 @@ import android.os.UidBatteryConsumer;
 import android.os.UserBatteryConsumer;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.util.ArrayMap;
 import android.util.DebugUtils;
 import android.util.Log;
 
@@ -41,7 +42,6 @@ import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settingslib.Utils;
 
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.Locale;
 
 /**
@@ -90,7 +90,7 @@ public class BatteryEntry {
                     BatteryConsumer.POWER_COMPONENT_ANY, BatteryConsumer.PROCESS_STATE_CACHED),
     };
 
-    static final HashMap<String, UidToDetail> sUidCache = new HashMap<>();
+    static final ArrayMap<String, UidToDetail> sUidCache = new ArrayMap<>();
 
     static Locale sCurrentLocale = null;
 

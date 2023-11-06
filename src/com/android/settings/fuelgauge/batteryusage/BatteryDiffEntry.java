@@ -23,6 +23,7 @@ import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.text.TextUtils;
+import android.util.ArrayMap;
 import android.util.Log;
 import android.util.Pair;
 
@@ -33,7 +34,6 @@ import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settingslib.utils.StringUtil;
 
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
@@ -43,14 +43,14 @@ public class BatteryDiffEntry {
 
     static Locale sCurrentLocale = null;
     // Caches app label and icon to improve loading performance.
-    static final Map<String, BatteryEntry.NameAndIcon> sResourceCache = new HashMap<>();
+    static final Map<String, BatteryEntry.NameAndIcon> sResourceCache = new ArrayMap<>();
 
     // Caches package name and uid to improve loading performance.
-    static final Map<String, Integer> sPackageNameAndUidCache = new HashMap<>();
+    static final Map<String, Integer> sPackageNameAndUidCache = new ArrayMap<>();
 
     // Whether a specific item is valid to launch restriction page?
     @VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
-    static final Map<String, Boolean> sValidForRestriction = new HashMap<>();
+    static final Map<String, Boolean> sValidForRestriction = new ArrayMap<>();
 
     /** A comparator for {@link BatteryDiffEntry} based on the sorting key. */
     static final Comparator<BatteryDiffEntry> COMPARATOR =
