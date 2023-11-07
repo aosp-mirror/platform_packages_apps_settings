@@ -69,10 +69,10 @@ public class BatteryOptimizeUtils {
                     | PackageManager.MATCH_DISABLED_UNTIL_USED_COMPONENTS;
 
     // Optimization modes.
-    static final int MODE_UNKNOWN = 0;
-    static final int MODE_RESTRICTED = 1;
-    static final int MODE_UNRESTRICTED = 2;
-    static final int MODE_OPTIMIZED = 3;
+    public static final int MODE_UNKNOWN = 0;
+    public static final int MODE_RESTRICTED = 1;
+    public static final int MODE_UNRESTRICTED = 2;
+    public static final int MODE_OPTIMIZED = 3;
 
     @IntDef(
             prefix = {"MODE_"},
