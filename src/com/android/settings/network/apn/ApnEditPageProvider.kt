@@ -38,7 +38,6 @@ import com.android.settings.R
 import com.android.settings.network.apn.ApnNetworkTypes.getNetworkTypeDisplayNames
 import com.android.settings.network.apn.ApnNetworkTypes.getNetworkTypeSelectedOptionsState
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
-import com.android.settingslib.spa.framework.compose.stateOf
 import com.android.settingslib.spa.widget.editor.SettingsExposedDropdownMenuBox
 import com.android.settingslib.spa.widget.editor.SettingsExposedDropdownMenuCheckBox
 import com.android.settingslib.spa.widget.editor.SettingsOutlinedTextField
@@ -186,10 +185,8 @@ fun ApnPage(apnDataInit: ApnData, apnDataCur: MutableState<ApnData>, uriInit: Ur
             SwitchPreference(
                 object : SwitchPreferenceModel {
                     override val title = context.resources.getString(R.string.carrier_enabled)
-                    override val changeable =
-                        stateOf(apnData.apnEnableEnabled)
-                    override val checked =
-                        stateOf(apnData.apnEnable)
+                    override val changeable = { apnData.apnEnableEnabled }
+                    override val checked = { apnData.apnEnable }
                     override val onCheckedChange = { newChecked: Boolean ->
                         apnData = apnData.copy(apnEnable = newChecked)
                     }

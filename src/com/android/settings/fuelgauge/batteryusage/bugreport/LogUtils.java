@@ -48,11 +48,8 @@ public final class LogUtils {
         DatabaseUtils.dump(context, writer);
         writer.flush();
         final BatteryStateDao dao =
-                BatteryStateDatabase
-                        .getInstance(context.getApplicationContext())
-                        .batteryStateDao();
-        final long timeOffset =
-                Clock.systemUTC().millis() - DUMP_TIME_OFFSET.toMillis();
+                BatteryStateDatabase.getInstance(context.getApplicationContext()).batteryStateDao();
+        final long timeOffset = Clock.systemUTC().millis() - DUMP_TIME_OFFSET.toMillis();
 
         // Gets all distinct timestamps.
         final List<Long> timestamps = dao.getDistinctTimestamps(timeOffset);
@@ -64,26 +61,27 @@ public final class LogUtils {
             return;
         }
         // Dumps all distinct timestamps.
-        timestamps.forEach(timestamp -> {
-            final String formattedTimestamp = ConvertUtils.utcToLocalTimeForLogging(timestamp);
-            writer.println("\t" + formattedTimestamp);
-            Log.w(TAG, "\t" + formattedTimestamp);
-        });
+        timestamps.forEach(
+                timestamp -> {
+                    final String formattedTimestamp =
+                            ConvertUtils.utcToLocalTimeForLogging(timestamp);
+                    writer.println("\t" + formattedTimestamp);
+                    Log.w(TAG, "\t" + formattedTimestamp);
+                });
         writer.flush();
 
-        final List<BatteryState> stateList = dao.getAllAfter(
-                Clock.systemUTC().millis() - DUMP_TIME_OFFSET_FOR_ENTRY.toMillis());
+        final List<BatteryState> stateList =
+                dao.getAllAfter(Clock.systemUTC().millis() - DUMP_TIME_OFFSET_FOR_ENTRY.toMillis());
         stateList.stream().forEach(state -> writer.println(state));
     }
 
     static void dumpAppUsageDatabaseHist(Context context, PrintWriter writer) {
         final AppUsageEventDao dao =
-                BatteryStateDatabase
-                        .getInstance(context.getApplicationContext())
+                BatteryStateDatabase.getInstance(context.getApplicationContext())
                         .appUsageEventDao();
         writer.println("\n\tApp DatabaseHistory:");
-        final List<AppUsageEventEntity> eventList = dao.getAllAfter(
-                Clock.systemUTC().millis() - DUMP_TIME_OFFSET_FOR_ENTRY.toMillis());
+        final List<AppUsageEventEntity> eventList =
+                dao.getAllAfter(Clock.systemUTC().millis() - DUMP_TIME_OFFSET_FOR_ENTRY.toMillis());
         eventList.stream().forEach(event -> writer.println(event));
         writer.flush();
     }

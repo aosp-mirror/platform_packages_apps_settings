@@ -24,10 +24,9 @@ import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.os.PowerExemptionManager
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.livedata.observeAsState
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settingslib.R
-import com.android.settingslib.spa.framework.compose.stateOf
+import com.android.settingslib.spa.livedata.observeAsCallback
 import com.android.settingslib.spaprivileged.model.app.AppRecord
 import com.android.settingslib.spaprivileged.model.app.IPackageManagers
 import com.android.settingslib.spaprivileged.model.app.PackageManagers
@@ -79,9 +78,10 @@ class AlarmsAndRemindersAppListModel(
     }
 
     @Composable
-    override fun isAllowed(record: AlarmsAndRemindersAppRecord) =
-        if (record.isTrumped) stateOf(true)
-        else record.controller.isAllowed.observeAsState()
+    override fun isAllowed(record: AlarmsAndRemindersAppRecord): () -> Boolean? = when {
+        record.isTrumped -> ({ true })
+        else -> record.controller.isAllowed.observeAsCallback()
+    }
 
     override fun isChangeable(record: AlarmsAndRemindersAppRecord) = record.isChangeable
 

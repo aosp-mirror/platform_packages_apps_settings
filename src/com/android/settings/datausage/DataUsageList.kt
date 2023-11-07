@@ -31,9 +31,10 @@ import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.datausage.lib.BillingCycleRepository
 import com.android.settings.datausage.lib.NetworkUsageData
-import com.android.settings.network.MobileDataEnabledListener
 import com.android.settings.network.MobileNetworkRepository
+import com.android.settings.network.mobileDataEnabledFlow
 import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity
+import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
 import com.android.settingslib.spaprivileged.framework.common.userManager
 import com.android.settingslib.utils.ThreadUtils
 import kotlin.jvm.optionals.getOrNull
@@ -43,10 +44,7 @@ import kotlin.jvm.optionals.getOrNull
  * to inspect based on usage cycle and control through [NetworkPolicy].
  */
 @OpenForTesting
-open class DataUsageList : DataUsageBaseFragment(), MobileDataEnabledListener.Client {
-    @VisibleForTesting
-    lateinit var dataStateListener: MobileDataEnabledListener
-
+open class DataUsageList : DataUsageBaseFragment() {
     @JvmField
     @VisibleForTesting
     var template: NetworkTemplate? = null
@@ -89,7 +87,6 @@ open class DataUsageList : DataUsageBaseFragment(), MobileDataEnabledListener.Cl
             return
         }
         updateSubscriptionInfoEntity()
-        dataStateListener = MobileDataEnabledListener(activity, this)
         dataUsageListAppsController = use(DataUsageListAppsController::class.java).apply {
             init(template)
         }
@@ -103,6 +100,9 @@ open class DataUsageList : DataUsageBaseFragment(), MobileDataEnabledListener.Cl
     override fun onViewCreated(v: View, savedInstanceState: Bundle?) {
         super.onViewCreated(v, savedInstanceState)
 
+        requireContext().mobileDataEnabledFlow(subId)
+            .collectLatestWithLifecycle(viewLifecycleOwner) { updatePolicy() }
+
         val template = template ?: return
         dataUsageListHeaderController = DataUsageListHeaderController(
             setPinnedHeaderView(R.layout.apps_filter_spinner),
@@ -112,17 +112,6 @@ open class DataUsageList : DataUsageBaseFragment(), MobileDataEnabledListener.Cl
             ::onCyclesLoad,
             ::updateSelectedCycle,
         )
-    }
-
-    override fun onResume() {
-        super.onResume()
-        dataStateListener.start(subId)
-        updatePolicy()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        dataStateListener.stop()
     }
 
     override fun getPreferenceScreenResId() = R.xml.data_usage_list
@@ -152,13 +141,6 @@ open class DataUsageList : DataUsageBaseFragment(), MobileDataEnabledListener.Cl
             subscriptionInfoEntity =
                 MobileNetworkRepository.getInstance(context).getSubInfoById(subId.toString())
         }
-    }
-
-    /**
-     * Implementation of `MobileDataEnabledListener.Client`
-     */
-    override fun onMobileDataEnabledChange() {
-        updatePolicy()
     }
 
     /** Update chart sweeps and cycle list to reflect [NetworkPolicy] for current [template]. */

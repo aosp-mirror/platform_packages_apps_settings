@@ -56,6 +56,9 @@ import java.util.List;
 })
 public class KeyboardSettingsPreferenceControllerTest {
 
+    private static final int VENDOR_ID = 123;
+    private static final int PRODUCT_ID = 456;
+
     @Rule
     public MockitoRule mMockitoRule = MockitoJUnit.rule();
 
@@ -88,7 +91,9 @@ public class KeyboardSettingsPreferenceControllerTest {
                         "TEST_DEVICE",
                         mInputDeviceIdentifier,
                         "TEST_DEVICE_LABEL",
-                        address);
+                        address,
+                        VENDOR_ID,
+                        PRODUCT_ID);
         List<HardKeyboardDeviceInfo> keyboards = new ArrayList<>();
         keyboards.add(deviceInfo);
         when(mController.getHardKeyboardList()).thenReturn(keyboards);

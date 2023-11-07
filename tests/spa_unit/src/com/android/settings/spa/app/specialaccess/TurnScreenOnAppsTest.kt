@@ -31,32 +31,12 @@ class TurnScreenOnAppsTest {
     private val listModel = TurnScreenOnAppsListModel(context)
 
     @Test
-    fun pageTitleResId() {
+    fun modelResourceIdAndProperties() {
         assertThat(listModel.pageTitleResId).isEqualTo(com.android.settingslib.R.string.turn_screen_on_title)
-    }
-
-    @Test
-    fun switchTitleResId() {
         assertThat(listModel.switchTitleResId).isEqualTo(com.android.settingslib.R.string.allow_turn_screen_on)
-    }
-
-    @Test
-    fun footerResId() {
         assertThat(listModel.footerResId).isEqualTo(com.android.settingslib.R.string.allow_turn_screen_on_description)
-    }
-
-    @Test
-    fun appOp() {
         assertThat(listModel.appOp).isEqualTo(AppOpsManager.OP_TURN_SCREEN_ON)
-    }
-
-    @Test
-    fun permission() {
         assertThat(listModel.permission).isEqualTo(Manifest.permission.TURN_SCREEN_ON)
-    }
-
-    @Test
-    fun setModeByUid() {
         assertThat(listModel.setModeByUid).isTrue()
     }
 }

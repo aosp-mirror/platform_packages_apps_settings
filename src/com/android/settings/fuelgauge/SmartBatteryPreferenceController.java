@@ -28,11 +28,9 @@ import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 
-/**
- * Controller to change and update the smart battery toggle
- */
-public class SmartBatteryPreferenceController extends BasePreferenceController implements
-        Preference.OnPreferenceChangeListener {
+/** Controller to change and update the smart battery toggle */
+public class SmartBatteryPreferenceController extends BasePreferenceController
+        implements Preference.OnPreferenceChangeListener {
 
     private static final String KEY_SMART_BATTERY = "smart_battery";
     private static final int ON = 1;
@@ -70,16 +68,22 @@ public class SmartBatteryPreferenceController extends BasePreferenceController i
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        final boolean smartBatteryOn = Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.ADAPTIVE_BATTERY_MANAGEMENT_ENABLED, ON) == ON;
+        final boolean smartBatteryOn =
+                Settings.Global.getInt(
+                                mContext.getContentResolver(),
+                                Settings.Global.ADAPTIVE_BATTERY_MANAGEMENT_ENABLED,
+                                ON)
+                        == ON;
         ((TwoStatePreference) preference).setChecked(smartBatteryOn);
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final boolean smartBatteryOn = (Boolean) newValue;
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.ADAPTIVE_BATTERY_MANAGEMENT_ENABLED, smartBatteryOn ? ON : OFF);
+        Settings.Global.putInt(
+                mContext.getContentResolver(),
+                Settings.Global.ADAPTIVE_BATTERY_MANAGEMENT_ENABLED,
+                smartBatteryOn ? ON : OFF);
         return true;
     }
 }

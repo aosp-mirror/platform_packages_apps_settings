@@ -63,13 +63,15 @@ public class BatteryActiveView extends View {
             return;
         }
         mPaint.setColor(color);
-        canvas.drawRect(start / period * getWidth(), 0, end / period * getWidth(), getHeight(),
-                mPaint);
+        canvas.drawRect(
+                start / period * getWidth(), 0, end / period * getWidth(), getHeight(), mPaint);
     }
 
     public interface BatteryActiveProvider {
         boolean hasData();
+
         long getPeriod();
+
         SparseIntArray getColorArray();
     }
 }

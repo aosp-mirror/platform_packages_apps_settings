@@ -53,8 +53,9 @@ public class AllowBackgroundPreferenceController extends AbstractPreferenceContr
     public void updateState(Preference preference) {
         preference.setEnabled(mBatteryOptimizeUtils.isOptimizeModeMutable());
 
-        final boolean isAllowBackground = mBatteryOptimizeUtils.getAppOptimizationMode()
-                != BatteryOptimizeUtils.MODE_RESTRICTED;
+        final boolean isAllowBackground =
+                mBatteryOptimizeUtils.getAppOptimizationMode()
+                        != BatteryOptimizeUtils.MODE_RESTRICTED;
         setChecked(preference, isAllowBackground);
     }
 

@@ -35,8 +35,7 @@ import java.util.concurrent.TimeUnit;
 public class AnomalyCleanupJobService extends JobService {
     private static final String TAG = "AnomalyCleanUpJobService";
 
-    @VisibleForTesting
-    static final long CLEAN_UP_FREQUENCY_MS = TimeUnit.DAYS.toMillis(1);
+    @VisibleForTesting static final long CLEAN_UP_FREQUENCY_MS = TimeUnit.DAYS.toMillis(1);
 
     public static void scheduleCleanUp(Context context) {
         final JobScheduler jobScheduler = context.getSystemService(JobScheduler.class);
@@ -52,23 +51,24 @@ public class AnomalyCleanupJobService extends JobService {
 
         // Don't schedule it if it already exists, to make sure it runs periodically even after
         // reboot
-        if (pending == null && jobScheduler.schedule(jobBuilder.build())
-                != JobScheduler.RESULT_SUCCESS) {
+        if (pending == null
+                && jobScheduler.schedule(jobBuilder.build()) != JobScheduler.RESULT_SUCCESS) {
             Log.i(TAG, "Anomaly clean up job service schedule failed.");
         }
     }
 
     @Override
     public boolean onStartJob(JobParameters params) {
-        final BatteryDatabaseManager batteryDatabaseManager = BatteryDatabaseManager
-                .getInstance(this);
+        final BatteryDatabaseManager batteryDatabaseManager =
+                BatteryDatabaseManager.getInstance(this);
         final BatteryTipPolicy policy = new BatteryTipPolicy(this);
-        ThreadUtils.postOnBackgroundThread(() -> {
-            batteryDatabaseManager.deleteAllAnomaliesBeforeTimeStamp(
-                    System.currentTimeMillis() - TimeUnit.DAYS.toMillis(
-                            policy.dataHistoryRetainDay));
-            jobFinished(params, false /* wantsReschedule */);
-        });
+        ThreadUtils.postOnBackgroundThread(
+                () -> {
+                    batteryDatabaseManager.deleteAllAnomaliesBeforeTimeStamp(
+                            System.currentTimeMillis()
+                                    - TimeUnit.DAYS.toMillis(policy.dataHistoryRetainDay));
+                    jobFinished(params, false /* wantsReschedule */);
+                });
 
         return true;
     }

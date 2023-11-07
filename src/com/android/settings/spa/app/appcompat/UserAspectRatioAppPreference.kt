@@ -63,18 +63,18 @@ class UserAspectRatioAppPresenter(
     }.flowOn(Dispatchers.IO)
 
     fun startActivity() =
-        navigateToAppAspectRatioSettings(context, app)
+        navigateToAppAspectRatioSettings(context, app, AppInfoSettingsProvider.METRICS_CATEGORY)
 
     val summaryFlow = flow {
         emit(manager.getUserMinAspectRatioEntry(app.packageName, context.userId))
     }.flowOn(Dispatchers.IO)
 }
 
-fun navigateToAppAspectRatioSettings(context: Context, app: ApplicationInfo) {
+fun navigateToAppAspectRatioSettings(context: Context, app: ApplicationInfo, metricsCategory: Int) {
     AppInfoDashboardFragment.startAppInfoFragment(
         UserAspectRatioDetails::class.java,
         app,
         context,
-        AppInfoSettingsProvider.METRICS_CATEGORY,
+        metricsCategory,
     )
 }

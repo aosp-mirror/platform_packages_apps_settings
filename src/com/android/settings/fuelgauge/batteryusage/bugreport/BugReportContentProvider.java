@@ -79,11 +79,7 @@ public final class BugReportContentProvider extends ContentProvider {
     }
 
     @Override
-    public int update(
-            Uri uri,
-            ContentValues values,
-            String selection,
-            String[] selectionArgs) {
+    public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
         throw new UnsupportedOperationException("unsupported!");
     }
 }

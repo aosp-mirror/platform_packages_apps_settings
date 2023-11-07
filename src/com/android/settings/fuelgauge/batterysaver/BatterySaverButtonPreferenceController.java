@@ -37,12 +37,9 @@ import com.android.settingslib.core.lifecycle.events.OnStop;
 import com.android.settingslib.fuelgauge.BatterySaverUtils;
 import com.android.settingslib.widget.MainSwitchPreference;
 
-/**
- * Controller to update the battery saver button
- */
-public class BatterySaverButtonPreferenceController extends
-        TogglePreferenceController implements LifecycleObserver, OnStart, OnStop,
-        BatterySaverReceiver.BatterySaverListener {
+/** Controller to update the battery saver button */
+public class BatterySaverButtonPreferenceController extends TogglePreferenceController
+        implements LifecycleObserver, OnStart, OnStop, BatterySaverReceiver.BatterySaverListener {
     private static final long SWITCH_ANIMATION_DURATION = 350L;
 
     private final BatterySaverReceiver mBatterySaverReceiver;
@@ -104,8 +101,8 @@ public class BatterySaverButtonPreferenceController extends
 
     @Override
     public boolean setChecked(boolean stateOn) {
-        return BatterySaverUtils.setPowerSaveMode(mContext, stateOn,
-                false /* needFirstTimeWarning */, SAVER_ENABLED_SETTINGS);
+        return BatterySaverUtils.setPowerSaveMode(
+                mContext, stateOn, false /* needFirstTimeWarning */, SAVER_ENABLED_SETTINGS);
     }
 
     @Override
@@ -115,8 +112,7 @@ public class BatterySaverButtonPreferenceController extends
 
     @Override
     public void onPowerSaveModeChanged() {
-        mHandler.postDelayed(() -> onPowerSaveModeChangedInternal(),
-                SWITCH_ANIMATION_DURATION);
+        mHandler.postDelayed(() -> onPowerSaveModeChangedInternal(), SWITCH_ANIMATION_DURATION);
     }
 
     private void onPowerSaveModeChangedInternal() {

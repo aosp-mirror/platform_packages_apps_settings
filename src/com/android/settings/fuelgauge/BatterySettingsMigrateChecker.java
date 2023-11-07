@@ -34,8 +34,7 @@ import java.util.List;
 public final class BatterySettingsMigrateChecker extends BroadcastReceiver {
     private static final String TAG = "BatterySettingsMigrateChecker";
 
-    @VisibleForTesting
-    static BatteryOptimizeUtils sBatteryOptimizeUtils = null;
+    @VisibleForTesting static BatteryOptimizeUtils sBatteryOptimizeUtils = null;
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -71,31 +70,38 @@ public final class BatterySettingsMigrateChecker extends BroadcastReceiver {
             Context context,
             @BatteryOptimizeUtils.OptimizationMode int optimizationMode,
             List<String> allowList) {
-        allowList.forEach(packageName -> {
-            final BatteryOptimizeUtils batteryOptimizeUtils =
-                    BatteryBackupHelper.newBatteryOptimizeUtils(context, packageName,
-                            /* testOptimizeUtils */ sBatteryOptimizeUtils);
-            if (batteryOptimizeUtils == null) {
-                return;
-            }
-            if (batteryOptimizeUtils.getAppOptimizationMode() != optimizationMode) {
-                Log.w(TAG, "Reset " + packageName + " battery mode into " + optimizationMode);
-                batteryOptimizeUtils.setAppUsageState(
-                        optimizationMode,
-                        BatteryOptimizeHistoricalLogEntry.Action.FORCE_RESET);
-            }
-        });
+        allowList.forEach(
+                packageName -> {
+                    final BatteryOptimizeUtils batteryOptimizeUtils =
+                            BatteryBackupHelper.newBatteryOptimizeUtils(
+                                    context,
+                                    packageName,
+                                    /* testOptimizeUtils */ sBatteryOptimizeUtils);
+                    if (batteryOptimizeUtils == null) {
+                        return;
+                    }
+                    if (batteryOptimizeUtils.getAppOptimizationMode() != optimizationMode) {
+                        Log.w(
+                                TAG,
+                                "Reset " + packageName + " battery mode into " + optimizationMode);
+                        batteryOptimizeUtils.setAppUsageState(
+                                optimizationMode,
+                                BatteryOptimizeHistoricalLogEntry.Action.FORCE_RESET);
+                    }
+                });
     }
 
     static void verifySaverConfiguration(Context context) {
         Log.d(TAG, "invoke verifySaverConfiguration()");
         final ContentResolver resolver = context.getContentResolver();
-        final int threshold = Settings.Global.getInt(resolver,
-                Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, 0);
+        final int threshold =
+                Settings.Global.getInt(resolver, Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, 0);
         // Force refine the invalid scheduled battery level.
         if (threshold < BatterySaverScheduleRadioButtonsController.TRIGGER_LEVEL_MIN
                 && threshold > 0) {
-            Settings.Global.putInt(resolver, Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL,
+            Settings.Global.putInt(
+                    resolver,
+                    Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL,
                     BatterySaverScheduleRadioButtonsController.TRIGGER_LEVEL_MIN);
             Log.w(TAG, "Reset invalid scheduled battery level from: " + threshold);
         }

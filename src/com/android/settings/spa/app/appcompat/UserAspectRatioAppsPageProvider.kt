@@ -16,6 +16,7 @@
 
 package com.android.settings.spa.app.appcompat
 
+import android.app.settings.SettingsEnums
 import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
@@ -155,7 +156,13 @@ class UserAspectRatioAppListModel(private val context: Context)
     override fun AppListItemModel<UserAspectRatioAppListItemModel>.AppItem() {
         val app = record.app
         AppListItem(
-            onClick = { navigateToAppAspectRatioSettings(context, app) }
+            onClick = {
+                navigateToAppAspectRatioSettings(
+                    context,
+                    app,
+                    SettingsEnums.USER_ASPECT_RATIO_APP_LIST_SETTINGS
+                )
+            }
         )
     }
 

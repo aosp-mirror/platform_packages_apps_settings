@@ -23,22 +23,23 @@ import com.android.settings.fuelgauge.batterytip.BatteryTipPolicy;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.LowBatteryTip;
 
-/**
- * Detect whether the battery is too low
- */
+/** Detect whether the battery is too low */
 public class LowBatteryDetector implements BatteryTipDetector {
     private final BatteryInfo mBatteryInfo;
     private final BatteryTipPolicy mPolicy;
     private final boolean mIsPowerSaveMode;
     private final int mWarningLevel;
 
-
-    public LowBatteryDetector(Context context, BatteryTipPolicy policy, BatteryInfo batteryInfo,
+    public LowBatteryDetector(
+            Context context,
+            BatteryTipPolicy policy,
+            BatteryInfo batteryInfo,
             boolean isPowerSaveMode) {
         mPolicy = policy;
         mBatteryInfo = batteryInfo;
-        mWarningLevel = context.getResources().getInteger(
-                com.android.internal.R.integer.config_lowBatteryWarningLevel);
+        mWarningLevel =
+                context.getResources()
+                        .getInteger(com.android.internal.R.integer.config_lowBatteryWarningLevel);
         mIsPowerSaveMode = isPowerSaveMode;
     }
 
