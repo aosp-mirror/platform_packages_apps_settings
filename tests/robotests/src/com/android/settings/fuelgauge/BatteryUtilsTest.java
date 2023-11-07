@@ -106,32 +106,22 @@ public class BatteryUtilsTest {
     private static final String INFO_EXCESSIVE = "anomaly_type=4,auto_restriction=false";
     private static final String INFO_WAKELOCK = "anomaly_type=1,auto_restriction=false";
 
-    @Mock
-    private BatteryStats.Uid mUid;
-    @Mock
-    private BatteryStats.Timer mTimer;
-    @Mock
-    private BatteryUsageStats mBatteryUsageStats;
-    @Mock
-    private BatteryConsumer mAggregateBatteryConsumer;
-    @Mock
-    private BatteryInfo mBatteryInfo;
-    @Mock
-    private PackageManager mPackageManager;
-    @Mock
-    private AppOpsManager mAppOpsManager;
-    @Mock
-    private ApplicationInfo mApplicationInfo;
+    @Mock private BatteryStats.Uid mUid;
+    @Mock private BatteryStats.Timer mTimer;
+    @Mock private BatteryUsageStats mBatteryUsageStats;
+    @Mock private BatteryConsumer mAggregateBatteryConsumer;
+    @Mock private BatteryInfo mBatteryInfo;
+    @Mock private PackageManager mPackageManager;
+    @Mock private AppOpsManager mAppOpsManager;
+    @Mock private ApplicationInfo mApplicationInfo;
+
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private BatteryStatsManager mBatteryStatsManager;
-    @Mock
-    private ApplicationInfo mHighApplicationInfo;
-    @Mock
-    private ApplicationInfo mLowApplicationInfo;
-    @Mock
-    private PowerAllowlistBackend mPowerAllowlistBackend;
-    @Mock
-    private BatteryDatabaseManager mBatteryDatabaseManager;
+
+    @Mock private ApplicationInfo mHighApplicationInfo;
+    @Mock private ApplicationInfo mLowApplicationInfo;
+    @Mock private PowerAllowlistBackend mPowerAllowlistBackend;
+    @Mock private BatteryDatabaseManager mBatteryDatabaseManager;
     private AnomalyInfo mAnomalyInfo;
     private BatteryUtils mBatteryUtils;
     private FakeFeatureFactory mFeatureFactory;
@@ -145,16 +135,21 @@ public class BatteryUtilsTest {
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mProvider = mFeatureFactory.powerUsageFeatureProvider;
 
-        doReturn(TIME_STATE_TOP).when(mUid).getProcessStateTime(eq(PROCESS_STATE_TOP), anyLong(),
-                anyInt());
-        doReturn(TIME_STATE_FOREGROUND_SERVICE).when(mUid).getProcessStateTime(
-                eq(PROCESS_STATE_FOREGROUND_SERVICE), anyLong(), anyInt());
-        doReturn(TIME_STATE_TOP_SLEEPING).when(mUid).getProcessStateTime(
-                eq(PROCESS_STATE_TOP_SLEEPING), anyLong(), anyInt());
-        doReturn(TIME_STATE_FOREGROUND).when(mUid).getProcessStateTime(eq(PROCESS_STATE_FOREGROUND),
-                anyLong(), anyInt());
-        doReturn(TIME_STATE_BACKGROUND).when(mUid).getProcessStateTime(eq(PROCESS_STATE_BACKGROUND),
-                anyLong(), anyInt());
+        doReturn(TIME_STATE_TOP)
+                .when(mUid)
+                .getProcessStateTime(eq(PROCESS_STATE_TOP), anyLong(), anyInt());
+        doReturn(TIME_STATE_FOREGROUND_SERVICE)
+                .when(mUid)
+                .getProcessStateTime(eq(PROCESS_STATE_FOREGROUND_SERVICE), anyLong(), anyInt());
+        doReturn(TIME_STATE_TOP_SLEEPING)
+                .when(mUid)
+                .getProcessStateTime(eq(PROCESS_STATE_TOP_SLEEPING), anyLong(), anyInt());
+        doReturn(TIME_STATE_FOREGROUND)
+                .when(mUid)
+                .getProcessStateTime(eq(PROCESS_STATE_FOREGROUND), anyLong(), anyInt());
+        doReturn(TIME_STATE_BACKGROUND)
+                .when(mUid)
+                .getProcessStateTime(eq(PROCESS_STATE_BACKGROUND), anyLong(), anyInt());
 
         when(mPackageManager.getApplicationInfo(eq(HIGH_SDK_PACKAGE), anyInt()))
                 .thenReturn(mHighApplicationInfo);
@@ -166,12 +161,14 @@ public class BatteryUtilsTest {
         mContext = spy(RuntimeEnvironment.application);
         doReturn(mPackageManager).when(mContext).getPackageManager();
         doReturn(mAppOpsManager).when(mContext).getSystemService(Context.APP_OPS_SERVICE);
-        doReturn(mBatteryStatsManager).when(mContext)
+        doReturn(mBatteryStatsManager)
+                .when(mContext)
                 .getSystemService(Context.BATTERY_STATS_SERVICE);
         mBatteryUtils = spy(new BatteryUtils(mContext));
         mBatteryUtils.mPowerUsageFeatureProvider = mProvider;
-        doReturn(0L).when(mBatteryUtils)
-            .getForegroundServiceTotalTimeUs(any(BatteryStats.Uid.class), anyLong());
+        doReturn(0L)
+                .when(mBatteryUtils)
+                .getForegroundServiceTotalTimeUs(any(BatteryStats.Uid.class), anyLong());
         mAnomalyInfo = new AnomalyInfo(INFO_WAKELOCK);
 
         BatteryDatabaseManager.setUpForTest(mBatteryDatabaseManager);
@@ -180,54 +177,62 @@ public class BatteryUtilsTest {
 
     @Test
     public void testGetProcessTimeMs_typeForeground_timeCorrect() {
-        doReturn(TIME_STATE_FOREGROUND + 500).when(mBatteryUtils)
-            .getForegroundActivityTotalTimeUs(eq(mUid), anyLong());
+        doReturn(TIME_STATE_FOREGROUND + 500)
+                .when(mBatteryUtils)
+                .getForegroundActivityTotalTimeUs(eq(mUid), anyLong());
 
-        final long time = mBatteryUtils.getProcessTimeMs(BatteryUtils.StatusType.FOREGROUND, mUid,
-                BatteryStats.STATS_SINCE_CHARGED);
+        final long time =
+                mBatteryUtils.getProcessTimeMs(
+                        BatteryUtils.StatusType.FOREGROUND, mUid, BatteryStats.STATS_SINCE_CHARGED);
 
         assertThat(time).isEqualTo(TIME_EXPECTED_FOREGROUND);
     }
 
     @Test
     public void testGetProcessTimeMs_typeBackground_timeCorrect() {
-        final long time = mBatteryUtils.getProcessTimeMs(BatteryUtils.StatusType.BACKGROUND, mUid,
-                BatteryStats.STATS_SINCE_CHARGED);
+        final long time =
+                mBatteryUtils.getProcessTimeMs(
+                        BatteryUtils.StatusType.BACKGROUND, mUid, BatteryStats.STATS_SINCE_CHARGED);
 
         assertThat(time).isEqualTo(TIME_EXPECTED_BACKGROUND);
     }
 
     @Test
     public void testGetProcessTimeMs_typeAll_timeCorrect() {
-        doReturn(TIME_STATE_FOREGROUND + 500).when(mBatteryUtils)
-            .getForegroundActivityTotalTimeUs(eq(mUid), anyLong());
+        doReturn(TIME_STATE_FOREGROUND + 500)
+                .when(mBatteryUtils)
+                .getForegroundActivityTotalTimeUs(eq(mUid), anyLong());
 
-        final long time = mBatteryUtils.getProcessTimeMs(BatteryUtils.StatusType.ALL, mUid,
-                BatteryStats.STATS_SINCE_CHARGED);
+        final long time =
+                mBatteryUtils.getProcessTimeMs(
+                        BatteryUtils.StatusType.ALL, mUid, BatteryStats.STATS_SINCE_CHARGED);
 
         assertThat(time).isEqualTo(TIME_EXPECTED_ALL);
     }
 
     @Test
     public void testGetProcessTimeMs_uidNull_returnZero() {
-        final long time = mBatteryUtils.getProcessTimeMs(BatteryUtils.StatusType.ALL, null,
-                BatteryStats.STATS_SINCE_CHARGED);
+        final long time =
+                mBatteryUtils.getProcessTimeMs(
+                        BatteryUtils.StatusType.ALL, null, BatteryStats.STATS_SINCE_CHARGED);
 
         assertThat(time).isEqualTo(0);
     }
 
     @Test
     public void testCalculateBatteryPercent() {
-        assertThat(mBatteryUtils.calculateBatteryPercent(BATTERY_SYSTEM_USAGE, TOTAL_BATTERY_USAGE,
-                DISCHARGE_AMOUNT))
-                .isWithin(PRECISION).of(PERCENT_SYSTEM_USAGE);
+        assertThat(
+                        mBatteryUtils.calculateBatteryPercent(
+                                BATTERY_SYSTEM_USAGE, TOTAL_BATTERY_USAGE, DISCHARGE_AMOUNT))
+                .isWithin(PRECISION)
+                .of(PERCENT_SYSTEM_USAGE);
     }
 
     @Test
     public void testCalculateLastFullChargeTime() {
         final long currentTimeMs = System.currentTimeMillis();
-        when(mBatteryUsageStats.getStatsStartTimestamp()).thenReturn(
-                currentTimeMs - TIME_SINCE_LAST_FULL_CHARGE_MS);
+        when(mBatteryUsageStats.getStatsStartTimestamp())
+                .thenReturn(currentTimeMs - TIME_SINCE_LAST_FULL_CHARGE_MS);
 
         assertThat(mBatteryUtils.calculateLastFullChargeTime(mBatteryUsageStats, currentTimeMs))
                 .isEqualTo(TIME_SINCE_LAST_FULL_CHARGE_MS);
@@ -237,49 +242,54 @@ public class BatteryUtilsTest {
     public void testGetForegroundActivityTotalTimeMs_returnMilliseconds() {
         final long rawRealtimeUs = SystemClock.elapsedRealtime() * 1000;
         doReturn(mTimer).when(mUid).getForegroundActivityTimer();
-        doReturn(TIME_SINCE_LAST_FULL_CHARGE_US).when(mTimer)
+        doReturn(TIME_SINCE_LAST_FULL_CHARGE_US)
+                .when(mTimer)
                 .getTotalTimeLocked(rawRealtimeUs, BatteryStats.STATS_SINCE_CHARGED);
 
-        assertThat(mBatteryUtils.getForegroundActivityTotalTimeUs(mUid, rawRealtimeUs)).isEqualTo(
-                TIME_SINCE_LAST_FULL_CHARGE_US);
+        assertThat(mBatteryUtils.getForegroundActivityTotalTimeUs(mUid, rawRealtimeUs))
+                .isEqualTo(TIME_SINCE_LAST_FULL_CHARGE_US);
     }
 
     @Test
-    public void testGetTargetSdkVersion_packageExist_returnSdk() throws
-            PackageManager.NameNotFoundException {
-        doReturn(mApplicationInfo).when(mPackageManager).getApplicationInfo(PACKAGE_NAME,
-                PackageManager.GET_META_DATA);
+    public void testGetTargetSdkVersion_packageExist_returnSdk()
+            throws PackageManager.NameNotFoundException {
+        doReturn(mApplicationInfo)
+                .when(mPackageManager)
+                .getApplicationInfo(PACKAGE_NAME, PackageManager.GET_META_DATA);
         mApplicationInfo.targetSdkVersion = SDK_VERSION;
 
         assertThat(mBatteryUtils.getTargetSdkVersion(PACKAGE_NAME)).isEqualTo(SDK_VERSION);
     }
 
     @Test
-    public void testGetTargetSdkVersion_packageNotExist_returnSdkNull() throws
-            PackageManager.NameNotFoundException {
-        doThrow(new PackageManager.NameNotFoundException()).when(
-                mPackageManager).getApplicationInfo(PACKAGE_NAME, PackageManager.GET_META_DATA);
+    public void testGetTargetSdkVersion_packageNotExist_returnSdkNull()
+            throws PackageManager.NameNotFoundException {
+        doThrow(new PackageManager.NameNotFoundException())
+                .when(mPackageManager)
+                .getApplicationInfo(PACKAGE_NAME, PackageManager.GET_META_DATA);
 
-        assertThat(mBatteryUtils.getTargetSdkVersion(PACKAGE_NAME)).isEqualTo(
-                BatteryUtils.SDK_NULL);
+        assertThat(mBatteryUtils.getTargetSdkVersion(PACKAGE_NAME))
+                .isEqualTo(BatteryUtils.SDK_NULL);
     }
 
     @Test
     public void testBackgroundRestrictionOn_restrictionOn_returnTrue() {
-        doReturn(AppOpsManager.MODE_IGNORED).when(mAppOpsManager).checkOpNoThrow(
-                AppOpsManager.OP_RUN_IN_BACKGROUND, UID, PACKAGE_NAME);
+        doReturn(AppOpsManager.MODE_IGNORED)
+                .when(mAppOpsManager)
+                .checkOpNoThrow(AppOpsManager.OP_RUN_IN_BACKGROUND, UID, PACKAGE_NAME);
 
-        assertThat(mBatteryUtils.isBackgroundRestrictionEnabled(SDK_VERSION, UID,
-                PACKAGE_NAME)).isTrue();
+        assertThat(mBatteryUtils.isBackgroundRestrictionEnabled(SDK_VERSION, UID, PACKAGE_NAME))
+                .isTrue();
     }
 
     @Test
     public void testBackgroundRestrictionOn_restrictionOff_returnFalse() {
-        doReturn(AppOpsManager.MODE_ALLOWED).when(mAppOpsManager).checkOpNoThrow(
-                AppOpsManager.OP_RUN_IN_BACKGROUND, UID, PACKAGE_NAME);
+        doReturn(AppOpsManager.MODE_ALLOWED)
+                .when(mAppOpsManager)
+                .checkOpNoThrow(AppOpsManager.OP_RUN_IN_BACKGROUND, UID, PACKAGE_NAME);
 
         assertThat(mBatteryUtils.isBackgroundRestrictionEnabled(SDK_VERSION, UID, PACKAGE_NAME))
-            .isFalse();
+                .isFalse();
     }
 
     @Test
@@ -294,13 +304,13 @@ public class BatteryUtilsTest {
 
     @Test
     public void testIsPreOApp_containPreOApp_ReturnTrue() {
-        assertThat(
-                mBatteryUtils.isPreOApp(new String[]{HIGH_SDK_PACKAGE, LOW_SDK_PACKAGE})).isTrue();
+        assertThat(mBatteryUtils.isPreOApp(new String[] {HIGH_SDK_PACKAGE, LOW_SDK_PACKAGE}))
+                .isTrue();
     }
 
     @Test
     public void testIsPreOApp_emptyList_ReturnFalse() {
-        assertThat(mBatteryUtils.isPreOApp(new String[]{})).isFalse();
+        assertThat(mBatteryUtils.isPreOApp(new String[] {})).isFalse();
     }
 
     @Ignore
@@ -309,10 +319,18 @@ public class BatteryUtilsTest {
         mBatteryUtils.setForceAppStandby(UID, LOW_SDK_PACKAGE, AppOpsManager.MODE_IGNORED);
 
         // Restrict both OP_RUN_IN_BACKGROUND and OP_RUN_ANY_IN_BACKGROUND
-        verify(mAppOpsManager).setMode(AppOpsManager.OP_RUN_IN_BACKGROUND, UID, LOW_SDK_PACKAGE,
-                AppOpsManager.MODE_IGNORED);
-        verify(mAppOpsManager).setMode(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, UID, LOW_SDK_PACKAGE,
-                AppOpsManager.MODE_IGNORED);
+        verify(mAppOpsManager)
+                .setMode(
+                        AppOpsManager.OP_RUN_IN_BACKGROUND,
+                        UID,
+                        LOW_SDK_PACKAGE,
+                        AppOpsManager.MODE_IGNORED);
+        verify(mAppOpsManager)
+                .setMode(
+                        AppOpsManager.OP_RUN_ANY_IN_BACKGROUND,
+                        UID,
+                        LOW_SDK_PACKAGE,
+                        AppOpsManager.MODE_IGNORED);
     }
 
     @Ignore
@@ -321,42 +339,53 @@ public class BatteryUtilsTest {
         mBatteryUtils.setForceAppStandby(UID, HIGH_SDK_PACKAGE, AppOpsManager.MODE_IGNORED);
 
         // Don't restrict OP_RUN_IN_BACKGROUND because it is already been restricted for O app
-        verify(mAppOpsManager, never()).setMode(AppOpsManager.OP_RUN_IN_BACKGROUND, UID,
-                HIGH_SDK_PACKAGE, AppOpsManager.MODE_IGNORED);
+        verify(mAppOpsManager, never())
+                .setMode(
+                        AppOpsManager.OP_RUN_IN_BACKGROUND,
+                        UID,
+                        HIGH_SDK_PACKAGE,
+                        AppOpsManager.MODE_IGNORED);
         // Restrict OP_RUN_ANY_IN_BACKGROUND
-        verify(mAppOpsManager).setMode(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, UID,
-                HIGH_SDK_PACKAGE, AppOpsManager.MODE_IGNORED);
+        verify(mAppOpsManager)
+                .setMode(
+                        AppOpsManager.OP_RUN_ANY_IN_BACKGROUND,
+                        UID,
+                        HIGH_SDK_PACKAGE,
+                        AppOpsManager.MODE_IGNORED);
     }
 
     @Test
     public void testSetForceAppStandby_restrictApp_recordTime() {
         mBatteryUtils.setForceAppStandby(UID, HIGH_SDK_PACKAGE, AppOpsManager.MODE_IGNORED);
 
-        verify(mBatteryDatabaseManager).insertAction(
-                eq(AnomalyDatabaseHelper.ActionType.RESTRICTION), eq(UID),
-                eq(HIGH_SDK_PACKAGE), anyLong());
+        verify(mBatteryDatabaseManager)
+                .insertAction(
+                        eq(AnomalyDatabaseHelper.ActionType.RESTRICTION), eq(UID),
+                        eq(HIGH_SDK_PACKAGE), anyLong());
     }
 
     @Test
     public void testSetForceAppStandby_unrestrictApp_deleteTime() {
         mBatteryUtils.setForceAppStandby(UID, HIGH_SDK_PACKAGE, AppOpsManager.MODE_ALLOWED);
 
-        verify(mBatteryDatabaseManager).deleteAction(AnomalyDatabaseHelper.ActionType.RESTRICTION,
-                UID, HIGH_SDK_PACKAGE);
+        verify(mBatteryDatabaseManager)
+                .deleteAction(AnomalyDatabaseHelper.ActionType.RESTRICTION, UID, HIGH_SDK_PACKAGE);
     }
 
     @Test
     public void testIsForceAppStandbyEnabled_enabled_returnTrue() {
-        when(mAppOpsManager.checkOpNoThrow(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, UID,
-                PACKAGE_NAME)).thenReturn(AppOpsManager.MODE_IGNORED);
+        when(mAppOpsManager.checkOpNoThrow(
+                        AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, UID, PACKAGE_NAME))
+                .thenReturn(AppOpsManager.MODE_IGNORED);
 
         assertThat(mBatteryUtils.isForceAppStandbyEnabled(UID, PACKAGE_NAME)).isTrue();
     }
 
     @Test
     public void testIsForceAppStandbyEnabled_disabled_returnFalse() {
-        when(mAppOpsManager.checkOpNoThrow(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, UID,
-                PACKAGE_NAME)).thenReturn(AppOpsManager.MODE_ALLOWED);
+        when(mAppOpsManager.checkOpNoThrow(
+                        AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, UID, PACKAGE_NAME))
+                .thenReturn(AppOpsManager.MODE_ALLOWED);
 
         assertThat(mBatteryUtils.isForceAppStandbyEnabled(UID, PACKAGE_NAME)).isFalse();
     }
@@ -369,77 +398,85 @@ public class BatteryUtilsTest {
         resolveInfo.activityInfo.packageName = HIGH_SDK_PACKAGE;
 
         doReturn(resolveInfos).when(mPackageManager).queryIntentActivities(any(), anyInt());
-        doReturn(new String[]{HIGH_SDK_PACKAGE}).when(mPackageManager).getPackagesForUid(UID);
+        doReturn(new String[] {HIGH_SDK_PACKAGE}).when(mPackageManager).getPackagesForUid(UID);
         mHighApplicationInfo.flags = ApplicationInfo.FLAG_SYSTEM;
 
-        assertThat(mBatteryUtils.shouldHideAnomaly(mPowerAllowlistBackend, UID,
-                mAnomalyInfo)).isTrue();
+        assertThat(mBatteryUtils.shouldHideAnomaly(mPowerAllowlistBackend, UID, mAnomalyInfo))
+                .isTrue();
     }
 
     @Test
     public void testShouldHideAnomaly_systemAppWithoutLauncher_returnTrue() {
         doReturn(new ArrayList<>()).when(mPackageManager).queryIntentActivities(any(), anyInt());
-        doReturn(new String[]{HIGH_SDK_PACKAGE}).when(mPackageManager).getPackagesForUid(UID);
+        doReturn(new String[] {HIGH_SDK_PACKAGE}).when(mPackageManager).getPackagesForUid(UID);
         mHighApplicationInfo.flags = ApplicationInfo.FLAG_SYSTEM;
 
-        assertThat(mBatteryUtils.shouldHideAnomaly(mPowerAllowlistBackend, UID,
-                mAnomalyInfo)).isTrue();
+        assertThat(mBatteryUtils.shouldHideAnomaly(mPowerAllowlistBackend, UID, mAnomalyInfo))
+                .isTrue();
     }
 
     @Test
     public void testShouldHideAnomaly_systemUid_returnTrue() {
         final int systemUid = Process.ROOT_UID;
-        doReturn(new String[]{HIGH_SDK_PACKAGE}).when(mPackageManager).getPackagesForUid(systemUid);
+        doReturn(new String[] {HIGH_SDK_PACKAGE})
+                .when(mPackageManager)
+                .getPackagesForUid(systemUid);
 
-        assertThat(mBatteryUtils.shouldHideAnomaly(mPowerAllowlistBackend, systemUid,
-                mAnomalyInfo)).isTrue();
+        assertThat(mBatteryUtils.shouldHideAnomaly(mPowerAllowlistBackend, systemUid, mAnomalyInfo))
+                .isTrue();
     }
 
     @Test
     public void testShouldHideAnomaly_AppInDozeList_returnTrue() {
-        doReturn(new String[]{HIGH_SDK_PACKAGE}).when(mPackageManager).getPackagesForUid(UID);
-        doReturn(true).when(mPowerAllowlistBackend)
-                .isAllowlisted(new String[]{HIGH_SDK_PACKAGE}, UID);
+        doReturn(new String[] {HIGH_SDK_PACKAGE}).when(mPackageManager).getPackagesForUid(UID);
+        doReturn(true)
+                .when(mPowerAllowlistBackend)
+                .isAllowlisted(new String[] {HIGH_SDK_PACKAGE}, UID);
 
-        assertThat(mBatteryUtils.shouldHideAnomaly(mPowerAllowlistBackend, UID,
-                mAnomalyInfo)).isTrue();
+        assertThat(mBatteryUtils.shouldHideAnomaly(mPowerAllowlistBackend, UID, mAnomalyInfo))
+                .isTrue();
     }
 
     @Test
     public void testShouldHideAnomaly_normalApp_returnFalse() {
-        doReturn(new String[]{HIGH_SDK_PACKAGE}).when(mPackageManager).getPackagesForUid(UID);
+        doReturn(new String[] {HIGH_SDK_PACKAGE}).when(mPackageManager).getPackagesForUid(UID);
 
-        assertThat(mBatteryUtils.shouldHideAnomaly(mPowerAllowlistBackend, UID,
-                mAnomalyInfo)).isFalse();
+        assertThat(mBatteryUtils.shouldHideAnomaly(mPowerAllowlistBackend, UID, mAnomalyInfo))
+                .isFalse();
     }
 
     @Test
     public void testShouldHideAnomaly_excessivePriorOApp_returnFalse() {
-        doReturn(new String[]{LOW_SDK_PACKAGE}).when(mPackageManager).getPackagesForUid(UID);
+        doReturn(new String[] {LOW_SDK_PACKAGE}).when(mPackageManager).getPackagesForUid(UID);
         mAnomalyInfo = new AnomalyInfo(INFO_EXCESSIVE);
 
-        assertThat(mBatteryUtils.shouldHideAnomaly(mPowerAllowlistBackend, UID,
-                mAnomalyInfo)).isFalse();
+        assertThat(mBatteryUtils.shouldHideAnomaly(mPowerAllowlistBackend, UID, mAnomalyInfo))
+                .isFalse();
     }
 
     @Test
     public void testShouldHideAnomaly_excessiveOApp_returnTrue() {
-        doReturn(new String[]{HIGH_SDK_PACKAGE}).when(mPackageManager).getPackagesForUid(UID);
+        doReturn(new String[] {HIGH_SDK_PACKAGE}).when(mPackageManager).getPackagesForUid(UID);
         mAnomalyInfo = new AnomalyInfo(INFO_EXCESSIVE);
 
-        assertThat(mBatteryUtils.shouldHideAnomaly(mPowerAllowlistBackend, UID,
-                mAnomalyInfo)).isTrue();
+        assertThat(mBatteryUtils.shouldHideAnomaly(mPowerAllowlistBackend, UID, mAnomalyInfo))
+                .isTrue();
     }
 
     @Test
     public void clearForceAppStandby_appRestricted_clearAndReturnTrue() {
         when(mBatteryUtils.getPackageUid(HIGH_SDK_PACKAGE)).thenReturn(UID);
-        when(mAppOpsManager.checkOpNoThrow(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, UID,
-                HIGH_SDK_PACKAGE)).thenReturn(AppOpsManager.MODE_IGNORED);
+        when(mAppOpsManager.checkOpNoThrow(
+                        AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, UID, HIGH_SDK_PACKAGE))
+                .thenReturn(AppOpsManager.MODE_IGNORED);
 
         assertThat(mBatteryUtils.clearForceAppStandby(HIGH_SDK_PACKAGE)).isTrue();
-        verify(mAppOpsManager).setMode(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, UID,
-                HIGH_SDK_PACKAGE, AppOpsManager.MODE_ALLOWED);
+        verify(mAppOpsManager)
+                .setMode(
+                        AppOpsManager.OP_RUN_ANY_IN_BACKGROUND,
+                        UID,
+                        HIGH_SDK_PACKAGE,
+                        AppOpsManager.MODE_ALLOWED);
     }
 
     @Test
@@ -447,29 +484,38 @@ public class BatteryUtilsTest {
         when(mBatteryUtils.getPackageUid(PACKAGE_NAME)).thenReturn(BatteryUtils.UID_NULL);
 
         assertThat(mBatteryUtils.clearForceAppStandby(PACKAGE_NAME)).isFalse();
-        verify(mAppOpsManager, never()).setMode(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, UID,
-                PACKAGE_NAME, AppOpsManager.MODE_ALLOWED);
+        verify(mAppOpsManager, never())
+                .setMode(
+                        AppOpsManager.OP_RUN_ANY_IN_BACKGROUND,
+                        UID,
+                        PACKAGE_NAME,
+                        AppOpsManager.MODE_ALLOWED);
     }
 
     @Test
     public void clearForceAppStandby_appUnrestricted_returnFalse() {
         when(mBatteryUtils.getPackageUid(PACKAGE_NAME)).thenReturn(UID);
-        when(mAppOpsManager.checkOpNoThrow(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, UID,
-                PACKAGE_NAME)).thenReturn(AppOpsManager.MODE_ALLOWED);
+        when(mAppOpsManager.checkOpNoThrow(
+                        AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, UID, PACKAGE_NAME))
+                .thenReturn(AppOpsManager.MODE_ALLOWED);
 
         assertThat(mBatteryUtils.clearForceAppStandby(PACKAGE_NAME)).isFalse();
-        verify(mAppOpsManager, never()).setMode(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, UID,
-                PACKAGE_NAME, AppOpsManager.MODE_ALLOWED);
+        verify(mAppOpsManager, never())
+                .setMode(
+                        AppOpsManager.OP_RUN_ANY_IN_BACKGROUND,
+                        UID,
+                        PACKAGE_NAME,
+                        AppOpsManager.MODE_ALLOWED);
     }
 
     @Test
     public void getBatteryInfo_providerNull_shouldNotCrash() {
         when(mProvider.isEnhancedBatteryPredictionEnabled(mContext)).thenReturn(true);
         when(mProvider.getEnhancedBatteryPrediction(mContext)).thenReturn(null);
-        when(mContext.registerReceiver(nullable(BroadcastReceiver.class),
-                any(IntentFilter.class))).thenReturn(new Intent());
+        when(mContext.registerReceiver(nullable(BroadcastReceiver.class), any(IntentFilter.class)))
+                .thenReturn(new Intent());
 
-        //Should not crash
+        // Should not crash
         assertThat(mBatteryUtils.getBatteryInfo(TAG)).isNotNull();
     }
 

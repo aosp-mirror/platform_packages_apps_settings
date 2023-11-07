@@ -88,8 +88,8 @@ public class AllowBackgroundPreferenceControllerTest {
     public void testUpdateState_isSystemOrDefaultAppAndRestrictedStates_prefChecked() {
         when(mBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()).thenReturn(false);
         when(mBatteryOptimizeUtils.isSystemOrDefaultApp()).thenReturn(true);
-        when(mBatteryOptimizeUtils.getAppOptimizationMode()).thenReturn(
-                BatteryOptimizeUtils.MODE_RESTRICTED);
+        when(mBatteryOptimizeUtils.getAppOptimizationMode())
+                .thenReturn(BatteryOptimizeUtils.MODE_RESTRICTED);
 
         mController.updateState(mMainSwitchPreference);
 
@@ -101,8 +101,8 @@ public class AllowBackgroundPreferenceControllerTest {
     public void testUpdateState_isSystemOrDefaultApp_prefUnchecked() {
         when(mBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()).thenReturn(false);
         when(mBatteryOptimizeUtils.isSystemOrDefaultApp()).thenReturn(true);
-        when(mBatteryOptimizeUtils.getAppOptimizationMode()).thenReturn(
-                BatteryOptimizeUtils.MODE_OPTIMIZED);
+        when(mBatteryOptimizeUtils.getAppOptimizationMode())
+                .thenReturn(BatteryOptimizeUtils.MODE_OPTIMIZED);
 
         mController.updateState(mMainSwitchPreference);
 
@@ -113,8 +113,8 @@ public class AllowBackgroundPreferenceControllerTest {
     @Test
     public void testUpdateState_isRestrictedStates_prefChecked() {
         when(mBatteryOptimizeUtils.isOptimizeModeMutable()).thenReturn(true);
-        when(mBatteryOptimizeUtils.getAppOptimizationMode()).thenReturn(
-                BatteryOptimizeUtils.MODE_RESTRICTED);
+        when(mBatteryOptimizeUtils.getAppOptimizationMode())
+                .thenReturn(BatteryOptimizeUtils.MODE_RESTRICTED);
 
         mController.updateState(mMainSwitchPreference);
 
@@ -125,8 +125,8 @@ public class AllowBackgroundPreferenceControllerTest {
     @Test
     public void testUpdateState_prefUnchecked() {
         when(mBatteryOptimizeUtils.isOptimizeModeMutable()).thenReturn(true);
-        when(mBatteryOptimizeUtils.getAppOptimizationMode()).thenReturn(
-                BatteryOptimizeUtils.MODE_OPTIMIZED);
+        when(mBatteryOptimizeUtils.getAppOptimizationMode())
+                .thenReturn(BatteryOptimizeUtils.MODE_OPTIMIZED);
 
         mController.updateState(mMainSwitchPreference);
 

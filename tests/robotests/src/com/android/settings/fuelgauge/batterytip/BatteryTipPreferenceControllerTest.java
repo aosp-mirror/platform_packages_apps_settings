@@ -15,8 +15,7 @@
  */
 package com.android.settings.fuelgauge.batterytip;
 
-import static com.android.settings.fuelgauge.batterytip.tips.BatteryTip.TipType
-        .SMART_BATTERY_MANAGER;
+import static com.android.settings.fuelgauge.batterytip.tips.BatteryTip.TipType.SMART_BATTERY_MANAGER;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -31,8 +30,6 @@ import android.text.format.DateUtils;
 
 import androidx.preference.PreferenceScreen;
 
-import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.InstrumentedPreferenceFragment;
@@ -58,16 +55,11 @@ public class BatteryTipPreferenceControllerTest {
     private static final String KEY_TIP = "key_battery_tip";
     private static final long AVERAGE_TIME_MS = DateUtils.HOUR_IN_MILLIS;
 
-    @Mock
-    private BatteryTipPreferenceController.BatteryTipListener mBatteryTipListener;
-    @Mock
-    private PreferenceScreen mPreferenceScreen;
-    @Mock
-    private BatteryTip mBatteryTip;
-    @Mock
-    private SettingsActivity mSettingsActivity;
-    @Mock
-    private InstrumentedPreferenceFragment mFragment;
+    @Mock private BatteryTipPreferenceController.BatteryTipListener mBatteryTipListener;
+    @Mock private PreferenceScreen mPreferenceScreen;
+    @Mock private BatteryTip mBatteryTip;
+    @Mock private SettingsActivity mSettingsActivity;
+    @Mock private InstrumentedPreferenceFragment mFragment;
 
     private Context mContext;
     private CardPreference mCardPreference;
@@ -147,13 +139,13 @@ public class BatteryTipPreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_returnAvailableUnsearchable() {
-        assertThat(mBatteryTipPreferenceController.getAvailabilityStatus()).isEqualTo(
-                BasePreferenceController.AVAILABLE_UNSEARCHABLE);
+        assertThat(mBatteryTipPreferenceController.getAvailabilityStatus())
+                .isEqualTo(BasePreferenceController.AVAILABLE_UNSEARCHABLE);
     }
 
     private BatteryTipPreferenceController buildBatteryTipPreferenceController() {
-        final BatteryTipPreferenceController controller = new BatteryTipPreferenceController(
-                mContext, KEY_PREF);
+        final BatteryTipPreferenceController controller =
+                new BatteryTipPreferenceController(mContext, KEY_PREF);
         controller.setActivity(mSettingsActivity);
         controller.setFragment(mFragment);
         controller.setBatteryTipListener(mBatteryTipListener);

@@ -88,7 +88,8 @@ public final class BootBroadcastReceiverTest {
         final SharedPreferences sharedPreferences = DatabaseUtils.getSharedPreferences(mContext);
         sharedPreferences
                 .edit()
-                .putInt(DatabaseUtils.KEY_LAST_USAGE_SOURCE,
+                .putInt(
+                        DatabaseUtils.KEY_LAST_USAGE_SOURCE,
                         UsageStatsManager.USAGE_SOURCE_CURRENT_ACTIVITY)
                 .apply();
 
@@ -96,9 +97,8 @@ public final class BootBroadcastReceiverTest {
 
         assertThat(mShadowAlarmManager.peekNextScheduledAlarm()).isNotNull();
         assertThat(
-                DatabaseUtils
-                        .getSharedPreferences(mContext)
-                        .contains(DatabaseUtils.KEY_LAST_USAGE_SOURCE))
+                        DatabaseUtils.getSharedPreferences(mContext)
+                                .contains(DatabaseUtils.KEY_LAST_USAGE_SOURCE))
                 .isFalse();
     }
 
@@ -124,7 +124,7 @@ public final class BootBroadcastReceiverTest {
 
     @Test
     public void onReceive_nullIntent_notRefreshesJob() {
-        mReceiver.onReceive(mContext, /*intent=*/ null);
+        mReceiver.onReceive(mContext, /* intent= */ null);
         assertThat(mShadowAlarmManager.peekNextScheduledAlarm()).isNull();
     }
 
@@ -142,11 +142,10 @@ public final class BootBroadcastReceiverTest {
     public void invokeJobRecheck_broadcastsIntent() {
         BootBroadcastReceiver.invokeJobRecheck(mContext);
 
-        final List<Intent> intents =
-                Shadows.shadowOf((Application) mContext).getBroadcastIntents();
+        final List<Intent> intents = Shadows.shadowOf((Application) mContext).getBroadcastIntents();
         assertThat(intents).hasSize(1);
-        assertThat(intents.get(0).getAction()).isEqualTo(
-                BootBroadcastReceiver.ACTION_PERIODIC_JOB_RECHECK);
+        assertThat(intents.get(0).getAction())
+                .isEqualTo(BootBroadcastReceiver.ACTION_PERIODIC_JOB_RECHECK);
     }
 
     private void clearSharedPreferences() {

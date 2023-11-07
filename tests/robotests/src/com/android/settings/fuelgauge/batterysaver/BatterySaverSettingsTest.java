@@ -34,13 +34,13 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {
-        com.android.settings.testutils.shadow.ShadowFragment.class,
-})
+@Config(
+        shadows = {
+            com.android.settings.testutils.shadow.ShadowFragment.class,
+        })
 public class BatterySaverSettingsTest {
     BatterySaverSettings mFragment;
-    @Mock
-    PreferenceScreen mScreen;
+    @Mock PreferenceScreen mScreen;
 
     @Before
     public void setUp() {
@@ -49,7 +49,6 @@ public class BatterySaverSettingsTest {
         mFragment = spy(new BatterySaverSettings());
         doReturn(mScreen).when(mFragment).getPreferenceScreen();
     }
-
 
     @Test
     public void setupFooter_linkAddedWhenAppropriate() {
