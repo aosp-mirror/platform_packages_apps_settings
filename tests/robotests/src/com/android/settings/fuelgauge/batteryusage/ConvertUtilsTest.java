@@ -61,14 +61,10 @@ public final class ConvertUtilsTest {
 
     private Context mContext;
 
-    @Mock
-    private PackageManager mMockPackageManager;
-    @Mock
-    private BatteryUsageStats mBatteryUsageStats;
-    @Mock
-    private BatteryEntry mMockBatteryEntry;
-    @Mock
-    private IUsageStatsManager mUsageStatsManager;
+    @Mock private PackageManager mMockPackageManager;
+    @Mock private BatteryUsageStats mBatteryUsageStats;
+    @Mock private BatteryEntry mMockBatteryEntry;
+    @Mock private IUsageStatsManager mUsageStatsManager;
 
     @Before
     public void setUp() {
@@ -104,12 +100,12 @@ public final class ConvertUtilsTest {
                 ConvertUtils.convertBatteryEntryToContentValues(
                         mMockBatteryEntry,
                         mBatteryUsageStats,
-                        /*batteryLevel=*/ 12,
-                        /*batteryStatus=*/ BatteryManager.BATTERY_STATUS_FULL,
-                        /*batteryHealth=*/ BatteryManager.BATTERY_HEALTH_COLD,
-                        /*bootTimestamp=*/ 101L,
-                        /*timestamp=*/ 10001L,
-                        /*isFullChargeStart=*/ true);
+                        /* batteryLevel= */ 12,
+                        /* batteryStatus= */ BatteryManager.BATTERY_STATUS_FULL,
+                        /* batteryHealth= */ BatteryManager.BATTERY_HEALTH_COLD,
+                        /* bootTimestamp= */ 101L,
+                        /* timestamp= */ 10001L,
+                        /* isFullChargeStart= */ true);
         final BatteryInformation batteryInformation =
                 ConvertUtils.getBatteryInformation(
                         values, BatteryHistEntry.KEY_BATTERY_INFORMATION);
@@ -150,8 +146,8 @@ public final class ConvertUtilsTest {
         when(mMockBatteryEntry.getUid()).thenReturn(-1);
         when(mMockBatteryEntry.getLabel()).thenReturn("CPU");
         when(mMockBatteryEntry.getDefaultPackageName()).thenReturn(null);
-        when(mMockBatteryEntry.getPowerComponentId()).thenReturn(
-                BatteryConsumer.POWER_COMPONENT_CPU);
+        when(mMockBatteryEntry.getPowerComponentId())
+                .thenReturn(BatteryConsumer.POWER_COMPONENT_CPU);
         when(mBatteryUsageStats.getConsumedPower()).thenReturn(5.1);
         when(mMockBatteryEntry.getConsumedPower()).thenReturn(1.1);
         when(mMockBatteryEntry.getConsumedPowerInForeground()).thenReturn(1.2);
@@ -168,12 +164,12 @@ public final class ConvertUtilsTest {
                 ConvertUtils.convertBatteryEntryToContentValues(
                         mMockBatteryEntry,
                         mBatteryUsageStats,
-                        /*batteryLevel=*/ 12,
-                        /*batteryStatus=*/ BatteryManager.BATTERY_STATUS_FULL,
-                        /*batteryHealth=*/ BatteryManager.BATTERY_HEALTH_COLD,
-                        /*bootTimestamp=*/ 101L,
-                        /*timestamp=*/ 10001L,
-                        /*isFullChargeStart=*/ true);
+                        /* batteryLevel= */ 12,
+                        /* batteryStatus= */ BatteryManager.BATTERY_STATUS_FULL,
+                        /* batteryHealth= */ BatteryManager.BATTERY_HEALTH_COLD,
+                        /* bootTimestamp= */ 101L,
+                        /* timestamp= */ 10001L,
+                        /* isFullChargeStart= */ true);
         final BatteryInformation batteryInformation =
                 ConvertUtils.getBatteryInformation(
                         values, BatteryHistEntry.KEY_BATTERY_INFORMATION);
@@ -200,8 +196,8 @@ public final class ConvertUtilsTest {
         assertThat(batteryInformation.getPercentOfTotal()).isEqualTo(0.3);
         assertThat(batteryInformation.getForegroundUsageTimeInMs()).isEqualTo(1234L);
         assertThat(batteryInformation.getBackgroundUsageTimeInMs()).isEqualTo(5689L);
-        assertThat(batteryInformation.getDrainType()).isEqualTo(
-                BatteryConsumer.POWER_COMPONENT_CPU);
+        assertThat(batteryInformation.getDrainType())
+                .isEqualTo(BatteryConsumer.POWER_COMPONENT_CPU);
         assertThat(deviceBatteryState.getBatteryLevel()).isEqualTo(12);
         assertThat(deviceBatteryState.getBatteryStatus())
                 .isEqualTo(BatteryManager.BATTERY_STATUS_FULL);
@@ -213,14 +209,14 @@ public final class ConvertUtilsTest {
     public void convertBatteryEntryToContentValues_nullBatteryEntry_returnsExpectedContentValues() {
         final ContentValues values =
                 ConvertUtils.convertBatteryEntryToContentValues(
-                        /*entry=*/ null,
-                        /*batteryUsageStats=*/ null,
-                        /*batteryLevel=*/ 12,
-                        /*batteryStatus=*/ BatteryManager.BATTERY_STATUS_FULL,
-                        /*batteryHealth=*/ BatteryManager.BATTERY_HEALTH_COLD,
-                        /*bootTimestamp=*/ 101L,
-                        /*timestamp=*/ 10001L,
-                        /*isFullChargeStart=*/ false);
+                        /* entry= */ null,
+                        /* batteryUsageStats= */ null,
+                        /* batteryLevel= */ 12,
+                        /* batteryStatus= */ BatteryManager.BATTERY_STATUS_FULL,
+                        /* batteryHealth= */ BatteryManager.BATTERY_HEALTH_COLD,
+                        /* bootTimestamp= */ 101L,
+                        /* timestamp= */ 10001L,
+                        /* isFullChargeStart= */ false);
 
         final BatteryInformation batteryInformation =
                 ConvertUtils.getBatteryInformation(
@@ -234,8 +230,7 @@ public final class ConvertUtilsTest {
                 .isEqualTo(BatteryManager.BATTERY_STATUS_FULL);
         assertThat(deviceBatteryState.getBatteryHealth())
                 .isEqualTo(BatteryManager.BATTERY_HEALTH_COLD);
-        assertThat(values.getAsLong(BatteryHistEntry.KEY_TIMESTAMP))
-                .isEqualTo(10001L);
+        assertThat(values.getAsLong(BatteryHistEntry.KEY_TIMESTAMP)).isEqualTo(10001L);
         assertThat(values.getAsString(BatteryHistEntry.KEY_PACKAGE_NAME))
                 .isEqualTo(ConvertUtils.FAKE_PACKAGE_NAME);
     }
@@ -273,11 +268,10 @@ public final class ConvertUtilsTest {
                         .setType(BatteryEventType.POWER_CONNECTED)
                         .setBatteryLevel(66)
                         .build();
-        final ContentValues values =
-                ConvertUtils.convertBatteryEventToContentValues(batteryEvent);
+        final ContentValues values = ConvertUtils.convertBatteryEventToContentValues(batteryEvent);
         assertThat(values.getAsLong(BatteryEventEntity.KEY_TIMESTAMP)).isEqualTo(10001L);
-        assertThat(values.getAsInteger(BatteryEventEntity.KEY_BATTERY_EVENT_TYPE)).isEqualTo(
-                BatteryEventType.POWER_CONNECTED.getNumber());
+        assertThat(values.getAsInteger(BatteryEventEntity.KEY_BATTERY_EVENT_TYPE))
+                .isEqualTo(BatteryEventType.POWER_CONNECTED.getNumber());
         assertThat(values.getAsInteger(BatteryEventEntity.KEY_BATTERY_LEVEL)).isEqualTo(66);
     }
 
@@ -302,8 +296,7 @@ public final class ConvertUtilsTest {
         final int expectedType = 3;
         when(mMockBatteryEntry.getUid()).thenReturn(1001);
         when(mMockBatteryEntry.getLabel()).thenReturn("Settings");
-        when(mMockBatteryEntry.getDefaultPackageName())
-                .thenReturn("com.android.settings.battery");
+        when(mMockBatteryEntry.getDefaultPackageName()).thenReturn("com.android.settings.battery");
         when(mMockBatteryEntry.isHidden()).thenReturn(true);
         when(mBatteryUsageStats.getConsumedPower()).thenReturn(5.1);
         when(mMockBatteryEntry.getConsumedPower()).thenReturn(1.1);
@@ -319,23 +312,16 @@ public final class ConvertUtilsTest {
                 .thenReturn(ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY);
 
         final BatteryHistEntry batteryHistEntry =
-                ConvertUtils.convertToBatteryHistEntry(
-                        mMockBatteryEntry,
-                        mBatteryUsageStats);
+                ConvertUtils.convertToBatteryHistEntry(mMockBatteryEntry, mBatteryUsageStats);
 
         assertThat(batteryHistEntry.mUid).isEqualTo(1001L);
-        assertThat(batteryHistEntry.mUserId)
-                .isEqualTo(UserHandle.getUserId(1001));
-        assertThat(batteryHistEntry.mAppLabel)
-                .isEqualTo("Settings");
-        assertThat(batteryHistEntry.mPackageName)
-                .isEqualTo("com.android.settings.battery");
+        assertThat(batteryHistEntry.mUserId).isEqualTo(UserHandle.getUserId(1001));
+        assertThat(batteryHistEntry.mAppLabel).isEqualTo("Settings");
+        assertThat(batteryHistEntry.mPackageName).isEqualTo("com.android.settings.battery");
         assertThat(batteryHistEntry.mIsHidden).isTrue();
-        assertThat(batteryHistEntry.mBootTimestamp)
-                .isEqualTo(0L);
+        assertThat(batteryHistEntry.mBootTimestamp).isEqualTo(0L);
         assertThat(batteryHistEntry.mTimestamp).isEqualTo(0L);
-        assertThat(batteryHistEntry.mZoneId)
-                .isEqualTo(TimeZone.getDefault().getID());
+        assertThat(batteryHistEntry.mZoneId).isEqualTo(TimeZone.getDefault().getID());
         assertThat(batteryHistEntry.mTotalPower).isEqualTo(5.1);
         assertThat(batteryHistEntry.mConsumePower).isEqualTo(1.1);
         assertThat(batteryHistEntry.mForegroundUsageConsumePower).isEqualTo(1.2);
@@ -343,10 +329,8 @@ public final class ConvertUtilsTest {
         assertThat(batteryHistEntry.mBackgroundUsageConsumePower).isEqualTo(1.4);
         assertThat(batteryHistEntry.mCachedUsageConsumePower).isEqualTo(1.5);
         assertThat(batteryHistEntry.mPercentOfTotal).isEqualTo(0.3);
-        assertThat(batteryHistEntry.mForegroundUsageTimeInMs)
-                .isEqualTo(1234L);
-        assertThat(batteryHistEntry.mBackgroundUsageTimeInMs)
-                .isEqualTo(5689L);
+        assertThat(batteryHistEntry.mForegroundUsageTimeInMs).isEqualTo(1234L);
+        assertThat(batteryHistEntry.mBackgroundUsageTimeInMs).isEqualTo(5689L);
         assertThat(batteryHistEntry.mDrainType).isEqualTo(expectedType);
         assertThat(batteryHistEntry.mConsumerType)
                 .isEqualTo(ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY);
@@ -359,20 +343,15 @@ public final class ConvertUtilsTest {
     public void convertToBatteryHistEntry_nullBatteryEntry_returnsExpectedResult() {
         final BatteryHistEntry batteryHistEntry =
                 ConvertUtils.convertToBatteryHistEntry(
-                        /*entry=*/ null,
-                        /*batteryUsageStats=*/ null);
+                        /* entry= */ null, /* batteryUsageStats= */ null);
 
-        assertThat(batteryHistEntry.mBootTimestamp)
-                .isEqualTo(0L);
-        assertThat(batteryHistEntry.mTimestamp)
-                .isEqualTo(0);
-        assertThat(batteryHistEntry.mZoneId)
-                .isEqualTo(TimeZone.getDefault().getID());
+        assertThat(batteryHistEntry.mBootTimestamp).isEqualTo(0L);
+        assertThat(batteryHistEntry.mTimestamp).isEqualTo(0);
+        assertThat(batteryHistEntry.mZoneId).isEqualTo(TimeZone.getDefault().getID());
         assertThat(batteryHistEntry.mBatteryLevel).isEqualTo(0);
         assertThat(batteryHistEntry.mBatteryStatus).isEqualTo(0);
         assertThat(batteryHistEntry.mBatteryHealth).isEqualTo(0);
-        assertThat(batteryHistEntry.mPackageName)
-                .isEqualTo(ConvertUtils.FAKE_PACKAGE_NAME);
+        assertThat(batteryHistEntry.mPackageName).isEqualTo(ConvertUtils.FAKE_PACKAGE_NAME);
     }
 
     @Test
@@ -387,8 +366,8 @@ public final class ConvertUtilsTest {
         when(mMockPackageManager.getPackageUidAsUser(any(), anyInt())).thenReturn(1001);
 
         final long userId = 2;
-        final AppUsageEvent appUsageEvent = ConvertUtils.convertToAppUsageEvent(
-                mContext, mUsageStatsManager, event, userId);
+        final AppUsageEvent appUsageEvent =
+                ConvertUtils.convertToAppUsageEvent(mContext, mUsageStatsManager, event, userId);
         assertThat(appUsageEvent.getTimestamp()).isEqualTo(101L);
         assertThat(appUsageEvent.getType()).isEqualTo(AppUsageEventType.ACTIVITY_RESUMED);
         assertThat(appUsageEvent.getPackageName()).isEqualTo("com.android.settings1");
@@ -426,14 +405,14 @@ public final class ConvertUtilsTest {
 
         final AppUsageEvent appUsageEvent =
                 ConvertUtils.convertToAppUsageEvent(
-                        mContext, mUsageStatsManager, event, /*userId=*/ 0);
+                        mContext, mUsageStatsManager, event, /* userId= */ 0);
 
         assertThat(appUsageEvent).isNull();
     }
 
     @Test
     public void convertToAppUsageEvent_failToGetUid_returnsNull()
-            throws PackageManager.NameNotFoundException  {
+            throws PackageManager.NameNotFoundException {
         final Event event = new Event();
         event.mEventType = UsageEvents.Event.DEVICE_SHUTDOWN;
         event.mPackage = "com.android.settings1";
@@ -449,24 +428,27 @@ public final class ConvertUtilsTest {
 
     @Test
     public void convertToAppUsageEvent_returnExpectedResult() {
-        final MatrixCursor cursor = new MatrixCursor(
-                new String[]{
-                        AppUsageEventEntity.KEY_UID,
-                        AppUsageEventEntity.KEY_USER_ID,
-                        AppUsageEventEntity.KEY_PACKAGE_NAME,
-                        AppUsageEventEntity.KEY_TIMESTAMP,
-                        AppUsageEventEntity.KEY_APP_USAGE_EVENT_TYPE,
-                        AppUsageEventEntity.KEY_TASK_ROOT_PACKAGE_NAME,
-                        AppUsageEventEntity.KEY_INSTANCE_ID});
+        final MatrixCursor cursor =
+                new MatrixCursor(
+                        new String[] {
+                            AppUsageEventEntity.KEY_UID,
+                            AppUsageEventEntity.KEY_USER_ID,
+                            AppUsageEventEntity.KEY_PACKAGE_NAME,
+                            AppUsageEventEntity.KEY_TIMESTAMP,
+                            AppUsageEventEntity.KEY_APP_USAGE_EVENT_TYPE,
+                            AppUsageEventEntity.KEY_TASK_ROOT_PACKAGE_NAME,
+                            AppUsageEventEntity.KEY_INSTANCE_ID
+                        });
         cursor.addRow(
-                new Object[]{
-                        101L,
-                        1001L,
-                        "com.android.settings1",
-                        10001L,
-                        AppUsageEventType.DEVICE_SHUTDOWN.getNumber(),
-                        "com.android.settings2",
-                        100001L});
+                new Object[] {
+                    101L,
+                    1001L,
+                    "com.android.settings1",
+                    10001L,
+                    AppUsageEventType.DEVICE_SHUTDOWN.getNumber(),
+                    "com.android.settings2",
+                    100001L
+                });
         cursor.moveToFirst();
 
         final AppUsageEvent appUsageEvent = ConvertUtils.convertToAppUsageEvent(cursor);
@@ -482,20 +464,23 @@ public final class ConvertUtilsTest {
 
     @Test
     public void convertToAppUsageEvent_emptyInstanceIdAndRootName_returnExpectedResult() {
-        final MatrixCursor cursor = new MatrixCursor(
-                new String[]{
-                        AppUsageEventEntity.KEY_UID,
-                        AppUsageEventEntity.KEY_USER_ID,
-                        AppUsageEventEntity.KEY_PACKAGE_NAME,
-                        AppUsageEventEntity.KEY_TIMESTAMP,
-                        AppUsageEventEntity.KEY_APP_USAGE_EVENT_TYPE});
+        final MatrixCursor cursor =
+                new MatrixCursor(
+                        new String[] {
+                            AppUsageEventEntity.KEY_UID,
+                            AppUsageEventEntity.KEY_USER_ID,
+                            AppUsageEventEntity.KEY_PACKAGE_NAME,
+                            AppUsageEventEntity.KEY_TIMESTAMP,
+                            AppUsageEventEntity.KEY_APP_USAGE_EVENT_TYPE
+                        });
         cursor.addRow(
-                new Object[]{
-                        101L,
-                        1001L,
-                        "com.android.settings1",
-                        10001L,
-                        AppUsageEventType.DEVICE_SHUTDOWN.getNumber()});
+                new Object[] {
+                    101L,
+                    1001L,
+                    "com.android.settings1",
+                    10001L,
+                    AppUsageEventType.DEVICE_SHUTDOWN.getNumber()
+                });
         cursor.moveToFirst();
 
         final AppUsageEvent appUsageEvent = ConvertUtils.convertToAppUsageEvent(cursor);
@@ -511,8 +496,8 @@ public final class ConvertUtilsTest {
 
     @Test
     public void convertToBatteryEvent_normalCase_returnsExpectedResult() {
-        final BatteryEvent batteryEvent = ConvertUtils.convertToBatteryEvent(
-                666L, BatteryEventType.POWER_DISCONNECTED, 88);
+        final BatteryEvent batteryEvent =
+                ConvertUtils.convertToBatteryEvent(666L, BatteryEventType.POWER_DISCONNECTED, 88);
         assertThat(batteryEvent.getTimestamp()).isEqualTo(666L);
         assertThat(batteryEvent.getType()).isEqualTo(BatteryEventType.POWER_DISCONNECTED);
         assertThat(batteryEvent.getBatteryLevel()).isEqualTo(88);
@@ -520,8 +505,9 @@ public final class ConvertUtilsTest {
 
     @Test
     public void convertToBatteryEventList_normalCase_returnsExpectedResult() {
-        final BatteryLevelData batteryLevelData = new BatteryLevelData(Map.of(
-                1691589600000L, 98, 1691596800000L, 90, 1691596812345L, 80));
+        final BatteryLevelData batteryLevelData =
+                new BatteryLevelData(
+                        Map.of(1691589600000L, 98, 1691596800000L, 90, 1691596812345L, 80));
 
         final List<BatteryEvent> batteryEventList =
                 ConvertUtils.convertToBatteryEventList(batteryLevelData);
@@ -537,14 +523,20 @@ public final class ConvertUtilsTest {
 
     @Test
     public void convertToBatteryUsageSlotList_normalCase_returnsExpectedResult() {
-        BatteryDiffData batteryDiffData1 = new BatteryDiffData(
-                mContext, 11L, 12L, 13, 14, 15, List.of(), List.of(), Set.of(), Set.of(), false);
-        BatteryDiffData batteryDiffData2 = new BatteryDiffData(
-                mContext, 21L, 22L, 23, 24, 25, List.of(), List.of(), Set.of(), Set.of(), false);
-        BatteryDiffData batteryDiffData3 = new BatteryDiffData(
-                mContext, 31L, 32L, 33, 34, 35, List.of(), List.of(), Set.of(), Set.of(), false);
-        final Map<Long, BatteryDiffData> batteryDiffDataMap = Map.of(
-                11L, batteryDiffData1, 21L, batteryDiffData2, 31L, batteryDiffData3);
+        BatteryDiffData batteryDiffData1 =
+                new BatteryDiffData(
+                        mContext, 11L, 12L, 13, 14, 15, List.of(), List.of(), Set.of(), Set.of(),
+                        false);
+        BatteryDiffData batteryDiffData2 =
+                new BatteryDiffData(
+                        mContext, 21L, 22L, 23, 24, 25, List.of(), List.of(), Set.of(), Set.of(),
+                        false);
+        BatteryDiffData batteryDiffData3 =
+                new BatteryDiffData(
+                        mContext, 31L, 32L, 33, 34, 35, List.of(), List.of(), Set.of(), Set.of(),
+                        false);
+        final Map<Long, BatteryDiffData> batteryDiffDataMap =
+                Map.of(11L, batteryDiffData1, 21L, batteryDiffData2, 31L, batteryDiffData3);
 
         final List<BatteryUsageSlot> batteryUsageSlotList =
                 ConvertUtils.convertToBatteryUsageSlotList(batteryDiffDataMap);
@@ -556,8 +548,7 @@ public final class ConvertUtilsTest {
 
     @Test
     public void getLocale_nullContext_returnDefaultLocale() {
-        assertThat(ConvertUtils.getLocale(/*context=*/ null))
-                .isEqualTo(Locale.getDefault());
+        assertThat(ConvertUtils.getLocale(/* context= */ null)).isEqualTo(Locale.getDefault());
     }
 
     @Test
@@ -578,8 +569,9 @@ public final class ConvertUtilsTest {
         final String packageName = "com.android.settings1";
         final String taskRootPackageName = "com.android.settings2";
 
-        assertThat(ConvertUtils.getEffectivePackageName(
-                mContext, mUsageStatsManager, packageName, taskRootPackageName))
+        assertThat(
+                        ConvertUtils.getEffectivePackageName(
+                                mContext, mUsageStatsManager, packageName, taskRootPackageName))
                 .isEqualTo(packageName);
     }
 
@@ -588,8 +580,9 @@ public final class ConvertUtilsTest {
         final String packageName = "com.android.settings1";
         final String taskRootPackageName = "com.android.settings2";
 
-        assertThat(ConvertUtils.getEffectivePackageName(
-                mContext, mUsageStatsManager, packageName, taskRootPackageName))
+        assertThat(
+                        ConvertUtils.getEffectivePackageName(
+                                mContext, mUsageStatsManager, packageName, taskRootPackageName))
                 .isEqualTo(packageName);
     }
 
@@ -599,8 +592,9 @@ public final class ConvertUtilsTest {
         final String packageName = "com.android.settings1";
         final String taskRootPackageName = "com.android.settings2";
 
-        assertThat(ConvertUtils.getEffectivePackageName(
-                mContext, mUsageStatsManager, packageName, taskRootPackageName))
+        assertThat(
+                        ConvertUtils.getEffectivePackageName(
+                                mContext, mUsageStatsManager, packageName, taskRootPackageName))
                 .isEqualTo(taskRootPackageName);
     }
 
@@ -609,11 +603,19 @@ public final class ConvertUtilsTest {
         ConvertUtils.sUsageSource = USAGE_SOURCE_TASK_ROOT_ACTIVITY;
         final String packageName = "com.android.settings1";
 
-        assertThat(ConvertUtils.getEffectivePackageName(
-                mContext, mUsageStatsManager, packageName, /*taskRootPackageName=*/ null))
+        assertThat(
+                        ConvertUtils.getEffectivePackageName(
+                                mContext,
+                                mUsageStatsManager,
+                                packageName,
+                                /* taskRootPackageName= */ null))
                 .isEqualTo(packageName);
-        assertThat(ConvertUtils.getEffectivePackageName(
-                mContext, mUsageStatsManager, packageName, /*taskRootPackageName=*/ ""))
+        assertThat(
+                        ConvertUtils.getEffectivePackageName(
+                                mContext,
+                                mUsageStatsManager,
+                                packageName,
+                                /* taskRootPackageName= */ ""))
                 .isEqualTo(packageName);
     }
 }

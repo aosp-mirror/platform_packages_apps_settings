@@ -45,8 +45,7 @@ public class BatteryTipTest {
 
     private static final String TITLE = "title";
     private static final String SUMMARY = "summary";
-    @DrawableRes
-    private static final int ICON_ID = R.drawable.ic_fingerprint;
+    @DrawableRes private static final int ICON_ID = R.drawable.ic_fingerprint;
 
     private Context mContext;
     private TestBatteryTip mBatteryTip;
@@ -86,8 +85,10 @@ public class BatteryTipTest {
     @Test
     public void updatePreference_resetLayoutState() {
         mContext.setTheme(R.style.Theme_Settings);
-        PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(
-                View.inflate(mContext, R.layout.card_preference_layout, /* parent= */ null));
+        PreferenceViewHolder holder =
+                PreferenceViewHolder.createInstanceForTests(
+                        View.inflate(
+                                mContext, R.layout.card_preference_layout, /* parent= */ null));
         CardPreference cardPreference = new CardPreference(mContext);
         cardPreference.onBindViewHolder(holder);
         cardPreference.setPrimaryButtonVisible(true);
@@ -113,9 +114,7 @@ public class BatteryTipTest {
         assertThat(mBatteryTip.toString()).isEqualTo("type=6 state=0");
     }
 
-    /**
-     * Used to test the non abstract methods in {@link TestBatteryTip}
-     */
+    /** Used to test the non abstract methods in {@link TestBatteryTip} */
     public static class TestBatteryTip extends BatteryTip {
         TestBatteryTip() {
             super(TipType.SUMMARY, StateType.NEW, true);
@@ -150,14 +149,15 @@ public class BatteryTipTest {
             // do nothing
         }
 
-        public final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-            public BatteryTip createFromParcel(Parcel in) {
-                return new TestBatteryTip(in);
-            }
+        public final Parcelable.Creator CREATOR =
+                new Parcelable.Creator() {
+                    public BatteryTip createFromParcel(Parcel in) {
+                        return new TestBatteryTip(in);
+                    }
 
-            public BatteryTip[] newArray(int size) {
-                return new TestBatteryTip[size];
-            }
-        };
+                    public BatteryTip[] newArray(int size) {
+                        return new TestBatteryTip[size];
+                    }
+                };
     }
 }

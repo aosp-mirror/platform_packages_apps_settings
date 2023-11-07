@@ -48,8 +48,7 @@ public final class BatteryUsageBroadcastReceiverTest {
     private BatteryUsageBroadcastReceiver mBatteryUsageBroadcastReceiver;
     private FakeFeatureFactory mFakeFeatureFactory;
 
-    @Mock
-    private PackageManager mPackageManager;
+    @Mock private PackageManager mPackageManager;
 
     @Before
     public void setUp() {
@@ -72,8 +71,8 @@ public final class BatteryUsageBroadcastReceiverTest {
     public void onReceive_workProfile_doNothing() {
         BatteryTestUtils.setWorkProfile(mContext);
 
-        mBatteryUsageBroadcastReceiver.onReceive(mContext,
-                new Intent(BatteryUsageBroadcastReceiver.ACTION_BATTERY_UNPLUGGING));
+        mBatteryUsageBroadcastReceiver.onReceive(
+                mContext, new Intent(BatteryUsageBroadcastReceiver.ACTION_BATTERY_UNPLUGGING));
 
         assertThat(mBatteryUsageBroadcastReceiver.mFetchBatteryUsageData).isFalse();
     }
@@ -84,11 +83,12 @@ public final class BatteryUsageBroadcastReceiverTest {
                 .thenReturn(Intent.ACTION_BATTERY_LEVEL_CHANGED);
         when(mFakeFeatureFactory.powerUsageFeatureProvider.delayHourlyJobWhenBooting())
                 .thenReturn(true);
-        doReturn(getBatteryIntent(/*level=*/ 20, BatteryManager.BATTERY_STATUS_UNKNOWN))
-                .when(mContext).registerReceiver(any(), any());
+        doReturn(getBatteryIntent(/* level= */ 20, BatteryManager.BATTERY_STATUS_UNKNOWN))
+                .when(mContext)
+                .registerReceiver(any(), any());
 
-        mBatteryUsageBroadcastReceiver.onReceive(mContext,
-                new Intent(Intent.ACTION_BATTERY_LEVEL_CHANGED));
+        mBatteryUsageBroadcastReceiver.onReceive(
+                mContext, new Intent(Intent.ACTION_BATTERY_LEVEL_CHANGED));
 
         assertThat(mBatteryUsageBroadcastReceiver.mFetchBatteryUsageData).isFalse();
         assertSharedPreferences(Intent.ACTION_BATTERY_LEVEL_CHANGED);
@@ -101,14 +101,15 @@ public final class BatteryUsageBroadcastReceiverTest {
         when(mFakeFeatureFactory.powerUsageFeatureProvider.delayHourlyJobWhenBooting())
                 .thenReturn(true);
         // Make sure isCharged returns true.
-        doReturn(getBatteryIntent(/*level=*/ 100, BatteryManager.BATTERY_STATUS_FULL))
-                .when(mContext).registerReceiver(any(), any());
+        doReturn(getBatteryIntent(/* level= */ 100, BatteryManager.BATTERY_STATUS_FULL))
+                .when(mContext)
+                .registerReceiver(any(), any());
         // Make sure broadcast will be sent with delay.
         BatteryUsageBroadcastReceiver.sBroadcastDelayFromBoot =
                 SystemClock.elapsedRealtime() + 5 * DateUtils.MINUTE_IN_MILLIS;
 
-        mBatteryUsageBroadcastReceiver.onReceive(mContext,
-                new Intent(Intent.ACTION_BATTERY_LEVEL_CHANGED));
+        mBatteryUsageBroadcastReceiver.onReceive(
+                mContext, new Intent(Intent.ACTION_BATTERY_LEVEL_CHANGED));
 
         assertThat(mBatteryUsageBroadcastReceiver.mFetchBatteryUsageData).isFalse();
         assertSharedPreferences(Intent.ACTION_BATTERY_LEVEL_CHANGED);
@@ -121,13 +122,14 @@ public final class BatteryUsageBroadcastReceiverTest {
         when(mFakeFeatureFactory.powerUsageFeatureProvider.delayHourlyJobWhenBooting())
                 .thenReturn(true);
         // Make sure isCharged returns true.
-        doReturn(getBatteryIntent(/*level=*/ 100, BatteryManager.BATTERY_STATUS_UNKNOWN))
-                .when(mContext).registerReceiver(any(), any());
+        doReturn(getBatteryIntent(/* level= */ 100, BatteryManager.BATTERY_STATUS_UNKNOWN))
+                .when(mContext)
+                .registerReceiver(any(), any());
         BatteryUsageBroadcastReceiver.sBroadcastDelayFromBoot =
                 SystemClock.elapsedRealtime() - 5 * DateUtils.MINUTE_IN_MILLIS;
 
-        mBatteryUsageBroadcastReceiver.onReceive(mContext,
-                new Intent(Intent.ACTION_BATTERY_LEVEL_CHANGED));
+        mBatteryUsageBroadcastReceiver.onReceive(
+                mContext, new Intent(Intent.ACTION_BATTERY_LEVEL_CHANGED));
 
         assertThat(mBatteryUsageBroadcastReceiver.mFetchBatteryUsageData).isFalse();
         assertSharedPreferences(Intent.ACTION_BATTERY_LEVEL_CHANGED);
@@ -140,13 +142,14 @@ public final class BatteryUsageBroadcastReceiverTest {
         when(mFakeFeatureFactory.powerUsageFeatureProvider.delayHourlyJobWhenBooting())
                 .thenReturn(true);
         // Make sure isCharged returns true.
-        doReturn(getBatteryIntent(/*level=*/ 100, BatteryManager.BATTERY_STATUS_UNKNOWN))
-                .when(mContext).registerReceiver(any(), any());
+        doReturn(getBatteryIntent(/* level= */ 100, BatteryManager.BATTERY_STATUS_UNKNOWN))
+                .when(mContext)
+                .registerReceiver(any(), any());
         BatteryUsageBroadcastReceiver.sBroadcastDelayFromBoot =
                 SystemClock.elapsedRealtime() - 5 * DateUtils.MINUTE_IN_MILLIS;
 
-        mBatteryUsageBroadcastReceiver.onReceive(mContext,
-                new Intent(Intent.ACTION_BATTERY_LEVEL_CHANGED));
+        mBatteryUsageBroadcastReceiver.onReceive(
+                mContext, new Intent(Intent.ACTION_BATTERY_LEVEL_CHANGED));
 
         assertThat(mBatteryUsageBroadcastReceiver.mFetchBatteryUsageData).isTrue();
         assertSharedPreferences(Intent.ACTION_BATTERY_LEVEL_CHANGED);
@@ -158,11 +161,12 @@ public final class BatteryUsageBroadcastReceiverTest {
                 .thenReturn(Intent.ACTION_POWER_DISCONNECTED);
         when(mFakeFeatureFactory.powerUsageFeatureProvider.delayHourlyJobWhenBooting())
                 .thenReturn(false);
-        doReturn(getBatteryIntent(/*level=*/ 20, BatteryManager.BATTERY_STATUS_UNKNOWN))
-                .when(mContext).registerReceiver(any(), any());
+        doReturn(getBatteryIntent(/* level= */ 20, BatteryManager.BATTERY_STATUS_UNKNOWN))
+                .when(mContext)
+                .registerReceiver(any(), any());
 
-        mBatteryUsageBroadcastReceiver.onReceive(mContext,
-                new Intent(BatteryUsageBroadcastReceiver.ACTION_BATTERY_UNPLUGGING));
+        mBatteryUsageBroadcastReceiver.onReceive(
+                mContext, new Intent(BatteryUsageBroadcastReceiver.ACTION_BATTERY_UNPLUGGING));
 
         assertThat(mBatteryUsageBroadcastReceiver.mFetchBatteryUsageData).isFalse();
         assertSharedPreferences(BatteryUsageBroadcastReceiver.ACTION_BATTERY_UNPLUGGING);
@@ -175,14 +179,15 @@ public final class BatteryUsageBroadcastReceiverTest {
         when(mFakeFeatureFactory.powerUsageFeatureProvider.delayHourlyJobWhenBooting())
                 .thenReturn(false);
         // Make sure isCharged returns true.
-        doReturn(getBatteryIntent(/*level=*/ 100, BatteryManager.BATTERY_STATUS_FULL))
-                .when(mContext).registerReceiver(any(), any());
+        doReturn(getBatteryIntent(/* level= */ 100, BatteryManager.BATTERY_STATUS_FULL))
+                .when(mContext)
+                .registerReceiver(any(), any());
         // Make sure broadcast will be sent with delay.
         BatteryUsageBroadcastReceiver.sBroadcastDelayFromBoot =
                 SystemClock.elapsedRealtime() + 5 * DateUtils.MINUTE_IN_MILLIS;
 
-        mBatteryUsageBroadcastReceiver.onReceive(mContext,
-                new Intent(BatteryUsageBroadcastReceiver.ACTION_BATTERY_UNPLUGGING));
+        mBatteryUsageBroadcastReceiver.onReceive(
+                mContext, new Intent(BatteryUsageBroadcastReceiver.ACTION_BATTERY_UNPLUGGING));
 
         assertThat(mBatteryUsageBroadcastReceiver.mFetchBatteryUsageData).isTrue();
         assertSharedPreferences(BatteryUsageBroadcastReceiver.ACTION_BATTERY_UNPLUGGING);
@@ -195,13 +200,14 @@ public final class BatteryUsageBroadcastReceiverTest {
         when(mFakeFeatureFactory.powerUsageFeatureProvider.delayHourlyJobWhenBooting())
                 .thenReturn(false);
         // Make sure isCharged returns true.
-        doReturn(getBatteryIntent(/*level=*/ 100, BatteryManager.BATTERY_STATUS_UNKNOWN))
-                .when(mContext).registerReceiver(any(), any());
+        doReturn(getBatteryIntent(/* level= */ 100, BatteryManager.BATTERY_STATUS_UNKNOWN))
+                .when(mContext)
+                .registerReceiver(any(), any());
         BatteryUsageBroadcastReceiver.sBroadcastDelayFromBoot =
                 SystemClock.elapsedRealtime() - 5 * DateUtils.MINUTE_IN_MILLIS;
 
-        mBatteryUsageBroadcastReceiver.onReceive(mContext,
-                new Intent(BatteryUsageBroadcastReceiver.ACTION_BATTERY_UNPLUGGING));
+        mBatteryUsageBroadcastReceiver.onReceive(
+                mContext, new Intent(BatteryUsageBroadcastReceiver.ACTION_BATTERY_UNPLUGGING));
 
         assertThat(mBatteryUsageBroadcastReceiver.mFetchBatteryUsageData).isFalse();
         assertSharedPreferences(BatteryUsageBroadcastReceiver.ACTION_BATTERY_UNPLUGGING);
@@ -214,13 +220,14 @@ public final class BatteryUsageBroadcastReceiverTest {
         when(mFakeFeatureFactory.powerUsageFeatureProvider.delayHourlyJobWhenBooting())
                 .thenReturn(false);
         // Make sure isCharged returns true.
-        doReturn(getBatteryIntent(/*level=*/ 100, BatteryManager.BATTERY_STATUS_UNKNOWN))
-                .when(mContext).registerReceiver(any(), any());
+        doReturn(getBatteryIntent(/* level= */ 100, BatteryManager.BATTERY_STATUS_UNKNOWN))
+                .when(mContext)
+                .registerReceiver(any(), any());
         BatteryUsageBroadcastReceiver.sBroadcastDelayFromBoot =
                 SystemClock.elapsedRealtime() - 5 * DateUtils.MINUTE_IN_MILLIS;
 
-        mBatteryUsageBroadcastReceiver.onReceive(mContext,
-                new Intent(BatteryUsageBroadcastReceiver.ACTION_BATTERY_UNPLUGGING));
+        mBatteryUsageBroadcastReceiver.onReceive(
+                mContext, new Intent(BatteryUsageBroadcastReceiver.ACTION_BATTERY_UNPLUGGING));
 
         assertThat(mBatteryUsageBroadcastReceiver.mFetchBatteryUsageData).isTrue();
         assertSharedPreferences(BatteryUsageBroadcastReceiver.ACTION_BATTERY_UNPLUGGING);
@@ -234,12 +241,12 @@ public final class BatteryUsageBroadcastReceiverTest {
                 /*packageName*/ "com.android.testing_package", Boolean.valueOf(true));
         assertThat(BatteryDiffEntry.sValidForRestriction).isNotEmpty();
 
-        mBatteryUsageBroadcastReceiver.onReceive(mContext,
+        mBatteryUsageBroadcastReceiver.onReceive(
+                mContext,
                 new Intent(BatteryUsageBroadcastReceiver.ACTION_CLEAR_BATTERY_CACHE_DATA));
 
         assertThat(BatteryDiffEntry.sValidForRestriction).isEmpty();
-        assertSharedPreferences(
-                BatteryUsageBroadcastReceiver.ACTION_CLEAR_BATTERY_CACHE_DATA);
+        assertSharedPreferences(BatteryUsageBroadcastReceiver.ACTION_CLEAR_BATTERY_CACHE_DATA);
     }
 
     @Test
@@ -250,12 +257,12 @@ public final class BatteryUsageBroadcastReceiverTest {
                 /*packageName*/ "com.android.testing_package", Boolean.valueOf(true));
         assertThat(BatteryDiffEntry.sValidForRestriction).isNotEmpty();
 
-        mBatteryUsageBroadcastReceiver.onReceive(mContext,
+        mBatteryUsageBroadcastReceiver.onReceive(
+                mContext,
                 new Intent(BatteryUsageBroadcastReceiver.ACTION_CLEAR_BATTERY_CACHE_DATA));
 
         assertThat(BatteryDiffEntry.sValidForRestriction).isNotEmpty();
-        assertSharedPreferences(
-                BatteryUsageBroadcastReceiver.ACTION_CLEAR_BATTERY_CACHE_DATA);
+        assertSharedPreferences(BatteryUsageBroadcastReceiver.ACTION_CLEAR_BATTERY_CACHE_DATA);
     }
 
     private static Intent getBatteryIntent(int level, int status) {
@@ -267,7 +274,6 @@ public final class BatteryUsageBroadcastReceiverTest {
     }
 
     private void assertSharedPreferences(String preferenceKey) {
-        assertThat(DatabaseUtils.getSharedPreferences(mContext).contains(preferenceKey))
-                .isTrue();
+        assertThat(DatabaseUtils.getSharedPreferences(mContext).contains(preferenceKey)).isTrue();
     }
 }

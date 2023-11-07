@@ -37,8 +37,7 @@ import org.robolectric.RuntimeEnvironment;
 @RunWith(RobolectricTestRunner.class)
 public class LowBatteryTipTest {
 
-    @Mock
-    private MetricsFeatureProvider mMetricsFeatureProvider;
+    @Mock private MetricsFeatureProvider mMetricsFeatureProvider;
     private Context mContext;
     private LowBatteryTip mLowBatteryTip;
 
@@ -58,25 +57,25 @@ public class LowBatteryTipTest {
         final LowBatteryTip parcelTip = new LowBatteryTip(parcel);
 
         assertThat(parcelTip.isPowerSaveModeOn()).isFalse();
-        assertThat(parcelTip.getSummary(mContext)).isEqualTo(
-                mContext.getString(R.string.battery_tip_low_battery_summary));
+        assertThat(parcelTip.getSummary(mContext))
+                .isEqualTo(mContext.getString(R.string.battery_tip_low_battery_summary));
     }
 
     @Test
     public void updateState_stateNew_showExpectedInformation() {
         mLowBatteryTip.mState = BatteryTip.StateType.NEW;
 
-        assertThat(mLowBatteryTip.getTitle(mContext)).isEqualTo(
-                mContext.getString(R.string.battery_tip_low_battery_title));
-        assertThat(mLowBatteryTip.getSummary(mContext)).isEqualTo(
-                mContext.getString(R.string.battery_tip_low_battery_summary));
+        assertThat(mLowBatteryTip.getTitle(mContext))
+                .isEqualTo(mContext.getString(R.string.battery_tip_low_battery_title));
+        assertThat(mLowBatteryTip.getSummary(mContext))
+                .isEqualTo(mContext.getString(R.string.battery_tip_low_battery_summary));
         assertThat(mLowBatteryTip.getIconId()).isEqualTo(R.drawable.ic_battery_saver_accent_24dp);
     }
 
     @Test
     public void updateState_powerSaveModeOn_notShowTipItem() {
-        final LowBatteryTip tip = new LowBatteryTip(
-                BatteryTip.StateType.NEW, true /* powerSaveModeOn */);
+        final LowBatteryTip tip =
+                new LowBatteryTip(BatteryTip.StateType.NEW, true /* powerSaveModeOn */);
 
         tip.updateState(tip);
 
@@ -87,7 +86,10 @@ public class LowBatteryTipTest {
     public void log_lowBatteryActionWithCorrectState() {
         mLowBatteryTip.log(mContext, mMetricsFeatureProvider);
 
-        verify(mMetricsFeatureProvider).action(mContext,
-                MetricsProto.MetricsEvent.ACTION_LOW_BATTERY_TIP, BatteryTip.StateType.NEW);
+        verify(mMetricsFeatureProvider)
+                .action(
+                        mContext,
+                        MetricsProto.MetricsEvent.ACTION_LOW_BATTERY_TIP,
+                        BatteryTip.StateType.NEW);
     }
 }
