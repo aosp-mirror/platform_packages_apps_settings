@@ -845,8 +845,10 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
             return;
         }
 
-        // update the menu item
-        requireActivity().invalidateMenu();
+        if (isAdded()) {
+            // update the menu item
+            requireActivity().invalidateMenu();
+        }
 
         switch (wifiState) {
             case WifiManager.WIFI_STATE_ENABLED:
@@ -1480,8 +1482,10 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     @Override
     public void onAirplaneModeChanged(boolean isAirplaneModeOn) {
         updateAirplaneModeMsgPreference(isAirplaneModeOn /* visible */);
-        // update the menu item
-        requireActivity().invalidateMenu();
+        if (isAdded()) {
+            // update the menu item
+            requireActivity().invalidateMenu();
+        }
     }
 
     /**
