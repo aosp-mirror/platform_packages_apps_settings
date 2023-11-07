@@ -240,8 +240,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         use(MmsMessagePreferenceController.class).init(mSubId);
         use(AutoDataSwitchPreferenceController.class).init(mSubId);
         use(DisabledSubscriptionController.class).init(mSubId);
-        use(DeleteSimProfilePreferenceController.class).init(mSubId, this,
-                REQUEST_CODE_DELETE_SUBSCRIPTION);
+        use(DeleteSimProfilePreferenceController.class).init(mSubId);
         use(DisableSimFooterPreferenceController.class).init(mSubId);
         use(NrDisabledInDsdsFooterPreferenceController.class).init(mSubId);
 
