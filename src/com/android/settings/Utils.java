@@ -1268,7 +1268,11 @@ public final class Utils extends com.android.settingslib.Utils {
             UserProperties userProperties = userManager.getUserProperties(userHandle);
             if (userProperties.getShowInSettings() == UserProperties.SHOW_IN_SETTINGS_SEPARATE) {
                 if (Flags.allowPrivateProfile() && userProperties.getHideInSettingsInQuietMode()) {
-                    return !userManager.isQuietModeEnabled(userHandle);
+                    if (!userManager.isQuietModeEnabled(userHandle)) {
+                        return true;
+                    } else {
+                        continue;
+                    }
                 }
                 return true;
             }
