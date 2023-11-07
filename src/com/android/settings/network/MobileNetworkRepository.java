@@ -226,6 +226,9 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
             createTelephonyManagerBySubId(subId);
             mDataRoamingObserver.register(mContext, subId);
         }
+        // When one client registers callback first time, convey the cached results to the client
+        // so that the client is aware of the content therein.
+        sendAvailableSubInfoCache(mobileNetworkCallback);
     }
 
     public void addRegisterBySubId(int subId) {
@@ -416,7 +419,15 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
 
     private void onAvailableSubInfoChanged(
             List<SubscriptionInfoEntity> availableSubInfoEntityList) {
-        mAvailableSubInfoEntityList = new ArrayList<>(availableSubInfoEntityList);
+        synchronized (this) {
+            if (mAvailableSubInfoEntityList != null
+                    && mAvailableSubInfoEntityList.size() == availableSubInfoEntityList.size()
+                    && mAvailableSubInfoEntityList.containsAll(availableSubInfoEntityList)) {
+                Log.d(TAG, "onAvailableSubInfoChanged, duplicates = " + availableSubInfoEntityList);
+                return;
+            }
+            mAvailableSubInfoEntityList = new ArrayList<>(availableSubInfoEntityList);
+        }
         if (DEBUG) {
             Log.d(TAG, "onAvailableSubInfoChanged, availableSubInfoEntityList = "
                     + availableSubInfoEntityList);
@@ -426,23 +437,48 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         }
         mMetricsFeatureProvider.action(mContext,
                 SettingsEnums.ACTION_MOBILE_NETWORK_DB_NOTIFY_SUB_INFO_IS_CHANGED, 0);
-        onActiveSubInfoListChanged(mAvailableSubInfoEntityList);
+        onActiveSubInfoListChanged(availableSubInfoEntityList);
     }
 
     private void onActiveSubInfoListChanged(
             List<SubscriptionInfoEntity> availableSubInfoEntityList) {
-        mActiveSubInfoEntityList = availableSubInfoEntityList.stream()
+        List<SubscriptionInfoEntity> activeSubInfoEntityList =
+                availableSubInfoEntityList.stream()
                 .filter(SubscriptionInfoEntity::isActiveSubscription)
                 .filter(SubscriptionInfoEntity::isSubscriptionVisible)
                 .collect(Collectors.toList());
         if (DEBUG) {
             Log.d(TAG, "onActiveSubInfoChanged, activeSubInfoEntityList = "
-                    + mActiveSubInfoEntityList);
+                    + activeSubInfoEntityList);
         }
-        List<SubscriptionInfoEntity> activeSubInfoEntityList = new ArrayList<>(
-                mActiveSubInfoEntityList);
+        List<SubscriptionInfoEntity> tempActiveSubInfoEntityList = new ArrayList<>(
+                activeSubInfoEntityList);
+        synchronized (this) {
+            mActiveSubInfoEntityList = activeSubInfoEntityList;
+        }
         for (MobileNetworkCallback callback : sCallbacks) {
-            callback.onActiveSubInfoChanged(activeSubInfoEntityList);
+            callback.onActiveSubInfoChanged(tempActiveSubInfoEntityList);
+        }
+    }
+
+    private void sendAvailableSubInfoCache(MobileNetworkCallback callback) {
+        if (callback != null) {
+             List<SubscriptionInfoEntity> availableSubInfoEntityList = null;
+             List<SubscriptionInfoEntity> activeSubInfoEntityList = null;
+             synchronized (this) {
+                 if (mAvailableSubInfoEntityList != null) {
+                     availableSubInfoEntityList = new ArrayList<>(mAvailableSubInfoEntityList);
+                 }
+                 if (mActiveSubInfoEntityList != null) {
+                     activeSubInfoEntityList = new ArrayList<>(mActiveSubInfoEntityList);
+                 }
+             }
+             if (availableSubInfoEntityList != null) {
+                 callback.onAvailableSubInfoChanged(availableSubInfoEntityList);
+             }
+             if (activeSubInfoEntityList != null) {
+                 callback.onActiveSubInfoChanged(activeSubInfoEntityList);
+             }
         }
     }
 
@@ -498,8 +534,6 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         mMobileNetworkDatabase.deleteSubInfoBySubId(subId);
         mMobileNetworkDatabase.deleteUiccInfoBySubId(subId);
         mMobileNetworkDatabase.deleteMobileNetworkInfoBySubId(subId);
-        mAvailableSubInfoEntityList.removeIf(info -> info.subId.equals(subId));
-        mActiveSubInfoEntityList.removeIf(info -> info.subId.equals(subId));
         mUiccInfoEntityList.removeIf(info -> info.subId.equals(subId));
         mMobileNetworkInfoEntityList.removeIf(info -> info.subId.equals(subId));
         int id = Integer.parseInt(subId);
@@ -656,10 +690,15 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
 
     private void insertAvailableSubInfoToEntity(List<SubscriptionInfo> inputAvailableInfoList) {
         sExecutor.execute(() -> {
-            SubscriptionInfoEntity[] availableInfoArray = mAvailableSubInfoEntityList.toArray(
+            SubscriptionInfoEntity[] availableInfoArray = null;
+            int availableEntitySize = 0;
+            synchronized (this) {
+                availableInfoArray = mAvailableSubInfoEntityList.toArray(
                     new SubscriptionInfoEntity[0]);
+                availableEntitySize = mAvailableSubInfoEntityList.size();
+            }
             if ((inputAvailableInfoList == null || inputAvailableInfoList.size() == 0)
-                    && mAvailableSubInfoEntityList.size() != 0) {
+                    && availableEntitySize != 0) {
                 if (DEBUG) {
                     Log.d(TAG, "availableSudInfoList from framework is empty, remove all subs");
                 }
@@ -672,7 +711,7 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
                 SubscriptionInfo[] inputAvailableInfoArray = inputAvailableInfoList.toArray(
                         new SubscriptionInfo[0]);
                 // Remove the redundant subInfo
-                if (inputAvailableInfoList.size() <= mAvailableSubInfoEntityList.size()) {
+                if (inputAvailableInfoList.size() <= availableEntitySize) {
                     for (SubscriptionInfo subInfo : inputAvailableInfoArray) {
                         int subId = subInfo.getSubscriptionId();
                         if (mSubscriptionInfoMap.containsKey(subId)) {
@@ -686,7 +725,7 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
                                 deleteAllInfoBySubId(String.valueOf(key));
                             }
                         }
-                    } else if (inputAvailableInfoList.size() < mAvailableSubInfoEntityList.size()) {
+                    } else if (inputAvailableInfoList.size() < availableEntitySize) {
                         // Check the subInfo between the new list from framework and old list in
                         // the database, if the subInfo is not existed in the new list, delete it
                         // from the database.
