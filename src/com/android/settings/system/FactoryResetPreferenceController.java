@@ -15,6 +15,7 @@
  */
 package com.android.settings.system;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -37,9 +38,6 @@ public class FactoryResetPreferenceController extends BasePreferenceController {
 
     private static final String ACTION_PREPARE_FACTORY_RESET =
             "com.android.settings.ACTION_PREPARE_FACTORY_RESET";
-
-    private static final String PREPARE_FACTORY_RESET_PERMISSION =
-            "com.android.settings.permissions.PREPARE_FACTORY_RESET";
 
     private final UserManager mUm;
     private ActivityResultLauncher<Intent> mFactoryResetPreparationLauncher;
@@ -103,7 +101,7 @@ public class FactoryResetPreferenceController extends BasePreferenceController {
                 boolean isGranted =
                         (factoryResetWizardPackageInfo.requestedPermissionsFlags[i]
                                 & PackageInfo.REQUESTED_PERMISSION_GRANTED) != 0;
-                if (permission.equals(PREPARE_FACTORY_RESET_PERMISSION) && isGranted) {
+                if (permission.equals(Manifest.permission.PREPARE_FACTORY_RESET) && isGranted) {
                     return prepareFactoryResetWizardRequest;
                 }
             }
