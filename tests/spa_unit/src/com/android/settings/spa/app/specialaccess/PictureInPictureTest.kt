@@ -67,18 +67,9 @@ class PictureInPictureTest {
     }
 
     @Test
-    fun pageTitleResId() {
+    fun modelResourceId() {
         assertThat(listModel.pageTitleResId).isEqualTo(R.string.picture_in_picture_title)
-    }
-
-    @Test
-    fun switchTitleResId() {
-        assertThat(listModel.switchTitleResId)
-            .isEqualTo(R.string.picture_in_picture_app_detail_switch)
-    }
-
-    @Test
-    fun footerResId() {
+        assertThat(listModel.switchTitleResId).isEqualTo(R.string.picture_in_picture_app_detail_switch)
         assertThat(listModel.footerResId).isEqualTo(R.string.picture_in_picture_app_detail_summary)
     }
 

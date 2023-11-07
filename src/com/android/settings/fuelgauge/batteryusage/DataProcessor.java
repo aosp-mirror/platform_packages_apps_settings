@@ -104,14 +104,11 @@ public final class DataProcessor {
     static final Comparator<BatteryEvent> BATTERY_EVENT_TIMESTAMP_COMPARATOR =
             Comparator.comparing(BatteryEvent::getTimestamp);
 
-    @VisibleForTesting
-    static boolean sDebug = false;
+    @VisibleForTesting static boolean sDebug = false;
 
-    @VisibleForTesting
-    static long sTestCurrentTimeMillis = 0;
+    @VisibleForTesting static long sTestCurrentTimeMillis = 0;
 
-    @VisibleForTesting
-    static Set<String> sTestSystemAppsPackageNames;
+    @VisibleForTesting static Set<String> sTestSystemAppsPackageNames;
 
     @VisibleForTesting
     static IUsageStatsManager sUsageStatsManager =
@@ -128,12 +125,11 @@ public final class DataProcessor {
                 Map<Integer, Map<Integer, BatteryDiffData>> batteryCallbackData);
     }
 
-    private DataProcessor() {
-    }
+    private DataProcessor() {}
 
     /**
-     * @return Returns battery usage data of different entries.
-     * Returns null if the input is invalid or there is no enough data.
+     * @return Returns battery usage data of different entries. <br>
+     *     Returns null if the input is invalid or there is no enough data.
      */
     @Nullable
     public static Map<Integer, Map<Integer, BatteryDiffData>> getBatteryUsageData(
@@ -153,32 +149,31 @@ public final class DataProcessor {
         final Map<String, BatteryHistEntry> currentBatteryHistoryMap =
                 getCurrentBatteryHistoryMapFromStatsService(context);
         // Replaces the placeholder in processedBatteryHistoryMap.
-        for (Map.Entry<Long, Map<String, BatteryHistEntry>> mapEntry
-                : processedBatteryHistoryMap.entrySet()) {
+        for (Map.Entry<Long, Map<String, BatteryHistEntry>> mapEntry :
+                processedBatteryHistoryMap.entrySet()) {
             if (mapEntry.getValue().containsKey(CURRENT_TIME_BATTERY_HISTORY_PLACEHOLDER)) {
                 mapEntry.setValue(currentBatteryHistoryMap);
             }
         }
         return batteryLevelData == null
                 ? null
-                : generateBatteryUsageMap(context,
-                        getBatteryDiffDataMap(context,
+                : generateBatteryUsageMap(
+                        context,
+                        getBatteryDiffDataMap(
+                                context,
                                 batteryLevelData.getHourlyBatteryLevelsPerDay(),
                                 processedBatteryHistoryMap,
-                                /*appUsagePeriodMap=*/ null,
+                                /* appUsagePeriodMap= */ null,
                                 getSystemAppsPackageNames(context),
                                 getSystemAppsUids(context)),
                         batteryLevelData);
     }
 
-    /**
-     * Gets the {@link BatteryUsageStats} from system service.
-     */
+    /** Gets the {@link BatteryUsageStats} from system service. */
     @Nullable
     public static BatteryUsageStats getBatteryUsageStats(final Context context) {
         final BatteryUsageStatsQuery batteryUsageStatsQuery =
-                new BatteryUsageStatsQuery
-                        .Builder()
+                new BatteryUsageStatsQuery.Builder()
                         .includeBatteryHistory()
                         .includeProcessStateData()
                         .build();
@@ -186,9 +181,7 @@ public final class DataProcessor {
                 .getBatteryUsageStats(batteryUsageStatsQuery);
     }
 
-    /**
-     * Gets the {@link UsageEvents} from system service for all unlocked users.
-     */
+    /** Gets the {@link UsageEvents} from system service for all unlocked users. */
     @Nullable
     public static Map<Long, UsageEvents> getAppUsageEvents(Context context) {
         final long start = System.currentTimeMillis();
@@ -204,21 +197,20 @@ public final class DataProcessor {
         final long sixDaysAgoTimestamp =
                 DatabaseUtils.getTimestampSixDaysAgo(Calendar.getInstance());
         for (final UserInfo user : userManager.getAliveUsers()) {
-            final UsageEvents events = getAppUsageEventsForUser(
-                    context, userManager, user.id, sixDaysAgoTimestamp);
+            final UsageEvents events =
+                    getAppUsageEventsForUser(context, userManager, user.id, sixDaysAgoTimestamp);
             if (events != null) {
                 resultMap.put(Long.valueOf(user.id), events);
             }
         }
         final long elapsedTime = System.currentTimeMillis() - start;
-        Log.d(TAG, String.format("getAppUsageEvents() for all unlocked users in %d/ms",
-                elapsedTime));
+        Log.d(
+                TAG,
+                String.format("getAppUsageEvents() for all unlocked users in %d/ms", elapsedTime));
         return resultMap.isEmpty() ? null : resultMap;
     }
 
-    /**
-     * Gets the {@link UsageEvents} from system service for the specific user.
-     */
+    /** Gets the {@link UsageEvents} from system service for the specific user. */
     @Nullable
     public static UsageEvents getAppUsageEventsForUser(
             Context context, final int userID, final long startTimestampOfLevelData) {
@@ -234,17 +226,17 @@ public final class DataProcessor {
         final long sixDaysAgoTimestamp =
                 DatabaseUtils.getTimestampSixDaysAgo(Calendar.getInstance());
         final long earliestTimestamp = Math.max(sixDaysAgoTimestamp, startTimestampOfLevelData);
-        final UsageEvents events = getAppUsageEventsForUser(
-                context, userManager, userID, earliestTimestamp);
+        final UsageEvents events =
+                getAppUsageEventsForUser(context, userManager, userID, earliestTimestamp);
         final long elapsedTime = System.currentTimeMillis() - start;
-        Log.d(TAG, String.format("getAppUsageEventsForUser() for user %d in %d/ms",
-                userID, elapsedTime));
+        Log.d(
+                TAG,
+                String.format(
+                        "getAppUsageEventsForUser() for user %d in %d/ms", userID, elapsedTime));
         return events;
     }
 
-    /**
-     * Closes the {@link BatteryUsageStats} after using it.
-     */
+    /** Closes the {@link BatteryUsageStats} after using it. */
     public static void closeBatteryUsageStats(BatteryUsageStats batteryUsageStats) {
         if (batteryUsageStats != null) {
             try {
@@ -260,18 +252,20 @@ public final class DataProcessor {
      * Attributes the list of {@link AppUsageEvent} into hourly time slots and reformat them into
      * {@link AppUsagePeriod} for easier use in the following process.
      *
-     * <p>There could be 2 cases of the returned value:</p>
+     * <p>There could be 2 cases of the returned value:
+     *
      * <ul>
-     * <li>null: empty or invalid data.</li>
-     * <li>non-null: must be a 2d map and composed by:
-     * <p>  [0][0] ~ [maxDailyIndex][maxHourlyIndex]</p></li>
+     *   <li>null: empty or invalid data.
+     *   <li>non-null: must be a 2d map and composed by:
+     *       <p>[0][0] ~ [maxDailyIndex][maxHourlyIndex]
      * </ul>
      *
-     * <p>The structure is consistent with the battery usage map returned by
-     * {@code generateBatteryUsageMap}.</p>
+     * <p>The structure is consistent with the battery usage map returned by {@code
+     * generateBatteryUsageMap}.
      *
-     * <p>{@code Long} stands for the userId.</p>
-     * <p>{@code String} stands for the packageName.</p>
+     * <p>{@code Long} stands for the userId.
+     *
+     * <p>{@code String} stands for the packageName.
      */
     @Nullable
     public static Map<Integer, Map<Integer, Map<Long, Map<String, List<AppUsagePeriod>>>>>
@@ -310,16 +304,18 @@ public final class DataProcessor {
                 // The value could be null when there is no data in the hourly slot.
                 dailyMap.put(
                         hourlyIndex,
-                        buildAppUsagePeriodList(context, hourlyAppUsageEventList, batteryEventList,
-                                startTimestamp, endTimestamp));
+                        buildAppUsagePeriodList(
+                                context,
+                                hourlyAppUsageEventList,
+                                batteryEventList,
+                                startTimestamp,
+                                endTimestamp));
             }
         }
         return resultMap;
     }
 
-    /**
-     * Generates the list of {@link AppUsageEvent} from the supplied {@link UsageEvents}.
-     */
+    /** Generates the list of {@link AppUsageEvent} from the supplied {@link UsageEvents}. */
     public static List<AppUsageEvent> generateAppUsageEventListFromUsageEvents(
             Context context, Map<Long, UsageEvents> usageEventsMap) {
         final List<AppUsageEvent> appUsageEventList = new ArrayList<>();
@@ -342,12 +338,14 @@ public final class DataProcessor {
                         final String taskRootClassName = event.getTaskRootClassName();
                         if (!TextUtils.isEmpty(taskRootClassName)
                                 && ignoreScreenOnTimeTaskRootSet.contains(taskRootClassName)) {
-                            Log.w(TAG, String.format(
-                                    "Ignoring a usage event with task root class name %s, "
-                                            + "(timestamp=%d, type=%d)",
-                                    taskRootClassName,
-                                    event.getTimeStamp(),
-                                    event.getEventType()));
+                            Log.w(
+                                    TAG,
+                                    String.format(
+                                            "Ignoring a usage event with task root class name %s, "
+                                                    + "(timestamp=%d, type=%d)",
+                                            taskRootClassName,
+                                            event.getTimeStamp(),
+                                            event.getEventType()));
                             break;
                         }
                         final AppUsageEvent appUsageEvent =
@@ -363,19 +361,18 @@ public final class DataProcessor {
                 }
             }
         }
-        Log.w(TAG, String.format(
-                "Read %d relevant events (%d total) from UsageStatsManager", numEventsFetched,
-                numAllEventsFetched));
+        Log.w(
+                TAG,
+                String.format(
+                        "Read %d relevant events (%d total) from UsageStatsManager",
+                        numEventsFetched, numAllEventsFetched));
         return appUsageEventList;
     }
 
-    /**
-     * Generates the list of {@link BatteryEntry} from the supplied {@link BatteryUsageStats}.
-     */
+    /** Generates the list of {@link BatteryEntry} from the supplied {@link BatteryUsageStats}. */
     @Nullable
     public static List<BatteryEntry> generateBatteryEntryListFromBatteryUsageStats(
-            final Context context,
-            @Nullable final BatteryUsageStats batteryUsageStats) {
+            final Context context, @Nullable final BatteryUsageStats batteryUsageStats) {
         if (batteryUsageStats == null) {
             Log.w(TAG, "batteryUsageStats is null content");
             return null;
@@ -385,13 +382,18 @@ public final class DataProcessor {
         }
         final BatteryUtils batteryUtils = BatteryUtils.getInstance(context);
         final int dischargePercentage = Math.max(0, batteryUsageStats.getDischargePercentage());
-        final List<BatteryEntry> usageList = getCoalescedUsageList(
-                context, batteryUtils, batteryUsageStats, /*loadDataInBackground=*/ false);
+        final List<BatteryEntry> usageList =
+                getCoalescedUsageList(
+                        context,
+                        batteryUtils,
+                        batteryUsageStats,
+                        /* loadDataInBackground= */ false);
         final double totalPower = batteryUsageStats.getConsumedPower();
         for (int i = 0; i < usageList.size(); i++) {
             final BatteryEntry entry = usageList.get(i);
-            final double percentOfTotal = batteryUtils.calculateBatteryPercent(
-                    entry.getConsumedPower(), totalPower, dischargePercentage);
+            final double percentOfTotal =
+                    batteryUtils.calculateBatteryPercent(
+                            entry.getConsumedPower(), totalPower, dischargePercentage);
             entry.mPercent = percentOfTotal;
         }
         return usageList;
@@ -404,19 +406,19 @@ public final class DataProcessor {
             final Context context) {
         final List<BatteryHistEntry> batteryHistEntryList =
                 getBatteryHistListFromFromStatsService(context);
-        return batteryHistEntryList == null ? new ArrayMap<>()
+        return batteryHistEntryList == null
+                ? new ArrayMap<>()
                 : batteryHistEntryList.stream().collect(Collectors.toMap(e -> e.getKey(), e -> e));
     }
 
     /**
      * @return Returns the processed history map which has interpolated to every hour data.
-     * The start timestamp is the first timestamp in batteryHistoryMap. The end timestamp is current
-     * time. The keys of processed history map should contain every hour between the start and end
-     * timestamp. If there's no data in some key, the value will be the empty map.
+     *     <p>The start timestamp is the first timestamp in batteryHistoryMap. The end timestamp is
+     *     current time. The keys of processed history map should contain every hour between the
+     *     start and end timestamp. If there's no data in some key, the value will be the empty map.
      */
     static Map<Long, Map<String, BatteryHistEntry>> getHistoryMapWithExpectedTimestamps(
-            Context context,
-            final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap) {
+            Context context, final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap) {
         final long startTime = System.currentTimeMillis();
         final List<Long> rawTimestampList = new ArrayList<>(batteryHistoryMap.keySet());
         final Map<Long, Map<String, BatteryHistEntry>> resultMap = new ArrayMap();
@@ -429,8 +431,11 @@ public final class DataProcessor {
         final List<Long> expectedTimestampList = getTimestampSlots(rawTimestampList, currentTime);
         interpolateHistory(
                 context, rawTimestampList, expectedTimestampList, batteryHistoryMap, resultMap);
-        Log.d(TAG, String.format("getHistoryMapWithExpectedTimestamps() size=%d in %d/ms",
-                resultMap.size(), (System.currentTimeMillis() - startTime)));
+        Log.d(
+                TAG,
+                String.format(
+                        "getHistoryMapWithExpectedTimestamps() size=%d in %d/ms",
+                        resultMap.size(), (System.currentTimeMillis() - startTime)));
         return resultMap;
     }
 
@@ -470,7 +475,8 @@ public final class DataProcessor {
         }
         timestampSlots.add(startTimestamp);
         for (long timestamp = TimestampUtils.getNextHourTimestamp(startTimestamp);
-                timestamp < endTimestamp; timestamp += DateUtils.HOUR_IN_MILLIS) {
+                timestamp < endTimestamp;
+                timestamp += DateUtils.HOUR_IN_MILLIS) {
             timestampSlots.add(timestamp);
         }
         timestampSlots.add(endTimestamp);
@@ -496,16 +502,17 @@ public final class DataProcessor {
 
     @VisibleForTesting
     static long[] findNearestTimestamp(final List<Long> timestamps, final long target) {
-        final long[] results = new long[]{Long.MIN_VALUE, Long.MAX_VALUE};
+        final long[] results = new long[] {Long.MIN_VALUE, Long.MAX_VALUE};
         // Searches the nearest lower and upper timestamp value.
-        timestamps.forEach(timestamp -> {
-            if (timestamp <= target && timestamp > results[0]) {
-                results[0] = timestamp;
-            }
-            if (timestamp >= target && timestamp < results[1]) {
-                results[1] = timestamp;
-            }
-        });
+        timestamps.forEach(
+                timestamp -> {
+                    if (timestamp <= target && timestamp > results[0]) {
+                        results[0] = timestamp;
+                    }
+                    if (timestamp >= target && timestamp < results[1]) {
+                        results[1] = timestamp;
+                    }
+                });
         // Uses zero value to represent invalid searching result.
         results[0] = results[0] == Long.MIN_VALUE ? 0 : results[0];
         results[1] = results[1] == Long.MAX_VALUE ? 0 : results[1];
@@ -547,7 +554,8 @@ public final class DataProcessor {
                 slotBatteryHistoryList.add(
                         batteryHistoryMap.getOrDefault(startTimestamp, EMPTY_BATTERY_MAP));
                 for (Long timestamp = TimestampUtils.getNextHourTimestamp(startTimestamp);
-                        timestamp < endTimestamp; timestamp += DateUtils.HOUR_IN_MILLIS) {
+                        timestamp < endTimestamp;
+                        timestamp += DateUtils.HOUR_IN_MILLIS) {
                     slotBatteryHistoryList.add(
                             batteryHistoryMap.getOrDefault(timestamp, EMPTY_BATTERY_MAP));
                 }
@@ -567,7 +575,7 @@ public final class DataProcessor {
                                 systemAppsPackageNames,
                                 systemAppsUids,
                                 appUsagePeriodMap == null
-                                        || appUsagePeriodMap.get(dailyIndex) == null
+                                                || appUsagePeriodMap.get(dailyIndex) == null
                                         ? null
                                         : appUsagePeriodMap.get(dailyIndex).get(hourlyIndex),
                                 slotBatteryHistoryList);
@@ -579,17 +587,16 @@ public final class DataProcessor {
 
     /**
      * @return Returns the indexed battery usage data for each corresponding time slot.
-     *
-     * <p>There could be 2 cases of the returned value:</p>
-     * <ul>
-     * <li> null: empty or invalid data.</li>
-     * <li> 1 part: if batteryLevelData is null.</li>
-     * <p>  [SELECTED_INDEX_ALL][SELECTED_INDEX_ALL]</p>
-     * <li> 3 parts: if batteryLevelData is not null.</li>
-     * <p>  1 - [SELECTED_INDEX_ALL][SELECTED_INDEX_ALL]</p>
-     * <p>  2 - [0][SELECTED_INDEX_ALL] ~ [maxDailyIndex][SELECTED_INDEX_ALL]</p>
-     * <p>  3 - [0][0] ~ [maxDailyIndex][maxHourlyIndex]</p>
-     * </ul>
+     *     <p>There could be 2 cases of the returned value:
+     *     <ul>
+     *       <li>null: empty or invalid data.
+     *       <li>1 part: if batteryLevelData is null.
+     *           <p>[SELECTED_INDEX_ALL][SELECTED_INDEX_ALL]
+     *       <li>3 parts: if batteryLevelData is not null.
+     *           <p>1 - [SELECTED_INDEX_ALL][SELECTED_INDEX_ALL]
+     *           <p>2 - [0][SELECTED_INDEX_ALL] ~ [maxDailyIndex][SELECTED_INDEX_ALL]
+     *           <p>3 - [0][0] ~ [maxDailyIndex][maxHourlyIndex]
+     *     </ul>
      */
     static Map<Integer, Map<Integer, BatteryDiffData>> generateBatteryUsageMap(
             final Context context,
@@ -630,9 +637,17 @@ public final class DataProcessor {
         final List<BatteryDiffEntry> systemEntries = new ArrayList<>();
         if (batteryHistEntryList == null || batteryHistEntryList.isEmpty()) {
             Log.w(TAG, "batteryHistEntryList is null or empty in generateBatteryDiffData()");
-            return new BatteryDiffData(context, startTimestamp, getCurrentTimeMillis(),
-                    /* startBatteryLevel =*/ 100, getCurrentLevel(context), /* screenOnTime= */ 0L,
-                    appEntries, systemEntries, systemAppsPackageNames, systemAppsUids,
+            return new BatteryDiffData(
+                    context,
+                    startTimestamp,
+                    getCurrentTimeMillis(),
+                    /* startBatteryLevel= */ 100,
+                    getCurrentLevel(context),
+                    /* screenOnTime= */ 0L,
+                    appEntries,
+                    systemEntries,
+                    systemAppsPackageNames,
+                    systemAppsUids,
                     /* isAccumulated= */ false);
         }
         final int currentUserId = context.getUserId();
@@ -642,30 +657,31 @@ public final class DataProcessor {
                 userHandle != null ? userHandle.getIdentifier() : Integer.MIN_VALUE;
 
         for (BatteryHistEntry entry : batteryHistEntryList) {
-            final boolean isFromOtherUsers = isConsumedFromOtherUsers(
-                    currentUserId, workProfileUserId, entry);
+            final boolean isFromOtherUsers =
+                    isConsumedFromOtherUsers(currentUserId, workProfileUserId, entry);
             // Not show other users' battery usage data.
             if (isFromOtherUsers) {
                 continue;
             } else {
-                final BatteryDiffEntry currentBatteryDiffEntry = new BatteryDiffEntry(
-                        context,
-                        entry.mUid,
-                        entry.mUserId,
-                        entry.getKey(),
-                        entry.mIsHidden,
-                        entry.mDrainType,
-                        entry.mPackageName,
-                        entry.mAppLabel,
-                        entry.mConsumerType,
-                        entry.mForegroundUsageTimeInMs,
-                        entry.mBackgroundUsageTimeInMs,
-                        /*screenOnTimeInMs=*/ 0,
-                        entry.mConsumePower,
-                        entry.mForegroundUsageConsumePower,
-                        entry.mForegroundServiceUsageConsumePower,
-                        entry.mBackgroundUsageConsumePower,
-                        entry.mCachedUsageConsumePower);
+                final BatteryDiffEntry currentBatteryDiffEntry =
+                        new BatteryDiffEntry(
+                                context,
+                                entry.mUid,
+                                entry.mUserId,
+                                entry.getKey(),
+                                entry.mIsHidden,
+                                entry.mDrainType,
+                                entry.mPackageName,
+                                entry.mAppLabel,
+                                entry.mConsumerType,
+                                entry.mForegroundUsageTimeInMs,
+                                entry.mBackgroundUsageTimeInMs,
+                                /* screenOnTimeInMs= */ 0,
+                                entry.mConsumePower,
+                                entry.mForegroundUsageConsumePower,
+                                entry.mForegroundServiceUsageConsumePower,
+                                entry.mBackgroundUsageConsumePower,
+                                entry.mCachedUsageConsumePower);
                 if (currentBatteryDiffEntry.isSystemEntry()) {
                     systemEntries.add(currentBatteryDiffEntry);
                 } else {
@@ -673,21 +689,33 @@ public final class DataProcessor {
                 }
             }
         }
-        return new BatteryDiffData(context, startTimestamp, getCurrentTimeMillis(),
-                /* startBatteryLevel =*/ 100, getCurrentLevel(context), /* screenOnTime= */ 0L,
-                appEntries, systemEntries, systemAppsPackageNames, systemAppsUids,
+        return new BatteryDiffData(
+                context,
+                startTimestamp,
+                getCurrentTimeMillis(),
+                /* startBatteryLevel= */ 100,
+                getCurrentLevel(context),
+                /* screenOnTime= */ 0L,
+                appEntries,
+                systemEntries,
+                systemAppsPackageNames,
+                systemAppsUids,
                 /* isAccumulated= */ false);
     }
 
     /**
-     * <p>{@code Long} stands for the userId.</p>
-     * <p>{@code String} stands for the packageName.</p>
+     * {@code Long} stands for the userId.
+     *
+     * <p>{@code String} stands for the packageName.
      */
     @VisibleForTesting
     @Nullable
     static Map<Long, Map<String, List<AppUsagePeriod>>> buildAppUsagePeriodList(
-            Context context, final List<AppUsageEvent> appUsageEvents,
-            final List<BatteryEvent> batteryEventList, final long startTime, final long endTime) {
+            Context context,
+            final List<AppUsageEvent> appUsageEvents,
+            final List<BatteryEvent> batteryEventList,
+            final long startTime,
+            final long endTime) {
         if (appUsageEvents.isEmpty()) {
             return null;
         }
@@ -726,11 +754,12 @@ public final class DataProcessor {
             // The same instance must have same userId and packageName.
             final AppUsageEvent firstEvent = usageEvents.get(0);
             final long eventUserId = firstEvent.getUserId();
-            final String packageName = getEffectivePackageName(
-                    context,
-                    sUsageStatsManager,
-                    firstEvent.getPackageName(),
-                    firstEvent.getTaskRootPackageName());
+            final String packageName =
+                    getEffectivePackageName(
+                            context,
+                            sUsageStatsManager,
+                            firstEvent.getPackageName(),
+                            firstEvent.getTaskRootPackageName());
             usageEvents.addAll(deviceEvents);
             // Sorts the usageEvents in ascending order based on the timestamp before computing the
             // period.
@@ -752,7 +781,7 @@ public final class DataProcessor {
             if (allUsagePeriods.get(userId) == null) {
                 continue;
             }
-            for (final String packageName: allUsagePeriods.get(userId).keySet()) {
+            for (final String packageName : allUsagePeriods.get(userId).keySet()) {
                 Collections.sort(
                         allUsagePeriods.get(userId).get(packageName),
                         Comparator.comparing(AppUsagePeriod::getStartTime));
@@ -811,8 +840,7 @@ public final class DataProcessor {
 
     @VisibleForTesting
     static List<AppUsagePeriod> excludePowerConnectedTimeFromAppUsagePeriodList(
-            final List<AppUsagePeriod> usagePeriodList,
-            final List<BatteryEvent> batteryEventList) {
+            final List<AppUsagePeriod> usagePeriodList, final List<BatteryEvent> batteryEventList) {
         final List<AppUsagePeriod> resultList = new ArrayList<>();
         int index = 0;
         for (AppUsagePeriod inputPeriod : usagePeriodList) {
@@ -840,10 +868,11 @@ public final class DataProcessor {
 
                 if (batteryEvent.getType() == BatteryEventType.POWER_CONNECTED
                         && lastStartTime != 0) {
-                    resultList.add(AppUsagePeriod.newBuilder()
-                            .setStartTime(lastStartTime)
-                            .setEndTime(batteryEvent.getTimestamp())
-                            .build());
+                    resultList.add(
+                            AppUsagePeriod.newBuilder()
+                                    .setStartTime(lastStartTime)
+                                    .setEndTime(batteryEvent.getTimestamp())
+                                    .build());
                     lastStartTime = 0;
                 } else if (batteryEvent.getType() == BatteryEventType.POWER_DISCONNECTED) {
                     lastStartTime = batteryEvent.getTimestamp();
@@ -851,10 +880,11 @@ public final class DataProcessor {
                 index++;
             }
             if (lastStartTime != 0) {
-                resultList.add(AppUsagePeriod.newBuilder()
-                        .setStartTime(lastStartTime)
-                        .setEndTime(inputPeriod.getEndTime())
-                        .build());
+                resultList.add(
+                        AppUsagePeriod.newBuilder()
+                                .setStartTime(lastStartTime)
+                                .setEndTime(inputPeriod.getEndTime())
+                                .build());
             }
         }
         return resultList;
@@ -873,13 +903,19 @@ public final class DataProcessor {
     }
 
     static Map<Long, BatteryDiffData> getBatteryDiffDataMapFromStatsService(
-            final Context context, final long startTimestamp,
+            final Context context,
+            final long startTimestamp,
             @NonNull final Set<String> systemAppsPackageNames,
             @NonNull final Set<Integer> systemAppsUids) {
         Map<Long, BatteryDiffData> batteryDiffDataMap = new ArrayMap<>(1);
-        batteryDiffDataMap.put(startTimestamp, generateBatteryDiffData(
-                context, startTimestamp, getBatteryHistListFromFromStatsService(context),
-                systemAppsPackageNames, systemAppsUids));
+        batteryDiffDataMap.put(
+                startTimestamp,
+                generateBatteryDiffData(
+                        context,
+                        startTimestamp,
+                        getBatteryHistListFromFromStatsService(context),
+                        systemAppsPackageNames,
+                        systemAppsUids));
         return batteryDiffDataMap;
     }
 
@@ -892,23 +928,25 @@ public final class DataProcessor {
         final BatteryDiffData batteryUsageMapForAll =
                 batteryUsageMap.get(SELECTED_INDEX_ALL).get(SELECTED_INDEX_ALL);
         if (batteryUsageMapForAll != null) {
-            batteryUsageMapForAll.getAppDiffEntryList().forEach(
-                    entry -> entry.loadLabelAndIcon());
-            batteryUsageMapForAll.getSystemDiffEntryList().forEach(
-                    entry -> entry.loadLabelAndIcon());
+            batteryUsageMapForAll.getAppDiffEntryList().forEach(entry -> entry.loadLabelAndIcon());
+            batteryUsageMapForAll
+                    .getSystemDiffEntryList()
+                    .forEach(entry -> entry.loadLabelAndIcon());
         }
     }
 
     static Set<String> getSystemAppsPackageNames(Context context) {
-        return sTestSystemAppsPackageNames != null ? sTestSystemAppsPackageNames
+        return sTestSystemAppsPackageNames != null
+                ? sTestSystemAppsPackageNames
                 : AppListRepositoryUtil.getSystemPackageNames(context, context.getUserId());
     }
 
     static Set<Integer> getSystemAppsUids(Context context) {
         Set<Integer> result = new ArraySet<>(1);
         try {
-            result.add(context.getPackageManager().getUidForSharedUser(
-                    ANDROID_CORE_APPS_SHARED_USER_ID));
+            result.add(
+                    context.getPackageManager()
+                            .getUidForSharedUser(ANDROID_CORE_APPS_SHARED_USER_ID));
         } catch (PackageManager.NameNotFoundException e) {
             // No Android Core Apps
         }
@@ -916,10 +954,10 @@ public final class DataProcessor {
     }
 
     /**
-     * Generates the list of {@link AppUsageEvent} within the specific time range.
-     * The buffer is added to make sure the app usage calculation near the boundaries is correct.
+     * Generates the list of {@link AppUsageEvent} within the specific time range. The buffer is
+     * added to make sure the app usage calculation near the boundaries is correct.
      *
-     * Note: The appUsageEventList should have been sorted when calling this function.
+     * <p>Note: The appUsageEventList should have been sorted when calling this function.
      */
     private static List<AppUsageEvent> getAppUsageEventListWithinTimeRangeWithBuffer(
             final List<AppUsageEvent> appUsageEventList, final long startTime, final long endTime) {
@@ -978,17 +1016,13 @@ public final class DataProcessor {
         packageNameMap.get(packageName).addAll(usagePeriodList);
     }
 
-    /**
-     * Returns the start time that gives {@code usagePeriod} the default usage duration.
-     */
+    /** Returns the start time that gives {@code usagePeriod} the default usage duration. */
     private static long getStartTimeForIncompleteUsagePeriod(
             final AppUsagePeriodOrBuilder usagePeriod) {
         return usagePeriod.getEndTime() - DEFAULT_USAGE_DURATION_FOR_INCOMPLETE_INTERVAL;
     }
 
-    /**
-     * Returns the end time that gives {@code usagePeriod} the default usage duration.
-     */
+    /** Returns the end time that gives {@code usagePeriod} the default usage duration. */
     private static long getEndTimeForIncompleteUsagePeriod(
             final AppUsagePeriodOrBuilder usagePeriod, final long eventTime) {
         return Math.min(
@@ -998,7 +1032,9 @@ public final class DataProcessor {
 
     @Nullable
     private static UsageEvents getAppUsageEventsForUser(
-            Context context, final UserManager userManager, final int userID,
+            Context context,
+            final UserManager userManager,
+            final int userID,
             final long earliestTimestamp) {
         final String callingPackage = context.getPackageName();
         final long now = System.currentTimeMillis();
@@ -1008,27 +1044,34 @@ public final class DataProcessor {
             Log.w(TAG, "fail to load app usage event for user :" + userID + " because locked");
             return null;
         }
-        final long startTime = DatabaseUtils.getAppUsageStartTimestampOfUser(
-                context, userID, earliestTimestamp);
+        final long startTime =
+                DatabaseUtils.getAppUsageStartTimestampOfUser(context, userID, earliestTimestamp);
         return loadAppUsageEventsForUserFromService(
                 sUsageStatsManager, startTime, now, userID, callingPackage);
     }
 
     @Nullable
     private static UsageEvents loadAppUsageEventsForUserFromService(
-            final IUsageStatsManager usageStatsManager, final long startTime, final long endTime,
-            final int userId, final String callingPackage) {
+            final IUsageStatsManager usageStatsManager,
+            final long startTime,
+            final long endTime,
+            final int userId,
+            final String callingPackage) {
         final long start = System.currentTimeMillis();
         UsageEvents events = null;
         try {
-            events = usageStatsManager.queryEventsForUser(
-                    startTime, endTime, userId, callingPackage);
+            events =
+                    usageStatsManager.queryEventsForUser(
+                            startTime, endTime, userId, callingPackage);
         } catch (RemoteException e) {
             Log.e(TAG, "Error fetching usage events: ", e);
         }
         final long elapsedTime = System.currentTimeMillis() - start;
-        Log.d(TAG, String.format("getAppUsageEventsForUser(): %d from %d to %d in %d/ms", userId,
-                startTime, endTime, elapsedTime));
+        Log.d(
+                TAG,
+                String.format(
+                        "getAppUsageEventsForUser(): %d from %d to %d in %d/ms",
+                        userId, startTime, endTime, elapsedTime));
         return events;
     }
 
@@ -1059,13 +1102,14 @@ public final class DataProcessor {
             return null;
         }
         return batteryEntryList.stream()
-                .filter(entry -> {
-                    final long foregroundMs = entry.getTimeInForegroundMs();
-                    final long backgroundMs = entry.getTimeInBackgroundMs();
-                    return entry.getConsumedPower() > 0
-                            || (entry.getConsumedPower() == 0
-                            && (foregroundMs != 0 || backgroundMs != 0));
-                })
+                .filter(
+                        entry -> {
+                            final long foregroundMs = entry.getTimeInForegroundMs();
+                            final long backgroundMs = entry.getTimeInBackgroundMs();
+                            return entry.getConsumedPower() > 0
+                                    || (entry.getConsumedPower() == 0
+                                            && (foregroundMs != 0 || backgroundMs != 0));
+                        })
                 .map(entry -> ConvertUtils.convertToBatteryHistEntry(entry, batteryUsageStats))
                 .collect(Collectors.toList());
     }
@@ -1089,10 +1133,15 @@ public final class DataProcessor {
 
         resultMap.put(startTimestamp, batteryHistoryMap.get(startTimestamp));
         for (int index = 1; index < expectedTimestampSlotsSize - 1; index++) {
-            interpolateHistoryForSlot(context, expectedTimestampSlots.get(index), rawTimestampList,
-                    batteryHistoryMap, resultMap);
+            interpolateHistoryForSlot(
+                    context,
+                    expectedTimestampSlots.get(index),
+                    rawTimestampList,
+                    batteryHistoryMap,
+                    resultMap);
         }
-        resultMap.put(endTimestamp,
+        resultMap.put(
+                endTimestamp,
                 Map.of(CURRENT_TIME_BATTERY_HISTORY_PLACEHOLDER, EMPTY_BATTERY_HIST_ENTRY));
     }
 
@@ -1183,7 +1232,7 @@ public final class DataProcessor {
                     BatteryHistEntry.interpolate(
                             currentSlot,
                             upperTimestamp,
-                            /*ratio=*/ timestampDiff / timestampLength,
+                            /* ratio= */ timestampDiff / timestampLength,
                             lowerEntry,
                             upperEntry);
             newHistEntryMap.put(entryKey, newEntry);
@@ -1201,8 +1250,10 @@ public final class DataProcessor {
             final long timestamp) {
         final Map<String, BatteryHistEntry> entryMap = processedBatteryHistoryMap.get(timestamp);
         if (entryMap == null || entryMap.isEmpty()) {
-            Log.e(TAG, "abnormal entry list in the timestamp:"
-                    + ConvertUtils.utcToLocalTimeForLogging(timestamp));
+            Log.e(
+                    TAG,
+                    "abnormal entry list in the timestamp:"
+                            + ConvertUtils.utcToLocalTimeForLogging(timestamp));
             return BATTERY_LEVEL_UNKNOWN;
         }
         // The current time battery history hasn't been loaded yet, returns the current battery
@@ -1262,11 +1313,11 @@ public final class DataProcessor {
     }
 
     private static void insertAllUsageDiffData(
-            final Context context,
-            final Map<Integer, Map<Integer, BatteryDiffData>> resultMap) {
+            final Context context, final Map<Integer, Map<Integer, BatteryDiffData>> resultMap) {
         final List<BatteryDiffData> diffDataList = new ArrayList<>();
-        resultMap.keySet().forEach(
-                key -> diffDataList.add(resultMap.get(key).get(SELECTED_INDEX_ALL)));
+        resultMap
+                .keySet()
+                .forEach(key -> diffDataList.add(resultMap.get(key).get(SELECTED_INDEX_ALL)));
         final Map<Integer, BatteryDiffData> allUsageMap = new ArrayMap<>();
         allUsageMap.put(SELECTED_INDEX_ALL, getAccumulatedUsageDiffData(context, diffDataList));
         resultMap.put(SELECTED_INDEX_ALL, allUsageMap);
@@ -1302,8 +1353,7 @@ public final class DataProcessor {
                     }
                 }
             }
-            slotScreenOnTime =
-                    Math.min(slotDuration, getScreenOnTime(flatAppUsagePeriodList));
+            slotScreenOnTime = Math.min(slotDuration, getScreenOnTime(flatAppUsagePeriodList));
         }
 
         final List<BatteryDiffEntry> appEntries = new ArrayList<>();
@@ -1316,9 +1366,18 @@ public final class DataProcessor {
                 // We should not get the empty list since we have at least one fake data to record
                 // the battery level and status in each time slot, the empty list is used to
                 // represent there is no enough data to apply interpolation arithmetic.
-                return new BatteryDiffData(context, startTimestamp, endTimestamp, startBatteryLevel,
-                        endBatteryLevel, /* screenOnTime= */ 0L, appEntries, systemEntries,
-                        systemAppsPackageNames, systemAppsUids, /* isAccumulated= */ false);
+                return new BatteryDiffData(
+                        context,
+                        startTimestamp,
+                        endTimestamp,
+                        startBatteryLevel,
+                        endBatteryLevel,
+                        /* screenOnTime= */ 0L,
+                        appEntries,
+                        systemEntries,
+                        systemAppsPackageNames,
+                        systemAppsUids,
+                        /* isAccumulated= */ false);
             }
             allBatteryHistEntryKeys.addAll(slotBatteryHistMap.keySet());
         }
@@ -1344,8 +1403,9 @@ public final class DataProcessor {
             }
 
             // Not show other users' battery usage data.
-            final boolean isFromOtherUsers = isConsumedFromOtherUsers(
-                    currentUserId, workProfileUserId, selectedBatteryEntry);
+            final boolean isFromOtherUsers =
+                    isConsumedFromOtherUsers(
+                            currentUserId, workProfileUserId, selectedBatteryEntry);
             if (isFromOtherUsers) {
                 continue;
             }
@@ -1369,10 +1429,7 @@ public final class DataProcessor {
                         getDiffValue(
                                 currentEntry.mBackgroundUsageTimeInMs,
                                 nextEntry.mBackgroundUsageTimeInMs);
-                consumePower +=
-                        getDiffValue(
-                                currentEntry.mConsumePower,
-                                nextEntry.mConsumePower);
+                consumePower += getDiffValue(currentEntry.mConsumePower, nextEntry.mConsumePower);
                 foregroundUsageConsumePower +=
                         getDiffValue(
                                 currentEntry.mForegroundUsageConsumePower,
@@ -1396,27 +1453,25 @@ public final class DataProcessor {
                 foregroundUsageTimeInMs = slotScreenOnTime;
             }
             // Excludes entry since we don't have enough data to calculate.
-            if (foregroundUsageTimeInMs == 0
-                    && backgroundUsageTimeInMs == 0
-                    && consumePower == 0) {
+            if (foregroundUsageTimeInMs == 0 && backgroundUsageTimeInMs == 0 && consumePower == 0) {
                 continue;
             }
             // Forces refine the cumulative value since it may introduce deviation error since we
             // will apply the interpolation arithmetic.
-            final float totalUsageTimeInMs =
-                    foregroundUsageTimeInMs + backgroundUsageTimeInMs;
+            final float totalUsageTimeInMs = foregroundUsageTimeInMs + backgroundUsageTimeInMs;
             if (totalUsageTimeInMs > slotDuration) {
                 final float ratio = slotDuration / totalUsageTimeInMs;
                 if (sDebug) {
-                    Log.w(TAG, String.format("abnormal usage time %d|%d for:\n%s",
-                            Duration.ofMillis(foregroundUsageTimeInMs).getSeconds(),
-                            Duration.ofMillis(backgroundUsageTimeInMs).getSeconds(),
-                            selectedBatteryEntry));
+                    Log.w(
+                            TAG,
+                            String.format(
+                                    "abnormal usage time %d|%d for:\n%s",
+                                    Duration.ofMillis(foregroundUsageTimeInMs).getSeconds(),
+                                    Duration.ofMillis(backgroundUsageTimeInMs).getSeconds(),
+                                    selectedBatteryEntry));
                 }
-                foregroundUsageTimeInMs =
-                        Math.round(foregroundUsageTimeInMs * ratio);
-                backgroundUsageTimeInMs =
-                        Math.round(backgroundUsageTimeInMs * ratio);
+                foregroundUsageTimeInMs = Math.round(foregroundUsageTimeInMs * ratio);
+                backgroundUsageTimeInMs = Math.round(backgroundUsageTimeInMs * ratio);
                 consumePower = consumePower * ratio;
                 foregroundUsageConsumePower = foregroundUsageConsumePower * ratio;
                 foregroundServiceUsageConsumePower = foregroundServiceUsageConsumePower * ratio;
@@ -1425,42 +1480,53 @@ public final class DataProcessor {
             }
 
             // Compute the screen on time and make sure it won't exceed the threshold.
-            final long screenOnTime = Math.min(
-                    (long) slotDuration,
-                    getScreenOnTime(
-                            appUsageMap,
-                            selectedBatteryEntry.mUserId,
-                            selectedBatteryEntry.mPackageName));
+            final long screenOnTime =
+                    Math.min(
+                            (long) slotDuration,
+                            getScreenOnTime(
+                                    appUsageMap,
+                                    selectedBatteryEntry.mUserId,
+                                    selectedBatteryEntry.mPackageName));
             // Make sure the background + screen-on time will not exceed the threshold.
-            backgroundUsageTimeInMs = Math.min(
-                    backgroundUsageTimeInMs, (long) slotDuration - screenOnTime);
-            final BatteryDiffEntry currentBatteryDiffEntry = new BatteryDiffEntry(
-                    context,
-                    selectedBatteryEntry.mUid,
-                    selectedBatteryEntry.mUserId,
-                    selectedBatteryEntry.getKey(),
-                    selectedBatteryEntry.mIsHidden,
-                    selectedBatteryEntry.mDrainType,
-                    selectedBatteryEntry.mPackageName,
-                    selectedBatteryEntry.mAppLabel,
-                    selectedBatteryEntry.mConsumerType,
-                    foregroundUsageTimeInMs,
-                    backgroundUsageTimeInMs,
-                    screenOnTime,
-                    consumePower,
-                    foregroundUsageConsumePower,
-                    foregroundServiceUsageConsumePower,
-                    backgroundUsageConsumePower,
-                    cachedUsageConsumePower);
+            backgroundUsageTimeInMs =
+                    Math.min(backgroundUsageTimeInMs, (long) slotDuration - screenOnTime);
+            final BatteryDiffEntry currentBatteryDiffEntry =
+                    new BatteryDiffEntry(
+                            context,
+                            selectedBatteryEntry.mUid,
+                            selectedBatteryEntry.mUserId,
+                            selectedBatteryEntry.getKey(),
+                            selectedBatteryEntry.mIsHidden,
+                            selectedBatteryEntry.mDrainType,
+                            selectedBatteryEntry.mPackageName,
+                            selectedBatteryEntry.mAppLabel,
+                            selectedBatteryEntry.mConsumerType,
+                            foregroundUsageTimeInMs,
+                            backgroundUsageTimeInMs,
+                            screenOnTime,
+                            consumePower,
+                            foregroundUsageConsumePower,
+                            foregroundServiceUsageConsumePower,
+                            backgroundUsageConsumePower,
+                            cachedUsageConsumePower);
             if (currentBatteryDiffEntry.isSystemEntry()) {
                 systemEntries.add(currentBatteryDiffEntry);
             } else {
                 appEntries.add(currentBatteryDiffEntry);
             }
         }
-        return new BatteryDiffData(context, startTimestamp, endTimestamp, startBatteryLevel,
-                endBatteryLevel, slotScreenOnTime, appEntries, systemEntries,
-                systemAppsPackageNames, systemAppsUids, /* isAccumulated= */ false);
+        return new BatteryDiffData(
+                context,
+                startTimestamp,
+                endTimestamp,
+                startBatteryLevel,
+                endBatteryLevel,
+                slotScreenOnTime,
+                appEntries,
+                systemEntries,
+                systemAppsPackageNames,
+                systemAppsUids,
+                /* isAccumulated= */ false);
     }
 
     private static long getScreenOnTime(@Nullable final List<AppUsagePeriod> appUsagePeriodList) {
@@ -1557,15 +1623,22 @@ public final class DataProcessor {
             }
         }
 
-        return new BatteryDiffData(context, startTimestamp, endTimestamp, startBatteryLevel,
-                endBatteryLevel, totalScreenOnTime, appEntries, systemEntries,
+        return new BatteryDiffData(
+                context,
+                startTimestamp,
+                endTimestamp,
+                startBatteryLevel,
+                endBatteryLevel,
+                totalScreenOnTime,
+                appEntries,
+                systemEntries,
                 /* systemAppsPackageNames= */ new ArraySet<>(),
-                /* systemAppsUids= */ new ArraySet<>(), /* isAccumulated= */ true);
+                /* systemAppsUids= */ new ArraySet<>(),
+                /* isAccumulated= */ true);
     }
 
     private static void computeUsageDiffDataPerEntry(
-            final BatteryDiffEntry entry,
-            final Map<String, BatteryDiffEntry> diffEntryMap) {
+            final BatteryDiffEntry entry, final Map<String, BatteryDiffEntry> diffEntryMap) {
         final String key = entry.getKey();
         final BatteryDiffEntry oldBatteryDiffEntry = diffEntryMap.get(key);
         // Creates new BatteryDiffEntry if we don't have it.
@@ -1573,16 +1646,13 @@ public final class DataProcessor {
             diffEntryMap.put(key, entry.clone());
         } else {
             // Sums up some field data into the existing one.
-            oldBatteryDiffEntry.mForegroundUsageTimeInMs +=
-                    entry.mForegroundUsageTimeInMs;
-            oldBatteryDiffEntry.mBackgroundUsageTimeInMs +=
-                    entry.mBackgroundUsageTimeInMs;
-            oldBatteryDiffEntry.mScreenOnTimeInMs +=
-                    entry.mScreenOnTimeInMs;
+            oldBatteryDiffEntry.mForegroundUsageTimeInMs += entry.mForegroundUsageTimeInMs;
+            oldBatteryDiffEntry.mBackgroundUsageTimeInMs += entry.mBackgroundUsageTimeInMs;
+            oldBatteryDiffEntry.mScreenOnTimeInMs += entry.mScreenOnTimeInMs;
             oldBatteryDiffEntry.mConsumePower += entry.mConsumePower;
             oldBatteryDiffEntry.mForegroundUsageConsumePower += entry.mForegroundUsageConsumePower;
-            oldBatteryDiffEntry.mForegroundServiceUsageConsumePower
-                    += entry.mForegroundServiceUsageConsumePower;
+            oldBatteryDiffEntry.mForegroundServiceUsageConsumePower +=
+                    entry.mForegroundServiceUsageConsumePower;
             oldBatteryDiffEntry.mBackgroundUsageConsumePower += entry.mBackgroundUsageConsumePower;
             oldBatteryDiffEntry.mCachedUsageConsumePower += entry.mCachedUsageConsumePower;
         }
@@ -1591,8 +1661,9 @@ public final class DataProcessor {
     private static boolean shouldShowBatteryAttributionList(final Context context) {
         final PowerProfile powerProfile = new PowerProfile(context);
         // Cheap hack to try to figure out if the power_profile.xml was populated.
-        final double averagePowerForOrdinal = powerProfile.getAveragePowerForOrdinal(
-                PowerProfile.POWER_GROUP_DISPLAY_SCREEN_FULL, 0);
+        final double averagePowerForOrdinal =
+                powerProfile.getAveragePowerForOrdinal(
+                        PowerProfile.POWER_GROUP_DISPLAY_SCREEN_FULL, 0);
         final boolean shouldShowBatteryAttributionList =
                 averagePowerForOrdinal >= MIN_AVERAGE_POWER_THRESHOLD_MILLI_AMP;
         if (!shouldShowBatteryAttributionList) {
@@ -1602,13 +1673,14 @@ public final class DataProcessor {
     }
 
     /**
-     * We want to coalesce some UIDs. For example, dex2oat runs under a shared gid that
-     * exists for all users of the same app. We detect this case and merge the power use
-     * for dex2oat to the device OWNER's use of the app.
+     * We want to coalesce some UIDs. For example, dex2oat runs under a shared gid that exists for
+     * all users of the same app. We detect this case and merge the power use for dex2oat to the
+     * device OWNER's use of the app.
      *
      * @return A sorted list of apps using power.
      */
-    private static List<BatteryEntry> getCoalescedUsageList(final Context context,
+    private static List<BatteryEntry> getCoalescedUsageList(
+            final Context context,
             final BatteryUtils batteryUtils,
             final BatteryUsageStats batteryUsageStats,
             final boolean loadDataInBackground) {
@@ -1621,8 +1693,9 @@ public final class DataProcessor {
 
         // Sort to have all apps with "real" UIDs first, followed by apps that are supposed
         // to be combined with the real ones.
-        uidBatteryConsumers.sort(Comparator.comparingInt(
-                consumer -> consumer.getUid() == getRealUid(consumer) ? 0 : 1));
+        uidBatteryConsumers.sort(
+                Comparator.comparingInt(
+                        consumer -> consumer.getUid() == getRealUid(consumer) ? 0 : 1));
 
         for (int i = 0, size = uidBatteryConsumers.size(); i < size; i++) {
             final UidBatteryConsumer consumer = uidBatteryConsumers.get(i);
@@ -1637,8 +1710,17 @@ public final class DataProcessor {
             final int index = batteryEntryList.indexOfKey(uid);
             if (index < 0) {
                 // New entry.
-                batteryEntryList.put(uid, new BatteryEntry(context, userManager, consumer,
-                        isHidden, uid, packages, null, loadDataInBackground));
+                batteryEntryList.put(
+                        uid,
+                        new BatteryEntry(
+                                context,
+                                userManager,
+                                consumer,
+                                isHidden,
+                                uid,
+                                packages,
+                                null,
+                                loadDataInBackground));
             } else {
                 // Combine BatterySippers if we already have one with this UID.
                 final BatteryEntry existingSipper = batteryEntryList.valueAt(index);
@@ -1646,33 +1728,50 @@ public final class DataProcessor {
             }
         }
 
-        final BatteryConsumer deviceConsumer = batteryUsageStats.getAggregateBatteryConsumer(
-                BatteryUsageStats.AGGREGATE_BATTERY_CONSUMER_SCOPE_DEVICE);
+        final BatteryConsumer deviceConsumer =
+                batteryUsageStats.getAggregateBatteryConsumer(
+                        BatteryUsageStats.AGGREGATE_BATTERY_CONSUMER_SCOPE_DEVICE);
 
-        for (int componentId = 0; componentId < BatteryConsumer.POWER_COMPONENT_COUNT;
+        for (int componentId = 0;
+                componentId < BatteryConsumer.POWER_COMPONENT_COUNT;
                 componentId++) {
-            results.add(new BatteryEntry(context, componentId,
-                    deviceConsumer.getConsumedPower(componentId),
-                    deviceConsumer.getUsageDurationMillis(componentId),
-                    componentId == POWER_COMPONENT_SYSTEM_SERVICES
-                            || componentId == POWER_COMPONENT_WAKELOCK));
+            results.add(
+                    new BatteryEntry(
+                            context,
+                            componentId,
+                            deviceConsumer.getConsumedPower(componentId),
+                            deviceConsumer.getUsageDurationMillis(componentId),
+                            componentId == POWER_COMPONENT_SYSTEM_SERVICES
+                                    || componentId == POWER_COMPONENT_WAKELOCK));
         }
 
         for (int componentId = BatteryConsumer.FIRST_CUSTOM_POWER_COMPONENT_ID;
-                componentId < BatteryConsumer.FIRST_CUSTOM_POWER_COMPONENT_ID
-                        + deviceConsumer.getCustomPowerComponentCount();
+                componentId
+                        < BatteryConsumer.FIRST_CUSTOM_POWER_COMPONENT_ID
+                                + deviceConsumer.getCustomPowerComponentCount();
                 componentId++) {
-            results.add(new BatteryEntry(context, componentId,
-                    deviceConsumer.getCustomPowerComponentName(componentId),
-                    deviceConsumer.getConsumedPowerForCustomComponent(componentId)));
+            results.add(
+                    new BatteryEntry(
+                            context,
+                            componentId,
+                            deviceConsumer.getCustomPowerComponentName(componentId),
+                            deviceConsumer.getConsumedPowerForCustomComponent(componentId)));
         }
 
         final List<UserBatteryConsumer> userBatteryConsumers =
                 batteryUsageStats.getUserBatteryConsumers();
         for (int i = 0, size = userBatteryConsumers.size(); i < size; i++) {
             final UserBatteryConsumer consumer = userBatteryConsumers.get(i);
-            results.add(new BatteryEntry(context, userManager, consumer, /* isHidden */ true,
-                    Process.INVALID_UID, null, null, loadDataInBackground));
+            results.add(
+                    new BatteryEntry(
+                            context,
+                            userManager,
+                            consumer, /* isHidden */
+                            true,
+                            Process.INVALID_UID,
+                            null,
+                            null,
+                            loadDataInBackground));
         }
 
         final int numUidSippers = batteryEntryList.size();
@@ -1692,8 +1791,10 @@ public final class DataProcessor {
         // Check if this UID is a shared GID. If so, we combine it with the OWNER's
         // actual app UID.
         if (isSharedGid(consumer.getUid())) {
-            realUid = UserHandle.getUid(UserHandle.USER_SYSTEM,
-                    UserHandle.getAppIdFromSharedAppGid(consumer.getUid()));
+            realUid =
+                    UserHandle.getUid(
+                            UserHandle.USER_SYSTEM,
+                            UserHandle.getAppIdFromSharedAppGid(consumer.getUid()));
         }
 
         // Check if this UID is a system UID (mediaserver, logd, nfc, drm, etc).
@@ -1727,8 +1828,13 @@ public final class DataProcessor {
         for (int dailyIndex = 0; dailyIndex < hourlyBatteryLevelsPerDay.size(); dailyIndex++) {
             if (batteryUsageMap.get(dailyIndex) == null
                     || !batteryUsageMap.get(dailyIndex).containsKey(SELECTED_INDEX_ALL)) {
-                Log.e(TAG, "no [" + dailyIndex + "][SELECTED_INDEX_ALL] in batteryUsageMap, "
-                        + "daily size is: " + hourlyBatteryLevelsPerDay.size());
+                Log.e(
+                        TAG,
+                        "no ["
+                                + dailyIndex
+                                + "][SELECTED_INDEX_ALL] in batteryUsageMap, "
+                                + "daily size is: "
+                                + hourlyBatteryLevelsPerDay.size());
                 return false;
             }
             if (hourlyBatteryLevelsPerDay.get(dailyIndex) == null) {
@@ -1738,8 +1844,15 @@ public final class DataProcessor {
             // Length of hourly usage map should be the length of hourly level data - 1.
             for (int hourlyIndex = 0; hourlyIndex < timestamps.size() - 1; hourlyIndex++) {
                 if (!batteryUsageMap.get(dailyIndex).containsKey(hourlyIndex)) {
-                    Log.e(TAG, "no [" + dailyIndex + "][" + hourlyIndex + "] in batteryUsageMap, "
-                            + "hourly size is: " + (timestamps.size() - 1));
+                    Log.e(
+                            TAG,
+                            "no ["
+                                    + dailyIndex
+                                    + "]["
+                                    + hourlyIndex
+                                    + "] in batteryUsageMap, "
+                                    + "hourly size is: "
+                                    + (timestamps.size() - 1));
                     return false;
                 }
             }
@@ -1759,11 +1872,19 @@ public final class DataProcessor {
         return sTestCurrentTimeMillis > 0 ? sTestCurrentTimeMillis : System.currentTimeMillis();
     }
 
-    private static void log(Context context, final String content, final long timestamp,
+    private static void log(
+            Context context,
+            final String content,
+            final long timestamp,
             final BatteryHistEntry entry) {
         if (sDebug) {
-            Log.d(TAG, String.format(entry != null ? "%s %s:\n%s" : "%s %s:%s",
-                    ConvertUtils.utcToLocalTimeForLogging(timestamp), content, entry));
+            Log.d(
+                    TAG,
+                    String.format(
+                            entry != null ? "%s %s:\n%s" : "%s %s:%s",
+                            ConvertUtils.utcToLocalTimeForLogging(timestamp),
+                            content,
+                            entry));
         }
     }
 }

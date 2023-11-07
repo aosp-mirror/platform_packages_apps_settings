@@ -25,7 +25,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.preference.PreferenceScreen
 import com.android.settings.core.BasePreferenceController
-import com.android.settings.datausage.lib.AppDataUsageDetailsRepository
 import com.android.settings.datausage.lib.IAppDataUsageDetailsRepository
 import com.android.settings.datausage.lib.NetworkUsageDetailsData
 import kotlinx.coroutines.Dispatchers
@@ -40,10 +39,17 @@ class AppDataUsageCycleController(context: Context, preferenceKey: String) :
     private lateinit var preference: SpinnerPreference
     private var cycleAdapter: CycleAdapter? = null
 
-    private var initialCycles: List<Long> = emptyList()
-    private var initialSelectedEndTime: Long = -1
-
     private var usageDetailsDataList: List<NetworkUsageDetailsData> = emptyList()
+
+    override fun getAvailabilityStatus() = AVAILABLE
+
+    override fun displayPreference(screen: PreferenceScreen) {
+        super.displayPreference(screen)
+        preference = screen.findPreference(preferenceKey)!!
+        if (cycleAdapter == null) {
+            cycleAdapter = CycleAdapter(mContext, preference)
+        }
+    }
 
     fun init(
         repository: IAppDataUsageDetailsRepository,
@@ -60,22 +66,9 @@ class AppDataUsageCycleController(context: Context, preferenceKey: String) :
      * before loading to reduce flicker.
      */
     fun setInitialCycles(initialCycles: List<Long>, initialSelectedEndTime: Long) {
-        this.initialCycles = initialCycles
-        this.initialSelectedEndTime = initialSelectedEndTime
-    }
-
-    override fun getAvailabilityStatus() = AVAILABLE
-
-    override fun displayPreference(screen: PreferenceScreen) {
-        super.displayPreference(screen)
-        preference = screen.findPreference(preferenceKey)!!
-        if (cycleAdapter == null) {
-            cycleAdapter = CycleAdapter(mContext, preference).apply {
-                if (initialCycles.isNotEmpty()) {
-                    setInitialCycleList(initialCycles, initialSelectedEndTime)
-                    preference.setHasCycles(true)
-                }
-            }
+        if (initialCycles.isNotEmpty()) {
+            cycleAdapter?.setInitialCycleList(initialCycles, initialSelectedEndTime)
+            preference.setHasCycles(true)
         }
     }
 

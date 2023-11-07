@@ -17,34 +17,14 @@ class VoiceActivationAppsTest {
     private val listModel = VoiceActivationAppsListModel(context)
 
     @Test
-    fun pageTitleResId() {
+    fun modelResourceIdAndProperties() {
         assertThat(listModel.pageTitleResId).isEqualTo(R.string.voice_activation_apps_title)
-    }
-
-    @Test
-    fun switchTitleResId() {
         assertThat(listModel.switchTitleResId).isEqualTo(R.string.permit_voice_activation_apps)
-    }
-
-    @Test
-    fun footerResId() {
-        assertThat(listModel.footerResId)
-            .isEqualTo(R.string.allow_voice_activation_apps_description)
-    }
-
-    @Test
-    fun appOp() {
+        assertThat(listModel.footerResId).isEqualTo(R.string.allow_voice_activation_apps_description)
         assertThat(listModel.appOp).isEqualTo(AppOpsManager.OP_RECEIVE_SANDBOX_TRIGGER_AUDIO)
-    }
-
-    @Test
-    fun permission() {
         assertThat(listModel.permission).isEqualTo(
-            Manifest.permission.RECEIVE_SANDBOX_TRIGGER_AUDIO)
-    }
-
-    @Test
-    fun setModeByUid() {
+            Manifest.permission.RECEIVE_SANDBOX_TRIGGER_AUDIO
+        )
         assertThat(listModel.setModeByUid).isTrue()
     }
 }

@@ -135,8 +135,11 @@
     <string name="stylus_connected_devices_title" msgid="2823967577941359812">"స్టైలస్"</string>
     <string name="audio_sharing_title" msgid="4144157137502923821">"ఆడియో షేరింగ్"</string>
     <string name="audio_sharing_switch_title" msgid="7052827328670825701">"ఆడియోను షేర్ చేయండి"</string>
-    <!-- no translation found for calls_and_alarms_device_title (6993559028175454198) -->
-    <skip />
+    <string name="calls_and_alarms_device_title" msgid="6993559028175454198">"కాల్స్, అలారాలు"</string>
+    <string name="audio_sharing_streams_category_title" msgid="862958129650324581">"LE ఆడియో స్ట్రీమ్‌కు కనెక్ట్ చేయండి"</string>
+    <string name="audio_sharing_streams_pref_title" msgid="4636293245167657721">"సమీపంలోని ఆడియో స్ట్రీమ్‌లు"</string>
+    <string name="audio_sharing_streams_title" msgid="8269455097512153101">"ఆడియో స్ట్రీమ్‌లు"</string>
+    <string name="audio_sharing_streams_qr_code_summary" msgid="4231875597377863735">"QR కోడ్‌ను ఉపయోగించి ఆడియో స్ట్రీమ్‌కు కనెక్ట్ చేయండి"</string>
     <string name="date_and_time" msgid="1788358029823431692">"తేదీ &amp; సమయం"</string>
     <string name="proxy_settings_title" msgid="4201866858226087066">"ప్రాక్సీ"</string>
     <string name="proxy_clear_text" msgid="6529658759984031149">"క్లియర్ చేయండి"</string>
@@ -568,40 +571,23 @@
     <string name="privatespace_how_title" msgid="8794102046435526065">"ఇది ఎలా పని చేస్తుంది"</string>
     <string name="privatespace_access_bottom_text" msgid="1075244097441349030">"మీరు మీ యాప్‌ల జాబితా కింద నుండి ప్రైవేట్ స్పేస్‌ను యాక్సెస్ చేయవచ్చు"</string>
     <string name="privatespace_protected_lock_text" msgid="7320604832432017423">"ప్రైవేట్ స్పేస్‌లోని యాప్‌లు లాక్ చేయడం ద్వారా రక్షించబడతాయి"</string>
-    <!-- no translation found for privatespace_hidden_notifications_text (8121285743543004812) -->
-    <skip />
-    <!-- no translation found for privatespace_apps_permission_text (4418511924151828812) -->
-    <skip />
-    <!-- no translation found for privatespace_setting_up_text (8532777749891406509) -->
-    <skip />
-    <!-- no translation found for privatespace_lock_protected_title (7409801274869666860) -->
-    <skip />
-    <!-- no translation found for privatespace_apps_hidden_title (6146605677591599107) -->
-    <skip />
-    <!-- no translation found for privatespace_access_from_apps_title (6787000636686810564) -->
-    <skip />
-    <!-- no translation found for privatespace_error_screen_title (8658511165913662275) -->
-    <skip />
-    <!-- no translation found for privatespace_error_screen_summary (5679626031159521676) -->
-    <skip />
-    <!-- no translation found for privatespace_tryagain_label (4091466165724929876) -->
-    <skip />
-    <!-- no translation found for privatespace_lockscreen_title (7459425150560213662) -->
-    <skip />
-    <!-- no translation found for privatespace_lockscreen_summary (980268845497843861) -->
-    <skip />
-    <!-- no translation found for privatespace_use_screenlock_label (2775404941450049991) -->
-    <skip />
-    <!-- no translation found for privatespace_set_lock_label (6277529807188602545) -->
-    <skip />
-    <!-- no translation found for privatespace_success_title (4854425684898602993) -->
-    <skip />
-    <!-- no translation found for privatespace_access_text (8756118686974614618) -->
-    <skip />
-    <!-- no translation found for privatespace_done_label (5534818213879562387) -->
-    <skip />
-    <!-- no translation found for scrolldown_to_access (5160743933093369151) -->
-    <skip />
+    <string name="privatespace_hidden_notifications_text" msgid="8121285743543004812">"ప్రైవేట్ స్పేస్ లాక్ అయ్యి ఉన్నప్పుడు, అందులోని యాప్‌ల నుండి నోటిఫికేషన్‌లు రావు"</string>
+    <string name="privatespace_apps_permission_text" msgid="4418511924151828812">"ప్రైవేట్ స్పేస్ లాక్ అయ్యి ఉన్నప్పుడు, అందులోని యాప్‌లు అనుమతి మేనేజర్‌లో, గోప్యతా డ్యాష్‌బోర్డ్‌లో, ఇతర సెట్టింగ్‌లలో కనిపించవు"</string>
+    <string name="privatespace_setting_up_text" msgid="8532777749891406509">"ప్రైవేట్ స్పేస్ సెటప్ ప్రోగ్రెస్‌లో ఉంది…"</string>
+    <string name="privatespace_lock_protected_title" msgid="7409801274869666860">"ప్రైవేట్ స్పేస్‌కు లాక్ రక్షణ ఉంటుంది"</string>
+    <string name="privatespace_apps_hidden_title" msgid="6146605677591599107">"ప్రైవేట్ స్పేస్ లాక్ అయ్యి ఉన్నప్పుడు, అందులోని యాప్‌లకు సంబంధించిన వినియోగ సమాచారం దాచబడి ఉంటుంది"</string>
+    <string name="privatespace_access_from_apps_title" msgid="6787000636686810564">"మీ యాప్‌ల లిస్ట్ నుండి ప్రైవేట్ స్పేస్‌ను యాక్సెస్ చేయండి"</string>
+    <string name="privatespace_error_screen_title" msgid="8658511165913662275">"ప్రైవేట్ స్పేస్‌ను సెటప్ చేయడం సాధ్యపడలేదు"</string>
+    <string name="privatespace_error_screen_summary" msgid="5679626031159521676">"ఇప్పుడే మళ్లీ ట్రై చేయండి, లేదా తర్వాత తిరిగి రండి"</string>
+    <string name="privatespace_tryagain_label" msgid="4091466165724929876">"మళ్లీ ట్రై చేయండి"</string>
+    <string name="privatespace_lockscreen_title" msgid="7459425150560213662">"అన్‌లాకింగ్‌కు స్క్రీన్ లాక్ వాడాలనుకుంటున్నారా?"</string>
+    <string name="privatespace_lockscreen_summary" msgid="980268845497843861">"మీరు మీ పరికరాన్ని ఎలా అయితే అన్‌లాక్ చేస్తారో, అలాగే ప్రైవేట్ స్పేస్‌ను అన్‌లాక్ చేయవచ్చు, లేదా వేరే లాక్‌ను ఎంచుకోవచ్చు"</string>
+    <string name="privatespace_use_screenlock_label" msgid="2775404941450049991">"స్క్రీన్ లాక్‌ను ఉపయోగించండి"</string>
+    <string name="privatespace_set_lock_label" msgid="6277529807188602545">"కొత్త లాక్‌ను ఎంచుకోండి"</string>
+    <string name="privatespace_success_title" msgid="4854425684898602993">"సెటప్ పూర్తయింది!"</string>
+    <string name="privatespace_access_text" msgid="8756118686974614618">"ప్రైవేట్ స్పేస్‌ను యాక్సెస్ చేయడానికి, మీ మొదటి స్క్రీన్ కింది నుండి పైకి స్వైప్ చేసి, ఆపై కిందికి స్క్రోల్ చేయండి"</string>
+    <string name="privatespace_done_label" msgid="5534818213879562387">"పూర్తయింది"</string>
+    <string name="scrolldown_to_access" msgid="5160743933093369151">"ప్రైవేట్ స్పేస్ యాక్సెస్ చేయడానికి కిందికి స్క్రోల్ చేయండి"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"మీరు గరిష్ఠంగా <xliff:g id="COUNT">%d</xliff:g> వేలిముద్రలను జోడించవచ్చు"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"మీరు గరిష్ట సంఖ్యలో వేలిముద్రలను జోడించారు"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"మరిన్ని వేలిముద్రలను జోడించడం సాధ్యపడదు"</string>
@@ -1119,8 +1105,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="fold_lock_behavior_title" msgid="786228803694268449">"ఫోల్డ్‌లో ఉన్న యాప్‌లను ఉపయోగించడం కొనసాగించండి"</string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"స్మూత్ డిస్‌ప్లే"</string>
-    <!-- no translation found for peak_refresh_rate_summary (3212309985294885790) -->
-    <skip />
+    <string name="peak_refresh_rate_summary" msgid="3212309985294885790">"కొంత కంటెంట్ విషయంలో, రిఫ్రెష్ రేటును ఆటోమేటిక్‌గా <xliff:g id="ID_1">%1$d</xliff:g> Hz వరకు పెంచుతుంది. బ్యాటరీ వినియోగం పెరుగుతుంది."</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"ఫోర్స్ పీక్ రిఫ్రెష్ రేటు"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"మెరుగైన స్పర్శ ప్రతిస్పందన &amp; యానిమేషన్ క్వాలిటీ కోసం అత్యధిక రిఫ్రెష్ రేటు. ఇది బ్యాటరీ వినియోగం పెరిగేలా చేస్తుంది."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"స్క్రీన్ అటెన్ష‌న్‌"</string>
@@ -1356,6 +1341,7 @@
     <string name="communal_settings_summary" msgid="4923914136953940317">"కమ్యూనల్ సెట్టింగ్‌లు"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APNలు"</string>
     <string name="apn_edit" msgid="2003683641840248741">"యాక్సెస్ పాయింట్‌ను ఎడిట్ చేయండి"</string>
+    <string name="apn_add" msgid="9069613192201630934">"యాక్సెస్ పాయింట్‌ను జోడించండి"</string>
     <string name="apn_not_set" msgid="8246646433109750293">"సెట్ చేయలేదు"</string>
     <string name="apn_not_set_for_mvno" msgid="1141490067313964640">"సెట్ చేయలేదు"</string>
     <string name="apn_name" msgid="6677695784108157953">"పేరు"</string>
@@ -1990,12 +1976,14 @@
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"తెరవడానికి యాక్సెసిబిలిటీ బటన్‌ను ఉపయోగించండి"</string>
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"తెరవడానికి వాల్యూమ్ కీలను పట్టుకుని అలాగే ఉండండి"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"తెరవడానికి స్క్రీన్‌పై మూడు సార్లు ట్యాప్ చేయండి"</string>
+    <string name="accessibility_tutorial_dialog_title_two_finger_triple" msgid="1090593773487065541">"తెరవడానికి రెండు వేళ్లతో స్క్రీన్‌ను మూడుసార్లు ట్యాప్ చేయండి"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"తెరవడానికి సంజ్ఞను ఉపయోగించండి"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"యాక్సెసిబిలిటీ సంజ్ఞను ఉపయోగించండి"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"ఈ ఫీచర్‌ను ఉపయోగించడానికి, మీ స్క్రీన్ దిగువన ఉన్న యాక్సెసిబిలిటీ బటన్ <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>ను ట్యాప్ చేయండి.\n\nఫీచర్‌ల మధ్య స్విచ్ అవడానికి, యాక్సెసిబిలిటీ బటన్‌ను నొక్కి &amp; పట్టుకోండి."</string>
     <string name="accessibility_tutorial_dialog_message_floating_button" msgid="2551777208185138391">"ఈ ఫీచర్‌ను ఉపయోగించడానికి, మీ స్క్రీన్ మీద ఉన్న యాక్సెసిబిలిటీ బటన్‌ను ట్యాప్ చేయండి."</string>
     <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"ఈ ఫీచర్‌ను ఉపయోగించడానికి, రెండు వాల్యూమ్ కీలను నొక్కి, పట్టుకోండి."</string>
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"మ్యాగ్నిఫికేషన్‌ను ప్రారంభించడానికి అలాగే ఆపడానికి, మీ స్క్రీన్‌పై ఎక్కడైనా మూడు సార్లు ట్యాప్ చేయండి."</string>
+    <string name="accessibility_tutorial_dialog_message_two_finger_triple" msgid="6205072282308562361">"మ్యాగ్నిఫికేషన్‌ను ప్రారంభించడానికి, ఆపడానికి స్క్రీన్‌పై ఎక్కడైనా 2 వేళ్లతో 3 సార్లు ట్యాప్ చేయండి."</string>
     <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"ఈ ఫీచర్‌ను ఉపయోగించడానికి, స్క్రీన్ దిగువ నుండి 2 వేళ్లతో పైకి స్వైప్ చేయండి.\n\nఫీచర్‌ల మధ్య స్విచ్ అవడానికి, 2 వేళ్లతో పైకి స్వైప్ చేసి పట్టుకోండి."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="8142847782708562793">"ఈ ఫీచర్‌ను ఉపయోగించడానికి, స్క్రీన్ దిగువ నుండి 3 వేళ్లతో పైకి స్వైప్ చేయండి.\n\nఫీచర్‌ల మధ్య స్విచ్ అవడానికి, 3 వేళ్లతో పైకి స్వైప్ చేసి పట్టుకోండి."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"యాక్సెస్ సౌలభ్య ఫీచర్‌లను ఉపయోగించడానికి, స్క్రీన్ దిగువ నుండి 2 వేళ్లతో పైకి స్వైప్ చేయండి.\n\nఫీచర్‌ల మధ్య స్విచ్ అవడానికి, 2 వేళ్లతో పైకి స్వైప్ చేసి పట్టుకోండి."</string>
@@ -2017,12 +2005,9 @@
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"వాల్యూమ్ కీలను నొక్కి ఉంచండి"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"వాల్యూమ్ కీలను పట్టుకుని అలాగే ఉండండి"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"వాల్యూమ్ కీలు రెండింటినీ నొక్కి పట్టుకోండి"</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_two_finger_triple_tap (6687765191490040899) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_two_finger_triple_tap_keyword (4200744613585702430) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_two_finger_triple_tap (2631127444247448793) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_title_two_finger_triple_tap" msgid="6687765191490040899">"రెండు వేళ్లతో స్క్రీన్‌ను మూడుసార్లు ట్యాప్ చేయండి"</string>
+    <string name="accessibility_shortcut_two_finger_triple_tap_keyword" msgid="4200744613585702430">"రెండు వేళ్లతో స్క్రీన్‌ను మూడుసార్లు ట్యాప్ చేయండి"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_two_finger_triple_tap" msgid="2631127444247448793">"రెండు వేళ్లతో స్క్రీన్‌ను {0,number,integer} సార్లు ఫాస్ట్‌గా ట్యాప్ చేయండి"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"స్క్రీన్‌పై మూడు సార్లు నొక్కండి"</string>
     <string name="accessibility_shortcut_triple_tap_keyword" msgid="6863958573135995927">"స్క్రీన్‌పై మూడు సార్లు ట్యాప్ చేయండి"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="2102327956423320536">"స్క్రీన్‌ను {0,number,integer} సార్లు త్వరగా ట్యాప్ చేయండి. ఈ షార్ట్‌కట్ వల్ల మీ పరికరం పనితీరు నెమ్మదించవచ్చు"</string>
@@ -2320,6 +2305,8 @@
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"మీరు యాప్ నేపథ్య యాక్టివిటీని పరిమితం చేస్తే, అది సరిగ్గా పని చేయకపోవచ్చు."</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"ఈ యాప్ బ్యాటరీని ఆప్టిమైజ్ చేయికి సెట్ చేయబడలేదు కనుక, దీన్ని మీరు పరిమితం చేయలేరు.\n\nయాప్‌ను పరిమితం చేయడానికి, మొదట బ్యాటరీ ఆప్టిమైజేషన్‌ను ఆన్ చేయండి."</string>
     <string name="manager_battery_usage_category_title" msgid="1493303237531629961">"బ్యాటరీ వినియోగాన్ని మేనేజ్ చేయండి"</string>
+    <string name="manager_battery_usage_allow_background_usage_title" msgid="6294649996820358852">"బ్యాక్‌గ్రౌండ్ వినియోగాన్ని అనుమతించండి"</string>
+    <string name="manager_battery_usage_allow_background_usage_summary" msgid="8021153755201340819">"రియల్-టైమ్ అప్‌డేట్‌ల కోసం ఎనేబుల్ చేయండి, బ్యాటరీని సేవ్ చేయడానికి డిజేబుల్ చేయండి"</string>
     <string name="manager_battery_usage_unrestricted_title" msgid="2426486290463258032">"అపరిమిత"</string>
     <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"ఆప్టిమైజ్ చేయబడినది"</string>
     <string name="manager_battery_usage_restricted_title" msgid="7702863764130323118">"పరిమితం చేయబడిన సెట్టింగ్‌లు"</string>
@@ -3830,6 +3817,12 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"అన్ని ఫైళ్లను మేనేజ్‌ చేయడానికి అనుమతించండి"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"ఈ పరికరంలో, లేదా కనెక్ట్ చేయబడిన ఏవైనా స్టోరేజ్ వాల్యూమ్‌లలో, అన్ని ఫైళ్లను చదవడానికి, మార్చడానికి, తొలగించడానికి ఈ యాప్‌నకు అనుమతిని ఇవ్వండి. అటువంటి అనుమతిని మీరు మంజూరు చేస్తే, మీకు ప్రత్యేకంగా తెలియపరచకుండానే మీ ఫైళ్లను యాప్, యాక్సెస్ చేయవచ్చు."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"అన్ని ఫైళ్లను యాక్సెస్ చేయగలవు"</string>
+    <!-- no translation found for voice_activation_apps_title (7130045161611529825) -->
+    <skip />
+    <!-- no translation found for permit_voice_activation_apps (9152780172988949319) -->
+    <skip />
+    <!-- no translation found for allow_voice_activation_apps_description (6369745626995060656) -->
+    <skip />
     <string name="full_screen_intent_title" msgid="747270185715224130">"ఫుల్ స్క్రీన్ నోటిఫికేషన్‌లు"</string>
     <string name="permit_full_screen_intent" msgid="9035367640019960861">"ఈ యాప్ నుండి ఫుల్ స్క్రీన్ నోటిఫికేషన్‌లను అనుమతించండి"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"పరికరం లాక్‌లో ఉన్నప్పుడు నోటిఫికేషన్లను చూపడానికి ఈ యాప్‌ను అనుమతించండి. ఈ నోటిఫికేషన్లు ఫుల్ స్క్రీన్‌లో కనిపిస్తాయి. అలారాలు, ఇన్‌కమింగ్ కాల్స్ లేదా ఇతర అత్యవసర నోటిఫికేషన్‌లను హైలైట్ చేయడానికి యాప్‌లు వీటిని ఉపయోగించవచ్చు."</string>

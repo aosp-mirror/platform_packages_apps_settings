@@ -30,11 +30,11 @@ import com.android.settings.Utils;
 import com.android.settingslib.widget.AppPreference;
 
 /**
- * Custom preference for displaying battery usage info as a bar and an icon on
- * the left for the subsystem/app type.
+ * Custom preference for displaying battery usage info as a bar and an icon on the left for the
+ * subsystem/app type.
  *
- * The battery usage info could be usage percentage or usage time. The preference
- * won't show any icon if it is null.
+ * <p>The battery usage info could be usage percentage or usage time. The preference won't show any
+ * icon if it is null.
  */
 public class PowerGaugePreference extends AppPreference {
 
@@ -49,8 +49,8 @@ public class PowerGaugePreference extends AppPreference {
     private CharSequence mProgress;
     private boolean mShowAnomalyIcon;
 
-    public PowerGaugePreference(Context context, Drawable icon, CharSequence contentDescription,
-            BatteryEntry info) {
+    public PowerGaugePreference(
+            Context context, Drawable icon, CharSequence contentDescription, BatteryEntry info) {
         this(context, null, icon, contentDescription, info);
     }
 
@@ -62,8 +62,12 @@ public class PowerGaugePreference extends AppPreference {
         this(context, attrs, null, null, null);
     }
 
-    private PowerGaugePreference(Context context, AttributeSet attrs, Drawable icon,
-            CharSequence contentDescription, BatteryEntry info) {
+    private PowerGaugePreference(
+            Context context,
+            AttributeSet attrs,
+            Drawable icon,
+            CharSequence contentDescription,
+            BatteryEntry info) {
         super(context, attrs);
         if (icon != null) {
             setIcon(icon);
@@ -119,15 +123,19 @@ public class PowerGaugePreference extends AppPreference {
         super.onBindViewHolder(view);
 
         final boolean isNightMode = Utils.isNightMode(getContext());
-        final float alpha = isSelectable() ? SELECTABLE_ALPHA
-                : (isNightMode ? UNSELECTABLE_ALPHA_DARK_MODE : UNSELECTABLE_ALPHA_LIGHT_MODE);
+        final float alpha =
+                isSelectable()
+                        ? SELECTABLE_ALPHA
+                        : (isNightMode
+                                ? UNSELECTABLE_ALPHA_DARK_MODE
+                                : UNSELECTABLE_ALPHA_LIGHT_MODE);
         setViewAlpha(view.itemView, alpha);
 
         final TextView subtitle = (TextView) view.findViewById(R.id.widget_summary);
         subtitle.setText(mProgress);
         if (mShowAnomalyIcon) {
-            subtitle.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_warning_24dp, 0,
-                    0, 0);
+            subtitle.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                    R.drawable.ic_warning_24dp, 0, 0, 0);
         } else {
             subtitle.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, 0, 0);
         }

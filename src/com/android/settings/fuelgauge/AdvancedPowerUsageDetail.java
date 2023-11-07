@@ -61,15 +61,15 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * Power usage detail fragment for each app, this fragment contains
- *
- * 1. Detail battery usage information for app(i.e. usage time, usage amount)
+ * Power usage detail fragment for each app, this fragment contains <br>
+ * <br>
+ * 1. Detail battery usage information for app(i.e. usage time, usage amount) <br>
  * 2. Battery related controls for app(i.e uninstall, force stop)
  */
-public class AdvancedPowerUsageDetail extends DashboardFragment implements
-        ButtonActionDialogFragment.AppButtonsDialogListener,
-        Preference.OnPreferenceClickListener,
-        Preference.OnPreferenceChangeListener {
+public class AdvancedPowerUsageDetail extends DashboardFragment
+        implements ButtonActionDialogFragment.AppButtonsDialogListener,
+                Preference.OnPreferenceClickListener,
+                Preference.OnPreferenceChangeListener {
     public static final String TAG = "AdvancedPowerDetail";
     public static final String EXTRA_UID = "extra_uid";
     public static final String EXTRA_PACKAGE_NAME = "extra_package_name";
@@ -96,23 +96,17 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     private AppButtonsPreferenceController mAppButtonsPreferenceController;
     private PowerUsageTimeController mPowerUsageTimeController;
 
-    @VisibleForTesting
-    LayoutPreference mHeaderPreference;
-    @VisibleForTesting
-    ApplicationsState mState;
-    @VisibleForTesting
-    ApplicationsState.AppEntry mAppEntry;
-    @VisibleForTesting
-    BatteryOptimizeUtils mBatteryOptimizeUtils;
-    @VisibleForTesting
-    PrimarySwitchPreference mAllowBackgroundUsagePreference;
-    @VisibleForTesting
-    @BatteryOptimizeUtils.OptimizationMode
+    @VisibleForTesting LayoutPreference mHeaderPreference;
+    @VisibleForTesting ApplicationsState mState;
+    @VisibleForTesting ApplicationsState.AppEntry mAppEntry;
+    @VisibleForTesting BatteryOptimizeUtils mBatteryOptimizeUtils;
+    @VisibleForTesting PrimarySwitchPreference mAllowBackgroundUsagePreference;
+
+    @VisibleForTesting @BatteryOptimizeUtils.OptimizationMode
     int mOptimizationMode = BatteryOptimizeUtils.MODE_UNKNOWN;
-    @VisibleForTesting
-    BackupManager mBackupManager;
-    @VisibleForTesting
-    StringBuilder mLogStringBuilder;
+
+    @VisibleForTesting BackupManager mBackupManager;
+    @VisibleForTesting StringBuilder mLogStringBuilder;
 
     // A wrapper class to carry LaunchBatteryDetailPage required arguments.
     private static final class LaunchBatteryDetailPageArgs {
@@ -134,9 +128,14 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
 
     /** Launches battery details page for an individual battery consumer fragment. */
     public static void startBatteryDetailPage(
-            Context context, int sourceMetricsCategory,
-            BatteryDiffEntry diffEntry, String usagePercent, String slotInformation,
-            boolean showTimeInformation, String anomalyHintPrefKey, String anomalyHintText) {
+            Context context,
+            int sourceMetricsCategory,
+            BatteryDiffEntry diffEntry,
+            String usagePercent,
+            String slotInformation,
+            boolean showTimeInformation,
+            String anomalyHintPrefKey,
+            String anomalyHintText) {
         final LaunchBatteryDetailPageArgs launchArgs = new LaunchBatteryDetailPageArgs();
         // configure the launch argument.
         launchArgs.mUsagePercent = usagePercent;
@@ -159,8 +158,11 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     }
 
     /** Launches battery details page for an individual battery consumer. */
-    public static void startBatteryDetailPage(Activity caller,
-            InstrumentedPreferenceFragment fragment, BatteryEntry entry, String usagePercent) {
+    public static void startBatteryDetailPage(
+            Activity caller,
+            InstrumentedPreferenceFragment fragment,
+            BatteryEntry entry,
+            String usagePercent) {
         final LaunchBatteryDetailPageArgs launchArgs = new LaunchBatteryDetailPageArgs();
         // configure the launch argument.
         launchArgs.mUsagePercent = usagePercent;
@@ -197,8 +199,10 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         args.putBoolean(EXTRA_SHOW_TIME_INFO, launchArgs.mShowTimeInformation);
         args.putString(EXTRA_ANOMALY_HINT_PREF_KEY, launchArgs.mAnomalyHintPrefKey);
         args.putString(EXTRA_ANOMALY_HINT_TEXT, launchArgs.mAnomalyHintText);
-        final int userId = launchArgs.mIsUserEntry ? ActivityManager.getCurrentUser()
-                : UserHandle.getUserId(launchArgs.mUid);
+        final int userId =
+                launchArgs.mIsUserEntry
+                        ? ActivityManager.getCurrentUser()
+                        : UserHandle.getUserId(launchArgs.mUid);
 
         new SubSettingLauncher(context)
                 .setDestination(AdvancedPowerUsageDetail.class.getName())
@@ -209,11 +213,11 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
                 .launch();
     }
 
-    /**
-     * Start packageName's battery detail page.
-     */
+    /** Start packageName's battery detail page. */
     public static void startBatteryDetailPage(
-            Activity caller, Instrumentable instrumentable, String packageName,
+            Activity caller,
+            Instrumentable instrumentable,
+            String packageName,
             UserHandle userHandle) {
         final Bundle args = new Bundle(3);
         final PackageManager packageManager = caller.getPackageManager();
@@ -261,15 +265,18 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         initHeader();
         mOptimizationMode = mBatteryOptimizeUtils.getAppOptimizationMode();
         initFooter();
-        mExecutor.execute(() -> {
-            final String packageName = BatteryUtils
-                    .getLoggingPackageName(getContext(), mBatteryOptimizeUtils.getPackageName());
-            FeatureFactory.getFeatureFactory().getMetricsFeatureProvider()
-                    .action(
-                            getContext(),
-                            SettingsEnums.OPEN_APP_BATTERY_USAGE,
-                            packageName);
-        });
+        mExecutor.execute(
+                () -> {
+                    final String packageName =
+                            BatteryUtils.getLoggingPackageName(
+                                    getContext(), mBatteryOptimizeUtils.getPackageName());
+                    FeatureFactory.getFeatureFactory()
+                            .getMetricsFeatureProvider()
+                            .action(
+                                    getContext(),
+                                    SettingsEnums.OPEN_APP_BATTERY_USAGE,
+                                    packageName);
+                });
         mLogStringBuilder = new StringBuilder("onResume mode = ").append(mOptimizationMode);
     }
 
@@ -282,22 +289,23 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         mLogStringBuilder.append(", onPause mode = ").append(currentOptimizeMode);
         logMetricCategory(currentOptimizeMode);
 
-        mExecutor.execute(() -> {
-            BatteryOptimizeLogUtils.writeLog(
-                    getContext().getApplicationContext(),
-                    Action.LEAVE,
-                    BatteryOptimizeLogUtils.getPackageNameWithUserId(
-                            mBatteryOptimizeUtils.getPackageName(), UserHandle.myUserId()),
-                    mLogStringBuilder.toString());
-        });
+        mExecutor.execute(
+                () -> {
+                    BatteryOptimizeLogUtils.writeLog(
+                            getContext().getApplicationContext(),
+                            Action.LEAVE,
+                            BatteryOptimizeLogUtils.getPackageNameWithUserId(
+                                    mBatteryOptimizeUtils.getPackageName(), UserHandle.myUserId()),
+                            mLogStringBuilder.toString());
+                });
         Log.d(TAG, "Leave with mode: " + currentOptimizeMode);
     }
 
     @VisibleForTesting
     void notifyBackupManager() {
         if (mOptimizationMode != mBatteryOptimizeUtils.getAppOptimizationMode()) {
-            final BackupManager backupManager = mBackupManager != null
-                    ? mBackupManager : new BackupManager(getContext());
+            final BackupManager backupManager =
+                    mBackupManager != null ? mBackupManager : new BackupManager(getContext());
             backupManager.dataChanged();
         }
     }
@@ -307,10 +315,11 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         final View appSnippet = mHeaderPreference.findViewById(R.id.entity_header);
         final Activity context = getActivity();
         final Bundle bundle = getArguments();
-        EntityHeaderController controller = EntityHeaderController
-                .newInstance(context, this, appSnippet)
-                .setButtonActions(EntityHeaderController.ActionType.ACTION_NONE,
-                        EntityHeaderController.ActionType.ACTION_NONE);
+        EntityHeaderController controller =
+                EntityHeaderController.newInstance(context, this, appSnippet)
+                        .setButtonActions(
+                                EntityHeaderController.ActionType.ACTION_NONE,
+                                EntityHeaderController.ActionType.ACTION_NONE);
 
         if (mAppEntry == null) {
             controller.setLabel(bundle.getString(EXTRA_LABEL));
@@ -334,8 +343,12 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
             final long backgroundTimeMs = bundle.getLong(EXTRA_BACKGROUND_TIME);
             final String anomalyHintPrefKey = bundle.getString(EXTRA_ANOMALY_HINT_PREF_KEY);
             final String anomalyHintText = bundle.getString(EXTRA_ANOMALY_HINT_TEXT);
-            mPowerUsageTimeController.handleScreenTimeUpdated(slotTime, screenOnTimeInMs,
-                    backgroundTimeMs, anomalyHintPrefKey, anomalyHintText);
+            mPowerUsageTimeController.handleScreenTimeUpdated(
+                    slotTime,
+                    screenOnTimeInMs,
+                    backgroundTimeMs,
+                    anomalyHintPrefKey,
+                    anomalyHintText);
         }
         controller.done(true /* rebindActions */);
     }
@@ -387,9 +400,15 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         final int uid = bundle.getInt(EXTRA_UID, 0);
         final String packageName = bundle.getString(EXTRA_PACKAGE_NAME);
 
-        mAppButtonsPreferenceController = new AppButtonsPreferenceController(
-                (SettingsActivity) getActivity(), this, getSettingsLifecycle(),
-                packageName, mState, REQUEST_UNINSTALL, REQUEST_REMOVE_DEVICE_ADMIN);
+        mAppButtonsPreferenceController =
+                new AppButtonsPreferenceController(
+                        (SettingsActivity) getActivity(),
+                        this,
+                        getSettingsLifecycle(),
+                        packageName,
+                        mState,
+                        REQUEST_UNINSTALL,
+                        REQUEST_REMOVE_DEVICE_ADMIN);
         if (bundle.getBoolean(EXTRA_SHOW_TIME_INFO, false)) {
             mPowerUsageTimeController = new PowerUsageTimeController(getContext());
             controllers.add(mPowerUsageTimeController);
@@ -461,17 +480,20 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
             return;
         }
         int finalMetricCategory = metricCategory;
-        mExecutor.execute(() -> {
-            String packageName = BatteryUtils
-                    .getLoggingPackageName(getContext(), mBatteryOptimizeUtils.getPackageName());
-            FeatureFactory.getFeatureFactory().getMetricsFeatureProvider()
-                    .action(
-                            /* attribution */ SettingsEnums.OPEN_APP_BATTERY_USAGE,
-                            /* action */ finalMetricCategory,
-                            /* pageId */ SettingsEnums.OPEN_APP_BATTERY_USAGE,
-                            packageName,
-                            getArguments().getInt(EXTRA_POWER_USAGE_AMOUNT));
-        });
+        mExecutor.execute(
+                () -> {
+                    String packageName =
+                            BatteryUtils.getLoggingPackageName(
+                                    getContext(), mBatteryOptimizeUtils.getPackageName());
+                    FeatureFactory.getFeatureFactory()
+                            .getMetricsFeatureProvider()
+                            .action(
+                                    /* attribution */ SettingsEnums.OPEN_APP_BATTERY_USAGE,
+                                    /* action */ finalMetricCategory,
+                                    /* pageId */ SettingsEnums.OPEN_APP_BATTERY_USAGE,
+                                    packageName,
+                                    getArguments().getInt(EXTRA_POWER_USAGE_AMOUNT));
+                });
     }
 
     private void onCreateBackgroundUsageState(String packageName) {

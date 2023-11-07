@@ -16,6 +16,7 @@
 
 package com.android.settings.inputmethod;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.hardware.input.InputDeviceIdentifier;
 import android.hardware.input.InputManager;
@@ -30,7 +31,9 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.TickButtonPreference;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
@@ -53,13 +56,16 @@ public class NewKeyboardLayoutPickerController extends BasePreferenceController 
     private KeyboardLayout[] mKeyboardLayouts;
     private PreferenceScreen mScreen;
     private String mPreviousSelection;
+    private String mFinalSelectedLayout;
     private String mLayout;
+    private MetricsFeatureProvider mMetricsFeatureProvider;
 
     public NewKeyboardLayoutPickerController(Context context, String key) {
         super(context, key);
         mIm = context.getSystemService(InputManager.class);
         mInputDeviceId = -1;
         mPreferenceMap = new HashMap<>();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     public void initialize(Fragment parent) {
@@ -74,6 +80,7 @@ public class NewKeyboardLayoutPickerController extends BasePreferenceController 
         mInputMethodSubtype =
                 arguments.getParcelable(NewKeyboardSettingsUtils.EXTRA_INPUT_METHOD_SUBTYPE);
         mLayout = getSelectedLayoutLabel();
+        mFinalSelectedLayout = mLayout;
         mKeyboardLayouts = mIm.getKeyboardLayoutListForInputDevice(
                 mInputDeviceIdentifier, mUserId, mInputMethodInfo, mInputMethodSubtype);
         parent.getActivity().setTitle(mTitle);
@@ -92,6 +99,11 @@ public class NewKeyboardLayoutPickerController extends BasePreferenceController 
 
     @Override
     public void onStop() {
+        if (!mLayout.equals(mFinalSelectedLayout)) {
+            String change = "From:" + mLayout + ", to:" + mFinalSelectedLayout;
+            mMetricsFeatureProvider.action(
+                    mContext, SettingsEnums.ACTION_PK_LAYOUT_CHANGED, change);
+        }
         mIm.unregisterInputDeviceListener(this);
         mInputDeviceId = -1;
     }
@@ -122,6 +134,7 @@ public class NewKeyboardLayoutPickerController extends BasePreferenceController 
         }
         setLayout(pref);
         mPreviousSelection = preference.getKey();
+        mFinalSelectedLayout = pref.getTitle().toString();
         return true;
     }
 

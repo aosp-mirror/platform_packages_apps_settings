@@ -15,11 +15,16 @@
  */
 package com.android.settings.security;
 
-import static android.view.contentprotection.flags.Flags.settingUiEnabled;
+import static com.android.internal.R.string.config_defaultContentProtectionService;
 
+import android.content.ComponentName;
 import android.content.Context;
+import android.provider.DeviceConfig;
+import android.view.contentcapture.ContentCaptureManager;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.core.BasePreferenceController;
 
@@ -31,7 +36,32 @@ public class ContentProtectionPreferenceController extends BasePreferenceControl
 
     @Override
     public int getAvailabilityStatus() {
-      // TODO(b/306565942): Add a resource value check.
-      return settingUiEnabled() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        if (!settingUiEnabled() || getContentProtectionServiceComponentName() == null) {
+            return UNSUPPORTED_ON_DEVICE;
+        }
+        return AVAILABLE;
+    }
+
+    @VisibleForTesting
+    @Nullable
+    protected String getContentProtectionServiceFlatComponentName() {
+        return mContext.getString(config_defaultContentProtectionService);
+    }
+
+    @Nullable
+    private ComponentName getContentProtectionServiceComponentName() {
+        String flatComponentName = getContentProtectionServiceFlatComponentName();
+        if (flatComponentName == null) {
+            return null;
+        }
+        return ComponentName.unflattenFromString(flatComponentName);
+    }
+
+    @VisibleForTesting
+    protected boolean settingUiEnabled() {
+        return DeviceConfig.getBoolean(
+                DeviceConfig.NAMESPACE_CONTENT_CAPTURE,
+                ContentCaptureManager.DEVICE_CONFIG_PROPERTY_ENABLE_CONTENT_PROTECTION_RECEIVER,
+                ContentCaptureManager.DEFAULT_ENABLE_CONTENT_PROTECTION_RECEIVER);
     }
 }

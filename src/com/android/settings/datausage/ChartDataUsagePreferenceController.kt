@@ -39,6 +39,8 @@ open class ChartDataUsagePreferenceController(context: Context, preferenceKey: S
     private lateinit var repository: INetworkCycleDataRepository
     private lateinit var preference: ChartDataUsagePreference
     private lateinit var lifecycleScope: LifecycleCoroutineScope
+    private var lastStartTime: Long? = null
+    private var lastEndTime: Long? = null
 
     open fun init(template: NetworkTemplate) {
         this.repository = NetworkCycleDataRepository(mContext, template)
@@ -72,6 +74,10 @@ open class ChartDataUsagePreferenceController(context: Context, preferenceKey: S
     }
 
     fun update(startTime: Long, endTime: Long) {
+        if (lastStartTime == startTime && lastEndTime == endTime) return
+        lastStartTime = startTime
+        lastEndTime = endTime
+
         preference.setTime(startTime, endTime)
         preference.setNetworkCycleData(NetworkCycleChartData.AllZero)
         lifecycleScope.launch {

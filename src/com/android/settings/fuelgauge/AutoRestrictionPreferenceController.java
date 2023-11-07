@@ -24,11 +24,9 @@ import androidx.preference.TwoStatePreference;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 
-/**
- * Controller to change and update the auto restriction toggle
- */
-public class AutoRestrictionPreferenceController extends BasePreferenceController implements
-        Preference.OnPreferenceChangeListener {
+/** Controller to change and update the auto restriction toggle */
+public class AutoRestrictionPreferenceController extends BasePreferenceController
+        implements Preference.OnPreferenceChangeListener {
     private static final String KEY_SMART_BATTERY = "auto_restriction";
     private static final int ON = 1;
     private static final int OFF = 0;
@@ -50,15 +48,20 @@ public class AutoRestrictionPreferenceController extends BasePreferenceControlle
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        final boolean smartBatteryOn = Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.APP_AUTO_RESTRICTION_ENABLED, ON) == ON;
+        final boolean smartBatteryOn =
+                Settings.Global.getInt(
+                                mContext.getContentResolver(),
+                                Settings.Global.APP_AUTO_RESTRICTION_ENABLED,
+                                ON)
+                        == ON;
         ((TwoStatePreference) preference).setChecked(smartBatteryOn);
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final boolean smartBatteryOn = (Boolean) newValue;
-        Settings.Global.putInt(mContext.getContentResolver(),
+        Settings.Global.putInt(
+                mContext.getContentResolver(),
                 Settings.Global.APP_AUTO_RESTRICTION_ENABLED,
                 smartBatteryOn ? ON : OFF);
         return true;

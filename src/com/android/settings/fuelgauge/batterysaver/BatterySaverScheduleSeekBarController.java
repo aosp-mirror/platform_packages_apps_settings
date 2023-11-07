@@ -35,30 +35,28 @@ import com.android.settings.widget.SeekBarPreference;
 import com.android.settingslib.fuelgauge.BatterySaverUtils;
 
 /**
- * Responds to user actions in the Settings > Battery > Set a Schedule Screen for the seekbar.
- * Note that this seekbar is only visible when the radio button selected is "Percentage".
+ * Responds to user actions in the Settings > Battery > Set a Schedule Screen for the seekbar. Note
+ * that this seekbar is only visible when the radio button selected is "Percentage".
  *
- * Note that this is not a preference controller since that screen does not inherit from
+ * <p>Note that this is not a preference controller since that screen does not inherit from
  * DashboardFragment.
  *
- * Will call the appropriate power manager APIs and modify the correct settings to enable
- * users to control their automatic battery saver toggling preferences.
- * See {@link Settings.Global#AUTOMATIC_POWER_SAVE_MODE} for more details.
+ * <p>Will call the appropriate power manager APIs and modify the correct settings to enable users
+ * to control their automatic battery saver toggling preferences. See {@link
+ * Settings.Global#AUTOMATIC_POWER_SAVE_MODE} for more details.
  */
-public class BatterySaverScheduleSeekBarController implements
-        OnPreferenceChangeListener, OnSeekBarChangeListener {
+public class BatterySaverScheduleSeekBarController
+        implements OnPreferenceChangeListener, OnSeekBarChangeListener {
 
     public static final int MAX_SEEKBAR_VALUE = 15;
     public static final int MIN_SEEKBAR_VALUE = 2;
     public static final String KEY_BATTERY_SAVER_SEEK_BAR = "battery_saver_seek_bar";
     private static final int LEVEL_UNIT_SCALE = 5;
 
-    @VisibleForTesting
-    public SeekBarPreference mSeekBarPreference;
+    @VisibleForTesting public SeekBarPreference mSeekBarPreference;
     private Context mContext;
 
-    @VisibleForTesting
-    int mPercentage;
+    @VisibleForTesting int mPercentage;
 
     public BatterySaverScheduleSeekBarController(Context context) {
         mContext = context;
@@ -93,7 +91,8 @@ public class BatterySaverScheduleSeekBarController implements
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
         if (mPercentage > 0) {
-            Settings.Global.putInt(mContext.getContentResolver(),
+            Settings.Global.putInt(
+                    mContext.getContentResolver(),
                     Global.LOW_POWER_MODE_TRIGGER_LEVEL,
                     mPercentage);
         }
@@ -108,8 +107,7 @@ public class BatterySaverScheduleSeekBarController implements
             final int currentSeekbarValue = Math.max(threshold / 5, MIN_SEEKBAR_VALUE);
             mSeekBarPreference.setVisible(true);
             mSeekBarPreference.setProgress(currentSeekbarValue);
-            final CharSequence stateDescription = formatStateDescription(
-                    currentSeekbarValue * 5);
+            final CharSequence stateDescription = formatStateDescription(currentSeekbarValue * 5);
             mSeekBarPreference.setTitle(stateDescription);
             mSeekBarPreference.overrideSeekBarStateDescription(stateDescription);
         } else {
@@ -130,7 +128,7 @@ public class BatterySaverScheduleSeekBarController implements
     }
 
     private CharSequence formatStateDescription(int percentage) {
-        return mContext.getString(R.string.battery_saver_seekbar_title,
-                Utils.formatPercentage(percentage));
+        return mContext.getString(
+                R.string.battery_saver_seekbar_title, Utils.formatPercentage(percentage));
     }
 }

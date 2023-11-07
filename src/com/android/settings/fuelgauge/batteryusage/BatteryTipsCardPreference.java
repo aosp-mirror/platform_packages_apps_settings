@@ -34,9 +34,7 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import com.google.android.material.button.MaterialButton;
 
-/**
- * A preference for displaying the battery tips card view.
- */
+/** A preference for displaying the battery tips card view. */
 public class BatteryTipsCardPreference extends Preference implements View.OnClickListener {
 
     private static final String TAG = "BatteryTipsCardPreference";
@@ -55,10 +53,8 @@ public class BatteryTipsCardPreference extends Preference implements View.OnClic
     private int mIconResourceId = 0;
     private int mMainButtonStrokeColorResourceId = 0;
 
-    @VisibleForTesting
-    CharSequence mMainButtonLabel;
-    @VisibleForTesting
-    CharSequence mDismissButtonLabel;
+    @VisibleForTesting CharSequence mMainButtonLabel;
+    @VisibleForTesting CharSequence mDismissButtonLabel;
 
     public BatteryTipsCardPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -76,9 +72,7 @@ public class BatteryTipsCardPreference extends Preference implements View.OnClic
         mOnRejectListener = listener;
     }
 
-    /**
-     * Sets the icon in tips card.
-     */
+    /** Sets the icon in tips card. */
     public void setIconResourceId(int resourceId) {
         if (mIconResourceId != resourceId) {
             mIconResourceId = resourceId;
@@ -86,9 +80,7 @@ public class BatteryTipsCardPreference extends Preference implements View.OnClic
         }
     }
 
-    /**
-     * Sets the stroke color of main button in tips card.
-     */
+    /** Sets the stroke color of main button in tips card. */
     public void setMainButtonStrokeColorResourceId(int resourceId) {
         if (mMainButtonStrokeColorResourceId != resourceId) {
             mMainButtonStrokeColorResourceId = resourceId;
@@ -96,9 +88,7 @@ public class BatteryTipsCardPreference extends Preference implements View.OnClic
         }
     }
 
-    /**
-     * Sets the label of main button in tips card.
-     */
+    /** Sets the label of main button in tips card. */
     public void setMainButtonLabel(CharSequence label) {
         if (!TextUtils.equals(mMainButtonLabel, label)) {
             mMainButtonLabel = label;
@@ -106,9 +96,7 @@ public class BatteryTipsCardPreference extends Preference implements View.OnClic
         }
     }
 
-    /**
-     * Sets the label of dismiss button in tips card.
-     */
+    /** Sets the label of dismiss button in tips card. */
     public void setDismissButtonLabel(CharSequence label) {
         if (!TextUtils.equals(mDismissButtonLabel, label)) {
             mDismissButtonLabel = label;

@@ -21,7 +21,7 @@ import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.icu.text.RelativeDateTimeFormatter
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.produceState
 import com.android.settings.R
 import com.android.settings.applications.AppInfoBase
@@ -29,6 +29,7 @@ import com.android.settings.notification.app.AppNotificationSettings
 import com.android.settings.spa.notification.SpinnerItem.Companion.toSpinnerItem
 import com.android.settingslib.spa.framework.util.asyncFilter
 import com.android.settingslib.spa.framework.util.asyncForEach
+import com.android.settingslib.spa.livedata.observeAsCallback
 import com.android.settingslib.spa.widget.ui.SpinnerOption
 import com.android.settingslib.spaprivileged.model.app.AppEntry
 import com.android.settingslib.spaprivileged.model.app.AppListModel
@@ -36,9 +37,11 @@ import com.android.settingslib.spaprivileged.model.app.AppRecord
 import com.android.settingslib.spaprivileged.template.app.AppListItemModel
 import com.android.settingslib.spaprivileged.template.app.AppListTwoTargetSwitchItem
 import com.android.settingslib.utils.StringUtil
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.withContext
 
 data class AppNotificationsRecord(
     override val app: ApplicationInfo,
@@ -117,12 +120,15 @@ class AppNotificationsListModel(
 
     @Composable
     override fun AppListItemModel<AppNotificationsRecord>.AppItem() {
+        val changeable by produceState(initialValue = false) {
+            withContext(Dispatchers.Default) {
+                value = repository.isChangeable(record.app)
+            }
+        }
         AppListTwoTargetSwitchItem(
             onClick = { navigateToAppNotificationSettings(app = record.app) },
-            checked = record.controller.isEnabled.observeAsState(),
-            changeable = produceState(initialValue = false) {
-                value = repository.isChangeable(record.app)
-            },
+            checked = record.controller.isEnabled.observeAsCallback(),
+            changeable = { changeable },
             onCheckedChange = record.controller::setEnabled,
         )
     }

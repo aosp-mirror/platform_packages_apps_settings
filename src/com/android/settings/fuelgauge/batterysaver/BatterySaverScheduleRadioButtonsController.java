@@ -31,12 +31,12 @@ import com.android.settingslib.fuelgauge.BatterySaverUtils;
 /**
  * Responds to user actions in the Settings > Battery > Set a Schedule Screen
  *
- * Note that this is not a preference controller since that screen does not inherit from
+ * <p>Note that this is not a preference controller since that screen does not inherit from
  * DashboardFragment.
  *
- * Will call the appropriate power manager APIs and modify the correct settings to enable
- * users to control their automatic battery saver toggling preferences.
- * See {@link Settings.Global#AUTOMATIC_POWER_SAVE_MODE} for more details.
+ * <p>Will call the appropriate power manager APIs and modify the correct settings to enable users
+ * to control their automatic battery saver toggling preferences. See {@link
+ * Settings.Global#AUTOMATIC_POWER_SAVE_MODE} for more details.
  */
 public class BatterySaverScheduleRadioButtonsController {
     private static final String TAG = "BatterySaverScheduleRadioButtonsController";
@@ -46,8 +46,8 @@ public class BatterySaverScheduleRadioButtonsController {
     private Context mContext;
     private BatterySaverScheduleSeekBarController mSeekBarController;
 
-    public BatterySaverScheduleRadioButtonsController(Context context,
-            BatterySaverScheduleSeekBarController seekbar) {
+    public BatterySaverScheduleRadioButtonsController(
+            Context context, BatterySaverScheduleSeekBarController seekbar) {
         mContext = context;
         mSeekBarController = seekbar;
     }
@@ -67,10 +67,11 @@ public class BatterySaverScheduleRadioButtonsController {
             case KEY_PERCENTAGE:
                 triggerLevel = TRIGGER_LEVEL_MIN;
                 confirmationExtras.putBoolean(BatterySaverUtils.EXTRA_CONFIRM_TEXT_ONLY, true);
-                confirmationExtras.putInt(BatterySaverUtils.EXTRA_POWER_SAVE_MODE_TRIGGER,
+                confirmationExtras.putInt(
+                        BatterySaverUtils.EXTRA_POWER_SAVE_MODE_TRIGGER,
                         PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE);
-                confirmationExtras.putInt(BatterySaverUtils.EXTRA_POWER_SAVE_MODE_TRIGGER_LEVEL,
-                        triggerLevel);
+                confirmationExtras.putInt(
+                        BatterySaverUtils.EXTRA_POWER_SAVE_MODE_TRIGGER_LEVEL, triggerLevel);
                 break;
             default:
                 throw new IllegalStateException(
@@ -79,7 +80,7 @@ public class BatterySaverScheduleRadioButtonsController {
 
         if (!TextUtils.equals(key, KEY_NO_SCHEDULE)
                 && BatterySaverUtils.maybeShowBatterySaverConfirmation(
-                mContext, confirmationExtras)) {
+                        mContext, confirmationExtras)) {
             // reset this if we need to show the confirmation message
             mode = PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE;
             triggerLevel = 0;
