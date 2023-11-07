@@ -115,11 +115,11 @@ public class WorkModePreferenceControllerTest {
 
     @Test
     public void onPreferenceChange_shouldRequestQuietModeEnabled() {
-        mController.onSwitchChanged(mSwitch, true);
+        mController.onCheckedChanged(mSwitch, true);
 
         verify(mUserManager).requestQuietModeEnabled(false, mManagedUser);
 
-        mController.onSwitchChanged(mSwitch, false);
+        mController.onCheckedChanged(mSwitch, false);
 
         verify(mUserManager).requestQuietModeEnabled(true, mManagedUser);
     }

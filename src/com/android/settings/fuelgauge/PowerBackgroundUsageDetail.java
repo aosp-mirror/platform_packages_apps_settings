@@ -28,7 +28,8 @@ import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.Switch;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -44,7 +45,6 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.LayoutPreference;
 import com.android.settingslib.widget.MainSwitchPreference;
-import com.android.settingslib.widget.OnMainSwitchChangeListener;
 import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import java.util.ArrayList;
@@ -54,7 +54,7 @@ import java.util.concurrent.Executors;
 
 /** Allow background usage fragment for each app */
 public class PowerBackgroundUsageDetail extends DashboardFragment
-        implements SelectorWithWidgetPreference.OnClickListener, OnMainSwitchChangeListener {
+        implements SelectorWithWidgetPreference.OnClickListener, OnCheckedChangeListener {
     private static final String TAG = "PowerBackgroundUsageDetail";
 
     public static final String EXTRA_UID = "extra_uid";
@@ -155,7 +155,7 @@ public class PowerBackgroundUsageDetail extends DashboardFragment
     }
 
     @Override
-    public void onSwitchChanged(Switch switchView, boolean isChecked) {
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         mMainSwitchPreference.setChecked(isChecked);
         updateSelectorPreference(isChecked);
     }
