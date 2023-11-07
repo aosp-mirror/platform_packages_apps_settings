@@ -18,6 +18,7 @@ package com.android.settings.dashboard.profileselector;
 
 import static android.content.Intent.EXTRA_USER_ID;
 
+import static com.android.settings.dashboard.profileselector.ProfileSelectFragment.EXTRA_PROFILE;
 import static com.android.settings.dashboard.profileselector.ProfileSelectFragment.PERSONAL_TAB;
 import static com.android.settings.dashboard.profileselector.ProfileSelectFragment.PRIVATE_TAB;
 import static com.android.settings.dashboard.profileselector.ProfileSelectFragment.WORK_TAB;
@@ -253,6 +254,37 @@ public class ProfileSelectFragmentTest {
                     }
                 });
         assertThat(fragments).hasLength(3);
+    }
+
+    @Test
+    public void testGetFragments_whenAvailableBundle_returnsFragmentsWithCorrectBundles() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE);
+        Bundle bundle = new Bundle();
+        Fragment[] fragments = ProfileSelectFragment.getFragments(
+                mContext,
+                bundle,
+                TestProfileSelectFragment::new,
+                TestProfileSelectFragment::new,
+                TestProfileSelectFragment::new,
+                new ProfileSelectFragment.PrivateSpaceInfoProvider() {
+                    @Override
+                    public boolean isPrivateSpaceLocked(Context context) {
+                        return false;
+                    }
+                },
+                new ProfileSelectFragment.ManagedProfileInfoProvider() {
+                    @Override
+                    public UserHandle getManagedProfile(Context context) {
+                        return new UserHandle(123);
+                    }
+                });
+        assertThat(fragments).hasLength(3);
+        assertThat(fragments[0].getArguments().getInt(EXTRA_PROFILE))
+                .isEqualTo(ProfileSelectFragment.ProfileType.PERSONAL);
+        assertThat(fragments[1].getArguments().getInt(EXTRA_PROFILE))
+                .isEqualTo(ProfileSelectFragment.ProfileType.WORK);
+        assertThat(fragments[2].getArguments().getInt(EXTRA_PROFILE))
+                .isEqualTo(ProfileSelectFragment.ProfileType.PRIVATE);
     }
 
     public static class TestProfileSelectFragment extends ProfileSelectFragment {
