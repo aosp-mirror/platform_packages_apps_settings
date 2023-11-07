@@ -41,7 +41,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
-import android.widget.CompoundButton;
+import android.widget.Switch;
 
 import androidx.annotation.Nullable;
 
@@ -294,7 +294,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     }
 
     @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+    public void onSwitchChanged(Switch switchView, boolean isChecked) {
         if (isChecked != isAccessibilityServiceEnabled()) {
             onPreferenceClick(isChecked);
         }

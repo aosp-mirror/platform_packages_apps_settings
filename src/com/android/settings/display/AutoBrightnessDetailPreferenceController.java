@@ -17,18 +17,18 @@
 package com.android.settings.display;
 
 import android.content.Context;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.Switch;
 
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.widget.SettingsMainSwitchPreference;
+import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 /**
  * Controller that updates the adaptive brightness.
  */
 public class AutoBrightnessDetailPreferenceController extends
-        AutoBrightnessPreferenceController implements OnCheckedChangeListener {
+        AutoBrightnessPreferenceController implements OnMainSwitchChangeListener {
 
     public AutoBrightnessDetailPreferenceController(Context context, String key) {
         super(context, key);
@@ -58,7 +58,7 @@ public class AutoBrightnessDetailPreferenceController extends
     }
 
     @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+    public void onSwitchChanged(Switch switchView, boolean isChecked) {
         if (isChecked != isChecked()) {
             setChecked(isChecked);
         }

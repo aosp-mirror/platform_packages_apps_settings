@@ -16,8 +16,7 @@ package com.android.settings.location;
 import android.content.Context;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.Switch;
 
 import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settingslib.RestrictedLockUtils;
@@ -25,11 +24,12 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
+import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 /**
  * The switch controller for the location.
  */
-public class LocationSwitchBarController implements OnCheckedChangeListener,
+public class LocationSwitchBarController implements OnMainSwitchChangeListener,
         LocationEnabler.LocationModeChangeListener, LifecycleObserver, OnStart, OnStop {
 
     private final SettingsMainSwitchBar mSwitchBar;
@@ -100,7 +100,7 @@ public class LocationSwitchBarController implements OnCheckedChangeListener,
      * Listens to the state change of the location primary switch.
      */
     @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+    public void onSwitchChanged(Switch switchView, boolean isChecked) {
         mLocationEnabler.setLocationEnabled(isChecked);
     }
 }

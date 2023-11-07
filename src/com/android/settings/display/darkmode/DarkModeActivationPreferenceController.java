@@ -18,8 +18,7 @@ package com.android.settings.display.darkmode;
 import android.app.UiModeManager;
 import android.content.Context;
 import android.content.res.Configuration;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.Switch;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -29,6 +28,7 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.widget.MainSwitchPreference;
+import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 import java.time.LocalTime;
 
@@ -36,7 +36,7 @@ import java.time.LocalTime;
  * Controller for activate/deactivate night mode button
  */
 public class DarkModeActivationPreferenceController extends BasePreferenceController implements
-        OnCheckedChangeListener {
+        OnMainSwitchChangeListener {
 
     private final UiModeManager mUiModeManager;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
@@ -96,7 +96,7 @@ public class DarkModeActivationPreferenceController extends BasePreferenceContro
     }
 
     @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+    public void onSwitchChanged(Switch switchView, boolean isChecked) {
         mMetricsFeatureProvider.logClickedPreference(mPreference, getMetricsCategory());
         final boolean active = (mContext.getResources().getConfiguration().uiMode
                 & Configuration.UI_MODE_NIGHT_YES) != 0;

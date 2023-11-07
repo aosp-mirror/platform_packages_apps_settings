@@ -32,8 +32,7 @@ import android.net.wifi.WifiManager;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.Switch;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -42,12 +41,13 @@ import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
+import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 /**
  * Controller for logic pertaining to switch Wi-Fi tethering.
  */
 public class WifiTetherSwitchBarController implements
-        LifecycleObserver, OnStart, OnStop, DataSaverBackend.Listener, OnCheckedChangeListener {
+        LifecycleObserver, OnStart, OnStop, DataSaverBackend.Listener, OnMainSwitchChangeListener {
 
     private static final String TAG = "WifiTetherSBC";
     private static final IntentFilter WIFI_INTENT_FILTER;
@@ -101,9 +101,9 @@ public class WifiTetherSwitchBarController implements
     }
 
     @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+    public void onSwitchChanged(Switch switchView, boolean isChecked) {
         // Filter out unnecessary callbacks when switch is disabled.
-        if (!buttonView.isEnabled()) return;
+        if (!switchView.isEnabled()) return;
 
         if (isChecked) {
             startTether();

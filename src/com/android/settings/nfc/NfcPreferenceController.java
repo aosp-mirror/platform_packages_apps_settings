@@ -22,8 +22,7 @@ import android.content.IntentFilter;
 import android.net.Uri;
 import android.nfc.NfcAdapter;
 import android.util.Log;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.Switch;
 
 import androidx.preference.PreferenceScreen;
 
@@ -34,11 +33,12 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.widget.MainSwitchPreference;
+import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 import java.io.IOException;
 
 public class NfcPreferenceController extends TogglePreferenceController
-        implements LifecycleObserver, OnResume, OnPause, OnCheckedChangeListener {
+        implements LifecycleObserver, OnResume, OnPause, OnMainSwitchChangeListener {
 
     public static final String KEY_TOGGLE_NFC = "toggle_nfc";
     private final NfcAdapter mNfcAdapter;
@@ -64,7 +64,7 @@ public class NfcPreferenceController extends TogglePreferenceController
     }
 
     @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+    public void onSwitchChanged(Switch switchView, boolean isChecked) {
         if (isChecked != mNfcAdapter.isEnabled()) {
             setChecked(isChecked);
         }

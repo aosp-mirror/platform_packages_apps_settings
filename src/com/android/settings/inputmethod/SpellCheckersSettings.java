@@ -26,8 +26,7 @@ import android.util.Log;
 import android.view.textservice.SpellCheckerInfo;
 import android.view.textservice.SpellCheckerSubtype;
 import android.view.textservice.TextServicesManager;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.Switch;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
@@ -38,9 +37,10 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.widget.SettingsMainSwitchBar;
+import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 public class SpellCheckersSettings extends SettingsPreferenceFragment
-        implements OnCheckedChangeListener, OnPreferenceChangeListener {
+        implements OnMainSwitchChangeListener, OnPreferenceChangeListener {
     private static final String TAG = SpellCheckersSettings.class.getSimpleName();
     private static final boolean DBG = false;
 
@@ -105,7 +105,7 @@ public class SpellCheckersSettings extends SettingsPreferenceFragment
     }
 
     @Override
-    public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
+    public void onSwitchChanged(final Switch switchView, final boolean isChecked) {
         Settings.Secure.putInt(getContentResolver(), Settings.Secure.SPELL_CHECKER_ENABLED,
                 isChecked ? 1 : 0);
         updatePreferenceScreen();

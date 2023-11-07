@@ -29,8 +29,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.Switch;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -45,12 +44,13 @@ import com.android.settingslib.dream.DreamBackend;
 import com.android.settingslib.dream.DreamBackend.WhenToDream;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.MainSwitchPreference;
+import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @SearchIndexable
-public class DreamSettings extends DashboardFragment implements OnCheckedChangeListener {
+public class DreamSettings extends DashboardFragment implements OnMainSwitchChangeListener {
 
     private static final String TAG = "DreamSettings";
     static final String WHILE_CHARGING_ONLY = "while_charging_only";
@@ -246,7 +246,7 @@ public class DreamSettings extends DashboardFragment implements OnCheckedChangeL
     }
 
     @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+    public void onSwitchChanged(Switch switchView, boolean isChecked) {
         setAllPreferencesEnabled(isChecked);
         mPreviewButton.setVisibility(isChecked ? View.VISIBLE : View.GONE);
         updatePaddingForPreviewButton();

@@ -45,8 +45,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.Switch;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
@@ -81,6 +80,7 @@ import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.development.SystemPropPoker;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
@@ -89,7 +89,7 @@ import java.util.List;
 
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFragment
-        implements OnCheckedChangeListener, OemUnlockDialogHost, AdbDialogHost,
+        implements OnMainSwitchChangeListener, OemUnlockDialogHost, AdbDialogHost,
         AdbClearKeysDialogHost, LogPersistDialogHost,
         BluetoothRebootDialog.OnRebootDialogListener,
         AbstractBluetoothPreferenceController.Callback,
@@ -333,7 +333,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
     }
 
     @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+    public void onSwitchChanged(Switch switchView, boolean isChecked) {
         final boolean developmentEnabledState =
                 DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(getContext());
         if (isChecked != developmentEnabledState) {

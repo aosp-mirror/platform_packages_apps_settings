@@ -112,7 +112,7 @@ public class BubbleNotificationPreferenceControllerTest {
     public void onSwitchChanged_true_settingIsOff_flagShouldOn() {
         Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, OFF);
 
-        mController.onCheckedChanged(mSwitch, true);
+        mController.onSwitchChanged(mSwitch, true);
 
         assertThat(Settings.Global.getInt(mContext.getContentResolver(),
                 NOTIFICATION_BUBBLES, OFF)).isEqualTo(ON);
@@ -122,7 +122,7 @@ public class BubbleNotificationPreferenceControllerTest {
     public void onSwitchChanged_false_settingIsOn_flagShouldOff() {
         Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, ON);
 
-        mController.onCheckedChanged(mSwitch, false);
+        mController.onSwitchChanged(mSwitch, false);
 
         assertThat(Settings.Global.getInt(mContext.getContentResolver(),
                 NOTIFICATION_BUBBLES, ON)).isEqualTo(OFF);

@@ -16,8 +16,7 @@
 package com.android.settings.accounts;
 
 import android.content.Context;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.Switch;
 
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
@@ -28,13 +27,14 @@ import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.slices.SliceData;
 import com.android.settingslib.widget.MainSwitchPreference;
+import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 import org.jetbrains.annotations.NotNull;
 
 
 /** Controller for "Work apps" toggle that allows the user to enable/disable quiet mode. */
 public class WorkModePreferenceController extends BasePreferenceController
-        implements OnCheckedChangeListener, DefaultLifecycleObserver,
+        implements OnMainSwitchChangeListener, DefaultLifecycleObserver,
         ManagedProfileQuietModeEnabler.QuietModeChangeListener {
 
     private final ManagedProfileQuietModeEnabler mQuietModeEnabler;
@@ -68,7 +68,7 @@ public class WorkModePreferenceController extends BasePreferenceController
     }
 
     @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+    public void onSwitchChanged(Switch switchView, boolean isChecked) {
         mQuietModeEnabler.setQuietModeEnabled(!isChecked);
     }
 

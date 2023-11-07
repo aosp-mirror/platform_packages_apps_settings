@@ -18,8 +18,7 @@ package com.android.settings.notification.zen;
 
 import android.app.AutomaticZenRule;
 import android.content.Context;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.Switch;
 
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
@@ -28,10 +27,11 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.widget.MainSwitchPreference;
+import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 public class ZenAutomaticRuleSwitchPreferenceController extends
         AbstractZenModeAutomaticRulePreferenceController implements
-        OnCheckedChangeListener {
+        OnMainSwitchChangeListener {
 
     private static final String KEY = "zen_automatic_rule_switch";
     private AutomaticZenRule mRule;
@@ -86,7 +86,7 @@ public class ZenAutomaticRuleSwitchPreferenceController extends
     }
 
     @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+    public void onSwitchChanged(Switch switchView, boolean isChecked) {
         final boolean enabled = isChecked;
         if (enabled == mRule.isEnabled()) return;
         mRule.setEnabled(enabled);

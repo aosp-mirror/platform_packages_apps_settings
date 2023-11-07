@@ -17,8 +17,7 @@
 package com.android.settings.emergency;
 
 import android.content.Context;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.Switch;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -28,12 +27,13 @@ import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.emergencynumber.EmergencyNumberUtils;
 import com.android.settingslib.widget.MainSwitchPreference;
+import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 /**
  * Preference controller for emergency gesture setting
  */
 public class EmergencyGesturePreferenceController extends BasePreferenceController implements
-        OnCheckedChangeListener {
+        OnMainSwitchChangeListener {
 
     @VisibleForTesting
     EmergencyNumberUtils mEmergencyNumberUtils;
@@ -72,7 +72,7 @@ public class EmergencyGesturePreferenceController extends BasePreferenceControll
     }
 
     @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+    public void onSwitchChanged(Switch switchView, boolean isChecked) {
         mEmergencyNumberUtils.setEmergencyGestureEnabled(isChecked);
     }
 }

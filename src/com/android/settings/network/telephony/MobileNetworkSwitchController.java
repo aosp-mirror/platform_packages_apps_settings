@@ -86,7 +86,7 @@ public class MobileNetworkSwitchController extends BasePreferenceController impl
         super.displayPreference(screen);
         mSwitchBar = (SettingsMainSwitchPreference) screen.findPreference(mPreferenceKey);
 
-        mSwitchBar.setOnBeforeCheckedChangeListener((isChecked) -> {
+        mSwitchBar.setOnBeforeCheckedChangeListener((toggleSwitch, isChecked) -> {
             // TODO b/135222940: re-evaluate whether to use
             // mSubscriptionManager#isSubscriptionEnabled
             if (mSubscriptionManager.isActiveSubscriptionId(mSubId) != isChecked) {

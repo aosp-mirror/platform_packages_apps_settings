@@ -19,6 +19,7 @@ import android.app.settings.SettingsEnums
 import android.content.Context
 import android.os.Bundle
 import android.telephony.SubscriptionManager
+import android.widget.Switch
 import com.android.settings.R
 import com.android.settings.SettingsActivity
 import com.android.settings.dashboard.DashboardFragment
@@ -50,7 +51,9 @@ class DataSaverSummary : DashboardFragment() {
         switchBar = (activity as SettingsActivity).switchBar.apply {
             setTitle(getString(R.string.data_saver_switch_title))
             show()
-            addOnSwitchChangeListener { _, isChecked -> onSwitchChanged(isChecked) }
+            addOnSwitchChangeListener { _: Switch, isChecked: Boolean ->
+                onSwitchChanged(isChecked)
+            }
         }
     }
 

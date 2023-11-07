@@ -35,8 +35,7 @@ import android.util.ArraySet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.VisibleForTesting;
@@ -52,6 +51,7 @@ import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.MainSwitchPreference;
+import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 import java.util.HashMap;
 import java.util.List;
@@ -62,7 +62,7 @@ import java.util.UUID;
 
 /** The page of the Open by default */
 public class AppLaunchSettings extends AppInfoBase implements
-        Preference.OnPreferenceChangeListener, OnCheckedChangeListener {
+        Preference.OnPreferenceChangeListener, OnMainSwitchChangeListener {
     private static final String TAG = "AppLaunchSettings";
     // Preference keys
     private static final String MAIN_SWITCH_PREF_KEY = "open_by_default_supported_links";
@@ -168,7 +168,7 @@ public class AppLaunchSettings extends AppInfoBase implements
     }
 
     @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+    public void onSwitchChanged(Switch switchView, boolean isChecked) {
         IntentPickerUtils.logd("onSwitchChanged: isChecked=" + isChecked);
         if (mMainSwitchPreference != null) { //mMainSwitchPreference synced with Switch
             mMainSwitchPreference.setChecked(isChecked);

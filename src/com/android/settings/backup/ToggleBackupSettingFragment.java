@@ -11,6 +11,7 @@ import android.os.ServiceManager;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
@@ -115,7 +116,8 @@ public class ToggleBackupSettingFragment extends SettingsPreferenceFragment
         mSwitchBar.setOnBeforeCheckedChangeListener(
                 new SettingsMainSwitchBar.OnBeforeCheckedChangeListener() {
                     @Override
-                    public boolean onBeforeCheckedChanged(boolean checked) {
+                    public boolean onBeforeCheckedChanged(
+                            Switch toggleSwitch, boolean checked) {
                         if (!checked) {
                             // Don't change Switch status until user makes choice in dialog
                             // so return true here.

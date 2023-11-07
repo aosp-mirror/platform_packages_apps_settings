@@ -25,8 +25,7 @@ import android.bluetooth.BluetoothLeBroadcastReceiveState;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.util.Log;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.Switch;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.DefaultLifecycleObserver;
@@ -43,6 +42,7 @@ import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.utils.ThreadUtils;
+import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 import com.google.common.collect.ImmutableList;
 
@@ -55,7 +55,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 public class AudioSharingSwitchBarController extends BasePreferenceController
-        implements DefaultLifecycleObserver, OnCheckedChangeListener {
+        implements DefaultLifecycleObserver, OnMainSwitchChangeListener {
     private static final String TAG = "AudioSharingSwitchBarCtl";
     private static final String PREF_KEY = "audio_sharing_main_switch";
     private final SettingsMainSwitchBar mSwitchBar;
@@ -229,9 +229,9 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
     }
 
     @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+    public void onSwitchChanged(Switch switchView, boolean isChecked) {
         // Filter out unnecessary callbacks when switch is disabled.
-        if (!buttonView.isEnabled()) return;
+        if (!switchView.isEnabled()) return;
         if (isChecked) {
             startAudioSharing();
         } else {

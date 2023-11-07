@@ -20,8 +20,7 @@ import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.Switch;
 
 import androidx.preference.PreferenceViewHolder;
 import androidx.preference.TwoStatePreference;
@@ -30,6 +29,7 @@ import com.android.settings.R;
 import com.android.settings.widget.SettingsMainSwitchBar.OnBeforeCheckedChangeListener;
 import com.android.settingslib.RestrictedPreferenceHelper;
 import com.android.settingslib.core.instrumentation.SettingsJankMonitor;
+import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,11 +40,11 @@ import java.util.List;
  * to enable or disable the preferences on the page.
  */
 public class SettingsMainSwitchPreference extends TwoStatePreference implements
-        OnCheckedChangeListener {
+        OnMainSwitchChangeListener {
 
     private final List<OnBeforeCheckedChangeListener> mBeforeCheckedChangeListeners =
             new ArrayList<>();
-    private final List<OnCheckedChangeListener> mSwitchChangeListeners = new ArrayList<>();
+    private final List<OnMainSwitchChangeListener> mSwitchChangeListeners = new ArrayList<>();
 
     private SettingsMainSwitchBar mMainSwitchBar;
     private EnforcedAdmin mEnforcedAdmin;
@@ -127,9 +127,9 @@ public class SettingsMainSwitchPreference extends TwoStatePreference implements
     }
 
     @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+    public void onSwitchChanged(Switch switchView, boolean isChecked) {
         super.setChecked(isChecked);
-        SettingsJankMonitor.detectToggleJank(getKey(), buttonView);
+        SettingsJankMonitor.detectToggleJank(getKey(), switchView);
     }
 
     /**
@@ -197,7 +197,7 @@ public class SettingsMainSwitchPreference extends TwoStatePreference implements
     /**
      * Adds a listener for switch changes
      */
-    public void addOnSwitchChangeListener(OnCheckedChangeListener listener) {
+    public void addOnSwitchChangeListener(OnMainSwitchChangeListener listener) {
         if (!mSwitchChangeListeners.contains(listener)) {
             mSwitchChangeListeners.add(listener);
         }
@@ -209,7 +209,7 @@ public class SettingsMainSwitchPreference extends TwoStatePreference implements
     /**
      * Remove a listener for switch changes
      */
-    public void removeOnSwitchChangeListener(OnCheckedChangeListener listener) {
+    public void removeOnSwitchChangeListener(OnMainSwitchChangeListener listener) {
         mSwitchChangeListeners.remove(listener);
         if (mMainSwitchBar != null) {
             mMainSwitchBar.removeOnSwitchChangeListener(listener);
@@ -239,7 +239,7 @@ public class SettingsMainSwitchPreference extends TwoStatePreference implements
         for (OnBeforeCheckedChangeListener listener : mBeforeCheckedChangeListeners) {
             mMainSwitchBar.setOnBeforeCheckedChangeListener(listener);
         }
-        for (OnCheckedChangeListener listener : mSwitchChangeListeners) {
+        for (OnMainSwitchChangeListener listener : mSwitchChangeListeners) {
             mMainSwitchBar.addOnSwitchChangeListener(listener);
         }
     }
