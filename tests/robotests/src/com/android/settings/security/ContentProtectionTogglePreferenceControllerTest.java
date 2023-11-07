@@ -125,7 +125,7 @@ public class ContentProtectionTogglePreferenceControllerTest {
         mController.displayPreference(mScreen);
         mController.setChecked(false);
 
-        mController.onSwitchChanged(/* switchView= */ null, /* isChecked= */ true);
+        mController.onCheckedChanged(/* switchView= */ null, /* isChecked= */ true);
 
         assertThat(getContentProtectionGlobalSetting()).isEqualTo(1);
     }
@@ -134,7 +134,7 @@ public class ContentProtectionTogglePreferenceControllerTest {
     public void onSwitchChanged_switchUnchecked_manuallyDisabled() {
         mController.displayPreference(mScreen);
 
-        mController.onSwitchChanged(/* switchView= */ null, /* isChecked= */ false);
+        mController.onCheckedChanged(/* switchView= */ null, /* isChecked= */ false);
 
         assertThat(getContentProtectionGlobalSetting()).isEqualTo(-1);
     }
