@@ -72,11 +72,12 @@ import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {
-        ShadowEntityHeaderController.class,
-        ShadowActivityManager.class,
-        com.android.settings.testutils.shadow.ShadowFragment.class,
-})
+@Config(
+        shadows = {
+            ShadowEntityHeaderController.class,
+            ShadowActivityManager.class,
+            com.android.settings.testutils.shadow.ShadowFragment.class,
+        })
 public class PowerBackgroundUsageDetailTest {
     private static final String APP_LABEL = "app label";
     private static final String SUMMARY = "summary";
@@ -96,30 +97,19 @@ public class PowerBackgroundUsageDetailTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private FragmentActivity mActivity;
-    @Mock
-    private EntityHeaderController mEntityHeaderController;
-    @Mock
-    private BatteryOptimizeUtils mBatteryOptimizeUtils;
-    @Mock
-    private LayoutPreference mHeaderPreference;
-    @Mock
-    private ApplicationsState mState;
-    @Mock
-    private Bundle mBundle;
-    @Mock
-    private LoaderManager mLoaderManager;
-    @Mock
-    private ApplicationsState.AppEntry mAppEntry;
-    @Mock
-    private BatteryEntry mBatteryEntry;
-    @Mock
-    private BackupManager mBackupManager;
-    @Mock
-    private PackageManager mPackageManager;
-    @Mock
-    private AppOpsManager mAppOpsManager;
-    @Mock
-    private Switch mMockSwitch;
+
+    @Mock private EntityHeaderController mEntityHeaderController;
+    @Mock private BatteryOptimizeUtils mBatteryOptimizeUtils;
+    @Mock private LayoutPreference mHeaderPreference;
+    @Mock private ApplicationsState mState;
+    @Mock private Bundle mBundle;
+    @Mock private LoaderManager mLoaderManager;
+    @Mock private ApplicationsState.AppEntry mAppEntry;
+    @Mock private BatteryEntry mBatteryEntry;
+    @Mock private BackupManager mBackupManager;
+    @Mock private PackageManager mPackageManager;
+    @Mock private AppOpsManager mAppOpsManager;
+    @Mock private Switch mMockSwitch;
 
     @Before
     public void setUp() {
@@ -137,19 +127,26 @@ public class PowerBackgroundUsageDetailTest {
         doReturn(mLoaderManager).when(mFragment).getLoaderManager();
 
         ShadowEntityHeaderController.setUseMock(mEntityHeaderController);
-        doReturn(mEntityHeaderController).when(mEntityHeaderController)
+        doReturn(mEntityHeaderController)
+                .when(mEntityHeaderController)
                 .setButtonActions(anyInt(), anyInt());
-        doReturn(mEntityHeaderController).when(mEntityHeaderController)
+        doReturn(mEntityHeaderController)
+                .when(mEntityHeaderController)
                 .setIcon(nullable(Drawable.class));
-        doReturn(mEntityHeaderController).when(mEntityHeaderController).setIcon(nullable(
-                ApplicationsState.AppEntry.class));
-        doReturn(mEntityHeaderController).when(mEntityHeaderController)
+        doReturn(mEntityHeaderController)
+                .when(mEntityHeaderController)
+                .setIcon(nullable(ApplicationsState.AppEntry.class));
+        doReturn(mEntityHeaderController)
+                .when(mEntityHeaderController)
                 .setLabel(nullable(String.class));
-        doReturn(mEntityHeaderController).when(mEntityHeaderController)
+        doReturn(mEntityHeaderController)
+                .when(mEntityHeaderController)
                 .setLabel(nullable(String.class));
-        doReturn(mEntityHeaderController).when(mEntityHeaderController)
+        doReturn(mEntityHeaderController)
+                .when(mEntityHeaderController)
                 .setLabel(nullable(ApplicationsState.AppEntry.class));
-        doReturn(mEntityHeaderController).when(mEntityHeaderController)
+        doReturn(mEntityHeaderController)
+                .when(mEntityHeaderController)
                 .setSummary(nullable(String.class));
 
         when(mBatteryEntry.getUid()).thenReturn(UID);
@@ -169,13 +166,15 @@ public class PowerBackgroundUsageDetailTest {
 
         final ArgumentCaptor<Intent> captor = ArgumentCaptor.forClass(Intent.class);
 
-        Answer<Void> callable = invocation -> {
-            mBundle = captor.getValue().getBundleExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS);
-            System.out.println("mBundle = " + mBundle);
-            return null;
-        };
-        doAnswer(callable).when(mActivity).startActivityAsUser(captor.capture(),
-                nullable(UserHandle.class));
+        Answer<Void> callable =
+                invocation -> {
+                    mBundle = captor.getValue().getBundleExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS);
+                    System.out.println("mBundle = " + mBundle);
+                    return null;
+                };
+        doAnswer(callable)
+                .when(mActivity)
+                .startActivityAsUser(captor.capture(), nullable(UserHandle.class));
         doAnswer(callable).when(mActivity).startActivity(captor.capture());
 
         mFooterPreference = spy(new FooterPreference(mContext));
@@ -207,7 +206,9 @@ public class PowerBackgroundUsageDetailTest {
 
     @Test
     public void initHeader_HasAppEntry_BuildByAppEntry() {
-        ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
+        ReflectionHelpers.setStaticField(
+                AppUtils.class,
+                "sInstantAppDataProvider",
                 new InstantAppDataProvider() {
                     @Override
                     public boolean isInstantApp(ApplicationInfo info) {
@@ -224,7 +225,9 @@ public class PowerBackgroundUsageDetailTest {
 
     @Test
     public void initHeader_HasAppEntry_InstantApp() {
-        ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
+        ReflectionHelpers.setStaticField(
+                AppUtils.class,
+                "sInstantAppDataProvider",
                 new InstantAppDataProvider() {
                     @Override
                     public boolean isInstantApp(ApplicationInfo info) {
@@ -256,7 +259,7 @@ public class PowerBackgroundUsageDetailTest {
         final int optimizedMode = BatteryOptimizeUtils.MODE_OPTIMIZED;
         mFragment.mOptimizationMode = optimizedMode;
 
-        mFragment.onSwitchChanged(mMockSwitch, /*isChecked=*/ false);
+        mFragment.onSwitchChanged(mMockSwitch, /* isChecked= */ false);
 
         verify(mOptimizePreference).setEnabled(false);
         verify(mUnrestrictedPreference).setEnabled(false);
@@ -272,7 +275,7 @@ public class PowerBackgroundUsageDetailTest {
         final int optimizedMode = BatteryOptimizeUtils.MODE_OPTIMIZED;
         mFragment.mOptimizationMode = restrictedMode;
 
-        mFragment.onSwitchChanged(mMockSwitch, /*isChecked=*/ true);
+        mFragment.onSwitchChanged(mMockSwitch, /* isChecked= */ true);
 
         verify(mOptimizePreference).setEnabled(true);
         verify(mUnrestrictedPreference).setEnabled(true);

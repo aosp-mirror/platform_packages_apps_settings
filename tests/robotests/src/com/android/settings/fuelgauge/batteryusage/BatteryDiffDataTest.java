@@ -149,16 +149,12 @@ public class BatteryDiffDataTest {
                 createBatteryDiffEntry(mContext, /* consumePower= */ 28.5, /* key= */ "APP_1"));
         batteryDiffEntries.add(
                 createBatteryDiffEntry(
-                        mContext,
-                        /* consumePower= */ 20,
-                        BatteryDiffEntry.UNINSTALLED_APPS_KEY));
+                        mContext, /* consumePower= */ 20, BatteryDiffEntry.UNINSTALLED_APPS_KEY));
         batteryDiffEntries.add(
                 createBatteryDiffEntry(mContext, /* consumePower= */ 3, /* key= */ "APP_2"));
         batteryDiffEntries.add(
                 createBatteryDiffEntry(
-                        mContext,
-                        /* consumePower= */ 28.5,
-                        BatteryDiffEntry.SYSTEM_APPS_KEY));
+                        mContext, /* consumePower= */ 28.5, BatteryDiffEntry.SYSTEM_APPS_KEY));
         batteryDiffEntries.add(
                 createBatteryDiffEntry(mContext, /* consumePower= */ 20, /* key= */ "APP_3"));
 

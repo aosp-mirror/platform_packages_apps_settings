@@ -53,8 +53,12 @@ public class PowerGaugePreferenceTest {
         MockitoAnnotations.initMocks(this);
 
         mContext = RuntimeEnvironment.application;
-        mRootView = LayoutInflater.from(mContext)
-                .inflate(com.android.settingslib.widget.preference.app.R.layout.preference_app, null);
+        mRootView =
+                LayoutInflater.from(mContext)
+                        .inflate(
+                                com.android.settingslib.widget.preference.app.R.layout
+                                        .preference_app,
+                                null);
         mWidgetView =
                 LayoutInflater.from(mContext).inflate(R.layout.preference_widget_summary, null);
         final LinearLayout widgetFrame = mRootView.findViewById(android.R.id.widget_frame);

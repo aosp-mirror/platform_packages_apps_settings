@@ -78,11 +78,12 @@ import org.robolectric.util.ReflectionHelpers;
 import java.util.concurrent.TimeUnit;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {
-        ShadowEntityHeaderController.class,
-        ShadowActivityManager.class,
-        com.android.settings.testutils.shadow.ShadowFragment.class,
-})
+@Config(
+        shadows = {
+            ShadowEntityHeaderController.class,
+            ShadowActivityManager.class,
+            com.android.settings.testutils.shadow.ShadowFragment.class,
+        })
 public class AdvancedPowerUsageDetailTest {
     private static final String APP_LABEL = "app label";
     private static final String SUMMARY = "summary";
@@ -99,30 +100,19 @@ public class AdvancedPowerUsageDetailTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private FragmentActivity mActivity;
-    @Mock
-    private EntityHeaderController mEntityHeaderController;
-    @Mock
-    private LayoutPreference mHeaderPreference;
-    @Mock
-    private ApplicationsState mState;
-    @Mock
-    private ApplicationsState.AppEntry mAppEntry;
-    @Mock
-    private Bundle mBundle;
-    @Mock
-    private BatteryEntry mBatteryEntry;
-    @Mock
-    private PackageManager mPackageManager;
-    @Mock
-    private InstallSourceInfo mInstallSourceInfo;
-    @Mock
-    private AppOpsManager mAppOpsManager;
-    @Mock
-    private LoaderManager mLoaderManager;
-    @Mock
-    private BatteryOptimizeUtils mBatteryOptimizeUtils;
-    @Mock
-    private BackupManager mBackupManager;
+
+    @Mock private EntityHeaderController mEntityHeaderController;
+    @Mock private LayoutPreference mHeaderPreference;
+    @Mock private ApplicationsState mState;
+    @Mock private ApplicationsState.AppEntry mAppEntry;
+    @Mock private Bundle mBundle;
+    @Mock private BatteryEntry mBatteryEntry;
+    @Mock private PackageManager mPackageManager;
+    @Mock private InstallSourceInfo mInstallSourceInfo;
+    @Mock private AppOpsManager mAppOpsManager;
+    @Mock private LoaderManager mLoaderManager;
+    @Mock private BatteryOptimizeUtils mBatteryOptimizeUtils;
+    @Mock private BackupManager mBackupManager;
 
     private Context mContext;
     private PrimarySwitchPreference mAllowBackgroundUsagePreference;
@@ -149,19 +139,26 @@ public class AdvancedPowerUsageDetailTest {
         doReturn(mLoaderManager).when(mFragment).getLoaderManager();
 
         ShadowEntityHeaderController.setUseMock(mEntityHeaderController);
-        doReturn(mEntityHeaderController).when(mEntityHeaderController)
+        doReturn(mEntityHeaderController)
+                .when(mEntityHeaderController)
                 .setButtonActions(anyInt(), anyInt());
-        doReturn(mEntityHeaderController).when(mEntityHeaderController)
+        doReturn(mEntityHeaderController)
+                .when(mEntityHeaderController)
                 .setIcon(nullable(Drawable.class));
-        doReturn(mEntityHeaderController).when(mEntityHeaderController).setIcon(nullable(
-                ApplicationsState.AppEntry.class));
-        doReturn(mEntityHeaderController).when(mEntityHeaderController)
+        doReturn(mEntityHeaderController)
+                .when(mEntityHeaderController)
+                .setIcon(nullable(ApplicationsState.AppEntry.class));
+        doReturn(mEntityHeaderController)
+                .when(mEntityHeaderController)
                 .setLabel(nullable(String.class));
-        doReturn(mEntityHeaderController).when(mEntityHeaderController)
+        doReturn(mEntityHeaderController)
+                .when(mEntityHeaderController)
                 .setLabel(nullable(String.class));
-        doReturn(mEntityHeaderController).when(mEntityHeaderController)
+        doReturn(mEntityHeaderController)
+                .when(mEntityHeaderController)
                 .setLabel(nullable(ApplicationsState.AppEntry.class));
-        doReturn(mEntityHeaderController).when(mEntityHeaderController)
+        doReturn(mEntityHeaderController)
+                .when(mEntityHeaderController)
                 .setSummary(nullable(String.class));
 
         when(mBatteryEntry.getUid()).thenReturn(UID);
@@ -184,13 +181,15 @@ public class AdvancedPowerUsageDetailTest {
 
         final ArgumentCaptor<Intent> captor = ArgumentCaptor.forClass(Intent.class);
 
-        Answer<Void> callable = invocation -> {
-            mBundle = captor.getValue().getBundleExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS);
-            System.out.println("mBundle = " + mBundle);
-            return null;
-        };
-        doAnswer(callable).when(mActivity).startActivityAsUser(captor.capture(),
-                nullable(UserHandle.class));
+        Answer<Void> callable =
+                invocation -> {
+                    mBundle = captor.getValue().getBundleExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS);
+                    System.out.println("mBundle = " + mBundle);
+                    return null;
+                };
+        doAnswer(callable)
+                .when(mActivity)
+                .startActivityAsUser(captor.capture(), nullable(UserHandle.class));
         doAnswer(callable).when(mActivity).startActivity(captor.capture());
 
         mAllowBackgroundUsagePreference = new PrimarySwitchPreference(mContext);
@@ -219,7 +218,9 @@ public class AdvancedPowerUsageDetailTest {
 
     @Test
     public void initHeader_HasAppEntry_BuildByAppEntry() {
-        ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
+        ReflectionHelpers.setStaticField(
+                AppUtils.class,
+                "sInstantAppDataProvider",
                 new InstantAppDataProvider() {
                     @Override
                     public boolean isInstantApp(ApplicationInfo info) {
@@ -236,7 +237,9 @@ public class AdvancedPowerUsageDetailTest {
 
     @Test
     public void initHeader_HasAppEntry_InstantApp() {
-        ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
+        ReflectionHelpers.setStaticField(
+                AppUtils.class,
+                "sInstantAppDataProvider",
                 new InstantAppDataProvider() {
                     @Override
                     public boolean isInstantApp(ApplicationInfo info) {
@@ -253,16 +256,13 @@ public class AdvancedPowerUsageDetailTest {
 
     @Test
     public void startBatteryDetailPage_invalidToShowSummary_noFGBDData() {
-        AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mFragment,
-                mBatteryEntry, USAGE_PERCENT);
+        AdvancedPowerUsageDetail.startBatteryDetailPage(
+                mActivity, mFragment, mBatteryEntry, USAGE_PERCENT);
 
         assertThat(mBundle.getInt(AdvancedPowerUsageDetail.EXTRA_UID)).isEqualTo(UID);
-        assertThat(mBundle.getLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME))
-                .isEqualTo(0);
-        assertThat(mBundle.getLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME))
-                .isEqualTo(0);
-        assertThat(mBundle.getLong(AdvancedPowerUsageDetail.EXTRA_SCREEN_ON_TIME))
-                .isEqualTo(0);
+        assertThat(mBundle.getLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME)).isEqualTo(0);
+        assertThat(mBundle.getLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME)).isEqualTo(0);
+        assertThat(mBundle.getLong(AdvancedPowerUsageDetail.EXTRA_SCREEN_ON_TIME)).isEqualTo(0);
         assertThat(mBundle.getString(AdvancedPowerUsageDetail.EXTRA_POWER_USAGE_PERCENT))
                 .isEqualTo(USAGE_PERCENT);
     }
@@ -276,18 +276,22 @@ public class AdvancedPowerUsageDetailTest {
 
         verify(mActivity).startActivity(captor.capture());
 
-        assertThat(captor.getValue().getBundleExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS)
-                .getString(AdvancedPowerUsageDetail.EXTRA_PACKAGE_NAME))
+        assertThat(
+                        captor.getValue()
+                                .getBundleExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS)
+                                .getString(AdvancedPowerUsageDetail.EXTRA_PACKAGE_NAME))
                 .isEqualTo(PACKAGE_NAME[0]);
 
-        assertThat(captor.getValue().getBundleExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS)
-                .getString(AdvancedPowerUsageDetail.EXTRA_POWER_USAGE_PERCENT))
+        assertThat(
+                        captor.getValue()
+                                .getBundleExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS)
+                                .getString(AdvancedPowerUsageDetail.EXTRA_POWER_USAGE_PERCENT))
                 .isEqualTo("0%");
     }
 
     @Test
-    public void startBatteryDetailPage_batteryEntryNotExisted_extractUidFromPackageName() throws
-            PackageManager.NameNotFoundException {
+    public void startBatteryDetailPage_batteryEntryNotExisted_extractUidFromPackageName()
+            throws PackageManager.NameNotFoundException {
         doReturn(UID).when(mPackageManager).getPackageUid(PACKAGE_NAME[0], 0 /* no flag */);
 
         AdvancedPowerUsageDetail.startBatteryDetailPage(
