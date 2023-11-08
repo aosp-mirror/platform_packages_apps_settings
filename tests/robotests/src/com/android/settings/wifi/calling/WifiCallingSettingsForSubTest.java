@@ -292,7 +292,7 @@ public class WifiCallingSettingsForSubTest {
     public void onSwitchChanged_enableSetting_shouldLaunchWfcDisclaimerFragment() {
         final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
 
-        mFragment.onSwitchChanged(null, true);
+        mFragment.onCheckedChanged(null, true);
 
         // Check the WFC disclaimer fragment is launched.
         verify(mFragment).startActivityForResult(intentCaptor.capture(),
@@ -337,7 +337,7 @@ public class WifiCallingSettingsForSubTest {
 
     @Test
     public void onSwitchChanged_disableSetting_shouldNotLaunchWfcDisclaimerFragment() {
-        mFragment.onSwitchChanged(null, false);
+        mFragment.onCheckedChanged(null, false);
 
         // Check the WFC disclaimer fragment is not launched.
         verify(mFragment, never()).startActivityForResult(any(Intent.class), anyInt());

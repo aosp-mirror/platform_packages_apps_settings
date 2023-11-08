@@ -44,8 +44,9 @@ import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityManager;
 import android.view.accessibility.AccessibilityManager.TouchExplorationStateChangeListener;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
-import android.widget.Switch;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
@@ -64,7 +65,6 @@ import com.android.settings.utils.LocaleUtils;
 import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settings.widget.SettingsMainSwitchPreference;
 import com.android.settingslib.widget.IllustrationPreference;
-import com.android.settingslib.widget.OnMainSwitchChangeListener;
 import com.android.settingslib.widget.TopIntroPreference;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
@@ -78,7 +78,7 @@ import java.util.Locale;
  * and dialog management.
  */
 public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
-        implements ShortcutPreference.OnClickCallback, OnMainSwitchChangeListener {
+        implements ShortcutPreference.OnClickCallback, OnCheckedChangeListener {
 
     public static final String KEY_GENERAL_CATEGORY = "general_categories";
     public static final String KEY_SHORTCUT_PREFERENCE = "shortcut_preference";
@@ -328,7 +328,7 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
     }
 
     @Override
-    public void onSwitchChanged(Switch switchView, boolean isChecked) {
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         onPreferenceToggled(mPreferenceKey, isChecked);
     }
 
