@@ -18,25 +18,18 @@ package com.android.settings.security;
 
 import static android.app.settings.SettingsEnums.CONTENT_PROTECTION_PREFERENCE;
 
-import static com.android.settings.security.ContentProtectionPreferenceFragment.KEY_WORK_PROFILE_SWITCH;
-
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
-import android.content.ComponentName;
 import android.content.Context;
-import android.content.pm.UserInfo;
-import android.os.UserHandle;
-import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
-import com.android.settings.Utils;
 import com.android.settings.testutils.XmlTestUtils;
 import com.android.settings.testutils.shadow.ShadowDashboardFragment;
 import com.android.settings.testutils.shadow.ShadowUtils;
@@ -44,13 +37,11 @@ import com.android.settings.testutils.shadow.ShadowUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-import java.util.Arrays;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
@@ -60,14 +51,9 @@ import java.util.List;
             ShadowUtils.class,
         })
 public class ContentProtectionPreferenceFragmentTest {
-    private static final int TEST_PRIMARY_USER_ID = 10;
-    private static final int TEST_MANAGED_PROFILE_ID = 11;
-
     private ContentProtectionPreferenceFragment mFragment;
-    @Mock private UserManager mMockUserManager;
     private Context mContext;
     private PreferenceScreen mScreen;
-    private SwitchPreference mWorkProfileSwitch;
 
     @Before
     public void setUp() throws Exception {
@@ -79,66 +65,6 @@ public class ContentProtectionPreferenceFragmentTest {
 
         doReturn(mContext).when(mFragment).getContext();
         doReturn(mScreen).when(mFragment).getPreferenceScreen();
-
-        mWorkProfileSwitch = new SwitchPreference(mContext);
-        mWorkProfileSwitch.setVisible(false);
-        doReturn(mWorkProfileSwitch).when(mScreen).findPreference(KEY_WORK_PROFILE_SWITCH);
-
-        doReturn(mMockUserManager).when(mContext).getSystemService(UserManager.class);
-        doReturn(TEST_PRIMARY_USER_ID).when(mMockUserManager).getUserHandle();
-        UserInfo primaryUser =
-                new UserInfo(
-                        TEST_PRIMARY_USER_ID,
-                        null,
-                        UserInfo.FLAG_INITIALIZED | UserInfo.FLAG_PRIMARY);
-        doReturn(primaryUser).when(mMockUserManager).getUserInfo(TEST_PRIMARY_USER_ID);
-        UserInfo managedProfile =
-                new UserInfo(
-                        TEST_MANAGED_PROFILE_ID,
-                        null,
-                        UserInfo.FLAG_INITIALIZED | UserInfo.FLAG_MANAGED_PROFILE);
-        doReturn(managedProfile).when(mMockUserManager).getUserInfo(TEST_MANAGED_PROFILE_ID);
-    }
-
-    @Test
-    public void onActivityCreated_workProfileDisplayWorkSwitch() {
-        UserHandle[] userHandles =
-                new UserHandle[] {
-                    new UserHandle(TEST_PRIMARY_USER_ID), new UserHandle(TEST_MANAGED_PROFILE_ID)
-                };
-        doReturn(Arrays.asList(userHandles)).when(mMockUserManager).getUserProfiles();
-
-        assertThat(Utils.getManagedProfile(mMockUserManager).getIdentifier())
-                .isEqualTo(TEST_MANAGED_PROFILE_ID);
-
-        mFragment.onActivityCreated(null);
-
-        assertThat(mWorkProfileSwitch.isVisible()).isTrue();
-        assertThat(mWorkProfileSwitch.isChecked()).isFalse();
-        assertThat(mWorkProfileSwitch.isEnabled()).isFalse();
-    }
-
-    @Test
-    public void onActivityCreated_fullyManagedMode_bottomSwitchInvisible() {
-        final ComponentName componentName =
-                ComponentName.unflattenFromString("com.android.test/.DeviceAdminReceiver");
-        ShadowUtils.setDeviceOwnerComponent(componentName);
-
-        mFragment.onActivityCreated(null);
-
-        assertThat(mWorkProfileSwitch.isVisible()).isFalse();
-    }
-
-    @Test
-    public void onActivityCreated_personalProfileHideWorkSwitch() {
-        UserHandle[] userHandles = new UserHandle[] {new UserHandle(TEST_PRIMARY_USER_ID)};
-        doReturn(Arrays.asList(userHandles)).when(mMockUserManager).getUserProfiles();
-
-        assertThat(Utils.getManagedProfile(mMockUserManager)).isNull();
-
-        mFragment.onActivityCreated(null);
-
-        assertThat(mWorkProfileSwitch.isVisible()).isFalse();
     }
 
     @Test
@@ -175,4 +101,3 @@ public class ContentProtectionPreferenceFragmentTest {
         assertThat(indexRes.get(0).xmlResId).isEqualTo(mFragment.getPreferenceScreenResId());
     }
 }
-
