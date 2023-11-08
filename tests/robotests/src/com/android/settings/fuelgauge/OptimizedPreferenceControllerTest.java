@@ -76,8 +76,8 @@ public class OptimizedPreferenceControllerTest {
     public void testUpdateState_isSystemOrDefaultAppAndOptimizeStates_prefChecked() {
         when(mBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()).thenReturn(false);
         when(mBatteryOptimizeUtils.isSystemOrDefaultApp()).thenReturn(true);
-        when(mBatteryOptimizeUtils.getAppOptimizationMode()).thenReturn(
-                BatteryOptimizeUtils.MODE_OPTIMIZED);
+        when(mBatteryOptimizeUtils.getAppOptimizationMode())
+                .thenReturn(BatteryOptimizeUtils.MODE_OPTIMIZED);
 
         mController.updateState(mPreference);
 
@@ -98,8 +98,8 @@ public class OptimizedPreferenceControllerTest {
     @Test
     public void testUpdateState_isOptimizedStates_prefChecked() {
         when(mBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()).thenReturn(false);
-        when(mBatteryOptimizeUtils.getAppOptimizationMode()).thenReturn(
-                BatteryOptimizeUtils.MODE_OPTIMIZED);
+        when(mBatteryOptimizeUtils.getAppOptimizationMode())
+                .thenReturn(BatteryOptimizeUtils.MODE_OPTIMIZED);
 
         mController.updateState(mPreference);
 

@@ -41,15 +41,13 @@ public final class BatteryStateTest {
     @Before
     public void setUp() {
         final DeviceBatteryState deviceBatteryState =
-                DeviceBatteryState
-                        .newBuilder()
+                DeviceBatteryState.newBuilder()
                         .setBatteryLevel(BATTERY_LEVEL)
                         .setBatteryStatus(BATTERY_STATUS)
                         .setBatteryHealth(BATTERY_HEALTH)
                         .build();
         mBatteryInformation =
-                BatteryInformation
-                        .newBuilder()
+                BatteryInformation.newBuilder()
                         .setDeviceBatteryState(deviceBatteryState)
                         .setBootTimestamp(101L)
                         .setIsHidden(true)
@@ -78,8 +76,8 @@ public final class BatteryStateTest {
         assertThat(state.timestamp).isEqualTo(100001L);
         assertThat(state.consumerType).isEqualTo(2);
         assertThat(state.isFullChargeCycleStart).isTrue();
-        assertThat(state.batteryInformation).isEqualTo(
-                ConvertUtils.convertBatteryInformationToString(mBatteryInformation));
+        assertThat(state.batteryInformation)
+                .isEqualTo(ConvertUtils.convertBatteryInformationToString(mBatteryInformation));
     }
 
     private static BatteryState create(BatteryInformation batteryInformation) {

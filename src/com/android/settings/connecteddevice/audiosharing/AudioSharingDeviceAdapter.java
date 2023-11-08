@@ -30,10 +30,11 @@ import java.util.ArrayList;
 public class AudioSharingDeviceAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static final String TAG = "AudioSharingDeviceAdapter";
-    private final ArrayList<String> mDevices;
+    private final ArrayList<AudioSharingDeviceItem> mDevices;
     private final OnClickListener mOnClickListener;
 
-    public AudioSharingDeviceAdapter(ArrayList<String> devices, OnClickListener listener) {
+    public AudioSharingDeviceAdapter(
+            ArrayList<AudioSharingDeviceItem> devices, OnClickListener listener) {
         mDevices = devices;
         mOnClickListener = listener;
     }
@@ -48,8 +49,9 @@ public class AudioSharingDeviceAdapter extends RecyclerView.Adapter<RecyclerView
 
         public void bindView(int position) {
             if (mButtonView != null) {
-                mButtonView.setText(mDevices.get(position));
-                mButtonView.setOnClickListener(v -> mOnClickListener.onClick(position));
+                mButtonView.setText(mDevices.get(position).getName());
+                mButtonView.setOnClickListener(
+                        v -> mOnClickListener.onClick(mDevices.get(position)));
             } else {
                 Log.w(TAG, "bind view skipped due to button view is null");
             }
@@ -76,6 +78,6 @@ public class AudioSharingDeviceAdapter extends RecyclerView.Adapter<RecyclerView
 
     public interface OnClickListener {
         /** Called when an item has been clicked. */
-        void onClick(int position);
+        void onClick(AudioSharingDeviceItem item);
     }
 }

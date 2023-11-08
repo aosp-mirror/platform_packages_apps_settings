@@ -46,12 +46,9 @@ public final class PowerUsageTimeControllerTest {
     private Context mContext;
     private PowerUsageTimeController mPowerUsageTimeController;
 
-    @Mock
-    private PreferenceCategory mPowerUsageTimeCategory;
-    @Mock
-    private PowerUsageTimePreference mScreenTimePreference;
-    @Mock
-    private PowerUsageTimePreference mBackgroundTimePreference;
+    @Mock private PreferenceCategory mPowerUsageTimeCategory;
+    @Mock private PowerUsageTimePreference mScreenTimePreference;
+    @Mock private PowerUsageTimePreference mBackgroundTimePreference;
 
     @Before
     public void setUp() {
@@ -67,18 +64,24 @@ public final class PowerUsageTimeControllerTest {
 
     @Test
     public void handleScreenTimeUpdated_noInfo_prefInvisible() {
-        mPowerUsageTimeController.handleScreenTimeUpdated(/*slotTime=*/ null,
-                /*screenOnTimeInMs=*/ 0, /*backgroundTimeInMs=*/ 0,
-                /*anomalyHintPrefKey=*/ null, /*anomalyHintText=*/ null);
+        mPowerUsageTimeController.handleScreenTimeUpdated(
+                /* slotTime= */ null,
+                /* screenOnTimeInMs= */ 0,
+                /* backgroundTimeInMs= */ 0,
+                /* anomalyHintPrefKey= */ null,
+                /* anomalyHintText= */ null);
 
         verifyAllPreferencesVisible(false);
     }
 
     @Test
     public void handleScreenTimeUpdated_onlySlotTime_prefInvisible() {
-        mPowerUsageTimeController.handleScreenTimeUpdated(SLOT_TIME,
-                /*screenOnTimeInMs=*/ 0, /*backgroundTimeInMs=*/ 0,
-                /*anomalyHintPrefKey=*/ null, /*anomalyHintText=*/ null);
+        mPowerUsageTimeController.handleScreenTimeUpdated(
+                SLOT_TIME,
+                /* screenOnTimeInMs= */ 0,
+                /* backgroundTimeInMs= */ 0,
+                /* anomalyHintPrefKey= */ null,
+                /* anomalyHintText= */ null);
 
         verifyAllPreferencesVisible(false);
     }
@@ -88,9 +91,12 @@ public final class PowerUsageTimeControllerTest {
         final long screenOnTimeAMinute = 60000;
         final long backgroundTimeZero = 0;
 
-        mPowerUsageTimeController.handleScreenTimeUpdated(SLOT_TIME,
-                screenOnTimeAMinute, backgroundTimeZero,
-                /*anomalyHintPrefKey=*/ null, /*anomalyHintText=*/ null);
+        mPowerUsageTimeController.handleScreenTimeUpdated(
+                SLOT_TIME,
+                screenOnTimeAMinute,
+                backgroundTimeZero,
+                /* anomalyHintPrefKey= */ null,
+                /* anomalyHintText= */ null);
 
         verifyOnePreferenceInvisible(mBackgroundTimePreference);
         verify(mScreenTimePreference).setTimeTitle("Screen time");
@@ -103,9 +109,12 @@ public final class PowerUsageTimeControllerTest {
         final long screenOnTimeZero = 0;
         final long backgroundTimeTwoMinutes = 120000;
 
-        mPowerUsageTimeController.handleScreenTimeUpdated(SLOT_TIME,
-                screenOnTimeZero, backgroundTimeTwoMinutes,
-                /*anomalyHintPrefKey=*/ null, /*anomalyHintText=*/ null);
+        mPowerUsageTimeController.handleScreenTimeUpdated(
+                SLOT_TIME,
+                screenOnTimeZero,
+                backgroundTimeTwoMinutes,
+                /* anomalyHintPrefKey= */ null,
+                /* anomalyHintText= */ null);
 
         verifyOnePreferenceInvisible(mScreenTimePreference);
         verify(mBackgroundTimePreference).setTimeTitle("Background time");
@@ -118,9 +127,12 @@ public final class PowerUsageTimeControllerTest {
         final long screenOnTimeAMinute = 60000;
         final long backgroundTimeTwoMinutes = 120000;
 
-        mPowerUsageTimeController.handleScreenTimeUpdated(SLOT_TIME,
-                screenOnTimeAMinute, backgroundTimeTwoMinutes,
-                /*anomalyHintPrefKey=*/ null, /*anomalyHintText=*/ null);
+        mPowerUsageTimeController.handleScreenTimeUpdated(
+                SLOT_TIME,
+                screenOnTimeAMinute,
+                backgroundTimeTwoMinutes,
+                /* anomalyHintPrefKey= */ null,
+                /* anomalyHintText= */ null);
 
         verifyAllPreferencesVisible(true);
         verify(mScreenTimePreference).setTimeTitle("Screen time");
@@ -137,9 +149,12 @@ public final class PowerUsageTimeControllerTest {
         final long backgroundTimeTwoMinutes = 120000;
         final long screenOnTimeAMinute = 60000;
 
-        mPowerUsageTimeController.handleScreenTimeUpdated(/*slotTime=*/ null,
-                screenOnTimeAMinute, backgroundTimeTwoMinutes,
-                /*anomalyHintPrefKey=*/ null, /*anomalyHintText=*/ null);
+        mPowerUsageTimeController.handleScreenTimeUpdated(
+                /* slotTime= */ null,
+                screenOnTimeAMinute,
+                backgroundTimeTwoMinutes,
+                /* anomalyHintPrefKey= */ null,
+                /* anomalyHintText= */ null);
 
         verifyAllPreferencesVisible(true);
         verify(mPowerUsageTimeCategory).setTitle("App usage since last full charge");
@@ -150,9 +165,12 @@ public final class PowerUsageTimeControllerTest {
         final long screenOnTimeAMinute = 60000;
         final long backgroundTimeLessThanAMinute = 59999;
 
-        mPowerUsageTimeController.handleScreenTimeUpdated(SLOT_TIME,
-                screenOnTimeAMinute, backgroundTimeLessThanAMinute,
-                /*anomalyHintPrefKey=*/ null, /*anomalyHintText=*/ null);
+        mPowerUsageTimeController.handleScreenTimeUpdated(
+                SLOT_TIME,
+                screenOnTimeAMinute,
+                backgroundTimeLessThanAMinute,
+                /* anomalyHintPrefKey= */ null,
+                /* anomalyHintText= */ null);
 
         verifyAllPreferencesVisible(true);
         verify(mScreenTimePreference).setTimeSummary("1 min");
@@ -164,9 +182,12 @@ public final class PowerUsageTimeControllerTest {
         final long screenOnTimeLessThanAMinute = 59999;
         final long backgroundTimeTwoMinutes = 120000;
 
-        mPowerUsageTimeController.handleScreenTimeUpdated(SLOT_TIME,
-                screenOnTimeLessThanAMinute, backgroundTimeTwoMinutes,
-                /*anomalyHintPrefKey=*/ null, /*anomalyHintText=*/ null);
+        mPowerUsageTimeController.handleScreenTimeUpdated(
+                SLOT_TIME,
+                screenOnTimeLessThanAMinute,
+                backgroundTimeTwoMinutes,
+                /* anomalyHintPrefKey= */ null,
+                /* anomalyHintText= */ null);
 
         verifyAllPreferencesVisible(true);
         verify(mScreenTimePreference).setTimeSummary("Less than a min");
@@ -178,9 +199,12 @@ public final class PowerUsageTimeControllerTest {
         final long screenOnTimeLessThanAMinute = 59999;
         final long backgroundTimeLessThanAMinute = 59999;
 
-        mPowerUsageTimeController.handleScreenTimeUpdated(SLOT_TIME,
-                screenOnTimeLessThanAMinute, backgroundTimeLessThanAMinute,
-                /*anomalyHintPrefKey=*/ null, /*anomalyHintText=*/ null);
+        mPowerUsageTimeController.handleScreenTimeUpdated(
+                SLOT_TIME,
+                screenOnTimeLessThanAMinute,
+                backgroundTimeLessThanAMinute,
+                /* anomalyHintPrefKey= */ null,
+                /* anomalyHintText= */ null);
 
         verifyAllPreferencesVisible(true);
         verify(mScreenTimePreference).setTimeSummary("Less than a min");
@@ -192,9 +216,12 @@ public final class PowerUsageTimeControllerTest {
         final long screenOnTimeAMinute = 60000;
         final long backgroundTimeTwoMinutes = 120000;
 
-        mPowerUsageTimeController.handleScreenTimeUpdated(SLOT_TIME,
-                screenOnTimeAMinute, backgroundTimeTwoMinutes,
-                KEY_SCREEN_ON_TIME_PREF, TEST_ANOMALY_HINT_TEXT);
+        mPowerUsageTimeController.handleScreenTimeUpdated(
+                SLOT_TIME,
+                screenOnTimeAMinute,
+                backgroundTimeTwoMinutes,
+                KEY_SCREEN_ON_TIME_PREF,
+                TEST_ANOMALY_HINT_TEXT);
 
         verifyAllPreferencesVisible(true);
         verify(mScreenTimePreference).setAnomalyHint(TEST_ANOMALY_HINT_TEXT);
@@ -206,9 +233,12 @@ public final class PowerUsageTimeControllerTest {
         final long screenOnTimeAMinute = 60000;
         final long backgroundTimeTwoMinutes = 120000;
 
-        mPowerUsageTimeController.handleScreenTimeUpdated(SLOT_TIME,
-                screenOnTimeAMinute, backgroundTimeTwoMinutes,
-                KEY_BACKGROUND_TIME_PREF, TEST_ANOMALY_HINT_TEXT);
+        mPowerUsageTimeController.handleScreenTimeUpdated(
+                SLOT_TIME,
+                screenOnTimeAMinute,
+                backgroundTimeTwoMinutes,
+                KEY_BACKGROUND_TIME_PREF,
+                TEST_ANOMALY_HINT_TEXT);
 
         verifyAllPreferencesVisible(true);
         verify(mScreenTimePreference, never()).setAnomalyHint(anyString());
@@ -220,9 +250,12 @@ public final class PowerUsageTimeControllerTest {
         final long screenOnTimeZero = 0;
         final long backgroundTimeTwoMinutes = 120000;
 
-        mPowerUsageTimeController.handleScreenTimeUpdated(SLOT_TIME,
-                screenOnTimeZero, backgroundTimeTwoMinutes,
-                KEY_SCREEN_ON_TIME_PREF, TEST_ANOMALY_HINT_TEXT);
+        mPowerUsageTimeController.handleScreenTimeUpdated(
+                SLOT_TIME,
+                screenOnTimeZero,
+                backgroundTimeTwoMinutes,
+                KEY_SCREEN_ON_TIME_PREF,
+                TEST_ANOMALY_HINT_TEXT);
 
         verifyAllPreferencesVisible(true);
         verify(mScreenTimePreference).setTimeSummary("Less than a min");

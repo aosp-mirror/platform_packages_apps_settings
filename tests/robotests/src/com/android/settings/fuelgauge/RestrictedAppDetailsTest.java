@@ -72,17 +72,11 @@ public class RestrictedAppDetailsTest {
     private static final int UID = UserHandle.getUid(USER_ID, 234);
     private static final String APP_NAME = "app";
 
-
-    @Mock
-    private PackageManager mPackageManager;
-    @Mock
-    private ApplicationInfo mApplicationInfo;
-    @Mock
-    private IconDrawableFactory mIconDrawableFactory;
-    @Mock
-    private InstrumentedPreferenceFragment mFragment;
-    @Mock
-    private BatteryDatabaseManager mBatteryDatabaseManager;
+    @Mock private PackageManager mPackageManager;
+    @Mock private ApplicationInfo mApplicationInfo;
+    @Mock private IconDrawableFactory mIconDrawableFactory;
+    @Mock private InstrumentedPreferenceFragment mFragment;
+    @Mock private BatteryDatabaseManager mBatteryDatabaseManager;
     private PreferenceManager mPreferenceManager;
     private RestrictedAppDetails mRestrictedAppDetails;
     private Context mContext;
@@ -96,10 +90,7 @@ public class RestrictedAppDetailsTest {
 
         mContext = spy(RuntimeEnvironment.application);
         mRestrictedAppDetails = spy(new RestrictedAppDetails());
-        mAppInfo = new AppInfo.Builder()
-                .setPackageName(PACKAGE_NAME)
-                .setUid(UID)
-                .build();
+        mAppInfo = new AppInfo.Builder().setPackageName(PACKAGE_NAME).setUid(UID).build();
 
         mPreferenceManager = new PreferenceManager(mContext);
 
@@ -113,8 +104,9 @@ public class RestrictedAppDetailsTest {
         mRestrictedAppDetails.mRestrictedAppListGroup = spy(new PreferenceCategory(mContext));
         mRestrictedAppDetails.mBatteryUtils = spy(new BatteryUtils(mContext));
         mRestrictedAppDetails.mBatteryDatabaseManager = mBatteryDatabaseManager;
-        doReturn(mPreferenceManager).when(
-                mRestrictedAppDetails.mRestrictedAppListGroup).getPreferenceManager();
+        doReturn(mPreferenceManager)
+                .when(mRestrictedAppDetails.mRestrictedAppListGroup)
+                .getPreferenceManager();
 
         mCheckBoxPreference = new CheckBoxPreference(mContext);
         mCheckBoxPreference.setKey(mRestrictedAppDetails.getKeyFromAppInfo(mAppInfo));
@@ -122,14 +114,17 @@ public class RestrictedAppDetailsTest {
 
     @Test
     public void refreshUi_displayPreference() throws Exception {
-        doReturn(mApplicationInfo).when(mPackageManager)
+        doReturn(mApplicationInfo)
+                .when(mPackageManager)
                 .getApplicationInfoAsUser(PACKAGE_NAME, 0, USER_ID);
         doReturn(APP_NAME).when(mPackageManager).getApplicationLabel(mApplicationInfo);
-        doReturn(true).when(mRestrictedAppDetails.mBatteryUtils).isForceAppStandbyEnabled(UID,
-                PACKAGE_NAME);
+        doReturn(true)
+                .when(mRestrictedAppDetails.mBatteryUtils)
+                .isForceAppStandbyEnabled(UID, PACKAGE_NAME);
         final SparseLongArray timestampArray = new SparseLongArray();
         timestampArray.put(UID, System.currentTimeMillis() - TimeUnit.HOURS.toMillis(5));
-        doReturn(timestampArray).when(mBatteryDatabaseManager)
+        doReturn(timestampArray)
+                .when(mBatteryDatabaseManager)
                 .queryActionTime(AnomalyDatabaseHelper.ActionType.RESTRICTION);
 
         mRestrictedAppDetails.refreshUi();
@@ -145,30 +140,32 @@ public class RestrictedAppDetailsTest {
     @Test
     public void startRestrictedAppDetails_startWithCorrectData() {
         final ArgumentCaptor<Intent> captor = ArgumentCaptor.forClass(Intent.class);
-        doAnswer(invocation -> {
-            // Get the intent in which it has the app info bundle
-            mIntent = captor.getValue();
-            return true;
-        }).when(mContext).startActivity(captor.capture());
+        doAnswer(
+                        invocation -> {
+                            // Get the intent in which it has the app info bundle
+                            mIntent = captor.getValue();
+                            return true;
+                        })
+                .when(mContext)
+                .startActivity(captor.capture());
 
-        RestrictedAppDetails.startRestrictedAppDetails(mFragment,
-                mRestrictedAppDetails.mAppInfos);
+        RestrictedAppDetails.startRestrictedAppDetails(mFragment, mRestrictedAppDetails.mAppInfos);
 
-        final Bundle bundle = mIntent.getBundleExtra(
-                SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS);
+        final Bundle bundle =
+                mIntent.getBundleExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS);
         // Verify the bundle has the correct info
-        final List<AppInfo> appInfos = bundle.getParcelableArrayList(
-                RestrictedAppDetails.EXTRA_APP_INFO_LIST);
+        final List<AppInfo> appInfos =
+                bundle.getParcelableArrayList(RestrictedAppDetails.EXTRA_APP_INFO_LIST);
         assertThat(appInfos).containsExactly(mAppInfo);
     }
 
     @Test
     public void createDialogFragment_toRestrict_createRestrictDialog() {
-        final BatteryTipDialogFragment dialogFragment = mRestrictedAppDetails.createDialogFragment(
-                mAppInfo, true);
+        final BatteryTipDialogFragment dialogFragment =
+                mRestrictedAppDetails.createDialogFragment(mAppInfo, true);
 
-        FragmentController.setupFragment(dialogFragment, FragmentActivity.class,
-                0 /* containerViewId */, null /* bundle */);
+        FragmentController.setupFragment(
+                dialogFragment, FragmentActivity.class, 0 /* containerViewId */, null /* bundle */);
 
         final AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         ShadowAlertDialogCompat shadowDialog = ShadowAlertDialogCompat.shadowOf(dialog);
@@ -177,11 +174,11 @@ public class RestrictedAppDetailsTest {
 
     @Test
     public void createDialogFragment_toUnrestrict_createUnrestrictDialog() {
-        final BatteryTipDialogFragment dialogFragment = mRestrictedAppDetails.createDialogFragment(
-                mAppInfo, false);
+        final BatteryTipDialogFragment dialogFragment =
+                mRestrictedAppDetails.createDialogFragment(mAppInfo, false);
 
-        FragmentController.setupFragment(dialogFragment, FragmentActivity.class,
-                0 /* containerViewId */, null /* bundle */);
+        FragmentController.setupFragment(
+                dialogFragment, FragmentActivity.class, 0 /* containerViewId */, null /* bundle */);
 
         final AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         ShadowAlertDialogCompat shadowDialog = ShadowAlertDialogCompat.shadowOf(dialog);
@@ -190,8 +187,8 @@ public class RestrictedAppDetailsTest {
 
     @Test
     public void onBatteryTipHandled_restrict_setChecked() {
-        final RestrictAppTip restrictAppTip = new RestrictAppTip(BatteryTip.StateType.NEW,
-                mAppInfo);
+        final RestrictAppTip restrictAppTip =
+                new RestrictAppTip(BatteryTip.StateType.NEW, mAppInfo);
         mRestrictedAppDetails.mRestrictedAppListGroup.addPreference(mCheckBoxPreference);
 
         mRestrictedAppDetails.onBatteryTipHandled(restrictAppTip);
@@ -201,8 +198,8 @@ public class RestrictedAppDetailsTest {
 
     @Test
     public void onBatteryTipHandled_unrestrict_setUnchecked() {
-        final UnrestrictAppTip unrestrictAppTip = new UnrestrictAppTip(BatteryTip.StateType.NEW,
-                mAppInfo);
+        final UnrestrictAppTip unrestrictAppTip =
+                new UnrestrictAppTip(BatteryTip.StateType.NEW, mAppInfo);
         mRestrictedAppDetails.mRestrictedAppListGroup.addPreference(mCheckBoxPreference);
 
         mRestrictedAppDetails.onBatteryTipHandled(unrestrictAppTip);

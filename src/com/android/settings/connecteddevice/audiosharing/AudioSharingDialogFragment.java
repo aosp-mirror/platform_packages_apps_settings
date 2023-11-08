@@ -34,11 +34,12 @@ import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.flags.Flags;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class AudioSharingDialogFragment extends InstrumentedDialogFragment {
     private static final String TAG = "AudioSharingDialog";
 
-    private static final String BUNDLE_KEY_DEVICE_NAMES = "bundle_key_device_names";
+    private static final String BUNDLE_KEY_DEVICE_ITEMS = "bundle_key_device_names";
 
     // The host creates an instance of this dialog fragment must implement this interface to receive
     // event callbacks.
@@ -46,13 +47,11 @@ public class AudioSharingDialogFragment extends InstrumentedDialogFragment {
         /**
          * Called when users click the device item for sharing in the dialog.
          *
-         * @param position The position of the item clicked.
+         * @param item The device item clicked.
          */
-        void onItemClick(int position);
+        void onItemClick(AudioSharingDeviceItem item);
 
-        /**
-         * Called when users click the cancel button in the dialog.
-         */
+        /** Called when users click the cancel button in the dialog. */
         void onCancelClick();
     }
 
@@ -71,13 +70,15 @@ public class AudioSharingDialogFragment extends InstrumentedDialogFragment {
      * @param host The Fragment this dialog will be hosted.
      */
     public static void show(
-            Fragment host, ArrayList<String> deviceNames, DialogEventListener listener) {
+            Fragment host,
+            ArrayList<AudioSharingDeviceItem> deviceItems,
+            DialogEventListener listener) {
         if (!Flags.enableLeAudioSharing()) return;
         final FragmentManager manager = host.getChildFragmentManager();
         sListener = listener;
         if (manager.findFragmentByTag(TAG) == null) {
             final Bundle bundle = new Bundle();
-            bundle.putStringArrayList(BUNDLE_KEY_DEVICE_NAMES, deviceNames);
+            bundle.putParcelableArrayList(BUNDLE_KEY_DEVICE_ITEMS, deviceItems);
             AudioSharingDialogFragment dialog = new AudioSharingDialogFragment();
             dialog.setArguments(bundle);
             dialog.show(manager, TAG);
@@ -87,7 +88,8 @@ public class AudioSharingDialogFragment extends InstrumentedDialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Bundle arguments = requireArguments();
-        ArrayList<String> deviceNames = arguments.getStringArrayList(BUNDLE_KEY_DEVICE_NAMES);
+        ArrayList<AudioSharingDeviceItem> deviceItems =
+                arguments.getParcelableArrayList(BUNDLE_KEY_DEVICE_ITEMS);
         final AlertDialog.Builder builder =
                 new AlertDialog.Builder(getActivity()).setTitle("Share audio").setCancelable(false);
         mRootView =
@@ -95,29 +97,33 @@ public class AudioSharingDialogFragment extends InstrumentedDialogFragment {
                         .inflate(R.layout.dialog_audio_sharing, /* parent= */ null);
         TextView subTitle1 = mRootView.findViewById(R.id.share_audio_subtitle1);
         TextView subTitle2 = mRootView.findViewById(R.id.share_audio_subtitle2);
-        if (deviceNames.isEmpty()) {
+        if (deviceItems.isEmpty()) {
             subTitle1.setVisibility(View.INVISIBLE);
-            subTitle2.setText("To start sharing audio, connect headphones that support LE audio");
+            subTitle2.setText(
+                    "To start sharing audio, connect additional headphones that support LE audio");
             builder.setNegativeButton(
                     "Close",
                     (dialog, which) -> {
                         sListener.onCancelClick();
                     });
-        } else if (deviceNames.size() == 1) {
-            // TODO: add real impl
-            subTitle1.setText("1 devices connected");
-            subTitle2.setText("placeholder");
         } else {
-            // TODO: add real impl
-            subTitle1.setText("2 devices connected");
-            subTitle2.setText("placeholder");
+            subTitle1.setText(
+                    String.format(
+                            Locale.US,
+                            "%d additional device%s connected",
+                            deviceItems.size(),
+                            deviceItems.size() > 1 ? "" : "s"));
+            subTitle2.setText(
+                    "The headphones you share audio with will hear videos and music playing on this"
+                            + " phone");
         }
         RecyclerView recyclerView = mRootView.findViewById(R.id.btn_list);
         recyclerView.setAdapter(
                 new AudioSharingDeviceAdapter(
-                        deviceNames,
-                        (int position) -> {
-                            sListener.onItemClick(position);
+                        deviceItems,
+                        (AudioSharingDeviceItem item) -> {
+                            sListener.onItemClick(item);
+                            dismiss();
                         }));
         recyclerView.setLayoutManager(
                 new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));

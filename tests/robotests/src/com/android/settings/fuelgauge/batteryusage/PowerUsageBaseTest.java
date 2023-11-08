@@ -52,10 +52,8 @@ import java.util.List;
 @Config(shadows = ShadowDashboardFragment.class)
 public class PowerUsageBaseTest {
 
-    @Mock
-    private LoaderManager mLoaderManager;
-    @Mock
-    private Loader<BatteryUsageStats> mBatteryUsageStatsLoader;
+    @Mock private LoaderManager mLoaderManager;
+    @Mock private Loader<BatteryUsageStats> mBatteryUsageStatsLoader;
     private TestFragment mFragment;
 
     @Before
@@ -77,16 +75,19 @@ public class PowerUsageBaseTest {
         final Bundle bundle = new Bundle();
         bundle.putInt(KEY_REFRESH_TYPE, BatteryBroadcastReceiver.BatteryUpdateType.BATTERY_STATUS);
         bundle.putBoolean(KEY_INCLUDE_HISTORY, false);
-        doReturn(mBatteryUsageStatsLoader).when(mLoaderManager).getLoader(
-                PowerUsageBase.LoaderIndex.BATTERY_USAGE_STATS_LOADER);
+        doReturn(mBatteryUsageStatsLoader)
+                .when(mLoaderManager)
+                .getLoader(PowerUsageBase.LoaderIndex.BATTERY_USAGE_STATS_LOADER);
         doReturn(false).when(mBatteryUsageStatsLoader).isReset();
 
         mFragment.restartBatteryStatsLoader(
                 BatteryBroadcastReceiver.BatteryUpdateType.BATTERY_STATUS);
 
         verify(mLoaderManager)
-                .restartLoader(eq(PowerUsageBase.LoaderIndex.BATTERY_USAGE_STATS_LOADER),
-                        refEq(bundle), any());
+                .restartLoader(
+                        eq(PowerUsageBase.LoaderIndex.BATTERY_USAGE_STATS_LOADER),
+                        refEq(bundle),
+                        any());
     }
 
     @Test
@@ -94,16 +95,19 @@ public class PowerUsageBaseTest {
         final Bundle bundle = new Bundle();
         bundle.putInt(KEY_REFRESH_TYPE, BatteryBroadcastReceiver.BatteryUpdateType.BATTERY_STATUS);
         bundle.putBoolean(KEY_INCLUDE_HISTORY, false);
-        doReturn(mBatteryUsageStatsLoader).when(mLoaderManager).getLoader(
-                PowerUsageBase.LoaderIndex.BATTERY_USAGE_STATS_LOADER);
+        doReturn(mBatteryUsageStatsLoader)
+                .when(mLoaderManager)
+                .getLoader(PowerUsageBase.LoaderIndex.BATTERY_USAGE_STATS_LOADER);
         doReturn(true).when(mBatteryUsageStatsLoader).isReset();
 
         mFragment.restartBatteryStatsLoader(
                 BatteryBroadcastReceiver.BatteryUpdateType.BATTERY_STATUS);
 
         verify(mLoaderManager)
-                .initLoader(eq(PowerUsageBase.LoaderIndex.BATTERY_USAGE_STATS_LOADER),
-                        refEq(bundle), any());
+                .initLoader(
+                        eq(PowerUsageBase.LoaderIndex.BATTERY_USAGE_STATS_LOADER),
+                        refEq(bundle),
+                        any());
     }
 
     @Test
@@ -111,14 +115,18 @@ public class PowerUsageBaseTest {
         final Bundle bundle = new Bundle();
         bundle.putInt(KEY_REFRESH_TYPE, BatteryBroadcastReceiver.BatteryUpdateType.BATTERY_STATUS);
         bundle.putBoolean(KEY_INCLUDE_HISTORY, false);
-        doReturn(null).when(mLoaderManager).getLoader(
-                PowerUsageBase.LoaderIndex.BATTERY_USAGE_STATS_LOADER);
+        doReturn(null)
+                .when(mLoaderManager)
+                .getLoader(PowerUsageBase.LoaderIndex.BATTERY_USAGE_STATS_LOADER);
 
         mFragment.restartBatteryStatsLoader(
                 BatteryBroadcastReceiver.BatteryUpdateType.BATTERY_STATUS);
 
-        verify(mLoaderManager).initLoader(eq(PowerUsageBase.LoaderIndex.BATTERY_USAGE_STATS_LOADER),
-                refEq(bundle), any());
+        verify(mLoaderManager)
+                .initLoader(
+                        eq(PowerUsageBase.LoaderIndex.BATTERY_USAGE_STATS_LOADER),
+                        refEq(bundle),
+                        any());
     }
 
     private static class TestFragment extends PowerUsageBase {

@@ -46,10 +46,8 @@ public class BatteryInfoLoaderTest {
 
     private static final long TEST_TIME_REMAINING = 1000L;
 
-    @Mock
-    private BatteryStatsManager mBatteryStatsManager;
-    @Mock
-    private BatteryUsageStats mBatteryUsageStats;
+    @Mock private BatteryStatsManager mBatteryStatsManager;
+    @Mock private BatteryUsageStats mBatteryUsageStats;
 
     private Context mContext;
 

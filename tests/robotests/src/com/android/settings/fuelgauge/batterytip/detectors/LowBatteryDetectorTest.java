@@ -40,8 +40,7 @@ import java.util.concurrent.TimeUnit;
 @RunWith(RobolectricTestRunner.class)
 public class LowBatteryDetectorTest {
 
-    @Mock
-    private BatteryInfo mBatteryInfo;
+    @Mock private BatteryInfo mBatteryInfo;
     private BatteryTipPolicy mPolicy;
     private LowBatteryDetector mLowBatteryDetector;
     private Context mContext;
@@ -55,15 +54,16 @@ public class LowBatteryDetectorTest {
         ReflectionHelpers.setField(mPolicy, "lowBatteryEnabled", true);
         mBatteryInfo.discharging = true;
 
-        mLowBatteryDetector = new LowBatteryDetector(mContext, mPolicy, mBatteryInfo,
-                false /* isPowerSaveMode */);
+        mLowBatteryDetector =
+                new LowBatteryDetector(
+                        mContext, mPolicy, mBatteryInfo, false /* isPowerSaveMode */);
     }
 
     @Test
     public void testDetect_disabledByPolicy_tipInvisible() {
         ReflectionHelpers.setField(mPolicy, "lowBatteryEnabled", false);
-        mLowBatteryDetector = new LowBatteryDetector(mContext, mPolicy, mBatteryInfo,
-                true /* isPowerSaveMode */);
+        mLowBatteryDetector =
+                new LowBatteryDetector(mContext, mPolicy, mBatteryInfo, true /* isPowerSaveMode */);
 
         assertThat(mLowBatteryDetector.detect().isVisible()).isFalse();
     }
@@ -84,8 +84,8 @@ public class LowBatteryDetectorTest {
 
     @Test
     public void testDetect_batterySaverOn_tipInvisible() {
-        mLowBatteryDetector = new LowBatteryDetector(mContext, mPolicy, mBatteryInfo,
-                true /* isPowerSaveMode */);
+        mLowBatteryDetector =
+                new LowBatteryDetector(mContext, mPolicy, mBatteryInfo, true /* isPowerSaveMode */);
 
         assertThat(mLowBatteryDetector.detect().getState())
                 .isEqualTo(BatteryTip.StateType.INVISIBLE);

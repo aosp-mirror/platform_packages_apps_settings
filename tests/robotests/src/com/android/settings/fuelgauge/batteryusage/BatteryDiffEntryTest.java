@@ -64,7 +64,6 @@ public final class BatteryDiffEntryTest {
     private static final String UNINSTALLED_PACKAGE_NAME = "com.android.testing.uninstalled";
     private static final String UID_ZERO_PACKAGE_NAME = "com.android.testing.uid.zero";
 
-
     private Context mContext;
 
     @Mock private ApplicationInfo mMockAppInfo;
@@ -451,7 +450,6 @@ public final class BatteryDiffEntryTest {
         assertThat(entry.isUninstalledEntry()).isFalse();
         assertThat(BatteryDiffEntry.sPackageNameAndUidCache.containsKey(PACKAGE_NAME)).isTrue();
         assertThat(BatteryDiffEntry.sPackageNameAndUidCache.get(PACKAGE_NAME)).isEqualTo(UID);
-
     }
 
     @Test
@@ -602,7 +600,7 @@ public final class BatteryDiffEntryTest {
         final BatteryHistEntry batteryHistEntry = new BatteryHistEntry(values);
         doReturn(drawable).when(mMockPackageManager).getDefaultActivityIcon();
         doReturn(null).when(mMockPackageManager).getApplicationInfo("com.a.b.c", 0);
-        doReturn(new String[]{"com.a.b.c"}).when(mMockPackageManager).getPackagesForUid(1001);
+        doReturn(new String[] {"com.a.b.c"}).when(mMockPackageManager).getPackagesForUid(1001);
         return createBatteryDiffEntry(10, batteryHistEntry);
     }
 
