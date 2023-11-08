@@ -19,7 +19,8 @@ package com.android.settings.security;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings;
-import android.widget.Switch;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceScreen;
@@ -28,11 +29,10 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.widget.SettingsMainSwitchPreference;
-import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 /** Preference controller for content protection toggle switch bar. */
 public class ContentProtectionTogglePreferenceController extends TogglePreferenceController
-        implements OnMainSwitchChangeListener {
+        implements OnCheckedChangeListener {
 
     @VisibleForTesting
     static final String KEY_CONTENT_PROTECTION_PREFERENCE = "content_protection_user_consent";
@@ -81,7 +81,7 @@ public class ContentProtectionTogglePreferenceController extends TogglePreferenc
     }
 
     @Override
-    public void onSwitchChanged(Switch switchView, boolean isChecked) {
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (isChecked != isChecked()) {
             setChecked(isChecked);
         }
