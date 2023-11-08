@@ -18,6 +18,10 @@ package com.android.settings.fuelgauge;
 
 import android.content.Context;
 
+import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
+
+import java.util.List;
+
 /** Feature provider for battery settings usage. */
 public interface BatterySettingsFeatureProvider {
 
@@ -29,4 +33,7 @@ public interface BatterySettingsFeatureProvider {
 
     /** Check whether the battery information page is enabled in the About phone page */
     boolean isBatteryInfoEnabled(Context context);
+
+    /** A way to add more battery tip detectors. */
+    void addBatteryTipDetector(Context context, List<BatteryTip> tips);
 }
