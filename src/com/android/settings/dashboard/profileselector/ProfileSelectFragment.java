@@ -57,6 +57,7 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Base fragment class for profile settings.
@@ -295,8 +296,7 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
                 personalFragmentConstructor,
                 workFragmentConstructor,
                 privateFragmentConstructor,
-                new PrivateSpaceInfoProvider() {},
-                new ManagedProfileInfoProvider() {});
+                new PrivateSpaceInfoProvider() {});
     }
 
     /**
@@ -309,36 +309,35 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
             FragmentConstructor personalFragmentConstructor,
             FragmentConstructor workFragmentConstructor,
             FragmentConstructor privateFragmentConstructor,
-            PrivateSpaceInfoProvider privateSpaceInfoProvider,
-            ManagedProfileInfoProvider managedProfileInfoProvider) {
+            PrivateSpaceInfoProvider privateSpaceInfoProvider) {
         Fragment[] result = new Fragment[0];
         ArrayList<Fragment> fragments = new ArrayList<>();
 
         try {
-            final Bundle personalOnly = bundle != null ? bundle : new Bundle();
-            personalOnly.putInt(EXTRA_PROFILE, ProfileType.PERSONAL);
-            final Fragment personalFragment =
-                    personalFragmentConstructor.constructAndGetFragment();
-            personalFragment.setArguments(personalOnly);
-            fragments.add(personalFragment);
+            UserManager userManager = context.getSystemService(UserManager.class);
+            List<UserInfo> userInfos = userManager.getProfiles(UserHandle.myUserId());
 
-            if (managedProfileInfoProvider.isManagedProfilePresent(context)) {
-                final Bundle workOnly = bundle != null ? bundle.deepCopy() : new Bundle();
-                workOnly.putInt(EXTRA_PROFILE, ProfileType.WORK);
-                final Fragment workFragment =
-                        workFragmentConstructor.constructAndGetFragment();
-                workFragment.setArguments(workOnly);
-                fragments.add(workFragment);
-            }
-
-            if (Flags.allowPrivateProfile()
-                    && !privateSpaceInfoProvider.isPrivateSpaceLocked(context)) {
-                final Bundle privateOnly = bundle != null ? bundle.deepCopy() : new Bundle();
-                privateOnly.putInt(EXTRA_PROFILE, ProfileType.PRIVATE);
-                final Fragment privateFragment =
-                        privateFragmentConstructor.constructAndGetFragment();
-                privateFragment.setArguments(privateOnly);
-                fragments.add(privateFragment);
+            for (UserInfo userInfo : userInfos) {
+                if (userInfo.getUserHandle().isSystem()) {
+                    fragments.add(createAndGetFragment(
+                            ProfileType.PERSONAL,
+                            bundle != null ? bundle : new Bundle(),
+                            personalFragmentConstructor));
+                } else if (userInfo.isManagedProfile()) {
+                    fragments.add(createAndGetFragment(
+                            ProfileType.WORK,
+                            bundle != null ? bundle.deepCopy() : new Bundle(),
+                            workFragmentConstructor));
+                } else if (Flags.allowPrivateProfile() && userInfo.isPrivateProfile()) {
+                    if (!privateSpaceInfoProvider.isPrivateSpaceLocked(context)) {
+                        fragments.add(createAndGetFragment(
+                                ProfileType.PRIVATE,
+                                bundle != null ? bundle.deepCopy() : new Bundle(),
+                                privateFragmentConstructor));
+                    }
+                } else {
+                    Log.d(TAG, "Not showing tab for unsupported user");
+                }
             }
 
             result = new Fragment[fragments.size()];
@@ -350,6 +349,14 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
         return result;
     }
 
+    private static Fragment createAndGetFragment(
+            @ProfileType int profileType, Bundle bundle, FragmentConstructor fragmentConstructor) {
+        bundle.putInt(EXTRA_PROFILE, profileType);
+        final Fragment fragment = fragmentConstructor.constructAndGetFragment();
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
     interface FragmentConstructor {
         Fragment constructAndGetFragment();
     }
@@ -357,13 +364,6 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
     interface PrivateSpaceInfoProvider {
         default boolean isPrivateSpaceLocked(Context context) {
             return PrivateSpaceMaintainer.getInstance(context).isPrivateSpaceLocked();
-        }
-    }
-
-    interface ManagedProfileInfoProvider {
-        default boolean isManagedProfilePresent(Context context) {
-            return Utils.doesProfileOfTypeExists(
-                    context.getSystemService(UserManager.class), ProfileType.WORK);
         }
     }
 
