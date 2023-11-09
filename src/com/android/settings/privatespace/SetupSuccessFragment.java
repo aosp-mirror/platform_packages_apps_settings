@@ -18,6 +18,8 @@ package com.android.settings.privatespace;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -69,13 +71,18 @@ public class SetupSuccessFragment extends Fragment {
 
     private View.OnClickListener onClickNext() {
         return v -> {
-            accessPrivateSpaceToast();
-            // TODO(b/306228087): Replace with the intent to launch All Apps once it is working.
-            Intent startMain = new Intent(Intent.ACTION_MAIN);
-            startMain.addCategory(Intent.CATEGORY_HOME);
-            startActivity(startMain);
             Activity activity = getActivity();
             if (activity != null) {
+                Intent allAppsIntent = new Intent(Intent.ACTION_ALL_APPS);
+                ResolveInfo resolveInfo = activity.getPackageManager().resolveActivityAsUser(
+                        new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_HOME),
+                        PackageManager.MATCH_SYSTEM_ONLY, activity.getUserId());
+                if (resolveInfo != null) {
+                    allAppsIntent.setPackage(resolveInfo.activityInfo.packageName);
+                    allAppsIntent.setComponent(resolveInfo.activityInfo.getComponentName());
+                }
+                accessPrivateSpaceToast();
+                startActivity(allAppsIntent);
                 activity.finish();
             }
         };
