@@ -17,10 +17,15 @@
 package com.android.settings.spa
 
 import android.app.Activity
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.pm.PackageManager.ComponentInfoFlags
 import android.os.Bundle
-import com.android.settings.spa.SpaActivity.Companion.startSpaActivity
+import androidx.annotation.VisibleForTesting
+import com.android.settings.activityembedding.ActivityEmbeddingUtils
+import com.android.settings.activityembedding.EmbeddedDeepLinkUtils.tryStartMultiPaneDeepLink
+import com.android.settingslib.spa.framework.util.SESSION_EXTERNAL
+import com.android.settingslib.spa.framework.util.appendSpaParams
 
 /**
  * Activity used as a bridge to [SpaActivity].
@@ -33,17 +38,28 @@ class SpaBridgeActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         getDestination()?.let { destination ->
-            startSpaActivity(destination)
+            startSpaActivityFromBridge(destination)
         }
         finish()
     }
 
     companion object {
+        fun Activity.startSpaActivityFromBridge(destination: String) {
+            val intent = Intent(this, SpaActivity::class.java)
+                .appendSpaParams(destination = destination)
+                .appendSpaParams(sessionName = SESSION_EXTERNAL)
+            if (!ActivityEmbeddingUtils.isEmbeddingActivityEnabled(this) ||
+                !tryStartMultiPaneDeepLink(intent)) {
+                startActivity(intent)
+            }
+        }
+
         fun Activity.getDestination(): String? =
             packageManager.getActivityInfo(
                 componentName, ComponentInfoFlags.of(PackageManager.GET_META_DATA.toLong())
             ).metaData.getString(META_DATA_KEY_DESTINATION)
 
-        private const val META_DATA_KEY_DESTINATION = "com.android.settings.spa.DESTINATION"
+        @VisibleForTesting
+        const val META_DATA_KEY_DESTINATION = "com.android.settings.spa.DESTINATION"
     }
 }

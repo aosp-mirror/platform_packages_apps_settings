@@ -16,16 +16,12 @@
 
 package com.android.settings;
 
-import static android.provider.Settings.ACTION_SETTINGS_EMBED_DEEP_LINK_ACTIVITY;
-import static android.provider.Settings.EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_HIGHLIGHT_MENU_KEY;
-import static android.provider.Settings.EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_INTENT_URI;
-
+import static com.android.settings.activityembedding.EmbeddedDeepLinkUtils.tryStartMultiPaneDeepLink;
 import static com.android.settings.applications.appinfo.AppButtonsPreferenceController.KEY_REMOVE_TASK_WHEN_FINISHING;
 
 import android.app.ActionBar;
 import android.app.ActivityManager;
 import android.app.settings.SettingsEnums;
-import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -35,7 +31,6 @@ import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.content.pm.UserInfo;
 import android.content.res.Resources;
 import android.content.res.Resources.Theme;
 import android.graphics.drawable.Icon;
@@ -67,7 +62,6 @@ import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.gateway.SettingsGateway;
 import com.android.settings.dashboard.DashboardFeatureProvider;
-import com.android.settings.homepage.DeepLinkHomepageActivityInternal;
 import com.android.settings.homepage.SettingsHomepageActivity;
 import com.android.settings.homepage.TopLevelSettings;
 import com.android.settings.overlay.FeatureFactory;
@@ -278,7 +272,8 @@ public class SettingsActivity extends SettingsBaseActivity
         getMetaData();
         final Intent intent = getIntent();
 
-        if (shouldShowTwoPaneDeepLink(intent) && tryStartTwoPaneDeepLink(intent)) {
+        if (shouldShowMultiPaneDeepLink(intent)
+                && tryStartMultiPaneDeepLink(this, intent, mHighlightMenuKey)) {
             finish();
             super.onCreate(savedState);
             return;
@@ -415,73 +410,7 @@ public class SettingsActivity extends SettingsBaseActivity
             intent.getBooleanExtra(EXTRA_SHOW_FRAGMENT_AS_SUBSETTING, false);
     }
 
-    /**
-     * Returns the deep link trampoline intent for large screen devices.
-     */
-    public static Intent getTrampolineIntent(Intent intent, String highlightMenuKey) {
-        final Intent detailIntent = new Intent(intent);
-        // Guard against the arbitrary Intent injection.
-        if (detailIntent.getSelector() != null) {
-            detailIntent.setSelector(null);
-        }
-        // It's a deep link intent, SettingsHomepageActivity will set SplitPairRule and start it.
-        final Intent trampolineIntent = new Intent(ACTION_SETTINGS_EMBED_DEEP_LINK_ACTIVITY)
-                .setPackage(Utils.SETTINGS_PACKAGE_NAME)
-                .replaceExtras(detailIntent);
-
-        // Relay detail intent data to prevent failure of Intent#ParseUri.
-        // If Intent#getData() is not null, Intent#toUri will return an Uri which has the scheme of
-        // Intent#getData() and it may not be the scheme of an Intent.
-        trampolineIntent.putExtra(
-                SettingsHomepageActivity.EXTRA_SETTINGS_LARGE_SCREEN_DEEP_LINK_INTENT_DATA,
-                detailIntent.getData());
-        detailIntent.setData(null);
-
-        trampolineIntent.putExtra(EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_INTENT_URI,
-                detailIntent.toUri(Intent.URI_INTENT_SCHEME));
-
-        trampolineIntent.putExtra(EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_HIGHLIGHT_MENU_KEY,
-                highlightMenuKey);
-        trampolineIntent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
-        return trampolineIntent;
-    }
-
-    private boolean tryStartTwoPaneDeepLink(Intent intent) {
-        intent.putExtra(EXTRA_INITIAL_CALLING_PACKAGE, PasswordUtils.getCallingAppPackageName(
-                getActivityToken()));
-        final Intent trampolineIntent;
-        if (intent.getBooleanExtra(EXTRA_IS_FROM_SLICE, false)) {
-            // Get menu key for slice deep link case.
-            final String highlightMenuKey = intent.getStringExtra(
-                    EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_HIGHLIGHT_MENU_KEY);
-            if (!TextUtils.isEmpty(highlightMenuKey)) {
-                mHighlightMenuKey = highlightMenuKey;
-            }
-            trampolineIntent = getTrampolineIntent(intent, mHighlightMenuKey);
-            trampolineIntent.setClass(this, DeepLinkHomepageActivityInternal.class);
-        } else {
-            trampolineIntent = getTrampolineIntent(intent, mHighlightMenuKey);
-        }
-
-        try {
-            final UserManager um = getSystemService(UserManager.class);
-            final UserInfo userInfo = um.getUserInfo(getUser().getIdentifier());
-            if (userInfo.isManagedProfile()) {
-                trampolineIntent.setClass(this, DeepLinkHomepageActivityInternal.class)
-                        .putExtra(EXTRA_USER_HANDLE, getUser());
-                startActivityAsUser(trampolineIntent,
-                        um.getProfileParent(userInfo.id).getUserHandle());
-            } else {
-                startActivity(trampolineIntent);
-            }
-        } catch (ActivityNotFoundException e) {
-            Log.e(LOG_TAG, "Deep link homepage is not available to show 2-pane UI");
-            return false;
-        }
-        return true;
-    }
-
-    private boolean shouldShowTwoPaneDeepLink(Intent intent) {
+    private boolean shouldShowMultiPaneDeepLink(Intent intent) {
         if (!ActivityEmbeddingUtils.isEmbeddingActivityEnabled(this)) {
             return false;
         }
