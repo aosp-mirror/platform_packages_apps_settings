@@ -20,14 +20,18 @@ import android.Manifest
 import android.app.AppOpsManager
 import android.app.settings.SettingsEnums
 import android.content.Context
-import android.content.res.Resources
 import com.android.settings.R
 import com.android.settings.overlay.FeatureFactory
+import com.android.settingslib.spaprivileged.model.app.PackageManagers.hasGrantPermission
 import com.android.settingslib.spaprivileged.template.app.AppOpPermissionListModel
 import com.android.settingslib.spaprivileged.template.app.AppOpPermissionRecord
 import com.android.settingslib.spaprivileged.template.app.TogglePermissionAppListProvider
 
-
+/**
+ * This class builds an App List under voice activation apps and the individual page which
+ * allows the user to toggle voice activation related permissions on / off for the apps displayed
+ * in the list.
+ */
 object VoiceActivationAppsListProvider : TogglePermissionAppListProvider {
     override val permissionType = "VoiceActivationApps"
     override fun createModel(context: Context) = VoiceActivationAppsListModel(context)
@@ -45,6 +49,9 @@ class VoiceActivationAppsListModel(context: Context) : AppOpPermissionListModel(
         super.setAllowed(record, newAllowed)
         logPermissionChange(newAllowed)
     }
+
+    override fun isChangeable(record: AppOpPermissionRecord): Boolean =
+        super.isChangeable(record) && record.app.hasGrantPermission(permission)
 
     private fun logPermissionChange(newAllowed: Boolean) {
         val category = when {

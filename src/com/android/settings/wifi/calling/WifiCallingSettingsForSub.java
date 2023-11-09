@@ -38,7 +38,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Switch;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
@@ -55,7 +56,6 @@ import com.android.settings.Utils;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.network.ims.WifiCallingQueryImsState;
 import com.android.settings.widget.SettingsMainSwitchPreference;
-import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 import java.util.List;
 
@@ -64,7 +64,7 @@ import java.util.List;
  * The preference screen lets you enable/disable Wi-Fi Calling and change Wi-Fi Calling mode.
  */
 public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
-        implements OnMainSwitchChangeListener,
+        implements OnCheckedChangeListener,
         Preference.OnPreferenceChangeListener {
     private static final String TAG = "WifiCallingForSub";
 
@@ -463,7 +463,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
      * Listens to the state change of the switch.
      */
     @Override
-    public void onSwitchChanged(Switch switchView, boolean isChecked) {
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         Log.d(TAG, "onSwitchChanged(" + isChecked + ")");
 
         if (!isChecked) {

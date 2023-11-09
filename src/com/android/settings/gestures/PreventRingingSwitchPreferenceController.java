@@ -18,7 +18,8 @@ package com.android.settings.gestures;
 
 import android.content.Context;
 import android.provider.Settings;
-import android.widget.Switch;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -28,10 +29,9 @@ import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.widget.MainSwitchPreference;
-import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 public class PreventRingingSwitchPreferenceController extends AbstractPreferenceController
-        implements PreferenceControllerMixin, OnMainSwitchChangeListener {
+        implements PreferenceControllerMixin, OnCheckedChangeListener {
 
     private static final String KEY = "gesture_prevent_ringing_switch";
     private final Context mContext;
@@ -94,7 +94,7 @@ public class PreventRingingSwitchPreferenceController extends AbstractPreference
     }
 
     @Override
-    public void onSwitchChanged(Switch switchView, boolean isChecked) {
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         final int preventRingingSetting = Settings.Secure.getInt(mContext.getContentResolver(),
                 Settings.Secure.VOLUME_HUSH_GESTURE, Settings.Secure.VOLUME_HUSH_VIBRATE);
         final int newRingingSetting = preventRingingSetting == Settings.Secure.VOLUME_HUSH_OFF

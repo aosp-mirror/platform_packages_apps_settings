@@ -47,6 +47,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewOutlineProvider;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -64,7 +65,6 @@ import com.android.settingslib.collapsingtoolbar.CollapsingToolbarBaseActivity;
 import com.android.settingslib.utils.StringUtil;
 import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.widget.MainSwitchBar;
-import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -355,7 +355,7 @@ public class NotificationHistoryActivity extends CollapsingToolbarBaseActivity {
         mHistoryEmpty.setVisibility(View.GONE);
     }
 
-    private final OnMainSwitchChangeListener mOnSwitchClickListener =
+    private final OnCheckedChangeListener mOnSwitchClickListener =
             (switchView, isChecked) -> {
                 int oldState = 0;
                 try {
