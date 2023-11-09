@@ -16,70 +16,53 @@
 
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:androidprv="http://schemas.android.com/apk/prv/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     style="?attr/face_layout_theme">
 
-    <!-- Top divider -->
-    <View
-        android:layout_alignParentTop="true"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?android:attr/listDivider" />
-
     <!-- Title -->
     <com.google.android.setupdesign.view.RichTextView
         android:id="@+id/title"
-        android:paddingHorizontal="8dp"
-        android:paddingTop="8dp"
-        android:paddingBottom="4dp"
+        android:layout_marginBottom="4dp"
         android:gravity="start"
         android:layout_alignParentStart="true"
         android:layout_toStartOf="@+id/toggle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="?android:attr/textColorPrimary"
-        android:textSize="@dimen/sud_description_text_size"
+        android:textSize="22sp"
+        android:letterSpacing="0"
+        android:minHeight="28dp"
+        android:fontFamily="@string/sudFontSecondary"
         />
 
     <!-- Subtitle -->
     <TextView
         android:id="@+id/subtitle"
-        android:paddingHorizontal="8dp"
-        android:paddingBottom="8dp"
         android:layout_alignParentStart="true"
         android:layout_toStartOf="@+id/toggle"
         android:layout_below="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/security_settings_face_enroll_introduction_accessibility_expanded"
-        android:textColor="?android:attr/textColorSecondary"/>
-
-    <!-- Vertical divider -->
-    <View
-        android:layout_centerVertical="true"
-        android:layout_alignTop="@+id/toggle"
-        android:layout_alignBottom="@+id/toggle"
-        android:layout_toStartOf="@+id/toggle"
-        android:layout_width="1dp"
-        android:layout_height="wrap_content"
-        android:background="?android:attr/listDivider" />
+        android:textSize="14sp"
+        android:letterSpacing="0"
+        android:minHeight="20dp"
+        android:fontFamily="@string/sudFontSecondaryText"
+        android:textColor="?androidprv:attr/materialColorOnSurfaceVariant"/>
 
     <!-- Toggle -->
-    <Switch
+    <com.google.android.material.materialswitch.MaterialSwitch
         android:layout_alignParentEnd="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:theme="@style/Theme.Material3.DynamicColors.DayNight"
+        android:background="@null"
         android:id="@+id/toggle"
         android:layout_centerVertical="true"
         android:checked="true"/>
-
-    <!-- Bottom divider -->
-    <View
-        android:layout_below="@+id/subtitle"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?android:attr/listDivider" />
 
 </RelativeLayout>
