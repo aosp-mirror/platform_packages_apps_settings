@@ -1399,12 +1399,14 @@ public class FingerprintSettings extends SubSettings {
             super.onBindViewHolder(view);
             mView = view.itemView;
             mDeleteView = view.itemView.findViewById(R.id.delete_button);
-            mDeleteView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (mOnDeleteClickListener != null) {
-                        mOnDeleteClickListener.onDeleteClick(FingerprintPreference.this);
-                    }
+            if (mFingerprint != null) {
+                mDeleteView.setContentDescription(
+                        mDeleteView.getContentDescription()
+                                + " " + mFingerprint.getName().toString());
+            }
+            mDeleteView.setOnClickListener(v -> {
+                if (mOnDeleteClickListener != null) {
+                    mOnDeleteClickListener.onDeleteClick(FingerprintPreference.this);
                 }
             });
         }
