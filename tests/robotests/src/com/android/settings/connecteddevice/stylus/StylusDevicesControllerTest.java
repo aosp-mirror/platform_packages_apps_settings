@@ -16,6 +16,8 @@
 
 package com.android.settings.connecteddevice.stylus;
 
+import static android.view.KeyEvent.KEYCODE_STYLUS_BUTTON_TAIL;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.junit.Assert.assertEquals;
@@ -139,6 +141,8 @@ public class StylusDevicesControllerTest {
                 .setSources(InputDevice.SOURCE_STYLUS)
                 .build());
         when(mInputDevice.getBluetoothAddress()).thenReturn("SOME:ADDRESS");
+        when(mInputDevice.hasKeys(KEYCODE_STYLUS_BUTTON_TAIL)).thenReturn(
+                new boolean[]{true});
 
         mController = new StylusDevicesController(mContext, mInputDevice, null, mLifecycle);
     }
@@ -218,6 +222,28 @@ public class StylusDevicesControllerTest {
         showScreen(controller);
 
         assertThat(mPreferenceContainer.getPreferenceCount()).isEqualTo(3);
+    }
+
+    @Test
+    public void usiStylusInputDevice_doesntSupportTailButton_tailButtonPreferenceNotShown() {
+        when(mInputDevice.hasKeys(KEYCODE_STYLUS_BUTTON_TAIL)).thenReturn(new boolean[]{false});
+        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_DEVICE_TYPE)).thenReturn(
+                BluetoothDevice.DEVICE_TYPE_WATCH.getBytes());
+        StylusDevicesController controller = new StylusDevicesController(
+                mContext, mInputDevice, mCachedBluetoothDevice, mLifecycle
+        );
+
+        showScreen(controller);
+        Preference handwritingPref = mPreferenceContainer.getPreference(0);
+        Preference buttonPref = mPreferenceContainer.getPreference(1);
+
+        assertThat(mPreferenceContainer.getPreferenceCount()).isEqualTo(2);
+        assertThat(handwritingPref.getTitle().toString()).isEqualTo(
+                mContext.getString(R.string.stylus_textfield_handwriting));
+        assertThat(handwritingPref.isVisible()).isTrue();
+        assertThat(buttonPref.getTitle().toString()).isEqualTo(
+                mContext.getString(R.string.stylus_ignore_button));
+        assertThat(buttonPref.isVisible()).isTrue();
     }
 
     @Test

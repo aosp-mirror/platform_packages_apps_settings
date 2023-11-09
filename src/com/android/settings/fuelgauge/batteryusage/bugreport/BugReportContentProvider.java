@@ -39,9 +39,14 @@ public final class BugReportContentProvider extends ContentProvider {
 
     @Override
     public void dump(FileDescriptor fd, PrintWriter writer, String[] args) {
-        final Context context = getContext();
+        Context context = getContext();
         if (context == null) {
             Log.w(TAG, "failed to dump BatteryUsage state: null context");
+            return;
+        }
+        context = context.getApplicationContext();
+        if (context == null) {
+            Log.w(TAG, "failed to dump BatteryUsage state: null application context");
             return;
         }
         if (DatabaseUtils.isWorkProfile(context)) {
@@ -51,6 +56,9 @@ public final class BugReportContentProvider extends ContentProvider {
         writer.println("dump BatteryUsage and AppUsage states:");
         LogUtils.dumpBatteryUsageDatabaseHist(context, writer);
         LogUtils.dumpAppUsageDatabaseHist(context, writer);
+        LogUtils.dumpBatteryUsageSlotDatabaseHist(context, writer);
+        LogUtils.dumpBatteryEventDatabaseHist(context, writer);
+        LogUtils.dumpBatteryStateDatabaseHist(context, writer);
     }
 
     @Override

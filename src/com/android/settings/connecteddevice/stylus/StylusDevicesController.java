@@ -32,6 +32,7 @@ import android.provider.Settings.Secure;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.InputDevice;
+import android.view.KeyEvent;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 
@@ -104,6 +105,12 @@ public class StylusDevicesController extends AbstractPreferenceController implem
     private Preference createOrUpdateDefaultNotesPreference(@Nullable Preference preference) {
         RoleManager rm = mContext.getSystemService(RoleManager.class);
         if (rm == null || !rm.isRoleAvailable(RoleManager.ROLE_NOTES)) {
+            return null;
+        }
+
+        boolean doesStylusSupportTailButton = mInputDevice.hasKeys(
+                KeyEvent.KEYCODE_STYLUS_BUTTON_TAIL)[0];
+        if (!doesStylusSupportTailButton) {
             return null;
         }
 
