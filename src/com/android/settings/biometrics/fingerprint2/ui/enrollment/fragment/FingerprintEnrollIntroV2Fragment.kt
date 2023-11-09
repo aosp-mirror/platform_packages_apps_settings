@@ -186,6 +186,9 @@ class FingerprintEnrollIntroV2Fragment() : Fragment(R.layout.fingerprint_v2_enro
       return view
     }
 
+  /**
+   * TODO (b/305269201): This link isn't displaying for screenshot tests.
+   */
   private fun setFooterLink(view: View) {
     val footerLink: TextView = view.requireViewById(R.id.footer_learn_more)
     footerLink.movementMethod = LinkMovementMethod.getInstance()
