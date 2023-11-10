@@ -16,18 +16,14 @@
 
 package com.android.settings.spa
 
-import android.app.ActivityManager
 import android.content.Context
 import android.content.Intent
-import android.os.RemoteException
-import android.os.UserHandle
 import android.util.Log
 import androidx.annotation.VisibleForTesting
 import com.android.settings.spa.app.appinfo.AppInfoSettingsProvider
 import com.android.settingslib.spa.framework.BrowseActivity
 import com.android.settingslib.spa.framework.common.SettingsPage
 import com.android.settingslib.spa.framework.util.SESSION_BROWSE
-import com.android.settingslib.spa.framework.util.SESSION_EXTERNAL
 import com.android.settingslib.spa.framework.util.appendSpaParams
 import com.google.android.setupcompat.util.WizardManagerHelper
 
@@ -44,7 +40,7 @@ class SpaActivity : BrowseActivity() {
         @VisibleForTesting
         fun Context.isSuwAndPageBlocked(name: String): Boolean =
             if (name in SuwBlockedPages && !WizardManagerHelper.isDeviceProvisioned(this)) {
-                Log.w(TAG, "$name blocked before SUW completed.");
+                Log.w(TAG, "$name blocked before SUW completed.")
                 true
             } else {
                 false
@@ -54,29 +50,8 @@ class SpaActivity : BrowseActivity() {
         fun Context.startSpaActivity(destination: String) {
             val intent = Intent(this, SpaActivity::class.java)
                 .appendSpaParams(destination = destination)
-            if (isLaunchedFromInternal()) {
-                intent.appendSpaParams(sessionName = SESSION_BROWSE)
-            } else {
-                intent.appendSpaParams(sessionName = SESSION_EXTERNAL)
-            }
+                .appendSpaParams(sessionName = SESSION_BROWSE)
             startActivity(intent)
-        }
-
-        @JvmStatic
-        fun Context.startSpaActivityForApp(destinationPrefix: String, intent: Intent): Boolean {
-            val packageName = intent.data?.schemeSpecificPart ?: return false
-            startSpaActivity("$destinationPrefix/$packageName/${UserHandle.myUserId()}")
-            return true
-        }
-
-        fun Context.isLaunchedFromInternal(): Boolean {
-            var pkg: String? = null
-            try {
-                pkg = ActivityManager.getService().getLaunchedFromPackage(getActivityToken())
-            } catch (e: RemoteException) {
-                Log.v(TAG, "Could not talk to activity manager.", e)
-            }
-            return applicationContext.packageName == pkg
         }
     }
 }

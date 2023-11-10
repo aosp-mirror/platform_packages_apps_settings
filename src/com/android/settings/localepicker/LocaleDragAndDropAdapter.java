@@ -194,6 +194,9 @@ class LocaleDragAndDropAdapter
     @VisibleForTesting
     protected void setCheckBoxDescription(LocaleDragCell dragCell, CheckBox checkbox,
             boolean isChecked) {
+        if (!mRemoveMode) {
+            return;
+        }
         CharSequence checkedStatus = mContext.getText(
                 isChecked ? com.android.internal.R.string.checked
                         : com.android.internal.R.string.not_checked);

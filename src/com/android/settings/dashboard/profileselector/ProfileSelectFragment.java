@@ -323,7 +323,7 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
             fragments.add(personalFragment);
 
             if (managedProfileInfoProvider.getManagedProfile(context) != null) {
-                final Bundle workOnly = bundle != null ? bundle : new Bundle();
+                final Bundle workOnly = bundle != null ? bundle.deepCopy() : new Bundle();
                 workOnly.putInt(EXTRA_PROFILE, ProfileType.WORK);
                 final Fragment workFragment =
                         workFragmentConstructor.constructAndGetFragment();
@@ -333,7 +333,7 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
 
             if (Flags.allowPrivateProfile()
                     && !privateSpaceInfoProvider.isPrivateSpaceLocked(context)) {
-                final Bundle privateOnly = bundle != null ? bundle : new Bundle();
+                final Bundle privateOnly = bundle != null ? bundle.deepCopy() : new Bundle();
                 privateOnly.putInt(EXTRA_PROFILE, ProfileType.PRIVATE);
                 final Fragment privateFragment =
                         privateFragmentConstructor.constructAndGetFragment();
