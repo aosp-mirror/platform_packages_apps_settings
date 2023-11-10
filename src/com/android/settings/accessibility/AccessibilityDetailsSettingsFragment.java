@@ -32,7 +32,6 @@ import android.content.pm.ServiceInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.text.TextUtils;
-import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.view.accessibility.AccessibilityManager;
 
@@ -112,9 +111,7 @@ public class AccessibilityDetailsSettingsFragment extends InstrumentedFragment {
             return new LaunchFragmentArguments(destination, /* arguments= */ null);
         }
 
-        if (ACCESSIBILITY_HEARING_AIDS_COMPONENT_NAME.equals(componentName)
-                && FeatureFlagUtils.isEnabled(getContext(),
-                FeatureFlagUtils.SETTINGS_ACCESSIBILITY_HEARING_AID_PAGE)) {
+        if (ACCESSIBILITY_HEARING_AIDS_COMPONENT_NAME.equals(componentName)) {
             final String destination = AccessibilityHearingAidsFragment.class.getName();
             return new LaunchFragmentArguments(destination, /* arguments= */ null);
         }
