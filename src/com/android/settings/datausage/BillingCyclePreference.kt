@@ -16,15 +16,21 @@ package com.android.settings.datausage
 
 import android.app.settings.SettingsEnums
 import android.content.Context
-import android.content.Intent
 import android.net.NetworkTemplate
 import android.os.Bundle
 import android.util.AttributeSet
-import androidx.preference.Preference
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settings.R
 import com.android.settings.core.SubSettingLauncher
 import com.android.settings.datausage.lib.BillingCycleRepository
-import com.android.settings.network.MobileDataEnabledListener
+import com.android.settings.network.mobileDataEnabledFlow
+import com.android.settings.spa.preference.ComposePreference
+import com.android.settingslib.spa.widget.preference.Preference
+import com.android.settingslib.spa.widget.preference.PreferenceModel
+import kotlinx.coroutines.flow.map
 
 /**
  * Preference which displays billing cycle of subscription
@@ -36,45 +42,31 @@ class BillingCyclePreference @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet?,
     private val repository: BillingCycleRepository = BillingCycleRepository(context),
-) : Preference(context, attrs), TemplatePreference {
-    private lateinit var template: NetworkTemplate
-    private var subId = 0
-
-    private val listener = MobileDataEnabledListener(context) {
-        updateEnabled()
-    }
+) : ComposePreference(context, attrs), TemplatePreference {
 
     override fun setTemplate(template: NetworkTemplate, subId: Int) {
-        this.template = template
-        this.subId = subId
-        summary = null
-        updateEnabled()
-        intent = intent
+        setContent {
+            val isModifiable by remember {
+                context.mobileDataEnabledFlow(subId).map { repository.isModifiable(subId) }
+            }.collectAsStateWithLifecycle(initialValue = false)
+
+            Preference(object : PreferenceModel {
+                override val title = stringResource(R.string.billing_cycle)
+                override val enabled = { isModifiable }
+                override val onClick = { launchBillingCycleSettings(template) }
+            })
+        }
     }
 
-    override fun onAttached() {
-        super.onAttached()
-        listener.start(subId)
-    }
-
-    override fun onDetached() {
-        listener.stop()
-        super.onDetached()
-    }
-
-    private fun updateEnabled() {
-        isEnabled = repository.isModifiable(subId)
-    }
-
-    override fun getIntent(): Intent {
+    private fun launchBillingCycleSettings(template: NetworkTemplate) {
         val args = Bundle().apply {
             putParcelable(DataUsageList.EXTRA_NETWORK_TEMPLATE, template)
         }
-        return SubSettingLauncher(context).apply {
+        SubSettingLauncher(context).apply {
             setDestination(BillingCycleSettings::class.java.name)
             setArguments(args)
             setTitleRes(R.string.billing_cycle)
             setSourceMetricsCategory(SettingsEnums.PAGE_UNKNOWN)
-        }.toIntent()
+        }.launch()
     }
 }
