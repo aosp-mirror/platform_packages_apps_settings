@@ -28,7 +28,7 @@ import com.android.settings.applications.appinfo.WriteSettingsDetails
 import com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureDetails
 import com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureSettings
 import com.android.settings.spa.SpaActivity.Companion.startSpaActivity
-import com.android.settings.spa.SpaActivity.Companion.startSpaActivityForApp
+import com.android.settings.spa.SpaAppBridgeActivity.Companion.getDestinationForApp
 import com.android.settings.spa.app.specialaccess.AlarmsAndRemindersAppListProvider
 import com.android.settings.spa.app.specialaccess.AllFilesAccessAppListProvider
 import com.android.settings.spa.app.specialaccess.DisplayOverOtherAppsAppListProvider
@@ -72,17 +72,18 @@ object SettingsActivityUtil {
 
     @JvmStatic
     fun Context.launchSpaActivity(fragmentName: String, intent: Intent): Boolean {
-        if (!FeatureFlagUtils.isEnabled(this, FeatureFlagUtils.SETTINGS_ENABLE_SPA)) {
-            return false
-        }
-        FRAGMENT_TO_SPA_DESTINATION_MAP[fragmentName]?.let { destination ->
-            startSpaActivity(destination)
-            return true
-        }
-        FRAGMENT_TO_SPA_APP_DESTINATION_PREFIX_MAP[fragmentName]?.let { appDestinationPrefix ->
-            startSpaActivityForApp(appDestinationPrefix, intent)
-            return true
+        if (FeatureFlagUtils.isEnabled(this, FeatureFlagUtils.SETTINGS_ENABLE_SPA)) {
+            getDestination(fragmentName, intent)?.let { destination ->
+                startSpaActivity(destination)
+                return true
+            }
         }
         return false
     }
+
+    private fun getDestination(fragmentName: String, intent: Intent): String? =
+        FRAGMENT_TO_SPA_DESTINATION_MAP[fragmentName]
+            ?: FRAGMENT_TO_SPA_APP_DESTINATION_PREFIX_MAP[fragmentName]?.let { destinationPrefix ->
+                getDestinationForApp(destinationPrefix, intent)
+            }
 }
