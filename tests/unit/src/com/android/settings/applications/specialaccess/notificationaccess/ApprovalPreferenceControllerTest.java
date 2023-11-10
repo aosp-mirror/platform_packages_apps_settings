@@ -21,6 +21,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.ArgumentMatchers.isNull;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -137,14 +138,19 @@ public class ApprovalPreferenceControllerTest {
 
     @Test
     public void restrictedSettings_appOpsDisabled() {
-        when(mAppOpsManager.noteOpNoThrow(anyInt(), anyInt(), anyString())).thenReturn(
-                AppOpsManager.MODE_ERRORED);
+        when(mAppOpsManager.noteOpNoThrow(anyInt(), anyInt(), anyString(), isNull(), isNull()))
+                .thenReturn(AppOpsManager.MODE_ERRORED);
+        doReturn(mAppOpsManager).when(mContext).getSystemService(Context.APP_OPS_SERVICE);
         when(mNm.isNotificationListenerAccessGranted(mCn)).thenReturn(false);
         RestrictedSwitchPreference pref = new RestrictedSwitchPreference(
                 mContext);
         pref.setAppOps(mAppOpsManager);
+        mController.setAppOpStr(AppOpsManager.OPSTR_ACCESS_NOTIFICATIONS);
 
         mController.updateState(pref);
+
+        verify(mContext).getSystemService(Context.APP_OPS_SERVICE);
+        verify(mAppOpsManager).noteOpNoThrow(anyInt(), anyInt(), anyString(), isNull(), isNull());
         assertThat(pref.isEnabled()).isFalse();
     }
 

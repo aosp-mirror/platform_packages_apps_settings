@@ -72,10 +72,18 @@ public class RestrictedAppPreference extends AppPreference {
 
     @Override
     public void setEnabled(boolean enabled) {
-        if (isDisabledByAdmin() && enabled) {
-            return;
+        boolean changed = false;
+        if (enabled && isDisabledByAdmin()) {
+            mHelper.setDisabledByAdmin(null);
+            changed = true;
         }
-        super.setEnabled(enabled);
+        if (enabled && isDisabledByEcm()) {
+            mHelper.setDisabledByEcm(null);
+            changed = true;
+        }
+        if (!changed) {
+            super.setEnabled(enabled);
+        }
     }
 
     public void setDisabledByAdmin(RestrictedLockUtils.EnforcedAdmin admin) {
@@ -86,6 +94,10 @@ public class RestrictedAppPreference extends AppPreference {
 
     public boolean isDisabledByAdmin() {
         return mHelper.isDisabledByAdmin();
+    }
+
+    public boolean isDisabledByEcm() {
+        return mHelper.isDisabledByEcm();
     }
 
     public void useAdminDisabledSummary(boolean useSummary) {
@@ -111,5 +123,16 @@ public class RestrictedAppPreference extends AppPreference {
 
     public void checkRestrictionAndSetDisabled(String userRestriction, int userId) {
         mHelper.checkRestrictionAndSetDisabled(userRestriction, userId);
+    }
+
+    /**
+     * Checks if the given setting is subject to Enhanced Confirmation Mode restrictions for this
+     * package. Marks the preference as disabled if so.
+     * @param restriction The key identifying the setting
+     * @param packageName the package to check the restriction for
+     * @param uid the uid of the package
+     */
+    public void checkEcmRestrictionAndSetDisabled(String restriction, String packageName, int uid) {
+        mHelper.checkEcmRestrictionAndSetDisabled(restriction, packageName, uid);
     }
 }

@@ -31,9 +31,12 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
+import android.platform.test.flag.junit.SetFlagsRule;
+import android.security.Flags;
 
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
 
 import org.junit.Rule;
@@ -45,6 +48,7 @@ import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
@@ -53,6 +57,9 @@ import java.util.List;
 
 /** Test for {@link RestrictedPreferenceHelper}. */
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        ShadowRestrictedLockUtilsInternal.class
+})
 public class RestrictedPreferenceHelperTest {
 
     private static final String PACKAGE_NAME = "com.android.test";
@@ -72,6 +79,9 @@ public class RestrictedPreferenceHelperTest {
     private AccessibilityShortcutInfo mShortcutInfo;
     private final RestrictedPreferenceHelper mHelper = new RestrictedPreferenceHelper(mContext);
 
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+
     @Test
     public void createAccessibilityServicePreferenceList_hasOneInfo_containsSameKey() {
         final String key = COMPONENT_NAME.flattenToString();
@@ -83,6 +93,35 @@ public class RestrictedPreferenceHelperTest {
         final RestrictedPreference preference = preferenceList.get(0);
 
         assertThat(preference.getKey()).isEqualTo(key);
+    }
+
+    @Test
+    public void createAccessibilityServicePreferenceList_ecmRestricted_prefIsEcmRestricted() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_EXTEND_ECM_TO_ALL_SETTINGS);
+        ShadowRestrictedLockUtilsInternal.setEcmRestrictedPkgs(
+                mServiceInfo.getResolveInfo().serviceInfo.packageName);
+        final List<AccessibilityServiceInfo> infoList = new ArrayList<>(
+                singletonList(mServiceInfo));
+
+        final List<RestrictedPreference> preferenceList =
+                mHelper.createAccessibilityServicePreferenceList(infoList);
+        final RestrictedPreference preference = preferenceList.get(0);
+
+        assertThat(preference.isDisabledByEcm()).isTrue();
+    }
+
+    @Test
+    public void createAccessibilityServicePreferenceList_ecmNotRestricted_prefIsNotEcmRestricted() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_EXTEND_ECM_TO_ALL_SETTINGS);
+        ShadowRestrictedLockUtilsInternal.setEcmRestrictedPkgs();
+        final List<AccessibilityServiceInfo> infoList = new ArrayList<>(
+                singletonList(mServiceInfo));
+
+        final List<RestrictedPreference> preferenceList =
+                mHelper.createAccessibilityServicePreferenceList(infoList);
+        final RestrictedPreference preference = preferenceList.get(0);
+
+        assertThat(preference.isDisabledByEcm()).isFalse();
     }
 
     @Test
