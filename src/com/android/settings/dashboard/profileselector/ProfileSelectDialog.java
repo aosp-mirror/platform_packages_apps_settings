@@ -25,7 +25,9 @@ import android.content.DialogInterface.OnDismissListener;
 import android.content.DialogInterface.OnShowListener;
 import android.content.Intent;
 import android.content.pm.UserInfo;
+import android.content.pm.UserProperties;
 import android.os.Bundle;
+import android.os.Flags;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Log;
@@ -183,7 +185,10 @@ public class ProfileSelectDialog extends DialogFragment implements UserAdapter.O
         final UserManager userManager = UserManager.get(context);
         for (int i = userHandles.size() - 1; i >= 0; i--) {
             UserInfo userInfo = userManager.getUserInfo(userHandles.get(i).getIdentifier());
-            if (userInfo == null || userInfo.isCloneProfile()) {
+            if (userInfo == null
+                    || userInfo.isCloneProfile()
+                    || (Flags.allowPrivateProfile()
+                        && shouldHideUserInQuietMode(userHandles.get(i), userManager))) {
                 if (DEBUG) {
                     Log.d(TAG, "Delete the user: " + userHandles.get(i).getIdentifier());
                 }
@@ -214,7 +219,10 @@ public class ProfileSelectDialog extends DialogFragment implements UserAdapter.O
         final UserManager userManager = UserManager.get(context);
         for (UserHandle userHandle : List.copyOf(tile.pendingIntentMap.keySet())) {
             UserInfo userInfo = userManager.getUserInfo(userHandle.getIdentifier());
-            if (userInfo == null || userInfo.isCloneProfile()) {
+            if (userInfo == null
+                    || userInfo.isCloneProfile()
+                    || (Flags.allowPrivateProfile()
+                        && shouldHideUserInQuietMode(userHandle, userManager))) {
                 if (DEBUG) {
                     Log.d(TAG, "Delete the user: " + userHandle.getIdentifier());
                 }
@@ -222,5 +230,12 @@ public class ProfileSelectDialog extends DialogFragment implements UserAdapter.O
                 tile.pendingIntentMap.remove(userHandle);
             }
         }
+    }
+
+    private static boolean shouldHideUserInQuietMode(
+            UserHandle userHandle, UserManager userManager) {
+        UserProperties userProperties = userManager.getUserProperties(userHandle);
+        return userProperties.getHideInSettingsInQuietMode()
+                && userManager.isQuietModeEnabled(userHandle);
     }
 }

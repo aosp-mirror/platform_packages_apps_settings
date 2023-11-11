@@ -43,7 +43,7 @@ class ComposePreferenceTest {
 
     @Test
     fun onBindViewHolder() {
-        preference.content = {
+        preference.setContent {
             Text(TEXT)
         }
 

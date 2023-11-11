@@ -18,6 +18,7 @@ package com.android.settings.spa.preference
 
 import android.content.Context
 import android.util.AttributeSet
+import androidx.annotation.VisibleForTesting
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
@@ -26,13 +27,23 @@ import androidx.preference.PreferenceViewHolder
 import com.android.settings.R
 import com.android.settingslib.spa.framework.theme.SettingsTheme
 
-class ComposePreference @JvmOverloads constructor(
+open class ComposePreference @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
     defStyleRes: Int = 0,
 ) : Preference(context, attrs, defStyleAttr, defStyleRes) {
-    var content: @Composable () -> Unit = {}
+    private var content: @Composable () -> Unit = {}
+
+    fun setContent(content: @Composable () -> Unit) {
+        this.content = content
+    }
+
+    @VisibleForTesting
+    @Composable
+    fun Content() {
+        content()
+    }
 
     init {
         layoutResource = R.layout.preference_compose

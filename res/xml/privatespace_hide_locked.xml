@@ -21,7 +21,7 @@
     <com.android.settingslib.widget.IllustrationPreference
         android:key="privatespace_hide_video"
         settings:searchable="false"
-        settings:lottie_rawRes="@raw/lottie_privatespace_hide_placeholder"/>
+        settings:lottie_rawRes="@drawable/privatespace_placeholder_image"/>
 
     <com.android.settingslib.widget.MainSwitchPreference
         android:key="hide_when_locked"
@@ -34,27 +34,33 @@
         android:selectable="false"
         settings:searchable="false" />
 
+        <Preference
+        android:key="private_space_note"
+        android:summary="@string/privatespace_development_note"
+        android:selectable="false"
+        settings:searchable="false" />
+
     <PreferenceCategory
-        android:title="@string/privatespace_access_header">
+        android:title="@string/privatespace_unhide_header">
 
         <Preference
         android:key="search_when_locked_footer"
         android:icon="@drawable/counter_1_24dp"
-        android:title="@string/privatespace_search_description"
+        android:title="@string/privatespace_open_settings"
         android:selectable="false"
         settings:searchable="false" />
 
         <Preference
             android:key="tap_tile_footer"
             android:icon="@drawable/counter_2_24dp"
-            android:title="@string/privatespace_tap_tile_description"
+            android:title="@string/privatespace_tap_settings"
             android:selectable="false"
             settings:searchable="false" />
 
         <Preference
-            android:key="unlock_profile_footer"
+            android:key="turn_off_footer"
             android:icon="@drawable/counter_3_24dp"
-            android:title="@string/privatespace_unlock_description"
+            android:title="@string/privatespace_turnoff_hide"
             android:selectable="false"
             settings:searchable="false" />
 
