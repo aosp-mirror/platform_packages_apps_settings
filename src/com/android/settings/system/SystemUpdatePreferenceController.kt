@@ -17,12 +17,9 @@
 package com.android.settings.system
 
 import android.content.Context
-import android.content.Intent
 import android.os.Build
-import android.os.PersistableBundle
 import android.os.SystemUpdateManager
 import android.os.UserManager
-import android.telephony.CarrierConfigManager
 import android.util.Log
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
@@ -39,6 +36,7 @@ import kotlinx.coroutines.launch
 open class SystemUpdatePreferenceController(context: Context, preferenceKey: String) :
     BasePreferenceController(context, preferenceKey) {
     private val userManager: UserManager = context.userManager
+    private val clientInitiatedActionRepository = ClientInitiatedActionRepository(context)
     private lateinit var preference: Preference
 
     override fun getAvailabilityStatus() =
@@ -61,12 +59,7 @@ open class SystemUpdatePreferenceController(context: Context, preferenceKey: Str
 
     override fun handlePreferenceTreeClick(preference: Preference): Boolean {
         if (preferenceKey == preference.key) {
-            val configManager = mContext.getSystemService(CarrierConfigManager::class.java)!!
-            configManager.getConfig(CarrierConfigManager.KEY_CI_ACTION_ON_SYS_UPDATE_BOOL)?.let {
-                if (it.getBoolean(CarrierConfigManager.KEY_CI_ACTION_ON_SYS_UPDATE_BOOL)) {
-                    ciActionOnSysUpdate(it)
-                }
-            }
+            clientInitiatedActionRepository.onSystemUpdate()
         }
         // always return false here because this handler does not want to block other handlers.
         return false
@@ -110,26 +103,6 @@ open class SystemUpdatePreferenceController(context: Context, preferenceKey: Str
         R.string.android_version_summary,
         Build.VERSION.RELEASE_OR_PREVIEW_DISPLAY,
     )
-
-    /**
-     * Trigger client initiated action (send intent) on system update
-     */
-    private fun ciActionOnSysUpdate(b: PersistableBundle) {
-        val intentStr = b.getString(CarrierConfigManager.KEY_CI_ACTION_ON_SYS_UPDATE_INTENT_STRING)
-        if (intentStr.isNullOrEmpty()) return
-        val extra = b.getString(CarrierConfigManager.KEY_CI_ACTION_ON_SYS_UPDATE_EXTRA_STRING)
-        val extraVal =
-            b.getString(CarrierConfigManager.KEY_CI_ACTION_ON_SYS_UPDATE_EXTRA_VAL_STRING)
-        Log.d(
-            TAG,
-            "ciActionOnSysUpdate: broadcasting intent $intentStr with extra $extra, $extraVal"
-        )
-        val intent = Intent(intentStr).apply {
-            if (!extra.isNullOrEmpty()) putExtra(extra, extraVal)
-            addFlags(Intent.FLAG_RECEIVER_INCLUDE_BACKGROUND)
-        }
-        mContext.applicationContext.sendBroadcast(intent)
-    }
 
     companion object {
         private const val TAG = "SysUpdatePrefContr"

@@ -61,7 +61,7 @@ class ComposePreferenceControllerTest {
         controller.displayPreference(preferenceScreen)
 
         composeTestRule.setContent {
-            preference.content()
+            preference.Content()
         }
         composeTestRule.onNodeWithText(TEXT).assertIsDisplayed()
     }

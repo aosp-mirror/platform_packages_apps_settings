@@ -63,6 +63,7 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
+import com.android.settings.flags.Flags;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.ConfirmLockPattern;
@@ -431,14 +432,24 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
 
         final GlifLayout layout = mContentView.findViewById(R.id.setup_wizard_layout);
         final FooterBarMixin mixin = layout.getMixin(FooterBarMixin.class);
+        final Activity activity = getActivity();
         mixin.setPrimaryButton(
-                new FooterButton.Builder(getActivity())
+                new FooterButton.Builder(activity)
                         .setText(R.string.main_clear_button_text)
                         .setListener(mInitiateListener)
                         .setButtonType(ButtonType.OTHER)
                         .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Primary)
-                        .build()
-        );
+                        .build());
+        if (Flags.showFactoryResetCancelButton()) {
+            mixin.setSecondaryButton(
+                    new FooterButton.Builder(activity)
+                            .setText(android.R.string.cancel)
+                            .setListener(view -> activity.onBackPressed())
+                            .setButtonType(ButtonType.CANCEL)
+                            .setTheme(
+                                    com.google.android.setupdesign.R.style.SudGlifButton_Secondary)
+                            .build());
+        }
         mInitiateButton = mixin.getPrimaryButton();
     }
 
