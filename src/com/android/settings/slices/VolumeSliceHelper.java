@@ -24,7 +24,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.media.AudioManager;
 import android.net.Uri;
-import android.util.ArrayMap;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
@@ -32,6 +31,7 @@ import androidx.annotation.VisibleForTesting;
 import com.android.settingslib.SliceBroadcastRelay;
 
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * This helper is to handle the broadcasts of volume slices
@@ -41,7 +41,7 @@ public class VolumeSliceHelper {
     private static final String TAG = "VolumeSliceHelper";
 
     @VisibleForTesting
-    static Map<Uri, Integer> sRegisteredUri = new ArrayMap<>();
+    static Map<Uri, Integer> sRegisteredUri = new ConcurrentHashMap<>();
     @VisibleForTesting
     static IntentFilter sIntentFilter;
 
@@ -133,23 +133,19 @@ public class VolumeSliceHelper {
     }
 
     private static void handleStreamChanged(Context context, int inputType) {
-        synchronized (sRegisteredUri) {
-            for (Map.Entry<Uri, Integer> entry : sRegisteredUri.entrySet()) {
-                if (entry.getValue() == inputType) {
-                    context.getContentResolver().notifyChange(entry.getKey(), null /* observer */);
-                    if (inputType != AudioManager.STREAM_RING) { // Two URIs are mapped to ring
-                        break;
-                    }
+        for (Map.Entry<Uri, Integer> entry : sRegisteredUri.entrySet()) {
+            if (entry.getValue() == inputType) {
+                context.getContentResolver().notifyChange(entry.getKey(), null /* observer */);
+                if (inputType != AudioManager.STREAM_RING) { // Two URIs are mapped to ring
+                    break;
                 }
             }
         }
     }
 
     private static void notifyAllStreamsChanged(Context context) {
-        synchronized (sRegisteredUri) {
-            sRegisteredUri.forEach((uri, audioStream) -> {
-                context.getContentResolver().notifyChange(uri, null /* observer */);
-            });
-        }
+        sRegisteredUri.keySet().forEach(uri -> {
+            context.getContentResolver().notifyChange(uri, null /* observer */);
+        });
     }
 }
