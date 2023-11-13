@@ -84,8 +84,7 @@ public final class BatteryTipsControllerTest {
         verify(mBatteryTipsCardPreference)
                 .setTitle("Turn on adaptive brightness to extend battery life");
         verify(mBatteryTipsCardPreference).setIconResourceId(R.drawable.ic_battery_tips_lightbulb);
-        verify(mBatteryTipsCardPreference)
-                .setMainButtonStrokeColorResourceId(R.color.color_accent_selector);
+        verify(mBatteryTipsCardPreference).setButtonColorResourceId(R.color.color_accent_selector);
         verify(mBatteryTipsCardPreference).setMainButtonLabel("View Settings");
         verify(mBatteryTipsCardPreference).setDismissButtonLabel("Got it");
         // Check proto info
@@ -104,8 +103,7 @@ public final class BatteryTipsControllerTest {
 
         verify(mBatteryTipsCardPreference).setTitle("Reduce screen timeout to extend battery life");
         verify(mBatteryTipsCardPreference).setIconResourceId(R.drawable.ic_battery_tips_lightbulb);
-        verify(mBatteryTipsCardPreference)
-                .setMainButtonStrokeColorResourceId(R.color.color_accent_selector);
+        verify(mBatteryTipsCardPreference).setButtonColorResourceId(R.color.color_accent_selector);
         verify(mBatteryTipsCardPreference).setMainButtonLabel("View Settings");
         verify(mBatteryTipsCardPreference).setDismissButtonLabel("Got it");
         verify(mBatteryTipsCardPreference).setVisible(true);
@@ -134,8 +132,7 @@ public final class BatteryTipsControllerTest {
 
         verify(mBatteryTipsCardPreference).setTitle(testTitle);
         verify(mBatteryTipsCardPreference).setIconResourceId(R.drawable.ic_battery_tips_lightbulb);
-        verify(mBatteryTipsCardPreference)
-                .setMainButtonStrokeColorResourceId(R.color.color_accent_selector);
+        verify(mBatteryTipsCardPreference).setButtonColorResourceId(R.color.color_accent_selector);
         verify(mBatteryTipsCardPreference).setMainButtonLabel("View Settings");
         verify(mBatteryTipsCardPreference).setDismissButtonLabel("Got it");
         verify(mBatteryTipsCardPreference).setVisible(true);
@@ -159,7 +156,7 @@ public final class BatteryTipsControllerTest {
         verify(mBatteryTipsCardPreference)
                 .setIconResourceId(R.drawable.ic_battery_tips_warning_icon);
         verify(mBatteryTipsCardPreference)
-                .setMainButtonStrokeColorResourceId(R.color.color_battery_anomaly_yellow_selector);
+                .setButtonColorResourceId(R.color.color_battery_anomaly_app_warning_selector);
         verify(mBatteryTipsCardPreference).setMainButtonLabel("Check");
         verify(mBatteryTipsCardPreference).setDismissButtonLabel("Got it");
         verify(mBatteryTipsCardPreference).setVisible(true);
