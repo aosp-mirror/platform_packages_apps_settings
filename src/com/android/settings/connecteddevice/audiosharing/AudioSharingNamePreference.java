@@ -16,6 +16,7 @@
 
 package com.android.settings.connecteddevice.audiosharing;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.ImageButton;
@@ -23,6 +24,7 @@ import android.widget.ImageButton;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.widget.ValidatedEditTextPreference;
 
 public class AudioSharingNamePreference extends ValidatedEditTextPreference {
@@ -60,5 +62,12 @@ public class AudioSharingNamePreference extends ValidatedEditTextPreference {
         super.onBindViewHolder(holder);
         final ImageButton shareButton = (ImageButton) holder.findViewById(R.id.button_icon);
         shareButton.setImageDrawable(getContext().getDrawable(R.drawable.ic_qrcode_24dp));
+        shareButton.setOnClickListener(
+                unused ->
+                        new SubSettingLauncher(getContext())
+                                .setTitleText("Audio sharing QR code")
+                                .setDestination(AudioStreamsQrCodeFragment.class.getName())
+                                .setSourceMetricsCategory(SettingsEnums.AUDIO_SHARING_SETTINGS)
+                                .launch());
     }
 }
