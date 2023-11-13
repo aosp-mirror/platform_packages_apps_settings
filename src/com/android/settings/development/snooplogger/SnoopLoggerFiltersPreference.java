@@ -19,12 +19,12 @@ package com.android.settings.development.snooplogger;
 import android.content.Context;
 import android.os.SystemProperties;
 
-import androidx.preference.SwitchPreference;
+import androidx.preference.SwitchPreferenceCompat;
 
 /**
  * Bluetooth Snoop Logger Filters Preference
  */
-public class SnoopLoggerFiltersPreference extends SwitchPreference {
+public class SnoopLoggerFiltersPreference extends SwitchPreferenceCompat {
 
     private final String mKey;
     private static final String TAG = "SnoopLoggerFiltersPreference";
