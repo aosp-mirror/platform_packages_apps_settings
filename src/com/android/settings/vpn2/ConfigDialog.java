@@ -44,8 +44,6 @@ import com.android.settings.R;
 import com.android.settings.utils.AndroidKeystoreAliasLoader;
 
 import java.net.InetAddress;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -60,13 +58,18 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
         View.OnClickListener, AdapterView.OnItemSelectedListener,
         CompoundButton.OnCheckedChangeListener {
     private static final String TAG = "ConfigDialog";
+    // Vpn profile constants to match with R.array.vpn_types.
+    private static final List<Integer> VPN_TYPES = List.of(
+            VpnProfile.TYPE_IKEV2_IPSEC_USER_PASS,
+            VpnProfile.TYPE_IKEV2_IPSEC_PSK,
+            VpnProfile.TYPE_IKEV2_IPSEC_RSA
+    );
+
     private final DialogInterface.OnClickListener mListener;
     private final VpnProfile mProfile;
 
     private boolean mEditing;
     private boolean mExists;
-    private List<String> mTotalTypes;
-    private List<String> mAllowedTypes;
 
     private View mView;
 
@@ -137,13 +140,7 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
         // Second, copy values from the profile.
         mName.setText(mProfile.name);
         setTypesByFeature(mType);
-        // Not all types will be available to the user. Find the index corresponding to the
-        // string of the profile's type.
-        if (mAllowedTypes != null && mTotalTypes != null) {
-            mType.setSelection(mAllowedTypes.indexOf(mTotalTypes.get(mProfile.type)));
-        } else {
-            Log.w(TAG, "Allowed or Total vpn types not initialized when setting initial selection");
-        }
+        mType.setSelection(convertVpnProfileConstantToTypeIndex(mProfile.type));
         mServer.setText(mProfile.server);
         if (mProfile.saveLogin) {
             mUsername.setText(mProfile.username);
@@ -217,12 +214,6 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
                 // Create a button to forget the profile if it has already been saved..
                 setButton(DialogInterface.BUTTON_NEUTRAL,
                         context.getString(R.string.vpn_forget), mListener);
-
-                // Display warning subtitle if the existing VPN is an insecure type...
-                if (VpnProfile.isLegacyType(mProfile.type)) {
-                    TextView subtitle = mView.findViewById(R.id.dialog_alert_subtitle);
-                    subtitle.setVisibility(View.VISIBLE);
-                }
             }
 
             // Create a button to save the profile.
@@ -285,10 +276,7 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         if (parent == mType) {
-            // Because the spinner may not display all available types,
-            // convert the selected position into the actual vpn profile type integer.
-            final int profileType = convertAllowedIndexToProfileType(position);
-            changeType(profileType);
+            changeType(VPN_TYPES.get(position));
         } else if (parent == mProxySettings) {
             updateProxyFieldsVisibility(position);
         }
@@ -382,8 +370,9 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
 
             // Configure networking option visibility
             // TODO(b/149070123): Add ability for platform VPNs to support DNS & routes
+            final int position = mType.getSelectedItemPosition();
             final int visibility =
-                    isLegacyType(getSelectedVpnType()) ? View.VISIBLE : View.GONE;
+                    isLegacyType(VPN_TYPES.get(position)) ? View.VISIBLE : View.GONE;
             mView.findViewById(R.id.network_options).setVisibility(visibility);
         } else {
             mView.findViewById(R.id.options).setVisibility(View.GONE);
@@ -443,7 +432,8 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
             return false;
         }
 
-        final int type = getSelectedVpnType();
+        final int position = mType.getSelectedItemPosition();
+        final int type = VPN_TYPES.get(position);
         if (!editing && requiresUsernamePassword(type)) {
             return mUsername.getText().length() != 0 && mPassword.getText().length() != 0;
         }
@@ -515,9 +505,9 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
 
     private void setTypesByFeature(Spinner typeSpinner) {
         String[] types = getContext().getResources().getStringArray(R.array.vpn_types);
-        mTotalTypes = new ArrayList<>(Arrays.asList(types));
-        mAllowedTypes = new ArrayList<>(Arrays.asList(types));
-
+        if (types.length != VPN_TYPES.size()) {
+            Log.wtf(TAG, "VPN_TYPES array length does not match string array");
+        }
         // Although FEATURE_IPSEC_TUNNELS should always be present in android S and beyond,
         // keep this check here just to be safe.
         if (!getContext().getPackageManager().hasSystemFeature(
@@ -532,17 +522,6 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
             mProfile.type = VpnProfile.TYPE_IKEV2_IPSEC_USER_PASS;
         }
 
-        // Remove all types which are legacy types from the typesList
-        if (!VpnProfile.isLegacyType(mProfile.type)) {
-            for (int i = mAllowedTypes.size() - 1; i >= 0; i--) {
-                // This must be removed from back to front in order to ensure index consistency
-                if (VpnProfile.isLegacyType(i)) {
-                    mAllowedTypes.remove(i);
-                }
-            }
-
-            types = mAllowedTypes.toArray(new String[0]);
-        }
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 getContext(), android.R.layout.simple_spinner_item, types);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -606,7 +585,8 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
         // First, save common fields.
         VpnProfile profile = new VpnProfile(mProfile.key);
         profile.name = mName.getText().toString();
-        profile.type = getSelectedVpnType();
+        final int position = mType.getSelectedItemPosition();
+        profile.type = VPN_TYPES.get(position);
         profile.server = mServer.getText().toString().trim();
         profile.username = mUsername.getText().toString();
         profile.password = mPassword.getText().toString();
@@ -692,19 +672,13 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
         return ProxyUtils.validate(host, port, "") == ProxyUtils.PROXY_VALID;
     }
 
-    private int getSelectedVpnType() {
-        return convertAllowedIndexToProfileType(mType.getSelectedItemPosition());
-    }
-
-    private int convertAllowedIndexToProfileType(int allowedSelectedPosition) {
-        if (mAllowedTypes != null && mTotalTypes != null) {
-            final String typeString = mAllowedTypes.get(allowedSelectedPosition);
-            final int profileType = mTotalTypes.indexOf(typeString);
-            return profileType;
-        } else {
-            Log.w(TAG, "Allowed or Total vpn types not initialized when converting protileType");
-            return allowedSelectedPosition;
+    private int convertVpnProfileConstantToTypeIndex(int vpnType) {
+        final int typeIndex = VPN_TYPES.indexOf(vpnType);
+        if (typeIndex == -1) {
+            // Existing legacy profile type
+            Log.wtf(TAG, "Invalid existing profile type");
+            return 0;
         }
+        return typeIndex;
     }
-
 }
