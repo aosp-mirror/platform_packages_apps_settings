@@ -100,7 +100,6 @@ public class AccountPreferenceController extends AbstractPreferenceController
     private SparseArray<ProfileData> mProfiles = new SparseArray<ProfileData>();
     private ManagedProfileBroadcastReceiver mManagedProfileBroadcastReceiver =
             new ManagedProfileBroadcastReceiver();
-    private Preference mProfileNotAvailablePreference;
     private String[] mAuthorities;
     private int mAuthoritiesCount = 0;
     private DashboardFragment mFragment;
@@ -531,18 +530,19 @@ public class AccountPreferenceController extends AbstractPreferenceController
         } else {
             profileData.preferenceGroup.removeAll();
             // Put a label instead of the accounts list
-            if (mProfileNotAvailablePreference == null) {
-                mProfileNotAvailablePreference =
-                        new Preference(mFragment.getPreferenceManager().getContext());
-            }
-            mProfileNotAvailablePreference.setEnabled(false);
-            mProfileNotAvailablePreference.setIcon(R.drawable.empty_icon);
-            mProfileNotAvailablePreference.setTitle(null);
-            mProfileNotAvailablePreference.setSummary(
-                    mDpm.getResources().getString(
-                            WORK_PROFILE_NOT_AVAILABLE, () -> mContext.getString(
-                    R.string.managed_profile_not_available_label)));
-            profileData.preferenceGroup.addPreference(mProfileNotAvailablePreference);
+            final Preference profileNotAvailablePreference =
+                    new Preference(mFragment.getPreferenceManager().getContext());
+            profileNotAvailablePreference.setEnabled(false);
+            profileNotAvailablePreference.setIcon(R.drawable.empty_icon);
+            profileNotAvailablePreference.setTitle(null);
+            profileNotAvailablePreference.setSummary(
+                    mDpm.getResources()
+                            .getString(
+                                    WORK_PROFILE_NOT_AVAILABLE,
+                                    () ->
+                                            mContext.getString(
+                                                    R.string.managed_profile_not_available_label)));
+            profileData.preferenceGroup.addPreference(profileNotAvailablePreference);
         }
         if (profileData.removeWorkProfilePreference != null) {
             profileData.preferenceGroup.addPreference(profileData.removeWorkProfilePreference);
