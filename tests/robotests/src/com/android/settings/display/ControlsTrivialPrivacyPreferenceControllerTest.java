@@ -20,6 +20,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.spy;
@@ -220,7 +221,7 @@ public class ControlsTrivialPrivacyPreferenceControllerTest {
             final ResolveInfo resolveInfo = new ResolveInfo();
             resolveInfo.activityInfo = activityInfo;
 
-            when(mPackageManager.resolveActivity(any(), any())).thenReturn(resolveInfo);
+            when(mPackageManager.resolveActivity(any(), anyInt())).thenReturn(resolveInfo);
         }
     }
 }
