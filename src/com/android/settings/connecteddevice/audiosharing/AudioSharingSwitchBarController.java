@@ -58,11 +58,17 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
         implements DefaultLifecycleObserver, OnCheckedChangeListener {
     private static final String TAG = "AudioSharingSwitchBarCtl";
     private static final String PREF_KEY = "audio_sharing_main_switch";
+
+    interface OnSwitchBarChangedListener {
+        void onSwitchBarChanged(boolean newState);
+    }
+
     private final SettingsMainSwitchBar mSwitchBar;
     private final LocalBluetoothManager mBtManager;
     private final LocalBluetoothLeBroadcast mBroadcast;
     private final LocalBluetoothLeBroadcastAssistant mAssistant;
     private final Executor mExecutor;
+    private final OnSwitchBarChangedListener mListener;
     private DashboardFragment mFragment;
     private List<BluetoothDevice> mTargetSinks = new ArrayList<>();
 
@@ -196,9 +202,11 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                         BluetoothLeBroadcastReceiveState state) {}
             };
 
-    AudioSharingSwitchBarController(Context context, SettingsMainSwitchBar switchBar) {
+    AudioSharingSwitchBarController(
+            Context context, SettingsMainSwitchBar switchBar, OnSwitchBarChangedListener listener) {
         super(context, PREF_KEY);
         mSwitchBar = switchBar;
+        mListener = listener;
         mBtManager = Utils.getLocalBtManager(context);
         mBroadcast = mBtManager.getProfileManager().getLeAudioBroadcastProfile();
         mAssistant = mBtManager.getProfileManager().getLeAudioBroadcastAssistantProfile();
@@ -326,8 +334,12 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
     private void updateSwitch() {
         ThreadUtils.postOnMainThread(
                 () -> {
-                    mSwitchBar.setChecked(isBroadcasting());
+                    boolean isBroadcasting = isBroadcasting();
+                    if (mSwitchBar.isChecked() != isBroadcasting) {
+                        mSwitchBar.setChecked(isBroadcasting);
+                    }
                     mSwitchBar.setEnabled(true);
+                    mListener.onSwitchBarChanged(isBroadcasting);
                 });
     }
 
