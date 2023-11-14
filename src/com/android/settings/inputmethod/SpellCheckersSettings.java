@@ -133,6 +133,7 @@ public class SpellCheckersSettings extends SettingsPreferenceFragment
             if (preference instanceof SpellCheckerPreference) {
                 final SpellCheckerPreference pref = (SpellCheckerPreference) preference;
                 pref.setSelected(mCurrentSci);
+                pref.setEnabled(mEnabledScis != null);
             }
         }
         mSpellCheckerLanaguagePref.setEnabled(isSpellCheckerEnabled && mCurrentSci != null);
