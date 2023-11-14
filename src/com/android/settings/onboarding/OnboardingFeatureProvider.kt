@@ -15,6 +15,8 @@
  */
 package com.android.settings.onboarding
 
+import android.app.backup.BackupHelper
+import android.app.backup.BackupRestoreEventLogger
 import android.content.Context
 
 /**
@@ -29,4 +31,12 @@ interface OnboardingFeatureProvider {
      * @param preferenceKey The key to distinguish which preference has been changed.
      */
     fun markPreferenceHasChanged(context: Context, preferenceKey: String)
+
+    /**
+     * Return a BackupHelper for backup sound related settings.
+     *
+     * @param context App context
+     * @param logger To log B&R stats.
+     */
+    fun getSoundBackupHelper(context: Context, logger: BackupRestoreEventLogger): BackupHelper
 }
