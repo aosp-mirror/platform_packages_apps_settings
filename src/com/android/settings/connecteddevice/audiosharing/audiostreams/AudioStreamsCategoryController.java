@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.connecteddevice.audiosharing;
+package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
 import android.content.Context;
 
@@ -29,6 +29,8 @@ public class AudioStreamsCategoryController extends PreferenceCategoryController
 
     @Override
     public int getAvailabilityStatus() {
-        return Flags.enableLeAudioQrCodePrivateBroadcastSharing() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        return Flags.enableLeAudioQrCodePrivateBroadcastSharing()
+                ? AVAILABLE
+                : UNSUPPORTED_ON_DEVICE;
     }
 }
