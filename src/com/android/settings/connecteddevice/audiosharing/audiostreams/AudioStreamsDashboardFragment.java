@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.connecteddevice.audiosharing;
+package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
 import android.content.Context;
 import android.os.Bundle;

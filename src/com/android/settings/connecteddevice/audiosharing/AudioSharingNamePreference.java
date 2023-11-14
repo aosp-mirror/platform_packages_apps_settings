@@ -24,6 +24,7 @@ import android.widget.ImageButton;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
+import com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsQrCodeFragment;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.widget.ValidatedEditTextPreference;
 
