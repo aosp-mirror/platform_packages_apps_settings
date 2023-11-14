@@ -32,7 +32,6 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
-import android.util.FeatureFlagUtils;
 import android.view.accessibility.AccessibilityManager;
 
 import androidx.test.core.app.ApplicationProvider;
@@ -158,8 +157,6 @@ public class AccessibilityDetailsSettingsFragmentTest {
 
     @Test
     public void onCreate_hearingAidsComponentName_launchAccessibilityHearingAidsFragment() {
-        FeatureFlagUtils.setEnabled(mContext,
-                FeatureFlagUtils.SETTINGS_ACCESSIBILITY_HEARING_AID_PAGE, true);
         Intent intent = new Intent();
         intent.putExtra(Intent.EXTRA_COMPONENT_NAME,
                 ACCESSIBILITY_HEARING_AIDS_COMPONENT_NAME.flattenToString());
