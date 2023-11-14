@@ -44,12 +44,6 @@
         android:title="@string/private_space_category_system">
 
         <Preference
-            android:key="private_space_create"
-            android:title="@string/private_space_create_title"
-            settings:controller="com.android.settings.privatespace.CreatePrivateSpaceController"
-            settings:searchable="false" />
-
-        <Preference
             android:key="private_space_delete"
             android:title="@string/private_space_delete_title"
             settings:controller="com.android.settings.privatespace.DeletePrivateSpaceController"
