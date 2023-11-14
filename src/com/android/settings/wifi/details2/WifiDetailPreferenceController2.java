@@ -59,7 +59,6 @@ import android.widget.Toast;
 import androidx.annotation.VisibleForTesting;
 import androidx.core.text.BidiFormatter;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.RecyclerView;
@@ -184,7 +183,6 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
     private Preference mSubnetPref;
     private Preference mDnsPref;
     private Preference mTypePref;
-    private PreferenceCategory mIpv6Category;
     private Preference mIpv6AddressPref;
     private final IconInjector mIconInjector;
     private final Clock mClock;
@@ -376,8 +374,6 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
         mSubnetPref = screen.findPreference(KEY_SUBNET_MASK_PREF);
         mDnsPref = screen.findPreference(KEY_DNS_PREF);
         mTypePref = screen.findPreference(KEY_WIFI_TYPE_PREF);
-
-        mIpv6Category = screen.findPreference(KEY_IPV6_CATEGORY);
         mIpv6AddressPref = screen.findPreference(KEY_IPV6_ADDRESSES_PREF);
     }
 
@@ -824,7 +820,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
             mSubnetPref.setVisible(false);
             mGatewayPref.setVisible(false);
             mDnsPref.setVisible(false);
-            mIpv6Category.setVisible(false);
+            mIpv6AddressPref.setVisible(false);
             return;
         }
 
@@ -864,11 +860,11 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
         updatePreference(mDnsPref, dnsServers);
 
         if (ipv6Addresses.length() > 0) {
+            mIpv6AddressPref.setVisible(true);
             mIpv6AddressPref.setSummary(
                     BidiFormatter.getInstance().unicodeWrap(ipv6Addresses.toString()));
-            mIpv6Category.setVisible(true);
         } else {
-            mIpv6Category.setVisible(false);
+            mIpv6AddressPref.setVisible(false);
         }
     }
 

@@ -234,7 +234,7 @@ final class AnomalyEventWrapper {
         }
         preference.setTitle(titleString);
         preference.setIconResourceId(getIconResId());
-        preference.setMainButtonStrokeColorResourceId(getColorResId());
+        preference.setButtonColorResourceId(getColorResId());
         preference.setMainButtonLabel(getMainBtnString());
         preference.setDismissButtonLabel(getDismissBtnString());
         return true;
