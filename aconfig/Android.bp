@@ -25,3 +25,14 @@ java_aconfig_library {
     name: "factory_reset_flags_lib",
     aconfig_declarations: "factory_reset_flags",
 }
+
+aconfig_declarations {
+    name: "media_drm_flags",
+    package: "com.android.settings.media_drm",
+    srcs: ["media_drm/*.aconfig"],
+}
+
+java_aconfig_library {
+    name: "MediaDrmSettingsFlagsLib",
+    aconfig_declarations: "media_drm_flags",
+}
