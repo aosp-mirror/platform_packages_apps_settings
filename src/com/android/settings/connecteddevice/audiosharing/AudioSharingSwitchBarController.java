@@ -16,13 +16,11 @@
 
 package com.android.settings.connecteddevice.audiosharing;
 
-import android.bluetooth.BluetoothCsipSetCoordinator;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeBroadcast;
 import android.bluetooth.BluetoothLeBroadcastAssistant;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
-import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.util.Log;
 import android.widget.CompoundButton;
@@ -37,17 +35,14 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.flags.Flags;
 import com.android.settings.widget.SettingsMainSwitchBar;
+import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
-import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.utils.ThreadUtils;
 
-import com.google.common.collect.ImmutableList;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -273,18 +268,17 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
             mSwitchBar.setEnabled(true);
             return;
         }
-        Map<Integer, List<CachedBluetoothDevice>> groupedDevices = fetchConnectedDevicesByGroupId();
+        Map<Integer, List<CachedBluetoothDevice>> groupedDevices =
+                AudioSharingUtils.fetchConnectedDevicesByGroupId(mBtManager);
         ArrayList<AudioSharingDeviceItem> deviceItems = new ArrayList<>();
         Optional<Integer> activeGroupId = Optional.empty();
         for (List<CachedBluetoothDevice> devices : groupedDevices.values()) {
             // Use random device in the group to represent the group.
             CachedBluetoothDevice device = devices.get(0);
-            // TODO: add BluetoothUtils.isActiveLeAudioDevice to avoid directly using isActiveDevice
-            if (device.isActiveDevice(BluetoothProfile.LE_AUDIO)) {
+            if (BluetoothUtils.isActiveLeAudioDevice(device)) {
                 activeGroupId = Optional.of(device.getGroupId());
             } else {
-                AudioSharingDeviceItem item =
-                        new AudioSharingDeviceItem(device.getName(), device.getGroupId());
+                AudioSharingDeviceItem item = AudioSharingUtils.buildAudioSharingDeviceItem(device);
                 deviceItems.add(item);
             }
         }
@@ -345,31 +339,6 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
 
     private boolean isBroadcasting() {
         return mBroadcast != null && mBroadcast.isEnabled(null);
-    }
-
-    private Map<Integer, List<CachedBluetoothDevice>> fetchConnectedDevicesByGroupId() {
-        // TODO: filter out devices with le audio disabled.
-        List<BluetoothDevice> connectedDevices =
-                mAssistant == null ? ImmutableList.of() : mAssistant.getConnectedDevices();
-        Map<Integer, List<CachedBluetoothDevice>> groupedDevices = new HashMap<>();
-        CachedBluetoothDeviceManager cacheManager = mBtManager.getCachedDeviceManager();
-        for (BluetoothDevice device : connectedDevices) {
-            CachedBluetoothDevice cachedDevice = cacheManager.findDevice(device);
-            if (cachedDevice == null) {
-                Log.d(TAG, "Skip device due to not being cached: " + device.getAnonymizedAddress());
-                continue;
-            }
-            int groupId = cachedDevice.getGroupId();
-            if (groupId == BluetoothCsipSetCoordinator.GROUP_ID_INVALID) {
-                Log.d(TAG, "Skip device due to no valid group id");
-                continue;
-            }
-            if (!groupedDevices.containsKey(groupId)) {
-                groupedDevices.put(groupId, new ArrayList<>());
-            }
-            groupedDevices.get(groupId).add(cachedDevice);
-        }
-        return groupedDevices;
     }
 
     private void addSourceToTargetDevices(List<BluetoothDevice> sinks) {

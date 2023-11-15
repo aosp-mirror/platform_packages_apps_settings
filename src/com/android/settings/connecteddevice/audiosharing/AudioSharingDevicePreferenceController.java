@@ -17,7 +17,6 @@
 package com.android.settings.connecteddevice.audiosharing;
 
 import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothCsipSetCoordinator;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeBroadcast;
 import android.bluetooth.BluetoothLeBroadcastAssistant;
@@ -43,16 +42,12 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.flags.Flags;
 import com.android.settingslib.bluetooth.BluetoothCallback;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
-import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.LeAudioProfile;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
-import com.google.common.collect.ImmutableList;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Executor;
@@ -378,13 +373,14 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
             // Do nothing for ineligible (non LE audio) remote device when no sharing session.
         } else {
             Map<Integer, List<CachedBluetoothDevice>> groupedDevices =
-                    fetchConnectedDevicesByGroupId();
+                    AudioSharingUtils.fetchConnectedDevicesByGroupId(mLocalBtManager);
             // Handle connected eligible (LE audio) remote device
             if (isBroadcasting()) {
                 // Show audio sharing switch or join dialog according to device count in the sharing
                 // session.
                 ArrayList<AudioSharingDeviceItem> deviceItemsInSharingSession =
-                        buildDeviceItemsInSharingSession(groupedDevices);
+                        AudioSharingUtils.buildOrderedDeviceItemsInSharingSession(
+                                groupedDevices, mLocalBtManager);
                 // Show audio sharing switch dialog when the third eligible (LE audio) remote device
                 // connected during a sharing session.
                 if (deviceItemsInSharingSession.size() >= 2) {
@@ -432,8 +428,7 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
                     if (device.getGroupId() == cachedDevice.getGroupId()) {
                         continue;
                     }
-                    deviceItems.add(
-                            new AudioSharingDeviceItem(device.getName(), device.getGroupId()));
+                    deviceItems.add(AudioSharingUtils.buildAudioSharingDeviceItem(device));
                 }
                 // Show audio sharing join dialog when the second eligible (LE audio) remote device
                 // connect and no sharing session.
@@ -492,52 +487,6 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
 
     private boolean isBroadcasting() {
         return mBroadcast != null && mBroadcast.isEnabled(null);
-    }
-
-    private Map<Integer, List<CachedBluetoothDevice>> fetchConnectedDevicesByGroupId() {
-        // TODO: filter out devices with le audio disabled.
-        List<BluetoothDevice> connectedDevices =
-                mAssistant == null ? ImmutableList.of() : mAssistant.getConnectedDevices();
-        Map<Integer, List<CachedBluetoothDevice>> groupedDevices = new HashMap<>();
-        CachedBluetoothDeviceManager cacheManager = mLocalBtManager.getCachedDeviceManager();
-        for (BluetoothDevice device : connectedDevices) {
-            CachedBluetoothDevice cachedDevice = cacheManager.findDevice(device);
-            if (cachedDevice == null) {
-                Log.d(TAG, "Skip device due to not being cached: " + device.getAnonymizedAddress());
-                continue;
-            }
-            int groupId = cachedDevice.getGroupId();
-            if (groupId == BluetoothCsipSetCoordinator.GROUP_ID_INVALID) {
-                Log.d(
-                        TAG,
-                        "Skip device due to no valid group id: " + device.getAnonymizedAddress());
-                continue;
-            }
-            if (!groupedDevices.containsKey(groupId)) {
-                groupedDevices.put(groupId, new ArrayList<>());
-            }
-            groupedDevices.get(groupId).add(cachedDevice);
-        }
-        return groupedDevices;
-    }
-
-    private ArrayList<AudioSharingDeviceItem> buildDeviceItemsInSharingSession(
-            Map<Integer, List<CachedBluetoothDevice>> groupedDevices) {
-        ArrayList<AudioSharingDeviceItem> deviceItems = new ArrayList<>();
-        for (List<CachedBluetoothDevice> devices : groupedDevices.values()) {
-            for (CachedBluetoothDevice device : devices) {
-                List<BluetoothLeBroadcastReceiveState> sourceList =
-                        mAssistant.getAllSources(device.getDevice());
-                if (!sourceList.isEmpty()) {
-                    // Use random device in the group within the sharing session to
-                    // represent the group.
-                    deviceItems.add(
-                            new AudioSharingDeviceItem(device.getName(), device.getGroupId()));
-                    break;
-                }
-            }
-        }
-        return deviceItems;
     }
 
     private void addSourceToTargetDevices(List<BluetoothDevice> sinks) {
