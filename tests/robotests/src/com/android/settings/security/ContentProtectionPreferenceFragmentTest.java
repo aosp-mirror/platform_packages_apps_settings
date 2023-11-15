@@ -113,8 +113,14 @@ public class ContentProtectionPreferenceFragmentTest {
         final List<String> allKeys =
                 XmlTestUtils.getKeysFromPreferenceXml(
                         mContext, R.layout.content_protection_preference_fragment);
+        final List<String> nonIndexableKeysExpected =
+                List.of(
+                        "content_protection_preference_top_intro",
+                        "content_protection_preference_subpage_illustration",
+                        "content_protection_preference_user_consent_work_profile_switch");
 
         assertThat(allKeys).containsAtLeastElementsIn(nonIndexableKeys);
+        assertThat(nonIndexableKeys).isEqualTo(nonIndexableKeysExpected);
     }
 
     @Test
@@ -132,7 +138,7 @@ public class ContentProtectionPreferenceFragmentTest {
                 XmlTestUtils.getKeysFromPreferenceXml(
                         mContext, R.layout.content_protection_preference_fragment);
 
-        assertThat(nonIndexableKeys).containsAnyIn(allKeys);
+        assertThat(nonIndexableKeys).isEqualTo(allKeys);
     }
 
     @Test
