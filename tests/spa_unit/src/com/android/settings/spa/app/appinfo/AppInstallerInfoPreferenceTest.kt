@@ -26,6 +26,7 @@ import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotDisplayed
 import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.hasText
+import androidx.compose.ui.test.isEnabled
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
@@ -46,9 +47,10 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.MockitoSession
-import org.mockito.Spy
 import org.mockito.kotlin.any
+import org.mockito.kotlin.doNothing
 import org.mockito.kotlin.eq
+import org.mockito.kotlin.spy
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 import org.mockito.quality.Strictness
@@ -60,8 +62,9 @@ class AppInstallerInfoPreferenceTest {
 
     private lateinit var mockSession: MockitoSession
 
-    @Spy
-    private val context: Context = ApplicationProvider.getApplicationContext()
+    private val context: Context = spy(ApplicationProvider.getApplicationContext()) {
+        doNothing().whenever(mock).startActivityAsUser(any(), any())
+    }
 
     @Before
     fun setUp() {
@@ -78,8 +81,7 @@ class AppInstallerInfoPreferenceTest {
             .thenReturn(STORE_LINK)
         whenever(Utils.getApplicationLabel(context, INSTALLER_PACKAGE_NAME))
             .thenReturn(INSTALLER_PACKAGE_LABEL)
-        whenever(AppUtils.isMainlineModule(any(), eq(PACKAGE_NAME)))
-            .thenReturn(false)
+        whenever(AppUtils.isMainlineModule(any(), eq(PACKAGE_NAME))).thenReturn(false)
     }
 
     @After
@@ -134,11 +136,8 @@ class AppInstallerInfoPreferenceTest {
         }
 
         setContent(instantApp)
-        waitUntilDisplayed()
 
-        composeTestRule.onNodeWithText("More info on installer label")
-            .assertIsDisplayed()
-            .assertIsEnabled()
+        composeTestRule.waitUntilExists(hasText("More info on installer label").and(isEnabled()))
     }
 
     @Test
