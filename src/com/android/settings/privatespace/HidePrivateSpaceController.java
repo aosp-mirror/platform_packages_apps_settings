@@ -16,10 +16,10 @@
 
 package com.android.settings.privatespace;
 
-import static android.provider.Settings.Secure.HIDE_PRIVATESPACE_ENTRY_POINT;
+import static com.android.settings.privatespace.PrivateSpaceMaintainer.HIDE_PRIVATE_SPACE_ENTRY_POINT_DISABLED_VAL;
+import static com.android.settings.privatespace.PrivateSpaceMaintainer.HIDE_PRIVATE_SPACE_ENTRY_POINT_ENABLED_VAL;
 
 import android.content.Context;
-import android.provider.Settings;
 
 import com.android.settings.core.TogglePreferenceController;
 
@@ -28,11 +28,11 @@ import com.android.settings.core.TogglePreferenceController;
  *  in All Apps.
  */
 public class HidePrivateSpaceController extends TogglePreferenceController {
-    private static final int DISABLED_VALUE = 0;
-    private static final int ENABLED_VALUE = 1;
+    private final PrivateSpaceMaintainer mPrivateSpaceMaintainer;
 
     public HidePrivateSpaceController(Context context, String key) {
         super(context, key);
+        mPrivateSpaceMaintainer = PrivateSpaceMaintainer.getInstance(context);
     }
 
     @Override
@@ -43,14 +43,15 @@ public class HidePrivateSpaceController extends TogglePreferenceController {
 
     @Override
     public boolean isChecked() {
-        return Settings.Secure.getInt(mContext.getContentResolver(),
-                HIDE_PRIVATESPACE_ENTRY_POINT, DISABLED_VALUE) != DISABLED_VALUE;
+        return mPrivateSpaceMaintainer.getHidePrivateSpaceEntryPointSetting()
+                != HIDE_PRIVATE_SPACE_ENTRY_POINT_DISABLED_VAL;
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        Settings.Secure.putInt(mContext.getContentResolver(), HIDE_PRIVATESPACE_ENTRY_POINT,
-                isChecked ? ENABLED_VALUE : DISABLED_VALUE);
+        mPrivateSpaceMaintainer.setHidePrivateSpaceEntryPointSetting(
+                isChecked ? HIDE_PRIVATE_SPACE_ENTRY_POINT_ENABLED_VAL
+                        : HIDE_PRIVATE_SPACE_ENTRY_POINT_DISABLED_VAL);
         return true;
     }
 
