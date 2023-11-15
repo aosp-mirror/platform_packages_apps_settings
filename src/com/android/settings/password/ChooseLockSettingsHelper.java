@@ -118,6 +118,14 @@ public final class ChooseLockSettingsHelper {
     public static final String EXTRA_KEY_DEVICE_PASSWORD_REQUIREMENT_ONLY =
             "device_password_requirement_only";
 
+    /** Intent extra for passing the screen title resource ID to show in the set lock screen. */
+    public static final String EXTRA_KEY_CHOOSE_LOCK_SCREEN_TITLE =
+            "choose_lock_setup_screen_title";
+
+    /** Intent extra for passing the description resource ID to show in the set lock screen. */
+    public static final String EXTRA_KEY_CHOOSE_LOCK_SCREEN_DESCRIPTION =
+            "choose_lock_setup_screen_description";
+
     @VisibleForTesting @NonNull LockPatternUtils mLockPatternUtils;
     @NonNull private final Activity mActivity;
     @Nullable private final Fragment mFragment;
