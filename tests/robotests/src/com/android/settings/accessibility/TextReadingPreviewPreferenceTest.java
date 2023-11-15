@@ -28,6 +28,7 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import androidx.preference.PreferenceViewHolder;
@@ -144,6 +145,44 @@ public class TextReadingPreviewPreferenceTest {
         mViewPager.setCurrentItem(currentItem);
 
         assertThat(mTextReadingPreviewPreference.getCurrentItem()).isEqualTo(currentItem);
+    }
+
+    @Test
+    public void adjustPaddings_setMinPaddingsLessThanXMLValue_paddingsNotIncreased() {
+        // get the default xml padding value
+        mTextReadingPreviewPreference.onBindViewHolder(mHolder);
+        final FrameLayout previewLayout = (FrameLayout) mHolder.itemView;
+        final LinearLayout backgroundView = previewLayout.findViewById(R.id.preview_background);
+
+        final int currentLayoutPaddingStart = previewLayout.getPaddingStart();
+        final int currentBackgroundPaddingStart = backgroundView.getPaddingStart();
+        mTextReadingPreviewPreference.setLayoutMinHorizontalPadding(
+                currentLayoutPaddingStart - 10);
+        mTextReadingPreviewPreference.setBackgroundMinHorizontalPadding(
+                currentBackgroundPaddingStart - 10);
+        mTextReadingPreviewPreference.adjustPaddings(previewLayout, backgroundView);
+
+        assertThat(previewLayout.getPaddingStart()).isEqualTo(currentLayoutPaddingStart);
+        assertThat(backgroundView.getPaddingStart()).isEqualTo(currentBackgroundPaddingStart);
+    }
+
+    @Test
+    public void adjustPaddings_setMinPaddingsLargerThanXMLValue_paddingsIncreased() {
+        // get the default xml padding value
+        mTextReadingPreviewPreference.onBindViewHolder(mHolder);
+        final FrameLayout previewLayout = (FrameLayout) mHolder.itemView;
+        final LinearLayout backgroundView = previewLayout.findViewById(R.id.preview_background);
+
+        final int currentLayoutPaddingStart = previewLayout.getPaddingStart();
+        final int currentBackgroundPaddingStart = backgroundView.getPaddingStart();
+        mTextReadingPreviewPreference.setLayoutMinHorizontalPadding(
+                currentLayoutPaddingStart + 10);
+        mTextReadingPreviewPreference.setBackgroundMinHorizontalPadding(
+                currentBackgroundPaddingStart + 10);
+        mTextReadingPreviewPreference.adjustPaddings(previewLayout, backgroundView);
+
+        assertThat(previewLayout.getPaddingStart()).isEqualTo(currentLayoutPaddingStart + 10);
+        assertThat(backgroundView.getPaddingStart()).isEqualTo(currentBackgroundPaddingStart + 10);
     }
 
     private static Configuration[] createConfigurations(int count) {
