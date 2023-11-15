@@ -45,6 +45,7 @@ import android.content.pm.UserInfo;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Flags;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.text.BidiFormatter;
@@ -297,13 +298,22 @@ public class AccountPreferenceController extends AbstractPreferenceController
         } else {
             List<UserInfo> profiles = mUm.getProfiles(UserHandle.myUserId());
             for (UserInfo profile : profiles) {
-                if ((profile.isManagedProfile()
-                            && (mType & ProfileSelectFragment.ProfileType.WORK) != 0)
-                        || (profile.isPrivateProfile()
+                // Check if this controller can handle this profile - e.g. if this controller's
+                // mType has the WORK flag set and this profile is a managed profile.
+                // If there are no tabs then this controller will support all profile types -
+                // - ProfileType.ALL.
+                // At the same time we should check the user property to make sure if this profile
+                // should be shown or not.
+                if (((profile.isManagedProfile()
+                        && (mType & ProfileSelectFragment.ProfileType.WORK) != 0)
+                        || (Flags.allowPrivateProfile()
+                            && profile.isPrivateProfile()
                             && (mType & ProfileSelectFragment.ProfileType.PRIVATE) != 0)
                         || (!profile.isManagedProfile()
-                            && !profile.isPrivateProfile()
-                            && (mType & ProfileSelectFragment.ProfileType.PERSONAL) != 0)) {
+                            && !(Flags.allowPrivateProfile() && profile.isPrivateProfile())
+                            && (mType & ProfileSelectFragment.ProfileType.PERSONAL) != 0))
+                        && !(mUm.getUserProperties(profile.getUserHandle())
+                            .getHideInSettingsInQuietMode() && profile.isQuietModeEnabled())) {
                     updateProfileUi(profile);
                 }
             }
