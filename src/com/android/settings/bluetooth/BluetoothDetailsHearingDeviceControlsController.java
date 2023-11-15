@@ -18,7 +18,6 @@ package com.android.settings.bluetooth;
 
 import android.content.Context;
 import android.text.TextUtils;
-import android.util.FeatureFlagUtils;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
@@ -51,8 +50,7 @@ public class BluetoothDetailsHearingDeviceControlsController extends BluetoothDe
 
     @Override
     public boolean isAvailable() {
-        return mCachedDevice.isHearingAidDevice() && FeatureFlagUtils.isEnabled(mContext,
-                FeatureFlagUtils.SETTINGS_ACCESSIBILITY_HEARING_AID_PAGE);
+        return mCachedDevice.isHearingAidDevice();
     }
 
     @Override

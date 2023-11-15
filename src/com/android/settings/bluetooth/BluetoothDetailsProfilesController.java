@@ -126,9 +126,12 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
         pref.setOnPreferenceClickListener(this);
         pref.setOrder(profile.getOrdinal());
 
-        if (profile instanceof LeAudioProfile && !isModelNameInAllowList(
+        boolean isLeEnabledByDefault =
+                SystemProperties.getBoolean(LE_AUDIO_CONNECTION_BY_DEFAULT_PROPERTY, true);
+
+        if (profile instanceof LeAudioProfile && (!isLeEnabledByDefault || !isModelNameInAllowList(
                 BluetoothUtils.getStringMetaData(mCachedDevice.getDevice(),
-                        METADATA_MODEL_NAME))) {
+                        METADATA_MODEL_NAME)))) {
             pref.setSummary(R.string.device_details_leaudio_toggle_summary);
         }
         return pref;

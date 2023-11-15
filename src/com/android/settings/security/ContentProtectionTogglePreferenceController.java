@@ -62,7 +62,6 @@ public class ContentProtectionTogglePreferenceController extends TogglePreferenc
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        mSwitchBar.setChecked(isChecked);
         Settings.Global.putInt(
                 mContentResolver, KEY_CONTENT_PROTECTION_PREFERENCE, isChecked ? 1 : -1);
         return true;

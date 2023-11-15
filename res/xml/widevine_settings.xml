@@ -18,16 +18,12 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:title="@string/audio_streams_title">
+    android:title="@string/widevine_settings_title"
+    settings:searchable="false">
 
-    <Preference
-        android:key="audio_streams_scan_qr_code"
-        android:title="@string/bluetooth_find_broadcast_button_scan"
-        android:icon="@drawable/ic_add_24dp"
-        android:summary="@string/audio_streams_qr_code_summary" />
-
-    <com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsProgressCategoryPreference
-        android:key="audio_streams_nearby_category"
-        android:title="@string/audio_streams_pref_title" />
-
+    <SwitchPreference
+        android:key="force_l3_fallback"
+        android:title="@string/force_l3_fallback_title"
+        android:summary="@string/force_l3_fallback_summary"
+        settings:controller="com.android.settings.development.widevine.ForceL3FallbackPreferenceController" />
 </PreferenceScreen>

@@ -34,13 +34,13 @@
 
     <PreferenceCategory
         android:key="audio_streams_settings_category"
-        android:title="@string/audio_sharing_streams_category_title"
-        settings:controller="com.android.settings.connecteddevice.audiosharing.AudioStreamsCategoryController" >
+        android:title="@string/audio_streams_category_title"
+        settings:controller="com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsCategoryController">
 
         <Preference
             android:key="audio_streams_settings"
-            android:fragment="com.android.settings.connecteddevice.audiosharing.AudioStreamsDashboardFragment"
-            android:title="@string/audio_sharing_streams_pref_title"
+            android:fragment="com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsDashboardFragment"
+            android:title="@string/audio_streams_pref_title"
             android:icon="@drawable/ic_chevron_right_24dp" />
 
     </PreferenceCategory>

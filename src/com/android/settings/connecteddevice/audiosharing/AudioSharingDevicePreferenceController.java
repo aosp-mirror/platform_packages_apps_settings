@@ -17,7 +17,9 @@
 package com.android.settings.connecteddevice.audiosharing;
 
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothCsipSetCoordinator;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothLeBroadcast;
 import android.bluetooth.BluetoothLeBroadcastAssistant;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
@@ -41,13 +43,18 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.flags.Flags;
 import com.android.settingslib.bluetooth.BluetoothCallback;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.LeAudioProfile;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
-import com.android.settingslib.bluetooth.LocalBluetoothProfile;
 
+import com.google.common.collect.ImmutableList;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -67,6 +74,67 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
     private Preference mAudioSharingSettingsPreference;
     private BluetoothDeviceUpdater mBluetoothDeviceUpdater;
     private DashboardFragment mFragment;
+    private List<BluetoothDevice> mTargetSinks = new ArrayList<>();
+
+    private final BluetoothLeBroadcast.Callback mBroadcastCallback =
+            new BluetoothLeBroadcast.Callback() {
+                @Override
+                public void onBroadcastStarted(int reason, int broadcastId) {
+                    Log.d(
+                            TAG,
+                            "onBroadcastStarted(), reason = "
+                                    + reason
+                                    + ", broadcastId = "
+                                    + broadcastId);
+                }
+
+                @Override
+                public void onBroadcastStartFailed(int reason) {
+                    Log.d(TAG, "onBroadcastStartFailed(), reason = " + reason);
+                    // TODO: handle broadcast start fail
+                }
+
+                @Override
+                public void onBroadcastMetadataChanged(
+                        int broadcastId, @NonNull BluetoothLeBroadcastMetadata metadata) {
+                    Log.d(
+                            TAG,
+                            "onBroadcastMetadataChanged(), broadcastId = "
+                                    + broadcastId
+                                    + ", metadata = "
+                                    + metadata);
+                    addSourceToTargetDevices(mTargetSinks);
+                    mTargetSinks = new ArrayList<>();
+                }
+
+                @Override
+                public void onBroadcastStopped(int reason, int broadcastId) {
+                    Log.d(
+                            TAG,
+                            "onBroadcastStopped(), reason = "
+                                    + reason
+                                    + ", broadcastId = "
+                                    + broadcastId);
+                }
+
+                @Override
+                public void onBroadcastStopFailed(int reason) {
+                    Log.d(TAG, "onBroadcastStopFailed(), reason = " + reason);
+                    // TODO: handle broadcast stop fail
+                }
+
+                @Override
+                public void onBroadcastUpdated(int reason, int broadcastId) {}
+
+                @Override
+                public void onBroadcastUpdateFailed(int reason, int broadcastId) {}
+
+                @Override
+                public void onPlaybackStarted(int reason, int broadcastId) {}
+
+                @Override
+                public void onPlaybackStopped(int reason, int broadcastId) {}
+            };
 
     private BluetoothLeBroadcastAssistant.Callback mBroadcastAssistantCallback =
             new BluetoothLeBroadcastAssistant.Callback() {
@@ -169,8 +237,8 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
             Log.d(TAG, "onStart() Bluetooth is not supported on this device");
             return;
         }
-        if (mAssistant == null) {
-            Log.d(TAG, "onStart() Broadcast assistant is not supported on this device");
+        if (mBroadcast == null || mAssistant == null) {
+            Log.d(TAG, "onStart() Broadcast or assistant is not supported on this device");
             return;
         }
         if (mBluetoothDeviceUpdater == null) {
@@ -178,6 +246,7 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
             return;
         }
         mLocalBtManager.getEventManager().registerCallback(this);
+        mBroadcast.registerServiceCallBack(mExecutor, mBroadcastCallback);
         mAssistant.registerServiceCallBack(mExecutor, mBroadcastAssistantCallback);
         mBluetoothDeviceUpdater.registerCallback();
         mBluetoothDeviceUpdater.refreshPreference();
@@ -189,8 +258,8 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
             Log.d(TAG, "onStop() Bluetooth is not supported on this device");
             return;
         }
-        if (mAssistant == null) {
-            Log.d(TAG, "onStop() Broadcast assistant is not supported on this device");
+        if (mBroadcast == null || mAssistant == null) {
+            Log.d(TAG, "onStop() Broadcast or assistant is not supported on this device");
             return;
         }
         if (mBluetoothDeviceUpdater == null) {
@@ -200,9 +269,12 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
         mLocalBtManager.getEventManager().unregisterCallback(this);
         // TODO: verify the reason for failing to unregister
         try {
+            mBroadcast.unregisterServiceCallBack(mBroadcastCallback);
             mAssistant.unregisterServiceCallBack(mBroadcastAssistantCallback);
         } catch (IllegalArgumentException e) {
-            Log.e(TAG, "Fail to unregister assistant callback due to " + e.getMessage());
+            Log.e(
+                    TAG,
+                    "Fail to unregister broadcast or assistant callback due to " + e.getMessage());
         }
         mBluetoothDeviceUpdater.unregisterCallback();
     }
@@ -263,31 +335,124 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
             Log.d(TAG, "Ignore onProfileConnectionStateChanged, not connected state");
             return;
         }
-        List<LocalBluetoothProfile> supportedProfiles = cachedDevice.getProfiles();
-        boolean isLeAudioSupported = false;
-        for (LocalBluetoothProfile profile : supportedProfiles) {
-            if (profile instanceof LeAudioProfile && profile.isEnabled(cachedDevice.getDevice())) {
-                isLeAudioSupported = true;
-            }
-            if (profile.getProfileId() != bluetoothProfile
-                    && profile.getConnectionStatus(cachedDevice.getDevice())
-                            == BluetoothProfile.STATE_CONNECTED) {
-                Log.d(
-                        TAG,
-                        "Ignore onProfileConnectionStateChanged, not the first connected profile");
-                return;
-            }
+        if (mFragment == null) {
+            Log.d(TAG, "Ignore onProfileConnectionStateChanged, no host fragment");
+            return;
         }
-        // Show stop audio sharing dialog when an ineligible (not le audio) remote device connected
-        // during a sharing session.
-        if (isBroadcasting() && !isLeAudioSupported) {
-            if (mFragment != null) {
+        if (mAssistant == null && mBroadcast == null) {
+            Log.d(
+                    TAG,
+                    "Ignore onProfileConnectionStateChanged, no broadcast or assistant supported");
+            return;
+        }
+        boolean isLeAudioSupported = isLeAudioSupported(cachedDevice);
+        // For eligible (LE audio) remote device, we only check its connected LE audio profile.
+        if (isLeAudioSupported && bluetoothProfile != BluetoothProfile.LE_AUDIO) {
+            Log.d(
+                    TAG,
+                    "Ignore onProfileConnectionStateChanged, not the le profile for le audio"
+                            + " device");
+            return;
+        }
+        boolean isFirstConnectedProfile = isFirstConnectedProfile(cachedDevice, bluetoothProfile);
+        // For ineligible (non LE audio) remote device, we only check its first connected profile.
+        if (!isLeAudioSupported && !isFirstConnectedProfile) {
+            Log.d(
+                    TAG,
+                    "Ignore onProfileConnectionStateChanged, not the first connected profile for"
+                            + " non le audio device");
+            return;
+        }
+        if (!isLeAudioSupported) {
+            // Handle connected ineligible (non LE audio) remote device
+            if (isBroadcasting()) {
+                // Show stop audio sharing dialog when an ineligible (non LE audio) remote device
+                // connected during a sharing session.
                 AudioSharingStopDialogFragment.show(
                         mFragment,
                         cachedDevice.getName(),
                         () -> {
                             mBroadcast.stopBroadcast(mBroadcast.getLatestBroadcastId());
                         });
+            }
+            // Do nothing for ineligible (non LE audio) remote device when no sharing session.
+        } else {
+            Map<Integer, List<CachedBluetoothDevice>> groupedDevices =
+                    fetchConnectedDevicesByGroupId();
+            // Handle connected eligible (LE audio) remote device
+            if (isBroadcasting()) {
+                // Show audio sharing switch or join dialog according to device count in the sharing
+                // session.
+                ArrayList<AudioSharingDeviceItem> deviceItemsInSharingSession =
+                        buildDeviceItemsInSharingSession(groupedDevices);
+                // Show audio sharing switch dialog when the third eligible (LE audio) remote device
+                // connected during a sharing session.
+                if (deviceItemsInSharingSession.size() >= 2) {
+                    AudioSharingDisconnectDialogFragment.show(
+                            mFragment,
+                            deviceItemsInSharingSession,
+                            cachedDevice.getName(),
+                            (AudioSharingDeviceItem item) -> {
+                                // Remove all sources from the device user clicked
+                                for (CachedBluetoothDevice device :
+                                        groupedDevices.get(item.getGroupId())) {
+                                    for (BluetoothLeBroadcastReceiveState source :
+                                            mAssistant.getAllSources(device.getDevice())) {
+                                        mAssistant.removeSource(
+                                                device.getDevice(), source.getSourceId());
+                                    }
+                                }
+                                // Add current broadcast to the latest connected device
+                                mAssistant.addSource(
+                                        cachedDevice.getDevice(),
+                                        mBroadcast.getLatestBluetoothLeBroadcastMetadata(),
+                                        /* isGroupOp= */ true);
+                            });
+                } else {
+                    // Show audio sharing join dialog when the first or second eligible (LE audio)
+                    // remote device connected during a sharing session.
+                    AudioSharingJoinDialogFragment.show(
+                            mFragment,
+                            deviceItemsInSharingSession,
+                            cachedDevice.getName(),
+                            () -> {
+                                // Add current broadcast to the latest connected device
+                                mAssistant.addSource(
+                                        cachedDevice.getDevice(),
+                                        mBroadcast.getLatestBluetoothLeBroadcastMetadata(),
+                                        /* isGroupOp= */ true);
+                            });
+                }
+            } else {
+                ArrayList<AudioSharingDeviceItem> deviceItems = new ArrayList<>();
+                for (List<CachedBluetoothDevice> devices : groupedDevices.values()) {
+                    // Use random device in the group within the sharing session to
+                    // represent the group.
+                    CachedBluetoothDevice device = devices.get(0);
+                    if (device.getGroupId() == cachedDevice.getGroupId()) {
+                        continue;
+                    }
+                    deviceItems.add(
+                            new AudioSharingDeviceItem(device.getName(), device.getGroupId()));
+                }
+                // Show audio sharing join dialog when the second eligible (LE audio) remote device
+                // connect and no sharing session.
+                if (deviceItems.size() == 1) {
+                    AudioSharingJoinDialogFragment.show(
+                            mFragment,
+                            deviceItems,
+                            cachedDevice.getName(),
+                            () -> {
+                                mTargetSinks = new ArrayList<>();
+                                for (List<CachedBluetoothDevice> devices :
+                                        groupedDevices.values()) {
+                                    for (CachedBluetoothDevice device : devices) {
+                                        mTargetSinks.add(device.getDevice());
+                                    }
+                                }
+                                mBroadcast.startBroadcast("test", null);
+                            });
+                }
             }
         }
     }
@@ -307,7 +472,93 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
                         fragment.getMetricsCategory());
     }
 
+    private boolean isLeAudioSupported(CachedBluetoothDevice cachedDevice) {
+        return cachedDevice.getProfiles().stream()
+                .anyMatch(
+                        profile ->
+                                profile instanceof LeAudioProfile
+                                        && profile.isEnabled(cachedDevice.getDevice()));
+    }
+
+    private boolean isFirstConnectedProfile(
+            CachedBluetoothDevice cachedDevice, int bluetoothProfile) {
+        return cachedDevice.getProfiles().stream()
+                .noneMatch(
+                        profile ->
+                                profile.getProfileId() != bluetoothProfile
+                                        && profile.getConnectionStatus(cachedDevice.getDevice())
+                                                == BluetoothProfile.STATE_CONNECTED);
+    }
+
     private boolean isBroadcasting() {
         return mBroadcast != null && mBroadcast.isEnabled(null);
+    }
+
+    private Map<Integer, List<CachedBluetoothDevice>> fetchConnectedDevicesByGroupId() {
+        // TODO: filter out devices with le audio disabled.
+        List<BluetoothDevice> connectedDevices =
+                mAssistant == null ? ImmutableList.of() : mAssistant.getConnectedDevices();
+        Map<Integer, List<CachedBluetoothDevice>> groupedDevices = new HashMap<>();
+        CachedBluetoothDeviceManager cacheManager = mLocalBtManager.getCachedDeviceManager();
+        for (BluetoothDevice device : connectedDevices) {
+            CachedBluetoothDevice cachedDevice = cacheManager.findDevice(device);
+            if (cachedDevice == null) {
+                Log.d(TAG, "Skip device due to not being cached: " + device.getAnonymizedAddress());
+                continue;
+            }
+            int groupId = cachedDevice.getGroupId();
+            if (groupId == BluetoothCsipSetCoordinator.GROUP_ID_INVALID) {
+                Log.d(
+                        TAG,
+                        "Skip device due to no valid group id: " + device.getAnonymizedAddress());
+                continue;
+            }
+            if (!groupedDevices.containsKey(groupId)) {
+                groupedDevices.put(groupId, new ArrayList<>());
+            }
+            groupedDevices.get(groupId).add(cachedDevice);
+        }
+        return groupedDevices;
+    }
+
+    private ArrayList<AudioSharingDeviceItem> buildDeviceItemsInSharingSession(
+            Map<Integer, List<CachedBluetoothDevice>> groupedDevices) {
+        ArrayList<AudioSharingDeviceItem> deviceItems = new ArrayList<>();
+        for (List<CachedBluetoothDevice> devices : groupedDevices.values()) {
+            for (CachedBluetoothDevice device : devices) {
+                List<BluetoothLeBroadcastReceiveState> sourceList =
+                        mAssistant.getAllSources(device.getDevice());
+                if (!sourceList.isEmpty()) {
+                    // Use random device in the group within the sharing session to
+                    // represent the group.
+                    deviceItems.add(
+                            new AudioSharingDeviceItem(device.getName(), device.getGroupId()));
+                    break;
+                }
+            }
+        }
+        return deviceItems;
+    }
+
+    private void addSourceToTargetDevices(List<BluetoothDevice> sinks) {
+        if (sinks.isEmpty() || mBroadcast == null || mAssistant == null) {
+            Log.d(TAG, "Skip adding source to target.");
+            return;
+        }
+        BluetoothLeBroadcastMetadata broadcastMetadata =
+                mBroadcast.getLatestBluetoothLeBroadcastMetadata();
+        if (broadcastMetadata == null) {
+            Log.e(TAG, "Error: There is no broadcastMetadata.");
+            return;
+        }
+        for (BluetoothDevice sink : sinks) {
+            Log.d(
+                    TAG,
+                    "Add broadcast with broadcastId: "
+                            + broadcastMetadata.getBroadcastId()
+                            + "to the device: "
+                            + sink.getAnonymizedAddress());
+            mAssistant.addSource(sink, broadcastMetadata, /* isGroupOp= */ false);
+        }
     }
 }

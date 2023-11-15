@@ -18,11 +18,7 @@ package com.android.settings.accessibility;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 
@@ -35,7 +31,6 @@ import android.bluetooth.BluetoothProfile;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.util.FeatureFlagUtils;
 
 import androidx.preference.Preference;
 import androidx.test.core.app.ApplicationProvider;
@@ -111,8 +106,6 @@ public class AccessibilityHearingAidPreferenceControllerTest {
 
     @Before
     public void setUp() {
-        FeatureFlagUtils.setEnabled(mContext,
-                FeatureFlagUtils.SETTINGS_ACCESSIBILITY_HEARING_AID_PAGE, true);
         mShadowApplication = shadowOf((Application) ApplicationProvider.getApplicationContext());
         setupEnvironment();
 
@@ -249,37 +242,6 @@ public class AccessibilityHearingAidPreferenceControllerTest {
 
         assertThat(mHearingAidPreference.getSummary()).isEqualTo(
                 mContext.getText(R.string.accessibility_hearingaid_not_connected_summary));
-    }
-
-    @Test
-    public void handleHearingAidPreferenceClick_noHearingAid_launchHearingAidInstructionDialog() {
-        FeatureFlagUtils.setEnabled(mContext,
-                FeatureFlagUtils.SETTINGS_ACCESSIBILITY_HEARING_AID_PAGE, false);
-        mPreferenceController = spy(new AccessibilityHearingAidPreferenceController(mContext,
-                HEARING_AID_PREFERENCE));
-        mPreferenceController.setPreference(mHearingAidPreference);
-        doNothing().when(mPreferenceController).launchHearingAidInstructionDialog();
-
-        mPreferenceController.handlePreferenceTreeClick(mHearingAidPreference);
-
-        verify(mPreferenceController).launchHearingAidInstructionDialog();
-    }
-
-    @Test
-    public void handleHearingAidPreferenceClick_withHearingAid_launchBluetoothDeviceDetailSetting
-            () {
-        FeatureFlagUtils.setEnabled(mContext,
-                FeatureFlagUtils.SETTINGS_ACCESSIBILITY_HEARING_AID_PAGE, false);
-        mPreferenceController = spy(new AccessibilityHearingAidPreferenceController(mContext,
-                HEARING_AID_PREFERENCE));
-        mPreferenceController.setPreference(mHearingAidPreference);
-        when(mHearingAidProfile.getConnectedDevices()).thenReturn(generateHearingAidDeviceList());
-        when(mCachedBluetoothDevice.getDevice()).thenReturn(mBluetoothDevice);
-        doNothing().when(mPreferenceController).launchBluetoothDeviceDetailSetting(any());
-
-        mPreferenceController.handlePreferenceTreeClick(mHearingAidPreference);
-
-        verify(mPreferenceController).launchBluetoothDeviceDetailSetting(mCachedBluetoothDevice);
     }
 
     @Test
