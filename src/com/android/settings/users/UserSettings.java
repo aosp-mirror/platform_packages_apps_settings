@@ -1724,6 +1724,9 @@ public class UserSettings extends SettingsPreferenceFragment
                 public List<SearchIndexableRaw> getRawDataToIndex(Context context,
                         boolean enabled) {
                     final List<SearchIndexableRaw> rawData = new ArrayList<>();
+                    if (!UserManager.supportsMultipleUsers()) {
+                        return rawData;
+                    }
 
                     SearchIndexableRaw allowMultipleUsersResult = new SearchIndexableRaw(context);
 
