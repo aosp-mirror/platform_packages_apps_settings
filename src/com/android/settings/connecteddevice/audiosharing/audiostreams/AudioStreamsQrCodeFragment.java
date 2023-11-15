@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.connecteddevice.audiosharing;
+package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
 import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.graphics.Bitmap;
@@ -49,8 +49,11 @@ public class AudioStreamsQrCodeFragment extends InstrumentedFragment {
     public final View onCreateView(
             LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.xml.bluetooth_audio_streams_qr_code, container, false);
-        getQrCodeBitmap().ifPresent(
-                bm -> ((ImageView) view.requireViewById(R.id.qrcode_view)).setImageBitmap(bm));
+        getQrCodeBitmap()
+                .ifPresent(
+                        bm ->
+                                ((ImageView) view.requireViewById(R.id.qrcode_view))
+                                        .setImageBitmap(bm));
         return view;
     }
 
@@ -66,10 +69,12 @@ public class AudioStreamsQrCodeFragment extends InstrumentedFragment {
             Bitmap bitmap = QrCodeGenerator.encodeQrCode(broadcastMetadata, qrcodeSize);
             return Optional.of(bitmap);
         } catch (WriterException e) {
-            Log.d(TAG, "onCreateView: broadcastMetadata "
-                    + broadcastMetadata
-                    + " qrCode generation exception "
-                    + e);
+            Log.d(
+                    TAG,
+                    "onCreateView: broadcastMetadata "
+                            + broadcastMetadata
+                            + " qrCode generation exception "
+                            + e);
         }
 
         return Optional.empty();
