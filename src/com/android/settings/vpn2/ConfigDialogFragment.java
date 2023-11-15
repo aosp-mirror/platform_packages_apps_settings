@@ -207,6 +207,10 @@ public class ConfigDialogFragment extends InstrumentedDialogFragment implements
                 mService.startLegacyVpn(profile);
             } catch (IllegalStateException e) {
                 Toast.makeText(mContext, R.string.vpn_no_network, Toast.LENGTH_LONG).show();
+            } catch (UnsupportedOperationException e) {
+                Log.e(TAG, "Attempted to start an unsupported VPN type.");
+                Toast.makeText(mContext, R.string.vpn_insecure_dialog_subtitle, Toast.LENGTH_LONG)
+                        .show();
             }
         }
     }
