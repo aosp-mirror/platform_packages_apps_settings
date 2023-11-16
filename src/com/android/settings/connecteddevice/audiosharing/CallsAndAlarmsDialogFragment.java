@@ -28,9 +28,25 @@ import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.flags.Flags;
 
+import java.util.ArrayList;
+
 /** Provides a dialog to choose the active device for calls and alarms. */
 public class CallsAndAlarmsDialogFragment extends InstrumentedDialogFragment {
     private static final String TAG = "CallsAndAlarmsDialog";
+    private static final String BUNDLE_KEY_DEVICE_ITEMS = "bundle_key_device_items";
+
+    // The host creates an instance of this dialog fragment must implement this interface to receive
+    // event callbacks.
+    public interface DialogEventListener {
+        /**
+         * Called when users click the device item to set active for calls and alarms in the dialog.
+         *
+         * @param item The device item clicked.
+         */
+        void onItemClick(AudioSharingDeviceItem item);
+    }
+
+    private static DialogEventListener sListener;
 
     @Override
     public int getMetricsCategory() {
@@ -41,28 +57,43 @@ public class CallsAndAlarmsDialogFragment extends InstrumentedDialogFragment {
      * Display the {@link CallsAndAlarmsDialogFragment} dialog.
      *
      * @param host The Fragment this dialog will be hosted.
+     * @param deviceItems The connected device items in audio sharing session.
+     * @param listener The callback to handle the user action on this dialog.
      */
-    public static void show(Fragment host) {
+    public static void show(
+            Fragment host,
+            ArrayList<AudioSharingDeviceItem> deviceItems,
+            DialogEventListener listener) {
         if (!Flags.enableLeAudioSharing()) return;
         final FragmentManager manager = host.getChildFragmentManager();
+        sListener = listener;
         if (manager.findFragmentByTag(TAG) == null) {
+            final Bundle bundle = new Bundle();
+            bundle.putParcelableArrayList(BUNDLE_KEY_DEVICE_ITEMS, deviceItems);
             final CallsAndAlarmsDialogFragment dialog = new CallsAndAlarmsDialogFragment();
+            dialog.setArguments(bundle);
             dialog.show(manager, TAG);
         }
     }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        // TODO: use real device names
-        String[] choices = {"Buds 1", "Buds 2"};
+        Bundle arguments = requireArguments();
+        ArrayList<AudioSharingDeviceItem> deviceItems =
+                arguments.getParcelableArrayList(BUNDLE_KEY_DEVICE_ITEMS);
+        int checkedItem = -1;
+        // deviceItems is ordered. The active device is put in the first place if it does exist
+        if (!deviceItems.isEmpty() && deviceItems.get(0).isActive()) checkedItem = 0;
+        String[] choices =
+                deviceItems.stream().map(AudioSharingDeviceItem::getName).toArray(String[]::new);
         AlertDialog.Builder builder =
                 new AlertDialog.Builder(getActivity())
                         .setTitle(R.string.calls_and_alarms_device_title)
                         .setSingleChoiceItems(
                                 choices,
-                                0, // TODO: set to current active device.
+                                checkedItem,
                                 (dialog, which) -> {
-                                    // TODO: set device to active device for calls and alarms.
+                                    sListener.onItemClick(deviceItems.get(which));
                                 });
         return builder.create();
     }
