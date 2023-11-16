@@ -19,7 +19,6 @@ package com.android.settings.privatespace;
 import static com.android.internal.widget.LockPatternUtils.CREDENTIAL_TYPE_PASSWORD;
 import static com.android.internal.widget.LockPatternUtils.CREDENTIAL_TYPE_PATTERN;
 import static com.android.internal.widget.LockPatternUtils.CREDENTIAL_TYPE_PIN;
-import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -36,7 +35,8 @@ import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.internal.widget.LockPatternUtils;
-import com.android.settings.privatespace.onelock.UseOneLockController;
+import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.privatespace.onelock.PrivateSpaceLockController;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
@@ -47,28 +47,34 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 @RunWith(AndroidJUnit4.class)
-public class UseOneLockControllerTest {
-    @Mock private Context mContext;
+public class PrivateSpaceLockControllerTest {
+    @Mock
+    private Context mContext;
     @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
-    private UseOneLockController mUseOneLockController;
-    private Preference mPreference;
 
+    @Mock SettingsPreferenceFragment mSettingsPreferenceFragment;
     @Mock
     LockPatternUtils mLockPatternUtils;
+
+    private Preference mPreference;
+    private PrivateSpaceLockController mPrivateSpaceLockController;
 
     /** Required setup before a test. */
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = ApplicationProvider.getApplicationContext();
-        final String preferenceKey = "private_space_use_one_lock";
-        mPreference = new Preference(mContext);
+        final String preferenceKey = "unlock_set_or_change_private_lock";
+
+        mPreference = new Preference(ApplicationProvider.getApplicationContext());
+        mPreference.setKey(preferenceKey);
 
         final FakeFeatureFactory featureFactory = FakeFeatureFactory.setupForTest();
         when(featureFactory.securityFeatureProvider.getLockPatternUtils(mContext))
                 .thenReturn(mLockPatternUtils);
-        mUseOneLockController = new UseOneLockController(mContext, preferenceKey);
 
+        mPrivateSpaceLockController = new PrivateSpaceLockController(mContext,
+                mSettingsPreferenceFragment);
     }
 
     /** Tests that the controller is always available. */
@@ -76,11 +82,21 @@ public class UseOneLockControllerTest {
     public void getAvailabilityStatus_returnsAvailable() {
         mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE);
 
-        assertThat(mUseOneLockController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+        assertThat(mPrivateSpaceLockController.isAvailable()).isEqualTo(true);
     }
 
+    /** Tests that preference is disabled and summary says same as device lock. */
+    @Test
+    public void getSummary_whenScreenLock() {
+        doReturn(false).when(mLockPatternUtils).isSeparateProfileChallengeEnabled(anyInt());
+        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE);
 
-    /** Tests that summary in controller is Pattern. */
+        mPrivateSpaceLockController.updateState(mPreference);
+        assertThat(mPreference.isEnabled()).isFalse();
+        assertThat(mPreference.getSummary().toString()).isEqualTo("Same as device screen lock");
+    }
+
+    /** Tests that preference is enabled and summary is Pattern. */
     @Test
     public void getSummary_whenProfileLockPattern() {
         doReturn(true)
@@ -89,23 +105,24 @@ public class UseOneLockControllerTest {
                 .when(mLockPatternUtils).getCredentialTypeForUser(anyInt());
         mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE);
 
-        mUseOneLockController.updateState(mPreference);
-        assertThat(mUseOneLockController.getSummary().toString()).isEqualTo("Pattern");
+        mPrivateSpaceLockController.updateState(mPreference);
+        assertThat(mPreference.isEnabled()).isTrue();
+        assertThat(mPreference.getSummary().toString()).isEqualTo("Pattern");
     }
 
-    /** Tests that summary in controller is PIN. */
+    /** Tests that preference is enabled and summary is Pin. */
     @Test
     public void getSummary_whenProfileLockPin() {
-        doReturn(true)
-                .when(mLockPatternUtils).isSeparateProfileChallengeEnabled(anyInt());
+        doReturn(true).when(mLockPatternUtils).isSeparateProfileChallengeEnabled(anyInt());
         doReturn(CREDENTIAL_TYPE_PIN).when(mLockPatternUtils).getCredentialTypeForUser(anyInt());
         mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE);
 
-        mUseOneLockController.updateState(mPreference);
-        assertThat(mUseOneLockController.getSummary().toString()).isEqualTo("PIN");
+        mPrivateSpaceLockController.updateState(mPreference);
+        assertThat(mPreference.isEnabled()).isTrue();
+        assertThat(mPreference.getSummary().toString()).isEqualTo("PIN");
     }
 
-    /** Tests that summary in controller is Password. */
+    /** Tests that preference is enabled and summary is Password. */
     @Test
     public void getSummary_whenProfileLockPassword() {
         doReturn(true)
@@ -114,7 +131,8 @@ public class UseOneLockControllerTest {
                 .when(mLockPatternUtils).getCredentialTypeForUser(anyInt());
         mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE);
 
-        mUseOneLockController.updateState(mPreference);
-        assertThat(mUseOneLockController.getSummary().toString()).isEqualTo("Password");
+        mPrivateSpaceLockController.updateState(mPreference);
+        assertThat(mPreference.isEnabled()).isTrue();
+        assertThat(mPreference.getSummary().toString()).isEqualTo("Password");
     }
 }

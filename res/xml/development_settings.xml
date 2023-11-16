@@ -619,6 +619,11 @@
             android:title="@string/transcode_settings_title"
             android:fragment="com.android.settings.development.transcode.TranscodeSettingsFragment" />
 
+        <Preference
+            android:key="widevine_settings"
+            android:title="@string/widevine_settings_title"
+            android:fragment="com.android.settings.development.widevine.WidevineSettingsFragment" />
+
     </PreferenceCategory>
 
     <PreferenceCategory

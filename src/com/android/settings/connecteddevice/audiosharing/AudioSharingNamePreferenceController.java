@@ -22,13 +22,10 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
-import com.android.settings.core.BasePreferenceController;
-import com.android.settings.flags.Flags;
 import com.android.settings.widget.ValidatedEditTextPreference;
 
-public class AudioSharingNamePreferenceController extends BasePreferenceController
+public class AudioSharingNamePreferenceController extends AudioSharingBasePreferenceController
         implements ValidatedEditTextPreference.Validator,
                 Preference.OnPreferenceChangeListener,
                 DefaultLifecycleObserver {
@@ -37,18 +34,11 @@ public class AudioSharingNamePreferenceController extends BasePreferenceControll
 
     private static final String PREF_KEY = "audio_sharing_stream_name";
 
-    protected Preference mPreference;
-
     private AudioSharingNameTextValidator mAudioSharingNameTextValidator;
 
     public AudioSharingNamePreferenceController(Context context) {
         super(context, PREF_KEY);
         mAudioSharingNameTextValidator = new AudioSharingNameTextValidator();
-    }
-
-    @Override
-    public int getAvailabilityStatus() {
-        return Flags.enableLeAudioSharing() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
@@ -60,12 +50,6 @@ public class AudioSharingNamePreferenceController extends BasePreferenceControll
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         // TODO: update broadcast when name is changed.
         return true;
-    }
-
-    @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-        mPreference = screen.findPreference(getPreferenceKey());
     }
 
     @Override

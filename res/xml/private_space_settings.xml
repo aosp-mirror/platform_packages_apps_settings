@@ -22,13 +22,25 @@
     android:title="@string/private_space_title"
     settings:searchable="false">
 
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="privatespace_hide_video"
+        settings:searchable="false"
+        settings:lottie_rawRes="@drawable/privatespace_placeholder_image"/>
+
+    <Preference
+        android:key="private_space_description"
+        android:summary="@string/private_space_description"
+        android:selectable="false"
+        settings:searchable="false" />
+
     <PreferenceCategory
         android:title="@string/security_header">
 
-        <SwitchPreferenceCompat
+        <Preference
             android:key="private_space_use_one_lock"
-            android:title="@string/private_space_one_lock_title"
-            settings:controller="com.android.settings.privatespace.UseOneLockController"
+            android:title="@string/private_space_lock_title"
+            android:fragment="com.android.settings.privatespace.onelock.UseOneLockSettingsFragment"
+            settings:controller="com.android.settings.privatespace.onelock.UseOneLockController"
             settings:searchable="false" />
 
         <Preference

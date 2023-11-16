@@ -472,6 +472,7 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
     private void configureDragAndDrop(LayoutPreference layout) {
         final RecyclerView list = layout.findViewById(R.id.dragList);
         final LocaleLinearLayoutManager llm = new LocaleLinearLayoutManager(getContext(), mAdapter);
+        llm.setLocaleListEditor(this);
         llm.setAutoMeasureEnabled(true);
         list.setLayoutManager(llm);
         list.setHasFixedSize(true);
@@ -505,7 +506,7 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
         return false;
     }
 
-    private void showConfirmDialog(boolean isFirstRemoved, LocaleStore.LocaleInfo localeInfo) {
+    public void showConfirmDialog(boolean isFirstRemoved, LocaleStore.LocaleInfo localeInfo) {
         Locale currentSystemLocale = LocalePicker.getLocales().get(0);
         if (!localeInfo.getLocale().equals(currentSystemLocale)) {
             final LocaleDialogFragment localeDialogFragment =

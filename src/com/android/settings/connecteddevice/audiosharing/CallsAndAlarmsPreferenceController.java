@@ -19,30 +19,20 @@ package com.android.settings.connecteddevice.audiosharing;
 import android.content.Context;
 import android.util.Log;
 
-import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.core.BasePreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.flags.Flags;
 
 /** PreferenceController to control the dialog to choose the active device for calls and alarms */
-public class CallsAndAlarmsPreferenceController extends BasePreferenceController {
+public class CallsAndAlarmsPreferenceController extends AudioSharingBasePreferenceController {
 
     private static final String TAG = "CallsAndAlarmsPreferenceController";
 
     private static final String PREF_KEY = "calls_and_alarms";
-
-    private Preference mPreference;
     private DashboardFragment mFragment;
 
     public CallsAndAlarmsPreferenceController(Context context) {
         super(context, PREF_KEY);
-    }
-
-    @Override
-    public int getAvailabilityStatus() {
-        return Flags.enableLeAudioSharing() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
@@ -53,7 +43,6 @@ public class CallsAndAlarmsPreferenceController extends BasePreferenceController
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mPreference = screen.findPreference(getPreferenceKey());
         mPreference.setOnPreferenceClickListener(
                 preference -> {
                     if (mFragment != null) {

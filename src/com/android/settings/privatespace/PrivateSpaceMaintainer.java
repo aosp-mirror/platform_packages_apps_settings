@@ -17,6 +17,7 @@
 package com.android.settings.privatespace;
 
 import static android.os.UserManager.USER_TYPE_PROFILE_PRIVATE;
+import static android.provider.Settings.Secure.HIDE_PRIVATESPACE_ENTRY_POINT;
 
 import android.app.ActivityManager;
 import android.app.IActivityManager;
@@ -27,6 +28,7 @@ import android.content.pm.UserInfo;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.provider.Settings;
 import android.util.ArraySet;
 import android.util.Log;
 
@@ -40,6 +42,7 @@ import java.util.List;
 /** A class to help with the creation / deletion of Private Space */
 public class PrivateSpaceMaintainer {
     private static final String TAG = "PrivateSpaceMaintainer";
+
     @GuardedBy("this")
     private static PrivateSpaceMaintainer sPrivateSpaceMaintainer;
 
@@ -48,6 +51,10 @@ public class PrivateSpaceMaintainer {
     @GuardedBy("this")
     private UserHandle mUserHandle;
     private final KeyguardManager mKeyguardManager;
+
+    /** This is the default value for the hide private space entry point settings. */
+    public static final int HIDE_PRIVATE_SPACE_ENTRY_POINT_DISABLED_VAL = 0;
+    public static final int HIDE_PRIVATE_SPACE_ENTRY_POINT_ENABLED_VAL = 1;
 
     public enum ErrorDeletingPrivateSpace {
             DELETE_PS_ERROR_NONE,
@@ -91,6 +98,7 @@ public class PrivateSpaceMaintainer {
             }
 
             Log.i(TAG, "Private space created with id: " + mUserHandle.getIdentifier());
+            resetPrivateSpaceSettings();
         }
         return true;
     }
@@ -196,5 +204,22 @@ public class PrivateSpaceMaintainer {
     private boolean isPrivateProfileLockSet() {
         return doesPrivateSpaceExist()
                 && mKeyguardManager.isDeviceSecure(mUserHandle.getIdentifier());
+    }
+
+    /** Sets the setting to show PS entry point to the provided value. */
+    public void setHidePrivateSpaceEntryPointSetting(int value) {
+        Settings.Secure.putInt(mContext.getContentResolver(), HIDE_PRIVATESPACE_ENTRY_POINT, value);
+    }
+
+    /** @return the setting to show PS entry point. */
+    public int getHidePrivateSpaceEntryPointSetting() {
+        return Settings.Secure.getInt(
+                mContext.getContentResolver(),
+                HIDE_PRIVATESPACE_ENTRY_POINT,
+                HIDE_PRIVATE_SPACE_ENTRY_POINT_DISABLED_VAL);
+    }
+
+    private void resetPrivateSpaceSettings() {
+        setHidePrivateSpaceEntryPointSetting(HIDE_PRIVATE_SPACE_ENTRY_POINT_DISABLED_VAL);
     }
 }

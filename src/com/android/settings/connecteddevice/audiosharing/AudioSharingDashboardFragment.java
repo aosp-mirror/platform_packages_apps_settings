@@ -25,11 +25,14 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.widget.SettingsMainSwitchBar;
 
-public class AudioSharingDashboardFragment extends DashboardFragment {
+public class AudioSharingDashboardFragment extends DashboardFragment
+        implements AudioSharingSwitchBarController.OnSwitchBarChangedListener {
     private static final String TAG = "AudioSharingDashboardFrag";
 
     SettingsMainSwitchBar mMainSwitchBar;
     private AudioSharingSwitchBarController mSwitchBarController;
+    private CallsAndAlarmsPreferenceController mCallsAndAlarmsPreferenceController;
+    private AudioSharingNamePreferenceController mAudioSharingNamePreferenceController;
 
     public AudioSharingDashboardFragment() {
         super();
@@ -63,7 +66,9 @@ public class AudioSharingDashboardFragment extends DashboardFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        use(CallsAndAlarmsPreferenceController.class).init(this);
+        mCallsAndAlarmsPreferenceController = use(CallsAndAlarmsPreferenceController.class);
+        mCallsAndAlarmsPreferenceController.init(this);
+        mAudioSharingNamePreferenceController = use(AudioSharingNamePreferenceController.class);
     }
 
     @Override
@@ -74,9 +79,19 @@ public class AudioSharingDashboardFragment extends DashboardFragment {
         final SettingsActivity activity = (SettingsActivity) getActivity();
         mMainSwitchBar = activity.getSwitchBar();
         mMainSwitchBar.setTitle(getText(R.string.audio_sharing_switch_title));
-        mSwitchBarController = new AudioSharingSwitchBarController(activity, mMainSwitchBar);
+        mSwitchBarController = new AudioSharingSwitchBarController(activity, mMainSwitchBar, this);
         mSwitchBarController.init(this);
         getSettingsLifecycle().addObserver(mSwitchBarController);
         mMainSwitchBar.show();
+    }
+
+    @Override
+    public void onSwitchBarChanged(boolean newState) {
+        updateVisibilityForAttachedPreferences(newState);
+    }
+
+    private void updateVisibilityForAttachedPreferences(boolean isVisible) {
+        mCallsAndAlarmsPreferenceController.updateVisibility(isVisible);
+        mAudioSharingNamePreferenceController.updateVisibility(isVisible);
     }
 }
