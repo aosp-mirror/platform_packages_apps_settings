@@ -20,18 +20,15 @@ import static android.net.NetworkPolicyManager.POLICY_NONE;
 import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
 
 import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
-import static com.android.settings.fuelgauge.BatteryUtils.UID_ZERO;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.net.NetworkPolicyManager;
 import android.util.ArraySet;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
-import java.util.List;
 import java.util.Set;
 
 /** A class to dynamically manage per apps {@link NetworkPolicyManager} POLICY_ flags. */
@@ -95,20 +92,7 @@ public final class DynamicDenylistManager {
     }
 
     /** Suggest a list of package to set as POLICY_REJECT. */
-    public void setDenylist(List<String> packageNameList) {
-        final Set<Integer> denylistTargetUids = new ArraySet<>(packageNameList.size());
-        for (String packageName : packageNameList) {
-            try {
-                final int uid = mContext.getPackageManager().getPackageUid(packageName, 0);
-                if (uid == UID_ZERO) {
-                    continue;
-                }
-                denylistTargetUids.add(uid);
-            } catch (PackageManager.NameNotFoundException e) {
-                Log.e(TAG, "Unknown package name: " + packageName, e);
-            }
-        }
-
+    public void setDenylist(Set<Integer> denylistTargetUids) {
         final Set<Integer> manualDenylistUids = getDenylistAllUids(getManualDenylistPref());
         denylistTargetUids.removeAll(manualDenylistUids);
 
@@ -126,16 +110,14 @@ public final class DynamicDenylistManager {
                 uid -> editor.putInt(String.valueOf(uid), POLICY_REJECT_METERED_BACKGROUND));
         editor.apply();
 
-        // Set new added UIDs into REJECT policy.
         synchronized (mLock) {
+            // Set new added UIDs into REJECT policy.
             for (int uid : denylistTargetUids) {
                 if (!lastDynamicDenylistUids.contains(uid)) {
                     mNetworkPolicyManager.setUidPolicy(uid, POLICY_REJECT_METERED_BACKGROUND);
                 }
             }
-        }
-        // Unset removed UIDs back to NONE policy.
-        synchronized (mLock) {
+            // Unset removed UIDs back to NONE policy.
             for (int uid : lastDynamicDenylistUids) {
                 if (!denylistTargetUids.contains(uid)) {
                     mNetworkPolicyManager.setUidPolicy(uid, POLICY_NONE);
