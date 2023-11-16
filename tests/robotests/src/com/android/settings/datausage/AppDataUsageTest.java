@@ -239,6 +239,7 @@ public class AppDataUsageTest {
         ReflectionHelpers.setField(mFragment, "mUnrestrictedData", unrestrictedDataPref);
         ReflectionHelpers.setField(mFragment, "mDataSaverBackend", dataSaverBackend);
         ReflectionHelpers.setField(mFragment.services, "mPolicyManager", networkPolicyManager);
+        ReflectionHelpers.setField(mFragment, "mContext", RuntimeEnvironment.application);
         when(mFragment.getListView()).thenReturn(mock(RecyclerView.class));
 
         ShadowRestrictedLockUtilsInternal.setRestricted(true);
