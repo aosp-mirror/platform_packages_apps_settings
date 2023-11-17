@@ -13,16 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.android.settings.security;
 
 import static com.android.settings.security.ContentProtectionTogglePreferenceController.KEY_CONTENT_PROTECTION_PREFERENCE;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.content.ComponentName;
 import android.content.Context;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
@@ -32,6 +34,7 @@ import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settings.widget.SettingsMainSwitchPreference;
+import com.android.settingslib.RestrictedLockUtils;
 
 import org.junit.After;
 import org.junit.Before;
@@ -55,8 +58,9 @@ public class ContentProtectionTogglePreferenceControllerTest {
     @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     @Rule public final MockitoRule mMockitoRule = MockitoJUnit.rule();
 
-    @Mock private PreferenceScreen mScreen;
+    @Mock private PreferenceScreen mMockScreen;
 
+    private RestrictedLockUtils.EnforcedAdmin mAdmin;
     private SettingsMainSwitchPreference mSwitchPreference;
     private final Context mContext = ApplicationProvider.getApplicationContext();
     private ContentProtectionTogglePreferenceController mController;
@@ -65,9 +69,10 @@ public class ContentProtectionTogglePreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mController = new ContentProtectionTogglePreferenceController(mContext, "key");
+        mController = new TestContentProtectionTogglePreferenceController();
         mSwitchPreference = new SettingsMainSwitchPreference(mContext);
-        when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mSwitchPreference);
+        when(mMockScreen.findPreference(mController.getPreferenceKey()))
+                .thenReturn(mSwitchPreference);
         mSettingBackupValue = getContentProtectionGlobalSetting();
         Settings.Global.putInt(mContext.getContentResolver(), KEY_CONTENT_PROTECTION_PREFERENCE, 0);
     }
@@ -78,11 +83,55 @@ public class ContentProtectionTogglePreferenceControllerTest {
                 mContext.getContentResolver(),
                 KEY_CONTENT_PROTECTION_PREFERENCE,
                 mSettingBackupValue);
+        ShadowUtils.reset();
     }
 
     @Test
     public void isAvailable_alwaysAvailable() {
         assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @Test
+    public void displayPreference() {
+        setUpFullyManagedMode();
+        SettingsMainSwitchPreference mockSwitchPreference =
+                mock(SettingsMainSwitchPreference.class);
+        when(mMockScreen.findPreference(any())).thenReturn(mockSwitchPreference);
+        when(mockSwitchPreference.getKey()).thenReturn(mController.getPreferenceKey());
+
+        mController = new TestContentProtectionTogglePreferenceController();
+        mController.displayPreference(mMockScreen);
+
+        assertThat(mockSwitchPreference).isNotNull();
+    }
+
+    @Test
+    public void updateState_notFullyManagedMode_enabled() {
+        SettingsMainSwitchPreference mockSwitchPreference =
+                mock(SettingsMainSwitchPreference.class);
+        when(mMockScreen.findPreference(any())).thenReturn(mockSwitchPreference);
+        when(mockSwitchPreference.getKey()).thenReturn(mController.getPreferenceKey());
+
+        mController = new TestContentProtectionTogglePreferenceController();
+        mController.displayPreference(mMockScreen);
+        mController.updateState(mockSwitchPreference);
+
+        verify(mockSwitchPreference, never()).setDisabledByAdmin(any());
+    }
+
+    @Test
+    public void updateState_fullyManagedMode_disabled() {
+        setUpFullyManagedMode();
+        SettingsMainSwitchPreference mockSwitchPreference =
+                mock(SettingsMainSwitchPreference.class);
+        when(mMockScreen.findPreference(any())).thenReturn(mockSwitchPreference);
+        when(mockSwitchPreference.getKey()).thenReturn(mController.getPreferenceKey());
+
+        mController = new TestContentProtectionTogglePreferenceController();
+        mController.displayPreference(mMockScreen);
+        mController.updateState(mockSwitchPreference);
+
+        verify(mockSwitchPreference).setDisabledByAdmin(mAdmin);
     }
 
     @Test
@@ -94,15 +143,18 @@ public class ContentProtectionTogglePreferenceControllerTest {
 
     @Test
     public void isChecked_fullyManagedMode_settingTurnOff() {
-        final ComponentName componentName =
-                ComponentName.unflattenFromString("com.android.test/.DeviceAdminReceiver");
-        ShadowUtils.setDeviceOwnerComponent(componentName);
+        setUpFullyManagedMode();
         Settings.Global.putInt(mContext.getContentResolver(), KEY_CONTENT_PROTECTION_PREFERENCE, 1);
+        SettingsMainSwitchPreference mockSwitchPreference =
+                mock(SettingsMainSwitchPreference.class);
+        when(mMockScreen.findPreference(any())).thenReturn(mockSwitchPreference);
+        when(mockSwitchPreference.getKey()).thenReturn(mController.getPreferenceKey());
 
-        ContentProtectionTogglePreferenceController controller =
-                new ContentProtectionTogglePreferenceController(mContext, "key");
+        mController = new TestContentProtectionTogglePreferenceController();
+        mController.displayPreference(mMockScreen);
+        mController.updateState(mockSwitchPreference);
 
-        assertThat(controller.isChecked()).isFalse();
+        assertThat(mController.isChecked()).isFalse();
     }
 
     @Test
@@ -122,7 +174,6 @@ public class ContentProtectionTogglePreferenceControllerTest {
 
     @Test
     public void onSwitchChanged_switchChecked_manuallyEnabled() {
-        mController.displayPreference(mScreen);
         mController.setChecked(false);
 
         mController.onCheckedChanged(/* switchView= */ null, /* isChecked= */ true);
@@ -132,8 +183,6 @@ public class ContentProtectionTogglePreferenceControllerTest {
 
     @Test
     public void onSwitchChanged_switchUnchecked_manuallyDisabled() {
-        mController.displayPreference(mScreen);
-
         mController.onCheckedChanged(/* switchView= */ null, /* isChecked= */ false);
 
         assertThat(getContentProtectionGlobalSetting()).isEqualTo(-1);
@@ -142,5 +191,22 @@ public class ContentProtectionTogglePreferenceControllerTest {
     private int getContentProtectionGlobalSetting() {
         return Settings.Global.getInt(
                 mContext.getContentResolver(), KEY_CONTENT_PROTECTION_PREFERENCE, 0);
+    }
+
+    private void setUpFullyManagedMode() {
+        mAdmin = new RestrictedLockUtils.EnforcedAdmin();
+    }
+
+    private class TestContentProtectionTogglePreferenceController
+            extends ContentProtectionTogglePreferenceController {
+
+        TestContentProtectionTogglePreferenceController() {
+            super(ContentProtectionTogglePreferenceControllerTest.this.mContext, "key");
+        }
+
+        @Override
+        protected RestrictedLockUtils.EnforcedAdmin getEnforcedAdmin() {
+            return mAdmin;
+        }
     }
 }
