@@ -60,6 +60,8 @@ import com.android.settings.flags.Flags;
 import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settingslib.widget.TopIntroPreference;
 
+import com.google.android.setupcompat.util.WizardManagerHelper;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -299,6 +301,20 @@ public class ToggleFeaturePreferenceFragmentTest {
                 ToggleFeaturePreferenceFragment.KEY_USE_SERVICE_PREFERENCE, /* enabled= */ true);
 
         assertThat(getLatestPopupWindow().isShowing()).isTrue();
+    }
+
+    @Test
+    @RequiresFlagsEnabled(com.android.settings.accessibility.Flags.FLAG_REMOVE_QS_TOOLTIP_IN_SUW)
+    @Config(shadows = ShadowFragment.class)
+    public void onPreferenceToggledOnEnabledService_inSuw_toolTipViewShouldNotShow() {
+        Intent suwIntent = new Intent();
+        suwIntent.putExtra(WizardManagerHelper.EXTRA_IS_SETUP_FLOW, true);
+        when(mActivity.getIntent()).thenReturn(suwIntent);
+
+        mFragment.onPreferenceToggled(
+                ToggleFeaturePreferenceFragment.KEY_USE_SERVICE_PREFERENCE, /* enabled= */ true);
+
+        assertThat(getLatestPopupWindow()).isNull();
     }
 
     @Test

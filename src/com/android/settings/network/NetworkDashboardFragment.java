@@ -22,7 +22,6 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.SearchIndexableResource;
 import android.util.Log;
 
 import androidx.appcompat.app.AlertDialog;
@@ -31,19 +30,16 @@ import androidx.lifecycle.LifecycleOwner;
 
 import com.android.settings.R;
 import com.android.settings.SettingsDumpService;
-import com.android.settings.Utils;
 import com.android.settings.core.OnActivityResultListener;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.network.MobilePlanPreferenceController.MobilePlanPreferenceHost;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.wifi.WifiPrimarySwitchPreferenceController;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @SearchIndexable
@@ -122,7 +118,6 @@ public class NetworkDashboardFragment extends DashboardFragment implements
             controllers.add(internetPreferenceController);
         }
         controllers.add(privateDnsPreferenceController);
-        controllers.add(new NetworkProviderCallsSmsController(context, lifecycle, lifecycleOwner));
 
         // Start SettingsDumpService after the MobileNetworkRepository is created.
         Intent intent = new Intent(context, SettingsDumpService.class);
