@@ -52,9 +52,6 @@ public class GraphicsDriverEnableAngleAsSystemDriverController
     private boolean mShouldToggleSwitchBackOnRebootDialogDismiss;
 
     @VisibleForTesting
-    static final String PROPERTY_RO_GFX_ANGLE_SUPPORTED = "ro.gfx.angle.supported";
-
-    @VisibleForTesting
     static final String PROPERTY_PERSISTENT_GRAPHICS_EGL = "persist.graphics.egl";
 
     @VisibleForTesting
@@ -95,11 +92,6 @@ public class GraphicsDriverEnableAngleAsSystemDriverController
     //     `adb shell setprop debug.graphics.angle.developeroption.enable true`
     private boolean isAngleDeveloperOptionEnabled() {
         return mSystemProperties.getBoolean(PROPERTY_DEBUG_ANGLE_DEVELOPER_OPTION, false);
-    }
-
-    private boolean isAngleSupported() {
-        return TextUtils.equals(
-                        mSystemProperties.get(PROPERTY_RO_GFX_ANGLE_SUPPORTED, ""), "true");
     }
 
     @VisibleForTesting
@@ -145,10 +137,6 @@ public class GraphicsDriverEnableAngleAsSystemDriverController
 
     /** Return the default value of "persist.graphics.egl" */
     public boolean isDefaultValue() {
-        if (!isAngleSupported()) {
-            return true;
-        }
-
         final String currentGlesDriver =
                 mSystemProperties.get(PROPERTY_PERSISTENT_GRAPHICS_EGL, "");
         // default value of "persist.graphics.egl" is ""
@@ -158,17 +146,11 @@ public class GraphicsDriverEnableAngleAsSystemDriverController
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        if (isAngleSupported()) {
-            // set switch on if "persist.graphics.egl" is "angle" and angle is built in /vendor
-            // set switch off otherwise.
-            final String currentGlesDriver =
-                    mSystemProperties.get(PROPERTY_PERSISTENT_GRAPHICS_EGL, "");
-            final boolean isAngle = TextUtils.equals(ANGLE_DRIVER_SUFFIX, currentGlesDriver);
-            ((SwitchPreference) mPreference).setChecked(isAngle);
-        } else {
-            mPreference.setEnabled(false);
-            ((SwitchPreference) mPreference).setChecked(false);
-        }
+        // set switch on if "persist.graphics.egl" is "angle".
+        final String currentGlesDriver =
+                mSystemProperties.get(PROPERTY_PERSISTENT_GRAPHICS_EGL, "");
+        final boolean isAngle = TextUtils.equals(ANGLE_DRIVER_SUFFIX, currentGlesDriver);
+        ((SwitchPreference) mPreference).setChecked(isAngle);
 
         // Disable the developer option toggle UI if ANGLE is disabled, this means next time the
         // debug property needs to be set to true again to enable ANGLE. If ANGLE is enabled, don't
@@ -182,12 +164,10 @@ public class GraphicsDriverEnableAngleAsSystemDriverController
     protected void onDeveloperOptionsSwitchDisabled() {
         // 1) disable the switch
         super.onDeveloperOptionsSwitchDisabled();
-        if (isAngleSupported()) {
-            // 2) set the persist.graphics.egl empty string
-            GraphicsEnvironment.getInstance().toggleAngleAsSystemDriver(false);
-            // 3) reset the switch
-            ((SwitchPreference) mPreference).setChecked(false);
-        }
+        // 2) set the persist.graphics.egl empty string
+        GraphicsEnvironment.getInstance().toggleAngleAsSystemDriver(false);
+        // 3) reset the switch
+        ((SwitchPreference) mPreference).setChecked(false);
     }
 
     void toggleSwitchBack() {
