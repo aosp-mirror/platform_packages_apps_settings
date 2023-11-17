@@ -59,11 +59,13 @@ class SimEidPreferenceController(context: Context, preferenceKey: String) :
     }
 
     /**
-     * Returns available here, but UI availability is retrieved asynchronously later.
+     * Returns available here, if SIM hardware is visible.
      *
-     * Check [updateNonIndexableKeys] for search availability.
+     * Also check [getIsAvailableAndUpdateEid] for other availability check which retrieved
+     * asynchronously later.
      */
-    override fun getAvailabilityStatus() = AVAILABLE
+    override fun getAvailabilityStatus() =
+        if (SubscriptionUtil.isSimHardwareVisible(mContext)) AVAILABLE else UNSUPPORTED_ON_DEVICE
 
     override fun displayPreference(screen: PreferenceScreen) {
         super.displayPreference(screen)
@@ -95,12 +97,7 @@ class SimEidPreferenceController(context: Context, preferenceKey: String) :
     }
 
     private fun getIsAvailableAndUpdateEid(): Boolean {
-        if (!SubscriptionUtil.isSimHardwareVisible(mContext) ||
-            !mContext.userManager.isAdminUser ||
-            Utils.isWifiOnly(mContext)
-        ) {
-            return false
-        }
+        if (!mContext.userManager.isAdminUser || Utils.isWifiOnly(mContext)) return false
         eid = eidStatus?.eid ?: ""
         return eid.isNotEmpty()
     }
@@ -147,8 +144,8 @@ class SimEidPreferenceController(context: Context, preferenceKey: String) :
     }
 
     override fun updateNonIndexableKeys(keys: MutableList<String>) {
-        if (!getIsAvailableAndUpdateEid()) {
-            keys.add(preferenceKey)
+        if (!isAvailable() || !getIsAvailableAndUpdateEid()) {
+            keys += preferenceKey
         }
     }
 
