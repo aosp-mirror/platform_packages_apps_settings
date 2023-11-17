@@ -19,6 +19,11 @@ package com.android.settings.privatespace;
 import static com.android.settings.privatespace.PrivateSpaceSetupActivity.ACCOUNT_LOGIN_ACTION;
 import static com.android.settings.privatespace.PrivateSpaceSetupActivity.EXTRA_ACTION_TYPE;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -51,16 +56,17 @@ public class AutoAdvanceSetupFragment extends Fragment {
     private static final String TAG = "AutoAdvanceFragment";
     private static final String TITLE_INDEX = "title_index";
     private static final int DELAY_BETWEEN_SCREENS = 5000; // 5 seconds in millis
+    private static final int ANIMATION_DURATION_MILLIS = 500;
     private GlifLayout mRootView;
     private Handler mHandler;
     private int mScreenTitleIndex;
     private static final List<Pair<Integer, Integer>> HEADER_IMAGE_PAIRS =
             ImmutableList.of(
-                    new Pair(R.string.privatespace_lock_protected_title,
-                            R.drawable.privatespace_setup_flow_placeholder),
                     new Pair(R.string.privatespace_apps_hidden_title,
                             R.drawable.privatespace_setup_flow_placeholder),
                     new Pair(R.string.privatespace_access_from_apps_title,
+                            R.drawable.privatespace_setup_flow_placeholder),
+                    new Pair(R.string.privatespace_system_apps_installed_title,
                             R.drawable.privatespace_setup_flow_placeholder));
 
     private Runnable mUpdateScreenResources =
@@ -69,7 +75,7 @@ public class AutoAdvanceSetupFragment extends Fragment {
                 public void run() {
                     if (getActivity() != null) {
                         if (++mScreenTitleIndex < HEADER_IMAGE_PAIRS.size()) {
-                            updateHeaderAndImage();
+                            startFadeOutAnimation();
                             mHandler.postDelayed(mUpdateScreenResources, DELAY_BETWEEN_SCREENS);
                         } else {
                             PrivateSpaceMaintainer privateSpaceMaintainer = PrivateSpaceMaintainer
@@ -148,5 +154,32 @@ public class AutoAdvanceSetupFragment extends Fragment {
         mRootView.setHeaderText(HEADER_IMAGE_PAIRS.get(mScreenTitleIndex).first);
         ((ImageView) mRootView.findViewById(R.id.placeholder_image))
                 .setImageResource(HEADER_IMAGE_PAIRS.get(mScreenTitleIndex).second);
+        startFadeInAnimation();
+    }
+
+    private  void startFadeInAnimation() {
+        ValueAnimator textView =  ObjectAnimator.ofFloat(
+                mRootView.getHeaderTextView(), View.ALPHA, 0f, 1f);
+        ValueAnimator imageView = ObjectAnimator.ofFloat(
+                mRootView.findViewById(R.id.placeholder_image), View.ALPHA, 0, 1f);
+        AnimatorSet fadeIn = new AnimatorSet();
+        fadeIn.playTogether(textView, imageView);
+        fadeIn.setDuration(ANIMATION_DURATION_MILLIS).start();
+    }
+
+    private void startFadeOutAnimation() {
+        AnimatorSet fadeOut = new AnimatorSet();
+        ValueAnimator textView =  ObjectAnimator.ofFloat(
+                mRootView.getHeaderTextView(), View.ALPHA, 1f, 0f);
+        ValueAnimator imageView = ObjectAnimator.ofFloat(
+                mRootView.findViewById(R.id.placeholder_image), View.ALPHA, 1f, 0f);
+        fadeOut.playTogether(textView, imageView);
+        fadeOut.setDuration(ANIMATION_DURATION_MILLIS).start();
+        fadeOut.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                updateHeaderAndImage();
+            }
+        });
     }
 }
