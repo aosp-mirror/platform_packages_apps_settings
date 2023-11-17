@@ -905,6 +905,14 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
             return;
         }
 
+        Activity activity = getActivity();
+        if (com.android.settings.accessibility.Flags.removeQsTooltipInSuw()
+                && activity != null
+                && WizardManagerHelper.isAnySetupWizard(activity.getIntent())) {
+            // Don't show QuickSettingsTooltip in Setup Wizard
+            return;
+        }
+
         if (!mNeedsQSTooltipReshow && AccessibilityQuickSettingUtils.hasValueInSharedPreferences(
                 getContext(), tileComponentName)) {
             // Returns if quick settings tooltip only show once.

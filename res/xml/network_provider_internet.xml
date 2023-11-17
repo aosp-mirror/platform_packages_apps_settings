@@ -31,16 +31,11 @@
         settings:keywords="@string/keywords_internet"
         settings:useAdminDisabledSummary="true" />
 
-    <com.android.settingslib.RestrictedPreference
+    <com.android.settings.spa.preference.ComposePreference
         android:key="calls_and_sms"
         android:title="@string/calls_and_sms"
-        android:icon="@drawable/ic_calls_sms"
         android:order="-20"
-        android:summary="@string/summary_placeholder"
-        settings:isPreferenceVisible="@bool/config_show_sim_info"
-        settings:allowDividerBelow="true"
-        settings:keywords="@string/calls_and_sms"
-        settings:useAdminDisabledSummary="true" />
+        settings:controller="com.android.settings.network.NetworkProviderCallsSmsController" />
 
     <com.android.settingslib.RestrictedPreference
         android:key="mobile_network_list"
