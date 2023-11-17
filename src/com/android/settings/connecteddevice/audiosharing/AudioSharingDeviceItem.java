@@ -22,10 +22,12 @@ import android.os.Parcelable;
 public final class AudioSharingDeviceItem implements Parcelable {
     private final String mName;
     private final int mGroupId;
+    private final boolean mIsActive;
 
-    public AudioSharingDeviceItem(String name, int groupId) {
+    public AudioSharingDeviceItem(String name, int groupId, boolean isActive) {
         mName = name;
         mGroupId = groupId;
+        mIsActive = isActive;
     }
 
     public String getName() {
@@ -36,15 +38,21 @@ public final class AudioSharingDeviceItem implements Parcelable {
         return mGroupId;
     }
 
+    public boolean isActive() {
+        return mIsActive;
+    }
+
     public AudioSharingDeviceItem(Parcel in) {
         mName = in.readString();
         mGroupId = in.readInt();
+        mIsActive = in.readBoolean();
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(mName);
         dest.writeInt(mGroupId);
+        dest.writeBoolean(mIsActive);
     }
 
     @Override
