@@ -20,7 +20,6 @@
     android:id="@+id/privatesapce_autoadvance_screen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:sucHeaderText="@string/privatespace_lock_protected_title"
     android:icon="@drawable/ic_privatespace_icon">
     <LinearLayout style="@style/SudContentFrame"
                   android:layout_width="match_parent"
@@ -34,26 +33,14 @@
             android:contentDescription="@null"
             android:src="@drawable/privatespace_setup_flow_placeholder"/>
 
-        <LinearLayout
-            android:id="@+id/setup_progress"
+        <TextView
+            android:id="@+id/createMessage"
+            style="@style/PrivateSpaceSetupTextFontStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right"
-            android:layout_margin="16dp"
-            android:orientation="horizontal">
-            <ProgressBar
-                android:id="@+id/progressBar_cyclic"
-                style="?android:attr/progressBarStyleSmall"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center"/>
-            <TextView
-                android:id="@+id/createMessage"
-                style="@style/PrivateSpaceSetupTextFontStyle"
-                android:textSize="14sp"
-                android:text="@string/privatespace_setting_up_text"
-                android:layout_margin="8dp"/>
-        </LinearLayout>
+            android:textSize="14sp"
+            android:text="@string/privatespace_setting_up_text"
+            android:layout_marginBottom="24dp"/>
 
     </LinearLayout>
 </com.google.android.setupdesign.GlifLayout>

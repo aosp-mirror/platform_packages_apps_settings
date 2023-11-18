@@ -36,32 +36,8 @@ public class ContentProtectionPreferenceController extends BasePreferenceControl
 
     @Override
     public int getAvailabilityStatus() {
-        if (!settingUiEnabled() || getContentProtectionServiceComponentName() == null) {
-            return UNSUPPORTED_ON_DEVICE;
-        }
-        return AVAILABLE;
-    }
-
-    @VisibleForTesting
-    @Nullable
-    protected String getContentProtectionServiceFlatComponentName() {
-        return mContext.getString(config_defaultContentProtectionService);
-    }
-
-    @Nullable
-    private ComponentName getContentProtectionServiceComponentName() {
-        String flatComponentName = getContentProtectionServiceFlatComponentName();
-        if (flatComponentName == null) {
-            return null;
-        }
-        return ComponentName.unflattenFromString(flatComponentName);
-    }
-
-    @VisibleForTesting
-    protected boolean settingUiEnabled() {
-        return DeviceConfig.getBoolean(
-                DeviceConfig.NAMESPACE_CONTENT_CAPTURE,
-                ContentCaptureManager.DEVICE_CONFIG_PROPERTY_ENABLE_CONTENT_PROTECTION_RECEIVER,
-                ContentCaptureManager.DEFAULT_ENABLE_CONTENT_PROTECTION_RECEIVER);
+        return ContentProtectionPreferenceUtils.isAvailable(mContext)
+                ? AVAILABLE
+                : UNSUPPORTED_ON_DEVICE;
     }
 }

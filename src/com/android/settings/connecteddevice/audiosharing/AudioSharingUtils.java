@@ -120,6 +120,9 @@ public class AudioSharingUtils {
     /** Build {@link AudioSharingDeviceItem} from {@link CachedBluetoothDevice}. */
     public static AudioSharingDeviceItem buildAudioSharingDeviceItem(
             CachedBluetoothDevice cachedDevice) {
-        return new AudioSharingDeviceItem(cachedDevice.getName(), cachedDevice.getGroupId());
+        return new AudioSharingDeviceItem(
+                cachedDevice.getName(),
+                cachedDevice.getGroupId(),
+                BluetoothUtils.isActiveLeAudioDevice(cachedDevice));
     }
 }
