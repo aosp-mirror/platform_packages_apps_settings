@@ -98,7 +98,7 @@ public final class InstalledAppCounterTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
+        when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
         mFakeFeatureFlags = new FakeFeatureFlagsImpl();
         mFakeFeatureFlags.setFlag(Flags.FLAG_ARCHIVING, true);
 
