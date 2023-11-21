@@ -49,6 +49,7 @@ import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -174,6 +175,13 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
                                     + source
                                     + ", reason = "
                                     + reason);
+                    AudioSharingUtils.toastMessage(
+                            mContext,
+                            String.format(
+                                    Locale.US,
+                                    "Fail to add source to %s reason %d",
+                                    sink.getAddress(),
+                                    reason));
                 }
 
                 @Override
@@ -209,6 +217,13 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
                                     + sourceId
                                     + ", reason = "
                                     + reason);
+                    AudioSharingUtils.toastMessage(
+                            mContext,
+                            String.format(
+                                    Locale.US,
+                                    "Fail to remove source from %s reason %d",
+                                    sink.getAddress(),
+                                    reason));
                 }
 
                 @Override
@@ -284,7 +299,7 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
         mPreferenceGroup.setVisible(false);
         mAudioSharingSettingsPreference.setVisible(false);
 
-        if (isAvailable()) {
+        if (isAvailable() && mBluetoothDeviceUpdater != null) {
             mBluetoothDeviceUpdater.setPrefContext(screen.getContext());
             mBluetoothDeviceUpdater.forceUpdate();
         }
@@ -379,8 +394,8 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
                 // Show audio sharing switch or join dialog according to device count in the sharing
                 // session.
                 ArrayList<AudioSharingDeviceItem> deviceItemsInSharingSession =
-                        AudioSharingUtils.buildOrderedDeviceItemsInSharingSession(
-                                groupedDevices, mLocalBtManager);
+                        AudioSharingUtils.buildOrderedConnectedLeadAudioSharingDeviceItem(
+                                mLocalBtManager, groupedDevices, /* filterByInSharing= */ true);
                 // Show audio sharing switch dialog when the third eligible (LE audio) remote device
                 // connected during a sharing session.
                 if (deviceItemsInSharingSession.size() >= 2) {
