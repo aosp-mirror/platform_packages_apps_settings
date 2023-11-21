@@ -19,17 +19,17 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingVertical="@dimen/settingslib_illustration_padding"
-    android:paddingEnd="@dimen/text_reading_preview_padding_end"
-    android:paddingStart="@dimen/text_reading_preview_padding_start">
+    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+    android:paddingStart="?android:attr/listPreferredItemPaddingStart">
 
     <LinearLayout
+        android:id="@+id/preview_background"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/accessibility_text_reading_preview"
         android:clipChildren="true"
         android:orientation="vertical"
-        android:paddingVertical="@dimen/text_reading_preview_background_padding_vertical"
-        android:paddingHorizontal="@dimen/text_reading_preview_background_padding_horizontal">
+        android:padding="18dp">
 
         <TextView
             android:id="@+id/preview_label"

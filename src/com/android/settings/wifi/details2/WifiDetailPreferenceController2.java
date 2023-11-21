@@ -644,7 +644,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
     }
 
     private void refreshSsid() {
-        if (mWifiEntry.isSubscription() && mWifiEntry.getSsid() != null) {
+        if (mWifiEntry.shouldShowSsid() && mWifiEntry.getSsid() != null) {
             mSsidPref.setVisible(true);
             mSsidPref.setSummary(mWifiEntry.getSsid());
         } else {

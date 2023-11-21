@@ -18,8 +18,8 @@ package com.android.settings.deviceinfo.firmwareversion;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
-import static com.android.settings.deviceinfo.firmwareversion.MainlineModuleVersionPreferenceController.MODULE_UPDATE_INTENT;
-import static com.android.settings.deviceinfo.firmwareversion.MainlineModuleVersionPreferenceController.MODULE_UPDATE_V2_INTENT;
+import static com.android.settings.deviceinfo.firmwareversion.MainlineModuleVersionPreferenceController.MODULE_UPDATE_INTENT_ACTION;
+import static com.android.settings.deviceinfo.firmwareversion.MainlineModuleVersionPreferenceController.MODULE_UPDATE_V2_INTENT_ACTION;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -29,13 +29,18 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.platform.test.annotations.RequiresFlagsEnabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 
 import androidx.preference.Preference;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -45,6 +50,15 @@ import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
 public class MainlineModuleVersionPreferenceControllerTest {
+
+    private static final String MODULE_PACKAGE = "com.android.vending";
+    private static final Intent MODULE_UPDATE_V2_INTENT =
+        new Intent(MODULE_UPDATE_V2_INTENT_ACTION).setPackage(MODULE_PACKAGE);
+    private static final Intent MODULE_UPDATE_INTENT =
+        new Intent(MODULE_UPDATE_INTENT_ACTION).setPackage(MODULE_PACKAGE);
+
+    @Rule
+    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
 
     @Mock
     private PackageManager mPackageManager;
@@ -58,6 +72,9 @@ public class MainlineModuleVersionPreferenceControllerTest {
         mContext = spy(RuntimeEnvironment.application);
         mPreference = new Preference(mContext);
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
+        when(mContext
+                 .getString(com.android.settings.R.string.config_mainline_module_update_package))
+                .thenReturn(MODULE_PACKAGE);
     }
 
     @Test
@@ -123,6 +140,7 @@ public class MainlineModuleVersionPreferenceControllerTest {
         assertThat(mPreference.isSelectable()).isTrue();
     }
 
+    @RequiresFlagsEnabled(com.android.settings.flags.Flags.FLAG_MAINLINE_MODULE_EXPLICIT_INTENT)
     @Test
     public void updateState_canHandleIntent_setIntentToPreference() throws Exception {
         setupModulePackage("test version 123");
@@ -137,6 +155,7 @@ public class MainlineModuleVersionPreferenceControllerTest {
         assertThat(mPreference.getIntent()).isEqualTo(MODULE_UPDATE_INTENT);
     }
 
+    @RequiresFlagsEnabled(com.android.settings.flags.Flags.FLAG_MAINLINE_MODULE_EXPLICIT_INTENT)
     @Test
     public void updateState_canHandleIntent_preferenceShouldBeSelectable() throws Exception {
         setupModulePackage("test version 123");
@@ -151,6 +170,7 @@ public class MainlineModuleVersionPreferenceControllerTest {
         assertThat(mPreference.isSelectable()).isTrue();
     }
 
+    @RequiresFlagsEnabled(com.android.settings.flags.Flags.FLAG_MAINLINE_MODULE_EXPLICIT_INTENT)
     @Test
     public void updateState_cannotHandleIntent_setNullToPreference() throws Exception {
         setupModulePackage("test version 123");

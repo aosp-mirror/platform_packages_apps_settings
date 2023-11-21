@@ -223,10 +223,14 @@
     <dimen name="message_icon_inset">11dp</dimen>
 
     <!-- Text Reading Settings -->
-    <dimen name="text_reading_preview_padding_start">@*android:dimen/list_item_padding_end_material</dimen>
-    <dimen name="text_reading_preview_padding_end">@*android:dimen/list_item_padding_end_material</dimen>
-    <dimen name="text_reading_preview_background_padding_vertical">18dp</dimen>
-    <dimen name="text_reading_preview_background_padding_horizontal">18dp</dimen>
+    <dimen name="text_reading_preview_layout_padding_horizontal_min">
+        @*android:dimen/list_item_padding_start_material</dimen>
+    <dimen name="text_reading_preview_background_padding_horizontal_min">18dp</dimen>
+
+    <dimen name="text_reading_preview_layout_padding_horizontal_min_suw">
+        @dimen/text_reading_preview_layout_padding_horizontal_min</dimen>
+    <dimen name="text_reading_preview_background_padding_horizontal_min_suw">
+        @dimen/text_reading_preview_background_padding_horizontal_min</dimen>
 
     <!-- Accessibility Settings -->
     <dimen name="accessibility_layout_margin_start_end">16dp</dimen>

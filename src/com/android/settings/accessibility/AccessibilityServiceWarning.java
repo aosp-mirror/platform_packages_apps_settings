@@ -139,9 +139,6 @@ public class AccessibilityServiceWarning {
 
         return new AlertDialog.Builder(context)
                 .setTitle(context.getString(R.string.disable_service_title, serviceName))
-                .setMessage(context.getString(R.string.disable_service_message,
-                        context.getString(R.string.accessibility_dialog_button_stop),
-                        serviceName))
                 .setCancelable(true)
                 .setPositiveButton(R.string.accessibility_dialog_button_stop, listener)
                 .setNegativeButton(R.string.accessibility_dialog_button_cancel, listener)
