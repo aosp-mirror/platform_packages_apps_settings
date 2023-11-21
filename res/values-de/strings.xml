@@ -136,16 +136,11 @@
     <string name="audio_sharing_title" msgid="4144157137502923821">"Audiofreigabe"</string>
     <string name="audio_sharing_switch_title" msgid="7052827328670825701">"Audioinhalte freigeben"</string>
     <string name="calls_and_alarms_device_title" msgid="6993559028175454198">"Anrufe und Wecker"</string>
-    <!-- no translation found for audio_streams_category_title (4878022761829895463) -->
-    <skip />
-    <!-- no translation found for audio_streams_pref_title (6320485086288646209) -->
-    <skip />
-    <!-- no translation found for audio_streams_title (6617990880383079165) -->
-    <skip />
-    <!-- no translation found for audio_streams_qr_code_summary (2838923349871884871) -->
-    <skip />
-    <!-- no translation found for audio_streams_empty (8803517701437394982) -->
-    <skip />
+    <string name="audio_streams_category_title" msgid="4878022761829895463">"Mit LE Audio-Stream verbinden"</string>
+    <string name="audio_streams_pref_title" msgid="6320485086288646209">"Audiostreams in der Nähe"</string>
+    <string name="audio_streams_title" msgid="6617990880383079165">"Audiostreams"</string>
+    <string name="audio_streams_qr_code_summary" msgid="2838923349871884871">"Über QR-Code mit einem Audiostream verbinden"</string>
+    <string name="audio_streams_empty" msgid="8803517701437394982">"Keine Audiostreams in der Nähe gefunden."</string>
     <string name="date_and_time" msgid="1788358029823431692">"Datum &amp; Uhrzeit"</string>
     <string name="proxy_settings_title" msgid="4201866858226087066">"Proxy"</string>
     <string name="proxy_clear_text" msgid="6529658759984031149">"Löschen"</string>
@@ -548,22 +543,14 @@
     <string name="work_profile_category_header" msgid="85707750968948517">"Arbeitsprofil"</string>
     <string name="private_space_title" msgid="7078627930195569767">"Privater Bereich"</string>
     <string name="private_space_summary" msgid="8237652417163408001">"Apps in privatem Ordner verstecken"</string>
-    <!-- no translation found for private_space_description (5494963647270826210) -->
-    <skip />
-    <!-- no translation found for private_space_lock_title (3006539720164938296) -->
-    <skip />
-    <!-- no translation found for private_space_one_lock_summary (2759953747682959371) -->
-    <skip />
-    <!-- no translation found for private_space_screen_lock_title (8679383894967823163) -->
-    <skip />
-    <!-- no translation found for private_space_biometric_title (3934339826674553174) -->
-    <skip />
-    <!-- no translation found for private_space_biometric_summary (4403837276018724581) -->
-    <skip />
-    <!-- no translation found for private_space_screen_lock_summary (394837965365561070) -->
-    <skip />
-    <!-- no translation found for private_space_new_lock_title (7306873010565337671) -->
-    <skip />
+    <string name="private_space_description" msgid="5494963647270826210">"Apps in privatem Ordner verstecken, auf den nur du zugreifen kannst"</string>
+    <string name="private_space_lock_title" msgid="3006539720164938296">"Sperre für privaten Bereich"</string>
+    <string name="private_space_one_lock_summary" msgid="2759953747682959371">"Du kannst den privaten Bereich auf dieselbe Weise entsperren wie dein Gerät oder eine andere Sperre auswählen"</string>
+    <string name="private_space_screen_lock_title" msgid="8679383894967823163">"Displaysperre des Geräts verwenden"</string>
+    <string name="private_space_biometric_title" msgid="3934339826674553174">"Entsperrung per Gesichtserkennung und Fingerabdruck"</string>
+    <string name="private_space_biometric_summary" msgid="4403837276018724581">"Zum Einrichten tippen"</string>
+    <string name="private_space_screen_lock_summary" msgid="394837965365561070">"Identisch mit Displaysperre des Geräts"</string>
+    <string name="private_space_new_lock_title" msgid="7306873010565337671">"Neue Sperre für privaten Bereich festlegen?"</string>
     <string name="private_space_hide_title" msgid="8687034008994037610">"Ausblenden, wenn gesperrt"</string>
     <string name="privatespace_hide_page_title" msgid="972581369094289386">"„Privater Bereich“ ausblenden, wenn gesperrt"</string>
     <string name="privatespace_hide_page_summary" msgid="1052569521186403642">"Blende „Privater Bereich“ in deiner App-Liste aus, damit niemand weiß, dass dieser Bereich auf deinem Gerät ist"</string>
@@ -591,9 +578,10 @@
     <string name="privatespace_hidden_notifications_text" msgid="8121285743543004812">"Benachrichtigungen von Apps im privaten Bereich werden nicht angezeigt, wenn dieser gesperrt ist"</string>
     <string name="privatespace_apps_permission_text" msgid="4418511924151828812">"Apps im privaten Bereich werden nicht im Berechtigungsmanager, im Privatsphäredashboard und in anderen Einstellungen angezeigt, wenn der private Bereich gesperrt ist"</string>
     <string name="privatespace_setting_up_text" msgid="8532777749891406509">"Der private Bereich wird eingerichtet…"</string>
-    <string name="privatespace_lock_protected_title" msgid="7409801274869666860">"Der private Bereich ist durch eine Sperre geschützt"</string>
     <string name="privatespace_apps_hidden_title" msgid="6146605677591599107">"Informationen zur Nutzung von Apps im privaten Bereich sind verborgen, wenn dieser gesperrt ist"</string>
     <string name="privatespace_access_from_apps_title" msgid="6787000636686810564">"Über die App-Liste auf den privaten Bereich zugreifen"</string>
+    <!-- no translation found for privatespace_system_apps_installed_title (4782295812052574626) -->
+    <skip />
     <string name="privatespace_error_screen_title" msgid="8658511165913662275">"Der private Bereich konnte nicht eingerichtet werden"</string>
     <string name="privatespace_error_screen_summary" msgid="5679626031159521676">"Du kannst es jetzt oder später noch einmal versuchen"</string>
     <string name="privatespace_tryagain_label" msgid="4091466165724929876">"Wiederholen"</string>
@@ -602,23 +590,17 @@
     <string name="privatespace_use_screenlock_label" msgid="2775404941450049991">"Displaysperre verwenden"</string>
     <string name="privatespace_set_lock_label" msgid="6277529807188602545">"Neue Sperre auswählen"</string>
     <string name="privatespace_success_title" msgid="4854425684898602993">"Fertig!"</string>
-    <string name="privatespace_access_text" msgid="8756118686974614618">"Wische vom unteren Rand deines Startbildschirms nach oben und scrolle dann nach unten, um auf den privaten Bereich zuzugreifen"</string>
+    <!-- no translation found for privatespace_access_text (1253541577173303723) -->
+    <skip />
     <string name="privatespace_done_label" msgid="5534818213879562387">"Fertig"</string>
     <string name="scrolldown_to_access" msgid="5160743933093369151">"Scrolle nach unten, um auf den privaten Bereich zuzugreifen"</string>
-    <!-- no translation found for privatespace_retry_signin_title (495054309243289223) -->
-    <skip />
-    <!-- no translation found for privatespace_retry_summary (1508253540053006284) -->
-    <skip />
-    <!-- no translation found for privatespace_unhide_header (1192011539687584004) -->
-    <skip />
-    <!-- no translation found for privatespace_open_settings (5038101805604421393) -->
-    <skip />
-    <!-- no translation found for privatespace_tap_settings (928932826450238276) -->
-    <skip />
-    <!-- no translation found for privatespace_turnoff_hide (4858511423837613842) -->
-    <skip />
-    <!-- no translation found for privatespace_development_note (2999992301558700721) -->
-    <skip />
+    <string name="privatespace_retry_signin_title" msgid="495054309243289223">"Zum Einrichten des privaten Bereichs anmelden"</string>
+    <string name="privatespace_retry_summary" msgid="1508253540053006284">"Du musst dich in einem Konto anmelden, um den privaten Bereich einrichten zu können"</string>
+    <string name="privatespace_unhide_header" msgid="1192011539687584004">"Zum Einblenden von „Privater Bereich“ (UX nicht endgültig)"</string>
+    <string name="privatespace_open_settings" msgid="5038101805604421393">"Öffne die Einstellungen"</string>
+    <string name="privatespace_tap_settings" msgid="928932826450238276">"Tippe auf „Datenschutz &amp; Sicherheit“ &gt; „Privater Bereich“ &gt; „‚Privater Bereich‘ ausblenden, wenn gesperrt“"</string>
+    <string name="privatespace_turnoff_hide" msgid="4858511423837613842">"Schaltfläche „‚Privater Bereich‘ ausblenden, wenn gesperrt“ aus"</string>
+    <string name="privatespace_development_note" msgid="2999992301558700721">"Hinweis für Google-Mitarbeiter: Diese Funktion befindet sich noch in der Entwicklungsphase"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Du kannst bis zu <xliff:g id="COUNT">%d</xliff:g> Fingerabdrücke hinzufügen."</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Du hast die maximale Anzahl an Fingerabdrücken hinzugefügt"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Es können keine Fingerabdrücke mehr hinzugefügt werden"</string>
@@ -835,10 +817,8 @@
     <string name="art_verifier_for_debuggable_summary" msgid="4802875841862652879">"ART die Überprüfung des Bytecodes für debug-fähige Apps gestatten"</string>
     <string name="show_refresh_rate" msgid="5742688821872354973">"Aktualisierungsrate anzeigen"</string>
     <string name="show_refresh_rate_summary" msgid="3558118122374609663">"Aktuelle Aktualisierungsrate des Displays anzeigen"</string>
-    <!-- no translation found for show_hdr_sdr_ratio (4188007289024955585) -->
-    <skip />
-    <!-- no translation found for show_hdr_sdr_ratio_summary (986292785096013733) -->
-    <skip />
+    <string name="show_hdr_sdr_ratio" msgid="4188007289024955585">"HDR/SDR-Verhältnis anzeigen"</string>
+    <string name="show_hdr_sdr_ratio_summary" msgid="986292785096013733">"Aktuelles HDR/SDR-Verhältnis anzeigen"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
     <string name="nfc_secure_settings_title" msgid="4906958426927741485">"Für NFC muss das Gerät entsperrt werden"</string>
     <string name="android_beam_settings_title" msgid="2797963824490671295">"Android Beam"</string>
@@ -2267,10 +2247,12 @@
     <string name="accessibility_service_action_perform_description" msgid="7807832069800034738">"Die Funktion kann deine Interaktionen mit einer App oder einem Hardwaresensor verfolgen und in deinem Namen mit Apps interagieren."</string>
     <string name="accessibility_dialog_button_allow" msgid="8274918676473216697">"Zulassen"</string>
     <string name="accessibility_dialog_button_deny" msgid="2037249860078259284">"Ablehnen"</string>
-    <string name="accessibility_dialog_button_stop" msgid="7295448112784528196">"Beenden"</string>
-    <string name="accessibility_dialog_button_cancel" msgid="4813234247237851121">"Abbrechen"</string>
-    <string name="disable_service_title" msgid="2909108731776956167">"<xliff:g id="SERVICE">%1$s</xliff:g> beenden?"</string>
-    <string name="disable_service_message" msgid="4814173941688548016">"Wenn du auf \"<xliff:g id="STOP">%1$s</xliff:g>\" tippst, wird \"<xliff:g id="SERVICE">%2$s</xliff:g>\" beendet."</string>
+    <!-- no translation found for accessibility_dialog_button_stop (7584815613743292151) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_cancel (8625997437316659966) -->
+    <skip />
+    <!-- no translation found for disable_service_title (8178020230162342801) -->
+    <skip />
     <string name="accessibility_no_services_installed" msgid="3725569493860028593">"Keine Dienste installiert"</string>
     <string name="accessibility_no_service_selected" msgid="1310596127128379897">"Kein Dienst ausgewählt"</string>
     <string name="accessibility_service_default_description" msgid="7801435825448138526">"Es wurde keine Beschreibung bereitgestellt."</string>
@@ -2750,27 +2732,18 @@
     <string name="vpn_name" msgid="3806456074909253262">"Name"</string>
     <string name="vpn_type" msgid="5533202873260826663">"Typ"</string>
     <string name="vpn_server" msgid="2908816134941973935">"Serveradresse"</string>
-    <string name="vpn_mppe" msgid="7366657055055114239">"PPP-Verschlüsselung (MPPE)"</string>
-    <string name="vpn_l2tp_secret" msgid="2356744369959140121">"L2TP-Schlüssel"</string>
     <string name="vpn_ipsec_identifier" msgid="8511842694369254801">"IPSec-ID"</string>
     <string name="vpn_ipsec_secret" msgid="532007567355505963">"Vorinstallierter IPSec-Schlüssel"</string>
     <string name="vpn_ipsec_user_cert" msgid="2714372103705048405">"IPSec-Nutzerzertifikat"</string>
     <string name="vpn_ipsec_ca_cert" msgid="5558498943577474987">"IPSec-CA-Zertifikat"</string>
     <string name="vpn_ipsec_server_cert" msgid="1411390470454731396">"IPSec-Serverzertifikat"</string>
     <string name="vpn_show_options" msgid="6105437733943318667">"Erweiterte Optionen anzeigen"</string>
-    <string name="vpn_search_domains" msgid="1973799969613962440">"DNS-Suchdomains"</string>
-    <string name="vpn_dns_servers" msgid="6505263074417737107">"DNS-Server (z. B. 8.8.8.8)"</string>
-    <string name="vpn_routes" msgid="1218707725375594862">"Weiterleitungsrouten (z. B. 10.0.0.0/8)"</string>
     <string name="vpn_username" msgid="8671768183475960068">"Nutzername"</string>
     <string name="vpn_password" msgid="1183746907642628127">"Passwort"</string>
     <string name="vpn_save_login" msgid="5986762519977472618">"Kontoinformationen speichern"</string>
     <string name="vpn_not_used" msgid="7229312881336083354">"(nicht verwendet)"</string>
     <string name="vpn_no_ca_cert" msgid="3687379414088677735">"(Server nicht überprüfen)"</string>
     <string name="vpn_no_server_cert" msgid="8106540968643125407">"(vom Server erhalten)"</string>
-    <string name="vpn_always_on_invalid_reason_type" msgid="4699113710248872972">"Dieser VPN-Typ kann nicht durchgehend verbunden bleiben"</string>
-    <string name="vpn_always_on_invalid_reason_server" msgid="2635347740046212693">"Durchgehend aktives VPN unterstützt numerische Serveradressen"</string>
-    <string name="vpn_always_on_invalid_reason_no_dns" msgid="3980357762395272467">"Ein DNS-Server muss für durchgehend aktives VPN angegeben werden"</string>
-    <string name="vpn_always_on_invalid_reason_dns" msgid="3934369594591801587">"DNS-Serveradressen müssen für durchgehend aktives VPN numerisch sein"</string>
     <string name="vpn_always_on_invalid_reason_other" msgid="4571905303713233321">"Bei den eingegebenen Informationen wird durchgehend aktives VPN nicht unterstützt"</string>
     <string name="vpn_cancel" msgid="5929410618112404383">"Abbrechen"</string>
     <string name="vpn_done" msgid="5137858784289564985">"Schließen"</string>
@@ -2806,6 +2779,8 @@
     <string name="vpn_require_connection" msgid="1027347404470060998">"Verbindungen ohne VPN blockieren"</string>
     <string name="vpn_require_connection_title" msgid="4186758487822779039">"VPN-Verbindung erforderlich?"</string>
     <string name="vpn_insecure_dialog_subtitle" msgid="1857621742868835300">"Unsicher. Update auf IKEv2-VPN empfohlen."</string>
+    <!-- no translation found for vpn_start_unsupported (7139925503292269904) -->
+    <skip />
     <string name="vpn_lockdown_summary" msgid="4700625960550559029">"Wähle ein VPN-Profil für eine durchgehende Verbindung aus. Netzwerkverkehr ist nur möglich, wenn eine Verbindung zu diesem VPN besteht."</string>
     <string name="vpn_lockdown_none" msgid="455915403560910517">"Keines"</string>
     <string name="vpn_lockdown_config_error" msgid="1992071316416371316">"Für ein durchgehend aktives VPN ist eine IP-Adresse für den Server und für das DNS erforderlich."</string>
@@ -3363,8 +3338,7 @@
     <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"Gesamten Benachrichtigungs­inhalt anzeigen"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"Sensible Inhalte nur im entsperrten Zustand anzeigen"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"Keine Benachrichtigungen anzeigen"</string>
-    <!-- no translation found for lock_screen_notifications_interstitial_message (6326229471276829730) -->
-    <skip />
+    <string name="lock_screen_notifications_interstitial_message" msgid="6326229471276829730">"Was soll auf deinem Sperrbildschirm angezeigt werden?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1360388192096354315">"Sperrbildschirm"</string>
     <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"Alle geschäftlichen Benachrichtigungen anzeigen"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"Vertrauliche geschäftliche Inhalte ausblenden"</string>
@@ -3855,8 +3829,7 @@
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Auf alle Dateien zugreifen"</string>
     <string name="voice_activation_apps_title" msgid="7130045161611529825">"Apps mit Sprachaktivierung"</string>
     <string name="permit_voice_activation_apps" msgid="9152780172988949319">"Sprachaktivierung zulassen"</string>
-    <!-- no translation found for allow_voice_activation_apps_description (6369745626995060656) -->
-    <skip />
+    <string name="allow_voice_activation_apps_description" msgid="6369745626995060656">"Mit der Sprachaktivierung lassen sich zugelassene Apps per Sprachbefehl starten. Ein integrierter adaptiver Sensor sorgt dafür, dass deine Daten privat bleiben.\n\n"<a href="">"Weitere Informationen zum geschützten adaptiven Sensor"</a></string>
     <string name="full_screen_intent_title" msgid="747270185715224130">"Vollbildbenachrichtigungen"</string>
     <string name="permit_full_screen_intent" msgid="9035367640019960861">"Vollbildbenachrichtigungen von dieser App erlauben"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Diese App darf Benachrichtigungen anzeigen, die das gesamte Display ausfüllen, wenn das Gerät gesperrt ist. Apps können diese verwenden, um Wecker, eingehende Anrufe oder andere dringende Benachrichtigungen hervorzuheben."</string>
@@ -4020,8 +3993,7 @@
     <string name="battery_tips_apps_summary_higher_than_usual_in_background" msgid="1585002072567422199">"<xliff:g id="APP_LABEL">%1$s</xliff:g> hat den Akku im Hintergrund stärker als üblich beansprucht"</string>
     <string name="battery_tips_apps_summary_always_high_in_foreground" msgid="1910991243576404700">"<xliff:g id="APP_LABEL">%1$s</xliff:g> hat den Akku im Vordergrund stärker beansprucht"</string>
     <string name="battery_tips_apps_summary_higher_than_usual_in_foreground" msgid="7937337570425168210">"<xliff:g id="APP_LABEL">%1$s</xliff:g> hat den Akku im Vordergrund stärker als üblich beansprucht"</string>
-    <!-- no translation found for battery_usage_anomaly_content_description (3199380151630770476) -->
-    <skip />
+    <string name="battery_usage_anomaly_content_description" msgid="3199380151630770476">"Anomalie bei der Akkunutzung"</string>
     <string name="battery_app_item_hint" msgid="4850929961461039110">"Hohe Akkunutzung"</string>
     <string name="battery_app_item_hint_in_bg" msgid="596240821466388336">"Hohe Akkunutzung im Hintergrund"</string>
     <string name="battery_app_item_hint_in_fg" msgid="5091860632260799910">"Hohe Akkunutzung im Vordergrund"</string>
@@ -4970,10 +4942,10 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Dein Gerätename ist für Apps, die du installiert hast, sichtbar. Wenn du dein Gerät mit Bluetooth-Geräten oder einem WLAN verbindest oder einen WLAN-Hotspot einrichtest, kann der Name möglicherweise auch von anderen Personen gesehen werden."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Genus"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Genus auswählen"</string>
-    <string name="content_protection_preference_title" msgid="5069260032659193074">"Auf Apps mit irreführenden Funktionen scannen"</string>
+    <string name="content_protection_preference_title" msgid="5069260032659193074">"Nach Apps mit irreführenden Funktionen durchsuchen"</string>
     <string name="content_protection_preference_summary" msgid="2252393849408445391">"App-Aktivitäten auf Phishing prüfen"</string>
-    <string name="content_protection_preference_user_consent_switch_title" msgid="1797782616799594426">"Nach Apps mit irreführendem Verhalten suchen"</string>
-    <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="3004347470520916069">"Nach geschäftlichen Apps mit irreführendem Verhalten suchen"</string>
+    <string name="content_protection_preference_user_consent_switch_title" msgid="1797782616799594426">"Nach Apps mit irreführenden Funktionen suchen"</string>
+    <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="3004347470520916069">"Nach geschäftlichen Apps mit irreführenden Funktionen suchen"</string>
     <string name="content_protection_preference_subpage_summary" msgid="3595621220981703364"></string>
     <string name="content_protection_preference_subpage_info" msgid="6890886357653365489"></string>
 </resources>
