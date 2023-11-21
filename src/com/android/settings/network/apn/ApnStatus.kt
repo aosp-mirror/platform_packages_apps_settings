@@ -72,9 +72,6 @@ data class ApnData(
     val customizedConfig: CustomizedConfig = CustomizedConfig()
 ) {
     fun getContentValues(context: Context): ContentValues {
-        val simCarrierId =
-            context.getSystemService(TelephonyManager::class.java)!!.createForSubscriptionId(subId)
-                .getSimCarrierId()
         val values = ContentValues()
         values.put(Telephony.Carriers.NAME, name)
         values.put(Telephony.Carriers.APN, apn)
@@ -96,7 +93,12 @@ data class ApnData(
         values.put(Telephony.Carriers.NETWORK_TYPE_BITMASK, networkType)
         values.put(Telephony.Carriers.CARRIER_ENABLED, apnEnable)
         values.put(Telephony.Carriers.EDITED_STATUS, Telephony.Carriers.USER_EDITED)
-        values.put(Telephony.Carriers.CARRIER_ID, simCarrierId)
+        if (newApn) {
+            val simCarrierId =
+                context.getSystemService(TelephonyManager::class.java)!!.createForSubscriptionId(subId)
+                    .getSimCarrierId()
+            values.put(Telephony.Carriers.CARRIER_ID, simCarrierId)
+        }
         return values
     }
 }
