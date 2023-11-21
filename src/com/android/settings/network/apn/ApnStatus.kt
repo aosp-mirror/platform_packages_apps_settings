@@ -518,3 +518,8 @@ private fun getEditableApnType(apnData: ApnData): String {
         )
     }.joinToString()
 }
+
+fun deleteApn(uri: Uri, context: Context) {
+    val contentResolver = context.contentResolver
+    contentResolver.delete(uri, null, null)
+}

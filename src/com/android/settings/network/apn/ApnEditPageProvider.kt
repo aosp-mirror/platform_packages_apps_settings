@@ -38,10 +38,13 @@ import com.android.settings.R
 import com.android.settings.network.apn.ApnNetworkTypes.getNetworkTypeDisplayNames
 import com.android.settings.network.apn.ApnNetworkTypes.getNetworkTypeSelectedOptionsState
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
+import com.android.settingslib.spa.framework.compose.LocalNavController
 import com.android.settingslib.spa.widget.editor.SettingsExposedDropdownMenuBox
 import com.android.settingslib.spa.widget.editor.SettingsExposedDropdownMenuCheckBox
 import com.android.settingslib.spa.widget.editor.SettingsOutlinedTextField
 import com.android.settingslib.spa.widget.editor.SettingsTextFieldPassword
+import com.android.settingslib.spa.widget.preference.Preference
+import com.android.settingslib.spa.widget.preference.PreferenceModel
 import com.android.settingslib.spa.widget.preference.SwitchPreference
 import com.android.settingslib.spa.widget.preference.SwitchPreferenceModel
 import com.android.settingslib.spa.widget.scaffold.RegularScaffold
@@ -199,6 +202,18 @@ fun ApnPage(apnDataInit: ApnData, apnDataCur: MutableState<ApnData>, uriInit: Ur
                 emptyVal = stringResource(R.string.network_type_unspecified),
                 enabled = apnData.networkTypeEnabled
             ) {}
+            if (!apnData.newApn) {
+                val navController = LocalNavController.current
+                Preference(
+                    object : PreferenceModel {
+                        override val title = stringResource(R.string.menu_delete)
+                        override val onClick = {
+                            deleteApn(uriInit, context)
+                            navController.navigateBack()
+                        }
+                    }
+                )
+            }
         }
     }
 }
