@@ -16,6 +16,7 @@
 
 package com.android.settings.regionalpreferences;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 
 import androidx.preference.PreferenceCategory;
@@ -65,8 +66,10 @@ public abstract class RegionalPreferenceListBasePreferenceController extends
                 RegionalPreferencesDataUtils.savePreference(mContext, getExtensionTypes(),
                         item.equals(RegionalPreferencesDataUtils.DEFAULT_VALUE)
                                 ? null : item);
-                mMetricsFeatureProvider.action(mContext, getMetricsActionKey(),
-                        getPreferenceTitle(value) + " > " +  getPreferenceTitle(item));
+                String metrics =
+                        getMetricsActionKey() == SettingsEnums.ACTION_SET_FIRST_DAY_OF_WEEK ? ""
+                                : getPreferenceTitle(value) + " > " + getPreferenceTitle(item);
+                mMetricsFeatureProvider.action(mContext, getMetricsActionKey(), metrics);
                 return true;
             });
             pref.setSelected(!value.isEmpty() && item.equals(value));
