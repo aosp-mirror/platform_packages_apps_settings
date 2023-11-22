@@ -6087,10 +6087,6 @@
     <string name="vpn_type">Type</string>
     <!-- Input label for the server address of a VPN profile. [CHAR LIMIT=40] -->
     <string name="vpn_server">Server address</string>
-    <!-- Checkbox label to enable PPP encryption for a VPN profile. [CHAR LIMIT=40] -->
-    <string name="vpn_mppe">PPP encryption (MPPE)</string>
-    <!-- Input label for the L2TP secret of a VPN profile. [CHAR LIMIT=40] -->
-    <string name="vpn_l2tp_secret">L2TP secret</string>
     <!-- Input label for the IPSec identifier of a VPN profile. [CHAR LIMIT=40] -->
     <string name="vpn_ipsec_identifier">IPSec identifier</string>
     <!-- Input label for the IPSec pre-shared key of a VPN profile. [CHAR LIMIT=40] -->
@@ -6103,12 +6099,6 @@
     <string name="vpn_ipsec_server_cert">IPSec server certificate</string>
     <!-- Checkbox label to show advanced options of a VPN profile. [CHAR LIMIT=40] -->
     <string name="vpn_show_options">Show advanced options</string>
-    <!-- Input label for the DNS search domains of a VPN profile. [CHAR LIMIT=40] -->
-    <string name="vpn_search_domains">DNS search domains</string>
-    <!-- Input label for the DNS servers of a VPN profile. [CHAR LIMIT=40] -->
-    <string name="vpn_dns_servers">DNS servers (e.g. 8.8.8.8)</string>
-    <!-- Input label for the forwarding routes of a VPN profile. [CHAR LIMIT=40] -->
-    <string name="vpn_routes">Forwarding routes (e.g. 10.0.0.0/8)</string>
     <!-- Input label for the username of a VPN profile. [CHAR LIMIT=40] -->
     <string name="vpn_username">Username</string>
     <!-- Input label for the password of a VPN profile. [CHAR LIMIT=40] -->
@@ -6121,22 +6111,6 @@
     <string name="vpn_no_ca_cert">(don\u2019t verify server)</string>
     <!-- Option to use the server certificate received from the VPN server. [CHAR LIMIT=40] -->
     <string name="vpn_no_server_cert">(received from server)</string>
-    <!-- Error message displayed below the always-on VPN checkbox when the checkbox is disabled:
-        the selected VPN type doesn't support always-on. [CHAR LIMIT=120] -->
-    <string name="vpn_always_on_invalid_reason_type">This VPN type can\'t stay connected at all
-        times</string>
-    <!-- Error message displayed below the always-on VPN checkbox when the checkbox is disabled:
-        the server address is not in numeric form (e.g. 8.8.8.8). [CHAR LIMIT=120] -->
-    <string name="vpn_always_on_invalid_reason_server">Always-on VPN only supports numeric server
-        addresses</string>
-    <!-- Error message displayed below the always-on VPN checkbox when the checkbox is disabled:
-        no DNS is found. [CHAR LIMIT=120] -->
-    <string name="vpn_always_on_invalid_reason_no_dns">A DNS server must be specified for always-on
-        VPN</string>
-    <!-- Error message displayed below the always-on VPN checkbox when the checkbox is disabled:
-        DNS server addresses are not in numeric form (e.g. 8.8.8.8). [CHAR LIMIT=120] -->
-    <string name="vpn_always_on_invalid_reason_dns">DNS server addresses must be numeric for
-        always-on VPN</string>
     <!-- Error message displayed below the always-on VPN checkbox when the checkbox is disabled:
         generic error. [CHAR LIMIT=120] -->
     <string name="vpn_always_on_invalid_reason_other">The information entered doesn\'t support
@@ -6213,6 +6187,11 @@
 
     <!-- Dialog subtitle warning for a VPN app that has an insecure type. [CHAR LIMIT=100]  -->
     <string name="vpn_insecure_dialog_subtitle">Not secure. Update to an IKEv2 VPN</string>
+    <!-- Dialog message when user attempted to start a VPN type that is no longer supported. It is
+         very unlikely, but not impossible, that a user has a very old VPN configuration that the
+         newer device no longer supports. This message is displayed when the user tries to start
+         this unsupported VPN. [CHAR LIMIT=NONE]  -->
+    <string name="vpn_start_unsupported">Failed to start unsupported VPN.</string>
 
     <!-- Summary describing the always-on VPN feature. [CHAR LIMIT=NONE] -->
     <string name="vpn_lockdown_summary">Select a VPN profile to always remain connected to. Network traffic will only be allowed when connected to this VPN.</string>
