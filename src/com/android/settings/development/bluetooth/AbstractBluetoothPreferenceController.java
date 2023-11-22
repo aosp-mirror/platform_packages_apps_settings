@@ -23,6 +23,7 @@ import android.bluetooth.BluetoothManager;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.core.PreferenceControllerMixin;
@@ -42,13 +43,15 @@ public abstract class AbstractBluetoothPreferenceController extends
         DeveloperOptionsPreferenceController implements BluetoothServiceConnectionListener,
         LifecycleObserver, OnDestroy, PreferenceControllerMixin {
 
-    protected volatile BluetoothA2dp mBluetoothA2dp;
+    @Nullable protected volatile BluetoothA2dp mBluetoothA2dp;
 
     @VisibleForTesting
     BluetoothAdapter mBluetoothAdapter;
 
-    public AbstractBluetoothPreferenceController(Context context, Lifecycle lifecycle,
-                                                 BluetoothA2dpConfigStore store) {
+    public AbstractBluetoothPreferenceController(
+            @Nullable Context context,
+            @Nullable Lifecycle lifecycle,
+            @Nullable BluetoothA2dpConfigStore store) {
         super(context);
         if (lifecycle != null) {
             lifecycle.addObserver(this);
