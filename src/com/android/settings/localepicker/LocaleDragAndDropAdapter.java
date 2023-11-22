@@ -232,8 +232,7 @@ class LocaleDragAndDropAdapter
 
         if (fromPosition != toPosition) {
             FeatureFactory.getFeatureFactory().getMetricsFeatureProvider()
-                    .action(mContext, SettingsEnums.ACTION_REORDER_LANGUAGE,
-                            mDragLocale.getLocale().toLanguageTag() + " move to " + toPosition);
+                    .action(mContext, SettingsEnums.ACTION_REORDER_LANGUAGE);
         }
 
         notifyItemChanged(fromPosition); // to update the numbers
@@ -275,8 +274,7 @@ class LocaleDragAndDropAdapter
             localeInfo = mFeedItemList.get(i);
             if (localeInfo.getChecked()) {
                 FeatureFactory.getFeatureFactory().getMetricsFeatureProvider()
-                        .action(mContext, SettingsEnums.ACTION_REMOVE_LANGUAGE,
-                                localeInfo.getLocale().toLanguageTag());
+                        .action(mContext, SettingsEnums.ACTION_REMOVE_LANGUAGE);
                 mFeedItemList.remove(i);
             }
         }

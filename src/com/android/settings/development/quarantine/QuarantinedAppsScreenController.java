@@ -18,6 +18,7 @@ package com.android.settings.development.quarantine;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.pm.Flags;
 import android.content.pm.PackageManager;
 import android.content.pm.SuspendDialogInfo;
 import android.os.UserHandle;
@@ -198,7 +199,7 @@ public class QuarantinedAppsScreenController extends BasePreferenceController im
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return Flags.quarantinedEnabled() ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override
