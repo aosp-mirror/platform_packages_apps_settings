@@ -162,7 +162,7 @@ abstract class FeatureFactory {
     abstract val stylusFeatureProvider: StylusFeatureProvider
 
     /**
-     * Retrieves implementation for TogglePreference feature.
+     * Retrieves implementation for Onboarding related feature.
      */
     open val onboardingFeatureProvider: OnboardingFeatureProvider? = null
 
