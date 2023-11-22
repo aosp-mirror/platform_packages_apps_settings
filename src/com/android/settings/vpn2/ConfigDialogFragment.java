@@ -209,7 +209,9 @@ public class ConfigDialogFragment extends InstrumentedDialogFragment implements
                 Toast.makeText(mContext, R.string.vpn_no_network, Toast.LENGTH_LONG).show();
             } catch (UnsupportedOperationException e) {
                 Log.e(TAG, "Attempted to start an unsupported VPN type.");
-                Toast.makeText(mContext, R.string.vpn_insecure_dialog_subtitle, Toast.LENGTH_LONG)
+                final AlertDialog unusedDialog = new AlertDialog.Builder(mContext)
+                        .setMessage(R.string.vpn_start_unsupported)
+                        .setPositiveButton(android.R.string.ok, null)
                         .show();
             }
         }
