@@ -474,18 +474,25 @@ public class SettingsSliceProvider extends SliceProvider {
 
     @VisibleForTesting
     boolean isPrivateSlicesNeeded(Uri uri) {
-        final String queryUri = getContext().getString(R.string.config_non_public_slice_query_uri);
+        final Context context = getContext();
+        final String queryUri = context.getString(R.string.config_non_public_slice_query_uri);
 
         if (!TextUtils.isEmpty(queryUri) && TextUtils.equals(uri.toString(), queryUri)) {
             // check if the calling package is eligible for private slices
             final int callingUid = Binder.getCallingUid();
-            final boolean hasPermission = getContext().checkPermission(
-                    android.Manifest.permission.READ_SEARCH_INDEXABLES, Binder.getCallingPid(),
-                    callingUid) == PackageManager.PERMISSION_GRANTED;
-            final String callingPackage = getContext().getPackageManager()
-                    .getPackagesForUid(callingUid)[0];
-            return hasPermission && TextUtils.equals(callingPackage,
-                    getContext().getString(R.string.config_settingsintelligence_package_name));
+            final boolean hasPermission =
+                    context.checkPermission(
+                                    android.Manifest.permission.READ_SEARCH_INDEXABLES,
+                                    Binder.getCallingPid(),
+                                    callingUid)
+                            == PackageManager.PERMISSION_GRANTED;
+            final String[] packages = context.getPackageManager().getPackagesForUid(callingUid);
+            final String callingPackage =
+                    packages != null && packages.length > 0 ? packages[0] : null;
+            return hasPermission
+                    && TextUtils.equals(
+                            callingPackage,
+                            context.getString(R.string.config_settingsintelligence_package_name));
         }
         return false;
     }
