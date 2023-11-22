@@ -47,6 +47,9 @@ class SpellCheckerPreference extends CustomListPreference {
         super(context, null);
         mScis = scis;
         setWidgetLayoutResource(R.layout.preference_widget_gear);
+        if (scis == null) {
+            return;
+        }
         CharSequence[] labels = new CharSequence[scis.length];
         CharSequence[] values = new CharSequence[scis.length];
         for (int i = 0 ; i < scis.length; i++) {
