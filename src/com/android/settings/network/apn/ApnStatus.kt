@@ -93,6 +93,12 @@ data class ApnData(
         values.put(Telephony.Carriers.NETWORK_TYPE_BITMASK, networkType)
         values.put(Telephony.Carriers.CARRIER_ENABLED, apnEnable)
         values.put(Telephony.Carriers.EDITED_STATUS, Telephony.Carriers.USER_EDITED)
+        if (newApn) {
+            val simCarrierId =
+                context.getSystemService(TelephonyManager::class.java)!!.createForSubscriptionId(subId)
+                    .getSimCarrierId()
+            values.put(Telephony.Carriers.CARRIER_ID, simCarrierId)
+        }
         return values
     }
 }
@@ -513,4 +519,9 @@ private fun getEditableApnType(apnData: ApnData): String {
             APN_TYPE_IMS,
         )
     }.joinToString()
+}
+
+fun deleteApn(uri: Uri, context: Context) {
+    val contentResolver = context.contentResolver
+    contentResolver.delete(uri, null, null)
 }

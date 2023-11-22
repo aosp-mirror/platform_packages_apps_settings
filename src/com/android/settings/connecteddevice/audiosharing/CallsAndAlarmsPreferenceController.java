@@ -62,14 +62,6 @@ public class CallsAndAlarmsPreferenceController extends AudioSharingBasePreferen
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        updateDeviceItemsInSharingSession();
-        // mDeviceItemsInSharingSession is ordered. The active device is the first place if exits.
-        if (!mDeviceItemsInSharingSession.isEmpty()
-                && mDeviceItemsInSharingSession.get(0).isActive()) {
-            mPreference.setSummary(mDeviceItemsInSharingSession.get(0).getName());
-        } else {
-            mPreference.setSummary("");
-        }
         mPreference.setOnPreferenceClickListener(
                 preference -> {
                     if (mFragment == null) {
@@ -107,6 +99,22 @@ public class CallsAndAlarmsPreferenceController extends AudioSharingBasePreferen
     }
 
     @Override
+    public void updateVisibility(boolean isVisible) {
+        super.updateVisibility(isVisible);
+        if (isVisible && mPreference != null) {
+            updateDeviceItemsInSharingSession();
+            // mDeviceItemsInSharingSession is ordered. The active device is the first place if
+            // exits.
+            if (!mDeviceItemsInSharingSession.isEmpty()
+                    && mDeviceItemsInSharingSession.get(0).isActive()) {
+                mPreference.setSummary(mDeviceItemsInSharingSession.get(0).getName());
+            } else {
+                mPreference.setSummary("");
+            }
+        }
+    }
+
+    @Override
     public void onActiveDeviceChanged(
             @Nullable CachedBluetoothDevice activeDevice, int bluetoothProfile) {
         if (bluetoothProfile != BluetoothProfile.LE_AUDIO) {
@@ -129,7 +137,7 @@ public class CallsAndAlarmsPreferenceController extends AudioSharingBasePreferen
         mGroupedConnectedDevices =
                 AudioSharingUtils.fetchConnectedDevicesByGroupId(mLocalBtManager);
         mDeviceItemsInSharingSession =
-                AudioSharingUtils.buildOrderedDeviceItemsInSharingSession(
-                        mGroupedConnectedDevices, mLocalBtManager);
+                AudioSharingUtils.buildOrderedConnectedLeadAudioSharingDeviceItem(
+                        mLocalBtManager, mGroupedConnectedDevices, /* filterByInSharing= */ true);
     }
 }
