@@ -16,7 +16,6 @@
 
 package com.android.settings.connecteddevice.audiosharing;
 
-import android.bluetooth.BluetoothLeBroadcastReceiveState;
 import android.content.Context;
 import android.util.Log;
 
@@ -27,10 +26,7 @@ import com.android.settings.bluetooth.BluetoothDeviceUpdater;
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
-import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
-
-import java.util.List;
 
 public class AudioSharingBluetoothDeviceUpdater extends BluetoothDeviceUpdater
         implements Preference.OnPreferenceClickListener {
@@ -55,7 +51,8 @@ public class AudioSharingBluetoothDeviceUpdater extends BluetoothDeviceUpdater
         if (isDeviceConnected(cachedDevice) && isDeviceInCachedDevicesList(cachedDevice)) {
             // If device is LE audio device and has a broadcast source,
             // it would show in audio sharing devices group.
-            if (cachedDevice.isConnectedLeAudioDevice() && hasBroadcastSource(cachedDevice)) {
+            if (cachedDevice.isConnectedLeAudioDevice()
+                    && AudioSharingUtils.hasBroadcastSource(cachedDevice, mLocalBluetoothManager)) {
                 isFilterMatched = true;
             }
         }
@@ -74,24 +71,6 @@ public class AudioSharingBluetoothDeviceUpdater extends BluetoothDeviceUpdater
         final CachedBluetoothDevice device =
                 ((BluetoothDevicePreference) preference).getBluetoothDevice();
         return device.setActive();
-    }
-
-    private boolean hasBroadcastSource(CachedBluetoothDevice cachedDevice) {
-        LocalBluetoothLeBroadcastAssistant assistant =
-                mLocalBluetoothManager.getProfileManager().getLeAudioBroadcastAssistantProfile();
-        if (assistant == null) {
-            return false;
-        }
-        List<BluetoothLeBroadcastReceiveState> sourceList =
-                assistant.getAllSources(cachedDevice.getDevice());
-        if (!sourceList.isEmpty()) return true;
-        // Return true if member device is in broadcast.
-        for (CachedBluetoothDevice device : cachedDevice.getMemberDevice()) {
-            List<BluetoothLeBroadcastReceiveState> list =
-                    assistant.getAllSources(device.getDevice());
-            if (!list.isEmpty()) return true;
-        }
-        return false;
     }
 
     @Override
