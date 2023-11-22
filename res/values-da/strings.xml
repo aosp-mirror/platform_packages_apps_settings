@@ -136,16 +136,11 @@
     <string name="audio_sharing_title" msgid="4144157137502923821">"Deling af lyd"</string>
     <string name="audio_sharing_switch_title" msgid="7052827328670825701">"Del lyd"</string>
     <string name="calls_and_alarms_device_title" msgid="6993559028175454198">"Opkald og alarmer"</string>
-    <!-- no translation found for audio_streams_category_title (4878022761829895463) -->
-    <skip />
-    <!-- no translation found for audio_streams_pref_title (6320485086288646209) -->
-    <skip />
-    <!-- no translation found for audio_streams_title (6617990880383079165) -->
-    <skip />
-    <!-- no translation found for audio_streams_qr_code_summary (2838923349871884871) -->
-    <skip />
-    <!-- no translation found for audio_streams_empty (8803517701437394982) -->
-    <skip />
+    <string name="audio_streams_category_title" msgid="4878022761829895463">"Opret forbindelse til en LE-lydstream"</string>
+    <string name="audio_streams_pref_title" msgid="6320485086288646209">"Lydstreams i nærheden"</string>
+    <string name="audio_streams_title" msgid="6617990880383079165">"Lydstreams"</string>
+    <string name="audio_streams_qr_code_summary" msgid="2838923349871884871">"Opret forbindelse til en lydstream ved hjælp af en QR-kode"</string>
+    <string name="audio_streams_empty" msgid="8803517701437394982">"Ingen lydstreams blev fundet i nærheden."</string>
     <string name="date_and_time" msgid="1788358029823431692">"Dato og klokkeslæt"</string>
     <string name="proxy_settings_title" msgid="4201866858226087066">"Proxy"</string>
     <string name="proxy_clear_text" msgid="6529658759984031149">"Ryd"</string>
@@ -548,22 +543,14 @@
     <string name="work_profile_category_header" msgid="85707750968948517">"Arbejdsprofil"</string>
     <string name="private_space_title" msgid="7078627930195569767">"Privat rum"</string>
     <string name="private_space_summary" msgid="8237652417163408001">"Skjul apps i en privat mappe"</string>
-    <!-- no translation found for private_space_description (5494963647270826210) -->
-    <skip />
-    <!-- no translation found for private_space_lock_title (3006539720164938296) -->
-    <skip />
-    <!-- no translation found for private_space_one_lock_summary (2759953747682959371) -->
-    <skip />
-    <!-- no translation found for private_space_screen_lock_title (8679383894967823163) -->
-    <skip />
-    <!-- no translation found for private_space_biometric_title (3934339826674553174) -->
-    <skip />
-    <!-- no translation found for private_space_biometric_summary (4403837276018724581) -->
-    <skip />
-    <!-- no translation found for private_space_screen_lock_summary (394837965365561070) -->
-    <skip />
-    <!-- no translation found for private_space_new_lock_title (7306873010565337671) -->
-    <skip />
+    <string name="private_space_description" msgid="5494963647270826210">"Skjul apps i en privat mappe, som kun du kan tilgå"</string>
+    <string name="private_space_lock_title" msgid="3006539720164938296">"Lås til privat rum"</string>
+    <string name="private_space_one_lock_summary" msgid="2759953747682959371">"Du kan låse op for det private rum på samme måde, som du låser din enhed op, eller ved at vælge en anden lås"</string>
+    <string name="private_space_screen_lock_title" msgid="8679383894967823163">"Brug enhedens skærmlås"</string>
+    <string name="private_space_biometric_title" msgid="3934339826674553174">"Ansigtsoplåsning og fingeroplåsning"</string>
+    <string name="private_space_biometric_summary" msgid="4403837276018724581">"Tryk for at konfigurere"</string>
+    <string name="private_space_screen_lock_summary" msgid="394837965365561070">"Den samme som enhedens skærmlås"</string>
+    <string name="private_space_new_lock_title" msgid="7306873010565337671">"Vil du vælge en ny lås til det private rum?"</string>
     <string name="private_space_hide_title" msgid="8687034008994037610">"Skjul, når det er låst"</string>
     <string name="privatespace_hide_page_title" msgid="972581369094289386">"Skjul det private rum, når det er låst"</string>
     <string name="privatespace_hide_page_summary" msgid="1052569521186403642">"Hvis andre ikke må kende til det private rum på din enhed, kan du skjule det på listen over apps"</string>
@@ -591,9 +578,10 @@
     <string name="privatespace_hidden_notifications_text" msgid="8121285743543004812">"Notifikationer fra apps i det private rum er skjult, når det private rum er låst"</string>
     <string name="privatespace_apps_permission_text" msgid="4418511924151828812">"Apps i et privat rum vises ikke i tilladelsesmanager, privatlivspanelet eller andre indstillinger, når det private rum er låst"</string>
     <string name="privatespace_setting_up_text" msgid="8532777749891406509">"Konfigurerer et privat rum…"</string>
-    <string name="privatespace_lock_protected_title" msgid="7409801274869666860">"Det private rum er beskyttet af en lås"</string>
     <string name="privatespace_apps_hidden_title" msgid="6146605677591599107">"Oplysninger om brug for apps i et privat rum er skjult, når det private rum er låst"</string>
     <string name="privatespace_access_from_apps_title" msgid="6787000636686810564">"Få adgang til dit private rum via din liste over apps"</string>
+    <!-- no translation found for privatespace_system_apps_installed_title (4782295812052574626) -->
+    <skip />
     <string name="privatespace_error_screen_title" msgid="8658511165913662275">"Det private rum kunne ikke konfigureres"</string>
     <string name="privatespace_error_screen_summary" msgid="5679626031159521676">"Prøv igen nu, eller vend tilbage senere"</string>
     <string name="privatespace_tryagain_label" msgid="4091466165724929876">"Prøv igen"</string>
@@ -602,22 +590,17 @@
     <string name="privatespace_use_screenlock_label" msgid="2775404941450049991">"Brug skærmlås"</string>
     <string name="privatespace_set_lock_label" msgid="6277529807188602545">"Vælg en ny lås"</string>
     <string name="privatespace_success_title" msgid="4854425684898602993">"Det var det hele."</string>
-    <string name="privatespace_access_text" msgid="8756118686974614618">"Stryg opad fra bunden af startskærmen, og rul ned for at få adgang til dit private rum"</string>
+    <!-- no translation found for privatespace_access_text (1253541577173303723) -->
+    <skip />
     <string name="privatespace_done_label" msgid="5534818213879562387">"Udfør"</string>
     <string name="scrolldown_to_access" msgid="5160743933093369151">"Rul ned for at få adgang til det private rum"</string>
     <string name="privatespace_retry_signin_title" msgid="495054309243289223">"Log ind for at konfigurere Private Space"</string>
-    <!-- no translation found for privatespace_retry_summary (1508253540053006284) -->
-    <skip />
-    <!-- no translation found for privatespace_unhide_header (1192011539687584004) -->
-    <skip />
-    <!-- no translation found for privatespace_open_settings (5038101805604421393) -->
-    <skip />
-    <!-- no translation found for privatespace_tap_settings (928932826450238276) -->
-    <skip />
-    <!-- no translation found for privatespace_turnoff_hide (4858511423837613842) -->
-    <skip />
-    <!-- no translation found for privatespace_development_note (2999992301558700721) -->
-    <skip />
+    <string name="privatespace_retry_summary" msgid="1508253540053006284">"Du skal logge ind på en konto for at konfigurere et privat rum"</string>
+    <string name="privatespace_unhide_header" msgid="1192011539687584004">"Få vist det private rum (ikke den endelige brugeroplevelse)"</string>
+    <string name="privatespace_open_settings" msgid="5038101805604421393">"Åbn appen Indstillinger"</string>
+    <string name="privatespace_tap_settings" msgid="928932826450238276">"Tryk på Sikkerhed og privatliv &gt; Privat rum &gt; Skjul det private rum, når det er låst"</string>
+    <string name="privatespace_turnoff_hide" msgid="4858511423837613842">"Deaktiver kontakten for Skjul det private rum, når det er låst"</string>
+    <string name="privatespace_development_note" msgid="2999992301558700721">"Bemærkning til Googlere: Denne funktion er stadig under udvikling"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Du kan tilføje op til <xliff:g id="COUNT">%d</xliff:g> fingeraftryk"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Du har tilføjet det maksimale antal fingeraftryk"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Du kan ikke tilføje flere fingeraftryk"</string>
@@ -781,8 +764,7 @@
     <string name="bluetooth_device_context_connect" msgid="4913860372216815855">"Forbind"</string>
     <string name="bluetooth_device_context_disconnect" msgid="4464167389972513232">"Afbryd"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="2406032703622371826">"Par og forbind med denne enhed"</string>
-    <!-- no translation found for bluetooth_empty_list_bluetooth_off (7326727272747345476) -->
-    <skip />
+    <string name="bluetooth_empty_list_bluetooth_off" msgid="7326727272747345476">"Når Bluetooth er aktiveret, kan enheden kommunikere med andre Bluetooth-enheder i nærheden"</string>
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Når Bluetooth er aktiveret, kan din enhed kommunikere med andre Bluetooth-enheder i nærheden.\n\nFor at forbedre enhedsoplevelsen kan apps og tjenester stadig til enhver tid søge efter enheder i nærheden, også selvom Bluetooth er deaktiveret. Dette kan f.eks. bruges til at forbedre lokationsbaserede funktioner og tjenester. Du kan ændre dette i indstillingerne for Bluetooth-scanning."</string>
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Rediger"</string>
     <string name="device_details_title" msgid="1155622417516195481">"Enhedsoplysninger"</string>
@@ -1022,7 +1004,7 @@
     <string name="wifi_p2p_remembered_groups" msgid="5497007770930525695">"Gemte grupper"</string>
     <string name="wifi_p2p_failed_connect_message" msgid="6767831720507440027">"Der kunne ikke oprettes forbindelse."</string>
     <string name="wifi_p2p_failed_rename_message" msgid="1317434386267376606">"Enheden kunne ikke omdøbes."</string>
-    <string name="wifi_p2p_disconnect_title" msgid="96361896458072463">"Vil du afbryde?"</string>
+    <string name="wifi_p2p_disconnect_title" msgid="96361896458072463">"Vil du afbryde forbindelsen?"</string>
     <string name="wifi_p2p_disconnect_message" msgid="1208761239498807208">"Hvis du afbryder, stoppes forbindelsen til <xliff:g id="PEER_NAME">%1$s</xliff:g>."</string>
     <string name="wifi_p2p_disconnect_multiple_message" msgid="4490648217799144078">"Hvis du afbryder, stoppes forbindelsen til <xliff:g id="PEER_NAME">%1$s</xliff:g> og <xliff:g id="PEER_COUNT">%2$s</xliff:g> andre enheder."</string>
     <string name="wifi_p2p_cancel_connect_title" msgid="8476985132989357041">"Vil du annullere invitationen?"</string>
@@ -2265,10 +2247,12 @@
     <string name="accessibility_service_action_perform_description" msgid="7807832069800034738">"Den kan spore dine interaktioner med en app eller en hardwaresensor og interagere med apps på dine vegne."</string>
     <string name="accessibility_dialog_button_allow" msgid="8274918676473216697">"Tillad"</string>
     <string name="accessibility_dialog_button_deny" msgid="2037249860078259284">"Afvis"</string>
-    <string name="accessibility_dialog_button_stop" msgid="7295448112784528196">"Stop"</string>
-    <string name="accessibility_dialog_button_cancel" msgid="4813234247237851121">"Annuller"</string>
-    <string name="disable_service_title" msgid="2909108731776956167">"Vil du standse <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <string name="disable_service_message" msgid="4814173941688548016">"Når du trykker på <xliff:g id="STOP">%1$s</xliff:g>, stoppes <xliff:g id="SERVICE">%2$s</xliff:g>."</string>
+    <!-- no translation found for accessibility_dialog_button_stop (7584815613743292151) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_cancel (8625997437316659966) -->
+    <skip />
+    <!-- no translation found for disable_service_title (8178020230162342801) -->
+    <skip />
     <string name="accessibility_no_services_installed" msgid="3725569493860028593">"Der er ikke installeret nogen tjenester"</string>
     <string name="accessibility_no_service_selected" msgid="1310596127128379897">"Der er ikke valgt nogen tjeneste"</string>
     <string name="accessibility_service_default_description" msgid="7801435825448138526">"Ingen beskrivelse til rådighed."</string>
@@ -2748,27 +2732,18 @@
     <string name="vpn_name" msgid="3806456074909253262">"Navn"</string>
     <string name="vpn_type" msgid="5533202873260826663">"Type"</string>
     <string name="vpn_server" msgid="2908816134941973935">"Serveradresse"</string>
-    <string name="vpn_mppe" msgid="7366657055055114239">"PPP-kryptering (MPPE)"</string>
-    <string name="vpn_l2tp_secret" msgid="2356744369959140121">"L2TP-hemmelighed"</string>
     <string name="vpn_ipsec_identifier" msgid="8511842694369254801">"IPSec-identifikator"</string>
     <string name="vpn_ipsec_secret" msgid="532007567355505963">"IPsec-forhåndsdelt nøglekodning"</string>
     <string name="vpn_ipsec_user_cert" msgid="2714372103705048405">"IPSec-brugercertifikat"</string>
     <string name="vpn_ipsec_ca_cert" msgid="5558498943577474987">"IPSec CA-certifikat"</string>
     <string name="vpn_ipsec_server_cert" msgid="1411390470454731396">"IPSec-servercertifikat"</string>
     <string name="vpn_show_options" msgid="6105437733943318667">"Vis avancerede valgmuligheder"</string>
-    <string name="vpn_search_domains" msgid="1973799969613962440">"DNS-søgedomæner"</string>
-    <string name="vpn_dns_servers" msgid="6505263074417737107">"DNS-servere (f.eks. 8.8.8.8)"</string>
-    <string name="vpn_routes" msgid="1218707725375594862">"Videresendelsesruter (f.eks. 10.0.0.0/8)"</string>
     <string name="vpn_username" msgid="8671768183475960068">"Brugernavn"</string>
     <string name="vpn_password" msgid="1183746907642628127">"Adgangskode"</string>
     <string name="vpn_save_login" msgid="5986762519977472618">"Gem kontooplysninger"</string>
     <string name="vpn_not_used" msgid="7229312881336083354">"(bruges ikke)"</string>
     <string name="vpn_no_ca_cert" msgid="3687379414088677735">"(ingen verificering af serveren)"</string>
     <string name="vpn_no_server_cert" msgid="8106540968643125407">"(modtaget fra serveren)"</string>
-    <string name="vpn_always_on_invalid_reason_type" msgid="4699113710248872972">"Denne VPN-type kan ikke være forbundet hele tiden"</string>
-    <string name="vpn_always_on_invalid_reason_server" msgid="2635347740046212693">"Konstant VPN understøtter kun numeriske serveradresser"</string>
-    <string name="vpn_always_on_invalid_reason_no_dns" msgid="3980357762395272467">"Der skal angives en DNS-server for konstant VPN"</string>
-    <string name="vpn_always_on_invalid_reason_dns" msgid="3934369594591801587">"DNS-serveradressen skal være numerisk for altid aktiverede VPN-netværk"</string>
     <string name="vpn_always_on_invalid_reason_other" msgid="4571905303713233321">"De indtastede oplysninger understøtter ikke konstant VPN"</string>
     <string name="vpn_cancel" msgid="5929410618112404383">"Annuller"</string>
     <string name="vpn_done" msgid="5137858784289564985">"Annuller"</string>
@@ -2779,7 +2754,7 @@
     <string name="vpn_forget" msgid="2913950864877236737">"Glem"</string>
     <string name="vpn_connect_to" msgid="216709261691085594">"Opret forbindelse til <xliff:g id="PROFILE">%s</xliff:g>"</string>
     <string name="vpn_disconnect_confirm" msgid="6356789348816854539">"Vil du afbryde dette VPN?"</string>
-    <string name="vpn_disconnect" msgid="7753808961085867345">"Afbryd"</string>
+    <string name="vpn_disconnect" msgid="7753808961085867345">"Afbryd forbindelse"</string>
     <string name="vpn_version" msgid="6344167191984400976">"Version"</string>
     <string name="vpn_forget_long" msgid="729132269203870205">"Glem VPN"</string>
     <string name="vpn_replace_vpn_title" msgid="3994226561866340280">"Erstat det eksisterende VPN-netværk?"</string>
@@ -2804,6 +2779,8 @@
     <string name="vpn_require_connection" msgid="1027347404470060998">"Bloker forbindelser uden VPN"</string>
     <string name="vpn_require_connection_title" msgid="4186758487822779039">"Vil du kræve VPN-forbindelse?"</string>
     <string name="vpn_insecure_dialog_subtitle" msgid="1857621742868835300">"Ikke sikkert. Opdater til et IKEv2 VPN-netværk"</string>
+    <!-- no translation found for vpn_start_unsupported (7139925503292269904) -->
+    <skip />
     <string name="vpn_lockdown_summary" msgid="4700625960550559029">"Vælg en VPN-profil, der altid skal være forbindelse til. Netværkstrafik tillades kun, når der er forbindelse til dette VPN-netværk."</string>
     <string name="vpn_lockdown_none" msgid="455915403560910517">"Ingen"</string>
     <string name="vpn_lockdown_config_error" msgid="1992071316416371316">"Et konstant VPN kræver en IP-adresse til både server og DNS."</string>
@@ -3361,8 +3338,7 @@
     <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"Vis alt indhold i notifikationer"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"Vis kun følsomt indhold, når skærmen er låst op"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"Vis slet ingen notifikationer"</string>
-    <!-- no translation found for lock_screen_notifications_interstitial_message (6326229471276829730) -->
-    <skip />
+    <string name="lock_screen_notifications_interstitial_message" msgid="6326229471276829730">"Hvad skal der vises på låseskærmen?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1360388192096354315">"Låseskærm"</string>
     <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"Vis alt indhold i arbejdsnotifikationer"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"Skjul følsomt arbejdsindhold"</string>
@@ -4017,8 +3993,7 @@
     <string name="battery_tips_apps_summary_higher_than_usual_in_background" msgid="1585002072567422199">"<xliff:g id="APP_LABEL">%1$s</xliff:g> brugte mere batteri end normalt i baggrunden"</string>
     <string name="battery_tips_apps_summary_always_high_in_foreground" msgid="1910991243576404700">"<xliff:g id="APP_LABEL">%1$s</xliff:g> brugte mere batteri i forgrunden"</string>
     <string name="battery_tips_apps_summary_higher_than_usual_in_foreground" msgid="7937337570425168210">"<xliff:g id="APP_LABEL">%1$s</xliff:g> brugte mere batteri end normalt i forgrunden"</string>
-    <!-- no translation found for battery_usage_anomaly_content_description (3199380151630770476) -->
-    <skip />
+    <string name="battery_usage_anomaly_content_description" msgid="3199380151630770476">"Afvigelse i batteriforbrug"</string>
     <string name="battery_app_item_hint" msgid="4850929961461039110">"Højt batteriforbrug"</string>
     <string name="battery_app_item_hint_in_bg" msgid="596240821466388336">"Højt batteriforbrug i baggrunden"</string>
     <string name="battery_app_item_hint_in_fg" msgid="5091860632260799910">"Højt batteriforbrug i forgrunden"</string>
@@ -4116,8 +4091,7 @@
     <string name="keywords_system_navigation" msgid="3131782378486554934">"systemnavigering, navigering med to knapper, navigering med tre knapper, navigering med bevægelser, stryg"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Digital assistent"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Stryg for at aktivere assistenten"</string>
-    <!-- no translation found for assistant_corner_gesture_summary (5012534700233017955) -->
-    <skip />
+    <string name="assistant_corner_gesture_summary" msgid="5012534700233017955">"Stryg opad fra et af de nedre hjørner for at aktivere appen for din digitale assistent."</string>
     <string name="assistant_long_press_home_gesture_title" msgid="4865972278738178753">"Hold knappen Hjem nede for at aktivere Assistent"</string>
     <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"Hold knappen Hjem nede for at aktivere appen for den digitale assistent."</string>
     <string name="low_label" msgid="6525629096999711220">"Lav"</string>
