@@ -17,6 +17,7 @@
 package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.android.settings.R;
@@ -58,10 +59,17 @@ public class AudioStreamsDashboardFragment extends DashboardFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        use(AudioStreamsScanQrCodeController.class).setFragment(this);
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // TODO(chelseahao): implementation.
     }
 }
