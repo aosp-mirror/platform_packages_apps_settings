@@ -160,6 +160,7 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
                                     + ", reason = "
                                     + reason);
                     mBluetoothDeviceUpdater.forceUpdate();
+                    AudioSharingUtils.updateActiveDeviceIfNeeded(mLocalBtManager);
                 }
 
                 @Override
@@ -204,6 +205,7 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
                                     + ", reason = "
                                     + reason);
                     mBluetoothDeviceUpdater.forceUpdate();
+                    AudioSharingUtils.updateActiveDeviceIfNeeded(mLocalBtManager);
                 }
 
                 @Override
@@ -299,7 +301,7 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
         mPreferenceGroup.setVisible(false);
         mAudioSharingSettingsPreference.setVisible(false);
 
-        if (isAvailable() && mBluetoothDeviceUpdater != null) {
+        if (isAvailable()) {
             mBluetoothDeviceUpdater.setPrefContext(screen.getContext());
             mBluetoothDeviceUpdater.forceUpdate();
         }
@@ -309,6 +311,7 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
     public int getAvailabilityStatus() {
         return mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH)
                         && Flags.enableLeAudioSharing()
+                        && mBluetoothDeviceUpdater != null
                 ? AVAILABLE_UNSEARCHABLE
                 : UNSUPPORTED_ON_DEVICE;
     }
