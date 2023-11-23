@@ -110,7 +110,8 @@ public class NewKeyboardSettingsUtils {
     }
 
     static InputDevice getInputDevice(InputManager im, InputDeviceIdentifier identifier) {
-        return im.getInputDeviceByDescriptor(identifier.getDescriptor());
+        return identifier == null ? null : im.getInputDeviceByDescriptor(
+                identifier.getDescriptor());
     }
 
     static KeyboardLayout[] getKeyboardLayouts(InputManager inputManager, int userId,

@@ -543,22 +543,14 @@
     <string name="work_profile_category_header" msgid="85707750968948517">"Work profile"</string>
     <string name="private_space_title" msgid="7078627930195569767">"Private Space"</string>
     <string name="private_space_summary" msgid="8237652417163408001">"Hide apps in a private folder"</string>
-    <!-- no translation found for private_space_description (5494963647270826210) -->
-    <skip />
-    <!-- no translation found for private_space_lock_title (3006539720164938296) -->
-    <skip />
-    <!-- no translation found for private_space_one_lock_summary (2759953747682959371) -->
-    <skip />
-    <!-- no translation found for private_space_screen_lock_title (8679383894967823163) -->
-    <skip />
-    <!-- no translation found for private_space_biometric_title (3934339826674553174) -->
-    <skip />
-    <!-- no translation found for private_space_biometric_summary (4403837276018724581) -->
-    <skip />
-    <!-- no translation found for private_space_screen_lock_summary (394837965365561070) -->
-    <skip />
-    <!-- no translation found for private_space_new_lock_title (7306873010565337671) -->
-    <skip />
+    <string name="private_space_description" msgid="5494963647270826210">"Hide apps in a private folder that only you can access"</string>
+    <string name="private_space_lock_title" msgid="3006539720164938296">"Private Space lock"</string>
+    <string name="private_space_one_lock_summary" msgid="2759953747682959371">"You can unlock Private Space the same way you unlock your device, or choose a different lock"</string>
+    <string name="private_space_screen_lock_title" msgid="8679383894967823163">"Use device screen lock"</string>
+    <string name="private_space_biometric_title" msgid="3934339826674553174">"Face &amp; Fingerprint Unlock"</string>
+    <string name="private_space_biometric_summary" msgid="4403837276018724581">"Tap to set up"</string>
+    <string name="private_space_screen_lock_summary" msgid="394837965365561070">"Same as device screen lock"</string>
+    <string name="private_space_new_lock_title" msgid="7306873010565337671">"Choose a new lock for Private Space?"</string>
     <string name="private_space_hide_title" msgid="8687034008994037610">"Hide when locked"</string>
     <string name="privatespace_hide_page_title" msgid="972581369094289386">"Hide Private Space when locked"</string>
     <string name="privatespace_hide_page_summary" msgid="1052569521186403642">"To stop other people knowing Private Space is on your device, you can hide it from your apps list"</string>
@@ -586,9 +578,9 @@
     <string name="privatespace_hidden_notifications_text" msgid="8121285743543004812">"Notifications from apps in Private Space are hidden when it’s locked"</string>
     <string name="privatespace_apps_permission_text" msgid="4418511924151828812">"Private Space apps won’t appear in permission manager, privacy dashboard, and other settings when Private Space is locked"</string>
     <string name="privatespace_setting_up_text" msgid="8532777749891406509">"Setting up Private Space…"</string>
-    <string name="privatespace_lock_protected_title" msgid="7409801274869666860">"Private Space is protected by a lock"</string>
     <string name="privatespace_apps_hidden_title" msgid="6146605677591599107">"Usage info for Private Space apps is hidden when it’s locked"</string>
     <string name="privatespace_access_from_apps_title" msgid="6787000636686810564">"Access Private Space from your apps list"</string>
+    <string name="privatespace_system_apps_installed_title" msgid="4782295812052574626">"Some system apps are already installed in Private Space"</string>
     <string name="privatespace_error_screen_title" msgid="8658511165913662275">"Couldn’t set up Private Space"</string>
     <string name="privatespace_error_screen_summary" msgid="5679626031159521676">"Try again now, or come back later"</string>
     <string name="privatespace_tryagain_label" msgid="4091466165724929876">"Try Again"</string>
@@ -597,7 +589,7 @@
     <string name="privatespace_use_screenlock_label" msgid="2775404941450049991">"Use screen lock"</string>
     <string name="privatespace_set_lock_label" msgid="6277529807188602545">"Choose new lock"</string>
     <string name="privatespace_success_title" msgid="4854425684898602993">"All set!"</string>
-    <string name="privatespace_access_text" msgid="8756118686974614618">"To access Private Space, swipe up from the bottom of your home screen, then scroll down"</string>
+    <string name="privatespace_access_text" msgid="1253541577173303723">"You can access Private Space from your apps list"</string>
     <string name="privatespace_done_label" msgid="5534818213879562387">"Done"</string>
     <string name="scrolldown_to_access" msgid="5160743933093369151">"Scroll down to access Private Space"</string>
     <string name="privatespace_retry_signin_title" msgid="495054309243289223">"Sign in to set up Private Space"</string>
@@ -2253,10 +2245,12 @@
     <string name="accessibility_service_action_perform_description" msgid="7807832069800034738">"It can track your interactions with an app or a hardware sensor and interact with apps on your behalf."</string>
     <string name="accessibility_dialog_button_allow" msgid="8274918676473216697">"Allow"</string>
     <string name="accessibility_dialog_button_deny" msgid="2037249860078259284">"Deny"</string>
-    <string name="accessibility_dialog_button_stop" msgid="7295448112784528196">"Stop"</string>
-    <string name="accessibility_dialog_button_cancel" msgid="4813234247237851121">"Cancel"</string>
-    <string name="disable_service_title" msgid="2909108731776956167">"Stop <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <string name="disable_service_message" msgid="4814173941688548016">"Tapping <xliff:g id="STOP">%1$s</xliff:g> will stop <xliff:g id="SERVICE">%2$s</xliff:g>."</string>
+    <!-- no translation found for accessibility_dialog_button_stop (7584815613743292151) -->
+    <skip />
+    <!-- no translation found for accessibility_dialog_button_cancel (8625997437316659966) -->
+    <skip />
+    <!-- no translation found for disable_service_title (8178020230162342801) -->
+    <skip />
     <string name="accessibility_no_services_installed" msgid="3725569493860028593">"No services installed"</string>
     <string name="accessibility_no_service_selected" msgid="1310596127128379897">"No service selected"</string>
     <string name="accessibility_service_default_description" msgid="7801435825448138526">"No description provided."</string>
@@ -2736,27 +2730,18 @@
     <string name="vpn_name" msgid="3806456074909253262">"Name"</string>
     <string name="vpn_type" msgid="5533202873260826663">"Type"</string>
     <string name="vpn_server" msgid="2908816134941973935">"Server address"</string>
-    <string name="vpn_mppe" msgid="7366657055055114239">"PPP encryption (MPPE)"</string>
-    <string name="vpn_l2tp_secret" msgid="2356744369959140121">"L2TP secret"</string>
     <string name="vpn_ipsec_identifier" msgid="8511842694369254801">"IPSec identifier"</string>
     <string name="vpn_ipsec_secret" msgid="532007567355505963">"IPSec pre-shared key"</string>
     <string name="vpn_ipsec_user_cert" msgid="2714372103705048405">"IPSec user certificate"</string>
     <string name="vpn_ipsec_ca_cert" msgid="5558498943577474987">"IPSec CA certificate"</string>
     <string name="vpn_ipsec_server_cert" msgid="1411390470454731396">"IPSec server certificate"</string>
     <string name="vpn_show_options" msgid="6105437733943318667">"Show advanced options"</string>
-    <string name="vpn_search_domains" msgid="1973799969613962440">"DNS search domains"</string>
-    <string name="vpn_dns_servers" msgid="6505263074417737107">"DNS servers (e.g. 8.8.8.8)"</string>
-    <string name="vpn_routes" msgid="1218707725375594862">"Forwarding routes (e.g. 10.0.0.0/8)"</string>
     <string name="vpn_username" msgid="8671768183475960068">"Username"</string>
     <string name="vpn_password" msgid="1183746907642628127">"Password"</string>
     <string name="vpn_save_login" msgid="5986762519977472618">"Save account information"</string>
     <string name="vpn_not_used" msgid="7229312881336083354">"(not used)"</string>
     <string name="vpn_no_ca_cert" msgid="3687379414088677735">"(don’t verify server)"</string>
     <string name="vpn_no_server_cert" msgid="8106540968643125407">"(received from server)"</string>
-    <string name="vpn_always_on_invalid_reason_type" msgid="4699113710248872972">"This VPN type can\'t stay connected at all times"</string>
-    <string name="vpn_always_on_invalid_reason_server" msgid="2635347740046212693">"Always-on VPN only supports numeric server addresses"</string>
-    <string name="vpn_always_on_invalid_reason_no_dns" msgid="3980357762395272467">"A DNS server must be specified for always-on VPN"</string>
-    <string name="vpn_always_on_invalid_reason_dns" msgid="3934369594591801587">"DNS server addresses must be numeric for always-on VPN"</string>
     <string name="vpn_always_on_invalid_reason_other" msgid="4571905303713233321">"The information entered doesn\'t support always-on VPN"</string>
     <string name="vpn_cancel" msgid="5929410618112404383">"Cancel"</string>
     <string name="vpn_done" msgid="5137858784289564985">"Dismiss"</string>
@@ -2792,6 +2777,8 @@
     <string name="vpn_require_connection" msgid="1027347404470060998">"Block connections without VPN"</string>
     <string name="vpn_require_connection_title" msgid="4186758487822779039">"Require VPN connection?"</string>
     <string name="vpn_insecure_dialog_subtitle" msgid="1857621742868835300">"Not secure. Update to an IKEv2 VPN"</string>
+    <!-- no translation found for vpn_start_unsupported (7139925503292269904) -->
+    <skip />
     <string name="vpn_lockdown_summary" msgid="4700625960550559029">"Select a VPN profile to always remain connected to. Network traffic will only be allowed when connected to this VPN."</string>
     <string name="vpn_lockdown_none" msgid="455915403560910517">"None"</string>
     <string name="vpn_lockdown_config_error" msgid="1992071316416371316">"Always-on VPN requires an IP address for both server and DNS."</string>
