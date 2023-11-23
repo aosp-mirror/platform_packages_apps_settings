@@ -2864,11 +2864,10 @@
         </activity>
 
         <activity
-            android:name="Settings$DevelopmentSettingsDashboardActivity"
+            android:name="Settings$DevelopmentSettingsActivity"
             android:label="@string/development_settings_title"
             android:icon="@drawable/ic_settings_development"
-            android:exported="true"
-            android:enabled="false">
+            android:exported="true">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.APPLICATION_DEVELOPMENT_SETTINGS" />
                 <action android:name="com.android.settings.APPLICATION_DEVELOPMENT_SETTINGS" />
@@ -2879,35 +2878,8 @@
                 <action android:name="com.android.settings.action.SETTINGS" />
                 <action android:name="com.android.intent.action.SHOW_CONTRAST_DIALOG" />
             </intent-filter>
-            <meta-data android:name="com.android.settings.order" android:value="-40"/>
-            <meta-data android:name="com.android.settings.category"
-                       android:value="com.android.settings.category.ia.system" />
-            <meta-data android:name="com.android.settings.summary"
-                       android:resource="@string/summary_empty"/>
-            <meta-data android:name="com.android.settings.icon"
-                       android:resource="@drawable/ic_settings_development" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.development.DevelopmentSettingsDashboardFragment" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_system"/>
-            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                       android:value="true" />
-        </activity>
-
-        <!-- The opposite of DevelopmentSettingsActivity, it's no-op and only enabled when the real
-             activity is disabled to be CTS compliant. -->
-        <activity
-            android:name=".development.DevelopmentSettingsDisabledActivity"
-            android:icon="@drawable/ic_settings_development"
-            android:label="@string/development_settings_title"
-            android:excludeFromRecents="true"
-            android:exported="true"
-            android:theme="@style/Transparent">
-            <intent-filter android:priority="-1">
-                <action android:name="android.settings.APPLICATION_DEVELOPMENT_SETTINGS" />
-                <action android:name="com.android.settings.APPLICATION_DEVELOPMENT_SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
         </activity>
 
         <activity
