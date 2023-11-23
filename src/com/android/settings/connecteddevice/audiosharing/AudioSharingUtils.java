@@ -34,6 +34,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class AudioSharingUtils {
@@ -227,6 +228,31 @@ public class AudioSharingUtils {
             }
         }
         return false;
+    }
+
+    /**
+     * Retrieves the one and only active Bluetooth LE Audio sink device, regardless if the device is
+     * currently in an audio sharing session.
+     *
+     * @param manager The LocalBluetoothManager instance used to fetch connected devices.
+     * @return An Optional containing the active LE Audio device, or an empty Optional if not found.
+     */
+    public static Optional<CachedBluetoothDevice> getActiveSinkOnAssistant(
+            LocalBluetoothManager manager) {
+        if (manager == null) {
+            Log.w(TAG, "getActiveSinksOnAssistant(): LocalBluetoothManager is null!");
+            return Optional.empty();
+        }
+        var groupedDevices = AudioSharingUtils.fetchConnectedDevicesByGroupId(manager);
+        var leadDevices =
+                AudioSharingUtils.buildOrderedConnectedLeadDevices(manager, groupedDevices, false);
+
+        if (!leadDevices.isEmpty() && AudioSharingUtils.isActiveLeAudioDevice(leadDevices.get(0))) {
+            return Optional.of(leadDevices.get(0));
+        } else {
+            Log.w(TAG, "getActiveSinksOnAssistant(): No active lead device!");
+        }
+        return Optional.empty();
     }
 
     /** Toast message on main thread. */
