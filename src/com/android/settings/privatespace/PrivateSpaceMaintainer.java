@@ -25,6 +25,7 @@ import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.UserInfo;
+import android.os.Flags;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -68,6 +69,9 @@ public class PrivateSpaceMaintainer {
      * <p> This method should be used by the Private Space Setup Flow ONLY.
      */
     final synchronized boolean createPrivateSpace() {
+        if (!Flags.allowPrivateProfile()) {
+            return false;
+        }
         // Check if Private space already exists
         if (doesPrivateSpaceExist()) {
             return true;
@@ -130,6 +134,9 @@ public class PrivateSpaceMaintainer {
 
     /** Returns true if the Private space exists. */
     public synchronized boolean doesPrivateSpaceExist() {
+        if (!Flags.allowPrivateProfile()) {
+            return false;
+        }
         if (mUserHandle != null) {
             return true;
         }

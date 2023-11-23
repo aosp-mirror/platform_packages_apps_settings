@@ -45,6 +45,9 @@ public class SetupSuccessFragment extends Fragment {
             LayoutInflater inflater,
             @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
+        if (!android.os.Flags.allowPrivateProfile()) {
+            return null;
+        }
         GlifLayout rootView =
                 (GlifLayout)
                         inflater.inflate(R.layout.privatespace_setup_success, container, false);
