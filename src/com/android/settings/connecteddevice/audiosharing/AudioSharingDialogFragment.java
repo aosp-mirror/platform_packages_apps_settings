@@ -21,6 +21,7 @@ import android.app.settings.SettingsEnums;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
@@ -39,7 +40,7 @@ import java.util.Locale;
 public class AudioSharingDialogFragment extends InstrumentedDialogFragment {
     private static final String TAG = "AudioSharingDialog";
 
-    private static final String BUNDLE_KEY_DEVICE_ITEMS = "bundle_key_device_names";
+    private static final String BUNDLE_KEY_DEVICE_ITEMS = "bundle_key_device_items";
 
     // The host creates an instance of this dialog fragment must implement this interface to receive
     // event callbacks.
@@ -50,9 +51,6 @@ public class AudioSharingDialogFragment extends InstrumentedDialogFragment {
          * @param item The device item clicked.
          */
         void onItemClick(AudioSharingDeviceItem item);
-
-        /** Called when users click the cancel button in the dialog. */
-        void onCancelClick();
     }
 
     private static DialogEventListener sListener;
@@ -68,6 +66,8 @@ public class AudioSharingDialogFragment extends InstrumentedDialogFragment {
      * Display the {@link AudioSharingDialogFragment} dialog.
      *
      * @param host The Fragment this dialog will be hosted.
+     * @param deviceItems The connected device items eligible for audio sharing.
+     * @param listener The callback to handle the user action on this dialog.
      */
     public static void show(
             Fragment host,
@@ -101,11 +101,6 @@ public class AudioSharingDialogFragment extends InstrumentedDialogFragment {
             subTitle1.setVisibility(View.INVISIBLE);
             subTitle2.setText(
                     "To start sharing audio, connect additional headphones that support LE audio");
-            builder.setNegativeButton(
-                    "Close",
-                    (dialog, which) -> {
-                        sListener.onCancelClick();
-                    });
         } else {
             subTitle1.setText(
                     String.format(
@@ -127,6 +122,8 @@ public class AudioSharingDialogFragment extends InstrumentedDialogFragment {
                         }));
         recyclerView.setLayoutManager(
                 new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        Button cancelBtn = mRootView.findViewById(R.id.cancel_btn);
+        cancelBtn.setOnClickListener(v -> dismiss());
         AlertDialog dialog = builder.setView(mRootView).create();
         dialog.setCanceledOnTouchOutside(false);
         return dialog;

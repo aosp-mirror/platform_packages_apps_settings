@@ -31,6 +31,7 @@ public class AudioSharingDashboardFragment extends DashboardFragment
 
     SettingsMainSwitchBar mMainSwitchBar;
     private AudioSharingSwitchBarController mSwitchBarController;
+    private AudioSharingDeviceVolumeGroupController mAudioSharingDeviceVolumeGroupController;
     private CallsAndAlarmsPreferenceController mCallsAndAlarmsPreferenceController;
     private AudioSharingNamePreferenceController mAudioSharingNamePreferenceController;
 
@@ -66,6 +67,9 @@ public class AudioSharingDashboardFragment extends DashboardFragment
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        mAudioSharingDeviceVolumeGroupController =
+                use(AudioSharingDeviceVolumeGroupController.class);
+        mAudioSharingDeviceVolumeGroupController.init(this);
         mCallsAndAlarmsPreferenceController = use(CallsAndAlarmsPreferenceController.class);
         mCallsAndAlarmsPreferenceController.init(this);
         mAudioSharingNamePreferenceController = use(AudioSharingNamePreferenceController.class);
@@ -91,6 +95,7 @@ public class AudioSharingDashboardFragment extends DashboardFragment
     }
 
     private void updateVisibilityForAttachedPreferences(boolean isVisible) {
+        mAudioSharingDeviceVolumeGroupController.updateVisibility(isVisible);
         mCallsAndAlarmsPreferenceController.updateVisibility(isVisible);
         mAudioSharingNamePreferenceController.updateVisibility(isVisible);
     }

@@ -240,8 +240,8 @@ public class NetworkProviderWifiCallingGroup extends
                 return true;
             });
 
-            pref.setEnabled(getTelephonyManagerForSubscriptionId(subId).getCallState()
-                    == TelephonyManager.CALL_STATE_IDLE);
+            pref.setEnabled(getTelephonyManagerForSubscriptionId(subId)
+                    .getCallStateForSubscription() == TelephonyManager.CALL_STATE_IDLE);
             pref.setOrder(order++);
 
             int resId = com.android.internal.R.string.wifi_calling_off_summary;
