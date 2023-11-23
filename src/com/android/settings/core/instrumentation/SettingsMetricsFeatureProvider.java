@@ -29,7 +29,6 @@ public class SettingsMetricsFeatureProvider extends MetricsFeatureProvider {
     protected void installLogWriters() {
         mLoggerWriters.add(new StatsLogWriter());
         mLoggerWriters.add(new SettingsEventLogWriter());
-        mLoggerWriters.add(new SettingsIntelligenceLogWriter());
     }
 
     /**
