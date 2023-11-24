@@ -59,15 +59,6 @@
         settings:userRestriction="no_airplane_mode"/>
 
     <com.android.settingslib.RestrictedPreference
-        android:key="manage_mobile_plan"
-        android:title="@string/manage_mobile_plan_title"
-        android:persistent="false"
-        android:order="19"
-        settings:userRestriction="no_config_mobile_networks"
-        settings:isPreferenceVisible="@bool/config_show_sim_info"
-        settings:useAdminDisabledSummary="true" />
-
-    <com.android.settingslib.RestrictedPreference
         android:fragment="com.android.settings.network.tether.TetherSettings"
         android:key="tether_settings"
         android:title="@string/tether_settings_title_all"
