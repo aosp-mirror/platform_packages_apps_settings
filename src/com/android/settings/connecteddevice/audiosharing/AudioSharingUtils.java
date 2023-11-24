@@ -16,6 +16,7 @@
 
 package com.android.settings.connecteddevice.audiosharing;
 
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothCsipSetCoordinator;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
@@ -89,11 +90,11 @@ public class AudioSharingUtils {
      * @return A list of ordered connected devices eligible for the audio sharing. The active device
      *     is placed in the first place if it exists.
      */
-    public static ArrayList<CachedBluetoothDevice> buildOrderedConnectedLeadDevices(
+    public static List<CachedBluetoothDevice> buildOrderedConnectedLeadDevices(
             LocalBluetoothManager localBtManager,
             Map<Integer, List<CachedBluetoothDevice>> groupedConnectedDevices,
             boolean filterByInSharing) {
-        ArrayList<CachedBluetoothDevice> orderedDevices = new ArrayList<>();
+        List<CachedBluetoothDevice> orderedDevices = new ArrayList<>();
         LocalBluetoothLeBroadcastAssistant assistant =
                 localBtManager.getProfileManager().getLeAudioBroadcastAssistantProfile();
         if (assistant == null) return orderedDevices;
@@ -233,5 +234,33 @@ public class AudioSharingUtils {
     public static void toastMessage(Context context, String message) {
         ThreadUtils.postOnMainThread(
                 () -> Toast.makeText(context, message, Toast.LENGTH_LONG).show());
+    }
+
+    /** Automatically update active device if needed. */
+    public static void updateActiveDeviceIfNeeded(LocalBluetoothManager localBtManager) {
+        if (localBtManager == null) return;
+        Map<Integer, List<CachedBluetoothDevice>> groupedConnectedDevices =
+                fetchConnectedDevicesByGroupId(localBtManager);
+        List<CachedBluetoothDevice> devicesInSharing =
+                buildOrderedConnectedLeadDevices(
+                        localBtManager, groupedConnectedDevices, /* filterByInSharing= */ true);
+        if (devicesInSharing.isEmpty()) return;
+        List<BluetoothDevice> devices =
+                BluetoothAdapter.getDefaultAdapter().getMostRecentlyConnectedDevices();
+        CachedBluetoothDevice targetDevice = null;
+        int targetDeviceIdx = -1;
+        for (CachedBluetoothDevice device : devicesInSharing) {
+            if (devices.contains(device.getDevice())) {
+                int idx = devices.indexOf(device.getDevice());
+                if (idx > targetDeviceIdx) {
+                    targetDeviceIdx = idx;
+                    targetDevice = device;
+                }
+            }
+        }
+        if (targetDevice != null && !isActiveLeAudioDevice(targetDevice)) {
+            Log.d(TAG, "Set active device: " + targetDevice.getDevice().getAnonymizedAddress());
+            targetDevice.setActive();
+        }
     }
 }

@@ -37,6 +37,8 @@ import com.android.settings.core.InstrumentedActivity;
  * Sharing a Wi-Fi network by QR code after unlocking. Used by {@code InternetDialog} in QS.
  */
 public class WifiDppConfiguratorAuthActivity extends InstrumentedActivity {
+    private static final String WIFI_SHARING_KEY_ALIAS = "wifi_sharing_auth_key";
+    private static final int MAX_UNLOCK_SECONDS = 60;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,7 +48,9 @@ public class WifiDppConfiguratorAuthActivity extends InstrumentedActivity {
         Intent authIntent = getSystemService(KeyguardManager.class)
                 .createConfirmDeviceCredentialIntent(
                         getText(R.string.wifi_dpp_lockscreen_title), null, getUserId());
-        if (authIntent == null) {
+        if (authIntent == null
+                || WifiDppUtils.isUnlockedWithinSeconds(
+                        WIFI_SHARING_KEY_ALIAS, MAX_UNLOCK_SECONDS)) {
             startQrCodeActivity();
             finish();
         } else {
