@@ -51,8 +51,7 @@ public final class BatterySettingsMigrateChecker extends BroadcastReceiver {
         context = context.getApplicationContext();
         verifySaverConfiguration(context);
         verifyBatteryOptimizeModes(context);
-        // Initialize and sync settings into SharedPreferences for migration.
-        DynamicDenylistManager.getInstance(context);
+        DynamicDenylistManager.getInstance(context).onBootComplete();
     }
 
     /** Avoid users set important apps into the unexpected battery optimize modes */
