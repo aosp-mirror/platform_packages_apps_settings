@@ -139,14 +139,23 @@ public final class DynamicDenylistManager {
             return;
         }
         synchronized (mLock) {
-            for (int uid : mNetworkPolicyManager
-                    .getUidsWithPolicy(POLICY_REJECT_METERED_BACKGROUND)) {
-                if (!getDenylistAllUids(getManualDenylistPref()).contains(uid)) {
-                    mNetworkPolicyManager.setUidPolicy(uid, POLICY_NONE);
+            final int[] uids = mNetworkPolicyManager
+                    .getUidsWithPolicy(POLICY_REJECT_METERED_BACKGROUND);
+            if (uids != null && uids.length != 0) {
+                for (int uid : uids) {
+                    if (!getDenylistAllUids(getManualDenylistPref()).contains(uid)) {
+                        mNetworkPolicyManager.setUidPolicy(uid, POLICY_NONE);
+                    }
                 }
             }
         }
         clearSharedPreferences();
+    }
+
+    /** Reset the POLICY_REJECT_METERED uids when device is boot completed. */
+    public void onBootComplete() {
+        resetDenylistIfNeeded(/* packageName= */ null, /* force= */ true);
+        syncPolicyIfNeeded();
     }
 
     /** Dump the data stored in the {@link SharedPreferences}. */

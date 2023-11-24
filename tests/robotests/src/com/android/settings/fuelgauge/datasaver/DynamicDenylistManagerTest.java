@@ -393,6 +393,27 @@ public class DynamicDenylistManagerTest {
         assertThat(dumpResults.contains("DynamicDenylist: null")).isTrue();
     }
 
+    @Test
+    public void onBootComplete_resetIntoManualMode() {
+        initDynamicDenylistManager(new int[] {FAKE_UID_1_INT});
+        setDenylist(new ArraySet<>(List.of(FAKE_UID_2_INT)));
+        // Ensure the testing environment for manual denylist.
+        assertThat(mManualDenyListPref.getAll()).hasSize(2);
+        assertTrue(mManualDenyListPref.contains(PREF_KEY_MANUAL_DENYLIST_SYNCED));
+        assertTrue(mManualDenyListPref.contains(FAKE_UID_1));
+        // Ensure the testing environment for dynamic denylist.
+        assertThat(mDynamicDenyListPref.getAll()).hasSize(1);
+
+        mDynamicDenylistManager.onBootComplete();
+
+        // Keep the users set uids in the manual denylist.
+        assertThat(mManualDenyListPref.getAll()).hasSize(2);
+        assertTrue(mManualDenyListPref.contains(PREF_KEY_MANUAL_DENYLIST_SYNCED));
+        assertTrue(mManualDenyListPref.contains(FAKE_UID_1));
+        // Clear the uids in the dynamic denylist.
+        assertThat(mDynamicDenyListPref.getAll()).isEmpty();
+    }
+
     private void initDynamicDenylistManager(int[] preload) {
         initDynamicDenylistManager(preload, preload);
     }
