@@ -159,12 +159,6 @@ public final class DatabaseUtils {
 
     private DatabaseUtils() {}
 
-    /** Returns true if current user is a work profile user. */
-    public static boolean isWorkProfile(Context context) {
-        final UserManager userManager = context.getSystemService(UserManager.class);
-        return userManager.isManagedProfile();
-    }
-
     /** Returns the latest timestamp current user data in app usage event table. */
     public static long getAppUsageStartTimestampOfUser(
             Context context, final long userId, final long earliestTimestamp) {
@@ -502,7 +496,7 @@ public final class DatabaseUtils {
 
     /** Returns the context with profile parent identity when current user is work profile. */
     public static Context getParentContext(Context context) {
-        if (isWorkProfile(context)) {
+        if (com.android.settingslib.fuelgauge.BatteryUtils.isWorkProfile(context)) {
             try {
                 return context.createPackageContextAsUser(
                         /* packageName= */ context.getPackageName(),
