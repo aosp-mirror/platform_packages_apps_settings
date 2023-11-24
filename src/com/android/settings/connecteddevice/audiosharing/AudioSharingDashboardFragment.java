@@ -22,6 +22,7 @@ import android.os.Bundle;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsCategoryController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.widget.SettingsMainSwitchBar;
 
@@ -34,6 +35,7 @@ public class AudioSharingDashboardFragment extends DashboardFragment
     private AudioSharingDeviceVolumeGroupController mAudioSharingDeviceVolumeGroupController;
     private CallsAndAlarmsPreferenceController mCallsAndAlarmsPreferenceController;
     private AudioSharingNamePreferenceController mAudioSharingNamePreferenceController;
+    private AudioStreamsCategoryController mAudioStreamsCategoryController;
 
     public AudioSharingDashboardFragment() {
         super();
@@ -73,6 +75,7 @@ public class AudioSharingDashboardFragment extends DashboardFragment
         mCallsAndAlarmsPreferenceController = use(CallsAndAlarmsPreferenceController.class);
         mCallsAndAlarmsPreferenceController.init(this);
         mAudioSharingNamePreferenceController = use(AudioSharingNamePreferenceController.class);
+        mAudioStreamsCategoryController = use(AudioStreamsCategoryController.class);
     }
 
     @Override
@@ -98,5 +101,6 @@ public class AudioSharingDashboardFragment extends DashboardFragment
         mAudioSharingDeviceVolumeGroupController.updateVisibility(isVisible);
         mCallsAndAlarmsPreferenceController.updateVisibility(isVisible);
         mAudioSharingNamePreferenceController.updateVisibility(isVisible);
+        mAudioStreamsCategoryController.updateVisibility(isVisible);
     }
 }
