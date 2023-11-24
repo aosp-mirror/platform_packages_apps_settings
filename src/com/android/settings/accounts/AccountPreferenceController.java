@@ -42,6 +42,7 @@ import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
+import android.content.pm.UserProperties;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -312,7 +313,8 @@ public class AccountPreferenceController extends AbstractPreferenceController
                             && !(Flags.allowPrivateProfile() && profile.isPrivateProfile())
                             && (mType & ProfileSelectFragment.ProfileType.PERSONAL) != 0))
                         && !(mUm.getUserProperties(profile.getUserHandle())
-                            .getHideInSettingsInQuietMode() && profile.isQuietModeEnabled())) {
+                            .getShowInQuietMode() == UserProperties.SHOW_IN_QUIET_MODE_HIDDEN
+                            && profile.isQuietModeEnabled())) {
                     updateProfileUi(profile);
                 }
             }

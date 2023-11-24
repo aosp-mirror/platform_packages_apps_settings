@@ -25,10 +25,10 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.widget.SummaryUpdater;
 
 public class AudioStreamsActiveDeviceController extends BasePreferenceController
-        implements SummaryUpdater.OnSummaryChangeListener, DefaultLifecycleObserver {
+        implements AudioStreamsActiveDeviceSummaryUpdater.OnSummaryChangeListener,
+                DefaultLifecycleObserver {
 
     public static final String KEY = "audio_streams_active_device";
     private final AudioStreamsActiveDeviceSummaryUpdater mSummaryHelper;
