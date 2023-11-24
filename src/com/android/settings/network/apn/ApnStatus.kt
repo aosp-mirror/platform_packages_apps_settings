@@ -69,6 +69,7 @@ data class ApnData(
     val networkTypeEnabled: Boolean = true,
     val newApn: Boolean = false,
     val subId: Int = -1,
+    val saveEnabled: Boolean = true,
     val customizedConfig: CustomizedConfig = CustomizedConfig()
 ) {
     fun getContentValues(context: Context): ContentValues {
@@ -230,6 +231,10 @@ fun validateAndSaveApnData(
     uriInit: Uri,
     networkTypeSelectedOptionsState: SnapshotStateList<Int>
 ): Boolean {
+    // Can not be saved
+    if (!apnData.saveEnabled) {
+        return false
+    }
     // Nothing to do if it's a read only APN
     if (apnData.customizedConfig.readOnlyApn) {
         return true
