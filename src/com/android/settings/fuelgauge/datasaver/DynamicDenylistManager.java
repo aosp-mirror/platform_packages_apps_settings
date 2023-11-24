@@ -23,12 +23,14 @@ import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.NetworkPolicyManager;
 import android.util.ArraySet;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
+import java.io.PrintWriter;
 import java.util.Set;
 
 /** A class to dynamically manage per apps {@link NetworkPolicyManager} POLICY_ flags. */
@@ -147,6 +149,15 @@ public final class DynamicDenylistManager {
         clearSharedPreferences();
     }
 
+    /** Dump the data stored in the {@link SharedPreferences}. */
+    public void dump(PrintWriter writer) {
+        writer.println("Dump of DynamicDenylistManager:");
+        writer.println("\tManualDenylist: " + getPackageNames(mContext,
+                getDenylistAllUids(getManualDenylistPref())));
+        writer.println("\tDynamicDenylist: " + getPackageNames(mContext,
+                getDenylistAllUids(getDynamicDenylistPref())));
+    }
+
     private Set<Integer> getDenylistAllUids(SharedPreferences sharedPreferences) {
         final ArraySet<Integer> uids = new ArraySet<>();
         for (String key : sharedPreferences.getAll().keySet()) {
@@ -185,5 +196,15 @@ public final class DynamicDenylistManager {
     @VisibleForTesting
     SharedPreferences getDynamicDenylistPref() {
         return mContext.getSharedPreferences(PREF_KEY_DYNAMIC_DENY, Context.MODE_PRIVATE);
+    }
+
+    private static String getPackageNames(Context context, Set<Integer> uids) {
+        if (uids == null || uids.isEmpty()) {
+            return null;
+        }
+        final PackageManager pm = context.getPackageManager();
+        final StringBuilder builder = new StringBuilder();
+        uids.forEach(uid -> builder.append(pm.getNameForUid(uid) + " "));
+        return builder.toString();
     }
 }
