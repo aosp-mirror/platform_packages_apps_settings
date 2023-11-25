@@ -27,6 +27,7 @@ import com.android.settings.core.instrumentation.ElapsedTimeUtils;
 import com.android.settings.fuelgauge.BatteryUsageHistoricalLogEntry.Action;
 import com.android.settings.fuelgauge.batteryusage.bugreport.BatteryUsageLogUtils;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.fuelgauge.BatteryUtils;
 
 import java.time.Duration;
 
@@ -56,7 +57,7 @@ public final class BootBroadcastReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         final String action = intent == null ? "" : intent.getAction();
-        if (DatabaseUtils.isWorkProfile(context)) {
+        if (BatteryUtils.isWorkProfile(context)) {
             Log.w(TAG, "do not start job for work profile action=" + action);
             return;
         }

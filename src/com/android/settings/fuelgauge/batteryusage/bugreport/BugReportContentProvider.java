@@ -23,7 +23,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.util.Log;
 
-import com.android.settings.fuelgauge.batteryusage.DatabaseUtils;
+import com.android.settingslib.fuelgauge.BatteryUtils;
 
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
@@ -49,7 +49,7 @@ public final class BugReportContentProvider extends ContentProvider {
             Log.w(TAG, "failed to dump BatteryUsage state: null application context");
             return;
         }
-        if (DatabaseUtils.isWorkProfile(context)) {
+        if (BatteryUtils.isWorkProfile(context)) {
             Log.w(TAG, "ignore battery usage states dump in the work profile");
             return;
         }

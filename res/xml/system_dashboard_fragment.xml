@@ -93,6 +93,14 @@
     </Preference>
 
     <Preference
+        android:key="system_multiuser"
+        android:title="@string/user_settings_title"
+        android:icon="@drawable/ic_settings_multiuser"
+        android:order="-45"
+        android:fragment="com.android.settings.users.UserSettings"
+        settings:controller="com.android.settings.users.MultiUserPreferenceController"/>
+
+    <Preference
         android:key="reset_dashboard"
         android:title="@string/reset_dashboard_title"
         android:icon="@drawable/ic_restore"

@@ -781,12 +781,6 @@ public class SettingsActivity extends SettingsBaseActivity
                 Utils.isBandwidthControlEnabled(), isAdmin)
                 || somethingChanged;
 
-        somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
-                        Settings.UserSettingsActivity.class.getName()),
-                UserHandle.MU_ENABLED && UserManager.supportsMultipleUsers()
-                        && !Utils.isMonkeyRunning(), isAdmin)
-                || somethingChanged;
-
         final boolean showDev = DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(this)
                 && !Utils.isMonkeyRunning();
         somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,

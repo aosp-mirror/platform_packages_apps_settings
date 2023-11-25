@@ -24,6 +24,7 @@ import android.util.Log;
 
 import com.android.settings.fuelgauge.BatteryUsageHistoricalLogEntry.Action;
 import com.android.settings.fuelgauge.batteryusage.bugreport.BatteryUsageLogUtils;
+import com.android.settingslib.fuelgauge.BatteryUtils;
 
 /** Receives the periodic alarm {@link PendingIntent} callback. */
 public final class PeriodicJobReceiver extends BroadcastReceiver {
@@ -49,7 +50,7 @@ public final class PeriodicJobReceiver extends BroadcastReceiver {
             Log.w(TAG, "receive unexpected action=" + action);
             return;
         }
-        if (DatabaseUtils.isWorkProfile(context)) {
+        if (BatteryUtils.isWorkProfile(context)) {
             BatteryUsageLogUtils.writeLog(
                     context, Action.SCHEDULE_JOB, "do not refresh job for work profile");
             Log.w(TAG, "do not refresh job for work profile action=" + action);

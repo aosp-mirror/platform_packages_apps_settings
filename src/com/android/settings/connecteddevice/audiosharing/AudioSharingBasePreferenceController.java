@@ -64,7 +64,7 @@ public abstract class AudioSharingBasePreferenceController extends BasePreferenc
         mPreference.setVisible(isVisible);
     }
 
-    private boolean isBroadcasting() {
+    protected boolean isBroadcasting() {
         return mBroadcast != null && mBroadcast.isEnabled(null);
     }
 }

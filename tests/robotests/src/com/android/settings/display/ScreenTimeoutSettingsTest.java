@@ -93,6 +93,9 @@ public class ScreenTimeoutSettingsTest {
     FooterPreference mDisableOptionsPreference;
 
     @Mock
+    FooterPreference mPowerConsumptionPreference;
+
+    @Mock
     private PackageManager mPackageManager;
 
     @Before
@@ -182,11 +185,28 @@ public class ScreenTimeoutSettingsTest {
     public void updateCandidates_enforcedAdmin_showDisabledByAdminPreference() {
         mSettings.mAdmin = new RestrictedLockUtils.EnforcedAdmin();
         mSettings.mDisableOptionsPreference = mDisableOptionsPreference;
+        mSettings.mPowerConsumptionPreference = mPowerConsumptionPreference;
         doNothing().when(mSettings).setupDisabledFooterPreference();
+        doNothing().when(mSettings).setupPowerConsumptionFooterPreference();
 
         mSettings.updateCandidates();
 
         verify(mPreferenceScreen, atLeast(1)).addPreference(mDisableOptionsPreference);
+        verify(mPreferenceScreen, never()).addPreference(mPowerConsumptionPreference);
+    }
+
+    @Test
+    public void updateCandidates_withoutAdmin_showPowerConsumptionPreference() {
+        mSettings.mAdmin = null;
+        mSettings.mDisableOptionsPreference = mDisableOptionsPreference;
+        mSettings.mPowerConsumptionPreference = mPowerConsumptionPreference;
+        doNothing().when(mSettings).setupDisabledFooterPreference();
+        doNothing().when(mSettings).setupPowerConsumptionFooterPreference();
+
+        mSettings.updateCandidates();
+
+        verify(mPreferenceScreen, never()).addPreference(mDisableOptionsPreference);
+        verify(mPreferenceScreen, atLeast(1)).addPreference(mPowerConsumptionPreference);
     }
 
     @Test

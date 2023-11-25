@@ -20,15 +20,10 @@ import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_SUMM
 
 import android.content.ContentProvider;
 import android.content.ContentValues;
-import android.content.Context;
-import android.content.pm.UserInfo;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.UserHandle;
-import android.os.UserManager;
 
-import com.android.settings.R;
 import com.android.settings.backup.BackupSettingsHelper;
 
 /** Provide preference summary for injected items. */
@@ -43,14 +38,6 @@ public class SummaryProvider extends ContentProvider {
             case BACKUP:
                 bundle.putString(META_DATA_PREFERENCE_SUMMARY,
                         new BackupSettingsHelper(getContext()).getSummary());
-                break;
-            case USER:
-                final Context context = getContext();
-                final UserInfo info = context.getSystemService(UserManager.class).getUserInfo(
-                        UserHandle.myUserId());
-                bundle.putString(META_DATA_PREFERENCE_SUMMARY,
-                        context.getString(R.string.users_summary,
-                                info.name));
                 break;
             default:
                 throw new IllegalArgumentException("Unknown Uri format: " + uri);
