@@ -92,17 +92,6 @@ public final class DatabaseUtilsTest {
     }
 
     @Test
-    public void isWorkProfile_defaultValue_returnFalse() {
-        assertThat(DatabaseUtils.isWorkProfile(mContext)).isFalse();
-    }
-
-    @Test
-    public void isWorkProfile_withManagedUser_returnTrue() {
-        BatteryTestUtils.setWorkProfile(mContext);
-        assertThat(DatabaseUtils.isWorkProfile(mContext)).isTrue();
-    }
-
-    @Test
     public void sendAppUsageEventData_returnsExpectedList() {
         // Configures the testing AppUsageEvent data.
         final List<AppUsageEvent> appUsageEventList = new ArrayList<>();

@@ -37,6 +37,7 @@ import com.android.settings.fuelgauge.batteryusage.db.BatteryStateDao;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryStateDatabase;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryUsageSlotDao;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryUsageSlotEntity;
+import com.android.settingslib.fuelgauge.BatteryUtils;
 
 import java.time.Clock;
 import java.time.Duration;
@@ -109,7 +110,7 @@ public class BatteryUsageContentProvider extends ContentProvider {
 
     @Override
     public boolean onCreate() {
-        if (DatabaseUtils.isWorkProfile(getContext())) {
+        if (BatteryUtils.isWorkProfile(getContext())) {
             Log.w(TAG, "do not create provider for work profile");
             return false;
         }

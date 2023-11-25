@@ -30,8 +30,6 @@ import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.utils.ThreadUtils;
 
-import java.util.Optional;
-
 public class AudioStreamsActiveDeviceSummaryUpdater implements BluetoothCallback {
     private static final String TAG = "AudioStreamsActiveDeviceSummaryUpdater";
     private static final boolean DEBUG = BluetoothUtils.D;
@@ -82,29 +80,11 @@ public class AudioStreamsActiveDeviceSummaryUpdater implements BluetoothCallback
     }
 
     private String getSummary() {
-        var activeSink = getActiveSinkOnAssistant(mBluetoothManager);
+        var activeSink = AudioSharingUtils.getActiveSinkOnAssistant(mBluetoothManager);
         if (activeSink.isEmpty()) {
             return "No active LE Audio device";
         }
         return activeSink.get().getName();
-    }
-
-    private static Optional<CachedBluetoothDevice> getActiveSinkOnAssistant(
-            LocalBluetoothManager manager) {
-        if (manager == null) {
-            Log.w(TAG, "getActiveSinksOnAssistant(): LocalBluetoothManager is null!");
-            return Optional.empty();
-        }
-        var groupedDevices = AudioSharingUtils.fetchConnectedDevicesByGroupId(manager);
-        var leadDevices =
-                AudioSharingUtils.buildOrderedConnectedLeadDevices(manager, groupedDevices, false);
-
-        if (!leadDevices.isEmpty() && AudioSharingUtils.isActiveLeAudioDevice(leadDevices.get(0))) {
-            return Optional.of(leadDevices.get(0));
-        } else {
-            Log.w(TAG, "getActiveSinksOnAssistant(): No active lead device!");
-        }
-        return Optional.empty();
     }
 
     /** Interface definition for a callback to be invoked when the summary has been changed. */

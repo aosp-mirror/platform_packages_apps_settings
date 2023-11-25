@@ -23,12 +23,14 @@ import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.NetworkPolicyManager;
 import android.util.ArraySet;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
+import java.io.PrintWriter;
 import java.util.Set;
 
 /** A class to dynamically manage per apps {@link NetworkPolicyManager} POLICY_ flags. */
@@ -137,14 +139,32 @@ public final class DynamicDenylistManager {
             return;
         }
         synchronized (mLock) {
-            for (int uid : mNetworkPolicyManager
-                    .getUidsWithPolicy(POLICY_REJECT_METERED_BACKGROUND)) {
-                if (!getDenylistAllUids(getManualDenylistPref()).contains(uid)) {
-                    mNetworkPolicyManager.setUidPolicy(uid, POLICY_NONE);
+            final int[] uids = mNetworkPolicyManager
+                    .getUidsWithPolicy(POLICY_REJECT_METERED_BACKGROUND);
+            if (uids != null && uids.length != 0) {
+                for (int uid : uids) {
+                    if (!getDenylistAllUids(getManualDenylistPref()).contains(uid)) {
+                        mNetworkPolicyManager.setUidPolicy(uid, POLICY_NONE);
+                    }
                 }
             }
         }
         clearSharedPreferences();
+    }
+
+    /** Reset the POLICY_REJECT_METERED uids when device is boot completed. */
+    public void onBootComplete() {
+        resetDenylistIfNeeded(/* packageName= */ null, /* force= */ true);
+        syncPolicyIfNeeded();
+    }
+
+    /** Dump the data stored in the {@link SharedPreferences}. */
+    public void dump(PrintWriter writer) {
+        writer.println("Dump of DynamicDenylistManager:");
+        writer.println("\tManualDenylist: " + getPackageNames(mContext,
+                getDenylistAllUids(getManualDenylistPref())));
+        writer.println("\tDynamicDenylist: " + getPackageNames(mContext,
+                getDenylistAllUids(getDynamicDenylistPref())));
     }
 
     private Set<Integer> getDenylistAllUids(SharedPreferences sharedPreferences) {
@@ -185,5 +205,15 @@ public final class DynamicDenylistManager {
     @VisibleForTesting
     SharedPreferences getDynamicDenylistPref() {
         return mContext.getSharedPreferences(PREF_KEY_DYNAMIC_DENY, Context.MODE_PRIVATE);
+    }
+
+    private static String getPackageNames(Context context, Set<Integer> uids) {
+        if (uids == null || uids.isEmpty()) {
+            return null;
+        }
+        final PackageManager pm = context.getPackageManager();
+        final StringBuilder builder = new StringBuilder();
+        uids.forEach(uid -> builder.append(pm.getNameForUid(uid) + " "));
+        return builder.toString();
     }
 }
