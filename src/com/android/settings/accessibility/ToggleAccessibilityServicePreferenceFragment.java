@@ -336,9 +336,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
                 preference.setChecked(false);
                 showPopupDialog(DialogEnums.ENABLE_WARNING_FROM_SHORTCUT_TOGGLE);
             } else {
-                AccessibilityUtil.optInAllValuesToSettings(getPrefContext(), shortcutTypes,
-                        mComponentName);
-                showPopupDialog(DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL);
+                onAllowButtonFromShortcutToggleClicked();
             }
         } else {
             AccessibilityUtil.optOutAllValuesFromSettings(getPrefContext(), shortcutTypes,
@@ -351,8 +349,11 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     public void onSettingsClicked(ShortcutPreference preference) {
         final boolean isServiceOnOrShortcutAdded = mShortcutPreference.isChecked()
                 || mToggleServiceSwitchPreference.isChecked();
-        showPopupDialog(isServiceOnOrShortcutAdded ? DialogEnums.EDIT_SHORTCUT
-                : DialogEnums.ENABLE_WARNING_FROM_SHORTCUT);
+        if (!isServiceOnOrShortcutAdded) {
+            showPopupDialog(DialogEnums.ENABLE_WARNING_FROM_SHORTCUT);
+        } else {
+            onAllowButtonFromShortcutClicked();
+        }
     }
 
     @Override
@@ -467,7 +468,9 @@ public class ToggleAccessibilityServicePreferenceFragment extends
             mIsDialogShown.set(false);
             showPopupDialog(DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL);
         }
-        mWarningDialog.dismiss();
+        if (mWarningDialog != null) {
+            mWarningDialog.dismiss();
+        }
     }
 
     private void onDenyButtonFromEnableToggleClicked() {
@@ -496,7 +499,9 @@ public class ToggleAccessibilityServicePreferenceFragment extends
         mIsDialogShown.set(false);
         showPopupDialog(DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL);
 
-        mWarningDialog.dismiss();
+        if (mWarningDialog != null) {
+            mWarningDialog.dismiss();
+        }
 
         mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
     }
@@ -522,7 +527,9 @@ public class ToggleAccessibilityServicePreferenceFragment extends
         mIsDialogShown.set(false);
         showPopupDialog(DialogEnums.EDIT_SHORTCUT);
 
-        mWarningDialog.dismiss();
+        if (mWarningDialog != null) {
+            mWarningDialog.dismiss();
+        }
     }
 
     private void onDenyButtonFromShortcutClicked() {
@@ -537,10 +544,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
             if (!mShortcutPreference.isChecked()) {
                 showPopupDialog(DialogEnums.ENABLE_WARNING_FROM_TOGGLE);
             } else {
-                handleConfirmServiceEnabled(/* confirmed= */ true);
-                if (serviceSupportsAccessibilityButton()) {
-                    showPopupDialog(DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL);
-                }
+                onAllowButtonFromEnableToggleClicked();
             }
         } else {
             mToggleServiceSwitchPreference.setChecked(true);
