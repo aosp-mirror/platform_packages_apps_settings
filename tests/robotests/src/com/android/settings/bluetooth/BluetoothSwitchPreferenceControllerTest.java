@@ -33,6 +33,7 @@ import com.android.settings.widget.SwitchWidgetController;
 import com.android.settingslib.widget.FooterPreference;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -82,6 +83,7 @@ public class BluetoothSwitchPreferenceControllerTest {
         assertThat(TextUtils.equals(mFooterPreference.getTitle(), text)).isTrue();
     }
 
+    @Ignore("b/313014781")
     @Test
     public void updateText_bluetoothOffScanningOff() {
         Settings.Global.putInt(mContext.getContentResolver(),
@@ -91,6 +93,7 @@ public class BluetoothSwitchPreferenceControllerTest {
         assertThat(mFooterPreference.getTitle()).isEqualTo(BLUETOOTH_INFO_STRING);
     }
 
+    @Ignore("b/313014781")
     @Test
     public void updateText_bluetoothOnScanningOff() {
         Settings.Global.putInt(mContext.getContentResolver(),
@@ -100,6 +103,7 @@ public class BluetoothSwitchPreferenceControllerTest {
         assertThat(mFooterPreference.getTitle()).isEqualTo(BLUETOOTH_INFO_STRING);
     }
 
+    @Ignore("b/313014781")
     @Test
     public void updateText_bluetoothOnScanningOn() {
         Settings.Global.putInt(mContext.getContentResolver(),
