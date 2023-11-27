@@ -4231,11 +4231,6 @@
                        android:value="@string/menu_key_system"/>
         </activity-alias>
 
-        <provider
-            android:name=".dashboard.SummaryProvider"
-            android:authorities="${applicationId}.dashboard.SummaryProvider">
-        </provider>
-
         <activity android:name=".backup.UserBackupSettingsActivity"
                   android:label="@string/privacy_settings_title"
                   android:exported="true"
