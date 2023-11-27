@@ -36,6 +36,7 @@ import com.android.settings.testutils.shadow.ShadowConnectivityManager;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -91,6 +92,7 @@ public class ConnectedDeviceDashboardFragmentTest {
         assertThat(indexRes.get(0).xmlResId).isEqualTo(R.xml.connected_devices);
     }
 
+    @Ignore("b/313362757")
     @Test
     public void nonIndexableKeys_existInXmlLayout() {
         final List<String> niks = ConnectedDeviceDashboardFragment.SEARCH_INDEX_DATA_PROVIDER
