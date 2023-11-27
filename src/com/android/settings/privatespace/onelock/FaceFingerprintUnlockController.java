@@ -35,7 +35,7 @@ public class FaceFingerprintUnlockController extends AbstractPreferenceControlle
 
     @Override
     public boolean isAvailable() {
-        return false;
+        return android.os.Flags.allowPrivateProfile();
     }
 
     @Override

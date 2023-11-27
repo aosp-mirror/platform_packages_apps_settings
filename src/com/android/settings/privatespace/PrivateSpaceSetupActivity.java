@@ -36,6 +36,9 @@ public class PrivateSpaceSetupActivity extends FragmentActivity {
     private NavHostFragment mNavHostFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (!android.os.Flags.allowPrivateProfile()) {
+            return;
+        }
         setTheme(SetupWizardUtils.getTheme(this, getIntent()));
         ThemeHelper.trySetDynamicColor(this);
         super.onCreate(savedInstanceState);

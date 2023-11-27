@@ -52,6 +52,9 @@ public class PrivateProfileContextHelperActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (!android.os.Flags.allowPrivateProfile()) {
+            return;
+        }
         setTheme(SetupWizardUtils.getTheme(this, getIntent()));
         ThemeHelper.trySetDynamicColor(this);
         super.onCreate(savedInstanceState);
