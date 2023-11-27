@@ -27,6 +27,8 @@ import static org.mockito.Mockito.verify;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
+import android.bluetooth.BluetoothUuid;
+import android.bluetooth.le.ScanRecord;
 import android.bluetooth.le.ScanResult;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -53,6 +55,8 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
+
+import java.util.List;
 
 /** Tests for {@link HearingDevicePairingFragment}. */
 @RunWith(RobolectricTestRunner.class)
@@ -159,7 +163,30 @@ public class HearingDevicePairingFragmentTest {
         mFragment.handleLeScanResult(scanResult);
 
         verify(mCachedDevice).setHearingAidInfo(new HearingAidInfo.Builder().build());
+    }
+
+    @Test
+    public void handleLeScanResult_isAndroidCompatible_addDevice() {
+        ScanResult scanResult = mock(ScanResult.class);
+        doReturn(mDevice).when(scanResult).getDevice();
+        doReturn(mCachedDevice).when(mCachedDeviceManager).findDevice(mDevice);
+        doReturn(true).when(mFragment).isAndroidCompatibleHearingAid(scanResult);
+
+        mFragment.handleLeScanResult(scanResult);
+
         verify(mFragment).addDevice(mCachedDevice);
+    }
+
+    @Test
+    public void handleLeScanResult_isNotAndroidCompatible_() {
+        ScanResult scanResult = mock(ScanResult.class);
+        doReturn(mDevice).when(scanResult).getDevice();
+        doReturn(mCachedDevice).when(mCachedDeviceManager).findDevice(mDevice);
+        doReturn(false).when(mFragment).isAndroidCompatibleHearingAid(scanResult);
+
+        mFragment.handleLeScanResult(scanResult);
+
+        verify(mFragment).discoverServices(mCachedDevice);
     }
 
     @Test
@@ -223,6 +250,60 @@ public class HearingDevicePairingFragmentTest {
         mFragment.onDeviceBondStateChanged(mCachedDevice, BluetoothDevice.BOND_NONE);
 
         verify(mFragment).startScanning();
+    }
+
+    @Test
+    public void isAndroidCompatibleHearingAid_asha_returnTrue() {
+        ScanResult scanResult = createAshaScanResult();
+
+        boolean isCompatible = mFragment.isAndroidCompatibleHearingAid(scanResult);
+
+        assertThat(isCompatible).isTrue();
+    }
+
+    @Test
+    public void isAndroidCompatibleHearingAid_has_returnTrue() {
+        ScanResult scanResult = createHasScanResult();
+
+        boolean isCompatible = mFragment.isAndroidCompatibleHearingAid(scanResult);
+
+        assertThat(isCompatible).isTrue();
+    }
+
+    @Test
+    public void isAndroidCompatibleHearingAid_mfiHas_returnFalse() {
+        ScanResult scanResult = createMfiHasScanResult();
+
+        boolean isCompatible = mFragment.isAndroidCompatibleHearingAid(scanResult);
+
+        assertThat(isCompatible).isFalse();
+    }
+
+    private ScanResult createAshaScanResult() {
+        ScanResult scanResult = mock(ScanResult.class);
+        ScanRecord scanRecord = mock(ScanRecord.class);
+        byte[] fakeAshaServiceData = new byte[] {
+                0x09, 0x16, (byte) 0xf0, (byte) 0xfd, 0x01, 0x00, 0x01, 0x02, 0x03, 0x04};
+        doReturn(scanRecord).when(scanResult).getScanRecord();
+        doReturn(fakeAshaServiceData).when(scanRecord).getServiceData(BluetoothUuid.HEARING_AID);
+        return scanResult;
+    }
+
+    private ScanResult createHasScanResult() {
+        ScanResult scanResult = mock(ScanResult.class);
+        ScanRecord scanRecord = mock(ScanRecord.class);
+        doReturn(scanRecord).when(scanResult).getScanRecord();
+        doReturn(List.of(BluetoothUuid.HAS)).when(scanRecord).getServiceUuids();
+        return scanResult;
+    }
+
+    private ScanResult createMfiHasScanResult() {
+        ScanResult scanResult = mock(ScanResult.class);
+        ScanRecord scanRecord = mock(ScanRecord.class);
+        byte[] fakeMfiServiceData = new byte[] {0x00, 0x00, 0x00, 0x00};
+        doReturn(scanRecord).when(scanResult).getScanRecord();
+        doReturn(fakeMfiServiceData).when(scanRecord).getServiceData(BluetoothUuid.MFI_HAS);
+        return scanResult;
     }
 
     private class TestHearingDevicePairingFragment extends HearingDevicePairingFragment {

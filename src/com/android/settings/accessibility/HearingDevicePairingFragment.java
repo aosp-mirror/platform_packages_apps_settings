@@ -22,15 +22,20 @@ import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
 import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothGatt;
+import android.bluetooth.BluetoothGattCallback;
 import android.bluetooth.BluetoothManager;
+import android.bluetooth.BluetoothProfile;
 import android.bluetooth.BluetoothUuid;
 import android.bluetooth.le.BluetoothLeScanner;
 import android.bluetooth.le.ScanCallback;
 import android.bluetooth.le.ScanFilter;
+import android.bluetooth.le.ScanRecord;
 import android.bluetooth.le.ScanResult;
 import android.bluetooth.le.ScanSettings;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.ParcelUuid;
 import android.os.SystemProperties;
 import android.util.Log;
 import android.widget.Toast;
@@ -83,6 +88,7 @@ public class HearingDevicePairingFragment extends RestrictedDashboardFragment im
     @Nullable
     BluetoothDevice mSelectedDevice;
     final List<BluetoothDevice> mSelectedDeviceList = new ArrayList<>();
+    final List<BluetoothGatt> mConnectingGattList = new ArrayList<>();
     final Map<CachedBluetoothDevice, BluetoothDevicePreference> mDevicePreferenceMap =
             new HashMap<>();
 
@@ -140,6 +146,9 @@ public class HearingDevicePairingFragment extends RestrictedDashboardFragment im
         }
         stopScanning();
         removeAllDevices();
+        for (BluetoothGatt gatt: mConnectingGattList) {
+            gatt.disconnect();
+        }
         mLocalManager.setForegroundActivity(null);
         mLocalManager.getEventManager().unregisterCallback(this);
     }
@@ -325,7 +334,16 @@ public class HearingDevicePairingFragment extends RestrictedDashboardFragment im
             }
             cachedDevice.setHearingAidInfo(new HearingAidInfo.Builder().build());
         }
-        addDevice(cachedDevice);
+        // No need to handle the device if the device is already in the list or discovering services
+        if (mDevicePreferenceMap.get(cachedDevice) == null
+                && mConnectingGattList.stream().noneMatch(
+                        gatt -> gatt.getDevice().equals(device))) {
+            if (isAndroidCompatibleHearingAid(result)) {
+                addDevice(cachedDevice);
+            } else {
+                discoverServices(cachedDevice);
+            }
+        }
     }
 
     void startLeScanning() {
@@ -388,6 +406,82 @@ public class HearingDevicePairingFragment extends RestrictedDashboardFragment im
         mLeScanFilters.add(new ScanFilter.Builder().setServiceUuid(BluetoothUuid.HAS).build());
         mLeScanFilters.add(new ScanFilter.Builder()
                 .setServiceData(BluetoothUuid.HAS, new byte[0]).build());
+        // Filters for MFi hearing aids
+        mLeScanFilters.add(new ScanFilter.Builder().setServiceUuid(BluetoothUuid.MFI_HAS).build());
+        mLeScanFilters.add(new ScanFilter.Builder()
+                .setServiceData(BluetoothUuid.MFI_HAS, new byte[0]).build());
+    }
+
+    boolean isAndroidCompatibleHearingAid(ScanResult scanResult) {
+        ScanRecord scanRecord = scanResult.getScanRecord();
+        if (scanRecord == null) {
+            if (DEBUG) {
+                Log.d(TAG, "Scan record is null, not compatible with Android. device: "
+                        + scanResult.getDevice());
+            }
+            return false;
+        }
+        List<ParcelUuid> uuids = scanRecord.getServiceUuids();
+        if (uuids != null) {
+            if (uuids.contains(BluetoothUuid.HEARING_AID) || uuids.contains(BluetoothUuid.HAS)) {
+                if (DEBUG) {
+                    Log.d(TAG, "Scan record uuid matched, compatible with Android. device: "
+                            + scanResult.getDevice());
+                }
+                return true;
+            }
+        }
+        if (scanRecord.getServiceData(BluetoothUuid.HEARING_AID) != null
+                || scanRecord.getServiceData(BluetoothUuid.HAS) != null) {
+            if (DEBUG) {
+                Log.d(TAG, "Scan record service data matched, compatible with Android. device: "
+                        + scanResult.getDevice());
+            }
+            return true;
+        }
+        if (DEBUG) {
+            Log.d(TAG, "Scan record mismatched, not compatible with Android. device: "
+                    + scanResult.getDevice());
+        }
+        return false;
+    }
+
+    void discoverServices(CachedBluetoothDevice cachedDevice) {
+        if (DEBUG) {
+            Log.d(TAG, "connectGattToCheckCompatibility, device: " + cachedDevice);
+        }
+        BluetoothGatt gatt = cachedDevice.getDevice().connectGatt(getContext(), false,
+                new BluetoothGattCallback() {
+                    @Override
+                    public void onConnectionStateChange(BluetoothGatt gatt, int status,
+                            int newState) {
+                        super.onConnectionStateChange(gatt, status, newState);
+                        if (DEBUG) {
+                            Log.d(TAG, "onConnectionStateChange, status: " + status + ", newState: "
+                                    + newState + ", device: " + cachedDevice);
+                        }
+                        if (newState == BluetoothProfile.STATE_CONNECTED) {
+                            gatt.discoverServices();
+                        }
+                    }
+
+                    @Override
+                    public void onServicesDiscovered(BluetoothGatt gatt, int status) {
+                        super.onServicesDiscovered(gatt, status);
+                        boolean isCompatible = gatt.getService(BluetoothUuid.HEARING_AID.getUuid())
+                                != null
+                                || gatt.getService(BluetoothUuid.HAS.getUuid()) != null;
+                        if (DEBUG) {
+                            Log.d(TAG,
+                                    "onServicesDiscovered, compatible with Android: " + isCompatible
+                                            + ", device: " + cachedDevice);
+                        }
+                        if (isCompatible) {
+                            addDevice(cachedDevice);
+                        }
+                    }
+                });
+        mConnectingGattList.add(gatt);
     }
 
     void showBluetoothTurnedOnToast() {
