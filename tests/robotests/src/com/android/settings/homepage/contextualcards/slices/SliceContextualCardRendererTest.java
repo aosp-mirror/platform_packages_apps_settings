@@ -38,18 +38,16 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.slice.builders.ListBuilder;
-import androidx.slice.builders.SliceAction;
 import androidx.slice.Slice;
 import androidx.slice.SliceProvider;
+import androidx.slice.builders.ListBuilder;
+import androidx.slice.builders.SliceAction;
 import androidx.slice.widget.SliceLiveData;
-
 
 import com.android.settings.R;
 import com.android.settings.homepage.contextualcards.ContextualCard;
 import com.android.settings.homepage.contextualcards.ContextualCardsFragment;
 import com.android.settings.homepage.contextualcards.ControllerRendererPool;
-import com.android.settings.wifi.slice.ContextualWifiSlice;
 
 import org.junit.Before;
 import org.junit.Test;

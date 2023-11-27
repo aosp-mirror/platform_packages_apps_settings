@@ -70,16 +70,16 @@ public class SettingsContextualCardProviderTest {
     }
 
     @Test
-    public void getContextualCards_wifiSlice_shouldGetImportantCategory() {
+    public void getContextualCards_darkThemeSlice_shouldGetImportantCategory() {
         final ContextualCardList cards = mProvider.getContextualCards();
-        ContextualCard wifiCard = null;
+        ContextualCard darkThemeCard = null;
         for (ContextualCard card : cards.getCardList()) {
             if (card.getSliceUri().equals(
-                    CustomSliceRegistry.CONTEXTUAL_WIFI_SLICE_URI.toString())) {
-                wifiCard = card;
+                    CustomSliceRegistry.DARK_THEME_SLICE_URI.toString())) {
+                darkThemeCard = card;
             }
         }
 
-        assertThat(wifiCard.getCardCategory()).isEqualTo(ContextualCard.Category.IMPORTANT);
+        assertThat(darkThemeCard.getCardCategory()).isEqualTo(ContextualCard.Category.IMPORTANT);
     }
 }
