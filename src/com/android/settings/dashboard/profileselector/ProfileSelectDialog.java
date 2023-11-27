@@ -27,7 +27,6 @@ import android.content.Intent;
 import android.content.pm.UserInfo;
 import android.content.pm.UserProperties;
 import android.os.Bundle;
-import android.os.Flags;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Log;
@@ -187,8 +186,7 @@ public class ProfileSelectDialog extends DialogFragment implements UserAdapter.O
             UserInfo userInfo = userManager.getUserInfo(userHandles.get(i).getIdentifier());
             if (userInfo == null
                     || userInfo.isCloneProfile()
-                    || (Flags.allowPrivateProfile()
-                        && shouldHideUserInQuietMode(userHandles.get(i), userManager))) {
+                    || shouldHideUserInQuietMode(userHandles.get(i), userManager)) {
                 if (DEBUG) {
                     Log.d(TAG, "Delete the user: " + userHandles.get(i).getIdentifier());
                 }
@@ -221,8 +219,7 @@ public class ProfileSelectDialog extends DialogFragment implements UserAdapter.O
             UserInfo userInfo = userManager.getUserInfo(userHandle.getIdentifier());
             if (userInfo == null
                     || userInfo.isCloneProfile()
-                    || (Flags.allowPrivateProfile()
-                        && shouldHideUserInQuietMode(userHandle, userManager))) {
+                    || shouldHideUserInQuietMode(userHandle, userManager)) {
                 if (DEBUG) {
                     Log.d(TAG, "Delete the user: " + userHandle.getIdentifier());
                 }
