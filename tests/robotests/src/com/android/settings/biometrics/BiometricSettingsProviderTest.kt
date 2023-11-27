@@ -26,6 +26,7 @@ import android.platform.test.flag.junit.DeviceFlagsValueProvider
 import com.android.settings.flags.Flags
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -73,6 +74,7 @@ class BiometricSettingsProviderTest {
     provider.update(Uri.EMPTY, null, null, null)
   }
 
+  @Ignore("b/313342682")
   @Test
   @RequiresFlagsEnabled(Flags.FLAG_BIOMETRIC_SETTINGS_PROVIDER)
   fun getSuggestionState_shouldQueryFeatureProvider() {

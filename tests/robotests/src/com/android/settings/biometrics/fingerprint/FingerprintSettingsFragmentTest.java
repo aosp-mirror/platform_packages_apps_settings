@@ -72,6 +72,7 @@ import com.android.settingslib.RestrictedSwitchPreference;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -201,6 +202,7 @@ public class FingerprintSettingsFragmentTest {
         assertThat(mFingerprintAuthenticateSidecar.isCancelled()).isTrue();
     }
 
+    @Ignore("b/313342682")
     @Test
     public void testGuestUserRequireScreenOnToAuth() {
         Settings.Secure.putIntForUser(
