@@ -47,6 +47,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.Toast;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
@@ -229,6 +230,12 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         if (Utils.isMonkeyRunning()) {
             getActivity().finish();
             return;
+        }
+        Context context = requireContext();
+        if (!DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(context)) {
+            Toast.makeText(context, R.string.dev_settings_disabled_warning, Toast.LENGTH_SHORT)
+                    .show();
+            finish();
         }
     }
 
