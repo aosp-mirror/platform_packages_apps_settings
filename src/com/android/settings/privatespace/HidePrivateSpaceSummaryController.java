@@ -36,7 +36,7 @@ public final class HidePrivateSpaceSummaryController extends BasePreferenceContr
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return android.os.Flags.allowPrivateProfile() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override

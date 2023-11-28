@@ -47,6 +47,9 @@ public class PrivateSpaceSetLockFragment extends Fragment {
             LayoutInflater inflater,
             @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
+        if (!android.os.Flags.allowPrivateProfile()) {
+            return null;
+        }
         GlifLayout rootView =
                 (GlifLayout) inflater.inflate(
                         R.layout.privatespace_setlock_screen, container, false);

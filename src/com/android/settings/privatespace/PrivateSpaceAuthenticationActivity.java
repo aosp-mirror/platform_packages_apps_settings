@@ -66,9 +66,8 @@ public class PrivateSpaceAuthenticationActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
         if (Flags.allowPrivateProfile()) {
+            super.onCreate(savedInstanceState);
             ThemeHelper.trySetDynamicColor(this);
             mPrivateSpaceMaintainer = new Injector().injectPrivateSpaceMaintainer(
                     getApplicationContext());
@@ -87,7 +86,6 @@ public class PrivateSpaceAuthenticationActivity extends FragmentActivity {
                 promptToSetDeviceLock();
             }
         } else {
-            Log.w(TAG, "allowPrivateProfile flag is Off!");
             finish();
         }
     }
