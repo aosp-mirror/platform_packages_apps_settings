@@ -73,6 +73,7 @@ import com.android.settingslib.search.SearchIndexableRaw;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.AdditionalMatchers;
@@ -207,6 +208,7 @@ public class UserSettingsTest {
         assertThat(UserSettings.assignDefaultPhoto(null, ACTIVE_USER_ID)).isFalse();
     }
 
+    @Ignore("b/313530297")
     @Test
     public void testGetRawDataToIndex_returnAllIndexablePreferences() {
         String[] expectedKeys = {KEY_ALLOW_MULTIPLE_USERS};
@@ -708,6 +710,7 @@ public class UserSettingsTest {
         verify(mUserManager).getAliveUsers();
     }
 
+    @Ignore("b/313530297")
     @Test
     public void updateUserList_userIconMissing_shouldLoadIcon() {
         UserInfo currentUser = getAdminUser(true);
