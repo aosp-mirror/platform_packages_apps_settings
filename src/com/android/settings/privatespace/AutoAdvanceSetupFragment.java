@@ -93,6 +93,13 @@ public class AutoAdvanceSetupFragment extends Fragment {
             };
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        if (android.os.Flags.allowPrivateProfile()) {
+            super.onCreate(savedInstanceState);
+        }
+    }
+
+    @Override
     public View onCreateView(
             LayoutInflater inflater,
             @Nullable ViewGroup container,

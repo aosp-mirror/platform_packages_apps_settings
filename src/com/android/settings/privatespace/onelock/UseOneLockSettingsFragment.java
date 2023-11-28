@@ -19,6 +19,7 @@ package com.android.settings.privatespace.onelock;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 
@@ -33,6 +34,13 @@ public class UseOneLockSettingsFragment extends DashboardFragment {
     private static final String TAG = "UseOneLockSettings";
     public static final int UNIFY_PRIVATE_LOCK_WITH_DEVICE_REQUEST = 1;
     public static final int UNUNIFY_PRIVATE_LOCK_FROM_DEVICE_REQUEST = 2;
+
+    @Override
+    public void onCreate(Bundle icicle) {
+        if (android.os.Flags.allowPrivateProfile()) {
+            super.onCreate(icicle);
+        }
+    }
 
     @Override
     public int getMetricsCategory() {

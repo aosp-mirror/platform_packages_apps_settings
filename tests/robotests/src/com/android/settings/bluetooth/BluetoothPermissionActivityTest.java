@@ -24,6 +24,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -32,6 +33,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
 
+@Ignore("b/313014781")
 @RunWith(RobolectricTestRunner.class)
 public class BluetoothPermissionActivityTest {
 

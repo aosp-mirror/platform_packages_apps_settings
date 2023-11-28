@@ -17,6 +17,7 @@
 package com.android.settings.privatespace;
 
 import android.app.settings.SettingsEnums;
+import android.os.Bundle;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -24,6 +25,13 @@ import com.android.settings.dashboard.DashboardFragment;
 /** Fragment representing the Private Space dashboard in Settings. */
 public class PrivateSpaceDashboardFragment extends DashboardFragment {
     private static final String TAG = "PrivateSpaceDashboardFragment";
+
+    @Override
+    public void onCreate(Bundle icicle) {
+        if (android.os.Flags.allowPrivateProfile()) {
+            super.onCreate(icicle);
+        }
+    }
 
     @Override
     protected int getPreferenceScreenResId() {
