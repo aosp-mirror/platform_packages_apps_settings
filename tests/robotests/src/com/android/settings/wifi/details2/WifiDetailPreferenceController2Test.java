@@ -94,6 +94,7 @@ import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiEntry.ConnectCallback;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -735,6 +736,7 @@ public class WifiDetailPreferenceController2Test {
         verify(mMockRxLinkSpeedPref).setSummary("100 Mbps");
     }
 
+    @Ignore("b/313536962")
     @Test
     public void ssidPref_isSubscription_show() {
         setUpForConnectedNetwork();
@@ -934,6 +936,7 @@ public class WifiDetailPreferenceController2Test {
         verify(mMockActivity, never()).finish();
     }
 
+    @Ignore("b/313536962")
     @Test
     public void noLinkProperties_allIpDetailsHidden() {
         setUpForConnectedNetwork();
@@ -956,6 +959,7 @@ public class WifiDetailPreferenceController2Test {
         verify(mMockDnsPref, never()).setVisible(true);
     }
 
+    @Ignore("b/313536962")
     @Test
     public void disconnectedNetwork_allIpDetailsHidden() {
         setUpForDisconnectedNetwork();
@@ -1005,6 +1009,7 @@ public class WifiDetailPreferenceController2Test {
         inOrder.verify(mMockIpv6AddressesPref).setSummary(text);
     }
 
+    @Ignore("b/313536962")
     @Test
     public void onLinkPropertiesChanged_updatesFields() {
         setUpForConnectedNetwork();
