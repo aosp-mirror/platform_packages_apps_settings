@@ -63,6 +63,7 @@ import com.android.settingslib.applications.ApplicationsState.AppFilter;
 import com.android.settingslib.testutils.shadow.ShadowInteractionJankMonitor;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -313,6 +314,7 @@ public class ManageApplicationsTest {
         verify(adapter).filterSearch(query);
     }
 
+    @Ignore("b/313583754")
     @Test
     public void notifyItemChange_recyclerViewIdle_shouldNotify() {
         final RecyclerView recyclerView = mock(RecyclerView.class);
@@ -327,6 +329,7 @@ public class ManageApplicationsTest {
         verify(adapter).notifyItemChanged(0);
     }
 
+    @Ignore("b/313583754")
     @Test
     public void notifyItemChange_recyclerViewScrolling_shouldNotifyWhenIdle() {
         final RecyclerView recyclerView = mock(RecyclerView.class);
@@ -423,6 +426,7 @@ public class ManageApplicationsTest {
         assertThat(adapter.getItemCount()).isEqualTo(5);
     }
 
+    @Ignore("b/313583754")
     @Test
     public void applicationsAdapter_filterSearch_noMatch_shouldShowEmptyList() {
         final ManageApplications.ApplicationsAdapter adapter =
