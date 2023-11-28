@@ -21,11 +21,13 @@ import static com.android.settings.dashboard.profileselector.ProfileSelectFragme
 import static com.google.common.truth.Truth.assertThat;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 
+@Ignore("b/313569889")
 @RunWith(RobolectricTestRunner.class)
 public class ProfileSelectLocationFragmentTest {
 

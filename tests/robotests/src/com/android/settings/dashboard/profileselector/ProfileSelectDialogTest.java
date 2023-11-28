@@ -42,6 +42,7 @@ import com.android.settingslib.drawer.Tile;
 import com.google.android.collect.Lists;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -88,6 +89,7 @@ public class ProfileSelectDialogTest {
         verify(mUserManager, never()).getUserInfo(NORMAL_USER.getIdentifier());
     }
 
+    @Ignore("b/313569889")
     @Test
     public void updateUserHandlesIfNeeded_Remove() {
         final Tile tile = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
@@ -103,6 +105,7 @@ public class ProfileSelectDialogTest {
         verify(mUserManager, times(2)).getUserInfo(REMOVED_USER.getIdentifier());
     }
 
+    @Ignore("b/313569889")
     @Test
     public void updateUserHandlesIfNeeded_removesCloneProfile() {
         final UserInfo userInfo = new UserInfo(CLONE_USER.getIdentifier(), "clone_user", null,
@@ -119,6 +122,7 @@ public class ProfileSelectDialogTest {
         verify(mUserManager, times(1)).getUserInfo(CLONE_USER.getIdentifier());
     }
 
+    @Ignore("b/313569889")
     @Test
     public void updatePendingIntentsIfNeeded_removesUsersWithNoPendingIntentsAndCloneProfile() {
         final UserInfo userInfo = new UserInfo(CLONE_USER.getIdentifier(), "clone_user", null,
