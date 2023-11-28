@@ -19,6 +19,8 @@ package com.android.settings.privatespace;
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.UserHandle;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
@@ -33,6 +35,7 @@ import com.google.android.setupdesign.util.ThemeHelper;
 
 /** Activity class that helps in setting up of private space */
 public class PrivateSpaceSetupActivity extends FragmentActivity {
+    private static final String TAG = "PrivateSpaceSetupAct";
     public static final int SET_LOCK_ACTION = 1;
     public static final int ACCOUNT_LOGIN_ACTION = 2;
     public static final String EXTRA_ACTION_TYPE = "action_type";
@@ -57,12 +60,21 @@ public class PrivateSpaceSetupActivity extends FragmentActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == SET_LOCK_ACTION && resultCode == RESULT_OK) {
-            mNavHostFragment.getNavController().navigate(R.id.action_success_fragment);
+            /* Start new activity in private profile to add an account to private profile */
+            UserHandle userHandle =
+                    PrivateSpaceMaintainer.getInstance(this).getPrivateProfileHandle();
+            if (userHandle != null) {
+                Intent intent = new Intent(this, PrivateProfileContextHelperActivity.class);
+                intent.putExtra(EXTRA_ACTION_TYPE, ACCOUNT_LOGIN_ACTION);
+                startActivityForResultAsUser(intent, ACCOUNT_LOGIN_ACTION, userHandle);
+            } else {
+                Log.w(TAG, "Private profile user handle is null");
+            }
         } else if (requestCode == ACCOUNT_LOGIN_ACTION) {
             if (resultCode == RESULT_OK) {
                 mMetricsFeatureProvider.action(
                         this, SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_ACCOUNT_LOGIN_SUCCESS, true);
-                mNavHostFragment.getNavController().navigate(R.id.action_set_lock_fragment);
+                mNavHostFragment.getNavController().navigate(R.id.action_success_fragment);
             } else {
                 mMetricsFeatureProvider.action(
                         this,
