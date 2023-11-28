@@ -467,6 +467,22 @@ public final class Utils extends com.android.settingslib.Utils {
         return null;
     }
 
+    /**
+     * Returns true if a profile of specified userType exists. Note that it considers all profiles,
+     * including the disabled profiles and the parent user itself.
+     */
+    public static boolean doesProfileOfTypeExists(
+            @NonNull UserManager userManager, @ProfileType int userType) {
+        final List<UserInfo> userProfiles = userManager.getProfiles(UserHandle.myUserId());
+        String umUserType = getUmUserType(userType);
+        for (UserInfo profile : userProfiles) {
+            if (Objects.equals(umUserType, profile.userType)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private static String getUmUserType(@ProfileType int userType) throws IllegalArgumentException {
         if (userType == ProfileType.WORK) {
             return USER_TYPE_PROFILE_MANAGED;
