@@ -16,8 +16,12 @@
 
 package com.android.settings.connecteddevice.audiosharing;
 
+import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.DefaultLifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
@@ -26,14 +30,18 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.flags.Flags;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
+import com.android.settingslib.utils.ThreadUtils;
 
-public abstract class AudioSharingBasePreferenceController extends BasePreferenceController {
+public abstract class AudioSharingBasePreferenceController extends BasePreferenceController
+        implements DefaultLifecycleObserver {
+    private final BluetoothAdapter mBluetoothAdapter;
     private final LocalBluetoothManager mBtManager;
     protected final LocalBluetoothLeBroadcast mBroadcast;
     protected Preference mPreference;
 
     public AudioSharingBasePreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         mBtManager = Utils.getLocalBtManager(context);
         mBroadcast =
                 mBtManager == null
@@ -43,28 +51,40 @@ public abstract class AudioSharingBasePreferenceController extends BasePreferenc
 
     @Override
     public int getAvailabilityStatus() {
-        return mBtManager != null && Flags.enableLeAudioSharing()
-                ? AVAILABLE
-                : UNSUPPORTED_ON_DEVICE;
+        return Flags.enableLeAudioSharing() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = screen.findPreference(getPreferenceKey());
-        updateVisibility(isBroadcasting());
     }
 
-    /**
-     * Update the visibility of the preference.
-     *
-     * @param isVisible the latest visibility state for the preference.
-     */
-    public void updateVisibility(boolean isVisible) {
-        mPreference.setVisible(isVisible);
+    @Override
+    public void onStart(@NonNull LifecycleOwner owner) {
+        if (isAvailable()) {
+            updateVisibility();
+        }
+    }
+
+    /** Update the visibility of the preference. */
+    protected void updateVisibility() {
+        if (mPreference != null) {
+            var unused =
+                    ThreadUtils.postOnBackgroundThread(
+                            () -> {
+                                boolean isVisible = isBroadcasting() && isBluetoothStateOn();
+                                ThreadUtils.postOnMainThread(
+                                        () -> mPreference.setVisible(isVisible));
+                            });
+        }
     }
 
     protected boolean isBroadcasting() {
         return mBroadcast != null && mBroadcast.isEnabled(null);
+    }
+
+    protected boolean isBluetoothStateOn() {
+        return mBluetoothAdapter != null && mBluetoothAdapter.isEnabled();
     }
 }

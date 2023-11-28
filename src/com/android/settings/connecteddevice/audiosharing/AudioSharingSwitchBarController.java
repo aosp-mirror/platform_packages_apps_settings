@@ -31,6 +31,7 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 
@@ -58,19 +59,20 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
     private static final String PREF_KEY = "audio_sharing_main_switch";
 
     interface OnSwitchBarChangedListener {
-        void onSwitchBarChanged(boolean newState);
+        void onSwitchBarChanged();
     }
 
     private final SettingsMainSwitchBar mSwitchBar;
     private final BluetoothAdapter mBluetoothAdapter;
-    private final IntentFilter mIntentFilter;
     private final LocalBluetoothManager mBtManager;
     private final LocalBluetoothLeBroadcast mBroadcast;
     private final LocalBluetoothLeBroadcastAssistant mAssistant;
     private final Executor mExecutor;
     private final OnSwitchBarChangedListener mListener;
     private DashboardFragment mFragment;
+    @VisibleForTesting IntentFilter mIntentFilter;
 
+    @VisibleForTesting
     BroadcastReceiver mReceiver =
             new BroadcastReceiver() {
                 @Override
@@ -80,6 +82,7 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                             intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothDevice.ERROR);
                     mSwitchBar.setChecked(isBroadcasting());
                     mSwitchBar.setEnabled(adapterState == BluetoothAdapter.STATE_ON);
+                    mListener.onSwitchBarChanged();
                 }
             };
 
@@ -346,15 +349,19 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
     }
 
     private void updateSwitch() {
-        ThreadUtils.postOnMainThread(
-                () -> {
-                    boolean isBroadcasting = isBroadcasting();
-                    if (mSwitchBar.isChecked() != isBroadcasting) {
-                        mSwitchBar.setChecked(isBroadcasting);
-                    }
-                    mSwitchBar.setEnabled(true);
-                    mListener.onSwitchBarChanged(isBroadcasting);
-                });
+        var unused =
+                ThreadUtils.postOnBackgroundThread(
+                        () -> {
+                            boolean isBroadcasting = isBroadcasting();
+                            ThreadUtils.postOnMainThread(
+                                    () -> {
+                                        if (mSwitchBar.isChecked() != isBroadcasting) {
+                                            mSwitchBar.setChecked(isBroadcasting);
+                                        }
+                                        mSwitchBar.setEnabled(true);
+                                        mListener.onSwitchBarChanged();
+                                    });
+                        });
     }
 
     private boolean isBroadcasting() {
@@ -376,7 +383,7 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                 TAG,
                 "Add broadcast with broadcastId: "
                         + broadcastMetadata.getBroadcastId()
-                        + "to the device: "
+                        + " to the device: "
                         + sink.getAnonymizedAddress());
         mAssistant.addSource(sink, broadcastMetadata, /* isGroupOp= */ false);
     }
