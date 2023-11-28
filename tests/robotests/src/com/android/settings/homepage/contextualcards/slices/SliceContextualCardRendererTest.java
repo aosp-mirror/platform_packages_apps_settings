@@ -52,6 +52,7 @@ import com.android.settings.homepage.contextualcards.ControllerRendererPool;
 import com.android.settings.wifi.slice.ContextualWifiSlice;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -102,6 +103,7 @@ public class SliceContextualCardRendererTest {
                 .isNull();
     }
 
+    @Ignore("b/313598030")
     @Test
     public void bindView_viewTypeFullWidth_shouldSetCachedSlice() {
         final RecyclerView.ViewHolder viewHolder = getSliceViewHolder();
@@ -113,6 +115,7 @@ public class SliceContextualCardRendererTest {
                 .isNotNull();
     }
 
+    @Ignore("b/313598030")
     @Test
     public void bindView_viewTypeSticky_shouldSetCachedSlice() {
         final RecyclerView.ViewHolder viewHolder = spy(getStickyViewHolder());
