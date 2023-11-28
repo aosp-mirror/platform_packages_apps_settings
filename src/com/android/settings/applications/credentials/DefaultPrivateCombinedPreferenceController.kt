@@ -36,15 +36,6 @@ class DefaultPrivateCombinedPreferenceController(context: Context?) : DefaultCom
         return "default_credman_autofill_private"
     }
 
-    override fun getSettingIntent(info: DefaultAppInfo ?): Intent ? {
-        if (info == null) {
-            return null
-        }
-        return userHandle?.let { handle ->
-            AutofillSettingIntentProvider(mContext, handle.identifier, info.key).intent
-        } ?: null
-    }
-
     override fun startActivity(intent: Intent) {
         userHandle?.let { handle ->
             mContext.startActivityAsUser(intent, handle)

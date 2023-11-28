@@ -4285,6 +4285,15 @@
                        android:value="true" />
         </activity>
 
+        <!-- Access to the Credential Manager list. -->
+        <activity android:name=".applications.credentials.CredentialsPickerActivity"
+                android:excludeFromRecents="true"
+                android:launchMode="singleInstance"
+                android:exported="false">
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.applications.credentials.DefaultCombinedPicker" />
+        </activity>
+
         <activity
             android:name=".Settings$SystemDashboardActivity"
             android:label="@string/header_category_system"
