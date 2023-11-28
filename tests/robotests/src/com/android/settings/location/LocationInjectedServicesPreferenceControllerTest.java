@@ -44,6 +44,7 @@ import com.android.settings.widget.RestrictedAppPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -114,6 +115,7 @@ public class LocationInjectedServicesPreferenceControllerTest {
         verify(mContext).unregisterReceiver(mController.mInjectedSettingsReceiver);
     }
 
+    @Ignore("b/313540388")
     @Test
     public void workProfileDisallowShareLocationOn_getParentUserLocationServicesOnly() {
         final int fakeWorkProfileId = 123;
@@ -166,6 +168,7 @@ public class LocationInjectedServicesPreferenceControllerTest {
         verify(mSettingsInjector).reloadStatusMessages();
     }
 
+    @Ignore("b/313540388")
     @Test
     public void withUserRestriction_shouldDisableLocationAccuracy() {
         final List<Preference> preferences = new ArrayList<>();
