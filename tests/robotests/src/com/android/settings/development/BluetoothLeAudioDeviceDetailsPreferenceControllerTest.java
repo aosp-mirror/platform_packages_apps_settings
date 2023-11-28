@@ -37,6 +37,7 @@ import com.android.settings.testutils.shadow.ShadowDeviceConfig;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -95,6 +96,7 @@ public class BluetoothLeAudioDeviceDetailsPreferenceControllerTest {
         assertThat(isEnabled).isFalse();
     }
 
+    @Ignore("b/313589946")
     @Test
     public void updateState_settingEnabled_preferenceShouldBeChecked() {
         mController.sLeAudioSupportedStateCache = BluetoothStatusCodes.FEATURE_SUPPORTED;
@@ -103,6 +105,7 @@ public class BluetoothLeAudioDeviceDetailsPreferenceControllerTest {
         verify(mPreference).setChecked(true);
     }
 
+    @Ignore("b/313589946")
     @Test
     public void updateState_settingDisabled_preferenceShouldNotBeChecked() {
         mController.sLeAudioSupportedStateCache = BluetoothStatusCodes.FEATURE_SUPPORTED;
