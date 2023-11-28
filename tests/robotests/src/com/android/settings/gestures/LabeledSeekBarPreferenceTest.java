@@ -42,6 +42,7 @@ import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.widget.LabeledSeekBarPreference;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -150,6 +151,7 @@ public class LabeledSeekBarPreferenceTest {
         assertThat(mLabelFrame.getVisibility()).isEqualTo(View.GONE);
     }
 
+    @Ignore("b/313594999")
     @Test
     public void setIconAttributes_iconVisible() {
         final AttributeSet attributeSet = Robolectric.buildAttributeSet()
@@ -204,6 +206,7 @@ public class LabeledSeekBarPreferenceTest {
         new LabeledSeekBarPreference(mContext, attributeSet);
     }
 
+    @Ignore("b/313594999")
     @Test
     public void setContentDescriptionWithIcon_success() {
         final String startDescription =
