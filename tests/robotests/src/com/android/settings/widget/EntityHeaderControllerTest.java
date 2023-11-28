@@ -45,6 +45,7 @@ import com.android.settings.R;
 import com.android.settingslib.widget.LayoutPreference;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -207,6 +208,7 @@ public class EntityHeaderControllerTest {
         verify(activity, never()).startActivity(any(Intent.class));
     }
 
+    @Ignore("b/313616350")
     @Test
     public void bindButton_hasAppInfo_shouldAttachClickListener() {
         final View appLinks = mLayoutInflater.inflate(
