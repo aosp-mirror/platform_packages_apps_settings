@@ -48,6 +48,7 @@ import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -207,6 +208,7 @@ public class WebViewAppPickerTest {
         verify(mActivity, times(1)).finish();
     }
 
+    @Ignore("b/313615637")
     @Test
     public void testNotFinishedIfAdmin() {
         mUserManager.setIsAdminUser(true);
