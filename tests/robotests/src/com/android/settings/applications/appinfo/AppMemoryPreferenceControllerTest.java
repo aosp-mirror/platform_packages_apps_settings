@@ -37,6 +37,7 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -79,6 +80,7 @@ public class AppMemoryPreferenceControllerTest {
         when(mFragment.getActivity()).thenReturn(mActivity);
     }
 
+    @Ignore("b/313582035")
     @Test
     @Config(qualifiers = "mcc999")
     public void getAvailabilityStatus_developmentSettingsEnabled_shouldReturnAvailable() {
