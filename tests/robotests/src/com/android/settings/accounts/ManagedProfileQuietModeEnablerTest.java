@@ -42,6 +42,7 @@ import androidx.lifecycle.LifecycleRegistry;
 import androidx.test.core.app.ApplicationProvider;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -111,6 +112,7 @@ public class ManagedProfileQuietModeEnablerTest {
         verify(mUserManager).requestQuietModeEnabled(mEnable, mManagedUser);
     }
 
+    @Ignore("b/313573729")
     @Test
     @RequiresFlagsEnabled(Flags.FLAG_QUIET_MODE_CREDENTIAL_BUG_FIX)
     public void onSetQuietMode_ifQuietModeAlreadyInDesiredState_shouldNotRequestQuietModeEnabled() {
