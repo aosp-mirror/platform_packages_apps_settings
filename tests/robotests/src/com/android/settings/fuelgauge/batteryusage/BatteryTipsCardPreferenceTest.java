@@ -40,7 +40,6 @@ import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -156,7 +155,6 @@ public final class BatteryTipsCardPreferenceTest {
                         "ScreenTimeoutAnomaly");
     }
 
-    @Ignore("b/313582999")
     @Test
     public void onClick_mainBtnOfAppsAnomaly_selectHighlightSlot() {
         final PowerAnomalyEvent appsAnomaly = BatteryTestUtils.createAppAnomalyEvent();
@@ -178,7 +176,6 @@ public final class BatteryTipsCardPreferenceTest {
                 .action(mContext, SettingsEnums.ACTION_BATTERY_TIPS_CARD_ACCEPT, "AppAnomaly");
     }
 
-    @Ignore("b/313582999")
     @Test
     public void onClick_dismissBtnOfAppsAnomaly_keepHighlightSlotIndex() {
         final PowerAnomalyEvent appsAnomaly = BatteryTestUtils.createAppAnomalyEvent();
