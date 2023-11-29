@@ -32,6 +32,7 @@ import com.android.settings.spa.app.specialaccess.DisplayOverOtherAppsAppListPro
 import com.android.settings.spa.app.specialaccess.InstallUnknownAppsListProvider
 import com.android.settings.spa.app.specialaccess.LongBackgroundTasksAppListProvider
 import com.android.settings.spa.app.specialaccess.MediaManagementAppsAppListProvider
+import com.android.settings.spa.app.specialaccess.MediaRoutingControlAppListProvider
 import com.android.settings.spa.app.specialaccess.ModifySystemSettingsAppListProvider
 import com.android.settings.spa.app.specialaccess.NfcTagAppsSettingsProvider
 import com.android.settings.spa.app.specialaccess.PictureInPictureListProvider
@@ -64,6 +65,7 @@ open class SettingsSpaEnvironment(context: Context) : SpaEnvironment(context) {
             AllFilesAccessAppListProvider,
             DisplayOverOtherAppsAppListProvider,
             MediaManagementAppsAppListProvider,
+            MediaRoutingControlAppListProvider,
             ModifySystemSettingsAppListProvider,
             UseFullScreenIntentAppListProvider,
             PictureInPictureListProvider,
