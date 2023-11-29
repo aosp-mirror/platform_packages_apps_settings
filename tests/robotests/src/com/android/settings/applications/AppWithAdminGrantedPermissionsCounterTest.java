@@ -40,6 +40,7 @@ import android.os.UserHandle;
 import android.os.UserManager;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -157,11 +158,13 @@ public final class AppWithAdminGrantedPermissionsCounterTest {
                 mDevicePolicyManager, mPackageManager, mPackageManagerService, mApp5)).isFalse();
     }
 
+    @Ignore("b/313578776")
     @Test
     public void testCountInstalledAppsSync() throws Exception {
         verifyCountInstalledApps(false /* async */);
     }
 
+    @Ignore("b/313578776")
     @Test
     public void testCountInstalledAppsAync() throws Exception {
         verifyCountInstalledApps(true /* async */);

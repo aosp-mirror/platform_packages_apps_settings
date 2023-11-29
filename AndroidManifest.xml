@@ -16,11 +16,6 @@
         android:name="com.android.settings.USE_BIOMETRIC_PROVIDER"
         android:protectionLevel="signature|privileged"/>
 
-    <!-- Permissions for acting as the factory reset preparation application. -->
-    <permission
-        android:name="com.android.settings.permissions.PREPARE_FACTORY_RESET"
-        android:protectionLevel="signature|privileged"/>
-
     <uses-permission android:name="android.permission.REQUEST_NETWORK_SCORES" />
     <uses-permission android:name="android.permission.WRITE_MEDIA_STORAGE" />
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
@@ -4288,6 +4283,15 @@
                        android:value="@string/menu_key_accounts"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
+        </activity>
+
+        <!-- Access to the Credential Manager list. -->
+        <activity android:name=".applications.credentials.CredentialsPickerActivity"
+                android:excludeFromRecents="true"
+                android:launchMode="singleInstance"
+                android:exported="false">
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.applications.credentials.DefaultCombinedPicker" />
         </activity>
 
         <activity

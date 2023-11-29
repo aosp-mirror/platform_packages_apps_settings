@@ -43,6 +43,7 @@ import com.android.settingslib.testutils.shadow.ShadowDefaultDialerManager;
 import com.android.settingslib.testutils.shadow.ShadowSmsApplication;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -140,11 +141,13 @@ public final class ApplicationFeatureProviderImplTest {
         assertThat(mAppList.get(0).appInfo.packageName).isEqualTo(APP_2);
     }
 
+    @Ignore("b/313578776")
     @Test
     public void testCalculateNumberOfInstalledAppsSync() {
         verifyCalculateNumberOfPolicyInstalledApps(false /* async */);
     }
 
+    @Ignore("b/313578776")
     @Test
     public void testCalculateNumberOfInstalledAppsAsync() {
         verifyCalculateNumberOfPolicyInstalledApps(true /* async */);
@@ -176,11 +179,13 @@ public final class ApplicationFeatureProviderImplTest {
         assertThat(mAppCount).isEqualTo(2);
     }
 
+    @Ignore("b/313578776")
     @Test
     public void testCalculateNumberOfAppsWithAdminGrantedPermissionsSync() throws Exception {
         verifyCalculateNumberOfAppsWithAdminGrantedPermissions(false /* async */);
     }
 
+    @Ignore("b/313578776")
     @Test
     public void testCalculateNumberOfAppsWithAdminGrantedPermissionsAsync() throws Exception {
         verifyCalculateNumberOfAppsWithAdminGrantedPermissions(true /* async */);

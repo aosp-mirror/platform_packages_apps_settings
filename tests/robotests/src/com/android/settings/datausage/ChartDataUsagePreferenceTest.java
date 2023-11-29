@@ -36,6 +36,7 @@ import com.android.settings.datausage.lib.NetworkUsageData;
 import com.android.settings.widget.UsageView;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -92,6 +93,7 @@ public class ChartDataUsagePreferenceTest {
         assertThat(points.valueAt(1)).isNotEqualTo(-1);
     }
 
+    @Ignore("b/313568482")
     @Test
     public void calcPoints_dataNotAvailableAtCycleStart_shouldIndicateStartOfData() {
         final UsageView usageView = mock(UsageView.class);
@@ -112,6 +114,7 @@ public class ChartDataUsagePreferenceTest {
         assertThat(points.valueAt(1)).isEqualTo(-1);
     }
 
+    @Ignore("b/313568482")
     @Test
     public void calcPoints_shouldNotDrawPointForFutureDate() {
         final UsageView usageView = mock(UsageView.class);

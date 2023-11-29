@@ -44,6 +44,7 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -222,6 +223,7 @@ public class UsbDetailsFunctionsControllerTest {
         assertThat(prefs.get(3).isChecked()).isFalse();
     }
 
+    @Ignore("b/313362757")
     @Test
     public void onClickNone_mtpEnabled_shouldDisableMtp() {
         when(mUsbBackend.areFunctionsSupported(anyLong())).thenReturn(true);

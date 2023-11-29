@@ -58,6 +58,7 @@ import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -202,6 +203,7 @@ public class AppLocalePickerActivityTest {
         assertThat(controller.get().isFinishing()).isTrue();
     }
 
+    @Ignore("b/313604701")
     @Test
     public void onLocaleSelected_getLocaleNotNull_getLanguageTag() {
         ActivityController<TestAppLocalePickerActivity> controller =

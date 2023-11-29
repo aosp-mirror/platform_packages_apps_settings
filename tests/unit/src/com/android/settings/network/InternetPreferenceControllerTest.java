@@ -298,4 +298,11 @@ public class InternetPreferenceControllerTest {
 
         assertThat(mPreference.getSummary().toString()).isEqualTo(TEST_SUMMARY);
     }
+
+    @Test
+    public void updateHotspotNetwork_hotspotNetworkNotEnabled_returnFalse() {
+        mController.mWifiPickerTrackerHelper = null;
+
+        assertThat(mController.updateHotspotNetwork()).isFalse();
+    }
 }

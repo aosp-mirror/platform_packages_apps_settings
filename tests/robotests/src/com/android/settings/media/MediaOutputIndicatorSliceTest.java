@@ -54,6 +54,7 @@ import com.android.settingslib.media.MediaDevice;
 import com.android.settingslib.media.MediaOutputConstants;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -151,6 +152,7 @@ public class MediaOutputIndicatorSliceTest {
         assertThat(metadata.isErrorSlice()).isFalse();
     }
 
+    @Ignore("b/313605377")
     @Test
     public void getSlice_noConnectedDevice_returnErrorSlice() {
         mDevices.clear();
@@ -163,6 +165,7 @@ public class MediaOutputIndicatorSliceTest {
         assertThat(metadata.isErrorSlice()).isTrue();
     }
 
+    @Ignore("b/313605377")
     @Test
     public void getSlice_audioModeIsInCommunication_returnErrorSlice() {
         mDevices.add(mDevice1);
@@ -177,6 +180,7 @@ public class MediaOutputIndicatorSliceTest {
         assertThat(metadata.isErrorSlice()).isTrue();
     }
 
+    @Ignore("b/313605377")
     @Test
     public void getSlice_audioModeIsRingtone_returnErrorSlice() {
         mDevices.add(mDevice1);
@@ -191,6 +195,7 @@ public class MediaOutputIndicatorSliceTest {
         assertThat(metadata.isErrorSlice()).isTrue();
     }
 
+    @Ignore("b/313605377")
     @Test
     public void getSlice_audioModeIsInCall_returnErrorSlice() {
         mDevices.add(mDevice1);

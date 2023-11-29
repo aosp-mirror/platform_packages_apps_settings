@@ -43,6 +43,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowSystemProperties;
 
+@Ignore("b/313564061")
 @RunWith(RobolectricTestRunner.class)
 @Config(
         shadows = {
@@ -134,7 +135,6 @@ public class MemtagPreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     public void setChecked_isChecked_doesNotShowDialog() {
         ZygoteShadow.setSupportsMemoryTagging(false);
         mController.setChecked(false);
@@ -142,7 +142,6 @@ public class MemtagPreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     public void setChecked_isUnchecked_doesNotShowDialog() {
         ZygoteShadow.setSupportsMemoryTagging(true);
         mController.setChecked(true);

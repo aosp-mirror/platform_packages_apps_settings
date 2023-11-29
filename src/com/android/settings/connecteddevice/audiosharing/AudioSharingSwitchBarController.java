@@ -16,12 +16,16 @@
 
 package com.android.settings.connecteddevice.audiosharing;
 
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeBroadcast;
 import android.bluetooth.BluetoothLeBroadcastAssistant;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.util.Log;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
@@ -58,12 +62,26 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
     }
 
     private final SettingsMainSwitchBar mSwitchBar;
+    private final BluetoothAdapter mBluetoothAdapter;
+    private final IntentFilter mIntentFilter;
     private final LocalBluetoothManager mBtManager;
     private final LocalBluetoothLeBroadcast mBroadcast;
     private final LocalBluetoothLeBroadcastAssistant mAssistant;
     private final Executor mExecutor;
     private final OnSwitchBarChangedListener mListener;
     private DashboardFragment mFragment;
+
+    BroadcastReceiver mReceiver =
+            new BroadcastReceiver() {
+                @Override
+                public void onReceive(Context context, Intent intent) {
+                    if (!BluetoothAdapter.ACTION_STATE_CHANGED.equals(intent.getAction())) return;
+                    int adapterState =
+                            intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothDevice.ERROR);
+                    mSwitchBar.setChecked(isBroadcasting());
+                    mSwitchBar.setEnabled(adapterState == BluetoothAdapter.STATE_ON);
+                }
+            };
 
     private final BluetoothLeBroadcast.Callback mBroadcastCallback =
             new BluetoothLeBroadcast.Callback() {
@@ -245,27 +263,34 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
         super(context, PREF_KEY);
         mSwitchBar = switchBar;
         mListener = listener;
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        mIntentFilter = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
         mBtManager = Utils.getLocalBtManager(context);
         mBroadcast = mBtManager.getProfileManager().getLeAudioBroadcastProfile();
         mAssistant = mBtManager.getProfileManager().getLeAudioBroadcastAssistantProfile();
         mExecutor = Executors.newSingleThreadExecutor();
-        mSwitchBar.setChecked(isBroadcasting());
     }
 
     @Override
     public void onStart(@NonNull LifecycleOwner owner) {
         mSwitchBar.addOnSwitchChangeListener(this);
+        mContext.registerReceiver(mReceiver, mIntentFilter, Context.RECEIVER_EXPORTED_UNAUDITED);
         if (mBroadcast != null) {
             mBroadcast.registerServiceCallBack(mExecutor, mBroadcastCallback);
         }
         if (mAssistant != null) {
             mAssistant.registerServiceCallBack(mExecutor, mBroadcastAssistantCallback);
         }
+        if (isAvailable()) {
+            mSwitchBar.setChecked(isBroadcasting());
+            mSwitchBar.setEnabled(mBluetoothAdapter != null && mBluetoothAdapter.isEnabled());
+        }
     }
 
     @Override
     public void onStop(@NonNull LifecycleOwner owner) {
         mSwitchBar.removeOnSwitchChangeListener(this);
+        mContext.unregisterReceiver(mReceiver);
         if (mBroadcast != null) {
             mBroadcast.unregisterServiceCallBack(mBroadcastCallback);
         }
