@@ -26,7 +26,6 @@ import android.platform.test.flag.junit.DeviceFlagsValueProvider
 import com.android.settings.flags.Flags
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -46,7 +45,9 @@ class BiometricSettingsProviderTest {
 
   @Before
   fun setUp() {
+    whenever(context.resources).thenReturn(resources)
     provider = BiometricSettingsProvider()
+    provider.attachInfo(context, null)
   }
 
   @Test(expected = UnsupportedOperationException::class)
@@ -74,16 +75,14 @@ class BiometricSettingsProviderTest {
     provider.update(Uri.EMPTY, null, null, null)
   }
 
-  @Ignore("b/313342682")
   @Test
   @RequiresFlagsEnabled(Flags.FLAG_BIOMETRIC_SETTINGS_PROVIDER)
   fun getSuggestionState_shouldQueryFeatureProvider() {
     val expectedValue = false
     setSupportFaceEnroll(expectedValue)
 
-    val bundle =
-      provider.call(BiometricSettingsProvider.GET_SUW_FACE_ENABLED, null, Bundle())
-    assertThat(bundle!!.getString(BiometricSettingsProvider.SUW_FACE_ENABLED))
+    val bundle = provider.call(BiometricSettingsProvider.GET_SUW_FACE_ENABLED, null, Bundle())
+    assertThat(bundle!!.getBoolean(BiometricSettingsProvider.SUW_FACE_ENABLED))
       .isEqualTo(expectedValue)
   }
 
