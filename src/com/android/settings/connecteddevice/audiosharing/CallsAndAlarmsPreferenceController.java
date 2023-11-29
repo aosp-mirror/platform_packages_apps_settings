@@ -22,7 +22,6 @@ import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceScreen;
 
@@ -31,6 +30,7 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.bluetooth.BluetoothCallback;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
+import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,7 +39,7 @@ import java.util.Map;
 
 /** PreferenceController to control the dialog to choose the active device for calls and alarms */
 public class CallsAndAlarmsPreferenceController extends AudioSharingBasePreferenceController
-        implements BluetoothCallback, DefaultLifecycleObserver {
+        implements BluetoothCallback {
 
     private static final String TAG = "CallsAndAlarmsPreferenceController";
     private static final String PREF_KEY = "calls_and_alarms";
@@ -86,6 +86,7 @@ public class CallsAndAlarmsPreferenceController extends AudioSharingBasePreferen
 
     @Override
     public void onStart(@NonNull LifecycleOwner owner) {
+        super.onStart(owner);
         if (mLocalBtManager != null) {
             mLocalBtManager.getEventManager().registerCallback(this);
         }
@@ -93,25 +94,46 @@ public class CallsAndAlarmsPreferenceController extends AudioSharingBasePreferen
 
     @Override
     public void onStop(@NonNull LifecycleOwner owner) {
+        super.onStop(owner);
         if (mLocalBtManager != null) {
             mLocalBtManager.getEventManager().unregisterCallback(this);
         }
     }
 
     @Override
-    public void updateVisibility(boolean isVisible) {
-        super.updateVisibility(isVisible);
-        if (isVisible && mPreference != null) {
-            updateDeviceItemsInSharingSession();
-            // mDeviceItemsInSharingSession is ordered. The active device is the first place if
-            // exits.
-            if (!mDeviceItemsInSharingSession.isEmpty()
-                    && mDeviceItemsInSharingSession.get(0).isActive()) {
-                mPreference.setSummary(mDeviceItemsInSharingSession.get(0).getName());
-            } else {
-                mPreference.setSummary("");
-            }
-        }
+    public void updateVisibility() {
+        if (mPreference == null) return;
+        var unused =
+                ThreadUtils.postOnBackgroundThread(
+                        () -> {
+                            boolean isVisible = isBroadcasting() && isBluetoothStateOn();
+                            if (!isVisible) {
+                                ThreadUtils.postOnMainThread(() -> mPreference.setVisible(false));
+                            } else {
+                                updateDeviceItemsInSharingSession();
+                                // mDeviceItemsInSharingSession is ordered. The active device is the
+                                // first
+                                // place if exits.
+                                if (!mDeviceItemsInSharingSession.isEmpty()
+                                        && mDeviceItemsInSharingSession.get(0).isActive()) {
+                                    ThreadUtils.postOnMainThread(
+                                            () -> {
+                                                mPreference.setVisible(true);
+                                                mPreference.setSummary(
+                                                        mDeviceItemsInSharingSession
+                                                                .get(0)
+                                                                .getName());
+                                            });
+                                } else {
+                                    ThreadUtils.postOnMainThread(
+                                            () -> {
+                                                mPreference.setVisible(true);
+                                                mPreference.setSummary(
+                                                        "No active device in sharing");
+                                            });
+                                }
+                            }
+                        });
     }
 
     @Override

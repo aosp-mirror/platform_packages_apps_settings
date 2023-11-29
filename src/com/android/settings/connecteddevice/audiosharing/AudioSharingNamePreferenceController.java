@@ -19,16 +19,13 @@ package com.android.settings.connecteddevice.audiosharing;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
 
 import com.android.settings.widget.ValidatedEditTextPreference;
 
 public class AudioSharingNamePreferenceController extends AudioSharingBasePreferenceController
-        implements ValidatedEditTextPreference.Validator,
-                Preference.OnPreferenceChangeListener,
-                DefaultLifecycleObserver {
+        implements ValidatedEditTextPreference.Validator, Preference.OnPreferenceChangeListener {
 
     private static final String TAG = "AudioSharingNamePreferenceController";
 
@@ -59,11 +56,13 @@ public class AudioSharingNamePreferenceController extends AudioSharingBasePrefer
 
     @Override
     public void onStart(@NonNull LifecycleOwner owner) {
+        super.onStart(owner);
         // TODO
     }
 
     @Override
     public void onStop(@NonNull LifecycleOwner owner) {
+        super.onStop(owner);
         // TODO
     }
 }
