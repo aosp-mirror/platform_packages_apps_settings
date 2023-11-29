@@ -18,6 +18,7 @@ package com.android.settings.privatespace;
 
 import static android.os.UserManager.USER_TYPE_PROFILE_PRIVATE;
 import static android.provider.Settings.Secure.HIDE_PRIVATESPACE_ENTRY_POINT;
+import static android.provider.Settings.Secure.USER_SETUP_COMPLETE;
 
 import android.app.ActivityManager;
 import android.app.IActivityManager;
@@ -96,6 +97,7 @@ public class PrivateSpaceMaintainer {
 
             IActivityManager am = ActivityManager.getService();
             try {
+                //TODO(b/313926659): To check and handle failure of startProfile
                 am.startProfile(mUserHandle.getIdentifier());
             } catch (RemoteException e) {
                 Log.e(TAG, "Failed to start private profile");
@@ -104,6 +106,7 @@ public class PrivateSpaceMaintainer {
 
             Log.i(TAG, "Private space created with id: " + mUserHandle.getIdentifier());
             resetPrivateSpaceSettings();
+            setUserSetupComplete();
         }
         return true;
     }
@@ -249,5 +252,15 @@ public class PrivateSpaceMaintainer {
 
     private void resetPrivateSpaceSettings() {
         setHidePrivateSpaceEntryPointSetting(HIDE_PRIVATE_SPACE_ENTRY_POINT_DISABLED_VAL);
+    }
+
+    /**
+     * Sets the USER_SETUP_COMPLETE for private profile on which device theme is applied to the
+     * profile.
+     */
+    @GuardedBy("this")
+    private void setUserSetupComplete() {
+        Settings.Secure.putIntForUser(mContext.getContentResolver(), USER_SETUP_COMPLETE,
+                1, mUserHandle.getIdentifier());
     }
 }

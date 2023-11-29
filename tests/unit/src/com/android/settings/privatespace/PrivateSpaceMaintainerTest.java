@@ -198,4 +198,40 @@ public class PrivateSpaceMaintainerTest {
         assertThat(privateSpaceMaintainer.doesPrivateSpaceExist()).isFalse();
         assertThat(privateSpaceMaintainer.lockPrivateSpace()).isFalse();
     }
+
+    /**
+     * Tests that {@link PrivateSpaceMaintainer#createPrivateSpace()} when no PS exists sets
+     * USER_SETUP_COMPLETE setting.
+     */
+    @Test
+    public void createPrivateSpace_psDoesNotExist_setsUserSetupComplete() {
+        PrivateSpaceMaintainer privateSpaceMaintainer =
+                PrivateSpaceMaintainer.getInstance(mContext);
+        privateSpaceMaintainer.createPrivateSpace();
+        assertThat(getSecureUserSetupComplete()).isEqualTo(1);
+    }
+
+    /**
+     * Tests that {@link PrivateSpaceMaintainer#createPrivateSpace()} when PS exists does not
+     * change USER_SETUP_COMPLETE setting.
+     */
+    @Test
+    public void createPrivateSpace_pSExists_doesNotChangeUserSetupSetting() {
+        PrivateSpaceMaintainer privateSpaceMaintainer =
+                PrivateSpaceMaintainer.getInstance(mContext);
+        privateSpaceMaintainer.createPrivateSpace();
+        assertThat(getSecureUserSetupComplete()).isEqualTo(1);
+        privateSpaceMaintainer.createPrivateSpace();
+        assertThat(getSecureUserSetupComplete()).isEqualTo(1);
+    }
+
+    private int getSecureUserSetupComplete() {
+        PrivateSpaceMaintainer privateSpaceMaintainer =
+                PrivateSpaceMaintainer.getInstance(mContext);
+        return Settings.Secure.getIntForUser(
+                mContentResolver,
+                Settings.Secure.USER_SETUP_COMPLETE,
+                0,
+                privateSpaceMaintainer.getPrivateProfileHandle().getIdentifier());
+    }
 }
