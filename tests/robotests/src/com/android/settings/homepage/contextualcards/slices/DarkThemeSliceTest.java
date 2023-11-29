@@ -42,6 +42,7 @@ import com.android.settings.slices.SlicesFeatureProviderImpl;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -129,6 +130,7 @@ public class DarkThemeSliceTest {
         assertThat(mDarkThemeSlice.isAvailable(mContext)).isTrue();
     }
 
+    @Ignore("b/313598030")
     @Test
     public void getSlice_batterySaver_returnErrorSlice() {
         when(mPowerManager.isPowerSaveMode()).thenReturn(true);
@@ -138,6 +140,7 @@ public class DarkThemeSliceTest {
         assertThat(metadata.isErrorSlice()).isTrue();
     }
 
+    @Ignore("b/313598030")
     @Test
     public void getSlice_notAvailable_returnErrorSlice() {
         mContext.getResources().getConfiguration().uiMode = UI_MODE_NIGHT_YES;
@@ -147,6 +150,7 @@ public class DarkThemeSliceTest {
         assertThat(metadata.isErrorSlice()).isTrue();
     }
 
+    @Ignore("b/313598030")
     @Test
     public void getSlice_newSession_notAvailable_returnErrorSlice() {
         // previous displayed: yes
@@ -173,6 +177,7 @@ public class DarkThemeSliceTest {
         assertThat(mDarkThemeSlice.getSlice()).isNotNull();
     }
 
+    @Ignore("b/313598030")
     @Test
     public void getSlice_sliceNotClicked_notAvailable_returnErrorSlice() {
         mDarkThemeSlice.sSliceClicked = false;

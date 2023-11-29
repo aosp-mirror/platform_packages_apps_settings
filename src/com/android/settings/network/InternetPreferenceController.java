@@ -43,6 +43,7 @@ import com.android.settings.R;
 import com.android.settings.widget.SummaryUpdater;
 import com.android.settings.wifi.WifiPickerTrackerHelper;
 import com.android.settings.wifi.WifiSummaryUpdater;
+import com.android.settings.wifi.repository.SharedConnectivityRepository;
 import com.android.settingslib.Utils;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
@@ -77,6 +78,7 @@ public class InternetPreferenceController extends AbstractPreferenceController i
     private List<SubscriptionInfoEntity> mSubInfoEntityList = new ArrayList<>();
     private int mDefaultDataSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     private DefaultSubscriptionReceiver mDataSubscriptionChangedReceiver;
+    private boolean mIsHotspotNetworkEnabled = SharedConnectivityRepository.isDeviceConfigEnabled();
     @VisibleForTesting
     WifiPickerTrackerHelper mWifiPickerTrackerHelper;
 
@@ -111,7 +113,9 @@ public class InternetPreferenceController extends AbstractPreferenceController i
         mLifecycleOwner = lifecycleOwner;
         mMobileNetworkRepository = MobileNetworkRepository.getInstance(context);
         mDataSubscriptionChangedReceiver = new DefaultSubscriptionReceiver(context, this);
-        mWifiPickerTrackerHelper = new WifiPickerTrackerHelper(lifecycle, context, this);
+        if (mIsHotspotNetworkEnabled) {
+            mWifiPickerTrackerHelper = new WifiPickerTrackerHelper(lifecycle, context, this);
+        }
         lifecycle.addObserver(this);
     }
 
@@ -162,6 +166,9 @@ public class InternetPreferenceController extends AbstractPreferenceController i
 
     @VisibleForTesting
     boolean updateHotspotNetwork() {
+        if (mWifiPickerTrackerHelper == null) {
+            return false;
+        }
         WifiEntry entry = mWifiPickerTrackerHelper.getWifiPickerTracker().getConnectedWifiEntry();
         if (!(entry instanceof HotspotNetworkEntry)) {
             return false;

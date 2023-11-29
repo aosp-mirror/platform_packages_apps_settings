@@ -47,3 +47,16 @@ java_aconfig_library {
     name: "accessibility_settings_flags_lib",
     aconfig_declarations: "accessibility_flags",
 }
+
+aconfig_declarations {
+    name: "development_settings_flags",
+    package: "com.android.settings.development",
+    srcs: [
+        "development/**/*.aconfig"
+    ],
+}
+
+java_aconfig_library {
+    name: "development_settings_flag_lib",
+    aconfig_declarations: "development_settings_flags",
+}

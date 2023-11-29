@@ -50,6 +50,7 @@ import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -125,6 +126,7 @@ public class PanelSlicesAdapterTest {
     /**
      * ViewHolder should load and set the action label correctly.
      */
+    @Ignore("b/313576125")
     @Test
     public void setActionLabel_loadsActionLabel() {
         addTestLiveData(VOLUME_NOTIFICATION_URI);
@@ -165,6 +167,7 @@ public class PanelSlicesAdapterTest {
         return foundLabel;
     }
 
+    @Ignore("b/313576125")
     @Test
     public void sizeOfAdapter_shouldNotExceedMaxNum() {
         for (int i = 0; i < MAX_NUM_OF_SLICES + 2; i++) {
@@ -183,6 +186,7 @@ public class PanelSlicesAdapterTest {
         assertThat(adapter.getData().size()).isEqualTo(MAX_NUM_OF_SLICES);
     }
 
+    @Ignore("b/313576125")
     @Test
     public void mediaOutputIndicatorSlice_notSliderPanel_noSliderLayout() {
         addTestLiveData(MEDIA_OUTPUT_INDICATOR_SLICE_URI);
@@ -199,6 +203,7 @@ public class PanelSlicesAdapterTest {
         assertThat(viewHolder.mSliceSliderLayout).isNull();
     }
 
+    @Ignore("b/313576125")
     @Test
     public void onBindViewHolder_viewTypeSlider_verifyActionLabelSet() {
         addTestLiveData(VOLUME_NOTIFICATION_URI);

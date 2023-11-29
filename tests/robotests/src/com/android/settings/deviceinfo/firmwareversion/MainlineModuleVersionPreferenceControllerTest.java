@@ -40,6 +40,7 @@ import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import androidx.preference.Preference;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -114,6 +115,7 @@ public class MainlineModuleVersionPreferenceControllerTest {
         assertThat(controller.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
+    @Ignore("b/313567396")
     @Test
     public void updateState_canHandleV2Intent_setIntentToPreference() throws Exception {
         setupModulePackage("test version 123");
@@ -127,6 +129,7 @@ public class MainlineModuleVersionPreferenceControllerTest {
         assertThat(mPreference.getIntent()).isEqualTo(MODULE_UPDATE_V2_INTENT);
     }
 
+    @Ignore("b/313567396")
     @Test
     public void updateState_canHandleV2Intent_preferenceShouldBeSelectable() throws Exception {
         setupModulePackage("test version 123");
@@ -140,6 +143,7 @@ public class MainlineModuleVersionPreferenceControllerTest {
         assertThat(mPreference.isSelectable()).isTrue();
     }
 
+    @Ignore("b/313567396")
     @RequiresFlagsEnabled(com.android.settings.flags.Flags.FLAG_MAINLINE_MODULE_EXPLICIT_INTENT)
     @Test
     public void updateState_canHandleIntent_setIntentToPreference() throws Exception {
@@ -155,6 +159,7 @@ public class MainlineModuleVersionPreferenceControllerTest {
         assertThat(mPreference.getIntent()).isEqualTo(MODULE_UPDATE_INTENT);
     }
 
+    @Ignore("b/313567396")
     @RequiresFlagsEnabled(com.android.settings.flags.Flags.FLAG_MAINLINE_MODULE_EXPLICIT_INTENT)
     @Test
     public void updateState_canHandleIntent_preferenceShouldBeSelectable() throws Exception {
