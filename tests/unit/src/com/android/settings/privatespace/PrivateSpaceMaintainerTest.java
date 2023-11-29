@@ -21,8 +21,11 @@ import static com.android.settings.privatespace.PrivateSpaceMaintainer.HIDE_PRIV
 
 import static com.google.common.truth.Truth.assertThat;
 
+import android.app.ActivityManager;
+import android.app.IActivityManager;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.os.RemoteException;
 import android.provider.Settings;
 
 import androidx.test.core.app.ApplicationProvider;
@@ -30,6 +33,8 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.settings.privatespace.PrivateSpaceMaintainer.ErrorDeletingPrivateSpace;
 
+import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,6 +42,7 @@ import org.mockito.MockitoAnnotations;
 
 @RunWith(AndroidJUnit4.class)
 public class PrivateSpaceMaintainerTest {
+    private static final String TAG = "PSMaintainerTest";
     private Context mContext;
     private ContentResolver mContentResolver;
 
@@ -46,6 +52,13 @@ public class PrivateSpaceMaintainerTest {
         MockitoAnnotations.initMocks(this);
         mContext = ApplicationProvider.getApplicationContext();
         mContentResolver = mContext.getContentResolver();
+    }
+
+    @After
+    public void tearDown() {
+        PrivateSpaceMaintainer privateSpaceMaintainer =
+                PrivateSpaceMaintainer.getInstance(mContext);
+        privateSpaceMaintainer.deletePrivateSpace();
     }
 
     /** Tests that {@link PrivateSpaceMaintainer#deletePrivateSpace()} deletes PS when PS exists. */
@@ -136,5 +149,53 @@ public class PrivateSpaceMaintainerTest {
         privateSpaceMaintainer.createPrivateSpace();
         assertThat(privateSpaceMaintainer.getHidePrivateSpaceEntryPointSetting())
                 .isEqualTo(HIDE_PRIVATE_SPACE_ENTRY_POINT_ENABLED_VAL);
+    }
+
+    /**
+     * Tests that {@link PrivateSpaceMaintainer#lockPrivateSpace()} when PS exists and is running
+     * locks the private profile.
+     */
+    @Test
+    public void lockPrivateSpace_psExistsAndPrivateProfileRunning_locksCreatedPrivateSpace() {
+        PrivateSpaceMaintainer privateSpaceMaintainer =
+                PrivateSpaceMaintainer.getInstance(mContext);
+        privateSpaceMaintainer.createPrivateSpace();
+        assertThat(privateSpaceMaintainer.doesPrivateSpaceExist()).isTrue();
+        assertThat(privateSpaceMaintainer.isPrivateProfileRunning()).isTrue();
+        assertThat(privateSpaceMaintainer.isPrivateSpaceLocked()).isFalse();
+        assertThat(privateSpaceMaintainer.lockPrivateSpace()).isTrue();
+        assertThat(privateSpaceMaintainer.isPrivateSpaceLocked()).isTrue();
+    }
+
+    /**
+     * Tests that {@link PrivateSpaceMaintainer#lockPrivateSpace()} when PS exist and private
+     * profile not running returns false.
+     */
+    @Test
+    public void lockPrivateSpace_psExistsAndPrivateProfileNotRunning_returnsFalse() {
+        PrivateSpaceMaintainer privateSpaceMaintainer =
+                PrivateSpaceMaintainer.getInstance(mContext);
+        privateSpaceMaintainer.createPrivateSpace();
+        assertThat(privateSpaceMaintainer.doesPrivateSpaceExist()).isTrue();
+        assertThat(privateSpaceMaintainer.isPrivateProfileRunning()).isTrue();
+        IActivityManager am = ActivityManager.getService();
+        try {
+            am.stopProfile(privateSpaceMaintainer.getPrivateProfileHandle().getIdentifier());
+        } catch (RemoteException e) {
+            Assert.fail("Stop profile failed with exception " + e.getMessage());
+        }
+        assertThat(privateSpaceMaintainer.isPrivateProfileRunning()).isFalse();
+        assertThat(privateSpaceMaintainer.lockPrivateSpace()).isFalse();
+    }
+
+    /**
+     * Tests that {@link PrivateSpaceMaintainer#lockPrivateSpace()} when no PS exists returns false.
+     */
+    @Test
+    public void lockPrivateSpace_psDoesNotExist_returnsFalse() {
+        PrivateSpaceMaintainer privateSpaceMaintainer =
+                PrivateSpaceMaintainer.getInstance(mContext);
+        assertThat(privateSpaceMaintainer.doesPrivateSpaceExist()).isFalse();
+        assertThat(privateSpaceMaintainer.lockPrivateSpace()).isFalse();
     }
 }

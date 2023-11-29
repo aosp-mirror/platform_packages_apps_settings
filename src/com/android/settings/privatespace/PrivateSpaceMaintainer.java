@@ -34,6 +34,7 @@ import android.util.ArraySet;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.annotations.GuardedBy;
 
@@ -224,6 +225,26 @@ public class PrivateSpaceMaintainer {
                 mContext.getContentResolver(),
                 HIDE_PRIVATESPACE_ENTRY_POINT,
                 HIDE_PRIVATE_SPACE_ENTRY_POINT_DISABLED_VAL);
+    }
+
+    /**
+     * Returns true if private space exists and quiet mode is successfully enabled, otherwise
+     * returns false
+     */
+    public synchronized boolean lockPrivateSpace() {
+        if (isPrivateProfileRunning()) {
+            return mUserManager.requestQuietModeEnabled(true, mUserHandle);
+        }
+        return false;
+    }
+
+    /** Returns true if private space exists and is running, otherwise returns false */
+    @VisibleForTesting
+    synchronized boolean isPrivateProfileRunning() {
+        if (doesPrivateSpaceExist() && mUserHandle != null) {
+            return mUserManager.isUserRunning(mUserHandle);
+        }
+        return false;
     }
 
     private void resetPrivateSpaceSettings() {
