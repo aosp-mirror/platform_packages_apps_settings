@@ -951,9 +951,7 @@
     <string name="lost_internet_access_cancel" msgid="1981171269794585284">"Manatili sa Wi‑Fi"</string>
     <string name="lost_internet_access_persist" msgid="6813604557672782197">"Huwag kailanman ipakitang muli"</string>
     <string name="wifi_connect" msgid="2481467560349907397">"Kumonekta"</string>
-    <string name="wifi_turned_on_message" msgid="8069855406962662881">"Na-on ang Wi‑Fi"</string>
     <string name="wifi_connected_to_message" msgid="8976048616505112896">"Nakakonekta sa <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
-    <string name="wifi_connecting_to_message" msgid="3153205024060064551">"Kumokonekta sa <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
     <string name="wifi_connecting" msgid="7450277833386859724">"Kumokonekta…"</string>
     <string name="wifi_failed_connect_message" msgid="8538000546604347894">"Nabigong kumonekta sa network."</string>
     <string name="wifi_not_in_range_message" msgid="3885327464037574739">"Walang signal ang network"</string>
@@ -1129,6 +1127,8 @@
     <string name="adaptive_sleep_privacy" msgid="7664570136417980556">"Ginagamit ng atensyon sa screen ang camera sa harap para makita kung may taong tumitingin sa screen. Gumagana ito sa device, at hindi kailanman sino-store o ipinapadala sa Google ang mga larawan."</string>
     <string name="adaptive_sleep_contextual_slice_title" msgid="7467588613212629758">"I-on ang atensyon sa screen"</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"Panatilihing naka-on ang screen habang tinitingnan mo ito"</string>
+    <!-- no translation found for power_consumption_footer_summary (4901490700555257237) -->
+    <skip />
     <string name="auto_rotate_camera_lock_title" msgid="5369003176695105872">"Naka-lock ang camera"</string>
     <string name="auto_rotate_camera_lock_summary" msgid="5699491516271544672">"Dapat ma-unlock ang camera para sa Pag-detect ng Mukha"</string>
     <string name="adaptive_sleep_camera_lock_summary" msgid="8417541183603618098">"Naka-unlock dapat ang Camera para sa Atensyon sa Screen"</string>
@@ -1469,7 +1469,6 @@
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Gamitin ang hotspot at pag-tether para magbigay ng internet sa iba pang device sa pamamagitan ng iyong koneksyon sa Wi‑Fi o mobile data. Puwede ring gumawa ng hotspot ang mga app para magbahagi ng content sa mga kalapit na device."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Tulong"</string>
     <string name="network_settings_title" msgid="4663717899931613176">"Mobile network"</string>
-    <string name="manage_mobile_plan_title" msgid="5616930513733409064">"Mobile plan"</string>
     <string name="sms_application_title" msgid="4791107002724108809">"SMS app"</string>
     <string name="sms_change_default_dialog_title" msgid="2343439998715457307">"Palitan ang SMS app?"</string>
     <string name="sms_change_default_dialog_text" msgid="8777606240342982531">"Gamitin ang <xliff:g id="NEW_APP">%1$s</xliff:g> sa halip na ang <xliff:g id="CURRENT_APP">%2$s</xliff:g> bilang iyong SMS app?"</string>
@@ -1477,10 +1476,6 @@
     <string name="network_scorer_change_active_dialog_title" msgid="7005220310238618141">"Baguhin ang Wi‑Fi assistant?"</string>
     <string name="network_scorer_change_active_dialog_text" msgid="7006057749370850706">"Gamitin ang <xliff:g id="NEW_APP">%1$s</xliff:g> sa halip na ang <xliff:g id="CURRENT_APP">%2$s</xliff:g> upang pamahalaan ang iyong mga koneksyon sa network?"</string>
     <string name="network_scorer_change_active_no_previous_dialog_text" msgid="680685773455072321">"Gamitin ang <xliff:g id="NEW_APP">%s</xliff:g> upang pamahalaan ang iyong mga koneksyon sa network?"</string>
-    <string name="mobile_unknown_sim_operator" msgid="6650422533065760963">"Hindi kilalang SIM operator"</string>
-    <string name="mobile_no_provisioning_url" msgid="609462719893503773">"Walang kilalang provisioning website ang <xliff:g id="OPERATOR">%1$s</xliff:g>"</string>
-    <string name="mobile_insert_sim_card" msgid="3639245241283948038">"Mangyaring magpasok ng SIM card at mag-restart"</string>
-    <string name="mobile_connect_to_internet" msgid="8162654404357069060">"Mangyaring kumonekta sa Internet"</string>
     <string name="location_category_recent_location_requests" msgid="2205900488782832082">"Kamakailang hiling sa lokasyon"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Lokayon ng profile sa trabaho"</string>
     <string name="location_app_level_permissions" msgid="907206607664629759">"Pahintulot sa lokasyon ng app"</string>
@@ -2245,12 +2240,9 @@
     <string name="accessibility_service_action_perform_description" msgid="7807832069800034738">"Masusubaybayan nito ang iyong mga pakikipag-ugayan sa isang app o hardware na sensor, at puwede itong makipag-ugnayan sa mga app para sa iyo."</string>
     <string name="accessibility_dialog_button_allow" msgid="8274918676473216697">"Payagan"</string>
     <string name="accessibility_dialog_button_deny" msgid="2037249860078259284">"Tanggihan"</string>
-    <!-- no translation found for accessibility_dialog_button_stop (7584815613743292151) -->
-    <skip />
-    <!-- no translation found for accessibility_dialog_button_cancel (8625997437316659966) -->
-    <skip />
-    <!-- no translation found for disable_service_title (8178020230162342801) -->
-    <skip />
+    <string name="accessibility_dialog_button_stop" msgid="7584815613743292151">"I-off"</string>
+    <string name="accessibility_dialog_button_cancel" msgid="8625997437316659966">"I-on lang"</string>
+    <string name="disable_service_title" msgid="8178020230162342801">"I-off ang <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="accessibility_no_services_installed" msgid="3725569493860028593">"Walang mga serbisyong naka-install"</string>
     <string name="accessibility_no_service_selected" msgid="1310596127128379897">"Walang serbisyong napili"</string>
     <string name="accessibility_service_default_description" msgid="7801435825448138526">"Walang ibinigay na paglalarawan."</string>
@@ -2777,8 +2769,7 @@
     <string name="vpn_require_connection" msgid="1027347404470060998">"I-block ang mga koneksyong walang VPN"</string>
     <string name="vpn_require_connection_title" msgid="4186758487822779039">"Gawing mandatoryo ang pagkonekta sa VPN?"</string>
     <string name="vpn_insecure_dialog_subtitle" msgid="1857621742868835300">"Hindi secure. Mag-update sa IKEv2 VPN"</string>
-    <!-- no translation found for vpn_start_unsupported (7139925503292269904) -->
-    <skip />
+    <string name="vpn_start_unsupported" msgid="7139925503292269904">"Hindi nasimulan ang hindi sinusuportahang VPN."</string>
     <string name="vpn_lockdown_summary" msgid="4700625960550559029">"Pumili ng VPN profile kung saan palaging mananatiling nakakonekta. Papayagan lang ang trapiko ng network kapag nakakonekta sa VPN na ito."</string>
     <string name="vpn_lockdown_none" msgid="455915403560910517">"Wala"</string>
     <string name="vpn_lockdown_config_error" msgid="1992071316416371316">"Nangangailangan ang Always-on VPN ng IP address para sa parehong server at DNS."</string>

@@ -580,8 +580,7 @@
     <string name="privatespace_setting_up_text" msgid="8532777749891406509">"Configuration d\'Espace privé…"</string>
     <string name="privatespace_apps_hidden_title" msgid="6146605677591599107">"Les informations d\'utilisation des applis contenues dans Espace privé sont masquées lorsque l\'application est verrouillée"</string>
     <string name="privatespace_access_from_apps_title" msgid="6787000636686810564">"Accéder à Espace privé depuis votre liste d\'applications"</string>
-    <!-- no translation found for privatespace_system_apps_installed_title (4782295812052574626) -->
-    <skip />
+    <string name="privatespace_system_apps_installed_title" msgid="4782295812052574626">"Certaines applications système sont déjà installées dans Espace privé"</string>
     <string name="privatespace_error_screen_title" msgid="8658511165913662275">"Impossible de configurer Espace privé"</string>
     <string name="privatespace_error_screen_summary" msgid="5679626031159521676">"Réessayer maintenant ou revenir plus tard"</string>
     <string name="privatespace_tryagain_label" msgid="4091466165724929876">"Réessayer"</string>
@@ -590,8 +589,7 @@
     <string name="privatespace_use_screenlock_label" msgid="2775404941450049991">"Utiliser le verrouillage de l\'écran"</string>
     <string name="privatespace_set_lock_label" msgid="6277529807188602545">"Choisir un nouveau verrouillage"</string>
     <string name="privatespace_success_title" msgid="4854425684898602993">"Tout est prêt !"</string>
-    <!-- no translation found for privatespace_access_text (1253541577173303723) -->
-    <skip />
+    <string name="privatespace_access_text" msgid="1253541577173303723">"Vous pouvez accéder à Espace privé depuis votre liste d\'applications"</string>
     <string name="privatespace_done_label" msgid="5534818213879562387">"OK"</string>
     <string name="scrolldown_to_access" msgid="5160743933093369151">"Faites défiler vers le bas pour accéder à Espace privé"</string>
     <string name="privatespace_retry_signin_title" msgid="495054309243289223">"Connectez-vous pour configurer Espace privé"</string>
@@ -953,9 +951,7 @@
     <string name="lost_internet_access_cancel" msgid="1981171269794585284">"Rester en Wi‑Fi"</string>
     <string name="lost_internet_access_persist" msgid="6813604557672782197">"Ne plus afficher"</string>
     <string name="wifi_connect" msgid="2481467560349907397">"Se connecter"</string>
-    <string name="wifi_turned_on_message" msgid="8069855406962662881">"Wi-Fi activé"</string>
     <string name="wifi_connected_to_message" msgid="8976048616505112896">"Connecté à <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
-    <string name="wifi_connecting_to_message" msgid="3153205024060064551">"Connexion à <xliff:g id="NETWORK_NAME">%1$s</xliff:g>…"</string>
     <string name="wifi_connecting" msgid="7450277833386859724">"Connexion…"</string>
     <string name="wifi_failed_connect_message" msgid="8538000546604347894">"Échec de la connexion au réseau."</string>
     <string name="wifi_not_in_range_message" msgid="3885327464037574739">"Réseau hors de portée"</string>
@@ -1131,6 +1127,7 @@
     <string name="adaptive_sleep_privacy" msgid="7664570136417980556">"Regard sur écran utilise la caméra frontale pour détecter si quelqu\'un regarde l\'écran. Il opère sur l\'appareil uniquement, et les images ne sont jamais enregistrées ni envoyées à Google."</string>
     <string name="adaptive_sleep_contextual_slice_title" msgid="7467588613212629758">"Activer Regard sur l\'écran"</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"Garde l\'écran allumé quand vous le regardez"</string>
+    <string name="power_consumption_footer_summary" msgid="4901490700555257237">"Un délai plus long de mise en veille de l\'écran sollicitera davantage la batterie."</string>
     <string name="auto_rotate_camera_lock_title" msgid="5369003176695105872">"L\'appareil photo est verrouillé"</string>
     <string name="auto_rotate_camera_lock_summary" msgid="5699491516271544672">"Vous devez déverrouiller l\'appareil photo pour la détection de visages"</string>
     <string name="adaptive_sleep_camera_lock_summary" msgid="8417541183603618098">"L\'appareil photo doit être déverrouillé pour utiliser Regard sur écran"</string>
@@ -1471,7 +1468,6 @@
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Utilisez un point d\'accès et le partage de connexion pour fournir Internet à d\'autres appareils via votre connexion au Wi-Fi ou aux données mobiles. Les applis peuvent aussi créer un point d\'accès pour partager des contenus avec des appareils à proximité."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Aide"</string>
     <string name="network_settings_title" msgid="4663717899931613176">"Réseau mobile"</string>
-    <string name="manage_mobile_plan_title" msgid="5616930513733409064">"Forfait mobile"</string>
     <string name="sms_application_title" msgid="4791107002724108809">"Appli de SMS"</string>
     <string name="sms_change_default_dialog_title" msgid="2343439998715457307">"Changer d\'application pour les SMS ?"</string>
     <string name="sms_change_default_dialog_text" msgid="8777606240342982531">"Utiliser <xliff:g id="NEW_APP">%1$s</xliff:g> au lieu de <xliff:g id="CURRENT_APP">%2$s</xliff:g> comme application SMS ?"</string>
@@ -1479,10 +1475,6 @@
     <string name="network_scorer_change_active_dialog_title" msgid="7005220310238618141">"Changer d\'assistant Wi‑Fi ?"</string>
     <string name="network_scorer_change_active_dialog_text" msgid="7006057749370850706">"Utiliser <xliff:g id="NEW_APP">%1$s</xliff:g> au lieu de <xliff:g id="CURRENT_APP">%2$s</xliff:g> pour gérer vos connexions réseau ?"</string>
     <string name="network_scorer_change_active_no_previous_dialog_text" msgid="680685773455072321">"Utiliser <xliff:g id="NEW_APP">%s</xliff:g> pour gérer vos connexions réseau ?"</string>
-    <string name="mobile_unknown_sim_operator" msgid="6650422533065760963">"Opérateur de carte SIM inconnu"</string>
-    <string name="mobile_no_provisioning_url" msgid="609462719893503773">"Aucun site Web de gestion des comptes connu pour <xliff:g id="OPERATOR">%1$s</xliff:g>"</string>
-    <string name="mobile_insert_sim_card" msgid="3639245241283948038">"Insérez la carte SIM, puis redémarrez."</string>
-    <string name="mobile_connect_to_internet" msgid="8162654404357069060">"Connectez-vous à Internet."</string>
     <string name="location_category_recent_location_requests" msgid="2205900488782832082">"Demandes de localisation récentes"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Position du profil pro"</string>
     <string name="location_app_level_permissions" msgid="907206607664629759">"Accès des applis à la position"</string>
@@ -2247,12 +2239,9 @@
     <string name="accessibility_service_action_perform_description" msgid="7807832069800034738">"Le service peut suivre vos interactions avec une application ou un capteur matériel, et interagir avec les applications en votre nom."</string>
     <string name="accessibility_dialog_button_allow" msgid="8274918676473216697">"Autoriser"</string>
     <string name="accessibility_dialog_button_deny" msgid="2037249860078259284">"Refuser"</string>
-    <!-- no translation found for accessibility_dialog_button_stop (7584815613743292151) -->
-    <skip />
-    <!-- no translation found for accessibility_dialog_button_cancel (8625997437316659966) -->
-    <skip />
-    <!-- no translation found for disable_service_title (8178020230162342801) -->
-    <skip />
+    <string name="accessibility_dialog_button_stop" msgid="7584815613743292151">"Désactiver"</string>
+    <string name="accessibility_dialog_button_cancel" msgid="8625997437316659966">"Ne pas désactiver"</string>
+    <string name="disable_service_title" msgid="8178020230162342801">"Désactiver <xliff:g id="SERVICE">%1$s</xliff:g> ?"</string>
     <string name="accessibility_no_services_installed" msgid="3725569493860028593">"Aucun service installé"</string>
     <string name="accessibility_no_service_selected" msgid="1310596127128379897">"Aucun service sélectionné"</string>
     <string name="accessibility_service_default_description" msgid="7801435825448138526">"Aucune description fournie"</string>
@@ -2779,8 +2768,7 @@
     <string name="vpn_require_connection" msgid="1027347404470060998">"Bloquer les connexions sans VPN"</string>
     <string name="vpn_require_connection_title" msgid="4186758487822779039">"Exiger une connexion VPN ?"</string>
     <string name="vpn_insecure_dialog_subtitle" msgid="1857621742868835300">"Non sécurisé. Passez à un VPN IKEv2"</string>
-    <!-- no translation found for vpn_start_unsupported (7139925503292269904) -->
-    <skip />
+    <string name="vpn_start_unsupported" msgid="7139925503292269904">"Échec du démarrage du VPN non pris en charge."</string>
     <string name="vpn_lockdown_summary" msgid="4700625960550559029">"Sélectionnez un profil VPN auquel rester connecté en permanence. Le trafic réseau ne sera autorisé que lorsque vous serez connecté à ce VPN."</string>
     <string name="vpn_lockdown_none" msgid="455915403560910517">"Aucun"</string>
     <string name="vpn_lockdown_config_error" msgid="1992071316416371316">"Le VPN permanent nécessite une adresse IP pour le serveur et le DNS."</string>

@@ -580,8 +580,7 @@
     <string name="privatespace_setting_up_text" msgid="8532777749891406509">"设置私密空间…"</string>
     <string name="privatespace_apps_hidden_title" msgid="6146605677591599107">"私密空间应用锁定后，其使用情况信息处于隐藏状态"</string>
     <string name="privatespace_access_from_apps_title" msgid="6787000636686810564">"从应用列表访问私密空间"</string>
-    <!-- no translation found for privatespace_system_apps_installed_title (4782295812052574626) -->
-    <skip />
+    <string name="privatespace_system_apps_installed_title" msgid="4782295812052574626">"某些系统应用已安装在私密空间中"</string>
     <string name="privatespace_error_screen_title" msgid="8658511165913662275">"无法设置私密空间"</string>
     <string name="privatespace_error_screen_summary" msgid="5679626031159521676">"立即重试，或稍后重试"</string>
     <string name="privatespace_tryagain_label" msgid="4091466165724929876">"重试"</string>
@@ -590,8 +589,7 @@
     <string name="privatespace_use_screenlock_label" msgid="2775404941450049991">"使用屏锁"</string>
     <string name="privatespace_set_lock_label" msgid="6277529807188602545">"选择新的锁定方式"</string>
     <string name="privatespace_success_title" msgid="4854425684898602993">"一切就绪！"</string>
-    <!-- no translation found for privatespace_access_text (1253541577173303723) -->
-    <skip />
+    <string name="privatespace_access_text" msgid="1253541577173303723">"您可以从应用列表访问私密空间"</string>
     <string name="privatespace_done_label" msgid="5534818213879562387">"完成"</string>
     <string name="scrolldown_to_access" msgid="5160743933093369151">"向下滚动，访问私密空间"</string>
     <string name="privatespace_retry_signin_title" msgid="495054309243289223">"登录账号才能设置私密空间"</string>
@@ -953,9 +951,7 @@
     <string name="lost_internet_access_cancel" msgid="1981171269794585284">"让 WLAN 保持开启状态"</string>
     <string name="lost_internet_access_persist" msgid="6813604557672782197">"不再显示"</string>
     <string name="wifi_connect" msgid="2481467560349907397">"连接"</string>
-    <string name="wifi_turned_on_message" msgid="8069855406962662881">"WLAN 已开启"</string>
     <string name="wifi_connected_to_message" msgid="8976048616505112896">"已连接到“<xliff:g id="NETWORK_NAME">%1$s</xliff:g>”"</string>
-    <string name="wifi_connecting_to_message" msgid="3153205024060064551">"正在连接到“<xliff:g id="NETWORK_NAME">%1$s</xliff:g>”"</string>
     <string name="wifi_connecting" msgid="7450277833386859724">"正在连接…"</string>
     <string name="wifi_failed_connect_message" msgid="8538000546604347894">"无法连接网络"</string>
     <string name="wifi_not_in_range_message" msgid="3885327464037574739">"网络不在范围内"</string>
@@ -1131,6 +1127,8 @@
     <string name="adaptive_sleep_privacy" msgid="7664570136417980556">"屏幕感知功能会通过前置摄像头来确定是否有人正在看屏幕。这个功能只会在设备上运行，系统绝对不会存储图片或将图片发送给 Google。"</string>
     <string name="adaptive_sleep_contextual_slice_title" msgid="7467588613212629758">"开启屏幕感知功能"</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"直视屏幕时让屏幕保持开启"</string>
+    <!-- no translation found for power_consumption_footer_summary (4901490700555257237) -->
+    <skip />
     <string name="auto_rotate_camera_lock_title" msgid="5369003176695105872">"相机已锁定"</string>
     <string name="auto_rotate_camera_lock_summary" msgid="5699491516271544672">"必须解锁相机才能使用人脸检测功能"</string>
     <string name="adaptive_sleep_camera_lock_summary" msgid="8417541183603618098">"必须解锁相机才能使用屏幕感知功能"</string>
@@ -1471,7 +1469,6 @@
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"使用热点和网络共享功能，让其他设备能通过您的 WLAN 或移动数据网络连接到互联网。应用还可以通过创建热点，与附近的设备共享内容。"</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"帮助"</string>
     <string name="network_settings_title" msgid="4663717899931613176">"移动网络"</string>
-    <string name="manage_mobile_plan_title" msgid="5616930513733409064">"手机套餐"</string>
     <string name="sms_application_title" msgid="4791107002724108809">"短信应用"</string>
     <string name="sms_change_default_dialog_title" msgid="2343439998715457307">"要更改短信应用吗？"</string>
     <string name="sms_change_default_dialog_text" msgid="8777606240342982531">"要使用“<xliff:g id="NEW_APP">%1$s</xliff:g>”取代“<xliff:g id="CURRENT_APP">%2$s</xliff:g>”作为您的短信应用吗？"</string>
@@ -1479,10 +1476,6 @@
     <string name="network_scorer_change_active_dialog_title" msgid="7005220310238618141">"要更改WLAN助手吗？"</string>
     <string name="network_scorer_change_active_dialog_text" msgid="7006057749370850706">"不再使用<xliff:g id="CURRENT_APP">%2$s</xliff:g>，而改用<xliff:g id="NEW_APP">%1$s</xliff:g>来管理您的网络连接吗？"</string>
     <string name="network_scorer_change_active_no_previous_dialog_text" msgid="680685773455072321">"要使用<xliff:g id="NEW_APP">%s</xliff:g>管理您的网络连接吗？"</string>
-    <string name="mobile_unknown_sim_operator" msgid="6650422533065760963">"未知的SIM卡运营商"</string>
-    <string name="mobile_no_provisioning_url" msgid="609462719893503773">"<xliff:g id="OPERATOR">%1$s</xliff:g>没有任何已知的配置网站"</string>
-    <string name="mobile_insert_sim_card" msgid="3639245241283948038">"请插入SIM卡，然后重新启动"</string>
-    <string name="mobile_connect_to_internet" msgid="8162654404357069060">"请连接到互联网"</string>
     <string name="location_category_recent_location_requests" msgid="2205900488782832082">"近期位置信息请求"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"工作资料位置信息"</string>
     <string name="location_app_level_permissions" msgid="907206607664629759">"应用位置信息权限"</string>
@@ -2247,12 +2240,9 @@
     <string name="accessibility_service_action_perform_description" msgid="7807832069800034738">"此功能可以跟踪您与应用或硬件传感器的互动，并代表您与应用互动。"</string>
     <string name="accessibility_dialog_button_allow" msgid="8274918676473216697">"允许"</string>
     <string name="accessibility_dialog_button_deny" msgid="2037249860078259284">"拒绝"</string>
-    <!-- no translation found for accessibility_dialog_button_stop (7584815613743292151) -->
-    <skip />
-    <!-- no translation found for accessibility_dialog_button_cancel (8625997437316659966) -->
-    <skip />
-    <!-- no translation found for disable_service_title (8178020230162342801) -->
-    <skip />
+    <string name="accessibility_dialog_button_stop" msgid="7584815613743292151">"关闭"</string>
+    <string name="accessibility_dialog_button_cancel" msgid="8625997437316659966">"保持开启状态"</string>
+    <string name="disable_service_title" msgid="8178020230162342801">"要关闭“<xliff:g id="SERVICE">%1$s</xliff:g>”吗？"</string>
     <string name="accessibility_no_services_installed" msgid="3725569493860028593">"未安装任何服务"</string>
     <string name="accessibility_no_service_selected" msgid="1310596127128379897">"未选择任何服务"</string>
     <string name="accessibility_service_default_description" msgid="7801435825448138526">"没有提供说明。"</string>
@@ -2779,8 +2769,7 @@
     <string name="vpn_require_connection" msgid="1027347404470060998">"屏蔽未使用 VPN 的所有连接"</string>
     <string name="vpn_require_connection_title" msgid="4186758487822779039">"需要连接 VPN？"</string>
     <string name="vpn_insecure_dialog_subtitle" msgid="1857621742868835300">"不安全。请更新为 IKEv2 VPN"</string>
-    <!-- no translation found for vpn_start_unsupported (7139925503292269904) -->
-    <skip />
+    <string name="vpn_start_unsupported" msgid="7139925503292269904">"未能启动不支持的 VPN。"</string>
     <string name="vpn_lockdown_summary" msgid="4700625960550559029">"选择要始终保持连接的VPN配置文件。只有在连接到此VPN之后才可以使用网络。"</string>
     <string name="vpn_lockdown_none" msgid="455915403560910517">"无"</string>
     <string name="vpn_lockdown_config_error" msgid="1992071316416371316">"始终开启的 VPN 需要服务器和 DNS 的 IP 地址。"</string>

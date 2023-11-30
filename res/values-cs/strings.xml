@@ -580,8 +580,7 @@
     <string name="privatespace_setting_up_text" msgid="8532777749891406509">"Nastavování soukromého prostoru…"</string>
     <string name="privatespace_apps_hidden_title" msgid="6146605677591599107">"Když je soukromý prostor uzamčen, informace o využití aplikací v soukromém prostoru jsou skryty"</string>
     <string name="privatespace_access_from_apps_title" msgid="6787000636686810564">"Přístup k soukromému prostoru ze seznamu aplikací"</string>
-    <!-- no translation found for privatespace_system_apps_installed_title (4782295812052574626) -->
-    <skip />
+    <string name="privatespace_system_apps_installed_title" msgid="4782295812052574626">"Některé systémové aplikace už jsou nainstalované v soukromém prostoru"</string>
     <string name="privatespace_error_screen_title" msgid="8658511165913662275">"Soukromý prostor se nepodařilo nastavit"</string>
     <string name="privatespace_error_screen_summary" msgid="5679626031159521676">"Zkuste to teď znovu nebo se vraťte později"</string>
     <string name="privatespace_tryagain_label" msgid="4091466165724929876">"Zkusit znovu"</string>
@@ -590,8 +589,7 @@
     <string name="privatespace_use_screenlock_label" msgid="2775404941450049991">"Použít zámek obrazovky"</string>
     <string name="privatespace_set_lock_label" msgid="6277529807188602545">"Zvolit nový zámek"</string>
     <string name="privatespace_success_title" msgid="4854425684898602993">"Hotovo!"</string>
-    <!-- no translation found for privatespace_access_text (1253541577173303723) -->
-    <skip />
+    <string name="privatespace_access_text" msgid="1253541577173303723">"Soukromý prostor můžete otevřít ze seznamu aplikací"</string>
     <string name="privatespace_done_label" msgid="5534818213879562387">"Hotovo"</string>
     <string name="scrolldown_to_access" msgid="5160743933093369151">"Pokud chcete otevřít soukromý prostor, přejděte dolů"</string>
     <string name="privatespace_retry_signin_title" msgid="495054309243289223">"Pokud chcete nastavit soukromý prostor, přihlaste se"</string>
@@ -953,9 +951,7 @@
     <string name="lost_internet_access_cancel" msgid="1981171269794585284">"Zůstat na Wi‑Fi"</string>
     <string name="lost_internet_access_persist" msgid="6813604557672782197">"Již nikdy nezobrazovat"</string>
     <string name="wifi_connect" msgid="2481467560349907397">"Připojit"</string>
-    <string name="wifi_turned_on_message" msgid="8069855406962662881">"Připojení Wi-Fi je zapnuto"</string>
     <string name="wifi_connected_to_message" msgid="8976048616505112896">"Připojeno k <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
-    <string name="wifi_connecting_to_message" msgid="3153205024060064551">"Připojování k síti <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
     <string name="wifi_connecting" msgid="7450277833386859724">"Připojování…"</string>
     <string name="wifi_failed_connect_message" msgid="8538000546604347894">"Připojení k síti se nezdařilo."</string>
     <string name="wifi_not_in_range_message" msgid="3885327464037574739">"Síť není v dosahu"</string>
@@ -1131,6 +1127,7 @@
     <string name="adaptive_sleep_privacy" msgid="7664570136417980556">"Funkce vnímavá obrazovka dokáže pomocí přední kamery určit, zda se někdo na obrazovku dívá. Data se zpracovávají v zařízení a snímky se nikdy neukládají ani neodesílají do Googlu."</string>
     <string name="adaptive_sleep_contextual_slice_title" msgid="7467588613212629758">"Zapnutí vnímavé obrazovky"</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"Nechat obrazovku zapnutou, když na ni koukáte"</string>
+    <string name="power_consumption_footer_summary" msgid="4901490700555257237">"Delší interval vypnutí obrazovky bude spotřebovávat víc baterie"</string>
     <string name="auto_rotate_camera_lock_title" msgid="5369003176695105872">"Fotoaparát je uzamčený"</string>
     <string name="auto_rotate_camera_lock_summary" msgid="5699491516271544672">"Při rozpoznávání obličeje musí být fotoaparát odemknutý"</string>
     <string name="adaptive_sleep_camera_lock_summary" msgid="8417541183603618098">"Při použití vnímavé obrazovky musí být fotoaparát odemknutý"</string>
@@ -1471,7 +1468,6 @@
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Hotspot a tethering umožňují poskytovat internet jiným zařízením prostřednictvím vašeho připojení Wi-Fi nebo vašeho mobilního datového připojení. Hotspot ke sdílení obsahu s okolními zařízeními mohou vytvářet i aplikace."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Nápověda"</string>
     <string name="network_settings_title" msgid="4663717899931613176">"Mobilní síť"</string>
-    <string name="manage_mobile_plan_title" msgid="5616930513733409064">"Mobilní tarif"</string>
     <string name="sms_application_title" msgid="4791107002724108809">"Aplikace pro SMS"</string>
     <string name="sms_change_default_dialog_title" msgid="2343439998715457307">"Chcete změnit aplikaci SMS?"</string>
     <string name="sms_change_default_dialog_text" msgid="8777606240342982531">"Chcete pro zprávy SMS používat aplikaci <xliff:g id="NEW_APP">%1$s</xliff:g> místo aplikace <xliff:g id="CURRENT_APP">%2$s</xliff:g>?"</string>
@@ -1479,10 +1475,6 @@
     <string name="network_scorer_change_active_dialog_title" msgid="7005220310238618141">"Změnit asistenta pro Wi-Fi?"</string>
     <string name="network_scorer_change_active_dialog_text" msgid="7006057749370850706">"Chcete spravovat síťová připojení pomocí aplikace <xliff:g id="NEW_APP">%1$s</xliff:g> namísto aplikace <xliff:g id="CURRENT_APP">%2$s</xliff:g>?"</string>
     <string name="network_scorer_change_active_no_previous_dialog_text" msgid="680685773455072321">"Chcete spravovat síťová připojení pomocí aplikace <xliff:g id="NEW_APP">%s</xliff:g>?"</string>
-    <string name="mobile_unknown_sim_operator" msgid="6650422533065760963">"Operátor SIM karty není znám"</string>
-    <string name="mobile_no_provisioning_url" msgid="609462719893503773">"Operátor <xliff:g id="OPERATOR">%1$s</xliff:g> nemá žádný známý web pro správu účtů"</string>
-    <string name="mobile_insert_sim_card" msgid="3639245241283948038">"Vložte SIM kartu a restartujte zařízení."</string>
-    <string name="mobile_connect_to_internet" msgid="8162654404357069060">"Připojte se prosím k internetu."</string>
     <string name="location_category_recent_location_requests" msgid="2205900488782832082">"Nedávné žádosti o určení polohy"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Umístění pracovního profilu"</string>
     <string name="location_app_level_permissions" msgid="907206607664629759">"Oprávnění aplikací pro přístup k poloze"</string>
@@ -2247,12 +2239,9 @@
     <string name="accessibility_service_action_perform_description" msgid="7807832069800034738">"Služba může sledovat vaše interakce s aplikací nebo hardwarovým senzorem a komunikovat s aplikacemi namísto vás."</string>
     <string name="accessibility_dialog_button_allow" msgid="8274918676473216697">"Povolit"</string>
     <string name="accessibility_dialog_button_deny" msgid="2037249860078259284">"Zakázat"</string>
-    <!-- no translation found for accessibility_dialog_button_stop (7584815613743292151) -->
-    <skip />
-    <!-- no translation found for accessibility_dialog_button_cancel (8625997437316659966) -->
-    <skip />
-    <!-- no translation found for disable_service_title (8178020230162342801) -->
-    <skip />
+    <string name="accessibility_dialog_button_stop" msgid="7584815613743292151">"Vypnout"</string>
+    <string name="accessibility_dialog_button_cancel" msgid="8625997437316659966">"Nevypínat"</string>
+    <string name="disable_service_title" msgid="8178020230162342801">"Vypnout službu <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="accessibility_no_services_installed" msgid="3725569493860028593">"Žádná služba není nainstalována"</string>
     <string name="accessibility_no_service_selected" msgid="1310596127128379897">"Není vybrána žádná služba"</string>
     <string name="accessibility_service_default_description" msgid="7801435825448138526">"K dispozici není žádný popis."</string>
@@ -2779,8 +2768,7 @@
     <string name="vpn_require_connection" msgid="1027347404470060998">"Blokovat připojení bez VPN"</string>
     <string name="vpn_require_connection_title" msgid="4186758487822779039">"Vyžadovat připojení VPN?"</string>
     <string name="vpn_insecure_dialog_subtitle" msgid="1857621742868835300">"Nezabezpečeno. Proveďte aktualizaci na IKEv2 VPN"</string>
-    <!-- no translation found for vpn_start_unsupported (7139925503292269904) -->
-    <skip />
+    <string name="vpn_start_unsupported" msgid="7139925503292269904">"Nepodporovanou VPN se nepodařilo spustit."</string>
     <string name="vpn_lockdown_summary" msgid="4700625960550559029">"Vyberte profil VPN, ke kterému chcete zůstat trvale připojeni. Síťový provoz bude povolen pouze v případě, že budete připojeni k této síti VPN."</string>
     <string name="vpn_lockdown_none" msgid="455915403560910517">"Žádná"</string>
     <string name="vpn_lockdown_config_error" msgid="1992071316416371316">"Trvalá síť VPN vyžaduje IP adresu pro server i DNS."</string>

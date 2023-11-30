@@ -951,9 +951,7 @@
     <string name="lost_internet_access_cancel" msgid="1981171269794585284">"Παραμονή σε Wi‑Fi"</string>
     <string name="lost_internet_access_persist" msgid="6813604557672782197">"Να μην εμφανιστεί ξανά"</string>
     <string name="wifi_connect" msgid="2481467560349907397">"Σύνδεση"</string>
-    <string name="wifi_turned_on_message" msgid="8069855406962662881">"Το Wi-Fi ενεργοποιήθηκε"</string>
     <string name="wifi_connected_to_message" msgid="8976048616505112896">"Σύνδεση σε <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
-    <string name="wifi_connecting_to_message" msgid="3153205024060064551">"Σύνδεση στο δίκτυο <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
     <string name="wifi_connecting" msgid="7450277833386859724">"Σύνδεση…"</string>
     <string name="wifi_failed_connect_message" msgid="8538000546604347894">"Αποτυχία σύνδεσης στο δίκτυο"</string>
     <string name="wifi_not_in_range_message" msgid="3885327464037574739">"Το δίκτυο δεν βρίσκεται εντός εμβέλειας"</string>
@@ -1129,6 +1127,7 @@
     <string name="adaptive_sleep_privacy" msgid="7664570136417980556">"Η λειτουργία Παρακολούθηση οθόνης χρησιμοποιεί την μπροστινή κάμερα για να διαπιστώσει αν κάποιος χρήστης κοιτάζει την οθόνη. Λειτουργεί στη συσκευή και οι εικόνες δεν αποθηκεύονται ούτε αποστέλλονται στην Google."</string>
     <string name="adaptive_sleep_contextual_slice_title" msgid="7467588613212629758">"Ενεργοποίηση παρακολούθησης οθόνης"</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"Η οθόνη διατηρείται αναμμένη όταν την κοιτάτε"</string>
+    <string name="power_consumption_footer_summary" msgid="4901490700555257237">"Θα χρησιμοποιηθεί περισσότερη μπαταρία, εάν το χρονικό όριο κλεισίματος οθόνης είναι μεγαλύτερο."</string>
     <string name="auto_rotate_camera_lock_title" msgid="5369003176695105872">"Η κάμερα είναι κλειδωμένη"</string>
     <string name="auto_rotate_camera_lock_summary" msgid="5699491516271544672">"Η κάμερα πρέπει να είναι ξεκλειδωμένη για την Ανίχνευση προσώπων"</string>
     <string name="adaptive_sleep_camera_lock_summary" msgid="8417541183603618098">"Η κάμερα πρέπει να είναι ξεκλειδωμένη για την Παρακολούθηση οθόνης"</string>
@@ -1469,7 +1468,6 @@
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Χρησιμοποιήστε το σημείο πρόσβασης Wi-Fi και τη σύνδεση, για να παρέχετε σύνδεση στο διαδίκτυο σε άλλες συσκευές, μέσω του δικτύου Wi-Fi ή της σύνδεσης δεδομένων κινητής τηλεφωνίας που χρησιμοποιείτε. Οι εφαρμογές μπορούν επίσης να δημιουργούν ένα σημείο πρόσβασης Wi-Fi, για να μοιράζονται περιεχόμενο με κοντινές συσκευές."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Βοήθεια"</string>
     <string name="network_settings_title" msgid="4663717899931613176">"Δίκτυο κινητής τηλεφωνίας"</string>
-    <string name="manage_mobile_plan_title" msgid="5616930513733409064">"Πρόγραμμα κινητής τηλεφωνίας"</string>
     <string name="sms_application_title" msgid="4791107002724108809">"Εφαρμογή SMS"</string>
     <string name="sms_change_default_dialog_title" msgid="2343439998715457307">"Αλλαγή εφαρμογής SMS;"</string>
     <string name="sms_change_default_dialog_text" msgid="8777606240342982531">"Χρήση του <xliff:g id="NEW_APP">%1$s</xliff:g> αντί του <xliff:g id="CURRENT_APP">%2$s</xliff:g> ως εφαρμογή SMS;"</string>
@@ -1477,10 +1475,6 @@
     <string name="network_scorer_change_active_dialog_title" msgid="7005220310238618141">"Αλλαγή βοηθού Wi-Fi;"</string>
     <string name="network_scorer_change_active_dialog_text" msgid="7006057749370850706">"Χρήση της εφαρμογής <xliff:g id="NEW_APP">%1$s</xliff:g> αντί για την εφαρμογή <xliff:g id="CURRENT_APP">%2$s</xliff:g> για τη διαχείριση των συνδέσεων δικτύου σας;"</string>
     <string name="network_scorer_change_active_no_previous_dialog_text" msgid="680685773455072321">"Χρήση της εφαρμογής <xliff:g id="NEW_APP">%s</xliff:g> για τη διαχείριση των συνδέσεων δικτύου σας;"</string>
-    <string name="mobile_unknown_sim_operator" msgid="6650422533065760963">"Κάρτα SIM άγνωστης εταιρείας κινητής τηλεφωνίας"</string>
-    <string name="mobile_no_provisioning_url" msgid="609462719893503773">"Ο τελεστής <xliff:g id="OPERATOR">%1$s</xliff:g> δεν διαθέτει γνωστό ιστότοπο παροχής"</string>
-    <string name="mobile_insert_sim_card" msgid="3639245241283948038">"Εισαγάγετε την κάρτα SIM και κάντε επανεκκίνηση"</string>
-    <string name="mobile_connect_to_internet" msgid="8162654404357069060">"Συνδεθείτε στο διαδίκτυο"</string>
     <string name="location_category_recent_location_requests" msgid="2205900488782832082">"Πρόσφατα αιτήματα τοποθεσίας"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Τοποθεσία για προφίλ εργασίας"</string>
     <string name="location_app_level_permissions" msgid="907206607664629759">"Άδειες τοποθεσίας εφαρμογών"</string>
@@ -2245,12 +2239,9 @@
     <string name="accessibility_service_action_perform_description" msgid="7807832069800034738">"Μπορεί να παρακολουθήσει τις αλληλεπιδράσεις σας με μια εφαρμογή ή έναν αισθητήρα εξοπλισμού και να αλληλεπιδράσει με εφαρμογές εκ μέρους σας."</string>
     <string name="accessibility_dialog_button_allow" msgid="8274918676473216697">"Ναι"</string>
     <string name="accessibility_dialog_button_deny" msgid="2037249860078259284">"Όχι"</string>
-    <!-- no translation found for accessibility_dialog_button_stop (7584815613743292151) -->
-    <skip />
-    <!-- no translation found for accessibility_dialog_button_cancel (8625997437316659966) -->
-    <skip />
-    <!-- no translation found for disable_service_title (8178020230162342801) -->
-    <skip />
+    <string name="accessibility_dialog_button_stop" msgid="7584815613743292151">"Απενεργοπ."</string>
+    <string name="accessibility_dialog_button_cancel" msgid="8625997437316659966">"Ενεργό"</string>
+    <string name="disable_service_title" msgid="8178020230162342801">"Απενεργοποίηση <xliff:g id="SERVICE">%1$s</xliff:g>;"</string>
     <string name="accessibility_no_services_installed" msgid="3725569493860028593">"Δεν έχουν εγκατασταθεί υπηρεσίες"</string>
     <string name="accessibility_no_service_selected" msgid="1310596127128379897">"Δεν έχει επιλεγεί κάποια υπηρεσία"</string>
     <string name="accessibility_service_default_description" msgid="7801435825448138526">"Δεν υπάρχει περιγραφή."</string>
@@ -2777,8 +2768,7 @@
     <string name="vpn_require_connection" msgid="1027347404470060998">"Αποκλεισμός συνδέσεων χωρίς VPN"</string>
     <string name="vpn_require_connection_title" msgid="4186758487822779039">"Να απαιτείται σύνδεση VPN;"</string>
     <string name="vpn_insecure_dialog_subtitle" msgid="1857621742868835300">"Μη ασφαλές. Ενημέρωση σε VPN IKEv2."</string>
-    <!-- no translation found for vpn_start_unsupported (7139925503292269904) -->
-    <skip />
+    <string name="vpn_start_unsupported" msgid="7139925503292269904">"Απέτυχε η εκκίνηση του μη υποστηριζόμενου VPN."</string>
     <string name="vpn_lockdown_summary" msgid="4700625960550559029">"Επιλέξτε ένα προφίλ VPN στο οποίο θα παραμένετε πάντα συνδεδεμένοι. Η κίνηση δικτύου θα επιτρέπεται μόνο κατά τη σύνδεση σε αυτό το VPN."</string>
     <string name="vpn_lockdown_none" msgid="455915403560910517">"Κανένα"</string>
     <string name="vpn_lockdown_config_error" msgid="1992071316416371316">"Το VPN που έχει ρυθμιστεί να είναι ενεργοποιημένο πάντα απαιτεί μια διεύθυνση IP τόσο για τον διακομιστή όσο και για το DNS."</string>
