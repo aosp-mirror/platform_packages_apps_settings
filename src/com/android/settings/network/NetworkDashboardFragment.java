@@ -18,7 +18,6 @@ package com.android.settings.network;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 
 import androidx.lifecycle.LifecycleOwner;
 
@@ -60,13 +59,6 @@ public class NetworkDashboardFragment extends DashboardFragment implements
         super.onAttach(context);
 
         use(AirplaneModePreferenceController.class).setFragment(this);
-        getSettingsLifecycle().addObserver(use(AllInOneTetherPreferenceController.class));
-    }
-
-    @Override
-    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-        super.onCreatePreferences(savedInstanceState, rootKey);
-        use(AllInOneTetherPreferenceController.class).initEnabler(getSettingsLifecycle());
     }
 
     @Override
