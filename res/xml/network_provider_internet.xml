@@ -70,18 +70,6 @@
         settings:userRestriction="no_config_tethering"
         settings:useAdminDisabledSummary="true" />
 
-    <com.android.settingslib.PrimarySwitchPreference
-        android:fragment="com.android.settings.AllInOneTetherSettings"
-        android:key="all_tether_settings"
-        android:title="@string/tether_settings_title_all"
-        android:icon="@drawable/ic_wifi_tethering"
-        android:order="6"
-        android:summary="@string/summary_placeholder"
-        settings:controller="com.android.settings.network.AllInOneTetherPreferenceController"
-        settings:keywords="@string/keywords_hotspot_tethering"
-        settings:userRestriction="no_config_tethering"
-        settings:useAdminDisabledSummary="true" />
-
     <com.android.settings.datausage.DataSaverPreference
         android:key="restrict_background_parent_entry"
         android:title="@string/data_saver_title"
