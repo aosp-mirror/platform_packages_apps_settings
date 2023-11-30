@@ -38,6 +38,7 @@ import androidx.preference.Preference;
 import androidx.test.core.app.ApplicationProvider;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -73,6 +74,7 @@ public class ContrastPreferenceControllerTest {
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
+    @Ignore("b/313614100")
     @Test
     public void testHandlePreferenceTreeClick() {
         Preference preference = new Preference(mContext);

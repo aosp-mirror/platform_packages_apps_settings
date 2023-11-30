@@ -25,45 +25,34 @@ import android.content.Context;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
-import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.RestrictedPreference;
-import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.datetime.ZoneGetter;
 
 import java.util.Calendar;
 
-public class TimeZonePreferenceController extends AbstractPreferenceController
-        implements PreferenceControllerMixin {
-
-    private static final String KEY_TIMEZONE = "timezone";
+public class TimeZonePreferenceController extends BasePreferenceController {
 
     private final TimeManager mTimeManager;
 
-    public TimeZonePreferenceController(Context context) {
-        super(context);
+    public TimeZonePreferenceController(Context context, String preferenceKey) {
+        super(context, preferenceKey);
         mTimeManager = context.getSystemService(TimeManager.class);
     }
 
     @Override
+    public CharSequence getSummary() {
+        return getTimeZoneOffsetAndName();
+    }
+
+    @Override
+    public int getAvailabilityStatus() {
+        return shouldEnableManualTimeZoneSelection() ? AVAILABLE : DISABLED_DEPENDENT_SETTING;
+    }
+
+    @Override
     public void updateState(Preference preference) {
-        if (!(preference instanceof RestrictedPreference)) {
-            return;
-        }
-        preference.setSummary(getTimeZoneOffsetAndName());
-        if (!((RestrictedPreference) preference).isDisabledByAdmin()) {
-            boolean enableManualTimeZoneSelection = shouldEnableManualTimeZoneSelection();
-            preference.setEnabled(enableManualTimeZoneSelection);
-        }
-    }
-
-    @Override
-    public boolean isAvailable() {
-        return true;
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return KEY_TIMEZONE;
+        super.updateState(preference);
+        preference.setEnabled(shouldEnableManualTimeZoneSelection());
     }
 
     @VisibleForTesting

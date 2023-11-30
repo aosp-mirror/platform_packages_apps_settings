@@ -98,7 +98,6 @@ public class NetworkDashboardFragment extends DashboardFragment implements
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
 
         controllers.add(new MobileNetworkSummaryController(context, lifecycle, lifecycleOwner));
-        controllers.add(new TetherPreferenceController(context, lifecycle));
         controllers.add(vpnPreferenceController);
         if (internetPreferenceController != null) {
             controllers.add(internetPreferenceController);

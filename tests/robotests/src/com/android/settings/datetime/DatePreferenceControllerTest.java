@@ -74,12 +74,8 @@ public class DatePreferenceControllerTest {
         when(mContext.getSystemService(TimeDetector.class)).thenReturn(mTimeDetector);
         when(mContext.getSystemService(TimeManager.class)).thenReturn(mTimeManager);
         mPreference = new RestrictedPreference(RuntimeEnvironment.application);
-        mController = new DatePreferenceController(mContext, mHost);
-    }
-
-    @Test
-    public void isAlwaysAvailable() {
-        assertThat(mController.isAvailable()).isTrue();
+        mController = new DatePreferenceController(mContext, "test_key");
+        mController.setHost(mHost);
     }
 
     @Test
@@ -147,7 +143,7 @@ public class DatePreferenceControllerTest {
         assertEquals(2020, calendar.get(Calendar.YEAR));
     }
 
-    private static TimeCapabilitiesAndConfig createCapabilitiesAndConfig(
+    static TimeCapabilitiesAndConfig createCapabilitiesAndConfig(
             boolean suggestManualAllowed) {
         int suggestManualCapability = suggestManualAllowed ? Capabilities.CAPABILITY_POSSESSED
                 : Capabilities.CAPABILITY_NOT_SUPPORTED;

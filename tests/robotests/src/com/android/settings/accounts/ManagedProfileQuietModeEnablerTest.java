@@ -35,6 +35,8 @@ import android.content.pm.UserInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.platform.test.annotations.RequiresFlagsEnabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
@@ -42,7 +44,7 @@ import androidx.lifecycle.LifecycleRegistry;
 import androidx.test.core.app.ApplicationProvider;
 
 import org.junit.Before;
-import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -69,6 +71,9 @@ public class ManagedProfileQuietModeEnablerTest {
             return registry;
         }
     };
+
+    @Rule
+    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
 
     @ParameterizedRobolectricTestRunner.Parameters
     public static List<?> params() {
@@ -112,7 +117,6 @@ public class ManagedProfileQuietModeEnablerTest {
         verify(mUserManager).requestQuietModeEnabled(mEnable, mManagedUser);
     }
 
-    @Ignore("b/313573729")
     @Test
     @RequiresFlagsEnabled(Flags.FLAG_QUIET_MODE_CREDENTIAL_BUG_FIX)
     public void onSetQuietMode_ifQuietModeAlreadyInDesiredState_shouldNotRequestQuietModeEnabled() {
