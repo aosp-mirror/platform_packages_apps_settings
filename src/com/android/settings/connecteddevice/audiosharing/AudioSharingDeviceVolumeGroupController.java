@@ -27,7 +27,6 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
@@ -48,7 +47,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 public class AudioSharingDeviceVolumeGroupController extends AudioSharingBasePreferenceController
-        implements DefaultLifecycleObserver, DevicePreferenceCallback {
+        implements DevicePreferenceCallback {
 
     private static final String TAG = "AudioSharingDeviceVolumeGroupController";
     private static final String KEY = "audio_sharing_device_volume_group";
@@ -162,6 +161,7 @@ public class AudioSharingDeviceVolumeGroupController extends AudioSharingBasePre
 
     @Override
     public void onStart(@NonNull LifecycleOwner owner) {
+        super.onStart(owner);
         if (mAssistant == null) {
             Log.d(TAG, "onStart() Broadcast or assistant is not supported on this device");
             return;
@@ -176,6 +176,7 @@ public class AudioSharingDeviceVolumeGroupController extends AudioSharingBasePre
 
     @Override
     public void onStop(@NonNull LifecycleOwner owner) {
+        super.onStop(owner);
         if (mAssistant == null) {
             Log.d(TAG, "onStop() Broadcast or assistant is not supported on this device");
             return;
@@ -233,10 +234,12 @@ public class AudioSharingDeviceVolumeGroupController extends AudioSharingBasePre
     }
 
     @Override
-    public void updateVisibility(boolean isVisible) {
-        super.updateVisibility(isVisible);
+    public void updateVisibility() {
         if (mPreferenceGroup != null) {
-            mPreferenceGroup.setVisible(mPreferenceGroup.getPreferenceCount() > 0);
+            mPreferenceGroup.setVisible(false);
+            if (mPreferenceGroup.getPreferenceCount() > 0) {
+                super.updateVisibility();
+            }
         }
     }
 

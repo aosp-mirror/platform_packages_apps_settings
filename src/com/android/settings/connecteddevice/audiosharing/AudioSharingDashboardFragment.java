@@ -93,14 +93,14 @@ public class AudioSharingDashboardFragment extends DashboardFragment
     }
 
     @Override
-    public void onSwitchBarChanged(boolean newState) {
-        updateVisibilityForAttachedPreferences(newState);
+    public void onSwitchBarChanged() {
+        updateVisibilityForAttachedPreferences();
     }
 
-    private void updateVisibilityForAttachedPreferences(boolean isVisible) {
-        mAudioSharingDeviceVolumeGroupController.updateVisibility(isVisible);
-        mCallsAndAlarmsPreferenceController.updateVisibility(isVisible);
-        mAudioSharingNamePreferenceController.updateVisibility(isVisible);
-        mAudioStreamsCategoryController.updateVisibility(isVisible);
+    private void updateVisibilityForAttachedPreferences() {
+        mAudioSharingDeviceVolumeGroupController.updateVisibility();
+        mCallsAndAlarmsPreferenceController.updateVisibility();
+        mAudioSharingNamePreferenceController.updateVisibility();
+        mAudioStreamsCategoryController.updateVisibility();
     }
 }

@@ -16,13 +16,15 @@
 
 package com.android.settings.datetime;
 
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.DISABLED_DEPENDENT_SETTING;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 import android.content.Intent;
 import android.provider.Settings;
 
-import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import org.junit.Before;
@@ -52,27 +54,30 @@ public class TimeFormatPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mApplication = ShadowApplication.getInstance();
         mContext = RuntimeEnvironment.application;
+        mController = new TimeFormatPreferenceController(mContext, "test_key");
+        mController.setTimeAndDateCallback(mCallback);
+        mController.setFromSUW(false);
+
+        mPreference = new SwitchPreference(mContext);
+        mPreference.setKey("test_key");
     }
 
     @Test
     public void isCalledFromSUW_NotAvailable() {
-        mController = new TimeFormatPreferenceController(mContext, mCallback, true);
+        mController.setFromSUW(true);
 
-        assertThat(mController.isAvailable()).isFalse();
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(DISABLED_DEPENDENT_SETTING);
     }
 
     @Test
     public void notCalledFromSUW_shouldBeAvailable() {
-        mController = new TimeFormatPreferenceController(mContext, mCallback, false);
-
-        assertThat(mController.isAvailable()).isTrue();
+        Settings.System.putString(mContext.getContentResolver(), Settings.System.TIME_12_24,
+                TimeFormatPreferenceController.HOURS_24);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
     @Test
     public void updateState_24HourSet_shouldCheckPreference() {
-        mController = new TimeFormatPreferenceController(mContext, mCallback, false);
-        mPreference = new SwitchPreference(mContext);
-        mPreference.setKey(mController.getPreferenceKey());
         Settings.System.putString(mContext.getContentResolver(), Settings.System.TIME_12_24,
                 TimeFormatPreferenceController.HOURS_24);
 
@@ -83,9 +88,6 @@ public class TimeFormatPreferenceControllerTest {
 
     @Test
     public void updateState_12HourSet_shouldNotCheckPreference() {
-        mController = new TimeFormatPreferenceController(mContext, mCallback, false);
-        mPreference = new SwitchPreference(mContext);
-        mPreference.setKey(mController.getPreferenceKey());
         Settings.System.putString(mContext.getContentResolver(), Settings.System.TIME_12_24,
                 TimeFormatPreferenceController.HOURS_12);
 
@@ -96,10 +98,7 @@ public class TimeFormatPreferenceControllerTest {
 
     @Test
     public void updateState_autoSet_shouldNotEnablePreference() {
-        mController = new TimeFormatPreferenceController(mContext, mCallback, false);
         Settings.System.putString(mContext.getContentResolver(), Settings.System.TIME_12_24, null);
-        mPreference = new SwitchPreference(mContext);
-        mPreference.setKey(mController.getPreferenceKey());
 
         mController.updateState(mPreference);
 
@@ -108,14 +107,7 @@ public class TimeFormatPreferenceControllerTest {
 
     @Test
     public void updatePreference_12HourSet_shouldSendIntent() {
-        mController = new TimeFormatPreferenceController(mContext, mCallback, false);
-        mPreference = new SwitchPreference(mContext);
-        mPreference.setKey(mController.getPreferenceKey());
-        mPreference.setChecked(false);
-
-        boolean result = mController.handlePreferenceTreeClick(mPreference);
-
-        assertThat(result).isTrue();
+        mController.setChecked(false);
 
         List<Intent> intentsFired = mApplication.getBroadcastIntents();
         assertThat(intentsFired.size()).isEqualTo(1);
@@ -127,14 +119,7 @@ public class TimeFormatPreferenceControllerTest {
 
     @Test
     public void updatePreference_24HourSet_shouldSendIntent() {
-        mController = new TimeFormatPreferenceController(mContext, mCallback, false);
-        mPreference = new SwitchPreference(mContext);
-        mPreference.setKey(mController.getPreferenceKey());
-        mPreference.setChecked(true);
-
-        boolean result = mController.handlePreferenceTreeClick(mPreference);
-
-        assertThat(result).isTrue();
+        mController.setChecked(true);
 
         List<Intent> intentsFired = mApplication.getBroadcastIntents();
         assertThat(intentsFired.size()).isEqualTo(1);

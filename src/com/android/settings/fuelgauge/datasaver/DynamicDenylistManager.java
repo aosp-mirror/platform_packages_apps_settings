@@ -95,6 +95,9 @@ public final class DynamicDenylistManager {
 
     /** Suggest a list of package to set as POLICY_REJECT. */
     public void setDenylist(Set<Integer> denylistTargetUids) {
+        if (denylistTargetUids == null) {
+            return;
+        }
         final Set<Integer> manualDenylistUids = getDenylistAllUids(getManualDenylistPref());
         denylistTargetUids.removeAll(manualDenylistUids);
 
@@ -105,27 +108,40 @@ public final class DynamicDenylistManager {
             return;
         }
 
-        // Store target denied uids into DynamicDenylistPref.
-        final SharedPreferences.Editor editor = getDynamicDenylistPref().edit();
-        editor.clear();
-        denylistTargetUids.forEach(
-                uid -> editor.putInt(String.valueOf(uid), POLICY_REJECT_METERED_BACKGROUND));
-        editor.apply();
-
+        final ArraySet<Integer> failedUids = new ArraySet<>();
         synchronized (mLock) {
             // Set new added UIDs into REJECT policy.
             for (int uid : denylistTargetUids) {
                 if (!lastDynamicDenylistUids.contains(uid)) {
-                    mNetworkPolicyManager.setUidPolicy(uid, POLICY_REJECT_METERED_BACKGROUND);
+                    try {
+                        mNetworkPolicyManager.setUidPolicy(uid, POLICY_REJECT_METERED_BACKGROUND);
+                    } catch (Exception e) {
+                        Log.e(TAG, "failed to setUidPolicy(REJECT) for " + uid, e);
+                        failedUids.add(uid);
+                    }
                 }
             }
             // Unset removed UIDs back to NONE policy.
             for (int uid : lastDynamicDenylistUids) {
                 if (!denylistTargetUids.contains(uid)) {
-                    mNetworkPolicyManager.setUidPolicy(uid, POLICY_NONE);
+                    try {
+                        mNetworkPolicyManager.setUidPolicy(uid, POLICY_NONE);
+                    } catch (Exception e) {
+                        Log.e(TAG, "failed to setUidPolicy(NONE) for " + uid, e);
+                    }
                 }
             }
         }
+
+        // Store target denied uids into DynamicDenylistPref.
+        final SharedPreferences.Editor editor = getDynamicDenylistPref().edit();
+        editor.clear();
+        denylistTargetUids.forEach(uid -> {
+            if (!failedUids.contains(uid)) {
+                editor.putInt(String.valueOf(uid), POLICY_REJECT_METERED_BACKGROUND);
+            }
+        });
+        editor.apply();
     }
 
     /** Return true if the target uid is in {@link #getManualDenylistPref()}. */

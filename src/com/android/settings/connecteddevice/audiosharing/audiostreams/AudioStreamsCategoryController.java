@@ -22,7 +22,6 @@ import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 
 import com.android.settings.bluetooth.Utils;
@@ -38,8 +37,7 @@ import com.android.settingslib.utils.ThreadUtils;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-public class AudioStreamsCategoryController extends AudioSharingBasePreferenceController
-        implements DefaultLifecycleObserver {
+public class AudioStreamsCategoryController extends AudioSharingBasePreferenceController {
     private static final String TAG = "AudioStreamsCategoryController";
     private static final boolean DEBUG = BluetoothUtils.D;
     private final LocalBluetoothManager mLocalBtManager;
@@ -50,7 +48,7 @@ public class AudioStreamsCategoryController extends AudioSharingBasePreferenceCo
                 public void onActiveDeviceChanged(
                         @Nullable CachedBluetoothDevice activeDevice, int bluetoothProfile) {
                     if (bluetoothProfile == BluetoothProfile.LE_AUDIO) {
-                        updateVisibility(isBroadcasting());
+                        updateVisibility();
                     }
                 }
             };
@@ -63,14 +61,15 @@ public class AudioStreamsCategoryController extends AudioSharingBasePreferenceCo
 
     @Override
     public void onStart(@NonNull LifecycleOwner owner) {
+        super.onStart(owner);
         if (mLocalBtManager != null) {
             mLocalBtManager.getEventManager().registerCallback(mBluetoothCallback);
         }
-        updateVisibility(isBroadcasting());
     }
 
     @Override
     public void onStop(@NonNull LifecycleOwner owner) {
+        super.onStop(owner);
         if (mLocalBtManager != null) {
             mLocalBtManager.getEventManager().unregisterCallback(mBluetoothCallback);
         }
@@ -84,21 +83,28 @@ public class AudioStreamsCategoryController extends AudioSharingBasePreferenceCo
     }
 
     @Override
-    public void updateVisibility(boolean isBroadcasting) {
+    public void updateVisibility() {
+        if (mPreference == null) return;
         mExecutor.execute(
                 () -> {
                     boolean hasActiveLe =
                             AudioSharingUtils.getActiveSinkOnAssistant(mLocalBtManager).isPresent();
+                    boolean isBroadcasting = isBroadcasting();
+                    boolean isBluetoothOn = isBluetoothStateOn();
                     if (DEBUG) {
                         Log.d(
                                 TAG,
                                 "updateVisibility() isBroadcasting : "
                                         + isBroadcasting
                                         + " hasActiveLe : "
-                                        + hasActiveLe);
+                                        + hasActiveLe
+                                        + " is BT on : "
+                                        + isBluetoothOn);
                     }
                     ThreadUtils.postOnMainThread(
-                            () -> super.updateVisibility(hasActiveLe && !isBroadcasting));
+                            () ->
+                                    mPreference.setVisible(
+                                            isBluetoothOn && hasActiveLe && !isBroadcasting));
                 });
     }
 }

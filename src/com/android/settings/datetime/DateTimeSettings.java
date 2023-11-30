@@ -16,21 +16,17 @@
 
 package com.android.settings.datetime;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.app.timedetector.TimeDetectorHelper;
 import android.content.Context;
-import android.content.Intent;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.google.android.setupcompat.util.WizardManagerHelper;
 
 @SearchIndexable
 public class DateTimeSettings extends DashboardFragment implements
@@ -59,40 +55,19 @@ public class DateTimeSettings extends DashboardFragment implements
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        boolean isFromSUW = WizardManagerHelper.isAnySetupWizard(getIntent());
         getSettingsLifecycle().addObserver(new TimeChangeListenerMixin(context, this));
         use(LocationTimeZoneDetectionPreferenceController.class).setFragment(this);
-    }
+        use(AutoTimePreferenceController.class).setDateAndTimeCallback(this);
+        use(DatePreferenceController.class).setHost(this);
+        use(TimePreferenceController.class).setHost(this);
+        use(AutoTimeZonePreferenceController.class)
+                .setTimeAndDateCallback(this)
+                .setFromSUW(isFromSUW);
+        use(TimeFormatPreferenceController.class)
+                .setTimeAndDateCallback(this)
+                .setFromSUW(isFromSUW);
 
-    @Override
-    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        final Activity activity = getActivity();
-        final Intent intent = activity.getIntent();
-        final boolean isFromSUW = intent.getBooleanExtra(EXTRA_IS_FROM_SUW, false);
-
-        final AutoTimePreferenceController autoTimePreferenceController =
-                new AutoTimePreferenceController(
-                        activity, this /* UpdateTimeAndDateCallback */);
-        controllers.add(autoTimePreferenceController);
-        DatePreferenceController datePreferenceController = new DatePreferenceController(
-                activity, this /* UpdateTimeAndDateCallback */);
-        controllers.add(datePreferenceController);
-        controllers.add(new TimePreferenceController(
-                activity, this /* UpdateTimeAndDateCallback */, datePreferenceController));
-
-        final AutoTimeZonePreferenceController autoTimeZonePreferenceController =
-                new AutoTimeZonePreferenceController(
-                        activity, this /* UpdateTimeAndDateCallback */, isFromSUW);
-        controllers.add(autoTimeZonePreferenceController);
-        controllers.add(new TimeZonePreferenceController(activity));
-
-        final AutoTimeFormatPreferenceController autoTimeFormatPreferenceController =
-                new AutoTimeFormatPreferenceController(
-                        activity, this /* UpdateTimeAndDateCallback */);
-        controllers.add(autoTimeFormatPreferenceController);
-        controllers.add(new TimeFormatPreferenceController(
-                activity, this /* UpdateTimeAndDateCallback */, isFromSUW));
-        return controllers;
     }
 
     @Override
