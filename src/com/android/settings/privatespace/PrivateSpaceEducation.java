@@ -17,23 +17,25 @@
 package com.android.settings.privatespace;
 
 import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.android.settings.R;
+import com.android.settings.core.InstrumentedFragment;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.GlifLayout;
 
 /** Fragment educating about the usage of Private Space. */
-public class PrivateSpaceEducation extends Fragment {
+public class PrivateSpaceEducation extends InstrumentedFragment {
+
     @Override
     public View onCreateView(
             LayoutInflater inflater,
@@ -66,11 +68,17 @@ public class PrivateSpaceEducation extends Fragment {
         return rootView;
     }
 
+    @Override
+    public int getMetricsCategory() {
+        return SettingsEnums.PRIVATE_SPACE_SETUP_EDUCATION;
+    }
+
     private View.OnClickListener onSetup() {
         return v -> {
+            mMetricsFeatureProvider.action(
+                    getContext(), SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_START);
             NavHostFragment.findNavController(PrivateSpaceEducation.this)
-                                        .navigate(R.id.action_education_to_auto_advance);
-
+                    .navigate(R.id.action_education_to_auto_advance);
         };
     }
 
@@ -78,6 +86,8 @@ public class PrivateSpaceEducation extends Fragment {
         return v -> {
             Activity activity = getActivity();
             if (activity != null) {
+                mMetricsFeatureProvider.action(
+                        getContext(), SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_CANCEL);
                 activity.finish();
             }
         };

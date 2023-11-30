@@ -20,6 +20,7 @@ import static com.android.settings.privatespace.PrivateSpaceSetupActivity.EXTRA_
 import static com.android.settings.privatespace.PrivateSpaceSetupActivity.SET_LOCK_ACTION;
 
 import android.annotation.SuppressLint;
+import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -29,18 +30,20 @@ import android.view.ViewGroup;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.android.settings.R;
+import com.android.settings.core.InstrumentedFragment;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.GlifLayout;
 
-/** Fragment that provides an option to user to choose between the existing screen lock or set a
- * separate private profile lock. */
-public class PrivateSpaceSetLockFragment extends Fragment {
+/**
+ * Fragment that provides an option to user to choose between the existing screen lock or set a
+ * separate private profile lock.
+ */
+public class PrivateSpaceSetLockFragment extends InstrumentedFragment {
 
     @Override
     public View onCreateView(
@@ -83,8 +86,15 @@ public class PrivateSpaceSetLockFragment extends Fragment {
         return rootView;
     }
 
+    @Override
+    public int getMetricsCategory() {
+        return SettingsEnums.PRIVATE_SPACE_SETUP_LOCK;
+    }
+
     private View.OnClickListener onClickUse() {
         return v -> {
+            mMetricsFeatureProvider.action(
+                    getContext(), SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_USE_SCREEN_LOCK);
             // Simply Use default screen lock. No need to handle
             NavHostFragment.findNavController(PrivateSpaceSetLockFragment.this)
                     .navigate(R.id.action_success_fragment);
@@ -93,6 +103,8 @@ public class PrivateSpaceSetLockFragment extends Fragment {
 
     private View.OnClickListener onClickNewLock() {
         return v -> {
+            mMetricsFeatureProvider.action(
+                    getContext(), SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_NEW_LOCK);
             createPrivateSpaceLock();
         };
     }

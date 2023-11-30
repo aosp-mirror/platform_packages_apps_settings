@@ -20,6 +20,7 @@ import static com.android.settings.privatespace.PrivateSpaceSetupActivity.ACCOUN
 import static com.android.settings.privatespace.PrivateSpaceSetupActivity.EXTRA_ACTION_TYPE;
 
 import android.annotation.SuppressLint;
+import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -29,16 +30,16 @@ import android.view.ViewGroup;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 import com.android.settings.R;
+import com.android.settings.core.InstrumentedFragment;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.GlifLayout;
 
 /** Fragment to display error screen if the profile is not signed in with a Google account. */
-public class PrivateSpaceAccountLoginError extends Fragment {
+public class PrivateSpaceAccountLoginError extends InstrumentedFragment {
     @Override
     public View onCreateView(
             LayoutInflater inflater,
@@ -67,18 +68,26 @@ public class PrivateSpaceAccountLoginError extends Fragment {
         return rootView;
     }
 
+    @Override
+    public int getMetricsCategory() {
+        return SettingsEnums.PRIVATE_SPACE_SETUP_ACCOUNT_LOGIN_ERROR;
+    }
+
     @SuppressLint("MissingPermission")
     private View.OnClickListener nextScreen() {
         return v -> {
-            PrivateSpaceMaintainer privateSpaceMaintainer = PrivateSpaceMaintainer
-                    .getInstance(getActivity());
+            mMetricsFeatureProvider.action(
+                    getContext(),
+                    SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_TRY_CREATE_ACCOUNT_AGAIN);
+            PrivateSpaceMaintainer privateSpaceMaintainer =
+                    PrivateSpaceMaintainer.getInstance(getActivity());
             UserHandle userHandle;
-            if (privateSpaceMaintainer.doesPrivateSpaceExist() && (userHandle =
-                    privateSpaceMaintainer.getPrivateProfileHandle()) != null) {
+            if (privateSpaceMaintainer.doesPrivateSpaceExist()
+                    && (userHandle = privateSpaceMaintainer.getPrivateProfileHandle()) != null) {
                 Intent intent = new Intent(getContext(), PrivateProfileContextHelperActivity.class);
                 intent.putExtra(EXTRA_ACTION_TYPE, ACCOUNT_LOGIN_ACTION);
-                getActivity().startActivityForResultAsUser(intent, ACCOUNT_LOGIN_ACTION,
-                        userHandle);
+                getActivity()
+                        .startActivityForResultAsUser(intent, ACCOUNT_LOGIN_ACTION, userHandle);
             }
         };
     }
