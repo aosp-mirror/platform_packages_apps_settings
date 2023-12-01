@@ -580,8 +580,7 @@
     <string name="privatespace_setting_up_text" msgid="8532777749891406509">"Nastavljanje zasebnega prostora …"</string>
     <string name="privatespace_apps_hidden_title" msgid="6146605677591599107">"Podatki o uporabi aplikacij v zasebnem prostoru so skriti, kadar je zasebni prostor zaklenjen"</string>
     <string name="privatespace_access_from_apps_title" msgid="6787000636686810564">"Dostop do zasebnega prostora s seznama aplikacij"</string>
-    <!-- no translation found for privatespace_system_apps_installed_title (4782295812052574626) -->
-    <skip />
+    <string name="privatespace_system_apps_installed_title" msgid="4782295812052574626">"Nekatere sistemske aplikacije so že nameščene v zasebnem prostoru"</string>
     <string name="privatespace_error_screen_title" msgid="8658511165913662275">"Zasebnega prostora ni bilo mogoče nastaviti"</string>
     <string name="privatespace_error_screen_summary" msgid="5679626031159521676">"Poskusite znova zdaj ali se vrnite pozneje"</string>
     <string name="privatespace_tryagain_label" msgid="4091466165724929876">"Poskusi znova"</string>
@@ -590,8 +589,7 @@
     <string name="privatespace_use_screenlock_label" msgid="2775404941450049991">"Uporabi način za odklepanje zaslona"</string>
     <string name="privatespace_set_lock_label" msgid="6277529807188602545">"Izberite nov način zaklepanja"</string>
     <string name="privatespace_success_title" msgid="4854425684898602993">"Končano"</string>
-    <!-- no translation found for privatespace_access_text (1253541577173303723) -->
-    <skip />
+    <string name="privatespace_access_text" msgid="1253541577173303723">"Do zasebnega prostora lahko dostopate s seznama aplikacij"</string>
     <string name="privatespace_done_label" msgid="5534818213879562387">"Končano"</string>
     <string name="scrolldown_to_access" msgid="5160743933093369151">"Za dostop do zasebnega prostora se pomaknite navzdol"</string>
     <string name="privatespace_retry_signin_title" msgid="495054309243289223">"Če želite nastaviti zasebni prostor, se prijavite"</string>
@@ -953,9 +951,7 @@
     <string name="lost_internet_access_cancel" msgid="1981171269794585284">"Ostani v omrežju Wi‑Fi"</string>
     <string name="lost_internet_access_persist" msgid="6813604557672782197">"Tega ne prikaži nikoli več"</string>
     <string name="wifi_connect" msgid="2481467560349907397">"Vzpostavi povezavo"</string>
-    <string name="wifi_turned_on_message" msgid="8069855406962662881">"Wi-Fi je vklopljen"</string>
     <string name="wifi_connected_to_message" msgid="8976048616505112896">"Povezano z omrežjem <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
-    <string name="wifi_connecting_to_message" msgid="3153205024060064551">"Vzpostavljanje povezave z omrežjem <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
     <string name="wifi_connecting" msgid="7450277833386859724">"Povezovanje …"</string>
     <string name="wifi_failed_connect_message" msgid="8538000546604347894">"Vzpostavljanje povezave z omrežjem ni uspelo"</string>
     <string name="wifi_not_in_range_message" msgid="3885327464037574739">"Omrežje ni v dosegu"</string>
@@ -1131,6 +1127,7 @@
     <string name="adaptive_sleep_privacy" msgid="7664570136417980556">"Funkcija zaznavanja pogleda na zaslon uporablja sprednji fotoaparat, da zazna, ali kdo gleda zaslon. Funkcija se izvaja v napravi, slike pa se v nobenem primeru ne shranijo in ne pošiljajo Googlu."</string>
     <string name="adaptive_sleep_contextual_slice_title" msgid="7467588613212629758">"Vklop zaznavanja pogleda na zaslon"</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"Ko gledate zaslon, naj ostane vklopljen"</string>
+    <string name="power_consumption_footer_summary" msgid="4901490700555257237">"Daljša časovna omejitev za zaslon poveča porabo energije baterije."</string>
     <string name="auto_rotate_camera_lock_title" msgid="5369003176695105872">"Fotoaparat je zaklenjen."</string>
     <string name="auto_rotate_camera_lock_summary" msgid="5699491516271544672">"Za zaznavanje obraza mora biti fotoaparat odklenjen."</string>
     <string name="adaptive_sleep_camera_lock_summary" msgid="8417541183603618098">"Za zaznavanje pogleda na zaslon mora biti fotoaparat odklenjen."</string>
@@ -1471,7 +1468,6 @@
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Uporabite dostopno točko in povezavo z internetom prek mobilnega telefona, da zagotovite internet drugim napravam prek Wi-Fi-ja ali mobilne podatkovne povezave. Tudi aplikacije lahko ustvarijo dostopno točko za deljenje vsebin z napravami v bližini."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Pomoč"</string>
     <string name="network_settings_title" msgid="4663717899931613176">"Mobilno omrežje"</string>
-    <string name="manage_mobile_plan_title" msgid="5616930513733409064">"Naročniški paket za mobilno napravo"</string>
     <string name="sms_application_title" msgid="4791107002724108809">"Aplikacija za SMS-je"</string>
     <string name="sms_change_default_dialog_title" msgid="2343439998715457307">"Ali želite zamenjati aplikacijo za sporočila SMS?"</string>
     <string name="sms_change_default_dialog_text" msgid="8777606240342982531">"Ali želite za SMS-e namesto aplikacije <xliff:g id="CURRENT_APP">%2$s</xliff:g> uporabljati aplikacijo <xliff:g id="NEW_APP">%1$s</xliff:g>?"</string>
@@ -1479,10 +1475,6 @@
     <string name="network_scorer_change_active_dialog_title" msgid="7005220310238618141">"Želite zamenjati Pomočnika za Wi‑Fi?"</string>
     <string name="network_scorer_change_active_dialog_text" msgid="7006057749370850706">"Želite za upravljanje omrežnih povezav namesto aplikacije <xliff:g id="CURRENT_APP">%2$s</xliff:g> uporabljati aplikacijo <xliff:g id="NEW_APP">%1$s</xliff:g>?"</string>
     <string name="network_scorer_change_active_no_previous_dialog_text" msgid="680685773455072321">"Želite za upravljanje omrežnih povezav uporabljati aplikacijo <xliff:g id="NEW_APP">%s</xliff:g>?"</string>
-    <string name="mobile_unknown_sim_operator" msgid="6650422533065760963">"Neznan ponudnik kartice SIM"</string>
-    <string name="mobile_no_provisioning_url" msgid="609462719893503773">"<xliff:g id="OPERATOR">%1$s</xliff:g> nima znanega splet. mesta za omogočanje uporabe"</string>
-    <string name="mobile_insert_sim_card" msgid="3639245241283948038">"Vstavite SIM in znova zaženite"</string>
-    <string name="mobile_connect_to_internet" msgid="8162654404357069060">"Vzpostavite internetno povezavo"</string>
     <string name="location_category_recent_location_requests" msgid="2205900488782832082">"Nedavne zahteve za lokacijo"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Lokacija za delovni profil"</string>
     <string name="location_app_level_permissions" msgid="907206607664629759">"Dovoljenja aplikacij za lokacijo"</string>
@@ -2247,12 +2239,9 @@
     <string name="accessibility_service_action_perform_description" msgid="7807832069800034738">"Spremlja lahko vaše interakcije z aplikacijo ali tipalom strojne opreme ter komunicira z aplikacijami v vašem imenu."</string>
     <string name="accessibility_dialog_button_allow" msgid="8274918676473216697">"Dovoli"</string>
     <string name="accessibility_dialog_button_deny" msgid="2037249860078259284">"Zavrni"</string>
-    <!-- no translation found for accessibility_dialog_button_stop (7584815613743292151) -->
-    <skip />
-    <!-- no translation found for accessibility_dialog_button_cancel (8625997437316659966) -->
-    <skip />
-    <!-- no translation found for disable_service_title (8178020230162342801) -->
-    <skip />
+    <string name="accessibility_dialog_button_stop" msgid="7584815613743292151">"Izklopi"</string>
+    <string name="accessibility_dialog_button_cancel" msgid="8625997437316659966">"Pusti vklopljeno"</string>
+    <string name="disable_service_title" msgid="8178020230162342801">"Želite izklopiti storitev za dostopnost »<xliff:g id="SERVICE">%1$s</xliff:g>«?"</string>
     <string name="accessibility_no_services_installed" msgid="3725569493860028593">"Nameščena ni nobena storitev"</string>
     <string name="accessibility_no_service_selected" msgid="1310596127128379897">"Nobena storitev ni izbrana"</string>
     <string name="accessibility_service_default_description" msgid="7801435825448138526">"Ni opisa."</string>
@@ -2779,8 +2768,7 @@
     <string name="vpn_require_connection" msgid="1027347404470060998">"Blokiraj povezave brez omrežja VPN"</string>
     <string name="vpn_require_connection_title" msgid="4186758487822779039">"Ali zahtevate povezavo VPN?"</string>
     <string name="vpn_insecure_dialog_subtitle" msgid="1857621742868835300">"Ni varno. Posodobite na VPN različice IKEv2."</string>
-    <!-- no translation found for vpn_start_unsupported (7139925503292269904) -->
-    <skip />
+    <string name="vpn_start_unsupported" msgid="7139925503292269904">"Nepodprtega omrežja VPN ni bilo mogoče zagnati."</string>
     <string name="vpn_lockdown_summary" msgid="4700625960550559029">"Izberite profil za navidezno zasebno omrežje (VPN), s katerim boste vedno povezani. Omrežni promet bo dovoljen samo prek tega omrežja VPN."</string>
     <string name="vpn_lockdown_none" msgid="455915403560910517">"Brez"</string>
     <string name="vpn_lockdown_config_error" msgid="1992071316416371316">"Za stalno vklopljeno navidezno zasebno omrežje je potreben naslov IP tako za strežnik kot za DNS."</string>
@@ -4827,7 +4815,7 @@
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Znova zaženi pozneje"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Prostorski zvok"</string>
     <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"Zvok iz združljivih predstavnosti dobi prostornejšo razsežnost."</string>
-    <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"Spremljanje premikov glave"</string>
+    <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"Spremljanje položaja glave"</string>
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"Zvok se med premikanjem glave spreminja za naravnejšo izkušnjo."</string>
     <string name="bluetooth_details_permissions_sync_title" msgid="7277580382321003521">"Sinhroniziranje dovoljenj iz telefona"</string>
     <string name="bluetooth_details_permissions_sync_summary" msgid="8125037984381432059">"Uri dodelite enaka dovoljenja za aplikacije, kot ste jih dodelili v tem telefonu"</string>

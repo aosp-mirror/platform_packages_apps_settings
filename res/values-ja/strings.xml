@@ -580,8 +580,7 @@
     <string name="privatespace_setting_up_text" msgid="8532777749891406509">"プライベート スペースを設定しています…"</string>
     <string name="privatespace_apps_hidden_title" msgid="6146605677591599107">"プライベート スペースがロックされているときは、プライベート スペース アプリの使用状況に関する情報は表示されません"</string>
     <string name="privatespace_access_from_apps_title" msgid="6787000636686810564">"アプリのリストからプライベート スペースにアクセス"</string>
-    <!-- no translation found for privatespace_system_apps_installed_title (4782295812052574626) -->
-    <skip />
+    <string name="privatespace_system_apps_installed_title" msgid="4782295812052574626">"一部のシステムアプリはすでにプライベート スペースにインストールされています"</string>
     <string name="privatespace_error_screen_title" msgid="8658511165913662275">"プライベート スペースを設定できませんでした"</string>
     <string name="privatespace_error_screen_summary" msgid="5679626031159521676">"今すぐもう一度試すか、後でやり直してください"</string>
     <string name="privatespace_tryagain_label" msgid="4091466165724929876">"再試行"</string>
@@ -590,8 +589,7 @@
     <string name="privatespace_use_screenlock_label" msgid="2775404941450049991">"画面ロックを使用"</string>
     <string name="privatespace_set_lock_label" msgid="6277529807188602545">"新しいロックを選択"</string>
     <string name="privatespace_success_title" msgid="4854425684898602993">"設定完了"</string>
-    <!-- no translation found for privatespace_access_text (1253541577173303723) -->
-    <skip />
+    <string name="privatespace_access_text" msgid="1253541577173303723">"アプリのリストからプライベート スペースにアクセスできます"</string>
     <string name="privatespace_done_label" msgid="5534818213879562387">"完了"</string>
     <string name="scrolldown_to_access" msgid="5160743933093369151">"プライベート スペースにアクセスするには下にスクロールします"</string>
     <string name="privatespace_retry_signin_title" msgid="495054309243289223">"プライベート スペースを設定するにはログインしてください"</string>
@@ -953,9 +951,7 @@
     <string name="lost_internet_access_cancel" msgid="1981171269794585284">"Wi‑Fi を継続"</string>
     <string name="lost_internet_access_persist" msgid="6813604557672782197">"次回から表示しない"</string>
     <string name="wifi_connect" msgid="2481467560349907397">"接続"</string>
-    <string name="wifi_turned_on_message" msgid="8069855406962662881">"Wi‑Fi を有効にしました"</string>
     <string name="wifi_connected_to_message" msgid="8976048616505112896">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g> に接続しました"</string>
-    <string name="wifi_connecting_to_message" msgid="3153205024060064551">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g> に接続中"</string>
     <string name="wifi_connecting" msgid="7450277833386859724">"接続しています…"</string>
     <string name="wifi_failed_connect_message" msgid="8538000546604347894">"ネットワークに接続できませんでした"</string>
     <string name="wifi_not_in_range_message" msgid="3885327464037574739">"ネットワーク圏外です"</string>
@@ -1131,6 +1127,8 @@
     <string name="adaptive_sleep_privacy" msgid="7664570136417980556">"スクリーン アテンションは前面カメラを使用して、ユーザーが画面を見ているかどうかを検出します。この検出はデバイスのみで行われます。画像が保存されたり、Google に送信されたりすることはありません。"</string>
     <string name="adaptive_sleep_contextual_slice_title" msgid="7467588613212629758">"スクリーン アテンションを ON にする"</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"見ている間は画面が OFF になりません"</string>
+    <!-- no translation found for power_consumption_footer_summary (4901490700555257237) -->
+    <skip />
     <string name="auto_rotate_camera_lock_title" msgid="5369003176695105872">"カメラのロックを解除しました"</string>
     <string name="auto_rotate_camera_lock_summary" msgid="5699491516271544672">"顔検出を利用するにはカメラのロックを解除する必要があります"</string>
     <string name="adaptive_sleep_camera_lock_summary" msgid="8417541183603618098">"スクリーン アテンションを使用する場合は、カメラのロックを解除してください"</string>
@@ -1397,7 +1395,7 @@
     <string name="menu_restore" msgid="4310539620115151551">"初期設定にリセット"</string>
     <string name="restore_default_apn_completed" msgid="5167505087078340256">"APN設定をリセットしました。"</string>
     <string name="reset_dashboard_title" msgid="7423200250697886918">"リセット オプション"</string>
-    <string name="reset_mobile_network_settings_title" msgid="5616713931258506842">"モバイル ネットワークの設定をリセットする"</string>
+    <string name="reset_mobile_network_settings_title" msgid="5616713931258506842">"モバイルネットワークの設定をリセット"</string>
     <string name="reset_mobile_network_settings_desc" msgid="7292636387692165727">"モバイル ネットワークのすべての設定をリセットします"</string>
     <string name="reset_mobile_network_settings_confirm_title" msgid="7510965634669511241">"モバイル ネットワークの設定をリセットしますか？"</string>
     <string name="reset_bluetooth_wifi_title" msgid="4113071322344697317">"Bluetooth と Wi-Fi のリセット"</string>
@@ -1471,7 +1469,6 @@
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"このデバイスをアクセス ポイントとして機能させてテザリングすることで、Wi-Fi またはモバイルデータ通信のインターネット接続を他のデバイスと共有できます。アプリでアクセス ポイントを作成し、近くのデバイスに接続することも可能です。"</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"ヘルプ"</string>
     <string name="network_settings_title" msgid="4663717899931613176">"モバイル ネットワーク"</string>
-    <string name="manage_mobile_plan_title" msgid="5616930513733409064">"モバイルプラン"</string>
     <string name="sms_application_title" msgid="4791107002724108809">"SMS アプリ"</string>
     <string name="sms_change_default_dialog_title" msgid="2343439998715457307">"SMSアプリを変更しますか？"</string>
     <string name="sms_change_default_dialog_text" msgid="8777606240342982531">"SMSアプリとして<xliff:g id="CURRENT_APP">%2$s</xliff:g>の代わりに<xliff:g id="NEW_APP">%1$s</xliff:g>を使用しますか？"</string>
@@ -1479,10 +1476,6 @@
     <string name="network_scorer_change_active_dialog_title" msgid="7005220310238618141">"Wi-Fiアシスタントを変更しますか？"</string>
     <string name="network_scorer_change_active_dialog_text" msgid="7006057749370850706">"ネットワーク接続の管理に<xliff:g id="CURRENT_APP">%2$s</xliff:g>ではなく<xliff:g id="NEW_APP">%1$s</xliff:g>を使用しますか？"</string>
     <string name="network_scorer_change_active_no_previous_dialog_text" msgid="680685773455072321">"ネットワーク接続の管理に<xliff:g id="NEW_APP">%s</xliff:g>を使用しますか？"</string>
-    <string name="mobile_unknown_sim_operator" msgid="6650422533065760963">"不明なSIM事業者"</string>
-    <string name="mobile_no_provisioning_url" msgid="609462719893503773">"<xliff:g id="OPERATOR">%1$s</xliff:g> には既知のプロビジョニング ウェブサイトがありません"</string>
-    <string name="mobile_insert_sim_card" msgid="3639245241283948038">"SIMカードを挿入して再起動してください"</string>
-    <string name="mobile_connect_to_internet" msgid="8162654404357069060">"インターネットに接続してください"</string>
     <string name="location_category_recent_location_requests" msgid="2205900488782832082">"最近の位置情報リクエスト"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"仕事用プロファイルで位置情報を使用"</string>
     <string name="location_app_level_permissions" msgid="907206607664629759">"アプリへの位置情報の利用許可"</string>
@@ -2247,12 +2240,9 @@
     <string name="accessibility_service_action_perform_description" msgid="7807832069800034738">"アプリやハードウェア センサーの操作を記録したり、自動的にアプリを操作したりできます。"</string>
     <string name="accessibility_dialog_button_allow" msgid="8274918676473216697">"許可"</string>
     <string name="accessibility_dialog_button_deny" msgid="2037249860078259284">"許可しない"</string>
-    <!-- no translation found for accessibility_dialog_button_stop (7584815613743292151) -->
-    <skip />
-    <!-- no translation found for accessibility_dialog_button_cancel (8625997437316659966) -->
-    <skip />
-    <!-- no translation found for disable_service_title (8178020230162342801) -->
-    <skip />
+    <string name="accessibility_dialog_button_stop" msgid="7584815613743292151">"OFF にする"</string>
+    <string name="accessibility_dialog_button_cancel" msgid="8625997437316659966">"ON のまま"</string>
+    <string name="disable_service_title" msgid="8178020230162342801">"<xliff:g id="SERVICE">%1$s</xliff:g> を OFF にしますか？"</string>
     <string name="accessibility_no_services_installed" msgid="3725569493860028593">"インストールされているサービスはありません"</string>
     <string name="accessibility_no_service_selected" msgid="1310596127128379897">"サービスが選択されていません"</string>
     <string name="accessibility_service_default_description" msgid="7801435825448138526">"説明はありません。"</string>
@@ -2779,8 +2769,7 @@
     <string name="vpn_require_connection" msgid="1027347404470060998">"VPN 以外の接続のブロック"</string>
     <string name="vpn_require_connection_title" msgid="4186758487822779039">"VPN 接続を要求しますか？"</string>
     <string name="vpn_insecure_dialog_subtitle" msgid="1857621742868835300">"安全ではありません。IKEv2 VPN に更新してください"</string>
-    <!-- no translation found for vpn_start_unsupported (7139925503292269904) -->
-    <skip />
+    <string name="vpn_start_unsupported" msgid="7139925503292269904">"サポート対象外の VPN を開始できませんでした。"</string>
     <string name="vpn_lockdown_summary" msgid="4700625960550559029">"常時接続するVPNプロファイルを選択します。このVPNに接続しているときのみネットワークにアクセスできます。"</string>
     <string name="vpn_lockdown_none" msgid="455915403560910517">"なし"</string>
     <string name="vpn_lockdown_config_error" msgid="1992071316416371316">"VPNへの常時接続にはサーバーとDNSの両方のIPアドレスが必要です。"</string>

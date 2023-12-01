@@ -20,7 +20,6 @@ import android.content.Context
 import android.net.TetheringManager
 import android.os.UserHandle
 import android.os.UserManager
-import android.util.FeatureFlagUtils
 import androidx.annotation.StringRes
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.Lifecycle
@@ -31,7 +30,6 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
 import com.android.settings.R
 import com.android.settings.core.BasePreferenceController
-import com.android.settings.core.FeatureFlags
 import com.android.settingslib.RestrictedLockUtilsInternal
 import com.android.settingslib.TetherUtil
 import com.android.settingslib.Utils
@@ -49,13 +47,7 @@ class TetherPreferenceController(context: Context, key: String) :
     private var preference: Preference? = null
 
     override fun getAvailabilityStatus() =
-        if (TetherUtil.isTetherAvailable(mContext)
-            && !FeatureFlagUtils.isEnabled(mContext, FeatureFlags.TETHER_ALL_IN_ONE)
-        ) {
-            AVAILABLE
-        } else {
-            CONDITIONALLY_UNAVAILABLE
-        }
+        if (TetherUtil.isTetherAvailable(mContext)) AVAILABLE else CONDITIONALLY_UNAVAILABLE
 
     override fun displayPreference(screen: PreferenceScreen) {
         super.displayPreference(screen)

@@ -46,7 +46,7 @@
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"裝置摺疊時開啟封面螢幕"</string>
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"僅限遊戲、影片等等"</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"如果應用程式不讓螢幕進入閒置狀態，封面螢幕就會開啟"</string>
-    <string name="sleep_on_fold_title" msgid="7626123024330501411">"從未"</string>
+    <string name="sleep_on_fold_title" msgid="7626123024330501411">"永不"</string>
     <string name="sleep_on_fold_summary" msgid="7737992842459588846">"裝置摺疊時鎖定封面螢幕"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"使用自動旋轉"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"臉部偵測技術會使用前置鏡頭提高「自動旋轉」功能的準確度。系統不會儲存相關圖像，也不會將這類圖像傳送給 Google。"</string>
@@ -951,9 +951,7 @@
     <string name="lost_internet_access_cancel" msgid="1981171269794585284">"保持開啟 Wi‑Fi"</string>
     <string name="lost_internet_access_persist" msgid="6813604557672782197">"不要再顯示"</string>
     <string name="wifi_connect" msgid="2481467560349907397">"連線"</string>
-    <string name="wifi_turned_on_message" msgid="8069855406962662881">"Wi‑Fi 已開啟"</string>
     <string name="wifi_connected_to_message" msgid="8976048616505112896">"已連線到「<xliff:g id="NETWORK_NAME">%1$s</xliff:g>」"</string>
-    <string name="wifi_connecting_to_message" msgid="3153205024060064551">"正在連線到「<xliff:g id="NETWORK_NAME">%1$s</xliff:g>」"</string>
     <string name="wifi_connecting" msgid="7450277833386859724">"連線中…"</string>
     <string name="wifi_failed_connect_message" msgid="8538000546604347894">"無法連線至網路"</string>
     <string name="wifi_not_in_range_message" msgid="3885327464037574739">"不在網路有效範圍內"</string>
@@ -1116,7 +1114,7 @@
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"關閉"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"螢幕白平衡"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
-    <string name="fold_lock_behavior_title" msgid="786228803694268449">"在摺疊狀態下繼續使用應用程式"</string>
+    <string name="fold_lock_behavior_title" msgid="786228803694268449">"折疊時繼續使用應用程式"</string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"流暢顯示"</string>
     <string name="peak_refresh_rate_summary" msgid="3212309985294885790">"自動將某些內容的刷新率調高到 <xliff:g id="ID_1">%1$d</xliff:g> Hz。請注意，開啟這項設定會增加電池用量。"</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"強制使用最高重新整理頻率"</string>
@@ -1129,6 +1127,8 @@
     <string name="adaptive_sleep_privacy" msgid="7664570136417980556">"螢幕感知功能會使用前置鏡頭判斷是否有人正在看著螢幕。這項功能只會在裝置上執行，系統不會儲存相關圖片或將其傳送給 Google。"</string>
     <string name="adaptive_sleep_contextual_slice_title" msgid="7467588613212629758">"開啟螢幕感知功能"</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"看著螢幕時讓螢幕保持開啟"</string>
+    <!-- no translation found for power_consumption_footer_summary (4901490700555257237) -->
+    <skip />
     <string name="auto_rotate_camera_lock_title" msgid="5369003176695105872">"相機已解鎖"</string>
     <string name="auto_rotate_camera_lock_summary" msgid="5699491516271544672">"必須解鎖相機才能使用臉部偵測功能"</string>
     <string name="adaptive_sleep_camera_lock_summary" msgid="8417541183603618098">"必須解鎖相機才能使用螢幕感知功能"</string>
@@ -1469,7 +1469,6 @@
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"使用無線基地台和網路共用功能，讓其他裝置能夠透過你的 Wi-Fi 或行動數據連線連上網際網路。應用程式也可以建立無線基地台，以便與鄰近的裝置分享內容。"</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"說明"</string>
     <string name="network_settings_title" msgid="4663717899931613176">"行動網路"</string>
-    <string name="manage_mobile_plan_title" msgid="5616930513733409064">"行動數據傳輸資費方案"</string>
     <string name="sms_application_title" msgid="4791107002724108809">"簡訊應用程式"</string>
     <string name="sms_change_default_dialog_title" msgid="2343439998715457307">"變更簡訊應用程式？"</string>
     <string name="sms_change_default_dialog_text" msgid="8777606240342982531">"你要改用「<xliff:g id="NEW_APP">%1$s</xliff:g>」而不再使用「<xliff:g id="CURRENT_APP">%2$s</xliff:g>」做為簡訊應用程式嗎？"</string>
@@ -1477,10 +1476,6 @@
     <string name="network_scorer_change_active_dialog_title" msgid="7005220310238618141">"變更 Wi‑Fi Assistant？"</string>
     <string name="network_scorer_change_active_dialog_text" msgid="7006057749370850706">"改以「<xliff:g id="NEW_APP">%1$s</xliff:g>」取代「<xliff:g id="CURRENT_APP">%2$s</xliff:g>」管理你的網路連線？"</string>
     <string name="network_scorer_change_active_no_previous_dialog_text" msgid="680685773455072321">"使用「<xliff:g id="NEW_APP">%s</xliff:g>」管理你的網路連線？"</string>
-    <string name="mobile_unknown_sim_operator" msgid="6650422533065760963">"未知的 SIM 卡電信業者"</string>
-    <string name="mobile_no_provisioning_url" msgid="609462719893503773">"「<xliff:g id="OPERATOR">%1$s</xliff:g>」沒有任何已知的佈建網站"</string>
-    <string name="mobile_insert_sim_card" msgid="3639245241283948038">"請插入 SIM 卡，並重新啟動裝置"</string>
-    <string name="mobile_connect_to_internet" msgid="8162654404357069060">"請連線至網際網路"</string>
     <string name="location_category_recent_location_requests" msgid="2205900488782832082">"最近的定位要求"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"工作資料夾位置資訊"</string>
     <string name="location_app_level_permissions" msgid="907206607664629759">"應用程式位置存取權"</string>
@@ -2245,12 +2240,9 @@
     <string name="accessibility_service_action_perform_description" msgid="7807832069800034738">"可追蹤你與應用程式或硬體感應器的互動，並代表你與應用程式進行互動。"</string>
     <string name="accessibility_dialog_button_allow" msgid="8274918676473216697">"允許"</string>
     <string name="accessibility_dialog_button_deny" msgid="2037249860078259284">"拒絕"</string>
-    <!-- no translation found for accessibility_dialog_button_stop (7584815613743292151) -->
-    <skip />
-    <!-- no translation found for accessibility_dialog_button_cancel (8625997437316659966) -->
-    <skip />
-    <!-- no translation found for disable_service_title (8178020230162342801) -->
-    <skip />
+    <string name="accessibility_dialog_button_stop" msgid="7584815613743292151">"停用"</string>
+    <string name="accessibility_dialog_button_cancel" msgid="8625997437316659966">"保持啟用"</string>
+    <string name="disable_service_title" msgid="8178020230162342801">"要停用「<xliff:g id="SERVICE">%1$s</xliff:g>」嗎？"</string>
     <string name="accessibility_no_services_installed" msgid="3725569493860028593">"未安裝任何服務"</string>
     <string name="accessibility_no_service_selected" msgid="1310596127128379897">"未選取任何服務"</string>
     <string name="accessibility_service_default_description" msgid="7801435825448138526">"未提供說明。"</string>
@@ -2777,8 +2769,7 @@
     <string name="vpn_require_connection" msgid="1027347404470060998">"封鎖沒有 VPN 的連線"</string>
     <string name="vpn_require_connection_title" msgid="4186758487822779039">"需要 VPN 連線嗎？"</string>
     <string name="vpn_insecure_dialog_subtitle" msgid="1857621742868835300">"這個 VPN 不安全，請更新為 IKEv2 VPN"</string>
-    <!-- no translation found for vpn_start_unsupported (7139925503292269904) -->
-    <skip />
+    <string name="vpn_start_unsupported" msgid="7139925503292269904">"無法啟動不支援的 VPN。"</string>
     <string name="vpn_lockdown_summary" msgid="4700625960550559029">"選取要永久連線的 VPN 設定檔。只有在連線到這個 VPN 後才能使用網路。"</string>
     <string name="vpn_lockdown_none" msgid="455915403560910517">"無"</string>
     <string name="vpn_lockdown_config_error" msgid="1992071316416371316">"永久連線的 VPN 需要同時具備伺服器和 DNS 的 IP 位址。"</string>

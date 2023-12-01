@@ -18,8 +18,8 @@ package com.android.settings.deviceinfo.firmwareversion;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
-import static com.android.settings.deviceinfo.firmwareversion.MainlineModuleVersionPreferenceController.MODULE_UPDATE_INTENT_ACTION;
-import static com.android.settings.deviceinfo.firmwareversion.MainlineModuleVersionPreferenceController.MODULE_UPDATE_V2_INTENT_ACTION;
+import static com.android.settings.deviceinfo.firmwareversion.MainlineModuleVersionPreferenceController.MODULE_UPDATE_INTENT;
+import static com.android.settings.deviceinfo.firmwareversion.MainlineModuleVersionPreferenceController.MODULE_UPDATE_V2_INTENT;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -29,7 +29,6 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -40,7 +39,6 @@ import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import androidx.preference.Preference;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -53,10 +51,6 @@ import org.robolectric.RuntimeEnvironment;
 public class MainlineModuleVersionPreferenceControllerTest {
 
     private static final String MODULE_PACKAGE = "com.android.vending";
-    private static final Intent MODULE_UPDATE_V2_INTENT =
-        new Intent(MODULE_UPDATE_V2_INTENT_ACTION).setPackage(MODULE_PACKAGE);
-    private static final Intent MODULE_UPDATE_INTENT =
-        new Intent(MODULE_UPDATE_INTENT_ACTION).setPackage(MODULE_PACKAGE);
 
     @Rule
     public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
@@ -115,7 +109,6 @@ public class MainlineModuleVersionPreferenceControllerTest {
         assertThat(controller.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
-    @Ignore("b/313567396")
     @Test
     public void updateState_canHandleV2Intent_setIntentToPreference() throws Exception {
         setupModulePackage("test version 123");
@@ -129,7 +122,6 @@ public class MainlineModuleVersionPreferenceControllerTest {
         assertThat(mPreference.getIntent()).isEqualTo(MODULE_UPDATE_V2_INTENT);
     }
 
-    @Ignore("b/313567396")
     @Test
     public void updateState_canHandleV2Intent_preferenceShouldBeSelectable() throws Exception {
         setupModulePackage("test version 123");
@@ -143,7 +135,6 @@ public class MainlineModuleVersionPreferenceControllerTest {
         assertThat(mPreference.isSelectable()).isTrue();
     }
 
-    @Ignore("b/313567396")
     @RequiresFlagsEnabled(com.android.settings.flags.Flags.FLAG_MAINLINE_MODULE_EXPLICIT_INTENT)
     @Test
     public void updateState_canHandleIntent_setIntentToPreference() throws Exception {
@@ -159,7 +150,6 @@ public class MainlineModuleVersionPreferenceControllerTest {
         assertThat(mPreference.getIntent()).isEqualTo(MODULE_UPDATE_INTENT);
     }
 
-    @Ignore("b/313567396")
     @RequiresFlagsEnabled(com.android.settings.flags.Flags.FLAG_MAINLINE_MODULE_EXPLICIT_INTENT)
     @Test
     public void updateState_canHandleIntent_preferenceShouldBeSelectable() throws Exception {
