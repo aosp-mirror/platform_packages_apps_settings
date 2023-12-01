@@ -19,6 +19,8 @@ package com.android.settings.connecteddevice.audiosharing.audiostreams;
 import android.content.Context;
 import android.util.AttributeSet;
 
+import androidx.annotation.Nullable;
+
 import com.android.settings.R;
 import com.android.settingslib.widget.TwoTargetPreference;
 
@@ -27,25 +29,35 @@ import com.android.settingslib.widget.TwoTargetPreference;
  * {@link TwoTargetPreference}.
  */
 public class AudioStreamPreference extends TwoTargetPreference {
-    private boolean mShowLock = true;
+    private boolean mIsConnected = false;
 
     /**
-     * Sets whether to display the lock icon.
+     * Update preference UI based on connection status
      *
-     * @param showLock Should show / hide the lock icon
+     * @param isConnected Is this streams connected
      */
-    public void setShowLock(boolean showLock) {
-        mShowLock = showLock;
+    public void setIsConnected(
+            boolean isConnected, @Nullable OnPreferenceClickListener onPreferenceClickListener) {
+        if (mIsConnected == isConnected
+                && getOnPreferenceClickListener() == onPreferenceClickListener) {
+            // Nothing to update.
+            return;
+        }
+        mIsConnected = isConnected;
+        setSummary(isConnected ? "Listening now" : "");
+        setOrder(isConnected ? 0 : 1);
+        setOnPreferenceClickListener(onPreferenceClickListener);
         notifyChanged();
     }
 
-    public AudioStreamPreference(Context context, AttributeSet attrs) {
+    public AudioStreamPreference(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        setIcon(R.drawable.ic_bt_audio_sharing);
     }
 
     @Override
     protected boolean shouldHideSecondTarget() {
-        return !mShowLock;
+        return mIsConnected;
     }
 
     @Override
