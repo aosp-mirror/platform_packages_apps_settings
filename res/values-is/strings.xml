@@ -951,9 +951,7 @@
     <string name="lost_internet_access_cancel" msgid="1981171269794585284">"Halda áfram á Wi-Fi"</string>
     <string name="lost_internet_access_persist" msgid="6813604557672782197">"Aldrei sýna aftur"</string>
     <string name="wifi_connect" msgid="2481467560349907397">"Tengjast"</string>
-    <string name="wifi_turned_on_message" msgid="8069855406962662881">"Kveikt á Wi-Fi"</string>
     <string name="wifi_connected_to_message" msgid="8976048616505112896">"Tengt við <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
-    <string name="wifi_connecting_to_message" msgid="3153205024060064551">"Tengist <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
     <string name="wifi_connecting" msgid="7450277833386859724">"Tengist…"</string>
     <string name="wifi_failed_connect_message" msgid="8538000546604347894">"Ekk tókst að tengjast neti"</string>
     <string name="wifi_not_in_range_message" msgid="3885327464037574739">"Ekkert samband við netkerfi"</string>
@@ -1129,6 +1127,7 @@
     <string name="adaptive_sleep_privacy" msgid="7664570136417980556">"Skjáskynjun notar fremri myndavélina til að sjá hvort einhver sé að horfa á skjáinn. Skjáskynjun virkar í tækinu, en myndir eru aldrei geymdar eða sendar til Google."</string>
     <string name="adaptive_sleep_contextual_slice_title" msgid="7467588613212629758">"Kveikja á skjáskynjun"</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"Hafðu kveikt á skjánum á meðan þú horfir á hann"</string>
+    <string name="power_consumption_footer_summary" msgid="4901490700555257237">"Langur tími þar til skjárinn slekkur á sér gengur hraðar á rafhlöðuna."</string>
     <string name="auto_rotate_camera_lock_title" msgid="5369003176695105872">"Myndavél er læst"</string>
     <string name="auto_rotate_camera_lock_summary" msgid="5699491516271544672">"Taka þarf myndavél úr lás fyrir andlitsgreiningu"</string>
     <string name="adaptive_sleep_camera_lock_summary" msgid="8417541183603618098">"Myndavélin verður að vera ólæst til að nota skjáskynjun"</string>
@@ -1469,7 +1468,6 @@
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Notaðu heitan reit og tjóðrun til að tengja önnur tæki við internetið í gegnum Wi-Fi eða farsímagagnatenginguna þína. Forrit geta einnig búið til heitan reit til að deila efni með nálægum tækjum."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Hjálp"</string>
     <string name="network_settings_title" msgid="4663717899931613176">"Farsímakerfi"</string>
-    <string name="manage_mobile_plan_title" msgid="5616930513733409064">"Farsímaáskrift"</string>
     <string name="sms_application_title" msgid="4791107002724108809">"SMS-forrit"</string>
     <string name="sms_change_default_dialog_title" msgid="2343439998715457307">"Skipta um SMS-forrit?"</string>
     <string name="sms_change_default_dialog_text" msgid="8777606240342982531">"Nota <xliff:g id="NEW_APP">%1$s</xliff:g> í stað <xliff:g id="CURRENT_APP">%2$s</xliff:g> sem SMS-forrit?"</string>
@@ -1477,10 +1475,6 @@
     <string name="network_scorer_change_active_dialog_title" msgid="7005220310238618141">"Skipta um Wi-Fi aðstoð?"</string>
     <string name="network_scorer_change_active_dialog_text" msgid="7006057749370850706">"Nota <xliff:g id="NEW_APP">%1$s</xliff:g> í stað <xliff:g id="CURRENT_APP">%2$s</xliff:g> til að stjórna nettengingunum þínum?"</string>
     <string name="network_scorer_change_active_no_previous_dialog_text" msgid="680685773455072321">"Nota <xliff:g id="NEW_APP">%s</xliff:g> til að stjórna nettengingunum þínum?"</string>
-    <string name="mobile_unknown_sim_operator" msgid="6650422533065760963">"Óþekkt símafyrirtæki SIM-korts"</string>
-    <string name="mobile_no_provisioning_url" msgid="609462719893503773">"<xliff:g id="OPERATOR">%1$s</xliff:g> er ekki með neitt þekkt úthlutunarvefsvæði"</string>
-    <string name="mobile_insert_sim_card" msgid="3639245241283948038">"Settu SIM-kortið í og endurræstu"</string>
-    <string name="mobile_connect_to_internet" msgid="8162654404357069060">"Tengdu tækið við netið"</string>
     <string name="location_category_recent_location_requests" msgid="2205900488782832082">"Nýlegar staðsetningarbeiðnir"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Staðsetning vinnusniðs"</string>
     <string name="location_app_level_permissions" msgid="907206607664629759">"Staðsetningarheimildir forrits"</string>
@@ -2245,12 +2239,9 @@
     <string name="accessibility_service_action_perform_description" msgid="7807832069800034738">"Það getur fylgst með samskiptum þínum við forrit eða skynjara vélbúnaðar og haft samskipti við forrit fyrir þína hönd."</string>
     <string name="accessibility_dialog_button_allow" msgid="8274918676473216697">"Leyfa"</string>
     <string name="accessibility_dialog_button_deny" msgid="2037249860078259284">"Hafna"</string>
-    <!-- no translation found for accessibility_dialog_button_stop (7584815613743292151) -->
-    <skip />
-    <!-- no translation found for accessibility_dialog_button_cancel (8625997437316659966) -->
-    <skip />
-    <!-- no translation found for disable_service_title (8178020230162342801) -->
-    <skip />
+    <string name="accessibility_dialog_button_stop" msgid="7584815613743292151">"Slökkva"</string>
+    <string name="accessibility_dialog_button_cancel" msgid="8625997437316659966">"Hafa kveikt"</string>
+    <string name="disable_service_title" msgid="8178020230162342801">"Viltu slökkva á <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="accessibility_no_services_installed" msgid="3725569493860028593">"Engin þjónusta uppsett"</string>
     <string name="accessibility_no_service_selected" msgid="1310596127128379897">"Engin þjónusta valin"</string>
     <string name="accessibility_service_default_description" msgid="7801435825448138526">"Engin lýsing til staðar."</string>
@@ -2777,8 +2768,7 @@
     <string name="vpn_require_connection" msgid="1027347404470060998">"Loka á tengingar sem eru ekki með VPN"</string>
     <string name="vpn_require_connection_title" msgid="4186758487822779039">"Krefjast VPN-tengingar?"</string>
     <string name="vpn_insecure_dialog_subtitle" msgid="1857621742868835300">"Ekki öruggt. Uppfæra í IKEv2 VPN"</string>
-    <!-- no translation found for vpn_start_unsupported (7139925503292269904) -->
-    <skip />
+    <string name="vpn_start_unsupported" msgid="7139925503292269904">"Ekki tókst að virkja óstutt VPN."</string>
     <string name="vpn_lockdown_summary" msgid="4700625960550559029">"Veldu VPN-snið sem alltaf á að vera tengt. Netumferð er aðeins leyfð þegar tenging við þetta VPN er virk."</string>
     <string name="vpn_lockdown_none" msgid="455915403560910517">"Ekkert"</string>
     <string name="vpn_lockdown_config_error" msgid="1992071316416371316">"VPN sem er alltaf virkt krefst IP-tölu þjóns og nafnaþjóns (DNS)."</string>

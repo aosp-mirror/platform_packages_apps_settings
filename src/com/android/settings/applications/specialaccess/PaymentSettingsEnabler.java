@@ -17,7 +17,6 @@
 package com.android.settings.applications.specialaccess;
 
 import android.content.Context;
-import android.nfc.Flags;
 import android.nfc.NfcAdapter;
 import android.nfc.cardemulation.CardEmulation;
 import android.os.UserHandle;
@@ -67,12 +66,8 @@ public class PaymentSettingsEnabler extends BaseNfcEnabler {
     }
 
     private boolean hasAnyServices() {
-        if (Flags.enableNfcMainline()) {
-            return mCardEmuManager.getServices(
-                CardEmulation.CATEGORY_PAYMENT, UserHandle.myUserId()).isEmpty();
-        } else {
-            return mCardEmuManager.getServices(CardEmulation.CATEGORY_PAYMENT).isEmpty();
-        }
+        return mCardEmuManager.getServices(
+            CardEmulation.CATEGORY_PAYMENT, UserHandle.myUserId()).isEmpty();
     }
 
     @Override

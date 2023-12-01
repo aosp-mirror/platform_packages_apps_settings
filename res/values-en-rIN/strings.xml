@@ -951,9 +951,7 @@
     <string name="lost_internet_access_cancel" msgid="1981171269794585284">"Stay on Wi‑Fi"</string>
     <string name="lost_internet_access_persist" msgid="6813604557672782197">"Never show again"</string>
     <string name="wifi_connect" msgid="2481467560349907397">"Connect"</string>
-    <string name="wifi_turned_on_message" msgid="8069855406962662881">"Wi‑Fi turned on"</string>
     <string name="wifi_connected_to_message" msgid="8976048616505112896">"Connected to <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
-    <string name="wifi_connecting_to_message" msgid="3153205024060064551">"Connecting to <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
     <string name="wifi_connecting" msgid="7450277833386859724">"Connecting…"</string>
     <string name="wifi_failed_connect_message" msgid="8538000546604347894">"Failed to connect to network"</string>
     <string name="wifi_not_in_range_message" msgid="3885327464037574739">"Network not in range"</string>
@@ -1129,6 +1127,8 @@
     <string name="adaptive_sleep_privacy" msgid="7664570136417980556">"Screen attention uses the front camera to see if someone is looking at the screen. It works on device and images are never stored or sent to Google."</string>
     <string name="adaptive_sleep_contextual_slice_title" msgid="7467588613212629758">"Turn on screen attention"</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"Keep screen on when looking at it"</string>
+    <!-- no translation found for power_consumption_footer_summary (4901490700555257237) -->
+    <skip />
     <string name="auto_rotate_camera_lock_title" msgid="5369003176695105872">"Camera is locked"</string>
     <string name="auto_rotate_camera_lock_summary" msgid="5699491516271544672">"Camera must be unlocked for face detection"</string>
     <string name="adaptive_sleep_camera_lock_summary" msgid="8417541183603618098">"Camera must be unlocked for screen attention"</string>
@@ -1469,7 +1469,6 @@
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Use hotspot and tethering to provide Internet to other devices through your Wi‑Fi or mobile data connection. Apps can also create a hotspot to share content with nearby devices."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Help"</string>
     <string name="network_settings_title" msgid="4663717899931613176">"Mobile network"</string>
-    <string name="manage_mobile_plan_title" msgid="5616930513733409064">"Mobile plan"</string>
     <string name="sms_application_title" msgid="4791107002724108809">"SMS app"</string>
     <string name="sms_change_default_dialog_title" msgid="2343439998715457307">"Change SMS app?"</string>
     <string name="sms_change_default_dialog_text" msgid="8777606240342982531">"Use <xliff:g id="NEW_APP">%1$s</xliff:g> instead of <xliff:g id="CURRENT_APP">%2$s</xliff:g> as your SMS app?"</string>
@@ -1477,10 +1476,6 @@
     <string name="network_scorer_change_active_dialog_title" msgid="7005220310238618141">"Change Wi‑Fi assistant?"</string>
     <string name="network_scorer_change_active_dialog_text" msgid="7006057749370850706">"Use <xliff:g id="NEW_APP">%1$s</xliff:g> instead of <xliff:g id="CURRENT_APP">%2$s</xliff:g> to manage your network connections?"</string>
     <string name="network_scorer_change_active_no_previous_dialog_text" msgid="680685773455072321">"Use <xliff:g id="NEW_APP">%s</xliff:g> to manage your network connections?"</string>
-    <string name="mobile_unknown_sim_operator" msgid="6650422533065760963">"Unknown SIM operator"</string>
-    <string name="mobile_no_provisioning_url" msgid="609462719893503773">"<xliff:g id="OPERATOR">%1$s</xliff:g> has no known provisioning website"</string>
-    <string name="mobile_insert_sim_card" msgid="3639245241283948038">"Please insert SIM card and restart"</string>
-    <string name="mobile_connect_to_internet" msgid="8162654404357069060">"Please connect to the internet"</string>
     <string name="location_category_recent_location_requests" msgid="2205900488782832082">"Recent location requests"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Location for work profile"</string>
     <string name="location_app_level_permissions" msgid="907206607664629759">"App location permissions"</string>
@@ -2245,12 +2240,9 @@
     <string name="accessibility_service_action_perform_description" msgid="7807832069800034738">"It can track your interactions with an app or a hardware sensor, and interact with apps on your behalf."</string>
     <string name="accessibility_dialog_button_allow" msgid="8274918676473216697">"Allow"</string>
     <string name="accessibility_dialog_button_deny" msgid="2037249860078259284">"Deny"</string>
-    <!-- no translation found for accessibility_dialog_button_stop (7584815613743292151) -->
-    <skip />
-    <!-- no translation found for accessibility_dialog_button_cancel (8625997437316659966) -->
-    <skip />
-    <!-- no translation found for disable_service_title (8178020230162342801) -->
-    <skip />
+    <string name="accessibility_dialog_button_stop" msgid="7584815613743292151">"Turn off"</string>
+    <string name="accessibility_dialog_button_cancel" msgid="8625997437316659966">"Keep on"</string>
+    <string name="disable_service_title" msgid="8178020230162342801">"Turn off <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="accessibility_no_services_installed" msgid="3725569493860028593">"No services installed"</string>
     <string name="accessibility_no_service_selected" msgid="1310596127128379897">"No service selected"</string>
     <string name="accessibility_service_default_description" msgid="7801435825448138526">"No description provided."</string>
@@ -2777,8 +2769,7 @@
     <string name="vpn_require_connection" msgid="1027347404470060998">"Block connections without VPN"</string>
     <string name="vpn_require_connection_title" msgid="4186758487822779039">"Require VPN connection?"</string>
     <string name="vpn_insecure_dialog_subtitle" msgid="1857621742868835300">"Not secure. Update to an IKEv2 VPN"</string>
-    <!-- no translation found for vpn_start_unsupported (7139925503292269904) -->
-    <skip />
+    <string name="vpn_start_unsupported" msgid="7139925503292269904">"Failed to start unsupported VPN."</string>
     <string name="vpn_lockdown_summary" msgid="4700625960550559029">"Select a VPN profile to always remain connected to. Network traffic will only be allowed when connected to this VPN."</string>
     <string name="vpn_lockdown_none" msgid="455915403560910517">"None"</string>
     <string name="vpn_lockdown_config_error" msgid="1992071316416371316">"Always-on VPN requires an IP address for both server and DNS."</string>

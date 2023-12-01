@@ -49,7 +49,6 @@ import android.net.wifi.SoftApConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.UserManager;
-import android.util.FeatureFlagUtils;
 import android.widget.TextView;
 
 import androidx.fragment.app.FragmentActivity;
@@ -60,7 +59,6 @@ import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowFragment;
@@ -144,7 +142,6 @@ public class WifiTetherSettingsTest {
 
     @Before
     public void setUp() {
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.TETHER_ALL_IN_ONE, false);
         setCanShowWifiHotspotCached(true);
         doReturn(mWifiManager).when(mContext).getSystemService(WifiManager.class);
         doReturn(mConnectivityManager)

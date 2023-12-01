@@ -474,5 +474,10 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
                     sir.xmlResId = R.xml.physical_keyboard_settings;
                     return Arrays.asList(sir);
                 }
+
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return !getHardKeyboards(context).isEmpty();
+                }
             };
 }

@@ -580,8 +580,7 @@
     <string name="privatespace_setting_up_text" msgid="8532777749891406509">"Личното пространство се настройва…"</string>
     <string name="privatespace_apps_hidden_title" msgid="6146605677591599107">"Информацията за използването на приложенията в личното пространство е скрита, когато то е заключено"</string>
     <string name="privatespace_access_from_apps_title" msgid="6787000636686810564">"Достъп до личното пространство от списъка ви с приложения"</string>
-    <!-- no translation found for privatespace_system_apps_installed_title (4782295812052574626) -->
-    <skip />
+    <string name="privatespace_system_apps_installed_title" msgid="4782295812052574626">"Някои системни приложения вече са инсталирани в личното пространство"</string>
     <string name="privatespace_error_screen_title" msgid="8658511165913662275">"Настройването на личното пространство не бе успешно"</string>
     <string name="privatespace_error_screen_summary" msgid="5679626031159521676">"Опитайте отново сега или се върнете по-късно"</string>
     <string name="privatespace_tryagain_label" msgid="4091466165724929876">"Нов опит"</string>
@@ -590,8 +589,7 @@
     <string name="privatespace_use_screenlock_label" msgid="2775404941450049991">"Използване на опцията за заключване на екрана"</string>
     <string name="privatespace_set_lock_label" msgid="6277529807188602545">"Избиране на нова опция за заключване"</string>
     <string name="privatespace_success_title" msgid="4854425684898602993">"Готово!"</string>
-    <!-- no translation found for privatespace_access_text (1253541577173303723) -->
-    <skip />
+    <string name="privatespace_access_text" msgid="1253541577173303723">"Можете да осъществите достъп до личното пространство от списъка с приложения"</string>
     <string name="privatespace_done_label" msgid="5534818213879562387">"Готово"</string>
     <string name="scrolldown_to_access" msgid="5160743933093369151">"Превъртете надолу за достъп до личното пространство"</string>
     <string name="privatespace_retry_signin_title" msgid="495054309243289223">"Влезте в профила си, за да настроите личното пространство"</string>
@@ -953,9 +951,7 @@
     <string name="lost_internet_access_cancel" msgid="1981171269794585284">"Придържане към Wi‑Fi"</string>
     <string name="lost_internet_access_persist" msgid="6813604557672782197">"Повече да не се показва"</string>
     <string name="wifi_connect" msgid="2481467560349907397">"Свързване"</string>
-    <string name="wifi_turned_on_message" msgid="8069855406962662881">"Функцията за Wi-Fi е включена"</string>
     <string name="wifi_connected_to_message" msgid="8976048616505112896">"Установена е връзка с(ъс) <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
-    <string name="wifi_connecting_to_message" msgid="3153205024060064551">"Свързване към <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
     <string name="wifi_connecting" msgid="7450277833386859724">"Свързва се…"</string>
     <string name="wifi_failed_connect_message" msgid="8538000546604347894">"Свързването с мрежата не бе успешно"</string>
     <string name="wifi_not_in_range_message" msgid="3885327464037574739">"Мрежата не е в обхват"</string>
@@ -1131,6 +1127,8 @@
     <string name="adaptive_sleep_privacy" msgid="7664570136417980556">"Функцията „Внимание към екрана“ използва предната камера, за да види дали някой гледа в екрана. Тя работи на устройството и изображенията не се съхраняват, нито се изпращат до Google."</string>
     <string name="adaptive_sleep_contextual_slice_title" msgid="7467588613212629758">"Вкл. на функцията „Внимание към екрана“"</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"Екранът остава включен, докато гледате към него"</string>
+    <!-- no translation found for power_consumption_footer_summary (4901490700555257237) -->
+    <skip />
     <string name="auto_rotate_camera_lock_title" msgid="5369003176695105872">"Камерата е заключена"</string>
     <string name="auto_rotate_camera_lock_summary" msgid="5699491516271544672">"Камерата трябва да е отключена за лицевото разпознаване"</string>
     <string name="adaptive_sleep_camera_lock_summary" msgid="8417541183603618098">"Камерата трябва да е отключена за функцията „Внимание към екрана“"</string>
@@ -1471,7 +1469,6 @@
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Използвайте точка за достъп и тетъринг, за да предоставите достъп до интернет на други устройства чрез Wi-Fi или мобилната си връзка за данни. Приложенията могат също да създават точки за достъп, за да споделят съдържание с устройства в близост."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Помощ"</string>
     <string name="network_settings_title" msgid="4663717899931613176">"Мобилна мрежа"</string>
-    <string name="manage_mobile_plan_title" msgid="5616930513733409064">"Мобилен план"</string>
     <string name="sms_application_title" msgid="4791107002724108809">"Приложение за SMS"</string>
     <string name="sms_change_default_dialog_title" msgid="2343439998715457307">"Да се промени ли приложението за SMS?"</string>
     <string name="sms_change_default_dialog_text" msgid="8777606240342982531">"Да се използва ли <xliff:g id="NEW_APP">%1$s</xliff:g> вместо <xliff:g id="CURRENT_APP">%2$s</xliff:g> като приложение за SMS?"</string>
@@ -1479,10 +1476,6 @@
     <string name="network_scorer_change_active_dialog_title" msgid="7005220310238618141">"Да се промени ли асистентът за Wi‑Fi?"</string>
     <string name="network_scorer_change_active_dialog_text" msgid="7006057749370850706">"Да се използва ли <xliff:g id="NEW_APP">%1$s</xliff:g> вместо <xliff:g id="CURRENT_APP">%2$s</xliff:g> за управление на мрежовите ви връзки?"</string>
     <string name="network_scorer_change_active_no_previous_dialog_text" msgid="680685773455072321">"Да се използва ли <xliff:g id="NEW_APP">%s</xliff:g> за управление на мрежовите ви връзки?"</string>
-    <string name="mobile_unknown_sim_operator" msgid="6650422533065760963">"Неизвестен SIM оператор"</string>
-    <string name="mobile_no_provisioning_url" msgid="609462719893503773">"Няма известен администриращ уебсайт за <xliff:g id="OPERATOR">%1$s</xliff:g>"</string>
-    <string name="mobile_insert_sim_card" msgid="3639245241283948038">"Моля, поставете SIM карта и рестартирайте"</string>
-    <string name="mobile_connect_to_internet" msgid="8162654404357069060">"Моля, свържете се с интернет"</string>
     <string name="location_category_recent_location_requests" msgid="2205900488782832082">"Скорошни заявки за местопол."</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Местоп. за служ. потр. профил"</string>
     <string name="location_app_level_permissions" msgid="907206607664629759">"Разрешения на приложенията за достъп до местоп."</string>
@@ -2247,12 +2240,9 @@
     <string name="accessibility_service_action_perform_description" msgid="7807832069800034738">"Услугата може да проследява взаимодействията ви с дадено приложение или хардуерен сензор, както и да взаимодейства с приложенията от ваше име."</string>
     <string name="accessibility_dialog_button_allow" msgid="8274918676473216697">"Разрешаване"</string>
     <string name="accessibility_dialog_button_deny" msgid="2037249860078259284">"Отказ"</string>
-    <!-- no translation found for accessibility_dialog_button_stop (7584815613743292151) -->
-    <skip />
-    <!-- no translation found for accessibility_dialog_button_cancel (8625997437316659966) -->
-    <skip />
-    <!-- no translation found for disable_service_title (8178020230162342801) -->
-    <skip />
+    <string name="accessibility_dialog_button_stop" msgid="7584815613743292151">"Изключване"</string>
+    <string name="accessibility_dialog_button_cancel" msgid="8625997437316659966">"Не"</string>
+    <string name="disable_service_title" msgid="8178020230162342801">"Да се изключи ли <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="accessibility_no_services_installed" msgid="3725569493860028593">"Няма инсталирани услуги"</string>
     <string name="accessibility_no_service_selected" msgid="1310596127128379897">"Няма избрана услуга"</string>
     <string name="accessibility_service_default_description" msgid="7801435825448138526">"Няма описание."</string>
@@ -2779,8 +2769,7 @@
     <string name="vpn_require_connection" msgid="1027347404470060998">"Блокиране на връзките без VPN"</string>
     <string name="vpn_require_connection_title" msgid="4186758487822779039">"Да се изисква ли връзка с VPN?"</string>
     <string name="vpn_insecure_dialog_subtitle" msgid="1857621742868835300">"Няма защита. Актуализирайте до VPN от типа IKEv2"</string>
-    <!-- no translation found for vpn_start_unsupported (7139925503292269904) -->
-    <skip />
+    <string name="vpn_start_unsupported" msgid="7139925503292269904">"Неподдържаната VPN не бе стартирана."</string>
     <string name="vpn_lockdown_summary" msgid="4700625960550559029">"Изберете потребителски профил за виртуална частна мрежа (VPN), за да останете винаги свързани с нея. Мрежовият трафик ще бъде разрешен само при връзка с тази VPN."</string>
     <string name="vpn_lockdown_none" msgid="455915403560910517">"Няма"</string>
     <string name="vpn_lockdown_config_error" msgid="1992071316416371316">"Винаги включената виртуална частна мрежа (VPN) изисква IP адрес както за сървъра, така и за DNS."</string>

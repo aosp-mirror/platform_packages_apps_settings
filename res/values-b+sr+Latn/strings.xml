@@ -951,9 +951,7 @@
     <string name="lost_internet_access_cancel" msgid="1981171269794585284">"Ostani na Wi‑Fi-ju"</string>
     <string name="lost_internet_access_persist" msgid="6813604557672782197">"Ne prikazuj ponovo"</string>
     <string name="wifi_connect" msgid="2481467560349907397">"Poveži"</string>
-    <string name="wifi_turned_on_message" msgid="8069855406962662881">"WiFi je uključen"</string>
     <string name="wifi_connected_to_message" msgid="8976048616505112896">"Povezano je na mrežu <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
-    <string name="wifi_connecting_to_message" msgid="3153205024060064551">"Povezujete se na <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
     <string name="wifi_connecting" msgid="7450277833386859724">"Povezuje se…"</string>
     <string name="wifi_failed_connect_message" msgid="8538000546604347894">"Povezivanje sa mrežom nije uspelo"</string>
     <string name="wifi_not_in_range_message" msgid="3885327464037574739">"Mreža nije u dometu"</string>
@@ -1129,6 +1127,8 @@
     <string name="adaptive_sleep_privacy" msgid="7664570136417980556">"Pažnja ekrana koristi prednju kameru da bi utvrdila da li neko gleda u ekran. Radi na uređaju, a slike se nikada ne čuvaju niti šalju Google-u."</string>
     <string name="adaptive_sleep_contextual_slice_title" msgid="7467588613212629758">"Uključite pažnju ekrana"</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"Sprečite isključivanje ekrana dok ga gledate"</string>
+    <!-- no translation found for power_consumption_footer_summary (4901490700555257237) -->
+    <skip />
     <string name="auto_rotate_camera_lock_title" msgid="5369003176695105872">"Kamera je zaključana"</string>
     <string name="auto_rotate_camera_lock_summary" msgid="5699491516271544672">"Kamera mora da bude otključana radi prepoznavanja lica"</string>
     <string name="adaptive_sleep_camera_lock_summary" msgid="8417541183603618098">"Kamera mora da bude otključana radi pažnje ekrana"</string>
@@ -1469,7 +1469,6 @@
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Koristite hotspot i privezivanje da biste omogućili internet na drugim uređajima pomoću WiFi veze ili veze za prenos podataka preko mobilnog operatera. Aplikacije mogu i da prave hotspotove za deljenje sadržaja sa uređajima u blizini."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Pomoć"</string>
     <string name="network_settings_title" msgid="4663717899931613176">"Mobilna mreža"</string>
-    <string name="manage_mobile_plan_title" msgid="5616930513733409064">"Tarifni paket za mobilni uređaj"</string>
     <string name="sms_application_title" msgid="4791107002724108809">"Aplikacija za SMS"</string>
     <string name="sms_change_default_dialog_title" msgid="2343439998715457307">"Želite li da promenite aplikaciju za SMS?"</string>
     <string name="sms_change_default_dialog_text" msgid="8777606240342982531">"Želite li da koristite <xliff:g id="NEW_APP">%1$s</xliff:g> umesto <xliff:g id="CURRENT_APP">%2$s</xliff:g> kao aplikaciju za SMS?"</string>
@@ -1477,10 +1476,6 @@
     <string name="network_scorer_change_active_dialog_title" msgid="7005220310238618141">"Želite da promenite Wi‑Fi pomoćnik?"</string>
     <string name="network_scorer_change_active_dialog_text" msgid="7006057749370850706">"Želite li da koristite aplikaciju <xliff:g id="NEW_APP">%1$s</xliff:g> umesto aplikacije <xliff:g id="CURRENT_APP">%2$s</xliff:g> za upravljanje mrežnim vezama?"</string>
     <string name="network_scorer_change_active_no_previous_dialog_text" msgid="680685773455072321">"Želite li da koristite aplikaciju <xliff:g id="NEW_APP">%s</xliff:g> za upravljanje mrežnim vezama?"</string>
-    <string name="mobile_unknown_sim_operator" msgid="6650422533065760963">"Nepoznati SIM operater"</string>
-    <string name="mobile_no_provisioning_url" msgid="609462719893503773">"<xliff:g id="OPERATOR">%1$s</xliff:g> nema poznat veb-sajt za dodelu"</string>
-    <string name="mobile_insert_sim_card" msgid="3639245241283948038">"Ubacite SIM karticu i restartujte"</string>
-    <string name="mobile_connect_to_internet" msgid="8162654404357069060">"Povežite se sa internetom"</string>
     <string name="location_category_recent_location_requests" msgid="2205900488782832082">"Nedavni zahtevi za lokaciju"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Lokacija za poslovni profil"</string>
     <string name="location_app_level_permissions" msgid="907206607664629759">"Dozvole za lokaciju aplikacije"</string>
@@ -2245,12 +2240,9 @@
     <string name="accessibility_service_action_perform_description" msgid="7807832069800034738">"Može da prati interakcije sa aplikacijom ili senzorom hardvera i koristi aplikacije umesto vas."</string>
     <string name="accessibility_dialog_button_allow" msgid="8274918676473216697">"Dozvoli"</string>
     <string name="accessibility_dialog_button_deny" msgid="2037249860078259284">"Odbij"</string>
-    <!-- no translation found for accessibility_dialog_button_stop (7584815613743292151) -->
-    <skip />
-    <!-- no translation found for accessibility_dialog_button_cancel (8625997437316659966) -->
-    <skip />
-    <!-- no translation found for disable_service_title (8178020230162342801) -->
-    <skip />
+    <string name="accessibility_dialog_button_stop" msgid="7584815613743292151">"Isključi"</string>
+    <string name="accessibility_dialog_button_cancel" msgid="8625997437316659966">"Nastavi"</string>
+    <string name="disable_service_title" msgid="8178020230162342801">"Želite da isključite uslugu <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="accessibility_no_services_installed" msgid="3725569493860028593">"Nijedna usluga nije instalirana"</string>
     <string name="accessibility_no_service_selected" msgid="1310596127128379897">"Nijedna usluga nije izabrana"</string>
     <string name="accessibility_service_default_description" msgid="7801435825448138526">"Nije naveden opis."</string>
@@ -2777,8 +2769,7 @@
     <string name="vpn_require_connection" msgid="1027347404470060998">"Blokiraj veze bez VPN-a"</string>
     <string name="vpn_require_connection_title" msgid="4186758487822779039">"Treba vam VPN veza?"</string>
     <string name="vpn_insecure_dialog_subtitle" msgid="1857621742868835300">"Nije bezbedno. Ažurirajte na IKEv2 VPN"</string>
-    <!-- no translation found for vpn_start_unsupported (7139925503292269904) -->
-    <skip />
+    <string name="vpn_start_unsupported" msgid="7139925503292269904">"Pokretanje nepodržanog VPN-a nije uspelo."</string>
     <string name="vpn_lockdown_summary" msgid="4700625960550559029">"Izaberite VPN profil sa kojim ćete uvek biti povezani. Mrežni sadržaj će biti dozvoljen samo kada ste povezani sa ovim VPN-om."</string>
     <string name="vpn_lockdown_none" msgid="455915403560910517">"Nijedan"</string>
     <string name="vpn_lockdown_config_error" msgid="1992071316416371316">"Stalno uključen VPN zahteva IP adresu za server i DNS."</string>

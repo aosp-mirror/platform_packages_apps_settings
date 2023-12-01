@@ -41,18 +41,17 @@ import java.util.TimeZone;
 
 public class MainlineModuleVersionPreferenceController extends BasePreferenceController {
 
+    @VisibleForTesting
+    static final Intent MODULE_UPDATE_INTENT =
+            new Intent("android.settings.MODULE_UPDATE_SETTINGS");
+    @VisibleForTesting
+    static final Intent MODULE_UPDATE_V2_INTENT =
+            new Intent("android.settings.MODULE_UPDATE_VERSIONS");
+
     private static final String TAG = "MainlineModuleControl";
     private static final List<String> VERSION_NAME_DATE_PATTERNS = Arrays.asList("yyyy-MM-dd",
             "yyyy-MM");
-    @VisibleForTesting
-    static final String MODULE_UPDATE_INTENT_ACTION =
-        "android.settings.MODULE_UPDATE_SETTINGS";
-    @VisibleForTesting
-    static final String MODULE_UPDATE_V2_INTENT_ACTION =
-        "android.settings.MODULE_UPDATE_VERSIONS";
 
-    private final Intent mModuleUpdateIntent;
-    private final Intent mModuleUpdateV2Intent;
     private final PackageManager mPackageManager;
 
     private String mModuleVersion;
@@ -60,13 +59,11 @@ public class MainlineModuleVersionPreferenceController extends BasePreferenceCon
     public MainlineModuleVersionPreferenceController(Context context, String key) {
         super(context, key);
         mPackageManager = mContext.getPackageManager();
-        mModuleUpdateIntent = new Intent(MODULE_UPDATE_INTENT_ACTION);
-        mModuleUpdateV2Intent = new Intent(MODULE_UPDATE_V2_INTENT_ACTION);
         if (Flags.mainlineModuleExplicitIntent()) {
-          String packageName = mContext
-              .getString(com.android.settings.R.string.config_mainline_module_update_package);
-          mModuleUpdateIntent.setPackage(packageName);
-          mModuleUpdateV2Intent.setPackage(packageName);
+            String packageName = mContext
+                    .getString(com.android.settings.R.string.config_mainline_module_update_package);
+            MODULE_UPDATE_INTENT.setPackage(packageName);
+            MODULE_UPDATE_V2_INTENT.setPackage(packageName);
         }
         initModules();
     }
@@ -96,17 +93,17 @@ public class MainlineModuleVersionPreferenceController extends BasePreferenceCon
         super.updateState(preference);
 
         final ResolveInfo resolvedV2 =
-                mPackageManager.resolveActivity(mModuleUpdateV2Intent, 0 /* flags */);
+                mPackageManager.resolveActivity(MODULE_UPDATE_V2_INTENT, 0 /* flags */);
         if (resolvedV2 != null) {
-            preference.setIntent(mModuleUpdateV2Intent);
+            preference.setIntent(MODULE_UPDATE_V2_INTENT);
             preference.setSelectable(true);
             return;
         }
 
         final ResolveInfo resolved =
-                mPackageManager.resolveActivity(mModuleUpdateIntent, 0 /* flags */);
+                mPackageManager.resolveActivity(MODULE_UPDATE_INTENT, 0 /* flags */);
         if (resolved != null) {
-            preference.setIntent(mModuleUpdateIntent);
+            preference.setIntent(MODULE_UPDATE_INTENT);
             preference.setSelectable(true);
         } else {
             Log.d(TAG, "The ResolveInfo of the update intent is null.");
