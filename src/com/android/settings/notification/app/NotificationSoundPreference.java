@@ -25,10 +25,13 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.AttributeSet;
 
+import android.util.Log;
 import com.android.settings.R;
 import com.android.settings.RingtonePreference;
 
 public class NotificationSoundPreference extends RingtonePreference {
+    private static final String TAG = "NotificationSoundPreference";
+
     private Uri mRingtone;
 
     public NotificationSoundPreference(Context context, AttributeSet attrs) {
@@ -50,8 +53,13 @@ public class NotificationSoundPreference extends RingtonePreference {
     public boolean onActivityResult(int requestCode, int resultCode, Intent data) {
         if (data != null) {
             Uri uri = data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
-            setRingtone(uri);
-            callChangeListener(uri);
+            if (isValidRingtoneUri(uri)) {
+                setRingtone(uri);
+                callChangeListener(uri);
+            } else {
+                Log.e(TAG, "onActivityResult for URI:" + uri
+                    + " ignored: invalid ringtone Uri");
+            }
         }
 
         return true;
