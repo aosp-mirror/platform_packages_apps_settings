@@ -130,7 +130,6 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
         if (titleResId > 0) {
             activity.setTitle(titleResId);
         }
-        final int selectedTab = getTabId(activity, getArguments());
 
         final View tabContainer = mContentView.findViewById(R.id.tab_container);
         mViewPager = tabContainer.findViewById(R.id.view_pager);
@@ -149,6 +148,7 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
                 }
         );
         tabContainer.setVisibility(View.VISIBLE);
+        final int selectedTab = getTabId(activity, getArguments());
         final TabLayout.Tab tab = tabs.getTabAt(selectedTab);
         tab.select();
 
@@ -228,7 +228,7 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
         if (bundle != null) {
             final int extraTab = bundle.getInt(SettingsActivity.EXTRA_SHOW_FRAGMENT_TAB, -1);
             if (extraTab != -1) {
-                return extraTab;
+                return ((ViewPagerAdapter) mViewPager.getAdapter()).getTabForPosition(extraTab);
             }
             final int userId = bundle.getInt(EXTRA_USER_ID, UserHandle.SYSTEM.getIdentifier());
             final boolean isWorkProfile = UserManager.get(activity).isManagedProfile(userId);
