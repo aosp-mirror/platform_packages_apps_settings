@@ -34,6 +34,7 @@ import com.android.settings.development.DevelopmentSettingsDashboardFragment
 import com.android.settings.spa.preference.ComposePreferenceController
 import com.android.settingslib.spa.widget.preference.PreferenceModel
 import com.android.settingslib.spa.widget.ui.SettingsIcon
+import com.android.settingslib.spaprivileged.framework.common.userManager
 import com.android.settingslib.spaprivileged.model.enterprise.Restrictions
 import com.android.settingslib.spaprivileged.settingsprovider.settingsGlobalBooleanFlow
 import com.android.settingslib.spaprivileged.template.preference.RestrictedPreference
@@ -41,7 +42,9 @@ import com.android.settingslib.spaprivileged.template.preference.RestrictedPrefe
 class DeveloperOptionsController(context: Context, preferenceKey: String) :
     ComposePreferenceController(context, preferenceKey) {
 
-    override fun getAvailabilityStatus() = AVAILABLE
+    override fun getAvailabilityStatus() =
+        if (mContext.userManager.isAdminUser) AVAILABLE
+        else DISABLED_FOR_USER
 
     private val isDevelopmentSettingsEnabledFlow = context.settingsGlobalBooleanFlow(
         name = Settings.Global.DEVELOPMENT_SETTINGS_ENABLED,
