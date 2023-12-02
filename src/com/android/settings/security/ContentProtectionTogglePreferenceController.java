@@ -15,20 +15,22 @@
  */
 package com.android.settings.security;
 
-
 import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.Utils;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.widget.SettingsMainSwitchPreference;
+import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 
 /** Preference controller for content protection toggle switch bar. */
 public class ContentProtectionTogglePreferenceController extends TogglePreferenceController
@@ -37,9 +39,9 @@ public class ContentProtectionTogglePreferenceController extends TogglePreferenc
     @VisibleForTesting
     static final String KEY_CONTENT_PROTECTION_PREFERENCE = "content_protection_user_consent";
 
-    private SettingsMainSwitchPreference mSwitchBar;
+    @Nullable private SettingsMainSwitchPreference mSwitchBar;
+    @Nullable private RestrictedLockUtils.EnforcedAdmin mEnforcedAdmin;
     private final ContentResolver mContentResolver;
-    private final boolean isFullyManagedDevice = Utils.getDeviceOwnerComponent(mContext) != null;
 
     public ContentProtectionTogglePreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -53,7 +55,7 @@ public class ContentProtectionTogglePreferenceController extends TogglePreferenc
 
     @Override
     public boolean isChecked() {
-        if (isFullyManagedDevice) {
+        if (mEnforcedAdmin != null) {
             // If fully managed device, it should always unchecked
             return false;
         }
@@ -70,12 +72,25 @@ public class ContentProtectionTogglePreferenceController extends TogglePreferenc
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
+        final Preference preference = screen.findPreference(getPreferenceKey());
 
-        mSwitchBar = screen.findPreference(getPreferenceKey());
-        mSwitchBar.addOnSwitchChangeListener(this);
-        if (isFullyManagedDevice) {
-            // If fully managed device, the switch bar is greyed out
-            mSwitchBar.setEnabled(false);
+        if (preference instanceof SettingsMainSwitchPreference) {
+            mSwitchBar = (SettingsMainSwitchPreference) preference;
+            mSwitchBar.addOnSwitchChangeListener(this);
+        }
+    }
+
+    /**
+     * Temporary workaround for SettingsMainSwitchPreference.setDisabledByAdmin without user
+     * restriction.
+     */
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        // Assign the value to mEnforcedAdmin since it's needed in isChecked()
+        mEnforcedAdmin = getEnforcedAdmin();
+        if (mSwitchBar != null && mEnforcedAdmin != null) {
+            mSwitchBar.setDisabledByAdmin(mEnforcedAdmin);
         }
     }
 
@@ -89,5 +104,10 @@ public class ContentProtectionTogglePreferenceController extends TogglePreferenc
     @Override
     public int getSliceHighlightMenuRes() {
         return R.string.menu_key_security;
+    }
+
+    @VisibleForTesting
+    protected RestrictedLockUtils.EnforcedAdmin getEnforcedAdmin() {
+        return RestrictedLockUtilsInternal.getDeviceOwner(mContext);
     }
 }
