@@ -107,13 +107,12 @@ android_library {
 
     plugins: ["androidx.room_room-compiler-plugin"],
 
-    // TODO: b/307330031 - Re-enable the nullaway plugin when the issue is fixed.
-    // errorprone: {
-    //     extra_check_modules: ["//external/nullaway:nullaway_plugin"],
-    //     javacflags: [
-    //         "-XepOpt:NullAway:AnnotatedPackages=com.android.settings",
-    //     ],
-    // },
+    errorprone: {
+        extra_check_modules: ["//external/nullaway:nullaway_plugin"],
+        javacflags: [
+            "-XepOpt:NullAway:AnnotatedPackages=com.android.settings",
+        ],
+    },
 
     libs: [
         "telephony-common",

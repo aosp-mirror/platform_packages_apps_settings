@@ -18,6 +18,7 @@ package com.android.settings.system
 
 import android.content.Context
 import android.content.Intent
+import android.os.UserManager
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
@@ -25,7 +26,9 @@ import androidx.compose.ui.test.performClick
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.SettingsActivity
+import com.android.settings.core.BasePreferenceController
 import com.android.settings.development.DevelopmentSettingsDashboardFragment
+import com.android.settingslib.spaprivileged.framework.common.userManager
 import com.google.common.truth.Truth.assertThat
 import org.junit.Rule
 import org.junit.Test
@@ -33,7 +36,10 @@ import org.junit.runner.RunWith
 import org.mockito.kotlin.any
 import org.mockito.kotlin.argumentCaptor
 import org.mockito.kotlin.doNothing
+import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.mock
 import org.mockito.kotlin.spy
+import org.mockito.kotlin.stub
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 
@@ -42,11 +48,36 @@ class DeveloperOptionsControllerTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
+    private val mockUserManager = mock<UserManager>()
+
     private val context: Context = spy(ApplicationProvider.getApplicationContext()) {
+        on { userManager } doReturn mockUserManager
         doNothing().whenever(mock).startActivity(any())
     }
 
     private val controller = DeveloperOptionsController(context, TEST_KEY)
+
+    @Test
+    fun getAvailabilityStatus_isAdminUser_returnAvailable() {
+        mockUserManager.stub {
+            on { isAdminUser } doReturn true
+        }
+
+        val availabilityStatus = controller.getAvailabilityStatus()
+
+        assertThat(availabilityStatus).isEqualTo(BasePreferenceController.AVAILABLE)
+    }
+
+    @Test
+    fun getAvailabilityStatus_notAdminUser_returnDisabledForUser() {
+        mockUserManager.stub {
+            on { isAdminUser } doReturn false
+        }
+
+        val availabilityStatus = controller.getAvailabilityStatus()
+
+        assertThat(availabilityStatus).isEqualTo(BasePreferenceController.DISABLED_FOR_USER)
+    }
 
     @Test
     fun title_isDisplayed() {
