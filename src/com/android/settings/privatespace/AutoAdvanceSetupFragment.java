@@ -25,6 +25,7 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
+import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -39,10 +40,10 @@ import android.widget.ImageView;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.android.settings.R;
+import com.android.settings.core.InstrumentedFragment;
 
 import com.google.android.setupdesign.GlifLayout;
 import com.google.common.collect.ImmutableList;
@@ -52,7 +53,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 /** Fragment to show screens that auto advance during private space setup flow */
-public class AutoAdvanceSetupFragment extends Fragment {
+public class AutoAdvanceSetupFragment extends InstrumentedFragment {
     private static final String TAG = "AutoAdvanceFragment";
     private static final String TITLE_INDEX = "title_index";
     private static final int DELAY_BETWEEN_SCREENS = 5000; // 5 seconds in millis
@@ -78,13 +79,24 @@ public class AutoAdvanceSetupFragment extends Fragment {
                             startFadeOutAnimation();
                             mHandler.postDelayed(mUpdateScreenResources, DELAY_BETWEEN_SCREENS);
                         } else {
-                            PrivateSpaceMaintainer privateSpaceMaintainer = PrivateSpaceMaintainer
-                                    .getInstance(getActivity());
+                            PrivateSpaceMaintainer privateSpaceMaintainer =
+                                    PrivateSpaceMaintainer.getInstance(getActivity());
                             UserHandle userHandle;
-                            if (privateSpaceMaintainer.doesPrivateSpaceExist() && (userHandle =
-                                    privateSpaceMaintainer.getPrivateProfileHandle()) != null) {
+                            if (privateSpaceMaintainer.doesPrivateSpaceExist()
+                                    && (userHandle =
+                                                    privateSpaceMaintainer
+                                                            .getPrivateProfileHandle())
+                                            != null) {
+                                mMetricsFeatureProvider.action(
+                                        getContext(),
+                                        SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_SPACE_CREATED,
+                                        true);
                                 startActivityInPrivateUser(userHandle);
                             } else {
+                                mMetricsFeatureProvider.action(
+                                        getContext(),
+                                        SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_SPACE_CREATED,
+                                        false);
                                 showPrivateSpaceErrorScreen();
                             }
                         }
@@ -142,6 +154,11 @@ public class AutoAdvanceSetupFragment extends Fragment {
     public void onDestroy() {
         mHandler.removeCallbacks(mUpdateScreenResources);
         super.onDestroy();
+    }
+
+    @Override
+    public int getMetricsCategory() {
+        return SettingsEnums.PRIVATE_SPACE_SETUP_SPACE_CREATION;
     }
 
     @SuppressLint("MissingPermission")

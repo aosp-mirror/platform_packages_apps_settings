@@ -65,7 +65,7 @@ public class PeakRefreshRatePreferenceController extends TogglePreferenceControl
                         updateState(mPreference);
                     }
                 };
-        mPeakRefreshRate = findHighestRefreshRateForDefaultDisplay(context);
+        mPeakRefreshRate = Math.round(findHighestRefreshRateForDefaultDisplay(context));
         Log.d(
                 TAG,
                 "DEFAULT_REFRESH_RATE : "

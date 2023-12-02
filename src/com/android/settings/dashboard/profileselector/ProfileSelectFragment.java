@@ -322,7 +322,7 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
             personalFragment.setArguments(personalOnly);
             fragments.add(personalFragment);
 
-            if (managedProfileInfoProvider.getManagedProfile(context) != null) {
+            if (managedProfileInfoProvider.isManagedProfilePresent(context)) {
                 final Bundle workOnly = bundle != null ? bundle.deepCopy() : new Bundle();
                 workOnly.putInt(EXTRA_PROFILE, ProfileType.WORK);
                 final Fragment workFragment =
@@ -361,8 +361,9 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
     }
 
     interface ManagedProfileInfoProvider {
-        default UserHandle getManagedProfile(Context context) {
-            return Utils.getManagedProfile(context.getSystemService(UserManager.class));
+        default boolean isManagedProfilePresent(Context context) {
+            return Utils.doesProfileOfTypeExists(
+                    context.getSystemService(UserManager.class), ProfileType.WORK);
         }
     }
 

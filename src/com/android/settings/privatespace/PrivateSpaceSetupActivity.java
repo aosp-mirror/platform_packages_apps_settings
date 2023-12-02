@@ -16,6 +16,7 @@
 
 package com.android.settings.privatespace;
 
+import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -25,6 +26,8 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import com.google.android.setupdesign.util.ThemeHelper;
 
@@ -34,6 +37,8 @@ public class PrivateSpaceSetupActivity extends FragmentActivity {
     public static final int ACCOUNT_LOGIN_ACTION = 2;
     public static final String EXTRA_ACTION_TYPE = "action_type";
     private NavHostFragment mNavHostFragment;
+    private MetricsFeatureProvider mMetricsFeatureProvider;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if (!android.os.Flags.allowPrivateProfile()) {
@@ -42,6 +47,7 @@ public class PrivateSpaceSetupActivity extends FragmentActivity {
         setTheme(SetupWizardUtils.getTheme(this, getIntent()));
         ThemeHelper.trySetDynamicColor(this);
         super.onCreate(savedInstanceState);
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
         setContentView(R.layout.privatespace_setup_root);
         mNavHostFragment = (NavHostFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.ps_nav_host_fragment);
@@ -54,8 +60,14 @@ public class PrivateSpaceSetupActivity extends FragmentActivity {
             mNavHostFragment.getNavController().navigate(R.id.action_success_fragment);
         } else if (requestCode == ACCOUNT_LOGIN_ACTION) {
             if (resultCode == RESULT_OK) {
+                mMetricsFeatureProvider.action(
+                        this, SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_ACCOUNT_LOGIN_SUCCESS, true);
                 mNavHostFragment.getNavController().navigate(R.id.action_set_lock_fragment);
             } else {
+                mMetricsFeatureProvider.action(
+                        this,
+                        SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_ACCOUNT_LOGIN_SUCCESS,
+                        false);
                 mNavHostFragment.getNavController().navigate(R.id.action_advance_login_error);
             }
         }

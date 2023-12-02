@@ -38,7 +38,6 @@ import androidx.lifecycle.LifecycleOwner;
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.flags.Flags;
 import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast;
@@ -315,7 +314,7 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
 
     @Override
     public int getAvailabilityStatus() {
-        return Flags.enableLeAudioSharing() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        return AudioSharingUtils.isFeatureEnabled() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     /**

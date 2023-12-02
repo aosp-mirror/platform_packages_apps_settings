@@ -20,10 +20,12 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothCsipSetCoordinator;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
+import android.bluetooth.BluetoothStatusCodes;
 import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.android.settings.flags.Flags;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
@@ -244,9 +246,8 @@ public class AudioSharingUtils {
             Log.w(TAG, "getActiveSinksOnAssistant(): LocalBluetoothManager is null!");
             return Optional.empty();
         }
-        var groupedDevices = AudioSharingUtils.fetchConnectedDevicesByGroupId(manager);
-        var leadDevices =
-                AudioSharingUtils.buildOrderedConnectedLeadDevices(manager, groupedDevices, false);
+        var groupedDevices = fetchConnectedDevicesByGroupId(manager);
+        var leadDevices = buildOrderedConnectedLeadDevices(manager, groupedDevices, false);
 
         if (!leadDevices.isEmpty() && AudioSharingUtils.isActiveLeAudioDevice(leadDevices.get(0))) {
             return Optional.of(leadDevices.get(0));
@@ -260,6 +261,16 @@ public class AudioSharingUtils {
     public static void toastMessage(Context context, String message) {
         ThreadUtils.postOnMainThread(
                 () -> Toast.makeText(context, message, Toast.LENGTH_LONG).show());
+    }
+
+    /** Returns if the le audio sharing is enabled. */
+    public static boolean isFeatureEnabled() {
+        BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
+        return Flags.enableLeAudioSharing()
+                && adapter.isLeAudioBroadcastSourceSupported()
+                        == BluetoothStatusCodes.FEATURE_SUPPORTED
+                && adapter.isLeAudioBroadcastAssistantSupported()
+                        == BluetoothStatusCodes.FEATURE_SUPPORTED;
     }
 
     /** Automatically update active device if needed. */

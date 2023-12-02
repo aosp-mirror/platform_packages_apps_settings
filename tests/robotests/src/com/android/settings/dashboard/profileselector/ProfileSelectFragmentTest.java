@@ -32,7 +32,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Flags;
-import android.os.UserHandle;
 import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.fragment.app.Fragment;
@@ -177,8 +176,8 @@ public class ProfileSelectFragmentTest {
                 },
                 new ProfileSelectFragment.ManagedProfileInfoProvider() {
                     @Override
-                    public UserHandle getManagedProfile(Context context) {
-                        return null;
+                    public boolean isManagedProfilePresent(Context context) {
+                        return false;
                     }
                 });
         assertThat(fragments).hasLength(1);
@@ -201,8 +200,8 @@ public class ProfileSelectFragmentTest {
                 },
                 new ProfileSelectFragment.ManagedProfileInfoProvider() {
                     @Override
-                    public UserHandle getManagedProfile(Context context) {
-                        return null;
+                    public boolean isManagedProfilePresent(Context context) {
+                        return false;
                     }
                 });
         assertThat(fragments).hasLength(2);
@@ -225,8 +224,8 @@ public class ProfileSelectFragmentTest {
                 },
                 new ProfileSelectFragment.ManagedProfileInfoProvider() {
                     @Override
-                    public UserHandle getManagedProfile(Context context) {
-                        return new UserHandle(123);
+                    public boolean isManagedProfilePresent(Context context) {
+                        return true;
                     }
                 });
         assertThat(fragments).hasLength(2);
@@ -249,8 +248,8 @@ public class ProfileSelectFragmentTest {
                 },
                 new ProfileSelectFragment.ManagedProfileInfoProvider() {
                     @Override
-                    public UserHandle getManagedProfile(Context context) {
-                        return new UserHandle(123);
+                    public boolean isManagedProfilePresent(Context context) {
+                        return true;
                     }
                 });
         assertThat(fragments).hasLength(3);
@@ -274,8 +273,8 @@ public class ProfileSelectFragmentTest {
                 },
                 new ProfileSelectFragment.ManagedProfileInfoProvider() {
                     @Override
-                    public UserHandle getManagedProfile(Context context) {
-                        return new UserHandle(123);
+                    public boolean isManagedProfilePresent(Context context) {
+                        return true;
                     }
                 });
         assertThat(fragments).hasLength(3);

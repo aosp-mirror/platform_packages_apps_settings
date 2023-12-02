@@ -24,7 +24,6 @@ import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -39,7 +38,6 @@ import com.android.settings.bluetooth.Utils;
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.flags.Flags;
 import com.android.settingslib.bluetooth.BluetoothCallback;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LeAudioProfile;
@@ -309,9 +307,7 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
 
     @Override
     public int getAvailabilityStatus() {
-        return mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH)
-                        && Flags.enableLeAudioSharing()
-                        && mBluetoothDeviceUpdater != null
+        return AudioSharingUtils.isFeatureEnabled() && mBluetoothDeviceUpdater != null
                 ? AVAILABLE_UNSEARCHABLE
                 : UNSUPPORTED_ON_DEVICE;
     }

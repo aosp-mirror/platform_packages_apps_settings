@@ -32,7 +32,6 @@ import com.android.internal.widget.LinearLayoutManager;
 import com.android.internal.widget.RecyclerView;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
-import com.android.settings.flags.Flags;
 
 import java.util.ArrayList;
 
@@ -66,13 +65,16 @@ public class AudioSharingDisconnectDialogFragment extends InstrumentedDialogFrag
      * Display the {@link AudioSharingDisconnectDialogFragment} dialog.
      *
      * @param host The Fragment this dialog will be hosted.
+     * @param deviceItems The existing connected device items in audio sharing session.
+     * @param newDeviceName The name of the latest connected device triggered this dialog.
+     * @param listener The callback to handle the user action on this dialog.
      */
     public static void show(
             Fragment host,
             ArrayList<AudioSharingDeviceItem> deviceItems,
             String newDeviceName,
             DialogEventListener listener) {
-        if (!Flags.enableLeAudioSharing()) return;
+        if (!AudioSharingUtils.isFeatureEnabled()) return;
         final FragmentManager manager = host.getChildFragmentManager();
         sListener = listener;
         if (manager.findFragmentByTag(TAG) == null) {
