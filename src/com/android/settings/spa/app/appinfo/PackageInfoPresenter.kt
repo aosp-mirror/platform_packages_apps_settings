@@ -32,14 +32,20 @@ import com.android.settings.spa.app.startUninstallActivity
 import com.android.settingslib.spa.framework.compose.LocalNavController
 import com.android.settingslib.spaprivileged.framework.common.activityManager
 import com.android.settingslib.spaprivileged.framework.common.asUser
+import com.android.settingslib.spaprivileged.framework.common.broadcastReceiverAsUserFlow
 import com.android.settingslib.spaprivileged.framework.compose.DisposableBroadcastReceiverAsUser
 import com.android.settingslib.spaprivileged.model.app.IPackageManagers
 import com.android.settingslib.spaprivileged.model.app.PackageManagers
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.merge
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.plus
 
 private const val TAG = "PackageInfoPresenter"
 
@@ -58,34 +64,33 @@ class PackageInfoPresenter(
     private val userHandle = UserHandle.of(userId)
     val userContext by lazy { context.asUser(userHandle) }
     val userPackageManager: PackageManager by lazy { userContext.packageManager }
-    private val _flow: MutableStateFlow<PackageInfo?> = MutableStateFlow(null)
 
-    val flow: StateFlow<PackageInfo?> = _flow
-
-    fun reloadPackageInfo() {
-        coroutineScope.launch(Dispatchers.IO) {
-            _flow.value = getPackageInfo()
-        }
-    }
+    val flow: StateFlow<PackageInfo?> = merge(
+        flowOf(null), // kick an initial value
+        context.broadcastReceiverAsUserFlow(
+            intentFilter = IntentFilter().apply {
+                addAction(Intent.ACTION_PACKAGE_CHANGED)
+                addAction(Intent.ACTION_PACKAGE_REPLACED)
+                addAction(Intent.ACTION_PACKAGE_RESTARTED)
+                addDataScheme("package")
+            },
+            userHandle = userHandle,
+        ),
+    ).map { getPackageInfo() }
+        .stateIn(coroutineScope + Dispatchers.Default, SharingStarted.WhileSubscribed(), null)
 
     /**
-     * Detects the package removed event.
+     * Detects the package fully removed event, and close the current page.
      */
     @Composable
-    fun PackageRemoveDetector() {
-        val intentFilter = IntentFilter(Intent.ACTION_PACKAGE_REMOVED).apply {
+    fun PackageFullyRemovedEffect() {
+        val intentFilter = IntentFilter(Intent.ACTION_PACKAGE_FULLY_REMOVED).apply {
             addDataScheme("package")
         }
         val navController = LocalNavController.current
         DisposableBroadcastReceiverAsUser(intentFilter, userHandle) { intent ->
             if (packageName == intent.data?.schemeSpecificPart) {
-                val packageInfo = flow.value
-                if (packageInfo != null && packageInfo.applicationInfo?.isSystemApp == true) {
-                    // System app still exists after uninstalling the updates, refresh the page.
-                    reloadPackageInfo()
-                } else {
-                    navController.navigateBack()
-                }
+                navController.navigateBack()
             }
         }
     }
@@ -97,7 +102,6 @@ class PackageInfoPresenter(
             userPackageManager.setApplicationEnabledSetting(
                 packageName, PackageManager.COMPONENT_ENABLED_STATE_DEFAULT, 0
             )
-            reloadPackageInfo()
         }
     }
 
@@ -108,7 +112,6 @@ class PackageInfoPresenter(
             userPackageManager.setApplicationEnabledSetting(
                 packageName, PackageManager.COMPONENT_ENABLED_STATE_DISABLED_USER, 0
             )
-            reloadPackageInfo()
         }
     }
 
@@ -123,7 +126,6 @@ class PackageInfoPresenter(
         logAction(SettingsEnums.ACTION_SETTINGS_CLEAR_INSTANT_APP)
         coroutineScope.launch(Dispatchers.IO) {
             userPackageManager.deletePackageAsUser(packageName, null, 0, userId)
-            reloadPackageInfo()
         }
     }
 
@@ -133,7 +135,6 @@ class PackageInfoPresenter(
         coroutineScope.launch(Dispatchers.Default) {
             Log.d(TAG, "Stopping package $packageName")
             context.activityManager.forceStopPackageAsUser(packageName, userId)
-            reloadPackageInfo()
         }
     }
 
@@ -141,7 +142,7 @@ class PackageInfoPresenter(
         metricsFeatureProvider.action(context, category, packageName)
     }
 
-    private fun getPackageInfo() =
+    private fun getPackageInfo(): PackageInfo? =
         packageManagers.getPackageInfoAsUser(
             packageName = packageName,
             flags = PackageManager.MATCH_ANY_USER.toLong() or
