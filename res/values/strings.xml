@@ -3898,6 +3898,8 @@
     <string name="force_stop">Force stop</string>
     <!-- Manage applications, text label for button to archive an application. Archiving means uninstalling the app without deleting user's personal data and replacing the app with a stub app with minimum size. So, the user can unarchive the app later and not lose any personal data. -->
     <string name="archive">Archive</string>
+    <!-- Manage applications, text label for button to restore an application. Restoring means installing the archived app. -->
+    <string name="restore">Restore</string>
     <!-- Manage applications, individual application info screen,label under Storage heading.  The total storage space taken up by this app. -->
     <string name="total_size_label">Total</string>
     <!-- Manage applications, individual application info screen, label under Storage heading. The amount of space taken up by the application itself (for example, the java compield files and things like that) -->
@@ -4012,6 +4014,12 @@
     <string name="archiving_failed">Archiving failed</string>
     <!-- Toast message when archiving an app succeeded. -->
     <string name="archiving_succeeded">Archived <xliff:g id="package_label" example="Translate">%1$s</xliff:g></string>
+    <!-- Toast message when restoring an app failed. -->
+    <string name="restoring_failed">Restoring failed</string>
+    <!-- Toast message when restoring an app succeeded. -->
+    <string name="restoring_succeeded">Restored <xliff:g id="package_label" example="Translate">%1$s</xliff:g></string>
+    <!-- Toast message when restoring an app has started. -->
+    <string name="restoring_in_progress">Restoring <xliff:g id="package_label" example="Translate">%1$s</xliff:g></string>
 
     <!-- Text of pop up message if the request for a "migrate primary storage" operation
          (see storage_menu_migrate) is denied as another is already in progress. [CHAR LIMIT=75] -->
