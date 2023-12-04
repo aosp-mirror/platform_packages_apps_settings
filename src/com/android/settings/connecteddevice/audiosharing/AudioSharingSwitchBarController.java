@@ -45,12 +45,16 @@ import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.utils.ThreadUtils;
 
+import com.google.common.collect.ImmutableList;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
+import java.util.stream.Collectors;
 
 public class AudioSharingSwitchBarController extends BasePreferenceController
         implements DefaultLifecycleObserver, OnCheckedChangeListener {
@@ -69,6 +73,9 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
     private final Executor mExecutor;
     private final OnSwitchBarChangedListener mListener;
     private DashboardFragment mFragment;
+    private Map<Integer, List<CachedBluetoothDevice>> mGroupedConnectedDevices = new HashMap<>();
+    private List<BluetoothDevice> mTargetActiveSinks = new ArrayList<>();
+    private ArrayList<AudioSharingDeviceItem> mDeviceItemsForSharing = new ArrayList<>();
     @VisibleForTesting IntentFilter mIntentFilter;
 
     @VisibleForTesting
@@ -114,24 +121,7 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                                     + broadcastId
                                     + ", metadata = "
                                     + metadata.getBroadcastName());
-                    Map<Integer, List<CachedBluetoothDevice>> groupedConnectedDevices =
-                            AudioSharingUtils.fetchConnectedDevicesByGroupId(mBtManager);
-                    ArrayList<AudioSharingDeviceItem> deviceItems =
-                            AudioSharingUtils.buildOrderedConnectedLeadAudioSharingDeviceItem(
-                                    mBtManager,
-                                    groupedConnectedDevices,
-                                    /* filterByInSharing= */ false);
-                    // deviceItems is ordered. The active device is the first place if exits.
-                    ArrayList<AudioSharingDeviceItem> deviceItemsForSharing = deviceItems;
-                    if (!deviceItems.isEmpty() && deviceItems.get(0).isActive()) {
-                        for (CachedBluetoothDevice device :
-                                groupedConnectedDevices.get(deviceItems.get(0).getGroupId())) {
-                            // If active device exists for audio sharing, share to it
-                            // automatically once the broadcast is started.
-                            addSourceToSink(device.getDevice());
-                        }
-                        deviceItemsForSharing.remove(0);
-                    }
+                    addSourceToTargetSinks(mTargetActiveSinks);
                     if (mFragment == null) {
                         Log.w(TAG, "Dialog fail to show due to null fragment.");
                         return;
@@ -140,16 +130,16 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                             () -> {
                                 AudioSharingDialogFragment.show(
                                         mFragment,
-                                        deviceItemsForSharing,
+                                        mDeviceItemsForSharing,
                                         item -> {
-                                            if (groupedConnectedDevices.containsKey(
-                                                    item.getGroupId())) {
-                                                for (CachedBluetoothDevice device :
-                                                        groupedConnectedDevices.get(
-                                                                item.getGroupId())) {
-                                                    addSourceToSink(device.getDevice());
-                                                }
-                                            }
+                                            addSourceToTargetSinks(
+                                                    mGroupedConnectedDevices
+                                                            .getOrDefault(
+                                                                    item.getGroupId(),
+                                                                    ImmutableList.of())
+                                                            .stream()
+                                                            .map(CachedBluetoothDevice::getDevice)
+                                                            .collect(Collectors.toList()));
                                         });
                             });
                 }
@@ -333,6 +323,22 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
             mSwitchBar.setEnabled(true);
             return;
         }
+        mGroupedConnectedDevices = AudioSharingUtils.fetchConnectedDevicesByGroupId(mBtManager);
+        ArrayList<AudioSharingDeviceItem> deviceItems =
+                AudioSharingUtils.buildOrderedConnectedLeadAudioSharingDeviceItem(
+                        mBtManager, mGroupedConnectedDevices, /* filterByInSharing= */ false);
+        // deviceItems is ordered. The active device is the first place if exits.
+        mDeviceItemsForSharing = new ArrayList<>(deviceItems);
+        if (!deviceItems.isEmpty() && deviceItems.get(0).isActive()) {
+            for (CachedBluetoothDevice device :
+                    mGroupedConnectedDevices.getOrDefault(
+                            deviceItems.get(0).getGroupId(), ImmutableList.of())) {
+                // If active device exists for audio sharing, share to it
+                // automatically once the broadcast is started.
+                mTargetActiveSinks.add(device.getDevice());
+            }
+            mDeviceItemsForSharing.remove(0);
+        }
         // TODO: start broadcast with new API
         mBroadcast.startBroadcast("test", null);
     }
@@ -367,8 +373,8 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
         return mBroadcast != null && mBroadcast.isEnabled(null);
     }
 
-    private void addSourceToSink(BluetoothDevice sink) {
-        if (mBroadcast == null || mAssistant == null) {
+    private void addSourceToTargetSinks(List<BluetoothDevice> sinks) {
+        if (sinks.isEmpty() || mBroadcast == null || mAssistant == null) {
             Log.d(TAG, "Skip adding source to target.");
             return;
         }
@@ -378,12 +384,14 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
             Log.e(TAG, "Error: There is no broadcastMetadata.");
             return;
         }
-        Log.d(
-                TAG,
-                "Add broadcast with broadcastId: "
-                        + broadcastMetadata.getBroadcastId()
-                        + " to the device: "
-                        + sink.getAnonymizedAddress());
-        mAssistant.addSource(sink, broadcastMetadata, /* isGroupOp= */ false);
+        for (BluetoothDevice sink : sinks) {
+            Log.d(
+                    TAG,
+                    "Add broadcast with broadcastId: "
+                            + broadcastMetadata.getBroadcastId()
+                            + "to the device: "
+                            + sink.getAnonymizedAddress());
+            mAssistant.addSource(sink, broadcastMetadata, /* isGroupOp= */ false);
+        }
     }
 }
