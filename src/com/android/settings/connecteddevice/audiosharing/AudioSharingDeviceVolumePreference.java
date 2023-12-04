@@ -21,33 +21,23 @@ import android.widget.SeekBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
-import com.android.settings.bluetooth.Utils;
 import com.android.settings.widget.SeekBarPreference;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
-import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 public class AudioSharingDeviceVolumePreference extends SeekBarPreference {
-    private static final String TAG = "AudioSharingDeviceVolumePreference";
     public static final int MIN_VOLUME = 0;
     public static final int MAX_VOLUME = 255;
 
     protected SeekBar mSeekBar;
-    private final LocalBluetoothManager mLocalBtManager;
     private final CachedBluetoothDevice mCachedDevice;
-    private final SeekBar.OnSeekBarChangeListener mListener;
 
     public AudioSharingDeviceVolumePreference(
-            Context context,
-            @NonNull CachedBluetoothDevice device,
-            SeekBar.OnSeekBarChangeListener listener) {
+            Context context, @NonNull CachedBluetoothDevice device) {
         super(context);
         setLayoutResource(R.layout.preference_volume_slider);
-        mLocalBtManager = Utils.getLocalBtManager(context);
         mCachedDevice = device;
-        mListener = listener;
     }
 
     @Nullable
@@ -55,19 +45,12 @@ public class AudioSharingDeviceVolumePreference extends SeekBarPreference {
         return mCachedDevice;
     }
 
-    @Override
-    public void onBindViewHolder(PreferenceViewHolder view) {
-        super.onBindViewHolder(view);
-        mSeekBar = (SeekBar) view.findViewById(com.android.internal.R.id.seekbar);
-        mSeekBar.setMax(MAX_VOLUME);
-        mSeekBar.setMin(MIN_VOLUME);
-        mSeekBar.setOnSeekBarChangeListener(mListener);
-    }
-
-    /** Set the progress bar to target progress */
-    public void setProgress(int progress) {
-        if (mSeekBar != null) {
-            mSeekBar.setProgress(progress);
-        }
+    /**
+     * Initialize {@link AudioSharingDeviceVolumePreference}.
+     * Need to be called after creating the preference.
+     */
+    public void initialize() {
+        setMax(MAX_VOLUME);
+        setMin(MIN_VOLUME);
     }
 }
