@@ -27,6 +27,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.view.inputmethod.InputMethodSubtype;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -122,5 +124,12 @@ public class NewKeyboardSettingsUtils {
     static String getKeyboardLayout(InputManager inputManager, int userId,
             InputDeviceIdentifier identifier, InputMethodInfo info, InputMethodSubtype subtype) {
         return inputManager.getKeyboardLayoutForInputDevice(identifier, userId, info, subtype);
+    }
+
+    static void sortKeyboardLayoutsByLabel(KeyboardLayout[] keyboardLayouts) {
+        Arrays.sort(
+                keyboardLayouts,
+                Comparator.comparing(KeyboardLayout::getLabel)
+        );
     }
 }

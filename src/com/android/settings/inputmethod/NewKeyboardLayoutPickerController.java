@@ -83,6 +83,7 @@ public class NewKeyboardLayoutPickerController extends BasePreferenceController 
         mFinalSelectedLayout = mLayout;
         mKeyboardLayouts = mIm.getKeyboardLayoutListForInputDevice(
                 mInputDeviceIdentifier, mUserId, mInputMethodInfo, mInputMethodSubtype);
+        NewKeyboardSettingsUtils.sortKeyboardLayoutsByLabel(mKeyboardLayouts);
         parent.getActivity().setTitle(mTitle);
     }
 
