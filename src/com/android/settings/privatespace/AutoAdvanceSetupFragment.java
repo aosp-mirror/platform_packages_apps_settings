@@ -16,21 +16,15 @@
 
 package com.android.settings.privatespace;
 
-import static com.android.settings.privatespace.PrivateSpaceSetupActivity.ACCOUNT_LOGIN_ACTION;
-import static com.android.settings.privatespace.PrivateSpaceSetupActivity.EXTRA_ACTION_TYPE;
-
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
-import android.annotation.SuppressLint;
 import android.app.settings.SettingsEnums;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.os.UserHandle;
 import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
@@ -78,27 +72,20 @@ public class AutoAdvanceSetupFragment extends InstrumentedFragment {
                         if (++mScreenTitleIndex < HEADER_IMAGE_PAIRS.size()) {
                             startFadeOutAnimation();
                             mHandler.postDelayed(mUpdateScreenResources, DELAY_BETWEEN_SCREENS);
+                        } else if (PrivateSpaceMaintainer.getInstance(getActivity())
+                                .doesPrivateSpaceExist()) {
+                            mMetricsFeatureProvider.action(
+                                    getContext(),
+                                    SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_SPACE_CREATED,
+                                    true);
+                            NavHostFragment.findNavController(AutoAdvanceSetupFragment.this)
+                                    .navigate(R.id.action_set_lock_fragment);
                         } else {
-                            PrivateSpaceMaintainer privateSpaceMaintainer =
-                                    PrivateSpaceMaintainer.getInstance(getActivity());
-                            UserHandle userHandle;
-                            if (privateSpaceMaintainer.doesPrivateSpaceExist()
-                                    && (userHandle =
-                                                    privateSpaceMaintainer
-                                                            .getPrivateProfileHandle())
-                                            != null) {
-                                mMetricsFeatureProvider.action(
-                                        getContext(),
-                                        SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_SPACE_CREATED,
-                                        true);
-                                startActivityInPrivateUser(userHandle);
-                            } else {
-                                mMetricsFeatureProvider.action(
-                                        getContext(),
-                                        SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_SPACE_CREATED,
-                                        false);
-                                showPrivateSpaceErrorScreen();
-                            }
+                            mMetricsFeatureProvider.action(
+                                    getContext(),
+                                    SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_SPACE_CREATED,
+                                    false);
+                            showPrivateSpaceErrorScreen();
                         }
                     }
                 }
@@ -159,14 +146,6 @@ public class AutoAdvanceSetupFragment extends InstrumentedFragment {
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.PRIVATE_SPACE_SETUP_SPACE_CREATION;
-    }
-
-    @SuppressLint("MissingPermission")
-    private void startActivityInPrivateUser(UserHandle userHandle) {
-        /* Start new activity in private profile which is needed to set private profile lock */
-        Intent intent = new Intent(getContext(), PrivateProfileContextHelperActivity.class);
-        intent.putExtra(EXTRA_ACTION_TYPE, ACCOUNT_LOGIN_ACTION);
-        getActivity().startActivityForResultAsUser(intent, ACCOUNT_LOGIN_ACTION, userHandle);
     }
 
     private void showPrivateSpaceErrorScreen() {

@@ -16,21 +16,21 @@
 
 package com.android.settings.privatespace;
 
+import static com.android.settings.privatespace.PrivateSpaceSetupActivity.ACCOUNT_LOGIN_ACTION;
 import static com.android.settings.privatespace.PrivateSpaceSetupActivity.EXTRA_ACTION_TYPE;
 import static com.android.settings.privatespace.PrivateSpaceSetupActivity.SET_LOCK_ACTION;
 
-import android.annotation.SuppressLint;
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
-import androidx.navigation.fragment.NavHostFragment;
 
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
@@ -44,6 +44,7 @@ import com.google.android.setupdesign.GlifLayout;
  * separate private profile lock.
  */
 public class PrivateSpaceSetLockFragment extends InstrumentedFragment {
+    private static final String TAG = "PrivateSpaceSetLockFrag";
 
     @Override
     public View onCreateView(
@@ -96,8 +97,7 @@ public class PrivateSpaceSetLockFragment extends InstrumentedFragment {
             mMetricsFeatureProvider.action(
                     getContext(), SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_USE_SCREEN_LOCK);
             // Simply Use default screen lock. No need to handle
-            NavHostFragment.findNavController(PrivateSpaceSetLockFragment.this)
-                    .navigate(R.id.action_success_fragment);
+            launchActivityForAction(ACCOUNT_LOGIN_ACTION);
         };
     }
 
@@ -105,21 +105,19 @@ public class PrivateSpaceSetLockFragment extends InstrumentedFragment {
         return v -> {
             mMetricsFeatureProvider.action(
                     getContext(), SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_NEW_LOCK);
-            createPrivateSpaceLock();
+            launchActivityForAction(SET_LOCK_ACTION);
         };
     }
 
-    @SuppressLint("MissingPermission")
-    private void createPrivateSpaceLock() {
-        PrivateSpaceMaintainer privateSpaceMaintainer = PrivateSpaceMaintainer
-                .getInstance(getActivity());
-        UserHandle userHandle;
-        if (privateSpaceMaintainer.doesPrivateSpaceExist() && (userHandle =
-                privateSpaceMaintainer.getPrivateProfileHandle()) != null) {
+    private void launchActivityForAction(int action) {
+        UserHandle userHandle =
+                PrivateSpaceMaintainer.getInstance(getActivity()).getPrivateProfileHandle();
+        if (userHandle != null) {
             Intent intent = new Intent(getContext(), PrivateProfileContextHelperActivity.class);
-            intent.putExtra(EXTRA_ACTION_TYPE, SET_LOCK_ACTION);
-            getActivity().startActivityForResultAsUser(intent, SET_LOCK_ACTION,
-                    userHandle);
+            intent.putExtra(EXTRA_ACTION_TYPE, action);
+            getActivity().startActivityForResultAsUser(intent, action, userHandle);
+        } else {
+            Log.w(TAG, "Private profile user handle is null");
         }
     }
 }
