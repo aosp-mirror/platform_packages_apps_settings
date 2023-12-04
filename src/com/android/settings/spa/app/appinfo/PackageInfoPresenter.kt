@@ -77,7 +77,7 @@ class PackageInfoPresenter(
             userHandle = userHandle,
         ),
     ).map { getPackageInfo() }
-        .stateIn(coroutineScope + Dispatchers.Default, SharingStarted.WhileSubscribed(), null)
+        .stateIn(coroutineScope + Dispatchers.Default, SharingStarted.Eagerly, null)
 
     /**
      * Detects the package fully removed event, and close the current page.
