@@ -18,12 +18,10 @@ package com.android.settings.spa
 
 import android.app.Activity
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.content.pm.PackageManager.ComponentInfoFlags
 import android.os.Bundle
-import androidx.annotation.VisibleForTesting
 import com.android.settings.activityembedding.ActivityEmbeddingUtils
 import com.android.settings.activityembedding.EmbeddedDeepLinkUtils.tryStartMultiPaneDeepLink
+import com.android.settings.spa.SpaDestination.Companion.getDestination
 import com.android.settingslib.spa.framework.util.SESSION_EXTERNAL
 import com.android.settingslib.spa.framework.util.appendSpaParams
 
@@ -37,29 +35,23 @@ import com.android.settingslib.spa.framework.util.appendSpaParams
 class SpaBridgeActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        getDestination()?.let { destination ->
-            startSpaActivityFromBridge(destination)
-        }
+        startSpaActivityFromBridge()
         finish()
     }
 
     companion object {
-        fun Activity.startSpaActivityFromBridge(destination: String) {
+        fun Activity.startSpaActivityFromBridge(destinationFactory: (String) -> String? = { it }) {
+            val (destination, highlightMenuKey) = getDestination(destinationFactory) ?: return
             val intent = Intent(this, SpaActivity::class.java)
-                .appendSpaParams(destination = destination)
-                .appendSpaParams(sessionName = SESSION_EXTERNAL)
+                .appendSpaParams(
+                    destination = destination,
+                    sessionName = SESSION_EXTERNAL,
+                )
             if (!ActivityEmbeddingUtils.isEmbeddingActivityEnabled(this) ||
-                !tryStartMultiPaneDeepLink(intent)) {
+                !tryStartMultiPaneDeepLink(intent, highlightMenuKey)
+            ) {
                 startActivity(intent)
             }
         }
-
-        fun Activity.getDestination(): String? =
-            packageManager.getActivityInfo(
-                componentName, ComponentInfoFlags.of(PackageManager.GET_META_DATA.toLong())
-            ).metaData.getString(META_DATA_KEY_DESTINATION)
-
-        @VisibleForTesting
-        const val META_DATA_KEY_DESTINATION = "com.android.settings.spa.DESTINATION"
     }
 }

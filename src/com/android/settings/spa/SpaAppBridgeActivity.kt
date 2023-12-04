@@ -20,7 +20,6 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.UserHandle
-import com.android.settings.spa.SpaBridgeActivity.Companion.getDestination
 import com.android.settings.spa.SpaBridgeActivity.Companion.startSpaActivityFromBridge
 
 /**
@@ -33,11 +32,7 @@ import com.android.settings.spa.SpaBridgeActivity.Companion.startSpaActivityFrom
 class SpaAppBridgeActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        getDestination()?.let { destinationPrefix ->
-            getDestinationForApp(destinationPrefix, intent)?.let { destination ->
-                startSpaActivityFromBridge(destination)
-            }
-        }
+        startSpaActivityFromBridge { getDestinationForApp(it, intent) }
         finish()
     }
 
