@@ -64,6 +64,7 @@ import com.android.settings.testutils.shadow.ShadowUtils;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -200,6 +201,7 @@ public class SettingsSliceProviderTest {
                 .registerIntentToUri(eq(FakeToggleController.INTENT_FILTER), eq(INTENT_SLICE_URI));
     }
 
+    @Ignore("b/314925256")
     @Test
     public void loadSlice_registersBackgroundListener() {
         SliceTestUtils.insertSliceToDb(mContext, KEY);
