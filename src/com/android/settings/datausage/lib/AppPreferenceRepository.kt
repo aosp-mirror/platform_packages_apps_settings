@@ -19,10 +19,13 @@ package com.android.settings.datausage.lib
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.UserHandle
+import android.util.IconDrawableFactory
 import androidx.preference.Preference
-import com.android.settingslib.Utils
 
-class AppPreferenceRepository(private val context: Context) {
+class AppPreferenceRepository(
+    private val context: Context,
+    private val iconDrawableFactory: IconDrawableFactory = IconDrawableFactory.newInstance(context),
+) {
     private val packageManager = context.packageManager
 
     fun loadAppPreferences(uids: List<Int>): List<Preference> = uids.flatMap { uid ->
@@ -38,7 +41,7 @@ class AppPreferenceRepository(private val context: Context) {
     private fun getPreference(packageName: String, userId: Int): Preference? = try {
         val app = packageManager.getApplicationInfoAsUser(packageName, 0, userId)
         Preference(context).apply {
-            icon = Utils.getBadgedIcon(context, app)
+            icon = iconDrawableFactory.getBadgedIcon(app)
             title = app.loadLabel(packageManager)
             isSelectable = false
         }
