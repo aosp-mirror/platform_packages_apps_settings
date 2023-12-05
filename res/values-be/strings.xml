@@ -383,9 +383,9 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Каб атрымліваць найлепшыя вынікі, карыстайцеся ахоўнай плёнкай, якая мае сертыфікат \"Made for Google\". Калі выкарыстоўваць іншыя ахоўныя плёнкі, сканер адбіткаў пальцаў вашага дзіцяці можа не працаваць."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"Разблакіроўка гадзіннікам"</string>
-    <string name="biometric_settings_intro_with_activeunlock" msgid="6583248094453119314">"Пасля наладжвання разблакіроўкі праз распазнаванне твару і адбітка пальца тэлефон будзе запытваць адбітак пальца, калі навокал цёмна ці ў вас на твары маска.\n\nКалі твар або адбітак пальца не распазнаюцца, можна выканаць разблакіроўку з дапамогай гадзінніка."</string>
-    <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"Калі адбітак пальца не распазнаецца, можна выканаць разблакіроўку з дапамогай гадзінніка."</string>
-    <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"Калі твар не распазнаецца, можна выканаць разблакіроўку з дапамогай гадзінніка."</string>
+    <string name="biometric_settings_intro_with_activeunlock" msgid="5032953826653108646">"Пасля наладжвання разблакіроўкі адбіткам пальца і праз распазнаванне твару тэлефон будзе запытваць адбітак пальца, калі навокал цёмна ці ў вас на твары маска.\n\nРазблакіроўку гадзіннікам зручна выкарыстоўваць, калі, напрыклад, у вас мокрыя пальцы або калі ваш твар не распазнаецца."</string>
+    <string name="biometric_settings_intro_with_fingerprint" msgid="5881355884547769337">"Разблакіроўку гадзіннікам зручна выкарыстоўваць, калі, напрыклад, ваш адбітак пальца не распазнаецца."</string>
+    <string name="biometric_settings_intro_with_face" msgid="7671919122230588521">"Разблакіроўку гадзіннікам зручна выкарыстоўваць, калі, напрыклад, ваш твар не распазнаецца."</string>
     <string name="biometric_settings_use_fingerprint_or_watch_for" msgid="1160830065613858095">"Скарыстайце адбітак пальца або гадзіннік, каб"</string>
     <string name="biometric_settings_use_face_or_watch_for" msgid="1507077107150278532">"Скарыстайце распазнаванне твару ці гадзіннік, каб"</string>
     <string name="biometric_settings_use_face_fingerprint_or_watch_for" msgid="7495835723072020641">"Скарыстайце распазнаванне твару, адбітак пальца або гадзіннік, каб"</string>
@@ -1011,7 +1011,6 @@
     <string name="wifi_hotspot_no_password_subtext" msgid="3685689196772398783">"Пароль не ўстаноўлены"</string>
     <string name="wifi_hotspot_name_title" msgid="6633480190014369846">"Назва хот-спота"</string>
     <string name="wifi_hotspot_password_title" msgid="9096340919454296786">"Пароль хот-спота"</string>
-    <string name="wifi_hotspot_ap_band_title" msgid="560262446129195042">"Дыяпазон частот Wi-Fi"</string>
     <string name="wifi_hotspot_auto_off_title" msgid="8855711787485504882">"Аўтаматычна выключаць хот-спот"</string>
     <string name="wifi_hotspot_auto_off_summary" msgid="8283656069997871354">"Калі няма падключаных прылад"</string>
     <string name="wifi_hotspot_maximize_compatibility" msgid="6494125684420024058">"Максімальная сумяшчальнасць"</string>
@@ -1127,8 +1126,7 @@
     <string name="adaptive_sleep_privacy" msgid="7664570136417980556">"Адаптыўны рэжым з дапамогай пярэдняй камеры вызначае, калі хто-небудзь глядзіць на экран. Функцыя працуе толькі на прыладзе: відарысы не захоўваюцца і не адпраўляюцца ў Google."</string>
     <string name="adaptive_sleep_contextual_slice_title" msgid="7467588613212629758">"Уключыць адаптыўны рэжым"</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"Не дазваляць экрану выключацца, калі на яго глядзяць"</string>
-    <!-- no translation found for power_consumption_footer_summary (4901490700555257237) -->
-    <skip />
+    <string name="power_consumption_footer_summary" msgid="4901490700555257237">"Чым даўжэйшы час да выключэння экрана, тым хутчэй разраджаецца акумулятар."</string>
     <string name="auto_rotate_camera_lock_title" msgid="5369003176695105872">"Камера заблакіравана"</string>
     <string name="auto_rotate_camera_lock_summary" msgid="5699491516271544672">"Каб выкарыстоўваць функцыю выяўлення твару, трэба разблакіраваць камеру"</string>
     <string name="adaptive_sleep_camera_lock_summary" msgid="8417541183603618098">"Для адаптыўнага рэжыму трэба разблакіраваць камеру"</string>
@@ -1259,6 +1257,10 @@
     <string name="imei_multi_sim" msgid="9001570420423929507">"IMEI (трымальнік SIM-карты <xliff:g id="IMEI_SLOT_ID">%1$d</xliff:g>)"</string>
     <string name="imei_multi_sim_primary" msgid="7914653040843734282">"IMEI (трымальнік SIM-карты <xliff:g id="IMEI_SLOT_ID_PRIMARY">%1$d</xliff:g>) (асноўны)"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"Для прагляду выберыце захаваную сетку"</string>
+    <!-- no translation found for status_imei (5719752369250485007) -->
+    <skip />
+    <!-- no translation found for status_imei_sv (6908985558726440951) -->
+    <skip />
     <string name="status_min_number" msgid="4492899165438225714">"MIN"</string>
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"Версiя PRL"</string>
@@ -1452,16 +1454,6 @@
     <string name="tether_settings_summary_all" msgid="7565193614882005775">"Хот-спот, USB, Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"Інтэрнэт не абагульваецца з іншымі прыладамі"</string>
     <string name="tether_preference_summary_off" msgid="6266799346319794630">"Выключана"</string>
-    <string name="tethering_interface_options" msgid="7575535888135143650">"Мадэм"</string>
-    <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"Не выкарыстоўваць хот-спот Wi‑Fi"</string>
-    <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"Абагульваць інтэрнэт толькі праз USB"</string>
-    <string name="disable_wifi_hotspot_when_bluetooth_on" msgid="4711723299880116345">"Абагульваць інтэрнэт толькі праз Bluetooth"</string>
-    <string name="disable_wifi_hotspot_when_ethernet_on" msgid="4123242400542103599">"Абагульваць інтэрнэт толькі праз Ethernet"</string>
-    <string name="disable_wifi_hotspot_when_usb_and_bluetooth_on" msgid="5258774769658150180">"Абагульваць інтэрнэт толькі праз USB і Bluetooth"</string>
-    <string name="disable_wifi_hotspot_when_usb_and_ethernet_on" msgid="7126313562907225612">"Абагульваць інтэрнэт толькі праз USB і Ethernet"</string>
-    <string name="disable_wifi_hotspot_when_bluetooth_and_ethernet_on" msgid="2943464651349235967">"Абагульваць інтэрнэт толькі праз Bluetooth і Ethernet"</string>
-    <string name="disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on" msgid="3934609816834760008">"Абагульваць інтэрнэт толькі праз USB, Bluetooth і Ethernet"</string>
-    <string name="usb_title" msgid="1157283449840612901">"USB"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"USB-мадэм"</string>
     <string name="bluetooth_tether_checkbox_text" msgid="6108398414967813545">"Bluetooth-мадэм"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Мадэм Ethernet"</string>
@@ -2051,6 +2043,10 @@
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Завяршыць выклік кнопкай сілкавання"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="5508351959249876801">"Вялікі ўказальнік мышы"</string>
     <string name="accessibility_toggle_large_pointer_icon_summary" msgid="1480527946039237705">"Зрабіць курсор больш прыметным"</string>
+    <!-- no translation found for accessibility_force_invert_title (5015366813138748407) -->
+    <skip />
+    <!-- no translation found for accessibility_force_invert_summary (1882329675950887268) -->
+    <skip />
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Адключыць анімацыю"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Паменшыць рух на экране"</string>
     <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"Монафанія"</string>
@@ -2582,8 +2578,6 @@
     <string name="emergency_tone_title" msgid="6673118505206685168">"Сігнал набору нумару ў аварыйнай сітуацыі"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"Задаць паводзіны на выпадак экстранага выкліку"</string>
     <string name="privacy_settings_title" msgid="6437057228255974577">"Рэзервовае капіраванне"</string>
-    <string name="backup_summary_state_on" msgid="9018954639693085240">"Укл."</string>
-    <string name="backup_summary_state_off" msgid="5341339397224835909">"Выкл."</string>
     <string name="backup_section_title" msgid="6539706829848457794">"Рэзервовае капіяванне і аднаўленне"</string>
     <string name="personal_data_section_title" msgid="6368610168625722682">"Асабістыя дадзеныя"</string>
     <string name="backup_data_title" msgid="507663517227498525">"Рэзервовае капіяванне дадзеных"</string>
@@ -4325,6 +4319,8 @@
     <string name="change_nfc_tag_apps_detail_summary" msgid="3338220223868942195">"Дазвольце запускаць гэту праграму для сканіравання цэтліка NFC.\nКалі гэты дазвол дадзены, пры выяўленні цэтліка праграма будзе даступнай для выбару."</string>
     <string name="media_output_title" msgid="8283629315159510680">"Дзе прайграваць"</string>
     <string name="media_output_label_title" msgid="4139048973886819148">"<xliff:g id="LABEL">%s</xliff:g>: дзе прайграваць"</string>
+    <!-- no translation found for media_output_title_without_playing (3339321669132875821) -->
+    <skip />
     <string name="media_output_default_summary" msgid="4200343059396412376">"Гэта прылада"</string>
     <string name="media_out_summary_ongoing_call_state" msgid="475188726850090363">"Недаступна падчас выклікаў"</string>
     <string name="take_call_on_title" msgid="1159417893879946757">"Адказаць"</string>

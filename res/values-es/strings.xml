@@ -383,9 +383,9 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Para obtener mejores resultados, usa un protector de pantalla con certificado Made for Google. Con otros protectores de pantalla, puede que la huella digital de tu hijo/a no funcione."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"Desbloqueo con reloj"</string>
-    <string name="biometric_settings_intro_with_activeunlock" msgid="6583248094453119314">"Cuando configures Desbloqueo facial y Desbloqueo con huella digital, el teléfono te pedirá la huella digital si llevas mascarilla o estás en un lugar con poca luz.\n\nPuedes desbloquear el teléfono con tu reloj si no reconoce tu cara o tu huella digital."</string>
-    <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"Puedes desbloquear el teléfono con tu reloj cuando no reconozca tu huella digital."</string>
-    <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"Puedes desbloquear el teléfono con tu reloj cuando no reconozca tu cara."</string>
+    <string name="biometric_settings_intro_with_activeunlock" msgid="5032953826653108646">"Si configuras Desbloqueo facial y Desbloqueo con huella digital, el teléfono te pedirá la huella digital si llevas mascarilla o estás en un entorno con poca luz.\n\nDesbloqueo con reloj es otra forma cómoda de desbloquear el teléfono, por ejemplo, si tienes los dedos húmedos o no se reconoce tu cara."</string>
+    <string name="biometric_settings_intro_with_fingerprint" msgid="5881355884547769337">"Desbloqueo con reloj es otra forma cómoda de desbloquear el teléfono, por ejemplo, cuando no se reconoce tu huella digital."</string>
+    <string name="biometric_settings_intro_with_face" msgid="7671919122230588521">"Desbloqueo con reloj es otra forma cómoda de desbloquear el teléfono, por ejemplo, cuando no se reconoce tu cara."</string>
     <string name="biometric_settings_use_fingerprint_or_watch_for" msgid="1160830065613858095">"Usa la huella digital o el reloj para"</string>
     <string name="biometric_settings_use_face_or_watch_for" msgid="1507077107150278532">"Usa la cara o el reloj para"</string>
     <string name="biometric_settings_use_face_fingerprint_or_watch_for" msgid="7495835723072020641">"Usa la cara, la huella digital o el reloj para"</string>
@@ -1011,7 +1011,6 @@
     <string name="wifi_hotspot_no_password_subtext" msgid="3685689196772398783">"No se ha definido ninguna contraseña"</string>
     <string name="wifi_hotspot_name_title" msgid="6633480190014369846">"Nombre del punto de acceso"</string>
     <string name="wifi_hotspot_password_title" msgid="9096340919454296786">"Contraseña del punto de acceso"</string>
-    <string name="wifi_hotspot_ap_band_title" msgid="560262446129195042">"Banda del punto de acceso"</string>
     <string name="wifi_hotspot_auto_off_title" msgid="8855711787485504882">"Desactivar Compartir Internet automáticamente"</string>
     <string name="wifi_hotspot_auto_off_summary" msgid="8283656069997871354">"Cuando no hay dispositivos conectados"</string>
     <string name="wifi_hotspot_maximize_compatibility" msgid="6494125684420024058">"Ampliar compatibilidad"</string>
@@ -1127,8 +1126,7 @@
     <string name="adaptive_sleep_privacy" msgid="7664570136417980556">"La función Pantalla atenta usa la cámara frontal para detectar si hay alguien mirando la pantalla. Funciona solo en el propio dispositivo y las imágenes no se almacenan ni se envían a Google."</string>
     <string name="adaptive_sleep_contextual_slice_title" msgid="7467588613212629758">"Activa Pantalla atenta"</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"Mantiene la pantalla encendida al mirarla"</string>
-    <!-- no translation found for power_consumption_footer_summary (4901490700555257237) -->
-    <skip />
+    <string name="power_consumption_footer_summary" msgid="4901490700555257237">"Un tiempo de espera de la pantalla más largo consumirá más batería."</string>
     <string name="auto_rotate_camera_lock_title" msgid="5369003176695105872">"La cámara está bloqueada"</string>
     <string name="auto_rotate_camera_lock_summary" msgid="5699491516271544672">"La cámara tiene que estar desbloqueada para usar Detección de caras"</string>
     <string name="adaptive_sleep_camera_lock_summary" msgid="8417541183603618098">"La cámara debe estar desbloqueada para activar la función de pantalla atenta"</string>
@@ -1259,6 +1257,10 @@
     <string name="imei_multi_sim" msgid="9001570420423929507">"IMEI (ranura de SIM <xliff:g id="IMEI_SLOT_ID">%1$d</xliff:g>)"</string>
     <string name="imei_multi_sim_primary" msgid="7914653040843734282">"IMEI (ranura de SIM <xliff:g id="IMEI_SLOT_ID_PRIMARY">%1$d</xliff:g>, primario)"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"Para verla, selecciona una red guardada"</string>
+    <!-- no translation found for status_imei (5719752369250485007) -->
+    <skip />
+    <!-- no translation found for status_imei_sv (6908985558726440951) -->
+    <skip />
     <string name="status_min_number" msgid="4492899165438225714">"MIN"</string>
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"Versión de PRL"</string>
@@ -1452,16 +1454,6 @@
     <string name="tether_settings_summary_all" msgid="7565193614882005775">"Compartir Internet, USB, Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"No se está compartiendo Internet con otros dispositivos"</string>
     <string name="tether_preference_summary_off" msgid="6266799346319794630">"Desactivado"</string>
-    <string name="tethering_interface_options" msgid="7575535888135143650">"Compartir conexión"</string>
-    <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"No usar Compartir Internet"</string>
-    <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"Compartir Internet solo mediante USB"</string>
-    <string name="disable_wifi_hotspot_when_bluetooth_on" msgid="4711723299880116345">"Compartir Internet solo mediante Bluetooth"</string>
-    <string name="disable_wifi_hotspot_when_ethernet_on" msgid="4123242400542103599">"Compartir Internet solo por Ethernet"</string>
-    <string name="disable_wifi_hotspot_when_usb_and_bluetooth_on" msgid="5258774769658150180">"Compartir Internet solo mediante USB y Bluetooth"</string>
-    <string name="disable_wifi_hotspot_when_usb_and_ethernet_on" msgid="7126313562907225612">"Compartir Internet solo por USB y Ethernet"</string>
-    <string name="disable_wifi_hotspot_when_bluetooth_and_ethernet_on" msgid="2943464651349235967">"Compartir Internet solo por Bluetooth y Ethernet"</string>
-    <string name="disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on" msgid="3934609816834760008">"Compartir Internet solo por USB, Bluetooth y Ethernet"</string>
-    <string name="usb_title" msgid="1157283449840612901">"USB"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"Compartir conexión por USB"</string>
     <string name="bluetooth_tether_checkbox_text" msgid="6108398414967813545">"Compartir conexión por Bluetooth"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Compartir conexión por Ethernet"</string>
@@ -2051,6 +2043,10 @@
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Colgar con botón de encendido"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="5508351959249876801">"Cursor del ratón grande"</string>
     <string name="accessibility_toggle_large_pointer_icon_summary" msgid="1480527946039237705">"Haz más visible el cursor del ratón"</string>
+    <!-- no translation found for accessibility_force_invert_title (5015366813138748407) -->
+    <skip />
+    <!-- no translation found for accessibility_force_invert_summary (1882329675950887268) -->
+    <skip />
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Quitar animaciones"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Reduce el movimiento de la pantalla"</string>
     <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"Audio en mono"</string>
@@ -2240,12 +2236,9 @@
     <string name="accessibility_service_action_perform_description" msgid="7807832069800034738">"Puede registrar tus interacciones con una aplicación o un sensor de hardware, así como interactuar con las aplicaciones en tu nombre."</string>
     <string name="accessibility_dialog_button_allow" msgid="8274918676473216697">"Permitir"</string>
     <string name="accessibility_dialog_button_deny" msgid="2037249860078259284">"Denegar"</string>
-    <!-- no translation found for accessibility_dialog_button_stop (7584815613743292151) -->
-    <skip />
-    <!-- no translation found for accessibility_dialog_button_cancel (8625997437316659966) -->
-    <skip />
-    <!-- no translation found for disable_service_title (8178020230162342801) -->
-    <skip />
+    <string name="accessibility_dialog_button_stop" msgid="7584815613743292151">"Desactivar"</string>
+    <string name="accessibility_dialog_button_cancel" msgid="8625997437316659966">"Dejar activado"</string>
+    <string name="disable_service_title" msgid="8178020230162342801">"¿Desactivar <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="accessibility_no_services_installed" msgid="3725569493860028593">"No se ha instalado ningún servicio."</string>
     <string name="accessibility_no_service_selected" msgid="1310596127128379897">"No se ha seleccionado ningún servicio"</string>
     <string name="accessibility_service_default_description" msgid="7801435825448138526">"No se ha especificado ninguna descripción."</string>
@@ -2585,8 +2578,6 @@
     <string name="emergency_tone_title" msgid="6673118505206685168">"Señal de llamada de emergencia"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"Establecer comportamiento al realizar una llamada de emergencia"</string>
     <string name="privacy_settings_title" msgid="6437057228255974577">"Copia de seguridad"</string>
-    <string name="backup_summary_state_on" msgid="9018954639693085240">"Activada"</string>
-    <string name="backup_summary_state_off" msgid="5341339397224835909">"Desactivado"</string>
     <string name="backup_section_title" msgid="6539706829848457794">"Copia de seguridad y restauración"</string>
     <string name="personal_data_section_title" msgid="6368610168625722682">"Datos personales"</string>
     <string name="backup_data_title" msgid="507663517227498525">"Copia de seguridad de mis datos"</string>
@@ -2772,8 +2763,7 @@
     <string name="vpn_require_connection" msgid="1027347404470060998">"Bloquear conexiones sin VPN"</string>
     <string name="vpn_require_connection_title" msgid="4186758487822779039">"¿Requerir una conexión VPN?"</string>
     <string name="vpn_insecure_dialog_subtitle" msgid="1857621742868835300">"No es segura. Cambia a una VPN IKEv2."</string>
-    <!-- no translation found for vpn_start_unsupported (7139925503292269904) -->
-    <skip />
+    <string name="vpn_start_unsupported" msgid="7139925503292269904">"No se ha podido iniciar la VPN no compatible."</string>
     <string name="vpn_lockdown_summary" msgid="4700625960550559029">"Selecciona un perfil de VPN para permanecer conectado de forma continua. Solo se permitirá el tráfico de red cuando estés conectado a esta red VPN."</string>
     <string name="vpn_lockdown_none" msgid="455915403560910517">"Ninguno"</string>
     <string name="vpn_lockdown_config_error" msgid="1992071316416371316">"Las redes VPN activadas continuamente requieren una dirección IP para el servidor y el DNS."</string>
@@ -4329,6 +4319,8 @@
     <string name="change_nfc_tag_apps_detail_summary" msgid="3338220223868942195">"Permite que esta aplicación se inicie al escanear una etiqueta NFC.\nSi este permiso está activado, la aplicación estará disponible como opción siempre que se detecte una etiqueta."</string>
     <string name="media_output_title" msgid="8283629315159510680">"Reproducir contenido multimedia en"</string>
     <string name="media_output_label_title" msgid="4139048973886819148">"Reproducir <xliff:g id="LABEL">%s</xliff:g> en"</string>
+    <!-- no translation found for media_output_title_without_playing (3339321669132875821) -->
+    <skip />
     <string name="media_output_default_summary" msgid="4200343059396412376">"Este dispositivo"</string>
     <string name="media_out_summary_ongoing_call_state" msgid="475188726850090363">"No disponible durante las llamadas"</string>
     <string name="take_call_on_title" msgid="1159417893879946757">"Atender llamada en"</string>

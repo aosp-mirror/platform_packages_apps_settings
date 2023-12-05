@@ -383,9 +383,9 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Рекомендуємо використовувати захисну плівку чи скло, що мають позначку \"Створено для Google\". Якщо вони не матимуть такої позначки, відбиток пальця дитини може не розпізнаватися."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"Розблокування годинником"</string>
-    <string name="biometric_settings_intro_with_activeunlock" msgid="6583248094453119314">"Якщо ви налаштуєте розблокування за допомогою фейс-контролю й відбитка пальця, телефон запитуватиме ваш відбиток пальця, коли ви в масці або навколо вас темно.\n\nЯкщо не вдається розпізнати ваше обличчя або відбиток пальця, ви можете розблокувати пристрій за допомогою годинника."</string>
-    <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"Якщо ваш відбиток пальця не вдається розпізнати, ви можете розблокувати пристрій за допомогою годинника."</string>
-    <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"Якщо ваше обличчя не вдається розпізнати, ви можете розблокувати пристрій за допомогою годинника."</string>
+    <string name="biometric_settings_intro_with_activeunlock" msgid="5032953826653108646">"Якщо ви налаштуєте розблокування за допомогою фейс-контролю й відбитком пальця, телефон запитуватиме ваш відбиток пальця, коли темно або у вас на обличчі маска.\n\nРозблокування годинником – ще один зручний спосіб розблоковувати цей телефон (наприклад, коли у вас мокрі руки чи пристрій не може розпізнати ваше обличчя)."</string>
+    <string name="biometric_settings_intro_with_fingerprint" msgid="5881355884547769337">"Розблокування годинником – ще один зручний спосіб розблоковувати цей телефон (наприклад, коли пристрій не може розпізнати ваш відбиток пальця)."</string>
+    <string name="biometric_settings_intro_with_face" msgid="7671919122230588521">"Розблокування годинником – ще один зручний спосіб розблоковувати цей телефон (наприклад, коли пристрій не може розпізнати ваше обличчя)."</string>
     <string name="biometric_settings_use_fingerprint_or_watch_for" msgid="1160830065613858095">"Використовувати відбиток пальця або годинник для"</string>
     <string name="biometric_settings_use_face_or_watch_for" msgid="1507077107150278532">"Використовувати фейс-контроль або годинник для"</string>
     <string name="biometric_settings_use_face_fingerprint_or_watch_for" msgid="7495835723072020641">"Використовувати фейс-контроль, відбиток пальця або годинник для"</string>
@@ -1011,7 +1011,6 @@
     <string name="wifi_hotspot_no_password_subtext" msgid="3685689196772398783">"Пароль не налаштовано"</string>
     <string name="wifi_hotspot_name_title" msgid="6633480190014369846">"Назва точки доступу"</string>
     <string name="wifi_hotspot_password_title" msgid="9096340919454296786">"Пароль точки доступу"</string>
-    <string name="wifi_hotspot_ap_band_title" msgid="560262446129195042">"Діапазон частот точки доступу"</string>
     <string name="wifi_hotspot_auto_off_title" msgid="8855711787485504882">"Вимикати точку доступу автоматично"</string>
     <string name="wifi_hotspot_auto_off_summary" msgid="8283656069997871354">"Коли немає підключених пристроїв"</string>
     <string name="wifi_hotspot_maximize_compatibility" msgid="6494125684420024058">"Розширити сумісність"</string>
@@ -1127,8 +1126,7 @@
     <string name="adaptive_sleep_privacy" msgid="7664570136417980556">"Адаптивний сплячий режим за допомогою передньої камери визначає, чи дивиться користувач на екран. Ця функція працює лише на пристрої, не зберігає зображень і не надсилає їх у Google."</string>
     <string name="adaptive_sleep_contextual_slice_title" msgid="7467588613212629758">"Увімкнути адаптивний сплячий режим"</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"Не вимикати екран, поки ви на нього дивитеся"</string>
-    <!-- no translation found for power_consumption_footer_summary (4901490700555257237) -->
-    <skip />
+    <string name="power_consumption_footer_summary" msgid="4901490700555257237">"Якщо вибрати довший час вимкнення екрана, акумулятор розряджатиметься швидше."</string>
     <string name="auto_rotate_camera_lock_title" msgid="5369003176695105872">"Камеру заблоковано"</string>
     <string name="auto_rotate_camera_lock_summary" msgid="5699491516271544672">"Щоб розпізнавання облич працювало, потрібно розблокувати камеру"</string>
     <string name="adaptive_sleep_camera_lock_summary" msgid="8417541183603618098">"Для роботи адаптивного сплячого режиму потрібно розблокувати камеру"</string>
@@ -1259,6 +1257,10 @@
     <string name="imei_multi_sim" msgid="9001570420423929507">"IMEI (гніздо <xliff:g id="IMEI_SLOT_ID">%1$d</xliff:g> для SIM-карти)"</string>
     <string name="imei_multi_sim_primary" msgid="7914653040843734282">"IMEI (гніздо <xliff:g id="IMEI_SLOT_ID_PRIMARY">%1$d</xliff:g> для SIM-карти) (основний)"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"Щоб переглянути, виберіть збережену мережу"</string>
+    <!-- no translation found for status_imei (5719752369250485007) -->
+    <skip />
+    <!-- no translation found for status_imei_sv (6908985558726440951) -->
+    <skip />
     <string name="status_min_number" msgid="4492899165438225714">"MIN"</string>
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"Версія PRL"</string>
@@ -1452,16 +1454,6 @@
     <string name="tether_settings_summary_all" msgid="7565193614882005775">"Точка доступу, USB, Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"Інші пристрої не мають доступу до Інтернету"</string>
     <string name="tether_preference_summary_off" msgid="6266799346319794630">"Вимкнено"</string>
-    <string name="tethering_interface_options" msgid="7575535888135143650">"Використання телефона як модема"</string>
-    <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"Не використовувати точку доступу Wi‑Fi"</string>
-    <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"Надавати доступ до Інтернету тільки через USB"</string>
-    <string name="disable_wifi_hotspot_when_bluetooth_on" msgid="4711723299880116345">"Надавати доступ до Інтернету тільки через Bluetooth"</string>
-    <string name="disable_wifi_hotspot_when_ethernet_on" msgid="4123242400542103599">"Надавати доступ до Інтернету лише через Ethernet"</string>
-    <string name="disable_wifi_hotspot_when_usb_and_bluetooth_on" msgid="5258774769658150180">"Надавати доступ до Інтернету тільки через USB та Bluetooth"</string>
-    <string name="disable_wifi_hotspot_when_usb_and_ethernet_on" msgid="7126313562907225612">"Надавати доступ до Інтернету лише через USB й Ethernet"</string>
-    <string name="disable_wifi_hotspot_when_bluetooth_and_ethernet_on" msgid="2943464651349235967">"Надавати доступ до Інтернету лише через Bluetooth і Ethernet"</string>
-    <string name="disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on" msgid="3934609816834760008">"Надавати доступ до Інтернету лише через USB, Bluetooth і Ethernet"</string>
-    <string name="usb_title" msgid="1157283449840612901">"USB"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"USB-модем"</string>
     <string name="bluetooth_tether_checkbox_text" msgid="6108398414967813545">"Bluetooth-модем"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Ethernet-модем"</string>
@@ -2051,6 +2043,10 @@
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Кнопка живлення закінчує виклик"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="5508351959249876801">"Великий курсор"</string>
     <string name="accessibility_toggle_large_pointer_icon_summary" msgid="1480527946039237705">"Курсор миші стане помітнішим"</string>
+    <!-- no translation found for accessibility_force_invert_title (5015366813138748407) -->
+    <skip />
+    <!-- no translation found for accessibility_force_invert_summary (1882329675950887268) -->
+    <skip />
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Вимкнути анімацію"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Кількість рухомих об’єктів на екрані зменшиться"</string>
     <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"Монофонічне аудіо"</string>
@@ -2582,8 +2578,6 @@
     <string name="emergency_tone_title" msgid="6673118505206685168">"Сигнал екстреного виклику"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"Устан. поведінку при розміщ. аварійного виклику"</string>
     <string name="privacy_settings_title" msgid="6437057228255974577">"Резервне копіювання"</string>
-    <string name="backup_summary_state_on" msgid="9018954639693085240">"Увімкнено"</string>
-    <string name="backup_summary_state_off" msgid="5341339397224835909">"Вимкнено"</string>
     <string name="backup_section_title" msgid="6539706829848457794">"Резервне копіювання та відновлення"</string>
     <string name="personal_data_section_title" msgid="6368610168625722682">"Особисті дані"</string>
     <string name="backup_data_title" msgid="507663517227498525">"Резервне копіювання даних"</string>
@@ -4325,6 +4319,8 @@
     <string name="change_nfc_tag_apps_detail_summary" msgid="3338220223868942195">"Дозвольте цьому додатку запускатися під час сканування NFC-міток.\nЯкщо цей дозвіл ввімкнено, у разі виявлення мітки додаток відображатиметься серед доступних опцій."</string>
     <string name="media_output_title" msgid="8283629315159510680">"Де відтворювати мультимедіа"</string>
     <string name="media_output_label_title" msgid="4139048973886819148">"Як відтворювати <xliff:g id="LABEL">%s</xliff:g>:"</string>
+    <!-- no translation found for media_output_title_without_playing (3339321669132875821) -->
+    <skip />
     <string name="media_output_default_summary" msgid="4200343059396412376">"Цей пристрій"</string>
     <string name="media_out_summary_ongoing_call_state" msgid="475188726850090363">"Недоступно під час викликів"</string>
     <string name="take_call_on_title" msgid="1159417893879946757">"Прийняти виклик на"</string>
