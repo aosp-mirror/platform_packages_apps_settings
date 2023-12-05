@@ -16,10 +16,6 @@
 
 package com.android.settings.connecteddevice.audiosharing.audiostreams.qrcode;
 
-import static com.android.settingslib.bluetooth.BluetoothBroadcastUtils.EXTRA_BLUETOOTH_DEVICE_SINK;
-import static com.android.settingslib.bluetooth.BluetoothBroadcastUtils.EXTRA_BLUETOOTH_SINK_IS_GROUP;
-
-import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -43,9 +39,6 @@ import com.android.settingslib.bluetooth.BluetoothUtils;
 public class QrCodeScanModeActivity extends QrCodeScanModeBaseActivity {
     private static final boolean DEBUG = BluetoothUtils.D;
     private static final String TAG = "QrCodeScanModeActivity";
-
-    private boolean mIsGroupOp;
-    private BluetoothDevice mSink;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,8 +81,6 @@ public class QrCodeScanModeActivity extends QrCodeScanModeBaseActivity {
             Log.d(TAG, "showQrCodeScannerFragment");
         }
 
-        mSink = intent.getParcelableExtra(EXTRA_BLUETOOTH_DEVICE_SINK);
-        mIsGroupOp = intent.getBooleanExtra(EXTRA_BLUETOOTH_SINK_IS_GROUP, false);
         if (DEBUG) {
             Log.d(TAG, "get extra from intent");
         }
