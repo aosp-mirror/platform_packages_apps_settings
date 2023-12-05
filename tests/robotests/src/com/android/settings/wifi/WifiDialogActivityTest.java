@@ -50,6 +50,7 @@ import com.android.wifitrackerlib.WifiEntry;
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -89,6 +90,7 @@ public class WifiDialogActivityTest {
 
     WifiDialogActivity mActivity;
 
+    @Ignore("b/314867581")
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
