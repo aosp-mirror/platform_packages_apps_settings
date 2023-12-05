@@ -28,7 +28,6 @@ import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import com.android.settings.R
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
-import com.android.settingslib.spa.framework.compose.LifecycleEffect
 import com.android.settingslib.spa.widget.scaffold.RegularScaffold
 import com.android.settingslib.spaprivileged.model.app.toRoute
 import com.android.settingslib.spaprivileged.template.app.AppInfoProvider
@@ -54,7 +53,7 @@ object CloneAppInfoSettingsProvider : SettingsPageProvider {
             PackageInfoPresenter(context, packageName, userId, coroutineScope)
         }
         CloneAppInfoSettings(packageInfoPresenter)
-        packageInfoPresenter.PackageRemoveDetector()
+        packageInfoPresenter.PackageFullyRemovedEffect()
     }
 
     @Composable
@@ -70,7 +69,6 @@ object CloneAppInfoSettingsProvider : SettingsPageProvider {
 
 @Composable
 private fun CloneAppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
-    LifecycleEffect(onStart = { packageInfoPresenter.reloadPackageInfo() })
     val packageInfo = packageInfoPresenter.flow.collectAsStateWithLifecycle().value ?: return
     RegularScaffold(
             title = stringResource(R.string.application_info_label),

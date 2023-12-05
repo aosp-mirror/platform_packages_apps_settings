@@ -24,7 +24,8 @@
         android:key="audio_streams_scan_qr_code"
         android:title="@string/bluetooth_find_broadcast_button_scan"
         android:icon="@drawable/ic_add_24dp"
-        android:summary="@string/audio_streams_qr_code_summary" />
+        android:summary="@string/audio_streams_qr_code_summary"
+        settings:controller="com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsScanQrCodeController" />
 
     <Preference
         android:key="audio_streams_active_device"
