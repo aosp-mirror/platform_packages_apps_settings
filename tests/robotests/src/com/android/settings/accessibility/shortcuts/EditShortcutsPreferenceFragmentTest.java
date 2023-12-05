@@ -16,7 +16,6 @@
 
 package com.android.settings.accessibility.shortcuts;
 
-
 import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL;
 
 import static com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_COMPONENT_NAME;
@@ -416,6 +415,7 @@ public class EditShortcutsPreferenceFragmentTest {
                         /* themeResId= */ 0, Lifecycle.State.INITIALIZED);
         scenario.onFragment(fragment -> {
             Intent intent = fragment.requireActivity().getIntent();
+            intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE, SCREEN_TITLE);
             fragment.requireActivity().setIntent(createSuwIntent(intent, isInSuw));
             // Since the fragment is attached before we have a chance
             // to modify the activity's intent; initialize controllers again
