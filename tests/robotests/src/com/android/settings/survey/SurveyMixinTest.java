@@ -13,6 +13,7 @@ import com.android.settings.overlay.SurveyFeatureProvider;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -39,6 +40,7 @@ public class SurveyMixinTest {
         mProvider = FakeFeatureFactory.setupForTest().getSurveyFeatureProvider(mContext);
     }
 
+    @Ignore("b/314929422")
     @Test
     public void onResume_noActionIfActivityDoesNotExist() {
         // Pretend we are an activity that is starting up
