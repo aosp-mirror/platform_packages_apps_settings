@@ -95,4 +95,9 @@ public class GrammaticalGenderPreferenceController extends DeveloperOptionsPrefe
         listPreference.setValue(mListValues[index]);
         listPreference.setSummary(mListSummaries[index]);
     }
+
+    @Override
+    public boolean isAvailable() {
+        return android.app.Flags.systemTermsOfAddressEnabled();
+    }
 }
