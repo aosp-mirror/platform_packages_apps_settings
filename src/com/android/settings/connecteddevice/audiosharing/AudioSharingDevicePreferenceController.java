@@ -27,6 +27,8 @@ import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
@@ -39,6 +41,7 @@ import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.bluetooth.BluetoothCallback;
+import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LeAudioProfile;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast;
@@ -54,6 +57,7 @@ import java.util.concurrent.Executors;
 
 public class AudioSharingDevicePreferenceController extends BasePreferenceController
         implements DefaultLifecycleObserver, DevicePreferenceCallback, BluetoothCallback {
+    private static final boolean DEBUG = BluetoothUtils.D;
 
     private static final String TAG = "AudioSharingDevicePrefController";
     private static final String KEY = "audio_sharing_device_list";
@@ -372,19 +376,31 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
                             + " non le audio device");
             return;
         }
+        if (DEBUG) {
+            Log.d(
+                    TAG,
+                    "Start handling onProfileConnectionStateChanged for "
+                            + cachedDevice.getDevice().getAnonymizedAddress());
+        }
         if (!isLeAudioSupported) {
             // Handle connected ineligible (non LE audio) remote device
             if (isBroadcasting()) {
                 // Show stop audio sharing dialog when an ineligible (non LE audio) remote device
                 // connected during a sharing session.
+                closeOpeningDialogs();
                 AudioSharingStopDialogFragment.show(
                         mFragment,
                         cachedDevice.getName(),
-                        () -> {
-                            mBroadcast.stopBroadcast(mBroadcast.getLatestBroadcastId());
-                        });
+                        () -> mBroadcast.stopBroadcast(mBroadcast.getLatestBroadcastId()));
+            } else {
+                // Do nothing for ineligible (non LE audio) remote device when no sharing session.
+                if (DEBUG) {
+                    Log.d(
+                            TAG,
+                            "Ignore onProfileConnectionStateChanged for non LE audio without"
+                                + " sharing session");
+                }
             }
-            // Do nothing for ineligible (non LE audio) remote device when no sharing session.
         } else {
             Map<Integer, List<CachedBluetoothDevice>> groupedDevices =
                     AudioSharingUtils.fetchConnectedDevicesByGroupId(mLocalBtManager);
@@ -398,6 +414,7 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
                 // Show audio sharing switch dialog when the third eligible (LE audio) remote device
                 // connected during a sharing session.
                 if (deviceItemsInSharingSession.size() >= 2) {
+                    closeOpeningDialogs();
                     AudioSharingDisconnectDialogFragment.show(
                             mFragment,
                             deviceItemsInSharingSession,
@@ -421,6 +438,7 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
                 } else {
                     // Show audio sharing join dialog when the first or second eligible (LE audio)
                     // remote device connected during a sharing session.
+                    closeOpeningDialogs();
                     AudioSharingJoinDialogFragment.show(
                             mFragment,
                             deviceItemsInSharingSession,
@@ -447,6 +465,7 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
                 // Show audio sharing join dialog when the second eligible (LE audio) remote device
                 // connect and no sharing session.
                 if (deviceItems.size() == 1) {
+                    closeOpeningDialogs();
                     AudioSharingJoinDialogFragment.show(
                             mFragment,
                             deviceItems,
@@ -522,6 +541,17 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
                             + "to the device: "
                             + sink.getAnonymizedAddress());
             mAssistant.addSource(sink, broadcastMetadata, /* isGroupOp= */ false);
+        }
+    }
+
+    private void closeOpeningDialogs() {
+        if (mFragment == null) return;
+        List<Fragment> fragments = mFragment.getChildFragmentManager().getFragments();
+        for (Fragment fragment : fragments) {
+            if (fragment instanceof DialogFragment) {
+                Log.d(TAG, "Remove staled opening dialog " + fragment.getTag());
+                ((DialogFragment) fragment).dismiss();
+            }
         }
     }
 }
