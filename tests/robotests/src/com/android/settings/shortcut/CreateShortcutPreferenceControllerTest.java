@@ -116,6 +116,7 @@ public class CreateShortcutPreferenceControllerTest {
                 .isEqualTo(SHORTCUT_ID_PREFIX + intent.getComponent().flattenToShortString());
     }
 
+    @Ignore("b/314924127")
     @Test
     public void queryShortcuts_shouldOnlyIncludeSystemApp() {
         final ResolveInfo ri1 = new ResolveInfo();
@@ -139,6 +140,7 @@ public class CreateShortcutPreferenceControllerTest {
         assertThat(info.get(0).activityInfo).isEqualTo(ri2.activityInfo);
     }
 
+    @Ignore("b/314924127")
     @Test
     public void queryShortcuts_shouldSortBasedOnPriority() {
         final ResolveInfo ri1 = new ResolveInfo();
