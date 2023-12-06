@@ -119,16 +119,19 @@ object AppInfoSettingsProvider : SettingsPageProvider {
 
 @Composable
 private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
-    val packageInfo = packageInfoPresenter.flow.collectAsStateWithLifecycle().value ?:return
-    val app = checkNotNull(packageInfo.applicationInfo)
+    val packageInfoState = packageInfoPresenter.flow.collectAsStateWithLifecycle()
     val featureFlags: FeatureFlags = FeatureFlagsImpl()
     RegularScaffold(
         title = stringResource(R.string.application_info_label),
         actions = {
-            if (featureFlags.archiving()) TopBarAppLaunchButton(packageInfoPresenter, app)
-            AppInfoSettingsMoreOptions(packageInfoPresenter, app)
+            packageInfoState.value?.applicationInfo?.let { app ->
+                if (featureFlags.archiving()) TopBarAppLaunchButton(packageInfoPresenter, app)
+                AppInfoSettingsMoreOptions(packageInfoPresenter, app)
+            }
         }
     ) {
+        val packageInfo = packageInfoState.value ?: return@RegularScaffold
+        val app = packageInfo.applicationInfo ?: return@RegularScaffold
         val appInfoProvider = remember(packageInfo) { AppInfoProvider(packageInfo) }
 
         appInfoProvider.AppInfo()
