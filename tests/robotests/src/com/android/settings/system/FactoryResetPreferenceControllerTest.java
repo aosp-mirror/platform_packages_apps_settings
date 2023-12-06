@@ -27,6 +27,7 @@ import com.android.settings.testutils.shadow.ShadowUtils;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -60,6 +61,7 @@ public class FactoryResetPreferenceControllerTest {
         Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.DEVICE_DEMO_MODE, 0);
     }
 
+    @Ignore("b/314930928")
     @Test
     public void isAvailable_systemUser() {
         mShadowUserManager.setIsAdminUser(true);

@@ -56,13 +56,11 @@ public class AudioSharingStopDialogFragment extends InstrumentedDialogFragment {
         if (!AudioSharingUtils.isFeatureEnabled()) return;
         final FragmentManager manager = host.getChildFragmentManager();
         sListener = listener;
-        if (manager.findFragmentByTag(TAG) == null) {
-            final Bundle bundle = new Bundle();
-            bundle.putString(BUNDLE_KEY_NEW_DEVICE_NAME, newDeviceName);
-            AudioSharingStopDialogFragment dialog = new AudioSharingStopDialogFragment();
-            dialog.setArguments(bundle);
-            dialog.show(manager, TAG);
-        }
+        final Bundle bundle = new Bundle();
+        bundle.putString(BUNDLE_KEY_NEW_DEVICE_NAME, newDeviceName);
+        AudioSharingStopDialogFragment dialog = new AudioSharingStopDialogFragment();
+        dialog.setArguments(bundle);
+        dialog.show(manager, TAG);
     }
 
     @Override

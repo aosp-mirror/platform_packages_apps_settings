@@ -77,15 +77,12 @@ public class AudioSharingDisconnectDialogFragment extends InstrumentedDialogFrag
         if (!AudioSharingUtils.isFeatureEnabled()) return;
         final FragmentManager manager = host.getChildFragmentManager();
         sListener = listener;
-        if (manager.findFragmentByTag(TAG) == null) {
-            final Bundle bundle = new Bundle();
-            bundle.putParcelableArrayList(BUNDLE_KEY_DEVICE_TO_DISCONNECT_ITEMS, deviceItems);
-            bundle.putString(BUNDLE_KEY_NEW_DEVICE_NAME, newDeviceName);
-            AudioSharingDisconnectDialogFragment dialog =
-                    new AudioSharingDisconnectDialogFragment();
-            dialog.setArguments(bundle);
-            dialog.show(manager, TAG);
-        }
+        final Bundle bundle = new Bundle();
+        bundle.putParcelableArrayList(BUNDLE_KEY_DEVICE_TO_DISCONNECT_ITEMS, deviceItems);
+        bundle.putString(BUNDLE_KEY_NEW_DEVICE_NAME, newDeviceName);
+        AudioSharingDisconnectDialogFragment dialog = new AudioSharingDisconnectDialogFragment();
+        dialog.setArguments(bundle);
+        dialog.show(manager, TAG);
     }
 
     @Override
