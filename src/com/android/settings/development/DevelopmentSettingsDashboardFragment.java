@@ -688,6 +688,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new HardwareLayersUpdatesPreferenceController(context));
         controllers.add(new DebugGpuOverdrawPreferenceController(context));
         controllers.add(new DebugNonRectClipOperationsPreferenceController(context));
+        controllers.add(new GameDefaultFrameRatePreferenceController(context));
         controllers.add(new ForceDarkPreferenceController(context));
         controllers.add(new EnableBlursPreferenceController(context));
         controllers.add(new ForceMSAAPreferenceController(context));
