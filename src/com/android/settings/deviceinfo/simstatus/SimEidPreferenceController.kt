@@ -21,16 +21,24 @@ import android.util.Log
 import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
 import com.android.settings.R
 import com.android.settings.core.BasePreferenceController
 import com.android.settings.deviceinfo.PhoneNumberUtil
 import com.android.settings.network.SubscriptionUtil
-import com.android.settings.network.telephony.TelephonyPreferenceDialog
+import com.android.settingslib.CustomDialogPreferenceCompat
 import com.android.settingslib.Utils
 import com.android.settingslib.qrcode.QrCodeGenerator
 import com.android.settingslib.spaprivileged.framework.common.userManager
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * This is to show a preference regarding EID of SIM card.
@@ -41,7 +49,8 @@ class SimEidPreferenceController(context: Context, preferenceKey: String) :
     BasePreferenceController(context, preferenceKey) {
     private var slotSimStatus: SlotSimStatus? = null
     private var eidStatus: EidStatus? = null
-    private lateinit var preference: TelephonyPreferenceDialog
+    private lateinit var preference: CustomDialogPreferenceCompat
+    private var coroutineScope: CoroutineScope? = null
     private lateinit var eid: String
 
     fun init(slotSimStatus: SlotSimStatus?, eidStatus: EidStatus?) {
@@ -49,21 +58,48 @@ class SimEidPreferenceController(context: Context, preferenceKey: String) :
         this.eidStatus = eidStatus
     }
 
-    override fun getAvailabilityStatus(): Int {
-        if (!SubscriptionUtil.isSimHardwareVisible(mContext)) return UNSUPPORTED_ON_DEVICE
-        eid = eidStatus?.eid ?: ""
-        val isAvailable = mContext.userManager.isAdminUser &&
-            !Utils.isWifiOnly(mContext) &&
-            eid.isNotEmpty()
-        return if (isAvailable) AVAILABLE else CONDITIONALLY_UNAVAILABLE
-    }
+    /**
+     * Returns available here, if SIM hardware is visible.
+     *
+     * Also check [getIsAvailableAndUpdateEid] for other availability check which retrieved
+     * asynchronously later.
+     */
+    override fun getAvailabilityStatus() =
+        if (SubscriptionUtil.isSimHardwareVisible(mContext)) AVAILABLE else UNSUPPORTED_ON_DEVICE
 
     override fun displayPreference(screen: PreferenceScreen) {
         super.displayPreference(screen)
         preference = screen.findPreference(preferenceKey)!!
-        val title = getTitle()
-        preference.title = title
-        preference.dialogTitle = title
+    }
+
+    override fun onViewCreated(viewLifecycleOwner: LifecycleOwner) {
+        coroutineScope = viewLifecycleOwner.lifecycleScope
+        coroutineScope?.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                update()
+            }
+        }
+    }
+
+    private suspend fun update() {
+        val isAvailable = withContext(Dispatchers.Default) {
+            getIsAvailableAndUpdateEid()
+        }
+        preference.isVisible = isAvailable
+        if (isAvailable) {
+            val title = withContext(Dispatchers.Default) {
+                getTitle()
+            }
+            preference.title = title
+            preference.dialogTitle = title
+            updateDialog()
+        }
+    }
+
+    private fun getIsAvailableAndUpdateEid(): Boolean {
+        if (!mContext.userManager.isAdminUser || Utils.isWifiOnly(mContext)) return false
+        eid = eidStatus?.eid ?: ""
+        return eid.isNotEmpty()
     }
 
     /** Constructs title string. */
@@ -82,13 +118,7 @@ class SimEidPreferenceController(context: Context, preferenceKey: String) :
         return mContext.getString(R.string.status_eid)
     }
 
-    override fun updateState(preference: Preference?) {
-        super.updateState(preference)
-
-        updateDialog()
-    }
-
-    private fun updateDialog() {
+    private suspend fun updateDialog() {
         val dialog = preference.dialog ?: return
         dialog.window?.setFlags(
             WindowManager.LayoutParams.FLAG_SECURE,
@@ -106,11 +136,17 @@ class SimEidPreferenceController(context: Context, preferenceKey: String) :
     }
 
     override fun handlePreferenceTreeClick(preference: Preference): Boolean {
-        if (preference.key == preferenceKey) {
-            this.preference.setOnShowListener { updateDialog() }
-            return true
+        if (preference.key != preferenceKey) return false
+        this.preference.setOnShowListener {
+            coroutineScope?.launch { updateDialog() }
         }
-        return super.handlePreferenceTreeClick(preference)
+        return true
+    }
+
+    override fun updateNonIndexableKeys(keys: MutableList<String>) {
+        if (!isAvailable() || !getIsAvailableAndUpdateEid()) {
+            keys += preferenceKey
+        }
     }
 
     companion object {
@@ -122,11 +158,13 @@ class SimEidPreferenceController(context: Context, preferenceKey: String) :
          * @param eid is the EID string
          * @return a Bitmap of QR code
          */
-        private fun getEidQrCode(eid: String): Bitmap? = try {
-            QrCodeGenerator.encodeQrCode(eid, QR_CODE_SIZE)
-        } catch (exception: Exception) {
-            Log.w(TAG, "Error when creating QR code width $QR_CODE_SIZE", exception)
-            null
+        private suspend fun getEidQrCode(eid: String): Bitmap? = withContext(Dispatchers.Default) {
+            try {
+                QrCodeGenerator.encodeQrCode(contents = eid, size = QR_CODE_SIZE)
+            } catch (exception: Exception) {
+                Log.w(TAG, "Error when creating QR code width $QR_CODE_SIZE", exception)
+                null
+            }
         }
     }
 }
