@@ -93,6 +93,7 @@ import com.android.settingslib.widget.TwoTargetPreference;
 import com.google.android.setupdesign.util.DeviceHelper;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -876,6 +877,8 @@ public class FingerprintSettings extends SubSettings {
         @Override
         protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
             if (!isFingerprintHardwareDetected(context)) {
+                Log.e(TAG, "Fingerprint hardware is not detected");
+                mControllers = Collections.emptyList();
                 return null;
             }
 
