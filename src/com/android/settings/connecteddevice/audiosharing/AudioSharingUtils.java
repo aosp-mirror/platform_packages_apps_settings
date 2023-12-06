@@ -29,6 +29,7 @@ import com.android.settings.flags.Flags;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
+import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.utils.ThreadUtils;
@@ -297,5 +298,21 @@ public class AudioSharingUtils {
                             + targetDevice.getDevice().getAnonymizedAddress());
             targetDevice.setActive();
         }
+    }
+
+    /** Returns if the broadcast is on-going. */
+    public static boolean isBroadcasting(LocalBluetoothManager manager) {
+        if (manager == null) return false;
+        LocalBluetoothLeBroadcast broadcast =
+                manager.getProfileManager().getLeAudioBroadcastProfile();
+        return broadcast != null && broadcast.isEnabled(null);
+    }
+
+    /** Stops the latest broadcast. */
+    public static void stopBroadcasting(LocalBluetoothManager manager) {
+        if (manager == null) return;
+        LocalBluetoothLeBroadcast broadcast =
+                manager.getProfileManager().getLeAudioBroadcastProfile();
+        broadcast.stopBroadcast(broadcast.getLatestBroadcastId());
     }
 }
