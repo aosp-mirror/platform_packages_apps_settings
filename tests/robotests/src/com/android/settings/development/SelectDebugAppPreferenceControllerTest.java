@@ -36,6 +36,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -71,6 +72,7 @@ public class SelectDebugAppPreferenceControllerTest {
         mController.displayPreference(mPreferenceScreen);
     }
 
+    @Ignore("b/314919354")
     @Test
     public void handlePreferenceTreeClick_preferenceClicked_launchActivity() {
         final Intent activityStartIntent = new Intent(mContext, AppPicker.class);

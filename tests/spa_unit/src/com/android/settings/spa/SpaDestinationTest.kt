@@ -20,26 +20,34 @@ import android.app.Activity
 import android.content.ComponentName
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
-import android.content.pm.PackageManager.ComponentInfoFlags
+import android.os.Bundle
 import androidx.core.os.bundleOf
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.android.settings.spa.SpaBridgeActivity.Companion.META_DATA_KEY_DESTINATION
-import com.android.settings.spa.SpaBridgeActivity.Companion.getDestination
+import com.android.settings.SettingsActivity.META_DATA_KEY_HIGHLIGHT_MENU_KEY
+import com.android.settings.spa.SpaDestination.Companion.META_DATA_KEY_DESTINATION
+import com.android.settings.spa.SpaDestination.Companion.getDestination
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.any
+import org.mockito.kotlin.doAnswer
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.eq
 import org.mockito.kotlin.mock
 
 @RunWith(AndroidJUnit4::class)
-class SpaBridgeActivityTest {
+class SpaDestinationTest {
+    private var activityMetadata: Bundle = bundleOf()
+
     private val mockPackageManager = mock<PackageManager> {
-        on { getActivityInfo(eq(COMPONENT_NAME), any<ComponentInfoFlags>()) } doReturn
-            ActivityInfo().apply {
-                metaData = bundleOf(META_DATA_KEY_DESTINATION to DESTINATION)
-            }
+        on {
+            getActivityInfo(
+                eq(COMPONENT_NAME),
+                any<PackageManager.ComponentInfoFlags>()
+            )
+        } doAnswer {
+            ActivityInfo().apply { metaData = activityMetadata }
+        }
     }
 
     private val activity = mock<Activity> {
@@ -48,10 +56,35 @@ class SpaBridgeActivityTest {
     }
 
     @Test
-    fun getDestination() {
+    fun getDestination_noDestination_returnNull() {
+        activityMetadata = bundleOf()
+
         val destination = activity.getDestination()
 
+        assertThat(destination).isNull()
+    }
+
+    @Test
+    fun getDestination_withoutHighlightMenuKey() {
+        activityMetadata = bundleOf(META_DATA_KEY_DESTINATION to DESTINATION)
+
+        val (destination, highlightMenuKey) = activity.getDestination()!!
+
         assertThat(destination).isEqualTo(DESTINATION)
+        assertThat(highlightMenuKey).isNull()
+    }
+
+    @Test
+    fun getDestination_withHighlightMenuKey() {
+        activityMetadata = bundleOf(
+            META_DATA_KEY_DESTINATION to DESTINATION,
+            META_DATA_KEY_HIGHLIGHT_MENU_KEY to HIGHLIGHT_MENU_KEY,
+        )
+
+        val (destination, highlightMenuKey) = activity.getDestination()!!
+
+        assertThat(destination).isEqualTo(DESTINATION)
+        assertThat(highlightMenuKey).isEqualTo(HIGHLIGHT_MENU_KEY)
     }
 
     private companion object {
@@ -59,5 +92,6 @@ class SpaBridgeActivityTest {
         const val ACTIVITY_NAME = "ActivityName"
         val COMPONENT_NAME = ComponentName(PACKAGE_NAME, ACTIVITY_NAME)
         const val DESTINATION = "Destination"
+        const val HIGHLIGHT_MENU_KEY = "apps"
     }
 }

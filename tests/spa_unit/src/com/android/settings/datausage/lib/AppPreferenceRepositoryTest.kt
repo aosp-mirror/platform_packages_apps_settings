@@ -21,6 +21,7 @@ import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
 import android.os.UserHandle
+import android.util.IconDrawableFactory
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth.assertThat
@@ -43,7 +44,9 @@ class AppPreferenceRepositoryTest {
         on { packageManager } doReturn packageManager
     }
 
-    private val repository = AppPreferenceRepository(context)
+    private val mockIconDrawableFactory = mock<IconDrawableFactory>()
+
+    private val repository = AppPreferenceRepository(context, mockIconDrawableFactory)
 
     @Test
     fun loadAppPreferences_packageNotFound_returnEmpty() {
@@ -61,8 +64,10 @@ class AppPreferenceRepositoryTest {
     @Test
     fun loadAppPreferences_packageFound_returnPreference() {
         val app = mock<ApplicationInfo> {
-            on { loadUnbadgedIcon(any()) } doReturn UNBADGED_ICON
             on { loadLabel(any()) } doReturn LABEL
+        }
+        mockIconDrawableFactory.stub {
+            on { getBadgedIcon(app) } doReturn UNBADGED_ICON
         }
         packageManager.stub {
             on {

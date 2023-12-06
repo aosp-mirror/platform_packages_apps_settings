@@ -1741,6 +1741,8 @@
                         android:targetActivity=".spa.SpaBridgeActivity">
             <meta-data android:name="com.android.settings.spa.DESTINATION"
                        android:value="TogglePermissionAppList/UseFullScreenIntent"/>
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_apps"/>
         </activity-alias>
 
         <activity-alias android:name="AppManageFullScreenIntent"
@@ -1753,6 +1755,8 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.spa.DESTINATION"
                        android:value="TogglePermissionAppInfoPage/UseFullScreenIntent"/>
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_apps"/>
         </activity-alias>
 
         <activity android:name=".applications.InstalledAppOpenByDefaultActivity"
@@ -4967,6 +4971,8 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.spa.DESTINATION"
                        android:value="UsageStats"/>
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_apps"/>
         </activity-alias>
 
         <!-- [b/197780098] Disable eager initialization of Jetpack libraries. -->

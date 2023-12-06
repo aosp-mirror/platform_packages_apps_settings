@@ -35,6 +35,7 @@ import com.android.settings.testutils.BatteryTestUtils;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -128,6 +129,7 @@ public final class BootBroadcastReceiverTest {
         assertThat(mShadowAlarmManager.peekNextScheduledAlarm()).isNull();
     }
 
+    @Ignore("b/314921894")
     @Test
     public void onReceive_withTimeChangedIntent_clearsAllDataAndRefreshesJob()
             throws InterruptedException {

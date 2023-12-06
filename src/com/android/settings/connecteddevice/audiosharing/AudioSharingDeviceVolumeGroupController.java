@@ -23,6 +23,7 @@ import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
 import android.bluetooth.BluetoothVolumeControl;
 import android.content.Context;
+import android.media.AudioManager;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -36,10 +37,12 @@ import com.android.settings.bluetooth.BluetoothDeviceUpdater;
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.VolumeControlProfile;
+import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -48,6 +51,7 @@ import java.util.concurrent.Executors;
 
 public class AudioSharingDeviceVolumeGroupController extends AudioSharingBasePreferenceController
         implements DevicePreferenceCallback {
+    private static final boolean DEBUG = BluetoothUtils.D;
 
     private static final String TAG = "AudioSharingDeviceVolumeGroupController";
     private static final String KEY = "audio_sharing_device_volume_group";
@@ -190,6 +194,17 @@ public class AudioSharingDeviceVolumeGroupController extends AudioSharingBasePre
     }
 
     @Override
+    public void onDestroy(@NonNull LifecycleOwner owner) {
+        for (var entry : mCallbackMap.entrySet()) {
+            if (DEBUG) {
+                Log.d(TAG, "onDestroy: unregister callback for " + entry.getKey());
+            }
+            mVolumeControl.unregisterCallback(entry.getValue());
+        }
+        mCallbackMap.clear();
+    }
+
+    @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
 
@@ -217,6 +232,9 @@ public class AudioSharingDeviceVolumeGroupController extends AudioSharingBasePre
             BluetoothVolumeControl.Callback callback =
                     buildVcCallback((AudioSharingDeviceVolumePreference) preference);
             mCallbackMap.put(preference, callback);
+            if (DEBUG) {
+                Log.d(TAG, "onDeviceAdded: register callback for " + preference);
+            }
             mVolumeControl.registerCallback(mExecutor, callback);
         }
     }
@@ -228,6 +246,9 @@ public class AudioSharingDeviceVolumeGroupController extends AudioSharingBasePre
             mPreferenceGroup.setVisible(false);
         }
         if (mVolumeControl != null && mCallbackMap.containsKey(preference)) {
+            if (DEBUG) {
+                Log.d(TAG, "onDeviceRemoved: unregister callback for " + preference);
+            }
             mVolumeControl.unregisterCallback(mCallbackMap.get(preference));
             mCallbackMap.remove(preference);
         }
@@ -266,16 +287,41 @@ public class AudioSharingDeviceVolumeGroupController extends AudioSharingBasePre
             @Override
             public void onDeviceVolumeChanged(
                     @android.annotation.NonNull BluetoothDevice device,
-                    @IntRange(from = 0, to = 255) int volume) {
-                Log.d(TAG, "onDeviceVolumeChanged changed " + device.getAnonymizedAddress());
+                    @IntRange(from = -255, to = 255) int volume) {
                 CachedBluetoothDevice cachedDevice =
                         mLocalBtManager.getCachedDeviceManager().findDevice(device);
                 if (cachedDevice == null) return;
                 if (preference.getCachedDevice() != null
                         && preference.getCachedDevice().getGroupId() == cachedDevice.getGroupId()) {
-                    preference.setProgress(volume);
+                    // If the callback return invalid volume, try to get the volume from
+                    // AudioManager.STREAM_MUSIC
+                    int finalVolume = getAudioVolumeIfNeeded(volume);
+                    Log.d(
+                            TAG,
+                            "onDeviceVolumeChanged: set volume to "
+                                    + finalVolume
+                                    + " for "
+                                    + device.getAnonymizedAddress());
+                    ThreadUtils.postOnMainThread(
+                            () -> {
+                                preference.setProgress(finalVolume);
+                            });
                 }
             }
         };
+    }
+
+    private int getAudioVolumeIfNeeded(int volume) {
+        if (volume >= 0) return volume;
+        try {
+            AudioManager audioManager = mContext.getSystemService(AudioManager.class);
+            int max = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+            int min = audioManager.getStreamMinVolume(AudioManager.STREAM_MUSIC);
+            return Math.round(
+                    audioManager.getStreamVolume(AudioManager.STREAM_MUSIC) * 255f / (max - min));
+        } catch (RuntimeException e) {
+            Log.e(TAG, "Fail to fetch current music stream volume, error = " + e);
+            return volume;
+        }
     }
 }
