@@ -840,9 +840,13 @@ public class ToggleScreenMagnificationPreferenceFragment extends
      */
     public static CharSequence getServiceSummary(Context context) {
         // Get the user shortcut type from settings provider.
-        final int uerShortcutType = getUserShortcutTypeFromSettings(context);
-        return (uerShortcutType != AccessibilityUtil.UserShortcutType.EMPTY)
+        final int userShortcutType = getUserShortcutTypeFromSettings(context);
+        final CharSequence featureState =
+                (userShortcutType != AccessibilityUtil.UserShortcutType.EMPTY)
                 ? context.getText(R.string.accessibility_summary_shortcut_enabled)
                 : context.getText(R.string.generic_accessibility_feature_shortcut_off);
+        final CharSequence featureSummary = context.getText(R.string.magnification_feature_summary);
+        return context.getString(R.string.preference_summary_default_combination,
+                featureState, featureSummary);
     }
 }

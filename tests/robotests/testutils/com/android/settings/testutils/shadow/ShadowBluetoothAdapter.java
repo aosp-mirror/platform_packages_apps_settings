@@ -31,6 +31,8 @@ public class ShadowBluetoothAdapter extends org.robolectric.shadows.ShadowBlueto
     private int mState;
     private List<Integer> mSupportedProfiles = new ArrayList<>();
     private List<BluetoothDevice> mMostRecentlyConnectedDevices = new ArrayList<>();
+    private int mIsLeAudioBroadcastSourceSupported;
+    private int mIsLeAudioBroadcastAssistantSupported;
 
     @Implementation
     protected List<Integer> getSupportedProfiles() {
@@ -66,5 +68,23 @@ public class ShadowBluetoothAdapter extends org.robolectric.shadows.ShadowBlueto
 
     public void setMostRecentlyConnectedDevices(List<BluetoothDevice> list) {
         mMostRecentlyConnectedDevices = list;
+    }
+
+    @Implementation
+    protected int isLeAudioBroadcastSourceSupported() {
+        return mIsLeAudioBroadcastSourceSupported;
+    }
+
+    public void setIsLeAudioBroadcastSourceSupported(int isSupported) {
+        mIsLeAudioBroadcastSourceSupported = isSupported;
+    }
+
+    @Implementation
+    protected int isLeAudioBroadcastAssistantSupported() {
+        return mIsLeAudioBroadcastAssistantSupported;
+    }
+
+    public void setIsLeAudioBroadcastAssistantSupported(int isSupported) {
+        mIsLeAudioBroadcastAssistantSupported = isSupported;
     }
 }

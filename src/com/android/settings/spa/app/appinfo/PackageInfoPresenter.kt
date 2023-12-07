@@ -26,6 +26,7 @@ import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.os.UserHandle
 import android.util.Log
+import androidx.annotation.VisibleForTesting
 import androidx.compose.runtime.Composable
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settings.spa.app.startUninstallActivity
@@ -40,6 +41,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.merge
@@ -65,18 +67,42 @@ class PackageInfoPresenter(
     val userContext by lazy { context.asUser(userHandle) }
     val userPackageManager: PackageManager by lazy { userContext.packageManager }
 
-    val flow: StateFlow<PackageInfo?> = merge(
-        flowOf(null), // kick an initial value
-        context.broadcastReceiverAsUserFlow(
-            intentFilter = IntentFilter().apply {
-                addAction(Intent.ACTION_PACKAGE_CHANGED)
-                addAction(Intent.ACTION_PACKAGE_REPLACED)
-                addAction(Intent.ACTION_PACKAGE_RESTARTED)
-                addDataScheme("package")
-            },
-            userHandle = userHandle,
-        ),
-    ).map { getPackageInfo() }
+    private val appChangeFlow = context.broadcastReceiverAsUserFlow(
+        intentFilter = IntentFilter().apply {
+            // App enabled / disabled
+            addAction(Intent.ACTION_PACKAGE_CHANGED)
+
+            // App archived
+            addAction(Intent.ACTION_PACKAGE_REMOVED)
+
+            // App updated / the updates are uninstalled (system app)
+            addAction(Intent.ACTION_PACKAGE_REPLACED)
+
+            // App force-stopped
+            addAction(Intent.ACTION_PACKAGE_RESTARTED)
+
+            addDataScheme("package")
+        },
+        userHandle = userHandle,
+    ).filter(::isInterestedAppChange).filter(::isForThisApp)
+
+    @VisibleForTesting
+    fun isInterestedAppChange(intent: Intent) = when {
+        intent.action != Intent.ACTION_PACKAGE_REMOVED -> true
+
+        // filter out the fully removed case, in which the page will be closed, so no need to
+        // refresh
+        intent.getBooleanExtra(Intent.EXTRA_DATA_REMOVED, false) -> false
+
+        // filter out the updates are uninstalled (system app), which will followed by a replacing
+        // broadcast, we can refresh at that time
+        intent.getBooleanExtra(Intent.EXTRA_REPLACING, false) -> false
+
+        else -> true // App archived
+    }
+
+    val flow: StateFlow<PackageInfo?> = merge(flowOf(null), appChangeFlow)
+        .map { getPackageInfo() }
         .stateIn(coroutineScope + Dispatchers.Default, SharingStarted.Eagerly, null)
 
     /**
@@ -89,11 +115,13 @@ class PackageInfoPresenter(
         }
         val navController = LocalNavController.current
         DisposableBroadcastReceiverAsUser(intentFilter, userHandle) { intent ->
-            if (packageName == intent.data?.schemeSpecificPart) {
+            if (isForThisApp(intent)) {
                 navController.navigateBack()
             }
         }
     }
+
+    private fun isForThisApp(intent: Intent) = packageName == intent.data?.schemeSpecificPart
 
     /** Enables this package. */
     fun enable() {
