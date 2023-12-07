@@ -18,8 +18,6 @@ package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
 import static java.util.Collections.emptyList;
 
-import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothLeAudioContentMetadata;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
 import android.content.Context;
@@ -35,19 +33,12 @@ import com.android.settings.bluetooth.Utils;
 import com.android.settings.connecteddevice.audiosharing.AudioSharingUtils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.bluetooth.BluetoothUtils;
-import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
-import com.android.settingslib.bluetooth.LocalBluetoothManager;
-import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 import com.android.settingslib.utils.ThreadUtils;
 
-import com.google.common.base.Strings;
-
-import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
-import java.util.stream.Stream;
 
 import javax.annotation.Nullable;
 
@@ -58,17 +49,17 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
 
     private final Executor mExecutor;
     private final AudioStreamsBroadcastAssistantCallback mBroadcastAssistantCallback;
-    private final LocalBluetoothManager mBluetoothManager;
+    private final AudioStreamsHelper mAudioStreamsHelper;
     private final @Nullable LocalBluetoothLeBroadcastAssistant mLeBroadcastAssistant;
     private final ConcurrentHashMap<Integer, AudioStreamPreference> mBroadcastIdToPreferenceMap =
             new ConcurrentHashMap<>();
-    private @Nullable AudioStreamsProgressCategoryPreference mCategoryPreference;
+    private AudioStreamsProgressCategoryPreference mCategoryPreference;
 
     public AudioStreamsProgressCategoryController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         mExecutor = Executors.newSingleThreadExecutor();
-        mBluetoothManager = Utils.getLocalBtManager(mContext);
-        mLeBroadcastAssistant = getLeBroadcastAssistant(mBluetoothManager);
+        mAudioStreamsHelper = new AudioStreamsHelper(Utils.getLocalBtManager(mContext));
+        mLeBroadcastAssistant = mAudioStreamsHelper.getLeBroadcastAssistant();
         mBroadcastAssistantCallback = new AudioStreamsBroadcastAssistantCallback(this);
     }
 
@@ -104,14 +95,10 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
                     // Display currently connected streams
                     var unused =
                             ThreadUtils.postOnBackgroundThread(
-                                    () -> {
-                                        for (var sink :
-                                                getActiveSinksOnAssistant(mBluetoothManager)) {
-                                            mLeBroadcastAssistant
-                                                    .getAllSources(sink)
-                                                    .forEach(this::addSourceConnected);
-                                        }
-                                    });
+                                    () ->
+                                            mAudioStreamsHelper
+                                                    .getAllSources()
+                                                    .forEach(this::handleSourceConnected));
                 });
     }
 
@@ -140,31 +127,36 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
                 });
     }
 
-    void addSourceFound(BluetoothLeBroadcastMetadata source) {
-        Preference.OnPreferenceClickListener onClickListener =
+    void handleSourceFound(BluetoothLeBroadcastMetadata source) {
+        Preference.OnPreferenceClickListener addSourceOrShowDialog =
                 preference -> {
                     if (DEBUG) {
                         Log.d(TAG, "preferenceClicked(): attempt to join broadcast");
                     }
-
-                    // TODO(chelseahao): add source to sink
+                    if (source.isEncrypted()) {
+                        ThreadUtils.postOnMainThread(
+                                () -> launchPasswordDialog(source, preference));
+                    } else {
+                        mAudioStreamsHelper.addSource(source);
+                    }
                     return true;
                 };
         mBroadcastIdToPreferenceMap.computeIfAbsent(
                 source.getBroadcastId(),
                 k -> {
-                    var p = createPreference(source, onClickListener);
+                    var preference = AudioStreamPreference.fromMetadata(mContext, source);
                     ThreadUtils.postOnMainThread(
                             () -> {
+                                preference.setIsConnected(false, addSourceOrShowDialog);
                                 if (mCategoryPreference != null) {
-                                    mCategoryPreference.addPreference(p);
+                                    mCategoryPreference.addPreference(preference);
                                 }
                             });
-                    return p;
+                    return preference;
                 });
     }
 
-    void removeSourceLost(int broadcastId) {
+    void handleSourceLost(int broadcastId) {
         var toRemove = mBroadcastIdToPreferenceMap.remove(broadcastId);
         if (toRemove != null) {
             ThreadUtils.postOnMainThread(
@@ -174,92 +166,43 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
                         }
                     });
         }
-        // TODO(chelseahao): remove source from sink
+        mAudioStreamsHelper.removeSource();
     }
 
-    private void addSourceConnected(BluetoothLeBroadcastReceiveState state) {
+    void handleSourceConnected(BluetoothLeBroadcastReceiveState state) {
+        // TODO(chelseahao): only continue when the state indicates a successful connection
         mBroadcastIdToPreferenceMap.compute(
                 state.getBroadcastId(),
                 (k, v) -> {
-                    if (v == null) {
-                        // Create a new preference as the source has not been added.
-                        var p = createPreference(state);
-                        ThreadUtils.postOnMainThread(
-                                () -> {
-                                    if (mCategoryPreference != null) {
-                                        mCategoryPreference.addPreference(p);
-                                    }
-                                });
-                        return p;
-                    } else {
-                        // This source has been added either by scanning, or it's currently
-                        // connected to another active sink. Update its connection status to true
-                        // if needed.
-                        ThreadUtils.postOnMainThread(() -> v.setIsConnected(true, null));
-                        return v;
-                    }
+                    // True if this source has been added either by scanning, or it's currently
+                    // connected to another active sink.
+                    boolean existed = v != null;
+                    AudioStreamPreference preference =
+                            existed ? v : AudioStreamPreference.fromReceiveState(mContext, state);
+
+                    ThreadUtils.postOnMainThread(
+                            () -> {
+                                preference.setIsConnected(
+                                        true, p -> launchDetailFragment((AudioStreamPreference) p));
+                                if (mCategoryPreference != null && !existed) {
+                                    mCategoryPreference.addPreference(preference);
+                                }
+                            });
+
+                    return preference;
                 });
-    }
-
-    private AudioStreamPreference createPreference(
-            BluetoothLeBroadcastMetadata source,
-            Preference.OnPreferenceClickListener onPreferenceClickListener) {
-        AudioStreamPreference preference = new AudioStreamPreference(mContext, /* attrs= */ null);
-        preference.setTitle(
-                source.getSubgroups().stream()
-                        .map(s -> s.getContentMetadata().getProgramInfo())
-                        .filter(i -> !Strings.isNullOrEmpty(i))
-                        .findFirst()
-                        .orElse("Broadcast Id: " + source.getBroadcastId()));
-        preference.setIsConnected(false, onPreferenceClickListener);
-        return preference;
-    }
-
-    private AudioStreamPreference createPreference(BluetoothLeBroadcastReceiveState state) {
-        AudioStreamPreference preference = new AudioStreamPreference(mContext, /* attrs= */ null);
-        preference.setTitle(
-                state.getSubgroupMetadata().stream()
-                        .map(BluetoothLeAudioContentMetadata::getProgramInfo)
-                        .filter(i -> !Strings.isNullOrEmpty(i))
-                        .findFirst()
-                        .orElse("Broadcast Id: " + state.getBroadcastId()));
-        preference.setIsConnected(true, null);
-        return preference;
-    }
-
-    private static List<BluetoothDevice> getActiveSinksOnAssistant(LocalBluetoothManager manager) {
-        if (manager == null) {
-            Log.w(TAG, "getActiveSinksOnAssistant(): LocalBluetoothManager is null!");
-            return emptyList();
-        }
-        return AudioSharingUtils.getActiveSinkOnAssistant(manager)
-                .map(
-                        cachedBluetoothDevice ->
-                                Stream.concat(
-                                                Stream.of(cachedBluetoothDevice.getDevice()),
-                                                cachedBluetoothDevice.getMemberDevice().stream()
-                                                        .map(CachedBluetoothDevice::getDevice))
-                                        .toList())
-                .orElse(emptyList());
-    }
-
-    private static @Nullable LocalBluetoothLeBroadcastAssistant getLeBroadcastAssistant(
-            LocalBluetoothManager manager) {
-        if (manager == null) {
-            Log.w(TAG, "getLeBroadcastAssistant(): LocalBluetoothManager is null!");
-            return null;
-        }
-
-        LocalBluetoothProfileManager profileManager = manager.getProfileManager();
-        if (profileManager == null) {
-            Log.w(TAG, "getLeBroadcastAssistant(): LocalBluetoothProfileManager is null!");
-            return null;
-        }
-
-        return profileManager.getLeAudioBroadcastAssistantProfile();
     }
 
     void showToast(String msg) {
         AudioSharingUtils.toastMessage(mContext, msg);
+    }
+
+    private boolean launchDetailFragment(AudioStreamPreference preference) {
+        // TODO(chelseahao): impl
+        return true;
+    }
+
+    private void launchPasswordDialog(BluetoothLeBroadcastMetadata source, Preference preference) {
+        // TODO(chelseahao): impl
     }
 }
