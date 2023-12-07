@@ -91,7 +91,7 @@
     <string name="bluetooth_devices_card_off_title" msgid="1320149821945129127">"Bluetooth on pois päältä"</string>
     <string name="bluetooth_devices_card_off_summary" msgid="2276527382891105858">"Laita se päälle napauttamalla"</string>
     <string name="device_picker" msgid="2427027896389445414">"Valitse Bluetooth-laite"</string>
-    <string name="bluetooth_ask_enablement" msgid="1529030199895339199">"<xliff:g id="APP_NAME">%1$s</xliff:g> haluaa ottaa Bluetoothin käyttöön."</string>
+    <string name="bluetooth_ask_enablement" msgid="1529030199895339199">"<xliff:g id="APP_NAME">%1$s</xliff:g> haluaa laittaa Bluetoothin päälle."</string>
     <string name="bluetooth_ask_disablement" msgid="1879788777942714761">"<xliff:g id="APP_NAME">%1$s</xliff:g> haluaa poistaa Bluetoothin käytöstä."</string>
     <string name="bluetooth_ask_enablement_no_name" msgid="5091401961637405417">"Sovellus haluaa ottaa Bluetoothin käyttöön."</string>
     <string name="bluetooth_ask_disablement_no_name" msgid="382299750909188822">"Sovellus haluaa poistaa Bluetoothin käytöstä."</string>
@@ -383,9 +383,9 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Saat parhaan lopputuloksen käyttämällä Made For Google ‑sertifioitua näytönsuojusta. Lapsesi sormenjälki ei välttämättä toimi muiden näytönsuojusten kanssa."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"Kellon avaus"</string>
-    <string name="biometric_settings_intro_with_activeunlock" msgid="6583248094453119314">"Otettuasi kasvojentunnistus- ja sormenjälkiavauksen käyttöön puhelimesi pyytää sormenjälkeäsi, kun käytät maskia tai olet pimeässä ympäristössä.\n\nVoit avata lukituksen kellolla, jos kasvojasi tai sormenjälkeäsi ei tunnisteta."</string>
-    <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"Voit avata lukituksen kellolla, jos sormenjälkeäsi ei tunnisteta."</string>
-    <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"Voit avata lukituksen kellolla, jos kasvojasi ei tunnisteta."</string>
+    <string name="biometric_settings_intro_with_activeunlock" msgid="5032953826653108646">"Otettuasi kasvojentunnistus- ja sormenjälkiavauksen käyttöön puhelimesi pyytää sormenjälkeäsi, kun käytät maskia tai olet pimeässä ympäristössä.\n\nKellon avaus on kätevä tapa avata puhelin, esimerkiksi jos sormesi ovat kastuneet tai kasvojen tunnistus ei onnistu."</string>
+    <string name="biometric_settings_intro_with_fingerprint" msgid="5881355884547769337">"Kellon avaus on kätevä tapa avata puhelin, esimerkiksi jos sormenjäljen tunnistus ei onnistu."</string>
+    <string name="biometric_settings_intro_with_face" msgid="7671919122230588521">"Kellon avaus on kätevä tapa avata puhelin, esimerkiksi jos kasvojen tunnistus ei onnistu."</string>
     <string name="biometric_settings_use_fingerprint_or_watch_for" msgid="1160830065613858095">"Käytä sormenjälkeä tai kelloa:"</string>
     <string name="biometric_settings_use_face_or_watch_for" msgid="1507077107150278532">"Käytä kasvoja tai kelloa:"</string>
     <string name="biometric_settings_use_face_fingerprint_or_watch_for" msgid="7495835723072020641">"Käytä kasvoja, sormenjälkeä tai kelloa:"</string>
@@ -1011,7 +1011,6 @@
     <string name="wifi_hotspot_no_password_subtext" msgid="3685689196772398783">"Ei salasanaa"</string>
     <string name="wifi_hotspot_name_title" msgid="6633480190014369846">"Hotspotin nimi"</string>
     <string name="wifi_hotspot_password_title" msgid="9096340919454296786">"Hotspotin salasana"</string>
-    <string name="wifi_hotspot_ap_band_title" msgid="560262446129195042">"AP-taajuus"</string>
     <string name="wifi_hotspot_auto_off_title" msgid="8855711787485504882">"Laita hotspot pois päältä automaattisesti"</string>
     <string name="wifi_hotspot_auto_off_summary" msgid="8283656069997871354">"Kun laitteita ei ole yhdistettynä"</string>
     <string name="wifi_hotspot_maximize_compatibility" msgid="6494125684420024058">"Laajenna yhteensopivuus"</string>
@@ -1127,8 +1126,7 @@
     <string name="adaptive_sleep_privacy" msgid="7664570136417980556">"Huomionäyttö näkee etukameralla, katsooko joku näyttöä. Ominaisuus toimii laitteella, eikä kuvia ikinä tallenneta tai lähetetä Googlelle."</string>
     <string name="adaptive_sleep_contextual_slice_title" msgid="7467588613212629758">"Laita huomionäyttö päälle"</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"Pidä näyttö päällä, kun sitä katsotaan"</string>
-    <!-- no translation found for power_consumption_footer_summary (4901490700555257237) -->
-    <skip />
+    <string name="power_consumption_footer_summary" msgid="4901490700555257237">"Jos näytön aikakatkaisulla on pitkä kesto, akkua kuluu enemmän."</string>
     <string name="auto_rotate_camera_lock_title" msgid="5369003176695105872">"Kamera on lukittu"</string>
     <string name="auto_rotate_camera_lock_summary" msgid="5699491516271544672">"Kameran lukitus on avattava kasvojentunnistusta varten"</string>
     <string name="adaptive_sleep_camera_lock_summary" msgid="8417541183603618098">"Kameran lukitus on avattava huomionäyttöä varten"</string>
@@ -1259,6 +1257,10 @@
     <string name="imei_multi_sim" msgid="9001570420423929507">"IMEI-koodi (sim-paikka <xliff:g id="IMEI_SLOT_ID">%1$d</xliff:g>)"</string>
     <string name="imei_multi_sim_primary" msgid="7914653040843734282">"IMEI-koodi (sim-paikka <xliff:g id="IMEI_SLOT_ID_PRIMARY">%1$d</xliff:g>) (ensisijainen)"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"Valitse tallennettu verkko nähdäksesi tämän"</string>
+    <!-- no translation found for status_imei (5719752369250485007) -->
+    <skip />
+    <!-- no translation found for status_imei_sv (6908985558726440951) -->
+    <skip />
     <string name="status_min_number" msgid="4492899165438225714">"MIN"</string>
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"PRL-versio"</string>
@@ -1452,16 +1454,6 @@
     <string name="tether_settings_summary_all" msgid="7565193614882005775">"Hotspot, USB, Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"Internetyhteyttä ei jaeta muille laitteille."</string>
     <string name="tether_preference_summary_off" msgid="6266799346319794630">"Pois päältä"</string>
-    <string name="tethering_interface_options" msgid="7575535888135143650">"Puhelimen käyttäminen modeemina"</string>
-    <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"Älä käytä Wi-Fi-hotspotia"</string>
-    <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"Jaa verkkoyhteys vain USB:n kautta"</string>
-    <string name="disable_wifi_hotspot_when_bluetooth_on" msgid="4711723299880116345">"Jaa verkkoyhteys vain Bluetoothin kautta"</string>
-    <string name="disable_wifi_hotspot_when_ethernet_on" msgid="4123242400542103599">"Jaa verkkoyhteys vain Ethernetin kautta"</string>
-    <string name="disable_wifi_hotspot_when_usb_and_bluetooth_on" msgid="5258774769658150180">"Jaa verkkoyhteys USB:n ja Bluetoothin kautta"</string>
-    <string name="disable_wifi_hotspot_when_usb_and_ethernet_on" msgid="7126313562907225612">"Jaa verkkoyhteys vain USB:n ja Ethernetin kautta"</string>
-    <string name="disable_wifi_hotspot_when_bluetooth_and_ethernet_on" msgid="2943464651349235967">"Jaa verkkoyhteys vain Bluetoothin ja Ethernetin kautta"</string>
-    <string name="disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on" msgid="3934609816834760008">"Jaa verkkoyhteys vain USB:n, Bluetoothin ja Ethernetin kautta"</string>
-    <string name="usb_title" msgid="1157283449840612901">"USB"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"Internetin jakaminen USB:n kautta"</string>
     <string name="bluetooth_tether_checkbox_text" msgid="6108398414967813545">"Jaettu Bluetooth-yhteys"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Ethernetin jakaminen"</string>
@@ -2051,6 +2043,10 @@
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Puhelun katkaisu virtapainikkeella"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="5508351959249876801">"Suuri hiiren osoitin"</string>
     <string name="accessibility_toggle_large_pointer_icon_summary" msgid="1480527946039237705">"Voit muuttaa hiiren osoitinta helpommin huomattavaksi"</string>
+    <!-- no translation found for accessibility_force_invert_title (5015366813138748407) -->
+    <skip />
+    <!-- no translation found for accessibility_force_invert_summary (1882329675950887268) -->
+    <skip />
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Poista animaatiot"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Vähennä näytöllä näkyvää liikettä"</string>
     <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"Monoaudio"</string>
@@ -2582,8 +2578,6 @@
     <string name="emergency_tone_title" msgid="6673118505206685168">"Hätäpuhelun äänimerkki"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"Aseta toiminta hätäpuhelun tapauksessa"</string>
     <string name="privacy_settings_title" msgid="6437057228255974577">"Varmuuskopiointi"</string>
-    <string name="backup_summary_state_on" msgid="9018954639693085240">"Päällä"</string>
-    <string name="backup_summary_state_off" msgid="5341339397224835909">"Ei päällä"</string>
     <string name="backup_section_title" msgid="6539706829848457794">"Varmuuskopiointi &amp; palautus"</string>
     <string name="personal_data_section_title" msgid="6368610168625722682">"Henkilökohtaiset tiedot"</string>
     <string name="backup_data_title" msgid="507663517227498525">"Tietojen varmuuskopiointi"</string>
@@ -4325,6 +4319,8 @@
     <string name="change_nfc_tag_apps_detail_summary" msgid="3338220223868942195">"Salli tämän sovelluksen käynnistyä, kun NFC-tagi skannataan.\nJos tämä lupa myönnetään, sovellus on saatavilla vaihtoehtona aina, kun tagi havaitaan."</string>
     <string name="media_output_title" msgid="8283629315159510680">"Toista mediasisältöä:"</string>
     <string name="media_output_label_title" msgid="4139048973886819148">"Mistä <xliff:g id="LABEL">%s</xliff:g> kuuluu:"</string>
+    <!-- no translation found for media_output_title_without_playing (3339321669132875821) -->
+    <skip />
     <string name="media_output_default_summary" msgid="4200343059396412376">"Tämä laite"</string>
     <string name="media_out_summary_ongoing_call_state" msgid="475188726850090363">"Ei käytettävissä puhelujen aikana"</string>
     <string name="take_call_on_title" msgid="1159417893879946757">"Vastaa puheluun:"</string>
