@@ -20,7 +20,9 @@ import android.app.ActivityManager
 import android.app.settings.SettingsEnums
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
+import android.net.Uri
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.testutils.FakeFeatureFactory
@@ -61,11 +63,57 @@ class PackageInfoPresenterTest {
     private val fakeFeatureFactory = FakeFeatureFactory()
     private val metricsFeatureProvider = fakeFeatureFactory.metricsFeatureProvider
 
+    private val packageInfoPresenter =
+        PackageInfoPresenter(context, PACKAGE_NAME, USER_ID, TestScope(), packageManagers)
+
+    @Test
+    fun isInterestedAppChange_packageChanged_isInterested() {
+        val intent = Intent(Intent.ACTION_PACKAGE_CHANGED).apply {
+            data = Uri.parse("package:$PACKAGE_NAME")
+        }
+
+        val isInterestedAppChange = packageInfoPresenter.isInterestedAppChange(intent)
+
+        assertThat(isInterestedAppChange).isTrue()
+    }
+
+    @Test
+    fun isInterestedAppChange_fullyRemoved_notInterested() {
+        val intent = Intent(Intent.ACTION_PACKAGE_REMOVED).apply {
+            data = Uri.parse("package:$PACKAGE_NAME")
+            putExtra(Intent.EXTRA_DATA_REMOVED, true)
+        }
+
+        val isInterestedAppChange = packageInfoPresenter.isInterestedAppChange(intent)
+
+        assertThat(isInterestedAppChange).isFalse()
+    }
+
+    @Test
+    fun isInterestedAppChange_removedBeforeReplacing_notInterested() {
+        val intent = Intent(Intent.ACTION_PACKAGE_REMOVED).apply {
+            data = Uri.parse("package:$PACKAGE_NAME")
+            putExtra(Intent.EXTRA_REPLACING, true)
+        }
+
+        val isInterestedAppChange = packageInfoPresenter.isInterestedAppChange(intent)
+
+        assertThat(isInterestedAppChange).isFalse()
+    }
+
+    @Test
+    fun isInterestedAppChange_archived_interested() {
+        val intent = Intent(Intent.ACTION_PACKAGE_REMOVED).apply {
+            data = Uri.parse("package:$PACKAGE_NAME")
+        }
+
+        val isInterestedAppChange = packageInfoPresenter.isInterestedAppChange(intent)
+
+        assertThat(isInterestedAppChange).isTrue()
+    }
+
     @Test
     fun enable() = runBlocking {
-        val packageInfoPresenter =
-            PackageInfoPresenter(context, PACKAGE_NAME, USER_ID, TestScope(), packageManagers)
-
         packageInfoPresenter.enable()
         delay(100)
 
@@ -77,9 +125,6 @@ class PackageInfoPresenterTest {
 
     @Test
     fun disable() = runBlocking {
-        val packageInfoPresenter =
-            PackageInfoPresenter(context, PACKAGE_NAME, USER_ID, TestScope(), packageManagers)
-
         packageInfoPresenter.disable()
         delay(100)
 
@@ -91,9 +136,6 @@ class PackageInfoPresenterTest {
 
     @Test
     fun startUninstallActivity() = runBlocking {
-        val packageInfoPresenter =
-            PackageInfoPresenter(context, PACKAGE_NAME, USER_ID, TestScope(), packageManagers)
-
         packageInfoPresenter.startUninstallActivity()
 
         verifyAction(SettingsEnums.ACTION_SETTINGS_UNINSTALL_APP)
@@ -109,9 +151,6 @@ class PackageInfoPresenterTest {
 
     @Test
     fun clearInstantApp() = runBlocking {
-        val packageInfoPresenter =
-            PackageInfoPresenter(context, PACKAGE_NAME, USER_ID, TestScope(), packageManagers)
-
         packageInfoPresenter.clearInstantApp()
         delay(100)
 
@@ -121,9 +160,6 @@ class PackageInfoPresenterTest {
 
     @Test
     fun forceStop() = runBlocking {
-        val packageInfoPresenter =
-            PackageInfoPresenter(context, PACKAGE_NAME, USER_ID, TestScope(), packageManagers)
-
         packageInfoPresenter.forceStop()
         delay(100)
 
@@ -133,9 +169,6 @@ class PackageInfoPresenterTest {
 
     @Test
     fun logAction() = runBlocking {
-        val packageInfoPresenter =
-            PackageInfoPresenter(context, PACKAGE_NAME, USER_ID, TestScope(), packageManagers)
-
         packageInfoPresenter.logAction(123)
 
         verifyAction(123)
@@ -148,5 +181,6 @@ class PackageInfoPresenterTest {
     private companion object {
         const val PACKAGE_NAME = "package.name"
         const val USER_ID = 0
+        val PACKAGE_INFO = PackageInfo()
     }
 }

@@ -29,6 +29,7 @@ import com.android.settings.flags.Flags;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
+import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.utils.ThreadUtils;
@@ -42,6 +43,7 @@ import java.util.stream.Collectors;
 
 public class AudioSharingUtils {
     private static final String TAG = "AudioSharingUtils";
+    private static final boolean DEBUG = BluetoothUtils.D;
 
     /**
      * Fetch {@link CachedBluetoothDevice}s connected to the broadcast assistant. The devices are
@@ -76,6 +78,9 @@ public class AudioSharingUtils {
                 groupedDevices.put(groupId, new ArrayList<>());
             }
             groupedDevices.get(groupId).add(cachedDevice);
+        }
+        if (DEBUG) {
+            Log.d(TAG, "fetchConnectedDevicesByGroupId: " + groupedDevices);
         }
         return groupedDevices;
     }
@@ -221,16 +226,7 @@ public class AudioSharingUtils {
      * @return Whether the device is an active le audio device.
      */
     public static boolean isActiveLeAudioDevice(CachedBluetoothDevice cachedDevice) {
-        if (BluetoothUtils.isActiveLeAudioDevice(cachedDevice)) {
-            return true;
-        }
-        // Return true if member device is an active le audio device.
-        for (CachedBluetoothDevice device : cachedDevice.getMemberDevice()) {
-            if (BluetoothUtils.isActiveLeAudioDevice(device)) {
-                return true;
-            }
-        }
-        return false;
+        return BluetoothUtils.isActiveLeAudioDevice(cachedDevice);
     }
 
     /**
@@ -296,8 +292,27 @@ public class AudioSharingUtils {
             }
         }
         if (targetDevice != null && !isActiveLeAudioDevice(targetDevice)) {
-            Log.d(TAG, "Set active device: " + targetDevice.getDevice().getAnonymizedAddress());
+            Log.d(
+                    TAG,
+                    "updateActiveDeviceIfNeeded, set active device: "
+                            + targetDevice.getDevice().getAnonymizedAddress());
             targetDevice.setActive();
         }
+    }
+
+    /** Returns if the broadcast is on-going. */
+    public static boolean isBroadcasting(LocalBluetoothManager manager) {
+        if (manager == null) return false;
+        LocalBluetoothLeBroadcast broadcast =
+                manager.getProfileManager().getLeAudioBroadcastProfile();
+        return broadcast != null && broadcast.isEnabled(null);
+    }
+
+    /** Stops the latest broadcast. */
+    public static void stopBroadcasting(LocalBluetoothManager manager) {
+        if (manager == null) return;
+        LocalBluetoothLeBroadcast broadcast =
+                manager.getProfileManager().getLeAudioBroadcastProfile();
+        broadcast.stopBroadcast(broadcast.getLatestBroadcastId());
     }
 }
