@@ -21,8 +21,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:filterTouchesWhenObscured="true"
-    app:sucHeaderText="@string/privatespace_setup_title"
-    app:sudDescriptionText="@string/privatespace_hide_apps_summary"
+    app:sucHeaderText="@string/private_space_setup_title"
+    app:sudDescriptionText="@string/private_space_hide_apps_summary"
     android:icon="@drawable/ic_privatespace_icon">
     <ScrollView
         android:id="@+id/main_clear_scrollview"
@@ -43,7 +43,29 @@
             android:src="@drawable/privatespace_placeholder_image"/>
         <TextView
             style="@style/PrivateSpaceSetupSubHeaderStyle"
-            android:text="@string/privatespace_how_title"/>
+            android:text="@string/private_space_how_title"/>
+        <RelativeLayout
+            style="@style/PrivateSpaceSetupBulletPointLayoutStyle">
+            <ImageView
+                android:id="@+id/lockIcon"
+                style="@style/PrivateSpaceBulletPointIconStyle"
+                android:src="@drawable/ic_lock_closed" />
+            <TextView
+                style="@style/PrivateSpaceBulletPointTextFontStyle"
+                android:layout_toRightOf="@+id/lockIcon"
+                android:text="@string/private_space_protected_lock_text"/>
+        </RelativeLayout>
+        <RelativeLayout
+            style="@style/PrivateSpaceSetupBulletPointLayoutStyle">
+            <ImageView
+                android:id="@+id/bellIcon"
+                style="@style/PrivateSpaceBulletPointIconStyle"
+                android:src="@drawable/ic_notifications" />
+            <TextView
+                style="@style/PrivateSpaceBulletPointTextFontStyle"
+                android:layout_toRightOf="@+id/bellIcon"
+                android:text="@string/private_space_hidden_notifications_text"/>
+        </RelativeLayout>
         <RelativeLayout
             style="@style/PrivateSpaceSetupBulletPointLayoutStyle"
             android:layout_width="fill_parent"
@@ -55,29 +77,7 @@
             <TextView
                 style="@style/PrivateSpaceBulletPointTextFontStyle"
                 android:layout_toRightOf="@+id/appsIcon"
-                android:text="@string/privatespace_access_bottom_text"/>
-        </RelativeLayout>
-        <RelativeLayout
-            style="@style/PrivateSpaceSetupBulletPointLayoutStyle">
-            <ImageView
-                android:id="@+id/lockIcon"
-                style="@style/PrivateSpaceBulletPointIconStyle"
-                android:src="@drawable/ic_lock_closed" />
-            <TextView
-                style="@style/PrivateSpaceBulletPointTextFontStyle"
-                android:layout_toRightOf="@+id/lockIcon"
-                android:text="@string/privatespace_protected_lock_text"/>
-        </RelativeLayout>
-        <RelativeLayout
-            style="@style/PrivateSpaceSetupBulletPointLayoutStyle">
-            <ImageView
-                android:id="@+id/bellIcon"
-                style="@style/PrivateSpaceBulletPointIconStyle"
-                android:src="@drawable/ic_notifications" />
-            <TextView
-                style="@style/PrivateSpaceBulletPointTextFontStyle"
-                android:layout_toRightOf="@+id/bellIcon"
-                android:text="@string/privatespace_hidden_notifications_text"/>
+                android:text="@string/private_space_access_bottom_text"/>
         </RelativeLayout>
         <Space
             android:layout_width="wrap_content"
@@ -94,7 +94,7 @@
                 style="@style/PrivateSpaceBulletPointTextFontStyle"
                 android:textSize = "14sp"
                 android:layout_toRightOf="@+id/infoIcon"
-                android:text="@string/privatespace_apps_permission_text"/>
+                android:text="@string/private_space_apps_permission_text"/>
         </RelativeLayout>
     </LinearLayout>
     </ScrollView>

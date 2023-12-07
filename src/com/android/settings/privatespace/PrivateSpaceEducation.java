@@ -50,14 +50,14 @@ public class PrivateSpaceEducation extends InstrumentedFragment {
         final FooterBarMixin mixin = rootView.getMixin(FooterBarMixin.class);
         mixin.setPrimaryButton(
                 new FooterButton.Builder(getContext())
-                        .setText(R.string.privatespace_setup_button_label)
+                        .setText(R.string.private_space_setup_button_label)
                         .setListener(onSetup())
                         .setButtonType(FooterButton.ButtonType.NEXT)
                         .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Primary)
                         .build());
         mixin.setSecondaryButton(
                 new FooterButton.Builder(getContext())
-                        .setText(R.string.privatespace_cancel_label)
+                        .setText(R.string.private_space_cancel_label)
                         .setListener(onCancel())
                         .setButtonType(FooterButton.ButtonType.CANCEL)
                         .setTheme(

@@ -60,14 +60,14 @@ public class PrivateSpaceSetLockFragment extends InstrumentedFragment {
         final FooterBarMixin mixin = rootView.getMixin(FooterBarMixin.class);
         mixin.setPrimaryButton(
                 new FooterButton.Builder(getContext())
-                        .setText(R.string.privatespace_use_screenlock_label)
+                        .setText(R.string.private_space_use_screenlock_label)
                         .setListener(onClickUse())
                         .setButtonType(FooterButton.ButtonType.NEXT)
                         .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Primary)
                         .build());
         mixin.setSecondaryButton(
                 new FooterButton.Builder(getContext())
-                        .setText(R.string.privatespace_set_lock_label)
+                        .setText(R.string.private_space_set_lock_label)
                         .setListener(onClickNewLock())
                         .setButtonType(FooterButton.ButtonType.NEXT)
                         .setTheme(
