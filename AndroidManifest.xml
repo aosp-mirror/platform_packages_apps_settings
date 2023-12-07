@@ -4185,6 +4185,25 @@
                        android:value="@string/menu_key_apps"/>
         </activity>
 
+        <!-- @FlaggedApi("com.android.media.flags.enable_privileged_routing_for_media_routing_control") -->
+        <activity-alias
+            android:name="MediaRoutingControlActivity"
+            android:knownActivityEmbeddingCerts="@array/config_known_host_certs"
+            android:exported="true"
+            android:targetActivity=".spa.SpaBridgeActivity"
+            android:label="@string/media_routing_control_title">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.REQUEST_MEDIA_ROUTING_CONTROL" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.spa.DESTINATION"
+                       android:value="TogglePermissionAppList/MediaRoutingControl"/>
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_apps"/>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
+        </activity-alias>
+
         <!-- Keep compatibility with old WebView-picker implementation -->
         <activity-alias android:name=".WebViewImplementation"
                   android:targetActivity="Settings$WebViewAppPickerActivity"
