@@ -19,7 +19,9 @@ package com.android.settings.notification.zen;
 import static android.app.NotificationManager.EXTRA_AUTOMATIC_RULE_ID;
 
 import android.app.AutomaticZenRule;
+import android.app.Flags;
 import android.app.NotificationManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -100,10 +102,21 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase {
                     public boolean onPreferenceClick(Preference preference) {
                         Bundle bundle = new Bundle();
                         bundle.putString(ZenCustomRuleSettings.RULE_ID, mId);
+
+                        // When modes_api flag is on, we skip the radio button screen distinguishing
+                        // between "default" and "custom" and take users directly to the custom
+                        // settings screen.
+                        String destination = ZenCustomRuleSettings.class.getName();
+                        int sourceMetricsCategory = 0;
+                        if (Flags.modesApi()) {
+                            // From ZenRuleCustomPolicyPreferenceController#launchCustomSettings
+                            destination = ZenCustomRuleConfigSettings.class.getName();
+                            sourceMetricsCategory = SettingsEnums.ZEN_CUSTOM_RULE_SOUND_SETTINGS;
+                        }
                         new SubSettingLauncher(mContext)
-                                .setDestination(ZenCustomRuleSettings.class.getName())
+                                .setDestination(destination)
                                 .setArguments(bundle)
-                                .setSourceMetricsCategory(0) // TODO
+                                .setSourceMetricsCategory(sourceMetricsCategory)
                                 .launch();
                         return true;
                     }
