@@ -207,6 +207,7 @@ public class BatteryDiffDataTest {
                 batteryHistEntry.mAppLabel,
                 batteryHistEntry.mConsumerType,
                 /* foregroundUsageTimeInMs= */ 0,
+                /* foregroundServiceUsageTimeInMs= */ 0,
                 /* backgroundUsageTimeInMs= */ 0,
                 /* screenOnTimeInMs= */ 0,
                 consumePower,

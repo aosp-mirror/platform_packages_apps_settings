@@ -544,6 +544,7 @@ public final class ConvertUtils {
                 batteryUsageDiff.getLabel(),
                 batteryUsageDiff.getConsumerType(),
                 batteryUsageDiff.getForegroundUsageTime(),
+                batteryUsageDiff.getForegroundServiceUsageTime(),
                 batteryUsageDiff.getBackgroundUsageTime(),
                 batteryUsageDiff.getScreenOnTime(),
                 batteryUsageDiff.getConsumePower(),
@@ -612,6 +613,7 @@ public final class ConvertUtils {
                     .setPercentOfTotal(entry.mPercent)
                     .setDrainType(entry.getPowerComponentId())
                     .setForegroundUsageTimeInMs(entry.getTimeInForegroundMs())
+                    .setForegroundServiceUsageTimeInMs(entry.getTimeInForegroundServiceMs())
                     .setBackgroundUsageTimeInMs(entry.getTimeInBackgroundMs());
         }
 

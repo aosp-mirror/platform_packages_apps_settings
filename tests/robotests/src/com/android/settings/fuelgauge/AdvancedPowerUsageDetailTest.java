@@ -49,7 +49,9 @@ import androidx.loader.app.LoaderManager;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.fuelgauge.batteryusage.BatteryDiffEntry;
 import com.android.settings.fuelgauge.batteryusage.BatteryEntry;
+import com.android.settings.fuelgauge.batteryusage.ConvertUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowActivityManager;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
@@ -91,11 +93,10 @@ public class AdvancedPowerUsageDetailTest {
     private static final String USAGE_PERCENT = "16%";
     private static final int ICON_ID = 123;
     private static final int UID = 1;
+    private static final long FOREGROUND_TIME_MS = 444;
+    private static final long FOREGROUND_SERVICE_TIME_MS = 123;
     private static final long BACKGROUND_TIME_MS = 100;
-    private static final long FOREGROUND_ACTIVITY_TIME_MS = 123;
-    private static final long FOREGROUND_SERVICE_TIME_MS = 444;
-    private static final long FOREGROUND_TIME_MS =
-            FOREGROUND_ACTIVITY_TIME_MS + FOREGROUND_SERVICE_TIME_MS;
+    private static final long SCREEN_ON_TIME_MS = 321;
     private static final String KEY_ALLOW_BACKGROUND_USAGE = "allow_background_usage";
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -105,7 +106,6 @@ public class AdvancedPowerUsageDetailTest {
     @Mock private LayoutPreference mHeaderPreference;
     @Mock private ApplicationsState mState;
     @Mock private ApplicationsState.AppEntry mAppEntry;
-    @Mock private Bundle mBundle;
     @Mock private BatteryEntry mBatteryEntry;
     @Mock private PackageManager mPackageManager;
     @Mock private InstallSourceInfo mInstallSourceInfo;
@@ -120,6 +120,8 @@ public class AdvancedPowerUsageDetailTest {
     private SettingsActivity mTestActivity;
     private FakeFeatureFactory mFeatureFactory;
     private MetricsFeatureProvider mMetricsFeatureProvider;
+    private BatteryDiffEntry mBatteryDiffEntry;
+    private Bundle mBundle;
 
     @Before
     public void setUp() {
@@ -131,6 +133,7 @@ public class AdvancedPowerUsageDetailTest {
         mMetricsFeatureProvider = mFeatureFactory.metricsFeatureProvider;
 
         mFragment = spy(new AdvancedPowerUsageDetail());
+        mBundle = spy(new Bundle());
         doReturn(mContext).when(mFragment).getContext();
         doReturn(mActivity).when(mFragment).getActivity();
         doReturn(SUMMARY).when(mFragment).getString(anyInt());
@@ -163,9 +166,34 @@ public class AdvancedPowerUsageDetailTest {
 
         when(mBatteryEntry.getUid()).thenReturn(UID);
         when(mBatteryEntry.getLabel()).thenReturn(APP_LABEL);
-        when(mBatteryEntry.getTimeInBackgroundMs()).thenReturn(BACKGROUND_TIME_MS);
         when(mBatteryEntry.getTimeInForegroundMs()).thenReturn(FOREGROUND_TIME_MS);
+        when(mBatteryEntry.getTimeInForegroundServiceMs()).thenReturn(FOREGROUND_SERVICE_TIME_MS);
+        when(mBatteryEntry.getTimeInBackgroundMs()).thenReturn(BACKGROUND_TIME_MS);
         mBatteryEntry.mIconId = ICON_ID;
+
+        mBatteryDiffEntry =
+                spy(
+                        new BatteryDiffEntry(
+                                mContext,
+                                /* uid= */ UID,
+                                /* userId= */ 0,
+                                /* key= */ "key",
+                                /* isHidden= */ false,
+                                /* componentId= */ -1,
+                                /* legacyPackageName= */ null,
+                                /* legacyLabel= */ null,
+                                /*consumerType*/ ConvertUtils.CONSUMER_TYPE_USER_BATTERY,
+                                /* foregroundUsageTimeInMs= */ FOREGROUND_TIME_MS,
+                                /* foregroundSerUsageTimeInMs= */ FOREGROUND_SERVICE_TIME_MS,
+                                /* backgroundUsageTimeInMs= */ BACKGROUND_TIME_MS,
+                                /* screenOnTimeInMs= */ SCREEN_ON_TIME_MS,
+                                /* consumePower= */ 0,
+                                /* foregroundUsageConsumePower= */ 0,
+                                /* foregroundServiceUsageConsumePower= */ 0,
+                                /* backgroundUsageConsumePower= */ 0,
+                                /* cachedUsageConsumePower= */ 0));
+        when(mBatteryDiffEntry.getAppLabel()).thenReturn(APP_LABEL);
+        when(mBatteryDiffEntry.getAppIconId()).thenReturn(ICON_ID);
 
         mFragment.mHeaderPreference = mHeaderPreference;
         mFragment.mState = mState;
@@ -191,6 +219,7 @@ public class AdvancedPowerUsageDetailTest {
                 .when(mActivity)
                 .startActivityAsUser(captor.capture(), nullable(UserHandle.class));
         doAnswer(callable).when(mActivity).startActivity(captor.capture());
+        doAnswer(callable).when(mContext).startActivity(captor.capture());
 
         mAllowBackgroundUsagePreference = new PrimarySwitchPreference(mContext);
         mAllowBackgroundUsagePreference.setKey(KEY_ALLOW_BACKGROUND_USAGE);
@@ -256,6 +285,7 @@ public class AdvancedPowerUsageDetailTest {
 
     @Test
     public void startBatteryDetailPage_invalidToShowSummary_noFGBDData() {
+        mBundle.clear();
         AdvancedPowerUsageDetail.startBatteryDetailPage(
                 mActivity, mFragment, mBatteryEntry, USAGE_PERCENT);
 
@@ -266,6 +296,35 @@ public class AdvancedPowerUsageDetailTest {
         assertThat(mBundle.getString(AdvancedPowerUsageDetail.EXTRA_POWER_USAGE_PERCENT))
                 .isEqualTo(USAGE_PERCENT);
     }
+
+    @Test
+    public void startBatteryDetailPage_showSummary_hasFGBDData() {
+        final ArgumentCaptor<Intent> captor = ArgumentCaptor.forClass(Intent.class);
+        mBundle.clear();
+        AdvancedPowerUsageDetail.startBatteryDetailPage(
+                mContext,
+                mFragment.getMetricsCategory(),
+                mBatteryDiffEntry,
+                USAGE_PERCENT,
+                /* slotInformation= */ null,
+                /* showTimeInformation= */ true,
+                /* anomalyHintPrefKey= */ null,
+                /* anomalyHintText= */ null);
+
+        verify(mContext).startActivity(captor.capture());
+        assertThat(mBundle.getInt(AdvancedPowerUsageDetail.EXTRA_UID)).isEqualTo(UID);
+        assertThat(mBundle.getLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME))
+                .isEqualTo(BACKGROUND_TIME_MS + FOREGROUND_SERVICE_TIME_MS);
+        assertThat(mBundle.getLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME))
+                .isEqualTo(FOREGROUND_TIME_MS);
+        assertThat(mBundle.getLong(AdvancedPowerUsageDetail.EXTRA_SCREEN_ON_TIME))
+                .isEqualTo(SCREEN_ON_TIME_MS);
+        assertThat(mBundle.getString(AdvancedPowerUsageDetail.EXTRA_POWER_USAGE_PERCENT))
+                .isEqualTo(USAGE_PERCENT);
+        assertThat(mBundle.getString(AdvancedPowerUsageDetail.EXTRA_SLOT_TIME))
+                .isEqualTo(null);
+    }
+
 
     @Test
     public void startBatteryDetailPage_noBatteryUsage_hasBasicData() {
@@ -292,6 +351,7 @@ public class AdvancedPowerUsageDetailTest {
     @Test
     public void startBatteryDetailPage_batteryEntryNotExisted_extractUidFromPackageName()
             throws PackageManager.NameNotFoundException {
+        mBundle.clear();
         doReturn(UID).when(mPackageManager).getPackageUid(PACKAGE_NAME[0], 0 /* no flag */);
 
         AdvancedPowerUsageDetail.startBatteryDetailPage(
