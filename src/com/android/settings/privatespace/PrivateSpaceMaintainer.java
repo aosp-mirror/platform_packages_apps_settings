@@ -25,6 +25,7 @@ import android.app.IActivityManager;
 import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.content.pm.UserInfo;
 import android.os.Flags;
 import android.os.RemoteException;
@@ -239,6 +240,17 @@ public class PrivateSpaceMaintainer {
             return mUserManager.requestQuietModeEnabled(true, mUserHandle);
         }
         return false;
+    }
+
+    /**
+     * Checks if private space exists and requests to disable quiet mode.
+     *
+     * @param intentSender target to start when the user is unlocked
+     */
+    public synchronized void unlockPrivateSpace(IntentSender intentSender) {
+        if (mUserHandle != null) {
+            mUserManager.requestQuietModeEnabled(false, mUserHandle, intentSender);
+        }
     }
 
     /** Returns true if private space exists and is running, otherwise returns false */
