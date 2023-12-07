@@ -27,6 +27,20 @@ import com.android.settings.dashboard.DashboardFragment;
 public class NewKeyboardLayoutPickerContent extends DashboardFragment {
 
     private static final String TAG = "KeyboardLayoutPicker";
+    private NewKeyboardLayoutPickerController mNewKeyboardLayoutPickerController;
+    private ControllerUpdateCallback mControllerUpdateCallback;
+
+    public interface ControllerUpdateCallback {
+        /**
+         * Called when mNewKeyBoardLayoutPickerController been initialized.
+         */
+        void onControllerUpdated(NewKeyboardLayoutPickerController
+                newKeyboardLayoutPickerController);
+    }
+
+    public void setControllerUpdateCallback(ControllerUpdateCallback controllerUpdateCallback) {
+        this.mControllerUpdateCallback = controllerUpdateCallback;
+    }
 
     @Override
     public void onAttach(Context context) {
@@ -40,7 +54,11 @@ public class NewKeyboardLayoutPickerContent extends DashboardFragment {
             getActivity().finish();
             return;
         }
-        use(NewKeyboardLayoutPickerController.class).initialize(this);
+        mNewKeyboardLayoutPickerController = use(NewKeyboardLayoutPickerController.class);
+        mNewKeyboardLayoutPickerController.initialize(this);
+        if (mControllerUpdateCallback != null) {
+            mControllerUpdateCallback.onControllerUpdated(mNewKeyboardLayoutPickerController);
+        }
     }
 
     @Override
@@ -55,5 +73,9 @@ public class NewKeyboardLayoutPickerContent extends DashboardFragment {
 
     protected int getPreferenceScreenResId() {
         return R.xml.new_keyboard_layout_picker_fragment;
+    }
+
+    public NewKeyboardLayoutPickerController getController() {
+        return mNewKeyboardLayoutPickerController;
     }
 }
