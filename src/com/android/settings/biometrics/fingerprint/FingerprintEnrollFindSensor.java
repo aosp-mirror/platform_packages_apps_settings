@@ -25,8 +25,6 @@ import android.content.res.Resources;
 import android.hardware.fingerprint.FingerprintManager;
 import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
 import android.view.OrientationEventListener;
 import android.view.Surface;
@@ -35,15 +33,12 @@ import android.view.accessibility.AccessibilityManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.lifecycle.Observer;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.BiometricEnrollSidecar;
 import com.android.settings.biometrics.BiometricUtils;
-import com.android.settings.biometrics.fingerprint.UdfpsEnrollCalibrator.Result;
-import com.android.settings.biometrics.fingerprint.UdfpsEnrollCalibrator.Status;
 import com.android.settings.flags.Flags;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockSettingsHelper;
@@ -56,7 +51,6 @@ import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Activity explaining the fingerprint sensor location for fingerprint enrollment.
@@ -85,8 +79,6 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
     private boolean mIsReverseDefaultRotation;
     @Nullable
     private UdfpsEnrollCalibrator mCalibrator;
-    @Nullable
-    private Observer<Status> mCalibratorStatusObserver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -172,13 +164,15 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
         if (mCanAssumeUdfps) {
             if (Flags.udfpsEnrollCalibration()) {
                 mCalibrator = FeatureFactory.getFeatureFactory().getFingerprintFeatureProvider()
-                        .getUdfpsEnrollCalibrator(
-                                (savedInstanceState != null)
-                                ? savedInstanceState.getParcelable(KEY_CALIBRATOR_UUID, UUID.class)
-                                : getIntent().getSerializableExtra(KEY_CALIBRATOR_UUID, UUID.class)
-                        );
-                if (mCalibrator == null
-                        || mCalibrator.getStatusLiveData().getValue() == Status.FINISHED) {
+                        .getUdfpsEnrollCalibrator(getApplicationContext(), savedInstanceState,
+                                getIntent());
+                if (mCalibrator != null) {
+                    mCalibrator.onFindSensorPage(
+                            getLifecycle(),
+                            getSupportFragmentManager(),
+                            this::enableUdfpsLottieAndNextButton
+                    );
+                } else {
                     enableUdfpsLottieAndNextButton();
                 }
             } else {
@@ -193,14 +187,19 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
     }
 
     private void enableUdfpsLottieAndNextButton() {
-        mFooterBarMixin.setPrimaryButton(
-                new FooterButton.Builder(this)
-                        .setText(R.string.security_settings_udfps_enroll_find_sensor_start_button)
-                        .setListener(this::onStartButtonClick)
-                        .setButtonType(FooterButton.ButtonType.NEXT)
-                        .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Primary)
-                        .build()
-        );
+        if (isFinishing()) {
+            return;
+        }
+
+        if (mFooterBarMixin.getPrimaryButton() == null) {
+            mFooterBarMixin.setPrimaryButton(new FooterButton.Builder(this)
+                    .setText(R.string.security_settings_udfps_enroll_find_sensor_start_button)
+                    .setListener(this::onStartButtonClick)
+                    .setButtonType(FooterButton.ButtonType.NEXT)
+                    .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Primary)
+                    .build()
+            );
+        }
         if (mIllustrationLottie != null) {
             mIllustrationLottie.setOnClickListener(this::onStartButtonClick);
         }
@@ -285,7 +284,7 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
         outState.putBoolean(SAVED_STATE_IS_NEXT_CLICKED, mNextClicked);
         if (Flags.udfpsEnrollCalibration()) {
             if (mCalibrator != null) {
-                outState.putSerializable(KEY_CALIBRATOR_UUID, mCalibrator.getUuid());
+                mCalibrator.onSaveInstanceState(outState);
             }
         }
     }
@@ -316,39 +315,6 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
         super.onStart();
         if (mAnimation != null) {
             mAnimation.startAnimation();
-        }
-        if (Flags.udfpsEnrollCalibration()) {
-            if (mCalibrator != null) {
-                final Status current = mCalibrator.getStatusLiveData().getValue();
-                if (current == Status.PROCESSING) {
-                    if (mCalibratorStatusObserver == null) {
-                        mCalibratorStatusObserver = status -> {
-                            if (status == Status.GOT_RESULT) {
-                                onGotCalibrationResult();
-                            }
-                        };
-                    }
-                    mCalibrator.getStatusLiveData().observe(this, mCalibratorStatusObserver);
-                } else if (current == Status.GOT_RESULT) {
-                    onGotCalibrationResult();
-                }
-            }
-        }
-    }
-
-    private void onGotCalibrationResult() {
-        if (Flags.udfpsEnrollCalibration()) {
-            if (mCalibrator != null) {
-                mCalibrator.setFinished();
-                if (mCalibrator.getResult() == Result.NEED_CALIBRATION) {
-                    UdfpsEnrollCalibrationDialog.newInstance(
-                            mCalibrator.getCalibrationDialogTitleTextId(),
-                            mCalibrator.getCalibrationDialogMessageTextId(),
-                            mCalibrator.getCalibrationDialogDismissButtonTextId()
-                    ).show(getSupportFragmentManager(), "findsensor-calibration-dialog");
-                }
-            }
-            new Handler(Looper.getMainLooper()).post(this::enableUdfpsLottieAndNextButton);
         }
     }
 
@@ -406,12 +372,6 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
         mScreenSizeFoldProvider.unregisterCallback(this);
         if (mAnimation != null) {
             mAnimation.pauseAnimation();
-        }
-        if (Flags.udfpsEnrollCalibration()) {
-            if (mCalibrator != null && mCalibratorStatusObserver != null) {
-                mCalibrator.getStatusLiveData().removeObserver(mCalibratorStatusObserver);
-                mCalibratorStatusObserver = null;
-            }
         }
     }
 

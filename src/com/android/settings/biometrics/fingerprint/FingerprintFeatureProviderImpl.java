@@ -21,8 +21,6 @@ import androidx.annotation.Nullable;
 import com.android.settings.biometrics.fingerprint.feature.SfpsEnrollmentFeature;
 import com.android.settings.biometrics.fingerprint.feature.SfpsEnrollmentFeatureImpl;
 
-import java.util.UUID;
-
 public class FingerprintFeatureProviderImpl implements FingerprintFeatureProvider {
 
     @Nullable
@@ -34,11 +32,5 @@ public class FingerprintFeatureProviderImpl implements FingerprintFeatureProvide
             mSfpsEnrollmentFeatureImpl = new SfpsEnrollmentFeatureImpl();
         }
         return mSfpsEnrollmentFeatureImpl;
-    }
-
-    @Nullable
-    @Override
-    public UdfpsEnrollCalibrator getUdfpsEnrollCalibrator(@Nullable UUID uuid) {
-        return null;
     }
 }
