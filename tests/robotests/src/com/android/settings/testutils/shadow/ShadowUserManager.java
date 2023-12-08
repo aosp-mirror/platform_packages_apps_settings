@@ -55,6 +55,7 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
     private int[] profileIdsForUser = new int[0];
     private boolean mUserSwitchEnabled;
     private Bundle mDefaultGuestUserRestriction = new Bundle();
+    private boolean mIsGuestUser = false;
 
     private @UserManager.UserSwitchabilityResult int mSwitchabilityStatus =
             UserManager.SWITCHABILITY_STATUS_OK;
@@ -269,5 +270,14 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
         for (int i = 0; i < mUserProfileInfos.size(); i++) {
             mUserProfileInfos.get(i).flags |= UserInfo.FLAG_ADMIN;
         }
+    }
+
+    @Implementation
+    protected boolean isGuestUser() {
+        return mIsGuestUser;
+    }
+
+    public void setGuestUser(boolean isGuestUser) {
+        mIsGuestUser = isGuestUser;
     }
 }

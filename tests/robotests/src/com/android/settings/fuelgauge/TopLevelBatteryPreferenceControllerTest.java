@@ -31,6 +31,7 @@ import android.content.Intent;
 import android.hardware.usb.UsbManager;
 import android.hardware.usb.UsbPort;
 import android.hardware.usb.UsbPortStatus;
+import android.os.BatteryManager;
 
 import androidx.preference.Preference;
 import androidx.test.core.app.ApplicationProvider;
@@ -143,6 +144,17 @@ public class TopLevelBatteryPreferenceControllerTest {
 
         assertThat(mController.getDashboardLabel(mContext, info, true))
                 .isEqualTo(mContext.getString(R.string.battery_info_status_not_charging));
+    }
+
+    @Test
+    public void getDashboardLabel_notChargingState_returnsCorrectLabel() {
+        mController.mPreference = new Preference(mContext);
+        BatteryInfo info = new BatteryInfo();
+        info.batteryStatus = BatteryManager.BATTERY_STATUS_NOT_CHARGING;
+        info.statusLabel = "expected returned label";
+
+        assertThat(mController.getDashboardLabel(mContext, info, true))
+                .isEqualTo(info.statusLabel);
     }
 
     @Test

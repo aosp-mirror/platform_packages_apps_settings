@@ -69,6 +69,7 @@ android_library {
         "androidx.appcompat_appcompat",
         "androidx.cardview_cardview",
         "androidx.compose.runtime_runtime-livedata",
+        "androidx.activity_activity-ktx",
         "androidx.preference_preference",
         "androidx.recyclerview_recyclerview",
         "androidx.window_window",
@@ -82,6 +83,8 @@ android_library {
         "net-utils-framework-common",
         "app-usage-event-protos-lite",
         "battery-event-protos-lite",
+        "battery-usage-slot-protos-lite",
+        "power-anomaly-event-protos-lite",
         "settings-contextual-card-protos-lite",
         "settings-log-bridge-protos-lite",
         "settings-telephony-protos-lite",
@@ -149,14 +152,17 @@ filegroup {
     srcs: ["proguard.flags"],
 }
 
-// The sources for Settings need to be exposed to SettingsGoogle, etc.
-// so they can run the com.android.settingslib.search.IndexableProcessor
-// over all the sources together.
+// Deprecated. The sources for Settings need to be exposed to ArcSettings, so they can run the
+// com.android.settingslib.search.IndexableProcessor over all the sources together.
+// Use "-Acom.android.settingslib.search.processor.package=" instead to generate the search data
+// separately for different modules.
 filegroup {
     name: "Settings_srcs",
     srcs: ["src/**/*.java", "src/**/*.kt"],
 }
 
+// Deprecated. Do not depend on this, only depend on Settings-core, and its manifest is also
+// included.
 filegroup {
     name: "Settings_manifest",
     srcs: ["AndroidManifest.xml"],

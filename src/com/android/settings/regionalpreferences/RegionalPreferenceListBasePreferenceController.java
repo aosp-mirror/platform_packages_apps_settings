@@ -16,7 +16,6 @@
 
 package com.android.settings.regionalpreferences;
 
-import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.util.Log;
 
@@ -25,20 +24,16 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.TickButtonPreference;
-import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 /** A base controller for handling all regional preferences controllers. */
 public abstract class RegionalPreferenceListBasePreferenceController extends
         BasePreferenceController {
 
-    private final MetricsFeatureProvider mMetricsFeatureProvider;
     private PreferenceCategory mPreferenceCategory;
 
     public RegionalPreferenceListBasePreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
     }
 
     @Override
@@ -59,6 +54,8 @@ public abstract class RegionalPreferenceListBasePreferenceController extends
             TickButtonPreference pref = new TickButtonPreference(mContext);
             mPreferenceCategory.addPreference(pref);
             final String item = unitValues[i];
+            final String value = RegionalPreferencesDataUtils.getDefaultUnicodeExtensionData(
+                    mContext, getExtensionTypes());
             pref.setTitle(getPreferenceTitle(item));
             pref.setKey(item);
             pref.setOnPreferenceClickListener(clickedPref -> {
@@ -66,11 +63,8 @@ public abstract class RegionalPreferenceListBasePreferenceController extends
                 RegionalPreferencesDataUtils.savePreference(mContext, getExtensionTypes(),
                         item.equals(RegionalPreferencesDataUtils.DEFAULT_VALUE)
                                 ? null : item);
-                mMetricsFeatureProvider.action(mContext, getMetricsActionKey());
                 return true;
             });
-            String value = RegionalPreferencesDataUtils.getDefaultUnicodeExtensionData(mContext,
-                    getExtensionTypes());
             pref.setSelected(!value.isEmpty() && item.equals(value));
         }
     }
@@ -98,8 +92,4 @@ public abstract class RegionalPreferenceListBasePreferenceController extends
     protected abstract String getExtensionTypes();
 
     protected abstract String[] getUnitValues();
-
-    protected abstract int getMetricsActionKey();
-
-
 }

@@ -94,7 +94,6 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
     private ListWithEntrySummaryPreference mButtonWfcRoamingMode;
     private Preference mUpdateAddress;
 
-    private boolean mValidListener = false;
     private boolean mEditableWfcMode = true;
     private boolean mEditableWfcRoamingMode = true;
     private boolean mUseWfcHomeModeForRoaming = false;
@@ -104,7 +103,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
     private ProvisioningManager mProvisioningManager;
     private TelephonyManager mTelephonyManager;
 
-    private final PhoneTelephonyCallback mTelephonyCallback = new PhoneTelephonyCallback();
+    private PhoneTelephonyCallback mTelephonyCallback;
 
     private class PhoneTelephonyCallback extends TelephonyCallback implements
             TelephonyCallback.CallStateListener {
@@ -202,8 +201,10 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
     void showAlert(Intent intent) {
         final Context context = getActivity();
 
-        final CharSequence title = intent.getCharSequenceExtra(Phone.EXTRA_KEY_ALERT_TITLE);
-        final CharSequence message = intent.getCharSequenceExtra(Phone.EXTRA_KEY_ALERT_MESSAGE);
+        final CharSequence title =
+                intent.getCharSequenceExtra(ImsManager.EXTRA_WFC_REGISTRATION_FAILURE_TITLE);
+        final CharSequence message =
+                intent.getCharSequenceExtra(ImsManager.EXTRA_WFC_REGISTRATION_FAILURE_MESSAGE);
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setMessage(message)
@@ -418,27 +419,20 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
     @Override
     public void onResume() {
         super.onResume();
-
         updateBody();
-
-        final Context context = getActivity();
-        if (queryImsState(mSubId).isWifiCallingSupported()) {
+        Context context = getActivity();
+        if (mTelephonyCallback == null && queryImsState(mSubId).isWifiCallingSupported()) {
+            mTelephonyCallback = new PhoneTelephonyCallback();
             getTelephonyManagerForSub(mSubId).registerTelephonyCallback(
                     context.getMainExecutor(), mTelephonyCallback);
-
             mSwitchBar.addOnSwitchChangeListener(this);
-
-            mValidListener = true;
         }
-
         context.registerReceiver(mIntentReceiver, mIntentFilter,
                 Context.RECEIVER_EXPORTED_UNAUDITED);
-
         final Intent intent = getActivity().getIntent();
         if (intent.getBooleanExtra(Phone.EXTRA_KEY_ALERT_SHOW, false)) {
             showAlert(intent);
         }
-
         // Register callback for provisioning changes.
         registerProvisioningChangedCallback();
     }
@@ -446,19 +440,13 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
     @Override
     public void onPause() {
         super.onPause();
-
-        final Context context = getActivity();
-
-        if (mValidListener) {
-            mValidListener = false;
-
+        Context context = getActivity();
+        if (mTelephonyCallback != null) {
             getTelephonyManagerForSub(mSubId).unregisterTelephonyCallback(mTelephonyCallback);
-
+            mTelephonyCallback = null;
             mSwitchBar.removeOnSwitchChangeListener(this);
         }
-
         context.unregisterReceiver(mIntentReceiver);
-
         // Remove callback for provisioning changes.
         unregisterProvisioningChangedCallback();
     }

@@ -21,6 +21,7 @@ android_test {
     ],
 
     static_libs: [
+        "androidx.arch.core_core-testing",
         "androidx.test.core",
         "androidx.test.rules",
         "androidx.test.espresso.core",
@@ -30,8 +31,10 @@ android_test {
         "androidx.preference_preference",
         "mockito-target-minus-junit4",
         "platform-test-annotations",
+        "platform-test-rules",
         "truth",
         "androidx.test.uiautomator_uiautomator",
+        "kotlinx_coroutines_test",
         // Don't add SettingsLib libraries here - you can use them directly as they are in the
         // instrumented Settings app.
     ],
@@ -40,8 +43,11 @@ android_test {
         javacflags: ["-Xep:CheckReturnValue:WARN"],
     },
 
-    // Include all test java files.
-    srcs: ["src/**/*.java"],
+    // Include all test java/kotlin files.
+    srcs: [
+        "src/**/*.java",
+        "src/**/*.kt",
+    ],
 
     platform_apis: true,
     test_suites: ["device-tests"],

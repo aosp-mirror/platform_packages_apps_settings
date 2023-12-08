@@ -16,8 +16,8 @@
 
 package com.android.settings.fuelgauge;
 
-import android.content.ContentResolver;
 import android.content.BroadcastReceiver;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.provider.Settings;
@@ -25,8 +25,6 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
-import com.android.settings.R;
-import com.android.settings.fuelgauge.BatteryOptimizeHistoricalLogEntry;
 import com.android.settings.fuelgauge.batterysaver.BatterySaverScheduleRadioButtonsController;
 import com.android.settingslib.fuelgauge.BatterySaverUtils;
 
@@ -41,6 +39,7 @@ public final class BatterySettingsMigrateChecker extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        Log.d(TAG, "onReceive: " + intent + " owner: " + BatteryBackupHelper.isOwner());
         if (intent != null
                 && Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())
                 && BatteryBackupHelper.isOwner()) {

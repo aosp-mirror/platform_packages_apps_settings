@@ -27,7 +27,12 @@ import static org.mockito.Mockito.verify;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
@@ -53,6 +58,20 @@ public class BluetoothPairingDetailTest {
 
     private final Context mContext = ApplicationProvider.getApplicationContext();
 
+    private final Lifecycle mFakeLifecycle = new Lifecycle() {
+        @Override
+        public void addObserver(@NonNull LifecycleObserver observer) {}
+
+        @Override
+        public void removeObserver(@NonNull LifecycleObserver observer) {}
+
+        @NonNull
+        @Override
+        public State getCurrentState() {
+            return State.CREATED;
+        }
+    };
+
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private LocalBluetoothManager mLocalManager;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -74,6 +93,8 @@ public class BluetoothPairingDetailTest {
                 .findPreference(BluetoothPairingDetail.KEY_AVAIL_DEVICES);
         doReturn(mFooterPreference).when(mFragment)
                 .findPreference(BluetoothPairingDetail.KEY_FOOTER_PREF);
+        doReturn(new View(mContext)).when(mFragment).getView();
+        doReturn((LifecycleOwner) () -> mFakeLifecycle).when(mFragment).getViewLifecycleOwner();
         doReturn(Collections.emptyList()).when(mDeviceManager).getCachedDevicesCopy();
 
         mFragment.mBluetoothAdapter = mBluetoothAdapter;
@@ -82,7 +103,7 @@ public class BluetoothPairingDetailTest {
         mFragment.mDeviceListGroup = mAvailableDevicesCategory;
         mFragment.onViewCreated(mFragment.getView(), Bundle.EMPTY);
     }
-//
+
     @Test
     public void initPreferencesFromPreferenceScreen_findPreferences() {
         mFragment.initPreferencesFromPreferenceScreen();

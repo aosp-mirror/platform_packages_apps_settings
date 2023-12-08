@@ -64,8 +64,10 @@ import com.google.protobuf.MessageLite;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-import java.time.Duration;
 import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.List;
 
 /**
@@ -353,7 +355,7 @@ public class BatteryUtils {
     @SuppressWarnings("unchecked")
     public static <T extends MessageLite> T parseProtoFromString(
             String serializedProto, T protoClass) {
-        if (serializedProto.isEmpty()) {
+        if (serializedProto == null || serializedProto.isEmpty()) {
             return (T) protoClass.getDefaultInstanceForType();
         }
         try {
@@ -451,12 +453,10 @@ public class BatteryUtils {
 
     @VisibleForTesting
     Estimate getEnhancedEstimate() {
-        Estimate estimate = null;
-        // Get enhanced prediction if available
-        if (Duration.between(Estimate.getLastCacheUpdateTime(mContext), Instant.now())
-                .compareTo(Duration.ofSeconds(10)) < 0) {
-            estimate = Estimate.getCachedEstimateIfAvailable(mContext);
-        } else if (mPowerUsageFeatureProvider != null &&
+        // Align the same logic in the BatteryControllerImpl.updateEstimate()
+        Estimate estimate = Estimate.getCachedEstimateIfAvailable(mContext);
+        if (estimate == null &&
+                mPowerUsageFeatureProvider != null &&
                 mPowerUsageFeatureProvider.isEnhancedBatteryPredictionEnabled(mContext)) {
             estimate = mPowerUsageFeatureProvider.getEnhancedBatteryPrediction(mContext);
             if (estimate != null) {
@@ -672,6 +672,14 @@ public class BatteryUtils {
             }
         }
         return summary.toString();
+    }
+    /** Format the date of battery related info */
+    public static CharSequence getBatteryInfoFormattedDate(long dateInMs) {
+        final Instant instant = Instant.ofEpochMilli(dateInMs);
+        final String localDate = instant.atZone(ZoneId.systemDefault()).toLocalDate().format(
+                DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
+
+        return localDate;
     }
 
     /** Builds the battery usage time information for one timestamp. */

@@ -18,6 +18,7 @@ package com.android.settings.fuelgauge;
 
 import android.content.ComponentName;
 import android.content.Context;
+import android.os.BatteryManager;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
@@ -139,7 +140,10 @@ public class TopLevelBatteryPreferenceController extends BasePreferenceControlle
         if (Utils.containsIncompatibleChargers(mContext, TAG)) {
             return mContext.getString(R.string.battery_info_status_not_charging);
         }
-        if (!info.discharging && info.chargeLabel != null) {
+        if (info.batteryStatus == BatteryManager.BATTERY_STATUS_NOT_CHARGING) {
+            // Present status only if no remaining time or status anomalous
+            return info.statusLabel;
+        } else if (!info.discharging && info.chargeLabel != null) {
             return info.chargeLabel;
         } else if (info.remainingLabel == null) {
             return info.batteryPercentString;

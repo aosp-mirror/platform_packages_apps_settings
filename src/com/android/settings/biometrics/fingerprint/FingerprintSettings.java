@@ -169,7 +169,8 @@ public class FingerprintSettings extends SubSettings {
         private static final String KEY_LAUNCHED_CONFIRM = "launched_confirm";
         private static final String KEY_HAS_FIRST_ENROLLED = "has_first_enrolled";
         private static final String KEY_IS_ENROLLING = "is_enrolled";
-        private static final String KEY_REQUIRE_SCREEN_ON_TO_AUTH =
+        @VisibleForTesting
+        static final String KEY_REQUIRE_SCREEN_ON_TO_AUTH =
                 "security_settings_require_screen_on_to_auth";
         private static final String KEY_FINGERPRINTS_ENROLLED_CATEGORY =
                 "security_settings_fingerprints_enrolled";
@@ -479,10 +480,8 @@ public class FingerprintSettings extends SubSettings {
                         R.string.security_settings_fingerprint_enroll_introduction_v3_message,
                         DeviceHelper.getDeviceName(getActivity()));
                 column.mLearnMoreClickListener = learnMoreClickListener;
-                if (isSfps()) {
-                    column.mLearnMoreOverrideText = getText(
-                            R.string.security_settings_fingerprint_settings_footer_learn_more);
-                }
+                column.mLearnMoreOverrideText = getText(
+                        R.string.security_settings_fingerprint_settings_footer_learn_more);
                 mFooterColumns.add(column);
             }
         }
@@ -536,16 +535,20 @@ public class FingerprintSettings extends SubSettings {
 
         private void addFingerprintPreferences(PreferenceGroup root) {
             final String fpPrefKey = addFingerprintItemPreferences(root);
-            if (isSfps()) {
-                scrollToPreference(fpPrefKey);
-                addFingerprintUnlockCategory();
-            }
             for (AbstractPreferenceController controller : mControllers) {
                 if (controller instanceof FingerprintSettingsPreferenceController) {
                     ((FingerprintSettingsPreferenceController) controller).setUserId(mUserId);
                 } else if (controller instanceof FingerprintUnlockCategoryController) {
                     ((FingerprintUnlockCategoryController) controller).setUserId(mUserId);
                 }
+            }
+
+            // This needs to be after setting ids, otherwise
+            // |mRequireScreenOnToAuthPreferenceController.isChecked| is always checking the primary
+            // user instead of the user with |mUserId|.
+            if (isSfps()) {
+                scrollToPreference(fpPrefKey);
+                addFingerprintUnlockCategory();
             }
             createFooterPreference(root);
         }
