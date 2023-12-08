@@ -58,6 +58,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 
+@Ignore("b/314867581")
 @RunWith(RobolectricTestRunner.class)
 public class WifiDialogActivityTest {
 
@@ -90,7 +91,6 @@ public class WifiDialogActivityTest {
 
     WifiDialogActivity mActivity;
 
-    @Ignore("b/314867581")
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);

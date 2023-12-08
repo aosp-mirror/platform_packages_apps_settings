@@ -383,9 +383,9 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"최상의 결과를 얻으려면 Made For Google 인증 화면 보호재를 사용하세요. 다른 화면 보호재를 사용할 경우 자녀의 지문이 인식되지 않을 수 있습니다."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"스마트시계 잠금 해제"</string>
-    <string name="biometric_settings_intro_with_activeunlock" msgid="6583248094453119314">"얼굴 인식 잠금 해제 및 지문 잠금 해제를 설정하면 마스크를 쓰고 있거나 어두운 곳에 있을 때 휴대전화에서 지문을 요청합니다.\n\n얼굴 또는 지문이 인식되지 않을 때 시계로 잠금 해제할 수 있습니다."</string>
-    <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"지문이 인식되지 않을 때 시계로 잠금 해제할 수 있습니다."</string>
-    <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"얼굴이 인식되지 않을 때 시계로 잠금 해제할 수 있습니다."</string>
+    <string name="biometric_settings_intro_with_activeunlock" msgid="5032953826653108646">"얼굴 인식 잠금 해제 및 지문 잠금 해제를 설정하면 마스크를 쓰고 있거나 어두운 곳에 있을 때 휴대전화에서 지문을 요청합니다.\n\n스마트시계 잠금 해제는 손가락이 젖었거나 얼굴이 인식되지 않을 때 휴대전화를 잠금 해제할 수 있는 또 다른 편리한 방법입니다."</string>
+    <string name="biometric_settings_intro_with_fingerprint" msgid="5881355884547769337">"스마트시계 잠금 해제는 지문이 인식되지 않을 때 휴대전화를 잠금 해제할 수 있는 또 다른 편리한 방법입니다."</string>
+    <string name="biometric_settings_intro_with_face" msgid="7671919122230588521">"스마트시계 잠금 해제는 얼굴이 인식되지 않을 때 휴대전화를 잠금 해제할 수 있는 또 다른 편리한 방법입니다."</string>
     <string name="biometric_settings_use_fingerprint_or_watch_for" msgid="1160830065613858095">"다음에 지문 또는 워치 사용"</string>
     <string name="biometric_settings_use_face_or_watch_for" msgid="1507077107150278532">"다음에 얼굴 또는 워치 사용"</string>
     <string name="biometric_settings_use_face_fingerprint_or_watch_for" msgid="7495835723072020641">"다음에 얼굴, 지문 또는 워치 사용"</string>
@@ -1011,7 +1011,6 @@
     <string name="wifi_hotspot_no_password_subtext" msgid="3685689196772398783">"설정된 비밀번호 없음"</string>
     <string name="wifi_hotspot_name_title" msgid="6633480190014369846">"핫스팟 이름"</string>
     <string name="wifi_hotspot_password_title" msgid="9096340919454296786">"핫스팟 비밀번호"</string>
-    <string name="wifi_hotspot_ap_band_title" msgid="560262446129195042">"AP 대역"</string>
     <string name="wifi_hotspot_auto_off_title" msgid="8855711787485504882">"자동으로 핫스팟 사용 중지"</string>
     <string name="wifi_hotspot_auto_off_summary" msgid="8283656069997871354">"연결된 기기가 없을 때"</string>
     <string name="wifi_hotspot_maximize_compatibility" msgid="6494125684420024058">"호환성 확장"</string>
@@ -1127,8 +1126,7 @@
     <string name="adaptive_sleep_privacy" msgid="7664570136417980556">"화면 시선 감지는 전면 카메라를 사용하여 화면을 보고 있는 사용자가 있는지 확인하는 기능입니다. 이 기능은 기기에서 작동하며 이미지는 Google에 전송되거나 저장되지 않습니다."</string>
     <string name="adaptive_sleep_contextual_slice_title" msgid="7467588613212629758">"화면 시선 감지 사용"</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"화면을 보고 있는 동안 화면을 켜진 상태로 유지"</string>
-    <!-- no translation found for power_consumption_footer_summary (4901490700555257237) -->
-    <skip />
+    <string name="power_consumption_footer_summary" msgid="4901490700555257237">"화면 자동 잠금 시간이 길어지면 배터리 소모량이 많아집니다."</string>
     <string name="auto_rotate_camera_lock_title" msgid="5369003176695105872">"카메라가 잠겨 있음"</string>
     <string name="auto_rotate_camera_lock_summary" msgid="5699491516271544672">"얼굴 인식을 위해 카메라를 잠금 해제해야 합니다."</string>
     <string name="adaptive_sleep_camera_lock_summary" msgid="8417541183603618098">"화면 시선 감지를 위해 카메라를 잠금 해제해야 합니다."</string>
@@ -1259,6 +1257,10 @@
     <string name="imei_multi_sim" msgid="9001570420423929507">"IMEI(SIM 슬롯 <xliff:g id="IMEI_SLOT_ID">%1$d</xliff:g>)"</string>
     <string name="imei_multi_sim_primary" msgid="7914653040843734282">"IMEI(SIM 슬롯 <xliff:g id="IMEI_SLOT_ID_PRIMARY">%1$d</xliff:g>)(기본)"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"확인하려면 저장된 네트워크를 선택하세요."</string>
+    <!-- no translation found for status_imei (5719752369250485007) -->
+    <skip />
+    <!-- no translation found for status_imei_sv (6908985558726440951) -->
+    <skip />
     <string name="status_min_number" msgid="4492899165438225714">"MIN"</string>
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"PRL 버전"</string>
@@ -1452,16 +1454,6 @@
     <string name="tether_settings_summary_all" msgid="7565193614882005775">"핫스팟, USB, 블루투스, 이더넷"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"다른 기기와 인터넷 공유 안함"</string>
     <string name="tether_preference_summary_off" msgid="6266799346319794630">"사용 안함"</string>
-    <string name="tethering_interface_options" msgid="7575535888135143650">"테더링"</string>
-    <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"Wi‑Fi 핫스팟 사용 안함"</string>
-    <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"USB를 통해서만 인터넷 공유"</string>
-    <string name="disable_wifi_hotspot_when_bluetooth_on" msgid="4711723299880116345">"블루투스를 통해서만 인터넷 공유"</string>
-    <string name="disable_wifi_hotspot_when_ethernet_on" msgid="4123242400542103599">"이더넷을 통해서만 인터넷 공유"</string>
-    <string name="disable_wifi_hotspot_when_usb_and_bluetooth_on" msgid="5258774769658150180">"USB 및 블루투스를 통해서만 인터넷 공유"</string>
-    <string name="disable_wifi_hotspot_when_usb_and_ethernet_on" msgid="7126313562907225612">"USB 및 이더넷을 통해서만 인터넷 공유"</string>
-    <string name="disable_wifi_hotspot_when_bluetooth_and_ethernet_on" msgid="2943464651349235967">"블루투스 및 이더넷을 통해서만 인터넷 공유"</string>
-    <string name="disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on" msgid="3934609816834760008">"USB, 블루투스, 이더넷을 통해서만 인터넷 공유"</string>
-    <string name="usb_title" msgid="1157283449840612901">"USB"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"USB 테더링"</string>
     <string name="bluetooth_tether_checkbox_text" msgid="6108398414967813545">"블루투스 테더링"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"이더넷 테더링"</string>
@@ -2051,6 +2043,10 @@
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"전원 버튼으로 통화 종료"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="5508351959249876801">"대형 마우스 포인터"</string>
     <string name="accessibility_toggle_large_pointer_icon_summary" msgid="1480527946039237705">"마우스 포인터를 더 눈에 띄게 만듭니다."</string>
+    <!-- no translation found for accessibility_force_invert_title (5015366813138748407) -->
+    <skip />
+    <!-- no translation found for accessibility_force_invert_summary (1882329675950887268) -->
+    <skip />
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"애니메이션 삭제"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"화면상의 움직임을 줄입니다."</string>
     <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"모노 오디오"</string>
@@ -2582,8 +2578,6 @@
     <string name="emergency_tone_title" msgid="6673118505206685168">"응급 상황 다이얼링 신호"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"긴급 통화 중 동작 설정"</string>
     <string name="privacy_settings_title" msgid="6437057228255974577">"백업"</string>
-    <string name="backup_summary_state_on" msgid="9018954639693085240">"사용"</string>
-    <string name="backup_summary_state_off" msgid="5341339397224835909">"사용 안함"</string>
     <string name="backup_section_title" msgid="6539706829848457794">"백업 및 복원"</string>
     <string name="personal_data_section_title" msgid="6368610168625722682">"개인 데이터"</string>
     <string name="backup_data_title" msgid="507663517227498525">"내 데이터 백업"</string>
@@ -4325,6 +4319,8 @@
     <string name="change_nfc_tag_apps_detail_summary" msgid="3338220223868942195">"NFC 태그가 스캔되면 이 앱이 실행되도록 허용합니다.\n이 권한이 허용되어 있는 경우 태그가 감지되면 이 앱을 옵션으로 사용할 수 있게 됩니다."</string>
     <string name="media_output_title" msgid="8283629315159510680">"미디어 출력 대상"</string>
     <string name="media_output_label_title" msgid="4139048973886819148">"<xliff:g id="LABEL">%s</xliff:g> 재생 위치"</string>
+    <!-- no translation found for media_output_title_without_playing (3339321669132875821) -->
+    <skip />
     <string name="media_output_default_summary" msgid="4200343059396412376">"이 기기"</string>
     <string name="media_out_summary_ongoing_call_state" msgid="475188726850090363">"통화 중에는 사용할 수 없습니다."</string>
     <string name="take_call_on_title" msgid="1159417893879946757">"전화 받기 기능 사용"</string>

@@ -383,9 +383,9 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"最適な結果を得るには、Made For Google 認定の画面保護シートを使用してください。認定されていないシートを使うと、お子様の指紋が認識されない可能性があります。"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"ウォッチ認証"</string>
-    <string name="biometric_settings_intro_with_activeunlock" msgid="6583248094453119314">"顔認証と指紋認証を設定した場合、マスク着用時や暗い場所にいるときは指紋認証が求められます。\n\n顔や指紋が認識されなかった場合は、ウォッチでロック解除できます。"</string>
-    <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"指紋が認識されなかった場合はウォッチでロック解除できます。"</string>
-    <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"顔が認識されなかった場合はウォッチでロック解除できます。"</string>
+    <string name="biometric_settings_intro_with_activeunlock" msgid="5032953826653108646">"顔認証と指紋認証を設定した場合、マスク着用時や暗い場所にいるときは指紋認証が求められます。\n\nウォッチ認証を使用すると、指が濡れているときや顔が認識されないときなどでも、このスマートフォンをロック解除できます。"</string>
+    <string name="biometric_settings_intro_with_fingerprint" msgid="5881355884547769337">"ウォッチ認証を使用すると、指紋が認識されないときなどでも、スマートフォンをロック解除できます。"</string>
+    <string name="biometric_settings_intro_with_face" msgid="7671919122230588521">"ウォッチ認証を使用すると、顔が認識されないときなどでも、スマートフォンをロック解除できます。"</string>
     <string name="biometric_settings_use_fingerprint_or_watch_for" msgid="1160830065613858095">"指紋認証またはウォッチの使用:"</string>
     <string name="biometric_settings_use_face_or_watch_for" msgid="1507077107150278532">"顔認証またはウォッチの使用:"</string>
     <string name="biometric_settings_use_face_fingerprint_or_watch_for" msgid="7495835723072020641">"顔認証、指紋認証、またはウォッチの使用:"</string>
@@ -1011,7 +1011,6 @@
     <string name="wifi_hotspot_no_password_subtext" msgid="3685689196772398783">"パスワードが設定されていません"</string>
     <string name="wifi_hotspot_name_title" msgid="6633480190014369846">"アクセス ポイント名"</string>
     <string name="wifi_hotspot_password_title" msgid="9096340919454296786">"アクセス ポイントのパスワード"</string>
-    <string name="wifi_hotspot_ap_band_title" msgid="560262446129195042">"AP 周波数帯"</string>
     <string name="wifi_hotspot_auto_off_title" msgid="8855711787485504882">"アクセス ポイントを自動的に OFF にする"</string>
     <string name="wifi_hotspot_auto_off_summary" msgid="8283656069997871354">"デバイスが接続されていない場合、自動的に OFF にします。"</string>
     <string name="wifi_hotspot_maximize_compatibility" msgid="6494125684420024058">"互換性を拡張する"</string>
@@ -1127,8 +1126,7 @@
     <string name="adaptive_sleep_privacy" msgid="7664570136417980556">"スクリーン アテンションは前面カメラを使用して、ユーザーが画面を見ているかどうかを検出します。この検出はデバイスのみで行われます。画像が保存されたり、Google に送信されたりすることはありません。"</string>
     <string name="adaptive_sleep_contextual_slice_title" msgid="7467588613212629758">"スクリーン アテンションを ON にする"</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"見ている間は画面が OFF になりません"</string>
-    <!-- no translation found for power_consumption_footer_summary (4901490700555257237) -->
-    <skip />
+    <string name="power_consumption_footer_summary" msgid="4901490700555257237">"画面自動消灯の時間を長くすると、バッテリー消費量が多くなります。"</string>
     <string name="auto_rotate_camera_lock_title" msgid="5369003176695105872">"カメラのロックを解除しました"</string>
     <string name="auto_rotate_camera_lock_summary" msgid="5699491516271544672">"顔検出を利用するにはカメラのロックを解除する必要があります"</string>
     <string name="adaptive_sleep_camera_lock_summary" msgid="8417541183603618098">"スクリーン アテンションを使用する場合は、カメラのロックを解除してください"</string>
@@ -1259,6 +1257,10 @@
     <string name="imei_multi_sim" msgid="9001570420423929507">"IMEI（SIM スロット <xliff:g id="IMEI_SLOT_ID">%1$d</xliff:g>）"</string>
     <string name="imei_multi_sim_primary" msgid="7914653040843734282">"IMEI（SIM スロット <xliff:g id="IMEI_SLOT_ID_PRIMARY">%1$d</xliff:g>）（メイン）"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"表示するには、保存済みネットワークを選択してください"</string>
+    <!-- no translation found for status_imei (5719752369250485007) -->
+    <skip />
+    <!-- no translation found for status_imei_sv (6908985558726440951) -->
+    <skip />
     <string name="status_min_number" msgid="4492899165438225714">"MIN"</string>
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"PRLバージョン:"</string>
@@ -1452,16 +1454,6 @@
     <string name="tether_settings_summary_all" msgid="7565193614882005775">"アクセス ポイント、USB、Bluetooth、イーサネット"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"インターネットを他のデバイスと共有しない"</string>
     <string name="tether_preference_summary_off" msgid="6266799346319794630">"OFF"</string>
-    <string name="tethering_interface_options" msgid="7575535888135143650">"テザリング"</string>
-    <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"Wi-Fi アクセス ポイントを使用しない"</string>
-    <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"USB でのみインターネットを共有"</string>
-    <string name="disable_wifi_hotspot_when_bluetooth_on" msgid="4711723299880116345">"Bluetooth でのみインターネットを共有"</string>
-    <string name="disable_wifi_hotspot_when_ethernet_on" msgid="4123242400542103599">"イーサネットでのみインターネットを共有"</string>
-    <string name="disable_wifi_hotspot_when_usb_and_bluetooth_on" msgid="5258774769658150180">"USB と Bluetooth でのみインターネットを共有"</string>
-    <string name="disable_wifi_hotspot_when_usb_and_ethernet_on" msgid="7126313562907225612">"USB とイーサネットでのみインターネットを共有"</string>
-    <string name="disable_wifi_hotspot_when_bluetooth_and_ethernet_on" msgid="2943464651349235967">"Bluetooth とイーサネットでのみインターネットを共有"</string>
-    <string name="disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on" msgid="3934609816834760008">"USB、Bluetooth、イーサネットでのみインターネットを共有"</string>
-    <string name="usb_title" msgid="1157283449840612901">"USB"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"USB テザリング"</string>
     <string name="bluetooth_tether_checkbox_text" msgid="6108398414967813545">"Bluetooth テザリング"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"イーサネット テザリング"</string>
@@ -2051,6 +2043,10 @@
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"電源ボタンで通話を終了"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="5508351959249876801">"マウスポインタを拡大"</string>
     <string name="accessibility_toggle_large_pointer_icon_summary" msgid="1480527946039237705">"マウスポインタを目立たせることができます"</string>
+    <!-- no translation found for accessibility_force_invert_title (5015366813138748407) -->
+    <skip />
+    <!-- no translation found for accessibility_force_invert_summary (1882329675950887268) -->
+    <skip />
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"アニメーションを無効化"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"画面上の動きを軽減できます"</string>
     <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"モノラル音声"</string>
@@ -2582,8 +2578,6 @@
     <string name="emergency_tone_title" msgid="6673118505206685168">"緊急通報信号"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"緊急通報時の動作を設定します"</string>
     <string name="privacy_settings_title" msgid="6437057228255974577">"バックアップ"</string>
-    <string name="backup_summary_state_on" msgid="9018954639693085240">"ON"</string>
-    <string name="backup_summary_state_off" msgid="5341339397224835909">"OFF"</string>
     <string name="backup_section_title" msgid="6539706829848457794">"バックアップと復元"</string>
     <string name="personal_data_section_title" msgid="6368610168625722682">"個人データ"</string>
     <string name="backup_data_title" msgid="507663517227498525">"データのバックアップ"</string>
@@ -4325,6 +4319,8 @@
     <string name="change_nfc_tag_apps_detail_summary" msgid="3338220223868942195">"NFC タグが検出されたときに起動することを、このアプリに許可します。\nこの権限が有効の場合にタグが検出されると、このアプリをオプションとして利用できるようになります。"</string>
     <string name="media_output_title" msgid="8283629315159510680">"メディアの再生先"</string>
     <string name="media_output_label_title" msgid="4139048973886819148">"<xliff:g id="LABEL">%s</xliff:g> を再生:"</string>
+    <!-- no translation found for media_output_title_without_playing (3339321669132875821) -->
+    <skip />
     <string name="media_output_default_summary" msgid="4200343059396412376">"このデバイス"</string>
     <string name="media_out_summary_ongoing_call_state" msgid="475188726850090363">"通話中は利用できません"</string>
     <string name="take_call_on_title" msgid="1159417893879946757">"通話するデバイス"</string>
