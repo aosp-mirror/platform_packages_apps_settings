@@ -61,6 +61,7 @@ object SpecialAppAccessPageProvider : SettingsPageProvider {
                 AllFilesAccessAppListProvider,
                 DisplayOverOtherAppsAppListProvider,
                 MediaManagementAppsAppListProvider,
+                MediaRoutingControlAppListProvider,
                 ModifySystemSettingsAppListProvider,
                 UseFullScreenIntentAppListProvider,
                 PictureInPictureListProvider,

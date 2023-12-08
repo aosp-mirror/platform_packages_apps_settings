@@ -383,9 +383,9 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Për rezultate më të mira, përdor një mbrojtës ekrani që është i certifikuar nga \"Prodhuar për Google\". Me mbrojtës të tjerë ekrani, gjurma e gishtit e fëmijës tënd mund të mos funksionojë."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"Shkyçja me orë"</string>
-    <string name="biometric_settings_intro_with_activeunlock" msgid="6583248094453119314">"Kur konfiguron \"Shkyçjen me fytyrë\" dhe \"Shkyçjen me gjurmën e gishtit\", telefoni yt do të kërkojë gjurmën tënde të gishtit kur mban maskë apo kur je në një zonë të errët.\n\nMund ta shkyçësh nëpërmjet orës kur fytyra ose gjurma e gishtit nuk njihet."</string>
-    <string name="biometric_settings_intro_with_fingerprint" msgid="4312041617237493461">"Mund ta shkyçësh nëpërmjet orës kur gjurma e gishtit ose fytyra nuk njihet."</string>
-    <string name="biometric_settings_intro_with_face" msgid="7658123658803417930">"Mund ta shkyçësh nëpërmjet orës kur fytyra ose gjurma e gishtit nuk njihet."</string>
+    <string name="biometric_settings_intro_with_activeunlock" msgid="5032953826653108646">"Kur konfiguron \"Shkyçjen me fytyrë\" dhe \"Shkyçjen me gjurmën e gishtit\", telefoni do të kërkojë gjurmën tënde të gishtit kur mban maskë apo kur je në një zonë të errët.\n\n\"Shkyçja me orë\" është një mënyrë tjetër praktike për të shkyçur telefonin, p.sh. kur i ke gishtat të lagur ose kur fytyra nuk njihet."</string>
+    <string name="biometric_settings_intro_with_fingerprint" msgid="5881355884547769337">"\"Shkyçja me orë\" është një mënyrë tjetër praktike për të shkyçur telefonin, p.sh. kur gjurma jote e gishtit nuk njihet."</string>
+    <string name="biometric_settings_intro_with_face" msgid="7671919122230588521">"\"Shkyçja me orë\" është një mënyrë tjetër praktike për të shkyçur telefonin, p.sh. kur fytyra jote nuk njihet."</string>
     <string name="biometric_settings_use_fingerprint_or_watch_for" msgid="1160830065613858095">"Përdor gjurmën e gishtit ose orën"</string>
     <string name="biometric_settings_use_face_or_watch_for" msgid="1507077107150278532">"Përdor fytyrën ose gjurmën e gishtit"</string>
     <string name="biometric_settings_use_face_fingerprint_or_watch_for" msgid="7495835723072020641">"Përdor fytyrën, gjurmën e gishtit ose orën"</string>
@@ -1011,7 +1011,6 @@
     <string name="wifi_hotspot_no_password_subtext" msgid="3685689196772398783">"Nuk është caktuar fjalëkalim"</string>
     <string name="wifi_hotspot_name_title" msgid="6633480190014369846">"Emri i zonës së qasjes për internet"</string>
     <string name="wifi_hotspot_password_title" msgid="9096340919454296786">"Fjalëkalimi i zonës së qasjes për internet"</string>
-    <string name="wifi_hotspot_ap_band_title" msgid="560262446129195042">"Banda AP"</string>
     <string name="wifi_hotspot_auto_off_title" msgid="8855711787485504882">"Çaktivizo automatikisht zonën e qasjes për internet"</string>
     <string name="wifi_hotspot_auto_off_summary" msgid="8283656069997871354">"Kur nuk është lidhur asnjë pajisje"</string>
     <string name="wifi_hotspot_maximize_compatibility" msgid="6494125684420024058">"Zgjero përputhshmërinë"</string>
@@ -1127,8 +1126,7 @@
     <string name="adaptive_sleep_privacy" msgid="7664570136417980556">"\"Vëmendja ndaj ekranit\" përdor kamerën e përparme për të parë nëse dikush po shikon tek ekrani. Funksionon në pajisje dhe imazhet nuk ruhen apo dërgohen asnjëherë te Google."</string>
     <string name="adaptive_sleep_contextual_slice_title" msgid="7467588613212629758">"Aktivizo vëmendjen ndaj ekranit"</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"Mbaje ekranin aktiv kur e shikon"</string>
-    <!-- no translation found for power_consumption_footer_summary (4901490700555257237) -->
-    <skip />
+    <string name="power_consumption_footer_summary" msgid="4901490700555257237">"Koha më e gjatë e pritjes së ekranit do të përdorë më shumë bateri."</string>
     <string name="auto_rotate_camera_lock_title" msgid="5369003176695105872">"Kamera është e kyçur"</string>
     <string name="auto_rotate_camera_lock_summary" msgid="5699491516271544672">"Kamera duhet të jetë e shkyçur për \"Zbulimin e fytyrës\""</string>
     <string name="adaptive_sleep_camera_lock_summary" msgid="8417541183603618098">"Kamera duhet të jetë e shkyçur për \"Vëmendjen ndaj ekranit\""</string>
@@ -1259,6 +1257,10 @@
     <string name="imei_multi_sim" msgid="9001570420423929507">"IMEI (foleja e kartës <xliff:g id="IMEI_SLOT_ID">%1$d</xliff:g>)"</string>
     <string name="imei_multi_sim_primary" msgid="7914653040843734282">"IMEI (foleja e kartës <xliff:g id="IMEI_SLOT_ID_PRIMARY">%1$d</xliff:g>) (kryesore)"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"Për ta shfaqur, zgjidh rrjetin e ruajtur"</string>
+    <!-- no translation found for status_imei (5719752369250485007) -->
+    <skip />
+    <!-- no translation found for status_imei_sv (6908985558726440951) -->
+    <skip />
     <string name="status_min_number" msgid="4492899165438225714">"MINUTA"</string>
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"Versioni PRL"</string>
@@ -1452,16 +1454,6 @@
     <string name="tether_settings_summary_all" msgid="7565193614882005775">"Zona e qasjes së internetit, USB, Bluetooth, eternet"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"Interneti nuk ndahet me pajisje të tjera"</string>
     <string name="tether_preference_summary_off" msgid="6266799346319794630">"Joaktive"</string>
-    <string name="tethering_interface_options" msgid="7575535888135143650">"Ndarja e internetit"</string>
-    <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"Mos përdor zonën e qasjes për Wi-Fi"</string>
-    <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"Ndaje internetin vetëm me USB"</string>
-    <string name="disable_wifi_hotspot_when_bluetooth_on" msgid="4711723299880116345">"Ndaje internetin vetëm me Bluetooth"</string>
-    <string name="disable_wifi_hotspot_when_ethernet_on" msgid="4123242400542103599">"Ndaje internetin vetëm me eternet"</string>
-    <string name="disable_wifi_hotspot_when_usb_and_bluetooth_on" msgid="5258774769658150180">"Ndaje internetin vetëm me USB dhe Bluetooth"</string>
-    <string name="disable_wifi_hotspot_when_usb_and_ethernet_on" msgid="7126313562907225612">"Ndaje internetin vetëm me USB dhe eternet"</string>
-    <string name="disable_wifi_hotspot_when_bluetooth_and_ethernet_on" msgid="2943464651349235967">"Ndaje internetin vetëm me Bluetooth dhe eternet"</string>
-    <string name="disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on" msgid="3934609816834760008">"Ndaje internetin vetëm me USB, Bluetooth dhe eternet"</string>
-    <string name="usb_title" msgid="1157283449840612901">"USB"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"Ndarje interneti përmes USB-së"</string>
     <string name="bluetooth_tether_checkbox_text" msgid="6108398414967813545">"Ndarje interneti përmes Bluetooth-it"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Ndarja e Ethernet-it"</string>
@@ -2051,6 +2043,10 @@
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Butoni i energjisë mbyll telefonatën"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="5508351959249876801">"Kursor mausi i madh"</string>
     <string name="accessibility_toggle_large_pointer_icon_summary" msgid="1480527946039237705">"Bëje treguesin e miut më të dukshëm"</string>
+    <!-- no translation found for accessibility_force_invert_title (5015366813138748407) -->
+    <skip />
+    <!-- no translation found for accessibility_force_invert_summary (1882329675950887268) -->
+    <skip />
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Hiq animacionet"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Redukto lëvizjen në ekran"</string>
     <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"Audioja mono"</string>
@@ -2582,8 +2578,6 @@
     <string name="emergency_tone_title" msgid="6673118505206685168">"Sinjali i telefonimit të urgjencës"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"Cakto sjelljen kur kryhet një telefonatë urgjence"</string>
     <string name="privacy_settings_title" msgid="6437057228255974577">"Rezervimi"</string>
-    <string name="backup_summary_state_on" msgid="9018954639693085240">"Aktiv"</string>
-    <string name="backup_summary_state_off" msgid="5341339397224835909">"Joaktiv"</string>
     <string name="backup_section_title" msgid="6539706829848457794">"Rezervo dhe restauro"</string>
     <string name="personal_data_section_title" msgid="6368610168625722682">"Të dhënat personale"</string>
     <string name="backup_data_title" msgid="507663517227498525">"Rezervo të dhënat e mia"</string>
@@ -4325,6 +4319,8 @@
     <string name="change_nfc_tag_apps_detail_summary" msgid="3338220223868942195">"Lejo këtë aplikacion të hapet kur skanohet një etiketë NFC.\nNëse kjo leje është aktive, aplikacioni do të ofrohet si opsion sa herë që zbulohet një etiketë."</string>
     <string name="media_output_title" msgid="8283629315159510680">"Luaj median te"</string>
     <string name="media_output_label_title" msgid="4139048973886819148">"Luaj <xliff:g id="LABEL">%s</xliff:g> në"</string>
+    <!-- no translation found for media_output_title_without_playing (3339321669132875821) -->
+    <skip />
     <string name="media_output_default_summary" msgid="4200343059396412376">"Kjo pajisje"</string>
     <string name="media_out_summary_ongoing_call_state" msgid="475188726850090363">"Nuk ofrohet gjatë telefonatave"</string>
     <string name="take_call_on_title" msgid="1159417893879946757">"Prano telefonatën te"</string>

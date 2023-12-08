@@ -1310,6 +1310,10 @@
     <string name="privatespace_retry_signin_title">Sign in to set up Private Space</string>
     <!-- Summary for the Private Space account login error screen. [CHAR LIMIT=NONE] -->
     <string name="privatespace_retry_summary">You need to sign in to an account to set up Private Space</string>
+    <!-- private space lock setup screen title. This title is asking the user to choose a type of screen lock (such as a pattern, PIN, or password) that they need to enter to unlock private space. [CHAR LIMIT=60] -->
+    <string name="private_space_lock_setup_title">Choose a lock for your private space</string>
+    <!-- private space lock setup screen description [CHAR LIMIT=NONE] -->
+    <string name="private_space_lock_setup_description">You can unlock your private space using your fingerprint. For security, this option requires a backup lock.</string>
 
     <!-- TODO(b/309950257): Remove below strings once QSTIle fulfillment is complete. -->
     <!-- Header in hide Private Space settings page to unhide Private Space. [CHAR LIMIT=90] -->
@@ -1322,7 +1326,6 @@
     <string name="privatespace_turnoff_hide">Turn off \‘Hide Private Space when locked\’ toggle</string>
     <!-- Note in hide Private Space settings page to inform that this is a development feature. [CHAR LIMIT=NONE] -->
     <string name="privatespace_development_note">Note to Googlers: The development of this feature is still in progress</string>
-
 
     <!-- Text shown when "Add fingerprint" button is disabled -->
     <string name="fingerprint_add_max">You can add up to <xliff:g id="count" example="5">%d</xliff:g> fingerprints</string>
@@ -9475,6 +9478,14 @@
     <string name="permit_draw_overlay">Allow display over other apps</string>
     <!-- Description of allowing overlay setting [CHAR LIMIT=NONE] -->
     <string name="allow_overlay_description">Allow this app to display on top of other apps you\u2019re using. This app will be able to see where you tap or change what\u2019s displayed on the screen.</string>
+
+    <!-- Change Media Output settings -->
+    <!-- Title for Change Media Output screen [CHAR LIMIT=30] -->
+    <string name="media_routing_control_title">Change media output</string>
+    <!-- Label for setting which controls whether app can change media outputs for other apps [CHAR LIMIT=45] -->
+    <string name="allow_media_routing_control">Allow app to switch media output</string>
+    <!-- Description for allowing change media output setting [CHAR LIMIT=NONE] -->
+    <string name="allow_media_routing_description">Allow this app to choose which connected device plays audio or video from other apps. If allowed, this app can access a list of available devices such as headphones and speakers and choose which output device is used to stream or cast audio or video.</string>
 
     <!-- Manager External Storage settings title [CHAR LIMIT=40] -->
     <string name="manage_external_storage_title">All files access</string>
