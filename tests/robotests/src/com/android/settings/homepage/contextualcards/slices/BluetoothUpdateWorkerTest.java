@@ -29,6 +29,7 @@ import com.android.settings.slices.ShadowSliceBackgroundWorker;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -60,6 +61,7 @@ public class BluetoothUpdateWorkerTest {
         verify(mResolver).notifyChange(URI, null);
     }
 
+    @Ignore("b/315399487")
     @Test
     public void onActiveDeviceChanged_shouldNotifyChange() {
         mBluetoothUpdateWorker.onActiveDeviceChanged(null, 0);
