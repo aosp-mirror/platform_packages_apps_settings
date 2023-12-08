@@ -159,4 +159,12 @@ public class CombinedBiometricStatusUtils {
     public String getProfileSettingsClassName() {
         return Settings.CombinedBiometricProfileSettingsActivity.class.getName();
     }
+
+    /**
+     * Returns the class name of the Settings page corresponding to combined biometric settings for
+     * Private profile.
+     */
+    public String getPrivateProfileSettingsClassName() {
+        return Settings.PrivateSpaceBiometricSettingsActivity.class.getName();
+    }
 }

@@ -34,11 +34,11 @@
         android:summary="@string/unlock_set_unlock_mode_pattern"
         settings:searchable="false" />
 
-    <Preference
+    <com.android.settingslib.RestrictedPreference
         android:key="private_space_biometrics"
         android:title="@string/private_space_biometric_title"
-        android:summary="@string/private_space_biometric_summary"
-        android:fragment="com.android.settings.privatespace.onelock.FaceFingerprintUnlockFragment"
+        android:summary="@string/summary_placeholder"
+        android:fragment="com.android.settings.privatespace.onelock.PrivateSpaceBiometricSettings"
         settings:searchable="false" />
 
 </PreferenceScreen>
