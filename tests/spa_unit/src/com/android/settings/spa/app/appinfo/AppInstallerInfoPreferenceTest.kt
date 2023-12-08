@@ -21,14 +21,11 @@ import android.content.Intent
 import android.content.pm.ApplicationInfo
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.test.assertIsDisplayed
-import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotDisplayed
-import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.isEnabled
+import androidx.compose.ui.test.isNotEnabled
 import androidx.compose.ui.test.junit4.createComposeRule
-import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
 import androidx.test.core.app.ApplicationProvider
@@ -122,9 +119,8 @@ class AppInstallerInfoPreferenceTest {
             .thenReturn(null)
 
         setContent()
-        waitUntilDisplayed()
 
-        composeTestRule.onNode(preferenceNode).assertIsNotEnabled()
+        composeTestRule.waitUntilExists(preferenceNode.and(isNotEnabled()))
     }
 
     @Test
@@ -143,17 +139,16 @@ class AppInstallerInfoPreferenceTest {
     @Test
     fun whenNotInstantApp() {
         setContent()
-        waitUntilDisplayed()
 
-        composeTestRule.onNodeWithText("App installed from installer label")
-            .assertIsDisplayed()
-            .assertIsEnabled()
+        composeTestRule.waitUntilExists(hasText("App installed from installer label"))
+        composeTestRule.waitUntilExists(preferenceNode.and(isEnabled()))
     }
 
     @Test
     fun whenClick_startActivity() {
         setContent()
-        waitUntilDisplayed()
+        composeTestRule.delay()
+
         composeTestRule.onRoot().performClick()
         composeTestRule.delay()
 
@@ -168,14 +163,10 @@ class AppInstallerInfoPreferenceTest {
         }
     }
 
-    private fun waitUntilDisplayed() {
-        composeTestRule.waitUntilExists(preferenceNode)
-    }
-
     private val preferenceNode = hasText(context.getString(R.string.app_install_details_title))
 
     private companion object {
-        const val PACKAGE_NAME = "packageName"
+        const val PACKAGE_NAME = "package.name"
         const val INSTALLER_PACKAGE_NAME = "installer"
         const val INSTALLER_PACKAGE_LABEL = "installer label"
         val STORE_LINK = Intent("store/link")
