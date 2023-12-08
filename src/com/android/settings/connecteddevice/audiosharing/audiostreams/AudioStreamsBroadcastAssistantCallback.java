@@ -32,7 +32,7 @@ public class AudioStreamsBroadcastAssistantCallback
     private static final String TAG = "AudioStreamsBroadcastAssistantCallback";
     private static final boolean DEBUG = BluetoothUtils.D;
 
-    private AudioStreamsProgressCategoryController mCategoryController;
+    private final AudioStreamsProgressCategoryController mCategoryController;
 
     public AudioStreamsBroadcastAssistantCallback(
             AudioStreamsProgressCategoryController audioStreamsProgressCategoryController) {
@@ -52,6 +52,7 @@ public class AudioStreamsBroadcastAssistantCallback
                             + " state: "
                             + state);
         }
+        mCategoryController.handleSourceConnected(state);
     }
 
     @Override
@@ -94,7 +95,20 @@ public class AudioStreamsBroadcastAssistantCallback
 
     @Override
     public void onSourceAddFailed(
-            BluetoothDevice sink, BluetoothLeBroadcastMetadata source, int reason) {}
+            BluetoothDevice sink, BluetoothLeBroadcastMetadata source, int reason) {
+        if (DEBUG) {
+            Log.d(
+                    TAG,
+                    "onSourceAddFailed() sink : "
+                            + sink.getAddress()
+                            + " source: "
+                            + source
+                            + " reason: "
+                            + reason);
+        }
+        mCategoryController.showToast(
+                String.format(Locale.US, "Failed to join broadcast, reason %d", reason));
+    }
 
     @Override
     public void onSourceAdded(BluetoothDevice sink, int sourceId, int reason) {
@@ -119,7 +133,7 @@ public class AudioStreamsBroadcastAssistantCallback
         if (DEBUG) {
             Log.d(TAG, "onSourceFound() broadcastId : " + source.getBroadcastId());
         }
-        mCategoryController.addSourceFound(source);
+        mCategoryController.handleSourceFound(source);
     }
 
     @Override
@@ -127,7 +141,7 @@ public class AudioStreamsBroadcastAssistantCallback
         if (DEBUG) {
             Log.d(TAG, "onSourceLost() broadcastId : " + broadcastId);
         }
-        mCategoryController.removeSourceLost(broadcastId);
+        mCategoryController.handleSourceLost(broadcastId);
     }
 
     @Override
@@ -137,8 +151,23 @@ public class AudioStreamsBroadcastAssistantCallback
     public void onSourceModifyFailed(BluetoothDevice sink, int sourceId, int reason) {}
 
     @Override
-    public void onSourceRemoveFailed(BluetoothDevice sink, int sourceId, int reason) {}
+    public void onSourceRemoveFailed(BluetoothDevice sink, int sourceId, int reason) {
+        Log.w(TAG, "onSourceRemoveFailed() sourceId : " + sourceId + " reason : " + reason);
+        mCategoryController.showToast(
+                String.format(
+                        Locale.US,
+                        "Failed to remove source %d for sink %s",
+                        sourceId,
+                        sink.getAddress()));
+    }
 
     @Override
-    public void onSourceRemoved(BluetoothDevice sink, int sourceId, int reason) {}
+    public void onSourceRemoved(BluetoothDevice sink, int sourceId, int reason) {
+        if (DEBUG) {
+            Log.d(TAG, "onSourceRemoved() sourceId : " + sourceId + " reason : " + reason);
+        }
+        mCategoryController.showToast(
+                String.format(
+                        Locale.US, "Source %d removed for sink %s", sourceId, sink.getAddress()));
+    }
 }
