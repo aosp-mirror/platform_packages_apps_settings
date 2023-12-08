@@ -239,7 +239,12 @@ fun validateAndSaveApnData(
     if (apnData.customizedConfig.readOnlyApn) {
         return true
     }
-    val errorMsg = validateApnData(apnData, context)
+    var errorMsg = validateApnData(apnData, context)
+    if (errorMsg != null) {
+        //TODO: showError(this)
+        return false
+    }
+    errorMsg = validateMMSC(apnData.mmsc, context)
     if (errorMsg != null) {
         //TODO: showError(this)
         return false
@@ -529,4 +534,9 @@ private fun getEditableApnType(apnData: ApnData): String {
 fun deleteApn(uri: Uri, context: Context) {
     val contentResolver = context.contentResolver
     contentResolver.delete(uri, null, null)
+}
+
+fun validateMMSC(mmsc: String, context: Context): String? {
+    return if (mmsc.matches(Regex("^https?:\\/\\/.+"))) null
+            else context.resources.getString(R.string.error_mmsc_valid)
 }
