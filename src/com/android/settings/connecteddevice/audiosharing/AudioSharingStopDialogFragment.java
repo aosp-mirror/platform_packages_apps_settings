@@ -19,11 +19,16 @@ package com.android.settings.connecteddevice.audiosharing;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
 public class AudioSharingStopDialogFragment extends InstrumentedDialogFragment {
@@ -68,22 +73,20 @@ public class AudioSharingStopDialogFragment extends InstrumentedDialogFragment {
         Bundle arguments = requireArguments();
         String newDeviceName = arguments.getString(BUNDLE_KEY_NEW_DEVICE_NAME);
         final AlertDialog.Builder builder =
-                new AlertDialog.Builder(getActivity())
-                        .setTitle("Stop sharing audio?")
-                        .setCancelable(false);
+                new AlertDialog.Builder(getActivity()).setCancelable(false);
+        LayoutInflater inflater = LayoutInflater.from(builder.getContext());
+        View customTitle =
+                inflater.inflate(R.layout.dialog_custom_title_audio_sharing, /* parent= */ null);
+        ImageView icon = customTitle.findViewById(R.id.title_icon);
+        icon.setImageResource(R.drawable.ic_warning_24dp);
+        TextView title = customTitle.findViewById(R.id.title_text);
+        title.setText("Stop sharing audio?");
         builder.setMessage(
-                newDeviceName + " is connected, devices in audio sharing will disconnect.");
+                newDeviceName + " wants to connect, headphones in audio sharing will disconnect.");
         builder.setPositiveButton(
-                "Stop sharing",
-                (dialog, which) -> {
-                    sListener.onStopSharingClick();
-                });
-        builder.setNegativeButton(
-                "Cancel",
-                (dialog, which) -> {
-                    dismiss();
-                });
-        AlertDialog dialog = builder.create();
+                "Stop sharing", (dialog, which) -> sListener.onStopSharingClick());
+        builder.setNegativeButton("Cancel", (dialog, which) -> dismiss());
+        AlertDialog dialog = builder.setCustomTitle(customTitle).create();
         dialog.setCanceledOnTouchOutside(false);
         return dialog;
     }
