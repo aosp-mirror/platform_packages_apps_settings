@@ -23,6 +23,7 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.telephony.data.ApnSetting;
 
+import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.network.MobileDataContentObserver;
@@ -31,21 +32,20 @@ import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
 /**
- * Preference controller for "Mobile data"
+ * Preference controller for "MMS messages"
  */
 public class MmsMessagePreferenceController extends TelephonyTogglePreferenceController implements
         LifecycleObserver, OnStart, OnStop {
     private TelephonyManager mTelephonyManager;
-    private SubscriptionManager mSubscriptionManager;
     private MobileDataContentObserver mMobileDataContentObserver;
     private PreferenceScreen mScreen;
+    private Preference mPreference;
 
     public MmsMessagePreferenceController(Context context, String key) {
         super(context, key);
-        mSubscriptionManager = context.getSystemService(SubscriptionManager.class);
         mMobileDataContentObserver = new MobileDataContentObserver(
                 new Handler(Looper.getMainLooper()));
-        mMobileDataContentObserver.setOnMobileDataChangedListener(()->refreshPreference());
+        mMobileDataContentObserver.setOnMobileDataChangedListener(() -> refreshPreference());
     }
 
     @Override
@@ -63,6 +63,7 @@ public class MmsMessagePreferenceController extends TelephonyTogglePreferenceCon
     public void onStart() {
         if (mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             mMobileDataContentObserver.register(mContext, mSubId);
+            updateState(mPreference);
         }
     }
 
@@ -77,6 +78,7 @@ public class MmsMessagePreferenceController extends TelephonyTogglePreferenceCon
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mScreen = screen;
+        mPreference = screen.findPreference(getPreferenceKey());
     }
 
 
@@ -88,11 +90,14 @@ public class MmsMessagePreferenceController extends TelephonyTogglePreferenceCon
 
     @Override
     public boolean setChecked(boolean isChecked) {
+        if (mTelephonyManager == null) {
+            return false;
+        }
         mTelephonyManager.setMobileDataPolicyEnabled(
                 TelephonyManager.MOBILE_DATA_POLICY_MMS_ALWAYS_ALLOWED, isChecked);
-        return isChecked == mTelephonyManager.isMobileDataPolicyEnabled(
-                TelephonyManager.MOBILE_DATA_POLICY_MMS_ALWAYS_ALLOWED);
+        return true;
     }
+
 
     @Override
     public boolean isChecked() {

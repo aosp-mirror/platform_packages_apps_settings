@@ -21,6 +21,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -148,6 +149,13 @@ public class WifiP2pSettingsTest {
     public void networkInfo_afterOnDeviceInfoAvailable_shouldBeRequested() {
         mFragment.onDeviceInfoAvailable(mock(WifiP2pDevice.class));
         verify(mWifiP2pManager, times(1)).requestNetworkInfo(any(), any());
+    }
+
+    @Test
+    public void onDeviceInfoAvailable_nullChannel_shouldBeIgnored() {
+        mFragment.sChannel = null;
+        mFragment.onDeviceInfoAvailable(mock(WifiP2pDevice.class));
+        verify(mWifiP2pManager, never()).requestNetworkInfo(any(), any());
     }
 
     @Test

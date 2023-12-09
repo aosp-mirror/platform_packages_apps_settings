@@ -16,25 +16,29 @@
 
 package com.android.settings.network;
 
+import static com.android.settings.network.SubscriptionUtil.KEY_UNIQUE_SUBSCRIPTION_DISPLAYNAME;
+import static com.android.settings.network.SubscriptionUtil.SUB_ID;
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
-import com.android.settings.R;
-
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+
+import com.android.settings.R;
 
 import org.junit.Before;
 import org.junit.Ignore;
@@ -179,7 +183,7 @@ public class SubscriptionUtilTest {
     @Ignore
     @Test
     public void getUniqueDisplayNames_identicalCarriers_fourDigitsUsed() {
-        // Both subscriptoins have the same display name.
+        // Both subscriptions have the same display name.
         final SubscriptionInfo info1 = mock(SubscriptionInfo.class);
         final SubscriptionInfo info2 = mock(SubscriptionInfo.class);
         when(info1.getSubscriptionId()).thenReturn(SUBID_1);
@@ -209,7 +213,7 @@ public class SubscriptionUtilTest {
     @Ignore
     @Test
     public void getUniqueDisplayNames_identicalCarriersAfterTrim_fourDigitsUsed() {
-        // Both subscriptoins have the same display name.
+        // Both subscriptions have the same display name.
         final SubscriptionInfo info1 = mock(SubscriptionInfo.class);
         final SubscriptionInfo info2 = mock(SubscriptionInfo.class);
         when(info1.getSubscriptionId()).thenReturn(SUBID_1);
@@ -238,8 +242,8 @@ public class SubscriptionUtilTest {
 
     @Ignore
     @Test
-    public void getUniqueDisplayNames_phoneNumberBlocked_subscriptoinIdFallback() {
-        // Both subscriptoins have the same display name.
+    public void getUniqueDisplayNames_phoneNumberBlocked_subscriptionIdFallback() {
+        // Both subscriptions have the same display name.
         final SubscriptionInfo info1 = mock(SubscriptionInfo.class);
         final SubscriptionInfo info2 = mock(SubscriptionInfo.class);
         when(info1.getSubscriptionId()).thenReturn(SUBID_1);
@@ -267,9 +271,9 @@ public class SubscriptionUtilTest {
 
     @Ignore
     @Test
-    public void getUniqueDisplayNames_phoneNumberIdentical_subscriptoinIdFallback() {
+    public void getUniqueDisplayNames_phoneNumberIdentical_subscriptionIdFallback() {
         // TODO have three here from the same carrier
-        // Both subscriptoins have the same display name.
+        // Both subscriptions have the same display name.
         final SubscriptionInfo info1 = mock(SubscriptionInfo.class);
         final SubscriptionInfo info2 = mock(SubscriptionInfo.class);
         final SubscriptionInfo info3 = mock(SubscriptionInfo.class);
@@ -445,6 +449,68 @@ public class SubscriptionUtilTest {
     }
 
     @Test
+    public void getUniqueDisplayName_hasRecord_useRecordBeTheResult() {
+        final SubscriptionInfo info1 = mock(SubscriptionInfo.class);
+        final SubscriptionInfo info2 = mock(SubscriptionInfo.class);
+        when(info1.getSubscriptionId()).thenReturn(SUBID_1);
+        when(info2.getSubscriptionId()).thenReturn(SUBID_2);
+        when(info1.getDisplayName()).thenReturn(CARRIER_1);
+        when(info2.getDisplayName()).thenReturn(CARRIER_1);
+        when(mSubMgr.getAvailableSubscriptionInfoList()).thenReturn(
+                Arrays.asList(info1, info2));
+
+        SharedPreferences sp = mock(SharedPreferences.class);
+        when(mContext.getSharedPreferences(
+                KEY_UNIQUE_SUBSCRIPTION_DISPLAYNAME, Context.MODE_PRIVATE)).thenReturn(sp);
+        when(sp.getString(eq(SUB_ID + SUBID_1), anyString())).thenReturn(CARRIER_1 + " 6789");
+        when(sp.getString(eq(SUB_ID + SUBID_2), anyString())).thenReturn(CARRIER_1 + " 4321");
+
+
+        final CharSequence nameOfSub1 =
+                SubscriptionUtil.getUniqueSubscriptionDisplayName(info1, mContext);
+        final CharSequence nameOfSub2 =
+                SubscriptionUtil.getUniqueSubscriptionDisplayName(info2, mContext);
+
+        assertThat(nameOfSub1).isNotNull();
+        assertThat(nameOfSub2).isNotNull();
+        assertEquals(CARRIER_1 + " 6789", nameOfSub1.toString());
+        assertEquals(CARRIER_1 + " 4321", nameOfSub2.toString());
+    }
+
+    @Test
+    public void getUniqueDisplayName_hasRecordAndNameIsChanged_doesNotUseRecordBeTheResult() {
+        final SubscriptionInfo info1 = mock(SubscriptionInfo.class);
+        final SubscriptionInfo info2 = mock(SubscriptionInfo.class);
+        when(info1.getSubscriptionId()).thenReturn(SUBID_1);
+        when(info2.getSubscriptionId()).thenReturn(SUBID_2);
+        when(info1.getDisplayName()).thenReturn(CARRIER_1);
+        when(info2.getDisplayName()).thenReturn(CARRIER_2);
+        when(mSubMgr.getAvailableSubscriptionInfoList()).thenReturn(
+                Arrays.asList(info1, info2));
+
+        SharedPreferences sp = mock(SharedPreferences.class);
+        SharedPreferences.Editor editor = mock(SharedPreferences.Editor.class);
+        when(mContext.getSharedPreferences(
+                KEY_UNIQUE_SUBSCRIPTION_DISPLAYNAME, Context.MODE_PRIVATE)).thenReturn(sp);
+        when(sp.edit()).thenReturn(editor);
+        when(editor.remove(anyString())).thenReturn(editor);
+
+        when(sp.getString(eq(SUB_ID + SUBID_1), anyString())).thenReturn(CARRIER_1 + " 6789");
+        when(sp.getString(eq(SUB_ID + SUBID_2), anyString())).thenReturn(CARRIER_1 + " 4321");
+
+
+        final CharSequence nameOfSub1 =
+                SubscriptionUtil.getUniqueSubscriptionDisplayName(info1, mContext);
+        final CharSequence nameOfSub2 =
+                SubscriptionUtil.getUniqueSubscriptionDisplayName(info2, mContext);
+
+        assertThat(nameOfSub1).isNotNull();
+        assertThat(nameOfSub2).isNotNull();
+        assertEquals(CARRIER_1 + " 6789", nameOfSub1.toString());
+        assertEquals(CARRIER_2.toString(), nameOfSub2.toString());
+    }
+
+    @Test
     public void isInactiveInsertedPSim_nullSubInfo_doesNotCrash() {
         assertThat(SubscriptionUtil.isInactiveInsertedPSim(null)).isFalse();
     }
@@ -465,5 +531,61 @@ public class SubscriptionUtilTest {
                 .thenReturn(true);
 
         assertTrue(SubscriptionUtil.isSimHardwareVisible(mContext));
+    }
+
+    @Test
+    public void isValidCachedDisplayName_matchesRule1_returnTrue() {
+        String originalName = "originalName";
+        String cacheString = "originalName 1234";
+
+        assertThat(SubscriptionUtil.isValidCachedDisplayName(cacheString, originalName)).isTrue();
+    }
+
+    @Test
+    public void isValidCachedDisplayName_matchesRule2_returnTrue() {
+        String originalName = "original Name";
+        String cacheString = originalName + " " + 1234;
+
+        assertThat(SubscriptionUtil.isValidCachedDisplayName(cacheString, originalName)).isTrue();
+    }
+
+    @Test
+    public void isValidCachedDisplayName_nameIsEmpty1_returnFalse() {
+        String originalName = "original Name";
+        String cacheString = "";
+
+        assertThat(SubscriptionUtil.isValidCachedDisplayName(cacheString, originalName)).isFalse();
+    }
+
+    @Test
+    public void isValidCachedDisplayName_nameIsEmpty2_returnFalse() {
+        String originalName = "";
+        String cacheString = "originalName 1234";
+
+        assertThat(SubscriptionUtil.isValidCachedDisplayName(cacheString, originalName)).isFalse();
+    }
+
+    @Test
+    public void isValidCachedDisplayName_nameIsDifferent_returnFalse() {
+        String originalName = "original Name";
+        String cacheString = "originalName 1234";
+
+        assertThat(SubscriptionUtil.isValidCachedDisplayName(cacheString, originalName)).isFalse();
+    }
+
+    @Test
+    public void isValidCachedDisplayName_noNumber_returnFalse() {
+        String originalName = "original Name";
+        String cacheString = originalName;
+
+        assertThat(SubscriptionUtil.isValidCachedDisplayName(cacheString, originalName)).isFalse();
+    }
+
+    @Test
+    public void isValidCachedDisplayName_noSpace_returnFalse() {
+        String originalName = "original Name";
+        String cacheString = originalName;
+
+        assertThat(SubscriptionUtil.isValidCachedDisplayName(cacheString, originalName)).isFalse();
     }
 }

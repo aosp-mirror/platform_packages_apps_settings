@@ -33,6 +33,7 @@ import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_SWIT
 import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_TITLE;
 import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_TITLE_URI;
 
+import android.app.PendingIntent;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
@@ -74,6 +75,8 @@ import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.drawer.TileUtils;
 import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.widget.AdaptiveIcon;
+
+import com.google.common.collect.Iterables;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -152,7 +155,14 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         }
         bindIcon(pref, tile, forceRoundedIcon);
 
-        if (tile instanceof ActivityTile) {
+        if (tile.hasPendingIntent()) {
+            // Pending intent cannot be launched within the settings app panel, and will thus always
+            // be executed directly.
+            pref.setOnPreferenceClickListener(preference -> {
+                launchPendingIntentOrSelectProfile(activity, tile, fragment.getMetricsCategory());
+                return true;
+            });
+        } else if (tile instanceof ActivityTile) {
             final int sourceMetricsCategory = fragment.getMetricsCategory();
             final Bundle metadata = tile.getMetaData();
             String clsName = null;
@@ -439,6 +449,33 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
             ((AdaptiveIcon) iconDrawable).setBackgroundColor(mContext, tile);
         }
         preference.setIcon(iconDrawable);
+    }
+
+    private void launchPendingIntentOrSelectProfile(FragmentActivity activity, Tile tile,
+            int sourceMetricCategory) {
+        ProfileSelectDialog.updatePendingIntentsIfNeeded(mContext, tile);
+
+        if (tile.pendingIntentMap.isEmpty()) {
+            Log.w(TAG, "Cannot resolve pendingIntent, skipping. " + tile.getIntent());
+            return;
+        }
+
+        mMetricsFeatureProvider.logSettingsTileClick(tile.getKey(mContext), sourceMetricCategory);
+
+        // Launch the pending intent directly if there's only one available.
+        if (tile.pendingIntentMap.size() == 1) {
+            PendingIntent pendingIntent = Iterables.getOnlyElement(tile.pendingIntentMap.values());
+            try {
+                pendingIntent.send();
+            } catch (PendingIntent.CanceledException e) {
+                Log.w(TAG, "Failed executing pendingIntent. " + pendingIntent.getIntent(), e);
+            }
+            return;
+        }
+
+        ProfileSelectDialog.show(activity.getSupportFragmentManager(), tile,
+                sourceMetricCategory, /* onShowListener= */ null,
+                /* onDismissListener= */ null, /* onCancelListener= */ null);
     }
 
     private void launchIntentOrSelectProfile(FragmentActivity activity, Tile tile, Intent intent,

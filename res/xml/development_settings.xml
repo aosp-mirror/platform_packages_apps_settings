@@ -258,7 +258,7 @@
             android:key="platform_compat_dashboard"
             android:title="@string/platform_compat_dashboard_title"
             android:summary="@string/platform_compat_dashboard_summary"
-            android:fragment="com.android.settings.development.compat.PlatformCompatDashboard"
+            settings:controller="com.android.settings.spa.development.compat.PlatformCompatPreferenceController"
             />
 
         <SwitchPreference
@@ -463,6 +463,11 @@
             android:key="pointer_location"
             android:title="@string/pointer_location"
             android:summary="@string/pointer_location_summary" />
+
+        <SwitchPreference
+            android:key="show_key_presses"
+            android:title="@string/show_key_presses"
+            android:summary="@string/show_key_presses_summary" />
 
     </PreferenceCategory>
 

@@ -35,11 +35,11 @@ import android.database.MatrixCursor;
 import android.os.BatteryManager;
 import android.os.BatteryUsageStats;
 import android.os.LocaleList;
-import android.os.RemoteException;
 import android.os.UserHandle;
 
 import com.android.settings.fuelgauge.batteryusage.db.AppUsageEventEntity;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryEventEntity;
+import com.android.settings.fuelgauge.batteryusage.db.BatteryUsageSlotEntity;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -49,7 +49,10 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
 import java.util.TimeZone;
 
 @RunWith(RobolectricTestRunner.class)
@@ -62,15 +65,18 @@ public final class ConvertUtilsTest {
     @Mock
     private BatteryUsageStats mBatteryUsageStats;
     @Mock
-    private IUsageStatsManager mUsageStatsManager;
-    @Mock
     private BatteryEntry mMockBatteryEntry;
+    @Mock
+    private IUsageStatsManager mUsageStatsManager;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
         mContext = spy(RuntimeEnvironment.application);
+        ConvertUtils.sUsageSource = ConvertUtils.EMPTY_USAGE_SOURCE;
         when(mContext.getPackageManager()).thenReturn(mMockPackageManager);
+        DataProcessor.sUsageStatsManager = mUsageStatsManager;
     }
 
     @Test
@@ -212,6 +218,22 @@ public final class ConvertUtilsTest {
     }
 
     @Test
+    public void convertBatteryUsageSlotToContentValues_normalCase_returnsExpectedContentValues() {
+        final BatteryUsageSlot batteryUsageSlot =
+                BatteryUsageSlot.newBuilder()
+                        .setStartTimestamp(10001L)
+                        .setEndTimestamp(30003L)
+                        .setStartBatteryLevel(88)
+                        .setEndBatteryLevel(66)
+                        .setScreenOnTime(123L)
+                        .build();
+        final ContentValues values =
+                ConvertUtils.convertBatteryUsageSlotToContentValues(batteryUsageSlot);
+        assertThat(values.getAsLong(BatteryUsageSlotEntity.KEY_TIMESTAMP)).isEqualTo(10001L);
+        assertThat(BatteryUsageSlotEntity.KEY_BATTERY_USAGE_SLOT).isNotEmpty();
+    }
+
+    @Test
     public void convertToBatteryHistEntry_returnsExpectedResult() {
         final int expectedType = 3;
         when(mMockBatteryEntry.getUid()).thenReturn(1001);
@@ -322,8 +344,8 @@ public final class ConvertUtilsTest {
         when(mMockPackageManager.getPackageUidAsUser(any(), anyInt())).thenReturn(1001);
 
         final long userId = 1;
-        final AppUsageEvent appUsageEvent = ConvertUtils.convertToAppUsageEvent(
-                mContext, mUsageStatsManager, event, userId);
+        final AppUsageEvent appUsageEvent =
+                ConvertUtils.convertToAppUsageEvent(mContext, mUsageStatsManager, event, userId);
         assertThat(appUsageEvent.getTimestamp()).isEqualTo(101L);
         assertThat(appUsageEvent.getType()).isEqualTo(AppUsageEventType.DEVICE_SHUTDOWN);
         assertThat(appUsageEvent.getPackageName()).isEqualTo("com.android.settings1");
@@ -338,8 +360,9 @@ public final class ConvertUtilsTest {
         final Event event = new Event();
         event.mPackage = null;
 
-        final AppUsageEvent appUsageEvent = ConvertUtils.convertToAppUsageEvent(
-                mContext, mUsageStatsManager, event, /*userId=*/ 0);
+        final AppUsageEvent appUsageEvent =
+                ConvertUtils.convertToAppUsageEvent(
+                        mContext, mUsageStatsManager, event, /*userId=*/ 0);
 
         assertThat(appUsageEvent).isNull();
     }
@@ -354,14 +377,14 @@ public final class ConvertUtilsTest {
                 .thenThrow(new PackageManager.NameNotFoundException());
 
         final long userId = 1;
-        final AppUsageEvent appUsageEvent = ConvertUtils.convertToAppUsageEvent(
-                mContext, mUsageStatsManager, event, userId);
+        final AppUsageEvent appUsageEvent =
+                ConvertUtils.convertToAppUsageEvent(mContext, mUsageStatsManager, event, userId);
 
         assertThat(appUsageEvent).isNull();
     }
 
     @Test
-    public void convertToAppUsageEventFromCursor_returnExpectedResult() {
+    public void convertToAppUsageEvent_returnExpectedResult() {
         final MatrixCursor cursor = new MatrixCursor(
                 new String[]{
                         AppUsageEventEntity.KEY_UID,
@@ -382,7 +405,7 @@ public final class ConvertUtilsTest {
                         100001L});
         cursor.moveToFirst();
 
-        final AppUsageEvent appUsageEvent = ConvertUtils.convertToAppUsageEventFromCursor(cursor);
+        final AppUsageEvent appUsageEvent = ConvertUtils.convertToAppUsageEvent(cursor);
 
         assertThat(appUsageEvent.getUid()).isEqualTo(101L);
         assertThat(appUsageEvent.getUserId()).isEqualTo(1001L);
@@ -394,7 +417,7 @@ public final class ConvertUtilsTest {
     }
 
     @Test
-    public void convertToAppUsageEventFromCursor_emptyInstanceIdAndRootName_returnExpectedResult() {
+    public void convertToAppUsageEvent_emptyInstanceIdAndRootName_returnExpectedResult() {
         final MatrixCursor cursor = new MatrixCursor(
                 new String[]{
                         AppUsageEventEntity.KEY_UID,
@@ -411,7 +434,7 @@ public final class ConvertUtilsTest {
                         AppUsageEventType.DEVICE_SHUTDOWN.getNumber()});
         cursor.moveToFirst();
 
-        final AppUsageEvent appUsageEvent = ConvertUtils.convertToAppUsageEventFromCursor(cursor);
+        final AppUsageEvent appUsageEvent = ConvertUtils.convertToAppUsageEvent(cursor);
 
         assertThat(appUsageEvent.getUid()).isEqualTo(101L);
         assertThat(appUsageEvent.getUserId()).isEqualTo(1001L);
@@ -429,6 +452,42 @@ public final class ConvertUtilsTest {
         assertThat(batteryEvent.getTimestamp()).isEqualTo(666L);
         assertThat(batteryEvent.getType()).isEqualTo(BatteryEventType.POWER_DISCONNECTED);
         assertThat(batteryEvent.getBatteryLevel()).isEqualTo(88);
+    }
+
+    @Test
+    public void convertToBatteryEventList_normalCase_returnsExpectedResult() {
+        final BatteryLevelData batteryLevelData = new BatteryLevelData(Map.of(
+                1691589600000L, 98, 1691596800000L, 90, 1691596812345L, 80));
+
+        final List<BatteryEvent> batteryEventList =
+                ConvertUtils.convertToBatteryEventList(batteryLevelData);
+
+        assertThat(batteryEventList).hasSize(2);
+        assertThat(batteryEventList.get(0).getTimestamp()).isEqualTo(1691589600000L);
+        assertThat(batteryEventList.get(0).getType()).isEqualTo(BatteryEventType.EVEN_HOUR);
+        assertThat(batteryEventList.get(0).getBatteryLevel()).isEqualTo(98);
+        assertThat(batteryEventList.get(1).getTimestamp()).isEqualTo(1691596800000L);
+        assertThat(batteryEventList.get(1).getType()).isEqualTo(BatteryEventType.EVEN_HOUR);
+        assertThat(batteryEventList.get(1).getBatteryLevel()).isEqualTo(90);
+    }
+
+    @Test
+    public void convertToBatteryUsageSlotList_normalCase_returnsExpectedResult() {
+        BatteryDiffData batteryDiffData1 = new BatteryDiffData(
+                mContext, 11L, 12L, 13, 14, 15, List.of(), List.of(), Set.of(), Set.of(), false);
+        BatteryDiffData batteryDiffData2 = new BatteryDiffData(
+                mContext, 21L, 22L, 23, 24, 25, List.of(), List.of(), Set.of(), Set.of(), false);
+        BatteryDiffData batteryDiffData3 = new BatteryDiffData(
+                mContext, 31L, 32L, 33, 34, 35, List.of(), List.of(), Set.of(), Set.of(), false);
+        final Map<Long, BatteryDiffData> batteryDiffDataMap = Map.of(
+                11L, batteryDiffData1, 21L, batteryDiffData2, 31L, batteryDiffData3);
+
+        final List<BatteryUsageSlot> batteryUsageSlotList =
+                ConvertUtils.convertToBatteryUsageSlotList(batteryDiffDataMap);
+
+        assertThat(batteryUsageSlotList).hasSize(3);
+        assertThat(batteryUsageSlotList.stream().map((s) -> s.getScreenOnTime()).sorted().toList())
+                .isEqualTo(List.of(15L, 25L, 35L));
     }
 
     @Test
@@ -450,51 +509,47 @@ public final class ConvertUtilsTest {
     }
 
     @Test
-    public void getEffectivePackageName_currentActivity_returnPackageName() throws RemoteException {
-        when(mUsageStatsManager.getUsageSource()).thenReturn(USAGE_SOURCE_CURRENT_ACTIVITY);
+    public void getEffectivePackageName_currentActivity_returnPackageName() {
+        ConvertUtils.sUsageSource = USAGE_SOURCE_CURRENT_ACTIVITY;
         final String packageName = "com.android.settings1";
         final String taskRootPackageName = "com.android.settings2";
 
         assertThat(ConvertUtils.getEffectivePackageName(
-                mUsageStatsManager, packageName, taskRootPackageName))
+                mContext, mUsageStatsManager, packageName, taskRootPackageName))
                 .isEqualTo(packageName);
     }
 
     @Test
-    public void getEffectivePackageName_usageSourceThrowException_returnPackageName()
-            throws RemoteException {
-        when(mUsageStatsManager.getUsageSource()).thenThrow(new RemoteException());
+    public void getEffectivePackageName_emptyUsageSource_returnPackageName() {
         final String packageName = "com.android.settings1";
         final String taskRootPackageName = "com.android.settings2";
 
         assertThat(ConvertUtils.getEffectivePackageName(
-                mUsageStatsManager, packageName, taskRootPackageName))
+                mContext, mUsageStatsManager, packageName, taskRootPackageName))
                 .isEqualTo(packageName);
     }
 
     @Test
-    public void getEffectivePackageName_rootActivity_returnTaskRootPackageName()
-            throws RemoteException {
-        when(mUsageStatsManager.getUsageSource()).thenReturn(USAGE_SOURCE_TASK_ROOT_ACTIVITY);
+    public void getEffectivePackageName_rootActivity_returnTaskRootPackageName() {
+        ConvertUtils.sUsageSource = USAGE_SOURCE_TASK_ROOT_ACTIVITY;
         final String packageName = "com.android.settings1";
         final String taskRootPackageName = "com.android.settings2";
 
         assertThat(ConvertUtils.getEffectivePackageName(
-                mUsageStatsManager, packageName, taskRootPackageName))
+                mContext, mUsageStatsManager, packageName, taskRootPackageName))
                 .isEqualTo(taskRootPackageName);
     }
 
     @Test
-    public void getEffectivePackageName_nullOrEmptyTaskRoot_returnPackageName()
-            throws RemoteException {
-        when(mUsageStatsManager.getUsageSource()).thenReturn(USAGE_SOURCE_TASK_ROOT_ACTIVITY);
+    public void getEffectivePackageName_nullOrEmptyTaskRoot_returnPackageName() {
+        ConvertUtils.sUsageSource = USAGE_SOURCE_TASK_ROOT_ACTIVITY;
         final String packageName = "com.android.settings1";
 
         assertThat(ConvertUtils.getEffectivePackageName(
-                mUsageStatsManager, packageName, /*taskRootPackageName=*/ null))
+                mContext, mUsageStatsManager, packageName, /*taskRootPackageName=*/ null))
                 .isEqualTo(packageName);
         assertThat(ConvertUtils.getEffectivePackageName(
-                mUsageStatsManager, packageName, /*taskRootPackageName=*/ ""))
+                mContext, mUsageStatsManager, packageName, /*taskRootPackageName=*/ ""))
                 .isEqualTo(packageName);
     }
 }

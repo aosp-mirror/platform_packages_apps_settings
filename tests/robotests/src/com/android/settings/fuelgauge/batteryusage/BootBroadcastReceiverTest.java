@@ -22,8 +22,10 @@ import static org.robolectric.Shadows.shadowOf;
 
 import android.app.AlarmManager;
 import android.app.Application;
+import android.app.usage.UsageStatsManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 
 import androidx.test.core.app.ApplicationProvider;
 
@@ -40,7 +42,6 @@ import org.robolectric.Shadows;
 import org.robolectric.shadows.ShadowAlarmManager;
 
 import java.time.Clock;
-import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -65,10 +66,12 @@ public final class BootBroadcastReceiverTest {
         BatteryTestUtils.insertDataToBatteryStateTable(
                 mContext, Clock.systemUTC().millis(), "com.android.systemui");
         mDao = database.batteryStateDao();
+        clearSharedPreferences();
     }
 
     @After
     public void tearDown() {
+        clearSharedPreferences();
         mPeriodicJobManager.reset();
     }
 
@@ -82,8 +85,21 @@ public final class BootBroadcastReceiverTest {
 
     @Test
     public void onReceive_withBootCompletedIntent_refreshesJob() {
+        final SharedPreferences sharedPreferences = DatabaseUtils.getSharedPreferences(mContext);
+        sharedPreferences
+                .edit()
+                .putInt(DatabaseUtils.KEY_LAST_USAGE_SOURCE,
+                        UsageStatsManager.USAGE_SOURCE_CURRENT_ACTIVITY)
+                .apply();
+
         mReceiver.onReceive(mContext, new Intent(Intent.ACTION_BOOT_COMPLETED));
+
         assertThat(mShadowAlarmManager.peekNextScheduledAlarm()).isNotNull();
+        assertThat(
+                DatabaseUtils
+                        .getSharedPreferences(mContext)
+                        .contains(DatabaseUtils.KEY_LAST_USAGE_SOURCE))
+                .isFalse();
     }
 
     @Test
@@ -133,15 +149,7 @@ public final class BootBroadcastReceiverTest {
                 BootBroadcastReceiver.ACTION_PERIODIC_JOB_RECHECK);
     }
 
-    private void insertExpiredData(int shiftDay) {
-        final long expiredTimeInMs =
-                Clock.systemUTC().millis() - Duration.ofDays(shiftDay).toMillis();
-        BatteryTestUtils.insertDataToBatteryStateTable(
-                mContext, expiredTimeInMs - 1, "com.android.systemui");
-        BatteryTestUtils.insertDataToBatteryStateTable(
-                mContext, expiredTimeInMs, "com.android.systemui");
-        // Ensures the testing environment is correct.
-        assertThat(mDao.getAllAfter(0)).hasSize(3);
+    private void clearSharedPreferences() {
+        DatabaseUtils.getSharedPreferences(mContext).edit().clear().apply();
     }
-
 }

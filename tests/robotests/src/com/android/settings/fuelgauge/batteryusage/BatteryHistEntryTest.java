@@ -15,6 +15,10 @@
  */
 package com.android.settings.fuelgauge.batteryusage;
 
+import static com.android.settings.fuelgauge.batteryusage.ConvertUtils.isSystemConsumer;
+import static com.android.settings.fuelgauge.batteryusage.ConvertUtils.isUidConsumer;
+import static com.android.settings.fuelgauge.batteryusage.ConvertUtils.isUserConsumer;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.when;
@@ -147,32 +151,32 @@ public final class BatteryHistEntryTest {
 
     @Test
     public void testIsAppEntry_returnExpectedResult() {
-        assertThat(createEntry(ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY).isAppEntry())
-                .isFalse();
-        assertThat(createEntry(ConvertUtils.CONSUMER_TYPE_USER_BATTERY).isAppEntry())
-                .isFalse();
-        assertThat(createEntry(ConvertUtils.CONSUMER_TYPE_UID_BATTERY).isAppEntry())
-                .isTrue();
+        assertThat(isUidConsumer(
+                createEntry(ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY).mConsumerType)).isFalse();
+        assertThat(isUidConsumer(
+                createEntry(ConvertUtils.CONSUMER_TYPE_USER_BATTERY).mConsumerType)).isFalse();
+        assertThat(isUidConsumer(
+                createEntry(ConvertUtils.CONSUMER_TYPE_UID_BATTERY).mConsumerType)).isTrue();
     }
 
     @Test
     public void testIsUserEntry_returnExpectedResult() {
-        assertThat(createEntry(ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY).isUserEntry())
-                .isFalse();
-        assertThat(createEntry(ConvertUtils.CONSUMER_TYPE_USER_BATTERY).isUserEntry())
-                .isTrue();
-        assertThat(createEntry(ConvertUtils.CONSUMER_TYPE_UID_BATTERY).isUserEntry())
-                .isFalse();
+        assertThat(isUserConsumer(
+                createEntry(ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY).mConsumerType)).isFalse();
+        assertThat(isUserConsumer(
+                createEntry(ConvertUtils.CONSUMER_TYPE_USER_BATTERY).mConsumerType)).isTrue();
+        assertThat(isUserConsumer(
+                createEntry(ConvertUtils.CONSUMER_TYPE_UID_BATTERY).mConsumerType)).isFalse();
     }
 
     @Test
     public void testIsSystemEntry_returnExpectedResult() {
-        assertThat(createEntry(ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY).isSystemEntry())
-                .isTrue();
-        assertThat(createEntry(ConvertUtils.CONSUMER_TYPE_USER_BATTERY).isSystemEntry())
-                .isFalse();
-        assertThat(createEntry(ConvertUtils.CONSUMER_TYPE_UID_BATTERY).isSystemEntry())
-                .isFalse();
+        assertThat(isSystemConsumer(
+                createEntry(ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY).mConsumerType)).isTrue();
+        assertThat(isSystemConsumer(
+                createEntry(ConvertUtils.CONSUMER_TYPE_USER_BATTERY).mConsumerType)).isFalse();
+        assertThat(isSystemConsumer(
+                createEntry(ConvertUtils.CONSUMER_TYPE_UID_BATTERY).mConsumerType)).isFalse();
     }
 
     @Test

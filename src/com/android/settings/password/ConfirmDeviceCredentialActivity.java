@@ -20,9 +20,7 @@ package com.android.settings.password;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.CONFIRM_WORK_PROFILE_PASSWORD_HEADER;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.CONFIRM_WORK_PROFILE_PATTERN_HEADER;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.CONFIRM_WORK_PROFILE_PIN_HEADER;
-import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_CONFIRM_PASSWORD;
-import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_CONFIRM_PATTERN;
-import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_CONFIRM_PIN;
+import static android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS;
 
 import android.app.Activity;
 import android.app.KeyguardManager;
@@ -32,6 +30,7 @@ import android.app.trust.TrustManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.hardware.biometrics.BiometricConstants;
 import android.hardware.biometrics.BiometricPrompt;
@@ -166,11 +165,18 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         mDetails = intent.getCharSequenceExtra(KeyguardManager.EXTRA_DESCRIPTION);
         String alternateButton = intent.getStringExtra(
                 KeyguardManager.EXTRA_ALTERNATE_BUTTON_LABEL);
-        boolean frp = KeyguardManager.ACTION_CONFIRM_FRP_CREDENTIAL.equals(intent.getAction());
-        boolean remoteValidation =
+        final boolean frp =
+                KeyguardManager.ACTION_CONFIRM_FRP_CREDENTIAL.equals(intent.getAction());
+        final boolean repairMode =
+                KeyguardManager.ACTION_CONFIRM_REPAIR_MODE_DEVICE_CREDENTIAL
+                        .equals(intent.getAction());
+        final boolean remoteValidation =
                 KeyguardManager.ACTION_CONFIRM_REMOTE_DEVICE_CREDENTIAL.equals(intent.getAction());
         mTaskOverlay = isInternalActivity()
                 && intent.getBooleanExtra(KeyguardManager.EXTRA_FORCE_TASK_OVERLAY, false);
+        final boolean prepareRepairMode =
+                KeyguardManager.ACTION_PREPARE_REPAIR_MODE_DEVICE_CREDENTIAL.equals(
+                        intent.getAction());
 
         mUserId = UserHandle.myUserId();
         if (isInternalActivity()) {
@@ -202,7 +208,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         }
         if (mDetails == null) {
             promptInfo.setDeviceCredentialSubtitle(
-                    getDetailsFromCredentialType(credentialType, isEffectiveUserManagedProfile));
+                    Utils.getConfirmCredentialStringForUser(this, mUserId, credentialType));
         }
 
         boolean launchedBiometric = false;
@@ -218,6 +224,14 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                     .setAlternateButton(alternateButton)
                     .setExternal(true)
                     .setUserId(LockPatternUtils.USER_FRP)
+                    .show();
+        } else if (repairMode) {
+            final ChooseLockSettingsHelper.Builder builder =
+                    new ChooseLockSettingsHelper.Builder(this);
+            launchedCDC = builder.setHeader(mTitle)
+                    .setDescription(mDetails)
+                    .setExternal(true)
+                    .setUserId(LockPatternUtils.USER_REPAIR_MODE)
                     .show();
         } else if (remoteValidation) {
             RemoteLockscreenValidationSession remoteLockscreenValidationSession =
@@ -244,6 +258,17 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                     .setExternal(true)
                     .show();
             return;
+        } else if (prepareRepairMode) {
+            final ChooseLockSettingsHelper.Builder builder =
+                    new ChooseLockSettingsHelper.Builder(this);
+            launchedCDC = builder.setHeader(mTitle)
+                    .setDescription(mDetails)
+                    .setExternal(true)
+                    .setUserId(mUserId)
+                    .setTaskOverlay(mTaskOverlay)
+                    .setRequestWriteRepairModePassword(true)
+                    .setForceVerifyPath(true)
+                    .show();
         } else if (isEffectiveUserManagedProfile && isInternalActivity()) {
             mCredentialMode = CREDENTIAL_MANAGED;
             if (isBiometricAllowed(effectiveUserId, mUserId)) {
@@ -314,45 +339,18 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         return null;
     }
 
-    private String getDetailsFromCredentialType(@LockPatternUtils.CredentialType int credentialType,
-            boolean isEffectiveUserManagedProfile) {
-        switch (credentialType) {
-            case LockPatternUtils.CREDENTIAL_TYPE_PIN:
-                if (isEffectiveUserManagedProfile) {
-                    return mDevicePolicyManager.getResources().getString(WORK_PROFILE_CONFIRM_PIN,
-                            () -> getString(
-                                    R.string.lockpassword_confirm_your_pin_generic_profile));
-                }
-
-                return getString(R.string.lockpassword_confirm_your_pin_generic);
-            case LockPatternUtils.CREDENTIAL_TYPE_PATTERN:
-                if (isEffectiveUserManagedProfile) {
-                    return mDevicePolicyManager.getResources().getString(
-                            WORK_PROFILE_CONFIRM_PATTERN,
-                            () -> getString(
-                                    R.string.lockpassword_confirm_your_pattern_generic_profile));
-                }
-
-                return getString(R.string.lockpassword_confirm_your_pattern_generic);
-            case LockPatternUtils.CREDENTIAL_TYPE_PASSWORD:
-                if (isEffectiveUserManagedProfile) {
-                    return mDevicePolicyManager.getResources().getString(
-                            WORK_PROFILE_CONFIRM_PASSWORD,
-                            () -> getString(
-                                    R.string.lockpassword_confirm_your_password_generic_profile));
-                }
-
-                return getString(R.string.lockpassword_confirm_your_password_generic);
-        }
-        return null;
-    }
-
     @Override
     protected void onStart() {
         super.onStart();
         // Translucent activity that is "visible", so it doesn't complain about finish()
         // not being called before onResume().
         setVisible(true);
+
+        if ((getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK)
+                != Configuration.UI_MODE_NIGHT_YES) {
+            getWindow().getInsetsController().setSystemBarsAppearance(
+                    APPEARANCE_LIGHT_STATUS_BARS, APPEARANCE_LIGHT_STATUS_BARS);
+        }
     }
 
     @Override

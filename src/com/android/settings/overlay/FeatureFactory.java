@@ -31,6 +31,7 @@ import com.android.settings.aware.AwareFeatureProvider;
 import com.android.settings.biometrics.face.FaceFeatureProvider;
 import com.android.settings.biometrics2.factory.BiometricsRepositoryProvider;
 import com.android.settings.bluetooth.BluetoothFeatureProvider;
+import com.android.settings.connecteddevice.stylus.StylusFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.deviceinfo.hardwareinfo.HardwareInfoFeatureProvider;
@@ -40,6 +41,7 @@ import com.android.settings.fuelgauge.BatteryStatusFeatureProvider;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.gestures.AssistGestureFeatureProvider;
 import com.android.settings.homepage.contextualcards.ContextualCardFeatureProvider;
+import com.android.settings.inputmethod.KeyboardSettingsFeatureProvider;
 import com.android.settings.localepicker.LocaleFeatureProvider;
 import com.android.settings.panel.PanelFeatureProvider;
 import com.android.settings.search.SearchFeatureProvider;
@@ -130,8 +132,7 @@ public abstract class FeatureFactory {
     /**
      * Gets implementation for Battery Settings provider.
      */
-    public abstract BatterySettingsFeatureProvider getBatterySettingsFeatureProvider(
-            Context context);
+    public abstract BatterySettingsFeatureProvider getBatterySettingsFeatureProvider();
 
     public abstract DashboardFeatureProvider getDashboardFeatureProvider(Context context);
 
@@ -203,6 +204,16 @@ public abstract class FeatureFactory {
      * Retrieves implementation for Wi-Fi feature.
      */
     public abstract WifiFeatureProvider getWifiFeatureProvider();
+
+    /**
+     * Retrieves implementation for keyboard settings feature.
+     */
+    public abstract KeyboardSettingsFeatureProvider getKeyboardSettingsFeatureProvider();
+
+    /**
+     * Retrieves implementation for stylus settings feature.
+     */
+    public abstract StylusFeatureProvider getStylusFeatureProvider();
 
     public static final class FactoryNotFoundException extends RuntimeException {
         public FactoryNotFoundException(Throwable throwable) {

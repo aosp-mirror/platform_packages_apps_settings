@@ -56,7 +56,8 @@ public class HearingAidHelper {
      * @return a list of hearing aids {@link BluetoothDevice} objects
      */
     public List<BluetoothDevice> getConnectedHearingAidDeviceList() {
-        if (!isHearingAidSupported()) {
+        if (mBluetoothAdapter == null || !mBluetoothAdapter.isEnabled()
+                || !isHearingAidSupported()) {
             return new ArrayList<>();
         }
         final List<BluetoothDevice> deviceList = new ArrayList<>();
@@ -88,9 +89,6 @@ public class HearingAidHelper {
      * supported.
      */
     public boolean isHearingAidSupported() {
-        if (mBluetoothAdapter == null || !mBluetoothAdapter.isEnabled()) {
-            return false;
-        }
         final List<Integer> supportedList = mBluetoothAdapter.getSupportedProfiles();
         return supportedList.contains(BluetoothProfile.HEARING_AID)
                 || supportedList.contains(BluetoothProfile.HAP_CLIENT);

@@ -63,9 +63,7 @@ public class TouchGesturesButtonPreferenceController extends BasePreferenceContr
 
     @Override
     public int getAvailabilityStatus() {
-        boolean touchGestureDeveloperMode = FeatureFlagUtils
-                .isEnabled(mContext, FeatureFlagUtils.SETTINGS_NEW_KEYBOARD_TRACKPAD_GESTURE);
-        return touchGestureDeveloperMode ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+        return AVAILABLE;
     }
 
     private void showTouchpadGestureEducation() {

@@ -196,8 +196,10 @@ public class DataSaverBackend {
     public interface Listener {
         void onDataSaverChanged(boolean isDataSaving);
 
-        void onAllowlistStatusChanged(int uid, boolean isAllowlisted);
+        /** This is called when allow list status is changed. */
+        default void onAllowlistStatusChanged(int uid, boolean isAllowlisted) {}
 
-        void onDenylistStatusChanged(int uid, boolean isDenylisted);
+        /** This is called when deny list status is changed. */
+        default void onDenylistStatusChanged(int uid, boolean isDenylisted) {}
     }
 }

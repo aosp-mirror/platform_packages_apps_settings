@@ -24,6 +24,7 @@
     <shortcut
         android:shortcutId="manifest-shortcut-data-usage"
         android:icon="@drawable/ic_shortcut_data_usage"
+        android:enabled="@bool/config_show_sim_info"
         android:shortcutShortLabel="@string/data_usage_summary_title">
         <intent
             android:action="android.intent.action.MAIN"

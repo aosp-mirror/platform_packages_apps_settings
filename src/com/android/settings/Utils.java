@@ -16,6 +16,9 @@
 
 package com.android.settings;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_CONFIRM_PASSWORD;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_CONFIRM_PATTERN;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_CONFIRM_PIN;
 import static android.content.Intent.EXTRA_USER;
 import static android.content.Intent.EXTRA_USER_ID;
 import static android.text.format.DateUtils.FORMAT_ABBREV_MONTH;
@@ -97,7 +100,6 @@ import android.widget.TabWidget;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 import androidx.annotation.VisibleForTesting;
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.core.graphics.drawable.RoundedBitmapDrawable;
@@ -708,9 +710,13 @@ public final class Utils extends com.android.settingslib.Utils {
         final int userId = bundle.getInt(Intent.EXTRA_USER_ID, UserHandle.myUserId());
         if (userId == LockPatternUtils.USER_FRP) {
             return allowAnyUser ? userId : checkUserOwnsFrpCredential(context, userId);
-        } else {
-            return allowAnyUser ? userId : enforceSameOwner(context, userId);
         }
+        if (userId == LockPatternUtils.USER_REPAIR_MODE) {
+            enforceRepairModeActive(context);
+            // any users can exit repair mode
+            return userId;
+        }
+        return allowAnyUser ? userId : enforceSameOwner(context, userId);
     }
 
     /**
@@ -727,6 +733,16 @@ public final class Utils extends com.android.settingslib.Utils {
         }
         throw new SecurityException("Current user id " + UserHandle.myUserId()
                 + " does not own frp credential.");
+    }
+
+    /**
+     * Throws {@link SecurityException} if repair mode is not active on the device.
+     */
+    private static void enforceRepairModeActive(Context context) {
+        if (LockPatternUtils.isRepairModeActive(context)) {
+            return;
+        }
+        throw new SecurityException("Repair mode is not active on the device.");
     }
 
     /**
@@ -766,6 +782,47 @@ public final class Utils extends com.android.settingslib.Utils {
             int userId) {
         final LockPatternUtils lpu = new LockPatternUtils(context);
         return lpu.getCredentialTypeForUser(userId);
+    }
+
+    /**
+     * Returns the confirmation credential string of the given user id.
+     */
+    @Nullable public static String getConfirmCredentialStringForUser(@NonNull Context context,
+             int userId, @LockPatternUtils.CredentialType int credentialType) {
+        final int effectiveUserId = UserManager.get(context).getCredentialOwnerProfile(userId);
+        final boolean isEffectiveUserManagedProfile = UserManager.get(context)
+                .isManagedProfile(effectiveUserId);
+        final DevicePolicyManager devicePolicyManager = context
+                .getSystemService(DevicePolicyManager.class);
+        switch (credentialType) {
+            case LockPatternUtils.CREDENTIAL_TYPE_PIN:
+                if (isEffectiveUserManagedProfile) {
+                    return devicePolicyManager.getResources().getString(WORK_PROFILE_CONFIRM_PIN,
+                            () -> context.getString(
+                                    R.string.lockpassword_confirm_your_pin_generic_profile));
+                }
+
+                return context.getString(R.string.lockpassword_confirm_your_pin_generic);
+            case LockPatternUtils.CREDENTIAL_TYPE_PATTERN:
+                if (isEffectiveUserManagedProfile) {
+                    return devicePolicyManager.getResources().getString(
+                            WORK_PROFILE_CONFIRM_PATTERN,
+                            () -> context.getString(
+                                    R.string.lockpassword_confirm_your_pattern_generic_profile));
+                }
+
+                return context.getString(R.string.lockpassword_confirm_your_pattern_generic);
+            case LockPatternUtils.CREDENTIAL_TYPE_PASSWORD:
+                if (isEffectiveUserManagedProfile) {
+                    return devicePolicyManager.getResources().getString(
+                            WORK_PROFILE_CONFIRM_PASSWORD,
+                            () -> context.getString(
+                                    R.string.lockpassword_confirm_your_password_generic_profile));
+                }
+
+                return context.getString(R.string.lockpassword_confirm_your_password_generic);
+        }
+        return null;
     }
 
     private static final StringBuilder sBuilder = new StringBuilder(50);
@@ -1295,4 +1352,5 @@ public final class Utils extends com.android.settingslib.Utils {
                 com.android.internal.R.bool.config_dreamsOnlyEnabledForDockUser);
         return dreamsSupported && (!dreamsOnlyEnabledForDockUser || canCurrentUserDream(context));
     }
+
 }

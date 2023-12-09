@@ -18,9 +18,11 @@ package com.android.settings.fuelgauge;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.ArrayMap;
 import android.util.SparseIntArray;
 
+import com.android.settings.fuelgauge.batteryusage.PowerAnomalyEventList;
 import com.android.settingslib.fuelgauge.Estimate;
 
 import java.util.List;
@@ -35,6 +37,11 @@ public interface PowerUsageFeatureProvider {
      * Check whether the battery usage button is enabled in the battery page
      */
     boolean isBatteryUsageEnabled();
+
+    /**
+     * Check whether the battery tips card is enabled in the battery usage page
+     */
+    boolean isBatteryTipsEnabled();
 
     /**
      * Returns a threshold (in milliseconds) for the minimal screen on time in battery usage list
@@ -127,6 +134,16 @@ public interface PowerUsageFeatureProvider {
      * Returns {@code true} if delay the hourly job when device is booting
      */
     boolean delayHourlyJobWhenBooting();
+
+    /**
+     * Insert settings configuration data for anomaly detection
+     */
+    void insertSettingsData(Context context, double displayDrain);
+
+    /**
+     * Returns {@link Bundle} for settings anomaly detection result
+     */
+    PowerAnomalyEventList detectSettingsAnomaly(Context context, double displayDrain);
 
     /**
      * Gets an intent for one time bypass charge limited to resume charging.
