@@ -416,7 +416,7 @@ public final class AccessibilityGestureNavigationTutorial {
         // TODO(b/308088945): Update tutorial string and image when UX provides them
         final int type = UserShortcutType.TWOFINGERTRIPLETAP;
         final CharSequence title =
-                context.getText(R.string.accessibility_tutorial_dialog_title_two_finger_triple);
+                context.getText(R.string.accessibility_tutorial_dialog_title_two_finger_double);
         final View image =
                 createIllustrationViewWithImageRawResource(context,
                         R.raw.a11y_shortcut_type_triple_tap);
