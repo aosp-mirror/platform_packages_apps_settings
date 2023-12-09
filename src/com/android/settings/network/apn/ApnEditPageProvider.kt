@@ -150,6 +150,7 @@ fun ApnPage(apnDataInit: ApnData, apnDataCur: MutableState<ApnData>, uriInit: Ur
             SettingsOutlinedTextField(
                 value = apnData.mmsc,
                 label = stringResource(R.string.apn_mmsc),
+                errorMessage = validateMMSC(apnData.mmsc, context),
                 enabled = apnData.mmscEnabled
             ) { apnData = apnData.copy(mmsc = it) }
             SettingsOutlinedTextField(

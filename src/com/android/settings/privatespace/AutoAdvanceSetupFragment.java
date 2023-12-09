@@ -52,16 +52,17 @@ public class AutoAdvanceSetupFragment extends InstrumentedFragment {
     private static final String TITLE_INDEX = "title_index";
     private static final int DELAY_BETWEEN_SCREENS = 5000; // 5 seconds in millis
     private static final int ANIMATION_DURATION_MILLIS = 500;
+    private static final int HEADER_TEXT_MAX_LINES = 4;
     private GlifLayout mRootView;
     private Handler mHandler;
     private int mScreenTitleIndex;
     private static final List<Pair<Integer, Integer>> HEADER_IMAGE_PAIRS =
             ImmutableList.of(
-                    new Pair(R.string.privatespace_apps_hidden_title,
+                    new Pair(R.string.private_space_notifications_hidden_title,
                             R.drawable.privatespace_setup_flow_placeholder),
-                    new Pair(R.string.privatespace_access_from_apps_title,
+                    new Pair(R.string.private_space_share_photos_title,
                             R.drawable.privatespace_setup_flow_placeholder),
-                    new Pair(R.string.privatespace_system_apps_installed_title,
+                    new Pair(R.string.private_space_apps_installed_title,
                             R.drawable.privatespace_setup_flow_placeholder));
 
     private Runnable mUpdateScreenResources =
@@ -116,6 +117,7 @@ public class AutoAdvanceSetupFragment extends InstrumentedFragment {
         mRootView =
                 (GlifLayout)
                         inflater.inflate(R.layout.privatespace_advancing_screen, container, false);
+        mRootView.getHeaderTextView().setMaxLines(HEADER_TEXT_MAX_LINES);
         updateHeaderAndImage();
         mHandler = new Handler(Looper.getMainLooper());
         mHandler.postDelayed(mUpdateScreenResources, DELAY_BETWEEN_SCREENS);

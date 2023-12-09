@@ -16,15 +16,25 @@
 
 package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
+import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsScanQrCodeController.REQUEST_SCAN_BT_BROADCAST_QR_CODE;
+
+import android.app.Activity;
+import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.android.settings.R;
+import com.android.settings.connecteddevice.audiosharing.audiostreams.qrcode.QrCodeScanModeFragment;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settingslib.bluetooth.BluetoothLeBroadcastMetadataExt;
+import com.android.settingslib.bluetooth.BluetoothUtils;
 
 public class AudioStreamsDashboardFragment extends DashboardFragment {
     private static final String TAG = "AudioStreamsDashboardFrag";
+    private static final boolean DEBUG = BluetoothUtils.D;
+    private AudioStreamsScanQrCodeController mAudioStreamsScanQrCodeController;
 
     public AudioStreamsDashboardFragment() {
         super();
@@ -59,7 +69,8 @@ public class AudioStreamsDashboardFragment extends DashboardFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        use(AudioStreamsScanQrCodeController.class).setFragment(this);
+        mAudioStreamsScanQrCodeController = use(AudioStreamsScanQrCodeController.class);
+        mAudioStreamsScanQrCodeController.setFragment(this);
     }
 
     @Override
@@ -70,6 +81,34 @@ public class AudioStreamsDashboardFragment extends DashboardFragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        // TODO(chelseahao): implementation.
+        if (DEBUG) {
+            Log.d(
+                    TAG,
+                    "onActivityResult() requestCode : "
+                            + requestCode
+                            + " resultCode : "
+                            + resultCode);
+        }
+        if (requestCode == REQUEST_SCAN_BT_BROADCAST_QR_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
+                String broadcastMetadata =
+                        data.getStringExtra(QrCodeScanModeFragment.KEY_BROADCAST_METADATA);
+                BluetoothLeBroadcastMetadata source =
+                        BluetoothLeBroadcastMetadataExt.INSTANCE.convertToBroadcastMetadata(
+                                broadcastMetadata);
+                if (source == null) {
+                    Log.w(TAG, "onActivityResult() source is null!");
+                    return;
+                }
+                if (DEBUG) {
+                    Log.d(TAG, "onActivityResult() broadcastId : " + source.getBroadcastId());
+                }
+                if (mAudioStreamsScanQrCodeController == null) {
+                    Log.w(TAG, "onActivityResult() AudioStreamsScanQrCodeController is null!");
+                    return;
+                }
+                mAudioStreamsScanQrCodeController.addSource(source);
+            }
+        }
     }
 }

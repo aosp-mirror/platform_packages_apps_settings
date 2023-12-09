@@ -1,36 +1,18 @@
 package com.android.settings.biometrics.fingerprint
 
-import androidx.annotation.StringRes
-import androidx.lifecycle.LiveData
-import java.util.UUID
+import android.os.Bundle
+import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.Lifecycle
 
 interface UdfpsEnrollCalibrator {
 
-    enum class Status {
-        PROCESSING,
-        GOT_RESULT,
-        FINISHED,
-    }
+    val extrasForNextIntent: Bundle
 
-    enum class Result {
-        NEED_CALIBRATION,
-        NO_NEED_CALIBRATION,
-    }
+    fun onSaveInstanceState(outState: Bundle)
 
-    val uuid: UUID
-
-    val statusLiveData: LiveData<Status>
-
-    val result: Result?
-
-    fun setFinished()
-
-    @get:StringRes
-    val calibrationDialogTitleTextId: Int
-
-    @get:StringRes
-    val calibrationDialogMessageTextId: Int
-
-    @get:StringRes
-    val calibrationDialogDismissButtonTextId: Int
+    fun onFindSensorPage(
+            lifecycle: Lifecycle,
+            fragmentManager: FragmentManager,
+            enableEnrollingRunnable: Runnable
+    )
 }

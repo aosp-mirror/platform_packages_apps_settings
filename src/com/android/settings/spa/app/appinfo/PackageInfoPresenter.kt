@@ -87,19 +87,9 @@ class PackageInfoPresenter(
     ).filter(::isInterestedAppChange).filter(::isForThisApp)
 
     @VisibleForTesting
-    fun isInterestedAppChange(intent: Intent) = when {
-        intent.action != Intent.ACTION_PACKAGE_REMOVED -> true
-
-        // filter out the fully removed case, in which the page will be closed, so no need to
-        // refresh
-        intent.getBooleanExtra(Intent.EXTRA_DATA_REMOVED, false) -> false
-
-        // filter out the updates are uninstalled (system app), which will followed by a replacing
-        // broadcast, we can refresh at that time
-        intent.getBooleanExtra(Intent.EXTRA_REPLACING, false) -> false
-
-        else -> true // App archived
-    }
+    fun isInterestedAppChange(intent: Intent) =
+        intent.action != Intent.ACTION_PACKAGE_REMOVED ||
+            intent.getBooleanExtra(Intent.EXTRA_ARCHIVAL, false)
 
     val flow: StateFlow<PackageInfo?> = merge(flowOf(null), appChangeFlow)
         .map { getPackageInfo() }

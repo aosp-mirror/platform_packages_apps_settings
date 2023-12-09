@@ -192,7 +192,7 @@ public class UseOneLockControllerSwitch extends AbstractPreferenceController
         new AlertDialog.Builder(mContext)
                   .setMessage(R.string.private_space_new_lock_title)
                   .setPositiveButton(
-                            R.string.privatespace_set_lock_label,
+                            R.string.private_space_set_lock_label,
                             (dialog, which) -> {
                                 Intent intent = new Intent(mContext,
                                           PrivateProfileContextHelperActivity.class);
@@ -201,7 +201,7 @@ public class UseOneLockControllerSwitch extends AbstractPreferenceController
                                           UNUNIFY_PRIVATE_LOCK_FROM_DEVICE_REQUEST,
                                           /*Options*/ null, mUserHandle);
                             })
-                  .setNegativeButton(R.string.privatespace_cancel_label,
+                  .setNegativeButton(R.string.private_space_cancel_label,
                             (DialogInterface dialog, int which) -> {
                                 mUnifyProfile.setChecked(true);
                                 dialog.dismiss();

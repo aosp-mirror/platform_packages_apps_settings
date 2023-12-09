@@ -16,6 +16,9 @@
 
 package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
+import android.bluetooth.BluetoothLeAudioContentMetadata;
+import android.bluetooth.BluetoothLeBroadcastMetadata;
+import android.bluetooth.BluetoothLeBroadcastReceiveState;
 import android.content.Context;
 import android.util.AttributeSet;
 
@@ -24,11 +27,13 @@ import androidx.annotation.Nullable;
 import com.android.settings.R;
 import com.android.settingslib.widget.TwoTargetPreference;
 
+import com.google.common.base.Strings;
+
 /**
  * Custom preference class for managing audio stream preferences with an optional lock icon. Extends
  * {@link TwoTargetPreference}.
  */
-public class AudioStreamPreference extends TwoTargetPreference {
+class AudioStreamPreference extends TwoTargetPreference {
     private boolean mIsConnected = false;
 
     /**
@@ -36,7 +41,7 @@ public class AudioStreamPreference extends TwoTargetPreference {
      *
      * @param isConnected Is this streams connected
      */
-    public void setIsConnected(
+    void setIsConnected(
             boolean isConnected, @Nullable OnPreferenceClickListener onPreferenceClickListener) {
         if (mIsConnected == isConnected
                 && getOnPreferenceClickListener() == onPreferenceClickListener) {
@@ -50,7 +55,7 @@ public class AudioStreamPreference extends TwoTargetPreference {
         notifyChanged();
     }
 
-    public AudioStreamPreference(Context context, @Nullable AttributeSet attrs) {
+    AudioStreamPreference(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         setIcon(R.drawable.ic_bt_audio_sharing);
     }
@@ -63,5 +68,35 @@ public class AudioStreamPreference extends TwoTargetPreference {
     @Override
     protected int getSecondTargetResId() {
         return R.layout.preference_widget_lock;
+    }
+
+    static AudioStreamPreference fromMetadata(
+            Context context, BluetoothLeBroadcastMetadata source) {
+        AudioStreamPreference preference = new AudioStreamPreference(context, /* attrs= */ null);
+        preference.setTitle(getBroadcastName(source));
+        return preference;
+    }
+
+    static AudioStreamPreference fromReceiveState(
+            Context context, BluetoothLeBroadcastReceiveState state) {
+        AudioStreamPreference preference = new AudioStreamPreference(context, /* attrs= */ null);
+        preference.setTitle(getBroadcastName(state));
+        return preference;
+    }
+
+    private static String getBroadcastName(BluetoothLeBroadcastMetadata source) {
+        return source.getSubgroups().stream()
+                .map(s -> s.getContentMetadata().getProgramInfo())
+                .filter(i -> !Strings.isNullOrEmpty(i))
+                .findFirst()
+                .orElse("Broadcast Id: " + source.getBroadcastId());
+    }
+
+    private static String getBroadcastName(BluetoothLeBroadcastReceiveState state) {
+        return state.getSubgroupMetadata().stream()
+                .map(BluetoothLeAudioContentMetadata::getProgramInfo)
+                .filter(i -> !Strings.isNullOrEmpty(i))
+                .findFirst()
+                .orElse("Broadcast Id: " + state.getBroadcastId());
     }
 }

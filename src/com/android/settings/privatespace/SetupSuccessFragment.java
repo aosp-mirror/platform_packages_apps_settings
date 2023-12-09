@@ -55,7 +55,7 @@ public class SetupSuccessFragment extends InstrumentedFragment {
         final FooterBarMixin mixin = rootView.getMixin(FooterBarMixin.class);
         mixin.setPrimaryButton(
                 new FooterButton.Builder(getContext())
-                        .setText(R.string.privatespace_done_label)
+                        .setText(R.string.private_space_done_label)
                         .setListener(onClickNext())
                         .setButtonType(FooterButton.ButtonType.NEXT)
                         .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Primary)
@@ -104,6 +104,7 @@ public class SetupSuccessFragment extends InstrumentedFragment {
     }
 
     private void accessPrivateSpaceToast() {
-        Toast.makeText(getContext(), R.string.scrolldown_to_access, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), R.string.private_space_scrolldown_to_access,
+                Toast.LENGTH_SHORT).show();
     }
 }

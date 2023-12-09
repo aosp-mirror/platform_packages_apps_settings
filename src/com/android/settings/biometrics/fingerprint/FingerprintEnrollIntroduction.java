@@ -57,7 +57,6 @@ import com.google.android.setupdesign.span.LinkSpan;
 import com.google.android.setupdesign.util.DeviceHelper;
 
 import java.util.List;
-import java.util.UUID;
 
 public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
 
@@ -92,12 +91,7 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
 
         if (Flags.udfpsEnrollCalibration()) {
             mCalibrator = FeatureFactory.getFeatureFactory().getFingerprintFeatureProvider()
-                    .getUdfpsEnrollCalibrator(
-                            (savedInstanceState != null)
-                                    ? savedInstanceState.getParcelable(
-                                        KEY_CALIBRATOR_UUID, UUID.class)
-                                    : null
-                        );
+                    .getUdfpsEnrollCalibrator(getApplicationContext(), savedInstanceState, null);
         }
 
         final ImageView iconFingerprint = findViewById(R.id.icon_fingerprint);
@@ -175,7 +169,7 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
         super.onSaveInstanceState(outState);
         if (Flags.udfpsEnrollCalibration()) {
             if (mCalibrator != null) {
-                outState.putSerializable(KEY_CALIBRATOR_UUID, mCalibrator.getUuid());
+                mCalibrator.onSaveInstanceState(outState);
             }
         }
     }
@@ -391,7 +385,7 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
         }
         if (Flags.udfpsEnrollCalibration()) {
             if (mCalibrator != null) {
-                intent.putExtra(KEY_CALIBRATOR_UUID, mCalibrator.getUuid());
+                intent.putExtras(mCalibrator.getExtrasForNextIntent());
             }
         }
         return intent;

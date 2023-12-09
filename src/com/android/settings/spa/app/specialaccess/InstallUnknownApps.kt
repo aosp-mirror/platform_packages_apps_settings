@@ -18,6 +18,7 @@ package com.android.settings.spa.app.specialaccess
 
 import android.Manifest
 import android.app.AppGlobals
+import android.app.AppOpsManager
 import android.app.AppOpsManager.MODE_DEFAULT
 import android.app.AppOpsManager.OP_REQUEST_INSTALL_PACKAGES
 import android.content.Context
@@ -55,6 +56,7 @@ class InstallUnknownAppsListModel(private val context: Context) :
             UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES,
             UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES_GLOBALLY,
         )
+    override val enhancedConfirmationKey: String = AppOpsManager.OPSTR_REQUEST_INSTALL_PACKAGES
 
     override fun transformItem(app: ApplicationInfo) =
         InstallUnknownAppsRecord(

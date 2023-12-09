@@ -18,6 +18,7 @@ package com.android.settings.spa.app.specialaccess
 
 import android.Manifest
 import android.app.AlarmManager
+import android.app.AppOpsManager
 import android.app.compat.CompatChanges
 import android.app.settings.SettingsEnums
 import android.content.Context
@@ -56,6 +57,7 @@ class AlarmsAndRemindersAppListModel(
     override val pageTitleResId = R.string.alarms_and_reminders_title
     override val switchTitleResId = R.string.alarms_and_reminders_switch_title
     override val footerResId = R.string.alarms_and_reminders_footer_title
+    override val enhancedConfirmationKey: String = AppOpsManager.OPSTR_SCHEDULE_EXACT_ALARM
 
     override fun transform(userIdFlow: Flow<Int>, appListFlow: Flow<List<ApplicationInfo>>) =
         userIdFlow.map { userId ->
