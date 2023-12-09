@@ -51,7 +51,7 @@ public class PrivateSpaceAccountLoginError extends InstrumentedFragment {
         final FooterBarMixin mixin = rootView.getMixin(FooterBarMixin.class);
         mixin.setPrimaryButton(
                 new FooterButton.Builder(getContext())
-                        .setText(R.string.privatespace_tryagain_label)
+                        .setText(R.string.private_space_tryagain_label)
                         .setListener(nextScreen())
                         .setButtonType(FooterButton.ButtonType.NEXT)
                         .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Primary)

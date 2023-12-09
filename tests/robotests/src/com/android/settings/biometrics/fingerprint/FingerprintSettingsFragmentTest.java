@@ -262,6 +262,13 @@ public class FingerprintSettingsFragmentTest {
         mFragment.onResume();
     }
 
+    @Test
+    public void testFragmentVisibleWhenNoHardwareDetected() {
+        doReturn(false).when(mFingerprintManager).isHardwareDetected();
+        setUpFragment(false);
+        assertThat(mFragment.isVisible()).isTrue();
+    }
+
     private void setSensor(@FingerprintSensorProperties.SensorType int sensorType) {
         final ArrayList<FingerprintSensorPropertiesInternal> props = new ArrayList<>();
         props.add(new FingerprintSensorPropertiesInternal(

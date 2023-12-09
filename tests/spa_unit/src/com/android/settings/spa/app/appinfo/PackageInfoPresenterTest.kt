@@ -105,6 +105,7 @@ class PackageInfoPresenterTest {
     fun isInterestedAppChange_archived_interested() {
         val intent = Intent(Intent.ACTION_PACKAGE_REMOVED).apply {
             data = Uri.parse("package:$PACKAGE_NAME")
+            putExtra(Intent.EXTRA_ARCHIVAL, true)
         }
 
         val isInterestedAppChange = packageInfoPresenter.isInterestedAppChange(intent)

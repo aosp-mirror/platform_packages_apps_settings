@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
@@ -90,17 +91,18 @@ public class AudioSharingDisconnectDialogFragment extends InstrumentedDialogFrag
         Bundle arguments = requireArguments();
         ArrayList<AudioSharingDeviceItem> deviceItems =
                 arguments.getParcelableArrayList(BUNDLE_KEY_DEVICE_TO_DISCONNECT_ITEMS);
-        String newDeviceName = arguments.getString(BUNDLE_KEY_NEW_DEVICE_NAME);
         final AlertDialog.Builder builder =
-                new AlertDialog.Builder(getActivity())
-                        .setTitle("Choose headphone to disconnect")
-                        .setCancelable(false);
+                new AlertDialog.Builder(getActivity()).setCancelable(false);
+        LayoutInflater inflater = LayoutInflater.from(builder.getContext());
+        View customTitle = inflater.inflate(R.layout.dialog_custom_title_audio_sharing, null);
+        ImageView icon = customTitle.findViewById(R.id.title_icon);
+        icon.setImageResource(R.drawable.ic_bt_audio_sharing);
+        TextView title = customTitle.findViewById(R.id.title_text);
+        title.setText("Choose a device to disconnect");
         View rootView =
-                LayoutInflater.from(builder.getContext())
-                        .inflate(R.layout.dialog_audio_sharing_disconnect, /* parent= */ null);
+                inflater.inflate(R.layout.dialog_audio_sharing_disconnect, /* parent= */ null);
         TextView subTitle = rootView.findViewById(R.id.share_audio_disconnect_description);
-        subTitle.setText(
-                "To share audio with " + newDeviceName + ", disconnect another pair of headphone");
+        subTitle.setText("Only 2 devices can share audio at a time");
         RecyclerView recyclerView = rootView.findViewById(R.id.device_btn_list);
         recyclerView.setAdapter(
                 new AudioSharingDeviceAdapter(
@@ -116,7 +118,7 @@ public class AudioSharingDisconnectDialogFragment extends InstrumentedDialogFrag
                 v -> {
                     dismiss();
                 });
-        AlertDialog dialog = builder.setView(rootView).create();
+        AlertDialog dialog = builder.setCustomTitle(customTitle).setView(rootView).create();
         dialog.setCanceledOnTouchOutside(false);
         return dialog;
     }
