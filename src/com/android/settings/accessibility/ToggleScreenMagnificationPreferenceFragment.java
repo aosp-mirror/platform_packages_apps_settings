@@ -477,7 +477,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         if (Flags.enableMagnificationMultipleFingerMultipleTapGesture()) {
             if (hasShortcutType(shortcutTypes, UserShortcutType.TWOFINGERTRIPLETAP)) {
                 final CharSequence twoFingerTripleTapTitle = context.getText(
-                        R.string.accessibility_shortcut_two_finger_triple_tap_keyword);
+                        R.string.accessibility_shortcut_two_finger_double_tap_keyword);
                 list.add(twoFingerTripleTapTitle);
             }
         }
