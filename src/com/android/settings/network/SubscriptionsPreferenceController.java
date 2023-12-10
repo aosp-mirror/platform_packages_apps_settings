@@ -521,7 +521,7 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
          * Uses to inject function and value for class and test class.
          */
         public boolean canSubscriptionBeDisplayed(Context context, int subId) {
-            return (SubscriptionUtil.getAvailableSubscription(context,
+            return (SubscriptionUtil.getAvailableSubscriptionBySubIdAndShowingForUser(context,
                     ProxySubscriptionManager.getInstance(context), subId) != null);
         }
 
