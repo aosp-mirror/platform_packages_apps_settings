@@ -19,8 +19,10 @@ package com.android.settings.network
 import android.app.Application
 import android.telephony.SubscriptionInfo
 import android.telephony.SubscriptionManager
+
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.asExecutor
 import kotlinx.coroutines.channels.awaitClose
@@ -32,13 +34,12 @@ import kotlinx.coroutines.plus
 
 class SubscriptionInfoListViewModel(application: Application) : AndroidViewModel(application) {
     private val scope = viewModelScope + Dispatchers.Default
-
     val subscriptionInfoListFlow = callbackFlow<List<SubscriptionInfo>> {
         val subscriptionManager = application.getSystemService(SubscriptionManager::class.java)!!
 
         val listener = object : SubscriptionManager.OnSubscriptionsChangedListener() {
             override fun onSubscriptionsChanged() {
-                trySend(subscriptionManager.activeSubscriptionInfoList ?: emptyList())
+                trySend(SubscriptionUtil.getActiveSubscriptions(subscriptionManager))
             }
         }
 
