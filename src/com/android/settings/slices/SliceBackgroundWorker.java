@@ -29,6 +29,8 @@ import android.os.SystemClock;
 import android.util.ArrayMap;
 import android.util.Log;
 
+import androidx.annotation.VisibleForTesting;
+
 import java.io.Closeable;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -172,7 +174,8 @@ public abstract class SliceBackgroundWorker<E> implements Closeable {
     /**
      * Notify that data was updated and attempt to sync changes to the Slice.
      */
-    protected final void notifySliceChange() {
+    @VisibleForTesting
+    public final void notifySliceChange() {
         NotifySliceChangeHandler.getInstance().updateSlice(this);
     }
 
