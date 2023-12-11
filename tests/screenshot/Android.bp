@@ -29,42 +29,46 @@ android_app {
         "androidx.fragment_fragment",
         "androidx.test.runner",
         "androidx.test.core",
-    ],
-    uses_libs: ["org.apache.http.legacy"],
-
-    aaptflags: ["--extra-packages com.android.settings"],
-    manifest: "AndroidManifest.xml",
-}
-
-android_test {
-    name: "SettingsScreenshotTests",
-    platform_apis: true,
-    certificate: "platform",
-    test_suites: ["device-tests"],
-    srcs: [
-        "src/**/*.kt",
-    ],
-    static_libs: [
-        "androidx.fragment_fragment-testing",
-        "androidx.fragment_fragment",
         "androidx.test.rules",
         "androidx.test.ext.junit",
         "platform-screenshot-diff-core",
         "Settings-testutils2",
-        "androidx.test.core",
         "androidx.test.espresso.core",
         "kotlinx-coroutines-android",
         "androidx.lifecycle_lifecycle-runtime-testing",
         "kotlinx_coroutines_test",
-        "Settings-core",
-        "androidx.test.runner",
     ],
     uses_libs: ["org.apache.http.legacy"],
-    compile_multilib: "both",
+    aaptflags: ["--extra-packages com.android.settings"],
     manifest: "AndroidManifest.xml",
-    test_config: "AndroidTest.xml",
-    use_embedded_native_libs: false,
-    asset_dirs: ["assets"],
+}
+
+// This is a RNG (Robolectric native graphics) test target.
+android_robolectric_test {
+    name: "SettingsScreenshotRNGTests",
+    srcs: [
+        "src/**/*.kt",
+    ],
+    test_suites: ["general-tests"],
+
+    // Do not add any libraries here, instead add them to the ScreenshotTestStub
+    static_libs: [
+        "androidx.compose.runtime_runtime",
+        "androidx.test.uiautomator_uiautomator",
+        "androidx.test.ext.junit",
+        "inline-mockito-robolectric-prebuilt",
+        "platform-parametric-runner-lib",
+        "uiautomator-helpers",
+
+    ],
+    libs: [
+        "android.test.runner",
+        "android.test.base",
+        "android.test.mock",
+        "truth",
+    ],
+
+    upstream: true,
     instrumentation_for: "ScreenshotTestStub",
-    data: [":ScreenshotTestStub"],
+    java_resource_dirs: ["config"],
 }
