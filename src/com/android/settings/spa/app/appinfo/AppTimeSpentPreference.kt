@@ -40,7 +40,7 @@ import kotlinx.coroutines.Dispatchers
 @Composable
 fun AppTimeSpentPreference(app: ApplicationInfo) {
     val context = LocalContext.current
-    val presenter = remember { AppTimeSpentPresenter(context, app) }
+    val presenter = remember(app) { AppTimeSpentPresenter(context, app) }
     if (!presenter.isAvailable()) return
 
     val summary by presenter.summaryLiveData.observeAsState(
