@@ -18,6 +18,8 @@ package com.android.settings.privatespace;
 
 import static android.os.UserManager.USER_TYPE_PROFILE_PRIVATE;
 import static android.provider.Settings.Secure.HIDE_PRIVATESPACE_ENTRY_POINT;
+import static android.provider.Settings.Secure.PRIVATE_SPACE_AUTO_LOCK;
+import static android.provider.Settings.Secure.PRIVATE_SPACE_AUTO_LOCK_NEVER;
 import static android.provider.Settings.Secure.USER_SETUP_COMPLETE;
 
 import android.app.ActivityManager;
@@ -46,7 +48,6 @@ import java.util.List;
 /** A class to help with the creation / deletion of Private Space */
 public class PrivateSpaceMaintainer {
     private static final String TAG = "PrivateSpaceMaintainer";
-
     @GuardedBy("this")
     private static PrivateSpaceMaintainer sPrivateSpaceMaintainer;
 
@@ -59,6 +60,9 @@ public class PrivateSpaceMaintainer {
     /** This is the default value for the hide private space entry point settings. */
     public static final int HIDE_PRIVATE_SPACE_ENTRY_POINT_DISABLED_VAL = 0;
     public static final int HIDE_PRIVATE_SPACE_ENTRY_POINT_ENABLED_VAL = 1;
+    /** Default value for private space auto lock settings. */
+    @Settings.Secure.PrivateSpaceAutoLockOption
+    public static final int PRIVATE_SPACE_AUTO_LOCK_DEFAULT_VAL = PRIVATE_SPACE_AUTO_LOCK_NEVER;
 
     public enum ErrorDeletingPrivateSpace {
             DELETE_PS_ERROR_NONE,
@@ -223,12 +227,32 @@ public class PrivateSpaceMaintainer {
         Settings.Secure.putInt(mContext.getContentResolver(), HIDE_PRIVATESPACE_ENTRY_POINT, value);
     }
 
+    /** Sets the setting for private space auto lock option. */
+    public void setPrivateSpaceAutoLockSetting(
+            @Settings.Secure.PrivateSpaceAutoLockOption int value) {
+        if (isPrivateSpaceAutoLockSupported()) {
+            Settings.Secure.putInt(mContext.getContentResolver(), PRIVATE_SPACE_AUTO_LOCK, value);
+        }
+    }
+
     /** @return the setting to show PS entry point. */
     public int getHidePrivateSpaceEntryPointSetting() {
         return Settings.Secure.getInt(
                 mContext.getContentResolver(),
                 HIDE_PRIVATESPACE_ENTRY_POINT,
                 HIDE_PRIVATE_SPACE_ENTRY_POINT_DISABLED_VAL);
+    }
+
+    /** @return the setting for PS auto lock option. */
+    @Settings.Secure.PrivateSpaceAutoLockOption
+    public int getPrivateSpaceAutoLockSetting() {
+        if (isPrivateSpaceAutoLockSupported()) {
+            return Settings.Secure.getInt(
+                    mContext.getContentResolver(),
+                    PRIVATE_SPACE_AUTO_LOCK,
+                    PRIVATE_SPACE_AUTO_LOCK_DEFAULT_VAL);
+        }
+        return PRIVATE_SPACE_AUTO_LOCK_DEFAULT_VAL;
     }
 
     /**
@@ -264,6 +288,7 @@ public class PrivateSpaceMaintainer {
 
     private void resetPrivateSpaceSettings() {
         setHidePrivateSpaceEntryPointSetting(HIDE_PRIVATE_SPACE_ENTRY_POINT_DISABLED_VAL);
+        setPrivateSpaceAutoLockSetting(PRIVATE_SPACE_AUTO_LOCK_DEFAULT_VAL);
     }
 
     /**
@@ -274,5 +299,10 @@ public class PrivateSpaceMaintainer {
     private void setUserSetupComplete() {
         Settings.Secure.putIntForUser(mContext.getContentResolver(), USER_SETUP_COMPLETE,
                 1, mUserHandle.getIdentifier());
+    }
+
+    private boolean isPrivateSpaceAutoLockSupported() {
+        return android.os.Flags.allowPrivateProfile()
+                && android.multiuser.Flags.supportAutolockForPrivateSpace();
     }
 }

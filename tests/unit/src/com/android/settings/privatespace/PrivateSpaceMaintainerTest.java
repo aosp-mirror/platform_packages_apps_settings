@@ -16,8 +16,11 @@
 
 package com.android.settings.privatespace;
 
+import static android.provider.Settings.Secure.PRIVATE_SPACE_AUTO_LOCK;
+
 import static com.android.settings.privatespace.PrivateSpaceMaintainer.HIDE_PRIVATE_SPACE_ENTRY_POINT_DISABLED_VAL;
 import static com.android.settings.privatespace.PrivateSpaceMaintainer.HIDE_PRIVATE_SPACE_ENTRY_POINT_ENABLED_VAL;
+import static com.android.settings.privatespace.PrivateSpaceMaintainer.PRIVATE_SPACE_AUTO_LOCK_DEFAULT_VAL;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -25,7 +28,9 @@ import android.app.ActivityManager;
 import android.app.IActivityManager;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.os.Flags;
 import android.os.RemoteException;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 
 import androidx.test.core.app.ApplicationProvider;
@@ -36,6 +41,7 @@ import com.android.settings.privatespace.PrivateSpaceMaintainer.ErrorDeletingPri
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
@@ -45,6 +51,7 @@ public class PrivateSpaceMaintainerTest {
     private static final String TAG = "PSMaintainerTest";
     private Context mContext;
     private ContentResolver mContentResolver;
+    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     /** Required setup before a test. */
     @Before
@@ -75,8 +82,8 @@ public class PrivateSpaceMaintainerTest {
     }
 
     /**
-     * Tests that {@link PrivateSpaceMaintainer#deletePrivateSpace()} returns error when PS does
-     * not exist.
+     * Tests that {@link PrivateSpaceMaintainer#deletePrivateSpace()} returns error when PS does not
+     * exist.
      */
     @Test
     public void deletePrivateSpace_psDoesNotExist_returnsNoPSError() {
@@ -100,8 +107,8 @@ public class PrivateSpaceMaintainerTest {
     }
 
     /**
-     * Tests that {@link PrivateSpaceMaintainer#createPrivateSpace()} when PS exists still
-     * returns true.
+     * Tests that {@link PrivateSpaceMaintainer#createPrivateSpace()} when PS exists still returns
+     * true.
      */
     @Test
     public void createPrivateSpace_psExists_returnsFalse() {
@@ -114,11 +121,11 @@ public class PrivateSpaceMaintainerTest {
     }
 
     /**
-     * Tests that {@link PrivateSpaceMaintainer#createPrivateSpace()} when no PS exists resets PS
-     * Settings.
+     * Tests that {@link PrivateSpaceMaintainer#createPrivateSpace()} when no PS exists resets hide
+     * PS Settings.
      */
     @Test
-    public void createPrivateSpace_psDoesNotExist_resetsPSSettings() {
+    public void createPrivateSpace_psDoesNotExist_resetsHidePSSettings() {
         PrivateSpaceMaintainer privateSpaceMaintainer =
                 PrivateSpaceMaintainer.getInstance(mContext);
         Settings.Secure.putInt(
@@ -134,10 +141,10 @@ public class PrivateSpaceMaintainerTest {
 
     /**
      * Tests that {@link PrivateSpaceMaintainer#createPrivateSpace()} when PS exist does not reset
-     * PS Settings.
+     * hide PS Settings.
      */
     @Test
-    public void createPrivateSpace_psExists_doesNotResetPSSettings() {
+    public void createPrivateSpace_psExists_doesNotResetHidePSSettings() {
         PrivateSpaceMaintainer privateSpaceMaintainer =
                 PrivateSpaceMaintainer.getInstance(mContext);
         privateSpaceMaintainer.createPrivateSpace();
@@ -212,8 +219,8 @@ public class PrivateSpaceMaintainerTest {
     }
 
     /**
-     * Tests that {@link PrivateSpaceMaintainer#createPrivateSpace()} when PS exists does not
-     * change USER_SETUP_COMPLETE setting.
+     * Tests that {@link PrivateSpaceMaintainer#createPrivateSpace()} when PS exists does not change
+     * USER_SETUP_COMPLETE setting.
      */
     @Test
     public void createPrivateSpace_pSExists_doesNotChangeUserSetupSetting() {
@@ -223,6 +230,52 @@ public class PrivateSpaceMaintainerTest {
         assertThat(getSecureUserSetupComplete()).isEqualTo(1);
         privateSpaceMaintainer.createPrivateSpace();
         assertThat(getSecureUserSetupComplete()).isEqualTo(1);
+    }
+
+    /**
+     * Tests that {@link PrivateSpaceMaintainer#createPrivateSpace()} when no PS exists resets PS
+     * auto lock Settings.
+     */
+    @Test
+    public void createPrivateSpace_psDoesNotExist_resetsPSAutoLockSettings() {
+        mSetFlagsRule.enableFlags(
+                Flags.FLAG_ALLOW_PRIVATE_PROFILE,
+                android.multiuser.Flags.FLAG_SUPPORT_AUTOLOCK_FOR_PRIVATE_SPACE);
+        final int autoLockOption = 2;
+        PrivateSpaceMaintainer privateSpaceMaintainer =
+                PrivateSpaceMaintainer.getInstance(mContext);
+        Settings.Secure.putInt(
+                mContentResolver, Settings.Secure.PRIVATE_SPACE_AUTO_LOCK, autoLockOption);
+
+        privateSpaceMaintainer.deletePrivateSpace();
+        privateSpaceMaintainer.createPrivateSpace();
+        assertThat(privateSpaceMaintainer.getPrivateSpaceAutoLockSetting())
+                .isEqualTo(PRIVATE_SPACE_AUTO_LOCK_DEFAULT_VAL);
+        assertThat(Settings.Secure.getInt(mContentResolver, PRIVATE_SPACE_AUTO_LOCK, -1))
+                .isEqualTo(PRIVATE_SPACE_AUTO_LOCK_DEFAULT_VAL);
+    }
+
+    /**
+     * Tests that {@link PrivateSpaceMaintainer#createPrivateSpace()} when PS exist does not reset
+     * PS auto lock setting.
+     */
+    @Test
+    public void createPrivateSpace_psExists_doesNotResetPSAutoLockSettings() {
+        mSetFlagsRule.enableFlags(
+                Flags.FLAG_ALLOW_PRIVATE_PROFILE,
+                android.multiuser.Flags.FLAG_SUPPORT_AUTOLOCK_FOR_PRIVATE_SPACE);
+        final int privateSpaceAutLockValue = 1;
+        PrivateSpaceMaintainer privateSpaceMaintainer =
+                PrivateSpaceMaintainer.getInstance(mContext);
+        privateSpaceMaintainer.createPrivateSpace();
+        Settings.Secure.putInt(
+                mContentResolver,
+                Settings.Secure.PRIVATE_SPACE_AUTO_LOCK,
+                privateSpaceAutLockValue);
+
+        privateSpaceMaintainer.createPrivateSpace();
+        assertThat(privateSpaceMaintainer.getPrivateSpaceAutoLockSetting())
+                .isEqualTo(privateSpaceAutLockValue);
     }
 
     private int getSecureUserSetupComplete() {
