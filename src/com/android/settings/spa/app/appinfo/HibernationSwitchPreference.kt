@@ -54,7 +54,7 @@ import kotlinx.coroutines.withContext
 @Composable
 fun HibernationSwitchPreference(app: ApplicationInfo) {
     val context = LocalContext.current
-    val presenter = remember { HibernationSwitchPresenter(context, app) }
+    val presenter = remember(app) { HibernationSwitchPresenter(context, app) }
     if (!presenter.isAvailable()) return
 
     val isEligibleState by presenter.isEligibleFlow.collectAsStateWithLifecycle(initialValue = false)

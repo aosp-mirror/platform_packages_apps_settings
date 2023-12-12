@@ -39,7 +39,7 @@ data class AppPermissionSummaryState(
 @Composable
 fun rememberAppPermissionSummary(app: ApplicationInfo): AppPermissionSummaryLiveData {
     val context = LocalContext.current
-    return remember { AppPermissionSummaryLiveData(context, app) }
+    return remember(app) { AppPermissionSummaryLiveData(context, app) }
 }
 
 class AppPermissionSummaryLiveData(
