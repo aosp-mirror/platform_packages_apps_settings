@@ -64,6 +64,7 @@ public class PoliteNotifVibrateUnlockedToggleControllerTest {
     public void isAvailable_flagEnabled_vibrationSupported_shouldReturnTrue() {
         // TODO: b/291907312 - remove feature flags
         mSetFlagsRule.enableFlags(Flags.FLAG_POLITE_NOTIFICATIONS);
+        mSetFlagsRule.enableFlags(Flags.FLAG_VIBRATE_WHILE_UNLOCKED);
         when(mVibrator.hasVibrator()).thenReturn(true);
         assertThat(mController.isAvailable()).isTrue();
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
@@ -74,6 +75,7 @@ public class PoliteNotifVibrateUnlockedToggleControllerTest {
     public void isAvailable_flagEnabled_vibrationNotSupported_shouldReturnFalse() {
         // TODO: b/291907312 - remove feature flags
         mSetFlagsRule.enableFlags(Flags.FLAG_POLITE_NOTIFICATIONS);
+        mSetFlagsRule.enableFlags(Flags.FLAG_VIBRATE_WHILE_UNLOCKED);
         when(mVibrator.hasVibrator()).thenReturn(false);
         assertThat(mController.isAvailable()).isFalse();
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
@@ -84,6 +86,7 @@ public class PoliteNotifVibrateUnlockedToggleControllerTest {
     public void isAvailable_flagDisabled_shouldReturnFalse() {
         // TODO: b/291907312 - remove feature flags
         mSetFlagsRule.disableFlags(Flags.FLAG_POLITE_NOTIFICATIONS);
+        mSetFlagsRule.enableFlags(Flags.FLAG_VIBRATE_WHILE_UNLOCKED);
         assertThat(mController.isAvailable()).isFalse();
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
                 BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
