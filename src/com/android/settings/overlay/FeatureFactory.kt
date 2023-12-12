@@ -29,6 +29,7 @@ import com.android.settings.connecteddevice.stylus.StylusFeatureProvider
 import com.android.settings.dashboard.DashboardFeatureProvider
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider
 import com.android.settings.deviceinfo.hardwareinfo.HardwareInfoFeatureProvider
+import com.android.settings.display.DisplayFeatureProvider
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider
 import com.android.settings.fuelgauge.BatterySettingsFeatureProvider
 import com.android.settings.fuelgauge.BatteryStatusFeatureProvider
@@ -175,6 +176,11 @@ abstract class FeatureFactory {
      * Gets implementation for Private Space account login feature.
      */
     abstract val privateSpaceLoginFeatureProvider: PrivateSpaceLoginFeatureProvider
+
+    /**
+     * Gets implementation for Display feature.
+     */
+    abstract val displayFeatureProvider: DisplayFeatureProvider
 
     companion object {
         private var _factory: FeatureFactory? = null

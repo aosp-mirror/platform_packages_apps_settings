@@ -34,9 +34,11 @@ import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.flags.Flags;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -106,6 +108,9 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment
     @VisibleForTesting
     AdaptiveSleepBatterySaverPreferenceController mAdaptiveSleepBatterySaverPreferenceController;
 
+    @Nullable
+    TogglePreferenceController mAdditionalTogglePreferenceController;
+
     public ScreenTimeoutSettings() {
         super();
         mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
@@ -133,6 +138,8 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment
                 com.android.settingslib.widget.preference.footer.R.layout.preference_footer);
         mPrivacyManager = SensorPrivacyManager.getInstance(context);
         mPrivacyChangedListener = (sensor, enabled) -> mAdaptiveSleepController.updatePreference();
+        mAdditionalTogglePreferenceController = FeatureFactory.getFeatureFactory()
+                .getDisplayFeatureProvider().createAdditionalPreference(context);
     }
 
     @Override
@@ -164,6 +171,8 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment
                 mReceiver, new IntentFilter(PowerManager.ACTION_POWER_SAVE_MODE_CHANGED));
         mPrivacyManager.addSensorPrivacyListener(CAMERA, mPrivacyChangedListener);
         mIsUserAuthenticated = false;
+        FeatureFactory.getFeatureFactory().getDisplayFeatureProvider().updatePreference(
+                mAdditionalTogglePreferenceController);
     }
 
     @Override
@@ -209,6 +218,9 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment
         mPrivacyPreference.setSelectable(false);
         mPrivacyPreference.setLayoutResource(
                 com.android.settingslib.widget.preference.footer.R.layout.preference_footer);
+
+        FeatureFactory.getFeatureFactory().getDisplayFeatureProvider()
+                .addToScreen(mAdditionalTogglePreferenceController, screen);
 
         if (isScreenAttentionAvailable(getContext())) {
             mAdaptiveSleepPermissionController.addToScreen(screen);
