@@ -148,7 +148,8 @@ public class AdvancedPowerUsageDetail extends DashboardFragment
         launchArgs.mShowTimeInformation = showTimeInformation;
         if (launchArgs.mShowTimeInformation) {
             launchArgs.mForegroundTimeMs = diffEntry.mForegroundUsageTimeInMs;
-            launchArgs.mBackgroundTimeMs = diffEntry.mBackgroundUsageTimeInMs;
+            launchArgs.mBackgroundTimeMs =
+                    diffEntry.mBackgroundUsageTimeInMs + diffEntry.mForegroundServiceUsageTimeInMs;
             launchArgs.mScreenOnTimeMs = diffEntry.mScreenOnTimeInMs;
             launchArgs.mAnomalyHintPrefKey = anomalyHintPrefKey;
             launchArgs.mAnomalyHintText = anomalyHintText;

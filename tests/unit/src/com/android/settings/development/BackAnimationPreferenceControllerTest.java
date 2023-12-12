@@ -29,6 +29,10 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.UserHandle;
+import android.platform.test.annotations.RequiresFlagsDisabled;
+import android.platform.test.annotations.RequiresFlagsEnabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.provider.Settings;
 
 import androidx.preference.PreferenceManager;
@@ -37,8 +41,11 @@ import androidx.preference.SwitchPreference;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 
+import com.android.window.flags.Flags;
+
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
@@ -57,6 +64,9 @@ public class BackAnimationPreferenceControllerTest {
     private Context mContext;
     private BackAnimationPreferenceController mController;
     private Looper mLooper;
+
+    @Rule
+    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
 
     @Before
     public void setUp() {
@@ -78,6 +88,18 @@ public class BackAnimationPreferenceControllerTest {
         mPreference.setKey(mController.getPreferenceKey());
         screen.addPreference(mPreference);
         mController.displayPreference(screen);
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_PREDICTIVE_BACK_SYSTEM_ANIMATIONS)
+    public void controllerNotAvailable_whenAconfigFlagEnabled() {
+        assertFalse(mController.isAvailable());
+    }
+
+    @Test
+    @RequiresFlagsDisabled(Flags.FLAG_PREDICTIVE_BACK_SYSTEM_ANIMATIONS)
+    public void controllerAvailable_whenAconfigFlagDisabled() {
+        assertTrue(mController.isAvailable());
     }
 
     @Test

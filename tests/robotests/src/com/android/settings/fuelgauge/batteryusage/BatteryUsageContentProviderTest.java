@@ -290,6 +290,7 @@ public final class BatteryUsageContentProviderTest {
                         .setPercentOfTotal(0.9)
                         .setForegroundUsageTimeInMs(1000)
                         .setBackgroundUsageTimeInMs(2000)
+                        .setForegroundServiceUsageTimeInMs(1500)
                         .setDrainType(1)
                         .build();
         final String expectedBatteryInformationString =
