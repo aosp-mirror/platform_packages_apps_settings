@@ -55,7 +55,11 @@ class AppPermissionSummaryLiveData(
 
     override fun onActive() {
         userPackageManager.addOnPermissionsChangeListener(onPermissionsChangedListener)
-        update()
+        if (app.isArchived) {
+            postValue(noPermissionRequestedState())
+        } else {
+            update()
+        }
     }
 
     override fun onInactive() {

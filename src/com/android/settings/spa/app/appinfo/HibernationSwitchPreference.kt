@@ -93,6 +93,10 @@ private class HibernationSwitchPresenter(context: Context, private val app: Appl
         DeviceConfig.getBoolean(NAMESPACE_APP_HIBERNATION, PROPERTY_APP_HIBERNATION_ENABLED, true)
 
     val isEligibleFlow = flow {
+        if (app.isArchived) {
+            emit(false)
+            return@flow
+        }
         val eligibility = getEligibility()
         emit(
             eligibility != HIBERNATION_ELIGIBILITY_EXEMPT_BY_SYSTEM &&
