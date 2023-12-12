@@ -40,7 +40,6 @@ import com.android.settings.flags.Flags;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -85,6 +84,7 @@ public class AudioSharingDialogFragmentTest {
 
     @Before
     public void setUp() {
+        ShadowAlertDialogCompat.reset();
         mShadowBluetoothAdapter = Shadow.extract(BluetoothAdapter.getDefaultAdapter());
         mShadowBluetoothAdapter.setEnabled(true);
         mShadowBluetoothAdapter.setIsLeAudioBroadcastSourceSupported(
@@ -95,11 +95,6 @@ public class AudioSharingDialogFragmentTest {
         mParent = new Fragment();
         FragmentController.setupFragment(
                 mParent, FragmentActivity.class, /* containerViewId= */ 0, /* bundle= */ null);
-    }
-
-    @After
-    public void tearDown() {
-        ShadowAlertDialogCompat.reset();
     }
 
     @Test
