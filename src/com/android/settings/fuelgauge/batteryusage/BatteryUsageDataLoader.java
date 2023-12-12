@@ -135,7 +135,10 @@ public final class BatteryUsageDataLoader {
                                                                             .isEmpty()))) {
                                 FeatureFactory.getFeatureFactory()
                                         .getPowerUsageFeatureProvider()
-                                        .detectSettingsAnomaly(context, /* displayDrain= */ 0);
+                                        .detectSettingsAnomaly(
+                                                context,
+                                                /* displayDrain= */ 0,
+                                                DetectRequestSourceType.TYPE_DATA_LOADER);
                             }
                         });
         if (batteryLevelData == null) {

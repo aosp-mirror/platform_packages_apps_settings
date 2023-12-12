@@ -27,6 +27,7 @@ import android.util.ArraySet;
 import android.util.SparseIntArray;
 
 import com.android.internal.util.ArrayUtils;
+import com.android.settings.fuelgauge.batteryusage.DetectRequestSourceType;
 import com.android.settings.fuelgauge.batteryusage.PowerAnomalyEventList;
 import com.android.settingslib.fuelgauge.Estimate;
 
@@ -168,10 +169,8 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
-    public void insertSettingsData(Context context, double displayDrain) {}
-
-    @Override
-    public PowerAnomalyEventList detectSettingsAnomaly(Context context, double displayDrain) {
+    public PowerAnomalyEventList detectSettingsAnomaly(
+            Context context, double displayDrain, DetectRequestSourceType detectRequestSourceType) {
         return null;
     }
 
