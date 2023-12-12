@@ -16,32 +16,13 @@
 -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.android.settings.tests.screenshot"
-    >
-
-    <application android:debuggable="true">
-        <provider
-            android:name="com.android.settings.slices.SettingsSliceProvider"
-            android:authorities="com.android.settings.tests.screenshot.disabled"
-            android:enabled="false"
-            tools:node="remove"
-            tools:replace="android:authorities" />
-
-    </application>
-
-    <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" />
-    <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
-    <uses-permission android:name="android.permission.READ_LOGS" />
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+        xmlns:androidprv="http://schemas.android.com/apk/prv/res/android"
+        coreApp="true"
+        package="com.android.settings">
     <uses-permission android:name="android.permission.READ_DEVICE_CONFIG" />
 
-    <instrumentation
-        android:name="androidx.test.runner.AndroidJUnitRunner"
-        android:label="Android Settings Screenshot tests"
-        android:targetPackage="com.android.settings.tests.screenshot" />
+    <application>
+        <activity android:name="com.android.settings.test.screenshot.ContainerActivity" android:exported="true" />
+    </application>
 
 </manifest>

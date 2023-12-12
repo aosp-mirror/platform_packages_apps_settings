@@ -111,6 +111,7 @@ public class BatteryEntry {
     @BatteryConsumer.PowerComponent private final int mPowerComponentId;
     private long mUsageDurationMs;
     private long mTimeInForegroundMs;
+    private long mTimeInForegroundServiceMs;
     private long mTimeInBackgroundMs;
 
     public String mName;
@@ -188,9 +189,14 @@ public class BatteryEntry {
                 }
             }
             mTimeInForegroundMs =
-                    uidBatteryConsumer.getTimeInStateMs(UidBatteryConsumer.STATE_FOREGROUND);
+                    uidBatteryConsumer.getTimeInProcessStateMs(
+                            UidBatteryConsumer.PROCESS_STATE_FOREGROUND);
+            mTimeInForegroundServiceMs =
+                    uidBatteryConsumer.getTimeInProcessStateMs(
+                            UidBatteryConsumer.PROCESS_STATE_FOREGROUND_SERVICE);
             mTimeInBackgroundMs =
-                    uidBatteryConsumer.getTimeInStateMs(UidBatteryConsumer.STATE_BACKGROUND);
+                    uidBatteryConsumer.getTimeInProcessStateMs(
+                            UidBatteryConsumer.PROCESS_STATE_BACKGROUND);
             mConsumedPowerInForeground =
                     safeGetConsumedPower(
                             uidBatteryConsumer, BATTERY_DIMENSIONS[BATTERY_USAGE_INDEX_FOREGROUND]);
@@ -433,20 +439,19 @@ public class BatteryEntry {
 
     /** Returns foreground time/ms that is attributed to this entry. */
     public long getTimeInForegroundMs() {
-        if (mBatteryConsumer instanceof UidBatteryConsumer) {
-            return mTimeInForegroundMs;
-        } else {
-            return mUsageDurationMs;
-        }
+        return (mBatteryConsumer instanceof UidBatteryConsumer)
+                ? mTimeInForegroundMs
+                : mUsageDurationMs;
+    }
+
+    /** Returns foreground service time/ms that is attributed to this entry. */
+    public long getTimeInForegroundServiceMs() {
+        return (mBatteryConsumer instanceof UidBatteryConsumer) ? mTimeInForegroundServiceMs : 0;
     }
 
     /** Returns background activity time/ms that is attributed to this entry. */
     public long getTimeInBackgroundMs() {
-        if (mBatteryConsumer instanceof UidBatteryConsumer) {
-            return mTimeInBackgroundMs;
-        } else {
-            return 0;
-        }
+        return (mBatteryConsumer instanceof UidBatteryConsumer) ? mTimeInBackgroundMs : 0;
     }
 
     /** Returns total amount of power (in milli-amp-hours) that is attributed to this entry. */
@@ -510,9 +515,14 @@ public class BatteryEntry {
         if (batteryConsumer instanceof UidBatteryConsumer) {
             UidBatteryConsumer uidBatteryConsumer = (UidBatteryConsumer) batteryConsumer;
             mTimeInForegroundMs +=
-                    uidBatteryConsumer.getTimeInStateMs(UidBatteryConsumer.STATE_FOREGROUND);
+                    uidBatteryConsumer.getTimeInProcessStateMs(
+                            UidBatteryConsumer.PROCESS_STATE_FOREGROUND);
+            mTimeInForegroundServiceMs +=
+                    uidBatteryConsumer.getTimeInProcessStateMs(
+                            UidBatteryConsumer.PROCESS_STATE_FOREGROUND_SERVICE);
             mTimeInBackgroundMs +=
-                    uidBatteryConsumer.getTimeInStateMs(UidBatteryConsumer.STATE_BACKGROUND);
+                    uidBatteryConsumer.getTimeInProcessStateMs(
+                            UidBatteryConsumer.PROCESS_STATE_BACKGROUND);
             mConsumedPowerInForeground +=
                     safeGetConsumedPower(
                             uidBatteryConsumer, BATTERY_DIMENSIONS[BATTERY_USAGE_INDEX_FOREGROUND]);

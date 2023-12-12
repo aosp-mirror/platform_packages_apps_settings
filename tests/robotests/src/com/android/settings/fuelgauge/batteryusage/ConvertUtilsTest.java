@@ -92,6 +92,7 @@ public final class ConvertUtilsTest {
         mMockBatteryEntry.mPercent = 0.3;
         when(mMockBatteryEntry.getTimeInForegroundMs()).thenReturn(1234L);
         when(mMockBatteryEntry.getTimeInBackgroundMs()).thenReturn(5689L);
+        when(mMockBatteryEntry.getTimeInForegroundServiceMs()).thenReturn(3456L);
         when(mMockBatteryEntry.getPowerComponentId()).thenReturn(-1);
         when(mMockBatteryEntry.getConsumerType())
                 .thenReturn(ConvertUtils.CONSUMER_TYPE_UID_BATTERY);
@@ -133,6 +134,7 @@ public final class ConvertUtilsTest {
         assertThat(batteryInformation.getPercentOfTotal()).isEqualTo(0.3);
         assertThat(batteryInformation.getForegroundUsageTimeInMs()).isEqualTo(1234L);
         assertThat(batteryInformation.getBackgroundUsageTimeInMs()).isEqualTo(5689L);
+        assertThat(batteryInformation.getForegroundServiceUsageTimeInMs()).isEqualTo(3456L);
         assertThat(batteryInformation.getDrainType()).isEqualTo(-1);
         assertThat(deviceBatteryState.getBatteryLevel()).isEqualTo(12);
         assertThat(deviceBatteryState.getBatteryStatus())
@@ -157,6 +159,7 @@ public final class ConvertUtilsTest {
         mMockBatteryEntry.mPercent = 0.3;
         when(mMockBatteryEntry.getTimeInForegroundMs()).thenReturn(1234L);
         when(mMockBatteryEntry.getTimeInBackgroundMs()).thenReturn(5689L);
+        when(mMockBatteryEntry.getTimeInForegroundServiceMs()).thenReturn(3456L);
         when(mMockBatteryEntry.getConsumerType())
                 .thenReturn(ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY);
 
@@ -196,6 +199,7 @@ public final class ConvertUtilsTest {
         assertThat(batteryInformation.getPercentOfTotal()).isEqualTo(0.3);
         assertThat(batteryInformation.getForegroundUsageTimeInMs()).isEqualTo(1234L);
         assertThat(batteryInformation.getBackgroundUsageTimeInMs()).isEqualTo(5689L);
+        assertThat(batteryInformation.getForegroundServiceUsageTimeInMs()).isEqualTo(3456L);
         assertThat(batteryInformation.getDrainType())
                 .isEqualTo(BatteryConsumer.POWER_COMPONENT_CPU);
         assertThat(deviceBatteryState.getBatteryLevel()).isEqualTo(12);
@@ -307,6 +311,7 @@ public final class ConvertUtilsTest {
         mMockBatteryEntry.mPercent = 0.3;
         when(mMockBatteryEntry.getTimeInForegroundMs()).thenReturn(1234L);
         when(mMockBatteryEntry.getTimeInBackgroundMs()).thenReturn(5689L);
+        when(mMockBatteryEntry.getTimeInForegroundServiceMs()).thenReturn(3456L);
         when(mMockBatteryEntry.getPowerComponentId()).thenReturn(expectedType);
         when(mMockBatteryEntry.getConsumerType())
                 .thenReturn(ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY);
@@ -331,6 +336,7 @@ public final class ConvertUtilsTest {
         assertThat(batteryHistEntry.mPercentOfTotal).isEqualTo(0.3);
         assertThat(batteryHistEntry.mForegroundUsageTimeInMs).isEqualTo(1234L);
         assertThat(batteryHistEntry.mBackgroundUsageTimeInMs).isEqualTo(5689L);
+        assertThat(batteryHistEntry.mForegroundServiceUsageTimeInMs).isEqualTo(3456L);
         assertThat(batteryHistEntry.mDrainType).isEqualTo(expectedType);
         assertThat(batteryHistEntry.mConsumerType)
                 .isEqualTo(ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY);

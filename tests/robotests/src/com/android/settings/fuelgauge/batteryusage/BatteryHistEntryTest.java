@@ -65,6 +65,7 @@ public final class BatteryHistEntryTest {
         when(mMockBatteryEntry.getConsumedPowerInCached()).thenReturn(1.5);
         mMockBatteryEntry.mPercent = 0.3;
         when(mMockBatteryEntry.getTimeInForegroundMs()).thenReturn(1234L);
+        when(mMockBatteryEntry.getTimeInForegroundServiceMs()).thenReturn(3456L);
         when(mMockBatteryEntry.getTimeInBackgroundMs()).thenReturn(5689L);
         when(mMockBatteryEntry.getPowerComponentId()).thenReturn(expectedType);
         when(mMockBatteryEntry.getConsumerType())
@@ -105,6 +106,7 @@ public final class BatteryHistEntryTest {
                         /* backgroundUsageConsumePower= */ 1.4,
                         /* cachedUsageConsumePower= */ 1.5,
                         /* foregroundUsageTimeInMs= */ 1234L,
+                        /* foregroundServiceUsageTimeInMs= */ 3456L,
                         /* backgroundUsageTimeInMs= */ 5689L,
                         /* batteryLevel= */ 12),
                 /* drainType= */ 3,
@@ -211,6 +213,7 @@ public final class BatteryHistEntryTest {
                         /* backgroundUsageConsumePower= */ 3,
                         /* cachedUsageConsumePower= */ 4,
                         /* foregroundUsageTimeInMs= */ 100,
+                        /* foregroundServiceUsageTimeInMs= */ 150,
                         /* backgroundUsageTimeInMs= */ 200,
                         /* batteryLevel= */ 90);
         final BatteryHistEntry upperHistEntry =
@@ -224,6 +227,7 @@ public final class BatteryHistEntryTest {
                         /* backgroundUsageConsumePower= */ 6,
                         /* cachedUsageConsumePower= */ 5,
                         /* foregroundUsageTimeInMs= */ 200,
+                        /* foregroundServiceUsageTimeInMs= */ 250,
                         /* backgroundUsageTimeInMs= */ 300,
                         /* batteryLevel= */ 80);
 
@@ -244,6 +248,7 @@ public final class BatteryHistEntryTest {
                 /* backgroundUsageConsumePower= */ 3 + 0.5 * (6 - 3),
                 /* cachedUsageConsumePower= */ 4 + 0.5 * (5 - 4),
                 /* foregroundUsageTimeInMs= */ Math.round(100 + 0.5 * (200 - 100)),
+                /* foregroundServiceUsageTimeInMs= */ Math.round(150 + 0.5 * (250 - 150)),
                 /* backgroundUsageTimeInMs= */ Math.round(200 + 0.5 * (300 - 200)),
                 /* batteryLevel= */ (int) Math.round(90 + 0.5 * (80 - 90)));
     }
@@ -264,6 +269,7 @@ public final class BatteryHistEntryTest {
                         /* backgroundUsageConsumePower= */ 6,
                         /* cachedUsageConsumePower= */ 5,
                         /* foregroundUsageTimeInMs= */ 200,
+                        /* foregroundServiceUsageTimeInMs= */ 250,
                         /* backgroundUsageTimeInMs= */ 300,
                         /* batteryLevel= */ 80);
 
@@ -288,6 +294,7 @@ public final class BatteryHistEntryTest {
                 /* backgroundUsageConsumePower= */ 0.5 * 6,
                 /* cachedUsageConsumePower= */ 0.5 * 5,
                 /* foregroundUsageTimeInMs= */ Math.round(0.5 * 200),
+                /* foregroundServiceUsageTimeInMs= */ Math.round(0.5 * 250),
                 /* backgroundUsageTimeInMs= */ Math.round(0.5 * 300),
                 /* batteryLevel= */ upperHistEntry.mBatteryLevel);
     }
@@ -317,6 +324,7 @@ public final class BatteryHistEntryTest {
                 /* backgroundUsageConsumePower= */ 1.4,
                 /* cachedUsageConsumePower= */ 1.5,
                 /* foregroundUsageTimeInMs= */ 1234L,
+                /*foregroundServiceUsageTimeInMs=*/ 3456L,
                 /* backgroundUsageTimeInMs= */ 5689L,
                 /* batteryLevel= */ 12);
     }
@@ -334,6 +342,7 @@ public final class BatteryHistEntryTest {
             double backgroundUsageConsumePower,
             double cachedUsageConsumePower,
             long foregroundUsageTimeInMs,
+            long foregroundServiceUsageTimeInMs,
             long backgroundUsageTimeInMs,
             int batteryLevel) {
         assertThat(entry.isValidEntry()).isTrue();
@@ -354,6 +363,7 @@ public final class BatteryHistEntryTest {
         assertThat(entry.mCachedUsageConsumePower).isEqualTo(cachedUsageConsumePower);
         assertThat(entry.mPercentOfTotal).isEqualTo(percentOfTotal);
         assertThat(entry.mForegroundUsageTimeInMs).isEqualTo(foregroundUsageTimeInMs);
+        assertThat(entry.mForegroundServiceUsageTimeInMs).isEqualTo(foregroundServiceUsageTimeInMs);
         assertThat(entry.mBackgroundUsageTimeInMs).isEqualTo(backgroundUsageTimeInMs);
         assertThat(entry.mDrainType).isEqualTo(drainType);
         assertThat(entry.mConsumerType).isEqualTo(ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY);
@@ -372,6 +382,7 @@ public final class BatteryHistEntryTest {
             double backgroundUsageConsumePower,
             double cachedUsageConsumePower,
             long foregroundUsageTimeInMs,
+            long foregroundServiceUsageTimeInMs,
             long backgroundUsageTimeInMs,
             int batteryLevel) {
         final MatrixCursor cursor =
@@ -406,6 +417,7 @@ public final class BatteryHistEntryTest {
                         .setPercentOfTotal(0.3)
                         .setDrainType(3)
                         .setForegroundUsageTimeInMs(foregroundUsageTimeInMs)
+                        .setForegroundServiceUsageTimeInMs(foregroundServiceUsageTimeInMs)
                         .setBackgroundUsageTimeInMs(backgroundUsageTimeInMs)
                         .build();
         cursor.addRow(
