@@ -49,6 +49,7 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
@@ -606,8 +607,9 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
-            Activity activity, Lifecycle lifecycle, DevelopmentSettingsDashboardFragment fragment,
-            BluetoothA2dpConfigStore bluetoothA2dpConfigStore) {
+            @Nullable Activity activity, @Nullable Lifecycle lifecycle,
+            @Nullable DevelopmentSettingsDashboardFragment fragment,
+            @Nullable BluetoothA2dpConfigStore bluetoothA2dpConfigStore) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new MemoryUsagePreferenceController(context));
         controllers.add(new BugReportPreferenceController(context));
@@ -735,7 +737,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new OverlaySettingsPreferenceController(context));
         controllers.add(new StylusHandwritingPreferenceController(context));
         controllers.add(new IngressRateLimitPreferenceController((context)));
-        controllers.add(new BackAnimationPreferenceController(context, fragment));
+        // controllers.add(new BackAnimationPreferenceController(context, fragment));
         controllers.add(new PhantomProcessPreferenceController(context));
         controllers.add(new ContrastPreferenceController(
                 context, context.getSystemService(UiModeManager.class)));
