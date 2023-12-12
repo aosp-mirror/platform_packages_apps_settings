@@ -31,8 +31,8 @@ import android.view.View;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.internal.widget.RecyclerView;
 import com.android.settings.R;
 import com.android.settings.flags.Flags;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
