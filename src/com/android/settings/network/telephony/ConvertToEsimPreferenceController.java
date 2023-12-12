@@ -43,6 +43,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.internal.telephony.util.TelephonyUtils;
 import com.android.settings.network.MobileNetworkRepository;
+import com.android.settings.network.SubscriptionUtil;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
 
@@ -98,10 +99,21 @@ public class ConvertToEsimPreferenceController extends TelephonyBasePreferenceCo
 
     @Override
     public int getAvailabilityStatus(int subId) {
-        // TODO(b/262195754): Need the intent to enabled the feature.
+        // TODO(b/315073761) : Add a new API to set whether the profile has been
+        // converted/transferred. Remove any confusion to the user according to the set value.
+
+        /*
+         * If pSIM is set to preferred SIM and there is an active eSIM, convert the pSIM to eSIM
+         * and then disable the pSIM.
+         * This causes a dialog to switch the preferred SIM to downloaded new eSIM.
+         * This may cause confusion for the user about the seamless conversion.
+         * To avoid showing users dialogs that can cause confusion,
+         * add conditions to allow conversion in the absence of active eSIM.
+         */
         if (findConversionSupportComponent()) {
             return mSubscriptionInfoEntity != null && mSubscriptionInfoEntity.isActiveSubscriptionId
                     && !mSubscriptionInfoEntity.isEmbedded && isActiveSubscription(subId)
+                    && !hasActiveEsimProfiles()
                     ? AVAILABLE
                     : CONDITIONALLY_UNAVAILABLE;
         }
@@ -135,7 +147,6 @@ public class ConvertToEsimPreferenceController extends TelephonyBasePreferenceCo
 
     @Override
     public void onActiveSubInfoChanged(List<SubscriptionInfoEntity> subInfoEntityList) {
-        // TODO(b/262195754): Need the intent to enabled the feature.
         mSubscriptionInfoEntityList = subInfoEntityList;
         mSubscriptionInfoEntityList.forEach(entity -> {
             if (Integer.parseInt(entity.subId) == mSubId) {
@@ -153,6 +164,24 @@ public class ConvertToEsimPreferenceController extends TelephonyBasePreferenceCo
             return false;
         }
         return true;
+    }
+
+    private boolean hasActiveEsimProfiles() {
+        SubscriptionManager subscriptionManager = mContext.getSystemService(
+                SubscriptionManager.class);
+        List<SubscriptionInfo> subscriptionInfoList =
+                SubscriptionUtil.getActiveSubscriptions(subscriptionManager);
+        if (subscriptionInfoList == null || subscriptionInfoList.isEmpty()) {
+            return false;
+        }
+        int activatedEsimCount = (int) subscriptionInfoList
+                .stream()
+                .filter(SubscriptionInfo::isEmbedded)
+                .count();
+        if (activatedEsimCount > 0) {
+            return true;
+        }
+        return false;
     }
 
     private boolean findConversionSupportComponent() {
