@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.util.ArrayMap;
 import android.util.SparseIntArray;
 
+import com.android.settings.fuelgauge.batteryusage.DetectRequestSourceType;
 import com.android.settings.fuelgauge.batteryusage.PowerAnomalyEventList;
 import com.android.settingslib.fuelgauge.Estimate;
 
@@ -103,11 +104,9 @@ public interface PowerUsageFeatureProvider {
     /** Returns {@code true} if delay the hourly job when device is booting */
     boolean delayHourlyJobWhenBooting();
 
-    /** Insert settings configuration data for anomaly detection */
-    void insertSettingsData(Context context, double displayDrain);
-
     /** Returns {@link Bundle} for settings anomaly detection result */
-    PowerAnomalyEventList detectSettingsAnomaly(Context context, double displayDrain);
+    PowerAnomalyEventList detectSettingsAnomaly(
+            Context context, double displayDrain, DetectRequestSourceType detectRequestSourceType);
 
     /** Gets an intent for one time bypass charge limited to resume charging. */
     Intent getResumeChargeIntent(boolean isDockDefender);
