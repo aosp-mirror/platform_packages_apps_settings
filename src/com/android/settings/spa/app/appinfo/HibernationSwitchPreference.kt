@@ -22,6 +22,7 @@ import android.app.AppOpsManager.MODE_IGNORED
 import android.app.AppOpsManager.OP_AUTO_REVOKE_PERMISSIONS_IF_UNUSED
 import android.content.Context
 import android.content.pm.ApplicationInfo
+import android.content.pm.Flags
 import android.os.Build
 import android.permission.PermissionControllerManager.HIBERNATION_ELIGIBILITY_EXEMPT_BY_SYSTEM
 import android.permission.PermissionControllerManager.HIBERNATION_ELIGIBILITY_UNKNOWN
@@ -60,14 +61,26 @@ fun HibernationSwitchPreference(app: ApplicationInfo) {
     val isCheckedState = presenter.isCheckedFlow.collectAsStateWithLifecycle(initialValue = null)
     SwitchPreference(remember {
         object : SwitchPreferenceModel {
-            override val title = context.getString(R.string.unused_apps_switch)
-            override val summary = { context.getString(R.string.unused_apps_switch_summary) }
+            override val title =
+                if (isArchivingEnabled())
+                    context.getString(R.string.unused_apps_switch_v2)
+                else
+                    context.getString(R.string.unused_apps_switch)
+            override val summary = {
+                if (isArchivingEnabled())
+                    context.getString(R.string.unused_apps_switch_summary_v2)
+                else
+                    context.getString(R.string.unused_apps_switch_summary)
+            }
             override val changeable = { isEligibleState }
             override val checked = { if (changeable()) isCheckedState.value else false }
             override val onCheckedChange = presenter::onCheckedChange
         }
     })
 }
+
+private fun isArchivingEnabled() =
+        Flags.archiving() || "true" == System.getProperty("pm.archiving.enabled")
 
 private class HibernationSwitchPresenter(context: Context, private val app: ApplicationInfo) {
     private val appOpsManager = context.appOpsManager
