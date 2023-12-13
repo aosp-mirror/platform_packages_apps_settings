@@ -138,6 +138,7 @@
     <uses-permission android:name="android.permission.CUSTOMIZE_SYSTEM_UI" />
     <uses-permission android:name="android.permission.REMAP_MODIFIER_KEYS" />
     <uses-permission android:name="android.permission.ACCESS_GPU_SERVICE" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
     <application
             android:name=".SettingsApplication"
@@ -489,6 +490,17 @@
                 android:value="com.android.settings.display.AutoBrightnessSettings"/>
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
                 android:value="@string/menu_key_display"/>
+        </activity>
+
+        <activity android:name=".Settings$ScreenTimeoutActivity"
+                  android:label="@string/screen_timeout"
+                  android:exported="true">
+            <intent-filter>
+                <action android:name="android.settings.SCREEN_TIMEOUT_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.display.ScreenTimeoutSettings"/>
         </activity>
 
         <activity

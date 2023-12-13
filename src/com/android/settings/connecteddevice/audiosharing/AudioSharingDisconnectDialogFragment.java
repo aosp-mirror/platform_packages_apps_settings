@@ -28,9 +28,9 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.internal.widget.LinearLayoutManager;
-import com.android.internal.widget.RecyclerView;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
@@ -110,7 +110,8 @@ public class AudioSharingDisconnectDialogFragment extends InstrumentedDialogFrag
                         (AudioSharingDeviceItem item) -> {
                             sListener.onItemClick(item);
                             dismiss();
-                        }));
+                        },
+                        "Disconnect "));
         recyclerView.setLayoutManager(
                 new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         Button cancelBtn = rootView.findViewById(R.id.cancel_btn);

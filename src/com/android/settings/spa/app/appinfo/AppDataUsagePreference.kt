@@ -59,7 +59,7 @@ fun AppDataUsagePreference(
 ) {
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
-    val presenter = remember {
+    val presenter = remember(app) {
         AppDataUsagePresenter(context, app, coroutineScope, networkTemplates, repositoryFactory)
     }
     if (!presenter.isAvailableFlow.collectAsStateWithLifecycle(initialValue = false).value) return

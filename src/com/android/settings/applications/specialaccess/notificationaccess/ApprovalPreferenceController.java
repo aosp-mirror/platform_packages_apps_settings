@@ -41,6 +41,8 @@ public class ApprovalPreferenceController extends BasePreferenceController {
     private PreferenceFragmentCompat mParent;
     private NotificationManager mNm;
     private PackageManager mPm;
+    // The appOp representing this preference
+    private String mAppOpStr;
 
     public ApprovalPreferenceController(Context context, String key) {
         super(context, key);
@@ -68,6 +70,14 @@ public class ApprovalPreferenceController extends BasePreferenceController {
 
     public ApprovalPreferenceController setPm(PackageManager pm) {
         mPm = pm;
+        return this;
+    }
+
+    /**
+     * Set the associated appOp for the Setting
+     */
+    public ApprovalPreferenceController setAppOpStr(String appOpStr) {
+        mAppOpStr = appOpStr;
         return this;
     }
 
@@ -107,8 +117,20 @@ public class ApprovalPreferenceController extends BasePreferenceController {
                 return false;
             }
         });
-        preference.updateState(
-                mCn.getPackageName(), mPkgInfo.applicationInfo.uid, isAllowedCn, isEnabled);
+
+        if (android.security.Flags.extendEcmToAllSettings()) {
+            if (!isAllowedCn && !isEnabled) {
+                preference.setEnabled(false);
+            } else if (isEnabled) {
+                preference.setEnabled(true);
+            } else {
+                preference.checkEcmRestrictionAndSetDisabled(mAppOpStr,
+                        mCn.getPackageName(), mPkgInfo.applicationInfo.uid);
+            }
+        } else {
+            preference.updateState(
+                    mCn.getPackageName(), mPkgInfo.applicationInfo.uid, isAllowedCn, isEnabled);
+        }
     }
 
     public void disable(final ComponentName cn) {
