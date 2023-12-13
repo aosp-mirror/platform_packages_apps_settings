@@ -80,8 +80,8 @@ class AudioStreamsHelper {
                         });
     }
 
-    /** Removes all sources from LE broadcasts associated for all active sinks. */
-    void removeSource() {
+    /** Removes sources from LE broadcasts associated for all active sinks based on broadcast Id. */
+    void removeSource(int broadcastId) {
         if (mLeBroadcastAssistant == null) {
             Log.w(TAG, "removeSource(): LeBroadcastAssistant is null!");
             return;
@@ -93,14 +93,17 @@ class AudioStreamsHelper {
                                 if (DEBUG) {
                                     Log.d(
                                             TAG,
-                                            "removeSource(): remove all sources from sink : "
+                                            "removeSource(): remove all sources with broadcast id :"
+                                                    + broadcastId
+                                                    + " from sink : "
                                                     + sink.getAddress());
                                 }
-                                var sources = mLeBroadcastAssistant.getAllSources(sink);
-                                if (!sources.isEmpty()) {
-                                    mLeBroadcastAssistant.removeSource(
-                                            sink, sources.get(0).getSourceId());
-                                }
+                                mLeBroadcastAssistant.getAllSources(sink).stream()
+                                        .filter(state -> state.getBroadcastId() == broadcastId)
+                                        .forEach(
+                                                state ->
+                                                        mLeBroadcastAssistant.removeSource(
+                                                                sink, state.getSourceId()));
                             }
                         });
     }
@@ -119,6 +122,12 @@ class AudioStreamsHelper {
     @Nullable
     LocalBluetoothLeBroadcastAssistant getLeBroadcastAssistant() {
         return mLeBroadcastAssistant;
+    }
+
+    static boolean isConnected(BluetoothLeBroadcastReceiveState state) {
+        return state.getPaSyncState() == BluetoothLeBroadcastReceiveState.PA_SYNC_STATE_SYNCHRONIZED
+                && state.getBigEncryptionState()
+                        == BluetoothLeBroadcastReceiveState.BIG_ENCRYPTION_STATE_DECRYPTING;
     }
 
     private static List<BluetoothDevice> getActiveSinksOnAssistant(

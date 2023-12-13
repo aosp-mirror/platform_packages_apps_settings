@@ -25,10 +25,12 @@
         android:layout="@layout/settings_entity_header"
         android:selectable="false"
         settings:allowDividerBelow="true"
-        settings:searchable="false" />
+        settings:searchable="false"
+        settings:controller="com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamHeaderController" />
 
     <com.android.settingslib.widget.ActionButtonsPreference
         android:key="audio_stream_button"
-        settings:allowDividerBelow="true" />
+        settings:allowDividerBelow="true"
+        settings:controller="com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamButtonController" />
 
 </PreferenceScreen>

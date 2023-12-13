@@ -41,6 +41,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.annotation.Nullable;
+
 public class AudioSharingUtils {
     private static final String TAG = "AudioSharingUtils";
     private static final boolean DEBUG = BluetoothUtils.D;
@@ -237,7 +239,7 @@ public class AudioSharingUtils {
      * @return An Optional containing the active LE Audio device, or an empty Optional if not found.
      */
     public static Optional<CachedBluetoothDevice> getActiveSinkOnAssistant(
-            LocalBluetoothManager manager) {
+            @Nullable LocalBluetoothManager manager) {
         if (manager == null) {
             Log.w(TAG, "getActiveSinksOnAssistant(): LocalBluetoothManager is null!");
             return Optional.empty();
