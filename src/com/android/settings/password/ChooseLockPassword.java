@@ -1084,6 +1084,12 @@ public class ChooseLockPassword extends SettingsActivity {
                     startActivity(intent);
                 }
             }
+
+            if (mLayout != null) {
+                mLayout.announceForAccessibility(
+                        getString(R.string.accessibility_setup_password_complete));
+            }
+
             getActivity().finish();
         }
 

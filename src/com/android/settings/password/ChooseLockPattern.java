@@ -871,6 +871,12 @@ public class ChooseLockPattern extends SettingsActivity {
                     startActivity(intent);
                 }
             }
+
+            if (mSudContent != null) {
+                mSudContent.announceForAccessibility(
+                        getString(R.string.accessibility_setup_password_complete));
+            }
+
             getActivity().finish();
         }
     }
