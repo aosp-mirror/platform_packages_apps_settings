@@ -617,6 +617,9 @@ public class WifiP2pSettings extends DashboardFragment
     }
 
     private void onDeviceAvailable() {
+        if (mWifiP2pManager == null || sChannel == null) {
+            return;
+        }
         mWifiP2pManager.requestNetworkInfo(sChannel, networkInfo -> {
             if (sChannel == null) return;
             mWifiP2pManager.requestConnectionInfo(sChannel, wifip2pinfo -> {

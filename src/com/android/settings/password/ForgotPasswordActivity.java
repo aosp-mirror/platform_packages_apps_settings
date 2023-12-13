@@ -50,6 +50,7 @@ public class ForgotPasswordActivity extends Activity {
             finish();
             return;
         }
+        ThemeHelper.trySetDynamicColor(this);
         setContentView(R.layout.forgot_password_activity);
 
         DevicePolicyManager devicePolicyManager = getSystemService(DevicePolicyManager.class);

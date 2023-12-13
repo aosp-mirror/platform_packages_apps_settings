@@ -15,6 +15,8 @@
  */
 package com.android.settings.wifi;
 
+import static com.android.settingslib.wifi.WifiUtils.getHotspotIconResource;
+
 import android.annotation.Nullable;
 import android.content.Context;
 import android.content.res.Resources;
@@ -37,6 +39,7 @@ import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.Utils;
 import com.android.settingslib.wifi.WifiUtils;
 import com.android.wifitrackerlib.BaseWifiTracker;
+import com.android.wifitrackerlib.HotspotNetworkEntry;
 import com.android.wifitrackerlib.WifiEntry;
 
 /**
@@ -145,13 +148,17 @@ public class WifiEntryPreference extends RestrictedPreference implements
      */
     public void refresh() {
         setTitle(mWifiEntry.getTitle());
-        final int level = mWifiEntry.getLevel();
-        final boolean showX = mWifiEntry.shouldShowXLevelIcon();
-        if (level != mLevel || showX != mShowX) {
-            mLevel = level;
-            mShowX = showX;
-            updateIcon(mShowX, mLevel);
-            notifyChanged();
+        if (mWifiEntry instanceof HotspotNetworkEntry) {
+            updateHotspotIcon(((HotspotNetworkEntry) mWifiEntry).getDeviceType());
+        } else {
+            int level = mWifiEntry.getLevel();
+            boolean showX = mWifiEntry.shouldShowXLevelIcon();
+
+            if (level != mLevel || showX != mShowX) {
+                mLevel = level;
+                mShowX = showX;
+                updateIcon(mShowX, mLevel);
+            }
         }
 
         setSummary(mWifiEntry.getSummary(false /* concise */));
@@ -201,14 +208,7 @@ public class WifiEntryPreference extends RestrictedPreference implements
         return accent ? android.R.attr.colorAccent : android.R.attr.colorControlNormal;
     }
 
-    @VisibleForTesting
-    void updateIcon(boolean showX, int level) {
-        if (level == -1) {
-            setIcon(null);
-            return;
-        }
-
-        final Drawable drawable = mIconInjector.getIcon(showX, level);
+    private void setIconWithTint(Drawable drawable) {
         if (drawable != null) {
             // Must use Drawable#setTintList() instead of Drawable#setTint() to show the grey
             // icon when the preference is disabled.
@@ -217,6 +217,20 @@ public class WifiEntryPreference extends RestrictedPreference implements
         } else {
             setIcon(null);
         }
+    }
+
+    @VisibleForTesting
+    void updateIcon(boolean showX, int level) {
+        if (level == -1) {
+            setIcon(null);
+            return;
+        }
+        setIconWithTint(mIconInjector.getIcon(showX, level));
+    }
+
+    @VisibleForTesting
+    void updateHotspotIcon(int deviceType) {
+        setIconWithTint(getContext().getDrawable(getHotspotIconResource(deviceType)));
     }
 
     @Nullable

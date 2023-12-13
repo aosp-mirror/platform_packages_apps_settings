@@ -25,6 +25,7 @@ import com.android.settings.aware.AwareFeatureProvider
 import com.android.settings.biometrics.face.FaceFeatureProvider
 import com.android.settings.biometrics2.factory.BiometricsRepositoryProvider
 import com.android.settings.bluetooth.BluetoothFeatureProvider
+import com.android.settings.connecteddevice.stylus.StylusFeatureProvider
 import com.android.settings.dashboard.DashboardFeatureProvider
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider
 import com.android.settings.deviceinfo.hardwareinfo.HardwareInfoFeatureProvider
@@ -34,6 +35,7 @@ import com.android.settings.fuelgauge.BatteryStatusFeatureProvider
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider
 import com.android.settings.gestures.AssistGestureFeatureProvider
 import com.android.settings.homepage.contextualcards.ContextualCardFeatureProvider
+import com.android.settings.inputmethod.KeyboardSettingsFeatureProvider
 import com.android.settings.localepicker.LocaleFeatureProvider
 import com.android.settings.overlay.DockUpdaterFeatureProvider
 import com.android.settings.overlay.FeatureFactory
@@ -84,9 +86,7 @@ class FakeFeatureFactory : FeatureFactory() {
         TODO("Not yet implemented")
     }
 
-    override fun getBatterySettingsFeatureProvider(
-        context: Context?,
-    ): BatterySettingsFeatureProvider {
+    override fun getBatterySettingsFeatureProvider(): BatterySettingsFeatureProvider {
         TODO("Not yet implemented")
     }
 
@@ -185,6 +185,14 @@ class FakeFeatureFactory : FeatureFactory() {
     }
 
     override fun getWifiFeatureProvider(): WifiFeatureProvider {
+        TODO("Not yet implemented")
+    }
+
+    override fun getKeyboardSettingsFeatureProvider(): KeyboardSettingsFeatureProvider {
+        TODO("Not yet implemented")
+    }
+
+    override fun getStylusFeatureProvider(): StylusFeatureProvider {
         TODO("Not yet implemented")
     }
 }

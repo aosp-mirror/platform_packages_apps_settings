@@ -18,12 +18,8 @@ package com.android.settings.password;
 
 import static android.app.admin.DevicePolicyResources.Strings.Settings.CONFIRM_WORK_PROFILE_PASSWORD_HEADER;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.CONFIRM_WORK_PROFILE_PIN_HEADER;
-import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_CONFIRM_PASSWORD;
-import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_CONFIRM_PIN;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_LAST_PASSWORD_ATTEMPT_BEFORE_WIPE;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_LAST_PIN_ATTEMPT_BEFORE_WIPE;
-import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_PASSWORD_REQUIRED;
-import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_PIN_REQUIRED;
 import static android.app.admin.DevicePolicyResources.UNDEFINED;
 
 import static com.android.settings.biometrics.GatekeeperPasswordProvider.containsGatekeeperPasswordHandle;
@@ -75,27 +71,12 @@ import java.util.ArrayList;
 
 public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
 
-    // The index of the array is isStrongAuth << 2 + isManagedProfile << 1 + isAlpha.
+    // The index of the array is isStrongAuth << 1 + isAlpha.
     private static final int[] DETAIL_TEXTS = new int[] {
         R.string.lockpassword_confirm_your_pin_generic,
         R.string.lockpassword_confirm_your_password_generic,
-        R.string.lockpassword_confirm_your_pin_generic_profile,
-        R.string.lockpassword_confirm_your_password_generic_profile,
         R.string.lockpassword_strong_auth_required_device_pin,
         R.string.lockpassword_strong_auth_required_device_password,
-        R.string.lockpassword_strong_auth_required_work_pin,
-        R.string.lockpassword_strong_auth_required_work_password
-    };
-
-    private static final String[] DETAIL_TEXT_OVERRIDES = new String[] {
-            UNDEFINED,
-            UNDEFINED,
-            WORK_PROFILE_CONFIRM_PIN,
-            WORK_PROFILE_CONFIRM_PASSWORD,
-            UNDEFINED,
-            UNDEFINED,
-            WORK_PROFILE_PIN_REQUIRED,
-            WORK_PROFILE_PASSWORD_REQUIRED
     };
 
     public static class InternalActivity extends ConfirmLockPassword {
@@ -125,7 +106,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
 
     public static class ConfirmLockPasswordFragment extends ConfirmDeviceCredentialBaseFragment
             implements OnClickListener, OnEditorActionListener,
-            CredentialCheckResultTracker.Listener, SaveChosenLockWorkerBase.Listener,
+            CredentialCheckResultTracker.Listener, SaveAndFinishWorker.Listener,
             RemoteLockscreenValidationFragment.Listener {
         private static final String FRAGMENT_TAG_CHECK_LOCK_RESULT = "check_lock_result";
         private ImeAwareEditText mPasswordEntry;
@@ -200,7 +181,12 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                     detailsMessage = getDefaultDetails();
                 }
                 mGlifLayout.setHeaderText(headerMessage);
-                mGlifLayout.setDescriptionText(detailsMessage);
+
+                if (mIsManagedProfile) {
+                    mGlifLayout.getDescriptionTextView().setVisibility(View.GONE);
+                } else {
+                    mGlifLayout.setDescriptionText(detailsMessage);
+                }
                 mCheckBoxLabel = intent.getCharSequenceExtra(KeyguardManager.EXTRA_CHECKBOX_LABEL);
             }
             int currentType = mPasswordEntry.getInputType();
@@ -284,6 +270,11 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                 return mIsAlpha ? getString(R.string.lockpassword_confirm_your_password_header_frp)
                         : getString(R.string.lockpassword_confirm_your_pin_header_frp);
             }
+            if (mRepairMode) {
+                return mIsAlpha
+                        ? getString(R.string.lockpassword_confirm_repair_mode_password_header)
+                        : getString(R.string.lockpassword_confirm_repair_mode_pin_header);
+            }
             if (mRemoteValidation) {
                 return getString(R.string.lockpassword_remote_validation_header);
             }
@@ -307,17 +298,20 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                 return mIsAlpha ? getString(R.string.lockpassword_confirm_your_password_details_frp)
                         : getString(R.string.lockpassword_confirm_your_pin_details_frp);
             }
+            if (mRepairMode) {
+                return mIsAlpha
+                        ? getString(R.string.lockpassword_confirm_repair_mode_password_details)
+                        : getString(R.string.lockpassword_confirm_repair_mode_pin_details);
+            }
             if (mRemoteValidation) {
                 return getContext().getString(mIsAlpha
                         ? R.string.lockpassword_remote_validation_password_details
                         : R.string.lockpassword_remote_validation_pin_details);
             }
             boolean isStrongAuthRequired = isStrongAuthRequired();
-            // Map boolean flags to an index by isStrongAuth << 2 + isManagedProfile << 1 + isAlpha.
-            int index = ((isStrongAuthRequired ? 1 : 0) << 2) + ((mIsManagedProfile ? 1 : 0) << 1)
-                    + (mIsAlpha ? 1 : 0);
-            return mDevicePolicyManager.getResources().getString(
-                    DETAIL_TEXT_OVERRIDES[index], () -> getString(DETAIL_TEXTS[index]));
+            // Map boolean flags to an index by isStrongAuth << 1 + isAlpha.
+            int index = ((isStrongAuthRequired ? 1 : 0) << 1) + (mIsAlpha ? 1 : 0);
+            return getString(DETAIL_TEXTS[index]);
         }
 
         private String getDefaultCheckboxLabel() {
@@ -496,7 +490,9 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                 }
             } else if (mForceVerifyPath)  {
                 if (isInternalActivity()) {
-                    startVerifyPassword(credential, intent, 0 /* flags */);
+                    final int flags = mRequestWriteRepairModePassword
+                            ? LockPatternUtils.VERIFY_FLAG_WRITE_REPAIR_MODE_PW : 0;
+                    startVerifyPassword(credential, intent, flags);
                     return;
                 }
             } else {
@@ -621,15 +617,15 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                     if (mCheckBox.isChecked() && mRemoteLockscreenValidationFragment
                             .getLockscreenCredential() != null) {
                         Log.i(TAG, "Setting device screen lock to the other device's screen lock.");
-                        ChooseLockPassword.SaveAndFinishWorker saveAndFinishWorker =
-                                new ChooseLockPassword.SaveAndFinishWorker();
+                        SaveAndFinishWorker saveAndFinishWorker = new SaveAndFinishWorker();
                         getFragmentManager().beginTransaction().add(saveAndFinishWorker, null)
                                 .commit();
                         getFragmentManager().executePendingTransactions();
-                        saveAndFinishWorker.setListener(this);
+                        saveAndFinishWorker
+                                .setListener(this)
+                                .setRequestGatekeeperPasswordHandle(true);
                         saveAndFinishWorker.start(
                                 mLockPatternUtils,
-                                /* requestGatekeeperPassword= */ true,
                                 mRemoteLockscreenValidationFragment.getLockscreenCredential(),
                                 /* currentCredential= */ null,
                                 mEffectiveUserId);

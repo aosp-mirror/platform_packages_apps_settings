@@ -20,6 +20,7 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.android.settingslib.R;
+import com.android.wifitrackerlib.HotspotNetworkEntry;
 import com.android.wifitrackerlib.WifiEntry;
 
 /**
@@ -38,6 +39,9 @@ public class WifiSliceItem {
     private final boolean mShouldEditBeforeConnect;
     private final boolean mHasInternetAccess;
     private final String mSummary;
+
+    private boolean mIsInstantHotspotNetwork;
+    private int mInstantHotspotDeviceType;
 
     // These values must be kept within [WifiEntry.WIFI_LEVEL_MIN, WifiEntry.WIFI_LEVEL_MAX]
     private static final int[] WIFI_CONNECTION_STRENGTH = {
@@ -59,6 +63,10 @@ public class WifiSliceItem {
         mShouldEditBeforeConnect = wifiEntry.shouldEditBeforeConnect();
         mHasInternetAccess = wifiEntry.hasInternetAccess();
         mSummary = wifiEntry.getSummary(false /* concise */);
+        mIsInstantHotspotNetwork = wifiEntry instanceof HotspotNetworkEntry;
+        if (mIsInstantHotspotNetwork) {
+            mInstantHotspotDeviceType = ((HotspotNetworkEntry) wifiEntry).getDeviceType();
+        }
     }
 
     @Override
@@ -81,6 +89,12 @@ public class WifiSliceItem {
             return false;
         }
         if (!TextUtils.equals(getSummary(), otherItem.getSummary())) {
+            return false;
+        }
+        if (isInstantHotspotNetwork() != otherItem.isInstantHotspotNetwork()) {
+            return false;
+        }
+        if (getInstantHotspotDeviceType() != otherItem.getInstantHotspotDeviceType()) {
             return false;
         }
         return true;
@@ -134,6 +148,20 @@ public class WifiSliceItem {
      */
     public String getSummary() {
         return mSummary;
+    }
+
+    /**
+     * Returns true if this is a Instant Hotspot network.
+     */
+    public boolean isInstantHotspotNetwork() {
+        return mIsInstantHotspotNetwork;
+    }
+
+    /**
+     * Returns DeviceType of Instant Hotspot network.
+     */
+    public int getInstantHotspotDeviceType() {
+        return mInstantHotspotDeviceType;
     }
 
     /**

@@ -16,22 +16,32 @@
 
 package com.android.settings.fuelgauge.batteryusage;
 
+import static android.app.usage.UsageStatsManager.USAGE_SOURCE_CURRENT_ACTIVITY;
+import static android.app.usage.UsageStatsManager.USAGE_SOURCE_TASK_ROOT_ACTIVITY;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.when;
 
+import android.app.usage.IUsageStatsManager;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.MatrixCursor;
+import android.net.Uri;
 import android.os.BatteryManager;
 import android.os.BatteryUsageStats;
+import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
 
@@ -67,6 +77,7 @@ public final class DatabaseUtilsTest {
     @Mock private BatteryEntry mMockBatteryEntry2;
     @Mock private BatteryEntry mMockBatteryEntry3;
     @Mock private Context mMockContext;
+    @Mock private IUsageStatsManager mUsageStatsManager;
 
     @Before
     public void setUp() {
@@ -77,6 +88,7 @@ public final class DatabaseUtilsTest {
         doReturn(mPackageManager).when(mMockContext).getPackageManager();
         doReturn(mPackageManager).when(mContext).getPackageManager();
         DatabaseUtils.getSharedPreferences(mContext).edit().clear().apply();
+        DataProcessor.sUsageStatsManager = mUsageStatsManager;
     }
 
     @Test
@@ -164,8 +176,8 @@ public final class DatabaseUtilsTest {
         doReturn(null).when(mContext).registerReceiver(any(), any());
         assertThat(
                 DatabaseUtils.sendBatteryEntryData(
-                        mContext, /*batteryEntryList=*/ null, mBatteryUsageStats,
-                        /*isFullChargeStart=*/ false))
+                        mContext, System.currentTimeMillis(), /*batteryEntryList=*/ null,
+                        mBatteryUsageStats, /*isFullChargeStart=*/ false))
                 .isNull();
     }
 
@@ -184,7 +196,10 @@ public final class DatabaseUtilsTest {
 
         final List<ContentValues> valuesList =
                 DatabaseUtils.sendBatteryEntryData(
-                        mContext, batteryEntryList, mBatteryUsageStats,
+                        mContext,
+                        System.currentTimeMillis(),
+                        batteryEntryList,
+                        mBatteryUsageStats,
                         /*isFullChargeStart=*/ false);
 
         assertThat(valuesList).hasSize(2);
@@ -207,6 +222,7 @@ public final class DatabaseUtilsTest {
         final List<ContentValues> valuesList =
                 DatabaseUtils.sendBatteryEntryData(
                         mContext,
+                        System.currentTimeMillis(),
                         new ArrayList<>(),
                         mBatteryUsageStats,
                         /*isFullChargeStart=*/ false);
@@ -226,6 +242,7 @@ public final class DatabaseUtilsTest {
         final List<ContentValues> valuesList =
                 DatabaseUtils.sendBatteryEntryData(
                         mContext,
+                        System.currentTimeMillis(),
                         /*batteryEntryList=*/ null,
                         mBatteryUsageStats,
                         /*isFullChargeStart=*/ false);
@@ -245,6 +262,7 @@ public final class DatabaseUtilsTest {
         final List<ContentValues> valuesList =
                 DatabaseUtils.sendBatteryEntryData(
                         mContext,
+                        System.currentTimeMillis(),
                         /*batteryEntryList=*/ null,
                         /*batteryUsageStats=*/ null,
                         /*isFullChargeStart=*/ false);
@@ -350,7 +368,7 @@ public final class DatabaseUtilsTest {
     }
 
     @Test
-    public void getHistoryMapSinceLastFullCharge_emptyCursorContent_returnEmptyMap() {
+    public void getHistoryMap_emptyCursorContent_returnEmptyMap() {
         final MatrixCursor cursor = new MatrixCursor(
                 new String[] {
                         BatteryHistEntry.KEY_UID,
@@ -358,36 +376,33 @@ public final class DatabaseUtilsTest {
                         BatteryHistEntry.KEY_TIMESTAMP});
         DatabaseUtils.sFakeSupplier = () -> cursor;
 
-        assertThat(DatabaseUtils.getHistoryMapSinceLastFullCharge(
-                mContext, /*calendar=*/ null)).isEmpty();
+        assertThat(DatabaseUtils.getHistoryMapSinceQueryTimestamp(mContext, 0)).isEmpty();
     }
 
     @Test
-    public void getHistoryMapSinceLastFullCharge_nullCursor_returnEmptyMap() {
+    public void getHistoryMap_nullCursor_returnEmptyMap() {
         DatabaseUtils.sFakeSupplier = () -> null;
-        assertThat(DatabaseUtils.getHistoryMapSinceLastFullCharge(
-                mContext, /*calendar=*/ null)).isEmpty();
+        assertThat(DatabaseUtils.getHistoryMapSinceQueryTimestamp(mContext, 0)).isEmpty();
     }
 
     @Test
-    public void getHistoryMapSinceLastFullCharge_returnExpectedMap() {
+    public void getHistoryMap_returnExpectedMap() {
         final Long timestamp1 = Long.valueOf(1001L);
         final Long timestamp2 = Long.valueOf(1002L);
         final MatrixCursor cursor = getMatrixCursor();
         // Adds fake data into the cursor.
         cursor.addRow(new Object[] {
-                "app name1", timestamp1, 1, ConvertUtils.CONSUMER_TYPE_UID_BATTERY});
+                "app name1", timestamp1, 1, ConvertUtils.CONSUMER_TYPE_UID_BATTERY, true});
         cursor.addRow(new Object[] {
-                "app name2", timestamp2, 2, ConvertUtils.CONSUMER_TYPE_UID_BATTERY});
+                "app name2", timestamp2, 2, ConvertUtils.CONSUMER_TYPE_UID_BATTERY, false});
         cursor.addRow(new Object[] {
-                "app name3", timestamp2, 3, ConvertUtils.CONSUMER_TYPE_UID_BATTERY});
+                "app name3", timestamp2, 3, ConvertUtils.CONSUMER_TYPE_UID_BATTERY, false});
         cursor.addRow(new Object[] {
-                "app name4", timestamp2, 4, ConvertUtils.CONSUMER_TYPE_UID_BATTERY});
+                "app name4", timestamp2, 4, ConvertUtils.CONSUMER_TYPE_UID_BATTERY, false});
         DatabaseUtils.sFakeSupplier = () -> cursor;
 
         final Map<Long, Map<String, BatteryHistEntry>> batteryHistMap =
-                DatabaseUtils.getHistoryMapSinceLastFullCharge(
-                        mContext, /*calendar=*/ null);
+                DatabaseUtils.getHistoryMapSinceQueryTimestamp(mContext, timestamp1);
 
         assertThat(batteryHistMap).hasSize(2);
         // Verifies the BatteryHistEntry data for timestamp1.
@@ -403,7 +418,7 @@ public final class DatabaseUtilsTest {
     }
 
     @Test
-    public void getHistoryMapSinceLastFullCharge_withWorkProfile_returnExpectedMap()
+    public void getHistoryMap_withWorkProfile_returnExpectedMap()
             throws PackageManager.NameNotFoundException {
         doReturn("com.fake.package").when(mContext).getPackageName();
         doReturn(mMockContext).when(mContext).createPackageContextAsUser(
@@ -416,10 +431,74 @@ public final class DatabaseUtilsTest {
         DatabaseUtils.sFakeSupplier = () -> getMatrixCursor();
 
         final Map<Long, Map<String, BatteryHistEntry>> batteryHistMap =
-                DatabaseUtils.getHistoryMapSinceLastFullCharge(
-                        mContext, /*calendar=*/ null);
+                DatabaseUtils.getHistoryMapSinceQueryTimestamp(mContext, 0);
 
         assertThat(batteryHistMap).isEmpty();
+    }
+
+    @Test
+    public void removeUsageSource_hasNoData() {
+        DatabaseUtils.removeUsageSource(mContext);
+        assertThat(
+                DatabaseUtils
+                        .getSharedPreferences(mContext)
+                        .contains(DatabaseUtils.KEY_LAST_USAGE_SOURCE))
+                .isFalse();
+    }
+
+    @Test
+    public void removeUsageSource_hasData_deleteUsageSource() {
+        final SharedPreferences sharedPreferences = DatabaseUtils.getSharedPreferences(mContext);
+        sharedPreferences
+                .edit()
+                .putInt(DatabaseUtils.KEY_LAST_USAGE_SOURCE, USAGE_SOURCE_TASK_ROOT_ACTIVITY)
+                .apply();
+
+        DatabaseUtils.removeUsageSource(mContext);
+
+        assertThat(
+                DatabaseUtils
+                        .getSharedPreferences(mContext)
+                        .contains(DatabaseUtils.KEY_LAST_USAGE_SOURCE))
+                .isFalse();
+    }
+
+    @Test
+    public void getUsageSource_hasData() {
+        final SharedPreferences sharedPreferences = DatabaseUtils.getSharedPreferences(mContext);
+        sharedPreferences
+                .edit()
+                .putInt(DatabaseUtils.KEY_LAST_USAGE_SOURCE, USAGE_SOURCE_TASK_ROOT_ACTIVITY)
+                .apply();
+
+        assertThat(DatabaseUtils.getUsageSource(mContext, mUsageStatsManager))
+                .isEqualTo(USAGE_SOURCE_TASK_ROOT_ACTIVITY);
+    }
+
+    @Test
+    public void getUsageSource_notHasData_writeLoadedData() throws RemoteException {
+        when(mUsageStatsManager.getUsageSource()).thenReturn(USAGE_SOURCE_TASK_ROOT_ACTIVITY);
+
+        assertThat(DatabaseUtils.getUsageSource(mContext, mUsageStatsManager))
+                .isEqualTo(USAGE_SOURCE_TASK_ROOT_ACTIVITY);
+        assertThat(
+                DatabaseUtils
+                        .getSharedPreferences(mContext)
+                        .getInt(DatabaseUtils.KEY_LAST_USAGE_SOURCE, USAGE_SOURCE_CURRENT_ACTIVITY))
+                .isEqualTo(USAGE_SOURCE_TASK_ROOT_ACTIVITY);
+    }
+
+    @Test
+    public void getUsageSource_throwException_writeDefaultData() throws RemoteException {
+        when(mUsageStatsManager.getUsageSource()).thenThrow(new RemoteException());
+
+        assertThat(DatabaseUtils.getUsageSource(mContext, mUsageStatsManager))
+                .isEqualTo(USAGE_SOURCE_CURRENT_ACTIVITY);
+        assertThat(
+                DatabaseUtils
+                        .getSharedPreferences(mContext)
+                        .getInt(DatabaseUtils.KEY_LAST_USAGE_SOURCE, USAGE_SOURCE_CURRENT_ACTIVITY))
+                .isEqualTo(USAGE_SOURCE_CURRENT_ACTIVITY);
     }
 
     @Test
@@ -452,6 +531,19 @@ public final class DatabaseUtilsTest {
         assertThat(dumpContent.contains("ClearBatteryCacheData")).isTrue();
         assertThat(dumpContent.contains("LastLoadFullChargeTime")).isTrue();
         assertThat(dumpContent.contains("LastUploadFullChargeTime")).isTrue();
+    }
+
+    @Test
+    public void loadFromContentProvider_workProfile_transferToUserProfile() throws Exception {
+        // Test to verify b/297036263
+        doReturn(mUserManager).when(mContext).getSystemService(UserManager.class);
+        doReturn(true).when(mUserManager).isManagedProfile();
+        doReturn(UserHandle.CURRENT).when(mContext).getUser();
+        doReturn(UserHandle.SYSTEM).when(mUserManager).getProfileParent(UserHandle.CURRENT);
+
+        DatabaseUtils.loadFromContentProvider(mContext, Uri.EMPTY, null, cursor -> 1);
+
+        verify(mContext).createPackageContextAsUser(anyString(), anyInt(), any());
     }
 
     private static void verifyBatteryEntryContentValues(
@@ -497,6 +589,7 @@ public final class DatabaseUtilsTest {
                         BatteryHistEntry.KEY_PACKAGE_NAME,
                         BatteryHistEntry.KEY_TIMESTAMP,
                         BatteryHistEntry.KEY_UID,
-                        BatteryHistEntry.KEY_CONSUMER_TYPE});
+                        BatteryHistEntry.KEY_CONSUMER_TYPE,
+                        BatteryHistEntry.KEY_IS_FULL_CHARGE_CYCLE_START});
     }
 }

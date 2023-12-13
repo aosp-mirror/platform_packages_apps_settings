@@ -128,7 +128,7 @@ public abstract class BluetoothDevicePairingDetailBase extends DeviceListPrefere
             if (device != null && mSelectedList.contains(device)) {
                 setResult(RESULT_OK);
                 finish();
-            } else if (mDevicePreferenceMap.containsKey(cachedDevice)) {
+            } else {
                 onDeviceDeleted(cachedDevice);
             }
         }
@@ -175,8 +175,6 @@ public abstract class BluetoothDevicePairingDetailBase extends DeviceListPrefere
     public void updateContent(int bluetoothState) {
         switch (bluetoothState) {
             case BluetoothAdapter.STATE_ON:
-                mDevicePreferenceMap.clear();
-                clearPreferenceGroupCache();
                 mBluetoothAdapter.enable();
                 enableScanning();
                 break;
@@ -185,14 +183,6 @@ public abstract class BluetoothDevicePairingDetailBase extends DeviceListPrefere
                 finish();
                 break;
         }
-    }
-
-    /**
-     * Clears all cached preferences in {@code preferenceGroup}.
-     */
-    private void clearPreferenceGroupCache() {
-        cacheRemoveAllPrefs(mAvailableDevicesCategory);
-        removeCachedPrefs(mAvailableDevicesCategory);
     }
 
     @VisibleForTesting

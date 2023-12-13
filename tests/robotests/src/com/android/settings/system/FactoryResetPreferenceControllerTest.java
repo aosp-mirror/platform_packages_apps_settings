@@ -49,7 +49,7 @@ public class FactoryResetPreferenceControllerTest {
         mContext = RuntimeEnvironment.application;
         mShadowUserManager = ShadowUserManager.getShadow();
 
-        mController = new FactoryResetPreferenceController(mContext);
+        mController = new FactoryResetPreferenceController(mContext, FACTORY_RESET_KEY);
     }
 
     @After
@@ -85,7 +85,7 @@ public class FactoryResetPreferenceControllerTest {
         // Indicate the user is a demo user.
         mShadowUserManager.addUser(UserHandle.myUserId(), "test", UserInfo.FLAG_DEMO);
 
-        assertThat(mController.isAvailable()).isTrue();
+        assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test

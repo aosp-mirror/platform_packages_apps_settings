@@ -59,4 +59,10 @@
         android:summary="@string/summary_placeholder"
         android:fragment="com.android.settings.wifi.tether.WifiHotspotSpeedSettings"
         settings:isPreferenceVisible="@bool/config_show_wifi_hotspot_speed"/>
+
+    <Preference
+        android:key="wifi_hotspot_instant"
+        android:title="@string/wifi_hotspot_instant_title"
+        android:summary="@string/summary_placeholder"
+        settings:isPreferenceVisible="false"/>
 </PreferenceScreen>

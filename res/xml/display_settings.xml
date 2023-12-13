@@ -49,6 +49,13 @@
             settings:controller="com.android.settings.security.screenlock.LockScreenPreferenceController"/>
 
         <com.android.settingslib.RestrictedPreference
+            android:fragment="com.android.settings.display.FoldLockBehaviorSettings"
+            android:key="fold_lock_behavior"
+            android:title="@string/fold_lock_behavior_title"
+            settings:controller="com.android.settings.display.FoldLockBehaviorPreferenceController"
+            settings:keywords="@string/keywords_fold_lock_behavior" />
+
+        <com.android.settingslib.RestrictedPreference
             android:key="screen_timeout"
             android:title="@string/screen_timeout"
             android:summary="@string/summary_placeholder"

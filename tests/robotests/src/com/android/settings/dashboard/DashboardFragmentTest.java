@@ -16,7 +16,9 @@
 package com.android.settings.dashboard;
 
 import static com.android.internal.logging.nano.MetricsProto.MetricsEvent.DASHBOARD_CONTAINER;
+import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_GROUP_KEY;
 import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_KEYHINT;
+import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_PENDING_INTENT;
 import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_SWITCH_URI;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -30,6 +32,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.PendingIntent;
 import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -38,15 +41,18 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.ProviderInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.preference.PreferenceManager.OnActivityResultListener;
 
 import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.slices.BlockingSlicePrefController;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -57,6 +63,7 @@ import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
 import com.android.settingslib.drawer.ActivityTile;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.ProviderTile;
+import com.android.settingslib.drawer.Tile;
 
 import org.junit.Before;
 import org.junit.Ignore;
@@ -175,6 +182,43 @@ public class DashboardFragmentTest {
         mTestFragment.onCreatePreferences(new Bundle(), "rootKey");
 
         verify(mTestFragment.mScreen, times(2)).addPreference(nullable(Preference.class));
+    }
+
+    @Test
+    public void displayTilesAsPreference_withGroup_shouldAddTilesIntoGroup() {
+        final ProviderInfo providerInfo = new ProviderInfo();
+        providerInfo.packageName = "pkg";
+        providerInfo.name = "provider";
+        providerInfo.authority = "authority";
+        final Bundle groupTileMetaData = new Bundle();
+        groupTileMetaData.putString(META_DATA_PREFERENCE_KEYHINT, "injected_tile_group_key");
+        ProviderTile groupTile = new ProviderTile(providerInfo, mDashboardCategory.key,
+                groupTileMetaData);
+        mDashboardCategory.addTile(groupTile);
+
+        final Bundle subTileMetaData = new Bundle();
+        subTileMetaData.putString(META_DATA_PREFERENCE_KEYHINT, "injected_tile_key3");
+        subTileMetaData.putString(META_DATA_PREFERENCE_GROUP_KEY, "injected_tile_group_key");
+        subTileMetaData.putParcelable(
+                META_DATA_PREFERENCE_PENDING_INTENT,
+                PendingIntent.getActivity(mContext, 0, new Intent(), 0));
+        ProviderTile subTile = new ProviderTile(providerInfo, mDashboardCategory.key,
+                subTileMetaData);
+        mDashboardCategory.addTile(subTile);
+
+        PreferenceCategory groupPreference = mock(PreferenceCategory.class);
+        when(mFakeFeatureFactory.dashboardFeatureProvider
+                .getTilesForCategory(nullable(String.class)))
+                .thenReturn(mDashboardCategory);
+        when(mFakeFeatureFactory.dashboardFeatureProvider
+                .getDashboardKeyForTile(any(Tile.class)))
+                .then(invocation -> ((Tile) invocation.getArgument(0)).getKey(mContext));
+        when(mTestFragment.mScreen.findPreference("injected_tile_group_key"))
+                .thenReturn(groupPreference);
+        mTestFragment.onCreatePreferences(new Bundle(), "rootKey");
+
+        verify(mTestFragment.mScreen, times(3)).addPreference(nullable(Preference.class));
+        verify(groupPreference).addPreference(nullable(Preference.class));
     }
 
     @Test
@@ -352,12 +396,80 @@ public class DashboardFragmentTest {
     }
 
     @Test
+    public void createPreference_isActivityTile_returnPreference() {
+        final Preference pref = mTestFragment.createPreference(mActivityTile);
+
+        assertThat(pref).isInstanceOf(Preference.class);
+        assertThat(pref).isNotInstanceOf(PrimarySwitchPreference.class);
+        assertThat(pref).isNotInstanceOf(SwitchPreference.class);
+        assertThat(pref.getWidgetLayoutResource()).isEqualTo(0);
+    }
+
+    @Test
     public void createPreference_isActivityTileAndHasSwitch_returnPrimarySwitchPreference() {
         mActivityTile.getMetaData().putString(META_DATA_PREFERENCE_SWITCH_URI, "uri");
 
         final Preference pref = mTestFragment.createPreference(mActivityTile);
 
         assertThat(pref).isInstanceOf(PrimarySwitchPreference.class);
+    }
+
+    @Test
+    public void createPreference_isProviderTileWithPendingIntent_returnPreferenceWithIcon() {
+        final ProviderInfo providerInfo = new ProviderInfo();
+        providerInfo.packageName = "pkg";
+        providerInfo.name = "provider";
+        providerInfo.authority = "authority";
+        final Bundle metaData = new Bundle();
+        metaData.putString(META_DATA_PREFERENCE_KEYHINT, "injected_tile_key2");
+        ProviderTile providerTile = new ProviderTile(providerInfo, mDashboardCategory.key,
+                metaData);
+        providerTile.pendingIntentMap.put(
+                UserHandle.CURRENT, PendingIntent.getActivity(mContext, 0, new Intent(), 0));
+
+        final Preference pref = mTestFragment.createPreference(providerTile);
+
+        assertThat(pref).isInstanceOf(Preference.class);
+        assertThat(pref).isNotInstanceOf(PrimarySwitchPreference.class);
+        assertThat(pref).isNotInstanceOf(SwitchPreference.class);
+        assertThat(pref.getWidgetLayoutResource())
+                .isEqualTo(R.layout.preference_external_action_icon);
+    }
+
+    @Test
+    public void createPreference_isProviderTileWithPendingIntentAndSwitch_returnPrimarySwitch() {
+        mProviderTile.pendingIntentMap.put(
+                UserHandle.CURRENT, PendingIntent.getActivity(mContext, 0, new Intent(), 0));
+
+        final Preference pref = mTestFragment.createPreference(mProviderTile);
+
+        assertThat(pref).isInstanceOf(PrimarySwitchPreference.class);
+    }
+
+    @Test
+    public void createPreference_isGroupTile_returnPreferenceCategory_logTileAdded() {
+        final ProviderInfo providerInfo = new ProviderInfo();
+        providerInfo.packageName = "pkg";
+        providerInfo.name = "provider";
+        providerInfo.authority = "authority";
+        final Bundle metaData = new Bundle();
+        metaData.putString(META_DATA_PREFERENCE_KEYHINT, "injected_tile_key2");
+        ProviderTile providerTile =
+                new ProviderTile(providerInfo, mDashboardCategory.key, metaData);
+        MetricsFeatureProvider metricsFeatureProvider =
+                mFakeFeatureFactory.getMetricsFeatureProvider();
+        when(metricsFeatureProvider.getAttribution(any())).thenReturn(123);
+
+        final Preference pref = mTestFragment.createPreference(providerTile);
+
+        assertThat(pref).isInstanceOf(PreferenceCategory.class);
+        verify(metricsFeatureProvider)
+                .action(
+                        123,
+                        SettingsEnums.ACTION_SETTINGS_GROUP_TILE_ADDED_TO_SCREEN,
+                        mTestFragment.getMetricsCategory(),
+                        "injected_tile_key2",
+                        0);
     }
 
     @Test

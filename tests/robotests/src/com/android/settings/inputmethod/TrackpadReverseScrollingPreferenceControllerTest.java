@@ -16,7 +16,6 @@
 
 package com.android.settings.inputmethod;
 
-
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;

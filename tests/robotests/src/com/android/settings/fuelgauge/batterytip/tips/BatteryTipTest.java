@@ -18,11 +18,11 @@ package com.android.settings.fuelgauge.batterytip.tips;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
-import android.view.View;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.view.View;
 
-import androidx.annotation.IdRes;
+import androidx.annotation.DrawableRes;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
@@ -45,7 +45,7 @@ public class BatteryTipTest {
 
     private static final String TITLE = "title";
     private static final String SUMMARY = "summary";
-    @IdRes
+    @DrawableRes
     private static final int ICON_ID = R.drawable.ic_fingerprint;
 
     private Context mContext;

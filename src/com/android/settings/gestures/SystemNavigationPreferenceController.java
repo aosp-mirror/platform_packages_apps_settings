@@ -52,7 +52,8 @@ public class SystemNavigationPreferenceController extends BasePreferenceControll
         }
     }
 
-    static boolean isGestureAvailable(Context context) {
+    /** Returns {@code true} if gesture is available. */
+    public static boolean isGestureAvailable(Context context) {
         // Skip if the swipe up settings are not available
         if (!context.getResources().getBoolean(
                 com.android.internal.R.bool.config_swipe_up_gesture_setting_available)) {

@@ -245,7 +245,7 @@ public class BatteryOptimizeUtils {
             Context context, int appStandbyMode, boolean allowListed, int uid, String packageName,
             BatteryUtils batteryUtils, PowerAllowlistBackend powerAllowlistBackend,
             Action action) {
-        final String packageNameKey = BatteryHistoricalLogUtil
+        final String packageNameKey = BatteryOptimizeLogUtils
                 .getPackageNameWithUserId(packageName, UserHandle.myUserId());
         try {
             batteryUtils.setForceAppStandby(uid, packageName, appStandbyMode);
@@ -259,7 +259,7 @@ public class BatteryOptimizeUtils {
             appStandbyMode = -1;
             Log.e(TAG, "set OPTIMIZATION MODE failed for " + packageName, e);
         }
-        BatteryHistoricalLogUtil.writeLog(
+        BatteryOptimizeLogUtils.writeLog(
                 context,
                 action,
                 packageNameKey,

@@ -24,9 +24,25 @@ java_library {
 }
 
 java_library {
+    name: "battery-usage-slot-protos-lite",
+    proto: {
+        type: "lite",
+    },
+    srcs: ["battery_usage_slot.proto"],
+}
+
+java_library {
     name: "fuelgauge-usage-state-protos-lite",
     proto: {
         type: "lite",
     },
     srcs: ["fuelgauge_usage_state.proto"],
+}
+
+java_library {
+    name: "power-anomaly-event-protos-lite",
+    proto: {
+        type: "lite",
+    },
+    srcs: ["power_anomaly_event.proto"],
 }
