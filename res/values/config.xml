@@ -38,6 +38,11 @@
     <!-- Whether to show Camera laser sensor switch in Developer Options -->
     <bool name="config_show_camera_laser_sensor">false</bool>
 
+    <!-- Intent action to open Avatar Picker app -->
+    <string name="config_avatar_picker_action" translatable="false">
+        com.android.avatarpicker.FULL_SCREEN_ACTIVITY
+    </string>
+
     <!-- Package name and fully-qualified class name for the wallpaper picker activity. -->
     <string name="config_wallpaper_picker_package" translatable="false">com.android.settings</string>
     <string name="config_wallpaper_picker_class" translatable="false">com.android.settings.Settings$WallpaperSettingsActivity</string>
