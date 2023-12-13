@@ -25,8 +25,10 @@ import static com.android.settings.wifi.tether.WifiHotspotSpeedSettings.KEY_SPEE
 import static com.android.settings.wifi.tether.WifiHotspotSpeedSettings.KEY_SPEED_5GHZ;
 import static com.android.settings.wifi.tether.WifiHotspotSpeedSettings.KEY_SPEED_6GHZ;
 
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.anyBoolean;
 import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -89,98 +91,156 @@ public class WifiHotspotSpeedSettingsTest {
 
     @Test
     public void onSpeedInfoMapDataChanged_checkedSpeed2g_checkedToRadioButton2g() {
-        mSpeedInfo2g = new WifiHotspotSpeedViewModel.SpeedInfo(false, true, false);
+        mSpeedInfo2g = new WifiHotspotSpeedViewModel.SpeedInfo(true, true, true);
         updateSpeedInfoMap();
-        mockRadioButton(true, false, true);
+        mockRadioButton(false, false, false);
         mSettings.mSpeedPreferenceMap.put(SPEED_2GHZ, mRadioButton);
 
         mSettings.onSpeedInfoMapDataChanged(mSpeedInfoMap);
 
-        verifyRadioButton(false, true, false);
+        verifyRadioButton(true, true, true);
     }
 
     @Test
     public void onSpeedInfoMapDataChanged_uncheckedSpeed2g_uncheckedToRadioButton2g() {
-        mSpeedInfo2g = new WifiHotspotSpeedViewModel.SpeedInfo(true, false, true);
+        mSpeedInfo2g = new WifiHotspotSpeedViewModel.SpeedInfo(false, false, true);
         updateSpeedInfoMap();
-        mockRadioButton(false, true, false);
+        mockRadioButton(true, true, true);
         mSettings.mSpeedPreferenceMap.put(SPEED_2GHZ, mRadioButton);
 
         mSettings.onSpeedInfoMapDataChanged(mSpeedInfoMap);
 
-        verifyRadioButton(true, false, true);
+        verifyRadioButton(false, false, true);
     }
 
     @Test
     public void onSpeedInfoMapDataChanged_checkedSpeed5g_checkedToRadioButton5g() {
-        mSpeedInfo5g = new WifiHotspotSpeedViewModel.SpeedInfo(false, true, false);
+        mSpeedInfo5g = new WifiHotspotSpeedViewModel.SpeedInfo(true, true, true);
         updateSpeedInfoMap();
-        mockRadioButton(true, false, true);
+        mockRadioButton(false, false, false);
         mSettings.mSpeedPreferenceMap.put(SPEED_5GHZ, mRadioButton);
 
         mSettings.onSpeedInfoMapDataChanged(mSpeedInfoMap);
 
-        verifyRadioButton(false, true, false);
+        verifyRadioButton(true, true, true);
     }
 
     @Test
     public void onSpeedInfoMapDataChanged_uncheckedSpeed5g_uncheckedToRadioButton5g() {
-        mSpeedInfo5g = new WifiHotspotSpeedViewModel.SpeedInfo(true, false, true);
+        mSpeedInfo5g = new WifiHotspotSpeedViewModel.SpeedInfo(false, false, true);
         updateSpeedInfoMap();
-        mockRadioButton(false, true, false);
+        mockRadioButton(true, true, true);
         mSettings.mSpeedPreferenceMap.put(SPEED_5GHZ, mRadioButton);
 
         mSettings.onSpeedInfoMapDataChanged(mSpeedInfoMap);
 
-        verifyRadioButton(true, false, true);
+        verifyRadioButton(false, false, true);
     }
 
     @Test
     public void onSpeedInfoMapDataChanged_checkedSpeed2g5g_checkedToRadioButton2g5g() {
-        mSpeedInfo2g5g = new WifiHotspotSpeedViewModel.SpeedInfo(false, true, false);
+        mSpeedInfo2g5g = new WifiHotspotSpeedViewModel.SpeedInfo(true, true, true);
         updateSpeedInfoMap();
-        mockRadioButton(true, false, true);
+        mockRadioButton(false, false, false);
         mSettings.mSpeedPreferenceMap.put(SPEED_2GHZ_5GHZ, mRadioButton);
 
         mSettings.onSpeedInfoMapDataChanged(mSpeedInfoMap);
 
-        verifyRadioButton(false, true, false);
+        verifyRadioButton(true, true, true);
     }
 
     @Test
-    public void onSpeedInfoMapDataChanged_uncheckedSpeed25g_uncheckedToRadioButton25g() {
-        mSpeedInfo2g5g = new WifiHotspotSpeedViewModel.SpeedInfo(true, false, true);
+    public void onSpeedInfoMapDataChanged_uncheckedSpeed2g5g_uncheckedToRadioButton2g5g() {
+        mSpeedInfo2g5g = new WifiHotspotSpeedViewModel.SpeedInfo(false, false, true);
         updateSpeedInfoMap();
-        mockRadioButton(false, true, false);
+        mockRadioButton(true, true, true);
         mSettings.mSpeedPreferenceMap.put(SPEED_2GHZ_5GHZ, mRadioButton);
 
         mSettings.onSpeedInfoMapDataChanged(mSpeedInfoMap);
 
-        verifyRadioButton(true, false, true);
+        verifyRadioButton(false, false, true);
     }
 
     @Test
     public void onSpeedInfoMapDataChanged_checkedSpeed6g_checkedToRadioButton6g() {
-        mSpeedInfo6g = new WifiHotspotSpeedViewModel.SpeedInfo(false, true, false);
+        mSpeedInfo6g = new WifiHotspotSpeedViewModel.SpeedInfo(true, true, true);
         updateSpeedInfoMap();
+        mockRadioButton(false, false, false);
+        mSettings.mSpeedPreferenceMap.put(SPEED_6GHZ, mRadioButton);
+
+        mSettings.onSpeedInfoMapDataChanged(mSpeedInfoMap);
+
+        verifyRadioButton(true, true, true);
+    }
+
+    @Test
+    public void onSpeedInfoMapDataChanged_uncheckedSpeed6g_uncheckedToRadioButton6g() {
+        mSpeedInfo6g = new WifiHotspotSpeedViewModel.SpeedInfo(false, false, true);
+        updateSpeedInfoMap();
+        mockRadioButton(true, true, true);
+        mSettings.mSpeedPreferenceMap.put(SPEED_6GHZ, mRadioButton);
+
+        mSettings.onSpeedInfoMapDataChanged(mSpeedInfoMap);
+
+        verifyRadioButton(false, false, true);
+    }
+
+    @Test
+    public void onSpeedInfoMapDataChanged_setVisibleFalse_setVisibleOnly() {
+        mSpeedInfo6g = new WifiHotspotSpeedViewModel.SpeedInfo(true, true, false);
+        mSpeedInfo6g.mSummary = "summary";
+        mSpeedInfoMap.put(SPEED_6GHZ, mSpeedInfo6g);
+        mockRadioButton(true, true, true);
+        mSettings.mSpeedPreferenceMap.put(SPEED_6GHZ, mRadioButton);
+
+        mSettings.onSpeedInfoMapDataChanged(mSpeedInfoMap);
+
+        verify(mRadioButton).setVisible(false);
+        verify(mRadioButton, never()).setChecked(anyBoolean());
+        verify(mRadioButton, never()).setEnabled(anyBoolean());
+        verify(mRadioButton, never()).setSummary(anyString());
+    }
+
+    @Test
+    public void onSpeedInfoMapDataChanged_setVisibleTrue_setAllProperties() {
+        mSpeedInfo6g = new WifiHotspotSpeedViewModel.SpeedInfo(true, true, true);
+        mSpeedInfo6g.mSummary = "summary";
+        mSpeedInfoMap.put(SPEED_6GHZ, mSpeedInfo6g);
+        mockRadioButton(true, true, true);
+        mSettings.mSpeedPreferenceMap.put(SPEED_6GHZ, mRadioButton);
+
+        mSettings.onSpeedInfoMapDataChanged(mSpeedInfoMap);
+
+        verify(mRadioButton).setVisible(true);
+        verify(mRadioButton).setChecked(anyBoolean());
+        verify(mRadioButton).setEnabled(anyBoolean());
+        verify(mRadioButton).setSummary(anyString());
+    }
+
+    @Test
+    public void onSpeedInfoMapDataChanged_summaryIsNull_doNotSetSummary() {
+        mSpeedInfo6g = new WifiHotspotSpeedViewModel.SpeedInfo(true, true, true);
+        mSpeedInfo6g.mSummary = null;
+        mSpeedInfoMap.put(SPEED_6GHZ, mSpeedInfo6g);
+        mockRadioButton(true, true, true);
+        mSettings.mSpeedPreferenceMap.put(SPEED_6GHZ, mRadioButton);
+
+        mSettings.onSpeedInfoMapDataChanged(mSpeedInfoMap);
+
+        verify(mRadioButton, never()).setSummary(anyString());
+    }
+
+    @Test
+    public void onSpeedInfoMapDataChanged_summaryNotNull_setSummary() {
+        mSpeedInfo6g = new WifiHotspotSpeedViewModel.SpeedInfo(true, false, true);
+        mSpeedInfo6g.mSummary = "summary";
+        mSpeedInfoMap.put(SPEED_6GHZ, mSpeedInfo6g);
         mockRadioButton(true, false, true);
         mSettings.mSpeedPreferenceMap.put(SPEED_6GHZ, mRadioButton);
 
         mSettings.onSpeedInfoMapDataChanged(mSpeedInfoMap);
 
-        verifyRadioButton(false, true, false);
-    }
-
-    @Test
-    public void onSpeedInfoMapDataChanged_uncheckedSpeed6g_uncheckedToRadioButton6g() {
-        mSpeedInfo6g = new WifiHotspotSpeedViewModel.SpeedInfo(true, false, true);
-        updateSpeedInfoMap();
-        mockRadioButton(false, true, false);
-        mSettings.mSpeedPreferenceMap.put(SPEED_6GHZ, mRadioButton);
-
-        mSettings.onSpeedInfoMapDataChanged(mSpeedInfoMap);
-
-        verifyRadioButton(true, false, true);
+        verify(mRadioButton).setSummary(mSpeedInfo6g.mSummary);
     }
 
     @Test

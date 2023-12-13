@@ -21,6 +21,7 @@ import android.hardware.fingerprint.FingerprintManager;
 import android.hardware.fingerprint.FingerprintManager.AuthenticationResult;
 import android.os.CancellationSignal;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.core.InstrumentedFragment;
 
 /**
@@ -80,7 +81,6 @@ public class FingerprintAuthenticateSidecar extends InstrumentedFragment {
 
                 @Override
                 public void onAuthenticationError(int errMsgId, CharSequence errString) {
-                    mCancellationSignal = null;
                     if (mListener != null) {
                         mListener.onAuthenticationError(errMsgId, errString);
                     } else {
@@ -108,10 +108,12 @@ public class FingerprintAuthenticateSidecar extends InstrumentedFragment {
     }
 
     public void stopAuthentication() {
-        if (mCancellationSignal != null && !mCancellationSignal.isCanceled()) {
+        if (mCancellationSignal != null) {
+            // This will automatically check if the cancel has been sent and if so
+            // it won't send it again.
             mCancellationSignal.cancel();
+            mCancellationSignal = null;
         }
-        mCancellationSignal = null;
     }
 
     public void setListener(Listener listener) {
@@ -128,5 +130,10 @@ public class FingerprintAuthenticateSidecar extends InstrumentedFragment {
             }
         }
         mListener = listener;
+    }
+
+    @VisibleForTesting
+    boolean isCancelled() {
+        return mCancellationSignal == null || mCancellationSignal.isCanceled();
     }
 }

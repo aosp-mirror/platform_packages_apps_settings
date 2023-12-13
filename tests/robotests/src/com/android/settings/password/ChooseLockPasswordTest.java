@@ -27,10 +27,8 @@ import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_NUMERIC;
 import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_NUMERIC_COMPLEX;
 import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_SOMETHING;
 import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
-import static android.provider.DeviceConfig.NAMESPACE_AUTO_PIN_CONFIRMATION;
 import static android.view.WindowManager.LayoutParams.FLAG_SECURE;
 
-import static com.android.internal.widget.LockPatternUtils.FLAG_ENABLE_AUTO_PIN_CONFIRMATION;
 import static com.android.internal.widget.LockPatternUtils.PASSWORD_TYPE_KEY;
 import static com.android.settings.password.ChooseLockGeneric.CONFIRM_CREDENTIALS;
 
@@ -45,7 +43,6 @@ import android.app.admin.PasswordMetrics;
 import android.app.admin.PasswordPolicy;
 import android.content.Intent;
 import android.os.UserHandle;
-import android.provider.DeviceConfig;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
@@ -55,7 +52,6 @@ import com.android.settings.R;
 import com.android.settings.password.ChooseLockPassword.ChooseLockPasswordFragment;
 import com.android.settings.password.ChooseLockPassword.IntentBuilder;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
-import com.android.settings.testutils.shadow.ShadowDeviceConfig;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowUtils;
@@ -65,7 +61,6 @@ import com.google.android.setupdesign.GlifLayout;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
@@ -74,14 +69,12 @@ import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowDrawable;
 
-@Ignore
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
         SettingsShadowResources.class,
         ShadowLockPatternUtils.class,
         ShadowUtils.class,
         ShadowDevicePolicyManager.class,
-        ShadowDeviceConfig.class,
 })
 public class ChooseLockPasswordTest {
     @Before
@@ -415,24 +408,7 @@ public class ChooseLockPasswordTest {
     }
 
     @Test
-    public void processAndValidatePasswordRequirements_autoPinDisabled_defaultPinMinimumLength() {
-        DeviceConfig.setProperty(NAMESPACE_AUTO_PIN_CONFIRMATION, FLAG_ENABLE_AUTO_PIN_CONFIRMATION,
-                /* value= */ "false", /* makeDefault= */ false);
-        PasswordPolicy policy = new PasswordPolicy();
-        policy.quality = PASSWORD_QUALITY_UNSPECIFIED;
-
-        assertPasswordValidationResult(
-                /* minMetrics */ policy.getMinMetrics(),
-                /* minComplexity= */ PASSWORD_COMPLEXITY_NONE,
-                /* passwordType= */ PASSWORD_QUALITY_NUMERIC,
-                /* userEnteredPassword= */ LockscreenCredential.createPassword("11"),
-                "PIN must be at least 4 digits");
-    }
-
-    @Test
-    public void processAndValidatePasswordRequirements_autoPinEnabled_defaultPinMinimumLength() {
-        DeviceConfig.setProperty(NAMESPACE_AUTO_PIN_CONFIRMATION, FLAG_ENABLE_AUTO_PIN_CONFIRMATION,
-                /* value= */ "true", /* makeDefault= */ false);
+    public void processAndValidatePasswordRequirements_defaultPinMinimumLength() {
         PasswordPolicy policy = new PasswordPolicy();
         policy.quality = PASSWORD_QUALITY_UNSPECIFIED;
 
@@ -472,8 +448,6 @@ public class ChooseLockPasswordTest {
 
     @Test
     public void autoPinConfirmOption_featureEnabledAndUntouchedByUser_changeStateAsPerRules() {
-        DeviceConfig.setProperty(NAMESPACE_AUTO_PIN_CONFIRMATION, FLAG_ENABLE_AUTO_PIN_CONFIRMATION,
-                /* value= */ "true", /* makeDefault= */ false);
         ChooseLockPassword passwordActivity = setupActivityWithPinTypeAndDefaultPolicy();
 
         ChooseLockPasswordFragment fragment = getChooseLockPasswordFragment(passwordActivity);
@@ -510,8 +484,6 @@ public class ChooseLockPasswordTest {
 
     @Test
     public void autoPinConfirmOption_featureEnabledAndModifiedByUser_shouldChangeStateAsPerRules() {
-        DeviceConfig.setProperty(NAMESPACE_AUTO_PIN_CONFIRMATION, FLAG_ENABLE_AUTO_PIN_CONFIRMATION,
-                /* value= */ "true", /* makeDefault= */ false);
         ChooseLockPassword passwordActivity = setupActivityWithPinTypeAndDefaultPolicy();
 
         ChooseLockPasswordFragment fragment = getChooseLockPasswordFragment(passwordActivity);
@@ -540,38 +512,6 @@ public class ChooseLockPasswordTest {
         fragment.updateUi();
         assertThat(pinAutoConfirmOption.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(securityMessage.getVisibility()).isEqualTo(View.VISIBLE);
-        assertThat(pinAutoConfirmOption.isChecked()).isFalse();
-    }
-
-    @Test
-    public void autoPinConfirmOption_featureDisabled_shouldRemainInvisibleAndUnchecked() {
-        DeviceConfig.setProperty(NAMESPACE_AUTO_PIN_CONFIRMATION, FLAG_ENABLE_AUTO_PIN_CONFIRMATION,
-                /* value= */ "false", /* makeDefault= */ false);
-        ChooseLockPassword passwordActivity = setupActivityWithPinTypeAndDefaultPolicy();
-
-        ChooseLockPasswordFragment fragment = getChooseLockPasswordFragment(passwordActivity);
-        ScrollToParentEditText passwordEntry = passwordActivity.findViewById(R.id.password_entry);
-        CheckBox pinAutoConfirmOption = passwordActivity
-                .findViewById(R.id.auto_pin_confirm_enabler);
-        TextView securityMessage =
-                passwordActivity.findViewById(R.id.auto_pin_confirm_security_message);
-
-        passwordEntry.setText("1234");
-        fragment.updateUi();
-        assertThat(pinAutoConfirmOption.getVisibility()).isEqualTo(View.GONE);
-        assertThat(securityMessage.getVisibility()).isEqualTo(View.GONE);
-        assertThat(pinAutoConfirmOption.isChecked()).isFalse();
-
-        passwordEntry.setText("123456");
-        fragment.updateUi();
-        assertThat(pinAutoConfirmOption.getVisibility()).isEqualTo(View.GONE);
-        assertThat(securityMessage.getVisibility()).isEqualTo(View.GONE);
-        assertThat(pinAutoConfirmOption.isChecked()).isFalse();
-
-        passwordEntry.setText("12345678");
-        fragment.updateUi();
-        assertThat(pinAutoConfirmOption.getVisibility()).isEqualTo(View.GONE);
-        assertThat(securityMessage.getVisibility()).isEqualTo(View.GONE);
         assertThat(pinAutoConfirmOption.isChecked()).isFalse();
     }
 

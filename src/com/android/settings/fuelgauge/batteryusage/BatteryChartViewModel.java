@@ -55,6 +55,7 @@ class BatteryChartViewModel {
     private final String[] mFullTexts;
 
     private int mSelectedIndex = SELECTED_INDEX_ALL;
+    private int mHighlightSlotIndex = SELECTED_INDEX_INVALID;
 
     BatteryChartViewModel(@NonNull List<Integer> levels, @NonNull List<Long> timestamps,
             @NonNull AxisLabelPosition axisLabelPosition,
@@ -104,6 +105,14 @@ class BatteryChartViewModel {
 
     public void setSelectedIndex(int index) {
         mSelectedIndex = index;
+    }
+
+    public int getHighlightSlotIndex() {
+        return mHighlightSlotIndex;
+    }
+
+    public void setHighlightSlotIndex(int index) {
+        mHighlightSlotIndex = index;
     }
 
     @Override

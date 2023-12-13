@@ -18,12 +18,14 @@ package com.android.settings.users;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.junit.Assume.assumeTrue;
 import static org.mockito.Answers.RETURNS_DEEP_STUBS;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.SystemProperties;
 import android.os.UserManager;
 
@@ -103,6 +105,8 @@ public class GuestTelephonyPreferenceControllerTest {
 
     @Test
     public void updateState_Admin_shouldDisplayPreference() {
+        assumeTrue("Device does not have telephony feature ",
+                mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_TELEPHONY));
         SystemProperties.set("fw.max_users", Long.toBinaryString(4));
         mDpm.setDeviceOwner(null);
         mUserManager.setIsAdminUser(true);

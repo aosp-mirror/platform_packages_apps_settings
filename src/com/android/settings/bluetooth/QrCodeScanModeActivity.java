@@ -98,7 +98,7 @@ public class QrCodeScanModeActivity extends QrCodeScanModeBaseActivity {
                         BluetoothBroadcastUtils.TAG_FRAGMENT_QR_CODE_SCANNER);
 
         if (fragment == null) {
-            fragment = new QrCodeScanModeFragment(mIsGroupOp, mSink);
+            fragment = new QrCodeScanModeFragment();
         } else {
             if (fragment.isVisible()) {
                 return;
