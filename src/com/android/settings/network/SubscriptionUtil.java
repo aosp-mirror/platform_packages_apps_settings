@@ -158,7 +158,7 @@ public class SubscriptionUtil {
         }
 
         // hide provisioning/bootstrap and satellite profiles for user
-        if (isEmbeddedSubscriptionVisible(subInfo)) {
+        if (!isEmbeddedSubscriptionVisible(subInfo)) {
             Log.d(TAG, "Do not insert the provision eSIM or NTN eSim");
             return null;
         }
@@ -587,7 +587,7 @@ public class SubscriptionUtil {
         if (info == null) return false;
 
         // hide provisioning/bootstrap and satellite profiles for user
-        if (isEmbeddedSubscriptionVisible(info)) {
+        if (!isEmbeddedSubscriptionVisible(info)) {
             return false;
         }
 

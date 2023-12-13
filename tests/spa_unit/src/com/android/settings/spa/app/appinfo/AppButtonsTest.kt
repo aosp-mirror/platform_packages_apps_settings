@@ -140,6 +140,38 @@ class AppButtonsTest {
         composeTestRule.onNodeWithText(context.getString(R.string.uninstall_text)).assertIsEnabled()
     }
 
+    @Test
+    fun archiveButton_displayed_whenAppIsNotArchived() {
+        featureFlags.setFlag(Flags.FLAG_ARCHIVING, true)
+        val packageInfo = PackageInfo().apply {
+            applicationInfo = ApplicationInfo().apply {
+                packageName = PACKAGE_NAME
+                isArchived = false
+            }
+            packageName = PACKAGE_NAME
+        }
+        setContent(packageInfo)
+
+        composeTestRule.onNodeWithText(context.getString(R.string.archive)).assertIsDisplayed()
+        composeTestRule.onNodeWithText(context.getString(R.string.restore)).assertIsNotDisplayed()
+    }
+
+    @Test
+    fun restoreButton_displayed_whenAppIsArchived() {
+        featureFlags.setFlag(Flags.FLAG_ARCHIVING, true)
+        val packageInfo = PackageInfo().apply {
+            applicationInfo = ApplicationInfo().apply {
+                packageName = PACKAGE_NAME
+                isArchived = true
+            }
+            packageName = PACKAGE_NAME
+        }
+        setContent(packageInfo)
+
+        composeTestRule.onNodeWithText(context.getString(R.string.restore)).assertIsDisplayed()
+        composeTestRule.onNodeWithText(context.getString(R.string.archive)).assertIsNotDisplayed()
+    }
+
     private fun setContent(packageInfo: PackageInfo = PACKAGE_INFO) {
         whenever(packageInfoPresenter.flow).thenReturn(MutableStateFlow(packageInfo))
         composeTestRule.setContent {

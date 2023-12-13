@@ -28,9 +28,9 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.internal.widget.LinearLayoutManager;
-import com.android.internal.widget.RecyclerView;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
@@ -139,7 +139,8 @@ public class AudioSharingDialogFragment extends InstrumentedDialogFragment {
                             (AudioSharingDeviceItem item) -> {
                                 sListener.onItemClick(item);
                                 dismiss();
-                            }));
+                            },
+                            "Connect "));
             recyclerView.setLayoutManager(
                     new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
             recyclerView.setVisibility(View.VISIBLE);

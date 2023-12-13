@@ -18,10 +18,18 @@ package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
 import static java.util.Collections.emptyList;
 
+import android.app.AlertDialog;
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
 import android.content.Context;
+import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.DefaultLifecycleObserver;
@@ -29,13 +37,16 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.connecteddevice.audiosharing.AudioSharingUtils;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
 import com.android.settingslib.utils.ThreadUtils;
 
+import java.nio.charset.StandardCharsets;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -198,11 +209,48 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
     }
 
     private boolean launchDetailFragment(AudioStreamPreference preference) {
-        // TODO(chelseahao): impl
+        Bundle broadcast = new Bundle();
+        broadcast.putString(
+                Settings.Secure.BLUETOOTH_LE_BROADCAST_PROGRAM_INFO,
+                (String) preference.getTitle());
+
+        new SubSettingLauncher(mContext)
+                .setTitleText("Audio stream details")
+                .setDestination(AudioStreamDetailsFragment.class.getName())
+                // TODO(chelseahao): Add logging enum
+                .setSourceMetricsCategory(SettingsEnums.PAGE_UNKNOWN)
+                .setArguments(broadcast)
+                .launch();
         return true;
     }
 
     private void launchPasswordDialog(BluetoothLeBroadcastMetadata source, Preference preference) {
-        // TODO(chelseahao): impl
+        View layout =
+                LayoutInflater.from(mContext)
+                        .inflate(R.layout.bluetooth_find_broadcast_password_dialog, null);
+        ((TextView) layout.requireViewById(R.id.broadcast_name_text))
+                .setText(preference.getTitle());
+        AlertDialog alertDialog =
+                new AlertDialog.Builder(mContext)
+                        .setTitle(R.string.find_broadcast_password_dialog_title)
+                        .setView(layout)
+                        .setNeutralButton(android.R.string.cancel, null)
+                        .setPositiveButton(
+                                R.string.bluetooth_connect_access_dialog_positive,
+                                (dialog, which) -> {
+                                    var code =
+                                            ((EditText)
+                                                    layout.requireViewById(
+                                                            R.id.broadcast_edit_text))
+                                                    .getText()
+                                                    .toString();
+                                    mAudioStreamsHelper.addSource(
+                                            new BluetoothLeBroadcastMetadata.Builder(source)
+                                                    .setBroadcastCode(
+                                                            code.getBytes(StandardCharsets.UTF_8))
+                                                    .build());
+                                })
+                        .create();
+        alertDialog.show();
     }
 }

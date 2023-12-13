@@ -53,6 +53,7 @@ private class AppButtonsPresenter(
     private val appClearButton = AppClearButton(packageInfoPresenter)
     private val appForceStopButton = AppForceStopButton(packageInfoPresenter)
     private val appArchiveButton = AppArchiveButton(packageInfoPresenter)
+    private val appRestoreButton = AppRestoreButton(packageInfoPresenter)
 
     @Composable
     fun getActionButtons() =
@@ -63,7 +64,11 @@ private class AppButtonsPresenter(
     @Composable
     private fun getActionButtons(app: ApplicationInfo): List<ActionButton> = listOfNotNull(
         if (featureFlags.archiving()) {
-            appArchiveButton.getActionButton(app)
+            if (app.isArchived) {
+                appRestoreButton.getActionButton(app)
+            } else {
+                appArchiveButton.getActionButton(app)
+            }
         } else {
             appLaunchButton.getActionButton(app)
         },

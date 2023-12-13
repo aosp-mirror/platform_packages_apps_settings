@@ -16,35 +16,23 @@
 
 package com.android.settings.network
 
-import android.app.settings.SettingsEnums
 import android.content.Context
 import android.content.IntentFilter
-import android.os.UserManager
 import android.telephony.SubscriptionInfo
 import android.telephony.SubscriptionManager
 import android.telephony.TelephonyManager
 import androidx.annotation.VisibleForTesting
-import androidx.compose.foundation.layout.Column
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.PermPhoneMsg
-import androidx.compose.material3.HorizontalDivider
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
-import androidx.compose.ui.res.stringResource
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.LifecycleOwner
+import androidx.preference.PreferenceScreen
 import com.android.settings.R
-import com.android.settings.core.SubSettingLauncher
-import com.android.settings.spa.preference.ComposePreferenceController
+import com.android.settings.core.BasePreferenceController
+import com.android.settingslib.RestrictedPreference
 import com.android.settingslib.Utils
-import com.android.settingslib.spa.widget.preference.PreferenceModel
-import com.android.settingslib.spa.widget.ui.SettingsIcon
+import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
 import com.android.settingslib.spaprivileged.framework.common.broadcastReceiverFlow
 import com.android.settingslib.spaprivileged.framework.common.userManager
-import com.android.settingslib.spaprivileged.framework.compose.placeholder
-import com.android.settingslib.spaprivileged.model.enterprise.Restrictions
-import com.android.settingslib.spaprivileged.template.preference.RestrictedPreference
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
@@ -64,7 +52,14 @@ open class NetworkProviderCallsSmsController @JvmOverloads constructor(
         SubscriptionUtil.getUniqueSubscriptionDisplayName(subInfo, context)
     },
     private val isInService: (Int) -> Boolean = IsInServiceImpl(context)::isInService,
-) : ComposePreferenceController(context, preferenceKey) {
+) : BasePreferenceController(context, preferenceKey) {
+
+    private lateinit var lazyViewModel: Lazy<SubscriptionInfoListViewModel>
+    private lateinit var preference: RestrictedPreference
+
+    fun init(fragment: Fragment) {
+        lazyViewModel = fragment.viewModels()
+    }
 
     override fun getAvailabilityStatus() = when {
         !SubscriptionUtil.isSimHardwareVisible(mContext) -> UNSUPPORTED_ON_DEVICE
@@ -72,35 +67,23 @@ open class NetworkProviderCallsSmsController @JvmOverloads constructor(
         else -> AVAILABLE
     }
 
-    @Composable
-    override fun Content() {
-        Column {
-            CallsAndSms()
-            HorizontalDivider()
-        }
+    override fun displayPreference(screen: PreferenceScreen) {
+        super.displayPreference(screen)
+        preference = screen.findPreference(preferenceKey)!!
     }
 
-    @Composable
-    private fun CallsAndSms() {
-        val viewModel: SubscriptionInfoListViewModel = viewModel()
-        val subscriptionInfos by viewModel.subscriptionInfoListFlow.collectAsStateWithLifecycle()
-        val summary by remember { summaryFlow(viewModel.subscriptionInfoListFlow) }
-            .collectAsStateWithLifecycle(initialValue = placeholder())
-        RestrictedPreference(
-            model = object : PreferenceModel {
-                override val title = stringResource(R.string.calls_and_sms)
-                override val icon = @Composable { SettingsIcon(Icons.Outlined.PermPhoneMsg) }
-                override val summary = { summary }
-                override val enabled = { subscriptionInfos.isNotEmpty() }
-                override val onClick = {
-                    SubSettingLauncher(mContext).apply {
-                        setDestination(NetworkProviderCallsSmsFragment::class.qualifiedName)
-                        setSourceMetricsCategory(SettingsEnums.SETTINGS_NETWORK_CATEGORY)
-                    }.launch()
+    override fun onViewCreated(viewLifecycleOwner: LifecycleOwner) {
+        val viewModel by lazyViewModel
+
+        summaryFlow(viewModel.subscriptionInfoListFlow)
+            .collectLatestWithLifecycle(viewLifecycleOwner) { preference.summary = it }
+
+        viewModel.subscriptionInfoListFlow
+            .collectLatestWithLifecycle(viewLifecycleOwner) { subscriptionInfoList ->
+                if (!preference.isDisabledByAdmin) {
+                    preference.isEnabled = subscriptionInfoList.isNotEmpty()
                 }
-            },
-            restrictions = Restrictions(keys = listOf(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS)),
-        )
+            }
     }
 
     private fun summaryFlow(subscriptionInfoListFlow: Flow<List<SubscriptionInfo>>) = combine(

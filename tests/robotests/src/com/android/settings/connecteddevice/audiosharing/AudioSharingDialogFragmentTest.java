@@ -34,13 +34,13 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
 import com.android.settings.flags.Flags;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -85,6 +85,7 @@ public class AudioSharingDialogFragmentTest {
 
     @Before
     public void setUp() {
+        ShadowAlertDialogCompat.reset();
         mShadowBluetoothAdapter = Shadow.extract(BluetoothAdapter.getDefaultAdapter());
         mShadowBluetoothAdapter.setEnabled(true);
         mShadowBluetoothAdapter.setIsLeAudioBroadcastSourceSupported(
@@ -95,11 +96,6 @@ public class AudioSharingDialogFragmentTest {
         mParent = new Fragment();
         FragmentController.setupFragment(
                 mParent, FragmentActivity.class, /* containerViewId= */ 0, /* bundle= */ null);
-    }
-
-    @After
-    public void tearDown() {
-        ShadowAlertDialogCompat.reset();
     }
 
     @Test
@@ -154,7 +150,7 @@ public class AudioSharingDialogFragmentTest {
         Button shareBtn = rootView.findViewById(R.id.share_btn);
         assertThat(dialog.isShowing()).isTrue();
         assertThat(subtitle1.getVisibility()).isEqualTo(View.VISIBLE);
-        assertThat(TEST_DEVICE_NAME1).isEqualTo(subtitle1.getText());
+        assertThat(subtitle1.getText().toString()).isEqualTo(TEST_DEVICE_NAME1);
         assertThat(guidance.getVisibility()).isEqualTo(View.GONE);
         assertThat(shareBtn.getVisibility()).isEqualTo(View.VISIBLE);
     }
@@ -205,10 +201,13 @@ public class AudioSharingDialogFragmentTest {
         TextView subtitle1 = rootView.findViewById(R.id.share_audio_subtitle1);
         ImageView guidance = rootView.findViewById(R.id.share_audio_guidance);
         Button shareBtn = rootView.findViewById(R.id.share_btn);
+        RecyclerView recyclerView = rootView.findViewById(R.id.btn_list);
         assertThat(dialog.isShowing()).isTrue();
         assertThat(subtitle1.getVisibility()).isEqualTo(View.GONE);
         assertThat(guidance.getVisibility()).isEqualTo(View.GONE);
         assertThat(shareBtn.getVisibility()).isEqualTo(View.GONE);
+        assertThat(recyclerView.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(recyclerView.getAdapter().getItemCount()).isEqualTo(3);
     }
 
     @Test

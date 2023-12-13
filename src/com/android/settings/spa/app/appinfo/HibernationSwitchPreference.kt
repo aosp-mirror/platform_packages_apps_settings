@@ -22,6 +22,7 @@ import android.app.AppOpsManager.MODE_IGNORED
 import android.app.AppOpsManager.OP_AUTO_REVOKE_PERMISSIONS_IF_UNUSED
 import android.content.Context
 import android.content.pm.ApplicationInfo
+import android.content.pm.Flags
 import android.os.Build
 import android.permission.PermissionControllerManager.HIBERNATION_ELIGIBILITY_EXEMPT_BY_SYSTEM
 import android.permission.PermissionControllerManager.HIBERNATION_ELIGIBILITY_UNKNOWN
@@ -53,21 +54,33 @@ import kotlinx.coroutines.withContext
 @Composable
 fun HibernationSwitchPreference(app: ApplicationInfo) {
     val context = LocalContext.current
-    val presenter = remember { HibernationSwitchPresenter(context, app) }
+    val presenter = remember(app) { HibernationSwitchPresenter(context, app) }
     if (!presenter.isAvailable()) return
 
     val isEligibleState by presenter.isEligibleFlow.collectAsStateWithLifecycle(initialValue = false)
     val isCheckedState = presenter.isCheckedFlow.collectAsStateWithLifecycle(initialValue = null)
     SwitchPreference(remember {
         object : SwitchPreferenceModel {
-            override val title = context.getString(R.string.unused_apps_switch)
-            override val summary = { context.getString(R.string.unused_apps_switch_summary) }
+            override val title =
+                if (isArchivingEnabled())
+                    context.getString(R.string.unused_apps_switch_v2)
+                else
+                    context.getString(R.string.unused_apps_switch)
+            override val summary = {
+                if (isArchivingEnabled())
+                    context.getString(R.string.unused_apps_switch_summary_v2)
+                else
+                    context.getString(R.string.unused_apps_switch_summary)
+            }
             override val changeable = { isEligibleState }
             override val checked = { if (changeable()) isCheckedState.value else false }
             override val onCheckedChange = presenter::onCheckedChange
         }
     })
 }
+
+private fun isArchivingEnabled() =
+        Flags.archiving() || "true" == System.getProperty("pm.archiving.enabled")
 
 private class HibernationSwitchPresenter(context: Context, private val app: ApplicationInfo) {
     private val appOpsManager = context.appOpsManager
@@ -80,6 +93,10 @@ private class HibernationSwitchPresenter(context: Context, private val app: Appl
         DeviceConfig.getBoolean(NAMESPACE_APP_HIBERNATION, PROPERTY_APP_HIBERNATION_ENABLED, true)
 
     val isEligibleFlow = flow {
+        if (app.isArchived) {
+            emit(false)
+            return@flow
+        }
         val eligibility = getEligibility()
         emit(
             eligibility != HIBERNATION_ELIGIBILITY_EXEMPT_BY_SYSTEM &&

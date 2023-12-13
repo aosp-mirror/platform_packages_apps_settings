@@ -15,19 +15,20 @@
   ~ limitations under the License.
   -->
 
-<FrameLayout
+<PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:title="Audio stream details">
 
-    <Button
-        android:id="@+id/device_button"
-        style="@style/SettingsLibActionButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:background="@drawable/audio_sharing_rounded_bg_ripple"
-        android:textAlignment="center" />
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="audio_stream_header"
+        android:layout="@layout/settings_entity_header"
+        android:selectable="false"
+        settings:allowDividerBelow="true"
+        settings:searchable="false" />
 
-</FrameLayout>
+    <com.android.settingslib.widget.ActionButtonsPreference
+        android:key="audio_stream_button"
+        settings:allowDividerBelow="true" />
+
+</PreferenceScreen>
