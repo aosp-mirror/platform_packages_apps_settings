@@ -26,10 +26,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.android.hardware.input.Flags;
 import com.android.settings.R;
 
 //TODO: b/316243168 - [Physical Keyboard Setting] Refactor NewKeyboardLayoutPickerFragment
@@ -38,19 +42,25 @@ public class NewKeyboardLayoutPickerFragment extends Fragment {
     private static final int DEFAULT_KEYBOARD_PREVIEW_HEIGHT = 540;
 
     private ImageView mKeyboardLayoutPreview;
+    private TextView mKeyboardLayoutPreviewText;
     private InputManager mInputManager;
     private final NewKeyboardLayoutPickerController.KeyboardLayoutSelectedCallback
             mKeyboardLayoutSelectedCallback =
             new NewKeyboardLayoutPickerController.KeyboardLayoutSelectedCallback() {
                 @Override
                 public void onSelected(KeyboardLayout keyboardLayout) {
-                    if (mInputManager != null && mKeyboardLayoutPreview != null) {
+                    if (mInputManager != null
+                            && mKeyboardLayoutPreview != null
+                            && mKeyboardLayoutPreviewText != null && keyboardLayout != null) {
                         Drawable previewDrawable = mInputManager.getKeyboardLayoutPreview(
                                 keyboardLayout,
                                 DEFAULT_KEYBOARD_PREVIEW_WIDTH, DEFAULT_KEYBOARD_PREVIEW_HEIGHT);
                         mKeyboardLayoutPreview.setVisibility(
                                 previewDrawable == null ? GONE : VISIBLE);
+                        mKeyboardLayoutPreviewText.setVisibility(
+                                previewDrawable == null ? GONE : VISIBLE);
                         if (previewDrawable != null) {
+                            mKeyboardLayoutPreviewText.setText(keyboardLayout.getLabel());
                             mKeyboardLayoutPreview.setImageDrawable(previewDrawable);
                         }
                     }
@@ -73,6 +83,10 @@ public class NewKeyboardLayoutPickerFragment extends Fragment {
         ViewGroup fragmentView = (ViewGroup) inflater.inflate(
                 R.layout.keyboard_layout_picker, container, false);
         mKeyboardLayoutPreview = fragmentView.findViewById(R.id.keyboard_layout_preview);
+        mKeyboardLayoutPreviewText = fragmentView.findViewById(R.id.keyboard_layout_preview_name);
+        if (!Flags.keyboardLayoutPreviewFlag()) {
+            updateViewMarginForPreviewFlagOff(fragmentView);
+        }
         getActivity().getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.keyboard_layout_title, new NewKeyboardLayoutPickerTitle())
@@ -86,5 +100,14 @@ public class NewKeyboardLayoutPickerFragment extends Fragment {
                 .replace(R.id.keyboard_layouts, fragment)
                 .commit();
         return fragmentView;
+    }
+
+    private void updateViewMarginForPreviewFlagOff(ViewGroup fragmentView) {
+        LinearLayout previewContainer = fragmentView.findViewById(
+                R.id.keyboard_layout_picker_container);
+        FrameLayout.LayoutParams previewContainerLayoutParams =
+                (FrameLayout.LayoutParams) previewContainer.getLayoutParams();
+        previewContainerLayoutParams.setMargins(0, 0, 0, 0);
+        previewContainer.setLayoutParams(previewContainerLayoutParams);
     }
 }
