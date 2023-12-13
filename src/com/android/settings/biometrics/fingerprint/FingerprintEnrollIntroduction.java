@@ -385,7 +385,7 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
         }
         if (Flags.udfpsEnrollCalibration()) {
             if (mCalibrator != null) {
-                intent.putExtras(mCalibrator.getExtrasForNextIntent());
+                intent.putExtras(mCalibrator.getExtrasForNextIntent(false));
             }
         }
         return intent;
