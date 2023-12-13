@@ -69,7 +69,7 @@ data class ApnData(
     val networkTypeEnabled: Boolean = true,
     val newApn: Boolean = false,
     val subId: Int = -1,
-    val saveEnabled: Boolean = true,
+    val validEnabled: Boolean = false,
     val customizedConfig: CustomizedConfig = CustomizedConfig()
 ) {
     fun getContentValues(context: Context): ContentValues {
@@ -96,7 +96,8 @@ data class ApnData(
         values.put(Telephony.Carriers.EDITED_STATUS, Telephony.Carriers.USER_EDITED)
         if (newApn) {
             val simCarrierId =
-                context.getSystemService(TelephonyManager::class.java)!!.createForSubscriptionId(subId)
+                context.getSystemService(TelephonyManager::class.java)!!
+                    .createForSubscriptionId(subId)
                     .getSimCarrierId()
             values.put(Telephony.Carriers.CARRIER_ID, simCarrierId)
         }
@@ -231,22 +232,12 @@ fun validateAndSaveApnData(
     uriInit: Uri,
     networkTypeSelectedOptionsState: SnapshotStateList<Int>
 ): Boolean {
-    // Can not be saved
-    if (!apnData.saveEnabled) {
-        return false
-    }
     // Nothing to do if it's a read only APN
     if (apnData.customizedConfig.readOnlyApn) {
         return true
     }
-    var errorMsg = validateApnData(apnData, context)
+    val errorMsg = validateApnData(apnData, context)
     if (errorMsg != null) {
-        //TODO: showError(this)
-        return false
-    }
-    errorMsg = validateMMSC(apnData.mmsc, context)
-    if (errorMsg != null) {
-        //TODO: showError(this)
         return false
     }
     val newApnData = apnData.copy(networkType = getNetworkType(networkTypeSelectedOptionsState))
@@ -268,37 +259,23 @@ fun validateAndSaveApnData(
  * @return An error message if the apn data is invalid, otherwise return null.
  */
 fun validateApnData(apnData: ApnData, context: Context): String? {
-    var errorMsg: String? = null
+    var errorMsg: String?
     val name = apnData.name
     val apn = apnData.apn
-    if (name == "") {
-        errorMsg = context.resources.getString(R.string.error_name_empty)
+    errorMsg = if (name == "") {
+        context.resources.getString(R.string.error_name_empty)
     } else if (apn == "") {
-        errorMsg = context.resources.getString(R.string.error_apn_empty)
+        context.resources.getString(R.string.error_apn_empty)
+    } else {
+        validateMMSC(apnData.validEnabled, apnData.mmsc, context)
     }
     if (errorMsg == null) {
-        // if carrier does not allow editing certain apn types, make sure type does not include
-        // those
-        if (!ArrayUtils.isEmpty(apnData.customizedConfig.readOnlyApnTypes)
-            && apnTypesMatch(
-                apnData.customizedConfig.readOnlyApnTypes,
-                getUserEnteredApnType(apnData.apnType, apnData.customizedConfig.readOnlyApnTypes)
-            )
-        ) {
-            val stringBuilder = StringBuilder()
-            for (type in apnData.customizedConfig.readOnlyApnTypes) {
-                stringBuilder.append(type).append(", ")
-                Log.d(TAG, "validateApnData: appending type: $type")
-            }
-            // remove last ", "
-            if (stringBuilder.length >= 2) {
-                stringBuilder.delete(stringBuilder.length - 2, stringBuilder.length)
-            }
-            errorMsg = String.format(
-                context.resources.getString(R.string.error_adding_apn_type),
-                stringBuilder
-            )
-        }
+        errorMsg = validateAPNType(
+            apnData.validEnabled,
+            apnData.apnType,
+            apnData.customizedConfig.readOnlyApnTypes,
+            context
+        )
     }
     return errorMsg
 }
@@ -536,7 +513,39 @@ fun deleteApn(uri: Uri, context: Context) {
     contentResolver.delete(uri, null, null)
 }
 
-fun validateMMSC(mmsc: String, context: Context): String? {
-    return if (mmsc.matches(Regex("^https?:\\/\\/.+"))) null
-            else context.resources.getString(R.string.error_mmsc_valid)
+fun validateMMSC(validEnabled: Boolean, mmsc: String, context: Context): String? {
+    return if (validEnabled && !mmsc.matches(Regex("^https?:\\/\\/.+")))
+        context.resources.getString(R.string.error_mmsc_valid)
+    else null
+}
+
+fun validateName(validEnabled: Boolean, name: String, context: Context): String? {
+    return if (validEnabled && (name == "")) context.resources.getString(R.string.error_name_empty)
+    else null
+}
+
+fun validateAPN(validEnabled: Boolean, apn: String, context: Context): String? {
+    return if (validEnabled && (apn == "")) context.resources.getString(R.string.error_apn_empty)
+    else null
+}
+
+fun validateAPNType(
+    validEnabled: Boolean,
+    apnType: String,
+    readOnlyApnTypes: List<String>,
+    context: Context
+): String? {
+    // if carrier does not allow editing certain apn types, make sure type does not include those
+    if (validEnabled && !ArrayUtils.isEmpty(readOnlyApnTypes)
+        && apnTypesMatch(
+            readOnlyApnTypes,
+            getUserEnteredApnType(apnType, readOnlyApnTypes)
+        )
+    ) {
+        return String.format(
+            context.resources.getString(R.string.error_adding_apn_type),
+            readOnlyApnTypes.joinToString(", ")
+        )
+    }
+    return null
 }
