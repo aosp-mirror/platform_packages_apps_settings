@@ -51,9 +51,10 @@ public class AudioSharingDeviceVolumeControlUpdater extends BluetoothDeviceUpdat
     public boolean isFilterMatched(CachedBluetoothDevice cachedDevice) {
         boolean isFilterMatched = false;
         if (isDeviceConnected(cachedDevice) && isDeviceInCachedDevicesList(cachedDevice)) {
-            // If device is LE audio device and has a broadcast source,
-            // it would show in audio sharing devices group.
+            // If device is LE audio device and in a sharing session on current sharing device,
+            // it would show in volume control group.
             if (cachedDevice.isConnectedLeAudioDevice()
+                    && AudioSharingUtils.isBroadcasting(mLocalBtManager)
                     && AudioSharingUtils.hasBroadcastSource(cachedDevice, mLocalBtManager)) {
                 isFilterMatched = true;
             }
