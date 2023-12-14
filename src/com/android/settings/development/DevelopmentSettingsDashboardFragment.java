@@ -737,7 +737,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new OverlaySettingsPreferenceController(context));
         controllers.add(new StylusHandwritingPreferenceController(context));
         controllers.add(new IngressRateLimitPreferenceController((context)));
-        // controllers.add(new BackAnimationPreferenceController(context, fragment));
+        controllers.add(new BackAnimationPreferenceController(context, fragment));
         controllers.add(new PhantomProcessPreferenceController(context));
         controllers.add(new ContrastPreferenceController(
                 context, context.getSystemService(UiModeManager.class)));
