@@ -44,6 +44,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
+import com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragment;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.utils.LocaleUtils;
 
@@ -251,7 +252,17 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
 
     @Override
     public void onSettingsClicked(ShortcutPreference preference) {
-        showDialog(DialogEnums.EDIT_SHORTCUT);
+        if (Flags.editShortcutsInFullScreen()) {
+            EditShortcutsPreferenceFragment.showEditShortcutScreen(
+                    getContext(),
+                    getMetricsCategory(),
+                    getShortcutTitle(),
+                    getComponentName(),
+                    getIntent()
+            );
+        } else {
+            showDialog(DialogEnums.EDIT_SHORTCUT);
+        }
     }
 
     @Override

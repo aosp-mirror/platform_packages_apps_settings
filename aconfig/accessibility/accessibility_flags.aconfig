@@ -3,6 +3,14 @@ package: "com.android.settings.accessibility"
 # NOTE: Keep alphabetized to help limit merge conflicts from multiple simultaneous editors.
 
 flag {
+  name: "edit_shortcuts_in_full_screen"
+  namespace: "accessibility"
+  description: "Show the edit shorcuts screen in full screen, since the shortcut options are increasing."
+  bug: "300302098"
+}
+
+
+flag {
   name: "remove_qs_tooltip_in_suw"
   namespace: "accessibility"
   description: "Don't show quick settings tooltip in SUW, since the user can't use quick settings there."
