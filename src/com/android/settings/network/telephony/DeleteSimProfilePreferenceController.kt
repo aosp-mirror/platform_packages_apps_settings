@@ -26,10 +26,8 @@ import androidx.preference.PreferenceScreen
 import com.android.settings.R
 import com.android.settings.core.BasePreferenceController
 import com.android.settings.network.SubscriptionUtil
-import com.android.settings.security.ConfirmSimDeletionPreferenceController.KEY_CONFIRM_SIM_DELETION
 import com.android.settings.wifi.dpp.WifiDppUtils
 import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
-import com.android.settingslib.spaprivileged.settingsprovider.settingsGlobalBoolean
 
 /** This controls a preference allowing the user to delete the profile for an eSIM.  */
 class DeleteSimProfilePreferenceController(context: Context, preferenceKey: String) :
@@ -63,16 +61,8 @@ class DeleteSimProfilePreferenceController(context: Context, preferenceKey: Stri
     override fun handlePreferenceTreeClick(preference: Preference): Boolean {
         if (preference.key != preferenceKey) return false
 
-        val confirmDeletion by mContext.settingsGlobalBoolean(
-            name = KEY_CONFIRM_SIM_DELETION,
-            defaultValue = mContext.resources
-                .getBoolean(R.bool.config_sim_deletion_confirmation_default_on),
-        )
-        if (confirmDeletion) {
-            WifiDppUtils.showLockScreen(mContext) { deleteSim() }
-        } else {
-            deleteSim()
-        }
+        WifiDppUtils.showLockScreen(mContext) { deleteSim() }
+
         return true
     }
 
