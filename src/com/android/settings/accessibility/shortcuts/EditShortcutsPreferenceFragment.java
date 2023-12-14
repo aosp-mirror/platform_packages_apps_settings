@@ -16,6 +16,7 @@
 
 package com.android.settings.accessibility.shortcuts;
 
+import static android.app.Activity.RESULT_CANCELED;
 import static android.provider.Settings.Secure.ACCESSIBILITY_BUTTON_MODE;
 import static android.provider.Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS;
 import static android.provider.Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED;
@@ -24,6 +25,7 @@ import static android.provider.Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SER
 
 import static com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_COMPONENT_NAME;
 import static com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_CONTROLLER_NAME;
+import static com.android.settings.SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE;
 
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
@@ -35,19 +37,27 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityManager;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
+import com.android.settings.accessibility.AccessibilitySetupWizardUtils;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.core.AbstractPreferenceController;
 
+import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.util.WizardManagerHelper;
+import com.google.android.setupdesign.GlifPreferenceLayout;
 
 import java.util.Collection;
 import java.util.Set;
@@ -155,6 +165,42 @@ public class EditShortcutsPreferenceFragment extends DashboardFragment {
         };
 
         registerSettingsObserver();
+    }
+
+    @NonNull
+    @Override
+    public RecyclerView onCreateRecyclerView(
+            @NonNull LayoutInflater inflater, @NonNull ViewGroup parent,
+            @Nullable Bundle savedInstanceState) {
+        if (parent instanceof GlifPreferenceLayout layout) {
+            // Usually for setup wizard
+            return layout.onCreateRecyclerView(inflater, parent, savedInstanceState);
+        } else {
+            return super.onCreateRecyclerView(inflater, parent, savedInstanceState);
+        }
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        if (view instanceof GlifPreferenceLayout layout) {
+            // Usually for setup wizard
+            String title = null;
+            Intent intent = getIntent();
+            if (intent != null) {
+                title = intent.getStringExtra(EXTRA_SHOW_FRAGMENT_TITLE);
+            }
+            AccessibilitySetupWizardUtils.updateGlifPreferenceLayout(getContext(), layout, title,
+                    /* description= */ null, /* icon= */ null);
+
+            FooterBarMixin mixin = layout.getMixin(FooterBarMixin.class);
+            AccessibilitySetupWizardUtils.setPrimaryButton(getContext(), mixin, R.string.done,
+                    () -> {
+                        setResult(RESULT_CANCELED);
+                        finish();
+                    });
+        }
     }
 
     @Override
