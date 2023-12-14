@@ -39,7 +39,6 @@ import com.android.settings.network.apn.ApnNetworkTypes.getNetworkTypeDisplayNam
 import com.android.settings.network.apn.ApnNetworkTypes.getNetworkTypeSelectedOptionsState
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
 import com.android.settingslib.spa.framework.compose.LocalNavController
-import com.android.settingslib.spa.framework.compose.OnBackEffect
 import com.android.settingslib.spa.widget.editor.SettingsExposedDropdownMenuBox
 import com.android.settingslib.spa.widget.editor.SettingsExposedDropdownMenuCheckBox
 import com.android.settingslib.spa.widget.editor.SettingsOutlinedTextField
@@ -98,29 +97,35 @@ fun ApnPage(apnDataInit: ApnData, apnDataCur: MutableState<ApnData>, uriInit: Ur
     val networkTypeSelectedOptionsState = remember {
         getNetworkTypeSelectedOptionsState(apnData.networkType)
     }
-    OnBackEffect{
-        validateAndSaveApnData(
-            apnDataInit,
-            apnData,
-            context,
-            uriInit,
-            networkTypeSelectedOptionsState
-        )
-    }
     val navController = LocalNavController.current
     RegularScaffold(
-        title = if(apnDataInit.newApn) stringResource(id = R.string.apn_add) else stringResource(id = R.string.apn_edit),
+        title = if (apnDataInit.newApn) stringResource(id = R.string.apn_add) else stringResource(id = R.string.apn_edit),
+        actions = {
+            IconButton(onClick = {
+                if (!apnData.validEnabled) apnData = apnData.copy(validEnabled = true)
+                val valid = validateAndSaveApnData(
+                    apnDataInit,
+                    apnData,
+                    context,
+                    uriInit,
+                    networkTypeSelectedOptionsState
+                )
+                if (valid) navController.navigateBack()
+            }) { Icon(imageVector = Icons.Outlined.Done, contentDescription = null) }
+        },
     ) {
         Column {
             SettingsOutlinedTextField(
                 value = apnData.name,
                 label = stringResource(R.string.apn_name),
-                enabled = apnData.nameEnabled
+                enabled = apnData.nameEnabled,
+                errorMessage = validateName(apnData.validEnabled, apnData.name, context)
             ) { apnData = apnData.copy(name = it) }
             SettingsOutlinedTextField(
                 value = apnData.apn,
                 label = stringResource(R.string.apn_apn),
-                enabled = apnData.apnEnabled
+                enabled = apnData.apnEnabled,
+                errorMessage = validateAPN(apnData.validEnabled, apnData.apn, context)
             ) { apnData = apnData.copy(apn = it) }
             SettingsOutlinedTextField(
                 value = apnData.proxy,
@@ -150,7 +155,7 @@ fun ApnPage(apnDataInit: ApnData, apnDataCur: MutableState<ApnData>, uriInit: Ur
             SettingsOutlinedTextField(
                 value = apnData.mmsc,
                 label = stringResource(R.string.apn_mmsc),
-                errorMessage = validateMMSC(apnData.mmsc, context),
+                errorMessage = validateMMSC(apnData.validEnabled, apnData.mmsc, context),
                 enabled = apnData.mmscEnabled
             ) { apnData = apnData.copy(mmsc = it) }
             SettingsOutlinedTextField(
@@ -172,7 +177,11 @@ fun ApnPage(apnDataInit: ApnData, apnDataCur: MutableState<ApnData>, uriInit: Ur
             SettingsOutlinedTextField(
                 value = apnData.apnType,
                 label = stringResource(R.string.apn_type),
-                enabled = apnData.apnTypeEnabled
+                enabled = apnData.apnTypeEnabled,
+                errorMessage = validateAPNType(
+                    apnData.validEnabled, apnData.apnType,
+                    apnData.customizedConfig.readOnlyApnTypes, context
+                )
             ) { apnData = apnData.copy(apnType = updateApnType(apnData.copy(apnType = it))) }
             SettingsExposedDropdownMenuBox(
                 label = stringResource(R.string.apn_protocol),
@@ -209,7 +218,6 @@ fun ApnPage(apnDataInit: ApnData, apnDataCur: MutableState<ApnData>, uriInit: Ur
                         override val title = stringResource(R.string.menu_delete)
                         override val onClick = {
                             deleteApn(uriInit, context)
-                            apnData = apnData.copy(saveEnabled = false)
                             navController.navigateBack()
                         }
                     }
