@@ -564,7 +564,7 @@
     <string name="lock_screen_password_skip_biometrics_message" product="device" msgid="8611216039321306045">"Jelszó szükséges az Arcalapú feloldás és a Feloldás ujjlenyomattal funkció beállításához.\n\nJelszó védi az eszközt, ha elvész vagy ellopják."</string>
     <string name="lock_screen_pin_skip_biometrics_message" product="default" msgid="8796878521409329051">"PIN-kód szükséges az Arcalapú feloldás és a Feloldás ujjlenyomattal funkció beállításához.\n\nPIN-kód védi a telefont, ha elvész vagy ellopják."</string>
     <string name="lock_screen_pattern_skip_biometrics_message" product="default" msgid="8423700958936341596">"Minta szükséges az Arcalapú feloldás és a Feloldás ujjlenyomattal funkció beállításához.\n\nMinta védi a telefont, ha elvész vagy ellopják."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="default" msgid="5411689248299854172">"Jelszó szükséges az Arcalapú feloldás és a Feloldás ujjlenyomattal funkció beállításához.\n\nJelszó védi a telefont, ha elvész vagy ellopják."</string>
+    <string name="lock_screen_password_skip_biometrics_message" product="default" msgid="5411689248299854172">"Jelszó szükséges az Arcalapú feloldás és a Feloldás ujjlenyomattal funkció beállításához.\n\nA jelszó megvédi a telefont, ha elvész vagy ellopják."</string>
     <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"Kihagyja a PIN-kód beállítását?"</string>
     <string name="lock_screen_pin_skip_face_title" msgid="8810770395309512358">"Kihagyja a PIN-kód és arc beállítását?"</string>
     <string name="lock_screen_pin_skip_fingerprint_title" msgid="371214283158750976">"Kihagyja a PIN-kód és ujjlenyomat beállítását?"</string>
@@ -636,10 +636,10 @@
     <string name="setup_lock_settings_picker_message" product="default" msgid="8867435145945818970">"Az eszköz védelmi funkcióinak aktiválásával megakadályozhatja, hogy mások az Ön engedélye nélkül használják a telefont. Válassza ki a használni kívánt képernyőlezárási módot."</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Válassza ki a másodlagos képernyőzárolási módszert"</string>
     <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"Ha elfelejti a képernyőzárat, a rendszergazda nem tudja visszaállítani."</string>
-    <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"Más munkahelyi zár megadása"</string>
+    <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"Külön munkahelyi zár megadása"</string>
     <string name="lock_settings_picker_profile_message" msgid="9142379549980873478">"Ha elfelejtette, hogyan oldhatja fel ezt a zárat, forduljon a rendszergazdájához"</string>
-    <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"A képernyőzár feloldása"</string>
-    <string name="setup_lock_settings_options_dialog_title" msgid="7985107300517468569">"A képernyőzár feloldása"</string>
+    <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"Képernyőzárolási lehetőségek"</string>
+    <string name="setup_lock_settings_options_dialog_title" msgid="7985107300517468569">"Képernyőzárolási lehetőségek"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="4981063601772605609">"Képernyőzár"</string>
     <string name="unlock_set_unlock_launch_picker_summary_lock_immediately" msgid="5799070517574360310">"<xliff:g id="UNLOCK_METHOD">%1$s</xliff:g> / Közvetlenül az alvó mód kezdete után"</string>
     <string name="unlock_set_unlock_launch_picker_summary_lock_after_timeout" msgid="4572132216801894216">"<xliff:g id="UNLOCK_METHOD">%1$s</xliff:g> / Az alvó mód kezdete után ennyivel: <xliff:g id="TIMEOUT_STRING">%2$s</xliff:g>"</string>
@@ -2342,7 +2342,7 @@
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"Feladó: Bill"</string>
     <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"Jó reggelt!\n\nCsak a tervekről szeretnék érdeklődni. Készen lesznek, mielőtt elkezdjük elkészíteni az új hőlégballonokat?"</string>
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"Visszaállítás"</string>
-    <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"A képernyőméretre és a szövegre vonatkozó beállításokat visszaállította a rendszer"</string>
+    <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"A megjelenítési méret és a szöveg beállításait visszaállította"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Visszaállítja a megjelenítési méretet és a szöveg beállításait?"</string>
     <string name="accessibility_text_reading_confirm_dialog_message" msgid="517090197003540264">"A megjelenítési méret és a szövegbeállítások visszaállnak a telefon eredeti beállításaira"</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Visszaállítás"</string>
@@ -2415,7 +2415,7 @@
     <string name="accessibility_button_low_label" msgid="4193015407828927741">"Átlátszó"</string>
     <string name="accessibility_button_high_label" msgid="9138077512008190896">"Nem átlátszó"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Nagy kontrasztú szöveg"</string>
-    <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Módosítsa a szöveg színét feketére vagy fehérre, hogy maximálisan elkülönüljön a háttértől."</string>
+    <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"A szöveg színének módosítása feketére vagy fehérre, hogy maximálisan elkülönüljön a háttértől."</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Képernyőnagyítás automatikus frissítése"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Nagyítás frissítése az alkalmazások közti átmeneteknél"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"A bekapcs. gomb megszakítja a hívást"</string>
@@ -3178,7 +3178,7 @@
     <string name="misc_files_selected_count_bytes" msgid="7622766714974500289">"<xliff:g id="TOTAL">%2$s</xliff:g>/<xliff:g id="NUMBER">%1$s</xliff:g>"</string>
     <string name="select_all" msgid="7898929601615536401">"Az összes kijelölése"</string>
     <string name="data_usage_summary_title" msgid="394067070764360142">"Adathasználat"</string>
-    <string name="data_usage_app_summary_title" msgid="4933742247928064178">"Mobiladatok és Wi‑Fi"</string>
+    <string name="data_usage_app_summary_title" msgid="4933742247928064178">"Mobiladat és Wi‑Fi"</string>
     <string name="data_usage_accounting" msgid="6832015632699116754">"A szolgáltató adatszámlálási módja eltérhet az eszközétől."</string>
     <string name="data_usage_app" msgid="6367974637783240699">"Alkalmazások használata"</string>
     <string name="data_usage_app_info_label" msgid="3542220416056122841">"ALKALMAZÁSINFÓ"</string>
@@ -3264,7 +3264,7 @@
     <string name="data_usage_metered_wifi_disabled" msgid="4664158157415362613">"Forgalomkorlátos hálózat kiválasztásához kapcsolja be a Wi-Fit."</string>
     <string name="data_usage_metered_auto" msgid="1560514082131687116">"Automatikus"</string>
     <string name="wifi_metered_title" msgid="6623732965268033931">"Hálózathasználat"</string>
-    <string name="data_usage_metered_yes" msgid="4262598072030135223">"Mért"</string>
+    <string name="data_usage_metered_yes" msgid="4262598072030135223">"Forgalomkorlátos"</string>
     <string name="data_usage_metered_no" msgid="1685828958417926268">"Nem mért"</string>
     <string name="data_usage_disclaimer" msgid="3271450299386176770">"A szolgáltató adatszámlálási módja eltérhet az eszközétől."</string>
     <string name="vpn_name" msgid="3806456074909253262">"Név"</string>
@@ -3381,7 +3381,7 @@
     <string name="user_summary_not_set_up" msgid="4602868481732886115">"Nincs beállítva"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1658946988920104613">"Nincs létrehozva – Korlátozott jogokkal rendelkező profil"</string>
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"Még nincs létrehozva – Munkaprofil"</string>
-    <string name="user_admin" msgid="4024553191395768119">"Rendszergazda"</string>
+    <string name="user_admin" msgid="4024553191395768119">"Adminisztrátor"</string>
     <string name="user_you" msgid="3070562015202859996">"Ön (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_add_max_count" msgid="3328539978480663740">"Nem adhat hozzá több felhasználót. Újabb hozzáadásához távolítsa el valamelyik meglévő felhasználót."</string>
     <string name="user_cannot_manage_message" product="tablet" msgid="3405022988077682357">"Csak a táblagép tulajdonosa kezelheti a felhasználókat."</string>
@@ -3528,7 +3528,7 @@
     <string name="sim_calls_always_use" msgid="967857230039768111">"Mindig ezt használja hívásokhoz"</string>
     <string name="select_sim_for_data" msgid="2642305487659432499">"SIM-kártya kiválasztása a mobiladatokhoz"</string>
     <string name="select_sim_for_sms" msgid="5335510076282673497">"SIM-kártya kiválasztása SMS-ekhez"</string>
-    <string name="data_switch_started" msgid="6292759843974720112">"Az adatforgalomhoz használt SIM-kártya váltása folyamatban – ez legfeljebb egy percet vesz igénybe…"</string>
+    <string name="data_switch_started" msgid="6292759843974720112">"Adatforgalomhoz használt SIM-kártya váltása – egy perc, és kész."</string>
     <string name="select_specific_sim_for_data_title" msgid="5851980301321577985">"A(z) <xliff:g id="NEW_SIM">%1$s</xliff:g> szolgáltatót használja?"</string>
     <string name="select_specific_sim_for_data_msg" msgid="7401698123430573637">"Ha a(z) <xliff:g id="NEW_SIM">%1$s</xliff:g> szolgáltatóra vált, az eszköz többé nem használja a(z) <xliff:g id="OLD_SIM">%2$s</xliff:g> szolgáltatót a mobiladat-kapcsolathoz."</string>
     <string name="select_specific_sim_for_data_button" msgid="6571935548920603512">"<xliff:g id="NEW_SIM">%1$s</xliff:g> használata"</string>

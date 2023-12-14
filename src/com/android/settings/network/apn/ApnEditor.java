@@ -25,6 +25,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.os.UserManager;
 import android.provider.Telephony;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionInfo;
@@ -269,6 +270,11 @@ public class ApnEditor extends SettingsPreferenceFragment
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        if (isUserRestricted()) {
+            Log.e(TAG, "This setting isn't available due to user restriction.");
+            finish();
+            return;
+        }
 
         setLifecycleForAllControllers();
 
@@ -1431,6 +1437,23 @@ public class ApnEditor extends SettingsPreferenceFragment
         }
 
         return apnData;
+    }
+
+    @VisibleForTesting
+    boolean isUserRestricted() {
+        UserManager userManager = getContext().getSystemService(UserManager.class);
+        if (userManager == null) {
+            return false;
+        }
+        if (!userManager.isAdminUser()) {
+            Log.e(TAG, "User is not an admin");
+            return true;
+        }
+        if (userManager.hasUserRestriction(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS)) {
+            Log.e(TAG, "User is not allowed to configure mobile network");
+            return true;
+        }
+        return false;
     }
 
     @VisibleForTesting
