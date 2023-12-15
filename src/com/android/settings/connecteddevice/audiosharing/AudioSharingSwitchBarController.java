@@ -22,6 +22,7 @@ import android.bluetooth.BluetoothLeBroadcast;
 import android.bluetooth.BluetoothLeBroadcastAssistant;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
+import android.bluetooth.BluetoothLeBroadcastSubgroupSettings;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -339,8 +340,7 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
             }
             mDeviceItemsForSharing.remove(0);
         }
-        // TODO: start broadcast with new API
-        mBroadcast.startBroadcast("test", null);
+        mBroadcast.startPrivateBroadcast(BluetoothLeBroadcastSubgroupSettings.QUALITY_HIGH);
     }
 
     private void stopAudioSharing() {
