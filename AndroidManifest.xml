@@ -5001,9 +5001,16 @@
             android:theme="@style/GlifV3Theme.Light"
             android:exported="false" />
 
-        <activity android:name=".privatespace.PrivateSpaceAuthenticationActivity"
-                  android:theme="@*android:style/Theme.DeviceDefault.Settings.Dialog.NoActionBar"
-                  android:exported="false"/>
+        <activity
+            android:name=".privatespace.PrivateSpaceAuthenticationActivity"
+            android:theme="@*android:style/Theme.DeviceDefault.Settings.Dialog.NoActionBar"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.android.settings.action.PRIVATE_SPACE_SETUP_FLOW" />
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
         <activity android:name=".privatespace.PrivateProfileContextHelperActivity" android:exported="false"/>
 
         <activity-alias android:name="UsageStatsActivity"
