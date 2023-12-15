@@ -17,37 +17,22 @@
 package com.android.settings.network
 
 import android.app.Application
-import android.telephony.SubscriptionInfo
 import android.telephony.SubscriptionManager
-
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-
+import com.android.settings.network.telephony.subscriptionsChangedFlow
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.asExecutor
-import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.callbackFlow
-import kotlinx.coroutines.flow.conflate
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.plus
 
 class SubscriptionInfoListViewModel(application: Application) : AndroidViewModel(application) {
+    private val subscriptionManager =
+        application.getSystemService(SubscriptionManager::class.java)!!
     private val scope = viewModelScope + Dispatchers.Default
-    val subscriptionInfoListFlow = callbackFlow<List<SubscriptionInfo>> {
-        val subscriptionManager = application.getSystemService(SubscriptionManager::class.java)!!
 
-        val listener = object : SubscriptionManager.OnSubscriptionsChangedListener() {
-            override fun onSubscriptionsChanged() {
-                trySend(SubscriptionUtil.getActiveSubscriptions(subscriptionManager))
-            }
-        }
-
-        subscriptionManager.addOnSubscriptionsChangedListener(
-            Dispatchers.Default.asExecutor(),
-            listener,
-        )
-
-        awaitClose { subscriptionManager.removeOnSubscriptionsChangedListener(listener) }
-    }.conflate().stateIn(scope, SharingStarted.Eagerly, initialValue = emptyList())
+    val subscriptionInfoListFlow = application.subscriptionsChangedFlow().map {
+        SubscriptionUtil.getActiveSubscriptions(subscriptionManager)
+    }.stateIn(scope, SharingStarted.Eagerly, initialValue = emptyList())
 }
