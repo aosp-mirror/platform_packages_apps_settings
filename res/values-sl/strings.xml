@@ -164,7 +164,7 @@
     <string name="skip_label" msgid="6380034601349015895">"Preskoči"</string>
     <string name="next_label" msgid="1248293387735652187">"Naprej"</string>
     <string name="language_picker_title" msgid="4271307478263345133">"Jeziki"</string>
-    <string name="language_picker_category_title" msgid="1792199453060454565">"Vrstni red želenih jezikov"</string>
+    <string name="language_picker_category_title" msgid="1792199453060454565">"Prednostni vrstni red jezikov"</string>
     <string name="desc_current_default_language" msgid="1901157141663662859">"Sistemski jezik"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"Odstrani"</string>
     <string name="add_a_language" msgid="2126220398077503271">"Dodaj jezik"</string>
@@ -180,7 +180,7 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"V nastavitvah ni na voljo izbire jezika za to aplikacijo."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Jezik se morda razlikuje od jezikov, ki so na voljo v aplikaciji. Nekatere aplikacije morda ne podpirajo te nastavitve."</string>
     <string name="desc_app_locale_selection_supported" msgid="6744909281573556379">"Nastavite jezik za posamezno aplikacijo."</string>
-    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Sistem, aplikacije in spletna mesta uporabijo prvi podprti jezik izmed želenih jezikov."</string>
+    <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Sistem, aplikacije in spletna mesta uporabijo prvi podprti jezik izmed prednostnih jezikov."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Če želite izbrati jezik za posamezno aplikacijo, odprite nastavitve jezika aplikacije."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Več o jezikih aplikacij"</string>
     <string name="title_change_system_locale" msgid="8589844586256566951">"Želite sistemski jezik spremeniti v jezik »%s«?"</string>
@@ -565,35 +565,36 @@
     <string name="private_space_deleted" msgid="7825768516955610897">"Zasebni prostor je bil uspešno izbrisan"</string>
     <string name="private_space_delete_failed" msgid="8500755484258565011">"Zasebnega prostora ni bilo mogoče izbrisati"</string>
     <string name="no_device_lock_title" msgid="1078223464721029954">"Nastavite zaklepanje zaslona"</string>
-    <string name="no_device_lock_summary" msgid="7653477413589207824">"Če želite uporabljati zasebni prostor, v napravi nastavite zaklepanje zaslona."</string>
+    <string name="no_device_lock_summary" msgid="7436025227616244687">"Če želite uporabljati zasebni prostor, v tej napravi nastavite zaklepanje zaslona"</string>
     <string name="no_device_lock_action_label" msgid="2640487005629001288">"Nastavite zaklepanje zaslona"</string>
     <string name="no_device_lock_cancel" msgid="4412602160321228863">"Prekliči"</string>
-    <string name="privatespace_cancel_label" msgid="362351004019511784">"Prekliči"</string>
-    <string name="privatespace_setup_button_label" msgid="3696372546231047258">"Nastavi"</string>
-    <string name="privatespace_setup_title" msgid="177623114624330394">"Nastavitev zasebnega prostora"</string>
-    <string name="privatespace_hide_apps_summary" msgid="4016518749055602268">"Skrivanje zasebnih aplikacij na varnem mestu, ki je dostopno samo vam"</string>
-    <string name="privatespace_how_title" msgid="8794102046435526065">"Kako deluje"</string>
-    <string name="privatespace_access_bottom_text" msgid="1075244097441349030">"Do zasebnega prostora lahko dostopate z dna seznama aplikacij"</string>
-    <string name="privatespace_protected_lock_text" msgid="7320604832432017423">"Aplikacije v zasebnem prostoru so zaščitene z zaklepanjem"</string>
-    <string name="privatespace_hidden_notifications_text" msgid="8121285743543004812">"Obvestila aplikacij v zasebnem prostoru so skrita, kadar je zasebni prostor zaklenjen"</string>
-    <string name="privatespace_apps_permission_text" msgid="4418511924151828812">"Aplikacije v zasebnem prostoru ne bodo prikazane v upravitelju dovoljenj, na nadzorni plošči za zasebnost in v drugih nastavitvah, kadar je zasebni prostor zaklenjen"</string>
-    <string name="privatespace_setting_up_text" msgid="8532777749891406509">"Nastavljanje zasebnega prostora …"</string>
-    <string name="privatespace_apps_hidden_title" msgid="6146605677591599107">"Podatki o uporabi aplikacij v zasebnem prostoru so skriti, kadar je zasebni prostor zaklenjen"</string>
-    <string name="privatespace_access_from_apps_title" msgid="6787000636686810564">"Dostop do zasebnega prostora s seznama aplikacij"</string>
-    <string name="privatespace_system_apps_installed_title" msgid="4782295812052574626">"Nekatere sistemske aplikacije so že nameščene v zasebnem prostoru"</string>
-    <string name="privatespace_error_screen_title" msgid="8658511165913662275">"Zasebnega prostora ni bilo mogoče nastaviti"</string>
-    <string name="privatespace_error_screen_summary" msgid="5679626031159521676">"Poskusite znova zdaj ali se vrnite pozneje"</string>
-    <string name="privatespace_tryagain_label" msgid="4091466165724929876">"Poskusi znova"</string>
-    <string name="privatespace_lockscreen_title" msgid="7459425150560213662">"Želite odklepati z načinom za odklepanje zaslona?"</string>
-    <string name="privatespace_lockscreen_summary" msgid="980268845497843861">"Zasebni prostor lahko odklepate na enak način kot napravo, lahko pa izberete drug način zaklepanja"</string>
-    <string name="privatespace_use_screenlock_label" msgid="2775404941450049991">"Uporabi način za odklepanje zaslona"</string>
-    <string name="privatespace_set_lock_label" msgid="6277529807188602545">"Izberite nov način zaklepanja"</string>
-    <string name="privatespace_success_title" msgid="4854425684898602993">"Končano"</string>
-    <string name="privatespace_access_text" msgid="1253541577173303723">"Do zasebnega prostora lahko dostopate s seznama aplikacij"</string>
-    <string name="privatespace_done_label" msgid="5534818213879562387">"Končano"</string>
-    <string name="scrolldown_to_access" msgid="5160743933093369151">"Za dostop do zasebnega prostora se pomaknite navzdol"</string>
-    <string name="privatespace_retry_signin_title" msgid="495054309243289223">"Če želite nastaviti zasebni prostor, se prijavite"</string>
-    <string name="privatespace_retry_summary" msgid="1508253540053006284">"Če želite nastaviti zasebni prostor, se morate prijaviti v račun"</string>
+    <string name="private_space_cancel_label" msgid="379259667396956886">"Prekliči"</string>
+    <string name="private_space_setup_button_label" msgid="2094882154623560585">"Nastavi"</string>
+    <string name="private_space_setup_title" msgid="7091257695872833671">"Nastavitev zasebnega prostora"</string>
+    <string name="private_space_hide_apps_summary" msgid="6272406822568588610">"Zasebne aplikacije ohranite v ločenem prostoru, ki ga lahko skrijete ali zaklenete"</string>
+    <string name="private_space_how_title" msgid="6878224242661347658">"Kako deluje"</string>
+    <string name="private_space_access_bottom_text" msgid="8931773427017046981">"Do zasebnega prostora lahko dostopate z dna seznama aplikacij"</string>
+    <string name="private_space_protected_lock_text" msgid="3926344387256377994">"Aplikacije v zasebnem prostoru so zaščitene z zaklepanjem"</string>
+    <string name="private_space_hidden_notifications_text" msgid="1487992156742340621">"Obvestila aplikacij v zasebnem prostoru so skrita, kadar je zasebni prostor zaklenjen"</string>
+    <string name="private_space_apps_permission_text" msgid="7030946025253366172">"Aplikacije v zasebnem prostoru ne bodo prikazane v upravitelju dovoljenj, na nadzorni plošči za zasebnost in v drugih nastavitvah, kadar je zasebni prostor zaklenjen.\n\nZasebnega prostora ni mogoče premakniti v novo napravo. Če želite zasebni prostor uporabljati v drugi napravi, morate nastaviti novega.\n\nVsakdo, ki vašo napravo poveže z računalnikom ali v napravo namesti škodljive aplikacije, bo morda lahko dostopal do vašega zasebnega prostora."</string>
+    <string name="private_space_setting_up_text" msgid="8458035555212009528">"Nastavljanje zasebnega prostora …"</string>
+    <string name="private_space_notifications_hidden_title" msgid="4377296080723608107">"Obvestila aplikacij v zasebnem prostoru so skrita, kadar je zasebni prostor zaklenjen"</string>
+    <string name="private_space_share_photos_title" msgid="2276051999632122847">"Odklenite prostor, če želite deliti fotografije ali datoteke iz aplikacij v zasebnem prostoru"</string>
+    <string name="private_space_apps_installed_title" msgid="2428207301009983268">"Nekatere aplikacije so že nameščene v zasebnem prostoru"</string>
+    <string name="private_space_error_screen_title" msgid="1210906480024148398">"Zasebnega prostora ni bilo mogoče nastaviti"</string>
+    <string name="private_space_tryagain_label" msgid="8305362615231738367">"Poskusi znova"</string>
+    <string name="private_space_lockscreen_title" msgid="6034864097861137509">"Želite uporabiti zaklepanje zaslona za odklepanje zasebnega prostora?"</string>
+    <string name="private_space_lockscreen_summary" msgid="430569465080645805">"Zasebni prostor lahko odklepate na enak način kot napravo, lahko pa izberete drug način zaklepanja"</string>
+    <string name="private_space_use_screenlock_label" msgid="9182153443192032782">"Uporabi zaklepanje zaslona"</string>
+    <string name="private_space_set_lock_label" msgid="1790408277477408475">"Izberite nov način zaklepanja"</string>
+    <string name="private_space_success_title" msgid="4351904015352046118">"Končano"</string>
+    <string name="private_space_access_text" msgid="4258842502257201013">"Za dostop do zasebnega prostora odprite seznam aplikacij in se nato pomaknite navzdol"</string>
+    <string name="private_space_done_label" msgid="1020482651595246071">"Končano"</string>
+    <string name="private_space_scrolldown_to_access" msgid="4820954877349434545">"Pomaknite se navzdol, če želite poiskati zasebni prostor"</string>
+    <string name="private_space_retry_signin_title" msgid="2340841075193680666">"Prijavite se za nastavitev zasebnega prostora"</string>
+    <string name="private_space_retry_summary" msgid="1976929616948459609">"Če želite nastaviti zasebni prostor, se morate prijaviti v račun"</string>
+    <string name="private_space_lock_setup_title" msgid="6541564212199510787">"Izbira zaklepanja za zasebni prostor"</string>
+    <string name="private_space_lock_setup_description" msgid="423405593476300918">"Zasebni prostor lahko odklenete s prstnim odtisom. Zaradi varnosti ta možnost zahteva uporabo nadomestnega načina zaklepanja."</string>
     <string name="privatespace_unhide_header" msgid="1192011539687584004">"Za prikaz zasebnega prostora (ni končna uporabniška izkušnja)"</string>
     <string name="privatespace_open_settings" msgid="5038101805604421393">"Odprite aplikacijo Nastavitve"</string>
     <string name="privatespace_tap_settings" msgid="928932826450238276">"Dotaknite se »Varnost in zasebnost« &gt; »Zasebni prostor« &gt; »Skrivanje zasebnega prostora, kadar je zaklenjen«"</string>
@@ -1257,10 +1258,8 @@
     <string name="imei_multi_sim" msgid="9001570420423929507">"IMEI (reža za kartico SIM <xliff:g id="IMEI_SLOT_ID">%1$d</xliff:g>)"</string>
     <string name="imei_multi_sim_primary" msgid="7914653040843734282">"IMEI (reža za kartico SIM <xliff:g id="IMEI_SLOT_ID_PRIMARY">%1$d</xliff:g>) (glavna)"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"Za ogled izberite shranjeno omrežje"</string>
-    <!-- no translation found for status_imei (5719752369250485007) -->
-    <skip />
-    <!-- no translation found for status_imei_sv (6908985558726440951) -->
-    <skip />
+    <string name="status_imei" msgid="5719752369250485007">"IMEI"</string>
+    <string name="status_imei_sv" msgid="6908985558726440951">"IMEI SV"</string>
     <string name="status_min_number" msgid="4492899165438225714">"MIN"</string>
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"Različica seznama prednostnih omrežij za gostovanje"</string>
@@ -1393,6 +1392,7 @@
     <string name="error_mcc_not3" msgid="883659545640179094">"Polje z mobilno kodo države mora vsebovati 3 števke."</string>
     <string name="error_mnc_not23" msgid="7642478711158474918">"Polje s kodo mobilnega omrežja mora vsebovati 2 ali 3 števke."</string>
     <string name="error_adding_apn_type" msgid="1324263534991467943">"Operater ne podpira dodajanja APN-jev vrste %s."</string>
+    <string name="error_mmsc_valid" msgid="8380951905485647380">"Polje MMSC mora biti veljavno."</string>
     <string name="restore_default_apn" msgid="6596048535642130689">"Obnavljanje privzetih nastavitev APN-jev"</string>
     <string name="menu_restore" msgid="4310539620115151551">"Ponastavi na privzeto"</string>
     <string name="restore_default_apn_completed" msgid="5167505087078340256">"Ponastavitev privzetih nastavitev APN-jev končana"</string>
@@ -1650,6 +1650,9 @@
     <string name="clear_uri_btn_text" msgid="4828117421162495134">"Počisti dostop"</string>
     <string name="controls_label" msgid="8671492254263626383">"Kontrolniki"</string>
     <string name="force_stop" msgid="2681771622136916280">"Prisilno ustavi"</string>
+    <string name="archive" msgid="9074663845068632127">"Arhiviraj"</string>
+    <!-- no translation found for restore (7622486640713967157) -->
+    <skip />
     <string name="total_size_label" msgid="2052185048749658866">"Skupaj"</string>
     <string name="application_size_label" msgid="6407051020651716729">"Velikost aplikacije"</string>
     <string name="external_code_size_label" msgid="7375146402660973743">"Aplikacija na pogonu USB"</string>
@@ -1703,6 +1706,14 @@
     <string name="invalid_size_value" msgid="7017371543563259201">"Velikosti paketa ni bilo mogoče izračunati."</string>
     <string name="version_text" msgid="7628938665256107608">"različica <xliff:g id="VERSION_NUM">%1$s</xliff:g>"</string>
     <string name="move_app" msgid="5421158479447276791">"Premakni"</string>
+    <string name="archiving_failed" msgid="2037798988961634978">"Arhiviranje ni uspelo"</string>
+    <string name="archiving_succeeded" msgid="7891249456483297845">"Uspešno arhivirano: <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>"</string>
+    <!-- no translation found for restoring_failed (3390531747355943533) -->
+    <skip />
+    <!-- no translation found for restoring_succeeded (4967353965137524330) -->
+    <skip />
+    <!-- no translation found for restoring_in_progress (7787443682651146115) -->
+    <skip />
     <string name="another_migration_already_in_progress" msgid="6550546307856052261">"Poteka že druga selitev."</string>
     <string name="insufficient_storage" msgid="8115088042669030558">"Ni dovolj prostora za shranjevanje."</string>
     <string name="does_not_exist" msgid="6499163879348776120">"Aplikacija ne obstaja."</string>
@@ -1976,14 +1987,16 @@
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Odpiranje z gumbom za dostopnost"</string>
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Za odpiranje pridržite tipki za glasnost"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Za odpiranje se trikrat dotaknite zaslona"</string>
-    <string name="accessibility_tutorial_dialog_title_two_finger_triple" msgid="1090593773487065541">"Trikratni dotik zaslona z dvema prstoma za odpiranje"</string>
+    <!-- no translation found for accessibility_tutorial_dialog_title_two_finger_double (3912970760484557646) -->
+    <skip />
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Odpiranje s potezo"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"Uporaba poteze za dostopnost"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"Če želite uporabljati to funkcijo, se na dnu zaslona dotaknite gumba za dostopnost <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>.\n\nČe želite preklopiti med funkcijami, se dotaknite gumba za dostopnost in ga pridržite."</string>
     <string name="accessibility_tutorial_dialog_message_floating_button" msgid="2551777208185138391">"Za uporabo te funkcije se na zaslonu dotaknite gumba za dostopnost."</string>
     <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"Če želite uporabljati to funkcijo, pritisnite obe tipki za glasnost in ju pridržite."</string>
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"Če želite vklopiti ali izklopiti povečavo, se trikrat dotaknite poljubnega mesta na zaslonu."</string>
-    <string name="accessibility_tutorial_dialog_message_two_finger_triple" msgid="6205072282308562361">"Za vklop ali izklop povečave se z dvema prstoma trikrat dotaknite poljubnega mesta na zaslonu."</string>
+    <!-- no translation found for accessibility_tutorial_dialog_message_two_finger_triple (860548190334486449) -->
+    <skip />
     <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"Če želite uporabljati to funkcijo, z dvema prstoma povlecite z dna zaslona navzgor.\n\nČe želite preklopiti med funkcijami, z dvema prstoma povlecite navzgor in pridržite."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="8142847782708562793">"Če želite uporabljati to funkcijo, s tremi prsti povlecite z dna zaslona navzgor.\n\nČe želite preklopiti med funkcijami, s tremi prsti povlecite navzgor in pridržite."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"Če želite uporabljati funkcijo za dostopnost, z dvema prstoma povlecite z dna zaslona navzgor.\n\nČe želite preklopiti med funkcijami, z dvema prstoma povlecite navzgor in pridržite."</string>
@@ -2005,9 +2018,12 @@
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Pridržanje tipk za glasnost"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"pridržanje tipk za glasnost"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Pritisnite in pridržite obe tipki za glasnost."</string>
-    <string name="accessibility_shortcut_edit_dialog_title_two_finger_triple_tap" msgid="6687765191490040899">"Trikratni dotik zaslona z dvema prstoma"</string>
-    <string name="accessibility_shortcut_two_finger_triple_tap_keyword" msgid="4200744613585702430">"trikratni dotik zaslona z dvema prstoma"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_two_finger_triple_tap" msgid="2631127444247448793">"Z dvema prstoma se {0,number,integer}-krat hitro dotaknite zaslona"</string>
+    <!-- no translation found for accessibility_shortcut_edit_dialog_title_two_finger_double_tap (2271778556854020996) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_two_finger_double_tap_keyword (2971265341474137433) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_two_finger_double_tap (8262165091808318538) -->
+    <skip />
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"Trikratni dotik zaslona"</string>
     <string name="accessibility_shortcut_triple_tap_keyword" msgid="6863958573135995927">"trikratni dotik zaslona"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="2102327956423320536">"{0,number,integer}-krat se hitro dotaknite zaslona. Ta bližnjica bo morda upočasnila delovanje naprave."</string>
@@ -2043,10 +2059,8 @@
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Gumb za vklop konča klic"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="5508351959249876801">"Velik kazalec miške"</string>
     <string name="accessibility_toggle_large_pointer_icon_summary" msgid="1480527946039237705">"Povečanje ikone za kazalec miške"</string>
-    <!-- no translation found for accessibility_force_invert_title (5015366813138748407) -->
-    <skip />
-    <!-- no translation found for accessibility_force_invert_summary (1882329675950887268) -->
-    <skip />
+    <string name="accessibility_force_invert_title" msgid="5015366813138748407">"Temna tema pri vseh aplikacijah"</string>
+    <string name="accessibility_force_invert_summary" msgid="1882329675950887268">"Velja za aplikacije, ki so brez svoje temne teme. Nekatere aplikacije bodo morda imele težave s prikazom, kot so obrnjene barve."</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Odstranjevanje animacij"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Zmanjšanje gibanja na zaslonu"</string>
     <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"Mono zvok"</string>
@@ -3680,6 +3694,10 @@
     <string name="unused_apps_category" msgid="8954930958175500851">"Nastavitve neuporabljenih aplikacij"</string>
     <string name="unused_apps_switch" msgid="7595419855882245772">"Zaustavi dejavnost aplikacije ob neuporabi"</string>
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"Dovoljenja se odstranijo, začasne datoteke se izbrišejo in prikazovanje obvestil se ustavi."</string>
+    <!-- no translation found for unused_apps_switch_v2 (7464060328451454469) -->
+    <skip />
+    <!-- no translation found for unused_apps_switch_summary_v2 (3182898279622036805) -->
+    <skip />
     <string name="filter_all_apps" msgid="6645539744080251371">"Vse aplikacije"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Nameščene aplikacije"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Nenamestljive aplikacije"</string>
@@ -3806,6 +3824,9 @@
     <string name="system_alert_window_settings" msgid="6458633954424862521">"Prekrivanje drugih aplikacij"</string>
     <string name="permit_draw_overlay" msgid="4468994037192804075">"Dovoli prekrivanje drugih aplikacij"</string>
     <string name="allow_overlay_description" msgid="1607235723669496298">"Omogočite tej aplikaciji, da na zaslonu prekrije druge aplikacije, ki jih uporabljate. Ta aplikacija bo lahko spremljala dotike zaslona ali spreminjala prikaz na zaslonu."</string>
+    <string name="media_routing_control_title" msgid="6402800638960066807">"Spreminjanje izhoda za predstavnost"</string>
+    <string name="allow_media_routing_control" msgid="4907036637509360616">"Aplikaciji dovoli preklop izhoda za predstavnost"</string>
+    <string name="allow_media_routing_description" msgid="8343709701298051207">"Tej aplikaciji dovolite, da izbere, katera povezana naprava predvaja zvok ali videoposnetek iz drugih aplikacij. Če ji omogočite dovoljenje, lahko ta aplikacija dostopa do seznama razpoložljivih naprav, kot so slušalke in zvočniki, ter upravlja, katera izhodna naprava se uporablja za pretočno ali daljinsko predvajanje zvoka ali videoposnetka."</string>
     <string name="manage_external_storage_title" msgid="8024521099838816100">"Dostop do vseh datotek"</string>
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Dovoli dostop za upravljanje vseh datotek"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Tej aplikaciji dovolite, da bere, spreminja in briše vse datoteke v tej napravi ali drugih povezanih nosilcih za shranjevanje. Če daste to dovoljenje, bo aplikacija morda dostopala do datotek brez vaše vednosti."</string>
@@ -4319,8 +4340,7 @@
     <string name="change_nfc_tag_apps_detail_summary" msgid="3338220223868942195">"Tej aplikaciji dovolite, da se zažene pri optičnem branju oznake NFC.\nČe je to dovoljenje vklopljeno, bo aplikacija na voljo kot ena od možnosti ob vsaki zaznani oznaki."</string>
     <string name="media_output_title" msgid="8283629315159510680">"Predvajaj predstavnost v"</string>
     <string name="media_output_label_title" msgid="4139048973886819148">"Predvaj <xliff:g id="LABEL">%s</xliff:g> v napravi:"</string>
-    <!-- no translation found for media_output_title_without_playing (3339321669132875821) -->
-    <skip />
+    <string name="media_output_title_without_playing" msgid="3339321669132875821">"Zvok bo predvajan v"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"Ta naprava"</string>
     <string name="media_out_summary_ongoing_call_state" msgid="475188726850090363">"Ni na voljo med klici"</string>
     <string name="take_call_on_title" msgid="1159417893879946757">"Sprejemanje klicev je vklopljeno"</string>
@@ -4920,7 +4940,7 @@
     <string name="color_inversion_state_on" msgid="1160969033636440368">"Vklopljeno"</string>
     <string name="color_inversion_state_off" msgid="6925638668080451724">"Izklopljeno"</string>
     <string name="color_inversion_feature_summary" msgid="1199876648549627647">"Svetle zaslone spremeni v temne in temne v svetle."</string>
-    <string name="magnification_feature_summary" msgid="641825267460247848">"Hitro povečajte zaslon za povečavo vsebine."</string>
+    <string name="magnification_feature_summary" msgid="2053971569640663564">"Povečava zaslona"</string>
     <string name="autoclick_disabled" msgid="3213396804955002120">"Izklopljeno"</string>
     <string name="show_captions_disabled" msgid="690650956523818755">"Izklopljeno"</string>
     <string name="show_captions_enabled" msgid="7089043007924626">"Vklopljeno"</string>
