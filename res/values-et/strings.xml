@@ -774,7 +774,7 @@
     <string name="wifi_privacy_settings" msgid="3283946009000725698">"Privaatsus"</string>
     <string name="wifi_subscription" msgid="4432423938285430113">"Tellimus"</string>
     <string name="wifi_subscription_summary" msgid="18802471063384598">"Tellimuse vaatamine või muutmine"</string>
-    <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"Juhulikustatud MAC-aadress"</string>
+    <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"Juhuslikustatud MAC-aadress"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="6141246783457722976">"Seadme lisamine"</string>
     <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"Seadme võrku „<xliff:g id="SSID">%1$s</xliff:g>” lisamiseks paigutage QR-kood allolevas aknas keskele"</string>
     <string name="wifi_dpp_scan_qr_code" msgid="3543923817779444434">"QR-koodi skannimine"</string>
@@ -853,7 +853,7 @@
     <string name="wifi_saved_all_access_points_summary" msgid="2335870101156113858">"{count,plural, =1{1 võrk ja tellimus}other{# võrku ja tellimust}}"</string>
     <string name="wifi_advanced_ssid_title" msgid="1561437650193980185">"SSID"</string>
     <string name="wifi_advanced_device_mac_address_title" msgid="6155800851233164411">"Seadme MAC-aadress"</string>
-    <string name="wifi_advanced_randomized_mac_address_title" msgid="3930671320234553088">"Juhulikustatud MAC-aadress"</string>
+    <string name="wifi_advanced_randomized_mac_address_title" msgid="3930671320234553088">"Juhuslikustatud MAC-aadress"</string>
     <string name="wifi_advanced_randomized_mac_address_disconnected_title" msgid="2755843130417523727">"Juhuslikustatud MAC-aadress (viimati kasutatud)"</string>
     <string name="wifi_details_title" msgid="222735438574597493">"Võrgu üksikasjad"</string>
     <string name="wifi_details_subnet_mask" msgid="1619151769276260512">"Alamvõrgu mask"</string>
@@ -1492,7 +1492,7 @@
     <string name="lock_settings_profile_title" msgid="103605580492566086">"Tööprofiili turvalisus"</string>
     <string name="lock_settings_profile_screen_lock_title" msgid="3776275029218681815">"Tööprofiili ekraanilukk"</string>
     <string name="lock_settings_profile_unification_title" msgid="5777961097706546513">"Kasuta ühte lukku"</string>
-    <string name="lock_settings_profile_unification_summary" msgid="1317553536289481654">"Tööprofiili ja seadme ekraani puhul kasutatakse ühte lukku"</string>
+    <string name="lock_settings_profile_unification_summary" msgid="1317553536289481654">"Kasuta tööprofiili ja seadme ekraani puhul ühte lukku"</string>
     <string name="lock_settings_profile_unification_dialog_title" msgid="5163178097464820825">"Kas kasutada ühte lukku?"</string>
     <string name="lock_settings_profile_unification_dialog_body" msgid="1222905637428672355">"Seade kasutab teie tööprofiili ekraanilukku. Mõlema luku puhul kehtivad tööreeglid."</string>
     <string name="lock_settings_profile_unification_dialog_uncompliant_body" msgid="8844682343443755895">"Teie tööprofiili lukk ei vasta teie organisatsiooni turvanõuetele. Seadme ekraani ja tööprofiili puhul saate kasutada sama lukku, kuid selle puhul kehtivad tööprofiili luku eeskirjad."</string>
@@ -2457,7 +2457,7 @@
     <string name="no_device_admins" msgid="8888779888103079854">"Saadaval ei ole ühtki seadme administraatori rakendust"</string>
     <string name="no_trust_agents" msgid="8659098725864191600">"Saadaval pole ühtegi usaldusväärset agenti"</string>
     <string name="add_device_admin_msg" msgid="7730006568970042119">"Kas aktiveerida admin. rakendus?"</string>
-    <string name="add_device_admin" msgid="6252128813507932519">"Seadme administraatori rakenduse aktiveerimine"</string>
+    <string name="add_device_admin" msgid="6252128813507932519">"Aktiveeri seadme administraatori rakendus"</string>
     <string name="device_admin_add_title" msgid="6087481040932322289">"Seadme administraator"</string>
     <string name="device_admin_warning" msgid="1889160106787280321">"Selle administraatori rakenduse aktiveerimisel lubatakse rakendusel <xliff:g id="APP_NAME">%1$s</xliff:g> teha järgmisi toiminguid."</string>
     <string name="device_admin_warning_simplified" msgid="2715756519899116115">"Seda seadet haldab ja jälgib rakendus <xliff:g id="APP_NAME">%1$s</xliff:g>."</string>
@@ -2975,6 +2975,10 @@
     <string name="ring_volume_option_title" msgid="1520802026403038560">"Helina ja märguannete helitugevus"</string>
     <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"Helina helitugevus"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"Märguande helitugevus"</string>
+    <string name="ringer_content_description_silent_mode" msgid="1442257660889685934">"Hääletu telefonihelin"</string>
+    <string name="ringer_content_description_vibrate_mode" msgid="5946432791951870480">"Vibreeriv telefonihelin"</string>
+    <string name="notification_volume_content_description_vibrate_mode" msgid="6097212000507408288">"Märguannete helitugevus on vaigistatud, märguanded vibreerivad"</string>
+    <string name="volume_content_description_silent_mode" msgid="377680514551405754">"<xliff:g id="VOLUME_TYPE">%1$s</xliff:g> on vaigistatud"</string>
     <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"Pole saadaval, kuna helin on vaigistatud"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"Telefoni helin"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Märguande vaikeheli"</string>
@@ -3185,7 +3189,7 @@
     <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"Ära kuva märguandeid üldse"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="4688399629301178487">"Kuidas soovite lukustuskuva kuvada?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1360388192096354315">"Lukustuskuva"</string>
-    <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"Kuva töökoha märguannete kogu sisu"</string>
+    <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"Kuva tööprofiili märguannete kogu sisu"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"Peida tundlik töösisu"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"Kuidas tuleks profiili märguanded kuvada siis, kui seade on lukus?"</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="6950124772255324448">"Profiili märguanded"</string>
@@ -3889,7 +3893,7 @@
     <string name="managed_profile_contact_search_summary" msgid="4974727886709219105">"IT-administraator võib teie otsinguid ja sissetulevaid kõnesid näha"</string>
     <string name="cross_profile_calendar_title" msgid="7570277841490216947">"Profiilideülene kalender"</string>
     <string name="cross_profile_calendar_summary" msgid="8856185206722860069">"Kuvab tööga seotud sündmused isiklikus kalendris"</string>
-    <string name="managed_profile_settings_footer" msgid="996500759305118103">"Kui töörakendused on välja lülitatud, on need peatatud ja neile ei pääse juurde ja see ei saada teile märguandeid"</string>
+    <string name="managed_profile_settings_footer" msgid="996500759305118103">"Kui töörakendused on välja lülitatud, on need peatatud, neile ei pääse juurde ja need ei saada teile märguandeid."</string>
     <string name="automatic_storage_manager_settings" msgid="519158151463974656">"Salvestusruumi haldamine"</string>
     <string name="automatic_storage_manager_text" msgid="6900593059927987273">"Salvestusruumi vabastamiseks eemaldab salvestusruumi haldur varundatud fotod ja videod teie seadmest."</string>
     <string name="automatic_storage_manager_days_title" msgid="5077286114860539367">"Fotode ja videote eemaldamine"</string>
@@ -4080,9 +4084,9 @@
     <string name="credman_autofill_keywords" msgid="701180623776848914">"automaatne, täitmine, automaattäide, andmed, pääsuvõti, parool"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Veenduge, et rakendus oleks usaldusväärne&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google\'i automaatne täitmine&gt;%1$s&lt;/xliff:g&gt; kasutab automaatse täitmise sisestuse määramiseks ekraanil kuvatut."</string>
     <string name="credman_autofill_confirmation_message" msgid="4951846866327737417">"&lt;b&gt;Kas kasutada rakendust &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; kasutab teie ekraanil olevat sisu, et määratleda, mida saab automaatselt täita. Uued paroolid, pääsuvõtmed ja muu teave salvestatakse edaspidi siia."</string>
-    <string name="credman_picker_title" msgid="2642776965060619988">"Paroolid, pääsuvõtmed ja andmesideteenused"</string>
+    <string name="credman_picker_title" msgid="2642776965060619988">"Paroolid, pääsuvõtmed ja andmeteenused"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"Kas lülitada %1$s välja?"</string>
-    <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Kas lülitada see teenus välja?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Salvestatud teavet, nagu paroolid, pääsuvõtmed, makseviisid ja muud teavet sisselogimisel ei täideta. Salvestatud teabe kasutamiseks valige parool, pääsuvõti või andmeteenus."</string>
+    <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Kas lülitada see teenus välja?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Salvestatud teavet, nagu paroolid, pääsuvõtmed, makseviisid ja muu teave, sisselogimisel ei täideta. Salvestatud teabe kasutamiseks valige üks paroolide, pääsuvõtmete või andmete talletamise teenus."</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"Kas kasutada teenust %1$s?"</string>
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"%1$s kasutab ekraanil kuvatut, et otsustada, mida saab automaatselt täita."</string>
     <string name="credman_error_message_title" msgid="4741457523969373713">"Paroolide, pääsuvõtmete ja andmesideteenuste piirang"</string>
@@ -4146,7 +4150,7 @@
     <string name="my_device_info_account_preference_title" msgid="9197139254007133175">"Konto"</string>
     <string name="my_device_info_device_name_preference_title" msgid="8053298498727237971">"Seadme nimi"</string>
     <string name="my_device_info_basic_info_category_title" msgid="381963187269356548">"Põhiteave"</string>
-    <string name="my_device_info_legal_category_title" msgid="7732792841537995127">"Seadused ja määrused"</string>
+    <string name="my_device_info_legal_category_title" msgid="7732792841537995127">"Juriidiline ja regulatiivteave"</string>
     <string name="my_device_info_device_details_category_title" msgid="4848438695638348680">"Seadme üksikasjad"</string>
     <string name="my_device_info_device_identifiers_category_title" msgid="2197063484127704153">"Seadme identifikaatorid"</string>
     <string name="change_wifi_state_title" msgid="5629648102837821525">"WiFi-seadete juhtimine"</string>
@@ -4691,8 +4695,8 @@
     <string name="flash_notifications_summary_on_screen" msgid="9040640799633336219">"Sees / ekraani vilkumine"</string>
     <string name="flash_notifications_summary_on_camera_and_screen" msgid="2326268141063768701">"Sees / kaamera välgu ja ekraani vilkumine"</string>
     <string name="flash_notifications_intro" msgid="8409873413480928249">"Kui saate märguande või kui esitatakse äratuse heli, vilgub kaamera tuli või seadme ekraan."</string>
-    <string name="flash_notifications_intro_without_camera_flash" msgid="6297337174487793891">"Kui saate märguande või kui esitatakse äratuse heli, vilgub seadme ekraan"</string>
-    <string name="flash_notifications_note" msgid="2426125248448055075">"Kui olete valgustundlik, olge vilkuvate märguannete kasutamisel ettevaatlik"</string>
+    <string name="flash_notifications_intro_without_camera_flash" msgid="6297337174487793891">"Kui saate märguande või kui esitatakse äratuse heli, vilgub seadme ekraan."</string>
+    <string name="flash_notifications_note" msgid="2426125248448055075">"Kui olete valgustundlik, olge vilkuvate märguannete kasutamisel ettevaatlik."</string>
     <string name="flash_notifications_keywords" msgid="2458759275318514836">"välk, valgus, kuulmislangusega, kuulmiskadu"</string>
     <string name="flash_notifications_preview" msgid="5320176885050440874">"Näita vilkumist"</string>
     <string name="camera_flash_notification_title" msgid="2475084876382922732">"Kaamera välgu vilkumine"</string>
