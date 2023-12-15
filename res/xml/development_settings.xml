@@ -727,11 +727,10 @@
             android:title="@string/enable_non_resizable_multi_window"
             android:summary="@string/enable_non_resizable_multi_window_summary" />
 
-        // TODO(b/315859328): Temporally removed since causing search indexing failure.
-<!--        <SwitchPreferenceCompat-->
-<!--            android:key="back_navigation_animation"-->
-<!--            android:title="@string/back_navigation_animation"-->
-<!--            android:summary="@string/back_navigation_animation_summary" />-->
+        <SwitchPreferenceCompat
+            android:key="back_navigation_animation"
+            android:title="@string/back_navigation_animation"
+            android:summary="@string/back_navigation_animation_summary" />
 
         <Preference
             android:key="reset_shortcut_manager_throttling"

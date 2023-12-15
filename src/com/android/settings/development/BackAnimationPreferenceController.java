@@ -18,6 +18,7 @@ package com.android.settings.development;
 
 import static com.android.window.flags.Flags.predictiveBackSystemAnimations;
 
+import android.annotation.Nullable;
 import android.content.Context;
 import android.provider.Settings;
 
@@ -27,8 +28,6 @@ import androidx.preference.TwoStatePreference;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
-
-import java.util.Objects;
 
 /**
  * PreferenceController for enabling/disabling animation related to back button and back gestures.
@@ -51,9 +50,8 @@ public class BackAnimationPreferenceController extends DeveloperOptionsPreferenc
 
 
     public BackAnimationPreferenceController(Context context,
-            DevelopmentSettingsDashboardFragment fragment) {
+            @Nullable DevelopmentSettingsDashboardFragment fragment) {
         super(context);
-        Objects.requireNonNull(fragment);
         mFragment = fragment;
     }
 

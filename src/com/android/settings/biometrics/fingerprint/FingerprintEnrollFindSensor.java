@@ -290,6 +290,17 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
     }
 
     @Override
+    protected Intent getFingerprintEnrollingIntent() {
+        final Intent ret = super.getFingerprintEnrollingIntent();
+        if (Flags.udfpsEnrollCalibration()) {
+            if (mCalibrator != null) {
+                ret.putExtras(mCalibrator.getExtrasForNextIntent(true));
+            }
+        }
+        return ret;
+    }
+
+    @Override
     public void onBackPressed() {
         stopLookingForFingerprint();
         super.onBackPressed();

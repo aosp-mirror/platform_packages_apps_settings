@@ -17,16 +17,28 @@
 package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
 import android.content.Context;
+import android.os.Bundle;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 
 public class AudioStreamDetailsFragment extends DashboardFragment {
+    static final String BROADCAST_NAME_ARG = "broadcast_name";
+    static final String BROADCAST_ID_ARG = "broadcast_id";
     private static final String TAG = "AudioStreamDetailsFragment";
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        Bundle arguments = getArguments();
+        if (arguments != null) {
+            use(AudioStreamHeaderController.class)
+                    .init(
+                            this,
+                            arguments.getString(BROADCAST_NAME_ARG),
+                            arguments.getInt(BROADCAST_ID_ARG));
+            use(AudioStreamButtonController.class).init(arguments.getInt(BROADCAST_ID_ARG));
+        }
     }
 
     @Override

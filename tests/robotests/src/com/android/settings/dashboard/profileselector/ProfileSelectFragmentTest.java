@@ -39,17 +39,24 @@ import android.os.Flags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.util.ArraySet;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.Lifecycle;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragmentTest;
+import com.android.settings.dashboard.profileselector.ProfileSelectFragment.ViewPagerAdapter;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
@@ -75,6 +82,9 @@ public class ProfileSelectFragmentTest {
     private TestProfileSelectFragment mFragment;
     private FragmentActivity mActivity;
     private ShadowUserManager mUserManager;
+    @Mock private FragmentManager mFragmentManager;
+    @Mock private Lifecycle mLifecycle;
+    @Mock private FragmentTransaction mFragmentTransaction;
     @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     @Before
@@ -97,6 +107,16 @@ public class ProfileSelectFragmentTest {
     public void getTabId_setArgumentWork_setCorrectTab() {
         final Bundle bundle = new Bundle();
         bundle.putInt(SettingsActivity.EXTRA_SHOW_FRAGMENT_TAB, WORK_TAB);
+        ViewPager2 viewPager = new ViewPager2(mContext);
+        TestProfileSelectFragment profileSelectFragment = new TestProfileSelectFragment();
+        ViewPagerAdapter viewPagerAdapter =
+                new TestViewPagerAdapter(mFragmentManager, mLifecycle, profileSelectFragment);
+
+        when(mFragmentManager.beginTransaction()).thenReturn(mFragmentTransaction);
+        viewPager.setAdapter(viewPagerAdapter);
+        mFragment.setViewPager(viewPager);
+        profileSelectFragment.setViewPager(viewPager);
+        mFragmentManager.beginTransaction().add(profileSelectFragment, "tag");
 
         assertThat(mFragment.getTabId(mActivity, bundle)).isEqualTo(WORK_TAB);
     }
@@ -105,6 +125,16 @@ public class ProfileSelectFragmentTest {
     public void getTabId_setArgumentPrivate_setCorrectTab() {
         final Bundle bundle = new Bundle();
         bundle.putInt(SettingsActivity.EXTRA_SHOW_FRAGMENT_TAB, PRIVATE_TAB);
+        ViewPager2 viewPager = new ViewPager2(mContext);
+        TestProfileSelectFragment profileSelectFragment = new TestProfileSelectFragment();
+        ViewPagerAdapter viewPagerAdapter =
+                new TestViewPagerAdapter(mFragmentManager, mLifecycle, profileSelectFragment);
+
+        when(mFragmentManager.beginTransaction()).thenReturn(mFragmentTransaction);
+        viewPager.setAdapter(viewPagerAdapter);
+        mFragment.setViewPager(viewPager);
+        profileSelectFragment.setViewPager(viewPager);
+        mFragmentManager.beginTransaction().add(profileSelectFragment, "tag");
 
         assertThat(mFragment.getTabId(mActivity, bundle)).isEqualTo(PRIVATE_TAB);
     }
@@ -113,6 +143,16 @@ public class ProfileSelectFragmentTest {
     public void getTabId_setArgumentPersonal_setCorrectTab() {
         final Bundle bundle = new Bundle();
         bundle.putInt(SettingsActivity.EXTRA_SHOW_FRAGMENT_TAB, PERSONAL_TAB);
+        ViewPager2 viewPager = new ViewPager2(mContext);
+        TestProfileSelectFragment profileSelectFragment = new TestProfileSelectFragment();
+        ViewPagerAdapter viewPagerAdapter =
+                new TestViewPagerAdapter(mFragmentManager, mLifecycle, profileSelectFragment);
+
+        when(mFragmentManager.beginTransaction()).thenReturn(mFragmentTransaction);
+        viewPager.setAdapter(viewPagerAdapter);
+        mFragment.setViewPager(viewPager);
+        profileSelectFragment.setViewPager(viewPager);
+        mFragmentManager.beginTransaction().add(profileSelectFragment, "tag");
 
         assertThat(mFragment.getTabId(mActivity, bundle)).isEqualTo(PERSONAL_TAB);
     }
@@ -308,6 +348,20 @@ public class ProfileSelectFragmentTest {
                     new SettingsPreferenceFragmentTest.TestFragment(),
                     new SettingsPreferenceFragmentTest.TestFragment()
             };
+        }
+    }
+
+    static class TestViewPagerAdapter extends ViewPagerAdapter {
+        TestViewPagerAdapter(
+                @NonNull FragmentManager fragmentManager,
+                @NonNull Lifecycle lifecycle,
+                ProfileSelectFragment profileSelectFragment) {
+            super(fragmentManager, lifecycle, profileSelectFragment);
+        }
+
+        @Override
+        int getTabForPosition(int position) {
+            return position;
         }
     }
 }
