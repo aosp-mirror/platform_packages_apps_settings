@@ -27,6 +27,7 @@ import android.util.Log
 import android.view.View
 import androidx.annotation.OpenForTesting
 import androidx.annotation.VisibleForTesting
+import androidx.fragment.app.viewModels
 import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.datausage.lib.BillingCycleRepository
@@ -58,6 +59,8 @@ open class DataUsageList : DataUsageBaseFragment() {
     private lateinit var dataUsageListAppsController: DataUsageListAppsController
     private lateinit var chartDataUsagePreferenceController: ChartDataUsagePreferenceController
     private lateinit var billingCycleRepository: BillingCycleRepository
+
+    private val viewModel: DataUsageListViewModel by viewModels()
 
     @VisibleForTesting
     var dataUsageListHeaderController: DataUsageListHeaderController? = null
@@ -104,14 +107,21 @@ open class DataUsageList : DataUsageBaseFragment() {
             .collectLatestWithLifecycle(viewLifecycleOwner) { updatePolicy() }
 
         val template = template ?: return
+        viewModel.templateFlow.value = template
         dataUsageListHeaderController = DataUsageListHeaderController(
             setPinnedHeaderView(R.layout.apps_filter_spinner),
             template,
             metricsCategory,
             viewLifecycleOwner,
-            ::onCyclesLoad,
+            viewModel.cyclesFlow,
             ::updateSelectedCycle,
         )
+        viewModel.cyclesFlow.collectLatestWithLifecycle(viewLifecycleOwner) { cycles ->
+            dataUsageListAppsController.updateCycles(cycles)
+        }
+        viewModel.chartDataFlow.collectLatestWithLifecycle(viewLifecycleOwner) { chartData ->
+            chartDataUsagePreferenceController.update(chartData)
+        }
     }
 
     override fun getPreferenceScreenResId() = R.xml.data_usage_list
@@ -158,10 +168,6 @@ open class DataUsageList : DataUsageBaseFragment() {
                 .getActiveSubscriptionInfo(subId) != null)
     }
 
-    private fun onCyclesLoad(networkUsageData: List<NetworkUsageData>) {
-        dataUsageListAppsController.updateCycles(networkUsageData)
-    }
-
     /**
      * Updates the chart and detail data when initial loaded or selected cycle changed.
      */
@@ -169,17 +175,9 @@ open class DataUsageList : DataUsageBaseFragment() {
         Log.d(TAG, "showing cycle $usageData")
 
         usageAmount.title = usageData.getDataUsedString(requireContext())
+        viewModel.selectedCycleFlow.value = usageData
 
-        updateChart(usageData)
         updateApps(usageData)
-    }
-
-    /** Updates chart to show selected cycle. */
-    private fun updateChart(usageData: NetworkUsageData) {
-        chartDataUsagePreferenceController.update(
-            startTime = usageData.startTime,
-            endTime = usageData.endTime,
-        )
     }
 
     /** Updates applications data usage. */

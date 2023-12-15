@@ -63,7 +63,7 @@ class NetworkCycleDataRepositoryTest {
         spy(NetworkCycleDataRepository(context, template, mockNetworkStatsRepository))
 
     @Test
-    fun loadCycles_byPolicy() = runTest {
+    fun loadFirstCycle_byPolicy() = runTest {
         val policy = mock<NetworkPolicy> {
             on { cycleIterator() } doReturn listOf(
                 Range(zonedDateTime(CYCLE1_START_TIME), zonedDateTime(CYCLE1_END_TIME))
@@ -71,55 +71,28 @@ class NetworkCycleDataRepositoryTest {
         }
         doReturn(policy).whenever(repository).getPolicy()
 
-        val cycles = repository.loadCycles()
+        val firstCycle = repository.loadFirstCycle()
 
-        assertThat(cycles).containsExactly(
+        assertThat(firstCycle).isEqualTo(
             NetworkUsageData(startTime = 1, endTime = 2, usage = CYCLE1_BYTES),
         )
     }
 
     @Test
-    fun loadCycles_asFourWeeks() = runTest {
+    fun loadFirstCycle_asFourWeeks() = runTest {
         doReturn(null).whenever(repository).getPolicy()
         mockNetworkStatsRepository.stub {
             on { getTimeRange() } doReturn Range(CYCLE2_START_TIME, CYCLE2_END_TIME)
         }
 
-        val cycles = repository.loadCycles()
+        val firstCycle = repository.loadFirstCycle()
 
-        assertThat(cycles).containsExactly(
+        assertThat(firstCycle).isEqualTo(
             NetworkUsageData(
                 startTime = CYCLE2_END_TIME - DateUtils.WEEK_IN_MILLIS * 4,
                 endTime = CYCLE2_END_TIME,
                 usage = CYCLE2_BYTES,
             ),
-        )
-    }
-
-    @Test
-    fun querySummary() = runTest {
-        val summary = repository.queryChartData(CYCLE3_START_TIME, CYCLE4_END_TIME)
-
-        assertThat(summary).isEqualTo(
-            NetworkCycleChartData(
-                total = NetworkUsageData(
-                    startTime = CYCLE3_START_TIME,
-                    endTime = CYCLE4_END_TIME,
-                    usage = CYCLE3_BYTES + CYCLE4_BYTES,
-                ),
-                dailyUsage = listOf(
-                    NetworkUsageData(
-                        startTime = CYCLE3_START_TIME,
-                        endTime = CYCLE3_END_TIME,
-                        usage = CYCLE3_BYTES,
-                    ),
-                    NetworkUsageData(
-                        startTime = CYCLE4_START_TIME,
-                        endTime = CYCLE4_END_TIME,
-                        usage = CYCLE4_BYTES,
-                    ),
-                ),
-            )
         )
     }
 

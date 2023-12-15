@@ -33,19 +33,21 @@ class NetworkStatsRepository(context: Context, private val template: NetworkTemp
     ): NetworkUsageData? = try {
         networkStatsManager.queryDetailsForUidTagState(
             template, range.lower, range.upper, uid, NetworkStats.Bucket.TAG_NONE, state,
-        ).aggregate()
+        ).convertToBuckets().aggregate()
     } catch (e: Exception) {
         Log.e(TAG, "Exception queryDetailsForUidTagState", e)
         null
     }
 
-    fun getTimeRange(): Range<Long>? = try {
+    fun queryDetailsForDevice(): List<Bucket> = try {
         networkStatsManager.queryDetailsForDevice(template, Long.MIN_VALUE, Long.MAX_VALUE)
-            .aggregate()?.timeRange
+            .convertToBuckets()
     } catch (e: Exception) {
         Log.e(TAG, "Exception queryDetailsForDevice", e)
-        null
+        emptyList()
     }
+
+    fun getTimeRange(): Range<Long>? = queryDetailsForDevice().aggregate()?.timeRange
 
     fun querySummaryForDevice(startTime: Long, endTime: Long): Long = try {
         networkStatsManager.querySummaryForDevice(template, startTime, endTime).bytes
@@ -70,31 +72,36 @@ class NetworkStatsRepository(context: Context, private val template: NetworkTemp
             val uid: Int,
             val bytes: Long,
             val state: Int = NetworkStats.Bucket.STATE_ALL,
+            val startTimeStamp: Long,
+            val endTimeStamp: Long,
         )
+
+        fun List<Bucket>.aggregate(): NetworkUsageData? = when {
+            isEmpty() -> null
+            else -> NetworkUsageData(
+                startTime = minOf { it.startTimeStamp },
+                endTime = maxOf { it.endTimeStamp },
+                usage = sumOf { it.bytes },
+            )
+        }
+
+        fun List<Bucket>.filterTime(startTime: Long, endTime: Long): List<Bucket> = filter {
+            it.startTimeStamp >= startTime && it.endTimeStamp <= endTime
+        }
 
         private fun NetworkStats.convertToBuckets(): List<Bucket> = use {
             val buckets = mutableListOf<Bucket>()
             val bucket = NetworkStats.Bucket()
             while (getNextBucket(bucket)) {
-                buckets += Bucket(uid = bucket.uid, bytes = bucket.bytes, state = bucket.state)
+                buckets += Bucket(
+                    uid = bucket.uid,
+                    bytes = bucket.bytes,
+                    state = bucket.state,
+                    startTimeStamp = bucket.startTimeStamp,
+                    endTimeStamp = bucket.endTimeStamp,
+                )
             }
             buckets
-        }
-
-        private fun NetworkStats.aggregate(): NetworkUsageData? = use {
-            var startTime = Long.MAX_VALUE
-            var endTime = Long.MIN_VALUE
-            var usage = 0L
-            val bucket = NetworkStats.Bucket()
-            while (getNextBucket(bucket)) {
-                startTime = startTime.coerceAtMost(bucket.startTimeStamp)
-                endTime = endTime.coerceAtLeast(bucket.endTimeStamp)
-                usage += bucket.bytes
-            }
-            when {
-                startTime > endTime -> null
-                else -> NetworkUsageData(startTime, endTime, usage)
-            }
         }
 
         private val NetworkStats.Bucket.bytes: Long

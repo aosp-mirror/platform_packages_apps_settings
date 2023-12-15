@@ -17,16 +17,12 @@
 package com.android.settings.datausage
 
 import android.content.Context
-import android.util.Range
 import androidx.lifecycle.testing.TestLifecycleOwner
 import androidx.preference.PreferenceScreen
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.android.settings.datausage.lib.INetworkCycleDataRepository
 import com.android.settings.datausage.lib.NetworkCycleChartData
 import com.android.settings.datausage.lib.NetworkUsageData
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -38,17 +34,6 @@ import org.mockito.kotlin.verify
 class ChartDataUsagePreferenceControllerTest {
     private val context: Context = ApplicationProvider.getApplicationContext()
 
-    private val repository = object : INetworkCycleDataRepository {
-        override suspend fun loadCycles() = emptyList<NetworkUsageData>()
-        override fun getCycles() = emptyList<Range<Long>>()
-        override fun getPolicy() = null
-
-        override suspend fun queryChartData(startTime: Long, endTime: Long) = when {
-            startTime == START_TIME && endTime == END_TIME -> CycleChartDate
-            else -> null
-        }
-    }
-
     private val preference = mock<ChartDataUsagePreference>()
     private val preferenceScreen = mock<PreferenceScreen> {
         onGeneric { findPreference(KEY) } doReturn preference
@@ -58,15 +43,13 @@ class ChartDataUsagePreferenceControllerTest {
 
     @Before
     fun setUp() {
-        controller.init(repository)
         controller.displayPreference(preferenceScreen)
         controller.onViewCreated(TestLifecycleOwner())
     }
 
     @Test
-    fun update() = runBlocking {
-        controller.update(START_TIME, END_TIME)
-        delay(100L)
+    fun update() {
+        controller.update(CycleChartDate)
 
         verify(preference).setTime(START_TIME, END_TIME)
         verify(preference).setNetworkCycleData(CycleChartDate)
