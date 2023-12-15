@@ -16,19 +16,32 @@
 
 package com.android.settings.applications.appcompat;
 
+import static android.content.pm.ActivityInfo.OVERRIDE_ANY_ORIENTATION_TO_USER;
+import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_16_9;
+import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_3_2;
+import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_4_3;
+import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_APP_DEFAULT;
+import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_DISPLAY_SIZE;
+import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_FULLSCREEN;
+import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_SPLIT_SCREEN;
+import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_UNSET;
 import static android.os.UserHandle.getUserHandleForUid;
+import static android.os.UserHandle.getUserId;
+import static android.view.WindowManager.PROPERTY_COMPAT_ALLOW_ORIENTATION_OVERRIDE;
 import static android.view.WindowManager.PROPERTY_COMPAT_ALLOW_USER_ASPECT_RATIO_FULLSCREEN_OVERRIDE;
 import static android.view.WindowManager.PROPERTY_COMPAT_ALLOW_USER_ASPECT_RATIO_OVERRIDE;
 
 import static java.lang.Boolean.FALSE;
 
 import android.app.AppGlobals;
+import android.app.compat.CompatChanges;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.IPackageManager;
 import android.content.pm.LauncherApps;
 import android.content.pm.PackageManager;
 import android.os.RemoteException;
+import android.os.UserHandle;
 import android.provider.DeviceConfig;
 import android.util.ArrayMap;
 
@@ -37,6 +50,7 @@ import androidx.annotation.Nullable;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.window.flags.Flags;
 
 import com.google.common.annotations.VisibleForTesting;
 
@@ -55,6 +69,8 @@ public class UserAspectRatioManager {
             "enable_app_compat_user_aspect_ratio_fullscreen";
     private static final boolean DEFAULT_VALUE_ENABLE_USER_ASPECT_RATIO_FULLSCREEN = true;
 
+    final boolean mIsUserMinAspectRatioAppDefaultFlagEnabled = Flags.userMinAspectRatioAppDefault();
+
     private final Context mContext;
     private final IPackageManager mIPm;
     /** Apps that have launcher entry defined in manifest */
@@ -62,8 +78,13 @@ public class UserAspectRatioManager {
     private final Map<Integer, CharSequence> mUserAspectRatioA11yMap;
 
     public UserAspectRatioManager(@NonNull Context context) {
+        this(context, AppGlobals.getPackageManager());
+    }
+
+    @VisibleForTesting
+    UserAspectRatioManager(@NonNull Context context, @NonNull IPackageManager pm) {
         mContext = context;
-        mIPm = AppGlobals.getPackageManager();
+        mIPm = pm;
         mUserAspectRatioA11yMap = new ArrayMap<>();
         mUserAspectRatioMap = getUserMinAspectRatioMapping();
     }
@@ -86,7 +107,7 @@ public class UserAspectRatioManager {
             throws RemoteException {
         final int aspectRatio = mIPm.getUserMinAspectRatio(packageName, uid);
         return hasAspectRatioOption(aspectRatio, packageName)
-                ? aspectRatio : PackageManager.USER_MIN_ASPECT_RATIO_UNSET;
+                ? aspectRatio : USER_MIN_ASPECT_RATIO_UNSET;
     }
 
     /**
@@ -94,11 +115,18 @@ public class UserAspectRatioManager {
      */
     @NonNull
     public String getUserMinAspectRatioEntry(@PackageManager.UserMinAspectRatio int aspectRatio,
-            String packageName) {
-        if (!hasAspectRatioOption(aspectRatio, packageName))  {
-            return mUserAspectRatioMap.get(PackageManager.USER_MIN_ASPECT_RATIO_UNSET);
+            @NonNull String packageName, int userId) {
+        final String appDefault = getAspectRatioStringOrDefault(
+                mUserAspectRatioMap.get(USER_MIN_ASPECT_RATIO_UNSET),
+                USER_MIN_ASPECT_RATIO_UNSET);
+
+        if (!hasAspectRatioOption(aspectRatio, packageName)) {
+            return appDefault;
         }
-        return mUserAspectRatioMap.get(aspectRatio);
+
+        return isCurrentSelectionFromManufacturerOverride(packageName, userId, aspectRatio)
+                ? getUserMinAspectRatioEntry(USER_MIN_ASPECT_RATIO_FULLSCREEN, packageName, userId)
+                : mUserAspectRatioMap.getOrDefault(aspectRatio, appDefault);
     }
 
     /**
@@ -106,19 +134,22 @@ public class UserAspectRatioManager {
      */
     @NonNull
     public CharSequence getAccessibleEntry(@PackageManager.UserMinAspectRatio int aspectRatio,
-            String packageName) {
-        return mUserAspectRatioA11yMap.getOrDefault(aspectRatio,
-                getUserMinAspectRatioEntry(aspectRatio, packageName));
+            @NonNull String packageName) {
+        final int userId = mContext.getUserId();
+        return isCurrentSelectionFromManufacturerOverride(packageName, userId, aspectRatio)
+                ? getAccessibleEntry(USER_MIN_ASPECT_RATIO_FULLSCREEN, packageName)
+                : mUserAspectRatioA11yMap.getOrDefault(aspectRatio,
+                        getUserMinAspectRatioEntry(aspectRatio, packageName, userId));
     }
 
     /**
      * @return corresponding aspect ratio string for package name and user
      */
     @NonNull
-    public String getUserMinAspectRatioEntry(@NonNull String packageName, int uid)
+    public String getUserMinAspectRatioEntry(@NonNull String packageName, int userId)
             throws RemoteException {
-        final int aspectRatio = getUserMinAspectRatioValue(packageName, uid);
-        return getUserMinAspectRatioEntry(aspectRatio, packageName);
+        final int aspectRatio = getUserMinAspectRatioValue(packageName, userId);
+        return getUserMinAspectRatioEntry(aspectRatio, packageName, userId);
     }
 
     /**
@@ -128,8 +159,7 @@ public class UserAspectRatioManager {
      */
     public boolean hasAspectRatioOption(@PackageManager.UserMinAspectRatio int option,
             String packageName) {
-        if (option == PackageManager.USER_MIN_ASPECT_RATIO_FULLSCREEN
-                && !isFullscreenOptionEnabled(packageName)) {
+        if (option == USER_MIN_ASPECT_RATIO_FULLSCREEN && !isFullscreenOptionEnabled(packageName)) {
             return false;
         }
         return mUserAspectRatioMap.containsKey(option);
@@ -155,6 +185,18 @@ public class UserAspectRatioManager {
     }
 
     /**
+     * Whether the app has been overridden to fullscreen by device manufacturer or
+     * whether the app's aspect ratio has been overridden by the user.
+     */
+    public boolean isAppOverridden(@NonNull ApplicationInfo app,
+            @PackageManager.UserMinAspectRatio int userOverride) {
+        return (userOverride != USER_MIN_ASPECT_RATIO_UNSET
+                    && userOverride != USER_MIN_ASPECT_RATIO_APP_DEFAULT)
+                || isCurrentSelectionFromManufacturerOverride(app.packageName, getUserId(app.uid),
+                    userOverride);
+    }
+
+    /**
      * Whether fullscreen option in per-app user aspect ratio settings is enabled
      */
     @VisibleForTesting
@@ -166,6 +208,32 @@ public class UserAspectRatioManager {
         return !FALSE.equals(appAllowsFullscreenOption) && isBuildTimeFlagEnabled
                 && getValueFromDeviceConfig(KEY_ENABLE_USER_ASPECT_RATIO_FULLSCREEN,
                     DEFAULT_VALUE_ENABLE_USER_ASPECT_RATIO_FULLSCREEN);
+    }
+
+    /**
+     * Whether the device manufacturer has overridden app's orientation to
+     * {@link android.content.pm.ActivityInfo#SCREEN_ORIENTATION_USER} to force app to fullscreen
+     * and app has not opted-out from the treatment
+     */
+    boolean isOverrideToFullscreenEnabled(String pkgName, int userId) {
+        Boolean appAllowsOrientationOverride = readComponentProperty(mContext.getPackageManager(),
+                pkgName, PROPERTY_COMPAT_ALLOW_ORIENTATION_OVERRIDE);
+        return mIsUserMinAspectRatioAppDefaultFlagEnabled
+                && hasAspectRatioOption(USER_MIN_ASPECT_RATIO_FULLSCREEN, pkgName)
+                && !FALSE.equals(appAllowsOrientationOverride)
+                && isFullscreenCompatChangeEnabled(pkgName, userId);
+    }
+
+    @VisibleForTesting
+    boolean isFullscreenCompatChangeEnabled(String pkgName, int userId) {
+        return CompatChanges.isChangeEnabled(
+                OVERRIDE_ANY_ORIENTATION_TO_USER, pkgName, UserHandle.of(userId));
+    }
+
+    private boolean isCurrentSelectionFromManufacturerOverride(String pkgName, int userId,
+            @PackageManager.UserMinAspectRatio int aspectRatio) {
+        return aspectRatio == USER_MIN_ASPECT_RATIO_UNSET
+                && isOverrideToFullscreenEnabled(pkgName, userId);
     }
 
     private boolean hasLauncherEntry(@NonNull ApplicationInfo app) {
@@ -197,13 +265,13 @@ public class UserAspectRatioManager {
             boolean containsColon = aspectRatioString.contains(":");
             switch (aspectRatioVal) {
                 // Only map known values of UserMinAspectRatio and ignore unknown entries
-                case PackageManager.USER_MIN_ASPECT_RATIO_FULLSCREEN:
-                case PackageManager.USER_MIN_ASPECT_RATIO_UNSET:
-                case PackageManager.USER_MIN_ASPECT_RATIO_SPLIT_SCREEN:
-                case PackageManager.USER_MIN_ASPECT_RATIO_DISPLAY_SIZE:
-                case PackageManager.USER_MIN_ASPECT_RATIO_4_3:
-                case PackageManager.USER_MIN_ASPECT_RATIO_16_9:
-                case PackageManager.USER_MIN_ASPECT_RATIO_3_2:
+                case USER_MIN_ASPECT_RATIO_FULLSCREEN:
+                case USER_MIN_ASPECT_RATIO_UNSET:
+                case USER_MIN_ASPECT_RATIO_SPLIT_SCREEN:
+                case USER_MIN_ASPECT_RATIO_DISPLAY_SIZE:
+                case USER_MIN_ASPECT_RATIO_4_3:
+                case USER_MIN_ASPECT_RATIO_16_9:
+                case USER_MIN_ASPECT_RATIO_3_2:
                     if (containsColon) {
                         String[] aspectRatioDigits = aspectRatioString.split(":");
                         String accessibleString = getAccessibleOption(aspectRatioDigits[0],
@@ -215,9 +283,17 @@ public class UserAspectRatioManager {
                     userMinAspectRatioMap.put(aspectRatioVal, aspectRatioString);
             }
         }
-        if (!userMinAspectRatioMap.containsKey(PackageManager.USER_MIN_ASPECT_RATIO_UNSET)) {
+        if (!userMinAspectRatioMap.containsKey(USER_MIN_ASPECT_RATIO_UNSET)) {
             throw new RuntimeException("config_userAspectRatioOverrideValues options must have"
                     + " USER_MIN_ASPECT_RATIO_UNSET value");
+        }
+        if (mIsUserMinAspectRatioAppDefaultFlagEnabled) {
+            userMinAspectRatioMap.put(USER_MIN_ASPECT_RATIO_APP_DEFAULT,
+                    userMinAspectRatioMap.get(USER_MIN_ASPECT_RATIO_UNSET));
+            if (mUserAspectRatioA11yMap.containsKey(USER_MIN_ASPECT_RATIO_UNSET)) {
+                mUserAspectRatioA11yMap.put(USER_MIN_ASPECT_RATIO_APP_DEFAULT,
+                        mUserAspectRatioA11yMap.get(USER_MIN_ASPECT_RATIO_UNSET));
+            }
         }
         return userMinAspectRatioMap;
     }
@@ -236,17 +312,17 @@ public class UserAspectRatioManager {
         }
         // Options are customized per device and if strings are set to @null, use default
         switch (aspectRatioVal) {
-            case PackageManager.USER_MIN_ASPECT_RATIO_FULLSCREEN:
+            case USER_MIN_ASPECT_RATIO_FULLSCREEN:
                 return mContext.getString(R.string.user_aspect_ratio_fullscreen);
-            case PackageManager.USER_MIN_ASPECT_RATIO_SPLIT_SCREEN:
+            case USER_MIN_ASPECT_RATIO_SPLIT_SCREEN:
                 return mContext.getString(R.string.user_aspect_ratio_half_screen);
-            case PackageManager.USER_MIN_ASPECT_RATIO_DISPLAY_SIZE:
+            case USER_MIN_ASPECT_RATIO_DISPLAY_SIZE:
                 return mContext.getString(R.string.user_aspect_ratio_device_size);
-            case PackageManager.USER_MIN_ASPECT_RATIO_4_3:
+            case USER_MIN_ASPECT_RATIO_4_3:
                 return mContext.getString(R.string.user_aspect_ratio_4_3);
-            case PackageManager.USER_MIN_ASPECT_RATIO_16_9:
+            case USER_MIN_ASPECT_RATIO_16_9:
                 return mContext.getString(R.string.user_aspect_ratio_16_9);
-            case PackageManager.USER_MIN_ASPECT_RATIO_3_2:
+            case USER_MIN_ASPECT_RATIO_3_2:
                 return mContext.getString(R.string.user_aspect_ratio_3_2);
             default:
                 return mContext.getString(R.string.user_aspect_ratio_app_default);
