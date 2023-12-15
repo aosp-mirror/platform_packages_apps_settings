@@ -41,6 +41,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Lifecycle;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
@@ -357,6 +359,11 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
         return fragment;
     }
 
+    @VisibleForTesting
+    void setViewPager(ViewPager2 viewPager) {
+        mViewPager = viewPager;
+    }
+
     interface FragmentConstructor {
         Fragment constructAndGetFragment();
     }
@@ -376,6 +383,15 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
             mChildFragments = fragment.getFragments();
         }
 
+        @VisibleForTesting
+        ViewPagerAdapter(
+                @NonNull FragmentManager fragmentManager,
+                @NonNull Lifecycle lifecycle,
+                ProfileSelectFragment profileSelectFragment) {
+            super(fragmentManager, lifecycle);
+            mChildFragments = profileSelectFragment.getFragments();
+        }
+
         @Override
         public Fragment createFragment(int position) {
             return mChildFragments[position];
@@ -386,7 +402,8 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
             return mChildFragments.length;
         }
 
-        private int getTabForPosition(int position) {
+        @VisibleForTesting
+        int getTabForPosition(int position) {
             if (position >= mChildFragments.length) {
                 Log.e(TAG, "tab requested for out of bound position " + position);
                 return PERSONAL_TAB;

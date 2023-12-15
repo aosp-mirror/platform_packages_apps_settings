@@ -6,7 +6,7 @@ import androidx.lifecycle.Lifecycle
 
 interface UdfpsEnrollCalibrator {
 
-    val extrasForNextIntent: Bundle
+    fun getExtrasForNextIntent(isEnrolling: Boolean): Bundle
 
     fun onSaveInstanceState(outState: Bundle)
 
