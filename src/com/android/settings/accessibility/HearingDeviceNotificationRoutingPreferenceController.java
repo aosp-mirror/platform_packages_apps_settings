@@ -19,39 +19,36 @@ package com.android.settings.accessibility;
 import android.content.Context;
 import android.provider.Settings;
 
-import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.HearingAidAudioRoutingConstants;
 
 /**
- * The controller of the hearing device system sounds routing list preference.
+ * The controller of the hearing device notification routing list preference.
  */
-public class HearingDeviceSystemSoundsRoutingPreferenceController extends
+public class HearingDeviceNotificationRoutingPreferenceController extends
         HearingDeviceAudioRoutingBasePreferenceController {
 
-    private CachedBluetoothDevice mHearingDevice;
-
-    public HearingDeviceSystemSoundsRoutingPreferenceController(Context context,
+    public HearingDeviceNotificationRoutingPreferenceController(Context context,
             String preferenceKey) {
         super(context, preferenceKey);
     }
 
     @Override
     protected int[] getSupportedAttributeList() {
-        return HearingAidAudioRoutingConstants.SYSTEM_SOUNDS_ROUTING_ATTRIBUTES;
+        return HearingAidAudioRoutingConstants.NOTIFICATION_ROUTING_ATTRIBUTES;
 
     }
 
     @Override
     protected void saveRoutingValue(Context context, int routingValue) {
         Settings.Secure.putInt(context.getContentResolver(),
-                Settings.Secure.HEARING_AID_SYSTEM_SOUNDS_ROUTING, routingValue);
+                Settings.Secure.HEARING_AID_NOTIFICATION_ROUTING, routingValue);
 
     }
 
     @Override
     protected int restoreRoutingValue(Context context) {
         return Settings.Secure.getInt(context.getContentResolver(),
-                Settings.Secure.HEARING_AID_SYSTEM_SOUNDS_ROUTING,
+                Settings.Secure.HEARING_AID_NOTIFICATION_ROUTING,
                 HearingAidAudioRoutingConstants.RoutingValue.AUTO);
     }
 }
