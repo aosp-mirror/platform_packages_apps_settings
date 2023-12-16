@@ -59,6 +59,7 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.accessibility.AccessibilityDialogUtils.DialogType;
 import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
+import com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragment;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.flags.Flags;
 import com.android.settings.utils.LocaleUtils;
@@ -832,7 +833,13 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
 
     @Override
     public void onSettingsClicked(ShortcutPreference preference) {
-        showDialog(DialogEnums.EDIT_SHORTCUT);
+        if (com.android.settings.accessibility.Flags.editShortcutsInFullScreen()) {
+            EditShortcutsPreferenceFragment.showEditShortcutScreen(
+                    requireContext(), getMetricsCategory(), getShortcutTitle(),
+                    mComponentName, getIntent());
+        } else {
+            showDialog(DialogEnums.EDIT_SHORTCUT);
+        }
     }
 
     /**

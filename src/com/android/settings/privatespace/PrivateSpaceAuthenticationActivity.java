@@ -42,9 +42,10 @@ import com.android.settingslib.transition.SettingsTransitionHelper;
 import com.google.android.setupdesign.util.ThemeHelper;
 
 /**
- * Prompts user to set a device lock if not set with an alert dialog.
- * If a lock is already set then first authenticates user before displaying private space settings
- * page.
+ * This class represents an activity responsible for user authentication before starting the private
+ * space setup flow or accessing the private space settings page if already created. Also prompts
+ * user to set a device lock if not set with an alert dialog. This can be launched using the intent
+ * com.android.settings.action.PRIVATE_SPACE_SETUP_FLOW.
  */
 public class PrivateSpaceAuthenticationActivity extends FragmentActivity {
     private static final String TAG = "PrivateSpaceAuthCheck";
@@ -66,8 +67,9 @@ public class PrivateSpaceAuthenticationActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
         if (Flags.allowPrivateProfile()) {
-            super.onCreate(savedInstanceState);
             ThemeHelper.trySetDynamicColor(this);
             mPrivateSpaceMaintainer = new Injector().injectPrivateSpaceMaintainer(
                     getApplicationContext());

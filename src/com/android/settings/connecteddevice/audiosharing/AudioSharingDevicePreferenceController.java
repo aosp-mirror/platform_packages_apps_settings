@@ -22,6 +22,7 @@ import android.bluetooth.BluetoothLeBroadcast;
 import android.bluetooth.BluetoothLeBroadcastAssistant;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
+import android.bluetooth.BluetoothLeBroadcastSubgroupSettings;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.util.Log;
@@ -540,7 +541,8 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
                                                 mTargetSinks.add(device.getDevice());
                                             }
                                         }
-                                        mBroadcast.startBroadcast("test", null);
+                                        mBroadcast.startPrivateBroadcast(
+                                                BluetoothLeBroadcastSubgroupSettings.QUALITY_HIGH);
                                     });
                         });
             }

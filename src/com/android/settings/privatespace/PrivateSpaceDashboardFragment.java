@@ -34,6 +34,14 @@ public class PrivateSpaceDashboardFragment extends DashboardFragment {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        if (PrivateSpaceMaintainer.getInstance(getContext()).isPrivateSpaceLocked()) {
+            finish();
+        }
+    }
+
+    @Override
     protected int getPreferenceScreenResId() {
         return R.xml.private_space_settings;
     }

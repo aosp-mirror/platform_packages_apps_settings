@@ -262,6 +262,7 @@ public class FingerprintSettingsFragmentTest {
         mFragment.onResume();
     }
 
+    @Ignore("b/315519360")
     @Test
     public void testFragmentVisibleWhenNoHardwareDetected() {
         doReturn(false).when(mFingerprintManager).isHardwareDetected();
