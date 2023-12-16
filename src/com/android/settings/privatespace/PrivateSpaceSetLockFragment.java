@@ -16,51 +16,58 @@
 
 package com.android.settings.privatespace;
 
+import static com.android.settings.privatespace.PrivateSpaceSetupActivity.ACCOUNT_LOGIN_ACTION;
 import static com.android.settings.privatespace.PrivateSpaceSetupActivity.EXTRA_ACTION_TYPE;
 import static com.android.settings.privatespace.PrivateSpaceSetupActivity.SET_LOCK_ACTION;
 
-import android.annotation.SuppressLint;
+import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 
 import com.android.settings.R;
+import com.android.settings.core.InstrumentedFragment;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.GlifLayout;
 
-/** Fragment that provides an option to user to choose between the existing screen lock or set a
- * separate private profile lock. */
-public class PrivateSpaceSetLockFragment extends Fragment {
+/**
+ * Fragment that provides an option to user to choose between the existing screen lock or set a
+ * separate private profile lock.
+ */
+public class PrivateSpaceSetLockFragment extends InstrumentedFragment {
+    private static final String TAG = "PrivateSpaceSetLockFrag";
 
     @Override
     public View onCreateView(
             LayoutInflater inflater,
             @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
+        if (!android.os.Flags.allowPrivateProfile()) {
+            return null;
+        }
         GlifLayout rootView =
                 (GlifLayout) inflater.inflate(
                         R.layout.privatespace_setlock_screen, container, false);
         final FooterBarMixin mixin = rootView.getMixin(FooterBarMixin.class);
         mixin.setPrimaryButton(
                 new FooterButton.Builder(getContext())
-                        .setText(R.string.privatespace_use_screenlock_label)
+                        .setText(R.string.private_space_use_screenlock_label)
                         .setListener(onClickUse())
                         .setButtonType(FooterButton.ButtonType.NEXT)
                         .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Primary)
                         .build());
         mixin.setSecondaryButton(
                 new FooterButton.Builder(getContext())
-                        .setText(R.string.privatespace_set_lock_label)
+                        .setText(R.string.private_space_set_lock_label)
                         .setListener(onClickNewLock())
                         .setButtonType(FooterButton.ButtonType.NEXT)
                         .setTheme(
@@ -80,31 +87,37 @@ public class PrivateSpaceSetLockFragment extends Fragment {
         return rootView;
     }
 
+    @Override
+    public int getMetricsCategory() {
+        return SettingsEnums.PRIVATE_SPACE_SETUP_LOCK;
+    }
+
     private View.OnClickListener onClickUse() {
         return v -> {
+            mMetricsFeatureProvider.action(
+                    getContext(), SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_USE_SCREEN_LOCK);
             // Simply Use default screen lock. No need to handle
-            NavHostFragment.findNavController(PrivateSpaceSetLockFragment.this)
-                    .navigate(R.id.action_success_fragment);
+            launchActivityForAction(ACCOUNT_LOGIN_ACTION);
         };
     }
 
     private View.OnClickListener onClickNewLock() {
         return v -> {
-            createPrivateSpaceLock();
+            mMetricsFeatureProvider.action(
+                    getContext(), SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_NEW_LOCK);
+            launchActivityForAction(SET_LOCK_ACTION);
         };
     }
 
-    @SuppressLint("MissingPermission")
-    private void createPrivateSpaceLock() {
-        PrivateSpaceMaintainer privateSpaceMaintainer = PrivateSpaceMaintainer
-                .getInstance(getActivity());
-        UserHandle userHandle;
-        if (privateSpaceMaintainer.doesPrivateSpaceExist() && (userHandle =
-                privateSpaceMaintainer.getPrivateProfileHandle()) != null) {
+    private void launchActivityForAction(int action) {
+        UserHandle userHandle =
+                PrivateSpaceMaintainer.getInstance(getActivity()).getPrivateProfileHandle();
+        if (userHandle != null) {
             Intent intent = new Intent(getContext(), PrivateProfileContextHelperActivity.class);
-            intent.putExtra(EXTRA_ACTION_TYPE, SET_LOCK_ACTION);
-            getActivity().startActivityForResultAsUser(intent, SET_LOCK_ACTION,
-                    userHandle);
+            intent.putExtra(EXTRA_ACTION_TYPE, action);
+            getActivity().startActivityForResultAsUser(intent, action, userHandle);
+        } else {
+            Log.w(TAG, "Private profile user handle is null");
         }
     }
 }

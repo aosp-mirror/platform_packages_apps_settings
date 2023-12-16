@@ -92,6 +92,7 @@ public class BatteryDiffEntry {
     public String mLegacyLabel;
     public int mConsumerType;
     public long mForegroundUsageTimeInMs;
+    public long mForegroundServiceUsageTimeInMs;
     public long mBackgroundUsageTimeInMs;
     public long mScreenOnTimeInMs;
     public double mConsumePower;
@@ -125,6 +126,7 @@ public class BatteryDiffEntry {
             String legacyLabel,
             int consumerType,
             long foregroundUsageTimeInMs,
+            long foregroundServiceUsageTimeInMs,
             long backgroundUsageTimeInMs,
             long screenOnTimeInMs,
             double consumePower,
@@ -142,6 +144,7 @@ public class BatteryDiffEntry {
         mLegacyLabel = legacyLabel;
         mConsumerType = consumerType;
         mForegroundUsageTimeInMs = foregroundUsageTimeInMs;
+        mForegroundServiceUsageTimeInMs = foregroundServiceUsageTimeInMs;
         mBackgroundUsageTimeInMs = backgroundUsageTimeInMs;
         mScreenOnTimeInMs = screenOnTimeInMs;
         mConsumePower = consumePower;
@@ -164,6 +167,7 @@ public class BatteryDiffEntry {
                 legacyLabel,
                 consumerType,
                 /* foregroundUsageTimeInMs= */ 0,
+                /* foregroundServiceUsageTimeInMs= */ 0,
                 /* backgroundUsageTimeInMs= */ 0,
                 /* screenOnTimeInMs= */ 0,
                 /* consumePower= */ 0,
@@ -232,6 +236,7 @@ public class BatteryDiffEntry {
                 this.mLegacyLabel,
                 this.mConsumerType,
                 this.mForegroundUsageTimeInMs,
+                this.mForegroundServiceUsageTimeInMs,
                 this.mBackgroundUsageTimeInMs,
                 this.mScreenOnTimeInMs,
                 this.mConsumePower,
@@ -515,48 +520,50 @@ public class BatteryDiffEntry {
 
     @Override
     public String toString() {
-        final StringBuilder builder =
-                new StringBuilder()
-                        .append("BatteryDiffEntry{")
-                        .append(
-                                String.format(
-                                        "\n\tname=%s restrictable=%b",
-                                        mAppLabel, mValidForRestriction))
-                        .append(
-                                String.format(
-                                        "\n\tconsume=%.2f%% %f/%f",
-                                        mPercentage, mConsumePower, mTotalConsumePower))
-                        .append(
-                                String.format(
-                                        "\n\tconsume power= foreground:%f foregroundService:%f",
-                                        mForegroundUsageConsumePower,
-                                        mForegroundServiceUsageConsumePower))
-                        .append(
-                                String.format(
-                                        "\n\tconsume power= background:%f cached:%f",
-                                        mBackgroundUsageConsumePower, mCachedUsageConsumePower))
-                        .append(
-                                String.format(
-                                        "\n\ttime= foreground:%s background:%s screen-on:%s",
-                                        StringUtil.formatElapsedTime(
-                                                mContext,
-                                                (double) mForegroundUsageTimeInMs,
-                                                /* withSeconds= */ true,
-                                                /* collapseTimeUnit= */ false),
-                                        StringUtil.formatElapsedTime(
-                                                mContext,
-                                                (double) mBackgroundUsageTimeInMs,
-                                                /* withSeconds= */ true,
-                                                /* collapseTimeUnit= */ false),
-                                        StringUtil.formatElapsedTime(
-                                                mContext,
-                                                (double) mScreenOnTimeInMs,
-                                                /* withSeconds= */ true,
-                                                /* collapseTimeUnit= */ false)))
-                        .append(
-                                String.format(
-                                        "\n\tpackage:%s|%s uid:%d userId:%d",
-                                        mLegacyPackageName, getPackageName(), mUid, mUserId));
+        final StringBuilder builder = new StringBuilder();
+        builder.append("BatteryDiffEntry{");
+        builder.append(
+                String.format("\n\tname=%s restrictable=%b", mAppLabel, mValidForRestriction));
+        builder.append(
+                String.format(
+                        "\n\tconsume=%.2f%% %f/%f",
+                        mPercentage, mConsumePower, mTotalConsumePower));
+        builder.append(
+                String.format(
+                        "\n\tconsume power= foreground:%f foregroundService:%f",
+                        mForegroundUsageConsumePower, mForegroundServiceUsageConsumePower));
+        builder.append(
+                String.format(
+                        "\n\tconsume power= background:%f cached:%f",
+                        mBackgroundUsageConsumePower, mCachedUsageConsumePower));
+        builder.append(
+                String.format(
+                        "\n\ttime= foreground:%s foregroundService:%s "
+                                + "background:%s screen-on:%s",
+                        StringUtil.formatElapsedTime(
+                                mContext,
+                                (double) mForegroundUsageTimeInMs,
+                                /* withSeconds= */ true,
+                                /* collapseTimeUnit= */ false),
+                        StringUtil.formatElapsedTime(
+                                mContext,
+                                (double) mForegroundServiceUsageTimeInMs,
+                                /* withSeconds= */ true,
+                                /* collapseTimeUnit= */ false),
+                        StringUtil.formatElapsedTime(
+                                mContext,
+                                (double) mBackgroundUsageTimeInMs,
+                                /* withSeconds= */ true,
+                                /* collapseTimeUnit= */ false),
+                        StringUtil.formatElapsedTime(
+                                mContext,
+                                (double) mScreenOnTimeInMs,
+                                /* withSeconds= */ true,
+                                /* collapseTimeUnit= */ false)));
+        builder.append(
+                String.format(
+                        "\n\tpackage:%s|%s uid:%d userId:%d",
+                        mLegacyPackageName, getPackageName(), mUid, mUserId));
         return builder.toString();
     }
 

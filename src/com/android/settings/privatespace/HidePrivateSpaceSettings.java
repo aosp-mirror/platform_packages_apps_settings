@@ -17,12 +17,20 @@
 package com.android.settings.privatespace;
 
 import android.app.settings.SettingsEnums;
+import android.os.Bundle;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 
 public class HidePrivateSpaceSettings extends DashboardFragment{
     private static final String TAG = "HidePrivateSpaceSettings";
+
+    @Override
+    public void onCreate(Bundle icicle) {
+        if (android.os.Flags.allowPrivateProfile()) {
+            super.onCreate(icicle);
+        }
+    }
 
     @Override
     public int getMetricsCategory() {

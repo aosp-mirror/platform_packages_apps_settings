@@ -42,7 +42,6 @@ import android.content.pm.IPackageManager;
 import android.content.pm.IntentFilterVerificationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
 import android.content.pm.UserProperties;
 import android.content.res.Configuration;
@@ -107,8 +106,6 @@ import androidx.core.graphics.drawable.RoundedBitmapDrawable;
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Lifecycle;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceGroup;
 
 import com.android.internal.app.UnlaunchableAppActivity;
 import com.android.internal.util.ArrayUtils;
@@ -178,61 +175,6 @@ public final class Utils extends com.android.settingslib.Utils {
      */
     public static final String PROPERTY_DELETE_ALL_APP_CLONES_ENABLED =
             "delete_all_app_clones_enabled";
-
-    /**
-     * Finds a matching activity for a preference's intent. If a matching
-     * activity is not found, it will remove the preference.
-     *
-     * @param context The context.
-     * @param parentPreferenceGroup The preference group that contains the
-     *            preference whose intent is being resolved.
-     * @param preferenceKey The key of the preference whose intent is being
-     *            resolved.
-     * @param flags 0 or one or more of
-     *            {@link #UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY}
-     *            .
-     * @return Whether an activity was found. If false, the preference was
-     *         removed.
-     */
-    public static boolean updatePreferenceToSpecificActivityOrRemove(Context context,
-            PreferenceGroup parentPreferenceGroup, String preferenceKey, int flags) {
-
-        final Preference preference = parentPreferenceGroup.findPreference(preferenceKey);
-        if (preference == null) {
-            return false;
-        }
-
-        final Intent intent = preference.getIntent();
-        if (intent != null) {
-            // Find the activity that is in the system image
-            final PackageManager pm = context.getPackageManager();
-            final List<ResolveInfo> list = pm.queryIntentActivities(intent, 0);
-            final int listSize = list.size();
-            for (int i = 0; i < listSize; i++) {
-                final ResolveInfo resolveInfo = list.get(i);
-                if ((resolveInfo.activityInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM)
-                        != 0) {
-
-                    // Replace the intent with this specific activity
-                    preference.setIntent(new Intent().setClassName(
-                            resolveInfo.activityInfo.packageName,
-                            resolveInfo.activityInfo.name));
-
-                    if ((flags & UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY) != 0) {
-                        // Set the preference title to the activity's label
-                        preference.setTitle(resolveInfo.loadLabel(pm));
-                    }
-
-                    return true;
-                }
-            }
-        }
-
-        // Did not find a matching activity, so remove the preference
-        parentPreferenceGroup.removePreference(preference);
-
-        return false;
-    }
 
     /**
      * Returns true if Monkey is running.
@@ -465,6 +407,22 @@ public final class Utils extends com.android.settingslib.Utils {
             }
         }
         return null;
+    }
+
+    /**
+     * Returns true if a profile of specified userType exists. Note that it considers all profiles,
+     * including the disabled profiles and the parent user itself.
+     */
+    public static boolean doesProfileOfTypeExists(
+            @NonNull UserManager userManager, @ProfileType int userType) {
+        final List<UserInfo> userProfiles = userManager.getProfiles(UserHandle.myUserId());
+        String umUserType = getUmUserType(userType);
+        for (UserInfo profile : userProfiles) {
+            if (Objects.equals(umUserType, profile.userType)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private static String getUmUserType(@ProfileType int userType) throws IllegalArgumentException {
@@ -1267,7 +1225,9 @@ public final class Utils extends com.android.settingslib.Utils {
         for (UserHandle userHandle : profiles) {
             UserProperties userProperties = userManager.getUserProperties(userHandle);
             if (userProperties.getShowInSettings() == UserProperties.SHOW_IN_SETTINGS_SEPARATE) {
-                if (Flags.allowPrivateProfile() && userProperties.getHideInSettingsInQuietMode()) {
+                if (Flags.allowPrivateProfile()
+                        && userProperties.getShowInQuietMode()
+                        == UserProperties.SHOW_IN_QUIET_MODE_HIDDEN) {
                     if (!userManager.isQuietModeEnabled(userHandle)) {
                         return true;
                     } else {

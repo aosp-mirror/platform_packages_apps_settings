@@ -40,8 +40,9 @@
     <com.android.settingslib.RestrictedSwitchPreference
         android:key="content_protection_preference_user_consent_work_profile_switch"
         android:title="@string/content_protection_preference_user_consent_work_profile_switch_title"
+        settings:controller="com.android.settings.security.ContentProtectionWorkSwitchController"
         settings:restrictedSwitchSummary="@string/summary_placeholder"
-        settings:controller="com.android.settings.security.ContentProtectionWorkSwitchController"/>
+        settings:useAdditionalSummary="true"/>
 
     <com.android.settingslib.widget.FooterPreference
         android:key="content_protection_preference_subpage_footer"

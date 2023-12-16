@@ -675,6 +675,7 @@ public final class DataProcessor {
                                 entry.mAppLabel,
                                 entry.mConsumerType,
                                 entry.mForegroundUsageTimeInMs,
+                                entry.mForegroundServiceUsageTimeInMs,
                                 entry.mBackgroundUsageTimeInMs,
                                 /* screenOnTimeInMs= */ 0,
                                 entry.mConsumePower,
@@ -1412,6 +1413,7 @@ public final class DataProcessor {
 
             // Cumulative values is a specific time slot for a specific app.
             long foregroundUsageTimeInMs = 0;
+            long foregroundServiceUsageTimeInMs = 0;
             long backgroundUsageTimeInMs = 0;
             double consumePower = 0;
             double foregroundUsageConsumePower = 0;
@@ -1425,6 +1427,10 @@ public final class DataProcessor {
                         getDiffValue(
                                 currentEntry.mForegroundUsageTimeInMs,
                                 nextEntry.mForegroundUsageTimeInMs);
+                foregroundServiceUsageTimeInMs +=
+                        getDiffValue(
+                                currentEntry.mForegroundServiceUsageTimeInMs,
+                                nextEntry.mForegroundServiceUsageTimeInMs);
                 backgroundUsageTimeInMs +=
                         getDiffValue(
                                 currentEntry.mBackgroundUsageTimeInMs,
@@ -1453,24 +1459,32 @@ public final class DataProcessor {
                 foregroundUsageTimeInMs = slotScreenOnTime;
             }
             // Excludes entry since we don't have enough data to calculate.
-            if (foregroundUsageTimeInMs == 0 && backgroundUsageTimeInMs == 0 && consumePower == 0) {
+            if (foregroundUsageTimeInMs == 0
+                    && foregroundServiceUsageTimeInMs == 0
+                    && backgroundUsageTimeInMs == 0
+                    && consumePower == 0) {
                 continue;
             }
             // Forces refine the cumulative value since it may introduce deviation error since we
             // will apply the interpolation arithmetic.
-            final float totalUsageTimeInMs = foregroundUsageTimeInMs + backgroundUsageTimeInMs;
+            final float totalUsageTimeInMs =
+                    foregroundUsageTimeInMs
+                            + backgroundUsageTimeInMs
+                            + foregroundServiceUsageTimeInMs;
             if (totalUsageTimeInMs > slotDuration) {
                 final float ratio = slotDuration / totalUsageTimeInMs;
                 if (sDebug) {
                     Log.w(
                             TAG,
                             String.format(
-                                    "abnormal usage time %d|%d for:\n%s",
+                                    "abnormal usage time %d|%d|%d for:\n%s",
                                     Duration.ofMillis(foregroundUsageTimeInMs).getSeconds(),
+                                    Duration.ofMillis(foregroundServiceUsageTimeInMs).getSeconds(),
                                     Duration.ofMillis(backgroundUsageTimeInMs).getSeconds(),
                                     selectedBatteryEntry));
                 }
                 foregroundUsageTimeInMs = Math.round(foregroundUsageTimeInMs * ratio);
+                foregroundServiceUsageTimeInMs = Math.round(foregroundServiceUsageTimeInMs * ratio);
                 backgroundUsageTimeInMs = Math.round(backgroundUsageTimeInMs * ratio);
                 consumePower = consumePower * ratio;
                 foregroundUsageConsumePower = foregroundUsageConsumePower * ratio;
@@ -1487,9 +1501,14 @@ public final class DataProcessor {
                                     appUsageMap,
                                     selectedBatteryEntry.mUserId,
                                     selectedBatteryEntry.mPackageName));
-            // Make sure the background + screen-on time will not exceed the threshold.
+            // Ensure the following value will not exceed the threshold.
+            // value = background + foregroundService + screen-on
             backgroundUsageTimeInMs =
                     Math.min(backgroundUsageTimeInMs, (long) slotDuration - screenOnTime);
+            foregroundServiceUsageTimeInMs =
+                    Math.min(
+                            foregroundServiceUsageTimeInMs,
+                            (long) slotDuration - screenOnTime - backgroundUsageTimeInMs);
             final BatteryDiffEntry currentBatteryDiffEntry =
                     new BatteryDiffEntry(
                             context,
@@ -1502,6 +1521,7 @@ public final class DataProcessor {
                             selectedBatteryEntry.mAppLabel,
                             selectedBatteryEntry.mConsumerType,
                             foregroundUsageTimeInMs,
+                            foregroundServiceUsageTimeInMs,
                             backgroundUsageTimeInMs,
                             screenOnTime,
                             consumePower,
@@ -1647,6 +1667,8 @@ public final class DataProcessor {
         } else {
             // Sums up some field data into the existing one.
             oldBatteryDiffEntry.mForegroundUsageTimeInMs += entry.mForegroundUsageTimeInMs;
+            oldBatteryDiffEntry.mForegroundServiceUsageTimeInMs +=
+                    entry.mForegroundServiceUsageTimeInMs;
             oldBatteryDiffEntry.mBackgroundUsageTimeInMs += entry.mBackgroundUsageTimeInMs;
             oldBatteryDiffEntry.mScreenOnTimeInMs += entry.mScreenOnTimeInMs;
             oldBatteryDiffEntry.mConsumePower += entry.mConsumePower;

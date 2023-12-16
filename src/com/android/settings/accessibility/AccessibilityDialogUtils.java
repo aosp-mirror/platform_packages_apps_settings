@@ -249,7 +249,7 @@ public class AccessibilityDialogUtils {
                 initSoftwareShortcut(context, contentView);
                 initHardwareShortcut(context, contentView);
                 if (Flags.enableMagnificationMultipleFingerMultipleTapGesture()) {
-                    initTwoFingerTripleTapMagnificationShortcut(context, contentView);
+                    initTwoFingerDoubleTapMagnificationShortcut(context, contentView);
                 }
                 initMagnifyShortcut(context, contentView);
                 initAdvancedWidget(contentView);
@@ -260,7 +260,7 @@ public class AccessibilityDialogUtils {
                 initSoftwareShortcutForSUW(context, contentView);
                 initHardwareShortcut(context, contentView);
                 if (Flags.enableMagnificationMultipleFingerMultipleTapGesture()) {
-                    initTwoFingerTripleTapMagnificationShortcut(context, contentView);
+                    initTwoFingerDoubleTapMagnificationShortcut(context, contentView);
                 }
                 initMagnifyShortcut(context, contentView);
                 initAdvancedWidget(contentView);
@@ -365,15 +365,15 @@ public class AccessibilityDialogUtils {
                 R.raw.a11y_shortcut_type_triple_tap);
     }
 
-    private static void initTwoFingerTripleTapMagnificationShortcut(Context context, View view) {
+    private static void initTwoFingerDoubleTapMagnificationShortcut(Context context, View view) {
         // TODO(b/306153204): Update shortcut string and image when UX provides them
         final View dialogView = view.findViewById(R.id.two_finger_triple_tap_shortcut);
         final CharSequence title = context.getText(
-                R.string.accessibility_shortcut_edit_dialog_title_two_finger_triple_tap);
+                R.string.accessibility_shortcut_edit_dialog_title_two_finger_double_tap);
         String summary = context.getString(
-                R.string.accessibility_shortcut_edit_dialog_summary_two_finger_triple_tap);
-        // Format the number '3' in the summary.
-        final Object[] arguments = {3};
+                R.string.accessibility_shortcut_edit_dialog_summary_two_finger_double_tap);
+        // Format the number '2' in the summary.
+        final Object[] arguments = {2};
         summary = MessageFormat.format(summary, arguments);
 
         setupShortcutWidgetWithImageRawResource(context, dialogView, title, summary,

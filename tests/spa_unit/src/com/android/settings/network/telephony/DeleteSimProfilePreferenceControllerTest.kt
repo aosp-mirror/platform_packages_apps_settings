@@ -16,15 +16,15 @@
 
 package com.android.settings.network.telephony
 
+import android.app.KeyguardManager
 import android.content.Context
+import android.os.UserManager
 import android.telephony.SubscriptionInfo
 import androidx.preference.Preference
 import androidx.preference.PreferenceManager
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.network.SubscriptionUtil
-import com.android.settings.security.ConfirmSimDeletionPreferenceController
-import com.android.settingslib.spaprivileged.settingsprovider.settingsGlobalBoolean
 import com.google.common.truth.Truth.assertThat
 import org.junit.After
 import org.junit.Before
@@ -46,8 +46,13 @@ class DeleteSimProfilePreferenceControllerTest {
         on { isEmbedded } doReturn true
     }
 
+    private val mockKeyguardManager = mock<KeyguardManager>() {
+        on { isKeyguardSecure() } doReturn false
+    }
+
     private var context: Context = spy(ApplicationProvider.getApplicationContext()) {
         doNothing().whenever(mock).startActivity(any())
+        on { getSystemService(Context.KEYGUARD_SERVICE) } doReturn mockKeyguardManager
     }
 
     private val preference = Preference(context).apply { key = PREF_KEY }
@@ -103,11 +108,6 @@ class DeleteSimProfilePreferenceControllerTest {
     fun onPreferenceClick_startsIntent() {
         controller.init(SUB_ID)
         controller.displayPreference(preferenceScreen)
-        // turn off confirmation before click
-        var confirmDeletion by context.settingsGlobalBoolean(
-            name = ConfirmSimDeletionPreferenceController.KEY_CONFIRM_SIM_DELETION,
-        )
-        confirmDeletion = false
 
         controller.handlePreferenceTreeClick(preference)
 

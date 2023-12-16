@@ -218,7 +218,7 @@ public class WifiCallingPreferenceController extends TelephonyBasePreferenceCont
             mTelephonyManager = getTelephonyManager(context, subId);
             // assign current call state so that it helps to show correct preference state even
             // before first onCallStateChanged() by initial registration.
-            mCallState = mTelephonyManager.getCallState(subId);
+            mCallState = mTelephonyManager.getCallStateForSubscription();
             mTelephonyManager.registerTelephonyCallback(context.getMainExecutor(), this);
         }
 

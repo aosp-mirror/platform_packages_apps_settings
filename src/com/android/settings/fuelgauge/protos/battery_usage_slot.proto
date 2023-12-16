@@ -31,4 +31,5 @@ message BatteryUsageDiff {
   optional int64 foreground_usage_time = 14;
   optional int64 background_usage_time = 15;
   optional int64 screen_on_time = 16;
+  optional int64 foreground_service_usage_time = 17;
 }

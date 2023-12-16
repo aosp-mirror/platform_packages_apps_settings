@@ -19,18 +19,15 @@ package com.android.settings;
 import static android.provider.Settings.ACTION_PRIVACY_SETTINGS;
 
 import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.ims.ImsRcsManager;
 import android.text.TextUtils;
-import android.util.FeatureFlagUtils;
 import android.util.Log;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.biometrics.face.FaceSettings;
 import com.android.settings.communal.CommunalPreferenceController;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.enterprise.EnterprisePrivacySettings;
 import com.android.settings.network.MobileNetworkIntentConverter;
 import com.android.settings.overlay.FeatureFactory;
@@ -58,42 +55,8 @@ public class Settings extends SettingsActivity {
     public static class FingerprintSettingsActivityV2 extends SettingsActivity { /* empty */ }
     public static class CombinedBiometricSettingsActivity extends SettingsActivity { /* empty */ }
     public static class CombinedBiometricProfileSettingsActivity extends SettingsActivity { /* empty */ }
-    public static class TetherSettingsActivity extends SettingsActivity {
-        // TODO(b/147675042): Clean the override up when we enable the new Fragment persistently.
-        @Override
-        public Intent getIntent() {
-            return wrapIntentWithAllInOneTetherSettingsIfNeeded(
-                    getApplicationContext(), super.getIntent());
-        }
-    }
-    public static class WifiTetherSettingsActivity extends SettingsActivity {
-        // TODO(b/147675042): Clean the override up when we enable the new Fragment persistently.
-        @Override
-        public Intent getIntent() {
-            return wrapIntentWithAllInOneTetherSettingsIfNeeded(
-                    getApplicationContext(), super.getIntent());
-        }
-    }
-
-    private static Intent wrapIntentWithAllInOneTetherSettingsIfNeeded(
-            Context context, Intent superIntent) {
-        if (!FeatureFlagUtils.isEnabled(context, FeatureFlags.TETHER_ALL_IN_ONE)) {
-            return superIntent;
-        }
-
-        final Intent modIntent = new Intent(superIntent);
-        modIntent.putExtra(EXTRA_SHOW_FRAGMENT,
-                AllInOneTetherSettings.class.getCanonicalName());
-        Bundle args = superIntent.getBundleExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS);
-        if (args != null) {
-            args = new Bundle(args);
-        } else {
-            args = new Bundle();
-        }
-        args.putParcelable("intent", superIntent);
-        modIntent.putExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS, args);
-        return modIntent;
-    }
+    public static class TetherSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class WifiTetherSettingsActivity extends SettingsActivity { /* empty */ }
 
     public static class VpnSettingsActivity extends SettingsActivity { /* empty */ }
     /** Activity for Data saver settings. */
@@ -134,7 +97,7 @@ public class Settings extends SettingsActivity {
     public static class HighPowerApplicationsActivity extends SettingsActivity { /* empty */ }
     public static class BackgroundCheckSummaryActivity extends SettingsActivity { /* empty */ }
     public static class StorageUseActivity extends SettingsActivity { /* empty */ }
-    public static class DevelopmentSettingsDashboardActivity extends SettingsActivity { /* empty */ }
+    public static class DevelopmentSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AccessibilitySettingsActivity extends SettingsActivity { /* empty */ }
     public static class AccessibilityDetailsSettingsActivity extends SettingsActivity { /* empty */ }
     public static class CaptioningSettingsActivity extends SettingsActivity { /* empty */ }
@@ -515,4 +478,6 @@ public class Settings extends SettingsActivity {
     public static class OneHandedSettingsActivity extends SettingsActivity { /* empty */ }
 
     public static class PreviouslyConnectedDeviceActivity extends SettingsActivity { /* empty */ }
+
+    public static class ScreenTimeoutActivity extends SettingsActivity { /* empty */ }
 }

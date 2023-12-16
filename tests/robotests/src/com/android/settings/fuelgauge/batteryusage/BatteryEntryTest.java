@@ -195,7 +195,8 @@ public class BatteryEntryTest {
 
     @Test
     public void getTimeInForegroundMs_app() {
-        when(mUidBatteryConsumer.getTimeInStateMs(UidBatteryConsumer.STATE_FOREGROUND))
+        when(mUidBatteryConsumer.getTimeInProcessStateMs(
+                        UidBatteryConsumer.PROCESS_STATE_FOREGROUND))
                 .thenReturn(100L);
 
         final BatteryEntry entry =
@@ -226,8 +227,9 @@ public class BatteryEntryTest {
 
     @Test
     public void getTimeInBackgroundMs_app() {
-        when(mUidBatteryConsumer.getTimeInStateMs(UidBatteryConsumer.STATE_BACKGROUND))
-                .thenReturn(100L);
+        when(mUidBatteryConsumer.getTimeInProcessStateMs(
+                        UidBatteryConsumer.PROCESS_STATE_BACKGROUND))
+                .thenReturn(30L);
 
         final BatteryEntry entry =
                 new BatteryEntry(
@@ -239,7 +241,26 @@ public class BatteryEntryTest {
                         null,
                         null);
 
-        assertThat(entry.getTimeInBackgroundMs()).isEqualTo(100L);
+        assertThat(entry.getTimeInBackgroundMs()).isEqualTo(30L);
+    }
+
+    @Test
+    public void getTimeInForegroundServiceMs_app() {
+        when(mUidBatteryConsumer.getTimeInProcessStateMs(
+                        UidBatteryConsumer.PROCESS_STATE_FOREGROUND_SERVICE))
+                .thenReturn(70L);
+
+        final BatteryEntry entry =
+                new BatteryEntry(
+                        RuntimeEnvironment.application,
+                        mMockUserManager,
+                        mUidBatteryConsumer,
+                        false,
+                        0,
+                        null,
+                        null);
+
+        assertThat(entry.getTimeInForegroundServiceMs()).isEqualTo(70L);
     }
 
     @Test

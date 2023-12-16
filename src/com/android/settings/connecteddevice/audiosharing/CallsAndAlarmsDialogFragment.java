@@ -26,7 +26,6 @@ import androidx.fragment.app.FragmentManager;
 
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
-import com.android.settings.flags.Flags;
 
 import java.util.ArrayList;
 
@@ -64,7 +63,7 @@ public class CallsAndAlarmsDialogFragment extends InstrumentedDialogFragment {
             Fragment host,
             ArrayList<AudioSharingDeviceItem> deviceItems,
             DialogEventListener listener) {
-        if (!Flags.enableLeAudioSharing()) return;
+        if (!AudioSharingUtils.isFeatureEnabled()) return;
         final FragmentManager manager = host.getChildFragmentManager();
         sListener = listener;
         if (manager.findFragmentByTag(TAG) == null) {

@@ -47,6 +47,7 @@ import android.content.pm.UserInfo;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Looper;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
@@ -211,7 +212,7 @@ public class UserSettingsTest {
     public void testGetRawDataToIndex_returnAllIndexablePreferences() {
         String[] expectedKeys = {KEY_ALLOW_MULTIPLE_USERS};
         List<String> keysResultList = new ArrayList<>();
-
+        ShadowUserManager.getShadow().setSupportsMultipleUsers(true);
         List<SearchIndexableRaw> rawData =
                 UserSettings.SEARCH_INDEX_DATA_PROVIDER.getRawDataToIndex(mContext, true);
 
@@ -719,6 +720,7 @@ public class UserSettingsTest {
         doReturn(userIcon).when(mUserManager).getUserIcon(ACTIVE_USER_ID);
 
         mFragment.updateUserList();
+        shadowOf(Looper.getMainLooper()).idle();
 
         verify(mUserManager).getUserIcon(ACTIVE_USER_ID);
         // updateUserList should be called another time after loading the icons

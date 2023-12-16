@@ -59,6 +59,7 @@ public class NewKeyboardLayoutPickerController extends BasePreferenceController 
     private String mFinalSelectedLayout;
     private String mLayout;
     private MetricsFeatureProvider mMetricsFeatureProvider;
+    private KeyboardLayoutSelectedCallback mKeyboardLayoutSelectedCallback;
 
     public NewKeyboardLayoutPickerController(Context context, String key) {
         super(context, key);
@@ -83,6 +84,7 @@ public class NewKeyboardLayoutPickerController extends BasePreferenceController 
         mFinalSelectedLayout = mLayout;
         mKeyboardLayouts = mIm.getKeyboardLayoutListForInputDevice(
                 mInputDeviceIdentifier, mUserId, mInputMethodInfo, mInputMethodSubtype);
+        NewKeyboardSettingsUtils.sortKeyboardLayoutsByLabel(mKeyboardLayouts);
         parent.getActivity().setTitle(mTitle);
     }
 
@@ -99,7 +101,7 @@ public class NewKeyboardLayoutPickerController extends BasePreferenceController 
 
     @Override
     public void onStop() {
-        if (!mLayout.equals(mFinalSelectedLayout)) {
+        if (mLayout != null && !mLayout.equals(mFinalSelectedLayout)) {
             String change = "From:" + mLayout + ", to:" + mFinalSelectedLayout;
             mMetricsFeatureProvider.action(
                     mContext, SettingsEnums.ACTION_PK_LAYOUT_CHANGED, change);
@@ -120,6 +122,14 @@ public class NewKeyboardLayoutPickerController extends BasePreferenceController 
         return AVAILABLE;
     }
 
+    /**
+     * Registers {@link KeyboardLayoutSelectedCallback} and get updated.
+     */
+    public void registerKeyboardSelectedCallback(KeyboardLayoutSelectedCallback
+            keyboardLayoutSelectedCallback) {
+        this.mKeyboardLayoutSelectedCallback = keyboardLayoutSelectedCallback;
+    }
+
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (!(preference instanceof TickButtonPreference)) {
@@ -127,6 +137,9 @@ public class NewKeyboardLayoutPickerController extends BasePreferenceController 
         }
 
         final TickButtonPreference pref = (TickButtonPreference) preference;
+        if (mKeyboardLayoutSelectedCallback != null && mPreferenceMap.containsKey(preference)) {
+            mKeyboardLayoutSelectedCallback.onSelected(mPreferenceMap.get(preference));
+        }
         pref.setSelected(true);
         if (mPreviousSelection != null && !mPreviousSelection.equals(preference.getKey())) {
             TickButtonPreference preSelectedPref = mScreen.findPreference(mPreviousSelection);
@@ -165,6 +178,9 @@ public class NewKeyboardLayoutPickerController extends BasePreferenceController 
             pref.setTitle(layout.getLabel());
 
             if (mLayout.equals(layout.getLabel())) {
+                if (mKeyboardLayoutSelectedCallback != null) {
+                    mKeyboardLayoutSelectedCallback.onSelected(layout);
+                }
                 pref.setSelected(true);
                 mPreviousSelection = layout.getDescriptor();
             }
@@ -198,5 +214,12 @@ public class NewKeyboardLayoutPickerController extends BasePreferenceController 
             }
         }
         return label;
+    }
+
+    public interface KeyboardLayoutSelectedCallback {
+        /**
+         * Called when KeyboardLayout been selected.
+         */
+        void onSelected(KeyboardLayout keyboardLayout);
     }
 }

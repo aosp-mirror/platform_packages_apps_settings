@@ -16,20 +16,15 @@
 
 package com.android.settings.privatespace;
 
-import static com.android.settings.privatespace.PrivateSpaceSetupActivity.ACCOUNT_LOGIN_ACTION;
-import static com.android.settings.privatespace.PrivateSpaceSetupActivity.EXTRA_ACTION_TYPE;
-
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
-import android.annotation.SuppressLint;
-import android.content.Intent;
+import android.app.settings.SettingsEnums;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.os.UserHandle;
 import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
@@ -39,10 +34,10 @@ import android.widget.ImageView;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.android.settings.R;
+import com.android.settings.core.InstrumentedFragment;
 
 import com.google.android.setupdesign.GlifLayout;
 import com.google.common.collect.ImmutableList;
@@ -52,21 +47,22 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 /** Fragment to show screens that auto advance during private space setup flow */
-public class AutoAdvanceSetupFragment extends Fragment {
+public class AutoAdvanceSetupFragment extends InstrumentedFragment {
     private static final String TAG = "AutoAdvanceFragment";
     private static final String TITLE_INDEX = "title_index";
     private static final int DELAY_BETWEEN_SCREENS = 5000; // 5 seconds in millis
     private static final int ANIMATION_DURATION_MILLIS = 500;
+    private static final int HEADER_TEXT_MAX_LINES = 4;
     private GlifLayout mRootView;
     private Handler mHandler;
     private int mScreenTitleIndex;
     private static final List<Pair<Integer, Integer>> HEADER_IMAGE_PAIRS =
             ImmutableList.of(
-                    new Pair(R.string.privatespace_apps_hidden_title,
+                    new Pair(R.string.private_space_notifications_hidden_title,
                             R.drawable.privatespace_setup_flow_placeholder),
-                    new Pair(R.string.privatespace_access_from_apps_title,
+                    new Pair(R.string.private_space_share_photos_title,
                             R.drawable.privatespace_setup_flow_placeholder),
-                    new Pair(R.string.privatespace_system_apps_installed_title,
+                    new Pair(R.string.private_space_apps_installed_title,
                             R.drawable.privatespace_setup_flow_placeholder));
 
     private Runnable mUpdateScreenResources =
@@ -77,20 +73,31 @@ public class AutoAdvanceSetupFragment extends Fragment {
                         if (++mScreenTitleIndex < HEADER_IMAGE_PAIRS.size()) {
                             startFadeOutAnimation();
                             mHandler.postDelayed(mUpdateScreenResources, DELAY_BETWEEN_SCREENS);
+                        } else if (PrivateSpaceMaintainer.getInstance(getActivity())
+                                .doesPrivateSpaceExist()) {
+                            mMetricsFeatureProvider.action(
+                                    getContext(),
+                                    SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_SPACE_CREATED,
+                                    true);
+                            NavHostFragment.findNavController(AutoAdvanceSetupFragment.this)
+                                    .navigate(R.id.action_set_lock_fragment);
                         } else {
-                            PrivateSpaceMaintainer privateSpaceMaintainer = PrivateSpaceMaintainer
-                                    .getInstance(getActivity());
-                            UserHandle userHandle;
-                            if (privateSpaceMaintainer.doesPrivateSpaceExist() && (userHandle =
-                                    privateSpaceMaintainer.getPrivateProfileHandle()) != null) {
-                                startActivityInPrivateUser(userHandle);
-                            } else {
-                                showPrivateSpaceErrorScreen();
-                            }
+                            mMetricsFeatureProvider.action(
+                                    getContext(),
+                                    SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_SPACE_CREATED,
+                                    false);
+                            showPrivateSpaceErrorScreen();
                         }
                     }
                 }
             };
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        if (android.os.Flags.allowPrivateProfile()) {
+            super.onCreate(savedInstanceState);
+        }
+    }
 
     @Override
     public View onCreateView(
@@ -110,6 +117,7 @@ public class AutoAdvanceSetupFragment extends Fragment {
         mRootView =
                 (GlifLayout)
                         inflater.inflate(R.layout.privatespace_advancing_screen, container, false);
+        mRootView.getHeaderTextView().setMaxLines(HEADER_TEXT_MAX_LINES);
         updateHeaderAndImage();
         mHandler = new Handler(Looper.getMainLooper());
         mHandler.postDelayed(mUpdateScreenResources, DELAY_BETWEEN_SCREENS);
@@ -137,12 +145,9 @@ public class AutoAdvanceSetupFragment extends Fragment {
         super.onDestroy();
     }
 
-    @SuppressLint("MissingPermission")
-    private void startActivityInPrivateUser(UserHandle userHandle) {
-        /* Start new activity in private profile which is needed to set private profile lock */
-        Intent intent = new Intent(getContext(), PrivateProfileContextHelperActivity.class);
-        intent.putExtra(EXTRA_ACTION_TYPE, ACCOUNT_LOGIN_ACTION);
-        getActivity().startActivityForResultAsUser(intent, ACCOUNT_LOGIN_ACTION, userHandle);
+    @Override
+    public int getMetricsCategory() {
+        return SettingsEnums.PRIVATE_SPACE_SETUP_SPACE_CREATION;
     }
 
     private void showPrivateSpaceErrorScreen() {

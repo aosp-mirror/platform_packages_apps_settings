@@ -81,7 +81,8 @@ public class SpinnerPreference extends Preference {
             return;
         }
         if (!(state instanceof SavedState)) {
-            super.onRestoreInstanceState(state);
+            // To avoid the IllegalArgumentException, return the BaseSavedState.EMPTY_STATE.
+            super.onRestoreInstanceState(BaseSavedState.EMPTY_STATE);
             return;
         }
         SavedState savedState = (SavedState) state;

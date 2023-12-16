@@ -50,6 +50,8 @@ android_robolectric_test {
         "src/**/*.kt",
     ],
 
+    // test_suites attribute is not needed. This module will be configured in ATP GCL file.
+
     static_libs: [
         "Robolectric_shadows_androidx_fragment_upstream",
         "Settings_robolectric_meta_service_file",

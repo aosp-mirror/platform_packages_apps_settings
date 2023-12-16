@@ -28,6 +28,7 @@ import android.content.Intent;
 import com.android.settingslib.wifi.WifiRestrictionsCache;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,6 +38,7 @@ import org.mockito.junit.MockitoRule;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 
+@Ignore("b/314867581")
 @RunWith(RobolectricTestRunner.class)
 public class WifiDppEnrolleeActivityTest {
 

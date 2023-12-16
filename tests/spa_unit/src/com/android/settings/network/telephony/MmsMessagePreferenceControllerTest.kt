@@ -80,6 +80,20 @@ class MmsMessagePreferenceControllerTest {
     }
 
     @Test
+    fun getAvailabilityStatus_autoDataSwitch_returnUnavailable() {
+        mockTelephonyManager.stub {
+            on { isApnMetered(ApnSetting.TYPE_MMS) } doReturn true
+            on {
+                isMobileDataPolicyEnabled(TelephonyManager.MOBILE_DATA_POLICY_AUTO_DATA_SWITCH)
+            } doReturn true
+        }
+
+        val availabilityStatus = controller.getAvailabilityStatus(SUB_ID)
+
+        assertThat(availabilityStatus).isEqualTo(CONDITIONALLY_UNAVAILABLE)
+    }
+
+    @Test
     fun getAvailabilityStatus_mobileDataOffWithValidSubId_returnAvailable() {
         mockTelephonyManager.stub {
             on { isDataEnabled } doReturn false

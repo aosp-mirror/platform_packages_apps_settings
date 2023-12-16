@@ -73,7 +73,7 @@ public class PrivateSpaceLockController extends AbstractPreferenceController {
 
     @Override
     public boolean isAvailable() {
-        return true;
+        return android.os.Flags.allowPrivateProfile();
     }
 
     @Override

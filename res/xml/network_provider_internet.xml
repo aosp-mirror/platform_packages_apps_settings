@@ -31,10 +31,16 @@
         settings:keywords="@string/keywords_internet"
         settings:useAdminDisabledSummary="true" />
 
-    <com.android.settings.spa.preference.ComposePreference
+    <com.android.settingslib.RestrictedPreference
         android:key="calls_and_sms"
         android:title="@string/calls_and_sms"
+        android:icon="@drawable/ic_calls_sms"
         android:order="-20"
+        android:summary="@string/summary_placeholder"
+        android:fragment="com.android.settings.network.NetworkProviderCallsSmsFragment"
+        settings:userRestriction="no_config_mobile_networks"
+        settings:allowDividerBelow="true"
+        settings:useAdminDisabledSummary="true"
         settings:controller="com.android.settings.network.NetworkProviderCallsSmsController" />
 
     <com.android.settingslib.RestrictedPreference
@@ -59,33 +65,13 @@
         settings:userRestriction="no_airplane_mode"/>
 
     <com.android.settingslib.RestrictedPreference
-        android:key="manage_mobile_plan"
-        android:title="@string/manage_mobile_plan_title"
-        android:persistent="false"
-        android:order="19"
-        settings:userRestriction="no_config_mobile_networks"
-        settings:isPreferenceVisible="@bool/config_show_sim_info"
-        settings:useAdminDisabledSummary="true" />
-
-    <com.android.settingslib.RestrictedPreference
         android:fragment="com.android.settings.network.tether.TetherSettings"
         android:key="tether_settings"
         android:title="@string/tether_settings_title_all"
         android:icon="@drawable/ic_wifi_tethering"
         android:order="5"
         android:summary="@string/summary_placeholder"
-        settings:keywords="@string/keywords_hotspot_tethering"
-        settings:userRestriction="no_config_tethering"
-        settings:useAdminDisabledSummary="true" />
-
-    <com.android.settingslib.PrimarySwitchPreference
-        android:fragment="com.android.settings.AllInOneTetherSettings"
-        android:key="all_tether_settings"
-        android:title="@string/tether_settings_title_all"
-        android:icon="@drawable/ic_wifi_tethering"
-        android:order="6"
-        android:summary="@string/summary_placeholder"
-        settings:controller="com.android.settings.network.AllInOneTetherPreferenceController"
+        settings:controller="com.android.settings.network.TetherPreferenceController"
         settings:keywords="@string/keywords_hotspot_tethering"
         settings:userRestriction="no_config_tethering"
         settings:useAdminDisabledSummary="true" />

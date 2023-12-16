@@ -22,6 +22,7 @@ import android.os.Bundle;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsCategoryController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.widget.SettingsMainSwitchBar;
 
@@ -31,8 +32,10 @@ public class AudioSharingDashboardFragment extends DashboardFragment
 
     SettingsMainSwitchBar mMainSwitchBar;
     private AudioSharingSwitchBarController mSwitchBarController;
+    private AudioSharingDeviceVolumeGroupController mAudioSharingDeviceVolumeGroupController;
     private CallsAndAlarmsPreferenceController mCallsAndAlarmsPreferenceController;
     private AudioSharingNamePreferenceController mAudioSharingNamePreferenceController;
+    private AudioStreamsCategoryController mAudioStreamsCategoryController;
 
     public AudioSharingDashboardFragment() {
         super();
@@ -66,9 +69,13 @@ public class AudioSharingDashboardFragment extends DashboardFragment
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        mAudioSharingDeviceVolumeGroupController =
+                use(AudioSharingDeviceVolumeGroupController.class);
+        mAudioSharingDeviceVolumeGroupController.init(this);
         mCallsAndAlarmsPreferenceController = use(CallsAndAlarmsPreferenceController.class);
         mCallsAndAlarmsPreferenceController.init(this);
         mAudioSharingNamePreferenceController = use(AudioSharingNamePreferenceController.class);
+        mAudioStreamsCategoryController = use(AudioStreamsCategoryController.class);
     }
 
     @Override
@@ -86,12 +93,14 @@ public class AudioSharingDashboardFragment extends DashboardFragment
     }
 
     @Override
-    public void onSwitchBarChanged(boolean newState) {
-        updateVisibilityForAttachedPreferences(newState);
+    public void onSwitchBarChanged() {
+        updateVisibilityForAttachedPreferences();
     }
 
-    private void updateVisibilityForAttachedPreferences(boolean isVisible) {
-        mCallsAndAlarmsPreferenceController.updateVisibility(isVisible);
-        mAudioSharingNamePreferenceController.updateVisibility(isVisible);
+    private void updateVisibilityForAttachedPreferences() {
+        mAudioSharingDeviceVolumeGroupController.updateVisibility();
+        mCallsAndAlarmsPreferenceController.updateVisibility();
+        mAudioSharingNamePreferenceController.updateVisibility();
+        mAudioStreamsCategoryController.updateVisibility();
     }
 }

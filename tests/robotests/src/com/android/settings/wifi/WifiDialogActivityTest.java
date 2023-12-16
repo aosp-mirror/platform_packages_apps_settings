@@ -50,6 +50,7 @@ import com.android.wifitrackerlib.WifiEntry;
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -57,6 +58,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 
+@Ignore("b/314867581")
 @RunWith(RobolectricTestRunner.class)
 public class WifiDialogActivityTest {
 

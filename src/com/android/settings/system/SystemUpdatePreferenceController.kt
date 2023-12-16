@@ -28,7 +28,6 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
 import com.android.settings.R
-import com.android.settings.Utils
 import com.android.settings.core.BasePreferenceController
 import com.android.settingslib.spaprivileged.framework.common.userManager
 import kotlinx.coroutines.launch
@@ -36,6 +35,7 @@ import kotlinx.coroutines.launch
 open class SystemUpdatePreferenceController(context: Context, preferenceKey: String) :
     BasePreferenceController(context, preferenceKey) {
     private val userManager: UserManager = context.userManager
+    private val systemUpdateRepository = SystemUpdateRepository(context)
     private val clientInitiatedActionRepository = ClientInitiatedActionRepository(context)
     private lateinit var preference: Preference
 
@@ -48,12 +48,12 @@ open class SystemUpdatePreferenceController(context: Context, preferenceKey: Str
         super.displayPreference(screen)
         preference = screen.findPreference(preferenceKey)!!
         if (isAvailable) {
-            Utils.updatePreferenceToSpecificActivityOrRemove(
-                mContext,
-                screen,
-                preferenceKey,
-                Utils.UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY,
-            )
+            val intent = systemUpdateRepository.getSystemUpdateIntent()
+            if (intent != null) {  // Replace the intent with this specific activity
+                preference.intent = intent
+            } else { // Did not find a matching activity, so remove the preference
+                screen.removePreference(preference)
+            }
         }
     }
 

@@ -48,7 +48,6 @@ import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
@@ -70,7 +69,6 @@ import com.android.settings.wfd.WifiDisplaySettings;
 import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settingslib.core.instrumentation.Instrumentable;
 import com.android.settingslib.core.instrumentation.SharedPreferencesLogger;
-import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.drawer.DashboardCategory;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
@@ -173,8 +171,6 @@ public class SettingsActivity extends SettingsBaseActivity
 
     private CharSequence mInitialTitle;
     private int mInitialTitleResId;
-
-    private BroadcastReceiver mDevelopmentSettingsListener;
 
     private boolean mBatteryPresent = true;
     private BroadcastReceiver mBatteryInfoReceiver = new BroadcastReceiver() {
@@ -614,15 +610,6 @@ public class SettingsActivity extends SettingsBaseActivity
         super.onResume();
         setActionBarStatus();
 
-        mDevelopmentSettingsListener = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                updateTilesList();
-            }
-        };
-        LocalBroadcastManager.getInstance(this).registerReceiver(mDevelopmentSettingsListener,
-                new IntentFilter(DevelopmentSettingsEnabler.DEVELOPMENT_SETTINGS_CHANGED_ACTION));
-
         registerReceiver(mBatteryInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 
         updateTilesList();
@@ -631,8 +618,6 @@ public class SettingsActivity extends SettingsBaseActivity
     @Override
     protected void onPause() {
         super.onPause();
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(mDevelopmentSettingsListener);
-        mDevelopmentSettingsListener = null;
         unregisterReceiver(mBatteryInfoReceiver);
     }
 
@@ -779,19 +764,6 @@ public class SettingsActivity extends SettingsBaseActivity
         somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
                         Settings.DataUsageSummaryActivity.class.getName()),
                 Utils.isBandwidthControlEnabled(), isAdmin)
-                || somethingChanged;
-
-        somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
-                        Settings.UserSettingsActivity.class.getName()),
-                UserHandle.MU_ENABLED && UserManager.supportsMultipleUsers()
-                        && !Utils.isMonkeyRunning(), isAdmin)
-                || somethingChanged;
-
-        final boolean showDev = DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(this)
-                && !Utils.isMonkeyRunning();
-        somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
-                        Settings.DevelopmentSettingsDashboardActivity.class.getName()),
-                showDev, isAdmin)
                 || somethingChanged;
 
         somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,

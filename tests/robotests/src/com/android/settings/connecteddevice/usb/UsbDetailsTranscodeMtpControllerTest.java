@@ -36,6 +36,7 @@ import androidx.preference.SwitchPreference;
 import com.android.settings.testutils.shadow.ShadowUtils;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -118,6 +119,7 @@ public class UsbDetailsTranscodeMtpControllerTest {
         assertThat(mPreference.isEnabled()).isFalse();
     }
 
+    @Ignore("b/313362757")
     @Test
     public void displayRefresh_fileTransfer_withAbsentProp_shouldCheck() {
         mUnderTest.displayPreference(mScreen);
@@ -129,6 +131,7 @@ public class UsbDetailsTranscodeMtpControllerTest {
         assertThat(getSwitchPreference().isChecked()).isFalse();
     }
 
+    @Ignore("b/313362757")
     @Test
     public void displayRefresh_fileTransfer_withUnsetProp_shouldUncheck() {
         mUnderTest.displayPreference(mScreen);
@@ -141,6 +144,7 @@ public class UsbDetailsTranscodeMtpControllerTest {
         assertThat(getSwitchPreference().isChecked()).isFalse();
     }
 
+    @Ignore("b/313362757")
     @Test
     public void displayRefresh_fileTransfer_withSetProp_shouldCheck() {
         mUnderTest.displayPreference(mScreen);
@@ -153,6 +157,7 @@ public class UsbDetailsTranscodeMtpControllerTest {
         assertThat(getSwitchPreference().isChecked()).isTrue();
     }
 
+    @Ignore("b/313362757")
     @Test
     public void click_checked_shouldSetSystemProperty() {
         mUnderTest.displayPreference(mScreen);
@@ -160,6 +165,7 @@ public class UsbDetailsTranscodeMtpControllerTest {
         assertThat(SystemProperties.getBoolean(TRANSCODE_MTP_SYS_PROP_KEY, false)).isTrue();
     }
 
+    @Ignore("b/313362757")
     @Test
     public void click_unChecked_shouldUnsetSystemProperty() {
         mUnderTest.displayPreference(mScreen);

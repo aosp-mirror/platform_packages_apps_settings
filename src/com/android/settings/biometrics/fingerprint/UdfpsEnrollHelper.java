@@ -182,7 +182,7 @@ public class UdfpsEnrollHelper extends InstrumentedFragment {
      * Called when a fingerprint image has been acquired, but wasn't processed yet.
      */
     public void onAcquired(boolean isAcquiredGood) {
-        if (mListener != null && mTotalSteps != -1) {
+        if (mListener != null) {
             mListener.onAcquired(isAcquiredGood && animateIfLastStep());
         }
     }

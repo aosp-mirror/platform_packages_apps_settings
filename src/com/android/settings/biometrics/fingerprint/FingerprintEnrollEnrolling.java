@@ -70,6 +70,7 @@ import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.biometrics.BiometricsEnrollEnrolling;
 import com.android.settings.biometrics.fingerprint.feature.SfpsEnrollmentFeature;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.flags.Flags;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.display.DisplayDensityUtils;
 
@@ -197,6 +198,8 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
 
     @NonNull
     private SfpsEnrollmentFeature mSfpsEnrollmentFeature = new EmptySfpsEnrollmentFeature();
+    @Nullable
+    private UdfpsEnrollCalibrator mCalibrator;
 
     @VisibleForTesting
     protected boolean shouldShowLottie() {
@@ -245,6 +248,12 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
 
             setContentView(layout);
             setDescriptionText(R.string.security_settings_udfps_enroll_start_message);
+
+            if (Flags.udfpsEnrollCalibration()) {
+                mCalibrator = FeatureFactory.getFeatureFactory().getFingerprintFeatureProvider()
+                        .getUdfpsEnrollCalibrator(getApplicationContext(), savedInstanceState,
+                                getIntent());
+            }
         } else if (mCanAssumeSfps) {
             mSfpsEnrollmentFeature = FeatureFactory.getFeatureFactory()
                     .getFingerprintFeatureProvider().getSfpsEnrollmentFeature();
@@ -364,6 +373,11 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         super.onSaveInstanceState(outState);
         outState.putBoolean(KEY_STATE_CANCELED, mIsCanceled);
         outState.putInt(KEY_STATE_PREVIOUS_ROTATION, mPreviousRotation);
+        if (Flags.udfpsEnrollCalibration()) {
+            if (mCalibrator != null) {
+                mCalibrator.onSaveInstanceState(outState);
+            }
+        }
     }
 
     private void restoreSavedState(Bundle savedInstanceState) {

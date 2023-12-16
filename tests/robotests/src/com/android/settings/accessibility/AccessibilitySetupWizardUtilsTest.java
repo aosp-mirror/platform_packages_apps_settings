@@ -15,7 +15,9 @@
  */
 package com.android.settings.accessibility;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import android.content.Context;
@@ -49,5 +51,15 @@ public class AccessibilitySetupWizardUtilsTest {
         verify(layout).setDescriptionText(description);
         verify(layout).setIcon(icon);
         verify(layout).setHeaderText(title);
+    }
+
+    @Test
+    public void setupGlifPreferenceLayout_descriptionIsNull_doesNotCallSetDescriptionText() {
+        GlifPreferenceLayout layout = mock(GlifPreferenceLayout.class);
+
+        AccessibilitySetupWizardUtils.updateGlifPreferenceLayout(mContext, layout, "title",
+                /* description= */ null, /* icon= */ null);
+
+        verify(layout, times(0)).setDescriptionText(any());
     }
 }

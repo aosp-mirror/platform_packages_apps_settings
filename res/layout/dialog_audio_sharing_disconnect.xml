@@ -19,29 +19,33 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="24dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingHorizontal="?android:dialogPreferredPadding"
+    android:paddingBottom="?android:dialogPreferredPadding">
 
     <TextView
         android:id="@+id/share_audio_disconnect_description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:layout_gravity="center"/>
-
-    <com.android.internal.widget.RecyclerView
-        android:visibility="visible"
-        android:id="@+id/device_btn_list"
-        android:nestedScrollingEnabled="false"
-        android:overScrollMode="never"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"/>
-
-    <Button
-        android:id="@+id/cancel_btn"
+        style="@style/DeviceAudioSharingText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/cancel"/>
+        android:paddingBottom="24dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/device_btn_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:nestedScrollingEnabled="false"
+        android:overScrollMode="never" />
+
+    <Button
+        android:id="@+id/cancel_btn"
+        style="@style/SettingsLibActionButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/audio_sharing_rounded_bg_ripple"
+        android:text="@string/cancel" />
 </LinearLayout>

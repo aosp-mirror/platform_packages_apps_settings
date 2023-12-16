@@ -93,6 +93,9 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
     FooterPreference mDisableOptionsPreference;
 
     @VisibleForTesting
+    FooterPreference mPowerConsumptionPreference;
+
+    @VisibleForTesting
     AdaptiveSleepPermissionPreferenceController mAdaptiveSleepPermissionController;
 
     @VisibleForTesting
@@ -216,6 +219,9 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
         if (mAdmin != null) {
             setupDisabledFooterPreference();
             screen.addPreference(mDisableOptionsPreference);
+        } else {
+            setupPowerConsumptionFooterPreference();
+            screen.addPreference(mPowerConsumptionPreference);
         }
     }
 
@@ -236,8 +242,20 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
         mDisableOptionsPreference.setIcon(R.drawable.ic_info_outline_24dp);
 
         // The 'disabled by admin' preference should always be at the end of the setting page.
-        mDisableOptionsPreference.setOrder(DEFAULT_ORDER_OF_LOWEST_PREFERENCE);
         mPrivacyPreference.setOrder(DEFAULT_ORDER_OF_LOWEST_PREFERENCE - 1);
+        mDisableOptionsPreference.setOrder(DEFAULT_ORDER_OF_LOWEST_PREFERENCE);
+    }
+
+    @VisibleForTesting
+    void setupPowerConsumptionFooterPreference() {
+        mPowerConsumptionPreference = new FooterPreference(getContext());
+        mPowerConsumptionPreference.setTitle(R.string.power_consumption_footer_summary);
+        mPowerConsumptionPreference.setSelectable(false);
+        mPowerConsumptionPreference.setIcon(R.drawable.ic_info_outline_24dp);
+
+        // The 'Longer screen timeout' preference should always be at the end of the setting page.
+        mPrivacyPreference.setOrder(DEFAULT_ORDER_OF_LOWEST_PREFERENCE - 1);
+        mPowerConsumptionPreference.setOrder(DEFAULT_ORDER_OF_LOWEST_PREFERENCE);
     }
 
     @Override

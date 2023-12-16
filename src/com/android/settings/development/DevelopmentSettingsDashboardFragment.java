@@ -47,7 +47,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
@@ -229,6 +231,12 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         if (Utils.isMonkeyRunning()) {
             getActivity().finish();
             return;
+        }
+        Context context = requireContext();
+        if (!DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(context)) {
+            Toast.makeText(context, R.string.dev_settings_disabled_warning, Toast.LENGTH_SHORT)
+                    .show();
+            finish();
         }
     }
 
@@ -599,8 +607,9 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
-            Activity activity, Lifecycle lifecycle, DevelopmentSettingsDashboardFragment fragment,
-            BluetoothA2dpConfigStore bluetoothA2dpConfigStore) {
+            @Nullable Activity activity, @Nullable Lifecycle lifecycle,
+            @Nullable DevelopmentSettingsDashboardFragment fragment,
+            @Nullable BluetoothA2dpConfigStore bluetoothA2dpConfigStore) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new MemoryUsagePreferenceController(context));
         controllers.add(new BugReportPreferenceController(context));

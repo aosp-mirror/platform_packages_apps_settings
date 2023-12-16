@@ -45,7 +45,9 @@ class BiometricSettingsProviderTest {
 
   @Before
   fun setUp() {
+    whenever(context.resources).thenReturn(resources)
     provider = BiometricSettingsProvider()
+    provider.attachInfo(context, null)
   }
 
   @Test(expected = UnsupportedOperationException::class)
@@ -79,9 +81,8 @@ class BiometricSettingsProviderTest {
     val expectedValue = false
     setSupportFaceEnroll(expectedValue)
 
-    val bundle =
-      provider.call(BiometricSettingsProvider.GET_SUW_FACE_ENABLED, null, Bundle())
-    assertThat(bundle!!.getString(BiometricSettingsProvider.SUW_FACE_ENABLED))
+    val bundle = provider.call(BiometricSettingsProvider.GET_SUW_FACE_ENABLED, null, Bundle())
+    assertThat(bundle!!.getBoolean(BiometricSettingsProvider.SUW_FACE_ENABLED))
       .isEqualTo(expectedValue)
   }
 

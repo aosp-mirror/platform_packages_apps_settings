@@ -16,11 +16,6 @@
         android:name="com.android.settings.USE_BIOMETRIC_PROVIDER"
         android:protectionLevel="signature|privileged"/>
 
-    <!-- Permissions for acting as the factory reset preparation application. -->
-    <permission
-        android:name="com.android.settings.permissions.PREPARE_FACTORY_RESET"
-        android:protectionLevel="signature|privileged"/>
-
     <uses-permission android:name="android.permission.REQUEST_NETWORK_SCORES" />
     <uses-permission android:name="android.permission.WRITE_MEDIA_STORAGE" />
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
@@ -143,6 +138,7 @@
     <uses-permission android:name="android.permission.CUSTOMIZE_SYSTEM_UI" />
     <uses-permission android:name="android.permission.REMAP_MODIFIER_KEYS" />
     <uses-permission android:name="android.permission.ACCESS_GPU_SERVICE" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
     <application
             android:name=".SettingsApplication"
@@ -494,6 +490,17 @@
                 android:value="com.android.settings.display.AutoBrightnessSettings"/>
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
                 android:value="@string/menu_key_display"/>
+        </activity>
+
+        <activity android:name=".Settings$ScreenTimeoutActivity"
+                  android:label="@string/screen_timeout"
+                  android:exported="true">
+            <intent-filter>
+                <action android:name="android.settings.SCREEN_TIMEOUT_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.display.ScreenTimeoutSettings"/>
         </activity>
 
         <activity
@@ -1746,6 +1753,8 @@
                         android:targetActivity=".spa.SpaBridgeActivity">
             <meta-data android:name="com.android.settings.spa.DESTINATION"
                        android:value="TogglePermissionAppList/UseFullScreenIntent"/>
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_apps"/>
         </activity-alias>
 
         <activity-alias android:name="AppManageFullScreenIntent"
@@ -1758,6 +1767,8 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.spa.DESTINATION"
                        android:value="TogglePermissionAppInfoPage/UseFullScreenIntent"/>
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_apps"/>
         </activity-alias>
 
         <activity android:name=".applications.InstalledAppOpenByDefaultActivity"
@@ -2864,11 +2875,10 @@
         </activity>
 
         <activity
-            android:name="Settings$DevelopmentSettingsDashboardActivity"
+            android:name="Settings$DevelopmentSettingsActivity"
             android:label="@string/development_settings_title"
             android:icon="@drawable/ic_settings_development"
-            android:exported="true"
-            android:enabled="false">
+            android:exported="true">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.APPLICATION_DEVELOPMENT_SETTINGS" />
                 <action android:name="com.android.settings.APPLICATION_DEVELOPMENT_SETTINGS" />
@@ -2876,38 +2886,12 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <intent-filter>
-                <action android:name="com.android.settings.action.SETTINGS" />
                 <action android:name="com.android.intent.action.SHOW_CONTRAST_DIALOG" />
             </intent-filter>
-            <meta-data android:name="com.android.settings.order" android:value="-40"/>
-            <meta-data android:name="com.android.settings.category"
-                       android:value="com.android.settings.category.ia.system" />
-            <meta-data android:name="com.android.settings.summary"
-                       android:resource="@string/summary_empty"/>
-            <meta-data android:name="com.android.settings.icon"
-                       android:resource="@drawable/ic_settings_development" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.development.DevelopmentSettingsDashboardFragment" />
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
                        android:value="@string/menu_key_system"/>
-            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                       android:value="true" />
-        </activity>
-
-        <!-- The opposite of DevelopmentSettingsActivity, it's no-op and only enabled when the real
-             activity is disabled to be CTS compliant. -->
-        <activity
-            android:name=".development.DevelopmentSettingsDisabledActivity"
-            android:icon="@drawable/ic_settings_development"
-            android:label="@string/development_settings_title"
-            android:excludeFromRecents="true"
-            android:exported="true"
-            android:theme="@style/Transparent">
-            <intent-filter android:priority="-1">
-                <action android:name="android.settings.APPLICATION_DEVELOPMENT_SETTINGS" />
-                <action android:name="com.android.settings.APPLICATION_DEVELOPMENT_SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
         </activity>
 
         <activity
@@ -3389,16 +3373,6 @@
                 <action android:name="android.settings.USER_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter>
-                <action android:name="com.android.settings.action.SETTINGS" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.order" android:value="-45"/>
-            <meta-data android:name="com.android.settings.category"
-                       android:value="com.android.settings.category.ia.system" />
-            <meta-data android:name="com.android.settings.summary_uri"
-                       android:value="content://com.android.settings.dashboard.SummaryProvider/user" />
-            <meta-data android:name="com.android.settings.icon"
-                       android:resource="@drawable/ic_settings_multiuser" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.users.UserSettings" />
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
@@ -4223,6 +4197,40 @@
                        android:value="@string/menu_key_apps"/>
         </activity>
 
+        <!-- @FlaggedApi("com.android.media.flags.enable_privileged_routing_for_media_routing_control") -->
+        <activity-alias
+            android:name="MediaRoutingControlActivity"
+            android:knownActivityEmbeddingCerts="@array/config_known_host_certs"
+            android:exported="true"
+            android:targetActivity=".spa.SpaBridgeActivity"
+            android:label="@string/media_routing_control_title">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.REQUEST_MEDIA_ROUTING_CONTROL" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.spa.DESTINATION"
+                       android:value="TogglePermissionAppList/MediaRoutingControl"/>
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_apps"/>
+        </activity-alias>
+
+        <activity-alias
+            android:name="AppMediaRoutingControlActivity"
+            android:knownActivityEmbeddingCerts="@array/config_known_host_certs"
+            android:exported="true"
+            android:targetActivity=".spa.SpaAppBridgeActivity"
+            android:label="@string/media_routing_control_title">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.REQUEST_MEDIA_ROUTING_CONTROL" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="package" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.spa.DESTINATION"
+                       android:value="TogglePermissionAppInfoPage/MediaRoutingControl"/>
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_apps"/>
+        </activity-alias>
+
         <!-- Keep compatibility with old WebView-picker implementation -->
         <activity-alias android:name=".WebViewImplementation"
                   android:targetActivity="Settings$WebViewAppPickerActivity"
@@ -4240,11 +4248,6 @@
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
                        android:value="@string/menu_key_system"/>
         </activity-alias>
-
-        <provider
-            android:name=".dashboard.SummaryProvider"
-            android:authorities="${applicationId}.dashboard.SummaryProvider">
-        </provider>
 
         <activity android:name=".backup.UserBackupSettingsActivity"
                   android:label="@string/privacy_settings_title"
@@ -4331,6 +4334,15 @@
                        android:value="@string/menu_key_accounts"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
+        </activity>
+
+        <!-- Access to the Credential Manager list. -->
+        <activity android:name=".applications.credentials.CredentialsPickerActivity"
+                android:excludeFromRecents="true"
+                android:launchMode="singleInstance"
+                android:exported="false">
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.applications.credentials.DefaultCombinedPicker" />
         </activity>
 
         <activity
@@ -4989,9 +5001,16 @@
             android:theme="@style/GlifV3Theme.Light"
             android:exported="false" />
 
-        <activity android:name=".privatespace.PrivateSpaceAuthenticationActivity"
-                  android:theme="@*android:style/Theme.DeviceDefault.Settings.Dialog.NoActionBar"
-                  android:exported="false"/>
+        <activity
+            android:name=".privatespace.PrivateSpaceAuthenticationActivity"
+            android:theme="@*android:style/Theme.DeviceDefault.Settings.Dialog.NoActionBar"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.android.settings.action.PRIVATE_SPACE_SETUP_FLOW" />
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
         <activity android:name=".privatespace.PrivateProfileContextHelperActivity" android:exported="false"/>
 
         <activity-alias android:name="UsageStatsActivity"
@@ -5004,6 +5023,8 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.spa.DESTINATION"
                        android:value="UsageStats"/>
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_apps"/>
         </activity-alias>
 
         <!-- [b/197780098] Disable eager initialization of Jetpack libraries. -->

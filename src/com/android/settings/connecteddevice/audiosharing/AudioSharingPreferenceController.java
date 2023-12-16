@@ -19,7 +19,6 @@ package com.android.settings.connecteddevice.audiosharing;
 import android.content.Context;
 
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.flags.Flags;
 
 public class AudioSharingPreferenceController extends BasePreferenceController {
     private static final String TAG = "AudioSharingPreferenceController";
@@ -33,6 +32,6 @@ public class AudioSharingPreferenceController extends BasePreferenceController {
 
     @Override
     public int getAvailabilityStatus() {
-        return Flags.enableLeAudioSharing() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        return AudioSharingUtils.isFeatureEnabled() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 }

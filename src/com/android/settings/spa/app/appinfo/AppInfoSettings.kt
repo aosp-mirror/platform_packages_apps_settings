@@ -32,10 +32,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
-import com.android.settings.flags.Flags
 import com.android.settings.R
 import com.android.settings.applications.AppInfoBase
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment
+import com.android.settings.flags.Flags
 import com.android.settings.spa.SpaActivity.Companion.startSpaActivity
 import com.android.settings.spa.app.appcompat.UserAspectRatioAppPreference
 import com.android.settings.spa.app.specialaccess.AlarmsAndRemindersAppListProvider
@@ -45,7 +45,6 @@ import com.android.settings.spa.app.specialaccess.ModifySystemSettingsAppListPro
 import com.android.settings.spa.app.specialaccess.PictureInPictureListProvider
 import com.android.settings.spa.app.specialaccess.VoiceActivationAppsListProvider
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
-import com.android.settingslib.spa.framework.compose.LifecycleEffect
 import com.android.settingslib.spa.framework.compose.navigator
 import com.android.settingslib.spa.widget.scaffold.RegularScaffold
 import com.android.settingslib.spa.widget.ui.Category
@@ -75,7 +74,7 @@ object AppInfoSettingsProvider : SettingsPageProvider {
             PackageInfoPresenter(context, packageName, userId, coroutineScope)
         }
         AppInfoSettings(packageInfoPresenter)
-        packageInfoPresenter.PackageRemoveDetector()
+        packageInfoPresenter.PackageFullyRemovedEffect()
     }
 
     @Composable
@@ -120,18 +119,20 @@ object AppInfoSettingsProvider : SettingsPageProvider {
 
 @Composable
 private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
-    LifecycleEffect(onStart = { packageInfoPresenter.reloadPackageInfo() })
-    val packageInfo = packageInfoPresenter.flow.collectAsStateWithLifecycle().value ?: return
-    val app = checkNotNull(packageInfo.applicationInfo)
+    val packageInfoState = packageInfoPresenter.flow.collectAsStateWithLifecycle()
     val featureFlags: FeatureFlags = FeatureFlagsImpl()
     RegularScaffold(
         title = stringResource(R.string.application_info_label),
         actions = {
-            if (featureFlags.archiving()) TopBarAppLaunchButton(packageInfoPresenter, app)
-            AppInfoSettingsMoreOptions(packageInfoPresenter, app)
+            packageInfoState.value?.applicationInfo?.let { app ->
+                if (featureFlags.archiving()) TopBarAppLaunchButton(packageInfoPresenter, app)
+                AppInfoSettingsMoreOptions(packageInfoPresenter, app)
+            }
         }
     ) {
-        val appInfoProvider = remember { AppInfoProvider(packageInfo) }
+        val packageInfo = packageInfoState.value ?: return@RegularScaffold
+        val app = packageInfo.applicationInfo ?: return@RegularScaffold
+        val appInfoProvider = remember(packageInfo) { AppInfoProvider(packageInfo) }
 
         appInfoProvider.AppInfo()
 

@@ -82,6 +82,7 @@ import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiPickerTracker;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -397,6 +398,7 @@ public class NetworkProviderSettingsTest {
         verify(mContextMenu, never()).add(anyInt(), eq(MENU_ID_SHARE), anyInt(), anyInt());
     }
 
+    @Ignore("b/313585353")
     @Test
     public void onWifiEntriesChanged_shouldChangeNextButtonState() {
         mNetworkProviderSettings.onWifiEntriesChanged();

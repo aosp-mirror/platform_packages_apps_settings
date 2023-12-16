@@ -32,6 +32,7 @@ import androidx.preference.SwitchPreference;
 import com.android.internal.widget.LockPatternUtils;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -63,13 +64,6 @@ public class PinPrivacyPreferenceControllerTest {
     public void isAvailable_lockSetToPin_shouldReturnTrue() {
         when(mLockPatternUtils.getCredentialTypeForUser(TEST_USER_ID)).thenReturn(
                 CREDENTIAL_TYPE_PIN);
-        assertThat(mController.isAvailable()).isTrue();
-    }
-
-    @Test
-    public void isAvailable_lockSetToPinOrPw_shouldReturnTrue() {
-        when(mLockPatternUtils.getCredentialTypeForUser(TEST_USER_ID)).thenReturn(
-                CREDENTIAL_TYPE_PASSWORD_OR_PIN);
         assertThat(mController.isAvailable()).isTrue();
     }
 

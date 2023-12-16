@@ -26,17 +26,21 @@ import android.app.backup.SharedPreferencesBackupHelper;
 import android.os.ParcelFileDescriptor;
 
 import com.android.settings.fuelgauge.BatteryBackupHelper;
+import com.android.settings.onboarding.OnboardingFeatureProvider;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.shortcut.CreateShortcutPreferenceController;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import com.android.settings.flags.Flags;
 
 /**
  * Backup agent for Settings APK
  */
 public class SettingsBackupHelper extends BackupAgentHelper {
     private static final String PREF_LOCALE_NOTIFICATION = "localeNotificationSharedPref";
+    public static final String SOUND_BACKUP_HELPER = "SoundSettingsBackup";
 
     @Override
     public void onCreate() {
@@ -45,6 +49,14 @@ public class SettingsBackupHelper extends BackupAgentHelper {
         addHelper(BatteryBackupHelper.TAG, new BatteryBackupHelper(this));
         addHelper(PREF_LOCALE_NOTIFICATION,
                 new SharedPreferencesBackupHelper(this, LOCALE_NOTIFICATION));
+        if (Flags.enableSoundBackup()) {
+            OnboardingFeatureProvider onboardingFeatureProvider =
+                    FeatureFactory.getFeatureFactory().getOnboardingFeatureProvider();
+            if (onboardingFeatureProvider != null) {
+                addHelper(SOUND_BACKUP_HELPER, onboardingFeatureProvider.
+                        getSoundBackupHelper(this, this.getBackupRestoreEventLogger()));
+            }
+        }
     }
 
     @Override

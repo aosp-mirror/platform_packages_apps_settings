@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
@@ -30,7 +31,6 @@ import androidx.fragment.app.FragmentManager;
 
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
-import com.android.settings.flags.Flags;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -49,7 +49,6 @@ public class AudioSharingJoinDialogFragment extends InstrumentedDialogFragment {
     }
 
     private static DialogEventListener sListener;
-    private View mRootView;
 
     @Override
     public int getMetricsCategory() {
@@ -69,17 +68,15 @@ public class AudioSharingJoinDialogFragment extends InstrumentedDialogFragment {
             ArrayList<AudioSharingDeviceItem> deviceItems,
             String newDeviceName,
             DialogEventListener listener) {
-        if (!Flags.enableLeAudioSharing()) return;
+        if (!AudioSharingUtils.isFeatureEnabled()) return;
         final FragmentManager manager = host.getChildFragmentManager();
         sListener = listener;
-        if (manager.findFragmentByTag(TAG) == null) {
-            final Bundle bundle = new Bundle();
-            bundle.putParcelableArrayList(BUNDLE_KEY_DEVICE_ITEMS, deviceItems);
-            bundle.putString(BUNDLE_KEY_NEW_DEVICE_NAME, newDeviceName);
-            final AudioSharingJoinDialogFragment dialog = new AudioSharingJoinDialogFragment();
-            dialog.setArguments(bundle);
-            dialog.show(manager, TAG);
-        }
+        final Bundle bundle = new Bundle();
+        bundle.putParcelableArrayList(BUNDLE_KEY_DEVICE_ITEMS, deviceItems);
+        bundle.putString(BUNDLE_KEY_NEW_DEVICE_NAME, newDeviceName);
+        final AudioSharingJoinDialogFragment dialog = new AudioSharingJoinDialogFragment();
+        dialog.setArguments(bundle);
+        dialog.show(manager, TAG);
     }
 
     @Override
@@ -89,14 +86,17 @@ public class AudioSharingJoinDialogFragment extends InstrumentedDialogFragment {
                 arguments.getParcelableArrayList(BUNDLE_KEY_DEVICE_ITEMS);
         String newDeviceName = arguments.getString(BUNDLE_KEY_NEW_DEVICE_NAME);
         final AlertDialog.Builder builder =
-                new AlertDialog.Builder(getActivity())
-                        .setTitle("Share audio?")
-                        .setCancelable(false);
-        mRootView =
-                LayoutInflater.from(builder.getContext())
-                        .inflate(R.layout.dialog_audio_sharing_join, null /* parent */);
-        TextView subtitle1 = mRootView.findViewById(R.id.share_audio_subtitle1);
-        TextView subtitle2 = mRootView.findViewById(R.id.share_audio_subtitle2);
+                new AlertDialog.Builder(getActivity()).setCancelable(false);
+        LayoutInflater inflater = LayoutInflater.from(builder.getContext());
+        View customTitle =
+                inflater.inflate(R.layout.dialog_custom_title_audio_sharing, /* parent= */ null);
+        ImageView icon = customTitle.findViewById(R.id.title_icon);
+        icon.setImageResource(R.drawable.ic_bt_audio_sharing);
+        TextView title = customTitle.findViewById(R.id.title_text);
+        title.setText("Share your audio");
+        View rootView = inflater.inflate(R.layout.dialog_audio_sharing_join, /* parent= */ null);
+        TextView subtitle1 = rootView.findViewById(R.id.share_audio_subtitle1);
+        TextView subtitle2 = rootView.findViewById(R.id.share_audio_subtitle2);
         if (deviceItems.isEmpty()) {
             subtitle1.setText(newDeviceName);
         } else {
@@ -109,10 +109,9 @@ public class AudioSharingJoinDialogFragment extends InstrumentedDialogFragment {
                                     .collect(Collectors.joining(", ")),
                             newDeviceName));
         }
-        subtitle2.setText(
-                "Connected eligible headphones will hear videos ad music playing on this phone");
-        Button shareBtn = mRootView.findViewById(R.id.share_btn);
-        Button cancelBtn = mRootView.findViewById(R.id.cancel_btn);
+        subtitle2.setText("This device's music and videos will play on both pairs of headphones");
+        Button shareBtn = rootView.findViewById(R.id.share_btn);
+        Button cancelBtn = rootView.findViewById(R.id.cancel_btn);
         shareBtn.setOnClickListener(
                 v -> {
                     sListener.onShareClick();
@@ -120,7 +119,7 @@ public class AudioSharingJoinDialogFragment extends InstrumentedDialogFragment {
                 });
         shareBtn.setText("Share audio");
         cancelBtn.setOnClickListener(v -> dismiss());
-        Dialog dialog = builder.setView(mRootView).create();
+        Dialog dialog = builder.setCustomTitle(customTitle).setView(rootView).create();
         dialog.setCanceledOnTouchOutside(false);
         return dialog;
     }

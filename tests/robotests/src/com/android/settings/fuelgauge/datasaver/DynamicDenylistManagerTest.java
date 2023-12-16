@@ -36,6 +36,7 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.NetworkPolicyManager;
 import android.util.ArraySet;
 
@@ -48,6 +49,8 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -67,6 +70,8 @@ public class DynamicDenylistManagerTest {
 
     @Mock
     private NetworkPolicyManager mNetworkPolicyManager;
+    @Mock
+    private PackageManager mPackageManager;
 
     @Before
     public void setUp() {
@@ -357,12 +362,66 @@ public class DynamicDenylistManagerTest {
         assertThat(mDynamicDenyListPref.getAll()).isEmpty();
     }
 
+    @Test
+    public void dump_dumpExpectedResult() {
+        initDynamicDenylistManager(EMPTY_ARRAY);
+        setupPreference(mManualDenyListPref, FAKE_UID_1);
+        setupPreference(mDynamicDenyListPref, FAKE_UID_2);
+        final StringWriter stringWriter = new StringWriter();
+        final PrintWriter printWriter = new PrintWriter(stringWriter);
+        when(mPackageManager.getNameForUid(FAKE_UID_1_INT)).thenReturn("app1");
+        when(mPackageManager.getNameForUid(FAKE_UID_2_INT)).thenReturn("app2");
+
+        mDynamicDenylistManager.dump(printWriter);
+
+        final String dumpResults = stringWriter.toString();
+        assertThat(dumpResults.contains("ManualDenylist: app1")).isTrue();
+        assertThat(dumpResults.contains("DynamicDenylist: app2")).isTrue();
+    }
+
+    @Test
+    public void dump_withEmptySharedPreferences_dumpExpectedResult() {
+        initDynamicDenylistManager(EMPTY_ARRAY, EMPTY_ARRAY);
+        mDynamicDenylistManager.clearSharedPreferences();
+        final StringWriter stringWriter = new StringWriter();
+        final PrintWriter printWriter = new PrintWriter(stringWriter);
+
+        mDynamicDenylistManager.dump(printWriter);
+
+        final String dumpResults = stringWriter.toString();
+        assertThat(dumpResults.contains("ManualDenylist: null")).isTrue();
+        assertThat(dumpResults.contains("DynamicDenylist: null")).isTrue();
+    }
+
+    @Test
+    public void onBootComplete_resetIntoManualMode() {
+        initDynamicDenylistManager(new int[] {FAKE_UID_1_INT});
+        setDenylist(new ArraySet<>(List.of(FAKE_UID_2_INT)));
+        // Ensure the testing environment for manual denylist.
+        assertThat(mManualDenyListPref.getAll()).hasSize(2);
+        assertTrue(mManualDenyListPref.contains(PREF_KEY_MANUAL_DENYLIST_SYNCED));
+        assertTrue(mManualDenyListPref.contains(FAKE_UID_1));
+        // Ensure the testing environment for dynamic denylist.
+        assertThat(mDynamicDenyListPref.getAll()).hasSize(1);
+
+        mDynamicDenylistManager.onBootComplete();
+
+        // Keep the users set uids in the manual denylist.
+        assertThat(mManualDenyListPref.getAll()).hasSize(2);
+        assertTrue(mManualDenyListPref.contains(PREF_KEY_MANUAL_DENYLIST_SYNCED));
+        assertTrue(mManualDenyListPref.contains(FAKE_UID_1));
+        // Clear the uids in the dynamic denylist.
+        assertThat(mDynamicDenyListPref.getAll()).isEmpty();
+    }
+
     private void initDynamicDenylistManager(int[] preload) {
         initDynamicDenylistManager(preload, preload);
     }
 
     private void initDynamicDenylistManager(int[] preload1, int[] preload2) {
         final Context context = spy(RuntimeEnvironment.application.getApplicationContext());
+        when(context.getApplicationContext()).thenReturn(context);
+        when(context.getPackageManager()).thenReturn(mPackageManager);
         when(mNetworkPolicyManager.getUidsWithPolicy(anyInt()))
                 .thenReturn(preload1).thenReturn(preload2);
         mDynamicDenylistManager = new DynamicDenylistManager(context, mNetworkPolicyManager);

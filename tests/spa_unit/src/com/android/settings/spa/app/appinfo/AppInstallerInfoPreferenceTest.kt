@@ -21,13 +21,11 @@ import android.content.Intent
 import android.content.pm.ApplicationInfo
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.test.assertIsDisplayed
-import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotDisplayed
-import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.hasText
+import androidx.compose.ui.test.isEnabled
+import androidx.compose.ui.test.isNotEnabled
 import androidx.compose.ui.test.junit4.createComposeRule
-import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
 import androidx.test.core.app.ApplicationProvider
@@ -46,9 +44,10 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.MockitoSession
-import org.mockito.Spy
 import org.mockito.kotlin.any
+import org.mockito.kotlin.doNothing
 import org.mockito.kotlin.eq
+import org.mockito.kotlin.spy
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 import org.mockito.quality.Strictness
@@ -60,8 +59,9 @@ class AppInstallerInfoPreferenceTest {
 
     private lateinit var mockSession: MockitoSession
 
-    @Spy
-    private val context: Context = ApplicationProvider.getApplicationContext()
+    private val context: Context = spy(ApplicationProvider.getApplicationContext()) {
+        doNothing().whenever(mock).startActivityAsUser(any(), any())
+    }
 
     @Before
     fun setUp() {
@@ -78,8 +78,7 @@ class AppInstallerInfoPreferenceTest {
             .thenReturn(STORE_LINK)
         whenever(Utils.getApplicationLabel(context, INSTALLER_PACKAGE_NAME))
             .thenReturn(INSTALLER_PACKAGE_LABEL)
-        whenever(AppUtils.isMainlineModule(any(), eq(PACKAGE_NAME)))
-            .thenReturn(false)
+        whenever(AppUtils.isMainlineModule(any(), eq(PACKAGE_NAME))).thenReturn(false)
     }
 
     @After
@@ -120,9 +119,8 @@ class AppInstallerInfoPreferenceTest {
             .thenReturn(null)
 
         setContent()
-        waitUntilDisplayed()
 
-        composeTestRule.onNode(preferenceNode).assertIsNotEnabled()
+        composeTestRule.waitUntilExists(preferenceNode.and(isNotEnabled()))
     }
 
     @Test
@@ -134,27 +132,23 @@ class AppInstallerInfoPreferenceTest {
         }
 
         setContent(instantApp)
-        waitUntilDisplayed()
 
-        composeTestRule.onNodeWithText("More info on installer label")
-            .assertIsDisplayed()
-            .assertIsEnabled()
+        composeTestRule.waitUntilExists(hasText("More info on installer label").and(isEnabled()))
     }
 
     @Test
     fun whenNotInstantApp() {
         setContent()
-        waitUntilDisplayed()
 
-        composeTestRule.onNodeWithText("App installed from installer label")
-            .assertIsDisplayed()
-            .assertIsEnabled()
+        composeTestRule.waitUntilExists(hasText("App installed from installer label"))
+        composeTestRule.waitUntilExists(preferenceNode.and(isEnabled()))
     }
 
     @Test
     fun whenClick_startActivity() {
         setContent()
-        waitUntilDisplayed()
+        composeTestRule.delay()
+
         composeTestRule.onRoot().performClick()
         composeTestRule.delay()
 
@@ -169,14 +163,10 @@ class AppInstallerInfoPreferenceTest {
         }
     }
 
-    private fun waitUntilDisplayed() {
-        composeTestRule.waitUntilExists(preferenceNode)
-    }
-
     private val preferenceNode = hasText(context.getString(R.string.app_install_details_title))
 
     private companion object {
-        const val PACKAGE_NAME = "packageName"
+        const val PACKAGE_NAME = "package.name"
         const val INSTALLER_PACKAGE_NAME = "installer"
         const val INSTALLER_PACKAGE_LABEL = "installer label"
         val STORE_LINK = Intent("store/link")

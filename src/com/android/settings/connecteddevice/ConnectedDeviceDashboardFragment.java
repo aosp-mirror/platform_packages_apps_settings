@@ -28,9 +28,9 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.connecteddevice.audiosharing.AudioSharingDevicePreferenceController;
+import com.android.settings.connecteddevice.audiosharing.AudioSharingUtils;
 import com.android.settings.core.SettingsUIDeviceConfig;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.flags.Flags;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.overlay.SurveyFeatureProvider;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -87,7 +87,7 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
                             + ", action : "
                             + action);
         }
-        if (Flags.enableLeAudioSharing()) {
+        if (AudioSharingUtils.isFeatureEnabled()) {
             use(AudioSharingDevicePreferenceController.class).init(this);
         }
         use(AvailableMediaDeviceGroupController.class).init(this);

@@ -43,6 +43,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.os.storage.StorageManager;
 import android.util.Log;
 import android.view.WindowManager;
 
@@ -292,7 +293,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
             // use, which optionally accepts a challenge.
             mForceVerifyPath = true;
             if (isBiometricAllowed(effectiveUserId, mUserId)) {
-                showBiometricPrompt(promptInfo);
+                showBiometricPrompt(promptInfo, mUserId);
                 launchedBiometric = true;
             } else {
                 showConfirmCredentials();
@@ -302,19 +303,25 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                 && userProperties != null
                 && userProperties.isAuthAlwaysRequiredToDisableQuietMode()
                 && isInternalActivity()) {
-            // Force verification path is required to be invoked as we might need to verify the tied
-            // profile challenge if the profile is using the unified challenge mode. This would
-            // result in ConfirmLockPassword.startVerifyPassword/
+            // Force verification path is required to be invoked as we might need to verify the
+            // tied profile challenge if the profile is using the unified challenge mode. This
+            // would result in ConfirmLockPassword.startVerifyPassword/
             // ConfirmLockPattern.startVerifyPattern being called instead of the
             // startCheckPassword/startCheckPattern
             mForceVerifyPath = userProperties.isCredentialShareableWithParent();
-            showConfirmCredentials();
-            launchedCDC = true;
+            if (android.multiuser.Flags.enableBiometricsToUnlockPrivateSpace()
+                    && isBiometricAllowed(effectiveUserId, mUserId)) {
+                showBiometricPrompt(promptInfo, effectiveUserId);
+                launchedBiometric = true;
+            } else {
+                showConfirmCredentials();
+                launchedCDC = true;
+            }
         } else {
             if (isBiometricAllowed(effectiveUserId, mUserId)) {
                 // Don't need to check if biometrics / pin/pattern/pass are enrolled. It will go to
                 // onAuthenticationError and do the right thing automatically.
-                showBiometricPrompt(promptInfo);
+                showBiometricPrompt(promptInfo, mUserId);
                 launchedBiometric = true;
             } else {
                 showConfirmCredentials();
@@ -400,7 +407,19 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
     // biometric is disabled due to device restart.
     private boolean isStrongAuthRequired(int effectiveUserId) {
         return !mLockPatternUtils.isBiometricAllowedForUser(effectiveUserId)
-                || !mUserManager.isUserUnlocked(mUserId);
+                || doesUserStateEnforceStrongAuth(mUserId);
+    }
+
+    private boolean doesUserStateEnforceStrongAuth(int userId) {
+        if (android.os.Flags.allowPrivateProfile()
+                && android.multiuser.Flags.enableBiometricsToUnlockPrivateSpace()) {
+            // Check if CE storage for user is locked since biometrics can't unlock fbe/keystore of
+            // the profile user using verifyTiedProfileChallenge. Biometrics can still be used if
+            // the user is stopped with delayed locking (i.e., with storage unlocked), so the user
+            // state (whether the user is in the RUNNING_UNLOCKED state) should not be relied upon.
+            return !StorageManager.isUserKeyUnlocked(userId);
+        }
+        return !mUserManager.isUserUnlocked(userId);
     }
 
     private boolean isBiometricAllowed(int effectiveUserId, int realUserId) {
@@ -408,7 +427,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                 .hasPendingEscrowToken(realUserId);
     }
 
-    private void showBiometricPrompt(PromptInfo promptInfo) {
+    private void showBiometricPrompt(PromptInfo promptInfo, int userId) {
         mBiometricFragment = (BiometricFragment) getSupportFragmentManager()
                 .findFragmentByTag(TAG_BIOMETRIC_FRAGMENT);
         boolean newFragment = false;
@@ -418,7 +437,9 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
             newFragment = true;
         }
         mBiometricFragment.setCallbacks(mExecutor, mAuthenticationCallback);
-        mBiometricFragment.setUser(mUserId);
+        // TODO(b/315864564): Move the logic of choosing the user id against which the
+        //  authentication needs to happen to the BiometricPrompt API
+        mBiometricFragment.setUser(userId);
 
         if (newFragment) {
             getSupportFragmentManager().beginTransaction()

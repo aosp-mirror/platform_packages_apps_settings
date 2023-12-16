@@ -17,6 +17,7 @@
 package com.android.settings.privatespace;
 
 import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,17 +25,17 @@ import android.view.ViewGroup;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.android.settings.R;
+import com.android.settings.core.InstrumentedFragment;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.GlifLayout;
 
 /** Fragment to display error screen if creation of private profile failed for any reason. */
-public class PrivateProfileCreationError extends Fragment {
+public class PrivateProfileCreationError extends InstrumentedFragment {
     @Override
     public View onCreateView(
             LayoutInflater inflater,
@@ -46,14 +47,14 @@ public class PrivateProfileCreationError extends Fragment {
         final FooterBarMixin mixin = rootView.getMixin(FooterBarMixin.class);
         mixin.setPrimaryButton(
                 new FooterButton.Builder(getContext())
-                        .setText(R.string.privatespace_tryagain_label)
+                        .setText(R.string.private_space_tryagain_label)
                         .setListener(onTryAgain())
                         .setButtonType(FooterButton.ButtonType.NEXT)
                         .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Primary)
                         .build());
         mixin.setSecondaryButton(
                 new FooterButton.Builder(getContext())
-                        .setText(R.string.privatespace_cancel_label)
+                        .setText(R.string.private_space_cancel_label)
                         .setListener(onCancel())
                         .setButtonType(FooterButton.ButtonType.CANCEL)
                         .setTheme(
@@ -73,10 +74,17 @@ public class PrivateProfileCreationError extends Fragment {
         return rootView;
     }
 
+    @Override
+    public int getMetricsCategory() {
+        return SettingsEnums.PRIVATE_SPACE_SETUP_SPACE_CREATION_ERROR;
+    }
+
     private View.OnClickListener onTryAgain() {
         return v -> {
+            mMetricsFeatureProvider.action(
+                    getContext(), SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_TRY_CREATE_SPACE_AGAIN);
             NavHostFragment.findNavController(PrivateProfileCreationError.this)
-                                        .navigate(R.id.action_retry_profile_creation);
+                    .navigate(R.id.action_retry_profile_creation);
         };
     }
 
@@ -84,6 +92,8 @@ public class PrivateProfileCreationError extends Fragment {
         return v -> {
             Activity activity = getActivity();
             if (activity != null) {
+                mMetricsFeatureProvider.action(
+                        getContext(), SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_CANCEL_CREATE_SPACE);
                 activity.finish();
             }
         };

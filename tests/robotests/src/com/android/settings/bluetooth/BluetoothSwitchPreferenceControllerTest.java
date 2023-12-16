@@ -44,7 +44,7 @@ import org.robolectric.RuntimeEnvironment;
 public class BluetoothSwitchPreferenceControllerTest {
 
     private static final String BLUETOOTH_INFO_STRING = "When Bluetooth is turned on, your device"
-            + " can communicate with other nearby Bluetooth devices.";
+            + " can communicate with other nearby Bluetooth devices";
     @Mock
     private RestrictionUtils mRestrictionUtils;
     @Mock

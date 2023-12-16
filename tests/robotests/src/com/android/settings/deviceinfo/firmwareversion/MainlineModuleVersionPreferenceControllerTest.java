@@ -18,8 +18,8 @@ package com.android.settings.deviceinfo.firmwareversion;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
-import static com.android.settings.deviceinfo.firmwareversion.MainlineModuleVersionPreferenceController.MODULE_UPDATE_INTENT_ACTION;
-import static com.android.settings.deviceinfo.firmwareversion.MainlineModuleVersionPreferenceController.MODULE_UPDATE_V2_INTENT_ACTION;
+import static com.android.settings.deviceinfo.firmwareversion.MainlineModuleVersionPreferenceController.MODULE_UPDATE_INTENT;
+import static com.android.settings.deviceinfo.firmwareversion.MainlineModuleVersionPreferenceController.MODULE_UPDATE_V2_INTENT;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -29,7 +29,6 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -52,10 +51,6 @@ import org.robolectric.RuntimeEnvironment;
 public class MainlineModuleVersionPreferenceControllerTest {
 
     private static final String MODULE_PACKAGE = "com.android.vending";
-    private static final Intent MODULE_UPDATE_V2_INTENT =
-        new Intent(MODULE_UPDATE_V2_INTENT_ACTION).setPackage(MODULE_PACKAGE);
-    private static final Intent MODULE_UPDATE_INTENT =
-        new Intent(MODULE_UPDATE_INTENT_ACTION).setPackage(MODULE_PACKAGE);
 
     @Rule
     public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();

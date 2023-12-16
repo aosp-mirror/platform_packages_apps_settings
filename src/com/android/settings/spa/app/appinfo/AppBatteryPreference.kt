@@ -49,7 +49,7 @@ import kotlinx.coroutines.withContext
 @Composable
 fun AppBatteryPreference(app: ApplicationInfo) {
     val context = LocalContext.current
-    val presenter = remember { AppBatteryPresenter(context, app) }
+    val presenter = remember(app) { AppBatteryPresenter(context, app) }
     if (!presenter.isAvailable()) return
 
     Preference(object : PreferenceModel {

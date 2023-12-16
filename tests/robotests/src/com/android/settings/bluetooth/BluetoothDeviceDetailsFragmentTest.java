@@ -29,6 +29,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.companion.CompanionDeviceManager;
 import android.content.Context;
 import android.hardware.input.InputManager;
 import android.os.Bundle;
@@ -48,6 +49,8 @@ import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
+
+import com.google.common.collect.ImmutableList;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -88,12 +91,17 @@ public class BluetoothDeviceDetailsFragmentTest {
     private UserManager mUserManager;
     @Mock
     private InputManager mInputManager;
+    @Mock
+    private CompanionDeviceManager mCompanionDeviceManager;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
         doReturn(mInputManager).when(mContext).getSystemService(InputManager.class);
+        doReturn(mCompanionDeviceManager).when(mContext)
+                .getSystemService(CompanionDeviceManager.class);
+        when(mCompanionDeviceManager.getAllAssociations()).thenReturn(ImmutableList.of());
         removeInputDeviceWithMatchingBluetoothAddress();
         FakeFeatureFactory.setupForTest();
 

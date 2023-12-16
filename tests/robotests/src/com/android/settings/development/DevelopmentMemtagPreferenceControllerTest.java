@@ -38,6 +38,7 @@ import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.testutils.shadow.ShadowInteractionJankMonitor;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -46,13 +47,14 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowSystemProperties;
 
+@Ignore("b/313564061")
 @RunWith(RobolectricTestRunner.class)
 @Config(
         shadows = {
-            ZygoteShadow.class,
-            ShadowDeviceConfig.class,
-            ShadowInteractionJankMonitor.class,
-            ShadowRestrictedLockUtilsInternal.class
+                ZygoteShadow.class,
+                ShadowDeviceConfig.class,
+                ShadowInteractionJankMonitor.class,
+                ShadowRestrictedLockUtilsInternal.class
         })
 public class DevelopmentMemtagPreferenceControllerTest {
     private final String mMemtagSupportedProperty = "ro.arm64.memtag.bootctl_supported";

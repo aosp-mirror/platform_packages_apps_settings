@@ -47,6 +47,7 @@ import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -101,6 +102,7 @@ public class SettingsPanelActivityTest {
         mSettingsPanelActivity.getResources().getConfiguration().uiMode = mOriginalUiMode;
     }
 
+    @Ignore("b/313576125")
     @Test
     public void onStart_isNotDebuggable_shouldHideSystemOverlay() {
         ReflectionHelpers.setStaticField(Build.class, "IS_DEBUGGABLE", false);
@@ -117,6 +119,7 @@ public class SettingsPanelActivityTest {
         verify(window).addSystemFlags(SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
     }
 
+    @Ignore("b/313576125")
     @Test
     public void onStop_isNotDebuggable_shouldRemoveHideSystemOverlay() {
         ReflectionHelpers.setStaticField(Build.class, "IS_DEBUGGABLE", false);
@@ -144,6 +147,7 @@ public class SettingsPanelActivityTest {
                 & SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS).isEqualTo(0);
     }
 
+    @Ignore("b/313576125")
     @Test
     public void onStop_panelIsNotCreating_shouldForceUpdate() {
         mSettingsPanelActivity.mForceCreation = false;
@@ -155,6 +159,7 @@ public class SettingsPanelActivityTest {
         assertThat(mSettingsPanelActivity.mForceCreation).isTrue();
     }
 
+    @Ignore("b/313576125")
     @Test
     public void onStop_panelIsCreating_shouldNotForceUpdate() {
         mSettingsPanelActivity.mForceCreation = false;

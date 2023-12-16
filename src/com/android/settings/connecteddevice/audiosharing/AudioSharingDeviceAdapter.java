@@ -22,7 +22,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.android.internal.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.settings.R;
 
 import java.util.ArrayList;
@@ -32,11 +33,13 @@ public class AudioSharingDeviceAdapter extends RecyclerView.Adapter<RecyclerView
     private static final String TAG = "AudioSharingDeviceAdapter";
     private final ArrayList<AudioSharingDeviceItem> mDevices;
     private final OnClickListener mOnClickListener;
+    private final String mPrefix;
 
     public AudioSharingDeviceAdapter(
-            ArrayList<AudioSharingDeviceItem> devices, OnClickListener listener) {
+            ArrayList<AudioSharingDeviceItem> devices, OnClickListener listener, String prefix) {
         mDevices = devices;
         mOnClickListener = listener;
+        mPrefix = prefix;
     }
 
     private class AudioSharingDeviceViewHolder extends RecyclerView.ViewHolder {
@@ -49,7 +52,7 @@ public class AudioSharingDeviceAdapter extends RecyclerView.Adapter<RecyclerView
 
         public void bindView(int position) {
             if (mButtonView != null) {
-                mButtonView.setText(mDevices.get(position).getName());
+                mButtonView.setText(mPrefix + mDevices.get(position).getName());
                 mButtonView.setOnClickListener(
                         v -> mOnClickListener.onClick(mDevices.get(position)));
             } else {

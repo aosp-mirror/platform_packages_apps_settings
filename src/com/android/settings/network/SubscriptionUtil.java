@@ -18,6 +18,8 @@ package com.android.settings.network;
 
 import static android.telephony.SubscriptionManager.INVALID_SIM_SLOT_INDEX;
 import static android.telephony.UiccSlotInfo.CARD_STATE_INFO_PRESENT;
+import static android.telephony.SubscriptionManager.PROFILE_CLASS_PROVISIONING;
+
 import static com.android.internal.util.CollectionUtils.emptyIfNull;
 
 import android.annotation.Nullable;
@@ -36,9 +38,11 @@ import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.telephony.MccTable;
+import com.android.internal.telephony.flags.Flags;
 import com.android.settings.R;
 import com.android.settings.network.helper.SelectableSubscriptions;
 import com.android.settings.network.helper.SubscriptionAnnotation;
@@ -84,6 +88,8 @@ public class SubscriptionUtil {
     }
 
     public static List<SubscriptionInfo> getActiveSubscriptions(SubscriptionManager manager) {
+        //TODO (b/315499317) : Refactor the subscription utils.
+
         if (sActiveResultsForTesting != null) {
             return sActiveResultsForTesting;
         }
@@ -94,7 +100,12 @@ public class SubscriptionUtil {
         if (subscriptions == null) {
             return new ArrayList<>();
         }
-        return subscriptions;
+        // Since the SubscriptionManager.getActiveSubscriptionInfoList() has checked whether the
+        // sim visible by the SubscriptionManager.isSubscriptionVisible(), here only checks whether
+        // the esim visible here.
+        return subscriptions.stream()
+                .filter(subInfo -> subInfo != null && isEmbeddedSubscriptionVisible(subInfo))
+                .collect(Collectors.toList());
     }
 
     /**
@@ -128,7 +139,7 @@ public class SubscriptionUtil {
     }
 
     /**
-     * Get subscription which is available to be displayed to the user
+     * Get subscriptionInfo which is available to be displayed to the user
      * per subscription id.
      *
      * @param context {@code Context}
@@ -138,10 +149,17 @@ public class SubscriptionUtil {
      * @return {@code SubscriptionInfo} based on the given subscription id. Null of subscription
      *         is invalid or not allowed to be displayed to the user.
      */
-    public static SubscriptionInfo getAvailableSubscription(Context context,
+    public static SubscriptionInfo getAvailableSubscriptionBySubIdAndShowingForUser(Context context,
             ProxySubscriptionManager subscriptionManager, int subId) {
+        //TODO (b/315499317) : Refactor the subscription utils.
         final SubscriptionInfo subInfo = subscriptionManager.getAccessibleSubscriptionInfo(subId);
         if (subInfo == null) {
+            return null;
+        }
+
+        // hide provisioning/bootstrap and satellite profiles for user
+        if (!isEmbeddedSubscriptionVisible(subInfo)) {
+            Log.d(TAG, "Do not insert the provision eSIM or NTN eSim");
             return null;
         }
 
@@ -567,6 +585,12 @@ public class SubscriptionUtil {
     public static boolean isSubscriptionVisible(
             SubscriptionManager subscriptionManager, Context context, SubscriptionInfo info) {
         if (info == null) return false;
+
+        // hide provisioning/bootstrap and satellite profiles for user
+        if (!isEmbeddedSubscriptionVisible(info)) {
+            return false;
+        }
+
         // If subscription is NOT grouped opportunistic subscription, it's visible.
         if (info.getGroupUuid() == null || !info.isOpportunistic()) return true;
 
@@ -785,5 +809,15 @@ public class SubscriptionUtil {
             currentSubInfo = selectionOfDefault.apply(subList);
         }
         return (currentSubInfo == null) ? null : currentSubInfo.getSubInfo();
+    }
+
+    private static boolean isEmbeddedSubscriptionVisible(@NonNull SubscriptionInfo subInfo) {
+        if (subInfo.isEmbedded()
+                && (subInfo.getProfileClass() == PROFILE_CLASS_PROVISIONING
+                || (Flags.oemEnabledSatelliteFlag()
+                && subInfo.isOnlyNonTerrestrialNetwork()))) {
+            return false;
+        }
+        return true;
     }
 }

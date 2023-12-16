@@ -16,6 +16,7 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_COMPONENT_NAME;
 import static com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_CONTROLLER_NAME;
 import static com.android.settings.accessibility.AccessibilityDialogUtils.DialogEnums;
 import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
@@ -55,6 +56,7 @@ import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityDialogUtils.DialogType;
 import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
+import com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragment;
 import com.android.settings.utils.LocaleUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -477,7 +479,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         if (Flags.enableMagnificationMultipleFingerMultipleTapGesture()) {
             if (hasShortcutType(shortcutTypes, UserShortcutType.TWOFINGERTRIPLETAP)) {
                 final CharSequence twoFingerTripleTapTitle = context.getText(
-                        R.string.accessibility_shortcut_two_finger_triple_tap_keyword);
+                        R.string.accessibility_shortcut_two_finger_double_tap_keyword);
                 list.add(twoFingerTripleTapTitle);
             }
         }
@@ -584,7 +586,16 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
     @Override
     public void onSettingsClicked(ShortcutPreference preference) {
-        showDialog(DialogEnums.MAGNIFICATION_EDIT_SHORTCUT);
+        if (com.android.settings.accessibility.Flags.editShortcutsInFullScreen()) {
+            EditShortcutsPreferenceFragment.showEditShortcutScreen(
+                    requireContext(),
+                    getMetricsCategory(),
+                    getShortcutTitle(),
+                    MAGNIFICATION_COMPONENT_NAME,
+                    getIntent());
+        } else {
+            showDialog(DialogEnums.MAGNIFICATION_EDIT_SHORTCUT);
+        }
     }
 
     @Override
@@ -840,9 +851,13 @@ public class ToggleScreenMagnificationPreferenceFragment extends
      */
     public static CharSequence getServiceSummary(Context context) {
         // Get the user shortcut type from settings provider.
-        final int uerShortcutType = getUserShortcutTypeFromSettings(context);
-        return (uerShortcutType != AccessibilityUtil.UserShortcutType.EMPTY)
+        final int userShortcutType = getUserShortcutTypeFromSettings(context);
+        final CharSequence featureState =
+                (userShortcutType != AccessibilityUtil.UserShortcutType.EMPTY)
                 ? context.getText(R.string.accessibility_summary_shortcut_enabled)
                 : context.getText(R.string.generic_accessibility_feature_shortcut_off);
+        final CharSequence featureSummary = context.getText(R.string.magnification_feature_summary);
+        return context.getString(R.string.preference_summary_default_combination,
+                featureState, featureSummary);
     }
 }

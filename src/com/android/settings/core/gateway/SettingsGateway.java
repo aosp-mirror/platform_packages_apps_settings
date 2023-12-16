@@ -16,7 +16,6 @@
 
 package com.android.settings.core.gateway;
 
-import com.android.settings.AllInOneTetherSettings;
 import com.android.settings.DisplaySettings;
 import com.android.settings.IccLockSettings;
 import com.android.settings.MainClear;
@@ -101,6 +100,7 @@ import com.android.settings.deviceinfo.firmwareversion.FirmwareVersionSettings;
 import com.android.settings.deviceinfo.legal.ModuleLicensesDashboard;
 import com.android.settings.display.AutoBrightnessSettings;
 import com.android.settings.display.NightDisplaySettings;
+import com.android.settings.display.ScreenTimeoutSettings;
 import com.android.settings.display.SmartAutoRotatePreferenceFragment;
 import com.android.settings.display.darkmode.DarkModeSettingsFragment;
 import com.android.settings.dream.DreamSettings;
@@ -205,7 +205,6 @@ public class SettingsGateway {
             WifiNetworkDetailsFragment.class.getName(),
             ConfigureWifiSettings.class.getName(),
             SavedAccessPointsWifiSettings2.class.getName(),
-            AllInOneTetherSettings.class.getName(),
             TetherSettings.class.getName(),
             SmartAutoRotatePreferenceFragment.class.getName(),
             WifiP2pSettings.class.getName(),
@@ -371,7 +370,8 @@ public class SettingsGateway {
             LongBackgroundTasksDetails.class.getName(),
             RegionalPreferencesEntriesFragment.class.getName(),
             BatteryInfoFragment.class.getName(),
-            UserAspectRatioDetails.class.getName()
+            UserAspectRatioDetails.class.getName(),
+            ScreenTimeoutSettings.class.getName(),
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {

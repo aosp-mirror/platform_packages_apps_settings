@@ -24,10 +24,17 @@
         android:key="audio_streams_scan_qr_code"
         android:title="@string/bluetooth_find_broadcast_button_scan"
         android:icon="@drawable/ic_add_24dp"
-        android:summary="@string/audio_streams_qr_code_summary" />
+        android:summary="@string/audio_streams_qr_code_summary"
+        settings:controller="com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsScanQrCodeController" />
+
+    <Preference
+        android:key="audio_streams_active_device"
+        android:title="Listen with"
+        settings:controller="com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsActiveDeviceController" />
 
     <com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsProgressCategoryPreference
         android:key="audio_streams_nearby_category"
-        android:title="@string/audio_streams_pref_title" />
+        android:title="@string/audio_streams_pref_title"
+        settings:controller="com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsProgressCategoryController" />
 
 </PreferenceScreen>

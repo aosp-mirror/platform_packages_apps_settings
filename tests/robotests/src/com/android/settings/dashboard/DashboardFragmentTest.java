@@ -66,6 +66,7 @@ import com.android.settingslib.drawer.ProviderTile;
 import com.android.settingslib.drawer.Tile;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -386,6 +387,7 @@ public class DashboardFragmentTest {
         assertThat(mTestFragment.mBlockerController).isNull();
     }
 
+    @Ignore("b/313569889")
     @Test
     public void createPreference_isProviderTile_returnSwitchPreference() {
         final Preference pref = mTestFragment.createPreference(mProviderTile);

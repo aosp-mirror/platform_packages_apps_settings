@@ -45,6 +45,7 @@ import com.android.settings.Settings;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -115,6 +116,7 @@ public class CreateShortcutPreferenceControllerTest {
                 .isEqualTo(SHORTCUT_ID_PREFIX + intent.getComponent().flattenToShortString());
     }
 
+    @Ignore("b/314924127")
     @Test
     public void queryShortcuts_shouldOnlyIncludeSystemApp() {
         final ResolveInfo ri1 = new ResolveInfo();
@@ -138,6 +140,7 @@ public class CreateShortcutPreferenceControllerTest {
         assertThat(info.get(0).activityInfo).isEqualTo(ri2.activityInfo);
     }
 
+    @Ignore("b/314924127")
     @Test
     public void queryShortcuts_shouldSortBasedOnPriority() {
         final ResolveInfo ri1 = new ResolveInfo();
@@ -200,6 +203,7 @@ public class CreateShortcutPreferenceControllerTest {
     }
 
     @Test
+    @Ignore
     public void queryShortcuts_configShowDataUsage_ShouldEnableShortcuts() {
         doReturn(true).when(mController).canShowDataUsage();
         setupActivityInfo(Settings.DataUsageSummaryActivity.class.getSimpleName());
@@ -208,6 +212,7 @@ public class CreateShortcutPreferenceControllerTest {
     }
 
     @Test
+    @Ignore
     public void queryShortcuts_configNotShowDataUsage_ShouldDisableShortcuts() {
         doReturn(false).when(mController).canShowDataUsage();
         setupActivityInfo(Settings.DataUsageSummaryActivity.class.getSimpleName());

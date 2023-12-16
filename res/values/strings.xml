@@ -160,10 +160,10 @@
     <string name="bluetooth_ringtone_title">Ringtone and alarms</string>
     <!-- Bluetooth audio output settings. Title of the option managing call audio path. [CHAR LIMIT=30] -->
     <string name="bluetooth_call_title">Audio during calls</string>
-    <!-- Bluetooth audio output settings. Title of the option managing media audio path. [CHAR LIMIT=30] -->
-    <string name="bluetooth_media_title">Media</string>
-    <!-- Bluetooth audio output settings. Title of the option managing system sounds related audio path. [CHAR LIMIT=60] -->
-    <string name="bluetooth_system_sounds_title">Notifications and other system sounds</string>
+    <!-- Bluetooth audio output settings. Title of the option managing media and system sounds related audio path. [CHAR LIMIT=30] -->
+    <string name="bluetooth_media_title">Media and system sounds</string>
+    <!-- Bluetooth audio output settings. Title of the option managing notification audio path. [CHAR LIMIT=60] -->
+    <string name="bluetooth_notification_title">Notifications</string>
     <!-- Description for text in accessibility hearing aids footer. [CHAR LIMIT=NONE] -->
     <string name="bluetooth_audio_routing_footer_summary">By default, audio output is determined by individual apps</string>
 
@@ -881,11 +881,11 @@
     <!-- Title shown for menu item that launches watch unlock settings. [CHAR LIMIT=40] -->
     <string name ="security_settings_activeunlock_preference_title">Watch Unlock</string>
     <!-- Introduction shown in face and fingerprint page to introduce the biometric feature. [CHAR LIMIT=NONE]-->
-    <string name="biometric_settings_intro_with_activeunlock">When you set up Face Unlock and Fingerprint Unlock, your phone will ask for your fingerprint when you wear a mask or are in a dark area.\n\nYou can unlock with your watch when your face or fingerprint isn\u2019t recognized.</string>
+    <string name="biometric_settings_intro_with_activeunlock">When you set up Face Unlock and Fingerprint Unlock, your phone will ask for your fingerprint when you wear a mask or are in a dark area.\n\nWatch Unlock is another convenient way to unlock your phone, for example, when your fingers are wet or face isn\u2019t recognized.</string>
     <!-- Introduction shown in fingerprint page to explain that watch unlock can be used if fingerprint isn't recognized. [CHAR LIMIT=NONE]-->
-    <string name="biometric_settings_intro_with_fingerprint">You can unlock with your watch when your fingerprint isn\u2019t recognized.</string>
+    <string name="biometric_settings_intro_with_fingerprint">Watch Unlock is another convenient way to unlock your phone, for example, when your fingerprint isn\u2019t recognized.</string>
     <!-- Introduction shown in face page to explain that watch unlock can be used if face isn't recognized. [CHAR LIMIT=NONE]-->
-    <string name="biometric_settings_intro_with_face">You can unlock with your watch when your face isn\u2019t recognized.</string>
+    <string name="biometric_settings_intro_with_face">Watch Unlock is another convenient way to unlock your phone, for example, when your face isn\u2019t recognized.</string>
     <string name="biometric_settings_use_fingerprint_or_watch_for"> Use fingerprint or watch to</string>
     <string name="biometric_settings_use_face_or_watch_for"> Use face or watch to</string>
     <string name="biometric_settings_use_face_fingerprint_or_watch_for"> Use face, fingerprint, or watch to</string>
@@ -1253,63 +1253,65 @@
     <!-- Title of the Alert Dialog when no screen lock is set [CHAR LIMIT=30] -->
     <string name="no_device_lock_title">Set a screen lock</string>
     <!-- Summary of the alert when no screen lock is set [CHAR LIMIT=90] -->
-    <string name="no_device_lock_summary">To use Private Space, set a screen lock on this device.</string>
+    <string name="no_device_lock_summary">To use your private space, set a screen lock on this device</string>
     <!-- Action label for dialog when no screen lock is set [CHAR LIMIT=30] -->
     <string name="no_device_lock_action_label">Set screen lock</string>
     <!-- Action label to cancel Alert dialog when no screen lock is set [CHAR LIMIT=30] -->
     <string name="no_device_lock_cancel">Cancel</string>
-    <!-- Action label to cancel Private Space Setup flow [CHAR LIMIT=30] -->
-    <string name="privatespace_cancel_label">Cancel</string>
-    <!-- Label for Private Space setup button to create Private Space [CHAR LIMIT=30] -->
-    <string name="privatespace_setup_button_label">Set up</string>
+    <!-- Action label to cancel private space Setup flow [CHAR LIMIT=30] -->
+    <string name="private_space_cancel_label">Cancel</string>
+    <!-- Label for private space setup button to create private space [CHAR LIMIT=30] -->
+    <string name="private_space_setup_button_label">Set up</string>
     <!-- Title for Private Space setup education screen. [CHAR LIMIT=50] -->
-    <string name="privatespace_setup_title">Set up Private Space</string>
-    <!-- Summary for the Private Space setup education screen. [CHAR LIMIT=NONE] -->
-    <string name="privatespace_hide_apps_summary">Hide private apps in a secure space that only you can access</string>
-    <!-- Text shown in Private Space setup screen which explains how the Private Space works [CHAR LIMIT=50] -->
-    <string name="privatespace_how_title">How it works</string>
-    <!-- Text shown in Private Space setup screen which explains Private Space can be accessed from bottom of all apps list. [CHAR LIMIT=NONE] -->
-    <string name="privatespace_access_bottom_text">You can access Private Space from the bottom of your apps list</string>
-    <!-- Text shown in Private Space setup screen which explains Private Space apps are protected by a lock. [CHAR LIMIT=60] -->
-    <string name="privatespace_protected_lock_text">Apps in Private Space are protected by a lock</string>
-    <!-- Text shown in Private Space setup screen which explains notifications from Private Space apps will not be shown when Private Space is locked. [CHAR LIMIT=NONE] -->
-    <string name="privatespace_hidden_notifications_text">Notifications from apps in Private Space are hidden when it\u2019s locked</string>
-    <!-- Text shown in Private Space setup screen which explains that the permissions granted to Private Space apps will not be shown in settings when Private Space is locked. [CHAR LIMIT=NONE] -->
-    <string name="privatespace_apps_permission_text">Private Space apps won\u2019t appear in permission manager, privacy dashboard, and other settings when Private Space is locked</string>
-    <!-- Text shown at the bottom in Private Space auto advancing  screens. [CHAR LIMIT=60] -->
-    <string name="privatespace_setting_up_text">Setting up Private Space\u2026</string>
-    <!-- Title for Private Space setup in auto advancing screen informing private space is hidden when locked. [CHAR LIMIT=NONE] -->
-    <string name="privatespace_apps_hidden_title">Usage info for Private Space apps is hidden when it\u2019s locked</string>
-    <!-- Title for Private Space setup in auto advancing screen informing private space can be accessed from apps list. [CHAR LIMIT=60] -->
-    <string name="privatespace_access_from_apps_title">Access Private Space from your apps list</string>
-    <!-- Title for Private Space setup in auto advancing screen informing some system apps are already installed in Private Space. [CHAR LIMIT=NONE] -->
-    <string name="privatespace_system_apps_installed_title">Some system apps are already installed in Private Space</string>
-    <!-- Title for Private Space creation error screen. [CHAR LIMIT=60] -->
-    <string name="privatespace_error_screen_title">Couldn\u2019t set up Private Space</string>
-    <!-- Summary for the Private Space creation error screen. [CHAR LIMIT=60] -->
-    <string name="privatespace_error_screen_summary">Try again now, or come back later</string>
+    <string name="private_space_setup_title">Set up a private space</string>
+    <!-- Summary for the private space setup education screen. [CHAR LIMIT=NONE] -->
+    <string name="private_space_hide_apps_summary">Keep private apps in a separate space that you can hide or lock</string>
+    <!-- Text shown in private space setup screen which explains how the private space works [CHAR LIMIT=50] -->
+    <string name="private_space_how_title">How it works</string>
+    <!-- Text shown in private space setup screen which explains private space can be accessed from bottom of all apps list. [CHAR LIMIT=NONE] -->
+    <string name="private_space_access_bottom_text">You can access your private space from the bottom of your apps list</string>
+    <!-- Text shown in private space setup screen which explains private space apps are protected by a lock. [CHAR LIMIT=60] -->
+    <string name="private_space_protected_lock_text">Apps in your private space are protected by a lock</string>
+    <!-- Text shown in private space setup screen which explains notifications from private space apps will not be shown when private space is locked. [CHAR LIMIT=NONE] -->
+    <string name="private_space_hidden_notifications_text">Notifications from apps in your private space are hidden when it\u2019s locked</string>
+    <!-- This is info text to help explain in private space setup screen that the permissions granted to private space apps will not be shown in settings when private space is locked. [CHAR LIMIT=NONE] -->
+    <string name="private_space_apps_permission_text">Apps in your private space won\'t appear in permission manager, privacy dashboard, and other settings when your private space is locked.\n\nYour private space can\'t be moved to a new device. You\'ll need to set up another private space if you want to use it on another device.\n\nAnyone that connects your device to a computer or installs harmful apps on your device may be able to access your private space.</string>
+    <!-- Text shown at the bottom in private space auto advancing  screens. [CHAR LIMIT=60] -->
+    <string name="private_space_setting_up_text">Setting up private space\u2026</string>
+    <!-- Title for private space setup in auto advancing screen informing private space notifications are hidden when locked. [CHAR LIMIT=NONE] -->
+    <string name="private_space_notifications_hidden_title">Notifications from apps in private space are hidden when it\u2019s locked</string>
+    <!-- Title for private space setup in auto advancing screen informing photos/files from private space can be shared when unlocked. [CHAR LIMIT=NONE] -->
+    <string name="private_space_share_photos_title">Unlock your space to share photos or files from private space apps</string>
+    <!-- Title for private space setup in auto advancing screen informing some system apps are already installed in private space. [CHAR LIMIT=NONE] -->
+    <string name="private_space_apps_installed_title">Some apps are already installed in your private space</string>
+    <!-- Title for private space creation error screen. [CHAR LIMIT=60] -->
+    <string name="private_space_error_screen_title">Couldn\u2019t set up private space</string>
     <!-- Label for button to retry creating private space again on creation error. [CHAR LIMIT=30] -->
-    <string name="privatespace_tryagain_label">Try Again</string>
-    <!-- Title for Private Space lock setup screen. [CHAR LIMIT=50] -->
-    <string name="privatespace_lockscreen_title">Use screen lock to unlock?</string>
-    <!-- Summary for the Private Space lock setup screen. [CHAR LIMIT=NONE] -->
-    <string name="privatespace_lockscreen_summary">You can unlock Private Space the same way you unlock your device, or choose a different lock</string>
-    <!-- Action label to use existing device lock for Private Space. [CHAR LIMIT=50] -->
-    <string name="privatespace_use_screenlock_label">Use screen lock</string>
-    <!-- Label for Private Space lock setup button to choose a new lock. [CHAR LIMIT=50] -->
-    <string name="privatespace_set_lock_label">Choose new lock</string>
-    <!-- Title for Private Space setup success screen. [CHAR LIMIT=30] -->
-    <string name="privatespace_success_title">All set!</string>
-    <!-- Summary for the Private Space setup success screen. [CHAR LIMIT=NONE] -->
-    <string name="privatespace_access_text">You can access Private Space from your apps list</string>
-    <!-- Label for Private Space done button to show a toast, finish setup and launch All apps [CHAR LIMIT=30] -->
-    <string name="privatespace_done_label">Done</string>
+    <string name="private_space_tryagain_label">Try Again</string>
+    <!-- Title for private space lock setup screen. [CHAR LIMIT=90] -->
+    <string name="private_space_lockscreen_title">Use screen lock to unlock private space?</string>
+    <!-- Summary for the private space lock setup screen. [CHAR LIMIT=NONE] -->
+    <string name="private_space_lockscreen_summary">You can unlock your private space the same way you unlock your device, or choose a different lock</string>
+    <!-- Action label to use existing device lock for private space. [CHAR LIMIT=50] -->
+    <string name="private_space_use_screenlock_label">Use screen lock</string>
+    <!-- Label for private space lock setup button to choose a new lock. [CHAR LIMIT=50] -->
+    <string name="private_space_set_lock_label">Choose new lock</string>
+    <!-- Title for private space setup success screen. [CHAR LIMIT=30] -->
+    <string name="private_space_success_title">All set!</string>
+    <!-- Summary for the private space setup success screen. [CHAR LIMIT=NONE] -->
+    <string name="private_space_access_text">To access your private space, go to your apps list then scroll down</string>
+    <!-- Label for private space done button to show a toast, finish setup and launch All apps [CHAR LIMIT=30] -->
+    <string name="private_space_done_label">Done</string>
     <!-- Toast to show on private space setup completion informing user to scroll down All apps to access private space. [CHAR LIMIT=60] -->
-    <string name="scrolldown_to_access">Scroll down to access Private Space</string>
-    <!-- Title for Private Space account login error screen. [CHAR LIMIT=60] -->
-    <string name="privatespace_retry_signin_title">Sign in to set up Private Space</string>
-    <!-- Summary for the Private Space account login error screen. [CHAR LIMIT=NONE] -->
-    <string name="privatespace_retry_summary">You need to sign in to an account to set up Private Space</string>
+    <string name="private_space_scrolldown_to_access">Scroll down to find private space</string>
+    <!-- Title for private space account login error screen. [CHAR LIMIT=60] -->
+    <string name="private_space_retry_signin_title">Sign in to set up a private space</string>
+    <!-- Summary for the private space account login error screen. [CHAR LIMIT=NONE] -->
+    <string name="private_space_retry_summary">You need to sign in to an account to set up a private space</string>
+    <!-- private space lock setup screen title. This title is asking the user to choose a type of screen lock (such as a pattern, PIN, or password) that they need to enter to unlock private space. [CHAR LIMIT=60] -->
+    <string name="private_space_lock_setup_title">Choose a lock for your private space</string>
+    <!-- private space lock setup screen description [CHAR LIMIT=NONE] -->
+    <string name="private_space_lock_setup_description">You can unlock your private space using your fingerprint. For security, this option requires a backup lock.</string>
 
     <!-- TODO(b/309950257): Remove below strings once QSTIle fulfillment is complete. -->
     <!-- Header in hide Private Space settings page to unhide Private Space. [CHAR LIMIT=90] -->
@@ -1322,7 +1324,6 @@
     <string name="privatespace_turnoff_hide">Turn off \‘Hide Private Space when locked\’ toggle</string>
     <!-- Note in hide Private Space settings page to inform that this is a development feature. [CHAR LIMIT=NONE] -->
     <string name="privatespace_development_note">Note to Googlers: The development of this feature is still in progress</string>
-
 
     <!-- Text shown when "Add fingerprint" button is disabled -->
     <string name="fingerprint_add_max">You can add up to <xliff:g id="count" example="5">%d</xliff:g> fingerprints</string>
@@ -2167,12 +2168,8 @@
 
     <!-- Button label to connect to a Wi-Fi network -->
     <string name="wifi_connect">Connect</string>
-    <!-- Turned on notification for Wi-Fi [CHAR LIMIT=40] -->
-    <string name="wifi_turned_on_message">Wi\u2011Fi turned on</string>
     <!-- A notification for connected to a Wi-Fi network [CHAR LIMIT=NONE] -->
     <string name="wifi_connected_to_message">Connected to <xliff:g id="network_name" example="MyNetwork">%1$s</xliff:g></string>
-    <!-- A notification for connecting to a Wi-Fi network [CHAR LIMIT=NONE] -->
-    <string name="wifi_connecting_to_message">Connecting to <xliff:g id="network_name" example="MyNetwork">%1$s</xliff:g></string>
     <!-- Button label to connecting progress to a Wi-Fi network [CHAR LIMIT=20] -->
     <string name="wifi_connecting">Connecting\u2026</string>
     <!-- Failured notification for connect -->
@@ -2312,8 +2309,6 @@
     <string name="wifi_hotspot_name_title">Hotspot name</string>
     <!-- Label for Wifi hotspot password. -->
     <string name="wifi_hotspot_password_title">Hotspot password</string>
-    <!-- Label for Wifi hotspot AP Band. -->
-    <string name="wifi_hotspot_ap_band_title">AP Band</string>
 
     <!-- Title for the toggle to turn off hotspot automatically [CHAR LIMIT=NONE]-->
     <string name="wifi_hotspot_auto_off_title">Turn off hotspot automatically</string>
@@ -2656,6 +2651,8 @@
     <string name="adaptive_sleep_contextual_slice_title">Turn on screen attention</string>
     <!-- Description about the contextual adaptive sleep card [CHAR LIMIT=NONE]-->
     <string name="adaptive_sleep_contextual_slice_summary">Keep screen on when looking at it</string>
+    <!-- Description about the power consumption implication in screen timeout footer [CHAR LIMIT=NONE]-->
+    <string name="power_consumption_footer_summary">Longer screen timeout will use more battery.</string>
     <!-- auto_rotate settings screen, title about the camera privacy lock enabled [CHAR LIMIT=NONE]-->
     <string name="auto_rotate_camera_lock_title">Camera is locked</string>
     <!-- Description feature's privacy sensitive details to make sure users understand what feature users, what it saves/sends etc [CHAR LIMIT=NONE]-->
@@ -2950,9 +2947,9 @@
     <string name="imei_multi_sim_primary">IMEI (sim slot <xliff:g id="imei_slot_id_primary">%1$d</xliff:g>) (primary)</string>
     <!-- About phone screen, summary of the MAC address [CHAR LIMIT=80] -->
     <string name="view_saved_network">To view, choose saved network</string>
-    <!-- Do not translate. About phone, status item title -->
+    <!-- About phone, status item title. This translation is for specific language only. Like: fr-CA -->
     <string name="status_imei">IMEI</string>
-    <!-- Do not translate. About phone, status item title -->
+    <!-- About phone, status item title. This translation is for specific language only. Like: fr-CA -->
     <string name="status_imei_sv">IMEI SV</string>
     <!-- Do not translate. About phone, status item title -->
     <string name="status_iccid">ICCID</string>
@@ -3271,6 +3268,8 @@
     <string name="error_mnc_not23">MNC field must be 2 or 3 digits.</string>
     <!-- APN error dialog messages: -->
     <string name="error_adding_apn_type">Carrier does not allow adding APNs of type %s.</string>
+    <!-- APN error messages: -->
+    <string name="error_mmsc_valid">MMSC field must be valid.</string>
     <!-- The message of dialog indicated restoring default APN settings in progress -->
     <string name="restore_default_apn">Restoring default APN settings.</string>
     <!-- APNs screen menu option to reset default APN settings -->
@@ -3411,29 +3410,8 @@
     <!-- Tethering preference summary when hotspot and tethering are off [CHAR LIMIT=NONE]-->
     <string name="tether_preference_summary_off">Off</string>
 
-    <!-- Tethering interface options [CHAR LIMIT=NONE]-->
-    <string name="tethering_interface_options">Tethering</string>
-
-    <!-- Disable Wifi Hotspot option-->
-    <!-- Don't use Wi-Fi hotspot title [CHAR LIMIT=NONE]-->
-    <string name="disable_wifi_hotspot_title">Don\u2019t use Wi\u2011Fi hotspot</string>
-    <!-- Don't use Wi-Fi hotspot summary when USB tethering is chosen [CHAR LIMIT=NONE]-->
-    <string name="disable_wifi_hotspot_when_usb_on">Only share internet via USB</string>
-    <!-- Don't use Wi-Fi hotspot summary when Bluetooth tethering is chosen [CHAR LIMIT=NONE]-->
-    <string name="disable_wifi_hotspot_when_bluetooth_on">Only share internet via Bluetooth</string>
-    <!-- Don't use Wi-Fi hotspot summary when Ethernet tethering is chosen [CHAR LIMIT=NONE]-->
-    <string name="disable_wifi_hotspot_when_ethernet_on">Only share internet via Ethernet</string>
-    <!-- Don't use Wi-Fi hotspot summary when USB tethering and Bluetooth tethering are chosen [CHAR LIMIT=NONE]-->
-    <string name="disable_wifi_hotspot_when_usb_and_bluetooth_on">Only share internet via USB and Bluetooth</string>
-    <!-- Don't use Wi-Fi hotspot summary when USB tethering and Ethernet tethering are chosen [CHAR LIMIT=NONE]-->
-    <string name="disable_wifi_hotspot_when_usb_and_ethernet_on">Only share internet via USB and Ethernet</string>
-    <!-- Don't use Wi-Fi hotspot summary when Bluetooth tethering and Ethernet tethering are chosen [CHAR LIMIT=NONE]-->
-    <string name="disable_wifi_hotspot_when_bluetooth_and_ethernet_on">Only share internet via Bluetooth and Ethernet</string>
-    <!-- Don't use Wi-Fi hotspot summary when USB, Bluetooth and Ethernet tethering are chosen [CHAR LIMIT=NONE]-->
-    <string name="disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on">Only share internet via USB, Bluetooth and Ethernet</string>
-
     <!-- USB Tethering options -->
-    <string name="usb_title">USB</string>
+    <!-- Label for USB tethering switch [CHAR LIMIT=NONE]-->
     <string name="usb_tethering_button_text">USB tethering</string>
 
     <!-- Bluetooth Tethering settings-->
@@ -3455,9 +3433,6 @@
     <!-- Wireless controls, item title to go into the network settings -->
     <string name="network_settings_title">Mobile network</string>
 
-    <!-- Mobile plan [CHAR LIMIT=35]-->
-    <string name="manage_mobile_plan_title" translatable="true">Mobile plan</string>
-
     <!-- SMS Application [CHAR LIMIT=35]-->
     <string name="sms_application_title" translatable="true">SMS app</string>
     <string name="sms_change_default_dialog_title" translatable="true">Change SMS app?</string>
@@ -3470,18 +3445,6 @@
     <string name="network_scorer_change_active_dialog_text">Use <xliff:g id="new_app">%1$s</xliff:g> instead of <xliff:g id="current_app">%2$s</xliff:g> to manage your network connections?</string>
     <!-- Wifi Assistant request message.  This message asks the user if it is okay for an app to become the Wifi Assistant. [CHAR LIMIT=100] -->
     <string name="network_scorer_change_active_no_previous_dialog_text">Use <xliff:g id="new_app">%s</xliff:g> to manage your network connections?</string>
-
-    <!-- The SIM operator is not known [CHAR_ LIMIT=50]-->
-    <string name="mobile_unknown_sim_operator" translatable="true">Unknown SIM operator</string>
-
-    <!-- There is no mobile provisiong website for the operator which is the firat parameter [CHAR_ LIMIT=50]-->
-    <string name="mobile_no_provisioning_url"><xliff:g id="operator">%1$s</xliff:g> has no known provisioning website</string>
-
-    <!-- Ask user to insert a SIM card [CHAR_ LIMIT=50]-->
-    <string name="mobile_insert_sim_card" translatable="true">Please insert SIM card and restart</string>
-
-    <!-- Ask user to connect to the internet [CHAR_ LIMIT=50]-->
-    <string name="mobile_connect_to_internet" translatable="true">Please connect to the internet</string>
 
     <!-- Location settings screen, sub category for recent location requests [CHAR LIMIT=42] -->
     <string name="location_category_recent_location_requests">Recent location requests</string>
@@ -3933,6 +3896,10 @@
     <string name="controls_label">Controls</string>
     <!-- Manage applications, text label for button to kill / force stop an application -->
     <string name="force_stop">Force stop</string>
+    <!-- Manage applications, text label for button to archive an application. Archiving means uninstalling the app without deleting user's personal data and replacing the app with a stub app with minimum size. So, the user can unarchive the app later and not lose any personal data. -->
+    <string name="archive">Archive</string>
+    <!-- Manage applications, text label for button to restore an application. Restoring means installing the archived app. -->
+    <string name="restore">Restore</string>
     <!-- Manage applications, individual application info screen,label under Storage heading.  The total storage space taken up by this app. -->
     <string name="total_size_label">Total</string>
     <!-- Manage applications, individual application info screen, label under Storage heading. The amount of space taken up by the application itself (for example, the java compield files and things like that) -->
@@ -4042,6 +4009,17 @@
     <string name="version_text">version <xliff:g id="version_num">%1$s</xliff:g></string>
     <!-- Manage applications, text for Move button -->
     <string name="move_app">Move</string>
+
+    <!-- Toast message when archiving an app failed. -->
+    <string name="archiving_failed">Archiving failed</string>
+    <!-- Toast message when archiving an app succeeded. -->
+    <string name="archiving_succeeded">Archived <xliff:g id="package_label" example="Translate">%1$s</xliff:g></string>
+    <!-- Toast message when restoring an app failed. -->
+    <string name="restoring_failed">Restoring failed</string>
+    <!-- Toast message when restoring an app succeeded. -->
+    <string name="restoring_succeeded">Restored <xliff:g id="package_label" example="Translate">%1$s</xliff:g></string>
+    <!-- Toast message when restoring an app has started. -->
+    <string name="restoring_in_progress">Restoring <xliff:g id="package_label" example="Translate">%1$s</xliff:g></string>
 
     <!-- Text of pop up message if the request for a "migrate primary storage" operation
          (see storage_menu_migrate) is denied as another is already in progress. [CHAR LIMIT=75] -->
@@ -4649,7 +4627,7 @@
     <string name="accessibility_screen_magnification_navbar_short_summary">Tap a button to zoom</string>
     <!-- Intro for the accessibility preference screen to enable screen magnification gestures. [CHAR LIMIT=none] -->
     <string name="accessibility_screen_magnification_intro_text">Quickly zoom in on the screen to make content larger</string>
-    <!-- Summary for the accessibility preference screen to enable screen magnification gestures. [CHAR LIMIT=none] -->
+    <!-- Instructions on the accessibility preference screen teaching the user how to enable screen magnification gestures. [CHAR LIMIT=none] -->
     <string name="accessibility_screen_magnification_summary">
         <![CDATA[
         <b>To zoom in:</b><br/>
@@ -4676,8 +4654,8 @@
     <string name="accessibility_tutorial_dialog_title_volume">Hold volume keys to open</string>
     <!-- Title for the accessibility tutorial dialog in accessibility service with triple tap. [CHAR LIMIT=100] -->
     <string name="accessibility_tutorial_dialog_title_triple">Triple tap screen to open</string>
-    <!-- Title for the accessibility tutorial dialog in accessibility service with two finger triple tap. [CHAR LIMIT=100] -->
-    <string name="accessibility_tutorial_dialog_title_two_finger_triple">Two finger triple tap screen to open</string>
+    <!-- Title for the accessibility tutorial dialog in accessibility service with two finger double tap. [CHAR LIMIT=100] -->
+    <string name="accessibility_tutorial_dialog_title_two_finger_double">Two finger double tap screen to open</string>
     <!-- Title for the accessibility tutorial dialog in accessibility service with gesture. [CHAR LIMIT=50] -->
     <string name="accessibility_tutorial_dialog_title_gesture">Use gesture to open</string>
     <!-- Title for the accessibility tutorial dialog in gesture navigation settings. [CHAR LIMIT=50] -->
@@ -4690,8 +4668,8 @@
     <string name="accessibility_tutorial_dialog_message_volume">To use this feature, press &amp; hold both volume keys.</string>
     <!-- Instruction for the accessibility tutorial dialog in accessibility service with triple tap. [CHAR LIMIT=100] -->
     <string name="accessibility_tutorial_dialog_message_triple">To start and stop magnification, triple-tap anywhere on your screen.</string>
-    <!-- Instruction for the accessibility tutorial dialog in accessibility service with two finger triple tap. [CHAR LIMIT=100] -->
-    <string name="accessibility_tutorial_dialog_message_two_finger_triple">To start and stop magnification, triple-tap anywhere on your screen with two fingers.</string>
+    <!-- Instruction for the accessibility tutorial dialog in accessibility service with two finger double tap. [CHAR LIMIT=100] -->
+    <string name="accessibility_tutorial_dialog_message_two_finger_triple">To start and stop magnification, double-tap anywhere on your screen with two fingers.</string>
     <!-- Message for the accessibility tutorial dialog when user enables an accessibility service while using gesture navigation and touch exploration is not enabled. [CHAR LIMIT=NONE] -->
     <string name="accessibility_tutorial_dialog_message_gesture">To use this feature, swipe up from the bottom of the screen with 2 fingers.\n\nTo switch between features, swipe up with 2 fingers and hold.</string>
     <!-- Message for the accessibility tutorial dialog when user enables an accessibility service while using gesture navigation and touch exploration is enabled. [CHAR LIMIT=NONE] -->
@@ -4734,12 +4712,12 @@
     <string name="accessibility_shortcut_hardware_keyword">hold volume keys</string>
     <!-- Summary for hardware shortcut in accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_dialog_summary_hardware">Press &amp; hold both volume keys</string>
-    <!-- Title for two finger triple tap shortcut in accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_shortcut_edit_dialog_title_two_finger_triple_tap">Two-finger triple-tap screen</string>
+    <!-- Title for two finger double tap shortcut in accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_shortcut_edit_dialog_title_two_finger_double_tap">Two-finger double-tap screen</string>
     <!-- Part of list to compose user's accessibility shortcut list. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_shortcut_two_finger_triple_tap_keyword">two-finger triple-tap screen</string>
-    <!-- Summary for two finger triple tap shortcut in accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_shortcut_edit_dialog_summary_two_finger_triple_tap">Quickly tap screen {0,number,integer} times with two fingers</string>
+    <string name="accessibility_shortcut_two_finger_double_tap_keyword">two-finger double-tap screen</string>
+    <!-- Summary for two finger double tap shortcut in accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_shortcut_edit_dialog_summary_two_finger_double_tap">Quickly tap screen {0,number,integer} times with two fingers</string>
     <!-- Title for triple tap shortcut in accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap">Triple-tap screen</string>
     <!-- Part of list to compose user's accessibility shortcut list. [CHAR LIMIT=NONE] -->
@@ -4826,6 +4804,10 @@
     <string name="accessibility_toggle_large_pointer_icon_title">Large mouse pointer</string>
     <!-- Summary for the accessibility preference for enabling/disabling large icons for mouse/trackpad pointers. [CHAR LIMIT=60] -->
     <string name="accessibility_toggle_large_pointer_icon_summary">Make the mouse pointer more noticeable</string>
+    <!-- Title for the accessibility preference for forcing all apps to use dark theme. [CHAR LIMIT=35] -->
+    <string name="accessibility_force_invert_title">Make all apps dark</string>
+    <!-- Summary for the accessibility preference for forcing all apps to use dark theme. [CHAR LIMIT=100] -->
+    <string name="accessibility_force_invert_summary">Applies to apps without their own dark theme. Some apps may have display issues, like inverted colors.</string>
     <!-- Title for the accessibility preference for disabling animations. [CHAR LIMIT=35] -->
     <string name="accessibility_disable_animations">Remove animations</string>
     <!-- Summary for the accessibility preference for disabling animations. [CHAR LIMIT=60] -->
@@ -6111,10 +6093,6 @@
     <!-- Backup and reset Settings screen --><skip />
     <!-- Backup and reset settings menu and activity title -->
     <string name="privacy_settings_title">Backup</string>
-    <!-- Summary for the Backup settings when it is turned on. -->
-    <string name="backup_summary_state_on">On</string>
-    <!-- Summary for the Backup settings when it is turned off. -->
-    <string name="backup_summary_state_off">Off</string>
     <!-- Backup section title -->
     <string name="backup_section_title">Backup &amp; restore</string>
     <!-- Personal data section title -->
@@ -6537,6 +6515,11 @@
 
     <!-- Dialog subtitle warning for a VPN app that has an insecure type. [CHAR LIMIT=100]  -->
     <string name="vpn_insecure_dialog_subtitle">Not secure. Update to an IKEv2 VPN</string>
+    <!-- Dialog message when user attempted to start a VPN type that is no longer supported. It is
+         very unlikely, but not impossible, that a user has a very old VPN configuration that the
+         newer device no longer supports. This message is displayed when the user tries to start
+         this unsupported VPN. [CHAR LIMIT=NONE]  -->
+    <string name="vpn_start_unsupported">Failed to start unsupported VPN.</string>
 
     <!-- Summary describing the always-on VPN feature. [CHAR LIMIT=NONE] -->
     <string name="vpn_lockdown_summary">Select a VPN profile to always remain connected to. Network traffic will only be allowed when connected to this VPN.</string>
@@ -9132,6 +9115,12 @@
     <!-- Summary of the switch preference that controls whether the system will pause app activity when the app has not been used for months [CHAR LIMIT=NONE]-->
     <string name="unused_apps_switch_summary">Remove permissions, delete temporary files, and stop notifications</string>
 
+    <!-- Label of a switch preference that controls whether the system will pause app activity when the app has not been used for a while [CHAR LIMIT=40]-->
+    <string name="unused_apps_switch_v2">Manage app if unused</string>
+
+    <!-- Summary of the switch preference that controls whether the system will pause app activity when the app has not been used for a while [CHAR LIMIT=NONE]-->
+    <string name="unused_apps_switch_summary_v2">Remove permissions, delete temporary files, stop notifications, and archive the app</string>
+
     <!-- Label for showing all apps in list [CHAR LIMIT=30] -->
     <string name="filter_all_apps">All apps</string>
     <!-- Label for showing enabled apps in list [CHAR LIMIT=30] -->
@@ -9510,6 +9499,14 @@
     <string name="permit_draw_overlay">Allow display over other apps</string>
     <!-- Description of allowing overlay setting [CHAR LIMIT=NONE] -->
     <string name="allow_overlay_description">Allow this app to display on top of other apps you\u2019re using. This app will be able to see where you tap or change what\u2019s displayed on the screen.</string>
+
+    <!-- Change Media Output settings -->
+    <!-- Title for Change Media Output screen [CHAR LIMIT=30] -->
+    <string name="media_routing_control_title">Change media output</string>
+    <!-- Label for setting which controls whether app can change media outputs for other apps [CHAR LIMIT=45] -->
+    <string name="allow_media_routing_control">Allow app to switch media output</string>
+    <!-- Description for allowing change media output setting [CHAR LIMIT=NONE] -->
+    <string name="allow_media_routing_description">Allow this app to choose which connected device plays audio or video from other apps. If allowed, this app can access a list of available devices such as headphones and speakers and choose which output device is used to stream or cast audio or video.</string>
 
     <!-- Manager External Storage settings title [CHAR LIMIT=40] -->
     <string name="manage_external_storage_title">All files access</string>
@@ -10961,6 +10958,9 @@
 
     <!-- Title with application label for media output settings. [CHAR LIMIT=NONE] -->
     <string name="media_output_label_title">Play <xliff:g id="label" example="Music Player">%s</xliff:g> on</string>
+
+    <!-- Title for media output settings without media is playing -->
+    <string name="media_output_title_without_playing">Audio will play on</string>
 
     <!-- Summary for media output default settings. (this device) [CHAR LIMIT=30] -->
     <string name="media_output_default_summary">This device</string>
@@ -12594,8 +12594,8 @@
     <string name="color_inversion_state_off">Off</string>
     <!-- The color inversion feature summary displayed as a subtext as an item in a list. -->
     <string name="color_inversion_feature_summary">Turns light screens dark and dark screens light</string>
-    <!-- Short summary explains what magnification feature is. -->
-    <string name="magnification_feature_summary">Quickly zoom in on the screen to make content larger</string>
+    <!-- Summary for the accessibility preference screen to enable screen magnification. [CHAR LIMIT=none] -->
+    <string name="magnification_feature_summary">Zoom in on the screen</string>
     <!-- Summary of the AutoClick feature disabled state. -->
     <string name="autoclick_disabled">Off</string>
     <!-- Summary of the show captions preference disabled state. -->

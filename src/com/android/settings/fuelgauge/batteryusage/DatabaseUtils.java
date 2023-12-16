@@ -159,12 +159,6 @@ public final class DatabaseUtils {
 
     private DatabaseUtils() {}
 
-    /** Returns true if current user is a work profile user. */
-    public static boolean isWorkProfile(Context context) {
-        final UserManager userManager = context.getSystemService(UserManager.class);
-        return userManager.isManagedProfile();
-    }
-
     /** Returns the latest timestamp current user data in app usage event table. */
     public static long getAppUsageStartTimestampOfUser(
             Context context, final long userId, final long earliestTimestamp) {
@@ -502,7 +496,7 @@ public final class DatabaseUtils {
 
     /** Returns the context with profile parent identity when current user is work profile. */
     public static Context getParentContext(Context context) {
-        if (isWorkProfile(context)) {
+        if (com.android.settingslib.fuelgauge.BatteryUtils.isWorkProfile(context)) {
             try {
                 return context.createPackageContextAsUser(
                         /* packageName= */ context.getPackageName(),
@@ -666,36 +660,39 @@ public final class DatabaseUtils {
         // Creates the ContentValues list to insert them into provider.
         final List<ContentValues> valuesList = new ArrayList<>();
         if (batteryEntryList != null) {
-            batteryEntryList.stream()
-                    .filter(
-                            entry -> {
-                                final long foregroundMs = entry.getTimeInForegroundMs();
-                                final long backgroundMs = entry.getTimeInBackgroundMs();
-                                if (entry.getConsumedPower() == 0
-                                        && (foregroundMs != 0 || backgroundMs != 0)) {
-                                    Log.w(
-                                            TAG,
-                                            String.format(
-                                                    "no consumed power but has running time for %s"
-                                                        + " time=%d|%d",
-                                                    entry.getLabel(), foregroundMs, backgroundMs));
-                                }
-                                return entry.getConsumedPower() != 0
-                                        || foregroundMs != 0
-                                        || backgroundMs != 0;
-                            })
-                    .forEach(
-                            entry ->
-                                    valuesList.add(
-                                            ConvertUtils.convertBatteryEntryToContentValues(
-                                                    entry,
-                                                    batteryUsageStats,
-                                                    batteryLevel,
-                                                    batteryStatus,
-                                                    batteryHealth,
-                                                    snapshotBootTimestamp,
-                                                    snapshotTimestamp,
-                                                    isFullChargeStart)));
+            for (BatteryEntry entry : batteryEntryList) {
+                final long foregroundMs = entry.getTimeInForegroundMs();
+                final long foregroundServiceMs = entry.getTimeInForegroundServiceMs();
+                final long backgroundMs = entry.getTimeInBackgroundMs();
+                if (entry.getConsumedPower() == 0
+                        && (foregroundMs != 0 || foregroundServiceMs != 0 || backgroundMs != 0)) {
+                    Log.w(
+                            TAG,
+                            String.format(
+                                    "no consumed power but has running time for %s"
+                                            + " time=%d|%d|%d",
+                                    entry.getLabel(),
+                                    foregroundMs,
+                                    foregroundServiceMs,
+                                    backgroundMs));
+                }
+                if (entry.getConsumedPower() == 0
+                        && foregroundMs == 0
+                        && foregroundServiceMs == 0
+                        && backgroundMs == 0) {
+                    continue;
+                }
+                valuesList.add(
+                        ConvertUtils.convertBatteryEntryToContentValues(
+                                entry,
+                                batteryUsageStats,
+                                batteryLevel,
+                                batteryStatus,
+                                batteryHealth,
+                                snapshotBootTimestamp,
+                                snapshotTimestamp,
+                                isFullChargeStart));
+            }
         }
 
         int size = 1;

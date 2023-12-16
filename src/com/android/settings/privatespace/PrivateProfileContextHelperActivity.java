@@ -20,6 +20,8 @@ import static android.app.admin.DevicePolicyManager.ACTION_SET_NEW_PASSWORD;
 import static android.app.admin.DevicePolicyManager.EXTRA_PASSWORD_COMPLEXITY;
 import static android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_LOW;
 
+import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_CHOOSE_LOCK_SCREEN_DESCRIPTION;
+import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_CHOOSE_LOCK_SCREEN_TITLE;
 import static com.android.settings.privatespace.PrivateSpaceSetupActivity.ACCOUNT_LOGIN_ACTION;
 import static com.android.settings.privatespace.PrivateSpaceSetupActivity.EXTRA_ACTION_TYPE;
 import static com.android.settings.privatespace.PrivateSpaceSetupActivity.SET_LOCK_ACTION;
@@ -34,6 +36,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
+import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.overlay.FeatureFactory;
 
@@ -52,6 +55,9 @@ public class PrivateProfileContextHelperActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (!android.os.Flags.allowPrivateProfile()) {
+            return;
+        }
         setTheme(SetupWizardUtils.getTheme(this, getIntent()));
         ThemeHelper.trySetDynamicColor(this);
         super.onCreate(savedInstanceState);
@@ -74,6 +80,11 @@ public class PrivateProfileContextHelperActivity extends FragmentActivity {
     private void createPrivateSpaceLock() {
         final Intent intent = new Intent(ACTION_SET_NEW_PASSWORD);
         intent.putExtra(EXTRA_PASSWORD_COMPLEXITY, PASSWORD_COMPLEXITY_LOW);
+        intent.putExtra(
+                EXTRA_KEY_CHOOSE_LOCK_SCREEN_TITLE, R.string.private_space_lock_setup_title);
+        intent.putExtra(
+                EXTRA_KEY_CHOOSE_LOCK_SCREEN_DESCRIPTION,
+                R.string.private_space_lock_setup_description);
         mVerifyDeviceLock.launch(intent);
     }
 

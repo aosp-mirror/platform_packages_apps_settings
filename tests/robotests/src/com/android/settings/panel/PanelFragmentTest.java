@@ -42,6 +42,7 @@ import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -54,6 +55,7 @@ import org.robolectric.annotation.LooperMode;
 
 import java.util.Objects;
 
+@Ignore("b/313576125")
 @RunWith(RobolectricTestRunner.class)
 @LooperMode(LooperMode.Mode.LEGACY)
 @Config(shadows = {

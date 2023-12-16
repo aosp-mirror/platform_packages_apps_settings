@@ -22,8 +22,10 @@ import android.content.pm.ApplicationInfo
 import android.content.pm.FakeFeatureFlagsImpl
 import android.content.pm.Flags
 import android.content.pm.PackageInfo
+import android.content.pm.PackageInstaller
 import android.content.pm.PackageManager
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
@@ -62,6 +64,9 @@ class AppButtonsTest {
     @Mock
     private lateinit var packageManager: PackageManager
 
+    @Mock
+    private lateinit var packageInstaller: PackageInstaller
+
     private val featureFlags = FakeFeatureFlagsImpl()
 
     @Before
@@ -74,6 +79,7 @@ class AppButtonsTest {
         whenever(packageInfoPresenter.context).thenReturn(context)
         whenever(packageInfoPresenter.packageName).thenReturn(PACKAGE_NAME)
         whenever(packageInfoPresenter.userPackageManager).thenReturn(packageManager)
+        whenever(packageManager.packageInstaller).thenReturn(packageInstaller)
         whenever(packageManager.getPackageInfo(PACKAGE_NAME, 0)).thenReturn(PACKAGE_INFO)
         whenever(AppUtils.isMainlineModule(packageManager, PACKAGE_NAME)).thenReturn(false)
         featureFlags.setFlag(Flags.FLAG_ARCHIVING, true)
@@ -118,8 +124,56 @@ class AppButtonsTest {
         composeTestRule.onNodeWithText(context.getString(R.string.launch_instant_app)).assertIsNotDisplayed()
     }
 
-    private fun setContent() {
-        whenever(packageInfoPresenter.flow).thenReturn(MutableStateFlow(PACKAGE_INFO))
+    @Test
+    fun uninstallButton_enabled_whenAppIsArchived() {
+        whenever(packageManager.getLaunchIntentForPackage(PACKAGE_NAME)).thenReturn(Intent())
+        featureFlags.setFlag(Flags.FLAG_ARCHIVING, true)
+        val packageInfo = PackageInfo().apply {
+            applicationInfo = ApplicationInfo().apply {
+                packageName = PACKAGE_NAME
+                isArchived = true
+            }
+            packageName = PACKAGE_NAME
+        }
+        setContent(packageInfo)
+
+        composeTestRule.onNodeWithText(context.getString(R.string.uninstall_text)).assertIsEnabled()
+    }
+
+    @Test
+    fun archiveButton_displayed_whenAppIsNotArchived() {
+        featureFlags.setFlag(Flags.FLAG_ARCHIVING, true)
+        val packageInfo = PackageInfo().apply {
+            applicationInfo = ApplicationInfo().apply {
+                packageName = PACKAGE_NAME
+                isArchived = false
+            }
+            packageName = PACKAGE_NAME
+        }
+        setContent(packageInfo)
+
+        composeTestRule.onNodeWithText(context.getString(R.string.archive)).assertIsDisplayed()
+        composeTestRule.onNodeWithText(context.getString(R.string.restore)).assertIsNotDisplayed()
+    }
+
+    @Test
+    fun restoreButton_displayed_whenAppIsArchived() {
+        featureFlags.setFlag(Flags.FLAG_ARCHIVING, true)
+        val packageInfo = PackageInfo().apply {
+            applicationInfo = ApplicationInfo().apply {
+                packageName = PACKAGE_NAME
+                isArchived = true
+            }
+            packageName = PACKAGE_NAME
+        }
+        setContent(packageInfo)
+
+        composeTestRule.onNodeWithText(context.getString(R.string.restore)).assertIsDisplayed()
+        composeTestRule.onNodeWithText(context.getString(R.string.archive)).assertIsNotDisplayed()
+    }
+
+    private fun setContent(packageInfo: PackageInfo = PACKAGE_INFO) {
+        whenever(packageInfoPresenter.flow).thenReturn(MutableStateFlow(packageInfo))
         composeTestRule.setContent {
             AppButtons(packageInfoPresenter, featureFlags)
         }
