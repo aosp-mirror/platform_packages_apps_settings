@@ -24,11 +24,13 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -239,6 +241,42 @@ public class SettingsHomepageActivityTest {
         verify(window).setAttributes(paramCaptor.capture());
         assertThat(paramCaptor.getValue().privateFlags
                 & SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS).isEqualTo(0);
+    }
+
+    @Test
+    public void onCreate_TaskRoot_shouldNotFinish() {
+        SettingsHomepageActivity activity =
+                spy(Robolectric.buildActivity(SettingsHomepageActivity.class).get());
+        doReturn(true).when(activity).isTaskRoot();
+
+        activity.onCreate(/* savedInstanceState */ null);
+
+        verify(activity, never()).finish();
+    }
+
+    @Test
+    public void onCreate_notTaskRoot_shouldRestartActivity() {
+        SettingsHomepageActivity activity =
+                spy(Robolectric.buildActivity(SettingsHomepageActivity.class).get());
+        doReturn(false).when(activity).isTaskRoot();
+
+        activity.onCreate(/* savedInstanceState */ null);
+
+        verify(activity).finish();
+        verify(activity).startActivity(any(Intent.class));
+    }
+
+    @Test
+    public void onCreate_notTaskRoot_flagNewTask_shouldOnlyFinish() {
+        SettingsHomepageActivity activity =
+                spy(Robolectric.buildActivity(SettingsHomepageActivity.class).get());
+        doReturn(false).when(activity).isTaskRoot();
+        activity.setIntent(new Intent().addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+
+        activity.onCreate(/* savedInstanceState */ null);
+
+        verify(activity).finish();
+        verify(activity, never()).startActivity(any(Intent.class));
     }
 
     /** This test is for large screen devices Activity embedding. */
