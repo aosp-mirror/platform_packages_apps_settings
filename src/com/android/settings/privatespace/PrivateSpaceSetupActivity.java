@@ -66,6 +66,8 @@ public class PrivateSpaceSetupActivity extends FragmentActivity {
             if (userHandle != null) {
                 Intent intent = new Intent(this, PrivateProfileContextHelperActivity.class);
                 intent.putExtra(EXTRA_ACTION_TYPE, ACCOUNT_LOGIN_ACTION);
+                mMetricsFeatureProvider.action(
+                        this, SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_ACCOUNT_LOGIN_START);
                 startActivityForResultAsUser(intent, ACCOUNT_LOGIN_ACTION, userHandle);
             } else {
                 Log.w(TAG, "Private profile user handle is null");
