@@ -52,6 +52,7 @@ import android.widget.TabWidget;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.TwoStatePreference;
 
@@ -716,13 +717,18 @@ public class IccLockSettings extends SettingsPreferenceFragment
         return slotId;
     }
 
+    @Nullable
     private SubscriptionInfo getVisibleSubscriptionInfoForSimSlotIndex(int slotId) {
         final List<SubscriptionInfo> subInfoList =
                 mProxySubscriptionMgr.getActiveSubscriptionsInfo();
         if (subInfoList == null) {
             return null;
         }
-        final CarrierConfigManager carrierConfigManager = getContext().getSystemService(
+        Context context = getContext();
+        if (context == null) {
+            return null;
+        }
+        final CarrierConfigManager carrierConfigManager = context.getSystemService(
                 CarrierConfigManager.class);
         for (SubscriptionInfo subInfo : subInfoList) {
             if ((isSubscriptionVisible(carrierConfigManager, subInfo)
