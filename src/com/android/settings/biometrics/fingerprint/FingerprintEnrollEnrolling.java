@@ -53,7 +53,6 @@ import android.view.Surface;
 import android.view.View;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
-import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
 import android.widget.ProgressBar;
@@ -191,7 +190,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     private boolean mHaveShownSfpsRightEdgeLottie;
     private boolean mShouldShowLottie;
 
-    private ObjectAnimator mHelpAnimation;
+    private Animator mHelpAnimation;
 
     private OrientationEventListener mOrientationEventListener;
     private int mPreviousRotation = 0;
@@ -341,16 +340,10 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     }
 
     private void setHelpAnimation() {
-        final float translationX = 40;
-        final int duration = 550;
         final RelativeLayout progressLottieLayout = findViewById(R.id.progress_lottie);
-        mHelpAnimation = ObjectAnimator.ofFloat(progressLottieLayout,
-                "translationX" /* propertyName */,
-                0, translationX, -1 * translationX, translationX, 0f);
-        mHelpAnimation.setInterpolator(new AccelerateDecelerateInterpolator());
-        mHelpAnimation.setDuration(duration);
-        mHelpAnimation.setAutoCancel(false);
+        mHelpAnimation = mSfpsEnrollmentFeature.getHelpAnimator(progressLottieLayout);
     }
+
     @Override
     protected BiometricEnrollSidecar getSidecar() {
         final FingerprintEnrollSidecar sidecar = new FingerprintEnrollSidecar(this,
@@ -703,6 +696,9 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         view.setComposition(composition);
         view.setVisibility(View.VISIBLE);
         view.playAnimation();
+        if (mCanAssumeSfps) {
+            mSfpsEnrollmentFeature.handleOnEnrollmentLottieComposition(view);
+        }
     }
 
     @EnrollStage
@@ -1224,6 +1220,11 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
 
         @Override
         public float getEnrollStageThreshold(@NonNull Context context, int index) {
+            throw new IllegalStateException(exceptionStr);
+        }
+
+        @Override
+        public Animator getHelpAnimator(@NonNull View target) {
             throw new IllegalStateException(exceptionStr);
         }
     }
