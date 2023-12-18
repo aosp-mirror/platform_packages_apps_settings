@@ -37,13 +37,20 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.platform.test.annotations.RequiresFlagsDisabled;
+import android.platform.test.annotations.RequiresFlagsEnabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
+import android.webkit.Flags;
 
 import com.android.settings.testutils.ApplicationTestUtils;
+import com.android.settings.webview.WebViewUpdateServiceWrapper;
 import com.android.settingslib.testutils.shadow.ShadowDefaultDialerManager;
 import com.android.settingslib.testutils.shadow.ShadowSmsApplication;
 
 import org.junit.Before;
 import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -66,6 +73,9 @@ import java.util.Set;
 @RunWith(RobolectricTestRunner.class)
 @LooperMode(LooperMode.Mode.LEGACY)
 public final class ApplicationFeatureProviderImplTest {
+
+    @Rule
+    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
 
     private final int MAIN_USER_ID = 0;
     private final int MANAGED_PROFILE_ID = 10;
@@ -91,6 +101,8 @@ public final class ApplicationFeatureProviderImplTest {
     private DevicePolicyManager mDevicePolicyManager;
     @Mock
     private LocationManager mLocationManager;
+    @Mock
+    private WebViewUpdateServiceWrapper mWebViewUpdateServiceWrapper;
 
     private ApplicationFeatureProvider mProvider;
 
@@ -106,7 +118,7 @@ public final class ApplicationFeatureProviderImplTest {
         when(mContext.getSystemService(Context.LOCATION_SERVICE)).thenReturn(mLocationManager);
 
         mProvider = new ApplicationFeatureProviderImpl(mContext, mPackageManager,
-                mPackageManagerService, mDevicePolicyManager);
+                mPackageManagerService, mDevicePolicyManager, mWebViewUpdateServiceWrapper);
     }
 
     private void verifyCalculateNumberOfPolicyInstalledApps(boolean async) {
@@ -339,6 +351,26 @@ public final class ApplicationFeatureProviderImplTest {
         final Set<String> allowlist = mProvider.getKeepEnabledPackages();
 
         assertThat(allowlist).contains("com.android.settings.intelligence");
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_UPDATE_SERVICE_V2)
+    public void getKeepEnabledPackages_shouldContainWebViewPackage() {
+        final String testWebViewPackageName = "com.android.webview";
+        when(mWebViewUpdateServiceWrapper.getDefaultWebViewPackageName())
+                .thenReturn(testWebViewPackageName);
+        final Set<String> allowlist = mProvider.getKeepEnabledPackages();
+        assertThat(allowlist).contains(testWebViewPackageName);
+    }
+
+    @Test
+    @RequiresFlagsDisabled(Flags.FLAG_UPDATE_SERVICE_V2)
+    public void getKeepEnabledPackages_shouldNotContainWebViewPackageIfFlagDisabled() {
+        final String testWebViewPackageName = "com.android.webview";
+        when(mWebViewUpdateServiceWrapper.getDefaultWebViewPackageName())
+                .thenReturn(testWebViewPackageName);
+        final Set<String> allowlist = mProvider.getKeepEnabledPackages();
+        assertThat(allowlist).doesNotContain(testWebViewPackageName);
     }
 
     @Test
