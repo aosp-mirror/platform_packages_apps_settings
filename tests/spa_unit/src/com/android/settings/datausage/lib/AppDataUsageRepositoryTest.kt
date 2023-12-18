@@ -77,8 +77,8 @@ class AppDataUsageRepositoryTest {
             getPackageName = { null },
         )
         val buckets = listOf(
-            Bucket(uid = APP_ID_1, bytes = 1),
-            Bucket(uid = APP_ID_2, bytes = 2),
+            Bucket(uid = APP_ID_1, bytes = 1, startTimeStamp = 0, endTimeStamp = 0),
+            Bucket(uid = APP_ID_2, bytes = 2, startTimeStamp = 0, endTimeStamp = 0),
         )
 
         val appPercentList = repository.getAppPercent(null, buckets)
@@ -107,8 +107,8 @@ class AppDataUsageRepositoryTest {
             getPackageName = { if (it.key == APP_ID_1) HIDING_PACKAGE_NAME else null },
         )
         val buckets = listOf(
-            Bucket(uid = APP_ID_1, bytes = 1),
-            Bucket(uid = APP_ID_2, bytes = 2),
+            Bucket(uid = APP_ID_1, bytes = 1, startTimeStamp = 0, endTimeStamp = 0),
+            Bucket(uid = APP_ID_2, bytes = 2, startTimeStamp = 0, endTimeStamp = 0),
         )
 
         val appPercentList = repository.getAppPercent(HIDING_CARRIER_ID, buckets)
