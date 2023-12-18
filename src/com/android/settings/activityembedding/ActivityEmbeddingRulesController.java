@@ -34,6 +34,7 @@ import androidx.window.embedding.SplitPairRule;
 import androidx.window.embedding.SplitPlaceholderRule;
 import androidx.window.embedding.SplitRule;
 
+import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SubSettings;
@@ -261,8 +262,13 @@ public class ActivityEmbeddingRulesController {
         addActivityFilter(activityFilters, FaceEnrollIntroduction.class);
         addActivityFilter(activityFilters, RemoteAuthActivity.class);
         addActivityFilter(activityFilters, RemoteAuthActivityInternal.class);
-        addActivityFilter(activityFilters, AvatarPickerActivity.class);
         addActivityFilter(activityFilters, ChooseLockPattern.class);
+        if (android.multiuser.Flags.avatarSync()) {
+            String action = mContext.getString(R.string.config_avatar_picker_action);
+            addActivityFilter(activityFilters, new Intent(action));
+        } else {
+            addActivityFilter(activityFilters, AvatarPickerActivity.class);
+        }
         ActivityRule activityRule = new ActivityRule.Builder(activityFilters).setAlwaysExpand(true)
                 .build();
         mRuleController.addRule(activityRule);
