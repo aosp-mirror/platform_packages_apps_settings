@@ -139,7 +139,11 @@ public class ApprovalPreferenceController extends BasePreferenceController {
         AsyncTask.execute(() -> {
             if (!mNm.isNotificationPolicyAccessGrantedForPackage(
                     cn.getPackageName())) {
-                mNm.removeAutomaticZenRules(cn.getPackageName());
+                if (android.app.Flags.modesApi()) {
+                    mNm.removeAutomaticZenRules(cn.getPackageName(), /* fromUser= */ true);
+                } else {
+                    mNm.removeAutomaticZenRules(cn.getPackageName());
+                }
             }
         });
     }

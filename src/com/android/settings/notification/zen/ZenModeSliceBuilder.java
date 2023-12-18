@@ -19,6 +19,7 @@ package com.android.settings.notification.zen;
 import static android.app.slice.Slice.EXTRA_TOGGLE_STATE;
 
 import android.annotation.ColorInt;
+import android.app.Flags;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.settings.SettingsEnums;
@@ -116,7 +117,12 @@ public class ZenModeSliceBuilder {
         } else {
             zenMode = Settings.Global.ZEN_MODE_OFF;
         }
-        NotificationManager.from(context).setZenMode(zenMode, null /* conditionId */, TAG);
+        if (Flags.modesApi()) {
+            NotificationManager.from(context).setZenMode(zenMode, /* conditionId= */ null, TAG,
+                    /* fromUser= */ true);
+        } else {
+            NotificationManager.from(context).setZenMode(zenMode, null /* conditionId */, TAG);
+        }
         // Do not notifyChange on Uri. The service takes longer to update the current value than it
         // does for the Slice to check the current value again. Let {@link SliceBroadcastRelay}
         // handle it.
