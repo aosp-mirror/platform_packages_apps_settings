@@ -168,6 +168,19 @@ public class SettingsHomepageActivityTest {
     }
 
     @Test
+    public void showHomepageWithSuggestion_callAfterOnStop_shouldUpdateVisibility() {
+        final SettingsHomepageActivity activity = Robolectric.buildActivity(
+                SettingsHomepageActivity.class).create().get();
+        final View suggestionTile = activity.findViewById(R.id.suggestion_content);
+
+        activity.showHomepageWithSuggestion(true);
+        activity.onStop();
+        activity.showHomepageWithSuggestion(false);
+
+        assertThat(suggestionTile.getVisibility()).isEqualTo(View.GONE);
+    }
+
+    @Test
     public void onStart_isNotDebuggable_shouldHideSystemOverlay() {
         ReflectionHelpers.setStaticField(Build.class, "IS_DEBUGGABLE", false);
 

@@ -119,6 +119,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
 
     private SplitControllerCallbackAdapter mSplitControllerAdapter;
     private SplitInfoCallback mCallback;
+    private boolean mAllowUpdateSuggestion = true;
 
     /** A listener receiving homepage loaded events. */
     public interface HomepageLoadedListener {
@@ -155,15 +156,18 @@ public class SettingsHomepageActivity extends FragmentActivity implements
      * to avoid the flicker caused by the suggestion suddenly appearing/disappearing.
      */
     public void showHomepageWithSuggestion(boolean showSuggestion) {
+        if (mAllowUpdateSuggestion) {
+            Log.i(TAG, "showHomepageWithSuggestion: " + showSuggestion);
+            mAllowUpdateSuggestion = false;
+            mSuggestionView.setVisibility(showSuggestion ? View.VISIBLE : View.GONE);
+            mTwoPaneSuggestionView.setVisibility(showSuggestion ? View.VISIBLE : View.GONE);
+        }
+
         if (mHomepageView == null) {
             return;
         }
-        Log.i(TAG, "showHomepageWithSuggestion: " + showSuggestion);
         final View homepageView = mHomepageView;
-        mSuggestionView.setVisibility(showSuggestion ? View.VISIBLE : View.GONE);
-        mTwoPaneSuggestionView.setVisibility(showSuggestion ? View.VISIBLE : View.GONE);
         mHomepageView = null;
-
         mLoadedListeners.forEach(listener -> listener.onHomepageLoaded());
         mLoadedListeners.clear();
         homepageView.setVisibility(View.VISIBLE);
@@ -278,6 +282,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
     @Override
     protected void onStop() {
         super.onStop();
+        mAllowUpdateSuggestion = true;
         if (mSplitControllerAdapter != null && mCallback != null) {
             mSplitControllerAdapter.removeSplitListener(mCallback);
             mCallback = null;
