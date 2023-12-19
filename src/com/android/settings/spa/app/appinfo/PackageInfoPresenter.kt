@@ -166,7 +166,7 @@ class PackageInfoPresenter(
             flags = PackageManager.MATCH_ANY_USER.toLong() or
                 PackageManager.MATCH_DISABLED_COMPONENTS.toLong() or
                 PackageManager.GET_PERMISSIONS.toLong() or
-                if (featureFlags.archiving()) PackageManager.MATCH_ARCHIVED_PACKAGES else 0,
+                if (isArchivingEnabled(featureFlags)) PackageManager.MATCH_ARCHIVED_PACKAGES else 0,
             userId = userId,
         )
 }

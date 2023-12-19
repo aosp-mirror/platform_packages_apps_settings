@@ -22,10 +22,13 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.RemoteException;
 import android.util.Log;
+import android.webkit.IWebViewUpdateService;
 import android.webkit.UserPackage;
 import android.webkit.WebViewFactory;
 import android.webkit.WebViewProviderInfo;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -102,6 +105,25 @@ public class WebViewUpdateServiceWrapper {
                 com.android.settingslib.R.string.select_webview_provider_toast_text,
                 Toast.LENGTH_SHORT);
         toast.show();
+    }
+
+    /**
+     * Fetch the package name of the default WebView provider.
+     */
+    @Nullable
+    public String getDefaultWebViewPackageName() {
+        try {
+            IWebViewUpdateService service = WebViewFactory.getUpdateService();
+            if (service != null) {
+                WebViewProviderInfo provider = service.getDefaultWebViewPackage();
+                if (provider != null) {
+                    return provider.packageName;
+                }
+            }
+        } catch (RemoteException e) {
+            Log.e(TAG, "RemoteException when trying to fetch default WebView package Name", e);
+        }
+        return null;
     }
 
     static final int PACKAGE_FLAGS = PackageManager.MATCH_ANY_USER;

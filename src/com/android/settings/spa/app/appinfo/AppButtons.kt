@@ -63,7 +63,7 @@ private class AppButtonsPresenter(
 
     @Composable
     private fun getActionButtons(app: ApplicationInfo): List<ActionButton> = listOfNotNull(
-        if (featureFlags.archiving()) {
+        if (isArchivingEnabled(featureFlags)) {
             if (app.isArchived) {
                 appRestoreButton.getActionButton(app)
             } else {

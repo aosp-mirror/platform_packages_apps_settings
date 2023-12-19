@@ -125,7 +125,7 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
         title = stringResource(R.string.application_info_label),
         actions = {
             packageInfoState.value?.applicationInfo?.let { app ->
-                if (featureFlags.archiving()) TopBarAppLaunchButton(packageInfoPresenter, app)
+                if (isArchivingEnabled(featureFlags)) TopBarAppLaunchButton(packageInfoPresenter, app)
                 AppInfoSettingsMoreOptions(packageInfoPresenter, app)
             }
         }
@@ -174,3 +174,6 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
         appInfoProvider.FooterAppVersion()
     }
 }
+
+fun isArchivingEnabled(featureFlags: FeatureFlags) =
+        featureFlags.archiving() || "true" == System.getProperty("pm.archiving.enabled")
