@@ -20,7 +20,6 @@ import static android.app.admin.DevicePolicyResources.Strings.Settings.SHARE_REM
 import static android.app.admin.DevicePolicyResources.Strings.Settings.SHARE_REMOTE_BUGREPORT_NOT_FINISHED_REQUEST_CONSENT;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.SHARING_REMOTE_BUGREPORT_MESSAGE;
 
-import android.annotation.Nullable;
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.content.DialogInterface;
@@ -29,6 +28,7 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
 /**

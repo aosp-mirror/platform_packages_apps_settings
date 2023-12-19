@@ -16,13 +16,13 @@
 
 package com.android.settings.wifi.tether;
 
-import android.annotation.NonNull;
 import android.content.Context;
 import android.net.wifi.SoftApCapability;
 import android.net.wifi.SoftApConfiguration;
 import android.net.wifi.WifiManager;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;

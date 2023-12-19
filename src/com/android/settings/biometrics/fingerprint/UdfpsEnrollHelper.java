@@ -16,8 +16,6 @@
 
 package com.android.settings.biometrics.fingerprint;
 
-import android.annotation.NonNull;
-import android.annotation.Nullable;
 import android.content.Context;
 import android.graphics.PointF;
 import android.hardware.fingerprint.FingerprintManager;
@@ -28,6 +26,9 @@ import android.provider.Settings;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.accessibility.AccessibilityManager;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.android.settings.core.InstrumentedFragment;
 

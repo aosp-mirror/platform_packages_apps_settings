@@ -17,7 +17,6 @@ package com.android.settings.applications.specialaccess.pictureinpicture;
 
 import static android.content.pm.PackageManager.GET_ACTIVITIES;
 
-import android.annotation.Nullable;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
@@ -32,6 +31,7 @@ import android.util.IconDrawableFactory;
 import android.util.Pair;
 import android.view.View;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceClickListener;

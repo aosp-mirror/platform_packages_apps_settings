@@ -16,8 +16,6 @@
 
 package com.android.settings.utils;
 
-import android.annotation.NonNull;
-import android.annotation.Nullable;
 import android.content.Context;
 import android.icu.text.DecimalFormat;
 import android.icu.text.MeasureFormat;
@@ -27,6 +25,9 @@ import android.icu.util.MeasureUnit;
 import android.text.BidiFormatter;
 import android.text.TextUtils;
 import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.math.BigDecimal;
 import java.util.Locale;
