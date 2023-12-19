@@ -17,16 +17,19 @@
 package com.android.settings.network.telephony
 
 import android.content.Context
+import android.telephony.ServiceState
 import android.telephony.TelephonyCallback
+import android.util.Log
 import kotlinx.coroutines.flow.Flow
 
-/**
- * Flow for call state.
- */
-fun Context.callStateFlow(subId: Int): Flow<Int> = telephonyCallbackFlow(subId) {
-    object : TelephonyCallback(), TelephonyCallback.CallStateListener {
-        override fun onCallStateChanged(state: Int) {
-            trySend(state)
+private const val TAG = "ServiceStateFlow"
+
+/** Creates an instance of a cold Flow for [ServiceState] of given [subId]. */
+fun Context.serviceStateFlow(subId: Int): Flow<ServiceState> = telephonyCallbackFlow(subId) {
+    object : TelephonyCallback(), TelephonyCallback.ServiceStateListener {
+        override fun onServiceStateChanged(serviceState: ServiceState) {
+            trySend(serviceState)
+            Log.d(TAG, "[$subId] serviceState: $serviceState")
         }
     }
 }
