@@ -25,6 +25,7 @@ import androidx.annotation.Nullable;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.privatespace.PrivateSpaceMaintainer;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.ArrayList;
@@ -39,6 +40,14 @@ public class UseOneLockSettingsFragment extends DashboardFragment {
     public void onCreate(Bundle icicle) {
         if (android.os.Flags.allowPrivateProfile()) {
             super.onCreate(icicle);
+        }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (PrivateSpaceMaintainer.getInstance(getContext()).isPrivateSpaceLocked()) {
+            finish();
         }
     }
 
