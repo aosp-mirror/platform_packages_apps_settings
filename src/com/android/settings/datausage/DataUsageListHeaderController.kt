@@ -24,19 +24,13 @@ import android.view.accessibility.AccessibilityEvent
 import android.widget.AdapterView
 import android.widget.Spinner
 import androidx.annotation.OpenForTesting
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import com.android.settings.R
 import com.android.settings.core.SubSettingLauncher
 import com.android.settings.datausage.CycleAdapter.SpinnerInterface
-import com.android.settings.datausage.lib.INetworkCycleDataRepository
-import com.android.settings.datausage.lib.NetworkCycleDataRepository
 import com.android.settings.datausage.lib.NetworkUsageData
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
+import kotlinx.coroutines.flow.Flow
 
 @OpenForTesting
 open class DataUsageListHeaderController(
@@ -44,10 +38,8 @@ open class DataUsageListHeaderController(
     template: NetworkTemplate,
     sourceMetricsCategory: Int,
     viewLifecycleOwner: LifecycleOwner,
-    private val onCyclesLoad: (usageDataList: List<NetworkUsageData>) -> Unit,
+    cyclesFlow: Flow<List<NetworkUsageData>>,
     private val updateSelectedCycle: (usageData: NetworkUsageData) -> Unit,
-    private val repository: INetworkCycleDataRepository =
-        NetworkCycleDataRepository(header.context, template),
 ) {
     private val context = header.context
 
@@ -104,13 +96,9 @@ open class DataUsageListHeaderController(
             }
         }
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                cycles = withContext(Dispatchers.Default) {
-                    repository.loadCycles()
-                }
-                updateCycleData()
-            }
+        cyclesFlow.collectLatestWithLifecycle(viewLifecycleOwner) {
+            cycles = it
+            updateCycleData()
         }
     }
 
@@ -121,7 +109,6 @@ open class DataUsageListHeaderController(
     private fun updateCycleData() {
         cycleAdapter.updateCycleList(cycles.map { Range(it.startTime, it.endTime) })
         cycleSpinner.visibility = View.VISIBLE
-        onCyclesLoad(cycles)
     }
 
     private fun setSelectedCycle(position: Int) {
