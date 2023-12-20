@@ -305,6 +305,16 @@ public class ChooseLockGenericTest {
     }
 
     @Test
+    public void onActivityResult_requestcode102_resultCancel_shouldFinish() {
+        initActivity(null);
+
+        mFragment.onActivityResult(ChooseLockGenericFragment.CHOOSE_LOCK_REQUEST,
+                Activity.RESULT_CANCELED, null /* data */);
+
+        assertThat(mActivity.isFinishing()).isTrue();
+    }
+
+    @Test
     public void onActivityResult_requestcode103_shouldFinish() {
         initActivity(null);
 
