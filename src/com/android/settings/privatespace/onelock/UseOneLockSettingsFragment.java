@@ -25,6 +25,7 @@ import androidx.annotation.Nullable;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.privatespace.PrivateSpaceMaintainer;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.ArrayList;
@@ -39,6 +40,14 @@ public class UseOneLockSettingsFragment extends DashboardFragment {
     public void onCreate(Bundle icicle) {
         if (android.os.Flags.allowPrivateProfile()) {
             super.onCreate(icicle);
+        }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (PrivateSpaceMaintainer.getInstance(getContext()).isPrivateSpaceLocked()) {
+            finish();
         }
     }
 
@@ -62,14 +71,14 @@ public class UseOneLockSettingsFragment extends DashboardFragment {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new UseOneLockControllerSwitch(context, this));
         controllers.add(new PrivateSpaceLockController(context, this));
-        controllers.add(new FaceFingerprintUnlockController(context, this));
+        controllers.add(new FaceFingerprintUnlockController(context, getSettingsLifecycle()));
         return controllers;
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (use(UseOneLockControllerSwitch.class)
-                  .handleActivityResult(requestCode, resultCode, data)) {
+                .handleActivityResult(requestCode, resultCode, data)) {
             return;
         }
         super.onActivityResult(requestCode, resultCode, data);

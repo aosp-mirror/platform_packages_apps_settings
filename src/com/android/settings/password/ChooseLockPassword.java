@@ -260,7 +260,6 @@ public class ChooseLockPassword extends SettingsActivity {
         private LockscreenCredential mFirstPassword;
         private RecyclerView mPasswordRestrictionView;
         protected boolean mIsAlphaMode;
-        protected boolean mIsManagedProfile;
         protected FooterButton mSkipOrClearButton;
         private FooterButton mNextButton;
         private TextView mMessage;
@@ -272,6 +271,14 @@ public class ChooseLockPassword extends SettingsActivity {
 
         private static final int CONFIRM_EXISTING_REQUEST = 58;
         static final int RESULT_FINISHED = RESULT_FIRST_USER;
+        /** Used to store the profile type for which pin/password is being set */
+        protected enum ProfileType {
+            None,
+            Managed,
+            Private,
+            Other
+        };
+        protected ProfileType mProfileType;
 
         /**
          * Keep track internally of where the user is in choosing a pattern.
@@ -285,12 +292,14 @@ public class ChooseLockPassword extends SettingsActivity {
                     R.string.lockpassword_choose_your_password_header_for_fingerprint,
                     R.string.lockpassword_choose_your_password_header_for_face,
                     R.string.lockpassword_choose_your_password_header_for_biometrics,
+                    R.string.private_space_choose_your_password_header, // private space password
                     R.string.lockpassword_choose_your_pin_header, // pin
                     SET_WORK_PROFILE_PIN_HEADER,
                     R.string.lockpassword_choose_your_profile_pin_header,
                     R.string.lockpassword_choose_your_pin_header_for_fingerprint,
                     R.string.lockpassword_choose_your_pin_header_for_face,
                     R.string.lockpassword_choose_your_pin_header_for_biometrics,
+                    R.string.private_space_choose_your_pin_header, // private space pin
                     R.string.lock_settings_picker_biometrics_added_security_message,
                     R.string.lock_settings_picker_biometrics_added_security_message,
                     R.string.next_label),
@@ -302,9 +311,11 @@ public class ChooseLockPassword extends SettingsActivity {
                     R.string.lockpassword_confirm_your_password_header,
                     R.string.lockpassword_confirm_your_password_header,
                     R.string.lockpassword_confirm_your_password_header,
+                    R.string.lockpassword_confirm_your_password_header,
                     R.string.lockpassword_confirm_your_pin_header,
                     REENTER_WORK_PROFILE_PIN_HEADER,
                     R.string.lockpassword_reenter_your_profile_pin_header,
+                    R.string.lockpassword_confirm_your_pin_header,
                     R.string.lockpassword_confirm_your_pin_header,
                     R.string.lockpassword_confirm_your_pin_header,
                     R.string.lockpassword_confirm_your_pin_header,
@@ -319,8 +330,10 @@ public class ChooseLockPassword extends SettingsActivity {
                     R.string.lockpassword_confirm_passwords_dont_match,
                     R.string.lockpassword_confirm_passwords_dont_match,
                     R.string.lockpassword_confirm_passwords_dont_match,
+                    R.string.lockpassword_confirm_passwords_dont_match,
                     R.string.lockpassword_confirm_pins_dont_match,
                     UNDEFINED,
+                    R.string.lockpassword_confirm_pins_dont_match,
                     R.string.lockpassword_confirm_pins_dont_match,
                     R.string.lockpassword_confirm_pins_dont_match,
                     R.string.lockpassword_confirm_pins_dont_match,
@@ -335,29 +348,33 @@ public class ChooseLockPassword extends SettingsActivity {
                     int hintInAlphaForFingerprint,
                     int hintInAlphaForFace,
                     int hintInAlphaForBiometrics,
+                    int hintInAlphaForPrivateProfile,
                     int hintInNumeric,
                     String hintOverrideInNumericForProfile,
                     int hintInNumericForProfile,
                     int hintInNumericForFingerprint,
                     int hintInNumericForFace,
                     int hintInNumericForBiometrics,
+                    int hintInNumericForPrivateProfile,
                     int messageInAlphaForBiometrics,
                     int messageInNumericForBiometrics,
                     int nextButtonText) {
 
                 this.alphaHint = hintInAlpha;
                 this.alphaHintOverrideForProfile = hintOverrideInAlphaForProfile;
-                this.alphaHintForProfile = hintInAlphaForProfile;
+                this.alphaHintForManagedProfile = hintInAlphaForProfile;
                 this.alphaHintForFingerprint = hintInAlphaForFingerprint;
                 this.alphaHintForFace = hintInAlphaForFace;
                 this.alphaHintForBiometrics = hintInAlphaForBiometrics;
+                this.alphaHintForPrivateProfile = hintInAlphaForPrivateProfile;
 
                 this.numericHint = hintInNumeric;
                 this.numericHintOverrideForProfile = hintOverrideInNumericForProfile;
-                this.numericHintForProfile = hintInNumericForProfile;
+                this.numericHintForManagedProfile = hintInNumericForProfile;
                 this.numericHintForFingerprint = hintInNumericForFingerprint;
                 this.numericHintForFace = hintInNumericForFace;
                 this.numericHintForBiometrics = hintInNumericForBiometrics;
+                this.numericHintForPrivateProfile = hintInNumericForPrivateProfile;
 
                 this.alphaMessageForBiometrics = messageInAlphaForBiometrics;
                 this.numericMessageForBiometrics = messageInNumericForBiometrics;
@@ -372,16 +389,18 @@ public class ChooseLockPassword extends SettingsActivity {
 
             // Password header
             public final int alphaHint;
+            public final int alphaHintForPrivateProfile;
             public final String alphaHintOverrideForProfile;
-            public final int alphaHintForProfile;
+            public final int alphaHintForManagedProfile;
             public final int alphaHintForFingerprint;
             public final int alphaHintForFace;
             public final int alphaHintForBiometrics;
 
             // PIN header
             public final int numericHint;
+            public final int numericHintForPrivateProfile;
             public final String numericHintOverrideForProfile;
-            public final int numericHintForProfile;
+            public final int numericHintForManagedProfile;
             public final int numericHintForFingerprint;
             public final int numericHintForFace;
             public final int numericHintForBiometrics;
@@ -394,34 +413,40 @@ public class ChooseLockPassword extends SettingsActivity {
 
             public final int buttonText;
 
-            public String getHint(Context context, boolean isAlpha, int type, boolean isProfile) {
+            public String getHint(Context context, boolean isAlpha, int type, ProfileType profile) {
                 if (isAlpha) {
-                    if (type == TYPE_FINGERPRINT) {
+                    if (android.os.Flags.allowPrivateProfile()
+                            && profile.equals(ProfileType.Private)) {
+                        return context.getString(alphaHintForPrivateProfile);
+                    } else if (type == TYPE_FINGERPRINT) {
                         return context.getString(alphaHintForFingerprint);
                     } else if (type == TYPE_FACE) {
                         return context.getString(alphaHintForFace);
                     } else if (type == TYPE_BIOMETRIC) {
                         return context.getString(alphaHintForBiometrics);
-                    } else if (isProfile) {
+                    } else if (profile.equals(ProfileType.Managed)) {
                         return context.getSystemService(DevicePolicyManager.class).getResources()
                                 .getString(alphaHintOverrideForProfile,
-                                        () -> context.getString(alphaHintForProfile));
+                                        () -> context.getString(alphaHintForManagedProfile));
                     } else {
                         return context.getString(alphaHint);
                     }
                 } else {
-                    if (type == TYPE_FINGERPRINT) {
+                    if (android.os.Flags.allowPrivateProfile()
+                            && profile.equals(ProfileType.Private)) {
+                        return context.getString(numericHintForPrivateProfile);
+                    } else if (type == TYPE_FINGERPRINT) {
                         return context.getString(numericHintForFingerprint);
                     } else if (type == TYPE_FACE) {
                         return context.getString(numericHintForFace);
                     } else if (type == TYPE_BIOMETRIC) {
                         return context.getString(numericHintForBiometrics);
-                    } else if (isProfile) {
+                    } else if (profile.equals(ProfileType.Managed)) {
                         return context.getSystemService(DevicePolicyManager.class).getResources()
                                 .getString(numericHintOverrideForProfile,
-                                        () -> context.getString(numericHintForProfile));
+                                        () -> context.getString(numericHintForManagedProfile));
                     } else {
-                        return  context.getString(numericHint);
+                        return context.getString(numericHint);
                     }
                 }
             }
@@ -455,7 +480,7 @@ public class ChooseLockPassword extends SettingsActivity {
             }
             // Only take this argument into account if it belongs to the current profile.
             mUserId = Utils.getUserIdFromBundle(getActivity(), intent.getExtras());
-            mIsManagedProfile = UserManager.get(getActivity()).isManagedProfile(mUserId);
+            mProfileType = getProfileType();
             mForFingerprint = intent.getBooleanExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, false);
             mForFace = intent.getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FACE, false);
@@ -602,7 +627,7 @@ public class ChooseLockPassword extends SettingsActivity {
             if (activity instanceof SettingsActivity) {
                 final SettingsActivity sa = (SettingsActivity) activity;
                 String title = Stage.Introduction.getHint(
-                        getContext(), mIsAlphaMode, getStageType(), mIsManagedProfile);
+                        getContext(), mIsAlphaMode, getStageType(), mProfileType);
                 sa.setTitle(title);
                 mLayout.setHeaderText(title);
             }
@@ -938,7 +963,7 @@ public class ChooseLockPassword extends SettingsActivity {
                 // Hide password requirement view when we are just asking user to confirm the pw.
                 mPasswordRestrictionView.setVisibility(View.GONE);
                 setHeaderText(mUiStage.getHint(getContext(), mIsAlphaMode, getStageType(),
-                        mIsManagedProfile));
+                        mProfileType));
                 setNextEnabled(canInput && length >= LockPatternUtils.MIN_LOCK_PASSWORD_SIZE);
                 mSkipOrClearButton.setVisibility(toVisibility(canInput && length > 0));
 
@@ -1084,6 +1109,12 @@ public class ChooseLockPassword extends SettingsActivity {
                     startActivity(intent);
                 }
             }
+
+            if (mLayout != null) {
+                mLayout.announceForAccessibility(
+                        getString(R.string.accessibility_setup_password_complete));
+            }
+
             getActivity().finish();
         }
 
@@ -1109,6 +1140,19 @@ public class ChooseLockPassword extends SettingsActivity {
                     updateUi();
                 }
             }
+        }
+
+        private ProfileType getProfileType() {
+            UserManager userManager = getContext().createContextAsUser(UserHandle.of(mUserId),
+                    /*flags=*/0).getSystemService(UserManager.class);
+            if (userManager.isManagedProfile()) {
+                return ProfileType.Managed;
+            } else if (android.os.Flags.allowPrivateProfile() && userManager.isPrivateProfile()) {
+                return ProfileType.Private;
+            } else if (userManager.isProfile()) {
+                return ProfileType.Other;
+            }
+            return ProfileType.None;
         }
     }
 }

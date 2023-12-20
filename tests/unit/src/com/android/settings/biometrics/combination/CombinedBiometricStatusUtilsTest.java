@@ -34,6 +34,7 @@ import android.hardware.fingerprint.Fingerprint;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -44,6 +45,7 @@ import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.utils.StringUtil;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -71,6 +73,8 @@ public class CombinedBiometricStatusUtilsTest {
 
     private Context mApplicationContext;
     private CombinedBiometricStatusUtils mCombinedBiometricStatusUtils;
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     @Before
     public void setUp() {
@@ -299,6 +303,17 @@ public class CombinedBiometricStatusUtilsTest {
 
         assertThat(mCombinedBiometricStatusUtils.getProfileSettingsClassName())
                 .isEqualTo(Settings.CombinedBiometricProfileSettingsActivity.class.getName());
+    }
+
+    @Test
+    public void getPrivateProfileSettingsClassName_returnsPrivateSpaceBiometricSettings() {
+        when(mFaceManager.hasEnrolledTemplates(anyInt())).thenReturn(false);
+        mSetFlagsRule.enableFlags(
+                android.os.Flags.FLAG_ALLOW_PRIVATE_PROFILE,
+                android.multiuser.Flags.FLAG_ENABLE_BIOMETRICS_TO_UNLOCK_PRIVATE_SPACE);
+
+        assertThat(mCombinedBiometricStatusUtils.getPrivateProfileSettingsClassName())
+                .isEqualTo(Settings.PrivateSpaceBiometricSettingsActivity.class.getName());
     }
 
     private List<Fingerprint> createFingerprintList(int size) {

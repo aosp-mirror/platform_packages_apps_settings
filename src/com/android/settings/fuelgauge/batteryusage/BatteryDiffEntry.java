@@ -324,7 +324,8 @@ public class BatteryDiffEntry {
             }
         }
 
-        int uid = BatteryUtils.getInstance(mContext).getPackageUid(packageName);
+        int uid =
+                BatteryUtils.getInstance(mContext).getPackageUidAsUser(packageName, (int) mUserId);
         synchronized (sPackageNameAndUidCacheLock) {
             sPackageNameAndUidCache.put(packageName, uid);
         }
@@ -379,8 +380,7 @@ public class BatteryDiffEntry {
                     mAppIcon = nameAndIconForUser.mIcon;
                     mAppLabel = nameAndIconForUser.mName;
                     putResourceCache(
-                            getKey(),
-                            new NameAndIcon(mAppLabel, mAppIcon, /* iconId= */ 0));
+                            getKey(), new NameAndIcon(mAppLabel, mAppIcon, /* iconId= */ 0));
                 }
                 break;
             case ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY:
@@ -392,8 +392,7 @@ public class BatteryDiffEntry {
                         mAppIconId = nameAndIconForSystem.mIconId;
                         mAppIcon = mContext.getDrawable(nameAndIconForSystem.mIconId);
                     }
-                    putResourceCache(
-                            getKey(), new NameAndIcon(mAppLabel, mAppIcon, mAppIconId));
+                    putResourceCache(getKey(), new NameAndIcon(mAppLabel, mAppIcon, mAppIconId));
                 }
                 break;
             case ConvertUtils.CONSUMER_TYPE_UID_BATTERY:
@@ -406,8 +405,7 @@ public class BatteryDiffEntry {
                 mAppIcon = getBadgeIconForUser(mAppIcon);
                 if (mAppLabel != null || mAppIcon != null) {
                     putResourceCache(
-                            getKey(),
-                            new NameAndIcon(mAppLabel, mAppIcon, /* iconId= */ 0));
+                            getKey(), new NameAndIcon(mAppLabel, mAppIcon, /* iconId= */ 0));
                 }
                 break;
         }

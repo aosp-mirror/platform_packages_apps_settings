@@ -101,8 +101,12 @@ public class ZenAccessController extends BasePreferenceController {
     }
 
     public static void deleteRules(final Context context, final String pkg) {
-       final NotificationManager mgr = context.getSystemService(NotificationManager.class);
-       mgr.removeAutomaticZenRules(pkg);
+        final NotificationManager mgr = context.getSystemService(NotificationManager.class);
+        if (android.app.Flags.modesApi()) {
+            mgr.removeAutomaticZenRules(pkg, /* fromUser= */ true);
+        } else {
+            mgr.removeAutomaticZenRules(pkg);
+        }
     }
 
     @VisibleForTesting

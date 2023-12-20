@@ -144,7 +144,6 @@ public class BatteryUtils {
         sInstance = null;
     }
 
-
     /** Gets the process time */
     public long getProcessTimeMs(@StatusType int type, @Nullable BatteryStats.Uid uid, int which) {
         if (uid == null) {
@@ -339,6 +338,25 @@ public class BatteryUtils {
             return packageName == null
                     ? UID_NULL
                     : mPackageManager.getPackageUid(packageName, PackageManager.GET_META_DATA);
+        } catch (PackageManager.NameNotFoundException e) {
+            return UID_NULL;
+        }
+    }
+
+    /**
+     * Find package uid from package name
+     *
+     * @param packageName used to find the uid
+     * @param userId The user handle identifier to look up the package under
+     * @return uid for packageName, or {@link #UID_NULL} if exception happens or {@code packageName}
+     *     is null
+     */
+    public int getPackageUidAsUser(String packageName, int userId) {
+        try {
+            return packageName == null
+                    ? UID_NULL
+                    : mPackageManager.getPackageUidAsUser(
+                            packageName, PackageManager.GET_META_DATA, userId);
         } catch (PackageManager.NameNotFoundException e) {
             return UID_NULL;
         }
