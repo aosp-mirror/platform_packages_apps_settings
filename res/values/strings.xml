@@ -1207,7 +1207,7 @@
     <!-- Title for the Private Space page. [CHAR LIMIT=60] -->
     <string name="private_space_title">Private Space</string>
     <!-- Summary for the Private Space page. [CHAR LIMIT=NONE] -->
-    <string name="private_space_summary">Hide apps in a private folder</string>
+    <string name="private_space_summary">Keep private apps locked and hidden</string>
     <!-- Description for the Private Space page. [CHAR LIMIT=NONE] -->
     <string name="private_space_description">Hide apps in a private folder that only you can access</string>
     <!-- Title for the Private Space one lock preference. [CHAR LIMIT=60] -->
@@ -1281,7 +1281,7 @@
     <!-- Title for private space setup in auto advancing screen informing private space notifications are hidden when locked. [CHAR LIMIT=NONE] -->
     <string name="private_space_notifications_hidden_title">Notifications from apps in private space are hidden when it\u2019s locked</string>
     <!-- Title for private space setup in auto advancing screen informing photos/files from private space can be shared when unlocked. [CHAR LIMIT=NONE] -->
-    <string name="private_space_share_photos_title">Unlock your space to share photos or files from private space apps</string>
+    <string name="private_space_share_photos_title">Unlock private space to share photos or files from private space apps</string>
     <!-- Title for private space setup in auto advancing screen informing some system apps are already installed in private space. [CHAR LIMIT=NONE] -->
     <string name="private_space_apps_installed_title">Some apps are already installed in your private space</string>
     <!-- Title for private space creation error screen. [CHAR LIMIT=60] -->
@@ -1312,6 +1312,12 @@
     <string name="private_space_lock_setup_title">Choose a lock for your private space</string>
     <!-- private space lock setup screen description [CHAR LIMIT=NONE] -->
     <string name="private_space_lock_setup_description">You can unlock your private space using your fingerprint. For security, this option requires a backup lock.</string>
+    <!-- Header for private space choose your PIN screen [CHAR LIMIT=40] -->
+    <string name="private_space_choose_your_pin_header">Set a PIN for your private space</string>
+    <!-- Header for private space choose your password screen [CHAR LIMIT=40] -->
+    <string name="private_space_choose_your_password_header">Set a password for your private space</string>
+    <!-- Header for private space choose your pattern screen [CHAR LIMIT=40] -->
+    <string name="private_space_choose_your_pattern_header">Set a pattern for your private space</string>
 
     <!-- TODO(b/309950257): Remove below strings once QSTIle fulfillment is complete. -->
     <!-- Header in hide Private Space settings page to unhide Private Space. [CHAR LIMIT=90] -->
@@ -12633,4 +12639,7 @@
     <string name="content_protection_preference_subpage_summary"></string>
     <!-- Default information at the bottom of the subpage of content protection settings. Will be overlaid by OEM. -->
     <string name="content_protection_preference_subpage_info"></string>
+
+    <!-- Content description for setting password complete-->
+    <string name="accessibility_setup_password_complete">Password is now set up</string>
 </resources>

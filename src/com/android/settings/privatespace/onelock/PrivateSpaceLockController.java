@@ -20,6 +20,7 @@ import static com.android.internal.widget.LockPatternUtils.CREDENTIAL_TYPE_PASSW
 import static com.android.internal.widget.LockPatternUtils.CREDENTIAL_TYPE_PATTERN;
 import static com.android.internal.widget.LockPatternUtils.CREDENTIAL_TYPE_PIN;
 import static com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment.HIDE_INSECURE_OPTIONS;
+import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_CHOOSE_LOCK_SCREEN_TITLE;
 
 import android.content.Context;
 import android.content.Intent;
@@ -94,6 +95,7 @@ public class PrivateSpaceLockController extends AbstractPreferenceController {
         final Bundle extras = new Bundle();
         extras.putInt(Intent.EXTRA_USER_ID, mProfileUserId);
         extras.putBoolean(HIDE_INSECURE_OPTIONS, true);
+        extras.putInt(EXTRA_KEY_CHOOSE_LOCK_SCREEN_TITLE, R.string.private_space_lock_setup_title);
         new SubSettingLauncher(mContext)
                 .setDestination(ChooseLockGeneric.ChooseLockGenericFragment.class.getName())
                 .setSourceMetricsCategory(mHost.getMetricsCategory())
