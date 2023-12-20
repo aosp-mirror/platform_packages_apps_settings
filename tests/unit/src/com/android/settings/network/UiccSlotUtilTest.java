@@ -752,11 +752,14 @@ public class UiccSlotUtilTest {
     }
 
     @Test
-    public void onReceiveSimSlotChangeReceiver_receiveAction_timerCountDown() {
+    public void onReceiveSimCardStateChangeReceiver_receiveAction_timerCountDown() {
         CountDownLatch latch = spy(new CountDownLatch(1));
-        UiccSlotUtil.SimSlotChangeReceiver receive = new UiccSlotUtil.SimSlotChangeReceiver(latch);
+        UiccSlotUtil.SimCardStateChangeReceiver receive =
+                new UiccSlotUtil.SimCardStateChangeReceiver(latch);
+        Intent intent = new Intent(TelephonyManager.ACTION_SIM_SLOT_STATUS_CHANGED);
+        intent.putExtra(TelephonyManager.EXTRA_SIM_STATE, TelephonyManager.SIM_STATE_PRESENT);
 
-        receive.onReceive(mContext, new Intent(TelephonyManager.ACTION_SIM_SLOT_STATUS_CHANGED));
+        receive.onReceive(mContext, intent);
 
         verify(latch).countDown();
     }
