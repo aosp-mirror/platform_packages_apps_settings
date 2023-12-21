@@ -119,7 +119,7 @@ public class PowerBackgroundUsageDetail extends DashboardFragment
                             .getMetricsFeatureProvider()
                             .action(
                                     getContext(),
-                                    SettingsEnums.OPEN_APP_BATTERY_USAGE,
+                                    SettingsEnums.OPEN_POWER_USAGE_MANAGE_BACKGROUND,
                                     packageName);
                 });
         mLogStringBuilder = new StringBuilder("onResume mode = ").append(mOptimizationMode);
@@ -338,9 +338,11 @@ public class PowerBackgroundUsageDetail extends DashboardFragment
                     FeatureFactory.getFeatureFactory()
                             .getMetricsFeatureProvider()
                             .action(
-                                    /* attribution */ SettingsEnums.OPEN_APP_BATTERY_USAGE,
+                                    /* attribution */ SettingsEnums
+                                            .LEAVE_POWER_USAGE_MANAGE_BACKGROUND,
                                     /* action */ finalMetricCategory,
-                                    /* pageId */ SettingsEnums.OPEN_APP_BATTERY_USAGE,
+                                    /* pageId */ SettingsEnums
+                                            .FUELGAUGE_POWER_USAGE_MANAGE_BACKGROUND,
                                     packageName,
                                     getArguments().getInt(EXTRA_POWER_USAGE_AMOUNT));
                 });
