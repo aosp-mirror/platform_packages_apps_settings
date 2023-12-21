@@ -16,7 +16,6 @@
 
 package com.android.settings.bluetooth;
 
-import android.annotation.Nullable;
 import android.app.ActivityManager;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -25,6 +24,8 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.text.TextUtils;
 import android.util.Log;
+
+import androidx.annotation.Nullable;
 
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 

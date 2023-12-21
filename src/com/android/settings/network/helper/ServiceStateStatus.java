@@ -19,7 +19,6 @@ package com.android.settings.network.helper;
 import android.telephony.ServiceState;
 import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyManager;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
@@ -34,8 +33,10 @@ import java.util.function.Consumer;
  * Only got update when Lifecycle.State is considered as STARTED or RESUMED.
  *
  * {@code null} when status unknown. Other values are {@link ServiceState}.
+ *
+ * @deprecated Please us {@link com.android.settings.network.telephony.ServiceStateFlowKt} instead.
  */
-@VisibleForTesting
+@Deprecated
 public class ServiceStateStatus extends LiveData<ServiceState> {
     private static final String TAG = "ServiceStateStatus";
 

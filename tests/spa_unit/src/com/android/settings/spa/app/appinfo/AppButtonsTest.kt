@@ -68,6 +68,7 @@ class AppButtonsTest {
     private lateinit var packageInstaller: PackageInstaller
 
     private val featureFlags = FakeFeatureFlagsImpl()
+    private val isHibernationSwitchEnabledStateFlow = MutableStateFlow(true)
 
     @Before
     fun setUp() {
@@ -175,7 +176,7 @@ class AppButtonsTest {
     private fun setContent(packageInfo: PackageInfo = PACKAGE_INFO) {
         whenever(packageInfoPresenter.flow).thenReturn(MutableStateFlow(packageInfo))
         composeTestRule.setContent {
-            AppButtons(packageInfoPresenter, featureFlags)
+            AppButtons(packageInfoPresenter, isHibernationSwitchEnabledStateFlow, featureFlags)
         }
 
         composeTestRule.delay()

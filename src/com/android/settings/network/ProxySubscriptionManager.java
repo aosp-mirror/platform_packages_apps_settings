@@ -20,7 +20,6 @@ import static androidx.lifecycle.Lifecycle.Event.ON_DESTROY;
 import static androidx.lifecycle.Lifecycle.Event.ON_START;
 import static androidx.lifecycle.Lifecycle.Event.ON_STOP;
 
-import android.annotation.NonNull;
 import android.content.Context;
 import android.os.Looper;
 import android.provider.Settings;
@@ -29,6 +28,7 @@ import android.telephony.SubscriptionManager;
 import android.util.Log;
 
 import androidx.annotation.Keep;
+import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;

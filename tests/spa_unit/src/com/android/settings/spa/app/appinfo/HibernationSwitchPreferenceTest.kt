@@ -70,6 +70,7 @@ import org.mockito.Spy
 import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoRule
 import java.util.function.IntConsumer
+import kotlinx.coroutines.flow.MutableStateFlow
 import org.mockito.Mockito.`when` as whenever
 
 @RunWith(AndroidJUnit4::class)
@@ -98,6 +99,8 @@ class HibernationSwitchPreferenceTest {
 
     private val hibernationTargetsPreSConfig =
         TestDeviceConfig(NAMESPACE_APP_HIBERNATION, PROPERTY_HIBERNATION_TARGETS_PRE_S_APPS)
+
+    private val isHibernationSwitchEnabledStateFlow = MutableStateFlow(true)
 
     @Before
     fun setUp() {
@@ -234,7 +237,7 @@ class HibernationSwitchPreferenceTest {
     private fun setContent(app: ApplicationInfo = TARGET_R_APP) {
         composeTestRule.setContent {
             CompositionLocalProvider(LocalContext provides context) {
-                HibernationSwitchPreference(app)
+                HibernationSwitchPreference(app, isHibernationSwitchEnabledStateFlow)
             }
         }
     }

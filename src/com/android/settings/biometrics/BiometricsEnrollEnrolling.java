@@ -16,10 +16,11 @@
 
 package com.android.settings.biometrics;
 
-import android.annotation.Nullable;
 import android.content.Intent;
 import android.os.UserHandle;
 import android.view.View;
+
+import androidx.annotation.Nullable;
 
 import com.android.settings.password.ChooseLockSettingsHelper;
 

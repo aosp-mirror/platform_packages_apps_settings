@@ -33,10 +33,15 @@ import com.android.settings.R
 import com.android.settingslib.spa.widget.button.ActionButton
 import com.android.settingslib.spaprivileged.framework.compose.DisposableBroadcastReceiverAsUser
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
 
-class AppArchiveButton(packageInfoPresenter: PackageInfoPresenter) {
+class AppArchiveButton(
+    packageInfoPresenter: PackageInfoPresenter,
+    private val isHibernationSwitchEnabledStateFlow: MutableStateFlow<Boolean>,
+) {
     private companion object {
         private const val LOG_TAG = "AppArchiveButton"
         private const val INTENT_ACTION = "com.android.settings.archive.action"
@@ -65,16 +70,18 @@ class AppArchiveButton(packageInfoPresenter: PackageInfoPresenter) {
             text = context.getString(R.string.archive),
             imageVector = Icons.Outlined.CloudUpload,
             enabled = remember(app) {
-                flow {
-                    emit(
-                        app.isActionButtonEnabled() && appButtonRepository.isAllowUninstallOrArchive(
-                            context,
-                            app
-                        )
-                    )
+                isHibernationSwitchEnabledStateFlow.asStateFlow().map {
+                    it && isActionButtonEnabledForApp(app)
                 }.flowOn(Dispatchers.Default)
             }.collectAsStateWithLifecycle(false).value
         ) { onArchiveClicked(app) }
+    }
+
+    private fun isActionButtonEnabledForApp(app: ApplicationInfo): Boolean {
+        return app.isActionButtonEnabled() && appButtonRepository.isAllowUninstallOrArchive(
+            context,
+            app
+        )
     }
 
     private fun ApplicationInfo.isActionButtonEnabled(): Boolean {

@@ -15,7 +15,6 @@
  */
 package com.android.settings;
 
-import android.annotation.NonNull;
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.content.DialogInterface;
@@ -31,6 +30,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 
 import com.android.internal.widget.LockPatternUtils;

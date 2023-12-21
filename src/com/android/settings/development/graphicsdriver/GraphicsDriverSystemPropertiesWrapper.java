@@ -14,9 +14,11 @@
  * limitations under the License.
  */
 package com.android.settings.development.graphicsdriver;
-import android.annotation.NonNull;
-import android.annotation.Nullable;
+
 import android.os.SystemProperties;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 /**
  * Wrapper interface to access {@link SystemProperties}.
  *

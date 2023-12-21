@@ -21,8 +21,7 @@ import static android.provider.Settings.System.KEYBOARD_VIBRATION_ENABLED;
 import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
 import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 
-import android.annotation.NonNull;
-import android.annotation.Nullable;
+
 import android.content.Context;
 import android.database.ContentObserver;
 import android.net.Uri;
@@ -33,6 +32,8 @@ import android.os.vibrator.Flags;
 import android.provider.Settings;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
