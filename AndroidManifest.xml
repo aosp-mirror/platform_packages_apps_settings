@@ -719,6 +719,13 @@
                        android:value="@string/menu_key_security"/>
         </activity>
 
+        <activity android:name=".Settings$PrivateSpaceBiometricSettingsActivity"
+                  android:label="@string/private_space_biometric_title"
+                  android:exported="false">
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.privatespace.onelock.PrivateSpaceBiometricSettings" />
+        </activity>
+
         <activity android:name=".bluetooth.DevicePickerActivity"
                 android:label="@string/device_picker"
                 android:configChanges="orientation|keyboardHidden|screenSize"

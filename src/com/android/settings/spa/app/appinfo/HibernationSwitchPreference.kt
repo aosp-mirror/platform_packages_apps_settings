@@ -48,11 +48,15 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.asExecutor
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
 
 @Composable
-fun HibernationSwitchPreference(app: ApplicationInfo) {
+fun HibernationSwitchPreference(
+    app: ApplicationInfo,
+    isHibernationSwitchEnabledStateFlow: MutableStateFlow<Boolean>
+) {
     val context = LocalContext.current
     val presenter = remember(app) { HibernationSwitchPresenter(context, app) }
     if (!presenter.isAvailable()) return
@@ -73,7 +77,14 @@ fun HibernationSwitchPreference(app: ApplicationInfo) {
                     context.getString(R.string.unused_apps_switch_summary)
             }
             override val changeable = { isEligibleState }
-            override val checked = { if (changeable()) isCheckedState.value else false }
+            override val checked = {
+                val result = if (changeable()) isCheckedState.value else false
+                result.also { isChecked ->
+                    isChecked?.let {
+                        isHibernationSwitchEnabledStateFlow.value = it
+                    }
+                }
+            }
             override val onCheckedChange = presenter::onCheckedChange
         }
     })

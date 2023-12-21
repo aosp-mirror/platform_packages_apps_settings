@@ -21,7 +21,6 @@ import static android.app.NotificationManager.BUBBLE_PREFERENCE_ALL;
 import static android.app.NotificationManager.BUBBLE_PREFERENCE_NONE;
 import static android.app.NotificationManager.BUBBLE_PREFERENCE_SELECTED;
 
-import android.annotation.Nullable;
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
 import android.content.Context;
@@ -31,6 +30,7 @@ import android.service.notification.ConversationChannelWrapper;
 import android.view.View;
 import android.widget.ImageView;
 
+import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 

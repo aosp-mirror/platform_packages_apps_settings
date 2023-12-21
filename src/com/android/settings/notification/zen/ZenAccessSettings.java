@@ -16,7 +16,6 @@
 
 package com.android.settings.notification.zen;
 
-import android.annotation.Nullable;
 import android.app.NotificationManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -30,6 +29,7 @@ import android.util.ArraySet;
 import android.util.Log;
 import android.view.View;
 
+import androidx.annotation.Nullable;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;

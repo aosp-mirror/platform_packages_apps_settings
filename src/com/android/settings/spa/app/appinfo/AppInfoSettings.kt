@@ -50,6 +50,7 @@ import com.android.settingslib.spa.widget.scaffold.RegularScaffold
 import com.android.settingslib.spa.widget.ui.Category
 import com.android.settingslib.spaprivileged.model.app.toRoute
 import com.android.settingslib.spaprivileged.template.app.AppInfoProvider
+import kotlinx.coroutines.flow.MutableStateFlow
 
 private const val PACKAGE_NAME = "packageName"
 private const val USER_ID = "userId"
@@ -133,10 +134,11 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
         val packageInfo = packageInfoState.value ?: return@RegularScaffold
         val app = packageInfo.applicationInfo ?: return@RegularScaffold
         val appInfoProvider = remember(packageInfo) { AppInfoProvider(packageInfo) }
+        val isHibernationSwitchEnabledStateFlow = MutableStateFlow(false)
 
         appInfoProvider.AppInfo()
 
-        AppButtons(packageInfoPresenter)
+        AppButtons(packageInfoPresenter, isHibernationSwitchEnabledStateFlow)
 
         AppSettingsPreference(app)
         AppAllServicesPreference(app)
@@ -152,7 +154,7 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
         DefaultAppShortcuts(app)
 
         Category(title = stringResource(R.string.unused_apps_category)) {
-            HibernationSwitchPreference(app)
+            HibernationSwitchPreference(app, isHibernationSwitchEnabledStateFlow)
         }
 
         Category(title = stringResource(R.string.advanced_apps)) {

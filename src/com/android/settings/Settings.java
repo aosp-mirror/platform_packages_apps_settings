@@ -57,7 +57,9 @@ public class Settings extends SettingsActivity {
     public static class CombinedBiometricProfileSettingsActivity extends SettingsActivity { /* empty */ }
     public static class TetherSettingsActivity extends SettingsActivity { /* empty */ }
     public static class WifiTetherSettingsActivity extends SettingsActivity { /* empty */ }
-
+    public static class PrivateSpaceBiometricSettingsActivity extends SettingsActivity {
+        /* empty */
+    }
     public static class VpnSettingsActivity extends SettingsActivity { /* empty */ }
     /** Activity for Data saver settings. */
     public static class DataSaverSummaryActivity extends SettingsActivity { /* empty */ }

@@ -71,14 +71,14 @@ public class UseOneLockSettingsFragment extends DashboardFragment {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new UseOneLockControllerSwitch(context, this));
         controllers.add(new PrivateSpaceLockController(context, this));
-        controllers.add(new FaceFingerprintUnlockController(context, this));
+        controllers.add(new FaceFingerprintUnlockController(context, getSettingsLifecycle()));
         return controllers;
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (use(UseOneLockControllerSwitch.class)
-                  .handleActivityResult(requestCode, resultCode, data)) {
+                .handleActivityResult(requestCode, resultCode, data)) {
             return;
         }
         super.onActivityResult(requestCode, resultCode, data);

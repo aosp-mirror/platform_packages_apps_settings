@@ -25,6 +25,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settingslib.applications.AppUtils
 import com.android.settingslib.spa.widget.button.ActionButton
 import com.android.settingslib.spa.widget.button.ActionButtons
+import kotlinx.coroutines.flow.MutableStateFlow
 
 @Composable
 /**
@@ -32,10 +33,17 @@ import com.android.settingslib.spa.widget.button.ActionButtons
  */
 fun AppButtons(
     packageInfoPresenter: PackageInfoPresenter,
+    isHibernationSwitchEnabledStateFlow: MutableStateFlow<Boolean>,
     featureFlags: FeatureFlags = FeatureFlagsImpl()
 ) {
     if (remember(packageInfoPresenter) { packageInfoPresenter.isMainlineModule() }) return
-    val presenter = remember { AppButtonsPresenter(packageInfoPresenter, featureFlags) }
+    val presenter = remember {
+        AppButtonsPresenter(
+            packageInfoPresenter,
+            isHibernationSwitchEnabledStateFlow,
+            featureFlags
+        )
+    }
     ActionButtons(actionButtons = presenter.getActionButtons())
 }
 
@@ -44,6 +52,7 @@ private fun PackageInfoPresenter.isMainlineModule(): Boolean =
 
 private class AppButtonsPresenter(
     private val packageInfoPresenter: PackageInfoPresenter,
+    isHibernationSwitchEnabledStateFlow: MutableStateFlow<Boolean>,
     private val featureFlags: FeatureFlags
 ) {
     private val appLaunchButton = AppLaunchButton(packageInfoPresenter)
@@ -52,7 +61,8 @@ private class AppButtonsPresenter(
     private val appUninstallButton = AppUninstallButton(packageInfoPresenter)
     private val appClearButton = AppClearButton(packageInfoPresenter)
     private val appForceStopButton = AppForceStopButton(packageInfoPresenter)
-    private val appArchiveButton = AppArchiveButton(packageInfoPresenter)
+    private val appArchiveButton =
+        AppArchiveButton(packageInfoPresenter, isHibernationSwitchEnabledStateFlow)
     private val appRestoreButton = AppRestoreButton(packageInfoPresenter)
 
     @Composable

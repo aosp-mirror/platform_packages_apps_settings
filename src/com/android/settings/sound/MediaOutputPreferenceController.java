@@ -18,7 +18,6 @@ package com.android.settings.sound;
 
 import static com.android.settingslib.media.flags.Flags.enableOutputSwitcherForSystemRouting;
 
-import android.annotation.Nullable;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.Intent;
@@ -27,6 +26,7 @@ import android.media.session.MediaController;
 import android.media.session.MediaSessionManager;
 import android.text.TextUtils;
 
+import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
