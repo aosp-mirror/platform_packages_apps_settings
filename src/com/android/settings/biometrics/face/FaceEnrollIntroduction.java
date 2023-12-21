@@ -484,6 +484,9 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     protected Intent getEnrollingIntent() {
         Intent intent = new Intent(this, FaceEnrollEducation.class);
         WizardManagerHelper.copyWizardManagerExtras(getIntent(), intent);
+        intent.putExtra(BiometricUtils.EXTRA_ENROLL_REASON,
+                getIntent().getIntExtra(BiometricUtils.EXTRA_ENROLL_REASON, -1));
+
         return intent;
     }
 

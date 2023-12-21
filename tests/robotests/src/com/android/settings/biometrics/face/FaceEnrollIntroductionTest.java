@@ -43,6 +43,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.hardware.face.Face;
+import android.hardware.face.FaceEnrollOptions;
 import android.hardware.face.FaceManager;
 import android.hardware.face.FaceSensorProperties;
 import android.hardware.face.FaceSensorPropertiesInternal;
@@ -196,6 +197,8 @@ public class FaceEnrollIntroductionTest {
         final Intent testIntent = new Intent();
         // Set the challenge token so the confirm screen will not be shown
         testIntent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, new byte[0]);
+        testIntent.putExtra(BiometricUtils.EXTRA_ENROLL_REASON,
+                FaceEnrollOptions.ENROLL_REASON_SETTINGS);
 
         when(mFakeFeatureFactory.mFaceFeatureProvider.getPostureGuidanceIntent(any())).thenReturn(
                 null /* Simulate no posture intent */);
@@ -220,6 +223,8 @@ public class FaceEnrollIntroductionTest {
         testIntent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, new byte[0]);
         testIntent.putExtra(EXTRA_KEY_NEXT_LAUNCHED, false);
         testIntent.putExtra(EXTRA_LAUNCHED_POSTURE_GUIDANCE, false);
+        testIntent.putExtra(BiometricUtils.EXTRA_ENROLL_REASON,
+                FaceEnrollOptions.ENROLL_REASON_SETTINGS);
 
         when(mFakeFeatureFactory.mFaceFeatureProvider.getPostureGuidanceIntent(any())).thenReturn(
                 testIntent);
@@ -641,4 +646,14 @@ public class FaceEnrollIntroductionTest {
         final AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(dialog).isNull();
     }
+
+    @Test
+    public void testFaceEnrollIntroduction_forwardsEnrollOptions() {
+        setupActivity();
+        final Intent intent = mActivity.getEnrollingIntent();
+
+        assertThat(intent.getIntExtra(BiometricUtils.EXTRA_ENROLL_REASON, -1))
+                .isEqualTo(FaceEnrollOptions.ENROLL_REASON_SETTINGS);
+    }
+
 }
