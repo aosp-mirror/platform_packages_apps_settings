@@ -21,7 +21,6 @@ import static android.media.Spatializer.SPATIALIZER_IMMERSIVE_LEVEL_NONE;
 import android.content.Context;
 import android.media.AudioDeviceAttributes;
 import android.media.AudioDeviceInfo;
-import android.media.AudioManager;
 import android.media.Spatializer;
 import android.text.TextUtils;
 import android.util.Log;
@@ -35,6 +34,7 @@ import androidx.preference.SwitchPreferenceCompat;
 import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -62,8 +62,8 @@ public class BluetoothDetailsSpatialAudioController extends BluetoothDetailsCont
             CachedBluetoothDevice device,
             Lifecycle lifecycle) {
         super(context, fragment, device, lifecycle);
-        AudioManager audioManager = context.getSystemService(AudioManager.class);
-        mSpatializer = audioManager.getSpatializer();
+        mSpatializer = FeatureFactory.getFeatureFactory().getBluetoothFeatureProvider()
+                .getSpatializer(context);
     }
 
     @Override

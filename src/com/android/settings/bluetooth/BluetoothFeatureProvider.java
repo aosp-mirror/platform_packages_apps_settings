@@ -18,6 +18,8 @@ package com.android.settings.bluetooth;
 
 import android.bluetooth.BluetoothDevice;
 import android.content.ComponentName;
+import android.content.Context;
+import android.media.Spatializer;
 import android.net.Uri;
 
 import java.util.List;
@@ -50,4 +52,12 @@ public interface BluetoothFeatureProvider {
      * @return list of {@link ComponentName}
      */
     List<ComponentName> getRelatedTools();
+
+    /**
+     * Gets the instance of {@link Spatializer}.
+     *
+     * @param context Context
+     * @return the Spatializer instance
+     */
+    Spatializer getSpatializer(Context context);
 }
