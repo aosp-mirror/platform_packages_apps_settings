@@ -162,6 +162,7 @@ public class ChooseLockGeneric extends SettingsActivity {
         private boolean mRequestGatekeeperPasswordHandle = false;
         private boolean mPasswordConfirmed = false;
         private boolean mWaitingForConfirmation = false;
+        private boolean mWaitingForActivityResult = false;
         private LockscreenCredential mUserPassword;
         private FingerprintManager mFingerprintManager;
         private FaceManager mFaceManager;
@@ -470,6 +471,7 @@ public class ChooseLockGeneric extends SettingsActivity {
         public void onActivityResult(int requestCode, int resultCode, Intent data) {
             super.onActivityResult(requestCode, resultCode, data);
             mWaitingForConfirmation = false;
+            mWaitingForActivityResult = false;
             if (requestCode == CONFIRM_EXISTING_REQUEST && resultCode == Activity.RESULT_OK) {
                 mPasswordConfirmed = true;
                 mUserPassword = data != null
@@ -479,7 +481,6 @@ public class ChooseLockGeneric extends SettingsActivity {
             } else if (requestCode == CHOOSE_LOCK_REQUEST) {
                 if (resultCode != RESULT_CANCELED) {
                     getActivity().setResult(resultCode, data);
-                    finish();
                 } else {
                     // If PASSWORD_TYPE_KEY is set, this activity is used as a trampoline to start
                     // the actual password enrollment. If the result is canceled, which means the
@@ -487,9 +488,9 @@ public class ChooseLockGeneric extends SettingsActivity {
                     int quality = getIntent().getIntExtra(LockPatternUtils.PASSWORD_TYPE_KEY, -1);
                     if (quality != -1) {
                         getActivity().setResult(RESULT_CANCELED, data);
-                        finish();
                     }
                 }
+                finish();
             } else if (requestCode == CHOOSE_LOCK_BEFORE_BIOMETRIC_REQUEST
                     && resultCode == BiometricEnrollBase.RESULT_FINISHED) {
                 Intent intent = getBiometricEnrollIntent(getActivity());
@@ -821,6 +822,7 @@ public class ChooseLockGeneric extends SettingsActivity {
                 }
                 if (getIntent().getBooleanExtra(EXTRA_KEY_REQUEST_WRITE_REPAIR_MODE_PW, false)) {
                     intent.putExtra(EXTRA_KEY_REQUEST_WRITE_REPAIR_MODE_PW, true);
+                    mWaitingForActivityResult = true;
                 }
                 intent.putExtra(EXTRA_CHOOSE_LOCK_GENERIC_EXTRAS, getIntent().getExtras());
                 // If the caller requested Gatekeeper Password Handle to be returned, we assume it
@@ -871,7 +873,7 @@ public class ChooseLockGeneric extends SettingsActivity {
             // Otherwise, bugs would be caused. (e.g. b/278488549, b/278530059)
             final boolean hasCredential = mLockPatternUtils.isSecure(mUserId);
             if (!getActivity().isChangingConfigurations()
-                    && !mWaitingForConfirmation && hasCredential) {
+                    && !mWaitingForConfirmation && !mWaitingForActivityResult && hasCredential) {
                 getActivity().finish();
             }
         }
