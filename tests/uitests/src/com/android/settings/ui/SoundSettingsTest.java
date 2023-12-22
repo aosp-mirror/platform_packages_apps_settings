@@ -22,9 +22,9 @@ import android.provider.Settings;
 import android.system.helpers.SettingsHelper;
 import android.system.helpers.SettingsHelper.SettingsType;
 import android.test.InstrumentationTestCase;
-import android.test.suitebuilder.annotation.MediumTest;
-import android.test.suitebuilder.annotation.Suppress;
 
+import androidx.test.filters.MediumTest;
+import androidx.test.filters.Suppress;
 import androidx.test.uiautomator.By;
 import androidx.test.uiautomator.UiDevice;
 import androidx.test.uiautomator.UiObject2;

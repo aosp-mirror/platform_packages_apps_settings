@@ -6,6 +6,13 @@ package: "com.android.settings.flags"
 # flags with 'development' to prevent naming collision.
 
 flag {
+    name: "development_game_default_frame_rate"
+    namespace: "game"
+    description: "This flag guards the new behavior with the addition of Game Default Frame Rate feature."
+    bug: "286084594"
+}
+
+flag {
   name: "development_hdr_sdr_ratio"
   namespace: "core_graphics"
   description: "Shows hdr/sdr dev opton on the development options page from aconfig"

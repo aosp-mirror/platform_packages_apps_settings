@@ -139,6 +139,7 @@
     <uses-permission android:name="android.permission.REMAP_MODIFIER_KEYS" />
     <uses-permission android:name="android.permission.ACCESS_GPU_SERVICE" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.MANAGE_GAME_MODE" />
 
     <application
             android:name=".SettingsApplication"
@@ -309,6 +310,19 @@
                        android:value="@string/menu_key_network"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
+        </activity>
+
+        <activity android:name=".Settings$ResetMobileNetworkSettingsActivity"
+                  android:exported="true"
+                  android:label="@string/reset_mobile_network_settings_title">
+            <intent-filter android:priority="1">
+                <action android:name="android.telephony.action.RESET_MOBILE_NETWORK_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.ResetNetwork"/>
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_system"/>
         </activity>
 
         <activity

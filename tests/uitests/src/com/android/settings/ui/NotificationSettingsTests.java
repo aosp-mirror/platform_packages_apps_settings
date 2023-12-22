@@ -22,10 +22,10 @@ import android.provider.Settings;
 import android.system.helpers.ActivityHelper;
 import android.system.helpers.SettingsHelper;
 import android.test.InstrumentationTestCase;
-import android.test.suitebuilder.annotation.MediumTest;
 import android.util.Log;
 import android.widget.ListView;
 
+import androidx.test.filters.MediumTest;
 import androidx.test.uiautomator.By;
 import androidx.test.uiautomator.BySelector;
 import androidx.test.uiautomator.Direction;
