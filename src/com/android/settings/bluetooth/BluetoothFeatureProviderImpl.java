@@ -18,6 +18,9 @@ package com.android.settings.bluetooth;
 
 import android.bluetooth.BluetoothDevice;
 import android.content.ComponentName;
+import android.content.Context;
+import android.media.AudioManager;
+import android.media.Spatializer;
 import android.net.Uri;
 
 import com.android.settingslib.bluetooth.BluetoothUtils;
@@ -44,5 +47,11 @@ public class BluetoothFeatureProviderImpl implements BluetoothFeatureProvider {
     @Override
     public List<ComponentName> getRelatedTools() {
         return null;
+    }
+
+    @Override
+    public Spatializer getSpatializer(Context context) {
+        AudioManager audioManager = context.getSystemService(AudioManager.class);
+        return audioManager.getSpatializer();
     }
 }

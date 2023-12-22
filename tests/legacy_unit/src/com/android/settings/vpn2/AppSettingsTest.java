@@ -27,7 +27,8 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.os.Process;
 import android.test.AndroidTestCase;
-import android.test.suitebuilder.annotation.SmallTest;
+
+import androidx.test.filters.SmallTest;
 
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;

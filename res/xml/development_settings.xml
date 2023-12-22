@@ -255,6 +255,11 @@
             android:title="@string/enable_angle_as_system_driver"
             android:summary="@string/enable_angle_as_system_driver_summary" />
 
+        <SwitchPreferenceCompat
+            android:key="disable_game_default_frame_rate"
+            android:title="@string/disable_game_default_frame_rate_title"
+            android:summary="@string/disable_game_default_frame_rate_summary"/>
+
         <Preference
             android:key="graphics_driver_dashboard"
             android:title="@string/graphics_driver_dashboard_title"
