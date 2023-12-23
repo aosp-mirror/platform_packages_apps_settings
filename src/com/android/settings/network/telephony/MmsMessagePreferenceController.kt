@@ -29,8 +29,13 @@ import kotlinx.coroutines.flow.combine
 /**
  * Preference controller for "MMS messages"
  */
-class MmsMessagePreferenceController(context: Context, key: String) :
-    TelephonyTogglePreferenceController(context, key) {
+class MmsMessagePreferenceController @JvmOverloads constructor(
+    context: Context,
+    key: String,
+    private val getDefaultDataSubId: () -> Int = {
+        SubscriptionManager.getDefaultDataSubscriptionId()
+    },
+) : TelephonyTogglePreferenceController(context, key) {
 
     private lateinit var telephonyManager: TelephonyManager
 
@@ -46,10 +51,17 @@ class MmsMessagePreferenceController(context: Context, key: String) :
         if (subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID &&
             !telephonyManager.isDataEnabled &&
             telephonyManager.isApnMetered(ApnSetting.TYPE_MMS) &&
-            !telephonyManager.isMobileDataPolicyEnabled(
+            !isFallbackDataEnabled()
+        ) AVAILABLE else CONDITIONALLY_UNAVAILABLE
+
+    private fun isFallbackDataEnabled(): Boolean {
+        val defaultDataSubId = getDefaultDataSubId()
+        return defaultDataSubId != mSubId &&
+            telephonyManager.createForSubscriptionId(defaultDataSubId).isDataEnabled &&
+            telephonyManager.isMobileDataPolicyEnabled(
                 TelephonyManager.MOBILE_DATA_POLICY_AUTO_DATA_SWITCH
             )
-        ) AVAILABLE else CONDITIONALLY_UNAVAILABLE
+    }
 
     override fun displayPreference(screen: PreferenceScreen) {
         super.displayPreference(screen)
@@ -61,7 +73,8 @@ class MmsMessagePreferenceController(context: Context, key: String) :
             mContext.mobileDataEnabledFlow(mSubId),
             mContext.subscriptionsChangedFlow(), // Capture isMobileDataPolicyEnabled() changes
         ) { _, _ -> }.collectLatestWithLifecycle(viewLifecycleOwner) {
-            preferenceScreen?.let { super.displayPreference(it) } }
+            preferenceScreen?.let { super.displayPreference(it) }
+        }
     }
 
     override fun isChecked(): Boolean = telephonyManager.isMobileDataPolicyEnabled(

@@ -16,12 +16,12 @@
 
 package com.android.settings.network;
 
-import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -33,6 +33,8 @@ import android.telephony.TelephonyManager;
 
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+
+import com.android.settings.ResetNetworkRequest;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -128,5 +130,45 @@ public class ResetNetworkOperationBuilderTest {
 
         verify(mTelephonyManager).resetSettings();
         verify(mNetworkPolicyManager).factoryReset(imsi);
+    }
+
+    @Test
+    public void resetIms_performReset_whenBuildAndRun_withSingleValidSubId() {
+        final int subId = 1;
+        doReturn(mTelephonyManager).when(mTelephonyManager)
+                .createForSubscriptionId(anyInt());
+        doReturn(mTelephonyManager).when(mContext)
+                .getSystemService(Context.TELEPHONY_SERVICE);
+
+        mBuilder.resetIms(subId).build().run();
+
+        verify(mTelephonyManager).resetIms(anyInt());
+    }
+
+    @Test
+    public void resetIms_performReset_whenBuildAndRun_withInvalidSubId() {
+        final int subId = ResetNetworkRequest.INVALID_SUBSCRIPTION_ID;
+        doReturn(mTelephonyManager).when(mTelephonyManager)
+                .createForSubscriptionId(anyInt());
+        doReturn(mTelephonyManager).when(mContext)
+                .getSystemService(Context.TELEPHONY_SERVICE);
+
+        mBuilder.resetIms(subId).build().run();
+
+        verify(mTelephonyManager, never()).resetIms(anyInt());
+    }
+
+    @Test
+    public void resetIms_performReset_whenBuildAndRun_withAllValidSubId() {
+        final int subId = ResetNetworkRequest.ALL_SUBSCRIPTION_ID;
+        doReturn(mTelephonyManager).when(mTelephonyManager)
+                .createForSubscriptionId(anyInt());
+        doReturn(mTelephonyManager).when(mContext)
+                .getSystemService(Context.TELEPHONY_SERVICE);
+        doReturn(2).when(mTelephonyManager).getActiveModemCount();
+
+        mBuilder.resetIms(subId).build().run();
+
+        verify(mTelephonyManager, times(2)).resetIms(anyInt());
     }
 }

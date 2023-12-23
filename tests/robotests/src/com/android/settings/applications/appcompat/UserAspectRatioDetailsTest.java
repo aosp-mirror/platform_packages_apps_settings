@@ -16,12 +16,21 @@
 
 package com.android.settings.applications.appcompat;
 
+import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_APP_DEFAULT;
+import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_FULLSCREEN;
+import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_UNSET;
+
+import static com.android.settings.applications.AppInfoBase.ARG_PACKAGE_NAME;
 import static com.android.settings.applications.appcompat.UserAspectRatioDetails.KEY_PREF_3_2;
 import static com.android.settings.applications.appcompat.UserAspectRatioDetails.KEY_PREF_DEFAULT;
+import static com.android.settings.applications.appcompat.UserAspectRatioDetails.KEY_PREF_FULLSCREEN;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -30,15 +39,20 @@ import static org.mockito.Mockito.when;
 import android.app.IActivityManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.os.Bundle;
 import android.os.RemoteException;
 
+import androidx.fragment.app.testing.EmptyFragmentActivity;
 import androidx.test.core.app.ApplicationProvider;
+import androidx.test.ext.junit.rules.ActivityScenarioRule;
 
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowActivityManager;
+import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InOrder;
@@ -51,8 +65,12 @@ import org.robolectric.annotation.Config;
  * To run test: atest SettingsRoboTests:UserAspectRatioDetailsTest
  */
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowActivityManager.class})
+@Config(shadows = {ShadowActivityManager.class, ShadowFragment.class})
 public class UserAspectRatioDetailsTest {
+
+    @Rule
+    public ActivityScenarioRule<EmptyFragmentActivity> rule =
+            new ActivityScenarioRule<>(EmptyFragmentActivity.class);
 
     @Mock
     private UserAspectRatioManager mUserAspectRatioManager;
@@ -72,6 +90,8 @@ public class UserAspectRatioDetailsTest {
         mFragment = spy(new UserAspectRatioDetails());
         when(mFragment.getContext()).thenReturn(mContext);
         when(mFragment.getAspectRatioManager()).thenReturn(mUserAspectRatioManager);
+        when(mUserAspectRatioManager.isOverrideToFullscreenEnabled(anyString(), anyInt()))
+                .thenReturn(false);
         ShadowActivityManager.setService(mAm);
         mRadioButtonPref = new RadioWithImagePreference(mContext);
         final FakeFeatureFactory featureFactory = FakeFeatureFactory.setupForTest();
@@ -80,6 +100,8 @@ public class UserAspectRatioDetailsTest {
 
     @Test
     public void onRadioButtonClicked_prefChange_shouldStopActivity() throws RemoteException {
+        doReturn(USER_MIN_ASPECT_RATIO_UNSET).when(mFragment)
+                .getSelectedUserMinAspectRatio(anyString());
         // Default was already selected
         mRadioButtonPref.setKey(KEY_PREF_DEFAULT);
         mFragment.onRadioButtonClicked(mRadioButtonPref);
@@ -92,6 +114,8 @@ public class UserAspectRatioDetailsTest {
 
     @Test
     public void onRadioButtonClicked_prefChange_shouldSetAspectRatio() throws RemoteException {
+        doReturn(USER_MIN_ASPECT_RATIO_UNSET).when(mFragment)
+                .getSelectedUserMinAspectRatio(anyString());
         // Default was already selected
         mRadioButtonPref.setKey(KEY_PREF_DEFAULT);
         mFragment.onRadioButtonClicked(mRadioButtonPref);
@@ -105,6 +129,8 @@ public class UserAspectRatioDetailsTest {
 
     @Test
     public void onRadioButtonClicked_prefChange_logMetrics() throws NullPointerException {
+        doReturn(USER_MIN_ASPECT_RATIO_UNSET).when(mFragment)
+                .getSelectedUserMinAspectRatio(anyString());
         // Default was already selected
         mRadioButtonPref.setKey(KEY_PREF_DEFAULT);
         mFragment.onRadioButtonClicked(mRadioButtonPref);
@@ -128,5 +154,48 @@ public class UserAspectRatioDetailsTest {
                         eq(SettingsEnums.USER_ASPECT_RATIO_APP_INFO_SETTINGS),
                         any(),
                         anyInt());
+    }
+
+    @Test
+    public void onButtonClicked_overrideEnabled_fullscreenPreselected()
+            throws RemoteException {
+        doReturn(true).when(mUserAspectRatioManager)
+                .isOverrideToFullscreenEnabled(anyString(), anyInt());
+        doReturn(USER_MIN_ASPECT_RATIO_UNSET).when(mUserAspectRatioManager)
+                .getUserMinAspectRatioValue(anyString(), anyInt());
+        doReturn(mRadioButtonPref).when(mFragment).findPreference(KEY_PREF_DEFAULT);
+        doReturn(mRadioButtonPref).when(mFragment).findPreference(KEY_PREF_FULLSCREEN);
+        doReturn(true).when(mUserAspectRatioManager)
+                .hasAspectRatioOption(anyInt(), anyString());
+
+        rule.getScenario().onActivity(a -> doReturn(a).when(mFragment).getActivity());
+        final Bundle args = new Bundle();
+        args.putString(ARG_PACKAGE_NAME, anyString());
+        mFragment.setArguments(args);
+        mFragment.onCreate(Bundle.EMPTY);
+
+        // Fullscreen should be pre-selected
+        assertEquals(KEY_PREF_FULLSCREEN, mFragment.mSelectedKey);
+        assertEquals(USER_MIN_ASPECT_RATIO_FULLSCREEN,
+                mFragment.getSelectedUserMinAspectRatio(mFragment.mSelectedKey));
+
+        // Revert to app default, should be set to app default from unset
+        mRadioButtonPref.setKey(KEY_PREF_DEFAULT);
+        mFragment.onRadioButtonClicked(mRadioButtonPref);
+        verify(mUserAspectRatioManager).setUserMinAspectRatio(
+                any(), anyInt(), anyInt());
+        assertEquals(USER_MIN_ASPECT_RATIO_APP_DEFAULT,
+                mFragment.getSelectedUserMinAspectRatio(mFragment.mSelectedKey));
+        assertEquals(KEY_PREF_DEFAULT, mFragment.mSelectedKey);
+
+        // Fullscreen override disabled, should be changed to unset from app default
+        when(mUserAspectRatioManager.isOverrideToFullscreenEnabled(anyString(), anyInt()))
+                .thenReturn(false);
+        mFragment.mKeyToAspectRatioMap.clear();
+        mFragment.onCreate(Bundle.EMPTY);
+
+        assertEquals(KEY_PREF_DEFAULT, mFragment.mSelectedKey);
+        assertEquals(USER_MIN_ASPECT_RATIO_UNSET,
+                mFragment.getSelectedUserMinAspectRatio(mFragment.mSelectedKey));
     }
 }

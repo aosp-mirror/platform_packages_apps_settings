@@ -22,6 +22,8 @@ import android.content.pm.LauncherActivityInfo
 import android.content.pm.LauncherApps
 import android.content.pm.PackageManager
 import android.provider.DeviceConfig.NAMESPACE_WINDOW_MANAGER
+import android.view.WindowManager.PROPERTY_COMPAT_ALLOW_ORIENTATION_OVERRIDE
+import android.view.WindowManager.PROPERTY_COMPAT_ALLOW_USER_ASPECT_RATIO_FULLSCREEN_OVERRIDE
 import android.view.WindowManager.PROPERTY_COMPAT_ALLOW_USER_ASPECT_RATIO_OVERRIDE
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.LocalContext
@@ -96,6 +98,8 @@ class UserAspectRatioAppPreferenceTest {
         whenever(launcherApps.getActivityList(anyString(), any())).thenReturn(launcherActivities)
         // True is ignored but need this here or getBoolean will complain null object
         mockProperty(PROPERTY_COMPAT_ALLOW_USER_ASPECT_RATIO_OVERRIDE, true)
+        mockProperty(PROPERTY_COMPAT_ALLOW_USER_ASPECT_RATIO_FULLSCREEN_OVERRIDE, true)
+        mockProperty(PROPERTY_COMPAT_ALLOW_ORIENTATION_OVERRIDE, true)
     }
 
     @After
