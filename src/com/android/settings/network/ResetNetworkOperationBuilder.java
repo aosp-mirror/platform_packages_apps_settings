@@ -33,6 +33,7 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
+import com.android.settings.ResetNetworkRequest;
 import com.android.settings.network.apn.ApnSettings;
 
 import java.util.ArrayList;
@@ -209,6 +210,32 @@ public class ResetNetworkOperationBuilder {
             Log.i(TAG, "Reset " + uri + ", takes " + (endTime - startTime) + " ms");
         };
         mResetSequence.add(runnable);
+        return this;
+    }
+
+    /**
+     * Append a step of resetting IMS stack.
+     *
+     * @return this
+     */
+    public ResetNetworkOperationBuilder resetIms(int subId) {
+        attachSystemServiceWork(Context.TELEPHONY_SERVICE,
+                (Consumer<TelephonyManager>) tm -> {
+                    if (subId == ResetNetworkRequest.INVALID_SUBSCRIPTION_ID) {
+                        // Do nothing
+                        return;
+                    }
+                    if (subId == ResetNetworkRequest.ALL_SUBSCRIPTION_ID) {
+                        // Reset IMS for all slots
+                        for (int slotIndex = 0; slotIndex < tm.getActiveModemCount(); slotIndex++) {
+                            tm.resetIms(slotIndex);
+                        }
+                    } else {
+                        // Reset IMS for the slot specified by the sucriptionId.
+                        final int slotIndex = SubscriptionManager.getSlotIndex(subId);
+                        tm.resetIms(slotIndex);
+                    }
+                });
         return this;
     }
 
