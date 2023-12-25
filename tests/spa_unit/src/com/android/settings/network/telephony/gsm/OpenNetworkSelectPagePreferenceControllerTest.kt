@@ -59,21 +59,19 @@ class OpenNetworkSelectPagePreferenceControllerTest {
     private val preference = Preference(context).apply { key = TEST_KEY }
     private val preferenceScreen = PreferenceManager(context).createPreferenceScreen(context)
 
-    private val controller = OpenNetworkSelectPagePreferenceController(context, TEST_KEY)
-
     private val serviceState = ServiceState()
+
+    private val controller = OpenNetworkSelectPagePreferenceController(
+        context = context,
+        key = TEST_KEY,
+        allowedNetworkTypesFlowFactory = { emptyFlow() },
+        serviceStateFlowFactory = { flowOf(serviceState) },
+    ).init(subId = SUB_ID)
 
     @Before
     fun setUp() {
         preferenceScreen.addPreference(preference)
-        controller.apply {
-            init(
-                subId = SUB_ID,
-                allowedNetworkTypesFlow = emptyFlow(),
-                serviceStateFlow = flowOf(serviceState),
-            )
-            displayPreference(preferenceScreen)
-        }
+        controller.displayPreference(preferenceScreen)
     }
 
     @Test

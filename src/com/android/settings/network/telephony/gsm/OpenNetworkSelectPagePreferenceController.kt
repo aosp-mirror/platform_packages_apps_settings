@@ -21,7 +21,6 @@ import android.content.Intent
 import android.provider.Settings
 import android.telephony.ServiceState
 import android.telephony.TelephonyManager
-import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LifecycleOwner
 import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
@@ -39,12 +38,15 @@ import kotlinx.coroutines.withContext
 /**
  * Preference controller for "Open network select"
  */
-class OpenNetworkSelectPagePreferenceController(context: Context, key: String) :
-    TelephonyBasePreferenceController(context, key),
+class OpenNetworkSelectPagePreferenceController @JvmOverloads constructor(
+    context: Context,
+    key: String,
+    private val allowedNetworkTypesFlowFactory: (subId: Int) -> Flow<Long> =
+        context::allowedNetworkTypesFlow,
+    private val serviceStateFlowFactory: (subId: Int) -> Flow<ServiceState> =
+        context::serviceStateFlow,
+) : TelephonyBasePreferenceController(context, key),
     AutoSelectPreferenceController.OnNetworkSelectModeListener {
-
-    private lateinit var allowedNetworkTypesFlow: Flow<Long>
-    private lateinit var serviceStateFlow: Flow<ServiceState>
 
     private var preference: Preference? = null
 
@@ -53,20 +55,7 @@ class OpenNetworkSelectPagePreferenceController(context: Context, key: String) :
      */
     fun init(subId: Int): OpenNetworkSelectPagePreferenceController {
         mSubId = subId
-        allowedNetworkTypesFlow = mContext.allowedNetworkTypesFlow(subId)
-        serviceStateFlow = mContext.serviceStateFlow(subId)
         return this
-    }
-
-    @VisibleForTesting
-    fun init(
-        subId: Int,
-        allowedNetworkTypesFlow: Flow<Long>,
-        serviceStateFlow: Flow<ServiceState>,
-    ) {
-        mSubId = subId
-        this.allowedNetworkTypesFlow = allowedNetworkTypesFlow
-        this.serviceStateFlow = serviceStateFlow
     }
 
     override fun getAvailabilityStatus(subId: Int) =
@@ -83,13 +72,13 @@ class OpenNetworkSelectPagePreferenceController(context: Context, key: String) :
     }
 
     override fun onViewCreated(viewLifecycleOwner: LifecycleOwner) {
-        allowedNetworkTypesFlow.collectLatestWithLifecycle(viewLifecycleOwner) {
+        allowedNetworkTypesFlowFactory(mSubId).collectLatestWithLifecycle(viewLifecycleOwner) {
             preference?.isVisible = withContext(Dispatchers.Default) {
                 MobileNetworkUtils.shouldDisplayNetworkSelectOptions(mContext, mSubId)
             }
         }
 
-        serviceStateFlow
+        serviceStateFlowFactory(mSubId)
             .collectLatestWithLifecycle(viewLifecycleOwner) { serviceState ->
                 preference?.summary = if (serviceState.state == ServiceState.STATE_IN_SERVICE) {
                     withContext(Dispatchers.Default) {
