@@ -176,6 +176,8 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
                                 localeInfo.getFullNameNative()),
                         getString(R.string.desc_system_locale_addition),
                         localeTag);
+                mMetricsFeatureProvider.action(this,
+                        SettingsEnums.ACTION_NOTIFICATION_FOR_SYSTEM_LOCALE);
             }
         } catch (PackageManager.NameNotFoundException e) {
             Log.e(TAG, "Unable to find info for package: " + mPackageName);

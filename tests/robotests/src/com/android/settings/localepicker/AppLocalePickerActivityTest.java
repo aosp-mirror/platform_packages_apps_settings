@@ -314,6 +314,8 @@ public class AppLocalePickerActivityTest {
         assertThat(info.getNotificationCount()).isEqualTo(1);
         assertThat(info.getDismissCount()).isEqualTo(0);
         assertThat(info.getLastNotificationTimeMs()).isNotEqualTo(0);
+        verify(mFeatureFactory.metricsFeatureProvider).action(
+                any(), eq(SettingsEnums.ACTION_NOTIFICATION_FOR_SYSTEM_LOCALE));
 
         mDataManager.clearLocaleNotificationMap();
     }
