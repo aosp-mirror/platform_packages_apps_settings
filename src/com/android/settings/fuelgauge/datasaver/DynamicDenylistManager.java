@@ -31,6 +31,7 @@ import android.util.Log;
 import androidx.annotation.VisibleForTesting;
 
 import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.Set;
 
 /** A class to dynamically manage per apps {@link NetworkPolicyManager} POLICY_ flags. */
@@ -87,6 +88,7 @@ public final class DynamicDenylistManager {
 
     /** Set policy flags for specific UID. */
     public void setUidPolicyLocked(int uid, int policy) {
+        Log.i(TAG, "setUidPolicyLocked: uid=" + uid + " policy=" + policy);
         synchronized (mLock) {
             mNetworkPolicyManager.setUidPolicy(uid, policy);
         }
@@ -152,17 +154,21 @@ public final class DynamicDenylistManager {
     /** Reset the UIDs in the denylist if needed. */
     public void resetDenylistIfNeeded(String packageName, boolean force) {
         if (!force && !SETTINGS_PACKAGE_NAME.equals(packageName)) {
+            Log.w(TAG, "resetDenylistIfNeeded: invalid conditions");
             return;
         }
         synchronized (mLock) {
             final int[] uids = mNetworkPolicyManager
                     .getUidsWithPolicy(POLICY_REJECT_METERED_BACKGROUND);
             if (uids != null && uids.length != 0) {
+                Log.i(TAG, "resetDenylistIfNeeded: " + Arrays.toString(uids));
                 for (int uid : uids) {
                     if (!getDenylistAllUids(getManualDenylistPref()).contains(uid)) {
                         mNetworkPolicyManager.setUidPolicy(uid, POLICY_NONE);
                     }
                 }
+            } else {
+                Log.w(TAG, "resetDenylistIfNeeded: there is no valid UIDs");
             }
         }
         clearSharedPreferences();
@@ -209,6 +215,7 @@ public final class DynamicDenylistManager {
     }
 
     void clearSharedPreferences() {
+        Log.i(TAG, "clearSharedPreferences()");
         getManualDenylistPref().edit().clear().apply();
         getDynamicDenylistPref().edit().clear().apply();
     }
