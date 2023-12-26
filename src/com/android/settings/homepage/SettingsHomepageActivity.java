@@ -175,6 +175,12 @@ public class SettingsHomepageActivity extends FragmentActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        if (!isTaskRoot() && !isSingleTask()) {
+            Log.i(TAG, "Not task root nor single task, finish");
+            finish();
+            return;
+        }
+
         mIsEmbeddingActivityEnabled = ActivityEmbeddingUtils.isEmbeddingActivityEnabled(this);
         if (mIsEmbeddingActivityEnabled) {
             final UserManager um = getSystemService(UserManager.class);
@@ -289,6 +295,12 @@ public class SettingsHomepageActivity extends FragmentActivity implements
             updateHomepagePaddings();
         }
         updateSplitLayout();
+    }
+
+    private boolean isSingleTask() {
+        ActivityInfo info = getIntent().resolveActivityInfo(getPackageManager(),
+                PackageManager.MATCH_DEFAULT_ONLY);
+        return info.launchMode == ActivityInfo.LAUNCH_SINGLE_TASK;
     }
 
     private void updateSplitLayout() {
