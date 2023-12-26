@@ -69,6 +69,18 @@ public class LocaleNotificationDataManagerTest {
     }
 
     @Test
+    public void testRemoveNotificationInfo() {
+        String locale = "en-US";
+        Set<Integer> uidSet = Set.of(101);
+        NotificationInfo info = new NotificationInfo(uidSet, 1, 1, 100L, 1000);
+
+        mDataManager.putNotificationInfo(locale, info);
+        assertThat(mDataManager.getNotificationInfo(locale)).isEqualTo(info);
+        mDataManager.removeNotificationInfo(locale);
+        assertThat(mDataManager.getNotificationInfo(locale)).isNull();
+    }
+
+    @Test
     public void testGetNotificationMap() {
         String enUS = "en-US";
         Set<Integer> uidSet1 = Set.of(101, 102);
