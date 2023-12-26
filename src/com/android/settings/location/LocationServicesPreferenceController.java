@@ -32,7 +32,7 @@ public class LocationServicesPreferenceController extends BasePreferenceControll
 
     @AvailabilityStatus
     public int getAvailabilityStatus() {
-        return mContext.getResources().getBoolean(R.bool.config_show_location_scanning)
+        return mContext.getResources().getBoolean(R.bool.config_show_location_services)
                 ? AVAILABLE
                 : UNSUPPORTED_ON_DEVICE;
     }
