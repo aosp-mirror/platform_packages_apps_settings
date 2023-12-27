@@ -37,6 +37,9 @@ import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.utils.ThreadUtils;
+
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * The controller of the Spatial audio setting in the bluetooth detail settings.
@@ -55,6 +58,8 @@ public class BluetoothDetailsSpatialAudioController extends BluetoothDetailsCont
     PreferenceCategory mProfilesContainer;
     @VisibleForTesting
     AudioDeviceAttributes mAudioDevice = null;
+
+    AtomicBoolean mHasHeadTracker = new AtomicBoolean(false);
 
     public BluetoothDetailsSpatialAudioController(
             Context context,
@@ -77,7 +82,13 @@ public class BluetoothDetailsSpatialAudioController extends BluetoothDetailsCont
         String key = switchPreference.getKey();
         if (TextUtils.equals(key, KEY_SPATIAL_AUDIO)) {
             updateSpatializerEnabled(switchPreference.isChecked());
-            refreshSpatialAudioEnabled(switchPreference);
+            ThreadUtils.postOnBackgroundThread(
+                    () -> {
+                        mHasHeadTracker.set(
+                                mAudioDevice != null && mSpatializer.hasHeadTracker(mAudioDevice));
+                        mContext.getMainExecutor()
+                                .execute(() -> refreshSpatialAudioEnabled(switchPreference));
+                    });
             return true;
         } else if (TextUtils.equals(key, KEY_HEAD_TRACKING)) {
             updateSpatializerHeadTracking(switchPreference.isChecked());
@@ -124,7 +135,15 @@ public class BluetoothDetailsSpatialAudioController extends BluetoothDetailsCont
         if (mAudioDevice == null) {
             getAvailableDevice();
         }
+        ThreadUtils.postOnBackgroundThread(
+                () -> {
+                    mHasHeadTracker.set(
+                            mAudioDevice != null && mSpatializer.hasHeadTracker(mAudioDevice));
+                    mContext.getMainExecutor().execute(this::refreshUi);
+                });
+    }
 
+    private void refreshUi() {
         TwoStatePreference spatialAudioPref = mProfilesContainer.findPreference(KEY_SPATIAL_AUDIO);
         if (spatialAudioPref == null && mAudioDevice != null) {
             spatialAudioPref = createSpatialAudioPreference(mProfilesContainer.getContext());
@@ -145,7 +164,8 @@ public class BluetoothDetailsSpatialAudioController extends BluetoothDetailsCont
         refreshSpatialAudioEnabled(spatialAudioPref);
     }
 
-    private void refreshSpatialAudioEnabled(TwoStatePreference spatialAudioPref) {
+    private void refreshSpatialAudioEnabled(
+            TwoStatePreference spatialAudioPref) {
         boolean isSpatialAudioOn = mSpatializer.getCompatibleAudioDevices().contains(mAudioDevice);
         Log.d(TAG, "refresh() isSpatialAudioOn : " + isSpatialAudioOn);
         spatialAudioPref.setChecked(isSpatialAudioOn);
@@ -160,9 +180,8 @@ public class BluetoothDetailsSpatialAudioController extends BluetoothDetailsCont
 
     private void refreshHeadTracking(TwoStatePreference spatialAudioPref,
             TwoStatePreference headTrackingPref) {
-        boolean isHeadTrackingAvailable =
-                spatialAudioPref.isChecked() && mSpatializer.hasHeadTracker(mAudioDevice);
-        Log.d(TAG, "refresh() has head tracker : " + mSpatializer.hasHeadTracker(mAudioDevice));
+        boolean isHeadTrackingAvailable = spatialAudioPref.isChecked() && mHasHeadTracker.get();
+        Log.d(TAG, "refresh() has head tracker : " + mHasHeadTracker.get());
         headTrackingPref.setVisible(isHeadTrackingAvailable);
         if (isHeadTrackingAvailable) {
             headTrackingPref.setChecked(mSpatializer.isHeadTrackerEnabled(mAudioDevice));
