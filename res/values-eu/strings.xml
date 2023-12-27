@@ -701,8 +701,8 @@
     <string name="tx_link_speed" msgid="3071955184703668113">"<xliff:g id="TRANSMIT_LINK_SPEED">%1$d</xliff:g> Mb/s"</string>
     <string name="rx_link_speed" msgid="6292229178855567783">"<xliff:g id="RECEIVE_LINK_SPEED">%1$d</xliff:g> Mb/s"</string>
     <string name="link_speed" msgid="931786745741016446">"<xliff:g id="LINK_SPEED">%1$d</xliff:g> Mb/s"</string>
-    <string name="wifi_ask_enable" msgid="6860056048266810769">"<xliff:g id="REQUESTER">%s</xliff:g> aplikazioak Wi-Fi konexioa aktibatu nahi du"</string>
-    <string name="wifi_ask_disable" msgid="1663208096020309639">"<xliff:g id="REQUESTER">%s</xliff:g> aplikazioak Wi-Fi konexioa desaktibatu nahi du"</string>
+    <string name="wifi_ask_enable" msgid="6860056048266810769">"<xliff:g id="REQUESTER">%s</xliff:g> aplikazioak wifi-konexioa aktibatu nahi du"</string>
+    <string name="wifi_ask_disable" msgid="1663208096020309639">"<xliff:g id="REQUESTER">%s</xliff:g> aplikazioak wifi-konexioa desaktibatu nahi du"</string>
     <string name="art_verifier_for_debuggable_title" msgid="1926445785190030479">"Egiaztatu aratz daitezkeen aplikazioen byte-kodea"</string>
     <string name="art_verifier_for_debuggable_summary" msgid="4802875841862652879">"Eman aratz daitezkeen aplikazioen byte-kodea egiaztatzeko baimena ART egiaztatzaileari"</string>
     <string name="show_refresh_rate" msgid="5742688821872354973">"Erakutsi freskatze-abiadura"</string>
@@ -718,7 +718,7 @@
     <string name="wifi_settings_primary_switch_title" msgid="628360786662947258">"Erabili wifi-konexioa"</string>
     <string name="wifi_settings_category" msgid="3523464780563778321">"Wi-Fi ezarpenak"</string>
     <string name="wifi_select_network" msgid="6692897876718813259">"Hautatu wifi-sarea"</string>
-    <string name="wifi_starting" msgid="6147022683967506341">"Wi-Fi konexioa aktibatzen…"</string>
+    <string name="wifi_starting" msgid="6147022683967506341">"Wifi-konexioa aktibatzen…"</string>
     <string name="wifi_stopping" msgid="4471699665741299711">"Wi-Fia desaktibatzen…"</string>
     <string name="wifi_error" msgid="4903954145386086899">"Errorea"</string>
     <string name="wifi_sap_no_channel_error" msgid="2126487622024749402">"5 GHz-eko banda ez dago erabilgarri herrialde honetan"</string>
@@ -838,7 +838,7 @@
     <string name="lost_internet_access_title" msgid="9032463989950384698">"Wifi-sarea ez dago Internetera konektatuta"</string>
     <string name="lost_internet_access_text" msgid="1535911323549496789">"Sare mugikorra erabil dezakezu Wi-Fi sareak konexio txarra badu. Agian datu-erabilera ordaindu beharko duzu."</string>
     <string name="lost_internet_access_switch" msgid="7935665847081706202">"Aldatu datu-konexiora"</string>
-    <string name="lost_internet_access_cancel" msgid="1981171269794585284">"Jarraitu Wi‑Fi konexioa erabiltzen"</string>
+    <string name="lost_internet_access_cancel" msgid="1981171269794585284">"Jarraitu wifi-konexioa erabiltzen"</string>
     <string name="lost_internet_access_persist" msgid="6813604557672782197">"Ez erakutsi berriro"</string>
     <string name="wifi_connect" msgid="2481467560349907397">"Konektatu"</string>
     <string name="wifi_turned_on_message" msgid="8069855406962662881">"Wifi konexioa aktibatu da"</string>
@@ -2767,7 +2767,7 @@
     <string name="nfc_payment_favor_open" msgid="8554643344050373346">"Ordaintzeko beste aplikazio bat irekita badago izan ezik"</string>
     <string name="nfc_payment_pay_with" msgid="3001320460566523453">"Kontakturik gabeko ordainketa-terminaletan, ordaindu honen bidez:"</string>
     <string name="nfc_how_it_works_title" msgid="1363791241625771084">"Terminalean ordaintzea"</string>
-    <string name="nfc_how_it_works_content" msgid="1141382684788210772">"Konfiguratu ordaintzeko aplikazio bat. Ondoren, jarri telefonoaren atzeko aldea kontakturik gabeko sistemaren ikurra duen terminal baten aurrean."</string>
+    <string name="nfc_how_it_works_content" msgid="1141382684788210772">"Konfiguratu ordaintzeko aplikazio bat. Ondoren, jarri telefonoaren atzealdea kontakturik gabeko sistemaren ikurra duen terminal baten aurrean."</string>
     <string name="nfc_how_it_works_got_it" msgid="4717868843368296630">"Ados"</string>
     <string name="nfc_more_title" msgid="1041094244767216498">"Gehiago…"</string>
     <string name="nfc_payment_set_default_label" msgid="7395939287766230293">"Ezarri ordainketak egiteko aplikazio lehenetsia"</string>
@@ -4426,15 +4426,15 @@
     <string name="content_capture" msgid="868372905432812238">"Aplikazioko edukia"</string>
     <string name="content_capture_summary" msgid="49720773699715531">"Eman Android sistemara edukia bidaltzeko baimena aplikazioei"</string>
     <string name="capture_system_heap_dump_title" msgid="9210974110606886455">"Sortu memoria-iraulketaren txostena"</string>
-    <string name="development_memtag_page_title" msgid="3546667618748029188">"Memorian etiketatzeko luzapena"</string>
-    <string name="development_memtag_intro" msgid="8032596625527637164">"Memorian etiketatzeko luzapenari (MTE) esker, errazago bilatuko dituzu memoriaren segurtasunarekin erlazionatutako arazoak aplikazioan. Gainera, aplikazioko kode natiboa seguruagoa izango da."</string>
+    <string name="development_memtag_page_title" msgid="3546667618748029188">"Memory Tagging Extension"</string>
+    <string name="development_memtag_intro" msgid="8032596625527637164">"Memory Tagging Extension-ari (MTE) esker, errazago bilatuko dituzu memoriaren segurtasunarekin erlazionatutako arazoak aplikazioan. Gainera, aplikazioko kode natiboa seguruagoa izango da."</string>
     <string name="development_memtag_footer" msgid="5681925148773626562">"MTEa aktibatuz gero, baliteke gailuaren errendimendua hain ona ez izatea."</string>
     <string name="development_memtag_learn_more" msgid="8961984806973926704">"Lortu MTEari buruzko informazio gehiago"</string>
     <string name="development_memtag_toggle" msgid="2474420239518386894">"Gaitu MTEa hura desaktibatu arte"</string>
     <string name="development_memtag_reboot_message_on" msgid="8100075676107327847">"MTEa aktibatzeko, gailua berrabiarazi beharko duzu."</string>
     <string name="development_memtag_reboot_message_off" msgid="3703925647922079456">"MTEa desaktibatzeko, gailua berrabiarazi beharko duzu."</string>
     <string name="reboot_with_mte_title" msgid="2320125810211279">"Gaitu MTEa saio bakar batean"</string>
-    <string name="reboot_with_mte_message" msgid="1232881567956207641">"Sistema berrabiarazi egingo da, eta memorian etiketatzeko luzapenarekin (MTE) probak egiteko baimena emango. Baliteke MTEak eragin negatiboa izatea sistemaren errendimenduan eta egonkortasunean. Ondoz ondoko hurrengo berrabiaraztean berrezarriko da."</string>
+    <string name="reboot_with_mte_message" msgid="1232881567956207641">"Sistema berrabiarazi egingo da, eta Memory Tagging Extension-arekin (MTE) probak egiteko baimena emango. Baliteke MTEak eragin negatiboa izatea sistemaren errendimenduan eta egonkortasunean. Ondoz ondoko hurrengo berrabiaraztean berrezarriko da."</string>
     <string name="reboot_with_mte_summary" msgid="3896537791216432882">"Berrabiarazi sistema MTEa gaituta daukan saio bakar bat abiarazteko"</string>
     <string name="reboot_with_mte_already_enabled" msgid="4439168867613407167">"Dagoeneko gaituta dago MTEa"</string>
     <string name="capturing_system_heap_dump_message" msgid="8410503247477360622">"Memoria-iraulketaren txostena sortzen"</string>
