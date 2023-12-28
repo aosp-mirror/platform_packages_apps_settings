@@ -210,7 +210,7 @@
             android:title="@string/network_operator_category"
             settings:controller="com.android.settings.network.telephony.NetworkPreferenceCategoryController">
 
-            <SwitchPreferenceCompat
+            <com.android.settings.spa.preference.ComposePreference
                 android:key="auto_select_key"
                 android:title="@string/select_automatically"
                 settings:controller="com.android.settings.network.telephony.gsm.AutoSelectPreferenceController"/>
