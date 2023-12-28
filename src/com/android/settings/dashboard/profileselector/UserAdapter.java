@@ -17,6 +17,8 @@
 package com.android.settings.dashboard.profileselector;
 
 import static android.app.admin.DevicePolicyResources.Strings.Settings.PERSONAL_CATEGORY_HEADER;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.PRIVATE_CATEGORY_HEADER;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_CATEGORY_HEADER;
 
 import android.app.ActivityManager;
 import android.app.admin.DevicePolicyManager;
@@ -26,6 +28,7 @@ import android.content.pm.UserInfo;
 import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +49,7 @@ import java.util.Objects;
  * Adapter for a spinner that shows a list of users.
  */
 public class UserAdapter extends BaseAdapter {
+    private static final String TAG = "UserAdapter";
 
     /** Holder for user details */
     public static class UserDetails {
@@ -79,8 +83,17 @@ public class UserAdapter extends BaseAdapter {
                 return resources.getString(PERSONAL_CATEGORY_HEADER,
                         () -> context.getString(
                                 com.android.settingslib.R.string.category_personal));
+            } else if (mUserManager.isManagedProfile(userId)) {
+                return resources.getString(WORK_CATEGORY_HEADER,
+                        () -> context.getString(com.android.settingslib.R.string.category_work));
+            } else if (android.os.Flags.allowPrivateProfile()
+                    && mUserManager.getUserInfo(userId).isPrivateProfile()) {
+                return resources.getString(PRIVATE_CATEGORY_HEADER,
+                        () -> context.getString(com.android.settingslib.R.string.category_private));
             }
-            return (String) mUserManager.getBadgedLabelForUser(/* label= */ "", mUserHandle);
+            Log.w(TAG, "title requested for unexpected user id " + userId);
+            return resources.getString(PERSONAL_CATEGORY_HEADER,
+                    () -> context.getString(com.android.settingslib.R.string.category_personal));
         }
     }
 

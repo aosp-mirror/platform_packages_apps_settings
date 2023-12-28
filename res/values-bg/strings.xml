@@ -79,8 +79,8 @@
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"Сродни"</string>
     <string name="bluetooth_ringtone_title" msgid="3177308461256892085">"Мелодия и будилници"</string>
     <string name="bluetooth_call_title" msgid="6851464952021874072">"Звук по време на обаждания"</string>
-    <string name="bluetooth_media_title" msgid="343705257183053699">"Мултимедия"</string>
-    <string name="bluetooth_system_sounds_title" msgid="6746938637128763205">"Известия и др. системни звуци"</string>
+    <string name="bluetooth_media_title" msgid="2878373577382067290">"Мултимедия и системни звуци"</string>
+    <string name="bluetooth_notification_title" msgid="8708962394926222039">"Известия"</string>
     <string name="bluetooth_audio_routing_footer_summary" msgid="410260713589309293">"По подразбиране аудиоизходът се определя от отделните приложения"</string>
     <string name="bluetooth_device" msgid="2217973503732544291">"Устройство с Bluetooth без име"</string>
     <string name="progress_scanning" msgid="2564746192843011826">"Търси се"</string>
@@ -542,13 +542,16 @@
     <string name="privacy_header" msgid="5526002421324257007">"Поверителност"</string>
     <string name="work_profile_category_header" msgid="85707750968948517">"Служебен потребителски профил"</string>
     <string name="private_space_title" msgid="7078627930195569767">"Лично пространство"</string>
-    <string name="private_space_summary" msgid="8237652417163408001">"Скриване на приложенията в лична папка"</string>
+    <string name="private_space_summary" msgid="2274405892301976238">"Заключване и скриване на частните приложения"</string>
     <string name="private_space_description" msgid="5494963647270826210">"Скриване на приложенията в лична папка, до която само вие имате достъп"</string>
     <string name="private_space_lock_title" msgid="3006539720164938296">"Опция за заключване на личното пространство"</string>
     <string name="private_space_one_lock_summary" msgid="2759953747682959371">"Можете да отключвате личното пространство по същия начин, по който отключвате устройството си, или да изберете друга опция за заключване"</string>
     <string name="private_space_screen_lock_title" msgid="8679383894967823163">"Използване на опцията за заключване на екрана на у-вото"</string>
     <string name="private_space_biometric_title" msgid="3934339826674553174">"Отключване с лице и отпечатък"</string>
     <string name="private_space_biometric_summary" msgid="4403837276018724581">"Докоснете, за да настроите"</string>
+    <string name="private_space_fingerprint_unlock_title" msgid="5804023571114910034">"„Отключване с отпечатък“ за частното пространство"</string>
+    <string name="private_space_face_unlock_title" msgid="6613018437620070183">"„Отключване с лице“ за частното пространство"</string>
+    <string name="private_space_category_ways_to_unlock" msgid="4356631225316950046">"Начини за отключване"</string>
     <string name="private_space_screen_lock_summary" msgid="394837965365561070">"Като опцията за заключване на екрана на устройството"</string>
     <string name="private_space_new_lock_title" msgid="7306873010565337671">"Искате ли нова опция за закл. на личното простр.?"</string>
     <string name="private_space_hide_title" msgid="8687034008994037610">"Скриване, когато е заключено"</string>
@@ -565,36 +568,39 @@
     <string name="private_space_deleted" msgid="7825768516955610897">"Личното пространство бе изтрито успешно"</string>
     <string name="private_space_delete_failed" msgid="8500755484258565011">"Изтриването на личното пространство не бе успешно"</string>
     <string name="no_device_lock_title" msgid="1078223464721029954">"Настройте заключване на екрана"</string>
-    <string name="no_device_lock_summary" msgid="7436025227616244687">"За да ползвате личното си пространство, настройте заключване на екрана на това устройство."</string>
+    <string name="no_device_lock_summary" msgid="7436025227616244687">"За да ползвате частното си пространство, настройте заключване на екрана на устройството."</string>
     <string name="no_device_lock_action_label" msgid="2640487005629001288">"Настройване на закл. на екрана"</string>
     <string name="no_device_lock_cancel" msgid="4412602160321228863">"Отказ"</string>
     <string name="private_space_cancel_label" msgid="379259667396956886">"Отказ"</string>
     <string name="private_space_setup_button_label" msgid="2094882154623560585">"Настройване"</string>
-    <string name="private_space_setup_title" msgid="7091257695872833671">"Настройване на лично пространство"</string>
+    <string name="private_space_setup_title" msgid="7091257695872833671">"Настройване на частно пространство"</string>
     <string name="private_space_hide_apps_summary" msgid="6272406822568588610">"Частните приложения са на отделно място, което можете да скриете или заключите"</string>
     <string name="private_space_how_title" msgid="6878224242661347658">"Начин на работа"</string>
-    <string name="private_space_access_bottom_text" msgid="8931773427017046981">"Можете да осъществите достъп до личното пространство от долната част на списъка с приложения"</string>
-    <string name="private_space_protected_lock_text" msgid="3926344387256377994">"Приложенията в личното простр. са защитени със заключване"</string>
-    <string name="private_space_hidden_notifications_text" msgid="1487992156742340621">"Известията от приложенията в личното ви пространство са скрити, когато то е заключено"</string>
-    <string name="private_space_apps_permission_text" msgid="7030946025253366172">"Когато личното ви пространство е заключено, приложенията в него няма да се показват в мениджъра на разрешенията, таблото за управление на поверителността и други настройки.\n\nЛичното ви пространство не може да бъде преместено на ново устройство. В такъв случай ще трябва да настроите друго лично пространство.\n\nВсеки, който свърже устройството ви с компютър или инсталира опасни приложения на него, би могъл да осъществи достъп до личното ви пространство."</string>
-    <string name="private_space_setting_up_text" msgid="8458035555212009528">"Личното пространство се настройва…"</string>
-    <string name="private_space_notifications_hidden_title" msgid="4377296080723608107">"Известията от приложенията в личното пространство са скрити, когато то е заключено"</string>
-    <string name="private_space_share_photos_title" msgid="2276051999632122847">"Отключете личното си пространство, за да споделяте снимки или файлове от приложенията в него"</string>
-    <string name="private_space_apps_installed_title" msgid="2428207301009983268">"Някои приложения вече са инсталирани в личното ви пространство"</string>
-    <string name="private_space_error_screen_title" msgid="1210906480024148398">"Настройването на личното пространство не бе успешно"</string>
+    <string name="private_space_access_bottom_text" msgid="8931773427017046981">"Можете да осъществите достъп до частното пространство от долната част на списъка с приложения"</string>
+    <string name="private_space_protected_lock_text" msgid="3926344387256377994">"Приложенията в частното простр. са защитени със заключване"</string>
+    <string name="private_space_hidden_notifications_text" msgid="1487992156742340621">"Известията от приложенията в частното ви пространство са скрити, когато то е заключено"</string>
+    <string name="private_space_apps_permission_text" msgid="7030946025253366172">"Когато частното ви пространство е заключено, приложенията в него няма да се показват в мениджъра на разрешенията, таблото за управление на поверителността и други настройки.\n\nЧастното ви пространство не може да бъде преместено на ново устройство. В такъв случай ще трябва да настроите друго частно пространство.\n\nВсеки, който свърже устройството ви с компютър или инсталира опасни приложения на него, би могъл да осъществи достъп до частното ви пространство."</string>
+    <string name="private_space_setting_up_text" msgid="8458035555212009528">"Частното пространство се настройва…"</string>
+    <string name="private_space_notifications_hidden_title" msgid="4377296080723608107">"Известията от приложенията в частното пространство са скрити, когато то е заключено"</string>
+    <string name="private_space_share_photos_title" msgid="2102594859384040485">"Отключете частното пространство, за да споделяте снимки или файлове от приложенията в него"</string>
+    <string name="private_space_apps_installed_title" msgid="2428207301009983268">"Някои приложения вече са инсталирани в частното ви пространство"</string>
+    <string name="private_space_error_screen_title" msgid="1210906480024148398">"Настройването на частното пространство не бе успешно"</string>
     <string name="private_space_tryagain_label" msgid="8305362615231738367">"Нов опит"</string>
-    <string name="private_space_lockscreen_title" msgid="6034864097861137509">"Да се отключва ли личното простр. по същия начин?"</string>
-    <string name="private_space_lockscreen_summary" msgid="430569465080645805">"Можете да отключвате личното пространство по същия начин, по който отключвате устройството си, или да изберете друга опция за заключване"</string>
+    <string name="private_space_lockscreen_title" msgid="6034864097861137509">"Да се отключва ли частното простр. по същия начин?"</string>
+    <string name="private_space_lockscreen_summary" msgid="430569465080645805">"Можете да отключвате частното пространство по същия начин, по който отключвате устройството си, или да изберете друга опция за заключване"</string>
     <string name="private_space_use_screenlock_label" msgid="9182153443192032782">"Използване на закл. на екрана"</string>
     <string name="private_space_set_lock_label" msgid="1790408277477408475">"Избиране на нова опция за заключване"</string>
     <string name="private_space_success_title" msgid="4351904015352046118">"Готово!"</string>
-    <string name="private_space_access_text" msgid="4258842502257201013">"За достъп до личното си пространство отворете списъка с приложения и превъртете надолу"</string>
+    <string name="private_space_access_text" msgid="4258842502257201013">"За достъп до частното си пространство отворете списъка с приложения и превъртете надолу"</string>
     <string name="private_space_done_label" msgid="1020482651595246071">"Готово"</string>
-    <string name="private_space_scrolldown_to_access" msgid="4820954877349434545">"Превъртете надолу, за да намерите личното пространство"</string>
-    <string name="private_space_retry_signin_title" msgid="2340841075193680666">"Влезте в профил, за да настроите лично пространство"</string>
-    <string name="private_space_retry_summary" msgid="1976929616948459609">"Трябва да влезете в профил, за да настроите лично пространство"</string>
-    <string name="private_space_lock_setup_title" msgid="6541564212199510787">"Изберете опция за заключване на личното ви пространство"</string>
-    <string name="private_space_lock_setup_description" msgid="423405593476300918">"Можете да отключвате личното си пространство посредством отпечатъка си. От съображения за сигурност трябва да зададете резервна опция за заключване."</string>
+    <string name="private_space_scrolldown_to_access" msgid="4820954877349434545">"Превъртете надолу, за да намерите частното пространство"</string>
+    <string name="private_space_retry_signin_title" msgid="2340841075193680666">"Влезте в профил, за да настроите частно пространство"</string>
+    <string name="private_space_retry_summary" msgid="1976929616948459609">"Трябва да влезете в профил, за да настроите частно пространство"</string>
+    <string name="private_space_lock_setup_title" msgid="6541564212199510787">"Изберете опция за заключване на частното ви пространство"</string>
+    <string name="private_space_lock_setup_description" msgid="423405593476300918">"Можете да отключвате частното си пространство посредством отпечатъка си. От съображения за сигурност трябва да зададете резервна опция за заключване."</string>
+    <string name="private_space_choose_your_pin_header" msgid="4560802934975898265">"Задайте ПИН код за частното пространство"</string>
+    <string name="private_space_choose_your_password_header" msgid="7660259341095044434">"Задайте парола за частното пространство"</string>
+    <string name="private_space_choose_your_pattern_header" msgid="2165607102459936724">"Задайте фигура за частното пространство"</string>
     <string name="privatespace_unhide_header" msgid="1192011539687584004">"За показване на личното пространство (не е окончателната UX)"</string>
     <string name="privatespace_open_settings" msgid="5038101805604421393">"Отворете приложението „Настройки“"</string>
     <string name="privatespace_tap_settings" msgid="928932826450238276">"Докоснете „Сигурност и поверителност &gt; Лично пространство &gt; Скриване на личното пространство при заключен екран“"</string>
@@ -836,6 +842,12 @@
     <string name="wifi_in_airplane_mode" msgid="1235412508135267981">"В самолетен режим"</string>
     <string name="wifi_notify_open_networks" msgid="2610323626246818961">"Известяване за обществени мрежи"</string>
     <string name="wifi_notify_open_networks_summary" msgid="191058832201741013">"Известяване при наличие на висококачествена обществена мрежа"</string>
+    <!-- no translation found for wifi_allow_wep_networks (8772342993235292010) -->
+    <skip />
+    <!-- no translation found for wifi_allow_wep_networks_summary (3033397893296724615) -->
+    <skip />
+    <!-- no translation found for wifi_allow_wep_networks_summary_carrier_not_allow (6298103289728210026) -->
+    <skip />
     <string name="wifi_wakeup" msgid="3834327315861781611">"Автоматично включване на Wi‑Fi"</string>
     <string name="wifi_wakeup_summary" msgid="5778059083790221465">"Wi‑Fi ще се включва при наличие на висококачествени запазени мрежи, като например тази в дома ви"</string>
     <string name="wifi_wakeup_summary_no_location" msgid="681323616606485096">"Не е налице, защото местоположението е изключено. Включете "<annotation id="link">"настройката"</annotation>"."</string>
@@ -857,6 +869,18 @@
     <string name="wifi_settings_scanning_required_info" msgid="1473411566072565789">"Сканирането за Wi‑Fi разрешава на приложенията и услугите да сканират за Wi‑Fi мрежи по всяко време дори когато функцията за Wi‑Fi e изключена. Това може да послужи например за подобряване на базиращите се на местоположението функции и услуги."</string>
     <string name="wifi_settings_scanning_required_turn_on" msgid="1112223196123955447">"Включване"</string>
     <string name="wifi_settings_scanning_required_enabled" msgid="4721729158927146365">"Сканирането за Wi-Fi е включено"</string>
+    <!-- no translation found for wifi_settings_warning_wep_network (2655077013800385646) -->
+    <skip />
+    <!-- no translation found for wifi_settings_wep_networks_blocked_title (8337700496544833669) -->
+    <skip />
+    <!-- no translation found for wifi_settings_wep_networks_summary_toggle_off (1113138364046142949) -->
+    <skip />
+    <!-- no translation found for wifi_settings_wep_networks_summary_blocked_by_carrier (6085673947156094523) -->
+    <skip />
+    <!-- no translation found for wifi_settings_wep_networks_button_allow (2807926329019873706) -->
+    <skip />
+    <!-- no translation found for wifi_settings_ssid_block_button_close (3013886895576949908) -->
+    <skip />
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Разширени опции"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Падащ списък за разширени опции"</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"разгъване"</string>
@@ -1115,7 +1139,9 @@
     <string name="display_white_balance_title" msgid="2624544323029364713">"Баланс на бялото на дисплея"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="fold_lock_behavior_title" msgid="786228803694268449">"Продължаване на използването на приложенията при сгъване"</string>
-    <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Плавно показване"</string>
+    <string name="disable_game_default_frame_rate_title" msgid="3712908601744143753">"Деакт. на осн. скорост на кадрите за игрите"</string>
+    <string name="disable_game_default_frame_rate_summary" msgid="4436762704707434225">"Деактивиране на ограничаването на максималната скорост на кадрите за игрите при <xliff:g id="FRAME_RATE">%1$d</xliff:g> Hz."</string>
+    <string name="peak_refresh_rate_title" msgid="2056355754210341011">"Плавно показване"</string>
     <string name="peak_refresh_rate_summary" msgid="3212309985294885790">"Автоматично увеличава честотата на опресняване до <xliff:g id="ID_1">%1$d</xliff:g> Hz за част от съдържанието. По-интензивно използване на батерията."</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Принудителна най-висока честота на опресняване"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Най-висока честота на опресняване за по-добро реагиране при докосване и качество на анимациите. По-интензивно използване на батерията."</string>
@@ -1651,8 +1677,7 @@
     <string name="controls_label" msgid="8671492254263626383">"Контроли"</string>
     <string name="force_stop" msgid="2681771622136916280">"Принудител­но спиране"</string>
     <string name="archive" msgid="9074663845068632127">"Архивиране"</string>
-    <!-- no translation found for restore (7622486640713967157) -->
-    <skip />
+    <string name="restore" msgid="7622486640713967157">"Възстановяване"</string>
     <string name="total_size_label" msgid="2052185048749658866">"Общо"</string>
     <string name="application_size_label" msgid="6407051020651716729">"Размер на приложението"</string>
     <string name="external_code_size_label" msgid="7375146402660973743">"Приложение за USB хранилище"</string>
@@ -1708,12 +1733,9 @@
     <string name="move_app" msgid="5421158479447276791">"Преместване"</string>
     <string name="archiving_failed" msgid="2037798988961634978">"Архивирането не бе успешно"</string>
     <string name="archiving_succeeded" msgid="7891249456483297845">"Успешно архивиране на <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>"</string>
-    <!-- no translation found for restoring_failed (3390531747355943533) -->
-    <skip />
-    <!-- no translation found for restoring_succeeded (4967353965137524330) -->
-    <skip />
-    <!-- no translation found for restoring_in_progress (7787443682651146115) -->
-    <skip />
+    <string name="restoring_failed" msgid="3390531747355943533">"Възстановяването не бе успешно"</string>
+    <string name="restoring_succeeded" msgid="4967353965137524330">"Възстановихте <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>"</string>
+    <string name="restoring_in_progress" msgid="7787443682651146115">"<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> се възстановява"</string>
     <string name="another_migration_already_in_progress" msgid="6550546307856052261">"Вече се извършва друго мигриране."</string>
     <string name="insufficient_storage" msgid="8115088042669030558">"Няма достатъчно място в хранилището."</string>
     <string name="does_not_exist" msgid="6499163879348776120">"Приложението не съществува."</string>
@@ -1987,16 +2009,14 @@
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Отваряне с бутона за достъпност"</string>
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"За отваряне натиснете и задръжте бутоните за силата на звука"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Трикратно докосване на екрана с цел отваряне"</string>
-    <!-- no translation found for accessibility_tutorial_dialog_title_two_finger_double (3912970760484557646) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_title_two_finger_double" msgid="3912970760484557646">"Отваряне с двукратно докосване на екрана с два пръста"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Отваряне с жест"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"Използване на жеста за достъпност"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"За да използвате тази функция, докоснете бутона за достъпност <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> в долната част на екрана.\n\nДокоснете и задръжте този бутон и за превключване между функциите."</string>
     <string name="accessibility_tutorial_dialog_message_floating_button" msgid="2551777208185138391">"За да използвате тази функция, докоснете бутона за достъпност на екрана."</string>
     <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"За да използвате тази функция, натиснете и задръжте двата бутона за силата на звука."</string>
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"За стартиране и спиране на увеличението докоснете три пъти където и да е на екрана."</string>
-    <!-- no translation found for accessibility_tutorial_dialog_message_two_finger_triple (860548190334486449) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_message_two_finger_triple" msgid="860548190334486449">"За стартиране и спиране на увеличението докоснете два пъти с два пръста където и да е на екрана."</string>
     <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"За да използвате тази функция, прекарайте два пръста нагоре от долната част на екрана.\n\nЗа превключване между функциите прекарайте два пръста нагоре и задръжте."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="8142847782708562793">"За да използвате тази функция, прекарайте три пръста нагоре от долната част на екрана.\n\nЗа превключване между функциите прекарайте три пръста нагоре и задръжте."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"За да използвате функцията за достъпност, прекарайте два пръста нагоре от долната част на екрана.\n\nЗа превключване между функциите прекарайте два пръста нагоре и задръжте."</string>
@@ -2018,12 +2038,9 @@
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Задържане на бутоните за силата на звука"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"задържане на бутоните за силата на звука"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Натиснете и задръжте двата бутона за силата на звука"</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_two_finger_double_tap (2271778556854020996) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_two_finger_double_tap_keyword (2971265341474137433) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_two_finger_double_tap (8262165091808318538) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_title_two_finger_double_tap" msgid="2271778556854020996">"Двукратно докосване на екрана с два пръста"</string>
+    <string name="accessibility_shortcut_two_finger_double_tap_keyword" msgid="2971265341474137433">"двукратно докосване на екрана с два пръста"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_two_finger_double_tap" msgid="8262165091808318538">"Бързо докоснете екрана {0,number,integer} пъти с два пръста"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"Трикратно докосване на екрана"</string>
     <string name="accessibility_shortcut_triple_tap_keyword" msgid="6863958573135995927">"трикратно докосване на екрана"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="2102327956423320536">"Бързо докоснете екрана {0,number,integer} пъти. Този пряк път може да забави работата на устройството ви."</string>
@@ -3694,10 +3711,8 @@
     <string name="unused_apps_category" msgid="8954930958175500851">"Настройки за неизползваните приложения"</string>
     <string name="unused_apps_switch" msgid="7595419855882245772">"Поставяне на активн. в прилож. на пауза, ако не се ползва"</string>
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"Премахване на разрешенията, изтриване на временните файлове и спиране на известията"</string>
-    <!-- no translation found for unused_apps_switch_v2 (7464060328451454469) -->
-    <skip />
-    <!-- no translation found for unused_apps_switch_summary_v2 (3182898279622036805) -->
-    <skip />
+    <string name="unused_apps_switch_v2" msgid="7464060328451454469">"Управление на прилож., ако не се ползва"</string>
+    <string name="unused_apps_switch_summary_v2" msgid="3182898279622036805">"Премахване на разрешенията, изтриване на временните файлове, спиране на известията и архивиране на приложението"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Всички приложения"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Инсталирани приложения"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Мигновени приложения"</string>
@@ -3806,6 +3821,12 @@
     <string name="free_memory" msgid="439783742246854785">"Свободна памет"</string>
     <string name="memory_usage_apps" msgid="5776108502569850579">"Използвана от приложенията памет"</string>
     <string name="memory_usage_apps_summary" msgid="7168292864155527974">"{count,plural, =1{1 приложение е използвало памет през последния период от {time}}other{# приложения са използвали памет през последния период от {time}}}"</string>
+    <!-- no translation found for force_enable_pss_profiling_title (2253816522775341523) -->
+    <skip />
+    <!-- no translation found for force_enable_pss_profiling_summary (7714294324548399136) -->
+    <skip />
+    <!-- no translation found for pss_profiling_disabled (1967278421143514850) -->
+    <skip />
     <string name="running_frequency" msgid="7260225121706316639">"Честота"</string>
     <string name="memory_maximum_usage" msgid="2047013391595835607">"Максимално използвана"</string>
     <string name="no_data_usage" msgid="4665617440434654132">"Не са използвани данни"</string>
@@ -4643,7 +4664,7 @@
     <string name="media_controls_resume_description" msgid="3163482266454802097">"С цел бързо възобновяване на възпроизвеждането медийният плейър остава отворен в бързите настройки"</string>
     <string name="media_controls_lockscreen_title" msgid="2188311721857512510">"Показване на медийния плейър на заключения екран"</string>
     <string name="media_controls_lockscreen_description" msgid="3320333660404439510">"С цел бързо възобновяване на възпроизвеждането медийният плейър остава отворен на заключения екран"</string>
-    <string name="media_controls_recommendations_title" msgid="184225835236807677">"Показване на препоръки за мултимедия"</string>
+    <string name="media_controls_recommendations_title" msgid="3012692549413927608">"Показване на препоръките на Асистент за мултимедия"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"Въз основа на активността ви"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Скриване на плейъра"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"Показване на плейъра"</string>
@@ -4953,4 +4974,5 @@
     <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="3004347470520916069">"Използване на сканирането за подвеждащи приложения за служебния потребителски профил"</string>
     <string name="content_protection_preference_subpage_summary" msgid="3595621220981703364"></string>
     <string name="content_protection_preference_subpage_info" msgid="6890886357653365489"></string>
+    <string name="accessibility_setup_password_complete" msgid="6358749253318369077">"Паролата е зададена"</string>
 </resources>
