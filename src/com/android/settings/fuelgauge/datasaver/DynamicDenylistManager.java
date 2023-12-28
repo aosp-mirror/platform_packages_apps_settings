@@ -31,7 +31,9 @@ import android.util.Log;
 import androidx.annotation.VisibleForTesting;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 
 /** A class to dynamically manage per apps {@link NetworkPolicyManager} POLICY_ flags. */
@@ -183,10 +185,21 @@ public final class DynamicDenylistManager {
     /** Dump the data stored in the {@link SharedPreferences}. */
     public void dump(PrintWriter writer) {
         writer.println("Dump of DynamicDenylistManager:");
-        writer.println("\tManualDenylist: " + getPackageNames(mContext,
-                getDenylistAllUids(getManualDenylistPref())));
-        writer.println("\tDynamicDenylist: " + getPackageNames(mContext,
-                getDenylistAllUids(getDynamicDenylistPref())));
+        final List<String> manualDenyList =
+                getPackageNames(mContext, getDenylistAllUids(getManualDenylistPref()));
+        writer.println("\tManualDenylist:");
+        if (manualDenyList != null) {
+            manualDenyList.forEach(packageName -> writer.println("\t\t" + packageName));
+            writer.flush();
+        }
+
+        final List<String> dynamicDenyList =
+                getPackageNames(mContext, getDenylistAllUids(getDynamicDenylistPref()));
+        writer.println("\tDynamicDenylist:");
+        if (dynamicDenyList != null) {
+            dynamicDenyList.forEach(packageName -> writer.println("\t\t" + packageName));
+            writer.flush();
+        }
     }
 
     private Set<Integer> getDenylistAllUids(SharedPreferences sharedPreferences) {
@@ -230,13 +243,13 @@ public final class DynamicDenylistManager {
         return mContext.getSharedPreferences(PREF_KEY_DYNAMIC_DENY, Context.MODE_PRIVATE);
     }
 
-    private static String getPackageNames(Context context, Set<Integer> uids) {
+    private static List<String> getPackageNames(Context context, Set<Integer> uids) {
         if (uids == null || uids.isEmpty()) {
             return null;
         }
         final PackageManager pm = context.getPackageManager();
-        final StringBuilder builder = new StringBuilder();
-        uids.forEach(uid -> builder.append(pm.getNameForUid(uid) + " "));
-        return builder.toString();
+        final List<String> packageNames = new ArrayList<>(uids.size());
+        uids.forEach(uid -> packageNames.add(pm.getNameForUid(uid)));
+        return packageNames;
     }
 }
