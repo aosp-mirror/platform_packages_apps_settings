@@ -26,8 +26,11 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
+
+import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -43,12 +46,14 @@ public class NotificationCancelReceiverTest {
     private NotificationCancelReceiver mReceiver;
     @Mock
     private NotificationController mNotificationController;
+    private FakeFeatureFactory mFeatureFactory;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
         mReceiver = spy(new NotificationCancelReceiver());
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         doReturn(mNotificationController).when(mReceiver).getNotificationController(any());
     }
 
@@ -64,5 +69,7 @@ public class NotificationCancelReceiverTest {
         mReceiver.onReceive(mContext, intent);
 
         verify(mNotificationController).incrementDismissCount(eq(locale));
+        verify(mFeatureFactory.metricsFeatureProvider).action(
+                any(), eq(SettingsEnums.ACTION_NOTIFICATION_SWIPE_FOR_SYSTEM_LOCALE));
     }
 }
