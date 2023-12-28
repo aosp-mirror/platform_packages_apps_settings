@@ -413,9 +413,9 @@ public class AdvancedPowerUsageDetailTest {
         TimeUnit.SECONDS.sleep(1);
         verify(mMetricsFeatureProvider)
                 .action(
-                        SettingsEnums.OPEN_APP_BATTERY_USAGE,
+                        SettingsEnums.LEAVE_APP_BATTERY_USAGE,
                         SettingsEnums.ACTION_APP_BATTERY_USAGE_ALLOW_BACKGROUND,
-                        SettingsEnums.OPEN_APP_BATTERY_USAGE,
+                        SettingsEnums.FUELGAUGE_POWER_USAGE_DETAIL,
                         packageName,
                         /* consumed battery */ 0);
     }

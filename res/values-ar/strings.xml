@@ -79,8 +79,8 @@
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"أدوات مشابهة"</string>
     <string name="bluetooth_ringtone_title" msgid="3177308461256892085">"نغمة الرنين والمنبّهات"</string>
     <string name="bluetooth_call_title" msgid="6851464952021874072">"الصوت أثناء المكالمات"</string>
-    <string name="bluetooth_media_title" msgid="343705257183053699">"الوسائط"</string>
-    <string name="bluetooth_system_sounds_title" msgid="6746938637128763205">"الإشعارات وأصوات النظام الأخرى"</string>
+    <string name="bluetooth_media_title" msgid="2878373577382067290">"أصوات الوسائط والنظام"</string>
+    <string name="bluetooth_notification_title" msgid="8708962394926222039">"الإشعارات"</string>
     <string name="bluetooth_audio_routing_footer_summary" msgid="410260713589309293">"يتم تلقائيًا تحديد مصدر إخراج الصوت بواسطة التطبيقات الفردية."</string>
     <string name="bluetooth_device" msgid="2217973503732544291">"جهاز بلوتوث بدون اسم"</string>
     <string name="progress_scanning" msgid="2564746192843011826">"البحث"</string>
@@ -542,13 +542,16 @@
     <string name="privacy_header" msgid="5526002421324257007">"الخصوصية"</string>
     <string name="work_profile_category_header" msgid="85707750968948517">"الملف الشخصي للعمل"</string>
     <string name="private_space_title" msgid="7078627930195569767">"مساحة خاصة"</string>
-    <string name="private_space_summary" msgid="8237652417163408001">"إخفاء التطبيقات في مجلّد خاص"</string>
+    <string name="private_space_summary" msgid="2274405892301976238">"إبقاء التطبيقات الخاصة مقفلة ومخفية"</string>
     <string name="private_space_description" msgid="5494963647270826210">"يمكن إخفاء التطبيقات في مجلّد خاص يمكنك وحدك الوصول إليه."</string>
     <string name="private_space_lock_title" msgid="3006539720164938296">"قفل المساحة الخاصة"</string>
     <string name="private_space_one_lock_summary" msgid="2759953747682959371">"يمكنك فتح قفل المساحة الخاصة بالطريقة نفسها المستخدَمة لفتح قفل هاتفك، أو اختيار طريقة أخرى."</string>
     <string name="private_space_screen_lock_title" msgid="8679383894967823163">"استخدام قفل شاشة الجهاز"</string>
     <string name="private_space_biometric_title" msgid="3934339826674553174">"فتح الجهاز ببصمة الإصبع والتعرّف على الوجه"</string>
     <string name="private_space_biometric_summary" msgid="4403837276018724581">"انقر لإعداد هذه الميزة."</string>
+    <string name="private_space_fingerprint_unlock_title" msgid="5804023571114910034">"استخدام ميزة \"فتح الجهاز ببصمة الإصبع\" للمساحة الخاصّة"</string>
+    <string name="private_space_face_unlock_title" msgid="6613018437620070183">"استخدام ميزة \"فتح الجهاز بالتعرّف على الوجه\" للمساحة الخاصّة"</string>
+    <string name="private_space_category_ways_to_unlock" msgid="4356631225316950046">"طُرق فتح القفل"</string>
     <string name="private_space_screen_lock_summary" msgid="394837965365561070">"نفس قفل شاشة الجهاز"</string>
     <string name="private_space_new_lock_title" msgid="7306873010565337671">"هل تريد اختيار طريقة جديدة لقفل المساحة الخاصة؟"</string>
     <string name="private_space_hide_title" msgid="8687034008994037610">"الإخفاء بعد القفل"</string>
@@ -565,64 +568,39 @@
     <string name="private_space_deleted" msgid="7825768516955610897">"تم حذف المساحة الخاصة بنجاح."</string>
     <string name="private_space_delete_failed" msgid="8500755484258565011">"تعذَّر حذف المساحة الخاصة."</string>
     <string name="no_device_lock_title" msgid="1078223464721029954">"ضبط قفل شاشة"</string>
-    <!-- no translation found for no_device_lock_summary (7436025227616244687) -->
-    <skip />
+    <string name="no_device_lock_summary" msgid="7436025227616244687">"لاستخدام المساحة الخاصة، يجب ضبط قفل شاشة على هذا الجهاز."</string>
     <string name="no_device_lock_action_label" msgid="2640487005629001288">"ضبط قفل الشاشة"</string>
     <string name="no_device_lock_cancel" msgid="4412602160321228863">"إلغاء"</string>
-    <!-- no translation found for private_space_cancel_label (379259667396956886) -->
-    <skip />
-    <!-- no translation found for private_space_setup_button_label (2094882154623560585) -->
-    <skip />
-    <!-- no translation found for private_space_setup_title (7091257695872833671) -->
-    <skip />
-    <!-- no translation found for private_space_hide_apps_summary (6272406822568588610) -->
-    <skip />
-    <!-- no translation found for private_space_how_title (6878224242661347658) -->
-    <skip />
-    <!-- no translation found for private_space_access_bottom_text (8931773427017046981) -->
-    <skip />
-    <!-- no translation found for private_space_protected_lock_text (3926344387256377994) -->
-    <skip />
-    <!-- no translation found for private_space_hidden_notifications_text (1487992156742340621) -->
-    <skip />
-    <!-- no translation found for private_space_apps_permission_text (7030946025253366172) -->
-    <skip />
-    <!-- no translation found for private_space_setting_up_text (8458035555212009528) -->
-    <skip />
-    <!-- no translation found for private_space_notifications_hidden_title (4377296080723608107) -->
-    <skip />
-    <!-- no translation found for private_space_share_photos_title (2276051999632122847) -->
-    <skip />
-    <!-- no translation found for private_space_apps_installed_title (2428207301009983268) -->
-    <skip />
-    <!-- no translation found for private_space_error_screen_title (1210906480024148398) -->
-    <skip />
-    <!-- no translation found for private_space_tryagain_label (8305362615231738367) -->
-    <skip />
-    <!-- no translation found for private_space_lockscreen_title (6034864097861137509) -->
-    <skip />
-    <!-- no translation found for private_space_lockscreen_summary (430569465080645805) -->
-    <skip />
-    <!-- no translation found for private_space_use_screenlock_label (9182153443192032782) -->
-    <skip />
-    <!-- no translation found for private_space_set_lock_label (1790408277477408475) -->
-    <skip />
-    <!-- no translation found for private_space_success_title (4351904015352046118) -->
-    <skip />
-    <!-- no translation found for private_space_access_text (4258842502257201013) -->
-    <skip />
-    <!-- no translation found for private_space_done_label (1020482651595246071) -->
-    <skip />
-    <!-- no translation found for private_space_scrolldown_to_access (4820954877349434545) -->
-    <skip />
-    <!-- no translation found for private_space_retry_signin_title (2340841075193680666) -->
-    <skip />
-    <!-- no translation found for private_space_retry_summary (1976929616948459609) -->
-    <skip />
-    <!-- no translation found for private_space_lock_setup_title (6541564212199510787) -->
-    <skip />
-    <!-- no translation found for private_space_lock_setup_description (423405593476300918) -->
-    <skip />
+    <string name="private_space_cancel_label" msgid="379259667396956886">"إلغاء"</string>
+    <string name="private_space_setup_button_label" msgid="2094882154623560585">"إعداد"</string>
+    <string name="private_space_setup_title" msgid="7091257695872833671">"إعداد مساحة خاصة"</string>
+    <string name="private_space_hide_apps_summary" msgid="6272406822568588610">"احتفِظ بالتطبيقات الخاصة في مساحة منفصلة يمكنك إخفاؤها أو قفلها."</string>
+    <string name="private_space_how_title" msgid="6878224242661347658">"طريقة العمل"</string>
+    <string name="private_space_access_bottom_text" msgid="8931773427017046981">"يمكنك الوصول إلى المساحة الخاصة من أسفل قائمة التطبيقات."</string>
+    <string name="private_space_protected_lock_text" msgid="3926344387256377994">"تتم حماية التطبيقات في المساحة الخاصة باستخدام قفل."</string>
+    <string name="private_space_hidden_notifications_text" msgid="1487992156742340621">"يتم إخفاء الإشعارات الواردة من تطبيقات المساحة الخاصة إذا كانت المساحة الخاصة مقفلة."</string>
+    <string name="private_space_apps_permission_text" msgid="7030946025253366172">"لن تظهر التطبيقات في المساحة الخاصة ضِمن \"إدارة الأذونات\" أو \"لوحة بيانات الخصوصية\" أو الإعدادات الأخرى إذا كانت المساحة الخاصة مقفلة.\n\nلا يمكن نقل المساحة الخاصة إلى جهاز جديد. إذا أردت استخدام مساحة خاصة على جهاز آخر، عليك إعداد مساحة خاصة على ذلك الجهاز.\n\n.في حال تمكَّن شخص من ربط جهازك بجهاز كمبيوتر أو تثبيت تطبيقات ضارة على جهازك، قد يستطيع هذا الشخص الوصول إلى المساحة الخاصة."</string>
+    <string name="private_space_setting_up_text" msgid="8458035555212009528">"جارٍ إعداد المساحة الخاصة…"</string>
+    <string name="private_space_notifications_hidden_title" msgid="4377296080723608107">"يتم إخفاء الإشعارات الواردة من تطبيقات المساحة الخاصة إذا كانت المساحة مقفلة."</string>
+    <string name="private_space_share_photos_title" msgid="2102594859384040485">"فتح قفل المساحة الخاصّة لمشاركة الصور أو الملفات من التطبيقات المدْرجة فيها"</string>
+    <string name="private_space_apps_installed_title" msgid="2428207301009983268">"بعض التطبيقات سبَق أن تم تثبيتها في المساحة الخاصة"</string>
+    <string name="private_space_error_screen_title" msgid="1210906480024148398">"تعذّر إعداد المساحة الخاصة"</string>
+    <string name="private_space_tryagain_label" msgid="8305362615231738367">"إعادة المحاولة"</string>
+    <string name="private_space_lockscreen_title" msgid="6034864097861137509">"هل تريد استخدام قفل الشاشة لفتح قفل مساحتك الخاصة؟"</string>
+    <string name="private_space_lockscreen_summary" msgid="430569465080645805">"يمكنك فتح قفل المساحة الخاصة بالطريقة نفسها المستخدَمة لفتح قفل هاتفك، أو يمكنك اختيار طريقة أخرى."</string>
+    <string name="private_space_use_screenlock_label" msgid="9182153443192032782">"استخدام قفل الشاشة"</string>
+    <string name="private_space_set_lock_label" msgid="1790408277477408475">"اختيار قفل جديد"</string>
+    <string name="private_space_success_title" msgid="4351904015352046118">"اكتملت عملية الإعداد"</string>
+    <string name="private_space_access_text" msgid="4258842502257201013">"للوصول إلى المساحة الخاصة، انتقِل إلى قائمة التطبيقات ثم مرِّر سريعًا للأسفل."</string>
+    <string name="private_space_done_label" msgid="1020482651595246071">"تم"</string>
+    <string name="private_space_scrolldown_to_access" msgid="4820954877349434545">"انتقِل للأسفل للعثور على مساحة خاصة."</string>
+    <string name="private_space_retry_signin_title" msgid="2340841075193680666">"تسجيل الدخول لإعداد المساحة الخاصة"</string>
+    <string name="private_space_retry_summary" msgid="1976929616948459609">"يجب تسجيل الدخول إلى حسابك لإعداد مساحة خاصة."</string>
+    <string name="private_space_lock_setup_title" msgid="6541564212199510787">"اختيار قفل للمساحة الخاصة"</string>
+    <string name="private_space_lock_setup_description" msgid="423405593476300918">"يمكنك فتح قفل المساحة الخاصة باستخدام بصمة إصبعك. ولأغراض تتعلق بالأمان، يتطلب هذا الخيار استخدام قفل احتياطي."</string>
+    <string name="private_space_choose_your_pin_header" msgid="4560802934975898265">"ضبط رقم تعريف شخصي للمساحة الخاصّة"</string>
+    <string name="private_space_choose_your_password_header" msgid="7660259341095044434">"ضبط كلمة مرور للمساحة الخاصّة"</string>
+    <string name="private_space_choose_your_pattern_header" msgid="2165607102459936724">"ضبط نقش للمساحة الخاصّة"</string>
     <string name="privatespace_unhide_header" msgid="1192011539687584004">"إظهار المساحة الخاصة (ليست تجربة المستخدم النهائية)"</string>
     <string name="privatespace_open_settings" msgid="5038101805604421393">"فتح تطبيق \"الإعدادات\""</string>
     <string name="privatespace_tap_settings" msgid="928932826450238276">"‏اضغط على \"الأمان والخصوصية\" &gt; مساحة خاصة &gt; إخفاء المساحة الخاصة إذا كانت مقفلة."</string>
@@ -864,6 +842,12 @@
     <string name="wifi_in_airplane_mode" msgid="1235412508135267981">"في وضع الطيران"</string>
     <string name="wifi_notify_open_networks" msgid="2610323626246818961">"إشعاري بالشبكات العامة"</string>
     <string name="wifi_notify_open_networks_summary" msgid="191058832201741013">"الإشعار عند توفر شبكة عامة عالية الجودة"</string>
+    <!-- no translation found for wifi_allow_wep_networks (8772342993235292010) -->
+    <skip />
+    <!-- no translation found for wifi_allow_wep_networks_summary (3033397893296724615) -->
+    <skip />
+    <!-- no translation found for wifi_allow_wep_networks_summary_carrier_not_allow (6298103289728210026) -->
+    <skip />
     <string name="wifi_wakeup" msgid="3834327315861781611">"‏تفعيل اتّصال Wi‑Fi تلقائيًا"</string>
     <string name="wifi_wakeup_summary" msgid="5778059083790221465">"‏إعادة تفعيل اتّصال Wi‑Fi بالقرب من الشبكات المحفوظة العالية الجودة، مثل الشبكة المنزلية"</string>
     <string name="wifi_wakeup_summary_no_location" msgid="681323616606485096">"غير متاحة نظرًا لإيقاف خدمة الموقع. فعِّل خدمة "<annotation id="link">"الموقع"</annotation>"."</string>
@@ -885,6 +869,18 @@
     <string name="wifi_settings_scanning_required_info" msgid="1473411566072565789">"‏تتيح ميزة \"البحث عن شبكات Wi‑Fi\" للتطبيقات والخدمات إمكانية البحث عن شبكات Wi‑Fi في أي وقت، حتى في حال عدم تفعيل Wi‑Fi. ويمكن استخدام هذه البيانات مثلاً لتحسين الميزات والخدمات المستندة إلى الموقع الجغرافي."</string>
     <string name="wifi_settings_scanning_required_turn_on" msgid="1112223196123955447">"تفعيل"</string>
     <string name="wifi_settings_scanning_required_enabled" msgid="4721729158927146365">"‏ميزة \"البحث عن شبكات Wi‑Fi\" مفعّلة"</string>
+    <!-- no translation found for wifi_settings_warning_wep_network (2655077013800385646) -->
+    <skip />
+    <!-- no translation found for wifi_settings_wep_networks_blocked_title (8337700496544833669) -->
+    <skip />
+    <!-- no translation found for wifi_settings_wep_networks_summary_toggle_off (1113138364046142949) -->
+    <skip />
+    <!-- no translation found for wifi_settings_wep_networks_summary_blocked_by_carrier (6085673947156094523) -->
+    <skip />
+    <!-- no translation found for wifi_settings_wep_networks_button_allow (2807926329019873706) -->
+    <skip />
+    <!-- no translation found for wifi_settings_ssid_block_button_close (3013886895576949908) -->
+    <skip />
     <string name="wifi_show_advanced" msgid="2969378109942071741">"الخيارات المتقدمة"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"القائمة المنسدلة \"الخيارات المتقدمة\""</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"توسيع"</string>
@@ -1143,7 +1139,9 @@
     <string name="display_white_balance_title" msgid="2624544323029364713">"موازنة اللون الأبيض للشاشة"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="fold_lock_behavior_title" msgid="786228803694268449">"مواصلة استخدام التطبيقات أثناء طيّ الهاتف"</string>
-    <string name="peak_refresh_rate_title" msgid="1878771412897140903">"العرض السلس"</string>
+    <string name="disable_game_default_frame_rate_title" msgid="3712908601744143753">"إيقاف عدد اللقطات في الثانية التلقائي"</string>
+    <string name="disable_game_default_frame_rate_summary" msgid="4436762704707434225">"إيقاف الحدّ من عدد اللقطات الأقصى في الثانية للألعاب عند <xliff:g id="FRAME_RATE">%1$d</xliff:g> هرتز."</string>
+    <string name="peak_refresh_rate_title" msgid="2056355754210341011">"العرض السلس"</string>
     <string name="peak_refresh_rate_summary" msgid="3212309985294885790">"تعمل هذه الميزة على رفع معدّل التحديث في الشاشة إلى <xliff:g id="ID_1">%1$d</xliff:g> هرتز لبعض أنواع المحتوى، علمًا بأنّ ذلك يؤدي زيادة استخدام البطارية."</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"فرض معدل إعادة التحميل الأقصى"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"أعلى معدل إعادة تحميل لتحسين استجابة اللمس وجودة الصور المتحركة. يؤدي هذا إلى زيادة استخدام البطارية."</string>
@@ -1420,8 +1418,7 @@
     <string name="error_mcc_not3" msgid="883659545640179094">"‏يجب أن يكون حقل MCC من ثلاثة أرقام."</string>
     <string name="error_mnc_not23" msgid="7642478711158474918">"‏يجب أن يتكون حقل MNC من رقمين أو ثلاثة أرقام."</string>
     <string name="error_adding_apn_type" msgid="1324263534991467943">"‏لا يسمح مشغّل شبكة الجوّال بإضافة APN من النوع %s."</string>
-    <!-- no translation found for error_mmsc_valid (8380951905485647380) -->
-    <skip />
+    <string name="error_mmsc_valid" msgid="8380951905485647380">"‏يجب أن يكون حقل MMSC صالحًا."</string>
     <string name="restore_default_apn" msgid="6596048535642130689">"‏جارٍ استعادة إعدادات APN التلقائية."</string>
     <string name="menu_restore" msgid="4310539620115151551">"إعادة الضبط على الإعداد التلقائي"</string>
     <string name="restore_default_apn_completed" msgid="5167505087078340256">"‏اكتملت إعادة ضبط إعدادات APN التلقائية."</string>
@@ -1679,8 +1676,7 @@
     <string name="clear_uri_btn_text" msgid="4828117421162495134">"محو إمكانية الدخول"</string>
     <string name="controls_label" msgid="8671492254263626383">"عناصر التحكم"</string>
     <string name="force_stop" msgid="2681771622136916280">"فرض الإيقاف"</string>
-    <!-- no translation found for archive (9074663845068632127) -->
-    <skip />
+    <string name="archive" msgid="9074663845068632127">"أرشفة"</string>
     <!-- no translation found for restore (7622486640713967157) -->
     <skip />
     <string name="total_size_label" msgid="2052185048749658866">"المجموع"</string>
@@ -1736,10 +1732,8 @@
     <string name="invalid_size_value" msgid="7017371543563259201">"يتعذر حساب حجم الحزمة."</string>
     <string name="version_text" msgid="7628938665256107608">"الإصدار <xliff:g id="VERSION_NUM">%1$s</xliff:g>"</string>
     <string name="move_app" msgid="5421158479447276791">"نقل"</string>
-    <!-- no translation found for archiving_failed (2037798988961634978) -->
-    <skip />
-    <!-- no translation found for archiving_succeeded (7891249456483297845) -->
-    <skip />
+    <string name="archiving_failed" msgid="2037798988961634978">"تعذّرت عملية الأرشفة"</string>
+    <string name="archiving_succeeded" msgid="7891249456483297845">"تمت أرشفة \"<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>\""</string>
     <!-- no translation found for restoring_failed (3390531747355943533) -->
     <skip />
     <!-- no translation found for restoring_succeeded (4967353965137524330) -->
@@ -2091,10 +2085,8 @@
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"إنهاء الاتصال عبر زر التشغيل"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="5508351959249876801">"مؤشر الماوس الكبير"</string>
     <string name="accessibility_toggle_large_pointer_icon_summary" msgid="1480527946039237705">"جعل مؤشّر الماوس أكثر وضوحًا"</string>
-    <!-- no translation found for accessibility_force_invert_title (5015366813138748407) -->
-    <skip />
-    <!-- no translation found for accessibility_force_invert_summary (1882329675950887268) -->
-    <skip />
+    <string name="accessibility_force_invert_title" msgid="5015366813138748407">"تطبيق المظهر الداكن على كل التطبيقات"</string>
+    <string name="accessibility_force_invert_summary" msgid="1882329675950887268">"ينطبق هذا الإعداد على التطبيقات التي لا تحتوي على مظهر داكن. قد تظهر في بعض التطبيقات مشاكل في العرض، مثل قلب الألوان."</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"إزالة الصور المتحركة"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"تقليل الحركة على الشاشة"</string>
     <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"صوت أحادي"</string>
@@ -3840,6 +3832,12 @@
     <string name="free_memory" msgid="439783742246854785">"الذاكرة المتاحة"</string>
     <string name="memory_usage_apps" msgid="5776108502569850579">"الذاكرة المستخدمة بواسطة التطبيقات"</string>
     <string name="memory_usage_apps_summary" msgid="7168292864155527974">"{count,plural, =1{استخدَم تطبيق واحد الذاكرة خلال آخر {time}.}zero{استخدَم # تطبيق الذاكرة خلال آخر {time}.}two{استخدَم تطبيقان الذاكرة خلال آخر {time}.}few{استخدَمت # تطبيقات الذاكرة خلال آخر {time}.}many{استخدَم # تطبيقًا الذاكرة خلال آخر {time}.}other{استخدَم # تطبيق الذاكرة خلال آخر {time}.}}"</string>
+    <!-- no translation found for force_enable_pss_profiling_title (2253816522775341523) -->
+    <skip />
+    <!-- no translation found for force_enable_pss_profiling_summary (7714294324548399136) -->
+    <skip />
+    <!-- no translation found for pss_profiling_disabled (1967278421143514850) -->
+    <skip />
     <string name="running_frequency" msgid="7260225121706316639">"معدل الاستخدام"</string>
     <string name="memory_maximum_usage" msgid="2047013391595835607">"الاستخدام الأقصى"</string>
     <string name="no_data_usage" msgid="4665617440434654132">"لم يتم استخدام أي بيانات."</string>
@@ -3858,12 +3856,9 @@
     <string name="system_alert_window_settings" msgid="6458633954424862521">"إظهار فوق التطبيقات الأخرى"</string>
     <string name="permit_draw_overlay" msgid="4468994037192804075">"السماح بظهور التطبيق فوق التطبيقات الأخرى"</string>
     <string name="allow_overlay_description" msgid="1607235723669496298">"يمكنك السماح بعرض واجهة هذا التطبيق فوق التطبيقات الأخرى التي تستخدمها. سيتمكّن هذا التطبيق من معرفة الأماكن التي تنقر عليها أو من تغيير ما يتم عرضه على الشاشة."</string>
-    <!-- no translation found for media_routing_control_title (6402800638960066807) -->
-    <skip />
-    <!-- no translation found for allow_media_routing_control (4907036637509360616) -->
-    <skip />
-    <!-- no translation found for allow_media_routing_description (8343709701298051207) -->
-    <skip />
+    <string name="media_routing_control_title" msgid="6402800638960066807">"تغيير جهاز إخراج الوسائط"</string>
+    <string name="allow_media_routing_control" msgid="4907036637509360616">"السماح للتطبيق بتبديل جهاز إخراج الوسائط"</string>
+    <string name="allow_media_routing_description" msgid="8343709701298051207">"يؤدي تفعيل هذا الإعداد إلى السماح لهذا التطبيق باختيار واحد من الأجهزة المتصلة لتشغيل الصوت أو الفيديو من تطبيقات أخرى. في حال تفعيل الإعداد، يمكن لهذا التطبيق الوصول إلى قائمة بالأجهزة المتاحة، مثل سمّاعات الرأس ومكبّرات الصوت، ثم اختيار جهاز إخراج لتشغيل الصوت أو الفيديو أو بثّهما."</string>
     <string name="manage_external_storage_title" msgid="8024521099838816100">"الوصول إلى كل الملفات"</string>
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"السماح بالوصول إلى كل الملفات لإدارتها"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"يسمح هذا الإعداد لهذا التطبيق بقراءة كل الملفات وتعديلها وحذفها من هذا الجهاز أو أي وحدات تخزين متصلة. في حال تفعيله، يمكن أن يصل التطبيق إلى الملفات بدون إعلامك بذلك."</string>
@@ -4684,7 +4679,7 @@
     <string name="media_controls_resume_description" msgid="3163482266454802097">"لاستئناف التشغيل بسرعة، يظل مشغّل الوسائط مفتوحًا في \"الإعدادات السريعة\"."</string>
     <string name="media_controls_lockscreen_title" msgid="2188311721857512510">"إظهار الوسائط على شاشة القفل"</string>
     <string name="media_controls_lockscreen_description" msgid="3320333660404439510">"لاستئناف التشغيل بسرعة، يظل مشغِّل الوسائط مفتوحًا في شاشة القفل."</string>
-    <string name="media_controls_recommendations_title" msgid="184225835236807677">"إظهار اقتراحات الوسائط"</string>
+    <string name="media_controls_recommendations_title" msgid="3012692549413927608">"‏عرض اقتراحات الوسائط من \"مساعد Google\""</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"استنادًا إلى أنشطتك"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"إخفاء المشغِّل"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"إظهار المشغِّل"</string>
@@ -4979,8 +4974,7 @@
     <string name="color_inversion_state_on" msgid="1160969033636440368">"الميزة مفعَّلة"</string>
     <string name="color_inversion_state_off" msgid="6925638668080451724">"الميزة غير مفعَّلة"</string>
     <string name="color_inversion_feature_summary" msgid="1199876648549627647">"تحوّل هذه الميزة الشاشات المضيئة إلى معتمة والشاشات المعتمة إلى مضيئة."</string>
-    <!-- no translation found for magnification_feature_summary (2053971569640663564) -->
-    <skip />
+    <string name="magnification_feature_summary" msgid="2053971569640663564">"يمكنك تكبير الشاشة."</string>
     <string name="autoclick_disabled" msgid="3213396804955002120">"الميزة غير مفعَّلة"</string>
     <string name="show_captions_disabled" msgid="690650956523818755">"الخيار غير مفعَّل"</string>
     <string name="show_captions_enabled" msgid="7089043007924626">"الخيار مفعَّل"</string>
@@ -4995,4 +4989,5 @@
     <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="3004347470520916069">"استخدام الفحص بحثًا عن التطبيقات المخادِعة في ملف العمل"</string>
     <string name="content_protection_preference_subpage_summary" msgid="3595621220981703364"></string>
     <string name="content_protection_preference_subpage_info" msgid="6890886357653365489"></string>
+    <string name="accessibility_setup_password_complete" msgid="6358749253318369077">"تم إعداد كلمة المرور."</string>
 </resources>

@@ -489,9 +489,9 @@ public class AdvancedPowerUsageDetail extends DashboardFragment
                     FeatureFactory.getFeatureFactory()
                             .getMetricsFeatureProvider()
                             .action(
-                                    /* attribution */ SettingsEnums.OPEN_APP_BATTERY_USAGE,
+                                    /* attribution */ SettingsEnums.LEAVE_APP_BATTERY_USAGE,
                                     /* action */ finalMetricCategory,
-                                    /* pageId */ SettingsEnums.OPEN_APP_BATTERY_USAGE,
+                                    /* pageId */ SettingsEnums.FUELGAUGE_POWER_USAGE_DETAIL,
                                     packageName,
                                     getArguments().getInt(EXTRA_POWER_USAGE_AMOUNT));
                 });
