@@ -188,6 +188,11 @@ public class AccountPreferenceController extends AbstractPreferenceController
     }
 
     @Override
+    public void updateRawDataToIndex(List<SearchIndexableRaw> rawData) {
+        rawData.add(newAddAccountRawData());
+    }
+
+    @Override
     public void updateDynamicRawDataToIndex(List<SearchIndexableRaw> rawData) {
         if (!isAvailable()) {
             return;
@@ -426,6 +431,14 @@ public class AccountPreferenceController extends AbstractPreferenceController
             }
             return mContext.getString(resourceIdentifier);
         }));
+    }
+
+    private SearchIndexableRaw newAddAccountRawData() {
+        SearchIndexableRaw data = new SearchIndexableRaw(mContext);
+        data.key = PREF_KEY_ADD_ACCOUNT;
+        data.title = mContext.getString(R.string.add_account_label);
+        data.iconResId = R.drawable.ic_add_24dp;
+        return data;
     }
 
     private RestrictedPreference newAddAccountPreference() {
