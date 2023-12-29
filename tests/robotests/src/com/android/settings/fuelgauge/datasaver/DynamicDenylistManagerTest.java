@@ -375,8 +375,8 @@ public class DynamicDenylistManagerTest {
         mDynamicDenylistManager.dump(printWriter);
 
         final String dumpResults = stringWriter.toString();
-        assertThat(dumpResults.contains("ManualDenylist: app1")).isTrue();
-        assertThat(dumpResults.contains("DynamicDenylist: app2")).isTrue();
+        assertThat(dumpResults.contains("\tManualDenylist:\n\t\tapp1")).isTrue();
+        assertThat(dumpResults.contains("\tDynamicDenylist:\n\t\tapp2")).isTrue();
     }
 
     @Test
@@ -389,8 +389,8 @@ public class DynamicDenylistManagerTest {
         mDynamicDenylistManager.dump(printWriter);
 
         final String dumpResults = stringWriter.toString();
-        assertThat(dumpResults.contains("ManualDenylist: null")).isTrue();
-        assertThat(dumpResults.contains("DynamicDenylist: null")).isTrue();
+        assertThat(dumpResults.contains("Dump of DynamicDenylistManager:")).isTrue();
+        assertThat(dumpResults.contains("\tManualDenylist:\n\tDynamicDenylist:")).isTrue();
     }
 
     @Test

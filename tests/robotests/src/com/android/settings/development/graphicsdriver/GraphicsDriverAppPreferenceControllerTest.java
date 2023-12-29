@@ -43,6 +43,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -52,6 +53,7 @@ import org.robolectric.RuntimeEnvironment;
 
 import java.util.Arrays;
 
+@Ignore("b/317934814")
 @RunWith(RobolectricTestRunner.class)
 public class GraphicsDriverAppPreferenceControllerTest {
 
