@@ -24,6 +24,7 @@ import static com.android.settings.biometrics.BiometricEnrollBase.RESULT_CONSENT
 
 import static com.google.android.setupdesign.transition.TransitionHelper.TRANSITION_FADE_THROUGH;
 
+import android.annotation.NonNull;
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
@@ -44,7 +45,6 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Log;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.android.internal.util.FrameworkStatsLog;

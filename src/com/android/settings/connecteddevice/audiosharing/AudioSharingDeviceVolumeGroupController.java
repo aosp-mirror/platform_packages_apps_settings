@@ -286,7 +286,7 @@ public class AudioSharingDeviceVolumeGroupController extends AudioSharingBasePre
 
             @Override
             public void onDeviceVolumeChanged(
-                    @NonNull BluetoothDevice device,
+                    @android.annotation.NonNull BluetoothDevice device,
                     @IntRange(from = -255, to = 255) int volume) {
                 CachedBluetoothDevice cachedDevice =
                         mLocalBtManager.getCachedDeviceManager().findDevice(device);

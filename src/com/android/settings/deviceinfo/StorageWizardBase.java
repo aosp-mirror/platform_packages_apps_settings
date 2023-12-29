@@ -20,6 +20,7 @@ import static android.os.storage.DiskInfo.EXTRA_DISK_ID;
 import static android.os.storage.VolumeInfo.EXTRA_VOLUME_ID;
 
 import android.annotation.LayoutRes;
+import android.annotation.NonNull;
 import android.content.Intent;
 import android.content.res.Resources.Theme;
 import android.graphics.drawable.Drawable;
@@ -37,7 +38,6 @@ import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;

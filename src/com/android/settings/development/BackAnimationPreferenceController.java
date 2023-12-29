@@ -18,10 +18,10 @@ package com.android.settings.development;
 
 import static com.android.window.flags.Flags.predictiveBackSystemAnimations;
 
+import android.annotation.Nullable;
 import android.content.Context;
 import android.provider.Settings;
 
-import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.TwoStatePreference;
 

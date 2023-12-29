@@ -22,6 +22,7 @@ import static android.telephony.SubscriptionManager.PROFILE_CLASS_PROVISIONING;
 
 import static com.android.internal.util.CollectionUtils.emptyIfNull;
 
+import android.annotation.Nullable;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.ParcelUuid;
@@ -38,7 +39,6 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.telephony.MccTable;
