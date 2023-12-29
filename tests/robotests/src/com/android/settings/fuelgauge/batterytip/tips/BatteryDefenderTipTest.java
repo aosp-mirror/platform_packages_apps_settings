@@ -104,7 +104,7 @@ public class BatteryDefenderTipTest {
 
     @Test
     public void updatePreference_shouldSetPrimaryButtonText() {
-        String expectedText = mContext.getString(R.string.battery_tip_charge_to_full_button);
+        String expectedText = mContext.getString(R.string.learn_more);
 
         mBatteryDefenderTip.updatePreference(mCardPreference);
 
@@ -113,7 +113,7 @@ public class BatteryDefenderTipTest {
 
     @Test
     public void updatePreference_shouldSetSecondaryButtonText() {
-        String expected = mContext.getString(R.string.learn_more);
+        String expected = mContext.getString(R.string.battery_tip_charge_to_full_button);
 
         mBatteryDefenderTip.updatePreference(mCardPreference);
 
@@ -121,10 +121,10 @@ public class BatteryDefenderTipTest {
     }
 
     @Test
-    public void updatePreference_shouldSetSecondaryButtonVisible() {
+    public void updatePreference_shouldSetPrimaryButtonVisible() {
         mBatteryDefenderTip.updatePreference(mCardPreference);
 
-        verify(mCardPreference).setSecondaryButtonVisible(true);
+        verify(mCardPreference).setPrimaryButtonVisible(true);
     }
 
     @Test
@@ -138,19 +138,19 @@ public class BatteryDefenderTipTest {
     }
 
     @Test
-    public void updatePreference_whenNotCharging_setPrimaryButtonVisibleToBeFalse() {
+    public void updatePreference_whenNotCharging_setSecondaryButtonVisibleToBeFalse() {
         mBatteryDefenderTip.updatePreference(mCardPreference);
 
-        verify(mCardPreference).setPrimaryButtonVisible(false);
+        verify(mCardPreference).setSecondaryButtonVisible(false);
     }
 
     @Test
-    public void updatePreference_whenGetChargingStatusFailed_setPrimaryButtonVisibleToBeFalse() {
+    public void updatePreference_whenGetChargingStatusFailed_setSecondaryButtonVisibleToBeFalse() {
         fakeGetChargingStatusFailed();
 
         mBatteryDefenderTip.updatePreference(mCardPreference);
 
-        verify(mCardPreference).setPrimaryButtonVisible(false);
+        verify(mCardPreference).setSecondaryButtonVisible(false);
     }
 
     private void fakeGetChargingStatusFailed() {

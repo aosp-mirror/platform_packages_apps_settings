@@ -83,17 +83,8 @@ public class BatteryDefenderTip extends BatteryTip {
         }
 
         cardPreference.setSelectable(false);
-        cardPreference.setPrimaryButtonText(
-                context.getString(R.string.battery_tip_charge_to_full_button));
+        cardPreference.setPrimaryButtonText(context.getString(R.string.learn_more));
         cardPreference.setPrimaryButtonClickListener(
-                unused -> {
-                    resumeCharging(context);
-                    preference.setVisible(false);
-                });
-        cardPreference.setPrimaryButtonVisible(mIsPluggedIn);
-
-        cardPreference.setSecondaryButtonText(context.getString(R.string.learn_more));
-        cardPreference.setSecondaryButtonClickListener(
                 button ->
                         button.startActivityForResult(
                                 HelpUtils.getHelpIntent(
@@ -101,10 +92,19 @@ public class BatteryDefenderTip extends BatteryTip {
                                         context.getString(R.string.help_url_battery_defender),
                                         /* backupContext */ ""), /* requestCode */
                                 0));
-        cardPreference.setSecondaryButtonVisible(true);
-        cardPreference.setSecondaryButtonContentDescription(
+        cardPreference.setPrimaryButtonVisible(true);
+        cardPreference.setPrimaryButtonContentDescription(
                 context.getString(
                         R.string.battery_tip_limited_temporarily_sec_button_content_description));
+
+        cardPreference.setSecondaryButtonText(
+                context.getString(R.string.battery_tip_charge_to_full_button));
+        cardPreference.setSecondaryButtonClickListener(
+                unused -> {
+                    resumeCharging(context);
+                    preference.setVisible(false);
+                });
+        cardPreference.setSecondaryButtonVisible(mIsPluggedIn);
     }
 
     private void resumeCharging(Context context) {
