@@ -19,8 +19,7 @@ package com.android.settings.testutils.shadow;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.AuthenticatorDescription;
-
-import androidx.annotation.NonNull;
+import android.annotation.NonNull;
 
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;

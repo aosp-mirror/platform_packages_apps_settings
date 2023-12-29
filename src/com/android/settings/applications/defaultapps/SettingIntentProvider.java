@@ -16,9 +16,8 @@
 
 package com.android.settings.applications.defaultapps;
 
+import android.annotation.Nullable;
 import android.content.Intent;
-
-import androidx.annotation.Nullable;
 
 /**
  * Provides an "advanced setting" intent for this app info.

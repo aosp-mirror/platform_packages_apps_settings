@@ -17,6 +17,7 @@
 package com.android.settings;
 
 import android.annotation.LayoutRes;
+import android.annotation.Nullable;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -42,7 +43,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;

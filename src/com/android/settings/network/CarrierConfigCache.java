@@ -20,6 +20,7 @@ import static android.telephony.CarrierConfigManager.ACTION_CARRIER_CONFIG_CHANG
 import static android.telephony.SubscriptionManager.EXTRA_SUBSCRIPTION_INDEX;
 import static android.telephony.SubscriptionManager.INVALID_SUBSCRIPTION_ID;
 
+import android.annotation.NonNull;
 import android.annotation.TestApi;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -31,7 +32,6 @@ import android.telephony.SubscriptionManager;
 import android.util.Log;
 
 import androidx.annotation.GuardedBy;
-import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 
 import java.util.Map;
