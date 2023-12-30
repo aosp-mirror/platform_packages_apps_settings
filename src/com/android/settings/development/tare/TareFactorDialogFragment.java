@@ -18,6 +18,7 @@ package com.android.settings.development.tare;
 
 import static android.app.tare.EconomyManager.CAKE_IN_ARC;
 
+import android.annotation.NonNull;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -31,8 +32,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
-
-import androidx.annotation.NonNull;
 
 import com.android.settings.R;
 import com.android.settings.Utils;

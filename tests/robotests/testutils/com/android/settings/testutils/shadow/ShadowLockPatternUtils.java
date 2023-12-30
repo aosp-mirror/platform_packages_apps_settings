@@ -16,15 +16,14 @@
 
 package com.android.settings.testutils.shadow;
 
+import android.annotation.NonNull;
+import android.annotation.Nullable;
 import android.app.admin.DevicePolicyManager;
 import android.app.admin.PasswordMetrics;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.UserInfo;
 import android.os.UserHandle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockscreenCredential;

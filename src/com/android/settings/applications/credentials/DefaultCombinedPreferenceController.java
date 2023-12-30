@@ -16,6 +16,7 @@
 
 package com.android.settings.applications.credentials;
 
+import android.annotation.Nullable;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -29,7 +30,6 @@ import android.service.autofill.AutofillServiceInfo;
 import android.text.TextUtils;
 import android.view.autofill.AutofillManager;
 
-import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 

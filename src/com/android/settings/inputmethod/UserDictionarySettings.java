@@ -16,6 +16,7 @@
 
 package com.android.settings.inputmethod;
 
+import android.annotation.Nullable;
 import android.app.ActionBar;
 import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
@@ -38,7 +39,6 @@ import android.widget.SectionIndexer;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.ListFragment;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;

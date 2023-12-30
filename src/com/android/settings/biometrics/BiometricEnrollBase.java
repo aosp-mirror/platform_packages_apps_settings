@@ -18,6 +18,7 @@ package com.android.settings.biometrics;
 
 import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
 
+import android.annotation.Nullable;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -31,7 +32,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
-import androidx.annotation.Nullable;
 
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;

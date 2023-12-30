@@ -25,6 +25,7 @@ import static android.app.tare.EconomyManager.parseCreditValue;
 import static android.provider.Settings.Global.TARE_ALARM_MANAGER_CONSTANTS;
 import static android.provider.Settings.Global.TARE_JOB_SCHEDULER_CONSTANTS;
 
+import android.annotation.NonNull;
 import android.app.tare.EconomyManager;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -38,8 +39,6 @@ import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.KeyValueListParser;
 import android.util.Slog;
-
-import androidx.annotation.NonNull;
 
 import com.android.settings.R;
 
