@@ -17,6 +17,7 @@ package com.android.settings.wifi;
 
 import static com.android.settingslib.wifi.WifiUtils.getHotspotIconResource;
 
+import android.annotation.Nullable;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -30,7 +31,6 @@ import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceViewHolder;
 

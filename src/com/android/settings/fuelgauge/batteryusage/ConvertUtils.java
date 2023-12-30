@@ -16,6 +16,7 @@
 package com.android.settings.fuelgauge.batteryusage;
 
 import android.annotation.IntDef;
+import android.annotation.Nullable;
 import android.app.usage.IUsageStatsManager;
 import android.app.usage.UsageEvents.Event;
 import android.app.usage.UsageStatsManager;
@@ -33,7 +34,6 @@ import android.util.Base64;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.fuelgauge.BatteryUtils;

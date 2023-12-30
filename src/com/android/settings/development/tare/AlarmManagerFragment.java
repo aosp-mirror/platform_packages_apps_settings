@@ -15,6 +15,7 @@
  */
 package com.android.settings.development.tare;
 
+import android.annotation.Nullable;
 import android.app.Fragment;
 import android.app.tare.EconomyManager;
 import android.content.res.Resources;
@@ -24,8 +25,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
-
-import androidx.annotation.Nullable;
 
 import com.android.settings.R;
 

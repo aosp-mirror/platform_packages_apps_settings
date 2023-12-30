@@ -16,6 +16,8 @@
 
 package com.android.settings.applications.credentials;
 
+import android.annotation.NonNull;
+import android.annotation.Nullable;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -25,9 +27,6 @@ import android.graphics.drawable.Drawable;
 import android.service.autofill.AutofillServiceInfo;
 import android.text.TextUtils;
 import android.util.IconDrawableFactory;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collections;

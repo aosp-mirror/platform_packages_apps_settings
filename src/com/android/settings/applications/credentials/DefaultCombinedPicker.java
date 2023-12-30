@@ -16,6 +16,7 @@
 
 package com.android.settings.applications.credentials;
 
+import android.annotation.Nullable;
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -37,7 +38,6 @@ import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
 
-import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.preference.Preference;
 

@@ -15,6 +15,7 @@
  */
 package com.android.settings.wifi;
 
+import android.annotation.Nullable;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
@@ -27,7 +28,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 

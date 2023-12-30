@@ -18,6 +18,8 @@ package com.android.settings.applications.credentials;
 
 import static androidx.lifecycle.Lifecycle.Event.ON_CREATE;
 
+import android.annotation.NonNull;
+import android.annotation.Nullable;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.ComponentName;
@@ -47,8 +49,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
