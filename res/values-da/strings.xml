@@ -36,7 +36,7 @@
     <string name="radioInfo_roaming_not" msgid="3137594549464975054">"Roamer ikke"</string>
     <string name="radioInfo_data_disconnected" msgid="362604130117666924">"Afbrudt"</string>
     <string name="radioInfo_data_connecting" msgid="7280819598028917888">"Forbinder"</string>
-    <string name="radioInfo_data_connected" msgid="8816467971633020141">"Tilsluttet"</string>
+    <string name="radioInfo_data_connected" msgid="8816467971633020141">"Forbundet"</string>
     <string name="radioInfo_data_suspended" msgid="2001254415431299603">"Sat på pause"</string>
     <string name="radioInfo_unknown" msgid="2892562356748600367">"Ukendt"</string>
     <string name="preview_pager_content_description" msgid="3762247188224576303">"Forhåndsvisning"</string>
@@ -228,8 +228,8 @@
     <string name="date_time_set_timezone_title" msgid="790404320569600222">"Tidszone"</string>
     <string name="date_time_set_timezone" msgid="2915125337941495746">"Vælg tidszone"</string>
     <string name="date_time_set_date_title" msgid="7624166157167528407">"Dato"</string>
-    <string name="date_time_search_region" msgid="1364133854952610919">"Søg efter område"</string>
-    <string name="date_time_select_region" msgid="5449345333305056072">"Område"</string>
+    <string name="date_time_search_region" msgid="1364133854952610919">"Søg efter region"</string>
+    <string name="date_time_select_region" msgid="5449345333305056072">"Region"</string>
     <string name="date_time_select_fixed_offset_time_zones" msgid="594848300882055361">"Vælg UTC-forskydning"</string>
     <string name="zone_info_exemplar_location_and_offset" msgid="2186042522225153092">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g> (<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
@@ -238,7 +238,7 @@
     <string name="zone_info_footer_no_dst" msgid="8399585343328811158">"Bruger <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. Ingen sommertid/vintertid."</string>
     <string name="zone_time_type_dst" msgid="9189689342265305808">"Sommertid"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Standardtid"</string>
-    <string name="zone_menu_by_region" msgid="2963565278710225652">"Vælg efter område"</string>
+    <string name="zone_menu_by_region" msgid="2963565278710225652">"Vælg efter region"</string>
     <string name="zone_menu_by_offset" msgid="1257702747474426745">"Vælg efter UTC-forskydning"</string>
     <string name="lock_after_timeout" msgid="8682769000437403444">"Lås efter skærmens timeout"</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> efter timeout"</string>
@@ -678,7 +678,7 @@
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Aktivér trådløs skærm"</string>
     <string name="wifi_display_no_devices_found" msgid="7904877793677102805">"Der blev ikke fundet enheder i nærheden."</string>
     <string name="wifi_display_status_connecting" msgid="530880182560077334">"Tilslutter"</string>
-    <string name="wifi_display_status_connected" msgid="2189925211258519539">"Tilsluttet"</string>
+    <string name="wifi_display_status_connected" msgid="2189925211258519539">"Forbundet"</string>
     <string name="wifi_display_status_in_use" msgid="5904009697167947449">"I brug"</string>
     <string name="wifi_display_status_not_available" msgid="8463750208946968594">"Ikke tilgængelig"</string>
     <string name="wifi_display_options_title" msgid="7584326966240865043">"Indstillinger for trådløs skærm"</string>
@@ -911,7 +911,7 @@
     <string name="wifi_hotspot_speed_2g_5g_summary" msgid="8104575293617700173">"Hurtige hastigheder. Dette dual-band-hotspot er kompatibelt med de fleste enheder."</string>
     <string name="wifi_hotspot_speed_6g" msgid="3787697484862730500">"6 GHz"</string>
     <string name="wifi_hotspot_speed_6g_summary" msgid="8675262219242174548">"Hurtigste hastigheder. Kompatibel med få enheder."</string>
-    <string name="wifi_hotspot_speed_summary_unavailable" msgid="7276080644693388756">"Ikke tilgængelig i dit land eller område"</string>
+    <string name="wifi_hotspot_speed_summary_unavailable" msgid="7276080644693388756">"Ikke tilgængelig i dit land eller din region"</string>
     <string name="wifi_hotspot_speed_footer" msgid="8846939503916795002">"Hvis din foretrukne frekvens ikke er tilgængelig, anvender dit hotspot muligvis en anden. Sikkerhedsindstillingerne for hotspottet kan ændres, hvis du justerer frekvensen."</string>
     <string name="wifi_hotspot_security_summary_unavailable" msgid="117582979310345853">"Ikke tilgængeligt med 6 GHz"</string>
     <string name="wifi_hotspot_security_footer" msgid="4608329688744949796">"Sikkerhedsindstillingerne kan ændres, hvis du justerer frekvensen for hotspottet"</string>
@@ -1354,7 +1354,7 @@
     <string name="location_app_permission_summary_location_on" msgid="7552095451731948984">"{count,plural, =1{# ud af {total} apps har adgang til din lokation}one{# ud af {total} apps har adgang til din lokation}other{# ud af {total} apps har adgang til din lokation}}"</string>
     <string name="location_category_recent_location_access" msgid="2558063524482178146">"Seneste adgang"</string>
     <string name="location_recent_location_access_see_all" msgid="4203102419355323325">"Se alle"</string>
-    <string name="location_recent_location_access_view_details" msgid="5803264082558504544">"Se info"</string>
+    <string name="location_recent_location_access_view_details" msgid="5803264082558504544">"Se oplysninger"</string>
     <string name="location_no_recent_apps" msgid="6814206631456177033">"Ingen apps har anmodet om lokation for nylig"</string>
     <string name="location_no_recent_accesses" msgid="6031735777805464247">"Ingen apps har haft adgang til lokationen for nylig"</string>
     <string name="location_high_battery_use" msgid="4277318891200626524">"Højt batteriforbrug"</string>
@@ -3604,7 +3604,7 @@
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"USB-præferencer"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"USB styres af"</string>
-    <string name="usb_control_host" msgid="7404215921555021871">"Tilsluttet enhed"</string>
+    <string name="usb_control_host" msgid="7404215921555021871">"Forbundet med enhed"</string>
     <string name="usb_control_device" msgid="527916783743021577">"Denne enhed"</string>
     <string name="usb_switching" msgid="3654709188596609354">"Skifter…"</string>
     <string name="usb_switching_failed" msgid="5721262697715454137">"Der kunne ikke skiftes"</string>
@@ -3800,7 +3800,7 @@
     <string name="carrier_and_update_now_text" msgid="5075861262344398849">"Netop opdateret af <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="no_carrier_update_now_text" msgid="7898004907837200752">"Netop opdateret"</string>
     <string name="launch_mdp_app_text" msgid="8791816789749304897">"Se abonnement"</string>
-    <string name="launch_wifi_text" msgid="976421974332512894">"Se info"</string>
+    <string name="launch_wifi_text" msgid="976421974332512894">"Se oplysninger"</string>
     <string name="data_saver_title" msgid="2593804270788863815">"Datasparefunktion"</string>
     <string name="unrestricted_data_saver" msgid="7922563266857367495">"Ubegrænset data"</string>
     <string name="restrict_background_blocklisted" msgid="2308345280442438232">"Baggrundsdata er deaktiveret"</string>
@@ -4178,7 +4178,7 @@
     <string name="devices_title" msgid="649715719278562515">"Enheder"</string>
     <string name="choose_network_title" msgid="5355609223363859430">"Vælg netværk"</string>
     <string name="network_disconnected" msgid="8281188173486212661">"Afbrudt"</string>
-    <string name="network_connected" msgid="7637745547242487795">"Tilsluttet"</string>
+    <string name="network_connected" msgid="7637745547242487795">"Forbundet"</string>
     <string name="network_connecting" msgid="6856124847029124041">"Opretter forbindelse…"</string>
     <string name="network_could_not_connect" msgid="676574629319069922">"Der kunne ikke oprettes forbindelse"</string>
     <string name="empty_networks_list" msgid="6519489879480673428">"Der blev ikke fundet nogen netværk."</string>
