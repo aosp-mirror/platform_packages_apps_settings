@@ -283,6 +283,8 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"برنامه‌هایی که اجازه «دستگاه‌های اطراف» را دارند می‌توانند موقعیت نسبی دستگاه‌های متصل را مشخص کنند."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"دسترسی به مکان برای برنامه‌ها و سرویس‌ها خاموش است. وقتی با شماره تلفن اضطراری تماس می‌گیرید یا به آن پیامک ارسال می‌کنید، ممکن است مکان دستگاهتان همچنان برای مسئولان خدمات اضطراری ارسال شود."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"درباره «تنظیمات مکان» بیشتر بدانید"</string>
+    <!-- no translation found for location_settings_tooltip_text_for_chrome (3574930966097093550) -->
+    <skip />
     <string name="account_settings_title" msgid="9138880127246241885">"حساب‌ها"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"امنیت"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"رمزگذاری و اطلاعات اعتباری"</string>
@@ -532,10 +534,10 @@
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"انگشت را بلند کنید، سپس دوباره حسگر را لمس کنید"</string>
     <string name="security_settings_fingerprint_bad_calibration_title" msgid="3073145395701953620">"امکان استفاده از حسگر اثر انگشت وجود ندارد"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="304585658839584958">"به ارائه‌دهنده خدمات تعمیر مراجعه کنید."</string>
-    <string name="security_advanced_settings" msgid="6260756619837834042">"تنظیمات امنیتی بیشتر"</string>
+    <string name="security_advanced_settings" msgid="6260756619837834042">"تنظیمات ایمنی بیشتر"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"قفل نمایه کاری، رمزگذاری، و غیره"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"رمزگذاری، اطلاعات اعتباری، و غیره"</string>
-    <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"امنیت، تنظیمات امنیتی بیشتر، تنظیمات بیشتر، تنظیمات امنیتی پیشرفته"</string>
+    <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"ایمنی، تنظیمات ایمنی بیشتر، تنظیمات بیشتر، تنظیمات ایمنی پیشرفته"</string>
     <string name="privacy_advanced_settings" msgid="8828215456566937719">"تنظیمات حریم خصوصی بیشتر"</string>
     <string name="more_security_privacy_settings" msgid="123465614090328851">"امنیت و حریم خصوصی بیشتر"</string>
     <string name="security_header" msgid="961514795852103424">"امنیت"</string>
@@ -842,12 +844,9 @@
     <string name="wifi_in_airplane_mode" msgid="1235412508135267981">"در حالت هواپیما"</string>
     <string name="wifi_notify_open_networks" msgid="2610323626246818961">"دریافت اعلان برای شبکه‌های عمومی"</string>
     <string name="wifi_notify_open_networks_summary" msgid="191058832201741013">"وقتی شبکه عمومی‌ای با کیفیت خوب در دسترس است، اطلاع داده شود"</string>
-    <!-- no translation found for wifi_allow_wep_networks (8772342993235292010) -->
-    <skip />
-    <!-- no translation found for wifi_allow_wep_networks_summary (3033397893296724615) -->
-    <skip />
-    <!-- no translation found for wifi_allow_wep_networks_summary_carrier_not_allow (6298103289728210026) -->
-    <skip />
+    <string name="wifi_allow_wep_networks" msgid="8772342993235292010">"‏مجاز کردن شبکه‌های WEP"</string>
+    <string name="wifi_allow_wep_networks_summary" msgid="3033397893296724615">"‏WEP یک پروتکل امنیتی قدیمی است که امنیت کمتری دارد"</string>
+    <string name="wifi_allow_wep_networks_summary_carrier_not_allow" msgid="6298103289728210026">"‏شرکت مخابراتی شما اجازه استفاده از شبکه‌های WEP را نمی‌دهد زیرا امنیت کمتری دارند"</string>
     <string name="wifi_wakeup" msgid="3834327315861781611">"‏روشن شدن خودکار Wi-Fi"</string>
     <string name="wifi_wakeup_summary" msgid="5778059083790221465">"‏Wi-Fi درنزدیکی شبکه‌های با کیفیت بالای ذخیره‌شده (ازجمله شبکه خانه‌تان) دوباره روشن می‌شود."</string>
     <string name="wifi_wakeup_summary_no_location" msgid="681323616606485096">"در دسترس نیست چون «مکان» خاموش است. "<annotation id="link">"مکان"</annotation>" را روشن کنید."</string>
@@ -869,18 +868,12 @@
     <string name="wifi_settings_scanning_required_info" msgid="1473411566072565789">"‏«اسکن کردن Wi‑Fi» به برنامه‌ها و سرویس‌ها امکان می‌دهد در هر زمانی (حتی وقتی Wi‑Fi خاموش است) این شبکه‌ها را جستجو کنند. برای مثال، این مورد می‌تواند برای بهبود ویژگی‌ها و سرویس‌های مکان‌مبنا استفاده شود."</string>
     <string name="wifi_settings_scanning_required_turn_on" msgid="1112223196123955447">"روشن کردن"</string>
     <string name="wifi_settings_scanning_required_enabled" msgid="4721729158927146365">"‏«اسکن کردن Wi‑Fi» روشن شد"</string>
-    <!-- no translation found for wifi_settings_warning_wep_network (2655077013800385646) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_blocked_title (8337700496544833669) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_summary_toggle_off (1113138364046142949) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_summary_blocked_by_carrier (6085673947156094523) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_button_allow (2807926329019873706) -->
-    <skip />
-    <!-- no translation found for wifi_settings_ssid_block_button_close (3013886895576949908) -->
-    <skip />
+    <string name="wifi_settings_warning_wep_network" msgid="2655077013800385646">"این شبکه از پروتکل امنیتی قدیمی‌تری استفاده می‌کند که امنیت کمتری دارد"</string>
+    <string name="wifi_settings_wep_networks_blocked_title" msgid="8337700496544833669">"<xliff:g id="NAME">%1$s</xliff:g> مسدود شده است"</string>
+    <string name="wifi_settings_wep_networks_summary_toggle_off" msgid="1113138364046142949">"‏این شبکه از پروتکل امنیتی قدیمی‌تری به‌نام WEP استفاده می‌کند که امنیت کمتری دارد. برای اینکه درهرصورت متصل شوید، می‌توانید شبکه‌های WEP را مجاز کنید."</string>
+    <string name="wifi_settings_wep_networks_summary_blocked_by_carrier" msgid="6085673947156094523">"شرکت مخابراتی‌تان اجازه نمی‌دهد به این شبکه متصل شوید زیرا از پروتکل امنیتی قدیمی‌تری استفاده می‌کند که امنیت کمتری دارد"</string>
+    <string name="wifi_settings_wep_networks_button_allow" msgid="2807926329019873706">"‏مجاز کردن WEP"</string>
+    <string name="wifi_settings_ssid_block_button_close" msgid="3013886895576949908">"بستن"</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"گزینه‌های پیشرفته"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"گزینه‌های پیشرفتهٔ فهرست کرکره‌ای"</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"بزرگ کردن"</string>
@@ -1057,9 +1050,9 @@
     <string name="wifi_hotspot_speed_6g" msgid="3787697484862730500">"۶ گیگاهرتز"</string>
     <string name="wifi_hotspot_speed_6g_summary" msgid="8675262219242174548">"سریع‌ترین سرعت‌ها. با دستگاه‌های کمی سازگار است."</string>
     <string name="wifi_hotspot_speed_summary_unavailable" msgid="7276080644693388756">"در کشور یا منطقه شما دردسترس نیست"</string>
-    <string name="wifi_hotspot_speed_footer" msgid="8846939503916795002">"اگر بسامد ترجیحی شما دردسترس نباشد، ممکن است نقطه اتصال از بسامد دیگری استفاده کند. اگر بسامد را تغییر دهید، ممکن است تنظیمات امنیتی نقطه اتصال تغییر کند."</string>
+    <string name="wifi_hotspot_speed_footer" msgid="8846939503916795002">"اگر بسامد ترجیحی شما دردسترس نباشد، ممکن است نقطه اتصال از بسامد دیگری استفاده کند. اگر بسامد را تغییر دهید، ممکن است تنظیمات ایمنی نقطه اتصال تغییر کند."</string>
     <string name="wifi_hotspot_security_summary_unavailable" msgid="117582979310345853">"با ۶ گیگاهرتز دردسترس نیست"</string>
-    <string name="wifi_hotspot_security_footer" msgid="4608329688744949796">"اگر فرکانس نقطه اتصال را تغییر دهید، ممکن است تنظیمات امنیتی تغییر کند"</string>
+    <string name="wifi_hotspot_security_footer" msgid="4608329688744949796">"اگر فرکانس نقطه اتصال را تغییر دهید، ممکن است تنظیمات ایمنی تغییر کند"</string>
     <string name="wifi_hotspot_instant_title" msgid="7052526695338853703">"نقطه اتصال فوری"</string>
     <string name="wifi_hotspot_instant_summary_on" msgid="3142749148673081288">"روشن"</string>
     <string name="wifi_hotspot_instant_summary_off" msgid="8594065628453795615">"خاموش"</string>
@@ -1821,9 +1814,19 @@
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"صفحه‌کلید مجازی دردسترس است"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"مدیریت صفحه‌کلیدهای روی صفحه"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"گزینه‌ها"</string>
+    <!-- no translation found for keyboard_a11y_category (8230758278046841469) -->
+    <skip />
     <string name="physical_keyboard_title" msgid="3328134097512350958">"صفحه‌کلید فیزیکی"</string>
     <string name="show_ime" msgid="4334255501724746849">"استفاده از صفحه‌کلید مجازی"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"وقتی صفحه‌کلید فیزیکی فعال است این ویرایشگر را روی صفحه نگه‌می‌دارد"</string>
+    <!-- no translation found for bounce_keys (7419450970351743904) -->
+    <skip />
+    <!-- no translation found for bounce_keys_summary (6922850403920596246) -->
+    <skip />
+    <!-- no translation found for sticky_keys (7317317044898161747) -->
+    <skip />
+    <!-- no translation found for sticky_keys_summary (8520909829540989765) -->
+    <skip />
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"میان‌برهای صفحه‌کلید"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"نمایش فهرست میان‌برها"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"نمایه کاری صفحه‌کلیدها و ابزارها"</string>
@@ -3821,12 +3824,9 @@
     <string name="free_memory" msgid="439783742246854785">"آزاد"</string>
     <string name="memory_usage_apps" msgid="5776108502569850579">"حافظه مورداستفاده برنامه‌ها"</string>
     <string name="memory_usage_apps_summary" msgid="7168292864155527974">"{count,plural, =1{یک برنامه ظرف {time} گذشته از حافظه استفاده کرده است}one{‏‎# برنامه ظرف {time} گذشته از حافظه استفاده کرده است}other{‏‎# برنامه ظرف {time} گذشته از حافظه استفاده کرده‌اند}}"</string>
-    <!-- no translation found for force_enable_pss_profiling_title (2253816522775341523) -->
-    <skip />
-    <!-- no translation found for force_enable_pss_profiling_summary (7714294324548399136) -->
-    <skip />
-    <!-- no translation found for pss_profiling_disabled (1967278421143514850) -->
-    <skip />
+    <string name="force_enable_pss_profiling_title" msgid="2253816522775341523">"فعال کردن نمایه‌سازی استفاده از حافظه"</string>
+    <string name="force_enable_pss_profiling_summary" msgid="7714294324548399136">"نمایه‌سازی استفاده از حافظه به منابع سیستم اضافی نیاز دارد."</string>
+    <string name="pss_profiling_disabled" msgid="1967278421143514850">"نمایه‌سازی استفاده از حافظه غیرفعال است"</string>
     <string name="running_frequency" msgid="7260225121706316639">"تعداد دفعات اجرا"</string>
     <string name="memory_maximum_usage" msgid="2047013391595835607">"حداکثر مصرف"</string>
     <string name="no_data_usage" msgid="4665617440434654132">"از داده استفاده نشده"</string>

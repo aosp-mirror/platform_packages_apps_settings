@@ -283,6 +283,8 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Приложенията с разрешението за устройства в близост могат да определят относителната позиция на свързаните устройства."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Достъпът до местоположението е изключен за приложенията и услугите. Местоположението на устройството ви пак може да се изпраща до органите за бързо реагиране, когато се обадите на номер за спешни случаи или изпратите SMS до такъв."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Научете повече за настройките за местоположението"</string>
+    <!-- no translation found for location_settings_tooltip_text_for_chrome (3574930966097093550) -->
+    <skip />
     <string name="account_settings_title" msgid="9138880127246241885">"Профили"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Сигурност"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Шифроване и идентификационни данни"</string>
@@ -842,12 +844,9 @@
     <string name="wifi_in_airplane_mode" msgid="1235412508135267981">"В самолетен режим"</string>
     <string name="wifi_notify_open_networks" msgid="2610323626246818961">"Известяване за обществени мрежи"</string>
     <string name="wifi_notify_open_networks_summary" msgid="191058832201741013">"Известяване при наличие на висококачествена обществена мрежа"</string>
-    <!-- no translation found for wifi_allow_wep_networks (8772342993235292010) -->
-    <skip />
-    <!-- no translation found for wifi_allow_wep_networks_summary (3033397893296724615) -->
-    <skip />
-    <!-- no translation found for wifi_allow_wep_networks_summary_carrier_not_allow (6298103289728210026) -->
-    <skip />
+    <string name="wifi_allow_wep_networks" msgid="8772342993235292010">"Разрешаване на мрежи с WEP"</string>
+    <string name="wifi_allow_wep_networks_summary" msgid="3033397893296724615">"WEP е по-стар протокол за сигурност, който не е толкова надежден"</string>
+    <string name="wifi_allow_wep_networks_summary_carrier_not_allow" msgid="6298103289728210026">"Операторът ви не разрешава мрежи с WEP, тъй като не са толкова надеждни"</string>
     <string name="wifi_wakeup" msgid="3834327315861781611">"Автоматично включване на Wi‑Fi"</string>
     <string name="wifi_wakeup_summary" msgid="5778059083790221465">"Wi‑Fi ще се включва при наличие на висококачествени запазени мрежи, като например тази в дома ви"</string>
     <string name="wifi_wakeup_summary_no_location" msgid="681323616606485096">"Не е налице, защото местоположението е изключено. Включете "<annotation id="link">"настройката"</annotation>"."</string>
@@ -869,18 +868,12 @@
     <string name="wifi_settings_scanning_required_info" msgid="1473411566072565789">"Сканирането за Wi‑Fi разрешава на приложенията и услугите да сканират за Wi‑Fi мрежи по всяко време дори когато функцията за Wi‑Fi e изключена. Това може да послужи например за подобряване на базиращите се на местоположението функции и услуги."</string>
     <string name="wifi_settings_scanning_required_turn_on" msgid="1112223196123955447">"Включване"</string>
     <string name="wifi_settings_scanning_required_enabled" msgid="4721729158927146365">"Сканирането за Wi-Fi е включено"</string>
-    <!-- no translation found for wifi_settings_warning_wep_network (2655077013800385646) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_blocked_title (8337700496544833669) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_summary_toggle_off (1113138364046142949) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_summary_blocked_by_carrier (6085673947156094523) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_button_allow (2807926329019873706) -->
-    <skip />
-    <!-- no translation found for wifi_settings_ssid_block_button_close (3013886895576949908) -->
-    <skip />
+    <string name="wifi_settings_warning_wep_network" msgid="2655077013800385646">"Тази мрежа използва по-стар протокол за сигурност, който не е толкова надежден"</string>
+    <string name="wifi_settings_wep_networks_blocked_title" msgid="8337700496544833669">"Мрежата „<xliff:g id="NAME">%1$s</xliff:g>“ е блокирана"</string>
+    <string name="wifi_settings_wep_networks_summary_toggle_off" msgid="1113138364046142949">"Тази мрежа използва по-стар протокол за сигурност, наречен WEP, който не е толкова надежден. За да се свържете въпреки това, можете да разрешите мрежите с WEP."</string>
+    <string name="wifi_settings_wep_networks_summary_blocked_by_carrier" msgid="6085673947156094523">"Операторът ви не разрешава да се свържете с тази мрежа, защото тя използва по-стар протокол за сигурност, който не е толкова надежден"</string>
+    <string name="wifi_settings_wep_networks_button_allow" msgid="2807926329019873706">"Разрешаване на WEP"</string>
+    <string name="wifi_settings_ssid_block_button_close" msgid="3013886895576949908">"Затваряне"</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Разширени опции"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Падащ списък за разширени опции"</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"разгъване"</string>
@@ -1821,9 +1814,19 @@
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Налична екранна клавиатура"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Управление на екранните клавиатури"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"Опции"</string>
+    <!-- no translation found for keyboard_a11y_category (8230758278046841469) -->
+    <skip />
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Физическа клавиатура"</string>
     <string name="show_ime" msgid="4334255501724746849">"Използване на екранната клавиатура"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"Показва се на екрана, докато физическата клавиатура е активна"</string>
+    <!-- no translation found for bounce_keys (7419450970351743904) -->
+    <skip />
+    <!-- no translation found for bounce_keys_summary (6922850403920596246) -->
+    <skip />
+    <!-- no translation found for sticky_keys (7317317044898161747) -->
+    <skip />
+    <!-- no translation found for sticky_keys_summary (8520909829540989765) -->
+    <skip />
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Клавишни комбинации"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Показване на списък с клавишните комбинации"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Клавиатури и инструменти за служебния потр. профил"</string>
@@ -3821,12 +3824,9 @@
     <string name="free_memory" msgid="439783742246854785">"Свободна памет"</string>
     <string name="memory_usage_apps" msgid="5776108502569850579">"Използвана от приложенията памет"</string>
     <string name="memory_usage_apps_summary" msgid="7168292864155527974">"{count,plural, =1{1 приложение е използвало памет през последния период от {time}}other{# приложения са използвали памет през последния период от {time}}}"</string>
-    <!-- no translation found for force_enable_pss_profiling_title (2253816522775341523) -->
-    <skip />
-    <!-- no translation found for force_enable_pss_profiling_summary (7714294324548399136) -->
-    <skip />
-    <!-- no translation found for pss_profiling_disabled (1967278421143514850) -->
-    <skip />
+    <string name="force_enable_pss_profiling_title" msgid="2253816522775341523">"Вкл. на профилирането на използв. памет"</string>
+    <string name="force_enable_pss_profiling_summary" msgid="7714294324548399136">"Профилирането на използваната памет изисква допълнителни системни ресурси."</string>
+    <string name="pss_profiling_disabled" msgid="1967278421143514850">"Профилирането на паметта е деактивирано"</string>
     <string name="running_frequency" msgid="7260225121706316639">"Честота"</string>
     <string name="memory_maximum_usage" msgid="2047013391595835607">"Максимално използвана"</string>
     <string name="no_data_usage" msgid="4665617440434654132">"Не са използвани данни"</string>
