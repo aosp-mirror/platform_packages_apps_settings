@@ -373,6 +373,13 @@
             android:title="@string/bluetooth_disable_leaudio"
             android:summary="@string/bluetooth_disable_leaudio_summary" />
 
+        <ListPreference
+            android:key="bluetooth_leaudio_mode"
+            android:title="@string/bluetooth_leaudio_mode"
+            android:summary="@string/summary_placeholder"
+            android:entries="@array/bluetooth_leaudio_mode"
+            android:entryValues="@array/bluetooth_leaudio_mode_values"/>
+
         <SwitchPreferenceCompat
             android:key="bluetooth_show_leaudio_device_details"
             android:title="@string/bluetooth_show_leaudio_device_details"/>
