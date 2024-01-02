@@ -54,6 +54,7 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
     @VisibleForTesting
     Integer mCallState;
     private MobileDataEnabledListener mDataContentObserver;
+    private CallingPreferenceCategoryController mCallingPreferenceCategoryController;
 
     public VideoCallingPreferenceController(Context context, String key) {
         super(context, key);
@@ -97,6 +98,8 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
         final TwoStatePreference switchPreference = (TwoStatePreference) preference;
         final boolean videoCallEnabled = isVideoCallEnabled(mSubId);
         switchPreference.setVisible(videoCallEnabled);
+        mCallingPreferenceCategoryController
+                .updateChildVisible(getPreferenceKey(), videoCallEnabled);
         if (videoCallEnabled) {
             final boolean videoCallEditable = queryVoLteState(mSubId).isEnabledByUser()
                     && queryImsState(mSubId).isAllowUserControl();
@@ -136,8 +139,13 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
                 PackageManager.FEATURE_TELEPHONY_IMS);
     }
 
-    public VideoCallingPreferenceController init(int subId) {
+    /**
+     * Init instance of VideoCallingPreferenceController.
+     */
+    public VideoCallingPreferenceController init(
+            int subId, CallingPreferenceCategoryController callingPreferenceCategoryController) {
         mSubId = subId;
+        mCallingPreferenceCategoryController = callingPreferenceCategoryController;
 
         return this;
     }
