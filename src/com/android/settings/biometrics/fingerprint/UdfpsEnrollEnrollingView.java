@@ -138,7 +138,8 @@ public class UdfpsEnrollEnrollingView extends GlifLayout {
                 displayInfo.getNaturalWidth(),
                 displayInfo.getNaturalHeight(),
                 scaleFactor,
-                displayInfo.rotation);
+                displayInfo.rotation,
+                udfpsProps.sensorType);
 
         mUdfpsEnrollView.setOverlayParams(params);
         mUdfpsEnrollView.setEnrollHelper(udfpsEnrollHelper);
