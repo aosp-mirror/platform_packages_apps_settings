@@ -78,7 +78,7 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
     private boolean mIsFolded;
     private boolean mIsReverseDefaultRotation;
     @Nullable
-    private UdfpsEnrollCalibrator mCalibrator;
+    protected UdfpsEnrollCalibrator mCalibrator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
