@@ -103,9 +103,9 @@ public class RemoteVolumeGroupControllerTest {
         mContext = spy(RuntimeEnvironment.application);
         doReturn(mMediaSessionManager).when(mContext).getSystemService(
                 Context.MEDIA_SESSION_SERVICE);
-        mController = new RemoteVolumeGroupController(mContext, KEY_REMOTE_VOLUME_GROUP);
-        mController.mLocalMediaManager = mLocalMediaManager;
-        mController.mRouterManager = mRouterManager;
+        mController =
+                new RemoteVolumeGroupController(
+                        mContext, KEY_REMOTE_VOLUME_GROUP, mLocalMediaManager, mRouterManager);
         mPreferenceCategory = spy(new PreferenceCategory(mContext));
         mPreferenceCategory.setKey(mController.getPreferenceKey());
 
