@@ -110,6 +110,15 @@ public class NotificationController {
         return (info != null) ? info.getNotificationId() : -1;
     }
 
+    /**
+     * Remove the {@link NotificationInfo} with the corresponding locale
+     *
+     * @param locale The locale which the application sets to
+     */
+    public void removeNotificationInfo(@NonNull String locale) {
+        mDataManager.removeNotificationInfo(locale);
+    }
+
     private boolean updateLocaleNotificationInfo(int uid, String locale) {
         NotificationInfo info = mDataManager.getNotificationInfo(locale);
         if (info == null) {
@@ -135,20 +144,20 @@ public class NotificationController {
         int notificationCount = info.getNotificationCount();
         long lastNotificationTime = info.getLastNotificationTimeMs();
         int notificationId = info.getNotificationId();
-
-        // Add the uid into the locale's uid list
-        uidSet.add(uid);
         if (dismissCount < DISMISS_COUNT_THRESHOLD
-                && notificationCount < NOTIFICATION_COUNT_THRESHOLD
-                // Notification should fire on multiples of 2 apps using the locale.
-                && uidSet.size() % MULTIPLE_BASE == 0
-                && !isNotificationFrequent(lastNotificationTime)) {
-            // Increment the count because the notification can be triggered.
-            notificationCount = info.getNotificationCount() + 1;
-            lastNotificationTime = Calendar.getInstance().getTimeInMillis();
-            Log.i(TAG, "notificationCount:" + notificationCount);
-            if (notificationCount == 1) {
-                notificationId = (int) SystemClock.uptimeMillis();
+                && notificationCount < NOTIFICATION_COUNT_THRESHOLD) {
+            // Add the uid into the locale's uid list
+            uidSet.add(uid);
+            // Notification should fire on multiples of 2 apps using the locale.
+            if (uidSet.size() % MULTIPLE_BASE == 0
+                    && !isNotificationFrequent(lastNotificationTime)) {
+                // Increment the count because the notification can be triggered.
+                notificationCount = info.getNotificationCount() + 1;
+                lastNotificationTime = Calendar.getInstance().getTimeInMillis();
+                Log.i(TAG, "notificationCount:" + notificationCount);
+                if (notificationCount == 1) {
+                    notificationId = (int) SystemClock.uptimeMillis();
+                }
             }
         }
         return new NotificationInfo(uidSet, notificationCount, dismissCount, lastNotificationTime,

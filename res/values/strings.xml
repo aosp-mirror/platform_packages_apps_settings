@@ -88,6 +88,11 @@
     <string name="selective_stay_awake_title">Only games, videos, and more</string>
     <!-- Summary for selective stay awake radio button. [CHAR_LIMIT=NONE] -->
     <string name="selective_stay_awake_summary">Front display turns on for apps that stop your screen going idle</string>
+    <!-- Title for fold grace period radio button that, on fold, goes to the lockscreen. [CHAR_LIMIT=NONE] -->
+    <string name="stay_awake_on_lockscreen_title">Swipe up to continue</string>
+    <!-- Summary for folding grace period radio button that, on fold, goes to the lockscreen. [CHAR_LIMIT=NONE] -->
+    <string name="stay_awake_on_lockscreen_summary">Fold your phone and swipe up on the front display to continue using the app, or wait a few seconds for the screen to lock</string>
+
     <!-- Title for sleep on fold radio button. [CHAR_LIMIT=NONE] -->
     <string name="sleep_on_fold_title">Never</string>
     <!-- Summary for sleep on fold radio button. [CHAR_LIMIT=NONE] -->
@@ -2659,7 +2664,7 @@
     <string name="display_white_balance_summary"></string>
     <!-- Display settings screen, setting option name to change Fold setting -->
     <string name="fold_lock_behavior_title">Continue using apps on fold</string>
-    <!-- Display settings screen, game default frame rate settings title [CHAR LIMIT=30] -->
+    <!-- Display settings screen, game default frame rate settings title [CHAR LIMIT=65] -->
     <string name="disable_game_default_frame_rate_title">Disable default frame rate for games</string>
     <!-- Display settings screen, game default frame rate settings summary [CHAR LIMIT=NONE] -->
     <string name="disable_game_default_frame_rate_summary">Disable limiting the maximum frame rate for games at <xliff:g id="frame_rate" example="60">%1$d</xliff:g> Hz.</string>
@@ -8207,6 +8212,9 @@
     <!-- a11y string -->
     <string name="clear">Clear</string>
 
+    <!-- a11y string -->
+    <string name="clear_conversation">Clear <xliff:g id="conversation_name" example="Mom">%1$s</xliff:g></string>
+
     <!-- title for conversation onboarding -->
     <string name="conversation_onboarding_title">Priority and modified conversations will appear here</string>
 
@@ -9494,7 +9502,7 @@
       other   {# apps used memory in the last {time}}
     }</string>
 
-    <!-- Label for toggle that enables the profiling/aggregating of memory usage [CHAR LIMIT=40]-->
+    <!-- Label for toggle that enables the profiling/aggregating of memory usage [CHAR LIMIT=80]-->
     <string name="force_enable_pss_profiling_title">Enable memory usage profiling</string>
     <!-- Description with an explanation of the extra resources used if profiling of memory usage is enabled [CHAR LIMIT=NONE]-->
     <string name="force_enable_pss_profiling_summary">Memory usage profiling requires additional system resources.</string>

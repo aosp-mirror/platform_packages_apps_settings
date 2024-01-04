@@ -158,13 +158,14 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
 
     private void broadcastAppLocaleChange(LocaleStore.LocaleInfo localeInfo) {
         if (!localeNotificationEnabled()) {
+            Log.w(TAG, "Locale notification is not enabled");
             return;
         }
-        String localeTag = localeInfo.getLocale().toLanguageTag();
-        if (LocaleUtils.isInSystemLocale(localeTag) || localeInfo.isAppCurrentLocale()) {
+        if (localeInfo.isAppCurrentLocale()) {
             return;
         }
         try {
+            String localeTag = localeInfo.getLocale().toLanguageTag();
             int uid = getPackageManager().getApplicationInfo(mPackageName,
                     PackageManager.GET_META_DATA).uid;
             boolean launchNotification = mNotificationController.shouldTriggerNotification(
