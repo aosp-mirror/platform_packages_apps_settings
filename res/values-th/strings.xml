@@ -283,6 +283,8 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"แอปที่มีสิทธิ์เข้าถึงอุปกรณ์ที่อยู่ใกล้เคียงจะสามารถระบุตำแหน่งซึ่งสัมพันธ์กับอุปกรณ์ที่เชื่อมต่อ"</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"สิทธิ์เข้าถึงตำแหน่งปิดอยู่สำหรับแอปและบริการต่างๆ ระบบอาจยังส่งตำแหน่งของอุปกรณ์ไปให้หน่วยกู้ภัยฉุกเฉินเมื่อคุณโทรหาหรือส่ง SMS ถึงหมายเลขฉุกเฉิน"</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"ดูข้อมูลเพิ่มเติมเกี่ยวกับการตั้งค่าตำแหน่ง"</string>
+    <!-- no translation found for location_settings_tooltip_text_for_chrome (3574930966097093550) -->
+    <skip />
     <string name="account_settings_title" msgid="9138880127246241885">"บัญชี"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"ความปลอดภัย"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"การเข้ารหัสและข้อมูลเข้าสู่ระบบ"</string>
@@ -842,12 +844,9 @@
     <string name="wifi_in_airplane_mode" msgid="1235412508135267981">"ในโหมดใช้งานบนเครื่องบิน"</string>
     <string name="wifi_notify_open_networks" msgid="2610323626246818961">"แจ้งเตือนเมื่อพบเครือข่ายสาธารณะ"</string>
     <string name="wifi_notify_open_networks_summary" msgid="191058832201741013">"แจ้งเตือนเมื่อมีเครือข่ายสาธารณะคุณภาพสูงพร้อมใช้งาน"</string>
-    <!-- no translation found for wifi_allow_wep_networks (8772342993235292010) -->
-    <skip />
-    <!-- no translation found for wifi_allow_wep_networks_summary (3033397893296724615) -->
-    <skip />
-    <!-- no translation found for wifi_allow_wep_networks_summary_carrier_not_allow (6298103289728210026) -->
-    <skip />
+    <string name="wifi_allow_wep_networks" msgid="8772342993235292010">"อนุญาตเครือข่าย WEP"</string>
+    <string name="wifi_allow_wep_networks_summary" msgid="3033397893296724615">"WEP เป็นโปรโตคอลความปลอดภัยเวอร์ชันเก่าซึ่งมีความปลอดภัยน้อยกว่า"</string>
+    <string name="wifi_allow_wep_networks_summary_carrier_not_allow" msgid="6298103289728210026">"ผู้ให้บริการของคุณไม่อนุญาตเครือข่าย WEP เนื่องจากมีความปลอดภัยน้อยกว่า"</string>
     <string name="wifi_wakeup" msgid="3834327315861781611">"เปิด Wi‑Fi อัตโนมัติ"</string>
     <string name="wifi_wakeup_summary" msgid="5778059083790221465">"Wi‑Fi จะเปิดอีกครั้งเมื่ออยู่ใกล้เครือข่ายคุณภาพสูงที่บันทึกไว้ เช่น เครือข่ายที่บ้านของคุณ"</string>
     <string name="wifi_wakeup_summary_no_location" msgid="681323616606485096">"ไม่พร้อมใช้งานเนื่องจากตำแหน่งปิดอยู่ โปรดเปิด"<annotation id="link">"ตำแหน่ง"</annotation></string>
@@ -869,18 +868,12 @@
     <string name="wifi_settings_scanning_required_info" msgid="1473411566072565789">"การสแกนหา Wi-Fi อนุญาตให้แอปและบริการต่างๆ สแกนหาเครือข่าย Wi‑Fi ตลอดเวลาแม้ Wi‑Fi จะปิดอยู่ การตั้งค่านี้ใช้เพื่อทำสิ่งต่างๆ เช่น ปรับปรุงฟีเจอร์และบริการตามสถานที่"</string>
     <string name="wifi_settings_scanning_required_turn_on" msgid="1112223196123955447">"เปิด"</string>
     <string name="wifi_settings_scanning_required_enabled" msgid="4721729158927146365">"เปิดการสแกนหา Wi-Fi แล้ว"</string>
-    <!-- no translation found for wifi_settings_warning_wep_network (2655077013800385646) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_blocked_title (8337700496544833669) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_summary_toggle_off (1113138364046142949) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_summary_blocked_by_carrier (6085673947156094523) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_button_allow (2807926329019873706) -->
-    <skip />
-    <!-- no translation found for wifi_settings_ssid_block_button_close (3013886895576949908) -->
-    <skip />
+    <string name="wifi_settings_warning_wep_network" msgid="2655077013800385646">"เครือข่ายนี้ใช้โปรโตคอลความปลอดภัยเวอร์ชันเก่าซึ่งมีความปลอดภัยน้อยกว่า"</string>
+    <string name="wifi_settings_wep_networks_blocked_title" msgid="8337700496544833669">"<xliff:g id="NAME">%1$s</xliff:g> ถูกบล็อก"</string>
+    <string name="wifi_settings_wep_networks_summary_toggle_off" msgid="1113138364046142949">"เครือข่ายนี้ใช้โปรโตคอลความปลอดภัยเวอร์ชันเก่าที่ชื่อว่า WEP ซึ่งมีความปลอดภัยน้อยกว่า หากยังต้องการเชื่อมต่อ คุณอนุญาตเครือข่าย WEP ได้"</string>
+    <string name="wifi_settings_wep_networks_summary_blocked_by_carrier" msgid="6085673947156094523">"ผู้ให้บริการของคุณไม่อนุญาตให้เชื่อมต่อกับเครือข่ายนี้เนื่องจากใช้โปรโตคอลความปลอดภัยเวอร์ชันเก่าซึ่งมีความปลอดภัยน้อยกว่า"</string>
+    <string name="wifi_settings_wep_networks_button_allow" msgid="2807926329019873706">"อนุญาต WEP"</string>
+    <string name="wifi_settings_ssid_block_button_close" msgid="3013886895576949908">"ปิด"</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"ตัวเลือกขั้นสูง"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"ตัวเลือกขั้นสูงที่เป็นรายการแบบเลื่อนลง"</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"ขยาย"</string>
@@ -1821,9 +1814,19 @@
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"แป้นพิมพ์บนหน้าจอที่พร้อมใช้งาน"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"จัดการแป้นพิมพ์บนหน้าจอ"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"ตัวเลือก"</string>
+    <!-- no translation found for keyboard_a11y_category (8230758278046841469) -->
+    <skip />
     <string name="physical_keyboard_title" msgid="3328134097512350958">"แป้นพิมพ์จริง"</string>
     <string name="show_ime" msgid="4334255501724746849">"ใช้แป้นพิมพ์บนหน้าจอ"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"เปิดทิ้งไว้บนหน้าจอในระหว่างใช้งานแป้นพิมพ์จริง"</string>
+    <!-- no translation found for bounce_keys (7419450970351743904) -->
+    <skip />
+    <!-- no translation found for bounce_keys_summary (6922850403920596246) -->
+    <skip />
+    <!-- no translation found for sticky_keys (7317317044898161747) -->
+    <skip />
+    <!-- no translation found for sticky_keys_summary (8520909829540989765) -->
+    <skip />
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"แป้นพิมพ์ลัด"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"แสดงรายการแป้นพิมพ์ลัด"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"แป้นพิมพ์และเครื่องมือของโปรไฟล์งาน"</string>
@@ -3821,12 +3824,9 @@
     <string name="free_memory" msgid="439783742246854785">"เหลือ"</string>
     <string name="memory_usage_apps" msgid="5776108502569850579">"หน่วยความจำที่แอปใช้"</string>
     <string name="memory_usage_apps_summary" msgid="7168292864155527974">"{count,plural, =1{1 แอปใช้หน่วยความจำในช่วง {time}ที่ผ่านมา}other{# แอปใช้หน่วยความจำในช่วง {time}ที่ผ่านมา}}"</string>
-    <!-- no translation found for force_enable_pss_profiling_title (2253816522775341523) -->
-    <skip />
-    <!-- no translation found for force_enable_pss_profiling_summary (7714294324548399136) -->
-    <skip />
-    <!-- no translation found for pss_profiling_disabled (1967278421143514850) -->
-    <skip />
+    <string name="force_enable_pss_profiling_title" msgid="2253816522775341523">"เปิดใช้การทำโปรไฟล์การใช้งานหน่วยความจำ"</string>
+    <string name="force_enable_pss_profiling_summary" msgid="7714294324548399136">"การทำโปรไฟล์การใช้งานหน่วยความจำต้องใช้ทรัพยากรระบบเพิ่มเติม"</string>
+    <string name="pss_profiling_disabled" msgid="1967278421143514850">"ปิดใช้การทำโปรไฟล์หน่วยความจำอยู่"</string>
     <string name="running_frequency" msgid="7260225121706316639">"ความถี่"</string>
     <string name="memory_maximum_usage" msgid="2047013391595835607">"การใช้งานสูงสุด"</string>
     <string name="no_data_usage" msgid="4665617440434654132">"ไม่ได้ใช้อินเทอร์เน็ต"</string>

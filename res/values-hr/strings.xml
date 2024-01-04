@@ -283,6 +283,8 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Aplikacije s dopuštenjem za uređaje u blizini mogu odrediti približni položaj povezanih uređaja."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Pristup lokaciji isključen je za aplikacije i usluge. Lokacija vašeg uređaja i dalje se može slati djelatnicima hitnih službi kada nazovete broj hitne službe ili na njega pošaljete SMS."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Saznajte više o postavkama lokacije"</string>
+    <!-- no translation found for location_settings_tooltip_text_for_chrome (3574930966097093550) -->
+    <skip />
     <string name="account_settings_title" msgid="9138880127246241885">"Računi"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Sigurnost"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Šifriranje i vjerodajnice"</string>
@@ -842,12 +844,9 @@
     <string name="wifi_in_airplane_mode" msgid="1235412508135267981">"U načinu rada u zrakoplovu"</string>
     <string name="wifi_notify_open_networks" msgid="2610323626246818961">"Obavijesti me o javnim mrežama"</string>
     <string name="wifi_notify_open_networks_summary" msgid="191058832201741013">"Obavještava vas kada je dostupna javna mreža visoke kvalitete"</string>
-    <!-- no translation found for wifi_allow_wep_networks (8772342993235292010) -->
-    <skip />
-    <!-- no translation found for wifi_allow_wep_networks_summary (3033397893296724615) -->
-    <skip />
-    <!-- no translation found for wifi_allow_wep_networks_summary_carrier_not_allow (6298103289728210026) -->
-    <skip />
+    <string name="wifi_allow_wep_networks" msgid="8772342993235292010">"Dopusti WEP mreže"</string>
+    <string name="wifi_allow_wep_networks_summary" msgid="3033397893296724615">"WEP je stariji sigurnosni protokol koji je manje siguran"</string>
+    <string name="wifi_allow_wep_networks_summary_carrier_not_allow" msgid="6298103289728210026">"Vaš mobilni operater ne dopušta WEP mreže jer su manje sigurne"</string>
     <string name="wifi_wakeup" msgid="3834327315861781611">"Automatski uključi Wi-Fi"</string>
     <string name="wifi_wakeup_summary" msgid="5778059083790221465">"Wi‑Fi će se automatski ponovo uključiti u blizini spremljenih mreža visoke kvalitete, poput vaše kućne mreže"</string>
     <string name="wifi_wakeup_summary_no_location" msgid="681323616606485096">"Nije dostupno jer je lokacija isključena. Uključite "<annotation id="link">"lokaciju"</annotation>"."</string>
@@ -869,18 +868,12 @@
     <string name="wifi_settings_scanning_required_info" msgid="1473411566072565789">"Traženje Wi‑Fija omogućuje aplikacijama i uslugama da bilo kada traže Wi‑Fi mreže, čak i kada je Wi‑Fi isključen. Tako se primjerice mogu poboljšati značajke i usluge koje se temelje na lokaciji."</string>
     <string name="wifi_settings_scanning_required_turn_on" msgid="1112223196123955447">"Uključi"</string>
     <string name="wifi_settings_scanning_required_enabled" msgid="4721729158927146365">"Uključeno je traženje Wi‑Fija"</string>
-    <!-- no translation found for wifi_settings_warning_wep_network (2655077013800385646) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_blocked_title (8337700496544833669) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_summary_toggle_off (1113138364046142949) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_summary_blocked_by_carrier (6085673947156094523) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_button_allow (2807926329019873706) -->
-    <skip />
-    <!-- no translation found for wifi_settings_ssid_block_button_close (3013886895576949908) -->
-    <skip />
+    <string name="wifi_settings_warning_wep_network" msgid="2655077013800385646">"Ova mreža koristi stariji sigurnosni protokol koji je manje siguran"</string>
+    <string name="wifi_settings_wep_networks_blocked_title" msgid="8337700496544833669">"Mreža <xliff:g id="NAME">%1$s</xliff:g> blokirana"</string>
+    <string name="wifi_settings_wep_networks_summary_toggle_off" msgid="1113138364046142949">"Ova mreža koristi stariji sigurnosni protokol naziva WEP, koji je manje siguran. Da biste se svejedno povezali, možete dopustiti WEP mreže."</string>
+    <string name="wifi_settings_wep_networks_summary_blocked_by_carrier" msgid="6085673947156094523">"Vaš mobilni operater ne dopušta da se povežete s ovom mrežom jer ona koristi stariji sigurnosni protokol koji je manje siguran"</string>
+    <string name="wifi_settings_wep_networks_button_allow" msgid="2807926329019873706">"Dopusti WEP"</string>
+    <string name="wifi_settings_ssid_block_button_close" msgid="3013886895576949908">"Zatvori"</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Napredne opcije"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Padajući popis Napredne opcije"</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"proširi"</string>
@@ -1139,12 +1132,9 @@
     <string name="display_white_balance_title" msgid="2624544323029364713">"Prikaz balansa bijele boje"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="fold_lock_behavior_title" msgid="786228803694268449">"Nastavak upotrebe aplikacija pri sklapanju"</string>
-    <!-- no translation found for disable_game_default_frame_rate_title (3712908601744143753) -->
-    <skip />
-    <!-- no translation found for disable_game_default_frame_rate_summary (4436762704707434225) -->
-    <skip />
-    <!-- no translation found for peak_refresh_rate_title (2056355754210341011) -->
-    <skip />
+    <string name="disable_game_default_frame_rate_title" msgid="3712908601744143753">"Onemogućivanje zadanog broja sličica u sekundi za igre"</string>
+    <string name="disable_game_default_frame_rate_summary" msgid="4436762704707434225">"Onemogućite ograničavanje maksimalnog broja sličica u sekundi za igre pri <xliff:g id="FRAME_RATE">%1$d</xliff:g> Hz."</string>
+    <string name="peak_refresh_rate_title" msgid="2056355754210341011">"Glatki prikaz"</string>
     <string name="peak_refresh_rate_summary" msgid="3212309985294885790">"Automatski povećava učestalost osvježavanja do <xliff:g id="ID_1">%1$d</xliff:g> Hz za određeni sadržaj. Povećava potrošnju baterije."</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Prisilna maksimalna učestalost osvježavanja"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Najviša učestalost osvježavanja za poboljšano reagiranje na dodir i kvalitetu animacije. Povećava potrošnju baterije."</string>
@@ -1824,9 +1814,19 @@
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Dostupna zaslonska tipkovnica"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Upravljajte tipkovnicama na zaslonu"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"Opcije"</string>
+    <!-- no translation found for keyboard_a11y_category (8230758278046841469) -->
+    <skip />
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Fizička tipkovnica"</string>
     <string name="show_ime" msgid="4334255501724746849">"Upotreba tipkovnice na zaslonu"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"Zadrži na zaslonu dok je fizička tipkovnica aktivna"</string>
+    <!-- no translation found for bounce_keys (7419450970351743904) -->
+    <skip />
+    <!-- no translation found for bounce_keys_summary (6922850403920596246) -->
+    <skip />
+    <!-- no translation found for sticky_keys (7317317044898161747) -->
+    <skip />
+    <!-- no translation found for sticky_keys_summary (8520909829540989765) -->
+    <skip />
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Tipkovni prečaci"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Prikaži popis prečaca"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Tipkovnice i alati radnog profila"</string>
@@ -3824,12 +3824,9 @@
     <string name="free_memory" msgid="439783742246854785">"Dostupno"</string>
     <string name="memory_usage_apps" msgid="5776108502569850579">"Memorija koju upotrebljavaju aplikacije"</string>
     <string name="memory_usage_apps_summary" msgid="7168292864155527974">"{count,plural, =1{Jedna aplikacija upotrijebila je memoriju u posljednjih {time}}one{# aplikacija upotrijebila je memoriju u posljednjih {time}}few{# aplikacije upotrijebile su memoriju u posljednjih {time}}other{# aplikacija upotrijebilo je memoriju u posljednjih {time}}}"</string>
-    <!-- no translation found for force_enable_pss_profiling_title (2253816522775341523) -->
-    <skip />
-    <!-- no translation found for force_enable_pss_profiling_summary (7714294324548399136) -->
-    <skip />
-    <!-- no translation found for pss_profiling_disabled (1967278421143514850) -->
-    <skip />
+    <string name="force_enable_pss_profiling_title" msgid="2253816522775341523">"Omogući profiliranje upotrebe memorije"</string>
+    <string name="force_enable_pss_profiling_summary" msgid="7714294324548399136">"Profiliranje upotrebe memorije zahtijeva dodatne resurse sustava."</string>
+    <string name="pss_profiling_disabled" msgid="1967278421143514850">"Profiliranje memorije onemogućeno"</string>
     <string name="running_frequency" msgid="7260225121706316639">"Učestalost"</string>
     <string name="memory_maximum_usage" msgid="2047013391595835607">"Maksimalna upotreba"</string>
     <string name="no_data_usage" msgid="4665617440434654132">"Nema upotrebe podataka"</string>

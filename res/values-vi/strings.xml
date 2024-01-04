@@ -283,6 +283,8 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Những ứng dụng có quyền đối với các Thiết bị ở gần có thể xác định vị trí tương đối của các thiết bị đã kết nối."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Các ứng dụng và dịch vụ sẽ không có quyền truy cập vào thông tin vị trí. Khi bạn gọi điện hoặc nhắn tin đến một số khẩn cấp, những người ứng cứu khẩn cấp vẫn có thể nhận được thông tin vị trí thiết bị của bạn."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Tìm hiểu thêm về chế độ Cài đặt vị trí"</string>
+    <!-- no translation found for location_settings_tooltip_text_for_chrome (3574930966097093550) -->
+    <skip />
     <string name="account_settings_title" msgid="9138880127246241885">"Tài khoản"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Bảo mật"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Mã hóa và thông tin xác thực"</string>
@@ -842,12 +844,9 @@
     <string name="wifi_in_airplane_mode" msgid="1235412508135267981">"Ở chế độ trên máy bay"</string>
     <string name="wifi_notify_open_networks" msgid="2610323626246818961">"Thông báo về mạng công cộng"</string>
     <string name="wifi_notify_open_networks_summary" msgid="191058832201741013">"Thông báo khi có mạng công cộng chất lượng cao"</string>
-    <!-- no translation found for wifi_allow_wep_networks (8772342993235292010) -->
-    <skip />
-    <!-- no translation found for wifi_allow_wep_networks_summary (3033397893296724615) -->
-    <skip />
-    <!-- no translation found for wifi_allow_wep_networks_summary_carrier_not_allow (6298103289728210026) -->
-    <skip />
+    <string name="wifi_allow_wep_networks" msgid="8772342993235292010">"Cho phép kết nối với mạng WEP"</string>
+    <string name="wifi_allow_wep_networks_summary" msgid="3033397893296724615">"WEP là một giao thức bảo mật cũ và kém an toàn hơn"</string>
+    <string name="wifi_allow_wep_networks_summary_carrier_not_allow" msgid="6298103289728210026">"Nhà mạng của bạn không cho phép kết nối với mạng WEP vì mạng này kém an toàn hơn"</string>
     <string name="wifi_wakeup" msgid="3834327315861781611">"Tự động bật Wi-Fi"</string>
     <string name="wifi_wakeup_summary" msgid="5778059083790221465">"Wi-Fi sẽ bật lại khi ở gần các mạng đã lưu chất lượng cao, chẳng hạn như mạng gia đình của bạn"</string>
     <string name="wifi_wakeup_summary_no_location" msgid="681323616606485096">"Không hoạt động vì đã tắt vị trí. Hãy bật "<annotation id="link">"vị trí"</annotation>"."</string>
@@ -869,18 +868,12 @@
     <string name="wifi_settings_scanning_required_info" msgid="1473411566072565789">"Chế độ Quét tìm Wi-Fi cho phép các ứng dụng và dịch vụ quét tìm mạng Wi‑Fi bất kỳ lúc nào, ngay cả khi Wi-Fi tắt. Chế độ này có thể cải thiện các tính năng và dịch vụ dựa trên vị trí."</string>
     <string name="wifi_settings_scanning_required_turn_on" msgid="1112223196123955447">"Bật"</string>
     <string name="wifi_settings_scanning_required_enabled" msgid="4721729158927146365">"Đã bật tính năng quét tìm Wi‑Fi"</string>
-    <!-- no translation found for wifi_settings_warning_wep_network (2655077013800385646) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_blocked_title (8337700496544833669) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_summary_toggle_off (1113138364046142949) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_summary_blocked_by_carrier (6085673947156094523) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_button_allow (2807926329019873706) -->
-    <skip />
-    <!-- no translation found for wifi_settings_ssid_block_button_close (3013886895576949908) -->
-    <skip />
+    <string name="wifi_settings_warning_wep_network" msgid="2655077013800385646">"Mạng này dùng một giao thức bảo mật cũ và kém an toàn hơn"</string>
+    <string name="wifi_settings_wep_networks_blocked_title" msgid="8337700496544833669">"<xliff:g id="NAME">%1$s</xliff:g> đã bị chặn"</string>
+    <string name="wifi_settings_wep_networks_summary_toggle_off" msgid="1113138364046142949">"Mạng này dùng một giao thức bảo mật cũ hơn có tên là WEP, giao thức này cũng kém an toàn hơn. Nếu quyết định vẫn kết nối, bạn có thể cho phép mạng WEP."</string>
+    <string name="wifi_settings_wep_networks_summary_blocked_by_carrier" msgid="6085673947156094523">"Nhà mạng của bạn không cho phép kết nối với mạng này vì mạng này dùng một giao thức bảo mật cũ và kém an toàn hơn"</string>
+    <string name="wifi_settings_wep_networks_button_allow" msgid="2807926329019873706">"Cho phép WEP"</string>
+    <string name="wifi_settings_ssid_block_button_close" msgid="3013886895576949908">"Đóng"</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Tùy chọn nâng cao"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Danh sách thả xuống của Tùy chọn nâng cao"</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"mở rộng"</string>
@@ -1821,9 +1814,19 @@
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Bàn phím ảo có sẵn"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Quản lý bàn phím ảo"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"Tuỳ chọn"</string>
+    <!-- no translation found for keyboard_a11y_category (8230758278046841469) -->
+    <skip />
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Bàn phím vật lý"</string>
     <string name="show_ime" msgid="4334255501724746849">"Sử dụng bàn phím ảo"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"Hiện bàn phím ảo trên màn hình trong khi bàn phím vật lý đang hoạt động"</string>
+    <!-- no translation found for bounce_keys (7419450970351743904) -->
+    <skip />
+    <!-- no translation found for bounce_keys_summary (6922850403920596246) -->
+    <skip />
+    <!-- no translation found for sticky_keys (7317317044898161747) -->
+    <skip />
+    <!-- no translation found for sticky_keys_summary (8520909829540989765) -->
+    <skip />
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Phím tắt"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Hiện danh sách phím tắt"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Công cụ và bàn phím hồ sơ công việc"</string>
@@ -3821,12 +3824,9 @@
     <string name="free_memory" msgid="439783742246854785">"Còn trống"</string>
     <string name="memory_usage_apps" msgid="5776108502569850579">"Bộ nhớ do ứng dụng sử dụng"</string>
     <string name="memory_usage_apps_summary" msgid="7168292864155527974">"{count,plural, =1{1 ứng dụng sử dụng bộ nhớ trong {time} vừa qua}other{# ứng dụng sử dụng bộ nhớ trong {time} vừa qua}}"</string>
-    <!-- no translation found for force_enable_pss_profiling_title (2253816522775341523) -->
-    <skip />
-    <!-- no translation found for force_enable_pss_profiling_summary (7714294324548399136) -->
-    <skip />
-    <!-- no translation found for pss_profiling_disabled (1967278421143514850) -->
-    <skip />
+    <string name="force_enable_pss_profiling_title" msgid="2253816522775341523">"Bật chế độ phân tích mức sử dụng bộ nhớ"</string>
+    <string name="force_enable_pss_profiling_summary" msgid="7714294324548399136">"Quy trình phân tích mức sử dụng bộ nhớ cần sử dụng thêm tài nguyên hệ thống."</string>
+    <string name="pss_profiling_disabled" msgid="1967278421143514850">"Đã tắt chế độ phân tích bộ nhớ"</string>
     <string name="running_frequency" msgid="7260225121706316639">"Tần suất"</string>
     <string name="memory_maximum_usage" msgid="2047013391595835607">"Mức sử dụng tối đa"</string>
     <string name="no_data_usage" msgid="4665617440434654132">"Không sử dụng dữ liệu"</string>

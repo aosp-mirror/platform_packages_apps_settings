@@ -283,6 +283,8 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Forrit með heimildir nálægra tækja geta ákvarðað afstæða staðsetningu tengdra tækja."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Slökkt er á aðgangi að staðsetningu fyrir forrit og þjónustur. Staðsetning tækisins kann samt að verða send til viðbragðsaðila þegar þú hringir eða sendir skilaboð í neyðarnúmer."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Nánar um staðsetningarstillingar"</string>
+    <!-- no translation found for location_settings_tooltip_text_for_chrome (3574930966097093550) -->
+    <skip />
     <string name="account_settings_title" msgid="9138880127246241885">"Reikningar"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Öryggi"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Dulkóðun og skilríki"</string>
@@ -842,12 +844,9 @@
     <string name="wifi_in_airplane_mode" msgid="1235412508135267981">"Í flugstillingu"</string>
     <string name="wifi_notify_open_networks" msgid="2610323626246818961">"Tilkynna opin net"</string>
     <string name="wifi_notify_open_networks_summary" msgid="191058832201741013">"Tilkynna þegar opið gæðanet er tiltækt"</string>
-    <!-- no translation found for wifi_allow_wep_networks (8772342993235292010) -->
-    <skip />
-    <!-- no translation found for wifi_allow_wep_networks_summary (3033397893296724615) -->
-    <skip />
-    <!-- no translation found for wifi_allow_wep_networks_summary_carrier_not_allow (6298103289728210026) -->
-    <skip />
+    <string name="wifi_allow_wep_networks" msgid="8772342993235292010">"Leyfa WEP-netkerfi"</string>
+    <string name="wifi_allow_wep_networks_summary" msgid="3033397893296724615">"WEP er eldri öryggissamskiptaregla sem er ekki eins örugg"</string>
+    <string name="wifi_allow_wep_networks_summary_carrier_not_allow" msgid="6298103289728210026">"Símafyrirtækið þitt leyfir ekki WEP-netkerfi því þau eru ekki eins örugg"</string>
     <string name="wifi_wakeup" msgid="3834327315861781611">"Kveikja sjálfkrafa á Wi-Fi"</string>
     <string name="wifi_wakeup_summary" msgid="5778059083790221465">"Wi‑Fi mun kveikja á sér innan sendisviðs vistaðra, öruggra neta, eins og netsins þíns heima"</string>
     <string name="wifi_wakeup_summary_no_location" msgid="681323616606485096">"Ekki tiltækt vegna þess að slökkt er á staðsetningu. Kveiktu á "<annotation id="link">"staðsetningu"</annotation>"."</string>
@@ -869,18 +868,12 @@
     <string name="wifi_settings_scanning_required_info" msgid="1473411566072565789">"Wi-Fi leit leyfir forritum og þjónustu að leita að Wi-Fi neti hvenær sem er, jafnvel þegar slökkt er á Wi-Fi. Sem dæmi er hægt að nota þetta til að bæta eiginleika og þjónustu sem byggja á staðsetningu."</string>
     <string name="wifi_settings_scanning_required_turn_on" msgid="1112223196123955447">"Kveikja"</string>
     <string name="wifi_settings_scanning_required_enabled" msgid="4721729158927146365">"Kveikt á Wi‑Fi leit"</string>
-    <!-- no translation found for wifi_settings_warning_wep_network (2655077013800385646) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_blocked_title (8337700496544833669) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_summary_toggle_off (1113138364046142949) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_summary_blocked_by_carrier (6085673947156094523) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_button_allow (2807926329019873706) -->
-    <skip />
-    <!-- no translation found for wifi_settings_ssid_block_button_close (3013886895576949908) -->
-    <skip />
+    <string name="wifi_settings_warning_wep_network" msgid="2655077013800385646">"Þetta netkerfi notar eldri öryggissamskiptareglu sem er ekki eins örugg"</string>
+    <string name="wifi_settings_wep_networks_blocked_title" msgid="8337700496544833669">"<xliff:g id="NAME">%1$s</xliff:g> er á bannlista"</string>
+    <string name="wifi_settings_wep_networks_summary_toggle_off" msgid="1113138364046142949">"Þetta netkerfi notar eldri öryggissamskiptareglu sem kallast WEP, sem er ekki eins örugg. Til að tengjast samt sem áður geturðu leyft WEP-netkerfi."</string>
+    <string name="wifi_settings_wep_networks_summary_blocked_by_carrier" msgid="6085673947156094523">"Símafyrirtækið þitt leyfir þér ekki að tengjast þessu netkerfi vegna þess að það notar eldri öryggissamskiptareglu sem er ekki eins örugg"</string>
+    <string name="wifi_settings_wep_networks_button_allow" msgid="2807926329019873706">"Leyfa WEP"</string>
+    <string name="wifi_settings_ssid_block_button_close" msgid="3013886895576949908">"Loka"</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Ítarlegri valkostir"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Ítarlegir valkostir fellilista"</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"Opna"</string>
@@ -1821,9 +1814,19 @@
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Tiltækt skjályklaborð"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Stjórna skjályklaborðum"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"Valkostir"</string>
+    <!-- no translation found for keyboard_a11y_category (8230758278046841469) -->
+    <skip />
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Vélbúnaðarlyklaborð"</string>
     <string name="show_ime" msgid="4334255501724746849">"Nota skjályklaborð"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"Haltu því á skjánum meðan vélbúnaðarlyklaborðið er virkt"</string>
+    <!-- no translation found for bounce_keys (7419450970351743904) -->
+    <skip />
+    <!-- no translation found for bounce_keys_summary (6922850403920596246) -->
+    <skip />
+    <!-- no translation found for sticky_keys (7317317044898161747) -->
+    <skip />
+    <!-- no translation found for sticky_keys_summary (8520909829540989765) -->
+    <skip />
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Flýtilyklar"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Sýna lista yfir flýtileiðir"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Lyklaborð og verkfæri vinnusniðs"</string>
@@ -3821,12 +3824,9 @@
     <string name="free_memory" msgid="439783742246854785">"Laust"</string>
     <string name="memory_usage_apps" msgid="5776108502569850579">"Minni sem forrit nota"</string>
     <string name="memory_usage_apps_summary" msgid="7168292864155527974">"{count,plural, =1{1 forrit notaði minnið síðustu {time}}one{# forrit notaði minnið síðustu {time}}other{# forrit notuðu minnið síðustu {time}}}"</string>
-    <!-- no translation found for force_enable_pss_profiling_title (2253816522775341523) -->
-    <skip />
-    <!-- no translation found for force_enable_pss_profiling_summary (7714294324548399136) -->
-    <skip />
-    <!-- no translation found for pss_profiling_disabled (1967278421143514850) -->
-    <skip />
+    <string name="force_enable_pss_profiling_title" msgid="2253816522775341523">"Virkja greiningu minnisnotkunar"</string>
+    <string name="force_enable_pss_profiling_summary" msgid="7714294324548399136">"Greining minnisnotkunar krefst aukinna kerfistilfanga."</string>
+    <string name="pss_profiling_disabled" msgid="1967278421143514850">"Slökkt á minnisgreiningu"</string>
     <string name="running_frequency" msgid="7260225121706316639">"Tíðni"</string>
     <string name="memory_maximum_usage" msgid="2047013391595835607">"Hámarksnotkun"</string>
     <string name="no_data_usage" msgid="4665617440434654132">"Engin gögn notuð"</string>

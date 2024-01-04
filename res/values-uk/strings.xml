@@ -283,6 +283,8 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Додатки з дозволами на доступ до пристроїв поблизу можуть визначати відносне розташування підключених пристроїв."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Доступ до геоданих вимкнено для додатків і сервісів. Однак дані про місцезнаходження вашого пристрою можуть надсилатися в екстрених випадках, якщо ви зателефонуєте або надішлете SMS на екстрений номер."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Докладніше про доступ до геоданих"</string>
+    <!-- no translation found for location_settings_tooltip_text_for_chrome (3574930966097093550) -->
+    <skip />
     <string name="account_settings_title" msgid="9138880127246241885">"Облікові записи"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Безпека"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Шифрування й облікові дані"</string>
@@ -842,12 +844,9 @@
     <string name="wifi_in_airplane_mode" msgid="1235412508135267981">"У режимі польоту"</string>
     <string name="wifi_notify_open_networks" msgid="2610323626246818961">"Повідомляти про загальнодоступні мережі"</string>
     <string name="wifi_notify_open_networks_summary" msgid="191058832201741013">"Сповіщати про доступність високоякісної загальнодоступної мережі"</string>
-    <!-- no translation found for wifi_allow_wep_networks (8772342993235292010) -->
-    <skip />
-    <!-- no translation found for wifi_allow_wep_networks_summary (3033397893296724615) -->
-    <skip />
-    <!-- no translation found for wifi_allow_wep_networks_summary_carrier_not_allow (6298103289728210026) -->
-    <skip />
+    <string name="wifi_allow_wep_networks" msgid="8772342993235292010">"Дозволити підключення до мереж WEP"</string>
+    <string name="wifi_allow_wep_networks_summary" msgid="3033397893296724615">"WEP – це застарілий (менш надійний) протокол безпеки"</string>
+    <string name="wifi_allow_wep_networks_summary_carrier_not_allow" msgid="6298103289728210026">"Ваш оператор не дозволяє підключатися до мереж WEP, оскільки вони менш надійні"</string>
     <string name="wifi_wakeup" msgid="3834327315861781611">"Автоматично вмикати Wi‑Fi"</string>
     <string name="wifi_wakeup_summary" msgid="5778059083790221465">"Wi‑Fi вмикатиметься поблизу збережених високоякісних мереж, як-от вашої домашньої мережі"</string>
     <string name="wifi_wakeup_summary_no_location" msgid="681323616606485096">"Недоступно, оскільки місцезнаходження невідоме. Увімкніть "<annotation id="link">"надсилання геоданих"</annotation>"."</string>
@@ -869,18 +868,12 @@
     <string name="wifi_settings_scanning_required_info" msgid="1473411566072565789">"За допомогою функції пошуку мереж Wi-Fi додатки та сервіси можуть будь-коли шукати бездротові мережі, навіть якщо Wi-Fi вимкнено. Це покращує роботу функцій і сервісів, які використовують дані про місцезнаходження."</string>
     <string name="wifi_settings_scanning_required_turn_on" msgid="1112223196123955447">"Увімкнути"</string>
     <string name="wifi_settings_scanning_required_enabled" msgid="4721729158927146365">"Пошук мереж Wi-Fi увімкнено"</string>
-    <!-- no translation found for wifi_settings_warning_wep_network (2655077013800385646) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_blocked_title (8337700496544833669) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_summary_toggle_off (1113138364046142949) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_summary_blocked_by_carrier (6085673947156094523) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_button_allow (2807926329019873706) -->
-    <skip />
-    <!-- no translation found for wifi_settings_ssid_block_button_close (3013886895576949908) -->
-    <skip />
+    <string name="wifi_settings_warning_wep_network" msgid="2655077013800385646">"У цій мережі використовується застарілий (менш надійний) протокол безпеки"</string>
+    <string name="wifi_settings_wep_networks_blocked_title" msgid="8337700496544833669">"Мережу <xliff:g id="NAME">%1$s</xliff:g> заблоковано"</string>
+    <string name="wifi_settings_wep_networks_summary_toggle_off" msgid="1113138364046142949">"У цій мережі використовується застарілий протокол безпеки WEP, який є менш надійним. Щоб усе одно під’єднатися, ви можете дозволити підключення до мереж WEP."</string>
+    <string name="wifi_settings_wep_networks_summary_blocked_by_carrier" msgid="6085673947156094523">"Ваш оператор не дозволяє підключатися до цієї мережі, оскільки в ній використовується застарілий (менш надійний) протокол безпеки"</string>
+    <string name="wifi_settings_wep_networks_button_allow" msgid="2807926329019873706">"Дозволити WEP"</string>
+    <string name="wifi_settings_ssid_block_button_close" msgid="3013886895576949908">"Закрити"</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Додаткові параметри"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Спадний список додаткових параметрів"</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"розгорнути"</string>
@@ -1821,9 +1814,19 @@
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Доступна екранна клавіатура"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Керувати екранною клавіатурою"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"Опції"</string>
+    <!-- no translation found for keyboard_a11y_category (8230758278046841469) -->
+    <skip />
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Фізична клавіатура"</string>
     <string name="show_ime" msgid="4334255501724746849">"Використовувати екранну клавіатуру"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"Залишати її на екрані, коли активна фізична клавіатура"</string>
+    <!-- no translation found for bounce_keys (7419450970351743904) -->
+    <skip />
+    <!-- no translation found for bounce_keys_summary (6922850403920596246) -->
+    <skip />
+    <!-- no translation found for sticky_keys (7317317044898161747) -->
+    <skip />
+    <!-- no translation found for sticky_keys_summary (8520909829540989765) -->
+    <skip />
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Комбінації клавіш"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Показати список комбінацій клавіш"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Клавіатури та інструменти робочого профілю"</string>
@@ -3821,12 +3824,9 @@
     <string name="free_memory" msgid="439783742246854785">"Вільна пам’ять"</string>
     <string name="memory_usage_apps" msgid="5776108502569850579">"Використання пам\'яті додатками"</string>
     <string name="memory_usage_apps_summary" msgid="7168292864155527974">"{count,plural, =1{За ост. {time} пам’ять використовував 1 додаток}one{За ост. {time} пам’ять використовував # додаток}few{За ост. {time} пам’ять використовували # додатки}many{За ост. {time} пам’ять використовували # додатків}other{За ост. {time} пам’ять використовували # додатка}}"</string>
-    <!-- no translation found for force_enable_pss_profiling_title (2253816522775341523) -->
-    <skip />
-    <!-- no translation found for force_enable_pss_profiling_summary (7714294324548399136) -->
-    <skip />
-    <!-- no translation found for pss_profiling_disabled (1967278421143514850) -->
-    <skip />
+    <string name="force_enable_pss_profiling_title" msgid="2253816522775341523">"Увімк. профілювання використання пам’яті"</string>
+    <string name="force_enable_pss_profiling_summary" msgid="7714294324548399136">"Щоб профілювати використання пам’яті, потрібні додаткові системні ресурси."</string>
+    <string name="pss_profiling_disabled" msgid="1967278421143514850">"Профілювання використання пам’яті вимкнено"</string>
     <string name="running_frequency" msgid="7260225121706316639">"Як часто працює додаток"</string>
     <string name="memory_maximum_usage" msgid="2047013391595835607">"Найбільше використання"</string>
     <string name="no_data_usage" msgid="4665617440434654132">"Трафік не споживався"</string>

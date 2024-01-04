@@ -283,6 +283,8 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Apper med tillatelsen for enheter i nærheten kan fastslå den relative posisjonen til tilkoblede enheter."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Posisjonstilgang er av for apper og tjenester. Enhetsposisjonen kan fremdeles sendes til utrykningspersonell når du ringer eller sender tekstmelding til et nødnummer."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Finn ut mer om posisjonsinnstillinger"</string>
+    <!-- no translation found for location_settings_tooltip_text_for_chrome (3574930966097093550) -->
+    <skip />
     <string name="account_settings_title" msgid="9138880127246241885">"Kontoer"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Sikkerhet"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Kryptering og legitimasjon"</string>
@@ -842,12 +844,9 @@
     <string name="wifi_in_airplane_mode" msgid="1235412508135267981">"I flymodus"</string>
     <string name="wifi_notify_open_networks" msgid="2610323626246818961">"Varsle om offentlige nettverk"</string>
     <string name="wifi_notify_open_networks_summary" msgid="191058832201741013">"Varsle når et offentlig nettverk av høy kvalitet er tilgjengelig"</string>
-    <!-- no translation found for wifi_allow_wep_networks (8772342993235292010) -->
-    <skip />
-    <!-- no translation found for wifi_allow_wep_networks_summary (3033397893296724615) -->
-    <skip />
-    <!-- no translation found for wifi_allow_wep_networks_summary_carrier_not_allow (6298103289728210026) -->
-    <skip />
+    <string name="wifi_allow_wep_networks" msgid="8772342993235292010">"Tillat WEP-nettverk"</string>
+    <string name="wifi_allow_wep_networks_summary" msgid="3033397893296724615">"WEP er en eldre sikkerhetsprotokoll som er mindre sikker"</string>
+    <string name="wifi_allow_wep_networks_summary_carrier_not_allow" msgid="6298103289728210026">"Operatøren din tillater ikke WEP-nettverk fordi de er mindre sikre"</string>
     <string name="wifi_wakeup" msgid="3834327315861781611">"Slå på wifi automatisk"</string>
     <string name="wifi_wakeup_summary" msgid="5778059083790221465">"Wifi slås på igjen i nærheten av lagrede nettverk av høy kvalitet, for eksempel hjemmenettverket ditt"</string>
     <string name="wifi_wakeup_summary_no_location" msgid="681323616606485096">"Utilgjengelig fordi Posisjon er slått av. Slå på "<annotation id="link">"Posisjon"</annotation>"."</string>
@@ -869,18 +868,12 @@
     <string name="wifi_settings_scanning_required_info" msgid="1473411566072565789">"Med wifi-skanning kan apper og tjenester søke etter enheter i nærheten når som helst, selv når Wifi er slått av. Dette kan for eksempel brukes til å forbedre posisjonsbaserte funksjoner og tjenester."</string>
     <string name="wifi_settings_scanning_required_turn_on" msgid="1112223196123955447">"Slå på"</string>
     <string name="wifi_settings_scanning_required_enabled" msgid="4721729158927146365">"Wifi-skanning er slått på"</string>
-    <!-- no translation found for wifi_settings_warning_wep_network (2655077013800385646) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_blocked_title (8337700496544833669) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_summary_toggle_off (1113138364046142949) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_summary_blocked_by_carrier (6085673947156094523) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_button_allow (2807926329019873706) -->
-    <skip />
-    <!-- no translation found for wifi_settings_ssid_block_button_close (3013886895576949908) -->
-    <skip />
+    <string name="wifi_settings_warning_wep_network" msgid="2655077013800385646">"Dette nettverket bruker en eldre sikkerhetsprotokoll som er mindre sikker"</string>
+    <string name="wifi_settings_wep_networks_blocked_title" msgid="8337700496544833669">"<xliff:g id="NAME">%1$s</xliff:g> er blokkert"</string>
+    <string name="wifi_settings_wep_networks_summary_toggle_off" msgid="1113138364046142949">"Dette nettverket bruker en eldre sikkerhetsprotokoll som heter WEP, og som er mindre sikker. Hvis du vil koble til likevel, kan du tillate WEP-nettverk."</string>
+    <string name="wifi_settings_wep_networks_summary_blocked_by_carrier" msgid="6085673947156094523">"Operatøren din tillater ikke at du kobler til dette nettverket, fordi det bruker en eldre sikkerhetsprotokoll som er mindre sikker"</string>
+    <string name="wifi_settings_wep_networks_button_allow" msgid="2807926329019873706">"Tillat WEP"</string>
+    <string name="wifi_settings_ssid_block_button_close" msgid="3013886895576949908">"Lukk"</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Avanserte alternativer"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Rullegardinliste med avanserte alternativer"</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"vis"</string>
@@ -1139,8 +1132,8 @@
     <string name="display_white_balance_title" msgid="2624544323029364713">"Vis hvitbalanse"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="fold_lock_behavior_title" msgid="786228803694268449">"Fortsett å bruke apper etter sammenlegging"</string>
-    <string name="disable_game_default_frame_rate_title" msgid="3712908601744143753">"Slå av standard bildefrekvens for spill"</string>
-    <string name="disable_game_default_frame_rate_summary" msgid="4436762704707434225">"Slå av begrensningen av den maksimale bildefrekvensen for spill på <xliff:g id="FRAME_RATE">%1$d</xliff:g> Hz."</string>
+    <string name="disable_game_default_frame_rate_title" msgid="3712908601744143753">"Slå av standard bildefrekvens"</string>
+    <string name="disable_game_default_frame_rate_summary" msgid="4436762704707434225">"Slå av begrensningen for den maksimale bildefrekvensen for spill på <xliff:g id="FRAME_RATE">%1$d</xliff:g> Hz."</string>
     <string name="peak_refresh_rate_title" msgid="2056355754210341011">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="3212309985294885790">"Øker oppdateringsfrekvensen automatisk til <xliff:g id="ID_1">%1$d</xliff:g> Hz for noe innhold. Dette øker batteribruken."</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Maks oppdateringsfrekvens"</string>
@@ -1821,9 +1814,19 @@
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Tilgjengelig skjermtastatur"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Administrer skjermtastaturer"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"Alternativer"</string>
+    <!-- no translation found for keyboard_a11y_category (8230758278046841469) -->
+    <skip />
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Fysisk tastatur"</string>
     <string name="show_ime" msgid="4334255501724746849">"Bruk skjermtastaturet"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"Ha det på skjermen når det fysiske tastaturet er aktivt"</string>
+    <!-- no translation found for bounce_keys (7419450970351743904) -->
+    <skip />
+    <!-- no translation found for bounce_keys_summary (6922850403920596246) -->
+    <skip />
+    <!-- no translation found for sticky_keys (7317317044898161747) -->
+    <skip />
+    <!-- no translation found for sticky_keys_summary (8520909829540989765) -->
+    <skip />
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Hurtigtaster"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Vis listen over hurtigtaster"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Tastatur og verktøy i jobbprofilen"</string>
@@ -3821,12 +3824,9 @@
     <string name="free_memory" msgid="439783742246854785">"Ledig"</string>
     <string name="memory_usage_apps" msgid="5776108502569850579">"Minne brukt av apper"</string>
     <string name="memory_usage_apps_summary" msgid="7168292864155527974">"{count,plural, =1{1 app har brukt minne i løpet av siste {time}}other{# apper har brukt minne i løpet av siste {time}}}"</string>
-    <!-- no translation found for force_enable_pss_profiling_title (2253816522775341523) -->
-    <skip />
-    <!-- no translation found for force_enable_pss_profiling_summary (7714294324548399136) -->
-    <skip />
-    <!-- no translation found for pss_profiling_disabled (1967278421143514850) -->
-    <skip />
+    <string name="force_enable_pss_profiling_title" msgid="2253816522775341523">"Aktiver profilering av minnebruk"</string>
+    <string name="force_enable_pss_profiling_summary" msgid="7714294324548399136">"Profilering av minnebruk krever flere systemressurser."</string>
+    <string name="pss_profiling_disabled" msgid="1967278421143514850">"Minneprofilering er deaktivert"</string>
     <string name="running_frequency" msgid="7260225121706316639">"Frekvens"</string>
     <string name="memory_maximum_usage" msgid="2047013391595835607">"Maks. bruk"</string>
     <string name="no_data_usage" msgid="4665617440434654132">"Ingen data er brukt"</string>

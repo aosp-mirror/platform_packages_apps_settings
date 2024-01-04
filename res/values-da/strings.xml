@@ -283,6 +283,8 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Apps med tilladelse fra enheder i nærheden kan fastslå den relative placering af forbundne enheder."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Adgangen til Lokation er deaktiveret for apps og tjenester. Din enhedslokation kan stadig blive sendt til udrykningsberedskab, hvis du ringer eller sender en sms til et alarmnummer."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Få flere oplysninger om lokationsindstillinger"</string>
+    <!-- no translation found for location_settings_tooltip_text_for_chrome (3574930966097093550) -->
+    <skip />
     <string name="account_settings_title" msgid="9138880127246241885">"Konti"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Sikkerhed"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Kryptering og loginoplysninger"</string>
@@ -842,12 +844,9 @@
     <string name="wifi_in_airplane_mode" msgid="1235412508135267981">"I flytilstand"</string>
     <string name="wifi_notify_open_networks" msgid="2610323626246818961">"Underret om offentlige netværk"</string>
     <string name="wifi_notify_open_networks_summary" msgid="191058832201741013">"Giv besked, hvis et offentligt netværk af høj kvalitet er tilgængeligt"</string>
-    <!-- no translation found for wifi_allow_wep_networks (8772342993235292010) -->
-    <skip />
-    <!-- no translation found for wifi_allow_wep_networks_summary (3033397893296724615) -->
-    <skip />
-    <!-- no translation found for wifi_allow_wep_networks_summary_carrier_not_allow (6298103289728210026) -->
-    <skip />
+    <string name="wifi_allow_wep_networks" msgid="8772342993235292010">"Tillad WEP-netværk"</string>
+    <string name="wifi_allow_wep_networks_summary" msgid="3033397893296724615">"WEP er en ældre og mindre sikker sikkerhedsprotokol"</string>
+    <string name="wifi_allow_wep_networks_summary_carrier_not_allow" msgid="6298103289728210026">"Dit mobilselskab tillader ikke WEP-netværk, fordi de er mindre sikre"</string>
     <string name="wifi_wakeup" msgid="3834327315861781611">"Aktivér Wi-Fi automatisk"</string>
     <string name="wifi_wakeup_summary" msgid="5778059083790221465">"Wi-Fi aktiveres igen, når du er i nærheden af gemte netværk af høj kvalitet, f.eks dit hjemmenetværk"</string>
     <string name="wifi_wakeup_summary_no_location" msgid="681323616606485096">"Ikke tilgængelig, fordi lokation er deaktiveret. Aktivér "<annotation id="link">"lokation"</annotation>"."</string>
@@ -869,18 +868,12 @@
     <string name="wifi_settings_scanning_required_info" msgid="1473411566072565789">"Wi-Fi-scanning tillader, at apps og tjenester til enhver tid kan søge efter Wi-Fi-netværk, også selvom Wi-Fi er deaktiveret. Dette kan f.eks. bruges til at forbedre lokationsbaserede funktioner og tjenester."</string>
     <string name="wifi_settings_scanning_required_turn_on" msgid="1112223196123955447">"Aktivér"</string>
     <string name="wifi_settings_scanning_required_enabled" msgid="4721729158927146365">"Wi‑Fi-scanning er slået til"</string>
-    <!-- no translation found for wifi_settings_warning_wep_network (2655077013800385646) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_blocked_title (8337700496544833669) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_summary_toggle_off (1113138364046142949) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_summary_blocked_by_carrier (6085673947156094523) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_button_allow (2807926329019873706) -->
-    <skip />
-    <!-- no translation found for wifi_settings_ssid_block_button_close (3013886895576949908) -->
-    <skip />
+    <string name="wifi_settings_warning_wep_network" msgid="2655077013800385646">"Dette netværk bruger en ældre og mindre sikker sikkerhedsprotokol"</string>
+    <string name="wifi_settings_wep_networks_blocked_title" msgid="8337700496544833669">"<xliff:g id="NAME">%1$s</xliff:g> er blokeret"</string>
+    <string name="wifi_settings_wep_networks_summary_toggle_off" msgid="1113138364046142949">"Dette netværk bruger en ældre og mindre sikker sikkerhedsprotokol, der kaldes for WEP. Hvis du vil fortsætte alligevel, kan du tillade WEP-netværk."</string>
+    <string name="wifi_settings_wep_networks_summary_blocked_by_carrier" msgid="6085673947156094523">"Dit mobilselskab tillader ikke, at du opretter forbindelse til dette netværk, da det bruger en ældre og mindre sikker sikkerhedsprotokol"</string>
+    <string name="wifi_settings_wep_networks_button_allow" msgid="2807926329019873706">"Tillad WEP"</string>
+    <string name="wifi_settings_ssid_block_button_close" msgid="3013886895576949908">"Luk"</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Avancerede valgmuligheder"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Rulleliste med avancerede valgmuligheder"</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"udvid"</string>
@@ -1139,7 +1132,7 @@
     <string name="display_white_balance_title" msgid="2624544323029364713">"Skærmens hvidbalance"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="fold_lock_behavior_title" msgid="786228803694268449">"Fortsæt med at bruge apps på Fold"</string>
-    <string name="disable_game_default_frame_rate_title" msgid="3712908601744143753">"Deaktiver standardfrekvensen"</string>
+    <string name="disable_game_default_frame_rate_title" msgid="3712908601744143753">"Deaktiver std. frekvens i spil"</string>
     <string name="disable_game_default_frame_rate_summary" msgid="4436762704707434225">"Deaktiver begrænsning af den maksimale billedfrekvens i spil på <xliff:g id="FRAME_RATE">%1$d</xliff:g> Hz."</string>
     <string name="peak_refresh_rate_title" msgid="2056355754210341011">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="3212309985294885790">"Øger automatisk opdateringshastigheden op til <xliff:g id="ID_1">%1$d</xliff:g> Hz for noget indhold. Medfører højere batteriforbrug."</string>
@@ -1821,9 +1814,19 @@
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Tilgængeligt skærmtastatur"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Administrer tastaturer på skærmen"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"Valgmuligheder"</string>
+    <!-- no translation found for keyboard_a11y_category (8230758278046841469) -->
+    <skip />
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Fysisk tastatur"</string>
     <string name="show_ime" msgid="4334255501724746849">"Brug skærmtastaturet"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"Behold det på skærmen, mens det fysiske tastatur er aktivt"</string>
+    <!-- no translation found for bounce_keys (7419450970351743904) -->
+    <skip />
+    <!-- no translation found for bounce_keys_summary (6922850403920596246) -->
+    <skip />
+    <!-- no translation found for sticky_keys (7317317044898161747) -->
+    <skip />
+    <!-- no translation found for sticky_keys_summary (8520909829540989765) -->
+    <skip />
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Tastaturgenveje"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Vis liste over genveje"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Tastatur og værktøjer for arbejdsprofil"</string>
@@ -2589,7 +2592,7 @@
     <string name="user_certificate" msgid="6897024598058566466">"VPN- og appbrugercertifikat"</string>
     <string name="wifi_certificate" msgid="8461905432409380387">"Wi‑Fi-certifikat"</string>
     <string name="ca_certificate_warning_title" msgid="7951148441028692619">"Dine data er ikke private"</string>
-    <string name="ca_certificate_warning_description" msgid="8409850109551028774">"CA-certifikater bruges af websites, apps og VPN-netværk til kryptering. Du bør kun installere CA-certifikater fra organisationer, du har tillid til. \n\nHvis du installerer et CA-certifikat, kan certifikatejeren få adgang til dine data, f.eks. adgangskoder eller betalingskortoplysninger fra websites, du besøger, eller apps, du bruger – selv hvis dine data er krypterede."</string>
+    <string name="ca_certificate_warning_description" msgid="8409850109551028774">"CA-certifikater bruges af websites, apps og VPN-netværk til kryptering. Du bør kun installere CA-certifikater fra organisationer, du har tillid til. \n\nHvis du installerer et CA-certifikat, kan certifikatejeren få adgang til dine data, f.eks. adgangskoder eller kreditkortoplysninger fra websites, du besøger, eller apps, du bruger – selv hvis dine data er krypterede."</string>
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"Installer ikke"</string>
     <string name="certificate_warning_install_anyway" msgid="4633118283407228740">"Installer alligevel"</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"Certifikatet er ikke installeret"</string>
@@ -2833,7 +2836,7 @@
     <string name="ssl_ca_cert_dialog_title" msgid="1032088078702042090">"{count,plural, =1{Tillad eller fjern certifikat}one{Tillad eller fjern certifikat}other{Tillad eller fjern certifikater}}"</string>
     <string name="ssl_ca_cert_info_message_device_owner" msgid="7528581447864707873">"{numberOfCertificates,plural, =1{{orgName} har installeret en certifikatautoritet på din enhed, hvilket giver vedkommende mulighed for at overvåge netværksaktivitet på din enhed, herunder mails, apps og sikre websites.\n\nKontakt din administrator for at få flere oplysninger om dette certifikat.}one{{orgName} har installeret en certifikatautoritet på din enhed, hvilket giver vedkommende mulighed for at overvåge netværksaktivitet på din enhed, herunder mails, apps og sikre websites.\n\nKontakt din administrator for at få flere oplysninger om dette certifikat.}other{{orgName} har installeret certifikatautoriteter på din enhed, hvilket giver vedkommende mulighed for at overvåge netværksaktivitet på din enhed, herunder mails, apps og sikre websites.\n\nKontakt din administrator for at få flere oplysninger om disse certifikater.}}"</string>
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName} har installeret en certifikatautoritet for din arbejdsprofil, hvilket giver vedkommende mulighed for at overvåge aktivitet på dit arbejdsnetværk, herunder mails, apps og sikre websites.\n\nKontakt din administrator for at få flere oplysninger om dette certifikat.}one{{orgName} har installeret en certifikatautoritet for din arbejdsprofil, hvilket giver vedkommende mulighed for at overvåge aktivitet på dit arbejdsnetværk, herunder mails, apps og sikre websites.\n\nKontakt din administrator for at få flere oplysninger om dette certifikat.}other{{orgName} har installeret certifikatautoriteter for din arbejdsprofil, hvilket giver vedkommende mulighed for at overvåge aktivitet på dit arbejdsnetværk, herunder mails, apps og sikre websites\n\nKontakt din administrator for at få flere oplysninger om disse certifikater.}}"</string>
-    <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"En tredjepart kan overvåge din netværksaktivitet, herunder e-mails, apps og sikre websites.\n\nPålidelige loginoplysninger, der er installeret på din enhed, gør dette muligt."</string>
+    <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"En tredjepart kan overvåge din netværksaktivitet, herunder mails, apps og sikre websites.\n\nPålidelige loginoplysninger, der er installeret på din enhed, gør dette muligt."</string>
     <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{Tjek certifikatet}one{Tjek certifikatet}other{Tjek certifikaterne}}"</string>
     <string name="user_settings_title" msgid="6550866465409807877">"Flere brugere"</string>
     <string name="user_list_title" msgid="1387379079186123404">"Brugere og profiler"</string>
@@ -3821,12 +3824,9 @@
     <string name="free_memory" msgid="439783742246854785">"Ledig"</string>
     <string name="memory_usage_apps" msgid="5776108502569850579">"Hukommelse, der bruges af apps"</string>
     <string name="memory_usage_apps_summary" msgid="7168292864155527974">"{count,plural, =1{1 app har brugt hukommelse inden for den seneste {time}}one{# app har brugt hukommelse inden for den seneste {time}}other{# apps har brugt hukommelse inden for den seneste {time}}}"</string>
-    <!-- no translation found for force_enable_pss_profiling_title (2253816522775341523) -->
-    <skip />
-    <!-- no translation found for force_enable_pss_profiling_summary (7714294324548399136) -->
-    <skip />
-    <!-- no translation found for pss_profiling_disabled (1967278421143514850) -->
-    <skip />
+    <string name="force_enable_pss_profiling_title" msgid="2253816522775341523">"Aktivér profilering af hukommelsesforbrug"</string>
+    <string name="force_enable_pss_profiling_summary" msgid="7714294324548399136">"Profilering af hukommelsesforbrug kræver yderligere systemressourcer."</string>
+    <string name="pss_profiling_disabled" msgid="1967278421143514850">"Profilering af hukommelse er deaktiveret"</string>
     <string name="running_frequency" msgid="7260225121706316639">"Hyppighed"</string>
     <string name="memory_maximum_usage" msgid="2047013391595835607">"Maksimal forbrug"</string>
     <string name="no_data_usage" msgid="4665617440434654132">"Der blev ikke brugt nogen data"</string>
@@ -4113,7 +4113,7 @@
     <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"Gå til startskærmen ved at stryge opad fra bunden af skærmen. Skift mellem apps ved at stryge opad fra bunden af skærmen, holde fingeren nede og derefter give slip. Gå tilbage ved at stryge fra enten venstre eller højre kant."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Navigering med tre knapper"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"Gå tilbage, gå til startskærmen og skift mellem apps ved hjælp af knapperne nederst på din skærm."</string>
-    <string name="keywords_system_navigation" msgid="3131782378486554934">"systemnavigering, navigering med to knapper, navigering med tre knapper, navigering med bevægelser, stryg"</string>
+    <string name="keywords_system_navigation" msgid="3131782378486554934">"systemnavigation, navigering med to knapper, navigering med tre knapper, navigering med bevægelser, stryg"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Digital assistent"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Stryg for at aktivere assistenten"</string>
     <string name="assistant_corner_gesture_summary" msgid="5012534700233017955">"Stryg opad fra et af de nedre hjørner for at aktivere appen for din digitale assistent."</string>
