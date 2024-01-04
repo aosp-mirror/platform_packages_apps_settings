@@ -365,14 +365,12 @@ public class NetworkSelectSettings extends DashboardFragment {
         }
         ArrayList<CellInfo> aggregatedList = new ArrayList<>();
         for (CellInfo cellInfo : cellInfoListInput) {
-            String plmn = CellInfoUtil.getNetworkTitle(cellInfo.getCellIdentity(),
-                    CellInfoUtil.getCellIdentityMccMnc(cellInfo.getCellIdentity()));
+            String plmn = CellInfoUtil.getNetworkTitle(cellInfo.getCellIdentity());
             Class className = cellInfo.getClass();
 
             Optional<CellInfo> itemInTheList = aggregatedList.stream().filter(
                     item -> {
-                        String itemPlmn = CellInfoUtil.getNetworkTitle(item.getCellIdentity(),
-                                CellInfoUtil.getCellIdentityMccMnc(item.getCellIdentity()));
+                        String itemPlmn = CellInfoUtil.getNetworkTitle(item.getCellIdentity());
                         return itemPlmn.equals(plmn) && item.getClass().equals(className);
                     })
                     .findFirst();

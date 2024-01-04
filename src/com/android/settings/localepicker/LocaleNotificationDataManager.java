@@ -63,6 +63,17 @@ public class LocaleNotificationDataManager {
     }
 
     /**
+     * Removes one entry with the corresponding locale from the {@link SharedPreferences}.
+     *
+     * @param locale A locale which the application sets to
+     */
+    public void removeNotificationInfo(String locale) {
+        SharedPreferences.Editor editor = getSharedPreferences(mContext).edit();
+        editor.remove(locale);
+        editor.apply();
+    }
+
+    /**
      * Gets the {@link NotificationInfo} with the associated locale from the
      * {@link SharedPreferences}.
      *
