@@ -36,7 +36,7 @@
     <string name="radioInfo_roaming_not" msgid="3137594549464975054">"Roamer ikke"</string>
     <string name="radioInfo_data_disconnected" msgid="362604130117666924">"Afbrudt"</string>
     <string name="radioInfo_data_connecting" msgid="7280819598028917888">"Forbinder"</string>
-    <string name="radioInfo_data_connected" msgid="8816467971633020141">"Tilsluttet"</string>
+    <string name="radioInfo_data_connected" msgid="8816467971633020141">"Forbundet"</string>
     <string name="radioInfo_data_suspended" msgid="2001254415431299603">"Sat på pause"</string>
     <string name="radioInfo_unknown" msgid="2892562356748600367">"Ukendt"</string>
     <string name="preview_pager_content_description" msgid="3762247188224576303">"Forhåndsvisning"</string>
@@ -228,8 +228,8 @@
     <string name="date_time_set_timezone_title" msgid="790404320569600222">"Tidszone"</string>
     <string name="date_time_set_timezone" msgid="2915125337941495746">"Vælg tidszone"</string>
     <string name="date_time_set_date_title" msgid="7624166157167528407">"Dato"</string>
-    <string name="date_time_search_region" msgid="1364133854952610919">"Søg efter område"</string>
-    <string name="date_time_select_region" msgid="5449345333305056072">"Område"</string>
+    <string name="date_time_search_region" msgid="1364133854952610919">"Søg efter region"</string>
+    <string name="date_time_select_region" msgid="5449345333305056072">"Region"</string>
     <string name="date_time_select_fixed_offset_time_zones" msgid="594848300882055361">"Vælg UTC-forskydning"</string>
     <string name="zone_info_exemplar_location_and_offset" msgid="2186042522225153092">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g> (<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
@@ -238,7 +238,7 @@
     <string name="zone_info_footer_no_dst" msgid="8399585343328811158">"Bruger <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. Ingen sommertid/vintertid."</string>
     <string name="zone_time_type_dst" msgid="9189689342265305808">"Sommertid"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Standardtid"</string>
-    <string name="zone_menu_by_region" msgid="2963565278710225652">"Vælg efter område"</string>
+    <string name="zone_menu_by_region" msgid="2963565278710225652">"Vælg efter region"</string>
     <string name="zone_menu_by_offset" msgid="1257702747474426745">"Vælg efter UTC-forskydning"</string>
     <string name="lock_after_timeout" msgid="8682769000437403444">"Lås efter skærmens timeout"</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> efter timeout"</string>
@@ -678,7 +678,7 @@
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Aktivér trådløs skærm"</string>
     <string name="wifi_display_no_devices_found" msgid="7904877793677102805">"Der blev ikke fundet enheder i nærheden."</string>
     <string name="wifi_display_status_connecting" msgid="530880182560077334">"Tilslutter"</string>
-    <string name="wifi_display_status_connected" msgid="2189925211258519539">"Tilsluttet"</string>
+    <string name="wifi_display_status_connected" msgid="2189925211258519539">"Forbundet"</string>
     <string name="wifi_display_status_in_use" msgid="5904009697167947449">"I brug"</string>
     <string name="wifi_display_status_not_available" msgid="8463750208946968594">"Ikke tilgængelig"</string>
     <string name="wifi_display_options_title" msgid="7584326966240865043">"Indstillinger for trådløs skærm"</string>
@@ -879,7 +879,7 @@
     <string name="wifi_p2p_remembered_groups" msgid="5497007770930525695">"Gemte grupper"</string>
     <string name="wifi_p2p_failed_connect_message" msgid="6767831720507440027">"Der kunne ikke oprettes forbindelse."</string>
     <string name="wifi_p2p_failed_rename_message" msgid="1317434386267376606">"Enheden kunne ikke omdøbes."</string>
-    <string name="wifi_p2p_disconnect_title" msgid="96361896458072463">"Vil du afbryde?"</string>
+    <string name="wifi_p2p_disconnect_title" msgid="96361896458072463">"Vil du afbryde forbindelsen?"</string>
     <string name="wifi_p2p_disconnect_message" msgid="1208761239498807208">"Hvis du afbryder, stoppes forbindelsen til <xliff:g id="PEER_NAME">%1$s</xliff:g>."</string>
     <string name="wifi_p2p_disconnect_multiple_message" msgid="4490648217799144078">"Hvis du afbryder, stoppes forbindelsen til <xliff:g id="PEER_NAME">%1$s</xliff:g> og <xliff:g id="PEER_COUNT">%2$s</xliff:g> andre enheder."</string>
     <string name="wifi_p2p_cancel_connect_title" msgid="8476985132989357041">"Vil du annullere invitationen?"</string>
@@ -911,7 +911,7 @@
     <string name="wifi_hotspot_speed_2g_5g_summary" msgid="8104575293617700173">"Hurtige hastigheder. Dette dual-band-hotspot er kompatibelt med de fleste enheder."</string>
     <string name="wifi_hotspot_speed_6g" msgid="3787697484862730500">"6 GHz"</string>
     <string name="wifi_hotspot_speed_6g_summary" msgid="8675262219242174548">"Hurtigste hastigheder. Kompatibel med få enheder."</string>
-    <string name="wifi_hotspot_speed_summary_unavailable" msgid="7276080644693388756">"Ikke tilgængelig i dit land eller område"</string>
+    <string name="wifi_hotspot_speed_summary_unavailable" msgid="7276080644693388756">"Ikke tilgængelig i dit land eller din region"</string>
     <string name="wifi_hotspot_speed_footer" msgid="8846939503916795002">"Hvis din foretrukne frekvens ikke er tilgængelig, anvender dit hotspot muligvis en anden. Sikkerhedsindstillingerne for hotspottet kan ændres, hvis du justerer frekvensen."</string>
     <string name="wifi_hotspot_security_summary_unavailable" msgid="117582979310345853">"Ikke tilgængeligt med 6 GHz"</string>
     <string name="wifi_hotspot_security_footer" msgid="4608329688744949796">"Sikkerhedsindstillingerne kan ændres, hvis du justerer frekvensen for hotspottet"</string>
@@ -1354,7 +1354,7 @@
     <string name="location_app_permission_summary_location_on" msgid="7552095451731948984">"{count,plural, =1{# ud af {total} apps har adgang til din lokation}one{# ud af {total} apps har adgang til din lokation}other{# ud af {total} apps har adgang til din lokation}}"</string>
     <string name="location_category_recent_location_access" msgid="2558063524482178146">"Seneste adgang"</string>
     <string name="location_recent_location_access_see_all" msgid="4203102419355323325">"Se alle"</string>
-    <string name="location_recent_location_access_view_details" msgid="5803264082558504544">"Se info"</string>
+    <string name="location_recent_location_access_view_details" msgid="5803264082558504544">"Se oplysninger"</string>
     <string name="location_no_recent_apps" msgid="6814206631456177033">"Ingen apps har anmodet om lokation for nylig"</string>
     <string name="location_no_recent_accesses" msgid="6031735777805464247">"Ingen apps har haft adgang til lokationen for nylig"</string>
     <string name="location_high_battery_use" msgid="4277318891200626524">"Højt batteriforbrug"</string>
@@ -2411,7 +2411,7 @@
     <string name="user_certificate" msgid="6897024598058566466">"VPN- og appbrugercertifikat"</string>
     <string name="wifi_certificate" msgid="8461905432409380387">"Wi‑Fi-certifikat"</string>
     <string name="ca_certificate_warning_title" msgid="7951148441028692619">"Dine data er ikke private"</string>
-    <string name="ca_certificate_warning_description" msgid="8409850109551028774">"CA-certifikater bruges af websites, apps og VPN-netværk til kryptering. Du bør kun installere CA-certifikater fra organisationer, du har tillid til. \n\nHvis du installerer et CA-certifikat, kan certifikatejeren få adgang til dine data, f.eks. adgangskoder eller betalingskortoplysninger fra websites, du besøger, eller apps, du bruger – selv hvis dine data er krypterede."</string>
+    <string name="ca_certificate_warning_description" msgid="8409850109551028774">"CA-certifikater bruges af websites, apps og VPN-netværk til kryptering. Du bør kun installere CA-certifikater fra organisationer, du har tillid til. \n\nHvis du installerer et CA-certifikat, kan certifikatejeren få adgang til dine data, f.eks. adgangskoder eller kreditkortoplysninger fra websites, du besøger, eller apps, du bruger – selv hvis dine data er krypterede."</string>
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"Installer ikke"</string>
     <string name="certificate_warning_install_anyway" msgid="4633118283407228740">"Installer alligevel"</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"Certifikatet er ikke installeret"</string>
@@ -2601,7 +2601,7 @@
     <string name="vpn_forget" msgid="2913950864877236737">"Glem"</string>
     <string name="vpn_connect_to" msgid="216709261691085594">"Opret forbindelse til <xliff:g id="PROFILE">%s</xliff:g>"</string>
     <string name="vpn_disconnect_confirm" msgid="6356789348816854539">"Vil du afbryde dette VPN?"</string>
-    <string name="vpn_disconnect" msgid="7753808961085867345">"Afbryd"</string>
+    <string name="vpn_disconnect" msgid="7753808961085867345">"Afbryd forbindelse"</string>
     <string name="vpn_version" msgid="6344167191984400976">"Version"</string>
     <string name="vpn_forget_long" msgid="729132269203870205">"Glem VPN"</string>
     <string name="vpn_replace_vpn_title" msgid="3994226561866340280">"Erstat det eksisterende VPN-netværk?"</string>
@@ -2664,7 +2664,7 @@
     <string name="ssl_ca_cert_dialog_title" msgid="1032088078702042090">"{count,plural, =1{Tillad eller fjern certifikat}one{Tillad eller fjern certifikat}other{Tillad eller fjern certifikater}}"</string>
     <string name="ssl_ca_cert_info_message_device_owner" msgid="7528581447864707873">"{numberOfCertificates,plural, =1{{orgName} har installeret en certifikatautoritet på din enhed, hvilket giver vedkommende mulighed for at overvåge netværksaktivitet på din enhed, herunder mails, apps og sikre websites.\n\nKontakt din administrator for at få flere oplysninger om dette certifikat.}one{{orgName} har installeret en certifikatautoritet på din enhed, hvilket giver vedkommende mulighed for at overvåge netværksaktivitet på din enhed, herunder mails, apps og sikre websites.\n\nKontakt din administrator for at få flere oplysninger om dette certifikat.}other{{orgName} har installeret certifikatautoriteter på din enhed, hvilket giver vedkommende mulighed for at overvåge netværksaktivitet på din enhed, herunder mails, apps og sikre websites.\n\nKontakt din administrator for at få flere oplysninger om disse certifikater.}}"</string>
     <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName} har installeret en certifikatautoritet for din arbejdsprofil, hvilket giver vedkommende mulighed for at overvåge aktivitet på dit arbejdsnetværk, herunder mails, apps og sikre websites.\n\nKontakt din administrator for at få flere oplysninger om dette certifikat.}one{{orgName} har installeret en certifikatautoritet for din arbejdsprofil, hvilket giver vedkommende mulighed for at overvåge aktivitet på dit arbejdsnetværk, herunder mails, apps og sikre websites.\n\nKontakt din administrator for at få flere oplysninger om dette certifikat.}other{{orgName} har installeret certifikatautoriteter for din arbejdsprofil, hvilket giver vedkommende mulighed for at overvåge aktivitet på dit arbejdsnetværk, herunder mails, apps og sikre websites\n\nKontakt din administrator for at få flere oplysninger om disse certifikater.}}"</string>
-    <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"En tredjepart kan overvåge din netværksaktivitet, herunder e-mails, apps og sikre websites.\n\nPålidelige loginoplysninger, der er installeret på din enhed, gør dette muligt."</string>
+    <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"En tredjepart kan overvåge din netværksaktivitet, herunder mails, apps og sikre websites.\n\nPålidelige loginoplysninger, der er installeret på din enhed, gør dette muligt."</string>
     <string name="ssl_ca_cert_settings_button" msgid="2044927302268394991">"{count,plural, =1{Tjek certifikatet}one{Tjek certifikatet}other{Tjek certifikaterne}}"</string>
     <string name="user_settings_title" msgid="6550866465409807877">"Flere brugere"</string>
     <string name="user_list_title" msgid="1387379079186123404">"Brugere og profiler"</string>
@@ -3604,7 +3604,7 @@
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"USB-præferencer"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"USB styres af"</string>
-    <string name="usb_control_host" msgid="7404215921555021871">"Tilsluttet enhed"</string>
+    <string name="usb_control_host" msgid="7404215921555021871">"Forbundet med enhed"</string>
     <string name="usb_control_device" msgid="527916783743021577">"Denne enhed"</string>
     <string name="usb_switching" msgid="3654709188596609354">"Skifter…"</string>
     <string name="usb_switching_failed" msgid="5721262697715454137">"Der kunne ikke skiftes"</string>
@@ -3716,7 +3716,7 @@
     <string name="disabled_by_policy_content_biometric_parental_consent" msgid="7124116806784305206">"Giv telefonen til din forælder for at starte konfigurationen af dette"</string>
     <string name="disabled_by_policy_parental_consent" msgid="9166060049019018978">"Giv telefonen til din forælder, så din forælder kan tillade, at denne indstilling ændres."</string>
     <string name="default_admin_support_msg" msgid="8816296554831532033">"Få flere oplysninger ved at kontakte din it-administrator."</string>
-    <string name="admin_support_more_info" msgid="8407433155725898290">"Mere info"</string>
+    <string name="admin_support_more_info" msgid="8407433155725898290">"Flere oplysninger"</string>
     <string name="admin_profile_owner_message" msgid="8860709969532649195">"Din administrator kan overvåge og administrere apps og data, der er knyttet til din arbejdsprofil, herunder indstillinger, tilladelser, virksomhedsadgang, netværksaktivitet og enhedens lokationsoplysninger."</string>
     <string name="admin_profile_owner_user_message" msgid="4929926887231544950">"Din administrator kan overvåge og administrere apps og data, der er knyttet til denne bruger, herunder indstillinger, tilladelser, virksomhedsadgang, netværksaktivitet og enhedens lokationsoplysninger."</string>
     <string name="admin_device_owner_message" msgid="5503131744126520590">"Din administrator kan overvåge og administrere apps og data, der er knyttet til denne enhed, herunder indstillinger, tilladelser, virksomhedsadgang, netværksaktivitet og enhedens lokationsoplysninger."</string>
@@ -3800,7 +3800,7 @@
     <string name="carrier_and_update_now_text" msgid="5075861262344398849">"Netop opdateret af <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="no_carrier_update_now_text" msgid="7898004907837200752">"Netop opdateret"</string>
     <string name="launch_mdp_app_text" msgid="8791816789749304897">"Se abonnement"</string>
-    <string name="launch_wifi_text" msgid="976421974332512894">"Se info"</string>
+    <string name="launch_wifi_text" msgid="976421974332512894">"Se oplysninger"</string>
     <string name="data_saver_title" msgid="2593804270788863815">"Datasparefunktion"</string>
     <string name="unrestricted_data_saver" msgid="7922563266857367495">"Ubegrænset data"</string>
     <string name="restrict_background_blocklisted" msgid="2308345280442438232">"Baggrundsdata er deaktiveret"</string>
@@ -3895,9 +3895,9 @@
     <string name="cross_profile_calendar_summary" msgid="8856185206722860069">"Se arbejdsbegivenheder i din personlige kalender"</string>
     <string name="managed_profile_settings_footer" msgid="996500759305118103">"Når arbejdsapps er deaktiveret, sættes de på pause og kan ikke tilgås eller sende dig notifikationer"</string>
     <string name="automatic_storage_manager_settings" msgid="519158151463974656">"Administrer lagerplads"</string>
-    <string name="automatic_storage_manager_text" msgid="6900593059927987273">"For at hjælpe med at frigøre lagerplads fjerner lagerstyringen sikkerhedskopierede billeder og videoer fra din enhed."</string>
+    <string name="automatic_storage_manager_text" msgid="6900593059927987273">"For at hjælpe med at frigøre lagerplads fjerner Lageradministrator sikkerhedskopierede billeder og videoer fra din enhed."</string>
     <string name="automatic_storage_manager_days_title" msgid="5077286114860539367">"Fjern billeder og videoer"</string>
-    <string name="automatic_storage_manager_preference_title" msgid="3483357910142595444">"Lagerstyring"</string>
+    <string name="automatic_storage_manager_preference_title" msgid="3483357910142595444">"Lageradministrator"</string>
     <string name="automatic_storage_manager_primary_switch_title" msgid="9131959126462101994">"Brug Lageradministrator"</string>
     <string name="gesture_preference_title" msgid="8291899281322647187">"Bevægelser"</string>
     <string name="double_tap_power_for_camera_title" msgid="7982364144330923683">"Åbn hurtigt kameraet"</string>
@@ -3908,12 +3908,12 @@
     <string name="swipe_up_to_switch_apps_title" msgid="6677266952021118342">"Navigering med to knapper"</string>
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"Stryg opad på knappen Hjem for at skifte mellem apps. Stryg opad igen for at se alle apps. Tryk på tilbageknappen for at gå tilbage."</string>
     <string name="emergency_settings_preference_title" msgid="6183455153241187148">"Sikkerhed og nødsituationer"</string>
-    <string name="emergency_dashboard_summary" msgid="401033951074039302">"Alarm-SOS, helbredsoplysninger, underretninger"</string>
+    <string name="emergency_dashboard_summary" msgid="401033951074039302">"Nødkald, helbredsoplysninger, underretninger"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Navigering med bevægelser"</string>
     <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"Gå til startskærmen ved at stryge opad fra bunden af skærmen. Skift mellem apps ved at stryge opad fra bunden af skærmen, holde fingeren nede og derefter give slip. Gå tilbage ved at stryge fra enten venstre eller højre kant."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Navigering med tre knapper"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"Gå tilbage, gå til startskærmen og skift mellem apps ved hjælp af knapperne nederst på din skærm."</string>
-    <string name="keywords_system_navigation" msgid="3131782378486554934">"systemnavigering, navigering med to knapper, navigering med tre knapper, navigering med bevægelser, stryg"</string>
+    <string name="keywords_system_navigation" msgid="3131782378486554934">"systemnavigation, navigering med to knapper, navigering med tre knapper, navigering med bevægelser, stryg"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Digital assistent"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Stryg for at aktivere assistenten"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"Stryg opad fra et af de nederste hjørner for at aktivere appen for din digitale assistent."</string>
@@ -3944,16 +3944,16 @@
     <string name="ambient_display_summary" msgid="2650326740502690434">"Tryk to gange på skærmen for at se klokkeslæt, notifikationer og andre oplysninger."</string>
     <string name="ambient_display_wake_screen_title" msgid="7637678749035378085">"Aktivering af skærm"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"Tryk på skærmen for at se klokkeslæt, notifikationer og andre oplysninger."</string>
-    <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"Alarm-SOS"</string>
-    <string name="emergency_gesture_switchbar_title" msgid="7421353963329899514">"Brug Alarm-SOS"</string>
+    <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"Nødkald"</string>
+    <string name="emergency_gesture_switchbar_title" msgid="7421353963329899514">"Brug Nødkald"</string>
     <string name="emergency_gesture_screen_summary" msgid="6640521030845132507">"Start nedenstående handlinger ved at trykke på afbryderknappen hurtigt 5 gange eller mere"</string>
     <string name="emergency_gesture_sound_setting_title" msgid="7153948164862156536">"Afspil nedtællingsalarm"</string>
-    <string name="emergency_gesture_sound_setting_summary" msgid="6573377104470235173">"Afspil en høj lyd, når Alarm-SOS starter"</string>
+    <string name="emergency_gesture_sound_setting_summary" msgid="6573377104470235173">"Afspil en høj lyd, når Nødkald starter"</string>
     <string name="emergency_gesture_category_call_for_help_title" msgid="1680040129478289510">"Kontakt i nødsituationer"</string>
     <string name="emergency_gesture_call_for_help_title" msgid="4969340870836239982">"Ring efter hjælp"</string>
     <string name="emergency_gesture_call_for_help_dialog_title" msgid="8901271205171421201">"Telefonnummer, der kan kontaktes for at få hjælp"</string>
     <string name="emergency_gesture_call_for_help_summary" msgid="6552830427932669221">"<xliff:g id="PHONE_NUMBER">%1$s</xliff:g>. Tryk for at redigere"</string>
-    <string name="emergency_gesture_number_override_notes" msgid="233018570696200402">"Hvis du angiver et nummer, der ikke er et alarmnummer:\n • Din enhed skal låses op, før du kan bruge Alarm-SOS\n • Dit opkald besvares muligvis ikke"</string>
+    <string name="emergency_gesture_number_override_notes" msgid="233018570696200402">"Hvis du angiver et nummer, der ikke er et alarmnummer:\n • Din enhed skal låses op, før du kan bruge Nødkald\n • Dit opkald besvares muligvis ikke"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"Stryg over fingeraftrykslæser for at se notifikationer"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"Stryg fingeraftryk"</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="2956636269742745449">"Se notifikationer hurtigt"</string>
@@ -3969,7 +3969,7 @@
     <string name="web_action_section_title" msgid="994717569424234098">"Instant-apps"</string>
     <string name="instant_apps_settings" msgid="4280942494969957858">"Præferencer for Instant Apps"</string>
     <string name="domain_url_section_title" msgid="9028890472923474958">"Installerede apps"</string>
-    <string name="automatic_storage_manager_activation_warning" msgid="170508173207142665">"Din lagerplads administreres nu af lageradministratoren"</string>
+    <string name="automatic_storage_manager_activation_warning" msgid="170508173207142665">"Din lagerplads administreres nu af Lageradministrator"</string>
     <string name="account_for_section_header" msgid="7466759342105251096">"Konti for <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="auto_sync_account_title" msgid="1070908045600374254">"Synkroniser automatisk appdata"</string>
     <string name="auto_sync_account_summary" msgid="7580352130028957346">"Giv apps tilladelse til at opdatere data automatisk"</string>
@@ -4111,7 +4111,7 @@
     <string name="show_operator_name_title" msgid="3355910331531144028">"Netværksnavn"</string>
     <string name="show_operator_name_summary" msgid="5352696579216501773">"Vis netværksnavn på statusbjælken"</string>
     <string name="install_type_instant" msgid="7685381859060486009">"Instant-app"</string>
-    <string name="automatic_storage_manager_deactivation_warning" msgid="4905106133215702099">"Slå lagerstyring fra?"</string>
+    <string name="automatic_storage_manager_deactivation_warning" msgid="4905106133215702099">"Slå Lageradministrator fra?"</string>
     <string name="zen_suggestion_title" msgid="4555260320474465668">"Opdater Forstyr ikke"</string>
     <string name="zen_suggestion_summary" msgid="1984990920503217">"Sæt notifikationer på pause, så du kan koncentrere dig"</string>
     <string name="disabled_feature" msgid="7151433782819744211">"Funktionen er ikke tilgængelig"</string>
@@ -4178,7 +4178,7 @@
     <string name="devices_title" msgid="649715719278562515">"Enheder"</string>
     <string name="choose_network_title" msgid="5355609223363859430">"Vælg netværk"</string>
     <string name="network_disconnected" msgid="8281188173486212661">"Afbrudt"</string>
-    <string name="network_connected" msgid="7637745547242487795">"Tilsluttet"</string>
+    <string name="network_connected" msgid="7637745547242487795">"Forbundet"</string>
     <string name="network_connecting" msgid="6856124847029124041">"Opretter forbindelse…"</string>
     <string name="network_could_not_connect" msgid="676574629319069922">"Der kunne ikke oprettes forbindelse"</string>
     <string name="empty_networks_list" msgid="6519489879480673428">"Der blev ikke fundet nogen netværk."</string>
