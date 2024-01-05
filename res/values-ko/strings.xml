@@ -283,6 +283,8 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"근처 기기 액세스 권한이 있는 앱은 연결된 기기 간의 상대적인 위치를 파악할 수 있습니다."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"앱 및 서비스에 대한 위치 정보 액세스가 사용 중지되어 있습니다. 그래도 긴급 전화번호로 전화를 걸거나 문자 메시지를 보내면 기기의 위치 정보가 긴급 구조원에게 전달될 수 있습니다."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"위치 설정에 대해 자세히 알아보기"</string>
+    <!-- no translation found for location_settings_tooltip_text_for_chrome (3574930966097093550) -->
+    <skip />
     <string name="account_settings_title" msgid="9138880127246241885">"계정"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"보안"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"암호화 및 사용자 인증 정보"</string>
@@ -842,12 +844,9 @@
     <string name="wifi_in_airplane_mode" msgid="1235412508135267981">"비행기 모드"</string>
     <string name="wifi_notify_open_networks" msgid="2610323626246818961">"공용 네트워크 알림"</string>
     <string name="wifi_notify_open_networks_summary" msgid="191058832201741013">"고품질 공용 네트워크를 사용할 수 있을 때 알림"</string>
-    <!-- no translation found for wifi_allow_wep_networks (8772342993235292010) -->
-    <skip />
-    <!-- no translation found for wifi_allow_wep_networks_summary (3033397893296724615) -->
-    <skip />
-    <!-- no translation found for wifi_allow_wep_networks_summary_carrier_not_allow (6298103289728210026) -->
-    <skip />
+    <string name="wifi_allow_wep_networks" msgid="8772342993235292010">"WEP 네트워크 허용"</string>
+    <string name="wifi_allow_wep_networks_summary" msgid="3033397893296724615">"WEP는 오래되어서 안전성이 낮은 보안 프로토콜입니다"</string>
+    <string name="wifi_allow_wep_networks_summary_carrier_not_allow" msgid="6298103289728210026">"사용 중인 이동통신사에서는 WEP 네트워크의 낮은 안전성으로 인해 해당 네트워크를 허용하지 않습니다"</string>
     <string name="wifi_wakeup" msgid="3834327315861781611">"자동으로 Wi‑Fi 사용 설정"</string>
     <string name="wifi_wakeup_summary" msgid="5778059083790221465">"홈 네트워크 등의 저장된 고품질 네트워크가 가까이 있을 때 Wi‑Fi가 다시 사용 설정됨"</string>
     <string name="wifi_wakeup_summary_no_location" msgid="681323616606485096">"위치 정보가 사용 중지되어 있으므로 사용할 수 없습니다. "<annotation id="link">"위치 정보"</annotation>"를 사용 설정해 주세요."</string>
@@ -869,18 +868,12 @@
     <string name="wifi_settings_scanning_required_info" msgid="1473411566072565789">"Wi-Fi 검색을 사용하면 Wi‑Fi가 꺼져 있을 때도 앱과 서비스에서 항상 Wi-Fi 네트워크를 검색할 수 있습니다. 이 설정은 위치 기반 기능 및 서비스 개선 등에 사용할 수 있습니다."</string>
     <string name="wifi_settings_scanning_required_turn_on" msgid="1112223196123955447">"사용 설정"</string>
     <string name="wifi_settings_scanning_required_enabled" msgid="4721729158927146365">"Wi‑Fi 검색 사용 설정됨"</string>
-    <!-- no translation found for wifi_settings_warning_wep_network (2655077013800385646) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_blocked_title (8337700496544833669) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_summary_toggle_off (1113138364046142949) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_summary_blocked_by_carrier (6085673947156094523) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_button_allow (2807926329019873706) -->
-    <skip />
-    <!-- no translation found for wifi_settings_ssid_block_button_close (3013886895576949908) -->
-    <skip />
+    <string name="wifi_settings_warning_wep_network" msgid="2655077013800385646">"이 네트워크는 오래되어서 안전성이 낮은 보안 프로토콜을 사용합니다"</string>
+    <string name="wifi_settings_wep_networks_blocked_title" msgid="8337700496544833669">"<xliff:g id="NAME">%1$s</xliff:g> 차단됨"</string>
+    <string name="wifi_settings_wep_networks_summary_toggle_off" msgid="1113138364046142949">"이 네트워크는 오래되어서 안전성이 낮은 WEP라는 보안 프로토콜을 사용합니다. 그래도 연결하려면 WEP 네트워크를 허용하세요."</string>
+    <string name="wifi_settings_wep_networks_summary_blocked_by_carrier" msgid="6085673947156094523">"사용 중인 이동통신사에서는 이 네트워크가 오래되어서 안전성이 낮은 보안 프로토콜을 사용하기 때문에 해당 네트워크에 대한 연결을 허용하지 않습니다"</string>
+    <string name="wifi_settings_wep_networks_button_allow" msgid="2807926329019873706">"WEP 허용"</string>
+    <string name="wifi_settings_ssid_block_button_close" msgid="3013886895576949908">"닫기"</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"고급 옵션"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"드롭다운 목록 고급 옵션"</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"펼치기"</string>
@@ -1821,9 +1814,19 @@
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"사용 가능한 터치 키보드"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"터치 키보드 관리"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"옵션"</string>
+    <!-- no translation found for keyboard_a11y_category (8230758278046841469) -->
+    <skip />
     <string name="physical_keyboard_title" msgid="3328134097512350958">"물리적 키보드"</string>
     <string name="show_ime" msgid="4334255501724746849">"터치 키보드 사용"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"물리적 키보드가 활성 상태인 경우 화면에 켜 둠"</string>
+    <!-- no translation found for bounce_keys (7419450970351743904) -->
+    <skip />
+    <!-- no translation found for bounce_keys_summary (6922850403920596246) -->
+    <skip />
+    <!-- no translation found for sticky_keys (7317317044898161747) -->
+    <skip />
+    <!-- no translation found for sticky_keys_summary (8520909829540989765) -->
+    <skip />
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"단축키"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"단축키 목록을 표시합니다."</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"직장 프로필 키보드 및 도구"</string>
@@ -3821,12 +3824,9 @@
     <string name="free_memory" msgid="439783742246854785">"사용 가능"</string>
     <string name="memory_usage_apps" msgid="5776108502569850579">"앱에서 사용한 메모리"</string>
     <string name="memory_usage_apps_summary" msgid="7168292864155527974">"{count,plural, =1{지난 {time} 동안 1개 앱에서 메모리를 사용했습니다.}other{지난 {time} 동안 #개 앱에서 메모리를 사용했습니다.}}"</string>
-    <!-- no translation found for force_enable_pss_profiling_title (2253816522775341523) -->
-    <skip />
-    <!-- no translation found for force_enable_pss_profiling_summary (7714294324548399136) -->
-    <skip />
-    <!-- no translation found for pss_profiling_disabled (1967278421143514850) -->
-    <skip />
+    <string name="force_enable_pss_profiling_title" msgid="2253816522775341523">"메모리 사용량 프로파일링 사용 설정"</string>
+    <string name="force_enable_pss_profiling_summary" msgid="7714294324548399136">"메모리 사용량 프로파일링에는 추가 시스템 리소스가 필요합니다."</string>
+    <string name="pss_profiling_disabled" msgid="1967278421143514850">"메모리 프로파일링 사용 중지됨"</string>
     <string name="running_frequency" msgid="7260225121706316639">"빈도"</string>
     <string name="memory_maximum_usage" msgid="2047013391595835607">"최대 사용량"</string>
     <string name="no_data_usage" msgid="4665617440434654132">"사용한 데이터 없음"</string>

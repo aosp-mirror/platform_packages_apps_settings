@@ -283,6 +283,8 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"具有附近设备权限的应用可以确定已连接的设备的相对位置。"</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"应用和服务的位置信息使用权处于关闭状态。在您拨打紧急电话号码或向该号码发送短信时，系统可能仍会将您的设备位置信息发送给急救人员。"</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"详细了解位置信息设置"</string>
+    <!-- no translation found for location_settings_tooltip_text_for_chrome (3574930966097093550) -->
+    <skip />
     <string name="account_settings_title" msgid="9138880127246241885">"账号"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"安全"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"加密与凭据"</string>
@@ -842,12 +844,9 @@
     <string name="wifi_in_airplane_mode" msgid="1235412508135267981">"正处于飞行模式下"</string>
     <string name="wifi_notify_open_networks" msgid="2610323626246818961">"附近有公共网络时发出通知"</string>
     <string name="wifi_notify_open_networks_summary" msgid="191058832201741013">"有可用的高品质公共网络时通知我"</string>
-    <!-- no translation found for wifi_allow_wep_networks (8772342993235292010) -->
-    <skip />
-    <!-- no translation found for wifi_allow_wep_networks_summary (3033397893296724615) -->
-    <skip />
-    <!-- no translation found for wifi_allow_wep_networks_summary_carrier_not_allow (6298103289728210026) -->
-    <skip />
+    <string name="wifi_allow_wep_networks" msgid="8772342993235292010">"允许连接 WEP 网络"</string>
+    <string name="wifi_allow_wep_networks_summary" msgid="3033397893296724615">"WEP 是较旧的安全协议，其安全性较低"</string>
+    <string name="wifi_allow_wep_networks_summary_carrier_not_allow" msgid="6298103289728210026">"您的运营商不允许连接 WEP 网络，因为这类网络的安全性较低"</string>
     <string name="wifi_wakeup" msgid="3834327315861781611">"自动开启 WLAN"</string>
     <string name="wifi_wakeup_summary" msgid="5778059083790221465">"位于已保存的高品质网络（例如您的家庭网络）附近时自动重新开启 WLAN"</string>
     <string name="wifi_wakeup_summary_no_location" msgid="681323616606485096">"无法使用，因为位置信息服务已关闭。请开启"<annotation id="link">"位置信息服务"</annotation>"。"</string>
@@ -869,18 +868,12 @@
     <string name="wifi_settings_scanning_required_info" msgid="1473411566072565789">"WLAN 扫描功能可让应用和服务随时扫描 WLAN 网络（即使 WLAN 已关闭）。这可用于改进基于位置的功能和服务。"</string>
     <string name="wifi_settings_scanning_required_turn_on" msgid="1112223196123955447">"开启"</string>
     <string name="wifi_settings_scanning_required_enabled" msgid="4721729158927146365">"WLAN 扫描功能已开启"</string>
-    <!-- no translation found for wifi_settings_warning_wep_network (2655077013800385646) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_blocked_title (8337700496544833669) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_summary_toggle_off (1113138364046142949) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_summary_blocked_by_carrier (6085673947156094523) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_button_allow (2807926329019873706) -->
-    <skip />
-    <!-- no translation found for wifi_settings_ssid_block_button_close (3013886895576949908) -->
-    <skip />
+    <string name="wifi_settings_warning_wep_network" msgid="2655077013800385646">"此网络采用较旧的安全协议，其安全性较低"</string>
+    <string name="wifi_settings_wep_networks_blocked_title" msgid="8337700496544833669">"“<xliff:g id="NAME">%1$s</xliff:g>”已被屏蔽"</string>
+    <string name="wifi_settings_wep_networks_summary_toggle_off" msgid="1113138364046142949">"此网络采用名为 WEP 的较旧安全协议，其安全性较低。如果您仍想连接，也可选择允许连接 WEP 网络。"</string>
+    <string name="wifi_settings_wep_networks_summary_blocked_by_carrier" msgid="6085673947156094523">"您的运营商不允许连接此网络，因为它采用较旧的安全协议，安全性较低"</string>
+    <string name="wifi_settings_wep_networks_button_allow" msgid="2807926329019873706">"允许连接 WEP"</string>
+    <string name="wifi_settings_ssid_block_button_close" msgid="3013886895576949908">"关闭"</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"高级选项"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"下拉列表高级选项"</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"展开"</string>
@@ -1821,9 +1814,19 @@
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"可用的屏幕键盘"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"管理屏幕键盘"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"选项"</string>
+    <!-- no translation found for keyboard_a11y_category (8230758278046841469) -->
+    <skip />
     <string name="physical_keyboard_title" msgid="3328134097512350958">"实体键盘"</string>
     <string name="show_ime" msgid="4334255501724746849">"使用屏幕键盘"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"开启后，连接到实体键盘时，它会一直显示在屏幕上"</string>
+    <!-- no translation found for bounce_keys (7419450970351743904) -->
+    <skip />
+    <!-- no translation found for bounce_keys_summary (6922850403920596246) -->
+    <skip />
+    <!-- no translation found for sticky_keys (7317317044898161747) -->
+    <skip />
+    <!-- no translation found for sticky_keys_summary (8520909829540989765) -->
+    <skip />
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"键盘快捷键"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"显示快捷键列表"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"工作资料键盘和工具"</string>
@@ -3821,12 +3824,9 @@
     <string name="free_memory" msgid="439783742246854785">"可用"</string>
     <string name="memory_usage_apps" msgid="5776108502569850579">"各个应用使用的内存"</string>
     <string name="memory_usage_apps_summary" msgid="7168292864155527974">"{count,plural, =1{过去 {time}内有 1 个应用使用了内存}other{过去 {time}内有 # 个应用使用了内存}}"</string>
-    <!-- no translation found for force_enable_pss_profiling_title (2253816522775341523) -->
-    <skip />
-    <!-- no translation found for force_enable_pss_profiling_summary (7714294324548399136) -->
-    <skip />
-    <!-- no translation found for pss_profiling_disabled (1967278421143514850) -->
-    <skip />
+    <string name="force_enable_pss_profiling_title" msgid="2253816522775341523">"启用内存用量分析功能"</string>
+    <string name="force_enable_pss_profiling_summary" msgid="7714294324548399136">"内存用量分析功能需占用额外的系统资源。"</string>
+    <string name="pss_profiling_disabled" msgid="1967278421143514850">"内存分析功能已停用"</string>
     <string name="running_frequency" msgid="7260225121706316639">"频率"</string>
     <string name="memory_maximum_usage" msgid="2047013391595835607">"最高使用量"</string>
     <string name="no_data_usage" msgid="4665617440434654132">"未使用任何数据流量"</string>

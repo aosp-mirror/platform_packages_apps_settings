@@ -28,6 +28,7 @@ import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.doThrow
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.spy
 import org.mockito.kotlin.stub
@@ -97,6 +98,17 @@ class ImsMmTelRepositoryTest {
         val wiFiCallingMode = repository.getWiFiCallingMode()
 
         assertThat(wiFiCallingMode).isEqualTo(mockImsMmTelManager.getVoWiFiModeSetting())
+    }
+
+    @Test
+    fun getWiFiCallingMode_illegalArgumentException_returnUnknown() {
+        mockImsMmTelManager.stub {
+            on { isVoWiFiSettingEnabled } doThrow IllegalArgumentException()
+        }
+
+        val wiFiCallingMode = repository.getWiFiCallingMode()
+
+        assertThat(wiFiCallingMode).isEqualTo(ImsMmTelManager.WIFI_MODE_UNKNOWN)
     }
 
     private fun mockUseWfcHomeModeForRoaming(config: Boolean) {

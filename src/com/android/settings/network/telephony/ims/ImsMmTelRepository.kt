@@ -23,6 +23,7 @@ import android.telephony.TelephonyManager
 import android.telephony.ims.ImsManager
 import android.telephony.ims.ImsMmTelManager
 import android.telephony.ims.ImsMmTelManager.WiFiCallingMode
+import android.util.Log
 
 interface ImsMmTelRepository {
     @WiFiCallingMode
@@ -41,17 +42,26 @@ class ImsMmTelRepositoryImpl(
     private val carrierConfigManager = context.getSystemService(CarrierConfigManager::class.java)!!
 
     @WiFiCallingMode
-    override fun getWiFiCallingMode(): Int = when {
-        !imsMmTelManager.isVoWiFiSettingEnabled -> ImsMmTelManager.WIFI_MODE_UNKNOWN
+    override fun getWiFiCallingMode(): Int = try {
+        when {
+            !imsMmTelManager.isVoWiFiSettingEnabled -> ImsMmTelManager.WIFI_MODE_UNKNOWN
 
-        telephonyManager.isNetworkRoaming && !useWfcHomeModeForRoaming() ->
-            imsMmTelManager.getVoWiFiRoamingModeSetting()
+            telephonyManager.isNetworkRoaming && !useWfcHomeModeForRoaming() ->
+                imsMmTelManager.getVoWiFiRoamingModeSetting()
 
-        else -> imsMmTelManager.getVoWiFiModeSetting()
+            else -> imsMmTelManager.getVoWiFiModeSetting()
+        }
+    } catch (e: IllegalArgumentException) {
+        Log.w(TAG, "getWiFiCallingMode failed subId=$subId", e)
+        ImsMmTelManager.WIFI_MODE_UNKNOWN
     }
 
     private fun useWfcHomeModeForRoaming(): Boolean =
         carrierConfigManager
             .getConfigForSubId(subId, KEY_USE_WFC_HOME_NETWORK_MODE_IN_ROAMING_NETWORK_BOOL)
             .getBoolean(KEY_USE_WFC_HOME_NETWORK_MODE_IN_ROAMING_NETWORK_BOOL)
+
+    private companion object {
+        private const val TAG = "ImsMmTelRepository"
+    }
 }

@@ -283,6 +283,8 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Les applis ayant l\'autorisation de détecter les appareils à proximité peuvent déterminer la position relative des appareils connectés."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"L\'accès à la position est désactivé pour les applis et les services. La position de votre appareil peut toujours être envoyée aux services d\'urgence lorsque vous les contactez par téléphone ou SMS."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"En savoir plus sur les paramètres de localisation."</string>
+    <!-- no translation found for location_settings_tooltip_text_for_chrome (3574930966097093550) -->
+    <skip />
     <string name="account_settings_title" msgid="9138880127246241885">"Comptes"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Sécurité"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Chiffrement et identifiants"</string>
@@ -842,12 +844,9 @@
     <string name="wifi_in_airplane_mode" msgid="1235412508135267981">"En mode Avion"</string>
     <string name="wifi_notify_open_networks" msgid="2610323626246818961">"Notifier en cas de réseaux publics"</string>
     <string name="wifi_notify_open_networks_summary" msgid="191058832201741013">"M\'avertir lorsqu\'un réseau public de haute qualité est disponible"</string>
-    <!-- no translation found for wifi_allow_wep_networks (8772342993235292010) -->
-    <skip />
-    <!-- no translation found for wifi_allow_wep_networks_summary (3033397893296724615) -->
-    <skip />
-    <!-- no translation found for wifi_allow_wep_networks_summary_carrier_not_allow (6298103289728210026) -->
-    <skip />
+    <string name="wifi_allow_wep_networks" msgid="8772342993235292010">"Autoriser les réseaux WEP"</string>
+    <string name="wifi_allow_wep_networks_summary" msgid="3033397893296724615">"WEP est un ancien protocole de sécurité moins sécurisé"</string>
+    <string name="wifi_allow_wep_networks_summary_carrier_not_allow" msgid="6298103289728210026">"Votre opérateur n\'autorise pas les réseaux WEP parce qu\'ils sont moins sécurisés"</string>
     <string name="wifi_wakeup" msgid="3834327315861781611">"Activer automatiquement le Wi‑Fi"</string>
     <string name="wifi_wakeup_summary" msgid="5778059083790221465">"Le Wi‑Fi se réactivera à proximité des réseaux haute qualité enregistrés, par ex. le réseau de votre domicile"</string>
     <string name="wifi_wakeup_summary_no_location" msgid="681323616606485096">"Indisponible, car le service de localisation est désactivé. Activez la "<annotation id="link">"localisation"</annotation>"."</string>
@@ -869,18 +868,12 @@
     <string name="wifi_settings_scanning_required_info" msgid="1473411566072565789">"La recherche Wi-Fi autorise les applis et les services à rechercher des réseaux Wi-Fi à tout moment, même si le Wi-Fi est désactivé. Ce réglage peut, par exemple, servir à améliorer les fonctionnalités et les services géolocalisés."</string>
     <string name="wifi_settings_scanning_required_turn_on" msgid="1112223196123955447">"Activer"</string>
     <string name="wifi_settings_scanning_required_enabled" msgid="4721729158927146365">"Recherche Wi-Fi activée"</string>
-    <!-- no translation found for wifi_settings_warning_wep_network (2655077013800385646) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_blocked_title (8337700496544833669) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_summary_toggle_off (1113138364046142949) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_summary_blocked_by_carrier (6085673947156094523) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_button_allow (2807926329019873706) -->
-    <skip />
-    <!-- no translation found for wifi_settings_ssid_block_button_close (3013886895576949908) -->
-    <skip />
+    <string name="wifi_settings_warning_wep_network" msgid="2655077013800385646">"Ce réseau utilise un ancien protocole de sécurité moins sécurisé"</string>
+    <string name="wifi_settings_wep_networks_blocked_title" msgid="8337700496544833669">"Le réseau <xliff:g id="NAME">%1$s</xliff:g> est bloqué"</string>
+    <string name="wifi_settings_wep_networks_summary_toggle_off" msgid="1113138364046142949">"Ce réseau utilise un ancien protocole de sécurité appelé WEP, qui est moins sécurisé. Pour vous connecter malgré tout, vous pouvez autoriser les réseaux WEP."</string>
+    <string name="wifi_settings_wep_networks_summary_blocked_by_carrier" msgid="6085673947156094523">"Votre opérateur ne vous permet pas de vous connecter à ce réseau parce qu\'il utilise un ancien protocole moins sécurisé"</string>
+    <string name="wifi_settings_wep_networks_button_allow" msgid="2807926329019873706">"Autoriser le WEP"</string>
+    <string name="wifi_settings_ssid_block_button_close" msgid="3013886895576949908">"Fermer"</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Options avancées"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Liste déroulante \"Options avancées\""</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"développer"</string>
@@ -1821,9 +1814,19 @@
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Clavier à l\'écran disponible"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Gérer les claviers à l\'écran"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"Options"</string>
+    <!-- no translation found for keyboard_a11y_category (8230758278046841469) -->
+    <skip />
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Clavier physique"</string>
     <string name="show_ime" msgid="4334255501724746849">"Utiliser le clavier à l\'écran"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"Afficher le clavier virtuel même lorsque le clavier physique est actif"</string>
+    <!-- no translation found for bounce_keys (7419450970351743904) -->
+    <skip />
+    <!-- no translation found for bounce_keys_summary (6922850403920596246) -->
+    <skip />
+    <!-- no translation found for sticky_keys (7317317044898161747) -->
+    <skip />
+    <!-- no translation found for sticky_keys_summary (8520909829540989765) -->
+    <skip />
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Raccourcis clavier"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Afficher la liste des raccourcis"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Claviers et outils du profil professionnel"</string>
@@ -1987,7 +1990,7 @@
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Agrandir avec un raccourci"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Agrandir avec un raccourci et trois tapotements"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"À propos de <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
-    <string name="accessibility_text_reading_options_title" msgid="3224648909213325563">"Taille d\'affichage et texte"</string>
+    <string name="accessibility_text_reading_options_title" msgid="3224648909213325563">"Taille de l\'affichage et du texte"</string>
     <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"Modifier l\'affichage du texte"</string>
     <string name="accessibility_text_reading_preview_mail_subject" msgid="4597374768612733616">"Objet : modèles de montgolfières"</string>
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"De : Bill"</string>
@@ -2119,7 +2122,7 @@
     <string name="accessibility_autoclick_shorter_desc" msgid="7631013255724544348">"Plus court"</string>
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"Plus long"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"Délai du clic automatique"</string>
-    <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Vibreur et retour haptique"</string>
+    <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Vibreur et retour tactile"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"Contrôler la force des vibrations pour différentes utilisations"</string>
     <string name="accessibility_vibration_settings_state_on" msgid="5566026932372832502">"Activé"</string>
     <string name="accessibility_vibration_settings_state_off" msgid="7946588741954981703">"Désactivés"</string>
@@ -2211,8 +2214,8 @@
     <string name="daltonizer_mode_protanomaly_summary" msgid="4617032854982040748">"Rouge faible, protanomalie"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Tritanomalie"</string>
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"Encore moins lumineux"</string>
-    <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Rendre l\'écran encore moins lumineux"</string>
-    <string name="reduce_bright_colors_shortcut_title" msgid="495648157059202745">"Raccourci vers Encore moins lumineux"</string>
+    <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Luminosité ultra-réduite"</string>
+    <string name="reduce_bright_colors_shortcut_title" msgid="495648157059202745">"Raccourci vers Luminosité ultra-réduite"</string>
     <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"À propos d\'encore moins lumineux"</string>
     <string name="reduce_bright_colors_preference_intro_text" msgid="3502290826747650566">"Réduisez encore plus la luminosité de l\'écran pour faciliter la lecture"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Intensité"</string>
@@ -3821,12 +3824,9 @@
     <string name="free_memory" msgid="439783742246854785">"Disponible"</string>
     <string name="memory_usage_apps" msgid="5776108502569850579">"Mémoire utilisée par les applications"</string>
     <string name="memory_usage_apps_summary" msgid="7168292864155527974">"{count,plural, =1{1 appli a utilisé de la mémoire au cours du dernier {time}}one{# appli a utilisé de la mémoire au cours du dernier {time}}other{# applis ont utilisé de la mémoire au cours du dernier {time}}}"</string>
-    <!-- no translation found for force_enable_pss_profiling_title (2253816522775341523) -->
-    <skip />
-    <!-- no translation found for force_enable_pss_profiling_summary (7714294324548399136) -->
-    <skip />
-    <!-- no translation found for pss_profiling_disabled (1967278421143514850) -->
-    <skip />
+    <string name="force_enable_pss_profiling_title" msgid="2253816522775341523">"Activer le profilage de l\'utilisation de la mémoire"</string>
+    <string name="force_enable_pss_profiling_summary" msgid="7714294324548399136">"Le profilage de l\'utilisation de la mémoire nécessite des ressources système supplémentaires."</string>
+    <string name="pss_profiling_disabled" msgid="1967278421143514850">"Profilage de la mémoire désactivé"</string>
     <string name="running_frequency" msgid="7260225121706316639">"Fréquence"</string>
     <string name="memory_maximum_usage" msgid="2047013391595835607">"Utilisation maximale"</string>
     <string name="no_data_usage" msgid="4665617440434654132">"Aucune donnée utilisée"</string>

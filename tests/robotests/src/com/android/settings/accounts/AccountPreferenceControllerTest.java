@@ -254,25 +254,26 @@ public class AccountPreferenceControllerTest {
     }
 
     @Test
-    public void updateRawDataToIndex_ManagedProfile_shouldNotUpdate() {
+    public void updateRawDataToIndex_noManagedProfile_shouldContainAddAccount() {
+        final List<SearchIndexableRaw> data = new ArrayList<>();
+        when(mUserManager.isManagedProfile()).thenReturn(false);
+
+        mController.updateRawDataToIndex(data);
+
+        assertThat(data).hasSize(1);
+        assertThat(data.get(0).key).isEqualTo("add_account");
+    }
+
+
+    @Test
+    public void updateRawDataToIndex_ManagedProfile_shouldContainAddAccount() {
         final List<SearchIndexableRaw> data = new ArrayList<>();
         when(mUserManager.isManagedProfile()).thenReturn(true);
 
         mController.updateRawDataToIndex(data);
 
-        assertThat(data).isEmpty();
-    }
-
-    @Test
-    public void updateRawDataToIndex_DisabledUser_shouldNotUpdate() {
-        final List<SearchIndexableRaw> data = new ArrayList<>();
-        final List<UserInfo> infos = new ArrayList<>();
-        infos.add(new UserInfo(1, "user 1", UserInfo.FLAG_DISABLED));
-        when(mUserManager.isManagedProfile()).thenReturn(false);
-        when(mUserManager.getProfiles(anyInt())).thenReturn(infos);
-        mController.updateRawDataToIndex(data);
-
-        assertThat(data).isEmpty();
+        assertThat(data).hasSize(1);
+        assertThat(data.get(0).key).isEqualTo("add_account");
     }
 
     @Test

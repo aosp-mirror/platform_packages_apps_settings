@@ -18,12 +18,12 @@ package com.android.settings.network.telephony;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
 import android.telephony.CellIdentity;
@@ -32,6 +32,7 @@ import android.telephony.CellIdentityLte;
 import android.telephony.CellInfo;
 import android.telephony.CellInfoGsm;
 import android.telephony.CellInfoLte;
+import android.telephony.CellSignalStrength;
 import android.telephony.CellSignalStrengthGsm;
 import android.telephony.CellSignalStrengthLte;
 import android.telephony.TelephonyManager;
@@ -39,7 +40,6 @@ import android.telephony.TelephonyManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceManager;
-import androidx.preference.PreferenceScreen;
 import androidx.test.annotation.UiThreadTest;
 import androidx.test.core.app.ApplicationProvider;
 
@@ -68,10 +68,6 @@ public class NetworkSelectSettingsTest {
     @Mock
     public MetricsFeatureProvider mMetricsFeatureProvider;
     @Mock
-    public NetworkOperatorPreference mNetworkOperatorPreference1;
-    @Mock
-    public NetworkOperatorPreference mNetworkOperatorPreference2;
-    @Mock
     private CellInfo mCellInfo1;
     @Mock
     private CellIdentity mCellId1;
@@ -80,7 +76,6 @@ public class NetworkSelectSettingsTest {
     @Mock
     private CellIdentity mCellId2;
 
-    private PreferenceScreen mPreferenceScreen;
     @Mock
     public PreferenceManager mPreferenceManager;
 
@@ -88,7 +83,6 @@ public class NetworkSelectSettingsTest {
     public PreferenceCategory mPreferenceCategory;
     public boolean mIsAggregationEnabled = true;
 
-    private Bundle mInitArguments;
     private TargetClass mNetworkSelectSettings;
 
     @Before
@@ -103,8 +97,10 @@ public class NetworkSelectSettingsTest {
         mPreferenceCategory = spy(new PreferenceCategory(mContext));
         doReturn(mPreferenceManager).when(mPreferenceCategory).getPreferenceManager();
         doReturn(mCellId1).when(mCellInfo1).getCellIdentity();
+        doReturn(mock(CellSignalStrength.class)).when(mCellInfo1).getCellSignalStrength();
         doReturn(CARRIER_NAME1).when(mCellId1).getOperatorAlphaLong();
         doReturn(mCellId2).when(mCellInfo2).getCellIdentity();
+        doReturn(mock(CellSignalStrength.class)).when(mCellInfo2).getCellSignalStrength();
         doReturn(CARRIER_NAME2).when(mCellId2).getOperatorAlphaLong();
         mIsAggregationEnabled = true;
         mNetworkSelectSettings = spy(new TargetClass(this));
@@ -116,8 +112,8 @@ public class NetworkSelectSettingsTest {
         doReturn(TelephonyManager.DATA_CONNECTED).when(mTelephonyManager).getDataState();
     }
 
-    public class TargetClass extends NetworkSelectSettings {
-        private NetworkSelectSettingsTest mTestEnv;
+    public static class TargetClass extends NetworkSelectSettings {
+        private final NetworkSelectSettingsTest mTestEnv;
         private boolean mIsPreferenceScreenEnabled;
 
         public TargetClass(NetworkSelectSettingsTest env) {
@@ -284,8 +280,7 @@ public class NetworkSelectSettingsTest {
     private CellInfoLte createLteCellInfo(boolean registered, int cellId, String mcc, String mnc,
             String plmnName) {
         CellIdentityLte cil = new CellIdentityLte(
-                cellId, 5, 200, 2000, new int[]{1, 2}, 10000, new String(mcc),
-                new String(mnc), new String(plmnName), new String(plmnName),
+                cellId, 5, 200, 2000, new int[]{1, 2}, 10000, mcc, mnc, plmnName, plmnName,
                 Collections.emptyList(), null);
         CellSignalStrengthLte cssl = new CellSignalStrengthLte(15, 16, 17, 18, 19, 20);
 
@@ -299,8 +294,7 @@ public class NetworkSelectSettingsTest {
 
     private CellInfoGsm createGsmCellInfo(boolean registered, int cellId, String mcc, String mnc,
             String plmnName) {
-        CellIdentityGsm cig = new CellIdentityGsm(1, cellId, 40, 5, new String(mcc),
-                new String(mnc), new String(plmnName), new String(plmnName),
+        CellIdentityGsm cig = new CellIdentityGsm(1, cellId, 40, 5, mcc, mnc, plmnName, plmnName,
                 Collections.emptyList());
         CellSignalStrengthGsm cssg = new CellSignalStrengthGsm(5, 6, 7);
         CellInfoGsm cellInfoGsm = new CellInfoGsm();

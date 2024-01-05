@@ -283,6 +283,8 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Апликације са дозволом за уређаје у близини могу да одреде приближан положај повезаних уређаја."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Приступ локацији је искључен за апликације и услуге. Локација уређаја може и даље да се шаље екипама хитних служби када позовете број за хитне случајеве или пошаљете SMS на њега."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Сазнајте више о подешавањима локације"</string>
+    <!-- no translation found for location_settings_tooltip_text_for_chrome (3574930966097093550) -->
+    <skip />
     <string name="account_settings_title" msgid="9138880127246241885">"Налози"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Безбедност"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Шифровање и акредитиви"</string>
@@ -842,12 +844,9 @@
     <string name="wifi_in_airplane_mode" msgid="1235412508135267981">"У Режиму рада у авиону"</string>
     <string name="wifi_notify_open_networks" msgid="2610323626246818961">"Обавести ме о јавним мрежама"</string>
     <string name="wifi_notify_open_networks_summary" msgid="191058832201741013">"Обавештава вас кад год је доступна јавна мрежа високог квалитета"</string>
-    <!-- no translation found for wifi_allow_wep_networks (8772342993235292010) -->
-    <skip />
-    <!-- no translation found for wifi_allow_wep_networks_summary (3033397893296724615) -->
-    <skip />
-    <!-- no translation found for wifi_allow_wep_networks_summary_carrier_not_allow (6298103289728210026) -->
-    <skip />
+    <string name="wifi_allow_wep_networks" msgid="8772342993235292010">"Дозволи WEP мреже"</string>
+    <string name="wifi_allow_wep_networks_summary" msgid="3033397893296724615">"WEP је старији безбедносни протокол који је мање сигуран"</string>
+    <string name="wifi_allow_wep_networks_summary_carrier_not_allow" msgid="6298103289728210026">"Мобилни оператер не дозвољава WEP мреже јер су мање безбедне"</string>
     <string name="wifi_wakeup" msgid="3834327315861781611">"Аутоматски укључи Wi‑Fi"</string>
     <string name="wifi_wakeup_summary" msgid="5778059083790221465">"WiFi ће се поново укључити у  близини сачуваних мрежа високог квалитета, као што је кућна мрежа"</string>
     <string name="wifi_wakeup_summary_no_location" msgid="681323616606485096">"Није доступно јер је локација искључена. Укључите "<annotation id="link">"локацију"</annotation>"."</string>
@@ -869,18 +868,12 @@
     <string name="wifi_settings_scanning_required_info" msgid="1473411566072565789">"WiFi скенирање омогућава апликацијама и услугама да траже WiFi мреже у било ком тренутку, чак и када је WiFi искључен. Ово, на пример, може да се користи за побољшање функција и услуга заснованих на локацији."</string>
     <string name="wifi_settings_scanning_required_turn_on" msgid="1112223196123955447">"Укључи"</string>
     <string name="wifi_settings_scanning_required_enabled" msgid="4721729158927146365">"Wi‑Fi скенирање је укључено"</string>
-    <!-- no translation found for wifi_settings_warning_wep_network (2655077013800385646) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_blocked_title (8337700496544833669) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_summary_toggle_off (1113138364046142949) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_summary_blocked_by_carrier (6085673947156094523) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_button_allow (2807926329019873706) -->
-    <skip />
-    <!-- no translation found for wifi_settings_ssid_block_button_close (3013886895576949908) -->
-    <skip />
+    <string name="wifi_settings_warning_wep_network" msgid="2655077013800385646">"Ова мрежа користи старији безбедносни протокол који је мање сигуран"</string>
+    <string name="wifi_settings_wep_networks_blocked_title" msgid="8337700496544833669">"Мрежа <xliff:g id="NAME">%1$s</xliff:g> је блокирана"</string>
+    <string name="wifi_settings_wep_networks_summary_toggle_off" msgid="1113138364046142949">"Мрежа користи старији безбедносни протокол звани WEP који је мање сигуран. Да бисте се ипак повезали, дозволите WEP мреже."</string>
+    <string name="wifi_settings_wep_networks_summary_blocked_by_carrier" msgid="6085673947156094523">"Мобилни оператер не дозвољава да се повежете са овом мрежом јер она користи старији безбедносни протокол који је мање сигуран"</string>
+    <string name="wifi_settings_wep_networks_button_allow" msgid="2807926329019873706">"Дозволи WEP"</string>
+    <string name="wifi_settings_ssid_block_button_close" msgid="3013886895576949908">"Затвори"</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Напредне опције"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Падајућа листа са напредним опцијама"</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"проширите"</string>
@@ -1821,9 +1814,19 @@
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Доступна тастатура на екрану"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Управљајте тастатурама на екрану"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"Опције"</string>
+    <!-- no translation found for keyboard_a11y_category (8230758278046841469) -->
+    <skip />
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Физичка тастатура"</string>
     <string name="show_ime" msgid="4334255501724746849">"Користи тастатуру на екрану"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"Задржава се на екрану док је физичка тастатура активна"</string>
+    <!-- no translation found for bounce_keys (7419450970351743904) -->
+    <skip />
+    <!-- no translation found for bounce_keys_summary (6922850403920596246) -->
+    <skip />
+    <!-- no translation found for sticky_keys (7317317044898161747) -->
+    <skip />
+    <!-- no translation found for sticky_keys_summary (8520909829540989765) -->
+    <skip />
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Тастерске пречице"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Приказује листу пречица"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Тастатуре и алатке за пословни профил"</string>
@@ -3821,12 +3824,9 @@
     <string name="free_memory" msgid="439783742246854785">"Слободно"</string>
     <string name="memory_usage_apps" msgid="5776108502569850579">"Меморија коју користе апликације"</string>
     <string name="memory_usage_apps_summary" msgid="7168292864155527974">"{count,plural, =1{1 апликација је користила меморију у последњем периоду од {time}}one{# апликација је користила меморију у последњем периоду од {time}}few{# апликације су користиле меморију у последњем периоду од {time}}other{# апликација је користило меморију у последњем периоду од {time}}}"</string>
-    <!-- no translation found for force_enable_pss_profiling_title (2253816522775341523) -->
-    <skip />
-    <!-- no translation found for force_enable_pss_profiling_summary (7714294324548399136) -->
-    <skip />
-    <!-- no translation found for pss_profiling_disabled (1967278421143514850) -->
-    <skip />
+    <string name="force_enable_pss_profiling_title" msgid="2253816522775341523">"Омогући профилисање коришћења меморије"</string>
+    <string name="force_enable_pss_profiling_summary" msgid="7714294324548399136">"За профилисање коришћења меморије су потребни додатни системски ресурси."</string>
+    <string name="pss_profiling_disabled" msgid="1967278421143514850">"Профилисање меморије је онемогућено"</string>
     <string name="running_frequency" msgid="7260225121706316639">"Учесталост"</string>
     <string name="memory_maximum_usage" msgid="2047013391595835607">"Максимум коришћења"</string>
     <string name="no_data_usage" msgid="4665617440434654132">"Не користе се никакви подаци"</string>
