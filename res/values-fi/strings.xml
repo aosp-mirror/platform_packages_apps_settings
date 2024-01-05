@@ -95,7 +95,7 @@
     <string name="bluetooth_ask_disablement" msgid="1879788777942714761">"<xliff:g id="APP_NAME">%1$s</xliff:g> haluaa poistaa Bluetoothin käytöstä."</string>
     <string name="bluetooth_ask_enablement_no_name" msgid="5091401961637405417">"Sovellus haluaa ottaa Bluetoothin käyttöön."</string>
     <string name="bluetooth_ask_disablement_no_name" msgid="382299750909188822">"Sovellus haluaa poistaa Bluetoothin käytöstä."</string>
-    <string name="bluetooth_turning_on" msgid="3842613808709024730">"Bluetooth otetaan käyttöön…"</string>
+    <string name="bluetooth_turning_on" msgid="3842613808709024730">"Bluetooth laitetaan päälle..."</string>
     <string name="bluetooth_turning_off" msgid="7406309124247701148">"Bluetooth poistetaan käytöstä..."</string>
     <string name="bluetooth_connection_permission_request" msgid="8793131019383198861">"Bluetooth-yhteyspyyntö"</string>
     <string name="bluetooth_phonebook_request" msgid="1085102844577089889">"PBAP-pyyntö"</string>
@@ -283,6 +283,8 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Sovellukset, joilla on lähellä olevien laitteiden lupa, voivat määrittää yhdistettyjen laitteiden suhteellisen sijainnin."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Sovelluksilla ja palveluilla ei ole sijaintilupaa. Tiedot laitteesi sijainnista voidaan silti lähettää pelastustyöntekijöille, kun soitat tai lähetät tekstiviestin hätänumeroon."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Lue lisää sijaintiasetuksista"</string>
+    <!-- no translation found for location_settings_tooltip_text_for_chrome (3574930966097093550) -->
+    <skip />
     <string name="account_settings_title" msgid="9138880127246241885">"Tilit"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Suojaus"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Salaus ja kirjautumistiedot"</string>
@@ -842,12 +844,9 @@
     <string name="wifi_in_airplane_mode" msgid="1235412508135267981">"Lentokonetilassa"</string>
     <string name="wifi_notify_open_networks" msgid="2610323626246818961">"Ilmoita julkisista verkoista"</string>
     <string name="wifi_notify_open_networks_summary" msgid="191058832201741013">"Ilmoita, kun käytettävissä on laadukkaita julkisia verkkoja"</string>
-    <!-- no translation found for wifi_allow_wep_networks (8772342993235292010) -->
-    <skip />
-    <!-- no translation found for wifi_allow_wep_networks_summary (3033397893296724615) -->
-    <skip />
-    <!-- no translation found for wifi_allow_wep_networks_summary_carrier_not_allow (6298103289728210026) -->
-    <skip />
+    <string name="wifi_allow_wep_networks" msgid="8772342993235292010">"Salli WEP-verkot"</string>
+    <string name="wifi_allow_wep_networks_summary" msgid="3033397893296724615">"WEP on vanhempi tietoturvaprotokolla, joka on vähemmän turvallinen"</string>
+    <string name="wifi_allow_wep_networks_summary_carrier_not_allow" msgid="6298103289728210026">"Operaattori ei salli WEP-verkkoja, koska ne ovat vähemmän turvallisia"</string>
     <string name="wifi_wakeup" msgid="3834327315861781611">"Laita Wi-Fi päälle automaattisesti"</string>
     <string name="wifi_wakeup_summary" msgid="5778059083790221465">"Wi-Fi laitetaan automaattisesti päälle, kun lähistöllä on kotiverkkosi tai muita laadukkaita tallennettuja verkkoja"</string>
     <string name="wifi_wakeup_summary_no_location" msgid="681323616606485096">"Ei käytettävissä, koska sijainti on poistettu käytöstä. Ota "<annotation id="link">"sijainti"</annotation>" käyttöön."</string>
@@ -869,18 +868,12 @@
     <string name="wifi_settings_scanning_required_info" msgid="1473411566072565789">"Wi-Fi-haku sallii sovellusten ja palvelujen hakea Wi‑Fi-verkkoja aina, vaikka Wi-Fi olisi pois käytöstä. Näin voidaan esimerkiksi kehittää sijaintiin perustuvia ominaisuuksia ja palveluja."</string>
     <string name="wifi_settings_scanning_required_turn_on" msgid="1112223196123955447">"Ota käyttöön"</string>
     <string name="wifi_settings_scanning_required_enabled" msgid="4721729158927146365">"Wi-Fi-haku on käytössä"</string>
-    <!-- no translation found for wifi_settings_warning_wep_network (2655077013800385646) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_blocked_title (8337700496544833669) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_summary_toggle_off (1113138364046142949) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_summary_blocked_by_carrier (6085673947156094523) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_button_allow (2807926329019873706) -->
-    <skip />
-    <!-- no translation found for wifi_settings_ssid_block_button_close (3013886895576949908) -->
-    <skip />
+    <string name="wifi_settings_warning_wep_network" msgid="2655077013800385646">"Tämä verkko käyttää vanhempaa tietoturvaprotokollaa, joka on vähemmän turvallinen"</string>
+    <string name="wifi_settings_wep_networks_blocked_title" msgid="8337700496544833669">"<xliff:g id="NAME">%1$s</xliff:g> on estetty"</string>
+    <string name="wifi_settings_wep_networks_summary_toggle_off" msgid="1113138364046142949">"Tämä verkko käyttää vanhempaa WEP-tietoturvaprotokollaa, joka on vähemmän turvallinen. Jos haluat silti yhdistää siihen, voit sallia WEP-verkot."</string>
+    <string name="wifi_settings_wep_networks_summary_blocked_by_carrier" msgid="6085673947156094523">"Operaattori ei salli yhteyden muodostamista tähän verkkoon, koska se käyttää vanhempaa tietoturvaprotokollaa, joka on vähemmän turvallinen"</string>
+    <string name="wifi_settings_wep_networks_button_allow" msgid="2807926329019873706">"Salli WEP"</string>
+    <string name="wifi_settings_ssid_block_button_close" msgid="3013886895576949908">"Sulje"</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Lisäasetukset"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Lisäasetusten avattava lista"</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"laajenna"</string>
@@ -1821,9 +1814,19 @@
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Saatavilla oleva näyttönäppäimistö"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Ylläpidä näyttönäppäimistöjä"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"Vaihtoehdot"</string>
+    <!-- no translation found for keyboard_a11y_category (8230758278046841469) -->
+    <skip />
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Fyysinen näppäimistö"</string>
     <string name="show_ime" msgid="4334255501724746849">"Käytä näyttönäppäimistöä"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"Pidä näytöllä, kun fyysinen näppäimistö on aktiivinen"</string>
+    <!-- no translation found for bounce_keys (7419450970351743904) -->
+    <skip />
+    <!-- no translation found for bounce_keys_summary (6922850403920596246) -->
+    <skip />
+    <!-- no translation found for sticky_keys (7317317044898161747) -->
+    <skip />
+    <!-- no translation found for sticky_keys_summary (8520909829540989765) -->
+    <skip />
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Pikanäppäimet"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Näytä pikanäppäimet"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Työprofiilin näppäimistöt ja työkalut"</string>
@@ -3821,12 +3824,9 @@
     <string name="free_memory" msgid="439783742246854785">"Vapaana"</string>
     <string name="memory_usage_apps" msgid="5776108502569850579">"Sovellusten käyttämä muisti"</string>
     <string name="memory_usage_apps_summary" msgid="7168292864155527974">"{count,plural, =1{1 sovellus käytti muistia tänä aikana: {time}}other{# sovellusta käytti muistia tänä aikana: {time}}}"</string>
-    <!-- no translation found for force_enable_pss_profiling_title (2253816522775341523) -->
-    <skip />
-    <!-- no translation found for force_enable_pss_profiling_summary (7714294324548399136) -->
-    <skip />
-    <!-- no translation found for pss_profiling_disabled (1967278421143514850) -->
-    <skip />
+    <string name="force_enable_pss_profiling_title" msgid="2253816522775341523">"Ota käyttöön muistin käytön profilointi"</string>
+    <string name="force_enable_pss_profiling_summary" msgid="7714294324548399136">"Muistin käytön profilointiin tarvitaan lisää järjestelmän resursseja."</string>
+    <string name="pss_profiling_disabled" msgid="1967278421143514850">"Muistin käytön profilointi poissa käytöstä"</string>
     <string name="running_frequency" msgid="7260225121706316639">"Toistuvuus"</string>
     <string name="memory_maximum_usage" msgid="2047013391595835607">"Enimmäiskäyttö"</string>
     <string name="no_data_usage" msgid="4665617440434654132">"Dataa ei ole käytetty"</string>

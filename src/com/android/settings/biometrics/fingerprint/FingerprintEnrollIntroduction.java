@@ -70,7 +70,7 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
     private DevicePolicyManager mDevicePolicyManager;
     private boolean mCanAssumeUdfps;
     @Nullable
-    private UdfpsEnrollCalibrator mCalibrator;
+    protected UdfpsEnrollCalibrator mCalibrator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

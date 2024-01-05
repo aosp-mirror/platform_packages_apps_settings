@@ -283,6 +283,8 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Matutukoy ng mga app na may pahintulot sa Mga kalapit na device ang relatibong posisyon ng mga nakakonektang device."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Naka-off para sa mga app at serbisyo ang access sa lokasyon. Posibleng ipadala pa rin ang lokasyon ng iyong device sa mga reresponde sa emergency kapag tumawag o nag-text ka sa pang-emergency na numero."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Matuto pa tungkol sa Mga setting ng lokasyon."</string>
+    <!-- no translation found for location_settings_tooltip_text_for_chrome (3574930966097093550) -->
+    <skip />
     <string name="account_settings_title" msgid="9138880127246241885">"Mga Account"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Seguridad"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Pag-encrypt at mga kredensyal"</string>
@@ -842,12 +844,9 @@
     <string name="wifi_in_airplane_mode" msgid="1235412508135267981">"Nasa Airplane mode"</string>
     <string name="wifi_notify_open_networks" msgid="2610323626246818961">"Abisuhan kapag may mga pampublikong network"</string>
     <string name="wifi_notify_open_networks_summary" msgid="191058832201741013">"Mag-abiso kapag may available na pampublikong network na may mataas na kalidad"</string>
-    <!-- no translation found for wifi_allow_wep_networks (8772342993235292010) -->
-    <skip />
-    <!-- no translation found for wifi_allow_wep_networks_summary (3033397893296724615) -->
-    <skip />
-    <!-- no translation found for wifi_allow_wep_networks_summary_carrier_not_allow (6298103289728210026) -->
-    <skip />
+    <string name="wifi_allow_wep_networks" msgid="8772342993235292010">"Payagan ang mga WEP network"</string>
+    <string name="wifi_allow_wep_networks_summary" msgid="3033397893296724615">"Ang WEP ay isang mas lumang protocol ng seguridad na hindi gaanong secure"</string>
+    <string name="wifi_allow_wep_networks_summary_carrier_not_allow" msgid="6298103289728210026">"Hindi pinapayagan ng iyong carrier ang mga WEP network dahil hindi gaanong secure ang mga ito"</string>
     <string name="wifi_wakeup" msgid="3834327315861781611">"Awtomatikong i-on ang Wi‑Fi"</string>
     <string name="wifi_wakeup_summary" msgid="5778059083790221465">"Mag-o-on ulit ang Wi‑Fi kapag malapit sa mga naka-save na network na may mataas na kalidad, gaya ng iyong home network"</string>
     <string name="wifi_wakeup_summary_no_location" msgid="681323616606485096">"Hindi available dahil naka-off ang lokasyon. I-on ang "<annotation id="link">"lokasyon"</annotation>"."</string>
@@ -869,18 +868,12 @@
     <string name="wifi_settings_scanning_required_info" msgid="1473411566072565789">"Nagbibigay-daan ang pag-scan ng Wi‑Fi sa mga app at serbisyo para mag-scan ng mga Wi‑Fi network anumang oras, kahit na naka-off ang Wi‑Fi. Magagamit ito, halimbawa, para pahusayin ang mga feature at serbisyong batay sa lokasyon."</string>
     <string name="wifi_settings_scanning_required_turn_on" msgid="1112223196123955447">"I-on"</string>
     <string name="wifi_settings_scanning_required_enabled" msgid="4721729158927146365">"Na-on ang pag-scan ng Wi‑Fi"</string>
-    <!-- no translation found for wifi_settings_warning_wep_network (2655077013800385646) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_blocked_title (8337700496544833669) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_summary_toggle_off (1113138364046142949) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_summary_blocked_by_carrier (6085673947156094523) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_button_allow (2807926329019873706) -->
-    <skip />
-    <!-- no translation found for wifi_settings_ssid_block_button_close (3013886895576949908) -->
-    <skip />
+    <string name="wifi_settings_warning_wep_network" msgid="2655077013800385646">"Gumagamit ang network na ito ng mas lumang protocol ng seguridad na hindi gaanong secure"</string>
+    <string name="wifi_settings_wep_networks_blocked_title" msgid="8337700496544833669">"Na-block ang <xliff:g id="NAME">%1$s</xliff:g>"</string>
+    <string name="wifi_settings_wep_networks_summary_toggle_off" msgid="1113138364046142949">"Gumagamit ang network na ito ng mas lumang protocol ng seguridad na tinatawag na WEP na hindi gaanong secure. Para kumonekta pa rin, puwede mong payagan ang mga WEP network."</string>
+    <string name="wifi_settings_wep_networks_summary_blocked_by_carrier" msgid="6085673947156094523">"Hindi ka pinapayagan ng iyong carrier na kumonekta sa network na ito dahil gumagamit ito ng mas lumang protocol ng seguridad na hindi gaanong secure"</string>
+    <string name="wifi_settings_wep_networks_button_allow" msgid="2807926329019873706">"Payagan ang WEP"</string>
+    <string name="wifi_settings_ssid_block_button_close" msgid="3013886895576949908">"Isara"</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Mga advanced na opsyon"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Mga Advanced na Opsyon sa drop down na listahan"</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"i-expand"</string>
@@ -1821,9 +1814,19 @@
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Available na On-screen na keyboard"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Pamahalaan ang on-screen na keyboard"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"Mga Opsyon"</string>
+    <!-- no translation found for keyboard_a11y_category (8230758278046841469) -->
+    <skip />
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Aktwal na keyboard"</string>
     <string name="show_ime" msgid="4334255501724746849">"Gumamit ng on-screen na keyboard"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"Panatilihin ito sa screen habang aktibo ang pisikal na keyboard"</string>
+    <!-- no translation found for bounce_keys (7419450970351743904) -->
+    <skip />
+    <!-- no translation found for bounce_keys_summary (6922850403920596246) -->
+    <skip />
+    <!-- no translation found for sticky_keys (7317317044898161747) -->
+    <skip />
+    <!-- no translation found for sticky_keys_summary (8520909829540989765) -->
+    <skip />
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Mga keyboard shortcut"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Ipakita ang listahan ng mga shortcut"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Mga keyboard at tool ng profile sa trabaho"</string>
@@ -3821,12 +3824,9 @@
     <string name="free_memory" msgid="439783742246854785">"Libre"</string>
     <string name="memory_usage_apps" msgid="5776108502569850579">"Memory na ginamit ng mga app"</string>
     <string name="memory_usage_apps_summary" msgid="7168292864155527974">"{count,plural, =1{1 app ang gumamit ng memory sa nakalipas na {time}}one{# app ang gumamit ng memory sa nakalipas na {time}}other{# na app ang gumamit ng memory sa nakalipas na {time}}}"</string>
-    <!-- no translation found for force_enable_pss_profiling_title (2253816522775341523) -->
-    <skip />
-    <!-- no translation found for force_enable_pss_profiling_summary (7714294324548399136) -->
-    <skip />
-    <!-- no translation found for pss_profiling_disabled (1967278421143514850) -->
-    <skip />
+    <string name="force_enable_pss_profiling_title" msgid="2253816522775341523">"I-enable ang pag-profile ng paggamit ng memory"</string>
+    <string name="force_enable_pss_profiling_summary" msgid="7714294324548399136">"Nangangailangan ng mga karagdagang resource ng system ang pag-profile ng paggamit ng memory."</string>
+    <string name="pss_profiling_disabled" msgid="1967278421143514850">"Na-disable ang pag-profile ng memory"</string>
     <string name="running_frequency" msgid="7260225121706316639">"Frequency"</string>
     <string name="memory_maximum_usage" msgid="2047013391595835607">"Maximum na paggamit"</string>
     <string name="no_data_usage" msgid="4665617440434654132">"Walang nagamit na data"</string>

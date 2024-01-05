@@ -283,6 +283,8 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Apps with the Nearby devices permission can determine the relative position of connected devices."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Location access is off for apps and services. Your device location may still be sent to emergency responders when you call or text an emergency number."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Learn more about Location settings"</string>
+    <!-- no translation found for location_settings_tooltip_text_for_chrome (3574930966097093550) -->
+    <skip />
     <string name="account_settings_title" msgid="9138880127246241885">"Accounts"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Security"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Encryption &amp; credentials"</string>
@@ -842,12 +844,9 @@
     <string name="wifi_in_airplane_mode" msgid="1235412508135267981">"In Airplane mode"</string>
     <string name="wifi_notify_open_networks" msgid="2610323626246818961">"Notify for public networks"</string>
     <string name="wifi_notify_open_networks_summary" msgid="191058832201741013">"Notify when a high‑quality public network is available"</string>
-    <!-- no translation found for wifi_allow_wep_networks (8772342993235292010) -->
-    <skip />
-    <!-- no translation found for wifi_allow_wep_networks_summary (3033397893296724615) -->
-    <skip />
-    <!-- no translation found for wifi_allow_wep_networks_summary_carrier_not_allow (6298103289728210026) -->
-    <skip />
+    <string name="wifi_allow_wep_networks" msgid="8772342993235292010">"Allow WEP networks"</string>
+    <string name="wifi_allow_wep_networks_summary" msgid="3033397893296724615">"WEP is an older security protocol that\'s less secure"</string>
+    <string name="wifi_allow_wep_networks_summary_carrier_not_allow" msgid="6298103289728210026">"Your carrier doesn\'t allow WEP networks because they\'re less secure"</string>
     <string name="wifi_wakeup" msgid="3834327315861781611">"Turn on Wi‑Fi automatically"</string>
     <string name="wifi_wakeup_summary" msgid="5778059083790221465">"Wi‑Fi will turn back on near high‑quality saved networks, like your home network"</string>
     <string name="wifi_wakeup_summary_no_location" msgid="681323616606485096">"Unavailable because location is turned off. Turn on "<annotation id="link">"location"</annotation>"."</string>
@@ -869,18 +868,12 @@
     <string name="wifi_settings_scanning_required_info" msgid="1473411566072565789">"Wi‑Fi scanning allows apps and services to scan for Wi‑Fi networks at any time, even when Wi‑Fi is off. This can be used, for example, to improve location‑based features and services."</string>
     <string name="wifi_settings_scanning_required_turn_on" msgid="1112223196123955447">"Turn on"</string>
     <string name="wifi_settings_scanning_required_enabled" msgid="4721729158927146365">"Wi‑Fi scanning turned on"</string>
-    <!-- no translation found for wifi_settings_warning_wep_network (2655077013800385646) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_blocked_title (8337700496544833669) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_summary_toggle_off (1113138364046142949) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_summary_blocked_by_carrier (6085673947156094523) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_button_allow (2807926329019873706) -->
-    <skip />
-    <!-- no translation found for wifi_settings_ssid_block_button_close (3013886895576949908) -->
-    <skip />
+    <string name="wifi_settings_warning_wep_network" msgid="2655077013800385646">"This network uses an older security protocol that\'s less secure"</string>
+    <string name="wifi_settings_wep_networks_blocked_title" msgid="8337700496544833669">"<xliff:g id="NAME">%1$s</xliff:g> is blocked"</string>
+    <string name="wifi_settings_wep_networks_summary_toggle_off" msgid="1113138364046142949">"This network uses an older security protocol called WEP, which is less secure. To connect anyway, you can allow WEP networks."</string>
+    <string name="wifi_settings_wep_networks_summary_blocked_by_carrier" msgid="6085673947156094523">"Your carrier doesn\'t allow you to connect to this network because it uses an older security protocol that’s less secure"</string>
+    <string name="wifi_settings_wep_networks_button_allow" msgid="2807926329019873706">"Allow WEP"</string>
+    <string name="wifi_settings_ssid_block_button_close" msgid="3013886895576949908">"Close"</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Advanced options"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Drop down list Advanced Options"</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"expand"</string>
@@ -1821,9 +1814,19 @@
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Available On-screen keyboard"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Manage on-screen keyboards"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"Options"</string>
+    <!-- no translation found for keyboard_a11y_category (8230758278046841469) -->
+    <skip />
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Physical keyboard"</string>
     <string name="show_ime" msgid="4334255501724746849">"Use on-screen keyboard"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"Keep it on screen while physical keyboard is active"</string>
+    <!-- no translation found for bounce_keys (7419450970351743904) -->
+    <skip />
+    <!-- no translation found for bounce_keys_summary (6922850403920596246) -->
+    <skip />
+    <!-- no translation found for sticky_keys (7317317044898161747) -->
+    <skip />
+    <!-- no translation found for sticky_keys_summary (8520909829540989765) -->
+    <skip />
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Keyboard shortcuts"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Show list of shortcuts"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Work profile keyboards &amp; tools"</string>
@@ -3821,12 +3824,9 @@
     <string name="free_memory" msgid="439783742246854785">"Free"</string>
     <string name="memory_usage_apps" msgid="5776108502569850579">"Memory used by apps"</string>
     <string name="memory_usage_apps_summary" msgid="7168292864155527974">"{count,plural, =1{1 app used memory in the last {time}}other{# apps used memory in the last {time}}}"</string>
-    <!-- no translation found for force_enable_pss_profiling_title (2253816522775341523) -->
-    <skip />
-    <!-- no translation found for force_enable_pss_profiling_summary (7714294324548399136) -->
-    <skip />
-    <!-- no translation found for pss_profiling_disabled (1967278421143514850) -->
-    <skip />
+    <string name="force_enable_pss_profiling_title" msgid="2253816522775341523">"Enable memory usage profiling"</string>
+    <string name="force_enable_pss_profiling_summary" msgid="7714294324548399136">"Memory usage profiling requires additional system resources."</string>
+    <string name="pss_profiling_disabled" msgid="1967278421143514850">"Memory profiling disabled"</string>
     <string name="running_frequency" msgid="7260225121706316639">"Frequency"</string>
     <string name="memory_maximum_usage" msgid="2047013391595835607">"Maximum usage"</string>
     <string name="no_data_usage" msgid="4665617440434654132">"No data used"</string>

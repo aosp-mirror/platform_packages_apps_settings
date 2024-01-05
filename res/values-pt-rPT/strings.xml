@@ -283,6 +283,8 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"As apps com a autorização Dispositivos próximos podem determinar a posição relativa dos dispositivos ligados."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"O acesso à localização está desativado para apps e serviços. A localização do dispositivo ainda pode ser enviada para os contactos de resposta a emergências quando liga ou envia uma mensagem de texto para um número de emergência."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Saiba mais acerca das definições de localização"</string>
+    <!-- no translation found for location_settings_tooltip_text_for_chrome (3574930966097093550) -->
+    <skip />
     <string name="account_settings_title" msgid="9138880127246241885">"Contas"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Segurança"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Encriptação/credenciais"</string>
@@ -842,12 +844,9 @@
     <string name="wifi_in_airplane_mode" msgid="1235412508135267981">"No Modo de avião"</string>
     <string name="wifi_notify_open_networks" msgid="2610323626246818961">"Notificar se existirem redes públicas"</string>
     <string name="wifi_notify_open_networks_summary" msgid="191058832201741013">"Notificar quando uma rede pública de alta qualidade estiver disponível"</string>
-    <!-- no translation found for wifi_allow_wep_networks (8772342993235292010) -->
-    <skip />
-    <!-- no translation found for wifi_allow_wep_networks_summary (3033397893296724615) -->
-    <skip />
-    <!-- no translation found for wifi_allow_wep_networks_summary_carrier_not_allow (6298103289728210026) -->
-    <skip />
+    <string name="wifi_allow_wep_networks" msgid="8772342993235292010">"Permitir redes WEP"</string>
+    <string name="wifi_allow_wep_networks_summary" msgid="3033397893296724615">"O WEP é um protocolo de segurança mais antigo que é menos seguro"</string>
+    <string name="wifi_allow_wep_networks_summary_carrier_not_allow" msgid="6298103289728210026">"A sua operadora não permite redes WEP porque são menos seguras"</string>
     <string name="wifi_wakeup" msgid="3834327315861781611">"Ativar o Wi‑Fi automaticamente"</string>
     <string name="wifi_wakeup_summary" msgid="5778059083790221465">"O Wi‑Fi é reativado quando estiver perto de redes de alta qualidade guardadas, como a sua rede doméstica"</string>
     <string name="wifi_wakeup_summary_no_location" msgid="681323616606485096">"Indisponível porque a localização está desativada. Ative a "<annotation id="link">"localização"</annotation>"."</string>
@@ -869,18 +868,12 @@
     <string name="wifi_settings_scanning_required_info" msgid="1473411566072565789">"A procura de Wi-Fi permite que as aplicações e os serviços procurem redes Wi‑Fi em qualquer altura, mesmo quando o Wi-Fi estiver desativado. Isto pode ser utilizado, por exemplo, para melhorar as funcionalidades e os serviços baseados na localização."</string>
     <string name="wifi_settings_scanning_required_turn_on" msgid="1112223196123955447">"Ativar"</string>
     <string name="wifi_settings_scanning_required_enabled" msgid="4721729158927146365">"Procura de Wi-Fi ativada"</string>
-    <!-- no translation found for wifi_settings_warning_wep_network (2655077013800385646) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_blocked_title (8337700496544833669) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_summary_toggle_off (1113138364046142949) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_summary_blocked_by_carrier (6085673947156094523) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_button_allow (2807926329019873706) -->
-    <skip />
-    <!-- no translation found for wifi_settings_ssid_block_button_close (3013886895576949908) -->
-    <skip />
+    <string name="wifi_settings_warning_wep_network" msgid="2655077013800385646">"Esta rede usa um protocolo de segurança mais antigo que é menos seguro"</string>
+    <string name="wifi_settings_wep_networks_blocked_title" msgid="8337700496544833669">"A rede <xliff:g id="NAME">%1$s</xliff:g> foi bloqueada"</string>
+    <string name="wifi_settings_wep_networks_summary_toggle_off" msgid="1113138364046142949">"Esta rede usa um protocolo de segurança mais antigo chamado WEP, que é menos seguro. Para se ligar mesmo assim, pode permitir redes WEP."</string>
+    <string name="wifi_settings_wep_networks_summary_blocked_by_carrier" msgid="6085673947156094523">"A sua operadora não lhe permite ligar-se a esta rede porque usa um protocolo de segurança mais antigo que é menos seguro"</string>
+    <string name="wifi_settings_wep_networks_button_allow" msgid="2807926329019873706">"Permitir WEP"</string>
+    <string name="wifi_settings_ssid_block_button_close" msgid="3013886895576949908">"Fechar"</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Opções avançadas"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Lista pendente: Opções avançadas"</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"expandir"</string>
@@ -1821,9 +1814,19 @@
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Teclado no ecrã disponível"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Gerir teclados no ecrã"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"Opções"</string>
+    <!-- no translation found for keyboard_a11y_category (8230758278046841469) -->
+    <skip />
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Teclado físico"</string>
     <string name="show_ime" msgid="4334255501724746849">"Usar o teclado no ecrã"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"Manter no ecrã enquanto o teclado físico estiver ativo"</string>
+    <!-- no translation found for bounce_keys (7419450970351743904) -->
+    <skip />
+    <!-- no translation found for bounce_keys_summary (6922850403920596246) -->
+    <skip />
+    <!-- no translation found for sticky_keys (7317317044898161747) -->
+    <skip />
+    <!-- no translation found for sticky_keys_summary (8520909829540989765) -->
+    <skip />
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Atalhos de teclado"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Mostre a lista de atalhos"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Teclados e ferramentas do perfil de trabalho"</string>
@@ -3821,12 +3824,9 @@
     <string name="free_memory" msgid="439783742246854785">"Disponível"</string>
     <string name="memory_usage_apps" msgid="5776108502569850579">"Memória utilizada pelas aplicações"</string>
     <string name="memory_usage_apps_summary" msgid="7168292864155527974">"{count,plural, =1{1 app usou a memória nos(as) últimos(as) {time}}other{# apps usaram a memória nos(as) últimos(as) {time}}}"</string>
-    <!-- no translation found for force_enable_pss_profiling_title (2253816522775341523) -->
-    <skip />
-    <!-- no translation found for force_enable_pss_profiling_summary (7714294324548399136) -->
-    <skip />
-    <!-- no translation found for pss_profiling_disabled (1967278421143514850) -->
-    <skip />
+    <string name="force_enable_pss_profiling_title" msgid="2253816522775341523">"Ativar perfis de utilização de memória"</string>
+    <string name="force_enable_pss_profiling_summary" msgid="7714294324548399136">"A criação de perfis de utilização de memória exige recursos de sistema adicionais."</string>
+    <string name="pss_profiling_disabled" msgid="1967278421143514850">"Criação de perfis de memória desativada"</string>
     <string name="running_frequency" msgid="7260225121706316639">"Frequência"</string>
     <string name="memory_maximum_usage" msgid="2047013391595835607">"Utilização máxima"</string>
     <string name="no_data_usage" msgid="4665617440434654132">"Sem dados usados"</string>

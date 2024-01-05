@@ -283,6 +283,8 @@
     <string name="location_settings_footer_general" msgid="1040507068701188821">"A közeli eszközökre vonatkozó engedéllyel rendelkező alkalmazások meghatározhatják a csatlakoztatott eszközök relatív pozícióját."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"A helyhozzáférés ki van kapcsolva az alkalmazásoknál és a szolgáltatásoknál. A rendszer azonban így is elküldheti az eszköz helyét a segélyszolgálatoknak, ha Ön segélyhívó számot hív, vagy SMS-t küld rá."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"További információ a helybeállításokról."</string>
+    <!-- no translation found for location_settings_tooltip_text_for_chrome (3574930966097093550) -->
+    <skip />
     <string name="account_settings_title" msgid="9138880127246241885">"Fiókok"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Biztonság"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Titkosítás és hitelesítési adatok"</string>
@@ -842,12 +844,9 @@
     <string name="wifi_in_airplane_mode" msgid="1235412508135267981">"Repülős üzemmódban"</string>
     <string name="wifi_notify_open_networks" msgid="2610323626246818961">"Értesítés a nyilvános hálózatokról"</string>
     <string name="wifi_notify_open_networks_summary" msgid="191058832201741013">"Értesítsen, ha rendelkezésre áll jó minőségű nyilvános hálózat"</string>
-    <!-- no translation found for wifi_allow_wep_networks (8772342993235292010) -->
-    <skip />
-    <!-- no translation found for wifi_allow_wep_networks_summary (3033397893296724615) -->
-    <skip />
-    <!-- no translation found for wifi_allow_wep_networks_summary_carrier_not_allow (6298103289728210026) -->
-    <skip />
+    <string name="wifi_allow_wep_networks" msgid="8772342993235292010">"WEP-hálózatok engedélyezése"</string>
+    <string name="wifi_allow_wep_networks_summary" msgid="3033397893296724615">"A WEP egy régebbi, kevésbé biztonságos biztonsági protokoll."</string>
+    <string name="wifi_allow_wep_networks_summary_carrier_not_allow" msgid="6298103289728210026">"Szolgáltatója nem engedélyezi a WEP-hálózatokat, mert kevésbé biztonságosak."</string>
     <string name="wifi_wakeup" msgid="3834327315861781611">"Wi‑Fi automatikus bekapcsolása"</string>
     <string name="wifi_wakeup_summary" msgid="5778059083790221465">"A Wi‑Fi újra bekapcsol jó minőségű mentett hálózatok (például az otthoni hálózat) közelében"</string>
     <string name="wifi_wakeup_summary_no_location" msgid="681323616606485096">"Nem áll rendelkezésre, mert a helyszolgáltatás ki van kapcsolva. "<annotation id="link">"Helyszolgáltatás"</annotation>" bekapcsolása."</string>
@@ -869,18 +868,12 @@
     <string name="wifi_settings_scanning_required_info" msgid="1473411566072565789">"A Wi-Fi-keresés engedélyezi az alkalmazásoknak és szolgáltatásoknak, hogy Wi-Fi-hálózatokat keressenek még akkor is, ha ki van kapcsolva a Wi-Fi. Ez például a helyalapú funkciók és szolgáltatások hatékonyságának javítására használható."</string>
     <string name="wifi_settings_scanning_required_turn_on" msgid="1112223196123955447">"Bekapcsolás"</string>
     <string name="wifi_settings_scanning_required_enabled" msgid="4721729158927146365">"Wi‑Fi-keresés bekapcsolva"</string>
-    <!-- no translation found for wifi_settings_warning_wep_network (2655077013800385646) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_blocked_title (8337700496544833669) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_summary_toggle_off (1113138364046142949) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_summary_blocked_by_carrier (6085673947156094523) -->
-    <skip />
-    <!-- no translation found for wifi_settings_wep_networks_button_allow (2807926329019873706) -->
-    <skip />
-    <!-- no translation found for wifi_settings_ssid_block_button_close (3013886895576949908) -->
-    <skip />
+    <string name="wifi_settings_warning_wep_network" msgid="2655077013800385646">"Ez a hálózat egy régebbi, kevésbé biztonságos biztonsági protokollt használ."</string>
+    <string name="wifi_settings_wep_networks_blocked_title" msgid="8337700496544833669">"A(z) <xliff:g id="NAME">%1$s</xliff:g> le van tiltva"</string>
+    <string name="wifi_settings_wep_networks_summary_toggle_off" msgid="1113138364046142949">"Ez a hálózat egy régebbi, kevésbé biztonságos biztonsági protokollt (WEP-et) használ. Ha ennek ellenére csatlakozni szeretne hozzá, engedélyezheti a WEP-hálózatokat."</string>
+    <string name="wifi_settings_wep_networks_summary_blocked_by_carrier" msgid="6085673947156094523">"Szolgáltatója nem engedélyezi a csatlakozást, mert ez a hálózat egy régebbi, kevésbé biztonságos biztonsági protokollt használ."</string>
+    <string name="wifi_settings_wep_networks_button_allow" msgid="2807926329019873706">"A WEP engedélyezése"</string>
+    <string name="wifi_settings_ssid_block_button_close" msgid="3013886895576949908">"Bezárás"</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Speciális beállítások"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Legördülő lista – Speciális beállítások"</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"kibontás"</string>
@@ -1821,9 +1814,19 @@
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Használható képernyő-billentyűzet"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Képernyő-billentyűzetek kezelése"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"Opciók"</string>
+    <!-- no translation found for keyboard_a11y_category (8230758278046841469) -->
+    <skip />
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Fizikai billentyűzet"</string>
     <string name="show_ime" msgid="4334255501724746849">"Képernyő-billentyűzet használata"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"Maradjon a képernyőn, amíg a fizikai billentyűzet aktív"</string>
+    <!-- no translation found for bounce_keys (7419450970351743904) -->
+    <skip />
+    <!-- no translation found for bounce_keys_summary (6922850403920596246) -->
+    <skip />
+    <!-- no translation found for sticky_keys (7317317044898161747) -->
+    <skip />
+    <!-- no translation found for sticky_keys_summary (8520909829540989765) -->
+    <skip />
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Billentyűparancsok"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Billentyűparancsok listájának megjelenítése"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Munkaprofil billentyűzetei és eszközei"</string>
@@ -3821,12 +3824,9 @@
     <string name="free_memory" msgid="439783742246854785">"Szabad"</string>
     <string name="memory_usage_apps" msgid="5776108502569850579">"Alkalmazások által használt memória"</string>
     <string name="memory_usage_apps_summary" msgid="7168292864155527974">"{count,plural, =1{1 alkalmazás használt memóriát az elmúlt {time} során}other{# alkalmazás használt memóriát az elmúlt {time} során}}"</string>
-    <!-- no translation found for force_enable_pss_profiling_title (2253816522775341523) -->
-    <skip />
-    <!-- no translation found for force_enable_pss_profiling_summary (7714294324548399136) -->
-    <skip />
-    <!-- no translation found for pss_profiling_disabled (1967278421143514850) -->
-    <skip />
+    <string name="force_enable_pss_profiling_title" msgid="2253816522775341523">"Memóriahasználati profil engedélyezése"</string>
+    <string name="force_enable_pss_profiling_summary" msgid="7714294324548399136">"A memóriahasználati profilalkotáshoz további rendszererőforrásokra van szükség."</string>
+    <string name="pss_profiling_disabled" msgid="1967278421143514850">"Memóriahasználati profil kikapcsolva"</string>
     <string name="running_frequency" msgid="7260225121706316639">"Gyakoriság"</string>
     <string name="memory_maximum_usage" msgid="2047013391595835607">"Maximális használat"</string>
     <string name="no_data_usage" msgid="4665617440434654132">"Nincs felhasznált adatmennyiség"</string>
