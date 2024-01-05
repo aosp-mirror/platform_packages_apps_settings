@@ -25,12 +25,19 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.platform.test.annotations.RequiresFlagsDisabled;
+import android.platform.test.annotations.RequiresFlagsEnabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.provider.Settings;
 
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
+import com.android.server.display.feature.flags.Flags;
+
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -50,6 +57,9 @@ public class ForcePeakRefreshRatePreferenceControllerTest {
     private Context mContext;
     private ForcePeakRefreshRatePreferenceController mController;
 
+    @Rule
+    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
@@ -61,7 +71,19 @@ public class ForcePeakRefreshRatePreferenceControllerTest {
     }
 
     @Test
-    public void onPreferenceChange_preferenceChecked_shouldEnableForcePeak() {
+    @RequiresFlagsDisabled(Flags.FLAG_BACK_UP_SMOOTH_DISPLAY_AND_FORCE_PEAK_REFRESH_RATE)
+    public void onPreferenceChange_preferenceChecked_shouldEnableForcePeak_featureFlagOff() {
+        mController.mPeakRefreshRate = 88f;
+
+        mController.onPreferenceChange(mPreference, true);
+
+        assertThat(Settings.System.getFloat(mContext.getContentResolver(),
+                Settings.System.MIN_REFRESH_RATE, NO_CONFIG)).isEqualTo(88f);
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_BACK_UP_SMOOTH_DISPLAY_AND_FORCE_PEAK_REFRESH_RATE)
+    public void onPreferenceChange_preferenceChecked_shouldEnableForcePeak_featureFlagOn() {
         mController.mPeakRefreshRate = 88f;
 
         mController.onPreferenceChange(mPreference, true);
@@ -88,6 +110,7 @@ public class ForcePeakRefreshRatePreferenceControllerTest {
         mController.updateState(mPreference);
 
         verify(mPreference).setChecked(true);
+        assertThat(mController.isForcePeakRefreshRateEnabled()).isTrue();
     }
 
     @Test
@@ -98,6 +121,7 @@ public class ForcePeakRefreshRatePreferenceControllerTest {
         mController.updateState(mPreference);
 
         verify(mPreference).setChecked(false);
+        assertThat(mController.isForcePeakRefreshRateEnabled()).isFalse();
     }
 
     @Test
