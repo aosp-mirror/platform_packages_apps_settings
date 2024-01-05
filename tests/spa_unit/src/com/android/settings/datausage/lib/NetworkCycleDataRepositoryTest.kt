@@ -23,10 +23,8 @@ import android.text.format.DateUtils
 import android.util.Range
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.settings.testutils.zonedDateTime
 import com.google.common.truth.Truth.assertThat
-import java.time.Instant
-import java.time.ZoneId
-import java.time.ZonedDateTime
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -95,9 +93,6 @@ class NetworkCycleDataRepositoryTest {
             ),
         )
     }
-
-    private fun zonedDateTime(epochMilli: Long): ZonedDateTime? =
-        ZonedDateTime.ofInstant(Instant.ofEpochMilli(epochMilli), ZoneId.systemDefault())
 
     private companion object {
         const val CYCLE1_START_TIME = 1L
