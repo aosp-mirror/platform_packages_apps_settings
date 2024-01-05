@@ -21,13 +21,13 @@ import static android.net.wifi.WifiManager.SAP_START_FAILURE_GENERAL;
 
 import static com.android.settings.wifi.WifiUtils.canShowWifiHotspot;
 
-import android.annotation.NonNull;
 import android.content.Context;
 import android.net.wifi.SoftApConfiguration;
 import android.net.wifi.WifiClient;
 import android.net.wifi.WifiManager;
 import android.text.BidiFormatter;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceScreen;
 

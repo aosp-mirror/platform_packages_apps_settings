@@ -16,11 +16,12 @@
 
 package com.android.settings;
 
-import android.annotation.Nullable;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.FrameLayout;
+
+import androidx.annotation.Nullable;
 
 /**
  * Extension of FrameLayout that consumes all touch events.

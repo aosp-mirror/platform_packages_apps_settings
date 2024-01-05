@@ -18,7 +18,6 @@ package com.android.settings.search;
 
 import static android.view.View.IMPORTANT_FOR_ACCESSIBILITY_NO;
 
-import android.annotation.NonNull;
 import android.app.ActivityOptions;
 import android.content.ComponentName;
 import android.content.Context;
@@ -30,6 +29,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toolbar;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;

@@ -16,7 +16,6 @@
 
 package com.android.settings.applications.specialaccess.premiumsms;
 
-import android.annotation.Nullable;
 import android.app.Application;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -24,6 +23,7 @@ import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.view.View;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.DropDownPreference;
 import androidx.preference.Preference;

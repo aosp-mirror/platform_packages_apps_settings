@@ -17,12 +17,13 @@
 package com.android.settings.testutils.shadow;
 
 import android.Manifest;
-import android.annotation.NonNull;
 import android.content.Context;
 import android.content.pm.CrossProfileApps;
 import android.content.pm.ICrossProfileApps;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+
+import androidx.annotation.NonNull;
 
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;

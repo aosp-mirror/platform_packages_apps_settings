@@ -18,8 +18,6 @@ package com.android.settings.password;
 
 import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
 
-import android.annotation.NonNull;
-import android.annotation.Nullable;
 import android.app.Activity;
 import android.app.ActivityOptions;
 import android.app.KeyguardManager;
@@ -33,6 +31,8 @@ import android.os.UserManager;
 import android.util.Log;
 
 import androidx.activity.result.ActivityResultLauncher;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 
