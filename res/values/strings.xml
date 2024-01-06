@@ -10218,6 +10218,21 @@
     <!-- Keywords for settings screen for controlling apps that can run long background tasks [CHAR LIMIT=NONE] -->
     <string name="keywords_long_background_tasks">long jobs, data transfer, background tasks</string>
 
+    <!-- Title for the settings screen for controlling apps that hold the run backup jobs permission [CHAR LIMIT=60] -->
+    <string name="run_backup_tasks_title">Perform backup tasks in background</string>
+    <!-- Label for the switch to toggle the run backup jobs permission [CHAR LIMIT=100] -->
+    <string name="run_backup_tasks_switch_title">Allow app to run backup-related background tasks</string>
+    <!-- Description that appears below the run_backup_tasks switch [CHAR LIMIT=NONE] -->
+    <string name="run_backup_tasks_footer_title">
+        Indicates that this app has a major use-case where it needs to backup or sync content.
+        Granting this permission allows the app to run in the background for a slightly longer time
+        in order to complete the backup-related work.
+        \n\nIf this permission is denied, the system will not give any special exemption to this
+        app to complete backup-related work in the background.
+    </string>
+    <!-- Keywords for settings screen for controlling apps that hold the run backup tasks permission [CHAR LIMIT=NONE] -->
+    <string name="keywords_run_backup_tasks">backup tasks, backup jobs</string>
+
     <!-- Reset rate-limiting in the system service ShortcutManager.  "ShortcutManager" is the name of a system service and not translatable.
     If the word "rate-limit" is hard to translate, use "Reset ShortcutManager API call limit" as the source text, which means
     the same thing in this context.

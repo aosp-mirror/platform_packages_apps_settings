@@ -29,6 +29,7 @@ import com.android.settings.spa.app.appinfo.CloneAppInfoSettingsProvider
 import com.android.settings.spa.app.backgroundinstall.BackgroundInstalledAppsPageProvider
 import com.android.settings.spa.app.specialaccess.AlarmsAndRemindersAppListProvider
 import com.android.settings.spa.app.specialaccess.AllFilesAccessAppListProvider
+import com.android.settings.spa.app.specialaccess.BackupTasksAppsListProvider
 import com.android.settings.spa.app.specialaccess.DisplayOverOtherAppsAppListProvider
 import com.android.settings.spa.app.specialaccess.InstallUnknownAppsListProvider
 import com.android.settings.spa.app.specialaccess.LongBackgroundTasksAppListProvider
@@ -79,6 +80,7 @@ open class SettingsSpaEnvironment(context: Context) : SpaEnvironment(context) {
             NfcTagAppsSettingsProvider,
             LongBackgroundTasksAppListProvider,
             TurnScreenOnAppsAppListProvider,
+            BackupTasksAppsListProvider,
         )
     }
 

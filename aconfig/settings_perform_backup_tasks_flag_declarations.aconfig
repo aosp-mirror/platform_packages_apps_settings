@@ -1,0 +1,9 @@
+package: "com.android.settings.flags"
+container: "system"
+
+flag {
+  name: "enable_perform_backup_tasks_in_settings"
+  namespace: "backstage_power"
+  description: "Enable the Perform Backup Tasks screen in Settings"
+  bug: "320563660"
+}
