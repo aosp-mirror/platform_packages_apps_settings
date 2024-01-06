@@ -21,7 +21,6 @@ import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -128,6 +127,8 @@ public class ResetNetwork extends InstrumentedFragment {
                         | ResetNetworkRequest.RESET_VPN_MANAGER;
         if (Flags.resetMobileNetworkSettings()) {
             resetOptions |= ResetNetworkRequest.RESET_IMS_STACK;
+            resetOptions |= ResetNetworkRequest.RESET_PHONE_PROCESS;
+            resetOptions |= ResetNetworkRequest.RESET_RILD;
         }
         ResetNetworkRequest request = new ResetNetworkRequest(resetOptions);
         if (mSubscriptions != null && mSubscriptions.size() > 0) {
