@@ -28,6 +28,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.TwoStatePreference;
 
+import com.android.server.display.feature.flags.Flags;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
@@ -95,7 +96,9 @@ public class ForcePeakRefreshRatePreferenceController extends DeveloperOptionsPr
 
     @VisibleForTesting
     void forcePeakRefreshRate(boolean enable) {
-        final float peakRefreshRate = enable ? Float.POSITIVE_INFINITY : NO_CONFIG;
+        final float valueIfEnabled = Flags.backUpSmoothDisplayAndForcePeakRefreshRate()
+                ? Float.POSITIVE_INFINITY : mPeakRefreshRate;
+        final float peakRefreshRate = enable ? valueIfEnabled : NO_CONFIG;
         Settings.System.putFloat(mContext.getContentResolver(),
             Settings.System.MIN_REFRESH_RATE, peakRefreshRate);
     }

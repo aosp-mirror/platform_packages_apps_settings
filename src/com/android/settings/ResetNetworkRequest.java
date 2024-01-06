@@ -51,6 +51,12 @@ public class ResetNetworkRequest {
     /* Reset option - reset IMS stack */
     public static final int RESET_IMS_STACK = 0x20;
 
+    /* Reset option - reset phone process */
+    public static final int RESET_PHONE_PROCESS = 0x40;
+
+    /* Reset option - reset RILD */
+    public static final int RESET_RILD = 0x80;
+
     /**
      *  Subscription ID indicates NOT resetting any of the components below:
      *  - TelephonyAndNetworkPolicy
@@ -263,6 +269,12 @@ public class ResetNetworkRequest {
         }
         if ((mResetOptions & RESET_IMS_STACK) != 0) {
             builder.resetIms(mSubscriptionIdToResetIms);
+        }
+        if ((mResetOptions & RESET_PHONE_PROCESS) != 0) {
+            builder.restartPhoneProcess();
+        }
+        if ((mResetOptions & RESET_RILD) != 0) {
+            builder.restartRild();
         }
         return builder;
     }

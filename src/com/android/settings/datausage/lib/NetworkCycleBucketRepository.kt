@@ -21,6 +21,7 @@ import android.net.NetworkTemplate
 import android.text.format.DateUtils
 import android.util.Range
 import com.android.settings.datausage.lib.NetworkCycleDataRepository.Companion.bucketRange
+import com.android.settings.datausage.lib.NetworkCycleDataRepository.Companion.getCycles
 import com.android.settings.datausage.lib.NetworkCycleDataRepository.Companion.reverseBucketRange
 import com.android.settings.datausage.lib.NetworkStatsRepository.Companion.Bucket
 import com.android.settings.datausage.lib.NetworkStatsRepository.Companion.aggregate
@@ -37,12 +38,8 @@ class NetworkCycleBucketRepository(
     fun loadCycles(): List<NetworkUsageData> =
         getCycles().map { aggregateUsage(it) }.filter { it.usage > 0 }
 
-    private fun getCycles(): List<Range<Long>> {
-        val policy = networkCycleDataRepository.getPolicy() ?: return queryCyclesAsFourWeeks()
-        return policy.cycleIterator().asSequence().map {
-            Range(it.lower.toInstant().toEpochMilli(), it.upper.toInstant().toEpochMilli())
-        }.toList()
-    }
+    private fun getCycles(): List<Range<Long>> =
+        networkCycleDataRepository.getPolicy()?.getCycles() ?: queryCyclesAsFourWeeks()
 
     private fun queryCyclesAsFourWeeks(): List<Range<Long>> {
         val timeRange = buckets.aggregate()?.timeRange ?: return emptyList()
