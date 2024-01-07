@@ -58,22 +58,29 @@ public class UiccSlotUtil {
     public static final int INVALID_PORT_ID = -1;
 
     @VisibleForTesting
-    static class SimSlotChangeReceiver extends BroadcastReceiver{
+    static class SimCardStateChangeReceiver extends BroadcastReceiver{
         private final CountDownLatch mLatch;
-        SimSlotChangeReceiver(CountDownLatch latch) {
+        SimCardStateChangeReceiver(CountDownLatch latch) {
             mLatch = latch;
         }
 
         public void registerOn(Context context) {
             context.registerReceiver(this,
-                    new IntentFilter(TelephonyManager.ACTION_SIM_SLOT_STATUS_CHANGED),
-                    Context.RECEIVER_EXPORTED/*UNAUDITED*/);
+                    new IntentFilter(TelephonyManager.ACTION_SIM_CARD_STATE_CHANGED),
+                    Context.RECEIVER_NOT_EXPORTED);
         }
 
         @Override
         public void onReceive(Context context, Intent intent) {
             Log.i(TAG, "Action: " + intent.getAction());
-            if (TelephonyManager.ACTION_SIM_SLOT_STATUS_CHANGED.equals(intent.getAction())) {
+            if (!TelephonyManager.ACTION_SIM_CARD_STATE_CHANGED.equals(intent.getAction())) {
+                return;
+            }
+            final int simState = intent.getIntExtra(
+                    TelephonyManager.EXTRA_SIM_STATE, TelephonyManager.SIM_STATE_UNKNOWN);
+            Log.i(TAG, "simState: " + simState);
+            if (simState != TelephonyManager.SIM_STATE_UNKNOWN
+                    && simState != TelephonyManager.SIM_STATE_ABSENT) {
                 mLatch.countDown();
             }
         }
@@ -269,8 +276,8 @@ public class UiccSlotUtil {
         try {
             CountDownLatch latch = new CountDownLatch(1);
             if (isMultipleEnabledProfilesSupported(telMgr)) {
-                receiver = new SimSlotChangeReceiver(latch);
-                ((SimSlotChangeReceiver) receiver).registerOn(context);
+                receiver = new SimCardStateChangeReceiver(latch);
+                ((SimCardStateChangeReceiver) receiver).registerOn(context);
             } else {
                 receiver = new CarrierConfigChangedReceiver(latch);
                 ((CarrierConfigChangedReceiver) receiver).registerOn(context);
