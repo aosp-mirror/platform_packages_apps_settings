@@ -163,8 +163,8 @@
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Езикът може да се различава от езиците, налични в приложението. Възможно е някои приложения да не поддържат тази настройка."</string>
     <string name="desc_app_locale_selection_supported" msgid="6744909281573556379">"Задайте език за всяко приложение."</string>
     <string name="desc_introduction_of_language_picker" msgid="1038423471887102449">"Системата, приложенията и уебсайтовете използват първия поддържан език от тези, които предпочитате."</string>
-    <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"За да изберете език за всяко отделно приложение, отворете съответните настройки."</string>
-    <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Научете повече за езиците на приложението"</string>
+    <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"За да изберете език за всяко отделно приложение, отворете настройките за език на приложенията."</string>
+    <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Научете повече за езиците на приложенията"</string>
     <string name="title_change_system_locale" msgid="8589844586256566951">"Искате ли да промените системния език на %s?"</string>
     <string name="desc_notice_device_locale_settings_change" msgid="8311132485850714160">"Настройките на устройството и регионалните ви предпочитания ще бъдат променени."</string>
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"Промяна"</string>
@@ -240,7 +240,7 @@
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Стандартно време"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"Избиране по регион"</string>
     <string name="zone_menu_by_offset" msgid="1257702747474426745">"Избиране по отместване от UTC"</string>
-    <string name="lock_after_timeout" msgid="8682769000437403444">"Заключв. след времето за изчакване"</string>
+    <string name="lock_after_timeout" msgid="8682769000437403444">"Заключв. след времето до авт. изкл."</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> след времето за изчакване"</string>
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"Веднага след времето за изчакване, освен когато екранът се поддържа отключен от <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> след времето за изчакване, освен когато екранът се поддържа отключен от <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
@@ -1047,7 +1047,7 @@
     <string name="dark_ui_text" msgid="4392646155331126666">"Тъмната тема използва черен фон с цел удължаване на живота на батерията на някои екрани. Графиците за нея изчакват с включването, докато екранът ви не се изключи."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Понастоящем тъмната тема следва графика ви за режима „Време за сън“"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Настройки за режима „Време за сън“"</string>
-    <string name="screen_timeout" msgid="7709947617767439410">"Време за изчакване на екрана"</string>
+    <string name="screen_timeout" msgid="7709947617767439410">"Време до автоматично изключване на екрана"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"След <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> неактивност"</string>
     <string name="screen_timeout_summary_not_set" msgid="5107680774964178875">"Не е зададено"</string>
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"Тапет"</string>
@@ -1384,7 +1384,7 @@
     <string name="about_settings_summary" msgid="4831942939227432513">"Преглед на състоянието, правната информация и версията на софтуера"</string>
     <string name="legal_information" msgid="7509900979811934843">"Правна информация"</string>
     <string name="manual" msgid="3651593989906084868">"Ръководство"</string>
-    <string name="regulatory_labels" msgid="5960251403367154270">"Регулативни етикети"</string>
+    <string name="regulatory_labels" msgid="5960251403367154270">"Регулаторни етикети"</string>
     <string name="safety_and_regulatory_info" msgid="8285048080439298528">"Наръчник за безопасността и норм. изисквания"</string>
     <string name="copyright_title" msgid="83245306827757857">"Авторски права"</string>
     <string name="license_title" msgid="8745742085916617540">"Лиценз"</string>
@@ -2975,6 +2975,10 @@
     <string name="ring_volume_option_title" msgid="1520802026403038560">"Сила на звука за звън. и известия"</string>
     <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"Сила на звука при звънене"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"Сила на звука при известие"</string>
+    <string name="ringer_content_description_silent_mode" msgid="1442257660889685934">"Звъненето е в тих режим"</string>
+    <string name="ringer_content_description_vibrate_mode" msgid="5946432791951870480">"Вибрира при звънене"</string>
+    <string name="notification_volume_content_description_vibrate_mode" msgid="6097212000507408288">"Силата на звука на известията е спряна. При известия ще се вибрира"</string>
+    <string name="volume_content_description_silent_mode" msgid="377680514551405754">"Звукът на „<xliff:g id="VOLUME_TYPE">%1$s</xliff:g>“ е спрян"</string>
     <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"Не е налице, защото звъненето е спряно"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"Мелодия на телефона"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Стандартен звук за известяване"</string>
