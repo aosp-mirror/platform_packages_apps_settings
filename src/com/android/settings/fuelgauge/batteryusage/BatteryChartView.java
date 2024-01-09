@@ -784,10 +784,16 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
             }
             final AccessibilityNodeInfo childInfo =
                     new AccessibilityNodeInfo(BatteryChartView.this, index);
+            final String slotTimeInfo = mViewModel.getFullText(index);
+            final String batteryLevelInfo = mViewModel.getSlotBatteryLevelText(index);
             onInitializeAccessibilityNodeInfo(childInfo);
             childInfo.setClickable(isValidToDraw(mViewModel, index));
-            childInfo.setText(mViewModel.getFullText(index));
-            childInfo.setContentDescription(mViewModel.getFullText(index));
+            childInfo.setText(slotTimeInfo);
+            childInfo.setContentDescription(
+                    mContext.getString(
+                            R.string.battery_usage_time_info_and_battery_level,
+                            slotTimeInfo,
+                            batteryLevelInfo));
 
             final Rect bounds = new Rect();
             getBoundsOnScreen(bounds, true);
