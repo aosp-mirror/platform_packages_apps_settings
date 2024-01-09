@@ -107,7 +107,7 @@ class DataUsagePreferenceController(context: Context, key: String) :
 
     private fun getDataUsageSummary(): String? {
         val repository = createNetworkCycleDataRepository() ?: return null
-        repository.loadFirstCycle()?.takeIf { it.usage > 0 }?.let { usageData ->
+        repository.loadFirstCycle()?.let { usageData ->
             return mContext.getString(
                 R.string.data_usage_template,
                 usageData.formatUsage(mContext),
