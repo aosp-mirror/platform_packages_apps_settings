@@ -345,6 +345,7 @@ public class Settings extends SettingsActivity {
         /* empty */
     }
 
+    public static class SatelliteSettingActivity extends SettingsActivity { /* empty */ }
     public static class ApnSettingsActivity extends SettingsActivity { /* empty */ }
     public static class WifiCallingSettingsActivity extends SettingsActivity { /* empty */ }
     public static class MemorySettingsActivity extends SettingsActivity { /* empty */ }
