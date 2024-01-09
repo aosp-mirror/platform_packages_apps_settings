@@ -19,16 +19,21 @@ package com.android.settings.network.apn
 import android.net.Uri
 import android.os.Bundle
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Done
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
@@ -39,6 +44,7 @@ import com.android.settings.network.apn.ApnNetworkTypes.getNetworkTypeDisplayNam
 import com.android.settings.network.apn.ApnNetworkTypes.getNetworkTypeSelectedOptionsState
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
 import com.android.settingslib.spa.framework.compose.LocalNavController
+import com.android.settingslib.spa.framework.theme.SettingsDimension
 import com.android.settingslib.spa.widget.editor.SettingsExposedDropdownMenuBox
 import com.android.settingslib.spa.widget.editor.SettingsExposedDropdownMenuCheckBox
 import com.android.settingslib.spa.widget.editor.SettingsOutlinedTextField
@@ -98,25 +104,47 @@ fun ApnPage(apnDataInit: ApnData, apnDataCur: MutableState<ApnData>, uriInit: Ur
         getNetworkTypeSelectedOptionsState(apnData.networkType)
     }
     val navController = LocalNavController.current
+    var valid: String?
     RegularScaffold(
         title = if (apnDataInit.newApn) stringResource(id = R.string.apn_add) else stringResource(id = R.string.apn_edit),
         actions = {
             if (!apnData.customizedConfig.readOnlyApn) {
                 IconButton(onClick = {
-                    if (!apnData.validEnabled) apnData = apnData.copy(validEnabled = true)
-                    val valid = validateAndSaveApnData(
+                    apnData = apnData.copy(
+                        networkType = ApnNetworkTypes.getNetworkType(
+                            networkTypeSelectedOptionsState
+                        )
+                    )
+                    valid = validateAndSaveApnData(
                         apnDataInit,
                         apnData,
                         context,
-                        uriInit,
-                        networkTypeSelectedOptionsState
+                        uriInit
                     )
-                    if (valid) navController.navigateBack()
+                    if (valid == null) navController.navigateBack()
+                    else if (!apnData.validEnabled) apnData = apnData.copy(validEnabled = true)
                 }) { Icon(imageVector = Icons.Outlined.Done, contentDescription = null) }
             }
         },
     ) {
         Column {
+            if (apnData.validEnabled) {
+                apnData = apnData.copy(
+                    networkType = ApnNetworkTypes.getNetworkType(
+                        networkTypeSelectedOptionsState
+                    )
+                )
+                valid = validateApnData(uriInit, apnData, context)
+                valid?.let {
+                    Text(
+                        text = it,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(SettingsDimension.menuFieldPadding),
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                }
+            }
             SettingsOutlinedTextField(
                 value = apnData.name,
                 label = stringResource(R.string.apn_name),
