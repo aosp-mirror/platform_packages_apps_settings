@@ -52,8 +52,9 @@ public class PrivateSpaceSetupActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
         setContentView(R.layout.privatespace_setup_root);
-        mNavHostFragment = (NavHostFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.ps_nav_host_fragment);
+        mNavHostFragment =
+                (NavHostFragment)
+                        getSupportFragmentManager().findFragmentById(R.id.ps_nav_host_fragment);
         mNavHostFragment.getNavController().setGraph(R.navigation.privatespace_main_context_nav);
     }
 

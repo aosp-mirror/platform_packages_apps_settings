@@ -29,6 +29,7 @@ import static com.android.settings.privatespace.PrivateSpaceSetupActivity.SET_LO
 import android.app.KeyguardManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultLauncher;
@@ -42,16 +43,18 @@ import com.android.settings.overlay.FeatureFactory;
 
 import com.google.android.setupdesign.util.ThemeHelper;
 
-/** Activity that is started as private profile user that helps to set private profile lock or
- * add an account on the private profile. */
+/**
+ * Activity that is started as private profile user that helps to set private profile lock or add an
+ * account on the private profile.
+ */
 public class PrivateProfileContextHelperActivity extends FragmentActivity {
-    private static final String TAG = "PrivateProfileHelper";
+    private static final String TAG = "PrivateSpaceHelperAct";
     private final ActivityResultLauncher<Intent> mAddAccountToPrivateProfile =
-            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
-                    this::onAccountAdded);
+            registerForActivityResult(
+                    new ActivityResultContracts.StartActivityForResult(), this::onAccountAdded);
     private final ActivityResultLauncher<Intent> mVerifyDeviceLock =
-            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
-                    this::onSetDeviceNewLock);
+            registerForActivityResult(
+                    new ActivityResultContracts.StartActivityForResult(), this::onSetDeviceNewLock);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,8 +69,8 @@ public class PrivateProfileContextHelperActivity extends FragmentActivity {
             if (action == ACCOUNT_LOGIN_ACTION) {
                 PrivateSpaceLoginFeatureProvider privateSpaceLoginFeatureProvider =
                         FeatureFactory.getFeatureFactory().getPrivateSpaceLoginFeatureProvider();
-                if (!privateSpaceLoginFeatureProvider.initiateAccountLogin(this,
-                        mAddAccountToPrivateProfile)) {
+                if (!privateSpaceLoginFeatureProvider.initiateAccountLogin(
+                        this, mAddAccountToPrivateProfile)) {
                     setResult(RESULT_OK);
                     finish();
                 }
@@ -90,8 +93,10 @@ public class PrivateProfileContextHelperActivity extends FragmentActivity {
 
     private void onAccountAdded(@Nullable ActivityResult result) {
         if (result != null && result.getResultCode() == RESULT_OK) {
+            Log.i(TAG, "private space account login success");
             setResult(RESULT_OK);
         } else {
+            Log.i(TAG, "private space account login failed");
             setResult(RESULT_CANCELED);
         }
         finish();
@@ -101,8 +106,10 @@ public class PrivateProfileContextHelperActivity extends FragmentActivity {
         // TODO(b/307281644) : Verify this for biometrics and check result code after new
         //  Authentication changes are merged.
         if (result != null && getSystemService(KeyguardManager.class).isDeviceSecure()) {
+            Log.i(TAG, "separate private space lock setup success");
             setResult(RESULT_OK);
         } else {
+            Log.i(TAG, "separate private space lock not setup");
             setResult(RESULT_CANCELED);
         }
         finish();
