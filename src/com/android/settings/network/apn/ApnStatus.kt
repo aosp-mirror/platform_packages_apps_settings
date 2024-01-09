@@ -514,7 +514,7 @@ fun deleteApn(uri: Uri, context: Context) {
 }
 
 fun validateMMSC(validEnabled: Boolean, mmsc: String, context: Context): String? {
-    return if (validEnabled && !mmsc.matches(Regex("^https?:\\/\\/.+")))
+    return if (validEnabled && mmsc != "" && !mmsc.matches(Regex("^https?:\\/\\/.+")))
         context.resources.getString(R.string.error_mmsc_valid)
     else null
 }
