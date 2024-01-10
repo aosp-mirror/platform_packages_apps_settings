@@ -289,8 +289,9 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
             return;
         }
         setBackPreferenceListAnimatorIfLoaded();
-        final EnforcedAdmin admin = RestrictedLockUtilsInternal.checkIfMeteredDataRestricted(
-                mContext, mPackageName, UserHandle.getUserId(mAppItem.key));
+        final EnforcedAdmin admin = RestrictedLockUtilsInternal
+                .checkIfMeteredDataUsageUserControlDisabled(mContext, mPackageName,
+                        UserHandle.getUserId(mAppItem.key));
         if (mRestrictBackground != null) {
             mRestrictBackground.setChecked(!restrictBackground);
             mRestrictBackground.setDisabledByAdmin(admin);

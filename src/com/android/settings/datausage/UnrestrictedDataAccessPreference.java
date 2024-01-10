@@ -13,7 +13,7 @@
  */
 package com.android.settings.datausage;
 
-import static com.android.settingslib.RestrictedLockUtilsInternal.checkIfMeteredDataRestricted;
+import static com.android.settingslib.RestrictedLockUtilsInternal.checkIfMeteredDataUsageUserControlDisabled;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -56,8 +56,8 @@ public class UnrestrictedDataAccessPreference extends AppSwitchPreference implem
         mApplicationsState = applicationsState;
         mDataSaverBackend = dataSaverBackend;
         mParentFragment = parentFragment;
-        setDisabledByAdmin(checkIfMeteredDataRestricted(context, entry.info.packageName,
-                UserHandle.getUserId(entry.info.uid)));
+        setDisabledByAdmin(checkIfMeteredDataUsageUserControlDisabled(
+                context, entry.info.packageName, UserHandle.getUserId(entry.info.uid)));
         updateState();
         setKey(generateKey(mEntry));
 
