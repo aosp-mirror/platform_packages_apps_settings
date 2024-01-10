@@ -203,7 +203,6 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                                     + sourceId
                                     + ", reason = "
                                     + reason);
-                    AudioSharingUtils.updateActiveDeviceIfNeeded(mBtManager);
                 }
 
                 @Override
