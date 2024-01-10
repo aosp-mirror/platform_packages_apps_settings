@@ -42,7 +42,8 @@
             android:id="@+id/preview_pager"
             android:layout_width="match_parent"
             android:layout_height="217dp"
-            android:contentDescription="@string/preview_pager_content_description" />
+            android:contentDescription="@string/preview_pager_content_description"
+            android:nestedScrollingEnabled="true" />
 
         <com.android.settings.widget.DotsPageIndicator
             android:id="@+id/page_indicator"
