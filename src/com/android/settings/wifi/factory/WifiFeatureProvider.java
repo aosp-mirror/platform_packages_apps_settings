@@ -16,13 +16,13 @@
 
 package com.android.settings.wifi.factory;
 
-import android.annotation.Nullable;
 import android.content.Context;
 import android.net.TetheringManager;
 import android.net.wifi.WifiManager;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 

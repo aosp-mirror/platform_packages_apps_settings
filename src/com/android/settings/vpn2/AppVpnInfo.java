@@ -1,6 +1,6 @@
 package com.android.settings.vpn2;
 
-import android.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.android.internal.util.Preconditions;
 

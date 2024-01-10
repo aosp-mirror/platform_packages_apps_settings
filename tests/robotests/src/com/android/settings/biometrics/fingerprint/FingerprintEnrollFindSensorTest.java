@@ -36,7 +36,6 @@ import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.verify;
 import static org.robolectric.RuntimeEnvironment.application;
 
-import android.annotation.NonNull;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
@@ -52,6 +51,7 @@ import android.os.CancellationSignal;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.android.settings.R;

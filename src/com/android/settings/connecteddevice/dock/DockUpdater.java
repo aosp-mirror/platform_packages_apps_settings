@@ -15,8 +15,9 @@
  */
 package com.android.settings.connecteddevice.dock;
 
-import android.annotation.NonNull;
 import android.content.Context;
+
+import androidx.annotation.NonNull;
 
 /**
  * Update the dock devices. It notifies the upper level whether to add/remove the preference

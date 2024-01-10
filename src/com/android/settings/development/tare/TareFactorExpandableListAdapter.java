@@ -18,13 +18,14 @@ package com.android.settings.development.tare;
 
 import static android.app.tare.EconomyManager.CAKE_IN_ARC;
 
-import android.annotation.NonNull;
 import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 
 import com.android.settings.R;
 

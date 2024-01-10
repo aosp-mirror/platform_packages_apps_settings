@@ -16,12 +16,12 @@
 
 package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
-import android.annotation.Nullable;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.LifecycleOwner;
 
 import com.android.settings.bluetooth.Utils;
