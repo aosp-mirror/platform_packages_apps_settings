@@ -70,9 +70,8 @@ public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
 
         boolean isFilterMatched = false;
         if (isDeviceConnected(cachedDevice) && isDeviceInCachedDevicesList(cachedDevice)) {
-            if (DBG) {
-                Log.d(TAG, "isFilterMatched() current audio profile : " + currentAudioProfile);
-            }
+            Log.d(TAG, "isFilterMatched() current audio profile : " + currentAudioProfile);
+
             // If device is Hearing Aid, it is compatible with HFP and A2DP.
             // It would show in Available Devices group.
             if (cachedDevice.isConnectedAshaHearingAidDevice()) {
@@ -111,14 +110,12 @@ public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
                     isFilterMatched = cachedDevice.isConnectedHfpDevice();
                     break;
             }
-            if (DBG) {
-                Log.d(
-                        TAG,
-                        "isFilterMatched() device : "
-                                + cachedDevice.getName()
-                                + ", isFilterMatched : "
-                                + isFilterMatched);
-            }
+            Log.d(
+                    TAG,
+                    "isFilterMatched() device : "
+                            + cachedDevice.getName()
+                            + ", isFilterMatched : "
+                            + isFilterMatched);
         }
         return isFilterMatched;
     }
