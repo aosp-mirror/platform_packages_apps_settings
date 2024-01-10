@@ -95,9 +95,6 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
     private static final String ALTERNATE_INTENT = "android.settings.SYNC_SETTINGS";
     private static final String PRIMARY_INTENT = "android.settings.CREDENTIAL_PROVIDER";
     private static final int MAX_SELECTABLE_PROVIDERS = 5;
-    private static final String SETTINGS_ACTIVITY_INTENT_ACTION = "android.intent.action.MAIN";
-    private static final String SETTINGS_ACTIVITY_INTENT_CATEGORY =
-            "android.intent.category.LAUNCHER";
 
     private final PackageManager mPm;
     private final List<CredentialProviderInfo> mServices;
@@ -475,6 +472,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
 
             // If this provider is displayed at the top then we should not show it.
             if (topProvider != null
+                    && topProvider.getApplicationInfo() != null
                     && topProvider.getApplicationInfo().packageName.equals(packageName)) {
                 continue;
             }
@@ -483,10 +481,6 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
             if (combinedInfo.getCredentialProviderInfos().isEmpty()) {
                 continue;
             }
-
-            // Get the settings activity.
-            CharSequence settingsActivity =
-                    combinedInfo.getCredentialProviderInfos().get(0).getSettingsActivity();
 
             Drawable icon = combinedInfo.getAppIcon(context, getUser());
             CharSequence title = combinedInfo.getAppName(context);
@@ -499,7 +493,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
                             icon,
                             packageName,
                             combinedInfo.getSettingsSubtitle(),
-                            settingsActivity);
+                            combinedInfo.getSettingsActivity());
             output.put(packageName, pref);
             group.addPreference(pref);
         }
@@ -626,43 +620,12 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
 
                     @Override
                     public void onLeftSideClicked() {
-                        if (settingsActivity == null) {
-                            Log.w(TAG, "settingsActivity was null");
-                            return;
+                        Intent settingsIntent =
+                                CombinedProviderInfo.createSettingsActivityIntent(
+                                        mContext, packageName, settingsActivity, getUser());
+                        if (settingsIntent != null) {
+                            mContext.startActivity(settingsIntent);
                         }
-
-                        String settingsActivityStr = String.valueOf(settingsActivity);
-                        ComponentName cn = ComponentName.unflattenFromString(settingsActivityStr);
-                        if (cn == null) {
-                            Log.w(
-                                    TAG,
-                                    "Failed to deserialize settingsActivity attribute, we got: "
-                                            + settingsActivityStr);
-                            return;
-                        }
-
-                        Intent intent = new Intent(SETTINGS_ACTIVITY_INTENT_ACTION);
-                        intent.addCategory(SETTINGS_ACTIVITY_INTENT_CATEGORY);
-                        intent.setComponent(cn);
-
-                        Context context = mContext;
-                        int currentUserId = getUser();
-                        int contextUserId = context.getUser().getIdentifier();
-
-                        if (currentUserId != contextUserId) {
-                            Log.d(
-                                    TAG,
-                                    "onLeftSideClicked(): using context for current user ("
-                                            + currentUserId
-                                            + ") instead of user "
-                                            + contextUserId
-                                            + " on headless system user mode");
-                            context =
-                                    context.createContextAsUser(
-                                            UserHandle.of(currentUserId), /* flags= */ 0);
-                        }
-
-                        context.startActivity(intent);
                     }
                 });
 
