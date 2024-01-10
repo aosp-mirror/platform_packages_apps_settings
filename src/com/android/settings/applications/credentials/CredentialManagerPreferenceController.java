@@ -899,8 +899,18 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             return new AlertDialog.Builder(getActivity())
-                    .setTitle(getContext().getString(R.string.credman_error_message_title))
-                    .setMessage(getContext().getString(R.string.credman_error_message))
+                    .setTitle(
+                            getContext()
+                                    .getString(
+                                            Flags.newSettingsUi()
+                                                    ? R.string.credman_limit_error_msg_title
+                                                    : R.string.credman_error_message_title))
+                    .setMessage(
+                            getContext()
+                                    .getString(
+                                            Flags.newSettingsUi()
+                                                    ? R.string.credman_limit_error_msg
+                                                    : R.string.credman_error_message))
                     .setPositiveButton(android.R.string.ok, this)
                     .create();
         }
