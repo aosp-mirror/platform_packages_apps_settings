@@ -120,6 +120,10 @@ android_library {
         "telephony-common",
         "ims-common",
     ],
+
+    lint: {
+        extra_check_modules: ["SettingsLibLintChecker"],
+    },
 }
 
 platform_compat_config {
