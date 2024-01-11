@@ -26,6 +26,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
 import com.android.settings.core.BasePreferenceController;
+import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.datetime.ZoneGetter;
 
 import java.util.Calendar;
@@ -52,6 +53,12 @@ public class TimeZonePreferenceController extends BasePreferenceController {
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
+
+        if (preference instanceof RestrictedPreference
+                && ((RestrictedPreference) preference).isDisabledByAdmin()) {
+            return;
+        }
+
         preference.setEnabled(shouldEnableManualTimeZoneSelection());
     }
 
