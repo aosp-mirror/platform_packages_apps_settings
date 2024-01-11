@@ -109,13 +109,14 @@ class AudioStreamsHelper {
     }
 
     /** Retrieves a list of all LE broadcast receive states from active sinks. */
-    List<BluetoothLeBroadcastReceiveState> getAllSources() {
+    List<BluetoothLeBroadcastReceiveState> getAllConnectedSources() {
         if (mLeBroadcastAssistant == null) {
             Log.w(TAG, "getAllSources(): LeBroadcastAssistant is null!");
             return emptyList();
         }
         return getActiveSinksOnAssistant(mBluetoothManager).stream()
                 .flatMap(sink -> mLeBroadcastAssistant.getAllSources(sink).stream())
+                .filter(this::isConnected)
                 .toList();
     }
 
@@ -124,7 +125,7 @@ class AudioStreamsHelper {
         return mLeBroadcastAssistant;
     }
 
-    static boolean isConnected(BluetoothLeBroadcastReceiveState state) {
+    boolean isConnected(BluetoothLeBroadcastReceiveState state) {
         return state.getPaSyncState() == BluetoothLeBroadcastReceiveState.PA_SYNC_STATE_SYNCHRONIZED
                 && state.getBigEncryptionState()
                         == BluetoothLeBroadcastReceiveState.BIG_ENCRYPTION_STATE_DECRYPTING;
