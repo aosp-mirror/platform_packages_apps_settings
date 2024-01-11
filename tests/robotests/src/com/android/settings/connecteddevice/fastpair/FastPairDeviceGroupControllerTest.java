@@ -25,6 +25,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 
 import android.bluetooth.BluetoothAdapter;
@@ -41,6 +42,7 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.flags.Flags;
@@ -70,10 +72,13 @@ public class FastPairDeviceGroupControllerTest {
     @Rule
     public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
 
+    private static final String KEY = "fast_pair_device_list";
+
     @Mock private DashboardFragment mDashboardFragment;
     @Mock private FastPairDeviceUpdater mFastPairDeviceUpdater;
     @Mock private PackageManager mPackageManager;
     @Mock private PreferenceManager mPreferenceManager;
+    @Mock private PreferenceScreen mScreen;
     private ShadowBluetoothAdapter mShadowBluetoothAdapter;
     private Context mContext;
     private FastPairDeviceGroupController mFastPairDeviceGroupController;
@@ -96,12 +101,14 @@ public class FastPairDeviceGroupControllerTest {
         doReturn(mPreferenceManager).when(mPreferenceGroup).getPreferenceManager();
         mPreferenceGroup.setVisible(false);
         mFastPairDeviceGroupController.setPreferenceGroup(mPreferenceGroup);
+        when(mScreen.findPreference(KEY)).thenReturn(mPreferenceGroup);
+        when(mScreen.getContext()).thenReturn(mContext);
         mShadowBluetoothAdapter = Shadow.extract(BluetoothAdapter.getDefaultAdapter());
     }
 
     @Test
     @RequiresFlagsEnabled(Flags.FLAG_ENABLE_SUBSEQUENT_PAIR_SETTINGS_INTEGRATION)
-    public void testRegister() {
+    public void onStart_flagOn_registerCallback() {
         // register the callback in onStart()
         mFastPairDeviceGroupController.onStart(mLifecycleOwner);
         verify(mFastPairDeviceUpdater).registerCallback();
@@ -114,7 +121,7 @@ public class FastPairDeviceGroupControllerTest {
 
     @Test
     @RequiresFlagsEnabled(Flags.FLAG_ENABLE_SUBSEQUENT_PAIR_SETTINGS_INTEGRATION)
-    public void testUnregister() {
+    public void onStop_flagOn_unregisterCallback() {
         // register broadcast first
         mContext.registerReceiver(
                 mFastPairDeviceGroupController.mReceiver, null, Context.RECEIVER_EXPORTED);
@@ -127,7 +134,33 @@ public class FastPairDeviceGroupControllerTest {
 
     @Test
     @RequiresFlagsDisabled(Flags.FLAG_ENABLE_SUBSEQUENT_PAIR_SETTINGS_INTEGRATION)
-    public void testGetAvailabilityStatus_noFastPairFeature_returnUnSupported() {
+    public void onStart_flagOff_registerCallback() {
+        // register the callback in onStart()
+        mFastPairDeviceGroupController.onStart(mLifecycleOwner);
+        assertThat(mFastPairDeviceUpdater).isNull();
+        verify(mContext)
+                .registerReceiver(
+                        mFastPairDeviceGroupController.mReceiver,
+                        mFastPairDeviceGroupController.mIntentFilter,
+                        Context.RECEIVER_EXPORTED);
+    }
+
+    @Test
+    @RequiresFlagsDisabled(Flags.FLAG_ENABLE_SUBSEQUENT_PAIR_SETTINGS_INTEGRATION)
+    public void onStop_flagOff_unregisterCallback() {
+        // register broadcast first
+        mContext.registerReceiver(
+                mFastPairDeviceGroupController.mReceiver, null, Context.RECEIVER_EXPORTED);
+
+        // unregister the callback in onStop()
+        mFastPairDeviceGroupController.onStop(mLifecycleOwner);
+        assertThat(mFastPairDeviceUpdater).isNull();
+        verify(mContext).unregisterReceiver(mFastPairDeviceGroupController.mReceiver);
+    }
+
+    @Test
+    @RequiresFlagsDisabled(Flags.FLAG_ENABLE_SUBSEQUENT_PAIR_SETTINGS_INTEGRATION)
+    public void getAvailabilityStatus_noFastPairFeature_returnUnSupported() {
         doReturn(true).when(mPackageManager).hasSystemFeature(PackageManager.FEATURE_BLUETOOTH);
 
         assertThat(mFastPairDeviceGroupController.getAvailabilityStatus())
@@ -135,8 +168,8 @@ public class FastPairDeviceGroupControllerTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_ENABLE_SUBSEQUENT_PAIR_SETTINGS_INTEGRATION)
-    public void testGetAvailabilityStatus_noBluetoothFeature_returnUnSupported() {
+    @RequiresFlagsDisabled(Flags.FLAG_ENABLE_SUBSEQUENT_PAIR_SETTINGS_INTEGRATION)
+    public void getAvailabilityStatus_noBluetoothFastPairFeature_returnUnSupported() {
         doReturn(false).when(mPackageManager).hasSystemFeature(PackageManager.FEATURE_BLUETOOTH);
 
         assertThat(mFastPairDeviceGroupController.getAvailabilityStatus())
@@ -145,15 +178,23 @@ public class FastPairDeviceGroupControllerTest {
 
     @Test
     @RequiresFlagsEnabled(Flags.FLAG_ENABLE_SUBSEQUENT_PAIR_SETTINGS_INTEGRATION)
-    public void testGetAvailabilityStatus_withBluetoothFastPairFeature_returnSupported() {
+    public void getAvailabilityStatus_noBluetoothFeature_returnUnSupported() {
+        doReturn(false).when(mPackageManager).hasSystemFeature(PackageManager.FEATURE_BLUETOOTH);
+
+        assertThat(mFastPairDeviceGroupController.getAvailabilityStatus())
+                .isEqualTo(UNSUPPORTED_ON_DEVICE);
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_ENABLE_SUBSEQUENT_PAIR_SETTINGS_INTEGRATION)
+    public void getAvailabilityStatus_withBluetoothFastPairFeature_returnSupported() {
         doReturn(true).when(mPackageManager).hasSystemFeature(PackageManager.FEATURE_BLUETOOTH);
 
         assertThat(mFastPairDeviceGroupController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_ENABLE_SUBSEQUENT_PAIR_SETTINGS_INTEGRATION)
-    public void testUpdatePreferenceVisibility_bluetoothIsDisable_shouldHidePreference() {
+    public void updatePreferenceVisibility_bluetoothIsDisable_shouldHidePreference() {
         mShadowBluetoothAdapter.setEnabled(true);
         final GearPreference preference1 = new GearPreference(mContext, null /* AttributeSet */);
         mFastPairDeviceGroupController.onDeviceAdded(preference1);
@@ -170,5 +211,38 @@ public class FastPairDeviceGroupControllerTest {
 
         shadowOf(Looper.getMainLooper()).idle();
         assertThat(mPreferenceGroup.isVisible()).isFalse();
+    }
+
+    @Test
+    public void onDeviceAdd_bluetoothIsDisable_shouldHidePreference() {
+        mShadowBluetoothAdapter.setEnabled(true);
+        final GearPreference preference1 = new GearPreference(mContext, null /* AttributeSet */);
+        mFastPairDeviceGroupController.onDeviceAdded(preference1);
+        assertThat(mPreferenceGroup.isVisible()).isTrue();
+    }
+
+    @Test
+    public void onDeviceRemoved_bluetoothIsDisable_shouldHidePreference() {
+        mShadowBluetoothAdapter.setEnabled(true);
+        final GearPreference preference1 = new GearPreference(mContext, null /* AttributeSet */);
+        mPreferenceGroup.addPreference(preference1);
+        mFastPairDeviceGroupController.onDeviceRemoved(preference1);
+        assertThat(mPreferenceGroup.isVisible()).isFalse();
+    }
+
+    @Test
+    @RequiresFlagsDisabled(Flags.FLAG_ENABLE_SUBSEQUENT_PAIR_SETTINGS_INTEGRATION)
+    public void displayPreference_notAvailable_doNothing() {
+        mFastPairDeviceGroupController.displayPreference(mScreen);
+        assertThat(mPreferenceGroup.isVisible()).isFalse();
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_ENABLE_SUBSEQUENT_PAIR_SETTINGS_INTEGRATION)
+    public void displayPreference_isAvailable_fetchFastPairDevices() {
+        doReturn(true).when(mPackageManager).hasSystemFeature(PackageManager.FEATURE_BLUETOOTH);
+
+        mFastPairDeviceGroupController.displayPreference(mScreen);
+        verify(mFastPairDeviceUpdater).forceUpdate();
     }
 }

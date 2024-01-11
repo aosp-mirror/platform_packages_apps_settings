@@ -21,8 +21,6 @@ import static android.text.Layout.HYPHENATION_FREQUENCY_NONE;
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.annotation.IntDef;
-import android.annotation.NonNull;
-import android.annotation.Nullable;
 import android.annotation.RawRes;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
@@ -60,6 +58,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.IdRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
 import com.android.internal.annotations.VisibleForTesting;

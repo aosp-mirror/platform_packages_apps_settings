@@ -16,10 +16,14 @@
 
 package com.android.settings.applications.specialaccess;
 
+import android.app.role.RoleManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.nfc.NfcAdapter;
+import android.nfc.cardemulation.CardEmulation;
 import android.os.UserManager;
+import android.permission.flags.Flags;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -59,6 +63,20 @@ public class DefaultPaymentSettingsPreferenceController extends BasePreferenceCo
 
         final Preference preference = screen.findPreference(getPreferenceKey());
         mPaymentSettingsEnabler = new PaymentSettingsEnabler(mContext, preference);
+    }
+
+    @Override
+    public boolean handlePreferenceTreeClick(Preference preference) {
+        if (Flags.walletRoleEnabled()
+                && mPreferenceKey.equals(preference.getKey())) {
+            RoleManager roleManager = mContext.getSystemService(RoleManager.class);
+            if (roleManager.isRoleAvailable(RoleManager.ROLE_WALLET)) {
+                Intent intent = new Intent(CardEmulation.ACTION_CHANGE_DEFAULT);
+                mContext.startActivity(intent);
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

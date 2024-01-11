@@ -17,7 +17,6 @@ package com.android.settings.applications.specialaccess.interactacrossprofiles;
 
 import static android.app.admin.DevicePolicyResources.Strings.Settings.CONNECTED_WORK_AND_PERSONAL_APPS_TITLE;
 
-import android.annotation.Nullable;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -32,6 +31,7 @@ import android.util.IconDrawableFactory;
 import android.util.Pair;
 import android.view.View;
 
+import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceClickListener;
 import androidx.preference.PreferenceScreen;

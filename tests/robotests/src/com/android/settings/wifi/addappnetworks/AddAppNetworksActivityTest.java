@@ -22,12 +22,12 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
-import android.annotation.Nullable;
 import android.app.IActivityManager;
 import android.content.Context;
 import android.os.RemoteException;
 import android.os.UserManager;
 
+import androidx.annotation.Nullable;
 import androidx.test.core.app.ApplicationProvider;
 
 import org.junit.Before;

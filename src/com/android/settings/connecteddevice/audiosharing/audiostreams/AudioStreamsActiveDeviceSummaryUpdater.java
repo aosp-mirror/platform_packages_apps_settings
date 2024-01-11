@@ -16,11 +16,12 @@
 
 package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
-import android.annotation.Nullable;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
+
+import androidx.annotation.Nullable;
 
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.connecteddevice.audiosharing.AudioSharingUtils;
