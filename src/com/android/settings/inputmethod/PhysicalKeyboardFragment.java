@@ -151,7 +151,8 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
             mKeyboardA11yCategory.removePreference(mAccessibilityStickyKeys);
         }
         InputDeviceIdentifier inputDeviceIdentifier = activity.getIntent().getParcelableExtra(
-                KeyboardLayoutPickerFragment.EXTRA_INPUT_DEVICE_IDENTIFIER);
+                KeyboardLayoutPickerFragment.EXTRA_INPUT_DEVICE_IDENTIFIER,
+                InputDeviceIdentifier.class);
         int intentFromWhere =
                 activity.getIntent().getIntExtra(android.provider.Settings.EXTRA_ENTRYPOINT, -1);
         if (intentFromWhere != -1) {
@@ -168,7 +169,8 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
     }
 
     private static boolean isAutoSelection(Bundle bundle, InputDeviceIdentifier identifier) {
-        if (bundle != null && bundle.getParcelable(EXTRA_AUTO_SELECTION) != null) {
+        if (bundle != null && bundle.getParcelable(EXTRA_AUTO_SELECTION,
+                InputDeviceIdentifier.class) != null) {
             return false;
         }
         return identifier != null;
@@ -446,7 +448,8 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
 
         if (mIntentWaitingForResult != null) {
             InputDeviceIdentifier inputDeviceIdentifier = mIntentWaitingForResult
-                    .getParcelableExtra(KeyboardLayoutPickerFragment.EXTRA_INPUT_DEVICE_IDENTIFIER);
+                    .getParcelableExtra(KeyboardLayoutPickerFragment.EXTRA_INPUT_DEVICE_IDENTIFIER,
+                            InputDeviceIdentifier.class);
             mIntentWaitingForResult = null;
             showKeyboardLayoutDialog(inputDeviceIdentifier);
         }
