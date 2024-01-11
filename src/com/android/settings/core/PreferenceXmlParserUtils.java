@@ -16,7 +16,6 @@
 
 package com.android.settings.core;
 
-import android.annotation.NonNull;
 import android.annotation.XmlRes;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -28,6 +27,7 @@ import android.util.Log;
 import android.util.Xml;
 
 import androidx.annotation.IntDef;
+import androidx.annotation.NonNull;
 
 import com.android.settings.R;
 

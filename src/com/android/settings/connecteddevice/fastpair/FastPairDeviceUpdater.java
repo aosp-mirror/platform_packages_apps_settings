@@ -16,8 +16,9 @@
 
 package com.android.settings.connecteddevice.fastpair;
 
-import android.annotation.Nullable;
 import android.content.Context;
+
+import androidx.annotation.Nullable;
 
 /**
  * Updates the Fast Pair devices. It notifies the upper level whether to add/remove the preference

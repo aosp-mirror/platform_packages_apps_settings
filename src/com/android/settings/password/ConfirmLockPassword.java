@@ -26,7 +26,6 @@ import static com.android.settings.biometrics.GatekeeperPasswordProvider.contain
 import static com.android.settings.biometrics.GatekeeperPasswordProvider.getGatekeeperPasswordHandle;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE;
 
-import android.annotation.Nullable;
 import android.app.KeyguardManager;
 import android.app.RemoteLockscreenValidationResult;
 import android.app.admin.DevicePolicyManager;
@@ -57,6 +56,7 @@ import android.widget.ImeAwareEditText;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.android.internal.widget.LockPatternChecker;

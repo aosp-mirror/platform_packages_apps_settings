@@ -166,7 +166,6 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
                                     + ", reason = "
                                     + reason);
                     mBluetoothDeviceUpdater.forceUpdate();
-                    AudioSharingUtils.updateActiveDeviceIfNeeded(mLocalBtManager);
                 }
 
                 @Override
@@ -211,7 +210,6 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
                                     + ", reason = "
                                     + reason);
                     mBluetoothDeviceUpdater.forceUpdate();
-                    AudioSharingUtils.updateActiveDeviceIfNeeded(mLocalBtManager);
                 }
 
                 @Override

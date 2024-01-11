@@ -16,10 +16,11 @@
 
 package com.android.settings.biometrics.fingerprint;
 
-import android.annotation.NonNull;
-import android.annotation.Nullable;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Handler;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.time.Clock;
 import java.util.ArrayDeque;
