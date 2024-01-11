@@ -50,7 +50,7 @@ public class ShadowRestrictedLockUtilsInternal {
     }
 
     @Implementation
-    protected static EnforcedAdmin checkIfMeteredDataRestricted(Context context,
+    protected static EnforcedAdmin checkIfMeteredDataUsageUserControlDisabled(Context context,
             String packageName, int userId) {
         if (sIsRestricted) {
             return new EnforcedAdmin();
