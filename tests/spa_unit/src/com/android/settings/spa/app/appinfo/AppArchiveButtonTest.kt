@@ -63,8 +63,10 @@ class AppArchiveButtonTest {
         whenever(packageInfoPresenter.context).thenReturn(context)
         whenever(packageInfoPresenter.userPackageManager).thenReturn(userPackageManager)
         whenever(userPackageManager.packageInstaller).thenReturn(packageInstaller)
+        whenever(userPackageManager.getApplicationLabel(any())).thenReturn(APP_LABEL)
         whenever(packageInfoPresenter.packageName).thenReturn(PACKAGE_NAME)
-        appArchiveButton = AppArchiveButton(packageInfoPresenter, isHibernationSwitchEnabledStateFlow)
+        appArchiveButton =
+            AppArchiveButton(packageInfoPresenter, isHibernationSwitchEnabledStateFlow)
     }
 
     @Test
@@ -150,5 +152,6 @@ class AppArchiveButtonTest {
 
     private companion object {
         const val PACKAGE_NAME = "package.name"
+        const val APP_LABEL = "App label"
     }
 }
