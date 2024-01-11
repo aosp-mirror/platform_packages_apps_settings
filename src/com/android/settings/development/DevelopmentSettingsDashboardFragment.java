@@ -233,7 +233,14 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
             return;
         }
         Context context = requireContext();
-        if (!DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(context)) {
+        UserManager um = (UserManager) getSystemService(Context.USER_SERVICE);
+
+        if (!um.isAdminUser()) {
+            Toast.makeText(context, R.string.dev_settings_available_to_admin_only_warning,
+                            Toast.LENGTH_SHORT)
+                    .show();
+            finish();
+        } else if (!DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(context)) {
             Toast.makeText(context, R.string.dev_settings_disabled_warning, Toast.LENGTH_SHORT)
                     .show();
             finish();
